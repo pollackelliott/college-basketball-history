@@ -1,6 +1,6 @@
 {
-  "generation": 0,
+  "generation": 2,
   "proof": 5,
-  "state": "BASELINE",
-  "target": "remote-implementation-proof5-target"
+  "request_id": "proof5-boundary-c-0001",
+  "state": "PUBLISH_EXACTLY_ONCE_THEN_FAIL"
 }
