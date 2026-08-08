@@ -132,10 +132,9 @@ REQUIRED_PROGRAM_COLUMNS = {
 
 REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS = {
     "program_key",
+    "season_label",
     "conference_key",
     "conference_name",
-    "start_season",
-    "end_season",
 }
 
 SEASON_LABEL_RE = re.compile(r"^(\d{4})-(\d{4})$")
@@ -382,35 +381,27 @@ def main() -> int:
                 "in canonical games."
             )
 
-    membership_identity_values = [
-        "::".join(
-            [
-                r.get("program_key", ""),
-                r.get("conference_key", ""),
-                r.get("start_season", ""),
-                r.get("end_season", ""),
-            ]
-        )
+    membership_keys = [
+        f"{r.get('program_key', '')}::{r.get('season_label', '')}"
         for r in membership_rows
     ]
-    dupes = duplicates(membership_identity_values)
+    dupes = duplicates(membership_keys)
     if dupes:
         errors.append(
-            "Duplicate conference membership rows: "
+            "Duplicate program/season conference memberships: "
             + ", ".join(sorted(dupes)[:10])
         )
 
-    active_memberships_by_program: dict[str, list[dict[str, str]]] = {}
+    memberships_by_season_program: dict[tuple[str, str], dict[str, str]] = {}
 
     for line_num, row in enumerate(membership_rows, start=2):
         program_key = row.get("program_key", "")
+        season_label = row.get("season_label", "")
         conference_key = row.get("conference_key", "")
         conference_name = row.get("conference_name", "")
-        start_season = row.get("start_season", "")
-        end_season = row.get("end_season", "")
         label = (
-            f"{program_key}/{conference_key}"
-            if program_key or conference_key
+            f"{program_key}/{season_label}"
+            if program_key or season_label
             else f"conference-membership.csv row {line_num}"
         )
 
@@ -422,55 +413,30 @@ def main() -> int:
                 "in programs.csv."
             )
 
+        if not valid_season_label(season_label):
+            errors.append(
+                f"{label}: invalid season_label {season_label!r}; "
+                "expected consecutive YYYY-YYYY."
+            )
+
         if not conference_key:
             errors.append(f"{label}: conference_key is required.")
         if not conference_name:
             errors.append(f"{label}: conference_name is required.")
 
-        if not valid_season_label(start_season):
-            errors.append(
-                f"{label}: invalid start_season {start_season!r}; "
-                "expected consecutive YYYY-YYYY."
-            )
+        if program_key and season_label:
+            memberships_by_season_program[(program_key, season_label)] = row
 
-        if end_season and not valid_season_label(end_season):
-            errors.append(
-                f"{label}: invalid end_season {end_season!r}; "
-                "expected consecutive YYYY-YYYY or blank."
-            )
-
-        if (
-            valid_season_label(start_season)
-            and end_season
-            and valid_season_label(end_season)
-            and end_season < start_season
-        ):
-            errors.append(
-                f"{label}: end_season {end_season!r} precedes "
-                f"start_season {start_season!r}."
-            )
-
-        if not end_season and program_key:
-            active_memberships_by_program.setdefault(program_key, []).append(row)
-
-    for program_key, rows in active_memberships_by_program.items():
-        if len(rows) > 1:
-            conferences = ", ".join(
-                sorted(r.get("conference_key", "") for r in rows)
-            )
-            errors.append(
-                f"{program_key}: multiple active conference memberships "
-                f"({conferences})."
-            )
-
+    # The reference registry is presently a 2026-2027 current-D1 snapshot.
+    # Every current D1 program must have exactly one conference row for that season.
+    CURRENT_REFERENCE_SEASON = "2026-2027"
     for row in program_rows:
         program_key = row.get("program_key", "")
         if row.get("current_d1", "") == "Yes":
-            active_count = len(active_memberships_by_program.get(program_key, []))
-            if active_count == 0:
+            if (program_key, CURRENT_REFERENCE_SEASON) not in memberships_by_season_program:
                 errors.append(
-                    f"{program_key}: current_d1=Yes requires one active "
-                    "conference membership."
+                    f"{program_key}: current_d1=Yes requires a "
+                    f"{CURRENT_REFERENCE_SEASON} conference membership."
                 )
 
     # Report
