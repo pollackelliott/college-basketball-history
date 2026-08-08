@@ -64,25 +64,31 @@ def perspective_game(
     team_a = row["team_a_key"]
     team_b = row["team_b_key"]
 
+    score_a = row["team_a_score"].strip()
+    score_b = row["team_b_score"].strip()
+
     if program_key == team_a:
         opponent_key = team_b
-        team_score = int(row["team_a_score"])
-        opponent_score = int(row["team_b_score"])
+        team_score = int(score_a) if score_a else None
+        opponent_score = int(score_b) if score_b else None
     elif program_key == team_b:
         opponent_key = team_a
-        team_score = int(row["team_b_score"])
-        opponent_score = int(row["team_a_score"])
+        team_score = int(score_b) if score_b else None
+        opponent_score = int(score_a) if score_a else None
     else:
         raise ValueError(
             f'{row["canonical_game_id"]}: {program_key!r} is not a participant.'
         )
 
-    if team_score > opponent_score:
+    result_winner = row["result_winner_team_key"].strip()
+    if result_winner == program_key:
         result = "W"
-    elif team_score < opponent_score:
+    elif result_winner == opponent_key:
         result = "L"
-    else:
+    elif team_score is not None and opponent_score is not None and team_score == opponent_score:
         result = "T"
+    else:
+        result = None
 
     site_type = row["site_type"]
     designated_home = row["designated_home_team_key"]
@@ -113,6 +119,7 @@ def perspective_game(
         ),
         "team_score": team_score,
         "opponent_score": opponent_score,
+        "score_known": team_score is not None and opponent_score is not None,
         "result": result,
         "overtime_periods": int(row["overtime_periods"] or 0),
         "site": site,

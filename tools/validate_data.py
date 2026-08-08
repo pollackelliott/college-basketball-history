@@ -48,6 +48,13 @@ ALLOWED_CANONICAL_STATUSES = {
     "UNDER_REVIEW",
 }
 
+ALLOWED_ADMINISTRATIVE_STATUSES = {
+    "",
+    "FORFEIT",
+    "VACATED_GAME",
+    "VACATED_WIN",
+}
+
 REQUIRED_CANONICAL_COLUMNS = {
     "canonical_game_id",
     "season_label",
@@ -57,6 +64,7 @@ REQUIRED_CANONICAL_COLUMNS = {
     "team_b_key",
     "team_a_score",
     "team_b_score",
+    "result_winner_team_key",
     "overtime_periods",
     "site_type",
     "designated_home_team_key",
@@ -255,6 +263,56 @@ def main() -> int:
         status = row.get("canonical_status", "")
         if status not in ALLOWED_CANONICAL_STATUSES:
             errors.append(f"{game_id}: invalid canonical_status {status!r}.")
+
+        administrative_status = row.get("administrative_status", "")
+        if administrative_status not in ALLOWED_ADMINISTRATIVE_STATUSES:
+            errors.append(
+                f"{game_id}: invalid administrative_status {administrative_status!r}."
+            )
+
+        score_a = row.get("team_a_score", "").strip()
+        score_b = row.get("team_b_score", "").strip()
+        result_winner = row.get("result_winner_team_key", "").strip()
+
+        if bool(score_a) != bool(score_b):
+            errors.append(
+                f"{game_id}: team_a_score and team_b_score must either both be known "
+                "or both be blank."
+            )
+
+        if result_winner and result_winner not in {team_a, team_b}:
+            errors.append(
+                f"{game_id}: result_winner_team_key must be blank or one of the two "
+                f"participants (got {result_winner!r})."
+            )
+
+        if score_a and score_b:
+            try:
+                score_a_int = int(score_a)
+                score_b_int = int(score_b)
+            except ValueError:
+                errors.append(
+                    f"{game_id}: scores must be integer values or blank "
+                    f"(got {score_a!r}-{score_b!r})."
+                )
+            else:
+                expected_winner = (
+                    team_a
+                    if score_a_int > score_b_int
+                    else team_b
+                    if score_b_int > score_a_int
+                    else ""
+                )
+                if result_winner != expected_winner:
+                    errors.append(
+                        f"{game_id}: result_winner_team_key={result_winner!r} does not "
+                        f"match the scored result {score_a}-{score_b}; expected "
+                        f"{expected_winner!r}."
+                    )
+        elif administrative_status == "FORFEIT" and not result_winner:
+            errors.append(
+                f"{game_id}: a scoreless FORFEIT requires result_winner_team_key."
+            )
 
         designated_home = row.get("designated_home_team_key", "")
         if site_type == "TEAM_A_HOME" and designated_home != team_a:

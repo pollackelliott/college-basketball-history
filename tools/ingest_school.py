@@ -50,6 +50,7 @@ CANONICAL_FIELDS = [
     "team_b_key",
     "team_a_score",
     "team_b_score",
+    "result_winner_team_key",
     "overtime_periods",
     "site_type",
     "designated_home_team_key",
@@ -142,6 +143,41 @@ def source_scores_in_canonical_orientation(row: dict[str, str]) -> tuple[str, st
     school_score = row.get("team_score", "").strip()
     opp_score = row.get("opponent_score", "").strip()
     return (school_score, opp_score) if team_a == school else (opp_score, school_score)
+
+
+def source_result_winner(
+    row: dict[str, str],
+) -> tuple[bool, str]:
+    """
+    Return (result_is_known, winner_team_key).
+
+    Scores are authoritative for played on-court results when both are known.
+    If scores are unknown, a curated W/L/T result can still preserve a known
+    historical outcome, including a scoreless administrative forfeit.
+    """
+    school = row.get("source_program_key", "").strip()
+    opp = row.get("normalized_opponent_key", "").strip()
+    school_score = row.get("team_score", "").strip()
+    opp_score = row.get("opponent_score", "").strip()
+
+    if school_score and opp_score:
+        school_score_int = int(school_score)
+        opp_score_int = int(opp_score)
+        if school_score_int > opp_score_int:
+            return True, school
+        if opp_score_int > school_score_int:
+            return True, opp
+        return True, ""
+
+    played_result = row.get("played_result", "").strip().upper()
+    if played_result == "W":
+        return True, school
+    if played_result == "L":
+        return True, opp
+    if played_result == "T":
+        return True, ""
+
+    return False, ""
 
 
 def source_site_to_canonical(row: dict[str, str]) -> tuple[str, str]:
@@ -283,6 +319,17 @@ def discrepancy_candidates(
     if src_round and can_round and src_round != can_round:
         result.append(("postseason_round", src_round, can_round))
 
+    src_result_known, src_winner = source_result_winner(source)
+    can_winner = canonical.get("result_winner_team_key", "").strip()
+    if src_result_known and src_winner != can_winner:
+        result.append(
+            (
+                "result_winner_team_key",
+                src_winner or "[TIE]",
+                can_winner or "[TIE/UNKNOWN]",
+            )
+        )
+
     return result
 
 
@@ -399,6 +446,7 @@ def build_new_canonical(source: dict[str, str], game_id: str, venue_name_map: di
     opp = source["normalized_opponent_key"].strip()
     team_a, team_b = ordered_pair(school, opp)
     score_a, score_b = source_scores_in_canonical_orientation(source)
+    _, result_winner = source_result_winner(source)
     site_type, home_key = source_site_to_canonical(source)
 
     return {
@@ -410,6 +458,7 @@ def build_new_canonical(source: dict[str, str], game_id: str, venue_name_map: di
         "team_b_key": team_b,
         "team_a_score": score_a,
         "team_b_score": score_b,
+        "result_winner_team_key": result_winner,
         "overtime_periods": source.get("overtime_periods", ""),
         "site_type": site_type,
         "designated_home_team_key": home_key,
