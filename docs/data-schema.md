@@ -90,3 +90,116 @@ Exhibitions do not:
 - count toward venue statistics
 
 If exhibition metadata is ever retained, it remains outside the canonical competitive-games dataset.
+
+## Canonical game row contract
+
+`data/canonical/games.csv` is program-neutral. It must never describe a game from one school's perspective.
+
+### Canonical game ID
+
+IDs use the format:
+
+`CBBG-0000001`
+
+IDs are assigned when a canonical game is first created.
+
+They:
+- are permanent
+- are never reused
+- are not derived from date, teams, score, or other mutable attributes
+
+### Team orientation
+
+Every game has:
+
+- `team_a_key`
+- `team_b_key`
+- `team_a_score`
+- `team_b_score`
+
+For consistency, team keys are stored alphabetically by canonical program key.
+
+This orientation has no home/away meaning.
+
+### Canonical fields
+
+Each canonical game contains:
+
+- `canonical_game_id`
+- `season_label`
+- `game_date`
+- `date_precision`
+- `team_a_key`
+- `team_b_key`
+- `team_a_score`
+- `team_b_score`
+- `overtime_periods`
+- `site_type`
+- `designated_home_team_key`
+- `venue_key`
+- `site_city`
+- `site_state`
+- `game_type`
+- `postseason_round`
+- `administrative_status`
+- `administrative_note`
+- `canonical_status`
+- `notes`
+
+### Site type
+
+Allowed values:
+
+- `TEAM_A_HOME`
+- `TEAM_B_HOME`
+- `NEUTRAL`
+- `UNKNOWN`
+
+Venue does not determine site type.
+
+### Game type
+
+Allowed public competitive classifications:
+
+- `REGULAR_SEASON`
+- `CONFERENCE_TOURNAMENT`
+- `NCAA_TOURNAMENT`
+- `NIT`
+
+Other events may be retained as source metadata but do not require a canonical public game type beyond `REGULAR_SEASON`.
+
+### Postseason round
+
+NCAA Tournament rounds:
+
+- `Play-in`
+- `R64`
+- `R32`
+- `Sweet Sixteen`
+- `Elite Eight`
+- `Final Four`
+- `Championship`
+
+Conference tournament and NIT games receive `Championship` only for the championship game. Other rounds are blank.
+
+Historical consolation or third-place postseason games retain the appropriate `game_type` but leave `postseason_round` blank, with their specific nature preserved in notes.
+
+### Canonical status
+
+Allowed values:
+
+- `PROVISIONAL` — supported by source evidence but not yet independently reconciled
+- `VERIFIED` — reconciled against sufficient independent evidence
+- `UNDER_REVIEW` — known material conflict remains unresolved
+
+### Derived attributes
+
+Do not permanently store attributes that can reliably be derived from other canonical data, including:
+
+- win/loss result
+- current D1 status
+- current conference
+- historical conference membership
+- conference tournament display name
+
+These are derived from the game and program/conference dimensions.
