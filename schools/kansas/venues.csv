@@ -1,0 +1,23 @@
+source_program_key,venue_key,canonical_name,aliases,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
+kansas,hilton-coliseum,Hilton Coliseum,,Ames,IA,arena,,,,1,2026-02-14,2026-02-14,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,cu-events-center,CU Events Center,,Boulder,CO,arena,,,,1,2026-01-20,2026-01-20,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,dean-smith-center,Dean Smith Center,,Chapel Hill,NC,arena,,,,1,2025-11-07,2025-11-07,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,convention-hall-kc,Convention Hall,,Kansas City,MO,arena,,1935,year,11,1909-03-04,1932-01-05,,,,,,User-provided Kansas venue chronology / curated Kansas game history.,Historic Kansas City arena; specific Kansas games assigned only when game-level evidence supports it.
+kansas,kemper-arena,Kemper Arena,,Kansas City,MO,arena,,,,105,1974-12-26,2006-12-09,,,,,,Curated Kansas historical game history.,
+kansas,municipal-auditorium-kc,Municipal Auditorium,,Kansas City,MO,arena,,,,123,1935-12-20,1973-12-29,,,,,,Curated Kansas historical game history.,
+kansas,t-mobile-center,T-Mobile Center,Sprint Center,Kansas City,MO,arena,,,,67,2007-12-15,2026-03-13,,,,,,Curated Kansas historical game history.,
+kansas,allen-fieldhouse,Allen Fieldhouse,,Lawrence,KS,arena,1955-03-01,,exact,1009,1955-03-01,2026-03-07,primary_home,1955-03-01,,exact_start,,User-provided Kansas venue chronology / curated Kansas game history.,"Primary Kansas home from Mar. 1, 1955 to present."
+kansas,hoch-auditorium,Hoch Auditorium,,Lawrence,KS,auditorium,1927-10-14,1955-02-28,exact,243,1927-12-16,1955-02-19,primary_home,1927-10-14,1955-02-28,exact,,User-provided Kansas venue chronology / curated Kansas game history.,"Dedicated Oct. 14, 1927; Kansas home until Allen Fieldhouse."
+kansas,robinson-gymnasium,Robinson Gymnasium,,Lawrence,KS,gymnasium,1907-05,1927-10-13,month/exact,185,1907-12-13,1927-03-04,primary_home,1907-05,1927-10-13,month/exact,,User-provided Kansas venue chronology / curated Kansas game history.,"Primary Kansas home from May 1907 through Oct. 13, 1927."
+kansas,snow-hall,Snow Hall,,Lawrence,KS,hall,,1907-04,month,40,1899-02-10,1907-03-12,primary_home,1898-1899,1906-1907,season/month,,User-provided Kansas venue chronology / curated Kansas game history.,Primary Kansas home before Robinson Gymnasium.
+kansas,united-supermarkets-arena,United Supermarkets Arena,,Lubbock,TX,arena,,,,1,2026-02-02,2026-02-02,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,bramlage-coliseum,Bramlage Coliseum,,Manhattan,KS,arena,,,,1,2026-01-24,2026-01-24,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,wvu-coliseum,WVU Coliseum,,Morgantown,WV,arena,,,,1,2026-01-10,2026-01-10,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,madison-square-garden,Madison Square Garden,,New York,NY,arena,,,,1,2025-11-18,2025-11-18,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,addition-financial-arena,Addition Financial Arena,,Orlando,FL,arena,,,,1,2026-01-03,2026-01-03,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,mgm-grand-garden-arena,MGM Grand Garden Arena,,Paradise,NV,arena,,,,3,2025-11-24,2025-11-26,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,lenovo-center,Lenovo Center,PNC Arena,Raleigh,NC,arena,,,,1,2025-12-13,2025-12-13,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,viejas-arena,Viejas Arena,,San Diego,CA,arena,,,,2,2026-03-20,2026-03-22,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,gallagher-iba-arena,Gallagher-Iba Arena,,Stillwater,OK,arena,,,,1,2026-02-18,2026-02-18,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,desert-financial-arena,Desert Financial Arena,,Tempe,AZ,arena,,,,1,2026-03-03,2026-03-03,,,,,,Curated Kansas 2025-26 schedule.,
+kansas,mckale-center,McKale Center,,Tucson,AZ,arena,,,,1,2026-02-28,2026-02-28,,,,,,Curated Kansas 2025-26 schedule.,

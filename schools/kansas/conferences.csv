@@ -1,0 +1,7 @@
+source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+kansas,1898-1899,1906-1907,independent,Independent,independent,false,User-supplied Kansas conference history.,
+kansas,1907-1908,1927-1928,missouri-valley,Missouri Valley,conference,false,User-supplied Kansas conference history.,Formal historical league name: Missouri Valley Intercollegiate Athletic Association (MVIAA).
+kansas,1928-1929,1947-1948,big-six,Big Six,conference,false,User-supplied Kansas conference history.,Same legal conference lineage as the later Big Seven and Big Eight; formed in May 1928.
+kansas,1948-1949,1957-1958,big-seven,Big Seven,conference,false,User-supplied Kansas conference history.,"Same legal conference lineage as Big Six/Big Eight; league adopted Big Seven name Dec. 1, 1947 after Colorado joined."
+kansas,1958-1959,1995-1996,big-eight,Big Eight,conference,false,User-supplied Kansas conference history.,Same legal conference lineage as Big Six/Big Seven; Big Eight name in use for 1958-59 after Oklahoma State joined.
+kansas,1996-1997,,big-12,Big 12,conference,true,User-supplied Kansas conference history.,Big 12 began play in 1996-97 and is a legally distinct conference from the Big Six/Seven/Eight lineage.
