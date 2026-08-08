@@ -1,0 +1,8 @@
+source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+missouri,1906-1907,1906-1907,independent,Independent,independent,false,User-supplied Missouri season/league history,
+missouri,1907-1908,1927-1928,missouri-valley,Missouri Valley,conference,false,User-supplied Missouri season/league history,
+missouri,1928-1929,1947-1948,big-six,Big Six,conference,false,User-supplied Missouri season/league history,
+missouri,1948-1949,1957-1958,big-seven,Big Seven,conference,false,User-supplied Missouri season/league history,
+missouri,1958-1959,1995-1996,big-eight,Big Eight,conference,false,User-supplied Missouri season/league history,
+missouri,1996-1997,2011-2012,big-12,Big 12,conference,false,User-supplied Missouri season/league history,
+missouri,2012-2013,,sec,SEC,conference,true,User-supplied Missouri season/league history,Ongoing through the current curated season (2025-2026).
