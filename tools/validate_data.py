@@ -12,6 +12,7 @@ Optional:
 from __future__ import annotations
 
 import csv
+import re
 import sys
 from pathlib import Path
 
@@ -118,6 +119,28 @@ REQUIRED_DISCREPANCY_COLUMNS = {
 }
 
 
+ALLOWED_YES_NO = {"Yes", "No"}
+
+REQUIRED_PROGRAM_COLUMNS = {
+    "program_key",
+    "program_name",
+    "display_name",
+    "nickname",
+    "current_d1",
+    "public_page_enabled",
+}
+
+REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS = {
+    "program_key",
+    "conference_key",
+    "conference_name",
+    "start_season",
+    "end_season",
+}
+
+SEASON_LABEL_RE = re.compile(r"^(\d{4})-(\d{4})$")
+
+
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     if not path.exists():
         raise FileNotFoundError(path)
@@ -143,6 +166,15 @@ def duplicates(values: list[str]) -> set[str]:
     return dupes
 
 
+def valid_season_label(value: str) -> bool:
+    match = SEASON_LABEL_RE.fullmatch(value)
+    if not match:
+        return False
+    start_year = int(match.group(1))
+    end_year = int(match.group(2))
+    return end_year == start_year + 1
+
+
 def main() -> int:
     if len(sys.argv) > 2:
         print("Usage: python tools/validate_data.py [repository_root]")
@@ -157,6 +189,10 @@ def main() -> int:
     canonical_path = repo_root / "data" / "canonical" / "games.csv"
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
+    programs_path = repo_root / "data" / "reference" / "programs.csv"
+    conference_membership_path = (
+        repo_root / "data" / "reference" / "conference-membership.csv"
+    )
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -165,6 +201,8 @@ def main() -> int:
         canonical_columns, canonical_rows = read_csv(canonical_path)
         assertion_columns, assertion_rows = read_csv(assertions_path)
         discrepancy_columns, discrepancy_rows = read_csv(discrepancies_path)
+        program_columns, program_rows = read_csv(programs_path)
+        membership_columns, membership_rows = read_csv(conference_membership_path)
     except FileNotFoundError as exc:
         print(f"FAIL: required file not found: {exc}")
         return 1
@@ -172,6 +210,13 @@ def main() -> int:
     require_columns(canonical_path, canonical_columns, REQUIRED_CANONICAL_COLUMNS, errors)
     require_columns(assertions_path, assertion_columns, REQUIRED_ASSERTION_COLUMNS, errors)
     require_columns(discrepancies_path, discrepancy_columns, REQUIRED_DISCREPANCY_COLUMNS, errors)
+    require_columns(programs_path, program_columns, REQUIRED_PROGRAM_COLUMNS, errors)
+    require_columns(
+        conference_membership_path,
+        membership_columns,
+        REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS,
+        errors,
+    )
 
     canonical_ids = [r.get("canonical_game_id", "") for r in canonical_rows]
     canonical_id_set = set(canonical_ids)
@@ -283,6 +328,151 @@ def main() -> int:
             + ", ".join(missing_discrepancy_refs[:10])
         )
 
+    # Reference-layer validation
+    program_keys = [r.get("program_key", "") for r in program_rows]
+    program_key_set = set(program_keys)
+
+    if "" in program_key_set:
+        errors.append("Reference programs contain blank program_key values.")
+
+    dupes = duplicates(program_keys)
+    if dupes:
+        errors.append(
+            f"Duplicate program_key values: {', '.join(sorted(dupes)[:10])}"
+        )
+
+    canonical_team_keys = {
+        key
+        for row in canonical_rows
+        for key in (row.get("team_a_key", ""), row.get("team_b_key", ""))
+        if key
+    }
+
+    for line_num, row in enumerate(program_rows, start=2):
+        program_key = row.get("program_key", "")
+        label = program_key or f"programs.csv row {line_num}"
+
+        for field in ("program_name", "display_name", "nickname"):
+            if not row.get(field, "").strip():
+                errors.append(f"{label}: {field} is required.")
+
+        current_d1 = row.get("current_d1", "")
+        public_page_enabled = row.get("public_page_enabled", "")
+
+        if current_d1 not in ALLOWED_YES_NO:
+            errors.append(
+                f"{label}: current_d1 must be Yes or No "
+                f"(got {current_d1!r})."
+            )
+
+        if public_page_enabled not in ALLOWED_YES_NO:
+            errors.append(
+                f"{label}: public_page_enabled must be Yes or No "
+                f"(got {public_page_enabled!r})."
+            )
+
+        if public_page_enabled == "Yes" and current_d1 != "Yes":
+            errors.append(
+                f"{label}: public_page_enabled=Yes requires current_d1=Yes."
+            )
+
+        if public_page_enabled == "Yes" and program_key not in canonical_team_keys:
+            errors.append(
+                f"{label}: public page is enabled but program does not appear "
+                "in canonical games."
+            )
+
+    membership_identity_values = [
+        "::".join(
+            [
+                r.get("program_key", ""),
+                r.get("conference_key", ""),
+                r.get("start_season", ""),
+                r.get("end_season", ""),
+            ]
+        )
+        for r in membership_rows
+    ]
+    dupes = duplicates(membership_identity_values)
+    if dupes:
+        errors.append(
+            "Duplicate conference membership rows: "
+            + ", ".join(sorted(dupes)[:10])
+        )
+
+    active_memberships_by_program: dict[str, list[dict[str, str]]] = {}
+
+    for line_num, row in enumerate(membership_rows, start=2):
+        program_key = row.get("program_key", "")
+        conference_key = row.get("conference_key", "")
+        conference_name = row.get("conference_name", "")
+        start_season = row.get("start_season", "")
+        end_season = row.get("end_season", "")
+        label = (
+            f"{program_key}/{conference_key}"
+            if program_key or conference_key
+            else f"conference-membership.csv row {line_num}"
+        )
+
+        if not program_key:
+            errors.append(f"{label}: program_key is required.")
+        elif program_key not in program_key_set:
+            errors.append(
+                f"{label}: program_key {program_key!r} does not exist "
+                "in programs.csv."
+            )
+
+        if not conference_key:
+            errors.append(f"{label}: conference_key is required.")
+        if not conference_name:
+            errors.append(f"{label}: conference_name is required.")
+
+        if not valid_season_label(start_season):
+            errors.append(
+                f"{label}: invalid start_season {start_season!r}; "
+                "expected consecutive YYYY-YYYY."
+            )
+
+        if end_season and not valid_season_label(end_season):
+            errors.append(
+                f"{label}: invalid end_season {end_season!r}; "
+                "expected consecutive YYYY-YYYY or blank."
+            )
+
+        if (
+            valid_season_label(start_season)
+            and end_season
+            and valid_season_label(end_season)
+            and end_season < start_season
+        ):
+            errors.append(
+                f"{label}: end_season {end_season!r} precedes "
+                f"start_season {start_season!r}."
+            )
+
+        if not end_season and program_key:
+            active_memberships_by_program.setdefault(program_key, []).append(row)
+
+    for program_key, rows in active_memberships_by_program.items():
+        if len(rows) > 1:
+            conferences = ", ".join(
+                sorted(r.get("conference_key", "") for r in rows)
+            )
+            errors.append(
+                f"{program_key}: multiple active conference memberships "
+                f"({conferences})."
+            )
+
+    for row in program_rows:
+        program_key = row.get("program_key", "")
+        if row.get("current_d1", "") == "Yes":
+            active_count = len(active_memberships_by_program.get(program_key, []))
+            if active_count == 0:
+                errors.append(
+                    f"{program_key}: current_d1=Yes requires one active "
+                    "conference membership."
+                )
+
     # Report
     print("College Basketball History — data validation")
     print(f"Repository: {repo_root}")
@@ -290,6 +480,8 @@ def main() -> int:
     print(f"Canonical games:      {len(canonical_rows):,}")
     print(f"Source assertions:    {len(assertion_rows):,}")
     print(f"Discrepancies:        {len(discrepancy_rows):,}")
+    print(f"Reference programs:   {len(program_rows):,}")
+    print(f"Conference rows:      {len(membership_rows):,}")
     print()
 
     if warnings:
@@ -308,7 +500,7 @@ def main() -> int:
             print(f"  ... {len(errors) - 50} more")
         return 1
 
-    print("PASS: core canonical, evidence, and reconciliation layers are structurally valid.")
+    print("PASS: core canonical, evidence, reconciliation, and reference layers are structurally valid.")
     return 0
 
 
