@@ -1,0 +1,5 @@
+source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+kentucky,1902-1903,1909-1910,independent,Independent,independent,false,User-supplied Kentucky conference history.,
+kentucky,1910-1911,1920-1921,siaa,Southern Intercollegiate Athletic Association,conference,false,User-supplied Kentucky conference history.,Kentucky won the 1921 SIAA tournament.
+kentucky,1921-1922,1931-1932,southern,Southern Conference,conference,false,User-supplied Kentucky conference history.,Same Southern Conference that exists today. Kentucky detailed game history still labels the 1922 event SIAA Tournament; the 1924 detailed history labels Southern Conference Tournament while a summary footnote appears inconsistent. Membership timeline follows the user-supplied conference history.
+kentucky,1932-1933,,sec,SEC,conference,true,User-supplied Kentucky conference history.,"Kentucky has competed in the SEC since its first basketball season, 1932-33."
