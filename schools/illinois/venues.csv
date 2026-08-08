@@ -1,0 +1,25 @@
+source_program_key,venue_key,canonical_name,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
+illinois,alumni-gym,Alumni Gym,Lexington,KY,arena,,,,1,1944-02-07,1944-02-07,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,bon-secours-wellness-arena,Bon Secours Wellness Arena,Greenville,SC,arena,,,,2,2026-03-19,2026-03-21,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,breslin-center,Breslin Center,East Lansing,MI,arena,,,,1,2026-02-07,2026-02-07,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,bridgestone-arena,Bridgestone Arena,Nashville,TN,arena,,,,1,2025-12-06,2025-12-06,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,carver-hawkeye-arena,Carver–Hawkeye Arena,Iowa City,IA,arena,,,,1,2026-01-11,2026-01-11,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,chicago-stadium,Chicago Stadium,Chicago,IL,arena,,,unknown,1,1960-01-30,1960-01-30,,,,,,Illinois record book,"Illinois record book explicitly places the Jan. 30, 1960 Notre Dame game here. That game is treated as neutral."
+illinois,enterprise-center,Enterprise Center,St. Louis,MO,arena,,,,1,2025-12-22,2025-12-22,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,freedom-hall,Freedom Hall,Louisville,KY,arena,,,,1,1958-12-30,1958-12-30,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,galen-center,Galen Center,Los Angeles,CA,arena,,,,1,2026-02-18,2026-02-18,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,huff-hall,Huff Hall,Champaign,IL,arena,1925,1963-03-01,year/exact,416,1926-01-04,1963-02-23,primary_home,1925-1926,1962-1963,season,,User-provided Illinois venue history,"Illinois primary home venue from 1925 until Assembly Hall opened March 2, 1963. Exact 1925 first-game date remains unresolved."
+illinois,kenney-gym,Kenney Gym,Champaign-Urbana,IL,arena,,1925,year,148,1906-01-12,1924-12-19,primary_home,1905-1906,1924-1925,season,,User-provided Illinois venue history,Illinois primary home venue before Huff Hall. Exact 1925 transition day not supplied.
+illinois,lucas-oil-stadium,Lucas Oil Stadium,Indianapolis,IN,arena,,,,1,2026-04-04,2026-04-04,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,mackey-arena,Mackey Arena,West Lafayette,IN,arena,,,,1,2026-01-24,2026-01-24,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,madison-square-garden,Madison Square Garden,New York City,NY,arena,,,,1,2025-11-28,2025-11-28,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,palestra,Palestra,Philadelphia,PA,arena,,,,1,2026-01-03,2026-01-03,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,pauley-pavilion,Pauley Pavilion,Los Angeles,CA,arena,,,,1,2026-02-21,2026-02-21,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,pinnacle-bank-arena,Pinnacle Bank Arena,Lincoln,NE,arena,,,,1,2026-02-01,2026-02-01,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,prairie-capital-convention-center,Prairie Capital Convention Center,Springfield,IL,arena,,,unknown,4,2015-11-13,2015-11-23,temporary_home,2015-2016,2015-2016,season,,https://fightingillini.com/news/2015/9/11/mbb_springfield_single_game.aspx,Temporary Illinois home venue for four regular-season games in November 2015 while State Farm Center renovations were completed.
+illinois,state-farm-center,State Farm Center,Champaign,IL,arena,1963-03-02,,exact,917,1963-03-04,2026-03-03,primary_home,1962-1963,,exact_start,,User-provided Illinois venue history,"Same physical building historically known as Assembly Hall; Illinois primary home venue from March 2, 1963 to present."
+illinois,toyota-center,Toyota Center,Houston,TX,arena,,,,2,2026-03-26,2026-03-28,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,united-center,United Center,Chicago,IL,arena,,,unknown,3,2003-02-22,2026-03-13,,,,,,User decision,"Used for Illinois special-site games in Chicago, including the 2003 Northwestern game classified as Illinois Home by user decision."
+illinois,value-city-arena,Value City Arena,Columbus,OH,arena,,,,1,2025-12-09,2025-12-09,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,welsh-ryan-arena,Welsh-Ryan Arena,Evanston,IL,arena,,,,1,2026-01-14,2026-01-14,,,,,,Illinois record book / curated 2025-26 schedule,
+illinois,xfinity-center,Xfinity Center,College Park,MD,arena,,,,1,2026-03-08,2026-03-08,,,,,,Illinois record book / curated 2025-26 schedule,
