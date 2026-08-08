@@ -178,11 +178,28 @@ def identify_game(
 
     src_date = source.get("game_date", "").strip()
 
+    same_score = [c for c in candidates if scores_match(source, c)]
+
     if src_date:
         same_date = [c for c in candidates if c.get("game_date", "").strip() == src_date]
 
         if len(same_date) == 1:
-            return CONFIDENT, same_date[0]["canonical_game_id"], "UNIQUE_PAIR_SEASON_DATE"
+            dated = same_date[0]
+            if scores_match(source, dated):
+                return CONFIDENT, dated["canonical_game_id"], "UNIQUE_PAIR_SEASON_DATE_SCORE"
+
+            # In historical back-to-back series, two official sources can shift a date by a day.
+            # If the exact-date candidate disagrees on score but exactly one other same-season
+            # candidate has the same score, the score-consistent pairing is stronger evidence of
+            # game identity. Preserve the date disagreement separately as a discrepancy.
+            if len(same_score) == 1 and same_score[0]["canonical_game_id"] != dated["canonical_game_id"]:
+                return (
+                    CONFIDENT,
+                    same_score[0]["canonical_game_id"],
+                    "UNIQUE_PAIR_SEASON_SCORE_OVERRIDES_CONFLICTING_EXACT_DATE",
+                )
+
+            return CONFIDENT, dated["canonical_game_id"], "UNIQUE_PAIR_SEASON_DATE"
 
         if len(same_date) > 1:
             same_date_score = [c for c in same_date if scores_match(source, c)]
@@ -193,8 +210,6 @@ def identify_game(
                     "PAIR_SEASON_DATE_PLUS_SCORE_DISAMBIGUATION",
                 )
             return REVIEW, "", "MULTIPLE_PAIR_SEASON_DATE_CANDIDATES"
-
-    same_score = [c for c in candidates if scores_match(source, c)]
 
     if len(same_score) == 1:
         candidate = same_score[0]
@@ -288,6 +303,60 @@ def assertion_id_for(source: dict[str, str]) -> str:
     school = re.sub(r"[^A-Za-z0-9]+", "-", source.get("source_program_key", "").strip()).strip("-").upper()
     source_game = re.sub(r"[^A-Za-z0-9._-]+", "-", source.get("source_game_id", "").strip()).strip("-")
     return f"ASRT-{school}-{source_game}"
+
+
+def resolve_identity_override(
+    source: dict[str, str],
+    candidates: list[dict[str, str]],
+    assertions_by_source: dict[tuple[str, str], list[dict[str, str]]],
+    canonical_by_id: dict[str, dict[str, str]],
+) -> tuple[str, str, str] | None:
+    """Apply an optional curated identity override from a school source row.
+
+    Supported values in source-games.csv:
+    - FORCE_NEW: create a distinct canonical game even though same-season team-pair rows exist.
+      This is accepted only when the normal matcher does NOT already find a confident match.
+    - MATCH_SOURCE_ASSERTION: link to the canonical game already used by a named source assertion.
+      This avoids hard-coding global canonical IDs into a school package.
+
+    On re-ingestion, an existing assertion for the source row always wins, preserving idempotence.
+    """
+    override = source.get("identity_override", "").strip().upper()
+    if not override:
+        return None
+
+    if override == "FORCE_NEW":
+        normal_status, normal_id, normal_method = identify_game(source, candidates)
+        if normal_status == CONFIDENT:
+            return (REVIEW, "", f"FORCE_NEW_CONFLICTS_WITH_{normal_method}")
+        basis = source.get("identity_override_basis", "").strip()
+        return (NEW_GAME, "", f"CURATED_FORCE_NEW:{basis}" if basis else "CURATED_FORCE_NEW")
+
+    if override == "MATCH_SOURCE_ASSERTION":
+        program = source.get("identity_match_program_key", "").strip()
+        source_game_id = source.get("identity_match_source_game_id", "").strip()
+        target_rows = assertions_by_source.get((program, source_game_id), [])
+        target_ids = sorted({r.get("canonical_game_id", "").strip() for r in target_rows if r.get("canonical_game_id", "").strip()})
+        if len(target_ids) != 1:
+            return (REVIEW, "", f"MATCH_SOURCE_ASSERTION_TARGET_COUNT_{len(target_ids)}")
+        target_id = target_ids[0]
+        target = canonical_by_id.get(target_id)
+        if not target:
+            return (REVIEW, "", "MATCH_SOURCE_ASSERTION_CANONICAL_NOT_FOUND")
+
+        school = source.get("source_program_key", "").strip()
+        opp = source.get("normalized_opponent_key", "").strip()
+        team_a, team_b = ordered_pair(school, opp)
+        if (target.get("team_a_key", ""), target.get("team_b_key", ""), target.get("season_label", "")) != (team_a, team_b, source.get("season_label", "")):
+            return (REVIEW, "", "MATCH_SOURCE_ASSERTION_IDENTITY_MISMATCH")
+
+        basis = source.get("identity_override_basis", "").strip()
+        method = f"CURATED_MATCH_SOURCE_ASSERTION:{program}:{source_game_id}"
+        if basis:
+            method += f":{basis}"
+        return (CONFIDENT, target_id, method)
+
+    return (REVIEW, "", f"UNKNOWN_IDENTITY_OVERRIDE:{override}")
 
 
 def build_assertion(
@@ -390,6 +459,9 @@ def main() -> int:
         (r.get("source_program_key", ""), r.get("source_game_id", ""))
         for r in assertions
     }
+    assertions_by_source: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in assertions:
+        assertions_by_source[(row.get("source_program_key", ""), row.get("source_game_id", ""))].append(row)
 
     # Deduplicate discrepancy records by game + field + source program.
     # The same underlying disagreement may be written in different human-readable
@@ -419,7 +491,21 @@ def main() -> int:
 
         team_a, team_b = ordered_pair(school, opp)
         candidates = index.get((team_a, team_b, season), [])
-        status, game_id, method = identify_game(source, candidates)
+
+        # Idempotence first: a source row already represented in assertions must keep its canonical link.
+        source_pair = (source.get("source_program_key", ""), source.get("source_game_id", ""))
+        prior_rows = assertions_by_source.get(source_pair, [])
+        prior_ids = sorted({r.get("canonical_game_id", "").strip() for r in prior_rows if r.get("canonical_game_id", "").strip()})
+        if len(prior_ids) == 1:
+            status, game_id, method = CONFIDENT, prior_ids[0], "EXISTING_SOURCE_ASSERTION"
+        elif len(prior_ids) > 1:
+            status, game_id, method = REVIEW, "", "SOURCE_ASSERTION_LINKS_MULTIPLE_CANONICAL_GAMES"
+        else:
+            override_result = resolve_identity_override(source, candidates, assertions_by_source, canonical_by_id)
+            if override_result is not None:
+                status, game_id, method = override_result
+            else:
+                status, game_id, method = identify_game(source, candidates)
 
         if status == NEW_GAME:
             game_id = f"CBBG-{next_game_num:07d}"
