@@ -1,0 +1,22 @@
+source_program_key,venue_key,canonical_name,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
+arkansas,american-airlines-center,American Airlines Center,Dallas,TX,arena,,,,1,2025-12-13,2025-12-13,,,,,,Arkansas guide / curated modern schedule,
+arkansas,barnhill-arena,Barnhill Arena,Fayetteville,AR,arena,,,,425,1954-11-29,1993-03-03,primary_home,1954-1955,1992-1993,season,,Arkansas guide / curated modern schedule,
+arkansas,breslin-center,Breslin Center,East Lansing,MI,arena,,,,1,2025-11-08,2025-11-08,,,,,,Arkansas guide / curated modern schedule,
+arkansas,bridgestone-arena,Bridgestone Arena,Nashville,TN,arena,,,,3,2026-03-13,2026-03-15,,,,,,Arkansas guide / curated modern schedule,
+arkansas,bud-walton-arena,Bud Walton Arena,Fayetteville,AR,arena,,,,564,1993-11-29,2026-03-04,primary_home,1993-11-29,,exact_start,,Arkansas guide / curated modern schedule,"First official game Nov. 29, 1993 vs Murray State."
+arkansas,coleman-coliseum,Coleman Coliseum,Tuscaloosa,AL,arena,,,,1,2026-02-18,2026-02-18,,,,,,Arkansas guide / curated modern schedule,
+arkansas,humphrey-coliseum,Humphrey Coliseum,Starkville,MS,arena,,,,1,2026-02-07,2026-02-07,,,,,,Arkansas guide / curated modern schedule,
+arkansas,lloyd-noble-center,Lloyd Noble Center,Norman,OK,arena,,,,1,2026-01-27,2026-01-27,,,,,,Arkansas guide / curated modern schedule,
+arkansas,mens-gymnasium-field-house,Men's Gymnasium / Field House,Fayetteville,AR,arena,,,,164,1937-12-17,1954-02-26,primary_home,1937-1938,1953-1954,season,,Arkansas guide / curated modern schedule,"Guide states this was the home from 1937-38 until the 1954-55 transition; dedication Feb. 2, 1938."
+arkansas,mizzou-arena,Mizzou Arena,Columbia,MO,arena,,,,1,2026-03-07,2026-03-07,,,,,,Arkansas guide / curated modern schedule,
+arkansas,moda-center,Moda Center,Portland,OR,arena,,,,2,2026-03-19,2026-03-21,,,,,,Arkansas guide / curated modern schedule,
+arkansas,neville-arena,Neville Arena,Auburn,AL,arena,,,,1,2026-01-10,2026-01-10,,,,,,Arkansas guide / curated modern schedule,
+arkansas,oconnell-center,O'Connell Center,Gainesville,FL,arena,,,,1,2026-02-28,2026-02-28,,,,,,Arkansas guide / curated modern schedule,
+arkansas,pete-maravich-assembly-center,Pete Maravich Assembly Center,Baton Rouge,LA,arena,,,,1,2026-02-10,2026-02-10,,,,,,Arkansas guide / curated modern schedule,
+arkansas,prudential-center,Prudential Center,Newark,NJ,arena,,,,1,2025-12-20,2025-12-20,,,,,,Arkansas guide / curated modern schedule,
+arkansas,sap-center,SAP Center,San Jose,CA,arena,,,,1,2026-03-26,2026-03-26,,,,,,Arkansas guide / curated modern schedule,
+arkansas,sjb-pavilion,SJB Pavilion,Oxford,MS,arena,,,,1,2026-01-07,2026-01-07,,,,,,Arkansas guide / curated modern schedule,
+arkansas,schmidt-gymnasium,Schmidt Gymnasium,Fayetteville,AR,arena,,,,159,1923-12-21,1937-02-27,primary_home,1923-1924,1936-1937,season,,Arkansas guide / curated modern schedule,
+arkansas,simmons-bank-arena,Simmons Bank Arena,North Little Rock,AR,arena,,,,1,2025-12-06,2025-12-06,,,,,,Arkansas guide / curated modern schedule,
+arkansas,stegeman-coliseum,Stegeman Coliseum,Athens,GA,arena,,,,1,2026-01-17,2026-01-17,,,,,,Arkansas guide / curated modern schedule,
+arkansas,united-center,United Center,Chicago,IL,arena,,,,1,2025-11-27,2025-11-27,,,,,,Arkansas guide / curated modern schedule,
