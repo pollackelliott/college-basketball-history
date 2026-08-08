@@ -100,8 +100,16 @@ def main() -> int:
             for row in read_csv(venue_path):
                 name = row.get("canonical_name", "").strip()
                 key = row.get("venue_key", "").strip()
-                if name and key:
+                if not key:
+                    continue
+                if name:
                     mapping[name.casefold()] = key
+                aliases = row.get("aliases", "").strip()
+                if aliases:
+                    for alias in aliases.split(";"):
+                        alias = alias.strip()
+                        if alias:
+                            mapping[alias.casefold()] = key
             venue_maps[school_dir.name] = mapping
 
     candidates: dict[str, set[str]] = defaultdict(set)
@@ -215,10 +223,17 @@ def main() -> int:
         print("DRY RUN COMPLETE: no files changed.")
         return 0
 
-    if conflicting_assertions or existing_conflicts:
-        print("FAIL SAFE: refusing --apply while venue conflicts remain.")
-        print("Resolve or explicitly exempt those cases, then rerun the dry run.")
+    if existing_conflicts:
+        print("FAIL SAFE: refusing --apply while existing canonical venue-key conflicts remain.")
+        print("Resolve those canonical conflicts, then rerun the dry run.")
         return 2
+
+    if conflicting_assertions:
+        print(
+            f"NOTE: {len(conflicting_assertions):,} unresolved games have conflicting venue claims; "
+            "they will remain unchanged while all unambiguous blank venue keys are filled."
+        )
+        print()
 
     write_csv(canonical_path, canonical)
     print(f"Applied {filled:,} canonical venue-key fills.")

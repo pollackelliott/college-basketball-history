@@ -304,7 +304,7 @@ def build_assertion(
 
 
 def load_venue_name_map(path: Path) -> dict[str, str]:
-    """Map a school's canonical venue name to its stable venue_key."""
+    """Map canonical venue names and optional semicolon-delimited aliases to venue_key."""
     if not path.exists():
         return {}
     rows = read_csv(path)
@@ -312,8 +312,16 @@ def load_venue_name_map(path: Path) -> dict[str, str]:
     for row in rows:
         name = row.get("canonical_name", "").strip()
         key = row.get("venue_key", "").strip()
-        if name and key:
+        if not key:
+            continue
+        if name:
             result[name.casefold()] = key
+        aliases = row.get("aliases", "").strip()
+        if aliases:
+            for alias in aliases.split(";"):
+                alias = alias.strip()
+                if alias:
+                    result[alias.casefold()] = key
     return result
 
 
