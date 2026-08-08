@@ -136,12 +136,22 @@ def identify_game(
         candidate = same_score[0]
         can_date = candidate.get("game_date", "").strip()
 
-        # Safe only if at least one side lacks an exact date.
         if not src_date or not can_date:
             return (
                 CONFIDENT,
                 candidate["canonical_game_id"],
                 "UNIQUE_PAIR_SEASON_SCORE_DATE_INCOMPLETE",
+            )
+
+        # A unique same-season score match is strong enough to establish game
+        # identity even when two official sources disagree on the exact date.
+        # The date disagreement is preserved separately in reconciliation;
+        # it must not create a duplicate canonical game.
+        if src_date != can_date:
+            return (
+                CONFIDENT,
+                candidate["canonical_game_id"],
+                "UNIQUE_PAIR_SEASON_SCORE_DATE_CONFLICT",
             )
 
     if len(same_score) > 1:
