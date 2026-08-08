@@ -16,6 +16,8 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -132,6 +134,43 @@ def game_sort_key(game: dict[str, Any]) -> tuple[str, str, str]:
     )
 
 
+def normalized_name_signature(value: str) -> str:
+    """
+    Compare display-name variants while ignoring harmless punctuation/footnote residue.
+
+    This is intentionally conservative: it only treats names as equivalent when their
+    letters and numbers reduce to the same sequence. Truly different names still fail
+    the build and require explicit reconciliation.
+    """
+    value = unicodedata.normalize("NFKD", value)
+    value = "".join(ch for ch in value if not unicodedata.combining(ch))
+    return re.sub(r"[^a-z0-9]+", "", value.casefold())
+
+
+def preferred_display_name(names: set[str]) -> str:
+    """
+    Pick a deterministic clean display form among equivalent variants.
+
+    Preference:
+    1. no leading footnote/symbol residue;
+    2. shorter cleaned label;
+    3. ordinary lexical order for stable ties.
+    """
+    cleaned = []
+    for name in names:
+        candidate = re.sub(r"^[^A-Za-z0-9]+\s*", "", name).strip()
+        cleaned.append(candidate)
+
+    return sorted(
+        set(cleaned),
+        key=lambda value: (
+            len(value),
+            value.casefold(),
+            value,
+        ),
+    )[0]
+
+
 def load_opponent_names(
     repo_root: Path,
     programs: dict[str, dict[str, str]],
@@ -150,29 +189,33 @@ def load_opponent_names(
                 if key and name:
                     names_by_key[key].add(name)
 
-    conflicts = {
-        key: sorted(names)
-        for key, names in names_by_key.items()
-        if key not in programs and len(names) > 1
-    }
-    if conflicts:
+    resolved_names: dict[str, str] = {}
+    true_conflicts: dict[str, list[str]] = {}
+
+    for key, names in names_by_key.items():
+        if key in programs:
+            resolved_names[key] = programs[key]["program_name"].strip()
+            continue
+
+        signatures = {normalized_name_signature(name) for name in names}
+
+        if len(signatures) == 1:
+            resolved_names[key] = preferred_display_name(names)
+        else:
+            true_conflicts[key] = sorted(names)
+
+    if true_conflicts:
         sample = "; ".join(
-            f"{key}: {names}" for key, names in list(sorted(conflicts.items()))[:10]
+            f"{key}: {names}"
+            for key, names in list(sorted(true_conflicts.items()))[:10]
         )
         raise ValueError(
-            "Conflicting historical opponent display names found. "
-            "Resolve before publishing. "
+            "Conflicting historical opponent display names found after "
+            "punctuation/footnote normalization. Resolve before publishing. "
             + sample
         )
 
-    return {
-        key: (
-            programs[key]["program_name"].strip()
-            if key in programs
-            else sorted(names)[0]
-        )
-        for key, names in names_by_key.items()
-    }
+    return resolved_names
 
 
 def main() -> int:
