@@ -92,6 +92,8 @@ ASSERTION_FIELDS = [
     "source_page",
     "raw_text",
     "normalization_status",
+    "administrative_status",
+    "administrative_note",
     "notes",
     "match_status",
     "match_method",
@@ -301,7 +303,21 @@ def build_assertion(
     return row
 
 
-def build_new_canonical(source: dict[str, str], game_id: str) -> dict[str, str]:
+def load_venue_name_map(path: Path) -> dict[str, str]:
+    """Map a school's canonical venue name to its stable venue_key."""
+    if not path.exists():
+        return {}
+    rows = read_csv(path)
+    result: dict[str, str] = {}
+    for row in rows:
+        name = row.get("canonical_name", "").strip()
+        key = row.get("venue_key", "").strip()
+        if name and key:
+            result[name.casefold()] = key
+    return result
+
+
+def build_new_canonical(source: dict[str, str], game_id: str, venue_name_map: dict[str, str]) -> dict[str, str]:
     school = source["source_program_key"].strip()
     opp = source["normalized_opponent_key"].strip()
     team_a, team_b = ordered_pair(school, opp)
@@ -320,13 +336,13 @@ def build_new_canonical(source: dict[str, str], game_id: str) -> dict[str, str]:
         "overtime_periods": source.get("overtime_periods", ""),
         "site_type": site_type,
         "designated_home_team_key": home_key,
-        "venue_key": "",
+        "venue_key": venue_name_map.get(source.get("curated_venue_name", "").strip().casefold(), ""),
         "site_city": source.get("city", ""),
         "site_state": source.get("state", ""),
         "game_type": source.get("curated_game_type", "") or "REGULAR_SEASON",
         "postseason_round": source.get("curated_postseason_round", ""),
-        "administrative_status": "",
-        "administrative_note": "",
+        "administrative_status": source.get("administrative_status", ""),
+        "administrative_note": source.get("administrative_note", ""),
         "canonical_status": "PROVISIONAL",
         "notes": "",
     }
@@ -341,12 +357,14 @@ def main() -> int:
 
     repo_root = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
     source_path = repo_root / "schools" / args.school_key / "source-games.csv"
+    venue_path = repo_root / "schools" / args.school_key / "venues.csv"
     canonical_path = repo_root / "data" / "canonical" / "games.csv"
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
 
     try:
         sources = read_csv(source_path)
+        venue_name_map = load_venue_name_map(venue_path)
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
         discrepancies = read_csv(discrepancies_path)
@@ -434,7 +452,7 @@ def main() -> int:
 
     for source, status, game_id, method in planned:
         if status == NEW_GAME:
-            row = build_new_canonical(source, game_id)
+            row = build_new_canonical(source, game_id, venue_name_map)
             new_canonical.append(row)
             temp_canonical_by_id[game_id] = row
 
