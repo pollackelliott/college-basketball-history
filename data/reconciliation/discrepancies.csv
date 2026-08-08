@@ -7,6 +7,22 @@ DISC-000005,CBBG-0002768,score,missouri,"Missouri 66, Kentucky 88",kentucky,"Ken
 DISC-000006,CBBG-0000961,overtime_periods,arkansas,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
 DISC-000007,CBBG-0001182,score,arkansas,52-74,,,58-74,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
 DISC-000008,CBBG-0001259,overtime_periods,arkansas,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
-DISC-000009,CBBG-0002600,site_type,arkansas,TEAM_A_HOME,,,TEAM_B_HOME,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
-DISC-000010,CBBG-0002629,site_type,arkansas,TEAM_A_HOME,,,TEAM_B_HOME,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
-DISC-000011,CBBG-0002703,site_type,arkansas,TEAM_A_HOME,,,TEAM_B_HOME,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000009,CBBG-0002600,site_type,arkansas,TEAM_A_HOME,,,TEAM_A_HOME,RESOLVED,Resolved during Arkansas cross-source curation: Arkansas official year-by-year history places this game in Fayetteville; Bud Walton Arena was Arkansas's primary home venue. Missouri's prior home-site assertion is superseded; on-court score/result is unchanged.,Canonical site corrected to Arkansas home; prior source assertions remain preserved.
+DISC-000010,CBBG-0002629,site_type,arkansas,TEAM_A_HOME,,,TEAM_A_HOME,RESOLVED,Resolved during Arkansas cross-source curation: Arkansas official year-by-year history places this game in Fayetteville; Bud Walton Arena was Arkansas's primary home venue. Missouri's prior home-site assertion is superseded; on-court score/result is unchanged.,Canonical site corrected to Arkansas home; prior source assertions remain preserved.
+DISC-000011,CBBG-0002703,site_type,arkansas,TEAM_A_HOME,,,TEAM_A_HOME,RESOLVED,Resolved during Arkansas cross-source curation: Arkansas official year-by-year history places this game in Fayetteville; Bud Walton Arena was Arkansas's primary home venue. Missouri's prior home-site assertion is superseded; on-court score/result is unchanged.,Canonical site corrected to Arkansas home; prior source assertions remain preserved.
+DISC-000012,CBBG-0000442,game_date,illinois,1932-12-21,,,1932-12-20,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000013,CBBG-0001512,overtime_periods,illinois,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000014,CBBG-0001576,overtime_periods,illinois,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000015,CBBG-0001967,overtime_periods,illinois,3,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000016,CBBG-0002030,overtime_periods,illinois,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000017,CBBG-0002189,overtime_periods,illinois,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000018,CBBG-0005091,site_type,illinois,NEUTRAL,,,TEAM_A_HOME,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000019,CBBG-0005148,site_type,illinois,NEUTRAL,,,TEAM_A_HOME,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000020,CBBG-0006003,site_type,northwestern,TEAM_B_HOME,,,TEAM_A_HOME,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000021,CBBG-0006007,score,northwestern,17-25,,,16-25,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000022,CBBG-0006017,score,northwestern,47-17,,,45-17,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000023,CBBG-0006135,overtime_periods,northwestern,0,,,3,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000024,CBBG-0006432,overtime_periods,northwestern,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000025,CBBG-0006800,overtime_periods,northwestern,1,,,0,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000026,CBBG-0006831,game_date,northwestern,1959-03-08,,,1959-03-07,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
+DISC-000027,CBBG-0006901,score,northwestern,73-68,,,73-69,UNDER_REVIEW,,Automatically detected during school ingestion; canonical value was not overwritten.
