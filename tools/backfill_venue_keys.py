@@ -12,6 +12,9 @@ Apply:
 This only fills BLANK canonical venue_key fields when all usable source assertions
 for that canonical game agree on one venue key. It never overwrites an existing
 canonical venue key and never guesses across conflicting assertions.
+
+The dry run also prints all conflicts/unmapped venue names so they can be reviewed
+before applying.
 """
 
 from __future__ import annotations
@@ -83,6 +86,8 @@ def main() -> int:
         print(f"FAIL: required file not found: {exc}")
         return 1
 
+    canonical_by_id = {r.get("canonical_game_id", ""): r for r in canonical}
+
     venue_maps: dict[str, dict[str, str]] = {}
     if schools_root.exists():
         for school_dir in schools_root.iterdir():
@@ -100,7 +105,8 @@ def main() -> int:
             venue_maps[school_dir.name] = mapping
 
     candidates: dict[str, set[str]] = defaultdict(set)
-    unresolved_names = 0
+    candidate_details: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
+    unresolved_details: list[tuple[str, str, str, str]] = []
 
     for assertion in assertions:
         game_id = assertion.get("canonical_game_id", "").strip()
@@ -112,12 +118,15 @@ def main() -> int:
         key = venue_maps.get(program, {}).get(venue_name.casefold(), "")
         if key:
             candidates[game_id].add(key)
+            candidate_details[game_id].append((program, venue_name, key))
         else:
-            unresolved_names += 1
+            unresolved_details.append(
+                (game_id, program, venue_name, assertion.get("source_game_id", ""))
+            )
 
     filled = 0
-    conflicting_assertions = 0
-    existing_conflicts = 0
+    conflicting_assertions = []
+    existing_conflicts = []
     samples = []
 
     for row in canonical:
@@ -126,14 +135,14 @@ def main() -> int:
         existing = row.get("venue_key", "").strip()
 
         if len(keys) > 1:
-            conflicting_assertions += 1
+            conflicting_assertions.append((game_id, sorted(keys)))
             continue
 
         if len(keys) == 1:
             candidate = next(iter(keys))
             if existing:
                 if existing != candidate:
-                    existing_conflicts += 1
+                    existing_conflicts.append((game_id, existing, candidate))
                 continue
 
             row["venue_key"] = candidate
@@ -155,9 +164,9 @@ def main() -> int:
     print()
     print(f"Canonical games:                     {len(canonical):,}")
     print(f"Blank venue keys safely fillable:    {filled:,}")
-    print(f"Games with conflicting venue claims: {conflicting_assertions:,}")
-    print(f"Existing canonical/key conflicts:    {existing_conflicts:,}")
-    print(f"Assertion venue names not in registry:{unresolved_names:>8,}")
+    print(f"Games with conflicting venue claims: {len(conflicting_assertions):,}")
+    print(f"Existing canonical/key conflicts:    {len(existing_conflicts):,}")
+    print(f"Assertion venue names not in registry:{len(unresolved_details):>8,}")
     print()
 
     if samples:
@@ -166,9 +175,50 @@ def main() -> int:
             print(f"  - {game_id} | {season} | {a} vs {b} | {key}")
         print()
 
+    if conflicting_assertions:
+        print("CONFLICTING ASSERTION VENUE CLAIMS:")
+        for game_id, keys in conflicting_assertions:
+            c = canonical_by_id.get(game_id, {})
+            print(
+                f"  - {game_id} | {c.get('season_label','')} | "
+                f"{c.get('team_a_key','')} vs {c.get('team_b_key','')} | "
+                f"candidate keys: {', '.join(keys)}"
+            )
+            for program, venue_name, key in candidate_details.get(game_id, []):
+                print(f"      {program}: {venue_name} -> {key}")
+        print()
+
+    if existing_conflicts:
+        print("EXISTING CANONICAL VENUE-KEY CONFLICTS:")
+        for game_id, existing, candidate in existing_conflicts:
+            c = canonical_by_id.get(game_id, {})
+            print(
+                f"  - {game_id} | {c.get('season_label','')} | "
+                f"{c.get('team_a_key','')} vs {c.get('team_b_key','')} | "
+                f"canonical={existing} | assertion-derived={candidate}"
+            )
+            for program, venue_name, key in candidate_details.get(game_id, []):
+                print(f"      {program}: {venue_name} -> {key}")
+        print()
+
+    if unresolved_details:
+        print("ASSERTION VENUE NAMES NOT FOUND IN SCHOOL REGISTRY:")
+        for game_id, program, venue_name, source_game_id in unresolved_details:
+            c = canonical_by_id.get(game_id, {})
+            print(
+                f"  - {game_id} | {c.get('season_label','')} | "
+                f"{program} | {venue_name!r} | source={source_game_id}"
+            )
+        print()
+
     if not args.apply:
         print("DRY RUN COMPLETE: no files changed.")
         return 0
+
+    if conflicting_assertions or existing_conflicts:
+        print("FAIL SAFE: refusing --apply while venue conflicts remain.")
+        print("Resolve or explicitly exempt those cases, then rerun the dry run.")
+        return 2
 
     write_csv(canonical_path, canonical)
     print(f"Applied {filled:,} canonical venue-key fills.")
