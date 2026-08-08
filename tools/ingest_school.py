@@ -353,13 +353,14 @@ def main() -> int:
         for r in assertions
     }
 
-    existing_discrepancy_signatures = {
+    # Deduplicate discrepancy records by game + field + source program.
+    # The same underlying disagreement may be written in different human-readable
+    # formats, so value formatting must not create a duplicate record.
+    existing_discrepancy_keys = {
         (
             r.get("canonical_game_id", ""),
             r.get("field_name", ""),
             r.get("source_a_program_key", ""),
-            r.get("source_a_value", ""),
-            r.get("canonical_value", ""),
         )
         for r in discrepancies
     }
@@ -433,14 +434,12 @@ def main() -> int:
         if status == CONFIDENT:
             can = temp_canonical_by_id[game_id]
             for field_name, source_value, canonical_value in discrepancy_candidates(source, can):
-                sig = (
+                discrepancy_key = (
                     game_id,
                     field_name,
                     source.get("source_program_key", ""),
-                    source_value,
-                    canonical_value,
                 )
-                if sig in existing_discrepancy_signatures:
+                if discrepancy_key in existing_discrepancy_keys:
                     continue
 
                 new_discrepancies.append({
@@ -457,7 +456,7 @@ def main() -> int:
                     "notes": "Automatically detected during school ingestion; canonical value was not overwritten.",
                 })
                 next_disc_num += 1
-                existing_discrepancy_signatures.add(sig)
+                existing_discrepancy_keys.add(discrepancy_key)
 
     print(f"Assertions to add:           {len(new_assertions):,}")
     print(f"Discrepancies to add:        {len(new_discrepancies):,}")
