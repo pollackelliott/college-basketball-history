@@ -1,0 +1,5846 @@
+{
+  "schema_version": 1,
+  "reference_season": "2026-2027",
+  "programs": [
+    {
+      "program_key": "abilene-christian",
+      "program_name": "Abilene Christian",
+      "display_name": "Abilene Christian",
+      "nickname": "Wildcats",
+      "city": "Abilene",
+      "state": "TX",
+      "primary_hex": "#4F2170",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wac",
+        "conference_name": "WAC"
+      }
+    },
+    {
+      "program_key": "air-force",
+      "program_name": "Air Force",
+      "display_name": "Air Force",
+      "nickname": "Falcons",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "primary_hex": "#003087",
+      "secondary_hex": "#8A8D8F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "akron",
+      "program_name": "Akron",
+      "display_name": "Akron",
+      "nickname": "Zips",
+      "city": "Akron",
+      "state": "OH",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#A89968",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "alabama",
+      "program_name": "Alabama",
+      "display_name": "Alabama",
+      "nickname": "Crimson Tide",
+      "city": "Tuscaloosa",
+      "state": "AL",
+      "primary_hex": "#9E1B32",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "alabama-a-m",
+      "program_name": "Alabama A&M",
+      "display_name": "Alabama A&M",
+      "nickname": "Bulldogs",
+      "city": "Huntsville",
+      "state": "AL",
+      "primary_hex": "#660000",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "alabama-state",
+      "program_name": "Alabama State",
+      "display_name": "Alabama State",
+      "nickname": "Hornets",
+      "city": "Montgomery",
+      "state": "AL",
+      "primary_hex": "#C99700",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "ualbany",
+      "program_name": "UAlbany",
+      "display_name": "Albany",
+      "nickname": "Great Danes",
+      "city": "Albany",
+      "state": "NY",
+      "primary_hex": "#461660",
+      "secondary_hex": "#EEB211",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "alcorn-state",
+      "program_name": "Alcorn State",
+      "display_name": "Alcorn State",
+      "nickname": "Braves",
+      "city": "Lorman",
+      "state": "MS",
+      "primary_hex": "#4B306A",
+      "secondary_hex": "#C38300",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "american-university",
+      "program_name": "American University",
+      "display_name": "American",
+      "nickname": "Eagles",
+      "city": "Washington",
+      "state": "DC",
+      "primary_hex": "#143D8D",
+      "secondary_hex": "#C41230",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "app-state",
+      "program_name": "App State",
+      "display_name": "Appalachian State",
+      "nickname": "Mountaineers",
+      "city": "Boone",
+      "state": "NC",
+      "primary_hex": "#222222",
+      "secondary_hex": "#FFCC00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "arizona",
+      "program_name": "Arizona",
+      "display_name": "Arizona",
+      "nickname": "Wildcats",
+      "city": "Tucson",
+      "state": "AZ",
+      "primary_hex": "#CC0033",
+      "secondary_hex": "#003366",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "arizona-state",
+      "program_name": "Arizona State",
+      "display_name": "Arizona State",
+      "nickname": "Sun Devils",
+      "city": "Tempe",
+      "state": "AZ",
+      "primary_hex": "#8C1340",
+      "secondary_hex": "#FFC627",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "arkansas",
+      "program_name": "Arkansas",
+      "display_name": "Arkansas",
+      "nickname": "Razorbacks",
+      "city": "Fayetteville",
+      "state": "AR",
+      "primary_hex": "#9D2235",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "arkansas-state",
+      "program_name": "Arkansas State",
+      "display_name": "Arkansas State",
+      "nickname": "Red Wolves",
+      "city": "Jonesboro",
+      "state": "AR",
+      "primary_hex": "#CC092F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "army",
+      "program_name": "Army",
+      "display_name": "Army",
+      "nickname": "Black Knights",
+      "city": "West Point",
+      "state": "NY",
+      "primary_hex": "#D4BF91",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "auburn",
+      "program_name": "Auburn",
+      "display_name": "Auburn",
+      "nickname": "Tigers",
+      "city": "Auburn",
+      "state": "AL",
+      "primary_hex": "#0C2340",
+      "secondary_hex": "#E87722",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "austin-peay",
+      "program_name": "Austin Peay",
+      "display_name": "Austin Peay",
+      "nickname": "Governors",
+      "city": "Clarksville",
+      "state": "TN",
+      "primary_hex": "#C41E3A",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
+      }
+    },
+    {
+      "program_key": "ball-state",
+      "program_name": "Ball State",
+      "display_name": "Ball State",
+      "nickname": "Cardinals",
+      "city": "Muncie",
+      "state": "IN",
+      "primary_hex": "#BA0C2F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "baylor",
+      "program_name": "Baylor",
+      "display_name": "Baylor",
+      "nickname": "Bears",
+      "city": "Waco",
+      "state": "TX",
+      "primary_hex": "#154734",
+      "secondary_hex": "#FFB81C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "bellarmine",
+      "program_name": "Bellarmine",
+      "display_name": "Bellarmine",
+      "nickname": "Knights",
+      "city": "Louisville",
+      "state": "KY",
+      "primary_hex": "#752936",
+      "secondary_hex": "#C8C8C8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "belmont",
+      "program_name": "Belmont",
+      "display_name": "Belmont",
+      "nickname": "Bruins",
+      "city": "Nashville",
+      "state": "TN",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#00205B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "bethune-cookman",
+      "program_name": "Bethune-Cookman",
+      "display_name": "Bethune-Cookman",
+      "nickname": "Wildcats",
+      "city": "Daytona Beach",
+      "state": "FL",
+      "primary_hex": "#6F263D",
+      "secondary_hex": "#F2A900",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "binghamton",
+      "program_name": "Binghamton",
+      "display_name": "Binghamton",
+      "nickname": "Bearcats",
+      "city": "Binghamton",
+      "state": "NY",
+      "primary_hex": "#005A43",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "boise-state",
+      "program_name": "Boise State",
+      "display_name": "Boise State",
+      "nickname": "Broncos",
+      "city": "Boise",
+      "state": "ID",
+      "primary_hex": "#0033A0",
+      "secondary_hex": "#D64309",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "boston-college",
+      "program_name": "Boston College",
+      "display_name": "Boston College",
+      "nickname": "Eagles",
+      "city": "Chestnut Hill",
+      "state": "MA",
+      "primary_hex": "#98002E",
+      "secondary_hex": "#BC9B61",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "boston-university",
+      "program_name": "Boston University",
+      "display_name": "Boston University",
+      "nickname": "Terriers",
+      "city": "Boston",
+      "state": "MA",
+      "primary_hex": "#A3011B",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "bowling-green",
+      "program_name": "Bowling Green",
+      "display_name": "Bowling Green",
+      "nickname": "Falcons",
+      "city": "Bowling Green",
+      "state": "OH",
+      "primary_hex": "#F35000",
+      "secondary_hex": "#4F2C1D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "bradley",
+      "program_name": "Bradley",
+      "display_name": "Bradley",
+      "nickname": "Braves",
+      "city": "Peoria",
+      "state": "IL",
+      "primary_hex": "#A50000",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "brown",
+      "program_name": "Brown",
+      "display_name": "Brown",
+      "nickname": "Bears",
+      "city": "Providence",
+      "state": "RI",
+      "primary_hex": "#4E3629",
+      "secondary_hex": "#E4002B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "bryant",
+      "program_name": "Bryant",
+      "display_name": "Bryant",
+      "nickname": "Bulldogs",
+      "city": "Smithfield",
+      "state": "RI",
+      "primary_hex": "#B4975B",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "bucknell",
+      "program_name": "Bucknell",
+      "display_name": "Bucknell",
+      "nickname": "Bison",
+      "city": "Lewisburg",
+      "state": "PA",
+      "primary_hex": "#E87722",
+      "secondary_hex": "#003865",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "buffalo",
+      "program_name": "Buffalo",
+      "display_name": "Buffalo",
+      "nickname": "Bulls",
+      "city": "Buffalo",
+      "state": "NY",
+      "primary_hex": "#005BBB",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "butler",
+      "program_name": "Butler",
+      "display_name": "Butler",
+      "nickname": "Bulldogs",
+      "city": "Indianapolis",
+      "state": "IN",
+      "primary_hex": "#13294B",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "byu",
+      "program_name": "BYU",
+      "display_name": "BYU",
+      "nickname": "Cougars",
+      "city": "Provo",
+      "state": "UT",
+      "primary_hex": "#0062B8",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "california-baptist",
+      "program_name": "California Baptist",
+      "display_name": "Cal Baptist",
+      "nickname": "Lancers",
+      "city": "Riverside",
+      "state": "CA",
+      "primary_hex": "#002554",
+      "secondary_hex": "#A37400",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "cal-poly",
+      "program_name": "Cal Poly",
+      "display_name": "Cal Poly",
+      "nickname": "Mustangs",
+      "city": "San Luis Obispo",
+      "state": "CA",
+      "primary_hex": "#003831",
+      "secondary_hex": "#FFE395",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "cal-state-bakersfield",
+      "program_name": "Cal State Bakersfield",
+      "display_name": "Cal State Bakersfield",
+      "nickname": "Roadrunners",
+      "city": "Bakersfield",
+      "state": "CA",
+      "primary_hex": "#003594",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "cal-state-fullerton",
+      "program_name": "Cal State Fullerton",
+      "display_name": "Cal State Fullerton",
+      "nickname": "Titans",
+      "city": "Fullerton",
+      "state": "CA",
+      "primary_hex": "#00274C",
+      "secondary_hex": "#DC8218",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "california",
+      "program_name": "California",
+      "display_name": "California",
+      "nickname": "Golden Bears",
+      "city": "Berkeley",
+      "state": "CA",
+      "primary_hex": "#003262",
+      "secondary_hex": "#FDB515",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "campbell",
+      "program_name": "Campbell",
+      "display_name": "Campbell",
+      "nickname": "Fighting Camels",
+      "city": "Buies Creek",
+      "state": "NC",
+      "primary_hex": "#F58025",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "canisius",
+      "program_name": "Canisius",
+      "display_name": "Canisius",
+      "nickname": "Golden Griffins",
+      "city": "Buffalo",
+      "state": "NY",
+      "primary_hex": "#0C2340",
+      "secondary_hex": "#FFBA00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "central-arkansas",
+      "program_name": "Central Arkansas",
+      "display_name": "Central Arkansas",
+      "nickname": "Bears",
+      "city": "Conway",
+      "state": "AR",
+      "primary_hex": "#4F2D7F",
+      "secondary_hex": "#818A8F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
+      }
+    },
+    {
+      "program_key": "central-connecticut",
+      "program_name": "Central Connecticut",
+      "display_name": "Central Connecticut",
+      "nickname": "Blue Devils",
+      "city": "New Britain",
+      "state": "CT",
+      "primary_hex": "#00539B",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "central-michigan",
+      "program_name": "Central Michigan",
+      "display_name": "Central Michigan",
+      "nickname": "Chippewas",
+      "city": "Mount Pleasant",
+      "state": "MI",
+      "primary_hex": "#6A0032",
+      "secondary_hex": "#FFC82E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "charleston",
+      "program_name": "Charleston",
+      "display_name": "Charleston",
+      "nickname": "Cougars",
+      "city": "Charleston",
+      "state": "SC",
+      "primary_hex": "#800000",
+      "secondary_hex": "#9D8958",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "charleston-southern",
+      "program_name": "Charleston Southern",
+      "display_name": "Charleston Southern",
+      "nickname": "Buccaneers",
+      "city": "Charleston",
+      "state": "SC",
+      "primary_hex": "#A89963",
+      "secondary_hex": "#002855",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "charlotte",
+      "program_name": "Charlotte",
+      "display_name": "Charlotte",
+      "nickname": "49ers",
+      "city": "Charlotte",
+      "state": "NC",
+      "primary_hex": "#046A38",
+      "secondary_hex": "#B9975B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "chattanooga",
+      "program_name": "Chattanooga",
+      "display_name": "Chattanooga",
+      "nickname": "Mocs",
+      "city": "Chattanooga",
+      "state": "TN",
+      "primary_hex": "#00386B",
+      "secondary_hex": "#E0AA0F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "chicago-state",
+      "program_name": "Chicago State",
+      "display_name": "Chicago State",
+      "nickname": "Cougars",
+      "city": "Chicago",
+      "state": "IL",
+      "primary_hex": "#006666",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "cincinnati",
+      "program_name": "Cincinnati",
+      "display_name": "Cincinnati",
+      "nickname": "Bearcats",
+      "city": "Cincinnati",
+      "state": "OH",
+      "primary_hex": "#E00122",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "clemson",
+      "program_name": "Clemson",
+      "display_name": "Clemson",
+      "nickname": "Tigers",
+      "city": "Clemson",
+      "state": "SC",
+      "primary_hex": "#F56600",
+      "secondary_hex": "#522D80",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "cleveland-state",
+      "program_name": "Cleveland State",
+      "display_name": "Cleveland State",
+      "nickname": "Vikings",
+      "city": "Cleveland",
+      "state": "OH",
+      "primary_hex": "#006747",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "coastal-carolina",
+      "program_name": "Coastal Carolina",
+      "display_name": "Coastal Carolina",
+      "nickname": "Chanticleers",
+      "city": "Conway",
+      "state": "SC",
+      "primary_hex": "#006F71",
+      "secondary_hex": "#A27752",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "colgate",
+      "program_name": "Colgate",
+      "display_name": "Colgate",
+      "nickname": "Raiders",
+      "city": "Hamilton",
+      "state": "NY",
+      "primary_hex": "#821019",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "colorado",
+      "program_name": "Colorado",
+      "display_name": "Colorado",
+      "nickname": "Buffaloes",
+      "city": "Boulder",
+      "state": "CO",
+      "primary_hex": "#CFB87C",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "colorado-state",
+      "program_name": "Colorado State",
+      "display_name": "Colorado State",
+      "nickname": "Rams",
+      "city": "Fort Collins",
+      "state": "CO",
+      "primary_hex": "#1E4D2B",
+      "secondary_hex": "#C8C372",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "columbia",
+      "program_name": "Columbia",
+      "display_name": "Columbia",
+      "nickname": "Lions",
+      "city": "New York",
+      "state": "NY",
+      "primary_hex": "#9BCBEB",
+      "secondary_hex": "#003865",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "uconn",
+      "program_name": "UConn",
+      "display_name": "Connecticut",
+      "nickname": "Huskies",
+      "city": "Storrs",
+      "state": "CT",
+      "primary_hex": "#000E2F",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "coppin-state",
+      "program_name": "Coppin State",
+      "display_name": "Coppin State",
+      "nickname": "Eagles",
+      "city": "Baltimore",
+      "state": "MD",
+      "primary_hex": "#003056",
+      "secondary_hex": "#FFC915",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "cornell",
+      "program_name": "Cornell",
+      "display_name": "Cornell",
+      "nickname": "Big Red",
+      "city": "Ithaca",
+      "state": "NY",
+      "primary_hex": "#B31B1B",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "creighton",
+      "program_name": "Creighton",
+      "display_name": "Creighton",
+      "nickname": "Bluejays",
+      "city": "Omaha",
+      "state": "NE",
+      "primary_hex": "#005CA9",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "cal-state-northridge",
+      "program_name": "Cal State Northridge",
+      "display_name": "CSUN",
+      "nickname": "Matadors",
+      "city": "Northridge",
+      "state": "CA",
+      "primary_hex": "#CE1126",
+      "secondary_hex": "#D1C3C6",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "dartmouth",
+      "program_name": "Dartmouth",
+      "display_name": "Dartmouth",
+      "nickname": "Big Green",
+      "city": "Hanover",
+      "state": "NH",
+      "primary_hex": "#046A38",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "davidson",
+      "program_name": "Davidson",
+      "display_name": "Davidson",
+      "nickname": "Wildcats",
+      "city": "Davidson",
+      "state": "NC",
+      "primary_hex": "#AC1A2F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "dayton",
+      "program_name": "Dayton",
+      "display_name": "Dayton",
+      "nickname": "Flyers",
+      "city": "Dayton",
+      "state": "OH",
+      "primary_hex": "#CE1141",
+      "secondary_hex": "#004B8D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "delaware",
+      "program_name": "Delaware",
+      "display_name": "Delaware",
+      "nickname": "Fightin' Blue Hens",
+      "city": "Newark",
+      "state": "DE",
+      "primary_hex": "#00539F",
+      "secondary_hex": "#FFDD31",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "delaware-state",
+      "program_name": "Delaware State",
+      "display_name": "Delaware State",
+      "nickname": "Hornets",
+      "city": "Dover",
+      "state": "DE",
+      "primary_hex": "#EE3124",
+      "secondary_hex": "#72CDF4",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "denver",
+      "program_name": "Denver",
+      "display_name": "Denver",
+      "nickname": "Pioneers",
+      "city": "Denver",
+      "state": "CO",
+      "primary_hex": "#8B2332",
+      "secondary_hex": "#8B6F4B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "depaul",
+      "program_name": "DePaul",
+      "display_name": "DePaul",
+      "nickname": "Blue Demons",
+      "city": "Chicago",
+      "state": "IL",
+      "primary_hex": "#005EB8",
+      "secondary_hex": "#E4002B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "detroit-mercy",
+      "program_name": "Detroit Mercy",
+      "display_name": "Detroit Mercy",
+      "nickname": "Titans",
+      "city": "Detroit",
+      "state": "MI",
+      "primary_hex": "#A6093D",
+      "secondary_hex": "#002D72",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "drake",
+      "program_name": "Drake",
+      "display_name": "Drake",
+      "nickname": "Bulldogs",
+      "city": "Des Moines",
+      "state": "IA",
+      "primary_hex": "#004477",
+      "secondary_hex": "#999999",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "drexel",
+      "program_name": "Drexel",
+      "display_name": "Drexel",
+      "nickname": "Dragons",
+      "city": "Philadelphia",
+      "state": "PA",
+      "primary_hex": "#00437B",
+      "secondary_hex": "#FFDA02",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "duke",
+      "program_name": "Duke",
+      "display_name": "Duke",
+      "nickname": "Blue Devils",
+      "city": "Durham",
+      "state": "NC",
+      "primary_hex": "#003087",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "duquesne",
+      "program_name": "Duquesne",
+      "display_name": "Duquesne",
+      "nickname": "Dukes",
+      "city": "Pittsburgh",
+      "state": "PA",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#BA0C2F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "east-carolina",
+      "program_name": "East Carolina",
+      "display_name": "East Carolina",
+      "nickname": "Pirates",
+      "city": "Greenville",
+      "state": "NC",
+      "primary_hex": "#592A8A",
+      "secondary_hex": "#FDC82F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "east-tennessee-state",
+      "program_name": "East Tennessee State",
+      "display_name": "East Tennessee State",
+      "nickname": "Buccaneers",
+      "city": "Johnson City",
+      "state": "TN",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "east-texas-a-m",
+      "program_name": "East Texas A&M",
+      "display_name": "East Texas A&M",
+      "nickname": "Lions",
+      "city": "Commerce",
+      "state": "TX",
+      "primary_hex": "#00386C",
+      "secondary_hex": "#FFC333",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "eastern-illinois",
+      "program_name": "Eastern Illinois",
+      "display_name": "Eastern Illinois",
+      "nickname": "Panthers",
+      "city": "Charleston",
+      "state": "IL",
+      "primary_hex": "#004B83",
+      "secondary_hex": "#919295",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "eastern-kentucky",
+      "program_name": "Eastern Kentucky",
+      "display_name": "Eastern Kentucky",
+      "nickname": "Colonels",
+      "city": "Richmond",
+      "state": "KY",
+      "primary_hex": "#8A0039",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
+      }
+    },
+    {
+      "program_key": "eastern-michigan",
+      "program_name": "Eastern Michigan",
+      "display_name": "Eastern Michigan",
+      "nickname": "Eagles",
+      "city": "Ypsilanti",
+      "state": "MI",
+      "primary_hex": "#006633",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "eastern-washington",
+      "program_name": "Eastern Washington",
+      "display_name": "Eastern Washington",
+      "nickname": "Eagles",
+      "city": "Cheney",
+      "state": "WA",
+      "primary_hex": "#A10022",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "elon",
+      "program_name": "Elon",
+      "display_name": "Elon",
+      "nickname": "Phoenix",
+      "city": "Elon",
+      "state": "NC",
+      "primary_hex": "#73000A",
+      "secondary_hex": "#B59A57",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "evansville",
+      "program_name": "Evansville",
+      "display_name": "Evansville",
+      "nickname": "Purple Aces",
+      "city": "Evansville",
+      "state": "IN",
+      "primary_hex": "#52237F",
+      "secondary_hex": "#F36F21",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "fairfield",
+      "program_name": "Fairfield",
+      "display_name": "Fairfield",
+      "nickname": "Stags",
+      "city": "Fairfield",
+      "state": "CT",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#A2AAAD",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "fairleigh-dickinson",
+      "program_name": "Fairleigh Dickinson",
+      "display_name": "Fairleigh Dickinson",
+      "nickname": "Knights",
+      "city": "Hackensack",
+      "state": "NJ",
+      "primary_hex": "#283341",
+      "secondary_hex": "#72293C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "florida-atlantic",
+      "program_name": "Florida Atlantic",
+      "display_name": "FAU",
+      "nickname": "Owls",
+      "city": "Boca Raton",
+      "state": "FL",
+      "primary_hex": "#003366",
+      "secondary_hex": "#CC0000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "florida-international",
+      "program_name": "Florida International",
+      "display_name": "FIU",
+      "nickname": "Panthers",
+      "city": "Miami",
+      "state": "FL",
+      "primary_hex": "#081E3F",
+      "secondary_hex": "#B6862C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "florida",
+      "program_name": "Florida",
+      "display_name": "Florida",
+      "nickname": "Gators",
+      "city": "Gainesville",
+      "state": "FL",
+      "primary_hex": "#0021A5",
+      "secondary_hex": "#FA4616",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "florida-a-m",
+      "program_name": "Florida A&M",
+      "display_name": "Florida A&M",
+      "nickname": "Rattlers",
+      "city": "Tallahassee",
+      "state": "FL",
+      "primary_hex": "#EE7624",
+      "secondary_hex": "#1B5633",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "florida-gulf-coast",
+      "program_name": "Florida Gulf Coast",
+      "display_name": "Florida Gulf Coast",
+      "nickname": "Eagles",
+      "city": "Fort Myers",
+      "state": "FL",
+      "primary_hex": "#002D72",
+      "secondary_hex": "#007749",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "florida-state",
+      "program_name": "Florida State",
+      "display_name": "Florida State",
+      "nickname": "Seminoles",
+      "city": "Tallahassee",
+      "state": "FL",
+      "primary_hex": "#782F40",
+      "secondary_hex": "#CEB888",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "fordham",
+      "program_name": "Fordham",
+      "display_name": "Fordham",
+      "nickname": "Rams",
+      "city": "Bronx",
+      "state": "NY",
+      "primary_hex": "#860038",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "fresno-state",
+      "program_name": "Fresno State",
+      "display_name": "Fresno State",
+      "nickname": "Bulldogs",
+      "city": "Fresno",
+      "state": "CA",
+      "primary_hex": "#DB0032",
+      "secondary_hex": "#002E6D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "furman",
+      "program_name": "Furman",
+      "display_name": "Furman",
+      "nickname": "Paladins",
+      "city": "Greenville",
+      "state": "SC",
+      "primary_hex": "#201547",
+      "secondary_hex": "#A7A8AA",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "gardner-webb",
+      "program_name": "Gardner-Webb",
+      "display_name": "Gardner-Webb",
+      "nickname": "Runnin' Bulldogs",
+      "city": "Boiling Springs",
+      "state": "NC",
+      "primary_hex": "#BF2F37",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "george-mason",
+      "program_name": "George Mason",
+      "display_name": "George Mason",
+      "nickname": "Patriots",
+      "city": "Fairfax",
+      "state": "VA",
+      "primary_hex": "#006633",
+      "secondary_hex": "#FFCC33",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "george-washington",
+      "program_name": "George Washington",
+      "display_name": "George Washington",
+      "nickname": "Revolutionaries",
+      "city": "Washington",
+      "state": "DC",
+      "primary_hex": "#E2CB92",
+      "secondary_hex": "#002654",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "georgetown",
+      "program_name": "Georgetown",
+      "display_name": "Georgetown",
+      "nickname": "Hoyas",
+      "city": "Washington",
+      "state": "DC",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#8D817B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "georgia",
+      "program_name": "Georgia",
+      "display_name": "Georgia",
+      "nickname": "Bulldogs",
+      "city": "Athens",
+      "state": "GA",
+      "primary_hex": "#BA0C2F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "georgia-southern",
+      "program_name": "Georgia Southern",
+      "display_name": "Georgia Southern",
+      "nickname": "Eagles",
+      "city": "Statesboro",
+      "state": "GA",
+      "primary_hex": "#011E41",
+      "secondary_hex": "#87714D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "georgia-state",
+      "program_name": "Georgia State",
+      "display_name": "Georgia State",
+      "nickname": "Panthers",
+      "city": "Atlanta",
+      "state": "GA",
+      "primary_hex": "#0039A6",
+      "secondary_hex": "#D96A6A",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "georgia-tech",
+      "program_name": "Georgia Tech",
+      "display_name": "Georgia Tech",
+      "nickname": "Yellow Jackets",
+      "city": "Atlanta",
+      "state": "GA",
+      "primary_hex": "#B3A369",
+      "secondary_hex": "#003057",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "gonzaga",
+      "program_name": "Gonzaga",
+      "display_name": "Gonzaga",
+      "nickname": "Bulldogs",
+      "city": "Spokane",
+      "state": "WA",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#C8102E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "grambling",
+      "program_name": "Grambling",
+      "display_name": "Grambling",
+      "nickname": "Tigers",
+      "city": "Grambling",
+      "state": "LA",
+      "primary_hex": "#000000",
+      "secondary_hex": "#EAA921",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "grand-canyon",
+      "program_name": "Grand Canyon",
+      "display_name": "Grand Canyon",
+      "nickname": "Antelopes",
+      "city": "Phoenix",
+      "state": "AZ",
+      "primary_hex": "#522398",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "green-bay",
+      "program_name": "Green Bay",
+      "display_name": "Green Bay",
+      "nickname": "Phoenix",
+      "city": "Ashwaubenon",
+      "state": "WI",
+      "primary_hex": "#006747",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "hampton",
+      "program_name": "Hampton",
+      "display_name": "Hampton",
+      "nickname": "Pirates",
+      "city": "Hampton",
+      "state": "VA",
+      "primary_hex": "#0060A9",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "harvard",
+      "program_name": "Harvard",
+      "display_name": "Harvard",
+      "nickname": "Crimson",
+      "city": "Cambridge",
+      "state": "MA",
+      "primary_hex": "#A41034",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "hawai-i",
+      "program_name": "Hawai'i",
+      "display_name": "Hawai'i",
+      "nickname": "Rainbow Warriors",
+      "city": "Honolulu",
+      "state": "HI",
+      "primary_hex": "#024731",
+      "secondary_hex": "#C8C8C8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "high-point",
+      "program_name": "High Point",
+      "display_name": "High Point",
+      "nickname": "Panthers",
+      "city": "High Point",
+      "state": "NC",
+      "primary_hex": "#330072",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "hofstra",
+      "program_name": "Hofstra",
+      "display_name": "Hofstra",
+      "nickname": "Pride",
+      "city": "Hempstead",
+      "state": "NY",
+      "primary_hex": "#0B1E73",
+      "secondary_hex": "#FEB612",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "holy-cross",
+      "program_name": "Holy Cross",
+      "display_name": "Holy Cross",
+      "nickname": "Crusaders",
+      "city": "Worcester",
+      "state": "MA",
+      "primary_hex": "#602D89",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "houston",
+      "program_name": "Houston",
+      "display_name": "Houston",
+      "nickname": "Cougars",
+      "city": "Houston",
+      "state": "TX",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#B4B2B4",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "houston-christian",
+      "program_name": "Houston Christian",
+      "display_name": "Houston Christian",
+      "nickname": "Huskies",
+      "city": "Houston",
+      "state": "TX",
+      "primary_hex": "#1C439D",
+      "secondary_hex": "#F3652C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "howard",
+      "program_name": "Howard",
+      "display_name": "Howard",
+      "nickname": "Bison",
+      "city": "Washington",
+      "state": "DC",
+      "primary_hex": "#003A63",
+      "secondary_hex": "#E51937",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "idaho",
+      "program_name": "Idaho",
+      "display_name": "Idaho",
+      "nickname": "Vandals",
+      "city": "Moscow",
+      "state": "ID",
+      "primary_hex": "#B3A369",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "idaho-state",
+      "program_name": "Idaho State",
+      "display_name": "Idaho State",
+      "nickname": "Bengals",
+      "city": "Pocatello",
+      "state": "ID",
+      "primary_hex": "#FF671F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "illinois",
+      "program_name": "Illinois",
+      "display_name": "Illinois",
+      "nickname": "Fighting Illini",
+      "city": "Champaign",
+      "state": "IL",
+      "primary_hex": "#E84A27",
+      "secondary_hex": "#13294B",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "illinois-state",
+      "program_name": "Illinois State",
+      "display_name": "Illinois State",
+      "nickname": "Redbirds",
+      "city": "Normal",
+      "state": "IL",
+      "primary_hex": "#CE1126",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "incarnate-word",
+      "program_name": "Incarnate Word",
+      "display_name": "Incarnate Word",
+      "nickname": "Cardinals",
+      "city": "San Antonio",
+      "state": "TX",
+      "primary_hex": "#CB333B",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "indiana",
+      "program_name": "Indiana",
+      "display_name": "Indiana",
+      "nickname": "Hoosiers",
+      "city": "Bloomington",
+      "state": "IN",
+      "primary_hex": "#960009",
+      "secondary_hex": "#EEEDEB",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "indiana-state",
+      "program_name": "Indiana State",
+      "display_name": "Indiana State",
+      "nickname": "Sycamores",
+      "city": "Terre Haute",
+      "state": "IN",
+      "primary_hex": "#0142BC",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "iona",
+      "program_name": "Iona",
+      "display_name": "Iona",
+      "nickname": "Gaels",
+      "city": "New Rochelle",
+      "state": "NY",
+      "primary_hex": "#6F2C3F",
+      "secondary_hex": "#F2A900",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "iowa",
+      "program_name": "Iowa",
+      "display_name": "Iowa",
+      "nickname": "Hawkeyes",
+      "city": "Iowa City",
+      "state": "IA",
+      "primary_hex": "#FFCD00",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "iowa-state",
+      "program_name": "Iowa State",
+      "display_name": "Iowa State",
+      "nickname": "Cyclones",
+      "city": "Ames",
+      "state": "IA",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#F1BE48",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "iu-indianapolis",
+      "program_name": "IU Indianapolis",
+      "display_name": "IU Indy",
+      "nickname": "Jaguars",
+      "city": "Indianapolis",
+      "state": "IN",
+      "primary_hex": "#9D2235",
+      "secondary_hex": "#DFD1A7",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "jackson-state",
+      "program_name": "Jackson State",
+      "display_name": "Jackson State",
+      "nickname": "Tigers",
+      "city": "Jackson",
+      "state": "MS",
+      "primary_hex": "#002147",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "jacksonville",
+      "program_name": "Jacksonville",
+      "display_name": "Jacksonville",
+      "nickname": "Dolphins",
+      "city": "Jacksonville",
+      "state": "FL",
+      "primary_hex": "#004E44",
+      "secondary_hex": "#898A8D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "jacksonville-state",
+      "program_name": "Jacksonville State",
+      "display_name": "Jacksonville State",
+      "nickname": "Gamecocks",
+      "city": "Jacksonville",
+      "state": "AL",
+      "primary_hex": "#CC0000",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "james-madison",
+      "program_name": "James Madison",
+      "display_name": "James Madison",
+      "nickname": "Dukes",
+      "city": "Harrisonburg",
+      "state": "VA",
+      "primary_hex": "#450084",
+      "secondary_hex": "#CBB677",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "kansas",
+      "program_name": "Kansas",
+      "display_name": "Kansas",
+      "nickname": "Jayhawks",
+      "city": "Lawrence",
+      "state": "KS",
+      "primary_hex": "#0051BA",
+      "secondary_hex": "#E8000D",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "kansas-city",
+      "program_name": "Kansas City",
+      "display_name": "Kansas City",
+      "nickname": "Roos",
+      "city": "Kansas City",
+      "state": "MO",
+      "primary_hex": "#005293",
+      "secondary_hex": "#FECB00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "kansas-state",
+      "program_name": "Kansas State",
+      "display_name": "Kansas State",
+      "nickname": "Wildcats",
+      "city": "Manhattan",
+      "state": "KS",
+      "primary_hex": "#512888",
+      "secondary_hex": "#D1D1D1",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "kennesaw-state",
+      "program_name": "Kennesaw State",
+      "display_name": "Kennesaw State",
+      "nickname": "Owls",
+      "city": "Kennesaw",
+      "state": "GA",
+      "primary_hex": "#FDBB30",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "kent-state",
+      "program_name": "Kent State",
+      "display_name": "Kent State",
+      "nickname": "Golden Flashes",
+      "city": "Kent",
+      "state": "OH",
+      "primary_hex": "#002664",
+      "secondary_hex": "#EAAB00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "kentucky",
+      "program_name": "Kentucky",
+      "display_name": "Kentucky",
+      "nickname": "Wildcats",
+      "city": "Lexington",
+      "state": "KY",
+      "primary_hex": "#0033A0",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "la-salle",
+      "program_name": "La Salle",
+      "display_name": "La Salle",
+      "nickname": "Explorers",
+      "city": "Philadelphia",
+      "state": "PA",
+      "primary_hex": "#FFCC00",
+      "secondary_hex": "#003366",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "lafayette",
+      "program_name": "Lafayette",
+      "display_name": "Lafayette",
+      "nickname": "Leopards",
+      "city": "Easton",
+      "state": "PA",
+      "primary_hex": "#A89963",
+      "secondary_hex": "#98002E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "lamar",
+      "program_name": "Lamar",
+      "display_name": "Lamar",
+      "nickname": "Cardinals",
+      "city": "Beaumont",
+      "state": "TX",
+      "primary_hex": "#DC0032",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "le-moyne",
+      "program_name": "Le Moyne",
+      "display_name": "Le Moyne",
+      "nickname": "Dolphins",
+      "city": "Syracuse",
+      "state": "NY",
+      "primary_hex": "#00452A",
+      "secondary_hex": "#FCE300",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "lehigh",
+      "program_name": "Lehigh",
+      "display_name": "Lehigh",
+      "nickname": "Mountain Hawks",
+      "city": "Bethlehem",
+      "state": "PA",
+      "primary_hex": "#653600",
+      "secondary_hex": "#FFD24F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "liberty",
+      "program_name": "Liberty",
+      "display_name": "Liberty",
+      "nickname": "Flames",
+      "city": "Lynchburg",
+      "state": "VA",
+      "primary_hex": "#002D62",
+      "secondary_hex": "#C41230",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "lindenwood",
+      "program_name": "Lindenwood",
+      "display_name": "Lindenwood",
+      "nickname": "Lions",
+      "city": "Saint Charles",
+      "state": "MO",
+      "primary_hex": "#B5A36A",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "lipscomb",
+      "program_name": "Lipscomb",
+      "display_name": "Lipscomb",
+      "nickname": "Bisons",
+      "city": "Nashville",
+      "state": "TN",
+      "primary_hex": "#331E54",
+      "secondary_hex": "#F4AA00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "little-rock",
+      "program_name": "Little Rock",
+      "display_name": "Little Rock",
+      "nickname": "Trojans",
+      "city": "Little Rock",
+      "state": "AR",
+      "primary_hex": "#6E2639",
+      "secondary_hex": "#A7A9AC",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
+      }
+    },
+    {
+      "program_key": "long-island-university",
+      "program_name": "Long Island University",
+      "display_name": "LIU",
+      "nickname": "Sharks",
+      "city": "Brooklyn",
+      "state": "NY",
+      "primary_hex": "#69B3E7",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "long-beach-state",
+      "program_name": "Long Beach State",
+      "display_name": "Long Beach State",
+      "nickname": "Beach",
+      "city": "Long Beach",
+      "state": "CA",
+      "primary_hex": "#FFC72A",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "longwood",
+      "program_name": "Longwood",
+      "display_name": "Longwood",
+      "nickname": "Lancers",
+      "city": "Farmville",
+      "state": "VA",
+      "primary_hex": "#15213B",
+      "secondary_hex": "#999D93",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "louisiana",
+      "program_name": "Louisiana",
+      "display_name": "Louisiana",
+      "nickname": "Ragin' Cajuns",
+      "city": "Lafayette",
+      "state": "LA",
+      "primary_hex": "#CE1813",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "louisiana-tech",
+      "program_name": "Louisiana Tech",
+      "display_name": "Louisiana Tech",
+      "nickname": "Bulldogs",
+      "city": "Ruston",
+      "state": "LA",
+      "primary_hex": "#002F8B",
+      "secondary_hex": "#F31B23",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "ul-monroe",
+      "program_name": "UL Monroe",
+      "display_name": "Louisiana-Monroe",
+      "nickname": "Warhawks",
+      "city": "Monroe",
+      "state": "LA",
+      "primary_hex": "#840029",
+      "secondary_hex": "#FDB913",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "louisville",
+      "program_name": "Louisville",
+      "display_name": "Louisville",
+      "nickname": "Cardinals",
+      "city": "Louisville",
+      "state": "KY",
+      "primary_hex": "#AD0000",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "loyola-chicago",
+      "program_name": "Loyola Chicago",
+      "display_name": "Loyola Chicago",
+      "nickname": "Ramblers",
+      "city": "Chicago",
+      "state": "IL",
+      "primary_hex": "#922247",
+      "secondary_hex": "#FEBD18",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "loyola-maryland",
+      "program_name": "Loyola Maryland",
+      "display_name": "Loyola Maryland",
+      "nickname": "Greyhounds",
+      "city": "Baltimore",
+      "state": "MD",
+      "primary_hex": "#006943",
+      "secondary_hex": "#CACAC8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "loyola-marymount",
+      "program_name": "Loyola Marymount",
+      "display_name": "Loyola Marymount",
+      "nickname": "Lions",
+      "city": "Los Angeles",
+      "state": "CA",
+      "primary_hex": "#0076A5",
+      "secondary_hex": "#AB0C2F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "lsu",
+      "program_name": "LSU",
+      "display_name": "LSU",
+      "nickname": "Tigers",
+      "city": "Baton Rouge",
+      "state": "LA",
+      "primary_hex": "#461D7C",
+      "secondary_hex": "#FDD023",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "maine",
+      "program_name": "Maine",
+      "display_name": "Maine",
+      "nickname": "Black Bears",
+      "city": "Orono",
+      "state": "ME",
+      "primary_hex": "#003263",
+      "secondary_hex": "#B0D7FF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "manhattan",
+      "program_name": "Manhattan",
+      "display_name": "Manhattan",
+      "nickname": "Jaspers",
+      "city": "Riverdale",
+      "state": "NY",
+      "primary_hex": "#00703C",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "marist",
+      "program_name": "Marist",
+      "display_name": "Marist",
+      "nickname": "Red Foxes",
+      "city": "Poughkeepsie",
+      "state": "NY",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#B2B2B2",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "marquette",
+      "program_name": "Marquette",
+      "display_name": "Marquette",
+      "nickname": "Golden Eagles",
+      "city": "Milwaukee",
+      "state": "WI",
+      "primary_hex": "#003366",
+      "secondary_hex": "#FFCC00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "marshall",
+      "program_name": "Marshall",
+      "display_name": "Marshall",
+      "nickname": "Thundering Herd",
+      "city": "Huntington",
+      "state": "WV",
+      "primary_hex": "#00B140",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "maryland",
+      "program_name": "Maryland",
+      "display_name": "Maryland",
+      "nickname": "Terrapins",
+      "city": "College Park",
+      "state": "MD",
+      "primary_hex": "#E03A3E",
+      "secondary_hex": "#FFD520",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "massachusetts",
+      "program_name": "Massachusetts",
+      "display_name": "Massachusetts",
+      "nickname": "Minutemen",
+      "city": "Amherst",
+      "state": "MA",
+      "primary_hex": "#572932",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "mcneese",
+      "program_name": "McNeese",
+      "display_name": "McNeese",
+      "nickname": "Cowboys",
+      "city": "Lake Charles",
+      "state": "LA",
+      "primary_hex": "#00529B",
+      "secondary_hex": "#FFD204",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "memphis",
+      "program_name": "Memphis",
+      "display_name": "Memphis",
+      "nickname": "Tigers",
+      "city": "Memphis",
+      "state": "TN",
+      "primary_hex": "#003087",
+      "secondary_hex": "#898D8D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "mercer",
+      "program_name": "Mercer",
+      "display_name": "Mercer",
+      "nickname": "Bears",
+      "city": "Macon",
+      "state": "GA",
+      "primary_hex": "#F76800",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "mercyhurst",
+      "program_name": "Mercyhurst",
+      "display_name": "Mercyhurst",
+      "nickname": "Lakers",
+      "city": "Erie",
+      "state": "PA",
+      "primary_hex": "#07594D",
+      "secondary_hex": "#182752",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "merrimack",
+      "program_name": "Merrimack",
+      "display_name": "Merrimack",
+      "nickname": "Warriors",
+      "city": "North Andover",
+      "state": "MA",
+      "primary_hex": "#003768",
+      "secondary_hex": "#FDB813",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "miami",
+      "program_name": "Miami",
+      "display_name": "Miami",
+      "nickname": "Hurricanes",
+      "city": "Coral Gables",
+      "state": "FL",
+      "primary_hex": "#005030",
+      "secondary_hex": "#F47321",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "miami-oh",
+      "program_name": "Miami (OH)",
+      "display_name": "Miami University",
+      "nickname": "RedHawks",
+      "city": "Oxford",
+      "state": "OH",
+      "primary_hex": "#B61E2E",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "michigan",
+      "program_name": "Michigan",
+      "display_name": "Michigan",
+      "nickname": "Wolverines",
+      "city": "Ann Arbor",
+      "state": "MI",
+      "primary_hex": "#00274C",
+      "secondary_hex": "#FFCB05",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "michigan-state",
+      "program_name": "Michigan State",
+      "display_name": "Michigan State",
+      "nickname": "Spartans",
+      "city": "East Lansing",
+      "state": "MI",
+      "primary_hex": "#18453B",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "middle-tennessee",
+      "program_name": "Middle Tennessee",
+      "display_name": "Middle Tennessee",
+      "nickname": "Blue Raiders",
+      "city": "Murfreesboro",
+      "state": "TN",
+      "primary_hex": "#0066CC",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "milwaukee",
+      "program_name": "Milwaukee",
+      "display_name": "Milwaukee",
+      "nickname": "Panthers",
+      "city": "Milwaukee",
+      "state": "WI",
+      "primary_hex": "#FFBD00",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "minnesota",
+      "program_name": "Minnesota",
+      "display_name": "Minnesota",
+      "nickname": "Golden Gophers",
+      "city": "Minneapolis",
+      "state": "MN",
+      "primary_hex": "#7A0019",
+      "secondary_hex": "#FFCC33",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "mississippi-state",
+      "program_name": "Mississippi State",
+      "display_name": "Mississippi State",
+      "nickname": "Bulldogs",
+      "city": "Starkville",
+      "state": "MS",
+      "primary_hex": "#660000",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "mississippi-valley-state",
+      "program_name": "Mississippi Valley State",
+      "display_name": "Mississippi Valley State",
+      "nickname": "Delta Devils",
+      "city": "Itta Bena",
+      "state": "MS",
+      "primary_hex": "#00703C",
+      "secondary_hex": "#E51937",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "missouri-state",
+      "program_name": "Missouri State",
+      "display_name": "Missouri State",
+      "nickname": "Bears",
+      "city": "Springfield",
+      "state": "MO",
+      "primary_hex": "#530009",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "missouri",
+      "program_name": "Missouri",
+      "display_name": "Mizzou",
+      "nickname": "Tigers",
+      "city": "Columbia",
+      "state": "MO",
+      "primary_hex": "#000000",
+      "secondary_hex": "#F1B82D",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "monmouth",
+      "program_name": "Monmouth",
+      "display_name": "Monmouth",
+      "nickname": "Hawks",
+      "city": "West Long Branch",
+      "state": "NJ",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "montana",
+      "program_name": "Montana",
+      "display_name": "Montana",
+      "nickname": "Grizzlies",
+      "city": "Missoula",
+      "state": "MT",
+      "primary_hex": "#660033",
+      "secondary_hex": "#999999",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "montana-state",
+      "program_name": "Montana State",
+      "display_name": "Montana State",
+      "nickname": "Bobcats",
+      "city": "Bozeman",
+      "state": "MT",
+      "primary_hex": "#00205B",
+      "secondary_hex": "#B9975B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "morehead-state",
+      "program_name": "Morehead State",
+      "display_name": "Morehead State",
+      "nickname": "Eagles",
+      "city": "Morehead",
+      "state": "KY",
+      "primary_hex": "#005EB8",
+      "secondary_hex": "#FFCF00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "morgan-state",
+      "program_name": "Morgan State",
+      "display_name": "Morgan State",
+      "nickname": "Bears",
+      "city": "Baltimore",
+      "state": "MD",
+      "primary_hex": "#1B4383",
+      "secondary_hex": "#F47937",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "mount-st-mary-s",
+      "program_name": "Mount St. Mary's",
+      "display_name": "Mount St. Mary's",
+      "nickname": "Mountaineers",
+      "city": "Emmitsburg",
+      "state": "MD",
+      "primary_hex": "#002855",
+      "secondary_hex": "#84754E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "murray-state",
+      "program_name": "Murray State",
+      "display_name": "Murray State",
+      "nickname": "Racers",
+      "city": "Murray",
+      "state": "KY",
+      "primary_hex": "#ECAC00",
+      "secondary_hex": "#002144",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "navy",
+      "program_name": "Navy",
+      "display_name": "Navy",
+      "nickname": "Midshipmen",
+      "city": "Annapolis",
+      "state": "MD",
+      "primary_hex": "#00205B",
+      "secondary_hex": "#C5B783",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "patriot",
+        "conference_name": "Patriot"
+      }
+    },
+    {
+      "program_key": "nc-state",
+      "program_name": "NC State",
+      "display_name": "NC State",
+      "nickname": "Wolfpack",
+      "city": "Raleigh",
+      "state": "NC",
+      "primary_hex": "#CC0000",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "nebraska",
+      "program_name": "Nebraska",
+      "display_name": "Nebraska",
+      "nickname": "Cornhuskers",
+      "city": "Lincoln",
+      "state": "NE",
+      "primary_hex": "#E41C38",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "nevada",
+      "program_name": "Nevada",
+      "display_name": "Nevada",
+      "nickname": "Wolf Pack",
+      "city": "Reno",
+      "state": "NV",
+      "primary_hex": "#003366",
+      "secondary_hex": "#807F84",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "new-hampshire",
+      "program_name": "New Hampshire",
+      "display_name": "New Hampshire",
+      "nickname": "Wildcats",
+      "city": "Durham",
+      "state": "NH",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#BBBCBC",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "new-haven",
+      "program_name": "New Haven",
+      "display_name": "New Haven",
+      "nickname": "Chargers",
+      "city": "West Haven",
+      "state": "CT",
+      "primary_hex": "#004B8D",
+      "secondary_hex": "#FFC423",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "new-mexico",
+      "program_name": "New Mexico",
+      "display_name": "New Mexico",
+      "nickname": "Lobos",
+      "city": "Albuquerque",
+      "state": "NM",
+      "primary_hex": "#BA0C2F",
+      "secondary_hex": "#A7A8AA",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "new-mexico-state",
+      "program_name": "New Mexico State",
+      "display_name": "New Mexico State",
+      "nickname": "Aggies",
+      "city": "Las Cruces",
+      "state": "NM",
+      "primary_hex": "#861F41",
+      "secondary_hex": "#97999B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "new-orleans",
+      "program_name": "New Orleans",
+      "display_name": "New Orleans",
+      "nickname": "Privateers",
+      "city": "New Orleans",
+      "state": "LA",
+      "primary_hex": "#005CA6",
+      "secondary_hex": "#A3A9AC",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "niagara",
+      "program_name": "Niagara",
+      "display_name": "Niagara",
+      "nickname": "Purple Eagles",
+      "city": "Niagara Falls",
+      "state": "NY",
+      "primary_hex": "#582C83",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "nicholls",
+      "program_name": "Nicholls",
+      "display_name": "Nicholls",
+      "nickname": "Colonels",
+      "city": "Thibodaux",
+      "state": "LA",
+      "primary_hex": "#AE132A",
+      "secondary_hex": "#72808A",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "njit",
+      "program_name": "NJIT",
+      "display_name": "NJIT",
+      "nickname": "Highlanders",
+      "city": "Newark",
+      "state": "NJ",
+      "primary_hex": "#D22630",
+      "secondary_hex": "#071D49",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "norfolk-state",
+      "program_name": "Norfolk State",
+      "display_name": "Norfolk State",
+      "nickname": "Spartans",
+      "city": "Norfolk",
+      "state": "VA",
+      "primary_hex": "#007A53",
+      "secondary_hex": "#F3D03E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "north-alabama",
+      "program_name": "North Alabama",
+      "display_name": "North Alabama",
+      "nickname": "Lions",
+      "city": "Florence",
+      "state": "AL",
+      "primary_hex": "#46166B",
+      "secondary_hex": "#DB9F11",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
+      }
+    },
+    {
+      "program_key": "north-carolina",
+      "program_name": "North Carolina",
+      "display_name": "North Carolina",
+      "nickname": "Tar Heels",
+      "city": "Chapel Hill",
+      "state": "NC",
+      "primary_hex": "#7BAFD4",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "north-carolina-a-t",
+      "program_name": "North Carolina A&T",
+      "display_name": "North Carolina A&T",
+      "nickname": "Aggies",
+      "city": "Greensboro",
+      "state": "NC",
+      "primary_hex": "#F3B237",
+      "secondary_hex": "#003D6D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "north-carolina-central",
+      "program_name": "North Carolina Central",
+      "display_name": "North Carolina Central",
+      "nickname": "Eagles",
+      "city": "Durham",
+      "state": "NC",
+      "primary_hex": "#880023",
+      "secondary_hex": "#8E9093",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "north-dakota",
+      "program_name": "North Dakota",
+      "display_name": "North Dakota",
+      "nickname": "Fighting Hawks",
+      "city": "Grand Forks",
+      "state": "ND",
+      "primary_hex": "#009A44",
+      "secondary_hex": "#AAA3AD",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "north-dakota-state",
+      "program_name": "North Dakota State",
+      "display_name": "North Dakota State",
+      "nickname": "Bison",
+      "city": "Fargo",
+      "state": "ND",
+      "primary_hex": "#0A5640",
+      "secondary_hex": "#FFC72A",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "north-florida",
+      "program_name": "North Florida",
+      "display_name": "North Florida",
+      "nickname": "Ospreys",
+      "city": "Jacksonville",
+      "state": "FL",
+      "primary_hex": "#00246B",
+      "secondary_hex": "#D9D9D9",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "north-texas",
+      "program_name": "North Texas",
+      "display_name": "North Texas",
+      "nickname": "Mean Green",
+      "city": "Denton",
+      "state": "TX",
+      "primary_hex": "#00853E",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "northeastern",
+      "program_name": "Northeastern",
+      "display_name": "Northeastern",
+      "nickname": "Huskies",
+      "city": "Boston",
+      "state": "MA",
+      "primary_hex": "#D41B2C",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "northern-arizona",
+      "program_name": "Northern Arizona",
+      "display_name": "Northern Arizona",
+      "nickname": "Lumberjacks",
+      "city": "Flagstaff",
+      "state": "AZ",
+      "primary_hex": "#003466",
+      "secondary_hex": "#FFD200",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "northern-colorado",
+      "program_name": "Northern Colorado",
+      "display_name": "Northern Colorado",
+      "nickname": "Bears",
+      "city": "Greeley",
+      "state": "CO",
+      "primary_hex": "#013C65",
+      "secondary_hex": "#F6B000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "northern-illinois",
+      "program_name": "Northern Illinois",
+      "display_name": "Northern Illinois",
+      "nickname": "Huskies",
+      "city": "Dekalb",
+      "state": "IL",
+      "primary_hex": "#BA0C2F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "northern-iowa",
+      "program_name": "Northern Iowa",
+      "display_name": "Northern Iowa",
+      "nickname": "Panthers",
+      "city": "Cedar Falls",
+      "state": "IA",
+      "primary_hex": "#4B116F",
+      "secondary_hex": "#FFCC00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "northern-kentucky",
+      "program_name": "Northern Kentucky",
+      "display_name": "Northern Kentucky",
+      "nickname": "Norse",
+      "city": "Highland Heights",
+      "state": "KY",
+      "primary_hex": "#000000",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "northwestern",
+      "program_name": "Northwestern",
+      "display_name": "Northwestern",
+      "nickname": "Wildcats",
+      "city": "Evanston",
+      "state": "IL",
+      "primary_hex": "#4E2A84",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "northwestern-state",
+      "program_name": "Northwestern State",
+      "display_name": "Northwestern State",
+      "nickname": "Demons",
+      "city": "Natchitoches",
+      "state": "LA",
+      "primary_hex": "#663399",
+      "secondary_hex": "#FF6600",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "notre-dame",
+      "program_name": "Notre Dame",
+      "display_name": "Notre Dame",
+      "nickname": "Fighting Irish",
+      "city": "South Bend",
+      "state": "IN",
+      "primary_hex": "#0C2340",
+      "secondary_hex": "#C99700",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "oakland",
+      "program_name": "Oakland",
+      "display_name": "Oakland",
+      "nickname": "Golden Grizzlies",
+      "city": "Rochester",
+      "state": "MI",
+      "primary_hex": "#B59A57",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "ohio",
+      "program_name": "Ohio",
+      "display_name": "Ohio",
+      "nickname": "Bobcats",
+      "city": "Athens",
+      "state": "OH",
+      "primary_hex": "#00694E",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "ohio-state",
+      "program_name": "Ohio State",
+      "display_name": "Ohio State",
+      "nickname": "Buckeyes",
+      "city": "Columbus",
+      "state": "OH",
+      "primary_hex": "#BB0000",
+      "secondary_hex": "#B1B7BC",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "oklahoma",
+      "program_name": "Oklahoma",
+      "display_name": "Oklahoma",
+      "nickname": "Sooners",
+      "city": "Norman",
+      "state": "OK",
+      "primary_hex": "#841617",
+      "secondary_hex": "#FDF9D8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "oklahoma-state",
+      "program_name": "Oklahoma State",
+      "display_name": "Oklahoma State",
+      "nickname": "Cowboys",
+      "city": "Stillwater",
+      "state": "OK",
+      "primary_hex": "#FF7300",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "old-dominion",
+      "program_name": "Old Dominion",
+      "display_name": "Old Dominion",
+      "nickname": "Monarchs",
+      "city": "Norfolk",
+      "state": "VA",
+      "primary_hex": "#003057",
+      "secondary_hex": "#7C878E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "ole-miss",
+      "program_name": "Ole Miss",
+      "display_name": "Ole Miss",
+      "nickname": "Rebels",
+      "city": "Oxford",
+      "state": "MS",
+      "primary_hex": "#14213D",
+      "secondary_hex": "#CE1126",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "omaha",
+      "program_name": "Omaha",
+      "display_name": "Omaha",
+      "nickname": "Mavericks",
+      "city": "Omaha",
+      "state": "NE",
+      "primary_hex": "#000000",
+      "secondary_hex": "#D71920",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "oral-roberts",
+      "program_name": "Oral Roberts",
+      "display_name": "Oral Roberts",
+      "nickname": "Golden Eagles",
+      "city": "Tulsa",
+      "state": "OK",
+      "primary_hex": "#002F60",
+      "secondary_hex": "#C5B783",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "oregon",
+      "program_name": "Oregon",
+      "display_name": "Oregon",
+      "nickname": "Ducks",
+      "city": "Eugene",
+      "state": "OR",
+      "primary_hex": "#154733",
+      "secondary_hex": "#FEE123",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "oregon-state",
+      "program_name": "Oregon State",
+      "display_name": "Oregon State",
+      "nickname": "Beavers",
+      "city": "Corvallis",
+      "state": "OR",
+      "primary_hex": "#DC4405",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "pacific",
+      "program_name": "Pacific",
+      "display_name": "Pacific",
+      "nickname": "Tigers",
+      "city": "Stockton",
+      "state": "CA",
+      "primary_hex": "#E35205",
+      "secondary_hex": "#231F20",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "pennsylvania",
+      "program_name": "Pennsylvania",
+      "display_name": "Penn",
+      "nickname": "Quakers",
+      "city": "Philadelphia",
+      "state": "PA",
+      "primary_hex": "#011F5B",
+      "secondary_hex": "#990000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "penn-state",
+      "program_name": "Penn State",
+      "display_name": "Penn State",
+      "nickname": "Nittany Lions",
+      "city": "University Park",
+      "state": "PA",
+      "primary_hex": "#041E42",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "pepperdine",
+      "program_name": "Pepperdine",
+      "display_name": "Pepperdine",
+      "nickname": "Waves",
+      "city": "Malibu",
+      "state": "CA",
+      "primary_hex": "#00205C",
+      "secondary_hex": "#EE7624",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "pittsburgh",
+      "program_name": "Pittsburgh",
+      "display_name": "Pittsburgh",
+      "nickname": "Panthers",
+      "city": "Pittsburgh",
+      "state": "PA",
+      "primary_hex": "#003594",
+      "secondary_hex": "#FFB81C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "portland",
+      "program_name": "Portland",
+      "display_name": "Portland",
+      "nickname": "Pilots",
+      "city": "Portland",
+      "state": "OR",
+      "primary_hex": "#320274",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "portland-state",
+      "program_name": "Portland State",
+      "display_name": "Portland State",
+      "nickname": "Vikings",
+      "city": "Portland",
+      "state": "OR",
+      "primary_hex": "#154734",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "prairie-view-a-m",
+      "program_name": "Prairie View A&M",
+      "display_name": "Prairie View A&M",
+      "nickname": "Panthers",
+      "city": "Prairie View",
+      "state": "TX",
+      "primary_hex": "#330066",
+      "secondary_hex": "#FFCC33",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "presbyterian",
+      "program_name": "Presbyterian",
+      "display_name": "Presbyterian",
+      "nickname": "Blue Hose",
+      "city": "Clinton",
+      "state": "SC",
+      "primary_hex": "#0060A9",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "princeton",
+      "program_name": "Princeton",
+      "display_name": "Princeton",
+      "nickname": "Tigers",
+      "city": "Princeton",
+      "state": "NJ",
+      "primary_hex": "#FF571F",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "providence",
+      "program_name": "Providence",
+      "display_name": "Providence",
+      "nickname": "Friars",
+      "city": "Providence",
+      "state": "RI",
+      "primary_hex": "#000000",
+      "secondary_hex": "#8A8D8F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "purdue",
+      "program_name": "Purdue",
+      "display_name": "Purdue",
+      "nickname": "Boilermakers",
+      "city": "West Lafayette",
+      "state": "IN",
+      "primary_hex": "#CEB888",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "purdue-fort-wayne",
+      "program_name": "Purdue Fort Wayne",
+      "display_name": "Purdue Fort Wayne",
+      "nickname": "Mastodons",
+      "city": "Fort Wayne",
+      "state": "IN",
+      "primary_hex": "#CFB991",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "queens-university",
+      "program_name": "Queens University",
+      "display_name": "Queens",
+      "nickname": "Royals",
+      "city": "Charlotte",
+      "state": "NC",
+      "primary_hex": "#192C66",
+      "secondary_hex": "#857040",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "quinnipiac",
+      "program_name": "Quinnipiac",
+      "display_name": "Quinnipiac",
+      "nickname": "Bobcats",
+      "city": "Hamden",
+      "state": "CT",
+      "primary_hex": "#0C2340",
+      "secondary_hex": "#FFB81C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "radford",
+      "program_name": "Radford",
+      "display_name": "Radford",
+      "nickname": "Highlanders",
+      "city": "Radford",
+      "state": "VA",
+      "primary_hex": "#C2011B",
+      "secondary_hex": "#D1D3D4",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "rhode-island",
+      "program_name": "Rhode Island",
+      "display_name": "Rhode Island",
+      "nickname": "Rams",
+      "city": "Kingston",
+      "state": "RI",
+      "primary_hex": "#68ABE8",
+      "secondary_hex": "#002147",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "rice",
+      "program_name": "Rice",
+      "display_name": "Rice",
+      "nickname": "Owls",
+      "city": "Houston",
+      "state": "TX",
+      "primary_hex": "#00205B",
+      "secondary_hex": "#C1C6C8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "richmond",
+      "program_name": "Richmond",
+      "display_name": "Richmond",
+      "nickname": "Spiders",
+      "city": "Richmond",
+      "state": "VA",
+      "primary_hex": "#000066",
+      "secondary_hex": "#990000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "rider",
+      "program_name": "Rider",
+      "display_name": "Rider",
+      "nickname": "Broncs",
+      "city": "Lawrenceville",
+      "state": "NJ",
+      "primary_hex": "#981E32",
+      "secondary_hex": "#6C6F70",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "robert-morris",
+      "program_name": "Robert Morris",
+      "display_name": "Robert Morris",
+      "nickname": "Colonials",
+      "city": "Moon Township",
+      "state": "PA",
+      "primary_hex": "#14234B",
+      "secondary_hex": "#A6192E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "rutgers",
+      "program_name": "Rutgers",
+      "display_name": "Rutgers",
+      "nickname": "Scarlet Knights",
+      "city": "Piscataway",
+      "state": "NJ",
+      "primary_hex": "#CC0033",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "sacramento-state",
+      "program_name": "Sacramento State",
+      "display_name": "Sacramento State",
+      "nickname": "Hornets",
+      "city": "Sacramento",
+      "state": "CA",
+      "primary_hex": "#043927",
+      "secondary_hex": "#C4B581",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "sacred-heart",
+      "program_name": "Sacred Heart",
+      "display_name": "Sacred Heart",
+      "nickname": "Pioneers",
+      "city": "Fairfield",
+      "state": "CT",
+      "primary_hex": "#CE1141",
+      "secondary_hex": "#B1B3B6",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "saint-joseph-s",
+      "program_name": "Saint Joseph's",
+      "display_name": "Saint Joseph's",
+      "nickname": "Hawks",
+      "city": "Philadelphia",
+      "state": "PA",
+      "primary_hex": "#931B32",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "saint-louis",
+      "program_name": "Saint Louis",
+      "display_name": "Saint Louis",
+      "nickname": "Billikens",
+      "city": "St. Louis",
+      "state": "MO",
+      "primary_hex": "#003DA5",
+      "secondary_hex": "#C8C9C7",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "saint-mary-s",
+      "program_name": "Saint Mary's",
+      "display_name": "Saint Mary's",
+      "nickname": "Gaels",
+      "city": "Moraga",
+      "state": "CA",
+      "primary_hex": "#D80024",
+      "secondary_hex": "#06315B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "saint-peter-s",
+      "program_name": "Saint Peter's",
+      "display_name": "Saint Peter's",
+      "nickname": "Peacocks",
+      "city": "Jersey City",
+      "state": "NJ",
+      "primary_hex": "#003C71",
+      "secondary_hex": "#A59C94",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "sam-houston",
+      "program_name": "Sam Houston",
+      "display_name": "Sam Houston",
+      "nickname": "Bearkats",
+      "city": "Huntsville",
+      "state": "TX",
+      "primary_hex": "#FE5100",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "samford",
+      "program_name": "Samford",
+      "display_name": "Samford",
+      "nickname": "Bulldogs",
+      "city": "Homewood",
+      "state": "AL",
+      "primary_hex": "#002649",
+      "secondary_hex": "#C4161D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "san-diego",
+      "program_name": "San Diego",
+      "display_name": "San Diego",
+      "nickname": "Toreros",
+      "city": "San Diego",
+      "state": "CA",
+      "primary_hex": "#002868",
+      "secondary_hex": "#84BCE8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "san-diego-state",
+      "program_name": "San Diego State",
+      "display_name": "San Diego State",
+      "nickname": "Aztecs",
+      "city": "San Diego",
+      "state": "CA",
+      "primary_hex": "#A6192E",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "san-francisco",
+      "program_name": "San Francisco",
+      "display_name": "San Francisco",
+      "nickname": "Dons",
+      "city": "San Francisco",
+      "state": "CA",
+      "primary_hex": "#00543C",
+      "secondary_hex": "#FDBB30",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "san-jose-state",
+      "program_name": "San José State",
+      "display_name": "San Jose State",
+      "nickname": "Spartans",
+      "city": "San Jose",
+      "state": "CA",
+      "primary_hex": "#0055A2",
+      "secondary_hex": "#E5A823",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "santa-clara",
+      "program_name": "Santa Clara",
+      "display_name": "Santa Clara",
+      "nickname": "Broncos",
+      "city": "Santa Clara",
+      "state": "CA",
+      "primary_hex": "#862633",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "seattle-u",
+      "program_name": "Seattle U",
+      "display_name": "Seattle U",
+      "nickname": "Redhawks",
+      "city": "Seattle",
+      "state": "WA",
+      "primary_hex": "#AA0000",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wcc",
+        "conference_name": "WCC"
+      }
+    },
+    {
+      "program_key": "southeast-missouri-state",
+      "program_name": "Southeast Missouri State",
+      "display_name": "SEMO",
+      "nickname": "Redhawks",
+      "city": "Cape Girardeau",
+      "state": "MO",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "seton-hall",
+      "program_name": "Seton Hall",
+      "display_name": "Seton Hall",
+      "nickname": "Pirates",
+      "city": "Newark",
+      "state": "NJ",
+      "primary_hex": "#004488",
+      "secondary_hex": "#A2AAAD",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "siena",
+      "program_name": "Siena",
+      "display_name": "Siena",
+      "nickname": "Saints",
+      "city": "Albany",
+      "state": "NY",
+      "primary_hex": "#006747",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "maac",
+        "conference_name": "MAAC"
+      }
+    },
+    {
+      "program_key": "siu-edwardsville",
+      "program_name": "SIU Edwardsville",
+      "display_name": "SIUE",
+      "nickname": "Cougars",
+      "city": "Edwardsville",
+      "state": "IL",
+      "primary_hex": "#EF3829",
+      "secondary_hex": "#CFAA7A",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "smu",
+      "program_name": "SMU",
+      "display_name": "SMU",
+      "nickname": "Mustangs",
+      "city": "Dallas",
+      "state": "TX",
+      "primary_hex": "#0033A0",
+      "secondary_hex": "#C8102E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "south-alabama",
+      "program_name": "South Alabama",
+      "display_name": "South Alabama",
+      "nickname": "Jaguars",
+      "city": "Mobile",
+      "state": "AL",
+      "primary_hex": "#00205B",
+      "secondary_hex": "#BF0D3E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "south-carolina",
+      "program_name": "South Carolina",
+      "display_name": "South Carolina",
+      "nickname": "Gamecocks",
+      "city": "Columbia",
+      "state": "SC",
+      "primary_hex": "#73000A",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "south-carolina-state",
+      "program_name": "South Carolina State",
+      "display_name": "South Carolina State",
+      "nickname": "Bulldogs",
+      "city": "Orangeburg",
+      "state": "SC",
+      "primary_hex": "#862633",
+      "secondary_hex": "#001A72",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "south-dakota",
+      "program_name": "South Dakota",
+      "display_name": "South Dakota",
+      "nickname": "Coyotes",
+      "city": "Vermillion",
+      "state": "SD",
+      "primary_hex": "#AD0000",
+      "secondary_hex": "#B4B4B4",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "south-dakota-state",
+      "program_name": "South Dakota State",
+      "display_name": "South Dakota State",
+      "nickname": "Jackrabbits",
+      "city": "Brookings",
+      "state": "SD",
+      "primary_hex": "#0033A0",
+      "secondary_hex": "#FFD100",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "south-florida",
+      "program_name": "South Florida",
+      "display_name": "South Florida",
+      "nickname": "Bulls",
+      "city": "Tampa",
+      "state": "FL",
+      "primary_hex": "#006747",
+      "secondary_hex": "#CFC493",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "se-louisiana",
+      "program_name": "SE Louisiana",
+      "display_name": "Southeastern Louisiana",
+      "nickname": "Lions",
+      "city": "Hammond",
+      "state": "LA",
+      "primary_hex": "#006341",
+      "secondary_hex": "#EAAA00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "southern",
+      "program_name": "Southern",
+      "display_name": "Southern",
+      "nickname": "Jaguars",
+      "city": "Baton Rouge",
+      "state": "LA",
+      "primary_hex": "#58B6E7",
+      "secondary_hex": "#FFCE34",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "southern-illinois",
+      "program_name": "Southern Illinois",
+      "display_name": "Southern Illinois",
+      "nickname": "Salukis",
+      "city": "Carbondale",
+      "state": "IL",
+      "primary_hex": "#720000",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "southern-indiana",
+      "program_name": "Southern Indiana",
+      "display_name": "Southern Indiana",
+      "nickname": "Screaming Eagles",
+      "city": "Evansville",
+      "state": "IN",
+      "primary_hex": "#CF102D",
+      "secondary_hex": "#002D5D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "southern-miss",
+      "program_name": "Southern Miss",
+      "display_name": "Southern Miss",
+      "nickname": "Golden Eagles",
+      "city": "Hattiesburg",
+      "state": "MS",
+      "primary_hex": "#FFAB00",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "southern-utah",
+      "program_name": "Southern Utah",
+      "display_name": "Southern Utah",
+      "nickname": "Thunderbirds",
+      "city": "Cedar City",
+      "state": "UT",
+      "primary_hex": "#C41425",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "st-bonaventure",
+      "program_name": "St. Bonaventure",
+      "display_name": "St. Bonaventure",
+      "nickname": "Bonnies",
+      "city": "Saint Bonaventure",
+      "state": "NY",
+      "primary_hex": "#54261A",
+      "secondary_hex": "#BDB680",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "st-john-s",
+      "program_name": "St. John's",
+      "display_name": "St. John's",
+      "nickname": "Red Storm",
+      "city": "New York",
+      "state": "NY",
+      "primary_hex": "#BA0C2F",
+      "secondary_hex": "#041C2C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "st-thomas-minnesota",
+      "program_name": "St. Thomas-Minnesota",
+      "display_name": "St. Thomas",
+      "nickname": "Tommies",
+      "city": "Saint Paul",
+      "state": "MN",
+      "primary_hex": "#510C76",
+      "secondary_hex": "#98999B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "summit",
+        "conference_name": "Summit"
+      }
+    },
+    {
+      "program_key": "stanford",
+      "program_name": "Stanford",
+      "display_name": "Stanford",
+      "nickname": "Cardinal",
+      "city": "Stanford",
+      "state": "CA",
+      "primary_hex": "#8C1515",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "stephen-f-austin",
+      "program_name": "Stephen F. Austin",
+      "display_name": "Stephen F. Austin",
+      "nickname": "Lumberjacks",
+      "city": "Nacogdoches",
+      "state": "TX",
+      "primary_hex": "#613393",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "stetson",
+      "program_name": "Stetson",
+      "display_name": "Stetson",
+      "nickname": "Hatters",
+      "city": "DeLand",
+      "state": "FL",
+      "primary_hex": "#00523E",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "stonehill",
+      "program_name": "Stonehill",
+      "display_name": "Stonehill",
+      "nickname": "Skyhawks",
+      "city": "South Easton",
+      "state": "MA",
+      "primary_hex": "#2F2975",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "stony-brook",
+      "program_name": "Stony Brook",
+      "display_name": "Stony Brook",
+      "nickname": "Seawolves",
+      "city": "Stony Brook",
+      "state": "NY",
+      "primary_hex": "#990000",
+      "secondary_hex": "#16243E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "syracuse",
+      "program_name": "Syracuse",
+      "display_name": "Syracuse",
+      "nickname": "Orange",
+      "city": "Syracuse",
+      "state": "NY",
+      "primary_hex": "#F76900",
+      "secondary_hex": "#000354",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "texas-a-m-corpus-christi",
+      "program_name": "Texas A&M-Corpus Christi",
+      "display_name": "TAMUCC",
+      "nickname": "Islanders",
+      "city": "Corpus Christi",
+      "state": "TX",
+      "primary_hex": "#0067C5",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "tarleton-state",
+      "program_name": "Tarleton State",
+      "display_name": "Tarleton",
+      "nickname": "Texans",
+      "city": "Stephenville",
+      "state": "TX",
+      "primary_hex": "#4F2D7F",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wac",
+        "conference_name": "WAC"
+      }
+    },
+    {
+      "program_key": "tcu",
+      "program_name": "TCU",
+      "display_name": "TCU",
+      "nickname": "Horned Frogs",
+      "city": "Fort Worth",
+      "state": "TX",
+      "primary_hex": "#4D1979",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "temple",
+      "program_name": "Temple",
+      "display_name": "Temple",
+      "nickname": "Owls",
+      "city": "Philadelphia",
+      "state": "PA",
+      "primary_hex": "#9D2235",
+      "secondary_hex": "#8A8D8F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "tennessee",
+      "program_name": "Tennessee",
+      "display_name": "Tennessee",
+      "nickname": "Volunteers",
+      "city": "Knoxville",
+      "state": "TN",
+      "primary_hex": "#FF8200",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "tennessee-state",
+      "program_name": "Tennessee State",
+      "display_name": "Tennessee State",
+      "nickname": "Tigers",
+      "city": "Nashville",
+      "state": "TN",
+      "primary_hex": "#00539F",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "tennessee-tech",
+      "program_name": "Tennessee Tech",
+      "display_name": "Tennessee Tech",
+      "nickname": "Golden Eagles",
+      "city": "Cookeville",
+      "state": "TN",
+      "primary_hex": "#4F2984",
+      "secondary_hex": "#FFDD00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "texas",
+      "program_name": "Texas",
+      "display_name": "Texas",
+      "nickname": "Longhorns",
+      "city": "Austin",
+      "state": "TX",
+      "primary_hex": "#BF5700",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "texas-a-m",
+      "program_name": "Texas A&M",
+      "display_name": "Texas A&M",
+      "nickname": "Aggies",
+      "city": "College Station",
+      "state": "TX",
+      "primary_hex": "#500000",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "texas-southern",
+      "program_name": "Texas Southern",
+      "display_name": "Texas Southern",
+      "nickname": "Tigers",
+      "city": "Houston",
+      "state": "TX",
+      "primary_hex": "#7C183E",
+      "secondary_hex": "#9DA6AB",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "texas-state",
+      "program_name": "Texas State",
+      "display_name": "Texas State",
+      "nickname": "Bobcats",
+      "city": "San Marcos",
+      "state": "TX",
+      "primary_hex": "#501214",
+      "secondary_hex": "#8D734A",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "texas-tech",
+      "program_name": "Texas Tech",
+      "display_name": "Texas Tech",
+      "nickname": "Red Raiders",
+      "city": "Lubbock",
+      "state": "TX",
+      "primary_hex": "#000000",
+      "secondary_hex": "#CC0000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "the-citadel",
+      "program_name": "The Citadel",
+      "display_name": "The Citadel",
+      "nickname": "Bulldogs",
+      "city": "Charleston",
+      "state": "SC",
+      "primary_hex": "#3975B7",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "toledo",
+      "program_name": "Toledo",
+      "display_name": "Toledo",
+      "nickname": "Rockets",
+      "city": "Toledo",
+      "state": "OH",
+      "primary_hex": "#15397F",
+      "secondary_hex": "#FFDA00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "towson",
+      "program_name": "Towson",
+      "display_name": "Towson",
+      "nickname": "Tigers",
+      "city": "Towson",
+      "state": "MD",
+      "primary_hex": "#FFBB00",
+      "secondary_hex": "#3C3C3C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "troy",
+      "program_name": "Troy",
+      "display_name": "Troy",
+      "nickname": "Trojans",
+      "city": "Troy",
+      "state": "AL",
+      "primary_hex": "#8A2432",
+      "secondary_hex": "#B3B5B8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      }
+    },
+    {
+      "program_key": "tulane",
+      "program_name": "Tulane",
+      "display_name": "Tulane",
+      "nickname": "Green Wave",
+      "city": "New Orleans",
+      "state": "LA",
+      "primary_hex": "#006747",
+      "secondary_hex": "#418FDE",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "tulsa",
+      "program_name": "Tulsa",
+      "display_name": "Tulsa",
+      "nickname": "Golden Hurricane",
+      "city": "Tulsa",
+      "state": "OK",
+      "primary_hex": "#002D72",
+      "secondary_hex": "#C5B783",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "uab",
+      "program_name": "UAB",
+      "display_name": "UAB",
+      "nickname": "Blazers",
+      "city": "Birmingham",
+      "state": "AL",
+      "primary_hex": "#006341",
+      "secondary_hex": "#CC8A00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "arkansas-pine-bluff",
+      "program_name": "Arkansas-Pine Bluff",
+      "display_name": "UAPB",
+      "nickname": "Golden Lions",
+      "city": "Pine Bluff",
+      "state": "AR",
+      "primary_hex": "#EEB310",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      }
+    },
+    {
+      "program_key": "uc-davis",
+      "program_name": "UC Davis",
+      "display_name": "UC Davis",
+      "nickname": "Aggies",
+      "city": "Davis",
+      "state": "CA",
+      "primary_hex": "#002855",
+      "secondary_hex": "#B3A369",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "uc-irvine",
+      "program_name": "UC Irvine",
+      "display_name": "UC Irvine",
+      "nickname": "Anteaters",
+      "city": "Irvine",
+      "state": "CA",
+      "primary_hex": "#0C2340",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "uc-riverside",
+      "program_name": "UC Riverside",
+      "display_name": "UC Riverside",
+      "nickname": "Highlanders",
+      "city": "Riverside",
+      "state": "CA",
+      "primary_hex": "#2D6CC0",
+      "secondary_hex": "#F1AB00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "uc-san-diego",
+      "program_name": "UC San Diego",
+      "display_name": "UC San Diego",
+      "nickname": "Tritons",
+      "city": "San Diego",
+      "state": "CA",
+      "primary_hex": "#182B49",
+      "secondary_hex": "#FFCD00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "uc-santa-barbara",
+      "program_name": "UC Santa Barbara",
+      "display_name": "UC Santa Barbara",
+      "nickname": "Gauchos",
+      "city": "Santa Barbara",
+      "state": "CA",
+      "primary_hex": "#003660",
+      "secondary_hex": "#F3BC11",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "ucf",
+      "program_name": "UCF",
+      "display_name": "UCF",
+      "nickname": "Knights",
+      "city": "Orlando",
+      "state": "FL",
+      "primary_hex": "#BA9B37",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "ucla",
+      "program_name": "UCLA",
+      "display_name": "UCLA",
+      "nickname": "Bruins",
+      "city": "Los Angeles",
+      "state": "CA",
+      "primary_hex": "#2D68C4",
+      "secondary_hex": "#F2A900",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "uic",
+      "program_name": "UIC",
+      "display_name": "UIC",
+      "nickname": "Flames",
+      "city": "Chicago",
+      "state": "IL",
+      "primary_hex": "#AC1E2D",
+      "secondary_hex": "#041E42",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "umass-lowell",
+      "program_name": "UMass Lowell",
+      "display_name": "UMass Lowell",
+      "nickname": "River Hawks",
+      "city": "Lowell",
+      "state": "MA",
+      "primary_hex": "#003DA5",
+      "secondary_hex": "#C8102E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "umbc",
+      "program_name": "UMBC",
+      "display_name": "UMBC",
+      "nickname": "Retrievers",
+      "city": "Baltimore",
+      "state": "MD",
+      "primary_hex": "#B18906",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "maryland-eastern-shore",
+      "program_name": "Maryland Eastern Shore",
+      "display_name": "UMES",
+      "nickname": "Hawks",
+      "city": "Princess Anne",
+      "state": "MD",
+      "primary_hex": "#862633",
+      "secondary_hex": "#888B8D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "unc-asheville",
+      "program_name": "UNC Asheville",
+      "display_name": "UNC Asheville",
+      "nickname": "Bulldogs",
+      "city": "Asheville",
+      "state": "NC",
+      "primary_hex": "#003DA5",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "unc-greensboro",
+      "program_name": "UNC Greensboro",
+      "display_name": "UNC Greensboro",
+      "nickname": "Spartans",
+      "city": "Greensboro",
+      "state": "NC",
+      "primary_hex": "#0F2044",
+      "secondary_hex": "#FFB71B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "unc-wilmington",
+      "program_name": "UNC Wilmington",
+      "display_name": "UNC Wilmington",
+      "nickname": "Seahawks",
+      "city": "Wilmington",
+      "state": "NC",
+      "primary_hex": "#006666",
+      "secondary_hex": "#003366",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "unlv",
+      "program_name": "UNLV",
+      "display_name": "UNLV",
+      "nickname": "Rebels",
+      "city": "Las Vegas",
+      "state": "NV",
+      "primary_hex": "#CF0A2C",
+      "secondary_hex": "#CAC8C8",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "usc",
+      "program_name": "USC",
+      "display_name": "USC",
+      "nickname": "Trojans",
+      "city": "Los Angeles",
+      "state": "CA",
+      "primary_hex": "#990000",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "south-carolina-upstate",
+      "program_name": "South Carolina Upstate",
+      "display_name": "USC Upstate",
+      "nickname": "Spartans",
+      "city": "Spartanburg",
+      "state": "SC",
+      "primary_hex": "#00703C",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "ut-arlington",
+      "program_name": "UT Arlington",
+      "display_name": "UT Arlington",
+      "nickname": "Mavericks",
+      "city": "Arlington",
+      "state": "TX",
+      "primary_hex": "#F58025",
+      "secondary_hex": "#0064B1",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "wac",
+        "conference_name": "WAC"
+      }
+    },
+    {
+      "program_key": "ut-martin",
+      "program_name": "UT Martin",
+      "display_name": "UT Martin",
+      "nickname": "Skyhawks",
+      "city": "Martin",
+      "state": "TN",
+      "primary_hex": "#F79728",
+      "secondary_hex": "#002A5B",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "utah",
+      "program_name": "Utah",
+      "display_name": "Utah",
+      "nickname": "Utes",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "primary_hex": "#BE0000",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "utah-state",
+      "program_name": "Utah State",
+      "display_name": "Utah State",
+      "nickname": "Aggies",
+      "city": "Logan",
+      "state": "UT",
+      "primary_hex": "#00263A",
+      "secondary_hex": "#8A8D8F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "utah-tech",
+      "program_name": "Utah Tech",
+      "display_name": "Utah Tech",
+      "nickname": "Trailblazers",
+      "city": "St. George",
+      "state": "UT",
+      "primary_hex": "#BA1C21",
+      "secondary_hex": "#0C233F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "utah-valley",
+      "program_name": "Utah Valley",
+      "display_name": "Utah Valley",
+      "nickname": "Wolverines",
+      "city": "Orem",
+      "state": "UT",
+      "primary_hex": "#275D38",
+      "secondary_hex": "#838C89",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "utep",
+      "program_name": "UTEP",
+      "display_name": "UTEP",
+      "nickname": "Miners",
+      "city": "El Paso",
+      "state": "TX",
+      "primary_hex": "#FF8200",
+      "secondary_hex": "#041E42",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "ut-rio-grande-valley",
+      "program_name": "UT Rio Grande Valley",
+      "display_name": "UTRGV",
+      "nickname": "Vaqueros",
+      "city": "Edinburg",
+      "state": "TX",
+      "primary_hex": "#FFA300",
+      "secondary_hex": "#00843D",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
+      "program_key": "utsa",
+      "program_name": "UTSA",
+      "display_name": "UTSA",
+      "nickname": "Roadrunners",
+      "city": "San Antonio",
+      "state": "TX",
+      "primary_hex": "#F15A22",
+      "secondary_hex": "#0C2340",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "valparaiso",
+      "program_name": "Valparaiso",
+      "display_name": "Valparaiso",
+      "nickname": "Beacons",
+      "city": "Valparaiso",
+      "state": "IN",
+      "primary_hex": "#381E0E",
+      "secondary_hex": "#FFCC00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "missouri-valley",
+        "conference_name": "Missouri Valley"
+      }
+    },
+    {
+      "program_key": "vanderbilt",
+      "program_name": "Vanderbilt",
+      "display_name": "Vanderbilt",
+      "nickname": "Commodores",
+      "city": "Nashville",
+      "state": "TN",
+      "primary_hex": "#866D4B",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sec",
+        "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "vcu",
+      "program_name": "VCU",
+      "display_name": "VCU",
+      "nickname": "Rams",
+      "city": "Richmond",
+      "state": "VA",
+      "primary_hex": "#FFB300",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      }
+    },
+    {
+      "program_key": "vermont",
+      "program_name": "Vermont",
+      "display_name": "Vermont",
+      "nickname": "Catamounts",
+      "city": "Burlington",
+      "state": "VT",
+      "primary_hex": "#154734",
+      "secondary_hex": "#FFC72C",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      }
+    },
+    {
+      "program_key": "villanova",
+      "program_name": "Villanova",
+      "display_name": "Villanova",
+      "nickname": "Wildcats",
+      "city": "Villanova",
+      "state": "PA",
+      "primary_hex": "#00205B",
+      "secondary_hex": "#13B5EA",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "virginia",
+      "program_name": "Virginia",
+      "display_name": "Virginia",
+      "nickname": "Cavaliers",
+      "city": "Charlottesville",
+      "state": "VA",
+      "primary_hex": "#232D4B",
+      "secondary_hex": "#F84C1E",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "virginia-tech",
+      "program_name": "Virginia Tech",
+      "display_name": "Virginia Tech",
+      "nickname": "Hokies",
+      "city": "Blacksburg",
+      "state": "VA",
+      "primary_hex": "#630031",
+      "secondary_hex": "#CF4420",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "vmi",
+      "program_name": "VMI",
+      "display_name": "VMI",
+      "nickname": "Keydets",
+      "city": "Lexington",
+      "state": "VA",
+      "primary_hex": "#A71F23",
+      "secondary_hex": "#FFD520",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "wagner",
+      "program_name": "Wagner",
+      "display_name": "Wagner",
+      "nickname": "Seahawks",
+      "city": "Staten Island",
+      "state": "NY",
+      "primary_hex": "#00483A",
+      "secondary_hex": "#B9BBBD",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
+      }
+    },
+    {
+      "program_key": "wake-forest",
+      "program_name": "Wake Forest",
+      "display_name": "Wake Forest",
+      "nickname": "Demon Deacons",
+      "city": "Winston-Salem",
+      "state": "NC",
+      "primary_hex": "#937E38",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      }
+    },
+    {
+      "program_key": "washington",
+      "program_name": "Washington",
+      "display_name": "Washington",
+      "nickname": "Huskies",
+      "city": "Seattle",
+      "state": "WA",
+      "primary_hex": "#4B2E83",
+      "secondary_hex": "#B7A57A",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "washington-state",
+      "program_name": "Washington State",
+      "display_name": "Washington State",
+      "nickname": "Cougars",
+      "city": "Pullman",
+      "state": "WA",
+      "primary_hex": "#981E32",
+      "secondary_hex": "#5E6A71",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      }
+    },
+    {
+      "program_key": "weber-state",
+      "program_name": "Weber State",
+      "display_name": "Weber State",
+      "nickname": "Wildcats",
+      "city": "Ogden",
+      "state": "UT",
+      "primary_hex": "#4B2672",
+      "secondary_hex": "#A1A1A4",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-sky",
+        "conference_name": "Big Sky"
+      }
+    },
+    {
+      "program_key": "west-florida",
+      "program_name": "West Florida",
+      "display_name": "West Florida",
+      "nickname": "Argonauts",
+      "city": "Pensacola",
+      "state": "FL",
+      "primary_hex": "#00205B",
+      "secondary_hex": "#00a346",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "atlantic-sun",
+        "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "west-georgia",
+      "program_name": "West Georgia",
+      "display_name": "West Georgia",
+      "nickname": "Wolves",
+      "city": "Carrollton",
+      "state": "GA",
+      "primary_hex": "#0656A5",
+      "secondary_hex": "#E84A4F",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
+      }
+    },
+    {
+      "program_key": "west-virginia",
+      "program_name": "West Virginia",
+      "display_name": "West Virginia",
+      "nickname": "Mountaineers",
+      "city": "Morgantown",
+      "state": "WV",
+      "primary_hex": "#002855",
+      "secondary_hex": "#FAAA00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-12",
+        "conference_name": "Big 12"
+      }
+    },
+    {
+      "program_key": "western-carolina",
+      "program_name": "Western Carolina",
+      "display_name": "Western Carolina",
+      "nickname": "Catamounts",
+      "city": "Cullowhee",
+      "state": "NC",
+      "primary_hex": "#592C88",
+      "secondary_hex": "#C1A875",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "western-illinois",
+      "program_name": "Western Illinois",
+      "display_name": "Western Illinois",
+      "nickname": "Leathernecks",
+      "city": "Macomb",
+      "state": "IL",
+      "primary_hex": "#663399",
+      "secondary_hex": "#FFCC00",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
+      "program_key": "western-kentucky",
+      "program_name": "Western Kentucky",
+      "display_name": "Western Kentucky",
+      "nickname": "Hilltoppers",
+      "city": "Bowling Green",
+      "state": "KY",
+      "primary_hex": "#C60C30",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
+      }
+    },
+    {
+      "program_key": "western-michigan",
+      "program_name": "Western Michigan",
+      "display_name": "Western Michigan",
+      "nickname": "Broncos",
+      "city": "Kalamazoo",
+      "state": "MI",
+      "primary_hex": "#6C4023",
+      "secondary_hex": "#B5A167",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mac",
+        "conference_name": "MAC"
+      }
+    },
+    {
+      "program_key": "wichita-state",
+      "program_name": "Wichita State",
+      "display_name": "Wichita State",
+      "nickname": "Shockers",
+      "city": "Wichita",
+      "state": "KS",
+      "primary_hex": "#FFCD00",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
+      "program_key": "william-mary",
+      "program_name": "William & Mary",
+      "display_name": "William & Mary",
+      "nickname": "Tribe",
+      "city": "Williamsburg",
+      "state": "VA",
+      "primary_hex": "#115740",
+      "secondary_hex": "#F0B323",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "caa",
+        "conference_name": "CAA"
+      }
+    },
+    {
+      "program_key": "winthrop",
+      "program_name": "Winthrop",
+      "display_name": "Winthrop",
+      "nickname": "Eagles",
+      "city": "Rock Hill",
+      "state": "SC",
+      "primary_hex": "#660000",
+      "secondary_hex": "#F0B323",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      }
+    },
+    {
+      "program_key": "wisconsin",
+      "program_name": "Wisconsin",
+      "display_name": "Wisconsin",
+      "nickname": "Badgers",
+      "city": "Madison",
+      "state": "WI",
+      "primary_hex": "#C5050C",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-ten",
+        "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "wofford",
+      "program_name": "Wofford",
+      "display_name": "Wofford",
+      "nickname": "Terriers",
+      "city": "Spartanburg",
+      "state": "SC",
+      "primary_hex": "#88634C",
+      "secondary_hex": "#000000",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southern",
+        "conference_name": "Southern"
+      }
+    },
+    {
+      "program_key": "wright-state",
+      "program_name": "Wright State",
+      "display_name": "Wright State",
+      "nickname": "Raiders",
+      "city": "Dayton",
+      "state": "OH",
+      "primary_hex": "#026937",
+      "secondary_hex": "#CEA052",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    },
+    {
+      "program_key": "wyoming",
+      "program_name": "Wyoming",
+      "display_name": "Wyoming",
+      "nickname": "Cowboys",
+      "city": "Laramie",
+      "state": "WY",
+      "primary_hex": "#FFC425",
+      "secondary_hex": "#492F24",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West"
+      }
+    },
+    {
+      "program_key": "xavier",
+      "program_name": "Xavier",
+      "display_name": "Xavier",
+      "nickname": "Musketeers",
+      "city": "Cincinnati",
+      "state": "OH",
+      "primary_hex": "#0C2340",
+      "secondary_hex": "#93A2A2",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      }
+    },
+    {
+      "program_key": "yale",
+      "program_name": "Yale",
+      "display_name": "Yale",
+      "nickname": "Bulldogs",
+      "city": "New Haven",
+      "state": "CT",
+      "primary_hex": "#00356B",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
+      }
+    },
+    {
+      "program_key": "youngstown-state",
+      "program_name": "Youngstown State",
+      "display_name": "Youngstown State",
+      "nickname": "Penguins",
+      "city": "Youngstown",
+      "state": "OH",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#FFFFFF",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "horizon",
+        "conference_name": "Horizon"
+      }
+    }
+  ]
+}
