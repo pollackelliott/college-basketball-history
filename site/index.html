@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>College Basketball History — Schema-Driven Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Graduate&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#132238;--muted:#64748b;--line:#dbe3ec;--paper:#f5f7fa;--card:#fff;--nav:#0e2239;--gold:#d4a72c;--good:#16794b;--warn:#a65b00;--bad:#9b2c2c;--shadow:0 10px 28px rgba(17,34,56,.09)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}.college{font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;text-transform:uppercase;letter-spacing:.025em}
+.topbar{position:sticky;top:0;z-index:20;background:var(--nav);color:white;border-bottom:4px solid var(--gold)}
+.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:18px}
+.brand{font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;font-size:22px;letter-spacing:.055em;cursor:pointer;white-space:nowrap;text-transform:uppercase}
+.brand small{display:block;font-family:Inter,sans-serif;font-size:9px;letter-spacing:1.6px;text-transform:uppercase;opacity:.7;margin-top:3px}
+.navlinks{display:flex;gap:6px}.navlinks button{background:transparent;color:#dce7f2;border:0;padding:9px 11px;border-radius:6px;cursor:pointer}.navlinks button:hover{background:rgba(255,255,255,.09)}
+.searchbox{margin-left:auto;position:relative;width:min(350px,36vw)}.searchbox input{width:100%;border:1px solid rgba(255,255,255,.2);background:#fff;color:#15243a;border-radius:7px;padding:10px 12px}
+.search-results{position:absolute;top:45px;left:0;right:0;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);max-height:360px;overflow:auto;display:none}
+.search-result{padding:10px 12px;border-bottom:1px solid #eef2f6;display:flex;justify-content:space-between;gap:10px;text-align:left}.search-result.enabled{cursor:pointer}.search-result.enabled:hover{background:#f5f8fb}.search-result.disabled{color:#94a3b8}
+.shell{max-width:1280px;margin:0 auto;padding:24px 22px 50px}
+.hero{text-align:center;background:linear-gradient(135deg,#122a47,#1d466f);color:white;border-radius:12px;padding:34px;box-shadow:var(--shadow);margin-bottom:24px}.hero h1{font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;text-transform:uppercase;font-size:36px;line-height:1.18;margin:0 0 12px}.hero p{max-width:790px;line-height:1.65;color:#e4edf6;margin:0 auto}
+.kicker{text-transform:uppercase;letter-spacing:1.7px;font-weight:800;font-size:11px;color:#d9b84b;margin-bottom:8px}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}.stat{text-align:center;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:14px}.stat b{display:block;font-size:24px}.stat span{font-size:12px;color:#d8e4ef}
+.section-head{text-align:center;margin:30px 0 13px}.section-head h2{font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;text-transform:uppercase;margin:0;font-size:24px}.section-head p{margin:7px 0 0;color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.team-card{text-align:center;background:white;border:1px solid var(--line);border-top:6px solid var(--team);border-radius:10px;padding:16px;cursor:pointer;box-shadow:0 3px 12px rgba(17,34,56,.05)}.team-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}
+.team-card h3{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;margin:12px 0 3px;font-size:17px}.team-card .sub{font-size:12px;color:var(--muted)}.team-card .record{font-family:Graduate,"Arial Black",serif;font-size:22px;font-weight:700;margin-top:14px}.team-card .mini{font-size:11px;color:var(--muted);margin-top:4px}
+.panel{background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 3px 12px rgba(17,34,56,.04)}
+.program-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}.program{text-align:center;padding:11px 12px;border-right:1px solid #edf1f5;border-bottom:1px solid #edf1f5;min-height:58px}.program.enabled{cursor:pointer;background:#fff}.program.enabled:hover{background:#f7fafc}.program.disabled{color:#94a3b8;background:#fbfcfd}.program b{font-size:13px;display:block}.program small{font-size:10px}.lock{display:block;font-size:9px;color:#a7b2bf;margin-bottom:2px}
+.team-hero{border-radius:11px;overflow:hidden;background:white;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:18px}.team-strip{height:10px;background:var(--team)}
+.team-head{text-align:center;padding:24px;display:flex;flex-direction:column;align-items:center;gap:10px}.team-head h1{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:35px;line-height:1.2;margin:0}.team-head p{margin:6px 0 0;color:var(--muted)}.team-head .logo-disc{width:76px;height:76px;font-size:25px}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.metric{text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px}.metric b{font-size:21px;display:block}.metric span{font-size:11px;color:var(--muted)}
+.two-col{display:grid;grid-template-columns:360px 1fr;gap:16px}.series-list .series-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:12px 14px;border-bottom:1px solid #edf1f5;align-items:center;text-align:center}.series-row:last-child{border-bottom:0}.series-row .record{font-family:Graduate,"Arial Black",serif;font-size:17px;font-weight:700}
+.btn{background:var(--nav);color:white;border:0;border-radius:6px;padding:8px 10px;cursor:pointer;font-size:12px}.btn:hover{opacity:.9}.btn:disabled{opacity:.4;cursor:not-allowed}.panel-title{text-align:center;padding:14px 16px;border-bottom:1px solid var(--line);font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:14px;letter-spacing:.035em}
+.filters{padding:12px;border-bottom:1px solid var(--line);display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.filters input,.filters select{border:1px solid var(--line);border-radius:6px;padding:8px;font-size:12px;background:white}
+.season-summary{text-align:center;padding:9px 12px;background:#f7fafc;border-bottom:1px solid var(--line);font-size:12px;color:#526174}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th{background:#f2f5f8;color:#526174;text-align:center;padding:9px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1}td{text-align:center;padding:9px 10px;border-bottom:1px solid #edf1f5;white-space:nowrap}tr:hover td{background:#fafcfe}
+.opp-link{font-weight:700;color:#174f82;cursor:pointer;text-decoration:underline;text-decoration-color:#aac3da;text-underline-offset:2px}.opp-plain{font-weight:600}.result.W{color:var(--good);font-weight:800}.result.L{color:var(--bad);font-weight:800}.result.T{color:var(--warn);font-weight:800}
+.pager{padding:12px;display:flex;justify-content:center;gap:18px;align-items:center;color:var(--muted);font-size:12px}.pager button{border:1px solid var(--line);background:white;border-radius:6px;padding:7px 10px;cursor:pointer}
+.opponent-breakdown{margin-top:16px}.conference-group{border-top:1px solid var(--line)}.conference-group:first-child{border-top:0}.conference-group summary{cursor:pointer;list-style:none;padding:13px 16px;background:#f8fafc;font-weight:800;text-align:center}.conference-group summary::-webkit-details-marker{display:none}.conference-group summary span{color:var(--muted);font-weight:600;margin-left:8px;font-size:11px}.conference-group[open] summary{background:#eef4f8}
+.match-head{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;background:white;border:1px solid var(--line);border-radius:11px;padding:22px;box-shadow:var(--shadow);text-align:center}.side-team{display:flex;flex-direction:column;gap:10px;align-items:center}.side-team.right{justify-content:center;text-align:center}.side-team h2{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:27px;margin:0}.vs{font-family:Graduate,"Arial Black",serif;font-size:22px;color:#8090a2}
+.series-score{font-family:Graduate,"Arial Black",serif;text-align:center;font-size:30px;font-weight:800;margin:18px 0 4px}.series-caption{text-align:center;color:var(--muted);font-size:12px}.match-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.subgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.mini-table{width:100%}.mini-table td,.mini-table th{padding:7px 9px}
+.chip{display:inline-block;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800}.chip.verified{background:#e6f5ed;color:#16663f}.chip.resolved{background:#e9f0fa;color:#28578a}.chip.review{background:#fff3dd;color:#8b5200}
+.back{display:block;text-align:center;color:#526174;font-size:12px;margin-bottom:12px;cursor:pointer}.notice{text-align:center;background:#fff8e7;border:1px solid #f1d99e;border-radius:8px;padding:11px 13px;color:#73510e;font-size:12px;margin:12px 0}.data-note{text-align:center;font-size:12px;color:var(--muted);line-height:1.55}.empty{padding:30px;text-align:center;color:var(--muted)}
+footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-size:11px;text-align:center}
+@media(max-width:950px){.cards,.program-grid{grid-template-columns:repeat(2,1fr)}.statbar{grid-template-columns:repeat(2,1fr)}.metrics{grid-template-columns:repeat(3,1fr)}.two-col{grid-template-columns:1fr}.match-metrics{grid-template-columns:repeat(2,1fr)}.subgrid{grid-template-columns:1fr}.searchbox{display:none}.navlinks{margin-left:auto}}
+@media(max-width:560px){.shell{padding:16px 12px 40px}.topbar-inner{padding:12px}.brand{font-size:17px}.navlinks button:nth-child(2){display:none}.hero{padding:24px}.hero h1{font-size:28px}.cards,.program-grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.match-head{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <div class="brand" onclick="goHome()">CBB HISTORY<small id="brandSubtitle">Schema-driven prototype</small></div>
+  <div class="navlinks"><button onclick="goHome()">Teams</button><button onclick="showAbout()">About the data</button></div>
+  <div class="searchbox"><input id="globalSearch" placeholder="Search 365 current D1 programs…" autocomplete="off"><div id="searchResults" class="search-results"></div></div>
+</div></header>
+<main id="app" class="shell"></main>
+<footer id="siteFooter">Published program pages are loading from generated data.</footer>
+<script>
+"use strict";
+
+const DB = {
+  manifest: null,
+  referenceSeason: "",
+  programs: [],
+  activeKeys: [],
+  teams: {},
+  summaries: {},
+  seasons: {},
+  opponents: {},
+  games: {},
+  pairs: {},
+};
+
+let ACTIVE = new Set();
+const PAGE_SIZE = 50;
+const teamPageState = {};
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  })[char]);
+}
+
+function fmtNum(value) {
+  return Number(value ?? 0).toLocaleString("en-US");
+}
+
+function fmtRecord(wins, losses, ties = 0) {
+  return `${fmtNum(wins)}–${fmtNum(losses)}${ties ? `–${fmtNum(ties)}` : ""}`;
+}
+
+function initials(name) {
+  return String(name || "?")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function textColor(hex) {
+  const value = String(hex || "#333333").replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(value)) return "#fff";
+  const red = parseInt(value.slice(0, 2), 16);
+  const green = parseInt(value.slice(2, 4), 16);
+  const blue = parseInt(value.slice(4, 6), 16);
+  return (red * 299 + green * 587 + blue * 114) / 1000 > 155 ? "#172238" : "#fff";
+}
+
+function conferenceName(conference) {
+  return conference?.conference_name || "";
+}
+
+function programLocation(program) {
+  return [program.city, program.state].filter(Boolean).join(", ");
+}
+
+function gameLocation(game) {
+  return [game.site_city, game.site_state].filter(Boolean).join(", ");
+}
+
+function humanizeKey(value) {
+  if (!value) return "—";
+  return String(value)
+    .toLowerCase()
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function formatSeason(season) {
+  return String(season || "—").replace(/^(\d{4})-\d{2}(\d{2})$/, "$1–$2");
+}
+
+function formatGameDate(game) {
+  if (game.datePrecision !== "EXACT" || !game.date) return "Season only";
+  const parsed = new Date(`${game.date}T12:00:00`);
+  return Number.isNaN(parsed.getTime())
+    ? game.date
+    : parsed.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function gameSortValue(game) {
+  return `${game.date || ""}|${game.season || ""}`;
+}
+
+function scoreText(game) {
+  if (!game.scoreKnown || game.teamScore == null || game.oppScore == null) return "—";
+  const overtime = game.overtimePeriods > 0
+    ? ` (${game.overtimePeriods === 1 ? "OT" : `${game.overtimePeriods}OT`})`
+    : "";
+  return `${game.teamScore}–${game.oppScore}${overtime}`;
+}
+
+function gameTypeLabel(game) {
+  const labels = {
+    REGULAR_SEASON: "Regular season",
+    CONFERENCE_TOURNAMENT: "Conference tournament",
+    NCAA_TOURNAMENT: "NCAA tournament",
+    NIT: "NIT",
+  };
+  const base = labels[game.gameType] || humanizeKey(game.gameType || "Game");
+  return game.postseasonRound ? `${base} · ${humanizeKey(game.postseasonRound)}` : base;
+}
+
+function administrativeLabel(status) {
+  return status ? humanizeKey(status) : "On court";
+}
+
+function administrativeClass(status) {
+  if (!status) return "verified";
+  return status === "FORFEIT" ? "resolved" : "review";
+}
+
+function administrativeChip(game) {
+  const title = game.administrativeNote ? ` title="${esc(game.administrativeNote)}"` : "";
+  return `<span class="chip ${administrativeClass(game.administrativeStatus)}"${title}>${esc(administrativeLabel(game.administrativeStatus))}</span>`;
+}
+
+function normalizeProgram(program) {
+  return {
+    key: program.program_key,
+    name: program.program_name,
+    display: program.display_name || program.program_name,
+    nickname: program.nickname || "",
+    city: program.city || "",
+    state: program.state || "",
+    location: programLocation(program),
+    conference: conferenceName(program.current_conference) || "Independent",
+    primary: program.primary_hex || "#334155",
+    secondary: program.secondary_hex || "#ffffff",
+    currentD1: program.current_d1 !== false,
+    enabled: Boolean(program.public_page_enabled),
+  };
+}
+
+function normalizeOpponent(opponent) {
+  return {
+    key: opponent.opponent_key,
+    name: opponent.opponent_name,
+    currentD1: Boolean(opponent.current_d1),
+    enabled: Boolean(opponent.public_page_enabled),
+    conference: conferenceName(opponent.current_conference)
+      || (opponent.current_d1 ? "Independent" : "Non-D1 / Historical"),
+    firstSeason: opponent.first_season,
+    lastSeason: opponent.last_season,
+    games: opponent.games,
+    wins: opponent.wins,
+    losses: opponent.losses,
+    ties: opponent.ties,
+  };
+}
+
+function normalizeGame(game, opponentsByKey) {
+  const opponent = opponentsByKey.get(game.opponent_key);
+  return {
+    canonicalGameId: game.canonical_game_id,
+    season: game.season_label,
+    date: game.game_date,
+    datePrecision: game.date_precision,
+    opponentKey: game.opponent_key,
+    opponent: game.opponent_name,
+    opponentCurrentD1: Boolean(game.opponent_current_d1),
+    opponentPublicPageEnabled: Boolean(game.opponent_public_page_enabled),
+    opponentConference: opponent?.conference
+      || (game.opponent_current_d1 ? "Independent" : "Non-D1 / Historical"),
+    teamScore: game.team_score,
+    oppScore: game.opponent_score,
+    scoreKnown: Boolean(game.score_known),
+    result: game.result,
+    overtimePeriods: Number(game.overtime_periods || 0),
+    site: game.site || "UNKNOWN",
+    venue: humanizeKey(game.venue_key),
+    venueKey: game.venue_key,
+    location: gameLocation(game),
+    siteCity: game.site_city,
+    siteState: game.site_state,
+    gameType: game.game_type,
+    postseasonRound: game.postseason_round,
+    administrativeStatus: game.administrative_status,
+    administrativeNote: game.administrative_note,
+  };
+}
+
+function oppositeResult(result) {
+  return result === "W" ? "L" : result === "L" ? "W" : result;
+}
+
+function pairSite(site, teamKey, opponentKey) {
+  if (site === "HOME") return `${DB.teams[teamKey].name} Home`;
+  if (site === "AWAY") return `${DB.teams[opponentKey].name} Home`;
+  if (site === "NEUTRAL") return "Neutral";
+  return "Unknown";
+}
+
+function buildPairs() {
+  DB.pairs = {};
+  const seenByPair = {};
+
+  for (const teamKey of DB.activeKeys) {
+    for (const game of DB.games[teamKey]) {
+      const opponentKey = game.opponentKey;
+      if (!ACTIVE.has(opponentKey)) continue;
+      const ordered = [teamKey, opponentKey].sort();
+      if (teamKey !== ordered[0]) continue;
+      const pairKey = ordered.join("--");
+      if (!DB.pairs[pairKey]) DB.pairs[pairKey] = { games: [] };
+      if (!seenByPair[pairKey]) seenByPair[pairKey] = new Set();
+      if (seenByPair[pairKey].has(game.canonicalGameId)) continue;
+      seenByPair[pairKey].add(game.canonicalGameId);
+
+      DB.pairs[pairKey].games.push({
+        canonicalGameId: game.canonicalGameId,
+        season: game.season,
+        date: game.date,
+        datePrecision: game.datePrecision,
+        scores: {
+          [teamKey]: game.teamScore,
+          [opponentKey]: game.oppScore,
+        },
+        results: {
+          [teamKey]: game.result,
+          [opponentKey]: oppositeResult(game.result),
+        },
+        scoreKnown: game.scoreKnown,
+        overtimePeriods: game.overtimePeriods,
+        site: pairSite(game.site, teamKey, opponentKey),
+        venue: game.venue,
+        location: game.location,
+        gameType: game.gameType,
+        postseasonRound: game.postseasonRound,
+        administrativeStatus: game.administrativeStatus,
+        administrativeNote: game.administrativeNote,
+      });
+    }
+  }
+}
+
+async function fetchJSON(url) {
+  const response = await fetch(url, { cache: "no-store" });
+  if (!response.ok) throw new Error(`${response.status} ${response.statusText} while loading ${url}`);
+  return response.json();
+}
+
+async function loadData() {
+  const manifest = await fetchJSON("data/manifest.json");
+  if (manifest.schema_version !== 1) throw new Error(`Unsupported manifest schema: ${manifest.schema_version}`);
+  DB.manifest = manifest;
+  DB.referenceSeason = manifest.reference_season || "";
+
+  const programsPath = manifest.files?.programs || "programs.json";
+  const programsDocument = await fetchJSON(`data/${programsPath}`);
+  if (!Array.isArray(programsDocument.programs)) throw new Error("programs.json does not contain a programs array");
+
+  DB.programs = programsDocument.programs
+    .map(normalizeProgram)
+    .sort((a, b) => a.name.localeCompare(b.name));
+  DB.activeKeys = DB.programs.filter((program) => program.enabled).map((program) => program.key);
+  ACTIVE = new Set(DB.activeKeys);
+
+  if (manifest.program_count != null && DB.programs.length !== manifest.program_count) {
+    throw new Error(`Program count mismatch: expected ${manifest.program_count}, loaded ${DB.programs.length}`);
+  }
+  if (manifest.public_page_count != null && DB.activeKeys.length !== manifest.public_page_count) {
+    throw new Error(`Public-page count mismatch: expected ${manifest.public_page_count}, loaded ${DB.activeKeys.length}`);
+  }
+
+  const teamsRoot = String(manifest.files?.teams_root || "teams/")
+    .replace(/^\/+/, "")
+    .replace(/\/?$/, "/");
+  const teamDocuments = await Promise.all(
+    DB.activeKeys.map((key) => fetchJSON(`data/${teamsRoot}${encodeURIComponent(key)}.json`)),
+  );
+
+  for (const document of teamDocuments) {
+    const key = document.program?.program_key;
+    if (!ACTIVE.has(key)) throw new Error(`Unexpected team file: ${key || "missing program_key"}`);
+    const directoryProgram = DB.programs.find((program) => program.key === key);
+    const opponents = (document.opponents || []).map(normalizeOpponent);
+    const opponentsByKey = new Map(opponents.map((opponent) => [opponent.key, opponent]));
+    const games = (document.games || []).map((game) => normalizeGame(game, opponentsByKey));
+    const summary = document.summary || {};
+
+    DB.teams[key] = directoryProgram;
+    DB.opponents[key] = opponents;
+    DB.seasons[key] = document.seasons || [];
+    DB.games[key] = games;
+    DB.summaries[key] = {
+      games: summary.games || games.length,
+      wins: summary.wins || 0,
+      losses: summary.losses || 0,
+      ties: summary.ties || 0,
+      firstSeason: summary.first_season,
+      lastSeason: summary.last_season,
+      opponents: summary.opponents || opponents.length,
+      home: games.filter((game) => game.site === "HOME").length,
+      road: games.filter((game) => game.site === "AWAY").length,
+      neutral: games.filter((game) => game.site === "NEUTRAL").length,
+      unknownSite: games.filter((game) => game.site === "UNKNOWN").length,
+    };
+  }
+
+  const missing = DB.activeKeys.filter((key) => !DB.teams[key]);
+  if (missing.length) throw new Error(`Missing team data: ${missing.join(", ")}`);
+  buildPairs();
+}
+
+function updateChrome() {
+  const count = DB.activeKeys.length;
+  document.title = `College Basketball History — ${count}-Program Prototype`;
+  const subtitle = document.getElementById("brandSubtitle");
+  if (subtitle) subtitle.textContent = `${count}-program prototype`;
+  const search = document.getElementById("globalSearch");
+  if (search) search.placeholder = `Search ${fmtNum(DB.programs.length)} current D1 programs…`;
+  const footer = document.getElementById("siteFooter");
+  if (footer) {
+    footer.textContent = `${count} program pages are published from generated JSON. Other current D1 programs remain visible but intentionally disabled. Records default to on-court outcomes; administrative adjustments remain separate metadata.`;
+  }
+}
+
+function teamLogo(key) {
+  const team = DB.teams[key];
+  const color = textColor(team.primary);
+  return `<div class="logo-disc" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}">${initials(team.name)}</div>`;
+}
+
+function goHome() {
+  location.hash = "home";
+}
+
+function goTeam(key) {
+  if (ACTIVE.has(key)) location.hash = `team/${key}`;
+}
+
+function goMatch(teamA, teamB) {
+  if (DB.pairs[[teamA, teamB].sort().join("--")]) location.hash = `matchup/${teamA}/${teamB}`;
+}
+
+function showAbout() {
+  location.hash = "about";
+}
+
+function teamCard(key) {
+  const team = DB.teams[key];
+  const summary = DB.summaries[key];
+  return `<div class="team-card" style="--team:${team.primary}" onclick="goTeam('${key}')">${teamLogo(key)}<h3>${esc(team.name)}</h3><div class="sub">${esc(team.nickname)} · ${esc(team.conference)}</div><div class="record">${fmtRecord(summary.wins, summary.losses, summary.ties)}</div><div class="mini">${fmtNum(summary.games)} games indexed</div></div>`;
+}
+
+function homeView() {
+  const disabledCount = DB.programs.length - DB.activeKeys.length;
+  const allPrograms = DB.programs.map((program) => `<div class="program ${program.enabled ? "enabled" : "disabled"}" ${program.enabled ? `onclick="goTeam('${program.key}')"` : ""}>${program.enabled ? "" : '<span class="lock">NOT INDEXED</span>'}<b>${esc(program.name)}</b><small>${esc(program.conference)} · ${esc(program.nickname)}</small></div>`).join("");
+  const teamRows = DB.activeKeys.reduce((total, key) => total + DB.summaries[key].games, 0);
+  const pairings = Object.values(DB.pairs).filter((pair) => pair.games.length).length;
+
+  return `<section class="hero"><div class="kicker">Schema-driven prototype</div><h1>College Basketball History</h1><p>A Winsipedia-style database prototype loading every published program from generated JSON. The remaining current D1 directory is present but intentionally non-clickable, letting the product expand without school-specific interface code.</p><div class="statbar"><div class="stat"><b>${fmtNum(DB.activeKeys.length)}</b><span>clickable programs</span></div><div class="stat"><b>${fmtNum(DB.programs.length)}</b><span>current D1 programs listed</span></div><div class="stat"><b>${fmtNum(teamRows)}</b><span>team-history rows loaded</span></div><div class="stat"><b>${fmtNum(pairings)}</b><span>navigable pairings</span></div></div></section><div class="section-head"><h2>Indexed Programs</h2><p>Click any team to open its complete history page.</p></div><div class="cards">${DB.activeKeys.map(teamCard).join("")}</div><div class="section-head"><h2>Current D1 Directory</h2><p>${fmtNum(DB.activeKeys.length)} enabled; ${fmtNum(disabledCount)} intentionally disabled.</p></div><div class="panel"><div class="program-grid">${allPrograms}</div></div>`;
+}
+
+function canonicalWinnerKey(game, teamA, teamB) {
+  if (game.results?.[teamA] === "W") return teamA;
+  if (game.results?.[teamB] === "W") return teamB;
+  if (game.results?.[teamA] === "T" || game.results?.[teamB] === "T") return "tie";
+  const scoreA = game.scores?.[teamA];
+  const scoreB = game.scores?.[teamB];
+  if (scoreA == null || scoreB == null) return null;
+  return scoreA > scoreB ? teamA : scoreA < scoreB ? teamB : "tie";
+}
+
+function activeSeriesFor(key) {
+  return DB.activeKeys
+    .filter((other) => other !== key)
+    .map((other) => {
+      const games = DB.pairs[[key, other].sort().join("--")]?.games || [];
+      let wins = 0;
+      let losses = 0;
+      let ties = 0;
+      for (const game of games) {
+        const winner = canonicalWinnerKey(game, key, other);
+        if (winner === key) wins += 1;
+        else if (winner === other) losses += 1;
+        else if (winner === "tie") ties += 1;
+      }
+      return { other, games: games.length, wins, losses, ties };
+    })
+    .sort((a, b) => b.games - a.games || DB.teams[a.other].name.localeCompare(DB.teams[b.other].name));
+}
+
+function siteShort(site) {
+  if (site === "HOME") return "H";
+  if (site === "AWAY") return "A";
+  if (site === "NEUTRAL") return "N";
+  return "?";
+}
+
+function seasonsFor(key) {
+  return (DB.seasons[key] || [])
+    .map((season) => season.season_label)
+    .filter(Boolean)
+    .sort((a, b) => b.localeCompare(a));
+}
+
+function opponentBreakdown(key) {
+  const groups = new Map();
+  for (const opponent of DB.opponents[key] || []) {
+    if (!groups.has(opponent.conference)) groups.set(opponent.conference, []);
+    groups.get(opponent.conference).push(opponent);
+  }
+
+  return [...groups.entries()]
+    .map(([conference, rows]) => ({
+      conference,
+      rows: rows.sort((a, b) => b.games - a.games || a.name.localeCompare(b.name)),
+      total: rows.reduce((sum, row) => sum + row.games, 0),
+    }))
+    .sort((a, b) => {
+      if (a.conference === "Non-D1 / Historical") return 1;
+      if (b.conference === "Non-D1 / Historical") return -1;
+      return a.conference.localeCompare(b.conference);
+    })
+    .map((group) => `<details class="conference-group"><summary>${esc(group.conference)}<span>${fmtNum(group.rows.length)} opponents · ${fmtNum(group.total)} games</span></summary><div class="table-wrap"><table><thead><tr><th>Opponent</th><th>Record</th><th>Games</th><th>Win %</th></tr></thead><tbody>${group.rows.map((row) => {
+      const name = row.enabled && ACTIVE.has(row.key)
+        ? `<span class="opp-link" onclick="goTeam('${row.key}')">${esc(row.name)}</span>`
+        : `<span class="opp-plain">${esc(row.name)}</span>`;
+      const percentage = row.games ? ((row.wins + 0.5 * row.ties) / row.games * 100).toFixed(1) : "0.0";
+      return `<tr><td>${name}</td><td>${fmtRecord(row.wins, row.losses, row.ties)}</td><td>${fmtNum(row.games)}</td><td>${percentage}%</td></tr>`;
+    }).join("")}</tbody></table></div></details>`)
+    .join("");
+}
+
+function teamView(key) {
+  const team = DB.teams[key];
+  const summary = DB.summaries[key];
+  if (!team || !summary) return homeView();
+  const series = activeSeriesFor(key);
+  teamPageState[key] = { page: 0, q: "", site: "all", season: "" };
+  const seasonOptions = seasonsFor(key).map((season) => `<option value="${esc(season)}">${esc(season)}</option>`).join("");
+  const pairRows = series.map((row) => `<div class="series-row"><div><b>${esc(DB.teams[row.other].name)}</b><div class="data-note">${fmtNum(row.games)} meetings</div></div><div class="record">${fmtRecord(row.wins, row.losses, row.ties)}</div><button class="btn" onclick="goMatch('${key}','${row.other}')" ${row.games ? "" : "disabled"}>Series</button></div>`).join("");
+
+  return `<div class="back" onclick="goHome()">← All programs</div><section class="team-hero" style="--team:${team.primary}"><div class="team-strip"></div><div class="team-head">${teamLogo(key)}<div><div class="kicker" style="color:${team.primary}">${esc(team.conference)} · ${esc(team.location || "Location not listed")}</div><h1>${esc(team.name)} ${esc(team.nickname)}</h1><p>Complete history through ${esc(formatSeason(summary.lastSeason || DB.referenceSeason))}</p></div></div></section><div class="metrics"><div class="metric"><b>${fmtRecord(summary.wins, summary.losses, summary.ties)}</b><span>on-court record</span></div><div class="metric"><b>${fmtNum(summary.games)}</b><span>games indexed</span></div><div class="metric"><b>${esc(formatSeason(summary.firstSeason))}</b><span>first season in data</span></div><div class="metric"><b>${fmtNum(summary.home)}</b><span>home games</span></div><div class="metric"><b>${fmtNum(summary.road)}</b><span>road games</span></div><div class="metric"><b>${fmtNum(summary.neutral)}</b><span>neutral games</span></div></div><div class="two-col"><div><div class="panel series-list"><div class="panel-title">Series vs. Indexed Programs</div>${pairRows}</div><div class="notice"><b>Prototype rule:</b> only the ${fmtNum(DB.activeKeys.length)} published program pages are clickable. Every other opponent remains visible but does not yet have a public page.</div></div><div class="panel"><div class="panel-title">Complete Game History</div><div class="filters"><select id="seasonFilter" onchange="updateTeamGames('${key}',0,true)"><option value="">All seasons</option>${seasonOptions}</select><input id="oppFilter" placeholder="Filter opponent…" oninput="updateTeamGames('${key}',0,true)"><select id="siteFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All sites</option><option value="home">Home</option><option value="road">Road</option><option value="neutral">Neutral</option><option value="unknown">Unknown</option></select></div><div id="seasonSummary" class="season-summary"></div><div id="teamGamesTable"></div></div></div><div class="panel opponent-breakdown"><div class="panel-title">All-Time Record Against Every Opponent</div><div class="data-note" style="padding:11px 16px;border-bottom:1px solid var(--line)">Current D1 opponents are grouped by their ${esc(formatSeason(DB.referenceSeason))} conference. Historical and non-D1 opponents are grouped together. Within each conference, opponents are ordered by games played.</div>${opponentBreakdown(key)}</div>`;
+}
+
+function updateTeamGames(key, delta = 0, reset = false) {
+  const state = teamPageState[key] || { page: 0, q: "", site: "all", season: "" };
+  const opponentFilter = document.getElementById("oppFilter");
+  if (opponentFilter) {
+    state.q = opponentFilter.value.toLowerCase().trim();
+    state.site = document.getElementById("siteFilter").value;
+    state.season = document.getElementById("seasonFilter").value;
+  }
+  state.page = reset ? 0 : Math.max(0, (state.page || 0) + delta);
+  teamPageState[key] = state;
+
+  let games = [...DB.games[key]].sort((a, b) => gameSortValue(b).localeCompare(gameSortValue(a)));
+  games = games.filter((game) => {
+    if (state.q && !game.opponent.toLowerCase().includes(state.q)) return false;
+    if (state.season && game.season !== state.season) return false;
+    const short = siteShort(game.site);
+    if (state.site === "home" && short !== "H") return false;
+    if (state.site === "road" && short !== "A") return false;
+    if (state.site === "neutral" && short !== "N") return false;
+    if (state.site === "unknown" && short !== "?") return false;
+    return true;
+  });
+
+  const maxPage = Math.max(0, Math.ceil(games.length / PAGE_SIZE) - 1);
+  state.page = Math.min(state.page, maxPage);
+  const record = { W: 0, L: 0, T: 0 };
+  for (const game of games) if (record[game.result] != null) record[game.result] += 1;
+
+  document.getElementById("seasonSummary").innerHTML = `${state.season ? `<b>${esc(state.season)}</b> · ` : ""}${fmtRecord(record.W, record.L, record.T)} · ${fmtNum(games.length)} games shown`;
+  const slice = games.slice(state.page * PAGE_SIZE, (state.page + 1) * PAGE_SIZE);
+  const rows = slice.map((game) => {
+    const opponent = game.opponentPublicPageEnabled && ACTIVE.has(game.opponentKey)
+      ? `<span class="opp-link" onclick="goTeam('${game.opponentKey}')">${esc(game.opponent)}</span>`
+      : `<span class="opp-plain">${esc(game.opponent)}</span>`;
+    return `<tr><td>${esc(formatGameDate(game))}</td><td>${esc(game.season)}</td><td>${opponent}</td><td class="result ${esc(game.result)}">${esc(game.result)}</td><td>${esc(scoreText(game))}</td><td>${esc(siteShort(game.site))}</td><td>${esc(game.venue)}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game))}</td><td>${administrativeChip(game)}</td></tr>`;
+  }).join("");
+
+  document.getElementById("teamGamesTable").innerHTML = `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Season</th><th>Opponent</th><th>Result</th><th>Score</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows || '<tr><td colspan="10" class="empty">No games match these filters.</td></tr>'}</tbody></table></div><div class="pager"><span>${fmtNum(games.length)} games · page ${fmtNum(state.page + 1)} of ${fmtNum(maxPage + 1)}</span><span><button onclick="updateTeamGames('${key}',-1)" ${state.page === 0 ? "disabled" : ""}>Previous</button> <button onclick="updateTeamGames('${key}',1)" ${state.page >= maxPage ? "disabled" : ""}>Next</button></span></div>`;
+}
+
+function streakText(games, teamA, teamB) {
+  if (!games.length) return "—";
+  const newest = [...games].sort((a, b) => gameSortValue(b).localeCompare(gameSortValue(a)));
+  const first = canonicalWinnerKey(newest[0], teamA, teamB);
+  if (!first || first === "tie") return first === "tie" ? "Tie" : "—";
+  let length = 0;
+  for (const game of newest) {
+    if (canonicalWinnerKey(game, teamA, teamB) === first) length += 1;
+    else break;
+  }
+  return `${DB.teams[first].name} ${fmtNum(length)}`;
+}
+
+function longestStreak(games, teamA, teamB) {
+  let best = { key: null, length: 0 };
+  let current = { key: null, length: 0 };
+  for (const game of [...games].sort((a, b) => gameSortValue(a).localeCompare(gameSortValue(b)))) {
+    const winner = canonicalWinnerKey(game, teamA, teamB);
+    if (!winner || winner === "tie") {
+      current = { key: null, length: 0 };
+      continue;
+    }
+    current = current.key === winner
+      ? { key: winner, length: current.length + 1 }
+      : { key: winner, length: 1 };
+    if (current.length > best.length) best = { ...current };
+  }
+  return best.key ? `${DB.teams[best.key].name} ${fmtNum(best.length)}` : "—";
+}
+
+function bucket(games, teamA, teamB, labelFunction) {
+  const map = {};
+  for (const game of games) {
+    const label = labelFunction(game) || "Unknown";
+    if (!map[label]) map[label] = { label, wins: 0, losses: 0, ties: 0, games: 0 };
+    map[label].games += 1;
+    const winner = canonicalWinnerKey(game, teamA, teamB);
+    if (winner === teamA) map[label].wins += 1;
+    else if (winner === teamB) map[label].losses += 1;
+    else if (winner === "tie") map[label].ties += 1;
+  }
+  return Object.values(map);
+}
+
+function miniPanel(title, rows, teamA) {
+  return `<div class="panel"><div class="panel-title">${esc(title)}</div><table class="mini-table"><thead><tr><th>Group</th><th>${esc(DB.teams[teamA].name)} record</th><th>G</th></tr></thead><tbody>${rows.map((row) => `<tr><td>${esc(row.label)}</td><td>${fmtRecord(row.wins, row.losses, row.ties)}</td><td>${fmtNum(row.games)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+function matchupView(teamA, teamB) {
+  const pair = DB.pairs[[teamA, teamB].sort().join("--")];
+  if (!pair) return '<div class="empty">Series not available.</div>';
+  const games = pair.games;
+  const scoredGames = games.filter((game) => game.scoreKnown && game.scores[teamA] != null && game.scores[teamB] != null);
+  let teamAWins = 0;
+  let teamBWins = 0;
+  let ties = 0;
+  let teamAPoints = 0;
+  let teamBPoints = 0;
+
+  for (const game of games) {
+    const winner = canonicalWinnerKey(game, teamA, teamB);
+    if (winner === teamA) teamAWins += 1;
+    else if (winner === teamB) teamBWins += 1;
+    else if (winner === "tie") ties += 1;
+  }
+  for (const game of scoredGames) {
+    teamAPoints += game.scores[teamA];
+    teamBPoints += game.scores[teamB];
+  }
+
+  const margins = scoredGames.map((game) => ({
+    game,
+    margin: Math.abs(game.scores[teamA] - game.scores[teamB]),
+    total: game.scores[teamA] + game.scores[teamB],
+  }));
+  const largest = [...margins].sort((a, b) => b.margin - a.margin)[0];
+  const closest = [...margins].sort((a, b) => a.margin - b.margin)[0];
+  const highest = [...margins].sort((a, b) => b.total - a.total)[0];
+  const administrativeCount = games.filter((game) => game.administrativeStatus).length;
+  const sites = bucket(games, teamA, teamB, (game) => game.site).sort((a, b) => b.games - a.games);
+  const decades = bucket(games, teamA, teamB, (game) => {
+    const year = Number((game.date || game.season || "").slice(0, 4));
+    return year ? `${Math.floor(year / 10) * 10}s` : "";
+  }).sort((a, b) => b.label.localeCompare(a.label)).slice(0, 8);
+  const venues = bucket(games, teamA, teamB, (game) => game.venue || game.location || "Venue not resolved")
+    .sort((a, b) => b.games - a.games)
+    .slice(0, 8);
+
+  const rows = [...games]
+    .sort((a, b) => gameSortValue(b).localeCompare(gameSortValue(a)))
+    .map((game) => {
+      const scoreA = game.scoreKnown && game.scores[teamA] != null ? game.scores[teamA] : "—";
+      const scoreB = game.scoreKnown && game.scores[teamB] != null ? game.scores[teamB] : "—";
+      return `<tr><td>${esc(formatGameDate(game))}</td><td>${esc(game.season)}</td><td>${esc(scoreA)}</td><td>${esc(scoreB)}</td><td>${esc(game.site || "Unknown")}</td><td>${esc(game.venue || "—")}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game))}</td><td>${administrativeChip(game)}</td></tr>`;
+    }).join("");
+
+  return `<div class="back" onclick="goHome()">← All programs</div><div class="match-head"><div class="side-team">${teamLogo(teamA)}<div><div class="kicker" style="color:${DB.teams[teamA].primary}">${esc(DB.teams[teamA].conference)}</div><h2>${esc(DB.teams[teamA].name)}</h2></div></div><div class="vs">VS.</div><div class="side-team right">${teamLogo(teamB)}<div><div class="kicker" style="color:${DB.teams[teamB].primary}">${esc(DB.teams[teamB].conference)}</div><h2>${esc(DB.teams[teamB].name)}</h2></div></div></div><div class="series-score">${fmtRecord(teamAWins, teamBWins, ties)}</div><div class="series-caption">${esc(DB.teams[teamA].name)} record vs. ${esc(DB.teams[teamB].name)} · ${fmtNum(games.length)} meetings${scoredGames.length !== games.length ? ` · ${fmtNum(scoredGames.length)} with known scores` : ""}</div>${administrativeCount ? `<div class="notice">${fmtNum(administrativeCount)} game${administrativeCount === 1 ? "" : "s"} carries administrative metadata. Records shown use on-court results.</div>` : ""}<div class="match-metrics"><div class="metric"><b>${streakText(games, teamA, teamB)}</b><span>current streak</span></div><div class="metric"><b>${longestStreak(games, teamA, teamB)}</b><span>longest streak</span></div><div class="metric"><b>${largest ? fmtNum(largest.margin) : "—"}</b><span>largest margin · ${largest ? formatGameDate(largest.game) : ""}</span></div><div class="metric"><b>${closest ? fmtNum(closest.margin) : "—"}</b><span>closest margin · ${closest ? formatGameDate(closest.game) : ""}</span></div><div class="metric"><b>${highest ? fmtNum(highest.total) : "—"}</b><span>highest combined score</span></div><div class="metric"><b>${scoredGames.length ? (teamAPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(DB.teams[teamA].name)} avg. points</span></div><div class="metric"><b>${scoredGames.length ? (teamBPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(DB.teams[teamB].name)} avg. points</span></div><div class="metric"><b>${fmtNum(teamAPoints)}–${fmtNum(teamBPoints)}</b><span>total known points</span></div></div><div class="subgrid">${miniPanel("Record by Site", sites, teamA)}${miniPanel("Record by Decade", decades, teamA)}${miniPanel("Most-Used Venues", venues, teamA)}</div><div class="panel" style="margin-top:14px"><div class="panel-title">Complete Series History</div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Season</th><th>${esc(DB.teams[teamA].name)}</th><th>${esc(DB.teams[teamB].name)}</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+}
+
+function aboutView() {
+  const names = DB.activeKeys.map((key) => DB.teams[key].name).join(", ");
+  return `<section class="hero"><div class="kicker">Prototype data model</div><h1>One Game, Many Pieces of Evidence</h1><p>This prototype loads canonical games from generated program files. Source rows, corrections, and disagreements remain evidence behind each canonical game rather than becoming duplicate games.</p></section><div class="panel" style="padding:20px"><div class="data-note"><b>Published:</b> ${esc(names)}.</div><div class="data-note"><b>Records:</b> on-court outcomes by default; administrative adjustments remain separately labeled.</div><div class="data-note"><b>Opponent grouping:</b> current D1 teams use their ${esc(formatSeason(DB.referenceSeason))} conference; everyone else is Non-D1 / Historical.</div><div class="data-note"><b>Expansion model:</b> enabling another public program in generated data adds it without school-specific interface code.</div></div>`;
+}
+
+function render() {
+  const route = (location.hash || "#home").slice(1).split("/");
+  const app = document.getElementById("app");
+  if (route[0] === "team" && ACTIVE.has(route[1])) {
+    app.innerHTML = teamView(route[1]);
+    setTimeout(() => updateTeamGames(route[1]), 0);
+  } else if (route[0] === "matchup" && ACTIVE.has(route[1]) && ACTIVE.has(route[2])) {
+    app.innerHTML = matchupView(route[1], route[2]);
+  } else if (route[0] === "about") {
+    app.innerHTML = aboutView();
+  } else {
+    app.innerHTML = homeView();
+  }
+  window.scrollTo(0, 0);
+}
+
+function bindSearch() {
+  const search = document.getElementById("globalSearch");
+  const results = document.getElementById("searchResults");
+  search.addEventListener("input", () => {
+    const query = search.value.toLowerCase().trim();
+    if (!query) {
+      results.style.display = "none";
+      return;
+    }
+    const hits = DB.programs
+      .filter((program) => `${program.name} ${program.display} ${program.nickname} ${program.conference} ${program.location}`.toLowerCase().includes(query))
+      .slice(0, 12);
+    results.innerHTML = hits.map((program) => `<div class="search-result ${program.enabled ? "enabled" : "disabled"}" ${program.enabled ? `onclick="goTeam('${program.key}');document.getElementById('globalSearch').value='';document.getElementById('searchResults').style.display='none'"` : ""}><span><b>${esc(program.name)}</b><br><small>${esc(program.nickname)} · ${esc(program.conference)}</small></span><span>${program.enabled ? "Open" : "Not indexed"}</span></div>`).join("");
+    results.style.display = hits.length ? "block" : "none";
+  });
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".searchbox")) results.style.display = "none";
+  });
+}
+
+async function boot() {
+  const app = document.getElementById("app");
+  app.innerHTML = '<div class="empty"><b>Loading college basketball history…</b></div>';
+  try {
+    await loadData();
+    updateChrome();
+    bindSearch();
+    window.addEventListener("hashchange", render);
+    render();
+  } catch (error) {
+    console.error(error);
+    app.innerHTML = `<div class="notice"><b>The site data could not be loaded.</b><br>${esc(error.message)}<br><br>Open this page through the local web server, not as a file from disk.</div>`;
+  }
+}
+
+boot();
+</script></body></html>
