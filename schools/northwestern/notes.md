@@ -40,7 +40,8 @@ Public postseason round rules are therefore:
 Primary home chronology retained from the earlier curation:
 - Old Patton Gymnasium — before the 1940 Patton Gymnasium transition
 - Patton Gymnasium — 1940 until Welsh-Ryan opened
-- Welsh-Ryan Arena — first game Dec. 6, 1952 through present
+- Welsh-Ryan Arena — first game Dec. 6, 1952 through present, except for the 2017-18 season
+- Allstate Arena - All home games during the 2017-18 season (located in Rosemont, IL)
 
 Exact game-level source evidence overrides venue chronology.
 
