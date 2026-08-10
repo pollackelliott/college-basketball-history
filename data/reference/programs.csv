@@ -1,366 +1,366 @@
-program_key,program_name,display_name,nickname,city,state,primary_hex,secondary_hex,current_d1,public_page_enabled
-abilene-christian,Abilene Christian,Abilene Christian,Wildcats,Abilene,TX,#4F2170,#FFFFFF,Yes,No
-air-force,Air Force,Air Force,Falcons,Colorado Springs,CO,#003087,#8A8D8F,Yes,No
-akron,Akron,Akron,Zips,Akron,OH,#041E42,#A89968,Yes,No
-alabama,Alabama,Alabama,Crimson Tide,Tuscaloosa,AL,#9E1B32,#FFFFFF,Yes,No
-alabama-a-m,Alabama A&M,Alabama A&M,Bulldogs,Huntsville,AL,#660000,#FFFFFF,Yes,No
-alabama-state,Alabama State,Alabama State,Hornets,Montgomery,AL,#C99700,#000000,Yes,No
-alcorn-state,Alcorn State,Alcorn State,Braves,Lorman,MS,#4B306A,#C38300,Yes,No
-american-university,American University,American,Eagles,Washington,DC,#143D8D,#C41230,Yes,No
-app-state,App State,Appalachian State,Mountaineers,Boone,NC,#222222,#FFCC00,Yes,No
-arizona,Arizona,Arizona,Wildcats,Tucson,AZ,#CC0033,#003366,Yes,No
-arizona-state,Arizona State,Arizona State,Sun Devils,Tempe,AZ,#8C1340,#FFC627,Yes,No
-arkansas,Arkansas,Arkansas,Razorbacks,Fayetteville,AR,#9D2235,#FFFFFF,Yes,Yes
-arkansas-pine-bluff,Arkansas-Pine Bluff,UAPB,Golden Lions,Pine Bluff,AR,#EEB310,#000000,Yes,No
-arkansas-state,Arkansas State,Arkansas State,Red Wolves,Jonesboro,AR,#CC092F,#000000,Yes,No
-army,Army,Army,Black Knights,West Point,NY,#D4BF91,#000000,Yes,No
-auburn,Auburn,Auburn,Tigers,Auburn,AL,#0C2340,#E87722,Yes,No
-austin-peay,Austin Peay,Austin Peay,Governors,Clarksville,TN,#C41E3A,#FFFFFF,Yes,No
-ball-state,Ball State,Ball State,Cardinals,Muncie,IN,#BA0C2F,#000000,Yes,No
-baylor,Baylor,Baylor,Bears,Waco,TX,#154734,#FFB81C,Yes,No
-bellarmine,Bellarmine,Bellarmine,Knights,Louisville,KY,#752936,#C8C8C8,Yes,No
-belmont,Belmont,Belmont,Bruins,Nashville,TN,#C8102E,#00205B,Yes,No
-bethune-cookman,Bethune-Cookman,Bethune-Cookman,Wildcats,Daytona Beach,FL,#6F263D,#F2A900,Yes,No
-binghamton,Binghamton,Binghamton,Bearcats,Binghamton,NY,#005A43,#000000,Yes,No
-boise-state,Boise State,Boise State,Broncos,Boise,ID,#0033A0,#D64309,Yes,No
-boston-college,Boston College,Boston College,Eagles,Chestnut Hill,MA,#98002E,#BC9B61,Yes,No
-boston-university,Boston University,Boston University,Terriers,Boston,MA,#A3011B,#FFFFFF,Yes,No
-bowling-green,Bowling Green,Bowling Green,Falcons,Bowling Green,OH,#F35000,#4F2C1D,Yes,No
-bradley,Bradley,Bradley,Braves,Peoria,IL,#A50000,#FFFFFF,Yes,No
-brown,Brown,Brown,Bears,Providence,RI,#4E3629,#E4002B,Yes,No
-bryant,Bryant,Bryant,Bulldogs,Smithfield,RI,#B4975B,#000000,Yes,No
-bucknell,Bucknell,Bucknell,Bison,Lewisburg,PA,#E87722,#003865,Yes,No
-buffalo,Buffalo,Buffalo,Bulls,Buffalo,NY,#005BBB,#FFFFFF,Yes,No
-butler,Butler,Butler,Bulldogs,Indianapolis,IN,#13294B,#FFFFFF,Yes,No
-byu,BYU,BYU,Cougars,Provo,UT,#0062B8,#FFFFFF,Yes,No
-cal-poly,Cal Poly,Cal Poly,Mustangs,San Luis Obispo,CA,#003831,#FFE395,Yes,No
-cal-state-bakersfield,Cal State Bakersfield,Cal State Bakersfield,Roadrunners,Bakersfield,CA,#003594,#FFC72C,Yes,No
-cal-state-fullerton,Cal State Fullerton,Cal State Fullerton,Titans,Fullerton,CA,#00274C,#DC8218,Yes,No
-cal-state-northridge,Cal State Northridge,CSUN,Matadors,Northridge,CA,#CE1126,#D1C3C6,Yes,No
-california,California,California,Golden Bears,Berkeley,CA,#003262,#FDB515,Yes,No
-california-baptist,California Baptist,Cal Baptist,Lancers,Riverside,CA,#002554,#A37400,Yes,No
-campbell,Campbell,Campbell,Fighting Camels,Buies Creek,NC,#F58025,#000000,Yes,No
-canisius,Canisius,Canisius,Golden Griffins,Buffalo,NY,#0C2340,#FFBA00,Yes,No
-central-arkansas,Central Arkansas,Central Arkansas,Bears,Conway,AR,#4F2D7F,#818A8F,Yes,No
-central-connecticut,Central Connecticut,Central Connecticut,Blue Devils,New Britain,CT,#00539B,#FFFFFF,Yes,No
-central-michigan,Central Michigan,Central Michigan,Chippewas,Mount Pleasant,MI,#6A0032,#FFC82E,Yes,No
-charleston,Charleston,Charleston,Cougars,Charleston,SC,#800000,#9D8958,Yes,No
-charleston-southern,Charleston Southern,Charleston Southern,Buccaneers,Charleston,SC,#A89963,#002855,Yes,No
-charlotte,Charlotte,Charlotte,49ers,Charlotte,NC,#046A38,#B9975B,Yes,No
-chattanooga,Chattanooga,Chattanooga,Mocs,Chattanooga,TN,#00386B,#E0AA0F,Yes,No
-chicago-state,Chicago State,Chicago State,Cougars,Chicago,IL,#006666,#FFFFFF,Yes,No
-cincinnati,Cincinnati,Cincinnati,Bearcats,Cincinnati,OH,#E00122,#000000,Yes,No
-clemson,Clemson,Clemson,Tigers,Clemson,SC,#F56600,#522D80,Yes,No
-cleveland-state,Cleveland State,Cleveland State,Vikings,Cleveland,OH,#006747,#FFFFFF,Yes,No
-coastal-carolina,Coastal Carolina,Coastal Carolina,Chanticleers,Conway,SC,#006F71,#A27752,Yes,No
-colgate,Colgate,Colgate,Raiders,Hamilton,NY,#821019,#FFFFFF,Yes,No
-colorado,Colorado,Colorado,Buffaloes,Boulder,CO,#CFB87C,#000000,Yes,No
-colorado-state,Colorado State,Colorado State,Rams,Fort Collins,CO,#1E4D2B,#C8C372,Yes,No
-columbia,Columbia,Columbia,Lions,New York,NY,#9BCBEB,#003865,Yes,No
-coppin-state,Coppin State,Coppin State,Eagles,Baltimore,MD,#003056,#FFC915,Yes,No
-cornell,Cornell,Cornell,Big Red,Ithaca,NY,#B31B1B,#FFFFFF,Yes,No
-creighton,Creighton,Creighton,Bluejays,Omaha,NE,#005CA9,#FFFFFF,Yes,No
-dartmouth,Dartmouth,Dartmouth,Big Green,Hanover,NH,#046A38,#FFFFFF,Yes,No
-davidson,Davidson,Davidson,Wildcats,Davidson,NC,#AC1A2F,#000000,Yes,No
-dayton,Dayton,Dayton,Flyers,Dayton,OH,#CE1141,#004B8D,Yes,No
-delaware,Delaware,Delaware,Fightin' Blue Hens,Newark,DE,#00539F,#FFDD31,Yes,No
-delaware-state,Delaware State,Delaware State,Hornets,Dover,DE,#EE3124,#72CDF4,Yes,No
-denver,Denver,Denver,Pioneers,Denver,CO,#8B2332,#8B6F4B,Yes,No
-depaul,DePaul,DePaul,Blue Demons,Chicago,IL,#005EB8,#E4002B,Yes,No
-detroit-mercy,Detroit Mercy,Detroit Mercy,Titans,Detroit,MI,#A6093D,#002D72,Yes,No
-drake,Drake,Drake,Bulldogs,Des Moines,IA,#004477,#999999,Yes,No
-drexel,Drexel,Drexel,Dragons,Philadelphia,PA,#00437B,#FFDA02,Yes,No
-duke,Duke,Duke,Blue Devils,Durham,NC,#003087,#FFFFFF,Yes,No
-duquesne,Duquesne,Duquesne,Dukes,Pittsburgh,PA,#041E42,#BA0C2F,Yes,No
-east-carolina,East Carolina,East Carolina,Pirates,Greenville,NC,#592A8A,#FDC82F,Yes,No
-east-tennessee-state,East Tennessee State,East Tennessee State,Buccaneers,Johnson City,TN,#041E42,#FFC72C,Yes,No
-east-texas-a-m,East Texas A&M,East Texas A&M,Lions,Commerce,TX,#00386C,#FFC333,Yes,No
-eastern-illinois,Eastern Illinois,Eastern Illinois,Panthers,Charleston,IL,#004B83,#919295,Yes,No
-eastern-kentucky,Eastern Kentucky,Eastern Kentucky,Colonels,Richmond,KY,#8A0039,#FFFFFF,Yes,No
-eastern-michigan,Eastern Michigan,Eastern Michigan,Eagles,Ypsilanti,MI,#006633,#FFFFFF,Yes,No
-eastern-washington,Eastern Washington,Eastern Washington,Eagles,Cheney,WA,#A10022,#000000,Yes,No
-elon,Elon,Elon,Phoenix,Elon,NC,#73000A,#B59A57,Yes,No
-evansville,Evansville,Evansville,Purple Aces,Evansville,IN,#52237F,#F36F21,Yes,No
-fairfield,Fairfield,Fairfield,Stags,Fairfield,CT,#C8102E,#A2AAAD,Yes,No
-fairleigh-dickinson,Fairleigh Dickinson,Fairleigh Dickinson,Knights,Hackensack,NJ,#283341,#72293C,Yes,No
-florida,Florida,Florida,Gators,Gainesville,FL,#0021A5,#FA4616,Yes,Yes
-florida-a-m,Florida A&M,Florida A&M,Rattlers,Tallahassee,FL,#EE7624,#1B5633,Yes,No
-florida-atlantic,Florida Atlantic,FAU,Owls,Boca Raton,FL,#003366,#CC0000,Yes,No
-florida-gulf-coast,Florida Gulf Coast,Florida Gulf Coast,Eagles,Fort Myers,FL,#002D72,#007749,Yes,No
-florida-international,Florida International,FIU,Panthers,Miami,FL,#081E3F,#B6862C,Yes,No
-florida-state,Florida State,Florida State,Seminoles,Tallahassee,FL,#782F40,#CEB888,Yes,No
-fordham,Fordham,Fordham,Rams,Bronx,NY,#860038,#FFFFFF,Yes,No
-fresno-state,Fresno State,Fresno State,Bulldogs,Fresno,CA,#DB0032,#002E6D,Yes,No
-furman,Furman,Furman,Paladins,Greenville,SC,#201547,#A7A8AA,Yes,No
-gardner-webb,Gardner-Webb,Gardner-Webb,Runnin' Bulldogs,Boiling Springs,NC,#BF2F37,#000000,Yes,No
-george-mason,George Mason,George Mason,Patriots,Fairfax,VA,#006633,#FFCC33,Yes,No
-george-washington,George Washington,George Washington,Revolutionaries,Washington,DC,#E2CB92,#002654,Yes,No
-georgetown,Georgetown,Georgetown,Hoyas,Washington,DC,#041E42,#8D817B,Yes,No
-georgia,Georgia,Georgia,Bulldogs,Athens,GA,#BA0C2F,#000000,Yes,No
-georgia-southern,Georgia Southern,Georgia Southern,Eagles,Statesboro,GA,#011E41,#87714D,Yes,No
-georgia-state,Georgia State,Georgia State,Panthers,Atlanta,GA,#0039A6,#D96A6A,Yes,No
-georgia-tech,Georgia Tech,Georgia Tech,Yellow Jackets,Atlanta,GA,#B3A369,#003057,Yes,No
-gonzaga,Gonzaga,Gonzaga,Bulldogs,Spokane,WA,#041E42,#C8102E,Yes,No
-grambling,Grambling,Grambling,Tigers,Grambling,LA,#000000,#EAA921,Yes,No
-grand-canyon,Grand Canyon,Grand Canyon,Antelopes,Phoenix,AZ,#522398,#000000,Yes,No
-green-bay,Green Bay,Green Bay,Phoenix,Ashwaubenon,WI,#006747,#FFFFFF,Yes,No
-hampton,Hampton,Hampton,Pirates,Hampton,VA,#0060A9,#FFFFFF,Yes,No
-harvard,Harvard,Harvard,Crimson,Cambridge,MA,#A41034,#FFFFFF,Yes,No
-hawai-i,Hawai'i,Hawai'i,Rainbow Warriors,Honolulu,HI,#024731,#C8C8C8,Yes,No
-high-point,High Point,High Point,Panthers,High Point,NC,#330072,#FFFFFF,Yes,No
-hofstra,Hofstra,Hofstra,Pride,Hempstead,NY,#0B1E73,#FEB612,Yes,No
-holy-cross,Holy Cross,Holy Cross,Crusaders,Worcester,MA,#602D89,#FFFFFF,Yes,No
-houston,Houston,Houston,Cougars,Houston,TX,#C8102E,#B4B2B4,Yes,No
-houston-christian,Houston Christian,Houston Christian,Huskies,Houston,TX,#1C439D,#F3652C,Yes,No
-howard,Howard,Howard,Bison,Washington,DC,#003A63,#E51937,Yes,No
-idaho,Idaho,Idaho,Vandals,Moscow,ID,#B3A369,#000000,Yes,No
-idaho-state,Idaho State,Idaho State,Bengals,Pocatello,ID,#FF671F,#000000,Yes,No
-illinois,Illinois,Illinois,Fighting Illini,Champaign,IL,#E84A27,#13294B,Yes,Yes
-illinois-state,Illinois State,Illinois State,Redbirds,Normal,IL,#CE1126,#FFFFFF,Yes,No
-incarnate-word,Incarnate Word,Incarnate Word,Cardinals,San Antonio,TX,#CB333B,#000000,Yes,No
-indiana,Indiana,Indiana,Hoosiers,Bloomington,IN,#960009,#EEEDEB,Yes,No
-indiana-state,Indiana State,Indiana State,Sycamores,Terre Haute,IN,#0142BC,#FFFFFF,Yes,No
-iona,Iona,Iona,Gaels,New Rochelle,NY,#6F2C3F,#F2A900,Yes,No
-iowa,Iowa,Iowa,Hawkeyes,Iowa City,IA,#FFCD00,#000000,Yes,No
-iowa-state,Iowa State,Iowa State,Cyclones,Ames,IA,#C8102E,#F1BE48,Yes,No
-iu-indianapolis,IU Indianapolis,IU Indy,Jaguars,Indianapolis,IN,#9D2235,#DFD1A7,Yes,No
-jackson-state,Jackson State,Jackson State,Tigers,Jackson,MS,#002147,#FFFFFF,Yes,No
-jacksonville,Jacksonville,Jacksonville,Dolphins,Jacksonville,FL,#004E44,#898A8D,Yes,No
-jacksonville-state,Jacksonville State,Jacksonville State,Gamecocks,Jacksonville,AL,#CC0000,#000000,Yes,No
-james-madison,James Madison,James Madison,Dukes,Harrisonburg,VA,#450084,#CBB677,Yes,No
-kansas,Kansas,Kansas,Jayhawks,Lawrence,KS,#0051BA,#E8000D,Yes,Yes
-kansas-city,Kansas City,Kansas City,Roos,Kansas City,MO,#005293,#FECB00,Yes,No
-kansas-state,Kansas State,Kansas State,Wildcats,Manhattan,KS,#512888,#D1D1D1,Yes,No
-kennesaw-state,Kennesaw State,Kennesaw State,Owls,Kennesaw,GA,#FDBB30,#000000,Yes,No
-kent-state,Kent State,Kent State,Golden Flashes,Kent,OH,#002664,#EAAB00,Yes,No
-kentucky,Kentucky,Kentucky,Wildcats,Lexington,KY,#0033A0,#FFFFFF,Yes,Yes
-la-salle,La Salle,La Salle,Explorers,Philadelphia,PA,#FFCC00,#003366,Yes,No
-lafayette,Lafayette,Lafayette,Leopards,Easton,PA,#A89963,#98002E,Yes,No
-lamar,Lamar,Lamar,Cardinals,Beaumont,TX,#DC0032,#FFFFFF,Yes,No
-le-moyne,Le Moyne,Le Moyne,Dolphins,Syracuse,NY,#00452A,#FCE300,Yes,No
-lehigh,Lehigh,Lehigh,Mountain Hawks,Bethlehem,PA,#653600,#FFD24F,Yes,No
-liberty,Liberty,Liberty,Flames,Lynchburg,VA,#002D62,#C41230,Yes,No
-lindenwood,Lindenwood,Lindenwood,Lions,Saint Charles,MO,#B5A36A,#000000,Yes,No
-lipscomb,Lipscomb,Lipscomb,Bisons,Nashville,TN,#331E54,#F4AA00,Yes,No
-little-rock,Little Rock,Little Rock,Trojans,Little Rock,AR,#6E2639,#A7A9AC,Yes,No
-long-beach-state,Long Beach State,Long Beach State,Beach,Long Beach,CA,#FFC72A,#000000,Yes,No
-long-island-university,Long Island University,LIU,Sharks,Brooklyn,NY,#69B3E7,#FFC72C,Yes,No
-longwood,Longwood,Longwood,Lancers,Farmville,VA,#15213B,#999D93,Yes,No
-louisiana,Louisiana,Louisiana,Ragin' Cajuns,Lafayette,LA,#CE1813,#FFFFFF,Yes,No
-louisiana-tech,Louisiana Tech,Louisiana Tech,Bulldogs,Ruston,LA,#002F8B,#F31B23,Yes,No
-louisville,Louisville,Louisville,Cardinals,Louisville,KY,#AD0000,#000000,Yes,No
-loyola-chicago,Loyola Chicago,Loyola Chicago,Ramblers,Chicago,IL,#922247,#FEBD18,Yes,No
-loyola-maryland,Loyola Maryland,Loyola Maryland,Greyhounds,Baltimore,MD,#006943,#CACAC8,Yes,No
-loyola-marymount,Loyola Marymount,Loyola Marymount,Lions,Los Angeles,CA,#0076A5,#AB0C2F,Yes,No
-lsu,LSU,LSU,Tigers,Baton Rouge,LA,#461D7C,#FDD023,Yes,No
-maine,Maine,Maine,Black Bears,Orono,ME,#003263,#B0D7FF,Yes,No
-manhattan,Manhattan,Manhattan,Jaspers,Riverdale,NY,#00703C,#FFFFFF,Yes,No
-marist,Marist,Marist,Red Foxes,Poughkeepsie,NY,#C8102E,#B2B2B2,Yes,No
-marquette,Marquette,Marquette,Golden Eagles,Milwaukee,WI,#003366,#FFCC00,Yes,No
-marshall,Marshall,Marshall,Thundering Herd,Huntington,WV,#00B140,#FFFFFF,Yes,No
-maryland,Maryland,Maryland,Terrapins,College Park,MD,#E03A3E,#FFD520,Yes,No
-maryland-eastern-shore,Maryland Eastern Shore,UMES,Hawks,Princess Anne,MD,#862633,#888B8D,Yes,No
-massachusetts,Massachusetts,Massachusetts,Minutemen,Amherst,MA,#572932,#FFFFFF,Yes,No
-mcneese,McNeese,McNeese,Cowboys,Lake Charles,LA,#00529B,#FFD204,Yes,No
-memphis,Memphis,Memphis,Tigers,Memphis,TN,#003087,#898D8D,Yes,No
-mercer,Mercer,Mercer,Bears,Macon,GA,#F76800,#000000,Yes,No
-mercyhurst,Mercyhurst,Mercyhurst,Lakers,Erie,PA,#07594D,#182752,Yes,No
-merrimack,Merrimack,Merrimack,Warriors,North Andover,MA,#003768,#FDB813,Yes,No
-miami,Miami (FL),Miami (FL),Hurricanes,Coral Gables,FL,#005030,#F47321,Yes,No
-miami-oh,Miami (OH),Miami (OH),RedHawks,Oxford,OH,#B61E2E,#FFFFFF,Yes,No
-michigan,Michigan,Michigan,Wolverines,Ann Arbor,MI,#00274C,#FFCB05,Yes,No
-michigan-state,Michigan State,Michigan State,Spartans,East Lansing,MI,#18453B,#FFFFFF,Yes,No
-middle-tennessee,Middle Tennessee,Middle Tennessee,Blue Raiders,Murfreesboro,TN,#0066CC,#000000,Yes,No
-milwaukee,Milwaukee,Milwaukee,Panthers,Milwaukee,WI,#FFBD00,#000000,Yes,No
-minnesota,Minnesota,Minnesota,Golden Gophers,Minneapolis,MN,#7A0019,#FFCC33,Yes,No
-mississippi-state,Mississippi State,Mississippi State,Bulldogs,Starkville,MS,#660000,#FFFFFF,Yes,No
-mississippi-valley-state,Mississippi Valley State,Mississippi Valley State,Delta Devils,Itta Bena,MS,#00703C,#E51937,Yes,No
-missouri,Missouri,Mizzou,Tigers,Columbia,MO,#000000,#F1B82D,Yes,Yes
-missouri-state,Missouri State,Missouri State,Bears,Springfield,MO,#530009,#FFFFFF,Yes,No
-monmouth,Monmouth,Monmouth,Hawks,West Long Branch,NJ,#041E42,#FFFFFF,Yes,No
-montana,Montana,Montana,Grizzlies,Missoula,MT,#660033,#999999,Yes,No
-montana-state,Montana State,Montana State,Bobcats,Bozeman,MT,#00205B,#B9975B,Yes,No
-morehead-state,Morehead State,Morehead State,Eagles,Morehead,KY,#005EB8,#FFCF00,Yes,No
-morgan-state,Morgan State,Morgan State,Bears,Baltimore,MD,#1B4383,#F47937,Yes,No
-mount-st-mary-s,Mount St. Mary's,Mount St. Mary's,Mountaineers,Emmitsburg,MD,#002855,#84754E,Yes,No
-murray-state,Murray State,Murray State,Racers,Murray,KY,#ECAC00,#002144,Yes,No
-navy,Navy,Navy,Midshipmen,Annapolis,MD,#00205B,#C5B783,Yes,No
-nc-state,NC State,NC State,Wolfpack,Raleigh,NC,#CC0000,#FFFFFF,Yes,No
-nebraska,Nebraska,Nebraska,Cornhuskers,Lincoln,NE,#E41C38,#FFFFFF,Yes,No
-nevada,Nevada,Nevada,Wolf Pack,Reno,NV,#003366,#807F84,Yes,No
-new-hampshire,New Hampshire,New Hampshire,Wildcats,Durham,NH,#041E42,#BBBCBC,Yes,No
-new-haven,New Haven,New Haven,Chargers,West Haven,CT,#004B8D,#FFC423,Yes,No
-new-mexico,New Mexico,New Mexico,Lobos,Albuquerque,NM,#BA0C2F,#A7A8AA,Yes,No
-new-mexico-state,New Mexico State,New Mexico State,Aggies,Las Cruces,NM,#861F41,#97999B,Yes,No
-new-orleans,New Orleans,New Orleans,Privateers,New Orleans,LA,#005CA6,#A3A9AC,Yes,No
-niagara,Niagara,Niagara,Purple Eagles,Niagara Falls,NY,#582C83,#FFFFFF,Yes,No
-nicholls,Nicholls,Nicholls,Colonels,Thibodaux,LA,#AE132A,#72808A,Yes,No
-njit,NJIT,NJIT,Highlanders,Newark,NJ,#D22630,#071D49,Yes,No
-norfolk-state,Norfolk State,Norfolk State,Spartans,Norfolk,VA,#007A53,#F3D03E,Yes,No
-north-alabama,North Alabama,North Alabama,Lions,Florence,AL,#46166B,#DB9F11,Yes,No
-north-carolina,North Carolina,North Carolina,Tar Heels,Chapel Hill,NC,#7BAFD4,#FFFFFF,Yes,No
-north-carolina-a-t,North Carolina A&T,North Carolina A&T,Aggies,Greensboro,NC,#F3B237,#003D6D,Yes,No
-north-carolina-central,North Carolina Central,North Carolina Central,Eagles,Durham,NC,#880023,#8E9093,Yes,No
-north-dakota,North Dakota,North Dakota,Fighting Hawks,Grand Forks,ND,#009A44,#AAA3AD,Yes,No
-north-dakota-state,North Dakota State,North Dakota State,Bison,Fargo,ND,#0A5640,#FFC72A,Yes,No
-north-florida,North Florida,North Florida,Ospreys,Jacksonville,FL,#00246B,#D9D9D9,Yes,No
-north-texas,North Texas,North Texas,Mean Green,Denton,TX,#00853E,#000000,Yes,No
-northeastern,Northeastern,Northeastern,Huskies,Boston,MA,#D41B2C,#000000,Yes,No
-northern-arizona,Northern Arizona,Northern Arizona,Lumberjacks,Flagstaff,AZ,#003466,#FFD200,Yes,No
-northern-colorado,Northern Colorado,Northern Colorado,Bears,Greeley,CO,#013C65,#F6B000,Yes,No
-northern-illinois,Northern Illinois,Northern Illinois,Huskies,Dekalb,IL,#BA0C2F,#000000,Yes,No
-northern-iowa,Northern Iowa,Northern Iowa,Panthers,Cedar Falls,IA,#4B116F,#FFCC00,Yes,No
-northern-kentucky,Northern Kentucky,Northern Kentucky,Norse,Highland Heights,KY,#000000,#FFC72C,Yes,No
-northwestern,Northwestern,Northwestern,Wildcats,Evanston,IL,#4E2A84,#FFFFFF,Yes,Yes
-northwestern-state,Northwestern State,Northwestern State,Demons,Natchitoches,LA,#663399,#FF6600,Yes,No
-notre-dame,Notre Dame,Notre Dame,Fighting Irish,South Bend,IN,#0C2340,#C99700,Yes,No
-oakland,Oakland,Oakland,Golden Grizzlies,Rochester,MI,#B59A57,#000000,Yes,No
-ohio,Ohio,Ohio,Bobcats,Athens,OH,#00694E,#FFFFFF,Yes,No
-ohio-state,Ohio State,Ohio State,Buckeyes,Columbus,OH,#BB0000,#B1B7BC,Yes,No
-oklahoma,Oklahoma,Oklahoma,Sooners,Norman,OK,#841617,#FDF9D8,Yes,No
-oklahoma-state,Oklahoma State,Oklahoma State,Cowboys,Stillwater,OK,#FF7300,#000000,Yes,No
-old-dominion,Old Dominion,Old Dominion,Monarchs,Norfolk,VA,#003057,#7C878E,Yes,No
-ole-miss,Ole Miss,Ole Miss,Rebels,Oxford,MS,#14213D,#CE1126,Yes,No
-omaha,Omaha,Omaha,Mavericks,Omaha,NE,#000000,#D71920,Yes,No
-oral-roberts,Oral Roberts,Oral Roberts,Golden Eagles,Tulsa,OK,#002F60,#C5B783,Yes,No
-oregon,Oregon,Oregon,Ducks,Eugene,OR,#154733,#FEE123,Yes,No
-oregon-state,Oregon State,Oregon State,Beavers,Corvallis,OR,#DC4405,#000000,Yes,No
-pacific,Pacific,Pacific,Tigers,Stockton,CA,#E35205,#231F20,Yes,No
-penn-state,Penn State,Penn State,Nittany Lions,University Park,PA,#041E42,#FFFFFF,Yes,No
-pennsylvania,Pennsylvania,Penn,Quakers,Philadelphia,PA,#011F5B,#990000,Yes,No
-pepperdine,Pepperdine,Pepperdine,Waves,Malibu,CA,#00205C,#EE7624,Yes,No
-pittsburgh,Pittsburgh,Pittsburgh,Panthers,Pittsburgh,PA,#003594,#FFB81C,Yes,No
-portland,Portland,Portland,Pilots,Portland,OR,#320274,#FFFFFF,Yes,No
-portland-state,Portland State,Portland State,Vikings,Portland,OR,#154734,#FFFFFF,Yes,No
-prairie-view-a-m,Prairie View A&M,Prairie View A&M,Panthers,Prairie View,TX,#330066,#FFCC33,Yes,No
-presbyterian,Presbyterian,Presbyterian,Blue Hose,Clinton,SC,#0060A9,#FFFFFF,Yes,No
-princeton,Princeton,Princeton,Tigers,Princeton,NJ,#FF571F,#000000,Yes,No
-providence,Providence,Providence,Friars,Providence,RI,#000000,#8A8D8F,Yes,No
-purdue,Purdue,Purdue,Boilermakers,West Lafayette,IN,#CEB888,#000000,Yes,No
-purdue-fort-wayne,Purdue Fort Wayne,Purdue Fort Wayne,Mastodons,Fort Wayne,IN,#CFB991,#000000,Yes,No
-queens-university,Queens University,Queens,Royals,Charlotte,NC,#192C66,#857040,Yes,No
-quinnipiac,Quinnipiac,Quinnipiac,Bobcats,Hamden,CT,#0C2340,#FFB81C,Yes,No
-radford,Radford,Radford,Highlanders,Radford,VA,#C2011B,#D1D3D4,Yes,No
-rhode-island,Rhode Island,Rhode Island,Rams,Kingston,RI,#68ABE8,#002147,Yes,No
-rice,Rice,Rice,Owls,Houston,TX,#00205B,#C1C6C8,Yes,No
-richmond,Richmond,Richmond,Spiders,Richmond,VA,#000066,#990000,Yes,No
-rider,Rider,Rider,Broncs,Lawrenceville,NJ,#981E32,#6C6F70,Yes,No
-robert-morris,Robert Morris,Robert Morris,Colonials,Moon Township,PA,#14234B,#A6192E,Yes,No
-rutgers,Rutgers,Rutgers,Scarlet Knights,Piscataway,NJ,#CC0033,#FFFFFF,Yes,No
-sacramento-state,Sacramento State,Sacramento State,Hornets,Sacramento,CA,#043927,#C4B581,Yes,No
-sacred-heart,Sacred Heart,Sacred Heart,Pioneers,Fairfield,CT,#CE1141,#B1B3B6,Yes,No
-saint-joseph-s,Saint Joseph's,Saint Joseph's,Hawks,Philadelphia,PA,#931B32,#000000,Yes,No
-saint-louis,Saint Louis,Saint Louis,Billikens,St. Louis,MO,#003DA5,#C8C9C7,Yes,No
-saint-mary-s,Saint Mary's,Saint Mary's,Gaels,Moraga,CA,#D80024,#06315B,Yes,No
-saint-peter-s,Saint Peter's,Saint Peter's,Peacocks,Jersey City,NJ,#003C71,#A59C94,Yes,No
-sam-houston,Sam Houston,Sam Houston,Bearkats,Huntsville,TX,#FE5100,#FFFFFF,Yes,No
-samford,Samford,Samford,Bulldogs,Homewood,AL,#002649,#C4161D,Yes,No
-san-diego,San Diego,San Diego,Toreros,San Diego,CA,#002868,#84BCE8,Yes,No
-san-diego-state,San Diego State,San Diego State,Aztecs,San Diego,CA,#A6192E,#000000,Yes,No
-san-francisco,San Francisco,San Francisco,Dons,San Francisco,CA,#00543C,#FDBB30,Yes,No
-san-jose-state,San José State,San Jose State,Spartans,San Jose,CA,#0055A2,#E5A823,Yes,No
-santa-clara,Santa Clara,Santa Clara,Broncos,Santa Clara,CA,#862633,#FFFFFF,Yes,No
-se-louisiana,SE Louisiana,Southeastern Louisiana,Lions,Hammond,LA,#006341,#EAAA00,Yes,No
-seattle-u,Seattle U,Seattle U,Redhawks,Seattle,WA,#AA0000,#000000,Yes,No
-seton-hall,Seton Hall,Seton Hall,Pirates,Newark,NJ,#004488,#A2AAAD,Yes,No
-siena,Siena,Siena,Saints,Albany,NY,#006747,#FFC72C,Yes,No
-siu-edwardsville,SIU Edwardsville,SIUE,Cougars,Edwardsville,IL,#EF3829,#CFAA7A,Yes,No
-smu,SMU,SMU,Mustangs,Dallas,TX,#0033A0,#C8102E,Yes,No
-south-alabama,South Alabama,South Alabama,Jaguars,Mobile,AL,#00205B,#BF0D3E,Yes,No
-south-carolina,South Carolina,South Carolina,Gamecocks,Columbia,SC,#73000A,#000000,Yes,No
-south-carolina-state,South Carolina State,South Carolina State,Bulldogs,Orangeburg,SC,#862633,#001A72,Yes,No
-south-carolina-upstate,South Carolina Upstate,USC Upstate,Spartans,Spartanburg,SC,#00703C,#000000,Yes,No
-south-dakota,South Dakota,South Dakota,Coyotes,Vermillion,SD,#AD0000,#B4B4B4,Yes,No
-south-dakota-state,South Dakota State,South Dakota State,Jackrabbits,Brookings,SD,#0033A0,#FFD100,Yes,No
-south-florida,South Florida,South Florida,Bulls,Tampa,FL,#006747,#CFC493,Yes,No
-southeast-missouri-state,Southeast Missouri State,SEMO,Redhawks,Cape Girardeau,MO,#C8102E,#000000,Yes,No
-southern,Southern,Southern,Jaguars,Baton Rouge,LA,#58B6E7,#FFCE34,Yes,No
-southern-illinois,Southern Illinois,Southern Illinois,Salukis,Carbondale,IL,#720000,#000000,Yes,No
-southern-indiana,Southern Indiana,Southern Indiana,Screaming Eagles,Evansville,IN,#CF102D,#002D5D,Yes,No
-southern-miss,Southern Miss,Southern Miss,Golden Eagles,Hattiesburg,MS,#FFAB00,#000000,Yes,No
-southern-utah,Southern Utah,Southern Utah,Thunderbirds,Cedar City,UT,#C41425,#000000,Yes,No
-st-bonaventure,St. Bonaventure,St. Bonaventure,Bonnies,Saint Bonaventure,NY,#54261A,#BDB680,Yes,No
-st-john-s,St. John's,St. John's,Red Storm,New York,NY,#BA0C2F,#041C2C,Yes,No
-st-thomas-minnesota,St. Thomas-Minnesota,St. Thomas,Tommies,Saint Paul,MN,#510C76,#98999B,Yes,No
-stanford,Stanford,Stanford,Cardinal,Stanford,CA,#8C1515,#FFFFFF,Yes,No
-stephen-f-austin,Stephen F. Austin,Stephen F. Austin,Lumberjacks,Nacogdoches,TX,#613393,#FFFFFF,Yes,No
-stetson,Stetson,Stetson,Hatters,DeLand,FL,#00523E,#FFFFFF,Yes,No
-stonehill,Stonehill,Stonehill,Skyhawks,South Easton,MA,#2F2975,#FFFFFF,Yes,No
-stony-brook,Stony Brook,Stony Brook,Seawolves,Stony Brook,NY,#990000,#16243E,Yes,No
-syracuse,Syracuse,Syracuse,Orange,Syracuse,NY,#F76900,#000354,Yes,No
-tarleton-state,Tarleton State,Tarleton,Texans,Stephenville,TX,#4F2D7F,#FFFFFF,Yes,No
-tcu,TCU,TCU,Horned Frogs,Fort Worth,TX,#4D1979,#FFFFFF,Yes,No
-temple,Temple,Temple,Owls,Philadelphia,PA,#9D2235,#8A8D8F,Yes,No
-tennessee,Tennessee,Tennessee,Volunteers,Knoxville,TN,#FF8200,#FFFFFF,Yes,No
-tennessee-state,Tennessee State,Tennessee State,Tigers,Nashville,TN,#00539F,#FFFFFF,Yes,No
-tennessee-tech,Tennessee Tech,Tennessee Tech,Golden Eagles,Cookeville,TN,#4F2984,#FFDD00,Yes,No
-texas,Texas,Texas,Longhorns,Austin,TX,#BF5700,#FFFFFF,Yes,No
-texas-a-m,Texas A&M,Texas A&M,Aggies,College Station,TX,#500000,#FFFFFF,Yes,No
-texas-a-m-corpus-christi,Texas A&M-Corpus Christi,TAMUCC,Islanders,Corpus Christi,TX,#0067C5,#FFFFFF,Yes,No
-texas-southern,Texas Southern,Texas Southern,Tigers,Houston,TX,#7C183E,#9DA6AB,Yes,No
-texas-state,Texas State,Texas State,Bobcats,San Marcos,TX,#501214,#8D734A,Yes,No
-texas-tech,Texas Tech,Texas Tech,Red Raiders,Lubbock,TX,#000000,#CC0000,Yes,No
-the-citadel,The Citadel,The Citadel,Bulldogs,Charleston,SC,#3975B7,#FFFFFF,Yes,No
-toledo,Toledo,Toledo,Rockets,Toledo,OH,#15397F,#FFDA00,Yes,No
-towson,Towson,Towson,Tigers,Towson,MD,#FFBB00,#3C3C3C,Yes,No
-troy,Troy,Troy,Trojans,Troy,AL,#8A2432,#B3B5B8,Yes,No
-tulane,Tulane,Tulane,Green Wave,New Orleans,LA,#006747,#418FDE,Yes,No
-tulsa,Tulsa,Tulsa,Golden Hurricane,Tulsa,OK,#002D72,#C5B783,Yes,No
-uab,UAB,UAB,Blazers,Birmingham,AL,#006341,#CC8A00,Yes,No
-ualbany,UAlbany,Albany,Great Danes,Albany,NY,#461660,#EEB211,Yes,No
-uc-davis,UC Davis,UC Davis,Aggies,Davis,CA,#002855,#B3A369,Yes,No
-uc-irvine,UC Irvine,UC Irvine,Anteaters,Irvine,CA,#0C2340,#FFC72C,Yes,No
-uc-riverside,UC Riverside,UC Riverside,Highlanders,Riverside,CA,#2D6CC0,#F1AB00,Yes,No
-uc-san-diego,UC San Diego,UC San Diego,Tritons,San Diego,CA,#182B49,#FFCD00,Yes,No
-uc-santa-barbara,UC Santa Barbara,UC Santa Barbara,Gauchos,Santa Barbara,CA,#003660,#F3BC11,Yes,No
-ucf,UCF,UCF,Knights,Orlando,FL,#BA9B37,#000000,Yes,No
-ucla,UCLA,UCLA,Bruins,Los Angeles,CA,#2D68C4,#F2A900,Yes,No
-uconn,UConn,Connecticut,Huskies,Storrs,CT,#000E2F,#FFFFFF,Yes,No
-uic,UIC,UIC,Flames,Chicago,IL,#AC1E2D,#041E42,Yes,No
-ul-monroe,UL Monroe,Louisiana-Monroe,Warhawks,Monroe,LA,#840029,#FDB913,Yes,No
-umass-lowell,UMass Lowell,UMass Lowell,River Hawks,Lowell,MA,#003DA5,#C8102E,Yes,No
-umbc,UMBC,UMBC,Retrievers,Baltimore,MD,#B18906,#000000,Yes,No
-unc-asheville,UNC Asheville,UNC Asheville,Bulldogs,Asheville,NC,#003DA5,#FFFFFF,Yes,No
-unc-greensboro,UNC Greensboro,UNC Greensboro,Spartans,Greensboro,NC,#0F2044,#FFB71B,Yes,No
-unc-wilmington,UNC Wilmington,UNC Wilmington,Seahawks,Wilmington,NC,#006666,#003366,Yes,No
-unlv,UNLV,UNLV,Rebels,Las Vegas,NV,#CF0A2C,#CAC8C8,Yes,No
-usc,USC,USC,Trojans,Los Angeles,CA,#990000,#FFC72C,Yes,No
-ut-arlington,UT Arlington,UT Arlington,Mavericks,Arlington,TX,#F58025,#0064B1,Yes,No
-ut-martin,UT Martin,UT Martin,Skyhawks,Martin,TN,#F79728,#002A5B,Yes,No
-ut-rio-grande-valley,UT Rio Grande Valley,UTRGV,Vaqueros,Edinburg,TX,#FFA300,#00843D,Yes,No
-utah,Utah,Utah,Utes,Salt Lake City,UT,#BE0000,#FFFFFF,Yes,No
-utah-state,Utah State,Utah State,Aggies,Logan,UT,#00263A,#8A8D8F,Yes,No
-utah-tech,Utah Tech,Utah Tech,Trailblazers,St. George,UT,#BA1C21,#0C233F,Yes,No
-utah-valley,Utah Valley,Utah Valley,Wolverines,Orem,UT,#275D38,#838C89,Yes,No
-utep,UTEP,UTEP,Miners,El Paso,TX,#FF8200,#041E42,Yes,No
-utsa,UTSA,UTSA,Roadrunners,San Antonio,TX,#F15A22,#0C2340,Yes,No
-valparaiso,Valparaiso,Valparaiso,Beacons,Valparaiso,IN,#381E0E,#FFCC00,Yes,No
-vanderbilt,Vanderbilt,Vanderbilt,Commodores,Nashville,TN,#866D4B,#000000,Yes,No
-vcu,VCU,VCU,Rams,Richmond,VA,#FFB300,#000000,Yes,No
-vermont,Vermont,Vermont,Catamounts,Burlington,VT,#154734,#FFC72C,Yes,No
-villanova,Villanova,Villanova,Wildcats,Villanova,PA,#00205B,#13B5EA,Yes,No
-virginia,Virginia,Virginia,Cavaliers,Charlottesville,VA,#232D4B,#F84C1E,Yes,No
-virginia-tech,Virginia Tech,Virginia Tech,Hokies,Blacksburg,VA,#630031,#CF4420,Yes,No
-vmi,VMI,VMI,Keydets,Lexington,VA,#A71F23,#FFD520,Yes,No
-wagner,Wagner,Wagner,Seahawks,Staten Island,NY,#00483A,#B9BBBD,Yes,No
-wake-forest,Wake Forest,Wake Forest,Demon Deacons,Winston-Salem,NC,#937E38,#000000,Yes,No
-washington,Washington,Washington,Huskies,Seattle,WA,#4B2E83,#B7A57A,Yes,No
-washington-state,Washington State,Washington State,Cougars,Pullman,WA,#981E32,#5E6A71,Yes,No
-weber-state,Weber State,Weber State,Wildcats,Ogden,UT,#4B2672,#A1A1A4,Yes,No
-west-florida,West Florida,West Florida,Argonauts,Pensacola,FL,#00205B,#00a346,Yes,No
-west-georgia,West Georgia,West Georgia,Wolves,Carrollton,GA,#0656A5,#E84A4F,Yes,No
-west-virginia,West Virginia,West Virginia,Mountaineers,Morgantown,WV,#002855,#FAAA00,Yes,No
-western-carolina,Western Carolina,Western Carolina,Catamounts,Cullowhee,NC,#592C88,#C1A875,Yes,No
-western-illinois,Western Illinois,Western Illinois,Leathernecks,Macomb,IL,#663399,#FFCC00,Yes,No
-western-kentucky,Western Kentucky,Western Kentucky,Hilltoppers,Bowling Green,KY,#C60C30,#000000,Yes,No
-western-michigan,Western Michigan,Western Michigan,Broncos,Kalamazoo,MI,#6C4023,#B5A167,Yes,No
-wichita-state,Wichita State,Wichita State,Shockers,Wichita,KS,#FFCD00,#000000,Yes,No
-william-mary,William & Mary,William & Mary,Tribe,Williamsburg,VA,#115740,#F0B323,Yes,No
-winthrop,Winthrop,Winthrop,Eagles,Rock Hill,SC,#660000,#F0B323,Yes,No
-wisconsin,Wisconsin,Wisconsin,Badgers,Madison,WI,#C5050C,#FFFFFF,Yes,No
-wofford,Wofford,Wofford,Terriers,Spartanburg,SC,#88634C,#000000,Yes,No
-wright-state,Wright State,Wright State,Raiders,Dayton,OH,#026937,#CEA052,Yes,No
-wyoming,Wyoming,Wyoming,Cowboys,Laramie,WY,#FFC425,#492F24,Yes,No
-xavier,Xavier,Xavier,Musketeers,Cincinnati,OH,#0C2340,#93A2A2,Yes,No
-yale,Yale,Yale,Bulldogs,New Haven,CT,#00356B,#FFFFFF,Yes,No
-youngstown-state,Youngstown State,Youngstown State,Penguins,Youngstown,OH,#C8102E,#FFFFFF,Yes,No
+program_key,program_name,display_name,nickname,city,state,primary_hex,secondary_hex,current_d1,public_page_enabled,conference_regular_season_championships,conference_tournament_championships,final_four_appearances,national_championships
+abilene-christian,Abilene Christian,Abilene Christian,Wildcats,Abilene,TX,#4F2170,#FFFFFF,Yes,No,,,,
+air-force,Air Force,Air Force,Falcons,Colorado Springs,CO,#003087,#8A8D8F,Yes,No,,,,
+akron,Akron,Akron,Zips,Akron,OH,#041E42,#A89968,Yes,No,,,,
+alabama,Alabama,Alabama,Crimson Tide,Tuscaloosa,AL,#9E1B32,#FFFFFF,Yes,No,,,,
+alabama-a-m,Alabama A&M,Alabama A&M,Bulldogs,Huntsville,AL,#660000,#FFFFFF,Yes,No,,,,
+alabama-state,Alabama State,Alabama State,Hornets,Montgomery,AL,#C99700,#000000,Yes,No,,,,
+alcorn-state,Alcorn State,Alcorn State,Braves,Lorman,MS,#4B306A,#C38300,Yes,No,,,,
+american-university,American University,American,Eagles,Washington,DC,#143D8D,#C41230,Yes,No,,,,
+app-state,App State,Appalachian State,Mountaineers,Boone,NC,#222222,#FFCC00,Yes,No,,,,
+arizona,Arizona,Arizona,Wildcats,Tucson,AZ,#CC0033,#003366,Yes,No,,,,
+arizona-state,Arizona State,Arizona State,Sun Devils,Tempe,AZ,#8C1340,#FFC627,Yes,No,,,,
+arkansas,Arkansas,Arkansas,Razorbacks,Fayetteville,AR,#9D2235,#FFFFFF,Yes,Yes,24,8,6,1
+arkansas-pine-bluff,Arkansas-Pine Bluff,UAPB,Golden Lions,Pine Bluff,AR,#EEB310,#000000,Yes,No,,,,
+arkansas-state,Arkansas State,Arkansas State,Red Wolves,Jonesboro,AR,#CC092F,#000000,Yes,No,,,,
+army,Army,Army,Black Knights,West Point,NY,#D4BF91,#000000,Yes,No,,,,
+auburn,Auburn,Auburn,Tigers,Auburn,AL,#0C2340,#E87722,Yes,No,,,,
+austin-peay,Austin Peay,Austin Peay,Governors,Clarksville,TN,#C41E3A,#FFFFFF,Yes,No,,,,
+ball-state,Ball State,Ball State,Cardinals,Muncie,IN,#BA0C2F,#000000,Yes,No,,,,
+baylor,Baylor,Baylor,Bears,Waco,TX,#154734,#FFB81C,Yes,No,,,,
+bellarmine,Bellarmine,Bellarmine,Knights,Louisville,KY,#752936,#C8C8C8,Yes,No,,,,
+belmont,Belmont,Belmont,Bruins,Nashville,TN,#C8102E,#00205B,Yes,No,,,,
+bethune-cookman,Bethune-Cookman,Bethune-Cookman,Wildcats,Daytona Beach,FL,#6F263D,#F2A900,Yes,No,,,,
+binghamton,Binghamton,Binghamton,Bearcats,Binghamton,NY,#005A43,#000000,Yes,No,,,,
+boise-state,Boise State,Boise State,Broncos,Boise,ID,#0033A0,#D64309,Yes,No,,,,
+boston-college,Boston College,Boston College,Eagles,Chestnut Hill,MA,#98002E,#BC9B61,Yes,No,,,,
+boston-university,Boston University,Boston University,Terriers,Boston,MA,#A3011B,#FFFFFF,Yes,No,,,,
+bowling-green,Bowling Green,Bowling Green,Falcons,Bowling Green,OH,#F35000,#4F2C1D,Yes,No,,,,
+bradley,Bradley,Bradley,Braves,Peoria,IL,#A50000,#FFFFFF,Yes,No,,,,
+brown,Brown,Brown,Bears,Providence,RI,#4E3629,#E4002B,Yes,No,,,,
+bryant,Bryant,Bryant,Bulldogs,Smithfield,RI,#B4975B,#000000,Yes,No,,,,
+bucknell,Bucknell,Bucknell,Bison,Lewisburg,PA,#E87722,#003865,Yes,No,,,,
+buffalo,Buffalo,Buffalo,Bulls,Buffalo,NY,#005BBB,#FFFFFF,Yes,No,,,,
+butler,Butler,Butler,Bulldogs,Indianapolis,IN,#13294B,#FFFFFF,Yes,No,,,,
+byu,BYU,BYU,Cougars,Provo,UT,#0062B8,#FFFFFF,Yes,No,,,,
+cal-poly,Cal Poly,Cal Poly,Mustangs,San Luis Obispo,CA,#003831,#FFE395,Yes,No,,,,
+cal-state-bakersfield,Cal State Bakersfield,Cal State Bakersfield,Roadrunners,Bakersfield,CA,#003594,#FFC72C,Yes,No,,,,
+cal-state-fullerton,Cal State Fullerton,Cal State Fullerton,Titans,Fullerton,CA,#00274C,#DC8218,Yes,No,,,,
+cal-state-northridge,Cal State Northridge,CSUN,Matadors,Northridge,CA,#CE1126,#D1C3C6,Yes,No,,,,
+california,California,California,Golden Bears,Berkeley,CA,#003262,#FDB515,Yes,No,,,,
+california-baptist,California Baptist,Cal Baptist,Lancers,Riverside,CA,#002554,#A37400,Yes,No,,,,
+campbell,Campbell,Campbell,Fighting Camels,Buies Creek,NC,#F58025,#000000,Yes,No,,,,
+canisius,Canisius,Canisius,Golden Griffins,Buffalo,NY,#0C2340,#FFBA00,Yes,No,,,,
+central-arkansas,Central Arkansas,Central Arkansas,Bears,Conway,AR,#4F2D7F,#818A8F,Yes,No,,,,
+central-connecticut,Central Connecticut,Central Connecticut,Blue Devils,New Britain,CT,#00539B,#FFFFFF,Yes,No,,,,
+central-michigan,Central Michigan,Central Michigan,Chippewas,Mount Pleasant,MI,#6A0032,#FFC82E,Yes,No,,,,
+charleston,Charleston,Charleston,Cougars,Charleston,SC,#800000,#9D8958,Yes,No,,,,
+charleston-southern,Charleston Southern,Charleston Southern,Buccaneers,Charleston,SC,#A89963,#002855,Yes,No,,,,
+charlotte,Charlotte,Charlotte,49ers,Charlotte,NC,#046A38,#B9975B,Yes,No,,,,
+chattanooga,Chattanooga,Chattanooga,Mocs,Chattanooga,TN,#00386B,#E0AA0F,Yes,No,,,,
+chicago-state,Chicago State,Chicago State,Cougars,Chicago,IL,#006666,#FFFFFF,Yes,No,,,,
+cincinnati,Cincinnati,Cincinnati,Bearcats,Cincinnati,OH,#E00122,#000000,Yes,No,,,,
+clemson,Clemson,Clemson,Tigers,Clemson,SC,#F56600,#522D80,Yes,No,,,,
+cleveland-state,Cleveland State,Cleveland State,Vikings,Cleveland,OH,#006747,#FFFFFF,Yes,No,,,,
+coastal-carolina,Coastal Carolina,Coastal Carolina,Chanticleers,Conway,SC,#006F71,#A27752,Yes,No,,,,
+colgate,Colgate,Colgate,Raiders,Hamilton,NY,#821019,#FFFFFF,Yes,No,,,,
+colorado,Colorado,Colorado,Buffaloes,Boulder,CO,#CFB87C,#000000,Yes,No,,,,
+colorado-state,Colorado State,Colorado State,Rams,Fort Collins,CO,#1E4D2B,#C8C372,Yes,No,,,,
+columbia,Columbia,Columbia,Lions,New York,NY,#9BCBEB,#003865,Yes,No,,,,
+coppin-state,Coppin State,Coppin State,Eagles,Baltimore,MD,#003056,#FFC915,Yes,No,,,,
+cornell,Cornell,Cornell,Big Red,Ithaca,NY,#B31B1B,#FFFFFF,Yes,No,,,,
+creighton,Creighton,Creighton,Bluejays,Omaha,NE,#005CA9,#FFFFFF,Yes,No,,,,
+dartmouth,Dartmouth,Dartmouth,Big Green,Hanover,NH,#046A38,#FFFFFF,Yes,No,,,,
+davidson,Davidson,Davidson,Wildcats,Davidson,NC,#AC1A2F,#000000,Yes,No,,,,
+dayton,Dayton,Dayton,Flyers,Dayton,OH,#CE1141,#004B8D,Yes,No,,,,
+delaware,Delaware,Delaware,Fightin' Blue Hens,Newark,DE,#00539F,#FFDD31,Yes,No,,,,
+delaware-state,Delaware State,Delaware State,Hornets,Dover,DE,#EE3124,#72CDF4,Yes,No,,,,
+denver,Denver,Denver,Pioneers,Denver,CO,#8B2332,#8B6F4B,Yes,No,,,,
+depaul,DePaul,DePaul,Blue Demons,Chicago,IL,#005EB8,#E4002B,Yes,No,,,,
+detroit-mercy,Detroit Mercy,Detroit Mercy,Titans,Detroit,MI,#A6093D,#002D72,Yes,No,,,,
+drake,Drake,Drake,Bulldogs,Des Moines,IA,#004477,#999999,Yes,No,,,,
+drexel,Drexel,Drexel,Dragons,Philadelphia,PA,#00437B,#FFDA02,Yes,No,,,,
+duke,Duke,Duke,Blue Devils,Durham,NC,#003087,#FFFFFF,Yes,No,,,,
+duquesne,Duquesne,Duquesne,Dukes,Pittsburgh,PA,#041E42,#BA0C2F,Yes,No,,,,
+east-carolina,East Carolina,East Carolina,Pirates,Greenville,NC,#592A8A,#FDC82F,Yes,No,,,,
+east-tennessee-state,East Tennessee State,East Tennessee State,Buccaneers,Johnson City,TN,#041E42,#FFC72C,Yes,No,,,,
+east-texas-a-m,East Texas A&M,East Texas A&M,Lions,Commerce,TX,#00386C,#FFC333,Yes,No,,,,
+eastern-illinois,Eastern Illinois,Eastern Illinois,Panthers,Charleston,IL,#004B83,#919295,Yes,No,,,,
+eastern-kentucky,Eastern Kentucky,Eastern Kentucky,Colonels,Richmond,KY,#8A0039,#FFFFFF,Yes,No,,,,
+eastern-michigan,Eastern Michigan,Eastern Michigan,Eagles,Ypsilanti,MI,#006633,#FFFFFF,Yes,No,,,,
+eastern-washington,Eastern Washington,Eastern Washington,Eagles,Cheney,WA,#A10022,#000000,Yes,No,,,,
+elon,Elon,Elon,Phoenix,Elon,NC,#73000A,#B59A57,Yes,No,,,,
+evansville,Evansville,Evansville,Purple Aces,Evansville,IN,#52237F,#F36F21,Yes,No,,,,
+fairfield,Fairfield,Fairfield,Stags,Fairfield,CT,#C8102E,#A2AAAD,Yes,No,,,,
+fairleigh-dickinson,Fairleigh Dickinson,Fairleigh Dickinson,Knights,Hackensack,NJ,#283341,#72293C,Yes,No,,,,
+florida,Florida,Florida,Gators,Gainesville,FL,#0021A5,#FA4616,Yes,Yes,8,5,6,3
+florida-a-m,Florida A&M,Florida A&M,Rattlers,Tallahassee,FL,#EE7624,#1B5633,Yes,No,,,,
+florida-atlantic,Florida Atlantic,FAU,Owls,Boca Raton,FL,#003366,#CC0000,Yes,No,,,,
+florida-gulf-coast,Florida Gulf Coast,Florida Gulf Coast,Eagles,Fort Myers,FL,#002D72,#007749,Yes,No,,,,
+florida-international,Florida International,FIU,Panthers,Miami,FL,#081E3F,#B6862C,Yes,No,,,,
+florida-state,Florida State,Florida State,Seminoles,Tallahassee,FL,#782F40,#CEB888,Yes,No,,,,
+fordham,Fordham,Fordham,Rams,Bronx,NY,#860038,#FFFFFF,Yes,No,,,,
+fresno-state,Fresno State,Fresno State,Bulldogs,Fresno,CA,#DB0032,#002E6D,Yes,No,,,,
+furman,Furman,Furman,Paladins,Greenville,SC,#201547,#A7A8AA,Yes,No,,,,
+gardner-webb,Gardner-Webb,Gardner-Webb,Runnin' Bulldogs,Boiling Springs,NC,#BF2F37,#000000,Yes,No,,,,
+george-mason,George Mason,George Mason,Patriots,Fairfax,VA,#006633,#FFCC33,Yes,No,,,,
+george-washington,George Washington,George Washington,Revolutionaries,Washington,DC,#E2CB92,#002654,Yes,No,,,,
+georgetown,Georgetown,Georgetown,Hoyas,Washington,DC,#041E42,#8D817B,Yes,No,,,,
+georgia,Georgia,Georgia,Bulldogs,Athens,GA,#BA0C2F,#000000,Yes,No,,,,
+georgia-southern,Georgia Southern,Georgia Southern,Eagles,Statesboro,GA,#011E41,#87714D,Yes,No,,,,
+georgia-state,Georgia State,Georgia State,Panthers,Atlanta,GA,#0039A6,#D96A6A,Yes,No,,,,
+georgia-tech,Georgia Tech,Georgia Tech,Yellow Jackets,Atlanta,GA,#B3A369,#003057,Yes,No,,,,
+gonzaga,Gonzaga,Gonzaga,Bulldogs,Spokane,WA,#041E42,#C8102E,Yes,No,,,,
+grambling,Grambling,Grambling,Tigers,Grambling,LA,#000000,#EAA921,Yes,No,,,,
+grand-canyon,Grand Canyon,Grand Canyon,Antelopes,Phoenix,AZ,#522398,#000000,Yes,No,,,,
+green-bay,Green Bay,Green Bay,Phoenix,Ashwaubenon,WI,#006747,#FFFFFF,Yes,No,,,,
+hampton,Hampton,Hampton,Pirates,Hampton,VA,#0060A9,#FFFFFF,Yes,No,,,,
+harvard,Harvard,Harvard,Crimson,Cambridge,MA,#A41034,#FFFFFF,Yes,No,,,,
+hawai-i,Hawai'i,Hawai'i,Rainbow Warriors,Honolulu,HI,#024731,#C8C8C8,Yes,No,,,,
+high-point,High Point,High Point,Panthers,High Point,NC,#330072,#FFFFFF,Yes,No,,,,
+hofstra,Hofstra,Hofstra,Pride,Hempstead,NY,#0B1E73,#FEB612,Yes,No,,,,
+holy-cross,Holy Cross,Holy Cross,Crusaders,Worcester,MA,#602D89,#FFFFFF,Yes,No,,,,
+houston,Houston,Houston,Cougars,Houston,TX,#C8102E,#B4B2B4,Yes,No,,,,
+houston-christian,Houston Christian,Houston Christian,Huskies,Houston,TX,#1C439D,#F3652C,Yes,No,,,,
+howard,Howard,Howard,Bison,Washington,DC,#003A63,#E51937,Yes,No,,,,
+idaho,Idaho,Idaho,Vandals,Moscow,ID,#B3A369,#000000,Yes,No,,,,
+idaho-state,Idaho State,Idaho State,Bengals,Pocatello,ID,#FF671F,#000000,Yes,No,,,,
+illinois,Illinois,Illinois,Fighting Illini,Champaign,IL,#E84A27,#13294B,Yes,Yes,18,4,6,0
+illinois-state,Illinois State,Illinois State,Redbirds,Normal,IL,#CE1126,#FFFFFF,Yes,No,,,,
+incarnate-word,Incarnate Word,Incarnate Word,Cardinals,San Antonio,TX,#CB333B,#000000,Yes,No,,,,
+indiana,Indiana,Indiana,Hoosiers,Bloomington,IN,#960009,#EEEDEB,Yes,No,,,,
+indiana-state,Indiana State,Indiana State,Sycamores,Terre Haute,IN,#0142BC,#FFFFFF,Yes,No,,,,
+iona,Iona,Iona,Gaels,New Rochelle,NY,#6F2C3F,#F2A900,Yes,No,,,,
+iowa,Iowa,Iowa,Hawkeyes,Iowa City,IA,#FFCD00,#000000,Yes,No,,,,
+iowa-state,Iowa State,Iowa State,Cyclones,Ames,IA,#C8102E,#F1BE48,Yes,No,,,,
+iu-indianapolis,IU Indianapolis,IU Indy,Jaguars,Indianapolis,IN,#9D2235,#DFD1A7,Yes,No,,,,
+jackson-state,Jackson State,Jackson State,Tigers,Jackson,MS,#002147,#FFFFFF,Yes,No,,,,
+jacksonville,Jacksonville,Jacksonville,Dolphins,Jacksonville,FL,#004E44,#898A8D,Yes,No,,,,
+jacksonville-state,Jacksonville State,Jacksonville State,Gamecocks,Jacksonville,AL,#CC0000,#000000,Yes,No,,,,
+james-madison,James Madison,James Madison,Dukes,Harrisonburg,VA,#450084,#CBB677,Yes,No,,,,
+kansas,Kansas,Kansas,Jayhawks,Lawrence,KS,#0051BA,#E8000D,Yes,Yes,64,16,16,4
+kansas-city,Kansas City,Kansas City,Roos,Kansas City,MO,#005293,#FECB00,Yes,No,,,,
+kansas-state,Kansas State,Kansas State,Wildcats,Manhattan,KS,#512888,#D1D1D1,Yes,No,,,,
+kennesaw-state,Kennesaw State,Kennesaw State,Owls,Kennesaw,GA,#FDBB30,#000000,Yes,No,,,,
+kent-state,Kent State,Kent State,Golden Flashes,Kent,OH,#002664,#EAAB00,Yes,No,,,,
+kentucky,Kentucky,Kentucky,Wildcats,Lexington,KY,#0033A0,#FFFFFF,Yes,Yes,52,33,17,8
+la-salle,La Salle,La Salle,Explorers,Philadelphia,PA,#FFCC00,#003366,Yes,No,,,,
+lafayette,Lafayette,Lafayette,Leopards,Easton,PA,#A89963,#98002E,Yes,No,,,,
+lamar,Lamar,Lamar,Cardinals,Beaumont,TX,#DC0032,#FFFFFF,Yes,No,,,,
+le-moyne,Le Moyne,Le Moyne,Dolphins,Syracuse,NY,#00452A,#FCE300,Yes,No,,,,
+lehigh,Lehigh,Lehigh,Mountain Hawks,Bethlehem,PA,#653600,#FFD24F,Yes,No,,,,
+liberty,Liberty,Liberty,Flames,Lynchburg,VA,#002D62,#C41230,Yes,No,,,,
+lindenwood,Lindenwood,Lindenwood,Lions,Saint Charles,MO,#B5A36A,#000000,Yes,No,,,,
+lipscomb,Lipscomb,Lipscomb,Bisons,Nashville,TN,#331E54,#F4AA00,Yes,No,,,,
+little-rock,Little Rock,Little Rock,Trojans,Little Rock,AR,#6E2639,#A7A9AC,Yes,No,,,,
+long-beach-state,Long Beach State,Long Beach State,Beach,Long Beach,CA,#FFC72A,#000000,Yes,No,,,,
+long-island-university,Long Island University,LIU,Sharks,Brooklyn,NY,#69B3E7,#FFC72C,Yes,No,,,,
+longwood,Longwood,Longwood,Lancers,Farmville,VA,#15213B,#999D93,Yes,No,,,,
+louisiana,Louisiana,Louisiana,Ragin' Cajuns,Lafayette,LA,#CE1813,#FFFFFF,Yes,No,,,,
+louisiana-tech,Louisiana Tech,Louisiana Tech,Bulldogs,Ruston,LA,#002F8B,#F31B23,Yes,No,,,,
+louisville,Louisville,Louisville,Cardinals,Louisville,KY,#AD0000,#000000,Yes,No,,,,
+loyola-chicago,Loyola Chicago,Loyola Chicago,Ramblers,Chicago,IL,#922247,#FEBD18,Yes,No,,,,
+loyola-maryland,Loyola Maryland,Loyola Maryland,Greyhounds,Baltimore,MD,#006943,#CACAC8,Yes,No,,,,
+loyola-marymount,Loyola Marymount,Loyola Marymount,Lions,Los Angeles,CA,#0076A5,#AB0C2F,Yes,No,,,,
+lsu,LSU,LSU,Tigers,Baton Rouge,LA,#461D7C,#FDD023,Yes,No,,,,
+maine,Maine,Maine,Black Bears,Orono,ME,#003263,#B0D7FF,Yes,No,,,,
+manhattan,Manhattan,Manhattan,Jaspers,Riverdale,NY,#00703C,#FFFFFF,Yes,No,,,,
+marist,Marist,Marist,Red Foxes,Poughkeepsie,NY,#C8102E,#B2B2B2,Yes,No,,,,
+marquette,Marquette,Marquette,Golden Eagles,Milwaukee,WI,#003366,#FFCC00,Yes,No,,,,
+marshall,Marshall,Marshall,Thundering Herd,Huntington,WV,#00B140,#FFFFFF,Yes,No,,,,
+maryland,Maryland,Maryland,Terrapins,College Park,MD,#E03A3E,#FFD520,Yes,No,,,,
+maryland-eastern-shore,Maryland Eastern Shore,UMES,Hawks,Princess Anne,MD,#862633,#888B8D,Yes,No,,,,
+massachusetts,Massachusetts,Massachusetts,Minutemen,Amherst,MA,#572932,#FFFFFF,Yes,No,,,,
+mcneese,McNeese,McNeese,Cowboys,Lake Charles,LA,#00529B,#FFD204,Yes,No,,,,
+memphis,Memphis,Memphis,Tigers,Memphis,TN,#003087,#898D8D,Yes,No,,,,
+mercer,Mercer,Mercer,Bears,Macon,GA,#F76800,#000000,Yes,No,,,,
+mercyhurst,Mercyhurst,Mercyhurst,Lakers,Erie,PA,#07594D,#182752,Yes,No,,,,
+merrimack,Merrimack,Merrimack,Warriors,North Andover,MA,#003768,#FDB813,Yes,No,,,,
+miami,Miami (FL),Miami (FL),Hurricanes,Coral Gables,FL,#005030,#F47321,Yes,No,,,,
+miami-oh,Miami (OH),Miami (OH),RedHawks,Oxford,OH,#B61E2E,#FFFFFF,Yes,No,,,,
+michigan,Michigan,Michigan,Wolverines,Ann Arbor,MI,#00274C,#FFCB05,Yes,No,,,,
+michigan-state,Michigan State,Michigan State,Spartans,East Lansing,MI,#18453B,#FFFFFF,Yes,No,,,,
+middle-tennessee,Middle Tennessee,Middle Tennessee,Blue Raiders,Murfreesboro,TN,#0066CC,#000000,Yes,No,,,,
+milwaukee,Milwaukee,Milwaukee,Panthers,Milwaukee,WI,#FFBD00,#000000,Yes,No,,,,
+minnesota,Minnesota,Minnesota,Golden Gophers,Minneapolis,MN,#7A0019,#FFCC33,Yes,No,,,,
+mississippi-state,Mississippi State,Mississippi State,Bulldogs,Starkville,MS,#660000,#FFFFFF,Yes,No,,,,
+mississippi-valley-state,Mississippi Valley State,Mississippi Valley State,Delta Devils,Itta Bena,MS,#00703C,#E51937,Yes,No,,,,
+missouri,Missouri,Mizzou,Tigers,Columbia,MO,#000000,#F1B82D,Yes,Yes,15,8,0,0
+missouri-state,Missouri State,Missouri State,Bears,Springfield,MO,#530009,#FFFFFF,Yes,No,,,,
+monmouth,Monmouth,Monmouth,Hawks,West Long Branch,NJ,#041E42,#FFFFFF,Yes,No,,,,
+montana,Montana,Montana,Grizzlies,Missoula,MT,#660033,#999999,Yes,No,,,,
+montana-state,Montana State,Montana State,Bobcats,Bozeman,MT,#00205B,#B9975B,Yes,No,,,,
+morehead-state,Morehead State,Morehead State,Eagles,Morehead,KY,#005EB8,#FFCF00,Yes,No,,,,
+morgan-state,Morgan State,Morgan State,Bears,Baltimore,MD,#1B4383,#F47937,Yes,No,,,,
+mount-st-mary-s,Mount St. Mary's,Mount St. Mary's,Mountaineers,Emmitsburg,MD,#002855,#84754E,Yes,No,,,,
+murray-state,Murray State,Murray State,Racers,Murray,KY,#ECAC00,#002144,Yes,No,,,,
+navy,Navy,Navy,Midshipmen,Annapolis,MD,#00205B,#C5B783,Yes,No,,,,
+nc-state,NC State,NC State,Wolfpack,Raleigh,NC,#CC0000,#FFFFFF,Yes,No,,,,
+nebraska,Nebraska,Nebraska,Cornhuskers,Lincoln,NE,#E41C38,#FFFFFF,Yes,No,,,,
+nevada,Nevada,Nevada,Wolf Pack,Reno,NV,#003366,#807F84,Yes,No,,,,
+new-hampshire,New Hampshire,New Hampshire,Wildcats,Durham,NH,#041E42,#BBBCBC,Yes,No,,,,
+new-haven,New Haven,New Haven,Chargers,West Haven,CT,#004B8D,#FFC423,Yes,No,,,,
+new-mexico,New Mexico,New Mexico,Lobos,Albuquerque,NM,#BA0C2F,#A7A8AA,Yes,No,,,,
+new-mexico-state,New Mexico State,New Mexico State,Aggies,Las Cruces,NM,#861F41,#97999B,Yes,No,,,,
+new-orleans,New Orleans,New Orleans,Privateers,New Orleans,LA,#005CA6,#A3A9AC,Yes,No,,,,
+niagara,Niagara,Niagara,Purple Eagles,Niagara Falls,NY,#582C83,#FFFFFF,Yes,No,,,,
+nicholls,Nicholls,Nicholls,Colonels,Thibodaux,LA,#AE132A,#72808A,Yes,No,,,,
+njit,NJIT,NJIT,Highlanders,Newark,NJ,#D22630,#071D49,Yes,No,,,,
+norfolk-state,Norfolk State,Norfolk State,Spartans,Norfolk,VA,#007A53,#F3D03E,Yes,No,,,,
+north-alabama,North Alabama,North Alabama,Lions,Florence,AL,#46166B,#DB9F11,Yes,No,,,,
+north-carolina,North Carolina,North Carolina,Tar Heels,Chapel Hill,NC,#7BAFD4,#FFFFFF,Yes,No,,,,
+north-carolina-a-t,North Carolina A&T,North Carolina A&T,Aggies,Greensboro,NC,#F3B237,#003D6D,Yes,No,,,,
+north-carolina-central,North Carolina Central,North Carolina Central,Eagles,Durham,NC,#880023,#8E9093,Yes,No,,,,
+north-dakota,North Dakota,North Dakota,Fighting Hawks,Grand Forks,ND,#009A44,#AAA3AD,Yes,No,,,,
+north-dakota-state,North Dakota State,North Dakota State,Bison,Fargo,ND,#0A5640,#FFC72A,Yes,No,,,,
+north-florida,North Florida,North Florida,Ospreys,Jacksonville,FL,#00246B,#D9D9D9,Yes,No,,,,
+north-texas,North Texas,North Texas,Mean Green,Denton,TX,#00853E,#000000,Yes,No,,,,
+northeastern,Northeastern,Northeastern,Huskies,Boston,MA,#D41B2C,#000000,Yes,No,,,,
+northern-arizona,Northern Arizona,Northern Arizona,Lumberjacks,Flagstaff,AZ,#003466,#FFD200,Yes,No,,,,
+northern-colorado,Northern Colorado,Northern Colorado,Bears,Greeley,CO,#013C65,#F6B000,Yes,No,,,,
+northern-illinois,Northern Illinois,Northern Illinois,Huskies,Dekalb,IL,#BA0C2F,#000000,Yes,No,,,,
+northern-iowa,Northern Iowa,Northern Iowa,Panthers,Cedar Falls,IA,#4B116F,#FFCC00,Yes,No,,,,
+northern-kentucky,Northern Kentucky,Northern Kentucky,Norse,Highland Heights,KY,#000000,#FFC72C,Yes,No,,,,
+northwestern,Northwestern,Northwestern,Wildcats,Evanston,IL,#4E2A84,#FFFFFF,Yes,Yes,2,0,0,0
+northwestern-state,Northwestern State,Northwestern State,Demons,Natchitoches,LA,#663399,#FF6600,Yes,No,,,,
+notre-dame,Notre Dame,Notre Dame,Fighting Irish,South Bend,IN,#0C2340,#C99700,Yes,No,,,,
+oakland,Oakland,Oakland,Golden Grizzlies,Rochester,MI,#B59A57,#000000,Yes,No,,,,
+ohio,Ohio,Ohio,Bobcats,Athens,OH,#00694E,#FFFFFF,Yes,No,,,,
+ohio-state,Ohio State,Ohio State,Buckeyes,Columbus,OH,#BB0000,#B1B7BC,Yes,No,,,,
+oklahoma,Oklahoma,Oklahoma,Sooners,Norman,OK,#841617,#FDF9D8,Yes,No,,,,
+oklahoma-state,Oklahoma State,Oklahoma State,Cowboys,Stillwater,OK,#FF7300,#000000,Yes,No,,,,
+old-dominion,Old Dominion,Old Dominion,Monarchs,Norfolk,VA,#003057,#7C878E,Yes,No,,,,
+ole-miss,Ole Miss,Ole Miss,Rebels,Oxford,MS,#14213D,#CE1126,Yes,No,,,,
+omaha,Omaha,Omaha,Mavericks,Omaha,NE,#000000,#D71920,Yes,No,,,,
+oral-roberts,Oral Roberts,Oral Roberts,Golden Eagles,Tulsa,OK,#002F60,#C5B783,Yes,No,,,,
+oregon,Oregon,Oregon,Ducks,Eugene,OR,#154733,#FEE123,Yes,No,,,,
+oregon-state,Oregon State,Oregon State,Beavers,Corvallis,OR,#DC4405,#000000,Yes,No,,,,
+pacific,Pacific,Pacific,Tigers,Stockton,CA,#E35205,#231F20,Yes,No,,,,
+penn-state,Penn State,Penn State,Nittany Lions,University Park,PA,#041E42,#FFFFFF,Yes,No,,,,
+pennsylvania,Pennsylvania,Penn,Quakers,Philadelphia,PA,#011F5B,#990000,Yes,No,,,,
+pepperdine,Pepperdine,Pepperdine,Waves,Malibu,CA,#00205C,#EE7624,Yes,No,,,,
+pittsburgh,Pittsburgh,Pittsburgh,Panthers,Pittsburgh,PA,#003594,#FFB81C,Yes,No,,,,
+portland,Portland,Portland,Pilots,Portland,OR,#320274,#FFFFFF,Yes,No,,,,
+portland-state,Portland State,Portland State,Vikings,Portland,OR,#154734,#FFFFFF,Yes,No,,,,
+prairie-view-a-m,Prairie View A&M,Prairie View A&M,Panthers,Prairie View,TX,#330066,#FFCC33,Yes,No,,,,
+presbyterian,Presbyterian,Presbyterian,Blue Hose,Clinton,SC,#0060A9,#FFFFFF,Yes,No,,,,
+princeton,Princeton,Princeton,Tigers,Princeton,NJ,#FF571F,#000000,Yes,No,,,,
+providence,Providence,Providence,Friars,Providence,RI,#000000,#8A8D8F,Yes,No,,,,
+purdue,Purdue,Purdue,Boilermakers,West Lafayette,IN,#CEB888,#000000,Yes,No,,,,
+purdue-fort-wayne,Purdue Fort Wayne,Purdue Fort Wayne,Mastodons,Fort Wayne,IN,#CFB991,#000000,Yes,No,,,,
+queens-university,Queens University,Queens,Royals,Charlotte,NC,#192C66,#857040,Yes,No,,,,
+quinnipiac,Quinnipiac,Quinnipiac,Bobcats,Hamden,CT,#0C2340,#FFB81C,Yes,No,,,,
+radford,Radford,Radford,Highlanders,Radford,VA,#C2011B,#D1D3D4,Yes,No,,,,
+rhode-island,Rhode Island,Rhode Island,Rams,Kingston,RI,#68ABE8,#002147,Yes,No,,,,
+rice,Rice,Rice,Owls,Houston,TX,#00205B,#C1C6C8,Yes,No,,,,
+richmond,Richmond,Richmond,Spiders,Richmond,VA,#000066,#990000,Yes,No,,,,
+rider,Rider,Rider,Broncs,Lawrenceville,NJ,#981E32,#6C6F70,Yes,No,,,,
+robert-morris,Robert Morris,Robert Morris,Colonials,Moon Township,PA,#14234B,#A6192E,Yes,No,,,,
+rutgers,Rutgers,Rutgers,Scarlet Knights,Piscataway,NJ,#CC0033,#FFFFFF,Yes,No,,,,
+sacramento-state,Sacramento State,Sacramento State,Hornets,Sacramento,CA,#043927,#C4B581,Yes,No,,,,
+sacred-heart,Sacred Heart,Sacred Heart,Pioneers,Fairfield,CT,#CE1141,#B1B3B6,Yes,No,,,,
+saint-joseph-s,Saint Joseph's,Saint Joseph's,Hawks,Philadelphia,PA,#931B32,#000000,Yes,No,,,,
+saint-louis,Saint Louis,Saint Louis,Billikens,St. Louis,MO,#003DA5,#C8C9C7,Yes,No,,,,
+saint-mary-s,Saint Mary's,Saint Mary's,Gaels,Moraga,CA,#D80024,#06315B,Yes,No,,,,
+saint-peter-s,Saint Peter's,Saint Peter's,Peacocks,Jersey City,NJ,#003C71,#A59C94,Yes,No,,,,
+sam-houston,Sam Houston,Sam Houston,Bearkats,Huntsville,TX,#FE5100,#FFFFFF,Yes,No,,,,
+samford,Samford,Samford,Bulldogs,Homewood,AL,#002649,#C4161D,Yes,No,,,,
+san-diego,San Diego,San Diego,Toreros,San Diego,CA,#002868,#84BCE8,Yes,No,,,,
+san-diego-state,San Diego State,San Diego State,Aztecs,San Diego,CA,#A6192E,#000000,Yes,No,,,,
+san-francisco,San Francisco,San Francisco,Dons,San Francisco,CA,#00543C,#FDBB30,Yes,No,,,,
+san-jose-state,San José State,San Jose State,Spartans,San Jose,CA,#0055A2,#E5A823,Yes,No,,,,
+santa-clara,Santa Clara,Santa Clara,Broncos,Santa Clara,CA,#862633,#FFFFFF,Yes,No,,,,
+se-louisiana,SE Louisiana,Southeastern Louisiana,Lions,Hammond,LA,#006341,#EAAA00,Yes,No,,,,
+seattle-u,Seattle U,Seattle U,Redhawks,Seattle,WA,#AA0000,#000000,Yes,No,,,,
+seton-hall,Seton Hall,Seton Hall,Pirates,Newark,NJ,#004488,#A2AAAD,Yes,No,,,,
+siena,Siena,Siena,Saints,Albany,NY,#006747,#FFC72C,Yes,No,,,,
+siu-edwardsville,SIU Edwardsville,SIUE,Cougars,Edwardsville,IL,#EF3829,#CFAA7A,Yes,No,,,,
+smu,SMU,SMU,Mustangs,Dallas,TX,#0033A0,#C8102E,Yes,No,,,,
+south-alabama,South Alabama,South Alabama,Jaguars,Mobile,AL,#00205B,#BF0D3E,Yes,No,,,,
+south-carolina,South Carolina,South Carolina,Gamecocks,Columbia,SC,#73000A,#000000,Yes,No,,,,
+south-carolina-state,South Carolina State,South Carolina State,Bulldogs,Orangeburg,SC,#862633,#001A72,Yes,No,,,,
+south-carolina-upstate,South Carolina Upstate,USC Upstate,Spartans,Spartanburg,SC,#00703C,#000000,Yes,No,,,,
+south-dakota,South Dakota,South Dakota,Coyotes,Vermillion,SD,#AD0000,#B4B4B4,Yes,No,,,,
+south-dakota-state,South Dakota State,South Dakota State,Jackrabbits,Brookings,SD,#0033A0,#FFD100,Yes,No,,,,
+south-florida,South Florida,South Florida,Bulls,Tampa,FL,#006747,#CFC493,Yes,No,,,,
+southeast-missouri-state,Southeast Missouri State,SEMO,Redhawks,Cape Girardeau,MO,#C8102E,#000000,Yes,No,,,,
+southern,Southern,Southern,Jaguars,Baton Rouge,LA,#58B6E7,#FFCE34,Yes,No,,,,
+southern-illinois,Southern Illinois,Southern Illinois,Salukis,Carbondale,IL,#720000,#000000,Yes,No,,,,
+southern-indiana,Southern Indiana,Southern Indiana,Screaming Eagles,Evansville,IN,#CF102D,#002D5D,Yes,No,,,,
+southern-miss,Southern Miss,Southern Miss,Golden Eagles,Hattiesburg,MS,#FFAB00,#000000,Yes,No,,,,
+southern-utah,Southern Utah,Southern Utah,Thunderbirds,Cedar City,UT,#C41425,#000000,Yes,No,,,,
+st-bonaventure,St. Bonaventure,St. Bonaventure,Bonnies,Saint Bonaventure,NY,#54261A,#BDB680,Yes,No,,,,
+st-john-s,St. John's,St. John's,Red Storm,New York,NY,#BA0C2F,#041C2C,Yes,No,,,,
+st-thomas-minnesota,St. Thomas-Minnesota,St. Thomas,Tommies,Saint Paul,MN,#510C76,#98999B,Yes,No,,,,
+stanford,Stanford,Stanford,Cardinal,Stanford,CA,#8C1515,#FFFFFF,Yes,No,,,,
+stephen-f-austin,Stephen F. Austin,Stephen F. Austin,Lumberjacks,Nacogdoches,TX,#613393,#FFFFFF,Yes,No,,,,
+stetson,Stetson,Stetson,Hatters,DeLand,FL,#00523E,#FFFFFF,Yes,No,,,,
+stonehill,Stonehill,Stonehill,Skyhawks,South Easton,MA,#2F2975,#FFFFFF,Yes,No,,,,
+stony-brook,Stony Brook,Stony Brook,Seawolves,Stony Brook,NY,#990000,#16243E,Yes,No,,,,
+syracuse,Syracuse,Syracuse,Orange,Syracuse,NY,#F76900,#000354,Yes,No,,,,
+tarleton-state,Tarleton State,Tarleton,Texans,Stephenville,TX,#4F2D7F,#FFFFFF,Yes,No,,,,
+tcu,TCU,TCU,Horned Frogs,Fort Worth,TX,#4D1979,#FFFFFF,Yes,No,,,,
+temple,Temple,Temple,Owls,Philadelphia,PA,#9D2235,#8A8D8F,Yes,No,,,,
+tennessee,Tennessee,Tennessee,Volunteers,Knoxville,TN,#FF8200,#FFFFFF,Yes,No,,,,
+tennessee-state,Tennessee State,Tennessee State,Tigers,Nashville,TN,#00539F,#FFFFFF,Yes,No,,,,
+tennessee-tech,Tennessee Tech,Tennessee Tech,Golden Eagles,Cookeville,TN,#4F2984,#FFDD00,Yes,No,,,,
+texas,Texas,Texas,Longhorns,Austin,TX,#BF5700,#FFFFFF,Yes,No,,,,
+texas-a-m,Texas A&M,Texas A&M,Aggies,College Station,TX,#500000,#FFFFFF,Yes,No,,,,
+texas-a-m-corpus-christi,Texas A&M-Corpus Christi,TAMUCC,Islanders,Corpus Christi,TX,#0067C5,#FFFFFF,Yes,No,,,,
+texas-southern,Texas Southern,Texas Southern,Tigers,Houston,TX,#7C183E,#9DA6AB,Yes,No,,,,
+texas-state,Texas State,Texas State,Bobcats,San Marcos,TX,#501214,#8D734A,Yes,No,,,,
+texas-tech,Texas Tech,Texas Tech,Red Raiders,Lubbock,TX,#000000,#CC0000,Yes,No,,,,
+the-citadel,The Citadel,The Citadel,Bulldogs,Charleston,SC,#3975B7,#FFFFFF,Yes,No,,,,
+toledo,Toledo,Toledo,Rockets,Toledo,OH,#15397F,#FFDA00,Yes,No,,,,
+towson,Towson,Towson,Tigers,Towson,MD,#FFBB00,#3C3C3C,Yes,No,,,,
+troy,Troy,Troy,Trojans,Troy,AL,#8A2432,#B3B5B8,Yes,No,,,,
+tulane,Tulane,Tulane,Green Wave,New Orleans,LA,#006747,#418FDE,Yes,No,,,,
+tulsa,Tulsa,Tulsa,Golden Hurricane,Tulsa,OK,#002D72,#C5B783,Yes,No,,,,
+uab,UAB,UAB,Blazers,Birmingham,AL,#006341,#CC8A00,Yes,No,,,,
+ualbany,UAlbany,Albany,Great Danes,Albany,NY,#461660,#EEB211,Yes,No,,,,
+uc-davis,UC Davis,UC Davis,Aggies,Davis,CA,#002855,#B3A369,Yes,No,,,,
+uc-irvine,UC Irvine,UC Irvine,Anteaters,Irvine,CA,#0C2340,#FFC72C,Yes,No,,,,
+uc-riverside,UC Riverside,UC Riverside,Highlanders,Riverside,CA,#2D6CC0,#F1AB00,Yes,No,,,,
+uc-san-diego,UC San Diego,UC San Diego,Tritons,San Diego,CA,#182B49,#FFCD00,Yes,No,,,,
+uc-santa-barbara,UC Santa Barbara,UC Santa Barbara,Gauchos,Santa Barbara,CA,#003660,#F3BC11,Yes,No,,,,
+ucf,UCF,UCF,Knights,Orlando,FL,#BA9B37,#000000,Yes,No,,,,
+ucla,UCLA,UCLA,Bruins,Los Angeles,CA,#2D68C4,#F2A900,Yes,No,,,,
+uconn,UConn,Connecticut,Huskies,Storrs,CT,#000E2F,#FFFFFF,Yes,No,,,,
+uic,UIC,UIC,Flames,Chicago,IL,#AC1E2D,#041E42,Yes,No,,,,
+ul-monroe,UL Monroe,Louisiana-Monroe,Warhawks,Monroe,LA,#840029,#FDB913,Yes,No,,,,
+umass-lowell,UMass Lowell,UMass Lowell,River Hawks,Lowell,MA,#003DA5,#C8102E,Yes,No,,,,
+umbc,UMBC,UMBC,Retrievers,Baltimore,MD,#B18906,#000000,Yes,No,,,,
+unc-asheville,UNC Asheville,UNC Asheville,Bulldogs,Asheville,NC,#003DA5,#FFFFFF,Yes,No,,,,
+unc-greensboro,UNC Greensboro,UNC Greensboro,Spartans,Greensboro,NC,#0F2044,#FFB71B,Yes,No,,,,
+unc-wilmington,UNC Wilmington,UNC Wilmington,Seahawks,Wilmington,NC,#006666,#003366,Yes,No,,,,
+unlv,UNLV,UNLV,Rebels,Las Vegas,NV,#CF0A2C,#CAC8C8,Yes,No,,,,
+usc,USC,USC,Trojans,Los Angeles,CA,#990000,#FFC72C,Yes,No,,,,
+ut-arlington,UT Arlington,UT Arlington,Mavericks,Arlington,TX,#F58025,#0064B1,Yes,No,,,,
+ut-martin,UT Martin,UT Martin,Skyhawks,Martin,TN,#F79728,#002A5B,Yes,No,,,,
+ut-rio-grande-valley,UT Rio Grande Valley,UTRGV,Vaqueros,Edinburg,TX,#FFA300,#00843D,Yes,No,,,,
+utah,Utah,Utah,Utes,Salt Lake City,UT,#BE0000,#FFFFFF,Yes,No,,,,
+utah-state,Utah State,Utah State,Aggies,Logan,UT,#00263A,#8A8D8F,Yes,No,,,,
+utah-tech,Utah Tech,Utah Tech,Trailblazers,St. George,UT,#BA1C21,#0C233F,Yes,No,,,,
+utah-valley,Utah Valley,Utah Valley,Wolverines,Orem,UT,#275D38,#838C89,Yes,No,,,,
+utep,UTEP,UTEP,Miners,El Paso,TX,#FF8200,#041E42,Yes,No,,,,
+utsa,UTSA,UTSA,Roadrunners,San Antonio,TX,#F15A22,#0C2340,Yes,No,,,,
+valparaiso,Valparaiso,Valparaiso,Beacons,Valparaiso,IN,#381E0E,#FFCC00,Yes,No,,,,
+vanderbilt,Vanderbilt,Vanderbilt,Commodores,Nashville,TN,#866D4B,#000000,Yes,No,,,,
+vcu,VCU,VCU,Rams,Richmond,VA,#FFB300,#000000,Yes,No,,,,
+vermont,Vermont,Vermont,Catamounts,Burlington,VT,#154734,#FFC72C,Yes,No,,,,
+villanova,Villanova,Villanova,Wildcats,Villanova,PA,#00205B,#13B5EA,Yes,No,,,,
+virginia,Virginia,Virginia,Cavaliers,Charlottesville,VA,#232D4B,#F84C1E,Yes,No,,,,
+virginia-tech,Virginia Tech,Virginia Tech,Hokies,Blacksburg,VA,#630031,#CF4420,Yes,No,,,,
+vmi,VMI,VMI,Keydets,Lexington,VA,#A71F23,#FFD520,Yes,No,,,,
+wagner,Wagner,Wagner,Seahawks,Staten Island,NY,#00483A,#B9BBBD,Yes,No,,,,
+wake-forest,Wake Forest,Wake Forest,Demon Deacons,Winston-Salem,NC,#937E38,#000000,Yes,No,,,,
+washington,Washington,Washington,Huskies,Seattle,WA,#4B2E83,#B7A57A,Yes,No,,,,
+washington-state,Washington State,Washington State,Cougars,Pullman,WA,#981E32,#5E6A71,Yes,No,,,,
+weber-state,Weber State,Weber State,Wildcats,Ogden,UT,#4B2672,#A1A1A4,Yes,No,,,,
+west-florida,West Florida,West Florida,Argonauts,Pensacola,FL,#00205B,#00a346,Yes,No,,,,
+west-georgia,West Georgia,West Georgia,Wolves,Carrollton,GA,#0656A5,#E84A4F,Yes,No,,,,
+west-virginia,West Virginia,West Virginia,Mountaineers,Morgantown,WV,#002855,#FAAA00,Yes,No,,,,
+western-carolina,Western Carolina,Western Carolina,Catamounts,Cullowhee,NC,#592C88,#C1A875,Yes,No,,,,
+western-illinois,Western Illinois,Western Illinois,Leathernecks,Macomb,IL,#663399,#FFCC00,Yes,No,,,,
+western-kentucky,Western Kentucky,Western Kentucky,Hilltoppers,Bowling Green,KY,#C60C30,#000000,Yes,No,,,,
+western-michigan,Western Michigan,Western Michigan,Broncos,Kalamazoo,MI,#6C4023,#B5A167,Yes,No,,,,
+wichita-state,Wichita State,Wichita State,Shockers,Wichita,KS,#FFCD00,#000000,Yes,No,,,,
+william-mary,William & Mary,William & Mary,Tribe,Williamsburg,VA,#115740,#F0B323,Yes,No,,,,
+winthrop,Winthrop,Winthrop,Eagles,Rock Hill,SC,#660000,#F0B323,Yes,No,,,,
+wisconsin,Wisconsin,Wisconsin,Badgers,Madison,WI,#C5050C,#FFFFFF,Yes,No,,,,
+wofford,Wofford,Wofford,Terriers,Spartanburg,SC,#88634C,#000000,Yes,No,,,,
+wright-state,Wright State,Wright State,Raiders,Dayton,OH,#026937,#CEA052,Yes,No,,,,
+wyoming,Wyoming,Wyoming,Cowboys,Laramie,WY,#FFC425,#492F24,Yes,No,,,,
+xavier,Xavier,Xavier,Musketeers,Cincinnati,OH,#0C2340,#93A2A2,Yes,No,,,,
+yale,Yale,Yale,Bulldogs,New Haven,CT,#00356B,#FFFFFF,Yes,No,,,,
+youngstown-state,Youngstown State,Youngstown State,Penguins,Youngstown,OH,#C8102E,#FFFFFF,Yes,No,,,,

@@ -950,14 +950,29 @@ Review the target's program metadata:
 - `state`
 - `primary_hex`
 - `secondary_hex`
+- `conference_regular_season_championships`
+- `conference_tournament_championships`
+- `final_four_appearances`
+- `national_championships`
 - `current_d1`
 - `public_page_enabled`
+
+The four achievement fields are required before a program may be published. Use nonnegative integers. `0` is a verified zero; blank means the value has not yet been populated and blocks public-page enablement.
+
+Achievement definitions:
+
+- conference regular-season championships include recognized outright and shared/co-championships across all conferences in the program's history;
+- conference tournament championships include official conference-tournament titles across all conferences in the program's history;
+- Final Four appearances are NCAA Tournament Final Four appearances;
+- national championships are NCAA Tournament championships rather than retroactive or non-NCAA selectors.
+
+Prefer the school's recognized historical totals. Escalate formally vacated championship/appearance cases for owner review rather than silently choosing a counting convention.
 
 Confirm the `2026-2027` conference key/name. Correct a bad reference value only with a documented authoritative source.
 
 ### Enable the page
 
-After canonical ingestion and validation, change only the target's `public_page_enabled` value from `No` to `Yes` in `data/reference/programs.csv`.
+After canonical ingestion and validation, confirm that all four achievement fields are populated, then change only the target's `public_page_enabled` value from `No` to `Yes` in `data/reference/programs.csv`.
 
 Run validation again:
 
@@ -1043,6 +1058,7 @@ Verify:
 
 - target appears in the directory and search;
 - team name, nickname, colors, city/state, and current conference are correct;
+- conference regular-season championships, conference tournament championships, Final Four appearances, and national championships are correct;
 - overall game count and on-court record reconcile to curated source rows;
 - first and last covered seasons are correct;
 - season-history totals reconcile;

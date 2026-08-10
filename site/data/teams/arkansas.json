@@ -10,6 +10,10 @@
     "state": "AR",
     "primary_hex": "#9D2235",
     "secondary_hex": "#FFFFFF",
+    "conference_regular_season_championships": 24,
+    "conference_tournament_championships": 8,
+    "final_four_appearances": 6,
+    "national_championships": 1,
     "current_conference": {
       "conference_key": "sec",
       "conference_name": "SEC"

@@ -353,6 +353,26 @@ def main() -> int:
                 "state": row.get("state", ""),
                 "primary_hex": row.get("primary_hex", ""),
                 "secondary_hex": row.get("secondary_hex", ""),
+                "conference_regular_season_championships": (
+                    int(row["conference_regular_season_championships"])
+                    if row.get("conference_regular_season_championships", "").strip()
+                    else None
+                ),
+                "conference_tournament_championships": (
+                    int(row["conference_tournament_championships"])
+                    if row.get("conference_tournament_championships", "").strip()
+                    else None
+                ),
+                "final_four_appearances": (
+                    int(row["final_four_appearances"])
+                    if row.get("final_four_appearances", "").strip()
+                    else None
+                ),
+                "national_championships": (
+                    int(row["national_championships"])
+                    if row.get("national_championships", "").strip()
+                    else None
+                ),
                 "current_d1": yes(row["current_d1"]),
                 "public_page_enabled": yes(row["public_page_enabled"]),
                 "current_conference": (
@@ -456,6 +476,26 @@ def main() -> int:
                 "state": program.get("state", ""),
                 "primary_hex": program.get("primary_hex", ""),
                 "secondary_hex": program.get("secondary_hex", ""),
+                "conference_regular_season_championships": (
+                    int(program["conference_regular_season_championships"])
+                    if program.get("conference_regular_season_championships", "").strip()
+                    else None
+                ),
+                "conference_tournament_championships": (
+                    int(program["conference_tournament_championships"])
+                    if program.get("conference_tournament_championships", "").strip()
+                    else None
+                ),
+                "final_four_appearances": (
+                    int(program["final_four_appearances"])
+                    if program.get("final_four_appearances", "").strip()
+                    else None
+                ),
+                "national_championships": (
+                    int(program["national_championships"])
+                    if program.get("national_championships", "").strip()
+                    else None
+                ),
                 "current_conference": (
                     {
                         "conference_key": membership["conference_key"],

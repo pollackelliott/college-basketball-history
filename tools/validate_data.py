@@ -129,6 +129,13 @@ REQUIRED_DISCREPANCY_COLUMNS = {
 
 ALLOWED_YES_NO = {"Yes", "No"}
 
+PROGRAM_ACHIEVEMENT_FIELDS = (
+    "conference_regular_season_championships",
+    "conference_tournament_championships",
+    "final_four_appearances",
+    "national_championships",
+)
+
 REQUIRED_PROGRAM_COLUMNS = {
     "program_key",
     "program_name",
@@ -136,6 +143,10 @@ REQUIRED_PROGRAM_COLUMNS = {
     "nickname",
     "current_d1",
     "public_page_enabled",
+    "conference_regular_season_championships",
+    "conference_tournament_championships",
+    "final_four_appearances",
+    "national_championships",
 }
 
 REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS = {
@@ -432,6 +443,23 @@ def main() -> int:
             errors.append(
                 f"{label}: public_page_enabled=Yes requires current_d1=Yes."
             )
+
+        for field in PROGRAM_ACHIEVEMENT_FIELDS:
+            value = row.get(field, "").strip()
+
+            if not value:
+                if public_page_enabled == "Yes":
+                    errors.append(
+                        f"{label}: {field} is required when "
+                        "public_page_enabled=Yes."
+                    )
+                continue
+
+            if not re.fullmatch(r"\d+", value):
+                errors.append(
+                    f"{label}: {field} must be a nonnegative integer "
+                    f"(got {value!r})."
+                )
 
         if public_page_enabled == "Yes" and program_key not in canonical_team_keys:
             errors.append(
