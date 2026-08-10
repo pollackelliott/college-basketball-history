@@ -65,7 +65,7 @@ Examples previously resolved under this rule include games at:
 
 ## Missouri-Illinois / Braggin' Rights
 
-Braggin' Rights games in St. Louis are Neutral unless specific evidence establishes otherwise.
+Braggin' Rights games in St. Louis are Neutral.
 
 Historical cross-source reconciliation has been performed against Illinois.
 
