@@ -1,0 +1,4 @@
+﻿index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,florida,1915-1916,1921-1922,independent,Independent,independent,False,Owner-supplied Florida conference history,Includes documented no-team WWI seasons within the interval; first recognized varsity season is 1915-16.
+1,florida,1922-1923,1931-1932,southern,Southern Conference,conference,False,Owner-supplied Florida conference history; consistent with Florida guide tournament labels,
+2,florida,1932-1933,,sec,SEC,conference,True,Owner-supplied Florida conference history; consistent with Florida guide SEC labeling,Ongoing through curated cutoff 2025-26.
