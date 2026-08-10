@@ -1404,7 +1404,7 @@
       "primary_hex": "#0021A5",
       "secondary_hex": "#FA4616",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
@@ -2692,8 +2692,8 @@
     },
     {
       "program_key": "miami",
-      "program_name": "Miami",
-      "display_name": "Miami",
+      "program_name": "Miami (FL)",
+      "display_name": "Miami (FL)",
       "nickname": "Hurricanes",
       "city": "Coral Gables",
       "state": "FL",
@@ -2709,7 +2709,7 @@
     {
       "program_key": "miami-oh",
       "program_name": "Miami (OH)",
-      "display_name": "Miami University",
+      "display_name": "Miami (OH)",
       "nickname": "RedHawks",
       "city": "Oxford",
       "state": "OH",
