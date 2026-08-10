@@ -83,7 +83,7 @@ elon,Elon,Elon,Phoenix,Elon,NC,#73000A,#B59A57,Yes,No
 evansville,Evansville,Evansville,Purple Aces,Evansville,IN,#52237F,#F36F21,Yes,No
 fairfield,Fairfield,Fairfield,Stags,Fairfield,CT,#C8102E,#A2AAAD,Yes,No
 fairleigh-dickinson,Fairleigh Dickinson,Fairleigh Dickinson,Knights,Hackensack,NJ,#283341,#72293C,Yes,No
-florida,Florida,Florida,Gators,Gainesville,FL,#0021A5,#FA4616,Yes,No
+florida,Florida,Florida,Gators,Gainesville,FL,#0021A5,#FA4616,Yes,Yes
 florida-a-m,Florida A&M,Florida A&M,Rattlers,Tallahassee,FL,#EE7624,#1B5633,Yes,No
 florida-atlantic,Florida Atlantic,FAU,Owls,Boca Raton,FL,#003366,#CC0000,Yes,No
 florida-gulf-coast,Florida Gulf Coast,Florida Gulf Coast,Eagles,Fort Myers,FL,#002D72,#007749,Yes,No
@@ -166,8 +166,8 @@ memphis,Memphis,Memphis,Tigers,Memphis,TN,#003087,#898D8D,Yes,No
 mercer,Mercer,Mercer,Bears,Macon,GA,#F76800,#000000,Yes,No
 mercyhurst,Mercyhurst,Mercyhurst,Lakers,Erie,PA,#07594D,#182752,Yes,No
 merrimack,Merrimack,Merrimack,Warriors,North Andover,MA,#003768,#FDB813,Yes,No
-miami,Miami,Miami,Hurricanes,Coral Gables,FL,#005030,#F47321,Yes,No
-miami-oh,Miami (OH),Miami University,RedHawks,Oxford,OH,#B61E2E,#FFFFFF,Yes,No
+miami,Miami (FL),Miami (FL),Hurricanes,Coral Gables,FL,#005030,#F47321,Yes,No
+miami-oh,Miami (OH),Miami (OH),RedHawks,Oxford,OH,#B61E2E,#FFFFFF,Yes,No
 michigan,Michigan,Michigan,Wolverines,Ann Arbor,MI,#00274C,#FFCB05,Yes,No
 michigan-state,Michigan State,Michigan State,Spartans,East Lansing,MI,#18453B,#FFFFFF,Yes,No
 middle-tennessee,Middle Tennessee,Middle Tennessee,Blue Raiders,Murfreesboro,TN,#0066CC,#000000,Yes,No

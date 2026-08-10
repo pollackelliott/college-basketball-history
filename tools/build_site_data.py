@@ -59,6 +59,7 @@ def perspective_game(
     row: dict[str, str],
     program_key: str,
     opponent_names: dict[str, str],
+    venue_names: dict[str, str],
     programs: dict[str, dict[str, str]],
 ) -> dict[str, Any]:
     team_a = row["team_a_key"]
@@ -124,6 +125,11 @@ def perspective_game(
         "overtime_periods": int(row["overtime_periods"] or 0),
         "site": site,
         "venue_key": row["venue_key"] or None,
+        "venue_name": (
+            venue_names.get(row["venue_key"].strip())
+            if row["venue_key"].strip()
+            else None
+        ),
         "site_city": row["site_city"] or None,
         "site_state": row["site_state"] or None,
         "game_type": row["game_type"],
@@ -225,6 +231,44 @@ def load_opponent_names(
     return resolved_names
 
 
+
+def load_venue_names(repo_root: Path) -> dict[str, str]:
+    names_by_key: dict[str, set[str]] = defaultdict(set)
+
+    schools_dir = repo_root / "schools"
+    if schools_dir.exists():
+        for path in sorted(schools_dir.glob("*/venues.csv")):
+            for row in read_csv(path):
+                key = row.get("venue_key", "").strip()
+                name = row.get("canonical_name", "").strip()
+                if key and name:
+                    names_by_key[key].add(name)
+
+    resolved_names: dict[str, str] = {}
+    true_conflicts: dict[str, list[str]] = {}
+
+    for key, names in names_by_key.items():
+        signatures = {normalized_name_signature(name) for name in names}
+
+        if len(signatures) == 1:
+            resolved_names[key] = preferred_display_name(names)
+        else:
+            true_conflicts[key] = sorted(names)
+
+    if true_conflicts:
+        sample = "; ".join(
+            f"{key}: {names}"
+            for key, names in list(sorted(true_conflicts.items()))[:10]
+        )
+        raise ValueError(
+            "Conflicting canonical venue display names found after "
+            "punctuation normalization. Resolve before publishing. "
+            + sample
+        )
+
+    return resolved_names
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -272,6 +316,7 @@ def main() -> int:
     }
 
     opponent_names = load_opponent_names(repo_root, programs)
+    venue_names = load_venue_names(repo_root)
 
     enabled_keys = sorted(
         row["program_key"]
@@ -328,7 +373,13 @@ def main() -> int:
         membership = current_memberships.get(program_key)
 
         perspective_games = [
-            perspective_game(row, program_key, opponent_names, programs)
+            perspective_game(
+                row,
+                program_key,
+                opponent_names,
+                venue_names,
+                programs,
+            )
             for row in canonical_rows
             if program_key in {row["team_a_key"], row["team_b_key"]}
         ]

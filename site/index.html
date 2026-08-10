@@ -270,7 +270,7 @@ function normalizeGame(game, opponentsByKey) {
     result: game.result,
     overtimePeriods: Number(game.overtime_periods || 0),
     site: game.site || "UNKNOWN",
-    venue: humanizeKey(game.venue_key),
+    venue: game.venue_name || humanizeKey(game.venue_key),
     venueKey: game.venue_key,
     location: gameLocation(game),
     siteCity: game.site_city,
