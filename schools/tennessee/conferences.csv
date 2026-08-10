@@ -1,0 +1,4 @@
+﻿index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,tennessee,1908-1909,1919-1920,siaa,SIAA,conference,False,Owner-supplied Tennessee conference history,Curated project chronology.
+1,tennessee,1920-1921,1931-1932,southern,Southern Conference,conference,False,Owner-supplied Tennessee conference history,Curated project chronology.
+2,tennessee,1932-1933,,sec,SEC,conference,True,Owner-supplied Tennessee conference history; consistent with record-book SEC labeling,Ongoing through curated cutoff 2025-26.
