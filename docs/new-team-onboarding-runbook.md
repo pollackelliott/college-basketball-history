@@ -2,7 +2,7 @@
 
 **Project:** College Basketball History
 
-**Document status:** Partner-ready v1
+**Document status:** Partner-ready v2
 
 **Validated:** August 10, 2026
 
@@ -10,27 +10,36 @@
 
 **Public site:** <https://college-basketball-history.vercel.app>
 
-> Florida completed the seventh-team acceptance test on August 10, 2026. This runbook is now the partner-ready v1 onboarding procedure. Routine execution may be delegated, but the project owner still reviews material identity decisions, conflicting canonical facts, and every step explicitly marked for owner review.
+> Florida and Tennessee completed successive production onboarding validations on August 10, 2026. Tennessee established the stable routine path for Partner-ready v2: build a complete six-file package, let ingestion surface a finite set of matches, enrichments, identity questions, and conflicts, and reserve heavier rehearsal work for cases that actually need it.
 
 ## 1. Purpose
 
 This runbook explains how to add one current Division I men's basketball program to the project without duplicating games, losing source evidence, silently overwriting conflicts, or breaking existing public program pages.
 
-The complete workflow is:
+For the current expansion cycle, every new program is curated through **2025-26**, the most recently completed season as of August 2026.
 
-1. Select the program and define its coverage cutoff.
-2. Gather authoritative source material.
-3. Build and QA the six-file school package.
-4. Commit the source package on a dedicated branch.
-5. Dry-run ingestion and resolve identity questions.
-6. Rehearse the apply in an isolated copy.
-7. Apply ingestion on the working branch.
-8. Review and resolve discrepancies.
-9. Validate and prove a target-school no-op.
-10. Enable the public page.
-11. Build deterministic website data.
-12. QA the new program and the existing-public-program regression set.
-13. Commit, push, review, merge, deploy, and verify production.
+The standard routine workflow is:
+
+1. Select the program and gather authoritative sources.
+2. Resolve material research questions before package construction.
+3. Build the complete six-file school package.
+4. Run compact structural and historical package QA.
+5. Commit the six-file source package on a dedicated onboarding branch.
+6. Dry-run ingestion and resolve any identity-review cases.
+7. Use an isolated rehearsal only when the safety conditions in Section 12 warrant it.
+8. Apply ingestion on the onboarding branch.
+9. Review the finite discrepancy set and reconcile approved conflicts.
+10. Validate and prove a complete target-school no-op.
+11. Populate publication metadata and enable the public page.
+12. Build deterministic public site data.
+13. Perform targeted new-team QA plus a light affected-existing-team smoke test.
+14. Commit explicitly, push the branch, open a pull request into `main`, merge, and verify production.
+
+The central operational principle is:
+
+> **The six-file school package is the primary onboarding deliverable.**
+
+Do the expensive historical research while constructing that package. Once it is coherent, ingestion should reduce the remaining global work to a finite set of machine-identified matches, enrichments, identity questions, and genuine source conflicts rather than requiring another manual proof of thousands of games.
 
 ## 2. Core data principle
 
@@ -326,7 +335,7 @@ If a source establishes a city but not an exact arena, fill the city and leave `
 
 A documented primary-home chronology may fill a missing venue/location only after the game has independently been established as a home game and only when no explicit game-level evidence contradicts the chronology.
 
-When an already-curated source assertion supplies an exact venue for an existing canonical game whose venue is blank, review the evidence and backfill the canonical venue/location when justified. Ingestion does not currently surface every such improvement automatically.
+When a confidently matched source row supplies supported metadata for a blank canonical field, ingestion may enrich the canonical game. Venue/location enrichment requires the source and canonical site classifications to independently agree; venue evidence never establishes home/away/neutral classification.
 
 `venue_key` is an identity field, not a presentation field. `canonical_name` is the public venue label. Generated public game data should carry both `venue_key` and `venue_name`; the frontend must prefer the canonical `venue_name` rather than manufacturing a label from the slug.
 
@@ -678,23 +687,24 @@ Expected result: exactly the six required filenames, with no unrelated changes.
 
 ## 11. Ingestion dry run and identity review
 
-Run the default dry run:
+Run:
 
 ```bash
 python tools/ingest_school.py "$school_key"
 git status -sb
 ```
 
-The dry run changes nothing. Review these counts:
+The dry run changes nothing. Review:
 
 - `Source rows`
 - `Existing-game matches`
 - `New canonical games`
 - `Identity review required`
+- `Canonical enrichments`
 - `Assertions to add`
 - `Discrepancies to add`
 
-The identity counts must satisfy:
+Identity counts must satisfy:
 
 ```text
 Existing-game matches + New canonical games + Identity review required = Source rows
@@ -702,191 +712,246 @@ Existing-game matches + New canonical games + Identity review required = Source 
 
 For a first ingestion:
 
-- `Source rows` must equal the number of competitive rows in the package.
+- `Source rows` must equal the competitive rows in the package.
 - `Assertions to add` will normally equal `Source rows`.
-- Existing matches should primarily be games already represented through one of the six curated programs.
-- New games should represent the rest of the target's history.
-- Any unexpectedly large or small count is a stop signal.
+- Existing matches are games already represented through another source.
+- New canonical games represent the rest of the target's history.
+- Canonical enrichments are supported blank fields filled on already-matched games.
+- Unexpected counts are a stop signal.
+
+### Safe matched-game enrichment
+
+For a confidently matched existing game:
+
+```text
+canonical blank + supported source value -> enrich canonical
+same value + same value                 -> no action
+populated values conflict               -> discrepancy
+source value unknown/unsupported        -> no action
+```
+
+Safe enrichment may fill supported blank metadata such as:
+
+- `venue_key`
+- `site_city`
+- `site_state`
+- `designated_home_team_key`
+
+For venue/location enrichment, source and canonical site classifications must independently agree.
+
+**Venue evidence never establishes or changes home/away/neutral classification.**
+
+Explicit game-level city/state evidence takes precedence over venue-registry fallback information.
 
 ### If identity review is required
 
-The script stops all writes when even one identity requires review. Inspect each printed row.
+The ingester stops all writes when even one identity requires review.
 
-Common causes:
+Common causes include:
 
-- multiple games against the same opponent in one season;
-- incomplete or conflicting date/score information;
-- a possible duplicate already represented by another source;
+- repeated opponents in the same season;
+- incomplete/conflicting date or score information;
+- a possible duplicate already represented elsewhere;
 - missing source identity fields;
 - an invalid identity override;
 - one source assertion linked to multiple canonical games.
 
-Resolve the underlying research question first. Then, only when justified, use `FORCE_NEW` or `MATCH_SOURCE_ASSERTION` as described in Section 7.1. Rerun the dry run until `Identity review required: 0`.
+Resolve the research question first. Use `FORCE_NEW` or `MATCH_SOURCE_ASSERTION` only when justified.
 
-## 12. Isolated apply rehearsal
+Rerun until:
 
-Perform this rehearsal before the first real apply for every new program. It applies only inside a temporary copy made from the committed branch.
+```text
+Identity review required: 0
+```
+
+Do not weaken the matcher or invent precision merely to make ingestion proceed.
+
+## 12. Isolated apply rehearsal — conditional safety tool
+
+An isolated rehearsal remains available, but it is **not required for every routine school** once the current ingestion engine has already been production-proven.
+
+Perform the rehearsal when any of these conditions applies:
+
+- `tools/ingest_school.py`, the canonical schema, or relevant validator logic changed since the last production-proven onboarding;
+- dry-run counts are surprising or cannot be readily explained;
+- identity overrides introduce unusual matching behavior;
+- a broad reconciliation/tooling change is part of the onboarding;
+- a collaborator is exercising a new or uncertain workflow where a disposable proof materially reduces risk;
+- the project owner requests it.
+
+For a routine school using unchanged, already-proven ingestion logic with sensible dry-run counts, proceed directly from reviewed dry run to the real branch apply.
+
+When rehearsal is warranted:
 
 ```bash
 audit_dir="$(mktemp -d "/tmp/cbb-${school_key}-audit.XXXXXX")"
 git archive HEAD | tar -x -C "$audit_dir"
+
 python "$audit_dir/tools/ingest_school.py" "$school_key" --repo "$audit_dir"
 python "$audit_dir/tools/ingest_school.py" "$school_key" --apply --repo "$audit_dir"
 python "$audit_dir/tools/validate_data.py" "$audit_dir"
+python "$audit_dir/tools/ingest_school.py" "$school_key" --repo "$audit_dir"
+
 printf 'Temporary audit copy: %s\n' "$audit_dir"
 ```
 
-Capture the exact proposed global changes without flooding the terminal:
-
-```bash
-diff -u data/canonical/games.csv "$audit_dir/data/canonical/games.csv" > "/tmp/${school_key}-canonical.diff" || true
-diff -u data/evidence/game-assertions.csv "$audit_dir/data/evidence/game-assertions.csv" > "/tmp/${school_key}-assertions.diff" || true
-diff -u data/reconciliation/discrepancies.csv "$audit_dir/data/reconciliation/discrepancies.csv" > "/tmp/${school_key}-discrepancies.diff" || true
-wc -l "/tmp/${school_key}-canonical.diff" "/tmp/${school_key}-assertions.diff" "/tmp/${school_key}-discrepancies.diff"
-sed -n '1,160p' "/tmp/${school_key}-canonical.diff"
-sed -n '1,160p' "/tmp/${school_key}-discrepancies.diff"
-```
-
-Review the complete saved diffs when the first 160 lines are not sufficient. The assertion diff can legitimately be large because the first ingestion appends one evidence row per source game.
-
-Then prove deduplication inside the already-updated copy:
-
-```bash
-python "$audit_dir/tools/ingest_school.py" "$school_key" --repo "$audit_dir"
-```
-
-Expected result:
+Expected result after the isolated apply:
 
 - validation passes;
-- second ingestion reports zero new games, assertions, and discrepancies;
+- second ingestion reports zero new canonical games;
+- zero canonical enrichments remain;
+- zero assertions remain to add;
+- zero discrepancies remain to add;
 - output includes `NO-OP`.
 
 Do not continue if the isolated second run is not a no-op.
 
 ## 13. Apply on the working branch
 
-After the dry-run counts and isolated diffs are approved:
+After the dry-run counts are reviewed and any required isolated rehearsal has passed:
 
 ```bash
 python tools/ingest_school.py "$school_key" --apply
 git status --short
 ```
 
-The script writes only these global layers:
+The ingester may update:
 
 - `data/canonical/games.csv`
+  - append genuinely new games;
+  - safely enrich supported blank fields on matched existing games;
 - `data/evidence/game-assertions.csv`
+  - append the target source assertions;
 - `data/reconciliation/discrepancies.csv`
+  - append machine-detected material disagreements.
 
 It also runs `tools/validate_data.py` after writing. A successful apply must end with post-write validation passing.
 
-Review the changes before reconciliation:
+Review the resulting scale of change:
 
 ```bash
-git diff --stat
-git diff -- data/reconciliation/discrepancies.csv
+git --no-pager diff --stat
+git --no-pager diff --numstat -- data/canonical/games.csv
+git --no-pager diff -- data/reconciliation/discrepancies.csv
 ```
 
-Do not infer success merely from row counts. Inspect representative early, middle, recent, postseason, neutral-site, overtime, and overlap games.
+Do not manually inspect thousands of routine appended rows one by one.
+
+Instead verify:
+
+- applied counts equal the reviewed dry-run counts;
+- the validator passes;
+- the discrepancy set is finite and understandable;
+- representative early, middle, recent, postseason, neutral-site, overtime, and overlap games behave correctly;
+- canonical enrichments are blank-to-supported-value changes rather than overwrites.
+
+If a supposedly small metadata edit produces broad formatting churn, stop and investigate file-format preservation before continuing.
 
 ## 14. Reconciliation
 
 ### What automatic ingestion does
 
-- Matches a source row against canonical games using the alphabetically ordered team pair and season.
-- Uses date and score evidence conservatively to identify a game.
-- Creates a new canonical game only when no same-season team-pair candidate exists or an approved `FORCE_NEW` applies.
-- Preserves permanent canonical game IDs.
-- Adds a source assertion.
-- Creates an `UNDER_REVIEW` discrepancy for material disagreements on:
+Automatic ingestion:
+
+- matches source rows against canonical games using team pair, season, date, score, and approved identity evidence;
+- creates a new canonical game only when the row represents a game not already canonical;
+- preserves permanent canonical game IDs;
+- adds one source assertion for the incoming source row;
+- creates an `UNDER_REVIEW` discrepancy for material nonblank disagreements involving:
   - game date;
   - score;
   - result winner;
   - overtime periods;
   - site type;
   - game type;
-  - postseason round.
-- Does not silently overwrite the canonical value.
+  - postseason round;
+- safely enriches supported blank canonical metadata on confidently matched games when source and canonical site classifications independently agree;
+- does not overwrite a populated conflicting canonical value.
 
-### What automatic ingestion does not guarantee
+### Matched-game enrichment policy
 
-- It does not comprehensively audit an existing program's entire site/home/venue history.
-- A new school cross-checks only games involving that school.
-- Blank source values do not create discrepancies against known canonical values.
-- Venue improvements are not all surfaced automatically.
-- `conferences.csv` is not imported.
-- There is no generic, fully documented reconciliation command for every conflict type yet.
+Supported second-source evidence should improve an existing canonical game rather than remain trapped only in its assertion.
 
-### Human-readable discrepancy review — required
+```text
+blank + supported evidence = enrich
+same + same = no action
+conflict + conflict = discrepancy
+unknown = remain unknown
+```
 
-Before canonical reconciliation begins, present every newly generated discrepancy to the project owner in a concise human-readable review.
+For matched games, venue/location enrichment is allowed only after site classification is independently established and agrees between source and canonical data.
 
-At minimum show:
+A venue or home-arena chronology may never establish home/away/neutral on its own.
+
+This mechanism improves only games involving the newly onboarded program. It does **not** constitute a comprehensive audit of every historical venue/site field for an older public program.
+
+### Human-readable discrepancy review
+
+Present newly generated discrepancies to the project owner in a concise review rather than using a giant raw CSV diff as the primary interface.
+
+For each discrepancy show:
 
 - discrepancy ID;
 - season/date and matchup;
 - disputed field;
-- each source's asserted value;
+- incoming source value;
 - current canonical value;
-- current status.
+- relevant competing evidence;
+- recommended disposition.
 
-Do not use a giant raw CSV diff as the owner's primary review interface.
+The owner should concentrate research effort on this finite conflict set rather than rechecking every source row.
 
-Give particular attention to modern and 21st-century conflicts, where independent official verification is usually practical. The owner must have an opportunity to validate every material discrepancy before it is marked `RESOLVED`.
+Modern and 21st-century conflicts should usually receive direct official verification when practical.
 
 ### Resolution rules
 
-1. Preserve the raw assertion unless the normalized field is demonstrably a curation error rather than what the source said.
-2. Prefer contemporaneous official game records or box scores when later summary tables contain an apparent typo.
-3. Use explicit game-level site evidence over a venue-based default.
-4. Do not force a resolution when two credible sources remain in genuine conflict.
-5. For a resolved discrepancy, retain:
-   - competing value(s);
-   - canonical value;
-   - `RESOLVED` status;
-   - evidence-based `resolution_basis`;
-   - a clear note.
-6. For genuine uncertainty, retain `UNDER_REVIEW` and do not invent a canonical correction.
-7. If an already-ingested source row's normalized value was wrong, update the school source row and its evidence assertion consistently, while preserving raw source text and prior reconciliation history.
-8. If a new package exposes duplicate opponent/program identities already present globally, reconcile the identity itself rather than merely changing its display label.
-9. If newly curated evidence supplies a missing canonical venue/location for an already-matched game, review and backfill the canonical field when justified. Preserve stronger explicit exceptions.
+1. Preserve raw source evidence.
+2. Prefer contemporaneous official game records or box scores when later summary tables contain apparent typos.
+3. Explicit game-level site evidence outranks venue chronology.
+4. Do not force a resolution when credible sources remain genuinely in conflict.
+5. A resolved discrepancy remains in `discrepancies.csv` with its competing value(s), final canonical value, `RESOLVED` status, evidence-based `resolution_basis`, and explanatory note.
+6. Genuine uncertainty may remain `UNDER_REVIEW`.
+7. An unresolved historical discrepancy does **not automatically block publication** when game identity is secure, the canonical representation is defensible, the conflict is transparently retained, and the owner approves publication with the flag outstanding.
+8. If a normalized package value was demonstrably curated incorrectly, correct the school row and corresponding evidence assertion while preserving raw source text and reconciliation history.
+9. If new evidence exposes duplicate opponent/program identities, reconcile the identity globally rather than merely changing a display label.
+10. Safe blank-field enrichment does not require a discrepancy record; conflicting populated values do.
+11. Material canonical-value changes require owner review.
 
 ### Examples
 
 #### Source score typo
 
-If a later guide says 51-63 but contemporary official box scores establish 57-63:
+If a later guide says 51-63 but contemporaneous official evidence establishes 57-63:
 
-- retain the guide's raw assertion;
-- keep 57-63 canonical;
-- record the conflict and evidence;
+- preserve the guide assertion;
+- keep or change canonical to the supported 57-63 as approved;
+- document the conflict;
 - mark the discrepancy resolved.
 
-#### Source/result internal conflict
+#### Genuine unresolved historical conflict
 
-If the source row says `L 77-70`, its result and score conflict internally. Do not silently reinterpret both fields. Preserve the raw assertion, establish the canonical score/result from stronger evidence, and document the resolution.
+If two credible historical sources report different scores and stronger evidence is unavailable:
+
+- retain both assertions;
+- retain the best-supported current canonical value;
+- leave the discrepancy `UNDER_REVIEW`;
+- do not invent certainty solely to achieve zero open discrepancies.
 
 #### Site versus venue chronology
 
-If the venue chronology suggests the target's home arena but explicit source text says `at Opponent`, treat the explicit game evidence as stronger. A home-arena relationship is not dispositive.
+If venue chronology suggests the target's home arena but explicit game evidence says `at Opponent`, explicit game evidence controls.
 
 #### Overtime normalization error
 
-If raw text contains `(OT)` but the normalized overtime field is `0`, correct the normalized source field before creating a redundant under-review discrepancy. Preserve the raw text.
+If raw text contains `(OT)` but a curated normalized field says `0`, correct the normalized field and evidence assertion while preserving the raw source text.
 
 #### Same-season repeated opponent
 
-If the matcher cannot distinguish two real games, use a cross-source assertion only after identifying the exact counterpart. `MATCH_SOURCE_ASSERTION` is preferable to embedding a canonical ID in the package.
-
-### Owner review required
-
-Material canonical-value changes after ingestion require project-owner review. Use an existing reviewed resolver pattern or a narrowly scoped, auditable patch. Never perform broad manual rewrites of global CSV files.
-
-Routine corrections that merely synchronize an already-approved resolution across normalized source fields, evidence, or generated public outputs may be executed without reopening the underlying research decision, provided the raw evidence remains preserved.
+If the matcher cannot distinguish two real games, identify the exact counterpart first. Use `MATCH_SOURCE_ASSERTION` only after the identity is established.
 
 ## 15. Validation and no-op gate
 
-After all approved resolutions:
+After all approved reconciliation:
 
 ```bash
 python tools/validate_data.py
@@ -894,34 +959,21 @@ python tools/ingest_school.py "$school_key"
 git status --short
 ```
 
-The target-school ingestion must report:
+The final target-school ingestion must report:
 
 - all source rows as existing-game matches;
 - `New canonical games: 0`;
 - `Identity review required: 0`;
+- `Canonical enrichments: 0 games / 0 fields`;
 - `Assertions to add: 0`;
 - `Discrepancies to add: 0`;
 - `NO-OP`.
 
-The validator currently checks, among other things:
+This no-op is the strongest routine proof that the six-file package, canonical games, evidence assertions, discrepancy layer, and safe enrichment behavior are synchronized.
 
-- required columns;
-- stable, unique canonical IDs;
-- alphabetically ordered and distinct team keys;
-- allowed site, game, postseason, canonical-status, and administrative-status values;
-- score/winner consistency;
-- home-team/site consistency;
-- unique assertion IDs and source identity pairs;
-- valid canonical references from evidence and discrepancies;
-- unique program keys;
-- required program names and Yes/No flags;
-- current-D1/public-page constraints;
-- valid conference-membership rows;
-- one `2026-2027` conference row for every current Division I program.
+The validator continues to enforce structural integrity across canonical games, evidence, reconciliation, program identities, and conference membership.
 
-### Known baseline caveat
-
-Known deferred cleanup in another program is not, by itself, a blocker to the target program's no-op gate. Keep unrelated cleanup separate unless evidence from the current onboarding directly resolves it.
+Known unrelated deferred cleanup is not itself a blocker to the target program. Keep unrelated work separate unless the current onboarding directly supplies evidence that resolves it.
 
 ## 16. Public-page enablement and deterministic site build
 
@@ -1091,52 +1143,32 @@ Do **not** open `site/index.html` through `file://`; the frontend fetches JSON f
 
 Test both desktop and a narrow/mobile viewport.
 
-### Existing-public-program regression set
+### Existing-public-program smoke test
 
-The regression set is dynamic: **every program already public before the current onboarding must be retested.**
+Routine data-only onboarding does **not** require a full retest of every previously published program.
 
-Do not hard-code a historical count such as six or seven programs.
+Instead:
 
-To list current public programs:
+- review any existing public team JSON files changed by the site build and understand why they changed;
+- visually open one or two representative affected existing programs;
+- specifically inspect any older program whose canonical game was materially reconciled or enriched;
+- confirm directory/search routing remains normal.
 
-```bash
-python - <<'PY2'
-import csv
+Perform a full existing-public-program regression only when:
 
-with open(
-    "data/reference/programs.csv",
-    newline="",
-    encoding="utf-8-sig",
-) as f:
-    rows = list(csv.DictReader(f))
-
-for row in sorted(
-    rows,
-    key=lambda r: r["display_name"].casefold(),
-):
-    if row["public_page_enabled"].strip().lower() == "yes":
-        print(row["program_key"], "-", row["display_name"])
-PY2
-```
-
-For each existing public program verify:
-
-- page loads;
-- directory/search routing works;
-- filters and pagination work;
-- opponent series opens;
-- matchup history renders;
-- no unexplained record/count change occurred;
-- canonical opponent names render correctly;
-- canonical venue names render correctly;
-- desktop and narrow/mobile layouts remain usable.
+- shared frontend code changed;
+- the public JSON schema changed;
+- site-builder behavior changed materially;
+- broad identity cleanup touched many programs;
+- broad venue/opponent normalization changed shared display behavior;
+- the project owner requests it.
 
 Generated changes to an existing team JSON file are acceptable when they result from:
 
 - approved canonical reconciliation;
+- safe matched-game enrichment;
 - the new target becoming a public/linkable opponent;
 - approved global identity cleanup;
-- canonical venue-name enrichment;
 - another explicitly reviewed cross-program improvement.
 
 ### Commit sequence
@@ -1316,7 +1348,7 @@ At minimum:
 - headline program metadata and record are correct;
 - representative opponent and venue display names are correct;
 - representative early/recent games render correctly;
-- every previously public program opens successfully.
+- one or two representative previously public programs open successfully, including any existing program materially affected by reconciliation or enrichment.
 
 Production JSON can also be checked directly at:
 
@@ -1393,129 +1425,112 @@ If both onboarding commits must be reverted, revert the later generated/publicat
 - Verify all previously public program pages and confirm the target is no longer public.
 - Never use `git reset --hard` or force-push shared `main` as a rollback mechanism.
 
-## 19. Seventh-team acceptance test — COMPLETED
+## 19. Production onboarding validation history
 
-**Acceptance program:** Florida
+### Florida — seventh public program
 
 **Completed:** August 10, 2026
-
 **Result:** PASS
 
-Florida completed the full onboarding workflow from six-file source package through production deployment.
+Florida established the first complete partner-ready onboarding path from six-file package through production.
 
-### Acceptance record
+Key results:
 
-- Source rows: **2,787**
-- Historical coverage: **1915-16 through 2025-26**
-- Final on-court record: **1,595-1,192**
-- Distinct opponents after reconciliation: **303**
-- Initial existing-game matches: **232**
-- Initial new canonical games: **2,555**
-- Identity review required: **0**
-- Assertions added: **2,787**
-- New discrepancies: **10**
-- All ten Florida discrepancies (`DISC-000068` through `DISC-000077`) were explicitly reviewed and marked `RESOLVED`.
-- Isolated apply validation: **PASS**
-- Isolated second ingestion: **NO-OP**
-- Final real ingestion: **NO-OP**
-- Final canonical games: **20,180**
-- Final source assertions: **21,175**
-- Final discrepancies: **77**
-- Reference programs: **365**
-- Conference rows: **365**
-- Public pages: **7**
-- Generated team JSON files: **7**
-- Stale team files: **0**
-- Site-data determinism: **PASS**
-- Local browser QA: **PASS**
-- Production JSON QA: **PASS**
-- Production visual QA: **PASS**
+- 2,787 source games;
+- 232 existing matches;
+- 2,555 new canonical games;
+- 0 identity-review cases;
+- 10 discrepancies, all reviewed and resolved;
+- final record 1,595-1,192;
+- isolated rehearsal PASS;
+- final ingestion NO-OP;
+- deterministic site build PASS;
+- production QA PASS.
 
-### Publication record
+### Tennessee — eighth public program / Partner-ready v2 validation
 
-- Florida publication commit: `f8230ea`
-- Pull request: `#1` — `Ingest and publish Florida`
-- Merge commit: `8c50e70b7d150c530364de60da1825f8a072428d`
-- Vercel Production deployment ID: `5839245056`
-- Production deployment state: `success`
+**Completed:** August 10, 2026
+**Result:** PASS
 
-### Lessons incorporated into partner-ready v1
+Tennessee validated the faster routine path and the permanent matched-game enrichment behavior.
 
-1. Human-readable discrepancy review is mandatory before reconciliation.
-2. Cross-program identity reconciliation is part of onboarding when new evidence exposes duplicate global identities.
-3. Florida exposed redundant Miami identities:
-   - `miami` is the canonical Miami (FL) identity;
-   - `miami-oh` is the canonical Miami (OH) identity;
-   - redundant `miami-fl`, `miami-fla`, and `miami-university` canonical usage was removed;
-   - Miami YMCA remains a separate historical opponent.
-4. Site classification and venue chronology remain independent.
-5. Venue chronology may fill venue/location only after a game is independently established as home.
-6. Canonical venue names, not prettified venue keys, drive public display.
-7. New school evidence can legitimately improve previously published pages.
-8. Bare `git diff --check` is unsuitable for the repository's current mixed CSV line endings; use the CRLF-aware check.
-9. The local frontend preview is a plain static HTTP server.
-10. Merging to `main` automatically triggers Vercel Production; production must be verified against the merge SHA.
-11. Regression sets are dynamic and include every currently public program.
-12. Unknown remains unknown when evidence is insufficient.
+Key results:
 
-### Process deviation observed during Florida
+- 2,952 source games;
+- 478 existing matches;
+- 2,474 new canonical games;
+- 0 identity-review cases;
+- 255 matched games safely enriched;
+- 672 blank canonical fields filled;
+- 22 discrepancies generated;
+- 21 resolved;
+- 1 genuine historical score conflict retained `UNDER_REVIEW`;
+- final record 1,827-1,123-2;
+- final ingestion NO-OP;
+- deterministic site build PASS;
+- production QA PASS.
 
-Florida's six-file source package had already been committed directly to `main` before the dedicated onboarding branch was created.
+### Partner-ready v2 conclusion
 
-This did not invalidate the acceptance test, but it is **not** the preferred future workflow.
+Routine onboarding now means:
 
-For future programs:
+1. build a trustworthy six-file package;
+2. let ingestion identify matches, new games, enrichments, identity questions, and conflicts;
+3. review only material identity ambiguity and discrepancies;
+4. retain genuine unresolved historical conflicts transparently when appropriate;
+5. prove the final no-op;
+6. perform targeted site QA;
+7. merge through a dedicated branch and pull request;
+8. verify production.
 
-1. create the dedicated onboarding branch first;
-2. build and review the six-file package there;
-3. commit the source package there;
-4. perform ingestion/publication work on that branch;
-5. merge through the normal pull-request process.
+Isolated rehearsal and full-public-program regression remain available safety tools, but they are no longer mandatory for every routine data-only onboarding.
 
-### Tooling improvements still worth building
+## 20. Known deferred work after Tennessee
 
-These are useful improvements but do not block partner-ready v1:
+The following remain valid project work but do not block routine onboarding:
 
-- promote the temporary structural checker into `tools/validate_school_package.py`;
-- create a reusable human-readable discrepancy-report helper;
-- establish a reusable six-file/source-game template containing the current field union;
-- decide whether historical `conferences.csv` remains documentary or gains an importer.
+- A newly onboarded school improves only games involving that school; it does not comprehensively audit every older program's history.
+- Existing public programs may still contain unsupported venue/location blanks that will be filled gradually as overlapping authoritative packages arrive or through dedicated cleanup.
+- Exact venue/location remains intentionally blank where evidence is insufficient.
+- Continue consolidating duplicate opponent and venue identities when new packages expose them.
+- Historical `conferences.csv` files remain documentary unless/until a dedicated importer is implemented.
+- A reusable `tools/validate_school_package.py` would improve structural package QA.
+- A reusable human-readable discrepancy-report helper would reduce manual review work.
+- A reusable six-file template reflecting the current field union would improve collaborator onboarding.
+- Some older public programs may still merit focused venue/site audits independent of the normal new-school onboarding cycle.
+- Florida retains a future venue-identity research question involving `Benchmark International Arena`; do not conflate it with another Tampa venue without evidence.
 
-## 20. Known deferred work after the Florida acceptance test
-
-- Missouri appears to have inflated home-game counts and still merits a focused site/venue audit.
-- Future opponent packages cross-check only games involving the newly onboarded school; they do not automatically audit an existing program's entire history.
-- Four Missouri normalization-related discrepancy candidates identified during the readiness audit should not be blindly applied.
-- Exact venues remain intentionally blank when evidence supports only a city or site classification.
-- Revisit the six pre-Florida public programs under the clarified venue policy:
-  - fill supported primary-home venue/location gaps only after site is independently established;
-  - preserve explicit game-level exceptions;
-  - leave genuinely unsupported venues blank.
-- Continue consolidating duplicate venue identities and aliases when new school packages expose them.
-- Florida's package retains a future research question about whether `Benchmark International Arena` belongs to an existing Tampa venue identity/alias family. Do not conflate it without evidence.
-
-These items remain visible project work, but none blocks normal onboarding under partner-ready v1.
+None of these items justifies delaying a new school whose own six-file package, ingestion, reconciliation, validation, no-op, and publication gates are clean.
 
 ## 21. Partner handoff checklist
 
 Before a partner begins independently, confirm that the partner can answer “yes” to each item:
 
-- [ ] I understand that one real game has one canonical row.
-- [ ] I understand the difference between source assertions and canonical facts.
-- [ ] I will preserve raw evidence and document normalization.
-- [ ] I will exclude exhibitions.
-- [ ] I will not infer site solely from venue.
-- [ ] I will not use aggregate totals to invent games.
-- [ ] I will stop for ambiguous identities.
-- [ ] I will use dry run before `--apply`.
-- [ ] I will rehearse the first apply in an isolated copy.
-- [ ] I will not apply when identity review is nonzero.
-- [ ] I will review every generated discrepancy.
-- [ ] I will require validation and a target-team no-op.
-- [ ] I will enable the public page only after canonical QA.
-- [ ] I will dry-run the site build before applying it.
-- [ ] I will test the new team and every previously public program in the regression set.
-- [ ] I will never run the obsolete rebase block or use `origin/ma`.
+- [ ] I understand that one real game has one canonical row and source assertions are evidence about that game.
+- [ ] I will preserve raw source evidence and document normalization decisions.
+- [ ] I will curate through 2025-26 for the current expansion cycle.
+- [ ] I will exclude exhibitions and will not invent games from aggregate totals.
+- [ ] I will not infer home/away/neutral solely from venue or venue chronology.
+- [ ] I understand that supported blank canonical metadata may be safely enriched on matched games, but populated conflicts become discrepancies.
+- [ ] I will stop for ambiguous identities or uncertain game inclusion.
+- [ ] I will create and use a dedicated onboarding branch before browser-uploading school files.
+- [ ] I will build and QA the complete six-file school package before ingestion.
+- [ ] I will commit the six-file package before global ingestion.
+- [ ] I will dry-run ingestion before `--apply` and will not apply while identity review is nonzero.
+- [ ] I understand that isolated rehearsal is conditional rather than mandatory for every routine school.
+- [ ] I will review every generated discrepancy in human-readable form and escalate material canonical-value decisions.
+- [ ] I understand that a genuine historical conflict may remain `UNDER_REVIEW` when publication with the flag is explicitly approved.
+- [ ] I will require validation and a complete target-team no-op, including zero remaining canonical enrichments.
+- [ ] I will verify the target's current conference row and populate all four achievement fields before publication.
+- [ ] I will preserve existing CSV BOM/newline style when modifying tracked CSV files.
+- [ ] I will dry-run the site build before applying it and verify deterministic output.
+- [ ] I will perform detailed target-page QA and a light affected-existing-program smoke test for routine data-only onboarding.
+- [ ] I will run a full public-program regression when shared frontend/schema/builder behavior or broad shared data changes warrant it.
+- [ ] I will stage files explicitly and will never use `git add -A` for onboarding.
+- [ ] I will push the onboarding branch, open a pull request with base `main`, verify checks, and merge through the PR.
+- [ ] I will synchronize local `main` after merge and rerun validation, target no-op, and site dry run.
+- [ ] I will verify the Vercel production deployment and production page before declaring the school closed.
+- [ ] I will never use the obsolete rebase block or `origin/ma`.
 - [ ] I will never force-push or reset shared `main` to undo an onboarding.
 
 ## Appendix A. Global output contracts
