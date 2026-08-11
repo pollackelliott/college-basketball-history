@@ -5871,12 +5871,12 @@
       "state": "TN",
       "primary_hex": "#FF8200",
       "secondary_hex": "#FFFFFF",
-      "conference_regular_season_championships": null,
-      "conference_tournament_championships": null,
-      "final_four_appearances": null,
-      "national_championships": null,
+      "conference_regular_season_championships": 12,
+      "conference_tournament_championships": 5,
+      "final_four_appearances": 0,
+      "national_championships": 0,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"

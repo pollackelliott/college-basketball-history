@@ -35,3 +35,12 @@ Opponent normalization first reuses identities already established in the projec
 ## 9. Expected reconciliation behavior
 
 Because Tennessee overlaps seven already-public programs, ingestion should match many existing canonical games. Material disagreements should be presented in the project's required human-readable discrepancy review before resolution, with especially close owner review for 21st-century cases. The six-file package itself is the principal deliverable; broad re-auditing of already-settled canonical history is not required absent a surfaced discrepancy.
+
+## Post-ingestion cross-source curation — 2026-08-10
+
+The Tennessee chronological ledger remains the preserved raw source basis. During cross-source reconciliation, two rows were curated for overtime count after corroborating evidence established information omitted from the Tennessee chronological line:
+
+- TENRAW-01005 — 1963-01-19 at Kentucky: curated to 1OT; raw Tennessee text preserved.
+- TENRAW-01407 — 1978-03-04 at Florida: curated to 3OT; raw Tennessee text preserved.
+
+Twenty-one of the 22 ingestion discrepancies were resolved. DISC-000078 remains under review as a genuine 1910 score conflict.
