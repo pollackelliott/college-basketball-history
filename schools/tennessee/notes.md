@@ -53,3 +53,17 @@ Current Division-I identities reuse the project's established program-key conven
 - Game types: {'REGULAR_SEASON': 2712, 'CONFERENCE_TOURNAMENT': 151, 'NIT': 26, 'NCAA_TOURNAMENT': 63}
 - Conference-tournament championship-game rows: 14
 - NCAA/public round counts: {'Championship': 14, 'Sweet Sixteen': 12, 'R64': 26, 'R32': 19, 'Elite Eight': 4}
+
+## Tennessee ingestion reconciliation — 2026-08-10
+
+- Initial ingestion produced 22 field-level discrepancies against existing canonical games.
+- 21 were resolved during owner-approved cross-source review.
+- DISC-000078 (Tennessee at Kentucky, 1910-02-16, Kentucky 26-5 vs. 20-5) remains UNDER_REVIEW because credible historical records conflict and no sufficiently persuasive evidence has yet broken the tie.
+- Tennessee's curated overtime values were corrected for:
+  - 1963-01-19 at Kentucky: 1OT.
+  - 1978-03-04 at Florida: 3OT.
+  The Tennessee chronological raw text omits those OT markers and remains preserved verbatim.
+- Reconciliation also corrected two previously canonical Missouri site assignments:
+  - 2013-03-09 Missouri at Tennessee.
+  - 2014-03-08 Missouri at Tennessee.
+  Both were played in Knoxville at Thompson-Boling Arena.

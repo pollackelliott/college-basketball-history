@@ -441,13 +441,161 @@ def load_venue_name_map(path: Path) -> dict[str, str]:
     return result
 
 
-def build_new_canonical(source: dict[str, str], game_id: str, venue_name_map: dict[str, str]) -> dict[str, str]:
+def load_venue_metadata_map(path: Path) -> dict[str, dict[str, str]]:
+    """
+    Map canonical venue names and aliases to venue metadata.
+
+    Venue metadata may enrich venue/location only after site classification
+    has been independently established. It never establishes site_type.
+    """
+    if not path.exists():
+        return {}
+
+    rows = read_csv(path)
+    result: dict[str, dict[str, str]] = {}
+
+    for row in rows:
+        name = row.get("canonical_name", "").strip()
+        key = row.get("venue_key", "").strip()
+
+        if not key:
+            continue
+
+        metadata = {
+            "venue_key": key,
+            "city": row.get("city", "").strip(),
+            "state": row.get("state", "").strip(),
+        }
+
+        if name:
+            result[name.casefold()] = metadata
+
+        aliases = row.get("aliases", "").strip()
+        if aliases:
+            for alias in aliases.split(";"):
+                alias = alias.strip()
+                if alias:
+                    result[alias.casefold()] = metadata
+
+    return result
+
+
+def canonical_enrichment_candidates(
+    source: dict[str, str],
+    canonical: dict[str, str],
+    venue_metadata_map: dict[str, dict[str, str]],
+) -> list[tuple[str, str]]:
+    """
+    Return safe blank-field enrichments for a matched canonical game.
+
+    Rules:
+    - Never change site_type here.
+    - Source and canonical site classifications must independently agree.
+    - Only blank canonical fields may be filled.
+    - Venue must resolve through the curated school venue registry.
+    - Game-level city/state evidence wins; venue metadata is only fallback.
+    """
+    src_site, src_home_key = source_site_to_canonical(source)
+    can_site = canonical.get("site_type", "").strip()
+
+    if (
+        src_site == "UNKNOWN"
+        or not can_site
+        or can_site == "UNKNOWN"
+        or src_site != can_site
+    ):
+        return []
+
+    venue_name = source.get("curated_venue_name", "").strip()
+    venue_metadata = (
+        venue_metadata_map.get(venue_name.casefold(), {})
+        if venue_name
+        else {}
+    )
+
+    venue_key = venue_metadata.get("venue_key", "").strip()
+
+    candidate_city = (
+        source.get("city", "").strip()
+        or venue_metadata.get("city", "").strip()
+    )
+
+    candidate_state = (
+        source.get("state", "").strip()
+        or venue_metadata.get("state", "").strip()
+    )
+
+    result: list[tuple[str, str]] = []
+
+    if (
+        not canonical.get("venue_key", "").strip()
+        and venue_key
+    ):
+        result.append(("venue_key", venue_key))
+
+    if (
+        not canonical.get("site_city", "").strip()
+        and candidate_city
+    ):
+        result.append(("site_city", candidate_city))
+
+    if (
+        not canonical.get("site_state", "").strip()
+        and candidate_state
+    ):
+        result.append(("site_state", candidate_state))
+
+    if (
+        not canonical.get("designated_home_team_key", "").strip()
+        and src_home_key
+        and can_site in {"TEAM_A_HOME", "TEAM_B_HOME"}
+    ):
+        result.append(
+            ("designated_home_team_key", src_home_key)
+        )
+
+    return result
+
+
+def build_new_canonical(
+    source: dict[str, str],
+    game_id: str,
+    venue_name_map: dict[str, str],
+    venue_metadata_map: dict[str, dict[str, str]],
+) -> dict[str, str]:
     school = source["source_program_key"].strip()
     opp = source["normalized_opponent_key"].strip()
     team_a, team_b = ordered_pair(school, opp)
     score_a, score_b = source_scores_in_canonical_orientation(source)
     _, result_winner = source_result_winner(source)
     site_type, home_key = source_site_to_canonical(source)
+
+    venue_name = source.get("curated_venue_name", "").strip()
+    venue_key = venue_name_map.get(venue_name.casefold(), "")
+    venue_metadata = (
+        venue_metadata_map.get(venue_name.casefold(), {})
+        if venue_name
+        else {}
+    )
+
+    # Explicit game-level location wins.
+    # Venue metadata may fill location only when site has been
+    # independently established; it never establishes site_type.
+    source_city = source.get("city", "").strip()
+    source_state = source.get("state", "").strip()
+
+    if site_type != "UNKNOWN":
+        site_city = (
+            source_city
+            or venue_metadata.get("city", "").strip()
+        )
+        site_state = (
+            source_state
+            or venue_metadata.get("state", "").strip()
+        )
+    else:
+        site_city = source_city
+        site_state = source_state
 
     return {
         "canonical_game_id": game_id,
@@ -462,9 +610,9 @@ def build_new_canonical(source: dict[str, str], game_id: str, venue_name_map: di
         "overtime_periods": source.get("overtime_periods", ""),
         "site_type": site_type,
         "designated_home_team_key": home_key,
-        "venue_key": venue_name_map.get(source.get("curated_venue_name", "").strip().casefold(), ""),
-        "site_city": source.get("city", ""),
-        "site_state": source.get("state", ""),
+        "venue_key": venue_key,
+        "site_city": site_city,
+        "site_state": site_state,
         "game_type": source.get("curated_game_type", "") or "REGULAR_SEASON",
         "postseason_round": source.get("curated_postseason_round", ""),
         "administrative_status": source.get("administrative_status", ""),
@@ -491,6 +639,7 @@ def main() -> int:
     try:
         sources = read_csv(source_path)
         venue_name_map = load_venue_name_map(venue_path)
+        venue_metadata_map = load_venue_metadata_map(venue_path)
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
         discrepancies = read_csv(discrepancies_path)
@@ -588,6 +737,8 @@ def main() -> int:
     new_assertions = []
     new_canonical = []
     new_discrepancies = []
+    canonical_enrichments = []
+    canonical_enrichment_game_ids = set()
     next_disc_num = next_discrepancy_number(discrepancies)
 
     # Temporary lookup includes newly planned canonical games so assertions can link immediately.
@@ -595,7 +746,12 @@ def main() -> int:
 
     for source, status, game_id, method in planned:
         if status == NEW_GAME:
-            row = build_new_canonical(source, game_id, venue_name_map)
+            row = build_new_canonical(
+                source,
+                game_id,
+                venue_name_map,
+                venue_metadata_map,
+            )
             new_canonical.append(row)
             temp_canonical_by_id[game_id] = row
 
@@ -631,19 +787,51 @@ def main() -> int:
                 next_disc_num += 1
                 existing_discrepancy_keys.add(discrepancy_key)
 
+            # A matched source may add supported metadata that the
+            # canonical game does not yet know. Fill blanks only;
+            # disagreements remain reconciliation issues.
+            for field_name, source_value in canonical_enrichment_candidates(
+                source,
+                can,
+                venue_metadata_map,
+            ):
+                if can.get(field_name, "").strip():
+                    continue
+
+                can[field_name] = source_value
+                canonical_enrichments.append(
+                    (game_id, field_name, source_value)
+                )
+                canonical_enrichment_game_ids.add(game_id)
+
+    print(
+        f"Canonical enrichments:       "
+        f"{len(canonical_enrichment_game_ids):,} games / "
+        f"{len(canonical_enrichments):,} fields"
+    )
     print(f"Assertions to add:           {len(new_assertions):,}")
     print(f"Discrepancies to add:        {len(new_discrepancies):,}")
     print()
 
     if not args.apply:
         print("DRY RUN COMPLETE: no files changed.")
-        if not new_canonical and not new_assertions and not new_discrepancies:
+        if (
+            not new_canonical
+            and not new_assertions
+            and not new_discrepancies
+            and not canonical_enrichments
+        ):
             print("NO-OP: this school is already fully represented in the current global layers.")
         else:
             print("Re-run with --apply only after reviewing these counts.")
         return 0
 
-    if not new_canonical and not new_assertions and not new_discrepancies:
+    if (
+        not new_canonical
+        and not new_assertions
+        and not new_discrepancies
+        and not canonical_enrichments
+    ):
         print("NO-OP: nothing to apply.")
         return 0
 
@@ -653,6 +841,11 @@ def main() -> int:
 
     print("Applied updates:")
     print(f"  canonical games:   +{len(new_canonical):,}")
+    print(
+        f"  enrichments:       "
+        f"{len(canonical_enrichment_game_ids):,} games / "
+        f"{len(canonical_enrichments):,} fields"
+    )
     print(f"  source assertions: +{len(new_assertions):,}")
     print(f"  discrepancies:     +{len(new_discrepancies):,}")
     print()
