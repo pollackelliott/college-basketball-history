@@ -22,6 +22,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from location_safety import public_location_pair
+
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     if not path.exists():
@@ -105,6 +107,10 @@ def perspective_game(
 
     opponent_program = programs.get(opponent_key)
 
+    public_city, public_state = public_location_pair(
+        row.get("site_city", ""), row.get("site_state", "")
+    )
+
     return {
         "canonical_game_id": row["canonical_game_id"],
         "season_label": row["season_label"],
@@ -130,8 +136,8 @@ def perspective_game(
             if row["venue_key"].strip()
             else None
         ),
-        "site_city": row["site_city"] or None,
-        "site_state": row["site_state"] or None,
+        "site_city": public_city,
+        "site_state": public_state,
         "game_type": row["game_type"],
         "postseason_round": row["postseason_round"] or None,
         "administrative_status": row["administrative_status"] or None,
@@ -403,6 +409,16 @@ def main() -> int:
             for row in canonical_rows
             if program_key in {row["team_a_key"], row["team_b_key"]}
         ]
+        partial_public_locations = [
+            game["canonical_game_id"]
+            for game in perspective_games
+            if bool(game["site_city"]) != bool(game["site_state"])
+        ]
+        if partial_public_locations:
+            raise ValueError(
+                "Public game data contains partial city/state geography: "
+                + ", ".join(partial_public_locations[:20])
+            )
         perspective_games.sort(key=game_sort_key)
 
         seasons: dict[str, list[dict[str, Any]]] = defaultdict(list)
