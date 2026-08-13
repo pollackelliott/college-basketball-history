@@ -1,19 +1,27 @@
 source_program_key,venue_key,canonical_name,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
 northwestern,allstate-arena,Allstate Arena,Rosemont,IL,arena,,,unknown,17,2017-11-10,2018-02-22,,,,,,Northwestern media guide + user instruction,All Northwestern home games in 2017-18 were played here during Welsh-Ryan renovation; competitive site remains Northwestern Home.
 northwestern,alumni-hall-depaul,Alumni Hall,Chicago,IL,arena,,,unknown,16,1982-11-29,1983-03-17,,,,,,Northwestern media guide,Northwestern 1982-83 home games were played at DePaul's Alumni Hall during McGaw Hall renovation; competitive site remains Northwestern Home.
+northwestern,barclays-center,Barclays Center,Brooklyn,NY,arena,,,unknown,2,2024-03-22,2024-03-24,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
 northwestern,breslin-center,Breslin Center,East Lansing,MI,arena,,,,1,2026-01-08,2026-01-08,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,carver-hawkeye-arena,Carver-Hawkeye Arena,Iowa City,IA,arena,,,,1,2026-02-08,2026-02-08,,,,,,Northwestern curated game history / 2025-26 schedule,
+northwestern,fiserv-forum,Fiserv Forum,Milwaukee,WI,arena,,,unknown,1,2024-12-15,2024-12-15,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
+northwestern,footprint-center,Footprint Center,Phoenix,AZ,arena,,,unknown,1,2023-12-20,2023-12-20,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
 northwestern,gainbridge-fieldhouse,Gainbridge Fieldhouse,Indianapolis,IN,arena,,,,1,2025-12-20,2025-12-20,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,galen-center,Galen Center,Los Angeles,CA,arena,,,,1,2026-01-21,2026-01-21,,,,,,Northwestern curated game history / 2025-26 schedule,
+northwestern,golden-1-center,Golden 1 Center,Sacramento,CA,arena,,,unknown,2,2023-03-16,2023-03-18,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
 northwestern,jersey-mikes-arena,Jersey Mike's Arena,Piscataway,NJ,arena,,,,1,2026-01-11,2026-01-11,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,kohl-center,Kohl Center,Madison,WI,arena,,,,1,2025-12-03,2025-12-03,,,,,,Northwestern curated game history / 2025-26 schedule,
+northwestern,mohegan-sun-arena,Mohegan Sun Arena,Uncasville,CT,arena,,,unknown,4,2017-11-18,2023-11-19,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
+northwestern,mullett-arena,Mullett Arena,Tempe,AZ,arena,,,unknown,2,2024-11-28,2024-11-29,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
 northwestern,old-patton-gymnasium,Old Patton Gymnasium,Evanston,IL,gymnasium,,1940,year,306,1905-03-11,1939-12-30,primary_home,1904-1905,1939-1940,season,,User-provided Northwestern venue history,Northwestern primary home venue before Patton Gymnasium opened in 1940. Exact 1940 transition date not supplied.
 northwestern,patton-gymnasium,Patton Gymnasium,Evanston,IL,gymnasium,1940,1952-12-05,year/exact,142,1941-01-04,1952-03-01,primary_home,1940-1941,1952-1953,year/exact,,User-provided Northwestern venue history,"Northwestern primary home venue beginning in 1940 until Welsh-Ryan Arena opened Dec. 6, 1952. Exact 1940 transition date not supplied."
 northwestern,pauley-pavilion,Pauley Pavilion,Los Angeles,CA,arena,,,,1,2026-01-24,2026-01-24,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,pinnacle-bank-arena,Pinnacle Bank Arena,Lincoln,NE,arena,,,,1,2026-02-14,2026-02-14,,,,,,Northwestern curated game history / 2025-26 schedule,
+northwestern,prudential-center,Prudential Center,Newark,NJ,arena,,,unknown,2,2021-11-22,2021-11-23,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
 northwestern,simon-skjodt-assembly-hall,Simon Skjodt Assembly Hall,Bloomington,IN,arena,,,,1,2026-02-24,2026-02-24,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,state-farm-center,State Farm Center,Champaign,IL,arena,,,,1,2026-02-04,2026-02-04,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,the-greenbrier,The Greenbrier,White Sulphur Springs,WV,arena,,,,2,2025-11-21,2025-11-23,,,,,,Northwestern curated game history / 2025-26 schedule,
+northwestern,titan-gym,Titan Gym,Fullerton,CA,gymnasium,,,unknown,3,2018-11-22,2018-11-25,,,,,,Owner-supplied verified Northwestern correction facts,Verified neutral-site correction.
 northwestern,united-center,United Center,Chicago,IL,arena,,,,4,2025-11-27,2026-03-12,,,,,,Northwestern curated game history / 2025-26 schedule,
 northwestern,welsh-ryan-arena,Welsh-Ryan Arena,Evanston,IL,arena,1952-12-06,,exact,1028,1952-12-06,2026-03-04,primary_home,1952-12-06,,exact_start,,User-provided Northwestern venue history,"Northwestern primary home arena from Dec. 6, 1952 to present. Historical McGaw Hall/Welsh-Ryan naming can be preserved as aliases."
 northwestern,williams-arena,Williams Arena,Minneapolis,MN,arena,,,,1,2026-03-07,2026-03-07,,,,,,Northwestern curated game history / 2025-26 schedule,
