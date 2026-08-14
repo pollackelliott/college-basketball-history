@@ -1,5 +1,5 @@
 ﻿index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
-0,tennessee,/- at Vanderbilt,at-vanderbilt,/- at Vanderbilt,No,1,2008-2009,2008-2009,RESOLVED,Historical/non-current source identity,,
+0,tennessee,/- at Vanderbilt,vanderbilt,Vanderbilt,Yes,1,2008-2009,2008-2009,RESOLVED,Owner-reviewed source marker normalization,Owner approved Vanderbilt identity on 2026-08-14.,The source prefix was a location marker rather than part of opponent identity.
 1,tennessee,/17 2-Pittsburgh,17-2-pittsburgh,/17 2-Pittsburgh,No,1,2011-2012,2011-2012,RESOLVED,Historical/non-current source identity,,
 2,tennessee,A&M-Corpus Christi,texas-a-m-corpus-christi,Texas A&M-Corpus Christi,Yes,1,2018-2019,2018-2019,RESOLVED,Current D1 registry / Tennessee alias normalization,,
 3,tennessee,Ala.-Birmingham,uab,UAB,Yes,4,1983-1984,1991-1992,RESOLVED,Current D1 registry / Tennessee alias normalization,,

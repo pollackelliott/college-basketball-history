@@ -83,6 +83,17 @@ The owner approved both surfaced cross-source corrections, but this package comm
 
 The corresponding Vanderbilt source rows carry the approved values and row notes. Application is deferred to a later explicitly authorized ingestion/reconciliation phase.
 
+## 12. Owner-approved identity resolutions
+
+On 2026-08-14 the owner approved the four identity dispositions surfaced by the read-only matcher:
+
+- `VANRAW-00213` matches Kentucky assertion `KYRAW-00194`. It is the only 1920-21 matchup; Vanderbilt's 18 points, result, and site align while Kentucky's printed total conflicts.
+- `VANRAW-00263` matches Kentucky assertion `KYRAW-00228`. It is the only 1923-24 matchup; Vanderbilt's 13 points, result, and site align while Kentucky's printed total conflicts.
+- `VANRAW-00582` matches Tennessee assertion `TENRAW-00489`. Both describe Vanderbilt's home win with Tennessee scoring 38; Vanderbilt's printed total conflicts.
+- `VANRAW-02428` matches Tennessee assertion `TENRAW-02350`. The owner confirmed that Vanderbilt's 2009-01-20 home loss to Tennessee by 63-76 and its 2009-02-14 loss at Tennessee by 50-69 are two distinct valid games. The January game already existed as `CBBG-0022174` but Tennessee's source marker had been misnormalized into a fake `at-vanderbilt` opponent identity. The approved correction restores Vanderbilt as the opponent and links the two assertions without creating a duplicate.
+
+All four overrides use `MATCH_SOURCE_ASSERTION`. Expected post-correction ingestion identity totals are 661 existing-game matches, 2,345 new canonical games, and zero identity-review rows.
+
 ## Package QA snapshot
 
 - Games: 3,006
@@ -93,7 +104,10 @@ The corresponding Vanderbilt source rows carry the approved values and row notes
 - Site types: 1,428 Vanderbilt home; 1,292 opponent home; 286 neutral
 - Game types: 2,823 regular season; 117 conference tournament; 37 NIT; 29 NCAA tournament
 - Distinct source opponent labels / canonical keys: 354 / 339
-- Read-only pre-ingestion matcher: 657 confident identities; 4 review cases; 2,345 new-game candidates
+- Read-only pre-ingestion matcher before owner review: 657 confident identities; 4 review cases; 2,345 new-game candidates
+- Superseded `FORCE_NEW` simulation: 660 existing-game matches; 0 review cases; 2,346 new-game candidates
+- Owner-approved corrected identity plan: 661 existing-game matches; 0 review cases; 2,345 new-game candidates
+- Corrected read-only ingester dry run with confirmed history scope: 271 matched games / 900 blank canonical fields enriched; 3,006 assertions added; 66 discrepancies surfaced
 - Confident matches with source differences: 37 (9 date, 14 score, 14 overtime)
 - No exhibition or unplayed schedule rows
 - No score/result contradictions after curated source review
