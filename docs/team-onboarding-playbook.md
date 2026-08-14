@@ -97,7 +97,15 @@ Key rules:
 - preserve raw source text even when normalized values are corrected;
 - never infer site solely from venue;
 - use venue chronology to fill location only after site is independently established;
+- treat normalized city/state as one atomic pair: populate both or leave both blank;
+- keep incomplete or foreign source wording in raw/event fields until an explicit normalized representation is owner-approved;
+- reject venue names, narrative footnotes, and combined multi-city labels in normalized city;
 - document source typos, undated games, uncertainty, and material curation decisions.
+
+Explicit game-level location outranks venue chronology. Registry fallback requires
+an explicit curated/source venue identity, independently established H/A/N, and a
+complete registry city/state pair. It records a machine-checkable provenance
+marker; it never establishes or changes H/A/N.
 
 Public game types are limited to `regular season`, `conference tournament`, `NCAA tournament`, and `NIT` under the detailed runbook's canonical values.
 
@@ -112,6 +120,7 @@ Confirm that:
 - opponent keys resolve through `opponents.csv`;
 - curated venues resolve through `venues.csv`;
 - site values are valid;
+- normalized city/state are both populated or both blank;
 - conference eras are coherent;
 - exhibitions and other exclusions are correct;
 - undated or uncertain rows are documented rather than guessed.
@@ -266,8 +275,13 @@ After reconciliation:
 
 ```bash
 python tools/validate_data.py
-python tools/ingest_school.py "$school_key"
+python tools/ingest_school.py "$school_key" --check-package
 ```
+
+The target-package check compares each source row only with the assertion
+generated from that same row, including game date, curated site/venue,
+city/state, event text, and `raw_text`. New onboarding must be synchronized;
+known legacy drift is reported separately rather than silently accepted.
 
 Required final result:
 
@@ -376,7 +390,7 @@ Before push:
 
 ```bash
 python tools/validate_data.py
-python tools/ingest_school.py "$school_key"
+python tools/ingest_school.py "$school_key" --check-package
 python tools/build_site_data.py
 git status -sb
 ```

@@ -68,6 +68,8 @@ These rules are binding unless the project owner explicitly changes them.
 - Once a game's site classification is independently established, venue/location may be populated from explicit game-level evidence or from a documented curated venue relationship/chronology when no stronger contradictory evidence exists.
 - Venue chronology may fill a venue for an already-established home game; it may never be used to establish that the game was home.
 - Explicit game-level venue/location evidence overrides a chronology fallback.
+- Normalized domestic `city` and `state` are one atomic pair: populate both or leave both blank. Incomplete wording may remain in `raw_text` or event fields; do not turn it into partial public geography.
+- Rare foreign or territory cases require an explicit owner-reviewed representation. Until approved, preserve the source wording and leave normalized city/state blank rather than guessing a country taxonomy.
 - Preserve source assertions even when another source establishes a different canonical value.
 - Keep resolved discrepancies as provenance. Resolution does not mean deletion.
 - Do not invent an exact date, venue, opponent identity, or site classification when the evidence is insufficient.
@@ -148,6 +150,7 @@ Important consequences:
 - Ingestion automatically compares date, score, result winner, overtime, site type, game type, and postseason round on matched games. It does **not** currently detect every possible venue improvement or automatically fill every blank canonical value.
 - The site builder aggregates canonical venue names across all `schools/*/venues.csv` files. Venue evidence discovered through one school can therefore improve display on another school's public page.
 - A true cross-package name conflict for the same `venue_key` is a publication blocker. Reconcile it rather than hiding it through slug humanization.
+- `data/evidence/game-assertions.csv` is the authoritative generated assertion layer. A school-level `game-assertions.csv`, where present, is a legacy mirror that must agree with its own `source-games.csv`; it is not evidence from another program.
 
 ## 6. Sources to gather before extraction
 
@@ -249,10 +252,12 @@ Do not replace a played score/result with the administrative outcome. A vacated 
 | `curated_site_type` | Project-required | `SOURCE_PROGRAM_HOME`, `OPPONENT_HOME`, `NEUTRAL`, or `UNKNOWN`. |
 | `source_venue_name` | Optional | Venue wording from the source. |
 | `curated_venue_name` | Optional | Normalized venue name; when filled, it must match `venues.csv` `canonical_name` or an alias. |
-| `city` | Optional | Game site city supported by evidence. |
-| `state` | Optional | Two-letter state/territory abbreviation where applicable. |
+| `city` | Optional as part of an atomic pair | Normalized game-site city supported by evidence. Populate together with `state`, or leave both blank. |
+| `state` | Optional as part of an atomic pair | Two-letter state/territory abbreviation where applicable. Populate together with `city`, or leave both blank. |
 
 Site and venue answer different questions. A neutral game can occur in a team's usual home arena, and a program-designated home game can occur away from its campus.
+
+`raw_text`, `source_venue_name`, and `event_or_tournament` may retain incomplete, historical, or broader-area wording. The atomic-pair rule applies to normalized/public geography. Reject an arena name, narrative footnote, or combined multi-city event label in normalized `city`.
 
 #### Event and postseason fields
 
@@ -336,6 +341,10 @@ If a source establishes a city but not an exact arena, fill the city and leave `
 A documented primary-home chronology may fill a missing venue/location only after the game has independently been established as a home game and only when no explicit game-level evidence contradicts the chronology.
 
 When a confidently matched source row supplies supported metadata for a blank canonical field, ingestion may enrich the canonical game. Venue/location enrichment requires the source and canonical site classifications to independently agree; venue evidence never establishes home/away/neutral classification.
+
+Registry fallback additionally requires an explicit curated/source venue identity and a complete registry city/state pair. Explicit game-level geography wins; never combine a partial source pair with registry metadata. Future registry-derived canonical enrichment is recorded in canonical `notes` with a machine-checkable `VENUE_REGISTRY_FALLBACK` marker identifying the linked source row, registry `venue_key`, independently established `site_type`, and fields filled.
+
+When the same `venue_key` appears in several registries, normalized city/state must agree. A genuine reviewed locality-label exception must be documented in every involved registry row with `VENUE_LOCATION_VARIANT:`.
 
 `venue_key` is an identity field, not a presentation field. `canonical_name` is the public venue label. Generated public game data should carry both `venue_key` and `venue_name`; the frontend must prefer the canonical `venue_name` rather than manufacturing a label from the slug.
 
@@ -487,6 +496,8 @@ Create `schools/$school_key/` and populate all six files. Do not begin ingestion
 - [ ] Exhibitions are absent.
 - [ ] Site classification is game-specific.
 - [ ] Exact venues are assigned only when supported.
+- [ ] Normalized city/state are both populated or both blank on every new source row.
+- [ ] Normalized city contains no venue name, narrative footnote, or combined multi-city label.
 - [ ] Every curated venue name resolves through `venues.csv`.
 - [ ] Conference intervals do not overlap or leave unexplained gaps.
 - [ ] Postseason types and rounds follow Section 3.
@@ -618,6 +629,15 @@ for line, row in enumerate(games, start=2):
     site = row.get("curated_site_type", "").strip().upper()
     if site not in allowed_sites:
         errors.append(f"{label}: invalid curated_site_type {site!r}")
+
+    city = row.get("city", "").strip()
+    state = row.get("state", "").strip()
+    if bool(city) != bool(state):
+        errors.append(f"{label}: normalized city/state must be both populated or both blank")
+    if city.casefold() in venue_names:
+        errors.append(f"{label}: normalized city contains a venue name")
+    if " and " in city.casefold():
+        errors.append(f"{label}: normalized city contains a combined multi-city value")
 
     game_type = row.get("curated_game_type", "").strip()
     round_name = row.get("curated_postseason_round", "").strip()
@@ -955,9 +975,13 @@ After all approved reconciliation:
 
 ```bash
 python tools/validate_data.py
-python tools/ingest_school.py "$school_key"
+python tools/ingest_school.py "$school_key" --check-package
 git status --short
 ```
+
+`--check-package` makes drift between the target's `source-games.csv` and the assertion generated from that same source row fatal. It covers game date, curated site and venue, normalized city/state, event text, and preserved `raw_text`. Ordinary validation summarizes known legacy drift as warnings so historical packages do not disable the repository-wide gate. The check never overwrites or compares another school's evidence.
+
+Initial ingestion creates the global assertion deterministically from the source row. If a legacy school-level assertion mirror exists, ingestion appends missing target rows there too; it does not mass-rewrite pre-existing legacy drift.
 
 The final target-school ingestion must report:
 
@@ -970,6 +994,8 @@ The final target-school ingestion must report:
 - `NO-OP`.
 
 This no-op is the strongest routine proof that the six-file package, canonical games, evidence assertions, discrepancy layer, and safe enrichment behavior are synchronized.
+
+The final target proof must also establish that source location preflight passes, public JSON contains no game with exactly one of `site_city`/`site_state`, and no venue or registry operation changed H/A/N.
 
 The validator continues to enforce structural integrity across canonical games, evidence, reconciliation, program identities, and conference membership.
 
@@ -1222,7 +1248,7 @@ git commit -m "Ingest and publish ${school_key}"
 
 ```bash
 python tools/validate_data.py
-python tools/ingest_school.py "$school_key"
+python tools/ingest_school.py "$school_key" --check-package
 python tools/build_site_data.py
 git status -sb
 git --no-pager log -3 --oneline --decorate

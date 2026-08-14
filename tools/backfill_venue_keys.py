@@ -10,8 +10,10 @@ Apply:
     python tools/backfill_venue_keys.py --apply
 
 This only fills BLANK canonical venue_key fields when all usable source assertions
-for that canonical game agree on one venue key. It never overwrites an existing
-canonical venue key and never guesses across conflicting assertions.
+for that canonical game agree on one venue key and their independently curated
+site classification agrees with canonical H/A/N. It records the linked assertion
+and registry lookup in canonical notes. It never overwrites an existing canonical
+venue key and never guesses across conflicting assertions.
 
 The dry run also prints all conflicts/unmapped venue names so they can be reviewed
 before applying.
@@ -26,6 +28,12 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from location_safety import (
+    append_note,
+    registry_fallback_marker,
+    source_site_agrees_with_canonical,
+)
+
 
 CANONICAL_FIELDS = [
     "canonical_game_id",
@@ -36,6 +44,7 @@ CANONICAL_FIELDS = [
     "team_b_key",
     "team_a_score",
     "team_b_score",
+    "result_winner_team_key",
     "overtime_periods",
     "site_type",
     "designated_home_team_key",
@@ -113,7 +122,7 @@ def main() -> int:
             venue_maps[school_dir.name] = mapping
 
     candidates: dict[str, set[str]] = defaultdict(set)
-    candidate_details: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
+    candidate_details: dict[str, list[tuple[str, str, str, str]]] = defaultdict(list)
     unresolved_details: list[tuple[str, str, str, str]] = []
 
     for assertion in assertions:
@@ -123,10 +132,18 @@ def main() -> int:
         if not game_id or not program or not venue_name:
             continue
 
+        canonical_row = canonical_by_id.get(game_id)
+        if not canonical_row or not source_site_agrees_with_canonical(
+            assertion, canonical_row
+        ):
+            continue
+
         key = venue_maps.get(program, {}).get(venue_name.casefold(), "")
         if key:
             candidates[game_id].add(key)
-            candidate_details[game_id].append((program, venue_name, key))
+            candidate_details[game_id].append(
+                (program, assertion.get("source_game_id", ""), venue_name, key)
+            )
         else:
             unresolved_details.append(
                 (game_id, program, venue_name, assertion.get("source_game_id", ""))
@@ -154,6 +171,17 @@ def main() -> int:
                 continue
 
             row["venue_key"] = candidate
+            program, source_game_id, _, _ = sorted(
+                candidate_details[game_id]
+            )[0]
+            marker = registry_fallback_marker(
+                program,
+                source_game_id,
+                candidate,
+                row.get("site_type", ""),
+                ["venue_key"],
+            )
+            row["notes"] = append_note(row.get("notes", ""), marker)
             filled += 1
             if len(samples) < 12:
                 samples.append(
@@ -192,7 +220,7 @@ def main() -> int:
                 f"{c.get('team_a_key','')} vs {c.get('team_b_key','')} | "
                 f"candidate keys: {', '.join(keys)}"
             )
-            for program, venue_name, key in candidate_details.get(game_id, []):
+            for program, source_game_id, venue_name, key in candidate_details.get(game_id, []):
                 print(f"      {program}: {venue_name} -> {key}")
         print()
 
@@ -205,7 +233,7 @@ def main() -> int:
                 f"{c.get('team_a_key','')} vs {c.get('team_b_key','')} | "
                 f"canonical={existing} | assertion-derived={candidate}"
             )
-            for program, venue_name, key in candidate_details.get(game_id, []):
+            for program, source_game_id, venue_name, key in candidate_details.get(game_id, []):
                 print(f"      {program}: {venue_name} -> {key}")
         print()
 

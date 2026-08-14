@@ -14,7 +14,17 @@ from __future__ import annotations
 import csv
 import re
 import sys
+from collections import Counter, defaultdict
 from pathlib import Path
+
+from location_safety import (
+    REGISTRY_FALLBACK_PREFIX,
+    assertion_drift,
+    location_pair_status,
+    parse_registry_fallback_markers,
+    source_site_agrees_with_canonical,
+    venue_location_conflicts,
+)
 
 
 ALLOWED_SITE_TYPES = {
@@ -378,6 +388,77 @@ def main() -> int:
             + ", ".join(missing_assertion_refs[:10])
         )
 
+    assertions_by_source = defaultdict(list)
+    assertions_by_game = defaultdict(list)
+    for row in assertion_rows:
+        assertions_by_source[
+            (
+                row.get("source_program_key", "").strip(),
+                row.get("source_game_id", "").strip(),
+            )
+        ].append(row)
+        assertions_by_game[row.get("canonical_game_id", "").strip()].append(row)
+
+    # Source packages are curated inputs; global assertions are deterministic
+    # evidence copies. Legacy drift is summarized rather than made fatal.
+    schools_root = repo_root / "schools"
+    if schools_root.exists():
+        for source_path in sorted(schools_root.glob("*/source-games.csv")):
+            program = source_path.parent.name
+            _, source_rows = read_csv(source_path)
+            drift_rows = 0
+            drift_fields = Counter()
+            for source in source_rows:
+                pair = (
+                    source.get("source_program_key", "").strip(),
+                    source.get("source_game_id", "").strip(),
+                )
+                linked = assertions_by_source.get(pair, [])
+                if len(linked) != 1:
+                    continue
+                drift = assertion_drift(source, linked[0])
+                if drift:
+                    drift_rows += 1
+                    drift_fields.update(drift.keys())
+            if drift_rows:
+                warnings.append(
+                    f"{program}: {drift_rows:,} legacy source/assertion rows drift "
+                    f"({', '.join(f'{field}={count:,}' for field, count in sorted(drift_fields.items()))}); "
+                    "run ingest_school.py --check-package for target-team enforcement."
+                )
+
+            local_assertions_path = source_path.parent / "game-assertions.csv"
+            if local_assertions_path.exists():
+                _, local_rows = read_csv(local_assertions_path)
+                local_by_source = defaultdict(list)
+                for assertion in local_rows:
+                    local_by_source[
+                        (
+                            assertion.get("source_program_key", "").strip(),
+                            assertion.get("source_game_id", "").strip(),
+                        )
+                    ].append(assertion)
+                local_drift_rows = 0
+                local_drift_fields = Counter()
+                for source in source_rows:
+                    pair = (
+                        source.get("source_program_key", "").strip(),
+                        source.get("source_game_id", "").strip(),
+                    )
+                    linked = local_by_source.get(pair, [])
+                    if len(linked) != 1:
+                        continue
+                    drift = assertion_drift(source, linked[0])
+                    if drift:
+                        local_drift_rows += 1
+                        local_drift_fields.update(drift.keys())
+                if local_drift_rows:
+                    warnings.append(
+                        f"{program}: {local_drift_rows:,} legacy source/local-assertion "
+                        f"rows drift ({', '.join(f'{field}={count:,}' for field, count in sorted(local_drift_fields.items()))}); "
+                        "run ingest_school.py --check-package for target-team enforcement."
+                    )
+
     discrepancy_ids = [r.get("discrepancy_id", "") for r in discrepancy_rows]
     if "" in set(discrepancy_ids):
         errors.append("Reconciliation data contains blank discrepancy_id values.")
@@ -524,6 +605,138 @@ def main() -> int:
                     f"{program_key}: current_d1=Yes requires a "
                     f"{CURRENT_REFERENCE_SEASON} conference membership."
                 )
+
+    # Venue registries must use atomic locations, and a stable venue identity
+    # must not silently acquire incompatible public geography across packages.
+    registry_rows: list[tuple[str, dict[str, str]]] = []
+    registry_keys_by_program: dict[str, set[str]] = defaultdict(set)
+    registry_rows_by_program_key: dict[
+        tuple[str, str], list[dict[str, str]]
+    ] = defaultdict(list)
+    registry_name_keys_by_program: dict[
+        str, dict[str, str]
+    ] = defaultdict(dict)
+    if schools_root.exists():
+        for venue_path in sorted(schools_root.glob("*/venues.csv")):
+            _, venue_rows = read_csv(venue_path)
+            program = venue_path.parent.name
+            for line_number, row in enumerate(venue_rows, start=2):
+                registry_rows.append((str(venue_path.relative_to(repo_root)), row))
+                key = row.get("venue_key", "").strip()
+                if key:
+                    registry_keys_by_program[program].add(key)
+                    registry_rows_by_program_key[(program, key)].append(row)
+                    names = [row.get("canonical_name", "")]
+                    names.extend(row.get("aliases", "").split(";"))
+                    for name in names:
+                        if name.strip():
+                            registry_name_keys_by_program[program][
+                                name.strip().casefold()
+                            ] = key
+                if location_pair_status(
+                    row.get("city", ""), row.get("state", "")
+                ) == "partial":
+                    errors.append(
+                        f"{venue_path.relative_to(repo_root)}:{line_number}: "
+                        "venue city/state must be both populated or both blank."
+                    )
+    errors.extend(venue_location_conflicts(registry_rows))
+
+    # Future registry-derived enrichment records an auditable marker in the
+    # existing canonical notes field. Validate all such markers end to end.
+    for row in canonical_rows:
+        game_id = row.get("canonical_game_id", "")
+        notes = row.get("notes", "")
+        markers = parse_registry_fallback_markers(notes)
+        if notes.count(REGISTRY_FALLBACK_PREFIX) != len(markers):
+            errors.append(
+                f"{game_id}: malformed VENUE_REGISTRY_FALLBACK marker in notes."
+            )
+        for marker in markers:
+            source_pair = (
+                marker["source_program_key"], marker["source_game_id"]
+            )
+            linked = [
+                assertion
+                for assertion in assertions_by_source.get(source_pair, [])
+                if assertion.get("canonical_game_id", "") == game_id
+            ]
+            if len(linked) != 1:
+                errors.append(
+                    f"{game_id}: registry fallback marker does not resolve to "
+                    f"one linked assertion for {source_pair[0]}/{source_pair[1]}."
+                )
+            else:
+                curated_venue = linked[0].get("curated_venue_name", "").strip()
+                resolved_key = registry_name_keys_by_program.get(
+                    marker["source_program_key"], {}
+                ).get(curated_venue.casefold(), "")
+                if not curated_venue or resolved_key != marker["venue_key"]:
+                    errors.append(
+                        f"{game_id}: registry fallback marker is not backed by "
+                        "the linked assertion's curated venue identity."
+                    )
+                if not source_site_agrees_with_canonical(linked[0], row):
+                    errors.append(
+                        f"{game_id}: registry fallback marker lacks independent "
+                        "source/canonical site-type agreement."
+                    )
+            if marker["venue_key"] not in registry_keys_by_program.get(
+                marker["source_program_key"], set()
+            ):
+                errors.append(
+                    f"{game_id}: registry fallback marker venue_key "
+                    f"{marker['venue_key']!r} is absent from "
+                    f"schools/{marker['source_program_key']}/venues.csv."
+                )
+            if marker["site_type"] == "UNKNOWN":
+                errors.append(
+                    f"{game_id}: registry fallback marker cannot use UNKNOWN site_type."
+                )
+            elif marker["site_type"] != row.get("site_type", "").strip():
+                errors.append(
+                    f"{game_id}: registry fallback marker site_type "
+                    f"{marker['site_type']!r} does not match canonical site_type."
+                )
+            allowed_fields = {"venue_key", "site_city", "site_state"}
+            fields = set(marker["fields"].split(","))
+            if not fields or not fields <= allowed_fields:
+                errors.append(
+                    f"{game_id}: registry fallback marker has invalid fields "
+                    f"{marker['fields']!r}."
+                )
+                continue
+            if (
+                "venue_key" in fields
+                and row.get("venue_key", "").strip() != marker["venue_key"]
+            ):
+                errors.append(
+                    f"{game_id}: registry-derived canonical venue_key no longer "
+                    "matches its provenance marker."
+                )
+            if fields & {"site_city", "site_state"}:
+                registry_entries = registry_rows_by_program_key.get(
+                    (marker["source_program_key"], marker["venue_key"]), []
+                )
+                registry_locations = {
+                    (
+                        entry.get("city", "").strip(),
+                        entry.get("state", "").strip(),
+                    )
+                    for entry in registry_entries
+                    if location_pair_status(
+                        entry.get("city", ""), entry.get("state", "")
+                    ) == "complete"
+                }
+                canonical_location = (
+                    row.get("site_city", "").strip(),
+                    row.get("site_state", "").strip(),
+                )
+                if len(registry_locations) != 1 or canonical_location not in registry_locations:
+                    errors.append(
+                        f"{game_id}: registry-derived canonical location is not "
+                        "traceable to one complete matching registry row."
+                    )
 
     # Report
     print("College Basketball History — data validation")

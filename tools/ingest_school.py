@@ -36,6 +36,15 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from location_safety import (
+    append_note,
+    assertion_drift,
+    atomic_location_enrichments,
+    location_pair_status,
+    registry_fallback_marker,
+    source_location_preflight,
+)
+
 
 CONFIDENT = "CONFIDENT_MATCH"
 REVIEW = "REVIEW"
@@ -515,35 +524,54 @@ def canonical_enrichment_candidates(
 
     venue_key = venue_metadata.get("venue_key", "").strip()
 
-    candidate_city = (
-        source.get("city", "").strip()
-        or venue_metadata.get("city", "").strip()
-    )
-
-    candidate_state = (
-        source.get("state", "").strip()
-        or venue_metadata.get("state", "").strip()
-    )
-
     result: list[tuple[str, str]] = []
+
+    registry_fields: list[str] = []
 
     if (
         not canonical.get("venue_key", "").strip()
         and venue_key
     ):
         result.append(("venue_key", venue_key))
+        registry_fields.append("venue_key")
 
-    if (
-        not canonical.get("site_city", "").strip()
-        and candidate_city
-    ):
-        result.append(("site_city", candidate_city))
+    source_city = source.get("city", "").strip()
+    source_state = source.get("state", "").strip()
+    source_location_status = location_pair_status(source_city, source_state)
+    if source_location_status == "complete":
+        candidate_city, candidate_state = source_city, source_state
+    elif source_location_status == "blank" and location_pair_status(
+        venue_metadata.get("city", ""), venue_metadata.get("state", "")
+    ) == "complete":
+        candidate_city = venue_metadata["city"].strip()
+        candidate_state = venue_metadata["state"].strip()
+        registry_fields.extend(("site_city", "site_state"))
+    else:
+        candidate_city = candidate_state = ""
 
-    if (
-        not canonical.get("site_state", "").strip()
-        and candidate_state
-    ):
-        result.append(("site_state", candidate_state))
+    location_fills = atomic_location_enrichments(
+        canonical.get("site_city", ""),
+        canonical.get("site_state", ""),
+        candidate_city,
+        candidate_state,
+    )
+    result.extend(location_fills)
+
+    used_registry_fields = [
+        field for field in registry_fields
+        if field == "venue_key" or any(name == field for name, _ in location_fills)
+    ]
+    if used_registry_fields:
+        marker = registry_fallback_marker(
+            source.get("source_program_key", "").strip(),
+            source.get("source_game_id", "").strip(),
+            venue_key,
+            can_site,
+            used_registry_fields,
+        )
+        new_notes = append_note(canonical.get("notes", ""), marker)
+        if new_notes != canonical.get("notes", ""):
+            result.append(("notes", new_notes))
 
     if (
         not canonical.get("designated_home_team_key", "").strip()
@@ -578,24 +606,42 @@ def build_new_canonical(
         else {}
     )
 
-    # Explicit game-level location wins.
-    # Venue metadata may fill location only when site has been
-    # independently established; it never establishes site_type.
+    # Explicit game-level location wins. Partial normalized geography is
+    # never published. Registry location fallback requires an independently
+    # established site and a complete registry pair.
     source_city = source.get("city", "").strip()
     source_state = source.get("state", "").strip()
+    registry_fields: list[str] = []
 
-    if site_type != "UNKNOWN":
-        site_city = (
-            source_city
-            or venue_metadata.get("city", "").strip()
-        )
-        site_state = (
-            source_state
-            or venue_metadata.get("state", "").strip()
-        )
+    if location_pair_status(source_city, source_state) == "complete":
+        site_city, site_state = source_city, source_state
+    elif (
+        location_pair_status(source_city, source_state) == "blank"
+        and site_type != "UNKNOWN"
+        and location_pair_status(
+            venue_metadata.get("city", ""), venue_metadata.get("state", "")
+        ) == "complete"
+    ):
+        site_city = venue_metadata["city"].strip()
+        site_state = venue_metadata["state"].strip()
+        registry_fields.extend(("site_city", "site_state"))
     else:
-        site_city = source_city
-        site_state = source_state
+        site_city = site_state = ""
+
+    if venue_key and site_type != "UNKNOWN":
+        registry_fields.append("venue_key")
+    elif site_type == "UNKNOWN":
+        venue_key = ""
+
+    notes = ""
+    if registry_fields:
+        notes = registry_fallback_marker(
+            source.get("source_program_key", "").strip(),
+            source.get("source_game_id", "").strip(),
+            venue_key,
+            site_type,
+            registry_fields,
+        )
 
     return {
         "canonical_game_id": game_id,
@@ -618,7 +664,7 @@ def build_new_canonical(
         "administrative_status": source.get("administrative_status", ""),
         "administrative_note": source.get("administrative_note", ""),
         "canonical_status": "PROVISIONAL",
-        "notes": "",
+        "notes": notes,
     }
 
 
@@ -626,6 +672,14 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("school_key")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument(
+        "--check-package",
+        action="store_true",
+        help=(
+            "Fail when this target package has source/assertion drift. "
+            "Use for final onboarding proof; legacy drift is otherwise warned."
+        ),
+    )
     parser.add_argument("--repo", type=Path, default=None)
     args = parser.parse_args()
 
@@ -634,10 +688,14 @@ def main() -> int:
     venue_path = repo_root / "schools" / args.school_key / "venues.csv"
     canonical_path = repo_root / "data" / "canonical" / "games.csv"
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
+    local_assertions_path = (
+        repo_root / "schools" / args.school_key / "game-assertions.csv"
+    )
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
 
     try:
         sources = read_csv(source_path)
+        venue_rows = read_csv(venue_path)
         venue_name_map = load_venue_name_map(venue_path)
         venue_metadata_map = load_venue_metadata_map(venue_path)
         canonical = read_csv(canonical_path)
@@ -660,6 +718,99 @@ def main() -> int:
     assertions_by_source: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
     for row in assertions:
         assertions_by_source[(row.get("source_program_key", ""), row.get("source_game_id", ""))].append(row)
+
+    registry_venue_names = set(venue_name_map)
+    preflight_errors, legacy_location_warnings = source_location_preflight(
+        sources,
+        existing_source_pairs,
+        registry_venue_names,
+    )
+    for line_number, venue in enumerate(venue_rows, start=2):
+        if location_pair_status(
+            venue.get("city", ""), venue.get("state", "")
+        ) == "partial":
+            preflight_errors.append(
+                f"venues.csv line {line_number}: venue city/state must be "
+                "both populated or both blank"
+            )
+
+    sync_problems: list[str] = []
+    for source in sources:
+        pair = (
+            source.get("source_program_key", "").strip(),
+            source.get("source_game_id", "").strip(),
+        )
+        linked = assertions_by_source.get(pair, [])
+        if len(linked) == 1:
+            drift = assertion_drift(source, linked[0])
+            if drift:
+                sync_problems.append(
+                    f"{pair[1]}: global assertion differs in "
+                    + ", ".join(sorted(drift))
+                )
+        elif len(linked) > 1:
+            sync_problems.append(f"{pair[1]}: multiple global assertions exist")
+        elif args.check_package:
+            sync_problems.append(f"{pair[1]}: global assertion is missing")
+
+    local_sync_problems: list[str] = []
+    local_assertions: list[dict[str, str]] = []
+    local_source_pairs: set[tuple[str, str]] = set()
+    if local_assertions_path.exists():
+        local_by_source = defaultdict(list)
+        local_assertions = read_csv(local_assertions_path)
+        for assertion in local_assertions:
+            pair = (
+                assertion.get("source_program_key", "").strip(),
+                assertion.get("source_game_id", "").strip(),
+            )
+            local_source_pairs.add(pair)
+            local_by_source[
+                pair
+            ].append(assertion)
+        for source in sources:
+            pair = (
+                source.get("source_program_key", "").strip(),
+                source.get("source_game_id", "").strip(),
+            )
+            linked = local_by_source.get(pair, [])
+            if len(linked) == 1:
+                drift = assertion_drift(source, linked[0])
+                if drift:
+                    local_sync_problems.append(
+                        f"{pair[1]}: local assertion differs in "
+                        + ", ".join(sorted(drift))
+                    )
+            elif len(linked) > 1:
+                local_sync_problems.append(f"{pair[1]}: multiple local assertions exist")
+            elif args.check_package:
+                local_sync_problems.append(f"{pair[1]}: local assertion is missing")
+
+    if preflight_errors:
+        print("FAIL: source package location preflight failed:")
+        for error in preflight_errors[:50]:
+            print(f"  - {error}")
+        if len(preflight_errors) > 50:
+            print(f"  ... {len(preflight_errors) - 50} more")
+        return 1
+
+    if legacy_location_warnings:
+        print(
+            "WARNING: grandfathered legacy source-location issues: "
+            f"{len(legacy_location_warnings):,} rows"
+        )
+
+    if sync_problems or local_sync_problems:
+        label = "FAIL" if args.check_package else "WARNING"
+        print(
+            f"{label}: source/assertion synchronization drift: "
+            f"{len(sync_problems):,} global, {len(local_sync_problems):,} local"
+        )
+        for problem in (sync_problems + local_sync_problems)[:20]:
+            print(f"  - {problem}")
+        if args.check_package:
+            return 1
+        print("  Run with --check-package to make target-package drift fatal.")
 
     # Deduplicate discrepancy records by game + field + source program.
     # The same underlying disagreement may be written in different human-readable
@@ -735,6 +886,7 @@ def main() -> int:
         return 0
 
     new_assertions = []
+    new_local_assertions = []
     new_canonical = []
     new_discrepancies = []
     canonical_enrichments = []
@@ -757,8 +909,17 @@ def main() -> int:
 
         source_pair = (source.get("source_program_key", ""), source.get("source_game_id", ""))
         if source_pair not in existing_source_pairs:
-            new_assertions.append(build_assertion(source, game_id, method))
+            assertion = build_assertion(source, game_id, method)
+            new_assertions.append(assertion)
             existing_source_pairs.add(source_pair)
+        if (
+            local_assertions_path.exists()
+            and source_pair not in local_source_pairs
+        ):
+            new_local_assertions.append(
+                build_assertion(source, game_id, method)
+            )
+            local_source_pairs.add(source_pair)
 
         if status == CONFIDENT:
             can = temp_canonical_by_id[game_id]
@@ -795,7 +956,10 @@ def main() -> int:
                 can,
                 venue_metadata_map,
             ):
-                if can.get(field_name, "").strip():
+                if field_name == "notes":
+                    if can.get("notes", "") == source_value:
+                        continue
+                elif can.get(field_name, "").strip():
                     continue
 
                 can[field_name] = source_value
@@ -810,6 +974,8 @@ def main() -> int:
         f"{len(canonical_enrichments):,} fields"
     )
     print(f"Assertions to add:           {len(new_assertions):,}")
+    if local_assertions_path.exists():
+        print(f"Local assertion mirrors:     {len(new_local_assertions):,}")
     print(f"Discrepancies to add:        {len(new_discrepancies):,}")
     print()
 
@@ -818,6 +984,7 @@ def main() -> int:
         if (
             not new_canonical
             and not new_assertions
+            and not new_local_assertions
             and not new_discrepancies
             and not canonical_enrichments
         ):
@@ -829,6 +996,7 @@ def main() -> int:
     if (
         not new_canonical
         and not new_assertions
+        and not new_local_assertions
         and not new_discrepancies
         and not canonical_enrichments
     ):
@@ -837,6 +1005,12 @@ def main() -> int:
 
     write_csv(canonical_path, CANONICAL_FIELDS, canonical + new_canonical)
     write_csv(assertions_path, ASSERTION_FIELDS, assertions + new_assertions)
+    if local_assertions_path.exists() and new_local_assertions:
+        write_csv(
+            local_assertions_path,
+            ASSERTION_FIELDS,
+            local_assertions + new_local_assertions,
+        )
     write_csv(discrepancies_path, DISCREPANCY_FIELDS, discrepancies + new_discrepancies)
 
     print("Applied updates:")
@@ -847,6 +1021,8 @@ def main() -> int:
         f"{len(canonical_enrichments):,} fields"
     )
     print(f"  source assertions: +{len(new_assertions):,}")
+    if local_assertions_path.exists():
+        print(f"  local mirrors:     +{len(new_local_assertions):,}")
     print(f"  discrepancies:     +{len(new_discrepancies):,}")
     print()
 
