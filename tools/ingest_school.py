@@ -36,6 +36,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from conference_reference import history_errors, registry_by_key
 from location_safety import (
     append_note,
     assertion_drift,
@@ -686,6 +687,10 @@ def main() -> int:
     repo_root = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
     source_path = repo_root / "schools" / args.school_key / "source-games.csv"
     venue_path = repo_root / "schools" / args.school_key / "venues.csv"
+    conference_history_path = (
+        repo_root / "schools" / args.school_key / "conferences.csv"
+    )
+    conference_registry_path = repo_root / "data" / "reference" / "conferences.csv"
     canonical_path = repo_root / "data" / "canonical" / "games.csv"
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
     local_assertions_path = (
@@ -696,6 +701,8 @@ def main() -> int:
     try:
         sources = read_csv(source_path)
         venue_rows = read_csv(venue_path)
+        conference_history = read_csv(conference_history_path)
+        conference_registry_rows = read_csv(conference_registry_path)
         venue_name_map = load_venue_name_map(venue_path)
         venue_metadata_map = load_venue_metadata_map(venue_path)
         canonical = read_csv(canonical_path)
@@ -724,6 +731,15 @@ def main() -> int:
         sources,
         existing_source_pairs,
         registry_venue_names,
+    )
+    conference_registry = registry_by_key(conference_registry_rows)
+    preflight_errors.extend(
+        f"conferences.csv {problem}"
+        for problem in history_errors(
+            conference_history,
+            set(conference_registry),
+            expected_program_key=args.school_key,
+        )
     )
     for line_number, venue in enumerate(venue_rows, start=2):
         if location_pair_status(

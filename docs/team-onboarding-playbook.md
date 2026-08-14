@@ -121,7 +121,7 @@ Confirm that:
 - curated venues resolve through `venues.csv`;
 - site values are valid;
 - normalized city/state are both populated or both blank;
-- conference eras are coherent;
+- conference eras are coherent, non-overlapping, and use registered conference keys;
 - exhibitions and other exclusions are correct;
 - undated or uncertain rows are documented rather than guessed.
 
@@ -308,6 +308,10 @@ Before enabling the public page, confirm the target's current conference row and
 
 `0` means verified zero. Blank means missing and blocks publication.
 
+Check every interval in `schools/<school_key>/conferences.csv` against `data/reference/conferences.csv`. A missing historical identity is an owner-review stop: add its proper historical key/name and owner-approved tournament label centrally rather than guessing an abbreviation. Do not conflate historically distinct naming eras merely because the conferences are related. Until a label is approved, mobile conference-tournament display must safely remain `Conference Tournament`.
+
+The displayed program's verified membership in the game season controls its conference-tournament presentation: mobile uses `<tournament_label> T`, while full team-history views use `<conference_name> Tournament`. Conflicting source/event wording is review metadata only; it must not override membership. Correct an actual membership-history error through owner-reviewed research in the school's `conferences.csv`, never through a game-level display exception.
+
 Then change only the target's `public_page_enabled` value from `No` to `Yes`.
 
 When editing an existing CSV, preserve its existing UTF-8 BOM state and newline style. Stop if a one-row edit rewrites the entire file.
@@ -456,6 +460,7 @@ Before declaring the school closed, verify production:
 - target appears in the directory;
 - target page loads;
 - record, metadata, achievements, and current conference are correct;
+- historical mobile tournament labels use the target's conference in the game season; unresolved cases display `Conference Tournament`;
 - representative early/recent games render;
 - representative venue/location data renders;
 - one or two representative previously public programs still open, including any existing program materially affected by the onboarding.
@@ -468,6 +473,7 @@ Stop and ask the project owner if:
 
 - game identity is ambiguous;
 - inclusion or exclusion is uncertain;
+- a historical conference identity or tournament abbreviation is not yet owner-approved;
 - a current Division I opponent identity is unclear;
 - two credible sources conflict materially;
 - a populated canonical value would need to be overwritten;

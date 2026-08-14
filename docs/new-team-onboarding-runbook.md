@@ -138,13 +138,13 @@ The files have different roles:
 | `source-games.csv` | One normalized source assertion per non-exhibition varsity game | `tools/ingest_school.py`; `tools/match_games.py` |
 | `opponents.csv` | Audit trail for source labels and canonical opponent identities | `tools/build_site_data.py` uses canonical keys/names for public display |
 | `venues.csv` | Venue registry, aliases, chronology, evidence, and canonical public display names | `tools/ingest_school.py`; `tools/backfill_venue_keys.py`; `tools/build_site_data.py` |
-| `conferences.csv` | Program's historical conference timeline | No current importer; curated/documentary |
+| `conferences.csv` | Program's historical conference timeline | `tools/ingest_school.py`; `tools/build_site_data.py`; `tools/validate_data.py` |
 | `notes.md` | Final curation decisions, exceptions, known issues, closure status | No current importer; curated/documentary |
 | `source-notes.md` | Source hierarchy, coverage, citations, extraction notes, and source limitations | No current importer; curated/documentary |
 
 Important consequences:
 
-- A complete six-file package is required even though only three files are read by current tools.
+- A complete six-file package is required. Historical conference intervals are validated and published once per team document.
 - `conferences.csv` does not automatically update `data/reference/conference-membership.csv`.
 - `notes.md` and `source-notes.md` must be reviewed as part of the package; validation does not prove they are complete.
 - Ingestion automatically compares date, score, result winner, overtime, site type, game type, and postseason round on matched games. It does **not** currently detect every possible venue improvement or automatically fill every blank canonical value.
@@ -364,7 +364,15 @@ When the same `venue_key` appears in several registries, normalized city/state m
 
 Intervals must not overlap and should cover the program's curated history without unexplained gaps.
 
-Current limitation: this file is not imported automatically. The public site's current conference comes from `data/reference/conference-membership.csv`, whose current snapshot is `2026-2027`. Confirm the target already has the correct reference row.
+Every `conference_key` must already exist in `data/reference/conferences.csv`. That central registry is the only source for owner-approved mobile conference-tournament labels. Never manufacture a short label algorithmically or copy it into game rows.
+
+If research finds a historical identity absent from the registry, stop for owner review before publication. Obtain the correct historical name, stable key, and tournament label, then add them centrally. Keep historically distinct naming eras distinct when their tournament presentation differs; do not collapse identities such as Pac-10/Pac-12 or an old historical Metro Conference/a later rebranded Metro merely because they are related.
+
+The site builder publishes this interval history once in the target team document. Conference-tournament display resolves the displayed program's game season against exactly one interval. Mobile uses the approved `<tournament_label> T`; full team-history views use the registry's `<conference_name> Tournament`. Zero or multiple interval matches, `independent`, or an unavailable required registry label must display exactly `Conference Tournament`.
+
+Season-specific conference membership controls this presentation. Conflicting source/event tournament wording is preserved as team-level review metadata but never silently redefines membership or overrides the public label. A genuine membership-history correction requires owner-reviewed research and belongs in `schools/<program>/conferences.csv`, not a game-level UI exception.
+
+The public site's current conference still comes from `data/reference/conference-membership.csv`, whose current snapshot is `2026-2027`. Confirm the target already has the correct reference row.
 
 ### 7.5 `notes.md`
 
@@ -981,6 +989,8 @@ git status --short
 
 `--check-package` makes drift between the target's `source-games.csv` and the assertion generated from that same source row fatal. It covers game date, curated site and venue, normalized city/state, event text, and preserved `raw_text`. Ordinary validation summarizes known legacy drift as warnings so historical packages do not disable the repository-wide gate. The check never overwrites or compares another school's evidence.
 
+The same target preflight validates `conferences.csv`. Unknown conference keys, invalid seasons, wrong program keys, and overlapping intervals block ingestion. A newly encountered historical identity requires owner approval and a central registry entry before the package can publish.
+
 Initial ingestion creates the global assertion deterministically from the source row. If a legacy school-level assertion mirror exists, ingestion appends missing target rows there too; it does not mass-rewrite pre-existing legacy drift.
 
 The final target-school ingestion must report:
@@ -997,7 +1007,7 @@ This no-op is the strongest routine proof that the six-file package, canonical g
 
 The final target proof must also establish that source location preflight passes, public JSON contains no game with exactly one of `site_city`/`site_state`, and no venue or registry operation changed H/A/N.
 
-The validator continues to enforce structural integrity across canonical games, evidence, reconciliation, program identities, and conference membership.
+The validator continues to enforce structural integrity across canonical games, evidence, reconciliation, program identities, conference membership, the central conference registry, and school historical intervals.
 
 Known unrelated deferred cleanup is not itself a blocker to the target program. Keep unrelated work separate unless the current onboarding directly supplies evidence that resolves it.
 
@@ -1519,7 +1529,7 @@ The following remain valid project work but do not block routine onboarding:
 - Existing public programs may still contain unsupported venue/location blanks that will be filled gradually as overlapping authoritative packages arrive or through dedicated cleanup.
 - Exact venue/location remains intentionally blank where evidence is insufficient.
 - Continue consolidating duplicate opponent and venue identities when new packages expose them.
-- Historical `conferences.csv` files remain documentary unless/until a dedicated importer is implemented.
+- Historical `conferences.csv` files are validated and published as team-level interval metadata; they do not alter canonical games or current membership.
 - A reusable `tools/validate_school_package.py` would improve structural package QA.
 - A reusable human-readable discrepancy-report helper would reduce manual review work.
 - A reusable six-file template reflecting the current field union would improve collaborator onboarding.
@@ -1548,6 +1558,8 @@ Before a partner begins independently, confirm that the partner can answer “ye
 - [ ] I understand that a genuine historical conflict may remain `UNDER_REVIEW` when publication with the flag is explicitly approved.
 - [ ] I will require validation and a complete target-team no-op, including zero remaining canonical enrichments.
 - [ ] I will verify the target's current conference row and populate all four achievement fields before publication.
+- [ ] I will verify every historical conference key exists in the central registry and stop for owner approval rather than inventing a tournament abbreviation.
+- [ ] I will keep historically distinct conference naming eras separate when their public tournament identities differ.
 - [ ] I will preserve existing CSV BOM/newline style when modifying tracked CSV files.
 - [ ] I will dry-run the site build before applying it and verify deterministic output.
 - [ ] I will perform detailed target-page QA and a light affected-existing-program smoke test for routine data-only onboarding.

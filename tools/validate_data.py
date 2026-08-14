@@ -17,6 +17,12 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from conference_reference import (
+    REQUIRED_HISTORY_COLUMNS,
+    REQUIRED_REGISTRY_COLUMNS,
+    history_errors,
+    registry_by_key,
+)
 from location_safety import (
     REGISTRY_FALLBACK_PREFIX,
     assertion_drift,
@@ -221,6 +227,7 @@ def main() -> int:
     conference_membership_path = (
         repo_root / "data" / "reference" / "conference-membership.csv"
     )
+    conferences_path = repo_root / "data" / "reference" / "conferences.csv"
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -231,6 +238,7 @@ def main() -> int:
         discrepancy_columns, discrepancy_rows = read_csv(discrepancies_path)
         program_columns, program_rows = read_csv(programs_path)
         membership_columns, membership_rows = read_csv(conference_membership_path)
+        conference_columns, conference_rows = read_csv(conferences_path)
     except FileNotFoundError as exc:
         print(f"FAIL: required file not found: {exc}")
         return 1
@@ -245,6 +253,51 @@ def main() -> int:
         REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS,
         errors,
     )
+    require_columns(
+        conferences_path,
+        conference_columns,
+        REQUIRED_REGISTRY_COLUMNS,
+        errors,
+    )
+
+    conference_keys = [row.get("conference_key", "").strip() for row in conference_rows]
+    if "" in conference_keys:
+        errors.append("conferences.csv contains a blank conference_key.")
+    duplicate_conference_keys = duplicates(conference_keys)
+    if duplicate_conference_keys:
+        errors.append(
+            "conferences.csv contains duplicate conference_key values: "
+            + ", ".join(sorted(duplicate_conference_keys))
+        )
+    conference_registry = registry_by_key(conference_rows)
+    for line_number, row in enumerate(conference_rows, start=2):
+        key = row.get("conference_key", "").strip()
+        if not row.get("conference_name", "").strip():
+            errors.append(f"conferences.csv line {line_number}: conference_name is required.")
+        if key != "independent" and not row.get("tournament_label", "").strip():
+            errors.append(
+                f"conferences.csv line {line_number}: owner-approved "
+                "tournament_label is required."
+            )
+
+    for line_number, row in enumerate(membership_rows, start=2):
+        key = row.get("conference_key", "").strip()
+        if key not in conference_registry:
+            errors.append(
+                f"conference-membership.csv line {line_number}: conference_key "
+                f"{key!r} is absent from conferences.csv."
+            )
+
+    for history_path in sorted((repo_root / "schools").glob("*/conferences.csv")):
+        history_columns, history_rows = read_csv(history_path)
+        require_columns(history_path, history_columns, REQUIRED_HISTORY_COLUMNS, errors)
+        expected_program_key = history_path.parent.name
+        for problem in history_errors(
+            history_rows,
+            set(conference_registry),
+            expected_program_key=expected_program_key,
+        ):
+            errors.append(f"{history_path}: {problem}")
 
     canonical_ids = [r.get("canonical_game_id", "") for r in canonical_rows]
     canonical_id_set = set(canonical_ids)

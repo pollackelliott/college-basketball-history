@@ -1,0 +1,40 @@
+conference_key,conference_name,tournament_label,status,notes
+acc,ACC,ACC,current,
+america-east,America East,AE,current,
+american,American,Amer,current,
+atlantic-10,Atlantic 10,A10,current,
+atlantic-sun,Atlantic Sun,ASUN,current,
+big-12,Big 12,Big 12,current,Legally distinct from the Big Six/Big Seven/Big Eight lineage.
+big-east,Big East,Big East,current,
+big-eight,Big Eight,Big 8,historical,Separate display identity within the Big Six/Big Seven/Big Eight lineage.
+big-seven,Big Seven,Big 7,historical,Separate display identity within the Big Six/Big Seven/Big Eight lineage.
+big-six,Big Six,Big 6,historical,Separate display identity within the Big Six/Big Seven/Big Eight lineage.
+big-sky,Big Sky,Big Sky,current,
+big-south,Big South,Big South,current,
+big-ten,Big Ten,Big Ten,current,Historical Western Conference and Big Nine names are normalized to this identity in current school timelines.
+big-west,Big West,Big West,current,
+caa,CAA,CAA,current,
+cusa,CUSA,CUSA,current,
+horizon,Horizon,Horizon,current,
+independent,Independent,,nonconference,Independent has no tournament label and always uses the safe fallback.
+ivy,Ivy,Ivy,current,
+maac,MAAC,MAAC,current,Historical label through 2025-26; do not conflate a future Metro identity with the old historical Metro Conference.
+mac,MAC,MAC,current,
+meac,MEAC,MEAC,current,
+missouri-valley,Missouri Valley,MVC,current,Historical MVIAA wording is normalized to this stable identity in current school timelines.
+mountain-west,Mountain West,MW,current,
+nec,NEC,NEC,current,
+ohio-valley,Ohio Valley,OVC,current,
+pac-12,Pac-12,Pac-12,current,Do not retroactively use for a distinct Pac-10 naming era.
+patriot,Patriot,Pat,current,
+sec,SEC,SEC,current,
+siaa,Southern Intercollegiate Athletic Association,SIAA,historical,
+southern,Southern,Southern,current,School timelines may display this identity as Southern Conference.
+southland,Southland,Slnd,current,
+southwest-conference,Southwest Conference,SWC,historical,
+summit,Summit,Summit,current,
+sun-belt,Sun Belt,Sun Belt,current,
+swac,SWAC,SWAC,current,
+united-athletic,United Athletic,UAC,current,
+wac,WAC,WAC,current,
+wcc,WCC,WCC,current,

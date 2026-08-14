@@ -22,6 +22,12 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from conference_reference import (
+    explicit_tournament_conference_keys,
+    history_errors,
+    registry_by_key,
+    resolved_history_key,
+)
 from location_safety import public_location_pair
 
 
@@ -34,6 +40,78 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def yes(value: str) -> bool:
     return value.strip().lower() == "yes"
+
+
+def conference_publication_metadata(
+    program_key: str,
+    history_rows: list[dict[str, str]],
+    registry: dict[str, dict[str, str]],
+    games: list[dict[str, Any]],
+    assertion_rows: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Publish one conference timeline plus event/membership review flags."""
+    events_by_game: dict[str, list[str]] = defaultdict(list)
+    for assertion in assertion_rows:
+        if assertion.get("source_program_key", "").strip() != program_key:
+            continue
+        if assertion.get("curated_game_type", "").strip() != "CONFERENCE_TOURNAMENT":
+            continue
+        game_id = assertion.get("canonical_game_id", "").strip()
+        event = assertion.get("event_or_tournament", "").strip()
+        if game_id and event:
+            events_by_game[game_id].append(event)
+
+    review_flags: list[dict[str, Any]] = []
+    for game in games:
+        if game["game_type"] != "CONFERENCE_TOURNAMENT":
+            continue
+        game_id = game["canonical_game_id"]
+        membership_key = resolved_history_key(history_rows, game["season_label"])
+        explicit_keys = explicit_tournament_conference_keys(
+            events_by_game.get(game_id, []), registry
+        )
+        conflicting_keys = sorted(explicit_keys - {membership_key})
+        if membership_key and conflicting_keys:
+            review_flags.append(
+                {
+                    "canonical_game_id": game_id,
+                    "membership_conference_key": membership_key,
+                    "conflicting_event_conference_keys": conflicting_keys,
+                    "source_events": sorted(set(events_by_game[game_id])),
+                }
+            )
+
+    used_keys = {
+        row.get("conference_key", "").strip()
+        for row in history_rows
+        if row.get("conference_key", "").strip()
+    }
+    labels = {
+        key: registry[key].get("tournament_label", "").strip()
+        for key in sorted(used_keys)
+        if key in registry and registry[key].get("tournament_label", "").strip()
+    }
+    names = {
+        key: registry[key].get("conference_name", "").strip()
+        for key in sorted(used_keys)
+        if key in registry and registry[key].get("conference_name", "").strip()
+    }
+
+    return {
+        "conference_history": [
+            {
+                "start_season": row.get("start_season", "").strip(),
+                "end_season": row.get("end_season", "").strip() or None,
+                "conference_key": row.get("conference_key", "").strip(),
+                "conference_name": row.get("conference_name", "").strip(),
+                "membership_type": row.get("membership_type", "").strip(),
+            }
+            for row in history_rows
+        ],
+        "conference_names": names,
+        "conference_tournament_labels": labels,
+        "conference_tournament_review_flags": review_flags,
+    }
 
 
 def record_from_games(games: list[dict[str, Any]]) -> dict[str, int]:
@@ -300,11 +378,15 @@ def main() -> int:
     memberships_path = (
         repo_root / "data" / "reference" / "conference-membership.csv"
     )
+    conferences_path = repo_root / "data" / "reference" / "conferences.csv"
     games_path = repo_root / "data" / "canonical" / "games.csv"
+    assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
 
     program_rows = read_csv(programs_path)
     membership_rows = read_csv(memberships_path)
+    conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
+    assertion_rows = read_csv(assertions_path)
 
     programs = {row["program_key"]: row for row in program_rows}
     if len(programs) != len(program_rows):
@@ -312,6 +394,22 @@ def main() -> int:
 
     if not membership_rows:
         raise ValueError("conference-membership.csv is empty.")
+
+    conference_registry = registry_by_key(conference_rows)
+    if len(conference_registry) != len(conference_rows):
+        raise ValueError("conferences.csv contains blank or duplicate conference_key values.")
+    unknown_current_conferences = sorted(
+        {
+            row["conference_key"]
+            for row in membership_rows
+            if row["conference_key"] not in conference_registry
+        }
+    )
+    if unknown_current_conferences:
+        raise ValueError(
+            "conference-membership.csv uses unregistered conference keys: "
+            + ", ".join(unknown_current_conferences)
+        )
 
     reference_season = max(row["season_label"] for row in membership_rows)
 
@@ -397,6 +495,20 @@ def main() -> int:
     for program_key in enabled_keys:
         program = programs[program_key]
         membership = current_memberships.get(program_key)
+        conference_history_path = (
+            repo_root / "schools" / program_key / "conferences.csv"
+        )
+        conference_history = read_csv(conference_history_path)
+        conference_problems = history_errors(
+            conference_history,
+            set(conference_registry),
+            expected_program_key=program_key,
+        )
+        if conference_problems:
+            raise ValueError(
+                f"{program_key}/conferences.csv is not publishable: "
+                + "; ".join(conference_problems[:10])
+            )
 
         perspective_games = [
             perspective_game(
@@ -479,6 +591,13 @@ def main() -> int:
         )
 
         overall = record_from_games(perspective_games)
+        conference_metadata = conference_publication_metadata(
+            program_key,
+            conference_history,
+            conference_registry,
+            perspective_games,
+            assertion_rows,
+        )
 
         team_payloads[program_key] = {
             "schema_version": 1,
@@ -530,6 +649,7 @@ def main() -> int:
             "seasons": season_summaries,
             "opponents": opponent_summaries,
             "games": perspective_games,
+            **conference_metadata,
         }
 
     manifest = {

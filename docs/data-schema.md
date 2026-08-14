@@ -203,3 +203,19 @@ Do not permanently store attributes that can reliably be derived from other cano
 - conference tournament display name
 
 These are derived from the game and program/conference dimensions.
+
+Historical conference membership is stored as non-overlapping season intervals in
+`schools/<program>/conferences.csv`. Stable conference identities and owner-approved
+conference names and owner-approved mobile tournament labels are centralized in
+`data/reference/conferences.csv`; labels
+must never be guessed or copied into canonical game rows. Generated team documents
+publish the interval history once and resolve conference-tournament presentation from
+the displayed program's conference in the game's season. An unresolved, Independent,
+unregistered, or unlabeled result displays exactly `Conference Tournament`. Mobile
+rows use `<tournament_label> T`; full team-history presentation uses the registry's
+`<conference_name> Tournament` and retains the same safe fallback.
+
+Conflicting source/event tournament wording is retained as team-level review metadata.
+It does not override a resolved membership interval or create a game-level conference
+exception. Membership-history corrections require owner-reviewed changes to the
+program's `conferences.csv` timeline.

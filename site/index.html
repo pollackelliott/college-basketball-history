@@ -103,6 +103,9 @@ const DB = {
   seasons: {},
   opponents: {},
   games: {},
+  conferenceHistory: {},
+  conferenceNames: {},
+  conferenceTournamentLabels: {},
   pairs: {},
 };
 
@@ -220,18 +223,52 @@ function scoreText(game) {
   return `${game.teamScore}–${game.oppScore}${overtime}`;
 }
 
-function baseGameTypeLabel(game) {
+function resolvedConferenceMembership(game, teamKey) {
+  if (!teamKey) return null;
+  const matches = (DB.conferenceHistory[teamKey] || []).filter((membership) => (
+    membership.start_season <= game.season
+    && (!membership.end_season || game.season <= membership.end_season)
+  ));
+  if (matches.length !== 1 || matches[0].conference_key === "independent") return null;
+  return matches[0];
+}
+
+function fullConferenceTournamentLabel(game, teamKey) {
+  const membership = resolvedConferenceMembership(game, teamKey);
+  if (!membership) return "Conference Tournament";
+  const name = DB.conferenceNames[teamKey]?.[membership.conference_key];
+  return name ? `${name} Tournament` : "Conference Tournament";
+}
+
+function baseGameTypeLabel(game, teamKey) {
 const labels = {
 REGULAR_SEASON: "Regular season",
-CONFERENCE_TOURNAMENT: "Conference tournament",
-NCAA_TOURNAMENT: "NCAA tournament",
+CONFERENCE_TOURNAMENT: fullConferenceTournamentLabel(game, teamKey),
+NCAA_TOURNAMENT: "NCAA Tournament",
 NIT: "NIT",
 };
 return labels[game.gameType] || humanizeKey(game.gameType || "Game");
 }
-function gameTypeLabel(game) {
-const base = baseGameTypeLabel(game);
+function gameTypeLabel(game, teamKey) {
+const base = baseGameTypeLabel(game, teamKey);
 return game.postseasonRound ? `${base} · ${humanizeKey(game.postseasonRound)}` : base;
+}
+
+function mobileConferenceTournamentLabel(game, teamKey) {
+  const membership = resolvedConferenceMembership(game, teamKey);
+  if (!membership) return "Conference Tournament";
+  const conferenceKey = membership.conference_key;
+  const label = DB.conferenceTournamentLabels[teamKey]?.[conferenceKey];
+  return label ? `${label} T` : "Conference Tournament";
+}
+
+function mobileGameTypeLabel(game, teamKey) {
+  let base;
+  if (game.gameType === "NCAA_TOURNAMENT") base = "NCAA T";
+  else if (game.gameType === "CONFERENCE_TOURNAMENT") {
+    return mobileConferenceTournamentLabel(game, teamKey);
+  } else base = baseGameTypeLabel(game);
+  return game.postseasonRound ? `${base} · ${humanizeKey(game.postseasonRound)}` : base;
 }
 
 function administrativeLabel(status) {
@@ -432,6 +469,9 @@ async function loadData() {
     DB.opponents[key] = opponents;
     DB.seasons[key] = document.seasons || [];
     DB.games[key] = games;
+    DB.conferenceHistory[key] = document.conference_history || [];
+    DB.conferenceNames[key] = document.conference_names || {};
+    DB.conferenceTournamentLabels[key] = document.conference_tournament_labels || {};
     DB.summaries[key] = {
       games: summary.games || games.length,
       wins: summary.wins || 0,
@@ -775,12 +815,12 @@ function siteLabel(site) {
   return "Unknown site";
 }
 
-function mobileGameDetails(game) {
+function mobileGameDetails(game, teamKey) {
   const rows = [
     ["Season", esc(formatSeason(game.season))],
     ["Venue", esc(game.venue || "—")],
     ["Location", esc(game.location || "—")],
-    ["Game Type", esc(baseGameTypeLabel(game))],
+    ["Game Type", esc(baseGameTypeLabel(game, teamKey))],
   ];
   if (game.postseasonRound) rows.push(["Postseason Round", esc(humanizeKey(game.postseasonRound))]);
   rows.push(["Administrative", administrativeChip(game)]);
@@ -788,7 +828,7 @@ function mobileGameDetails(game) {
 }
 function mobileTeamGameRow(game, teamKey) {
   const resultAndScore = `${game.result || "—"}${scoreText(game) !== "—" ? ` · ${scoreText(game)}` : ""}`;
-  return `<details class="mobile-game-row"><summary><div class="mobile-game-line mobile-team-game-line"><button type="button" class="opp-link mobile-game-opponent" onclick="event.preventDefault();event.stopPropagation();goMatch('${teamKey}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[teamKey].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button><span class="mobile-game-outcome result ${esc(game.result)}">${esc(resultAndScore)}</span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(compactGameDate(game))} · ${esc(siteLabel(game.site))} · ${esc(gameTypeLabel(game))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game)}</details>`;
+  return `<details class="mobile-game-row"><summary><div class="mobile-game-line mobile-team-game-line"><button type="button" class="opp-link mobile-game-opponent" onclick="event.preventDefault();event.stopPropagation();goMatch('${teamKey}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[teamKey].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button><span class="mobile-game-outcome result ${esc(game.result)}">${esc(resultAndScore)}</span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(compactGameDate(game))} · ${esc(siteLabel(game.site))} · ${esc(mobileGameTypeLabel(game, teamKey))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game, teamKey)}</details>`;
 }
 
 function mobileHistoryMonth(game) {
@@ -866,7 +906,7 @@ function updateTeamGames(key, delta = 0, reset = false) {
   const slice = games.slice(state.page * PAGE_SIZE, (state.page + 1) * PAGE_SIZE);
   const rows = slice.map((game) => {
     const opponent = `<button type="button" class="opp-link" onclick="goMatch('${key}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[key].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button>`;
-    return `<tr><td>${esc(formatGameDate(game))}</td><td>${opponent}</td><td class="result ${esc(game.result)}">${esc(game.result)}</td><td>${esc(scoreText(game))}</td><td>${esc(siteShort(game.site))}</td><td>${esc(game.venue)}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game))}</td><td>${administrativeChip(game)}</td></tr>`;
+    return `<tr><td>${esc(formatGameDate(game))}</td><td>${opponent}</td><td class="result ${esc(game.result)}">${esc(game.result)}</td><td>${esc(scoreText(game))}</td><td>${esc(siteShort(game.site))}</td><td>${esc(game.venue)}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game, key))}</td><td>${administrativeChip(game)}</td></tr>`;
   }).join("");
   const mobileRows = mobileTeamGameRows(slice, key);
   document.getElementById("teamGamesTable").innerHTML = `<div class="desktop-history"><div class="table-wrap"><table class="history-table"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th><th>Score</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows || '<tr><td colspan="9" class="empty">No games match these filters.</td></tr>'}</tbody></table></div></div><div class="mobile-history">${mobileRows || '<div class="empty">No games match these filters.</div>'}</div><div class="pager"><span>${fmtNum(games.length)} games · page ${fmtNum(state.page + 1)} of ${fmtNum(maxPage + 1)}</span><span><button type="button" onclick="updateTeamGames('${key}',-1)" ${state.page === 0 ? "disabled" : ""}>Previous</button> <button type="button" onclick="updateTeamGames('${key}',1)" ${state.page >= maxPage ? "disabled" : ""}>Next</button></span></div>`;
@@ -992,7 +1032,7 @@ function matchupView(teamA, teamB) {
       const scoreA = game.scoreKnown && game.scores[teamA] != null ? game.scores[teamA] : "—";
       const scoreB = game.scoreKnown && game.scores[teamB] != null ? game.scores[teamB] : "—";
       const winner = canonicalWinnerKey(game, teamA, teamB);
-      return `<tr><td>${esc(formatGameDate(game))}</td><td>${seriesScoreMarkup(scoreA, teamAProgram, winner, teamA)}</td><td>${seriesScoreMarkup(scoreB, teamBProgram, winner, teamB)}</td><td>${esc(game.site || "Unknown")}</td><td>${esc(game.venue || "—")}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game))}</td><td>${administrativeChip(game)}</td></tr>`;
+      return `<tr><td>${esc(formatGameDate(game))}</td><td>${seriesScoreMarkup(scoreA, teamAProgram, winner, teamA)}</td><td>${seriesScoreMarkup(scoreB, teamBProgram, winner, teamB)}</td><td>${esc(game.site || "Unknown")}</td><td>${esc(game.venue || "—")}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game, teamA))}</td><td>${administrativeChip(game)}</td></tr>`;
     }).join("");
   const mobileRows = [...games]
     .sort((a, b) => gameSortValue(b).localeCompare(gameSortValue(a)))
@@ -1003,7 +1043,7 @@ function matchupView(teamA, teamB) {
       const winner = canonicalWinnerKey(game, teamA, teamB);
       const scoreAMarkup = seriesScoreMarkup(scoreA, teamAProgram, winner, teamA);
       const scoreBMarkup = seriesScoreMarkup(scoreB, teamBProgram, winner, teamB);
-      return `<details class="mobile-game-row"><summary><div class="mobile-game-line"><span class="mobile-game-date">${esc(compactGameDate(game))}</span><span class="mobile-game-outcome series-mobile-outcome"><span class="result ${esc(outcome)}">${esc(outcome)}</span><span aria-hidden="true">·</span><span class="series-score-pair">${scoreAMarkup}<span aria-hidden="true">–</span>${scoreBMarkup}</span></span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(game.site || "Unknown")} · ${esc(gameTypeLabel(game))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game)}</details>`;
+      return `<details class="mobile-game-row"><summary><div class="mobile-game-line"><span class="mobile-game-date">${esc(compactGameDate(game))}</span><span class="mobile-game-outcome series-mobile-outcome"><span class="result ${esc(outcome)}">${esc(outcome)}</span><span aria-hidden="true">·</span><span class="series-score-pair">${scoreAMarkup}<span aria-hidden="true">–</span>${scoreBMarkup}</span></span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(game.site || "Unknown")} · ${esc(gameTypeLabel(game, teamA))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game, teamA)}</details>`;
     }).join("");
 
   return `<button type="button" class="back" onclick="goTeam('${teamA}')">← ${esc(teamAProgram.name)} history</button><div class="match-head"><div class="side-team">${teamLogo(teamAProgram)}<div><div class="kicker" style="color:${teamAProgram.primary}">${esc(teamAProgram.conference)}</div><h2>${matchupTeamName(teamAProgram)}</h2></div></div><div class="vs">VS.</div><div class="side-team right">${teamLogo(teamBProgram)}<div><div class="kicker" style="color:${teamBProgram.primary}">${esc(teamBProgram.conference)}</div><h2>${matchupTeamName(teamBProgram)}</h2></div></div></div><div class="series-score">${fmtRecord(teamAWins, teamBWins, ties)}</div><div class="series-caption">${esc(teamAProgram.name)} record vs. ${esc(teamBProgram.name)} · ${fmtNum(games.length)} meetings${scoredGames.length !== games.length ? ` · ${fmtNum(scoredGames.length)} with known scores` : ""}</div>${administrativeCount ? `<div class="notice">${fmtNum(administrativeCount)} game${administrativeCount === 1 ? "" : "s"} carries administrative metadata. Records shown use on-court results.</div>` : ""}<div class="match-metrics"><div class="metric"><b>${streakText(games, teamA, teamB)}</b><span>Current Streak</span></div><div class="metric"><b>${longestStreak(games, teamA, teamB)}</b><span>Longest Streak</span></div><div class="metric"><b>${largest ? fmtNum(largest.margin) : "—"}</b><span>Largest Margin · ${largest ? formatGameDate(largest.game) : ""}</span></div><div class="metric"><b>${closest ? fmtNum(closest.margin) : "—"}</b><span>Closest Margin · ${closest ? formatGameDate(closest.game) : ""}</span></div><div class="metric"><b>${highest ? fmtNum(highest.total) : "—"}</b><span>Highest Combined Score</span></div><div class="metric"><b>${scoredGames.length ? (teamAPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(teamAProgram.name)} Avg. Points</span></div><div class="metric"><b>${scoredGames.length ? (teamBPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(teamBProgram.name)} Avg. Points</span></div><div class="metric"><b>${fmtNum(teamAPoints)}–${fmtNum(teamBPoints)}</b><span>Total Known Points</span></div></div><div class="subgrid">${miniPanel("Record by Site", sites, teamA)}${miniPanel("Record by Decade", decades, teamA)}${miniPanel("Most-Used Venues", venues, teamA)}</div><div class="panel history-panel" style="margin-top:14px"><div class="panel-title">Complete Series History</div><div class="desktop-history"><div class="table-wrap"><table class="matchup-history-table"><thead><tr><th>Date</th><th>${esc(teamAProgram.name)}</th><th>${esc(teamBProgram.name)}</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows}</tbody></table></div></div><div class="mobile-history">${mobileRows}</div></div>`;
