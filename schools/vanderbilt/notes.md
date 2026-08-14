@@ -74,9 +74,9 @@ NCAA public rounds are normalized to Play-in, R64, R32, Sweet Sixteen, and Elite
 
 Current Division-I opponents reuse `data/reference/programs.csv` identities. Established project aliases are reused where supported. Historical clubs, YMCAs, military/service teams, prep programs, and non-current colleges are retained conservatively instead of being forced into modern institutions without evidence. The package contains **354 source opponent labels resolving to 339 canonical opponent keys**.
 
-## 11. Owner-approved future canonical corrections
+## 11. Owner-approved canonical corrections
 
-The owner approved both surfaced cross-source corrections, but this package commit intentionally does **not** edit global canonical data:
+The owner approved both surfaced cross-source corrections, and post-ingestion reconciliation applies them to global canonical data:
 
 - `CBBG-0020008`: Vanderbilt-Florida belongs on **2020-12-30**, not 2020-12-29.
 - `CBBG-0005665`: Vanderbilt's score against Arkansas is **71-92**, not 71-82.
@@ -111,3 +111,18 @@ All four overrides use `MATCH_SOURCE_ASSERTION`. Expected post-correction ingest
 - Confident matches with source differences: 37 (9 date, 14 score, 14 overtime)
 - No exhibition or unplayed schedule rows
 - No score/result contradictions after curated source review
+
+## 13. Post-ingestion reconciliation — 2026-08-14
+
+Vanderbilt ingestion surfaced 66 field-level discrepancies against eight previously
+public programs. The owner approved all 66 resolutions on 2026-08-14. Twenty
+canonical values were corrected, while 46 existing canonical values were retained
+and the Vanderbilt curated normalization was corrected to match the stronger
+game-level evidence. All original Vanderbilt `raw_text` values and discrepancy
+source values remain preserved.
+
+The owner specifically confirmed that the 1959-02-21 Florida game was played at
+Vanderbilt. The canonical Vanderbilt-home classification therefore controls;
+Vanderbilt's conflicting opponent-series `A` marker remains preserved as source
+context. No Vanderbilt ingestion discrepancy remains under review.
+

@@ -49,11 +49,11 @@ The 1961 Kentucky game labeled `NCAA Tournament (Knoxville)` in a season legend 
 
 ## 7. Modern cross-source corrections approved by the owner
 
-For Florida, Vanderbilt's current fact book and Florida's official [2020-21 schedule](https://floridagators.com/sports/mens-basketball/schedule/text/2020-21) establish 2020-12-30. The future correction applies to `CBBG-0020008`.
+For Florida, Vanderbilt's current fact book and Florida's official [2020-21 schedule](https://floridagators.com/sports/mens-basketball/schedule/text/2020-21) establish 2020-12-30. Canonical reconciliation applies this correction to `CBBG-0020008`.
 
-For Arkansas, Vanderbilt's current fact book, Vanderbilt's official [game recap](https://vucommodores.com/news/2021/01/23/dores-dropped-at-home), and Arkansas's official [postgame record](https://arkansasrazorbacks.com/vanderbilt-postgame-justin-smith-and-moses-moody/) establish Arkansas 92, Vanderbilt 71. An older Vanderbilt press-box line prints `L, 72-91`; that isolated typo is retained as conflict context but does not control the curated row. The future correction applies to `CBBG-0005665`.
+For Arkansas, Vanderbilt's current fact book, Vanderbilt's official [game recap](https://vucommodores.com/news/2021/01/23/dores-dropped-at-home), and Arkansas's official [postgame record](https://arkansasrazorbacks.com/vanderbilt-postgame-justin-smith-and-moses-moody/) establish Arkansas 92, Vanderbilt 71. An older Vanderbilt press-box line prints `L, 72-91`; that isolated typo is retained as conflict context but does not control the curated row. Canonical reconciliation applies this correction to `CBBG-0005665`.
 
-The owner approved both corrections on 2026-08-14. This source-package phase records the decisions but does not apply them to canonical games or discrepancies.
+The owner approved both corrections on 2026-08-14. The source package recorded these decisions before ingestion; post-ingestion reconciliation applies them to canonical games and discrepancies.
 
 ## 8. Home venue evidence
 
@@ -65,6 +65,30 @@ Vanderbilt overlaps all eight currently public programs and should confidently m
 
 The repository's read-only matcher initially reported 657 confident identity matches, 4 rows requiring identity review, and 2,345 new-game candidates. Thirty-seven initially confident matches contain field differences (9 date, 14 score, and 14 overtime).
 
-On 2026-08-14 the owner approved `MATCH_SOURCE_ASSERTION` links from `VANRAW-00213` to Kentucky `KYRAW-00194`, from `VANRAW-00263` to Kentucky `KYRAW-00228`, and from `VANRAW-00582` to Tennessee `TENRAW-00489`. The owner also confirmed that Vanderbilt-Tennessee on 2009-01-20 and Tennessee-Vanderbilt on 2009-02-14 are separate valid games. Further inspection showed that the January game already existed as `CBBG-0022174`, but Tennessee's `/- at Vanderbilt` source marker had been misnormalized as a fake `at-vanderbilt` opponent. The owner approved correcting Tennessee assertion `TENRAW-02350` and the canonical row to Vanderbilt and using `MATCH_SOURCE_ASSERTION` for `VANRAW-02428`. The corrected identity plan is therefore 661 existing matches, 2,345 new games, and zero review-required identities. Material field disagreements remain for the later reconciliation phase.
+On 2026-08-14 the owner approved `MATCH_SOURCE_ASSERTION` links from `VANRAW-00213` to Kentucky `KYRAW-00194`, from `VANRAW-00263` to Kentucky `KYRAW-00228`, and from `VANRAW-00582` to Tennessee `TENRAW-00489`. The owner also confirmed that Vanderbilt-Tennessee on 2009-01-20 and Tennessee-Vanderbilt on 2009-02-14 are separate valid games. Further inspection showed that the January game already existed as `CBBG-0022174`, but Tennessee's `/- at Vanderbilt` source marker had been misnormalized as a fake `at-vanderbilt` opponent. The owner approved correcting Tennessee assertion `TENRAW-02350` and the canonical row to Vanderbilt and using `MATCH_SOURCE_ASSERTION` for `VANRAW-02428`. The corrected identity plan is therefore 661 existing matches, 2,345 new games, and zero review-required identities. The material field disagreements were resolved in the post-ingestion reconciliation phase.
 
 The earlier read-only simulation of the now-withdrawn `FORCE_NEW` plan is superseded. After the approved Tennessee and canonical identity corrections, a fresh read-only simulation verified 661 existing matches, 2,345 new games, zero review-required identities, 271 matched games with 900 supported blank-field enrichments, 3,006 new source assertions, and 66 discrepancies.
+
+## 10. Post-ingestion reconciliation — 2026-08-14
+
+The owner approved all 66 Vanderbilt ingestion discrepancy resolutions. Cross-source
+review used official opponent histories and contemporary game records from Kentucky,
+Tennessee, Florida, Arkansas, Missouri, and Illinois. Twenty canonical fields were
+corrected; 46 Vanderbilt curated fields were normalized to the retained canonical
+value. Raw Vanderbilt fact-book text remains unchanged, and every original conflict
+remains auditable in `data/reconciliation/discrepancies.csv` with `RESOLVED` status.
+
+The owner ruled that Florida-Vanderbilt on 1959-02-21 was played at Vanderbilt.
+The curated site is therefore Vanderbilt home, while the fact book's conflicting
+series-table `A` marker remains preserved in `source_site_candidate`.
+
+Principal online cross-source references:
+
+- [Tennessee opponent history](https://utsports.com/sports/mbball/opponent-history/vanderbilt/80)
+- [Florida opponent history](https://floridagators.com/sports/mens-basketball/opponent-history/vanderbilt-university/90)
+- [Illinois opponent history](https://fightingillini.com/sports/mens-basketball/opponent-history/vanderbilt-university/77)
+- [Arkansas 2021 postgame record](https://arkansasrazorbacks.com/vanderbilt-postgame-justin-smith-and-moses-moody/)
+- [Missouri 2022-23 schedule](https://mutigers.com/sports/mens-basketball/schedule/season/2022-23)
+- [Kentucky 2019 official recap](https://ukathletics.com/news/2019/01/29/mens-basketball-no-7-cats-slam-dores-in-nashville/)
+- [Contemporary 1982 Illinois-Vanderbilt UPI report](https://www.upi.com/Archives/1982/12/13/Anthony-Welch-who-scored-28-points-sank-two-free/7492408603600/)
+
