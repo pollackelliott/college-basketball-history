@@ -10,10 +10,14 @@
     "state": "AR",
     "primary_hex": "#9D2235",
     "secondary_hex": "#FFFFFF",
+    "history_start_season": "1923-1924",
     "conference_regular_season_championships": 24,
     "conference_tournament_championships": 8,
+    "ncaa_tournament_appearances": 37,
     "final_four_appearances": 6,
     "national_championships": 1,
+    "best_finish_key": "NATIONAL_CHAMPION",
+    "best_finish_year": 1994,
     "current_conference": {
       "conference_key": "sec",
       "conference_name": "SEC"
@@ -12969,7 +12973,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "New Orleans",
+      "site_city": null,
       "site_state": null,
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -28209,7 +28213,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Shreveport",
+      "site_city": null,
       "site_state": null,
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -38745,7 +38749,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Anchorage",
+      "site_city": null,
       "site_state": null,
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -52809,7 +52813,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -55953,7 +55957,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -58017,7 +58021,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -60393,7 +60397,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -62697,7 +62701,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -65817,7 +65821,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Nashville",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -68361,7 +68365,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "St. Louis",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -72465,8 +72469,8 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Des Moines",
+      "site_state": "IA",
       "game_type": "NCAA_TOURNAMENT",
       "postseason_round": "R32",
       "administrative_status": null,
@@ -75040,5 +75044,30 @@
       "administrative_status": null,
       "administrative_note": null
     }
-  ]
+  ],
+  "conference_history": [
+    {
+      "start_season": "1923-1924",
+      "end_season": "1990-1991",
+      "conference_key": "southwest-conference",
+      "conference_name": "Southwest Conference",
+      "membership_type": "conference"
+    },
+    {
+      "start_season": "1991-1992",
+      "end_season": null,
+      "conference_key": "sec",
+      "conference_name": "SEC",
+      "membership_type": "conference"
+    }
+  ],
+  "conference_names": {
+    "sec": "SEC",
+    "southwest-conference": "Southwest Conference"
+  },
+  "conference_tournament_labels": {
+    "sec": "SEC",
+    "southwest-conference": "SWC"
+  },
+  "conference_tournament_review_flags": []
 }

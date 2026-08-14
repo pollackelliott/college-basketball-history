@@ -1,4 +1,4 @@
-program_key,program_name,display_name,nickname,city,state,primary_hex,secondary_hex,current_d1,public_page_enabled,conference_regular_season_championships,conference_tournament_championships,final_four_appearances,national_championships
+program_key,program_name,display_name,nickname,city,state,primary_hex,secondary_hex,current_d1,public_page_enabled,history_start_season,history_scope_status,history_scope_basis,history_scope_notes
 abilene-christian,Abilene Christian,Abilene Christian,Wildcats,Abilene,TX,#4F2170,#FFFFFF,Yes,No,,,,
 air-force,Air Force,Air Force,Falcons,Colorado Springs,CO,#003087,#8A8D8F,Yes,No,,,,
 akron,Akron,Akron,Zips,Akron,OH,#041E42,#A89968,Yes,No,,,,
@@ -10,7 +10,7 @@ american-university,American University,American,Eagles,Washington,DC,#143D8D,#C
 app-state,App State,Appalachian State,Mountaineers,Boone,NC,#222222,#FFCC00,Yes,No,,,,
 arizona,Arizona,Arizona,Wildcats,Tucson,AZ,#CC0033,#003366,Yes,No,,,,
 arizona-state,Arizona State,Arizona State,Sun Devils,Tempe,AZ,#8C1340,#FFC627,Yes,No,,,,
-arkansas,Arkansas,Arkansas,Razorbacks,Fayetteville,AR,#9D2235,#FFFFFF,Yes,Yes,24,8,6,1
+arkansas,Arkansas,Arkansas,Razorbacks,Fayetteville,AR,#9D2235,#FFFFFF,Yes,Yes,1923-1924,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 arkansas-pine-bluff,Arkansas-Pine Bluff,UAPB,Golden Lions,Pine Bluff,AR,#EEB310,#000000,Yes,No,,,,
 arkansas-state,Arkansas State,Arkansas State,Red Wolves,Jonesboro,AR,#CC092F,#000000,Yes,No,,,,
 army,Army,Army,Black Knights,West Point,NY,#D4BF91,#000000,Yes,No,,,,
@@ -83,7 +83,7 @@ elon,Elon,Elon,Phoenix,Elon,NC,#73000A,#B59A57,Yes,No,,,,
 evansville,Evansville,Evansville,Purple Aces,Evansville,IN,#52237F,#F36F21,Yes,No,,,,
 fairfield,Fairfield,Fairfield,Stags,Fairfield,CT,#C8102E,#A2AAAD,Yes,No,,,,
 fairleigh-dickinson,Fairleigh Dickinson,Fairleigh Dickinson,Knights,Hackensack,NJ,#283341,#72293C,Yes,No,,,,
-florida,Florida,Florida,Gators,Gainesville,FL,#0021A5,#FA4616,Yes,Yes,8,5,6,3
+florida,Florida,Florida,Gators,Gainesville,FL,#0021A5,#FA4616,Yes,Yes,1915-1916,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 florida-a-m,Florida A&M,Florida A&M,Rattlers,Tallahassee,FL,#EE7624,#1B5633,Yes,No,,,,
 florida-atlantic,Florida Atlantic,FAU,Owls,Boca Raton,FL,#003366,#CC0000,Yes,No,,,,
 florida-gulf-coast,Florida Gulf Coast,Florida Gulf Coast,Eagles,Fort Myers,FL,#002D72,#007749,Yes,No,,,,
@@ -115,7 +115,7 @@ houston-christian,Houston Christian,Houston Christian,Huskies,Houston,TX,#1C439D
 howard,Howard,Howard,Bison,Washington,DC,#003A63,#E51937,Yes,No,,,,
 idaho,Idaho,Idaho,Vandals,Moscow,ID,#B3A369,#000000,Yes,No,,,,
 idaho-state,Idaho State,Idaho State,Bengals,Pocatello,ID,#FF671F,#000000,Yes,No,,,,
-illinois,Illinois,Illinois,Fighting Illini,Champaign,IL,#E84A27,#13294B,Yes,Yes,18,4,6,0
+illinois,Illinois,Illinois,Fighting Illini,Champaign,IL,#E84A27,#13294B,Yes,Yes,1905-1906,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 illinois-state,Illinois State,Illinois State,Redbirds,Normal,IL,#CE1126,#FFFFFF,Yes,No,,,,
 incarnate-word,Incarnate Word,Incarnate Word,Cardinals,San Antonio,TX,#CB333B,#000000,Yes,No,,,,
 indiana,Indiana,Indiana,Hoosiers,Bloomington,IN,#960009,#EEEDEB,Yes,No,,,,
@@ -128,12 +128,12 @@ jackson-state,Jackson State,Jackson State,Tigers,Jackson,MS,#002147,#FFFFFF,Yes,
 jacksonville,Jacksonville,Jacksonville,Dolphins,Jacksonville,FL,#004E44,#898A8D,Yes,No,,,,
 jacksonville-state,Jacksonville State,Jacksonville State,Gamecocks,Jacksonville,AL,#CC0000,#000000,Yes,No,,,,
 james-madison,James Madison,James Madison,Dukes,Harrisonburg,VA,#450084,#CBB677,Yes,No,,,,
-kansas,Kansas,Kansas,Jayhawks,Lawrence,KS,#0051BA,#E8000D,Yes,Yes,64,16,16,4
+kansas,Kansas,Kansas,Jayhawks,Lawrence,KS,#0051BA,#E8000D,Yes,Yes,1898-1899,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 kansas-city,Kansas City,Kansas City,Roos,Kansas City,MO,#005293,#FECB00,Yes,No,,,,
 kansas-state,Kansas State,Kansas State,Wildcats,Manhattan,KS,#512888,#D1D1D1,Yes,No,,,,
 kennesaw-state,Kennesaw State,Kennesaw State,Owls,Kennesaw,GA,#FDBB30,#000000,Yes,No,,,,
 kent-state,Kent State,Kent State,Golden Flashes,Kent,OH,#002664,#EAAB00,Yes,No,,,,
-kentucky,Kentucky,Kentucky,Wildcats,Lexington,KY,#0033A0,#FFFFFF,Yes,Yes,52,33,17,8
+kentucky,Kentucky,Kentucky,Wildcats,Lexington,KY,#0033A0,#FFFFFF,Yes,Yes,1902-1903,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 la-salle,La Salle,La Salle,Explorers,Philadelphia,PA,#FFCC00,#003366,Yes,No,,,,
 lafayette,Lafayette,Lafayette,Leopards,Easton,PA,#A89963,#98002E,Yes,No,,,,
 lamar,Lamar,Lamar,Cardinals,Beaumont,TX,#DC0032,#FFFFFF,Yes,No,,,,
@@ -175,7 +175,7 @@ milwaukee,Milwaukee,Milwaukee,Panthers,Milwaukee,WI,#FFBD00,#000000,Yes,No,,,,
 minnesota,Minnesota,Minnesota,Golden Gophers,Minneapolis,MN,#7A0019,#FFCC33,Yes,No,,,,
 mississippi-state,Mississippi State,Mississippi State,Bulldogs,Starkville,MS,#660000,#FFFFFF,Yes,No,,,,
 mississippi-valley-state,Mississippi Valley State,Mississippi Valley State,Delta Devils,Itta Bena,MS,#00703C,#E51937,Yes,No,,,,
-missouri,Missouri,Mizzou,Tigers,Columbia,MO,#000000,#F1B82D,Yes,Yes,15,8,0,0
+missouri,Missouri,Mizzou,Tigers,Columbia,MO,#000000,#F1B82D,Yes,Yes,1906-1907,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 missouri-state,Missouri State,Missouri State,Bears,Springfield,MO,#530009,#FFFFFF,Yes,No,,,,
 monmouth,Monmouth,Monmouth,Hawks,West Long Branch,NJ,#041E42,#FFFFFF,Yes,No,,,,
 montana,Montana,Montana,Grizzlies,Missoula,MT,#660033,#999999,Yes,No,,,,
@@ -211,7 +211,7 @@ northern-colorado,Northern Colorado,Northern Colorado,Bears,Greeley,CO,#013C65,#
 northern-illinois,Northern Illinois,Northern Illinois,Huskies,Dekalb,IL,#BA0C2F,#000000,Yes,No,,,,
 northern-iowa,Northern Iowa,Northern Iowa,Panthers,Cedar Falls,IA,#4B116F,#FFCC00,Yes,No,,,,
 northern-kentucky,Northern Kentucky,Northern Kentucky,Norse,Highland Heights,KY,#000000,#FFC72C,Yes,No,,,,
-northwestern,Northwestern,Northwestern,Wildcats,Evanston,IL,#4E2A84,#FFFFFF,Yes,Yes,2,0,0,0
+northwestern,Northwestern,Northwestern,Wildcats,Evanston,IL,#4E2A84,#FFFFFF,Yes,Yes,1904-1905,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 northwestern-state,Northwestern State,Northwestern State,Demons,Natchitoches,LA,#663399,#FF6600,Yes,No,,,,
 notre-dame,Notre Dame,Notre Dame,Fighting Irish,South Bend,IN,#0C2340,#C99700,Yes,No,,,,
 oakland,Oakland,Oakland,Golden Grizzlies,Rochester,MI,#B59A57,#000000,Yes,No,,,,
@@ -291,7 +291,7 @@ syracuse,Syracuse,Syracuse,Orange,Syracuse,NY,#F76900,#000354,Yes,No,,,,
 tarleton-state,Tarleton State,Tarleton,Texans,Stephenville,TX,#4F2D7F,#FFFFFF,Yes,No,,,,
 tcu,TCU,TCU,Horned Frogs,Fort Worth,TX,#4D1979,#FFFFFF,Yes,No,,,,
 temple,Temple,Temple,Owls,Philadelphia,PA,#9D2235,#8A8D8F,Yes,No,,,,
-tennessee,Tennessee,Tennessee,Volunteers,Knoxville,TN,#FF8200,#FFFFFF,Yes,Yes,12,5,0,0
+tennessee,Tennessee,Tennessee,Volunteers,Knoxville,TN,#FF8200,#FFFFFF,Yes,Yes,1908-1909,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-14 that accepted site history begins with program inception.
 tennessee-state,Tennessee State,Tennessee State,Tigers,Nashville,TN,#00539F,#FFFFFF,Yes,No,,,,
 tennessee-tech,Tennessee Tech,Tennessee Tech,Golden Eagles,Cookeville,TN,#4F2984,#FFDD00,Yes,No,,,,
 texas,Texas,Texas,Longhorns,Austin,TX,#BF5700,#FFFFFF,Yes,No,,,,

@@ -10,10 +10,14 @@
     "state": "IL",
     "primary_hex": "#E84A27",
     "secondary_hex": "#13294B",
+    "history_start_season": "1905-1906",
     "conference_regular_season_championships": 18,
     "conference_tournament_championships": 4,
+    "ncaa_tournament_appearances": 36,
     "final_four_appearances": 6,
     "national_championships": 0,
+    "best_finish_key": "NATIONAL_RUNNER_UP",
+    "best_finish_year": 2005,
     "current_conference": {
       "conference_key": "big-ten",
       "conference_name": "Big Ten"
@@ -56725,8 +56729,8 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Chicago",
+      "site_state": "IL",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
@@ -58117,8 +58121,8 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "San Antonio",
+      "site_state": "TX",
       "game_type": "NCAA_TOURNAMENT",
       "postseason_round": "Sweet Sixteen",
       "administrative_status": null,
@@ -58981,8 +58985,8 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Madison",
+      "site_state": "WI",
       "game_type": "NCAA_TOURNAMENT",
       "postseason_round": "Sweet Sixteen",
       "administrative_status": null,
@@ -59173,7 +59177,7 @@
       "site": "NEUTRAL",
       "venue_key": "enterprise-center",
       "venue_name": "Enterprise Center",
-      "site_city": "Savvis Center–St. Louis",
+      "site_city": "St. Louis",
       "site_state": "MO",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -62581,7 +62585,7 @@
       "site": "NEUTRAL",
       "venue_key": "enterprise-center",
       "venue_name": "Enterprise Center",
-      "site_city": "Scottrade Center",
+      "site_city": "St. Louis",
       "site_state": "MO",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -66445,8 +66449,8 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Tulsa",
+      "site_state": "OK",
       "game_type": "NCAA_TOURNAMENT",
       "postseason_round": "R32",
       "administrative_status": null,
@@ -70021,7 +70025,7 @@
       "site": "NEUTRAL",
       "venue_key": "enterprise-center",
       "venue_name": "Enterprise Center",
-      "site_city": "Scottrade Center",
+      "site_city": "St. Louis",
       "site_state": "MO",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -77941,7 +77945,7 @@
       "site": "NEUTRAL",
       "venue_key": "madison-square-garden",
       "venue_name": "Madison Square Garden",
-      "site_city": "New York City",
+      "site_city": "New York",
       "site_state": "NY",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -78644,5 +78648,21 @@
       "administrative_status": null,
       "administrative_note": null
     }
-  ]
+  ],
+  "conference_history": [
+    {
+      "start_season": "1905-1906",
+      "end_season": null,
+      "conference_key": "big-ten",
+      "conference_name": "Big Ten",
+      "membership_type": "conference"
+    }
+  ],
+  "conference_names": {
+    "big-ten": "Big Ten"
+  },
+  "conference_tournament_labels": {
+    "big-ten": "Big Ten"
+  },
+  "conference_tournament_review_flags": []
 }

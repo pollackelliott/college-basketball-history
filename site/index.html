@@ -33,8 +33,8 @@ button,input,select{font:inherit}button{touch-action:manipulation}.college{font-
 .program-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:12px}.program-card{appearance:none;min-width:0;width:100%;min-height:108px;text-align:center;padding:14px;border:1px solid #111;border-top:6px solid var(--secondary);border-radius:9px;background:var(--primary);color:var(--cardText);box-shadow:0 0 0 1px #111,0 3px 11px rgba(17,34,56,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.program-card.enabled{cursor:pointer}.program-card.enabled:hover{transform:translateY(-2px);box-shadow:0 0 0 1px #111,0 10px 22px rgba(17,34,56,.18)}.program-card:disabled{cursor:not-allowed;opacity:.70}.program-card .program-name{display:block;font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:20px;line-height:1.2;overflow-wrap:anywhere}.program-card .program-meta{display:block;margin-top:7px;font-size:13px;line-height:1.35;opacity:.92}
 .logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}
 .team-hero{border-radius:11px;overflow:hidden;background:white;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:18px}.team-strip{height:10px;background:var(--team)}
-.team-head{text-align:center;padding:24px;display:flex;flex-direction:column;align-items:center;gap:10px}.team-head h1{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:35px;line-height:1.2;margin:0}.team-head p{margin:6px 0 0;color:var(--muted)}.team-head .logo-disc{width:76px;height:76px;font-size:25px}
-.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:16px 0}.metric{min-width:0;min-height:82px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.metric b{font-size:23px;line-height:1.1;display:block;overflow-wrap:anywhere}.metric span{display:block;margin:0;font-size:12px;line-height:1.28;font-weight:600;color:#526174}
+.team-head{text-align:center;padding:24px;display:flex;flex-direction:column;align-items:center;gap:10px}.team-head h1{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:35px;line-height:1.2;margin:0}.team-head h1+.kicker{margin-top:8px}.team-head .logo-disc{width:76px;height:76px;font-size:25px}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}.metric{min-width:0;min-height:82px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.metric.champion-finish{border-color:#C9A227}.metric b{font-size:23px;line-height:1.1;display:block;overflow-wrap:anywhere}.metric span{display:block;margin:0;font-size:12px;line-height:1.28;font-weight:600;color:#526174}
 .btn{background:var(--nav);color:white;border:0;border-radius:6px;padding:8px 10px;cursor:pointer;font-size:12px}.btn:hover{opacity:.9}.btn:disabled{opacity:.4;cursor:not-allowed}
 .mobile-filter-toggle{display:none;width:100%;min-height:46px;border:0;border-bottom:1px solid var(--line);background:#f8fafc;color:var(--ink);padding:11px 14px;font-weight:800;justify-content:space-between;align-items:center;cursor:pointer}.mobile-filter-toggle span:last-child{font-size:11px;color:var(--muted);font-weight:600}
 .filters{padding:12px;border-bottom:1px solid var(--line);display:flex;align-items:flex-end;justify-content:center;gap:9px;flex-wrap:wrap}.filter-field{min-width:150px}.filter-field.opponent-field{position:relative;flex:1 1 330px;max-width:520px}.filters input,.filters select{width:100%;min-height:40px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12px;background:white}.filter-clear{min-height:40px;border:1px solid var(--line);background:#fff;border-radius:6px;padding:8px 11px;color:#526174;cursor:pointer}.filter-clear:hover{background:#f4f7fa}
@@ -45,14 +45,14 @@ button,input,select{font:inherit}button{touch-action:manipulation}.college{font-
 .opp-link{border:0;background:transparent;padding:2px;font-weight:700;color:#174f82;cursor:pointer;text-decoration:underline;text-decoration-color:#aac3da;text-underline-offset:2px}.opp-plain{font-weight:600}.series-link{border:0;background:transparent;padding:2px;color:#174f82;font-weight:750;text-decoration:underline;text-decoration-color:#aac3da;text-underline-offset:2px;cursor:pointer}.result.W{color:var(--good);font-weight:800}.result.L{color:var(--bad);font-weight:800}.result.T{color:var(--warn);font-weight:800}
 .pager{padding:12px;display:flex;justify-content:center;gap:18px;align-items:center;color:var(--muted);font-size:12px;flex-wrap:wrap}.pager button{min-height:38px;border:1px solid var(--line);background:white;border-radius:6px;padding:7px 11px;cursor:pointer}.pager button:disabled{opacity:.45;cursor:not-allowed}
 .opponent-breakdown{margin-top:16px}.conference-group{border-top:1px solid var(--line)}.conference-group:first-child{border-top:0}.conference-group summary{cursor:pointer;list-style:none;padding:13px 16px;background:#f8fafc;font-weight:800;text-align:center}.conference-group summary::-webkit-details-marker{display:none}.conference-group summary span{color:var(--muted);font-weight:600;margin-left:8px;font-size:11px}.conference-group[open] summary{background:#eaf1f7}
-.match-head{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:20px;align-items:center;background:white;border:1px solid var(--line);border-radius:11px;padding:22px;box-shadow:var(--shadow);text-align:center}.side-team{min-width:0;display:flex;flex-direction:column;gap:10px;align-items:center}.side-team.right{justify-content:center;text-align:center}.side-team h2{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:27px;margin:0;overflow-wrap:anywhere}.team-title-link{border:0;background:transparent;padding:2px;color:inherit;font:inherit;text-transform:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:#b5c4d3;text-decoration-thickness:2px;text-underline-offset:5px}.team-title-link:hover{color:#174f82;text-decoration-color:currentColor}.vs{font-family:Graduate,"Arial Black",serif;font-size:22px;color:#8090a2}
+.match-head{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:20px;align-items:center;background:white;border:1px solid var(--line);border-radius:11px;padding:22px;box-shadow:var(--shadow);text-align:center}.side-team{min-width:0;display:flex;flex-direction:column;gap:10px;align-items:center}.side-team.right{justify-content:center;text-align:center}.side-team h2{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:27px;margin:0;overflow-wrap:anywhere}.side-team h2+.kicker{margin-top:8px}.team-title-link{border:0;background:transparent;padding:2px;color:inherit;font:inherit;text-transform:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:#b5c4d3;text-decoration-thickness:2px;text-underline-offset:5px}.team-title-link:hover{color:#174f82;text-decoration-color:currentColor}.vs{font-family:Graduate,"Arial Black",serif;font-size:22px;color:#8090a2}
 .series-score{font-family:Graduate,"Arial Black",serif;text-align:center;font-size:30px;font-weight:800;margin:18px 0 4px}.series-caption{text-align:center;color:var(--muted);font-size:12px}.winning-score{display:inline-block;min-width:2.25em;padding:3px 7px;border-radius:999px;background:var(--winner);color:var(--winnerText);font-weight:900;line-height:1.25;box-shadow:0 0 0 1px rgba(15,23,42,.12)}.tied-score{font-weight:900;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}.series-score-pair{display:inline-flex;align-items:center;gap:4px}.series-mobile-outcome{display:inline-flex;align-items:center;gap:4px}.match-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.subgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.mini-table{width:100%}.mini-table td,.mini-table th{padding:7px 9px}
 .chip{display:inline-block;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800}.chip.verified{background:#e6f5ed;color:#16663f}.chip.resolved{background:#e9f0fa;color:#28578a}.chip.review{background:#fff3dd;color:#8b5200}
 .back{display:block;margin:0 auto 12px;border:0;background:transparent;color:#526174;font-size:12px;cursor:pointer}.notice{text-align:center;background:#fff8e7;border:1px solid #f1d99e;border-radius:8px;padding:11px 13px;color:#73510e;font-size:12px;margin:12px 0}.data-note{text-align:center;font-size:12px;color:var(--muted);line-height:1.55}.empty{padding:30px;text-align:center;color:var(--muted)}
 footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-size:11px;text-align:center}
-@media(max-width:1080px){.program-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1080px){.program-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:950px){.statbar{grid-template-columns:repeat(2,minmax(0,1fr))}.match-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.subgrid{grid-template-columns:1fr}.searchbox{display:none}.mobile-search-toggle{display:block}.navlinks{margin-left:auto}}
-@media(max-width:720px){.shell{padding:16px 12px 40px}.topbar-inner{padding:9px 10px;gap:5px}.brand{font-size:16px;letter-spacing:.035em}.brand small{display:none}.navlinks{gap:0}.navlinks button{min-height:44px;padding:8px 7px;font-size:12px}.hero{padding:24px 16px}.hero h1{font-size:27px}.hero p{font-size:13px;line-height:1.55}.statbar{gap:8px}.stat{padding:11px 7px}.stat b{font-size:20px}.stat span{font-size:10px}.section-head h2{font-size:21px}.directory-controls{grid-template-columns:1fr;padding:12px}.program-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.program-card{min-height:112px;padding:11px;border-top-width:5px}.program-card .program-name{font-size:16px}.program-card .program-meta{font-size:12px}.team-head{padding:20px 14px}.team-head h1{font-size:27px}.team-head .logo-disc{width:66px;height:66px;font-size:21px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.metric{padding:11px 7px}.metric b{font-size:17px}.metric span{font-size:10px}.mobile-filter-toggle{display:flex}.filters{display:none;padding:11px;align-items:stretch}.filters.mobile-open{display:grid;grid-template-columns:1fr}.filter-field,.filter-field.opponent-field{width:100%;max-width:none;min-width:0}.filter-clear{min-height:44px}.desktop-history{display:none}.mobile-history{display:block}.pager{justify-content:space-between;gap:10px;padding:11px}.pager>span:first-child{width:100%;text-align:center}.pager button{min-height:44px;min-width:92px}.conference-group summary{text-align:left;padding:13px}.conference-group summary span{display:block;margin:4px 0 0}.opponent-breakdown .data-note{padding-left:13px!important;padding-right:13px!important}.opponent-breakdown table{table-layout:fixed;font-size:10px}.opponent-breakdown th,.opponent-breakdown td{padding:8px 5px;white-space:normal}.opponent-breakdown th:first-child,.opponent-breakdown td:first-child{width:43%;text-align:left}.match-head{grid-template-columns:1fr;gap:12px;padding:18px 14px}.match-head .vs{font-size:17px}.side-team h2{font-size:23px}.match-metrics{gap:8px}.series-score{font-size:26px}.series-caption{line-height:1.5;padding:0 8px}.mobile-search-dialog{margin-top:18px}.panel-title{font-size:13px}.mini-table{font-size:11px}.notice{font-size:11px}.data-note{font-size:11px}}
+@media(max-width:720px){.shell{padding:16px 12px 40px}.topbar-inner{padding:9px 10px;gap:5px}.brand{font-size:16px;letter-spacing:.035em}.brand small{display:none}.navlinks{gap:0}.navlinks button{min-height:44px;padding:8px 7px;font-size:12px}.hero{padding:24px 16px}.hero h1{font-size:27px}.hero p{font-size:13px;line-height:1.55}.statbar{gap:8px}.stat{padding:11px 7px}.stat b{font-size:20px}.stat span{font-size:10px}.section-head h2{font-size:21px}.directory-controls{grid-template-columns:1fr;padding:12px}.program-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.program-card{min-height:112px;padding:11px;border-top-width:5px}.program-card .program-name{font-size:16px}.program-card .program-meta{font-size:12px}.team-head{padding:20px 14px}.team-head h1{font-size:27px}.team-head .logo-disc{width:66px;height:66px;font-size:21px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.metric{padding:11px 7px}.metric b{font-size:17px}.metric span{font-size:10px}.history-panel{width:calc(100% + 16px);margin-inline:-8px}.history-panel .mobile-game-row summary{padding-left:8px;padding-right:8px}.history-panel .mobile-game-details{padding-left:8px;padding-right:8px}.mobile-filter-toggle{display:flex}.filters{display:none;padding:11px;align-items:stretch}.filters.mobile-open{display:grid;grid-template-columns:1fr}.filter-field,.filter-field.opponent-field{width:100%;max-width:none;min-width:0}.filter-clear{min-height:44px}.desktop-history{display:none}.mobile-history{display:block}.pager{justify-content:space-between;gap:10px;padding:11px}.pager>span:first-child{width:100%;text-align:center}.pager button{min-height:44px;min-width:92px}.conference-group summary{text-align:left;padding:13px}.conference-group summary span{display:block;margin:4px 0 0}.opponent-breakdown .data-note{padding-left:13px!important;padding-right:13px!important}.opponent-breakdown table{table-layout:fixed;font-size:10px}.opponent-breakdown th,.opponent-breakdown td{padding:8px 5px;white-space:normal}.opponent-breakdown th:first-child,.opponent-breakdown td:first-child{width:43%;text-align:left}.match-head{grid-template-columns:1fr;gap:12px;padding:18px 14px}.match-head .vs{font-size:17px}.side-team h2{font-size:23px}.match-metrics{gap:8px}.series-score{font-size:26px}.series-caption{line-height:1.5;padding:0 8px}.mobile-search-dialog{margin-top:18px}.panel-title{font-size:13px}.mini-table{font-size:11px}.notice{font-size:11px}.data-note{font-size:11px}}
 @media(max-width:700px){
 .mobile-history-season-group{position:relative}
 .mobile-history-season{position:sticky;top:66px;z-index:11;background:#16324a;color:#fff;padding:7px 12px;font-family:Graduate,"Arial Black",serif;font-size:11px;letter-spacing:.04em;border-bottom:1px solid rgba(255,255,255,.16)}
@@ -62,6 +62,9 @@ footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-siz
 .mobile-game-line:first-child{display:block;position:relative;min-height:20px}
 .mobile-game-opponent{display:block;width:max-content;max-width:58%;margin:0 auto;text-align:center}
 .mobile-game-outcome{position:absolute;right:0;top:50%;transform:translateY(-50%)}
+.mobile-team-game-line:first-child{display:flex;justify-content:center;gap:10px}
+.mobile-team-game-line .mobile-game-opponent{width:auto;max-width:none;margin:0;flex:0 1 auto}
+.mobile-team-game-line .mobile-game-outcome{position:static;transform:none;flex:0 0 auto}
 .mobile-game-line:nth-child(2){grid-template-columns:minmax(0,1fr) auto}
 .mobile-game-meta{text-align:center;padding-left:34px}
 .mobile-game-details{display:block;padding:3px 12px 13px}
@@ -100,6 +103,9 @@ const DB = {
   seasons: {},
   opponents: {},
   games: {},
+  conferenceHistory: {},
+  conferenceNames: {},
+  conferenceTournamentLabels: {},
   pairs: {},
 };
 
@@ -121,6 +127,14 @@ function esc(value) {
 
 function fmtNum(value) {
   return Number(value ?? 0).toLocaleString("en-US");
+}
+
+function fmtOptionalNum(value) {
+  return value == null ? "—" : fmtNum(value);
+}
+
+function fmtOptionalYear(value) {
+  return value == null ? "—" : String(value);
 }
 
 function fmtWinPct(wins, losses, ties = 0) {
@@ -187,6 +201,24 @@ function formatSeason(season) {
   return String(season || "—").replace(/^(\d{4})-\d{2}(\d{2})$/, "$1–$2");
 }
 
+function formatSinceSeason(season) {
+  return String(season || "—").replace(/^(\d{4})-\d{2}(\d{2})$/, "$1-$2");
+}
+
+function bestFinishLabel(key) {
+  const labels = {
+    NATIONAL_CHAMPION: "National Champion",
+    NATIONAL_RUNNER_UP: "National Runner Up",
+    FINAL_FOUR: "Final Four",
+    ELITE_EIGHT: "Elite Eight",
+    SWEET_SIXTEEN: "Sweet Sixteen",
+    ROUND_OF_32: "Round of 32",
+    ROUND_OF_64: "Round of 64",
+    PLAY_IN_ROUND: "Play-in Round",
+  };
+  return labels[key] || "—";
+}
+
 function formatGameDate(game) {
   if (game.datePrecision !== "EXACT" || !game.date) {
     return `${formatSeason(game.season)} · exact date unknown`;
@@ -217,18 +249,52 @@ function scoreText(game) {
   return `${game.teamScore}–${game.oppScore}${overtime}`;
 }
 
-function baseGameTypeLabel(game) {
+function resolvedConferenceMembership(game, teamKey) {
+  if (!teamKey) return null;
+  const matches = (DB.conferenceHistory[teamKey] || []).filter((membership) => (
+    membership.start_season <= game.season
+    && (!membership.end_season || game.season <= membership.end_season)
+  ));
+  if (matches.length !== 1 || matches[0].conference_key === "independent") return null;
+  return matches[0];
+}
+
+function fullConferenceTournamentLabel(game, teamKey) {
+  const membership = resolvedConferenceMembership(game, teamKey);
+  if (!membership) return "Conference Tournament";
+  const name = DB.conferenceNames[teamKey]?.[membership.conference_key];
+  return name ? `${name} Tournament` : "Conference Tournament";
+}
+
+function baseGameTypeLabel(game, teamKey) {
 const labels = {
 REGULAR_SEASON: "Regular season",
-CONFERENCE_TOURNAMENT: "Conference tournament",
-NCAA_TOURNAMENT: "NCAA tournament",
+CONFERENCE_TOURNAMENT: fullConferenceTournamentLabel(game, teamKey),
+NCAA_TOURNAMENT: "NCAA Tournament",
 NIT: "NIT",
 };
 return labels[game.gameType] || humanizeKey(game.gameType || "Game");
 }
-function gameTypeLabel(game) {
-const base = baseGameTypeLabel(game);
+function gameTypeLabel(game, teamKey) {
+const base = baseGameTypeLabel(game, teamKey);
 return game.postseasonRound ? `${base} · ${humanizeKey(game.postseasonRound)}` : base;
+}
+
+function mobileConferenceTournamentLabel(game, teamKey) {
+  const membership = resolvedConferenceMembership(game, teamKey);
+  if (!membership) return "Conference Tournament";
+  const conferenceKey = membership.conference_key;
+  const label = DB.conferenceTournamentLabels[teamKey]?.[conferenceKey];
+  return label ? `${label} T` : "Conference Tournament";
+}
+
+function mobileGameTypeLabel(game, teamKey) {
+  let base;
+  if (game.gameType === "NCAA_TOURNAMENT") base = "NCAA T";
+  else if (game.gameType === "CONFERENCE_TOURNAMENT") {
+    return mobileConferenceTournamentLabel(game, teamKey);
+  } else base = baseGameTypeLabel(game);
+  return game.postseasonRound ? `${base} · ${humanizeKey(game.postseasonRound)}` : base;
 }
 
 function administrativeLabel(status) {
@@ -257,6 +323,7 @@ function normalizeProgram(program) {
     conference: conferenceName(program.current_conference) || "Independent",
     primary: safeHex(program.primary_hex, "#334155"),
     secondary: safeHex(program.secondary_hex, "#FFFFFF"),
+    historyStartSeason: program.history_start_season || "",
     conferenceRegularSeasonChampionships:
       program.conference_regular_season_championships == null
         ? null
@@ -265,6 +332,10 @@ function normalizeProgram(program) {
       program.conference_tournament_championships == null
         ? null
         : Number(program.conference_tournament_championships),
+    ncaaTournamentAppearances:
+      program.ncaa_tournament_appearances == null
+        ? null
+        : Number(program.ncaa_tournament_appearances),
     finalFourAppearances:
       program.final_four_appearances == null
         ? null
@@ -273,6 +344,9 @@ function normalizeProgram(program) {
       program.national_championships == null
         ? null
         : Number(program.national_championships),
+    bestFinishKey: program.best_finish_key || "",
+    bestFinishYear:
+      program.best_finish_year == null ? null : Number(program.best_finish_year),
     currentD1: program.current_d1 !== false,
     enabled: Boolean(program.public_page_enabled),
   };
@@ -429,6 +503,9 @@ async function loadData() {
     DB.opponents[key] = opponents;
     DB.seasons[key] = document.seasons || [];
     DB.games[key] = games;
+    DB.conferenceHistory[key] = document.conference_history || [];
+    DB.conferenceNames[key] = document.conference_names || {};
+    DB.conferenceTournamentLabels[key] = document.conference_tournament_labels || {};
     DB.summaries[key] = {
       games: summary.games || games.length,
       wins: summary.wins || 0,
@@ -543,7 +620,7 @@ function homeView() {
   const conferenceOptions = conferences.map((conference) => `<option value="${esc(conference)}">${esc(conference)}</option>`).join("");
   const allPrograms = DB.programs.map(directoryCard).join("");
 
-  return `<section class="hero"><div class="kicker">Every program, one directory</div><h1>College Basketball History</h1><p>Explore complete program histories, season-by-season results, and every available opponent series. New histories appear in the same Division I directory as soon as their verified data is published.</p><div class="statbar"><div class="stat"><b>${fmtNum(DB.activeKeys.length)}</b><span>complete histories</span></div><div class="stat"><b>${fmtNum(DB.programs.length)}</b><span>current D1 programs</span></div><div class="stat"><b>${fmtNum(teamRows)}</b><span>team-history rows</span></div><div class="stat"><b>${fmtNum(seriesKeys.size)}</b><span>opponent series</span></div></div></section><div class="section-head"><h2>Current D-I Directory</h2><p>Every school uses its official colors. Select any published program to explore its results.</p></div><div class="panel directory-panel"><div class="directory-controls"><div class="directory-control"><label for="directorySearch">Find a program</label><input id="directorySearch" type="search" placeholder="School, nickname, city…" autocomplete="off" oninput="updateDirectory()"></div><div class="directory-control"><label for="directoryConference">Conference</label><select id="directoryConference" onchange="updateDirectory()"><option value="all">All conferences</option>${conferenceOptions}</select></div><div class="directory-control"><label for="directoryAvailability">Availability</label><select id="directoryAvailability" onchange="updateDirectory()"><option value="all">All programs</option><option value="available">Published</option><option value="coming">Not yet published</option></select></div></div><div id="directoryCount" class="directory-count">${fmtNum(DB.programs.length)} of ${fmtNum(DB.programs.length)} current Division I programs shown</div><div id="programGrid" class="program-grid">${allPrograms}</div></div>`;
+  return `<section class="hero"><h1>College Basketball History</h1><p>Explore complete program histories, season-by-season results, and every available opponent series. New histories appear in the same Division I directory as soon as their verified data is published.</p><div class="statbar"><div class="stat"><b>${fmtNum(DB.activeKeys.length)}</b><span>complete histories</span></div><div class="stat"><b>${fmtNum(DB.programs.length)}</b><span>current D1 programs</span></div><div class="stat"><b>${fmtNum(teamRows)}</b><span>team-history rows</span></div><div class="stat"><b>${fmtNum(seriesKeys.size)}</b><span>opponent series</span></div></div></section><div class="section-head"><h2>Current D-I Directory</h2><p>Every school uses its official colors. Select any published program to explore its results.</p></div><div class="panel directory-panel"><div class="directory-controls"><div class="directory-control"><label for="directorySearch">Find a program</label><input id="directorySearch" type="search" placeholder="School, nickname, city…" autocomplete="off" oninput="updateDirectory()"></div><div class="directory-control"><label for="directoryConference">Conference</label><select id="directoryConference" onchange="updateDirectory()"><option value="all">All conferences</option>${conferenceOptions}</select></div><div class="directory-control"><label for="directoryAvailability">Availability</label><select id="directoryAvailability" onchange="updateDirectory()"><option value="all">All programs</option><option value="available">Published</option><option value="coming">Not yet published</option></select></div></div><div id="directoryCount" class="directory-count">${fmtNum(DB.programs.length)} of ${fmtNum(DB.programs.length)} current Division I programs shown</div><div id="programGrid" class="program-grid">${allPrograms}</div></div>`;
 }
 
 function canonicalWinnerKey(game, teamA, teamB) {
@@ -578,7 +655,10 @@ function seriesGamesFor(teamKey, opponentKey) {
   if (!team) return [];
   const opponent = opponentProfile(teamKey, opponentKey);
   return (DB.games[teamKey] || [])
-    .filter((game) => game.opponentKey === opponentKey)
+    .filter((game) => (
+      game.opponentKey === opponentKey
+      && gameInProgramScope(game, teamKey)
+    ))
     .map((game) => ({
       canonicalGameId: game.canonicalGameId,
       season: game.season,
@@ -598,6 +678,11 @@ function seriesGamesFor(teamKey, opponentKey) {
     }));
 }
 
+function gameInProgramScope(game, teamKey) {
+  const historyStart = DB.teams[teamKey]?.historyStartSeason;
+  return !historyStart || game.season >= historyStart;
+}
+
 function siteShort(site) {
   if (site === "HOME") return "H";
   if (site === "AWAY") return "A";
@@ -613,6 +698,8 @@ function seasonsFor(key) {
 }
 
 function opponentBreakdown(key) {
+  const ownConference = DB.teams[key]?.conference;
+  const historicalConference = "Non-D1 / Historical";
   const groups = new Map();
   for (const opponent of DB.opponents[key] || []) {
     if (!groups.has(opponent.conference)) groups.set(opponent.conference, []);
@@ -624,13 +711,18 @@ function opponentBreakdown(key) {
       conference,
       rows: rows.sort((a, b) => b.games - a.games || a.name.localeCompare(b.name)),
       total: rows.reduce((sum, row) => sum + row.games, 0),
+      wins: rows.reduce((sum, row) => sum + row.wins, 0),
+      losses: rows.reduce((sum, row) => sum + row.losses, 0),
+      ties: rows.reduce((sum, row) => sum + row.ties, 0),
     }))
     .sort((a, b) => {
-      if (a.conference === "Non-D1 / Historical") return 1;
-      if (b.conference === "Non-D1 / Historical") return -1;
+      if (a.conference === ownConference && b.conference !== ownConference) return -1;
+      if (b.conference === ownConference && a.conference !== ownConference) return 1;
+      if (a.conference === historicalConference && b.conference !== historicalConference) return 1;
+      if (b.conference === historicalConference && a.conference !== historicalConference) return -1;
       return a.conference.localeCompare(b.conference);
     })
-    .map((group) => `<details class="conference-group"><summary>${esc(group.conference)}<span>${fmtNum(group.rows.length)} opponents · ${fmtNum(group.total)} games</span></summary><div class="table-wrap"><table><thead><tr><th>Opponent</th><th>Record</th><th>Games</th><th>Win %</th></tr></thead><tbody>${group.rows.map((row) => {
+    .map((group) => `<details class="conference-group"><summary>${esc(group.conference)}<span>${fmtNum(group.rows.length)} opponents · ${fmtNum(group.total)} games · ${fmtRecord(group.wins, group.losses, group.ties)}</span></summary><div class="table-wrap"><table><thead><tr><th>Opponent</th><th>Record</th><th>Games</th><th>Win %</th></tr></thead><tbody>${group.rows.map((row) => {
       const name = `<button type="button" class="series-link" onclick="goMatch('${key}','${row.key}')" aria-label="Open complete series against ${esc(row.name)}">${esc(row.name)}</button>`;
       const percentage = fmtWinPct(row.wins, row.losses, row.ties);
       return `<tr><td>${name}</td><td>${fmtRecord(row.wins, row.losses, row.ties)}</td><td>${fmtNum(row.games)}</td><td>${percentage}</td></tr>`;
@@ -642,9 +734,9 @@ function teamView(key) {
   const team = DB.teams[key];
   const summary = DB.summaries[key];
   if (!team || !summary) return homeView();
-  teamPageState[key] = { page: 0, q: "", selectedOpponentKeys: [], site: "all", season: "", suggestionIndex: -1 };
+  teamPageState[key] = { page: 0, q: "", selectedOpponentKeys: [], site: "all", season: "", type: "all", suggestionIndex: -1 };
   const seasonOptions = seasonsFor(key).map((season) => `<option value="${esc(season)}">${esc(season)}</option>`).join("");
-  return `<button type="button" class="back" onclick="goHome()">← All programs</button><section class="team-hero" style="--team:${team.primary}"><div class="team-strip"></div><div class="team-head">${teamLogo(key)}<div><div class="kicker" style="color:${team.primary}">${esc(team.conference)} · ${esc(team.location || "Location not listed")}</div><h1>${esc(team.name)} ${esc(team.nickname)}</h1><p>Complete history through ${esc(formatSeason(summary.lastSeason || DB.referenceSeason))}</p></div></div></section><div class="metrics"><div class="metric"><b>${fmtRecord(summary.wins, summary.losses, summary.ties)}</b><span>On-Court Record</span></div><div class="metric"><b>${esc(formatSeason(summary.firstSeason))}</b><span>First Season</span></div><div class="metric"><b>${fmtNum(team.conferenceRegularSeasonChampionships)}</b><span>Conference Regular Season Championships</span></div><div class="metric"><b>${fmtNum(team.conferenceTournamentChampionships)}</b><span>Conference Tournament Championships</span></div><div class="metric"><b>${fmtNum(team.finalFourAppearances)}</b><span>Final Fours</span></div><div class="metric"><b>${fmtNum(team.nationalChampionships)}</b><span>National Championships</span></div></div><div class="panel history-panel"><div class="panel-title">Complete Game History</div><button type="button" id="mobileFilterToggle" class="mobile-filter-toggle" onclick="toggleTeamFilters()" aria-controls="teamFilters" aria-expanded="false"><span>Filters</span><span id="filterToggleStatus">All games</span></button><div id="teamFilters" class="filters"><div class="filter-field"><label for="seasonFilter">Season</label><select id="seasonFilter" onchange="updateTeamGames('${key}',0,true)"><option value="">All seasons</option>${seasonOptions}</select></div><div class="filter-field opponent-field"><label for="oppFilter">Opponent</label><div class="opponent-combobox"><div class="opponent-input-wrap"><div id="opponentChips" class="filter-chips"></div><input id="oppFilter" placeholder="Type to match or select teams…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="oppSuggestions" aria-expanded="false" oninput="onOpponentFilterInput('${key}')" onkeydown="handleOpponentFilterKeydown(event,'${key}')"></div><div id="oppSuggestions" class="opponent-suggestions" role="listbox"></div></div></div><div class="filter-field"><label for="siteFilter">Site</label><select id="siteFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All sites</option><option value="home">Home</option><option value="road">Road</option><option value="neutral">Neutral</option><option value="unknown">Unknown</option></select></div><button type="button" class="filter-clear" onclick="clearTeamFilters('${key}')">Clear filters</button></div><div id="seasonSummary" class="season-summary"></div><div id="teamGamesTable"></div></div><div class="panel opponent-breakdown"><div class="panel-title">All-Time Record Against Every Opponent</div><div class="data-note" style="padding:11px 16px;border-bottom:1px solid var(--line)">Current D1 opponents are grouped by their ${esc(formatSeason(DB.referenceSeason))} conference; historical and non-D1 opponents are grouped together. Select any opponent to open the complete series.</div>${opponentBreakdown(key)}</div>`;
+  return `<button type="button" class="back" onclick="goHome()">← All programs</button><section class="team-hero" style="--team:${team.primary}"><div class="team-strip"></div><div class="team-head">${teamLogo(key)}<div><h1>${esc(team.name)} ${esc(team.nickname)}</h1><div class="kicker" style="color:${team.primary}">${esc(team.conference)} • ${esc(team.location || "Location not listed")} • SINCE ${esc(formatSinceSeason(team.historyStartSeason))}</div></div></div></section><div class="metrics"><div class="metric"><b>${fmtRecord(summary.wins, summary.losses, summary.ties)}</b><span>On-Court Record</span></div><div class="metric"><b>${fmtOptionalNum(team.conferenceRegularSeasonChampionships)}</b><span>Conference Regular Season Championships</span></div><div class="metric"><b>${fmtOptionalNum(team.conferenceTournamentChampionships)}</b><span>Conference Tournament Championships</span></div><div class="metric"><b>${fmtOptionalNum(team.ncaaTournamentAppearances)}</b><span>NCAA Tournament Appearances</span></div><div class="metric"><b>${fmtOptionalNum(team.finalFourAppearances)}</b><span>Final Fours</span></div><div class="metric"><b>${fmtOptionalNum(team.nationalChampionships)}</b><span>National Championships</span></div><div class="metric${team.bestFinishKey === "NATIONAL_CHAMPION" ? " champion-finish" : ""}"><b>${esc(bestFinishLabel(team.bestFinishKey))}</b><span>Best Finish</span></div><div class="metric"><b>${fmtOptionalYear(team.bestFinishYear)}</b><span>Best Finish Year</span></div></div><div class="panel history-panel"><div class="panel-title">Complete Game History</div><button type="button" id="mobileFilterToggle" class="mobile-filter-toggle" onclick="toggleTeamFilters()" aria-controls="teamFilters" aria-expanded="false"><span>Filters</span><span id="filterToggleStatus">All games</span></button><div id="teamFilters" class="filters"><div class="filter-field"><label for="seasonFilter">Season</label><select id="seasonFilter" onchange="updateTeamGames('${key}',0,true)"><option value="">All seasons</option>${seasonOptions}</select></div><div class="filter-field opponent-field"><label for="oppFilter">Opponent</label><div class="opponent-combobox"><div class="opponent-input-wrap"><div id="opponentChips" class="filter-chips"></div><input id="oppFilter" placeholder="Type to match or select teams…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="oppSuggestions" aria-expanded="false" oninput="onOpponentFilterInput('${key}')" onkeydown="handleOpponentFilterKeydown(event,'${key}')"></div><div id="oppSuggestions" class="opponent-suggestions" role="listbox"></div></div></div><div class="filter-field"><label for="siteFilter">Site</label><select id="siteFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All sites</option><option value="home">Home</option><option value="road">Road</option><option value="neutral">Neutral</option><option value="unknown">Unknown</option></select></div><div class="filter-field"><label for="typeFilter">Type</label><select id="typeFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All Types</option><option value="REGULAR_SEASON">Regular Season</option><option value="CONFERENCE_TOURNAMENT">Conference Tournament</option><option value="NCAA_TOURNAMENT">NCAA Tournament</option><option value="NIT">NIT</option></select></div><button type="button" class="filter-clear" onclick="clearTeamFilters('${key}')">Clear filters</button></div><div id="seasonSummary" class="season-summary"></div><div id="teamGamesTable"></div></div><div class="panel opponent-breakdown"><div class="panel-title">All Time Record by Opponent</div><div class="data-note" style="padding:11px 16px;border-bottom:1px solid var(--line)">Current D1 opponents are grouped by their ${esc(formatSeason(DB.referenceSeason))} conference; historical and non-D1 opponents are grouped together. Select any opponent to open the complete series.</div>${opponentBreakdown(key)}</div>`;
 }
 
 function toggleTeamFilters(force) {
@@ -748,13 +840,15 @@ function handleOpponentFilterKeydown(event, key) {
 function clearTeamFilters(key) {
   const state = teamPageState[key];
   if (!state) return;
-  Object.assign(state, { page: 0, q: "", selectedOpponentKeys: [], site: "all", season: "", suggestionIndex: -1 });
+  Object.assign(state, { page: 0, q: "", selectedOpponentKeys: [], site: "all", season: "", type: "all", suggestionIndex: -1 });
   const input = document.getElementById("oppFilter");
   const site = document.getElementById("siteFilter");
   const season = document.getElementById("seasonFilter");
+  const type = document.getElementById("typeFilter");
   if (input) input.value = "";
   if (site) site.value = "all";
   if (season) season.value = "";
+  if (type) type.value = "all";
   updateTeamGames(key, 0, true);
 }
 
@@ -765,12 +859,12 @@ function siteLabel(site) {
   return "Unknown site";
 }
 
-function mobileGameDetails(game) {
+function mobileGameDetails(game, teamKey) {
   const rows = [
     ["Season", esc(formatSeason(game.season))],
     ["Venue", esc(game.venue || "—")],
     ["Location", esc(game.location || "—")],
-    ["Game Type", esc(baseGameTypeLabel(game))],
+    ["Game Type", esc(baseGameTypeLabel(game, teamKey))],
   ];
   if (game.postseasonRound) rows.push(["Postseason Round", esc(humanizeKey(game.postseasonRound))]);
   rows.push(["Administrative", administrativeChip(game)]);
@@ -778,7 +872,7 @@ function mobileGameDetails(game) {
 }
 function mobileTeamGameRow(game, teamKey) {
   const resultAndScore = `${game.result || "—"}${scoreText(game) !== "—" ? ` · ${scoreText(game)}` : ""}`;
-  return `<details class="mobile-game-row"><summary><div class="mobile-game-line"><button type="button" class="opp-link mobile-game-opponent" onclick="event.preventDefault();event.stopPropagation();goMatch('${teamKey}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[teamKey].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button><span class="mobile-game-outcome result ${esc(game.result)}">${esc(resultAndScore)}</span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(compactGameDate(game))} · ${esc(siteLabel(game.site))} · ${esc(gameTypeLabel(game))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game)}</details>`;
+  return `<details class="mobile-game-row"><summary><div class="mobile-game-line mobile-team-game-line"><button type="button" class="opp-link mobile-game-opponent" onclick="event.preventDefault();event.stopPropagation();goMatch('${teamKey}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[teamKey].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button><span class="mobile-game-outcome result ${esc(game.result)}">${esc(resultAndScore)}</span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(compactGameDate(game))} · ${esc(siteLabel(game.site))} · ${esc(mobileGameTypeLabel(game, teamKey))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game, teamKey)}</details>`;
 }
 
 function mobileHistoryMonth(game) {
@@ -817,12 +911,13 @@ function mobileTeamGameRows(games, teamKey) {
   return html;
 }
 function updateTeamGames(key, delta = 0, reset = false) {
-  const state = teamPageState[key] || { page: 0, q: "", selectedOpponentKeys: [], site: "all", season: "", suggestionIndex: -1 };
+  const state = teamPageState[key] || { page: 0, q: "", selectedOpponentKeys: [], site: "all", season: "", type: "all", suggestionIndex: -1 };
   const opponentFilter = document.getElementById("oppFilter");
   if (opponentFilter) {
     state.q = opponentFilter.value;
     state.site = document.getElementById("siteFilter").value;
     state.season = document.getElementById("seasonFilter").value;
+    state.type = document.getElementById("typeFilter").value;
   }
   state.page = reset ? 0 : Math.max(0, (state.page || 0) + delta);
   teamPageState[key] = state;
@@ -837,6 +932,7 @@ function updateTeamGames(key, delta = 0, reset = false) {
       if (!exactSelected && !partialMatch) return false;
     }
     if (state.season && game.season !== state.season) return false;
+    if (state.type !== "all" && game.gameType !== state.type) return false;
     const short = siteShort(game.site);
     if (state.site === "home" && short !== "H") return false;
     if (state.site === "road" && short !== "A") return false;
@@ -856,12 +952,12 @@ function updateTeamGames(key, delta = 0, reset = false) {
   const slice = games.slice(state.page * PAGE_SIZE, (state.page + 1) * PAGE_SIZE);
   const rows = slice.map((game) => {
     const opponent = `<button type="button" class="opp-link" onclick="goMatch('${key}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[key].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button>`;
-    return `<tr><td>${esc(formatGameDate(game))}</td><td>${opponent}</td><td class="result ${esc(game.result)}">${esc(game.result)}</td><td>${esc(scoreText(game))}</td><td>${esc(siteShort(game.site))}</td><td>${esc(game.venue)}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game))}</td><td>${administrativeChip(game)}</td></tr>`;
+    return `<tr><td>${esc(formatGameDate(game))}</td><td>${opponent}</td><td class="result ${esc(game.result)}">${esc(game.result)}</td><td>${esc(scoreText(game))}</td><td>${esc(siteShort(game.site))}</td><td>${esc(game.venue)}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game, key))}</td><td>${administrativeChip(game)}</td></tr>`;
   }).join("");
   const mobileRows = mobileTeamGameRows(slice, key);
   document.getElementById("teamGamesTable").innerHTML = `<div class="desktop-history"><div class="table-wrap"><table class="history-table"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th><th>Score</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows || '<tr><td colspan="9" class="empty">No games match these filters.</td></tr>'}</tbody></table></div></div><div class="mobile-history">${mobileRows || '<div class="empty">No games match these filters.</div>'}</div><div class="pager"><span>${fmtNum(games.length)} games · page ${fmtNum(state.page + 1)} of ${fmtNum(maxPage + 1)}</span><span><button type="button" onclick="updateTeamGames('${key}',-1)" ${state.page === 0 ? "disabled" : ""}>Previous</button> <button type="button" onclick="updateTeamGames('${key}',1)" ${state.page >= maxPage ? "disabled" : ""}>Next</button></span></div>`;
   renderOpponentAssist(key);
-  const activeFilterCount = (state.selectedOpponentKeys || []).length + (partialQuery ? 1 : 0) + (state.site !== "all" ? 1 : 0) + (state.season ? 1 : 0);
+  const activeFilterCount = (state.selectedOpponentKeys || []).length + (partialQuery ? 1 : 0) + (state.site !== "all" ? 1 : 0) + (state.season ? 1 : 0) + (state.type !== "all" ? 1 : 0);
   const toggleStatus = document.getElementById("filterToggleStatus");
   if (toggleStatus) toggleStatus.textContent = activeFilterCount ? `${activeFilterCount} active` : "All games";
 }
@@ -982,7 +1078,7 @@ function matchupView(teamA, teamB) {
       const scoreA = game.scoreKnown && game.scores[teamA] != null ? game.scores[teamA] : "—";
       const scoreB = game.scoreKnown && game.scores[teamB] != null ? game.scores[teamB] : "—";
       const winner = canonicalWinnerKey(game, teamA, teamB);
-      return `<tr><td>${esc(formatGameDate(game))}</td><td>${seriesScoreMarkup(scoreA, teamAProgram, winner, teamA)}</td><td>${seriesScoreMarkup(scoreB, teamBProgram, winner, teamB)}</td><td>${esc(game.site || "Unknown")}</td><td>${esc(game.venue || "—")}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game))}</td><td>${administrativeChip(game)}</td></tr>`;
+      return `<tr><td>${esc(formatGameDate(game))}</td><td>${seriesScoreMarkup(scoreA, teamAProgram, winner, teamA)}</td><td>${seriesScoreMarkup(scoreB, teamBProgram, winner, teamB)}</td><td>${esc(game.site || "Unknown")}</td><td>${esc(game.venue || "—")}</td><td>${esc(game.location || "—")}</td><td>${esc(gameTypeLabel(game, teamA))}</td><td>${administrativeChip(game)}</td></tr>`;
     }).join("");
   const mobileRows = [...games]
     .sort((a, b) => gameSortValue(b).localeCompare(gameSortValue(a)))
@@ -993,10 +1089,10 @@ function matchupView(teamA, teamB) {
       const winner = canonicalWinnerKey(game, teamA, teamB);
       const scoreAMarkup = seriesScoreMarkup(scoreA, teamAProgram, winner, teamA);
       const scoreBMarkup = seriesScoreMarkup(scoreB, teamBProgram, winner, teamB);
-      return `<details class="mobile-game-row"><summary><div class="mobile-game-line"><span class="mobile-game-date">${esc(compactGameDate(game))}</span><span class="mobile-game-outcome series-mobile-outcome"><span class="result ${esc(outcome)}">${esc(outcome)}</span><span aria-hidden="true">·</span><span class="series-score-pair">${scoreAMarkup}<span aria-hidden="true">–</span>${scoreBMarkup}</span></span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(game.site || "Unknown")} · ${esc(gameTypeLabel(game))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game)}</details>`;
+      return `<details class="mobile-game-row"><summary><div class="mobile-game-line"><span class="mobile-game-date">${esc(compactGameDate(game))}</span><span class="mobile-game-outcome series-mobile-outcome"><span class="result ${esc(outcome)}">${esc(outcome)}</span><span aria-hidden="true">·</span><span class="series-score-pair">${scoreAMarkup}<span aria-hidden="true">–</span>${scoreBMarkup}</span></span></div><div class="mobile-game-line"><span class="mobile-game-meta">${esc(game.site || "Unknown")} · ${esc(gameTypeLabel(game, teamA))}</span><span class="mobile-game-cue">Details</span></div></summary>${mobileGameDetails(game, teamA)}</details>`;
     }).join("");
 
-  return `<button type="button" class="back" onclick="goTeam('${teamA}')">← ${esc(teamAProgram.name)} history</button><div class="match-head"><div class="side-team">${teamLogo(teamAProgram)}<div><div class="kicker" style="color:${teamAProgram.primary}">${esc(teamAProgram.conference)}</div><h2>${matchupTeamName(teamAProgram)}</h2></div></div><div class="vs">VS.</div><div class="side-team right">${teamLogo(teamBProgram)}<div><div class="kicker" style="color:${teamBProgram.primary}">${esc(teamBProgram.conference)}</div><h2>${matchupTeamName(teamBProgram)}</h2></div></div></div><div class="series-score">${fmtRecord(teamAWins, teamBWins, ties)}</div><div class="series-caption">${esc(teamAProgram.name)} record vs. ${esc(teamBProgram.name)} · ${fmtNum(games.length)} meetings${scoredGames.length !== games.length ? ` · ${fmtNum(scoredGames.length)} with known scores` : ""}</div>${administrativeCount ? `<div class="notice">${fmtNum(administrativeCount)} game${administrativeCount === 1 ? "" : "s"} carries administrative metadata. Records shown use on-court results.</div>` : ""}<div class="match-metrics"><div class="metric"><b>${streakText(games, teamA, teamB)}</b><span>Current Streak</span></div><div class="metric"><b>${longestStreak(games, teamA, teamB)}</b><span>Longest Streak</span></div><div class="metric"><b>${largest ? fmtNum(largest.margin) : "—"}</b><span>Largest Margin · ${largest ? formatGameDate(largest.game) : ""}</span></div><div class="metric"><b>${closest ? fmtNum(closest.margin) : "—"}</b><span>Closest Margin · ${closest ? formatGameDate(closest.game) : ""}</span></div><div class="metric"><b>${highest ? fmtNum(highest.total) : "—"}</b><span>Highest Combined Score</span></div><div class="metric"><b>${scoredGames.length ? (teamAPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(teamAProgram.name)} Avg. Points</span></div><div class="metric"><b>${scoredGames.length ? (teamBPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(teamBProgram.name)} Avg. Points</span></div><div class="metric"><b>${fmtNum(teamAPoints)}–${fmtNum(teamBPoints)}</b><span>Total Known Points</span></div></div><div class="subgrid">${miniPanel("Record by Site", sites, teamA)}${miniPanel("Record by Decade", decades, teamA)}${miniPanel("Most-Used Venues", venues, teamA)}</div><div class="panel" style="margin-top:14px"><div class="panel-title">Complete Series History</div><div class="desktop-history"><div class="table-wrap"><table class="matchup-history-table"><thead><tr><th>Date</th><th>${esc(teamAProgram.name)}</th><th>${esc(teamBProgram.name)}</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows}</tbody></table></div></div><div class="mobile-history">${mobileRows}</div></div>`;
+  return `<button type="button" class="back" onclick="goTeam('${teamA}')">← ${esc(teamAProgram.name)} history</button><div class="match-head"><div class="side-team">${teamLogo(teamAProgram)}<div><h2>${matchupTeamName(teamAProgram)}</h2><div class="kicker" style="color:${teamAProgram.primary}">${esc(teamAProgram.conference)}</div></div></div><div class="vs">VS.</div><div class="side-team right">${teamLogo(teamBProgram)}<div><h2>${matchupTeamName(teamBProgram)}</h2><div class="kicker" style="color:${teamBProgram.primary}">${esc(teamBProgram.conference)}</div></div></div></div><div class="series-score">${fmtRecord(teamAWins, teamBWins, ties)}</div><div class="series-caption">${esc(teamAProgram.name)} record vs. ${esc(teamBProgram.name)} · ${fmtNum(games.length)} meetings${scoredGames.length !== games.length ? ` · ${fmtNum(scoredGames.length)} with known scores` : ""}</div>${administrativeCount ? `<div class="notice">${fmtNum(administrativeCount)} game${administrativeCount === 1 ? "" : "s"} carries administrative metadata. Records shown use on-court results.</div>` : ""}<div class="match-metrics"><div class="metric"><b>${streakText(games, teamA, teamB)}</b><span>Current Streak</span></div><div class="metric"><b>${longestStreak(games, teamA, teamB)}</b><span>Longest Streak</span></div><div class="metric"><b>${largest ? fmtNum(largest.margin) : "—"}</b><span>Largest Margin · ${largest ? formatGameDate(largest.game) : ""}</span></div><div class="metric"><b>${closest ? fmtNum(closest.margin) : "—"}</b><span>Closest Margin · ${closest ? formatGameDate(closest.game) : ""}</span></div><div class="metric"><b>${highest ? fmtNum(highest.total) : "—"}</b><span>Highest Combined Score</span></div><div class="metric"><b>${scoredGames.length ? (teamAPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(teamAProgram.name)} Avg. Points</span></div><div class="metric"><b>${scoredGames.length ? (teamBPoints / scoredGames.length).toFixed(1) : "—"}</b><span>${esc(teamBProgram.name)} Avg. Points</span></div><div class="metric"><b>${fmtNum(teamAPoints)}–${fmtNum(teamBPoints)}</b><span>Total Known Points</span></div></div><div class="subgrid">${miniPanel("Record by Site", sites, teamA)}${miniPanel("Record by Decade", decades, teamA)}${miniPanel("Most-Used Venues", venues, teamA)}</div><div class="panel history-panel" style="margin-top:14px"><div class="panel-title">Complete Series History</div><div class="desktop-history"><div class="table-wrap"><table class="matchup-history-table"><thead><tr><th>Date</th><th>${esc(teamAProgram.name)}</th><th>${esc(teamBProgram.name)}</th><th>Site</th><th>Venue</th><th>Location</th><th>Type</th><th>Administrative</th></tr></thead><tbody>${rows}</tbody></table></div></div><div class="mobile-history">${mobileRows}</div></div>`;
 }
 
 function aboutView() {

@@ -22,7 +22,14 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from conference_reference import (
+    explicit_tournament_conference_keys,
+    history_errors,
+    registry_by_key,
+    resolved_history_key,
+)
 from location_safety import public_location_pair
+from program_history import scope_canonical_games, trim_conference_history
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -34,6 +41,100 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def yes(value: str) -> bool:
     return value.strip().lower() == "yes"
+
+
+def public_accomplishments(row: dict[str, str]) -> dict[str, Any]:
+    """Convert one normalized reference row to public scalar values."""
+    integer_fields = (
+        "conference_regular_season_championships",
+        "conference_tournament_championships",
+        "ncaa_tournament_appearances",
+        "final_four_appearances",
+        "national_championships",
+    )
+    payload: dict[str, Any] = {
+        field: int(row[field]) if row.get(field, "").strip() else None
+        for field in integer_fields
+    }
+    payload["best_finish_key"] = row.get("best_finish_key", "").strip() or None
+    payload["best_finish_year"] = (
+        int(row["best_finish_year"])
+        if row.get("best_finish_year", "").strip()
+        else None
+    )
+    return payload
+
+
+def conference_publication_metadata(
+    program_key: str,
+    history_rows: list[dict[str, str]],
+    registry: dict[str, dict[str, str]],
+    games: list[dict[str, Any]],
+    assertion_rows: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Publish one conference timeline plus event/membership review flags."""
+    events_by_game: dict[str, list[str]] = defaultdict(list)
+    for assertion in assertion_rows:
+        if assertion.get("source_program_key", "").strip() != program_key:
+            continue
+        if assertion.get("curated_game_type", "").strip() != "CONFERENCE_TOURNAMENT":
+            continue
+        game_id = assertion.get("canonical_game_id", "").strip()
+        event = assertion.get("event_or_tournament", "").strip()
+        if game_id and event:
+            events_by_game[game_id].append(event)
+
+    review_flags: list[dict[str, Any]] = []
+    for game in games:
+        if game["game_type"] != "CONFERENCE_TOURNAMENT":
+            continue
+        game_id = game["canonical_game_id"]
+        membership_key = resolved_history_key(history_rows, game["season_label"])
+        explicit_keys = explicit_tournament_conference_keys(
+            events_by_game.get(game_id, []), registry
+        )
+        conflicting_keys = sorted(explicit_keys - {membership_key})
+        if membership_key and conflicting_keys:
+            review_flags.append(
+                {
+                    "canonical_game_id": game_id,
+                    "membership_conference_key": membership_key,
+                    "conflicting_event_conference_keys": conflicting_keys,
+                    "source_events": sorted(set(events_by_game[game_id])),
+                }
+            )
+
+    used_keys = {
+        row.get("conference_key", "").strip()
+        for row in history_rows
+        if row.get("conference_key", "").strip()
+    }
+    labels = {
+        key: registry[key].get("tournament_label", "").strip()
+        for key in sorted(used_keys)
+        if key in registry and registry[key].get("tournament_label", "").strip()
+    }
+    names = {
+        key: registry[key].get("conference_name", "").strip()
+        for key in sorted(used_keys)
+        if key in registry and registry[key].get("conference_name", "").strip()
+    }
+
+    return {
+        "conference_history": [
+            {
+                "start_season": row.get("start_season", "").strip(),
+                "end_season": row.get("end_season", "").strip() or None,
+                "conference_key": row.get("conference_key", "").strip(),
+                "conference_name": row.get("conference_name", "").strip(),
+                "membership_type": row.get("membership_type", "").strip(),
+            }
+            for row in history_rows
+        ],
+        "conference_names": names,
+        "conference_tournament_labels": labels,
+        "conference_tournament_review_flags": review_flags,
+    }
 
 
 def record_from_games(games: list[dict[str, Any]]) -> dict[str, int]:
@@ -297,21 +398,56 @@ def main() -> int:
     )
 
     programs_path = repo_root / "data" / "reference" / "programs.csv"
+    accomplishments_path = (
+        repo_root / "data" / "reference" / "program-accomplishments.csv"
+    )
     memberships_path = (
         repo_root / "data" / "reference" / "conference-membership.csv"
     )
+    conferences_path = repo_root / "data" / "reference" / "conferences.csv"
     games_path = repo_root / "data" / "canonical" / "games.csv"
+    assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
 
     program_rows = read_csv(programs_path)
+    accomplishment_rows = read_csv(accomplishments_path)
     membership_rows = read_csv(memberships_path)
+    conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
+    assertion_rows = read_csv(assertions_path)
 
     programs = {row["program_key"]: row for row in program_rows}
     if len(programs) != len(program_rows):
         raise ValueError("Duplicate program_key values in programs.csv.")
+    accomplishments = {
+        row["program_key"]: row for row in accomplishment_rows
+    }
+    if len(accomplishments) != len(accomplishment_rows):
+        raise ValueError(
+            "Duplicate program_key values in program-accomplishments.csv."
+        )
+    if set(accomplishments) != set(programs):
+        raise ValueError(
+            "program-accomplishments.csv must contain exactly one row for every program."
+        )
 
     if not membership_rows:
         raise ValueError("conference-membership.csv is empty.")
+
+    conference_registry = registry_by_key(conference_rows)
+    if len(conference_registry) != len(conference_rows):
+        raise ValueError("conferences.csv contains blank or duplicate conference_key values.")
+    unknown_current_conferences = sorted(
+        {
+            row["conference_key"]
+            for row in membership_rows
+            if row["conference_key"] not in conference_registry
+        }
+    )
+    if unknown_current_conferences:
+        raise ValueError(
+            "conference-membership.csv uses unregistered conference keys: "
+            + ", ".join(unknown_current_conferences)
+        )
 
     reference_season = max(row["season_label"] for row in membership_rows)
 
@@ -349,6 +485,7 @@ def main() -> int:
         key=lambda r: (r["display_name"].casefold(), r["program_key"]),
     ):
         membership = current_memberships.get(row["program_key"])
+        accomplishment = accomplishments[row["program_key"]]
         public_programs.append(
             {
                 "program_key": row["program_key"],
@@ -359,26 +496,10 @@ def main() -> int:
                 "state": row.get("state", ""),
                 "primary_hex": row.get("primary_hex", ""),
                 "secondary_hex": row.get("secondary_hex", ""),
-                "conference_regular_season_championships": (
-                    int(row["conference_regular_season_championships"])
-                    if row.get("conference_regular_season_championships", "").strip()
-                    else None
+                "history_start_season": (
+                    row.get("history_start_season", "").strip() or None
                 ),
-                "conference_tournament_championships": (
-                    int(row["conference_tournament_championships"])
-                    if row.get("conference_tournament_championships", "").strip()
-                    else None
-                ),
-                "final_four_appearances": (
-                    int(row["final_four_appearances"])
-                    if row.get("final_four_appearances", "").strip()
-                    else None
-                ),
-                "national_championships": (
-                    int(row["national_championships"])
-                    if row.get("national_championships", "").strip()
-                    else None
-                ),
+                **public_accomplishments(accomplishment),
                 "current_d1": yes(row["current_d1"]),
                 "public_page_enabled": yes(row["public_page_enabled"]),
                 "current_conference": (
@@ -393,10 +514,45 @@ def main() -> int:
         )
 
     team_payloads: dict[str, dict[str, Any]] = {}
+    scope_exclusion_counts: dict[str, int] = {}
 
     for program_key in enabled_keys:
         program = programs[program_key]
         membership = current_memberships.get(program_key)
+        conference_history_path = (
+            repo_root / "schools" / program_key / "conferences.csv"
+        )
+        conference_history = read_csv(conference_history_path)
+        conference_problems = history_errors(
+            conference_history,
+            set(conference_registry),
+            expected_program_key=program_key,
+        )
+        if conference_problems:
+            raise ValueError(
+                f"{program_key}/conferences.csv is not publishable: "
+                + "; ".join(conference_problems[:10])
+            )
+
+        history_start = program.get("history_start_season", "").strip()
+        if not history_start:
+            raise ValueError(
+                f"{program_key}: public program has no history_start_season."
+            )
+        all_program_games = [
+            row
+            for row in canonical_rows
+            if program_key in {row["team_a_key"], row["team_b_key"]}
+        ]
+        scoped_canonical = scope_canonical_games(
+            all_program_games, program_key, history_start
+        )
+        scope_exclusion_counts[program_key] = (
+            len(all_program_games) - len(scoped_canonical)
+        )
+        public_conference_history = trim_conference_history(
+            conference_history, history_start
+        )
 
         perspective_games = [
             perspective_game(
@@ -406,8 +562,7 @@ def main() -> int:
                 venue_names,
                 programs,
             )
-            for row in canonical_rows
-            if program_key in {row["team_a_key"], row["team_b_key"]}
+            for row in scoped_canonical
         ]
         partial_public_locations = [
             game["canonical_game_id"]
@@ -479,6 +634,13 @@ def main() -> int:
         )
 
         overall = record_from_games(perspective_games)
+        conference_metadata = conference_publication_metadata(
+            program_key,
+            public_conference_history,
+            conference_registry,
+            perspective_games,
+            assertion_rows,
+        )
 
         team_payloads[program_key] = {
             "schema_version": 1,
@@ -492,26 +654,8 @@ def main() -> int:
                 "state": program.get("state", ""),
                 "primary_hex": program.get("primary_hex", ""),
                 "secondary_hex": program.get("secondary_hex", ""),
-                "conference_regular_season_championships": (
-                    int(program["conference_regular_season_championships"])
-                    if program.get("conference_regular_season_championships", "").strip()
-                    else None
-                ),
-                "conference_tournament_championships": (
-                    int(program["conference_tournament_championships"])
-                    if program.get("conference_tournament_championships", "").strip()
-                    else None
-                ),
-                "final_four_appearances": (
-                    int(program["final_four_appearances"])
-                    if program.get("final_four_appearances", "").strip()
-                    else None
-                ),
-                "national_championships": (
-                    int(program["national_championships"])
-                    if program.get("national_championships", "").strip()
-                    else None
-                ),
+                "history_start_season": history_start,
+                **public_accomplishments(accomplishments[program_key]),
                 "current_conference": (
                     {
                         "conference_key": membership["conference_key"],
@@ -530,6 +674,7 @@ def main() -> int:
             "seasons": season_summaries,
             "opponents": opponent_summaries,
             "games": perspective_games,
+            **conference_metadata,
         }
 
     manifest = {
@@ -595,7 +740,8 @@ def main() -> int:
             f'{summary["games"]:,} games, '
             f'{summary["wins"]:,}-{summary["losses"]:,}'
             + (f'-{summary["ties"]:,}' if summary["ties"] else "")
-            + f', {summary["opponents"]:,} opponents'
+            + f', {summary["opponents"]:,} opponents, '
+            + f'{scope_exclusion_counts[program_key]:,} pre-scope excluded'
         )
 
     if not args.apply:

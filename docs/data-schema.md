@@ -91,6 +91,43 @@ Exhibitions do not:
 
 If exhibition metadata is ever retained, it remains outside the canonical competitive-games dataset.
 
+### Program-perspective history boundary
+
+Every published program has an owner-approved `history_start_season` in
+`data/reference/programs.csv`. Before onboarding, the owner must state either:
+
+- "Program has always been D1/top-level for our site purposes."
+- "First year in D1/top-level for our site purposes is YYYY-YY."
+
+This is a site-scope ruling, not a claim that the formal NCAA Division I label existed
+throughout the period. A canonical game may remain globally valid while being outside
+one participant's public perspective. Builders filter by displayed program before
+calculating games, records, seasons, opponents, postseason figures, conference history,
+or any other aggregate. Raw pre-cutoff source rows remain preserved; ingestion excludes
+them from the target perspective without rewriting `raw_text`.
+
+The program registry stores `history_start_season`, `history_scope_status`,
+`history_scope_basis`, and `history_scope_notes`. A public program requires an
+owner-confirmed scope.
+
+## Program accomplishments
+
+`data/reference/program-accomplishments.csv` is the sole reference authority for
+program-card accomplishments. It contains one row per `program_key`, the five numeric
+counts, controlled `best_finish_key`, calendar `best_finish_year`, verification status,
+canonical cross-check status, basis, and notes. Identity fields remain exclusively in
+`programs.csv`.
+
+Allowed Best Finish keys are `NATIONAL_CHAMPION`, `NATIONAL_RUNNER_UP`, `FINAL_FOUR`,
+`ELITE_EIGHT`, `SWEET_SIXTEEN`, `ROUND_OF_32`, `ROUND_OF_64`, and `PLAY_IN_ROUND`.
+Zero NCAA appearances use blank Best Finish fields and publish as an em dash.
+
+Accomplishments use on-court history: administrative or vacated status remains
+preserved but does not erase an appearance or achievement. Owner baseline rows remain
+`OWNER_BASELINE_UNVERIFIED` until checked against authoritative school sources. New
+public onboarding requires `VERIFIED`; the original eight public programs are a
+documented transitional verification backlog and emit QA warnings meanwhile.
+
 ## Canonical game row contract
 
 `data/canonical/games.csv` is program-neutral. It must never describe a game from one school's perspective.
@@ -203,3 +240,19 @@ Do not permanently store attributes that can reliably be derived from other cano
 - conference tournament display name
 
 These are derived from the game and program/conference dimensions.
+
+Historical conference membership is stored as non-overlapping season intervals in
+`schools/<program>/conferences.csv`. Stable conference identities and owner-approved
+conference names and owner-approved mobile tournament labels are centralized in
+`data/reference/conferences.csv`; labels
+must never be guessed or copied into canonical game rows. Generated team documents
+publish the interval history once and resolve conference-tournament presentation from
+the displayed program's conference in the game's season. An unresolved, Independent,
+unregistered, or unlabeled result displays exactly `Conference Tournament`. Mobile
+rows use `<tournament_label> T`; full team-history presentation uses the registry's
+`<conference_name> Tournament` and retains the same safe fallback.
+
+Conflicting source/event tournament wording is retained as team-level review metadata.
+It does not override a resolved membership interval or create a game-level conference
+exception. Membership-history corrections require owner-reviewed changes to the
+program's `conferences.csv` timeline.

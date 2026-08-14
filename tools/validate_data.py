@@ -12,11 +12,18 @@ Optional:
 from __future__ import annotations
 
 import csv
+import json
 import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from conference_reference import (
+    REQUIRED_HISTORY_COLUMNS,
+    REQUIRED_REGISTRY_COLUMNS,
+    history_errors,
+    registry_by_key,
+)
 from location_safety import (
     REGISTRY_FALLBACK_PREFIX,
     assertion_drift,
@@ -24,6 +31,15 @@ from location_safety import (
     parse_registry_fallback_markers,
     source_site_agrees_with_canonical,
     venue_location_conflicts,
+)
+from program_history import (
+    CANONICAL_CROSSCHECK_STATUSES,
+    HISTORY_SCOPE_BASES,
+    HISTORY_SCOPE_STATUSES,
+    VERIFICATION_STATUSES,
+    accomplishment_row_issues,
+    history_scope_errors,
+    valid_season_label,
 )
 
 
@@ -139,13 +155,6 @@ REQUIRED_DISCREPANCY_COLUMNS = {
 
 ALLOWED_YES_NO = {"Yes", "No"}
 
-PROGRAM_ACHIEVEMENT_FIELDS = (
-    "conference_regular_season_championships",
-    "conference_tournament_championships",
-    "final_four_appearances",
-    "national_championships",
-)
-
 REQUIRED_PROGRAM_COLUMNS = {
     "program_key",
     "program_name",
@@ -153,10 +162,25 @@ REQUIRED_PROGRAM_COLUMNS = {
     "nickname",
     "current_d1",
     "public_page_enabled",
+    "history_start_season",
+    "history_scope_status",
+    "history_scope_basis",
+    "history_scope_notes",
+}
+
+REQUIRED_ACCOMPLISHMENT_COLUMNS = {
+    "program_key",
     "conference_regular_season_championships",
     "conference_tournament_championships",
+    "ncaa_tournament_appearances",
     "final_four_appearances",
     "national_championships",
+    "best_finish_key",
+    "best_finish_year",
+    "verification_status",
+    "verification_basis",
+    "canonical_crosscheck_status",
+    "notes",
 }
 
 REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS = {
@@ -165,9 +189,6 @@ REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS = {
     "conference_key",
     "conference_name",
 }
-
-SEASON_LABEL_RE = re.compile(r"^(\d{4})-(\d{4})$")
-
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     if not path.exists():
@@ -194,15 +215,6 @@ def duplicates(values: list[str]) -> set[str]:
     return dupes
 
 
-def valid_season_label(value: str) -> bool:
-    match = SEASON_LABEL_RE.fullmatch(value)
-    if not match:
-        return False
-    start_year = int(match.group(1))
-    end_year = int(match.group(2))
-    return end_year == start_year + 1
-
-
 def main() -> int:
     if len(sys.argv) > 2:
         print("Usage: python tools/validate_data.py [repository_root]")
@@ -218,9 +230,13 @@ def main() -> int:
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
     programs_path = repo_root / "data" / "reference" / "programs.csv"
+    accomplishments_path = (
+        repo_root / "data" / "reference" / "program-accomplishments.csv"
+    )
     conference_membership_path = (
         repo_root / "data" / "reference" / "conference-membership.csv"
     )
+    conferences_path = repo_root / "data" / "reference" / "conferences.csv"
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -230,7 +246,11 @@ def main() -> int:
         assertion_columns, assertion_rows = read_csv(assertions_path)
         discrepancy_columns, discrepancy_rows = read_csv(discrepancies_path)
         program_columns, program_rows = read_csv(programs_path)
+        accomplishment_columns, accomplishment_rows = read_csv(
+            accomplishments_path
+        )
         membership_columns, membership_rows = read_csv(conference_membership_path)
+        conference_columns, conference_rows = read_csv(conferences_path)
     except FileNotFoundError as exc:
         print(f"FAIL: required file not found: {exc}")
         return 1
@@ -240,11 +260,62 @@ def main() -> int:
     require_columns(discrepancies_path, discrepancy_columns, REQUIRED_DISCREPANCY_COLUMNS, errors)
     require_columns(programs_path, program_columns, REQUIRED_PROGRAM_COLUMNS, errors)
     require_columns(
+        accomplishments_path,
+        accomplishment_columns,
+        REQUIRED_ACCOMPLISHMENT_COLUMNS,
+        errors,
+    )
+    require_columns(
         conference_membership_path,
         membership_columns,
         REQUIRED_CONFERENCE_MEMBERSHIP_COLUMNS,
         errors,
     )
+    require_columns(
+        conferences_path,
+        conference_columns,
+        REQUIRED_REGISTRY_COLUMNS,
+        errors,
+    )
+
+    conference_keys = [row.get("conference_key", "").strip() for row in conference_rows]
+    if "" in conference_keys:
+        errors.append("conferences.csv contains a blank conference_key.")
+    duplicate_conference_keys = duplicates(conference_keys)
+    if duplicate_conference_keys:
+        errors.append(
+            "conferences.csv contains duplicate conference_key values: "
+            + ", ".join(sorted(duplicate_conference_keys))
+        )
+    conference_registry = registry_by_key(conference_rows)
+    for line_number, row in enumerate(conference_rows, start=2):
+        key = row.get("conference_key", "").strip()
+        if not row.get("conference_name", "").strip():
+            errors.append(f"conferences.csv line {line_number}: conference_name is required.")
+        if key != "independent" and not row.get("tournament_label", "").strip():
+            errors.append(
+                f"conferences.csv line {line_number}: owner-approved "
+                "tournament_label is required."
+            )
+
+    for line_number, row in enumerate(membership_rows, start=2):
+        key = row.get("conference_key", "").strip()
+        if key not in conference_registry:
+            errors.append(
+                f"conference-membership.csv line {line_number}: conference_key "
+                f"{key!r} is absent from conferences.csv."
+            )
+
+    for history_path in sorted((repo_root / "schools").glob("*/conferences.csv")):
+        history_columns, history_rows = read_csv(history_path)
+        require_columns(history_path, history_columns, REQUIRED_HISTORY_COLUMNS, errors)
+        expected_program_key = history_path.parent.name
+        for problem in history_errors(
+            history_rows,
+            set(conference_registry),
+            expected_program_key=expected_program_key,
+        ):
+            errors.append(f"{history_path}: {problem}")
 
     canonical_ids = [r.get("canonical_game_id", "") for r in canonical_rows]
     canonical_id_set = set(canonical_ids)
@@ -525,27 +596,106 @@ def main() -> int:
                 f"{label}: public_page_enabled=Yes requires current_d1=Yes."
             )
 
-        for field in PROGRAM_ACHIEVEMENT_FIELDS:
-            value = row.get(field, "").strip()
-
-            if not value:
-                if public_page_enabled == "Yes":
-                    errors.append(
-                        f"{label}: {field} is required when "
-                        "public_page_enabled=Yes."
-                    )
-                continue
-
-            if not re.fullmatch(r"\d+", value):
-                errors.append(
-                    f"{label}: {field} must be a nonnegative integer "
-                    f"(got {value!r})."
-                )
+        for problem in history_scope_errors(
+            row, required=public_page_enabled == "Yes"
+        ):
+            errors.append(f"{label}: {problem}.")
+        if (
+            row.get("history_scope_status", "").strip() == "OWNER_CONFIRMED"
+            and not row.get("history_scope_notes", "").strip()
+        ):
+            errors.append(f"{label}: owner-confirmed history scope requires notes.")
 
         if public_page_enabled == "Yes" and program_key not in canonical_team_keys:
             errors.append(
                 f"{label}: public page is enabled but program does not appear "
                 "in canonical games."
+            )
+
+    accomplishment_keys = [
+        row.get("program_key", "").strip() for row in accomplishment_rows
+    ]
+    duplicate_accomplishment_keys = duplicates(accomplishment_keys)
+    if duplicate_accomplishment_keys:
+        errors.append(
+            "Duplicate program-accomplishments program_key values: "
+            + ", ".join(sorted(duplicate_accomplishment_keys)[:10])
+        )
+    unknown_accomplishment_keys = sorted(set(accomplishment_keys) - program_key_set)
+    missing_accomplishment_keys = sorted(program_key_set - set(accomplishment_keys))
+    if unknown_accomplishment_keys:
+        errors.append(
+            "program-accomplishments.csv contains unknown program keys: "
+            + ", ".join(unknown_accomplishment_keys[:10])
+        )
+    if missing_accomplishment_keys:
+        errors.append(
+            "program-accomplishments.csv is missing program keys: "
+            + ", ".join(missing_accomplishment_keys[:10])
+        )
+
+    programs_by_key = {
+        row.get("program_key", "").strip(): row for row in program_rows
+    }
+    for line_num, row in enumerate(accomplishment_rows, start=2):
+        program_key = row.get("program_key", "").strip()
+        if program_key not in programs_by_key:
+            continue
+        program = programs_by_key[program_key]
+        public = program.get("public_page_enabled", "") == "Yes"
+        row_errors, row_warnings = accomplishment_row_issues(
+            row, program, public
+        )
+        errors.extend(
+            f"{program_key} accomplishments: {problem}."
+            for problem in row_errors
+        )
+        warnings.extend(
+            f"{program_key} accomplishments: {problem}."
+            for problem in row_warnings
+        )
+        if not row.get("verification_basis", "").strip():
+            errors.append(
+                f"{program_key} accomplishments: verification_basis is required."
+            )
+
+    # Generated public data must enforce scope without deleting shared canonical rows.
+    for program in program_rows:
+        if program.get("public_page_enabled", "") != "Yes":
+            continue
+        program_key = program.get("program_key", "")
+        cutoff = program.get("history_start_season", "").strip()
+        team_json_path = repo_root / "site" / "data" / "teams" / f"{program_key}.json"
+        if not team_json_path.exists():
+            continue
+        try:
+            document = json.loads(team_json_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{team_json_path}: cannot validate generated scope: {exc}")
+            continue
+        published_start = document.get("program", {}).get("history_start_season")
+        if published_start != cutoff:
+            errors.append(
+                f"{program_key}: generated history_start_season does not match programs.csv."
+            )
+        pre_cutoff_game_ids = [
+            game.get("canonical_game_id", "")
+            for game in document.get("games", [])
+            if game.get("season_label", "") < cutoff
+        ]
+        if pre_cutoff_game_ids:
+            errors.append(
+                f"{program_key}: generated public games precede history scope: "
+                + ", ".join(pre_cutoff_game_ids[:10])
+            )
+        pre_cutoff_intervals = [
+            row.get("conference_key", "")
+            for row in document.get("conference_history", [])
+            if row.get("start_season", "") < cutoff
+        ]
+        if pre_cutoff_intervals:
+            errors.append(
+                f"{program_key}: generated conference history precedes history scope."
             )
 
     membership_keys = [
@@ -746,6 +896,7 @@ def main() -> int:
     print(f"Source assertions:    {len(assertion_rows):,}")
     print(f"Discrepancies:        {len(discrepancy_rows):,}")
     print(f"Reference programs:   {len(program_rows):,}")
+    print(f"Accomplishment rows:  {len(accomplishment_rows):,}")
     print(f"Conference rows:      {len(membership_rows):,}")
     print()
 
