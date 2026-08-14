@@ -181,6 +181,22 @@ For every source, record:
 
 ### Required clarification before package construction
 
+Before any extraction or ingestion, obtain exactly one owner statement:
+
+- "Program has always been D1/top-level for our site purposes."
+- "First year in D1/top-level for our site purposes is YYYY-YY."
+
+Record the resulting `history_start_season`, `history_scope_status = OWNER_CONFIRMED`,
+`history_scope_basis`, and concise provenance in `history_scope_notes` on the target's
+`data/reference/programs.csv` row. `tools/ingest_school.py` will fail before matching if
+this checkpoint is missing. Longstanding major-college history may predate the formal
+Division I label; the owner statement controls site scope.
+
+Source rows before the approved boundary may remain in `source-games.csv` with their
+raw evidence unchanged. Ingestion reports and excludes them from the target perspective.
+Do not repurpose `normalization_status`, delete the rows, or let pre-cutoff games leak
+into public records, opponents, conferences, postseason totals, or other aggregates.
+
 Ask the project owner about any of the following:
 
 - ambiguous school or campus identity;
@@ -1038,14 +1054,24 @@ Review the target's program metadata:
 - `state`
 - `primary_hex`
 - `secondary_hex`
-- `conference_regular_season_championships`
-- `conference_tournament_championships`
-- `final_four_appearances`
-- `national_championships`
+- `history_start_season`
+- `history_scope_status`
+- `history_scope_basis`
+- `history_scope_notes`
 - `current_d1`
 - `public_page_enabled`
 
-The four achievement fields are required before a program may be published. Use nonnegative integers. `0` is a verified zero; blank means the value has not yet been populated and blocks public-page enablement.
+Then review the target row in `data/reference/program-accomplishments.csv`. This is the
+sole accomplishment authority. Run:
+
+```bash
+python tools/verify_program_accomplishments.py "$school_key"
+```
+
+The helper compares in-scope canonical NCAA seasons, Final Fours, on-court titles, Best
+Finish, and its most recent calendar year. Conference-tournament title derivation is a
+supporting check only; regular-season conference championships are not derivable from
+games.
 
 Achievement definitions:
 
@@ -1054,13 +1080,20 @@ Achievement definitions:
 - Final Four appearances are NCAA Tournament Final Four appearances;
 - national championships are NCAA Tournament championships rather than retroactive or non-NCAA selectors.
 
-Prefer the school's recognized historical totals. Escalate formally vacated championship/appearance cases for owner review rather than silently choosing a counting convention.
+Verify every value against authoritative school sources, filtered to the approved
+history boundary. The project counts on-court accomplishments while preserving vacated
+status separately. If baseline, school source, and canonical cross-check disagree, set
+`verification_status = UNDER_REVIEW` and stop for owner review. Only after agreement may
+a new target become `VERIFIED` and onboarding-complete. Disabled future programs may
+remain `OWNER_BASELINE_UNVERIFIED`.
 
 Confirm the `2026-2027` conference key/name. Correct a bad reference value only with a documented authoritative source.
 
 ### Enable the page
 
-After canonical ingestion and validation, confirm that all four achievement fields are populated, then change only the target's `public_page_enabled` value from `No` to `Yes` in `data/reference/programs.csv`.
+After canonical ingestion and validation, confirm owner-approved history scope and a
+`VERIFIED` accomplishment row, then change only the target's `public_page_enabled` value
+from `No` to `Yes` in `data/reference/programs.csv`.
 
 Run validation again:
 
@@ -1224,6 +1257,7 @@ git add data/canonical/games.csv
 git add data/evidence/game-assertions.csv
 git add data/reconciliation/discrepancies.csv
 git add data/reference/programs.csv
+git add data/reference/program-accomplishments.csv
 git add site/data
 ```
 
@@ -1557,7 +1591,8 @@ Before a partner begins independently, confirm that the partner can answer “ye
 - [ ] I will review every generated discrepancy in human-readable form and escalate material canonical-value decisions.
 - [ ] I understand that a genuine historical conflict may remain `UNDER_REVIEW` when publication with the flag is explicitly approved.
 - [ ] I will require validation and a complete target-team no-op, including zero remaining canonical enrichments.
-- [ ] I will verify the target's current conference row and populate all four achievement fields before publication.
+- [ ] I will obtain and record the required owner history-scope statement before ingestion.
+- [ ] I will verify the target accomplishment row against authoritative sources and canonical in-scope postseason history before publication.
 - [ ] I will verify every historical conference key exists in the central registry and stop for owner approval rather than inventing a tournament abbreviation.
 - [ ] I will keep historically distinct conference naming eras separate when their public tournament identities differ.
 - [ ] I will preserve existing CSV BOM/newline style when modifying tracked CSV files.

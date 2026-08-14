@@ -45,6 +45,7 @@ from location_safety import (
     registry_fallback_marker,
     source_location_preflight,
 )
+from program_history import history_scope_errors, partition_source_rows
 
 
 CONFIDENT = "CONFIDENT_MATCH"
@@ -686,6 +687,7 @@ def main() -> int:
 
     repo_root = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
     source_path = repo_root / "schools" / args.school_key / "source-games.csv"
+    programs_path = repo_root / "data" / "reference" / "programs.csv"
     venue_path = repo_root / "schools" / args.school_key / "venues.csv"
     conference_history_path = (
         repo_root / "schools" / args.school_key / "conferences.csv"
@@ -699,7 +701,8 @@ def main() -> int:
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
 
     try:
-        sources = read_csv(source_path)
+        all_sources = read_csv(source_path)
+        program_rows = read_csv(programs_path)
         venue_rows = read_csv(venue_path)
         conference_history = read_csv(conference_history_path)
         conference_registry_rows = read_csv(conference_registry_path)
@@ -711,6 +714,31 @@ def main() -> int:
     except FileNotFoundError as exc:
         print(f"FAIL: required file not found: {exc}")
         return 1
+
+    target_programs = [
+        row for row in program_rows if row.get("program_key", "") == args.school_key
+    ]
+    if len(target_programs) != 1:
+        print(
+            "FAIL: target program must have exactly one data/reference/programs.csv row."
+        )
+        return 1
+    target_program = target_programs[0]
+    scope_problems = history_scope_errors(target_program, required=True)
+    if scope_problems:
+        print("FAIL: target history-scope preflight failed:")
+        print(
+            "  Obtain Elliott's required statement: either the program has always "
+            "been D1/top-level for site purposes, or its first top-level season is YYYY-YY."
+        )
+        for problem in scope_problems:
+            print(f"  - {args.school_key}: {problem}")
+        return 1
+
+    history_start = target_program["history_start_season"].strip()
+    sources, pre_cutoff_sources = partition_source_rows(
+        all_sources, history_start
+    )
 
     index: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
     canonical_by_id = {}
@@ -884,7 +912,19 @@ def main() -> int:
     print(f"School:     {args.school_key}")
     print(f"Mode:       {'APPLY' if args.apply else 'DRY RUN'}")
     print()
-    print(f"Source rows:                {len(sources):,}")
+    print(f"Source rows:                {len(all_sources):,}")
+    print(f"In-scope source rows:       {len(sources):,}")
+    print(f"Pre-cutoff rows preserved:  {len(pre_cutoff_sources):,}")
+    if pre_cutoff_sources:
+        pre_cutoff_seasons = sorted(
+            source.get("season_label", "").strip()
+            for source in pre_cutoff_sources
+        )
+        print(
+            "Pre-cutoff season range:    "
+            f"{pre_cutoff_seasons[0]} through {pre_cutoff_seasons[-1]} "
+            "(excluded from target ingestion)"
+        )
     print(f"Existing-game matches:      {identity_counts[CONFIDENT]:,}")
     print(f"New canonical games:        {identity_counts[NEW_GAME]:,}")
     print(f"Identity review required:   {identity_counts[REVIEW]:,}")
