@@ -10,10 +10,14 @@
     "state": "MO",
     "primary_hex": "#000000",
     "secondary_hex": "#F1B82D",
+    "history_start_season": "1906-1907",
     "conference_regular_season_championships": 15,
     "conference_tournament_championships": 8,
+    "ncaa_tournament_appearances": 31,
     "final_four_appearances": 0,
     "national_championships": 0,
+    "best_finish_key": "ELITE_EIGHT",
+    "best_finish_year": 2009,
     "current_conference": {
       "conference_key": "sec",
       "conference_name": "SEC"

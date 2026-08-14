@@ -10,10 +10,14 @@
     "state": "IL",
     "primary_hex": "#4E2A84",
     "secondary_hex": "#FFFFFF",
+    "history_start_season": "1904-1905",
     "conference_regular_season_championships": 2,
     "conference_tournament_championships": 0,
+    "ncaa_tournament_appearances": 3,
     "final_four_appearances": 0,
     "national_championships": 0,
+    "best_finish_key": "ROUND_OF_32",
+    "best_finish_year": 2024,
     "current_conference": {
       "conference_key": "big-ten",
       "conference_name": "Big Ten"

@@ -10,10 +10,14 @@
     "state": "TN",
     "primary_hex": "#FF8200",
     "secondary_hex": "#FFFFFF",
+    "history_start_season": "1908-1909",
     "conference_regular_season_championships": 12,
     "conference_tournament_championships": 5,
+    "ncaa_tournament_appearances": 28,
     "final_four_appearances": 0,
     "national_championships": 0,
+    "best_finish_key": "ELITE_EIGHT",
+    "best_finish_year": 2026,
     "current_conference": {
       "conference_key": "sec",
       "conference_name": "SEC"

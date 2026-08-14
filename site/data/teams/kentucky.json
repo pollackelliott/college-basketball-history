@@ -10,10 +10,14 @@
     "state": "KY",
     "primary_hex": "#0033A0",
     "secondary_hex": "#FFFFFF",
+    "history_start_season": "1902-1903",
     "conference_regular_season_championships": 52,
     "conference_tournament_championships": 33,
+    "ncaa_tournament_appearances": 64,
     "final_four_appearances": 17,
     "national_championships": 8,
+    "best_finish_key": "NATIONAL_CHAMPION",
+    "best_finish_year": 2012,
     "current_conference": {
       "conference_key": "sec",
       "conference_name": "SEC"
