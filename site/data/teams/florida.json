@@ -9664,7 +9664,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -13888,7 +13888,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Louisville",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -37816,7 +37816,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Birmingham",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -38488,7 +38488,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Nashville",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -41608,7 +41608,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Baton Rouge",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -52241,7 +52241,7 @@
       "venue_key": null,
       "venue_name": null,
       "site_city": "New York",
-      "site_state": null,
+      "site_state": "NY",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
@@ -55528,7 +55528,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Las Vegas",
+      "site_city": null,
       "site_state": null,
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -59608,7 +59608,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -62297,7 +62297,7 @@
       "venue_key": null,
       "venue_name": null,
       "site_city": "Atlanta",
-      "site_state": null,
+      "site_state": "GA",
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
       "administrative_status": null,
@@ -62320,7 +62320,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Atlanta",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -67960,7 +67960,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Nashville",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": null,
@@ -71296,7 +71296,7 @@
       "site": "NEUTRAL",
       "venue_key": null,
       "venue_name": null,
-      "site_city": "Nashville",
+      "site_city": null,
       "site_state": null,
       "game_type": "CONFERENCE_TOURNAMENT",
       "postseason_round": "Championship",
@@ -72287,5 +72287,38 @@
       "administrative_status": null,
       "administrative_note": null
     }
-  ]
+  ],
+  "conference_history": [
+    {
+      "start_season": "1915-1916",
+      "end_season": "1921-1922",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent"
+    },
+    {
+      "start_season": "1922-1923",
+      "end_season": "1931-1932",
+      "conference_key": "southern",
+      "conference_name": "Southern Conference",
+      "membership_type": "conference"
+    },
+    {
+      "start_season": "1932-1933",
+      "end_season": null,
+      "conference_key": "sec",
+      "conference_name": "SEC",
+      "membership_type": "conference"
+    }
+  ],
+  "conference_names": {
+    "independent": "Independent",
+    "sec": "SEC",
+    "southern": "Southern"
+  },
+  "conference_tournament_labels": {
+    "sec": "SEC",
+    "southern": "Southern"
+  },
+  "conference_tournament_review_flags": []
 }
