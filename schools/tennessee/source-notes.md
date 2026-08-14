@@ -24,15 +24,19 @@ Tennessee's year-by-year legend uses `*`, `**`, `***`, and `****` after scores f
 
 The dedicated SEC Tournament table establishes championship-game appearances and the dedicated NCAA table establishes NCAA round progression. The NCAA table itself contains a known 2019 date typo for Purdue; the chronological year-by-year ledger controls the game date (2019-03-28). The 2024-25 Houston score/result conflict is resolved in favor of the dedicated NCAA table plus the 30-8 published season aggregate.
 
-## 7. Venue sources
+## 7. Vanderbilt source-marker correction
+
+The raw 2009-01-20 line `J20 /- at Vanderbilt W, 76-63 Nashville` was initially misnormalized as a game against a historical `at-vanderbilt` identity at a neutral site. The owner confirmed on 2026-08-14 that the row is Tennessee's valid road win at Vanderbilt and that the separate 2009-02-14 Tennessee home win also remains valid. The source opponent identity, H/A/N classification, Memorial Gymnasium venue, and Nashville/Tennessee location are corrected while `raw_text` remains unchanged.
+
+## 8. Venue sources
 
 The Volmanac's home-court history establishes Tennessee's primary venue eras. The package applies those venue eras only to games independently established as Tennessee home. Thompson-Boling Arena remains the owner-selected site-facing name; Food City naming is retained as alias evidence.
 
-## 8. Opponent resolution
+## 9. Opponent resolution
 
 Opponent normalization first reuses identities already established in the project package evidence, then applies the current Division-I registry conventions and conservative historical identities. Tennessee's opponent-series table explicitly establishes several historical lineage/display normalizations (City College of Detroit -> Wayne State; Eastern Montana -> Montana State-Billings; Cumberland College -> Cumberlands (Ky.); Mexico/Univ. of Mexico -> University of Mexico). Established project historical keys are reused where known, including Union College (Ky.), Washington & Lee, and St. Francis Brooklyn. Raw printed labels remain auditable in `source_opponent_label`/`raw_text`.
 
-## 9. Expected reconciliation behavior
+## 10. Expected reconciliation behavior
 
 Because Tennessee overlaps seven already-public programs, ingestion should match many existing canonical games. Material disagreements should be presented in the project's required human-readable discrepancy review before resolution, with especially close owner review for 21st-century cases. The six-file package itself is the principal deliverable; broad re-auditing of already-settled canonical history is not required absent a surfaced discrepancy.
 

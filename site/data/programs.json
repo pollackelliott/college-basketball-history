@@ -8075,7 +8075,7 @@
       "state": "TN",
       "primary_hex": "#866D4B",
       "secondary_hex": "#000000",
-      "history_start_season": null,
+      "history_start_season": "1900-1901",
       "conference_regular_season_championships": 5,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 17,
@@ -8084,7 +8084,7 @@
       "best_finish_key": "ELITE_EIGHT",
       "best_finish_year": 1965,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"

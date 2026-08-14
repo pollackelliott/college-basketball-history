@@ -38,7 +38,11 @@ SEC/SIAA/Southern tournament contests use `CONFERENCE_TOURNAMENT`; NCAA games us
 
 The 2024-25 year-by-year ledger prints the Houston Elite Eight row backward as `W, 69-50`. Tennessee's dedicated NCAA Tournament results and the published 30-8 season record establish the correct on-court result as **Tennessee L 50-69 Houston on 2025-03-30**. The package curates the correct result while preserving the printed source row in `raw_text`.
 
-## 10. Opponent identity policy
+## 10. Vanderbilt source-marker correction
+
+The 2009-01-20 source row prints `/- at Vanderbilt`. Initial normalization incorrectly treated the prefix as part of a historical opponent identity and created `at-vanderbilt`. On 2026-08-14 the owner confirmed that this is the valid Tennessee 76-63 win at Vanderbilt and is separate from Tennessee's 69-50 home win over Vanderbilt on 2009-02-14. `TENRAW-02350` is normalized to Vanderbilt with Vanderbilt home while preserving the printed source line in `raw_text`.
+
+## 11. Opponent identity policy
 
 Current Division-I identities reuse the project's established program-key conventions, including Miami (FL) = `miami`, Miami (OH) = `miami-oh`, UAB = `uab`, UCF = `ucf`, Chattanooga = `chattanooga`, Middle Tennessee = `middle-tennessee`, UT Martin = `ut-martin`, and UTEP for historical Texas Western. Historical clubs, YMCAs, military/prep teams, and non-current colleges are retained conservatively rather than forced into modern identities without evidence. Tennessee's own opponent-series table supplies several explicit historical lineage labels used here, including City College of Detroit -> Wayne State, Eastern Montana -> Montana State-Billings, Cumberland College -> Cumberlands (Ky.), and Mexico/Univ. of Mexico -> University of Mexico. Established project historical keys are reused for Union College (Ky.), Washington & Lee, and St. Francis Brooklyn.
 
