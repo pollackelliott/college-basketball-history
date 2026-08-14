@@ -2,13 +2,21 @@
 
 **Project:** College Basketball History
 
-**Document status:** Partner-ready v2
+**Document status:** Partner-ready v3 historical/data authority
 
-**Validated:** August 10, 2026
+**Validated:** August 14, 2026
 
 **Repository:** `/workspaces/college-basketball-history`
 
 **Public site:** <https://college-basketball-history.vercel.app>
+
+> **Permanent operational procedure (August 14, 2026):** Run
+> `docs/school-onboarding-fast-path.md` in the project Codespace. It consolidates
+> the post-package stages below into a sealed plan, one batch owner decision,
+> transactional apply, exact Preview approval, and automated Production proof.
+> The detailed evidence, identity, reconciliation, and stop rules in this runbook
+> remain binding. Manual commands below are diagnostic/fallback procedures, not the
+> normal new-school execution path.
 
 > Florida and Tennessee completed successive production onboarding validations on August 10, 2026. Tennessee established the stable routine path for Partner-ready v2: build a complete six-file package, let ingestion surface a finite set of matches, enrichments, identity questions, and conflicts, and reserve heavier rehearsal work for cases that actually need it.
 

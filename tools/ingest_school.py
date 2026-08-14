@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import re
 import subprocess
 import sys
@@ -417,6 +418,80 @@ def resolve_identity_override(
     return (REVIEW, "", f"UNKNOWN_IDENTITY_OVERRIDE:{override}")
 
 
+def load_sealed_identity_decisions(
+    path: Path | None,
+    school_key: str,
+) -> dict[str, str]:
+    """Load identity decisions from an owner-approved onboarding plan.
+
+    The generic onboarding wrapper verifies the plan hash and input fingerprint
+    before invoking ingestion.  Ingestion still validates every chosen canonical
+    identity against the source row's team pair and season before using it.
+    """
+    if path is None:
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"cannot read identity decision plan {path}: {exc}") from exc
+    if payload.get("school_key") != school_key:
+        raise ValueError(
+            "identity decision plan school_key does not match the ingestion target"
+        )
+    if not payload.get("approved_plan_hash"):
+        raise ValueError("identity decision plan is not sealed")
+
+    result: dict[str, str] = {}
+    for item in payload.get("decisions", []):
+        if item.get("category") != "identity":
+            continue
+        source_game_id = item.get("source_game_id", "").strip()
+        decision = item.get("decision", "").strip()
+        if not source_game_id or not decision or decision == "PENDING":
+            raise ValueError("identity decision plan contains an incomplete item")
+        if source_game_id in result:
+            raise ValueError(
+                f"identity decision plan repeats source_game_id {source_game_id!r}"
+            )
+        if decision != "FORCE_NEW" and not decision.startswith("MATCH_CANONICAL:"):
+            raise ValueError(
+                f"unsupported sealed identity decision for {source_game_id}: {decision}"
+            )
+        result[source_game_id] = decision
+    return result
+
+
+def resolve_sealed_identity_decision(
+    source: dict[str, str],
+    decision: str,
+    candidates: list[dict[str, str]],
+    canonical_by_id: dict[str, dict[str, str]],
+) -> tuple[str, str, str]:
+    """Resolve one sealed decision with the same defensive checks as normal matching."""
+    if decision == "FORCE_NEW":
+        normal_status, _, normal_method = identify_game(source, candidates)
+        if normal_status == CONFIDENT:
+            return REVIEW, "", f"SEALED_FORCE_NEW_CONFLICTS_WITH_{normal_method}"
+        return NEW_GAME, "", "SEALED_OWNER_FORCE_NEW"
+
+    canonical_game_id = decision.split(":", 1)[1]
+    canonical = canonical_by_id.get(canonical_game_id)
+    if canonical is None:
+        return REVIEW, "", "SEALED_MATCH_CANONICAL_NOT_FOUND"
+    school = source.get("source_program_key", "").strip()
+    opponent = source.get("normalized_opponent_key", "").strip()
+    team_a, team_b = ordered_pair(school, opponent)
+    expected_identity = (team_a, team_b, source.get("season_label", "").strip())
+    actual_identity = (
+        canonical.get("team_a_key", ""),
+        canonical.get("team_b_key", ""),
+        canonical.get("season_label", ""),
+    )
+    if actual_identity != expected_identity:
+        return REVIEW, "", "SEALED_MATCH_CANONICAL_IDENTITY_MISMATCH"
+    return CONFIDENT, canonical_game_id, "SEALED_OWNER_MATCH_CANONICAL"
+
+
 def build_assertion(
     source: dict[str, str],
     canonical_game_id: str,
@@ -682,6 +757,15 @@ def main() -> int:
             "Use for final onboarding proof; legacy drift is otherwise warned."
         ),
     )
+    parser.add_argument(
+        "--identity-decisions",
+        type=Path,
+        default=None,
+        help=(
+            "Owner-approved onboarding plan containing sealed identity decisions. "
+            "Use only through tools/onboard_school.py."
+        ),
+    )
     parser.add_argument("--repo", type=Path, default=None)
     args = parser.parse_args()
 
@@ -701,6 +785,10 @@ def main() -> int:
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
 
     try:
+        sealed_identity_decisions = load_sealed_identity_decisions(
+            args.identity_decisions,
+            args.school_key,
+        )
         all_sources = read_csv(source_path)
         program_rows = read_csv(programs_path)
         venue_rows = read_csv(venue_path)
@@ -711,8 +799,8 @@ def main() -> int:
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
         discrepancies = read_csv(discrepancies_path)
-    except FileNotFoundError as exc:
-        print(f"FAIL: required file not found: {exc}")
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"FAIL: invalid ingestion inputs: {exc}")
         return 1
 
     target_programs = [
@@ -894,6 +982,22 @@ def main() -> int:
         elif len(prior_ids) > 1:
             status, game_id, method = REVIEW, "", "SOURCE_ASSERTION_LINKS_MULTIPLE_CANONICAL_GAMES"
         else:
+            sealed_decision = sealed_identity_decisions.get(
+                source.get("source_game_id", "").strip()
+            )
+            if sealed_decision:
+                status, game_id, method = resolve_sealed_identity_decision(
+                    source,
+                    sealed_decision,
+                    candidates,
+                    canonical_by_id,
+                )
+                if status == NEW_GAME:
+                    game_id = f"CBBG-{next_game_num:07d}"
+                    next_game_num += 1
+                planned.append((source, status, game_id, method))
+                identity_counts[status] += 1
+                continue
             override_result = resolve_identity_override(source, candidates, assertions_by_source, canonical_by_id)
             if override_result is not None:
                 status, game_id, method = override_result

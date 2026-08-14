@@ -1,8 +1,13 @@
 # College Basketball History — New-Team Onboarding Playbook
 
 **Audience:** Project owner and collaborator
-**Status:** Partner-ready v2 companion to `docs/new-team-onboarding-runbook.md`
+**Status:** Partner-ready v3 companion to `docs/new-team-onboarding-runbook.md`
 **Current coverage standard:** through 2025-26
+
+> **Required fast path:** Use `docs/school-onboarding-fast-path.md` and the two
+> repository commands `tools/onboard_school.py` and `tools/release_school.py` for
+> every new team. The numbered manual sequence below remains a troubleshooting and
+> recovery reference. Do not use it as the normal serial handoff procedure.
 
 This playbook is the short operational version of the detailed runbook. If the two ever disagree, follow `docs/new-team-onboarding-runbook.md`.
 

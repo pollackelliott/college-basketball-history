@@ -175,10 +175,16 @@ Conflicting event/source wording is retained for audit purposes but does not aut
 The authoritative onboarding procedures live in:
 
 ```text
+docs/school-onboarding-fast-path.md
 docs/new-team-onboarding-runbook.md
 docs/team-onboarding-playbook.md
 docs/data-schema.md
 ```
+
+`docs/school-onboarding-fast-path.md` is the required operational procedure for
+new schools. It consolidates post-portfolio work into a sealed preflight/approval
+plan and one preview/merge approval, designed to be run by Codex in the project
+Codespace. The longer runbook remains the authority for historical and data rules.
 
 At a high level, a new program moves through:
 
@@ -232,6 +238,18 @@ Check a program package without modifying global data:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python tools/ingest_school.py <program_key> --check-package
+```
+
+Run the permanent consolidated onboarding preflight:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python tools/onboard_school.py <program_key> --preflight
+```
+
+After the sealed apply, prepare the exact PR and Preview gate:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python tools/release_school.py <program_key> --prepare
 ```
 
 Cross-check canonical NCAA accomplishments for a program:
