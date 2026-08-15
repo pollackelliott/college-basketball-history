@@ -295,7 +295,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
             )
 
     allowed_sites = {"SOURCE_PROGRAM_HOME", "OPPONENT_HOME", "NEUTRAL", "UNKNOWN"}
-    allowed_types = {"REGULAR_SEASON", "CONFERENCE_TOURNAMENT", "NCAA_TOURNAMENT", "NIT"}
+    allowed_types = {"REGULAR_SEASON", "CONFERENCE_TOURNAMENT", "NCAA_TOURNAMENT", "NIT", "POSTSEASON"}
     allowed_rounds = {
         "",
         "Play-in",
@@ -369,7 +369,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
             errors.append(f"{label}: invalid curated_postseason_round {round_name!r}")
         if game_type == "REGULAR_SEASON" and round_name:
             errors.append(f"{label}: regular-season game has a postseason round")
-        if game_type in {"CONFERENCE_TOURNAMENT", "NIT"} and round_name not in {"", "Championship"}:
+        if game_type in {"CONFERENCE_TOURNAMENT", "NIT", "POSTSEASON"} and round_name not in {"", "Championship"}:
             errors.append(f"{label}: {game_type} round must be blank or Championship")
 
         venue = row.get("curated_venue_name", "").strip()
