@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "minnesota",
+  "created_at": "2026-08-15T09:43:29.001260+00:00",
+  "input_fingerprint": {
+    "sha256": "28a78da6407934caea25c77ddc711f9d86005fdf3dca1e09bfaf3734559dea78",
+    "git_head": "5096868d252f419d63834d1ed5270a8a97da366d",
+    "files": {
+      "schools/minnesota/source-games.csv": "2bb520de61438f377f22f9020149e4cb99c8c4d18f9860788a709d480ae4ad03",
+      "schools/minnesota/opponents.csv": "ee3ee727fd7536e56213a3f494c767462d48ba0897bee21f77adc4c61983c56a",
+      "schools/minnesota/venues.csv": "f4c849ac0e967944fad2044214cf5deec2417ffa231c0a584eab2186d8c3e89b",
+      "schools/minnesota/conferences.csv": "0579f8afb8006c51578a3de37cad03370ac518807196b67d9db1bb5bacebfe3a",
+      "schools/minnesota/notes.md": "e5cc9132611281ac9a85bf1a3dec3358dfe4db660332d5c513fc6c0edf08d13c",
+      "schools/minnesota/source-notes.md": "abf50b25d0bcfeaf80e1613dabef25bd2c41f1a590815b5e42075562d34e260d",
+      "data/canonical/games.csv": "e22ba8984a58cce0008c5e71a793c74cda530552ba94943c8737398fbdaf3c42",
+      "data/evidence/game-assertions.csv": "becea133183f4c6674c1f5c46615b8442224e74f9c07dde922f2e08d8d6195b7",
+      "data/reconciliation/discrepancies.csv": "1639e9c6b009926e04964b20e4d87b705301ac83855efba1e9ba6f1c84fe932e",
+      "data/reference/programs.csv": "4299ba80fb9661195c3f7207afbc078c737cabbb7e6f89cf10c61028ae77436e",
+      "data/reference/program-accomplishments.csv": "7e2ebdc37247fdeeaf0ad60101d6e72c325c9ca686d9b08b642d847f7fdcf0bb",
+      "data/reference/conference-membership.csv": "d6b8058e2fbd40bc8c5d9ac44116be2fcaa3e17358f31733a0692e352034de05",
+      "data/reference/conferences.csv": "7ad43d3b3c9499c7e85962bd49ebda83f9c3f39e7511d4af3e2dab3f9810914f",
+      "tools/build_site_data.py": "dd1397c53a866a0bee7032fae80a3019d65baa86bba3177aee41a9b4ab38c435",
+      "tools/conference_reference.py": "65c60c3af105e09b85ada59539d26c3a1930c875785efa43cafefb87f18d914c",
+      "tools/ingest_school.py": "6223cc214f976bb6b2c5f12c15b166f930a0f90fe0815a62078c0d09b6f3bdd4",
+      "tools/location_safety.py": "19a4a23d6dfbd060d35eaaf07b0de378b69f5c3ae768f9af5916979ec94245f1",
+      "tools/onboard_school.py": "439d674d1fa3453d8ce09bcab21ee78e8be49355ac0bb9d2a546763b0e52cc37",
+      "tools/onboarding_plan.py": "1197ac7d47c1129630eae27894d3067c66641a78c8b5c5a2db90b3ab2b0e5f19",
+      "tools/program_history.py": "d6b2d47aca11f776524882886f0195e60f103569610b0fe7a8911907903b4ad8",
+      "tools/validate_data.py": "c74b9590155d33828d15e4da2eb5cb3041a8da2c31237e6516b0a4ec410e76c3",
+      "tools/verify_program_accomplishments.py": "0e621897241e4157f0e64593a35ba74fb6a1be50c6e85ba291f9facb6e14bb70"
+    }
+  },
+  "package": {
+    "errors": [],
+    "warnings": [],
+    "counts": {
+      "source_games": 3083,
+      "opponents": 802,
+      "venues": 3,
+      "conference_intervals": 2
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "summary": {
+    "source_rows": 3083,
+    "in_scope_source_rows": 3083,
+    "pre_cutoff_rows": 0,
+    "existing_game_matches": 3083,
+    "new_canonical_games": 0,
+    "identity_review_required": 0,
+    "assertions_to_add": 2,
+    "canonical_enrichment_games": 2,
+    "canonical_enrichment_fields": 8,
+    "discrepancies_to_add": 0,
+    "conditional_discrepancies": 0,
+    "affected_public_programs": [
+      "arkansas",
+      "florida",
+      "illinois",
+      "kansas",
+      "kentucky",
+      "missouri",
+      "northwestern",
+      "tennessee",
+      "vanderbilt"
+    ],
+    "already_public": true
+  },
+  "decisions": [],
+  "approval": {
+    "approved_by": "Elliott",
+    "approved_at": "2026-08-15T09:44:02.885142+00:00"
+  },
+  "approved_plan_hash": "789e0251f5cb55f52b8e539aa448dbb4bc8abedcded0bce35db8053954b16f84"
+}

@@ -8870,7 +8870,7 @@ CBBG-0008868,1910-1911,1911-02-18,EXACT,iowa,northwestern,27,18,iowa,0,TEAM_B_HO
 CBBG-0008869,1910-1911,1911-02-24,EXACT,indiana,northwestern,33,19,indiana,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008870,1910-1911,1911-03-01,EXACT,chicago,northwestern,25,18,chicago,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008871,1910-1911,1911-03-04,EXACT,evanston-ymca,northwestern,15,12,evanston-ymca,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0008872,1910-1911,1911-03-07,EXACT,minnesota,northwestern,33,3,minnesota,0,TEAM_A_HOME,minnesota,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0008872,1910-1911,1911-03-07,EXACT,minnesota,northwestern,33,3,minnesota,0,TEAM_A_HOME,minnesota,university-armory,Minneapolis,MN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=minnesota/MINRAW-03082;venue_key=university-armory;site_type=TEAM_A_HOME;fields=venue_key]
 CBBG-0008873,1910-1911,1911-03-08,EXACT,northwestern,wisconsin,11,23,wisconsin,0,TEAM_B_HOME,wisconsin,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008874,1910-1911,1911-03-11,EXACT,indiana,northwestern,41,12,indiana,0,TEAM_A_HOME,indiana,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008875,1910-1911,1911-03-15,EXACT,northwestern,ravenswood,33,29,northwestern,0,TEAM_A_HOME,northwestern,old-patton-gymnasium,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -8936,7 +8936,7 @@ CBBG-0008934,1914-1915,1915-02-12,EXACT,minnesota,northwestern,26,16,minnesota,0
 CBBG-0008935,1914-1915,1915-02-16,EXACT,chicago,northwestern,22,14,chicago,0,TEAM_A_HOME,chicago,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008936,1914-1915,1915-02-27,EXACT,northwestern,ohio-state,25,21,northwestern,0,TEAM_B_HOME,ohio-state,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008937,1914-1915,1915-03-06,EXACT,iowa,northwestern,16,25,northwestern,0,TEAM_A_HOME,iowa,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0008938,1914-1915,1915-03-12,EXACT,minnesota,northwestern,13,12,minnesota,0,TEAM_A_HOME,minnesota,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0008938,1914-1915,1915-03-12,EXACT,minnesota,northwestern,13,12,minnesota,0,TEAM_A_HOME,minnesota,university-armory,Minneapolis,MN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=minnesota/MINRAW-03083;venue_key=university-armory;site_type=TEAM_A_HOME;fields=venue_key]
 CBBG-0008939,1915-1916,1915-12-19,EXACT,northwestern,northwestern-college,22,19,northwestern,0,TEAM_B_HOME,northwestern-college,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008940,1915-1916,1915-12-20,EXACT,beloit,northwestern,20,8,beloit,0,TEAM_A_HOME,beloit,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0008941,1915-1916,1915-12-28,EXACT,buckeye-paints,northwestern,33,20,buckeye-paints,0,TEAM_A_HOME,buckeye-paints,,,,REGULAR_SEASON,,,,PROVISIONAL,
