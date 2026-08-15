@@ -34,3 +34,15 @@ records. The NCAA-sanction era from 1993-94 through 1998-99 uses Minnesota's
 official chronology with a score/result supplement because the official guide
 suppresses those game scores. Seven chronology/supplement date disagreements
 are intentionally retained for reconciliation rather than silently resolved.
+
+## Game-type classification
+
+Minnesota uses the project-wide game-type taxonomy:
+
+- Regular-season invitationals, classics, showcases, neutral-site events, and other in-season tournaments remain `REGULAR_SEASON`.
+- Big Ten Tournament games are `CONFERENCE_TOURNAMENT`.
+- NCAA Tournament games are `NCAA_TOURNAMENT`.
+- NIT games are `NIT`.
+- Other true postseason tournaments use the generic `POSTSEASON` type. Minnesota's 2025-26 College Basketball Crown game is the first such case.
+
+The specific tournament name may remain in source/event metadata without becoming a new public game-type category.

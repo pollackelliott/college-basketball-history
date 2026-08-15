@@ -55,6 +55,7 @@ ALLOWED_GAME_TYPES = {
     "CONFERENCE_TOURNAMENT",
     "NCAA_TOURNAMENT",
     "NIT",
+    "POSTSEASON",
 }
 
 ALLOWED_POSTSEASON_ROUNDS = {
@@ -425,7 +426,7 @@ def main() -> int:
                 f"{game_id}: REGULAR_SEASON must not have postseason_round={postseason_round!r}."
             )
 
-        if game_type in {"CONFERENCE_TOURNAMENT", "NIT"} and postseason_round not in {"", "Championship"}:
+        if game_type in {"CONFERENCE_TOURNAMENT", "NIT", "POSTSEASON"} and postseason_round not in {"", "Championship"}:
             errors.append(
                 f"{game_id}: {game_type} round must be blank or Championship."
             )

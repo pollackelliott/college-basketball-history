@@ -1,4 +1,4 @@
-﻿index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
+index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
 0,minnesota,Air Force*,air-force,Air Force,Yes,1,1977-1978,1977-1978,RESOLVED,Inherited established project identity,,
 1,minnesota,Akron,akron,Akron,Yes,1,1991-1992,1991-1992,RESOLVED,Inherited established project identity,,
 2,minnesota,Akron 20/- Big Ten Network,akron,Akron,Yes,1,2010-2011,2010-2011,RESOLVED,Inherited established project identity,,
@@ -101,7 +101,7 @@
 99,minnesota,at Columbia,columbia,Columbia,Yes,1,1904-1905,1904-1905,RESOLVED,Inherited established project identity,,
 100,minnesota,Columbia,columbia,Columbia,Yes,2,1907-1908,1907-1908,RESOLVED,Inherited established project identity,,
 101,minnesota,Company A,company-a,Company A,No,2,1895-1896,1895-1896,RESOLVED,Inherited established project identity,,
-102,minnesota,Concordia-St. Paul @ BigTenNetwork.com,concordia-st-paul-bigtennetwork-com,Concordia-St. Paul @ BigTenNetwork.com,No,1,2008-2009,2008-2009,RESOLVED,Inherited established project identity,,
+102,minnesota,Concordia-St. Paul @ BigTenNetwork.com,concordia-st-paul,Concordia-St. Paul,No,1,2008-2009,2008-2009,RESOLVED,Official Minnesota identity; removed TV-column leakage,,TV/presentation text was not part of opponent identity.
 103,minnesota,at Connecticut#,uconn,Connecticut,Yes,1,1980-1981,1980-1981,RESOLVED,Inherited established project identity,,
 104,minnesota,Connecticut,uconn,Connecticut,Yes,2,1984-1985,1985-1986,RESOLVED,Inherited established project identity,,
 105,minnesota,Coppin State,coppin-state,Coppin State,Yes,1,2004-2005,2004-2005,RESOLVED,Inherited established project identity,,
@@ -110,7 +110,7 @@
 108,minnesota,Cornell 13/- Big Ten Network,cornell,Cornell,Yes,1,2010-2011,2010-2011,RESOLVED,Inherited established project identity,,
 109,minnesota,Cornell*,cornell,Cornell,Yes,3,1963-1964,1976-1977,RESOLVED,Inherited established project identity,,
 110,minnesota,Cornell (Iowa),cornell-iowa,Cornell (Iowa),No,1,1931-1932,1931-1932,RESOLVED,Inherited established project identity,,
-111,minnesota,vs. Cornell ESPN360,cornell-espn360,Cornell ESPN360,No,1,2008-2009,2008-2009,RESOLVED,Inherited established project identity,,
+111,minnesota,vs. Cornell ESPN360,cornell,Cornell,Yes,1,2008-2009,2008-2009,RESOLVED,Current D1 registry identity; removed TV-column leakage,,TV/presentation text was not part of opponent identity.
 112,minnesota,Corpus Christi,corpus-christi,Corpus Christi,No,1,1972-1973,1972-1973,RESOLVED,Inherited established project identity,,
 113,minnesota,at Crawfordsville (Ind.) H.S.,crawfordsville-ind-h-s,Crawfordsville (Ind.) H.S.,No,1,1903-1904,1903-1904,RESOLVED,Inherited established project identity,,
 114,minnesota,at Creighton,creighton,Creighton,Yes,6,1924-1925,1967-1968,RESOLVED,Inherited established project identity,,
@@ -610,8 +610,8 @@
 608,minnesota,St. Francis Brooklyn,st-francis-brooklyn,St. Francis Brooklyn,No,1,2022-2023,2022-2023,RESOLVED,Inherited established project identity,,
 609,minnesota,at St. John’s,st-john-s,St. John's,Yes,1,2014-2015,2014-2015,RESOLVED,Inherited established project identity,,
 610,minnesota,St. John’s (Minn.),st-john-s-minn,St. John’s (Minn.),No,1,1907-1908,1907-1908,RESOLVED,Inherited established project identity,,
-611,minnesota,at St. John’s (N.Y.),st-john-s-n-y,St. John’s (N.Y.),No,1,1993-1994,1993-1994,RESOLVED,Inherited established project identity,,
-612,minnesota,St. John’s (N.Y.),st-john-s-n-y,St. John’s (N.Y.),No,2,1996-1997,2016-2017,RESOLVED,Inherited established project identity,,
+611,minnesota,at St. John’s (N.Y.),st-john-s,St. John's,Yes,1,1993-1994,1993-1994,RESOLVED,Mapped historical source alias to current program registry,,Corrected source-token leakage in opponent identity.
+612,minnesota,St. John’s (N.Y.),st-john-s,St. John's,Yes,2,1996-1997,2016-2017,RESOLVED,Mapped historical source alias to current program registry,,Corrected source-token leakage in opponent identity.
 613,minnesota,St. Mary’s (Calif.),st-mary-s-calif,St. Mary’s (Calif.),No,2,1948-1949,1960-1961,RESOLVED,Inherited established project identity,,
 614,minnesota,St. Mary’s (Minn.),st-mary-s-minn,St. Mary’s (Minn.),No,1,1943-1944,1943-1944,RESOLVED,Inherited established project identity,,
 615,minnesota,St. Olaf,st-olaf,St. Olaf,No,6,1914-1915,1922-1923,RESOLVED,Inherited established project identity,,
@@ -677,7 +677,7 @@
 675,minnesota,UCLA,ucla,UCLA,Yes,4,1959-1960,2025-2026,RESOLVED,Inherited established project identity,,
 676,minnesota,UCLA##,ucla,UCLA,Yes,1,1996-1997,1996-1997,RESOLVED,Inherited established project identity,,
 677,minnesota,UCLA*,ucla,UCLA,Yes,2,1964-1965,1967-1968,RESOLVED,Inherited established project identity,,
-678,minnesota,vs. UCLA -/24 truTV,ucla-24-trutv,UCLA -/24 truTV,No,1,2012-2013,2012-2013,RESOLVED,Inherited established project identity,,
+678,minnesota,vs. UCLA -/24 truTV,ucla,UCLA,Yes,1,2012-2013,2012-2013,RESOLVED,Mapped historical source alias to current program registry,,Corrected source-token leakage in opponent identity.
 679,minnesota,UMBC,umbc,UMBC,Yes,1,2014-2015,2014-2015,RESOLVED,Inherited established project identity,,
 680,minnesota,Maryland-Eastern Shore,maryland-eastern-shore,UMES,Yes,2,1988-1989,2001-2002,RESOLVED,Inherited established project identity,,
 681,minnesota,UNC Asheville,unc-asheville,UNC Asheville,Yes,1,2002-2003,2002-2003,RESOLVED,Matched exact program registry identity,,
@@ -689,7 +689,7 @@
 687,minnesota,at UNLV ^,unlv,UNLV,Yes,1,2007-2008,2007-2008,RESOLVED,Inherited established project identity,,
 688,minnesota,UNLV,unlv,UNLV,Yes,1,2005-2006,2005-2006,RESOLVED,Inherited established project identity,,
 689,minnesota,vs. UNLV #,unlv,UNLV,Yes,1,2022-2023,2022-2023,RESOLVED,Inherited established project identity,,
-690,minnesota,at UNLV mtn network,unlv-mtn-network,UNLV mtn network,No,1,2006-2007,2006-2007,RESOLVED,Inherited established project identity,,
+690,minnesota,at UNLV mtn network,unlv,UNLV,Yes,1,2006-2007,2006-2007,RESOLVED,Current D1 registry identity; removed TV-column leakage,,TV/presentation text was not part of opponent identity.
 691,minnesota,at USC,usc,USC,Yes,1,2024-2025,2024-2025,RESOLVED,Inherited established project identity,,
 692,minnesota,Southern California,usc,USC,Yes,1,2025-2026,2025-2026,RESOLVED,Mapped historical source alias to current program registry,,
 693,minnesota,Southern California*,usc,USC,Yes,1,1960-1961,1960-1961,RESOLVED,Mapped historical source alias to current program registry,,
