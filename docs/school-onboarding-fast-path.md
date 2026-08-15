@@ -145,6 +145,28 @@ Successful apply produces:
 └── visual-qa.md
 ```
 
+### Target assertion closure
+
+Before release, explicitly enumerate any in-scope canonical game involving the
+target program that does not have an assertion from the target package. Investigate
+each such game. Another already-onboarded source may legitimately preserve a real
+game omitted from the target school's own chronological ledger, so the target
+source-package count does not have to equal the target's canonical public-game
+count. Do not delete a legitimate canonical game or fabricate a target assertion
+merely to force those counts to agree.
+
+Separately, the target package itself must finish as a complete ingestion no-op:
+every in-scope target source row is represented, with zero new games, assertions,
+discrepancies, or enrichments remaining.
+
+### Critical release boundary
+
+Do **not** manually commit after the successful final transactional apply. The
+release manifest is bound to the HEAD on which apply ran. Changing HEAD invalidates
+the transaction and requires a new preflight, approval, and apply. Go directly from
+final apply to `python tools/release_school.py <school_key> --prepare`; `--prepare`
+owns the release commit, push, pull-request preparation, checks, and Preview.
+
 ## Phase 3 — one release preparation command
 
 Run:

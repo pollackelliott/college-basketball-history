@@ -86,12 +86,15 @@ These rules are binding unless the project owner explicitly changes them.
 - Public opponent and venue names come from canonical registries. Do not manufacture a display name by prettifying a key when a canonical name exists.
 - A current Division-I institution must use its established `data/reference/programs.csv` `program_key`. Do not create a second global key for a spelling variant of the same institution.
 - When duplicate global identities are discovered, stop and reconcile them across canonical games, evidence, relevant school packages, and public outputs before publication.
-- Public special game types are limited to:
+- Controlled public game types are:
+  - `REGULAR_SEASON`
   - `CONFERENCE_TOURNAMENT`
   - `NCAA_TOURNAMENT`
   - `NIT`
-- All other games use `REGULAR_SEASON`, even when they occurred in a named regular-season event.
-- Conference-tournament and NIT rounds are blank except for a title game, which uses `Championship`.
+  - `POSTSEASON`
+- `POSTSEASON` is the generic public classification for genuine postseason events that are neither the NCAA Tournament nor NIT.
+- Named regular-season tournaments, classics, invitationals, and similar events remain `REGULAR_SEASON`; retain the event name as source/provenance metadata when useful.
+- Conference-tournament, NIT, and `POSTSEASON` rounds are blank except for a title game, which uses `Championship`.
 - NCAA rounds use only:
   - `Play-in`
   - `R64`
@@ -289,7 +292,7 @@ Site and venue answer different questions. A neutral game can occur in a team's 
 |---|---|---|
 | `event_or_tournament` | Optional | Source or curated event name retained for research context. |
 | `source_round` | Optional | Round language used by the source. |
-| `curated_game_type` | Project-required | `REGULAR_SEASON`, `CONFERENCE_TOURNAMENT`, `NCAA_TOURNAMENT`, or `NIT`. |
+| `curated_game_type` | Project-required | `REGULAR_SEASON`, `CONFERENCE_TOURNAMENT`, `NCAA_TOURNAMENT`, `NIT`, or `POSTSEASON`. |
 | `curated_postseason_round` | Conditional | Canonical round taxonomy; blank when the rules require no public round. |
 
 #### Identity override fields
@@ -612,7 +615,7 @@ for row in venues:
             venue_names.add(alias)
 
 allowed_sites = {"SOURCE_PROGRAM_HOME", "OPPONENT_HOME", "NEUTRAL", "UNKNOWN"}
-allowed_types = {"REGULAR_SEASON", "CONFERENCE_TOURNAMENT", "NCAA_TOURNAMENT", "NIT"}
+allowed_types = {"REGULAR_SEASON", "CONFERENCE_TOURNAMENT", "NCAA_TOURNAMENT", "NIT", "POSTSEASON"}
 allowed_rounds = {"", "Play-in", "R64", "R32", "Sweet Sixteen", "Elite Eight", "Final Four", "Championship"}
 season_re = re.compile(r"^(\d{4})-(\d{4})$")
 
@@ -679,7 +682,7 @@ for line, row in enumerate(games, start=2):
         errors.append(f"{label}: invalid curated_postseason_round {round_name!r}")
     if game_type == "REGULAR_SEASON" and round_name:
         errors.append(f"{label}: regular-season game has a postseason round")
-    if game_type in {"CONFERENCE_TOURNAMENT", "NIT"} and round_name not in {"", "Championship"}:
+    if game_type in {"CONFERENCE_TOURNAMENT", "NIT", "POSTSEASON"} and round_name not in {"", "Championship"}:
         errors.append(f"{label}: {game_type} round must be blank or Championship")
 
     venue = row.get("curated_venue_name", "").strip()
@@ -1249,6 +1252,13 @@ Generated changes to an existing team JSON file are acceptable when they result 
 - another explicitly reviewed cross-program improvement.
 
 ### Commit sequence
+
+**Fallback/manual procedure only:** do not use the commit sequence below after a
+successful final transactional apply through the permanent sealed onboarding fast
+path. The release manifest is bound to the HEAD on which apply ran. After final
+apply, go directly to `python tools/release_school.py <school_key> --prepare`;
+that command owns exact staging, the release commit, push, PR preparation, checks,
+and Preview deployment. Changing HEAD first invalidates the release transaction.
 
 The six-file source package should normally already be committed separately on the onboarding branch.
 
