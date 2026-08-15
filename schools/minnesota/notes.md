@@ -46,3 +46,15 @@ Minnesota uses the project-wide game-type taxonomy:
 - Other true postseason tournaments use the generic `POSTSEASON` type. Minnesota's 2025-26 College Basketball Crown game is the first such case.
 
 The specific tournament name may remain in source/event metadata without becoming a new public game-type category.
+
+## Source score corrections
+
+Two internally inconsistent score rows in the 2025-26 Minnesota media guide
+are preserved verbatim in `raw_text` but corrected in the curated score fields.
+
+- 2006-03-21 at Cincinnati (NIT): the year-by-year row prints `L 76-62`;
+  Minnesota's dedicated NIT history and opponent-series history give
+  Cincinnati 76, Minnesota 62. Curated result: Minnesota L 62-76.
+- 2014-11-14 vs. Louisville: the year-by-year row prints `L 68-61`;
+  Minnesota's official game recap gives Louisville 81, Minnesota 68.
+  Curated result: Minnesota L 68-81.
