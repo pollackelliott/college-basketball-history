@@ -2,7 +2,7 @@ program_key,program_name,display_name,nickname,city,state,primary_hex,secondary_
 abilene-christian,Abilene Christian,Abilene Christian,Wildcats,Abilene,TX,#4F2170,#FFFFFF,Yes,No,,,,
 air-force,Air Force,Air Force,Falcons,Colorado Springs,CO,#003087,#8A8D8F,Yes,No,,,,
 akron,Akron,Akron,Zips,Akron,OH,#041E42,#A89968,Yes,No,,,,
-alabama,Alabama,Alabama,Crimson Tide,Tuscaloosa,AL,#9E1B32,#FFFFFF,Yes,No,,,,
+alabama,Alabama,Alabama,Crimson Tide,Tuscaloosa,AL,#9E1B32,#FFFFFF,Yes,No,1912-1913,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-15 that Alabama has always been D1/top-level for site purposes; site history begins with program inception in 1912-13.
 alabama-a-m,Alabama A&M,Alabama A&M,Bulldogs,Huntsville,AL,#660000,#FFFFFF,Yes,No,,,,
 alabama-state,Alabama State,Alabama State,Hornets,Montgomery,AL,#C99700,#000000,Yes,No,,,,
 alcorn-state,Alcorn State,Alcorn State,Braves,Lorman,MS,#4B306A,#C38300,Yes,No,,,,
