@@ -83,8 +83,8 @@
       "state": "AL",
       "primary_hex": "#9E1B32",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 11,
+      "history_start_season": "1912-1913",
+      "conference_regular_season_championships": 10,
       "conference_tournament_championships": 9,
       "ncaa_tournament_appearances": 27,
       "final_four_appearances": 1,
@@ -92,7 +92,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 2024,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
