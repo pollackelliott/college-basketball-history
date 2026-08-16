@@ -63,3 +63,13 @@ Owner-approved project totals are **11 conference regular-season championships, 
 
 ## Venue/location normalization
 - MGM Grand Garden Arena uses the existing project canonical location `Paradise, NV`. Alabama's supplied 2025-26 source text says `Las Vegas, NV`; that wording remains preserved in source provenance/raw text. Site type was independently established as neutral and was not inferred from geography.
+
+## Owner-approved Team #11 reconciliation checkpoint (2026-08-16)
+
+- The complete historical review was owner-approved before this checkpoint.
+- Approved date, score, overtime, site, and identity curations are encoded in curated fields only; original `raw_text` remains preserved.
+- The 2024-03-15 SEC Tournament game vs. Florida is the separate 88-102 loss, not the 2024-03-05 road game; no FORCE_NEW override is used because the March 15 canonical game already exists.
+- Vanderbilt identity links use `MATCH_SOURCE_ASSERTION` where an existing Vanderbilt assertion identifies the same real game; the distinct 1939-01-21 game is explicitly `FORCE_NEW`.
+- Conservative location enrichment never infers H/A/N. It fills geography only after site type is independently known, using registered venue geography, Tuscaloosa for ordinary Alabama-home rows, or the opponent program city for ordinary opponent-home rows. Neutral rows require a registered venue; UNKNOWN-site rows remain untouched.
+- Location blank-pair count changed from 1694 to 848.
+- Fourteen reviewed historical facts remain intentionally unresolved for provenance: 11 score conflicts and 3 overtime conflicts.
