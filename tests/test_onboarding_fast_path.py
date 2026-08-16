@@ -14,6 +14,7 @@ import ingest_school  # noqa: E402
 import onboard_school  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     WorkflowError,
+    _record_reciprocal_discrepancies,
     approve_plan,
     apply_reconciliation_decisions,
     build_plan,
@@ -344,6 +345,50 @@ class RegressionAndSafetyTests(unittest.TestCase):
                 "a" * 64,
             )
         )
+
+
+class ReciprocalDiscrepancyLifecycleTests(unittest.TestCase):
+    def test_owner_canonical_change_records_losing_existing_assertion(self):
+        canonical = {
+            "canonical_game_id": "CBBG-1",
+            "team_a_key": "alpha",
+            "team_b_key": "beta",
+            "overtime_periods": "1",
+        }
+        assertions = [
+            {
+                "canonical_game_id": "CBBG-1",
+                "source_program_key": "alpha",
+                "source_game_id": "ALPHA-1",
+                "normalized_opponent_key": "beta",
+                "overtime_periods": "1",
+            },
+            {
+                "canonical_game_id": "CBBG-1",
+                "source_program_key": "beta",
+                "source_game_id": "BETA-1",
+                "normalized_opponent_key": "alpha",
+                "overtime_periods": "0",
+            },
+        ]
+        discrepancies = []
+
+        counts = _record_reciprocal_discrepancies(
+            "alpha",
+            {("CBBG-1", "overtime_periods"): "Owner selected alpha after cross-source review."},
+            {"CBBG-1": canonical},
+            assertions,
+            discrepancies,
+        )
+
+        self.assertEqual(counts["reciprocal_discrepancies_added"], 1)
+        self.assertEqual(len(discrepancies), 1)
+        row = discrepancies[0]
+        self.assertEqual(row["source_a_program_key"], "beta")
+        self.assertEqual(row["source_a_value"], "0")
+        self.assertEqual(row["canonical_value"], "1")
+        self.assertEqual(row["status"], "RESOLVED")
+        self.assertIn("Owner selected alpha", row["resolution_basis"])
 
 
 class GenericReconciliationTests(unittest.TestCase):
