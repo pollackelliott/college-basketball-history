@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import datetime as dt
 import json
 import re
 import subprocess
@@ -236,16 +237,32 @@ def identify_game(
             if scores_match(source, dated):
                 return CONFIDENT, dated["canonical_game_id"], "UNIQUE_PAIR_SEASON_DATE_SCORE"
 
-            # In historical back-to-back series, two official sources can shift a date by a day.
-            # If the exact-date candidate disagrees on score but exactly one other same-season
-            # candidate has the same score, the score-consistent pairing is stronger evidence of
-            # game identity. Preserve the date disagreement separately as a discrepancy.
-            if len(same_score) == 1 and same_score[0]["canonical_game_id"] != dated["canonical_game_id"]:
-                return (
-                    CONFIDENT,
-                    same_score[0]["canonical_game_id"],
-                    "UNIQUE_PAIR_SEASON_SCORE_OVERRIDES_CONFLICTING_EXACT_DATE",
-                )
+            # Historical official sources can shift dates by a day. Preserve that
+            # useful behavior, but never let a same-season score collision many
+            # days away override a real exact-date candidate.
+            if (
+                len(same_score) == 1
+                and same_score[0]["canonical_game_id"] != dated["canonical_game_id"]
+            ):
+                score_date = same_score[0].get("game_date", "").strip()
+                day_gap = None
+                if score_date:
+                    try:
+                        day_gap = abs(
+                            (
+                                dt.date.fromisoformat(src_date)
+                                - dt.date.fromisoformat(score_date)
+                            ).days
+                        )
+                    except ValueError:
+                        day_gap = None
+
+                if day_gap is not None and day_gap <= 1:
+                    return (
+                        CONFIDENT,
+                        same_score[0]["canonical_game_id"],
+                        "UNIQUE_PAIR_SEASON_SCORE_OVERRIDES_CONFLICTING_EXACT_DATE",
+                    )
 
             return CONFIDENT, dated["canonical_game_id"], "UNIQUE_PAIR_SEASON_DATE"
 
@@ -270,15 +287,28 @@ def identify_game(
                 "UNIQUE_PAIR_SEASON_SCORE_DATE_INCOMPLETE",
             )
 
-        # A unique same-season score match is strong enough to establish game
-        # identity even when two official sources disagree on the exact date.
-        # The date disagreement is preserved separately in reconciliation;
-        # it must not create a duplicate canonical game.
         if src_date != can_date:
+            try:
+                day_gap = abs(
+                    (
+                        dt.date.fromisoformat(src_date)
+                        - dt.date.fromisoformat(can_date)
+                    ).days
+                )
+            except ValueError:
+                day_gap = None
+
+            if day_gap is not None and day_gap <= 1:
+                return (
+                    CONFIDENT,
+                    candidate["canonical_game_id"],
+                    "UNIQUE_PAIR_SEASON_SCORE_DATE_CONFLICT",
+                )
+
             return (
-                CONFIDENT,
-                candidate["canonical_game_id"],
-                "UNIQUE_PAIR_SEASON_SCORE_DATE_CONFLICT",
+                REVIEW,
+                "",
+                "UNIQUE_PAIR_SEASON_SCORE_DATE_CONFLICT_REQUIRES_REVIEW",
             )
 
     if len(same_score) > 1:
@@ -581,6 +611,15 @@ def canonical_enrichment_candidates(
     - Venue must resolve through the curated school venue registry.
     - Game-level city/state evidence wins; venue metadata is only fallback.
     """
+    result: list[tuple[str, str]] = []
+
+    src_date = source.get("game_date", "").strip()
+    can_date = canonical.get("game_date", "").strip()
+    if src_date and not can_date:
+        result.append(("game_date", src_date))
+        if canonical.get("date_precision", "").strip() in {"", "SEASON"}:
+            result.append(("date_precision", "EXACT"))
+
     src_site, src_home_key = source_site_to_canonical(source)
     can_site = canonical.get("site_type", "").strip()
 
@@ -590,7 +629,7 @@ def canonical_enrichment_candidates(
         or can_site == "UNKNOWN"
         or src_site != can_site
     ):
-        return []
+        return result
 
     venue_name = source.get("curated_venue_name", "").strip()
     venue_metadata = (
@@ -600,8 +639,6 @@ def canonical_enrichment_candidates(
     )
 
     venue_key = venue_metadata.get("venue_key", "").strip()
-
-    result: list[tuple[str, str]] = []
 
     registry_fields: list[str] = []
 
@@ -1120,7 +1157,16 @@ def main() -> int:
                     if can.get("notes", "") == source_value:
                         continue
                 elif can.get(field_name, "").strip():
-                    continue
+                    safe_date_precision_upgrade = (
+                        field_name == "date_precision"
+                        and can.get("date_precision", "").strip() == "SEASON"
+                        and source_value == "EXACT"
+                        and source.get("game_date", "").strip()
+                        and can.get("game_date", "").strip()
+                        == source.get("game_date", "").strip()
+                    )
+                    if not safe_date_precision_upgrade:
+                        continue
 
                 can[field_name] = source_value
                 canonical_enrichments.append(

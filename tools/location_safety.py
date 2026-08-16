@@ -213,6 +213,41 @@ def parse_registry_fallback_markers(notes: str) -> list[dict[str, str]]:
     ]
 
 
+def retire_site_mismatched_registry_fallbacks(
+    notes: str,
+    canonical_site_type: str,
+) -> tuple[str, int]:
+    # Retire registry-fallback markers invalidated by a canonical H/A/N change.
+    #
+    # A registry fallback records the canonical site type that made the registry
+    # enrichment safe. If owner-approved reconciliation later selects a different
+    # canonical site type, that old marker can no longer support the new canonical
+    # row and must be removed rather than rewritten. Matching markers are retained,
+    # including any new marker created from the newly selected source.
+    site_type = (canonical_site_type or "").strip()
+    value = notes or ""
+    if not site_type or not value:
+        return value, 0
+
+    retired = 0
+    result = value
+    matches = list(_REGISTRY_FALLBACK_RE.finditer(value))
+    for match in reversed(matches):
+        if match.group(4).strip() == site_type:
+            continue
+
+        start, end = match.span()
+        if start > 0 and result[start - 1 : start] == " ":
+            start -= 1
+        elif end < len(result) and result[end : end + 1] == " ":
+            end += 1
+
+        result = result[:start] + result[end:]
+        retired += 1
+
+    return result.strip(), retired
+
+
 def venue_location_conflicts(
     registry_rows: list[tuple[str, dict[str, str]]],
 ) -> list[str]:

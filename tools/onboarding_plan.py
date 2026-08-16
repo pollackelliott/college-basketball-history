@@ -28,6 +28,7 @@ from location_safety import (
     assertion_drift,
     location_pair_status,
     registry_fallback_marker,
+    retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
 )
 from program_history import (
@@ -1406,6 +1407,96 @@ def _venue_maps(repo: Path, school_key: str) -> tuple[dict[str, dict[str, str]],
     return target_metadata, names_by_key
 
 
+def _record_reciprocal_discrepancies(
+    school_key: str,
+    changed_field_bases: dict[tuple[str, str], str],
+    canonical_by_id: dict[str, dict[str, str]],
+    assertion_rows: list[dict[str, str]],
+    discrepancy_rows: list[dict[str, str]],
+) -> dict[str, int]:
+    # Preserve idempotence for previously onboarded sources after an owner-approved
+    # canonical change. If an existing assertion now loses to the selected canonical
+    # fact, the discrepancy ledger must represent that reciprocal conflict.
+    counts = Counter()
+    existing: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in discrepancy_rows:
+        existing[
+            (
+                row.get("canonical_game_id", ""),
+                row.get("field_name", ""),
+                row.get("source_a_program_key", ""),
+            )
+        ].append(row)
+
+    next_number = ingest_school.next_discrepancy_number(discrepancy_rows)
+
+    for (game_id, field_name), resolution_basis in sorted(changed_field_bases.items()):
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"Cannot rebalance reciprocal discrepancies: canonical game {game_id} is missing"
+            )
+
+        for assertion in assertion_rows:
+            if assertion.get("canonical_game_id", "") != game_id:
+                continue
+            source_program = assertion.get("source_program_key", "").strip()
+            if not source_program or source_program == school_key:
+                continue
+
+            conflicts = {
+                candidate_field: (source_value, canonical_value)
+                for candidate_field, source_value, canonical_value
+                in ingest_school.discrepancy_candidates(assertion, canonical)
+            }
+            if field_name not in conflicts:
+                continue
+
+            source_value, canonical_value = conflicts[field_name]
+            key = (game_id, field_name, source_program)
+            matches = existing.get(key, [])
+            if len(matches) > 1:
+                raise WorkflowError(
+                    f"{game_id}/{field_name}/{source_program}: multiple reciprocal "
+                    "discrepancy rows exist"
+                )
+
+            if matches:
+                row = matches[0]
+                row["canonical_value"] = canonical_value
+                row["status"] = "RESOLVED"
+                row["resolution_basis"] = resolution_basis
+                row["notes"] = (
+                    "Reciprocal conflict resolved by the same sealed owner-approved "
+                    "canonical decision; the losing source assertion remains preserved."
+                )
+                counts["reciprocal_discrepancies_resolved"] += 1
+                continue
+
+            row = {
+                "discrepancy_id": f"DISC-{next_number:06d}",
+                "canonical_game_id": game_id,
+                "field_name": field_name,
+                "source_a_program_key": source_program,
+                "source_a_value": source_value,
+                "source_b_program_key": "",
+                "source_b_value": "",
+                "canonical_value": canonical_value,
+                "status": "RESOLVED",
+                "resolution_basis": resolution_basis,
+                "notes": (
+                    "Reciprocal conflict recorded after a sealed owner-approved canonical "
+                    "change; the losing source assertion remains preserved."
+                ),
+            }
+            discrepancy_rows.append(row)
+            existing[key].append(row)
+            next_number += 1
+            counts["reciprocal_discrepancies_added"] += 1
+
+    return dict(counts)
+
+
 def apply_reconciliation_decisions(
     repo: Path,
     approved: dict[str, Any],
@@ -1445,6 +1536,7 @@ def apply_reconciliation_decisions(
 
     target_venue_metadata, venue_names = _venue_maps(repo, school_key)
     counts = Counter()
+    changed_field_bases: dict[tuple[str, str], str] = {}
     for item in reconciliation_items:
         game_id = item["canonical_game_id"]
         field_name = item["field_name"]
@@ -1480,6 +1572,12 @@ def apply_reconciliation_decisions(
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
                 _sync_site_metadata_from_source(source, canonical, target_venue_metadata)
+                canonical["notes"], retired = retire_site_mismatched_registry_fallbacks(
+                    canonical.get("notes", ""),
+                    canonical.get("site_type", ""),
+                )
+                counts["registry_fallbacks_retired"] += retired
+            changed_field_bases[(game_id, field_name)] = item["resolution_basis"]
             counts["canonical_changes"] += 1
         elif decision == "NORMALIZE_SOURCE_TO_CANONICAL":
             final_value = current
@@ -1529,6 +1627,16 @@ def apply_reconciliation_decisions(
                 "the original discrepancy value remain preserved."
             )
         counts["processed"] += 1
+
+    counts.update(
+        _record_reciprocal_discrepancies(
+            school_key,
+            changed_field_bases,
+            canonical_by_id,
+            assertion_rows,
+            discrepancy_rows,
+        )
+    )
 
     write_csv_preserving_format(canonical_path, canonical_fields, canonical_rows)
     write_csv_preserving_format(assertions_path, assertion_fields, assertion_rows)

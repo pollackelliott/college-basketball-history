@@ -1,0 +1,4 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,alabama,1912-1913,1920-1921,independent,Independent,independent,False,Owner-supplied Alabama conference chronology,Independent through 1920-21.
+1,alabama,1921-1922,1931-1932,southern,Southern Conference,conference,False,Owner-supplied Alabama conference chronology; consistent with guide Southern Conference Tournament labeling,
+2,alabama,1932-1933,,sec,SEC,conference,True,Owner-supplied Alabama conference chronology; consistent with guide SEC labeling,Ongoing through curated cutoff 2025-26.
