@@ -28,6 +28,7 @@ from location_safety import (
     assertion_drift,
     location_pair_status,
     registry_fallback_marker,
+    retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
 )
 from program_history import (
@@ -1480,6 +1481,11 @@ def apply_reconciliation_decisions(
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
                 _sync_site_metadata_from_source(source, canonical, target_venue_metadata)
+                canonical["notes"], retired = retire_site_mismatched_registry_fallbacks(
+                    canonical.get("notes", ""),
+                    canonical.get("site_type", ""),
+                )
+                counts["registry_fallbacks_retired"] += retired
             counts["canonical_changes"] += 1
         elif decision == "NORMALIZE_SOURCE_TO_CANONICAL":
             final_value = current

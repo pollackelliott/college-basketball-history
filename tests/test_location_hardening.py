@@ -11,6 +11,8 @@ import ingest_school  # noqa: E402
 from location_safety import (  # noqa: E402
     assertion_drift,
     parse_registry_fallback_markers,
+    registry_fallback_marker,
+    retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
     venue_location_conflicts,
 )
@@ -212,6 +214,56 @@ class SynchronizationAndPublicationTests(unittest.TestCase):
             ]
         )
         self.assertEqual(len(conflicts), 1)
+
+
+class RegistryFallbackLifecycleTests(unittest.TestCase):
+    def test_site_change_retires_only_mismatched_fallback_marker(self):
+        stale = registry_fallback_marker(
+            "old-school",
+            "OLD-0001",
+            "old-arena",
+            "TEAM_B_HOME",
+            ["venue_key"],
+        )
+        current = registry_fallback_marker(
+            "new-school",
+            "NEW-0001",
+            "new-arena",
+            "TEAM_A_HOME",
+            ["venue_key"],
+        )
+        notes = f"Historical note. {stale} {current}"
+
+        cleaned, retired = retire_site_mismatched_registry_fallbacks(
+            notes,
+            "TEAM_A_HOME",
+        )
+
+        self.assertEqual(retired, 1)
+        self.assertTrue(cleaned.startswith("Historical note."))
+        markers = parse_registry_fallback_markers(cleaned)
+        self.assertEqual(len(markers), 1)
+        self.assertEqual(markers[0]["source_program_key"], "new-school")
+        self.assertEqual(markers[0]["source_game_id"], "NEW-0001")
+        self.assertEqual(markers[0]["site_type"], "TEAM_A_HOME")
+
+    def test_matching_fallback_marker_is_preserved(self):
+        marker = registry_fallback_marker(
+            "source-school",
+            "SRC-0001",
+            "example-arena",
+            "NEUTRAL",
+            ["venue_key", "site_city", "site_state"],
+        )
+        notes = f"Existing narrative. {marker}"
+
+        cleaned, retired = retire_site_mismatched_registry_fallbacks(
+            notes,
+            "NEUTRAL",
+        )
+
+        self.assertEqual(retired, 0)
+        self.assertEqual(cleaned, notes)
 
 
 if __name__ == "__main__":
