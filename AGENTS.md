@@ -12,7 +12,7 @@ staging commands, or piecemeal owner questions.
 4. Present every row in `.onboarding/<school_key>/review.md` as one batch.
 5. Every game-specific review item must show its date. If date is disputed, show
    the source date and canonical date separately; never collapse them into one date.
-6. Obtain one explicit owner decision and evidence basis for every pending row.
+6. Obtain one explicit owner decision and evidence basis for every pending row. Before presenting the batch, research each row and provide a recommended disposition; the owner may approve routine recommendations in bulk.
 7. Edit only the decision, basis, and optional patch columns in `review.csv`, then
    seal with `--approve` and apply only with the exact emitted plan hash.
 8. The apply must remain transactional and must pass validation, target no-op,
@@ -25,6 +25,13 @@ staging commands, or piecemeal owner questions.
 Historical uncertainty remains valid. Never infer game identity, inclusion, date,
 site, venue, opponent, or a controlling canonical fact merely to make the workflow
 pass. Preserve source `raw_text` and approved unresolved discrepancies.
+
+
+## Collaboration boundary
+
+* Routine extraction, normalization research, package construction, reconciliation analysis, testing, provenance maintenance, Git plumbing, validator failures, and deployment mechanics belong to the collaborator and should not create extra owner handoffs.
+* Return to the owner only when a new judgment is required about history scope, game identity or inclusion, opponent identity, home/away/neutral classification, venue/location truth, a controlling canonical historical fact, accomplishments, unresolved-conflict publication, or final preview approval.
+* A technical failure after owner approval must be diagnosed and repaired generically where possible; do not ask the owner to re-review unchanged historical decisions merely because the tooling implementation changed.
 
 ## Git safety
 

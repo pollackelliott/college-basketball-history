@@ -17,6 +17,12 @@ It also required school-specific reconciliation programs and repeated command
 handoffs. The permanent workflow instead creates one complete review packet before
 tracked global data changes and seals the owner's batch decision cryptographically.
 
+The collaborator owns routine source extraction, six-file assembly, normalization research,
+preflight investigation, technical debugging, validation, provenance maintenance, and
+release mechanics. The owner should normally be interrupted only twice: once for the
+consolidated historical/reconciliation decision batch and once for the exact preview.
+Technical gate failures do not reopen unchanged owner decisions.
+
 ## Phase 0 — package checkpoint
 
 In the Codespace:

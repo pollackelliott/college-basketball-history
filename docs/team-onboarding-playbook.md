@@ -122,7 +122,7 @@ an explicit curated/source venue identity, independently established H/A/N, and 
 complete registry city/state pair. It records a machine-checkable provenance
 marker; it never establishes or changes H/A/N.
 
-Public game types are limited to `regular season`, `conference tournament`, `NCAA tournament`, and `NIT` under the detailed runbook's canonical values.
+Public game types use `regular season`, `conference tournament`, `NCAA tournament`, `NIT`, and generic `postseason` under the detailed runbook's canonical values. Regular-season events and tournaments remain regular season; generic `postseason` is reserved for non-NCAA, non-NIT postseason events.
 
 ## 4. Compact package QA
 
