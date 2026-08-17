@@ -371,8 +371,8 @@
       "state": "AL",
       "primary_hex": "#0C2340",
       "secondary_hex": "#E87722",
-      "history_start_season": null,
-      "conference_regular_season_championships": 9,
+      "history_start_season": "1905-1906",
+      "conference_regular_season_championships": 6,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 14,
       "final_four_appearances": 2,
@@ -380,7 +380,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 2025,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
