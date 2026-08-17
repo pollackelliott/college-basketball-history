@@ -38,6 +38,16 @@ https://content.lib.auburn.edu/digital/collection/plainsman/id/148/
 
 Contemporaneous Auburn archival evidence used to resolve the later media guide's one-point Jan. 25, 1929 Florida transcription. The printed season schedule gives Florida 44, Auburn 34. The later media-guide `raw_text` remains preserved.
 
+### Tennessee Athletics — 1933-34 SEC Tournament location
+
+https://utsports.com/sports/mens-basketball/schedule/1933-34
+
+https://utsports.com/sports/mens-basketball/opponent-history/auburn-university/1
+
+https://utsports.com/news/2001/2/27/All_Time_Tennessee_Results_in_SEC_Tournament
+
+Used only to establish **Atlanta, GA** for Auburn's 43-26 loss to Tennessee in the 1934 SEC Tournament. Tennessee's official historical pages agree on Atlanta and the score but have displayed differing exact dates. Therefore this evidence fills only the missing city/state pair; Auburn's `raw_text`, source date assertion, and the already-approved date reconciliation remain unchanged.
+
 ## Source hierarchy and preservation
 
 1. Auburn media guide chronological/year-by-year ledger.

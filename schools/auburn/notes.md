@@ -75,6 +75,10 @@ The first Auburn reconciliation pass exposed a matcher-risk in the 1927-28 Flori
 
 These are source-package normalizations, not silent deletion of conflicting evidence. The later record-book wording remains preserved in each row's `raw_text` and the archival basis is recorded in `source-notes.md`.
 
+### 1934 SEC Tournament location provenance
+
+Auburn's 1933-34 Tennessee SEC Tournament row (`AUBRAW-00352`) is location-enriched to **Atlanta, GA** from Tennessee Athletics' official season, opponent-history, and SEC Tournament records. This is deliberately a **location-only** enrichment. Tennessee historical pages have displayed differing exact dates for the same 43-26 event, so this repair does not alter Auburn's preserved raw date assertion or the separately owner-approved date reconciliation.
+
 ## 7. Administrative results
 
 The 2016-17 guide header reflects NCAA-vacated wins (6-14), while the chronological ledger preserves the on-court 18-14 results. The 12 affected wins are retained with their played score/result and `administrative_status = VACATED_WIN`.
