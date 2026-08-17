@@ -14,7 +14,7 @@ arkansas,24,8,37,6,1,NATIONAL_CHAMPION,1994,OWNER_BASELINE_UNVERIFIED,Owner-supp
 arkansas-pine-bluff,0,1,1,0,0,ROUND_OF_64,2010,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 arkansas-state,5,1,1,0,0,ROUND_OF_64,1999,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 army,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-auburn,9,3,14,2,0,FINAL_FOUR,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+auburn,6,3,14,2,0,FINAL_FOUR,2025,VERIFIED,"Owner-approved Auburn accomplishment reference: 14 NCAA appearances, 2 Final Fours, 0 national titles, Best Finish Final Four, Best Finish Year 2025, 6 cross-conference regular-season titles, and 3 conference-tournament titles; documented in schools/auburn/notes.md and the Auburn media-guide source package.",MATCH,Verified through onboarding plan 56819c828d70.
 austin-peay,9,5,7,0,0,SWEET_SIXTEEN,1973,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 ball-state,7,7,7,0,0,SWEET_SIXTEEN,1990,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 baylor,7,0,17,3,1,NATIONAL_CHAMPION,2021,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
