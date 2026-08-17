@@ -211,6 +211,30 @@ def create_or_reuse_pr(
     return created
 
 
+
+def protected_merge_args(
+    pr_number: str,
+    owner: str,
+    branch: str,
+    display: str,
+    head_sha: str,
+) -> list[str]:
+    # Owner Gate 2 authorizes the protected-main admin bypass, but only for
+    # the exact visually approved PR head SHA.
+    return [
+        "pr",
+        "merge",
+        pr_number,
+        "--merge",
+        "--admin",
+        "--match-head-commit",
+        head_sha,
+        "--subject",
+        f"Merge pull request #{pr_number} from {owner}/{branch}",
+        "--body",
+        f"Ingest and publish {display} history",
+    ]
+
 def wait_for_deployment(
     repo: Path,
     repo_slug: str,
@@ -437,14 +461,13 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
     display = program_display_name(repo, school_key)
     gh(
         repo,
-        "pr",
-        "merge",
-        pr_number,
-        "--merge",
-        "--subject",
-        f"Merge pull request #{pr_number} from {repository_slug(repo).split('/')[0]}/{branch}",
-        "--body",
-        f"Ingest and publish {display} history",
+        *protected_merge_args(
+            pr_number,
+            repository_slug(repo).split("/")[0],
+            branch,
+            display,
+            head_sha,
+        ),
         echo=True,
     )
     merged_pr = gh_json(
