@@ -64,6 +64,17 @@ Raw source text remains preserved.
 - Augusta College is normalized to **Augusta University** from Auburn's all-time opponent table/series.
 - Fort Benning is grouped under **Camp Benning** from Auburn's opponent-series history.
 
+### Contemporary Auburn archival corrections discovered during preflight
+
+The first Auburn reconciliation pass exposed a matcher-risk in the 1927-28 Florida series. Contemporary Auburn student-newspaper schedules, preserved by Auburn University Libraries, are used to correct the later media-guide normalization while retaining the media-guide `raw_text`:
+
+- 1928-01-20 Tennessee: Auburn **63-14** (later guide prints Jan. 29).
+- 1928-02-18 Florida: Auburn **58-32** (later guide prints Feb. 21).
+- 1928-02-22 Florida: Auburn **38-29** (later guide prints 50-28).
+- 1929-01-25 at Florida: Auburn **34-44** (later guide prints 33-44).
+
+These are source-package normalizations, not silent deletion of conflicting evidence. The later record-book wording remains preserved in each row's `raw_text` and the archival basis is recorded in `source-notes.md`.
+
 ## 7. Administrative results
 
 The 2016-17 guide header reflects NCAA-vacated wins (6-14), while the chronological ledger preserves the on-court 18-14 results. The 12 affected wins are retained with their played score/result and `administrative_status = VACATED_WIN`.

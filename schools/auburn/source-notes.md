@@ -26,12 +26,25 @@ https://www.lib.auburn.edu/archive/find-aid/798/00000027.htm
 
 Used with owner approval to date Alumni Gymnasium's dedication to Feb. 22, 1916 and support its primary-home placement beginning in 1916-17.
 
+### Auburn University Libraries — The Plainsman, Feb. 24, 1928
+
+https://content.lib.auburn.edu/digital/collection/plainsman/id/263/
+
+Contemporaneous Auburn archival evidence used after the first onboarding preflight exposed a 1927-28 matcher-risk. The issue prints the 1928 basketball season schedule and reports the final Florida game. It establishes Jan. 20 vs Tennessee (Auburn 63-14), Feb. 18 vs Florida (Auburn 58-32), and Feb. 22 vs Florida (Auburn 38-29). The later media-guide `raw_text` remains preserved.
+
+### Auburn University Libraries — The Plainsman, Feb. 21, 1929
+
+https://content.lib.auburn.edu/digital/collection/plainsman/id/148/
+
+Contemporaneous Auburn archival evidence used to resolve the later media guide's one-point Jan. 25, 1929 Florida transcription. The printed season schedule gives Florida 44, Auburn 34. The later media-guide `raw_text` remains preserved.
+
 ## Source hierarchy and preservation
 
 1. Auburn media guide chronological/year-by-year ledger.
-2. Auburn dedicated series/postseason tables when they clearly resolve an internal media-guide typo or identity.
-3. Auburn official season schedule for the 1937-38 incomplete-ledger supplement and completed 2025-26 season.
-4. Opponent/other official evidence only for a genuine conflict when needed.
+2. Contemporaneous Auburn archival publications when they directly demonstrate a later Auburn record-book transcription error.
+3. Auburn dedicated series/postseason tables when they clearly resolve an internal media-guide typo or identity.
+4. Auburn official season schedule for the 1937-38 incomplete-ledger supplement and completed 2025-26 season.
+5. Opponent/other official evidence only for a genuine conflict when needed.
 
 When a source typo is curated, `raw_text` preserves the printed evidence and `notes` explains the correction.
 
