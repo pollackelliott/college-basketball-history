@@ -1,0 +1,4 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,auburn,1905-1906,1920-1921,siaa,Southern Intercollegiate Athletic Association,conference,False,Owner-approved Auburn conference chronology; Auburn historical material,Auburn treated as SIAA through 1920-21 for site conference membership.
+1,auburn,1921-1922,1931-1932,southern,Southern Conference,conference,False,Owner-approved Auburn conference chronology; Auburn Athletics states original Southern Conference member 1921-1932,
+2,auburn,1932-1933,,sec,SEC,conference,True,Owner-approved Auburn conference chronology; media guide SEC records,Ongoing through curated cutoff 2025-26.
