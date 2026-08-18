@@ -36,6 +36,7 @@ from program_history import (
     history_scope_errors,
     partition_source_rows,
 )
+from venue_reference import load_global_venue_reference
 
 
 WORKFLOW_VERSION = 1
@@ -617,8 +618,10 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         for row in programs
         if row.get("public_page_enabled") == "Yes"
     }
+    global_venues_by_id, _, _ = load_global_venue_reference(repo)
     venue_metadata = ingest_school.load_venue_metadata_map(
-        repo / "schools" / school_key / "venues.csv"
+        repo / "schools" / school_key / "venues.csv",
+        global_venues_by_id,
     )
 
     for source in sources:
@@ -1351,15 +1354,21 @@ def _sync_site_metadata_from_source(
     site = canonical.get("site_type", "")
     if site == "UNKNOWN":
         canonical["venue_key"] = ""
+        canonical["venue_id"] = ""
         canonical["site_city"] = ""
         canonical["site_state"] = ""
         return
     venue_name = source.get("curated_venue_name", "").strip().casefold()
     venue = venue_map.get(venue_name, {}) if venue_name else {}
     canonical["venue_key"] = venue.get("venue_key", "")
+    canonical["venue_id"] = venue.get("venue_id", "")
     registry_fields: list[str] = []
-    if canonical["venue_key"]:
-        registry_fields.append("venue_key")
+    if canonical["venue_key"] and canonical["venue_id"]:
+        registry_fields.extend(("venue_key", "venue_id"))
+    elif canonical["venue_key"] or canonical["venue_id"]:
+        raise WorkflowError(
+            "venue relationship resolved only one half of venue_key/venue_id"
+        )
     if location_pair_status(source.get("city", ""), source.get("state", "")) == "complete":
         canonical["site_city"] = source["city"].strip()
         canonical["site_state"] = source["state"].strip()
@@ -1394,8 +1403,10 @@ def _sync_site_metadata_to_source(
 
 
 def _venue_maps(repo: Path, school_key: str) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
+    global_venues_by_id, _, _ = load_global_venue_reference(repo)
     target_metadata = ingest_school.load_venue_metadata_map(
-        repo / "schools" / school_key / "venues.csv"
+        repo / "schools" / school_key / "venues.csv",
+        global_venues_by_id,
     )
     names_by_key: dict[str, str] = {}
     for path in sorted((repo / "schools").glob("*/venues.csv")):
@@ -1534,7 +1545,8 @@ def apply_reconciliation_decisions(
             )
         ].append(row)
 
-    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+    target_venue_metadata: dict[str, dict[str, str]] | None = None
+    venue_names: dict[str, str] | None = None
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
     for item in reconciliation_items:
@@ -1571,7 +1583,13 @@ def apply_reconciliation_decisions(
             final_value = item["source_value"]
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
-                _sync_site_metadata_from_source(source, canonical, target_venue_metadata)
+                if target_venue_metadata is None or venue_names is None:
+                    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                _sync_site_metadata_from_source(
+                    source,
+                    canonical,
+                    target_venue_metadata,
+                )
                 canonical["notes"], retired = retire_site_mismatched_registry_fallbacks(
                     canonical.get("notes", ""),
                     canonical.get("site_type", ""),
@@ -1583,7 +1601,13 @@ def apply_reconciliation_decisions(
             final_value = current
             set_source_field(source, canonical, field_name, final_value)
             if field_name == "site_type":
-                _sync_site_metadata_to_source(source, canonical, venue_names)
+                if target_venue_metadata is None or venue_names is None:
+                    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                _sync_site_metadata_to_source(
+                    source,
+                    canonical,
+                    venue_names,
+                )
             counts["source_normalizations"] += 1
         elif decision == "KEEP_CANONICAL":
             final_value = current

@@ -256,3 +256,25 @@ Conflicting source/event tournament wording is retained as team-level review met
 It does not override a resolved membership interval or create a game-level conference
 exception. Membership-history corrections require owner-reviewed changes to the
 program's `conferences.csv` timeline.
+
+## Global venue identity
+
+Physical venue identity is centralized in `data/reference/venues.csv`.
+
+- `venue_id` is the immutable physical primary key (`VEN-######`).
+- `display_name` is the project's stable public label and is independent from
+  current naming-rights/legal names.
+- `data/reference/venue-names.csv` stores historical, sponsor, source, spelling,
+  and alias names.
+- Different physical buildings may reuse the same textual name.
+
+Canonical games retain both `venue_key` and `venue_id`. `venue_id` is the
+authoritative physical identity; `venue_key` remains compatibility/provenance
+metadata.
+
+Each `schools/<program>/venues.csv` row is a program relationship/provenance row
+and must reference its global physical venue with `venue_id`.
+
+The public site resolves `venue_name` from the global project's `display_name`.
+Venue identity and geography never establish H/A/N; enrichment remains allowed
+only after site classification is independently established.

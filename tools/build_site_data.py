@@ -232,9 +232,10 @@ def perspective_game(
         "overtime_periods": int(row["overtime_periods"] or 0),
         "site": site,
         "venue_key": row["venue_key"] or None,
+        "venue_id": row.get("venue_id", "").strip() or None,
         "venue_name": (
-            venue_names.get(row["venue_key"].strip())
-            if row["venue_key"].strip()
+            venue_names.get(row.get("venue_id", "").strip())
+            if row.get("venue_id", "").strip()
             else None
         ),
         "site_city": public_city,
@@ -340,40 +341,26 @@ def load_opponent_names(
 
 
 def load_venue_names(repo_root: Path) -> dict[str, str]:
-    names_by_key: dict[str, set[str]] = defaultdict(set)
+    """Map permanent venue_id to project-stable display_name."""
+    path = repo_root / "data" / "reference" / "venues.csv"
+    rows = read_csv(path)
 
-    schools_dir = repo_root / "schools"
-    if schools_dir.exists():
-        for path in sorted(schools_dir.glob("*/venues.csv")):
-            for row in read_csv(path):
-                key = row.get("venue_key", "").strip()
-                name = row.get("canonical_name", "").strip()
-                if key and name:
-                    names_by_key[key].add(name)
+    result: dict[str, str] = {}
+    for line_number, row in enumerate(rows, start=2):
+        venue_id = row.get("venue_id", "").strip()
+        display_name = row.get("display_name", "").strip()
 
-    resolved_names: dict[str, str] = {}
-    true_conflicts: dict[str, list[str]] = {}
+        if not venue_id or not display_name:
+            raise ValueError(
+                f"data/reference/venues.csv line {line_number}: "
+                "venue_id and display_name are required."
+            )
+        if venue_id in result:
+            raise ValueError(f"Duplicate global venue_id: {venue_id}")
 
-    for key, names in names_by_key.items():
-        signatures = {normalized_name_signature(name) for name in names}
+        result[venue_id] = display_name
 
-        if len(signatures) == 1:
-            resolved_names[key] = preferred_display_name(names)
-        else:
-            true_conflicts[key] = sorted(names)
-
-    if true_conflicts:
-        sample = "; ".join(
-            f"{key}: {names}"
-            for key, names in list(sorted(true_conflicts.items()))[:10]
-        )
-        raise ValueError(
-            "Conflicting canonical venue display names found after "
-            "punctuation normalization. Resolve before publishing. "
-            + sample
-        )
-
-    return resolved_names
+    return result
 
 
 def main() -> int:
