@@ -125,6 +125,45 @@ def load_global_venue_reference(
     return venues_by_id, venues_by_key, name_ids
 
 
+def canonical_venue_geography_errors(
+    canonical_rows: list[dict[str, str]],
+    venues_by_id: dict[str, dict[str, str]],
+) -> list[str]:
+    # Require canonical city/state to agree with physical venue identity.
+    # This validates geography only; it never establishes or modifies H/A/N.
+    errors: list[str] = []
+
+    for row in canonical_rows:
+        venue_id = row.get("venue_id", "").strip()
+        if not venue_id:
+            continue
+
+        game_id = row.get("canonical_game_id", "").strip() or "[unknown game]"
+        venue = venues_by_id.get(venue_id)
+        if venue is None:
+            errors.append(
+                f"{game_id}: venue_id {venue_id!r} is absent from global venues.csv"
+            )
+            continue
+
+        actual = (
+            row.get("site_city", "").strip(),
+            row.get("site_state", "").strip(),
+        )
+        expected = (
+            venue.get("city", "").strip(),
+            venue.get("state", "").strip(),
+        )
+        if actual != expected:
+            errors.append(
+                f"{game_id}: canonical geography {actual[0]!r}, {actual[1]!r} "
+                f"does not match venue_id {venue_id} global geography "
+                f"{expected[0]!r}, {expected[1]!r}"
+            )
+
+    return errors
+
+
 def school_venue_reference_errors(
     venue_path: Path,
     rows: list[dict[str, str]],

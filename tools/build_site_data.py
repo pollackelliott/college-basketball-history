@@ -31,7 +31,10 @@ from conference_reference import (
 from location_safety import public_location_pair
 from ncaa_safety import canonical_ncaa_errors
 from program_history import scope_canonical_games, trim_conference_history
-from venue_reference import load_global_venue_reference
+from venue_reference import (
+    canonical_venue_geography_errors,
+    load_global_venue_reference,
+)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -405,6 +408,15 @@ def main() -> int:
     assertion_rows = read_csv(assertions_path)
 
     global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
+    venue_geo_errors = canonical_venue_geography_errors(
+        canonical_rows,
+        global_venues_by_id,
+    )
+    if venue_geo_errors:
+        raise ValueError(
+            "Global physical-venue geography safety gate failed:\n- "
+            + "\n- ".join(venue_geo_errors[:50])
+        )
     ncaa_errors = canonical_ncaa_errors(canonical_rows, global_venues_by_id)
     if ncaa_errors:
         raise ValueError(

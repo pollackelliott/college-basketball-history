@@ -43,6 +43,7 @@ from program_history import (
     valid_season_label,
 )
 from venue_reference import (
+    canonical_venue_geography_errors,
     load_global_venue_reference,
     school_venue_reference_errors,
 )
@@ -290,6 +291,13 @@ def main() -> int:
         errors,
     )
 
+    errors.extend(
+        "Global venue geography: " + problem
+        for problem in canonical_venue_geography_errors(
+            canonical_rows,
+            global_venues_by_id,
+        )
+    )
     errors.extend(
         "NCAA safety: " + problem
         for problem in canonical_ncaa_errors(

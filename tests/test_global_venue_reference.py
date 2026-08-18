@@ -80,6 +80,64 @@ class GlobalVenueReferenceTests(unittest.TestCase):
             )
         )
 
+    def test_all_canonical_venue_geography_matches_global_identity(self):
+        canonical = rows(ROOT / "data/canonical/games.csv")
+        self.assertEqual(
+            venue_reference.canonical_venue_geography_errors(
+                canonical,
+                self.venues_by_id,
+            ),
+            [],
+        )
+
+    def test_global_geography_mismatch_is_fatal(self):
+        fixture = {
+            "canonical_game_id": "FIXTURE-GEO",
+            "venue_id": "VEN-000048",
+            "site_city": "Birmingham",
+            "site_state": "AL",
+        }
+        problems = venue_reference.canonical_venue_geography_errors(
+            [fixture],
+            self.venues_by_id,
+        )
+        self.assertEqual(len(problems), 1)
+        self.assertIn("does not match", problems[0])
+
+    def test_five_locked_global_geography_corrections(self):
+        canonical = {
+            row["canonical_game_id"]: row
+            for row in rows(ROOT / "data/canonical/games.csv")
+        }
+        expected = {
+            "CBBG-0002744": ("hp-field-house", "VEN-000084", "Orlando", "FL"),
+            "CBBG-0002745": ("hp-field-house", "VEN-000084", "Orlando", "FL"),
+            "CBBG-0002746": ("hp-field-house", "VEN-000084", "Orlando", "FL"),
+            "CBBG-0029269": (
+                "coleman-coliseum",
+                "VEN-000048",
+                "Tuscaloosa",
+                "AL",
+            ),
+            "CBBG-0029681": (
+                "legacy-arena",
+                "VEN-000109",
+                "Birmingham",
+                "AL",
+            ),
+        }
+        for game_id, values in expected.items():
+            row = canonical[game_id]
+            self.assertEqual(
+                (
+                    row["venue_key"],
+                    row["venue_id"],
+                    row["site_city"],
+                    row["site_state"],
+                ),
+                values,
+            )
+
     def test_backfill_same_physical_id_different_legacy_keys_is_not_conflict(self):
         resolved = backfill_venue_keys.resolve_candidate_identity(
             {
