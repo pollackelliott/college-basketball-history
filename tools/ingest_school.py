@@ -47,7 +47,12 @@ from location_safety import (
     registry_fallback_marker,
     source_location_preflight,
 )
+from ncaa_safety import canonical_ncaa_errors
 from program_history import history_scope_errors, partition_source_rows
+from venue_reference import (
+    load_global_venue_reference,
+    school_venue_reference_errors,
+)
 
 
 CONFIDENT = "CONFIDENT_MATCH"
@@ -68,6 +73,7 @@ CANONICAL_FIELDS = [
     "site_type",
     "designated_home_team_key",
     "venue_key",
+    "venue_id",
     "site_city",
     "site_state",
     "game_type",
@@ -557,12 +563,15 @@ def load_venue_name_map(path: Path) -> dict[str, str]:
     return result
 
 
-def load_venue_metadata_map(path: Path) -> dict[str, dict[str, str]]:
+def load_venue_metadata_map(
+    path: Path,
+    global_venues_by_id: dict[str, dict[str, str]],
+) -> dict[str, dict[str, str]]:
     """
-    Map canonical venue names and aliases to venue metadata.
+    Map school venue vocabulary to permanent global physical identity.
 
-    Venue metadata may enrich venue/location only after site classification
-    has been independently established. It never establishes site_type.
+    School venues.csv owns relationship/provenance; the global registry owns
+    venue_id and project geography. Venue metadata never establishes site_type.
     """
     if not path.exists():
         return {}
@@ -573,25 +582,45 @@ def load_venue_metadata_map(path: Path) -> dict[str, dict[str, str]]:
     for row in rows:
         name = row.get("canonical_name", "").strip()
         key = row.get("venue_key", "").strip()
+        venue_id = row.get("venue_id", "").strip()
 
         if not key:
             continue
+        if not venue_id:
+            raise ValueError(f"{path}: venue_key {key!r} is missing venue_id")
+
+        global_venue = global_venues_by_id.get(venue_id)
+        if global_venue is None:
+            raise ValueError(
+                f"{path}: venue_id {venue_id!r} is absent from global venues.csv"
+            )
 
         metadata = {
             "venue_key": key,
-            "city": row.get("city", "").strip(),
-            "state": row.get("state", "").strip(),
+            "venue_id": venue_id,
+            "city": global_venue.get("city", "").strip(),
+            "state": global_venue.get("state", "").strip(),
         }
 
+        def register(source_name: str) -> None:
+            folded = source_name.casefold()
+            existing = result.get(folded)
+            if existing and existing.get("venue_id") != venue_id:
+                raise ValueError(
+                    f"{path}: venue name/alias {source_name!r} maps to multiple "
+                    "physical venue IDs; explicit date-aware research is required"
+                )
+            result[folded] = metadata
+
         if name:
-            result[name.casefold()] = metadata
+            register(name)
 
         aliases = row.get("aliases", "").strip()
         if aliases:
             for alias in aliases.split(";"):
                 alias = alias.strip()
                 if alias:
-                    result[alias.casefold()] = metadata
+                    register(alias)
 
     return result
 
@@ -639,15 +668,19 @@ def canonical_enrichment_candidates(
     )
 
     venue_key = venue_metadata.get("venue_key", "").strip()
+    venue_id = venue_metadata.get("venue_id", "").strip()
 
     registry_fields: list[str] = []
 
     if (
         not canonical.get("venue_key", "").strip()
+        and not canonical.get("venue_id", "").strip()
         and venue_key
+        and venue_id
     ):
         result.append(("venue_key", venue_key))
-        registry_fields.append("venue_key")
+        result.append(("venue_id", venue_id))
+        registry_fields.extend(("venue_key", "venue_id"))
 
     source_city = source.get("city", "").strip()
     source_state = source.get("state", "").strip()
@@ -672,8 +705,10 @@ def canonical_enrichment_candidates(
     result.extend(location_fills)
 
     used_registry_fields = [
-        field for field in registry_fields
-        if field == "venue_key" or any(name == field for name, _ in location_fills)
+        field
+        for field in registry_fields
+        if field in {"venue_key", "venue_id"}
+        or any(name == field for name, _ in location_fills)
     ]
     if used_registry_fields:
         marker = registry_fallback_marker(
@@ -719,6 +754,7 @@ def build_new_canonical(
         if venue_name
         else {}
     )
+    venue_id = venue_metadata.get("venue_id", "").strip()
 
     # Explicit game-level location wins. Partial normalized geography is
     # never published. Registry location fallback requires an independently
@@ -742,10 +778,14 @@ def build_new_canonical(
     else:
         site_city = site_state = ""
 
-    if venue_key and site_type != "UNKNOWN":
-        registry_fields.append("venue_key")
+    if venue_key and venue_id and site_type != "UNKNOWN":
+        registry_fields.extend(("venue_key", "venue_id"))
     elif site_type == "UNKNOWN":
         venue_key = ""
+        venue_id = ""
+    elif bool(venue_key) != bool(venue_id):
+        venue_key = ""
+        venue_id = ""
 
     notes = ""
     if registry_fields:
@@ -771,6 +811,7 @@ def build_new_canonical(
         "site_type": site_type,
         "designated_home_team_key": home_key,
         "venue_key": venue_key,
+        "venue_id": venue_id,
         "site_city": site_city,
         "site_state": site_state,
         "game_type": source.get("curated_game_type", "") or "REGULAR_SEASON",
@@ -831,8 +872,16 @@ def main() -> int:
         venue_rows = read_csv(venue_path)
         conference_history = read_csv(conference_history_path)
         conference_registry_rows = read_csv(conference_registry_path)
+        (
+            global_venues_by_id,
+            global_venues_by_key,
+            global_venue_name_ids,
+        ) = load_global_venue_reference(repo_root)
         venue_name_map = load_venue_name_map(venue_path)
-        venue_metadata_map = load_venue_metadata_map(venue_path)
+        venue_metadata_map = load_venue_metadata_map(
+            venue_path,
+            global_venues_by_id,
+        )
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
         discrepancies = read_csv(discrepancies_path)
@@ -894,6 +943,16 @@ def main() -> int:
             expected_program_key=args.school_key,
         )
     )
+    preflight_errors.extend(
+        f"venues.csv {problem}"
+        for problem in school_venue_reference_errors(
+            venue_path,
+            venue_rows,
+            global_venues_by_id,
+            global_venue_name_ids,
+        )
+    )
+
     for line_number, venue in enumerate(venue_rows, start=2):
         if location_pair_status(
             venue.get("city", ""), venue.get("state", "")
@@ -1173,6 +1232,19 @@ def main() -> int:
                     (game_id, field_name, source_value)
                 )
                 canonical_enrichment_game_ids.add(game_id)
+
+    planned_ncaa_errors = canonical_ncaa_errors(
+        canonical + new_canonical,
+        global_venues_by_id,
+    )
+    if planned_ncaa_errors:
+        print("FAIL: planned ingestion would violate permanent NCAA safety:")
+        for problem in planned_ncaa_errors[:50]:
+            print(f"  - {problem}")
+        if len(planned_ncaa_errors) > 50:
+            print(f"  ... {len(planned_ncaa_errors) - 50} more")
+        print("No files were written.")
+        return 1
 
     print(
         f"Canonical enrichments:       "

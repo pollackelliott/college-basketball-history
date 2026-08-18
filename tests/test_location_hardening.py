@@ -79,6 +79,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         canonical = {
             "site_type": "NEUTRAL",
             "venue_key": "",
+            "venue_id": "",
             "site_city": "",
             "site_state": "",
             "notes": "",
@@ -86,6 +87,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         metadata = {
             "example arena": {
                 "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
                 "city": "Exampleville",
                 "state": "EX",
             }
@@ -96,6 +98,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
             )
         )
         self.assertEqual(changes["venue_key"], "example-arena")
+        self.assertEqual(changes["venue_id"], "VEN-EXAMPLE")
         self.assertEqual(changes["site_city"], "Exampleville")
         self.assertEqual(changes["site_state"], "EX")
         self.assertNotIn("site_type", changes)
@@ -111,6 +114,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         canonical = {
             "site_type": "UNKNOWN",
             "venue_key": "",
+            "venue_id": "",
             "site_city": "",
             "site_state": "",
             "notes": "",
@@ -118,6 +122,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         metadata = {
             "example arena": {
                 "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
                 "city": "Exampleville",
                 "state": "EX",
             }
@@ -134,6 +139,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         canonical = {
             "site_type": "NEUTRAL",
             "venue_key": "",
+            "venue_id": "",
             "site_city": "",
             "site_state": "",
             "notes": "",
@@ -141,6 +147,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         metadata = {
             "example arena": {
                 "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
                 "city": "Exampleville",
                 "state": "EX",
             }
@@ -188,6 +195,7 @@ class SynchronizationAndPublicationTests(unittest.TestCase):
             "site_type": "NEUTRAL",
             "designated_home_team_key": "",
             "venue_key": "example-arena",
+            "venue_id": "VEN-EXAMPLE",
             "site_city": "Exampleville",
             "site_state": "",
             "game_type": "REGULAR_SEASON",
@@ -199,7 +207,7 @@ class SynchronizationAndPublicationTests(unittest.TestCase):
             row,
             "new-school",
             {"opponent": "Opponent"},
-            {"example-arena": "Example Arena"},
+            {"VEN-EXAMPLE": "Example Arena"},
             {},
         )
         self.assertIsNone(game["site_city"])

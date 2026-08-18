@@ -32,6 +32,7 @@ from location_safety import (
     source_site_agrees_with_canonical,
     venue_location_conflicts,
 )
+from ncaa_safety import canonical_ncaa_errors, ncaa_evidence_errors
 from program_history import (
     CANONICAL_CROSSCHECK_STATUSES,
     HISTORY_SCOPE_BASES,
@@ -40,6 +41,11 @@ from program_history import (
     accomplishment_row_issues,
     history_scope_errors,
     valid_season_label,
+)
+from venue_reference import (
+    canonical_venue_geography_errors,
+    load_global_venue_reference,
+    school_venue_reference_errors,
 )
 
 
@@ -96,6 +102,7 @@ REQUIRED_CANONICAL_COLUMNS = {
     "site_type",
     "designated_home_team_key",
     "venue_key",
+    "venue_id",
     "site_city",
     "site_state",
     "game_type",
@@ -252,8 +259,13 @@ def main() -> int:
         )
         membership_columns, membership_rows = read_csv(conference_membership_path)
         conference_columns, conference_rows = read_csv(conferences_path)
-    except FileNotFoundError as exc:
-        print(f"FAIL: required file not found: {exc}")
+        (
+            global_venues_by_id,
+            global_venues_by_key,
+            global_venue_name_ids,
+        ) = load_global_venue_reference(repo_root)
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"FAIL: required reference input is invalid: {exc}")
         return 1
 
     require_columns(canonical_path, canonical_columns, REQUIRED_CANONICAL_COLUMNS, errors)
@@ -277,6 +289,29 @@ def main() -> int:
         conference_columns,
         REQUIRED_REGISTRY_COLUMNS,
         errors,
+    )
+
+    errors.extend(
+        "Global venue geography: " + problem
+        for problem in canonical_venue_geography_errors(
+            canonical_rows,
+            global_venues_by_id,
+        )
+    )
+    errors.extend(
+        "NCAA safety: " + problem
+        for problem in canonical_ncaa_errors(
+            canonical_rows,
+            global_venues_by_id,
+        )
+    )
+    errors.extend(
+        "NCAA site evidence: " + problem
+        for problem in ncaa_evidence_errors(
+            repo_root,
+            canonical_rows,
+            global_venues_by_id,
+        )
     )
 
     conference_keys = [row.get("conference_key", "").strip() for row in conference_rows]
@@ -344,6 +379,16 @@ def main() -> int:
         site_type = row.get("site_type", "")
         if site_type not in ALLOWED_SITE_TYPES:
             errors.append(f"{game_id}: invalid site_type {site_type!r}.")
+
+        venue_key = row.get("venue_key", "").strip()
+        venue_id = row.get("venue_id", "").strip()
+        if bool(venue_key) != bool(venue_id):
+            errors.append(
+                f"{game_id}: venue_key and venue_id must either both be populated "
+                "or both blank."
+            )
+        if venue_id and venue_id not in global_venues_by_id:
+            errors.append(f"{game_id}: unknown venue_id {venue_id!r}.")
 
         game_type = row.get("game_type", "")
         if game_type not in ALLOWED_GAME_TYPES:
@@ -769,8 +814,21 @@ def main() -> int:
     ] = defaultdict(dict)
     if schools_root.exists():
         for venue_path in sorted(schools_root.glob("*/venues.csv")):
-            _, venue_rows = read_csv(venue_path)
+            venue_columns, venue_rows = read_csv(venue_path)
             program = venue_path.parent.name
+            if "venue_id" not in venue_columns:
+                errors.append(
+                    f"{venue_path.relative_to(repo_root)}: venue_id column is required."
+                )
+            errors.extend(
+                f"{venue_path.relative_to(repo_root)}: {problem}"
+                for problem in school_venue_reference_errors(
+                    venue_path,
+                    venue_rows,
+                    global_venues_by_id,
+                    global_venue_name_ids,
+                )
+            )
             for line_number, row in enumerate(venue_rows, start=2):
                 registry_rows.append((str(venue_path.relative_to(repo_root)), row))
                 key = row.get("venue_key", "").strip()
@@ -849,7 +907,7 @@ def main() -> int:
                     f"{game_id}: registry fallback marker site_type "
                     f"{marker['site_type']!r} does not match canonical site_type."
                 )
-            allowed_fields = {"venue_key", "site_city", "site_state"}
+            allowed_fields = {"venue_key", "venue_id", "site_city", "site_state"}
             fields = set(marker["fields"].split(","))
             if not fields or not fields <= allowed_fields:
                 errors.append(
@@ -865,6 +923,23 @@ def main() -> int:
                     f"{game_id}: registry-derived canonical venue_key no longer "
                     "matches its provenance marker."
                 )
+            if "venue_id" in fields:
+                registry_entries = registry_rows_by_program_key.get(
+                    (marker["source_program_key"], marker["venue_key"]), []
+                )
+                registry_ids = {
+                    entry.get("venue_id", "").strip()
+                    for entry in registry_entries
+                    if entry.get("venue_id", "").strip()
+                }
+                if (
+                    len(registry_ids) != 1
+                    or row.get("venue_id", "").strip() not in registry_ids
+                ):
+                    errors.append(
+                        f"{game_id}: registry-derived canonical venue_id is not "
+                        "traceable to one matching school venue row."
+                    )
             if fields & {"site_city", "site_state"}:
                 registry_entries = registry_rows_by_program_key.get(
                     (marker["source_program_key"], marker["venue_key"]), []
@@ -899,6 +974,7 @@ def main() -> int:
     print(f"Reference programs:   {len(program_rows):,}")
     print(f"Accomplishment rows:  {len(accomplishment_rows):,}")
     print(f"Conference rows:      {len(membership_rows):,}")
+    print(f"Reference venues:     {len(global_venues_by_id):,}")
     print()
 
     if warnings:

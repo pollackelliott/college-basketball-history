@@ -29,7 +29,12 @@ from conference_reference import (
     resolved_history_key,
 )
 from location_safety import public_location_pair
+from ncaa_safety import canonical_ncaa_errors
 from program_history import scope_canonical_games, trim_conference_history
+from venue_reference import (
+    canonical_venue_geography_errors,
+    load_global_venue_reference,
+)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -232,9 +237,10 @@ def perspective_game(
         "overtime_periods": int(row["overtime_periods"] or 0),
         "site": site,
         "venue_key": row["venue_key"] or None,
+        "venue_id": row.get("venue_id", "").strip() or None,
         "venue_name": (
-            venue_names.get(row["venue_key"].strip())
-            if row["venue_key"].strip()
+            venue_names.get(row.get("venue_id", "").strip())
+            if row.get("venue_id", "").strip()
             else None
         ),
         "site_city": public_city,
@@ -340,40 +346,26 @@ def load_opponent_names(
 
 
 def load_venue_names(repo_root: Path) -> dict[str, str]:
-    names_by_key: dict[str, set[str]] = defaultdict(set)
+    """Map permanent venue_id to project-stable display_name."""
+    path = repo_root / "data" / "reference" / "venues.csv"
+    rows = read_csv(path)
 
-    schools_dir = repo_root / "schools"
-    if schools_dir.exists():
-        for path in sorted(schools_dir.glob("*/venues.csv")):
-            for row in read_csv(path):
-                key = row.get("venue_key", "").strip()
-                name = row.get("canonical_name", "").strip()
-                if key and name:
-                    names_by_key[key].add(name)
+    result: dict[str, str] = {}
+    for line_number, row in enumerate(rows, start=2):
+        venue_id = row.get("venue_id", "").strip()
+        display_name = row.get("display_name", "").strip()
 
-    resolved_names: dict[str, str] = {}
-    true_conflicts: dict[str, list[str]] = {}
+        if not venue_id or not display_name:
+            raise ValueError(
+                f"data/reference/venues.csv line {line_number}: "
+                "venue_id and display_name are required."
+            )
+        if venue_id in result:
+            raise ValueError(f"Duplicate global venue_id: {venue_id}")
 
-    for key, names in names_by_key.items():
-        signatures = {normalized_name_signature(name) for name in names}
+        result[venue_id] = display_name
 
-        if len(signatures) == 1:
-            resolved_names[key] = preferred_display_name(names)
-        else:
-            true_conflicts[key] = sorted(names)
-
-    if true_conflicts:
-        sample = "; ".join(
-            f"{key}: {names}"
-            for key, names in list(sorted(true_conflicts.items()))[:10]
-        )
-        raise ValueError(
-            "Conflicting canonical venue display names found after "
-            "punctuation normalization. Resolve before publishing. "
-            + sample
-        )
-
-    return resolved_names
+    return result
 
 
 def main() -> int:
@@ -414,6 +406,23 @@ def main() -> int:
     conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
     assertion_rows = read_csv(assertions_path)
+
+    global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
+    venue_geo_errors = canonical_venue_geography_errors(
+        canonical_rows,
+        global_venues_by_id,
+    )
+    if venue_geo_errors:
+        raise ValueError(
+            "Global physical-venue geography safety gate failed:\n- "
+            + "\n- ".join(venue_geo_errors[:50])
+        )
+    ncaa_errors = canonical_ncaa_errors(canonical_rows, global_venues_by_id)
+    if ncaa_errors:
+        raise ValueError(
+            "NCAA Tournament publication safety gate failed:\n- "
+            + "\n- ".join(ncaa_errors[:50])
+        )
 
     programs = {row["program_key"]: row for row in program_rows}
     if len(programs) != len(program_rows):

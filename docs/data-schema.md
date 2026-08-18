@@ -256,3 +256,48 @@ Conflicting source/event tournament wording is retained as team-level review met
 It does not override a resolved membership interval or create a game-level conference
 exception. Membership-history corrections require owner-reviewed changes to the
 program's `conferences.csv` timeline.
+
+## Global venue identity
+
+Physical venue identity is centralized in `data/reference/venues.csv`.
+
+- `venue_id` is the immutable physical primary key (`VEN-######`).
+- `display_name` is the project's stable public label and is independent from
+  current naming-rights/legal names.
+- `data/reference/venue-names.csv` stores historical, sponsor, source, spelling,
+  and alias names.
+- Different physical buildings may reuse the same textual name.
+
+Canonical games retain both `venue_key` and `venue_id`. `venue_id` is the
+authoritative physical identity; `venue_key` remains compatibility/provenance
+metadata.
+
+Each `schools/<program>/venues.csv` row is a program relationship/provenance row
+and must reference its global physical venue with `venue_id`.
+
+The public site resolves `venue_name` from the global project's `display_name`.
+Venue identity and geography never establish H/A/N; enrichment remains allowed
+only after site classification is independently established.
+
+## NCAA Tournament site safety
+
+NCAA Tournament games are subject to permanent publication and ingestion gates:
+
+- `venue_key`, `venue_id`, `site_city`, and `site_state` must all be populated.
+- `venue_id` must resolve to the global physical venue registry, and NCAA game
+  city/state must agree with that registry.
+- `R64` is invalid before season `1978-1979`.
+- `data/evidence/ncaa-tournament-sites.csv` is a committed owner-resolved NCAA
+  archival evidence layer. Its canonical IDs are unique, its source authority
+  is NCAA, its source-document provenance is required, and its site values must
+  continue to match canonical/global venue data.
+- `tools/build_site_data.py` refuses to publish an invalid NCAA row even when
+  invoked independently.
+- ingestion evaluates the post-match/post-safe-enrichment canonical state before
+  writing; a new NCAA game with unresolved site metadata cannot be applied.
+- onboarding preflight evaluates confidently matched and new-game NCAA outcomes
+  before Owner Gate 1. Review-required identity choices remain owner-gated, and
+  any later `FORCE_NEW` outcome is still protected by the ingestion pre-write
+  gate.
+
+These rules do not infer HOME/AWAY/NEUTRAL from venue or geography.

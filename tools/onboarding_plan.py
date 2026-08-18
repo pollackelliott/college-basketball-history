@@ -31,11 +31,13 @@ from location_safety import (
     retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
 )
+from ncaa_safety import canonical_ncaa_errors
 from program_history import (
     derive_ncaa_accomplishments,
     history_scope_errors,
     partition_source_rows,
 )
+from venue_reference import load_global_venue_reference
 
 
 WORKFLOW_VERSION = 1
@@ -182,6 +184,7 @@ def plan_input_paths(repo: Path, school_key: str) -> list[Path]:
             repo / "tools/conference_reference.py",
             repo / "tools/ingest_school.py",
             repo / "tools/location_safety.py",
+            repo / "tools/ncaa_safety.py",
             repo / "tools/onboard_school.py",
             repo / "tools/onboarding_plan.py",
             repo / "tools/program_history.py",
@@ -519,6 +522,46 @@ def _accomplishment_conflicts(
     return derived, conflicts
 
 
+def _planned_ncaa_safety_errors(
+    source: dict[str, str],
+    status: str,
+    game_id: str,
+    canonical_by_id: dict[str, dict[str, str]],
+    venue_name_map: dict[str, str],
+    venue_metadata: dict[str, dict[str, str]],
+    global_venues_by_id: dict[str, dict[str, str]],
+) -> list[str]:
+    # Evaluate the NCAA state that would exist after safe ingestion.
+    # REVIEW identities stay owner-gated; any later FORCE_NEW outcome is
+    # independently protected by ingestion's pre-write NCAA gate.
+    if status == ingest_school.REVIEW:
+        return []
+
+    if status == ingest_school.CONFIDENT:
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            return [f"{game_id or '[unknown]'}: matched canonical game is missing"]
+        candidate = dict(canonical)
+        for field_name, value in ingest_school.canonical_enrichment_candidates(
+            source,
+            candidate,
+            venue_metadata,
+        ):
+            candidate[field_name] = value
+    elif status == ingest_school.NEW_GAME:
+        source_id = source.get("source_game_id", "").strip() or "UNKNOWN"
+        candidate = ingest_school.build_new_canonical(
+            source,
+            f"PREFLIGHT-NCAA-{source_id}",
+            venue_name_map,
+            venue_metadata,
+        )
+    else:
+        return []
+
+    return canonical_ncaa_errors([candidate], global_venues_by_id)
+
+
 def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     repo = repo.resolve()
     package = validate_package(repo, school_key)
@@ -617,8 +660,10 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         for row in programs
         if row.get("public_page_enabled") == "Yes"
     }
+    global_venues_by_id, _, _ = load_global_venue_reference(repo)
     venue_metadata = ingest_school.load_venue_metadata_map(
-        repo / "schools" / school_key / "venues.csv"
+        repo / "schools" / school_key / "venues.csv",
+        global_venues_by_id,
     )
 
     for source in sources:
@@ -649,6 +694,20 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             )
             status, game_id, method = override or ingest_school.identify_game(source, candidates)
         identity_counts[status] += 1
+
+        for problem in _planned_ncaa_safety_errors(
+            source,
+            status,
+            game_id,
+            canonical_by_id,
+            venue_name_map,
+            venue_metadata,
+            global_venues_by_id,
+        ):
+            blockers.append(
+                f"{source.get('source_game_id', '')}: NCAA safety before owner review: "
+                + problem
+            )
 
         if status == ingest_school.REVIEW:
             if method == "SOURCE_ASSERTION_LINKS_MULTIPLE_CANONICAL_GAMES":
@@ -1351,15 +1410,21 @@ def _sync_site_metadata_from_source(
     site = canonical.get("site_type", "")
     if site == "UNKNOWN":
         canonical["venue_key"] = ""
+        canonical["venue_id"] = ""
         canonical["site_city"] = ""
         canonical["site_state"] = ""
         return
     venue_name = source.get("curated_venue_name", "").strip().casefold()
     venue = venue_map.get(venue_name, {}) if venue_name else {}
     canonical["venue_key"] = venue.get("venue_key", "")
+    canonical["venue_id"] = venue.get("venue_id", "")
     registry_fields: list[str] = []
-    if canonical["venue_key"]:
-        registry_fields.append("venue_key")
+    if canonical["venue_key"] and canonical["venue_id"]:
+        registry_fields.extend(("venue_key", "venue_id"))
+    elif canonical["venue_key"] or canonical["venue_id"]:
+        raise WorkflowError(
+            "venue relationship resolved only one half of venue_key/venue_id"
+        )
     if location_pair_status(source.get("city", ""), source.get("state", "")) == "complete":
         canonical["site_city"] = source["city"].strip()
         canonical["site_state"] = source["state"].strip()
@@ -1394,8 +1459,10 @@ def _sync_site_metadata_to_source(
 
 
 def _venue_maps(repo: Path, school_key: str) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
+    global_venues_by_id, _, _ = load_global_venue_reference(repo)
     target_metadata = ingest_school.load_venue_metadata_map(
-        repo / "schools" / school_key / "venues.csv"
+        repo / "schools" / school_key / "venues.csv",
+        global_venues_by_id,
     )
     names_by_key: dict[str, str] = {}
     for path in sorted((repo / "schools").glob("*/venues.csv")):
@@ -1534,7 +1601,8 @@ def apply_reconciliation_decisions(
             )
         ].append(row)
 
-    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+    target_venue_metadata: dict[str, dict[str, str]] | None = None
+    venue_names: dict[str, str] | None = None
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
     for item in reconciliation_items:
@@ -1571,7 +1639,13 @@ def apply_reconciliation_decisions(
             final_value = item["source_value"]
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
-                _sync_site_metadata_from_source(source, canonical, target_venue_metadata)
+                if target_venue_metadata is None or venue_names is None:
+                    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                _sync_site_metadata_from_source(
+                    source,
+                    canonical,
+                    target_venue_metadata,
+                )
                 canonical["notes"], retired = retire_site_mismatched_registry_fallbacks(
                     canonical.get("notes", ""),
                     canonical.get("site_type", ""),
@@ -1583,7 +1657,13 @@ def apply_reconciliation_decisions(
             final_value = current
             set_source_field(source, canonical, field_name, final_value)
             if field_name == "site_type":
-                _sync_site_metadata_to_source(source, canonical, venue_names)
+                if target_venue_metadata is None or venue_names is None:
+                    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                _sync_site_metadata_to_source(
+                    source,
+                    canonical,
+                    venue_names,
+                )
             counts["source_normalizations"] += 1
         elif decision == "KEEP_CANONICAL":
             final_value = current

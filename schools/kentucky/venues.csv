@@ -1,18 +1,18 @@
-source_program_key,venue_key,canonical_name,aliases,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
-kentucky,alumni-gym-kentucky,Alumni Gym,,Lexington,KY,arena,1924-12-13,1950,exact_start/year,338,1924-12-13,1950-02-25,primary_home,1924-12-13,1950-1951,exact/season,,Curated Kentucky game history.,"First game Dec. 13, 1924."
-kentucky,bridgestone-arena,Bridgestone Arena,,Nashville,TN,arena,,,,4,2025-12-05,2026-03-13,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,bud-walton-arena,Bud Walton Arena,,Fayetteville,AR,arena,,,,1,2026-01-31,2026-01-31,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,coleman-coliseum,Coleman Coliseum,,Tuscaloosa,AL,arena,,,,1,2026-01-03,2026-01-03,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,colonial-life-arena,Colonial Life Arena,,Columbia,SC,arena,,,,1,2026-02-24,2026-02-24,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,enterprise-center,Enterprise Center,,St. Louis,MO,arena,,,,2,2026-03-20,2026-03-22,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,kfc-yum-center,KFC Yum! Center,,Louisville,KY,arena,,,,1,2025-11-11,2025-11-11,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,madison-square-garden,Madison Square Garden,,New York,NY,arena,,,,1,2025-11-18,2025-11-18,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,memorial-coliseum-kentucky,Memorial Coliseum,,Lexington,KY,arena,1950,,season/year,348,1950-12-01,2009-03-17,primary_home,1950-1951,1975-1976,season,,Curated Kentucky game history.,Primary home 1950-51 through 1975-76; also hosted Kentucky 2009 NIT opener.
-kentucky,memorial-gymnasium,Memorial Gymnasium,,Nashville,TN,arena,,,,1,2026-01-27,2026-01-27,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,neville-arena,Neville Arena,Auburn Arena,Auburn,AL,arena,,,,1,2026-02-21,2026-02-21,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,oconnell-center,O'Connell Center,Oconnell Center;O Connell Center;O’Connell Center,Gainesville,FL,arena,,,,1,2026-02-14,2026-02-14,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,pete-maravich-assembly-center,Pete Maravich Assembly Center,,Baton Rouge,LA,arena,,,,1,2026-01-13,2026-01-13,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,reed-arena,Reed Arena,,College Station,TX,arena,,,,1,2026-03-03,2026-03-03,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,rupp-arena,Rupp Arena,,Lexington,KY,arena,1976-11-27,,exact_start,789,1976-11-27,2026-03-07,primary_home,1976-11-27,,exact_start,,Curated Kentucky game history.,"Primary Kentucky home venue from Nov. 27, 1976 onward."
-kentucky,state-farm-arena,State Farm Arena,,Atlanta,GA,arena,,,,1,2025-12-20,2025-12-20,,,,,,Curated Kentucky 2025-26 schedule.,
-kentucky,thompson-boling-arena,Thompson-Boling Arena,,Knoxville,TN,arena,,,,1,2026-01-17,2026-01-17,,,,,,Curated Kentucky 2025-26 schedule.,
+source_program_key,venue_key,venue_id,canonical_name,aliases,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
+kentucky,alumni-gym-kentucky,VEN-000005,Alumni Gym,,Lexington,KY,arena,1924-12-13,1950,exact_start/year,338,1924-12-13,1950-02-25,primary_home,1924-12-13,1950-1951,exact/season,,Curated Kentucky game history.,"First game Dec. 13, 1924."
+kentucky,bridgestone-arena,VEN-000031,Bridgestone Arena,,Nashville,TN,arena,,,,4,2025-12-05,2026-03-13,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,bud-walton-arena,VEN-000032,Bud Walton Arena,,Fayetteville,AR,arena,,,,1,2026-01-31,2026-01-31,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,coleman-coliseum,VEN-000048,Coleman Coliseum,,Tuscaloosa,AL,arena,,,,1,2026-01-03,2026-01-03,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,colonial-life-arena,VEN-000049,Colonial Life Arena,,Columbia,SC,arena,,,,1,2026-02-24,2026-02-24,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,enterprise-center,VEN-000060,Enterprise Center,,St. Louis,MO,arena,,,,2,2026-03-20,2026-03-22,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,kfc-yum-center,VEN-000104,KFC Yum! Center,,Louisville,KY,arena,,,,1,2025-11-11,2025-11-11,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,madison-square-garden,VEN-000124,Madison Square Garden,,New York,NY,arena,,,,1,2025-11-18,2025-11-18,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,memorial-coliseum-kentucky,VEN-000129,Memorial Coliseum,,Lexington,KY,arena,1950,,season/year,348,1950-12-01,2009-03-17,primary_home,1950-1951,1975-1976,season,,Curated Kentucky game history.,Primary home 1950-51 through 1975-76; also hosted Kentucky 2009 NIT opener.
+kentucky,memorial-gymnasium,VEN-000130,Memorial Gymnasium,,Nashville,TN,arena,,,,1,2026-01-27,2026-01-27,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,neville-arena,VEN-000150,Neville Arena,Auburn Arena,Auburn,AL,arena,,,,1,2026-02-21,2026-02-21,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,oconnell-center,VEN-000154,O'Connell Center,Oconnell Center;O Connell Center;O’Connell Center,Gainesville,FL,arena,,,,1,2026-02-14,2026-02-14,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,pete-maravich-assembly-center,VEN-000163,Pete Maravich Assembly Center,,Baton Rouge,LA,arena,,,,1,2026-01-13,2026-01-13,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,reed-arena,VEN-000171,Reed Arena,,College Station,TX,arena,,,,1,2026-03-03,2026-03-03,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,rupp-arena,VEN-000181,Rupp Arena,,Lexington,KY,arena,1976-11-27,,exact_start,789,1976-11-27,2026-03-07,primary_home,1976-11-27,,exact_start,,Curated Kentucky game history.,"Primary Kentucky home venue from Nov. 27, 1976 onward."
+kentucky,state-farm-arena,VEN-000195,State Farm Arena,,Atlanta,GA,arena,,,,1,2025-12-20,2025-12-20,,,,,,Curated Kentucky 2025-26 schedule.,
+kentucky,thompson-boling-arena,VEN-000211,Thompson-Boling Arena,,Knoxville,TN,arena,,,,1,2026-01-17,2026-01-17,,,,,,Curated Kentucky 2025-26 schedule.,

@@ -1,23 +1,5 @@
 #!/usr/bin/env python3
-"""
-Backfill blank canonical venue_key values from already-ingested source assertions
-and each school's curated venues.csv registry.
-
-Default is DRY RUN:
-    python tools/backfill_venue_keys.py
-
-Apply:
-    python tools/backfill_venue_keys.py --apply
-
-This only fills BLANK canonical venue_key fields when all usable source assertions
-for that canonical game agree on one venue key and their independently curated
-site classification agrees with canonical H/A/N. It records the linked assertion
-and registry lookup in canonical notes. It never overwrites an existing canonical
-venue key and never guesses across conflicting assertions.
-
-The dry run also prints all conflicts/unmapped venue names so they can be reviewed
-before applying.
-"""
+"""Backfill blank canonical venue identity from curated source assertions."""
 
 from __future__ import annotations
 
@@ -33,7 +15,7 @@ from location_safety import (
     registry_fallback_marker,
     source_site_agrees_with_canonical,
 )
-
+from venue_reference import load_global_venue_reference
 
 CANONICAL_FIELDS = [
     "canonical_game_id",
@@ -49,6 +31,7 @@ CANONICAL_FIELDS = [
     "site_type",
     "designated_home_team_key",
     "venue_key",
+    "venue_id",
     "site_city",
     "site_state",
     "game_type",
@@ -63,18 +46,43 @@ CANONICAL_FIELDS = [
 def read_csv(path: Path) -> list[dict[str, str]]:
     if not path.exists():
         raise FileNotFoundError(path)
-    with path.open(newline="", encoding="utf-8-sig") as f:
-        return list(csv.DictReader(f))
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        return list(csv.DictReader(handle))
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    with tmp.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=CANONICAL_FIELDS)
-        w.writeheader()
+    temp = path.with_suffix(path.suffix + ".tmp")
+    with temp.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=CANONICAL_FIELDS,
+            lineterminator="\n",
+        )
+        writer.writeheader()
         for row in rows:
-            w.writerow({field: row.get(field, "") for field in CANONICAL_FIELDS})
-    tmp.replace(path)
+            writer.writerow({field: row.get(field, "") for field in CANONICAL_FIELDS})
+    temp.replace(path)
+
+
+def resolve_candidate_identity(
+    pairs: set[tuple[str, str]],
+    venues_by_id: dict[str, dict[str, str]],
+) -> tuple[str, str] | None:
+    """Resolve claims by permanent physical venue_id."""
+    venue_ids = {venue_id for _, venue_id in pairs if venue_id}
+    if len(venue_ids) != 1:
+        return None
+
+    venue_id = next(iter(venue_ids))
+    global_row = venues_by_id.get(venue_id)
+    if global_row is None:
+        raise ValueError(f"unknown global venue_id {venue_id!r}")
+
+    venue_key = global_row.get("venue_key", "").strip()
+    if not venue_key:
+        raise ValueError(f"{venue_id}: global venue_key is required")
+
+    return venue_key, venue_id
 
 
 def main() -> int:
@@ -84,20 +92,24 @@ def main() -> int:
     args = parser.parse_args()
 
     repo = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
-    canonical_path = repo / "data" / "canonical" / "games.csv"
-    assertions_path = repo / "data" / "evidence" / "game-assertions.csv"
+    canonical_path = repo / "data/canonical/games.csv"
+    assertions_path = repo / "data/evidence/game-assertions.csv"
     schools_root = repo / "schools"
 
     try:
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
-    except FileNotFoundError as exc:
-        print(f"FAIL: required file not found: {exc}")
+        global_venues_by_id, _, _ = load_global_venue_reference(repo)
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"FAIL: required venue input is invalid: {exc}")
         return 1
 
-    canonical_by_id = {r.get("canonical_game_id", ""): r for r in canonical}
+    canonical_by_id = {
+        row.get("canonical_game_id", ""): row
+        for row in canonical
+    }
 
-    venue_maps: dict[str, dict[str, str]] = {}
+    venue_maps: dict[str, dict[str, tuple[str, str]]] = {}
     if schools_root.exists():
         for school_dir in schools_root.iterdir():
             if not school_dir.is_dir():
@@ -105,30 +117,36 @@ def main() -> int:
             venue_path = school_dir / "venues.csv"
             if not venue_path.exists():
                 continue
-            mapping = {}
+
+            mapping: dict[str, tuple[str, str]] = {}
             for row in read_csv(venue_path):
                 name = row.get("canonical_name", "").strip()
                 key = row.get("venue_key", "").strip()
-                if not key:
+                venue_id = row.get("venue_id", "").strip()
+                if not key or not venue_id:
                     continue
+                pair = (key, venue_id)
                 if name:
-                    mapping[name.casefold()] = key
-                aliases = row.get("aliases", "").strip()
-                if aliases:
-                    for alias in aliases.split(";"):
-                        alias = alias.strip()
-                        if alias:
-                            mapping[alias.casefold()] = key
+                    mapping[name.casefold()] = pair
+                for alias in row.get("aliases", "").split(";"):
+                    alias = alias.strip()
+                    if alias:
+                        mapping[alias.casefold()] = pair
+
             venue_maps[school_dir.name] = mapping
 
-    candidates: dict[str, set[str]] = defaultdict(set)
-    candidate_details: dict[str, list[tuple[str, str, str, str]]] = defaultdict(list)
-    unresolved_details: list[tuple[str, str, str, str]] = []
+    candidates: dict[str, set[tuple[str, str]]] = defaultdict(set)
+    details: dict[
+        str,
+        list[tuple[str, str, str, str, str]],
+    ] = defaultdict(list)
+    unresolved: list[tuple[str, str, str, str]] = []
 
     for assertion in assertions:
         game_id = assertion.get("canonical_game_id", "").strip()
         program = assertion.get("source_program_key", "").strip()
         venue_name = assertion.get("curated_venue_name", "").strip()
+
         if not game_id or not program or not venue_name:
             continue
 
@@ -138,51 +156,82 @@ def main() -> int:
         ):
             continue
 
-        key = venue_maps.get(program, {}).get(venue_name.casefold(), "")
-        if key:
-            candidates[game_id].add(key)
-            candidate_details[game_id].append(
-                (program, assertion.get("source_game_id", ""), venue_name, key)
+        pair = venue_maps.get(program, {}).get(venue_name.casefold())
+        if pair:
+            candidates[game_id].add(pair)
+            details[game_id].append(
+                (
+                    program,
+                    assertion.get("source_game_id", ""),
+                    venue_name,
+                    pair[0],
+                    pair[1],
+                )
             )
         else:
-            unresolved_details.append(
-                (game_id, program, venue_name, assertion.get("source_game_id", ""))
+            unresolved.append(
+                (
+                    game_id,
+                    program,
+                    venue_name,
+                    assertion.get("source_game_id", ""),
+                )
             )
 
     filled = 0
-    conflicting_assertions = []
+    conflicts = []
     existing_conflicts = []
     samples = []
 
     for row in canonical:
         game_id = row.get("canonical_game_id", "")
-        keys = candidates.get(game_id, set())
-        existing = row.get("venue_key", "").strip()
+        pairs = candidates.get(game_id, set())
+        existing_key = row.get("venue_key", "").strip()
+        existing_id = row.get("venue_id", "").strip()
 
-        if len(keys) > 1:
-            conflicting_assertions.append((game_id, sorted(keys)))
+        physical_ids = {venue_id for _, venue_id in pairs if venue_id}
+        if len(physical_ids) > 1:
+            conflicts.append((game_id, sorted(pairs)))
             continue
 
-        if len(keys) == 1:
-            candidate = next(iter(keys))
-            if existing:
-                if existing != candidate:
-                    existing_conflicts.append((game_id, existing, candidate))
+        resolved = resolve_candidate_identity(pairs, global_venues_by_id)
+        if resolved is not None:
+            candidate_key, candidate_id = resolved
+
+            if existing_key or existing_id:
+                # venue_id is authoritative physical identity. Different legacy
+                # venue_key values may legitimately refer to the same building.
+                conflict = (
+                    existing_id != candidate_id
+                    if existing_id
+                    else existing_key != candidate_key
+                )
+                if conflict:
+                    existing_conflicts.append(
+                        (
+                            game_id,
+                            existing_key,
+                            existing_id,
+                            candidate_key,
+                            candidate_id,
+                        )
+                    )
                 continue
 
-            row["venue_key"] = candidate
-            program, source_game_id, _, _ = sorted(
-                candidate_details[game_id]
-            )[0]
+            row["venue_key"] = candidate_key
+            row["venue_id"] = candidate_id
+
+            program, source_game_id, _, _, _ = sorted(details[game_id])[0]
             marker = registry_fallback_marker(
                 program,
                 source_game_id,
-                candidate,
+                candidate_key,
                 row.get("site_type", ""),
-                ["venue_key"],
+                ["venue_key", "venue_id"],
             )
             row["notes"] = append_note(row.get("notes", ""), marker)
             filled += 1
+
             if len(samples) < 12:
                 samples.append(
                     (
@@ -190,60 +239,37 @@ def main() -> int:
                         row.get("season_label", ""),
                         row.get("team_a_key", ""),
                         row.get("team_b_key", ""),
-                        candidate,
+                        candidate_key,
+                        candidate_id,
                     )
                 )
 
-    print("College Basketball History — canonical venue-key backfill")
+    print("College Basketball History — canonical venue identity backfill")
     print(f"Repository: {repo}")
     print(f"Mode:       {'APPLY' if args.apply else 'DRY RUN'}")
     print()
-    print(f"Canonical games:                     {len(canonical):,}")
-    print(f"Blank venue keys safely fillable:    {filled:,}")
-    print(f"Games with conflicting venue claims: {len(conflicting_assertions):,}")
-    print(f"Existing canonical/key conflicts:    {len(existing_conflicts):,}")
-    print(f"Assertion venue names not in registry:{len(unresolved_details):>8,}")
+    print(f"Canonical games:                      {len(canonical):,}")
+    print(f"Blank venue identities safely fillable:{filled:>8,}")
+    print(f"Games with conflicting physical venues:{len(conflicts):>8,}")
+    print(f"Existing canonical/venue conflicts:   {len(existing_conflicts):,}")
+    print(f"Assertion venue names not in registry:{len(unresolved):>8,}")
     print()
 
     if samples:
         print("SAMPLE FILLS:")
-        for game_id, season, a, b, key in samples:
-            print(f"  - {game_id} | {season} | {a} vs {b} | {key}")
-        print()
-
-    if conflicting_assertions:
-        print("CONFLICTING ASSERTION VENUE CLAIMS:")
-        for game_id, keys in conflicting_assertions:
-            c = canonical_by_id.get(game_id, {})
+        for game_id, season, a, b, key, venue_id in samples:
             print(
-                f"  - {game_id} | {c.get('season_label','')} | "
-                f"{c.get('team_a_key','')} vs {c.get('team_b_key','')} | "
-                f"candidate keys: {', '.join(keys)}"
+                f"  - {game_id} | {season} | {a} vs {b} | "
+                f"{key} | {venue_id}"
             )
-            for program, source_game_id, venue_name, key in candidate_details.get(game_id, []):
-                print(f"      {program}: {venue_name} -> {key}")
         print()
 
     if existing_conflicts:
-        print("EXISTING CANONICAL VENUE-KEY CONFLICTS:")
-        for game_id, existing, candidate in existing_conflicts:
-            c = canonical_by_id.get(game_id, {})
+        print("EXISTING CANONICAL VENUE CONFLICTS:")
+        for game_id, old_key, old_id, new_key, new_id in existing_conflicts:
             print(
-                f"  - {game_id} | {c.get('season_label','')} | "
-                f"{c.get('team_a_key','')} vs {c.get('team_b_key','')} | "
-                f"canonical={existing} | assertion-derived={candidate}"
-            )
-            for program, source_game_id, venue_name, key in candidate_details.get(game_id, []):
-                print(f"      {program}: {venue_name} -> {key}")
-        print()
-
-    if unresolved_details:
-        print("ASSERTION VENUE NAMES NOT FOUND IN SCHOOL REGISTRY:")
-        for game_id, program, venue_name, source_game_id in unresolved_details:
-            c = canonical_by_id.get(game_id, {})
-            print(
-                f"  - {game_id} | {c.get('season_label','')} | "
-                f"{program} | {venue_name!r} | source={source_game_id}"
+                f"  - {game_id} | canonical={old_key}/{old_id} | "
+                f"assertion-derived={new_key}/{new_id}"
             )
         print()
 
@@ -252,28 +278,21 @@ def main() -> int:
         return 0
 
     if existing_conflicts:
-        print("FAIL SAFE: refusing --apply while existing canonical venue-key conflicts remain.")
-        print("Resolve those canonical conflicts, then rerun the dry run.")
+        print("FAIL SAFE: refusing --apply while existing conflicts remain.")
         return 2
 
-    if conflicting_assertions:
-        print(
-            f"NOTE: {len(conflicting_assertions):,} unresolved games have conflicting venue claims; "
-            "they will remain unchanged while all unambiguous blank venue keys are filled."
-        )
-        print()
-
     write_csv(canonical_path, canonical)
-    print(f"Applied {filled:,} canonical venue-key fills.")
+    print(f"Applied {filled:,} canonical venue identity fills.")
 
-    validator = repo / "tools" / "validate_data.py"
+    validator = repo / "tools/validate_data.py"
     if validator.exists():
         result = subprocess.run([sys.executable, str(validator), str(repo)])
         if result.returncode != 0:
             print("FAIL: backfill applied, but validator failed.")
             return result.returncode
         print()
-        print("PASS: venue backfill applied and post-write validation succeeded.")
+        print("PASS: venue identity backfill applied and validated.")
+
     return 0
 
 
