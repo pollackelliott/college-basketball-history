@@ -47,6 +47,7 @@ from location_safety import (
     registry_fallback_marker,
     source_location_preflight,
 )
+from ncaa_safety import canonical_ncaa_errors
 from program_history import history_scope_errors, partition_source_rows
 from venue_reference import (
     load_global_venue_reference,
@@ -1231,6 +1232,19 @@ def main() -> int:
                     (game_id, field_name, source_value)
                 )
                 canonical_enrichment_game_ids.add(game_id)
+
+    planned_ncaa_errors = canonical_ncaa_errors(
+        canonical + new_canonical,
+        global_venues_by_id,
+    )
+    if planned_ncaa_errors:
+        print("FAIL: planned ingestion would violate permanent NCAA safety:")
+        for problem in planned_ncaa_errors[:50]:
+            print(f"  - {problem}")
+        if len(planned_ncaa_errors) > 50:
+            print(f"  ... {len(planned_ncaa_errors) - 50} more")
+        print("No files were written.")
+        return 1
 
     print(
         f"Canonical enrichments:       "

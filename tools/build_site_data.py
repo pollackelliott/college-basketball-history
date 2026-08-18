@@ -29,7 +29,9 @@ from conference_reference import (
     resolved_history_key,
 )
 from location_safety import public_location_pair
+from ncaa_safety import canonical_ncaa_errors
 from program_history import scope_canonical_games, trim_conference_history
+from venue_reference import load_global_venue_reference
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -401,6 +403,14 @@ def main() -> int:
     conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
     assertion_rows = read_csv(assertions_path)
+
+    global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
+    ncaa_errors = canonical_ncaa_errors(canonical_rows, global_venues_by_id)
+    if ncaa_errors:
+        raise ValueError(
+            "NCAA Tournament publication safety gate failed:\n- "
+            + "\n- ".join(ncaa_errors[:50])
+        )
 
     programs = {row["program_key"]: row for row in program_rows}
     if len(programs) != len(program_rows):

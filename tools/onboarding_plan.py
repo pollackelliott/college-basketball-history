@@ -31,6 +31,7 @@ from location_safety import (
     retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
 )
+from ncaa_safety import canonical_ncaa_errors
 from program_history import (
     derive_ncaa_accomplishments,
     history_scope_errors,
@@ -183,6 +184,7 @@ def plan_input_paths(repo: Path, school_key: str) -> list[Path]:
             repo / "tools/conference_reference.py",
             repo / "tools/ingest_school.py",
             repo / "tools/location_safety.py",
+            repo / "tools/ncaa_safety.py",
             repo / "tools/onboard_school.py",
             repo / "tools/onboarding_plan.py",
             repo / "tools/program_history.py",
@@ -520,6 +522,46 @@ def _accomplishment_conflicts(
     return derived, conflicts
 
 
+def _planned_ncaa_safety_errors(
+    source: dict[str, str],
+    status: str,
+    game_id: str,
+    canonical_by_id: dict[str, dict[str, str]],
+    venue_name_map: dict[str, str],
+    venue_metadata: dict[str, dict[str, str]],
+    global_venues_by_id: dict[str, dict[str, str]],
+) -> list[str]:
+    # Evaluate the NCAA state that would exist after safe ingestion.
+    # REVIEW identities stay owner-gated; any later FORCE_NEW outcome is
+    # independently protected by ingestion's pre-write NCAA gate.
+    if status == ingest_school.REVIEW:
+        return []
+
+    if status == ingest_school.CONFIDENT:
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            return [f"{game_id or '[unknown]'}: matched canonical game is missing"]
+        candidate = dict(canonical)
+        for field_name, value in ingest_school.canonical_enrichment_candidates(
+            source,
+            candidate,
+            venue_metadata,
+        ):
+            candidate[field_name] = value
+    elif status == ingest_school.NEW_GAME:
+        source_id = source.get("source_game_id", "").strip() or "UNKNOWN"
+        candidate = ingest_school.build_new_canonical(
+            source,
+            f"PREFLIGHT-NCAA-{source_id}",
+            venue_name_map,
+            venue_metadata,
+        )
+    else:
+        return []
+
+    return canonical_ncaa_errors([candidate], global_venues_by_id)
+
+
 def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     repo = repo.resolve()
     package = validate_package(repo, school_key)
@@ -652,6 +694,20 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             )
             status, game_id, method = override or ingest_school.identify_game(source, candidates)
         identity_counts[status] += 1
+
+        for problem in _planned_ncaa_safety_errors(
+            source,
+            status,
+            game_id,
+            canonical_by_id,
+            venue_name_map,
+            venue_metadata,
+            global_venues_by_id,
+        ):
+            blockers.append(
+                f"{source.get('source_game_id', '')}: NCAA safety before owner review: "
+                + problem
+            )
 
         if status == ingest_school.REVIEW:
             if method == "SOURCE_ASSERTION_LINKS_MULTIPLE_CANONICAL_GAMES":

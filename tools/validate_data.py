@@ -32,6 +32,7 @@ from location_safety import (
     source_site_agrees_with_canonical,
     venue_location_conflicts,
 )
+from ncaa_safety import canonical_ncaa_errors, ncaa_evidence_errors
 from program_history import (
     CANONICAL_CROSSCHECK_STATUSES,
     HISTORY_SCOPE_BASES,
@@ -287,6 +288,22 @@ def main() -> int:
         conference_columns,
         REQUIRED_REGISTRY_COLUMNS,
         errors,
+    )
+
+    errors.extend(
+        "NCAA safety: " + problem
+        for problem in canonical_ncaa_errors(
+            canonical_rows,
+            global_venues_by_id,
+        )
+    )
+    errors.extend(
+        "NCAA site evidence: " + problem
+        for problem in ncaa_evidence_errors(
+            repo_root,
+            canonical_rows,
+            global_venues_by_id,
+        )
     )
 
     conference_keys = [row.get("conference_key", "").strip() for row in conference_rows]
