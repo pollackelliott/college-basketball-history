@@ -68,7 +68,7 @@ class GlobalVenueReferenceTests(unittest.TestCase):
     def test_existing_canonical_identity_parity(self):
         canonical = rows(ROOT / "data/canonical/games.csv")
         keyed = [row for row in canonical if row.get("venue_key", "").strip()]
-        self.assertEqual(len(keyed), 17683)
+        self.assertEqual(len(keyed), 18456)
         self.assertTrue(
             all(row.get("venue_id", "").strip() in self.venues_by_id for row in keyed)
         )
