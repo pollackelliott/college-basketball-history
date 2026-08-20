@@ -2460,7 +2460,7 @@
       "opponent_key": "indiana",
       "opponent_name": "Indiana",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
@@ -62775,7 +62775,7 @@
       "opponent_key": "indiana",
       "opponent_name": "Indiana",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 89,
       "opponent_score": 71,
       "score_known": true,

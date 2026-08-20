@@ -2891,7 +2891,7 @@
       "state": "IN",
       "primary_hex": "#960009",
       "secondary_hex": "#EEEDEB",
-      "history_start_season": null,
+      "history_start_season": "1900-1901",
       "conference_regular_season_championships": 22,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 41,
@@ -2900,7 +2900,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1987,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
