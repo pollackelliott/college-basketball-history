@@ -30,6 +30,8 @@ from onboarding_plan import WorkflowError, read_csv
 
 
 PRODUCTION_BASE = "https://college-basketball-history.vercel.app"
+PR_MERGEABILITY_TIMEOUT_SECONDS = 120
+PR_MERGEABILITY_POLL_SECONDS = 5
 
 
 def run(
@@ -189,7 +191,16 @@ def create_or_reuse_pr(
 ) -> dict[str, Any]:
     existing = pr_for_branch(repo, branch)
     if existing and existing.get("state") == "OPEN":
-        return existing
+        gh(
+            repo,
+            "pr",
+            "edit",
+            str(existing["number"]),
+            "--body-file",
+            str(body_path),
+        )
+        refreshed = pr_for_branch(repo, branch)
+        return refreshed or existing
     display = program_display_name(repo, school_key)
     url = gh(
         repo,
@@ -210,6 +221,54 @@ def create_or_reuse_pr(
         raise WorkflowError(f"PR creation returned {url!r}, but the PR could not be read back")
     return created
 
+
+
+def wait_for_pr_mergeable(
+    repo: Path,
+    pr_number: str,
+    *,
+    expected_head_sha: str | None = None,
+    timeout_seconds: int = PR_MERGEABILITY_TIMEOUT_SECONDS,
+    poll_seconds: int = PR_MERGEABILITY_POLL_SECONDS,
+) -> dict[str, Any]:
+    deadline = time.monotonic() + timeout_seconds
+    last_state: dict[str, Any] | None = None
+    while True:
+        state = gh_json(
+            repo,
+            "pr",
+            "view",
+            pr_number,
+            "--json",
+            "number,url,state,mergeable,mergeStateStatus,headRefOid,headRefName,baseRefName",
+        )
+        last_state = state
+        if state.get("state") != "OPEN":
+            raise WorkflowError(f"PR #{pr_number} is not open: {state}")
+        if expected_head_sha is not None and state.get("headRefOid") != expected_head_sha:
+            raise WorkflowError(
+                f"PR #{pr_number} head changed "
+                f"({state.get('headRefOid')} != {expected_head_sha})"
+            )
+
+        mergeable = state.get("mergeable")
+        if mergeable == "MERGEABLE":
+            return state
+        if mergeable not in {"UNKNOWN", None}:
+            raise WorkflowError(f"PR #{pr_number} is not cleanly mergeable: {state}")
+        if time.monotonic() >= deadline:
+            break
+
+        print(
+            f"Waiting for GitHub mergeability on PR #{pr_number} "
+            f"({mergeable or 'UNKNOWN'})..."
+        )
+        time.sleep(poll_seconds)
+
+    raise WorkflowError(
+        f"timed out waiting for GitHub mergeability on PR #{pr_number}; "
+        f"last state {last_state}"
+    )
 
 
 def protected_merge_args(
@@ -330,17 +389,13 @@ def prepare(repo: Path, school_key: str, artifacts: Path, timeout: int) -> int:
     pr_number = str(pr["number"])
     print("\n=== pull-request checks ===")
     gh(repo, "pr", "checks", pr_number, "--watch", "--interval", "10", echo=True)
-    state = gh_json(
+    head_sha = git(repo, "rev-parse", "HEAD").strip()
+    state = wait_for_pr_mergeable(
         repo,
-        "pr",
-        "view",
         pr_number,
-        "--json",
-        "number,url,state,mergeable,mergeStateStatus,headRefOid,headRefName,baseRefName",
+        expected_head_sha=head_sha,
+        timeout_seconds=min(timeout, PR_MERGEABILITY_TIMEOUT_SECONDS),
     )
-    if state.get("state") != "OPEN" or state.get("mergeable") != "MERGEABLE":
-        raise WorkflowError(f"PR #{pr_number} is not cleanly mergeable: {state}")
-    head_sha = state["headRefOid"]
     deployment = wait_for_deployment(
         repo,
         repository_slug(repo),
@@ -443,20 +498,12 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
         raise WorkflowError("release branch HEAD changed after preview approval")
     pr_number = str(state["pr_number"])
     gh(repo, "pr", "checks", pr_number, "--watch", "--interval", "10", echo=True)
-    pr = gh_json(
+    pr = wait_for_pr_mergeable(
         repo,
-        "pr",
-        "view",
         pr_number,
-        "--json",
-        "state,mergeable,mergeStateStatus,headRefOid,url",
+        expected_head_sha=head_sha,
+        timeout_seconds=min(timeout, PR_MERGEABILITY_TIMEOUT_SECONDS),
     )
-    if (
-        pr.get("state") != "OPEN"
-        or pr.get("mergeable") != "MERGEABLE"
-        or pr.get("headRefOid") != head_sha
-    ):
-        raise WorkflowError(f"PR changed or is no longer mergeable: {pr}")
 
     display = program_display_name(repo, school_key)
     gh(
