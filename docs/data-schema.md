@@ -194,6 +194,8 @@ Allowed values:
 
 Venue does not determine site type.
 
+Game type does not determine site type either. In particular, an `NCAA_TOURNAMENT` game is not automatically `NEUTRAL`: if explicit historical/game-level evidence establishes that the game was played as a true home game for one participant, canonical site type remains `TEAM_A_HOME` or `TEAM_B_HOME` as appropriate. The same independence applies to other postseason game types. Never infer H/A/N from venue or geography alone.
+
 ### Game type
 
 Allowed public competitive classifications:
