@@ -1,0 +1,4 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,mississippi-state,1908-1909,1920-1921,siaa,SIAA,conference,False,Owner-approved Mississippi State conference chronology corroborated by the 2025-26 record book.,
+1,mississippi-state,1921-1922,1931-1932,southern,Southern Conference,conference,False,Owner-approved Mississippi State conference chronology corroborated by the 2025-26 record book.,1921-22 and 1922-23 regular-season games are labeled SoCon in the record book while Mississippi State also participated in the SIAA Tournament; tournament participation does not change primary conference membership.
+2,mississippi-state,1932-1933,,sec,SEC,conference,True,Owner-approved chronology; Mississippi State record book begins SEC basketball competition in 1932-33.,Ongoing through the completed 2025-26 season.
