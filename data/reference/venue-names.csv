@@ -211,7 +211,7 @@ VEN-000182,San Diego Sports Arena,sandiegosportsarena,PROJECT_DISPLAY,,,,Migrati
 VEN-000183,SAP Center,sapcenter,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000184,Schmidt Gymnasium,schmidtgymnasium,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000185,Simmons Bank Arena,simmonsbankarena,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
-VEN-000186,Simon Skjodt Assembly Hall,simonskjodtassemblyhall,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
+VEN-000186,Assembly Hall,assemblyhall,PROJECT_DISPLAY,,,,Owner-directed Indiana project display convention during Team #15 onboarding.,
 VEN-000187,SJB Pavilion,sjbpavilion,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000187,The Sandy and John Black Pavilion at Ole Miss,thesandyandjohnblackpavilionatolemiss,HISTORICAL_OR_ALIAS,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000188,Smoothie King Center,smoothiekingcenter,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
@@ -296,3 +296,13 @@ VEN-000250,McCarthy Gymnasium,mccarthygymnasium,PROJECT_DISPLAY,,,,Mississippi S
 VEN-000250,New Gym,newgym,ALIAS,,,,Mississippi State official historical venue evidence.,
 VEN-000251,Sanford Pentagon,sanfordpentagon,PROJECT_DISPLAY,,,,Mississippi State onboarding source package and owner-approved venue/tournament history.,
 VEN-000252,Tin Gym,tingym,PROJECT_DISPLAY,,,,Mississippi State onboarding source package and owner-approved venue/tournament history.,
+VEN-000186,Simon Skjodt Assembly Hall,simonskjodtassemblyhall,HISTORICAL_OR_ALIAS,,,,Owner-directed Indiana project display convention during Team #15 onboarding.,Former project display retained as alias.
+VEN-000253,Old Assembly Hall,oldassemblyhall,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000254,Men's Gymnasium,mensgymnasium,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000255,IU Fieldhouse,iufieldhouse,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000256,New IU Fieldhouse,newiufieldhouse,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000257,XL Center,xlcenter,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000258,McGaw Memorial Hall,mcgawmemorialhall,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000259,Capital Centre,capitalcentre,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000260,Target Center,targetcenter,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
+VEN-000261,Crisler Center,crislercenter,PROJECT_DISPLAY,,,,Indiana official historical/game/postseason evidence and established physical-site research.,Indiana Team #15 onboarding foundation addition.
