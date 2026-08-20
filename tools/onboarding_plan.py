@@ -522,6 +522,42 @@ def _accomplishment_conflicts(
     return derived, conflicts
 
 
+def _planned_venue_geography_errors(
+    source: dict[str, str],
+    status: str,
+    game_id: str,
+    canonical_by_id: dict[str, dict[str, str]],
+    venue_metadata: dict[str, dict[str, str]],
+) -> list[str]:
+    """Catch unsafe proposed venue enrichment before Owner Gate 1."""
+
+    if status != ingest_school.CONFIDENT:
+        return []
+
+    canonical = canonical_by_id.get(game_id)
+    if canonical is None:
+        return []
+
+    conflict = ingest_school.venue_geography_enrichment_conflict(
+        source,
+        canonical,
+        venue_metadata,
+    )
+    if conflict is None:
+        return []
+
+    return [
+        (
+            f"{game_id}: canonical geography "
+            f"{conflict['canonical_city']}, {conflict['canonical_state']} "
+            f"conflicts with proposed venue {conflict['venue_name']} "
+            f"({conflict['venue_id']}) registry geography "
+            f"{conflict['registry_city']}, {conflict['registry_state']}; "
+            "resolve the source/canonical location conflict before owner approval"
+        )
+    ]
+
+
 def _planned_ncaa_safety_errors(
     source: dict[str, str],
     status: str,
@@ -694,6 +730,18 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             )
             status, game_id, method = override or ingest_school.identify_game(source, candidates)
         identity_counts[status] += 1
+
+        for problem in _planned_venue_geography_errors(
+            source,
+            status,
+            game_id,
+            canonical_by_id,
+            venue_metadata,
+        ):
+            blockers.append(
+                f"{source.get('source_game_id', '')}: venue/geography before owner review: "
+                + problem
+            )
 
         for problem in _planned_ncaa_safety_errors(
             source,

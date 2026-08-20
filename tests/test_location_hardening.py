@@ -134,6 +134,36 @@ class CanonicalEnrichmentTests(unittest.TestCase):
             [],
         )
 
+    def test_conflicting_registry_venue_is_not_added_to_known_canonical_geography(self):
+        source = source_row("Atlanta", "GA")
+        canonical = {
+            "site_type": "NEUTRAL",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "Nashville",
+            "site_state": "TN",
+            "notes": "",
+        }
+        metadata = {
+            "example arena": {
+                "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
+                "city": "Atlanta",
+                "state": "GA",
+            }
+        }
+
+        changes = dict(
+            ingest_school.canonical_enrichment_candidates(
+                source, canonical, metadata
+            )
+        )
+
+        self.assertNotIn("venue_key", changes)
+        self.assertNotIn("venue_id", changes)
+        self.assertNotIn("site_city", changes)
+        self.assertNotIn("site_state", changes)
+
     def test_partial_source_location_is_not_completed_from_registry(self):
         source = source_row("Exampleville", "")
         canonical = {
