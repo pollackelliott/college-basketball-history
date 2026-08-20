@@ -220,7 +220,7 @@ ohio-state,22,5,36,11,1,NATIONAL_CHAMPION,1960,OWNER_BASELINE_UNVERIFIED,Owner-s
 oklahoma,14,7,34,5,0,NATIONAL_RUNNER_UP,1988,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 oklahoma-state,19,4,29,6,2,NATIONAL_CHAMPION,1946,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 old-dominion,7,9,12,0,0,ROUND_OF_32,2010,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-ole-miss,0,3,10,0,0,SWEET_SIXTEEN,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+ole-miss,0,3,10,0,0,SWEET_SIXTEEN,2025,VERIFIED,"Owner-approved Ole Miss accomplishment reference, documented from the official Ole Miss source package: 0 regular-season conference titles, 3 conference-tournament titles (1928 Southern, 1981 SEC, 2013 SEC), 10 NCAA appearances, 0 Final Fours, 0 national titles, best NCAA finish Sweet Sixteen, most recent best-finish year 2025.",MATCH,Verified through onboarding plan fbb15d83444f.
 omaha,1,1,1,0,0,ROUND_OF_64,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 oral-roberts,7,7,7,0,0,ELITE_EIGHT,1974,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 oregon,8,6,19,2,1,NATIONAL_CHAMPION,1939,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

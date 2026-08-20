@@ -5339,7 +5339,7 @@
       "state": "MS",
       "primary_hex": "#14213D",
       "secondary_hex": "#CE1126",
-      "history_start_season": null,
+      "history_start_season": "1908-1909",
       "conference_regular_season_championships": 0,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 10,
@@ -5348,7 +5348,7 @@
       "best_finish_key": "SWEET_SIXTEEN",
       "best_finish_year": 2025,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
