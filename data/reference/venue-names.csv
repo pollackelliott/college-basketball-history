@@ -238,7 +238,7 @@ VEN-000203,TD Garden,tdgarden,PROJECT_DISPLAY,,,,Migration seed from existing cu
 VEN-000204,The Dome at America's Center,thedomeatamericascenter,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000205,The Greenbrier,thegreenbrier,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000206,The Palace of Auburn Hills,thepalaceofauburnhills,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
-VEN-000207,The Pavilion at Ole Miss,thepavilionatolemiss,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
+VEN-000187,The Pavilion at Ole Miss,thepavilionatolemiss,HISTORICAL_OR_ALIAS,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.; Ole Miss onboarding physical-venue deduplication: VEN-000207 merged into VEN-000187.,
 VEN-000208,The Pit,thepit,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000209,The Spectrum,thespectrum,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000210,The Summit,thesummit,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
@@ -276,3 +276,15 @@ VEN-000235,WVU Coliseum,wvucoliseum,PROJECT_DISPLAY,,,,Migration seed from exist
 VEN-000236,Xfinity Center,xfinitycenter,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000237,Xfinity Mobile Arena,xfinitymobilearena,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000238,Yuengling Center,yuenglingcenter,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
+VEN-000039,Levitt Arena,levittarena,HISTORICAL_OR_ALIAS,,,,Wichita State Athletics facility history.,Same physical Wichita State arena now registered as Charles Koch Arena.
+VEN-000076,First Horizon Coliseum,firsthorizoncoliseum,HISTORICAL_OR_CURRENT_LEGAL,,,,City of Greensboro naming-rights announcement.,Greensboro Coliseum renamed First Horizon Coliseum in 2024.
+VEN-000227,Jacksonville Veterans Memorial Arena,jacksonvilleveteransmemorialarena,HISTORICAL_OR_ALIAS,,,,City of Jacksonville arena history and 2019 naming-rights record.,Same physical arena later named VyStar Veterans Memorial Arena.
+VEN-000146,The Myriad,themyriad,HISTORICAL_OR_ALIAS,,,,Ole Miss NCAA-site research.,
+VEN-000239,Original Gym,originalgym,PROJECT_DISPLAY,,,,Ole Miss historical facilities research during Team #13 onboarding.,
+VEN-000240,Tad Smith Coliseum,tadsmithcoliseum,PROJECT_DISPLAY,,,,Ole Miss Athletics facility history.,
+VEN-000241,Mellon Arena,mellonarena,PROJECT_DISPLAY,,,,Ole Miss NCAA Tournament site research; Pittsburgh Penguins arena history.,
+VEN-000241,Civic Arena,civicarena,HISTORICAL_OR_ALIAS,,,,Pittsburgh Penguins arena history.,
+VEN-000242,Acrisure Arena,acrisurearena,PROJECT_DISPLAY,,,,Owner-supplied completed 2025-26 Ole Miss results table.,
+VEN-000243,Mississippi Coast Coliseum,mississippicoastcoliseum,PROJECT_DISPLAY,,,,Owner-supplied completed 2025-26 Ole Miss results table.,
+VEN-000244,Cadence Bank Arena,cadencebankarena,PROJECT_DISPLAY,,,,Owner-supplied completed 2025-26 Ole Miss results table.,
+VEN-000245,Old Gym,oldgym,PROJECT_DISPLAY,1929,,YEAR,Ole Miss Athletics historical facilities research.,Ole Miss historical Oxford home facility.

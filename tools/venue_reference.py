@@ -9,7 +9,7 @@ import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 
-RETIRED_VENUE_IDS = {"VEN-000075"}
+RETIRED_VENUE_IDS = {"VEN-000075", "VEN-000207"}
 
 REQUIRED_VENUE_COLUMNS = {
     "venue_id", "venue_key", "display_name", "city", "state",
