@@ -85,3 +85,18 @@ Authoritative Ole Miss history supports the following onboarding values:
 - Best Finish Year: 2025
 
 The three conference-tournament championships are the 1928 Southern Conference Tournament and the 1981 and 2013 SEC Tournaments.
+
+## Jackson, Mississippi owner convention (2026-08-20)
+
+Ole Miss games established as being played in Jackson, Mississippi, are curated
+using an owner-approved alternate-site convention. Against opponents that are
+not Mississippi-based, Jackson games are treated as `SOURCE_PROGRAM_HOME`.
+Against Mississippi-based opponents, Jackson location alone does not establish
+Ole Miss home status: source-supported `NEUTRAL` or `OPPONENT_HOME` status is
+preserved.
+
+The source package contains 40 source-backed Jackson games. Twenty-three retain
+`OPPONENT_HOME`, eight retain `NEUTRAL`, and nine non-Mississippi-opponent games
+change from `NEUTRAL` to `SOURCE_PROGRAM_HOME`. All 40 receive `Jackson, MS`
+location enrichment. Original source site codes and raw evidence remain
+preserved.

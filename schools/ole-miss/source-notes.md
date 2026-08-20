@@ -60,3 +60,23 @@ The media guide's national-tournament summary repeats Milwaukee on the 2025 Mich
 ## Exhibition treatment
 
 No exhibition is included in the 2,856-game package. The explicit 2025 Saint Mary's exhibition is excluded.
+
+## Jackson location evidence and owner curation convention
+
+Jackson locations were recovered from the official Ole Miss historical record,
+including season-specific numeric location keys in the chronological all-time
+scores and explicit `Jackson, Miss.` entries in the all-time opponent
+game-by-game tables. Numeric historical location codes are interpreted only
+within the season-specific legend in which they appear; they are not globally
+mapped.
+
+Four additional Jackson YMCA opponent-home rows are supported by the opponent
+identity together with the source away designation. The original source site
+candidate and raw text remain unchanged for provenance.
+
+For site curation, the owner convention dated 2026-08-20 controls: a Jackson
+game against a non-Mississippi-based opponent is `SOURCE_PROGRAM_HOME`; a
+Jackson game against a Mississippi-based opponent retains source-supported
+neutral or opponent-home status. This produces 40 Jackson city/state
+enrichments and nine H/A/N reclassifications without changing scores, dates,
+opponents, results, or game type.
