@@ -14,6 +14,7 @@ import ingest_school  # noqa: E402
 import onboard_school  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     WorkflowError,
+    _planned_venue_geography_errors,
     _record_reciprocal_discrepancies,
     approve_plan,
     apply_reconciliation_decisions,
@@ -54,6 +55,49 @@ def review_item(**changes):
     }
     item.update(changes)
     return item
+
+
+class PlannedVenueGeographySafetyTests(unittest.TestCase):
+    def test_conflicting_proposed_venue_is_preflight_error(self):
+        source = {
+            "source_program_key": "new-school",
+            "source_game_id": "NEW-0001",
+            "normalized_opponent_key": "opponent",
+            "curated_site_type": "NEUTRAL",
+            "curated_venue_name": "Example Arena",
+            "city": "Atlanta",
+            "state": "GA",
+        }
+        canonical = {
+            "canonical_game_id": "CBBG-TEST",
+            "site_type": "NEUTRAL",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "Nashville",
+            "site_state": "TN",
+        }
+        metadata = {
+            "example arena": {
+                "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
+                "city": "Atlanta",
+                "state": "GA",
+            }
+        }
+
+        errors = _planned_venue_geography_errors(
+            source,
+            ingest_school.CONFIDENT,
+            "CBBG-TEST",
+            {"CBBG-TEST": canonical},
+            metadata,
+        )
+
+        self.assertEqual(len(errors), 1)
+        self.assertIn("Nashville, TN", errors[0])
+        self.assertIn("Example Arena", errors[0])
+        self.assertIn("Atlanta, GA", errors[0])
+        self.assertIn("before owner approval", errors[0])
 
 
 class DateCompleteReviewTests(unittest.TestCase):

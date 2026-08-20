@@ -625,6 +625,67 @@ def load_venue_metadata_map(
     return result
 
 
+def venue_geography_enrichment_conflict(
+    source: dict[str, str],
+    canonical: dict[str, str],
+    venue_metadata_map: dict[str, dict[str, str]],
+) -> dict[str, str] | None:
+    """Return details when a proposed venue fill conflicts with known canonical geography."""
+
+    src_site, _ = source_site_to_canonical(source)
+    can_site = canonical.get("site_type", "").strip()
+
+    # This is only about safe enrichment after independently established
+    # source/canonical site classifications agree.
+    if (
+        src_site == "UNKNOWN"
+        or not can_site
+        or can_site == "UNKNOWN"
+        or src_site != can_site
+    ):
+        return None
+
+    # No venue enrichment is being proposed if canonical venue identity
+    # already exists.
+    if (
+        canonical.get("venue_key", "").strip()
+        or canonical.get("venue_id", "").strip()
+    ):
+        return None
+
+    venue_name = source.get("curated_venue_name", "").strip()
+    if not venue_name:
+        return None
+
+    venue_metadata = venue_metadata_map.get(venue_name.casefold(), {})
+    venue_key = venue_metadata.get("venue_key", "").strip()
+    venue_id = venue_metadata.get("venue_id", "").strip()
+    if not venue_key or not venue_id:
+        return None
+
+    canonical_city = canonical.get("site_city", "").strip()
+    canonical_state = canonical.get("site_state", "").strip()
+    registry_city = venue_metadata.get("city", "").strip()
+    registry_state = venue_metadata.get("state", "").strip()
+
+    if (
+        location_pair_status(canonical_city, canonical_state) == "complete"
+        and location_pair_status(registry_city, registry_state) == "complete"
+        and (canonical_city, canonical_state) != (registry_city, registry_state)
+    ):
+        return {
+            "venue_name": venue_name,
+            "venue_key": venue_key,
+            "venue_id": venue_id,
+            "canonical_city": canonical_city,
+            "canonical_state": canonical_state,
+            "registry_city": registry_city,
+            "registry_state": registry_state,
+        }
+
+    return None
+
+
 def canonical_enrichment_candidates(
     source: dict[str, str],
     canonical: dict[str, str],
@@ -672,11 +733,21 @@ def canonical_enrichment_candidates(
 
     registry_fields: list[str] = []
 
+    venue_geography_conflict = (
+        venue_geography_enrichment_conflict(
+            source,
+            canonical,
+            venue_metadata_map,
+        )
+        is not None
+    )
+
     if (
         not canonical.get("venue_key", "").strip()
         and not canonical.get("venue_id", "").strip()
         and venue_key
         and venue_id
+        and not venue_geography_conflict
     ):
         result.append(("venue_key", venue_key))
         result.append(("venue_id", venue_id))
