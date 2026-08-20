@@ -1,0 +1,5 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,ole-miss,1908-1909,1916-1917,independent,Independent,independent,False,Owner-supplied Ole Miss conference history.,Independent through 1916-17. Ole Miss played no games in 1917-18 during World War I.
+1,ole-miss,1918-1919,1921-1922,siaa,SIAA,conference,False,Owner-supplied Ole Miss conference history.,
+2,ole-miss,1922-1923,1931-1932,southern,Southern Conference,conference,False,Owner-supplied chronology; corroborated by the Ole Miss historical timeline and tournament history.,
+3,ole-miss,1932-1933,,sec,SEC,conference,True,Owner-supplied chronology; Ole Miss media guide identifies Ole Miss as an SEC charter member.,Ongoing through the completed 2025-26 season.
