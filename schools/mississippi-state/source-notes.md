@@ -86,3 +86,11 @@ Mississippi State's dedicated **SEC Tournament Results** table (record-book p. 2
 For the 1926 Southern Conference Tournament, Mississippi State's official 1925-26 schedule establishes the North Carolina game as the tournament-ending loss, and Southern Conference historical tournament evidence identifies it as the championship game. Mississippi State's official source gives the score as 38-23; the conference historical record gives 37-23. The package preserves the Mississippi State score and documents the disagreement rather than silently reconciling it.
 
 Mississippi State 1925-26 schedule: https://hailstate.com/sports/mens-basketball/schedule/1925-26
+
+## Accomplishment verification
+
+The owner approved cross-conference accomplishment totals of **10 regular-season conference championships** and **4 conference-tournament championships**.
+
+Mississippi State's current record book identifies four early championship seasons (1911-12, 1912-13, 1913-14, 1915-16), six SEC regular-season championships (1959, 1961, 1962, 1963, 1991, 2004), the 1923 SIAA Tournament championship, and three SEC Tournament championships (1996, 2002, 2009). The record book's historical label "Southern Conference Champions" for the four early seasons is preserved as source wording; the project's independently approved conference chronology still places those seasons in the SIAA era.
+
+The NCAA accomplishment fields remain: 14 NCAA Tournament appearances, 1 Final Four, 0 national championships, best finish Final Four, best-finish year 1996.

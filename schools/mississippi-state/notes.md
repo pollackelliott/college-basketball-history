@@ -95,15 +95,21 @@ Source location tags such as Jackson, Meridian, Greenwood, Vicksburg, Tupelo, Bi
 
 ## 11. Accomplishment cross-check
 
-Mississippi State's official record-book history supports the onboarding accomplishment reference values:
+Mississippi State's official record-book history supports the owner-approved cross-conference accomplishment reference values:
 
-- SEC regular-season championships: **6**
-- SEC Tournament championships: **3**
+- conference regular-season championships: **10**
+  - four pre-SEC championships identified by the record book: **1911-12, 1912-13, 1913-14, 1915-16**
+  - six SEC regular-season championships: **1959, 1961, 1962, 1963, 1991, 2004**
+- conference tournament championships: **4**
+  - **1923 SIAA Tournament**
+  - SEC Tournament championships: **1996, 2002, 2009**
 - NCAA Tournament appearances: **14**
 - Final Fours: **1**
 - national championships: **0**
 - best NCAA finish: **Final Four**
 - best finish year: **1996**
+
+The record book itself labels the four early seasons "Southern Conference Champions," but the owner-approved program chronology places those seasons in Mississippi State's SIAA era. For project accomplishment counting, the championship claims are retained while conference membership is governed by the independently approved chronology.
 
 ## 12. Internal tournament-source corrections
 
