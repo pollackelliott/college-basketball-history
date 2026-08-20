@@ -9039,10 +9039,9 @@ CBBG-0009037,1922-1923,1923-01-22,EXACT,michigan,northwestern,16,10,michigan,0,T
 CBBG-0009038,1922-1923,1923-01-27,EXACT,iowa,northwestern,29,22,iowa,0,TEAM_A_HOME,iowa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0009039,1922-1923,1923-01-29,EXACT,northwestern,ohio-state,18,20,ohio-state,0,TEAM_A_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0009040,1922-1923,1923-02-10,EXACT,iowa,northwestern,28,11,iowa,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0009041,1922-1923,1923-02-03,EXACT,indiana,northwestern,31,25,indiana,0,TEAM_A_HOME,indiana,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0009042,1922-1923,1923-02-17,EXACT,michigan,northwestern,27,13,michigan,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0009043,1922-1923,1923-02-20,EXACT,indiana,northwestern,26,30,northwestern,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0009044,1922-1923,1923-03-03,EXACT,indiana,northwestern,31,25,indiana,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0009044,1922-1923,1923-03-03,EXACT,indiana,northwestern,31,25,indiana,0,TEAM_A_HOME,indiana,indiana-mens-gymnasium,VEN-000254,Bloomington,IN,REGULAR_SEASON,,,,PROVISIONAL,Pre-ingestion Indiana QA: retired duplicate canonical CBBG-0009041 and collapsed Northwestern evidence NWRAW-00230 into this 1923-03-03 game; Indiana official history supports March 3 at Indiana.
 CBBG-0009045,1922-1923,1923-03-05,EXACT,northwestern,wisconsin,17,29,wisconsin,0,TEAM_B_HOME,wisconsin,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0009046,1922-1923,,SEASON,northwestern,purdue,22,24,purdue,0,TEAM_A_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0009047,1923-1924,1923-12-15,EXACT,millikin,northwestern,15,14,millikin,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,

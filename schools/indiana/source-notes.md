@@ -33,6 +33,8 @@ The owner supplied **Conference Tournament Site Reference** workbook. Its Big Te
 
 Venue chronology never establishes H/A/N.
 
+NCAA Tournament status likewise never establishes neutral-site status by itself. Historical tournament games played as a true participant-home game remain H/A when explicit game-level evidence supports that classification. For Indiana, the 1981-03-20 UAB and 1981-03-22 St. Joseph's regional games at Assembly Hall are owner-confirmed Indiana home games; the ledger's original `vs.` wording remains preserved in `source_site_candidate`/`raw_text` as provenance.
+
 ## Home facility evidence
 
 Indiana institutional/history material supports the physical succession from the original Assembly Hall to Men's Gymnasium, the 1928 Fieldhouse, the 1960 New Fieldhouse, and the 1971 Assembly Hall. For project display, the owner directs that the current Bloomington building be called **Assembly Hall** only.

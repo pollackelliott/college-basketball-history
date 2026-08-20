@@ -43,7 +43,7 @@ Named regular-season events remain `REGULAR_SEASON`.
 
 Indiana's Big Ten Tournament history begins with the 1998 tournament. The owner-supplied conference-tournament workbook is used only for shared venue/city/state enrichment; it does not infer H/A/N. Big Ten Tournament games are independently established as neutral by the tournament/game context. Public conference-tournament rounds remain blank except Indiana's 2001 championship-game loss to Iowa.
 
-NCAA Tournament classification is cross-checked against Indiana's dedicated **NCAA Tournament Results** section. Historical consolation/third-place games keep `NCAA_TOURNAMENT` with blank public round. All Indiana NCAA Tournament games in this package are classified as neutral, including the 1981 Bloomington regional games; venue geography does not override the source's neutral site designation.
+NCAA Tournament classification is cross-checked against Indiana's dedicated **NCAA Tournament Results** section. Historical consolation/third-place games keep `NCAA_TOURNAMENT` with blank public round. NCAA Tournament status does **not** determine H/A/N. Tournament games remain `NCAA_TOURNAMENT`, but a game played as a true participant-home game is classified H/A when explicit historical/game-level evidence establishes that status; venue geography alone never creates it. The 1981 Bloomington regional wins over UAB (March 20) and St. Joseph's (March 22) are therefore Indiana home games at Assembly Hall, not neutral-site games.
 
 Postseason NIT appearances in the chronological ledger occur in **1972, 1979, 1985, 2005, 2017, and 2019**. The 1979 and 1985 title games use public round `Championship`; other NIT rounds remain blank.
 
