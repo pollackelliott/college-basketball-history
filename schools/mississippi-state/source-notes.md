@@ -61,6 +61,10 @@ Examples include Jenison Fieldhouse (1963 East Lansing), Carrier Dome -> JMA Wir
 
 Venue chronology never establishes or modifies H/A/N.
 
+### Owner-approved Jackson site convention
+
+For Mississippi State games played in **Jackson, MS**, the owner applies the same alternate-site convention used for Ole Miss in Jackson: games against Mississippi-based opponents remain **neutral**; games against out-of-state opponents are curated as **Mississippi State home games**. In this package that affects 33 Jackson games: **25 home and 8 neutral**. Raw source site markers remain preserved separately from the curated classification.
+
 ## Opponent normalization
 
 The package contains **301 source opponent labels** and resolves each to a stable canonical key/name. Historical and non-current identities are retained rather than forced into current-D1 identities.

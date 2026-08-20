@@ -80,7 +80,16 @@ Historical/non-current identities remain distinct from current D1 programs. In p
 
 ## 10. Site policy
 
-Source `at` establishes `OPPONENT_HOME`; source `vs.` establishes `NEUTRAL`; an unprefixed game line establishes `SOURCE_PROGRAM_HOME`. Geography and venue chronology never establish H/A/N by themselves.
+Source `at` establishes `OPPONENT_HOME`; source `vs.` establishes `NEUTRAL`; an unprefixed game line establishes `SOURCE_PROGRAM_HOME`. Geography and venue chronology never establish H/A/N by themselves, except where an explicit owner-approved alternate-site convention is documented below.
+
+### Jackson, Mississippi alternate-site convention
+
+For the **33 Mississippi State games in Jackson, MS** in this package, the owner established the same convention already used for Ole Miss games in Jackson:
+
+- against an opponent from the state of Mississippi: **NEUTRAL**
+- against an opponent from outside Mississippi: **SOURCE_PROGRAM_HOME**
+
+This produces **25 Mississippi State alternate-site home games** and **8 neutral games** in Jackson. The source's raw site marker is preserved in `source_site_candidate`; only the curated site classification is normalized by this owner convention. No Starkville primary-home venue is assigned to these Jackson games unless independently established by game-level evidence.
 
 Source location tags such as Jackson, Meridian, Greenwood, Vicksburg, Tupelo, Biloxi, Southaven, Little Rock, Dallas, and New York are retained when present. Blank historical locations remain blank rather than being guessed.
 
