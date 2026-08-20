@@ -21294,7 +21294,7 @@ CBBG-0021292,1973-1974,1974-02-23,EXACT,tennessee,vanderbilt,59,53,tennessee,0,T
 CBBG-0021293,1973-1974,1974-02-25,EXACT,mississippi-state,tennessee,62,58,mississippi-state,0,TEAM_A_HOME,mississippi-state,mccarthy-gymnasium,VEN-000250,Starkville,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=mississippi-state/MSURAW-01247;venue_key=mccarthy-gymnasium;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0021294,1973-1974,1974-03-02,EXACT,lsu,tennessee,80,100,tennessee,0,TEAM_B_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021295,1973-1974,1974-03-04,EXACT,georgia,tennessee,89,97,tennessee,0,TEAM_A_HOME,georgia,,,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0021296,1973-1974,1974-03-15,EXACT,indiana,tennessee,73,71,indiana,0,NEUTRAL,,,,St. Louis,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0021296,1973-1974,1974-03-15,EXACT,indiana,tennessee,73,71,indiana,0,NEUTRAL,,,,St. Louis,MO,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021297,1974-1975,1974-11-30,EXACT,milwaukee,tennessee,65,85,tennessee,0,TEAM_B_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021298,1974-1975,1974-12-07,EXACT,michigan,tennessee,78,74,michigan,0,TEAM_A_HOME,michigan,,,Ann Arbor,MI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021299,1974-1975,1974-12-13,EXACT,navy,tennessee,59,86,tennessee,0,TEAM_B_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
@@ -21421,7 +21421,7 @@ CBBG-0021419,1979-1980,1979-12-15,EXACT,arizona-state,tennessee,79,82,tennessee,
 CBBG-0021420,1979-1980,1979-12-17,EXACT,minnesota,tennessee,64,71,tennessee,0,TEAM_B_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021421,1979-1980,1979-12-19,EXACT,alabama,tennessee,78,79,tennessee,3,TEAM_B_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021422,1979-1980,1979-12-22,EXACT,ohio-state,tennessee,91,65,ohio-state,0,TEAM_A_HOME,ohio-state,,,Columbus,OH,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0021423,1979-1980,1979-12-28,EXACT,indiana,tennessee,70,68,indiana,0,NEUTRAL,,,,San Diego,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0021423,1979-1980,1979-12-28,EXACT,indiana,tennessee,70,68,indiana,0,NEUTRAL,,,,San Diego,CA,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021424,1979-1980,1979-12-29,EXACT,san-diego-state,tennessee,77,96,tennessee,0,TEAM_A_HOME,san-diego-state,,,San Diego,CA,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021425,1979-1980,1980-01-02,EXACT,ole-miss,tennessee,65,66,tennessee,0,TEAM_A_HOME,ole-miss,tad-smith-coliseum,VEN-000240,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-01401;venue_key=tad-smith-coliseum;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0021426,1979-1980,1980-01-12,EXACT,tennessee,vanderbilt,71,63,tennessee,0,TEAM_A_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
