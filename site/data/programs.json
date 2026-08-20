@@ -4211,8 +4211,8 @@
       "state": "MS",
       "primary_hex": "#660000",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 8,
+      "history_start_season": "1908-1909",
+      "conference_regular_season_championships": 10,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 14,
       "final_four_appearances": 1,
@@ -4220,7 +4220,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1996,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"

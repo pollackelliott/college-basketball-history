@@ -3270,7 +3270,7 @@
       "opponent_key": "mississippi-state",
       "opponent_name": "Mississippi State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
@@ -55063,7 +55063,7 @@
       "opponent_key": "mississippi-state",
       "opponent_name": "Mississippi State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 65,
       "opponent_score": 70,
       "score_known": true,
@@ -73813,7 +73813,7 @@
       "opponent_key": "mississippi-state",
       "opponent_name": "Mississippi State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 57,
       "opponent_score": 66,
       "score_known": true,
