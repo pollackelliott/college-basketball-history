@@ -1,0 +1,4 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,lsu,1908-1909,1921-1922,siaa,Southern Intercollegiate Athletic Association,conference,False,LSU institutional athletics history: LSU joined SIAA in 1896; basketball begins 1908-09.,Owner history scope begins 1908-09; continuous SIAA membership through 1921-22.
+1,lsu,1922-1923,1931-1932,southern,Southern,conference,False,LSU Libraries institutional athletics history and Southern Conference history: LSU joined the Southern Conference in 1922.,Project stable Southern identity; first basketball season following LSU joining in calendar 1922 is 1922-23.
+2,lsu,1932-1933,,sec,SEC,conference,True,LSU institutional history: charter SEC member; inaugural SEC basketball season/tournament followed 1932-33.,Continuous SEC membership from inaugural 1932-33 basketball season.
