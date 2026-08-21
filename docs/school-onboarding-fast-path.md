@@ -9,6 +9,11 @@ reconciliation, publication, testing, pull-request release, and production proof
 The detailed historical/data rules in `new-team-onboarding-runbook.md` still apply;
 this document controls how those rules are executed.
 
+The operating rationale, anti-churn rules, and Purdue-proven efficiency lessons are
+preserved in `onboarding-process-efficiency.md`. Treat that document as a required
+companion when deciding how much technical work to batch, what to ask the owner to
+review, and when a failure should or should not reopen historical decisions.
+
 ## Why this replaced the serial procedure
 
 The earlier procedure discovered identity questions, discrepancies,
@@ -25,7 +30,22 @@ Technical gate failures do not reopen unchanged owner decisions.
 
 ## Phase 0 — package checkpoint
 
-In the Codespace:
+Prefer to finish and QA the complete six-file portfolio before it mutates global
+repository data. If the portfolio was prepared outside the Codespace and transferred
+as a ZIP, treat the ZIP as a transport artifact rather than repository content.
+Before any tracked write, run one read-only checkpoint that verifies:
+
+- current branch and HEAD;
+- tracked worktree state;
+- local `main` versus `origin/main`;
+- the expected prior production checkpoint in `main` ancestry;
+- package presence and SHA-256;
+- exactly the six expected flat archive entries.
+
+Do not automatically stash, reset, delete an existing branch, or overwrite unexpected
+tracked work. Stop and identify any state that differs from the expected checkpoint.
+
+Then, in the Codespace:
 
 ```bash
 git switch main
@@ -34,9 +54,31 @@ school_key="<school_key>"
 git switch -c "data/${school_key}-onboarding"
 ```
 
-Build the complete six-file package and record the explicit owner-confirmed history
-scope in `data/reference/programs.csv`. Verify the accomplishment reference against
-authoritative sources. Commit this stable checkpoint before global ingestion.
+Install exactly the six package files under `schools/<school_key>/`. Record the
+explicit owner-confirmed history scope in `data/reference/programs.csv`. Add only
+reference identities that must exist before preflight can interpret the package,
+such as genuinely new physical venues and their required display-name rows.
+
+Research and verify expected accomplishment values before Gate 1, but normally let
+the onboarding decision machinery apply `program-accomplishments.csv` after owner
+approval rather than manually pre-solving that decision in Phase 0.
+
+Preserve existing file line endings. For repositories containing CRLF text, use the
+CRLF-safe whitespace treatment rather than converting whole files merely to satisfy
+a false-positive whitespace gate:
+
+```bash
+git \
+  -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol \
+  diff --cached --check
+```
+
+Stage only the explicit intended paths, never `git add -A`. If a transfer ZIP was
+used, delete it after verified extraction and do not commit it.
+
+Run package/repository QA, then commit this stable package/reference foundation
+checkpoint before global ingestion. Do not add school-specific reconciliation code
+unless the generic workflow truly cannot represent the problem.
 
 ## Phase 1 — one preflight and one owner decision batch
 
@@ -73,7 +115,18 @@ An unknown date is printed as `[unknown]`; it is never omitted or inferred.
 
 ### Owner gate 1
 
-Review all rows together. In `review.csv`, fill only:
+Review all rows together. The collaborator/agent should compress the machine review
+into a human decision packet rather than requiring the owner to parse a large raw
+CSV. Group identities, definite discrepancies, conditional discrepancies,
+accomplishments, and publication; collapse same-season candidate identities using
+available date/score/result/site context; and research only the rows where added
+evidence can materially change the disposition.
+
+If a large report is clipped or awkward to paste, request only the smallest missing
+subset with a targeted extractor. Do not make the owner reproduce already available
+output.
+
+In `review.csv`, fill only:
 
 - `decision`
 - `resolution_basis`
@@ -231,3 +284,5 @@ Production success.
 - A PR-head change after preview requires another preview approval.
 - An exact Production SHA or JSON mismatch is a release failure.
 - Historical uncertainty is valid. Unsupported certainty is not.
+- Technical failures do not reopen unchanged historical decisions. Fix the technical
+  defect at the narrowest layer possible, preserving the sealed historical judgment.
