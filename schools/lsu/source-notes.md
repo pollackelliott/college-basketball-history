@@ -47,3 +47,18 @@ Historical abbreviations and OCR variants are preserved in `source_opponent_labe
 
 ## Owner-supplied conference tournament site reference — 2026-08-21
 `Conference_Tournament_Site_Reference(3).xlsm` is not treated as universal canon because the workbook is still under construction. The owner explicitly authorized the completed SIAA, SoCon, and SEC sections for LSU's full conference-tournament history. It supplies the targeted venue corrections/additions applied in this frozen package. No unfinished conference section was used.
+
+### LSU Athletics — UCF, November 24, 2024
+
+LSU Athletics official contemporary game evidence establishes that the
+November 24, 2024 Greenbrier Tip-Off opponent was UCF, not Florida.
+
+Result: LSU 109, UCF 102 (3OT)
+Site: White Sulphur Springs, WV
+Event: Greenbrier Tip-Off
+
+Official recap:
+https://lsusports.net/news/2024/11/24/lsu-rallies-wins-109-102-in-3ot-at-greenbriar-tip-off-vs-ucf/
+
+Used to normalize the malformed year-by-year source token `UF` to UCF.
+The original source label and raw media-guide text remain preserved.
