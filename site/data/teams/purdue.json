@@ -3152,7 +3152,7 @@
       "opponent_key": "lsu",
       "opponent_name": "LSU",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
@@ -49870,7 +49870,7 @@
       "opponent_key": "lsu",
       "opponent_name": "LSU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 87,
       "opponent_score": 94,
       "score_known": true,
@@ -63320,7 +63320,7 @@
       "opponent_key": "lsu",
       "opponent_name": "LSU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 80,
       "opponent_score": 56,
       "score_known": true,
