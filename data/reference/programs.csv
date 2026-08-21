@@ -236,7 +236,7 @@ prairie-view-a-m,Prairie View A&M,Prairie View A&M,Panthers,Prairie View,TX,#330
 presbyterian,Presbyterian,Presbyterian,Blue Hose,Clinton,SC,#0060A9,#FFFFFF,Yes,No,,,,
 princeton,Princeton,Princeton,Tigers,Princeton,NJ,#FF571F,#000000,Yes,No,,,,
 providence,Providence,Providence,Friars,Providence,RI,#000000,#8A8D8F,Yes,No,,,,
-purdue,Purdue,Purdue,Boilermakers,West Lafayette,IN,#CEB888,#000000,Yes,No,1896-1897,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-20 that Purdue has always been D1/top-level for site purposes; site history begins with program inception in 1896-97.
+purdue,Purdue,Purdue,Boilermakers,West Lafayette,IN,#CEB888,#000000,Yes,Yes,1896-1897,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Elliott confirmed on 2026-08-20 that Purdue has always been D1/top-level for site purposes; site history begins with program inception in 1896-97.
 purdue-fort-wayne,Purdue Fort Wayne,Purdue Fort Wayne,Mastodons,Fort Wayne,IN,#CFB991,#000000,Yes,No,,,,
 queens-university,Queens University,Queens,Royals,Charlotte,NC,#192C66,#857040,Yes,No,,,,
 quinnipiac,Quinnipiac,Quinnipiac,Bobcats,Hamden,CT,#0C2340,#FFB81C,Yes,No,,,,
