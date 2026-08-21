@@ -236,7 +236,7 @@ prairie-view-a-m,4,3,3,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Owner-supp
 presbyterian,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 princeton,36,2,26,1,0,FINAL_FOUR,1965,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 providence,1,2,22,2,0,FINAL_FOUR,1987,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-purdue,26,3,37,3,0,NATIONAL_RUNNER_UP,2024,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+purdue,26,3,37,3,0,NATIONAL_RUNNER_UP,2024,VERIFIED,"Owner Gate 1 verified Purdue official records: 26 conference regular-season championships, 3 conference-tournament championships, 37 NCAA Tournament appearances, 3 Final Fours, 0 national championships, and NATIONAL_RUNNER_UP as the best NCAA finish, most recently in 2024.",MATCH,Verified through onboarding plan 7a38ae038dd3.
 purdue-fort-wayne,2,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 queens-university,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 quinnipiac,3,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

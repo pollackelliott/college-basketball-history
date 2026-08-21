@@ -24,9 +24,9 @@
     }
   },
   "summary": {
-    "games": 2856,
+    "games": 2857,
     "wins": 1429,
-    "losses": 1427,
+    "losses": 1428,
     "ties": 0,
     "first_season": "1908-1909",
     "last_season": "2025-2026",
@@ -672,9 +672,9 @@
     },
     {
       "season_label": "1933-1934",
-      "games": 16,
+      "games": 17,
       "wins": 7,
-      "losses": 9,
+      "losses": 10,
       "ties": 0
     },
     {
@@ -4005,16 +4005,16 @@
       "opponent_key": "purdue",
       "opponent_name": "Purdue",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
       },
-      "first_season": "2024-2025",
+      "first_season": "1933-1934",
       "last_season": "2024-2025",
-      "games": 1,
+      "games": 2,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "ties": 0
     },
     {
@@ -13713,6 +13713,31 @@
       "site_city": "Atlanta",
       "site_state": "GA",
       "game_type": "CONFERENCE_TOURNAMENT",
+      "postseason_round": null,
+      "administrative_status": null,
+      "administrative_note": null
+    },
+    {
+      "canonical_game_id": "CBBG-0038118",
+      "season_label": "1933-1934",
+      "game_date": "1934-01-04",
+      "date_precision": "EXACT",
+      "opponent_key": "purdue",
+      "opponent_name": "Purdue",
+      "opponent_current_d1": true,
+      "opponent_public_page_enabled": true,
+      "team_score": 25,
+      "opponent_score": 61,
+      "score_known": true,
+      "result": "L",
+      "overtime_periods": 0,
+      "site": "AWAY",
+      "venue_key": "purdue-memorial-gymnasium",
+      "venue_id": "VEN-000264",
+      "venue_name": "Memorial Gymnasium",
+      "site_city": "West Lafayette",
+      "site_state": "IN",
+      "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
       "administrative_note": null
@@ -75275,7 +75300,7 @@
       "opponent_key": "purdue",
       "opponent_name": "Purdue",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 78,
       "opponent_score": 80,
       "score_known": true,

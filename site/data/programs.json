@@ -5723,7 +5723,7 @@
       "state": "IN",
       "primary_hex": "#CEB888",
       "secondary_hex": "#000000",
-      "history_start_season": null,
+      "history_start_season": "1896-1897",
       "conference_regular_season_championships": 26,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 37,
@@ -5732,7 +5732,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 2024,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
