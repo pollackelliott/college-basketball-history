@@ -2758,7 +2758,7 @@
     },
     {
       "opponent_key": "hawaii-pacific",
-      "opponent_name": "Hawaii-Pacific",
+      "opponent_name": "Hawaii Pacific",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -62535,7 +62535,7 @@
       "game_date": "2000-11-24",
       "date_precision": "EXACT",
       "opponent_key": "hawaii-pacific",
-      "opponent_name": "Hawaii-Pacific",
+      "opponent_name": "Hawaii Pacific",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 86,

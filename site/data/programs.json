@@ -3731,7 +3731,7 @@
       "state": "LA",
       "primary_hex": "#461D7C",
       "secondary_hex": "#FDD023",
-      "history_start_season": null,
+      "history_start_season": "1908-1909",
       "conference_regular_season_championships": 14,
       "conference_tournament_championships": 1,
       "ncaa_tournament_appearances": 24,
@@ -3740,7 +3740,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 2006,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
