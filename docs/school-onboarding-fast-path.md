@@ -14,6 +14,15 @@ preserved in `onboarding-process-efficiency.md`. Treat that document as a requir
 companion when deciding how much technical work to batch, what to ask the owner to
 review, and when a failure should or should not reopen historical decisions.
 
+Two additional operating companions are now required:
+
+- `codespace-terminal-safety.md` — prevents shell-driving failures such as RVM
+  nounset crashes, accidental interactive-shell exits, expected-negative probes
+  under `set -e`, and repository-root helper clutter;
+- `parallel-portfolio-pipeline.md` — defines the optional high-major “five in the
+  holster” model: parallel source/portfolio research with strictly serialized
+  current-main integration.
+
 ## Why this replaced the serial procedure
 
 The earlier procedure discovered identity questions, discrepancies,
@@ -28,6 +37,27 @@ release mechanics. The owner should normally be interrupted only twice: once for
 consolidated historical/reconciliation decision batch and once for the exact preview.
 Technical gate failures do not reopen unchanged owner decisions.
 
+## Optional parallel portfolio research — one integration lane
+
+For current high-major onboarding, multiple school portfolios may be researched and
+assembled concurrently before repository integration. The recommended operating mode
+is up to five independent research chats feeding one serialized Codespace integration
+lane.
+
+Parallel research may construct and QA six-file portfolios, gather authoritative
+sources, and freeze research artifacts. It must not perform concurrent tracked writes,
+canonical preflight approval, apply, or release against stale repository state.
+
+Every parallel research package must record the `main` SHA it used as
+`research_base_sha`. Any new numeric global venue IDs assigned during research are
+provisional. When that school reaches the front of the integration queue, synchronize
+current `main`, reconcile all shared/global identities again, reuse any venue/reference
+identity added by intervening teams, allocate fresh numeric IDs where needed, rerun
+package QA and hashes, and only then begin tracked Phase 0.
+
+See `parallel-portfolio-pipeline.md` for the required research-freeze versus
+integration-freeze distinction and the current-main rebase checklist.
+
 ## Phase 0 — package checkpoint
 
 Prefer to finish and QA the complete six-file portfolio before it mutates global
@@ -40,7 +70,9 @@ Before any tracked write, run one read-only checkpoint that verifies:
 - local `main` versus `origin/main`;
 - the expected prior production checkpoint in `main` ancestry;
 - package presence and SHA-256;
-- exactly the six expected flat archive entries.
+- exactly the six expected flat archive entries;
+- for a parallel research-frozen package, the recorded `research_base_sha` and the
+  completed current-main shared-reference rebase.
 
 Do not automatically stash, reset, delete an existing branch, or overwrite unexpected
 tracked work. Stop and identify any state that differs from the expected checkpoint.
@@ -62,6 +94,36 @@ such as genuinely new physical venues and their required display-name rows.
 Research and verify expected accomplishment values before Gate 1, but normally let
 the onboarding decision machinery apply `program-accomplishments.csv` after owner
 approval rather than manually pre-solving that decision in Phase 0.
+
+### Codespace shell safety
+
+Do not use Bash nounset in this project Codespace. In particular, do not use:
+
+```bash
+set -u
+```
+
+or:
+
+```bash
+set -euo pipefail
+```
+
+The Codespace's RVM shell integration has previously terminated terminals on nounset
+failures unrelated to repository data.
+
+For complex guarded operations, prefer a quoted heredoc that writes a child script
+under `/tmp`, then run that child script. A child script may use `set -eo pipefail`
+or explicit return-code checks. Do not use `exit` as a STOP mechanism in a block
+pasted directly into the owner's live interactive shell.
+
+Expected-negative probes such as branch-existence checks, `grep` with an acceptable
+no-match result, or optional-file checks must be wrapped in explicit `if` logic under
+`set -e`; do not let an expected status 1 abort a script accidentally.
+
+If a script fails, inspect branch, HEAD, worktree state, and completed stages before
+rerunning. Keep helper scripts and diagnostics in `/tmp` or ignored `.onboarding/`
+paths rather than the repository root. See `codespace-terminal-safety.md`.
 
 Preserve existing file line endings. For repositories containing CRLF text, use the
 CRLF-safe whitespace treatment rather than converting whole files merely to satisfy
@@ -122,6 +184,12 @@ accomplishments, and publication; collapse same-season candidate identities usin
 available date/score/result/site context; and research only the rows where added
 evidence can materially change the disposition.
 
+Before asking the owner to adjudicate a row, correct any demonstrable package
+normalization defect that created the row in the first place. Examples include a
+malformed opponent token mapped to the wrong institution or a shared venue/display
+identity collision. Regenerate preflight after the narrow package fix rather than
+asking the owner to rule on an extraction error.
+
 If a large report is clipped or awkward to paste, request only the smallest missing
 subset with a targeted extractor. Do not make the owner reproduce already available
 output.
@@ -164,6 +232,13 @@ The command emits one SHA-256 plan hash. Any change to the school package, canon
 data, evidence, discrepancies, program metadata, accomplishments, conferences, or
 the decisions invalidates that approval.
 
+If a later purely technical normalization fix requires a fresh preflight, compare the
+complete decision-ID universe with the previously approved one. When the decision
+universe is identical, carry forward the already-approved decisions by exact
+`decision_id` and reseal as required; do not ask the owner to re-decide unchanged
+basketball history. If the decision universe materially changes, stop and review the
+new/changed rows.
+
 ## Phase 2 — one transactional apply
 
 Run the exact command printed by `--approve`:
@@ -191,7 +266,10 @@ The command requires a clean onboarding branch. It then:
 11. copies only the already-validated changed files back to the real branch;
 12. re-verifies the copied state.
 
-If rehearsal fails, the real tracked working tree remains unchanged.
+If rehearsal fails, the real tracked working tree remains unchanged. Diagnose whether
+the failure is historical/data-bearing or purely technical before altering package
+inputs. A site-build/display-normalization failure does not automatically reopen
+unchanged Owner Gate 1 decisions.
 
 Successful apply produces:
 
@@ -286,3 +364,9 @@ Production success.
 - Historical uncertainty is valid. Unsupported certainty is not.
 - Technical failures do not reopen unchanged historical decisions. Fix the technical
   defect at the narrowest layer possible, preserving the sealed historical judgment.
+- A research-frozen parallel portfolio must be rebased against current `main` before
+  tracked Phase 0; stale numeric venue IDs or shared-reference assumptions are never
+  accepted merely because they were valid when research began.
+- A terminal/script failure is inspected before rerunning. Do not use `set -u`, do
+  not kill the owner's live shell with an interactive `exit`, and do not let
+  expected-negative probes abort a guarded child script accidentally.
