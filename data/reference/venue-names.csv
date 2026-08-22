@@ -321,3 +321,19 @@ VEN-000273,UNT Coliseum,untcoliseum,PROJECT_DISPLAY,,,,LSU Athletics official fa
 VEN-000274,Atlanta Municipal Auditorium,atlantamunicipalauditorium,PROJECT_DISPLAY,,,,Owner-supplied Conference Tournament Site Reference; LSU Team #17 onboarding research.,Project display identity for historical Atlanta Municipal Auditorium.
 VEN-000270,Cow Palace,cowpalace,SOURCE_ALIAS,,,,LSU Team #17 onboarding source package and LSU Athletics historical venue evidence.,Historical nickname/alias for John M. Parker Agricultural Coliseum.
 VEN-000163,LSU Assembly Center,lsuassemblycenter,SOURCE_ALIAS,,,,LSU Team #17 onboarding source package and LSU Athletics historical venue evidence.,Historical name/alias for the Pete Maravich Assembly Center.
+VEN-000275,Athens YMCA,athensymca,PROJECT_DISPLAY,,,,Georgia Team #18 onboarding physical venue research.,
+VEN-000276,Alumni Hall,alumnihall,PROJECT_DISPLAY,,,,Georgia Team #18 onboarding physical venue research.,Georgia-specific physical identity.
+VEN-000277,The Octagon,theoctagon,PROJECT_DISPLAY,,,,Georgia Team #18 onboarding physical venue research.,
+VEN-000278,Moss Auditorium,mossauditorium,PROJECT_DISPLAY,,,,Georgia Team #18 onboarding physical venue research.,
+VEN-000279,Woodruff Hall,woodruffhall,PROJECT_DISPLAY,1925-02-21,,EXACT,Georgia Team #18 onboarding physical venue research.,
+VEN-000280,TD Arena,tdarena,PROJECT_DISPLAY,,,,Georgia Team #18 onboarding physical venue research.,
+VEN-000007,Alumni Memorial Gym,alumnimemorialgym,HISTORICAL_OR_ALIAS,,,,Georgia Team #18 onboarding venue evidence.,Historical/source alias used by Georgia package for the established Knoxville physical venue.
+VEN-000276,Memorial Hall,memorialhall,HISTORICAL_OR_ALIAS,,,,Georgia Athletics official historical home-court evidence; Georgia 2025-26 media guide.,Historical name for Georgia Alumni Hall physical identity.
+VEN-000275,Old Athens YMCA,oldathensymca,HISTORICAL_OR_ALIAS,,,,Georgia Athletics official historical home-court evidence; Georgia 2025-26 media guide.,Historical/source alias for Athens YMCA.
+VEN-000274,Municipal Auditorium,municipalauditorium,HISTORICAL_OR_ALIAS,,,,Owner-supplied Conference Tournament Site Reference; Georgia Team #18 onboarding research.,Source shorthand for Atlanta Municipal Auditorium in Georgia tournament evidence.
+VEN-000109,Birmingham-Jefferson Civic Center,birminghamjeffersonciviccenter,HISTORICAL_OR_ALIAS,,,,Georgia Team #18 postseason venue evidence.,Historical name for the physical arena now registered as Legacy Arena.
+VEN-000109,BJCC,bjcc,HISTORICAL_OR_ALIAS,,,,Georgia Team #18 postseason venue evidence.,Source abbreviation for Birmingham-Jefferson Civic Center / Legacy Arena.
+VEN-000249,Alexander Memorial Coliseum,alexandermemorialcoliseum,HISTORICAL_OR_ALIAS,,,,Georgia Team #18 tournament venue evidence.,Historical name for the physical Georgia Tech arena now registered as McCamish Pavilion.
+VEN-000131,The Pyramid,thepyramid,HISTORICAL_OR_ALIAS,,,,Georgia Team #18 postseason venue evidence.,Historical/source alias for Memphis Pyramid.
+VEN-000198,Georgia Coliseum,georgiacoliseum,HISTORICAL_OR_ALIAS,,,,Georgia Athletics official facility history; Georgia 2025-26 media guide.,Original name of the physical building now displayed as Stegeman Coliseum.
+VEN-000277,Octagon,octagon,HISTORICAL_OR_ALIAS,,,,Georgia Athletics official historical home-court evidence; Georgia 2025-26 media guide.,Source shorthand for The Octagon.

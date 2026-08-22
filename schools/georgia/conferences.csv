@@ -1,0 +1,4 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,georgia,1905-1906,1920-1921,siaa,Southern Intercollegiate Athletic Association,conference,False,Georgia athletics/conference historical evidence; owner-approved SIAA tournament-site reference.,Georgia basketball history begins in 1905-06; project timeline treats Georgia as SIAA through 1920-21.
+1,georgia,1921-1922,1931-1932,southern,Southern,conference,False,Georgia athletics/conference historical evidence; Southern Conference formation and Georgia membership history.,Primary membership is Southern Conference beginning 1921-22. Early joint SIAA/Southern tournament context is preserved in provenance rather than represented as dual primary membership.
+2,georgia,1932-1933,,sec,SEC,conference,True,Georgia/SEC history: Georgia is a charter Southeastern Conference member.,Continuous SEC membership from the inaugural 1932-33 basketball season.
