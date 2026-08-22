@@ -96,7 +96,7 @@ gardner-webb,1,1,1,0,0,ROUND_OF_64,2019,OWNER_BASELINE_UNVERIFIED,Owner-supplied
 george-mason,5,4,6,1,0,FINAL_FOUR,2006,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 george-washington,5,5,11,0,0,SWEET_SIXTEEN,1993,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 georgetown,9,11,31,5,1,NATIONAL_CHAMPION,1984,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-georgia,7,3,14,1,0,FINAL_FOUR,1983,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+georgia,7,3,14,1,0,FINAL_FOUR,1983,VERIFIED,"Owner Gate 1 verified Georgia accomplishments through 2025-26: 7 conference regular-season championships (5 SIAA: 1909, 1914, 1916, 1917, 1918; 1 Southern: 1931; 1 SEC: 1990), 3 conference tournament championships (1932 Southern, 1983 SEC, 2008 SEC), 14 on-court NCAA Tournament appearances, 1 Final Four, 0 national championships, best finish FINAL_FOUR in 1983.",MATCH,Verified through onboarding plan c441a6f50ea8.
 georgia-southern,5,3,3,0,0,ROUND_OF_64,1992,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 georgia-state,6,6,6,0,0,ROUND_OF_32,2015,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 georgia-tech,3,5,17,2,0,NATIONAL_RUNNER_UP,2004,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
