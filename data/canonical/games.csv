@@ -21145,7 +21145,7 @@ CBBG-0021144,1966-1967,1967-03-18,EXACT,indiana,tennessee,51,44,indiana,0,NEUTRA
 CBBG-0021145,1967-1968,1967-12-01,EXACT,richmond,tennessee,45,93,tennessee,0,TEAM_B_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021146,1967-1968,1967-12-16,EXACT,tennessee,tulsa,56,48,tennessee,0,TEAM_A_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021147,1967-1968,1967-12-20,EXACT,tennessee,wake-forest,81,63,tennessee,0,TEAM_A_HOME,tennessee,stokely-athletics-center,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0021148,1967-1968,1967-12-27,EXACT,iowa,tennessee,64,59,iowa,0,NEUTRAL,,,,Los Angeles,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0021148,1967-1968,1967-12-27,EXACT,iowa,tennessee,64,59,iowa,0,NEUTRAL,,,,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021149,1967-1968,1967-12-28,EXACT,tennessee,usc,78,68,tennessee,0,NEUTRAL,,,,Los Angeles,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021150,1967-1968,1967-12-29,EXACT,tennessee,utah-state,85,66,tennessee,0,NEUTRAL,,,,Los Angeles,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021151,1967-1968,1968-01-06,EXACT,alabama,tennessee,63,82,tennessee,0,TEAM_A_HOME,alabama,foster-auditorium,VEN-000067,Tuscaloosa,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=alabama/ALARAW-01109;venue_key=foster-auditorium;site_type=TEAM_A_HOME;fields=venue_key]
