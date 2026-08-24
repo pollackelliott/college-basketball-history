@@ -44,6 +44,7 @@ The acceptance gate checks, at minimum:
 - exactly the six flat package files;
 - stable source-game IDs;
 - valid season/date formatting when known;
+- `overtime_periods` is blank or a nonnegative integer;
 - resolved opponent keys;
 - valid site/game-type vocabulary;
 - atomic city/state pairs;
@@ -78,7 +79,7 @@ Review the mapping summary, then normally rerun with:
 --apply --commit
 ```
 
-The staging tool requires the onboarding branch to point exactly at current `origin/main`, requires `research_base_sha` to be an ancestor of current main, verifies the ZIP and research acceptance gate, rebases venue identities, reuses mechanically safe global identities, renumbers stale provisional IDs, stops on ambiguous physical identity, installs the six files, applies owner-confirmed scope metadata, validates, writes ignored `.onboarding/<school>/integration-freeze.json`, and can create the stable Phase 0 checkpoint.
+The staging tool requires the onboarding branch to point exactly at current `origin/main`, requires `research_base_sha` to be an ancestor of current main, verifies the ZIP and research acceptance gate, rebases venue identities, reuses mechanically safe global identities, ignores research-time numeric IDs when creating genuinely new physical venues, assigns every new physical venue the next authoritative global ID from current main, stops on ambiguous physical identity, installs the six files, applies owner-confirmed scope metadata, validates, writes ignored `.onboarding/<school>/integration-freeze.json`, and can create the stable Phase 0 checkpoint.
 
 `RESEARCH_FROZEN` remains immutable source/research provenance. The integration manifest records the current-main `INTEGRATION_FROZEN` mapping and fresh member hashes.
 
@@ -200,6 +201,8 @@ Owner Gate 2 reviews the exact PR-head Preview. After approval:
 ```bash
 python tools/release_school.py <school_key> --merge --preview-approved
 ```
+
+The release PR labels the apply-generated path list as the **Sealed apply boundary**. That list is intentionally narrower than the complete PR diff: committed Phase 0 package/reference changes, including new global venue/reference rows, are also part of the PR and remain visible in GitHub's full changed-file review.
 
 Preview success is never Production success. Exact merged-main Production proof remains mandatory.
 
