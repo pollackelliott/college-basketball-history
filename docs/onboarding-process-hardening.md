@@ -1,73 +1,67 @@
 # Onboarding Process Hardening — Post-Iowa Amendment
 
 - **Status:** Required process amendment after Iowa (Team #19)
-- **Applies to:** every school entering the serialized Implementation lane after Iowa
+- **Applies to:** every school entering serialized Implementation after Iowa
 - **Goal:** more throughput without less historical or repository quality
 
-Iowa proved that the permanent onboarding architecture is sound, but also exposed a specific inefficiency pattern: technical readiness failures were discovered only after Owner Gate 1 had already been sealed. That caused repeated preflight -> carry-forward -> reseal cycles even though the historical decision universe had not changed.
+Iowa proved that the permanent onboarding architecture is sound, but exposed a specific inefficiency: deterministic technical failures were first discovered after Owner Gate 1 had been sealed. That produced repeated preflight → carry-forward → reseal cycles even when basketball-history decisions had not changed.
 
-This amendment moves deterministic checks earlier, automates repetitive Gate 1 mechanics, and replaces one-command-at-a-time technical handoffs with guarded phase-sized operations.
-
-The historical rules in `new-team-onboarding-runbook.md`, repository safety rules in `codespace-terminal-safety.md`, and release requirements in `school-onboarding-fast-path.md` remain authoritative. This document narrows how those rules should be executed after Iowa.
+This amendment moves repeatable checks earlier, automates Gate 1 mechanics, and replaces one-command-at-a-time technical handoffs with guarded phase-sized operations. The historical rules in `new-team-onboarding-runbook.md`, shell rules in `codespace-terminal-safety.md`, parallelism rules in `parallel-portfolio-pipeline.md`, and release guarantees in `school-onboarding-fast-path.md` remain authoritative.
 
 ## 1. Interaction standard: phase-sized, not command-sized
 
-The Implementation lane should not normally ask the owner to paste dozens of tiny setup commands.
-
-Use one guarded operation for each reversible technical phase:
+The Implementation lane should normally use one guarded operation for each reversible technical phase:
 
 1. repository/main checkpoint and onboarding-branch creation;
-2. research-package acceptance + current-main Phase 0 staging;
+2. research acceptance + current-main Phase 0 staging;
 3. authoritative preflight;
 4. compact Gate 1 decision encoding;
 5. pre-seal technical rehearsal;
 6. sealed apply;
 7. release preparation;
-8. Gate 2 Preview approval;
+8. Owner Gate 2 Preview approval;
 9. merge + exact Production proof.
 
-Stop between those phases only when:
+Stop between phases only when repository state is unexpected, a genuine historical judgment is required, an irreversible boundary is being crossed, or a tool reports a blocker that cannot be resolved mechanically.
 
-- repository state is unexpected;
-- a historical/owner judgment is genuinely required;
-- an irreversible boundary is about to be crossed;
-- a tool reports a blocker that cannot be resolved mechanically.
+Phase-sized work must still obey terminal safety: no interactive `set -u`, no `set -euo pipefail`, no unsafe interactive `exit`, no `git add -A`, and complex guarded shell work belongs in a `/tmp` child script.
 
-The permanent terminal-safety rules still apply. Phase-sized work should run through repository tools or `/tmp` child scripts rather than giant unguarded interactive shell blocks.
+## 2. Research freeze is an executable acceptance state
 
-## 2. Research freeze is now an executable acceptance gate
+A portfolio should not be called `RESEARCH_FROZEN` merely because extraction and row counts look complete.
 
-A six-file package should not be called `RESEARCH_FROZEN` merely because extraction and row counts look complete.
-
-Run the generic acceptance checker whenever the research environment has the repository tooling available:
+When the repo tooling is available, run:
 
 ```bash
 python tools/onboarding_hardening.py research-check <school_key> <portfolio.zip> \
   --expected-sha256 <research_zip_sha256>
 ```
 
-If the research lane itself does not have the repo mounted, the serialized Implementation lane must run this command immediately upon receipt, before Phase 0 writes.
+If the research lane does not have the repo mounted, the serialized Implementation lane runs this immediately upon receipt, before Phase 0 writes.
 
-The acceptance gate requires, at minimum:
+The acceptance gate checks, at minimum:
 
 - exactly the six flat package files;
 - stable source-game IDs;
+- valid season/date formatting when known;
 - resolved opponent keys;
 - valid site/game-type vocabulary;
 - atomic city/state pairs;
 - every curated venue name represented in local `venues.csv`;
-- every NCAA Tournament row to have complete curated venue, city, state, and curated postseason round;
-- no exhibition-like row left in the competitive package.
+- every NCAA Tournament row has complete curated venue, city, and state;
+- ordinary NCAA Tournament rows have a normalized curated postseason round;
+- an NCAA consolation/third-place game may correctly keep a blank round when the source evidence explicitly identifies that exception;
+- no exhibition-like row remains in the competitive package.
 
-Unknown exact dates and unknown played scores remain valid when historically honest; they are reported, not guessed.
+Unknown exact dates and unknown played scores remain valid when historically honest; they are reported rather than guessed.
 
-This rule exists specifically so ordinary research completeness defects—such as missing NCAA sites—do not first surface inside serialized preflight.
+The purpose is to keep ordinary research-completeness defects—such as Iowa's initially missing NCAA sites—out of serialized preflight.
 
-## 3. Phase 0 is a guarded current-main staging operation
+## 3. Phase 0 is one guarded current-main staging operation
 
 The research ZIP remains immutable transport provenance. The tracked package is created only after current-main rebase.
 
-After synchronizing `main` and creating `data/<school>-onboarding`, use:
+After synchronizing `main` and creating `data/<school>-onboarding`, dry-run:
 
 ```bash
 python tools/stage_research_portfolio.py <school_key> <portfolio.zip> \
@@ -78,67 +72,48 @@ python tools/stage_research_portfolio.py <school_key> <portfolio.zip> \
   --history-scope-notes "<owner scope note>"
 ```
 
-The first run is a dry run. Review the rebase summary, then normally run the same command with:
+Review the mapping summary, then normally rerun with:
 
 ```text
 --apply --commit
 ```
 
-The staging tool:
+The staging tool requires the onboarding branch to point exactly at current `origin/main`, requires `research_base_sha` to be an ancestor of current main, verifies the ZIP and research acceptance gate, rebases venue identities, reuses mechanically safe global identities, renumbers stale provisional IDs, stops on ambiguous physical identity, installs the six files, applies owner-confirmed scope metadata, validates, writes ignored `.onboarding/<school>/integration-freeze.json`, and can create the stable Phase 0 checkpoint.
 
-- requires `data/<school>-onboarding` to point exactly at current `origin/main` before Phase 0;
-- requires `research_base_sha` to be an ancestor of current main;
-- verifies the immutable ZIP hash and research acceptance gate;
-- reuses an existing global venue only on mechanically safe key/name/geography evidence;
-- renumbers stale provisional venue IDs when another team consumed the number first;
-- registers missing source/historical aliases to an already-resolved physical identity;
-- stops on ambiguous physical venue identity instead of guessing;
-- installs the six package files;
-- applies owner-confirmed history-scope metadata;
-- runs repository validation;
-- writes ignored `.onboarding/<school>/integration-freeze.json` with final venue mapping and hashes;
-- optionally creates the stable Phase 0 package/reference commit.
+`RESEARCH_FROZEN` remains immutable source/research provenance. The integration manifest records the current-main `INTEGRATION_FROZEN` mapping and fresh member hashes.
 
-`RESEARCH_FROZEN` therefore remains immutable historical/source provenance, while the generated integration manifest records the current-main `INTEGRATION_FROZEN` state.
+## 4. One authoritative preflight and one owner packet
 
-## 4. One authoritative preflight, one owner decision packet
-
-After the clean Phase 0 checkpoint:
+From the clean Phase 0 checkpoint:
 
 ```bash
 python tools/onboard_school.py <school_key> --preflight
 ```
 
-The agent should still compress the machine decision set into one owner-readable Gate 1 packet. The owner should not be asked to parse `review.csv` manually.
+The agent compresses the machine review into one human Gate 1 packet. The owner should not manually parse or fill a large CSV.
 
-After the owner approves that packet in chat, encode it with a compact JSON decision map rather than school-specific CSV-editing scripts:
+After owner approval, encode the batch with one compact JSON map:
 
 ```bash
 python tools/onboarding_hardening.py fill-review <school_key> \
   --map /tmp/<school>-gate1-map.json
 ```
 
-The map supports:
+The map supports identity choices, ordinary discrepancy defaults, selected-candidate conditional defaults, exact overrides, and exact/default bases. The tool parses full `CBBG-#######` IDs and automatically marks rejected identity-candidate conditionals `NOT_APPLICABLE`.
 
-- identity choices keyed by `source_game_id` or exact identity decision ID;
-- ordinary discrepancy defaults;
-- ordinary selected-candidate conditional defaults;
-- exact decision overrides;
-- exact or default resolution bases.
+That automation specifically prevents the Iowa bug caused by ad hoc hyphen-splitting of canonical IDs.
 
-The tool expands conditional identity rows itself. A rejected identity candidate is marked `NOT_APPLICABLE` automatically using the full `CBBG-#######` identifier. This eliminates ad hoc candidate-ID parsing and the class of error Iowa exposed.
+## 5. Required new boundary: pre-seal technical rehearsal
 
-## 5. New required step: pre-seal technical rehearsal
-
-After the owner has approved the decision packet and `review.csv` has been filled—but **before cryptographic Gate 1 sealing**—run:
+After the owner has approved the packet and `review.csv` is filled—but before cryptographic sealing—run:
 
 ```bash
 python tools/onboarding_hardening.py rehearse-review <school_key>
 ```
 
-This command uses the current filled review to construct an in-memory approved plan, then runs the same disposable-repository transaction and automated gate suite that sealed apply will later run:
+This constructs the approved plan in memory and runs the same disposable-repository transaction and automated gates that sealed apply will later run:
 
-- ingestion apply;
+- ingestion;
 - generic reconciliation;
 - publication/accomplishment metadata;
 - deterministic site build;
@@ -146,51 +121,38 @@ This command uses the current filled review to construct an in-memory approved p
 - target package no-op;
 - accomplishment cross-check;
 - site dry run;
-- full unit tests;
+- full unit suite;
 - changed-path allow-list;
-- whitespace gate.
+- whitespace checks.
 
 The real tracked repository is not mutated and no `approved-plan.json` is sealed.
 
-The purpose is to expose legacy canonical/evidence/test defects before the cryptographic approval boundary. Iowa's partial Los Angeles state, unresolved canonical Play-in round, and stale scope test would all have surfaced here instead of after repeated seals.
+A passing result prints `TECHNICAL READINESS PASSED`. Only then should Gate 1 be cryptographically sealed.
 
-A passing result prints:
+This is designed to surface defects like Iowa's legacy partial Los Angeles state, unresolved canonical Play-in normalization, and stale scope regression test before the approval boundary.
 
-```text
-TECHNICAL READINESS PASSED
-```
+## 6. Purely technical repairs do not reopen unchanged history
 
-Only then should Gate 1 be sealed.
-
-## 6. Technical repair after owner approval does not mean owner re-review
-
-If pre-seal rehearsal finds a purely technical defect:
+If pre-seal rehearsal finds a technical defect:
 
 1. repair it at the narrowest correct layer;
 2. validate and checkpoint the repair;
 3. preserve the already owner-approved review outside regenerated `.onboarding` state;
 4. rerun authoritative preflight;
-5. use the generic carry-forward checker:
+5. run:
 
 ```bash
 python tools/onboarding_hardening.py carry-forward <school_key> \
   --from-review /tmp/<school>-previous-approved-review.csv
 ```
 
-Carry-forward succeeds only if:
+Carry-forward succeeds only if the decision-ID set is identical, every substantive decision input is identical, every prior action remains allowed, and every prior action/basis is complete.
 
-- the decision-ID set is identical;
-- every substantive decision input is byte-for-value identical;
-- every prior decision remains allowed;
-- every prior decision and resolution basis is complete.
+If any substantive historical input changes, the command stops and only the changed/new decisions return to the owner. If nothing changed, owner approval carries forward without another interruption. Then rerun `rehearse-review`.
 
-If any substantive historical input changed, the command stops and the changed/new decisions return to the owner. If nothing changed, prior approval carries forward automatically without another owner interruption.
+## 7. Seal once technical readiness passes
 
-Then rerun `rehearse-review`.
-
-## 7. Seal only after technical readiness passes
-
-Once the filled review has passed pre-seal rehearsal:
+Once the filled review passes pre-seal rehearsal:
 
 ```bash
 python tools/onboard_school.py <school_key> \
@@ -198,40 +160,34 @@ python tools/onboard_school.py <school_key> \
   --approved-by "Elliott"
 ```
 
-Then run the exact sealed apply command printed by the tool.
+Run only the exact sealed apply command printed by that tool.
 
 The expected normal path is now:
 
 ```text
 preflight
--> one owner Gate 1 packet
--> fill-review
--> pre-seal rehearsal PASS
--> seal once
--> apply once
+→ one Owner Gate 1 packet
+→ fill-review
+→ pre-seal rehearsal PASS
+→ seal once
+→ apply once
 ```
 
-A post-seal apply failure should become exceptional rather than routine.
+A post-seal apply failure should become exceptional.
 
-## 8. Scope tests must validate the rule, not named-school exceptions
+## 8. Scope tests enforce the invariant, not named-school exceptions
 
-Do not maintain a hard-coded dictionary such as:
+Do not maintain school-specific expected-exclusion dictionaries such as `{"iowa": 2}`.
 
-```python
-{"iowa": 2}
-```
+The generic rule is:
 
-for legitimate pre-scope reciprocal games.
-
-The generic invariant is:
-
-- a game before one program's owner-approved public scope may remain canonical because another program supplies legitimate reciprocal evidence;
-- the out-of-scope program must not itself have an ingested assertion for that game;
+- a game before one program's approved public scope may remain canonical because another program supplies legitimate reciprocal evidence;
+- the out-of-scope program itself must not have an ingested assertion for that game;
 - the canonical game must still have at least one evidence source.
 
-Tests should enforce that invariant directly. A future school with legitimate reciprocal pre-scope games must not require another school-name exception.
+Tests must enforce that rule directly. A future school with legitimate reciprocal pre-scope games must not require another named exception.
 
-## 9. Release boundary is unchanged
+## 9. Release boundary remains unchanged
 
 After successful sealed apply:
 
@@ -239,35 +195,31 @@ After successful sealed apply:
 python tools/release_school.py <school_key> --prepare
 ```
 
-Then Owner Gate 2 reviews the exact PR-head Preview.
-
-After approval:
+Owner Gate 2 reviews the exact PR-head Preview. After approval:
 
 ```bash
 python tools/release_school.py <school_key> --merge --preview-approved
 ```
 
-Preview success is not Production success. Exact merged-main Production proof remains mandatory.
+Preview success is never Production success. Exact merged-main Production proof remains mandatory.
 
 ## 10. Success criterion for the next proving school
 
-The next school entering Implementation should prove this hardened path.
-
-The target process is:
+The next school entering Implementation should prove this hardened sequence:
 
 ```text
 1 research acceptance
 1 current-main Phase 0 staging/checkpoint
 1 authoritative preflight
-1 owner Gate 1 conversation
+1 Owner Gate 1 conversation
 1 pre-seal technical rehearsal
 1 cryptographic seal
 1 transactional apply
 1 release preparation
-1 owner Gate 2 Preview approval
+1 Owner Gate 2 Preview approval
 1 merge/Production proof
 ```
 
-Repeated technical reseals, owner copy/paste of giant reports, manual conditional-row scripting, or school-specific known-exclusion tests are process regressions unless a genuinely new historical exception requires them.
+Repeated technical reseals, giant owner copy/paste reports, manual conditional-row scripting, or school-specific scope exceptions are process regressions unless a genuinely new historical exception requires them.
 
 The objective remains: **MORE THROUGHPUT WITHOUT LESS QUALITY.**
