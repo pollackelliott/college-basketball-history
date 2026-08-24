@@ -70,14 +70,6 @@ ALLOWED_NCAA_ROUNDS = {
     "Final Four",
     "Championship",
 }
-ROUNDLESS_NCAA_MARKERS = (
-    "consolation",
-    "third-place",
-    "third place",
-    "3rd-place",
-    "3rd place",
-)
-
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
@@ -321,19 +313,6 @@ def research_portfolio_report(
                     errors.append(
                         f"{label}: invalid NCAA curated_postseason_round {round_name!r}"
                     )
-                if not round_name:
-                    round_audit = " ".join(
-                        [
-                            row.get("source_round", ""),
-                            row.get("event_or_tournament", ""),
-                            row.get("raw_text", ""),
-                            row.get("notes", ""),
-                        ]
-                    ).casefold()
-                    if not any(marker in round_audit for marker in ROUNDLESS_NCAA_MARKERS):
-                        errors.append(
-                            f"{label}: NCAA Tournament research freeze requires a curated postseason round unless source evidence explicitly identifies a consolation/third-place game"
-                        )
             elif game_type == "REGULAR_SEASON" and round_name:
                 errors.append(
                     f"{label}: regular-season game has postseason round {round_name!r}"

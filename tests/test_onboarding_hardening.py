@@ -145,7 +145,20 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             self.assertEqual(report["status"], "FAIL")
             self.assertTrue(
                 any(
-                    "NCAA Tournament research freeze requires complete" in error
+                    "NCAA Tournament research freeze requires curated_venue_name"
+                    in error
+                    for error in report["errors"]
+                )
+            )
+            self.assertTrue(
+                any(
+                    "NCAA Tournament research freeze requires city" in error
+                    for error in report["errors"]
+                )
+            )
+            self.assertTrue(
+                any(
+                    "NCAA Tournament research freeze requires state" in error
                     for error in report["errors"]
                 )
             )

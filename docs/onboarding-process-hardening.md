@@ -49,8 +49,8 @@ The acceptance gate checks, at minimum:
 - atomic city/state pairs;
 - every curated venue name represented in local `venues.csv`;
 - every NCAA Tournament row has complete curated venue, city, and state;
-- ordinary NCAA Tournament rows have a normalized curated postseason round;
-- an NCAA consolation/third-place game may correctly keep a blank round when the source evidence explicitly identifies that exception;
+- any populated NCAA curated postseason round uses the project's controlled vocabulary;
+- a blank NCAA round remains valid when the historical tournament format or game does not map honestly to that controlled vocabulary; do not fabricate a modern round label merely to satisfy QA;
 - no exhibition-like row remains in the competitive package.
 
 Unknown exact dates and unknown played scores remain valid when historically honest; they are reported rather than guessed.
