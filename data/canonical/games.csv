@@ -22325,7 +22325,7 @@ CBBG-0022324,2013-2014,2014-02-26,EXACT,mississippi-state,tennessee,68,75,tennes
 CBBG-0022325,2013-2014,2014-03-01,EXACT,tennessee,vanderbilt,76,38,tennessee,0,TEAM_A_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022326,2013-2014,2014-03-05,EXACT,auburn,tennessee,54,82,tennessee,0,TEAM_A_HOME,auburn,neville-arena,VEN-000150,Auburn,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=auburn/AUBRAW-02391;venue_key=neville-arena;site_type=TEAM_A_HOME;fields=venue_key]
 CBBG-0022327,2013-2014,2014-03-14,EXACT,south-carolina,tennessee,44,59,tennessee,0,NEUTRAL,,,,Atlanta,,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,
-CBBG-0022328,2013-2014,2014-03-19,EXACT,iowa,tennessee,65,78,tennessee,0,NEUTRAL,,university-of-dayton-arena,VEN-000221,Dayton,OH,NCAA_TOURNAMENT,,,,PROVISIONAL,
+CBBG-0022328,2013-2014,2014-03-19,EXACT,iowa,tennessee,65,78,tennessee,0,NEUTRAL,,university-of-dayton-arena,VEN-000221,Dayton,OH,NCAA_TOURNAMENT,Play-in,,,PROVISIONAL,
 CBBG-0022329,2013-2014,2014-03-21,EXACT,massachusetts,tennessee,67,86,tennessee,0,NEUTRAL,,lenovo-center,VEN-000110,Raleigh,NC,NCAA_TOURNAMENT,R64,,,PROVISIONAL,
 CBBG-0022330,2013-2014,2014-03-23,EXACT,mercer,tennessee,63,83,tennessee,0,NEUTRAL,,lenovo-center,VEN-000110,Raleigh,NC,NCAA_TOURNAMENT,R32,,,PROVISIONAL,
 CBBG-0022331,2013-2014,2014-03-28,EXACT,michigan,tennessee,73,71,michigan,0,NEUTRAL,,lucas-oil-stadium,VEN-000120,Indianapolis,IN,NCAA_TOURNAMENT,Sweet Sixteen,,,PROVISIONAL,
