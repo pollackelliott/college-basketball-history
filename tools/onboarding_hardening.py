@@ -1,27 +1,22 @@
 #!/usr/bin/env python3
-"""Process-hardening helpers for the permanent school-onboarding workflow.
+"""Generic hardening helpers for the permanent school-onboarding workflow.
 
-This tool deliberately sits beside ``onboard_school.py`` instead of weakening its
-sealed-plan contract. It adds four generic capabilities learned from the Iowa
-proving case:
+The sealed-plan authority remains ``tools/onboard_school.py``. This companion moves
+repeatable work earlier and makes it executable:
 
-1. ``research-check`` validates a six-file research portfolio before it is
-   declared RESEARCH_FROZEN or admitted to Phase 0.
-2. ``fill-review`` expands a compact Gate 1 decision map into review.csv,
-   including automatic NOT_APPLICABLE handling for rejected identity candidates.
-3. ``carry-forward`` proves a regenerated decision universe is substantively
-   unchanged before copying prior owner decisions and resolution bases forward.
-4. ``rehearse-review`` runs the full disposable-repository transaction and every
-   automated gate *before* Gate 1 is sealed.
-
-The existing ``onboard_school.py --approve`` / ``--apply`` commands remain the
-only authority for sealing and applying an approved plan.
+- ``research-check``: accept/reject a six-file portfolio before RESEARCH_FROZEN;
+- ``fill-review``: expand one compact Gate 1 decision map into review.csv;
+- ``carry-forward``: reuse prior owner decisions only when the decision universe is
+  substantively identical after a purely technical repair;
+- ``rehearse-review``: run the complete disposable transaction and automated gate
+  suite before Gate 1 is cryptographically sealed.
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import datetime as dt
 import hashlib
 import json
 import re
@@ -32,11 +27,8 @@ from pathlib import Path
 from typing import Any
 
 import onboard_school
-from onboarding_plan import (
-    REQUIRED_PACKAGE_FILES,
-    WorkflowError,
-    approve_plan,
-)
+from onboarding_plan import REQUIRED_PACKAGE_FILES, WorkflowError, approve_plan
+
 
 SUBSTANTIVE_REVIEW_FIELDS = (
     "category",
@@ -78,6 +70,13 @@ ALLOWED_NCAA_ROUNDS = {
     "Final Four",
     "Championship",
 }
+ROUNDLESS_NCAA_MARKERS = (
+    "consolation",
+    "third-place",
+    "third place",
+    "3rd-place",
+    "3rd place",
+)
 
 
 def sha256_file(path: Path) -> str:
@@ -94,7 +93,11 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
         return list(reader.fieldnames or []), list(reader)
 
 
-def _write_review(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
+def _write_review(
+    path: Path,
+    fieldnames: list[str],
+    rows: list[dict[str, str]],
+) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
@@ -113,24 +116,24 @@ def _normalize_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
 
 
+def _valid_season(value: str) -> bool:
+    match = re.fullmatch(r"(\d{4})-(\d{4})", value or "")
+    return bool(match and int(match.group(2)) == int(match.group(1)) + 1)
+
+
 def _package_root(
     package: Path,
     *,
     expected_sha256: str = "",
 ) -> tuple[tempfile.TemporaryDirectory[str] | None, Path]:
+    expected = sorted(REQUIRED_PACKAGE_FILES)
     if package.is_dir():
         names = sorted(p.name for p in package.iterdir() if p.is_file())
-        expected = sorted(REQUIRED_PACKAGE_FILES)
-        if names != expected:
+        extras = sorted(p.name for p in package.iterdir() if not p.is_file())
+        if names != expected or extras:
             raise WorkflowError(
-                "research package directory must contain exactly the six required files; "
-                f"found {names}"
-            )
-        extras = [p.name for p in package.iterdir() if not p.is_file()]
-        if extras:
-            raise WorkflowError(
-                "research package directory must be flat; unexpected entries: "
-                + ", ".join(sorted(extras))
+                "research package directory must contain exactly the six required "
+                f"flat files; files={names}, extra_entries={extras}"
             )
         return None, package
 
@@ -149,14 +152,12 @@ def _package_root(
     root = Path(temporary.name)
     with zipfile.ZipFile(package) as archive:
         names = archive.namelist()
-        expected = list(REQUIRED_PACKAGE_FILES)
-        if sorted(names) != sorted(expected):
+        if sorted(names) != expected or any("/" in name or "\\" in name for name in names):
+            temporary.cleanup()
             raise WorkflowError(
                 "research ZIP must contain exactly the six required flat members; "
                 f"found {names}"
             )
-        if any("/" in name or "\\" in name for name in names):
-            raise WorkflowError("research ZIP members must be flat")
         archive.extractall(root)
     return temporary, root
 
@@ -167,6 +168,8 @@ def research_portfolio_report(
     school_key: str,
     expected_sha256: str = "",
 ) -> dict[str, Any]:
+    """Return the permanent pre-RESEARCH_FROZEN acceptance report."""
+
     temporary, root = _package_root(package, expected_sha256=expected_sha256)
     try:
         game_fields, games = _read_csv(root / "source-games.csv")
@@ -176,8 +179,7 @@ def research_portfolio_report(
 
         errors: list[str] = []
         warnings: list[str] = []
-
-        required_fields = {
+        required_game_fields = {
             "source_game_id",
             "source_program_key",
             "season_label",
@@ -194,7 +196,7 @@ def research_portfolio_report(
             "curated_postseason_round",
             "raw_text",
         }
-        for field in sorted(required_fields - set(game_fields)):
+        for field in sorted(required_game_fields - set(game_fields)):
             errors.append(f"source-games.csv missing column: {field}")
 
         opponent_keys = {
@@ -205,13 +207,6 @@ def research_portfolio_report(
 
         venue_names: set[str] = set()
         for row in venues:
-            canonical = row.get("canonical_name", "").strip()
-            if canonical:
-                venue_names.add(_normalize_name(canonical))
-            for alias in row.get("aliases", "").split(";"):
-                alias = alias.strip()
-                if alias:
-                    venue_names.add(_normalize_name(alias))
             owner = row.get("source_program_key", "").strip()
             if owner not in {"", school_key}:
                 errors.append(
@@ -223,18 +218,25 @@ def research_portfolio_report(
                 errors.append(
                     f"venue {row.get('venue_key', '[blank]')}: city/state must be both populated or both blank"
                 )
+            canonical = row.get("canonical_name", "").strip()
+            if canonical:
+                venue_names.add(_normalize_name(canonical))
+            for alias in row.get("aliases", "").split(";"):
+                alias = alias.strip()
+                if alias:
+                    venue_names.add(_normalize_name(alias))
 
         source_ids = [row.get("source_game_id", "").strip() for row in games]
-        duplicate_ids = sorted(
+        duplicates = sorted(
             value
             for value, count in Counter(source_ids).items()
             if value and count > 1
         )
         if any(not value for value in source_ids):
             errors.append("source-games.csv contains blank source_game_id")
-        if duplicate_ids:
+        if duplicates:
             errors.append(
-                "duplicate source_game_id values: " + ", ".join(duplicate_ids[:10])
+                "duplicate source_game_id values: " + ", ".join(duplicates[:10])
             )
 
         site_counts: Counter[str] = Counter()
@@ -249,8 +251,17 @@ def research_portfolio_report(
             if row.get("source_program_key", "").strip() != school_key:
                 errors.append(f"{label}: wrong source_program_key")
 
-            if not row.get("game_date", "").strip():
+            season = row.get("season_label", "").strip()
+            if not _valid_season(season):
+                errors.append(f"{label}: invalid season_label {season!r}")
+            game_date = row.get("game_date", "").strip()
+            if not game_date:
                 unknown_dates += 1
+            else:
+                try:
+                    dt.date.fromisoformat(game_date)
+                except ValueError:
+                    errors.append(f"{label}: invalid ISO game_date {game_date!r}")
 
             team_score = row.get("team_score", "").strip()
             opp_score = row.get("opponent_score", "").strip()
@@ -258,15 +269,19 @@ def research_portfolio_report(
                 errors.append(f"{label}: only one score is populated")
             if not team_score and not opp_score:
                 unknown_scores += 1
+            elif team_score and opp_score:
+                try:
+                    int(team_score)
+                    int(opp_score)
+                except ValueError:
+                    errors.append(f"{label}: score is not an integer")
 
             opponent = row.get("normalized_opponent_key", "").strip()
-            if not opponent:
+            if not opponent or opponent not in opponent_keys:
                 unresolved_opponents += 1
-                errors.append(f"{label}: blank normalized_opponent_key")
-            elif opponent not in opponent_keys:
-                unresolved_opponents += 1
+                detail = "blank" if not opponent else repr(opponent)
                 errors.append(
-                    f"{label}: opponent key {opponent!r} absent from opponents.csv"
+                    f"{label}: normalized opponent {detail} is not resolved in opponents.csv"
                 )
 
             site = row.get("curated_site_type", "").strip().upper()
@@ -287,40 +302,47 @@ def research_portfolio_report(
                 errors.append(f"{label}: invalid curated_game_type {game_type!r}")
 
             round_name = row.get("curated_postseason_round", "").strip()
+            venue = row.get("curated_venue_name", "").strip()
+            if venue and _normalize_name(venue) not in venue_names:
+                errors.append(f"{label}: curated venue {venue!r} absent from venues.csv")
+
             if game_type == "NCAA_TOURNAMENT":
                 ncaa_rows += 1
-                venue = row.get("curated_venue_name", "").strip()
-                missing = [
-                    field
-                    for field, value in (
-                        ("curated_venue_name", venue),
-                        ("city", city),
-                        ("state", state),
-                        ("curated_postseason_round", round_name),
-                    )
-                    if not value
-                ]
-                if missing:
-                    errors.append(
-                        f"{label}: NCAA Tournament research freeze requires complete "
-                        + ", ".join(missing)
-                    )
+                for field, value in (
+                    ("curated_venue_name", venue),
+                    ("city", city),
+                    ("state", state),
+                ):
+                    if not value:
+                        errors.append(
+                            f"{label}: NCAA Tournament research freeze requires {field}"
+                        )
                 if round_name and round_name not in ALLOWED_NCAA_ROUNDS:
                     errors.append(
                         f"{label}: invalid NCAA curated_postseason_round {round_name!r}"
                     )
-                if venue and _normalize_name(venue) not in venue_names:
-                    errors.append(
-                        f"{label}: NCAA curated venue {venue!r} absent from venues.csv"
-                    )
+                if not round_name:
+                    round_audit = " ".join(
+                        [
+                            row.get("source_round", ""),
+                            row.get("event_or_tournament", ""),
+                            row.get("raw_text", ""),
+                            row.get("notes", ""),
+                        ]
+                    ).casefold()
+                    if not any(marker in round_audit for marker in ROUNDLESS_NCAA_MARKERS):
+                        errors.append(
+                            f"{label}: NCAA Tournament research freeze requires a curated postseason round unless source evidence explicitly identifies a consolation/third-place game"
+                        )
             elif game_type == "REGULAR_SEASON" and round_name:
                 errors.append(
                     f"{label}: regular-season game has postseason round {round_name!r}"
                 )
-
-            venue = row.get("curated_venue_name", "").strip()
-            if venue and _normalize_name(venue) not in venue_names:
-                errors.append(f"{label}: curated venue {venue!r} absent from venues.csv")
+            elif game_type in {"CONFERENCE_TOURNAMENT", "NIT", "POSTSEASON"}:
+                if round_name not in {"", "Championship"}:
+                    errors.append(
+                        f"{label}: {game_type} round must be blank or Championship"
+                    )
 
             exhibition_text = " ".join(
                 [
@@ -362,19 +384,19 @@ def research_portfolio_report(
 def print_research_report(report: dict[str, Any]) -> None:
     counts = report["counts"]
     print("College Basketball History — research portfolio acceptance")
-    print(f"School:              {report['school_key']}")
-    print(f"Status:              {report['status']}")
-    print(f"Competitive games:   {counts['competitive_games']:,}")
-    print(f"Opponent rows:       {counts['opponent_rows']:,}")
-    print(f"Venue rows:          {counts['venue_rows']:,}")
-    print(f"NCAA rows:           {counts['ncaa_rows']:,}")
-    print(f"Unresolved opponents:{counts['unresolved_opponents']:,}")
-    print(f"Unknown exact dates: {counts['unknown_exact_dates']:,}")
-    print(f"Unknown scores:      {counts['unknown_played_scores']:,}")
-    print("Site types:          " + json.dumps(counts["site_types"], sort_keys=True))
-    print("Game types:          " + json.dumps(counts["game_types"], sort_keys=True))
+    print(f"School:               {report['school_key']}")
+    print(f"Status:               {report['status']}")
+    print(f"Competitive games:    {counts['competitive_games']:,}")
+    print(f"Opponent rows:        {counts['opponent_rows']:,}")
+    print(f"Venue rows:           {counts['venue_rows']:,}")
+    print(f"NCAA rows:            {counts['ncaa_rows']:,}")
+    print(f"Unresolved opponents: {counts['unresolved_opponents']:,}")
+    print(f"Unknown exact dates:  {counts['unknown_exact_dates']:,}")
+    print(f"Unknown scores:       {counts['unknown_played_scores']:,}")
+    print("Site types:           " + json.dumps(counts["site_types"], sort_keys=True))
+    print("Game types:           " + json.dumps(counts["game_types"], sort_keys=True))
     if report.get("zip_sha256"):
-        print(f"ZIP SHA-256:         {report['zip_sha256']}")
+        print(f"ZIP SHA-256:          {report['zip_sha256']}")
     if report["errors"]:
         print(f"\nFAIL ({len(report['errors'])} errors):")
         for error in report["errors"]:
@@ -391,6 +413,8 @@ def _decision_map(path: Path) -> dict[str, Any]:
 
 
 def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
+    """Fill review.csv from one compact owner-approved decision map."""
+
     with review_path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fieldnames = list(reader.fieldnames or [])
@@ -401,11 +425,10 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     explicit = decision_map.get("decisions", {})
     bases = decision_map.get("basis_by_decision", {})
     defaults = decision_map.get("defaults", {})
-
-    if not isinstance(identities, dict) or not isinstance(explicit, dict):
-        raise WorkflowError("identity and decisions entries must be JSON objects")
-    if not isinstance(bases, dict) or not isinstance(defaults, dict):
-        raise WorkflowError("basis_by_decision and defaults entries must be JSON objects")
+    if not all(isinstance(value, dict) for value in (identities, explicit, bases, defaults)):
+        raise WorkflowError(
+            "identity, decisions, basis_by_decision, and defaults must be JSON objects"
+        )
 
     default_discrepancy = str(defaults.get("discrepancy", "")).strip()
     default_selected_conditional = str(
@@ -416,14 +439,11 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     not_applicable_basis = str(
         defaults.get(
             "not_applicable_basis",
-            "Owner Gate 1 approved: this conditional discrepancy belongs to an "
-            "unselected canonical identity candidate, or the source game was "
-            "approved as FORCE_NEW.",
+            "Owner Gate 1 approved: this conditional discrepancy belongs to an unselected canonical identity candidate, or the source game was approved as FORCE_NEW.",
         )
     ).strip()
 
     selected_by_source: dict[str, str | None] = {}
-
     for row in rows:
         if row.get("category") != "identity":
             continue
@@ -432,23 +452,23 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
         action = str(
             explicit.get(did, identities.get(sid, identities.get(did, "")))
         ).strip()
-        if not action:
-            raise WorkflowError(f"decision map is missing identity action for {did}")
         if action == "FORCE_NEW":
             selected_by_source[sid] = None
         elif action.startswith("MATCH_CANONICAL:"):
             selected_by_source[sid] = action.split(":", 1)[1]
         else:
-            raise WorkflowError(f"invalid identity action for {did}: {action}")
-
+            raise WorkflowError(
+                f"decision map is missing or has invalid identity action for {did}: {action!r}"
+            )
         if action not in _allowed_actions(row):
             raise WorkflowError(
                 f"{action} is not allowed for {did}; allowed={row['allowed_actions']}"
             )
-        row["decision"] = action
-        row["resolution_basis"] = str(bases.get(did, identity_basis)).strip()
-        if not row["resolution_basis"]:
+        basis = str(bases.get(did, identity_basis)).strip()
+        if not basis:
             raise WorkflowError(f"missing resolution basis for {did}")
+        row["decision"] = action
+        row["resolution_basis"] = basis
 
     for row in rows:
         category = row.get("category", "")
@@ -458,7 +478,6 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
 
         action = str(explicit.get(did, "")).strip()
         basis = str(bases.get(did, "")).strip()
-
         if category == "conditional_discrepancy":
             sid = row.get("source_game_id", "")
             if sid not in selected_by_source:
@@ -478,17 +497,13 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
             elif not action:
                 action = default_selected_conditional
                 basis = basis or default_basis
-
-        elif category == "discrepancy":
-            if not action:
-                action = default_discrepancy
-                basis = basis or default_basis
-
-        else:
-            if not action:
-                raise WorkflowError(
-                    f"decision map requires explicit action for {did} ({category})"
-                )
+        elif category == "discrepancy" and not action:
+            action = default_discrepancy
+            basis = basis or default_basis
+        elif category not in {"discrepancy", "conditional_discrepancy"} and not action:
+            raise WorkflowError(
+                f"decision map requires explicit action for {did} ({category})"
+            )
 
         if not action:
             raise WorkflowError(f"decision map leaves {did} without an action")
@@ -496,11 +511,9 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
             raise WorkflowError(
                 f"{action} is not allowed for {did}; allowed={row['allowed_actions']}"
             )
-        if not basis:
-            basis = default_basis
+        basis = basis or default_basis
         if not basis:
             raise WorkflowError(f"missing resolution basis for {did}")
-
         row["decision"] = action
         row["resolution_basis"] = basis
 
@@ -517,6 +530,8 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
 
 
 def carry_forward_review(old_path: Path, new_path: Path) -> Counter[str]:
+    """Carry owner decisions forward only across a substantively identical review."""
+
     with old_path.open(encoding="utf-8-sig", newline="") as handle:
         old_rows = list(csv.DictReader(handle))
     with new_path.open(encoding="utf-8-sig", newline="") as handle:
@@ -524,11 +539,12 @@ def carry_forward_review(old_path: Path, new_path: Path) -> Counter[str]:
         fieldnames = list(reader.fieldnames or [])
         new_rows = list(reader)
 
-    old = {row.get("decision_id", ""): row for row in old_rows}
-    new = {row.get("decision_id", ""): row for row in new_rows}
-
+    if any(not row.get("decision_id", "").strip() for row in old_rows + new_rows):
+        raise WorkflowError("review contains blank decision_id values")
+    old = {row["decision_id"]: row for row in old_rows}
+    new = {row["decision_id"]: row for row in new_rows}
     if len(old) != len(old_rows) or len(new) != len(new_rows):
-        raise WorkflowError("review contains blank or duplicate decision_id values")
+        raise WorkflowError("review contains duplicate decision_id values")
     if set(old) != set(new):
         missing = sorted(set(old) - set(new))
         added = sorted(set(new) - set(old))
@@ -544,7 +560,6 @@ def carry_forward_review(old_path: Path, new_path: Path) -> Counter[str]:
                 raise WorkflowError(
                     f"Gate 1 substantive input changed for {did}: {field}"
                 )
-
         decision = old[did].get("decision", "").strip()
         basis = old[did].get("resolution_basis", "").strip()
         if not decision or not basis:
@@ -567,6 +582,8 @@ def rehearse_review(
     plan_path: Path,
     review_path: Path,
 ) -> dict[str, Any]:
+    """Run the exact disposable apply transaction before cryptographic sealing."""
+
     onboard_school.ensure_package_checkpoint(repo)
     approved, approved_hash = approve_plan(
         repo,
@@ -575,7 +592,6 @@ def rehearse_review(
         "technical-readiness",
     )
     before = onboard_school.tree_hashes(repo)
-
     with tempfile.TemporaryDirectory(prefix=f"preseal-{school_key}-") as temporary:
         rehearsal = Path(temporary) / "repository"
         print(f"Rehearsing filled review in {rehearsal}")
@@ -599,7 +615,6 @@ def rehearse_review(
             changed,
             include_tests=True,
         )
-
     return {
         "approved_plan_hash_preview": approved_hash,
         "changed_paths": changed,
@@ -648,7 +663,6 @@ def parse_args() -> argparse.Namespace:
     rehearse.add_argument("--repo", type=Path, default=None)
     rehearse.add_argument("--plan-file", type=Path, default=None)
     rehearse.add_argument("--review-file", type=Path, default=None)
-
     return parser.parse_args()
 
 
@@ -664,11 +678,7 @@ def main() -> int:
             print_research_report(report)
             return 0 if report["status"] == "PASS" else 1
 
-        repo = (
-            args.repo.resolve()
-            if args.repo
-            else Path(__file__).resolve().parents[1]
-        )
+        repo = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
         output_dir = repo / ".onboarding" / args.school_key
         review_path = (
             args.review_file.resolve()
@@ -688,8 +698,7 @@ def main() -> int:
         if args.command == "carry-forward":
             counts = carry_forward_review(args.from_review.resolve(), review_path)
             print(
-                "PASS: prior Gate 1 decisions carried forward; "
-                "decision IDs and substantive inputs are unchanged."
+                "PASS: prior Gate 1 decisions carried forward; decision IDs and substantive inputs are unchanged."
             )
             print("Action counts:")
             for action, count in sorted(counts.items()):
@@ -713,8 +722,7 @@ def main() -> int:
             print("Preview approved-plan hash: " + result["approved_plan_hash_preview"])
             print(f"Changed paths: {len(result['changed_paths']):,}")
             print(
-                "The real tracked repository was not changed. "
-                "Owner Gate 1 may now be sealed with onboard_school.py --approve."
+                "The real tracked repository was not changed. Owner Gate 1 may now be sealed with onboard_school.py --approve."
             )
             return 0
 
@@ -725,6 +733,7 @@ def main() -> int:
         KeyError,
         ValueError,
         json.JSONDecodeError,
+        zipfile.BadZipFile,
     ) as exc:
         print(f"FAIL: {exc}")
         return 1
