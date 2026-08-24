@@ -5243,7 +5243,7 @@
       "state": "OH",
       "primary_hex": "#BB0000",
       "secondary_hex": "#B1B7BC",
-      "history_start_season": null,
+      "history_start_season": "1898-1899",
       "conference_regular_season_championships": 22,
       "conference_tournament_championships": 5,
       "ncaa_tournament_appearances": 36,
@@ -5252,7 +5252,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1960,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
