@@ -206,24 +206,18 @@ def rebase_venues(
                 for venue_id in ids_by_name.get(normalized, set())
                 if geography_compatible(local, global_by_id[venue_id])
             }
-            if len(candidate_ids) > 1:
+            if candidate_ids:
                 raise WorkflowError(
-                    f"ambiguous venue identity for {name!r}: "
-                    + ", ".join(sorted(candidate_ids))
+                    f"venue {name!r} has a possible physical venue match "
+                    f"({', '.join(sorted(candidate_ids))}) by name/geography, "
+                    f"but venue_key {key!r} does not exactly match current main; "
+                    "resolve physical identity explicitly before Phase 0"
                 )
-            if len(candidate_ids) == 1:
-                chosen = global_by_id[next(iter(candidate_ids))]
-                reason = "REUSE_EXACT_NAME_GEOGRAPHY"
 
+        # Research-time numeric venue IDs are provisional. A collision with
+        # current main is never evidence that the physical venue is identical.
         if chosen is None and proposed_id in global_by_id:
-            candidate = global_by_id[proposed_id]
-            same_key = bool(key and key == candidate.get("venue_key", "").strip())
-            same_name = normalized == normalize_name(candidate.get("display_name", ""))
-            if (same_key or same_name) and geography_compatible(local, candidate):
-                chosen = candidate
-                reason = "REUSE_PROPOSED_ID_MATCH"
-            else:
-                proposed_id = ""
+            proposed_id = ""
 
         if chosen is None:
             final_id = (

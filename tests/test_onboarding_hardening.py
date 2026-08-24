@@ -421,6 +421,45 @@ class VenueRebaseTests(unittest.TestCase):
             any(row["venue_id"] == "VEN-000011" for row in global_after)
         )
 
+    def test_same_name_and_geography_without_exact_key_stops(self):
+        global_rows = [
+            {
+                "venue_id": "VEN-000010",
+                "venue_key": "old-building",
+                "display_name": "Memorial Gym",
+                "city": "Example City",
+                "state": "EX",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000010",
+                "venue_name": "Memorial Gym",
+                "normalized_name": "memorialgym",
+            }
+        ]
+        local = [
+            {
+                "venue_key": "new-building",
+                "venue_id": "VEN-999999",
+                "canonical_name": "Memorial Gym",
+                "aliases": "",
+                "city": "Example City",
+                "state": "EX",
+                "known_opened": "",
+                "known_closed": "",
+                "venue_date_precision": "unknown",
+                "source_basis": "test",
+                "notes": "",
+            }
+        ]
+
+        with self.assertRaisesRegex(
+            Exception,
+            "possible physical venue match",
+        ):
+            rebase_venues("test", local, global_rows, names)
+
 
 if __name__ == "__main__":
     unittest.main()
