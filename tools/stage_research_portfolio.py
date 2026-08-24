@@ -183,7 +183,6 @@ def rebase_venues(
         key = local.get("venue_key", "").strip()
         name = local.get("canonical_name", "").strip()
         research_id = local.get("venue_id", "").strip()
-        proposed_id = research_id
         normalized = normalize_name(name)
 
         chosen: dict[str, str] | None = None
@@ -214,19 +213,11 @@ def rebase_venues(
                     "resolve physical identity explicitly before Phase 0"
                 )
 
-        # Research-time numeric venue IDs are provisional. A collision with
-        # current main is never evidence that the physical venue is identical.
-        if chosen is None and proposed_id in global_by_id:
-            proposed_id = ""
-
+        # Research-time numeric venue IDs are transport provenance only.
+        # A genuinely new physical identity always receives the next
+        # authoritative global ID from current main.
         if chosen is None:
-            final_id = (
-                proposed_id
-                if proposed_id and proposed_id not in used_ids
-                else ""
-            )
-            if venue_number(final_id) is None:
-                final_id = next_venue_id(used_ids)
+            final_id = next_venue_id(used_ids)
             used_ids.add(final_id)
 
             chosen = {

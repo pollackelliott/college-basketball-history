@@ -9,6 +9,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import release_school  # noqa: E402
+import onboard_school  # noqa: E402
 
 
 class ReleasePreparationHardeningTests(unittest.TestCase):
@@ -89,6 +90,34 @@ class ReleasePreparationHardeningTests(unittest.TestCase):
                 timeout_seconds=10,
                 poll_seconds=0,
             )
+
+
+class PullRequestBodyTests(unittest.TestCase):
+    def test_pr_body_distinguishes_apply_boundary_from_full_pr_diff(self):
+        approved = {
+            "school_key": "example",
+            "approved_plan_hash": "a" * 64,
+            "summary": {
+                "source_rows": 10,
+                "pre_cutoff_rows": 0,
+                "existing_game_matches": 4,
+                "new_canonical_games": 6,
+            },
+            "decisions": [],
+        }
+
+        body = onboard_school.pr_body(
+            approved,
+            ["data/canonical/games.csv"],
+        )
+
+        self.assertIn("## Sealed apply boundary", body)
+        self.assertIn(
+            "full PR diff also includes committed Phase 0 package/reference changes",
+            body,
+        )
+        self.assertIn("`data/canonical/games.csv`", body)
+        self.assertNotIn("## Change boundary", body)
 
 
 class ProtectedMainMergeTests(unittest.TestCase):

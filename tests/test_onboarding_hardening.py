@@ -48,7 +48,12 @@ def write_csv(path, fieldnames, rows):
 
 
 class ResearchFreezeAcceptanceTests(unittest.TestCase):
-    def make_package(self, root: Path, ncaa_complete=True):
+    def make_package(
+        self,
+        root: Path,
+        ncaa_complete=True,
+        overtime_periods="0",
+    ):
         game_fields = [
             "source_game_id",
             "source_program_key",
@@ -59,6 +64,7 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             "team_score",
             "opponent_score",
             "played_result",
+            "overtime_periods",
             "curated_site_type",
             "curated_venue_name",
             "city",
@@ -82,6 +88,7 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     "team_score": "70",
                     "opponent_score": "60",
                     "played_result": "W",
+                    "overtime_periods": overtime_periods,
                     "curated_site_type": "NEUTRAL",
                     "curated_venue_name": "Example Arena" if ncaa_complete else "",
                     "city": "Example City" if ncaa_complete else "",
@@ -159,6 +166,25 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             self.assertTrue(
                 any(
                     "NCAA Tournament research freeze requires state" in error
+                    for error in report["errors"]
+                )
+            )
+
+    def test_invalid_overtime_blocks_research_freeze(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                ncaa_complete=True,
+                overtime_periods="1 OT",
+            )
+            report = research_portfolio_report(root, school_key="test")
+
+            self.assertEqual(report["status"], "FAIL")
+            self.assertTrue(
+                any(
+                    "overtime_periods must be blank or a nonnegative integer"
+                    in error
                     for error in report["errors"]
                 )
             )
@@ -417,6 +443,66 @@ class VenueRebaseTests(unittest.TestCase):
                 for row in names_after
             )
         )
+        self.assertTrue(
+            any(row["venue_id"] == "VEN-000011" for row in global_after)
+        )
+
+    def test_unused_research_id_does_not_control_new_global_number(self):
+        global_rows = [
+            {
+                "venue_id": "VEN-000010",
+                "venue_key": "existing-arena",
+                "display_name": "Existing Arena",
+                "city": "Existing City",
+                "state": "EX",
+                "opened": "",
+                "closed": "",
+                "date_precision": "",
+                "identity_status": "CURATED_SEED",
+                "source_basis": "seed",
+                "notes": "",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000010",
+                "venue_name": "Existing Arena",
+                "normalized_name": "existingarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "seed",
+                "notes": "",
+            }
+        ]
+        local = [
+            {
+                "venue_key": "new-building",
+                "venue_id": "VEN-999999",
+                "canonical_name": "New Building",
+                "aliases": "",
+                "city": "New City",
+                "state": "NW",
+                "known_opened": "",
+                "known_closed": "",
+                "venue_date_precision": "unknown",
+                "source_basis": "school source",
+                "notes": "",
+            }
+        ]
+
+        local_after, global_after, _, mappings = rebase_venues(
+            "test",
+            local,
+            global_rows,
+            names,
+        )
+
+        self.assertEqual(local_after[0]["venue_id"], "VEN-000011")
+        self.assertEqual(mappings[0]["research_venue_id"], "VEN-999999")
+        self.assertEqual(mappings[0]["final_venue_id"], "VEN-000011")
+        self.assertEqual(mappings[0]["resolution"], "NEW_GLOBAL_IDENTITY")
         self.assertTrue(
             any(row["venue_id"] == "VEN-000011" for row in global_after)
         )

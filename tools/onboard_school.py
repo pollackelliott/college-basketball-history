@@ -424,7 +424,13 @@ def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
             "- unit tests — PASS",
             "- changed-file whitespace check — PASS",
             "",
-            "## Change boundary",
+            "## Sealed apply boundary",
+            "",
+            (
+                "The paths below are the transactional sealed-plan mutation boundary. "
+                "The full PR diff also includes committed Phase 0 package/reference "
+                "changes already present on the onboarding branch."
+            ),
             "",
         ]
     )

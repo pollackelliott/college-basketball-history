@@ -180,6 +180,7 @@ def research_portfolio_report(
             "team_score",
             "opponent_score",
             "played_result",
+            "overtime_periods",
             "curated_site_type",
             "curated_venue_name",
             "city",
@@ -267,6 +268,20 @@ def research_portfolio_report(
                     int(opp_score)
                 except ValueError:
                     errors.append(f"{label}: score is not an integer")
+
+            overtime = row.get("overtime_periods", "").strip()
+            if overtime:
+                try:
+                    overtime_value = int(overtime)
+                except ValueError:
+                    errors.append(
+                        f"{label}: overtime_periods must be blank or a nonnegative integer"
+                    )
+                else:
+                    if overtime_value < 0:
+                        errors.append(
+                            f"{label}: overtime_periods must be blank or a nonnegative integer"
+                        )
 
             opponent = row.get("normalized_opponent_key", "").strip()
             if not opponent or opponent not in opponent_keys:
