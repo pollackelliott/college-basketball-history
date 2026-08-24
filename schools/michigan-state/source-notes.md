@@ -149,3 +149,17 @@ Research was conducted against:
 `4c8d75592f98b42a8534182a5af9bf240b1fd16c`
 
 Any newly proposed global numeric venue ID in this package is provisional. CURRENT-main shared-identity rebase is mandatory before tracked Phase 0.
+
+## Integration normalization — overtime periods
+
+During pre-Gate integration, 98 `overtime_periods` values were corrected
+after a systematic extraction artifact was identified. The affected rows
+already correctly identified overtime games in preserved `raw_text`, but
+the extracted numeric field had captured the opponent score for one-OT
+games or concatenated the opponent score with the explicit `2OT`/`3OT`
+marker.
+
+The correction was deterministic from each preserved score and OT token:
+`ot` / `1OT` = 1, `2OT` = 2, and `3OT` = 3. No dates, scores, results,
+opponents, site classifications, venues, game types, or raw source text
+were changed.
