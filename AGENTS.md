@@ -6,21 +6,56 @@ Use the permanent sealed-plan workflow for every new school. Do not recreate the
 legacy sequence of manual ingestion, one-off reconciliation scripts, hand-written
 staging commands, or piecemeal owner questions.
 
+Read these process documents together before onboarding work:
+
+- `docs/school-onboarding-fast-path.md`
+- `docs/onboarding-process-hardening.md`
+- `docs/codespace-terminal-safety.md`
+- `docs/parallel-portfolio-pipeline.md`
+
+The post-Iowa hardening amendment is controlling where it makes the execution path
+more specific than the older fast-path wording.
+
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
-2. Build and commit the complete six-file package plus owner-confirmed history scope.
-3. Run `python tools/onboard_school.py <school_key> --preflight`.
-4. Present every row in `.onboarding/<school_key>/review.md` as one batch.
-5. Every game-specific review item must show its date. If date is disputed, show
-   the source date and canonical date separately; never collapse them into one date.
-6. Obtain one explicit owner decision and evidence basis for every pending row. Before presenting the batch, research each row and provide a recommended disposition; the owner may approve routine recommendations in bulk.
-7. Edit only the decision, basis, and optional patch columns in `review.csv`, then
-   seal with `--approve` and apply only with the exact emitted plan hash.
-8. The apply must remain transactional and must pass validation, target no-op,
-   accomplishment cross-check, deterministic site build, unit tests, and whitespace.
-9. Run `python tools/release_school.py <school_key> --prepare`.
-10. Stop for the owner to visually approve the exact PR preview.
-11. Merge only with `--merge --preview-approved`; require the exact merged SHA to
-    reach a successful Production deployment and match production JSON.
+2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
+   `python tools/onboarding_hardening.py research-check ...` on an incoming six-file
+   portfolio before Phase 0; NCAA rows require complete site metadata and normalized
+   postseason handling before the package may advance.
+3. Perform current-main rebase and stable Phase 0 staging with
+   `python tools/stage_research_portfolio.py ...`; prefer one guarded phase-sized
+   operation over many tiny interactive command handoffs. Ambiguous global identity
+   is a STOP, never a guess.
+4. Run `python tools/onboard_school.py <school_key> --preflight` from the clean Phase 0
+   checkpoint.
+5. Present every owner-relevant decision as one consolidated Gate 1 batch. Every
+   game-specific review item must show its date. If date is disputed, show the source
+   date and canonical date separately; never collapse them into one date.
+6. Obtain one explicit owner decision and evidence basis for every pending row. Before
+   presenting the batch, research each row and provide a recommended disposition; the
+   owner may approve routine recommendations in bulk.
+7. Encode the approved batch with
+   `python tools/onboarding_hardening.py fill-review ...` rather than a school-specific
+   CSV-editing script. Let the tool expand selected versus rejected conditional identity
+   rows.
+8. Before cryptographically sealing Gate 1, run
+   `python tools/onboarding_hardening.py rehearse-review <school_key>`. This disposable
+   pre-seal rehearsal must pass ingestion, reconciliation, publication metadata,
+   validation, target no-op, accomplishment verification, deterministic site build,
+   unit tests, changed-path allow-list, and whitespace checks without mutating the real
+   tracked repository.
+9. If a purely technical repair changes tracked inputs after owner approval, regenerate
+   preflight and use `python tools/onboarding_hardening.py carry-forward ...`. Carry
+   approval forward only when the exact decision IDs and every substantive decision
+   input are unchanged; otherwise return only the changed/new historical decisions to
+   the owner.
+10. Seal with `python tools/onboard_school.py <school_key> --approve ...` only after the
+    pre-seal rehearsal passes. Apply only with the exact emitted plan hash.
+11. The sealed apply must remain transactional and must pass validation, target no-op,
+    accomplishment cross-check, deterministic site build, unit tests, and whitespace.
+12. Run `python tools/release_school.py <school_key> --prepare`.
+13. Stop for the owner to visually approve the exact PR preview.
+14. Merge only with `--merge --preview-approved`; require the exact merged SHA to reach
+    a successful Production deployment and match production JSON.
 
 Historical uncertainty remains valid. Never infer game identity, inclusion, date,
 site, venue, opponent, or a controlling canonical fact merely to make the workflow
@@ -32,6 +67,7 @@ pass. Preserve source `raw_text` and approved unresolved discrepancies.
 * Routine extraction, normalization research, package construction, reconciliation analysis, testing, provenance maintenance, Git plumbing, validator failures, and deployment mechanics belong to the collaborator and should not create extra owner handoffs.
 * Return to the owner only when a new judgment is required about history scope, game identity or inclusion, opponent identity, home/away/neutral classification, venue/location truth, a controlling canonical historical fact, accomplishments, unresolved-conflict publication, or final preview approval.
 * A technical failure after owner approval must be diagnosed and repaired generically where possible; do not ask the owner to re-review unchanged historical decisions merely because the tooling implementation changed.
+* Technical work should be batched at phase boundaries. Repeated one-command-at-a-time owner handoffs for deterministic setup are a process regression unless repository state is unexpected.
 
 ## Git safety
 
@@ -50,3 +86,7 @@ pass. Preserve source `raw_text` and approved unresolved discrepancies.
   transaction allow-list.
 - Flag any release path that merges without explicit preview approval or treats a
   Preview deployment as Production.
+- Flag any onboarding path that seals Gate 1 before the filled review has passed the
+  disposable pre-seal technical rehearsal.
+- Flag school-specific hard-coded pre-scope exclusion counts; scope tests must enforce
+  the reciprocal-evidence invariant generically.

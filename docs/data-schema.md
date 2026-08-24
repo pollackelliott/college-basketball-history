@@ -204,8 +204,9 @@ Allowed public competitive classifications:
 - `CONFERENCE_TOURNAMENT`
 - `NCAA_TOURNAMENT`
 - `NIT`
+- `POSTSEASON`
 
-Other events may be retained as source metadata but do not require a canonical public game type beyond `REGULAR_SEASON`.
+`POSTSEASON` is the generic controlled classification for a real competitive postseason game that is not properly classified as the conference tournament, NCAA Tournament, or NIT. Event-specific wording remains preserved in source/event metadata and notes rather than creating ad hoc public game-type values.
 
 ### Postseason round
 
@@ -219,7 +220,7 @@ NCAA Tournament rounds:
 - `Final Four`
 - `Championship`
 
-Conference tournament and NIT games receive `Championship` only for the championship game. Other rounds are blank.
+Conference tournament, NIT, and `POSTSEASON` games receive `Championship` only for a verified championship game. Other rounds are blank.
 
 Historical consolation or third-place postseason games retain the appropriate `game_type` but leave `postseason_round` blank, with their specific nature preserved in notes.
 
