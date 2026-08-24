@@ -163,3 +163,25 @@ The correction was deterministic from each preserved score and OT token:
 `ot` / `1OT` = 1, `2OT` = 2, and `3OT` = 3. No dates, scores, results,
 opponents, site classifications, venues, game types, or raw source text
 were changed.
+
+## Integration normalization — remaining source-internal corrections
+
+Three additional historical-ledger defects were normalized before Owner Gate 1
+using stronger Michigan State contemporary official evidence while preserving
+the original printed claims in `raw_text`:
+
+- `MSURAW-02823`: Northwestern 81-55 belongs to 2018-19 and was played
+  2019-01-02 at Breslin Center. The historical ledger printed `11/2/19`
+  and placed it at the beginning of the 2019-20 section.
+- `MSURAW-02216`: the 2002 Big Ten Tournament loss to Indiana was played
+  2002-03-08. Contemporary MSU recap/game notes override the ledger's
+  `3/9/02` transcription.
+- `MSURAW-02946`: the 2023 Iowa 112-106 loss required one overtime.
+  Contemporary MSU recap/box score override the later ledger's `2OT`.
+
+The 35 completed 2025-26 competitive rows also had metadata wording changed
+from `exhibitions excluded` to `non-record preseason contests omitted`.
+This is wording-only and prevents the generic exhibition-warning detector
+from flagging every legitimate 2025-26 competitive game. Bowling Green
+(2025-10-23) and at Connecticut (2025-10-28) remain excluded from the
+competitive universe.
