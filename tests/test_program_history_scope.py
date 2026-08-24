@@ -116,7 +116,7 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(public[0]["start_season"], "2000-2001")
         self.assertEqual(source[0]["start_season"], "1990-1991")
 
-    def test_existing_eight_cutoffs_exclude_zero_games(self):
+    def test_public_program_cutoffs_match_known_exclusions(self):
         with (ROOT / "data/reference/programs.csv").open(
             encoding="utf-8-sig", newline=""
         ) as f:
@@ -127,6 +127,11 @@ class ProgramHistoryScopeTests(unittest.TestCase):
             encoding="utf-8-sig", newline=""
         ) as f:
             games = list(csv.DictReader(f))
+
+        expected_exclusions = {
+            "iowa": 2,
+        }
+
         public_keys = [
             key
             for key, row in programs.items()
@@ -141,7 +146,12 @@ class ProgramHistoryScopeTests(unittest.TestCase):
             scoped = scope_canonical_games(
                 all_games, key, programs[key]["history_start_season"]
             )
-            self.assertEqual(len(scoped), len(all_games), key)
+            excluded = len(all_games) - len(scoped)
+            self.assertEqual(
+                excluded,
+                expected_exclusions.get(key, 0),
+                key,
+            )
 
 
 class AccomplishmentTests(unittest.TestCase):
