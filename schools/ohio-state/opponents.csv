@@ -214,7 +214,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 212,ohio-state,New Mexico,new-mexico,New Mexico,,2,1987-1988,1987-1988,RESOLVED,Ohio State media guide / official schedule identity normalization,,
 213,ohio-state,New Mexico State,new-mexico-state,New Mexico State,,2,1967-1968,1997-1998,RESOLVED,Ohio State media guide / official schedule identity normalization,,
 214,ohio-state,New Orleans,new-orleans,New Orleans,,2,1989-1990,2023-2024,RESOLVED,Ohio State media guide / official schedule identity normalization,,
-215,ohio-state,New York Univ.,nyu,NYU,,3,1944-1945,1959-1960,RESOLVED,Ohio State media guide / official schedule identity normalization,,
+215,ohio-state,New York Univ.,nyu,NYU,,2,1944-1945,1959-1960,RESOLVED,Ohio State media guide / official schedule identity normalization,,1950 NCAA dedicated table identifies that tournament opponent as C.C.N.Y.; chronological ledger wording remains in source raw_text.
 216,ohio-state,New York University,nyu,NYU,,1,1936-1937,1936-1937,RESOLVED,Ohio State media guide / official schedule identity normalization,,
 217,ohio-state,Niagara,niagara,Niagara,,1,2021-2022,2021-2022,RESOLVED,Ohio State media guide / official schedule identity normalization,,
 218,ohio-state,Norfolk Navy,norfolk-navy,Norfolk Navy,,2,1943-1944,1943-1944,RESOLVED,Historical/non-current source identity retained; no unsupported modern lineage forced,,Distinct historical source identity retained rather than speculatively merged.
@@ -380,3 +380,4 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 378,ohio-state,Youngstown,youngstown-state,Youngstown State,,1,1916-1917,1916-1917,RESOLVED,Ohio State media guide / official schedule identity normalization,,
 379,ohio-state,Youngstown Duq.,youngstown-duq,Youngstown Duq.,,1,1919-1920,1919-1920,RESOLVED,Ohio State media guide / official schedule identity normalization,,
 380,ohio-state,Youngstown State,youngstown-state,Youngstown State,,6,1982-1983,2024-2025,RESOLVED,Ohio State media guide / official schedule identity normalization,,
+381,ohio-state,C.C.N.Y.,ccny,CCNY,,1,1949-1950,1949-1950,RESOLVED,Ohio State dedicated NCAA Tournament table / established project historical identity,,Dedicated NCAA table identifies the 1950-03-23 opponent as C.C.N.Y.; chronological ledger prints New York Univ.

@@ -6,7 +6,7 @@ Ohio State men's basketball is curated from program inception in **1898-99** thr
 Owner ruling: **Ohio State has always been D1/top-level for site purposes.**  
 Research baseline: `4c8d75592f98b42a8534182a5af9bf240b1fd16c`.
 
-This is a parallel research-lane package. It is **RESEARCH_FROZEN**, not integration-frozen.
+The immutable transport ZIP remains the **RESEARCH_FROZEN** research provenance. This tracked copy was rebased onto current main during Phase 0; the subsequent executable-preflight repair is documented below.
 
 ## Competitive history
 - Competitive games: **3,125**
@@ -49,20 +49,23 @@ Explicit later St. John return games and the 2020-21 Covelli Center footnote ove
 ## Postseason
 Big Ten Tournament games are classified from Ohio State's dedicated tournament table. The owner-supplied conference-tournament workbook is used **only** for its authorized complete Big Ten section and only for venue/city/state.
 
-NCAA Tournament games are classified/site-normalized from the dedicated Ohio State NCAA table. Every NCAA row has venue/city/state populated. Historical NCAA rounds are left blank where a modern-equivalent stage is not sufficiently explicit; third-place/consolation games retain blank round.
+NCAA Tournament games are classified/site-normalized from the dedicated Ohio State NCAA table. Every NCAA row has venue/city/state populated. Historical NCAA stages are mapped to the project's controlled vocabulary only when the source and tournament structure support the equivalent. The 1944, 1945 and 1946 year-by-year ledgers explicitly mark the second tournament games as **Final Four**; their opening games in the eight-team field therefore map to **Elite Eight**. The 1950 C.C.N.Y. opening game likewise maps to **Elite Eight**, while the subsequent Holy Cross consolation game remains blank. The 1962 and 1971 regional progression and later bracket rounds are normalized consistently; opening first-round games in the 1979-84 expanded fields use `Play-in`, and 1985-and-later first rounds use `R64`. Historical third-place/consolation games remain `NCAA_TOURNAMENT` with blank public round.
+
+The dedicated NCAA table also resolves one opponent contradiction: the 1950-03-23 tournament game was against **C.C.N.Y. (CCNY)**, not NYU. The chronological ledger's `New York Univ.` wording remains preserved verbatim in `raw_text`.
 
 The package contains **30 NIT games**, matching Ohio State's 10 appearances and 21-9 on-court NIT record. Preseason NIT games remain regular season; only title games use `Championship`.
 
 ## Accomplishment evidence collected
-- Big Ten regular-season championships: **20**
-- Big Ten Tournament championships: **4**
-- NCAA appearances through 2025-26: **32**
-- Final Fours: **10**
+Project accomplishment totals use **on-court history**, with later NCAA vacations stored administratively rather than erasing what was achieved on the court:
+- Conference regular-season championships: **22**
+- Big Ten Tournament championships: **5**
+- NCAA appearances through 2025-26: **36**
+- Final Fours: **11**
 - National championships: **1**
 - Best Finish: **National Champion**
 - Best Finish Year: **1960**
 
-The guide has an internal NCAA-appearance-count inconsistency; the listed historical appearance seasons support 31 through 2022, and 2025-26 adds the 32nd.
+Ohio State's current administrative quick facts show 20 conference titles, 4 Big Ten Tournament titles, 32 NCAA appearances and 10 Final Fours because the 1998-99 through 2001-02 NCAA action removes those achievements from current official totals. Contemporary Ohio State material documents the underlying on-court achievements: Big Ten regular-season titles in **2000 and 2002**, the **2002 Big Ten Tournament championship**, **four consecutive NCAA appearances from 1999 through 2002**, and the **1999 Final Four**. Those achievements are retained in the project's on-court accomplishment reference while the vacation remains separately preserved as administrative history.
 
 ## Provisional global venue IDs
 All new research-time numeric venue allocations are provisional:
@@ -73,7 +76,7 @@ All new research-time numeric venue allocations are provisional:
 - Convocation Center (Athens, OH) -> `VEN-000285` **PROVISIONAL**
 - Covelli Center (Columbus, OH) -> `VEN-000286` **PROVISIONAL**
 
-A current-main shared-reference rebase is mandatory before tracked Phase 0.
+These numeric values describe the frozen research-time proposals only. Phase 0 has completed the current-main rebase; tracked `venues.csv` and the integration-freeze manifest contain the integration assignments.
 
 ## Owner questions remaining
 None.

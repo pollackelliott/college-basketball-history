@@ -48,3 +48,16 @@ Clear modern/historical institutional aliases are normalized to stable program l
 
 ## Source caveats
 The record book has several internal/transcription inconsistencies, including the 1992-93 omitted row, a 2022-23 heading that says 16-9 despite a 16-19 listed schedule, an NCAA-appearance count inconsistency, and a handful of score strings that conflict with listed W/L or were damaged by text extraction. Corrections are made only where authoritative evidence supports a specific value.
+
+## Integration normalization after executable preflight
+The first current-main preflight exposed unresolved historical NCAA-round semantics. The repair uses Ohio State's own dedicated NCAA table, the year-by-year postseason footnotes, and the project's established historical-round convention. The 1944-46 ledgers explicitly distinguish NCAA Eastern Regionals from Final Four games; historical consolation/third-place rows remain blank. Later rounds respect bracket structure and byes, including `Play-in` for opening games in the 1979-84 expanded fields and `R64` for 1985-and-later first rounds.
+
+The same dedicated NCAA table identifies the **1950-03-23** opponent as **C.C.N.Y.**, 56-55 over Ohio State. The year-by-year ledger prints `New York Univ.` for that line. The dedicated NCAA table controls the normalized opponent identity (`ccny` / `CCNY`), while the contradictory chronological wording remains preserved in `raw_text`.
+
+## Accomplishment provenance and administrative distinction
+The project's accomplishment layer uses on-court history. Ohio State's current quick facts report administratively reduced totals after the NCAA action affecting 1998-99 through 2001-02. Contemporary Ohio State Athletics material documents the on-court facts removed from those modern administrative totals: the 2000 and 2002 Big Ten regular-season titles, the 2002 Big Ten Tournament championship, four consecutive NCAA appearances from 1999 through 2002, and the 1999 Final Four. Adding those back to the current administrative totals yields the project reference values **22 / 5 / 36 / 11 / 1**, with 1960 as the national-championship best finish.
+
+Official Ohio State corroboration:
+- `https://ohiostatebuckeyes.com/news/2000/3/4/buckeyes-secure-road-victory-share-of-big-ten-championship-2`
+- `https://ohiostatebuckeyes.com/buckeyes-win-big-ten-tournament-championship`
+- `https://ohiostatebuckeyes.com/news/2002/8/2/the-2002-03-mens-basketball-prospectus-2`
