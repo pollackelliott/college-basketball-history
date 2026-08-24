@@ -2478,7 +2478,7 @@
       "opponent_key": "iowa",
       "opponent_name": "Iowa",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
@@ -62866,7 +62866,7 @@
       "opponent_key": "iowa",
       "opponent_name": "Iowa",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 72,
       "opponent_score": 60,
       "score_known": true,
@@ -66116,7 +66116,7 @@
       "opponent_key": "iowa",
       "opponent_name": "Iowa",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 47,
       "opponent_score": 55,
       "score_known": true,
