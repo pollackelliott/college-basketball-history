@@ -116,7 +116,7 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(public[0]["start_season"], "2000-2001")
         self.assertEqual(source[0]["start_season"], "1990-1991")
 
-    def test_public_program_cutoffs_match_known_exclusions(self):
+    def test_public_program_pre_scope_games_are_reciprocal_only(self):
         with (ROOT / "data/reference/programs.csv").open(
             encoding="utf-8-sig", newline=""
         ) as f:
@@ -127,10 +127,16 @@ class ProgramHistoryScopeTests(unittest.TestCase):
             encoding="utf-8-sig", newline=""
         ) as f:
             games = list(csv.DictReader(f))
+        with (ROOT / "data/evidence/game-assertions.csv").open(
+            encoding="utf-8-sig", newline=""
+        ) as f:
+            assertions = list(csv.DictReader(f))
 
-        expected_exclusions = {
-            "iowa": 2,
-        }
+        assertion_sources = {}
+        for assertion in assertions:
+            assertion_sources.setdefault(
+                assertion["canonical_game_id"], set()
+            ).add(assertion["source_program_key"])
 
         public_keys = [
             key
@@ -138,20 +144,24 @@ class ProgramHistoryScopeTests(unittest.TestCase):
             if row["public_page_enabled"] == "Yes"
         ]
         for key in public_keys:
+            start = programs[key]["history_start_season"]
             all_games = [
                 game
                 for game in games
                 if key in {game["team_a_key"], game["team_b_key"]}
             ]
-            scoped = scope_canonical_games(
-                all_games, key, programs[key]["history_start_season"]
-            )
-            excluded = len(all_games) - len(scoped)
-            self.assertEqual(
-                excluded,
-                expected_exclusions.get(key, 0),
-                key,
-            )
+            scoped = scope_canonical_games(all_games, key, start)
+            scoped_ids = {game["canonical_game_id"] for game in scoped}
+            excluded = [
+                game
+                for game in all_games
+                if game["canonical_game_id"] not in scoped_ids
+            ]
+            for game in excluded:
+                self.assertLess(game["season_label"], start, key)
+                sources = assertion_sources.get(game["canonical_game_id"], set())
+                self.assertNotIn(key, sources, game["canonical_game_id"])
+                self.assertTrue(sources, game["canonical_game_id"])
 
 
 class AccomplishmentTests(unittest.TestCase):
