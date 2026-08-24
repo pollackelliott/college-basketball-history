@@ -1,0 +1,5 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,iowa,1901-1902,1907-1908,independent,Independent,independent,False,Iowa Athletics yearly record / program history: no Big Ten competition before 1908-09.,Owner-confirmed site history begins with program inception in 1901-02.
+1,iowa,1908-1909,1928-1929,big-ten,Big Ten,conference,False,Iowa Athletics yearly record and media guide conference records.,Iowa began Big Ten basketball competition in 1908-09.
+2,iowa,1929-1930,1929-1930,independent,Independent,independent,False,Iowa Athletics yearly record: Iowa did not compete in the Big Ten in 1929-30.,One-season Big Ten suspension/non-competition interval represented explicitly.
+3,iowa,1930-1931,,big-ten,Big Ten,conference,True,Iowa Athletics yearly record / Big Ten membership history.,Continuous Big Ten basketball competition from 1930-31 through present.
