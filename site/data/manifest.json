@@ -2,8 +2,8 @@
   "schema_version": 1,
   "reference_season": "2026-2027",
   "program_count": 365,
-  "public_page_count": 22,
-  "canonical_game_count": 50374,
+  "public_page_count": 23,
+  "canonical_game_count": 51707,
   "files": {
     "programs": "programs.json",
     "teams_root": "teams/"
