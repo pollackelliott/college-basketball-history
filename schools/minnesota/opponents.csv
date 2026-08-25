@@ -782,7 +782,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 780,minnesota,Wisconsin * -/13 Big Ten Network,wisconsin,Wisconsin,Yes,1,2007-2008,2007-2008,RESOLVED,Inherited established project identity,,
 781,minnesota,Wisconsin * /13,wisconsin,Wisconsin,Yes,1,2021-2022,2021-2022,RESOLVED,Inherited established project identity,,
 782,minnesota,Wisconsin* /11,wisconsin,Wisconsin,Yes,1,2023-2024,2023-2024,RESOLVED,Inherited established project identity,,
-783,minnesota,Wisconsin * -6,wisconsin-6,Wisconsin * -6,No,1,2014-2015,2014-2015,RESOLVED,Inherited established project identity,,
+783,minnesota,Wisconsin * -6,wisconsin,Wisconsin,Yes,1,2014-2015,2014-2015,RESOLVED,Integration-time correction of source notation accidentally parsed as opponent identity,,2015-03-05 source label 'Wisconsin * -6' is Wisconsin; literal label retained.
 784,minnesota,Wisconsin-River Falls,wisconsin-river-falls,Wisconsin-River Falls,No,1,1920-1921,1920-1921,RESOLVED,Inherited established project identity,,
 785,minnesota,Wisconsin-Stout,wisconsin-stout,Wisconsin-Stout,No,1,1907-1908,1907-1908,RESOLVED,Inherited established project identity,,
 786,minnesota,Wofford,wofford,Wofford,Yes,1,2013-2014,2013-2014,RESOLVED,Inherited established project identity,,
