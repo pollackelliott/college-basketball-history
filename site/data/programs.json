@@ -4091,7 +4091,7 @@
       "state": "MI",
       "primary_hex": "#00274C",
       "secondary_hex": "#FFCB05",
-      "history_start_season": null,
+      "history_start_season": "1908-1909",
       "conference_regular_season_championships": 16,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 33,
@@ -4100,7 +4100,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2026,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
