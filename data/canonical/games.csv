@@ -20958,7 +20958,7 @@ CBBG-0020957,1957-1958,1958-02-18,EXACT,georgia-tech,tennessee,65,84,tennessee,0
 CBBG-0020958,1957-1958,1958-02-22,EXACT,auburn,tennessee,72,66,auburn,0,TEAM_A_HOME,auburn,auburn-sports-arena,VEN-000017,Auburn,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=auburn/AUBRAW-00801;venue_key=auburn-sports-arena;site_type=TEAM_A_HOME;fields=venue_key]
 CBBG-0020959,1957-1958,1958-02-24,EXACT,alabama,tennessee,70,37,alabama,0,TEAM_A_HOME,alabama,,,Tuscaloosa,AL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020960,1958-1959,1958-12-02,EXACT,tennessee,wyoming,72,71,tennessee,0,TEAM_A_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0020961,1958-1959,1958-12-05,EXACT,michigan,tennessee,66,80,tennessee,0,NEUTRAL,,,,Kent,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0020961,1958-1959,1958-12-05,EXACT,michigan,tennessee,66,80,tennessee,0,NEUTRAL,,,,Kent,OH,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020962,1958-1959,1958-12-06,EXACT,tennessee,wyoming,90,69,tennessee,0,NEUTRAL,,,,Kent,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020963,1958-1959,1958-12-09,EXACT,tennessee,wake-forest,61,50,tennessee,0,TEAM_A_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020964,1958-1959,1958-12-18,EXACT,davidson,tennessee,52,67,tennessee,0,TEAM_B_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
