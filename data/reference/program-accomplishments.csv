@@ -226,7 +226,7 @@ oral-roberts,7,7,7,0,0,ELITE_EIGHT,1974,OWNER_BASELINE_UNVERIFIED,Owner-supplied
 oregon,8,6,19,2,1,NATIONAL_CHAMPION,1939,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 oregon-state,15,1,18,2,0,FINAL_FOUR,1963,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 pacific,13,5,9,0,0,ELITE_EIGHT,1967,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-penn-state,0,1,10,1,0,FINAL_FOUR,1954,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+penn-state,0,1,10,1,0,FINAL_FOUR,1954,VERIFIED,"Owner Gate 1 verified Penn State's accomplishment reference values against authoritative Penn State history and the canonical NCAA cross-check: 10 NCAA appearances, one Final Four in 1954, no national championships, and one conference tournament championship.",MATCH,Verified through onboarding plan 426bdc5e3e76.
 pennsylvania,39,2,25,1,0,FINAL_FOUR,1979,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 pepperdine,12,3,13,0,0,ELITE_EIGHT,1944,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 pittsburgh,10,4,27,1,0,FINAL_FOUR,1941,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
