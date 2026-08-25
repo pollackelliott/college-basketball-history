@@ -8603,7 +8603,7 @@
       "state": "WI",
       "primary_hex": "#C5050C",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1898-1899",
       "conference_regular_season_championships": 20,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 29,
@@ -8612,7 +8612,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1941,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
