@@ -76,3 +76,18 @@ No canonical preflight, current-main shared-reference rebase, Owner Gate 1, inge
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=e03513ba8a8cd3313023c2f3f3647370f4a0e5c9` from `research_base_sha=b8b543544cc97d993056537e3b7fc8d09258fa8c`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Integration-time 1907-08 opponent correction
+
+Authoritative preflight exposed an opponent transposition in Wisconsin's
+All-Time Results ledger. The printed ledger gives Jan. 25, 1908 as Chicago
+37-16 and Jan. 31 as Minnesota 29-17. Reciprocal institutional evidence
+establishes the opposite opponent identities: Minnesota's official 1907-08
+year-by-year ledger records a 16-37 loss at Wisconsin on Jan. 25, and
+University of Chicago Athletics' official 1907-08 schedule records a 17-29
+loss at Wisconsin on Jan. 31.
+
+The integration-ready package therefore normalizes Jan. 25 to Minnesota and
+Jan. 31 to Chicago. Dates, scores, results, H/A/N, and Red Gym assignment are
+unchanged. The original Wisconsin opponent labels and `raw_text` remain
+preserved as source evidence. The immutable RESEARCH_FROZEN ZIP is unchanged.

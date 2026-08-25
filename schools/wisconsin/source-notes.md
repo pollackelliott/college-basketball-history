@@ -56,3 +56,19 @@ Where `current_d1` is blank, the physical/source opponent identity is resolved b
 `research_base_sha=b8b543544cc97d993056537e3b7fc8d09258fa8c`.
 
 Venue IDs created during parallel research are provisional until the serialized integration lane performs the mandatory current-main shared-reference rebase. The package is **RESEARCH_FROZEN**, not `INTEGRATION_FROZEN`.
+
+## Integration-time reciprocal evidence — 1907-08 opponent transposition
+
+The permanent authoritative preflight revealed that two adjacent Wisconsin
+All-Time Results rows have opponent names transposed while retaining the
+correct dates and scores.
+
+- Minnesota 2025-26 Men's Basketball Media Guide, Year-by-Year Scores:
+  1908-01-25 — Minnesota L 16-37 at Wisconsin.
+- University of Chicago Athletics official 1907-08 schedule and Wisconsin
+  opponent history:
+  1908-01-31 — Chicago L 17-29 at Wisconsin.
+
+Those reciprocal institutional records control the structured opponent
+identity for these two rows. Wisconsin's literal printed opponent labels and
+`raw_text` remain preserved. No other game fact is changed.
