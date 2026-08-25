@@ -90,3 +90,15 @@ Current-main shared-reference rebase completed against `integration_base_sha=ca9
 ## Owner display-geography ruling
 
 Owner display-geography ruling (2026-08-25): Penn State's three program home venues — Penn State Armory, Rec Hall, and Bryce Jordan Center — normalize to State College, PA for project presentation. Historical/source wording such as University Park, PA remains preserved in raw source text and reciprocal evidence.
+
+## Owner Palestra home-game ruling
+
+On 2026-08-25, Elliott confirmed that the recent Penn State-hosted
+annual games at the Palestra are Penn State home games and opponent
+road games. The affected portfolio sequence is Purdue (2023-01-08),
+Michigan (2024-01-07), Indiana (2025-01-05), and Illinois
+(2026-01-03). The venue is Palestra, Philadelphia, PA.
+
+The Palestra is an alternate-site home venue for these games and is
+not one of Penn State's three regular program-home venue
+relationships. Raw source text remains preserved.
