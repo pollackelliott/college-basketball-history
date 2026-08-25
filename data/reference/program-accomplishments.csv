@@ -186,7 +186,7 @@ mount-st-mary-s,2,7,7,0,0,ROUND_OF_64,2025,OWNER_BASELINE_UNVERIFIED,Owner-suppl
 murray-state,28,18,18,0,0,ROUND_OF_32,2022,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 navy,9,6,11,0,0,ELITE_EIGHT,1986,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 nc-state,13,18,30,4,2,NATIONAL_CHAMPION,1983,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-nebraska,7,1,9,0,0,SWEET_SIXTEEN,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+nebraska,7,1,9,0,0,SWEET_SIXTEEN,2026,VERIFIED,"Owner Gate 1 verified Nebraska's accomplishment reference values against the official 2025-26 Nebraska Men's Basketball Media Guide: 7 regular-season conference championships and 1 postseason/conference-tournament championship. The authoritative preflight canonical cross-check independently matches the NCAA fields: 9 NCAA appearances, Sweet Sixteen best finish in 2026, 0 Final Fours, and 0 national championships.",MATCH,Verified through onboarding plan 5f2761f662ba.
 nevada,13,5,11,0,0,SWEET_SIXTEEN,2018,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 new-hampshire,1,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 new-haven,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
