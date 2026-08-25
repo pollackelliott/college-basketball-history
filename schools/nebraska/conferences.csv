@@ -1,0 +1,10 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,nebraska,1896-1897,1906-1907,independent,Independent,independent,False,Nebraska 2025-26 media guide year-by-year conference summaries; owner-confirmed history scope.,Program inception through 1906-07 is treated as Independent.
+1,nebraska,1907-1908,1918-1919,missouri-valley,Missouri Valley,conference,False,Nebraska 2025-26 media guide year-by-year conference summaries.,Nebraska first appears with Missouri Valley conference standings in 1907-08.
+2,nebraska,1919-1920,1919-1920,independent,Independent,independent,False,Nebraska 2025-26 media guide year-by-year conference summary.,The 1919-20 season explicitly states No conference affiliation.
+3,nebraska,1920-1921,1927-1928,missouri-valley,Missouri Valley,conference,False,Nebraska 2025-26 media guide year-by-year conference summaries.,Nebraska returned to Missouri Valley competition in 1920-21.
+4,nebraska,1928-1929,1946-1947,big-six,Big Six,conference,False,Nebraska 2025-26 media guide year-by-year conference summaries.,Big Six display era begins in 1928-29.
+5,nebraska,1947-1948,1957-1958,big-seven,Big Seven,conference,False,Nebraska 2025-26 media guide year-by-year conference summaries.,Big Seven display era begins in 1947-48 and continues through 1957-58.
+6,nebraska,1958-1959,1995-1996,big-eight,Big Eight,conference,False,Nebraska 2025-26 media guide year-by-year conference summaries.,Big Eight display era begins in 1958-59 and ends with the 1995-96 season.
+7,nebraska,1996-1997,2010-2011,big-12,Big 12,conference,False,Nebraska 2025-26 media guide year-by-year conference summaries.,Nebraska was a Big 12 member for basketball from the league inaugural 1996-97 season through 2010-11.
+8,nebraska,2011-2012,,big-ten,Big Ten,conference,True,Nebraska 2025-26 media guide year-by-year conference summaries and Big Ten institutional history.,Nebraska Big Ten basketball membership begins in 2011-12 and is ongoing.

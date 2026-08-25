@@ -1,0 +1,398 @@
+index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
+0,nebraska,Abilene Christian,abilene-christian,Abilene Christian,Yes,1,2015-2016,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,
+1,nebraska,Air Force,air-force,Air Force,Yes,5,1959-1960,1981-1982,RESOLVED,Current D1 registry / established institutional lineage,,
+2,nebraska,Alabama,alabama,Alabama,Yes,2,1954-1955,1985-1986,RESOLVED,Current D1 registry / established institutional lineage,,
+3,nebraska,Alabama A M,alabama-a-m,Alabama A&M,Yes,3,2005-2006,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+4,nebraska,Alabama State,alabama-state,Alabama State,Yes,1,2008-2009,2008-2009,RESOLVED,Current D1 registry / established institutional lineage,,
+5,nebraska,Alabama-Birmingham,uab,UAB,Yes,1,1978-1979,1978-1979,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+6,nebraska,Alaska-Fairbanks,alaska-fairbanks,Alaska-Fairbanks,No,2,2000-2001,2002-2003,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+7,nebraska,Alcorn State,alcorn-state,Alcorn State,Yes,3,2007-2008,2011-2012,RESOLVED,Current D1 registry / established institutional lineage,,
+8,nebraska,Angelo State,angelo-state,Angelo State,No,1,1979-1980,1979-1980,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+9,nebraska,Appalachian St,app-state,Appalachian State,Yes,2,1992-1993,1994-1995,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+10,nebraska,Appalachian State,app-state,Appalachian State,Yes,1,1993-1994,1993-1994,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+11,nebraska,Arizona,arizona,Arizona,Yes,4,1960-1961,1999-2000,RESOLVED,Current D1 registry / established institutional lineage,,
+12,nebraska,Arizona State,arizona-state,Arizona State,Yes,8,1968-1969,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+13,nebraska,Arkansas,arkansas,Arkansas,Yes,8,1932-1933,1997-1998,RESOLVED,Current D1 registry / established institutional lineage,,
+14,nebraska,Arkansas State,arkansas-state,Arkansas State,Yes,2,1988-1989,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+15,nebraska,Arkansas Tech,arkansas-tech,Arkansas Tech,No,1,1978-1979,1978-1979,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+16,nebraska,Arkansas-Little Rock,little-rock,Little Rock,Yes,1,1986-1987,1986-1987,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+17,nebraska,Arkansas-Pine Bluff,arkansas-pine-bluff,Arkansas-Pine Bluff,Yes,6,2004-2005,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+18,nebraska,Auburn,auburn,Auburn,Yes,1,2021-2022,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+19,nebraska,Augustana (S.D.),augustana-sd,Augustana (S.D.),No,3,1968-1969,1983-1984,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+20,nebraska,Baker,baker,Baker,No,3,1904-1905,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+21,nebraska,Ball State,ball-state,Ball State,Yes,3,1980-1981,2002-2003,RESOLVED,Current D1 registry / established institutional lineage,,
+22,nebraska,Baylor,baylor,Baylor,Yes,23,1949-1950,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+23,nebraska,Bellevue,bellevue,Bellevue,No,1,1905-1906,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+24,nebraska,Bethune-Cookman,bethune-cookman,Bethune-Cookman,Yes,2,2003-2004,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+25,nebraska,Boise State,boise-state,Boise State,Yes,1,2024-2025,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+26,nebraska,Boston College,boston-college,Boston College,Yes,2,2017-2018,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+27,nebraska,Bowling Green,bowling-green,Bowling Green,Yes,3,1990-1991,1996-1997,RESOLVED,Current D1 registry / established institutional lineage,,
+28,nebraska,Bradley,bradley,Bradley,Yes,7,1937-1938,1958-1959,RESOLVED,Current D1 registry / established institutional lineage,,
+29,nebraska,Brandeis (Omaha),brandeis-omaha,Brandeis (Omaha),No,1,1916-1917,1916-1917,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+30,nebraska,Brigham Young,byu,BYU,Yes,4,1930-1931,1935-1936,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+31,nebraska,Brooklyn,brooklyn,Brooklyn,No,2,1986-1987,1987-1988,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+32,nebraska,Brown “B”,brown-b,Brown “B”,No,1,1905-1906,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+33,nebraska,Burgess-Nash,burgess-nash,Burgess-Nash,No,1,1915-1916,1915-1916,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+34,nebraska,Butler,butler,Butler,Yes,4,1929-1930,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+35,nebraska,BYU,byu,BYU,Yes,1,2009-2010,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,
+36,nebraska,Cal State Fullerton,cal-state-fullerton,Cal State Fullerton,Yes,3,1967-1968,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,
+37,nebraska,Cal State-Bakersfield,cal-state-bakersfield,Cal State Bakersfield,Yes,1,1979-1980,1979-1980,RESOLVED,Current D1 registry / established institutional lineage,,
+38,nebraska,California,california,California,Yes,13,1937-1938,1972-1973,RESOLVED,Current D1 registry / established institutional lineage,,
+39,nebraska,California-Davis,uc-davis,UC Davis,Yes,1,1977-1978,1977-1978,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+40,nebraska,California-Irvine,uc-irvine,UC Irvine,Yes,4,1969-1970,1986-1987,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+41,nebraska,Camp Funston,camp-funston,Camp Funston,No,1,1917-1918,1917-1918,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+42,nebraska,Canisius,canisius,Canisius,Yes,2,1936-1937,1984-1985,RESOLVED,Current D1 registry / established institutional lineage,,
+43,nebraska,Carleton,carleton,Carleton,No,2,1931-1932,1932-1933,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+44,nebraska,Centenary,centenary,Centenary,No,1,2002-2003,2002-2003,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+45,nebraska,Central Arkansas,central-arkansas,Central Arkansas,Yes,1,2014-2015,2014-2015,RESOLVED,Current D1 registry / established institutional lineage,,
+46,nebraska,Central City,central-city,Central City,No,1,1906-1907,1906-1907,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+47,nebraska,Central Michigan,central-michigan,Central Michigan,Yes,2,2011-2012,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+48,nebraska,Chaminade,chaminade,Chaminade,No,2,1987-1988,1988-1989,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+49,nebraska,Charlotte,charlotte,Charlotte,Yes,1,2007-2008,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
+50,nebraska,Cheyenne Business,cheyenne-business,Cheyenne Business,No,1,1902-1903,1902-1903,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+51,nebraska,Chicago Central,chicago-central,Chicago Central,No,1,1904-1905,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+52,nebraska,Chicago State,chicago-state,Chicago State,Yes,3,1989-1990,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,
+53,nebraska,Cincinnati,cincinnati,Cincinnati,Yes,6,1948-1949,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,
+54,nebraska,Clemson,clemson,Clemson,Yes,2,2016-2017,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+55,nebraska,Colgate,colgate,Colgate,Yes,4,1920-1921,1998-1999,RESOLVED,Current D1 registry / established institutional lineage,,
+56,nebraska,Coll. of Charleston,charleston,Charleston,Yes,1,1994-1995,1994-1995,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+57,nebraska,Colorado,colorado,Colorado,Yes,148,1902-1903,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+58,nebraska,Colorado College,colorado-college,Colorado College,No,7,1902-1903,1928-1929,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+59,nebraska,Colorado State,colorado-state,Colorado State,Yes,10,1947-1948,1998-1999,RESOLVED,Current D1 registry / established institutional lineage,,
+60,nebraska,Columbia,columbia,Columbia,Yes,1,1987-1988,1987-1988,RESOLVED,Current D1 registry / established institutional lineage,,
+61,nebraska,Connecticut,uconn,UConn,Yes,2,1991-1992,1996-1997,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+62,nebraska,Coppin State,coppin-state,Coppin State,Yes,1,1996-1997,1996-1997,RESOLVED,Current D1 registry / established institutional lineage,,
+63,nebraska,Cornell,cornell,Cornell,Yes,1,1982-1983,1982-1983,RESOLVED,Current D1 registry / established institutional lineage,,
+64,nebraska,Cornell (N.Y.),cornell,Cornell,Yes,1,1955-1956,1955-1956,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+65,nebraska,Cotner,cotner,Cotner,No,5,1908-1909,1916-1917,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+66,nebraska,Creighton,creighton,Creighton,Yes,59,1922-1923,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+67,nebraska,Crete,crete,Crete,No,1,1906-1907,1906-1907,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+68,nebraska,Davidson,davidson,Davidson,Yes,1,2010-2011,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+69,nebraska,Dayton,dayton,Dayton,Yes,1,2016-2017,2016-2017,RESOLVED,Current D1 registry / established institutional lineage,,
+70,nebraska,Delaware State,delaware-state,Delaware State,Yes,5,1994-1995,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+71,nebraska,Denver,denver,Denver,Yes,8,1906-1907,2002-2003,RESOLVED,Current D1 registry / established institutional lineage,,
+72,nebraska,Denver YMCA,denver-ymca,Denver YMCA,No,1,1902-1903,1902-1903,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+73,nebraska,DePaul,depaul,DePaul,Yes,5,1907-1908,1982-1983,RESOLVED,Current D1 registry / established institutional lineage,,
+74,nebraska,Detroit,detroit-mercy,Detroit Mercy,Yes,7,1937-1938,1987-1988,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+75,nebraska,Doane,doane,Doane,No,3,1898-1899,2020-2021,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+76,nebraska,Drake,drake,Drake,Yes,57,1908-1909,1988-1989,RESOLVED,Current D1 registry / established institutional lineage,,
+77,nebraska,Duquesne,duquesne,Duquesne,Yes,4,1948-1949,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,
+78,nebraska,Eastern Illinois,eastern-illinois,Eastern Illinois,Yes,6,1990-1991,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+79,nebraska,Eastern Michigan,eastern-michigan,Eastern Michigan,Yes,1,2003-2004,2003-2004,RESOLVED,Current D1 registry / established institutional lineage,,
+80,nebraska,Eastern Washington,eastern-washington,Eastern Washington,Yes,5,1979-1980,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+81,nebraska,Emporia State,emporia-state,Emporia State,No,1,1955-1956,1955-1956,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+82,nebraska,Evansville,evansville,Evansville,Yes,2,1984-1985,1985-1986,RESOLVED,Current D1 registry / established institutional lineage,,
+83,nebraska,Fairleigh Dickinson,fairleigh-dickinson,Fairleigh Dickinson,Yes,1,2003-2004,2003-2004,RESOLVED,Current D1 registry / established institutional lineage,,
+84,nebraska,FDU,fairleigh-dickinson,Fairleigh Dickinson,Yes,1,2024-2025,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+85,nebraska,FIU,florida-international,FIU,Yes,1,2025-2026,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,Integration normalization against current main: fiu -> florida-international.
+86,nebraska,Florida A M,florida-a-m,Florida A&M,Yes,3,1993-1994,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+87,nebraska,Florida Gulf Coast,florida-gulf-coast,Florida Gulf Coast,Yes,2,2011-2012,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+88,nebraska,Florida State,florida-state,Florida State,Yes,3,2005-2006,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+89,nebraska,Fond du Lac,fond-du-lac,Fond du Lac,No,1,1900-1901,1900-1901,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+90,nebraska,Fordham,fordham,Fordham,Yes,1,1992-1993,1992-1993,RESOLVED,Current D1 registry / established institutional lineage,,
+91,nebraska,Fort Dodge,fort-dodge,Fort Dodge,No,5,1904-1905,1917-1918,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+92,nebraska,Fort Dodge Co. G,fort-dodge-company-g,Fort Dodge Co. G,No,1,1913-1914,1913-1914,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+93,nebraska,Fort Riley,fort-riley,Fort Riley,No,1,1905-1906,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+94,nebraska,Fresno State,fresno-state,Fresno State,Yes,2,1951-1952,1995-1996,RESOLVED,Current D1 registry / established institutional lineage,,
+95,nebraska,Frinnell,grinnell,Grinnell,No,1,1918-1919,1918-1919,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Obvious historical source spelling normalized to Grinnell.
+96,nebraska,Ft. Dodge (Co. G),fort-dodge-company-g,Fort Dodge Co. G,No,1,1914-1915,1914-1915,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+97,nebraska,Furman,furman,Furman,Yes,2,1987-1988,1988-1989,RESOLVED,Current D1 registry / established institutional lineage,,
+98,nebraska,Gardner Naval,gardner-naval,Gardner Naval,No,2,1942-1943,1942-1943,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+99,nebraska,Gardner-Webb,gardner-webb,Gardner-Webb,Yes,1,2016-2017,2016-2017,RESOLVED,Current D1 registry / established institutional lineage,,
+100,nebraska,George Mason,george-mason,George Mason,Yes,1,2019-2020,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,
+101,nebraska,George Washington,george-washington,George Washington,Yes,1,1936-1937,1936-1937,RESOLVED,Current D1 registry / established institutional lineage,,
+102,nebraska,Georgetown,georgetown,Georgetown,Yes,1,2024-2025,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+103,nebraska,Georgia,georgia,Georgia,Yes,3,1985-1986,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+104,nebraska,Georgia Southern,georgia-southern,Georgia Southern,Yes,1,1995-1996,1995-1996,RESOLVED,Current D1 registry / established institutional lineage,,
+105,nebraska,Georgia State,georgia-state,Georgia State,Yes,2,1972-1973,1973-1974,RESOLVED,Current D1 registry / established institutional lineage,,
+106,nebraska,Georgia Tech,georgia-tech,Georgia Tech,Yes,3,1983-1984,2020-2021,RESOLVED,Current D1 registry / established institutional lineage,,
+107,nebraska,Grambling,grambling,Grambling,Yes,1,2010-2011,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+108,nebraska,Grambling State,grambling,Grambling,Yes,3,1987-1988,1997-1998,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+109,nebraska,Great Lakes,great-lakes,Great Lakes,No,1,1941-1942,1941-1942,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+110,nebraska,Greeley High,greeley-high,Greeley High,No,1,1902-1903,1902-1903,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+111,nebraska,Grinnell,grinnell,Grinnell,No,23,1906-1907,1927-1928,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+112,nebraska,Hamline,hamline,Hamline,No,2,1914-1915,1916-1917,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+113,nebraska,Harvard,harvard,Harvard,Yes,3,1948-1949,1989-1990,RESOLVED,Current D1 registry / established institutional lineage,,
+114,nebraska,Haskell,haskell,Haskell,No,2,1901-1902,1902-1903,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+115,nebraska,Hastings,hastings,Hastings,No,1,1919-1920,1919-1920,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+116,nebraska,Hawaii,hawai-i,Hawai'i,Yes,10,1967-1968,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+117,nebraska,Hawaii-Hilo,hawaii-hilo,Hawaii-Hilo,No,1,1976-1977,1976-1977,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+118,nebraska,Highland Park,highland-park,Highland Park,No,3,1903-1904,1907-1908,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+119,nebraska,Hillyard’s,hillyards,Hillyard's,No,1,1926-1927,1926-1927,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+120,nebraska,Hofstra,hofstra,Hofstra,Yes,2,2005-2006,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+121,nebraska,Houston,houston,Houston,Yes,4,1962-1963,2006-2007,RESOLVED,Current D1 registry / established institutional lineage,,
+122,nebraska,Hudson,hudson,Hudson,No,1,1906-1907,1906-1907,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+123,nebraska,Idaho,idaho,Idaho,Yes,7,1949-1950,1990-1991,RESOLVED,Current D1 registry / established institutional lineage,,
+124,nebraska,Idaho State,idaho-state,Idaho State,Yes,2,1994-1995,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+125,nebraska,Illinois,illinois,Illinois,Yes,34,1920-1921,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+126,nebraska,Illinois Wesleyan,illinois-wesleyan,Illinois Wesleyan,No,1,1920-1921,1920-1921,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+127,nebraska,Incarnate Word,incarnate-word,Incarnate Word,Yes,1,2014-2015,2014-2015,RESOLVED,Current D1 registry / established institutional lineage,,
+128,nebraska,Independence,independence,Independence,No,1,1905-1906,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+129,nebraska,Indiana,indiana,Indiana,Yes,31,1919-1920,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+130,nebraska,Iona,iona,Iona,Yes,2,1982-1983,2000-2001,RESOLVED,Current D1 registry / established institutional lineage,,
+131,nebraska,Iowa,iowa,Iowa,Yes,45,1906-1907,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+132,nebraska,Iowa State,iowa-state,Iowa State,Yes,234,1908-1909,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+133,nebraska,IPFW,purdue-fort-wayne,Purdue Fort Wayne,Yes,3,2002-2003,2008-2009,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+134,nebraska,Jackson State,jackson-state,Jackson State,Yes,2,2009-2010,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+135,nebraska,Jacksonville State,jacksonville-state,Jacksonville State,Yes,1,2012-2013,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+136,nebraska,Kansas,kansas,Kansas,Yes,243,1899-1900,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+137,nebraska,Kansas City A.C,kansas-city-ac,Kansas City A.C.,No,5,1905-1906,1925-1926,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+138,nebraska,Kansas City YMCA,kansas-city-ymca,Kansas City YMCA,No,1,1905-1906,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+139,nebraska,Kansas State,kansas-state,Kansas State,Yes,224,1905-1906,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+140,nebraska,Kennesaw State,kennesaw-state,Kennesaw State,Yes,1,2021-2022,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+141,nebraska,Kent State,kent-state,Kent State,Yes,3,1992-1993,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+142,nebraska,Kentucky,kentucky,Kentucky,Yes,3,1940-1941,1972-1973,RESOLVED,Current D1 registry / established institutional lineage,,
+143,nebraska,Knox,knox,Knox,No,1,1919-1920,1919-1920,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+144,nebraska,La Salle,la-salle,La Salle,Yes,2,1966-1967,1971-1972,RESOLVED,Current D1 registry / established institutional lineage,,
+145,nebraska,Lawrence,lawrence,Lawrence,No,1,1904-1905,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+146,nebraska,Lehigh,lehigh,Lehigh,Yes,1,1987-1988,1987-1988,RESOLVED,Current D1 registry / established institutional lineage,,
+147,nebraska,Lewis,lewis,Lewis,No,1,1904-1905,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+148,nebraska,Lincoln High,lincoln-high,Lincoln High,No,1,1903-1904,1903-1904,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+149,nebraska,Lincoln YMCA,lincoln-ymca,Lincoln YMCA,No,14,1896-1897,1908-1909,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+150,nebraska,Lindenwood,lindenwood,Lindenwood,Yes,1,2023-2024,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,
+151,nebraska,Lipscomb,lipscomb,Lipscomb,Yes,2,2002-2003,2003-2004,RESOLVED,Current D1 registry / established institutional lineage,,
+152,nebraska,Long Beach State,long-beach-state,Long Beach State,Yes,4,1974-1975,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+153,nebraska,Longwood,longwood,Longwood,Yes,1,2005-2006,2005-2006,RESOLVED,Current D1 registry / established institutional lineage,,
+154,nebraska,Louisiana State,lsu,LSU,Yes,1,1988-1989,1988-1989,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+155,nebraska,Louisiana Tech,louisiana-tech,Louisiana Tech,Yes,2,2005-2006,2016-2017,RESOLVED,Current D1 registry / established institutional lineage,,
+156,nebraska,Louisville,louisville,Louisville,Yes,2,1946-1947,1979-1980,RESOLVED,Current D1 registry / established institutional lineage,,
+157,nebraska,Loyola (Ill.),loyola-chicago,Loyola Chicago,Yes,2,1936-1937,1937-1938,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+158,nebraska,Loyola Marymount,loyola-marymount,Loyola Marymount,Yes,2,1980-1981,2014-2015,RESOLVED,Current D1 registry / established institutional lineage,,
+159,nebraska,Lubbock Christian,lubbock-christian,Lubbock Christian,No,1,2006-2007,2006-2007,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+160,nebraska,MacMurray,macmurray,MacMurray,No,1,1973-1974,1973-1974,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+161,nebraska,Maine,maine,Maine,Yes,1,2022-2023,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+162,nebraska,Mankato State,mankato-state,Mankato State,No,1,1976-1977,1976-1977,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+163,nebraska,Marist,marist,Marist,Yes,1,2017-2018,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+164,nebraska,Marquette,marquette,Marquette,Yes,8,1933-1934,2005-2006,RESOLVED,Current D1 registry / established institutional lineage,,
+165,nebraska,Marshall,marshall,Marshall,Yes,1,1966-1967,1966-1967,RESOLVED,Current D1 registry / established institutional lineage,,
+166,nebraska,Marshfield (Co. A),marshfield-co-a,Marshfield (Co. A),No,1,1906-1907,1906-1907,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+167,nebraska,Mary,mary,Mary,No,1,2016-2017,2016-2017,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+168,nebraska,Maryland,maryland,Maryland,Yes,19,2014-2015,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+169,nebraska,Maryland Eastern Shore,maryland-eastern-shore,Maryland Eastern Shore,Yes,4,2007-2008,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+170,nebraska,Maryland-Baltimore Co,umbc,UMBC,Yes,1,1988-1989,1988-1989,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+171,nebraska,McNeese State,mcneese,McNeese,Yes,1,2020-2021,2020-2021,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+172,nebraska,Memphis,memphis,Memphis,Yes,1,2022-2023,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+173,nebraska,Memphis State,memphis,Memphis,Yes,1,1954-1955,1954-1955,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+174,nebraska,Menasha,menasha,Menasha,No,1,1904-1905,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+175,nebraska,Mesa,mesa,Mesa,No,1,1982-1983,1982-1983,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+176,nebraska,Miami,miami,Miami (FL),Yes,6,1951-1952,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+177,nebraska,Miami (Ohio),miami-oh,Miami (OH),Yes,3,1962-1963,1990-1991,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+178,nebraska,Michigan,michigan,Michigan,Yes,29,1949-1950,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+179,nebraska,Michigan St,michigan-state,Michigan State,Yes,1,1994-1995,1994-1995,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+180,nebraska,Michigan State,michigan-state,Michigan State,Yes,34,1919-1920,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+181,nebraska,Middle Tennessee St,middle-tennessee,Middle Tennessee,Yes,1,1973-1974,1973-1974,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+182,nebraska,Millikin,millikin,Millikin,No,1,1934-1935,1934-1935,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+183,nebraska,Minneapolis YMCA,minneapolis-ymca,Minneapolis YMCA,No,1,1903-1904,1903-1904,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+184,nebraska,Minnesota,minnesota,Minnesota,Yes,87,1901-1902,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+185,nebraska,Minnesota Ag,minnesota-ag,Minnesota Ag,No,1,1902-1903,1902-1903,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+186,nebraska,Minnesota-Duluth,minnesota-duluth,Minnesota-Duluth,No,1,1973-1974,1973-1974,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+187,nebraska,Mississippi,ole-miss,Ole Miss,Yes,3,1977-1978,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+188,nebraska,Mississippi St,mississippi-state,Mississippi State,Yes,1,1995-1996,1995-1996,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+189,nebraska,Mississippi State,mississippi-state,Mississippi State,Yes,1,2017-2018,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+190,nebraska,Mississippi Valley State,mississippi-valley-state,Mississippi Valley State,Yes,2,2015-2016,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+191,nebraska,Missouri,missouri,Missouri,Yes,219,1907-1908,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+192,nebraska,Missouri Southern,missouri-southern,Missouri Southern,No,1,1977-1978,1977-1978,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+193,nebraska,Missouri State,missouri-state,Missouri State,Yes,1,2018-2019,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+194,nebraska,Missouri Western,missouri-western,Missouri Western,No,1,1982-1983,1982-1983,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+195,nebraska,Missouri-St. Louis,missouri-st-louis,Missouri-St. Louis,No,1,1986-1987,1986-1987,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+196,nebraska,Monmouth,monmouth,Monmouth,Yes,1,1999-2000,1999-2000,RESOLVED,Current D1 registry / established institutional lineage,,
+197,nebraska,Montana,montana,Montana,Yes,3,1936-1937,1982-1983,RESOLVED,Current D1 registry / established institutional lineage,,
+198,nebraska,Montana State,montana-state,Montana State,Yes,7,1929-1930,2004-2005,RESOLVED,Current D1 registry / established institutional lineage,,
+199,nebraska,Morehead State,morehead-state,Morehead State,Yes,2,1988-1989,1994-1995,RESOLVED,Current D1 registry / established institutional lineage,,
+200,nebraska,Morgan State,morgan-state,Morgan State,Yes,1,2004-2005,2004-2005,RESOLVED,Current D1 registry / established institutional lineage,,
+201,nebraska,Morningside,morningside,Morningside,No,7,1903-1904,1919-1920,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+202,nebraska,Morrison,morrison,Morrison,No,1,1907-1908,1907-1908,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+203,nebraska,Murray State,murray-state,Murray State,Yes,3,1990-1991,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+204,nebraska,Muscatine,muscatine,Muscatine,No,1,1907-1908,1907-1908,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+205,nebraska,NATTC,nattc,NATTC,No,1,1944-1945,1944-1945,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+206,nebraska,Navy Pre-Flight,navy-pre-flight,Navy Pre-Flight,No,2,1944-1945,1944-1945,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+207,nebraska,NC State,nc-state,NC State,Yes,1,2021-2022,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+208,nebraska,Nebraska Wesleyan,nebraska-wesleyan,Nebraska Wesleyan,No,25,1898-1899,1917-1918,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+209,nebraska,Nebraska-Omaha,omaha,Omaha,Yes,1,1987-1988,1987-1988,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+210,nebraska,Nevada,nevada,Nevada,Yes,2,1996-1997,2020-2021,RESOLVED,Current D1 registry / established institutional lineage,,
+211,nebraska,Nevada-Reno,nevada,Nevada,Yes,3,1947-1948,1977-1978,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+212,nebraska,New Hampshire,new-hampshire,New Hampshire,Yes,1,2025-2026,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+213,nebraska,New Mexico,new-mexico,New Mexico,Yes,2,2008-2009,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+214,nebraska,New Mexico State,new-mexico-state,New Mexico State,Yes,2,1975-1976,1992-1993,RESOLVED,Current D1 registry / established institutional lineage,,
+215,nebraska,New Orleans,new-orleans,New Orleans,Yes,1,1997-1998,1997-1998,RESOLVED,Current D1 registry / established institutional lineage,,
+216,nebraska,Niagara,niagara,Niagara,Yes,2,1937-1938,2003-2004,RESOLVED,Current D1 registry / established institutional lineage,,
+217,nebraska,Nicholls State,nicholls,Nicholls,Yes,1,2012-2013,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+218,nebraska,Norfolk State,norfolk-state,Norfolk State,Yes,1,2007-2008,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
+219,nebraska,North Carolina,north-carolina,North Carolina,Yes,1,1972-1973,1972-1973,RESOLVED,Current D1 registry / established institutional lineage,,
+220,nebraska,North Carolina A T,north-carolina-a-t,North Carolina A&T,Yes,4,1998-1999,2005-2006,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+221,nebraska,North Carolina Central,north-carolina-central,North Carolina Central,Yes,1,2007-2008,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
+222,nebraska,North Dakota,north-dakota,North Dakota,Yes,7,1933-1934,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+223,nebraska,North Dakota State,north-dakota-state,North Dakota State,Yes,2,1933-1934,2020-2021,RESOLVED,Current D1 registry / established institutional lineage,,
+224,nebraska,North Florida,north-florida,North Florida,Yes,1,2024-2025,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+225,nebraska,North Texas,north-texas,North Texas,Yes,5,1972-1973,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+226,nebraska,Northeast Illinois,northeast-illinois,Northeast Illinois,No,1,1995-1996,1995-1996,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+227,nebraska,Northeast Louisiana,ul-monroe,UL Monroe,Yes,1,1994-1995,1994-1995,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+228,nebraska,Northeastern Illinois,northeastern-illinois,Northeastern Illinois,No,1,1994-1995,1994-1995,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+229,nebraska,Northern Colorado,northern-colorado,Northern Colorado,Yes,3,1947-1948,2005-2006,RESOLVED,Current D1 registry / established institutional lineage,,
+230,nebraska,Northern Illinois,northern-illinois,Northern Illinois,Yes,4,1988-1989,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+231,nebraska,Northern Iowa,northern-iowa,Northern Iowa,Yes,14,1948-1949,1996-1997,RESOLVED,Current D1 registry / established institutional lineage,,
+232,nebraska,Northern Kentucky,northern-kentucky,Northern Kentucky,Yes,1,2014-2015,2014-2015,RESOLVED,Current D1 registry / established institutional lineage,,
+233,nebraska,Northern Michigan,northern-michigan,Northern Michigan,No,1,1969-1970,1969-1970,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+234,nebraska,Northwestern,northwestern,Northwestern,Yes,27,1933-1934,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+235,nebraska,Notre Dame,notre-dame,Notre Dame,Yes,7,1919-1920,1961-1962,RESOLVED,Current D1 registry / established institutional lineage,,
+236,nebraska,NW Missouri State,northwest-missouri-state,Northwest Missouri State,No,13,1948-1949,1986-1987,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+237,nebraska,Ohio,ohio,Ohio,Yes,4,1957-1958,2014-2015,RESOLVED,Current D1 registry / established institutional lineage,,
+238,nebraska,Ohio State,ohio-state,Ohio State,Yes,31,1936-1937,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+239,nebraska,Oklahoma,oklahoma,Oklahoma,Yes,189,1920-1921,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+240,nebraska,Oklahoma City,oklahoma-city,Oklahoma City,No,2,1963-1964,1965-1966,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+241,nebraska,Oklahoma St,oklahoma-state,Oklahoma State,Yes,2,1991-1992,2003-2004,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+242,nebraska,Oklahoma State,oklahoma-state,Oklahoma State,Yes,116,1926-1927,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+243,nebraska,Old Dominion,old-dominion,Old Dominion,Yes,1,1996-1997,1996-1997,RESOLVED,Current D1 registry / established institutional lineage,,
+244,nebraska,Omaha,omaha,Omaha,Yes,4,2006-2007,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+245,nebraska,Omaha Alumni,omaha-alumni,Omaha Alumni,No,1,1913-1914,1913-1914,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+246,nebraska,Omaha Athletic Club,omaha-athletic-club,Omaha Athletic Club,No,2,1919-1920,1919-1920,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+247,nebraska,Omaha Christian,omaha-christian,Omaha Christian,No,1,1903-1904,1903-1904,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+248,nebraska,Omaha X,omaha-x,Omaha X,No,2,1912-1913,1913-1914,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+249,nebraska,Omaha YMCA,omaha-ymca,Omaha YMCA,No,9,1897-1898,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+250,nebraska,Oral Roberts,oral-roberts,Oral Roberts,Yes,3,1999-2000,2001-2002,RESOLVED,Current D1 registry / established institutional lineage,,
+251,nebraska,Oregon,oregon,Oregon,Yes,15,1941-1942,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+252,nebraska,Oregon State,oregon-state,Oregon State,Yes,12,1940-1941,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+253,nebraska,Ottumwa Navy,ottumwa-navy,Ottumwa Navy,No,2,1946-1947,1946-1947,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+254,nebraska,Pacific,pacific,Pacific,Yes,4,1966-1967,2001-2002,RESOLVED,Current D1 registry / established institutional lineage,,
+255,nebraska,Penn State,penn-state,Penn State,Yes,29,1980-1981,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+256,nebraska,Pennsylvania,pennsylvania,Pennsylvania,Yes,1,1993-1994,1993-1994,RESOLVED,Current D1 registry / established institutional lineage,,
+257,nebraska,Pentahlon,pentahlon,Pentahlon,No,1,1944-1945,1944-1945,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+258,nebraska,Pepperdine,pepperdine,Pepperdine,Yes,1,1989-1990,1989-1990,RESOLVED,Current D1 registry / established institutional lineage,,
+259,nebraska,Pittsburgh,pittsburgh,Pittsburgh,Yes,4,1929-1930,2000-2001,RESOLVED,Current D1 registry / established institutional lineage,,
+260,nebraska,Port Washington,port-washington,Port Washington,No,1,1904-1905,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+261,nebraska,Portage,portage,Portage,No,1,1907-1908,1907-1908,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+262,nebraska,Portage (Co. F),portage-co-f,Portage Co. F,No,1,1906-1907,1906-1907,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+263,nebraska,Portland,portland,Portland,Yes,2,1966-1967,1993-1994,RESOLVED,Current D1 registry / established institutional lineage,,
+264,nebraska,Portland State,portland-state,Portland State,Yes,1,1979-1980,1979-1980,RESOLVED,Current D1 registry / established institutional lineage,,
+265,nebraska,Prairie View A M,prairie-view-a-m,Prairie View A&M,Yes,1,2015-2016,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+266,nebraska,Presbyterian,presbyterian,Presbyterian,Yes,1,2007-2008,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
+267,nebraska,Princeton,princeton,Princeton,Yes,1,1957-1958,1957-1958,RESOLVED,Current D1 registry / established institutional lineage,,
+268,nebraska,Purdue,purdue,Purdue,Yes,30,1947-1948,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+269,nebraska,Queens University,queens-university,Queens University,Yes,1,2022-2023,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,
+270,nebraska,Rhode Island,rhode-island,Rhode Island,Yes,3,2011-2012,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,
+271,nebraska,Rider,rider,Rider,Yes,1,2023-2024,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,
+272,nebraska,Ripon,ripon,Ripon,No,1,1904-1905,1904-1905,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+273,nebraska,Rutgers,rutgers,Rutgers,Yes,22,1999-2000,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+274,nebraska,Sacramento State,sacramento-state,Sacramento State,Yes,4,1978-1979,2016-2017,RESOLVED,Current D1 registry / established institutional lineage,,
+275,nebraska,Sacred Heart,sacred-heart,Sacred Heart,Yes,1,1912-1913,1912-1913,RESOLVED,Current D1 registry / established institutional lineage,,
+276,nebraska,Saint Louis,saint-louis,Saint Louis,Yes,8,1929-1930,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,
+277,nebraska,Saint Mary's,saint-mary-s,Saint Mary's,Yes,1,2024-2025,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+278,nebraska,Sam Houston,sam-houston,Sam Houston,Yes,1,2021-2022,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+279,nebraska,Sam Houston State,sam-houston,Sam Houston,Yes,4,1988-1989,2001-2002,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+280,nebraska,Samford,samford,Samford,Yes,1,2015-2016,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,
+281,nebraska,San Diego State,san-diego-state,San Diego State,Yes,1,1971-1972,1971-1972,RESOLVED,Current D1 registry / established institutional lineage,,
+282,nebraska,San Francisco,san-francisco,San Francisco,Yes,3,1986-1987,1999-2000,RESOLVED,Current D1 registry / established institutional lineage,,
+283,nebraska,San Jose State,san-jose-state,San Jose State,Yes,5,1947-1948,2008-2009,RESOLVED,Current D1 registry / established institutional lineage,,
+284,nebraska,Santa Clara,santa-clara,Santa Clara,Yes,3,1935-1936,1984-1985,RESOLVED,Current D1 registry / established institutional lineage,,
+285,nebraska,Savannah State,savannah-state,Savannah State,No,4,2001-2002,2010-2011,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+286,nebraska,SE Missouri State,southeast-missouri-state,Southeast Missouri State,Yes,1,2005-2006,2005-2006,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+287,nebraska,Seton Hall,seton-hall,Seton Hall,Yes,1,2018-2019,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+288,nebraska,Shattuck,shattuck,Shattuck,No,2,1904-1905,1905-1906,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+289,nebraska,Simpson,simpson,Simpson,No,2,1913-1914,1916-1917,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+290,nebraska,Sioux City YMCA,sioux-city-ymca,Sioux City YMCA,No,2,1901-1902,1903-1904,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+291,nebraska,Sonoma State,sonoma-state,Sonoma State,No,1,1980-1981,1980-1981,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+292,nebraska,South Carolina,south-carolina,South Carolina,Yes,2,1975-1976,1976-1977,RESOLVED,Current D1 registry / established institutional lineage,,
+293,nebraska,South Carolina State,south-carolina-state,South Carolina State,Yes,3,2008-2009,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,
+294,nebraska,South Carolina Upstate,south-carolina-upstate,USC Upstate,Yes,1,2025-2026,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+295,nebraska,South Dakota,south-dakota,South Dakota,Yes,40,1910-1911,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+296,nebraska,South Dakota State,south-dakota-state,South Dakota State,Yes,13,1928-1929,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,
+297,nebraska,South Florida,south-florida,South Florida,Yes,3,2002-2003,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,
+298,nebraska,Southeastern,se-louisiana,SE Louisiana,Yes,1,2018-2019,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,Nebraska official 2018-19 schedule identifies the opponent as Southeastern Louisiana.
+299,nebraska,Southeastern Louisiana,se-louisiana,SE Louisiana,Yes,2,2009-2010,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+300,nebraska,Southern,southern,Southern,Yes,5,2012-2013,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+301,nebraska,Southern California,usc,USC,Yes,8,1962-1963,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+302,nebraska,Southern Colorado,csu-pueblo,CSU Pueblo,No,1,1984-1985,1984-1985,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.; Owner confirmed on 2026-08-25 that the project/site display name for csu-pueblo is CSU Pueblo.
+303,nebraska,Southern Illinois,southern-illinois,Southern Illinois,Yes,2,1985-1986,1986-1987,RESOLVED,Current D1 registry / established institutional lineage,,
+304,nebraska,Southern Methodist,smu,SMU,Yes,6,1951-1952,2000-2001,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+305,nebraska,Southern Mississippi,southern-miss,Southern Miss,Yes,2,1986-1987,1999-2000,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+306,nebraska,Southern Utah,southern-utah,Southern Utah,Yes,5,1991-1992,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,
+307,nebraska,Southwestern La,louisiana,Louisiana,Yes,1,1992-1993,1992-1993,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+308,nebraska,Springfield,springfield,Springfield,No,1,1952-1953,1952-1953,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+309,nebraska,St. Francis (Pa.),saint-francis-pa,Saint Francis (Pa.),No,1,2003-2004,2003-2004,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+310,nebraska,St. John’s,st-john-s,St. John's,Yes,2,2017-2018,2022-2023,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+311,nebraska,St. Joseph's,saint-joseph-s,Saint Joseph's,Yes,1,1995-1996,1995-1996,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+312,nebraska,St. Joseph’s,saint-joseph-s,Saint Joseph's,Yes,3,1912-1913,1916-1917,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+313,nebraska,St. Mary’s (Calif.),saint-mary-s,Saint Mary's,Yes,2,1946-1947,1975-1976,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+314,nebraska,St. Thomas (Minn.),st-thomas-minnesota,St. Thomas,Yes,1,1916-1917,1916-1917,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+315,nebraska,St. Thomas (Pa.),st-thomas-pa,St. Thomas (Pa.),No,1,1936-1937,1936-1937,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+316,nebraska,Stanford,stanford,Stanford,Yes,9,1932-1933,1965-1966,RESOLVED,Current D1 registry / established institutional lineage,,
+317,nebraska,Stetson,stetson,Stetson,Yes,1,2017-2018,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+318,nebraska,Stevens Point A.C,stevens-point-ac,Stevens Point A.C.,No,1,1900-1901,1900-1901,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+319,nebraska,Stony Brook,stony-brook,Stony Brook,Yes,1,2023-2024,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,
+320,nebraska,SW Minnesota State,southwest-minnesota-state,Southwest Minnesota State,No,1,2018-2019,2018-2019,RESOLVED,Nebraska media guide / historical non-current identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.
+321,nebraska,SW Missouri State,missouri-state,Missouri State,Yes,1,1982-1983,1982-1983,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+322,nebraska,SW Texas State,texas-state,Texas State,Yes,1,1998-1999,1998-1999,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+323,nebraska,Tampa,tampa,Tampa,No,1,1951-1952,1951-1952,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+324,nebraska,TAMU-Corpus Christi,texas-a-m-corpus-christi,Texas A&M-Corpus Christi,Yes,1,2019-2020,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+325,nebraska,TCU,tcu,TCU,Yes,6,1998-1999,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+326,nebraska,Temple,temple,Temple,Yes,1,1936-1937,1936-1937,RESOLVED,Current D1 registry / established institutional lineage,,
+327,nebraska,Tennessee,tennessee,Tennessee,Yes,3,2003-2004,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,
+328,nebraska,Tennessee State,tennessee-state,Tennessee State,Yes,1,2021-2022,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+329,nebraska,Tennessee Tech,tennessee-tech,Tennessee Tech,Yes,1,1990-1991,1990-1991,RESOLVED,Current D1 registry / established institutional lineage,,
+330,nebraska,Tennessee-Martin,ut-martin,UT Martin,Yes,1,2014-2015,2014-2015,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+331,nebraska,Texas,texas,Texas,Yes,22,1964-1965,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+332,nebraska,Texas A M,texas-a-m,Texas A&M,Yes,21,1969-1970,2023-2024,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+333,nebraska,Texas Christian,tcu,TCU,Yes,4,1951-1952,1982-1983,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+334,nebraska,Texas Southern,texas-southern,Texas Southern,Yes,1,2004-2005,2004-2005,RESOLVED,Current D1 registry / established institutional lineage,,
+335,nebraska,Texas Tech,texas-tech,Texas Tech,Yes,27,1955-1956,2018-2019,RESOLVED,Current D1 registry / established institutional lineage,,
+336,nebraska,Texas-Arlington,ut-arlington,UT Arlington,Yes,1,1992-1993,1992-1993,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+337,nebraska,Texas-Pan American,ut-rio-grande-valley,UT Rio Grande Valley,Yes,1,2009-2010,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+338,nebraska,Texas-San Antonio,utsa,UTSA,Yes,5,1993-1994,2002-2003,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+339,nebraska,The Citadel,the-citadel,The Citadel,Yes,4,1990-1991,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+340,nebraska,Toledo,toledo,Toledo,Yes,3,1990-1991,1995-1996,RESOLVED,Current D1 registry / established institutional lineage,,
+341,nebraska,Topeka YMCA,topeka-ymca,Topeka YMCA,No,2,1901-1902,1901-1902,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+342,nebraska,Troy,troy,Troy,Yes,1,2025-2026,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+343,nebraska,Tulane,tulane,Tulane,Yes,3,1982-1983,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+344,nebraska,Tulsa,tulsa,Tulsa,Yes,3,1997-1998,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,
+345,nebraska,UAB,uab,UAB,Yes,4,1979-1980,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
+346,nebraska,UC Riverside,uc-riverside,UC Riverside,Yes,1,2019-2020,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,
+347,nebraska,UC Santa Barbara,uc-santa-barbara,UC Santa Barbara,Yes,1,2002-2003,2002-2003,RESOLVED,Current D1 registry / established institutional lineage,,
+348,nebraska,UC-Santa Barbara,uc-santa-barbara,UC Santa Barbara,Yes,1,1978-1979,1978-1979,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+349,nebraska,UCF,ucf,UCF,Yes,2,2017-2018,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
+350,nebraska,UCLA,ucla,UCLA,Yes,10,1938-1939,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+351,nebraska,UMass,massachusetts,Massachusetts,Yes,1,2013-2014,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.; Integration normalization against current main: umass -> massachusetts.
+352,nebraska,UMBC,umbc,UMBC,Yes,1,2008-2009,2008-2009,RESOLVED,Current D1 registry / established institutional lineage,,
+353,nebraska,UMKC,kansas-city,Kansas City,Yes,12,1982-1983,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+354,nebraska,UNC Greensboro,unc-greensboro,UNC Greensboro,Yes,2,1997-1998,1998-1999,RESOLVED,Current D1 registry / established institutional lineage,,
+355,nebraska,UNC Wilmington,unc-wilmington,UNC Wilmington,Yes,1,1997-1998,1997-1998,RESOLVED,Current D1 registry / established institutional lineage,,
+356,nebraska,UNLV,unlv,UNLV,Yes,2,1978-1979,1998-1999,RESOLVED,Current D1 registry / established institutional lineage,,
+357,nebraska,USC,usc,USC,Yes,4,2009-2010,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+358,nebraska,USC Upstate,south-carolina-upstate,USC Upstate,Yes,1,2009-2010,2009-2010,RESOLVED,Current D1 registry / established institutional lineage,,Integration normalization against current main: usc-upstate -> south-carolina-upstate.
+359,nebraska,Utah,utah,Utah,Yes,3,1935-1936,1980-1981,RESOLVED,Current D1 registry / established institutional lineage,,
+360,nebraska,Utah State,utah-state,Utah State,Yes,2,1960-1961,1977-1978,RESOLVED,Current D1 registry / established institutional lineage,,
+361,nebraska,Utah Valley State,utah-valley,Utah Valley,Yes,1,2004-2005,2004-2005,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+362,nebraska,UTEP,utep,UTEP,Yes,1,2012-2013,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+363,nebraska,UTRGV,ut-rio-grande-valley,UT Rio Grande Valley,Yes,1,2024-2025,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+364,nebraska,UTSA,utsa,UTSA,Yes,1,2017-2018,2017-2018,RESOLVED,Current D1 registry / established institutional lineage,,
+365,nebraska,UW-Green Bay,green-bay,Green Bay,Yes,2,1990-1991,1991-1992,RESOLVED,Current D1 registry / established institutional lineage,,Historical/source label normalized to established institutional/program lineage where applicable.
+366,nebraska,UW-Stevens Point,wisconsin-stevens-point,Wisconsin-Stevens Point,No,2,1981-1982,1984-1985,RESOLVED,Owner-confirmed non-D1 classification / historical identity normalization,,Historical/source label normalized to established institutional/program lineage where applicable.; Owner confirmed on 2026-08-25 that Wisconsin-Stevens Point is non-D1.
+367,nebraska,Valparaiso,valparaiso,Valparaiso,Yes,3,1919-1920,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+368,nebraska,Vanderbilt,vanderbilt,Vanderbilt,Yes,8,1955-1956,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+369,nebraska,Villanova,villanova,Villanova,Yes,3,1987-1988,2015-2016,RESOLVED,Current D1 registry / established institutional lineage,,
+370,nebraska,Virginia,virginia,Virginia,Yes,1,1997-1998,1997-1998,RESOLVED,Current D1 registry / established institutional lineage,,
+371,nebraska,Virginia Tech,virginia-tech,Virginia Tech,Yes,2,1994-1995,2016-2017,RESOLVED,Current D1 registry / established institutional lineage,,
+372,nebraska,Wagner,wagner,Wagner,Yes,1,1989-1990,1989-1990,RESOLVED,Current D1 registry / established institutional lineage,,
+373,nebraska,Wake Forest,wake-forest,Wake Forest,Yes,2,2011-2012,2012-2013,RESOLVED,Current D1 registry / established institutional lineage,,
+374,nebraska,Washburn,washburn,Washburn,No,1,1907-1908,1907-1908,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+375,nebraska,Washington,washington,Washington,Yes,11,1930-1931,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+376,nebraska,Washington (Mo.),washington-mo,Washington (Mo.),No,18,1917-1918,1948-1949,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+377,nebraska,Washington State,washington-state,Washington State,Yes,9,1966-1967,2019-2020,RESOLVED,Current D1 registry / established institutional lineage,,
+378,nebraska,Weber State,weber-state,Weber State,Yes,1,1996-1997,1996-1997,RESOLVED,Current D1 registry / established institutional lineage,,
+379,nebraska,Wesleyan Auto,wesleyan-auto,Wesleyan Auto,No,1,1913-1914,1913-1914,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+380,nebraska,West Georgia,west-georgia,West Georgia,Yes,1,2025-2026,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+381,nebraska,West Virginia,west-virginia,West Virginia,Yes,1,1929-1930,1929-1930,RESOLVED,Current D1 registry / established institutional lineage,,
+382,nebraska,Western Carolina,western-carolina,Western Carolina,Yes,1,1999-2000,1999-2000,RESOLVED,Current D1 registry / established institutional lineage,,
+383,nebraska,Western Illinois,western-illinois,Western Illinois,Yes,7,1977-1978,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
+384,nebraska,Western Kentucky,western-kentucky,Western Kentucky,Yes,4,1946-1947,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
+385,nebraska,Western Reserve,western-reserve,Western Reserve,No,2,1936-1937,1948-1949,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+386,nebraska,Wichita State,wichita-state,Wichita State,Yes,12,1955-1956,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
+387,nebraska,Winthrop,winthrop,Winthrop,Yes,3,2000-2001,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+388,nebraska,Wisconsin,wisconsin,Wisconsin,Yes,41,1903-1904,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
+389,nebraska,Wisconsin-Oshkosh,wisconsin-oshkosh,Wisconsin-Oshkosh,No,1,1979-1980,1979-1980,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+390,nebraska,Wisconsin-Stout,wisconsin-stout,Wisconsin-Stout,No,1,1985-1986,1985-1986,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+391,nebraska,Wisconsin-Superior,wisconsin-superior,Wisconsin-Superior,No,1,1931-1932,1931-1932,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
+392,nebraska,Wofford,wofford,Wofford,Yes,1,2001-2002,2001-2002,RESOLVED,Current D1 registry / established institutional lineage,,
+393,nebraska,Wyoming,wyoming,Wyoming,Yes,26,1933-1934,2006-2007,RESOLVED,Current D1 registry / established institutional lineage,,
+394,nebraska,Xavier,xavier,Xavier,Yes,2,1983-1984,1990-1991,RESOLVED,Current D1 registry / established institutional lineage,,
+395,nebraska,Yale,yale,Yale,Yes,1,2005-2006,2005-2006,RESOLVED,Current D1 registry / established institutional lineage,,
+396,nebraska,York College,york-college,York College,No,1,1916-1917,1916-1917,RESOLVED,Nebraska media guide / historical non-current identity normalization,,
