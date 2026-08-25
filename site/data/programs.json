@@ -4523,7 +4523,7 @@
       "state": "NE",
       "primary_hex": "#E41C38",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1896-1897",
       "conference_regular_season_championships": 7,
       "conference_tournament_championships": 1,
       "ncaa_tournament_appearances": 9,
@@ -4532,7 +4532,7 @@
       "best_finish_key": "SWEET_SIXTEEN",
       "best_finish_year": 2026,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
