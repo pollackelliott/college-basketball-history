@@ -22384,7 +22384,7 @@ CBBG-0022383,2015-2016,2016-03-10,EXACT,tennessee,vanderbilt,67,65,tennessee,0,N
 CBBG-0022384,2015-2016,2016-03-11,EXACT,lsu,tennessee,84,75,lsu,0,NEUTRAL,,bridgestone-arena,VEN-000031,Nashville,TN,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=lsu/LSURAW-02649;venue_key=bridgestone-arena;site_type=NEUTRAL;fields=venue_id,venue_key]"
 CBBG-0022385,2016-2017,2016-11-11,EXACT,chattanooga,tennessee,82,69,chattanooga,0,TEAM_B_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022386,2016-2017,2016-11-15,EXACT,app-state,tennessee,94,103,tennessee,0,TEAM_B_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0022387,2016-2017,2016-11-21,EXACT,tennessee,wisconsin,64,72,wisconsin,0,NEUTRAL,,,,Maui,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0022387,2016-2017,2016-11-21,EXACT,tennessee,wisconsin,64,72,wisconsin,0,NEUTRAL,,lahaina-civic-center,VEN-000108,Lahaina,HI,REGULAR_SEASON,,,,PROVISIONAL,"Technical location completion before Wisconsin onboarding: Wisconsin Athletics official 2016 Maui Invitational evidence identifies Lahaina Civic Center, Lahaina, HI; H/A/N unchanged."
 CBBG-0022388,2016-2017,2016-11-22,EXACT,oregon,tennessee,69,65,oregon,1,NEUTRAL,,,,Maui,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022389,2016-2017,2016-11-23,EXACT,chaminade,tennessee,81,95,tennessee,0,NEUTRAL,,,,Maui,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022390,2016-2017,2016-12-03,EXACT,georgia-tech,tennessee,58,81,tennessee,0,TEAM_B_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
