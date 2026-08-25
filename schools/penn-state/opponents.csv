@@ -254,7 +254,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 252,penn-state,St. John’s,st-john-s,St. John's,Yes,2,1911-1912,2013-2014,RESOLVED,Current D1 registry / established institutional lineage,,
 253,penn-state,St. Joseph’s,saint-joseph-s,Saint Joseph's,Yes,23,1982-1983,2011-2012,RESOLVED,Current D1 registry / established institutional lineage,,
 254,penn-state,St. Mary’s,saint-mary-s,Saint Mary's,Yes,1,1988-1989,1988-1989,RESOLVED,Current D1 registry / established institutional lineage,,
-255,penn-state,St. Mary’s (Md.),st-marys-md,St. Mary's (Md.),No,1,1987-1988,1987-1988,RESOLVED,Penn State source / established historical or non-current identity,,
+255,penn-state,St. Mary’s (Md.),st-marys-md,St. Mary's College of Md.,No,1,1987-1988,1987-1988,RESOLVED,Penn State source / established historical or non-current identity,,"Cross-school historical display normalization: st-marys-md uses the already-established canonical display ""St. Mary's College of Md.""; Penn State source wording remains preserved."
 256,penn-state,St.Thomas,scranton,Scranton,No,1,1934-1935,1934-1935,RESOLVED,Penn State source / established historical or non-current identity,,
 257,penn-state,Stony Brook,stony-brook,Stony Brook,Yes,1,2006-2007,2006-2007,RESOLVED,Current D1 registry / established institutional lineage,,
 258,penn-state,Susquehanna,susquehanna,Susquehanna,No,24,1903-1904,1949-1950,RESOLVED,Penn State source / established historical or non-current identity,,
