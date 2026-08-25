@@ -86,3 +86,7 @@ Exactly **six competitive games lack an authoritative exact date**: four Bucknel
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=ca9da72a525234e3b08fabe13359f182c71445f7` from `research_base_sha=ced6a1e64d46c3be040b680b308bc070d22cff08`. Research-time numeric venue IDs remain immutable transport provenance; final authoritative venue IDs were assigned or reused against current main. Historical conference identities `eastern-intercollegiate-conference` (EIC), `eastern-collegiate-basketball-league` (ECBL), and `eastern-eight` (E8) were registered centrally following owner approval on 2026-08-25. The known pre-existing McGaw Memorial Hall / Welsh-Ryan duplicate global identity was not broadened into this school onboarding; Penn State reuses authoritative `welsh-ryan-arena` / `VEN-000229`. Status: **INTEGRATION_FROZEN**.
+
+## Owner display-geography ruling
+
+Owner display-geography ruling (2026-08-25): Penn State's three program home venues — Penn State Armory, Rec Hall, and Bryce Jordan Center — normalize to State College, PA for project presentation. Historical/source wording such as University Park, PA remains preserved in raw source text and reciprocal evidence.
