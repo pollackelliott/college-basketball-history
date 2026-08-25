@@ -1,0 +1,10 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,penn-state,1896-1897,1934-1935,independent,Independent,primary,No,Penn State record book conference affiliations; no listed conference before 1935-36,
+1,penn-state,1935-1936,1938-1939,eastern-intercollegiate-conference,Eastern Intercollegiate Conference,primary,No,Penn State record book: Eastern Intercollegiate Conference 1936-39 (4 years),Provisional historical conference identity absent from research-baseline global conference registry.
+2,penn-state,1939-1940,1974-1975,independent,Independent,primary,No,Penn State record book conference affiliations,
+3,penn-state,1975-1976,1975-1976,eastern-collegiate-basketball-league,Eastern Collegiate Basketball League,primary,No,Penn State record book: Eastern Collegiate Basketball League 1976 (1 year),Provisional historical conference identity absent from research-baseline global conference registry.
+4,penn-state,1976-1977,1978-1979,eastern-eight,Eastern Eight,primary,No,Penn State record book: Eastern Eight 1977-79 (3 years),Provisional historical conference identity absent from research-baseline global conference registry; later league lineage became Atlantic 10.
+5,penn-state,1979-1980,1981-1982,independent,Independent,primary,No,Penn State record book conference affiliations,
+6,penn-state,1982-1983,1990-1991,atlantic-10,Atlantic 10,primary,No,Penn State record book: Atlantic 10 1983-91 (9 years),
+7,penn-state,1991-1992,1991-1992,independent,Independent,primary,No,Penn State record book conference affiliations; first Big Ten season is 1992-93,
+8,penn-state,1992-1993,,big-ten,Big Ten,primary,Yes,Penn State record book: first Big Ten season 1992-93 / Big Ten affiliation 1993-present,
