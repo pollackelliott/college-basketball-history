@@ -192,7 +192,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 190,texas,New Mexico St.,new-mexico-state,New Mexico State,Yes,2,1979-1980,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
 191,texas,New Mexico State,new-mexico-state,New Mexico State,Yes,3,1980-1981,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
 192,texas,New Orleans,new-orleans,New Orleans,Yes,4,1982-1983,2024-2025,RESOLVED,Current D1 registry / established institutional lineage,,
-193,texas,New York Univ.,new-york-university,New York Univ.,No,3,1947-1948,1967-1968,RESOLVED,Historical/non-current source identity or researched institutional lineage,,
+193,texas,New York Univ.,new-york-university,New York University,No,3,1947-1948,1967-1968,RESOLVED,Historical/non-current source identity or researched institutional lineage,,Integration technical repair after pre-seal rehearsal: canonical opponent display aligned to existing project-stable display for the unchanged canonical opponent key.
 194,texas,Niagara,niagara,Niagara,Yes,1,1999-2000,1999-2000,RESOLVED,Current D1 registry / established institutional lineage,,
 195,texas,Nicholls State,nicholls,Nicholls,Yes,2,2006-2007,2011-2012,RESOLVED,Current D1 registry / established institutional lineage,,Aligned to current research-baseline program registry; literal source label preserved in source-games.csv.
 196,texas,North Carolina,north-carolina,North Carolina,Yes,12,1992-1993,2020-2021,RESOLVED,Current D1 registry / established institutional lineage,,
@@ -242,7 +242,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 240,texas,Rutgers,rutgers,Rutgers,Yes,1,1977-1978,1977-1978,RESOLVED,Current D1 registry / established institutional lineage,,
 241,texas,S.A. Cadet Center,s-a-cadet-center,S.A. Cadet Center,No,2,1942-1943,1943-1944,RESOLVED,Historical/non-current source identity or researched institutional lineage,,
 242,texas,Sabinas Brewers,sabinas-brewers,Sabinas Brewers,No,1,1936-1937,1936-1937,RESOLVED,Historical/non-current source identity or researched institutional lineage,,
-243,texas,Saint Francis (Pa.),st-francis-pa,Saint Francis (Pa.),No,1,2014-2015,2014-2015,RESOLVED,Historical/non-current source identity or researched institutional lineage,,
+243,texas,Saint Francis (Pa.),st-francis-pa,St. Francis (Pa.),No,1,2014-2015,2014-2015,RESOLVED,Historical/non-current source identity or researched institutional lineage,,Integration technical repair after pre-seal rehearsal: canonical opponent display aligned to existing project-stable display for the unchanged canonical opponent key.
 244,texas,Saint Joseph’s,saint-joseph-s,Saint Joseph's,Yes,1,2008-2009,2008-2009,RESOLVED,Current D1 registry / established institutional lineage,,
 245,texas,Saint Mary’s (Calif.),saint-mary-s,Saint Mary's,Yes,1,2007-2008,2007-2008,RESOLVED,Current D1 registry / established institutional lineage,,
 246,texas,Sam Houston,sam-houston,Sam Houston,Yes,1,2021-2022,2021-2022,RESOLVED,Current D1 registry / established institutional lineage,,
