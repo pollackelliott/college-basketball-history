@@ -1,0 +1,5 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,maryland,1910-1911,1922-1923,independent,Independent,independent,False,Owner history-scope ruling and Maryland record book conference history,Includes no-team gaps; first competitive varsity season is 1910-11.
+1,maryland,1923-1924,1952-1953,southern,Southern Conference,conference,False,Maryland record book All-Time Results introduction / year-by-year history,
+2,maryland,1953-1954,2013-2014,acc,ACC,conference,False,Maryland record book All-Time Results introduction and program history,Maryland left the ACC after 2013-14.
+3,maryland,2014-2015,,big-ten,Big Ten,conference,True,Maryland record book / official Maryland Athletics history,Ongoing through curated 2025-26 season.
