@@ -432,3 +432,44 @@ VEN-000176,Cincinnati Coliseum,cincinnaticoliseum,HISTORICAL_OR_ALIAS,,,,Current
 VEN-000311,State Fairgrounds Coliseum,statefairgroundscoliseum,PROJECT_DISPLAY,,,,Nebraska 2025-26 media guide home-court history.,Registered during Nebraska integration rebase.
 VEN-000311,Nebraska State Fairgrounds Coliseum,nebraskastatefairgroundscoliseum,HISTORICAL_OR_ALIAS,,,,Nebraska 2025-26 media guide home-court history.,Registered during Nebraska integration rebase.
 VEN-000196,Assembly Hall (Illinois),assemblyhallillinois,HISTORICAL_OR_ALIAS,,,,Current project global venue registry; Nebraska official 2025-26 schedule.,Registered during Nebraska integration rebase.
+VEN-000018,Pepsi Center,pepsicenter,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000020,"Brooklyn, NY / Barclays Center",brooklynnybarclayscenter,HISTORICAL_OR_ALIAS,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000313,Boston Garden,bostongarden,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000314,Bren Events Center,breneventscenter,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000303,Bryce Center,brycecenter,HISTORICAL_OR_ALIAS,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000019,CFG Bank Arena,cfgbankarena,HISTORICAL_OR_ALIAS,,,,Maryland record book game/event footnotes | Maryland Athletics official 2025-26 schedule/results and nonconference schedule release,Registered during maryland onboarding current-main rebase.
+VEN-000259,USAir Arena,usairarena,HISTORICAL_OR_ALIAS,,,,Owner-authorized conference-tournament site workbook | Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000040,Charlotte Coliseum (1955),charlottecoliseum1955,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes | Owner-authorized conference-tournament site workbook | Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000040,Charlotte Coliseum I,charlottecoliseumi,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes | Owner-authorized conference-tournament site workbook | Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000041,Charlotte Coliseum (1988),charlottecoliseum1988,HISTORICAL_OR_ALIAS,,,,Owner-authorized conference-tournament site workbook,Registered during maryland onboarding current-main rebase.
+VEN-000041,Charlotte Coliseum II,charlottecoliseumii,HISTORICAL_OR_ALIAS,,,,Owner-authorized conference-tournament site workbook,Registered during maryland onboarding current-main rebase.
+VEN-000315,Climate Pledge Arena,climatepledgearena,PROJECT_DISPLAY,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000316,Hershey Park Arena,hersheyparkarena,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000082,Arrowhead Pond of Anaheim,arrowheadpondofanaheim,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000317,John Paul Jones Arena,johnpauljonesarena,PROJECT_DISPLAY,,,,Maryland Athletics official 2025-26 schedule/results and nonconference schedule release,Registered during maryland onboarding current-main rebase.
+VEN-000097,Jon Huntsman Center,jonhuntsmancenter,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000103,HSBC Center,hsbccenter,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000109,Birmingham Coliseum,birminghamcoliseum,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000318,Loyola Field House,loyolafieldhouse,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000319,Memorial Gymnasium,memorialgymnasium,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000320,Miami Beach Convention Center,miamibeachconventioncenter,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000321,Music Hall,musichall,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000153,Oakland Arena,oaklandarena,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes | Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000153,Oakland Coliseum,oaklandcoliseum,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes | Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000322,Pan American Center,panamericancenter,PROJECT_DISPLAY,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000170,"Newark, NJ / Prudential Center",newarknjprudentialcenter,HISTORICAL_OR_ALIAS,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000308,Recreation Building,recreationbuilding,HISTORICAL_OR_ALIAS,,,,Maryland record book NIT/all-time-results footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000323,Ritchie Coliseum,ritchiecoliseum,PROJECT_DISPLAY,,,,Maryland record book Arena History / home chronology,Registered during maryland onboarding current-main rebase.
+VEN-000324,Robbins Center,robbinscenter,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000177,Roberts Stadium,robertsstadium,HISTORICAL_OR_ALIAS,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000325,Don Haskins Center,donhaskinscenter,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000325,Special Events Center,specialeventscenter,HISTORICAL_OR_ALIAS,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000056,University Activity Center,universityactivitycenter,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000326,Springfield Civic Center,springfieldciviccenter,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000327,The Gymnasium,thegymnasium,PROJECT_DISPLAY,,,,Maryland record book Arena History / home chronology,Registered during maryland onboarding current-main rebase.
+VEN-000328,Thompson Gym,thompsongym,PROJECT_DISPLAY,,,,Owner-authorized conference-tournament site workbook,Registered during maryland onboarding current-main rebase.
+VEN-000221,UD Arena,udarena,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000221,Dayton Arena,daytonarena,HISTORICAL_OR_ALIAS,,,,Maryland record book NCAA Tournament history / game footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000329,Cassell Coliseum,cassellcoliseum,PROJECT_DISPLAY,,,,Maryland record book game/event footnotes,Registered during maryland onboarding current-main rebase.
+VEN-000236,Comcast Center,comcastcenter,HISTORICAL_OR_ALIAS,,,,Maryland record book NIT/all-time-results footnotes | Maryland record book Arena History / home chronology | Maryland Athletics official 2025-26 schedule/results and nonconference schedule release,Registered during maryland onboarding current-main rebase.
+VEN-000330,Memorial Gymnasium (Virginia),memorialgymnasiumvirginia,PROJECT_DISPLAY,,,,Maryland record-book game footnote; official Maryland 1948-49 schedule; University of Virginia venue history,Registered during maryland onboarding current-main rebase.
