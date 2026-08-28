@@ -294,7 +294,7 @@ temple,19,10,33,2,0,FINAL_FOUR,1958,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365
 tennessee,12,5,28,0,0,ELITE_EIGHT,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,MATCH,
 tennessee-state,3,3,3,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 tennessee-tech,7,1,2,0,0,ROUND_OF_32,1963,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-texas,25,4,40,3,0,FINAL_FOUR,2003,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+texas,25,4,40,3,0,FINAL_FOUR,2003,VERIFIED,"Owner Gate 1 approved verified reference values: 25 regular-season conference titles, 4 conference tournament titles, 40 NCAA appearances, 3 Final Fours, 0 national titles, best finish Final Four, best-finish year 2003.",MATCH,Verified through onboarding plan 5bd92d48b4b7.
 texas-a-m,12,2,18,0,0,SWEET_SIXTEEN,2018,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 texas-a-m-corpus-christi,2,3,3,0,0,ROUND_OF_64,2023,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 texas-southern,12,11,11,0,0,ROUND_OF_64,2022,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

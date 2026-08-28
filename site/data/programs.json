@@ -7115,7 +7115,7 @@
       "state": "TX",
       "primary_hex": "#BF5700",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1905-1906",
       "conference_regular_season_championships": 25,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 40,
@@ -7124,7 +7124,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 2003,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
