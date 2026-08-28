@@ -1,0 +1,5 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,texas,1905-1906,1913-1914,independent,Independent,primary,No,Texas fact book / project owner history-scope and conference research,
+1,texas,1914-1915,1995-1996,southwest-conference,Southwest Conference,primary,No,Texas 2025-26 Fact Book Southwest Conference history,
+2,texas,1996-1997,2023-2024,big-12,Big 12,primary,No,Texas 2025-26 Fact Book Big 12 Conference history,
+3,texas,2024-2025,,sec,SEC,primary,Yes,Texas 2025-26 Fact Book Southeastern Conference history / current membership,
