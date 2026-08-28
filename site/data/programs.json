@@ -3875,7 +3875,7 @@
       "state": "MD",
       "primary_hex": "#E03A3E",
       "secondary_hex": "#FFD520",
-      "history_start_season": null,
+      "history_start_season": "1910-1911",
       "conference_regular_season_championships": 7,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 31,
@@ -3884,7 +3884,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2002,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
