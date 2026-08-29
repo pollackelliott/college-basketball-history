@@ -40,3 +40,16 @@ This workbook is explicitly incomplete and is not promoted to universal canon. F
 ## Provenance policy
 
 The `raw_text` field preserves Rutgers source wording. Structured corrections and supplemental venue/date facts are documented in row notes rather than silently rewriting the source. Unknowns remain blank/`UNKNOWN` when the available evidence does not support a stronger assertion.
+
+## Implementation pre-Gate-1 supplemental verification
+
+The serialized Implementation preflight identified several modern structured
+normalization defects in the research-frozen package. Rutgers Athletics official
+season schedules, recaps, and box scores were used to correct those curated fields
+before owner review. Original `raw_text` remains unchanged.
+
+The corrections include the 2018 Michigan State, 2024 Nebraska, and 2025 Minnesota
+overtime games; explicit official H/A/N designations for the affected 2017-24
+schedule rows; the 2016 Illinois 110-101 three-overtime score; and the obvious
+Eastern Michigan/date extraction errors. No genuine Rutgers-versus-reciprocal
+historical conflict was silently normalized away.

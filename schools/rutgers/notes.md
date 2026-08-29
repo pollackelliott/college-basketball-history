@@ -59,3 +59,27 @@ historical or H/A/N ruling.
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=b8c84717fa6434610c43c8e1a49bc6d634870e0a` from `research_base_sha=ae823cae233ff287d3c3827c8dbd40ec2db09819`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Pre-Owner-Gate implementation normalization
+
+The first current-main onboarding preflight exposed a finite set of demonstrable
+package-normalization defects. They were repaired before Owner Gate 1 rather than
+being presented as historical judgments.
+
+Repairs included:
+
+- three structured date extraction errors where Rutgers' raw game line or official
+  schedule establishes the intended date;
+- one opponent-identity extraction error (`E. MICHIGAN` was mistakenly normalized
+  as Michigan rather than Eastern Michigan);
+- one modern media-guide score defect corrected by official Rutgers/Illinois game
+  records while preserving the original `raw_text`;
+- seven overtime parser artifacts in which score digits had populated
+  `overtime_periods`;
+- three modern overtime omissions corrected from official Rutgers recap/box-score
+  evidence; and
+- six modern H/A/N normalization errors corrected from explicit official Rutgers
+  schedule designations.
+
+These are source-package corrections only. Genuine conflicts between Rutgers and
+reciprocal/canonical evidence remain preserved for Owner Gate 1.
