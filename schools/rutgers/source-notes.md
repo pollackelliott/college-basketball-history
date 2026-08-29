@@ -53,3 +53,11 @@ overtime games; explicit official H/A/N designations for the affected 2017-24
 schedule rows; the 2016 Illinois 110-101 three-overtime score; and the obvious
 Eastern Michigan/date extraction errors. No genuine Rutgers-versus-reciprocal
 historical conflict was silently normalized away.
+
+## Rejected Gate 2 venue-source supplementation
+
+The first public Preview exposed a systematic venue-coverage defect. Rutgers Athletics' home-building history and completed 2024-25 schedule/results were therefore used as supplemental authoritative evidence. The original all-time-scoreboard `raw_text`, `source_site_candidate`, and `source_venue_name` remain unchanged. Curated venue assignment follows the permanent project rule that physical venue chronology may enrich a game only after H/A/N is independently established. Aggregate building records were used as QA signals only, not as row-level site evidence.
+
+The 2024-25 supplement directly establishes seven corrected H/A/N classifications (Monmouth, Notre Dame, Texas A&M, Seton Hall, Columbia, USC regular season, and USC Big Ten Tournament), plus venue/geography for the entire 32-game competitive schedule. Official Rutgers recap/box-score evidence also establishes overtime against Notre Dame and Washington and double overtime against USC in the Big Ten Tournament.
+
+Historical direct series/postseason evidence corrects ten previously unsupported site classifications. The 1975 ECAC Metro final against St. John's is neutral at Madison Square Garden. Remaining historical UNKNOWN rows stay UNKNOWN unless direct game-level evidence supports a stronger classification.

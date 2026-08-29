@@ -83,3 +83,13 @@ Repairs included:
 
 These are source-package corrections only. Genuine conflicts between Rutgers and
 reciprocal/canonical evidence remain preserved for Owner Gate 1.
+
+## Rejected Gate 2 venue reconstruction
+
+- Owner Gate 2 rejected the first Rutgers Preview because venue history was materially incomplete.
+- Official Rutgers home-court chronology is now used only after a game is independently classified Rutgers home; venue chronology never establishes H/A/N.
+- Permanent physical identities were added for Ballantine Gym, Highland Park Gym, and College Avenue Gym; the existing Jersey Mike's Arena / Rutgers Athletic Center identity is reused for the current building.
+- Facility aggregate W/L records remain diagnostic cross-checks only and were not used to manufacture site classifications.
+- Ten historical UNKNOWN site rows with direct series/postseason evidence were normalized; unsupported historical UNKNOWN rows remain UNKNOWN.
+- The completed 2024-25 Rutgers Athletics schedule supplies direct H/A/N and physical-venue evidence for all 32 competitive games, correcting seven site classifications and three overtime omissions while preserving the media-guide raw_text.
+- Special-event/footnoted home rows are deliberately excluded from blanket home-venue chronology unless direct physical-site evidence exists.
