@@ -4010,7 +4010,7 @@
       "opponent_key": "rutgers",
       "opponent_name": "Rutgers",
       "current_d1": true,
-      "public_page_enabled": true,
+      "public_page_enabled": false,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
@@ -8127,7 +8127,7 @@
       "opponent_key": "rutgers",
       "opponent_name": "Rutgers",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": true,
+      "opponent_public_page_enabled": false,
       "team_score": 33,
       "opponent_score": 36,
       "score_known": true,
