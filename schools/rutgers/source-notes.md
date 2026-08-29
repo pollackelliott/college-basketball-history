@@ -61,3 +61,7 @@ The first public Preview exposed a systematic venue-coverage defect. Rutgers Ath
 The 2024-25 supplement directly establishes seven corrected H/A/N classifications (Monmouth, Notre Dame, Texas A&M, Seton Hall, Columbia, USC regular season, and USC Big Ten Tournament), plus venue/geography for the entire 32-game competitive schedule. Official Rutgers recap/box-score evidence also establishes overtime against Notre Dame and Washington and double overtime against USC in the Big Ten Tournament.
 
 Historical direct series/postseason evidence corrects ten previously unsupported site classifications. The 1975 ECAC Metro final against St. John's is neutral at Madison Square Garden. Remaining historical UNKNOWN rows stay UNKNOWN unless direct game-level evidence supports a stronger classification.
+
+## Assembly Hall physical-identity disambiguation
+
+For the 2025-01-02 Indiana road game, Rutgers uses the existing global alias `Simon Skjodt Assembly Hall` for VEN-000186 so it cannot collide with Illinois VEN-000196. Original raw source evidence remains unchanged.

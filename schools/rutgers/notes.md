@@ -93,3 +93,9 @@ reciprocal/canonical evidence remain preserved for Owner Gate 1.
 - Ten historical UNKNOWN site rows with direct series/postseason evidence were normalized; unsupported historical UNKNOWN rows remain UNKNOWN.
 - The completed 2024-25 Rutgers Athletics schedule supplies direct H/A/N and physical-venue evidence for all 32 competitive games, correcting seven site classifications and three overtime omissions while preserving the media-guide raw_text.
 - Special-event/footnoted home rows are deliberately excluded from blanket home-venue chronology unless direct physical-site evidence exists.
+
+## Indiana / Illinois Assembly Hall disambiguation
+
+- Indiana VEN-000186 and Illinois VEN-000196 both use the project display label `Assembly Hall`.
+- Rutgers therefore uses the existing unambiguous alias `Simon Skjodt Assembly Hall` for the Jan. 2, 2025 Indiana road game.
+- No H/A/N, score, date or physical-site judgment changed.
