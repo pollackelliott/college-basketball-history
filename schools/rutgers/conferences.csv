@@ -1,0 +1,6 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,rutgers,1906-1907,1975-1976,independent,Independent,independent,False,Rutgers historical records and conference chronology research.,Owner-confirmed site scope begins with program inception in 1906-07.
+1,rutgers,1976-1977,1994-1995,atlantic-10,Atlantic 10,conference,False,Rutgers and Atlantic 10 historical membership evidence.,Stable project identity covers the league founded as the Eastern Collegiate Basketball League/Eastern Eight in 1976; historical naming preserved here rather than inventing a separate unregistered conference key.
+2,rutgers,1995-1996,2012-2013,big-east,Big East,conference,False,Rutgers athletics/conference membership history.,
+3,rutgers,2013-2014,2013-2014,american,American,conference,False,Rutgers athletics/conference membership history.,One basketball season in the American before Big Ten entry.
+4,rutgers,2014-2015,,big-ten,Big Ten,conference,True,Rutgers athletics / Big Ten membership history.,Rutgers entered Big Ten competition for 2014-15.
