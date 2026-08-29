@@ -246,7 +246,7 @@ rice,10,0,4,0,0,ELITE_EIGHT,1942,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-pr
 richmond,7,7,10,0,0,SWEET_SIXTEEN,2011,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 rider,12,3,3,0,0,ROUND_OF_64,1994,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 robert-morris,12,10,9,0,0,ROUND_OF_64,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-rutgers,5,4,8,1,0,FINAL_FOUR,1976,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+rutgers,5,4,8,1,0,FINAL_FOUR,1976,VERIFIED,Owner Gate 1 verified Rutgers accomplishment values: 5 conference regular-season championships; 4 conference/association tournament championships including the 1975 and 1976 ECAC Metropolitan crowns and the 1979 and 1989 Eastern 8/Atlantic 10 tournament titles; 8 NCAA Tournament appearances; 1 Final Four; 0 national championships; best finish FINAL_FOUR in 1976. Authoritative basis includes Rutgers Athletics historical records and the Atlantic 10 men's basketball record book.,MATCH,Verified through onboarding plan 8952eb0d01b1.
 sacramento-state,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 sacred-heart,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 saint-joseph-s,20,6,21,1,0,ELITE_EIGHT,2004,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
