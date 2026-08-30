@@ -5267,7 +5267,7 @@
       "state": "OK",
       "primary_hex": "#841617",
       "secondary_hex": "#FDF9D8",
-      "history_start_season": null,
+      "history_start_season": "1907-1908",
       "conference_regular_season_championships": 14,
       "conference_tournament_championships": 7,
       "ncaa_tournament_appearances": 34,
@@ -5276,7 +5276,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 1988,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
