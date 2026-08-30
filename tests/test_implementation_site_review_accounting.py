@@ -58,7 +58,10 @@ class ImplementationSiteReviewAccountingTests(unittest.TestCase):
             self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
             self.assertEqual(report["counts"]["target_source_information_loss"], 0)
             self.assertTrue(
-                any("home-site completeness is non-waivable" in error for error in report["errors"])
+                any(
+                    "without a valid researched-unresolved HOME venue exception" in error
+                    for error in report["errors"]
+                )
             )
 
     def test_field_specific_reconciliation_can_account_for_neutral_blank(self):
