@@ -1,0 +1,8 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,oklahoma,1907-1908,1918-1919,independent,Independent,independent,False,Oklahoma 2024-25 media guide year-by-year records.,Program inception through 1918-19.
+1,oklahoma,1919-1920,1927-1928,missouri-valley,Missouri Valley,conference,False,Oklahoma 2024-25 media guide year-by-year records.,Missouri Valley era.
+2,oklahoma,1928-1929,1946-1947,big-six,Big Six,conference,False,Oklahoma 2024-25 media guide year-by-year records.,Big Six era.
+3,oklahoma,1947-1948,1956-1957,big-seven,Big Seven,conference,False,Oklahoma 2024-25 media guide year-by-year records.,Big Seven era.
+4,oklahoma,1957-1958,1995-1996,big-eight,Big Eight,conference,False,Oklahoma 2024-25 media guide year-by-year records.,Media guide begins Big Eight display era in 1957-58.
+5,oklahoma,1996-1997,2023-2024,big-12,Big 12,conference,False,Oklahoma 2024-25 media guide and SEC transition statement.,28 seasons in Big 12.
+6,oklahoma,2024-2025,,sec,SEC,conference,True,Oklahoma official schedules and 2024-25 media guide.,SEC membership begins 2024-25 and is ongoing.

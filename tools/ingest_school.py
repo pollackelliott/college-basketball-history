@@ -756,14 +756,34 @@ def canonical_enrichment_candidates(
     source_city = source.get("city", "").strip()
     source_state = source.get("state", "").strip()
     source_location_status = location_pair_status(source_city, source_state)
-    if source_location_status == "complete":
-        candidate_city, candidate_state = source_city, source_state
-    elif source_location_status == "blank" and location_pair_status(
-        venue_metadata.get("city", ""), venue_metadata.get("state", "")
-    ) == "complete":
+    registry_location_status = location_pair_status(
+        venue_metadata.get("city", ""),
+        venue_metadata.get("state", ""),
+    )
+
+    canonical_venue_key = canonical.get("venue_key", "").strip()
+    canonical_venue_id = canonical.get("venue_id", "").strip()
+    venue_identity_compatible = bool(
+        venue_key
+        and venue_id
+        and (not canonical_venue_key or canonical_venue_key == venue_key)
+        and (not canonical_venue_id or canonical_venue_id == venue_id)
+    )
+
+    # Source assertions preserve their own normalized location. Canonical
+    # geography, however, follows the global physical venue registry once
+    # that venue identity is resolved. This prevents one school's mailing,
+    # event, or locality convention from changing project-wide venue geography.
+    if (
+        venue_identity_compatible
+        and registry_location_status == "complete"
+        and source_location_status in {"blank", "complete"}
+    ):
         candidate_city = venue_metadata["city"].strip()
         candidate_state = venue_metadata["state"].strip()
         registry_fields.extend(("site_city", "site_state"))
+    elif source_location_status == "complete":
+        candidate_city, candidate_state = source_city, source_state
     else:
         candidate_city = candidate_state = ""
 
@@ -827,25 +847,36 @@ def build_new_canonical(
     )
     venue_id = venue_metadata.get("venue_id", "").strip()
 
-    # Explicit game-level location wins. Partial normalized geography is
-    # never published. Registry location fallback requires an independently
-    # established site and a complete registry pair.
+    # Source assertions keep their own normalized city/state. For canonical
+    # games, once a permanent physical venue identity resolves, the global
+    # venue registry owns project geography. This keeps canonical venue_id and
+    # canonical site geography internally consistent without rewriting source
+    # evidence.
     source_city = source.get("city", "").strip()
     source_state = source.get("state", "").strip()
+    source_location_status = location_pair_status(source_city, source_state)
+    registry_location_status = location_pair_status(
+        venue_metadata.get("city", ""),
+        venue_metadata.get("state", ""),
+    )
     registry_fields: list[str] = []
 
-    if location_pair_status(source_city, source_state) == "complete":
-        site_city, site_state = source_city, source_state
-    elif (
-        location_pair_status(source_city, source_state) == "blank"
+    resolved_venue_identity = bool(
+        venue_key
+        and venue_id
         and site_type != "UNKNOWN"
-        and location_pair_status(
-            venue_metadata.get("city", ""), venue_metadata.get("state", "")
-        ) == "complete"
+    )
+
+    if (
+        resolved_venue_identity
+        and registry_location_status == "complete"
+        and source_location_status in {"blank", "complete"}
     ):
         site_city = venue_metadata["city"].strip()
         site_state = venue_metadata["state"].strip()
         registry_fields.extend(("site_city", "site_state"))
+    elif source_location_status == "complete":
+        site_city, site_state = source_city, source_state
     else:
         site_city = site_state = ""
 

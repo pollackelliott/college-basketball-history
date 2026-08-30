@@ -191,6 +191,81 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         self.assertNotIn("site_state", changes)
 
 
+    def test_new_canonical_global_venue_geography_does_not_rewrite_source_assertion(self):
+        source = source_row("Mailing City", "EX")
+        source.update(
+            {
+                "season_label": "2025-2026",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "curated_game_type": "REGULAR_SEASON",
+            }
+        )
+        metadata = {
+            "example arena": {
+                "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
+                "city": "Physical City",
+                "state": "EX",
+            }
+        }
+
+        canonical = ingest_school.build_new_canonical(
+            source,
+            "CBBG-TEST",
+            {"example arena": "example-arena"},
+            metadata,
+        )
+        assertion = ingest_school.build_assertion(
+            source,
+            "CBBG-TEST",
+            "TEST_MATCH",
+        )
+
+        self.assertEqual(canonical["venue_key"], "example-arena")
+        self.assertEqual(canonical["venue_id"], "VEN-EXAMPLE")
+        self.assertEqual(canonical["site_city"], "Physical City")
+        self.assertEqual(canonical["site_state"], "EX")
+
+        # Evidence stays literal to the school-level normalization.
+        self.assertEqual(assertion["city"], "Mailing City")
+        self.assertEqual(assertion["state"], "EX")
+
+    def test_enrichment_uses_global_geography_when_physical_venue_resolves(self):
+        source = source_row("Mailing City", "EX")
+        canonical = {
+            "site_type": "NEUTRAL",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+            "notes": "",
+        }
+        metadata = {
+            "example arena": {
+                "venue_key": "example-arena",
+                "venue_id": "VEN-EXAMPLE",
+                "city": "Physical City",
+                "state": "EX",
+            }
+        }
+
+        changes = dict(
+            ingest_school.canonical_enrichment_candidates(
+                source,
+                canonical,
+                metadata,
+            )
+        )
+
+        self.assertEqual(changes["venue_key"], "example-arena")
+        self.assertEqual(changes["venue_id"], "VEN-EXAMPLE")
+        self.assertEqual(changes["site_city"], "Physical City")
+        self.assertEqual(changes["site_state"], "EX")
+
+
 class SynchronizationAndPublicationTests(unittest.TestCase):
     def test_target_source_assertion_drift_is_detected(self):
         source = source_row("Exampleville", "EX")
