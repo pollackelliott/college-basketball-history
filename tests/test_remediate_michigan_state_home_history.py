@@ -34,6 +34,30 @@ class MichiganStateHomeHistoryTests(unittest.TestCase):
         self.assertFalse(msu.michigan_state_home({"site_type": "NEUTRAL", "team_a_key": "michigan-state", "team_b_key": "x"}))
         self.assertFalse(msu.michigan_state_home({"site_type": "TEAM_A_HOME", "team_a_key": "x", "team_b_key": "michigan-state"}))
 
+    def test_expected_facility_universe_is_fixed(self):
+        self.assertEqual(
+            msu.EXPECTED_FACILITY_COUNTS,
+            {
+                "michigan-state-armory": 120,
+                "michigan-state-im-circle-gymnasium": 133,
+            },
+        )
+        self.assertEqual(sum(msu.EXPECTED_FACILITY_COUNTS.values()), 253)
+
+    def test_blank_or_expected_allows_blank_and_matching(self):
+        msu.require_blank_or_expected({"city": ""}, "city", "East Lansing", "row")
+        msu.require_blank_or_expected({"city": "East Lansing"}, "city", "East Lansing", "row")
+
+    def test_blank_or_expected_rejects_conflict(self):
+        with self.assertRaises(msu.MichiganStateHomeError):
+            msu.require_blank_or_expected({"city": "Detroit"}, "city", "East Lansing", "row")
+
+    def test_provenance_note_is_idempotent(self):
+        marker = "[HOME_VENUE_CHRONOLOGY source=michigan-state/X]"
+        self.assertEqual(msu.append_note("", marker), marker)
+        self.assertEqual(msu.append_note(marker, marker), marker)
+        self.assertEqual(msu.append_note("prior", marker), f"prior {marker}")
+
 
 if __name__ == "__main__":
     unittest.main()
