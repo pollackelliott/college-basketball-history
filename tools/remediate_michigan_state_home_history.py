@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
-"""Plan Michigan State early HOME venue/location remediation.
+"""Plan and apply Michigan State early HOME venue/location remediation.
 
 Michigan State institutional history identifies five principal basketball homes:
 Armory; the gym now in IM Circle; Demonstration Hall; Jenison Fieldhouse; and
-Breslin Center.  The currently published HOME gap universe is confined to
-1898-99 through 1928-29.  MSU records date the replacement Gymnasium Building
-(now IM Circle) to spring 1918, after the 1917-18 basketball season, and the
-portable basketball floor in Demonstration Hall to December 1929.  Therefore
-this planner assigns only already-established Michigan State HOME rows as:
+Breslin Center. The current published HOME-gap universe is confined to 1898-99
+through 1928-29. MSU records date the replacement Gymnasium Building (today's
+IM Circle) to spring 1918, after the 1917-18 basketball season, and document a
+portable basketball floor in Demonstration Hall in December 1929. Therefore,
+only games already independently classified Michigan State HOME are assigned:
 
 - Armory: 1898-99 through 1917-18
 - IM Circle Gymnasium: 1918-19 through 1928-29
 
-It never infers H/A/N from venue chronology.  Default mode is read-only except
-for an ignored JSON plan under .onboarding/.  Apply support will be added only
-after the exact corpus plan is reviewed and zero-hold.
+Venue chronology never infers H/A/N. Default mode writes an ignored sealed plan.
+--apply requires that exact plan SHA-256 and refuses partial/conflicting writes.
 """
 
 from __future__ import annotations
@@ -31,8 +30,11 @@ from typing import Any
 PROGRAM = "michigan-state"
 EXPECTED_SOURCE_HOME_GAPS = 253
 EXPECTED_CANONICAL_HOME_GAPS = 253
-PLAN_VERSION = 1
-EAST_LANSING = ("East Lansing", "MI")
+EXPECTED_FACILITY_COUNTS = {
+    "michigan-state-armory": 120,
+    "michigan-state-im-circle-gymnasium": 133,
+}
+PLAN_VERSION = 2
 FACILITIES = {
     "michigan-state-armory": {
         "venue_key": "michigan-state-armory",
@@ -69,6 +71,20 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
         return list(reader.fieldnames or []), list(reader)
 
 
+def write_csv_preserving(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
+    original = path.read_bytes()
+    has_bom = original.startswith(b"\xef\xbb\xbf")
+    line_ending = "\r\n" if b"\r\n" in original else "\n"
+    encoding = "utf-8-sig" if has_bom else "utf-8"
+    temp = path.with_suffix(path.suffix + ".tmp")
+    with temp.open("w", encoding=encoding, newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator=line_ending)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({field: row.get(field, "") for field in fields})
+    temp.replace(path)
+
+
 def canonical_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
@@ -83,7 +99,13 @@ def git_head(repo: Path) -> str:
 
 def is_gap(row: dict[str, str], *, source: bool) -> bool:
     venue_field = "curated_venue_name" if source else "venue_id"
-    return not row.get(venue_field, "").strip() or not row.get("city" if source else "site_city", "").strip() or not row.get("state" if source else "site_state", "").strip()
+    city_field = "city" if source else "site_city"
+    state_field = "state" if source else "site_state"
+    return (
+        not row.get(venue_field, "").strip()
+        or not row.get(city_field, "").strip()
+        or not row.get(state_field, "").strip()
+    )
 
 
 def michigan_state_home(row: dict[str, str]) -> bool:
@@ -112,15 +134,32 @@ def facility_for_season(season: str) -> tuple[str | None, str | None]:
     return None, "outside_verified_early_chronology"
 
 
+def append_note(existing: str, marker: str) -> str:
+    existing = (existing or "").strip()
+    if marker in existing:
+        return existing
+    return f"{existing} {marker}".strip()
+
+
+def require_blank_or_expected(row: dict[str, str], field: str, expected: str, context: str) -> None:
+    current = row.get(field, "").strip()
+    if current and current != expected:
+        raise MichiganStateHomeError(
+            f"{context}: refusing conflicting {field} {current!r}; expected {expected!r}"
+        )
+
+
 def build_plan(repo: Path) -> dict[str, Any]:
     _, source_rows = read_csv(repo / "schools/michigan-state/source-games.csv")
     _, canonical_rows = read_csv(repo / "data/canonical/games.csv")
     _, assertion_rows = read_csv(repo / "data/evidence/game-assertions.csv")
     _, school_venue_rows = read_csv(repo / "schools/michigan-state/venues.csv")
+    _, global_venue_rows = read_csv(repo / "data/reference/venues.csv")
 
     source_gaps = [
         row for row in source_rows
-        if row.get("curated_site_type", "").strip() == "SOURCE_PROGRAM_HOME" and is_gap(row, source=True)
+        if row.get("curated_site_type", "").strip() == "SOURCE_PROGRAM_HOME"
+        and is_gap(row, source=True)
     ]
     canonical_gaps = [
         row for row in canonical_rows
@@ -134,6 +173,7 @@ def build_plan(repo: Path) -> dict[str, Any]:
 
     canonical_by_id = {row.get("canonical_game_id", "").strip(): row for row in canonical_rows}
     school_venues = {row.get("venue_key", "").strip(): row for row in school_venue_rows}
+    global_venues_by_id = {row.get("venue_id", "").strip(): row for row in global_venue_rows}
 
     errors: list[str] = []
     if len(source_gaps) != EXPECTED_SOURCE_HOME_GAPS:
@@ -142,21 +182,35 @@ def build_plan(repo: Path) -> dict[str, Any]:
         errors.append(f"canonical HOME gap count drift: {len(canonical_gaps)} != {EXPECTED_CANONICAL_HOME_GAPS}")
 
     for key, spec in FACILITIES.items():
-        row = school_venues.get(key)
-        if row is None:
+        school_row = school_venues.get(key)
+        if school_row is None:
             errors.append(f"missing school venue identity: {key}")
-            continue
-        for field in ("venue_id", "city", "state"):
-            if row.get(field, "").strip() != spec[field]:
-                errors.append(
-                    f"school venue identity drift for {key} {field}: {row.get(field, '').strip()!r} != {spec[field]!r}"
-                )
+        else:
+            for field in ("venue_id", "city", "state"):
+                if school_row.get(field, "").strip() != spec[field]:
+                    errors.append(
+                        f"school venue identity drift for {key} {field}: "
+                        f"{school_row.get(field, '').strip()!r} != {spec[field]!r}"
+                    )
+        global_row = global_venues_by_id.get(spec["venue_id"])
+        if global_row is None:
+            errors.append(f"missing global venue identity: {spec['venue_id']}")
+        else:
+            for field in ("venue_key", "city", "state"):
+                if global_row.get(field, "").strip() != spec[field]:
+                    errors.append(
+                        f"global venue identity drift for {spec['venue_id']} {field}: "
+                        f"{global_row.get(field, '').strip()!r} != {spec[field]!r}"
+                    )
 
     assignments: list[dict[str, Any]] = []
     holds: list[dict[str, str]] = []
     seen_canonical: set[str] = set()
 
-    for source in sorted(source_gaps, key=lambda r: (r.get("season_label", ""), r.get("game_date", ""), r.get("source_game_id", ""))):
+    for source in sorted(
+        source_gaps,
+        key=lambda r: (r.get("season_label", ""), r.get("game_date", ""), r.get("source_game_id", "")),
+    ):
         source_id = source.get("source_game_id", "").strip()
         facility_key, reason = facility_for_season(source.get("season_label", "").strip())
         if reason:
@@ -164,20 +218,42 @@ def build_plan(repo: Path) -> dict[str, Any]:
             continue
 
         assertions = assertion_by_source.get(source_id, [])
-        canonical_ids = sorted({r.get("canonical_game_id", "").strip() for r in assertions if r.get("canonical_game_id", "").strip()})
-        if len(canonical_ids) != 1:
-            holds.append({"source_game_id": source_id, "season_label": source.get("season_label", ""), "reason": f"canonical_mapping_count:{len(canonical_ids)}"})
+        if len(assertions) != 1:
+            holds.append({
+                "source_game_id": source_id,
+                "season_label": source.get("season_label", ""),
+                "reason": f"michigan_state_assertion_count:{len(assertions)}",
+            })
             continue
-        canonical_id = canonical_ids[0]
+        assertion = assertions[0]
+        if assertion.get("curated_site_type", "").strip() != "SOURCE_PROGRAM_HOME":
+            holds.append({
+                "source_game_id": source_id,
+                "season_label": source.get("season_label", ""),
+                "reason": f"assertion_not_source_home:{assertion.get('curated_site_type', '')}",
+            })
+            continue
+        canonical_id = assertion.get("canonical_game_id", "").strip()
+        if not canonical_id:
+            holds.append({"source_game_id": source_id, "season_label": source.get("season_label", ""), "reason": "canonical_mapping_missing"})
+            continue
         canonical = canonical_by_id.get(canonical_id)
         if canonical is None:
             holds.append({"source_game_id": source_id, "season_label": source.get("season_label", ""), "reason": "canonical_missing"})
             continue
         if not michigan_state_home(canonical):
-            holds.append({"source_game_id": source_id, "season_label": source.get("season_label", ""), "reason": f"canonical_not_michigan_state_home:{canonical.get('site_type', '')}"})
+            holds.append({
+                "source_game_id": source_id,
+                "season_label": source.get("season_label", ""),
+                "reason": f"canonical_not_michigan_state_home:{canonical.get('site_type', '')}",
+            })
             continue
         if canonical_id in seen_canonical:
-            holds.append({"source_game_id": source_id, "season_label": source.get("season_label", ""), "reason": f"duplicate_canonical_mapping:{canonical_id}"})
+            holds.append({
+                "source_game_id": source_id,
+                "season_label": source.get("season_label", ""),
+                "reason": f"duplicate_canonical_mapping:{canonical_id}",
+            })
             continue
         seen_canonical.add(canonical_id)
         facility = FACILITIES[facility_key]
@@ -204,6 +280,9 @@ def build_plan(repo: Path) -> dict[str, Any]:
         errors.append(f"assignments outside canonical HOME gap universe: {len(unexpected_assigned)}")
 
     facility_counts = dict(sorted(Counter(row["facility_key"] for row in assignments).items()))
+    if facility_counts != EXPECTED_FACILITY_COUNTS:
+        errors.append(f"facility count drift: {facility_counts} != {EXPECTED_FACILITY_COUNTS}")
+
     payload = {
         "plan_version": PLAN_VERSION,
         "program": PROGRAM,
@@ -233,40 +312,176 @@ def write_plan(repo: Path, payload: dict[str, Any]) -> tuple[Path, str]:
     return path, digest
 
 
+def apply_plan(repo: Path, payload: dict[str, Any]) -> dict[str, int]:
+    if payload.get("errors") or payload.get("holds"):
+        raise MichiganStateHomeError("refusing apply with plan errors/holds")
+    if payload.get("assignment_count") != EXPECTED_CANONICAL_HOME_GAPS:
+        raise MichiganStateHomeError("refusing apply outside exact 253-game owner-reviewed universe")
+
+    source_path = repo / "schools/michigan-state/source-games.csv"
+    canonical_path = repo / "data/canonical/games.csv"
+    assertion_path = repo / "data/evidence/game-assertions.csv"
+    school_venues_path = repo / "schools/michigan-state/venues.csv"
+
+    source_fields, source_rows = read_csv(source_path)
+    canonical_fields, canonical_rows = read_csv(canonical_path)
+    assertion_fields, assertion_rows = read_csv(assertion_path)
+    venue_fields, school_venue_rows = read_csv(school_venues_path)
+
+    source_by_id = {r.get("source_game_id", "").strip(): r for r in source_rows}
+    canonical_by_id = {r.get("canonical_game_id", "").strip(): r for r in canonical_rows}
+    assertions_by_source: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in assertion_rows:
+        if row.get("source_program_key", "").strip() == PROGRAM:
+            assertions_by_source[row.get("source_game_id", "").strip()].append(row)
+    venues_by_key = {r.get("venue_key", "").strip(): r for r in school_venue_rows}
+
+    source_changed = canonical_changed = assertion_changed = 0
+    facility_dates: dict[str, list[str]] = defaultdict(list)
+
+    for assignment in payload["assignments"]:
+        sid = assignment["source_game_id"]
+        cid = assignment["canonical_game_id"]
+        key = assignment["facility_key"]
+        venue_id = assignment["venue_id"]
+        venue_name = assignment["venue_name"]
+        city = assignment["city"]
+        state = assignment["state"]
+        marker = (
+            f"[HOME_VENUE_CHRONOLOGY source={PROGRAM}/{sid};venue_key={key};"
+            "fields=venue,city,state]"
+        )
+
+        source = source_by_id.get(sid)
+        if source is None or source.get("curated_site_type", "").strip() != "SOURCE_PROGRAM_HOME":
+            raise MichiganStateHomeError(f"{sid}: source row missing or no longer HOME")
+        require_blank_or_expected(source, "curated_venue_name", venue_name, sid)
+        require_blank_or_expected(source, "city", city, sid)
+        require_blank_or_expected(source, "state", state, sid)
+        source["curated_venue_name"] = venue_name
+        source["city"] = city
+        source["state"] = state
+        source["notes"] = append_note(source.get("notes", ""), marker)
+        source_changed += 1
+
+        canonical = canonical_by_id.get(cid)
+        if canonical is None or not michigan_state_home(canonical):
+            raise MichiganStateHomeError(f"{cid}: canonical row missing or no longer Michigan State HOME")
+        require_blank_or_expected(canonical, "venue_key", key, cid)
+        require_blank_or_expected(canonical, "venue_id", venue_id, cid)
+        require_blank_or_expected(canonical, "site_city", city, cid)
+        require_blank_or_expected(canonical, "site_state", state, cid)
+        canonical["venue_key"] = key
+        canonical["venue_id"] = venue_id
+        canonical["site_city"] = city
+        canonical["site_state"] = state
+        canonical["notes"] = append_note(canonical.get("notes", ""), marker)
+        canonical_changed += 1
+
+        assertions = assertions_by_source.get(sid, [])
+        if len(assertions) != 1:
+            raise MichiganStateHomeError(f"{sid}: expected exactly one Michigan State assertion, found {len(assertions)}")
+        assertion = assertions[0]
+        if assertion.get("canonical_game_id", "").strip() != cid:
+            raise MichiganStateHomeError(f"{sid}: assertion canonical mapping drift")
+        if assertion.get("curated_site_type", "").strip() != "SOURCE_PROGRAM_HOME":
+            raise MichiganStateHomeError(f"{sid}: assertion H/A/N drift")
+        require_blank_or_expected(assertion, "curated_venue_name", venue_name, f"assertion {sid}")
+        require_blank_or_expected(assertion, "city", city, f"assertion {sid}")
+        require_blank_or_expected(assertion, "state", state, f"assertion {sid}")
+        assertion["curated_venue_name"] = venue_name
+        assertion["city"] = city
+        assertion["state"] = state
+        assertion["notes"] = append_note(assertion.get("notes", ""), marker)
+        assertion_changed += 1
+
+        if assignment.get("game_date"):
+            facility_dates[key].append(assignment["game_date"])
+
+    for key, expected_count in EXPECTED_FACILITY_COUNTS.items():
+        row = venues_by_key.get(key)
+        if row is None:
+            raise MichiganStateHomeError(f"missing school venue row during apply: {key}")
+        dates = sorted(facility_dates[key])
+        if len(dates) != expected_count:
+            raise MichiganStateHomeError(f"{key}: expected {expected_count} dated assignments, found {len(dates)}")
+        row["games_currently_assigned"] = str(expected_count)
+        row["first_assigned_game"] = dates[0]
+        row["last_assigned_game"] = dates[-1]
+        row["relationship_type"] = "home"
+        row["relationship_start"] = dates[0]
+        row["relationship_end"] = dates[-1]
+        row["relationship_date_precision"] = "exact"
+        row["source_basis"] = SOURCE_BASIS
+        row["notes"] = append_note(
+            row.get("notes", ""),
+            "Chronology assignments completed under the published-team HOME completeness standard; H/A/N remained independently sourced.",
+        )
+
+    write_csv_preserving(source_path, source_fields, source_rows)
+    write_csv_preserving(canonical_path, canonical_fields, canonical_rows)
+    write_csv_preserving(assertion_path, assertion_fields, assertion_rows)
+    write_csv_preserving(school_venues_path, venue_fields, school_venue_rows)
+
+    return {
+        "source_changed": source_changed,
+        "canonical_changed": canonical_changed,
+        "assertion_changed": assertion_changed,
+        "school_venue_rows_updated": 2,
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--expected-plan-sha256", default="")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     repo = args.repo.resolve()
-    payload = build_plan(repo)
-    path, digest = write_plan(repo, payload)
+    try:
+        payload = build_plan(repo)
+        path, digest = write_plan(repo, payload)
 
-    print("College Basketball History — Michigan State early HOME chronology plan")
-    print(f"Git HEAD:             {payload['git_head']}")
-    print(f"Source HOME gaps:     {payload['source_home_gap_count']}")
-    print(f"Canonical HOME gaps:  {payload['canonical_home_gap_count']}")
-    print(f"Assignments:          {payload['assignment_count']}")
-    print(f"Holds:                {payload['hold_count']}")
-    print(f"Facility counts:      {json.dumps(payload['facility_counts'], sort_keys=True)}")
-    print(f"Plan SHA-256:         {digest}")
-    if payload["holds"]:
-        print("HELD ROWS:")
-        for row in payload["holds"]:
-            print("  " + json.dumps(row, sort_keys=True))
-    if payload["errors"]:
-        print("ERRORS:")
-        for error in payload["errors"]:
-            print("  - " + error)
-    print(f"Plan artifact:        {path}")
-    if payload["errors"] or payload["holds"]:
-        print("STOP: resolve every hold/error before adding apply support.")
+        print("College Basketball History — Michigan State early HOME chronology plan")
+        print(f"Git HEAD:             {payload['git_head']}")
+        print(f"Source HOME gaps:     {payload['source_home_gap_count']}")
+        print(f"Canonical HOME gaps:  {payload['canonical_home_gap_count']}")
+        print(f"Assignments:          {payload['assignment_count']}")
+        print(f"Holds:                {payload['hold_count']}")
+        print(f"Facility counts:      {json.dumps(payload['facility_counts'], sort_keys=True)}")
+        print(f"Plan SHA-256:         {digest}")
+        if payload["holds"]:
+            print("HELD ROWS:")
+            for row in payload["holds"]:
+                print("  " + json.dumps(row, sort_keys=True))
+        if payload["errors"]:
+            print("ERRORS:")
+            for error in payload["errors"]:
+                print("  - " + error)
+        print(f"Plan artifact:        {path}")
+        if payload["errors"] or payload["holds"]:
+            print("STOP: resolve every hold/error before apply.")
+            return 1
+        if not args.apply:
+            print("PASS: exact zero-hold read-only chronology plan; no tracked basketball data changed.")
+            return 0
+        if not args.expected_plan_sha256:
+            raise MichiganStateHomeError("--apply requires --expected-plan-sha256")
+        if args.expected_plan_sha256 != digest:
+            raise MichiganStateHomeError(
+                f"sealed plan hash mismatch: expected {args.expected_plan_sha256}, actual {digest}"
+            )
+        result = apply_plan(repo, payload)
+        print("APPLY RESULT: " + json.dumps(result, sort_keys=True))
+        print("PASS: sealed Michigan State HOME chronology applied; H/A/N was not modified.")
+        return 0
+    except (MichiganStateHomeError, FileNotFoundError, KeyError, ValueError) as exc:
+        print(f"FAIL: {exc}")
         return 1
-    print("PASS: exact zero-hold read-only chronology plan; no tracked basketball data changed.")
-    return 0
 
 
 if __name__ == "__main__":
