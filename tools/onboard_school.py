@@ -190,6 +190,16 @@ def run_gates(
             ],
         ),
         (
+            "site_completeness",
+            [
+                python,
+                str(repo / "tools/implementation_site_gate.py"),
+                school_key,
+                "--repo",
+                str(repo),
+            ],
+        ),
+        (
             "accomplishments",
             [
                 python,
@@ -419,6 +429,7 @@ def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
             "",
             "- repository validation — PASS",
             "- target package no-op — PASS",
+            "- implementation site completeness — PASS",
             "- accomplishment cross-check — PASS",
             "- deterministic site build — PASS",
             "- unit tests — PASS",
