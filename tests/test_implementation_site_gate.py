@@ -116,28 +116,30 @@ def target_assertion(**overrides):
 
 
 def home_exception_source(**overrides):
-    return source_row(
-        curated_venue_name="",
-        city="Example City",
-        state="EX",
-        site_research_status="RESEARCHED_UNRESOLVED_HOME_VENUE",
-        site_research_basis=(
+    values = {
+        "curated_venue_name": "",
+        "city": "Example City",
+        "state": "EX",
+        "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+        "site_research_basis": (
             "Official record book, institutional facility history, reciprocal evidence, "
             "and archival sources reviewed; exact physical venue is unsupported."
         ),
-        **overrides,
-    )
+    }
+    values.update(overrides)
+    return source_row(**values)
 
 
 def home_exception_canonical(**overrides):
-    return canonical_row(
-        venue_key="",
-        venue_id="",
-        site_city="Example City",
-        site_state="EX",
-        notes="[RESEARCHED_UNRESOLVED_HOME_VENUE source=test/TESTRAW-00001]",
-        **overrides,
-    )
+    values = {
+        "venue_key": "",
+        "venue_id": "",
+        "site_city": "Example City",
+        "site_state": "EX",
+        "notes": "[RESEARCHED_UNRESOLVED_HOME_VENUE source=test/TESTRAW-00001]",
+    }
+    values.update(overrides)
+    return canonical_row(**values)
 
 
 class ImplementationSiteGateTests(unittest.TestCase):
