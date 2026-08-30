@@ -35,6 +35,7 @@ Each research chat may independently:
 - research overtime and administrative-action evidence;
 - perform source-internal cross-checks;
 - perform targeted reciprocal-source research;
+- audit site completeness and historical home-venue chronology;
 - build and QA the six school-package files;
 - produce a ZIP and exact manifest/hashes;
 - record unresolved owner-level historical questions.
@@ -97,14 +98,18 @@ A research-frozen portfolio means:
 - the six files have passed source-level QA;
 - opponent identities are resolved as far as reasonably possible;
 - venue candidates are identified physically and geographically;
+- historical home-site chronology has been audited rather than inferred from aggregate H/A/N totals;
 - conference history is established;
 - postseason taxonomy is established;
 - current-season supplementation is complete;
 - exhibitions are excluded;
 - known uncertainties are documented;
+- the site-completeness census contains zero **unaccounted** material gap rows;
 - exact package hashes are recorded.
 
 It does **not** mean that every global numeric ID or shared reference identity is still valid against the newest `main`.
+
+A genuine historical site unknown may remain unresolved. It may not remain an unnoticed blank. See `docs/site-completeness-protocol.md`. Material unresolved rows use paired `site_research_status` / `site_research_basis` metadata, while NCAA Tournament site completeness remains non-waivable.
 
 ### Integration-frozen portfolio
 
@@ -214,7 +219,7 @@ integration_base_sha=<current main>
 7. renumber stale venue IDs where required;
 8. check venue key/name/geography collisions;
 9. check normalized opponent/program display assumptions;
-10. rerun the complete source-package QA;
+10. rerun the complete source-package QA, including `research-check` and its site-completeness census;
 11. produce new six-file hashes and a new integration-ready ZIP/manifest if transport is still needed;
 12. only then create `data/<school>-onboarding` and begin tracked Phase 0.
 
@@ -242,12 +247,17 @@ unknown exact dates: <count>
 unknown played scores: <count>
 venue rows: <count>
 new global venue candidates: <count>
+home missing venue/location/both: <counts>
+neutral missing venue/location: <counts>
+postseason missing venue/location: <counts>
+researched material site gaps: <count>
+unaccounted material site gaps: 0
 owner questions remaining: <none or short list>
 
 CURRENT-MAIN REBASE REQUIRED BEFORE TRACKED PHASE 0: YES
 ```
 
-If the package uses provisional numeric venue IDs, list them explicitly with the physical venue they represent.
+If the package uses provisional numeric venue IDs, list them explicitly with the physical venue they represent. If researched site gaps remain, summarize their era/decade concentration rather than hiding them behind an aggregate count.
 
 ## 10. Suggested queue states
 
@@ -321,6 +331,7 @@ Every package must still preserve:
 - explicit H/A/N evidence rather than geography inference;
 - stable game-type taxonomy;
 - honest unknowns;
+- no silent site-completeness blanks;
 - exhibition exclusion;
 - postseason normalization;
 - authoritative accomplishment verification;
@@ -358,7 +369,9 @@ The pipeline is safe when:
 - every holstered package is rebased against current main before Phase 0;
 - duplicate physical venues/reference identities are reused rather than recreated;
 - package QA and hashes are refreshed after rebase;
+- every research freeze has zero unaccounted material site gaps;
 - preflight/Gate 1 happens only after integration freeze;
+- the post-reconciliation implementation site gate preserves known target/reciprocal evidence;
 - each team still passes the exact sealed apply/release workflow independently.
 
 The desired result is higher throughput with the same historical and repository quality.

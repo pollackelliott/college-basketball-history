@@ -21,6 +21,29 @@ A Missouri–Illinois game may therefore appear in both:
 
 Those rows are independent source assertions.
 
+### Source site-research accounting
+
+`source-games.csv` may additionally carry the paired research-only columns
+`site_research_status` and `site_research_basis`. They exist to distinguish a
+historical site fact that was deliberately researched but remains unresolved from a
+blank that was never audited.
+
+Allowed populated `site_research_status` values are:
+
+- `RESEARCHED_PARTIAL`
+- `RESEARCHED_UNRESOLVED`
+
+Whenever one of these values is present, `site_research_basis` is required and should
+briefly identify the evidence checked or the reason stronger certainty is unsupported.
+These fields are source-research provenance, not canonical basketball facts, and normal
+ingestion does not copy them into `data/evidence/game-assertions.csv`.
+
+The permanent research acceptance gate requires explicit accounting for material
+source-side site gaps: source-program HOME missing venue/location, UNKNOWN H/A/N,
+non-NCAA neutral missing venue/location, and conference-tournament/NIT/POSTSEASON site
+gaps. NCAA Tournament site completeness remains stricter and cannot be waived by a
+research-status marker. See `docs/site-completeness-protocol.md`.
+
 ## Canonical games
 
 data/canonical/games.csv

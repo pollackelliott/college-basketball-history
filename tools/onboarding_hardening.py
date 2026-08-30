@@ -28,6 +28,7 @@ from typing import Any
 
 import onboard_school
 from onboarding_plan import REQUIRED_PACKAGE_FILES, WorkflowError, approve_plan
+from site_completeness import source_site_completeness_report
 
 
 SUBSTANTIVE_REVIEW_FIELDS = (
@@ -191,6 +192,10 @@ def research_portfolio_report(
         }
         for field in sorted(required_game_fields - set(game_fields)):
             errors.append(f"source-games.csv missing column: {field}")
+
+        site_completeness = source_site_completeness_report(game_fields, games)
+        errors.extend(site_completeness["errors"])
+        warnings.extend(site_completeness["warnings"])
 
         opponent_keys = {
             row.get("canonical_opponent_key", "").strip()
@@ -368,6 +373,9 @@ def research_portfolio_report(
                 "ncaa_rows": ncaa_rows,
                 "site_types": dict(sorted(site_counts.items())),
                 "game_types": dict(sorted(type_counts.items())),
+                "site_completeness": site_completeness["counts"],
+                "site_gap_decades": site_completeness["by_decade"],
+                "site_gap_seasons": site_completeness["by_season"],
             },
         }
     finally:
@@ -389,6 +397,15 @@ def print_research_report(report: dict[str, Any]) -> None:
     print(f"Unknown scores:       {counts['unknown_played_scores']:,}")
     print("Site types:           " + json.dumps(counts["site_types"], sort_keys=True))
     print("Game types:           " + json.dumps(counts["game_types"], sort_keys=True))
+    print(
+        "Site completeness:   "
+        + json.dumps(counts["site_completeness"], sort_keys=True)
+    )
+    if counts["site_gap_decades"]:
+        print(
+            "Site gaps by decade: "
+            + json.dumps(counts["site_gap_decades"], sort_keys=True)
+        )
     if report.get("zip_sha256"):
         print(f"ZIP SHA-256:          {report['zip_sha256']}")
     if report["errors"]:

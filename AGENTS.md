@@ -12,15 +12,20 @@ Read these process documents together before onboarding work:
 - `docs/onboarding-process-hardening.md`
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
+- `docs/site-completeness-protocol.md`
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
-more specific than the older fast-path wording.
+more specific than the older fast-path wording. The site-completeness protocol is
+controlling for research-accounted venue/location/H-A-N gaps and the independent
+post-reconciliation publication gate.
 
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
    `python tools/onboarding_hardening.py research-check ...` on an incoming six-file
-   portfolio before Phase 0; NCAA rows require complete site metadata and normalized
-   postseason handling before the package may advance.
+   portfolio before Phase 0. A portfolio may preserve genuinely unresolved historical
+   site facts, but HOME venue/location gaps, UNKNOWN H/A/N, non-NCAA neutral gaps, and
+   conference-tournament/NIT/POSTSEASON site gaps must be explicitly research-accounted;
+   silent blanks do not pass. NCAA rows retain the stricter complete-site requirement.
 3. Perform current-main rebase and stable Phase 0 staging with
    `python tools/stage_research_portfolio.py ...`; prefer one guarded phase-sized
    operation over many tiny interactive command handoffs. Ambiguous global identity
@@ -40,9 +45,9 @@ more specific than the older fast-path wording.
 8. Before cryptographically sealing Gate 1, run
    `python tools/onboarding_hardening.py rehearse-review <school_key>`. This disposable
    pre-seal rehearsal must pass ingestion, reconciliation, publication metadata,
-   validation, target no-op, accomplishment verification, deterministic site build,
-   unit tests, changed-path allow-list, and whitespace checks without mutating the real
-   tracked repository.
+   validation, target no-op, implementation site completeness, accomplishment
+   verification, deterministic site build, unit tests, changed-path allow-list, and
+   whitespace checks without mutating the real tracked repository.
 9. If a purely technical repair changes tracked inputs after owner approval, regenerate
    preflight and use `python tools/onboarding_hardening.py carry-forward ...`. Carry
    approval forward only when the exact decision IDs and every substantive decision
@@ -51,7 +56,10 @@ more specific than the older fast-path wording.
 10. Seal with `python tools/onboard_school.py <school_key> --approve ...` only after the
     pre-seal rehearsal passes. Apply only with the exact emitted plan hash.
 11. The sealed apply must remain transactional and must pass validation, target no-op,
-    accomplishment cross-check, deterministic site build, unit tests, and whitespace.
+    implementation site completeness, accomplishment cross-check, deterministic site
+    build, unit tests, and whitespace. Known source/reciprocal site evidence must not be
+    lost behind canonical blanks unless field-specific reconciliation provenance explains
+    why the canonical field remains unresolved.
 12. Run `python tools/release_school.py <school_key> --prepare`.
 13. Stop for the owner to visually approve the exact PR preview.
 14. Merge only with `--merge --preview-approved`; require the exact merged SHA to reach
@@ -59,7 +67,8 @@ more specific than the older fast-path wording.
 
 Historical uncertainty remains valid. Never infer game identity, inclusion, date,
 site, venue, opponent, or a controlling canonical fact merely to make the workflow
-pass. Preserve source `raw_text` and approved unresolved discrepancies.
+pass. Preserve source `raw_text`, explicit researched-unresolved metadata, and approved
+unresolved discrepancies.
 
 
 ## Collaboration boundary
@@ -88,5 +97,8 @@ pass. Preserve source `raw_text` and approved unresolved discrepancies.
   Preview deployment as Production.
 - Flag any onboarding path that seals Gate 1 before the filled review has passed the
   disposable pre-seal technical rehearsal.
+- Flag any research-freeze path that allows material site gaps to remain silent or any
+  implementation/release path that can lose known target/reciprocal site evidence
+  without field-specific reconciliation provenance.
 - Flag school-specific hard-coded pre-scope exclusion counts; scope tests must enforce
   the reciprocal-evidence invariant generically.
