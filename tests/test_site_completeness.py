@@ -59,9 +59,8 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         self.assertEqual(report["counts"]["home_missing_location"], 1)
         self.assertEqual(report["counts"]["home_missing_both"], 1)
         self.assertTrue(any("material site-gap" in error for error in report["errors"]))
-        self.assertTrue(any("non-waivable" in error for error in report["errors"]))
 
-    def test_researched_unresolved_home_blank_still_blocks_freeze(self):
+    def test_ordinary_researched_unresolved_home_blank_still_blocks_freeze(self):
         report = source_site_completeness_report(
             FIELDS,
             [
@@ -79,7 +78,52 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         self.assertEqual(report["counts"]["researched_gap_rows"], 1)
         self.assertEqual(report["counts"]["unaccounted_gap_rows"], 0)
         self.assertEqual(report["counts"]["home_publication_blocker_rows"], 1)
-        self.assertTrue(any("non-waivable" in error for error in report["errors"]))
+        self.assertTrue(any("ordinary" in error.lower() for error in report["errors"]))
+
+    def test_dedicated_researched_unresolved_home_venue_exception_passes_source_gate(self):
+        report = source_site_completeness_report(
+            FIELDS,
+            [
+                row(
+                    curated_venue_name="",
+                    city="Starkville",
+                    state="MS",
+                    site_research_status="RESEARCHED_UNRESOLVED_HOME_VENUE",
+                    site_research_basis=(
+                        "Official record book, institutional facility history, reciprocal "
+                        "published evidence, and archival sources reviewed; exact physical "
+                        "home venue identity is not supported by the surviving record."
+                    ),
+                )
+            ],
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["material_gap_rows"], 1)
+        self.assertEqual(report["counts"]["researched_gap_rows"], 1)
+        self.assertEqual(report["counts"]["unaccounted_gap_rows"], 0)
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 0)
+        self.assertEqual(report["counts"]["researched_unresolved_home_venue_rows"], 1)
+        self.assertEqual(report["counts"]["home_missing_venue"], 1)
+        self.assertNotIn("home_missing_location", report["counts"])
+
+    def test_dedicated_home_venue_exception_cannot_waive_location(self):
+        report = source_site_completeness_report(
+            FIELDS,
+            [
+                row(
+                    curated_venue_name="",
+                    city="Starkville",
+                    state="",
+                    site_research_status="RESEARCHED_UNRESOLVED_HOME_VENUE",
+                    site_research_basis="Exact physical venue remains unsupported after research.",
+                )
+            ],
+        )
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 1)
+        self.assertEqual(report["counts"]["researched_unresolved_home_venue_rows"], 0)
+        self.assertTrue(
+            any("RESEARCHED_UNRESOLVED_HOME_VENUE is valid only" in error for error in report["errors"])
+        )
 
     def test_partial_home_gap_still_blocks_freeze(self):
         report = source_site_completeness_report(
@@ -97,7 +141,6 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         self.assertEqual(report["counts"]["home_missing_venue"], 1)
         self.assertNotIn("home_missing_location", report["counts"])
         self.assertEqual(report["counts"]["home_publication_blocker_rows"], 1)
-        self.assertTrue(any("non-waivable" in error for error in report["errors"]))
 
     def test_unknown_site_type_requires_accounting(self):
         report = source_site_completeness_report(
@@ -160,8 +203,6 @@ class SourceSiteCompletenessTests(unittest.TestCase):
                 )
             ],
         )
-        # NCAA completeness is deliberately enforced by onboarding_hardening's existing
-        # strict gate, not by this waivable accounting layer.
         self.assertEqual(report["counts"]["material_gap_rows"], 0)
         self.assertEqual(report["counts"]["unaccounted_gap_rows"], 0)
         self.assertEqual(len(report["warnings"]), 1)

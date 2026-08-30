@@ -36,6 +36,7 @@ CANONICAL_FIELDS = [
     "site_city",
     "site_state",
     "game_type",
+    "notes",
 ]
 ASSERTION_FIELDS = [
     "canonical_game_id",
@@ -93,6 +94,7 @@ def canonical_row(**overrides):
         "site_city": "Example City",
         "site_state": "EX",
         "game_type": "REGULAR_SEASON",
+        "notes": "",
     }
     row.update(overrides)
     return row
@@ -111,6 +113,33 @@ def target_assertion(**overrides):
     }
     row.update(overrides)
     return row
+
+
+def home_exception_source(**overrides):
+    values = {
+        "curated_venue_name": "",
+        "city": "Example City",
+        "state": "EX",
+        "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+        "site_research_basis": (
+            "Official record book, institutional facility history, reciprocal evidence, "
+            "and archival sources reviewed; exact physical venue is unsupported."
+        ),
+    }
+    values.update(overrides)
+    return source_row(**values)
+
+
+def home_exception_canonical(**overrides):
+    values = {
+        "venue_key": "",
+        "venue_id": "",
+        "site_city": "Example City",
+        "site_state": "EX",
+        "notes": "[RESEARCHED_UNRESOLVED_HOME_VENUE source=test/TESTRAW-00001]",
+    }
+    values.update(overrides)
+    return canonical_row(**values)
 
 
 class ImplementationSiteGateTests(unittest.TestCase):
@@ -136,11 +165,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
             [{"program_key": "test", "history_start_season": history_start}],
         )
         write_csv(root / "data/canonical/games.csv", CANONICAL_FIELDS, canonical)
-        write_csv(
-            root / "data/evidence/game-assertions.csv",
-            ASSERTION_FIELDS,
-            assertions,
-        )
+        write_csv(root / "data/evidence/game-assertions.csv", ASSERTION_FIELDS, assertions)
         write_csv(
             root / "data/reconciliation/discrepancies.csv",
             DISCREPANCY_FIELDS,
@@ -156,7 +181,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
             self.assertEqual(report["counts"]["public_gap_rows"], 0)
             self.assertEqual(report["counts"]["target_source_information_loss"], 0)
 
-    def test_researched_unresolved_home_gap_is_nonwaivable(self):
+    def test_ordinary_researched_unresolved_home_gap_is_nonwaivable(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             source = source_row(
@@ -173,18 +198,81 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 site_state="",
             )
             assertion = target_assertion(curated_venue_name="", city="", state="")
-            self.make_repo(
-                root,
-                sources=[source],
-                canonical=[canonical],
-                assertions=[assertion],
-            )
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=[assertion])
             report = implementation_site_report(root, "test")
             self.assertEqual(report["status"], "FAIL")
-            self.assertEqual(report["counts"]["public_gap_rows"], 1)
-            self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 1)
             self.assertEqual(report["source_site_counts"]["home_publication_blocker_rows"], 1)
-            self.assertTrue(any("non-waivable" in error for error in report["errors"]))
+
+    def test_valid_researched_unresolved_home_venue_exception_passes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = home_exception_source()
+            canonical = home_exception_canonical()
+            assertion = target_assertion(
+                curated_venue_name="",
+                city="Example City",
+                state="EX",
+            )
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=[assertion])
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 0)
+            self.assertEqual(report["counts"]["researched_unresolved_home_venue_rows"], 1)
+            self.assertEqual(report["counts"]["invalid_home_venue_exception_marker_rows"], 0)
+            self.assertEqual(report["source_site_counts"]["home_publication_blocker_rows"], 0)
+            self.assertEqual(
+                report["source_site_counts"]["researched_unresolved_home_venue_rows"], 1
+            )
+
+    def test_home_venue_exception_requires_canonical_marker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = home_exception_source()
+            canonical = home_exception_canonical(notes="")
+            assertion = target_assertion(curated_venue_name="")
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=[assertion])
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 1)
+            self.assertEqual(report["counts"]["researched_unresolved_home_venue_rows"], 0)
+
+    def test_reciprocal_known_venue_defeats_home_venue_exception(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = home_exception_source()
+            canonical = home_exception_canonical()
+            assertions = [
+                target_assertion(curated_venue_name=""),
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "source_program_key": "other",
+                    "source_game_id": "OTHRAW-1",
+                    "normalized_opponent_key": "test",
+                    "curated_site_type": "OPPONENT_HOME",
+                    "curated_venue_name": "Known Reciprocal Arena",
+                    "city": "Example City",
+                    "state": "EX",
+                },
+            ]
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=assertions)
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 1)
+            self.assertEqual(report["counts"]["invalid_home_venue_exception_marker_rows"], 1)
+            self.assertEqual(report["counts"]["reciprocal_venue_unpropagated"], 1)
+
+    def test_home_venue_exception_cannot_waive_location(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = home_exception_source(state="")
+            canonical = home_exception_canonical(site_state="")
+            assertion = target_assertion(curated_venue_name="", state="")
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=[assertion])
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 1)
+            self.assertEqual(report["counts"]["invalid_home_venue_exception_marker_rows"], 1)
 
     def test_target_source_venue_and_location_loss_blocks(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -230,18 +318,13 @@ class ImplementationSiteGateTests(unittest.TestCase):
                     "state": "EX",
                 },
             ]
-            self.make_repo(
-                root,
-                sources=[source],
-                canonical=[canonical],
-                assertions=assertions,
-            )
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=assertions)
             report = implementation_site_report(root, "test")
             self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["counts"]["reciprocal_venue_unpropagated"], 1)
             self.assertEqual(report["counts"]["reciprocal_location_unpropagated"], 1)
 
-    def test_reconciliation_record_does_not_waive_own_home_research_gap(self):
+    def test_reconciliation_record_does_not_waive_ordinary_own_home_gap(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             source = source_row(
@@ -257,19 +340,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 site_city="",
                 site_state="",
             )
-            assertions = [
-                target_assertion(curated_venue_name="", city="", state=""),
-                {
-                    "canonical_game_id": "CBBG-0000001",
-                    "source_program_key": "other",
-                    "source_game_id": "OTHRAW-1",
-                    "normalized_opponent_key": "test",
-                    "curated_site_type": "OPPONENT_HOME",
-                    "curated_venue_name": "Example Arena",
-                    "city": "Example City",
-                    "state": "EX",
-                },
-            ]
+            assertions = [target_assertion(curated_venue_name="", city="", state="")]
             discrepancies = [
                 {
                     "canonical_game_id": "CBBG-0000001",
@@ -293,7 +364,6 @@ class ImplementationSiteGateTests(unittest.TestCase):
             )
             report = implementation_site_report(root, "test")
             self.assertEqual(report["status"], "FAIL")
-            self.assertEqual(report["counts"]["reciprocal_unpropagated"], 0)
             self.assertEqual(report["source_site_counts"]["home_publication_blocker_rows"], 1)
 
     def test_ncaa_canonical_site_gap_is_non_waivable(self):
@@ -322,12 +392,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 city="",
                 state="",
             )
-            self.make_repo(
-                root,
-                sources=[source],
-                canonical=[canonical],
-                assertions=[assertion],
-            )
+            self.make_repo(root, sources=[source], canonical=[canonical], assertions=[assertion])
             report = implementation_site_report(root, "test")
             self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["counts"]["strict_ncaa_gap_rows"], 1)

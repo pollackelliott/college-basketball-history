@@ -22,6 +22,7 @@ GAME_FIELDS = [
     "venue_id",
     "site_city",
     "site_state",
+    "notes",
 ]
 
 
@@ -33,7 +34,7 @@ def write_csv(path: Path, fields, rows):
         writer.writerows(rows)
 
 
-def game(game_id, team_a, team_b, site_type, *, venue="", city="", state=""):
+def game(game_id, team_a, team_b, site_type, *, venue="", city="", state="", notes=""):
     return {
         "canonical_game_id": game_id,
         "team_a_key": team_a,
@@ -43,6 +44,7 @@ def game(game_id, team_a, team_b, site_type, *, venue="", city="", state=""):
         "venue_id": "VEN-1" if venue else "",
         "site_city": city,
         "site_state": state,
+        "notes": notes,
     }
 
 
@@ -62,23 +64,67 @@ class PublishedSiteStandardTests(unittest.TestCase):
     def test_published_home_gap_is_hard_blocker(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            self.make_repo(
-                root,
-                [game("CBBG-1", "alpha", "gamma", "TEAM_A_HOME")],
-            )
+            self.make_repo(root, [game("CBBG-1", "alpha", "gamma", "TEAM_A_HOME")])
             report = published_site_standard_report(root)
             self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["counts"]["hard_published_home_blocker_games"], 1)
             self.assertEqual(report["counts"]["published_home_missing_venue"], 1)
             self.assertEqual(report["counts"]["published_home_missing_location"], 1)
 
-    def test_away_at_unpublished_gap_is_expected_debt_not_blocker(self):
+    def test_researched_unresolved_home_venue_is_visible_but_not_hard_blocker(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             self.make_repo(
                 root,
-                [game("CBBG-2", "alpha", "gamma", "TEAM_B_HOME")],
+                [
+                    game(
+                        "CBBG-EX",
+                        "alpha",
+                        "gamma",
+                        "TEAM_A_HOME",
+                        city="Alpha City",
+                        state="AA",
+                        notes="[RESEARCHED_UNRESOLVED_HOME_VENUE source=alpha/RAW-1]",
+                    )
+                ],
             )
+            report = published_site_standard_report(root)
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["hard_published_home_blocker_games"], 0)
+            self.assertEqual(report["counts"]["researched_unresolved_home_venue_games"], 1)
+            self.assertEqual(report["counts"]["published_home_missing_venue"], 1)
+            self.assertEqual(
+                report["counts"]["invalid_researched_unresolved_home_venue_marker_games"], 0
+            )
+
+    def test_home_venue_exception_marker_cannot_waive_location(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_repo(
+                root,
+                [
+                    game(
+                        "CBBG-BAD",
+                        "alpha",
+                        "gamma",
+                        "TEAM_A_HOME",
+                        city="Alpha City",
+                        state="",
+                        notes="[RESEARCHED_UNRESOLVED_HOME_VENUE source=alpha/RAW-1]",
+                    )
+                ],
+            )
+            report = published_site_standard_report(root)
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["hard_published_home_blocker_games"], 1)
+            self.assertEqual(
+                report["counts"]["invalid_researched_unresolved_home_venue_marker_games"], 1
+            )
+
+    def test_away_at_unpublished_gap_is_expected_debt_not_blocker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_repo(root, [game("CBBG-2", "alpha", "gamma", "TEAM_B_HOME")])
             report = published_site_standard_report(root)
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["counts"]["hard_published_home_blocker_games"], 0)
@@ -89,10 +135,7 @@ class PublishedSiteStandardTests(unittest.TestCase):
     def test_away_at_published_home_gap_is_hard_home_blocker(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            self.make_repo(
-                root,
-                [game("CBBG-3", "alpha", "beta", "TEAM_B_HOME")],
-            )
+            self.make_repo(root, [game("CBBG-3", "alpha", "beta", "TEAM_B_HOME")])
             report = published_site_standard_report(root)
             self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["counts"]["hard_published_home_blocker_games"], 1)
