@@ -236,6 +236,7 @@ def implementation_site_report(
 
     public_gap_rows = 0
     unaccounted_public_gap_rows = 0
+    strict_home_gap_rows = 0
     strict_ncaa_gap_rows = 0
 
     for game in target_games:
@@ -246,6 +247,13 @@ def implementation_site_report(
             public_gap_rows += 1
             for category in categories:
                 record(category, canonical_id)
+
+            # The target program's own home venue/location is a publication fact,
+            # not a waivable historical unknown. Research/reconciliation metadata may
+            # explain work in progress but cannot authorize a blank at release.
+            if any(category.startswith("home_missing_") for category in categories):
+                strict_home_gap_rows += 1
+                record("strict_home_gap", canonical_id)
 
             source_rows = [
                 source_by_id[source_id]
@@ -306,7 +314,9 @@ def implementation_site_report(
 
         # Reciprocal evidence that safely agrees with the current site classification
         # must not sit unused behind a canonical blank. Conflicting evidence belongs
-        # in reconciliation and is not treated as automatic enrichment.
+        # in reconciliation and is not treated as automatic enrichment. This naturally
+        # allows ordinary away-at-unpublished venue/location debt: there is no published
+        # reciprocal assertion to propagate yet.
         other_assertions = [
             assertion
             for assertion in assertions_by_canonical.get(canonical_id, [])
@@ -357,6 +367,12 @@ def implementation_site_report(
     loss_total = sum(counts[category] for category in loss_categories)
     reciprocal_total = sum(counts[category] for category in reciprocal_categories)
 
+    if strict_home_gap_rows:
+        errors.append(
+            f"{strict_home_gap_rows:,} in-scope target HOME canonical game(s) are missing "
+            "venue and/or complete location; published-program home-site completeness "
+            "is non-waivable."
+        )
     if strict_ncaa_gap_rows:
         errors.append(
             f"{strict_ncaa_gap_rows:,} in-scope NCAA canonical game(s) are missing "
@@ -397,6 +413,7 @@ def implementation_site_report(
             "target_canonical_games": len(target_games),
             "public_gap_rows": public_gap_rows,
             "unaccounted_public_gap_rows": unaccounted_public_gap_rows,
+            "strict_home_gap_rows": strict_home_gap_rows,
             "strict_ncaa_gap_rows": strict_ncaa_gap_rows,
             "target_source_information_loss": loss_total,
             "reciprocal_unpropagated": reciprocal_total,
@@ -427,7 +444,7 @@ def print_report(report: dict[str, Any]) -> None:
     else:
         print(
             "\nPASS: target public canonical site coverage preserves known evidence "
-            "and every remaining material gap is deliberately research-accounted."
+            "and every remaining material non-home gap is deliberately research-accounted."
         )
 
 

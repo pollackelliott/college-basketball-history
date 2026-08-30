@@ -156,7 +156,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
             self.assertEqual(report["counts"]["public_gap_rows"], 0)
             self.assertEqual(report["counts"]["target_source_information_loss"], 0)
 
-    def test_researched_unresolved_home_gap_can_survive_canonically(self):
+    def test_researched_unresolved_home_gap_is_nonwaivable(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             source = source_row(
@@ -180,9 +180,11 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 assertions=[assertion],
             )
             report = implementation_site_report(root, "test")
-            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["counts"]["public_gap_rows"], 1)
             self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
+            self.assertEqual(report["source_site_counts"]["home_publication_blocker_rows"], 1)
+            self.assertTrue(any("non-waivable" in error for error in report["errors"]))
 
     def test_target_source_venue_and_location_loss_blocks(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -239,7 +241,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
             self.assertEqual(report["counts"]["reciprocal_venue_unpropagated"], 1)
             self.assertEqual(report["counts"]["reciprocal_location_unpropagated"], 1)
 
-    def test_reconciliation_record_can_acknowledge_reciprocal_conflict(self):
+    def test_reconciliation_record_does_not_waive_own_home_research_gap(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             source = source_row(
@@ -290,8 +292,9 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 discrepancies=discrepancies,
             )
             report = implementation_site_report(root, "test")
-            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["counts"]["reciprocal_unpropagated"], 0)
+            self.assertEqual(report["source_site_counts"]["home_publication_blocker_rows"], 1)
 
     def test_ncaa_canonical_site_gap_is_non_waivable(self):
         with tempfile.TemporaryDirectory() as temporary:

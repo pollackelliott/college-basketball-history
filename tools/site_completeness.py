@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Reusable site-completeness accounting for research and implementation gates.
 
-The project deliberately prefers an explicit unknown over unsupported certainty.  This
-module therefore does not require every historical venue/location to be known.  It
-requires material source-side gaps to be visible, deliberately researched, and
-explained before a portfolio may be treated as research-frozen.
+The project deliberately prefers an explicit unknown over unsupported certainty. Most
+historical site gaps may therefore remain unresolved when deliberate research is made
+machine-visible. A program's own HOME venue/location is different: the project's
+publication standard requires the known home-venue chronology to be completed before
+RESEARCH_FROZEN, so HOME venue/location gaps are non-waivable blockers.
 """
 
 from __future__ import annotations
@@ -22,6 +23,11 @@ POSTSEASON_TYPES_REQUIRING_ACCOUNTING = {
     "CONFERENCE_TOURNAMENT",
     "NIT",
     "POSTSEASON",
+}
+HOME_PUBLICATION_BLOCKER_CATEGORIES = {
+    "home_missing_venue",
+    "home_missing_location",
+    "home_missing_both",
 }
 
 
@@ -55,7 +61,7 @@ def _row_gap_categories(row: dict[str, str]) -> list[str]:
         categories.append("unknown_site_type")
 
     # NCAA Tournament site completeness is already a strict, non-waivable research
-    # gate.  Avoid treating a status marker as a substitute for that requirement.
+    # gate. Avoid treating a status marker as a substitute for that requirement.
     if game_type != "NCAA_TOURNAMENT" and site == "NEUTRAL":
         if not venue:
             categories.append("neutral_missing_venue")
@@ -89,6 +95,10 @@ def source_site_completeness_report(
     Away regular-season rows are intentionally not research-freeze blockers here: a
     school's own research lane is not required to reconstruct every opponent building.
     NCAA Tournament rows remain governed by the stricter non-waivable NCAA gate.
+
+    Research metadata may account for most material gaps. It does not waive a school's
+    own HOME venue/location gap: those rows must be resolved from the program's venue
+    chronology before RESEARCH_FROZEN.
     """
 
     fields = set(game_fields)
@@ -110,11 +120,13 @@ def source_site_completeness_report(
     material_gap_rows = 0
     researched_gap_rows = 0
     unaccounted_gap_rows = 0
+    home_publication_blocker_rows = 0
     invalid_status_rows: list[str] = []
     missing_basis_rows: list[str] = []
     orphan_basis_rows: list[str] = []
     unnecessary_status_rows: list[str] = []
     unaccounted_examples: list[dict[str, Any]] = []
+    home_blocker_examples: list[dict[str, Any]] = []
 
     for line_number, row in enumerate(rows, start=2):
         source_game_id = row.get("source_game_id", "").strip() or f"line {line_number}"
@@ -141,10 +153,22 @@ def source_site_completeness_report(
             decade_counts[category][_season_decade(season)] += 1
             season_counts[category][season or "UNKNOWN"] += 1
 
-        accounted = (
-            status in ALLOWED_SITE_RESEARCH_STATUSES
-            and bool(basis)
-        )
+        if any(category in HOME_PUBLICATION_BLOCKER_CATEGORIES for category in categories):
+            home_publication_blocker_rows += 1
+            if len(home_blocker_examples) < example_limit:
+                home_blocker_examples.append(
+                    {
+                        "source_game_id": source_game_id,
+                        "season_label": season,
+                        "categories": sorted(
+                            category
+                            for category in categories
+                            if category in HOME_PUBLICATION_BLOCKER_CATEGORIES
+                        ),
+                    }
+                )
+
+        accounted = status in ALLOWED_SITE_RESEARCH_STATUSES and bool(basis)
         if accounted:
             researched_gap_rows += 1
         else:
@@ -177,6 +201,20 @@ def source_site_completeness_report(
             f"{len(orphan_basis_rows):,} row(s) affected; examples: "
             + ", ".join(orphan_basis_rows[:example_limit])
         )
+    if home_publication_blocker_rows:
+        rendered = "; ".join(
+            f"{item['source_game_id']} ({item['season_label'] or 'season unknown'}: "
+            + ", ".join(item["categories"])
+            + ")"
+            for item in home_blocker_examples
+        )
+        errors.append(
+            f"{home_publication_blocker_rows:,} source-program HOME row(s) are missing "
+            "venue and/or complete location. Published-program home-site completeness "
+            "is non-waivable: resolve these rows from the school's home-venue chronology "
+            "before RESEARCH_FROZEN. site_research_status may document work in progress "
+            f"but cannot waive this requirement. Examples: {rendered}"
+        )
     if unaccounted_gap_rows:
         rendered = "; ".join(
             f"{item['source_game_id']} ({item['season_label'] or 'season unknown'}: "
@@ -205,6 +243,7 @@ def source_site_completeness_report(
             "material_gap_rows": material_gap_rows,
             "researched_gap_rows": researched_gap_rows,
             "unaccounted_gap_rows": unaccounted_gap_rows,
+            "home_publication_blocker_rows": home_publication_blocker_rows,
         },
         "by_decade": {
             category: dict(sorted(counts.items()))
@@ -215,4 +254,5 @@ def source_site_completeness_report(
             for category, counts in sorted(season_counts.items())
         },
         "unaccounted_examples": unaccounted_examples,
+        "home_publication_blocker_examples": home_blocker_examples,
     }

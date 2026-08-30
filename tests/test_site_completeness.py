@@ -45,6 +45,7 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["material_gap_rows"], 0)
         self.assertEqual(report["counts"]["unaccounted_gap_rows"], 0)
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 0)
 
     def test_unaccounted_home_blank_blocks(self):
         report = source_site_completeness_report(
@@ -53,12 +54,14 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         )
         self.assertEqual(report["counts"]["material_gap_rows"], 1)
         self.assertEqual(report["counts"]["unaccounted_gap_rows"], 1)
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 1)
         self.assertEqual(report["counts"]["home_missing_venue"], 1)
         self.assertEqual(report["counts"]["home_missing_location"], 1)
         self.assertEqual(report["counts"]["home_missing_both"], 1)
         self.assertTrue(any("material site-gap" in error for error in report["errors"]))
+        self.assertTrue(any("non-waivable" in error for error in report["errors"]))
 
-    def test_researched_unresolved_home_blank_is_allowed(self):
+    def test_researched_unresolved_home_blank_still_blocks_freeze(self):
         report = source_site_completeness_report(
             FIELDS,
             [
@@ -73,11 +76,12 @@ class SourceSiteCompletenessTests(unittest.TestCase):
                 )
             ],
         )
-        self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["researched_gap_rows"], 1)
         self.assertEqual(report["counts"]["unaccounted_gap_rows"], 0)
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 1)
+        self.assertTrue(any("non-waivable" in error for error in report["errors"]))
 
-    def test_partial_home_gap_can_be_research_accounted(self):
+    def test_partial_home_gap_still_blocks_freeze(self):
         report = source_site_completeness_report(
             FIELDS,
             [
@@ -90,9 +94,10 @@ class SourceSiteCompletenessTests(unittest.TestCase):
                 )
             ],
         )
-        self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["home_missing_venue"], 1)
         self.assertNotIn("home_missing_location", report["counts"])
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 1)
+        self.assertTrue(any("non-waivable" in error for error in report["errors"]))
 
     def test_unknown_site_type_requires_accounting(self):
         report = source_site_completeness_report(
@@ -116,6 +121,7 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         )
         self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["material_gap_rows"], 0)
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 0)
 
     def test_non_ncaa_neutral_and_postseason_gaps_are_counted(self):
         report = source_site_completeness_report(
@@ -196,6 +202,7 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         )
         self.assertEqual(report["by_decade"]["home_missing_both"]["1900s"], 1)
         self.assertEqual(report["by_decade"]["home_missing_both"]["1970s"], 1)
+        self.assertEqual(report["counts"]["home_publication_blocker_rows"], 2)
 
 
 if __name__ == "__main__":
