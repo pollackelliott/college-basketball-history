@@ -75,7 +75,6 @@ class ImplementationSiteReviewAccountingTests(unittest.TestCase):
             )
             canonical = canonical_row(
                 site_type="NEUTRAL",
-                designated_home_team_key="",
                 venue_key="",
                 venue_id="",
                 site_city="",
