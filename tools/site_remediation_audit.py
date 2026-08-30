@@ -9,7 +9,9 @@ explicit output directory).
 The audit does *not* infer H/A/N from venue or geography. Venue/location evidence
 is mechanically usable only when its source assertion independently agrees with
 the canonical site classification (or with a mechanically unanimous site-type
-candidate for a currently UNKNOWN canonical row).
+candidate for a currently UNKNOWN canonical row). A known canonical site that is
+contradicted by participant assertion evidence blocks dependent venue/location
+enrichment unless that site conflict has already been explicitly resolved.
 """
 
 from __future__ import annotations
@@ -85,17 +87,28 @@ def canonical_site_from_assertion(row: dict[str, str]) -> str:
     return "UNKNOWN"
 
 
-def review_acknowledges(rows: Iterable[dict[str, str]], kind: str) -> bool:
+def reconciliation_state(rows: Iterable[dict[str, str]], kind: str) -> str:
+    """Return UNDER_REVIEW, RESOLVED, or blank for one discrepancy field family.
+
+    UNDER_REVIEW dominates because a live unresolved conflict must never be
+    treated as safe merely because an older resolved row also exists.
+    """
+
     accepted = DISCREPANCY_FIELDS[kind]
+    resolved = False
     for row in rows:
         if row.get("field_name", "").strip() not in accepted:
             continue
         status = row.get("status", "").strip().upper()
         if status == "UNDER_REVIEW":
-            return True
+            return "UNDER_REVIEW"
         if status == "RESOLVED" and row.get("resolution_basis", "").strip():
-            return True
-    return False
+            resolved = True
+    return "RESOLVED" if resolved else ""
+
+
+def review_acknowledges(rows: Iterable[dict[str, str]], kind: str) -> bool:
+    return bool(reconciliation_state(rows, kind))
 
 
 def canonical_venue_blank(game: dict[str, str]) -> bool:
@@ -352,42 +365,92 @@ def build_audit(repo: Path) -> dict[str, Any]:
             continue
         game_discrepancies = discrepancies_by_game.get(canonical_id, [])
 
+        site_values_by_program, site_blank_programs = source_program_value_state(
+            game_assertions, canonical_site_from_assertion
+        )
+        site_known_values = {
+            value for values in site_values_by_program.values() for value in values
+        }
+        site_supporting = [
+            row
+            for row in game_assertions
+            if canonical_site_from_assertion(row) not in {"", "UNKNOWN"}
+        ]
+        site_reconciliation = reconciliation_state(game_discrepancies, "site_type")
+
         # Site type: never infer this from venue or geography.
         proposed_site = ""
         current_site = game.get("site_type", "").strip()
+        site_dependency_blocked = False
+
         if current_site in {"", "UNKNOWN"}:
             out = base_output_row(game, "site_type")
-            values_by_program, blank_programs = source_program_value_state(
-                game_assertions, canonical_site_from_assertion
+            support_metadata(
+                out,
+                site_supporting,
+                site_values_by_program,
+                site_blank_programs,
             )
-            known_values = {
-                value for values in values_by_program.values() for value in values
-            }
-            supporting = [
-                row
-                for row in game_assertions
-                if canonical_site_from_assertion(row) not in {"", "UNKNOWN"}
-            ]
-            support_metadata(out, supporting, values_by_program, blank_programs)
-            out["evidence_values"] = "|".join(sorted(known_values))
-            if review_acknowledges(game_discrepancies, "site_type"):
+            out["evidence_values"] = "|".join(sorted(site_known_values))
+            if site_reconciliation:
                 out["classification"] = "RECONCILIATION_HOLD"
-                add(review, out, "field-specific reconciliation provenance already exists")
-            elif len(known_values) == 1:
-                proposed_site = next(iter(known_values))
+                add(
+                    review,
+                    out,
+                    "canonical H/A/N is unresolved and field-specific reconciliation provenance exists",
+                )
+                site_dependency_blocked = True
+            elif len(site_known_values) == 1:
+                proposed_site = next(iter(site_known_values))
                 out["proposed_value"] = proposed_site
                 add(mechanical, out, "all known participant site assertions agree")
-            elif len(known_values) > 1:
+            elif len(site_known_values) > 1:
                 out["classification"] = "CONFLICT_REVIEW"
                 add(review, out, "participant site assertions conflict")
+                site_dependency_blocked = True
             else:
                 out["classification"] = "NO_USEFUL_EVIDENCE"
                 add(review, out, "no participant assertion establishes H/A/N")
+                site_dependency_blocked = True
         else:
             proposed_site = current_site
+            conflicting_site_values = site_known_values - {current_site}
+            if conflicting_site_values:
+                out = base_output_row(game, "site_type")
+                support_metadata(
+                    out,
+                    site_supporting,
+                    site_values_by_program,
+                    site_blank_programs,
+                )
+                out["proposed_value"] = current_site
+                out["evidence_values"] = "|".join(sorted(site_known_values))
+                if site_reconciliation == "RESOLVED":
+                    out["classification"] = "RECONCILIATION_RESOLVED"
+                    add(
+                        review,
+                        out,
+                        "participant H/A/N evidence conflicts with canonical, but an explicit resolved site discrepancy retains the canonical classification; dependent enrichment may use only assertions agreeing with canonical",
+                    )
+                elif site_reconciliation == "UNDER_REVIEW":
+                    out["classification"] = "RECONCILIATION_HOLD"
+                    add(
+                        review,
+                        out,
+                        "participant H/A/N evidence conflicts with canonical and the site discrepancy remains under review",
+                    )
+                    site_dependency_blocked = True
+                else:
+                    out["classification"] = "CANONICAL_ASSERTION_CONFLICT"
+                    add(
+                        review,
+                        out,
+                        "participant H/A/N evidence conflicts with the populated canonical classification and no explicit resolution provenance exists",
+                    )
+                    site_dependency_blocked = True
 
         effective_site = proposed_site or current_site
-        if effective_site in {"", "UNKNOWN"}:
+        if effective_site in {"", "UNKNOWN"} or site_dependency_blocked:
             continue
 
         agreeing_assertions = [
@@ -518,9 +581,14 @@ def build_audit(repo: Path) -> dict[str, Any]:
     )
 
     counts: Counter[str] = Counter()
+    mechanical_fields_by_game: dict[str, set[str]] = defaultdict(set)
     for row in mechanical:
         counts[f"mechanical:{row['field_name']}"] += 1
         counts[f"mechanical:{row['classification']}"] += 1
+        mechanical_fields_by_game[row["canonical_game_id"]].add(row["field_name"])
+    for fields in mechanical_fields_by_game.values():
+        bundle = "+".join(sorted(fields))
+        counts[f"mechanical_bundle:{bundle}"] += 1
     for row in review:
         counts[f"review:{row['field_name']}"] += 1
         counts[f"review:{row['classification']}"] += 1
@@ -531,7 +599,9 @@ def build_audit(repo: Path) -> dict[str, Any]:
         "summary": {
             "canonical_games_scanned": len(canonical),
             "assertions_scanned": len(assertions),
+            "mechanical_game_candidates": len(mechanical_fields_by_game),
             "mechanical_field_candidates": len(mechanical),
+            "review_games": len({row["canonical_game_id"] for row in review}),
             "review_field_rows": len(review),
             "counts": dict(sorted(counts.items())),
         },
@@ -561,7 +631,9 @@ def print_summary(report: dict[str, Any], output_dir: Path) -> None:
     print("College Basketball History — site remediation Wave A audit")
     print(f"Canonical games scanned:       {summary['canonical_games_scanned']:,}")
     print(f"Assertions scanned:            {summary['assertions_scanned']:,}")
+    print(f"Mechanical game candidates:    {summary['mechanical_game_candidates']:,}")
     print(f"Mechanical field candidates:   {summary['mechanical_field_candidates']:,}")
+    print(f"Review games:                  {summary['review_games']:,}")
     print(f"Review field rows:              {summary['review_field_rows']:,}")
     for key, value in summary["counts"].items():
         print(f"  {key}: {value:,}")
