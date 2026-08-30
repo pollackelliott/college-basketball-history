@@ -134,6 +134,25 @@ def _review_acknowledges(
     return False
 
 
+def _review_accounts_for_gap(
+    categories: list[str],
+    discrepancies: list[dict[str, str]],
+) -> bool:
+    """Return True when every primitive canonical gap has explicit review provenance."""
+
+    required_kinds: set[str] = set()
+    if "unknown_site_type" in categories:
+        required_kinds.add("site_type")
+    if any(category.endswith("missing_venue") for category in categories):
+        required_kinds.add("venue")
+    if any(category.endswith("missing_location") for category in categories):
+        required_kinds.add("location")
+    return bool(required_kinds) and all(
+        _review_acknowledges(discrepancies, kind)
+        for kind in required_kinds
+    )
+
+
 def implementation_site_report(
     repo: Path,
     school_key: str,
@@ -221,6 +240,7 @@ def implementation_site_report(
 
     for game in target_games:
         canonical_id = game.get("canonical_game_id", "").strip()
+        game_discrepancies = discrepancies_by_canonical.get(canonical_id, [])
         categories = _canonical_gap_categories(game, school_key)
         if categories:
             public_gap_rows += 1
@@ -232,7 +252,9 @@ def implementation_site_report(
                 for source_id in target_source_ids_by_canonical.get(canonical_id, [])
                 if source_id in source_by_id
             ]
-            if not any(_researched_source_row(row) for row in source_rows):
+            research_accounted = any(_researched_source_row(row) for row in source_rows)
+            review_accounted = _review_accounts_for_gap(categories, game_discrepancies)
+            if not (research_accounted or review_accounted):
                 unaccounted_public_gap_rows += 1
                 record("unaccounted_public_gap", canonical_id)
 
@@ -246,7 +268,6 @@ def implementation_site_report(
             game.get("site_city", ""),
             game.get("site_state", ""),
         )
-        game_discrepancies = discrepancies_by_canonical.get(canonical_id, [])
 
         # Target-source information loss is a hard implementation defect unless the
         # exact field is deliberately held under reconciliation review.
@@ -361,8 +382,8 @@ def implementation_site_report(
     if unaccounted_public_gap_rows:
         errors.append(
             f"{unaccounted_public_gap_rows:,} canonical public site-gap game(s) are "
-            "not backed by a target source row marked RESEARCHED_PARTIAL or "
-            "RESEARCHED_UNRESOLVED with a basis."
+            "not backed by explicit research-accounting metadata or field-specific "
+            "reconciliation provenance."
         )
 
     return {
