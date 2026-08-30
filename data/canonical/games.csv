@@ -1507,7 +1507,7 @@ CBBG-0001505,1978-1979,1979-02-17,EXACT,missouri,nebraska,64,76,nebraska,0,TEAM_
 CBBG-0001506,1978-1979,1979-02-21,EXACT,kansas-state,missouri,63,67,missouri,0,TEAM_A_HOME,kansas-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0001507,1978-1979,1979-02-24,EXACT,iowa-state,missouri,67,73,missouri,0,TEAM_B_HOME,missouri,hearnes-center,VEN-000077,Columbia,MO,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0001508,1978-1979,1979-02-27,EXACT,missouri,oklahoma-state,92,70,missouri,0,TEAM_A_HOME,missouri,hearnes-center,VEN-000077,Columbia,MO,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,
-CBBG-0001509,1978-1979,1979-03-02,EXACT,kansas,missouri,76,73,kansas,0,NEUTRAL,,,,,,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,
+CBBG-0001509,1978-1979,1979-03-02,EXACT,kansas,missouri,76,73,kansas,0,NEUTRAL,,kemper-arena,VEN-000099,Kansas City,MO,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=kansas/KURAW-01737;venue_key=kemper-arena;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0001510,1979-1980,1979-11-30,EXACT,missouri,texas-state,86,70,missouri,0,TEAM_A_HOME,missouri,hearnes-center,VEN-000077,Columbia,MO,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0001511,1979-1980,1979-12-01,EXACT,missouri,south-dakota-state,80,60,missouri,0,TEAM_A_HOME,missouri,hearnes-center,VEN-000077,Columbia,MO,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0001512,1979-1980,1979-12-04,EXACT,illinois,missouri,66,67,missouri,0,TEAM_A_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -3556,7 +3556,7 @@ CBBG-0003554,1945-1946,1946-02-26,EXACT,arkansas,texas-a-m,53,43,arkansas,0,TEAM
 CBBG-0003555,1946-1947,1946-12-04,EXACT,arkansas,tulsa,56,21,arkansas,0,TEAM_A_HOME,arkansas,mens-gymnasium-field-house,VEN-000132,Fayetteville,AR,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0003556,1946-1947,1946-12-07,EXACT,arkansas,missouri-state,62,55,arkansas,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0003557,1946-1947,1946-12-12,EXACT,arkansas,nebraska,57,46,arkansas,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0003558,1946-1947,1946-12-13,EXACT,arkansas,kansas,52,53,kansas,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0003558,1946-1947,1946-12-13,EXACT,arkansas,kansas,52,53,kansas,0,NEUTRAL,,municipal-auditorium-kc,VEN-000143,Kansas City,MO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=kansas/KURAW-00881;venue_key=municipal-auditorium-kc;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0003559,1946-1947,1946-12-14,EXACT,arkansas,kansas-state,41,56,kansas-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0003560,1946-1947,1946-12-17,EXACT,arkansas,new-york-university,46,67,new-york-university,0,TEAM_B_HOME,new-york-university,,,New York,NY,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0003561,1946-1947,1946-12-21,EXACT,arkansas,st-joseph-s-pa,46,36,arkansas,0,TEAM_B_HOME,st-joseph-s-pa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -7914,7 +7914,7 @@ CBBG-0007912,1998-1999,1998-11-28,EXACT,illinois,utrgv,71,56,illinois,0,TEAM_B_H
 CBBG-0007913,1998-1999,1998-11-30,EXACT,illinois,valparaiso,53,49,illinois,0,TEAM_A_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0007914,1998-1999,1998-12-05,EXACT,bradley,illinois,48,53,illinois,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0007915,1998-1999,1998-12-12,EXACT,eastern-illinois,illinois,67,70,illinois,0,TEAM_B_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0007916,1998-1999,1998-12-19,EXACT,illinois,kansas,55,65,kansas,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0007916,1998-1999,1998-12-19,EXACT,illinois,kansas,55,65,kansas,0,NEUTRAL,,kemper-arena,VEN-000099,Kansas City,MO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=kansas/KURAW-02388;venue_key=kemper-arena;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0007917,1998-1999,1998-12-29,EXACT,clemson,illinois,50,67,illinois,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0007918,1998-1999,1999-01-03,EXACT,illinois,indiana,53,62,indiana,0,TEAM_B_HOME,indiana,simon-skjodt-assembly-hall,VEN-000186,Bloomington,IN,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=indiana/IURAW-02214;venue_key=simon-skjodt-assembly-hall;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0007919,1998-1999,1999-01-07,EXACT,illinois,iowa,62,84,iowa,0,TEAM_B_HOME,iowa,carver-hawkeye-arena,VEN-000037,Iowa City,IA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=iowa/IOWARAW-02133;venue_key=carver-hawkeye-arena;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
