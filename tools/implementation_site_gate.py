@@ -18,8 +18,11 @@ from typing import Any
 from site_completeness import (
     ALLOWED_SITE_RESEARCH_STATUSES,
     POSTSEASON_TYPES_REQUIRING_ACCOUNTING,
+    researched_unresolved_home_venue,
     source_site_completeness_report,
 )
+
+HOME_VENUE_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -109,6 +112,56 @@ def _researched_source_row(row: dict[str, str]) -> bool:
         in ALLOWED_SITE_RESEARCH_STATUSES
         and bool(row.get("site_research_basis", "").strip())
     )
+
+
+def _canonical_home_venue_exception(
+    game: dict[str, str],
+    school_key: str,
+    source_rows: list[dict[str, str]],
+    all_assertions: list[dict[str, str]],
+) -> bool:
+    """Validate the narrow owner-approved historical HOME venue exception.
+
+    The canonical game must remain a target HOME game with complete city/state and
+    blank venue, carry an explicit canonical provenance marker, and map to at least
+    one target source row that itself satisfies the dedicated research status. No
+    assertion that agrees with the canonical H/A/N may already supply a curated
+    venue identity; such evidence must be propagated/reconciled instead.
+    """
+
+    if not _target_home(game, school_key):
+        return False
+    if _venue_known(game):
+        return False
+    if not _complete_pair(game.get("site_city", ""), game.get("site_state", "")):
+        return False
+    if game.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
+        return False
+    if HOME_VENUE_EXCEPTION_MARKER not in game.get("notes", ""):
+        return False
+
+    can_site = game.get("site_type", "").strip()
+    qualifying_sources = [
+        row
+        for row in source_rows
+        if researched_unresolved_home_venue(row)
+        and _source_site_to_canonical(row) == can_site
+    ]
+    if not qualifying_sources:
+        return False
+
+    agreeing_assertions = [
+        assertion
+        for assertion in all_assertions
+        if _source_site_to_canonical(assertion) == can_site
+    ]
+    if any(
+        assertion.get("curated_venue_name", "").strip()
+        for assertion in agreeing_assertions
+    ):
+        return False
+
+    return True
 
 
 _DISCREPANCY_FIELDS = {
@@ -237,29 +290,45 @@ def implementation_site_report(
     public_gap_rows = 0
     unaccounted_public_gap_rows = 0
     strict_home_gap_rows = 0
+    researched_unresolved_home_venue_rows = 0
+    invalid_home_venue_exception_marker_rows = 0
     strict_ncaa_gap_rows = 0
 
     for game in target_games:
         canonical_id = game.get("canonical_game_id", "").strip()
         game_discrepancies = discrepancies_by_canonical.get(canonical_id, [])
         categories = _canonical_gap_categories(game, school_key)
+        source_rows = [
+            source_by_id[source_id]
+            for source_id in target_source_ids_by_canonical.get(canonical_id, [])
+            if source_id in source_by_id
+        ]
+        all_game_assertions = assertions_by_canonical.get(canonical_id, [])
+        home_exception = _canonical_home_venue_exception(
+            game,
+            school_key,
+            source_rows,
+            all_game_assertions,
+        )
+        marker_present = HOME_VENUE_EXCEPTION_MARKER in game.get("notes", "")
+
+        if marker_present and not home_exception:
+            invalid_home_venue_exception_marker_rows += 1
+            record("invalid_home_venue_exception_marker", canonical_id)
+
         if categories:
             public_gap_rows += 1
             for category in categories:
                 record(category, canonical_id)
 
-            # The target program's own home venue/location is a publication fact,
-            # not a waivable historical unknown. Research/reconciliation metadata may
-            # explain work in progress but cannot authorize a blank at release.
             if any(category.startswith("home_missing_") for category in categories):
-                strict_home_gap_rows += 1
-                record("strict_home_gap", canonical_id)
+                if home_exception:
+                    researched_unresolved_home_venue_rows += 1
+                    record("researched_unresolved_home_venue", canonical_id)
+                else:
+                    strict_home_gap_rows += 1
+                    record("strict_home_gap", canonical_id)
 
-            source_rows = [
-                source_by_id[source_id]
-                for source_id in target_source_ids_by_canonical.get(canonical_id, [])
-                if source_id in source_by_id
-            ]
             research_accounted = any(_researched_source_row(row) for row in source_rows)
             review_accounted = _review_accounts_for_gap(categories, game_discrepancies)
             if not (research_accounted or review_accounted):
@@ -319,7 +388,7 @@ def implementation_site_report(
         # reciprocal assertion to propagate yet.
         other_assertions = [
             assertion
-            for assertion in assertions_by_canonical.get(canonical_id, [])
+            for assertion in all_game_assertions
             if assertion.get("source_program_key", "").strip() != school_key
         ]
         if can_site in {"", "UNKNOWN"}:
@@ -370,8 +439,14 @@ def implementation_site_report(
     if strict_home_gap_rows:
         errors.append(
             f"{strict_home_gap_rows:,} in-scope target HOME canonical game(s) are missing "
-            "venue and/or complete location; published-program home-site completeness "
-            "is non-waivable."
+            "venue and/or complete location without a valid researched-unresolved HOME "
+            "venue exception. Complete HOME location is never waivable."
+        )
+    if invalid_home_venue_exception_marker_rows:
+        errors.append(
+            f"{invalid_home_venue_exception_marker_rows:,} canonical game(s) carry a "
+            "RESEARCHED_UNRESOLVED_HOME_VENUE marker without satisfying the source, "
+            "location, H/A/N, NCAA, and reciprocal-evidence requirements."
         )
     if strict_ncaa_gap_rows:
         errors.append(
@@ -414,6 +489,8 @@ def implementation_site_report(
             "public_gap_rows": public_gap_rows,
             "unaccounted_public_gap_rows": unaccounted_public_gap_rows,
             "strict_home_gap_rows": strict_home_gap_rows,
+            "researched_unresolved_home_venue_rows": researched_unresolved_home_venue_rows,
+            "invalid_home_venue_exception_marker_rows": invalid_home_venue_exception_marker_rows,
             "strict_ncaa_gap_rows": strict_ncaa_gap_rows,
             "target_source_information_loss": loss_total,
             "reciprocal_unpropagated": reciprocal_total,
@@ -443,8 +520,9 @@ def print_report(report: dict[str, Any]) -> None:
             print("  - " + error)
     else:
         print(
-            "\nPASS: target public canonical site coverage preserves known evidence "
-            "and every remaining material non-home gap is deliberately research-accounted."
+            "\nPASS: target public canonical site coverage preserves known evidence; "
+            "remaining material gaps are research-accounted, including any explicitly "
+            "validated historical HOME venue unknowns."
         )
 
 
