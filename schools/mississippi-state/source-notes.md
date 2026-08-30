@@ -94,3 +94,21 @@ The owner approved cross-conference accomplishment totals of **10 regular-season
 Mississippi State's current record book identifies four early championship seasons (1911-12, 1912-13, 1913-14, 1915-16), six SEC regular-season championships (1959, 1961, 1962, 1963, 1991, 2004), the 1923 SIAA Tournament championship, and three SEC Tournament championships (1996, 2002, 2009). The record book's historical label "Southern Conference Champions" for the four early seasons is preserved as source wording; the project's independently approved conference chronology still places those seasons in the SIAA era.
 
 The NCAA accomplishment fields remain: 14 NCAA Tournament appearances, 1 Final Four, 0 national championships, best finish Final Four, best-finish year 1996.
+
+## Retroactive HOME-site remediation (2026-08-30)
+
+The published-site hardening audit identified 168 Mississippi State canonical HOME games with missing venue and/or location. This remediation applies the owner-approved historical-unrecoverable HOME venue policy rather than inventing unsupported physical venue names.
+
+- 139 Mississippi State source HOME rows are exhaustively researched but retain a blank physical venue under `RESEARCHED_UNRESOLVED_HOME_VENUE`; city/state remain complete. This comprises pre-Tin Starkville HOME games plus pre-1962 Jackson alternate-site HOME games, including the reconciled 1929 Kentucky game.
+- 20 Jackson HOME rows beginning 1962-12-15 are assigned **Mississippi Coliseum**, supported by Mississippi State Athletics' official Jackson-game history and Mississippi Fairgrounds' 1962 facility history.
+- 10 canonical-only HOME gaps are assigned from the already-established Tin Gym / McCarthy Gymnasium / Humphrey Coliseum chronology.
+- `CBBG-0014851` is corrected from Kentucky HOME at Alumni Gym to Mississippi State alternate-site HOME in Jackson. UK Athletics' official all-time results marks both 1928-29 Mississippi A&M games as Kentucky away games, while Mississippi State places the 32-14 game in Jackson. The 1929-02-02 vs. 1929-02-03 source-date disagreement is preserved and not altered by this site-only correction.
+
+Primary supporting sources:
+
+- Mississippi State official historical record book / media guide and facility history.
+- Mississippi State Athletics, official Jackson basketball breakdown identifying Mississippi Coliseum games beginning 1962-12-15.
+- Mississippi Fairgrounds / Mississippi Department of Agriculture and Commerce history identifying Mississippi Coliseum as a 1962 facility.
+- UK Athletics official men's basketball all-time results for 1928-29.
+
+The unresolved HOME venue status is a permanent statement of historical uncertainty, not a placeholder for unfinished research. If stronger game-specific physical-venue evidence is later discovered, it should replace the exception.
