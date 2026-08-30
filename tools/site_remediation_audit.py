@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Build the deterministic Wave A site-remediation candidate universe.
 
-This tool is deliberately read-only with respect to tracked repository data.  It
+This tool is deliberately read-only with respect to tracked repository data. It
 examines canonical games, participant assertions, reconciliation provenance, and
 venue registries, then writes review artifacts under ``.onboarding`` (or an
 explicit output directory).
 
-The audit does *not* infer H/A/N from venue or geography.  Venue/location evidence
-is considered mechanically usable only when its source assertion independently
-agrees with the canonical site classification (or with a mechanically unanimous
-site-type candidate for a currently UNKNOWN canonical row).
+The audit does *not* infer H/A/N from venue or geography. Venue/location evidence
+is mechanically usable only when its source assertion independently agrees with
+the canonical site classification (or with a mechanically unanimous site-type
+candidate for a currently UNKNOWN canonical row).
 """
 
 from __future__ import annotations
@@ -75,7 +75,7 @@ def canonical_site_from_assertion(row: dict[str, str]) -> str:
     source_site = row.get("curated_site_type", "").strip().upper()
     if not source_program or not opponent or source_program == opponent:
         return "UNKNOWN"
-    team_a, team_b = sorted((source_program, opponent))
+    team_a, _team_b = sorted((source_program, opponent))
     if source_site == "SOURCE_PROGRAM_HOME":
         return "TEAM_A_HOME" if source_program == team_a else "TEAM_B_HOME"
     if source_site == "OPPONENT_HOME":
@@ -121,15 +121,14 @@ def participant_programs(game: dict[str, str]) -> set[str]:
     } - {""}
 
 
-def _source_program_value_state(
+def source_program_value_state(
     assertions: list[dict[str, str]],
     value_getter,
 ) -> tuple[dict[str, set[Any]], set[str]]:
-    """Return nonblank values by participant source plus programs with blank evidence."""
+    """Return nonblank values by participant source plus blank-only programs."""
 
     values_by_program: dict[str, set[Any]] = defaultdict(set)
     programs_seen: set[str] = set()
-    programs_with_blank: set[str] = set()
     for row in assertions:
         program = row.get("source_program_key", "").strip()
         if not program:
@@ -137,18 +136,17 @@ def _source_program_value_state(
         programs_seen.add(program)
         value = value_getter(row)
         if value is None or value == "" or value == "UNKNOWN":
-            programs_with_blank.add(program)
-        else:
-            values_by_program[program].add(value)
+            continue
+        values_by_program[program].add(value)
     blank_only = {
-        program
-        for program in programs_seen
-        if not values_by_program.get(program)
+        program for program in programs_seen if not values_by_program.get(program)
     }
     return values_by_program, blank_only
 
 
-def classify_support(values_by_program: dict[str, set[Any]], blank_programs: set[str]) -> str:
+def classify_support(
+    values_by_program: dict[str, set[Any]], blank_programs: set[str]
+) -> str:
     known_programs = {program for program, values in values_by_program.items() if values}
     if len(known_programs) >= 2:
         return "RECIPROCAL_CONSENSUS"
@@ -201,14 +199,14 @@ class VenueResolver:
                 raw_names = [
                     row.get("canonical_name", ""),
                     row.get("venue_key", ""),
+                    *row.get("aliases", "").split(";"),
                 ]
-                raw_names.extend(row.get("aliases", "").split(";"))
                 for value in raw_names:
                     normalized = normalize_name(value)
                     if normalized:
                         self.school_names[program][normalized].add(venue_id)
 
-    def _location_matches(self, venue_id: str, city: str, state: str) -> bool:
+    def location_matches(self, venue_id: str, city: str, state: str) -> bool:
         row = self.global_by_id.get(venue_id, {})
         if not city or not state:
             return True
@@ -218,7 +216,7 @@ class VenueResolver:
         )
 
     def resolve(self, assertion: dict[str, str]) -> tuple[str, str]:
-        """Return (venue_id, reason); blank venue_id means not safely resolvable."""
+        """Return ``(venue_id, basis)``; blank ID means identity is not safe."""
 
         raw_name = assertion.get("curated_venue_name", "").strip()
         if not raw_name:
@@ -227,34 +225,43 @@ class VenueResolver:
         program = assertion.get("source_program_key", "").strip()
         city = assertion.get("city", "").strip()
         state = assertion.get("state", "").strip()
+        has_location = bool(city and state)
 
-        school_candidates = set(self.school_names.get(program, {}).get(normalized, set()))
+        school_candidates = set(
+            self.school_names.get(program, {}).get(normalized, set())
+        )
         if school_candidates:
-            location_filtered = {
-                venue_id
-                for venue_id in school_candidates
-                if self._location_matches(venue_id, city, state)
-            }
-            candidates = location_filtered or school_candidates
+            candidates = school_candidates
+            if has_location:
+                candidates = {
+                    venue_id
+                    for venue_id in school_candidates
+                    if self.location_matches(venue_id, city, state)
+                }
+                if not candidates:
+                    return "", "school venue identity conflicts with assertion location"
             if len(candidates) == 1:
                 return next(iter(candidates)), "school venue registry"
             return "", "ambiguous school venue registry identity"
 
         global_candidates = set(self.global_names.get(normalized, set()))
         if global_candidates:
-            location_filtered = {
-                venue_id
-                for venue_id in global_candidates
-                if self._location_matches(venue_id, city, state)
-            }
-            candidates = location_filtered or global_candidates
+            candidates = global_candidates
+            if has_location:
+                candidates = {
+                    venue_id
+                    for venue_id in global_candidates
+                    if self.location_matches(venue_id, city, state)
+                }
+                if not candidates:
+                    return "", "global venue identity conflicts with assertion location"
             if len(candidates) == 1:
                 return next(iter(candidates)), "unique global venue name/location"
             return "", "ambiguous global venue identity"
         return "", "venue name absent from school/global registries"
 
 
-def _base_output_row(game: dict[str, str], field_name: str) -> dict[str, str]:
+def base_output_row(game: dict[str, str], field_name: str) -> dict[str, str]:
     return {
         "canonical_game_id": game.get("canonical_game_id", "").strip(),
         "season_label": game.get("season_label", "").strip(),
@@ -283,24 +290,29 @@ def _base_output_row(game: dict[str, str], field_name: str) -> dict[str, str]:
     }
 
 
-def _support_metadata(
-    row: dict[str, str],
-    assertions: list[dict[str, str]],
+def support_metadata(
+    out: dict[str, str],
     supporting_rows: list[dict[str, str]],
     values_by_program: dict[str, set[Any]],
     blank_programs: set[str],
 ) -> None:
-    row["supporting_programs"] = "|".join(
-        sorted({item.get("source_program_key", "").strip() for item in supporting_rows} - {""})
+    out["supporting_programs"] = "|".join(
+        sorted(
+            {row.get("source_program_key", "").strip() for row in supporting_rows}
+            - {""}
+        )
     )
-    row["supporting_source_game_ids"] = "|".join(
-        sorted({item.get("source_game_id", "").strip() for item in supporting_rows} - {""})
+    out["supporting_source_game_ids"] = "|".join(
+        sorted(
+            {row.get("source_game_id", "").strip() for row in supporting_rows}
+            - {""}
+        )
     )
-    row["known_program_count"] = str(
+    out["known_program_count"] = str(
         len({program for program, values in values_by_program.items() if values})
     )
-    row["blank_program_count"] = str(len(blank_programs))
-    row["classification"] = classify_support(values_by_program, blank_programs)
+    out["blank_program_count"] = str(len(blank_programs))
+    out["classification"] = classify_support(values_by_program, blank_programs)
 
 
 def build_audit(repo: Path) -> dict[str, Any]:
@@ -323,30 +335,29 @@ def build_audit(repo: Path) -> dict[str, Any]:
 
     mechanical: list[dict[str, str]] = []
     review: list[dict[str, str]] = []
-    counts: Counter[str] = Counter()
 
-    def add(bucket: list[dict[str, str]], row: dict[str, str], reason: str) -> None:
-        row["reason"] = reason
-        bucket.append(row)
-        counts[f"{row['field_name']}:{row['classification']}"] += 1
+    def add(bucket: list[dict[str, str]], out: dict[str, str], reason: str) -> None:
+        out["reason"] = reason
+        bucket.append(out)
 
     for game in canonical:
         canonical_id = game.get("canonical_game_id", "").strip()
+        participants = participant_programs(game)
         game_assertions = [
             row
             for row in assertions_by_game.get(canonical_id, [])
-            if row.get("source_program_key", "").strip() in participant_programs(game)
+            if row.get("source_program_key", "").strip() in participants
         ]
         if not game_assertions:
             continue
         game_discrepancies = discrepancies_by_game.get(canonical_id, [])
 
-        # 1. Site type. Venue/geography never participates in this decision.
+        # Site type: never infer this from venue or geography.
         proposed_site = ""
         current_site = game.get("site_type", "").strip()
         if current_site in {"", "UNKNOWN"}:
-            out = _base_output_row(game, "site_type")
-            values_by_program, blank_programs = _source_program_value_state(
+            out = base_output_row(game, "site_type")
+            values_by_program, blank_programs = source_program_value_state(
                 game_assertions, canonical_site_from_assertion
             )
             known_values = {
@@ -357,13 +368,13 @@ def build_audit(repo: Path) -> dict[str, Any]:
                 for row in game_assertions
                 if canonical_site_from_assertion(row) not in {"", "UNKNOWN"}
             ]
-            _support_metadata(out, game_assertions, supporting, values_by_program, blank_programs)
-            out["evidence_values"] = "|".join(sorted(str(value) for value in known_values))
+            support_metadata(out, supporting, values_by_program, blank_programs)
+            out["evidence_values"] = "|".join(sorted(known_values))
             if review_acknowledges(game_discrepancies, "site_type"):
                 out["classification"] = "RECONCILIATION_HOLD"
                 add(review, out, "field-specific reconciliation provenance already exists")
             elif len(known_values) == 1:
-                proposed_site = str(next(iter(known_values)))
+                proposed_site = next(iter(known_values))
                 out["proposed_value"] = proposed_site
                 add(mechanical, out, "all known participant site assertions agree")
             elif len(known_values) > 1:
@@ -377,7 +388,6 @@ def build_audit(repo: Path) -> dict[str, Any]:
 
         effective_site = proposed_site or current_site
         if effective_site in {"", "UNKNOWN"}:
-            # Without independently established H/A/N, venue/geography are review-only.
             continue
 
         agreeing_assertions = [
@@ -388,71 +398,79 @@ def build_audit(repo: Path) -> dict[str, Any]:
         if not agreeing_assertions:
             continue
 
-        # 2. Venue identity. Only immutable, uniquely resolved venue IDs are mechanical.
+        # Venue: require one immutable physical identity after name+location checks.
         if canonical_venue_blank(game):
-            out = _base_output_row(game, "venue")
+            out = base_output_row(game, "venue")
 
             def venue_value(assertion: dict[str, str]):
-                venue_id, _ = resolver.resolve(assertion)
+                venue_id, _basis = resolver.resolve(assertion)
                 return venue_id or None
 
-            values_by_program, blank_programs = _source_program_value_state(
+            values_by_program, blank_programs = source_program_value_state(
                 agreeing_assertions, venue_value
             )
             resolved_values = {
                 value for values in values_by_program.values() for value in values
             }
             raw_nonblank = [
-                row for row in agreeing_assertions if row.get("curated_venue_name", "").strip()
+                row
+                for row in agreeing_assertions
+                if row.get("curated_venue_name", "").strip()
             ]
-            unresolved_rows = [
-                row for row in raw_nonblank if not resolver.resolve(row)[0]
-            ]
-            supporting = [
-                row for row in raw_nonblank if resolver.resolve(row)[0]
-            ]
-            _support_metadata(out, agreeing_assertions, supporting, values_by_program, blank_programs)
-            out["evidence_values"] = "|".join(sorted(str(value) for value in resolved_values))
+            unresolved = [row for row in raw_nonblank if not resolver.resolve(row)[0]]
+            supporting = [row for row in raw_nonblank if resolver.resolve(row)[0]]
+            support_metadata(out, supporting, values_by_program, blank_programs)
+            out["evidence_values"] = "|".join(sorted(resolved_values))
 
             if review_acknowledges(game_discrepancies, "venue"):
                 out["classification"] = "RECONCILIATION_HOLD"
                 add(review, out, "field-specific reconciliation provenance already exists")
-            elif unresolved_rows:
+            elif unresolved:
                 out["classification"] = "VENUE_IDENTITY_REVIEW"
                 details = sorted(
                     {
                         f"{row.get('source_program_key','')}:{row.get('curated_venue_name','')} ({resolver.resolve(row)[1]})"
-                        for row in unresolved_rows
+                        for row in unresolved
                     }
                 )
                 add(review, out, "; ".join(details))
             elif len(resolved_values) == 1:
-                venue_id = str(next(iter(resolved_values)))
+                venue_id = next(iter(resolved_values))
                 venue = resolver.global_by_id.get(venue_id, {})
                 out["proposed_value"] = venue.get("display_name", "").strip()
                 out["proposed_venue_id"] = venue_id
                 out["proposed_venue_key"] = venue.get("venue_key", "").strip()
-                add(mechanical, out, "all safely resolved agreeing venue assertions identify one physical venue")
+                add(
+                    mechanical,
+                    out,
+                    "all safely resolved agreeing venue assertions identify one physical venue",
+                )
             elif len(resolved_values) > 1:
                 out["classification"] = "CONFLICT_REVIEW"
-                add(review, out, "agreeing participant assertions resolve to different physical venues")
+                add(
+                    review,
+                    out,
+                    "agreeing participant assertions resolve to different physical venues",
+                )
             elif raw_nonblank:
                 out["classification"] = "VENUE_IDENTITY_REVIEW"
-                add(review, out, "venue evidence exists but physical identity is not uniquely resolved")
+                add(
+                    review,
+                    out,
+                    "venue evidence exists but physical identity is not uniquely resolved",
+                )
 
-        # 3. Location pair. Partial canonical geography is never overwritten mechanically.
+        # Location: require a complete pair; never overwrite a partial canonical pair.
         location_state = canonical_location_state(game)
         if location_state != "KNOWN":
-            out = _base_output_row(game, "location")
+            out = base_output_row(game, "location")
 
             def location_value(assertion: dict[str, str]):
                 city = assertion.get("city", "").strip()
                 state = assertion.get("state", "").strip()
-                if city and state:
-                    return (city, state)
-                return None
+                return (city, state) if city and state else None
 
-            values_by_program, blank_programs = _source_program_value_state(
+            values_by_program, blank_programs = source_program_value_state(
                 agreeing_assertions, location_value
             )
             known_values = {
@@ -461,14 +479,18 @@ def build_audit(repo: Path) -> dict[str, Any]:
             supporting = [
                 row for row in agreeing_assertions if location_value(row) is not None
             ]
-            _support_metadata(out, agreeing_assertions, supporting, values_by_program, blank_programs)
+            support_metadata(out, supporting, values_by_program, blank_programs)
             out["evidence_values"] = "|".join(
                 sorted(f"{city}, {state}" for city, state in known_values)
             )
 
             if location_state == "PARTIAL":
                 out["classification"] = "PARTIAL_CANONICAL_REVIEW"
-                add(review, out, "canonical city/state is partially populated; mechanical overwrite refused")
+                add(
+                    review,
+                    out,
+                    "canonical city/state is partially populated; mechanical overwrite refused",
+                )
             elif review_acknowledges(game_discrepancies, "location"):
                 out["classification"] = "RECONCILIATION_HOLD"
                 add(review, out, "field-specific reconciliation provenance already exists")
@@ -477,21 +499,31 @@ def build_audit(repo: Path) -> dict[str, Any]:
                 out["proposed_value"] = f"{city}, {state}"
                 out["proposed_city"] = city
                 out["proposed_state"] = state
-                add(mechanical, out, "all known agreeing participant location assertions agree")
+                add(
+                    mechanical,
+                    out,
+                    "all known agreeing participant location assertions agree",
+                )
             elif len(known_values) > 1:
                 out["classification"] = "CONFLICT_REVIEW"
                 add(review, out, "agreeing participant location assertions conflict")
 
     mechanical.sort(key=lambda row: (row["canonical_game_id"], row["field_name"]))
-    review.sort(key=lambda row: (row["canonical_game_id"], row["field_name"], row["classification"]))
+    review.sort(
+        key=lambda row: (
+            row["canonical_game_id"],
+            row["field_name"],
+            row["classification"],
+        )
+    )
 
-    summary_counts = Counter()
+    counts: Counter[str] = Counter()
     for row in mechanical:
-        summary_counts[f"mechanical:{row['field_name']}"] += 1
-        summary_counts[f"mechanical:{row['classification']}"] += 1
+        counts[f"mechanical:{row['field_name']}"] += 1
+        counts[f"mechanical:{row['classification']}"] += 1
     for row in review:
-        summary_counts[f"review:{row['field_name']}"] += 1
-        summary_counts[f"review:{row['classification']}"] += 1
+        counts[f"review:{row['field_name']}"] += 1
+        counts[f"review:{row['classification']}"] += 1
 
     return {
         "mechanical": mechanical,
@@ -501,7 +533,7 @@ def build_audit(repo: Path) -> dict[str, Any]:
             "assertions_scanned": len(assertions),
             "mechanical_field_candidates": len(mechanical),
             "review_field_rows": len(review),
-            "counts": dict(sorted(summary_counts.items())),
+            "counts": dict(sorted(counts.items())),
         },
     }
 
