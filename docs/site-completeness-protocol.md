@@ -10,11 +10,11 @@ The governing principles are:
 
 and, for a program's own home history:
 
-> **A published program's home venue and location chronology is a publication requirement, not a waivable unknown.**
+> **A published program's home venue and location chronology is a publication requirement, except that an exhaustively researched physical venue identity may remain explicitly unresolved when the home city/state are known and the surviving record does not support a specific building.**
 
 Most historical site facts may remain unresolved after reasonable research when the unresolved state is explicit. A school's own home venue/location is held to a stronger standard because the project deliberately researches each program's home-facility history before publication.
 
-The detailed owner standard is recorded in `docs/site-completeness-owner-standard.md`.
+The detailed owner standard is recorded in `docs/site-completeness-owner-standard.md`. The narrow historical HOME venue exception is recorded in `docs/home-venue-research-unresolved-policy.md`.
 
 ## Research-lane responsibility
 
@@ -31,17 +31,19 @@ The site census covers at least:
 
 ### Home rows
 
-Every in-scope `SOURCE_PROGRAM_HOME` row must resolve to a venue and complete city/state geography before `RESEARCH_FROZEN`.
+Every in-scope `SOURCE_PROGRAM_HOME` row must resolve to complete city/state geography before `RESEARCH_FROZEN`. Venue identity is also mandatory unless the row satisfies the dedicated historical-unrecoverable exception described below.
 
-`RESEARCHED_PARTIAL` or `RESEARCHED_UNRESOLVED` may be used while research is still in progress, but neither status waives a home-site gap. The research lane is expected to use the school's documented facility chronology to fill predecessor arenas, facility transitions, alternate home sites, temporary sites, and known one-off home venues.
+`RESEARCHED_PARTIAL` or ordinary `RESEARCHED_UNRESOLVED` may be used while research is still in progress, but neither status waives a home-site gap. The research lane is expected to use the school's documented facility chronology to fill predecessor arenas, facility transitions, alternate home sites, temporary sites, and known one-off home venues.
 
 A broad historical gap such as an entire pre-arena era must be treated as unfinished research rather than accepted as a permanent blank.
+
+Only when exhaustive historical research establishes HOME and city/state but cannot establish a specific physical venue identity may the row use `RESEARCHED_UNRESOLVED_HOME_VENUE`. That status waives only `home_missing_venue`; it never waives missing city/state and never substitutes for NCAA Tournament site completeness. The research basis must document what was checked and why stronger identification is unsupported.
 
 ### Away rows
 
 Away regular-season venue completeness is not a research-freeze blocker. A school's own research lane is not required to reconstruct every opponent building.
 
-If the away opponent is not yet published, venue/location blanks are expected reciprocal debt and may remain until that opponent is researched. When the home opponent is already published, its home-site research should be available for canonical propagation and may not be silently discarded.
+If the away opponent is not yet published, venue/location blanks are expected reciprocal debt and may remain until that opponent is researched. When the home opponent is already published, its home-site research should be available for canonical propagation and may not be silently discarded. A published home program's valid researched-unresolved venue exception may propagate as an explicitly researched blank venue, with the known city/state retained.
 
 ### Neutral rows
 
@@ -63,11 +65,12 @@ A row with a material site gap must either be repaired or have both fields popul
 Allowed `site_research_status` values:
 
 - `RESEARCHED_PARTIAL` — some site information is established, but one or more material site fields remain unresolved;
-- `RESEARCHED_UNRESOLVED` — the relevant site fact could not be safely established after deliberate research.
+- `RESEARCHED_UNRESOLVED` — the relevant non-home site fact could not be safely established after deliberate research;
+- `RESEARCHED_UNRESOLVED_HOME_VENUE` — a source-program HOME row has independently established H/A/N and complete city/state, but exhaustive historical research cannot support a specific physical venue identity.
 
 `site_research_basis` must briefly identify the evidence checked or why stronger certainty is unsupported. It should be specific enough for another researcher or the Implementation lane to understand the unresolved state. Repeating one well-supported era-level basis across several rows is acceptable when the same research conclusion genuinely applies to all of them.
 
-These statuses can account for non-home uncertainty. They do **not** satisfy `RESEARCH_FROZEN` for a source-program home row that still lacks venue or complete location.
+The dedicated HOME venue status is deliberately narrower than the other research statuses. It is valid only when `curated_site_type=SOURCE_PROGRAM_HOME`, `curated_venue_name` is blank, both city and state are populated, a substantive basis is present, and the row is not an NCAA Tournament game. It may not be used when agreeing target or reciprocal evidence already supplies a usable curated venue identity.
 
 Examples for non-home unresolved research:
 
@@ -81,13 +84,21 @@ RESEARCHED_UNRESOLVED
 Contemporary schedule and reciprocal published source checked; neutral city/state cannot be safely established.
 ```
 
-The columns are source-research metadata. They are not canonical basketball facts and are not written into `data/evidence/game-assertions.csv` by normal ingestion.
+Example for an exhaustively researched HOME venue unknown:
+
+```text
+RESEARCHED_UNRESOLVED_HOME_VENUE
+Official record book, institutional facility history, contemporary archival material, known venue chronology, and reciprocal published evidence reviewed; Starkville, MS home classification is established, but the surviving record does not identify the exact physical venue.
+```
+
+The columns are source-research metadata. They are not canonical basketball facts and are not written into `data/evidence/game-assertions.csv` by normal ingestion. A canonical HOME game using the exception must instead carry explicit `[RESEARCHED_UNRESOLVED_HOME_VENUE ...]` provenance in `notes` so the public unknown is not silent.
 
 ## What blocks RESEARCH_FROZEN
 
 `RESEARCH_FROZEN` fails when:
 
-- any source-program home row lacks venue or complete location, regardless of research-status metadata;
+- any source-program HOME row lacks complete city/state;
+- any source-program HOME venue blank lacks a valid `RESEARCHED_UNRESOLVED_HOME_VENUE` research finding;
 - any other material site-gap row is merely blank and unaccounted;
 - any stricter existing rule such as NCAA site completeness fails.
 
@@ -99,17 +110,18 @@ A portfolio therefore cannot pass solely because:
 - NCAA Tournament sites are complete;
 - aggregate record/game counts reconcile.
 
-Historical home-venue chronology must itself be complete across the program's in-scope history.
+Historical home-venue chronology must itself be researched across the program's in-scope history. Valid historical-unrecoverable venue rows remain explicitly visible rather than being converted to invented venue identities.
 
 ## Required research status card
 
 Every `RESEARCH_FROZEN` status card should include at least:
 
 ```text
-home rows missing venue: 0
+home rows missing venue: <count>
 home rows missing location: 0
 home rows missing both: 0
 home publication blockers: 0
+researched-unresolved home venue rows: <count>
 unknown H/A/N rows: <count>
 neutral rows missing venue/location: <count>/<count>
 postseason rows missing venue/location: <count>/<count>
@@ -117,6 +129,8 @@ material site-gap rows: <count>
 researched site-gap rows: <count>
 unaccounted site-gap rows: 0
 ```
+
+A nonzero `home rows missing venue` count is acceptable only when every such row is included in `researched-unresolved home venue rows`; the dedicated count must be surfaced rather than hidden.
 
 When meaningful, include the decade/era concentration of remaining non-home researched gaps.
 
@@ -127,12 +141,13 @@ Research hardening is the first defense, not the only defense.
 When a portfolio reaches the serialized Implementation lane:
 
 1. rerun the research acceptance gate after current-main rebase;
-2. reject or return to research any source-program home venue/location gap or newly exposed unaccounted source-side site debt;
-3. independently verify that source/reciprocal site evidence is not lost when canonical games are matched or created;
-4. allow away venue/location debt when the home opponent is unpublished, but propagate the home opponent's established site data when that opponent is published;
-5. for neutral games, propagate available city/state evidence and apply heightened review when both participants are published;
-6. before release, census the target program's projected public canonical history for home-site gaps, `UNKNOWN` site type, and neutral/postseason location gaps;
-7. stop before publication if the projected canonical result violates the published-site standard or is materially less complete than its available evidence without an explicit reviewed reason.
+2. reject or return to research any source-program HOME location gap, any ordinary HOME venue gap, or newly exposed unaccounted source-side site debt;
+3. independently verify that any `RESEARCHED_UNRESOLVED_HOME_VENUE` row has complete location, explicit research basis, no usable agreeing target/reciprocal venue evidence, and matching canonical provenance;
+4. independently verify that source/reciprocal site evidence is not lost when canonical games are matched or created;
+5. allow away venue/location debt when the home opponent is unpublished, but propagate the home opponent's established site data when that opponent is published;
+6. for neutral games, propagate available city/state evidence and apply heightened review when both participants are published;
+7. before release, census the target program's projected public canonical history for HOME blockers, explicit researched HOME venue unknowns, `UNKNOWN` site type, and neutral/postseason location gaps;
+8. stop before publication if the projected canonical result violates the published-site standard or is materially less complete than its available evidence without an explicit reviewed reason.
 
 The Implementation lane should not become a second research lane that repairs hundreds of historical home games. Large chronology holes belong back in research/remediation. Implementation owns detection, evidence propagation, reconciliation, and final-public completeness proof.
 
@@ -140,11 +155,11 @@ The Implementation lane should not become a second research lane that repairs hu
 
 Existing published debt is repaired separately from generic hardening. The preferred order is now:
 
-1. published-program home venue/location completeness to zero blanks;
+1. published-program HOME venue/location research to zero unexcepted blockers, with only rigorously documented historical-unrecoverable venue exceptions remaining;
 2. reciprocal propagation for away games whose home opponent is already published;
 3. neutral-site city/state completion, prioritizing published-vs-published games and postseason;
 4. neutral venue completion where support is available;
 5. remaining H/A/N classification and identity/reference cleanup;
-6. rerun the same database-wide completeness audit and quantify the remaining genuinely unresolved non-home debt.
+6. rerun the same database-wide completeness audit and quantify both the researched-unresolved HOME venue exceptions and remaining genuinely unresolved non-home debt.
 
 Generic hardening and historical-data repair should not be mixed into one pull request.
