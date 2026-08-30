@@ -258,6 +258,90 @@ class SiteRemediationAuditTests(unittest.TestCase):
             ]
             self.assertEqual(len(conflicts), 1)
 
+    def test_known_canonical_site_conflict_blocks_dependent_enrichment(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            rows = [
+                assertion("alpha", "ARAW-1"),
+                assertion(
+                    "beta",
+                    "BRAW-1",
+                    curated_site_type="SOURCE_PROGRAM_HOME",
+                    curated_venue_name="Other Arena",
+                    city="Other City",
+                    state="BB",
+                ),
+            ]
+            self.make_repo(root, assertions=rows)
+            report = build_audit(root)
+            self.assertFalse(report["mechanical"])
+            conflicts = [
+                row for row in report["review"]
+                if row["field_name"] == "site_type"
+                and row["classification"] == "CANONICAL_ASSERTION_CONFLICT"
+            ]
+            self.assertEqual(len(conflicts), 1)
+
+    def test_resolved_known_site_conflict_allows_only_canonical_agreeing_enrichment(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            rows = [
+                assertion("alpha", "ARAW-1"),
+                assertion(
+                    "beta",
+                    "BRAW-1",
+                    curated_site_type="SOURCE_PROGRAM_HOME",
+                    curated_venue_name="Other Arena",
+                    city="Other City",
+                    state="BB",
+                ),
+            ]
+            discrepancies = [
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "field_name": "site_type",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Owner-reviewed source conflict; TEAM_A_HOME retained.",
+                }
+            ]
+            self.make_repo(root, assertions=rows, discrepancies=discrepancies)
+            report = build_audit(root)
+            fields = self.mechanical_by_field(report)
+            self.assertEqual(set(fields), {"venue", "location"})
+            self.assertEqual(fields["venue"]["proposed_venue_id"], "VEN-000001")
+            self.assertEqual(fields["location"]["proposed_value"], "Alpha City, AA")
+            resolved = [
+                row for row in report["review"]
+                if row["field_name"] == "site_type"
+                and row["classification"] == "RECONCILIATION_RESOLVED"
+            ]
+            self.assertEqual(len(resolved), 1)
+
+    def test_under_review_known_site_conflict_blocks_dependent_enrichment(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            rows = [
+                assertion("alpha", "ARAW-1"),
+                assertion("beta", "BRAW-1", curated_site_type="SOURCE_PROGRAM_HOME"),
+            ]
+            discrepancies = [
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "field_name": "site_type",
+                    "status": "UNDER_REVIEW",
+                    "resolution_basis": "",
+                }
+            ]
+            self.make_repo(root, assertions=rows, discrepancies=discrepancies)
+            report = build_audit(root)
+            self.assertFalse(report["mechanical"])
+            holds = [
+                row for row in report["review"]
+                if row["field_name"] == "site_type"
+                and row["classification"] == "RECONCILIATION_HOLD"
+            ]
+            self.assertEqual(len(holds), 1)
+
     def test_field_specific_reconciliation_provenance_holds_candidate(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
