@@ -61,6 +61,22 @@ def _target_home(row: dict[str, str], school_key: str) -> bool:
     )
 
 
+def _home_venue_exception_marker_for_school(
+    game: dict[str, str], school_key: str
+) -> bool:
+    """Return whether the canonical exception marker belongs to this school.
+
+    Canonical notes are shared by both program perspectives. A valid exception for
+    one HOME program must therefore be ignored by the opponent's implementation gate
+    rather than misreported as an invalid marker from the opponent perspective.
+    """
+
+    return (
+        f"{HOME_VENUE_EXCEPTION_MARKER} source={school_key}/"
+        in game.get("notes", "")
+    )
+
+
 def _canonical_gap_categories(
     row: dict[str, str],
     school_key: str,
@@ -123,10 +139,11 @@ def _canonical_home_venue_exception(
     """Validate the narrow owner-approved historical HOME venue exception.
 
     The canonical game must remain a target HOME game with complete city/state and
-    blank venue, carry an explicit canonical provenance marker, and map to at least
-    one target source row that itself satisfies the dedicated research status. No
-    assertion that agrees with the canonical H/A/N may already supply a curated
-    venue identity; such evidence must be propagated/reconciled instead.
+    blank venue, carry an explicit canonical provenance marker for the target school,
+    and map to at least one target source row that itself satisfies the dedicated
+    research status. No assertion that agrees with the canonical H/A/N may already
+    supply a curated venue identity; such evidence must be propagated/reconciled
+    instead.
     """
 
     if not _target_home(game, school_key):
@@ -137,7 +154,7 @@ def _canonical_home_venue_exception(
         return False
     if game.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
         return False
-    if HOME_VENUE_EXCEPTION_MARKER not in game.get("notes", ""):
+    if not _home_venue_exception_marker_for_school(game, school_key):
         return False
 
     can_site = game.get("site_type", "").strip()
@@ -310,7 +327,7 @@ def implementation_site_report(
             source_rows,
             all_game_assertions,
         )
-        marker_present = HOME_VENUE_EXCEPTION_MARKER in game.get("notes", "")
+        marker_present = _home_venue_exception_marker_for_school(game, school_key)
 
         if marker_present and not home_exception:
             invalid_home_venue_exception_marker_rows += 1
@@ -445,8 +462,9 @@ def implementation_site_report(
     if invalid_home_venue_exception_marker_rows:
         errors.append(
             f"{invalid_home_venue_exception_marker_rows:,} canonical game(s) carry a "
-            "RESEARCHED_UNRESOLVED_HOME_VENUE marker without satisfying the source, "
-            "location, H/A/N, NCAA, and reciprocal-evidence requirements."
+            "RESEARCHED_UNRESOLVED_HOME_VENUE marker for the target school without "
+            "satisfying the source, location, H/A/N, NCAA, and reciprocal-evidence "
+            "requirements."
         )
     if strict_ncaa_gap_rows:
         errors.append(
