@@ -28715,7 +28715,7 @@ CBBG-0028714,1976-1977,1977-03-10,EXACT,alabama,memphis,80,63,alabama,0,NEUTRAL,
 CBBG-0028715,1976-1977,1977-03-14,EXACT,alabama,virginia-tech,79,72,alabama,0,NEUTRAL,,,,,,NIT,,,,PROVISIONAL,
 CBBG-0028716,1976-1977,1977-03-17,EXACT,alabama,houston,76,82,houston,0,NEUTRAL,,,,,,NIT,,,,PROVISIONAL,
 CBBG-0028717,1976-1977,1977-03-20,EXACT,alabama,villanova,89,102,villanova,0,NEUTRAL,,,,,,NIT,,,,PROVISIONAL,
-CBBG-0028718,1977-1978,1977-11-30,EXACT,alabama,south-carolina,92,67,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0028718,1977-1978,1977-11-30,EXACT,alabama,south-carolina,92,67,alabama,0,TEAM_B_HOME,south-carolina,carolina-coliseum,VEN-000344,Columbia,SC,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-01397.
 CBBG-0028719,1977-1978,1977-12-03,EXACT,alabama,purdue,65,82,purdue,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028720,1977-1978,1977-12-05,EXACT,alabama,tennessee-tech,94,66,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028721,1977-1978,1977-12-14,EXACT,alabama,michigan,78,63,alabama,0,NEUTRAL,,legacy-arena,VEN-000109,Birmingham,AL,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=michigan/MICHRAW-01296;venue_key=legacy-arena;site_type=NEUTRAL;fields=venue_id,venue_key]"
@@ -28918,7 +28918,7 @@ CBBG-0028917,1986-1987,1986-12-20,EXACT,alabama,app-state,95,62,alabama,0,UNKNOW
 CBBG-0028918,1986-1987,1986-12-22,EXACT,alabama,georgia,71,70,alabama,0,TEAM_B_HOME,georgia,stegeman-coliseum,VEN-000198,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-01706;venue_key=stegeman-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0028919,1986-1987,1986-12-29,EXACT,alabama,pennsylvania,110,68,alabama,0,NEUTRAL,,,,Kansas City,MO,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028920,1986-1987,1987-01-03,EXACT,alabama,mississippi-state,64,49,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0028921,1986-1987,1987-01-12,EXACT,alabama,south-carolina,73,63,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0028921,1986-1987,1987-01-12,EXACT,alabama,south-carolina,73,63,alabama,0,TEAM_A_HOME,alabama,,,,,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-01661.
 CBBG-0028922,1986-1987,1987-01-15,EXACT,alabama,lsu,69,65,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028923,1986-1987,1987-01-17,EXACT,alabama,ole-miss,71,62,alabama,0,TEAM_B_HOME,ole-miss,tad-smith-coliseum,VEN-000240,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-01610;venue_key=tad-smith-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0028924,1986-1987,1987-01-22,EXACT,alabama,auburn,88,82,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -28936,7 +28936,7 @@ CBBG-0028935,1987-1988,1987-11-27,EXACT,alabama,new-mexico-state,85,84,alabama,0
 CBBG-0028936,1987-1988,1987-11-28,EXACT,alabama,hawaii-pacific,91,80,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028937,1987-1988,1987-11-29,EXACT,alabama,central-michigan,83,80,alabama,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028938,1987-1988,1987-12-05,EXACT,alabama,usc,78,69,alabama,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0028939,1987-1988,1987-12-09,EXACT,alabama,south-carolina,67,73,south-carolina,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0028939,1987-1988,1987-12-09,EXACT,alabama,south-carolina,67,73,south-carolina,0,TEAM_B_HOME,south-carolina,carolina-coliseum,VEN-000344,Columbia,SC,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-01682.
 CBBG-0028940,1987-1988,1987-12-12,EXACT,alabama,ul-monroe,86,66,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028941,1987-1988,1987-12-19,EXACT,alabama,montana-state,69,77,montana-state,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0028942,1987-1988,1987-12-21,EXACT,alabama,mississippi-valley-state,64,46,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -29107,7 +29107,7 @@ CBBG-0029106,1994-1995,1994-12-29,EXACT,alabama,california,76,73,alabama,1,UNKNO
 CBBG-0029107,1994-1995,1995-01-02,EXACT,alabama,central-connecticut,86,39,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029108,1994-1995,1995-01-07,EXACT,alabama,vmi,93,67,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029109,1994-1995,1995-01-11,EXACT,alabama,ole-miss,74,60,alabama,0,TEAM_B_HOME,ole-miss,tad-smith-coliseum,VEN-000240,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-01836;venue_key=tad-smith-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
-CBBG-0029110,1994-1995,1995-01-14,EXACT,alabama,south-carolina,91,59,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0029110,1994-1995,1995-01-14,EXACT,alabama,south-carolina,91,59,alabama,0,TEAM_A_HOME,alabama,,,,,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-01892.
 CBBG-0029111,1994-1995,1995-01-17,EXACT,alabama,lsu,61,74,lsu,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029112,1994-1995,1995-01-21,EXACT,alabama,mississippi-state,68,64,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029113,1994-1995,1995-02-01,EXACT,alabama,auburn,65,63,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -29541,7 +29541,7 @@ CBBG-0029540,2011-2012,2012-02-11,EXACT,alabama,lsu,58,67,lsu,0,TEAM_B_HOME,lsu,
 CBBG-0029541,2011-2012,2012-02-25,EXACT,alabama,mississippi-state,67,50,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029542,2011-2012,2012-02-29,EXACT,alabama,auburn,55,49,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029543,2011-2012,2012-03-03,EXACT,alabama,ole-miss,51,60,ole-miss,0,TEAM_B_HOME,ole-miss,tad-smith-coliseum,VEN-000240,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-02386;venue_key=tad-smith-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
-CBBG-0029544,2011-2012,2012-03-08,EXACT,alabama,south-carolina,63,57,alabama,0,UNKNOWN,,,,,,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,
+CBBG-0029544,2011-2012,2012-03-08,EXACT,alabama,south-carolina,63,57,alabama,0,NEUTRAL,,smoothie-king-center,VEN-000188,New Orleans,LA,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-02447.
 CBBG-0029545,2011-2012,2012-03-16,EXACT,alabama,creighton,57,58,creighton,0,UNKNOWN,,greensboro-coliseum,VEN-000076,Greensboro,NC,NCAA_TOURNAMENT,R64,,,PROVISIONAL,
 CBBG-0029546,2012-2013,2012-11-09,EXACT,alabama,south-dakota-state,70,67,alabama,0,TEAM_A_HOME,alabama,coleman-coliseum,VEN-000048,Tuscaloosa,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=alabama/ALARAW-02487;venue_key=coleman-coliseum;site_type=TEAM_A_HOME;fields=venue_key]
 CBBG-0029547,2012-2013,2012-11-11,EXACT,alabama,west-alabama,80,49,alabama,0,TEAM_A_HOME,alabama,coleman-coliseum,VEN-000048,Tuscaloosa,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=alabama/ALARAW-02488;venue_key=coleman-coliseum;site_type=TEAM_A_HOME;fields=venue_key]
@@ -29630,7 +29630,7 @@ CBBG-0029629,2015-2016,2015-12-21,EXACT,alabama,oregon,68,72,oregon,0,UNKNOWN,,,
 CBBG-0029630,2015-2016,2015-12-29,EXACT,alabama,jacksonville-state,67,59,alabama,1,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029631,2015-2016,2016-01-02,EXACT,alabama,norfolk-state,68,49,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029632,2015-2016,2016-01-07,EXACT,alabama,ole-miss,66,74,ole-miss,0,TEAM_B_HOME,ole-miss,sjb-pavilion,VEN-000187,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-02507;venue_key=sjb-pavilion;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
-CBBG-0029633,2015-2016,2016-01-13,EXACT,alabama,south-carolina,73,50,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0029633,2015-2016,2016-01-13,EXACT,alabama,south-carolina,73,50,alabama,0,TEAM_A_HOME,alabama,,,,,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-02562.
 CBBG-0029634,2015-2016,2016-01-19,EXACT,alabama,auburn,77,83,auburn,0,TEAM_B_HOME,auburn,neville-arena,VEN-000150,Auburn,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=auburn/AUBRAW-02445;venue_key=neville-arena;site_type=TEAM_B_HOME;fields=venue_key]
 CBBG-0029635,2015-2016,2016-01-23,EXACT,alabama,lsu,70,72,lsu,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029636,2015-2016,2016-01-30,EXACT,alabama,south-carolina,64,78,south-carolina,0,TEAM_B_HOME,south-carolina,,,Columbia,SC,REGULAR_SEASON,,,,PROVISIONAL,
@@ -29743,7 +29743,7 @@ CBBG-0029742,2019-2020,2020-02-15,EXACT,alabama,lsu,88,82,alabama,0,UNKNOWN,,,,,
 CBBG-0029743,2019-2020,2020-02-19,EXACT,alabama,texas-a-m,68,74,texas-a-m,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029744,2019-2020,2020-02-22,EXACT,alabama,ole-miss,103,78,alabama,0,TEAM_B_HOME,ole-miss,sjb-pavilion,VEN-000187,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-02653;venue_key=sjb-pavilion;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0029745,2019-2020,2020-02-25,EXACT,alabama,mississippi-state,73,80,mississippi-state,0,TEAM_B_HOME,mississippi-state,humphrey-coliseum,VEN-000087,Starkville,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=mississippi-state/MSURAW-02651;venue_key=humphrey-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
-CBBG-0029746,2019-2020,2020-02-29,EXACT,alabama,south-carolina,90,86,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0029746,2019-2020,2020-02-29,EXACT,alabama,south-carolina,90,86,alabama,0,TEAM_A_HOME,alabama,,,,,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-02711.
 CBBG-0029747,2020-2021,2020-11-25,EXACT,alabama,jacksonville-state,81,57,alabama,0,TEAM_A_HOME,alabama,coleman-coliseum,VEN-000048,Tuscaloosa,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=alabama/ALARAW-02757;venue_key=coleman-coliseum;site_type=TEAM_A_HOME;fields=venue_key]
 CBBG-0029748,2020-2021,2020-11-30,EXACT,alabama,stanford,64,82,stanford,0,NEUTRAL,,,,Asheville,NC,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029749,2020-2021,2020-12-01,EXACT,alabama,unlv,86,74,alabama,0,NEUTRAL,,,,Asheville,NC,REGULAR_SEASON,,,,PROVISIONAL,
@@ -29788,7 +29788,7 @@ CBBG-0029787,2021-2022,2022-01-29,EXACT,alabama,baylor,87,78,alabama,0,UNKNOWN,,
 CBBG-0029788,2021-2022,2022-02-01,EXACT,alabama,auburn,81,100,auburn,0,TEAM_B_HOME,auburn,neville-arena,VEN-000150,Auburn,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=auburn/AUBRAW-02645;venue_key=neville-arena;site_type=TEAM_B_HOME;fields=venue_key]
 CBBG-0029789,2021-2022,2022-02-09,EXACT,alabama,ole-miss,97,83,alabama,0,TEAM_B_HOME,ole-miss,sjb-pavilion,VEN-000187,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-02710;venue_key=sjb-pavilion;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0029790,2021-2022,2022-02-16,EXACT,alabama,mississippi-state,80,75,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0029791,2021-2022,2022-02-26,EXACT,alabama,south-carolina,90,71,alabama,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0029791,2021-2022,2022-02-26,EXACT,alabama,south-carolina,90,71,alabama,0,TEAM_A_HOME,alabama,,,,,REGULAR_SEASON,,,,PROVISIONAL,South Carolina onboarding: previously UNKNOWN H/A/N resolved from official target source SCARAW-02762.
 CBBG-0029792,2021-2022,2022-03-02,EXACT,alabama,texas-a-m,71,87,texas-a-m,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0029793,2021-2022,2022-03-05,EXACT,alabama,lsu,77,80,lsu,1,TEAM_B_HOME,lsu,pete-maravich-assembly-center,VEN-000163,Baton Rouge,LA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=lsu/LSURAW-02840;venue_key=pete-maravich-assembly-center;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0029794,2021-2022,2022-03-18,EXACT,alabama,notre-dame,64,78,notre-dame,0,UNKNOWN,,gainbridge-fieldhouse,VEN-000070,Indianapolis,IN,NCAA_TOURNAMENT,R64,,,PROVISIONAL,
@@ -42001,7 +42001,7 @@ CBBG-0042000,1945-1946,1945-12-12,EXACT,clemson,georgia,34,41,georgia,0,TEAM_A_H
 CBBG-0042001,1945-1946,1946-01-12,EXACT,chattanooga,georgia,36,58,georgia,0,TEAM_B_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00626;venue_key=woodruff-hall;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0042002,1945-1946,1946-01-18,EXACT,georgia,south-carolina,30,42,south-carolina,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00628;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0042003,1945-1946,1946-02-06,EXACT,georgia,georgia-tech,50,40,georgia,0,TEAM_B_HOME,georgia-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0042004,1945-1946,1946-02-09,EXACT,georgia,south-carolina,36,47,south-carolina,0,TEAM_B_HOME,south-carolina,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0042004,1945-1946,1946-02-09,EXACT,georgia,south-carolina,36,47,south-carolina,0,TEAM_B_HOME,south-carolina,carolina-fieldhouse,VEN-000345,Columbia,SC,REGULAR_SEASON,,,,PROVISIONAL,"South Carolina onboarding: Carolina Fieldhouse / Columbia, SC filled from the owner-approved South Carolina HOME ruling and verified 1927-1968 homecourt chronology."
 CBBG-0042005,1945-1946,1946-02-15,EXACT,georgia,georgia-tech,46,43,georgia,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00637;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0042006,1945-1946,1946-02-21,EXACT,clemson,georgia,51,72,georgia,0,TEAM_B_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00639;venue_key=woodruff-hall;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0042007,1945-1946,1946-02-28,EXACT,georgia,georgia-tech,36,30,georgia,0,NEUTRAL,,jefferson-county-armory,VEN-000248,Louisville,KY,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00640;venue_key=jefferson-county-armory;site_type=NEUTRAL;fields=venue_id,venue_key]"
@@ -42064,7 +42064,7 @@ CBBG-0042063,1950-1951,1950-12-14,EXACT,clemson,georgia,45,58,georgia,0,TEAM_B_H
 CBBG-0042064,1950-1951,1950-12-18,EXACT,clemson,georgia,70,69,clemson,0,TEAM_A_HOME,clemson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042065,1950-1951,1951-01-09,EXACT,georgia,georgia-tech,50,56,georgia-tech,0,TEAM_B_HOME,georgia-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042066,1950-1951,1951-01-15,EXACT,georgia,tulane,72,70,georgia,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00753;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
-CBBG-0042067,1950-1951,1951-01-18,EXACT,georgia,south-carolina,59,57,georgia,0,UNKNOWN,,,,Savannah,GA,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0042067,1950-1951,1951-01-18,EXACT,georgia,south-carolina,59,57,georgia,0,NEUTRAL,,,,Savannah,GA,REGULAR_SEASON,,,,PROVISIONAL,"South Carolina onboarding: owner-approved reciprocal research establishes the selected 1951-01-18 Georgia game as neutral in Savannah, GA; exact physical venue remains unresolved."
 CBBG-0042068,1950-1951,1951-01-20,EXACT,georgia,georgia-tech,77,66,georgia,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00755;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0042069,1950-1951,1951-01-23,EXACT,georgia,mercer,60,58,georgia,0,TEAM_B_HOME,mercer,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042070,1950-1951,1951-02-06,EXACT,georgia,georgia-tech,54,53,georgia,0,TEAM_B_HOME,georgia-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -42126,7 +42126,7 @@ CBBG-0042125,1955-1956,1956-03-05,EXACT,florida-state,georgia,80,75,florida-stat
 CBBG-0042126,1956-1957,1956-12-05,EXACT,georgia,mercer,88,77,georgia,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00892;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0042127,1956-1957,1956-12-08,EXACT,georgia,south-carolina,74,97,south-carolina,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00893;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0042128,1956-1957,1956-12-18,EXACT,georgia,georgia-tech,53,80,georgia-tech,0,TEAM_B_HOME,georgia-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0042129,1956-1957,1956-12-21,EXACT,georgia,south-carolina,81,96,south-carolina,0,TEAM_B_HOME,south-carolina,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0042129,1956-1957,1956-12-21,EXACT,georgia,south-carolina,81,96,south-carolina,0,TEAM_B_HOME,south-carolina,carolina-fieldhouse,VEN-000345,Columbia,SC,REGULAR_SEASON,,,,PROVISIONAL,"South Carolina onboarding: Carolina Fieldhouse / Columbia, SC filled from the owner-approved South Carolina HOME ruling and verified 1927-1968 homecourt chronology."
 CBBG-0042130,1956-1957,1956-12-27,EXACT,clemson,georgia,76,84,georgia,0,NEUTRAL,,,,Jacksonville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042131,1956-1957,1956-12-28,EXACT,georgia,south-carolina,64,62,georgia,0,NEUTRAL,,,,Jacksonville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042132,1956-1957,1957-01-01,EXACT,florida-state,georgia,68,72,georgia,0,TEAM_A_HOME,florida-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -42135,7 +42135,7 @@ CBBG-0042134,1956-1957,1957-01-21,EXACT,florida-state,georgia,86,63,florida-stat
 CBBG-0042135,1956-1957,1957-01-23,EXACT,georgia,mercer,71,91,mercer,0,TEAM_B_HOME,mercer,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042136,1956-1957,1957-02-14,EXACT,georgia,georgia-tech,65,67,georgia-tech,0,TEAM_A_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00910;venue_key=woodruff-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0042137,1956-1957,1957-02-23,EXACT,georgia,georgia-tech,60,74,georgia-tech,0,TEAM_B_HOME,georgia-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0042138,1957-1958,1957-12-02,EXACT,georgia,south-carolina,87,95,south-carolina,0,TEAM_B_HOME,south-carolina,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0042138,1957-1958,1957-12-02,EXACT,georgia,south-carolina,87,95,south-carolina,0,TEAM_B_HOME,south-carolina,carolina-fieldhouse,VEN-000345,Columbia,SC,REGULAR_SEASON,,,,PROVISIONAL,"South Carolina onboarding: Carolina Fieldhouse / Columbia, SC filled from the owner-approved South Carolina HOME ruling and verified 1927-1968 homecourt chronology."
 CBBG-0042139,1957-1958,1957-12-04,EXACT,clemson,georgia,60,72,georgia,0,TEAM_A_HOME,clemson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042140,1957-1958,1957-12-19,EXACT,georgia,georgia-tech,69,68,georgia,0,TEAM_B_HOME,georgia-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0042141,1957-1958,1957-12-30,EXACT,georgia,south-carolina,77,58,georgia,0,NEUTRAL,,,,Jacksonville,FL,REGULAR_SEASON,,,,PROVISIONAL,
