@@ -267,7 +267,7 @@ siena,11,6,7,0,0,ROUND_OF_32,2009,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-p
 siu-edwardsville,0,1,1,0,0,ROUND_OF_64,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 smu,16,3,13,1,0,FINAL_FOUR,1956,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 south-alabama,11,5,8,0,0,ROUND_OF_32,1989,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-south-carolina,6,2,10,1,0,FINAL_FOUR,2017,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+south-carolina,6,2,10,1,0,FINAL_FOUR,2017,VERIFIED,"Owner Gate 1 verified: 6 conference regular-season titles, 2 conference tournament titles, 10 NCAA appearances, 1 Final Four, 0 national championships, best finish Final Four in 2017.",MATCH,Verified through onboarding plan b04ed88ae7e7.
 south-carolina-state,8,5,5,0,0,ROUND_OF_64,2003,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 south-carolina-upstate,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 south-dakota,1,1,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

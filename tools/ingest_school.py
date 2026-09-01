@@ -49,6 +49,7 @@ from location_safety import (
 )
 from ncaa_safety import canonical_ncaa_errors
 from program_history import history_scope_errors, partition_source_rows
+from site_completeness import researched_unresolved_home_venue
 from venue_reference import (
     load_global_venue_reference,
     school_venue_reference_errors,
@@ -354,8 +355,11 @@ def discrepancy_candidates(
 
     src_site, _ = source_site_to_canonical(source)
     can_site = canonical.get("site_type", "").strip()
-    if src_site != "UNKNOWN" and can_site and can_site != "UNKNOWN" and src_site != can_site:
-        result.append(("site_type", src_site, can_site))
+    if src_site != "UNKNOWN":
+        if not can_site or can_site == "UNKNOWN":
+            result.append(("site_type", src_site, can_site or "UNKNOWN"))
+        elif src_site != can_site:
+            result.append(("site_type", src_site, can_site))
 
     src_game_type = source.get("curated_game_type", "").strip()
     can_game_type = canonical.get("game_type", "").strip()
@@ -897,6 +901,14 @@ def build_new_canonical(
             venue_key,
             site_type,
             registry_fields,
+        )
+
+    if researched_unresolved_home_venue(source):
+        notes = append_note(
+            notes,
+            "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+            f"source={source.get('source_program_key', '').strip()}/"
+            f"{source.get('source_game_id', '').strip()}]",
         )
 
     return {
