@@ -13,11 +13,14 @@ Read these process documents together before onboarding work:
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
+- `docs/research-freeze-self-challenge.md`
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
 more specific than the older fast-path wording. The site-completeness protocol is
 controlling for research-accounted venue/location/H-A-N gaps and the independent
-post-reconciliation publication gate.
+post-reconciliation publication gate. The research-freeze self-challenge is controlling
+for the final adversarial review required before a Research lane may certify large or
+suspicious residual debt as genuinely unresolved.
 
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
@@ -26,6 +29,9 @@ post-reconciliation publication gate.
    site facts, but HOME venue/location gaps, UNKNOWN H/A/N, non-NCAA neutral gaps, and
    conference-tournament/NIT/POSTSEASON site gaps must be explicitly research-accounted;
    silent blanks do not pass. NCAA rows retain the stricter complete-site requirement.
+   A Research lane must also complete the required adversarial pre-freeze self-challenge
+   in `docs/research-freeze-self-challenge.md`; a mechanical `research-check` pass alone
+   is not sufficient to certify `RESEARCH_FROZEN`.
 3. Perform current-main rebase and stable Phase 0 staging with
    `python tools/stage_research_portfolio.py ...`; prefer one guarded phase-sized
    operation over many tiny interactive command handoffs. Ambiguous global identity
@@ -77,6 +83,7 @@ unresolved discrepancies.
 * Return to the owner only when a new judgment is required about history scope, game identity or inclusion, opponent identity, home/away/neutral classification, venue/location truth, a controlling canonical historical fact, accomplishments, unresolved-conflict publication, or final preview approval.
 * A technical failure after owner approval must be diagnosed and repaired generically where possible; do not ask the owner to re-review unchanged historical decisions merely because the tooling implementation changed.
 * Technical work should be batched at phase boundaries. Repeated one-command-at-a-time owner handoffs for deterministic setup are a process regression unless repository state is unexpected.
+* Research lanes should perform the required pre-freeze self-challenge autonomously; do not create an extra owner approval loop merely because large researched-unknown populations require adversarial review.
 
 ## Git safety
 
@@ -97,8 +104,11 @@ unresolved discrepancies.
   Preview deployment as Production.
 - Flag any onboarding path that seals Gate 1 before the filled review has passed the
   disposable pre-seal technical rehearsal.
-- Flag any research-freeze path that allows material site gaps to remain silent or any
-  implementation/release path that can lose known target/reciprocal site evidence
-  without field-specific reconciliation provenance.
+- Flag any research-freeze path that allows material site gaps to remain silent, treats
+  a mechanical `research-check` pass as sufficient without the required adversarial
+  self-challenge, or allows large residual HOME/H-A-N/date debt to survive without the
+  evidence accounting required by `docs/research-freeze-self-challenge.md`.
+- Flag any implementation/release path that can lose known target/reciprocal site
+  evidence without field-specific reconciliation provenance.
 - Flag school-specific hard-coded pre-scope exclusion counts; scope tests must enforce
   the reciprocal-evidence invariant generically.
