@@ -1,0 +1,40 @@
+name: One-time Ohio State Saint Joseph source key
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Print Saint Joseph source rows
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,re
+          from pathlib import Path
+          def norm(v):
+              v=(v or '').lower().replace('&',' and ')
+              v=re.sub(r'[^a-z0-9]+',' ',v)
+              return ' '.join(v.split())
+          with Path('schools/ohio-state/source-games.csv').open(encoding='utf-8-sig',newline='') as f:
+              rows=list(csv.DictReader(f))
+          found=[]
+          for r in rows:
+              hay=' '.join([r.get('source_opponent_label',''),r.get('normalized_opponent_name',''),r.get('normalized_opponent_key','')])
+              if 'joseph' in norm(hay):
+                  found.append(r)
+          print('FOUND='+str(len(found)))
+          for r in found:
+              print('|'.join([r.get('source_game_id',''),r.get('season_label',''),r.get('game_date',''),r.get('source_opponent_label',''),r.get('normalized_opponent_name',''),r.get('normalized_opponent_key',''),r.get('opponent_current_d1',''),r.get('raw_text','')]))
+          assert found
+          PY
