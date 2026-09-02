@@ -83,3 +83,31 @@ The original 65 local `venues.csv` rows were compared against `data/reference/ve
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=fb886afc1f940ddc9e5904908cc2f2c5cf7077cb` from `research_base_sha=fb886afc1f940ddc9e5904908cc2f2c5cf7077cb`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Authoritative preflight blocker repairs
+
+Three bounded normalization defects discovered by authoritative onboarding
+preflight were corrected without reopening the research game universe,
+opponent identities, results, or history scope:
+
+- **1979-03-15 vs. Alabama (NIT):** official Texas A&M NIT history places the
+  72-68 Alabama win in Houston. The source row is normalized from the
+  incorrectly assigned Madison Square Garden / New York location to **The
+  Summit, Houston, TX**, reusing current-main `VEN-000210`.
+  Official evidence:
+  https://12thman.com/news/2005/03/15/aggies-face-clemson-in-first-round-nit-battle
+- **1964-03-09 vs. Texas Western (NCAA):** official Texas A&M history identifies
+  the game as an NCAA first-round loss. The 25-team field used preliminary
+  games before the 16-team regional stage, so current project bracket-stage
+  taxonomy normalizes the row to **Play-in**.
+  Official evidence:
+  https://12thman.com/news/2011/03/15/texas-am-heads-to-chicago-for-ncaa-secondthird-rounds
+- **1975-03-15 vs. Cincinnati (NCAA):** Texas A&M explicitly describes the
+  tournament as a 32-team field and the Cincinnati game as its first round.
+  Current project bracket-stage taxonomy therefore normalizes it to **R32**.
+  Official evidence:
+  https://12thman.com/news/2001/01/04/am-to-honor-four-championship-teams-on-saturday
+
+Raw source text is unchanged. These are implementation-stage factual
+normalizations required to clear machine blockers, not owner reconciliation
+decisions.
