@@ -1,0 +1,41 @@
+name: One-time comprehensive opponent remediation rehearsal v4
+on:
+  push:
+    branches: [scratch/opponent-identity-comprehensive-rehearsal-v4]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: scratch/opponent-identity-comprehensive-rehearsal-v4
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v4
+          path: /tmp/v4
+          github-token: ${{ github.token }}
+          run-id: 33657308070
+      - name: Create exact-main disposable worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git worktree add --detach /tmp/rehearsal 25d4e02ea492ad2af96f4ae40822431db7ecc50a
+          test "$(git -C /tmp/rehearsal rev-parse HEAD)" = 25d4e02ea492ad2af96f4ae40822431db7ecc50a
+      - name: Execute comprehensive rehearsal
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/scratch_comprehensive_rehearsal_v4.py /tmp/rehearsal /tmp/v4
+      - name: Prove source checkout untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git status --porcelain)"
+          echo 'PASS: source checkout clean; all basketball-data mutation confined to disposable worktree.'
