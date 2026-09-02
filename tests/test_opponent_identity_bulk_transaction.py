@@ -189,6 +189,26 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(plan['canonical_pairs'][0]['absorbed_canonical_game_id'],'CBBG-2')
         self.assertEqual(plan['canonical_pairs'][0]['final_canonical_values']['game_date'],'2000-01-01')
 
+    def test_omitted_global_package_usage_fails_and_rolls_back(self):
+        self._manifest()
+        self._resolution()
+        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[game('CBBG-1','old-target')])
+        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[['A1','CBBG-1','alpha','SRC-1','old-target']])
+        (self.repo/'schools/beta').mkdir(parents=True,exist_ok=True)
+        self._write(self.repo/'schools/beta/opponents.csv',OPPONENT_HEADERS,[[
+            'beta','Old Target','old-target','Old Target','No','1','1999-2000','1999-2000'
+        ]])
+        self._write(self.repo/'schools/beta/source-games.csv',SOURCE_HEADERS,[[
+            'BETA-1','beta','1999-2000','','Old Target','Old Target','old-target','No','','','W','0','beta raw'
+        ]])
+        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        before=(self.repo/'schools/alpha/source-games.csv').read_bytes()
+        with self.assertRaisesRegex(bulk.BulkTransactionError,'stale school-package key remains'):
+            bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)
+        self.assertEqual((self.repo/'schools/alpha/source-games.csv').read_bytes(),before)
+        self.assertEqual(self._read(self.repo/'data/canonical/games.csv')[0]['team_b_key'],'old-target')
+
     def test_hash_mismatch_refuses_before_write(self):
         self._manifest(); self._resolution()
         self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[game('CBBG-1','old-target')])
