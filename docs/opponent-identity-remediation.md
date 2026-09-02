@@ -113,9 +113,31 @@ An exact-date canonical collision is a blocker, not an instruction to delete a r
 It means the identity repair has exposed two canonical rows that may represent the
 same real game and must be reconciled under the project's one-real-game rule.
 
+## Conflict-aware collision audit
+
+The planner's exact signature includes score and overtime. That makes it a strong
+first-pass duplicate detector but not a complete reconciliation boundary: two source
+representations of one real game may disagree on score, overtime, site, or another
+canonical field.
+
+After a key-merge plan is generated, run:
+
+```bash
+python tools/opponent_identity_collision_audit.py /path/to/decisions.csv \
+  --output /tmp/opponent-collision-audit.json
+```
+
+The companion audit groups affected rows by mapped program pair and exact date before
+requiring score/overtime agreement. It classifies exact core matches separately from
+same-date identity conflicts and reports field-level differences. Every affected
+stale-key canonical row must therefore be explained before apply; a historical field
+disagreement is never permission to preserve a duplicate real game.
+
+See `docs/opponent-identity-collision-audit.md`.
+
 ## Apply boundary
 
-The current tool is intentionally read-only. Do not manually edit canonical or
+The current tools are intentionally read-only. Do not manually edit canonical or
 evidence CSVs from a plan.
 
 A transactional apply implementation must be added and tested before the first
@@ -124,6 +146,10 @@ revalidate fingerprints, update every affected source/reference/generated layer
 consistently, reconcile duplicate canonical games without changing permanent surviving
 IDs casually, run repository validation/site build/tests, and produce exact Preview
 and Production proof.
+
+Before seal, every affected stale-key canonical row must be accounted for by the
+collision audit as either a reviewed same-date collision/conflict or an explicitly
+researched unpaired case.
 
 ## Legacy cleanup exit criteria
 
