@@ -119,6 +119,30 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(rows[0]['venue_key'],'target-gym')
         self.assertEqual({r['canonical_game_id'] for r in self._read(self.repo/'data/evidence/game-assertions.csv')},{'CBBG-9'})
 
+    def test_pair_retires_site_mismatched_registry_fallback_marker(self):
+        self._manifest()
+        self._resolution()
+        marker = (
+            '[VENUE_REGISTRY_FALLBACK source=alpha/SRC-1;'
+            'venue_key=old-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]'
+        )
+        stale = game(
+            'CBBG-9','old-target',site='UNKNOWN',home='',venue='',city='',notes=marker
+        )
+        counterpart = game(
+            'CBBG-2','target',site='TEAM_B_HOME',home='target',venue='target-gym',city='Target City'
+        )
+        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[stale,counterpart])
+        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[
+            ['A1','CBBG-9','alpha','SRC-1','old-target'],['A2','CBBG-2','target','T-1','alpha']
+        ])
+        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        notes=plan['canonical_pairs'][0]['final_canonical_values']['notes']
+        self.assertNotIn('VENUE_REGISTRY_FALLBACK',notes)
+        self.assertIn('retired_registry_fallbacks=1',notes)
+        self.assertIn('canonical_site_type=TEAM_B_HOME',notes)
+
     def test_same_date_core_conflict_requires_explicit_resolution(self):
         self._manifest()
         self._resolution()
