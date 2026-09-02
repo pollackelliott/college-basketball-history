@@ -1,0 +1,66 @@
+name: One-time owner non-D1 target registry audit
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct owner review and print exact registry candidates
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src=Path('.github/workflows/one-time-owner-nond1-comprehensive-audit.yml').read_text()
+          marker="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=src.index(marker)+len(marker); b=src.index('\n          CSV',a)
+          lines=[line[10:] if line.startswith('          ') else line for line in src[a:b].splitlines()]
+          Path('/tmp/owner_scan.csv').write_text('\n'.join(lines)+'\n')
+          PY
+          python - <<'PY'
+          import csv,re,json
+          from collections import defaultdict
+          from difflib import SequenceMatcher
+          from pathlib import Path
+          def rows(p):
+              with Path(p).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          def norm(v):
+              v=(v or '').lower().replace('&',' and ')
+              v=re.sub(r'[^a-z0-9]+',' ',v)
+              return ' '.join(v.split())
+          review=rows('/tmp/owner_scan.csv')
+          programs=rows('data/reference/programs.csv')
+          aliases=rows('data/reference/program-names.csv')
+          entries=[]
+          for r in programs:
+              k=r.get('program_key','').strip()
+              for field in ('program_name','display_name'):
+                  n=r.get(field,'').strip()
+                  if n:entries.append((n,k,'PROGRAM:'+field,r.get('current_d1','').strip()))
+          for r in aliases:
+              if r.get('verification_status','').strip()!='VERIFIED':continue
+              n=r.get('alias_name','').strip(); k=r.get('program_key','').strip()
+              if n:entries.append((n,k,'VERIFIED_ALIAS',next((p.get('current_d1','').strip() for p in programs if p.get('program_key','').strip()==k),'')))
+          targets=sorted({r['target'] for r in review if r['status'] in ('CONFIRMED','PROBABLE')})
+          for t in targets:
+              exact=[e for e in entries if norm(e[0])==norm(t)]
+              if exact:
+                  print('TARGET|'+t+'|EXACT|'+json.dumps(sorted(set(exact)),ensure_ascii=False,separators=(',',':')))
+                  continue
+              ranked=[]
+              for e in entries:
+                  s=SequenceMatcher(None,norm(t),norm(e[0])).ratio()
+                  if s>=.55:ranked.append((s,e))
+              ranked=sorted(ranked,key=lambda x:(-x[0],x[1][0],x[1][1]))[:8]
+              print('TARGET|'+t+'|NO_EXACT|'+json.dumps([(round(s,3),)+e for s,e in ranked],ensure_ascii=False,separators=(',',':')))
+          PY
