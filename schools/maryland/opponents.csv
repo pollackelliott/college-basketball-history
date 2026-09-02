@@ -4,7 +4,7 @@ index,index,source_program_key,source_opponent_label,canonical_opponent_key,cano
 2,2,maryland,Air Force,air-force,Air Force,Yes,2,1977-1978,1978-1979,RESOLVED,Current D1 registry / Maryland source normalization,,
 3,3,maryland,Ala.-Anchorage,alaska-anchorage,Alaska-Anchorage,No,1,1984-1985,1984-1985,RESOLVED,Historical/non-current source identity or documented institutional lineage,,
 4,4,maryland,Alabama,alabama,Alabama,Yes,8,1924-1925,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
-5,5,maryland,Albany,albany,Albany,Yes,1,2011-2012,2011-2012,RESOLVED,Current D1 registry / Maryland source normalization,,
+5,5,maryland,Albany,ualbany,UAlbany,Yes,1,2011-2012,2011-2012,RESOLVED,Current D1 registry / Maryland source normalization,,
 6,6,maryland,Alcorn State,alcorn-state,Alcorn State,Yes,4,1989-1990,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
 7,7,maryland,American,american-university,American,Yes,18,1926-1927,2016-2017,RESOLVED,Current D1 registry / Maryland source normalization,,
 8,8,maryland,Appalachian State,app-state,Appalachian State,Yes,2,1974-1975,1976-1977,RESOLVED,Current D1 registry / Maryland source normalization,,
@@ -123,14 +123,14 @@ index,index,source_program_key,source_opponent_label,canonical_opponent_key,cano
 121,121,maryland,Kent,kent-state,Kent State,Yes,1,1972-1973,1972-1973,RESOLVED,Current D1 registry / Maryland source normalization,,
 122,122,maryland,Kentucky,kentucky,Kentucky,Yes,14,1927-1928,2012-2013,RESOLVED,Current D1 registry / Maryland source normalization,,
 123,123,maryland,Kentucky Wesleyan,kentucky-wesleyan,Kentucky Wesleyan,No,1,1953-1954,1953-1954,RESOLVED,Historical/non-current source identity or documented institutional lineage,,
-124,124,maryland,LIU-Brooklyn,liu,LIU,Yes,1,2012-2013,2012-2013,RESOLVED,Current D1 registry / Maryland source normalization,,Normalized to the LIU program lineage.
+124,124,maryland,LIU-Brooklyn,long-island-university,Long Island University,Yes,1,2012-2013,2012-2013,RESOLVED,Current D1 registry / Maryland source normalization,,Normalized to the LIU program lineage.
 125,125,maryland,LSU,lsu,LSU,Yes,1,2018-2019,2018-2019,RESOLVED,Current D1 registry / Maryland source normalization,,
 126,126,maryland,La Salle,la-salle,La Salle,Yes,4,1983-1984,2020-2021,RESOLVED,Current D1 registry / Maryland source normalization,,
 127,127,maryland,Lafayette,lafayette,Lafayette,Yes,5,1924-1925,2012-2013,RESOLVED,Current D1 registry / Maryland source normalization,,
 128,128,maryland,Lamar,lamar,Lamar,Yes,1,1988-1989,1988-1989,RESOLVED,Current D1 registry / Maryland source normalization,,
 129,129,maryland,Lehigh,lehigh,Lehigh,Yes,3,1970-1971,2021-2022,RESOLVED,Current D1 registry / Maryland source normalization,,
 130,130,maryland,Liberty,liberty,Liberty,Yes,1,2004-2005,2004-2005,RESOLVED,Current D1 registry / Maryland source normalization,,
-131,131,maryland,Long Island,liu,LIU,Yes,7,1971-1972,1981-1982,RESOLVED,Current D1 registry / Maryland source normalization,,Normalized to the LIU program lineage.
+131,131,maryland,Long Island,long-island-university,Long Island University,Yes,7,1971-1972,1981-1982,RESOLVED,Current D1 registry / Maryland source normalization,,Normalized to the LIU program lineage.
 132,132,maryland,Longwood,longwood,Longwood,Yes,2,2009-2010,2010-2011,RESOLVED,Current D1 registry / Maryland source normalization,,
 133,133,maryland,Louisiana State,lsu,LSU,Yes,4,1930-1931,1988-1989,RESOLVED,Current D1 registry / Maryland source normalization,,
 134,134,maryland,Louisville,louisville,Louisville,Yes,9,1961-1962,2022-2023,RESOLVED,Current D1 registry / Maryland source normalization,,
@@ -157,7 +157,7 @@ index,index,source_program_key,source_opponent_label,canonical_opponent_key,cano
 155,155,maryland,Michigan,michigan,Michigan,Yes,24,1926-1927,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
 156,156,maryland,Michigan State,michigan-state,Michigan State,Yes,26,1955-1956,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
 157,157,maryland,Minnesota,minnesota,Minnesota,Yes,21,1960-1961,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
-158,158,maryland,Mississippi,mississippi,Mississippi,Yes,2,1928-1929,1987-1988,RESOLVED,Current D1 registry / Maryland source normalization,,
+158,158,maryland,Mississippi,ole-miss,Ole Miss,Yes,2,1928-1929,1987-1988,RESOLVED,Current D1 registry / Maryland source normalization,,
 159,159,maryland,Mississippi State,mississippi-state,Mississippi State,Yes,3,1925-1926,1961-1962,RESOLVED,Current D1 registry / Maryland source normalization,,
 160,160,maryland,Missouri,missouri,Missouri,Yes,5,1987-1988,2007-2008,RESOLVED,Current D1 registry / Maryland source normalization,,
 161,161,maryland,Missouri-Kansas City,kansas-city,Kansas City,Yes,1,2006-2007,2006-2007,RESOLVED,Current D1 registry / Maryland source normalization,,
@@ -239,7 +239,7 @@ index,index,source_program_key,source_opponent_label,canonical_opponent_key,cano
 237,237,maryland,Southern Illinois,southern-illinois,Southern Illinois,Yes,1,1967-1968,1967-1968,RESOLVED,Current D1 registry / Maryland source normalization,,
 238,238,maryland,St. Bonaventure,st-bonaventure,St. Bonaventure,Yes,1,2017-2018,2017-2018,RESOLVED,Current D1 registry / Maryland source normalization,,
 239,239,maryland,St. Francis,saint-francis-pa,Saint Francis (PA),No,1,1955-1956,1955-1956,RESOLVED,Historical/non-current source identity or documented institutional lineage,,Maryland series/source context identifies Saint Francis (Pa.); retained as the Pennsylvania program identity.
-240,240,maryland,St. John’s,st-johns,St. John's,Yes,4,1941-1942,2006-2007,RESOLVED,Current D1 registry / Maryland source normalization,,
+240,240,maryland,St. John’s,st-john-s,St. John's,Yes,4,1941-1942,2006-2007,RESOLVED,Current D1 registry / Maryland source normalization,,
 241,241,maryland,St. John’s (Annapolis),st-johns-annapolis,St. John's (Annapolis),No,14,1913-1914,1938-1939,RESOLVED,Historical/non-current source identity or documented institutional lineage,,
 242,242,maryland,St. Joseph’s,saint-joseph-s,Saint Joseph's,Yes,4,1971-1972,1982-1983,RESOLVED,Current D1 registry / Maryland source normalization,,
 243,243,maryland,St. Louis,saint-louis,Saint Louis,Yes,1,1993-1994,1993-1994,RESOLVED,Current D1 registry / Maryland source normalization,,
@@ -280,7 +280,7 @@ index,index,source_program_key,source_opponent_label,canonical_opponent_key,cano
 278,278,maryland,UNC Wilmington,unc-wilmington,UNC Wilmington,Yes,3,1997-1998,2011-2012,RESOLVED,Current D1 registry / Maryland source normalization,,
 279,279,maryland,UNLV,unlv,UNLV,Yes,6,1977-1978,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
 280,280,maryland,USC,usc,USC,Yes,2,2024-2025,2025-2026,RESOLVED,Current D1 registry / Maryland source normalization,,
-281,281,maryland,USC Upstate,usc-upstate,USC Upstate,Yes,1,2014-2015,2014-2015,RESOLVED,Current D1 registry / Maryland source normalization,,
+281,281,maryland,USC Upstate,south-carolina-upstate,South Carolina Upstate,Yes,1,2014-2015,2014-2015,RESOLVED,Current D1 registry / Maryland source normalization,,
 282,282,maryland,UTEP,utep,UTEP,Yes,1,2003-2004,2003-2004,RESOLVED,Current D1 registry / Maryland source normalization,,
 283,283,maryland,Utah,utah,Utah,Yes,1,1994-1995,1994-1995,RESOLVED,Current D1 registry / Maryland source normalization,,
 284,284,maryland,Utah State,utah-state,Utah State,Yes,1,1997-1998,1997-1998,RESOLVED,Current D1 registry / Maryland source normalization,,

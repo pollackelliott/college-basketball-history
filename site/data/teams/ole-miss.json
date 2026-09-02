@@ -30,7 +30,7 @@
     "ties": 0,
     "first_season": "1908-1909",
     "last_season": "2025-2026",
-    "opponents": 305
+    "opponents": 304
   },
   "seasons": [
     {
@@ -2298,10 +2298,10 @@
         "conference_key": "horizon",
         "conference_name": "Horizon"
       },
-      "first_season": "1999-2000",
+      "first_season": "1974-1975",
       "last_season": "1999-2000",
-      "games": 1,
-      "wins": 1,
+      "games": 2,
+      "wins": 2,
       "losses": 0,
       "ties": 0
     },
@@ -5440,19 +5440,6 @@
       },
       "first_season": "2007-2008",
       "last_season": "2007-2008",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "wis-green-bay",
-      "opponent_name": "Wis.-Green Bay",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1974-1975",
-      "last_season": "1974-1975",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -12118,7 +12105,7 @@
       "administrative_note": null
     },
     {
-      "canonical_game_id": "CBBG-0032103",
+      "canonical_game_id": "CBBG-0056278",
       "season_label": "1928-1929",
       "game_date": "1929-03-01",
       "date_precision": "EXACT",
@@ -12132,9 +12119,9 @@
       "result": "W",
       "overtime_periods": 0,
       "site": "NEUTRAL",
-      "venue_key": null,
-      "venue_id": null,
-      "venue_name": null,
+      "venue_key": "atlanta-municipal-auditorium",
+      "venue_id": "VEN-000274",
+      "venue_name": "Atlanta Municipal Auditorium",
       "site_city": "Atlanta",
       "site_state": "GA",
       "game_type": "CONFERENCE_TOURNAMENT",
@@ -37022,9 +37009,9 @@
       "season_label": "1974-1975",
       "game_date": "1974-12-04",
       "date_precision": "EXACT",
-      "opponent_key": "wis-green-bay",
-      "opponent_name": "Wis.-Green Bay",
-      "opponent_current_d1": false,
+      "opponent_key": "green-bay",
+      "opponent_name": "Green Bay",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 83,
       "opponent_score": 53,
@@ -46218,7 +46205,7 @@
       "administrative_note": null
     },
     {
-      "canonical_game_id": "CBBG-0032982",
+      "canonical_game_id": "CBBG-0057679",
       "season_label": "1987-1988",
       "game_date": "1987-11-28",
       "date_precision": "EXACT",
@@ -46232,11 +46219,11 @@
       "result": "L",
       "overtime_periods": 0,
       "site": "NEUTRAL",
-      "venue_key": null,
-      "venue_id": null,
-      "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "venue_key": "baltimore-arena",
+      "venue_id": "VEN-000019",
+      "venue_name": "Baltimore Arena",
+      "site_city": "Baltimore",
+      "site_state": "MD",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
@@ -54268,7 +54255,7 @@
       "administrative_note": null
     },
     {
-      "canonical_game_id": "CBBG-0033168",
+      "canonical_game_id": "CBBG-0046360",
       "season_label": "1998-1999",
       "game_date": "1998-12-23",
       "date_precision": "EXACT",
@@ -54282,15 +54269,15 @@
       "result": "L",
       "overtime_periods": 0,
       "site": "NEUTRAL",
-      "venue_key": null,
-      "venue_id": null,
-      "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "venue_key": "eugenio-guerra-sports-complex",
+      "venue_id": "VEN-000371",
+      "venue_name": "Eugenio Guerra Sports Complex",
+      "site_city": "Bayamón",
+      "site_state": "PR",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
-      "administrative_status": null,
-      "administrative_note": null
+      "administrative_status": "VACATED_WIN",
+      "administrative_note": "NCAA-vacated game; on-court result preserved. Record book marks this individual row in italics within the 113 vacated games (82-31), 1998-99 through 2001-02."
     },
     {
       "canonical_game_id": "CBBG-0033169",
@@ -61943,7 +61930,7 @@
       "administrative_note": null
     },
     {
-      "canonical_game_id": "CBBG-0033366",
+      "canonical_game_id": "CBBG-0046558",
       "season_label": "2007-2008",
       "game_date": "2008-04-01",
       "date_precision": "EXACT",

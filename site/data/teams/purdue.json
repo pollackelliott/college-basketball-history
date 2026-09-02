@@ -964,11 +964,14 @@
       "ties": 0
     },
     {
-      "opponent_key": "alabama-a-and-m",
+      "opponent_key": "alabama-a-m",
       "opponent_name": "Alabama A&M",
-      "current_d1": false,
+      "current_d1": true,
       "public_page_enabled": false,
-      "current_conference": null,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      },
       "first_season": "2000-2001",
       "last_season": "2000-2001",
       "games": 1,
@@ -61167,9 +61170,9 @@
       "season_label": "2000-2001",
       "game_date": "2000-12-09",
       "date_precision": "EXACT",
-      "opponent_key": "alabama-a-and-m",
+      "opponent_key": "alabama-a-m",
       "opponent_name": "Alabama A&M",
-      "opponent_current_d1": false,
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 79,
       "opponent_score": 51,

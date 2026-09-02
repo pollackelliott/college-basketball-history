@@ -3299,11 +3299,14 @@
       "ties": 0
     },
     {
-      "opponent_key": "nicholls-state",
-      "opponent_name": "Nicholls State",
-      "current_d1": false,
+      "opponent_key": "nicholls",
+      "opponent_name": "Nicholls",
+      "current_d1": true,
       "public_page_enabled": false,
-      "current_conference": null,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
       "first_season": "2014-2015",
       "last_season": "2014-2015",
       "games": 1,
@@ -4204,6 +4207,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "south-carolina-upstate",
+      "opponent_name": "South Carolina Upstate",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      },
+      "first_season": "2010-2011",
+      "last_season": "2010-2011",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "south-dakota-state",
       "opponent_name": "South Dakota State",
       "current_d1": true,
@@ -4781,19 +4800,6 @@
       "games": 4,
       "wins": 3,
       "losses": 1,
-      "ties": 0
-    },
-    {
-      "opponent_key": "usc-upstate",
-      "opponent_name": "USC Upstate",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "2010-2011",
-      "last_season": "2010-2011",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -63546,9 +63552,9 @@
       "season_label": "2010-2011",
       "game_date": "2010-11-13",
       "date_precision": "EXACT",
-      "opponent_key": "usc-upstate",
-      "opponent_name": "USC Upstate",
-      "opponent_current_d1": false,
+      "opponent_key": "south-carolina-upstate",
+      "opponent_name": "South Carolina Upstate",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 66,
       "opponent_score": 35,
@@ -67296,9 +67302,9 @@
       "season_label": "2014-2015",
       "game_date": "2014-11-29",
       "date_precision": "EXACT",
-      "opponent_key": "nicholls-state",
-      "opponent_name": "Nicholls State",
-      "opponent_current_d1": false,
+      "opponent_key": "nicholls",
+      "opponent_name": "Nicholls",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 91,
       "opponent_score": 62,
