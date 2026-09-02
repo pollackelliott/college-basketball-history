@@ -119,6 +119,42 @@ jobs:
                     "notes": "Texas A&M's later year-by-year date remains preserved as source evidence."
                   }
                 ]
+              },
+              {
+                "resolution_id": "OIR-2012-OKLAHOMA-TEXAS-A-M",
+                "kind": "EXPLICIT_RECONCILIATION",
+                "survivor_canonical_game_id": "CBBG-0063073",
+                "absorbed_canonical_game_id": "CBBG-0067408",
+                "canonical_values": {
+                  "site_type": "NEUTRAL",
+                  "venue_key": "paycom-center",
+                  "venue_id": "VEN-000162",
+                  "site_city": "Oklahoma City",
+                  "site_state": "OK"
+                },
+                "canonical_clear_fields": [
+                  "designated_home_team_key"
+                ],
+                "resolution_basis": "Texas A&M's official 2012-13 schedule explicitly classifies the All-College Classic game against Oklahoma as Neutral in Oklahoma City, and its contemporaneous recap/box score identifies Chesapeake Energy Arena. The project's global venue registry maps that historical arena name to physical venue VEN-000162 / paycom-center.",
+                "evidence_urls": [
+                  "https://12thman.com/sports/mens-basketball/schedule/text/2012-13",
+                  "https://12thman.com/news/2012/12/15/am-win-streak-snapped-by-ou-64-54",
+                  "https://12thman.com/sports/mens-basketball/stats/2012-13/oklahoma/boxscore/884",
+                  "https://soonersports.com/news/2012/12/15/208397488.aspx"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "site_type",
+                    "source_a_program_key": "oklahoma",
+                    "source_a_value": "NEUTRAL",
+                    "source_b_program_key": "texas-a-m",
+                    "source_b_value": "SOURCE_PROGRAM_HOME / Reed Arena in later year-by-year curation",
+                    "canonical_value": "NEUTRAL / Paycom Center / Oklahoma City, OK",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Texas A&M's official season schedule explicitly marks the game Neutral and places the All-College Classic at Chesapeake Energy Arena in Oklahoma City; the contemporary A&M recap and box score corroborate the physical site.",
+                    "notes": "The conflicting later source interpretation remains preserved; historical Chesapeake Energy Arena is global venue VEN-000162 (project display Paycom Center)."
+                  }
+                ]
               }
             ]
           }
@@ -160,9 +196,9 @@ jobs:
           assert a['canonical_pair_count']==52
           assert len(a['absorbed_canonical_game_ids'])==52
           assert len(a['survivor_canonical_game_ids'])==52
-          assert len(a['new_discrepancies'])==3
+          assert len(a['new_discrepancies'])==4
           print('TRANSACTION_PLAN_SHA256='+a['plan_sha256'])
-          print('AFFECTED=52 PAIRS=52 ABSORBED=52 NEW_DISCREPANCIES=3')
+          print('AFFECTED=52 PAIRS=52 ABSORBED=52 NEW_DISCREPANCIES=4')
           PY
 
       - name: Rehearse exact transaction in disposable repository copy
@@ -209,10 +245,18 @@ jobs:
           discrepancies=rows(root/'data/reconciliation/discrepancies.csv')
           assert len(games)==before['canonical']-52, (before['canonical'],len(games))
           assert len(assertions)==before['assertions'], (before['assertions'],len(assertions))
-          assert len(discrepancies)==before['discrepancies']+3
+          assert len(discrepancies)==before['discrepancies']+4
           assert not any(r.get('team_a_key')=='texas-a-and-m' or r.get('team_b_key')=='texas-a-and-m' for r in games)
           assert not any(r.get('normalized_opponent_key')=='texas-a-and-m' for r in assertions)
+          resolved_2012=next(r for r in games if r.get('canonical_game_id')=='CBBG-0063073')
+          assert resolved_2012.get('site_type')=='NEUTRAL', resolved_2012
+          assert resolved_2012.get('designated_home_team_key')=='', resolved_2012
+          assert resolved_2012.get('venue_key')=='paycom-center', resolved_2012
+          assert resolved_2012.get('venue_id')=='VEN-000162', resolved_2012
+          assert resolved_2012.get('site_city')=='Oklahoma City', resolved_2012
+          assert resolved_2012.get('site_state')=='OK', resolved_2012
           print('POST_COUNTS',{'canonical':len(games),'assertions':len(assertions),'discrepancies':len(discrepancies)})
+          print('2012_SITE_RECONCILIATION=PASS')
           PY
 
       - name: Validate disposable post-transaction repository
