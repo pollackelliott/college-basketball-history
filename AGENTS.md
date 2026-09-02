@@ -15,6 +15,7 @@ Read these process documents together before onboarding work:
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
 - `docs/research-freeze-self-challenge.md`
+- `docs/published-opponent-identity-census.md`
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
 more specific than the older fast-path wording. The site-completeness protocol is
@@ -23,7 +24,9 @@ post-reconciliation publication gate. The research-freeze self-challenge is cont
 for the final adversarial review required before a Research lane may certify large or
 suspicious residual debt as genuinely unresolved. The post-Texas A&M implementation
 efficiency/recovery standard is controlling for phase-sized owner interaction, compact
-diagnostics, durable checkpoints, and failure recovery.
+diagnostics, durable checkpoints, and failure recovery. The published-opponent identity
+census is the read-only scoreboard for stale/duplicate opponent identity debt on already
+published school packages.
 
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
@@ -34,11 +37,16 @@ diagnostics, durable checkpoints, and failure recovery.
    silent blanks do not pass. NCAA rows retain the stricter complete-site requirement.
    A Research lane must also complete the required adversarial pre-freeze self-challenge
    in `docs/research-freeze-self-challenge.md`; a mechanical `research-check` pass alone
-   is not sufficient to certify `RESEARCH_FROZEN`.
+   is not sufficient to certify `RESEARCH_FROZEN`. `unresolved opponent identities = 0`
+   is also not sufficient if a current program has been assigned a stale/local key: the
+   self-challenge must compare suspicious current/non-D1 identities against current global
+   program keys and published reciprocal alias evidence.
 3. Perform current-main rebase and stable Phase 0 staging with
    `python tools/stage_research_portfolio.py ...`; prefer one guarded phase-sized
    operation over many tiny interactive command handoffs. Ambiguous global identity
-   is a STOP, never a guess.
+   is a STOP, never a guess. Recheck both physical venue identity and opponent/program
+   identity against current main; an intervening school may establish the authoritative
+   global key/alias that a frozen portfolio did not yet know.
 4. Run `python tools/onboard_school.py <school_key> --preflight` from the clean Phase 0
    checkpoint.
 5. Present every owner-relevant decision as one consolidated Gate 1 batch. Every
@@ -118,8 +126,9 @@ unresolved discrepancies.
   disposable pre-seal technical rehearsal.
 - Flag any research-freeze path that allows material site gaps to remain silent, treats
   a mechanical `research-check` pass as sufficient without the required adversarial
-  self-challenge, or allows large residual HOME/H-A-N/date debt to survive without the
-  evidence accounting required by `docs/research-freeze-self-challenge.md`.
+  self-challenge, allows large residual HOME/H-A-N/date debt to survive without the
+  evidence accounting required by `docs/research-freeze-self-challenge.md`, or permits
+  an obvious current-program opponent identity to survive under a stale/non-D1 key.
 - Flag any implementation/release path that can lose known target/reciprocal site
   evidence without field-specific reconciliation provenance.
 - Flag school-specific hard-coded pre-scope exclusion counts; scope tests must enforce
@@ -127,3 +136,5 @@ unresolved discrepancies.
 - Flag implementation instructions that require repeated owner copy/paste of verbose
   deterministic output when the same evidence can be written to a durable artifact and
   summarized compactly.
+- Opponent-identity census findings are review triggers, not automatic merge authority;
+  never rewrite historical program identity from string similarity alone.

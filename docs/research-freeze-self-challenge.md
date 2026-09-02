@@ -6,7 +6,7 @@
 
 A passing `research-check` is necessary but is not, by itself, sufficient for `RESEARCH_FROZEN`.
 
-The permanent research acceptance gate can prove that required fields, vocabularies, opponent identities, NCAA sites, and research-accounting metadata are structurally valid. It cannot always prove that the researcher exhausted obvious authoritative evidence before labeling a historical fact unresolved.
+The permanent research acceptance gate can prove that required fields, vocabularies, opponent identities, NCAA sites, and research-accounting metadata are structurally valid. It cannot always prove that the researcher exhausted obvious authoritative evidence before labeling a historical fact unresolved or before assigning a locally plausible but globally stale opponent identity.
 
 Therefore every Research lane must perform one adversarial self-review before final freeze.
 
@@ -27,9 +27,10 @@ It should target the largest or most suspicious residual debt classes, especiall
 - substantial exact-date blanks;
 - neutral/postseason site debt;
 - physical-venue identity candidates;
+- opponent identities that look non-D1/historical even though a current global program may be the same institution;
 - any modern or institutional series whose remaining unknowns are surprising relative to available reciprocal evidence.
 
-The objective is not zero unknowns at all costs. The objective is to distinguish genuinely unrecoverable historical facts from debt that survived only because the primary source omitted a field or because an obvious reciprocal source was not checked.
+The objective is not zero unknowns at all costs. The objective is to distinguish genuinely unrecoverable historical facts from debt that survived only because the primary source omitted a field, because an obvious reciprocal source was not checked, or because a current program was locally normalized to a stale historical key.
 
 Unsupported certainty remains worse than a researched unknown.
 
@@ -93,7 +94,25 @@ Ambiguous physical-identity matches must be zero at `RESEARCH_FROZEN`.
 
 Numeric global venue IDs remain provisional until serialized Implementation performs the authoritative current-main rebase.
 
-## 6. Neutral and postseason debt
+## 6. Opponent-identity self-challenge
+
+`unresolved opponent identities = 0` is not enough if a package has confidently resolved a current program to the wrong or stale key.
+
+Before freeze, challenge opponent rows that are especially likely to hide identity debt:
+
+- source/canonical labels that exactly match a current global program name but use a different key;
+- opponent rows whose canonical key is current D1 in `data/reference/programs.csv` but whose local `current_d1` field is blank/No;
+- aliases that another published/current-main school package already resolves uniquely to a current-D1 program;
+- modern (especially 2000s+) rows treated as non-D1/non-current despite institutional-name changes or reclassification possibilities;
+- duplicated institutional series that would split one real opponent into two site records.
+
+The lane should compare against the current global program registry and, where useful, current published opponent packages. If repository tooling provides `tools/published_opponent_identity_census.py`, use its evidence classes as review triggers.
+
+Do not merge identities from string similarity alone. Historical official names, renamed institutions, former athletic brands, and ambiguous abbreviations still require authoritative evidence and game-level context.
+
+Before `RESEARCH_FROZEN`, there should be zero known/obvious current-program key splits and zero unresolved ambiguous current-program identity matches.
+
+## 7. Neutral and postseason debt
 
 Material neutral and non-NCAA postseason gaps may remain when genuinely unresolved, but the lane should challenge large or modern populations before freeze.
 
@@ -103,15 +122,15 @@ In particular:
 - published-vs-published neutral gaps require heightened reciprocal review;
 - conference-tournament, NIT, and other postseason gaps must be explicitly researched/accounted rather than inherited silently from a sparse primary ledger.
 
-## 7. No arbitrary numerical failure threshold
+## 8. No arbitrary numerical failure threshold
 
 Large residual counts are review triggers, not automatic failures.
 
-A century-old program may legitimately retain hundreds of researched unknowns. A much smaller number of modern UNKNOWN institutional games may be more suspicious.
+A century-old program may legitimately retain hundreds of researched unknowns. A much smaller number of modern UNKNOWN institutional games or stale current-program opponent identities may be more suspicious.
 
-Do not invent generic rules such as “more than 100 UNKNOWN rows fails.” Instead require evidence-based self-challenge, era concentration, reciprocal review, and explicit accounting.
+Do not invent generic rules such as “more than 100 UNKNOWN rows fails.” Instead require evidence-based self-challenge, era concentration, reciprocal review, current-registry comparison, and explicit accounting.
 
-## 8. Required final self-challenge summary
+## 9. Required final self-challenge summary
 
 Before final packaging, the Research lane should summarize the largest residual debt populations and any recoveries produced by the self-challenge.
 
@@ -143,16 +162,24 @@ VENUES:
   existing reuses: <count>
   genuinely new candidates: <count>
   ambiguous identities: 0
+
+OPPONENT IDENTITIES:
+  current-program key splits found/repaired: <count>
+  ambiguous current-program matches: 0
+  modern non-D1 identities specifically reviewed: <count>
 ```
 
 If the self-challenge exposes a real defect, repair only the affected research fields, rerun the acceptance gate, regenerate affected hashes/manifest/ZIP, and supersede the prior package hash explicitly.
 
-## 9. Final freeze boundary
+## 10. Final freeze boundary
 
 Only after the self-challenge and any bounded repairs may the lane declare:
 
 - research acceptance errors = 0;
 - research acceptance warnings = 0;
+- unresolved opponent identities = 0;
+- known current-program opponent key splits = 0;
+- ambiguous current-program identity matches = 0;
 - HOME publication blockers = 0;
 - NCAA site gaps = 0;
 - unaccounted material site gaps = 0;
@@ -166,7 +193,7 @@ RESEARCH_FROZEN: YES
 CURRENT-MAIN REBASE REQUIRED BEFORE TRACKED PHASE 0: YES
 ```
 
-## 10. Owner communication
+## 11. Owner communication
 
 The self-challenge belongs to the Research lane and should not create another routine owner approval loop.
 
@@ -174,7 +201,7 @@ Once the owner has authorized research, perform the self-challenge autonomously.
 
 A normal successful lane should research, self-challenge, repair if necessary, package, and then present one final `RESEARCH_FROZEN` status rather than asking the owner to say “continue” through each step.
 
-## 11. Relationship to Implementation
+## 12. Relationship to Implementation
 
 The self-challenge strengthens Research Freeze; it does not replace serialized Implementation safeguards.
 
@@ -183,6 +210,7 @@ Implementation still must:
 - verify the immutable ZIP/hash;
 - rerun `research-check` under current-main tooling;
 - perform current-main shared-reference rebase;
+- recheck opponent identities that can drift as new programs/aliases are established;
 - reject newly exposed research defects rather than silently absorb a replacement research project;
 - independently enforce HOME exception and reciprocal-site preservation rules;
 - continue through the sealed-plan and exact release workflow.
