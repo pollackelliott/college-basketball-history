@@ -1,0 +1,87 @@
+name: One-time comprehensive opponent identity plan v3
+on:
+  push:
+    branches: [scratch/opponent-identity-comprehensive-plan-v3]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 806caa7d5ed93e2949c675a1a1ddaad3e8ba8400
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v2
+          path: /tmp/v2
+          github-token: ${{ github.token }}
+          run-id: 33644548696
+      - name: Verify recovered evidence and add final reviewed resolution
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 806caa7d5ed93e2949c675a1a1ddaad3e8ba8400
+          echo '3d866fe366a0a4b4889af6e031f8075081ee49189bacf9b48d11430e2129f1bb  /tmp/v2/authoritative-owner-audit.json' | sha256sum -c -
+          echo 'f2c1bfcfb3c5d8197733e5e1fa9a67a77d84ba63dbcf5031d1d20a0ea1077663  /tmp/v2/comprehensive-opponent-manifest.csv' | sha256sum -c -
+          echo '4e3c5147e4bea8f5f25c3ffbfc92fa509dec6944a3b07b2dbb6cf4ef754bf131  /tmp/v2/comprehensive-opponent-resolutions.json' | sha256sum -c -
+          cp /tmp/v2/comprehensive-opponent-manifest.csv /tmp/manifest.csv
+          cp /tmp/v2/comprehensive-opponent-resolutions.json /tmp/resolutions.json
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          audit=json.load(open('/tmp/v2/authoritative-owner-audit.json'))
+          decisions=[d for d in audit['decisions'] if d['action']=='KEY_REMAP']
+          assert len(decisions)==167 and len({d['from_key'] for d in decisions})==122
+          with open('data/reference/venues.csv',encoding='utf-8-sig',newline='') as f: venues=list(csv.DictReader(f))
+          ids={r['venue_id'].strip() for r in venues}; keys={r['venue_key'].strip() for r in venues}
+          next_id=f"VEN-{max(int(v[4:]) for v in ids if v.startswith('VEN-') and v[4:].isdigit())+1:06d}"
+          key='eugenio-guerra-sports-complex'
+          assert next_id=='VEN-000371' and key not in keys
+          p=Path('/tmp/resolutions.json'); doc=json.loads(p.read_text())
+          assert len(doc['resolutions'])==4 and len(doc['retain_distinct'])==1
+          doc['resolutions'].append({
+            'resolution_id':'OIR-1998-OHIO-STATE-OLE-MISS','kind':'SAME_DATE_IDENTITY_CONFLICT',
+            'survivor_canonical_game_id':'CBBG-0046360','absorbed_canonical_game_id':'CBBG-0033168',
+            'canonical_values':{'site_type':'NEUTRAL','venue_key':key,'venue_id':next_id,'site_city':'Bayamón','site_state':'PR'},
+            'canonical_clear_fields':['designated_home_team_key'],
+            'resolution_basis':'Official Ohio State and Ole Miss records establish the 67-62 game on 1998-12-23 as the Puerto Rico Holiday Classic championship in Puerto Rico, not an Ohio State home game. Ole Miss official tournament notes identify Eugenio Guerra Sports Complex at Bayamon, Puerto Rico as the event venue.',
+            'evidence_urls':['https://ohiostatebuckeyes.com/news/1998/12/26/mens-hoops-prepares-for-hurricanes-dec-27-2','https://ohiostatebuckeyes.com/news/1998/12/23/mississippi-box-score-2','https://olemisssports.com/news/1999/6/21/Ole_Miss_Falls_to_Buckeyes_in_Championship_Game','https://olemisssports.com/news/1999/6/21/Men_s_Basketball_to_Face_Oklahoma_in_Puerto_Rico_Classic'],
+            'discrepancies':[{'field_name':'site_type','source_a_program_key':'ohio-state','source_a_value':'TEAM_B_HOME / Value City Arena / Columbus, OH','source_b_program_key':'ole-miss','source_b_value':'NEUTRAL / Puerto Rico Holiday Classic','canonical_value':f'NEUTRAL / Eugenio Guerra Sports Complex / Bayamón, PR / {next_id}','status':'RESOLVED','resolution_basis':'Official tournament records place the championship in Puerto Rico; Ole Miss official event notes identify Eugenio Guerra Sports Complex at Bayamon.','notes':'Ohio State package fallback to Value City Arena remains preserved as source/provenance evidence.'}]
+          })
+          doc['venue_registry_additions']=[{'venue_id':next_id,'venue_key':key,'display_name':'Eugenio Guerra Sports Complex','city':'Bayamón','state':'PR','opened':'','closed':'','date_precision':'','identity_status':'RESEARCHED_EVENT_VENUE','source_basis':'Ole Miss official 1998 Puerto Rico Holiday Classic notes identify Eugenio Guerra Sports Complex at Bayamon, Puerto Rico; Ohio State and Ole Miss official championship records establish the Dec. 23 title game in the tournament.','notes':'Physical venue used for the 1998 Puerto Rico Holiday Classic; source materials variously describe the tournament locality as San Juan and Bayamon, Puerto Rico.'}]
+          p.write_text(json.dumps(doc,indent=2,sort_keys=True,ensure_ascii=False)+'\n')
+          Path('/tmp/new-venue-id.txt').write_text(next_id+'\n')
+          print('CONFIRMED_DECISIONS=167\nDISTINCT_KEY_REMAPS=122\nNEW_VENUE_ID='+next_id)
+          PY
+      - name: Generate sealed plan twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/manifest.csv /tmp/resolutions.json --output /tmp/plan-a.json
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/manifest.csv /tmp/resolutions.json --output /tmp/plan-b.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/plan-a.json')); b=json.load(open('/tmp/plan-b.json'))
+          assert a['plan_sha256']==b['plan_sha256']
+          assert a['git_head']=='806caa7d5ed93e2949c675a1a1ddaad3e8ba8400'
+          assert not a['blockers'], a['blockers']
+          assert (a['affected_canonical_game_count'],len(a['remap_only_canonical_game_ids']),len(a['canonical_pairs']),len(a['absorbed_canonical_game_ids']),len(a['retained_distinct_canonical_game_ids']),len(a['new_discrepancies']),len(a['venue_registry_additions']))==(434,376,58,58,2,5,1)
+          print('PLAN_SHA256='+a['plan_sha256'])
+          print('AFFECTED=434 IN_PLACE=376 PAIRS=58 ABSORBED=58 RETAINED_DISTINCT=2 NEW_DISCREPANCIES=5 VENUES_ADDED=1 BLOCKERS=0')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v3
+          path: |
+            /tmp/v2/authoritative-owner-audit.json
+            /tmp/manifest.csv
+            /tmp/resolutions.json
+            /tmp/plan-a.json
+            /tmp/plan-b.json
+            /tmp/new-venue-id.txt
+          if-no-files-found: error
