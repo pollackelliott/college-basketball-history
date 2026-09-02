@@ -161,3 +161,84 @@ scoreless-forfeit ingestion path can preserve the known administrative winner
 This does not assert a played 0-2 score and does not convert the unknown
 on-court result into a researched result. It is an implementation encoding of
 the official administrative outcome.
+
+## Implementation current-main opponent rebase
+
+Pre-seal deterministic site-build rehearsal exposed that the research portfolio had not been rebased against current-main program/opponent identities. A complete opponent audit was therefore performed before publication rather than repairing the first display collision alone.
+
+- Local opponent rows audited: **416**
+- Exact current-program rows: **221**
+- Exact-key metadata rows normalized to current-main program metadata: **163**
+- Deterministic alias rows rebased to current-main program identities: **63**
+- Distinct local alias keys rebased: **62**
+- Source game rows whose normalized opponent key changed: **253**
+- Ambiguous current-program aliases: **0**
+- Historical/non-current opponent rows deliberately retained: **132**
+- Projected historical display-name conflicts after rebase: **0**
+
+The source opponent labels remain unchanged. Current-program canonical keys, canonical display names, and current-D1 metadata now reuse the global program registry. Historical/non-current identities were not force-mapped.
+
+Deterministic current-main key mappings:
+
+- `alabama-a-and-m` -> `alabama-a-m`
+- `american` -> `american-university`
+- `cal-irvine` -> `uc-irvine`
+- `cal-santa-barbara` -> `uc-santa-barbara`
+- `college-of-charleston` -> `charleston`
+- `colorado-a-and-m` -> `colorado-state`
+- `connecticut` -> `uconn`
+- `csun` -> `cal-state-northridge`
+- `detroit` -> `detroit-mercy`
+- `east-texas-state` -> `east-texas-a-m`
+- `fau` -> `florida-atlantic`
+- `fgcu` -> `florida-gulf-coast`
+- `fiu` -> `florida-international`
+- `florida-a-and-m` -> `florida-a-m`
+- `grambling-state` -> `grambling`
+- `hawaii` -> `hawai-i`
+- `houston-baptist` -> `houston-christian`
+- `illinois-chicago` -> `uic`
+- `lasalle` -> `la-salle`
+- `long-island` -> `long-island-university`
+- `louisiana-monroe` -> `ul-monroe`
+- `mcneese-state` -> `mcneese`
+- `memphis-state` -> `memphis`
+- `miami-fla` -> `miami`
+- `miami-ohio` -> `miami-oh`
+- `mississippi` -> `ole-miss`
+- `mississippi-valley-st` -> `mississippi-valley-state`
+- `missouri-kansas-city` -> `kansas-city`
+- `nicholls-state` -> `nicholls`
+- `north-carolina-a-and-t` -> `north-carolina-a-t`
+- `north-texas-state` -> `north-texas`
+- `pan-american` -> `ut-rio-grande-valley`
+- `penn` -> `pennsylvania`
+- `pitt` -> `pittsburgh`
+- `prairie-view` -> `prairie-view-a-m`
+- `prairie-view-a-and-m` -> `prairie-view-a-m`
+- `sam-houston-state` -> `sam-houston`
+- `seattle` -> `seattle-u`
+- `sfa` -> `stephen-f-austin`
+- `southeastern-louisiana` -> `se-louisiana`
+- `southern-mississippi` -> `southern-miss`
+- `southwest-texas` -> `texas-state`
+- `st-johns` -> `st-john-s`
+- `st-josephs` -> `saint-joseph-s`
+- `st-josephs-pa` -> `saint-joseph-s`
+- `st-louis` -> `saint-louis`
+- `st-marys` -> `saint-mary-s`
+- `st-marys-calif` -> `saint-mary-s`
+- `sw-louisiana` -> `louisiana`
+- `sw-missouri-state` -> `missouri-state`
+- `sw-texas-state` -> `texas-state`
+- `texas-a-and-m-corpus-christi` -> `texas-a-m-corpus-christi`
+- `texas-pan-american` -> `ut-rio-grande-valley`
+- `trinity` -> `duke`
+- `ucsb` -> `uc-santa-barbara`
+- `umkc` -> `kansas-city`
+- `unc-charlotte` -> `charlotte`
+- `usc-upstate` -> `south-carolina-upstate`
+- `ut-pan-american` -> `ut-rio-grande-valley`
+- `uta` -> `ut-arlington`
+- `uw-green-bay` -> `green-bay`
+- `washington-university` -> `washington`
