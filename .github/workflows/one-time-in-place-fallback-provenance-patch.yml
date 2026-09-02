@@ -1,0 +1,69 @@
+name: One-time in-place fallback provenance patch
+on:
+  push:
+    branches: [chore/opponent-identity-in-place-fallback-provenance]
+    paths: [.github/workflows/one-time-in-place-fallback-provenance-patch.yml]
+permissions:
+  contents: write
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/opponent-identity-in-place-fallback-provenance
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Guard exact parent
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "491419509f148fa64b830f05397d6b00bd1feff1"
+          test -z "$(git diff --name-only HEAD^ -- . ':!.github/workflows/one-time-in-place-fallback-provenance-patch.yml')"
+      - name: Patch in-place notes and regression test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tools/opponent_identity_bulk_transaction.py')
+          s=p.read_text(encoding='utf-8')
+          old='''def _notes_for_in_place(row: dict[str, str], key_map: dict[str, str]) -> str:\n    old = [k for k in (clean(row.get("team_a_key")), clean(row.get("team_b_key"))) if k in key_map]\n    marker = "[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=" + ",".join(f"{k}->{key_map[k]}" for k in old) + "]"\n    notes = clean(row.get("notes"))\n    return (notes + " | " + marker).strip(" |") if notes else marker\n'''
+          new='''def _notes_for_in_place(row: dict[str, str], key_map: dict[str, str], final_site_type: str) -> str:\n    old = [k for k in (clean(row.get("team_a_key")), clean(row.get("team_b_key"))) if k in key_map]\n    marker = "[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=" + ",".join(f"{k}->{key_map[k]}" for k in old) + "]"\n    notes = clean(row.get("notes"))\n    combined = (notes + " | " + marker).strip(" |") if notes else marker\n    combined, retired = retire_site_mismatched_registry_fallbacks(combined, final_site_type)\n    if retired:\n        combined = (\n            combined\n            + " "\n            + f'[OPPONENT_IDENTITY_RECONCILIATION retired_registry_fallbacks={retired}; '\n            + f'canonical_site_type={clean(final_site_type)}; '\n            + 'superseded machine fallback no longer controls canonical site/venue]'\n        ).strip()\n    return combined\n'''
+          if old not in s: raise SystemExit('helper anchor not found')
+          s=s.replace(old,new,1)
+          old_call='''            mapped = tx.maprow(row, key_map)\n            mapped["notes"] = _notes_for_in_place(row, key_map)\n            row.update(mapped)\n'''
+          new_call='''            mapped = tx.maprow(row, key_map)\n            mapped["notes"] = _notes_for_in_place(row, key_map, clean(mapped.get("site_type")))\n            row.update(mapped)\n'''
+          if old_call not in s: raise SystemExit('call anchor not found')
+          s=s.replace(old_call,new_call,1)
+          p.write_text(s,encoding='utf-8')
+
+          t=Path('tests/test_opponent_identity_bulk_transaction.py')
+          s=t.read_text(encoding='utf-8')
+          anchor='''    def test_exact_collision_auto_absorbs_and_enriches(self):\n'''
+          method='''    def test_in_place_remap_retires_fallback_when_team_sort_flips_site(self):\n        self._manifest(old='z-old-target',new='aardvark-target',name='Aardvark Target')\n        self._write(self.repo/'data/reference/programs.csv',PROGRAM_HEADERS,[\n            ['alpha','Alpha','Alpha','Yes','Yes'],\n            ['aardvark-target','Aardvark Target','Aardvark Target','Yes','No'],\n        ])\n        self._resolution()\n        marker = (\n            '[VENUE_REGISTRY_FALLBACK source=alpha/SRC-1;'\n            'venue_key=old-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]'\n        )\n        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[\n            game('CBBG-1','z-old-target',site='TEAM_A_HOME',home='alpha',notes=marker)\n        ])\n        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[\n            ['A1','CBBG-1','alpha','SRC-1','z-old-target']\n        ])\n        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)\n        self.assertEqual(plan['blockers'],[])\n        bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)\n        row=self._read(self.repo/'data/canonical/games.csv')[0]\n        self.assertEqual((row['team_a_key'],row['team_b_key']),('aardvark-target','alpha'))\n        self.assertEqual(row['site_type'],'TEAM_B_HOME')\n        self.assertNotIn('VENUE_REGISTRY_FALLBACK',row['notes'])\n        self.assertIn('retired_registry_fallbacks=1',row['notes'])\n        self.assertIn('canonical_site_type=TEAM_B_HOME',row['notes'])\n\n'''
+          if anchor not in s: raise SystemExit('test anchor not found')
+          s=s.replace(anchor,method+anchor,1)
+          t.write_text(s,encoding='utf-8')
+          PY
+      - name: Run focused and full tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_opponent_identity_bulk_transaction.py' -v
+          python -m unittest discover -s tests -v
+      - name: Commit only intended files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git diff --name-only)
+          test "${#changed[@]}" -eq 2
+          test "${changed[0]}" = "tests/test_opponent_identity_bulk_transaction.py"
+          test "${changed[1]}" = "tools/opponent_identity_bulk_transaction.py"
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add tests/test_opponent_identity_bulk_transaction.py tools/opponent_identity_bulk_transaction.py
+          git commit -m "Retire stale fallback provenance on in-place remaps"
+          git push origin HEAD:chore/opponent-identity-in-place-fallback-provenance
