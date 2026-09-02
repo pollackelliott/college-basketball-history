@@ -30,7 +30,7 @@
     "ties": 0,
     "first_season": "1900-1901",
     "last_season": "2025-2026",
-    "opponents": 339
+    "opponents": 336
   },
   "seasons": [
     {
@@ -3133,10 +3133,10 @@
         "conference_key": "sun-belt",
         "conference_name": "Sun Belt"
       },
-      "first_season": "2004-2005",
+      "first_season": "1966-1967",
       "last_season": "2004-2005",
-      "games": 1,
-      "wins": 1,
+      "games": 2,
+      "wins": 2,
       "losses": 0,
       "ties": 0
     },
@@ -3687,19 +3687,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "murray",
-      "opponent_name": "Murray",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1930-1931",
-      "last_season": "1945-1946",
-      "games": 3,
-      "wins": 2,
-      "losses": 1,
-      "ties": 0
-    },
-    {
       "opponent_key": "murray-state",
       "opponent_name": "Murray State",
       "current_d1": true,
@@ -3708,11 +3695,11 @@
         "conference_key": "missouri-valley",
         "conference_name": "Missouri Valley"
       },
-      "first_season": "1988-1989",
+      "first_season": "1930-1931",
       "last_season": "2009-2010",
-      "games": 2,
-      "wins": 1,
-      "losses": 1,
+      "games": 5,
+      "wins": 3,
+      "losses": 2,
       "ties": 0
     },
     {
@@ -4872,19 +4859,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "southwestern-louisiana",
-      "opponent_name": "Southwestern Louisiana",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1966-1967",
-      "last_season": "1966-1967",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "southwestern-presbyterian",
       "opponent_name": "Southwestern Presbyterian",
       "current_d1": false,
@@ -5583,10 +5557,10 @@
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
       },
-      "first_season": "2008-2009",
+      "first_season": "1986-1987",
       "last_season": "2025-2026",
-      "games": 4,
-      "wins": 2,
+      "games": 5,
+      "wins": 3,
       "losses": 2,
       "ties": 0
     },
@@ -5636,19 +5610,6 @@
       "games": 7,
       "wins": 5,
       "losses": 2,
-      "ties": 0
-    },
-    {
-      "opponent_key": "virginia-commonwealth",
-      "opponent_name": "Virginia Commonwealth",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1986-1987",
-      "last_season": "1986-1987",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -16734,9 +16695,9 @@
       "season_label": "1930-1931",
       "game_date": null,
       "date_precision": "SEASON",
-      "opponent_key": "murray",
-      "opponent_name": "Murray",
-      "opponent_current_d1": false,
+      "opponent_key": "murray-state",
+      "opponent_name": "Murray State",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 48,
       "opponent_score": 29,
@@ -21284,9 +21245,9 @@
       "season_label": "1939-1940",
       "game_date": null,
       "date_precision": "SEASON",
-      "opponent_key": "murray",
-      "opponent_name": "Murray",
-      "opponent_current_d1": false,
+      "opponent_key": "murray-state",
+      "opponent_name": "Murray State",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 46,
       "opponent_score": 37,
@@ -23734,9 +23695,9 @@
       "season_label": "1945-1946",
       "game_date": "1946-02-16",
       "date_precision": "EXACT",
-      "opponent_key": "murray",
-      "opponent_name": "Murray",
-      "opponent_current_d1": false,
+      "opponent_key": "murray-state",
+      "opponent_name": "Murray State",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 34,
       "opponent_score": 53,
@@ -35584,9 +35545,9 @@
       "season_label": "1966-1967",
       "game_date": "1966-12-05",
       "date_precision": "EXACT",
-      "opponent_key": "southwestern-louisiana",
-      "opponent_name": "Southwestern Louisiana",
-      "opponent_current_d1": false,
+      "opponent_key": "louisiana",
+      "opponent_name": "Louisiana",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 101,
       "opponent_score": 68,
@@ -49134,9 +49095,9 @@
       "season_label": "1986-1987",
       "game_date": "1986-11-28",
       "date_precision": "EXACT",
-      "opponent_key": "virginia-commonwealth",
-      "opponent_name": "Virginia Commonwealth",
-      "opponent_current_d1": false,
+      "opponent_key": "vcu",
+      "opponent_name": "VCU",
+      "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 75,
       "opponent_score": 67,

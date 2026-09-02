@@ -1021,19 +1021,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "arkansas-a-m",
-      "opponent_name": "Arkansas A&M",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1967-1968",
-      "last_season": "1967-1968",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "arkansas-state",
       "opponent_name": "Arkansas State",
       "current_d1": true,
@@ -1046,6 +1033,19 @@
       "last_season": "2010-2011",
       "games": 3,
       "wins": 3,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "arkansas-monticello",
+      "opponent_name": "Arkansas-Monticello",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1967-1968",
+      "last_season": "1967-1968",
+      "games": 1,
+      "wins": 1,
       "losses": 0,
       "ties": 0
     },
@@ -34699,8 +34699,8 @@
       "season_label": "1967-1968",
       "game_date": "1967-12-02",
       "date_precision": "EXACT",
-      "opponent_key": "arkansas-a-m",
-      "opponent_name": "Arkansas A&M",
+      "opponent_key": "arkansas-monticello",
+      "opponent_name": "Arkansas-Monticello",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 138,

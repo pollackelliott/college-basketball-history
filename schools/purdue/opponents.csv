@@ -1,7 +1,7 @@
 index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
 0,purdue,Akron,akron,Akron,Yes,3,1999-2000,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
 1,purdue,Alabama,alabama,Alabama,Yes,11,1976-1977,2025-2026,RESOLVED,Current D1 registry / established institutional lineage,,
-2,purdue,Alabama A&M,alabama-a-and-m,Alabama A&M,Yes,1,2000-2001,2000-2001,RESOLVED,Current D1 registry / established institutional lineage,,
+2,purdue,Alabama A&M,alabama-a-m,Alabama A&M,Yes,1,2000-2001,2000-2001,RESOLVED,Current D1 registry / established institutional lineage,,
 3,purdue,Alaska-Anchorage,alaska-anchorage,Alaska-Anchorage,No,1,1985-1986,1985-1986,RESOLVED,Established historical/non-current identity or institutional lineage,,
 4,purdue,Alcorn State,alcorn-state,Alcorn State,Yes,1,2010-2011,2010-2011,RESOLVED,Current D1 registry / established institutional lineage,,
 5,purdue,Alumni,alumni,Alumni,No,2,1903-1904,1904-1905,RESOLVED,Established historical/non-current identity or institutional lineage,,

@@ -1,6 +1,6 @@
 ﻿index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
 0,tennessee,/- at Vanderbilt,vanderbilt,Vanderbilt,Yes,1,2008-2009,2008-2009,RESOLVED,Owner-reviewed source marker normalization,Owner approved Vanderbilt identity on 2026-08-14.,The source prefix was a location marker rather than part of opponent identity.
-1,tennessee,/17 2-Pittsburgh,17-2-pittsburgh,/17 2-Pittsburgh,No,1,2011-2012,2011-2012,RESOLVED,Historical/non-current source identity,,
+1,tennessee,/17 2-Pittsburgh,pittsburgh,Pittsburgh,Yes,1,2011-2012,2011-2012,RESOLVED,Historical/non-current source identity,,
 2,tennessee,A&M-Corpus Christi,texas-a-m-corpus-christi,Texas A&M-Corpus Christi,Yes,1,2018-2019,2018-2019,RESOLVED,Current D1 registry / Tennessee alias normalization,,
 3,tennessee,Ala.-Birmingham,uab,UAB,Yes,4,1983-1984,1991-1992,RESOLVED,Current D1 registry / Tennessee alias normalization,,
 4,tennessee,Alabama,alabama,Alabama,Yes,158,1913-1914,2025-2026,RESOLVED,Inherited established project identity,,
@@ -329,7 +329,7 @@
 327,tennessee,USC,usc,USC,Yes,1,2022-2023,2022-2023,RESOLVED,Current D1 registry / Tennessee alias normalization,,
 328,tennessee,USC Upstate,south-carolina-upstate,USC Upstate,Yes,3,2013-2014,2021-2022,RESOLVED,Current D1 registry / Tennessee alias normalization,,
 329,tennessee,UT Martin,ut-martin,UT Martin,Yes,5,2002-2003,2024-2025,RESOLVED,Current D1 registry / Tennessee alias normalization,,
-330,tennessee,UT-Chattanooga,ut-chattanooga,UT-Chattanooga,No,8,1982-1983,2007-2008,RESOLVED,Historical/non-current source identity,,
+330,tennessee,UT-Chattanooga,chattanooga,Chattanooga,Yes,8,1982-1983,2007-2008,RESOLVED,Historical/non-current source identity,,
 331,tennessee,Utah,utah,Utah,Yes,2,1977-1978,1978-1979,RESOLVED,Inherited established project identity,,
 332,tennessee,Utah State,utah-state,Utah State,Yes,2,1949-1950,1967-1968,RESOLVED,Inherited established project identity,,
 333,tennessee,UTEP,utep,UTEP,Yes,1,2013-2014,2013-2014,RESOLVED,Current D1 registry / Tennessee alias normalization,,
