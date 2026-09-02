@@ -1,0 +1,247 @@
+name: Exact-main sealed Texas A&M opponent identity remediation
+
+on:
+  push:
+    branches:
+      - scratch/opponent-identity-remediation-exact-main-exec
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact protected-main commit, not workflow carrier
+        uses: actions/checkout@v4
+        with:
+          ref: adc8c9ed1eed71ff2311bc8fab37a212b0372662
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Prove exact execution base
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "adc8c9ed1eed71ff2311bc8fab37a212b0372662"
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "adc8c9ed1eed71ff2311bc8fab37a212b0372662"
+          test -z "$(git status --porcelain)"
+          echo "EXACT_EXECUTION_HEAD=$(git rev-parse HEAD)"
+
+      - name: Run pre-transaction tests
+        run: |
+          python -m unittest discover -s tests -p 'test_opponent_identity_transaction.py' -v
+          python -m unittest discover -s tests -v
+
+      - name: Extract exact reviewed first-batch inputs from permanent workflow
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src=Path('.github/workflows/opponent-identity-transaction-validation.yml').read_text().splitlines()
+          def extract(command, terminator, output):
+              start=next(i for i,line in enumerate(src) if line.strip()==command)
+              end=next(i for i in range(start+1,len(src)) if src[i].strip()==terminator)
+              lines=[]
+              for line in src[start+1:end]:
+                  lines.append(line[10:] if line.startswith('          ') else line)
+              Path(output).write_text('\n'.join(lines)+'\n')
+          extract("cat > /tmp/texas-am-p0-decisions.csv <<'CSV'", 'CSV', '/tmp/texas-am-p0-decisions.csv')
+          extract("cat > /tmp/texas-am-p0-resolutions.json <<'JSON'", 'JSON', '/tmp/texas-am-p0-resolutions.json')
+          print('PERMANENT_REVIEWED_INPUTS_EXTRACTED=PASS')
+          PY
+
+      - name: Re-run read-only planner and collision accounting
+        shell: bash
+        run: |
+          set +e
+          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/remediation-plan-a.json
+          RC_A=$?
+          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/remediation-plan-b.json
+          RC_B=$?
+          set -e
+          test "$RC_A" = "$RC_B"
+          test "$RC_A" = "2"
+          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/collision-audit-a.json
+          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/collision-audit-b.json
+          python - <<'PY'
+          import json
+          p1=json.load(open('/tmp/remediation-plan-a.json')); p2=json.load(open('/tmp/remediation-plan-b.json'))
+          a1=json.load(open('/tmp/collision-audit-a.json')); a2=json.load(open('/tmp/collision-audit-b.json'))
+          assert p1['plan_sha256']==p2['plan_sha256']
+          assert a1['audit_sha256']==a2['audit_sha256']
+          assert a1['affected_canonical_game_count']==52
+          assert a1['same_date_collision_group_count']==51
+          assert a1['exact_core_match_group_count']==49
+          assert a1['same_date_identity_conflict_group_count']==2
+          assert a1['unpaired_affected_game_count']==1
+          assert a1['covered_affected_game_count']+a1['unpaired_affected_game_count']==52
+          print('READ_ONLY_PLAN_SHA256='+p1['plan_sha256'])
+          print('COLLISION_AUDIT_SHA256='+a1['audit_sha256'])
+          print('READ_ONLY_ACCOUNTING=52/52')
+          PY
+
+      - name: Generate fresh deterministic exact-main production transaction seal
+        shell: bash
+        run: |
+          python tools/opponent_identity_transaction.py plan /tmp/texas-am-p0-decisions.csv /tmp/texas-am-p0-resolutions.json --output /tmp/transaction-plan-a.json
+          python tools/opponent_identity_transaction.py plan /tmp/texas-am-p0-decisions.csv /tmp/texas-am-p0-resolutions.json --output /tmp/transaction-plan-b.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/transaction-plan-a.json')); b=json.load(open('/tmp/transaction-plan-b.json'))
+          assert a['git_head']=='adc8c9ed1eed71ff2311bc8fab37a212b0372662', a['git_head']
+          assert a['plan_sha256']==b['plan_sha256'], 'nondeterministic transaction plan'
+          assert a['affected_canonical_game_count']==52
+          assert a['canonical_pair_count']==52
+          assert len(a['survivor_canonical_game_ids'])==52
+          assert len(a['absorbed_canonical_game_ids'])==52
+          assert len(a['new_discrepancies'])==4
+          assert not a['blockers'], a['blockers']
+          assert not a['warnings'], a['warnings']
+          assert len(set(a['survivor_canonical_game_ids']))==52
+          assert len(set(a['absorbed_canonical_game_ids']))==52
+          assert not (set(a['survivor_canonical_game_ids']) & set(a['absorbed_canonical_game_ids']))
+          print('EXACT_MAIN_PRODUCTION_TRANSACTION_SEAL='+a['plan_sha256'])
+          print('TRANSACTION_ACCOUNTING=affected:52 pairs:52 survivors:52 absorbed:52 discrepancies:4 blockers:0 warnings:0')
+          open('/tmp/production-seal.txt','w').write(a['plan_sha256']+'\n')
+          PY
+
+      - name: Capture pre-apply evidence invariants
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
+          games=rows('data/canonical/games.csv'); assertions=rows('data/evidence/game-assertions.csv'); disc=rows('data/reconciliation/discrepancies.csv')
+          affected=[]
+          for school in ('northwestern','oklahoma'):
+              for r in rows(f'schools/{school}/source-games.csv'):
+                  if r.get('normalized_opponent_key','').strip()=='texas-a-and-m':
+                      affected.append((school,r.get('source_game_id',''),r.get('raw_text',''),r.get('source_opponent_label','')))
+          assert len(affected)==52, len(affected)
+          payload={'canonical':len(games),'assertions':len(assertions),'discrepancies':len(disc),'source_evidence':affected}
+          Path('/tmp/pre-invariants.json').write_text(json.dumps(payload,sort_keys=True))
+          print('PRE_COUNTS', {k:payload[k] for k in ('canonical','assertions','discrepancies')})
+          print('AFFECTED_SOURCE_EVIDENCE_ROWS=52')
+          PY
+
+      - name: Apply exact sealed production transaction
+        shell: bash
+        run: |
+          SEAL=$(cat /tmp/production-seal.txt)
+          python tools/opponent_identity_transaction.py apply /tmp/texas-am-p0-decisions.csv /tmp/texas-am-p0-resolutions.json --expected-plan-sha256 "$SEAL" --apply | tee /tmp/apply-result.txt
+          grep -q '"canonical_games_absorbed":52' /tmp/apply-result.txt
+          grep -q '"assertions_redirected":52' /tmp/apply-result.txt
+          grep -q '"opponents_rows_updated":2' /tmp/apply-result.txt
+          grep -q '"source_game_rows_updated":52' /tmp/apply-result.txt
+          grep -q '"discrepancies_added":4' /tmp/apply-result.txt
+
+      - name: Prove post-transaction basketball invariants
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
+          before=json.loads(Path('/tmp/pre-invariants.json').read_text())
+          games=rows('data/canonical/games.csv'); assertions=rows('data/evidence/game-assertions.csv'); disc=rows('data/reconciliation/discrepancies.csv')
+          assert len(games)==before['canonical']-52
+          assert len(assertions)==before['assertions']
+          assert len(disc)==before['discrepancies']+4
+          assert not any(r.get('team_a_key')=='texas-a-and-m' or r.get('team_b_key')=='texas-a-and-m' for r in games)
+          assert not any(r.get('normalized_opponent_key')=='texas-a-and-m' for r in assertions)
+          for school in ('northwestern','oklahoma'):
+              srows=rows(f'schools/{school}/source-games.csv')
+              assert not any(r.get('normalized_opponent_key','').strip()=='texas-a-and-m' for r in srows)
+              for school0,source_game_id,raw_text,label in before['source_evidence']:
+                  if school0!=school: continue
+                  r=next(x for x in srows if x.get('source_game_id','')==source_game_id)
+                  assert r.get('raw_text','')==raw_text
+                  assert r.get('source_opponent_label','')==label
+              orows=rows(f'schools/{school}/opponents.csv')
+              assert not any(r.get('canonical_opponent_key','').strip()=='texas-a-and-m' for r in orows)
+          byid={r['canonical_game_id']:r for r in games}
+          g=byid['CBBG-0009910']; assert g['game_date']=='1969-12-30' and g['overtime_periods']=='1' and g['site_type']=='NEUTRAL' and g['site_city']=='Greenville' and g['site_state']=='SC'
+          g=byid['CBBG-0062880']; assert g['game_date']=='2005-01-18' and {g['team_a_score'],g['team_b_score']}=={'70','54'} and g['venue_key']=='reed-arena' and g['site_city']=='College Station' and g['site_state']=='TX'
+          g=byid['CBBG-0063008']; assert g['game_date']=='2010-01-19' and {g['team_a_score'],g['team_b_score']}=={'65','62'} and g['venue_key']=='reed-arena' and g['site_city']=='College Station' and g['site_state']=='TX'
+          g=byid['CBBG-0063073']; assert g['game_date']=='2012-12-15' and g['site_type']=='NEUTRAL' and g['designated_home_team_key']=='' and g['venue_key']=='paycom-center' and g['venue_id']=='VEN-000162' and g['site_city']=='Oklahoma City' and g['site_state']=='OK'
+          absorbed={'CBBG-0066393','CBBG-0067210','CBBG-0067341','CBBG-0067408'}
+          assert not absorbed & set(byid)
+          new=disc[-4:]
+          assert len(new)==4 and all(r['status']=='RESOLVED' for r in new)
+          print('POST_COUNTS', {'canonical':len(games),'assertions':len(assertions),'discrepancies':len(disc)})
+          print('FOUR_REVIEWED_EXCEPTIONS=PASS')
+          print('RAW_SOURCE_EVIDENCE_PRESERVED=PASS')
+          PY
+
+      - name: Run permanent repository and publication QA
+        shell: bash
+        run: |
+          python tools/validate_data.py
+          python tools/build_site_data.py --apply
+          python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
+          python tools/published_opponent_identity_census.py --json > /tmp/post-opponent-census.json
+          python - <<'PY'
+          import json
+          report=json.load(open('/tmp/post-opponent-census.json'))
+          assert report['priority_counts']['P0']==0, report['priority_counts']
+          stale=[x for x in report['findings'] if x.get('canonical_opponent_key')=='texas-a-and-m']
+          assert not stale, stale
+          print('POST_CENSUS_P0=0')
+          print('TEXAS_A_AND_M_SPLIT=ABSENT')
+          PY
+          python tools/published_site_completeness_census.py --json > /tmp/post-site-census.json
+          echo 'ESTABLISHED_REPOSITORY_QA=PASS'
+
+      - name: Enforce exact bounded changed paths
+        shell: bash
+        run: |
+          python - <<'PY'
+          import subprocess
+          expected={
+            'data/canonical/games.csv',
+            'data/evidence/game-assertions.csv',
+            'data/reconciliation/discrepancies.csv',
+            'schools/northwestern/opponents.csv',
+            'schools/northwestern/source-games.csv',
+            'schools/oklahoma/opponents.csv',
+            'schools/oklahoma/source-games.csv',
+            'site/data/manifest.json',
+            'site/data/teams/northwestern.json',
+            'site/data/teams/oklahoma.json',
+            'site/data/teams/texas-a-m.json',
+          }
+          changed=subprocess.check_output(['git','status','--porcelain'],text=True).splitlines()
+          paths=[]
+          for line in changed:
+              p=line[3:]
+              if ' -> ' in p: p=p.split(' -> ',1)[1]
+              paths.append(p)
+          assert set(paths)==expected, (sorted(paths),sorted(expected))
+          print('EXACT_BOUNDED_CHANGED_PATHS=11')
+          PY
+
+      - name: Commit exact validated transaction directly atop protected main and publish clean production branch
+        shell: bash
+        run: |
+          SEAL=$(cat /tmp/production-seal.txt)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/canonical/games.csv
+          git add data/evidence/game-assertions.csv
+          git add data/reconciliation/discrepancies.csv
+          git add schools/northwestern/opponents.csv schools/northwestern/source-games.csv
+          git add schools/oklahoma/opponents.csv schools/oklahoma/source-games.csv
+          git add site/data/manifest.json site/data/teams/northwestern.json site/data/teams/oklahoma.json site/data/teams/texas-a-m.json
+          git commit -m "Apply sealed Texas A&M opponent identity remediation" -m "production_plan_sha256=$SEAL" -m "base_sha=adc8c9ed1eed71ff2311bc8fab37a212b0372662"
+          test "$(git rev-parse HEAD^)" = "adc8c9ed1eed71ff2311bc8fab37a212b0372662"
+          git push origin HEAD:refs/heads/data/opponent-identity-remediation-texas-a-m-production
