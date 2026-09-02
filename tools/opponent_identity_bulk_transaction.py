@@ -46,6 +46,7 @@ MANIFEST_FIELDS = [
     "evidence_url",
 ]
 SUPPORTED_DECISIONS = {"MERGE_TO_PROGRAM", "REKEY_DISTINCT_NON_D1"}
+ALL_PACKAGE_USAGES = "__ALL_KEY_USAGES__"
 PAIR_KINDS = {"EXPLICIT_RECONCILIATION", "EXPLICIT_COUNTERPART", "SAME_DATE_IDENTITY_CONFLICT", "EXACT_CORE_MATCH"}
 
 
@@ -140,31 +141,42 @@ def load_manifest(repo: Path, path: Path) -> tuple[list[dict[str, Any]], dict[st
             items.append({**row, "manifest_id": mid, "source_game_ids": []})
             continue
         _, opponent_rows = read_csv(opponents)
+        grouped_scope = label == ALL_PACKAGE_USAGES
         matches = [
             r for r in opponent_rows
-            if clean(r.get("source_opponent_label")) == label
-            and clean(r.get("canonical_opponent_key")) == old
+            if clean(r.get("canonical_opponent_key")) == old
+            and (grouped_scope or clean(r.get("source_opponent_label")) == label)
         ]
-        if len(matches) != 1:
-            blockers.append(f"{mid}: expected exactly one opponents.csv row, found {len(matches)}")
-        expected = None
-        if matches:
-            try:
-                expected = int(clean(matches[0].get("games_with_source_label")))
-            except ValueError:
-                blockers.append(f"{mid}: invalid games_with_source_label")
+        if grouped_scope:
+            if not matches:
+                blockers.append(f"{mid}: no opponents.csv rows for grouped old key {old!r}")
+            expected = None
+        else:
+            if len(matches) != 1:
+                blockers.append(f"{mid}: expected exactly one opponents.csv row, found {len(matches)}")
+            expected = None
+            if matches:
+                try:
+                    expected = int(clean(matches[0].get("games_with_source_label")))
+                except ValueError:
+                    blockers.append(f"{mid}: invalid games_with_source_label")
 
         _, game_rows = read_csv(source_games)
         game_matches = [
             r for r in game_rows
-            if clean(r.get("source_opponent_label")) == label
-            and clean(r.get("normalized_opponent_key")) == old
+            if clean(r.get("normalized_opponent_key")) == old
+            and (grouped_scope or clean(r.get("source_opponent_label")) == label)
         ]
-        if expected is not None and len(game_matches) != expected:
+        if not grouped_scope and expected is not None and len(game_matches) != expected:
             blockers.append(f"{mid}: source-game count {len(game_matches)} != opponents.csv count {expected}")
         if not game_matches:
             blockers.append(f"{mid}: no matching source-games.csv rows")
-        items.append({**row, "manifest_id": mid, "source_game_ids": sorted(clean(r.get("source_game_id")) for r in game_matches)})
+        items.append({
+            **row,
+            "manifest_id": mid,
+            "source_game_ids": sorted(clean(r.get("source_game_id")) for r in game_matches),
+            "opponent_row_labels": sorted(clean(r.get("source_opponent_label")) for r in matches),
+        })
 
     return sorted(items, key=lambda x: x["manifest_id"]), key_map, sorted(set(blockers))
 
@@ -451,17 +463,20 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
             loaded.setdefault(sp, read_csv(sp))
             _, opponent_rows = loaded[op]
             _, source_rows = loaded[sp]
+            grouped_scope = item["source_opponent_label"] == ALL_PACKAGE_USAGES
             matches = [
                 r for r in opponent_rows
-                if clean(r.get("source_opponent_label")) == item["source_opponent_label"]
-                and clean(r.get("canonical_opponent_key")) == item["from_program_key"]
+                if clean(r.get("canonical_opponent_key")) == item["from_program_key"]
+                and (grouped_scope or clean(r.get("source_opponent_label")) == item["source_opponent_label"])
             ]
-            if len(matches) != 1:
-                raise BulkTransactionError(item["manifest_id"] + ": opponents row changed")
-            matches[0]["canonical_opponent_key"] = item["to_program_key"]
-            matches[0]["canonical_opponent_name"] = item["to_program_name"]
-            matches[0]["current_d1"] = item["target_current_d1"]
-            opponent_updates += 1
+            actual_labels = sorted(clean(r.get("source_opponent_label")) for r in matches)
+            if not matches or actual_labels != item.get("opponent_row_labels", []):
+                raise BulkTransactionError(item["manifest_id"] + ": opponents row set changed")
+            for match in matches:
+                match["canonical_opponent_key"] = item["to_program_key"]
+                match["canonical_opponent_name"] = item["to_program_name"]
+                match["current_d1"] = item["target_current_d1"]
+            opponent_updates += len(matches)
 
             ids = set(item["source_game_ids"])
             source_matches = [r for r in source_rows if clean(r.get("source_game_id")) in ids]
