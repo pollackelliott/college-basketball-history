@@ -1,0 +1,66 @@
+name: One-time comprehensive opponent identity plan v6
+on:
+  push:
+    branches: [scratch/opponent-identity-comprehensive-plan-v6]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 207206f6b3dae277ce82490e3eb176b402aa0ae1
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v5
+          path: /tmp/v5
+          github-token: ${{ github.token }}
+          run-id: 33660835256
+      - name: Normalize recovered owner corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 207206f6b3dae277ce82490e3eb176b402aa0ae1
+          test -f /tmp/v5/v4/v3/manifest.csv
+          test -f /tmp/v5/v4/v3/resolutions.json
+          cp /tmp/v5/v4/v3/manifest.csv /tmp/manifest.csv
+          cp /tmp/v5/v4/v3/resolutions.json /tmp/resolutions.json
+          python - <<'PY'
+          import csv
+          with open('/tmp/manifest.csv',encoding='utf-8-sig',newline='') as f: m=list(csv.DictReader(f))
+          assert len(m)==173
+          assert len({r['from_program_key'] for r in m})==122
+          print('MANIFEST_ROWS=173 DISTINCT_KEY_REMAPS=122')
+          PY
+      - name: Generate exact-main v6 plan twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/manifest.csv /tmp/resolutions.json --output /tmp/plan-a.json
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/manifest.csv /tmp/resolutions.json --output /tmp/plan-b.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/plan-a.json')); b=json.load(open('/tmp/plan-b.json'))
+          assert a['plan_sha256']==b['plan_sha256']
+          assert a['git_head']=='207206f6b3dae277ce82490e3eb176b402aa0ae1'
+          assert a['blockers']==[], a['blockers']
+          assert (a['affected_canonical_game_count'],len(a['remap_only_canonical_game_ids']),len(a['canonical_pairs']),len(a['absorbed_canonical_game_ids']),len(a['retained_distinct_canonical_game_ids']),len(a['new_discrepancies']),len(a['venue_registry_additions']),len(a['venue_name_additions']))==(434,376,58,58,2,5,1,1)
+          print('PLAN_SHA256='+a['plan_sha256'])
+          print('AFFECTED=434 IN_PLACE=376 PAIRS=58 ABSORBED=58 RETAINED_DISTINCT=2 NEW_DISCREPANCIES=5 VENUES_ADDED=1 VENUE_NAMES_ADDED=1 BLOCKERS=0')
+          PY
+          sha256sum /tmp/manifest.csv /tmp/resolutions.json /tmp/plan-a.json /tmp/plan-b.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v6
+          path: |
+            /tmp/manifest.csv
+            /tmp/resolutions.json
+            /tmp/plan-a.json
+            /tmp/plan-b.json
+          if-no-files-found: error
