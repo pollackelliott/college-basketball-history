@@ -9,7 +9,7 @@ Owner history-scope ruling: **Texas A&M has always been D1/top-level for site pu
 ## Coverage
 
 - Competitive games: **2,926** (1912-13 through completed 2025-26).
-- On-court record with known played result: **1,569-1,356**, plus **1** played-result-unknown administrative-forfeit row.
+- On-court record with known played result: **1,569-1,356**, plus **1** on-court-result-unknown administrative-forfeit row; that row carries structured `played_result=L` solely to encode the known official administrative outcome.
 - Unknown exact dates after bounded reciprocal-source recovery audit: **542** (down from 759; 217 exact dates recovered).
 - Unknown played scores: **9**.
 - Site perspective: **1,522 home / 1,019 opponent-home / 385 neutral / 0 unknown**.
@@ -19,7 +19,7 @@ The explicit 2024 Houston charity exhibition and 2025 Arizona State exhibition a
 
 ## Administrative results
 
-Exactly two 1917-18 rows carry `FORFEIT` metadata. The Simmons College row is printed as `0-2^` with a generic forfeit footnote; because no independently supported played score/result was found, its structured played score/result is left unknown. The Texas row is source-conflicted: Texas A&M prints `L 7-8†`, while Texas's official fact book explicitly says the contest was forfeited to Texas because A&M's Pay Dwyer was ineligible and preserves the anomalous `W 7-8` notation. The reciprocal evidence establishes the on-court orientation used here: A&M 8, Texas 7, A&M on-court win, followed by an administrative forfeit to Texas. Raw A&M text is preserved verbatim.
+Exactly two 1917-18 rows carry `FORFEIT` metadata. The Simmons College row is printed as `0-2^` with a generic forfeit footnote; because no independently supported on-court score/result was found, its structured scores remain blank; implementation records `played_result=L` solely as the known administrative outcome required for scoreless-forfeit canonicalization. The Texas row is source-conflicted: Texas A&M prints `L 7-8†`, while Texas's official fact book explicitly says the contest was forfeited to Texas because A&M's Pay Dwyer was ineligible and preserves the anomalous `W 7-8` notation. The reciprocal evidence establishes the on-court orientation used here: A&M 8, Texas 7, A&M on-court win, followed by an administrative forfeit to Texas. Raw A&M text is preserved verbatim.
 
 ## Conference chronology
 
@@ -146,3 +146,18 @@ Principal authoritative Texas A&M evidence:
 
 No game was added or removed. Opponent identity, history scope, and raw source
 text were not changed.
+
+## Scoreless-forfeit implementation normalization
+
+Mandatory pre-seal rehearsal exposed a canonical validation requirement for
+TAMRAW-00066, the 1917-18 Simmons College administrative forfeit.
+
+Texas A&M's official ledger prints `L 0-2^`. No independently supported
+on-court score/result is known, so `team_score` and `opponent_score` remain
+blank. The structured `played_result` is set to `L` only so the generic
+scoreless-forfeit ingestion path can preserve the known administrative winner
+(Simmons College) in canonical `result_winner_team_key`.
+
+This does not assert a played 0-2 score and does not convert the unknown
+on-court result into a researched result. It is an implementation encoding of
+the official administrative outcome.
