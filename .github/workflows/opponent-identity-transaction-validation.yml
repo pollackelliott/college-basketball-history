@@ -1,0 +1,229 @@
+name: Opponent identity transaction rehearsal
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact PR head
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run transaction fixture tests
+        run: python -m unittest discover -s tests -p 'test_opponent_identity_transaction.py' -v
+
+      - name: Run full repository tests before rehearsal
+        run: python -m unittest discover -s tests -v
+
+      - name: Build evidence-backed first-batch inputs
+        shell: bash
+        run: |
+          cat > /tmp/texas-am-p0-decisions.csv <<'CSV'
+          source_program_key,source_opponent_label,from_program_key,to_program_key,decision,evidence_basis,evidence_url
+          northwestern,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Northwestern package uses stale texas-a-and-m identity; current registry and reciprocal Texas A&M history establish texas-a-m as the same program identity.",https://12thman.com/
+          oklahoma,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Oklahoma package uses stale texas-a-and-m identity; current registry and official Texas A&M/Oklahoma reciprocal history establish texas-a-m as the same program identity.",https://12thman.com/
+          CSV
+
+          cat > /tmp/texas-am-p0-resolutions.json <<'JSON'
+          {
+            "schema_version": 1,
+            "resolutions": [
+              {
+                "resolution_id": "OIR-1969-NORTHWESTERN-TEXAS-A-M",
+                "kind": "SAME_DATE_IDENTITY_CONFLICT",
+                "survivor_canonical_game_id": "CBBG-0009910",
+                "absorbed_canonical_game_id": "CBBG-0066393",
+                "canonical_values": {
+                  "overtime_periods": "1",
+                  "site_city": "Greenville",
+                  "site_state": "SC"
+                },
+                "resolution_basis": "Texas A&M official schedule and official Northwestern opponent history explicitly record the 93-91 game as overtime in Greenville, South Carolina.",
+                "evidence_urls": [
+                  "https://12thman.com/sports/mens-basketball/schedule/1969-70",
+                  "https://12thman.com/sports/mens-basketball/opponent-history/northwestern/79"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "overtime_periods",
+                    "source_a_program_key": "northwestern",
+                    "source_a_value": "0 / omitted",
+                    "source_b_program_key": "texas-a-m",
+                    "source_b_value": "1 (OT)",
+                    "canonical_value": "1",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Texas A&M official schedule and opponent history explicitly mark overtime.",
+                    "notes": "Northwestern's omission remains preserved as source evidence."
+                  }
+                ]
+              },
+              {
+                "resolution_id": "OIR-2005-OKLAHOMA-TEXAS-A-M",
+                "kind": "SAME_DATE_IDENTITY_CONFLICT",
+                "survivor_canonical_game_id": "CBBG-0062880",
+                "absorbed_canonical_game_id": "CBBG-0067210",
+                "canonical_values": {
+                  "team_b_score": "54"
+                },
+                "resolution_basis": "Texas A&M's contemporaneous official recap and Oklahoma's official box score both establish Oklahoma 70, Texas A&M 54 at Reed Arena.",
+                "evidence_urls": [
+                  "https://12thman.com/news/2005/1/18/205225598",
+                  "https://soonersports.com/sports/2005/1/18/Stats_3983"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "score",
+                    "source_a_program_key": "oklahoma",
+                    "source_a_value": "Oklahoma 70, Texas A&M 56",
+                    "source_b_program_key": "texas-a-m",
+                    "source_b_value": "Oklahoma 70, Texas A&M 54",
+                    "canonical_value": "Oklahoma 70, Texas A&M 54",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Contemporaneous official Oklahoma box score and Texas A&M recap agree on 70-54.",
+                    "notes": "Oklahoma's later media-guide 70-56 assertion remains preserved."
+                  }
+                ]
+              },
+              {
+                "resolution_id": "OIR-2010-OKLAHOMA-TEXAS-A-M",
+                "kind": "EXPLICIT_COUNTERPART",
+                "survivor_canonical_game_id": "CBBG-0063008",
+                "absorbed_canonical_game_id": "CBBG-0067341",
+                "canonical_values": {
+                  "game_date": "2010-01-19"
+                },
+                "resolution_basis": "Texas A&M's contemporaneous official recap and Oklahoma's official archive establish January 19, 2010; the later Texas A&M year-by-year row carries January 23.",
+                "evidence_urls": [
+                  "https://12thman.com/news/2010/1/19/205228753",
+                  "https://soonersports.com/news/2013/5/20/208793026.aspx"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "game_date",
+                    "source_a_program_key": "texas-a-m",
+                    "source_a_value": "2010-01-23",
+                    "source_b_program_key": "oklahoma",
+                    "source_b_value": "2010-01-19",
+                    "canonical_value": "2010-01-19",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Contemporaneous Texas A&M recap and Oklahoma official archive establish January 19.",
+                    "notes": "Texas A&M's later year-by-year date remains preserved as source evidence."
+                  }
+                ]
+              }
+            ]
+          }
+          JSON
+
+      - name: Build deterministic real-data transaction plan
+        shell: bash
+        run: |
+          python tools/opponent_identity_transaction.py plan \
+            /tmp/texas-am-p0-decisions.csv \
+            /tmp/texas-am-p0-resolutions.json \
+            --output /tmp/texas-am-transaction-plan-a.json
+          python tools/opponent_identity_transaction.py plan \
+            /tmp/texas-am-p0-decisions.csv \
+            /tmp/texas-am-p0-resolutions.json \
+            --output /tmp/texas-am-transaction-plan-b.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('/tmp/texas-am-transaction-plan-a.json').read_text())
+          b=json.loads(Path('/tmp/texas-am-transaction-plan-b.json').read_text())
+          assert a['plan_sha256']==b['plan_sha256'], 'transaction plan is nondeterministic'
+          assert not a['blockers'], a['blockers']
+          assert a['affected_canonical_game_count']==52
+          assert a['canonical_pair_count']==52
+          assert len(a['absorbed_canonical_game_ids'])==52
+          assert len(a['survivor_canonical_game_ids'])==52
+          assert len(a['new_discrepancies'])==3
+          print('TRANSACTION_PLAN_SHA256='+a['plan_sha256'])
+          print('AFFECTED=52 PAIRS=52 ABSORBED=52 NEW_DISCREPANCIES=3')
+          PY
+
+      - name: Rehearse exact transaction in disposable repository copy
+        shell: bash
+        run: |
+          rm -rf /tmp/opponent-identity-rehearsal
+          cp -a "$GITHUB_WORKSPACE" /tmp/opponent-identity-rehearsal
+
+          PLAN_SHA=$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/texas-am-transaction-plan-a.json'))['plan_sha256'])
+          PY
+          )
+
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root=Path('/tmp/opponent-identity-rehearsal')
+          def count(path):
+              with path.open(encoding='utf-8-sig',newline='') as f: return sum(1 for _ in csv.DictReader(f))
+          payload={
+              'canonical':count(root/'data/canonical/games.csv'),
+              'assertions':count(root/'data/evidence/game-assertions.csv'),
+              'discrepancies':count(root/'data/reconciliation/discrepancies.csv'),
+          }
+          Path('/tmp/pre-counts.json').write_text(json.dumps(payload))
+          print('PRE_COUNTS',payload)
+          PY
+
+          python /tmp/opponent-identity-rehearsal/tools/opponent_identity_transaction.py \
+            --repo /tmp/opponent-identity-rehearsal \
+            apply /tmp/texas-am-p0-decisions.csv /tmp/texas-am-p0-resolutions.json \
+            --expected-plan-sha256 "$PLAN_SHA" --apply
+
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root=Path('/tmp/opponent-identity-rehearsal')
+          before=json.loads(Path('/tmp/pre-counts.json').read_text())
+          def rows(path):
+              with path.open(encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
+          games=rows(root/'data/canonical/games.csv')
+          assertions=rows(root/'data/evidence/game-assertions.csv')
+          discrepancies=rows(root/'data/reconciliation/discrepancies.csv')
+          assert len(games)==before['canonical']-52, (before['canonical'],len(games))
+          assert len(assertions)==before['assertions'], (before['assertions'],len(assertions))
+          assert len(discrepancies)==before['discrepancies']+3
+          assert not any(r.get('team_a_key')=='texas-a-and-m' or r.get('team_b_key')=='texas-a-and-m' for r in games)
+          assert not any(r.get('normalized_opponent_key')=='texas-a-and-m' for r in assertions)
+          print('POST_COUNTS',{'canonical':len(games),'assertions':len(assertions),'discrepancies':len(discrepancies)})
+          PY
+
+      - name: Validate disposable post-transaction repository
+        working-directory: /tmp/opponent-identity-rehearsal
+        run: |
+          python tools/validate_data.py
+          python -m unittest discover -s tests -v
+          python tools/build_site_data.py --apply
+          python tools/check_site_data_freshness.py
+          python tools/published_opponent_identity_census.py --json > /tmp/post-opponent-census.json
+          python - <<'PY'
+          import json
+          report=json.load(open('/tmp/post-opponent-census.json'))
+          stale=[x for x in report['findings'] if x.get('canonical_opponent_key')=='texas-a-and-m']
+          assert not stale, stale
+          print('POST_P0=',report['priority_counts']['P0'])
+          print('POST_P1=',report['priority_counts']['P1'])
+          PY
+
+      - name: Prove real checkout remained unchanged by rehearsal
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --short
+            echo 'FAIL: real checkout changed during disposable rehearsal'
+            exit 1
+          fi
+          echo 'PASS: no basketball data changed in the real checkout.'
