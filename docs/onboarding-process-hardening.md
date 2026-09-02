@@ -6,7 +6,7 @@
 
 Iowa proved that the permanent onboarding architecture is sound, but exposed a specific inefficiency: deterministic technical failures were first discovered after Owner Gate 1 had been sealed. That produced repeated preflight → carry-forward → reseal cycles even when basketball-history decisions had not changed.
 
-This amendment moves repeatable checks earlier, automates Gate 1 mechanics, and replaces one-command-at-a-time technical handoffs with guarded phase-sized operations. The historical rules in `new-team-onboarding-runbook.md`, shell rules in `codespace-terminal-safety.md`, parallelism rules in `parallel-portfolio-pipeline.md`, and release guarantees in `school-onboarding-fast-path.md` remain authoritative.
+This amendment moves repeatable checks earlier, automates Gate 1 mechanics, and replaces one-command-at-a-time technical handoffs with guarded phase-sized operations. The historical rules in `new-team-onboarding-runbook.md`, shell rules in `codespace-terminal-safety.md`, parallelism rules in `parallel-portfolio-pipeline.md`, release guarantees in `school-onboarding-fast-path.md`, research adversarial acceptance in `research-freeze-self-challenge.md`, and post-A&M operational recovery rules in `implementation-efficiency-recovery.md` remain authoritative.
 
 ## 1. Interaction standard: phase-sized, not command-sized
 
@@ -25,6 +25,8 @@ The Implementation lane should normally use one guarded operation for each rever
 Stop between phases only when repository state is unexpected, a genuine historical judgment is required, an irreversible boundary is being crossed, or a tool reports a blocker that cannot be resolved mechanically.
 
 Phase-sized work must still obey terminal safety: no interactive `set -u`, no `set -euo pipefail`, no unsafe interactive `exit`, no `git add -A`, and complex guarded shell work belongs in a `/tmp` child script.
+
+After Texas A&M, phase-sized work also means the owner should not be used as a command/result transport layer. Prefer one phase command block, compact terminal summaries, durable diagnostic artifacts, and resume-from-checkpoint behavior as defined in `docs/implementation-efficiency-recovery.md`.
 
 ## 2. Research freeze is an executable acceptance state
 
@@ -56,7 +58,9 @@ The acceptance gate checks, at minimum:
 
 Unknown exact dates and unknown played scores remain valid when historically honest; they are reported rather than guessed.
 
-The purpose is to keep ordinary research-completeness defects—such as Iowa's initially missing NCAA sites—out of serialized preflight.
+A mechanical pass is necessary but not sufficient. Research lanes must also complete the adversarial pre-freeze review in `docs/research-freeze-self-challenge.md`, including targeted review of large or suspicious HOME-venue, UNKNOWN H/A/N, exact-date, neutral/postseason, and venue-identity debt.
+
+The purpose is to keep ordinary research-completeness defects—and mechanically accounted but insufficiently challenged debt—out of serialized preflight.
 
 ## 3. Phase 0 is one guarded current-main staging operation
 
@@ -223,6 +227,14 @@ The next school entering Implementation should prove this hardened sequence:
 1 merge/Production proof
 ```
 
-Repeated technical reseals, giant owner copy/paste reports, manual conditional-row scripting, or school-specific scope exceptions are process regressions unless a genuinely new historical exception requires them.
+Repeated technical reseals, giant owner copy/paste reports, manual conditional-row scripting, school-specific scope exceptions, or replay of already-successful phases after an unrelated chat/Codespace interruption are process regressions unless a genuinely new historical or repository condition requires them.
+
+## 11. Post-A&M recovery invariant
+
+The chat is not the durable implementation state.
+
+After a failure or interruption, verify repository/GitHub state and resume from the earliest incomplete phase. Successful phase fingerprints, commits, integration-freeze artifacts, approved-plan hashes, PR heads, and deployment SHAs should be reused rather than reconstructed from transcript memory.
+
+If verbose evidence is required, write it to `/tmp` or ignored `.onboarding/` artifacts and surface only the compact summary needed for the next decision. If the implementation chat itself becomes unusable, create the compact recovery capsule defined in `docs/implementation-efficiency-recovery.md` and verify it in the replacement chat before acting.
 
 The objective remains: **MORE THROUGHPUT WITHOUT LESS QUALITY.**
