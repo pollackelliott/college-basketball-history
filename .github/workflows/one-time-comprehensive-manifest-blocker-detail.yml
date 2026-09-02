@@ -1,0 +1,70 @@
+name: One-time comprehensive manifest blocker detail
+
+on:
+  push:
+    branches:
+      - scratch/opponent-identity-comprehensive-rehearsal
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Identify the four package-count blockers
+        shell: bash
+        run: |
+          git fetch origin main chore/owner-nond1-scan-comprehensive-audit
+          git show origin/chore/owner-nond1-scan-comprehensive-audit:.github/workflows/one-time-owner-nond1-comprehensive-audit.yml > /tmp/comprehensive.yml
+          git show origin/chore/owner-nond1-scan-comprehensive-audit:.github/workflows/one-time-owner-nond1-authoritative-audit.yml > /tmp/authoritative.yml
+          python - <<'PY'
+          from pathlib import Path
+          comprehensive=Path('/tmp/comprehensive.yml').read_text(); marker="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=comprehensive.index(marker)+len(marker); b=comprehensive.index('\n          CSV',a)
+          Path('/tmp/owner_scan.csv').write_text('\n'.join(line[10:] if line.startswith('          ') else line for line in comprehensive[a:b].splitlines())+'\n')
+          authoritative=Path('/tmp/authoritative.yml').read_text(); start="          python - <<'PY'\n"
+          a=authoritative.index(start,authoritative.index('Prove complete confirmed accounting'))+len(start); b=authoritative.index('\n          PY\n          sha256sum',a)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in authoritative[a:b].splitlines()).replace("'123':'st-joseph-s'","'123':'saint-josephs'",1)
+          Path('/tmp/final_authoritative_audit.py').write_text(code+'\n')
+          PY
+          git checkout --detach 5c1ce8f7fc398886e8a830be084bbc723b93722e
+          python /tmp/final_authoritative_audit.py >/dev/null
+          python - <<'PY'
+          import csv,hashlib,json
+          from collections import Counter
+          from pathlib import Path
+          BLOCK={'OIB-3CA46907A886981E','OIB-48C76E6B09698E6C','OIB-83CB9EF27D4C4407','OIB-B606A30168665545'}
+          FIELDS=['source_program_key','source_opponent_label','from_program_key','to_program_key','to_program_name','target_current_d1','decision']
+          def read(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          audit=json.loads(Path('/tmp/authoritative-owner-audit.json').read_text()); keymap={k:v['to_key'] for k,v in audit['key_stats'].items()}
+          programs={r['program_key']:r for r in read('data/reference/programs.csv')}; current={k for k,r in programs.items() if r['current_d1']=='Yes'}
+          for op in sorted(Path('schools').glob('*/opponents.csv')):
+              source=op.parent.name
+              for r in read(op):
+                  old=r['canonical_opponent_key'].strip()
+                  if old not in keymap:continue
+                  new=keymap[old]
+                  if new=='arkansas-monticello': name='Arkansas-Monticello'; d1='No'; decision='REKEY_DISTINCT_NON_D1'
+                  else: name=(programs[new].get('display_name') or programs[new].get('program_name') or new).strip(); d1='Yes'; decision='MERGE_TO_PROGRAM'
+                  item={'source_program_key':source,'source_opponent_label':r['source_opponent_label'],'from_program_key':old,'to_program_key':new,'to_program_name':name,'target_current_d1':d1,'decision':decision}
+                  mid='OIB-'+hashlib.sha256('|'.join(item[f] for f in FIELDS).encode()).hexdigest()[:16].upper()
+                  if mid not in BLOCK:continue
+                  games=read(op.parent/'source-games.csv')
+                  literal=[g for g in games if g.get('source_opponent_label','').strip()==r['source_opponent_label'].strip()]
+                  oldrows=[g for g in literal if g.get('normalized_opponent_key','').strip()==old]
+                  print('BLOCKER='+mid)
+                  print('ITEM='+json.dumps(item,sort_keys=True))
+                  print('OPPONENT_INDEX='+json.dumps(r,sort_keys=True))
+                  print('LITERAL_SOURCE_ROWS='+str(len(literal))+' OLD_KEY_ROWS='+str(len(oldrows)))
+                  print('KEY_COUNTS='+json.dumps(Counter(g.get('normalized_opponent_key','').strip() for g in literal),sort_keys=True))
+                  for g in literal:
+                      print('SOURCE|'+json.dumps({k:g.get(k,'') for k in ['source_game_id','season_label','game_date','source_opponent_label','normalized_opponent_key','raw_text']},sort_keys=True))
+          PY
