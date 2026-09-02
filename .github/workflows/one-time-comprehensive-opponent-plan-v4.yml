@@ -1,0 +1,76 @@
+name: One-time comprehensive opponent identity plan v4
+on:
+  push:
+    branches: [scratch/opponent-identity-comprehensive-plan-v4]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 25d4e02ea492ad2af96f4ae40822431db7ecc50a
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v3
+          path: /tmp/v3
+          github-token: ${{ github.token }}
+          run-id: 33656220190
+      - name: Verify recovered comprehensive evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 25d4e02ea492ad2af96f4ae40822431db7ecc50a
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          old=json.load(open('/tmp/v3/plan-a.json'))
+          assert old['plan_sha256']=='2cfffd73b566aabd71834b427d7171bd3531bb7bb4f5ace1ab660641883301c3'
+          assert old['git_head']=='806caa7d5ed93e2949c675a1a1ddaad3e8ba8400'
+          assert old['blockers']==[]
+          assert (old['affected_canonical_game_count'],len(old['remap_only_canonical_game_ids']),len(old['canonical_pairs']),len(old['absorbed_canonical_game_ids']),len(old['retained_distinct_canonical_game_ids']),len(old['new_discrepancies']),len(old['venue_registry_additions']))==(434,376,58,58,2,5,1)
+          with open('/tmp/v3/manifest.csv',encoding='utf-8-sig',newline='') as f: manifest=list(csv.DictReader(f))
+          assert len(manifest)==173
+          assert len({r['from_program_key'] for r in manifest})==122
+          res=json.load(open('/tmp/v3/resolutions.json'))
+          assert res['schema_version']==2 and len(res['resolutions'])==5 and len(res['retain_distinct'])==1 and len(res['venue_registry_additions'])==1
+          venue=res['venue_registry_additions'][0]
+          assert (venue['venue_id'],venue['venue_key'],venue['display_name'],venue['city'],venue['state'])==('VEN-000371','eugenio-guerra-sports-complex','Eugenio Guerra Sports Complex','Bayamón','PR')
+          print('PASS: recovered exact v3 owner evidence and five reviewed reconciliations.')
+          PY
+      - name: Generate exact-main v4 plan twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/v3/manifest.csv /tmp/v3/resolutions.json --output /tmp/plan-a.json
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/v3/manifest.csv /tmp/v3/resolutions.json --output /tmp/plan-b.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/plan-a.json')); b=json.load(open('/tmp/plan-b.json'))
+          assert a['plan_sha256']==b['plan_sha256']
+          assert a['git_head']=='25d4e02ea492ad2af96f4ae40822431db7ecc50a'
+          assert a['blockers']==[], a['blockers']
+          assert (a['affected_canonical_game_count'],len(a['remap_only_canonical_game_ids']),len(a['canonical_pairs']),len(a['absorbed_canonical_game_ids']),len(a['retained_distinct_canonical_game_ids']),len(a['new_discrepancies']),len(a['venue_registry_additions']),len(a['venue_name_additions']))==(434,376,58,58,2,5,1,1)
+          n=a['venue_name_additions'][0]
+          assert (n['venue_id'],n['venue_name'],n['normalized_name'],n['name_type'])==('VEN-000371','Eugenio Guerra Sports Complex','eugenioguerrasportscomplex','PROJECT_DISPLAY')
+          print('PLAN_SHA256='+a['plan_sha256'])
+          print('GIT_HEAD='+a['git_head'])
+          print('AFFECTED=434 IN_PLACE=376 PAIRS=58 ABSORBED=58 RETAINED_DISTINCT=2 NEW_DISCREPANCIES=5 VENUES_ADDED=1 VENUE_NAMES_ADDED=1 BLOCKERS=0')
+          PY
+          sha256sum /tmp/v3/manifest.csv /tmp/v3/resolutions.json /tmp/plan-a.json /tmp/plan-b.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v4
+          path: |
+            /tmp/v3/authoritative-owner-audit.json
+            /tmp/v3/manifest.csv
+            /tmp/v3/resolutions.json
+            /tmp/plan-a.json
+            /tmp/plan-b.json
+          if-no-files-found: error
