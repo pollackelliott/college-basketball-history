@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 import opponent_identity_remediation as remediation
 import opponent_identity_collision_audit as collision_audit
+from location_safety import retire_site_mismatched_registry_fallbacks
 
 class TransactionError(RuntimeError): pass
 OpponentIdentityTransactionError=TransactionError
@@ -101,7 +102,12 @@ def build_plan(repo,decisions,resolutions):
         notes=[]
         for x in [clean(sm.get('notes')),clean(am.get('notes')),f'[OPPONENT_IDENTITY_RECONCILIATION absorbed={aid}; preserved survivor={sid}; one real game / one canonical game]']:
             if x and x not in notes: notes.append(x)
-        if 'notes' in cfields: final['notes']=' | '.join(notes)
+        if 'notes' in cfields:
+            combined=' | '.join(notes)
+            combined,retired=retire_site_mismatched_registry_fallbacks(combined,final.get('site_type',''))
+            if retired:
+                combined=(combined+' '+f'[OPPONENT_IDENTITY_RECONCILIATION retired_registry_fallbacks={retired}; canonical_site_type={final.get("site_type","")}; superseded machine fallback no longer controls canonical site/venue]').strip()
+            final['notes']=combined
         pairs.append({'kind':kind,'survivor_canonical_game_id':sid,'absorbed_canonical_game_id':aid,'resolution_id':(res or {}).get('resolution_id',''),'final_canonical_values':final,'discrepancies':(res or {}).get('discrepancies',[])})
         if res: usedr.add(res['resolution_id'])
     for g in audit.get('collision_groups',[]):
