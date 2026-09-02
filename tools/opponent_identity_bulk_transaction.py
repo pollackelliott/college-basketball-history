@@ -335,6 +335,28 @@ def build_plan(repo: Path, manifest_path: Path, resolutions_path: Path) -> dict[
             continue
         blockers.append("unknown-date collision requires explicit retain-distinct or counterpart ruling: " + ",".join(group["canonical_game_ids"]))
 
+    # Explicit counterpart resolutions may intentionally bridge rows that the
+    # date-based collision audit cannot pair (for example, two source histories
+    # disagree on the exact game date).  They are still guarded: the stale-key
+    # survivor must be affected by this transaction and the resolution kind must
+    # explicitly authorize a non-standard counterpart.
+    for resolution in pair_resolutions:
+        if resolution["resolution_id"] in used_pair_resolutions:
+            continue
+        if resolution["kind"] not in {"EXPLICIT_COUNTERPART", "EXPLICIT_RECONCILIATION"}:
+            continue
+        if resolution["survivor"] not in affected:
+            blockers.append(
+                f"{resolution['resolution_id']}: explicit counterpart survivor is not an affected stale-key row"
+            )
+            continue
+        make_pair(
+            resolution["survivor"],
+            resolution["absorbed"],
+            "EXPLICIT_COUNTERPART",
+            resolution,
+        )
+
     unused_pairs = [r["resolution_id"] for r in pair_resolutions if r["resolution_id"] not in used_pair_resolutions]
     unused_distinct = [r["resolution_id"] for r in distinct_resolutions if r["resolution_id"] not in used_distinct]
     if unused_pairs:
