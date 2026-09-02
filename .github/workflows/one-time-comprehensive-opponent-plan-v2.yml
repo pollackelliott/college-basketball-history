@@ -1,0 +1,198 @@
+name: One-time comprehensive opponent identity plan v2
+
+on:
+  push:
+    branches:
+      - scratch/opponent-identity-comprehensive-plan-v2
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 3ae841961eda545ac39aa476154d438c0c058e3d
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct exact owner-reviewed authoritative census
+        shell: bash
+        run: |
+          set -euo pipefail
+          AUDIT_HEAD=84b0692f5958c2fffed12dae6bda11656ff5df78
+          git cat-file -e "$AUDIT_HEAD^{commit}"
+          git show "$AUDIT_HEAD:.github/workflows/one-time-owner-nond1-comprehensive-audit.yml" > /tmp/comprehensive-audit.yml
+          git show "$AUDIT_HEAD:.github/workflows/one-time-owner-nond1-authoritative-audit.yml" > /tmp/authoritative-audit.yml
+          python - <<'PY'
+          from pathlib import Path
+          comprehensive=Path('/tmp/comprehensive-audit.yml').read_text()
+          marker="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=comprehensive.index(marker)+len(marker); b=comprehensive.index('\n          CSV',a)
+          lines=[line[10:] if line.startswith('          ') else line for line in comprehensive[a:b].splitlines()]
+          Path('/tmp/owner_scan.csv').write_text('\n'.join(lines)+'\n')
+          authoritative=Path('/tmp/authoritative-audit.yml').read_text()
+          start="          python - <<'PY'\n"
+          a=authoritative.index(start,authoritative.index('Prove complete confirmed accounting'))+len(start)
+          b=authoritative.index('\n          PY\n          sha256sum',a)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in authoritative[a:b].splitlines())
+          old="'123':'st-joseph-s'"; new="'123':'saint-josephs'"
+          assert old in code
+          code=code.replace(old,new,1)
+          Path('/tmp/final_authoritative_audit.py').write_text(code+'\n')
+          PY
+          python /tmp/final_authoritative_audit.py > /tmp/authoritative-audit.log
+          grep -E '^(REVIEW_COUNTS|CONFIRMED_DECISIONS|ACTION_COUNTS|DISTINCT_KEY_REMAPS|AFFECTED_CANONICAL|EXACT_COLLISION_GROUPS|UNDATED_COLLISION_GROUPS|KEYS_WITH_EXTRA_PROGRAM_USAGE)=' /tmp/authoritative-audit.log
+
+      - name: Expand every approved old key across every package
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          SENTINEL='__ALL_KEY_USAGES__'
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          payload=json.loads(Path('/tmp/authoritative-owner-audit.json').read_text())
+          decisions=[d for d in payload['decisions'] if d['action']=='KEY_REMAP']
+          assert len(decisions)==167
+          mapping={}
+          for d in decisions:
+              info=(d['to_key'],d['to_name'],'Yes' if d['target_current_d1'] else 'No')
+              if d['from_key'] in mapping: assert mapping[d['from_key']]==info
+              mapping[d['from_key']]=info
+          assert len(mapping)==122
+          old_keys=set(mapping)
+          manifest=[]; covered=set(); packages_by_key={k:set() for k in old_keys}
+          for spath in sorted(Path('schools').glob('*/source-games.csv')):
+              program=spath.parent.name
+              srows=rows(spath)
+              present=sorted({(r.get('normalized_opponent_key') or '').strip() for r in srows}&old_keys)
+              if not present: continue
+              orows=rows(spath.parent/'opponents.csv')
+              for old in present:
+                  to_key,to_name,current=mapping[old]
+                  source_ids=sorted((r.get('source_game_id') or '').strip() for r in srows if (r.get('normalized_opponent_key') or '').strip()==old)
+                  opponent_rows=[r for r in orows if (r.get('canonical_opponent_key') or '').strip()==old]
+                  assert source_ids and opponent_rows,(program,old,len(source_ids),len(opponent_rows))
+                  packages_by_key[old].add(program)
+                  covered.update((program,sid) for sid in source_ids)
+                  manifest.append({
+                      'source_program_key':program,
+                      'source_opponent_label':SENTINEL,
+                      'from_program_key':old,
+                      'to_program_key':to_key,
+                      'to_program_name':to_name,
+                      'target_current_d1':current,
+                      'decision':'REKEY_DISTINCT_NON_D1' if to_key=='arkansas-monticello' else 'MERGE_TO_PROGRAM',
+                      'evidence_basis':'Owner-confirmed institutional identity normalization in the authoritative 2026-09-02 opponent scan; grouped package scope expands the same approved old-key identity across every literal source spelling in this source program while preserving literal evidence.',
+                      'evidence_url':'',
+                  })
+          global_rows={(p.parent.name,(r.get('source_game_id') or '').strip()) for p in Path('schools').glob('*/source-games.csv') for r in rows(p) if (r.get('normalized_opponent_key') or '').strip() in old_keys}
+          assert covered==global_rows,(len(covered),len(global_rows))
+          assert all(packages_by_key[k] for k in old_keys)
+          fields=['source_program_key','source_opponent_label','from_program_key','to_program_key','to_program_name','target_current_d1','decision','evidence_basis','evidence_url']
+          with Path('/tmp/comprehensive-opponent-manifest.csv').open('w',encoding='utf-8',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(sorted(manifest,key=lambda r:(r['source_program_key'],r['from_program_key'])))
+          print('DISTINCT_KEY_REMAPS='+str(len(mapping)))
+          print('GROUPED_MANIFEST_ROWS='+str(len(manifest)))
+          print('GLOBAL_SOURCE_ROWS='+str(len(global_rows)))
+          print('PROGRAMS_TOUCHED='+str(len({r['source_program_key'] for r in manifest})))
+          print('NON_D1_GROUPS='+str(sum(r['decision']=='REKEY_DISTINCT_NON_D1' for r in manifest)))
+          PY
+
+      - name: Build reviewed pair and retain-distinct resolutions
+        shell: bash
+        run: |
+          cat > /tmp/comprehensive-opponent-resolutions.json <<'JSON'
+          {
+            "schema_version": 2,
+            "resolutions": [
+              {
+                "resolution_id": "OIR-1969-NORTHWESTERN-TEXAS-A-M",
+                "kind": "SAME_DATE_IDENTITY_CONFLICT",
+                "survivor_canonical_game_id": "CBBG-0009910",
+                "absorbed_canonical_game_id": "CBBG-0066393",
+                "canonical_values": {"overtime_periods":"1","site_city":"Greenville","site_state":"SC"},
+                "resolution_basis": "Texas A&M official schedule and official Northwestern opponent history explicitly record the 93-91 game as overtime in Greenville, South Carolina.",
+                "evidence_urls": ["https://12thman.com/sports/mens-basketball/schedule/1969-70","https://12thman.com/sports/mens-basketball/opponent-history/northwestern/79"],
+                "discrepancies": [{"field_name":"overtime_periods","source_a_program_key":"northwestern","source_a_value":"0 / omitted","source_b_program_key":"texas-a-m","source_b_value":"1 (OT)","canonical_value":"1","status":"RESOLVED","resolution_basis":"Texas A&M official schedule and opponent history explicitly mark overtime.","notes":"Northwestern's omission remains preserved as source evidence."}]
+              },
+              {
+                "resolution_id": "OIR-2005-OKLAHOMA-TEXAS-A-M",
+                "kind": "SAME_DATE_IDENTITY_CONFLICT",
+                "survivor_canonical_game_id": "CBBG-0062880",
+                "absorbed_canonical_game_id": "CBBG-0067210",
+                "canonical_values": {"team_b_score":"54"},
+                "resolution_basis": "Texas A&M's contemporaneous official recap and Oklahoma's official box score both establish Oklahoma 70, Texas A&M 54 at Reed Arena.",
+                "evidence_urls": ["https://12thman.com/news/2005/1/18/205225598","https://soonersports.com/sports/2005/1/18/Stats_3983"],
+                "discrepancies": [{"field_name":"score","source_a_program_key":"oklahoma","source_a_value":"Oklahoma 70, Texas A&M 56","source_b_program_key":"texas-a-m","source_b_value":"Oklahoma 70, Texas A&M 54","canonical_value":"Oklahoma 70, Texas A&M 54","status":"RESOLVED","resolution_basis":"Contemporaneous official Oklahoma box score and Texas A&M recap agree on 70-54.","notes":"Oklahoma's later media-guide 70-56 assertion remains preserved."}]
+              },
+              {
+                "resolution_id": "OIR-2010-OKLAHOMA-TEXAS-A-M",
+                "kind": "EXPLICIT_COUNTERPART",
+                "survivor_canonical_game_id": "CBBG-0063008",
+                "absorbed_canonical_game_id": "CBBG-0067341",
+                "canonical_values": {"game_date":"2010-01-19"},
+                "resolution_basis": "Texas A&M's contemporaneous official recap and Oklahoma's official archive establish January 19, 2010; the later Texas A&M year-by-year row carries January 23.",
+                "evidence_urls": ["https://12thman.com/news/2010/1/19/205228753","https://soonersports.com/news/2013/5/20/208793026.aspx"],
+                "discrepancies": [{"field_name":"game_date","source_a_program_key":"texas-a-m","source_a_value":"2010-01-23","source_b_program_key":"oklahoma","source_b_value":"2010-01-19","canonical_value":"2010-01-19","status":"RESOLVED","resolution_basis":"Contemporaneous Texas A&M recap and Oklahoma official archive establish January 19.","notes":"Texas A&M's later year-by-year date remains preserved as source evidence."}]
+              },
+              {
+                "resolution_id": "OIR-2012-OKLAHOMA-TEXAS-A-M",
+                "kind": "EXPLICIT_RECONCILIATION",
+                "survivor_canonical_game_id": "CBBG-0063073",
+                "absorbed_canonical_game_id": "CBBG-0067408",
+                "canonical_values": {"site_type":"NEUTRAL","venue_key":"paycom-center","venue_id":"VEN-000162","site_city":"Oklahoma City","site_state":"OK"},
+                "canonical_clear_fields": ["designated_home_team_key"],
+                "resolution_basis": "Texas A&M's official 2012-13 schedule explicitly classifies the All-College Classic against Oklahoma as Neutral in Oklahoma City, and contemporaneous A&M material identifies Chesapeake Energy Arena; the global venue registry maps that physical arena to VEN-000162 / paycom-center.",
+                "evidence_urls": ["https://12thman.com/sports/mens-basketball/schedule/text/2012-13","https://12thman.com/news/2012/12/15/am-win-streak-snapped-by-ou-64-54","https://12thman.com/sports/mens-basketball/stats/2012-13/oklahoma/boxscore/884","https://soonersports.com/news/2012/12/15/208397488.aspx"],
+                "discrepancies": [{"field_name":"site_type","source_a_program_key":"oklahoma","source_a_value":"NEUTRAL","source_b_program_key":"texas-a-m","source_b_value":"SOURCE_PROGRAM_HOME / Reed Arena in later year-by-year curation","canonical_value":"NEUTRAL / Paycom Center / Oklahoma City, OK","status":"RESOLVED","resolution_basis":"Texas A&M's official season schedule explicitly marks the game Neutral and places the All-College Classic at Chesapeake Energy Arena in Oklahoma City; contemporaneous A&M material corroborates the physical site.","notes":"The conflicting later source interpretation remains preserved; historical Chesapeake Energy Arena is global venue VEN-000162 (project display Paycom Center)."}]
+              }
+            ],
+            "retain_distinct": [{"resolution_id":"OIR-1913-TEXAS-A-M-SAM-HOUSTON-DISTINCT","canonical_game_ids":["CBBG-0065455","CBBG-0065459"],"resolution_basis":"Texas A&M's historical source ledger contains two separate 1913-14 Sam Houston entries with opposite home designations. Exact dates and scores are unavailable; normalizing sam-houston-nc to sam-houston must preserve both real games rather than deduplicating an information-poor signature.","evidence_urls":[]}]
+          }
+          JSON
+
+      - name: Generate comprehensive plan twice
+        shell: bash
+        run: |
+          set +e
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/comprehensive-opponent-manifest.csv /tmp/comprehensive-opponent-resolutions.json --output /tmp/plan-a.json
+          RC_A=$?
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/comprehensive-opponent-manifest.csv /tmp/comprehensive-opponent-resolutions.json --output /tmp/plan-b.json
+          RC_B=$?
+          set -e
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/plan-a.json'));b=json.load(open('/tmp/plan-b.json'))
+          assert a['plan_sha256']==b['plan_sha256']
+          print('PLAN_SHA256='+a['plan_sha256'])
+          print('GIT_HEAD='+a['git_head'])
+          print('AFFECTED='+str(a['affected_canonical_game_count']))
+          print('IN_PLACE='+str(len(a['remap_only_canonical_game_ids'])))
+          print('PAIRS='+str(len(a['canonical_pairs'])))
+          print('ABSORBED='+str(len(a['absorbed_canonical_game_ids'])))
+          print('RETAINED_DISTINCT='+str(len(a['retained_distinct_canonical_game_ids'])))
+          print('NEW_DISCREPANCIES='+str(len(a['new_discrepancies'])))
+          print('BLOCKERS='+str(len(a['blockers'])))
+          for x in a['blockers']:print('BLOCKER='+x)
+          PY
+          echo "PLAN_RETURN_CODES=$RC_A,$RC_B"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v2
+          path: |
+            /tmp/authoritative-owner-audit.json
+            /tmp/comprehensive-opponent-manifest.csv
+            /tmp/comprehensive-opponent-resolutions.json
+            /tmp/plan-a.json
+            /tmp/plan-b.json
+          if-no-files-found: warn
