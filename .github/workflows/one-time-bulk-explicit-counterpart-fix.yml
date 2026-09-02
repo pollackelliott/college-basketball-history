@@ -1,0 +1,53 @@
+name: One-time bulk explicit counterpart hardening
+
+on:
+  push:
+    branches:
+      - chore/opponent-identity-bulk-remediation-tooling
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/opponent-identity-bulk-remediation-tooling
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add unpaired explicit counterpart support and regression coverage
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          tool=Path('tools/opponent_identity_bulk_transaction.py')
+          text=tool.read_text()
+          needle='''    unused_pairs = [r["resolution_id"] for r in pair_resolutions if r["resolution_id"] not in used_pair_resolutions]\n'''
+          insert='''    # Explicit counterpart resolutions may intentionally bridge rows that the\n    # date-based collision audit cannot pair (for example, two source histories\n    # disagree on the exact game date).  They are still guarded: the stale-key\n    # survivor must be affected by this transaction and the resolution kind must\n    # explicitly authorize a non-standard counterpart.\n    for resolution in pair_resolutions:\n        if resolution["resolution_id"] in used_pair_resolutions:\n            continue\n        if resolution["kind"] not in {"EXPLICIT_COUNTERPART", "EXPLICIT_RECONCILIATION"}:\n            continue\n        if resolution["survivor"] not in affected:\n            blockers.append(\n                f"{resolution['resolution_id']}: explicit counterpart survivor is not an affected stale-key row"\n            )\n            continue\n        make_pair(\n            resolution["survivor"],\n            resolution["absorbed"],\n            "EXPLICIT_COUNTERPART",\n            resolution,\n        )\n\n    unused_pairs = [r["resolution_id"] for r in pair_resolutions if r["resolution_id"] not in used_pair_resolutions]\n'''
+          if needle not in text:
+              raise SystemExit('tool insertion point not found')
+          tool.write_text(text.replace(needle,insert,1))
+
+          test=Path('tests/test_opponent_identity_bulk_transaction.py')
+          text=test.read_text()
+          needle='''    def test_hash_mismatch_refuses_before_write(self):\n'''
+          insert='''    def test_unpaired_exact_date_can_use_explicit_counterpart(self):\n        self._manifest()\n        stale=game('CBBG-9','old-target',date='2000-01-02',b_score='60')\n        counterpart=game('CBBG-2','target',date='2000-01-01',b_score='60')\n        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[stale,counterpart])\n        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[\n            ['A1','CBBG-9','alpha','SRC-1','old-target'],['A2','CBBG-2','target','T-1','alpha']\n        ])\n        self._resolution(pairs=[{\n            'resolution_id':'PAIR-DATE-1',\n            'kind':'EXPLICIT_COUNTERPART',\n            'survivor_canonical_game_id':'CBBG-9',\n            'absorbed_canonical_game_id':'CBBG-2',\n            'canonical_values':{'game_date':'2000-01-01'},\n            'resolution_basis':'reviewed reciprocal evidence establishes one game and the authoritative date',\n            'evidence_urls':['https://example.test/date'],\n            'discrepancies':[]\n        }])\n        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)\n        self.assertEqual(plan['blockers'],[])\n        self.assertEqual(plan['canonical_pairs'][0]['survivor_canonical_game_id'],'CBBG-9')\n        self.assertEqual(plan['canonical_pairs'][0]['absorbed_canonical_game_id'],'CBBG-2')\n        self.assertEqual(plan['canonical_pairs'][0]['final_canonical_values']['game_date'],'2000-01-01')\n\n    def test_hash_mismatch_refuses_before_write(self):\n'''
+          if needle not in text:
+              raise SystemExit('test insertion point not found')
+          test.write_text(text.replace(needle,insert,1))
+          PY
+
+          python -m unittest tests.test_opponent_identity_bulk_transaction -v
+          python -m unittest tests.test_opponent_identity_transaction -v
+          python -m unittest discover -s tests -v
+
+          rm .github/workflows/one-time-bulk-explicit-counterpart-fix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/opponent_identity_bulk_transaction.py tests/test_opponent_identity_bulk_transaction.py .github/workflows/one-time-bulk-explicit-counterpart-fix.yml
+          git commit -m "Handle explicit bulk counterpart resolutions"
+          git push origin HEAD:chore/opponent-identity-bulk-remediation-tooling
