@@ -127,20 +127,33 @@ jobs:
       - name: Build deterministic real-data transaction plan
         shell: bash
         run: |
+          set +e
           python tools/opponent_identity_transaction.py plan \
             /tmp/texas-am-p0-decisions.csv \
             /tmp/texas-am-p0-resolutions.json \
             --output /tmp/texas-am-transaction-plan-a.json
+          RC_A=$?
           python tools/opponent_identity_transaction.py plan \
             /tmp/texas-am-p0-decisions.csv \
             /tmp/texas-am-p0-resolutions.json \
             --output /tmp/texas-am-transaction-plan-b.json
+          RC_B=$?
+          set -e
 
           python - <<'PY'
           import json
           from pathlib import Path
           a=json.loads(Path('/tmp/texas-am-transaction-plan-a.json').read_text())
           b=json.loads(Path('/tmp/texas-am-transaction-plan-b.json').read_text())
+          print('PLAN_BLOCKERS=',len(a['blockers']))
+          for item in a['blockers']:
+              print('BLOCKER='+item)
+          print('PLAN_WARNINGS=',len(a['warnings']))
+          for item in a['warnings']:
+              print('WARNING='+item)
+          print('AFFECTED=',a['affected_canonical_game_count'])
+          print('PAIRS=',a['canonical_pair_count'])
+          print('NEW_DISCREPANCIES=',len(a['new_discrepancies']))
           assert a['plan_sha256']==b['plan_sha256'], 'transaction plan is nondeterministic'
           assert not a['blockers'], a['blockers']
           assert a['affected_canonical_game_count']==52
