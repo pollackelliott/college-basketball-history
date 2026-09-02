@@ -7139,7 +7139,7 @@
       "state": "TX",
       "primary_hex": "#500000",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1912-1913",
       "conference_regular_season_championships": 12,
       "conference_tournament_championships": 2,
       "ncaa_tournament_appearances": 18,
