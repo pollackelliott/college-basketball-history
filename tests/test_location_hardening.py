@@ -108,6 +108,52 @@ class CanonicalEnrichmentTests(unittest.TestCase):
         self.assertEqual(markers[0]["venue_key"], "example-arena")
         self.assertEqual(markers[0]["site_type"], "NEUTRAL")
 
+    def test_matched_researched_home_exception_adds_marker_and_location(self):
+        source = source_row("College Station", "TX")
+        source.update(
+            {
+                "curated_site_type": "SOURCE_PROGRAM_HOME",
+                "curated_venue_name": "",
+                "curated_game_type": "REGULAR_SEASON",
+                "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+                "site_research_basis": (
+                    "Exhaustive historical venue research did not safely "
+                    "identify the physical building."
+                ),
+            }
+        )
+        canonical = {
+            "site_type": "TEAM_A_HOME",
+            "designated_home_team_key": "",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+            "notes": "",
+        }
+
+        changes = dict(
+            ingest_school.canonical_enrichment_candidates(
+                source,
+                canonical,
+                {},
+            )
+        )
+
+        self.assertEqual(changes["site_city"], "College Station")
+        self.assertEqual(changes["site_state"], "TX")
+        self.assertNotIn("venue_key", changes)
+        self.assertNotIn("venue_id", changes)
+        self.assertEqual(
+            changes["designated_home_team_key"],
+            "new-school",
+        )
+        self.assertIn(
+            "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+            "source=new-school/NEW-0001]",
+            changes["notes"],
+        )
+
     def test_registry_cannot_establish_site_type(self):
         source = source_row()
         source["curated_site_type"] = "UNKNOWN"
