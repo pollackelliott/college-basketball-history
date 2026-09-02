@@ -22,6 +22,15 @@ jobs:
           path: /tmp/v4
           github-token: ${{ github.token }}
           run-id: 33657308070
+      - name: Normalize recovered artifact paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f /tmp/v4/plan-a.json
+          test -f /tmp/v4/v3/manifest.csv
+          test -f /tmp/v4/v3/resolutions.json
+          cp /tmp/v4/v3/manifest.csv /tmp/v4/manifest.csv
+          cp /tmp/v4/v3/resolutions.json /tmp/v4/resolutions.json
       - name: Create exact-main disposable worktree
         shell: bash
         run: |
@@ -34,6 +43,7 @@ jobs:
           set -euo pipefail
           python tools/scratch_comprehensive_rehearsal_v4.py /tmp/rehearsal /tmp/v4
       - name: Prove source checkout untouched
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
