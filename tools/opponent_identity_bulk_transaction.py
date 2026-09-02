@@ -538,6 +538,22 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
             raise BulkTransactionError("postcondition: stale canonical key remains")
         if any(clean(r.get("canonical_game_id")) in absorbed or clean(r.get("normalized_opponent_key")) in old_keys for r in ar2):
             raise BulkTransactionError("postcondition: stale assertion mapping remains")
+
+        stale_package_refs: list[str] = []
+        for package_path in sorted((repo / "schools").glob("*/opponents.csv")):
+            _, package_rows = read_csv(package_path)
+            if any(clean(r.get("canonical_opponent_key")) in old_keys for r in package_rows):
+                stale_package_refs.append(str(package_path.relative_to(repo)))
+        for package_path in sorted((repo / "schools").glob("*/source-games.csv")):
+            _, package_rows = read_csv(package_path)
+            if any(clean(r.get("normalized_opponent_key")) in old_keys for r in package_rows):
+                stale_package_refs.append(str(package_path.relative_to(repo)))
+        if stale_package_refs:
+            raise BulkTransactionError(
+                "postcondition: stale school-package key remains in "
+                + ", ".join(sorted(set(stale_package_refs)))
+            )
+
         retained = set(plan["retained_distinct_canonical_game_ids"])
         if retained and not retained.issubset({clean(r.get("canonical_game_id")) for r in cr2}):
             raise BulkTransactionError("postcondition: retain-distinct row was lost")
