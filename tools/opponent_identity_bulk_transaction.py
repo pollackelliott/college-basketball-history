@@ -29,6 +29,7 @@ import opponent_identity_collision_audit as collision_audit
 import opponent_identity_remediation as remediation
 import opponent_identity_transaction as tx
 import venue_reference
+from location_safety import retire_site_mismatched_registry_fallbacks
 
 
 class BulkTransactionError(RuntimeError):
@@ -387,7 +388,19 @@ def build_plan(repo: Path, manifest_path: Path, resolutions_path: Path) -> dict[
         for text in [clean(sm.get("notes")), clean(am.get("notes")), f"[OPPONENT_IDENTITY_RECONCILIATION absorbed={aid}; preserved={sid}; one real game / one canonical game]"]:
             if text and text not in notes:
                 notes.append(text)
-        final["notes"] = " | ".join(notes)
+        combined_notes = " | ".join(notes)
+        combined_notes, retired = retire_site_mismatched_registry_fallbacks(
+            combined_notes, final.get("site_type", "")
+        )
+        if retired:
+            combined_notes = (
+                combined_notes
+                + " "
+                + f'[OPPONENT_IDENTITY_RECONCILIATION retired_registry_fallbacks={retired}; '
+                + f'canonical_site_type={final.get("site_type", "")}; '
+                + 'superseded machine fallback no longer controls canonical site/venue]'
+            ).strip()
+        final["notes"] = combined_notes
         pairs.append({
             "kind": kind,
             "survivor_canonical_game_id": sid,
