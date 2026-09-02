@@ -7148,7 +7148,7 @@
       "best_finish_key": "SWEET_SIXTEEN",
       "best_finish_year": 2018,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
