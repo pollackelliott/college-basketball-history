@@ -10,14 +10,20 @@ Read these process documents together before onboarding work:
 
 - `docs/school-onboarding-fast-path.md`
 - `docs/onboarding-process-hardening.md`
+- `docs/implementation-efficiency-recovery.md`
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
+- `docs/research-freeze-self-challenge.md`
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
 more specific than the older fast-path wording. The site-completeness protocol is
 controlling for research-accounted venue/location/H-A-N gaps and the independent
-post-reconciliation publication gate.
+post-reconciliation publication gate. The research-freeze self-challenge is controlling
+for the final adversarial review required before a Research lane may certify large or
+suspicious residual debt as genuinely unresolved. The post-Texas A&M implementation
+efficiency/recovery standard is controlling for phase-sized owner interaction, compact
+diagnostics, durable checkpoints, and failure recovery.
 
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
@@ -26,6 +32,9 @@ post-reconciliation publication gate.
    site facts, but HOME venue/location gaps, UNKNOWN H/A/N, non-NCAA neutral gaps, and
    conference-tournament/NIT/POSTSEASON site gaps must be explicitly research-accounted;
    silent blanks do not pass. NCAA rows retain the stricter complete-site requirement.
+   A Research lane must also complete the required adversarial pre-freeze self-challenge
+   in `docs/research-freeze-self-challenge.md`; a mechanical `research-check` pass alone
+   is not sufficient to certify `RESEARCH_FROZEN`.
 3. Perform current-main rebase and stable Phase 0 staging with
    `python tools/stage_research_portfolio.py ...`; prefer one guarded phase-sized
    operation over many tiny interactive command handoffs. Ambiguous global identity
@@ -70,6 +79,14 @@ site, venue, opponent, or a controlling canonical fact merely to make the workfl
 pass. Preserve source `raw_text`, explicit researched-unresolved metadata, and approved
 unresolved discrepancies.
 
+## Implementation efficiency and recovery
+
+* Use one fresh Implementation chat per school, but do not assume that a fresh chat alone prevents context bloat. Keep verbose logs and large evidence tables in durable files rather than the conversation whenever possible.
+* Batch deterministic technical work by phase. One owner relay per reversible phase is the default; one-command-at-a-time copy/paste loops are a process regression unless a real blocker requires them.
+* Live terminal output should be compact: phase, HEAD/base/fingerprint, counts, exact failing IDs/paths, verbose-log path, and next safe action. Redirect large diagnostics to `/tmp` or ignored `.onboarding/` artifacts.
+* Durable repository state outranks chat memory. After interruption, inspect Git/GitHub and `.onboarding/<school>/` state and resume from the earliest incomplete phase rather than replaying successful phases.
+* A Codespace/chat failure does not authorize blind reset, stash, force push, branch deletion, or re-running an already completed phase whose fingerprint remains valid.
+* If a chat must be replaced mid-school, use the compact recovery capsule defined in `docs/implementation-efficiency-recovery.md` and verify it against actual repository state before acting.
 
 ## Collaboration boundary
 
@@ -77,6 +94,8 @@ unresolved discrepancies.
 * Return to the owner only when a new judgment is required about history scope, game identity or inclusion, opponent identity, home/away/neutral classification, venue/location truth, a controlling canonical historical fact, accomplishments, unresolved-conflict publication, or final preview approval.
 * A technical failure after owner approval must be diagnosed and repaired generically where possible; do not ask the owner to re-review unchanged historical decisions merely because the tooling implementation changed.
 * Technical work should be batched at phase boundaries. Repeated one-command-at-a-time owner handoffs for deterministic setup are a process regression unless repository state is unexpected.
+* Research lanes should perform the required pre-freeze self-challenge autonomously; do not create an extra owner approval loop merely because large researched-unknown populations require adversarial review.
+* Do not use the owner as a transport layer for files, logs, or state the agent can inspect directly from repository/GitHub/onboarding artifacts. When the owner's Codespace is the only execution surface, request the smallest diagnostic output needed.
 
 ## Git safety
 
@@ -97,8 +116,14 @@ unresolved discrepancies.
   Preview deployment as Production.
 - Flag any onboarding path that seals Gate 1 before the filled review has passed the
   disposable pre-seal technical rehearsal.
-- Flag any research-freeze path that allows material site gaps to remain silent or any
-  implementation/release path that can lose known target/reciprocal site evidence
-  without field-specific reconciliation provenance.
+- Flag any research-freeze path that allows material site gaps to remain silent, treats
+  a mechanical `research-check` pass as sufficient without the required adversarial
+  self-challenge, or allows large residual HOME/H-A-N/date debt to survive without the
+  evidence accounting required by `docs/research-freeze-self-challenge.md`.
+- Flag any implementation/release path that can lose known target/reciprocal site
+  evidence without field-specific reconciliation provenance.
 - Flag school-specific hard-coded pre-scope exclusion counts; scope tests must enforce
   the reciprocal-evidence invariant generically.
+- Flag implementation instructions that require repeated owner copy/paste of verbose
+  deterministic output when the same evidence can be written to a durable artifact and
+  summarized compactly.
