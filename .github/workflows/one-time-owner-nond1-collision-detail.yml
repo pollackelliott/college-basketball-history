@@ -1,0 +1,69 @@
+name: One-time owner non-D1 collision detail
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild authoritative audit payload
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          comprehensive=Path('.github/workflows/one-time-owner-nond1-comprehensive-audit.yml').read_text()
+          marker="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=comprehensive.index(marker)+len(marker); b=comprehensive.index('\n          CSV',a)
+          lines=[line[10:] if line.startswith('          ') else line for line in comprehensive[a:b].splitlines()]
+          Path('/tmp/owner_scan.csv').write_text('\n'.join(lines)+'\n')
+          authoritative=Path('.github/workflows/one-time-owner-nond1-authoritative-audit.yml').read_text()
+          start="          python - <<'PY'\n"
+          a=authoritative.index(start,authoritative.index('Prove complete confirmed accounting'))+len(start)
+          b=authoritative.index('\n          PY\n          sha256sum',a)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in authoritative[a:b].splitlines())
+          code=code.replace("'123':'st-joseph-s'","'123':'saint-josephs'",1)
+          Path('/tmp/final_authoritative_audit.py').write_text(code+'\n')
+          PY
+          python /tmp/final_authoritative_audit.py >/tmp/final-audit.log
+      - name: Print collision merge details
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,json,sys
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          import opponent_identity_collision_audit as audit
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          payload=json.loads(Path('/tmp/authoritative-owner-audit.json').read_text())
+          keymap={k:v['to_key'] for k,v in payload['key_stats'].items()}
+          affected={r['canonical_game_id'] for r in rows('data/canonical/games.csv') if r.get('team_a_key') in keymap or r.get('team_b_key') in keymap}
+          synthetic={'plan_sha256':'owner-detail','global_key_map':keymap,'affected_canonical_game_ids':{'all':sorted(affected)}}
+          games=rows('data/canonical/games.csv')
+          result=audit.audit_rows(synthetic,games)
+          byid={r['canonical_game_id']:r for r in games}
+          print('SAME_DATE_GROUPS='+str(len(result['collision_groups'])))
+          for g in result['collision_groups']:
+              ids=g['canonical_game_ids']
+              if set(ids).issubset(set(['CBBG-0009910','CBBG-0066393','CBBG-0062880','CBBG-0067210'])):
+                  pass
+              print('GROUP|'+json.dumps(g,separators=(',',':')))
+              for gid in ids:
+                  print('ROW|'+gid+'|'+json.dumps(audit.mapped_view(byid[gid],keymap),sort_keys=True,separators=(',',':')))
+          print('UNPAIRED_COUNT='+str(len(result['unpaired_affected_game_ids'])))
+          # Report the known 2010 date-mismatch rows explicitly.
+          for gid in ['CBBG-0063008','CBBG-0067341','CBBG-0065455','CBBG-0065459']:
+              print('SPECIAL|'+gid+'|'+json.dumps(audit.mapped_view(byid[gid],keymap),sort_keys=True,separators=(',',':')))
+          PY
