@@ -1,0 +1,51 @@
+name: One-time comprehensive opponent remediation rehearsal v5
+on:
+  push:
+    branches: [scratch/opponent-identity-comprehensive-rehearsal-v5]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: scratch/opponent-identity-comprehensive-rehearsal-v5
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: comprehensive-opponent-plan-v5
+          path: /tmp/v5
+          github-token: ${{ github.token }}
+          run-id: 33660835256
+      - name: Normalize recovered artifact paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f /tmp/v5/plan-a.json
+          test -f /tmp/v5/v4/v3/manifest.csv
+          test -f /tmp/v5/v4/v3/resolutions.json
+          cp /tmp/v5/v4/v3/manifest.csv /tmp/v5/manifest.csv
+          cp /tmp/v5/v4/v3/resolutions.json /tmp/v5/resolutions.json
+      - name: Create exact-main disposable worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git worktree add --detach /tmp/rehearsal 491419509f148fa64b830f05397d6b00bd1feff1
+          test "$(git -C /tmp/rehearsal rev-parse HEAD)" = 491419509f148fa64b830f05397d6b00bd1feff1
+      - name: Execute comprehensive rehearsal
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/scratch_comprehensive_rehearsal_v5.py /tmp/rehearsal /tmp/v5
+      - name: Prove source checkout untouched
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git status --porcelain)"
+          echo 'PASS: source checkout clean; all basketball-data mutation confined to disposable worktree.'
