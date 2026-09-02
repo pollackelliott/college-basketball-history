@@ -2,6 +2,7 @@ name: Opponent identity transaction rehearsal
 
 on:
   pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -12,6 +13,8 @@ jobs:
     steps:
       - name: Check out exact PR head
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,7 +24,7 @@ jobs:
       - name: Run transaction fixture tests
         run: python -m unittest discover -s tests -p 'test_opponent_identity_transaction.py' -v
 
-      - name: Run full repository tests before rehearsal
+      - name: Run full repository tests before lifecycle validation
         run: python -m unittest discover -s tests -v
 
       - name: Build evidence-backed first-batch inputs
@@ -160,7 +163,67 @@ jobs:
           }
           JSON
 
+      - name: Detect first-batch lifecycle state
+        id: lifecycle
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import os
+          from pathlib import Path
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as handle:
+                  return list(csv.DictReader(handle))
+
+          stale_opponent_rows = 0
+          stale_source_rows = 0
+          for program in ('northwestern', 'oklahoma'):
+              stale_opponent_rows += sum(
+                  1 for row in rows(f'schools/{program}/opponents.csv')
+                  if row.get('opponent_name') == 'Texas A&M'
+                  and row.get('opponent_program_key') == 'texas-a-and-m'
+              )
+              stale_source_rows += sum(
+                  1 for row in rows(f'schools/{program}/source-games.csv')
+                  if row.get('normalized_opponent_key') == 'texas-a-and-m'
+              )
+
+          stale_canonical_rows = sum(
+              1 for row in rows('data/canonical/games.csv')
+              if row.get('team_a_key') == 'texas-a-and-m'
+              or row.get('team_b_key') == 'texas-a-and-m'
+          )
+          stale_assertion_rows = sum(
+              1 for row in rows('data/evidence/game-assertions.csv')
+              if row.get('normalized_opponent_key') == 'texas-a-and-m'
+          )
+
+          counts = {
+              'opponents': stale_opponent_rows,
+              'source_games': stale_source_rows,
+              'canonical': stale_canonical_rows,
+              'assertions': stale_assertion_rows,
+          }
+          print('TEXAS_A_M_STALE_COUNTS=' + repr(counts))
+
+          if counts == {'opponents': 2, 'source_games': 52, 'canonical': 52, 'assertions': 52}:
+              state = 'pre'
+          elif counts == {'opponents': 0, 'source_games': 0, 'canonical': 0, 'assertions': 0}:
+              state = 'post'
+          else:
+              raise SystemExit(
+                  'FAIL: first-batch data is in neither the exact pre-transaction nor '
+                  f'clean post-transaction state: {counts}'
+              )
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as handle:
+              handle.write(f'state={state}\n')
+          print('FIRST_BATCH_LIFECYCLE_STATE=' + state)
+          PY
+
       - name: Build deterministic real-data transaction plan
+        if: steps.lifecycle.outputs.state == 'pre'
         shell: bash
         run: |
           set +e
@@ -192,6 +255,7 @@ jobs:
           print('NEW_DISCREPANCIES=',len(a['new_discrepancies']))
           assert a['plan_sha256']==b['plan_sha256'], 'transaction plan is nondeterministic'
           assert not a['blockers'], a['blockers']
+          assert not a['warnings'], a['warnings']
           assert a['affected_canonical_game_count']==52
           assert a['canonical_pair_count']==52
           assert len(a['absorbed_canonical_game_ids'])==52
@@ -202,6 +266,7 @@ jobs:
           PY
 
       - name: Rehearse exact transaction in disposable repository copy
+        if: steps.lifecycle.outputs.state == 'pre'
         shell: bash
         run: |
           rm -rf /tmp/opponent-identity-rehearsal
@@ -260,6 +325,7 @@ jobs:
           PY
 
       - name: Validate disposable post-transaction repository
+        if: steps.lifecycle.outputs.state == 'pre'
         working-directory: /tmp/opponent-identity-rehearsal
         run: |
           python tools/validate_data.py
@@ -276,11 +342,76 @@ jobs:
           print('POST_P1=',report['priority_counts']['P1'])
           PY
 
-      - name: Prove real checkout remained unchanged by rehearsal
+      - name: Validate already-applied post-transaction state
+        if: steps.lifecycle.outputs.state == 'post'
+        shell: bash
+        run: |
+          python tools/validate_data.py
+          python tools/check_site_data_freshness.py
+          python tools/published_opponent_identity_census.py --json > /tmp/post-opponent-census.json
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as handle:
+                  return list(csv.DictReader(handle))
+
+          games = rows('data/canonical/games.csv')
+          by_id = {row['canonical_game_id']: row for row in games}
+
+          g1969 = by_id['CBBG-0009910']
+          assert g1969.get('overtime_periods') == '1'
+          assert g1969.get('site_city') == 'Greenville'
+          assert g1969.get('site_state') == 'SC'
+
+          g2005 = by_id['CBBG-0062880']
+          assert g2005.get('team_b_score') == '54'
+
+          g2010 = by_id['CBBG-0063008']
+          assert g2010.get('game_date') == '2010-01-19'
+
+          g2012 = by_id['CBBG-0063073']
+          assert g2012.get('site_type') == 'NEUTRAL'
+          assert g2012.get('designated_home_team_key') == ''
+          assert g2012.get('venue_key') == 'paycom-center'
+          assert g2012.get('venue_id') == 'VEN-000162'
+          assert g2012.get('site_city') == 'Oklahoma City'
+          assert g2012.get('site_state') == 'OK'
+
+          discrepancies = rows('data/reconciliation/discrepancies.csv')
+          expected = {
+              ('CBBG-0009910', 'overtime_periods'),
+              ('CBBG-0062880', 'score'),
+              ('CBBG-0063008', 'game_date'),
+              ('CBBG-0063073', 'site_type'),
+          }
+          resolved = {
+              (row.get('canonical_game_id'), row.get('field_name'))
+              for row in discrepancies
+              if row.get('status') == 'RESOLVED'
+          }
+          missing = expected - resolved
+          assert not missing, f'missing reviewed resolved discrepancies: {sorted(missing)}'
+
+          report = json.load(open('/tmp/post-opponent-census.json'))
+          stale = [
+              item for item in report['findings']
+              if item.get('canonical_opponent_key') == 'texas-a-and-m'
+          ]
+          assert not stale, stale
+          assert report['priority_counts']['P0'] == 0, report['priority_counts']
+
+          print('POST_TRANSACTION_EXCEPTION_CHECKS=PASS')
+          print('POST_P0=0')
+          PY
+
+      - name: Prove real checkout remained unchanged by validation
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git status --short
-            echo 'FAIL: real checkout changed during disposable rehearsal'
+            echo 'FAIL: real checkout changed during lifecycle validation'
             exit 1
           fi
           echo 'PASS: no basketball data changed in the real checkout.'
