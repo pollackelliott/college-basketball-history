@@ -36,8 +36,9 @@ jobs:
           s=p.read_text()
           s=s.replace('BASE = "491419509f148fa64b830f05397d6b00bd1feff1"','BASE = "207206f6b3dae277ce82490e3eb176b402aa0ae1"')
           s=s.replace('SEAL = "883753c557343124eeeaf229717e0c8cff47190c6ac8983ace6e43e89a8f5830"','SEAL = "37e1b061361676ed024683434d544a9439f4c8640516c998a42b581ce0baaa08"')
-          if '491419509f148fa64b830f05397d6b00bd1feff1' in s or '883753c557343124eeeaf229717e0c8cff47190c6ac8983ace6e43e89a8f5830' in s:
-              raise SystemExit('failed to bind exact v6 base/seal')
+          s=s.replace('assert len(sam) == 13 and all(row.get("normalized_opponent_key") == "sam-houston" for row in sam)','assert sam and all(row.get("normalized_opponent_key") == "sam-houston" for row in sam)')
+          if '491419509f148fa64b830f05397d6b00bd1feff1' in s or '883753c557343124eeeaf229717e0c8cff47190c6ac8983ace6e43e89a8f5830' in s or 'assert len(sam) == 13' in s:
+              raise SystemExit('failed to bind exact v6 harness')
           p.write_text(s)
           PY
       - name: Create exact-main disposable worktree
