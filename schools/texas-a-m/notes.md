@@ -111,3 +111,38 @@ opponent identities, results, or history scope:
 Raw source text is unchanged. These are implementation-stage factual
 normalizations required to clear machine blockers, not owner reconciliation
 decisions.
+
+## Pre-Owner-Gate structured-source normalization
+
+Authoritative preflight exposed a bounded set of modern structured-source
+transcription errors whose answers are independently established by Texas A&M's
+own dedicated schedules, recaps, and box scores. They were corrected before
+Owner Gate 1 so the owner is not asked to arbitrate demonstrably false machine
+conflicts.
+
+Corrected structured facts:
+
+- TAMRAW-02387: Missouri date `2010-02-06` -> `2010-02-03`
+- TAMRAW-02390: Kansas date `2010-02-20` -> `2010-02-15`
+- TAMRAW-02393: Texas date `2010-03-01` -> `2010-02-27`
+- TAMRAW-02396: Big 12 Tournament Nebraska date `2010-03-10` -> `2010-03-11`
+- TAMRAW-02397: Big 12 Tournament Kansas date `2010-03-11` -> `2010-03-12`
+- TAMRAW-02419: Nebraska date `2011-01-26` -> `2011-01-29`
+- TAMRAW-02485: Kentucky overtime periods `0` -> `1`
+- TAMRAW-02667: NCAA Michigan date `2018-03-24` -> `2018-03-22`
+- TAMRAW-02720: Missouri score `66-64` -> Texas A&M `68-51`
+- TAMRAW-02762: Arkansas score `86-61` -> Texas A&M `86-81`
+- TAMRAW-02877: Ole Miss date `2025-01-21` -> `2025-01-22`
+
+Principal authoritative Texas A&M evidence:
+
+- https://12thman.com/sports/mens-basketball/schedule/season/2009-10
+- https://12thman.com/news/2011/1/29/205233267
+- https://12thman.com/news/2013/02/02/aggies-fall-to-kentucky-in-ot-72-68
+- https://12thman.com/sports/mens-basketball/stats/2017-18/michigan/boxscore/7276
+- https://12thman.com/news/2020/02/4/four-aggies-score-in-double-figures-as-am-defeats-missouri-68-51
+- https://12thman.com/sports/mens-basketball/stats/2021/arkansas/boxscore/18394
+- https://12thman.com/sports/mens-basketball/stats/2024-25/ole-miss/boxscore/22167
+
+No game was added or removed. Opponent identity, history scope, and raw source
+text were not changed.
