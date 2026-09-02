@@ -313,11 +313,21 @@ def _mapped_unknown_groups(rows: list[dict[str, str]], key_map: dict[str, str], 
     return sorted(out, key=lambda x: (x["signature"], x["canonical_game_ids"]))
 
 
-def _notes_for_in_place(row: dict[str, str], key_map: dict[str, str]) -> str:
+def _notes_for_in_place(row: dict[str, str], key_map: dict[str, str], final_site_type: str) -> str:
     old = [k for k in (clean(row.get("team_a_key")), clean(row.get("team_b_key"))) if k in key_map]
     marker = "[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=" + ",".join(f"{k}->{key_map[k]}" for k in old) + "]"
     notes = clean(row.get("notes"))
-    return (notes + " | " + marker).strip(" |") if notes else marker
+    combined = (notes + " | " + marker).strip(" |") if notes else marker
+    combined, retired = retire_site_mismatched_registry_fallbacks(combined, final_site_type)
+    if retired:
+        combined = (
+            combined
+            + " "
+            + f'[OPPONENT_IDENTITY_RECONCILIATION retired_registry_fallbacks={retired}; '
+            + f'canonical_site_type={clean(final_site_type)}; '
+            + 'superseded machine fallback no longer controls canonical site/venue]'
+        ).strip()
+    return combined
 
 
 def build_plan(repo: Path, manifest_path: Path, resolutions_path: Path) -> dict[str, Any]:
@@ -645,7 +655,7 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
             if not row:
                 raise BulkTransactionError(gid + ": canonical row disappeared")
             mapped = tx.maprow(row, key_map)
-            mapped["notes"] = _notes_for_in_place(row, key_map)
+            mapped["notes"] = _notes_for_in_place(row, key_map, clean(mapped.get("site_type")))
             row.update(mapped)
 
         redirect: dict[str, str] = {}
