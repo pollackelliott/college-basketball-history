@@ -38,10 +38,15 @@ A stored opponent identity conflicts with one exact current program identity and
 
 This is the highest-priority class because it can split one real published-vs-published series into two opponent records.
 
-Typical signal:
+Required signal:
 
-- canonical/source name exactly normalizes to one current published program;
-- stored opponent key is different.
+- the curated canonical opponent name exactly matches one current published program;
+- the stored opponent key is different;
+- the stored opponent key is absent from the global program registry.
+
+A raw source label by itself is never enough for P0. A key already represented in
+`data/reference/programs.csv` is presumed to identify that known program until
+authoritative evidence proves otherwise.
 
 P0 is a review trigger, not authorization to mutate blindly. Game-level identity still must reconcile before repair.
 
@@ -50,7 +55,7 @@ P0 is a review trigger, not authorization to mutate blindly. Game-level identity
 Examples include:
 
 - the stored canonical key is already a current-D1 registry key, but the school package still marks it non-D1/blank;
-- an exact canonical/source name uniquely matches a current-D1 program under a different stored key.
+- an exact curated canonical name uniquely matches a current-D1 program under a different key that is absent from the global registry.
 
 These are normally strong normalization candidates, but historical evidence still controls.
 
@@ -58,7 +63,7 @@ These are normally strong normalization candidates, but historical evidence stil
 
 Another published package already resolves the same normalized source/canonical label to one current-D1 program, while this package stores a different key.
 
-This is useful reciprocal normalization evidence, but it is intentionally weaker than an exact global current-name match. Ambiguous aliases are ignored.
+This is useful reciprocal normalization evidence, but it is intentionally weaker than an exact global current-name match. Cross-package alias evidence is always P2, even when the suggested target is already published. It can never become P0 merely because another package previously made that alias mapping. Ambiguous aliases are ignored.
 
 ### P3 — modern non-D1 review
 
@@ -91,8 +96,9 @@ The census never decides that two schools are the same merely because their name
 
 Specifically:
 
-- exact current-name matches are review triggers, not automatic mutations;
-- cross-package aliases are used only when they resolve uniquely to one current-D1 key;
+- high-priority exact current-name matches use the curated canonical opponent name, not a raw source label alone;
+- if the stored opponent key already exists anywhere in the global program registry, the census does not replace it from string similarity;
+- cross-package aliases are used only as P2 review evidence when they resolve uniquely to one current-D1 key;
 - ambiguous aliases are ignored;
 - modern non-D1 rows are surfaced for research but receive no automatic suggested key;
 - historical institutional renames require authoritative evidence;

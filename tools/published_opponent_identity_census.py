@@ -223,14 +223,19 @@ def build_census(repo: Path) -> dict[str, Any]:
                 )
             continue
 
-        exact_candidates: set[str] = set()
-        exact_fields: list[str] = []
-        for field in ("canonical_opponent_name", "source_opponent_label"):
-            normalized = normalize_name(row.get(field, ""))
-            candidates = current_name_index.get(normalized, set())
-            if len(candidates) == 1:
-                exact_candidates.update(candidates)
-                exact_fields.append(field)
+        # If the stored key already exists in the global program registry,
+        # it represents a known program identity. Do not remap that identity to a
+        # different current-D1 program merely because a name/label looks similar.
+        # This protects real distinct programs such as Florida Southern, Cornell
+        # College, and Monmouth College.
+        if canonical_key in all_programs:
+            continue
+
+        # A high-confidence current-program split requires the CURATED canonical
+        # opponent name itself to match exactly one current-D1 registry identity.
+        # A raw source label alone is not strong enough for P0/P1.
+        canonical_name = normalize_name(row.get("canonical_opponent_name", ""))
+        exact_candidates = current_name_index.get(canonical_name, set())
 
         if len(exact_candidates) == 1:
             candidate = next(iter(exact_candidates))
@@ -240,10 +245,9 @@ def build_census(repo: Path) -> dict[str, Any]:
                 row,
                 suggested_program_key=candidate,
                 basis=(
-                    "normalized "
-                    + "/".join(exact_fields)
-                    + " exactly matches one current-D1 registry program while the "
-                    "stored opponent key is different"
+                    "canonical opponent name exactly matches one current-D1 registry "
+                    "program while the stored opponent key is absent from the global "
+                    "program registry"
                 ),
             )
             continue
@@ -260,7 +264,7 @@ def build_census(repo: Path) -> dict[str, Any]:
         if len(alias_candidates) == 1:
             candidate = next(iter(alias_candidates))
             add_finding(
-                "P0" if candidate in published else "P2",
+                "P2",
                 "CROSS_PACKAGE_ALIAS_SPLIT",
                 row,
                 suggested_program_key=candidate,
@@ -312,7 +316,7 @@ def build_census(repo: Path) -> dict[str, Any]:
         candidate = current_keys[0]
         for row in group:
             canonical_key = row.get("canonical_opponent_key", "").strip()
-            if canonical_key == candidate:
+            if canonical_key == candidate or canonical_key in all_programs:
                 continue
             # Do not duplicate a stronger exact-name or alias finding for the same row.
             row_prefix = (
@@ -323,7 +327,7 @@ def build_census(repo: Path) -> dict[str, Any]:
             if any(signature[:3] == row_prefix for signature in finding_signatures):
                 continue
             add_finding(
-                "P0" if candidate in published else "P2",
+                "P2",
                 "CROSS_PACKAGE_CANONICAL_NAME_SPLIT",
                 row,
                 suggested_program_key=candidate,
@@ -410,7 +414,7 @@ def build_census(repo: Path) -> dict[str, Any]:
     priority_counts = Counter(finding["priority"] for finding in findings)
 
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "published_program_count": len(published),
         "published_program_keys": sorted(published),
         "opponent_rows_scanned": len(opponent_rows),

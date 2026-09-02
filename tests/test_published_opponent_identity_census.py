@@ -81,6 +81,27 @@ class PublishedOpponentIdentityCensusTests(unittest.TestCase):
                 "",
             ],
         ]
+        programs.extend(
+            [
+                [
+                    "florida-southern",
+                    "Florida Southern",
+                    "Florida Southern",
+                    "No",
+                    "No",
+                    "",
+                ],
+                [
+                    "southern",
+                    "Southern",
+                    "Southern",
+                    "Yes",
+                    "No",
+                    "",
+                ],
+            ]
+        )
+
         self._write_csv(
             self.repo / "data/reference/programs.csv",
             PROGRAM_HEADERS,
@@ -239,6 +260,90 @@ class PublishedOpponentIdentityCensusTests(unittest.TestCase):
         self.assertEqual(
             report["non_d1_identity_inventory"][0]["canonical_opponent_key"],
             "chicago-ymca",
+        )
+
+    def test_registered_noncurrent_program_is_not_remapped_by_name_collision(self):
+        self._write_opponents(
+            [
+                [
+                    "northwestern",
+                    "Southern",
+                    "florida-southern",
+                    "Southern",
+                    "No",
+                    "24",
+                    "2000-2001",
+                    "2024-2025",
+                ]
+            ],
+            [],
+        )
+
+        report = census.build_census(self.repo)
+        self.assertFalse(
+            any(
+                row["suggested_program_key"] == "southern"
+                for row in report["findings"]
+            )
+        )
+
+    def test_cross_package_alias_cannot_be_p0_even_for_published_target(self):
+        self._write_opponents(
+            [
+                [
+                    "northwestern",
+                    "Aggies",
+                    "texas-a-m",
+                    "Texas A&M",
+                    "Yes",
+                    "1",
+                    "1980-1981",
+                    "1980-1981",
+                ],
+                [
+                    "northwestern",
+                    "Aggies",
+                    "texas-aggies",
+                    "Texas Aggies",
+                    "No",
+                    "1",
+                    "1970-1971",
+                    "1970-1971",
+                ],
+            ],
+            [],
+        )
+
+        report = census.build_census(self.repo)
+        finding = next(
+            row
+            for row in report["findings"]
+            if row["canonical_opponent_key"] == "texas-aggies"
+        )
+        self.assertEqual(finding["priority"], "P2")
+        self.assertEqual(finding["finding_type"], "CROSS_PACKAGE_ALIAS_SPLIT")
+        self.assertEqual(finding["suggested_program_key"], "texas-a-m")
+
+    def test_raw_source_name_alone_does_not_create_exact_program_split(self):
+        self._write_opponents(
+            [
+                [
+                    "northwestern",
+                    "Texas A&M",
+                    "texas-agricultural",
+                    "Texas Agricultural",
+                    "No",
+                    "1",
+                    "1940-1941",
+                    "1940-1941",
+                ]
+            ],
+            [],
+        )
+
+        report = census.build_census(self.repo)
+        self.assertFalse(
+            any(row["priority"] == "P0" for row in report["findings"])
         )
 
     def test_name_normalization_handles_ampersand_and_whitespace(self):
