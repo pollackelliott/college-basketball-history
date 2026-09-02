@@ -1,0 +1,192 @@
+name: One-time comprehensive opponent identity preflight
+
+on:
+  push:
+    branches:
+      - scratch/opponent-identity-comprehensive-rehearsal
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct authoritative owner decisions on exact current data base
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=5c1ce8f7fc398886e8a830be084bbc723b93722e
+          PRIOR_DATA_BASE=c5102b0927aa9e00816fe42e437716979f28d354
+          git fetch origin main chore/owner-nond1-scan-comprehensive-audit
+          test "$(git rev-parse origin/main)" = "$BASE"
+          git diff --quiet "$PRIOR_DATA_BASE" "$BASE" -- data/canonical data/evidence data/reconciliation data/reference schools site/data || {
+            echo 'FAIL: basketball data moved since authoritative owner audit'; exit 1;
+          }
+          git show origin/chore/owner-nond1-scan-comprehensive-audit:.github/workflows/one-time-owner-nond1-comprehensive-audit.yml > /tmp/comprehensive.yml
+          git show origin/chore/owner-nond1-scan-comprehensive-audit:.github/workflows/one-time-owner-nond1-authoritative-audit.yml > /tmp/authoritative.yml
+          python - <<'PY'
+          from pathlib import Path
+          comprehensive=Path('/tmp/comprehensive.yml').read_text()
+          marker="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=comprehensive.index(marker)+len(marker); b=comprehensive.index('\n          CSV',a)
+          lines=[line[10:] if line.startswith('          ') else line for line in comprehensive[a:b].splitlines()]
+          Path('/tmp/owner_scan.csv').write_text('\n'.join(lines)+'\n')
+          authoritative=Path('/tmp/authoritative.yml').read_text()
+          start="          python - <<'PY'\n"
+          a=authoritative.index(start,authoritative.index('Prove complete confirmed accounting'))+len(start)
+          b=authoritative.index('\n          PY\n          sha256sum',a)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in authoritative[a:b].splitlines())
+          code=code.replace("'123':'st-joseph-s'","'123':'saint-josephs'",1)
+          Path('/tmp/final_authoritative_audit.py').write_text(code+'\n')
+          PY
+          git checkout --detach "$BASE"
+          python /tmp/final_authoritative_audit.py > /tmp/authoritative.log
+          grep -E '^(REVIEW_COUNTS|CONFIRMED_DECISIONS|DISTINCT_KEY_REMAPS|AFFECTED_CANONICAL|EXACT_COLLISION_GROUPS|UNDATED_COLLISION_GROUPS)=' /tmp/authoritative.log
+      - name: Build comprehensive manifest and reviewed resolutions
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,json,re
+          from pathlib import Path
+
+          def read(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+
+          audit=json.loads(Path('/tmp/authoritative-owner-audit.json').read_text())
+          keymap={k:v['to_key'] for k,v in audit['key_stats'].items()}
+          programs={r['program_key']:r for r in read('data/reference/programs.csv')}
+          current_d1={k for k,r in programs.items() if r.get('current_d1')=='Yes'}
+          rows=[]
+          for opp_file in sorted(Path('schools').glob('*/opponents.csv')):
+              source=opp_file.parent.name
+              for r in read(opp_file):
+                  old=r.get('canonical_opponent_key','').strip()
+                  if old not in keymap: continue
+                  new=keymap[old]
+                  if new=='arkansas-monticello':
+                      name='Arkansas-Monticello'; current='No'; decision='REKEY_DISTINCT_NON_D1'
+                  else:
+                      if new not in programs or new not in current_d1:
+                          raise SystemExit(f'FAIL target registry: {old}->{new}')
+                      name=(programs[new].get('display_name') or programs[new].get('program_name') or new).strip()
+                      current='Yes'; decision='MERGE_TO_PROGRAM'
+                  rows.append({
+                      'source_program_key':source,
+                      'source_opponent_label':r.get('source_opponent_label',''),
+                      'from_program_key':old,
+                      'to_program_key':new,
+                      'to_program_name':name,
+                      'target_current_d1':current,
+                      'decision':decision,
+                      'evidence_basis':'Owner-confirmed comprehensive opponent identity review; global package expansion applies the same adjudicated institutional identity mapping while preserving literal source evidence.',
+                      'evidence_url':'',
+                  })
+          fields=['source_program_key','source_opponent_label','from_program_key','to_program_key','to_program_name','target_current_d1','decision','evidence_basis','evidence_url']
+          with Path('/tmp/comprehensive-manifest.csv').open('w',encoding='utf-8',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(sorted(rows,key=lambda x:(x['source_program_key'],x['source_opponent_label'],x['from_program_key'])))
+          print('MANIFEST_ROWS='+str(len(rows)))
+          print('MANIFEST_SOURCE_PROGRAMS='+str(len({r['source_program_key'] for r in rows})))
+          print('MANIFEST_DISTINCT_OLD_KEYS='+str(len({r['from_program_key'] for r in rows})))
+          assert len({r['from_program_key'] for r in rows})==122
+
+          venues=read('data/reference/venues.csv')
+          existing=next((r for r in venues if r.get('venue_key')=='eugene-guerra-sports-complex'),None)
+          if existing:
+              venue_id=existing['venue_id']; add_venue=False
+          else:
+              nums=[int(m.group(1)) for r in venues if (m:=re.fullmatch(r'VEN-(\d+)',r.get('venue_id','')))]
+              venue_id=f'VEN-{max(nums)+1:06d}'; add_venue=True
+          Path('/tmp/eugene-venue.json').write_text(json.dumps({'venue_id':venue_id,'add':add_venue},sort_keys=True))
+          print(f'EUGENE_GUERRA_VENUE_ID={venue_id} ADD={add_venue}')
+
+          resolutions={
+            'schema_version':2,
+            'resolutions':[
+              {
+                'resolution_id':'OIR-1969-NORTHWESTERN-TEXAS-A-M','kind':'SAME_DATE_IDENTITY_CONFLICT',
+                'survivor_canonical_game_id':'CBBG-0009910','absorbed_canonical_game_id':'CBBG-0066393',
+                'canonical_values':{'overtime_periods':'1','site_city':'Greenville','site_state':'SC'},
+                'resolution_basis':'Texas A&M official schedule and official Northwestern opponent history explicitly record the 93-91 game as overtime in Greenville, South Carolina.',
+                'evidence_urls':['https://12thman.com/sports/mens-basketball/schedule/1969-70','https://12thman.com/sports/mens-basketball/opponent-history/northwestern/79'],
+                'discrepancies':[{'field_name':'overtime_periods','source_a_program_key':'northwestern','source_a_value':'0 / omitted','source_b_program_key':'texas-a-m','source_b_value':'1 (OT)','canonical_value':'1','status':'RESOLVED','resolution_basis':'Texas A&M official schedule and opponent history explicitly mark overtime.','notes':"Northwestern's omission remains preserved as source evidence."}]
+              },
+              {
+                'resolution_id':'OIR-2005-OKLAHOMA-TEXAS-A-M','kind':'SAME_DATE_IDENTITY_CONFLICT',
+                'survivor_canonical_game_id':'CBBG-0062880','absorbed_canonical_game_id':'CBBG-0067210',
+                'canonical_values':{'team_b_score':'54'},
+                'resolution_basis':"Texas A&M's contemporaneous official recap and Oklahoma's official box score both establish Oklahoma 70, Texas A&M 54 at Reed Arena.",
+                'evidence_urls':['https://12thman.com/news/2005/1/18/205225598','https://soonersports.com/sports/2005/1/18/Stats_3983'],
+                'discrepancies':[{'field_name':'score','source_a_program_key':'oklahoma','source_a_value':'Oklahoma 70, Texas A&M 56','source_b_program_key':'texas-a-m','source_b_value':'Oklahoma 70, Texas A&M 54','canonical_value':'Oklahoma 70, Texas A&M 54','status':'RESOLVED','resolution_basis':'Contemporaneous official Oklahoma box score and Texas A&M recap agree on 70-54.','notes':"Oklahoma's later media-guide 70-56 assertion remains preserved."}]
+              },
+              {
+                'resolution_id':'OIR-2010-OKLAHOMA-TEXAS-A-M','kind':'EXPLICIT_COUNTERPART',
+                'survivor_canonical_game_id':'CBBG-0063008','absorbed_canonical_game_id':'CBBG-0067341',
+                'canonical_values':{'game_date':'2010-01-19'},
+                'resolution_basis':"Texas A&M's contemporaneous official recap and Oklahoma's official archive establish January 19, 2010; the later Texas A&M year-by-year row carries January 23.",
+                'evidence_urls':['https://12thman.com/news/2010/1/19/205228753','https://soonersports.com/news/2013/5/20/208793026.aspx'],
+                'discrepancies':[{'field_name':'game_date','source_a_program_key':'texas-a-m','source_a_value':'2010-01-23','source_b_program_key':'oklahoma','source_b_value':'2010-01-19','canonical_value':'2010-01-19','status':'RESOLVED','resolution_basis':'Contemporaneous Texas A&M recap and Oklahoma official archive establish January 19.','notes':"Texas A&M's later year-by-year date remains preserved as source evidence."}]
+              },
+              {
+                'resolution_id':'OIR-2012-OKLAHOMA-TEXAS-A-M','kind':'EXPLICIT_RECONCILIATION',
+                'survivor_canonical_game_id':'CBBG-0063073','absorbed_canonical_game_id':'CBBG-0067408',
+                'canonical_values':{'site_type':'NEUTRAL','venue_key':'paycom-center','venue_id':'VEN-000162','site_city':'Oklahoma City','site_state':'OK'},
+                'canonical_clear_fields':['designated_home_team_key'],
+                'resolution_basis':"Texas A&M's official 2012-13 schedule explicitly classifies the All-College Classic game against Oklahoma as Neutral in Oklahoma City, and its contemporaneous recap/box score identifies Chesapeake Energy Arena; the project registry maps that physical arena to VEN-000162 / paycom-center.",
+                'evidence_urls':['https://12thman.com/sports/mens-basketball/schedule/text/2012-13','https://12thman.com/news/2012/12/15/am-win-streak-snapped-by-ou-64-54','https://12thman.com/sports/mens-basketball/stats/2012-13/oklahoma/boxscore/884','https://soonersports.com/news/2012/12/15/208397488.aspx'],
+                'discrepancies':[{'field_name':'site_type','source_a_program_key':'oklahoma','source_a_value':'NEUTRAL','source_b_program_key':'texas-a-m','source_b_value':'SOURCE_PROGRAM_HOME / Reed Arena in later year-by-year curation','canonical_value':'NEUTRAL / Paycom Center / Oklahoma City, OK','status':'RESOLVED','resolution_basis':"Texas A&M's official season schedule explicitly marks the game Neutral and places the All-College Classic at Chesapeake Energy Arena in Oklahoma City; contemporaneous A&M evidence corroborates the physical site.",'notes':'The conflicting later source interpretation remains preserved; historical Chesapeake Energy Arena is global venue VEN-000162 (project display Paycom Center).'}]
+              },
+              {
+                'resolution_id':'OIR-1998-OHIO-STATE-OLE-MISS-PUERTO-RICO','kind':'EXPLICIT_RECONCILIATION',
+                'survivor_canonical_game_id':'CBBG-0046360','absorbed_canonical_game_id':'CBBG-0033168',
+                'canonical_values':{'site_type':'NEUTRAL','venue_key':'eugene-guerra-sports-complex','venue_id':venue_id,'site_city':'San Juan','site_state':'PR'},
+                'canonical_clear_fields':['designated_home_team_key'],
+                'resolution_basis':"Ohio State's contemporary Dec. 26, 1998 release identifies the Dec. 23 win over Mississippi as the championship of the Puerto Rico Holiday Classic; Ole Miss's official game report places the championship in San Juan, Puerto Rico. Schedule-level venue evidence identifies Eugene Guerra Sports Complex.",
+                'evidence_urls':['https://ohiostatebuckeyes.com/news/1998/12/26/mens-hoops-prepares-for-hurricanes-dec-27-2','https://olemisssports.com/news/1999/6/21/Ole_Miss_Falls_to_Buckeyes_in_Championship_Game','https://www.sports-reference.com/cbb/schools/ohio-state/men/1999-schedule.html'],
+                'discrepancies':[{'field_name':'site_type','source_a_program_key':'ohio-state','source_a_value':'TEAM_A_HOME / Value City Arena / Columbus, OH','source_b_program_key':'ole-miss','source_b_value':'NEUTRAL / Puerto Rico Holiday Classic','canonical_value':'NEUTRAL / Eugene Guerra Sports Complex / San Juan, PR','status':'RESOLVED','resolution_basis':'Contemporary official reports establish the game as the Puerto Rico Holiday Classic championship in San Juan; schedule-level venue evidence identifies Eugene Guerra Sports Complex.','notes':'Ohio State administrative VACATED_WIN status remains separate from and preserved alongside the on-court/site truth.'}]
+              }
+            ],
+            'retain_distinct':[
+              {
+                'resolution_id':'OIR-1914-TEXAS-A-M-SAM-HOUSTON-TWO-GAMES',
+                'canonical_game_ids':['CBBG-0065455','CBBG-0065459'],
+                'resolution_basis':'Texas A&M source history contains two distinct 1913-14 Sam Houston games with opposite home designations: one in College Station and one at Sam Houston. Exact dates and scores are unavailable, so identity normalization must not collapse them.',
+                'evidence_urls':[]
+              }
+            ]
+          }
+          Path('/tmp/comprehensive-resolutions.json').write_text(json.dumps(resolutions,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Generate deterministic bulk plan twice
+        shell: bash
+        run: |
+          set +e
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/comprehensive-manifest.csv /tmp/comprehensive-resolutions.json --output /tmp/plan-a.json
+          RC_A=$?
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/comprehensive-manifest.csv /tmp/comprehensive-resolutions.json --output /tmp/plan-b.json
+          RC_B=$?
+          set -e
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/plan-a.json')); b=json.load(open('/tmp/plan-b.json'))
+          print('PLAN_RC_EXPECTED_BLOCKER_SENSITIVE')
+          print('AFFECTED='+str(a['affected_canonical_game_count']))
+          print('IN_PLACE='+str(len(a['remap_only_canonical_game_ids'])))
+          print('PAIRS='+str(len(a['canonical_pairs'])))
+          print('ABSORBED='+str(len(a['absorbed_canonical_game_ids'])))
+          print('RETAINED_DISTINCT='+str(len(a['retained_distinct_canonical_game_ids'])))
+          print('NEW_DISCREPANCIES='+str(len(a['new_discrepancies'])))
+          print('SAME_DATE_GROUPS='+str(a['same_date_collision_group_count']))
+          print('UNKNOWN_DATE_GROUPS='+str(a['unknown_date_collision_group_count']))
+          print('BLOCKERS='+str(len(a['blockers'])))
+          for x in a['blockers']: print('BLOCKER='+x)
+          assert a['plan_sha256']==b['plan_sha256'], 'nondeterministic plan'
+          print('PLAN_SHA256='+a['plan_sha256'])
+          PY
+          test "$RC_A" = "$RC_B"
