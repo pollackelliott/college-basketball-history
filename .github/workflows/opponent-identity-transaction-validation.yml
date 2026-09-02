@@ -181,8 +181,8 @@ jobs:
           for program in ('northwestern', 'oklahoma'):
               stale_opponent_rows += sum(
                   1 for row in rows(f'schools/{program}/opponents.csv')
-                  if row.get('opponent_name') == 'Texas A&M'
-                  and row.get('opponent_program_key') == 'texas-a-and-m'
+                  if row.get('source_opponent_label') == 'Texas A&M'
+                  and row.get('canonical_opponent_key') == 'texas-a-and-m'
               )
               stale_source_rows += sum(
                   1 for row in rows(f'schools/{program}/source-games.csv')
