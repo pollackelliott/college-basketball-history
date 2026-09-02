@@ -1,0 +1,92 @@
+name: One-time owner opponent remediation plan
+on:
+  push:
+    branches: [data/opponent-identity-owner-approved-remediation]
+    paths: [.github/workflows/one-time-owner-opponent-plan.yml]
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data/opponent-identity-owner-approved-remediation
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Guard exact baseline
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 207206f6b3dae277ce82490e3eb176b402aa0ae1 HEAD
+          test "$(git diff --name-only 207206f6b3dae277ce82490e3eb176b402aa0ae1...HEAD | grep -Ev '^\.github/(owner-approved-opponent-corpus\.json|workflows/one-time-owner-opponent-plan\.yml)$' | wc -l)" -eq 0
+      - name: Derive deterministic manifest from controlling corpus
+        run: |
+          python - <<'PY'
+          import csv,json,re,sys
+          from pathlib import Path
+          corpus=json.loads(Path('.github/owner-approved-opponent-corpus.json').read_text())
+          assert len(corpus)==167, len(corpus)
+          def norm(s): return re.sub(r'[^a-z0-9]+','',s.lower())
+          with open('data/reference/programs.csv',newline='',encoding='utf-8-sig') as f:
+              programs=list(csv.DictReader(f))
+          byname={}
+          for p in programs:
+              for v in (p['program_name'],p['display_name']): byname.setdefault(norm(v),[]).append(p)
+          teamkeys={}
+          for _,team,_,_ in corpus:
+              cand=byname.get(norm(team),[])
+              cand={p['program_key']:p for p in cand}.values()
+              cand=list(cand)
+              if len(cand)!=1: raise SystemExit(f'TEAM_RESOLUTION {team}: {[(p["program_key"],p["program_name"]) for p in cand]}')
+              teamkeys[team]=cand[0]['program_key']
+          out=[]; audit=[]
+          for owner_row,team,scan,target in corpus:
+              sk=teamkeys[team]
+              opp_path=Path('schools')/sk/'opponents.csv'
+              with opp_path.open(newline='',encoding='utf-8-sig') as f: opp=list(csv.DictReader(f))
+              matches=[r for r in opp if r['canonical_opponent_name']==scan]
+              if not matches: matches=[r for r in opp if r['source_opponent_label']==scan]
+              keys=sorted({r['canonical_opponent_key'] for r in matches})
+              if len(keys)!=1: raise SystemExit(f'OPP_RESOLUTION owner_row={owner_row} team={team} scan={scan!r} matches={[(r["source_opponent_label"],r["canonical_opponent_key"],r["canonical_opponent_name"]) for r in matches]}')
+              old=keys[0]
+              same=[r for r in opp if r['canonical_opponent_key']==old]
+              labels=sorted({r['source_opponent_label'] for r in same})
+              source_label=labels[0] if len(labels)==1 else '__ALL_KEY_USAGES__'
+              tcand=byname.get(norm(target),[])
+              tcand={p['program_key']:p for p in tcand}.values(); tcand=list(tcand)
+              if len(tcand)!=1: raise SystemExit(f'TARGET_RESOLUTION owner_row={owner_row} target={target!r}: {[(p["program_key"],p["program_name"],p["display_name"]) for p in tcand]}')
+              tp=tcand[0]
+              if tp['current_d1']!='Yes': raise SystemExit(f'TARGET_NOT_CURRENT_D1 owner_row={owner_row} target={target} key={tp["program_key"]}')
+              out.append({'source_program_key':sk,'source_opponent_label':source_label,'from_program_key':old,'to_program_key':tp['program_key'],'to_program_name':tp['program_name'],'target_current_d1':'Yes','decision':'MERGE_TO_PROGRAM','evidence_basis':f'Owner-reviewed controlling spreadsheet row {owner_row}: {scan} -> {target}','evidence_url':''})
+              audit.append((owner_row,sk,scan,old,tp['program_key'],source_label,len(labels),sum(int(r['games_with_source_label']) for r in same)))
+          fields=['source_program_key','source_opponent_label','from_program_key','to_program_key','to_program_name','target_current_d1','decision','evidence_basis','evidence_url']
+          with open('/tmp/decisions.csv','w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(out)
+          Path('/tmp/resolutions.json').write_text(json.dumps({'schema_version':2,'resolutions':[],'retain_distinct':[]},indent=2)+'\n')
+          print(f'CORPUS_ROWS={len(corpus)} MANIFEST_ROWS={len(out)} DISTINCT_REMAPS={len({(r["from_program_key"],r["to_program_key"]) for r in out})}')
+          print(f'PACKAGE_GAME_COUNT={sum(x[-1] for x in audit)}')
+          for x in audit: print('ACCOUNT',*x,sep='|')
+          PY
+      - name: Build plan twice and prove deterministic seal
+        run: |
+          set +e
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/decisions.csv /tmp/resolutions.json --output /tmp/plan1.json > /tmp/plan1.log 2>&1
+          s1=$?
+          python tools/opponent_identity_bulk_transaction.py plan /tmp/decisions.csv /tmp/resolutions.json --output /tmp/plan2.json > /tmp/plan2.log 2>&1
+          s2=$?
+          cat /tmp/plan1.log
+          echo PLAN_EXIT_1=$s1 PLAN_EXIT_2=$s2
+          if test -f /tmp/plan1.json; then python - <<'PY'
+          import json
+          p=json.load(open('/tmp/plan1.json'))
+          print('PLAN_SHA256='+str(p.get('plan_sha256')))
+          print('BLOCKER_COUNT='+str(len(p.get('blockers',[]))))
+          for b in p.get('blockers',[]): print('BLOCKER|'+json.dumps(b,sort_keys=True))
+          for k in ['manifest_rows','affected_source_games','affected_canonical_rows','in_place_remaps','canonical_pairs','retain_distinct']:
+              v=p.get(k); print(f'{k.upper()}_COUNT={len(v) if isinstance(v,list) else v}')
+          PY
+          fi
+          if test -f /tmp/plan1.json -a -f /tmp/plan2.json; then cmp /tmp/plan1.json /tmp/plan2.json && echo PLAN_BYTES_IDENTICAL=YES || echo PLAN_BYTES_IDENTICAL=NO; fi
+          exit 0
