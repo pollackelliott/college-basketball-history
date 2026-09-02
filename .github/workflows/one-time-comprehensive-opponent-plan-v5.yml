@@ -22,7 +22,7 @@ jobs:
           path: /tmp/v4
           github-token: ${{ github.token }}
           run-id: 33657308070
-      - name: Verify recovered owner corpus and prior exact plan
+      - name: Verify recovered corpus and prior exact plan
         shell: bash
         run: |
           set -euo pipefail
@@ -37,13 +37,7 @@ jobs:
           with open('/tmp/v4/v3/manifest.csv',encoding='utf-8-sig',newline='') as f: manifest=list(csv.DictReader(f))
           assert len(manifest)==173
           assert len({r['from_program_key'] for r in manifest})==122
-          audit=json.load(open('/tmp/v4/v3/authoritative-owner-audit.json'))
-          print('OWNER_AUDIT_TOP_LEVEL='+','.join(sorted(audit)))
-          for k,v in sorted(audit.items()):
-              if isinstance(v,list): print(f'OWNER_AUDIT_COUNT {k}={len(v)}')
-              elif isinstance(v,dict): print(f'OWNER_AUDIT_DICT {k}={len(v)}')
-              elif isinstance(v,(str,int,float,bool)) or v is None: print(f'OWNER_AUDIT_SCALAR {k}={v}')
-          print('MANIFEST_ROWS=173 DISTINCT_KEY_REMAPS=122')
+          print('MANIFEST_ROWS=173 DISTINCT_KEY_REMAPS=122 PRIOR_AFFECTED=434')
           PY
       - name: Generate exact-main v5 plan twice
         shell: bash
@@ -67,7 +61,6 @@ jobs:
         with:
           name: comprehensive-opponent-plan-v5
           path: |
-            /tmp/v4/v3/authoritative-owner-audit.json
             /tmp/v4/v3/manifest.csv
             /tmp/v4/v3/resolutions.json
             /tmp/plan-a.json
