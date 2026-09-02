@@ -1,0 +1,80 @@
+name: One-time bulk fallback provenance patch
+
+on:
+  push:
+    branches:
+      - chore/opponent-identity-bulk-fallback-provenance
+    paths:
+      - .github/workflows/one-time-bulk-fallback-provenance-patch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/opponent-identity-bulk-fallback-provenance
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Guard exact parent
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "25d4e02ea492ad2af96f4ae40822431db7ecc50a"
+          test -z "$(git diff --name-only HEAD^ -- . ':!.github/workflows/one-time-bulk-fallback-provenance-patch.yml')"
+      - name: Patch bulk transaction and regression test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          tool = Path('tools/opponent_identity_bulk_transaction.py')
+          text = tool.read_text(encoding='utf-8')
+          old_import = 'import venue_reference\n'
+          new_import = 'import venue_reference\nfrom location_safety import retire_site_mismatched_registry_fallbacks\n'
+          if old_import not in text or new_import in text:
+              raise SystemExit('unexpected import anchor state')
+          text = text.replace(old_import, new_import, 1)
+
+          old_notes = '''        final["notes"] = " | ".join(notes)\n        pairs.append({\n'''
+          new_notes = '''        combined_notes = " | ".join(notes)\n        combined_notes, retired = retire_site_mismatched_registry_fallbacks(\n            combined_notes, final.get("site_type", "")\n        )\n        if retired:\n            combined_notes = (\n                combined_notes\n                + " "\n                + f'[OPPONENT_IDENTITY_RECONCILIATION retired_registry_fallbacks={retired}; '\n                + f'canonical_site_type={final.get("site_type", "")}; '\n                + 'superseded machine fallback no longer controls canonical site/venue]'\n            ).strip()\n        final["notes"] = combined_notes\n        pairs.append({\n'''
+          if old_notes not in text:
+              raise SystemExit('unexpected notes anchor state')
+          text = text.replace(old_notes, new_notes, 1)
+          tool.write_text(text, encoding='utf-8')
+
+          test = Path('tests/test_opponent_identity_bulk_transaction.py')
+          t = test.read_text(encoding='utf-8')
+          anchor = '''    def test_same_date_core_conflict_requires_explicit_resolution(self):\n'''
+          method = '''    def test_pair_retires_site_mismatched_registry_fallback_marker(self):\n        self._manifest()\n        self._resolution()\n        marker = (\n            '[VENUE_REGISTRY_FALLBACK source=alpha/SRC-1;'\n            'venue_key=old-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]'\n        )\n        stale = game(\n            'CBBG-9','old-target',site='UNKNOWN',home='',venue='',city='',notes=marker\n        )\n        counterpart = game(\n            'CBBG-2','target',site='TEAM_B_HOME',home='target',venue='target-gym',city='Target City'\n        )\n        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[stale,counterpart])\n        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[\n            ['A1','CBBG-9','alpha','SRC-1','old-target'],['A2','CBBG-2','target','T-1','alpha']\n        ])\n        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)\n        self.assertEqual(plan['blockers'],[])\n        notes=plan['canonical_pairs'][0]['final_canonical_values']['notes']\n        self.assertNotIn('VENUE_REGISTRY_FALLBACK',notes)\n        self.assertIn('retired_registry_fallbacks=1',notes)\n        self.assertIn('canonical_site_type=TEAM_B_HOME',notes)\n\n'''
+          if anchor not in t or method in t:
+              raise SystemExit('unexpected test anchor state')
+          t = t.replace(anchor, method + anchor, 1)
+          test.write_text(t, encoding='utf-8')
+          PY
+      - name: Run focused and full tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_opponent_identity_bulk_transaction.py' -v
+          python -m unittest discover -s tests -v
+      - name: Prove scope and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git diff --name-only)
+          printf '%s\n' "${changed[@]}"
+          test "${#changed[@]}" -eq 2
+          test "${changed[0]}" = "tests/test_opponent_identity_bulk_transaction.py"
+          test "${changed[1]}" = "tools/opponent_identity_bulk_transaction.py"
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add tests/test_opponent_identity_bulk_transaction.py tools/opponent_identity_bulk_transaction.py
+          git commit -m "Retire stale fallback provenance in bulk reconciliation"
+          git push origin HEAD:chore/opponent-identity-bulk-fallback-provenance
