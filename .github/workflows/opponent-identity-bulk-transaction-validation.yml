@@ -1,0 +1,33 @@
+name: Opponent identity bulk transaction validation
+
+on:
+  pull_request:
+    paths:
+      - 'tools/opponent_identity_bulk_transaction.py'
+      - 'tests/test_opponent_identity_bulk_transaction.py'
+      - 'docs/opponent-identity-bulk-remediation.md'
+      - '.github/workflows/opponent-identity-bulk-transaction-validation.yml'
+      - 'tools/opponent_identity_transaction.py'
+      - 'tools/opponent_identity_remediation.py'
+      - 'tools/opponent_identity_collision_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile bulk transaction tool
+        run: python -m py_compile tools/opponent_identity_bulk_transaction.py
+      - name: Run bulk transaction tests
+        run: python -m unittest tests.test_opponent_identity_bulk_transaction -v
+      - name: Run existing transaction regression tests
+        run: python -m unittest tests.test_opponent_identity_transaction -v
+      - name: Run full repository test suite
+        run: python -m unittest discover -s tests -v
