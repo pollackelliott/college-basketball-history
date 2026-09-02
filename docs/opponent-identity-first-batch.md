@@ -25,11 +25,14 @@ is absorbed into that survivor.
 
 The survivor receives the authoritative program key and compatible nonblank enrichment
 from the absorbed row. Competing populated values are blockers unless an explicit
-reviewed resolution is supplied.
+reviewed resolution is supplied. When a reviewed resolution must intentionally clear a
+normally optional canonical field, the transaction uses the narrow
+`canonical_clear_fields` mechanism rather than treating an ordinary blank value as an
+implicit overwrite instruction.
 
 All source assertions from the absorbed row are redirected to the survivor. Literal
-source opponent labels, raw source text, and source-side conflicting dates/scores remain
-preserved.
+source opponent labels, raw source text, and source-side conflicting dates/scores/site
+interpretations remain preserved.
 
 ## Expected transaction shape
 
@@ -40,6 +43,11 @@ The validated read-only audit found:
 - 2 same-date identity-conflict groups;
 - 1 affected row whose duplicate was hidden by a source-date error.
 
+The first blocked transaction rehearsal then surfaced one additional populated-field
+conflict inside an otherwise exact-core pair: the Dec. 15, 2012 Oklahoma–Texas A&M
+All-College Classic site classification. That conflict is now explicitly reconciled
+below rather than suppressed.
+
 The sealed transaction therefore expects:
 
 - 52 survivor rows;
@@ -48,7 +56,7 @@ The sealed transaction therefore expects:
 - source assertion count unchanged;
 - all assertions formerly attached to absorbed rows redirected to survivors;
 - stale `texas-a-and-m` removed from canonical participants and affected assertion/package normalization;
-- 3 new `RESOLVED` discrepancy records for the material exceptional fields below.
+- 4 new `RESOLVED` discrepancy records for the material exceptional fields below.
 
 ## Exceptional reconciliation 1 — Northwestern, 1969-12-30
 
@@ -152,6 +160,55 @@ January 19, 2010. Texas A&M's later year-by-year source row carries January 23. 
 source row is not silently rewritten. Instead, its assertion is redirected to the
 January 19 survivor and the date disagreement is recorded as `RESOLVED`.
 
+## Exceptional reconciliation 4 — Oklahoma, 2012-12-15
+
+Canonical survivor:
+
+```text
+CBBG-0063073
+```
+
+Absorbed duplicate:
+
+```text
+CBBG-0067408
+```
+
+Canonical result:
+
+- Date: 2012-12-15
+- Oklahoma 64, Texas A&M 54
+- Site type: NEUTRAL
+- Designated home team: blank
+- Historical venue name: Chesapeake Energy Arena
+- Global physical venue: `VEN-000162` / `paycom-center`
+- Site city/state: Oklahoma City, OK
+
+Evidence:
+
+- Texas A&M official 2012-13 schedule text:
+  `https://12thman.com/sports/mens-basketball/schedule/text/2012-13`
+- Texas A&M contemporaneous official recap:
+  `https://12thman.com/news/2012/12/15/am-win-streak-snapped-by-ou-64-54`
+- Texas A&M official box score:
+  `https://12thman.com/sports/mens-basketball/stats/2012-13/oklahoma/boxscore/884`
+- Oklahoma contemporaneous official recap:
+  `https://soonersports.com/news/2012/12/15/208397488.aspx`
+
+Texas A&M's official season schedule explicitly classifies the All-College Classic
+meeting as **Neutral** in Oklahoma City and names Chesapeake Energy Arena. Its
+contemporaneous recap and box score corroborate that physical site. Oklahoma's current
+schedule presentation labels the game `Home`, but that schedule presentation is not
+used as project H/A/N authority when explicit neutral-site evidence exists.
+
+The existing global venue registry already identifies Chesapeake Energy Arena as a
+historical alias of physical venue `VEN-000162`, whose project display identity is
+Paycom Center. The transaction therefore sets canonical `site_type=NEUTRAL`, clears
+`designated_home_team_key`, assigns `paycom-center` / `VEN-000162`, and records Oklahoma
+City, OK. The conflicting later Texas A&M source interpretation remains preserved in
+evidence and is recorded as a resolved site-type discrepancy rather than silently
+rewritten.
+
 ## Apply invariants
 
 The transaction tool must refuse to apply unless all of the following hold:
@@ -160,12 +217,13 @@ The transaction tool must refuse to apply unless all of the following hold:
 2. every one of the 52 affected stale-key rows is paired exactly once;
 3. every absorbed row is a non-stale counterpart rather than another stale survivor;
 4. every competing populated canonical field is either equal or explicitly resolved;
-5. the affected school-package rows still match the sealed source-game sets;
-6. the discrepancy schema and next IDs are unchanged from the sealed plan;
-7. all controlling repository files still match the plan fingerprints;
-8. post-apply validation finds no absorbed canonical IDs or stale identity keys;
-9. repository validation passes; and
-10. any failure restores every touched file byte-for-byte.
+5. any intentional canonical field clear is listed explicitly in the narrow allowed `canonical_clear_fields` set;
+6. the affected school-package rows still match the sealed source-game sets;
+7. the discrepancy schema and next IDs are unchanged from the sealed plan;
+8. all controlling repository files still match the plan fingerprints;
+9. post-apply validation finds no absorbed canonical IDs or stale identity keys;
+10. repository validation passes; and
+11. any failure restores every touched file byte-for-byte.
 
 ## Rehearsal before real mutation
 
@@ -176,8 +234,10 @@ repository. The rehearsal must prove:
 - 52/52 pairing accounting;
 - exactly 52 canonical rows absorbed;
 - assertion count unchanged;
-- exactly 3 new resolved discrepancies;
+- exactly 4 new resolved discrepancies;
 - literal source labels/raw source text preserved;
+- the 2012 survivor is `NEUTRAL` with no designated home team and resolves to
+  `paycom-center` / `VEN-000162` in Oklahoma City, OK;
 - `validate_data.py` passes;
 - full unit suite passes;
 - generated site data can be rebuilt deterministically;
