@@ -97,6 +97,33 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(self._read(self.repo/'data/evidence/game-assertions.csv')[0]['normalized_opponent_key'],'target')
         self.assertEqual(self._read(self.repo/'schools/alpha/source-games.csv')[0]['raw_text'],'raw Old Target 1')
 
+    def test_in_place_remap_retires_fallback_when_team_sort_flips_site(self):
+        self._manifest(old='z-old-target',new='aardvark-target',name='Aardvark Target')
+        self._write(self.repo/'data/reference/programs.csv',PROGRAM_HEADERS,[
+            ['alpha','Alpha','Alpha','Yes','Yes'],
+            ['aardvark-target','Aardvark Target','Aardvark Target','Yes','No'],
+        ])
+        self._resolution()
+        marker = (
+            '[VENUE_REGISTRY_FALLBACK source=alpha/SRC-1;'
+            'venue_key=old-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]'
+        )
+        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[
+            game('CBBG-1','z-old-target',site='TEAM_A_HOME',home='alpha',notes=marker)
+        ])
+        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[
+            ['A1','CBBG-1','alpha','SRC-1','z-old-target']
+        ])
+        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)
+        row=self._read(self.repo/'data/canonical/games.csv')[0]
+        self.assertEqual((row['team_a_key'],row['team_b_key']),('aardvark-target','alpha'))
+        self.assertEqual(row['site_type'],'TEAM_B_HOME')
+        self.assertNotIn('VENUE_REGISTRY_FALLBACK',row['notes'])
+        self.assertIn('retired_registry_fallbacks=1',row['notes'])
+        self.assertIn('canonical_site_type=TEAM_B_HOME',row['notes'])
+
     def test_exact_collision_auto_absorbs_and_enriches(self):
         self._manifest()
         self._resolution()
