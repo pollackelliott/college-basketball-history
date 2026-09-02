@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import opponent_identity_transaction as tx
+from location_safety import parse_registry_fallback_markers, registry_fallback_marker
 
 CANONICAL_HEADERS = [
     'canonical_game_id','season_label','game_date','date_precision','team_a_key','team_b_key',
@@ -24,11 +25,11 @@ PROGRAM_HEADERS = ['program_key','program_name','display_name','current_d1','pub
 ALIAS_HEADERS = tx.remediation.REQUIRED_ALIAS_FIELDS
 
 
-def canonical(game_id, opponent_key, *, date='2005-01-18', a_score='70', b_score='54', overtime='0', venue='', city='', status='PROVISIONAL'):
+def canonical(game_id, opponent_key, *, date='2005-01-18', a_score='70', b_score='54', overtime='0', venue='', city='', status='PROVISIONAL', notes=''):
     return [
         game_id,'2004-2005',date,'EXACT','oklahoma',opponent_key,a_score,b_score,'oklahoma',
         overtime,'TEAM_B_HOME',opponent_key,venue,'VEN-1' if venue else '',city,'TX' if city else '',
-        'REGULAR_SEASON','','','',status,''
+        'REGULAR_SEASON','','','',status,notes
     ]
 
 
@@ -183,6 +184,37 @@ class OpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(final['venue_id'],'VEN-000162')
         self.assertEqual(final['site_city'],'Oklahoma City')
         self.assertEqual(final['site_state'],'OK')
+
+    def test_neutral_reconciliation_retires_only_stale_fallback_marker(self):
+        stale=registry_fallback_marker(
+            'texas-a-m','TAM-1','reed-arena','TEAM_B_HOME',
+            ['venue_key','venue_id','site_city','site_state'],
+        )
+        fields,rows=tx.read_csv(self.repo/'data/canonical/games.csv')
+        absorbed=next(row for row in rows if row['canonical_game_id']=='CBBG-10')
+        absorbed['notes']='Absorbed narrative. '+stale
+        tx.write_csv(self.repo/'data/canonical/games.csv',fields,rows)
+
+        payload=json.loads(self.resolutions.read_text())
+        row=payload['resolutions'][0]
+        row['canonical_values']={
+            'team_b_score':'54',
+            'site_type':'NEUTRAL',
+            'venue_key':'paycom-center',
+            'venue_id':'VEN-000162',
+            'site_city':'Oklahoma City',
+            'site_state':'OK',
+        }
+        row['canonical_clear_fields']=['designated_home_team_key']
+        self.resolutions.write_text(json.dumps(payload))
+
+        plan=tx.build_transaction_plan(self.repo,self.decisions,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        notes=plan['canonical_pairs'][0]['final_canonical_values']['notes']
+        self.assertEqual(parse_registry_fallback_markers(notes),[])
+        self.assertIn('Absorbed narrative.',notes)
+        self.assertIn('retired_registry_fallbacks=1',notes)
+        self.assertIn('canonical_site_type=NEUTRAL',notes)
 
     def test_apply_redirects_assertions_retargets_discrepancies_and_preserves_raw(self):
         plan=tx.build_transaction_plan(self.repo,self.decisions,self.resolutions)
