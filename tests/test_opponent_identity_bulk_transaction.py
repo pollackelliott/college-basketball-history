@@ -165,6 +165,30 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(source['normalized_opponent_key'],'arkansas-monticello')
         self.assertEqual(source['opponent_current_d1'],'No')
 
+    def test_unpaired_exact_date_can_use_explicit_counterpart(self):
+        self._manifest()
+        stale=game('CBBG-9','old-target',date='2000-01-02',b_score='60')
+        counterpart=game('CBBG-2','target',date='2000-01-01',b_score='60')
+        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[stale,counterpart])
+        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[
+            ['A1','CBBG-9','alpha','SRC-1','old-target'],['A2','CBBG-2','target','T-1','alpha']
+        ])
+        self._resolution(pairs=[{
+            'resolution_id':'PAIR-DATE-1',
+            'kind':'EXPLICIT_COUNTERPART',
+            'survivor_canonical_game_id':'CBBG-9',
+            'absorbed_canonical_game_id':'CBBG-2',
+            'canonical_values':{'game_date':'2000-01-01'},
+            'resolution_basis':'reviewed reciprocal evidence establishes one game and the authoritative date',
+            'evidence_urls':['https://example.test/date'],
+            'discrepancies':[]
+        }])
+        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        self.assertEqual(plan['canonical_pairs'][0]['survivor_canonical_game_id'],'CBBG-9')
+        self.assertEqual(plan['canonical_pairs'][0]['absorbed_canonical_game_id'],'CBBG-2')
+        self.assertEqual(plan['canonical_pairs'][0]['final_canonical_values']['game_date'],'2000-01-01')
+
     def test_hash_mismatch_refuses_before_write(self):
         self._manifest(); self._resolution()
         self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[game('CBBG-1','old-target')])
