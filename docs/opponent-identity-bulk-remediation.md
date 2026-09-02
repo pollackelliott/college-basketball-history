@@ -69,7 +69,7 @@ The JSON document uses `schema_version: 2` and contains:
   `opponent_identity_transaction.py`;
 - `retain_distinct`: explicit groups of canonical IDs that must remain separate despite
   an unknown-date mapped-signature collision, with substantive resolution basis.
-- `venue_registry_additions` (optional): full rows for newly researched physical venues required by an explicit reconciliation. Additions are sealed with the plan, must use the next sequential global `VEN-` IDs, are checked for key/ID collisions, and are committed or rolled back atomically with the game reconciliation.
+- `venue_registry_additions` (optional): full rows for newly researched physical venues required by an explicit reconciliation. Additions are sealed with the plan, must use the next sequential global `VEN-` IDs, and are checked for key/ID collisions. The transaction deterministically derives and seals exactly one matching `PROJECT_DISPLAY` row in `venue-names.csv` for every new venue, fingerprints both registries, and commits or rolls back both rows atomically with the game reconciliation.
 
 Exact-date core matches with exactly one stale row and one authoritative counterpart
 may be absorbed automatically only when all populated canonical fields merge without

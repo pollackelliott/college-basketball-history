@@ -28,6 +28,7 @@ from typing import Any
 import opponent_identity_collision_audit as collision_audit
 import opponent_identity_remediation as remediation
 import opponent_identity_transaction as tx
+import venue_reference
 
 
 class BulkTransactionError(RuntimeError):
@@ -251,6 +252,46 @@ def load_venue_registry_additions(repo: Path, path: Path) -> tuple[list[dict[str
     return additions, sorted(set(blockers))
 
 
+def derive_venue_name_additions(
+    repo: Path, venue_additions: list[dict[str, str]]
+) -> tuple[list[dict[str, str]], list[str]]:
+    if not venue_additions:
+        return [], []
+    path = repo / "data/reference/venue-names.csv"
+    if not path.exists():
+        return [], ["venue registry additions requested but data/reference/venue-names.csv is missing"]
+    fields, existing = read_csv(path)
+    blockers: list[str] = []
+    missing = sorted(venue_reference.REQUIRED_NAME_COLUMNS - set(fields))
+    if missing:
+        return [], ["venue-names.csv missing columns: " + ", ".join(missing)]
+    existing_by_id: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in existing:
+        existing_by_id[clean(row.get("venue_id"))].append(row)
+    additions: list[dict[str, str]] = []
+    for venue in venue_additions:
+        vid = clean(venue.get("venue_id"))
+        display = clean(venue.get("display_name"))
+        if existing_by_id.get(vid):
+            blockers.append(f"venue name addition {vid}: venue_id already appears in venue-names.csv")
+            continue
+        normalized = venue_reference.normalized_venue_name(display)
+        if not normalized:
+            blockers.append(f"venue name addition {vid}: display name cannot normalize to blank")
+            continue
+        row = {field: "" for field in fields}
+        row.update({
+            "venue_id": vid,
+            "venue_name": display,
+            "normalized_name": normalized,
+            "name_type": "PROJECT_DISPLAY",
+            "source_basis": clean(venue.get("source_basis")),
+            "notes": clean(venue.get("notes")),
+        })
+        additions.append(row)
+    return additions, sorted(set(blockers))
+
+
 def _mapped_unknown_groups(rows: list[dict[str, str]], key_map: dict[str, str], affected: set[str]) -> list[dict[str, Any]]:
     groups: dict[tuple[str, ...], list[dict[str, str]]] = defaultdict(list)
     for row in rows:
@@ -284,6 +325,8 @@ def build_plan(repo: Path, manifest_path: Path, resolutions_path: Path) -> dict[
     pair_resolutions, distinct_resolutions = load_resolutions(resolutions_path.resolve())
     venue_additions, venue_blockers = load_venue_registry_additions(repo, resolutions_path.resolve())
     blockers.extend(venue_blockers)
+    venue_name_additions, venue_name_blockers = derive_venue_name_additions(repo, venue_additions)
+    blockers.extend(venue_name_blockers)
     _, canonical_rows = read_csv(repo / "data/canonical/games.csv")
     _, discrepancy_rows = read_csv(repo / "data/reconciliation/discrepancies.csv")
 
@@ -454,6 +497,7 @@ def build_plan(repo: Path, manifest_path: Path, resolutions_path: Path) -> dict[
     }
     if venue_additions:
         fingerprints["venues.csv"] = sha_file(repo / "data/reference/venues.csv")
+        fingerprints["venue-names.csv"] = sha_file(repo / "data/reference/venue-names.csv")
     for source in sorted({item["source_program_key"] for item in items}):
         fingerprints[source + "/opponents.csv"] = sha_file(repo / "schools" / source / "opponents.csv")
         fingerprints[source + "/source-games.csv"] = sha_file(repo / "schools" / source / "source-games.csv")
@@ -470,6 +514,7 @@ def build_plan(repo: Path, manifest_path: Path, resolutions_path: Path) -> dict[
         "retained_distinct_canonical_game_ids": retained_distinct_ids,
         "retain_distinct_resolutions": [r for r in distinct_resolutions if r["resolution_id"] in used_distinct],
         "venue_registry_additions": venue_additions,
+        "venue_name_additions": venue_name_additions,
         "new_discrepancies": sorted(specs, key=lambda x: x["discrepancy_id"]),
         "collision_audit_sha256": audit.get("audit_sha256", ""),
         "same_date_collision_group_count": audit.get("same_date_collision_group_count", 0),
@@ -509,6 +554,7 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
     ]
     if plan["venue_registry_additions"]:
         paths.append(repo / "data/reference/venues.csv")
+        paths.append(repo / "data/reference/venue-names.csv")
     for item in plan["manifest_items"]:
         paths.extend([
             repo / "schools" / item["source_program_key"] / "opponents.csv",
@@ -564,6 +610,16 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
                 vr.append(dict(addition))
                 existing_ids.add(addition["venue_id"]); existing_keys.add(addition["venue_key"])
             tx.write_csv(vp, vf, vr)
+
+            vnp = repo / "data/reference/venue-names.csv"
+            vnf, vnr = read_csv(vnp)
+            existing_name_ids = {clean(r.get("venue_id")) for r in vnr}
+            for addition in plan["venue_name_additions"]:
+                if addition["venue_id"] in existing_name_ids:
+                    raise BulkTransactionError("venue-name registry changed after plan sealing")
+                vnr.append(dict(addition))
+                existing_name_ids.add(addition["venue_id"])
+            tx.write_csv(vnp, vnf, vnr)
 
         cf, cr = read_csv(repo / "data/canonical/games.csv")
         af, ar = read_csv(repo / "data/evidence/game-assertions.csv")
@@ -652,6 +708,15 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
                 row = by_id.get(addition["venue_id"])
                 if not row or any(clean(row.get(field)) != clean(addition.get(field)) for field in addition):
                     raise BulkTransactionError(f"postcondition: venue addition {addition['venue_id']} missing or changed")
+            _, final_names = read_csv(repo / "data/reference/venue-names.csv")
+            for addition in plan["venue_name_additions"]:
+                matches = [r for r in final_names if clean(r.get("venue_id")) == addition["venue_id"]]
+                if len(matches) != 1 or any(
+                    clean(matches[0].get(field)) != clean(addition.get(field)) for field in addition
+                ):
+                    raise BulkTransactionError(
+                        f"postcondition: venue name addition {addition['venue_id']} missing, duplicated, or changed"
+                    )
 
         retained = set(plan["retained_distinct_canonical_game_ids"])
         if retained and not retained.issubset({clean(r.get("canonical_game_id")) for r in cr2}):
@@ -673,6 +738,7 @@ def apply(repo: Path, manifest_path: Path, resolutions_path: Path, expected_sha:
         "source_game_rows_updated": source_updates,
         "discrepancies_added": len(plan["new_discrepancies"]),
         "venue_registry_additions": len(plan["venue_registry_additions"]),
+        "venue_name_additions": len(plan["venue_name_additions"]),
     }
 
 
