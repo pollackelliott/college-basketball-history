@@ -263,9 +263,9 @@ jobs:
         working-directory: /tmp/opponent-identity-rehearsal
         run: |
           python tools/validate_data.py
-          python -m unittest discover -s tests -v
           python tools/build_site_data.py --apply
           python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
           python tools/published_opponent_identity_census.py --json > /tmp/post-opponent-census.json
           python - <<'PY'
           import json
