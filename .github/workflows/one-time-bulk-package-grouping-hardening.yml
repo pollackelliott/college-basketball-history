@@ -1,0 +1,69 @@
+name: One-time bulk package grouping hardening
+
+on:
+  push:
+    branches:
+      - chore/opponent-identity-bulk-package-grouping
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/opponent-identity-bulk-package-grouping
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add whole-package identity scope
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          tool=Path('tools/opponent_identity_bulk_transaction.py')
+          text=tool.read_text()
+          needle='''SUPPORTED_DECISIONS = {"MERGE_TO_PROGRAM", "REKEY_DISTINCT_NON_D1"}\nPAIR_KINDS = {"EXPLICIT_RECONCILIATION", "EXPLICIT_COUNTERPART", "SAME_DATE_IDENTITY_CONFLICT", "EXACT_CORE_MATCH"}\n'''
+          replacement='''SUPPORTED_DECISIONS = {"MERGE_TO_PROGRAM", "REKEY_DISTINCT_NON_D1"}\nALL_PACKAGE_USAGES = "__ALL_KEY_USAGES__"\nPAIR_KINDS = {"EXPLICIT_RECONCILIATION", "EXPLICIT_COUNTERPART", "SAME_DATE_IDENTITY_CONFLICT", "EXACT_CORE_MATCH"}\n'''
+          assert needle in text
+          text=text.replace(needle,replacement,1)
+
+          needle='''        _, opponent_rows = read_csv(opponents)\n        matches = [\n            r for r in opponent_rows\n            if clean(r.get("source_opponent_label")) == label\n            and clean(r.get("canonical_opponent_key")) == old\n        ]\n        if len(matches) != 1:\n            blockers.append(f"{mid}: expected exactly one opponents.csv row, found {len(matches)}")\n        expected = None\n        if matches:\n            try:\n                expected = int(clean(matches[0].get("games_with_source_label")))\n            except ValueError:\n                blockers.append(f"{mid}: invalid games_with_source_label")\n\n        _, game_rows = read_csv(source_games)\n        game_matches = [\n            r for r in game_rows\n            if clean(r.get("source_opponent_label")) == label\n            and clean(r.get("normalized_opponent_key")) == old\n        ]\n        if expected is not None and len(game_matches) != expected:\n            blockers.append(f"{mid}: source-game count {len(game_matches)} != opponents.csv count {expected}")\n        if not game_matches:\n            blockers.append(f"{mid}: no matching source-games.csv rows")\n        items.append({**row, "manifest_id": mid, "source_game_ids": sorted(clean(r.get("source_game_id")) for r in game_matches)})\n'''
+          replacement='''        _, opponent_rows = read_csv(opponents)\n        grouped_scope = label == ALL_PACKAGE_USAGES\n        matches = [\n            r for r in opponent_rows\n            if clean(r.get("canonical_opponent_key")) == old\n            and (grouped_scope or clean(r.get("source_opponent_label")) == label)\n        ]\n        if grouped_scope:\n            if not matches:\n                blockers.append(f"{mid}: no opponents.csv rows for grouped old key {old!r}")\n            expected = None\n        else:\n            if len(matches) != 1:\n                blockers.append(f"{mid}: expected exactly one opponents.csv row, found {len(matches)}")\n            expected = None\n            if matches:\n                try:\n                    expected = int(clean(matches[0].get("games_with_source_label")))\n                except ValueError:\n                    blockers.append(f"{mid}: invalid games_with_source_label")\n\n        _, game_rows = read_csv(source_games)\n        game_matches = [\n            r for r in game_rows\n            if clean(r.get("normalized_opponent_key")) == old\n            and (grouped_scope or clean(r.get("source_opponent_label")) == label)\n        ]\n        if not grouped_scope and expected is not None and len(game_matches) != expected:\n            blockers.append(f"{mid}: source-game count {len(game_matches)} != opponents.csv count {expected}")\n        if not game_matches:\n            blockers.append(f"{mid}: no matching source-games.csv rows")\n        items.append({\n            **row,\n            "manifest_id": mid,\n            "source_game_ids": sorted(clean(r.get("source_game_id")) for r in game_matches),\n            "opponent_row_labels": sorted(clean(r.get("source_opponent_label")) for r in matches),\n        })\n'''
+          assert needle in text
+          text=text.replace(needle,replacement,1)
+
+          needle='''            matches = [\n                r for r in opponent_rows\n                if clean(r.get("source_opponent_label")) == item["source_opponent_label"]\n                and clean(r.get("canonical_opponent_key")) == item["from_program_key"]\n            ]\n            if len(matches) != 1:\n                raise BulkTransactionError(item["manifest_id"] + ": opponents row changed")\n            matches[0]["canonical_opponent_key"] = item["to_program_key"]\n            matches[0]["canonical_opponent_name"] = item["to_program_name"]\n            matches[0]["current_d1"] = item["target_current_d1"]\n            opponent_updates += 1\n'''
+          replacement='''            grouped_scope = item["source_opponent_label"] == ALL_PACKAGE_USAGES\n            matches = [\n                r for r in opponent_rows\n                if clean(r.get("canonical_opponent_key")) == item["from_program_key"]\n                and (grouped_scope or clean(r.get("source_opponent_label")) == item["source_opponent_label"])\n            ]\n            actual_labels = sorted(clean(r.get("source_opponent_label")) for r in matches)\n            if not matches or actual_labels != item.get("opponent_row_labels", []):\n                raise BulkTransactionError(item["manifest_id"] + ": opponents row set changed")\n            for match in matches:\n                match["canonical_opponent_key"] = item["to_program_key"]\n                match["canonical_opponent_name"] = item["to_program_name"]\n                match["current_d1"] = item["target_current_d1"]\n            opponent_updates += len(matches)\n'''
+          assert needle in text
+          text=text.replace(needle,replacement,1)
+          tool.write_text(text)
+
+          test=Path('tests/test_opponent_identity_bulk_transaction.py')
+          text=test.read_text()
+          needle='''    def test_omitted_global_package_usage_fails_and_rolls_back(self):\n'''
+          insert='''    def test_grouped_package_scope_preserves_multiple_literal_labels(self):\n        self._write(self.manifest,bulk.MANIFEST_FIELDS,[[\n            'alpha',bulk.ALL_PACKAGE_USAGES,'old-target','target','Target','Yes','MERGE_TO_PROGRAM',\n            'owner reviewed grouped identity','https://example.test'\n        ]])\n        self._resolution()\n        self._write(self.repo/'schools/alpha/opponents.csv',OPPONENT_HEADERS,[\n            ['alpha','Southern','old-target','Old Target','No','2','1999-2000','2000-2001'],\n            ['alpha','Southern Univ.','old-target','Old Target','No','2','1999-2000','2000-2001'],\n        ])\n        self._write(self.repo/'schools/alpha/source-games.csv',SOURCE_HEADERS,[\n            ['SRC-1','alpha','1999-2000','2000-01-01','Southern','Old Target','old-target','No','','','W','0','raw Southern'],\n            ['SRC-2','alpha','2000-2001','2001-01-01','Southern Univ.','Old Target','old-target','No','','','W','0','raw Southern Univ.'],\n        ])\n        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[\n            game('CBBG-1','old-target',date='2000-01-01'),\n            game('CBBG-2','old-target',date='2001-01-01'),\n        ])\n        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[\n            ['A1','CBBG-1','alpha','SRC-1','old-target'],['A2','CBBG-2','alpha','SRC-2','old-target']\n        ])\n        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)\n        self.assertEqual(plan['blockers'],[])\n        item=plan['manifest_items'][0]\n        self.assertEqual(item['source_game_ids'],['SRC-1','SRC-2'])\n        self.assertEqual(item['opponent_row_labels'],['Southern','Southern Univ.'])\n        bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)\n        opponents=self._read(self.repo/'schools/alpha/opponents.csv')\n        self.assertEqual([r['source_opponent_label'] for r in opponents],['Southern','Southern Univ.'])\n        self.assertTrue(all(r['canonical_opponent_key']=='target' for r in opponents))\n        sources=self._read(self.repo/'schools/alpha/source-games.csv')\n        self.assertEqual([r['source_opponent_label'] for r in sources],['Southern','Southern Univ.'])\n        self.assertEqual([r['raw_text'] for r in sources],['raw Southern','raw Southern Univ.'])\n        self.assertTrue(all(r['normalized_opponent_key']=='target' for r in sources))\n\n    def test_omitted_global_package_usage_fails_and_rolls_back(self):\n'''
+          assert needle in text
+          test.write_text(text.replace(needle,insert,1))
+
+          doc=Path('docs/opponent-identity-bulk-remediation.md')
+          text=doc.read_text()
+          needle='''Each manifest row is verified against the exact `opponents.csv` row and exact count of\nmatching `source-games.csv` rows. Literal source opponent labels and raw source text are\nnot rewritten.\n'''
+          replacement='''For ordinary rows, each manifest entry is verified against one exact `opponents.csv`\nsource label and its matching `source-games.csv` population. For historical packages\nwhose opponent index aggregates multiple literal spellings, set `source_opponent_label`\nto `__ALL_KEY_USAGES__`; that explicitly scopes the row to every package row and every\nsource-game row for the old key within that source program. The planned opponent-label\nset and source-game IDs are sealed before apply. Literal source opponent labels and raw\nsource text are never rewritten.\n'''
+          assert needle in text
+          doc.write_text(text.replace(needle,replacement,1))
+          PY
+
+          python -m unittest tests.test_opponent_identity_bulk_transaction -v
+          python -m unittest tests.test_opponent_identity_transaction -v
+          python -m unittest discover -s tests -v
+
+          rm .github/workflows/one-time-bulk-package-grouping-hardening.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/opponent_identity_bulk_transaction.py tests/test_opponent_identity_bulk_transaction.py docs/opponent-identity-bulk-remediation.md .github/workflows/one-time-bulk-package-grouping-hardening.yml
+          git commit -m "Support grouped bulk package identity scope"
+          git push origin HEAD:chore/opponent-identity-bulk-package-grouping
