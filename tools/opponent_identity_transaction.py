@@ -12,6 +12,7 @@ OpponentIdentityTransactionError=TransactionError
 
 DISC_FIELDS=['discrepancy_id','canonical_game_id','field_name','source_a_program_key','source_a_value','source_b_program_key','source_b_value','canonical_value','status','resolution_basis','notes']
 MERGE_FIELDS=['season_label','game_date','date_precision','team_a_score','team_b_score','result_winner_team_key','overtime_periods','site_type','designated_home_team_key','venue_key','venue_id','site_city','site_state','game_type','postseason_round','administrative_status','administrative_note','canonical_status']
+CLEARABLE_FIELDS={'designated_home_team_key','venue_key','venue_id','site_city','site_state','postseason_round','administrative_status','administrative_note'}
 DISCREPANCY_FIELDS=DISC_FIELDS
 KEY_FIELDS={'result_winner_team_key','designated_home_team_key'}
 
@@ -43,15 +44,17 @@ def load_resolutions(path):
         r={k:raw.get(k) for k in raw}; rid=clean(r.get('resolution_id')); s=clean(r.get('survivor_canonical_game_id')); a=clean(r.get('absorbed_canonical_game_id')); basis=clean(r.get('resolution_basis'))
         if not all((rid,s,a,basis)) or s==a: raise TransactionError('each resolution requires unique id, survivor, absorbed, basis')
         if rid in ids or (s,a) in pairs: raise TransactionError(f'duplicate resolution {rid}')
-        ids.add(rid); pairs.add((s,a)); vals={clean(k):clean(v) for k,v in (r.get('canonical_values') or {}).items()}
-        bad=set(vals)-set(MERGE_FIELDS)
+        ids.add(rid); pairs.add((s,a)); vals={clean(k):clean(v) for k,v in (r.get('canonical_values') or {}).items()}; clear=sorted({clean(k) for k in (r.get('canonical_clear_fields') or []) if clean(k)})
+        bad=set(vals)-set(MERGE_FIELDS); bad_clear=set(clear)-CLEARABLE_FIELDS
         if bad or any(not v for v in vals.values()): raise TransactionError(f'{rid}: invalid canonical_values')
+        if bad_clear: raise TransactionError(f'{rid}: invalid canonical_clear_fields')
+        if set(vals)&set(clear): raise TransactionError(f'{rid}: canonical field cannot be both set and cleared')
         ds=[]
         for d in r.get('discrepancies') or []:
             d={k:clean(d.get(k)) for k in DISC_FIELDS if k not in {'discrepancy_id','canonical_game_id'}}
             if d.get('status')!='RESOLVED' or not all(d.get(k) for k in ['field_name','source_a_program_key','source_a_value','canonical_value','resolution_basis']): raise TransactionError(f'{rid}: invalid discrepancy')
             ds.append(d)
-        out.append({'resolution_id':rid,'kind':clean(r.get('kind')) or 'EXPLICIT_RECONCILIATION','survivor':s,'absorbed':a,'canonical_values':vals,'resolution_basis':basis,'evidence_urls':sorted(clean(x) for x in (r.get('evidence_urls') or []) if clean(x)),'discrepancies':ds})
+        out.append({'resolution_id':rid,'kind':clean(r.get('kind')) or 'EXPLICIT_RECONCILIATION','survivor':s,'absorbed':a,'canonical_values':vals,'canonical_clear_fields':clear,'resolution_basis':basis,'evidence_urls':sorted(clean(x) for x in (r.get('evidence_urls') or []) if clean(x)),'discrepancies':ds})
     return sorted(out,key=lambda x:x['resolution_id'])
 
 def maprow(row,keymap):
@@ -65,7 +68,8 @@ def maprow(row,keymap):
         if k in r: r[k]=keymap.get(clean(r.get(k)),clean(r.get(k)))
     return r
 
-def mergefield(field,left,right,explicit,label):
+def mergefield(field,left,right,explicit,clear,label):
+    if field in clear: return '',None
     if field in explicit: return explicit[field],None
     l,r=clean(left),clean(right)
     if l==r: return l,None
@@ -90,9 +94,9 @@ def build_plan(repo,decisions,resolutions):
         if sid in useda or aid in usedb: blockers.append(f'{label}: canonical row paired twice')
         useda.add(sid); usedb.add(aid); sm,am=maprow(s,keymap),maprow(a,keymap)
         if (sm.get('team_a_key'),sm.get('team_b_key'))!=(am.get('team_a_key'),am.get('team_b_key')) or clean(s.get('season_label'))!=clean(a.get('season_label')): blockers.append(f'{label}: participants/season mismatch')
-        explicit=dict((res or {}).get('canonical_values') or {}); final={'team_a_key':clean(sm.get('team_a_key')),'team_b_key':clean(sm.get('team_b_key'))}
+        explicit=dict((res or {}).get('canonical_values') or {}); clear=set((res or {}).get('canonical_clear_fields') or []); final={'team_a_key':clean(sm.get('team_a_key')),'team_b_key':clean(sm.get('team_b_key'))}
         for f in [x for x in MERGE_FIELDS if x in cfields]:
-            v,e=mergefield(f,sm.get(f,''),am.get(f,''),explicit,label); final[f]=v
+            v,e=mergefield(f,sm.get(f,''),am.get(f,''),explicit,clear,label); final[f]=v
             if e: blockers.append(e)
         notes=[]
         for x in [clean(sm.get('notes')),clean(am.get('notes')),f'[OPPONENT_IDENTITY_RECONCILIATION absorbed={aid}; preserved survivor={sid}; one real game / one canonical game]']:
