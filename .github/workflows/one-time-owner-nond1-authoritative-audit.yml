@@ -87,7 +87,7 @@ jobs:
               '30':'utrgv',
               '69':'st-mary-s-calif',
               '119':'texas-a-and-m-corpus-christi',
-              '123':'saint-joseph-s',
+              '123':'st-joseph-s',
               '166':'17-2-pittsburgh',
               '184':'vs-iona',
               'BONUS-1':'sam-houston-nc',
@@ -139,9 +139,6 @@ jobs:
           keymap={k:next(iter(v)) for k,v in by_from.items() if k!=next(iter(v))}
           flag_keys=sorted({d['from_key'] for d in decisions if d['action']=='FLAG_ONLY'})
 
-          # Whole-repository source/package usage of each stale key. This is the exact
-          # blast radius a key-level transaction must account for, not an invitation to
-          # mutate unrelated identities.
           all_source=defaultdict(list); all_opp=defaultdict(list)
           for f in Path('schools').glob('*/source-games.csv'):
               p=f.parent.name
