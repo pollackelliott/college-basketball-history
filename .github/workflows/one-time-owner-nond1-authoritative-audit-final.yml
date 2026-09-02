@@ -1,0 +1,46 @@
+name: One-time owner non-D1 authoritative audit final
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct reviewed input and execute corrected authoritative audit
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          comprehensive=Path('.github/workflows/one-time-owner-nond1-comprehensive-audit.yml').read_text()
+          marker="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=comprehensive.index(marker)+len(marker)
+          b=comprehensive.index('\n          CSV',a)
+          lines=[line[10:] if line.startswith('          ') else line for line in comprehensive[a:b].splitlines()]
+          Path('/tmp/owner_scan.csv').write_text('\n'.join(lines)+'\n')
+
+          authoritative=Path('.github/workflows/one-time-owner-nond1-authoritative-audit.yml').read_text()
+          start="          python - <<'PY'\n"
+          a=authoritative.index(start, authoritative.index('Prove complete confirmed accounting'))+len(start)
+          b=authoritative.index('\n          PY\n          sha256sum',a)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in authoritative[a:b].splitlines())
+          old="'123':'st-joseph-s'"
+          new="'123':'saint-josephs'"
+          assert old in code
+          code=code.replace(old,new,1)
+          Path('/tmp/final_authoritative_audit.py').write_text(code+'\n')
+          PY
+          python /tmp/final_authoritative_audit.py
+          sha256sum /tmp/authoritative-owner-audit.json | awk '{print "AUTHORITATIVE_AUDIT_SHA256="$1}'
