@@ -4,6 +4,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
@@ -22,6 +23,7 @@ OPPONENT_HEADERS = ['source_program_key','source_opponent_label','canonical_oppo
 SOURCE_HEADERS = ['source_game_id','source_program_key','season_label','game_date','source_opponent_label','normalized_opponent_name','normalized_opponent_key','opponent_current_d1','team_score','opponent_score','played_result','overtime_periods','raw_text']
 PROGRAM_HEADERS = ['program_key','program_name','display_name','current_d1','public_page_enabled']
 VENUE_HEADERS = ['venue_id','venue_key','display_name','city','state','opened','closed','date_precision','identity_status','source_basis','notes']
+VENUE_NAME_HEADERS = ['venue_id','venue_name','normalized_name','name_type','valid_from','valid_to','date_precision','source_basis','notes']
 
 
 def game(gid, opponent, *, date='2000-01-01', a='alpha', a_score='70', b_score='60', site='TEAM_A_HOME', home='alpha', venue='', city='', notes=''):
@@ -196,6 +198,9 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         self._write(self.repo/'data/reference/venues.csv',VENUE_HEADERS,[[
             'VEN-000001','known-gym','Known Gym','Known City','ST','','','','TEST','fixture',''
         ]])
+        self._write(self.repo/'data/reference/venue-names.csv',VENUE_NAME_HEADERS,[[
+            'VEN-000001','Known Gym','knowngym','PROJECT_DISPLAY','','','','fixture',''
+        ]])
         stale=game('CBBG-9','old-target',site='TEAM_A_HOME',home='alpha',venue='known-gym',city='Alpha City')
         counterpart=game('CBBG-2','target',site='NEUTRAL',home='',venue='',city='')
         self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[stale,counterpart])
@@ -218,15 +223,57 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
         self.assertEqual(plan['blockers'],[])
         self.assertEqual(plan['venue_registry_additions'],[venue])
+        expected_name={
+            'venue_id':'VEN-000002','venue_name':'New Neutral Complex','normalized_name':'newneutralcomplex',
+            'name_type':'PROJECT_DISPLAY','valid_from':'','valid_to':'','date_precision':'',
+            'source_basis':'official tournament evidence','notes':'fixture'
+        }
+        self.assertEqual(plan['venue_name_additions'],[expected_name])
         result=bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)
         self.assertEqual(result['venue_registry_additions'],1)
+        self.assertEqual(result['venue_name_additions'],1)
         venues=self._read(self.repo/'data/reference/venues.csv')
         self.assertEqual(venues[-1]['venue_id'],'VEN-000002')
+        names=self._read(self.repo/'data/reference/venue-names.csv')
+        self.assertEqual(names[-1],expected_name)
         row=self._read(self.repo/'data/canonical/games.csv')[0]
         self.assertEqual(row['site_type'],'NEUTRAL')
         self.assertEqual(row['designated_home_team_key'],'')
         self.assertEqual(row['venue_key'],'new-neutral-complex')
         self.assertEqual(row['venue_id'],'VEN-000002')
+
+    def test_venue_and_project_display_name_roll_back_together(self):
+        self._manifest()
+        self._write(self.repo/'data/reference/venues.csv',VENUE_HEADERS,[[
+            'VEN-000001','known-gym','Known Gym','Known City','ST','','','','TEST','fixture',''
+        ]])
+        self._write(self.repo/'data/reference/venue-names.csv',VENUE_NAME_HEADERS,[[
+            'VEN-000001','Known Gym','knowngym','PROJECT_DISPLAY','','','','fixture',''
+        ]])
+        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[
+            game('CBBG-9','old-target',site='TEAM_A_HOME',home='alpha',venue='known-gym',city='Alpha City'),
+            game('CBBG-2','target',site='NEUTRAL',home='',venue='',city='')
+        ])
+        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[
+            ['A1','CBBG-9','alpha','SRC-1','old-target'],['A2','CBBG-2','target','T-1','alpha']
+        ])
+        venue={'venue_id':'VEN-000002','venue_key':'new-neutral-complex','display_name':'New Neutral Complex','city':'Neutral City','state':'PR','opened':'','closed':'','date_precision':'','identity_status':'RESEARCHED_TEST','source_basis':'official tournament evidence','notes':'fixture'}
+        self._resolution(pairs=[{
+            'resolution_id':'PAIR-VENUE-ROLLBACK','kind':'EXPLICIT_RECONCILIATION',
+            'survivor_canonical_game_id':'CBBG-9','absorbed_canonical_game_id':'CBBG-2',
+            'canonical_values':{'site_type':'NEUTRAL','venue_key':'new-neutral-complex','venue_id':'VEN-000002','site_city':'Neutral City','site_state':'PR'},
+            'canonical_clear_fields':['designated_home_team_key'],
+            'resolution_basis':'reviewed venue evidence','evidence_urls':[],'discrepancies':[]
+        }],venues=[venue])
+        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        venue_before=(self.repo/'data/reference/venues.csv').read_bytes()
+        names_before=(self.repo/'data/reference/venue-names.csv').read_bytes()
+        with mock.patch.object(bulk,'_run_validation',side_effect=bulk.BulkTransactionError('forced validation failure')):
+            with self.assertRaisesRegex(bulk.BulkTransactionError,'forced validation failure'):
+                bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=True)
+        self.assertEqual((self.repo/'data/reference/venues.csv').read_bytes(),venue_before)
+        self.assertEqual((self.repo/'data/reference/venue-names.csv').read_bytes(),names_before)
 
     def test_grouped_package_scope_preserves_multiple_literal_labels(self):
         self._write(self.manifest,bulk.MANIFEST_FIELDS,[[
