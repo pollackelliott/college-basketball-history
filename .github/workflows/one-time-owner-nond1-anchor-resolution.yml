@@ -1,0 +1,100 @@
+name: One-time owner non-D1 anchor resolution
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out audit branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Print exact evidence for unresolved confirmed anchors
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, json, re
+          from collections import Counter
+          from difflib import SequenceMatcher
+          from pathlib import Path
+
+          issues = [
+              ('5','arkansas','Southern (La.)','southern-la','southern'),
+              ('20','arkansas','North Carolina-Ashville',None,'unc-asheville'),
+              ('22','arkansas',"St. Joseph's (Pa.)",None,'saint-josephs'),
+              ('24','arkansas','Tennesse-Chattanooga',None,'chattanooga'),
+              ('30','illinois','UTRGV','utrgv','ut-rio-grande-valley'),
+              ('69','minnesota',"St. Mary's (Calif.)",None,'saint-marys'),
+              ('119','northwestern','Texas A&M-Corpus Christi',None,'texas-a-m-corpus-christi'),
+              ('123','ohio-state',"St. Joseph's",None,'saint-josephs'),
+              ('166','tennessee','17 2-Pittsburgh',None,'pittsburgh'),
+              ('184','texas-a-m','Vs Iona',None,'iona'),
+              ('BONUS-1','texas-a-m','Sam Houston NC','sam-houston-nc','sam-houston'),
+          ]
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f:
+                  return list(csv.DictReader(f))
+          def norm(v):
+              v=(v or '').lower().replace('&',' and ')
+              v=re.sub(r'[^a-z0-9]+',' ',v)
+              return ' '.join(v.split())
+          def score(a,b):
+              return SequenceMatcher(None,norm(a),norm(b)).ratio()
+
+          for rid, program, sheet_label, known_key, target in issues:
+              opp=rows(f'schools/{program}/opponents.csv')
+              src=rows(f'schools/{program}/source-games.csv')
+              print('\n=== ISSUE '+rid+' | '+program+' | '+sheet_label+' -> '+target+' ===')
+              exact_src=[r for r in src if r.get('source_opponent_label','').strip()==sheet_label]
+              exact_can=[r for r in opp if r.get('canonical_opponent_name','').strip()==sheet_label]
+              exact_idx=[r for r in opp if r.get('source_opponent_label','').strip()==sheet_label]
+              keys=set()
+              for r in exact_src: keys.add(r.get('normalized_opponent_key','').strip())
+              for r in exact_can+exact_idx: keys.add(r.get('canonical_opponent_key','').strip())
+              if known_key: keys.add(known_key)
+              keys.discard('')
+              print('EXACT_SOURCE_ROWS='+str(len(exact_src))+' EXACT_CANONICAL_INDEX_ROWS='+str(len(exact_can))+' EXACT_INDEX_LABEL_ROWS='+str(len(exact_idx))+' KEYS='+json.dumps(sorted(keys)))
+
+              # Candidate index rows by similarity to sheet label or target, plus any known-key rows.
+              candidates=[]
+              for r in opp:
+                  s=max(score(sheet_label,r.get('canonical_opponent_name','')),score(sheet_label,r.get('source_opponent_label','')),score(target,r.get('canonical_opponent_name','')),score(target,r.get('source_opponent_label','')))
+                  if r.get('canonical_opponent_key','').strip() in keys or s>=0.46:
+                      candidates.append((s,r))
+              candidates=sorted(candidates,key=lambda x:(-x[0],x[1].get('canonical_opponent_key',''),x[1].get('source_opponent_label','')))[:20]
+              for s,r in candidates:
+                  print('OPP|score={:.3f}|source_label={!r}|key={}|canonical_name={!r}|d1={}|games={}|seasons={}-{}'.format(s,r.get('source_opponent_label',''),r.get('canonical_opponent_key',''),r.get('canonical_opponent_name',''),r.get('current_d1',''),r.get('games_with_source_label',''),r.get('first_season',''),r.get('last_season','')))
+                  keys.add(r.get('canonical_opponent_key','').strip())
+
+              # Source evidence for exact/known/candidate keys, and high-similarity literal labels.
+              srcc=[]
+              for r in src:
+                  k=r.get('normalized_opponent_key','').strip()
+                  s=max(score(sheet_label,r.get('source_opponent_label','')),score(target,r.get('source_opponent_label','')),score(target,r.get('normalized_opponent_name','')))
+                  if k in keys or s>=0.55:
+                      srcc.append((s,r))
+              srcc=sorted(srcc,key=lambda x:(x[1].get('season_year',''),x[1].get('game_date',''),x[1].get('source_game_id','')))
+              print('SOURCE_CANDIDATE_ROWS='+str(len(srcc)))
+              for s,r in srcc[:80]:
+                  print('SRC|score={:.3f}|id={}|season={}|date={}|literal={!r}|norm_name={!r}|key={}|d1={}|scoreline={}-{}|raw={!r}'.format(s,r.get('source_game_id',''),r.get('season_label',''),r.get('game_date',''),r.get('source_opponent_label',''),r.get('normalized_opponent_name',''),r.get('normalized_opponent_key',''),r.get('opponent_current_d1',''),r.get('team_score',''),r.get('opponent_score',''),r.get('raw_text','')))
+              if len(srcc)>80: print('SOURCE_CANDIDATES_TRUNCATED='+str(len(srcc)-80))
+
+              # For any exact/known current stale key, reconcile index count against every source row using it.
+              for k in sorted(keys):
+                  srows=[r for r in src if r.get('normalized_opponent_key','').strip()==k]
+                  orows=[r for r in opp if r.get('canonical_opponent_key','').strip()==k]
+                  if srows or orows:
+                      print('KEY_SUMMARY|{}|source_rows={}|index_game_sum={}|source_labels={}|canonical_names={}'.format(k,len(srows),sum(int(r.get('games_with_source_label','0') or 0) for r in orows),json.dumps(sorted(Counter(r.get('source_opponent_label','').strip() for r in srows).items())),json.dumps(sorted({r.get('canonical_opponent_name','').strip() for r in orows}))))
+          PY
