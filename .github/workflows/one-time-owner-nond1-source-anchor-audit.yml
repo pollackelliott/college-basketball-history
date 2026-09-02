@@ -1,0 +1,266 @@
+name: One-time owner non-D1 source-anchored audit
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out audit branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct reviewed owner scan input
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src=Path('.github/workflows/one-time-owner-nond1-comprehensive-audit.yml').read_text()
+          start="cat > /tmp/owner_scan.csv <<'CSV'\n"
+          a=src.index(start)+len(start)
+          b=src.index('\n          CSV',a)
+          lines=[]
+          for line in src[a:b].splitlines():
+              if line.startswith('          '): line=line[10:]
+              lines.append(line)
+          out='\n'.join(lines)+'\n'
+          Path('/tmp/owner_scan.csv').write_text(out)
+          print('OWNER_SCAN_INPUT_ROWS='+str(len(out.splitlines())-1))
+          PY
+      - name: Source-anchor all reviewed rows and classify exact repository action
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, json, re, subprocess
+          from collections import Counter, defaultdict
+          from difflib import get_close_matches
+          from pathlib import Path
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig',newline='') as f:
+                  return list(csv.DictReader(f))
+          def norm(v):
+              v=(v or '').lower().replace('&',' and ')
+              v=re.sub(r"[^a-z0-9]+",' ',v)
+              return ' '.join(v.split())
+          def yes(v): return (v or '').strip().lower()=='yes'
+          def intval(v):
+              try:return int((v or '0').strip() or 0)
+              except:return 0
+
+          review=rows('/tmp/owner_scan.csv')
+          programs=rows('data/reference/programs.csv')
+          aliases=rows('data/reference/program-names.csv')
+          by_key={r['program_key'].strip():r for r in programs if r.get('program_key','').strip()}
+          current={k for k,r in by_key.items() if yes(r.get('current_d1',''))}
+          lookup=defaultdict(set)
+          named={}
+          for r in programs:
+              k=r.get('program_key','').strip()
+              for name in (r.get('program_name',''),r.get('display_name','')):
+                  if norm(name):
+                      lookup[norm(name)].add(k); named[norm(name)]=name
+          for r in aliases:
+              if r.get('verification_status','').strip()!='VERIFIED': continue
+              k=r.get('program_key','').strip(); name=r.get('alias_name','').strip()
+              if norm(name): lookup[norm(name)].add(k); named[norm(name)]=name
+
+          # Owner-approved human-facing target names whose spelling does not exactly
+          # equal the registry's current display spelling. Each target is still checked
+          # for registry existence before it can be considered resolved.
+          explicit_targets={
+              'Arkansas-Monticello':'arkansas-monticello',
+              'Arkansas Pine Bluff':'arkansas-pine-bluff',
+              'Central Connecticut State':'central-connecticut',
+              'College of Charleston':'charleston',
+              'Hawaii':'hawai-i',
+              'LaSalle':'la-salle',
+              'LIU':'long-island-university',
+              'Loyola (MD)':'loyola-maryland',
+              'Middle Tennessee State':'middle-tennessee',
+              'Pennsylvania':'penn',
+              'SIU Edwardsville':'siu-edwardsville',
+              "St. Joseph's":'saint-josephs',
+              "St. Mary's":'saint-marys',
+              'St. Thomas (MN)':'st-thomas',
+              'Seattle':'seattle-u',
+              'UNC Ashville':'unc-asheville',
+          }
+          def target(name):
+              if name in explicit_targets:
+                  k=explicit_targets[name]
+                  return (k,'EXPLICIT_REGISTRY') if k in by_key else ('','EXPLICIT_KEY_ABSENT')
+              ks=sorted(k for k in lookup.get(norm(name),set()) if k)
+              if len(ks)==1:return ks[0],'REGISTRY'
+              if len(ks)>1:return '|'.join(ks),'AMBIGUOUS'
+              return '','MISSING'
+
+          source_cache={}; opp_cache={}
+          results=[]; anchor_issues=[]; target_issues=[]
+          for r in review:
+              p=r['program']; label=r['label']; status=r['status']; tname=r['target']
+              source_cache.setdefault(p,rows(f'schools/{p}/source-games.csv'))
+              opp_cache.setdefault(p,rows(f'schools/{p}/opponents.csv'))
+              sm=[x for x in source_cache[p] if x.get('source_opponent_label','').strip()==label]
+              if not sm:
+                  anchor_issues.append({'row':r['row'],'program':p,'label':label,'type':'NO_EXACT_SOURCE_GAME_LABEL'})
+                  continue
+              from_keys=sorted({x.get('normalized_opponent_key','').strip() for x in sm})
+              if len(from_keys)!=1:
+                  anchor_issues.append({'row':r['row'],'program':p,'label':label,'type':'MULTIPLE_SOURCE_KEYS','keys':from_keys,'games':len(sm)})
+                  continue
+              fk=from_keys[0]
+              # The package index may aggregate multiple literal source labels under
+              # the same canonical key. Capture those rows rather than requiring the
+              # workbook literal to equal the index label.
+              om=[x for x in opp_cache[p] if x.get('canonical_opponent_key','').strip()==fk]
+              package_labels=sorted({x.get('source_opponent_label','').strip() for x in om})
+              src_flags=sorted({x.get('opponent_current_d1','').strip() for x in sm})
+              opp_flags=sorted({x.get('current_d1','').strip() for x in om})
+              tk,ts=target(tname) if status in {'CONFIRMED','PROBABLE'} else ('','NOT_REQUIRED')
+              if status=='CONFIRMED':
+                  if not tk or '|' in tk:
+                      action='TARGET_UNRESOLVED'; target_issues.append({'row':r['row'],'program':p,'label':label,'target':tname,'resolution':ts})
+                  elif fk==tk:
+                      registry_yes=tk in current
+                      all_src_yes=src_flags==['Yes']
+                      all_opp_yes=bool(om) and opp_flags==['Yes']
+                      action='ALREADY_CORRECT' if (not registry_yes or (all_src_yes and all_opp_yes)) else 'FLAG_ONLY'
+                  else:
+                      action='KEY_REMAP'
+              elif status=='PROBABLE': action='PROBABLE_HOLD'
+              elif status=='HOLD': action='HOLD'
+              else: action='KEEP'
+              results.append({**r,'from_key':fk,'to_key':tk,'target_resolution':ts,'source_game_count':len(sm),'source_game_ids':sorted(x.get('source_game_id','').strip() for x in sm),'source_flags':src_flags,'package_index_rows':len(om),'package_index_labels':package_labels,'package_flags':opp_flags,'target_current_d1':tk in current if tk else None,'action':action})
+
+          confirmed=[x for x in results if x['status']=='CONFIRMED']
+          counts=Counter(x['action'] for x in confirmed)
+
+          # Build the proposed key map only from resolved confirmed key remaps, and
+          # prove that one stale key never points to two different owner-approved targets.
+          key_targets=defaultdict(set); reviewed_labels=defaultdict(set)
+          for x in confirmed:
+              if x['action']=='KEY_REMAP':
+                  key_targets[x['from_key']].add(x['to_key']); reviewed_labels[x['from_key']].add((x['program'],x['label']))
+          inconsistent={k:sorted(v) for k,v in key_targets.items() if len(v)!=1}
+          keymap={k:next(iter(v)) for k,v in key_targets.items() if len(v)==1}
+
+          # Inventory every repository source/package use of a stale key so global
+          # replacement cannot silently expand beyond the reviewed evidence.
+          all_source_usage=defaultdict(list); all_package_usage=defaultdict(list)
+          for sd in Path('schools').glob('*/source-games.csv'):
+              p=sd.parent.name
+              for x in rows(sd):
+                  k=x.get('normalized_opponent_key','').strip()
+                  if k in keymap:
+                      all_source_usage[k].append({'program':p,'label':x.get('source_opponent_label','').strip(),'source_game_id':x.get('source_game_id','').strip(),'season':x.get('season_label','').strip()})
+          for op in Path('schools').glob('*/opponents.csv'):
+              p=op.parent.name
+              for x in rows(op):
+                  k=x.get('canonical_opponent_key','').strip()
+                  if k in keymap:
+                      all_package_usage[k].append({'program':p,'label':x.get('source_opponent_label','').strip(),'games':intval(x.get('games_with_source_label',''))})
+
+          extra_source={}
+          for k,items in all_source_usage.items():
+              reviewed=set(reviewed_labels[k])
+              extra=[i for i in items if (i['program'],i['label']) not in reviewed]
+              if extra: extra_source[k]=extra
+
+          canonical=rows('data/canonical/games.csv'); assertions=rows('data/evidence/game-assertions.csv')
+          by_id={x.get('canonical_game_id','').strip():x for x in canonical}
+          # Analyze mapped canonical signatures without changing data.
+          def mapped(row):
+              a=keymap.get(row.get('team_a_key','').strip(),row.get('team_a_key','').strip())
+              b=keymap.get(row.get('team_b_key','').strip(),row.get('team_b_key','').strip())
+              sa=row.get('team_a_score','').strip(); sb=row.get('team_b_score','').strip()
+              if a<=b:return a,b,sa,sb
+              return b,a,sb,sa
+          sigs=defaultdict(list); self_games=[]
+          affected=set()
+          for x in canonical:
+              oa=x.get('team_a_key','').strip(); ob=x.get('team_b_key','').strip()
+              if oa in keymap or ob in keymap: affected.add(x.get('canonical_game_id','').strip())
+              a,b,sa,sb=mapped(x)
+              if a==b and (oa in keymap or ob in keymap): self_games.append(x.get('canonical_game_id','').strip())
+              sig=(x.get('season_label','').strip(),x.get('game_date','').strip(),a,b,sa,sb,x.get('overtime_periods','').strip())
+              sigs[sig].append(x.get('canonical_game_id','').strip())
+          collisions=[]
+          for sig,ids in sigs.items():
+              if len(ids)>1 and any(i in affected for i in ids):
+                  collisions.append({'signature':sig,'ids':sorted(ids),'affected_ids':sorted(i for i in ids if i in affected)})
+          exact=[x for x in collisions if x['signature'][1]]; undated=[x for x in collisions if not x['signature'][1]]
+
+          remap_stats={}
+          for fk,tk in sorted(keymap.items()):
+              cids=sorted(x.get('canonical_game_id','').strip() for x in canonical if fk in {x.get('team_a_key','').strip(),x.get('team_b_key','').strip()})
+              remap_stats[fk]={'to_key':tk,'target_current_d1':tk in current,'canonical_rows':len(cids),'assertion_rows':sum(1 for x in assertions if x.get('normalized_opponent_key','').strip()==fk),'source_rows':len(all_source_usage[fk]),'package_rows':len(all_package_usage[fk]),'extra_source_rows':len(extra_source.get(fk,[]))}
+
+          # Report close registry spellings for any target that still failed resolution.
+          registry_names=list(lookup)
+          target_suggestions={}
+          for x in target_issues:
+              n=norm(x['target']); ms=get_close_matches(n,registry_names,n=6,cutoff=.45)
+              target_suggestions[x['row']]=[(named.get(m,m),sorted(lookup[m])) for m in ms]
+
+          payload={
+              'git_head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              'review_rows':len(review),
+              'review_status_counts':dict(Counter(x['status'] for x in review)),
+              'anchored_rows':len(results),
+              'anchor_issues':anchor_issues,
+              'confirmed_rows_anchored':len(confirmed),
+              'confirmed_action_counts':dict(counts),
+              'target_issues':target_issues,
+              'target_suggestions':target_suggestions,
+              'keymap':keymap,
+              'keymap_count':len(keymap),
+              'inconsistent_keymaps':inconsistent,
+              'extra_source_usage':extra_source,
+              'remap_stats':remap_stats,
+              'affected_canonical_count':len(affected),
+              'self_games':self_games,
+              'exact_collision_groups':exact,
+              'undated_collision_groups':undated,
+              'results':results,
+          }
+          Path('/tmp/owner-source-audit.json').write_text(json.dumps(payload,indent=2,sort_keys=True))
+          print('AUDIT_HEAD='+payload['git_head'])
+          print('REVIEW_ROWS='+str(payload['review_rows']))
+          print('STATUS_COUNTS='+json.dumps(payload['review_status_counts'],sort_keys=True))
+          print('ANCHORED_ROWS='+str(payload['anchored_rows']))
+          print('ANCHOR_ISSUES='+str(len(anchor_issues)))
+          print('CONFIRMED_ANCHORED='+str(payload['confirmed_rows_anchored']))
+          print('CONFIRMED_ACTION_COUNTS='+json.dumps(payload['confirmed_action_counts'],sort_keys=True))
+          print('TARGET_ISSUES='+str(len(target_issues)))
+          print('KEYMAP_COUNT='+str(len(keymap)))
+          print('INCONSISTENT_KEYMAPS='+str(len(inconsistent)))
+          print('KEYS_WITH_EXTRA_SOURCE_USAGE='+str(len(extra_source)))
+          print('AFFECTED_CANONICAL='+str(len(affected)))
+          print('SELF_GAMES='+str(len(self_games)))
+          print('EXACT_COLLISION_GROUPS='+str(len(exact)))
+          print('UNDATED_COLLISION_GROUPS='+str(len(undated)))
+          for x in anchor_issues: print('ANCHOR_ISSUE|'+json.dumps(x,separators=(',',':')))
+          for x in target_issues: print('TARGET_ISSUE|'+json.dumps(x,separators=(',',':'))+'|SUGGEST='+json.dumps(target_suggestions.get(x['row'],[]),separators=(',',':')))
+          for k,v in sorted(inconsistent.items()): print('INCONSISTENT_KEYMAP|'+k+'|'+','.join(v))
+          for k,items in sorted(extra_source.items()):
+              labels=Counter((i['program'],i['label']) for i in items)
+              print('EXTRA_USAGE|'+k+'->'+keymap[k]+'|'+json.dumps([{'program':p,'label':l,'games':n} for (p,l),n in sorted(labels.items())],separators=(',',':')))
+          print('--- CONFIRMED ACCOUNTING ---')
+          for x in confirmed:
+              print('|'.join([x['row'],x['program'],x['label'],x['action'],x['from_key'],x['to_key'],str(x['source_game_count']),'/'.join(x['source_flags']),'/'.join(x['package_flags'])]))
+          print('--- COLLISION GROUPS ---')
+          for x in exact: print('EXACT_COLLISION|'+json.dumps(x,separators=(',',':')))
+          for x in undated: print('UNDATED_COLLISION|'+json.dumps(x,separators=(',',':')))
+          PY
+          sha256sum /tmp/owner-source-audit.json | awk '{print "SOURCE_AUDIT_SHA256="$1}'
