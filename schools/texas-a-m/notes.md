@@ -169,11 +169,11 @@ Pre-seal deterministic site-build rehearsal exposed that the research portfolio 
 - Local opponent rows audited: **416**
 - Exact current-program rows: **221**
 - Exact-key metadata rows normalized to current-main program metadata: **163**
-- Deterministic alias rows rebased to current-main program identities: **63**
-- Distinct local alias keys rebased: **62**
-- Source game rows whose normalized opponent key changed: **253**
+- Deterministic alias rows rebased to current-main program identities after institution-context review: **60**
+- Distinct local alias keys rebased to current-main program identities after institution-context review: **59**
+- Source game rows rebased to current-main program identities: **226**
 - Ambiguous current-program aliases: **0**
-- Historical/non-current opponent rows deliberately retained: **132**
+- Historical/non-current opponent rows deliberately retained after institution-context review: **135**
 - Projected historical display-name conflicts after rebase: **0**
 
 The source opponent labels remain unchanged. Current-program canonical keys, canonical display names, and current-D1 metadata now reuse the global program registry. Historical/non-current identities were not force-mapped.
@@ -226,14 +226,12 @@ Deterministic current-main key mappings:
 - `st-josephs` -> `saint-joseph-s`
 - `st-josephs-pa` -> `saint-joseph-s`
 - `st-louis` -> `saint-louis`
-- `st-marys` -> `saint-mary-s`
 - `st-marys-calif` -> `saint-mary-s`
 - `sw-louisiana` -> `louisiana`
 - `sw-missouri-state` -> `missouri-state`
 - `sw-texas-state` -> `texas-state`
 - `texas-a-and-m-corpus-christi` -> `texas-a-m-corpus-christi`
 - `texas-pan-american` -> `ut-rio-grande-valley`
-- `trinity` -> `duke`
 - `ucsb` -> `uc-santa-barbara`
 - `umkc` -> `kansas-city`
 - `unc-charlotte` -> `charlotte`
@@ -241,4 +239,32 @@ Deterministic current-main key mappings:
 - `ut-pan-american` -> `ut-rio-grande-valley`
 - `uta` -> `ut-arlington`
 - `uw-green-bay` -> `green-bay`
-- `washington-university` -> `washington`
+
+## Opponent rebase institution-context correction
+
+A subsequent adversarial review found that three alias-only current-main
+mappings were not portable across institutions. The initial opponent rebase
+had treated another school's use of a source label as sufficient identity
+evidence. That is unsafe for generic historical institution names.
+
+The following overreaches were withdrawn:
+
+- `Trinity` -> `duke` was rejected. Texas A&M's official 15-2 Trinity series
+  is the San Antonio institution, not Duke's pre-1924 Trinity College.
+  Texas A&M's `Trinity` and `TRINITY UNIVERSITY` labels are consolidated
+  locally under non-D1 key `trinity-university`, display `Trinity University`.
+- `Washington University` -> `washington` was rejected. The 1941-42
+  Washington University opponent remains the distinct non-current identity
+  `washington-university`.
+- Plain `St. Mary's` -> current Saint Mary's was rejected. Texas A&M's official
+  series separates St. Mary's (Texas), 4-6, from St. Mary's (Calif.), 1-1.
+  The ten plain St. Mary's rows therefore use non-D1 key `st-marys-texas`,
+  while only the two explicitly California rows retain current-program key
+  `saint-mary-s`.
+
+The remaining current-main alias mappings were rechecked against Texas A&M
+source-era/context and represent institution-specific abbreviations, renamed
+programs, or established lineages rather than generic-name transfer.
+
+This correction does not add or remove games and does not alter raw source
+opponent labels.
