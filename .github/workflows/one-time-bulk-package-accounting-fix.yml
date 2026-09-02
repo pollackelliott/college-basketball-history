@@ -1,0 +1,178 @@
+name: One-time bulk package accounting hardening
+
+on:
+  push:
+    branches:
+      - chore/opponent-identity-bulk-package-accounting
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/opponent-identity-bulk-package-accounting
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Harden package/source-game accounting
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          tool=Path('tools/opponent_identity_bulk_transaction.py')
+          text=tool.read_text()
+          start=text.index('def load_manifest(')
+          end=text.index('\n\ndef load_resolutions(',start)
+          new=r'''def _label_group(value: str) -> str:
+    """Conservative package-label grouping for case-only historical variants."""
+    return " ".join(clean(value).casefold().split())
+
+
+def load_manifest(repo: Path, path: Path) -> tuple[list[dict[str, Any]], dict[str, str], list[str]]:
+    fields, rows = read_csv(path)
+    missing = [field for field in MANIFEST_FIELDS if field not in fields]
+    if missing:
+        raise BulkTransactionError("manifest missing fields: " + ", ".join(missing))
+
+    programs, current_d1, _ = remediation.load_programs(repo)
+    blockers: list[str] = []
+    items: list[dict[str, Any]] = []
+    key_map: dict[str, str] = {}
+    d1_map: dict[str, str] = {}
+
+    for raw in rows:
+        row = {k: clean(raw.get(k)) for k in MANIFEST_FIELDS}
+        mid = manifest_id(row)
+        source = row["source_program_key"]
+        label = row["source_opponent_label"]
+        old = row["from_program_key"]
+        new = row["to_program_key"]
+        name = row["to_program_name"]
+        action = row["decision"].upper()
+        current = row["target_current_d1"].title()
+        basis = row["evidence_basis"]
+
+        if source not in programs:
+            blockers.append(f"{mid}: unknown source program {source!r}")
+        if action not in SUPPORTED_DECISIONS:
+            blockers.append(f"{mid}: unsupported decision {action!r}")
+        if not all((label, old, new, name, basis)) or old == new:
+            blockers.append(f"{mid}: incomplete or no-op identity decision")
+        if current not in {"Yes", "No"}:
+            blockers.append(f"{mid}: target_current_d1 must be Yes or No")
+
+        if action == "MERGE_TO_PROGRAM":
+            if new not in programs:
+                blockers.append(f"{mid}: current-D1 target {new!r} absent from registry")
+            elif new not in current_d1:
+                blockers.append(f"{mid}: MERGE_TO_PROGRAM target {new!r} is not current D1")
+            if current != "Yes":
+                blockers.append(f"{mid}: MERGE_TO_PROGRAM requires target_current_d1=Yes")
+        elif action == "REKEY_DISTINCT_NON_D1":
+            if current != "No":
+                blockers.append(f"{mid}: non-D1 rekey requires target_current_d1=No")
+            if new in current_d1:
+                blockers.append(f"{mid}: non-D1 rekey points at current-D1 registry key {new!r}")
+
+        prior = key_map.get(old)
+        if prior and prior != new:
+            blockers.append(f"{mid}: global key {old!r} maps inconsistently to {prior!r} and {new!r}")
+        key_map[old] = new
+        prior_d1 = d1_map.get(old)
+        if prior_d1 and prior_d1 != current:
+            blockers.append(f"{mid}: inconsistent target_current_d1 for {old!r}")
+        d1_map[old] = current
+
+        opponents = repo / "schools" / source / "opponents.csv"
+        source_games = repo / "schools" / source / "source-games.csv"
+        if not opponents.exists() or not source_games.exists():
+            blockers.append(f"{mid}: source package files missing")
+            items.append({**row, "manifest_id": mid, "source_game_ids": [], "games_with_source_label_after": ""})
+            continue
+        _, opponent_rows = read_csv(opponents)
+        matches = [
+            r for r in opponent_rows
+            if clean(r.get("source_opponent_label")) == label
+            and clean(r.get("canonical_opponent_key")) == old
+        ]
+        if len(matches) != 1:
+            blockers.append(f"{mid}: expected exactly one opponents.csv row, found {len(matches)}")
+        indexed_count = ""
+        if matches:
+            indexed_count = clean(matches[0].get("games_with_source_label"))
+            try:
+                int(indexed_count)
+            except ValueError:
+                blockers.append(f"{mid}: invalid games_with_source_label")
+        items.append({
+            **row,
+            "manifest_id": mid,
+            "source_game_ids": [],
+            "indexed_games_with_source_label": indexed_count,
+            "games_with_source_label_after": indexed_count,
+        })
+
+    # Source-game normalization is an identity-key operation, not an exact-string
+    # rewrite. Historical package indexes sometimes group case-only source-label
+    # variants (for example "Lamar Tech" + "LAMAR TECH"), and newer appended rows
+    # can already use the target key under the same literal label. Account every old
+    # key exactly once at source-program scope while preserving every literal label.
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in items:
+        grouped[(item["source_program_key"], item["from_program_key"])].append(item)
+
+    for (source, old), group_items in sorted(grouped.items()):
+        source_games = repo / "schools" / source / "source-games.csv"
+        if not source_games.exists():
+            continue
+        _, game_rows = read_csv(source_games)
+        old_rows = [r for r in game_rows if clean(r.get("normalized_opponent_key")) == old]
+        if not old_rows:
+            blockers.append(f"{source}/{old}: no source-games.csv rows retain the stale key")
+            continue
+        first = sorted(group_items, key=lambda x: x["manifest_id"])[0]
+        first["source_game_ids"] = sorted(clean(r.get("source_game_id")) for r in old_rows)
+
+        new = first["to_program_key"]
+        for item in group_items:
+            label_key = _label_group(item["source_opponent_label"])
+            grouped_label_rows = [
+                r for r in game_rows
+                if _label_group(r.get("source_opponent_label", "")) == label_key
+                and clean(r.get("normalized_opponent_key")) in {old, new}
+            ]
+            if grouped_label_rows:
+                item["games_with_source_label_after"] = str(len(grouped_label_rows))
+
+    return sorted(items, key=lambda x: x["manifest_id"]), key_map, sorted(set(blockers))
+'''
+          tool.write_text(text[:start]+new+text[end:])
+
+          text=tool.read_text()
+          needle='''            matches[0]["canonical_opponent_key"] = item["to_program_key"]\n            matches[0]["canonical_opponent_name"] = item["to_program_name"]\n            matches[0]["current_d1"] = item["target_current_d1"]\n            opponent_updates += 1\n'''
+          repl='''            matches[0]["canonical_opponent_key"] = item["to_program_key"]\n            matches[0]["canonical_opponent_name"] = item["to_program_name"]\n            matches[0]["current_d1"] = item["target_current_d1"]\n            if "games_with_source_label" in matches[0] and item.get("games_with_source_label_after"):\n                matches[0]["games_with_source_label"] = item["games_with_source_label_after"]\n            opponent_updates += 1\n'''
+          if needle not in text: raise SystemExit('apply insertion point not found')
+          tool.write_text(text.replace(needle,repl,1))
+
+          test=Path('tests/test_opponent_identity_bulk_transaction.py')
+          text=test.read_text()
+          needle='''    def test_hash_mismatch_refuses_before_write(self):\n'''
+          insert='''    def test_package_index_grouping_handles_case_variants_partial_rekey_and_stale_count(self):\n        self._manifest(games=1)\n        self._write(self.repo/'schools/alpha/source-games.csv',SOURCE_HEADERS,[\n            ['SRC-1','alpha','1999-2000','','Old Target','Old Target','old-target','No','','','W','0','raw one'],\n            ['SRC-2','alpha','1999-2000','','OLD TARGET','OLD TARGET','old-target','No','','','W','0','raw two'],\n            ['SRC-3','alpha','1999-2000','','Old Target','Old Target','target','Yes','','','W','0','raw three'],\n        ])\n        self._resolution()\n        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[game('CBBG-1','old-target')])\n        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[['A1','CBBG-1','alpha','SRC-1','old-target']])\n        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)\n        self.assertEqual(plan['blockers'],[])\n        item=plan['manifest_items'][0]\n        self.assertEqual(item['source_game_ids'],['SRC-1','SRC-2'])\n        self.assertEqual(item['games_with_source_label_after'],'3')\n        bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)\n        opponent=self._read(self.repo/'schools/alpha/opponents.csv')[0]\n        self.assertEqual(opponent['games_with_source_label'],'3')\n        source=self._read(self.repo/'schools/alpha/source-games.csv')\n        self.assertEqual({r['normalized_opponent_key'] for r in source},{'target'})\n        self.assertEqual([r['raw_text'] for r in source],['raw one','raw two','raw three'])\n\n    def test_hash_mismatch_refuses_before_write(self):\n'''
+          if needle not in text: raise SystemExit('test insertion point not found')
+          test.write_text(text.replace(needle,insert,1))
+          PY
+          python -m py_compile tools/opponent_identity_bulk_transaction.py
+          python -m unittest tests.test_opponent_identity_bulk_transaction -v
+          python -m unittest tests.test_opponent_identity_transaction -v
+          python -m unittest discover -s tests -v
+          rm .github/workflows/one-time-bulk-package-accounting-fix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/opponent_identity_bulk_transaction.py tests/test_opponent_identity_bulk_transaction.py .github/workflows/one-time-bulk-package-accounting-fix.yml
+          git commit -m "Harden bulk package source-game accounting"
+          git push origin HEAD:chore/opponent-identity-bulk-package-accounting
