@@ -1,0 +1,451 @@
+name: One-time Texas A&M opponent identity production apply v2
+
+on:
+  push:
+    branches:
+      - chore/run-texas-am-opponent-remediation-v2
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out driver branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify exact protected-main base and clean production target
+        shell: bash
+        env:
+          BASE_SHA: c5102b0927aa9e00816fe42e437716979f28d354
+          PRODUCTION_BRANCH: data/opponent-identity-remediation-texas-a-m-production-v2
+        run: |
+          git fetch origin main "$PRODUCTION_BRANCH"
+          test "$(git rev-parse origin/main)" = "$BASE_SHA"
+          test "$(git rev-parse origin/$PRODUCTION_BRANCH)" = "$BASE_SHA"
+          test "$(git rev-parse HEAD^)" = "$BASE_SHA"
+          test "$(git diff --name-only "$BASE_SHA" HEAD)" = ".github/workflows/one-time-texas-am-opponent-remediation-v2.yml"
+          echo "BASE_SHA=$BASE_SHA"
+          echo "PRODUCTION_BRANCH=$PRODUCTION_BRANCH"
+          echo "DRIVER_HEAD=$(git rev-parse HEAD)"
+
+      - name: Build exact reviewed decision inputs
+        shell: bash
+        run: |
+          cat > /tmp/texas-am-p0-decisions.csv <<'CSV'
+          source_program_key,source_opponent_label,from_program_key,to_program_key,decision,evidence_basis,evidence_url
+          northwestern,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Northwestern package uses stale texas-a-and-m identity; current registry and reciprocal Texas A&M history establish texas-a-m as the same program identity.",https://12thman.com/
+          oklahoma,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Oklahoma package uses stale texas-a-and-m identity; current registry and official Texas A&M/Oklahoma reciprocal history establish texas-a-m as the same program identity.",https://12thman.com/
+          CSV
+
+          cat > /tmp/texas-am-p0-resolutions.json <<'JSON'
+          {
+            "schema_version": 1,
+            "resolutions": [
+              {
+                "resolution_id": "OIR-1969-NORTHWESTERN-TEXAS-A-M",
+                "kind": "SAME_DATE_IDENTITY_CONFLICT",
+                "survivor_canonical_game_id": "CBBG-0009910",
+                "absorbed_canonical_game_id": "CBBG-0066393",
+                "canonical_values": {
+                  "overtime_periods": "1",
+                  "site_city": "Greenville",
+                  "site_state": "SC"
+                },
+                "resolution_basis": "Texas A&M official schedule and official Northwestern opponent history explicitly record the 93-91 game as overtime in Greenville, South Carolina.",
+                "evidence_urls": [
+                  "https://12thman.com/sports/mens-basketball/schedule/1969-70",
+                  "https://12thman.com/sports/mens-basketball/opponent-history/northwestern/79"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "overtime_periods",
+                    "source_a_program_key": "northwestern",
+                    "source_a_value": "0 / omitted",
+                    "source_b_program_key": "texas-a-m",
+                    "source_b_value": "1 (OT)",
+                    "canonical_value": "1",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Texas A&M official schedule and opponent history explicitly mark overtime.",
+                    "notes": "Northwestern's omission remains preserved as source evidence."
+                  }
+                ]
+              },
+              {
+                "resolution_id": "OIR-2005-OKLAHOMA-TEXAS-A-M",
+                "kind": "SAME_DATE_IDENTITY_CONFLICT",
+                "survivor_canonical_game_id": "CBBG-0062880",
+                "absorbed_canonical_game_id": "CBBG-0067210",
+                "canonical_values": {
+                  "team_b_score": "54"
+                },
+                "resolution_basis": "Texas A&M's contemporaneous official recap and Oklahoma's official box score both establish Oklahoma 70, Texas A&M 54 at Reed Arena.",
+                "evidence_urls": [
+                  "https://12thman.com/news/2005/1/18/205225598",
+                  "https://soonersports.com/sports/2005/1/18/Stats_3983"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "score",
+                    "source_a_program_key": "oklahoma",
+                    "source_a_value": "Oklahoma 70, Texas A&M 56",
+                    "source_b_program_key": "texas-a-m",
+                    "source_b_value": "Oklahoma 70, Texas A&M 54",
+                    "canonical_value": "Oklahoma 70, Texas A&M 54",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Contemporaneous official Oklahoma box score and Texas A&M recap agree on 70-54.",
+                    "notes": "Oklahoma's later media-guide 70-56 assertion remains preserved."
+                  }
+                ]
+              },
+              {
+                "resolution_id": "OIR-2010-OKLAHOMA-TEXAS-A-M",
+                "kind": "EXPLICIT_COUNTERPART",
+                "survivor_canonical_game_id": "CBBG-0063008",
+                "absorbed_canonical_game_id": "CBBG-0067341",
+                "canonical_values": {
+                  "game_date": "2010-01-19"
+                },
+                "resolution_basis": "Texas A&M's contemporaneous official recap and Oklahoma's official archive establish January 19, 2010; the later Texas A&M year-by-year row carries January 23.",
+                "evidence_urls": [
+                  "https://12thman.com/news/2010/1/19/205228753",
+                  "https://soonersports.com/news/2013/5/20/208793026.aspx"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "game_date",
+                    "source_a_program_key": "texas-a-m",
+                    "source_a_value": "2010-01-23",
+                    "source_b_program_key": "oklahoma",
+                    "source_b_value": "2010-01-19",
+                    "canonical_value": "2010-01-19",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Contemporaneous Texas A&M recap and Oklahoma official archive establish January 19.",
+                    "notes": "Texas A&M's later year-by-year date remains preserved as source evidence."
+                  }
+                ]
+              },
+              {
+                "resolution_id": "OIR-2012-OKLAHOMA-TEXAS-A-M",
+                "kind": "EXPLICIT_RECONCILIATION",
+                "survivor_canonical_game_id": "CBBG-0063073",
+                "absorbed_canonical_game_id": "CBBG-0067408",
+                "canonical_values": {
+                  "site_type": "NEUTRAL",
+                  "venue_key": "paycom-center",
+                  "venue_id": "VEN-000162",
+                  "site_city": "Oklahoma City",
+                  "site_state": "OK"
+                },
+                "canonical_clear_fields": [
+                  "designated_home_team_key"
+                ],
+                "resolution_basis": "Texas A&M's official 2012-13 schedule explicitly classifies the All-College Classic game against Oklahoma as Neutral in Oklahoma City, and its contemporaneous recap/box score identifies Chesapeake Energy Arena. The project's global venue registry maps that historical arena name to physical venue VEN-000162 / paycom-center.",
+                "evidence_urls": [
+                  "https://12thman.com/sports/mens-basketball/schedule/text/2012-13",
+                  "https://12thman.com/news/2012/12/15/am-win-streak-snapped-by-ou-64-54",
+                  "https://12thman.com/sports/mens-basketball/stats/2012-13/oklahoma/boxscore/884",
+                  "https://soonersports.com/news/2012/12/15/208397488.aspx"
+                ],
+                "discrepancies": [
+                  {
+                    "field_name": "site_type",
+                    "source_a_program_key": "oklahoma",
+                    "source_a_value": "NEUTRAL",
+                    "source_b_program_key": "texas-a-m",
+                    "source_b_value": "SOURCE_PROGRAM_HOME / Reed Arena in later year-by-year curation",
+                    "canonical_value": "NEUTRAL / Paycom Center / Oklahoma City, OK",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Texas A&M's official season schedule explicitly marks the game Neutral and places the All-College Classic at Chesapeake Energy Arena in Oklahoma City; the contemporary A&M recap and box score corroborate the physical site.",
+                    "notes": "The conflicting later source interpretation remains preserved; historical Chesapeake Energy Arena is global venue VEN-000162 (project display Paycom Center)."
+                  }
+                ]
+              }
+            ]
+          }
+          JSON
+
+      - name: Create exact-main production worktree
+        shell: bash
+        env:
+          BASE_SHA: c5102b0927aa9e00816fe42e437716979f28d354
+        run: |
+          rm -rf /tmp/texas-am-production-v2
+          git worktree add --detach /tmp/texas-am-production-v2 "$BASE_SHA"
+          test "$(git -C /tmp/texas-am-production-v2 rev-parse HEAD)" = "$BASE_SHA"
+          test -z "$(git -C /tmp/texas-am-production-v2 status --porcelain)"
+
+      - name: Snapshot exact pre-transaction evidence and counts
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as handle:
+                  return list(csv.DictReader(handle))
+
+          def count(path):
+              return len(rows(path))
+
+          payload = {
+              'canonical': count('data/canonical/games.csv'),
+              'assertions': count('data/evidence/game-assertions.csv'),
+              'discrepancies': count('data/reconciliation/discrepancies.csv'),
+          }
+          assert payload == {'canonical': 67583, 'assertions': 89815, 'discrepancies': 2152}, payload
+
+          evidence = {}
+          affected = 0
+          for program in ('northwestern', 'oklahoma'):
+              for row in rows(f'schools/{program}/source-games.csv'):
+                  if row.get('normalized_opponent_key') == 'texas-a-and-m':
+                      affected += 1
+                      evidence[f"{program}:{row['source_game_id']}"] = {
+                          'source_opponent_label': row.get('source_opponent_label', ''),
+                          'raw_text': row.get('raw_text', ''),
+                      }
+          assert affected == 52, affected
+          Path('/tmp/texas-am-pre-counts.json').write_text(json.dumps(payload, sort_keys=True))
+          Path('/tmp/texas-am-source-evidence.json').write_text(json.dumps(evidence, sort_keys=True, ensure_ascii=False))
+          print('PRE_COUNTS=' + json.dumps(payload, sort_keys=True))
+          print('AFFECTED_SOURCE_EVIDENCE_ROWS=52')
+          PY
+
+      - name: Regenerate read-only planning and collision accounting
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        run: |
+          set +e
+          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-remediation-plan.json
+          REMEDIATION_RC=$?
+          set -e
+          if [ "$REMEDIATION_RC" -ne 0 ] && [ "$REMEDIATION_RC" -ne 2 ]; then
+            echo "Unexpected remediation planner exit code: $REMEDIATION_RC"
+            exit 1
+          fi
+
+          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-a.json
+          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-b.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('/tmp/texas-am-collision-audit-a.json').read_text())
+          b=json.loads(Path('/tmp/texas-am-collision-audit-b.json').read_text())
+          assert a['audit_sha256'] == b['audit_sha256']
+          assert a['affected_canonical_game_count'] == 52
+          assert a['same_date_collision_group_count'] == 51
+          assert a['exact_core_match_group_count'] == 49
+          assert a['same_date_identity_conflict_group_count'] == 2
+          assert a['covered_affected_game_count'] == 51
+          assert a['unpaired_affected_game_count'] == 1
+          assert a['unpaired_affected_game_ids'] == ['CBBG-0063008']
+          print('COLLISION_AUDIT_SHA256=' + a['audit_sha256'])
+          print('READ_ONLY_ACCOUNTING=52 affected / 51 covered / 1 explicit-counterpart row')
+          PY
+
+      - name: Generate fresh deterministic production transaction seal twice
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        run: |
+          python tools/opponent_identity_transaction.py plan \
+            /tmp/texas-am-p0-decisions.csv \
+            /tmp/texas-am-p0-resolutions.json \
+            --output /tmp/texas-am-transaction-plan-a.json
+          python tools/opponent_identity_transaction.py plan \
+            /tmp/texas-am-p0-decisions.csv \
+            /tmp/texas-am-p0-resolutions.json \
+            --output /tmp/texas-am-transaction-plan-b.json
+
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          a=json.loads(Path('/tmp/texas-am-transaction-plan-a.json').read_text())
+          b=json.loads(Path('/tmp/texas-am-transaction-plan-b.json').read_text())
+          assert a['git_head'] == 'c5102b0927aa9e00816fe42e437716979f28d354', a['git_head']
+          assert a['plan_sha256'] == b['plan_sha256']
+          assert a['affected_canonical_game_count'] == 52
+          assert a['canonical_pair_count'] == 52
+          assert len(a['survivor_canonical_game_ids']) == 52
+          assert len(a['absorbed_canonical_game_ids']) == 52
+          assert len(a['new_discrepancies']) == 4
+          assert not a['blockers'], a['blockers']
+          assert not a['warnings'], a['warnings']
+          survivors=set(a['survivor_canonical_game_ids'])
+          absorbed=set(a['absorbed_canonical_game_ids'])
+          assert not (survivors & absorbed)
+          assert {'CBBG-0009910','CBBG-0062880','CBBG-0063008','CBBG-0063073'} <= survivors
+          assert {'CBBG-0066393','CBBG-0067210','CBBG-0067341','CBBG-0067408'} <= absorbed
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as handle:
+              handle.write('PRODUCTION_PLAN_SHA=' + a['plan_sha256'] + '\n')
+          print('PRODUCTION_PLAN_SHA256=' + a['plan_sha256'])
+          print('TRANSACTION_ACCOUNTING=52 affected / 52 pairs / 52 survivors / 52 absorbed / 4 discrepancies / 0 blockers / 0 warnings')
+          PY
+
+      - name: Apply exact sealed transaction transactionally
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        run: |
+          python tools/opponent_identity_transaction.py \
+            apply /tmp/texas-am-p0-decisions.csv /tmp/texas-am-p0-resolutions.json \
+            --expected-plan-sha256 "$PRODUCTION_PLAN_SHA" --apply
+
+      - name: Rebuild generated site data and validate all postconditions
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        run: |
+          python tools/validate_data.py
+          python tools/build_site_data.py --apply
+          python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
+          python tools/published_opponent_identity_census.py --json > /tmp/texas-am-post-census.json
+
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as handle:
+                  return list(csv.DictReader(handle))
+
+          before=json.loads(Path('/tmp/texas-am-pre-counts.json').read_text())
+          games=rows('data/canonical/games.csv')
+          assertions=rows('data/evidence/game-assertions.csv')
+          discrepancies=rows('data/reconciliation/discrepancies.csv')
+          assert len(games) == before['canonical'] - 52 == 67531
+          assert len(assertions) == before['assertions'] == 89815
+          assert len(discrepancies) == before['discrepancies'] + 4 == 2156
+
+          assert not any(r.get('team_a_key')=='texas-a-and-m' or r.get('team_b_key')=='texas-a-and-m' for r in games)
+          assert not any(r.get('normalized_opponent_key')=='texas-a-and-m' for r in assertions)
+
+          post_evidence={}
+          stale_source=0
+          stale_opponents=0
+          for program in ('northwestern','oklahoma'):
+              for row in rows(f'schools/{program}/source-games.csv'):
+                  if row.get('source_opponent_label') == 'Texas A&M' and row.get('normalized_opponent_key') == 'texas-a-m':
+                      post_evidence[f"{program}:{row['source_game_id']}"] = {
+                          'source_opponent_label': row.get('source_opponent_label',''),
+                          'raw_text': row.get('raw_text',''),
+                      }
+                  if row.get('normalized_opponent_key') == 'texas-a-and-m':
+                      stale_source += 1
+              for row in rows(f'schools/{program}/opponents.csv'):
+                  if row.get('canonical_opponent_key') == 'texas-a-and-m':
+                      stale_opponents += 1
+          assert stale_source == 0
+          assert stale_opponents == 0
+          pre_evidence=json.loads(Path('/tmp/texas-am-source-evidence.json').read_text())
+          assert post_evidence == pre_evidence, 'literal source opponent labels/raw_text changed'
+          assert len(post_evidence) == 52
+
+          by_id={r['canonical_game_id']:r for r in games}
+          g=by_id['CBBG-0009910']
+          assert g.get('game_date')=='1969-12-30' and g.get('overtime_periods')=='1'
+          assert g.get('site_type')=='NEUTRAL' and g.get('site_city')=='Greenville' and g.get('site_state')=='SC'
+          assert not g.get('venue_id') and not g.get('venue_key')
+
+          g=by_id['CBBG-0062880']
+          assert g.get('game_date')=='2005-01-18' and g.get('team_a_score')=='70' and g.get('team_b_score')=='54'
+          assert g.get('venue_key')=='reed-arena' and g.get('site_city')=='College Station' and g.get('site_state')=='TX'
+
+          g=by_id['CBBG-0063008']
+          assert g.get('game_date')=='2010-01-19' and {'65','62'} == {g.get('team_a_score'),g.get('team_b_score')}
+          assert g.get('venue_key')=='reed-arena' and g.get('site_city')=='College Station' and g.get('site_state')=='TX'
+
+          g=by_id['CBBG-0063073']
+          assert g.get('game_date')=='2012-12-15' and g.get('site_type')=='NEUTRAL'
+          assert g.get('designated_home_team_key')==''
+          assert g.get('venue_key')=='paycom-center' and g.get('venue_id')=='VEN-000162'
+          assert g.get('site_city')=='Oklahoma City' and g.get('site_state')=='OK'
+
+          expected={
+              ('CBBG-0009910','overtime_periods'),
+              ('CBBG-0062880','score'),
+              ('CBBG-0063008','game_date'),
+              ('CBBG-0063073','site_type'),
+          }
+          new_rows=discrepancies[-4:]
+          assert {(r['canonical_game_id'],r['field_name']) for r in new_rows} == expected
+          assert all(r.get('status')=='RESOLVED' for r in new_rows)
+
+          census=json.loads(Path('/tmp/texas-am-post-census.json').read_text())
+          assert census['priority_counts']['P0'] == 0, census['priority_counts']
+          assert not [x for x in census['findings'] if x.get('canonical_opponent_key')=='texas-a-and-m']
+
+          absorbed={'CBBG-0066393','CBBG-0067210','CBBG-0067341','CBBG-0067408'}
+          assert not (absorbed & set(by_id))
+          print('POST_COUNTS={"canonical":67531,"assertions":89815,"discrepancies":2156}')
+          print('RAW_SOURCE_PRESERVATION=52/52 PASS')
+          print('FOUR_REVIEWED_EXCEPTIONS=PASS')
+          print('POST_OPPONENT_CENSUS_P0=0')
+          PY
+
+      - name: Enforce exact 11-file mutation boundary
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        env:
+          BASE_SHA: c5102b0927aa9e00816fe42e437716979f28d354
+        run: |
+          cat > /tmp/expected-paths.txt <<'EOF'
+          data/canonical/games.csv
+          data/evidence/game-assertions.csv
+          data/reconciliation/discrepancies.csv
+          schools/northwestern/opponents.csv
+          schools/northwestern/source-games.csv
+          schools/oklahoma/opponents.csv
+          schools/oklahoma/source-games.csv
+          site/data/manifest.json
+          site/data/teams/northwestern.json
+          site/data/teams/oklahoma.json
+          site/data/teams/texas-a-m.json
+          EOF
+          git diff --name-only "$BASE_SHA" | sort > /tmp/actual-paths.txt
+          sort /tmp/expected-paths.txt -o /tmp/expected-paths.txt
+          diff -u /tmp/expected-paths.txt /tmp/actual-paths.txt
+          echo 'CHANGED_PATH_BOUNDARY=11/11 PASS'
+
+      - name: Commit exact validated production tree and fast-forward production branch
+        working-directory: /tmp/texas-am-production-v2
+        shell: bash
+        env:
+          BASE_SHA: c5102b0927aa9e00816fe42e437716979f28d354
+          PRODUCTION_BRANCH: data/opponent-identity-remediation-texas-a-m-production-v2
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            data/canonical/games.csv \
+            data/evidence/game-assertions.csv \
+            data/reconciliation/discrepancies.csv \
+            schools/northwestern/opponents.csv \
+            schools/northwestern/source-games.csv \
+            schools/oklahoma/opponents.csv \
+            schools/oklahoma/source-games.csv \
+            site/data/manifest.json \
+            site/data/teams/northwestern.json \
+            site/data/teams/oklahoma.json \
+            site/data/teams/texas-a-m.json
+          git diff --cached --name-only | sort > /tmp/staged-paths.txt
+          diff -u /tmp/expected-paths.txt /tmp/staged-paths.txt
+          test -z "$(git diff --name-only)"
+          git commit -m "Apply sealed Texas A&M opponent identity remediation v2" \
+            -m "production_plan_sha256=$PRODUCTION_PLAN_SHA" \
+            -m "base_sha=$BASE_SHA"
+          test "$(git rev-parse HEAD^)" = "$BASE_SHA"
+          git push origin "HEAD:refs/heads/$PRODUCTION_BRANCH"
+          echo "PRODUCTION_COMMIT=$(git rev-parse HEAD)"
+          echo "PRODUCTION_PLAN_SHA256=$PRODUCTION_PLAN_SHA"
+          echo "BASE_SHA=$BASE_SHA"
