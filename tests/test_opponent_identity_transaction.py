@@ -161,6 +161,29 @@ class OpponentIdentityTransactionTests(unittest.TestCase):
         with self.assertRaises(tx.OpponentIdentityTransactionError):
             tx.build_transaction_plan(self.repo,self.decisions,self.resolutions)
 
+    def test_explicit_clear_can_remove_designated_home_for_neutral_resolution(self):
+        payload=json.loads(self.resolutions.read_text())
+        row=payload['resolutions'][0]
+        row['canonical_values']={
+            'team_b_score':'54',
+            'site_type':'NEUTRAL',
+            'venue_key':'paycom-center',
+            'venue_id':'VEN-000162',
+            'site_city':'Oklahoma City',
+            'site_state':'OK',
+        }
+        row['canonical_clear_fields']=['designated_home_team_key']
+        self.resolutions.write_text(json.dumps(payload))
+        plan=tx.build_transaction_plan(self.repo,self.decisions,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        final=plan['canonical_pairs'][0]['final_canonical_values']
+        self.assertEqual(final['site_type'],'NEUTRAL')
+        self.assertEqual(final['designated_home_team_key'],'')
+        self.assertEqual(final['venue_key'],'paycom-center')
+        self.assertEqual(final['venue_id'],'VEN-000162')
+        self.assertEqual(final['site_city'],'Oklahoma City')
+        self.assertEqual(final['site_state'],'OK')
+
     def test_apply_redirects_assertions_retargets_discrepancies_and_preserves_raw(self):
         plan=tx.build_transaction_plan(self.repo,self.decisions,self.resolutions)
         result=tx.apply_transaction(self.repo,self.decisions,self.resolutions,plan['plan_sha256'],run_validation=False)
