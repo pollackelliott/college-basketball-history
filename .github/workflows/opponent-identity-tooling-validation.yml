@@ -1,0 +1,98 @@
+name: Opponent identity tooling validation
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR head
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run targeted opponent identity tests
+        run: |
+          python -m unittest discover -s tests -p 'test_opponent_identity_collision_audit.py' -v
+          python -m unittest discover -s tests -p 'test_opponent_identity_remediation.py' -v
+          python -m unittest discover -s tests -p 'test_published_opponent_identity_census.py' -v
+
+      - name: Run full repository test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate alias registry
+        run: python tools/opponent_identity_remediation.py validate-aliases --json
+
+      - name: Build and audit the known Texas A&M P0 repair
+        shell: bash
+        run: |
+          cat > /tmp/texas-am-p0-decisions.csv <<'CSV'
+          source_program_key,source_opponent_label,from_program_key,to_program_key,decision,evidence_basis,evidence_url
+          northwestern,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Northwestern package uses stale texas-a-and-m identity; authoritative current registry and reciprocal Texas A&M history establish texas-a-m as the same program identity.",https://github.com/pollackelliott/college-basketball-history
+          oklahoma,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Oklahoma package uses stale texas-a-and-m identity; authoritative current registry establishes texas-a-m as the same program identity.",https://github.com/pollackelliott/college-basketball-history
+          CSV
+
+          set +e
+          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-p0-plan-a.json
+          PLAN_RC=$?
+          set -e
+          if [ "$PLAN_RC" -ne 0 ] && [ "$PLAN_RC" -ne 2 ]; then
+            echo "Unexpected planner exit code: $PLAN_RC"
+            exit 1
+          fi
+
+          set +e
+          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-p0-plan-b.json
+          PLAN_RC_2=$?
+          set -e
+          if [ "$PLAN_RC_2" -ne "$PLAN_RC" ]; then
+            echo "Planner exit code is nondeterministic"
+            exit 1
+          fi
+
+          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-a.json
+          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-b.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def load(path):
+              return json.loads(Path(path).read_text())
+
+          p1 = load('/tmp/texas-am-p0-plan-a.json')
+          p2 = load('/tmp/texas-am-p0-plan-b.json')
+          a1 = load('/tmp/texas-am-collision-audit-a.json')
+          a2 = load('/tmp/texas-am-collision-audit-b.json')
+
+          assert p1['plan_sha256'] == p2['plan_sha256'], 'plan hash is nondeterministic'
+          assert a1['audit_sha256'] == a2['audit_sha256'], 'audit hash is nondeterministic'
+
+          affected = a1['affected_canonical_game_count']
+          accounted = a1['covered_affected_game_count'] + a1['unpaired_affected_game_count']
+          assert affected == accounted, f'affected accounting mismatch: {accounted}/{affected}'
+
+          print('P0_PLAN_SHA256=' + p1['plan_sha256'])
+          print('P0_AUDIT_SHA256=' + a1['audit_sha256'])
+          print('AFFECTED_CANONICAL_GAMES=' + str(affected))
+          print('SAME_DATE_COLLISION_GROUPS=' + str(a1['same_date_collision_group_count']))
+          print('EXACT_CORE_MATCH_GROUPS=' + str(a1['exact_core_match_group_count']))
+          print('SAME_DATE_IDENTITY_CONFLICT_GROUPS=' + str(a1['same_date_identity_conflict_group_count']))
+          print('COVERED_AFFECTED_GAMES=' + str(a1['covered_affected_game_count']))
+          print('UNPAIRED_AFFECTED_GAMES=' + str(a1['unpaired_affected_game_count']))
+
+          for item in a1['collision_groups']:
+              if item['kind'] == 'SAME_DATE_IDENTITY_CONFLICT':
+                  print('CONFLICT=' + ','.join(item['canonical_game_ids']) + '|' + '|'.join(item['signature']) + '|differences=' + ','.join(sorted(item['field_differences'])))
+
+          for game_id in a1['unpaired_affected_game_ids']:
+              print('UNPAIRED=' + game_id)
+          PY
