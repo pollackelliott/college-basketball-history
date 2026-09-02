@@ -1,0 +1,374 @@
+name: One-time owner non-D1 comprehensive audit
+
+on:
+  push:
+    branches:
+      - chore/owner-nond1-scan-comprehensive-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out audit branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit reviewed owner scan against exact repository state
+        shell: bash
+        run: |
+          cat > /tmp/owner_scan.csv <<'CSV'
+          row,program,label,status,target
+          1,alabama,St. Thomas University,KEEP,St. Thomas University (Florida)
+          2,arkansas,Northwestern (La.) State,CONFIRMED,Northwestern State
+          3,arkansas,Sam Houston State,CONFIRMED,Sam Houston
+          4,arkansas,North Carolina-Greensboro,CONFIRMED,UNC Greensboro
+          5,arkansas,Southern (La.),CONFIRMED,Southern
+          6,arkansas,Southern California,CONFIRMED,USC
+          7,arkansas,Cal Davis,CONFIRMED,UC Davis
+          8,arkansas,Loyola (Calif.),CONFIRMED,Loyola Marymount
+          9,arkansas,Texas-San Antonio,CONFIRMED,UTSA
+          10,arkansas,Cal Santa Barbara,CONFIRMED,UC Santa Barbara
+          11,arkansas,College of Charleston,CONFIRMED,College of Charleston
+          12,arkansas,Denver University,CONFIRMED,Denver
+          13,arkansas,Florida International (FIU),CONFIRMED,FIU
+          14,arkansas,Jacksonville University,CONFIRMED,Jacksonville
+          15,arkansas,Lamar Tech,CONFIRMED,Lamar
+          16,arkansas,LaSalle,CONFIRMED,LaSalle
+          17,arkansas,McNeese State,CONFIRMED,McNeese
+          18,arkansas,Nicholls State,CONFIRMED,Nicholls
+          19,arkansas,North Carolina State,CONFIRMED,NC State
+          20,arkansas,North Carolina-Ashville,CONFIRMED,UNC Ashville
+          21,arkansas,North Carolina-Wilmington,CONFIRMED,UNC Wilmington
+          22,arkansas,St. Joseph's (Pa.),CONFIRMED,St. Joseph's
+          23,arkansas,St. Thomas University,KEEP,St. Thomas University (Florida)
+          24,arkansas,Tennesse-Chattanooga,CONFIRMED,Chattanooga
+          25,arkansas,Virginia Commonwealth,CONFIRMED,VCU
+          26,arkansas,Wisconsin-Milwaukee,CONFIRMED,Milwaukee
+          27,florida,St. Thomas University,KEEP,St. Thomas University (Florida)
+          28,florida,Coral Gables,KEEP,Coral Gables
+          29,georgia,Arkansas A&M,CONFIRMED,Arkansas-Monticello
+          30,illinois,UTRGV,CONFIRMED,UTRGV
+          31,illinois,IU Indy,CONFIRMED,IU Indy
+          32,illinois,North Carolina State,CONFIRMED,NC State
+          33,iowa,UTRGV,CONFIRMED,UTRGV
+          34,iowa,Connecticut,CONFIRMED,UConn
+          35,iowa,NC Central,CONFIRMED,North Carolina Central
+          36,iowa,Grambling State,CONFIRMED,Grambling
+          37,iowa,North Carolina A&T,CONFIRMED,North Carolina A&T
+          38,iowa,SIUE,CONFIRMED,SIU Edwardsville
+          39,iowa,Southeastern Louisiana,CONFIRMED,Southeastern Louisiana
+          40,iowa,Florida A&M,CONFIRMED,Florida A&M
+          41,iowa,McNeese State,CONFIRMED,McNeese
+          42,iowa,Penn,CONFIRMED,Pennsylvania
+          43,iowa,USC Upstate,CONFIRMED,USC Upstate
+          44,kentucky,Loyola (Ill.),CONFIRMED,Loyola Chicago
+          45,kentucky,UMass,CONFIRMED,Massachusetts
+          46,kentucky,College of Charleston,CONFIRMED,College of Charleston
+          47,kentucky,Hawaii,CONFIRMED,Hawaii
+          48,kentucky,Louisville Coliseum,KEEP,Louisville Coliseum
+          49,kentucky,Loyola (Md.),CONFIRMED,Loyola (MD)
+          50,kentucky,Seattle,CONFIRMED,Seattle
+          51,lsu,Southern-New Orlenas,KEEP,Southern University at New Orleans
+          52,maryland,LIU,CONFIRMED,LIU
+          53,maryland,St. John's,CONFIRMED,St. John's
+          54,maryland,Mississippi,CONFIRMED,Ole Miss
+          55,maryland,Albany,CONFIRMED,Albany
+          56,maryland,St. Thomas University,KEEP,St. Thomas University (Florida)
+          57,maryland,USC Upstate,CONFIRMED,USC Upstate
+          58,michigan,Kalamazoo,KEEP,Kalamazoo College
+          59,michigan,Nashville,KEEP,Nashville
+          60,michigan,Jonesboro,KEEP,Jonesboro
+          61,michigan,Nicholls State,CONFIRMED,Nicholls
+          62,michigan,USC Upstate,CONFIRMED,USC Upstate
+          63,michigan-state,Kalamazoo,KEEP,Kalamazoo College
+          64,michigan-state,LIU,CONFIRMED,LIU
+          65,michigan-state,Louisiana-Monroe,CONFIRMED,Louisiana-Monroe
+          66,minnesota,Middle Tennessee State,CONFIRMED,Middle Tennessee State
+          67,minnesota,No. Dakota Aggies,CONFIRMED,North Dakota State
+          68,minnesota,Loyola (Chi.),CONFIRMED,Loyola Chicago
+          69,minnesota,St. Mary's (Calif.),CONFIRMED,St. Mary's
+          70,minnesota,St. Thomas (Minn.),CONFIRMED,St. Thomas (MN)
+          71,minnesota,Ball State B1G +,CONFIRMED,Ball State
+          72,minnesota,Bethune Cookman B1G +,CONFIRMED,Bethune-Cookman
+          73,minnesota,Central Connecticut State,CONFIRMED,Central Connecticut State
+          74,minnesota,Corpus Christi,CONFIRMED,Texas A&M-Corpus Christi
+          75,minnesota,Duke @ -/5 AXS.TV,CONFIRMED,Duke
+          76,minnesota,Duquesne VS1,CONFIRMED,Duquesne
+          77,minnesota,Fargo Aggies,CONFIRMED,North Dakota State
+          78,minnesota,FDU,CONFIRMED,Fairleigh Dickinson
+          79,minnesota,Furman VS1,CONFIRMED,Furman
+          80,minnesota,Iowa -7,CONFIRMED,Iowa
+          81,minnesota,Iowa * -18,CONFIRMED,Iowa
+          82,minnesota,LaSalle* 9/-\,CONFIRMED,LaSalle
+          83,minnesota,Long Island Univ.,CONFIRMED,LIU
+          84,minnesota,Marquette (@Wis. Rapids),CONFIRMED,Marquette
+          85,minnesota,Memphis @ -/19 AXS.TV,CONFIRMED,Memphis
+          86,minnesota,No. Dakota State,CONFIRMED,North Dakota State
+          87,minnesota,Northern Illnois,CONFIRMED,Northern Illinois
+          88,minnesota,San Francisco (Chase Center),CONFIRMED,San Francisco
+          89,minnesota,So. Illinois-Edwardsville,CONFIRMED,SIU Edwardsville
+          90,minnesota,Stanford @ AXS.TV,CONFIRMED,Stanford
+          91,minnesota,UC-Santa Clara,HOLD,Unresolved: Santa Clara vs. UC Santa Barbara
+          92,minnesota,USC 14/- PAC-12,CONFIRMED,USC
+          93,minnesota,Utah PAC 12,CONFIRMED,Utah
+          94,minnesota,Virginia Commonwealth,CONFIRMED,VCU
+          95,minnesota,Wis.-Green Bay,CONFIRMED,Green Bay
+          96,minnesota,Wofford VS1,CONFIRMED,Wofford
+          97,mississippi-state,College of Memphis,KEEP,College of Memphis
+          98,mississippi-state,Miami (OH),CONFIRMED,Miami (OH)
+          99,mississippi-state,St. Thomas University,KEEP,St. Thomas University (Florida)
+          100,missouri,UTRGV,CONFIRMED,UTRGV
+          101,missouri,IU Indy,CONFIRMED,IU Indy
+          102,missouri,North Carolina State,CONFIRMED,NC State
+          103,northwestern,UTRGV,CONFIRMED,UTRGV
+          104,northwestern,SIUE,CONFIRMED,SIU Edwardsville
+          105,northwestern,Texas A&M,CONFIRMED,Texas A&M
+          106,northwestern,IU Indy,CONFIRMED,IU Indy
+          107,northwestern,UMES,CONFIRMED,Maryland Eastern Shore
+          108,northwestern,American,CONFIRMED,American University
+          109,northwestern,FAU,CONFIRMED,Florida Atlantic
+          110,northwestern,LIU,CONFIRMED,LIU
+          111,northwestern,UAPB,CONFIRMED,Arkansas Pine Bluff
+          112,northwestern,William & Mary,CONFIRMED,William & Mary
+          113,northwestern,FIU,CONFIRMED,FIU
+          114,northwestern,Florida A&M,CONFIRMED,Florida A&M
+          115,northwestern,North Carolina A&T,CONFIRMED,North Carolina A&T
+          116,northwestern,Penn,CONFIRMED,Pennsylvania
+          117,northwestern,Prairie View A&M,CONFIRMED,Prairie View A&M
+          118,northwestern,TAMUCC,CONFIRMED,Texas A&M-Corpus Christi
+          119,northwestern,Texas A&M-Corpus Christi,CONFIRMED,Texas A&M-Corpus Christi
+          120,ohio-state,St. Louis,CONFIRMED,Saint Louis
+          121,ohio-state,St. John's,CONFIRMED,St. John's
+          122,ohio-state,American,CONFIRMED,American University
+          123,ohio-state,St. Joseph's,CONFIRMED,St. Joseph's
+          124,ohio-state,Miami (FL),CONFIRMED,Miami (FL)
+          125,ohio-state,Detroit,CONFIRMED,Detroit Mercy
+          126,ohio-state,IUPUI,CONFIRMED,IU Indy
+          127,ohio-state,Mount St. Mary's,CONFIRMED,Mount St. Mary's
+          128,ohio-state,Albany,CONFIRMED,Albany
+          129,ohio-state,LaSalle,CONFIRMED,LaSalle
+          130,ohio-state,Mississippi,CONFIRMED,Ole Miss
+          131,ohio-state,Alabama A&M,CONFIRMED,Alabama A&M
+          132,ohio-state,Hawaii,CONFIRMED,Hawaii
+          133,ohio-state,Houston Baptist,CONFIRMED,Houston Christian
+          134,ohio-state,IU Indy,CONFIRMED,IU Indy
+          135,ohio-state,Long Island,CONFIRMED,LIU
+          136,ohio-state,McNeese State,CONFIRMED,McNeese
+          137,ohio-state,Saint Mary's,HOLD,St. Marys (1915-16 identity unresolved)
+          138,ohio-state,Santa Barbara,CONFIRMED,UC Santa Barbara
+          139,ohio-state,USC Upstate,CONFIRMED,USC Upstate
+          140,ohio-state,UTRGV,CONFIRMED,UTRGV
+          141,ohio-state,Wichita,CONFIRMED,Wichita State
+          142,oklahoma,Texas A&M,CONFIRMED,Texas A&M
+          143,oklahoma,UTRGV,CONFIRMED,UTRGV
+          144,oklahoma,Connecticut,CONFIRMED,UConn
+          145,oklahoma,Louisiana-Monroe,CONFIRMED,Louisiana-Monroe
+          146,oklahoma,Nicholls State,CONFIRMED,Nicholls
+          147,oklahoma,Florida A&M,CONFIRMED,Florida A&M
+          148,oklahoma,McNeese State,CONFIRMED,McNeese
+          149,oklahoma,Prairie View A&M,CONFIRMED,Prairie View A&M
+          150,oklahoma,Seattle,CONFIRMED,Seattle
+          151,oklahoma,Southeastern Louisiana,CONFIRMED,Southeastern Louisiana
+          152,oklahoma,Southern Mississippi,CONFIRMED,Southern Miss
+          153,oklahoma,Texas A&M-Corpus Christi,CONFIRMED,Texas A&M-Corpus Christi
+          154,oklahoma,Texas Western,CONFIRMED,UTEP
+          155,oklahoma,Albany,CONFIRMED,Albany
+          156,oklahoma,LIU,CONFIRMED,LIU
+          157,oklahoma,North Texas State,CONFIRMED,North Texas
+          158,oklahoma,Rider College,CONFIRMED,Rider
+          159,oklahoma,S. Carolina St,CONFIRMED,South Carolina State
+          160,oklahoma,William & Mary,CONFIRMED,William & Mary
+          161,ole-miss,Wis.-Green Bay,CONFIRMED,Green Bay
+          162,penn-state,Dickinson,KEEP,Dickinson College
+          163,penn-state,Pittsburgh Collegians,KEEP,Pittsburgh Collegians
+          164,purdue,Alabama A&M,CONFIRMED,Alabama A&M
+          165,tennessee,UT-Chattanooga,CONFIRMED,Chattanooga
+          166,tennessee,17 2-Pittsburgh,CONFIRMED,Pittsburgh
+          167,texas,St. Thomas University,KEEP,St. Thomas University (Florida)
+          168,texas,Montana State-Northern,KEEP,Montana State-Northern / Northern Montana
+          169,texas,Springfield (Mo.),PROBABLE,Missouri State
+          170,texas-a-m,Lamar Tech,CONFIRMED,Lamar
+          171,texas-a-m,North Texas Tc,CONFIRMED,North Texas
+          172,texas-a-m,Sfa Teachers College,CONFIRMED,Stephen F. Austin
+          173,texas-a-m,Corpus Christi Nas,KEEP,Corpus Christi NAS
+          174,texas-a-m,Cal State Sacramento,CONFIRMED,Sacramento State
+          175,texas-a-m,East Texas Normal,CONFIRMED,East Texas A&M
+          176,texas-a-m,Ntcc,CONFIRMED,North Texas
+          177,texas-a-m,Ntsc,CONFIRMED,North Texas
+          178,texas-a-m,Nw Louisiana,CONFIRMED,Northwestern State
+          179,texas-a-m,Pepperdine College,CONFIRMED,Pepperdine
+          180,texas-a-m,San Marcos Tc,CONFIRMED,Texas State
+          181,texas-a-m,Sw Louisiana Inst.,CONFIRMED,Louisiana
+          182,texas-a-m,Tamu-commerce,CONFIRMED,East Texas A&M
+          183,texas-a-m,Valpo,CONFIRMED,Valparaiso
+          184,texas-a-m,Vs Iona,CONFIRMED,Iona
+          185,vanderbilt,Murray,CONFIRMED,Murray State
+          186,vanderbilt,Southwestern Louisiana,CONFIRMED,Louisiana
+          187,vanderbilt,Virginia Commonwealth,CONFIRMED,VCU
+          BONUS-1,texas-a-m,Sam Houston NC,CONFIRMED,Sam Houston
+          BONUS-2,vanderbilt,Central (Mo.),HOLD,Central Missouri
+          CSV
+
+          python - <<'PY'
+          import csv, json, re
+          from collections import defaultdict, Counter
+          from pathlib import Path
+
+          def read_csv(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as f:
+                  return list(csv.DictReader(f))
+
+          def norm(value):
+              value=(value or '').lower().replace('&',' and ')
+              value=re.sub(r"[^a-z0-9]+",' ',value)
+              return ' '.join(value.split())
+
+          programs=read_csv('data/reference/programs.csv')
+          aliases=read_csv('data/reference/program-names.csv')
+          by_key={r['program_key'].strip():r for r in programs if r.get('program_key','').strip()}
+          lookup=defaultdict(set)
+          for r in programs:
+              key=r.get('program_key','').strip()
+              for name in (r.get('program_name',''), r.get('display_name','')):
+                  if norm(name): lookup[norm(name)].add(key)
+          for r in aliases:
+              if r.get('verification_status','').strip()=='VERIFIED' and norm(r.get('alias_name','')):
+                  lookup[norm(r['alias_name'])].add(r.get('program_key','').strip())
+
+          # Human-facing names in the reviewed workbook that intentionally differ from
+          # registry display spellings. Non-D1 target is explicit rather than guessed.
+          target_overrides={
+              'Arkansas-Monticello': ('arkansas-monticello', False),
+              'Arkansas Pine Bluff': ('arkansas-pine-bluff', True),
+              'Central Connecticut State': ('central-connecticut', True),
+              'College of Charleston': ('charleston', True),
+              'LaSalle': ('la-salle', True),
+              'Pennsylvania': ('penn', True),
+              'SIU Edwardsville': ('siu-edwardsville', True),
+              'St. Joseph\'s': ('saint-josephs', True),
+              'St. Mary\'s': ('saint-marys', True),
+              'UNC Ashville': ('unc-asheville', True),
+          }
+
+          review=read_csv('/tmp/owner_scan.csv')
+          results=[]; issues=[]
+          status_counts=Counter(r['status'] for r in review)
+          confirmed=[r for r in review if r['status']=='CONFIRMED']
+
+          def resolve_target(name):
+              if name in target_overrides:
+                  return target_overrides[name][0], 'OVERRIDE'
+              keys=sorted(k for k in lookup.get(norm(name),set()) if k)
+              if len(keys)==1:
+                  return keys[0], 'REGISTRY'
+              if not keys:
+                  return '', 'MISSING'
+              return '|'.join(keys), 'AMBIGUOUS'
+
+          for r in review:
+              package=Path('schools')/r['program']/'opponents.csv'
+              if not package.exists():
+                  issues.append({'row':r['row'],'type':'MISSING_PACKAGE','detail':str(package)})
+                  continue
+              matches=[x for x in read_csv(package) if x.get('source_opponent_label','').strip()==r['label']]
+              if len(matches)!=1:
+                  issues.append({'row':r['row'],'type':'PACKAGE_MATCH_COUNT','detail':f"{r['program']} / {r['label']!r} => {len(matches)}"})
+                  continue
+              m=matches[0]
+              target_key,target_source=resolve_target(r['target']) if r['status'] in {'CONFIRMED','PROBABLE'} else ('','NOT_REQUIRED')
+              current_key=m.get('canonical_opponent_key','').strip()
+              current_d1=m.get('current_d1','').strip()
+              games=int(m.get('games_with_source_label','0') or 0)
+              if r['status']=='CONFIRMED':
+                  if target_source in {'MISSING','AMBIGUOUS'}:
+                      mutation='TARGET_UNRESOLVED'
+                  elif current_key==target_key:
+                      mutation='ALREADY_CORRECT' if current_d1=='Yes' else 'FLAG_ONLY'
+                  else:
+                      mutation='KEY_REMAP'
+              elif r['status']=='PROBABLE': mutation='PROBABLE_HOLD'
+              elif r['status']=='HOLD': mutation='HOLD'
+              else: mutation='KEEP'
+              results.append({**r,'current_key':current_key,'current_name':m.get('canonical_opponent_name','').strip(),'current_d1':current_d1,'games':games,'target_key':target_key,'target_resolution':target_source,'mutation_class':mutation})
+
+          confirmed_results=[x for x in results if x['status']=='CONFIRMED']
+          mutation_counts=Counter(x['mutation_class'] for x in confirmed_results)
+          target_issues=[x for x in confirmed_results if x['mutation_class']=='TARGET_UNRESOLVED']
+
+          # Global remap consistency and blast-radius census.
+          remaps=defaultdict(set)
+          reviewed_usage=defaultdict(set)
+          for x in confirmed_results:
+              if x['mutation_class']=='KEY_REMAP':
+                  remaps[x['current_key']].add(x['target_key'])
+                  reviewed_usage[x['current_key']].add((x['program'],x['label']))
+          inconsistent={k:sorted(v) for k,v in remaps.items() if len(v)!=1}
+
+          all_usage=defaultdict(list)
+          for opp in Path('schools').glob('*/opponents.csv'):
+              program=opp.parent.name
+              for x in read_csv(opp):
+                  key=x.get('canonical_opponent_key','').strip()
+                  if key in remaps:
+                      all_usage[key].append((program,x.get('source_opponent_label','').strip(),int(x.get('games_with_source_label','0') or 0)))
+          unreviewed_usage={}
+          for key,items in all_usage.items():
+              extra=[i for i in items if (i[0],i[1]) not in reviewed_usage[key]]
+              if extra: unreviewed_usage[key]=extra
+
+          canonical=read_csv('data/canonical/games.csv')
+          assertions=read_csv('data/evidence/game-assertions.csv')
+          remap_stats={}
+          for key,targets in sorted(remaps.items()):
+              if len(targets)!=1: continue
+              target=next(iter(targets))
+              cids=[r.get('canonical_game_id','').strip() for r in canonical if key in {r.get('team_a_key','').strip(),r.get('team_b_key','').strip()}]
+              acount=sum(1 for r in assertions if r.get('normalized_opponent_key','').strip()==key)
+              remap_stats[key]={'target':target,'canonical_rows':len(cids),'assertions':acount,'reviewed_package_rows':len(reviewed_usage[key]),'all_package_rows':len(all_usage[key]),'unreviewed_package_rows':len(unreviewed_usage.get(key,[]))}
+
+          payload={
+              'git_head': __import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              'review_rows':len(review),
+              'status_counts':dict(status_counts),
+              'confirmed_rows':len(confirmed_results),
+              'confirmed_mutation_counts':dict(mutation_counts),
+              'issues':issues,
+              'target_issues':target_issues,
+              'inconsistent_global_remaps':inconsistent,
+              'global_remap_count':len(remaps),
+              'global_remap_stats':remap_stats,
+              'unreviewed_global_key_usage':unreviewed_usage,
+              'results':results,
+          }
+          Path('/tmp/owner-scan-audit.json').write_text(json.dumps(payload,indent=2,sort_keys=True))
+
+          print('OWNER_SCAN_AUDIT_HEAD='+payload['git_head'])
+          print('REVIEW_ROWS='+str(payload['review_rows']))
+          print('STATUS_COUNTS='+json.dumps(payload['status_counts'],sort_keys=True))
+          print('CONFIRMED_MUTATION_COUNTS='+json.dumps(payload['confirmed_mutation_counts'],sort_keys=True))
+          print('PACKAGE_ISSUES='+str(len(issues)))
+          print('TARGET_ISSUES='+str(len(target_issues)))
+          print('GLOBAL_REMAP_KEYS='+str(len(remaps)))
+          print('INCONSISTENT_GLOBAL_REMAPS='+str(len(inconsistent)))
+          print('REMAP_KEYS_WITH_UNREVIEWED_PACKAGE_USAGE='+str(len(unreviewed_usage)))
+          for x in target_issues:
+              print('TARGET_ISSUE|'+x['row']+'|'+x['program']+'|'+x['label']+'|'+x['target']+'|'+x['target_resolution'])
+          for x in issues:
+              print('PACKAGE_ISSUE|'+x['row']+'|'+x['type']+'|'+x['detail'])
+          for key,targets in sorted(inconsistent.items()):
+              print('INCONSISTENT_REMAP|'+key+'|'+','.join(targets))
+          for key,extra in sorted(unreviewed_usage.items()):
+              print('UNREVIEWED_USAGE|'+key+'|'+json.dumps(extra,separators=(',',':')))
+          print('--- CONFIRMED ROW CLASSIFICATIONS ---')
+          for x in confirmed_results:
+              print('|'.join([x['row'],x['program'],x['label'],x['mutation_class'],x['current_key'],x['target_key'],x['current_d1'],str(x['games'])]))
+          PY
+
+          cat /tmp/owner-scan-audit.json | sha256sum | awk '{print "OWNER_SCAN_AUDIT_SHA256="$1}'
