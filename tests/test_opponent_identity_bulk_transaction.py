@@ -189,6 +189,41 @@ class BulkOpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(plan['canonical_pairs'][0]['absorbed_canonical_game_id'],'CBBG-2')
         self.assertEqual(plan['canonical_pairs'][0]['final_canonical_values']['game_date'],'2000-01-01')
 
+    def test_grouped_package_scope_preserves_multiple_literal_labels(self):
+        self._write(self.manifest,bulk.MANIFEST_FIELDS,[[
+            'alpha',bulk.ALL_PACKAGE_USAGES,'old-target','target','Target','Yes','MERGE_TO_PROGRAM',
+            'owner reviewed grouped identity','https://example.test'
+        ]])
+        self._resolution()
+        self._write(self.repo/'schools/alpha/opponents.csv',OPPONENT_HEADERS,[
+            ['alpha','Southern','old-target','Old Target','No','2','1999-2000','2000-2001'],
+            ['alpha','Southern Univ.','old-target','Old Target','No','2','1999-2000','2000-2001'],
+        ])
+        self._write(self.repo/'schools/alpha/source-games.csv',SOURCE_HEADERS,[
+            ['SRC-1','alpha','1999-2000','2000-01-01','Southern','Old Target','old-target','No','','','W','0','raw Southern'],
+            ['SRC-2','alpha','2000-2001','2001-01-01','Southern Univ.','Old Target','old-target','No','','','W','0','raw Southern Univ.'],
+        ])
+        self._write(self.repo/'data/canonical/games.csv',CANONICAL_HEADERS,[
+            game('CBBG-1','old-target',date='2000-01-01'),
+            game('CBBG-2','old-target',date='2001-01-01'),
+        ])
+        self._write(self.repo/'data/evidence/game-assertions.csv',ASSERTION_HEADERS,[
+            ['A1','CBBG-1','alpha','SRC-1','old-target'],['A2','CBBG-2','alpha','SRC-2','old-target']
+        ])
+        plan=bulk.build_plan(self.repo,self.manifest,self.resolutions)
+        self.assertEqual(plan['blockers'],[])
+        item=plan['manifest_items'][0]
+        self.assertEqual(item['source_game_ids'],['SRC-1','SRC-2'])
+        self.assertEqual(item['opponent_row_labels'],['Southern','Southern Univ.'])
+        bulk.apply(self.repo,self.manifest,self.resolutions,plan['plan_sha256'],run_validation=False)
+        opponents=self._read(self.repo/'schools/alpha/opponents.csv')
+        self.assertEqual([r['source_opponent_label'] for r in opponents],['Southern','Southern Univ.'])
+        self.assertTrue(all(r['canonical_opponent_key']=='target' for r in opponents))
+        sources=self._read(self.repo/'schools/alpha/source-games.csv')
+        self.assertEqual([r['source_opponent_label'] for r in sources],['Southern','Southern Univ.'])
+        self.assertEqual([r['raw_text'] for r in sources],['raw Southern','raw Southern Univ.'])
+        self.assertTrue(all(r['normalized_opponent_key']=='target' for r in sources))
+
     def test_omitted_global_package_usage_fails_and_rolls_back(self):
         self._manifest()
         self._resolution()

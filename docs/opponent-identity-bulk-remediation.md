@@ -53,9 +53,13 @@ Supported decisions:
   institutional identity; `target_current_d1` must be `No`. This exists so historical
   cleanup never fabricates current-D1 status merely to reuse the D1 alias machinery.
 
-Each manifest row is verified against the exact `opponents.csv` row and exact count of
-matching `source-games.csv` rows. Literal source opponent labels and raw source text are
-not rewritten.
+For ordinary rows, each manifest entry is verified against one exact `opponents.csv`
+source label and its matching `source-games.csv` population. For historical packages
+whose opponent index aggregates multiple literal spellings, set `source_opponent_label`
+to `__ALL_KEY_USAGES__`; that explicitly scopes the row to every package row and every
+source-game row for the old key within that source program. The planned opponent-label
+set and source-game IDs are sealed before apply. Literal source opponent labels and raw
+source text are never rewritten.
 
 ## Resolution document
 
