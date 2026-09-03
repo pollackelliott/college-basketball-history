@@ -153,3 +153,23 @@ are unchanged.
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=d387d0e01b1d9930b72cdffb167595f3ac560d48` from `research_base_sha=6dc3910f68914c139097e9352481cb67a19cb2df`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+### Madison Square Garden alias disambiguation
+
+Implementation preflight correctly rejected the generic alias `MSG` after
+Rutgers Phase 0 caused it to resolve to two distinct physical Madison Square
+Garden buildings.
+
+The physical venue assignments were already correct and remain unchanged:
+
+- `VEN-000123` — Madison Square Garden III / 1925 building; Rutgers assigned
+  games are in 1967.
+- `VEN-000124` — Madison Square Garden IV / 1968-current building; Rutgers
+  assigned games begin in 1969.
+
+The generic `MSG` alias remains registered only to `VEN-000124`, as it was on
+protected main before Rutgers Phase 0. The Rutgers 1925-building relationship
+retains the unambiguous historical alias `Madison Square Garden III`.
+
+No game identity, date, score/result, H/A/N classification, venue assignment,
+location, or underlying research evidence changed.
