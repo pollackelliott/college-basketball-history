@@ -128,3 +128,18 @@ scores/results, game types, and source raw_text remain unchanged.
 
 Venice High School Gym was absent from the current global physical-venue
 registry and was registered as a new physical identity during this correction.
+
+## Gate 1 preflight blocker remediation
+
+Two demonstrable pre-owner-review blockers were corrected during implementation:
+
+1. `UCLARAW-00952` (1961-1962,
+   1962-03-23 vs. Cincinnati) was
+   normalized to `curated_postseason_round=Final Four` from UCLA's official NCAA
+   Tournament results. The game universe, score/result, site, and raw source text
+   were unchanged.
+
+2. Existing canonical game `CBBG-0014002` (Kansas-UCLA, 2011-11-22) was physically
+   resolved to Lahaina Civic Center (`VEN-000108`), Lahaina, HI. The prior canonical
+   `Maui, HI` value represented broader island/event locality rather than the
+   registered physical venue geography. Independent source evidence remains preserved.

@@ -13999,7 +13999,7 @@ CBBG-0013998,2010-2011,2011-03-27,EXACT,kansas,vcu,61,71,vcu,0,NEUTRAL,,alamodom
 CBBG-0013999,2011-2012,2011-11-11,EXACT,kansas,towson,100,54,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014000,2011-2012,2011-11-15,EXACT,kansas,kentucky,65,75,kentucky,0,NEUTRAL,,,,New York,NY,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014001,2011-2012,2011-11-21,EXACT,georgetown,kansas,63,67,kansas,0,NEUTRAL,,,,Maui,HI,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0014002,2011-2012,2011-11-22,EXACT,kansas,ucla,72,56,kansas,0,NEUTRAL,,,,Maui,HI,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0014002,2011-2012,2011-11-22,EXACT,kansas,ucla,72,56,kansas,0,NEUTRAL,,lahaina-civic-center,VEN-000108,Lahaina,HI,REGULAR_SEASON,,,,PROVISIONAL,"UCLA onboarding blocker remediation: physical venue resolved as Lahaina Civic Center (VEN-000108), Lahaina, HI. Existing source wording 'Maui, HI' is preserved in independent source evidence as broader island/event locality."
 CBBG-0014003,2011-2012,2011-11-23,EXACT,duke,kansas,68,61,duke,0,NEUTRAL,,,,Maui,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014004,2011-2012,2011-11-30,EXACT,florida-atlantic,kansas,54,77,kansas,0,TEAM_B_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014005,2011-2012,2011-12-03,EXACT,kansas,south-florida,70,42,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
