@@ -166,3 +166,27 @@ used as a timeless alias in `schools/oregon/venues.csv`. The global historical
 name registry remains the evidence layer for reused textual venue names. No
 game assignment, H/A/N classification, geography, score/result, or historical
 game fact changed in this repair.
+
+## Pre-seal site-completeness repair
+
+The mandatory technical rehearsal exposed three tightly related implementation
+site-gate findings without changing Oregon's game universe or reopening Owner
+Gate 1.
+
+- ORERAW-01537 / CBBG-0066408: the owner-approved neutral classification for
+  Oregon-Texas A&M exposed previously blank tournament-site metadata.
+  Authoritative Texas A&M, Oregon, and Houston evidence establishes Houston,
+  Texas, at Hofheinz Pavilion. Texas A&M refers to the event as the Houston
+  Classic; Oregon historical material identifies the Bluebonnet Bowl Classic.
+- ORERAW-02920, ORERAW-02921, and ORERAW-02922: Oregon's 2016 Maui Invitational
+  rows carried an erroneous normalized city of Hilo despite their own event
+  text saying Lahaina. Oregon Athletics official schedule/tournament evidence
+  establishes Lahaina Civic Center, Lahaina, Hawaii for the three-game cluster.
+- CBBG-0022388 is completed to Lahaina Civic Center / Lahaina, HI rather than
+  retaining the legacy partial canonical value `Maui` with blank state.
+
+Both physical venues already existed in the permanent current-main registry:
+Lahaina Civic Center (VEN-000108) and Hofheinz Pavilion (VEN-000291). No global
+venue identity was created. Scores, results, game identities, dates, H/A/N,
+conference history, postseason classification, and raw source text were not
+changed by this bounded technical repair.
