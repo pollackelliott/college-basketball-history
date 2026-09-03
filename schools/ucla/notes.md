@@ -108,3 +108,23 @@ NON_D1 owner scan.
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=ded80f39c52387c76d1667f75c548240b2d4883f` from `research_base_sha=6dc3910f68914c139097e9352481cb67a19cb2df`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Gate 1 fire-marshal home-venue chronology correction
+
+Implementation preflight exposed a bounded venue-chronology defect in the
+research-frozen UCLA package: 49 games already independently classified as UCLA
+HOME in 1955-56 through 1958-59 had all been assigned to Men's Gym.
+
+Targeted season-schedule and contemporary game-site evidence corrected only the
+physical venue layer:
+
+- 45 HOME games -> Pan-Pacific Auditorium;
+- 4 HOME games in 1955-56 (Oregon twice, California twice) -> Venice High
+  School Gym.
+
+The researched H/A/N classifications were not changed. Neutral Long Beach and
+Bakersfield games were not reclassified. Game universe, dates, opponents,
+scores/results, game types, and source raw_text remain unchanged.
+
+Venice High School Gym was absent from the current global physical-venue
+registry and was registered as a new physical identity during this correction.
