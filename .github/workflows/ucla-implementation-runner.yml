@@ -1,0 +1,98 @@
+name: UCLA implementation runner
+
+on:
+  push:
+    branches:
+      - chore/ucla-implementation-runner
+
+permissions:
+  contents: write
+
+jobs:
+  phase0-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact integration base
+        uses: actions/checkout@v4
+        with:
+          ref: ded80f39c52387c76d1667f75c548240b2d4883f
+          fetch-depth: 0
+
+      - name: Materialize frozen UCLA input
+        run: |
+          git fetch origin chore/ucla-implementation-runner
+          git show origin/chore/ucla-implementation-runner:.onboarding-input/UCLA_RESEARCH_FROZEN.zip.b64 | base64 -d > /tmp/UCLA_RESEARCH_FROZEN.zip
+          echo "ZIP_SHA=$(sha256sum /tmp/UCLA_RESEARCH_FROZEN.zip | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Guard exact base and create onboarding branch
+        run: |
+          test "$(git rev-parse HEAD)" = "ded80f39c52387c76d1667f75c548240b2d4883f"
+          test -z "$(git status --porcelain)"
+          git config user.name "College Basketball History Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git switch -c data/ucla-onboarding
+
+      - name: Current-main research acceptance
+        run: |
+          mkdir -p /tmp/ucla-logs
+          python tools/onboarding_hardening.py research-check ucla /tmp/UCLA_RESEARCH_FROZEN.zip \
+            --expected-sha256 c4c6957fbd29cd2c0e6e7a6f9b4e5f713e5fbd3d13a4ecef8d0c662cb1734608 \
+            > /tmp/ucla-logs/research-check.log 2>&1
+          tail -40 /tmp/ucla-logs/research-check.log
+
+      - name: Phase 0 dry run
+        run: |
+          python tools/stage_research_portfolio.py ucla /tmp/UCLA_RESEARCH_FROZEN.zip \
+            --expected-sha256 c4c6957fbd29cd2c0e6e7a6f9b4e5f713e5fbd3d13a4ecef8d0c662cb1734608 \
+            --research-base 6dc3910f68914c139097e9352481cb67a19cb2df \
+            --history-start-season 1919-1920 \
+            --history-scope-basis ALWAYS_TOP_LEVEL_FROM_INCEPTION \
+            --history-scope-notes "Owner history-scope ruling preserved from RESEARCH_FROZEN: UCLA accepted public history begins with 1919-20 and remains top-level from inception." \
+            > /tmp/ucla-logs/stage-dry-run.log 2>&1
+          tail -80 /tmp/ucla-logs/stage-dry-run.log
+
+      - name: Phase 0 apply and checkpoint
+        run: |
+          python tools/stage_research_portfolio.py ucla /tmp/UCLA_RESEARCH_FROZEN.zip \
+            --expected-sha256 c4c6957fbd29cd2c0e6e7a6f9b4e5f713e5fbd3d13a4ecef8d0c662cb1734608 \
+            --research-base 6dc3910f68914c139097e9352481cb67a19cb2df \
+            --history-start-season 1919-1920 \
+            --history-scope-basis ALWAYS_TOP_LEVEL_FROM_INCEPTION \
+            --history-scope-notes "Owner history-scope ruling preserved from RESEARCH_FROZEN: UCLA accepted public history begins with 1919-20 and remains top-level from inception." \
+            --apply --commit \
+            > /tmp/ucla-logs/stage-apply.log 2>&1
+          tail -80 /tmp/ucla-logs/stage-apply.log
+          git push origin data/ucla-onboarding
+
+      - name: Authoritative preflight
+        run: |
+          python tools/onboard_school.py ucla --preflight > /tmp/ucla-logs/preflight.log 2>&1
+          tail -120 /tmp/ucla-logs/preflight.log
+
+      - name: Build compact runner artifact
+        if: always()
+        run: |
+          mkdir -p /tmp/ucla-artifact/logs /tmp/ucla-artifact/onboarding
+          cp -f /tmp/ucla-logs/* /tmp/ucla-artifact/logs/ 2>/dev/null || true
+          if [ -d .onboarding/ucla ]; then cp -a .onboarding/ucla/. /tmp/ucla-artifact/onboarding/; fi
+          git rev-parse HEAD > /tmp/ucla-artifact/phase0-head.txt
+          git status --porcelain > /tmp/ucla-artifact/worktree-status.txt
+
+      - name: Upload implementation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ucla-phase0-preflight
+          path: /tmp/ucla-artifact
+          if-no-files-found: warn
+
+      - name: Compact summary
+        if: always()
+        run: |
+          {
+            echo "## UCLA implementation runner"
+            echo "- integration base: ded80f39c52387c76d1667f75c548240b2d4883f"
+            echo "- research ZIP: c4c6957fbd29cd2c0e6e7a6f9b4e5f713e5fbd3d13a4ecef8d0c662cb1734608"
+            echo "- current HEAD: $(git rev-parse HEAD)"
+            echo "- worktree: $(test -z "$(git status --porcelain)" && echo clean || echo dirty)"
+          } >> "$GITHUB_STEP_SUMMARY"
