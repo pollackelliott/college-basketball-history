@@ -17,6 +17,7 @@ Read these process documents together before onboarding work:
 - `docs/research-freeze-self-challenge.md`
 - `docs/published-opponent-identity-census.md`
 - `docs/non-d1-owner-sanity-scan.md`
+- `docs/program-top-level-scope-reference.md`
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
 more specific than the older fast-path wording. The site-completeness protocol is
@@ -29,7 +30,16 @@ diagnostics, durable checkpoints, and failure recovery. The published-opponent i
 census is the read-only scoreboard for stale/duplicate opponent identity debt on already
 published school packages. The non-D1 owner sanity scan is controlling for the required
 lightweight owner review of every target school's distinct `NON_D1` opponent population
-before that school first becomes eligible for tracked integration.
+before that school first becomes eligible for tracked integration. The program top-level
+scope reference is controlling as the default owner-supplied research baseline for each
+current D1 program's accepted top-level / Division I-equivalent history intervals.
+
+Research lanes must read `data/reference/program-top-level-scope.csv` at startup. When the
+target school is present and authoritative evidence encountered during ordinary research
+does not materially contradict the row, use that scope without asking the owner to restate
+when the program became or remained top-level. Multiple listed intervals are controlling;
+do not collapse them to only the current stint. Bring scope back to the owner only for a
+genuine contradiction, ambiguous school identity, or a target absent from the reference.
 
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
@@ -110,7 +120,7 @@ unresolved discrepancies.
 ## Collaboration boundary
 
 * Routine extraction, normalization research, package construction, reconciliation analysis, testing, provenance maintenance, Git plumbing, validator failures, and deployment mechanics belong to the collaborator and should not create extra owner handoffs.
-* Return to the owner only when a new judgment is required about history scope, game identity or inclusion, opponent identity, home/away/neutral classification, venue/location truth, a controlling canonical historical fact, accomplishments, unresolved-conflict publication, the required non-D1 opponent sanity scan, or final preview approval.
+* Return to the owner only when a new judgment is required about history scope, game identity or inclusion, opponent identity, home/away/neutral classification, venue/location truth, a controlling canonical historical fact, accomplishments, unresolved-conflict publication, the required non-D1 opponent sanity scan, or final preview approval. A history-scope question is new only when `data/reference/program-top-level-scope.csv` is absent/ambiguous for the target or authoritative research materially contradicts it; do not ask the owner to restate an uncontradicted reference row.
 * A technical failure after owner approval must be diagnosed and repaired generically where possible; do not ask the owner to re-review unchanged historical decisions merely because the tooling implementation changed.
 * Technical work should be batched at phase boundaries. Repeated one-command-at-a-time owner handoffs for deterministic setup are a process regression unless repository state is unexpected.
 * Research lanes should perform the required pre-freeze self-challenge autonomously; do not create an extra owner approval loop merely because large researched-unknown populations require adversarial review.
@@ -143,6 +153,10 @@ unresolved discrepancies.
   an obvious current-program opponent identity to survive under a stale/non-D1 key, or
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
+- Flag any research-lane workflow that asks the owner to supply or reconfirm a target
+  school's top-level/D1 start when an unambiguous, uncontradicted scope row already exists
+  in `data/reference/program-top-level-scope.csv`, or that discards an earlier accepted
+  interval for a multiple-stint program.
 - Flag any already-frozen portfolio that reaches `INTEGRATION_FROZEN`/tracked Phase 0
   without receiving the non-D1 owner sanity scan during current-main rebase when the
   scan was not completed before its original research freeze.
