@@ -256,3 +256,20 @@ Owner Gate 1:
 These repairs do not collapse genuine reciprocal historical disagreements.
 Institutional date/score/OT conflicts that remain after this pass are left for
 the sealed discrepancy workflow.
+
+### Scoreless default-win administrative normalization
+
+The pre-seal full-transaction rehearsal exposed one repository-vocabulary
+mismatch in `RUTRAW-00007`, Rutgers' historical scoreless win over Fordham by
+default.
+
+The underlying historical assertion is unchanged: Rutgers is recorded as the
+winner, the score is unknown, and the preserved raw source text says `default`.
+Implementation normalized only `administrative_status` from the research-time
+label `DEFAULT` to the project's existing canonical taxonomy `FORFEIT`.
+
+Rutgers already contained one separate valid `FORFEIT` source row; that row
+was explicitly preserved unchanged. After normalization the source ledger
+contains two `FORFEIT` administrative rows and no `DEFAULT` rows.
+
+No game identity, result, score, opponent, date, or site fact was changed.
