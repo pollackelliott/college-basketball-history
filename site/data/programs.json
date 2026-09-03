@@ -5963,8 +5963,8 @@
       "state": "NJ",
       "primary_hex": "#CC0033",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 5,
+      "history_start_season": "1906-1907",
+      "conference_regular_season_championships": 4,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 8,
       "final_four_appearances": 1,
@@ -5972,7 +5972,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1976,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
