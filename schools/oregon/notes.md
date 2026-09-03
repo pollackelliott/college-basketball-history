@@ -155,3 +155,14 @@ These match the research-base owner baseline but are independently verified here
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=e982a0ae746879d3a4c41a4dc128dc0107229f6d` from `research_base_sha=fb886afc1f940ddc9e5904908cc2f2c5cf7077cb`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Integration alias disambiguation
+
+The historical text `University Gymnasium` applies to two distinct Oregon
+physical gymnasium identities: the older university gymnasium and the later
+Men's Gymnasium. Because school-local ingestion vocabulary must map
+unambiguously to one permanent physical venue ID, that shared shorthand is not
+used as a timeless alias in `schools/oregon/venues.csv`. The global historical
+name registry remains the evidence layer for reused textual venue names. No
+game assignment, H/A/N classification, geography, score/result, or historical
+game fact changed in this repair.
