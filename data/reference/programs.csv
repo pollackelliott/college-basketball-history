@@ -314,7 +314,7 @@ uc-riverside,UC Riverside,UC Riverside,Highlanders,Riverside,CA,#2D6CC0,#F1AB00,
 uc-san-diego,UC San Diego,UC San Diego,Tritons,San Diego,CA,#182B49,#FFCD00,Yes,No,,,,
 uc-santa-barbara,UC Santa Barbara,UC Santa Barbara,Gauchos,Santa Barbara,CA,#003660,#F3BC11,Yes,No,,,,
 ucf,UCF,UCF,Knights,Orlando,FL,#BA9B37,#000000,Yes,No,,,,
-ucla,UCLA,UCLA,Bruins,Los Angeles,CA,#2D68C4,#F2A900,Yes,No,1919-1920,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed UCLA has always been top-level/D1-equivalent for site purposes; accepted public history begins with program inception in 1919-20.
+ucla,UCLA,UCLA,Bruins,Los Angeles,CA,#2D68C4,#F2A900,Yes,Yes,1919-1920,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed UCLA has always been top-level/D1-equivalent for site purposes; accepted public history begins with program inception in 1919-20.
 uconn,UConn,Connecticut,Huskies,Storrs,CT,#000E2F,#FFFFFF,Yes,No,,,,
 uic,UIC,UIC,Flames,Chicago,IL,#AC1E2D,#041E42,Yes,No,,,,
 ul-monroe,UL Monroe,Louisiana-Monroe,Warhawks,Monroe,LA,#840029,#FDB913,Yes,No,,,,
