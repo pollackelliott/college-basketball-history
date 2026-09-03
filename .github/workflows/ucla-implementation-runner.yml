@@ -21,8 +21,8 @@ jobs:
       - name: Materialize frozen UCLA input
         run: |
           git fetch origin chore/ucla-implementation-runner
-          git show origin/chore/ucla-implementation-runner:.onboarding-input/UCLA_RESEARCH_FROZEN.zip.b64 | base64 -d > /tmp/UCLA_RESEARCH_FROZEN.zip
-          echo "ZIP_SHA=$(sha256sum /tmp/UCLA_RESEARCH_FROZEN.zip | awk '{print $1}')" >> "$GITHUB_ENV"
+          git show origin/chore/ucla-implementation-runner:.onboarding-input/UCLA_RESEARCH_FROZEN.zip > /tmp/UCLA_RESEARCH_FROZEN.zip
+          test "$(sha256sum /tmp/UCLA_RESEARCH_FROZEN.zip | awk '{print $1}')" = "c4c6957fbd29cd2c0e6e7a6f9b4e5f713e5fbd3d13a4ecef8d0c662cb1734608"
 
       - name: Guard exact base and create onboarding branch
         run: |
