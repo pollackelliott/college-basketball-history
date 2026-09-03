@@ -246,7 +246,7 @@ rice,10,0,4,0,0,ELITE_EIGHT,1942,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-pr
 richmond,7,7,10,0,0,SWEET_SIXTEEN,2011,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 rider,12,3,3,0,0,ROUND_OF_64,1994,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 robert-morris,12,10,9,0,0,ROUND_OF_64,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-rutgers,5,4,8,1,0,FINAL_FOUR,1976,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+rutgers,4,4,8,1,0,FINAL_FOUR,1976,OWNER_BASELINE_UNVERIFIED,"Pre-Gate Rutgers correction from the Atlantic 10 official annual champions table: Rutgers regular-season conference championships in 1977, 1978, 1980 and 1983. Owner Gate verification still pending.",NOT_CHECKED,Implementation corrected the owner-baseline regular-season conference title count from 5 to 4 before verification; tournament-title count remains 4.
 sacramento-state,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 sacred-heart,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 saint-joseph-s,20,6,21,1,0,ELITE_EIGHT,2004,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

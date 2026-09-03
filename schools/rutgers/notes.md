@@ -189,3 +189,47 @@ The completed 2025-26 supplement notes used the phrase `exhibitions excluded`,
 which itself triggered the generic exhibition-wording warning. That provenance
 was reworded to `competitive games only`; the 34-game competitive supplement
 and its game data are unchanged.
+
+### Pre-Gate full-ledger releaseability corrections
+
+A full 2,696-row implementation audit was performed after ordinary preflight
+reached zero blockers and zero warnings. This audit intentionally challenged
+rows predicted to become new canonical games, because those rows do not
+generate ordinary reciprocal discrepancies.
+
+The audit identified and repaired a bounded set of source-normalization
+defects supported by institutional, conference, reciprocal, or independently
+cross-checked historical evidence:
+
+- Fordham 1978: corrected Rutgers home -> opponent home.
+- Penn State Feb. 27, 1979: corrected date, Rutgers-home site, RAC physical
+  venue, and Eastern Eight conference-tournament classification.
+- UCLA 1981 and Michigan 1983: recovered Meadowlands/Brendan Byrne Arena.
+- Penn State 1989 A-10 title: corrected neutral -> Rutgers home at the RAC;
+  score remains 70-66.
+- Lafayette 1989: corrected OCR-corrupted `768-619` to Rutgers 78-64.
+- Illinois 2016: corrected Rutgers score to 101 in the 110-101 3OT loss.
+- Minnesota 2017: corrected Rutgers home -> opponent home.
+- Michigan State 2018: restored one overtime.
+- Wisconsin 2021: corrected opponent home -> Rutgers home at the RAC.
+- Minnesota 2021: corrected score to Rutgers 76-72.
+- Indiana 2021 Big Ten Tournament: corrected score to Rutgers 61-50.
+- Mississippi State 2023: corrected to neutral at Prudential Center, Newark.
+- Nebraska 2024: restored one overtime.
+- Notre Dame / Alabama / Texas A&M 2024 Players Era games: corrected to
+  neutral at MGM Grand Garden Arena; Notre Dame also restored one overtime.
+- Michigan State 2025: corrected to designated Rutgers home at Madison Square
+  Garden.
+- Minnesota 2025: restored one overtime.
+- USC 2025 Big Ten Tournament: restored two overtimes.
+
+The Feb. 10, 2021 Iowa row was specifically reviewed and was not changed:
+Rutgers' normalized 66-79 loss is supported by Iowa official evidence, while
+the contradictory `79-56` media-guide string remains preserved as raw source
+text with its existing correction note.
+
+The Rutgers accomplishment baseline was also corrected from five to four
+regular-season conference championships. The Atlantic 10 official annual
+champions table supports Rutgers titles in 1977, 1978, 1980 and 1983.
+The accomplishment row deliberately remains `OWNER_BASELINE_UNVERIFIED`
+pending the normal Owner Gate.
