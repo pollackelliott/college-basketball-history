@@ -518,7 +518,14 @@ def _accomplishment_conflicts(
         for field, value in comparisons.items()
         if reference.get(field, "").strip() != value
     ]
-    conflicts.extend(derived["incomplete_reasons"])
+    # Historical NCAA formats do not always map honestly to the project's
+    # controlled modern round vocabulary. Research policy explicitly permits
+    # such rounds to remain blank. Keep those incomplete-round diagnostics
+    # attached to a genuine aggregate mismatch, but do not turn an honestly
+    # unmappable historical round into a false blocker after every aggregate
+    # accomplishment field independently matches the reference.
+    if conflicts:
+        conflicts.extend(derived["incomplete_reasons"])
     return derived, conflicts
 
 

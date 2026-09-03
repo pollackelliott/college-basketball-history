@@ -40743,7 +40743,7 @@ CBBG-0040746,1970-1971,1970-12-21,EXACT,georgia,lsu,76,97,lsu,0,TEAM_B_HOME,lsu,
 CBBG-0040747,1970-1971,1970-12-26,EXACT,depaul,lsu,72,91,lsu,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0040748,1970-1971,1970-12-28,EXACT,lsu,montana-state,89,77,lsu,0,NEUTRAL,,,,Oklahoma City,OK,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0040749,1970-1971,1970-12-30,EXACT,lsu,utah-state,81,97,utah-state,0,NEUTRAL,,,,Oklahoma City,OK,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0040750,1970-1971,1971-01-02,EXACT,lsu,usc,76,80,usc,1,TEAM_B_HOME,usc,,,Oklahoma City,OK,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0040750,1970-1971,1971-01-02,EXACT,lsu,usc,76,80,usc,1,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[USC_RECIPROCAL_SITE_CORRECTION source=usc/USCRAW-01376;prior_geography=Oklahoma City,OK;basis=LSU official Jan-2-1971 game record confirms Los Angeles Memorial Sports Arena]"
 CBBG-0040751,1970-1971,1971-01-07,EXACT,baylor,lsu,90,83,baylor,0,TEAM_B_HOME,lsu,john-m-parker-agricultural-coliseum,VEN-000270,Baton Rouge,LA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=lsu/LSURAW-01256;venue_key=john-m-parker-agricultural-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0040752,1970-1971,1971-02-03,EXACT,lsu,tulane,86,93,tulane,0,TEAM_B_HOME,tulane,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0040753,1970-1971,1971-03-06,EXACT,georgia,lsu,66,69,lsu,0,TEAM_A_HOME,georgia,stegeman-coliseum,VEN-000198,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-01271;venue_key=stegeman-coliseum;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
