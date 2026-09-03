@@ -324,7 +324,7 @@ unc-asheville,UNC Asheville,UNC Asheville,Bulldogs,Asheville,NC,#003DA5,#FFFFFF,
 unc-greensboro,UNC Greensboro,UNC Greensboro,Spartans,Greensboro,NC,#0F2044,#FFB71B,Yes,No,,,,
 unc-wilmington,UNC Wilmington,UNC Wilmington,Seahawks,Wilmington,NC,#006666,#003366,Yes,No,,,,
 unlv,UNLV,UNLV,Rebels,Las Vegas,NV,#CF0A2C,#CAC8C8,Yes,No,,,,
-usc,USC,USC,Trojans,Los Angeles,CA,#990000,#FFC72C,Yes,No,1906-1907,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed USC as top-level from inception; current program top-level scope reference also lists USC INCEPTION+. Accepted public history begins with program inception in 1906-07.
+usc,USC,USC,Trojans,Los Angeles,CA,#990000,#FFC72C,Yes,Yes,1906-1907,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed USC as top-level from inception; current program top-level scope reference also lists USC INCEPTION+. Accepted public history begins with program inception in 1906-07.
 ut-arlington,UT Arlington,UT Arlington,Mavericks,Arlington,TX,#F58025,#0064B1,Yes,No,,,,
 ut-martin,UT Martin,UT Martin,Skyhawks,Martin,TN,#F79728,#002A5B,Yes,No,,,,
 ut-rio-grande-valley,UT Rio Grande Valley,UTRGV,Vaqueros,Edinburg,TX,#FFA300,#00843D,Yes,No,,,,
