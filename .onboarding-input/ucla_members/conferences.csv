@@ -1,0 +1,8 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,ucla,1919-1920,1926-1927,sciac,Southern California Intercollegiate Athletic Conference,conference,False,UCLA inaugural-era conference records and contemporary SCIAC standings; UCLA guide carries conference records in this era.,"1919-20 has formal-membership wording nuance in later retrospectives, but contemporary standings include Southern Branch and UCLA records an 8-2 conference mark."
+1,ucla,1927-1928,1958-1959,pcc,Pacific Coast Conference,conference,False,UCLA year-by-year conference records and conference history.,UCLA basketball source records PCC conference play beginning 1927-28; later conference institutional history describes UCLA as added to the PCC in 1928.
+2,ucla,1959-1960,1967-1968,aawu,Athletic Association of Western Universities,conference,False,UCLA/conference institutional history.,
+3,ucla,1968-1969,1977-1978,pacific-8,Pacific-8 Conference,conference,False,UCLA/conference institutional history.,
+4,ucla,1978-1979,2010-2011,pacific-10,Pacific-10 Conference,conference,False,UCLA/conference institutional history.,
+5,ucla,2011-2012,2023-2024,pac-12,Pac-12 Conference,conference,False,UCLA/conference institutional history.,
+6,ucla,2024-2025,,big-ten,Big Ten Conference,conference,True,Big Ten official membership announcement and UCLA official schedules.,UCLA began Big Ten competition in 2024-25.
