@@ -273,3 +273,21 @@ was explicitly preserved unchanged. After normalization the source ledger
 contains two `FORFEIT` administrative rows and no `DEFAULT` rows.
 
 No game identity, result, score, opponent, date, or site fact was changed.
+
+### Saint Francis (PA) display-name normalization
+
+The pre-seal site-build rehearsal exposed a display-name collision for the
+already-correct opponent identity `saint-francis-pa`.
+
+Rutgers used the normalized display `Saint Francis`, while existing project
+data uses the Pennsylvania-disambiguated forms `Saint Francis (PA)` /
+`Saint Francis (Pa.)`. The latter two normalize to the same project signature;
+the bare form does not and is also ambiguous beside the separately modeled
+St. Francis Brooklyn identity.
+
+Implementation therefore normalized only the Rutgers project display name to
+`Saint Francis (PA)` in `opponents.csv` and in the single affected normalized
+game row `RUTRAW-02322`.
+
+The identity key, raw Rutgers label `ST. FRANCIS, PA`, date, score/result,
+site, opponent classification, and all other game facts are unchanged.
