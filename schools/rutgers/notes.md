@@ -173,3 +173,19 @@ retains the unambiguous historical alias `Madison Square Garden III`.
 
 No game identity, date, score/result, H/A/N classification, venue assignment,
 location, or underlying research evidence changed.
+
+### Pre-Gate releaseability technical cleanup
+
+Implementation's pre-Gate releaseability challenge identified a deterministic
+media-guide parsing defect in nine overtime games. In each case the raw
+Rutgers result string clearly marked overtime, but the parsed
+`overtime_periods` field had captured the losing score (for example,
+`61-54 OT` became `54`). Those nine fields were normalized directly from the
+preserved raw result strings. No score/result, opponent, date, site,
+venue, game type, or game identity changed.
+
+The same challenge also identified 34 false-positive exhibition warnings.
+The completed 2025-26 supplement notes used the phrase `exhibitions excluded`,
+which itself triggered the generic exhibition-wording warning. That provenance
+was reworded to `competitive games only`; the 34-game competitive supplement
+and its game data are unchanged.
