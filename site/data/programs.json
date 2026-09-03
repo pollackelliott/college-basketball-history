@@ -7571,7 +7571,7 @@
       "state": "CA",
       "primary_hex": "#2D68C4",
       "secondary_hex": "#F2A900",
-      "history_start_season": null,
+      "history_start_season": "1919-1920",
       "conference_regular_season_championships": 38,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 54,
@@ -7580,7 +7580,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1995,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
