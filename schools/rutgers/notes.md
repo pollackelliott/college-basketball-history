@@ -233,3 +233,26 @@ regular-season conference championships. The Atlantic 10 official annual
 champions table supports Rutgers titles in 1977, 1978, 1980 and 1983.
 The accomplishment row deliberately remains `OWNER_BASELINE_UNVERIFIED`
 pending the normal Owner Gate.
+
+### Final pre-Gate historical cleanup
+
+A final implementation pass resolved six deterministic source-side items before
+Owner Gate 1:
+
+- Missouri, Dec. 15, 1966: recovered the neutral physical site as Madison
+  Square Garden III / the 1925 building; the already-correct 3OT result is
+  preserved.
+- USC, Dec. 27, 1974: recovered the ECAC Holiday Festival physical site as
+  Madison Square Garden; the Rutgers-versus-USC one-day date conflict remains
+  intentionally unresolved for owner review.
+- Louisville Holiday Classic, 1976: corrected Rutgers-Louisville to Dec. 28
+  and Rutgers-Auburn to Dec. 29 using the Louisville and Auburn official
+  schedules. Louisville, Kentucky and tournament identity are recorded;
+  Auburn-Rutgers physical-building detail remains researched unresolved.
+- ECAC Holiday Festival, 1978: recovered Madison Square Garden for both the
+  St. John's semifinal and Ohio State championship, and corrected the
+  Ohio State game from 1 OT to the institutionally documented 3 OT.
+
+These repairs do not collapse genuine reciprocal historical disagreements.
+Institutional date/score/OT conflicts that remain after this pass are left for
+the sealed discrepancy workflow.
