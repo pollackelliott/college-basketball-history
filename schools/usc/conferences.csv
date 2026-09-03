@@ -1,0 +1,8 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,usc,1906-1907,1920-1921,independent,Independent,independent,False,USC official year-by-year conference records; Pac-12 institutional history.,Owner scope: ALWAYS_TOP_LEVEL_FROM_INCEPTION.
+1,usc,1921-1922,1958-1959,pacific-coast,Pacific Coast Conference,conference,False,USC 1921-22 year summary already reports a conference record; Pac-12 history records USC admission in 1922.,"Basketball season 1921-22 is represented as USC's first PCC season, consistent with USC year-by-year conference record."
+2,usc,1959-1960,1967-1968,aawu,Athletic Association of Western Universities,conference,False,Pac-12 institutional conference history.,USC was an original AAWU member when the PCC dissolved in 1959.
+3,usc,1968-1969,1977-1978,pac-8,Pacific-8 Conference,conference,False,Pac-12 institutional conference history.,AAWU adopted Pacific-8 name in 1968.
+4,usc,1978-1979,2010-2011,pac-10,Pacific-10 Conference,conference,False,Pac-12 institutional conference history.,"Arizona and Arizona State joined July 1, 1978; league became Pac-10."
+5,usc,2011-2012,2023-2024,pac-12,Pac-12,conference,False,Pac-12 institutional history and USC season records.,Workbook Pac-12/Pac-10 labels do not control this independently verified chronology.
+6,usc,2024-2025,,big-ten,Big Ten,conference,True,USC Athletics identifies 2024-25 as the Trojans' inaugural Big Ten season.,Ongoing membership through completed 2025-26.

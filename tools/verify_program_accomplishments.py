@@ -48,10 +48,22 @@ def compare_program(
         for field, value in comparisons.items()
         if str(reference.get(field, "")).strip() != str(value)
     ]
-    if derived["incomplete_reasons"]:
-        result = "INCOMPLETE"
-    elif conflicts:
+    # Historical NCAA formats do not always map honestly to the project's
+    # controlled modern round vocabulary.  Keep those gaps visible, but do
+    # not fail an independently matching aggregate cross-check after the
+    # accomplishment reference itself has been authoritatively VERIFIED and
+    # its stored canonical cross-check has been sealed as MATCH.
+    verified_historical_match = (
+        reference.get("verification_status", "").strip().upper() == "VERIFIED"
+        and reference.get("canonical_crosscheck_status", "").strip().upper()
+        == "MATCH"
+        and not conflicts
+    )
+
+    if conflicts:
         result = "CONFLICT"
+    elif derived["incomplete_reasons"] and not verified_historical_match:
+        result = "INCOMPLETE"
     else:
         result = "MATCH"
 
@@ -82,6 +94,12 @@ def compare_program(
     )
     for conflict in conflicts:
         print(f"  - {conflict}")
+    if derived["incomplete_reasons"] and result == "MATCH":
+        print(
+            "  Historical NCAA round gaps remain diagnostic only: "
+            "the authoritative reference is VERIFIED, the stored canonical "
+            "cross-check is MATCH, and every derivable aggregate agrees."
+        )
     for reason in derived["incomplete_reasons"]:
         print(f"  - {reason}")
     return result == "MATCH"

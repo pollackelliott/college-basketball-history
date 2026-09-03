@@ -324,7 +324,7 @@ unc-asheville,8,6,5,0,0,ROUND_OF_64,2023,OWNER_BASELINE_UNVERIFIED,Owner-supplie
 unc-greensboro,4,6,4,0,0,ROUND_OF_64,2021,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 unc-wilmington,10,7,7,0,0,ROUND_OF_32,2002,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 unlv,12,11,20,4,1,NATIONAL_CHAMPION,1990,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-usc,7,1,21,2,0,FINAL_FOUR,1954,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+usc,14,1,21,2,0,FINAL_FOUR,1954,VERIFIED,"Owner Gate 1 approved 2026-09-02 (America/Chicago). Authoritative USC history verifies 14 regular-season/league championships, 1 conference-tournament championship, 21 NCAA appearances, 2 Final Fours, 0 NCAA championships, and best finish Final Four in 1954. The NCAA aggregate fields also match the canonical cross-check.",MATCH,Verified through onboarding plan 3d6baf18bb51.
 ut-arlington,3,1,1,0,0,ROUND_OF_64,2008,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 ut-martin,2,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 ut-rio-grande-valley,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

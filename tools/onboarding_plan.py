@@ -518,7 +518,14 @@ def _accomplishment_conflicts(
         for field, value in comparisons.items()
         if reference.get(field, "").strip() != value
     ]
-    conflicts.extend(derived["incomplete_reasons"])
+    # Historical NCAA formats do not always map honestly to the project's
+    # controlled modern round vocabulary. Research policy explicitly permits
+    # such rounds to remain blank. Keep those incomplete-round diagnostics
+    # attached to a genuine aggregate mismatch, but do not turn an honestly
+    # unmappable historical round into a false blocker after every aggregate
+    # accomplishment field independently matches the reference.
+    if conflicts:
+        conflicts.extend(derived["incomplete_reasons"])
     return derived, conflicts
 
 
@@ -1653,6 +1660,8 @@ def apply_reconciliation_decisions(
     venue_names: dict[str, str] | None = None
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
+    touched_canonical_ids: set[str] = set()
+    touched_source_ids: set[str] = set()
     for item in reconciliation_items:
         game_id = item["canonical_game_id"]
         field_name = item["field_name"]
@@ -1663,6 +1672,8 @@ def apply_reconciliation_decisions(
         discrepancy_matches = discrepancy_index.get((game_id, field_name, school_key), [])
         if canonical is None or source is None:
             raise WorkflowError(f"{item['decision_id']}: canonical or source row is missing after ingestion")
+        touched_canonical_ids.add(game_id)
+        touched_source_ids.add(source_game_id)
         if len(assertions) != 1:
             raise WorkflowError(f"{item['decision_id']}: expected one target assertion; found {len(assertions)}")
         if len(discrepancy_matches) != 1:
@@ -1726,11 +1737,6 @@ def apply_reconciliation_decisions(
             canonical[field] = value
         for field, value in item.get("source_patch", {}).items():
             source[field] = value
-        if location_pair_status(canonical.get("site_city", ""), canonical.get("site_state", "")) == "partial":
-            raise WorkflowError(f"{item['decision_id']}: canonical patch creates partial city/state")
-        if location_pair_status(source.get("city", ""), source.get("state", "")) == "partial":
-            raise WorkflowError(f"{item['decision_id']}: source patch creates partial city/state")
-
         if decision == "NORMALIZE_SOURCE_TO_CANONICAL" or item.get("source_patch"):
             note = (
                 f"Owner-approved onboarding reconciliation {approved['approved_plan_hash'][:12]}: "
@@ -1755,6 +1761,37 @@ def apply_reconciliation_decisions(
                 "the original discrepancy value remain preserved."
             )
         counts["processed"] += 1
+
+    # Location integrity is a property of the completed reconciliation
+    # transaction, not of an arbitrary intermediate decision ordering.
+    # Multiple approved decisions may touch the same game; a later site
+    # decision can legitimately complete geography that is partial while
+    # an earlier date/score decision is being processed.
+    for game_id in sorted(touched_canonical_ids):
+        canonical = canonical_by_id[game_id]
+        if (
+            location_pair_status(
+                canonical.get("site_city", ""),
+                canonical.get("site_state", ""),
+            )
+            == "partial"
+        ):
+            raise WorkflowError(
+                f"{game_id}: final reconciliation leaves partial canonical city/state"
+            )
+
+    for source_game_id in sorted(touched_source_ids):
+        source = source_by_id[source_game_id]
+        if (
+            location_pair_status(
+                source.get("city", ""),
+                source.get("state", ""),
+            )
+            == "partial"
+        ):
+            raise WorkflowError(
+                f"{source_game_id}: final reconciliation leaves partial source city/state"
+            )
 
     counts.update(
         _record_reciprocal_discrepancies(

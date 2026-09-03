@@ -7787,8 +7787,8 @@
       "state": "CA",
       "primary_hex": "#990000",
       "secondary_hex": "#FFC72C",
-      "history_start_season": null,
-      "conference_regular_season_championships": 7,
+      "history_start_season": "1906-1907",
+      "conference_regular_season_championships": 14,
       "conference_tournament_championships": 1,
       "ncaa_tournament_appearances": 21,
       "final_four_appearances": 2,
@@ -7796,7 +7796,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1954,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
