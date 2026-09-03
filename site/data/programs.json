@@ -5411,7 +5411,7 @@
       "state": "OR",
       "primary_hex": "#154733",
       "secondary_hex": "#FEE123",
-      "history_start_season": null,
+      "history_start_season": "1902-1903",
       "conference_regular_season_championships": 8,
       "conference_tournament_championships": 6,
       "ncaa_tournament_appearances": 19,
@@ -5420,7 +5420,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1939,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"

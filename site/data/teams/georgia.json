@@ -3705,7 +3705,7 @@
       "opponent_key": "oregon",
       "opponent_name": "Oregon",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
@@ -39927,7 +39927,7 @@
       "opponent_key": "oregon",
       "opponent_name": "Oregon",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 74,
       "opponent_score": 87,
       "score_known": true,
@@ -76802,7 +76802,7 @@
       "opponent_key": "oregon",
       "opponent_name": "Oregon",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 71,
       "opponent_score": 82,
       "score_known": true,
