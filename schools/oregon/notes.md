@@ -190,3 +190,14 @@ Lahaina Civic Center (VEN-000108) and Hofheinz Pavilion (VEN-000291). No global
 venue identity was created. Scores, results, game identities, dates, H/A/N,
 conference history, postseason classification, and raw source text were not
 changed by this bounded technical repair.
+
+## Preview correction — Florida A&M identity
+
+Owner visual QA on 2026-09-03 identified Florida A&M appearing in Oregon's
+non-D1 grouping. Oregon's package already classified Florida A&M as current D1,
+but five source games and three opponent-label rows used the noncanonical key
+`florida-a-and-m`. The permanent program registry identity is `florida-a-m`.
+
+This bounded correction remaps only that key. The five Oregon games, dates,
+scores, results, H/A/N classifications, raw source labels, and raw text are
+unchanged. Florida A&M remains `current_d1=Yes`.
