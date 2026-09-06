@@ -8291,8 +8291,8 @@
       "state": "WA",
       "primary_hex": "#4B2E83",
       "secondary_hex": "#B7A57A",
-      "history_start_season": null,
-      "conference_regular_season_championships": 15,
+      "history_start_season": "1895-1896",
+      "conference_regular_season_championships": 24,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 17,
       "final_four_appearances": 1,
@@ -8300,7 +8300,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1953,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"

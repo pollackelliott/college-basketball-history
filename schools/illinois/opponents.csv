@@ -324,7 +324,7 @@ illinois,Waco Y.M.C.A,waco-y-m-c-a,Waco Y.M.C.A,No,1,1907-1908,1907-1908,resolve
 illinois,Wake Forest,wake-forest,Wake Forest,Yes,3,1998-1999,2017-2018,resolved,Inherited Missouri/current-registry identity,,
 illinois,Washington,washington,Washington,Yes,7,1927-1928,2024-2025,resolved,Inherited Missouri/current-registry identity,,
 illinois,Washington State,washington-state,Washington State,Yes,6,1947-1948,1977-1978,resolved,Inherited Missouri/current-registry identity,,
-illinois,Washington University,washington,Washington,Yes,13,1907-1908,1964-1965,resolved,Inherited Missouri/current-registry identity,,
+illinois,Washington University,washington-university-of-st-louis,Washington University of St. Louis,No,13,1907-1908,1964-1965,resolved,implementation_identity_correction,,"Washington implementation adversarial review proved this source label identifies Washington University in St. Louis, not the University of Washington Huskies; historical non-D1 identity corrected without altering literal source labels."
 illinois,Weber State,weber-state,Weber State,Yes,1,2007-2008,2007-2008,resolved,Inherited Missouri/current-registry identity,,
 illinois,Wesleyan,illinois-wesleyan,Illinois Wesleyan,No,1,1912-1913,1912-1913,resolved,User-confirmed historical/non-D1 identity,,
 illinois,West Texas State,west-texas-state,West Texas State,No,1,1983-1984,1983-1984,resolved,Inherited Missouri/current-registry identity,,

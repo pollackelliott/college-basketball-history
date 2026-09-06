@@ -5687,22 +5687,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "washington",
-      "opponent_name": "Washington",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-ten",
-        "conference_name": "Big Ten"
-      },
-      "first_season": "1948-1949",
-      "last_season": "1949-1950",
-      "games": 2,
-      "wins": 1,
-      "losses": 1,
-      "ties": 0
-    },
-    {
       "opponent_key": "washington-and-lee",
       "opponent_name": "Washington & Lee",
       "current_d1": false,
@@ -5729,6 +5713,19 @@
       "games": 1,
       "wins": 1,
       "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "washington-university-of-st-louis",
+      "opponent_name": "Washington University of St. Louis",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1948-1949",
+      "last_season": "1949-1950",
+      "games": 2,
+      "wins": 1,
+      "losses": 1,
       "ties": 0
     },
     {
@@ -24870,9 +24867,9 @@
       "season_label": "1948-1949",
       "game_date": "1949-01-03",
       "date_precision": "EXACT",
-      "opponent_key": "washington",
-      "opponent_name": "Washington",
-      "opponent_current_d1": true,
+      "opponent_key": "washington-university-of-st-louis",
+      "opponent_name": "Washington University of St. Louis",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 47,
       "opponent_score": 43,
@@ -25495,9 +25492,9 @@
       "season_label": "1949-1950",
       "game_date": "1950-01-02",
       "date_precision": "EXACT",
-      "opponent_key": "washington",
-      "opponent_name": "Washington",
-      "opponent_current_d1": true,
+      "opponent_key": "washington-university-of-st-louis",
+      "opponent_name": "Washington University of St. Louis",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 53,
       "opponent_score": 55,
