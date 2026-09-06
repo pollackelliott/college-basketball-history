@@ -334,7 +334,7 @@
 332,vanderbilt,Wabash,wabash,Wabash,No,3,1907-1908,1924-1925,RESOLVED,Inherited established project identity,,
 333,vanderbilt,Wake Forest,wake-forest,Wake Forest,Yes,11,1965-1966,2025-2026,RESOLVED,Inherited established project identity,,
 334,vanderbilt,Washington & Lee,washington-and-lee,Washington & Lee,No,3,1916-1917,1954-1955,RESOLVED,Conservative historical/non-current identity,,
-335,vanderbilt,Washington (Mo.),washington,Washington,Yes,2,1948-1949,1949-1950,RESOLVED,Established project alias normalization,,
+335,vanderbilt,Washington (Mo.),washington-university-of-st-louis,Washington University of St. Louis,No,2,1948-1949,1949-1950,RESOLVED,implementation_identity_correction,,"Washington implementation adversarial review proved this source label identifies Washington University in St. Louis, not the University of Washington Huskies; historical non-D1 identity corrected without altering literal source labels."
 336,vanderbilt,Washington State,washington-state,Washington State,Yes,1,2006-2007,2006-2007,RESOLVED,Inherited established project identity,,
 337,vanderbilt,West Virginia,west-virginia,West Virginia,Yes,1,2010-2011,2010-2011,RESOLVED,Inherited established project identity,,
 338,vanderbilt,Western Carolina,western-carolina,Western Carolina,Yes,4,1982-1983,2023-2024,RESOLVED,Inherited established project identity,,

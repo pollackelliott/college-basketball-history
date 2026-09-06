@@ -5873,7 +5873,7 @@ CBBG-0005871,1906-1907,1907-02-16,EXACT,illinois,purdue,18,45,purdue,0,TEAM_B_HO
 CBBG-0005872,1906-1907,1907-02-23,EXACT,chicago,illinois,35,20,chicago,0,TEAM_B_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0005873,1906-1907,1907-03-01,EXACT,illinois,minnesota,29,36,minnesota,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0005874,1907-1908,1907-12-19,EXACT,decatur-y-m-c-a,illinois,28,33,illinois,0,TEAM_A_HOME,decatur-y-m-c-a,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0005875,1907-1908,1907-12-20,EXACT,illinois,washington,36,25,illinois,0,TEAM_B_HOME,washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0005875,1907-1908,1907-12-20,EXACT,illinois,washington-university-of-st-louis,36,25,illinois,0,TEAM_B_HOME,washington-university-of-st-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0005876,1907-1908,1907-12-21,EXACT,cairo-athletic-club,illinois,14,92,illinois,0,TEAM_A_HOME,cairo-athletic-club,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0005877,1907-1908,1907-12-23,EXACT,illinois,memphis-y-m-c-a,56,8,illinois,0,TEAM_B_HOME,memphis-y-m-c-a,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0005878,1907-1908,1907-12-25,EXACT,ft-worth-y-m-c-a,illinois,25,41,illinois,0,TEAM_A_HOME,ft-worth-y-m-c-a,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6104,7 +6104,7 @@ CBBG-0006102,1921-1922,1922-02-25,EXACT,illinois,michigan,16,42,michigan,0,TEAM_
 CBBG-0006103,1921-1922,1922-02-27,EXACT,illinois,wisconsin,37,35,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006104,1921-1922,1922-03-03,EXACT,chicago,illinois,26,25,chicago,0,TEAM_B_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006105,1921-1922,1922-03-07,EXACT,illinois,purdue,31,39,purdue,0,TEAM_B_HOME,purdue,purdue-memorial-gymnasium,VEN-000264,West Lafayette,IN,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=purdue/PURRAW-00306;venue_key=purdue-memorial-gymnasium;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
-CBBG-0006106,1922-1923,1922-12-16,EXACT,illinois,washington,29,14,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006106,1922-1923,1922-12-16,EXACT,illinois,washington-university-of-st-louis,29,14,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006107,1922-1923,1922-12-21,EXACT,illinois,notre-dame,41,38,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006108,1922-1923,1922-12-02,EXACT,butler,illinois,29,25,butler,0,TEAM_B_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006109,1922-1923,1923-01-08,EXACT,illinois,ohio-state,36,31,illinois,0,TEAM_B_HOME,ohio-state,ohio-state-coliseum,VEN-000286,Columbus,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ohio-state/OSURAW-00348;venue_key=ohio-state-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
@@ -6120,7 +6120,7 @@ CBBG-0006118,1922-1923,1923-02-24,EXACT,chicago,illinois,24,20,chicago,0,TEAM_A_
 CBBG-0006119,1922-1923,1923-02-26,EXACT,illinois,michigan,20,27,michigan,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006120,1922-1923,1923-03-05,EXACT,illinois,ohio-state,37,21,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006121,1923-1924,1923-12-12,EXACT,depauw,illinois,29,28,depauw,0,TEAM_B_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006122,1923-1924,1923-12-15,EXACT,illinois,washington,15,17,washington,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006122,1923-1924,1923-12-15,EXACT,illinois,washington-university-of-st-louis,15,17,washington-university-of-st-louis,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006123,1923-1924,1923-12-21,EXACT,illinois,iowa-state,16,12,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006124,1923-1924,1924-01-02,EXACT,illinois,notre-dame,29,21,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006125,1923-1924,1924-01-05,EXACT,illinois,minnesota,20,36,minnesota,0,TEAM_B_HOME,minnesota,university-armory,VEN-000219,Minneapolis,MN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=minnesota/MINRAW-00384;venue_key=university-armory;site_type=TEAM_B_HOME;fields=venue_key]
@@ -6137,7 +6137,7 @@ CBBG-0006135,1923-1924,1924-03-04,EXACT,illinois,northwestern,36,35,illinois,3,T
 CBBG-0006136,1923-1924,1924-03-08,EXACT,illinois,michigan,23,20,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006137,1923-1924,1924-03-10,EXACT,illinois,minnesota,31,19,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006138,1924-1925,1924-12-13,EXACT,depauw,illinois,23,27,illinois,0,TEAM_B_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006139,1924-1925,1924-12-19,EXACT,illinois,washington,36,19,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006139,1924-1925,1924-12-19,EXACT,illinois,washington-university-of-st-louis,36,19,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006140,1924-1925,1924-12-30,EXACT,butler,illinois,24,22,butler,0,TEAM_A_HOME,butler,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006141,1924-1925,1925-01-05,EXACT,illinois,kentucky,36,26,illinois,0,TEAM_A_HOME,illinois,kenney-gym,VEN-000100,Champaign-Urbana,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006142,1924-1925,1925-01-10,EXACT,chicago,illinois,16,27,illinois,0,TEAM_A_HOME,chicago,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6207,7 +6207,7 @@ CBBG-0006205,1927-1928,1928-03-09,EXACT,illinois,wisconsin,22,32,wisconsin,0,TEA
 CBBG-0006206,1928-1929,1928-12-10,EXACT,bradley,illinois,29,46,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006207,1928-1929,1928-12-15,EXACT,illinois,lombard,44,22,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006208,1928-1929,1928-12-20,EXACT,illinois,north-dakota,28,27,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006209,1928-1929,1928-12-31,EXACT,illinois,washington,38,29,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006209,1928-1929,1928-12-31,EXACT,illinois,washington-university-of-st-louis,38,29,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006210,1928-1929,1929-01-05,EXACT,illinois,purdue,24,33,purdue,0,TEAM_B_HOME,purdue,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006211,1928-1929,1929-01-08,EXACT,illinois,indiana,20,16,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006212,1928-1929,1929-01-12,EXACT,illinois,ohio-state,22,27,ohio-state,0,TEAM_B_HOME,ohio-state,ohio-state-coliseum,VEN-000286,Columbus,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ohio-state/OSURAW-00450;venue_key=ohio-state-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
@@ -6222,7 +6222,7 @@ CBBG-0006220,1928-1929,1929-02-23,EXACT,illinois,indiana,22,32,indiana,0,TEAM_B_
 CBBG-0006221,1928-1929,1929-03-02,EXACT,illinois,purdue,23,37,purdue,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006222,1928-1929,1929-03-04,EXACT,illinois,minnesota,32,27,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006223,1929-1930,1929-12-14,EXACT,bradley,illinois,30,22,bradley,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006224,1929-1930,1929-12-19,EXACT,illinois,washington,30,19,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006224,1929-1930,1929-12-19,EXACT,illinois,washington-university-of-st-louis,30,19,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006225,1929-1930,1929-12-23,EXACT,depauw,illinois,28,26,depauw,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006226,1929-1930,1930-01-02,EXACT,butler,illinois,28,18,butler,0,TEAM_A_HOME,butler,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006227,1929-1930,1930-01-06,EXACT,illinois,ohio-state,19,15,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6290,7 +6290,7 @@ CBBG-0006288,1932-1933,1933-02-27,EXACT,illinois,iowa,27,30,iowa,0,TEAM_B_HOME,i
 CBBG-0006289,1932-1933,1933-03-04,EXACT,illinois,iowa,44,16,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006290,1933-1934,1933-12-10,EXACT,illinois,saint-louis,21,22,saint-louis,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006291,1933-1934,1933-12-16,EXACT,illinois,illinois-wesleyan,37,19,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006292,1933-1934,1933-12-22,EXACT,illinois,washington,40,36,illinois,0,TEAM_B_HOME,washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006292,1933-1934,1933-12-22,EXACT,illinois,washington-university-of-st-louis,40,36,illinois,0,TEAM_B_HOME,washington-university-of-st-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006293,1933-1934,1933-12-29,EXACT,illinois,knox,21,18,illinois,0,TEAM_B_HOME,knox,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006294,1933-1934,1933-12-30,EXACT,augustana,illinois,26,37,illinois,0,TEAM_A_HOME,augustana,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006295,1933-1934,1934-01-07,EXACT,illinois,wisconsin,20,17,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6309,7 +6309,7 @@ CBBG-0006307,1933-1934,1934-03-05,EXACT,illinois,purdue,27,26,illinois,0,TEAM_A_
 CBBG-0006308,1934-1935,1934-12-10,EXACT,depaul,illinois,29,26,depaul,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006309,1934-1935,1934-12-10,EXACT,bradley,illinois,25,55,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006310,1934-1935,1934-12-14,EXACT,illinois,wabash,30,27,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006311,1934-1935,1934-12-21,EXACT,illinois,washington,35,18,illinois,0,TEAM_B_HOME,washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006311,1934-1935,1934-12-21,EXACT,illinois,washington-university-of-st-louis,35,18,illinois,0,TEAM_B_HOME,washington-university-of-st-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006312,1934-1935,1934-12-22,EXACT,illinois,saint-louis,33,22,illinois,0,TEAM_B_HOME,saint-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006313,1934-1935,1934-12-29,EXACT,butler,illinois,39,24,butler,0,TEAM_A_HOME,butler,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006314,1934-1935,1935-01-01,EXACT,illinois,wabash,35,28,illinois,0,TEAM_B_HOME,wabash,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6365,7 +6365,7 @@ CBBG-0006363,1936-1937,1937-02-27,EXACT,illinois,iowa,40,29,illinois,0,TEAM_B_HO
 CBBG-0006364,1936-1937,1937-03-06,EXACT,illinois,northwestern,32,26,illinois,0,TEAM_B_HOME,northwestern,old-patton-gymnasium,VEN-000156,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006365,1937-1938,1937-12-07,EXACT,carroll,illinois,25,48,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006366,1937-1938,1937-12-11,EXACT,augustana,illinois,27,43,illinois,0,TEAM_A_HOME,augustana,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006367,1937-1938,1937-12-15,EXACT,illinois,washington,57,24,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006367,1937-1938,1937-12-15,EXACT,illinois,washington-university-of-st-louis,57,24,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006368,1937-1938,1937-12-18,EXACT,illinois,st-john-s,60,45,illinois,0,TEAM_B_HOME,st-john-s,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006369,1937-1938,1937-12-20,EXACT,illinois,temple,38,51,temple,0,TEAM_B_HOME,temple,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006370,1937-1938,1937-12-28,EXACT,illinois,notre-dame,33,32,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6381,7 +6381,7 @@ CBBG-0006379,1937-1938,1938-02-19,EXACT,illinois,ohio-state,42,34,illinois,0,TEA
 CBBG-0006380,1937-1938,1938-02-21,EXACT,chicago,illinois,43,39,chicago,0,TEAM_A_HOME,chicago,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006381,1937-1938,1938-02-28,EXACT,illinois,michigan,36,32,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006382,1937-1938,1938-03-04,EXACT,illinois,indiana,35,45,indiana,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006383,1938-1939,1938-12-10,EXACT,illinois,washington,49,31,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006383,1938-1939,1938-12-10,EXACT,illinois,washington-university-of-st-louis,49,31,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006384,1938-1939,1938-12-17,EXACT,illinois,north-dakota,61,33,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006385,1938-1939,1938-12-21,EXACT,illinois,uconn,49,23,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006386,1938-1939,1938-12-27,EXACT,illinois,manhattan,60,41,illinois,0,TEAM_B_HOME,manhattan,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6745,7 +6745,7 @@ CBBG-0006743,1954-1955,1955-02-28,EXACT,illinois,michigan,81,75,illinois,0,TEAM_
 CBBG-0006744,1954-1955,1955-03-05,EXACT,illinois,northwestern,81,69,illinois,0,TEAM_B_HOME,northwestern,welsh-ryan-arena,VEN-000229,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006745,1955-1956,1955-12-06,EXACT,butler,illinois,75,107,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006746,1955-1956,1955-12-13,EXACT,illinois,notre-dame,103,93,illinois,0,TEAM_B_HOME,notre-dame,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006747,1955-1956,1955-12-17,EXACT,illinois,washington,75,74,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006747,1955-1956,1955-12-17,EXACT,illinois,washington-university-of-st-louis,75,74,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006748,1955-1956,1955-12-19,EXACT,depaul,illinois,79,97,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006749,1955-1956,1955-12-23,EXACT,illinois,oklahoma,82,58,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006750,1955-1956,1955-12-29,EXACT,drake,illinois,66,102,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6901,7 +6901,7 @@ CBBG-0006899,1961-1962,1962-03-03,EXACT,illinois,iowa,78,88,iowa,0,TEAM_A_HOME,i
 CBBG-0006900,1961-1962,1962-03-05,EXACT,illinois,indiana,92,104,indiana,0,TEAM_B_HOME,indiana,new-iu-fieldhouse,VEN-000256,Bloomington,IN,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=indiana/IURAW-01140;venue_key=new-iu-fieldhouse;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0006901,1961-1962,1962-03-10,EXACT,illinois,northwestern,73,69,illinois,0,TEAM_B_HOME,northwestern,welsh-ryan-arena,VEN-000229,Evanston,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006902,1962-1963,1962-11-30,EXACT,butler,illinois,49,66,illinois,0,TEAM_B_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006903,1962-1963,1962-12-06,EXACT,illinois,washington,99,55,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006903,1962-1963,1962-12-06,EXACT,illinois,washington-university-of-st-louis,99,55,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006904,1962-1963,1962-12-15,EXACT,illinois,iowa-state,76,73,illinois,0,TEAM_B_HOME,iowa-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006905,1962-1963,1962-12-17,EXACT,illinois,san-jose-state,90,64,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006906,1962-1963,1962-12-22,EXACT,illinois,oklahoma,93,90,illinois,0,TEAM_A_HOME,illinois,huff-hall,VEN-000086,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -6953,7 +6953,7 @@ CBBG-0006951,1963-1964,1964-03-09,EXACT,illinois,iowa,90,67,illinois,0,TEAM_A_HO
 CBBG-0006952,1964-1965,1964-12-04,EXACT,illinois,ucla,110,83,illinois,0,TEAM_A_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006953,1964-1965,1964-12-05,EXACT,illinois,saint-louis,64,79,saint-louis,0,TEAM_B_HOME,saint-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006954,1964-1965,1964-12-08,EXACT,bowling-green,illinois,62,100,illinois,0,TEAM_B_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0006955,1964-1965,1964-12-12,EXACT,illinois,washington,103,59,illinois,0,TEAM_A_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0006955,1964-1965,1964-12-12,EXACT,illinois,washington-university-of-st-louis,103,59,illinois,0,TEAM_A_HOME,illinois,state-farm-center,VEN-000196,Champaign,IL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0006956,1964-1965,1964-12-15,EXACT,illinois,wisconsin,70,56,illinois,0,TEAM_B_HOME,wisconsin,wisconsin-field-house,VEN-000232,Madison,WI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wisconsin/WISCRAW-01193;venue_key=wisconsin-field-house;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0006957,1964-1965,1964-12-18,EXACT,dayton,illinois,86,104,illinois,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0006958,1964-1965,1964-12-19,EXACT,illinois,kentucky,91,86,illinois,0,TEAM_B_HOME,kentucky,memorial-coliseum-kentucky,VEN-000129,Lexington,KY,REGULAR_SEASON,,,,PROVISIONAL,
@@ -23292,7 +23292,7 @@ CBBG-0023291,1948-1949,1948-12-10,EXACT,cumberland,vanderbilt,32,77,vanderbilt,0
 CBBG-0023292,1948-1949,1948-12-20,EXACT,lipscomb,vanderbilt,37,57,vanderbilt,0,TEAM_B_HOME,vanderbilt,old-gym,VEN-000155,Nashville,TN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=vanderbilt/VANRAW-00741;venue_key=old-gym;site_type=TEAM_B_HOME;fields=venue_key]
 CBBG-0023293,1948-1949,1948-12-29,EXACT,drake,vanderbilt,47,46,drake,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0023294,1948-1949,1948-12-30,EXACT,dartmouth,vanderbilt,64,52,dartmouth,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0023295,1948-1949,1949-01-03,EXACT,vanderbilt,washington,47,43,vanderbilt,0,TEAM_B_HOME,washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0023295,1948-1949,1949-01-03,EXACT,vanderbilt,washington-university-of-st-louis,47,43,vanderbilt,0,TEAM_B_HOME,washington-university-of-st-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0023296,1948-1949,1949-01-15,EXACT,ole-miss,vanderbilt,49,62,vanderbilt,0,TEAM_A_HOME,ole-miss,ole-miss-old-gym,VEN-000245,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-00635;venue_key=ole-miss-old-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0023297,1948-1949,1949-01-17,EXACT,mississippi-state,vanderbilt,29,35,vanderbilt,0,TEAM_A_HOME,mississippi-state,tin-gym,VEN-000252,Starkville,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=mississippi-state/MSURAW-00634;venue_key=tin-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0023298,1948-1949,1949-01-22,EXACT,auburn,vanderbilt,48,46,auburn,0,TEAM_A_HOME,auburn,auburn-sports-arena,VEN-000017,Auburn,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=auburn/AUBRAW-00592;venue_key=auburn-sports-arena;site_type=TEAM_A_HOME;fields=venue_key]
@@ -23313,7 +23313,7 @@ CBBG-0023312,1949-1950,1949-12-12,EXACT,temple,vanderbilt,45,49,vanderbilt,0,NEU
 CBBG-0023313,1949-1950,1949-12-27,EXACT,oklahoma-state,vanderbilt,62,61,oklahoma-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0023314,1949-1950,1949-12-28,EXACT,baylor,vanderbilt,61,53,baylor,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0023315,1949-1950,1949-12-29,EXACT,alabama,vanderbilt,44,53,vanderbilt,0,NEUTRAL,,,,Oklahoma City,OK,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0023316,1949-1950,1950-01-02,EXACT,vanderbilt,washington,53,55,washington,0,TEAM_A_HOME,vanderbilt,old-gym,VEN-000155,Nashville,TN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=vanderbilt/VANRAW-00769;venue_key=old-gym;site_type=TEAM_A_HOME;fields=venue_key]
+CBBG-0023316,1949-1950,1950-01-02,EXACT,vanderbilt,washington-university-of-st-louis,53,55,washington-university-of-st-louis,0,TEAM_A_HOME,vanderbilt,old-gym,VEN-000155,Nashville,TN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=vanderbilt/VANRAW-00769;venue_key=old-gym;site_type=TEAM_A_HOME;fields=venue_key] [OPPONENT_IDENTITY_CORRECTION University of Washington -> Washington University of St. Louis; source evidence explicitly says Washington University / Washington (Mo.); 2026-09-06 Washington onboarding adversarial review]
 CBBG-0023317,1949-1950,1950-01-14,EXACT,mississippi-state,vanderbilt,50,62,vanderbilt,0,TEAM_A_HOME,mississippi-state,tin-gym,VEN-000252,Starkville,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=mississippi-state/MSURAW-00650;venue_key=tin-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0023318,1949-1950,1950-01-16,EXACT,ole-miss,vanderbilt,37,44,vanderbilt,0,TEAM_A_HOME,ole-miss,ole-miss-old-gym,VEN-000245,Oxford,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ole-miss/OMRAW-00663;venue_key=ole-miss-old-gym;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0023319,1949-1950,1950-01-21,EXACT,auburn,vanderbilt,47,58,vanderbilt,0,TEAM_A_HOME,auburn,auburn-sports-arena,VEN-000017,Auburn,AL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=auburn/AUBRAW-00613;venue_key=auburn-sports-arena;site_type=TEAM_A_HOME;fields=venue_key]
@@ -67785,7 +67785,7 @@ CBBG-0067842,1924-1925,1925-02-17,EXACT,arizona,usc,18,25,usc,0,TEAM_B_HOME,usc,
 CBBG-0067843,1924-1925,,SEASON,arizona,usc,10,25,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0067844,1924-1925,,SEASON,usc,utah-state,23,31,utah-state,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0067845,1924-1925,,SEASON,usc,utah-state,34,20,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0067846,1924-1925,,SEASON,usc,washington,23,40,washington,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0067846,1924-1925,,SEASON,usc,washington,23,40,washington,0,UNKNOWN,,,,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=washington/washington-0310] Washington institutional ledger establishes the 1925-02-26 USC game as a Washington home game in Seattle; exact physical home building remains deliberately unresolved.
 CBBG-0067847,1924-1925,,SEASON,multnomah-ac,usc,38,37,multnomah-ac,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0067848,1924-1925,,SEASON,oregon-state,usc,30,22,oregon-state,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0067849,1924-1925,,SEASON,usc,willamette,36,33,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -71235,7 +71235,7 @@ CBBG-0071292,1945-1946,1945-11-23,EXACT,klamath-falls-marines,oregon,37,46,orego
 CBBG-0071293,1945-1946,1945-12-03,EXACT,klamath-falls-marines,oregon,44,70,oregon,0,TEAM_B_HOME,oregon,mcarthur-court,VEN-000126,Eugene,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon/ORERAW-00859;venue_key=mcarthur-court;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0071294,1945-1946,1945-12-08,EXACT,oregon,portland,40,30,oregon,0,TEAM_B_HOME,portland,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0071295,1945-1946,1945-12-12,EXACT,indiana-state,oregon,66,48,indiana-state,0,NEUTRAL,,,,Chicago,IL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0071296,1945-1946,1945-12-13,EXACT,oregon,washington,41,44,washington,0,NEUTRAL,,,,Chicago,IL,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0071296,1945-1946,1945-12-13,EXACT,oregon,washington,41,44,washington,0,NEUTRAL,,,,Chicago,IL,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_RECONCILIATION DePaul Invitational 1945; neutral Chicago classification retained; exact building unresolved]
 CBBG-0071297,1945-1946,1945-12-19,EXACT,long-island-university,oregon,50,60,oregon,0,TEAM_A_HOME,long-island-university,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0071298,1945-1946,1945-12-22,EXACT,bowling-green,oregon,78,36,bowling-green,0,TEAM_A_HOME,bowling-green,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0071299,1945-1946,1945-12-26,EXACT,northwest-insulators,oregon,55,51,northwest-insulators,0,TEAM_A_HOME,northwest-insulators,,,,,REGULAR_SEASON,,,,PROVISIONAL,
