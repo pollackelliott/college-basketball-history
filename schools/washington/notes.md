@@ -48,3 +48,15 @@ Washington's 2025-26 record book uses `Northwest Intercollegiate` in the year-by
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=602b344e59ea5aeadee9439a36a3cb2a3acb2813` from `research_base_sha=6dc3910f68914c139097e9352481cb67a19cb2df`. The historical Northwest Intercollegiate Athletic Association registry identity and safe display label were owner-approved on 2026-09-05. The authoritative final venue-ID mapping is recorded in `.onboarding/washington/integration-freeze.json`. Status: **INTEGRATION_FROZEN**.
+
+## Pre-Gate implementation cleanup
+
+After the initial `INTEGRATION_FROZEN` Phase 0 checkpoint, the permanent onboarding preflight exposed deterministic source-normalization defects and stale reference metadata. These were repaired before Owner Gate 1 rather than converted into owner decisions.
+
+This checkpoint does not resolve genuine source/canonical disagreements. Those remain available to the regenerated sealed review.
+
+Post-Phase-0 venue enrichment adds two deterministic relationships beyond the initial integration-freeze venue map:
+- existing `VEN-000306` Matthew Knight Arena for the corrected 2026-03-07 Oregon road game;
+- new `VEN-000450` Mercedes-Benz Arena (Shanghai, CN) for the 2015-11-14 Texas neutral game.
+
+The initial ignored integration-freeze manifest remains provenance for the Phase 0 rebase; this tracked pre-Gate section records the later deterministic enrichment.

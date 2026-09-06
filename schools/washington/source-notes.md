@@ -23,3 +23,23 @@ The compatibility rebase additionally used current protected-main shared-referen
 - Kia Forum official venue information confirms the Forum physical venue is in Inglewood, California.
 
 These checks do not reopen Washington H/A/N, game-universe, opponent, score, or postseason research.
+
+## Implementation pre-Gate evidence repairs
+
+Before Owner Gate 1, implementation challenged the generated review rather than treating prior canonical values as presumptively correct.
+
+Deterministic source-normalization repairs:
+- Seventeen loss rows with winner-first score typography were restored to Washington-first team/opponent score orientation; raw source text remains unchanged.
+- Contemporaneous Washington/Auburn records date the 2018 road game at Auburn to Nov. 9, 2018.
+- Washington/Arizona schedule evidence establishes March 7, 2020 as a regular-season road game at McKale Center; tournament metadata belonged to the following Pac-12 Tournament game.
+- Washington/Oregon official 2025-26 records establish March 7, 2026 as a regular-season road game at Matthew Knight Arena.
+- Washington/USC official 2026 Big Ten Tournament evidence establishes the March 11 Washington win as an overtime game.
+- Washington and Texas contemporaneous 2015 China Game box scores identify Mercedes-Benz Arena in Shanghai and date the actual local game Nov. 14, 2015; Texas explicitly distinguishes Nov. 13 as the United States broadcast-calendar date.
+- Washington's 1948-49 ledger and Oregon's reciprocal record place the Dec. 27-29 PCC event in San Francisco rather than at Hec Edmundson Pavilion. The exact physical building remains researched unresolved.
+
+Identity-only overrides use the repository-supported `MATCH_SOURCE_ASSERTION` mechanism to connect securely identified contests to existing reciprocal evidence without hard-coding canonical game IDs into Washington's source package. Remaining field disagreements continue through the sealed discrepancy workflow.
+
+Program-accomplishment verification:
+- Washington Athletics identifies the 2012 regular-season crown as the program's 23rd conference title since 1911.
+- Washington won another outright regular-season conference championship in 2019, yielding 24 through the accepted history boundary.
+- Washington official historical notes support 17 NCAA appearances, one Final Four (1953), zero NCAA championships, and three conference-tournament championships.
