@@ -218,7 +218,7 @@ washington,Oregon State,oregon-state,Oregon State,TRUE,313,1903-1904,2023-2024,R
 washington,Pacific,pacific,Pacific,TRUE,4,1993-1994,2014-2015,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Paciﬁc,pacific,Pacific,TRUE,4,1971-1972,1988-1989,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Paciﬁc Lutheran,pacific-lutheran,Pacific Lutheran,FALSE,3,1940-1941,1947-1948,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,Paciﬁc U. (Ore.),pacific-oregon,Pacific University (Oregon),FALSE,1,1989-1990,1989-1990,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
+washington,Paciﬁc U. (Ore.),pacific-oregon,Pacific (Oregon),FALSE,1,1989-1990,1989-1990,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02. Implementation normalization: pacific-oregon historical opponent display name aligned from 'Pacific University (Oregon)' to the existing project-wide canonical display 'Pacific (Oregon)'; opponent identity/key unchanged.
 washington,Pasco Flyers/AAU,pasco-flyers-aau,Pasco Flyers/AAU,FALSE,1,1944-1945,1944-1945,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Penn,penn,Penn,TRUE,1,2015-2016,2015-2016,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Penn State,penn-state,Penn State,TRUE,2,2024-2025,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
