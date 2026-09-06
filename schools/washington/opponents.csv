@@ -8,11 +8,11 @@ washington,Alaska–Anchorage,alaska-anchorage,Alaska Anchorage,FALSE,1,1982-198
 washington,Alaska Fairbanks,alaska-fairbanks,Alaska Fairbanks,FALSE,1,2001-2002,2001-2002,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Alaska-Fairbanks,alaska-fairbanks,Alaska Fairbanks,FALSE,1,1991-1992,1991-1992,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Alaska–Fairbanks,alaska-fairbanks,Alaska Fairbanks,FALSE,2,1970-1971,1970-1971,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,Albany,albany,Albany,TRUE,1,2012-2013,2012-2013,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Albany,ualbany,Albany,Yes,1,2012-2013,2012-2013,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Alcorn State,alcorn-state,Alcorn State,TRUE,1,2024-2025,2024-2025,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Alpine Dairy/AAU,alpine-dairy-aau,Alpine Dairy/AAU,FALSE,7,1937-1938,1949-1950,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Alt Heidelburg/AAU,alt-heidelburg-aau,Alt Heidelburg/AAU,FALSE,1,1937-1938,1937-1938,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,American,american,American,TRUE,1,2005-2006,2005-2006,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,American,american-university,American,Yes,1,2005-2006,2005-2006,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,American U.-Puerto Rico,american-u-puerto-rico,American U.-Puerto Rico,FALSE,1,2000-2001,2000-2001,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Arizona,arizona,Arizona,TRUE,92,1964-1965,2023-2024,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Arizona St.,arizona-state,Arizona State,TRUE,2,1989-1990,2011-2012,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
@@ -65,7 +65,7 @@ washington,Cleveland State,cleveland-state,Cleveland State,TRUE,1,2008-2009,2008
 washington,Colorado,colorado,Colorado,TRUE,39,1953-1954,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Colorado State,colorado-state,Colorado State,TRUE,5,1962-1963,2024-2025,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Columbia,columbia,Columbia,TRUE,3,1949-1950,2003-2004,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
-washington,Connecticut,connecticut,Connecticut,TRUE,5,1997-1998,2013-2014,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Connecticut,uconn,Connecticut,Yes,5,1997-1998,2013-2014,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Cornell,cornell,Cornell,TRUE,1,2005-2006,2005-2006,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Dallas College,dallas-college,Dallas College,FALSE,2,1903-1904,1911-1912,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Dan’s Market/AAU,dan-s-market-aau,Dan’s Market/AAU,FALSE,1,1937-1938,1937-1938,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
@@ -136,7 +136,7 @@ washington,Kennesaw State,kennesaw-state,Kennesaw State,TRUE,1,2017-2018,2017-20
 washington,Kent AC,kent-ac,Kent AC,FALSE,1,1909-1910,1909-1910,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Kentucky,kentucky,Kentucky,TRUE,2,1984-1985,2010-2011,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Knights of Columbus,knights-of-columbus,Knights of Columbus,FALSE,2,1935-1936,1935-1936,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,Long Island U.,liu,LIU,TRUE,1,1970-1971,1970-1971,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Long Island U.,long-island-university,LIU,Yes,1,1970-1971,1970-1971,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,LSU,lsu,LSU,TRUE,3,1952-1953,2006-2007,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Louisiana State,lsu,LSU,TRUE,2,1985-1986,2007-2008,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,La Salle,la-salle,La Salle,TRUE,1,1976-1977,1976-1977,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
@@ -149,7 +149,7 @@ washington,Lohrer’s/AAU,lohrer-s-aau,Lohrer’s/AAU,FALSE,1,1942-1943,1942-194
 washington,Long Beach State,long-beach-state,Long Beach State,TRUE,6,2007-2008,2016-2017,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,SW Louisiana,louisiana,Louisiana,TRUE,1,1986-1987,1986-1987,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Louisiana Tech.,louisiana-tech,Louisiana Tech.,TRUE,1,1986-1987,1986-1987,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
-washington,NE Louisiana,louisiana-monroe,Louisiana-Monroe,TRUE,1,1987-1988,1987-1988,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,NE Louisiana,ul-monroe,Louisiana-Monroe,Yes,1,1987-1988,1987-1988,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Louisville,louisville,Louisville,TRUE,3,1982-1983,2004-2005,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Loyola-Maryland,loyola-maryland,Loyola Maryland,TRUE,1,2012-2013,2012-2013,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Loyola Marymount,loyola-marymount,Loyola Marymount,TRUE,4,1996-1997,2017-2018,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
@@ -162,12 +162,12 @@ washington,Manhattan,manhattan,Manhattan,TRUE,1,1974-1975,1974-1975,RESOLVED,res
 washington,Marquette,marquette,Marquette,TRUE,4,1965-1966,2011-2012,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Maryland,maryland,Maryland,TRUE,2,2024-2025,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Matheny–Bacon,matheny-bacon,Matheny–Bacon,FALSE,1,1946-1947,1946-1947,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,McNeese State,mcneese-state,McNeese State,TRUE,2,1985-1986,2010-2011,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,McNeese State,mcneese,McNeese,Yes,2,1985-1986,2010-2011,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,McPherson/AAU,mcpherson-aau,McPherson/AAU,FALSE,1,1935-1936,1935-1936,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Meiji Univ.–Japan,meiji-university-japan,Meiji University (Japan),FALSE,2,1932-1933,1932-1933,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Memphis State,memphis,Memphis,TRUE,2,1987-1988,1988-1989,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Miami (Fla.),miami,Miami,TRUE,3,1967-1968,1989-1990,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
-washington,Miami (Ohio),miami-ohio,Miami (Ohio),TRUE,2,1989-1990,1998-1999,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Miami (Ohio),miami-oh,Miami (OH),Yes,2,1989-1990,1998-1999,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Michigan,michigan,Michigan,TRUE,8,1936-1937,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Michigan State,michigan-state,Michigan State,TRUE,8,1941-1942,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Midwestern State,midwestern-state,Midwestern State,FALSE,1,1982-1983,1982-1983,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
@@ -179,7 +179,7 @@ washington,SW Missouri State,missouri-state,Missouri State,TRUE,1,1990-1991,1990
 washington,Montana,montana,Montana,TRUE,56,1923-1924,2020-2021,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Montana State,montana-state,Montana State,TRUE,15,1926-1927,2023-2024,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Morgan State,morgan-state,Morgan State,TRUE,2,2005-2006,2008-2009,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
-washington,Mount St. Mary’s,mount-st-marys,Mount St. Mary’s,TRUE,2,2015-2016,2019-2020,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Mount St. Mary’s,mount-st-mary-s,Mount St. Mary's,Yes,2,2015-2016,2019-2020,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Mt Angel College,mt-angel-college,Mt Angel College,FALSE,1,1909-1910,1909-1910,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Multnomah AC,multnomah-ac,Multnomah AC,FALSE,5,1909-1910,1934-1935,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,North Carolina State,nc-state,NC State,TRUE,2,2003-2004,2004-2005,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
@@ -192,7 +192,7 @@ washington,Nevada,nevada,Nevada,TRUE,14,1983-1984,2025-2026,RESOLVED,research_no
 washington,New Mexico,new-mexico,New Mexico,TRUE,6,1983-1984,2009-2010,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,New Mexico State,new-mexico-state,New Mexico State,TRUE,4,1998-1999,2001-2002,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,New York Univ.,new-york-university,New York University,FALSE,1,1941-1942,1941-1942,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,Nicholls State,nicholls-state,Nicholls State,TRUE,1,2006-2007,2006-2007,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Nicholls State,nicholls,Nicholls,Yes,1,2006-2007,2006-2007,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Nordstrom’s/AAU,nordstrom-s-aau,Nordstrom’s/AAU,FALSE,2,1931-1932,1932-1933,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,North Carolina,north-carolina,North Carolina,TRUE,3,1972-1973,2018-2019,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,North Dakota,north-dakota,North Dakota,TRUE,2,1928-1929,1928-1929,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
@@ -220,7 +220,7 @@ washington,Paciﬁc,pacific,Pacific,TRUE,4,1971-1972,1988-1989,RESOLVED,research
 washington,Paciﬁc Lutheran,pacific-lutheran,Pacific Lutheran,FALSE,3,1940-1941,1947-1948,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
 washington,Paciﬁc U. (Ore.),pacific-oregon,Pacific (Oregon),FALSE,1,1989-1990,1989-1990,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02. Implementation normalization: pacific-oregon historical opponent display name aligned from 'Pacific University (Oregon)' to the existing project-wide canonical display 'Pacific (Oregon)'; opponent identity/key unchanged.
 washington,Pasco Flyers/AAU,pasco-flyers-aau,Pasco Flyers/AAU,FALSE,1,1944-1945,1944-1945,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.
-washington,Penn,penn,Penn,TRUE,1,2015-2016,2015-2016,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Penn,pennsylvania,Penn,Yes,1,2015-2016,2015-2016,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Penn State,penn-state,Penn State,TRUE,2,2024-2025,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Pennsylvania,pennsylvania,Pennsylvania,TRUE,2,1988-1989,1993-1994,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Pepperdine,pepperdine,Pepperdine,TRUE,1,2006-2007,2006-2007,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
@@ -275,7 +275,7 @@ washington,South Carolina State,south-carolina-state,South Carolina State,TRUE,2
 washington,South Dakota,south-dakota,South Dakota,TRUE,1,2019-2020,2019-2020,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,South Dakota St.,south-dakota-state,South Dakota State,TRUE,1,2011-2012,2011-2012,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,South Dakota State,south-dakota-state,South Dakota State,TRUE,1,2021-2022,2021-2022,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
-washington,Southeastern Louis.,southeastern-louisiana,Southeastern Louisiana,TRUE,1,1986-1987,1986-1987,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
+washington,Southeastern Louis.,se-louisiana,Southeastern Louisiana,Yes,1,1986-1987,1986-1987,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Southern,southern,Southern,TRUE,1,2025-2026,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Southern Utah,southern-utah,Southern Utah,TRUE,2,2006-2007,2025-2026,RESOLVED,research_normalization,,Historical/current program identity normalized during Washington research.
 washington,Spokane AC,spokane-ac,Spokane AC,FALSE,4,1904-1905,1924-1925,RESOLVED,research_normalization,,Owner NON_D1 sanity scan approved 2026-09-02.

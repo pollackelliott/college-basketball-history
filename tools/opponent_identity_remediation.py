@@ -88,7 +88,7 @@ def headers(path: Path) -> list[str]:
 
 
 def yes(value: str) -> bool:
-    return (value or "").strip().lower() == "yes"
+    return (value or "").strip().lower() in {"yes", "true", "1", "y"}
 
 
 def season_start(value: str) -> int | None:

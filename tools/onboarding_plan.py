@@ -227,6 +227,58 @@ def _season_is_valid(value: str) -> bool:
     return bool(match and int(match.group(2)) == int(match.group(1)) + 1)
 
 
+def _truthy_flag(value: str) -> bool:
+    return (value or "").strip().lower() in {"true", "yes", "1", "y"}
+
+
+def current_d1_opponent_key_errors(
+    programs: list[dict[str, str]],
+    opponents: list[dict[str, str]],
+) -> list[str]:
+    """Require package current-D1 metadata to agree with the global registry."""
+
+    registry = {
+        row.get("program_key", "").strip(): row
+        for row in programs
+        if row.get("program_key", "").strip()
+    }
+    current_d1 = {
+        key
+        for key, row in registry.items()
+        if _truthy_flag(row.get("current_d1", ""))
+    }
+
+    errors: list[str] = []
+
+    for line_number, row in enumerate(opponents, start=2):
+        key = row.get("canonical_opponent_key", "").strip()
+        stored_current = _truthy_flag(row.get("current_d1", ""))
+
+        if stored_current and key not in registry:
+            errors.append(
+                f"opponents.csv line {line_number}: current-D1 opponent "
+                f"key {key!r} is absent from programs.csv"
+            )
+            continue
+
+        if stored_current and key not in current_d1:
+            errors.append(
+                f"opponents.csv line {line_number}: opponent key {key!r} "
+                "is marked current D1 in the school package but is not "
+                "current D1 in programs.csv"
+            )
+            continue
+
+        if key in current_d1 and not stored_current:
+            errors.append(
+                f"opponents.csv line {line_number}: opponent key {key!r} "
+                "is current D1 in programs.csv but the school package "
+                "does not mark it current D1"
+            )
+
+    return errors
+
+
 def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     """Run the permanent equivalent of the former pasted package-QA snippet."""
 
@@ -392,6 +444,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
                 errors.append(f"{filename} line {line_number}: wrong source_program_key {value!r}")
 
     programs = read_csv(repo / "data/reference/programs.csv")
+    errors.extend(current_d1_opponent_key_errors(programs, opponents))
     target_programs = [row for row in programs if row.get("program_key") == school_key]
     if len(target_programs) != 1:
         errors.append("Target must have exactly one programs.csv row")
