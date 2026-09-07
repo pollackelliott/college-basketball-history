@@ -37,6 +37,7 @@ from program_history import (
     history_scope_errors,
     partition_source_rows,
 )
+from site_completeness import _row_gap_categories
 from venue_reference import load_global_venue_reference
 
 
@@ -1564,6 +1565,16 @@ def _sync_site_metadata_to_source(
     source["curated_venue_name"] = venue_names.get(canonical.get("venue_key", ""), "")
     source["city"] = canonical.get("site_city", "")
     source["state"] = canonical.get("site_state", "")
+
+    # Reconciliation may fully resolve a row that previously carried
+    # research-accounting metadata for a material site gap. Once the
+    # material gap is gone, retaining an unresolved marker is misleading
+    # and fails the permanent site-completeness contract.
+    if not _row_gap_categories(source):
+        if "site_research_status" in source:
+            source["site_research_status"] = ""
+        if "site_research_basis" in source:
+            source["site_research_basis"] = ""
 
 
 def _venue_maps(repo: Path, school_key: str) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
