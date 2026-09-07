@@ -1346,7 +1346,7 @@
     },
     {
       "opponent_key": "cal-state-la",
-      "opponent_name": "Cal State-LA",
+      "opponent_name": "Cal State LA",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -3910,7 +3910,7 @@
       "opponent_key": "oklahoma-state",
       "opponent_name": "Oklahoma State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -45271,7 +45271,7 @@
       "game_date": "1985-11-26",
       "date_precision": "EXACT",
       "opponent_key": "cal-state-la",
-      "opponent_name": "Cal State-LA",
+      "opponent_name": "Cal State LA",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 77,
@@ -75573,7 +75573,7 @@
       "opponent_key": "oklahoma-state",
       "opponent_name": "Oklahoma State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 81,
       "opponent_score": 86,
       "score_known": true,
