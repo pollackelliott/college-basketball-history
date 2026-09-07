@@ -22538,7 +22538,7 @@ CBBG-0022537,2021-2022,2022-03-19,EXACT,michigan,tennessee,76,68,michigan,0,NEUT
 CBBG-0022538,2022-2023,2022-11-07,EXACT,tennessee,tennessee-tech,75,43,tennessee,0,TEAM_A_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022539,2022-2023,2022-11-13,EXACT,colorado,tennessee,78,66,colorado,0,NEUTRAL,,,,Nashville,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022540,2022-2023,2022-11-16,EXACT,florida-gulf-coast,tennessee,50,81,tennessee,0,TEAM_B_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0022541,2022-2023,2022-11-23,EXACT,butler,tennessee,45,71,tennessee,0,NEUTRAL,,,,Paradise Island,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0022541,2022-2023,2022-11-23,EXACT,butler,tennessee,45,71,tennessee,0,NEUTRAL,,,,Nassau,BS,REGULAR_SEASON,,,,PROVISIONAL,[STAGE2_VENUE_GEOGRAPHY_NORMALIZATION source=butler/BUTRAW-02839 future_enriched_venue_id=VEN-000088 from=Paradise_Island/[blank] to=Nassau/BS basis=Butler_physical_venue_identity_plus_current_global_registry]
 CBBG-0022542,2022-2023,2022-11-24,EXACT,tennessee,usc,73,66,tennessee,1,NEUTRAL,,,,Paradise Island,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022543,2022-2023,2022-11-30,EXACT,mcneese,tennessee,40,76,tennessee,0,TEAM_B_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022544,2022-2023,2022-12-04,EXACT,alcorn-state,tennessee,40,94,tennessee,0,TEAM_B_HOME,tennessee,thompson-boling-arena,VEN-000211,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
