@@ -61330,7 +61330,7 @@ CBBG-0061335,2025-2026,2026-03-17,EXACT,nc-state,texas,66,68,texas,0,NEUTRAL,,un
 CBBG-0061336,2025-2026,2026-03-19,EXACT,byu,texas,71,79,texas,0,NEUTRAL,,moda-center,VEN-000138,Portland,OR,NCAA_TOURNAMENT,R64,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=texas/TEXRAW-03110;venue_key=moda-center;site_type=NEUTRAL;fields=venue_id,venue_key]"
 CBBG-0061337,2025-2026,2026-03-21,EXACT,gonzaga,texas,68,74,texas,0,NEUTRAL,,moda-center,VEN-000138,Portland,OR,NCAA_TOURNAMENT,R32,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=texas/TEXRAW-03111;venue_key=moda-center;site_type=NEUTRAL;fields=venue_id,venue_key]"
 CBBG-0061338,1907-1908,,SEASON,epworth-college,oklahoma,12,32,oklahoma,0,TEAM_B_HOME,oklahoma,ou-gymnasium,VEN-000341,Norman,OK,REGULAR_SEASON,,,,PROVISIONAL,[OKLAHOMA_HOME_CHRONOLOGY source=OKLRAW-00001;venue_key=ou-gymnasium;basis=official-ou-facilities-timeline]
-CBBG-0061339,1907-1908,,SEASON,oklahoma,oklahoma-state,37,19,oklahoma,0,TEAM_B_HOME,oklahoma-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0061339,1907-1908,,SEASON,oklahoma,oklahoma-state,37,19,oklahoma,0,TEAM_B_HOME,oklahoma-state,oklahoma-a-m-original-armory,VEN-000452,Stillwater,OK,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0061340,1907-1908,,SEASON,oklahoma,tonkawa-prep,21,38,tonkawa-prep,0,TEAM_B_HOME,tonkawa-prep,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0061341,1907-1908,,SEASON,oklahoma,tonkawa-prep,16,32,tonkawa-prep,0,TEAM_B_HOME,tonkawa-prep,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0061342,1907-1908,,SEASON,oklahoma,tonkawa-prep,34,50,tonkawa-prep,0,TEAM_A_HOME,oklahoma,ou-gymnasium,VEN-000341,Norman,OK,REGULAR_SEASON,,,,PROVISIONAL,[OKLAHOMA_HOME_CHRONOLOGY source=OKLRAW-00005;venue_key=ou-gymnasium;basis=official-ou-facilities-timeline]
