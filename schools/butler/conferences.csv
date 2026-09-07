@@ -1,0 +1,12 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,butler,1895-1896,1931-1932,independent,Independent,independent,False,Butler institutional basketball/conference history.,Program inception through pre-MVC era.
+1,butler,1932-1933,1933-1934,missouri-valley,Missouri Valley Conference,conference,False,Butler Athletics historical conference account.,Butler joined Missouri Valley in 1932 and left after two seasons.
+2,butler,1934-1935,1945-1946,independent,Independent,independent,False,Butler institutional basketball/conference history.,Post-MVC independent era.
+3,butler,1946-1947,1949-1950,mac,Mid-American Conference,conference,False,Butler institutional conference history.,Butler competed in MAC from 1946-50.
+4,butler,1950-1951,1977-1978,indiana-collegiate,Indiana Collegiate Conference,conference,False,Butler institutional conference history.,ICC membership 1950-78.
+5,butler,1978-1979,1978-1979,independent,Independent,independent,False,Butler institutional conference history.,One independent season after ICC.
+6,butler,1979-1980,1984-1985,midwestern-city,Midwestern City Conference,conference,False,Butler Athletics league history.,Butler was a charter member in 1979.
+7,butler,1985-1986,2000-2001,midwestern-collegiate,Midwestern Collegiate Conference,conference,False,Butler Athletics league history.,Midwestern City Conference renamed Midwestern Collegiate Conference.
+8,butler,2001-2002,2011-2012,horizon,Horizon League,conference,False,Butler Athletics league history.,Midwestern Collegiate Conference renamed Horizon League.
+9,butler,2012-2013,2012-2013,atlantic-10,Atlantic 10,conference,False,Butler institutional announcement/history.,Butler competed in Atlantic 10 for one season.
+10,butler,2013-2014,,big-east,Big East,conference,True,Butler Athletics BIG EAST history.,Ongoing through completed 2025-26 season.
