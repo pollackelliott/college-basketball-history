@@ -31,7 +31,7 @@ brown,Brown,Brown,Bears,Providence,RI,#4E3629,#E4002B,Yes,No,,,,
 bryant,Bryant,Bryant,Bulldogs,Smithfield,RI,#B4975B,#000000,Yes,No,,,,
 bucknell,Bucknell,Bucknell,Bison,Lewisburg,PA,#E87722,#003865,Yes,No,,,,
 buffalo,Buffalo,Buffalo,Bulls,Buffalo,NY,#005BBB,#FFFFFF,Yes,No,,,,
-butler,Butler,Butler,Bulldogs,Indianapolis,IN,#13294B,#FFFFFF,Yes,No,1895-1896,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Current owner-supplied Program Top-Level Scope Reference lists Butler as INCEPTION+; accepted competitive varsity history begins with 1895-96.
+butler,Butler,Butler,Bulldogs,Indianapolis,IN,#13294B,#FFFFFF,Yes,Yes,1895-1896,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Current owner-supplied Program Top-Level Scope Reference lists Butler as INCEPTION+; accepted competitive varsity history begins with 1895-96.
 byu,BYU,BYU,Cougars,Provo,UT,#0062B8,#FFFFFF,Yes,No,,,,
 cal-poly,Cal Poly,Cal Poly,Mustangs,San Luis Obispo,CA,#003831,#FFE395,Yes,No,,,,
 cal-state-bakersfield,Cal State Bakersfield,Cal State Bakersfield,Roadrunners,Bakersfield,CA,#003594,#FFC72C,Yes,No,,,,
