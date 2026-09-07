@@ -38,9 +38,9 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 36,oklahoma-state,Camp Chaffee,camp-chaffee,Camp Chaffee,No,1,1943-1944,1943-1944,RESOLVED,Historical/non-current identity research,,OSU wartime schedule; military-team identity preserved
 37,oklahoma-state,Campbell,campbell,Campbell,Yes,1,2016-2017,2016-2017,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 38,oklahoma-state,Canisius,canisius,Canisius,Yes,2,1943-1944,1946-1947,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
-39,oklahoma-state,Carleton,carleton,Carleton College,No,1,1931-1932,1931-1932,RESOLVED,Historical/non-current identity research,,Official OSU opponent history identifies Carleton College
-40,oklahoma-state,CCNY,ccny,The City College of New York,No,5,1939-1940,1943-1944,RESOLVED,Historical/non-current identity research,,Official OSU opponent history expands CCNY
-41,oklahoma-state,Centenary,centenary,Centenary (LA),No,3,1982-1983,1990-1991,RESOLVED,Historical/non-current identity research,,OSU series heading distinguishes Louisiana institution
+39,oklahoma-state,Carleton,carleton,Carleton,No,1,1931-1932,1931-1932,RESOLVED,Historical/non-current identity research,,Official OSU opponent history identifies Carleton College
+40,oklahoma-state,CCNY,ccny,CCNY,No,5,1939-1940,1943-1944,RESOLVED,Historical/non-current identity research,,Official OSU opponent history expands CCNY
+41,oklahoma-state,Centenary,centenary,Centenary,No,3,1982-1983,1990-1991,RESOLVED,Historical/non-current identity research,,OSU series heading distinguishes Louisiana institution
 42,oklahoma-state,Central Ark.,central-arkansas,Central Arkansas,Yes,4,2010-2011,2018-2019,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 43,oklahoma-state,Central Conn. St.,central-connecticut,Central Connecticut,Yes,1,1988-1989,1988-1989,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 44,oklahoma-state,Central Missouri St.,university-of-central-missouri,University of Central Missouri,No,1,1938-1939,1938-1939,RESOLVED,Historical/non-current identity research,,Published Kansas package institutional-lineage evidence
@@ -105,7 +105,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 103,oklahoma-state,Grambling,grambling,Grambling,Yes,2,1990-1991,2008-2009,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 104,oklahoma-state,Grand Canyon,grand-canyon,Grand Canyon,Yes,1,2025-2026,2025-2026,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 105,oklahoma-state,Green Bay,green-bay,Green Bay,Yes,1,2024-2025,2024-2025,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
-106,oklahoma-state,Grinnell,grinnell,Grinnell College,No,26,1925-1926,1938-1939,RESOLVED,Historical/non-current identity research,,Official OSU opponent history/historical schedule
+106,oklahoma-state,Grinnell,grinnell,Grinnell,No,26,1925-1926,1938-1939,RESOLVED,Historical/non-current identity research,,Official OSU opponent history/historical schedule
 107,oklahoma-state,Hamline,hamline,Hamline,No,1,1947-1948,1947-1948,RESOLVED,Historical/non-current identity research,,OSU series heading
 108,oklahoma-state,Hardin-Simmons,hardin-simmons,Hardin-Simmons,No,4,1953-1954,1979-1980,RESOLVED,Historical/non-current identity research,,OSU series heading
 109,oklahoma-state,Hartford,hartford,Hartford,No,1,2002-2003,2002-2003,RESOLVED,Historical/non-current identity research,,OSU series heading; current registry review confirms no current-D1 identity
@@ -267,15 +267,15 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 265,oklahoma-state,Southern Miss,southern-miss,Southern Miss,Yes,1,1998-1999,1998-1999,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 266,oklahoma-state,Southern U.,southern,Southern,Yes,2,2006-2007,2009-2010,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 267,oklahoma-state,Southern Utah,southern-utah,Southern Utah,Yes,2,1989-1990,1997-1998,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
-268,oklahoma-state,Southwestern (Kan.),southwestern-kansas,Southwestern (KS),No,4,1912-1913,1937-1938,RESOLVED,Historical/non-current identity research,,OSU series heading/state qualifier prevents collision
-269,oklahoma-state,Southwestern (Texas),southwestern-texas,Southwestern (TX),No,1,1943-1944,1943-1944,RESOLVED,Historical/non-current identity research,,OSU series heading/state qualifier prevents collision
-270,oklahoma-state,Southwestern (TX),southwestern-texas,Southwestern (TX),No,1,1977-1978,1977-1978,RESOLVED,Historical/non-current identity research,,Same institution/series as Southwestern (Texas)
+268,oklahoma-state,Southwestern (Kan.),southwestern-kansas,Southwestern (Kansas),No,4,1912-1913,1937-1938,RESOLVED,Historical/non-current identity research,,OSU series heading/state qualifier prevents collision
+269,oklahoma-state,Southwestern (Texas),southwestern-texas,Southwestern Texas,No,1,1943-1944,1943-1944,RESOLVED,Historical/non-current identity research,,OSU series heading/state qualifier prevents collision
+270,oklahoma-state,Southwestern (TX),southwestern-texas,Southwestern Texas,No,1,1977-1978,1977-1978,RESOLVED,Historical/non-current identity research,,Same institution/series as Southwestern (Texas)
 271,oklahoma-state,Southwestern Okla.,southwestern-oklahoma-state,Southwestern Oklahoma State,No,11,1917-1918,2006-2007,RESOLVED,Historical/non-current identity research,,OSU series heading
 272,oklahoma-state,St. Bonaventure,st-bonaventure,St. Bonaventure,Yes,1,2023-2024,2023-2024,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 273,oklahoma-state,St. Gregory’s,st-gregorys-university,St. Gregory's University,No,1,2000-2001,2000-2001,RESOLVED,Historical/non-current identity research,,OSU series heading; closed Oklahoma institution
 274,oklahoma-state,St. John’s (N.Y.),st-john-s,St. John's,Yes,1,1988-1989,1988-1989,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
-275,oklahoma-state,St. Mary's (TX),st-marys-texas,St. Mary's (TX),No,1,1985-1986,1985-1986,RESOLVED,Historical/non-current identity research,,OSU series heading/state qualifier
-276,oklahoma-state,St. Mary’s (TX),st-marys-texas,St. Mary's (TX),No,1,1995-1996,1995-1996,RESOLVED,Historical/non-current identity research,,Same institution; punctuation variant
+275,oklahoma-state,St. Mary's (TX),st-marys-texas,St. Mary's (Texas),No,1,1985-1986,1985-1986,RESOLVED,Historical/non-current identity research,,OSU series heading/state qualifier
+276,oklahoma-state,St. Mary’s (TX),st-marys-texas,St. Mary's (Texas),No,1,1995-1996,1995-1996,RESOLVED,Historical/non-current identity research,,Same institution; punctuation variant
 277,oklahoma-state,St. Thomas (MN),st-thomas-minnesota,St. Thomas,Yes,1,2024-2025,2024-2025,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 278,oklahoma-state,Stanford,stanford,Stanford,Yes,4,2009-2010,2017-2018,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
 279,oklahoma-state,Syracuse,syracuse,Syracuse,Yes,6,1986-1987,2019-2020,RESOLVED,Current-D1 registry exact/normalized match,,research_base_sha current program registry; Oklahoma State series heading/raw label
