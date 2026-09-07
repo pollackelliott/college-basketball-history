@@ -14,7 +14,7 @@ https://github.com/pollackelliott/college-basketball-history
 
 This chat is the ONE ACTIVE SERIALIZED IMPLEMENTATION LANE for <school>. It is not a Research lane.
 
-Before acting, inspect actual protected main and current repository/onboarding state. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md and the implementation policies they reference. Repository policy controls over copied handoff wording.
+Before acting, inspect actual protected main and current repository/onboarding state. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, docs/recurring-venue-identity-conventions.md, and the implementation policies they reference. Repository policy controls over copied handoff wording.
 
 The incoming portfolio is RESEARCH_FROZEN. Verify its immutable ZIP/hash and status card before using it.
 
@@ -57,7 +57,7 @@ Use this when an Implementation chat fails or must be replaced:
 ```text
 We are recovering the serialized Implementation lane for <school> in my College Basketball History project.
 
-Before acting, inspect actual protected main, Git/GitHub state, the onboarding branch, tracked worktree, .onboarding/<school>/ artifacts, existing PR/release state, and exact hashes/fingerprints. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md.
+Before acting, inspect actual protected main, Git/GitHub state, the onboarding branch, tracked worktree, .onboarding/<school>/ artifacts, existing PR/release state, and exact hashes/fingerprints. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, and docs/recurring-venue-identity-conventions.md.
 
 Do not restart the school or replay completed implementation stages merely because the previous chat failed. Reconstruct the earliest incomplete bounded stage from durable state and resume only that stage. Preserve already-settled owner decisions unless actual substantive inputs changed.
 
