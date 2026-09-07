@@ -76,3 +76,15 @@ The package is research-complete under the project's current evidence and uncert
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=286548b2041ee854e85c84c9b42a977b7efbc3ff` from `research_base_sha=e982a0ae746879d3a4c41a4dc128dc0107229f6d`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+
+### Stage 2 NCAA accomplishment normalization
+
+Current Implementation preflight exposed a deterministic accomplishment cross-check gap because the four 2010/2011 Final Four games were correctly present in the frozen game ledger but carried blank normalized NCAA rounds. The following round labels were added without changing game identity, date, score, opponent, site, venue, or raw source evidence:
+
+- 2010-04-03 vs Michigan State — Final Four
+- 2010-04-05 vs Duke — Championship
+- 2011-04-02 vs VCU — Final Four
+- 2011-04-04 vs Connecticut — Championship
+
+Authoritative corroboration: Butler Athletics identifies Michigan State and VCU as national semifinals and Duke/Connecticut as national title games; NCAA championship history records Butler as national runner-up in both 2010 and 2011.
