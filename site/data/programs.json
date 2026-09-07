@@ -779,8 +779,8 @@
       "state": "IN",
       "primary_hex": "#13294B",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 22,
+      "history_start_season": "1895-1896",
+      "conference_regular_season_championships": 13,
       "conference_tournament_championships": 7,
       "ncaa_tournament_appearances": 16,
       "final_four_appearances": 2,
@@ -788,7 +788,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 2011,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
