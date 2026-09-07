@@ -1,0 +1,7 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,oklahoma-state,1907-1908,1920-1921,independent,Independent,independent,False,Oklahoma State 2025-26 media guide game-by-game/year-by-year conference record notation.,Program inception through 1920-21.
+1,oklahoma-state,1921-1922,1924-1925,southwest-conference,Southwest Conference,conference,False,Oklahoma State 2025-26 media guide: 1921-22 through 1924-25 seasons explicitly use SWC conference records/legend.,Southwest Conference era; 1924-25 listed as Southwest Conference champion.
+2,oklahoma-state,1925-1926,1956-1957,missouri-valley,Missouri Valley,conference,False,Oklahoma State 2025-26 media guide: 1925-26 begins MVC notation and 1956-57 remains MVC.,Missouri Valley era.
+3,oklahoma-state,1957-1958,1957-1958,independent,Independent,independent,False,Oklahoma State 2025-26 media guide: 1957-58 explicitly listed Independent.,One-season independent interval between MVC and Big Eight display eras.
+4,oklahoma-state,1958-1959,1995-1996,big-eight,Big Eight,conference,False,Oklahoma State 2025-26 media guide Quick Facts and season legends: Big Eight 1958-96.,Big Eight era.
+5,oklahoma-state,1996-1997,,big-12,Big 12,conference,True,Oklahoma State 2025-26 media guide / official schedule context.,Big 12 begins 1996-97 and is ongoing through completed 2025-26.
