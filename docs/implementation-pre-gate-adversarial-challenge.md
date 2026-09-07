@@ -9,6 +9,8 @@ Stage 2 is not complete merely because preflight produced a decision list. Befor
 
 This is a pre-Gate challenge, not a new owner gate. It must not invent historical facts or replace the disposable Stage 3 rehearsal.
 
+Before researching or escalating a recurring venue-identity/locality question, apply `docs/recurring-venue-identity-conventions.md`. Stable project conventions such as Madison Square Garden physical-building splits and Paradise-vs-Las-Vegas venue geography should be reused mechanically rather than re-litigated for each school unless game-specific evidence creates a genuine contradiction.
+
 ## Required challenge
 
 ### 1. Conditional discrepancy applicability
