@@ -45,7 +45,7 @@ jobs:
             }
           }
 
-'''
+          '''
           if text.count(anchor) != 1:
               raise SystemExit('unexpected sync function count')
           text = text.replace(anchor, fit + anchor, 1)
