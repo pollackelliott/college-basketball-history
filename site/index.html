@@ -744,7 +744,7 @@ function opponentColorPresentation(opponentKey) {
   if (!program) return null;
   const background = program.primary;
   let foreground = program.secondary;
-  if (contrastRatio(background, foreground) < 4.5) foreground = textColor(background);
+  if (contrastRatio(background, foreground) < 2.0) foreground = textColor(background);
   return { background, foreground };
 }
 
