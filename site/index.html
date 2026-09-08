@@ -112,6 +112,10 @@ body.nav-home .topbar-inner{display:flex;align-items:center;gap:16px}body.nav-ho
   body.nav-team .navlinks button,body.nav-series .navlinks button{min-height:22px;padding:1px 4px}
 }
 
+
+/* Diagnostic: keep the old painted frame until the new route is fully captured. */
+::view-transition-old(root),::view-transition-new(root){animation:none}
+
 </style>
 </head>
 <body>
@@ -594,16 +598,45 @@ function teamLogo(keyOrProgram) {
   return `<div class="logo-disc" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}">${initials(team.name)}</div>`;
 }
 
+function forceRouteTop() {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+function renderRouteAtomically(updateUrl) {
+  const update = () => {
+    if (updateUrl) updateUrl();
+    forceRouteTop();
+    render();
+  };
+  if (document.startViewTransition) {
+    document.startViewTransition(update);
+  } else {
+    update();
+  }
+}
+
+function navigateRoute(route) {
+  const nextHash = `#${route}`;
+  if (location.hash === nextHash) {
+    forceRouteTop();
+    syncTeamContextTitle();
+    return;
+  }
+  renderRouteAtomically(() => history.pushState(null, "", nextHash));
+}
+
 function goHome() {
-  location.hash = "home";
+  navigateRoute("home");
 }
 
 function goTeam(key) {
-  if (ACTIVE.has(key)) location.hash = `team/${key}`;
+  if (ACTIVE.has(key)) navigateRoute(`team/${key}`);
 }
 
 function goMatch(teamA, teamB) {
-  if (seriesGamesFor(teamA, teamB).length) location.hash = `matchup/${teamA}/${teamB}`;
+  if (seriesGamesFor(teamA, teamB).length) navigateRoute(`matchup/${teamA}/${teamB}`);
 }
 
 function directoryCard(program) {
@@ -1560,6 +1593,7 @@ function matchupView(teamA, teamB) {
 }
 
 function render() {
+  forceRouteTop();
   const route = (location.hash || "#home").slice(1).split("/");
   const app = document.getElementById("app");
   if (route[0] === "team" && ACTIVE.has(route[1])) {
@@ -1570,7 +1604,7 @@ function render() {
   } else {
     app.innerHTML = homeView();
   }
-  window.scrollTo(0, 0);
+  forceRouteTop();
   syncStickyOffsets();
   syncTeamContextTitle();
 }
@@ -1683,7 +1717,8 @@ async function boot() {
       scheduleTeamContextTitleSync();
     });
     window.addEventListener("scroll", scheduleTeamContextTitleSync, { passive: true });
-    window.addEventListener("hashchange", render);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.addEventListener("popstate", () => renderRouteAtomically());
     render();
   } catch (error) {
     console.error(error);
