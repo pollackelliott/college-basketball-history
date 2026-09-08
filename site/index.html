@@ -101,6 +101,17 @@ body.nav-home .topbar-inner{display:flex;align-items:center;gap:16px}body.nav-ho
 @media(max-width:720px){body.nav-home .topbar-inner{padding:9px 10px;gap:5px}body.nav-home .brand{width:auto;white-space:nowrap;text-align:left;font-size:16px;line-height:normal;letter-spacing:.035em}body.nav-home .navlinks{gap:0;margin-left:auto;margin-right:0;flex-direction:row;align-items:center}body.nav-home .navlinks button{min-height:44px;padding:8px 7px;font-size:12px;line-height:normal}body.nav-team .brand,body.nav-series .brand{width:72px;text-align:center;white-space:normal;line-height:.95}body.nav-team .navlinks,body.nav-series .navlinks{margin-right:8px;align-items:flex-end}body.nav-team .team-context-title{max-width:100%}body.nav-series .team-context-title{display:none}.series-context-title{gap:4px}.series-context-badge{padding:5px 6px;border-radius:6px;font-size:13px;letter-spacing:.01em}}
 @media(max-width:360px){body.nav-home .brand{font-size:14px}body.nav-home .navlinks button{font-size:11px;padding:7px 5px}body.nav-team .brand,body.nav-series .brand{width:66px}.series-context-badge{padding:4px 5px}}
 
+
+/* Mobile navigation affordance polish. */
+.mobile-search-icon{display:none}
+@media(max-width:720px){
+  .navlinks button:first-child{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  .mobile-search-toggle{display:inline-flex;align-items:center;justify-content:flex-end;gap:4px}
+  .mobile-search-icon{display:block;width:11px;height:11px;flex:0 0 11px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  body.nav-team .navlinks,body.nav-series .navlinks{gap:1px}
+  body.nav-team .navlinks button,body.nav-series .navlinks button{min-height:22px;padding:1px 4px}
+}
+
 </style>
 </head>
 <body>
@@ -108,7 +119,7 @@ body.nav-home .topbar-inner{display:flex;align-items:center;gap:16px}body.nav-ho
   <button type="button" class="brand" onclick="goHome()">CBB HISTORY<small id="brandSubtitle">Schema-driven prototype</small></button>
   <div id="teamContextTitle" class="team-context-title" aria-hidden="true"></div>
   <div id="seriesContextTitle" class="series-context-title" aria-hidden="true"><span id="seriesContextA" class="series-context-badge"></span><span id="seriesContextB" class="series-context-badge"></span></div>
-  <div class="navlinks"><button type="button" onclick="goHome()">Teams</button><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs">Search</button></div>
+  <div class="navlinks"><button type="button" onclick="goHome()">Teams</button><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs"><svg class="mobile-search-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14 14"></path></svg><span>Search</span></button></div>
   <div class="searchbox"><label class="sr-only" for="globalSearch">Search current Division I programs</label><input id="globalSearch" placeholder="Search 365 current D1 programs…" autocomplete="off" aria-controls="searchResults" aria-expanded="false"><div id="searchResults" class="search-results" role="listbox"></div></div>
 </div></header>
 <div id="mobileSearchOverlay" class="mobile-search-overlay" aria-hidden="true" onclick="if(event.target===this)toggleMobileSearch(false)">
