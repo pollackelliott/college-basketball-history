@@ -759,6 +759,27 @@ function hideTeamContextTitle() {
   title.textContent = "";
 }
 
+function fitTeamContextTitle() {
+  const title = document.getElementById("teamContextTitle");
+  if (!title || !title.textContent) return;
+  const preferredMinSize = 12;
+  const absoluteMinSize = 10;
+  let size = 20;
+  title.style.fontSize = "20px";
+  title.style.letterSpacing = ".025em";
+  while (title.scrollWidth > title.clientWidth && size > preferredMinSize) {
+    size = Math.max(preferredMinSize, size - 0.5);
+    title.style.fontSize = size + "px";
+  }
+  if (title.scrollWidth > title.clientWidth) {
+    title.style.letterSpacing = "0";
+    while (title.scrollWidth > title.clientWidth && size > absoluteMinSize) {
+      size = Math.max(absoluteMinSize, size - 0.5);
+      title.style.fontSize = size + "px";
+    }
+  }
+}
+
 function syncTeamContextTitle() {
   const title = document.getElementById("teamContextTitle");
   if (!title) return;
@@ -777,6 +798,7 @@ function syncTeamContextTitle() {
   title.textContent = team.name;
   title.style.setProperty("--team-context-bg", background);
   title.style.setProperty("--team-context-fg", foreground);
+  fitTeamContextTitle();
   const show = heading.getBoundingClientRect().bottom <= topbar.getBoundingClientRect().bottom;
   title.classList.toggle("visible", show);
   title.setAttribute("aria-hidden", show ? "false" : "true");
