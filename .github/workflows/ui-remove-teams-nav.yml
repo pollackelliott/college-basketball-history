@@ -1,0 +1,97 @@
+name: Remove redundant Teams navigation
+on:
+  push:
+    branches:
+      - chore/remove-redundant-teams-nav
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/remove-redundant-teams-nav
+          fetch-depth: 0
+      - name: Apply topbar refinement
+        run: python tools/tmp_remove_teams_nav.py
+      - name: Validate inline JavaScript
+        run: |
+          python -c "from pathlib import Path; import re; t=Path('site/index.html').read_text(); s=re.findall(r'<script>(.*?)</script>',t,re.S); assert len(s)==1; Path('/tmp/site-inline.js').write_text(s[0])"
+          node --check /tmp/site-inline.js
+      - name: Browser QA three-zone topbar
+        run: |
+          cat > site/_qa_topbar.html <<'EOF'
+          <!doctype html><html><body><iframe id="desktop" style="width:1200px;height:500px;border:0" src="/index.html#home"></iframe><iframe id="mobile" style="width:390px;height:500px;border:0" src="/index.html#home"></iframe><pre id="out">RUNNING</pre><script>
+          const delay=ms=>new Promise(r=>setTimeout(r,ms));
+          async function waitFor(fn){for(let i=0;i<120;i++){try{const v=fn();if(v)return v}catch{}await delay(100)}throw new Error('timeout')}
+          const centerX=r=>r.left+r.width/2, centerY=r=>r.top+r.height/2;
+          function desktopChecks(d, lines){
+            const inner=d.querySelector('.topbar-inner'), brand=d.querySelector('.brand'), nav=d.querySelector('.navlinks'), search=d.querySelector('.searchbox'), team=d.getElementById('teamContextTitle'), series=d.getElementById('seriesContextTitle');
+            const buttons=[...d.querySelectorAll('.navlinks button')];
+            lines.push(`${buttons.length===1 && !buttons.some(b=>b.textContent.trim()==='Teams')?'PASS':'FAIL'}: Teams control removed; navlinks contains only Search`);
+            d.body.classList.remove('nav-home','nav-series'); d.body.classList.add('nav-team');
+            team.textContent='Alabama'; team.classList.add('visible'); series.classList.remove('visible');
+            const cs=getComputedStyle(inner), tracks=cs.gridTemplateColumns.trim().split(/\s+/).map(parseFloat), gap=parseFloat(cs.columnGap)||0;
+            const ir=inner.getBoundingClientRect(), tr=team.getBoundingClientRect();
+            const middleCenter=ir.left+tracks[0]+gap+tracks[1]/2;
+            lines.push(`${cs.display==='grid' && tracks.length===3 && getComputedStyle(nav).display==='none' && getComputedStyle(search).display!=='none'?'PASS':'FAIL'}: desktop uses three visible zones: brand / context / search`);
+            lines.push(`${Math.abs(centerX(tr)-middleCenter)<=1.5?'PASS':'FAIL'}: team context is centered in the middle desktop zone :: delta=${Math.abs(centerX(tr)-middleCenter).toFixed(1)}px`);
+            d.body.classList.remove('nav-team'); d.body.classList.add('nav-series'); team.classList.remove('visible'); series.classList.add('visible'); d.getElementById('seriesContextA').textContent='Alabama'; d.getElementById('seriesContextB').textContent='Auburn';
+            const sr=series.getBoundingClientRect(), cs2=getComputedStyle(inner), tracks2=cs2.gridTemplateColumns.trim().split(/\s+/).map(parseFloat), middleCenter2=ir.left+tracks2[0]+gap+tracks2[1]/2;
+            lines.push(`${Math.abs(centerX(sr)-middleCenter2)<=1.5?'PASS':'FAIL'}: series names are centered in the middle desktop zone :: delta=${Math.abs(centerX(sr)-middleCenter2).toFixed(1)}px`);
+          }
+          function mobileChecks(d, lines){
+            const inner=d.querySelector('.topbar-inner'), nav=d.querySelector('.navlinks'), search=d.querySelector('.mobile-search-toggle');
+            d.body.classList.remove('nav-home','nav-series'); d.body.classList.add('nav-team');
+            const buttons=[...d.querySelectorAll('.navlinks button')], ir=inner.getBoundingClientRect(), sr=search.getBoundingClientRect(), ns=getComputedStyle(nav), ss=getComputedStyle(search);
+            lines.push(`${buttons.length===1 && buttons[0]===search && !d.body.textContent.includes('Teams')?'PASS':'FAIL'}: mobile Teams control removed`);
+            lines.push(`${ns.display==='flex' && ss.display.includes('flex')?'PASS':'FAIL'}: mobile Search control remains visible`);
+            lines.push(`${Math.abs(centerY(sr)-centerY(ir))<=1.5?'PASS':'FAIL'}: mobile Search is vertically centered in its topbar zone :: delta=${Math.abs(centerY(sr)-centerY(ir)).toFixed(1)}px`);
+            lines.push(`${ss.textDecorationLine==='none'?'PASS':'FAIL'}: Search is not inheriting the old Teams underline`);
+          }
+          window.addEventListener('load',()=>setTimeout(async()=>{
+            const lines=[];
+            try{
+              const df=document.getElementById('desktop'), mf=document.getElementById('mobile');
+              await waitFor(()=>df.contentDocument?.querySelector('.topbar-inner') && mf.contentDocument?.querySelector('.topbar-inner'));
+              desktopChecks(df.contentDocument,lines); mobileChecks(mf.contentDocument,lines);
+            }catch(e){lines.push(`FAIL: ${e.message}`)}
+            document.getElementById('out').textContent=lines.join('\n');
+          },800));
+          </script></body></html>
+          EOF
+          python -m http.server 8000 --directory site >/tmp/ui-topbar-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break; sleep .2; done
+          google-chrome --headless=new --disable-gpu --no-sandbox --window-size=1400,1100 --virtual-time-budget=12000 --dump-dom http://127.0.0.1:8000/_qa_topbar.html >/tmp/ui-topbar-dom.html
+          python - <<'PY'
+          from pathlib import Path
+          from html import unescape
+          import re
+          text=Path('/tmp/ui-topbar-dom.html').read_text(encoding='utf-8')
+          m=re.search(r'<pre id="out">(.*?)</pre>', text, re.S)
+          if not m: raise SystemExit('QA output missing')
+          output=unescape(re.sub(r'<[^>]+>','',m.group(1))).strip()
+          print(output)
+          fails=[line for line in output.splitlines() if line.startswith('FAIL:')]
+          if fails: raise SystemExit(f'{len(fails)} topbar checks failed')
+          if output.count('PASS:') != 8: raise SystemExit(f'Expected 8 passes, got {output.count("PASS:")}')
+          PY
+          rm -f site/_qa_topbar.html
+      - name: Validate repository
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+      - name: Commit production change
+        run: |
+          rm -f site/_qa_topbar.html
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add site/index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Remove redundant Teams navigation"
+          git push origin HEAD:chore/remove-redundant-teams-nav
