@@ -21,6 +21,16 @@ jobs:
           python-version: '3.12'
       - name: Apply anchored UI patch
         run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tools/_apply_history_ui_patch.py')
+          text = path.read_text(encoding='utf-8')
+          old = 'text2, count = re.subn(pattern, replacement, text, count=1, flags=flags)'
+          new = 'text2, count = re.subn(pattern, lambda match: replacement, text, count=1, flags=flags)'
+          if old not in text:
+              raise SystemExit('Regex replacement helper target not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
           python tools/_apply_history_ui_patch.py
           python - <<'PY'
           from pathlib import Path
