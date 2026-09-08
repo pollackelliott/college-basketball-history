@@ -1,0 +1,87 @@
+name: Apply history UI patch
+
+on:
+  push:
+    branches:
+      - chore/history-ui-exploration
+
+permissions:
+  contents: write
+
+jobs:
+  apply-ui-patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/history-ui-exploration
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply anchored UI patch
+        run: |
+          python tools/_apply_history_ui_patch.py
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('site/index.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('onclick="event.stopPropagation();goMatch', 'onclick="event.preventDefault();event.stopPropagation();goMatch')
+          text = text.replace('<div class="filters"><div class="filter-field"><label for="matchupSiteFilter">', '<div class="filters series-filters"><div class="filter-field"><label for="matchupSiteFilter">')
+          text = text.replace('</style>', '@media(max-width:720px){.filters.series-filters{display:grid!important;grid-template-columns:1fr}}\n</style>', 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          text = Path('site/index.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script>(.*?)</script>', text, flags=re.S)
+          if not scripts:
+              raise SystemExit('No inline script found')
+          Path('/tmp/site-inline.js').write_text(scripts[-1], encoding='utf-8')
+          PY
+          node --check /tmp/site-inline.js
+      - name: Verify requested UI surfaces
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('site/index.html').read_text(encoding='utf-8')
+          required = [
+              'desktop-history-season-row',
+              'desktop-history-month-row',
+              'school-color-link',
+              'groupByConference',
+              'opponentSort',
+              'venueFilter',
+              'locationFilter',
+              'Longest ${esc(teamAProgram.name)} Streak',
+              'NCAA Tournament Series',
+              'matchupSiteFilter',
+              'matchupVenueFilter',
+              'matchupLocationFilter',
+              'matchupTypeFilter',
+          ]
+          missing = [value for value in required if value not in text]
+          if missing:
+              raise SystemExit(f'Missing requested UI markers: {missing}')
+          forbidden = ['onclick="showAbout()">About</button>', 'function aboutView()', 'Every school uses its official colors.']
+          present = [value for value in forbidden if value in text]
+          if present:
+              raise SystemExit(f'Removed UI still present: {present}')
+          print('UI marker checks passed')
+          PY
+      - name: Validate repository and deterministic site data
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+      - name: Commit generated UI change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/index.html
+          git commit -m "Enhance game history exploration UI"
+          git push origin HEAD:chore/history-ui-exploration
