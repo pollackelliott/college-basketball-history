@@ -1,0 +1,223 @@
+name: Add sticky team context title
+
+on:
+  push:
+    branches:
+      - chore/sticky-team-context-title
+
+permissions:
+  contents: write
+
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/sticky-team-context-title
+          fetch-depth: 0
+
+      - name: Implement sticky team context title
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('site/index.html')
+          text = path.read_text(encoding='utf-8')
+          marker = 'id="teamContextTitle"'
+          if marker in text:
+              print('Sticky team context title already implemented')
+              raise SystemExit(0)
+
+          replacements = [
+              (
+                  '.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;min-width:0}',
+                  '.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;min-width:0;position:relative}'
+              ),
+              (
+                  '.brand small{display:block;font-family:Inter,sans-serif;font-size:9px;letter-spacing:1.6px;text-transform:uppercase;opacity:.7;margin-top:3px}',
+                  '.brand small{display:block;font-family:Inter,sans-serif;font-size:9px;letter-spacing:1.6px;text-transform:uppercase;opacity:.7;margin-top:3px}\n.team-context-title{position:absolute;left:50%;top:50%;max-width:min(38vw,420px);transform:translate(-50%,-50%) translateY(-4px);border-radius:7px;padding:6px 11px;background:var(--team-context-bg,#fff);color:var(--team-context-fg,var(--nav));font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;font-size:20px;line-height:1.05;letter-spacing:.025em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 0 1px rgba(15,23,42,.18),0 2px 7px rgba(0,0,0,.2);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,transform .16s ease,visibility 0s linear .16s}.team-context-title.visible{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(0);transition-delay:0s}'
+              ),
+              (
+                  '@media(max-width:1080px){.program-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}',
+                  '@media(max-width:720px){.team-context-title{max-width:36vw;padding:5px 8px;border-radius:6px;font-size:15px;letter-spacing:.015em}}\n@media(max-width:1080px){.program-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}'
+              ),
+              (
+                  '  <button type="button" class="brand" onclick="goHome()">CBB HISTORY<small id="brandSubtitle">Schema-driven prototype</small></button>\n  <div class="navlinks">',
+                  '  <button type="button" class="brand" onclick="goHome()">CBB HISTORY<small id="brandSubtitle">Schema-driven prototype</small></button>\n  <div id="teamContextTitle" class="team-context-title" aria-hidden="true"></div>\n  <div class="navlinks">'
+              ),
+              (
+                  '<h1>${esc(team.name)} ${esc(team.nickname)}</h1>',
+                  '<h1 id="teamPageTitle">${esc(team.name)} ${esc(team.nickname)}</h1>'
+              ),
+          ]
+
+          for old, new in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one replacement target, found {count}: {old[:90]}')
+              text = text.replace(old, new, 1)
+
+          anchor = '''function opponentColorPresentation(opponentKey) {
+            const program = DB.programs.find((row) => row.key === opponentKey);
+            if (!program) return null;
+            const background = program.primary;
+            let foreground = program.secondary;
+            if (contrastRatio(background, foreground) < 2.0) foreground = textColor(background);
+            return { background, foreground };
+          }
+          '''
+          addition = anchor + '''
+          function hideTeamContextTitle() {
+            const title = document.getElementById("teamContextTitle");
+            if (!title) return;
+            title.classList.remove("visible");
+            title.setAttribute("aria-hidden", "true");
+            title.textContent = "";
+          }
+
+          function syncTeamContextTitle() {
+            const title = document.getElementById("teamContextTitle");
+            if (!title) return;
+            const route = (location.hash || "#home").slice(1).split("/");
+            const teamKey = route[0] === "team" && ACTIVE.has(route[1]) ? route[1] : null;
+            const team = teamKey ? DB.teams[teamKey] : null;
+            const heading = teamKey ? document.getElementById("teamPageTitle") : null;
+            const topbar = document.querySelector(".topbar");
+            if (!team || !heading || !topbar) {
+              hideTeamContextTitle();
+              return;
+            }
+            const colors = opponentColorPresentation(teamKey);
+            const background = colors?.background || team.primary || "#FFFFFF";
+            const foreground = colors?.foreground || textColor(background);
+            title.textContent = team.name;
+            title.style.setProperty("--team-context-bg", background);
+            title.style.setProperty("--team-context-fg", foreground);
+            const show = heading.getBoundingClientRect().bottom <= topbar.getBoundingClientRect().bottom;
+            title.classList.toggle("visible", show);
+            title.setAttribute("aria-hidden", show ? "false" : "true");
+          }
+
+          let teamContextSyncPending = false;
+          function scheduleTeamContextTitleSync() {
+            if (teamContextSyncPending) return;
+            teamContextSyncPending = true;
+            requestAnimationFrame(() => {
+              teamContextSyncPending = false;
+              syncTeamContextTitle();
+            });
+          }
+          '''
+          if text.count(anchor) != 1:
+              raise SystemExit(f'Expected opponentColorPresentation anchor once, found {text.count(anchor)}')
+          text = text.replace(anchor, addition, 1)
+
+          old_render_tail = '''  syncStickyOffsets();
+            window.scrollTo(0, 0);
+          }'''
+          new_render_tail = '''  window.scrollTo(0, 0);
+            syncStickyOffsets();
+            syncTeamContextTitle();
+          }'''
+          if text.count(old_render_tail) != 1:
+              raise SystemExit(f'Expected render tail once, found {text.count(old_render_tail)}')
+          text = text.replace(old_render_tail, new_render_tail, 1)
+
+          old_boot = '''    syncStickyOffsets();
+              window.addEventListener("resize", syncStickyOffsets);
+              window.addEventListener("hashchange", render);'''
+          new_boot = '''    syncStickyOffsets();
+              syncTeamContextTitle();
+              window.addEventListener("resize", () => {
+                syncStickyOffsets();
+                scheduleTeamContextTitleSync();
+              });
+              window.addEventListener("scroll", scheduleTeamContextTitleSync, { passive: true });
+              window.addEventListener("hashchange", render);'''
+          if text.count(old_boot) != 1:
+              raise SystemExit(f'Expected boot listener block once, found {text.count(old_boot)}')
+          text = text.replace(old_boot, new_boot, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate inline JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          text = Path('site/index.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script>(.*?)</script>', text, flags=re.S)
+          if len(scripts) != 1:
+              raise SystemExit(f'Expected one inline script, found {len(scripts)}')
+          Path('/tmp/site-inline.js').write_text(scripts[0], encoding='utf-8')
+          PY
+          node --check /tmp/site-inline.js
+
+      - name: Browser QA sticky context title
+        run: |
+          cat > site/_qa_sticky_team_title.html <<'EOF'
+          <!doctype html><html><body><iframe id="app" style="width:390px;height:844px;border:0" src="/index.html#team/missouri"></iframe><pre id="out">RUNNING</pre><script>
+          const delay=ms=>new Promise(r=>setTimeout(r,ms));
+          window.addEventListener('load',()=>setTimeout(async()=>{
+            const f=document.getElementById('app'), w=f.contentWindow, d=f.contentDocument;
+            for(let i=0;i<80;i++){try{if(w.eval('DB.programs.length')&&d.getElementById('teamPageTitle'))break}catch{} await delay(100)}
+            const lines=[];
+            const title=d.getElementById('teamContextTitle');
+            const team=w.eval(`DB.teams['missouri']`);
+            const colors=w.eval(`opponentColorPresentation('missouri')`);
+            const initialHidden=!title.classList.contains('visible')&&title.getAttribute('aria-hidden')==='true';
+            lines.push(`${initialHidden?'PASS':'FAIL'}: hidden while full team title is visible`);
+            w.scrollTo(0,900); await delay(350);
+            const scrolledVisible=title.classList.contains('visible')&&title.getAttribute('aria-hidden')==='false';
+            lines.push(`${scrolledVisible?'PASS':'FAIL'}: visible after team title scrolls behind sticky nav`);
+            lines.push(`${title.textContent.trim()==='Missouri'?'PASS':'FAIL'}: school name only :: ${title.textContent.trim()}`);
+            const styles=w.getComputedStyle(title);
+            const colorMatch=styles.getPropertyValue('--team-context-bg').trim().toLowerCase()===colors.background.toLowerCase()&&styles.getPropertyValue('--team-context-fg').trim().toLowerCase()===colors.foreground.toLowerCase();
+            lines.push(`${colorMatch?'PASS':'FAIL'}: uses opponent-badge color presentation`);
+            w.location.hash='#home'; await delay(250);
+            const homeHidden=!title.classList.contains('visible')&&title.getAttribute('aria-hidden')==='true'&&title.textContent==='';
+            lines.push(`${homeHidden?'PASS':'FAIL'}: clears outside team pages`);
+            document.getElementById('out').textContent=lines.join('\n');
+          },500));
+          </script></body></html>
+          EOF
+          python -m http.server 8000 --directory site >/tmp/ui-sticky-title-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break; sleep .2; done
+          google-chrome --headless=new --disable-gpu --no-sandbox --virtual-time-budget=12000 --dump-dom http://127.0.0.1:8000/_qa_sticky_team_title.html >/tmp/ui-sticky-title-dom.html
+          python - <<'PY'
+          from pathlib import Path
+          from html import unescape
+          import re
+          text=Path('/tmp/ui-sticky-title-dom.html').read_text(encoding='utf-8')
+          m=re.search(r'<pre id="out">(.*?)</pre>',text,re.S)
+          if not m: raise SystemExit('QA output missing')
+          output=unescape(re.sub(r'<[^>]+>','',m.group(1))).strip()
+          print(output)
+          fails=[x for x in output.splitlines() if x.startswith('FAIL:')]
+          if fails: raise SystemExit(f'{len(fails)} sticky title checks failed')
+          if output.count('PASS:') != 5: raise SystemExit(f'Expected 5 passes, got {output.count("PASS:")}')
+          PY
+
+      - name: Validate repository
+        run: |
+          rm -f site/_qa_sticky_team_title.html
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+
+      - name: Commit production change
+        run: |
+          rm -f site/_qa_sticky_team_title.html
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add site/index.html
+          if git diff --cached --quiet; then
+            echo "No production change to commit"
+            exit 0
+          fi
+          git commit -m "Add sticky team context title"
+          git push origin HEAD:chore/sticky-team-context-title
