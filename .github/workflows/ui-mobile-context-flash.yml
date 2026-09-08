@@ -1,0 +1,115 @@
+name: Mobile context badge flash regression
+on:
+  push:
+    branches:
+      - fix/mobile-context-badge-flash
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-context-badge-flash
+          fetch-depth: 0
+      - name: Apply mobile context fix
+        run: python tools/tmp_fix_mobile_context_flash.py
+      - name: Validate inline JavaScript
+        run: |
+          python -c "from pathlib import Path; import re; t=Path('site/index.html').read_text(); s=re.findall(r'<script>(.*?)</script>',t,re.S); assert len(s)==1; Path('/tmp/site-inline.js').write_text(s[0])"
+          node --check /tmp/site-inline.js
+      - name: Browser QA delayed mobile scroll reset
+        run: |
+          cat > site/_qa_mobile_context.html <<'EOF'
+          <!doctype html><html><body><iframe id="appframe" style="width:390px;height:844px;border:0" src="/index.html#home"></iframe><pre id="out">RUNNING</pre><script>
+          const delay=ms=>new Promise(r=>setTimeout(r,ms));
+          async function waitFor(fn,label){for(let i=0;i<180;i++){try{const v=fn();if(v)return v}catch{}await delay(50)}throw new Error('timeout: '+label)}
+          async function frames(w,n=3){for(let i=0;i<n;i++)await new Promise(r=>w.requestAnimationFrame(r))}
+          function pass(lines,ok,label,extra=''){lines.push(`${ok?'PASS':'FAIL'}: ${label}${extra?` :: ${extra}`:''}`)}
+          window.addEventListener('load',()=>setTimeout(async()=>{
+            const lines=[];
+            try{
+              const frame=document.getElementById('appframe');
+              const w=frame.contentWindow;
+              await waitFor(()=>w.document.querySelector('#programGrid'),'home ready');
+              await frames(w,4);
+
+              w.scrollTo(0,1800);
+              await frames(w,3);
+              const nativeScrollTo=w.scrollTo.bind(w);
+              let delayedCalls=0;
+              w.scrollTo=(...args)=>{delayedCalls++;};
+              w.location.hash='team/alabama';
+              await waitFor(()=>w.document.getElementById('teamPageTitle'),'team rendered');
+              await frames(w,3);
+              const teamBadge=w.document.getElementById('teamContextTitle');
+              pass(lines,!teamBadge.classList.contains('visible'),'team badge stays hidden while mobile scroll reset is delayed',`scrollY=${Math.round(w.scrollY)}, delayedCalls=${delayedCalls}`);
+
+              w.scrollTo=nativeScrollTo;
+              nativeScrollTo(0,0);
+              await waitFor(()=>Math.abs(w.scrollY)<=1,'team top reset');
+              await frames(w,4);
+              pass(lines,!teamBadge.classList.contains('visible'),'team badge stays hidden once route settles at top',`scrollY=${Math.round(w.scrollY)}`);
+
+              nativeScrollTo(0,650);
+              await frames(w,5);
+              pass(lines,teamBadge.classList.contains('visible'),'team badge appears normally after scrolling past team heading',`scrollY=${Math.round(w.scrollY)}`);
+
+              const nativeAgain=w.scrollTo.bind(w);
+              delayedCalls=0;
+              w.scrollTo=(...args)=>{delayedCalls++;};
+              w.location.hash='matchup/alabama/auburn';
+              await waitFor(()=>w.document.querySelector('.match-head'),'series rendered');
+              await frames(w,3);
+              const seriesBadge=w.document.getElementById('seriesContextTitle');
+              pass(lines,!seriesBadge.classList.contains('visible'),'series badges stay hidden while mobile scroll reset is delayed',`scrollY=${Math.round(w.scrollY)}, delayedCalls=${delayedCalls}`);
+
+              w.scrollTo=nativeAgain;
+              nativeAgain(0,0);
+              await waitFor(()=>Math.abs(w.scrollY)<=1,'series top reset');
+              await frames(w,4);
+              pass(lines,!seriesBadge.classList.contains('visible'),'series badges stay hidden once route settles at top',`scrollY=${Math.round(w.scrollY)}`);
+
+              nativeAgain(0,650);
+              await frames(w,5);
+              pass(lines,seriesBadge.classList.contains('visible'),'series badges appear normally after scrolling past series heading',`scrollY=${Math.round(w.scrollY)}`);
+            }catch(e){lines.push(`FAIL: ${e.message}`)}
+            document.getElementById('out').textContent=lines.join('\n');
+          },700));
+          </script></body></html>
+          EOF
+          python -m http.server 8000 --directory site >/tmp/ui-context-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break; sleep .2; done
+          google-chrome --headless=new --disable-gpu --no-sandbox --window-size=900,1100 --virtual-time-budget=18000 --dump-dom http://127.0.0.1:8000/_qa_mobile_context.html >/tmp/ui-context-dom.html
+          python - <<'PY'
+          from pathlib import Path
+          from html import unescape
+          import re
+          text=Path('/tmp/ui-context-dom.html').read_text(encoding='utf-8')
+          m=re.search(r'<pre id="out">(.*?)</pre>', text, re.S)
+          if not m: raise SystemExit('QA output missing')
+          output=unescape(re.sub(r'<[^>]+>','',m.group(1))).strip()
+          print(output)
+          fails=[line for line in output.splitlines() if line.startswith('FAIL:')]
+          if fails: raise SystemExit(f'{len(fails)} mobile context checks failed')
+          if output.count('PASS:') != 6: raise SystemExit(f'Expected 6 passes, got {output.count("PASS:")}')
+          PY
+          rm -f site/_qa_mobile_context.html
+      - name: Validate repository
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+      - name: Commit production fix
+        run: |
+          rm -f site/_qa_mobile_context.html
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add site/index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Prevent mobile context badge flash"
+          git push origin HEAD:fix/mobile-context-badge-flash
