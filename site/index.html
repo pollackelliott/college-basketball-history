@@ -15,9 +15,10 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans
 button,input,select{font:inherit}button{touch-action:manipulation}.college{font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;text-transform:uppercase;letter-spacing:.025em}
 :focus-visible{outline:3px solid #2b76b9;outline-offset:2px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .topbar{position:sticky;top:0;z-index:20;background:var(--nav);color:white;border-bottom:4px solid var(--gold)}
-.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;min-width:0}
+.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;min-width:0;position:relative}
 .brand{border:0;background:transparent;color:inherit;padding:0;text-align:left;font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;font-size:22px;letter-spacing:.055em;cursor:pointer;white-space:nowrap;text-transform:uppercase}
 .brand small{display:block;font-family:Inter,sans-serif;font-size:9px;letter-spacing:1.6px;text-transform:uppercase;opacity:.7;margin-top:3px}
+.team-context-title{position:absolute;left:50%;top:50%;max-width:min(38vw,420px);transform:translate(-50%,-50%) translateY(-4px);border-radius:7px;padding:6px 11px;background:var(--team-context-bg,#fff);color:var(--team-context-fg,var(--nav));font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;font-size:20px;line-height:1.05;letter-spacing:.025em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 0 1px rgba(15,23,42,.18),0 2px 7px rgba(0,0,0,.2);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,transform .16s ease,visibility 0s linear .16s}.team-context-title.visible{opacity:1;visibility:visible;transform:translate(-50%,-50%) translateY(0);transition-delay:0s}
 .navlinks{display:flex;gap:4px}.navlinks button{min-height:40px;background:transparent;color:#dce7f2;border:0;padding:9px 10px;border-radius:6px;cursor:pointer}.navlinks button:hover{background:rgba(255,255,255,.09)}
 .searchbox{margin-left:auto;position:relative;width:min(350px,36vw)}.searchbox input{width:100%;border:1px solid rgba(255,255,255,.2);background:#fff;color:#15243a;border-radius:7px;padding:10px 12px}
 .search-results{position:absolute;top:45px;left:0;right:0;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);max-height:360px;overflow:auto;display:none}
@@ -66,6 +67,7 @@ footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-siz
 .match-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
 .series-history-summary{text-align:center;padding:9px 12px;background:#f7fafc;border-bottom:1px solid var(--line);font-size:12px;color:#526174}
 @media(max-width:720px){.opponent-breakdown-controls{display:grid;grid-template-columns:1fr;align-items:stretch;justify-content:stretch;gap:12px;padding:13px 14px}.opponent-breakdown-control{justify-content:space-between;width:100%;gap:16px;text-align:left}.opponent-breakdown-control select{min-width:150px}.filter-field.searchable-field{min-width:0;width:100%;max-width:none}.school-color-link{padding:3px 7px}.match-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.team-context-title{max-width:36vw;padding:5px 8px;border-radius:6px;font-size:15px;letter-spacing:.015em}}
 @media(max-width:1080px){.program-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:950px){.statbar{grid-template-columns:repeat(2,minmax(0,1fr))}.match-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.subgrid{grid-template-columns:1fr}.searchbox{display:none}.mobile-search-toggle{display:block}.navlinks{margin-left:auto}}
 @media(max-width:720px){.shell{padding:16px 12px 40px}.topbar-inner{padding:9px 10px;gap:5px}.brand{font-size:16px;letter-spacing:.035em}.brand small{display:none}.navlinks{gap:0}.navlinks button{min-height:44px;padding:8px 7px;font-size:12px}.hero{padding:24px 16px}.hero h1{font-size:27px}.hero p{font-size:13px;line-height:1.55}.statbar{gap:8px}.stat{padding:11px 7px}.stat b{font-size:20px}.stat span{font-size:10px}.section-head h2{font-size:21px}.directory-controls{grid-template-columns:1fr;padding:12px}.program-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.program-card{min-height:112px;padding:11px;border-top-width:5px}.program-card .program-name{font-size:16px}.program-card .program-meta{font-size:12px}.team-head{padding:20px 14px}.team-head h1{font-size:27px}.team-head .logo-disc{width:66px;height:66px;font-size:21px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.metric{padding:11px 7px}.metric b{font-size:17px}.metric span{font-size:10px}.history-panel{width:calc(100% + 16px);margin-inline:-8px}.history-panel .mobile-game-row summary{padding-left:8px;padding-right:8px}.history-panel .mobile-game-details{padding-left:8px;padding-right:8px}.mobile-filter-toggle{display:flex}.filters{display:none;padding:11px;align-items:stretch}.filters.mobile-open{display:grid;grid-template-columns:1fr}.filter-field,.filter-field.opponent-field{width:100%;max-width:none;min-width:0}.filter-clear{min-height:44px}.desktop-history{display:none}.mobile-history{display:block}.pager{justify-content:space-between;gap:10px;padding:11px}.pager>span:first-child{width:100%;text-align:center}.pager button{min-height:44px;min-width:92px}.conference-group summary{text-align:left;padding:13px}.conference-group summary span{display:block;margin:4px 0 0}.opponent-breakdown .data-note{padding-left:13px!important;padding-right:13px!important}.opponent-breakdown table{table-layout:fixed;font-size:10px}.opponent-breakdown th,.opponent-breakdown td{padding:8px 5px;white-space:normal}.opponent-breakdown th:first-child,.opponent-breakdown td:first-child{width:43%;text-align:left}.match-head{grid-template-columns:1fr;gap:12px;padding:18px 14px}.match-head .vs{font-size:17px}.side-team h2{font-size:23px}.match-metrics{gap:8px}.series-score{font-size:26px}.series-caption{line-height:1.5;padding:0 8px}.mobile-search-dialog{margin-top:18px}.panel-title{font-size:13px}.mini-table{font-size:11px}.notice{font-size:11px}.data-note{font-size:11px}}
@@ -96,6 +98,7 @@ footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-siz
 <body>
 <header class="topbar"><div class="topbar-inner">
   <button type="button" class="brand" onclick="goHome()">CBB HISTORY<small id="brandSubtitle">Schema-driven prototype</small></button>
+  <div id="teamContextTitle" class="team-context-title" aria-hidden="true"></div>
   <div class="navlinks"><button type="button" onclick="goHome()">Teams</button><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs">Search</button></div>
   <div class="searchbox"><label class="sr-only" for="globalSearch">Search current Division I programs</label><input id="globalSearch" placeholder="Search 365 current D1 programs…" autocomplete="off" aria-controls="searchResults" aria-expanded="false"><div id="searchResults" class="search-results" role="listbox"></div></div>
 </div></header>
@@ -748,6 +751,47 @@ function opponentColorPresentation(opponentKey) {
   return { background, foreground };
 }
 
+function hideTeamContextTitle() {
+  const title = document.getElementById("teamContextTitle");
+  if (!title) return;
+  title.classList.remove("visible");
+  title.setAttribute("aria-hidden", "true");
+  title.textContent = "";
+}
+
+function syncTeamContextTitle() {
+  const title = document.getElementById("teamContextTitle");
+  if (!title) return;
+  const route = (location.hash || "#home").slice(1).split("/");
+  const teamKey = route[0] === "team" && ACTIVE.has(route[1]) ? route[1] : null;
+  const team = teamKey ? DB.teams[teamKey] : null;
+  const heading = teamKey ? document.getElementById("teamPageTitle") : null;
+  const topbar = document.querySelector(".topbar");
+  if (!team || !heading || !topbar) {
+    hideTeamContextTitle();
+    return;
+  }
+  const colors = opponentColorPresentation(teamKey);
+  const background = colors?.background || team.primary || "#FFFFFF";
+  const foreground = colors?.foreground || textColor(background);
+  title.textContent = team.name;
+  title.style.setProperty("--team-context-bg", background);
+  title.style.setProperty("--team-context-fg", foreground);
+  const show = heading.getBoundingClientRect().bottom <= topbar.getBoundingClientRect().bottom;
+  title.classList.toggle("visible", show);
+  title.setAttribute("aria-hidden", show ? "false" : "true");
+}
+
+let teamContextSyncPending = false;
+function scheduleTeamContextTitleSync() {
+  if (teamContextSyncPending) return;
+  teamContextSyncPending = true;
+  requestAnimationFrame(() => {
+    teamContextSyncPending = false;
+    syncTeamContextTitle();
+  });
+}
+
 function opponentLinkMarkup(teamKey, game, extraClass = "") {
   const classes = ["opp-link", extraClass].filter(Boolean).join(" ");
   return `<button type="button" class="${classes}" onclick="event.preventDefault();event.stopPropagation();goMatch('${teamKey}','${game.opponentKey}')" aria-label="Open complete ${esc(DB.teams[teamKey].name)} versus ${esc(game.opponent)} series">${esc(game.opponent)}</button>`;
@@ -891,7 +935,7 @@ function teamView(key) {
   const seasonOptions = seasonsFor(key).map((season) => `<option value="${esc(season)}">${esc(season)}</option>`).join("");
   const venueOptions = venueOptionsForGames(DB.games[key]).map((option) => `<option value="${esc(option.label)}"></option>`).join("");
   const locationOptions = locationOptionsForGames(DB.games[key]).map((option) => `<option value="${esc(option.label)}"></option>`).join("");
-  return `<button type="button" class="back" onclick="goHome()">← All programs</button><section class="team-hero" style="--team:${team.primary}"><div class="team-strip"></div><div class="team-head">${teamLogo(key)}<div><h1>${esc(team.name)} ${esc(team.nickname)}</h1><div class="kicker" style="color:${team.primary}">${esc(team.conference)} • ${esc(team.location || "Location not listed")} • SINCE ${esc(formatSinceSeason(team.historyStartSeason))}</div></div></div></section><div class="metrics"><div class="metric"><b>${fmtRecord(summary.wins, summary.losses, summary.ties)}</b><span>On-Court Record</span></div><div class="metric"><b>${fmtOptionalNum(team.conferenceRegularSeasonChampionships)}</b><span>Conference Regular Season Championships</span></div><div class="metric"><b>${fmtOptionalNum(team.conferenceTournamentChampionships)}</b><span>Conference Tournament Championships</span></div><div class="metric"><b>${fmtOptionalNum(team.ncaaTournamentAppearances)}</b><span>NCAA Tournament Appearances</span></div><div class="metric"><b>${fmtOptionalNum(team.finalFourAppearances)}</b><span>Final Fours</span></div><div class="metric"><b>${fmtOptionalNum(team.nationalChampionships)}</b><span>National Championships</span></div><div class="metric${team.bestFinishKey === "NATIONAL_CHAMPION" ? " champion-finish" : ""}"><b>${esc(bestFinishLabel(team.bestFinishKey))}</b><span>Best Finish</span></div><div class="metric"><b>${fmtOptionalYear(team.bestFinishYear)}</b><span>Best Finish Year</span></div></div><div class="panel history-panel"><div class="panel-title">Complete Game History</div><button type="button" id="mobileFilterToggle" class="mobile-filter-toggle" onclick="toggleTeamFilters()" aria-controls="teamFilters" aria-expanded="false"><span>Filters</span><span id="filterToggleStatus">All games</span></button><div id="teamFilters" class="filters"><div class="filter-field"><label for="seasonFilter">Season</label><select id="seasonFilter" onchange="updateTeamGames('${key}',0,true)"><option value="">All seasons</option>${seasonOptions}</select></div><div class="filter-field opponent-field"><label for="oppFilter">Opponent</label><div class="opponent-combobox"><div class="opponent-input-wrap"><div id="opponentChips" class="filter-chips"></div><input id="oppFilter" placeholder="Type to match or select teams…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="oppSuggestions" aria-expanded="false" oninput="onOpponentFilterInput('${key}')" onkeydown="handleOpponentFilterKeydown(event,'${key}')"></div><div id="oppSuggestions" class="opponent-suggestions" role="listbox"></div></div></div><div class="filter-field"><label for="siteFilter">Site</label><select id="siteFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All sites</option><option value="home">Home</option><option value="road">Road</option><option value="neutral">Neutral</option><option value="unknown">Unknown</option></select></div><div class="filter-field searchable-field"><label for="venueFilter">Venue</label><div class="searchable-filter-shell"><input id="venueFilter" list="venueFilterOptions" placeholder="All venues" autocomplete="off" onfocus="this.select()" oninput="updateTeamGames('${key}',0,true)"><button type="button" id="venueFilterClear" class="search-filter-clear" hidden onclick="clearTeamSearchFilter('${key}','venueFilter')" aria-label="Clear venue filter">×</button></div><datalist id="venueFilterOptions">${venueOptions}</datalist></div><div class="filter-field searchable-field"><label for="locationFilter">Location</label><div class="searchable-filter-shell"><input id="locationFilter" list="locationFilterOptions" placeholder="All locations" autocomplete="off" onfocus="this.select()" oninput="updateTeamGames('${key}',0,true)"><button type="button" id="locationFilterClear" class="search-filter-clear" hidden onclick="clearTeamSearchFilter('${key}','locationFilter')" aria-label="Clear location filter">×</button></div><datalist id="locationFilterOptions">${locationOptions}</datalist></div><div class="filter-field"><label for="typeFilter">Type</label><select id="typeFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All Types</option><option value="REGULAR_SEASON">Regular Season</option><option value="CONFERENCE_TOURNAMENT">Conference Tournament</option><option value="NCAA_TOURNAMENT">NCAA Tournament</option><option value="NIT">NIT</option><option value="POSTSEASON">Postseason</option></select></div><button type="button" class="filter-clear" onclick="clearTeamFilters('${key}')">Clear filters</button></div><div id="seasonSummary" class="season-summary"></div><div id="teamGamesTable"></div></div><div class="panel opponent-breakdown"><div class="panel-title">All Time Record by Opponent</div><div class="opponent-breakdown-controls"><label class="opponent-breakdown-control"><span>Group by conference</span><span class="toggle-switch"><input id="groupByConference" type="checkbox" checked onchange="updateOpponentBreakdown('${key}')"><span class="toggle-slider" aria-hidden="true"></span></span></label><label class="opponent-breakdown-control"><span>Sort by</span><select id="opponentSort" onchange="updateOpponentBreakdown('${key}')"><option value="games" selected>Games played</option><option value="alpha">Alphabetical</option><option value="wins">Wins</option></select></label></div><div id="opponentBreakdownBody">${opponentBreakdown(key)}</div></div>`;
+  return `<button type="button" class="back" onclick="goHome()">← All programs</button><section class="team-hero" style="--team:${team.primary}"><div class="team-strip"></div><div class="team-head">${teamLogo(key)}<div><h1 id="teamPageTitle">${esc(team.name)} ${esc(team.nickname)}</h1><div class="kicker" style="color:${team.primary}">${esc(team.conference)} • ${esc(team.location || "Location not listed")} • SINCE ${esc(formatSinceSeason(team.historyStartSeason))}</div></div></div></section><div class="metrics"><div class="metric"><b>${fmtRecord(summary.wins, summary.losses, summary.ties)}</b><span>On-Court Record</span></div><div class="metric"><b>${fmtOptionalNum(team.conferenceRegularSeasonChampionships)}</b><span>Conference Regular Season Championships</span></div><div class="metric"><b>${fmtOptionalNum(team.conferenceTournamentChampionships)}</b><span>Conference Tournament Championships</span></div><div class="metric"><b>${fmtOptionalNum(team.ncaaTournamentAppearances)}</b><span>NCAA Tournament Appearances</span></div><div class="metric"><b>${fmtOptionalNum(team.finalFourAppearances)}</b><span>Final Fours</span></div><div class="metric"><b>${fmtOptionalNum(team.nationalChampionships)}</b><span>National Championships</span></div><div class="metric${team.bestFinishKey === "NATIONAL_CHAMPION" ? " champion-finish" : ""}"><b>${esc(bestFinishLabel(team.bestFinishKey))}</b><span>Best Finish</span></div><div class="metric"><b>${fmtOptionalYear(team.bestFinishYear)}</b><span>Best Finish Year</span></div></div><div class="panel history-panel"><div class="panel-title">Complete Game History</div><button type="button" id="mobileFilterToggle" class="mobile-filter-toggle" onclick="toggleTeamFilters()" aria-controls="teamFilters" aria-expanded="false"><span>Filters</span><span id="filterToggleStatus">All games</span></button><div id="teamFilters" class="filters"><div class="filter-field"><label for="seasonFilter">Season</label><select id="seasonFilter" onchange="updateTeamGames('${key}',0,true)"><option value="">All seasons</option>${seasonOptions}</select></div><div class="filter-field opponent-field"><label for="oppFilter">Opponent</label><div class="opponent-combobox"><div class="opponent-input-wrap"><div id="opponentChips" class="filter-chips"></div><input id="oppFilter" placeholder="Type to match or select teams…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="oppSuggestions" aria-expanded="false" oninput="onOpponentFilterInput('${key}')" onkeydown="handleOpponentFilterKeydown(event,'${key}')"></div><div id="oppSuggestions" class="opponent-suggestions" role="listbox"></div></div></div><div class="filter-field"><label for="siteFilter">Site</label><select id="siteFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All sites</option><option value="home">Home</option><option value="road">Road</option><option value="neutral">Neutral</option><option value="unknown">Unknown</option></select></div><div class="filter-field searchable-field"><label for="venueFilter">Venue</label><div class="searchable-filter-shell"><input id="venueFilter" list="venueFilterOptions" placeholder="All venues" autocomplete="off" onfocus="this.select()" oninput="updateTeamGames('${key}',0,true)"><button type="button" id="venueFilterClear" class="search-filter-clear" hidden onclick="clearTeamSearchFilter('${key}','venueFilter')" aria-label="Clear venue filter">×</button></div><datalist id="venueFilterOptions">${venueOptions}</datalist></div><div class="filter-field searchable-field"><label for="locationFilter">Location</label><div class="searchable-filter-shell"><input id="locationFilter" list="locationFilterOptions" placeholder="All locations" autocomplete="off" onfocus="this.select()" oninput="updateTeamGames('${key}',0,true)"><button type="button" id="locationFilterClear" class="search-filter-clear" hidden onclick="clearTeamSearchFilter('${key}','locationFilter')" aria-label="Clear location filter">×</button></div><datalist id="locationFilterOptions">${locationOptions}</datalist></div><div class="filter-field"><label for="typeFilter">Type</label><select id="typeFilter" onchange="updateTeamGames('${key}',0,true)"><option value="all">All Types</option><option value="REGULAR_SEASON">Regular Season</option><option value="CONFERENCE_TOURNAMENT">Conference Tournament</option><option value="NCAA_TOURNAMENT">NCAA Tournament</option><option value="NIT">NIT</option><option value="POSTSEASON">Postseason</option></select></div><button type="button" class="filter-clear" onclick="clearTeamFilters('${key}')">Clear filters</button></div><div id="seasonSummary" class="season-summary"></div><div id="teamGamesTable"></div></div><div class="panel opponent-breakdown"><div class="panel-title">All Time Record by Opponent</div><div class="opponent-breakdown-controls"><label class="opponent-breakdown-control"><span>Group by conference</span><span class="toggle-switch"><input id="groupByConference" type="checkbox" checked onchange="updateOpponentBreakdown('${key}')"><span class="toggle-slider" aria-hidden="true"></span></span></label><label class="opponent-breakdown-control"><span>Sort by</span><select id="opponentSort" onchange="updateOpponentBreakdown('${key}')"><option value="games" selected>Games played</option><option value="alpha">Alphabetical</option><option value="wins">Wins</option></select></label></div><div id="opponentBreakdownBody">${opponentBreakdown(key)}</div></div>`;
 }
 
 function toggleTeamFilters(force) {
@@ -1403,8 +1447,9 @@ function render() {
   } else {
     app.innerHTML = homeView();
   }
-  syncStickyOffsets();
   window.scrollTo(0, 0);
+  syncStickyOffsets();
+  syncTeamContextTitle();
 }
 
 function openProgramFromSearch(key, inputId, resultsId, mobile = false) {
@@ -1509,7 +1554,12 @@ async function boot() {
     updateChrome();
     bindSearch();
     syncStickyOffsets();
-    window.addEventListener("resize", syncStickyOffsets);
+    syncTeamContextTitle();
+    window.addEventListener("resize", () => {
+      syncStickyOffsets();
+      scheduleTeamContextTitleSync();
+    });
+    window.addEventListener("scroll", scheduleTeamContextTitleSync, { passive: true });
     window.addEventListener("hashchange", render);
     render();
   } catch (error) {
