@@ -1,0 +1,91 @@
+name: Atomic route production candidate
+on:
+  push:
+    branches:
+      - fix/atomic-route-handoff
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/atomic-route-handoff
+          fetch-depth: 0
+      - name: Port proven atomic route handoff
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('site/index.html')
+          t = p.read_text(encoding='utf-8')
+
+          css_anchor = '\n</style>'
+          css = '''\n\n/* Keep the old painted route visible until the new route is captured at the top. */\n::view-transition-old(root),::view-transition-new(root){animation:none}\n'''
+          if '::view-transition-old(root),::view-transition-new(root){animation:none}' not in t:
+              if t.count(css_anchor) != 1:
+                  raise SystemExit('style anchor mismatch')
+              t = t.replace(css_anchor, css + css_anchor, 1)
+
+          old_nav = '''function goHome() {\n  location.hash = "home";\n}\n\nfunction goTeam(key) {\n  if (ACTIVE.has(key)) location.hash = `team/${key}`;\n}\n\nfunction goMatch(teamA, teamB) {\n  if (seriesGamesFor(teamA, teamB).length) location.hash = `matchup/${teamA}/${teamB}`;\n}'''
+          new_nav = '''function forceRouteTop() {\n  document.documentElement.scrollTop = 0;\n  document.body.scrollTop = 0;\n  window.scrollTo(0, 0);\n}\n\nfunction renderRouteAtomically(updateUrl) {\n  const update = () => {\n    if (updateUrl) updateUrl();\n    forceRouteTop();\n    render();\n  };\n  if (document.startViewTransition) {\n    document.startViewTransition(update);\n  } else {\n    update();\n  }\n}\n\nfunction navigateRoute(route) {\n  const nextHash = `#${route}`;\n  if (location.hash === nextHash) {\n    forceRouteTop();\n    syncTeamContextTitle();\n    return;\n  }\n  renderRouteAtomically(() => history.pushState(null, "", nextHash));\n}\n\nfunction goHome() {\n  navigateRoute("home");\n}\n\nfunction goTeam(key) {\n  if (ACTIVE.has(key)) navigateRoute(`team/${key}`);\n}\n\nfunction goMatch(teamA, teamB) {\n  if (seriesGamesFor(teamA, teamB).length) navigateRoute(`matchup/${teamA}/${teamB}`);\n}'''
+          if t.count(old_nav) != 1:
+              raise SystemExit(f'navigation block mismatch: {t.count(old_nav)}')
+          t = t.replace(old_nav, new_nav, 1)
+
+          guard = '''\n  // Mobile route context scroll-reset guard: iOS can apply scrollTo(0, 0)\n  // after the newly rendered heading has already been measured. Keep the\n  // sticky context hidden until the route is actually settled at the top.\n  if (routeContextResetPending) {\n    hideTeamContextTitle();\n    hideSeriesContextTitle();\n    return;\n  }\n'''
+          if t.count(guard) != 1:
+              raise SystemExit(f'route guard mismatch: {t.count(guard)}')
+          t = t.replace(guard, '\n', 1)
+
+          reset_block = '''let teamContextSyncPending = false;\nlet routeContextResetPending = false;\nlet routeContextResetFrame = 0;\n\nfunction settleRouteContextAfterScrollReset(attempt = 0) {\n  if (!routeContextResetPending) return;\n  if (Math.abs(window.scrollY) <= 1 || attempt >= 12) {\n    routeContextResetPending = false;\n    routeContextResetFrame = 0;\n    syncStickyOffsets();\n    syncTeamContextTitle();\n    return;\n  }\n  window.scrollTo(0, 0);\n  routeContextResetFrame = requestAnimationFrame(() => settleRouteContextAfterScrollReset(attempt + 1));\n}\n'''
+          if t.count(reset_block) != 1:
+              raise SystemExit(f'reset block mismatch: {t.count(reset_block)}')
+          t = t.replace(reset_block, 'let teamContextSyncPending = false;\n', 1)
+
+          old_render = '''function render() {\n  const route = (location.hash || "#home").slice(1).split("/");\n  const app = document.getElementById("app");\n  routeContextResetPending = true;\n  if (routeContextResetFrame) cancelAnimationFrame(routeContextResetFrame);\n  routeContextResetFrame = 0;\n  if (route[0] === "team" && ACTIVE.has(route[1])) {\n    app.innerHTML = teamView(route[1]);\n    setTimeout(() => updateTeamGames(route[1]), 0);\n  } else if (route[0] === "matchup" && ACTIVE.has(route[1]) && seriesGamesFor(route[1], route[2]).length) {\n    app.innerHTML = matchupView(route[1], route[2]);\n  } else {\n    app.innerHTML = homeView();\n  }\n  window.scrollTo(0, 0);\n  syncStickyOffsets();\n  syncTeamContextTitle();\n  routeContextResetFrame = requestAnimationFrame(() => settleRouteContextAfterScrollReset());\n}'''
+          new_render = '''function render() {\n  forceRouteTop();\n  const route = (location.hash || "#home").slice(1).split("/");\n  const app = document.getElementById("app");\n  if (route[0] === "team" && ACTIVE.has(route[1])) {\n    app.innerHTML = teamView(route[1]);\n    setTimeout(() => updateTeamGames(route[1]), 0);\n  } else if (route[0] === "matchup" && ACTIVE.has(route[1]) && seriesGamesFor(route[1], route[2]).length) {\n    app.innerHTML = matchupView(route[1], route[2]);\n  } else {\n    app.innerHTML = homeView();\n  }\n  forceRouteTop();\n  syncStickyOffsets();\n  syncTeamContextTitle();\n}'''
+          if t.count(old_render) != 1:
+              raise SystemExit(f'render block mismatch: {t.count(old_render)}')
+          t = t.replace(old_render, new_render, 1)
+
+          old_boot = '''    window.addEventListener("hashchange", render);\n    render();'''
+          new_boot = '''    if ("scrollRestoration" in history) history.scrollRestoration = "manual";\n    window.addEventListener("popstate", () => renderRouteAtomically());\n    render();'''
+          if t.count(old_boot) != 1:
+              raise SystemExit(f'boot listener mismatch: {t.count(old_boot)}')
+          t = t.replace(old_boot, new_boot, 1)
+
+          p.write_text(t, encoding='utf-8')
+          print('PASS: ported proven atomic route handoff and removed obsolete route-reset workaround')
+          PY
+      - name: Validate candidate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          t = Path('site/index.html').read_text(encoding='utf-8')
+          assert 'document.startViewTransition(update)' in t
+          assert 'history.pushState(null, "", nextHash)' in t
+          assert 'history.scrollRestoration = "manual"' in t
+          assert 'window.addEventListener("hashchange", render)' not in t
+          assert 'routeContextResetPending' not in t
+          assert 'settleRouteContextAfterScrollReset' not in t
+          assert '::view-transition-old(root),::view-transition-new(root){animation:none}' in t
+          assert 'class="teams-slot-placeholder"' in t
+          assert '.teams-slot-placeholder{visibility:hidden;pointer-events:none}' in t
+          scripts = re.findall(r'<script>(.*?)</script>', t, re.S)
+          assert len(scripts) == 1
+          Path('/tmp/site-inline.js').write_text(scripts[0], encoding='utf-8')
+          PY
+          node --check /tmp/site-inline.js
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+      - name: Commit production candidate
+        run: |
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add site/index.html
+          git commit -m "Make route handoff atomic at scroll top"
+          git push origin HEAD:fix/atomic-route-handoff
