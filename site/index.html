@@ -93,13 +93,33 @@ footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-siz
 }
 @media(max-width:360px){.brand{font-size:14px}.navlinks button{font-size:9px;padding:2px 3px}.program-grid{gap:6px;padding:7px}.program-card{padding:9px}.mobile-game-details{grid-template-columns:1fr}}
 @media(max-width:720px){.filters.series-filters{display:grid!important;grid-template-columns:1fr}}
+
+/* Route-aware sticky navigation refinement. */
+.series-context-title{grid-area:title;justify-self:center;max-width:100%;min-width:0;display:flex;align-items:center;justify-content:center;gap:5px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-4px);transition:opacity .16s ease,transform .16s ease,visibility 0s linear .16s}.series-context-title.visible{opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s}.series-context-badge{min-width:0;max-width:100%;border-radius:7px;padding:6px 9px;background:var(--series-context-bg,#fff);color:var(--series-context-fg,var(--nav));font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;font-size:17px;line-height:1.05;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 0 1px rgba(15,23,42,.18),0 2px 7px rgba(0,0,0,.2)}
+body.nav-home .topbar-inner{display:flex;align-items:center;gap:16px}body.nav-home .brand{grid-area:auto;width:auto;white-space:nowrap;text-align:left;line-height:normal}body.nav-home .navlinks{grid-area:auto;display:flex;flex-direction:row;align-items:center;margin-left:0;margin-right:0}body.nav-home .searchbox{grid-area:auto;margin-left:auto;width:min(350px,36vw)}body.nav-home .team-context-title,body.nav-home .series-context-title{display:none}
+@media(max-width:950px){body.nav-home .topbar-inner{display:flex}body.nav-home .searchbox{display:none}body.nav-home .navlinks{margin-left:auto;flex-direction:row;align-items:center}body.nav-team .topbar-inner,body.nav-series .topbar-inner{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"brand title nav"}}
+@media(max-width:720px){body.nav-home .topbar-inner{padding:9px 10px;gap:5px}body.nav-home .brand{width:auto;white-space:nowrap;text-align:left;font-size:16px;line-height:normal;letter-spacing:.035em}body.nav-home .navlinks{gap:0;margin-left:auto;margin-right:0;flex-direction:row;align-items:center}body.nav-home .navlinks button{min-height:44px;padding:8px 7px;font-size:12px;line-height:normal}body.nav-team .brand,body.nav-series .brand{width:72px;text-align:center;white-space:normal;line-height:.95}body.nav-team .navlinks,body.nav-series .navlinks{margin-right:8px;align-items:flex-end}body.nav-team .team-context-title{max-width:100%}body.nav-series .team-context-title{display:none}.series-context-title{gap:4px}.series-context-badge{padding:5px 6px;border-radius:6px;font-size:13px;letter-spacing:.01em}}
+@media(max-width:360px){body.nav-home .brand{font-size:14px}body.nav-home .navlinks button{font-size:11px;padding:7px 5px}body.nav-team .brand,body.nav-series .brand{width:66px}.series-context-badge{padding:4px 5px}}
+
+
+/* Mobile navigation affordance polish. */
+.mobile-search-icon{display:none}
+@media(max-width:720px){
+  .navlinks button:first-child{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  .mobile-search-toggle{display:inline-flex;align-items:center;justify-content:flex-end;gap:4px}
+  .mobile-search-icon{display:block;width:11px;height:11px;flex:0 0 11px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  body.nav-team .navlinks,body.nav-series .navlinks{gap:1px}
+  body.nav-team .navlinks button,body.nav-series .navlinks button{min-height:22px;padding:1px 4px}
+}
+
 </style>
 </head>
 <body>
 <header class="topbar"><div class="topbar-inner">
   <button type="button" class="brand" onclick="goHome()">CBB HISTORY<small id="brandSubtitle">Schema-driven prototype</small></button>
   <div id="teamContextTitle" class="team-context-title" aria-hidden="true"></div>
-  <div class="navlinks"><button type="button" onclick="goHome()">Teams</button><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs">Search</button></div>
+  <div id="seriesContextTitle" class="series-context-title" aria-hidden="true"><span id="seriesContextA" class="series-context-badge"></span><span id="seriesContextB" class="series-context-badge"></span></div>
+  <div class="navlinks"><button type="button" onclick="goHome()">Teams</button><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs"><svg class="mobile-search-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14 14"></path></svg><span>Search</span></button></div>
   <div class="searchbox"><label class="sr-only" for="globalSearch">Search current Division I programs</label><input id="globalSearch" placeholder="Search 365 current D1 programs…" autocomplete="off" aria-controls="searchResults" aria-expanded="false"><div id="searchResults" class="search-results" role="listbox"></div></div>
 </div></header>
 <div id="mobileSearchOverlay" class="mobile-search-overlay" aria-hidden="true" onclick="if(event.target===this)toggleMobileSearch(false)">
@@ -780,30 +800,111 @@ function fitTeamContextTitle() {
   }
 }
 
-function syncTeamContextTitle() {
-  const title = document.getElementById("teamContextTitle");
-  if (!title) return;
-  const route = (location.hash || "#home").slice(1).split("/");
-  const teamKey = route[0] === "team" && ACTIVE.has(route[1]) ? route[1] : null;
-  const team = teamKey ? DB.teams[teamKey] : null;
-  const heading = teamKey ? document.getElementById("teamPageTitle") : null;
-  const topbar = document.querySelector(".topbar");
-  if (!team || !heading || !topbar) {
-    hideTeamContextTitle();
-    return;
-  }
-  const colors = opponentColorPresentation(teamKey);
-  const background = colors?.background || team.primary || "#FFFFFF";
-  const foreground = colors?.foreground || textColor(background);
-  title.textContent = team.name;
-  title.style.setProperty("--team-context-bg", background);
-  title.style.setProperty("--team-context-fg", foreground);
-  fitTeamContextTitle();
-  const show = heading.getBoundingClientRect().bottom <= topbar.getBoundingClientRect().bottom;
-  title.classList.toggle("visible", show);
-  title.setAttribute("aria-hidden", show ? "false" : "true");
+function hideSeriesContextTitle() {
+  const container = document.getElementById("seriesContextTitle");
+  if (!container) return;
+  container.classList.remove("visible");
+  container.setAttribute("aria-hidden", "true");
+  const a = document.getElementById("seriesContextA");
+  const b = document.getElementById("seriesContextB");
+  if (a) a.textContent = "";
+  if (b) b.textContent = "";
 }
 
+function applyContextBadgeColors(element, key, profile) {
+  if (!element || !profile) return;
+  const colors = opponentColorPresentation(key);
+  const background = colors?.background || profile.primary || "#FFFFFF";
+  const foreground = colors?.foreground || textColor(background);
+  element.style.setProperty("--series-context-bg", background);
+  element.style.setProperty("--series-context-fg", foreground);
+}
+
+function fitSeriesContextTitle() {
+  const container = document.getElementById("seriesContextTitle");
+  const badges = [document.getElementById("seriesContextA"), document.getElementById("seriesContextB")].filter(Boolean);
+  if (!container || badges.length !== 2 || !badges.every((badge) => badge.textContent)) return;
+  let size = window.innerWidth <= 720 ? 13 : 17;
+  const preferredMin = window.innerWidth <= 720 ? 9 : 11;
+  const absoluteMin = 8;
+  badges.forEach((badge) => {
+    badge.style.fontSize = size + "px";
+    badge.style.letterSpacing = window.innerWidth <= 720 ? ".01em" : ".02em";
+  });
+  while (container.scrollWidth > container.clientWidth + 1 && size > preferredMin) {
+    size -= 1;
+    badges.forEach((badge) => { badge.style.fontSize = size + "px"; });
+  }
+  if (container.scrollWidth > container.clientWidth + 1) {
+    badges.forEach((badge) => { badge.style.letterSpacing = "0"; });
+    while (container.scrollWidth > container.clientWidth + 1 && size > absoluteMin) {
+      size -= 1;
+      badges.forEach((badge) => { badge.style.fontSize = size + "px"; });
+    }
+  }
+}
+
+function syncTeamContextTitle() {
+  const title = document.getElementById("teamContextTitle");
+  const seriesTitle = document.getElementById("seriesContextTitle");
+  if (!title || !seriesTitle) return;
+  const route = (location.hash || "#home").slice(1).split("/");
+  const isTeam = route[0] === "team" && ACTIVE.has(route[1]);
+  const isSeries = route[0] === "matchup" && ACTIVE.has(route[1]) && seriesGamesFor(route[1], route[2]).length;
+  document.body.classList.toggle("nav-team", Boolean(isTeam));
+  document.body.classList.toggle("nav-series", Boolean(isSeries));
+  document.body.classList.toggle("nav-home", !isTeam && !isSeries);
+
+  if (isTeam) {
+    hideSeriesContextTitle();
+    const teamKey = route[1];
+    const team = DB.teams[teamKey];
+    const heading = document.getElementById("teamPageTitle");
+    const topbar = document.querySelector(".topbar");
+    if (!team || !heading || !topbar) {
+      hideTeamContextTitle();
+      return;
+    }
+    const colors = opponentColorPresentation(teamKey);
+    const background = colors?.background || team.primary || "#FFFFFF";
+    const foreground = colors?.foreground || textColor(background);
+    title.textContent = team.name;
+    title.style.setProperty("--team-context-bg", background);
+    title.style.setProperty("--team-context-fg", foreground);
+    fitTeamContextTitle();
+    const show = heading.getBoundingClientRect().bottom <= topbar.getBoundingClientRect().bottom;
+    title.classList.toggle("visible", show);
+    title.setAttribute("aria-hidden", show ? "false" : "true");
+    return;
+  }
+
+  hideTeamContextTitle();
+  if (isSeries) {
+    const teamAKey = route[1];
+    const teamBKey = route[2];
+    const teamA = DB.teams[teamAKey];
+    const teamB = opponentProfile(teamAKey, teamBKey);
+    const heading = document.querySelector(".match-head");
+    const topbar = document.querySelector(".topbar");
+    const badgeA = document.getElementById("seriesContextA");
+    const badgeB = document.getElementById("seriesContextB");
+    if (!teamA || !teamB || !heading || !topbar || !badgeA || !badgeB) {
+      hideSeriesContextTitle();
+      return;
+    }
+    badgeA.textContent = teamA.name;
+    badgeB.textContent = teamB.name;
+    applyContextBadgeColors(badgeA, teamAKey, teamA);
+    applyContextBadgeColors(badgeB, teamBKey, teamB);
+    fitSeriesContextTitle();
+    const show = heading.getBoundingClientRect().bottom <= topbar.getBoundingClientRect().bottom;
+    seriesTitle.classList.toggle("visible", show);
+    seriesTitle.setAttribute("aria-hidden", show ? "false" : "true");
+    return;
+  }
+
+  hideSeriesContextTitle();
+}
 let teamContextSyncPending = false;
 function scheduleTeamContextTitleSync() {
   if (teamContextSyncPending) return;
