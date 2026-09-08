@@ -47,7 +47,6 @@ jobs:
               const desktop = document.getElementById('desktop');
               await ready(mobile);
               await ready(desktop);
-
               const md = mobile.contentDocument;
               const mw = mobile.contentWindow;
               const dd = desktop.contentDocument;
@@ -67,24 +66,20 @@ jobs:
               const sort = dd.getElementById('opponentSort');
               check('Opponent grouping defaults on', !!groupToggle?.checked);
               check('Opponent sorting defaults to games played', sort?.value === 'games', sort?.value || 'missing');
-
               groupToggle.checked = false;
               dw.updateOpponentBreakdown('missouri');
               check('Ungrouped opponent view renders one raw table', dd.querySelectorAll('.conference-group').length === 0 && !!dd.querySelector('.ungrouped-opponent-table'));
-
               sort.value = 'wins';
               dw.updateOpponentBreakdown('missouri');
               let rawRows = [...dd.querySelectorAll('.ungrouped-opponent-table tbody tr')];
               const firstWins = rawRows.slice(0, 6).map(recordWins);
               check('Wins sort is descending', firstWins.every((value, index) => index === 0 || firstWins[index - 1] >= value), firstWins.join(','));
-
               sort.value = 'alpha';
               dw.updateOpponentBreakdown('missouri');
               rawRows = [...dd.querySelectorAll('.ungrouped-opponent-table tbody tr')];
               const names = rawRows.slice(0, 6).map((row) => row.children[0].textContent.trim());
               const sortedNames = [...names].sort((a, b) => a.localeCompare(b));
               check('Alphabetical sort works', names.join('|') === sortedNames.join('|'), names.join(', '));
-
               groupToggle.checked = true;
               sort.value = 'games';
               dw.updateOpponentBreakdown('missouri');
@@ -107,14 +102,17 @@ jobs:
 
                 const venueInput = dd.getElementById('venueFilter');
                 const venueOptions = [...dd.querySelectorAll('#venueFilterOptions option')].map((option) => option.value);
-                const kcVenue = venueOptions.find((value) => value.endsWith('— Kansas City, MO'));
-                check('Searchable venue option includes city/state', !!kcVenue, kcVenue || 'none');
+                const kcVenueOptions = venueOptions.filter((value) => value.includes('Kansas City, MO'));
+                const kcVenue = kcVenueOptions[0];
+                check('Searchable venue option includes city/state', !!kcVenue && kcVenue.includes(' — '), kcVenueOptions.join(' | '));
                 if (kcVenue) {
                   venueInput.value = kcVenue;
                   dw.updateTeamGames('missouri', 0, true);
                   await delay(100);
                   const narrowed = gameRows(dd);
+                  const selectedVenueName = kcVenue.split(' — ')[0];
                   check('Venue + location filters combine', narrowed.length > 0 && narrowed.length <= kcRows.length, `${narrowed.length} vs city ${kcRows.length}`);
+                  check('Combined venue filter returns selected building', narrowed.every((row) => row.children[5].textContent.trim() === selectedVenueName), selectedVenueName);
                 }
               }
               dw.clearTeamFilters('missouri');
@@ -149,7 +147,6 @@ jobs:
               check('NCAA Tournament card explains orientation', [...metricCards].some((card) => card.textContent.includes('NCAA Tournament Series') && card.textContent.includes('Missouri record vs. Kansas')));
               check('Series history filters all render', ['matchupSiteFilter','matchupVenueFilter','matchupLocationFilter','matchupTypeFilter'].every((id) => sd.getElementById(id)));
               check('Series filters visible on desktop', sw.getComputedStyle(sd.querySelector('.series-filters')).display !== 'none', sw.getComputedStyle(sd.querySelector('.series-filters')).display);
-
               mw.location.hash = 'matchup/missouri/kansas';
               await delay(600);
               const msd = mobile.contentDocument;
@@ -158,7 +155,6 @@ jobs:
               check('QA harness execution', false, error.stack || error.message);
             }
             document.getElementById('output').textContent = results.join('\n');
-            document.body.dataset.done = 'true';
           }
           window.addEventListener('load', () => setTimeout(run, 500));
           </script>
