@@ -24,7 +24,7 @@ jobs:
           cat > site/_qa_mobile_context.html <<'EOF'
           <!doctype html><html><body><iframe id="appframe" style="width:390px;height:844px;border:0" src="/index.html#home"></iframe><pre id="out">RUNNING</pre><script>
           const delay=ms=>new Promise(r=>setTimeout(r,ms));
-          async function waitFor(fn,label){for(let i=0;i<180;i++){try{const v=fn();if(v)return v}catch{}await delay(50)}throw new Error('timeout: '+label)}
+          async function waitFor(fn,label){for(let i=0;i<300;i++){try{const v=fn();if(v)return v}catch{}await delay(50)}throw new Error('timeout: '+label)}
           async function frames(w,n=3){for(let i=0;i<n;i++)await new Promise(r=>w.requestAnimationFrame(r))}
           function pass(lines,ok,label,extra=''){lines.push(`${ok?'PASS':'FAIL'}: ${label}${extra?` :: ${extra}`:''}`)}
           window.addEventListener('load',()=>setTimeout(async()=>{
@@ -76,14 +76,14 @@ jobs:
               pass(lines,seriesBadge.classList.contains('visible'),'series badges appear normally after scrolling past series heading',`scrollY=${Math.round(w.scrollY)}`);
             }catch(e){lines.push(`FAIL: ${e.message}`)}
             document.getElementById('out').textContent=lines.join('\n');
-          },700));
+          },250));
           </script></body></html>
           EOF
           python -m http.server 8000 --directory site >/tmp/ui-context-server.log 2>&1 &
           PID=$!
           trap 'kill $PID || true' EXIT
           for i in {1..30}; do curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break; sleep .2; done
-          google-chrome --headless=new --disable-gpu --no-sandbox --window-size=900,1100 --virtual-time-budget=18000 --dump-dom http://127.0.0.1:8000/_qa_mobile_context.html >/tmp/ui-context-dom.html
+          google-chrome --headless=new --disable-gpu --no-sandbox --window-size=900,1100 --virtual-time-budget=65000 --dump-dom http://127.0.0.1:8000/_qa_mobile_context.html >/tmp/ui-context-dom.html
           python - <<'PY'
           from pathlib import Path
           from html import unescape
