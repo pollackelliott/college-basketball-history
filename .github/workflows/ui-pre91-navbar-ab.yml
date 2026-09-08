@@ -1,0 +1,98 @@
+name: Pre-91 navbar A/B
+on:
+  push:
+    branches:
+      - fix/mobile-topbar-repaint-blip
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-topbar-repaint-blip
+          fetch-depth: 0
+      - name: Restore pre-91 navbar mechanics without visible Teams
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('site/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = [
+            (
+              '.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:grid;grid-template-columns:auto minmax(0,1fr) minmax(280px,350px);grid-template-areas:"brand title search";align-items:center;gap:16px;min-width:0}',
+              '.topbar-inner{max-width:1280px;margin:0 auto;padding:14px 22px;display:grid;grid-template-columns:auto auto minmax(0,1fr) minmax(280px,350px);grid-template-areas:"brand nav title search";align-items:center;gap:16px;min-width:0}'
+            ),
+            (
+              '.navlinks{display:none;gap:4px}.navlinks button{min-height:40px;background:transparent;color:#dce7f2;border:0;padding:9px 10px;border-radius:6px;cursor:pointer}',
+              '.navlinks{grid-area:nav;display:flex;gap:4px}.navlinks button{min-height:40px;background:transparent;color:#dce7f2;border:0;padding:9px 10px;border-radius:6px;cursor:pointer}'
+            ),
+          ]
+          for old, new in replacements:
+              if text.count(old) != 1:
+                  raise SystemExit(f'Expected exactly one navbar anchor, found {text.count(old)} for {old[:50]}')
+              text = text.replace(old, new, 1)
+
+          marker = '\n/* Three-zone topbar without redundant Teams control. */\n'
+          start = text.find(marker)
+          if start < 0:
+              raise SystemExit('PR #91 override block not found')
+          end_marker = '\n\n</style>'
+          end = text.find(end_marker, start)
+          if end < 0:
+              raise SystemExit('Could not find end of PR #91 override block')
+          text = text[:start] + text[end:]
+
+          old_nav = '<div class="navlinks"><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs">'
+          new_nav = '<div class="navlinks"><button type="button" class="teams-slot-placeholder" aria-hidden="true" tabindex="-1" disabled>Teams</button><button type="button" class="mobile-search-toggle" onclick="toggleMobileSearch(true)" aria-label="Search programs">'
+          if text.count(old_nav) != 1:
+              raise SystemExit(f'Expected one nav HTML anchor, found {text.count(old_nav)}')
+          text = text.replace(old_nav, new_nav, 1)
+
+          css_anchor = '.navlinks button:hover{background:rgba(255,255,255,.09)}'
+          replacement = css_anchor + '.teams-slot-placeholder{visibility:hidden;pointer-events:none}'
+          if text.count(css_anchor) != 1:
+              raise SystemExit(f'Expected one nav hover CSS anchor, found {text.count(css_anchor)}')
+          text = text.replace(css_anchor, replacement, 1)
+
+          path.write_text(text, encoding='utf-8')
+          print('PASS: restored pre-#91 navbar grid and route mechanics with invisible Teams geometry placeholder')
+          PY
+      - name: Validate A/B scope and repository
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          text = Path('site/index.html').read_text(encoding='utf-8')
+          assert 'grid-template-columns:auto auto minmax(0,1fr) minmax(280px,350px)' in text
+          assert 'grid-template-areas:"brand nav title search"' in text
+          assert '.navlinks{grid-area:nav;display:flex;gap:4px}' in text
+          assert 'Three-zone topbar without redundant Teams control' not in text
+          assert 'class="teams-slot-placeholder"' in text
+          assert '.teams-slot-placeholder{visibility:hidden;pointer-events:none}' in text
+          assert 'onclick="goHome()">Teams</button>' not in text
+          # Keep #92 route-reset guard untouched.
+          assert 'if (routeContextResetPending)' in text
+          # This A/B intentionally uses current-main rendering/navigation only.
+          assert 'history.pushState(null, "", nextHash)' not in text
+          assert 'function commitRouteView(app, html)' not in text
+          scripts = re.findall(r'<script>(.*?)</script>', text, re.S)
+          assert len(scripts) == 1
+          Path('/tmp/site-inline.js').write_text(scripts[0], encoding='utf-8')
+          print('PASS: A/B isolates PR #91 navbar mechanics; no route-render experiments remain')
+          PY
+          node --check /tmp/site-inline.js
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+      - name: Commit production A/B change
+        run: |
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add site/index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Restore pre-91 navbar mechanics without Teams"
+          git push origin HEAD:fix/mobile-topbar-repaint-blip
