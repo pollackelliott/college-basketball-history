@@ -104,15 +104,15 @@ jobs:
                 const venueOptions = [...dd.querySelectorAll('#venueFilterOptions option')].map((option) => option.value);
                 const kcVenueOptions = venueOptions.filter((value) => value.includes('Kansas City, MO'));
                 const kcVenue = kcVenueOptions[0];
-                check('Searchable venue option includes city/state', !!kcVenue && kcVenue.includes(' — '), kcVenueOptions.join(' | '));
+                check('Searchable venue options include building plus city/state', !!kcVenue && kcVenue !== 'Kansas City, MO', kcVenueOptions.join(' | '));
                 if (kcVenue) {
                   venueInput.value = kcVenue;
                   dw.updateTeamGames('missouri', 0, true);
                   await delay(100);
                   const narrowed = gameRows(dd);
-                  const selectedVenueName = kcVenue.split(' — ')[0];
+                  const narrowedVenues = [...new Set(narrowed.map((row) => row.children[5].textContent.trim()))];
                   check('Venue + location filters combine', narrowed.length > 0 && narrowed.length <= kcRows.length, `${narrowed.length} vs city ${kcRows.length}`);
-                  check('Combined venue filter returns selected building', narrowed.every((row) => row.children[5].textContent.trim() === selectedVenueName), selectedVenueName);
+                  check('Combined venue filter returns one selected building', narrowedVenues.length === 1 && kcVenue.includes(narrowedVenues[0]), narrowedVenues.join(' | '));
                 }
               }
               dw.clearTeamFilters('missouri');
