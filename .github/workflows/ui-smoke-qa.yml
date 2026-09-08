@@ -1,0 +1,187 @@
+name: Browser UI smoke QA
+
+on:
+  push:
+    branches:
+      - chore/history-ui-exploration
+
+jobs:
+  ui-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render and exercise UI in headless Chrome
+        run: |
+          google-chrome --version
+          cat > site/_qa.html <<'EOF'
+          <!doctype html>
+          <html><body>
+          <iframe id="mobile" src="/index.html#team/missouri" style="width:390px;height:844px;border:0"></iframe>
+          <iframe id="desktop" src="/index.html#team/missouri" style="width:1200px;height:900px;border:0"></iframe>
+          <pre id="output">RUNNING</pre>
+          <script>
+          const results = [];
+          const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+          function check(name, pass, detail = "") {
+            results.push(`${pass ? "PASS" : "FAIL"}: ${name}${detail ? ` :: ${detail}` : ""}`);
+          }
+          function gameRows(doc) {
+            return [...doc.querySelectorAll('.desktop-history tbody tr')].filter((row) => !row.classList.contains('desktop-history-group') && !row.querySelector('.empty'));
+          }
+          function recordWins(row) {
+            const text = row?.children?.[1]?.textContent?.trim() || "";
+            const match = text.match(/^(\d[\d,]*)/);
+            return match ? Number(match[1].replaceAll(',', '')) : -1;
+          }
+          async function ready(frame) {
+            for (let i = 0; i < 40; i += 1) {
+              const doc = frame.contentDocument;
+              if (doc?.querySelector('#teamGamesTable .mobile-game-row') && doc.querySelector('#opponentSort')) return;
+              await delay(125);
+            }
+            throw new Error(`Frame ${frame.id} did not render team page`);
+          }
+          async function run() {
+            try {
+              const mobile = document.getElementById('mobile');
+              const desktop = document.getElementById('desktop');
+              await ready(mobile);
+              await ready(desktop);
+
+              const md = mobile.contentDocument;
+              const mw = mobile.contentWindow;
+              const dd = desktop.contentDocument;
+              const dw = desktop.contentWindow;
+
+              check('About navigation removed', !dd.querySelector('.navlinks')?.textContent?.includes('About'));
+              check('Homepage tagline removed from source DOM', !dd.documentElement.innerHTML.includes('Every school uses its official colors'));
+              check('Desktop season dividers rendered', dd.querySelectorAll('.desktop-history-season-row').length > 0, `${dd.querySelectorAll('.desktop-history-season-row').length} rows`);
+              check('Desktop month dividers rendered', dd.querySelectorAll('.desktop-history-month-row').length > 0, `${dd.querySelectorAll('.desktop-history-month-row').length} rows`);
+
+              const colorLink = dd.querySelector('.school-color-link');
+              const colorStyle = colorLink ? dw.getComputedStyle(colorLink) : null;
+              check('Opponent school-color badge rendered', !!colorLink && colorStyle.backgroundColor !== 'rgba(0, 0, 0, 0)', colorLink?.textContent?.trim() || 'none');
+              check('Opponent school-color badge remains underlined', !!colorStyle && colorStyle.textDecorationLine.includes('underline'), colorStyle?.textDecorationLine || 'none');
+
+              const groupToggle = dd.getElementById('groupByConference');
+              const sort = dd.getElementById('opponentSort');
+              check('Opponent grouping defaults on', !!groupToggle?.checked);
+              check('Opponent sorting defaults to games played', sort?.value === 'games', sort?.value || 'missing');
+
+              groupToggle.checked = false;
+              dw.updateOpponentBreakdown('missouri');
+              check('Ungrouped opponent view renders one raw table', dd.querySelectorAll('.conference-group').length === 0 && !!dd.querySelector('.ungrouped-opponent-table'));
+
+              sort.value = 'wins';
+              dw.updateOpponentBreakdown('missouri');
+              let rawRows = [...dd.querySelectorAll('.ungrouped-opponent-table tbody tr')];
+              const firstWins = rawRows.slice(0, 6).map(recordWins);
+              check('Wins sort is descending', firstWins.every((value, index) => index === 0 || firstWins[index - 1] >= value), firstWins.join(','));
+
+              sort.value = 'alpha';
+              dw.updateOpponentBreakdown('missouri');
+              rawRows = [...dd.querySelectorAll('.ungrouped-opponent-table tbody tr')];
+              const names = rawRows.slice(0, 6).map((row) => row.children[0].textContent.trim());
+              const sortedNames = [...names].sort((a, b) => a.localeCompare(b));
+              check('Alphabetical sort works', names.join('|') === sortedNames.join('|'), names.join(', '));
+
+              groupToggle.checked = true;
+              sort.value = 'games';
+              dw.updateOpponentBreakdown('missouri');
+              check('Grouped opponent view restores conference groups', dd.querySelectorAll('.conference-group').length > 0);
+
+              const locationInput = dd.getElementById('locationFilter');
+              const locationOptions = [...dd.querySelectorAll('#locationFilterOptions option')].map((option) => option.value);
+              const kc = locationOptions.find((value) => value.toLowerCase() === 'kansas city, mo');
+              check('Kansas City, MO location option exists', !!kc, locationOptions.filter((value) => /kansas city/i.test(value)).join(' | '));
+              if (kc) {
+                locationInput.value = kc;
+                dw.updateTeamGames('missouri', 0, true);
+                await delay(100);
+                const kcRows = gameRows(dd);
+                const locations = kcRows.map((row) => row.children[6].textContent.trim());
+                check('Kansas City location filter returns games', kcRows.length > 0, `${kcRows.length} visible rows`);
+                check('Kansas City location filter spans only selected city', locations.every((value) => value === 'Kansas City, MO'), [...new Set(locations)].join(' | '));
+                const venues = [...new Set(kcRows.map((row) => row.children[5].textContent.trim()))];
+                check('Kansas City city view spans multiple venues', venues.length > 1, venues.join(' | '));
+
+                const venueInput = dd.getElementById('venueFilter');
+                const venueOptions = [...dd.querySelectorAll('#venueFilterOptions option')].map((option) => option.value);
+                const kcVenue = venueOptions.find((value) => value.endsWith('— Kansas City, MO'));
+                check('Searchable venue option includes city/state', !!kcVenue, kcVenue || 'none');
+                if (kcVenue) {
+                  venueInput.value = kcVenue;
+                  dw.updateTeamGames('missouri', 0, true);
+                  await delay(100);
+                  const narrowed = gameRows(dd);
+                  check('Venue + location filters combine', narrowed.length > 0 && narrowed.length <= kcRows.length, `${narrowed.length} vs city ${kcRows.length}`);
+                }
+              }
+              dw.clearTeamFilters('missouri');
+
+              const seasonGroup = md.querySelector('.mobile-history-season-group');
+              const seasonHeader = seasonGroup?.querySelector('.mobile-history-season');
+              check('Mobile season header computed sticky', seasonHeader && mw.getComputedStyle(seasonHeader).position === 'sticky', mw.getComputedStyle(seasonHeader).position);
+              check('Mobile month header computed sticky', md.querySelector('.mobile-history-month') && mw.getComputedStyle(md.querySelector('.mobile-history-month')).position === 'sticky', mw.getComputedStyle(md.querySelector('.mobile-history-month')).position);
+              if (seasonGroup && seasonGroup.offsetHeight > 300) {
+                const target = seasonGroup.offsetTop + Math.min(900, Math.floor(seasonGroup.offsetHeight / 2));
+                mw.scrollTo(0, target);
+                await delay(150);
+                const topbarHeight = md.querySelector('.topbar').getBoundingClientRect().height;
+                const seasonRect = seasonHeader.getBoundingClientRect();
+                const seasonHeight = seasonRect.height;
+                const monthHeaders = [...md.querySelectorAll('.mobile-history-month')];
+                const stuckMonth = monthHeaders.find((header) => Math.abs(header.getBoundingClientRect().top - (topbarHeight + seasonHeight)) < 3);
+                check('Mobile season header actually sticks while scrolling', Math.abs(seasonRect.top - topbarHeight) < 3, `seasonTop=${seasonRect.top.toFixed(1)} topbar=${topbarHeight.toFixed(1)}`);
+                check('Mobile active month actually sticks beneath season', !!stuckMonth, monthHeaders.map((h) => `${h.textContent.trim()}:${h.getBoundingClientRect().top.toFixed(1)}`).slice(0,6).join(' | '));
+              } else {
+                check('Mobile sticky geometry test has adequate season height', false, `${seasonGroup?.offsetHeight || 0}px`);
+              }
+
+              dw.location.hash = 'matchup/missouri/kansas';
+              await delay(600);
+              const sd = desktop.contentDocument;
+              const sw = desktop.contentWindow;
+              const metricCards = sd.querySelectorAll('.match-metrics .metric');
+              check('Series page has exactly six metric cards', metricCards.length === 6, `${metricCards.length} cards`);
+              const seriesHeader = [...sd.querySelectorAll('.match-head h2')].map((node) => node.textContent.trim()).join(' | ');
+              check('Series header includes nicknames', /Tigers/i.test(seriesHeader) && /Jayhawks/i.test(seriesHeader), seriesHeader);
+              check('NCAA Tournament card explains orientation', [...metricCards].some((card) => card.textContent.includes('NCAA Tournament Series') && card.textContent.includes('Missouri record vs. Kansas')));
+              check('Series history filters all render', ['matchupSiteFilter','matchupVenueFilter','matchupLocationFilter','matchupTypeFilter'].every((id) => sd.getElementById(id)));
+              check('Series filters visible on desktop', sw.getComputedStyle(sd.querySelector('.series-filters')).display !== 'none', sw.getComputedStyle(sd.querySelector('.series-filters')).display);
+
+              mw.location.hash = 'matchup/missouri/kansas';
+              await delay(600);
+              const msd = mobile.contentDocument;
+              check('Series filters visible on mobile', mobile.contentWindow.getComputedStyle(msd.querySelector('.series-filters')).display !== 'none', mobile.contentWindow.getComputedStyle(msd.querySelector('.series-filters')).display);
+            } catch (error) {
+              check('QA harness execution', false, error.stack || error.message);
+            }
+            document.getElementById('output').textContent = results.join('\n');
+            document.body.dataset.done = 'true';
+          }
+          window.addEventListener('load', () => setTimeout(run, 500));
+          </script>
+          </body></html>
+          EOF
+          python -m http.server 8000 --directory site >/tmp/ui-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break; sleep 0.2; done
+          google-chrome --headless=new --disable-gpu --no-sandbox --virtual-time-budget=12000 --dump-dom http://127.0.0.1:8000/_qa.html > /tmp/qa-dom.html
+          python - <<'PY'
+          from html import unescape
+          from pathlib import Path
+          import re
+          text = Path('/tmp/qa-dom.html').read_text(encoding='utf-8')
+          match = re.search(r'<pre id="output">(.*?)</pre>', text, flags=re.S)
+          if not match:
+              raise SystemExit('QA output element not found')
+          output = unescape(re.sub(r'<[^>]+>', '', match.group(1))).strip()
+          print(output)
+          failures = [line for line in output.splitlines() if line.startswith('FAIL:')]
+          if failures:
+              raise SystemExit(f'{len(failures)} browser UI smoke checks failed')
+          if output.count('PASS:') < 20:
+              raise SystemExit(f'Expected at least 20 passing browser checks, got {output.count("PASS:")}')
+          PY
