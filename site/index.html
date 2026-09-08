@@ -114,6 +114,10 @@ body.nav-home .topbar-inner{display:flex;align-items:center;gap:16px}body.nav-ho
 
 
 
+
+/* Keep the old painted route visible until the new route is captured at the top. */
+::view-transition-old(root),::view-transition-new(root){animation:none}
+
 </style>
 </head>
 <body>
@@ -596,16 +600,45 @@ function teamLogo(keyOrProgram) {
   return `<div class="logo-disc" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}">${initials(team.name)}</div>`;
 }
 
+function forceRouteTop() {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+function renderRouteAtomically(updateUrl) {
+  const update = () => {
+    if (updateUrl) updateUrl();
+    forceRouteTop();
+    render();
+  };
+  if (document.startViewTransition) {
+    document.startViewTransition(update);
+  } else {
+    update();
+  }
+}
+
+function navigateRoute(route) {
+  const nextHash = `#${route}`;
+  if (location.hash === nextHash) {
+    forceRouteTop();
+    syncTeamContextTitle();
+    return;
+  }
+  renderRouteAtomically(() => history.pushState(null, "", nextHash));
+}
+
 function goHome() {
-  location.hash = "home";
+  navigateRoute("home");
 }
 
 function goTeam(key) {
-  if (ACTIVE.has(key)) location.hash = `team/${key}`;
+  if (ACTIVE.has(key)) navigateRoute(`team/${key}`);
 }
 
 function goMatch(teamA, teamB) {
-  if (seriesGamesFor(teamA, teamB).length) location.hash = `matchup/${teamA}/${teamB}`;
+  if (seriesGamesFor(teamA, teamB).length) navigateRoute(`matchup/${teamA}/${teamB}`);
 }
 
 function directoryCard(program) {
@@ -857,14 +890,6 @@ function syncTeamContextTitle() {
   document.body.classList.toggle("nav-series", Boolean(isSeries));
   document.body.classList.toggle("nav-home", !isTeam && !isSeries);
 
-  // Mobile route context scroll-reset guard: iOS can apply scrollTo(0, 0)
-  // after the newly rendered heading has already been measured. Keep the
-  // sticky context hidden until the route is actually settled at the top.
-  if (routeContextResetPending) {
-    hideTeamContextTitle();
-    hideSeriesContextTitle();
-    return;
-  }
 
   if (isTeam) {
     hideSeriesContextTitle();
@@ -917,21 +942,6 @@ function syncTeamContextTitle() {
   hideSeriesContextTitle();
 }
 let teamContextSyncPending = false;
-let routeContextResetPending = false;
-let routeContextResetFrame = 0;
-
-function settleRouteContextAfterScrollReset(attempt = 0) {
-  if (!routeContextResetPending) return;
-  if (Math.abs(window.scrollY) <= 1 || attempt >= 12) {
-    routeContextResetPending = false;
-    routeContextResetFrame = 0;
-    syncStickyOffsets();
-    syncTeamContextTitle();
-    return;
-  }
-  window.scrollTo(0, 0);
-  routeContextResetFrame = requestAnimationFrame(() => settleRouteContextAfterScrollReset(attempt + 1));
-}
 
 function scheduleTeamContextTitleSync() {
   if (teamContextSyncPending) return;
@@ -1587,11 +1597,9 @@ function matchupView(teamA, teamB) {
 }
 
 function render() {
+  forceRouteTop();
   const route = (location.hash || "#home").slice(1).split("/");
   const app = document.getElementById("app");
-  routeContextResetPending = true;
-  if (routeContextResetFrame) cancelAnimationFrame(routeContextResetFrame);
-  routeContextResetFrame = 0;
   if (route[0] === "team" && ACTIVE.has(route[1])) {
     app.innerHTML = teamView(route[1]);
     setTimeout(() => updateTeamGames(route[1]), 0);
@@ -1600,10 +1608,9 @@ function render() {
   } else {
     app.innerHTML = homeView();
   }
-  window.scrollTo(0, 0);
+  forceRouteTop();
   syncStickyOffsets();
   syncTeamContextTitle();
-  routeContextResetFrame = requestAnimationFrame(() => settleRouteContextAfterScrollReset());
 }
 
 function openProgramFromSearch(key, inputId, resultsId, mobile = false) {
@@ -1714,7 +1721,8 @@ async function boot() {
       scheduleTeamContextTitleSync();
     });
     window.addEventListener("scroll", scheduleTeamContextTitleSync, { passive: true });
-    window.addEventListener("hashchange", render);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.addEventListener("popstate", () => renderRouteAtomically());
     render();
   } catch (error) {
     console.error(error);
