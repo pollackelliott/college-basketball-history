@@ -21,75 +21,81 @@ jobs:
           node --check /tmp/site-inline.js
       - name: Browser QA delayed mobile scroll reset
         run: |
-          cat > site/_qa_mobile_context.html <<'EOF'
-          <!doctype html><html><body><iframe id="appframe" style="width:390px;height:844px;border:0" src="/index.html#home"></iframe><pre id="out">RUNNING</pre><script>
-          const delay=ms=>new Promise(r=>setTimeout(r,ms));
-          async function waitFor(fn,label){for(let i=0;i<300;i++){try{const v=fn();if(v)return v}catch{}await delay(50)}throw new Error('timeout: '+label)}
-          async function frames(w,n=3){for(let i=0;i<n;i++)await new Promise(r=>w.requestAnimationFrame(r))}
-          function pass(lines,ok,label,extra=''){lines.push(`${ok?'PASS':'FAIL'}: ${label}${extra?` :: ${extra}`:''}`)}
-          window.addEventListener('load',()=>setTimeout(async()=>{
+          python - <<'PY'
+          from pathlib import Path
+          page = Path('site/index.html').read_text(encoding='utf-8')
+          qa = r'''
+          <pre id="qaOut" style="position:fixed;left:0;bottom:0;z-index:9999;background:white">RUNNING</pre>
+          <script>
+          const qaDelay=ms=>new Promise(r=>setTimeout(r,ms));
+          async function qaWaitFor(fn,label){for(let i=0;i<300;i++){try{const v=fn();if(v)return v}catch{}await qaDelay(50)}throw new Error('timeout: '+label)}
+          async function qaFrames(n=3){for(let i=0;i<n;i++)await new Promise(r=>requestAnimationFrame(r))}
+          function qaPass(lines,ok,label,extra=''){lines.push(`${ok?'PASS':'FAIL'}: ${label}${extra?` :: ${extra}`:''}`)}
+          setTimeout(async()=>{
             const lines=[];
             try{
-              const frame=document.getElementById('appframe');
-              const w=frame.contentWindow;
-              await waitFor(()=>w.document.querySelector('#programGrid'),'home ready');
-              await frames(w,4);
+              await qaWaitFor(()=>document.querySelector('#programGrid'),'home ready');
+              await qaFrames(4);
 
-              w.scrollTo(0,1800);
-              await frames(w,3);
-              const nativeScrollTo=w.scrollTo.bind(w);
+              window.scrollTo(0,1800);
+              await qaFrames(3);
+              const nativeScrollTo=window.scrollTo.bind(window);
               let delayedCalls=0;
-              w.scrollTo=(...args)=>{delayedCalls++;};
-              w.location.hash='team/alabama';
-              await waitFor(()=>w.document.getElementById('teamPageTitle'),'team rendered');
-              await frames(w,3);
-              const teamBadge=w.document.getElementById('teamContextTitle');
-              pass(lines,!teamBadge.classList.contains('visible'),'team badge stays hidden while mobile scroll reset is delayed',`scrollY=${Math.round(w.scrollY)}, delayedCalls=${delayedCalls}`);
+              window.scrollTo=(...args)=>{delayedCalls++;};
+              location.hash='team/alabama';
+              await qaWaitFor(()=>document.getElementById('teamPageTitle'),'team rendered');
+              await qaFrames(3);
+              const teamBadge=document.getElementById('teamContextTitle');
+              qaPass(lines,!teamBadge.classList.contains('visible'),'team badge stays hidden while mobile scroll reset is delayed',`scrollY=${Math.round(window.scrollY)}, delayedCalls=${delayedCalls}`);
 
-              w.scrollTo=nativeScrollTo;
+              window.scrollTo=nativeScrollTo;
               nativeScrollTo(0,0);
-              await waitFor(()=>Math.abs(w.scrollY)<=1,'team top reset');
-              await frames(w,4);
-              pass(lines,!teamBadge.classList.contains('visible'),'team badge stays hidden once route settles at top',`scrollY=${Math.round(w.scrollY)}`);
+              await qaWaitFor(()=>Math.abs(window.scrollY)<=1,'team top reset');
+              await qaFrames(4);
+              qaPass(lines,!teamBadge.classList.contains('visible'),'team badge stays hidden once route settles at top',`scrollY=${Math.round(window.scrollY)}`);
 
               nativeScrollTo(0,650);
-              await frames(w,5);
-              pass(lines,teamBadge.classList.contains('visible'),'team badge appears normally after scrolling past team heading',`scrollY=${Math.round(w.scrollY)}`);
+              await qaFrames(5);
+              qaPass(lines,teamBadge.classList.contains('visible'),'team badge appears normally after scrolling past team heading',`scrollY=${Math.round(window.scrollY)}`);
 
-              const nativeAgain=w.scrollTo.bind(w);
+              const nativeAgain=window.scrollTo.bind(window);
               delayedCalls=0;
-              w.scrollTo=(...args)=>{delayedCalls++;};
-              w.location.hash='matchup/alabama/auburn';
-              await waitFor(()=>w.document.querySelector('.match-head'),'series rendered');
-              await frames(w,3);
-              const seriesBadge=w.document.getElementById('seriesContextTitle');
-              pass(lines,!seriesBadge.classList.contains('visible'),'series badges stay hidden while mobile scroll reset is delayed',`scrollY=${Math.round(w.scrollY)}, delayedCalls=${delayedCalls}`);
+              window.scrollTo=(...args)=>{delayedCalls++;};
+              location.hash='matchup/alabama/auburn';
+              await qaWaitFor(()=>document.querySelector('.match-head'),'series rendered');
+              await qaFrames(3);
+              const seriesBadge=document.getElementById('seriesContextTitle');
+              qaPass(lines,!seriesBadge.classList.contains('visible'),'series badges stay hidden while mobile scroll reset is delayed',`scrollY=${Math.round(window.scrollY)}, delayedCalls=${delayedCalls}`);
 
-              w.scrollTo=nativeAgain;
+              window.scrollTo=nativeAgain;
               nativeAgain(0,0);
-              await waitFor(()=>Math.abs(w.scrollY)<=1,'series top reset');
-              await frames(w,4);
-              pass(lines,!seriesBadge.classList.contains('visible'),'series badges stay hidden once route settles at top',`scrollY=${Math.round(w.scrollY)}`);
+              await qaWaitFor(()=>Math.abs(window.scrollY)<=1,'series top reset');
+              await qaFrames(4);
+              qaPass(lines,!seriesBadge.classList.contains('visible'),'series badges stay hidden once route settles at top',`scrollY=${Math.round(window.scrollY)}`);
 
               nativeAgain(0,650);
-              await frames(w,5);
-              pass(lines,seriesBadge.classList.contains('visible'),'series badges appear normally after scrolling past series heading',`scrollY=${Math.round(w.scrollY)}`);
+              await qaFrames(5);
+              qaPass(lines,seriesBadge.classList.contains('visible'),'series badges appear normally after scrolling past series heading',`scrollY=${Math.round(window.scrollY)}`);
             }catch(e){lines.push(`FAIL: ${e.message}`)}
-            document.getElementById('out').textContent=lines.join('\n');
-          },250));
-          </script></body></html>
-          EOF
+            document.getElementById('qaOut').textContent=lines.join('\n');
+          },150);
+          </script>
+          '''
+          if page.count('</body>') != 1:
+              raise SystemExit('Expected one body close')
+          Path('site/_qa_mobile_context.html').write_text(page.replace('</body>', qa + '</body>'), encoding='utf-8')
+          PY
           python -m http.server 8000 --directory site >/tmp/ui-context-server.log 2>&1 &
           PID=$!
           trap 'kill $PID || true' EXIT
           for i in {1..30}; do curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break; sleep .2; done
-          google-chrome --headless=new --disable-gpu --no-sandbox --window-size=900,1100 --virtual-time-budget=65000 --dump-dom http://127.0.0.1:8000/_qa_mobile_context.html >/tmp/ui-context-dom.html
+          google-chrome --headless=new --disable-gpu --no-sandbox --window-size=390,844 --virtual-time-budget=45000 --dump-dom http://127.0.0.1:8000/_qa_mobile_context.html#home >/tmp/ui-context-dom.html
           python - <<'PY'
           from pathlib import Path
           from html import unescape
           import re
           text=Path('/tmp/ui-context-dom.html').read_text(encoding='utf-8')
-          m=re.search(r'<pre id="out">(.*?)</pre>', text, re.S)
+          m=re.search(r'<pre id="qaOut"[^>]*>(.*?)</pre>', text, re.S)
           if not m: raise SystemExit('QA output missing')
           output=unescape(re.sub(r'<[^>]+>','',m.group(1))).strip()
           print(output)
