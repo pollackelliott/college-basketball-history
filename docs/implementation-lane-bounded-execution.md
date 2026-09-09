@@ -37,17 +37,25 @@ Repository policy controls over copied handoff wording.
 
 After interruption, reconstruct from Git/GitHub, tracked files, ignored `.onboarding/<school>/` state, sealed hashes, PR state, and release state. Do not replay successful phases merely because a prior turn ended unexpectedly.
 
-### 3.2 Owner relay should be phase-sized
+### 3.2 Owner relay should be phase-sized and thin
 
 When the owner's Codespace is the only execution surface, prefer one guarded phase-sized child script or compact command block per bounded phase rather than repeated one-command-at-a-time handoffs.
 
-Follow `docs/codespace-terminal-safety.md` exactly:
+"Phase-sized" does not mean monolithic. The normal relay should contain one principal repository operation plus its immediate validation. Do not combine mutation, regenerated preflight, rehearsal, release preparation, and unrelated confidence checks into one giant wrapper merely to reduce the number of pastes.
+
+Follow `docs/codespace-terminal-safety.md` exactly. In particular:
 
 - never use `set -u`, `set -euo pipefail`, or `set -eo pipefail` directly in the owner's interactive shell;
 - never use `exit` from pasted interactive-shell instructions;
 - put fail-fast guarded logic in a child script under `/tmp`;
 - never use `git add -A`;
-- inspect state before rerunning a failed phase.
+- let permanent repository tooling own invariants it already validates instead of reimplementing them in shell;
+- changed-path inventories must include untracked files when they claim to represent the complete worktree;
+- derive numerical postconditions from durable state when practical rather than manually remembering totals;
+- keep verbose logs local and return compact PASS/STOP output;
+- inspect and classify state before rerunning a failed phase.
+
+If an owner-run relay fails, first classify the stop as `REPOSITORY/DATA FAILURE`, `HISTORICAL REVIEW`, or `ASSISTANT WRAPPER DEFECT`. A wrapper defect should be repaired without making the owner re-investigate healthy basketball data.
 
 ### 3.3 Preserve settled owner decisions
 
@@ -270,14 +278,16 @@ The protocol does not create terminal access that the chat does not possess. Whe
 
 The required operating target is:
 
-> **Few phase-sized owner relays, not many command-sized relays.**
+> **Few thin phase-sized owner relays, not many command-sized relays and not giant multi-operation scripts.**
 
 A normal school should ideally require owner attention only for:
 
-- one or a small number of phase-sized Codespace executions when necessary;
+- one or a small number of thin phase-sized Codespace executions when necessary;
 - Owner Gate 1;
 - exact Preview approval;
 - genuinely unexpected historical/repository blockers.
+
+A false stop caused only by assistant-authored wrapper arithmetic, incomplete changed-path inventory, formatting, or duplicated verification logic does not count as an acceptable normal blocker. Treat repeated wrapper defects as process bugs to eliminate, not as the expected cost of safe onboarding.
 
 ## 14. Relationship to existing policy
 
