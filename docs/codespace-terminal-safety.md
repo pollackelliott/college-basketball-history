@@ -2,13 +2,13 @@
 
 - **Status:** Required companion to `school-onboarding-fast-path.md`
 - **Applies to:** All interactive onboarding work in the project Codespace
-- **Purpose:** Prevent avoidable terminal death, partial-command ambiguity, and repository churn while preserving fail-fast safety
+- **Purpose:** Prevent avoidable terminal death, partial-command ambiguity, repository churn, and false-negative wrapper stops while preserving fail-fast safety
 
 The onboarding architecture is now strong enough that the most common avoidable failures are not basketball-data failures. They are shell-driving failures.
 
-LSU and Georgia both completed successfully, but the surrounding work reinforced a simple rule:
+LSU and Georgia established the original shell-safety rules. Oklahoma State, Butler, and Kansas State later showed a second recurring risk: assistant-authored wrapper scripts can become more brittle than the permanent repository tooling they surround. The durable rule is therefore:
 
-> **Keep the interactive shell boring and alive. Run complex fail-fast logic in a child script, not in the shell the owner is sitting in.**
+> **Keep the interactive shell boring and alive. Keep owner relays thin. Let permanent repository tooling own invariants it already knows how to prove.**
 
 ## 1. Do not enable Bash nounset in this Codespace
 
@@ -113,6 +113,8 @@ For substantial Phase 0, Gate 1 encoding, or recovery work:
 
 Several short guarded commands are also preferable when the work has natural checkpoints.
 
+A phase-sized relay is **not** permission to build a monolithic wrapper around several independent repository operations. Prefer one principal operation plus its immediate validation. If later rehearsal, regeneration, or release preparation is independently supported by permanent tooling, run it as the next bounded operation rather than embedding it in the same giant relay.
+
 ## 5. Keep transport and helper artifacts out of the tracked-worktree boundary
 
 Untracked files in the repository root can block clean-worktree guards even when the basketball data is correct.
@@ -148,6 +150,14 @@ Then determine:
 
 A failed guard should reduce uncertainty, not trigger repeated blind retries.
 
+Before prescribing a repair, classify the stop explicitly as one of:
+
+- `REPOSITORY/DATA FAILURE` — permanent tooling or durable repository state found a substantive technical problem;
+- `HISTORICAL REVIEW` — the evidence genuinely requires owner judgment or a narrow research reopen;
+- `ASSISTANT WRAPPER DEFECT` — the relay's own assertion, path census, formatting, arithmetic, or shell logic was wrong while the underlying repository operation was healthy.
+
+If the failure is `ASSISTANT WRAPPER DEFECT`, repair or remove the wrapper defect first. Do not make the owner troubleshoot basketball data that did not fail.
+
 ## 7. Do not reopen historical decisions for a shell failure
 
 If a terminal or script failure occurs after Owner Gate 1, first determine whether the reviewed decision universe changed.
@@ -163,7 +173,55 @@ If the problem is purely technical and the historical inputs/decisions remain id
 
 Historical decisions reopen only when historical inputs materially change.
 
-## 8. Shell-safety checklist before giving the owner a command block
+## 8. Permanent tooling outranks bespoke wrapper assertions
+
+Before adding an assertion to an owner-run relay, ask whether a permanent repository command already verifies the same invariant.
+
+If yes:
+
+- rely on the permanent tool's contract and result;
+- do not recreate the same logic in shell merely for extra reassurance;
+- add an independent check only when a documented gap remains or when the check protects a materially different invariant.
+
+A wrapper that duplicates repository logic can become the least reliable part of the workflow. Independent verification is valuable; redundant reimplementation is not.
+
+## 9. Changed-path checks must include untracked files
+
+Do not use `git diff --name-only` or `git diff --name-only HEAD` as a complete working-tree manifest. Those commands omit untracked files.
+
+When the question is "what files currently differ from HEAD?" the answer must include both tracked changes and untracked files. Prefer a permanent repository helper when one exists. Otherwise use a Git status form that includes both classes, such as:
+
+```bash
+git status --short
+```
+
+or an equivalently complete porcelain/status-based inventory.
+
+Release-manifest and allow-list checks must never declare newly created artifacts "missing" merely because the diagnostic considered tracked diffs only.
+
+## 10. Derive numerical guards from durable state
+
+Avoid manually remembered post-mutation totals in owner-run scripts when the expected value can be computed from durable pre-operation state plus the intended mutation.
+
+For example, do not hard-code an expected away-game count from memory after adding one road game. Read the pre-operation count, apply the intended delta, and compare the resulting value.
+
+Hard-coded numerical assertions are acceptable only when the number itself is a durable project invariant or is read from an authoritative artifact in the same operation.
+
+## 11. Compact output is the default
+
+Owner-facing relay output should normally contain only:
+
+- the operation name;
+- PASS/STOP;
+- a few relevant counts;
+- exact failing IDs/paths when applicable;
+- the path to any verbose log or durable diagnostic artifact.
+
+Redirect verbose command output to `/tmp` or an ignored onboarding path. Do not paste long successful logs into chat merely to prove that commands ran.
+
+The owner should be able to paste one compact result back without transporting hundreds of lines that the repository can preserve locally.
+
+## 12. Shell-safety checklist before giving the owner a command block
 
 Before asking the owner to paste terminal instructions, verify:
 
@@ -171,9 +229,13 @@ Before asking the owner to paste terminal instructions, verify:
 - no `exit` that will execute in the live interactive shell;
 - every expected-negative command is wrapped explicitly;
 - complex logic runs as a child script;
+- the relay has one principal operation rather than several loosely related phases;
 - helper/diagnostic files are outside the repo or ignored;
 - exact expected branch/HEAD/worktree guards are present when needed;
-- the command prints a clear PASS or STOP result;
-- the next action after STOP is inspection, not blind rerun.
+- changed-path logic includes untracked files whenever a complete worktree inventory is intended;
+- numerical expectations are derived rather than manually remembered when practical;
+- permanent repository tools are not redundantly reimplemented by the wrapper;
+- the command prints compact PASS/STOP output and preserves verbose logs elsewhere;
+- the next action after STOP is inspection and failure classification, not blind rerun.
 
-The desired outcome is not fewer safeguards. It is safeguards that fail safely without killing the workspace the owner is using.
+The desired outcome is not fewer safeguards. It is safeguards that fail safely without killing the workspace the owner is using, and without making the wrapper less trustworthy than the workflow it is guarding.
