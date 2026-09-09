@@ -59,3 +59,16 @@ unchanged.
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=4412742a67e980a92ba8075ce5df38e29aa5bd2c` from `research_base_sha=de0c67405881b7be716c93ecb46f6ae2ea8e29ca`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## IMPLEMENTATION-DISCOVERED RESEARCH REOPEN — 1907 KANSAS
+
+Implementation Stage 2 exposed one genuine omission in the immutable
+RESEARCH_FROZEN ledger: Kansas State's current institutional series history
+identifies Jan. 25, 1907 as the first Kansas meeting and records a 39-54 road
+loss; Kansas's current institutional game history independently records the
+reciprocal 54-39 game in Lawrence.
+
+The immutable RESEARCH_FROZEN ZIP and its recorded SHA-256 remain unchanged as
+provenance. The corrected working Kansas State source ledger supersedes the
+frozen package's game-count headline and now contains 3,039 competitive games
+with an on-court record of 1,759-1,279-1.

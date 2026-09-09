@@ -62,3 +62,26 @@ Package validation rejected the guide token `F29` for the 1921-22 home loss to D
 Relevant official pages:
 - https://www.kstatesports.com/sports/mens-basketball/schedule/1921-22
 - https://www.kstatesports.com/sports/mbball/opponent-history/drake/18
+
+## IMPLEMENTATION-DISCOVERED SOURCE-UNIVERSE CORRECTION — 1907 KANSAS
+
+Restored source_game_id `kansas-state-reopen-1907-01-25-kansas` after current
+protected-main reciprocal evidence exposed a research-universe omission.
+
+Evidence:
+- K-State 2025-26 series history: first Kansas meeting Jan. 25, 1907; road
+  loss 39-54.
+- Kansas current institutional game history: Jan. 25, 1907 in Lawrence,
+  Kansas 54, Kansas State 39.
+- Existing reciprocal assertion: `kansas/KURAW-00102`.
+
+The restored K-State row uses permanent `MATCH_SOURCE_ASSERTION` identity
+metadata to link to the already-established reciprocal game without hard-coding
+a canonical game ID.
+
+Also repaired reciprocal identity mapping for the two 1918-19 Nebraska rows:
+- `kansas-state-0207` -> `nebraska/NEBRAW-00310`
+- `kansas-state-0208` -> `nebraska/NEBRAW-00311`
+
+Those identity repairs do not silently resolve the institutions' conflicting
+dates or the second game's 30-19 / 30-21 score disagreement.
