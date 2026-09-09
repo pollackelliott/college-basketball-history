@@ -1,0 +1,52 @@
+name: Desktop context centering
+on:
+  push:
+    branches:
+      - ui/desktop-context-center
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/desktop-context-center
+          fetch-depth: 0
+      - name: Center sticky badges in visible desktop gap
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('site/index.html')
+          t = p.read_text(encoding='utf-8')
+          rule = '@media(min-width:951px){body.nav-team .team-context-title,body.nav-series .series-context-title{grid-column:nav-start / title-end}}\n'
+          anchor = '@media(prefers-reduced-motion:reduce){.team-context-title,.series-context-title{transition:none}}\n'
+          if rule not in t:
+              if t.count(anchor) != 1:
+                  raise SystemExit(f'anchor mismatch: {t.count(anchor)}')
+              t = t.replace(anchor, rule + anchor, 1)
+          p.write_text(t, encoding='utf-8')
+          print('PASS: desktop context badges span the invisible nav slot plus title slot; mobile unchanged')
+          PY
+      - name: Validate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          t = Path('site/index.html').read_text(encoding='utf-8')
+          rule = '@media(min-width:951px){body.nav-team .team-context-title,body.nav-series .series-context-title{grid-column:nav-start / title-end}}'
+          assert t.count(rule) == 1
+          assert 'document.startViewTransition(update)' in t
+          assert 'history.pushState(null, "", nextHash)' in t
+          assert 'transition:opacity .36s cubic-bezier(.4,0,.2,1)' in t
+          PY
+          PYTHONDONTWRITEBYTECODE=1 python tools/validate_data.py
+          PYTHONDONTWRITEBYTECODE=1 python tools/build_site_data.py
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+          git diff --check
+      - name: Commit desktop centering
+        run: |
+          git config user.name "Elliott Pollack"
+          git config user.email "pollack.elliott@gmail.com"
+          git add site/index.html
+          git commit -m "Center desktop context badges in visible navbar gap"
+          git push origin HEAD:ui/desktop-context-center
