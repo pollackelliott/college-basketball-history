@@ -2881,7 +2881,7 @@
       "opponent_key": "kansas-state",
       "opponent_name": "Kansas State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -49121,7 +49121,7 @@
       "opponent_key": "kansas-state",
       "opponent_name": "Kansas State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 62,
       "opponent_score": 60,
       "score_known": true,

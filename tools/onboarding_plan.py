@@ -37,7 +37,10 @@ from program_history import (
     history_scope_errors,
     partition_source_rows,
 )
-from site_completeness import _row_gap_categories
+from site_completeness import (
+    _row_gap_categories,
+    researched_unresolved_home_venue,
+)
 from venue_reference import load_global_venue_reference
 
 
@@ -1554,6 +1557,27 @@ def _sync_site_metadata_from_source(
                 canonical.get("site_type", ""),
                 registry_fields,
             ),
+        )
+
+    # A USE_SOURCE site reconciliation can turn a previously non-HOME
+    # canonical row into the target program's researched HOME row.
+    # Initial ingestion cannot attach this exception marker while H/A/N
+    # disagrees, so reconciliation must propagate it once the selected
+    # canonical site agrees with the qualifying source.
+    if (
+        researched_unresolved_home_venue(source)
+        and relative_source_site(
+            source.get("source_program_key", ""),
+            canonical,
+            canonical.get("site_type", ""),
+        )
+        == "SOURCE_PROGRAM_HOME"
+    ):
+        canonical["notes"] = append_note(
+            canonical.get("notes", ""),
+            "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+            f"source={source.get('source_program_key', '').strip()}/"
+            f"{source.get('source_game_id', '').strip()}]",
         )
 
 
