@@ -1,5 +1,5 @@
 source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
-kansas-state,#KANSAS CITY ATHLETIC CLUB,kansas-city-ac,Kansas City Athletic Club,FALSE,1,1909-1910,1909-1910,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,#KANSAS CITY ATHLETIC CLUB,kansas-city-ac,Kansas City AC,FALSE,1,1909-1910,1909-1910,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,-— — OKLAHOMA STATE*,oklahoma-state,Oklahoma State,TRUE,1,1978-1979,1978-1979,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,1 10 KANSAS*,kansas,Kansas,TRUE,1,1957-1958,1957-1958,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,1 15 at Kansas*,kansas,Kansas,TRUE,1,1952-1953,1952-1953,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
@@ -370,11 +370,11 @@ kansas-state,9 — vs. Oklahoma State,oklahoma-state,Oklahoma State,TRUE,1,2009-
 kansas-state,at Arizona,arizona,Arizona,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Arizona State,arizona-state,Arizona State,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Baker (Kan.),baker,Baker,FALSE,3,1906-1907,1911-1912,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
-kansas-state,at Bethany (Kan.),bethany,Bethany (KS),FALSE,2,1902-1903,1907-1908,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,at Bethany (Kan.),bethany,Bethany,FALSE,2,1902-1903,1907-1908,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Bradley,bradley,Bradley,TRUE,1,1946-1947,1946-1947,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Canisius,canisius,Canisius,TRUE,1,1947-1948,1947-1948,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
-kansas-state,at Carleton College (Minn.),carleton,Carleton College,FALSE,1,1936-1937,1936-1937,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
-kansas-state,at Central Missouri,university-of-central-missouri,Central Missouri,FALSE,2,1912-1913,1933-1934,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,at Carleton College (Minn.),carleton,Carleton,FALSE,1,1936-1937,1936-1937,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,at Central Missouri,university-of-central-missouri,University of Central Missouri,FALSE,2,1912-1913,1933-1934,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Clay Center High School,clay-center-high-school,Clay Center High School,FALSE,1,1908-1909,1908-1909,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Colorado,colorado,Colorado,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Colorado College,colorado-college,Colorado College,FALSE,5,1929-1930,1935-1936,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
@@ -392,7 +392,7 @@ kansas-state,at Emporia State (Kan.),emporia-state,Emporia State,FALSE,5,1905-19
 kansas-state,at Evansville,evansville,Evansville,TRUE,2,1936-1937,1939-1940,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Fort Hays State (Kan.),fort-hays-state,Fort Hays State,FALSE,1,1938-1939,1938-1939,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Fort Riley,fort-riley,Fort Riley,FALSE,3,1905-1906,1944-1945,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
-kansas-state,at Friends (Kan.),friends,Friends (KS),FALSE,1,1910-1911,1910-1911,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,at Friends (Kan.),friends,Friends,FALSE,1,1910-1911,1910-1911,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at George Washington,george-washington,George Washington,TRUE,1,1940-1941,1940-1941,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Glasco High School,glasco-high-school,Glasco High School,FALSE,1,1905-1906,1905-1906,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Grinnell* (Iowa),grinnell,Grinnell,FALSE,6,1921-1922,1927-1928,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
@@ -406,7 +406,7 @@ kansas-state,at Iowa,iowa,Iowa,TRUE,1,1946-1947,1946-1947,RESOLVED,CURRENT_PROGR
 kansas-state,at Iowa State*,iowa-state,Iowa State,TRUE,32,1917-1918,1947-1948,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Kansas,kansas,Kansas,TRUE,9,1907-1908,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Kansas (OT),kansas,Kansas,TRUE,1,1934-1935,1934-1935,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
-kansas-state,at Kansas City Athletic Club,kansas-city-ac,Kansas City Athletic Club,FALSE,2,1925-1926,1926-1927,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,at Kansas City Athletic Club,kansas-city-ac,Kansas City AC,FALSE,2,1925-1926,1926-1927,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Kansas Wesleyan,kansas-wesleyan,Kansas Wesleyan,FALSE,3,1907-1908,1929-1930,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,at Kansas*,kansas,Kansas,TRUE,42,1913-1914,1947-1948,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,at Kansas* (OT),kansas,Kansas,TRUE,2,1940-1941,1941-1942,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
@@ -462,12 +462,12 @@ kansas-state,at Wyoming,wyoming,Wyoming,TRUE,3,1937-1938,1945-1946,RESOLVED,CURR
 kansas-state,BAKER (Kan.),baker,Baker,FALSE,5,1902-1903,1939-1940,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,Baylor,baylor,Baylor,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,Bellarmine,bellarmine,Bellarmine,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
-kansas-state,BETHANY (Kan.),bethany,Bethany (KS),FALSE,7,1906-1907,1916-1917,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
-kansas-state,BETHANY* (Kan.),bethany,Bethany (KS),FALSE,1,1920-1921,1920-1921,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,BETHANY (Kan.),bethany,Bethany,FALSE,7,1906-1907,1916-1917,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,BETHANY* (Kan.),bethany,Bethany,FALSE,1,1920-1921,1920-1921,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,Bowling Green,bowling-green,Bowling Green,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,BYU,byu,BYU,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_ALIAS,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,California,california,California,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
-kansas-state,CENTRAL MISSOURI,university-of-central-missouri,Central Missouri,FALSE,1,1915-1916,1915-1916,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,CENTRAL MISSOURI,university-of-central-missouri,University of Central Missouri,FALSE,1,1915-1916,1915-1916,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,Cincinnati,cincinnati,Cincinnati,TRUE,1,2025-2026,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,CLAY CENTER HIGH SCHOOL,clay-center-high-school,Clay Center High School,FALSE,1,1905-1906,1905-1906,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,COLORADO,colorado,Colorado,TRUE,1,1933-1934,1933-1934,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
@@ -476,7 +476,7 @@ kansas-state,COLORADO STATE,colorado-state,Colorado State,TRUE,4,1938-1939,1941-
 kansas-state,COLORADO*,colorado,Colorado,TRUE,2,1947-1948,1948-1949,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,COTNER,cotner,Cotner,FALSE,1,1908-1909,1908-1909,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,CRTC-FORT RILEY,fort-riley-crtc,Fort Riley CRTC,FALSE,2,1942-1943,1942-1943,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
-kansas-state,CULVER-STOCKTON (Mo.),culver-stockton,Culver-Stockton,FALSE,1,1947-1948,1947-1948,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,CULVER-STOCKTON (Mo.),culver-stockton,Culver-Stockton College (MO),FALSE,1,1947-1948,1947-1948,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,DAKOTA WESLEYAN (S.D.),dakota-wesleyan,Dakota Wesleyan,FALSE,1,1933-1934,1933-1934,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,DAVIS & ELKINS (W. Va.),davis-elkins,Davis & Elkins,FALSE,2,1932-1933,1932-1933,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,DEPAUL,depaul,DePaul,TRUE,1,1938-1939,1938-1939,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
@@ -1004,10 +1004,10 @@ kansas-state,— — CAL STATE BAKERSFIELD,cal-state-bakersfield,Cal State Baker
 kansas-state,— — CAL STATE FULLERTON,cal-state-fullerton,Cal State Fullerton,TRUE,3,1967-1968,2005-2006,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,— — CAL STATE NORTHRIDGE,cal-state-northridge,CSUN,TRUE,2,1983-1984,1987-1988,RESOLVED,CURRENT_PROGRAM_ALIAS,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,— — CALIFORNIA,california,California,TRUE,1,2007-2008,2007-2008,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
-kansas-state,— — CENTENARY,centenary,Centenary (LA),FALSE,2,1983-1984,2008-2009,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,— — CENTENARY,centenary,Centenary,FALSE,2,1983-1984,2008-2009,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,— — CENTRAL ARKANSAS,central-arkansas,Central Arkansas,TRUE,2,2013-2014,2023-2024,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,— — CENTRAL CONNECTICUT,central-connecticut,Central Connecticut,TRUE,1,1992-1993,1992-1993,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
-kansas-state,— — CENTRAL MISSOURI,university-of-central-missouri,Central Missouri,FALSE,3,1975-1976,2004-2005,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
+kansas-state,— — CENTRAL MISSOURI,university-of-central-missouri,University of Central Missouri,FALSE,3,1975-1976,2004-2005,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Owner NON_D1 sanity scan approved 2026-09-06.
 kansas-state,— — CHARLESTON SOUTHERN,charleston-southern,Charleston Southern,TRUE,1,2011-2012,2011-2012,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,— — CHICAGO STATE,chicago-state,Chicago State,TRUE,3,2006-2007,2023-2024,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
 kansas-state,— — CINCINNATI^ (OT),cincinnati,Cincinnati,TRUE,1,1967-1968,1967-1968,RESOLVED,CURRENT_PROGRAM_REGISTRY,,Historical/current program identity normalized during Kansas State Stage 2 research.
