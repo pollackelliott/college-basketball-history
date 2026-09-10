@@ -16,11 +16,11 @@ This chat is ONE INDEPENDENT RESEARCH LANE for one school. It is not the seriali
 
 Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
 
-Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a durable checkpoint, report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
+Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
 My Proceed/Continue response authorizes only the identified next bounded stage or unfinished remainder, not all remaining research through RESEARCH_FROZEN.
 
-Preserve accepted prior stages unless later evidence produces a genuine contradiction. Preserve substantial working artifacts durably whenever possible. Historical uncertainty remains valid; unsupported certainty is worse than a researched unknown.
+Preserve accepted prior stages unless later evidence produces a genuine contradiction. Durable artifacts outrank chat memory. A replacement chat should be able to attach the latest checkpoint, verify it, and continue without rediscovering completed work. Historical uncertainty remains valid; unsupported certainty is worse than a researched unknown.
 
 The target school and owner-supplied sources/constraints follow below.
 
@@ -47,7 +47,7 @@ After an incomplete stage:
 Proceed.
 ```
 
-means resume only the identified unfinished remainder of that same stage.
+means resume only the identified unfinished remainder of that same stage from its portable checkpoint.
 
 ## Recovery bootstrap for an existing unfinished Research lane
 
@@ -56,17 +56,23 @@ Use this when a prior chat/session failed or must be replaced but durable resear
 ```text
 We are recovering an existing Research lane for <school> in my College Basketball History project.
 
-Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md. Then reconstruct the actual surviving research state from the durable artifacts and the last accepted stage/checkpoint information I provide below.
+Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md.
 
-Do not restart completed stages. Verify surviving artifacts/fingerprints where available, preserve accepted conclusions, and resume from the earliest incomplete bounded stage. Reopen prior research only if reconstruction exposes a genuine contradiction.
+I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
+
+Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage.
+
+Do not restart completed stages. Do not perform open-ended archaeology for hidden/chat-local state. Do not reconstruct completed work from old prose merely because a prior chat said it existed. If the required residual queue is genuinely missing from the attached checkpoint, stop and identify the exact missing artifact/state before doing reconstruction.
 
 Use the repository bounded-stage response contract. One bounded objective per turn; stop at every stage boundary.
 
-LAST ACCEPTED STATE / DURABLE ARTIFACTS:
-<insert concise recovery state>
+LATEST DURABLE CHECKPOINT / EXPECTED HASH:
+<attach artifact and insert hash/status>
 
 Resume only the earliest incomplete stage.
 ```
+
+The intended recovery experience is **attach checkpoint -> verify -> continue**.
 
 ## What does not belong in the bootstrap
 
