@@ -34,6 +34,22 @@ The objective is not zero unknowns at all costs. The objective is to distinguish
 
 Unsupported certainty remains worse than a researched unknown.
 
+### Terminal researched debt
+
+The self-challenge has a stopping rule. For a meaningful residual population, challenge the population as a class and inspect obvious authoritative/institutional/reciprocal evidence classes plus any specific systematic high-yield recovery opportunity. Repair supported defects in bounded batches.
+
+When the surviving population is:
+
+- homogeneous enough to describe coherently;
+- explicitly researched/accounted under project policy;
+- concentrated in an era/context where the remaining uncertainty is historically plausible;
+- free of a known material publication blocker; and
+- no further comparable systematic/high-yield evidence class is identified,
+
+it may be classified as **terminal researched historical debt**. Do not then launch independent row-by-row searches merely to drive the unknown count toward zero.
+
+A new systematic evidence class or genuine contradiction may reopen the affected population. The mere fact that residual rows remain does not.
+
 ## 2. HOME venue self-challenge
 
 If any `RESEARCHED_UNRESOLVED_HOME_VENUE` rows remain, the lane must report and validate:
@@ -48,6 +64,8 @@ If any `RESEARCHED_UNRESOLVED_HOME_VENUE` rows remain, the lane must report and 
 A broad unexplored pre-arena era does not qualify merely because city/state are known.
 
 If the self-challenge exposes a documented temporary home, alternate home, predecessor building, transition date, or reciprocal venue assertion, repair those rows before freeze.
+
+Once a bounded population challenge establishes that a known aggregate facility allocation cannot safely be assigned at the individual-game level, preserve those rows as researched unresolved rather than repeatedly reopening the same allocation question.
 
 ## 3. UNKNOWN H/A/N self-challenge
 
@@ -64,6 +82,8 @@ The lane must explicitly challenge unusually large institutional series. A large
 
 Do not resolve H/A/N by geography, arena location, ordinary series pattern, or assumed host convention.
 
+After the relevant evidence classes and systematic reciprocal opportunities have been challenged, surviving historically plausible UNKNOWN rows may become terminal researched debt. Do not repeatedly re-search them without new evidence.
+
 ## 4. Exact-date self-challenge
 
 Unknown exact dates remain valid when historically honest, but a large block of blank dates must not survive merely because the primary school ledger omits month/day information.
@@ -78,6 +98,8 @@ When meaningful exact-date debt remains, the lane must report:
 - confirmation that dates were not inferred from schedule order, geography, usual series timing, or season chronology.
 
 Recover only uniquely or sufficiently supported dates. Field-specific evidence may be used field-specifically: a reciprocal source can support a date without silently replacing a conflicting played score or other source fact.
+
+For a large residual, first ask whether a **specific systematic source class** can materially reduce the population (for example, current-main published reciprocal packages or an authoritative opponent archive covering a concentrated series). Pursue such opportunities proportionately. If those opportunities are exhausted and the remainder is early/historical, explicitly accounted, and otherwise release-safe, serialize it as terminal exact-date debt rather than performing one independent search per remaining game.
 
 ## 5. Venue physical-identity self-challenge
 
@@ -128,7 +150,7 @@ Large residual counts are review triggers, not automatic failures.
 
 A century-old program may legitimately retain hundreds of researched unknowns. A much smaller number of modern UNKNOWN institutional games or stale current-program opponent identities may be more suspicious.
 
-Do not invent generic rules such as “more than 100 UNKNOWN rows fails.” Instead require evidence-based self-challenge, era concentration, reciprocal review, current-registry comparison, and explicit accounting.
+Do not invent generic rules such as “more than 100 UNKNOWN rows fails.” Instead require evidence-based self-challenge, era concentration, reciprocal review, current-registry comparison, explicit accounting, and the terminal-debt stopping rule above.
 
 ## 9. Required final self-challenge summary
 
@@ -156,6 +178,7 @@ UNKNOWN EXACT DATES:
   recovered: <count>
   final count: <count>
   residual era concentration: <summary>
+  terminal-debt basis/systematic opportunities exhausted: <summary>
 
 VENUES:
   local physical rows: <count>
@@ -197,9 +220,9 @@ CURRENT-MAIN REBASE REQUIRED BEFORE TRACKED PHASE 0: YES
 
 The self-challenge belongs to the Research lane and should not create another routine owner approval loop.
 
-Once the owner has authorized research, perform the self-challenge autonomously. Contact the owner only if it exposes a genuine owner-level historical judgment or materially contradicts an owner-supplied assumption.
+Once the owner has authorized research, perform the self-challenge autonomously within the bounded Stage 6 authorization. Contact the owner only if it exposes a genuine owner-level historical judgment or materially contradicts an owner-supplied assumption.
 
-A normal successful lane should research, self-challenge, repair if necessary, package, and then present one final `RESEARCH_FROZEN` status rather than asking the owner to say “continue” through each step.
+Under the bounded-stage protocol, a completed Stage 6 still stops before Stage 7. Within Stage 6 itself, however, the owner should not need to approve each repair batch or terminal-debt decision. A healthy Stage 6 should normally require only `Proceed` to resume an incomplete durable checkpoint, not continuous research steering.
 
 ## 12. Relationship to Implementation
 
