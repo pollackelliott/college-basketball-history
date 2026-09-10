@@ -3,7 +3,7 @@
 - **Status:** Controlling Research-lane turn-execution protocol
 - **Applies to:** new school Research lanes and recovery of unfinished Research lanes
 - **Does not replace:** historical/data-quality policy, six-file schema, site-completeness policy, opponent-identity policy, NON_D1 owner sanity scan, or research-freeze self-challenge
-- **Pilot basis:** empirically validated during Kansas State research, September 2026
+- **Pilot basis:** empirically validated during Kansas State research, September 2026; durability/stopping rules hardened after the DePaul postmortem
 
 ## 1. Purpose
 
@@ -41,17 +41,31 @@ Reopen an accepted prior conclusion only when later evidence exposes a **genuine
 
 Preserve substantial intermediate ledgers, mappings, censuses, evidence registers, QA results, correction overlays, and hashes whenever the execution environment permits. A replacement chat should be able to recover from durable artifacts without repeating completed research.
 
-### 3.3 Mechanical closeout may split from research
+A checkpoint is not portable merely because it reports counts. If a stage is incomplete, the durable state must identify the **actual residual rows/labels/items**, not only a statement such as `5 labels remain` or `187 dates remain`.
+
+When practical, emit one owner-facing checkpoint ZIP containing the cumulative accepted continuation state, exact residual queue(s), owner dispositions, completed repairs, QA/status, and manifest/hashes. Supporting constituent files may also be emitted, but the ZIP is the preferred recovery unit.
+
+The checkpoint test is:
+
+> **If this chat disappeared permanently now, could a fresh Research chat attach this checkpoint, verify it, and continue without rediscovering completed work?**
+
+If the answer is no, the checkpoint is not sufficient.
+
+### 3.3 Serialize before extending a substantial research batch
 
 A stage should complete research + mechanical application + artifact emission in one turn when this is safely achievable.
 
-If substantive research is complete but the full-population mechanical application, census, QA, artifact write, or hashing cannot safely finish in the same turn, **stop cleanly**. The next bounded turn becomes a closeout-only continuation of the same stage.
+Do not defer all durable serialization until after several expensive research populations have been investigated. Once a substantial coherent population has been resolved, promote that accepted work into the stage's durable working state **before** embarking on another substantial population when the execution environment permits.
+
+This is not a requirement to create tiny owner-facing checkpoints after every few rows. The purpose is to avoid the failure pattern `long research -> more long research -> artifact emission last -> execution boundary -> lost work`.
+
+If substantive research is complete but the full-population mechanical application, census, QA, artifact write, or hashing cannot safely finish in the same turn, **stop cleanly**. The next bounded turn becomes a closeout-only continuation of the same stage. Mechanical closeout comes before new research.
 
 Do not manufacture final counts or hashes that were not actually generated and checked.
 
 ### 3.4 Honest incomplete checkpoint is valid
 
-A stage that unexpectedly becomes large may stop before completion. Preserve the exact completed work, identify the exact residual population, and do not begin another domain.
+A stage that unexpectedly becomes large may stop before completion. Preserve the exact completed work and the exact residual population, including a row-/label-level remaining queue sufficient for continuation, and do not begin another domain.
 
 An incomplete checkpoint is preferable to unsupported certainty, lost work, or a silent/overlong execution failure.
 
@@ -85,11 +99,14 @@ If an owner question is genuinely required, replace `NONE` with the concise ques
 STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED
 
 Completed: <exact completed work>
-Remaining: <exact residual work>
+Remaining: <exact residual work and durable queue artifact(s)>
+Checkpoint: <portable ZIP/artifact + verified hash when feasible>
 Owner decision required: NO
 Next bounded assignment: resume Stage X from this exact checkpoint
 STOPPING AT THE REQUIRED STAGE BOUNDARY.
 ```
+
+An incomplete-stage report without a recoverable residual queue is not a sufficient durable checkpoint merely because aggregate counts are known.
 
 If an owner decision is genuinely required, say so explicitly.
 
@@ -145,6 +162,8 @@ Resolve every game to the correct historical/canonical opponent identity without
 - produce the working distinct `NON_D1` census;
 - produce the informational self-corrected-opponent list;
 - preserve a game-level opponent mapping and identity provenance.
+
+For obscure historical/NON_D1 opponents, research must remain proportionate to the purpose: establish a defensible canonical identity, avoid false merges/splits, and preserve literal evidence. Do not pursue exhaustive institutional genealogy after available evidence is exhausted when it would not materially affect canonical identity, duplicate handling, or the game universe. Genuine unresolved historical identity remains preferable to unsupported certainty when repository policy permits it.
 
 ### Completion standard
 
@@ -282,7 +301,7 @@ Do not reopen unrelated research.
 
 ### Completion standard
 
-Record the owner disposition. No owner-flagged identity may remain unexplained at the freeze point.
+Record the owner disposition durably. No owner-flagged identity may remain unexplained at the freeze point. A later recovery must not require the owner to repeat a completed Stage 5 approval when the preserved disposition verifies cleanly.
 
 After clean approval, the next bounded stage is Stage 6.
 
@@ -307,6 +326,21 @@ Challenge the largest/suspicious residual populations, especially:
 Use the controlling self-challenge document for the evidence/accounting standard.
 
 If a real defect is exposed, repair only the affected research fields, rerun affected package QA, and refresh dependent artifacts/hashes. Do not restart the school.
+
+### Terminal-debt stopping rule
+
+Stage 6 is an adversarial audit, not a command to eliminate every permitted historical unknown.
+
+For each meaningful residual class:
+
+1. challenge the population as a class;
+2. inspect obvious authoritative/institutional/reciprocal evidence classes and any specific systematic high-yield opportunity;
+3. repair supported defects in bounded batches;
+4. if the surviving population is homogeneous, explicitly researched/accounted, policy-permitted, and no further comparable systematic evidence class is identified, classify it as **terminal researched historical debt** and stop individual searching merely to reduce the count.
+
+Do not recursively treat every smaller remainder as a new mandate for exhaustive row-by-row research. Large residual counts are review triggers, not zero-unknown requirements.
+
+A systematic opportunity may justify one proportionate batch even when many rows remain. Once that opportunity is exhausted, the lane should test Stage 6 acceptance rather than begin hundreds of independent searches.
 
 ### Completion standard
 
@@ -356,18 +390,25 @@ This is the terminal Research-lane state. Do not begin serialized Implementation
 
 The numbered stages are the normal domain boundaries, not a command to force every school into identically sized turns.
 
-If a stage is unusually large, split **within that same stage** at a natural residual boundary and use the incomplete checkpoint contract. The next turn resumes the same stage.
+If a stage is unusually large, split **within that same stage** at a natural residual boundary and use the incomplete checkpoint contract. The next turn resumes the same stage. Do not return merely because a few rows were resolved; a bounded unit should normally make a meaningful reduction in a coherent population unless a genuine blocker or execution boundary intervenes.
 
 If a stage is small enough to research, mechanically close, QA, write artifacts, and hash safely in one turn, do so; do not create artificial extra turns merely to follow an A/B naming scheme.
 
 Do not use clock-based heartbeat rules as a substitute for bounded objectives. The execution unit is defined by work scope, not a promised number of minutes.
 
-After interruption or chat replacement:
+### Recovery after interruption or chat replacement
 
-1. inspect durable artifacts and the last valid stage report;
-2. verify accepted prior-stage fingerprints/hashes where available;
-3. resume from the earliest incomplete bounded stage;
-4. do not restart completed research absent a genuine contradiction.
+Recovery should be mechanical and artifact-first:
+
+1. locate the latest portable checkpoint ZIP/artifact, including File Library when the visible prior response is unavailable;
+2. verify its hash/manifest and accepted owner dispositions;
+3. load the exact serialized residual queue(s);
+4. resume only the earliest incomplete bounded stage from those queues;
+5. do not perform open-ended conversational archaeology, hidden-workspace searching, or broad reconstruction of completed work merely because a prior chat mentioned it;
+6. if the required residual queue is genuinely missing, stop and identify the exact missing artifact/state before authorizing reconstruction;
+7. do not restart completed research absent a genuine contradiction.
+
+The desired recovery experience is: **attach checkpoint -> verify -> continue**.
 
 ## 14. Relationship to existing policy
 
