@@ -44,6 +44,12 @@ SUBSTANTIVE_REVIEW_FIELDS = (
     "relevant_evidence",
     "recommended_action",
     "allowed_actions",
+)
+
+# These fields are owner-controlled decision payloads, not regenerated
+# preflight inputs.  If the underlying substantive review row is unchanged,
+# carry-forward must preserve them exactly from the previously approved review.
+OWNER_REVIEW_PAYLOAD_FIELDS = (
     "canonical_patch_json",
     "source_patch_json",
     "notes",
@@ -674,6 +680,8 @@ def carry_forward_review(
             )
         new_row["decision"] = decision
         new_row["resolution_basis"] = basis
+        for field in OWNER_REVIEW_PAYLOAD_FIELDS:
+            new_row[field] = old_row.get(field, "")
 
     _write_review(new_path, fieldnames, new_rows)
     return Counter(row["decision"] for row in new_rows)
@@ -820,7 +828,9 @@ def main() -> int:
                 plan_path=carry_plan_path,
             )
             print(
-                "PASS: prior Gate 1 decisions carried forward; decision IDs and substantive inputs are unchanged."
+                "PASS: prior Gate 1 decisions carried forward; decision IDs and "
+                "substantive preflight inputs are unchanged, and owner decision "
+                "payloads were preserved."
             )
             print("Action counts:")
             for action, count in sorted(counts.items()):

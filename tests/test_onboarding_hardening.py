@@ -497,6 +497,92 @@ class ReviewAutomationTests(unittest.TestCase):
                     plan_path=plan,
                 )
 
+    def test_carry_forward_preserves_owner_patch_and_note_payloads(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            old = root / "old.csv"
+            new = root / "new.csv"
+
+            rows = self.sample_rows()
+            target_id = "DISCREPANCY-TESTRAW-00003-SCORE"
+
+            for row in rows:
+                category = row["category"]
+                if category == "identity":
+                    row["decision"] = "MATCH_CANONICAL:CBBG-0000001"
+                elif category == "conditional_discrepancy":
+                    row["decision"] = (
+                        "KEEP_CANONICAL"
+                        if "CBBG-0000001" in row["decision_id"]
+                        else "NOT_APPLICABLE"
+                    )
+                elif category == "publication":
+                    row["decision"] = "ENABLE_PUBLIC_PAGE"
+                else:
+                    row["decision"] = "KEEP_CANONICAL"
+                row["resolution_basis"] = "Approved basis."
+
+            target = next(
+                row for row in rows
+                if row["decision_id"] == target_id
+            )
+            target["canonical_patch_json"] = (
+                '{"site_type":"TEAM_A_HOME",'
+                '"designated_home_team_key":"test"}'
+            )
+            target["source_patch_json"] = (
+                '{"curated_site_type":"SOURCE_PROGRAM_HOME"}'
+            )
+            target["notes"] = (
+                "Owner-approved third outcome; preserve raw source evidence."
+            )
+
+            write_csv(old, REVIEW_FIELDS, rows)
+
+            fresh = []
+            for row in rows:
+                copy = dict(row)
+                copy["decision"] = "PENDING"
+                copy["resolution_basis"] = ""
+                if copy["decision_id"] == target_id:
+                    copy["canonical_patch_json"] = "{}"
+                    copy["source_patch_json"] = "{}"
+                    copy["notes"] = (
+                        "Material source/canonical conflict; "
+                        "raw source evidence will remain preserved."
+                    )
+                fresh.append(copy)
+
+            write_csv(new, REVIEW_FIELDS, fresh)
+
+            counts = carry_forward_review(old, new)
+            self.assertEqual(sum(counts.values()), len(rows))
+
+            with new.open(encoding="utf-8-sig", newline="") as handle:
+                carried = {
+                    row["decision_id"]: row
+                    for row in csv.DictReader(handle)
+                }
+
+            result = carried[target_id]
+            self.assertEqual(
+                result["canonical_patch_json"],
+                target["canonical_patch_json"],
+            )
+            self.assertEqual(
+                result["source_patch_json"],
+                target["source_patch_json"],
+            )
+            self.assertEqual(
+                result["notes"],
+                target["notes"],
+            )
+            self.assertEqual(result["decision"], "KEEP_CANONICAL")
+            self.assertEqual(
+                result["resolution_basis"],
+                "Approved basis.",
+            )
+
     def test_carry_forward_requires_substantively_identical_review(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
