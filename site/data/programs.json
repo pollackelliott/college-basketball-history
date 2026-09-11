@@ -1307,7 +1307,7 @@
       "state": "CO",
       "primary_hex": "#CFB87C",
       "secondary_hex": "#000000",
-      "history_start_season": null,
+      "history_start_season": "1901-1902",
       "conference_regular_season_championships": 19,
       "conference_tournament_championships": 1,
       "ncaa_tournament_appearances": 16,
@@ -1316,7 +1316,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1955,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
