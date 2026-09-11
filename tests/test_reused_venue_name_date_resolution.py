@@ -60,18 +60,105 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
         self.assertEqual(result["venue_id"], "VEN-000041")
         self.assertEqual(result["venue_key"], "charlotte-coliseum-1988")
 
-    def test_undated_reused_name_stops(self):
-        with self.assertRaisesRegex(ValueError, "lacks an exact date"):
+    def test_undated_reused_name_without_season_stops(self):
+        with self.assertRaisesRegex(ValueError, "available date/season evidence"):
             ingest_school.resolve_venue_metadata(
-                {"source_game_id":"UNDATED","game_date":"","curated_venue_name":"Charlotte Coliseum"},
+                {
+                    "source_game_id":"UNDATED",
+                    "game_date":"",
+                    "season_label":"",
+                    "curated_venue_name":"Charlotte Coliseum",
+                },
                 self.make_map(),
             )
 
-    def test_unmatched_date_stops(self):
+    def test_ambiguous_exact_date_stops(self):
         with self.assertRaisesRegex(ValueError, "does not resolve exactly one candidate"):
             ingest_school.resolve_venue_metadata(
-                {"source_game_id":"OTHER","game_date":"1985-01-01","curated_venue_name":"Charlotte Coliseum"},
+                {
+                    "source_game_id":"OTHER",
+                    "game_date":"1989-01-01",
+                    "season_label":"1988-1989",
+                    "curated_venue_name":"Charlotte Coliseum",
+                },
                 self.make_map(),
+            )
+
+    def make_msg_map(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        path = Path(directory.name) / "venues.csv"
+        with path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=FIELDS)
+            writer.writeheader()
+            old = venue_row(
+                "madison-square-garden-1925",
+                "VEN-000123",
+                "1937-02-24",
+                "1966-03-10",
+            )
+            old["canonical_name"] = "Madison Square Garden"
+            new = venue_row(
+                "madison-square-garden-1968",
+                "VEN-000124",
+                "1983-02-20",
+                "2026-03-11",
+            )
+            new["canonical_name"] = "Madison Square Garden"
+            writer.writerow(old)
+            writer.writerow(new)
+        globals_by_id = {
+            "VEN-000123":{
+                "venue_id":"VEN-000123",
+                "city":"New York",
+                "state":"NY",
+                "opened":"1925",
+                "closed":"1968",
+            },
+            "VEN-000124":{
+                "venue_id":"VEN-000124",
+                "city":"New York",
+                "state":"NY",
+                "opened":"1968-02-11",
+                "closed":"",
+            },
+        }
+        return ingest_school.load_venue_metadata_map(path, globals_by_id)
+
+    def test_undated_1935_36_msg_resolves_msg_iii_by_season(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id":"DEPRAW-00201",
+                "game_date":"",
+                "season_label":"1935-1936",
+                "curated_venue_name":"Madison Square Garden",
+            },
+            self.make_msg_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-000123")
+
+    def test_undated_1937_38_msg_resolves_msg_iii_by_season(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id":"DEPRAW-00235",
+                "game_date":"",
+                "season_label":"1937-1938",
+                "curated_venue_name":"Madison Square Garden",
+            },
+            self.make_msg_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-000123")
+
+    def test_msg_transition_season_stops(self):
+        with self.assertRaisesRegex(ValueError, "available date/season evidence"):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id":"TRANSITION",
+                    "game_date":"",
+                    "season_label":"1967-1968",
+                    "curated_venue_name":"Madison Square Garden",
+                },
+                self.make_msg_map(),
             )
 
 if __name__ == "__main__":

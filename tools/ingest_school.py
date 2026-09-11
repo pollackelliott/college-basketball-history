@@ -608,17 +608,21 @@ def load_venue_metadata_map(
                 f"{path}: venue_id {venue_id!r} is absent from global venues.csv"
             )
 
-        valid_from = (
+        local_valid_from = (
             row.get("first_assigned_game", "").strip()
             or row.get("relationship_start", "").strip()
-            or row.get("known_opened", "").strip()
-            or global_venue.get("opened", "").strip()
         )
-        valid_to = (
+        local_valid_to = (
             row.get("last_assigned_game", "").strip()
             or row.get("relationship_end", "").strip()
+        )
+        physical_opened = (
+            global_venue.get("opened", "").strip()
+            or row.get("known_opened", "").strip()
+        )
+        physical_closed = (
+            global_venue.get("closed", "").strip()
             or row.get("known_closed", "").strip()
-            or global_venue.get("closed", "").strip()
         )
 
         metadata = {
@@ -626,8 +630,10 @@ def load_venue_metadata_map(
             "venue_id": venue_id,
             "city": global_venue.get("city", "").strip(),
             "state": global_venue.get("state", "").strip(),
-            "valid_from": valid_from,
-            "valid_to": valid_to,
+            "local_valid_from": local_valid_from,
+            "local_valid_to": local_valid_to,
+            "physical_opened": physical_opened,
+            "physical_closed": physical_closed,
         }
 
         def register(source_name: str) -> None:
@@ -673,37 +679,125 @@ def resolve_venue_metadata(
         game_date = dt.date.fromisoformat(game_date_text)
     except ValueError:
         game_date = None
-    if game_date is None:
+
+    def matching_on_date(
+        target_date: dt.date,
+        start_field: str,
+        end_field: str,
+    ) -> list[dict[str, str]]:
+        matching: list[dict[str, str]] = []
+        for candidate in candidates:
+            start = _venue_bound_date(
+                candidate.get(start_field, ""),
+                is_end=False,
+            )
+            end = _venue_bound_date(
+                candidate.get(end_field, ""),
+                is_end=True,
+            )
+            if start is None and end is None:
+                continue
+            if start is not None and target_date < start:
+                continue
+            if end is not None and target_date > end:
+                continue
+            matching.append(candidate)
+        return matching
+
+    if game_date is not None:
+        # School-assignment evidence is most specific when it yields one result.
+        local_matching = matching_on_date(
+            game_date,
+            "local_valid_from",
+            "local_valid_to",
+        )
+        local_ids = {
+            row.get("venue_id", "")
+            for row in local_matching
+            if row.get("venue_id", "")
+        }
+        if len(local_ids) == 1 and local_matching:
+            return local_matching[0]
+
+        # Otherwise use global physical-lifetime evidence, but only if unique.
+        physical_matching = matching_on_date(
+            game_date,
+            "physical_opened",
+            "physical_closed",
+        )
+        physical_ids = {
+            row.get("venue_id", "")
+            for row in physical_matching
+            if row.get("venue_id", "")
+        }
+        if len(physical_ids) == 1 and physical_matching:
+            return physical_matching[0]
+
+        candidate_ids = ", ".join(
+            sorted(
+                {
+                    row.get("venue_id", "")
+                    for row in candidates
+                    if row.get("venue_id", "")
+                }
+            )
+        )
         raise ValueError(
             f"source game {source.get('source_game_id','[unknown]')}: venue name "
-            f"{venue_name!r} maps to multiple physical venue IDs and the game lacks "
-            "an exact date; explicit date-aware research is required"
+            f"{venue_name!r} maps to multiple physical venue IDs ({candidate_ids}) "
+            f"and exact date {game_date_text} does not resolve exactly one candidate; "
+            "explicit date-aware research is required"
         )
 
-    matching = []
-    for candidate in candidates:
-        start = _venue_bound_date(candidate.get("valid_from", ""), is_end=False)
-        end = _venue_bound_date(candidate.get("valid_to", ""), is_end=True)
-        if start is None and end is None:
-            continue
-        if start is not None and game_date < start:
-            continue
-        if end is not None and game_date > end:
-            continue
-        matching.append(candidate)
+    # Exact date can remain historically unresolved. A season-only fallback is
+    # permitted only when the entire broad basketball season window intersects
+    # exactly one physical venue lifetime. This deliberately refuses transition
+    # seasons such as MSG's 1967-68 overlap.
+    season = source.get("season_label", "").strip()
+    match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+    if match and int(match.group(2)) == int(match.group(1)) + 1:
+        season_start = dt.date(int(match.group(1)), 7, 1)
+        season_end = dt.date(int(match.group(2)), 6, 30)
+        season_candidates: list[dict[str, str]] = []
+        for candidate in candidates:
+            opened = _venue_bound_date(
+                candidate.get("physical_opened", ""),
+                is_end=False,
+            )
+            closed = _venue_bound_date(
+                candidate.get("physical_closed", ""),
+                is_end=True,
+            )
+            if opened is None and closed is None:
+                continue
+            if opened is not None and opened > season_end:
+                continue
+            if closed is not None and closed < season_start:
+                continue
+            season_candidates.append(candidate)
 
-    unique_ids = {row.get("venue_id", "") for row in matching}
-    if len(unique_ids) == 1 and matching:
-        return matching[0]
+        season_ids = {
+            row.get("venue_id", "")
+            for row in season_candidates
+            if row.get("venue_id", "")
+        }
+        if len(season_ids) == 1 and season_candidates:
+            return season_candidates[0]
 
     candidate_ids = ", ".join(
-        sorted({row.get("venue_id", "") for row in candidates if row.get("venue_id", "")})
+        sorted(
+            {
+                row.get("venue_id", "")
+                for row in candidates
+                if row.get("venue_id", "")
+            }
+        )
     )
     raise ValueError(
         f"source game {source.get('source_game_id','[unknown]')}: venue name "
-        f"{venue_name!r} maps to multiple physical venue IDs ({candidate_ids}) and "
-        f"date {game_date_text} does not resolve exactly one candidate; explicit "
-        "date-aware research is required"
+        f"{venue_name!r} maps to multiple physical venue IDs ({candidate_ids}) "
+        f"and available date/season evidence does not resolve exactly one candidate; "
+        "explicit date-aware research is required"
     )
 
 
