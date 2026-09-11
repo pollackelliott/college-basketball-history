@@ -18,6 +18,8 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import ingest_school
+
 from conference_reference import (
     REQUIRED_HISTORY_COLUMNS,
     REQUIRED_REGISTRY_COLUMNS,
@@ -221,6 +223,17 @@ def duplicates(values: list[str]) -> set[str]:
             dupes.add(value)
         seen.add(value)
     return dupes
+
+
+def resolved_assertion_venue_key(
+    assertion: dict[str, str],
+    venue_metadata_map: dict[str, list[dict[str, str]]],
+) -> str:
+    """Resolve one assertion's curated venue identity with reused-name safety."""
+    return ingest_school.resolve_venue_metadata(
+        assertion,
+        venue_metadata_map,
+    ).get("venue_key", "").strip()
 
 
 def main() -> int:
@@ -809,13 +822,23 @@ def main() -> int:
     registry_rows_by_program_key: dict[
         tuple[str, str], list[dict[str, str]]
     ] = defaultdict(list)
-    registry_name_keys_by_program: dict[
-        str, dict[str, str]
-    ] = defaultdict(dict)
+    registry_venue_metadata_by_program: dict[
+        str, dict[str, list[dict[str, str]]]
+    ] = {}
     if schools_root.exists():
         for venue_path in sorted(schools_root.glob("*/venues.csv")):
             venue_columns, venue_rows = read_csv(venue_path)
             program = venue_path.parent.name
+            try:
+                registry_venue_metadata_by_program[program] = (
+                    ingest_school.load_venue_metadata_map(
+                        venue_path,
+                        global_venues_by_id,
+                    )
+                )
+            except ValueError as exc:
+                errors.append(f"{venue_path}: cannot build date-aware venue metadata: {exc}")
+                registry_venue_metadata_by_program[program] = {}
             if "venue_id" not in venue_columns:
                 errors.append(
                     f"{venue_path.relative_to(repo_root)}: venue_id column is required."
@@ -835,13 +858,6 @@ def main() -> int:
                 if key:
                     registry_keys_by_program[program].add(key)
                     registry_rows_by_program_key[(program, key)].append(row)
-                    names = [row.get("canonical_name", "")]
-                    names.extend(row.get("aliases", "").split(";"))
-                    for name in names:
-                        if name.strip():
-                            registry_name_keys_by_program[program][
-                                name.strip().casefold()
-                            ] = key
                 if location_pair_status(
                     row.get("city", ""), row.get("state", "")
                 ) == "partial":
@@ -877,13 +893,23 @@ def main() -> int:
                 )
             else:
                 curated_venue = linked[0].get("curated_venue_name", "").strip()
-                resolved_key = registry_name_keys_by_program.get(
-                    marker["source_program_key"], {}
-                ).get(curated_venue.casefold(), "")
+                try:
+                    resolved_key = resolved_assertion_venue_key(
+                        linked[0],
+                        registry_venue_metadata_by_program.get(
+                            marker["source_program_key"], {}
+                        ),
+                    )
+                except ValueError as exc:
+                    resolved_key = ""
+                    errors.append(
+                        f"{game_id}: registry fallback marker venue identity cannot "
+                        f"be resolved date-safely from its linked assertion: {exc}"
+                    )
                 if not curated_venue or resolved_key != marker["venue_key"]:
                     errors.append(
                         f"{game_id}: registry fallback marker is not backed by "
-                        "the linked assertion's curated venue identity."
+                        "the linked assertion's date-resolved curated venue identity."
                     )
                 if not source_site_agrees_with_canonical(linked[0], row):
                     errors.append(

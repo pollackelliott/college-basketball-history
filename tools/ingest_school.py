@@ -1097,6 +1097,51 @@ def canonical_enrichment_candidates(
     return result
 
 
+def apply_canonical_enrichment_candidates(
+    source: dict[str, str],
+    canonical: dict[str, str],
+    venue_metadata_map: dict[str, list[dict[str, str]]],
+) -> list[tuple[str, str]]:
+    """Apply only safe enrichments, including proven registry geography corrections."""
+    registry_correction = registry_backed_geography_correction(
+        source,
+        canonical,
+        venue_metadata_map,
+    )
+    applied: list[tuple[str, str]] = []
+    for field_name, source_value in canonical_enrichment_candidates(
+        source,
+        canonical,
+        venue_metadata_map,
+    ):
+        if field_name == "notes":
+            if canonical.get("notes", "") == source_value:
+                continue
+        elif canonical.get(field_name, "").strip():
+            safe_date_precision_upgrade = (
+                field_name == "date_precision"
+                and canonical.get("date_precision", "").strip() == "SEASON"
+                and source_value == "EXACT"
+                and source.get("game_date", "").strip()
+                and canonical.get("game_date", "").strip()
+                == source.get("game_date", "").strip()
+            )
+            safe_registry_geography_replacement = bool(
+                registry_correction
+                and field_name in {"site_city", "site_state"}
+                and source_value
+                == registry_correction[
+                    "registry_city" if field_name == "site_city" else "registry_state"
+                ]
+            )
+            if not safe_date_precision_upgrade and not safe_registry_geography_replacement:
+                continue
+
+        canonical[field_name] = source_value
+        applied.append((field_name, source_value))
+    return applied
+
+
 def build_new_canonical(
     source: dict[str, str],
     game_id: str,
@@ -1587,29 +1632,13 @@ def main() -> int:
                 existing_discrepancy_keys.add(discrepancy_key)
 
             # A matched source may add supported metadata that the
-            # canonical game does not yet know. Fill blanks only;
-            # disagreements remain reconciliation issues.
-            for field_name, source_value in canonical_enrichment_candidates(
+            # canonical game does not yet know. Registry-backed physical-venue
+            # geography corrections are the one intentional nonblank replacement.
+            for field_name, source_value in apply_canonical_enrichment_candidates(
                 source,
                 can,
                 venue_metadata_map,
             ):
-                if field_name == "notes":
-                    if can.get("notes", "") == source_value:
-                        continue
-                elif can.get(field_name, "").strip():
-                    safe_date_precision_upgrade = (
-                        field_name == "date_precision"
-                        and can.get("date_precision", "").strip() == "SEASON"
-                        and source_value == "EXACT"
-                        and source.get("game_date", "").strip()
-                        and can.get("game_date", "").strip()
-                        == source.get("game_date", "").strip()
-                    )
-                    if not safe_date_precision_upgrade:
-                        continue
-
-                can[field_name] = source_value
                 canonical_enrichments.append(
                     (game_id, field_name, source_value)
                 )
