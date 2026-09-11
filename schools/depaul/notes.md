@@ -52,3 +52,9 @@ Stage 6 is complete. Stage 7 immutable package construction has **not** begun.
 - Shared/global identity reconciliation is complete with **0 ambiguous current-main matches**.
 - Status: **INTEGRATION_FROZEN**.
 - Tracked Phase 0 has **not** begun.
+
+## Implementation Stage 3 owner supplement — 2026-09-11
+
+- Owner approved retaining `CBBG-0045618` (1950-03-18, Ohio State 70, DePaul 63 in Columbus) as a legitimate reciprocal-only in-scope canonical game.
+- Ohio State official record-book evidence and DePaul official ranked-opponent history independently establish the game; DePaul's year-by-year ledger omits it.
+- The immutable DePaul Research/source package remains **2,706 rows / 1,546-1,160**. The owner-approved canonical public universe is therefore **2,707 games / 1,546-1,161**, with no fabricated DePaul source assertion.
