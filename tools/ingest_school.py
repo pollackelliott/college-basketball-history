@@ -567,21 +567,30 @@ def load_venue_name_map(path: Path) -> dict[str, str]:
     return result
 
 
+def _venue_bound_date(value: str, *, is_end: bool) -> dt.date | None:
+    text = (value or "").strip()
+    if not text:
+        return None
+    try:
+        return dt.date.fromisoformat(text)
+    except ValueError:
+        pass
+    if re.fullmatch(r"\d{4}", text):
+        year = int(text)
+        return dt.date(year, 12, 31) if is_end else dt.date(year, 1, 1)
+    return None
+
+
 def load_venue_metadata_map(
     path: Path,
     global_venues_by_id: dict[str, dict[str, str]],
-) -> dict[str, dict[str, str]]:
-    """
-    Map school venue vocabulary to permanent global physical identity.
-
-    School venues.csv owns relationship/provenance; the global registry owns
-    venue_id and project geography. Venue metadata never establishes site_type.
-    """
+) -> dict[str, list[dict[str, str]]]:
+    # Preserve reused textual names as multiple physical candidates.
     if not path.exists():
         return {}
 
     rows = read_csv(path)
-    result: dict[str, dict[str, str]] = {}
+    result: dict[str, list[dict[str, str]]] = defaultdict(list)
 
     for row in rows:
         name = row.get("canonical_name", "").strip()
@@ -599,26 +608,36 @@ def load_venue_metadata_map(
                 f"{path}: venue_id {venue_id!r} is absent from global venues.csv"
             )
 
+        valid_from = (
+            row.get("first_assigned_game", "").strip()
+            or row.get("relationship_start", "").strip()
+            or row.get("known_opened", "").strip()
+            or global_venue.get("opened", "").strip()
+        )
+        valid_to = (
+            row.get("last_assigned_game", "").strip()
+            or row.get("relationship_end", "").strip()
+            or row.get("known_closed", "").strip()
+            or global_venue.get("closed", "").strip()
+        )
+
         metadata = {
             "venue_key": key,
             "venue_id": venue_id,
             "city": global_venue.get("city", "").strip(),
             "state": global_venue.get("state", "").strip(),
+            "valid_from": valid_from,
+            "valid_to": valid_to,
         }
 
         def register(source_name: str) -> None:
             folded = source_name.casefold()
-            existing = result.get(folded)
-            if existing and existing.get("venue_id") != venue_id:
-                raise ValueError(
-                    f"{path}: venue name/alias {source_name!r} maps to multiple "
-                    "physical venue IDs; explicit date-aware research is required"
-                )
-            result[folded] = metadata
+            existing_ids = {item.get("venue_id", "") for item in result.get(folded, [])}
+            if venue_id not in existing_ids:
+                result[folded].append(dict(metadata))
 
         if name:
             register(name)
-
         aliases = row.get("aliases", "").strip()
         if aliases:
             for alias in aliases.split(";"):
@@ -626,13 +645,72 @@ def load_venue_metadata_map(
                 if alias:
                     register(alias)
 
-    return result
+    return dict(result)
+
+
+def resolve_venue_metadata(
+    source: dict[str, str],
+    venue_metadata_map: dict[str, list[dict[str, str]]],
+) -> dict[str, str]:
+    # Unique names resolve directly; reused names require one exact-date match.
+    venue_name = source.get("curated_venue_name", "").strip()
+    if not venue_name:
+        return {}
+    raw_candidates = venue_metadata_map.get(venue_name.casefold(), [])
+    # Backward-compatible support for existing unit fixtures and callers that
+    # provide the pre-hardening unique-name shape: name -> metadata dict.
+    if isinstance(raw_candidates, dict):
+        return raw_candidates
+
+    candidates = list(raw_candidates)
+    if not candidates:
+        return {}
+    if len(candidates) == 1:
+        return candidates[0]
+
+    game_date_text = source.get("game_date", "").strip()
+    try:
+        game_date = dt.date.fromisoformat(game_date_text)
+    except ValueError:
+        game_date = None
+    if game_date is None:
+        raise ValueError(
+            f"source game {source.get('source_game_id','[unknown]')}: venue name "
+            f"{venue_name!r} maps to multiple physical venue IDs and the game lacks "
+            "an exact date; explicit date-aware research is required"
+        )
+
+    matching = []
+    for candidate in candidates:
+        start = _venue_bound_date(candidate.get("valid_from", ""), is_end=False)
+        end = _venue_bound_date(candidate.get("valid_to", ""), is_end=True)
+        if start is None and end is None:
+            continue
+        if start is not None and game_date < start:
+            continue
+        if end is not None and game_date > end:
+            continue
+        matching.append(candidate)
+
+    unique_ids = {row.get("venue_id", "") for row in matching}
+    if len(unique_ids) == 1 and matching:
+        return matching[0]
+
+    candidate_ids = ", ".join(
+        sorted({row.get("venue_id", "") for row in candidates if row.get("venue_id", "")})
+    )
+    raise ValueError(
+        f"source game {source.get('source_game_id','[unknown]')}: venue name "
+        f"{venue_name!r} maps to multiple physical venue IDs ({candidate_ids}) and "
+        f"date {game_date_text} does not resolve exactly one candidate; explicit "
+        "date-aware research is required"
+    )
 
 
 def venue_geography_enrichment_conflict(
     source: dict[str, str],
     canonical: dict[str, str],
-    venue_metadata_map: dict[str, dict[str, str]],
+    venue_metadata_map: dict[str, list[dict[str, str]]],
 ) -> dict[str, str] | None:
     """Return details when a proposed venue fill conflicts with known canonical geography."""
 
@@ -661,7 +739,7 @@ def venue_geography_enrichment_conflict(
     if not venue_name:
         return None
 
-    venue_metadata = venue_metadata_map.get(venue_name.casefold(), {})
+    venue_metadata = resolve_venue_metadata(source, venue_metadata_map)
     venue_key = venue_metadata.get("venue_key", "").strip()
     venue_id = venue_metadata.get("venue_id", "").strip()
     if not venue_key or not venue_id:
@@ -693,7 +771,7 @@ def venue_geography_enrichment_conflict(
 def canonical_enrichment_candidates(
     source: dict[str, str],
     canonical: dict[str, str],
-    venue_metadata_map: dict[str, dict[str, str]],
+    venue_metadata_map: dict[str, list[dict[str, str]]],
 ) -> list[tuple[str, str]]:
     """
     Return safe blank-field enrichments for a matched canonical game.
@@ -727,7 +805,7 @@ def canonical_enrichment_candidates(
 
     venue_name = source.get("curated_venue_name", "").strip()
     venue_metadata = (
-        venue_metadata_map.get(venue_name.casefold(), {})
+        resolve_venue_metadata(source, venue_metadata_map)
         if venue_name
         else {}
     )
@@ -849,7 +927,7 @@ def build_new_canonical(
     source: dict[str, str],
     game_id: str,
     venue_name_map: dict[str, str],
-    venue_metadata_map: dict[str, dict[str, str]],
+    venue_metadata_map: dict[str, list[dict[str, str]]],
 ) -> dict[str, str]:
     school = source["source_program_key"].strip()
     opp = source["normalized_opponent_key"].strip()
@@ -859,12 +937,12 @@ def build_new_canonical(
     site_type, home_key = source_site_to_canonical(source)
 
     venue_name = source.get("curated_venue_name", "").strip()
-    venue_key = venue_name_map.get(venue_name.casefold(), "")
     venue_metadata = (
-        venue_metadata_map.get(venue_name.casefold(), {})
+        resolve_venue_metadata(source, venue_metadata_map)
         if venue_name
         else {}
     )
+    venue_key = venue_metadata.get("venue_key", "").strip()
     venue_id = venue_metadata.get("venue_id", "").strip()
 
     # Source assertions keep their own normalized city/state. For canonical
