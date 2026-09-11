@@ -181,6 +181,7 @@ def plan_input_paths(repo: Path, school_key: str) -> list[Path]:
             repo / "data/evidence/game-assertions.csv",
             repo / "data/reconciliation/discrepancies.csv",
             repo / "data/reference/programs.csv",
+            repo / "data/reference/program-names.csv",
             repo / "data/reference/program-accomplishments.csv",
             repo / "data/reference/conference-membership.csv",
             repo / "data/reference/conferences.csv",
