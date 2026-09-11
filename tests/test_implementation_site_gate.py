@@ -50,6 +50,7 @@ ASSERTION_FIELDS = [
 ]
 DISCREPANCY_FIELDS = [
     "canonical_game_id",
+    "source_a_program_key",
     "field_name",
     "status",
     "resolution_basis",

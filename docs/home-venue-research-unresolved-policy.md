@@ -59,3 +59,38 @@ A broad unexplored era, an absent first-pass venue table, or a generic claim tha
 ## Owner ruling
 
 Approved by the project owner on 2026-08-30. The governing intent is: a truthful researched blank is preferable to inventing a historical venue solely to satisfy a completeness counter.
+
+## Reconciliation-backed canonical HOME supplement
+
+Owner-approved on 2026-09-11.
+
+A second, narrower canonical-only exception applies when the target program's
+preserved source assertion loses an owner-approved H/A/N reconciliation, so the
+ordinary source-side `RESEARCHED_UNRESOLVED_HOME_VENUE` status cannot truthfully
+be assigned.
+
+This exception is valid only when all of the following are true:
+
+1. the sealed owner-approved reconciliation establishes the target program as
+   canonical HOME while preserving a conflicting target source assertion;
+2. canonical city and state are complete;
+3. the exact physical venue remains unsupported after deliberate bounded
+   historical review and is left blank rather than inferred;
+4. at least one independent reciprocal assertion agrees with the canonical HOME
+   classification and independently supports the canonical city/state;
+5. no assertion agreeing with the canonical HOME classification supplies a
+   usable physical venue identity;
+6. the target `site_type` discrepancy is `RESOLVED` with a substantive
+   resolution basis;
+7. NCAA Tournament strict site rules do not apply; and
+8. canonical notes contain the machine-visible marker
+   `[RECONCILED_UNRESOLVED_HOME_VENUE source=<target>/<source_game_id>
+   reciprocal=<program>/<source_game_id>]`.
+
+The losing target assertion must remain unchanged. This mechanism may waive only
+a missing physical HOME venue after the canonical HOME classification and
+locality have been independently established. It may not waive missing
+city/state, unresolved H/A/N, known agreeing venue evidence, or NCAA site debt.
+
+As with the source-backed exception, this is explicit visible historical debt,
+not a claim that the venue is complete.
