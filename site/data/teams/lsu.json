@@ -24,8 +24,8 @@
     }
   },
   "summary": {
-    "games": 2974,
-    "wins": 1686,
+    "games": 2973,
+    "wins": 1685,
     "losses": 1288,
     "ties": 0,
     "first_season": "1908-1909",
@@ -238,8 +238,8 @@
     },
     {
       "season_label": "1996-1997",
-      "games": 31,
-      "wins": 11,
+      "games": 30,
+      "wins": 10,
       "losses": 20,
       "ties": 0
     },
@@ -2601,15 +2601,15 @@
       "opponent_key": "iowa-state",
       "opponent_name": "Iowa State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
       },
-      "first_season": "1996-1997",
+      "first_season": "2021-2022",
       "last_season": "2021-2022",
-      "games": 2,
-      "wins": 1,
+      "games": 1,
+      "wins": 0,
       "losses": 1,
       "ties": 0
     },
@@ -55978,31 +55978,6 @@
       "administrative_note": null
     },
     {
-      "canonical_game_id": "CBBG-0041072",
-      "season_label": "1996-1997",
-      "game_date": "1996-11-26",
-      "date_precision": "EXACT",
-      "opponent_key": "iowa-state",
-      "opponent_name": "Iowa State",
-      "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
-      "team_score": 70,
-      "opponent_score": 60,
-      "score_known": true,
-      "result": "W",
-      "overtime_periods": 0,
-      "site": "NEUTRAL",
-      "venue_key": null,
-      "venue_id": null,
-      "venue_name": null,
-      "site_city": null,
-      "site_state": null,
-      "game_type": "REGULAR_SEASON",
-      "postseason_round": null,
-      "administrative_status": null,
-      "administrative_note": null
-    },
-    {
       "canonical_game_id": "CBBG-0044349",
       "season_label": "1996-1997",
       "game_date": "1996-11-26",
@@ -76585,7 +76560,7 @@
       "opponent_key": "iowa-state",
       "opponent_name": "Iowa State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 54,
       "opponent_score": 59,
       "score_known": true,
