@@ -1518,7 +1518,7 @@ def _append_note(existing: str, addition: str) -> str:
 def _sync_site_metadata_from_source(
     source: dict[str, str],
     canonical: dict[str, str],
-    venue_map: dict[str, dict[str, str]],
+    venue_map: dict[str, list[dict[str, str]]],
 ) -> None:
     site = canonical.get("site_type", "")
     if site == "UNKNOWN":
@@ -1527,27 +1527,48 @@ def _sync_site_metadata_from_source(
         canonical["site_city"] = ""
         canonical["site_state"] = ""
         return
-    venue_name = source.get("curated_venue_name", "").strip().casefold()
-    venue = venue_map.get(venue_name, {}) if venue_name else {}
+
+    venue_name = source.get("curated_venue_name", "").strip()
+    venue = (
+        ingest_school.resolve_venue_metadata(source, venue_map)
+        if venue_name
+        else {}
+    )
     canonical["venue_key"] = venue.get("venue_key", "")
     canonical["venue_id"] = venue.get("venue_id", "")
     registry_fields: list[str] = []
+
     if canonical["venue_key"] and canonical["venue_id"]:
         registry_fields.extend(("venue_key", "venue_id"))
     elif canonical["venue_key"] or canonical["venue_id"]:
         raise WorkflowError(
             "venue relationship resolved only one half of venue_key/venue_id"
         )
-    if location_pair_status(source.get("city", ""), source.get("state", "")) == "complete":
-        canonical["site_city"] = source["city"].strip()
-        canonical["site_state"] = source["state"].strip()
-    elif location_pair_status(venue.get("city", ""), venue.get("state", "")) == "complete":
+
+    source_location_status = location_pair_status(
+        source.get("city", ""),
+        source.get("state", ""),
+    )
+    registry_location_status = location_pair_status(
+        venue.get("city", ""),
+        venue.get("state", ""),
+    )
+
+    if (
+        canonical["venue_key"]
+        and canonical["venue_id"]
+        and registry_location_status == "complete"
+    ):
         canonical["site_city"] = venue["city"].strip()
         canonical["site_state"] = venue["state"].strip()
         registry_fields.extend(("site_city", "site_state"))
+    elif source_location_status == "complete":
+        canonical["site_city"] = source["city"].strip()
+        canonical["site_state"] = source["state"].strip()
     else:
         canonical["site_city"] = ""
         canonical["site_state"] = ""
+
     if registry_fields:
         canonical["notes"] = append_note(
             canonical.get("notes", ""),
@@ -1602,7 +1623,10 @@ def _sync_site_metadata_to_source(
             source["site_research_basis"] = ""
 
 
-def _venue_maps(repo: Path, school_key: str) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
+def _venue_maps(
+    repo: Path,
+    school_key: str,
+) -> tuple[dict[str, list[dict[str, str]]], dict[str, str]]:
     global_venues_by_id, _, _ = load_global_venue_reference(repo)
     target_metadata = ingest_school.load_venue_metadata_map(
         repo / "schools" / school_key / "venues.csv",
@@ -1616,6 +1640,39 @@ def _venue_maps(repo: Path, school_key: str) -> tuple[dict[str, dict[str, str]],
             if key and name:
                 names_by_key.setdefault(key, name)
     return target_metadata, names_by_key
+
+
+def _apply_canonical_patch(
+    canonical: dict[str, str],
+    patch: dict[str, str],
+) -> int:
+    previous_venue_key = canonical.get("venue_key", "").strip()
+
+    for field, value in patch.items():
+        canonical[field] = value
+
+    if "venue_key" in patch:
+        patched_venue_key = canonical.get("venue_key", "").strip()
+        if not patched_venue_key:
+            canonical["venue_id"] = ""
+        elif patched_venue_key != previous_venue_key:
+            raise WorkflowError(
+                "nonblank canonical venue_key patch may not change physical venue "
+                "identity without deterministic venue_id resolution"
+            )
+
+    if bool(canonical.get("venue_key", "").strip()) != bool(
+        canonical.get("venue_id", "").strip()
+    ):
+        raise WorkflowError(
+            "canonical patch leaves only one half of venue_key/venue_id populated"
+        )
+
+    canonical["notes"], retired = retire_site_mismatched_registry_fallbacks(
+        canonical.get("notes", ""),
+        canonical.get("site_type", ""),
+    )
+    return retired
 
 
 def _record_reciprocal_discrepancies(
@@ -1822,8 +1879,10 @@ def apply_reconciliation_decisions(
         else:
             raise WorkflowError(f"{item['decision_id']}: unsupported discrepancy action {decision}")
 
-        for field, value in item.get("canonical_patch", {}).items():
-            canonical[field] = value
+        counts["registry_fallbacks_retired"] += _apply_canonical_patch(
+            canonical,
+            item.get("canonical_patch", {}),
+        )
         for field, value in item.get("source_patch", {}).items():
             source[field] = value
         if decision == "NORMALIZE_SOURCE_TO_CANONICAL" or item.get("source_patch"):
