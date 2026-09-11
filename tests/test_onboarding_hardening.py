@@ -321,6 +321,182 @@ class ReviewAutomationTests(unittest.TestCase):
                 "NOT_APPLICABLE",
             )
 
+    def test_carry_forward_reconstructs_auto_not_applicable_conditionals(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            old = root / "old.csv"
+            new = root / "new.csv"
+            plan = root / "plan.json"
+
+            rows = self.sample_rows()
+
+            for row in rows:
+                category = row["category"]
+                if category == "identity":
+                    row["decision"] = "MATCH_CANONICAL:CBBG-0000001"
+                    row["resolution_basis"] = "Owner approved identity."
+                elif category == "conditional_discrepancy":
+                    if "CBBG-0000001" in row["decision_id"]:
+                        row["decision"] = "KEEP_CANONICAL"
+                        row["resolution_basis"] = "Owner approved selected conflict."
+                    else:
+                        # This is a valid historical review shape. approve_plan()
+                        # never required the rejected candidate to be manually filled.
+                        row["decision"] = "PENDING"
+                        row["resolution_basis"] = ""
+                elif category == "publication":
+                    row["decision"] = "ENABLE_PUBLIC_PAGE"
+                    row["resolution_basis"] = "Owner approved publication."
+                else:
+                    row["decision"] = "KEEP_CANONICAL"
+                    row["resolution_basis"] = "Owner approved discrepancy."
+
+            write_csv(old, REVIEW_FIELDS, rows)
+
+            fresh = []
+            for row in rows:
+                copy = dict(row)
+                copy["decision"] = "PENDING"
+                copy["resolution_basis"] = ""
+                fresh.append(copy)
+            write_csv(new, REVIEW_FIELDS, fresh)
+
+            plan_items = []
+            for row in rows:
+                item = {
+                    "decision_id": row["decision_id"],
+                    "category": row["category"],
+                    "source_game_id": row["source_game_id"],
+                }
+                if row["category"] == "conditional_discrepancy":
+                    candidate = (
+                        "CBBG-0000001"
+                        if "CBBG-0000001" in row["decision_id"]
+                        else "CBBG-0000002"
+                    )
+                    item["applies_if_identity_decision"] = (
+                        f"MATCH_CANONICAL:{candidate}"
+                    )
+                plan_items.append(item)
+
+            plan.write_text(
+                json.dumps({"decisions": plan_items}),
+                encoding="utf-8",
+            )
+
+            counts = carry_forward_review(
+                old,
+                new,
+                plan_path=plan,
+            )
+
+            self.assertEqual(sum(counts.values()), len(rows))
+            self.assertEqual(counts["NOT_APPLICABLE"], 1)
+
+            with new.open(encoding="utf-8-sig", newline="") as handle:
+                carried = {
+                    row["decision_id"]: row
+                    for row in csv.DictReader(handle)
+                }
+
+            rejected_id = (
+                "CONDITIONAL-DISCREPANCY-TESTRAW-00001-"
+                "CBBG-0000002-GAME_DATE"
+            )
+            selected_id = (
+                "CONDITIONAL-DISCREPANCY-TESTRAW-00001-"
+                "CBBG-0000001-GAME_DATE"
+            )
+
+            self.assertEqual(
+                carried[rejected_id]["decision"],
+                "NOT_APPLICABLE",
+            )
+            self.assertEqual(
+                carried[rejected_id]["resolution_basis"],
+                (
+                    "Not applicable because the sealed identity decision was "
+                    "MATCH_CANONICAL:CBBG-0000001"
+                ),
+            )
+            self.assertEqual(
+                carried[selected_id]["decision"],
+                "KEEP_CANONICAL",
+            )
+            self.assertEqual(
+                carried[selected_id]["resolution_basis"],
+                "Owner approved selected conflict.",
+            )
+
+    def test_carry_forward_rejects_pending_selected_conditional(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            old = root / "old.csv"
+            new = root / "new.csv"
+            plan = root / "plan.json"
+
+            rows = self.sample_rows()
+
+            for row in rows:
+                category = row["category"]
+                if category == "identity":
+                    row["decision"] = "MATCH_CANONICAL:CBBG-0000001"
+                    row["resolution_basis"] = "Owner approved identity."
+                elif category == "conditional_discrepancy":
+                    row["decision"] = "PENDING"
+                    row["resolution_basis"] = ""
+                elif category == "publication":
+                    row["decision"] = "ENABLE_PUBLIC_PAGE"
+                    row["resolution_basis"] = "Owner approved publication."
+                else:
+                    row["decision"] = "KEEP_CANONICAL"
+                    row["resolution_basis"] = "Owner approved discrepancy."
+
+            write_csv(old, REVIEW_FIELDS, rows)
+
+            fresh = []
+            for row in rows:
+                copy = dict(row)
+                copy["decision"] = "PENDING"
+                copy["resolution_basis"] = ""
+                fresh.append(copy)
+            write_csv(new, REVIEW_FIELDS, fresh)
+
+            plan_items = []
+            for row in rows:
+                item = {
+                    "decision_id": row["decision_id"],
+                    "category": row["category"],
+                    "source_game_id": row["source_game_id"],
+                }
+                if row["category"] == "conditional_discrepancy":
+                    candidate = (
+                        "CBBG-0000001"
+                        if "CBBG-0000001" in row["decision_id"]
+                        else "CBBG-0000002"
+                    )
+                    item["applies_if_identity_decision"] = (
+                        f"MATCH_CANONICAL:{candidate}"
+                    )
+                plan_items.append(item)
+
+            plan.write_text(
+                json.dumps({"decisions": plan_items}),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(
+                Exception,
+                "prior review is not fully approved at "
+                "CONDITIONAL-DISCREPANCY-TESTRAW-00001-"
+                "CBBG-0000001-GAME_DATE",
+            ):
+                carry_forward_review(
+                    old,
+                    new,
+                    plan_path=plan,
+                )
+
     def test_carry_forward_requires_substantively_identical_review(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
