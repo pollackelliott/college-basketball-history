@@ -266,7 +266,7 @@ depaul,NYU!,nyu,NYU,FALSE,2,1963-1964,1965-1966,RESOLVED,HISTORICAL_NON_D1_RESEA
 depaul,NYU^,nyu,NYU,FALSE,1,1941-1942,1941-1942,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Navy Pier,navy-pier-nattc,Navy Pier NATTC,FALSE,3,1942-1943,1944-1945,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Nebraska,nebraska,Nebraska,TRUE,1,1933-1934,1933-1934,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Nebraska Wesleyan,nebraska-wesleyan,Nebraska Wesleyan University,FALSE,1,1957-1958,1957-1958,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Nebraska Wesleyan,nebraska-wesleyan,Nebraska Wesleyan,FALSE,1,1957-1958,1957-1958,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Nebraska-Omaha,omaha,Omaha,TRUE,2,1939-1940,1940-1941,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Nebraska^,nebraska,Nebraska,TRUE,1,1943-1944,1943-1944,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Nevada,nevada,Nevada,TRUE,1,1969-1970,1969-1970,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
@@ -326,11 +326,11 @@ depaul,Purdue#,purdue,Purdue,TRUE,2,1936-1937,1937-1938,RESOLVED,CURRENT_PROGRAM
 depaul,Purdue^,purdue,Purdue,TRUE,5,1934-1935,1944-1945,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Quincy,quincy,Quincy,FALSE,3,1952-1953,1954-1955,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Radio Chicago,radio-chicago-naval-training-schools,Naval Training Schools - Radio Chicago,FALSE,1,1944-1945,1944-1945,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Regis,regis-colorado,Regis University,FALSE,1,1947-1948,1947-1948,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Regis,regis-colorado,Regis,FALSE,1,1947-1948,1947-1948,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Rhode Island,rhode-island,Rhode Island,TRUE,2,1974-1975,2004-2005,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Rice,rice,Rice,TRUE,1,1930-1931,1930-1931,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Rice Institute^,rice,Rice,TRUE,1,1946-1947,1946-1947,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Ripon,ripon,Ripon College,FALSE,1,1953-1954,1953-1954,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Ripon,ripon,Ripon,FALSE,1,1953-1954,1953-1954,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Robert Morris^,robert-morris,Robert Morris,TRUE,1,2016-2017,2016-2017,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Rocky Mountain,rocky-mountain-college,Rocky Mountain College,FALSE,2,1971-1972,1973-1974,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Rutgers%,rutgers,Rutgers,TRUE,2,2016-2017,2021-2022,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
@@ -370,7 +370,7 @@ depaul,Southern Miss%,southern-miss,Southern Miss,TRUE,1,2013-2014,2013-2014,RES
 depaul,Southern Miss*,southern-miss,Southern Miss,TRUE,3,1995-1996,2003-2004,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Southern&,southern,Southern,TRUE,1,2008-2009,2008-2009,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Southwest Louisiana,louisiana,Louisiana,TRUE,1,1969-1970,1969-1970,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Spring Hill,spring-hill,Spring Hill College,FALSE,1,1970-1971,1970-1971,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Spring Hill,spring-hill,Spring Hill,FALSE,1,1970-1971,1970-1971,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,St. Ambrose,st-ambrose,St. Ambrose,FALSE,6,1927-1928,1975-1976,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,St. Bonaventure,st-bonaventure,St. Bonaventure,TRUE,8,1961-1962,1976-1977,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,St. Franics (NY),st-francis-brooklyn,St. Francis Brooklyn,FALSE,1,1985-1986,1985-1986,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
@@ -395,7 +395,7 @@ depaul,Syracuse,syracuse,Syracuse,TRUE,1,1980-1981,1980-1981,RESOLVED,CURRENT_PR
 depaul,Syracuse*,syracuse,Syracuse,TRUE,4,2005-2006,2011-2012,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,TCU,tcu,TCU,TRUE,1,1992-1993,1992-1993,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,TCU*,tcu,TCU,TRUE,2,2002-2003,2004-2005,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Tampa,tampa,University of Tampa,FALSE,1,1960-1961,1960-1961,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Tampa,tampa,Tampa,FALSE,1,1960-1961,1960-1961,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Taylor,taylor-indiana,Taylor (Indiana),FALSE,2,1952-1953,1954-1955,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Temple,temple,Temple,TRUE,1,1996-1997,1996-1997,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Temple*,temple,Temple,TRUE,1,2000-2001,2000-2001,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
@@ -450,7 +450,7 @@ depaul,Virginia Tech,virginia-tech,Virginia Tech,TRUE,1,1975-1976,1975-1976,RESO
 depaul,Wagner,wagner,Wagner,TRUE,1,1980-1981,1980-1981,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Wake Forest,wake-forest,Wake Forest,TRUE,1,2006-2007,2006-2007,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Wake Forest%,wake-forest,Wake Forest,TRUE,1,1956-1957,1956-1957,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Washburn,washburn,Washburn University,FALSE,1,1935-1936,1935-1936,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Washburn,washburn,Washburn,FALSE,1,1935-1936,1935-1936,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Washington,washington,Washington,TRUE,1,1988-1989,1988-1989,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Washington State,washington-state,Washington State,TRUE,1,1973-1974,1973-1974,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Washington^,washington,Washington,TRUE,1,1945-1946,1945-1946,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
@@ -467,7 +467,7 @@ depaul,Western Kentucky^,western-kentucky,Western Kentucky,TRUE,3,1942-1943,1944
 depaul,Western Michigan,western-michigan,Western Michigan,TRUE,14,1932-1933,1987-1988,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Western Michigan^,western-michigan,Western Michigan,TRUE,2,1942-1943,2015-2016,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Western Ontario,western-ontario,Western Ontario,FALSE,8,1932-1933,1965-1966,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
-depaul,Westmont,westmont,Westmont College,FALSE,1,1972-1973,1972-1973,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
+depaul,Westmont,westmont,Westmont,FALSE,1,1972-1973,1972-1973,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Wichita State,wichita-state,Wichita State,TRUE,5,1937-1938,2025-2026,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Winona State,winona-state,Winona State University,FALSE,1,1972-1973,1972-1973,RESOLVED,HISTORICAL_NON_D1_RESEARCHED,,Accepted Stage 2 identity; literal source label preserved.
 depaul,Wisconsin,wisconsin,Wisconsin,TRUE,2,1978-1979,1979-1980,RESOLVED,CURRENT_PROGRAM_REGISTRY_OR_ACCEPTED_ALIAS,,Accepted Stage 2 identity; literal source label preserved.
