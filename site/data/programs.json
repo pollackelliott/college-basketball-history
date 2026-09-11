@@ -2987,7 +2987,7 @@
       "state": "IA",
       "primary_hex": "#C8102E",
       "secondary_hex": "#F1BE48",
-      "history_start_season": null,
+      "history_start_season": "1907-1908",
       "conference_regular_season_championships": 6,
       "conference_tournament_championships": 7,
       "ncaa_tournament_appearances": 25,
@@ -2996,7 +2996,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1944,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
