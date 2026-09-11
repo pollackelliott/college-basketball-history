@@ -15,6 +15,7 @@ Read these process documents together before onboarding work:
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
 - `docs/research-freeze-self-challenge.md`
+- `docs/research-convergence-and-stopping.md`
 - `docs/published-opponent-identity-census.md`
 - `docs/non-d1-owner-sanity-scan.md`
 - `docs/program-top-level-scope-reference.md`
@@ -24,15 +25,19 @@ more specific than the older fast-path wording. The site-completeness protocol i
 controlling for research-accounted venue/location/H-A-N gaps and the independent
 post-reconciliation publication gate. The research-freeze self-challenge is controlling
 for the final adversarial review required before a Research lane may certify large or
-suspicious residual debt as genuinely unresolved. The post-Texas A&M implementation
-efficiency/recovery standard is controlling for phase-sized owner interaction, compact
-diagnostics, durable checkpoints, and failure recovery. The published-opponent identity
-census is the read-only scoreboard for stale/duplicate opponent identity debt on already
-published school packages. The non-D1 owner sanity scan is controlling for the required
-lightweight owner review of every target school's distinct `NON_D1` opponent population
-before that school first becomes eligible for tracked integration. The program top-level
-scope reference is controlling as the default owner-supplied research baseline for each
-current D1 program's accepted top-level / Division I-equivalent history intervals.
+suspicious residual debt as genuinely unresolved. The Research convergence/stopping
+policy is controlling for proportional continuation in opponent identity, Stages 3A/3B,
+and Stage 6; it prevents already researched residual ambiguity from becoming an
+open-ended second research cycle without weakening substantive acceptance gates. The
+post-Texas A&M implementation efficiency/recovery standard is controlling for phase-sized
+owner interaction, compact diagnostics, durable checkpoints, and failure recovery. The
+published-opponent identity census is the read-only scoreboard for stale/duplicate
+opponent identity debt on already published school packages. The non-D1 owner sanity
+scan is controlling for the required lightweight owner review of every target school's
+distinct `NON_D1` opponent population before that school first becomes eligible for
+tracked integration. The program top-level scope reference is controlling as the default
+owner-supplied research baseline for each current D1 program's accepted top-level /
+Division I-equivalent history intervals.
 
 Research lanes must read `data/reference/program-top-level-scope.csv` at startup. When the
 target school is present and authoritative evidence encountered during ordinary research
