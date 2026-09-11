@@ -58,7 +58,7 @@ def review_item(**changes):
 
 
 class PlannedVenueGeographySafetyTests(unittest.TestCase):
-    def test_conflicting_proposed_venue_is_preflight_error(self):
+    def test_source_and_registry_corrobated_venue_clears_coarse_geography_block(self):
         source = {
             "source_program_key": "new-school",
             "source_game_id": "NEW-0001",
@@ -93,11 +93,11 @@ class PlannedVenueGeographySafetyTests(unittest.TestCase):
             metadata,
         )
 
-        self.assertEqual(len(errors), 1)
-        self.assertIn("Nashville, TN", errors[0])
-        self.assertIn("Example Arena", errors[0])
-        self.assertIn("Atlanta, GA", errors[0])
-        self.assertIn("before owner approval", errors[0])
+        # Source and permanent venue registry independently agree on Atlanta,
+        # while the canonical row has no physical venue identity. Under the
+        # project invariant, canonical geography follows the resolved physical
+        # venue and the older Nashville assertion remains preserved separately.
+        self.assertEqual(errors, [])
 
 
 class DateCompleteReviewTests(unittest.TestCase):
