@@ -1643,7 +1643,7 @@
       "state": "IL",
       "primary_hex": "#005EB8",
       "secondary_hex": "#E4002B",
-      "history_start_season": null,
+      "history_start_season": "1923-1924",
       "conference_regular_season_championships": 2,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 22,
@@ -1652,7 +1652,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1979,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
