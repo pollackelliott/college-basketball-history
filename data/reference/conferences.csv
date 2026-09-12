@@ -13,7 +13,7 @@ big-sky,Big Sky,Big Sky,current,
 big-south,Big South,Big South,current,
 big-ten,Big Ten,Big Ten,current,Historical Western Conference and Big Nine names are normalized to this identity in current school timelines.
 big-west,Big West,Big West,current,
-caa,CAA,CAA,current,
+ncaa,CAA,CAA,current,
 cusa,CUSA,CUSA,current,
 horizon,Horizon,Horizon,current,"Owner-confirmed 2026-09-07 conference continuity: the Midwestern City Conference, Midwestern Collegiate Conference, and today's Horizon League are the same conference lineage under successive names; retain the two MCC-era names as separate historical display identities."
 independent,Independent,,nonconference,Independent has no tournament label and always uses the safe fallback.
@@ -48,9 +48,10 @@ eastern-eight,Eastern Eight,E8,historical,Owner-approved historical Penn State c
 metro-1975,Metro (1975),Metro (1975),historical,Owner-approved 2026-08-31 historical identity. The 1975-era Metro Conference must display as Metro (1975) to distinguish it from the conference formerly known as the MAAC adopting the Metro name beginning in 2026-27.
 sciac,Southern California Intercollegiate Athletic Conference,SCIAC,historical,UCLA RESEARCH_FROZEN historical conference identity; UCLA membership represented from 1919-20 through 1926-27. Registered during UCLA current-main integration rebase.
 northwest-intercollegiate,Northwest Intercollegiate Athletic Association,Northwest Intercollegiate,historical,Owner-approved 2026-09-05 Washington historical conference identity. Washington institutional record book identifies this affiliation for 1911-15; registration does not imply that a conference tournament existed.
-indiana-collegiate,Indiana Collegiate Conference,ICC,historical,Owner-approved 2026-09-07 Butler historical conference identity. The ICC label is the approved registry display/tournament fallback; registration does not imply that a postseason conference tournament existed.
+indiana-collegiate,Indiana Collegiate Conference,ICC,historical,Owner-approved 2026-09-07 Butler historical conference identity. The ICC label is the approved registry display/tournament fallback; registration does not imply that a conference tournament existed.
 midwestern-city,Midwestern City Conference,MCC,historical,"Owner-confirmed 2026-09-07 conference continuity: the Midwestern City Conference, Midwestern Collegiate Conference, and today's Horizon League are the same conference lineage under successive names; retain the two MCC-era names as separate historical display identities."
 midwestern-collegiate,Midwestern Collegiate Conference,MCC,historical,"Owner-confirmed 2026-09-07 conference continuity: the Midwestern City Conference, Midwestern Collegiate Conference, and today's Horizon League are the same conference lineage under successive names; retain the two MCC-era names as separate historical display identities."
 rocky-mountain,Rocky Mountain Conference,Rocky Mountain,historical,Owner-approved 2026-09-10 Colorado historical conference identity and tournament label during serialized Implementation; registration does not imply that a conference tournament existed.
 mountain-states,Mountain States Conference,Mountain States,historical,Owner-approved 2026-09-10 Colorado historical conference identity and tournament label during serialized Implementation; registration does not imply that a conference tournament existed.
 great-midwest,Great Midwest,Great Midwest,historical,Owner-approved during DePaul Implementation Stage 1; registration does not imply tournament existence outside documented seasons.
+border-conference,Border Conference,Border,historical,Owner-approved 2026-09-12 during Texas Tech Research Stage 4; Texas Tech membership represented from 1932-33 through 1955-56. Registration does not imply tournament existence outside documented seasons.
