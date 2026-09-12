@@ -44,6 +44,12 @@ SUBSTANTIVE_REVIEW_FIELDS = (
     "relevant_evidence",
     "recommended_action",
     "allowed_actions",
+)
+
+# These fields are owner-controlled decision payloads, not regenerated
+# preflight inputs.  If the underlying substantive review row is unchanged,
+# carry-forward must preserve them exactly from the previously approved review.
+OWNER_REVIEW_PAYLOAD_FIELDS = (
     "canonical_patch_json",
     "source_patch_json",
     "notes",
@@ -540,8 +546,21 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     return Counter(row["decision"] for row in rows)
 
 
-def carry_forward_review(old_path: Path, new_path: Path) -> Counter[str]:
-    """Carry owner decisions forward only across a substantively identical review."""
+def carry_forward_review(
+    old_path: Path,
+    new_path: Path,
+    *,
+    plan_path: Path | None = None,
+) -> Counter[str]:
+    """Carry owner decisions forward only across a substantively identical review.
+
+    Conditional discrepancy rows have one additional rule: ``approve_plan`` seals
+    a row ``NOT_APPLICABLE`` automatically when the owner-selected identity points
+    at a different canonical candidate.  A historically valid review.csv may
+    therefore leave those rejected conditional rows PENDING.  Carry-forward must
+    reproduce the same deterministic applicability rule rather than demanding an
+    owner decision that approval never required.
+    """
 
     with old_path.open(encoding="utf-8-sig", newline="") as handle:
         old_rows = list(csv.DictReader(handle))
@@ -565,22 +584,104 @@ def carry_forward_review(old_path: Path, new_path: Path) -> Counter[str]:
             + (f"added={added[:10]}" if added else "")
         )
 
+    plan_by_id: dict[str, dict[str, Any]] = {}
+    if plan_path is not None:
+        if not plan_path.is_file():
+            raise WorkflowError(f"carry-forward plan not found: {plan_path}")
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        plan_items = list(plan.get("decisions", []))
+        plan_by_id = {
+            item.get("decision_id", ""): item
+            for item in plan_items
+            if item.get("decision_id", "")
+        }
+        if len(plan_by_id) != len(plan_items):
+            raise WorkflowError(
+                "carry-forward plan contains blank or duplicate decision_id values"
+            )
+        if set(plan_by_id) != set(new):
+            raise WorkflowError(
+                "carry-forward plan decision universe differs from regenerated review"
+            )
+
     for did in sorted(old):
         for field in SUBSTANTIVE_REVIEW_FIELDS:
             if old[did].get(field, "") != new[did].get(field, ""):
                 raise WorkflowError(
                     f"Gate 1 substantive input changed for {did}: {field}"
                 )
-        decision = old[did].get("decision", "").strip()
-        basis = old[did].get("resolution_basis", "").strip()
-        if not decision or not basis:
+
+    # Identity choices control which conditional discrepancy rows were genuinely
+    # owner-applicable. These decisions must themselves have been fully approved.
+    identity_choices: dict[str, str] = {}
+    for did in sorted(old):
+        row = old[did]
+        if row.get("category", "").strip() != "identity":
+            continue
+        decision = row.get("decision", "").strip()
+        basis = row.get("resolution_basis", "").strip()
+        if not decision or decision == "PENDING" or not basis:
             raise WorkflowError(f"prior review is not fully approved at {did}")
         if decision not in _allowed_actions(new[did]):
             raise WorkflowError(
                 f"prior decision no longer allowed for {did}: {decision}"
             )
-        new[did]["decision"] = decision
-        new[did]["resolution_basis"] = basis
+        source_game_id = row.get("source_game_id", "").strip()
+        if not source_game_id:
+            raise WorkflowError(f"identity row {did} has no source_game_id")
+        identity_choices[source_game_id] = decision
+
+    for did in sorted(old):
+        old_row = old[did]
+        new_row = new[did]
+        category = old_row.get("category", "").strip()
+
+        if category == "conditional_discrepancy" and plan_by_id:
+            plan_item = plan_by_id[did]
+            applies_if = plan_item.get("applies_if_identity_decision", "")
+            if not applies_if:
+                raise WorkflowError(
+                    f"conditional discrepancy {did} has no applicability identity in plan"
+                )
+
+            source_game_id = old_row.get("source_game_id", "").strip()
+            selected_identity = identity_choices.get(source_game_id)
+            applies = selected_identity == applies_if
+
+            if not applies:
+                if "NOT_APPLICABLE" not in _allowed_actions(new_row):
+                    raise WorkflowError(
+                        f"NOT_APPLICABLE is no longer allowed for {did}"
+                    )
+                new_row["decision"] = "NOT_APPLICABLE"
+                new_row["resolution_basis"] = (
+                    "Not applicable because the sealed identity decision was "
+                    f"{selected_identity or '[missing]'}"
+                )
+                continue
+
+        decision = old_row.get("decision", "").strip()
+        basis = old_row.get("resolution_basis", "").strip()
+        if not decision or decision == "PENDING" or not basis:
+            raise WorkflowError(f"prior review is not fully approved at {did}")
+
+        if (
+            category == "conditional_discrepancy"
+            and plan_by_id
+            and decision == "NOT_APPLICABLE"
+        ):
+            raise WorkflowError(
+                f"{did}: selected identity makes this discrepancy applicable"
+            )
+
+        if decision not in _allowed_actions(new_row):
+            raise WorkflowError(
+                f"prior decision no longer allowed for {did}: {decision}"
+            )
+        new_row["decision"] = decision
+        new_row["resolution_basis"] = basis
+        for field in OWNER_REVIEW_PAYLOAD_FIELDS:
+            new_row[field] = old_row.get(field, "")
 
     _write_review(new_path, fieldnames, new_rows)
     return Counter(row["decision"] for row in new_rows)
@@ -665,6 +766,15 @@ def parse_args() -> argparse.Namespace:
     carry.add_argument("--from-review", type=Path, required=True)
     carry.add_argument("--repo", type=Path, default=None)
     carry.add_argument("--review-file", type=Path, default=None)
+    carry.add_argument(
+        "--plan-file",
+        type=Path,
+        default=None,
+        help=(
+            "Regenerated preflight plan used to reproduce conditional "
+            "identity applicability exactly."
+        ),
+    )
 
     rehearse = sub.add_parser(
         "rehearse-review",
@@ -707,9 +817,20 @@ def main() -> int:
             return 0
 
         if args.command == "carry-forward":
-            counts = carry_forward_review(args.from_review.resolve(), review_path)
+            carry_plan_path = (
+                args.plan_file.resolve()
+                if args.plan_file
+                else output_dir / "plan.json"
+            )
+            counts = carry_forward_review(
+                args.from_review.resolve(),
+                review_path,
+                plan_path=carry_plan_path,
+            )
             print(
-                "PASS: prior Gate 1 decisions carried forward; decision IDs and substantive inputs are unchanged."
+                "PASS: prior Gate 1 decisions carried forward; decision IDs and "
+                "substantive preflight inputs are unchanged, and owner decision "
+                "payloads were preserved."
             )
             print("Action counts:")
             for action, count in sorted(counts.items()):

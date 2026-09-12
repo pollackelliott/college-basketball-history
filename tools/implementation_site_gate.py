@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
@@ -23,6 +24,7 @@ from site_completeness import (
 )
 
 HOME_VENUE_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
+RECONCILED_HOME_VENUE_EXCEPTION_MARKER = "[RECONCILED_UNRESOLVED_HOME_VENUE"
 
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -75,6 +77,113 @@ def _home_venue_exception_marker_for_school(
         f"{HOME_VENUE_EXCEPTION_MARKER} source={school_key}/"
         in game.get("notes", "")
     )
+
+
+
+def _reconciled_home_venue_exception_marker_for_school(
+    game: dict[str, str],
+    school_key: str,
+) -> bool:
+    return (
+        f"{RECONCILED_HOME_VENUE_EXCEPTION_MARKER} source={school_key}/"
+        in game.get("notes", "")
+    )
+
+
+def _reconciled_home_venue_exception(
+    game: dict[str, str],
+    school_key: str,
+    source_rows: list[dict[str, str]],
+    all_assertions: list[dict[str, str]],
+    discrepancies: list[dict[str, str]],
+) -> bool:
+    """Validate the owner-approved reconciliation-backed HOME venue exception."""
+
+    if not _target_home(game, school_key):
+        return False
+    if _venue_known(game):
+        return False
+    if not _complete_pair(game.get("site_city", ""), game.get("site_state", "")):
+        return False
+    if game.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
+        return False
+
+    pattern = re.compile(
+        r"\[RECONCILED_UNRESOLVED_HOME_VENUE "
+        r"source=([^/\s]+)/([^\s\]]+) "
+        r"reciprocal=([^/\s]+)/([^\s\]]+)\]"
+    )
+    matches = pattern.findall(game.get("notes", ""))
+    matches = [match for match in matches if match[0] == school_key]
+    if len(matches) != 1:
+        return False
+
+    source_program, source_game_id, reciprocal_program, reciprocal_game_id = matches[0]
+
+    target_source = next(
+        (
+            row
+            for row in source_rows
+            if row.get("source_program_key", "").strip() == source_program
+            and row.get("source_game_id", "").strip() == source_game_id
+        ),
+        None,
+    )
+    if target_source is None:
+        return False
+
+    canonical_site = game.get("site_type", "").strip()
+    target_source_site = _source_site_to_canonical(target_source)
+    if target_source_site in {"", "UNKNOWN", canonical_site}:
+        return False
+
+    resolved_site_reviews = [
+        row
+        for row in discrepancies
+        if row.get("field_name", "").strip() == "site_type"
+        and row.get("source_a_program_key", "").strip() == school_key
+        and row.get("status", "").strip().upper() == "RESOLVED"
+        and bool(row.get("resolution_basis", "").strip())
+    ]
+    if len(resolved_site_reviews) != 1:
+        return False
+
+    agreeing_assertions = [
+        assertion
+        for assertion in all_assertions
+        if _source_site_to_canonical(assertion) == canonical_site
+    ]
+    if any(
+        assertion.get("curated_venue_name", "").strip()
+        for assertion in agreeing_assertions
+    ):
+        return False
+
+    reciprocal = next(
+        (
+            assertion
+            for assertion in agreeing_assertions
+            if assertion.get("source_program_key", "").strip() == reciprocal_program
+            and assertion.get("source_game_id", "").strip() == reciprocal_game_id
+        ),
+        None,
+    )
+    if reciprocal is None:
+        return False
+
+    if not _complete_pair(reciprocal.get("city", ""), reciprocal.get("state", "")):
+        return False
+
+    if (
+        reciprocal.get("city", "").strip(),
+        reciprocal.get("state", "").strip(),
+    ) != (
+        game.get("site_city", "").strip(),
+        game.get("site_state", "").strip(),
+    ):
+        return False
+
+    return True
 
 
 def _canonical_gap_categories(
@@ -321,13 +430,24 @@ def implementation_site_report(
             if source_id in source_by_id
         ]
         all_game_assertions = assertions_by_canonical.get(canonical_id, [])
-        home_exception = _canonical_home_venue_exception(
+        source_home_exception = _canonical_home_venue_exception(
             game,
             school_key,
             source_rows,
             all_game_assertions,
         )
-        marker_present = _home_venue_exception_marker_for_school(game, school_key)
+        reconciled_home_exception = _reconciled_home_venue_exception(
+            game,
+            school_key,
+            source_rows,
+            all_game_assertions,
+            game_discrepancies,
+        )
+        home_exception = source_home_exception or reconciled_home_exception
+        marker_present = (
+            _home_venue_exception_marker_for_school(game, school_key)
+            or _reconciled_home_venue_exception_marker_for_school(game, school_key)
+        )
 
         if marker_present and not home_exception:
             invalid_home_venue_exception_marker_rows += 1
@@ -342,13 +462,15 @@ def implementation_site_report(
                 if home_exception:
                     researched_unresolved_home_venue_rows += 1
                     record("researched_unresolved_home_venue", canonical_id)
+                    if reconciled_home_exception:
+                        record("reconciled_unresolved_home_venue", canonical_id)
                 else:
                     strict_home_gap_rows += 1
                     record("strict_home_gap", canonical_id)
 
             research_accounted = any(_researched_source_row(row) for row in source_rows)
             review_accounted = _review_accounts_for_gap(categories, game_discrepancies)
-            if not (research_accounted or review_accounted):
+            if not (research_accounted or review_accounted or home_exception):
                 unaccounted_public_gap_rows += 1
                 record("unaccounted_public_gap", canonical_id)
 

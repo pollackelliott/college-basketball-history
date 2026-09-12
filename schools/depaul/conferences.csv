@@ -1,0 +1,5 @@
+source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+depaul,1923-1924,1990-1991,independent,Independent,primary,No,DePaul 2025-26 media guide / accepted Stage 3B conference history,Accepted DePaul program history before Great Midwest membership.
+depaul,1991-1992,1994-1995,great-midwest,Great Midwest,primary,No,DePaul 2025-26 media guide / owner-authorized conference-tournament site reference,Implementation Stage 1 owner-approved the historical global conference identity great-midwest / Great Midwest with tournament label Great Midwest and status historical; accepted DePaul membership interval preserved.
+depaul,1995-1996,2004-2005,cusa,Conference USA,primary,No,DePaul 2025-26 media guide / owner-authorized conference-tournament site reference,Implementation Stage 1 current-main rebase normalized the local key conference-usa to current global key cusa; historical display name Conference USA preserved.
+depaul,2005-2006,,big-east,Big East,primary,Yes,DePaul 2025-26 media guide / owner-authorized conference-tournament site reference,Ongoing current membership represented open-ended.

@@ -180,7 +180,7 @@ class CanonicalEnrichmentTests(unittest.TestCase):
             [],
         )
 
-    def test_conflicting_registry_venue_is_not_added_to_known_canonical_geography(self):
+    def test_source_registry_agreement_corrects_coarse_canonical_geography(self):
         source = source_row("Atlanta", "GA")
         canonical = {
             "site_type": "NEUTRAL",
@@ -205,10 +205,14 @@ class CanonicalEnrichmentTests(unittest.TestCase):
             )
         )
 
-        self.assertNotIn("venue_key", changes)
-        self.assertNotIn("venue_id", changes)
-        self.assertNotIn("site_city", changes)
-        self.assertNotIn("site_state", changes)
+        # Once source venue/location and global physical-venue geography
+        # corroborate one another, canonical geography follows the resolved
+        # physical venue. The older reciprocal assertion remains preserved
+        # separately as evidence rather than controlling canonical locality.
+        self.assertEqual(changes["venue_key"], "example-arena")
+        self.assertEqual(changes["venue_id"], "VEN-EXAMPLE")
+        self.assertEqual(changes["site_city"], "Atlanta")
+        self.assertEqual(changes["site_state"], "GA")
 
     def test_partial_source_location_is_not_completed_from_registry(self):
         source = source_row("Exampleville", "")

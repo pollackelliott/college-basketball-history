@@ -83,6 +83,179 @@ def load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
         return list(reader.fieldnames or []), list(reader)
 
 
+
+def season_start(value: str) -> int | None:
+    text = (value or "").strip()
+    if len(text) >= 4 and text[:4].isdigit():
+        return int(text[:4])
+    return None
+
+
+def truthy(value: str) -> bool:
+    return (value or "").strip().lower() in {"yes", "true", "1", "y"}
+
+
+def program_alias_applies(
+    alias: dict[str, str],
+    first_season: str,
+    last_season: str,
+) -> bool:
+    # A bounded alias must cover the package row's full known era.
+    start = season_start(alias.get("effective_start_season", ""))
+    end = season_start(alias.get("effective_end_season", ""))
+    first = season_start(first_season)
+    last = season_start(last_season)
+
+    if start is not None and first is not None and first < start:
+        return False
+    if end is not None and last is not None and last > end:
+        return False
+    return True
+
+
+def rebase_program_aliases(
+    programs: list[dict[str, str]],
+    alias_rows: list[dict[str, str]],
+    opponent_rows: list[dict[str, str]],
+    source_rows: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], list[dict[str, str]], list[dict[str, Any]]]:
+    # Exact, unique VERIFIED aliases only. No fuzzy or sibling-name inference.
+    programs_by_key = {
+        row.get("program_key", "").strip(): row
+        for row in programs
+        if row.get("program_key", "").strip()
+    }
+
+    aliases_by_name: dict[str, list[dict[str, str]]] = {}
+    for alias in alias_rows:
+        if alias.get("verification_status", "").strip() != "VERIFIED":
+            continue
+        key = alias.get("program_key", "").strip()
+        if key not in programs_by_key:
+            raise WorkflowError(
+                f"verified program alias points to unknown program_key {key!r}"
+            )
+        normalized = normalize_name(alias.get("alias_name", ""))
+        if normalized:
+            aliases_by_name.setdefault(normalized, []).append(alias)
+
+    mappings: list[dict[str, Any]] = []
+    source_mapping: dict[tuple[str, str], tuple[str, str, str]] = {}
+
+    for row in opponent_rows:
+        old_key = row.get("canonical_opponent_key", "").strip()
+        if not old_key or old_key in programs_by_key:
+            continue
+
+        canonical_name = row.get("canonical_opponent_name", "").strip()
+        normalized = normalize_name(canonical_name)
+        if not normalized:
+            continue
+
+        applicable = [
+            alias
+            for alias in aliases_by_name.get(normalized, [])
+            if program_alias_applies(
+                alias,
+                row.get("first_season", ""),
+                row.get("last_season", ""),
+            )
+        ]
+        keys = sorted(
+            {
+                alias.get("program_key", "").strip()
+                for alias in applicable
+                if alias.get("program_key", "").strip()
+            }
+        )
+        if len(keys) > 1:
+            raise WorkflowError(
+                f"ambiguous verified program alias {canonical_name!r} maps to "
+                + ", ".join(keys)
+            )
+        if not keys:
+            continue
+
+        target_key = keys[0]
+        target = programs_by_key[target_key]
+        target_name = (
+            target.get("display_name", "").strip()
+            or target.get("program_name", "").strip()
+            or target_key
+        )
+        target_current = "TRUE" if truthy(target.get("current_d1", "")) else "FALSE"
+
+        label = row.get("source_opponent_label", "").strip()
+        map_key = (label, old_key)
+        prior = source_mapping.get(map_key)
+        proposed = (target_key, target_name, target_current)
+        if prior and prior != proposed:
+            raise WorkflowError(
+                f"inconsistent alias rebase for source label {label!r}/{old_key!r}"
+            )
+        source_mapping[map_key] = proposed
+
+        try:
+            expected_games = int(row.get("games_with_source_label", "").strip())
+        except ValueError as exc:
+            raise WorkflowError(
+                f"invalid games_with_source_label for {label!r}"
+            ) from exc
+
+        row["canonical_opponent_key"] = target_key
+        row["canonical_opponent_name"] = target_name
+        if "current_d1" in row:
+            row["current_d1"] = target_current
+
+        mappings.append(
+            {
+                "source_opponent_label": label,
+                "canonical_opponent_name": canonical_name,
+                "from_program_key": old_key,
+                "to_program_key": target_key,
+                "to_program_name": target_name,
+                "expected_source_games": expected_games,
+                "alias_name": applicable[0].get("alias_name", ""),
+                "alias_type": applicable[0].get("alias_type", ""),
+                "verification_status": applicable[0].get(
+                    "verification_status", ""
+                ),
+            }
+        )
+
+    actual_counts: dict[tuple[str, str], int] = {}
+    for row in source_rows:
+        label = row.get("source_opponent_label", "").strip()
+        old_key = row.get("normalized_opponent_key", "").strip()
+        map_key = (label, old_key)
+        target = source_mapping.get(map_key)
+        if target is None:
+            continue
+        target_key, target_name, target_current = target
+        row["normalized_opponent_key"] = target_key
+        row["normalized_opponent_name"] = target_name
+        if "opponent_current_d1" in row:
+            row["opponent_current_d1"] = target_current
+        actual_counts[map_key] = actual_counts.get(map_key, 0) + 1
+
+    for mapping in mappings:
+        map_key = (
+            mapping["source_opponent_label"],
+            mapping["from_program_key"],
+        )
+        actual = actual_counts.get(map_key, 0)
+        expected = mapping["expected_source_games"]
+        if actual != expected:
+            raise WorkflowError(
+                f"program alias rebase source-game count mismatch for "
+                f"{mapping['source_opponent_label']!r}: expected {expected}, "
+                f"found {actual}"
+            )
+        mapping["source_games_rebased"] = actual
+
+    return opponent_rows, source_rows, mappings
+
+
 def copy_package(package: Path, destination: Path) -> None:
     if package.is_dir():
         names = sorted(p.name for p in package.iterdir() if p.is_file())
@@ -430,9 +603,16 @@ def main() -> int:
             copy_package(package, package_root)
 
             local_fields, local_venues = load_csv(package_root / "venues.csv")
+            opponent_fields, local_opponents = load_csv(
+                package_root / "opponents.csv"
+            )
+            source_fields, source_games = load_csv(
+                package_root / "source-games.csv"
+            )
             global_fields, global_venues = load_csv(repo / "data/reference/venues.csv")
             name_fields, venue_names = load_csv(repo / "data/reference/venue-names.csv")
             program_fields, programs = load_csv(repo / "data/reference/programs.csv")
+            _, program_aliases = load_csv(repo / "data/reference/program-names.csv")
 
             (
                 local_venues,
@@ -444,6 +624,17 @@ def main() -> int:
                 local_venues,
                 global_venues,
                 venue_names,
+            )
+
+            (
+                local_opponents,
+                source_games,
+                program_alias_mappings,
+            ) = rebase_program_aliases(
+                programs,
+                program_aliases,
+                local_opponents,
+                source_games,
             )
 
             update_program_scope(
@@ -458,6 +649,16 @@ def main() -> int:
                 package_root / "venues.csv",
                 local_fields,
                 local_venues,
+            )
+            write_csv_preserving_format(
+                package_root / "opponents.csv",
+                opponent_fields,
+                local_opponents,
+            )
+            write_csv_preserving_format(
+                package_root / "source-games.csv",
+                source_fields,
+                source_games,
             )
             notes_path = package_root / "notes.md"
             notes = notes_path.read_text(encoding="utf-8")
@@ -488,6 +689,7 @@ def main() -> int:
                 "research_zip_sha256": actual_sha,
                 "package_member_sha256": staged_hashes,
                 "venue_mapping": mappings,
+                "program_alias_mapping": program_alias_mappings,
                 "history_scope": {
                     "history_start_season": args.history_start_season,
                     "history_scope_status": "OWNER_CONFIRMED",
@@ -502,6 +704,12 @@ def main() -> int:
             print(f"Integration base:      {current_head}")
             print(f"Research ZIP SHA-256:  {actual_sha}")
             print(f"Venue rows rebased:    {len(mappings)}")
+            print(
+                f"Program aliases rebased: {len(program_alias_mappings)} "
+                f"mapping row(s), "
+                f"{sum(row['source_games_rebased'] for row in program_alias_mappings)} "
+                "source game(s)"
+            )
             print("Venue outcomes:")
             for key, count in sorted(
                 {
