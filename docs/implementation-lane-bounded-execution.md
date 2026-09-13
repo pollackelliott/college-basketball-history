@@ -55,6 +55,14 @@ Follow `docs/codespace-terminal-safety.md` exactly. In particular:
 - keep verbose logs local and return compact PASS/STOP output;
 - inspect and classify state before rerunning a failed phase.
 
+For recurring Implementation operations already owned by permanent repository tooling, invoke that tooling directly by default. Do not replace an existing supported operation with bespoke shell or `/tmp` Python merely because the same result can be scripted. In particular, use supported review-fill, rehearsal, onboarding, site-gate, package-check, and release commands for the responsibilities they own. Temporary helpers are appropriate for genuinely school-specific diagnostics or operations not represented by current tooling, and should remain narrow rather than reimplementing permanent invariants.
+
+The preferred execution order is:
+
+`permanent repository command -> pasted standard command/guard -> pasted temporary helper -> manual helper-file transport`
+
+Manual helper-file transport remains exceptional under `docs/codespace-terminal-safety.md`.
+
 If an owner-run relay fails, first classify the stop as `REPOSITORY/DATA FAILURE`, `HISTORICAL REVIEW`, or `ASSISTANT WRAPPER DEFECT`. A wrapper defect should be repaired without making the owner re-investigate healthy basketball data.
 
 ### 3.3 Preserve settled owner decisions
@@ -148,7 +156,8 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 - install the six-file package and required current-main reference additions;
 - create/verify the stable Phase 0 checkpoint;
 - run generic onboarding preflight;
-- correct demonstrable mechanical/package-normalization defects before owner review;
+- before serial repair, run the comprehensive deterministic candidate sweep defined by `docs/implementation-pre-gate-adversarial-challenge.md` and inventory presently detectable normalization, current-source, reciprocal, display, site-metadata, and predicted-publication defects together;
+- correct the bounded inventory of demonstrable mechanical/package-normalization defects coherently where safe before owner review;
 - regenerate preflight after such narrow fixes;
 - research every genuine owner-relevant decision row;
 - consolidate recommendations, evidence bases, accomplishments, and publication decisions into one readable Gate 1 packet;

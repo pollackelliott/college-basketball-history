@@ -11,6 +11,22 @@ This is a pre-Gate challenge, not a new owner gate. It must not invent historica
 
 Before researching or escalating a recurring venue-identity/locality question, apply `docs/recurring-venue-identity-conventions.md`. Stable project conventions such as Madison Square Garden physical-building splits and Paradise-vs-Las-Vegas venue geography should be reused mechanically rather than re-litigated for each school unless game-specific evidence creates a genuine contradiction.
 
+### Comprehensive deterministic sweep before serial repair
+
+Before beginning a serial repair loop, perform one comprehensive deterministic candidate sweep across the staged package and predicted integrated state using the current repository tooling and evidence already available to Implementation. Inventory together, where presently detectable:
+
+- package/reference normalization drift;
+- current-D1 key or display-identity drift;
+- stale source-normalized values against the current authorized source set;
+- site-research metadata that is inconsistent with already-resolved site/venue state;
+- reciprocal/canonical count mismatches or assertion-closure anomalies;
+- predicted opponent-display collisions;
+- the deterministic publication/site-completeness defects covered below.
+
+Repair that bounded inventory as a coherent population where safe, then regenerate authoritative preflight/challenge state. Do not intentionally rely on successive full simulations to discover deterministic defects one at a time.
+
+This is an execution-order rule, not a new gate and not authority for speculative research. Integrated-state issues that cannot safely be known until a simulation or reciprocal reconciliation may still emerge iteratively; diagnose those normally rather than forcing unsupported early conclusions.
+
 ## Required challenge
 
 ### 1. Conditional discrepancy applicability
