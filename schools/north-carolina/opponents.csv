@@ -134,7 +134,7 @@ north-carolina,Connecticut (10/5),uconn,Connecticut,Yes,1,2023-2024,2023-2024,RE
 north-carolina,Cornell,cornell,Cornell,Yes,3,1990-1991,1992-1993,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Creighton,creighton,Creighton,Yes,2,1970-1971,2011-2012,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Creighton (5/-),creighton,Creighton,Yes,1,1960-1961,1960-1961,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
-north-carolina,Crescent AC (Brooklyn),crescent-athletic-club,Crescent Athletic Club (Brooklyn),No,2,1924-1925,1934-1935,RESOLVED,HISTORICAL_CLUB_IDENTITY_RETAINED,,
+north-carolina,Crescent AC (Brooklyn),crescent-athletic-club,Crescent Athletic Club,No,2,1924-1925,1934-1935,RESOLVED,HISTORICAL_CLUB_IDENTITY_RETAINED,,
 north-carolina,Dartmouth,dartmouth,Dartmouth,Yes,6,1940-1941,1998-1999,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Dartmouth (3/-),dartmouth,Dartmouth,Yes,1,1956-1957,1956-1957,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Davidson,davidson,Davidson,Yes,74,1910-1911,2014-2015,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
@@ -267,7 +267,7 @@ north-carolina,Gonzaga (12/4),gonzaga,Gonzaga,Yes,1,2018-2019,2018-2019,RESOLVED
 north-carolina,Gonzaga (5/2),gonzaga,Gonzaga,Yes,1,2016-2017,2016-2017,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Greensboro O.R.D.,greensboro-ord,Greensboro O.R.D.,No,2,1945-1946,1945-1946,RESOLVED,HISTORICAL_MILITARY_IDENTITY_RETAINED,,
 north-carolina,Greensboro YMCA,greensboro-ymca,Greensboro YMCA,No,4,1926-1927,1940-1941,RESOLVED,HISTORICAL_YMCA_IDENTITY_RETAINED,,
-north-carolina,Guilford,guilford,Guilford,No,25,1911-1912,1948-1949,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,
+north-carolina,Guilford,guilford,Guilford College,No,25,1911-1912,1948-1949,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,
 north-carolina,G’boro Eatman-Smith,greensboro-eatman-smith,Greensboro Eatman-Smith,No,1,1939-1940,1939-1940,RESOLVED,HISTORICAL_LOCAL_TEAM_IDENTITY_RETAINED,,
 north-carolina,Hampden-Sydney,hampden-sydney,Hampden-Sydney,No,1,1926-1927,1926-1927,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,
 north-carolina,Hampton,hampton,Hampton,Yes,3,1997-1998,2001-2002,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
@@ -378,7 +378,7 @@ north-carolina,Maryland (6/-),maryland,Maryland,Yes,1,1956-1957,1956-1957,RESOLV
 north-carolina,Maryland (7/-),maryland,Maryland,Yes,1,1960-1961,1960-1961,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Maryland (9/-),maryland,Maryland,Yes,1,1955-1956,1955-1956,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,Maryland (9/2),maryland,Maryland,Yes,1,2015-2016,2015-2016,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
-north-carolina,Maryville,maryville-tn,Maryville (TN),No,1,1915-1916,1915-1916,RESOLVED,HISTORICAL_NON_D1_IDENTITY_DISAMBIGUATED,,Historical Maryville source identity disambiguated as Maryville (Tennessee).
+north-carolina,Maryville,maryville-tn,Maryville (Tenn.),No,1,1915-1916,1915-1916,RESOLVED,HISTORICAL_NON_D1_IDENTITY_DISAMBIGUATED,,Historical Maryville source identity disambiguated as Maryville (Tennessee).
 north-carolina,Massachusetts,massachusetts,Massachusetts,Yes,5,1970-1971,2000-2001,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
 north-carolina,McCrary Eagles,mccrary-eagles,McCrary Eagles,No,6,1939-1940,1950-1951,RESOLVED,HISTORICAL_INDUSTRIAL_TEAM_IDENTITY_RETAINED,,
 north-carolina,McNeese State,mcneese,McNeese,Yes,1,2012-2013,2012-2013,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,
