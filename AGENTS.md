@@ -16,6 +16,7 @@ Read these process documents together before onboarding work:
 - `docs/site-completeness-protocol.md`
 - `docs/research-freeze-self-challenge.md`
 - `docs/research-convergence-and-stopping.md`
+- `docs/shared-reference-authority.md`
 - `docs/published-opponent-identity-census.md`
 - `docs/non-d1-owner-sanity-scan.md`
 - `docs/program-top-level-scope-reference.md`
@@ -29,6 +30,8 @@ suspicious residual debt as genuinely unresolved. The Research convergence/stopp
 policy is controlling for proportional continuation in opponent identity, Stages 3A/3B,
 and Stage 6; it prevents already researched residual ambiguity from becoming an
 open-ended second research cycle without weakening substantive acceptance gates. The
+shared-reference authority policy is controlling for the boundary between parallel
+Research findings and authoritative protected-main/global reference mutation. The
 post-Texas A&M implementation efficiency/recovery standard is controlling for phase-sized
 owner interaction, compact diagnostics, durable checkpoints, and failure recovery. The
 published-opponent identity census is the read-only scoreboard for stale/duplicate
@@ -45,6 +48,19 @@ does not materially contradict the row, use that scope without asking the owner 
 when the program became or remained top-level. Multiple listed intervals are controlling;
 do not collapse them to only the current stint. Bring scope back to the owner only for a
 genuine contradiction, ambiguous school identity, or a target absent from the reference.
+
+### Research shared-reference authority
+
+Research may fully establish historical identities that have global implications, but an
+independent school Research lane must not directly mutate protected-main shared registries.
+Carry a settled but not-yet-registered identity forward as `Historical identity: RESOLVED`
+and `Global registration: PENDING_CURRENT_MAIN_REBASE` with enough evidence/detail for
+serialized Implementation to reconcile it mechanically. General permission to mutate
+repository or research state does **not** authorize protected-main shared-reference writes.
+If early global registration is genuinely useful across active lanes, use an explicitly
+authorized dedicated maintenance branch/PR under `docs/shared-reference-authority.md`.
+Any shared-reference mutation must pass both repository validation and declared-intent diff
+validation; unrelated shared-row changes are a STOP.
 
 1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
@@ -68,11 +84,14 @@ genuine contradiction, ambiguous school identity, or a target absent from the re
    operation over many tiny interactive command handoffs. Ambiguous global identity
    is a STOP, never a guess. Recheck both physical venue identity and opponent/program
    identity against current main; an intervening school may establish the authoritative
-   global key/alias that a frozen portfolio did not yet know. For portfolios that reached
-   `RESEARCH_FROZEN` before the non-D1 owner sanity-scan policy was adopted, perform that
-   same complete owner scan during current-main rebase and resolve any flagged identities
-   before declaring `INTEGRATION_FROZEN` or beginning tracked Phase 0; do not reopen
-   unrelated historical research merely to add this checkpoint.
+   global key/alias that a frozen portfolio did not yet know. Reconcile any settled
+   Research shared-reference proposals under `docs/shared-reference-authority.md`; do not
+   reopen their historical conclusion unless current-main evidence creates a genuine
+   conflict. For portfolios that reached `RESEARCH_FROZEN` before the non-D1 owner
+   sanity-scan policy was adopted, perform that same complete owner scan during
+   current-main rebase and resolve any flagged identities before declaring
+   `INTEGRATION_FROZEN` or beginning tracked Phase 0; do not reopen unrelated historical
+   research merely to add this checkpoint.
 4. Run `python tools/onboard_school.py <school_key> --preflight` from the clean Phase 0
    checkpoint.
 5. Present every owner-relevant decision as one consolidated Gate 1 batch. Every
@@ -117,6 +136,7 @@ unresolved discrepancies.
 
 * Use one fresh Implementation chat per school, but do not assume that a fresh chat alone prevents context bloat. Keep verbose logs and large evidence tables in durable files rather than the conversation whenever possible.
 * Batch deterministic technical work by phase. One owner relay per reversible phase is the default; one-command-at-a-time copy/paste loops are a process regression unless a real blocker requires them.
+* **Default owner execution interface: self-contained copy/paste terminal relays.** Do not require the owner to download assistant-generated `.py`/helper files and manually upload or drag them into the Codespace when the same operation can reasonably be delivered as a guarded pasted relay. If substantial Python is necessary, the pasted relay may write a temporary child script under `/tmp`, execute it, preserve compact diagnostics, and leave tracked repository boundaries clean. Manual helper-script transport is an exception, not the default.
 * Live terminal output should be compact: phase, HEAD/base/fingerprint, counts, exact failing IDs/paths, verbose-log path, and next safe action. Redirect large diagnostics to `/tmp` or ignored `.onboarding/` artifacts.
 * Durable repository state outranks chat memory. After interruption, inspect Git/GitHub and `.onboarding/<school>/` state and resume from the earliest incomplete phase rather than replaying successful phases.
 * A Codespace/chat failure does not authorize blind reset, stash, force push, branch deletion, or re-running an already completed phase whose fingerprint remains valid.
@@ -130,7 +150,7 @@ unresolved discrepancies.
 * Technical work should be batched at phase boundaries. Repeated one-command-at-a-time owner handoffs for deterministic setup are a process regression unless repository state is unexpected.
 * Research lanes should perform the required pre-freeze self-challenge autonomously; do not create an extra owner approval loop merely because large researched-unknown populations require adversarial review.
 * The non-D1 owner sanity scan is a quick completeness check, not a transfer of research responsibility: the collaborator must research suspicious identities before presentation and must not require the owner to verify every legitimate non-D1 opponent independently.
-* Do not use the owner as a transport layer for files, logs, or state the agent can inspect directly from repository/GitHub/onboarding artifacts. When the owner's Codespace is the only execution surface, request the smallest diagnostic output needed.
+* Do not use the owner as a transport layer for files, logs, helper scripts, or state the agent can inspect directly from repository/GitHub/onboarding artifacts. When the owner's Codespace is the only execution surface, request the smallest diagnostic output needed and default to a copy/paste relay rather than manual helper-file upload/download loops.
 
 ## Git safety
 
@@ -158,6 +178,12 @@ unresolved discrepancies.
   an obvious current-program opponent identity to survive under a stale/non-D1 key, or
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
+- Flag any independent Research-lane workflow that directly mutates protected-main
+  shared reference registries, or that interprets general repository-mutation permission
+  as authority for such a write. Settled shared identities should normally be carried to
+  current-main rebase under `docs/shared-reference-authority.md`.
+- Flag any shared-reference mutation whose actual diff changes unrelated shared identities
+  outside the declared scope, even when repository validation passes.
 - Flag any research-lane workflow that asks the owner to supply or reconfirm a target
   school's top-level/D1 start when an unambiguous, uncontradicted scope row already exists
   in `data/reference/program-top-level-scope.csv`, or that discards an earlier accepted
@@ -172,5 +198,8 @@ unresolved discrepancies.
 - Flag implementation instructions that require repeated owner copy/paste of verbose
   deterministic output when the same evidence can be written to a durable artifact and
   summarized compactly.
+- Flag implementation instructions that require manual download/upload of assistant-generated
+  helper scripts when a guarded copy/paste relay can reasonably create and execute the
+  same temporary helper inside the Codespace.
 - Opponent-identity census findings are review triggers, not automatic merge authority;
   never rewrite historical program identity from string similarity alone.

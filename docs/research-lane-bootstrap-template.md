@@ -14,13 +14,15 @@ https://github.com/pollackelliott/college-basketball-history
 
 This chat is ONE INDEPENDENT RESEARCH LANE for one school. It is not the serialized repository-integration lane.
 
-Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
+Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
 
 Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
 My Proceed/Continue response authorizes only the identified next bounded stage or unfinished remainder, not all remaining research through RESEARCH_FROZEN.
 
 Preserve accepted prior stages unless later evidence produces a genuine contradiction. Durable artifacts outrank chat memory. A replacement chat should be able to attach the latest checkpoint, verify it, and continue without rediscovering completed work. Historical uncertainty remains valid; unsupported certainty is worse than a researched unknown.
+
+Research may fully resolve shared historical identities, but this independent Research lane must not directly mutate protected-main shared reference registries. Carry any settled new shared identity forward as a resolved proposal for current-main Implementation rebase under docs/shared-reference-authority.md. General permission to mutate repository/research state does not override that boundary.
 
 The target school and owner-supplied sources/constraints follow below.
 
@@ -56,13 +58,15 @@ Use this when a prior chat/session failed or must be replaced but durable resear
 ```text
 We are recovering an existing Research lane for <school> in my College Basketball History project.
 
-Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md.
+Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md and docs/shared-reference-authority.md.
 
 I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
 
 Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage.
 
 Do not restart completed stages. Do not perform open-ended archaeology for hidden/chat-local state. Do not reconstruct completed work from old prose merely because a prior chat said it existed. If the required residual queue is genuinely missing from the attached checkpoint, stop and identify the exact missing artifact/state before doing reconstruction.
+
+Any settled shared-reference proposal remains historically resolved but pending current-main Integration unless current-main evidence creates a genuine contradiction. Do not mutate protected-main shared registries from this Research lane.
 
 Use the repository bounded-stage response contract. One bounded objective per turn; stop at every stage boundary.
 
