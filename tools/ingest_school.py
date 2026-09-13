@@ -847,7 +847,8 @@ def registry_backed_geography_correction(
         return None
     if (source_city, source_state) != (registry_city, registry_state):
         return None
-    if location_pair_status(canonical_city, canonical_state) != "complete":
+    canonical_location_status = location_pair_status(canonical_city, canonical_state)
+    if canonical_location_status not in {"partial", "complete"}:
         return None
     if (canonical_city, canonical_state) == (registry_city, registry_state):
         return None
