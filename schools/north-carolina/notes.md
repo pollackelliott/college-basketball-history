@@ -137,3 +137,28 @@ No owner-level historical judgment is required.
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=5177d4470061879d04b2211312f917dbd60382fd` from `research_base_sha=bb2fcf16dd8800e3d9b823c0b4999b2d1b516d6b`. Settled North Carolina shared-reference findings were reconciled mechanically during Implementation: Orleans Arena physical geography is canonicalized to Paradise, Nevada, and duplicate VEN-000476 is retired into VEN-000471. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Implementation Stage 2 reciprocal-only evidence addendum
+
+Serialized Implementation's pre-Gate adversarial challenge identified one
+current-main reciprocal game involving North Carolina that is not represented
+by a North Carolina source assertion in this six-file package.
+
+South Carolina's current official historical record independently establishes
+two distinct 1920-21 meetings with North Carolina:
+
+- 1921-01-14 at Chapel Hill: South Carolina lost 15-34.
+- 1921-03-09 at Columbia: South Carolina lost 15-38.
+
+The March 9 game is already represented globally by South Carolina assertion
+`SCARAW-00120` and canonical game `CBBG-0063529`. It is retained as legitimate
+reciprocal-only evidence rather than duplicated as a synthetic North Carolina
+source assertion.
+
+Therefore the immutable Research result remains a **3,302-row North Carolina
+source portfolio with a source-perspective record of 2,419-883**, while the
+expected integrated/public North Carolina history is **3,303 canonical games
+with a record of 2,420-883**.
+
+This is a bounded Implementation reconciliation finding and does not reopen
+the remainder of accepted Research.
