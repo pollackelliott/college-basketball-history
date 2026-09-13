@@ -4811,8 +4811,8 @@
       "state": "NC",
       "primary_hex": "#7BAFD4",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 42,
+      "history_start_season": "1910-1911",
+      "conference_regular_season_championships": 40,
       "conference_tournament_championships": 26,
       "ncaa_tournament_appearances": 55,
       "final_four_appearances": 21,
@@ -4820,7 +4820,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2017,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
