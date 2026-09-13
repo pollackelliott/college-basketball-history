@@ -30,6 +30,7 @@ import hashlib
 import json
 import re
 import shutil
+import unicodedata
 import subprocess
 import sys
 import tempfile
@@ -74,8 +75,9 @@ def sha256_file(path: Path) -> str:
 
 
 def normalize_name(value: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
-
+    value = unicodedata.normalize("NFKD", value or "")
+    value = "".join(ch for ch in value if not unicodedata.combining(ch))
+    return re.sub(r"[^a-z0-9]+", "", value.casefold())
 
 def load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
