@@ -14,7 +14,7 @@ https://github.com/pollackelliott/college-basketball-history
 
 This chat is the ONE ACTIVE SERIALIZED IMPLEMENTATION LANE for <school>. It is not a Research lane.
 
-Before acting, inspect actual protected main and current repository/onboarding state. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, docs/recurring-venue-identity-conventions.md, and the implementation policies they reference. Repository policy controls over copied handoff wording.
+Before acting, inspect actual protected main and current repository/onboarding state. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, docs/recurring-venue-identity-conventions.md, docs/shared-reference-authority.md, and the implementation policies they reference. Repository policy controls over copied handoff wording.
 
 The incoming portfolio is RESEARCH_FROZEN. Verify its immutable ZIP/hash and status card before using it.
 
@@ -24,7 +24,9 @@ My Proceed/Continue response authorizes only the identified next bounded impleme
 
 If a stage cannot safely finish in one turn, preserve the durable repository/onboarding checkpoint, report IMPLEMENTATION STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
-Minimize my Codespace copy/paste work. When my Codespace is required, batch deterministic work into the smallest safe phase-sized operation, follow docs/codespace-terminal-safety.md, and request only compact diagnostic output.
+Minimize my Codespace work. When my Codespace is required, default to one self-contained guarded copy/paste terminal relay for the bounded operation and request only compact diagnostic output. Do not make manual helper-file transfer the normal execution path when the same work can reasonably be performed by pasted commands. If substantial Python is needed, the pasted relay may create and execute a temporary child script under /tmp in accordance with docs/codespace-terminal-safety.md.
+
+Any shared-reference proposal preserved by Research is historically settled unless current-main evidence genuinely contradicts it. Reconcile its authoritative repository identity during current-main rebase under docs/shared-reference-authority.md.
 
 INCOMING SCHOOL: <school>
 RESEARCH_FROZEN ZIP SHA-256: <sha256>
@@ -57,9 +59,11 @@ Use this when an Implementation chat fails or must be replaced:
 ```text
 We are recovering the serialized Implementation lane for <school> in my College Basketball History project.
 
-Before acting, inspect actual protected main, Git/GitHub state, the onboarding branch, tracked worktree, .onboarding/<school>/ artifacts, existing PR/release state, and exact hashes/fingerprints. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, and docs/recurring-venue-identity-conventions.md.
+Before acting, inspect actual protected main, Git/GitHub state, the onboarding branch, tracked worktree, .onboarding/<school>/ artifacts, existing PR/release state, and exact hashes/fingerprints. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, docs/recurring-venue-identity-conventions.md, and docs/shared-reference-authority.md.
 
 Do not restart the school or replay completed implementation stages merely because the previous chat failed. Reconstruct the earliest incomplete bounded stage from durable state and resume only that stage. Preserve already-settled owner decisions unless actual substantive inputs changed.
+
+When owner Codespace execution is required during recovery, retain the default copy/paste relay preference. Do not switch to manual helper-file transfer merely because a prior relay failed; classify the failure and provide a corrected guarded pasted relay when reasonable.
 
 LAST KNOWN RECOVERY CAPSULE:
 <insert compact implementation recovery state>
