@@ -2077,7 +2077,7 @@
       "opponent_key": "duke",
       "opponent_name": "Duke",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -73785,7 +73785,7 @@
       "opponent_key": "duke",
       "opponent_name": "Duke",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 71,
       "opponent_score": 98,
       "score_known": true,
@@ -79060,7 +79060,7 @@
       "opponent_key": "duke",
       "opponent_name": "Duke",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 82,
       "opponent_score": 68,
       "score_known": true,
