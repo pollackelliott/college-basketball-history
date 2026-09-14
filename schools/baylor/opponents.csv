@@ -472,12 +472,12 @@ baylor,"ARIZONA 8,135",arizona,Arizona,TRUE,1,1997-1998,1997-1998,RESOLVED,curre
 baylor,ARIZONA STATE,arizona-state,Arizona State,TRUE,1,2025-2026,2025-2026,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"ARIZONA STATE1 7,083",arizona-state,Arizona State,TRUE,1,2010-2011,2010-2011,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"ARIZONA STATE4 4,562",arizona-state,Arizona State,TRUE,1,2012-2013,2012-2013,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
-baylor,"ARKANSAS PINE BLUFF 6,207",arkansas-pine-bluff,UAPB,TRUE,1,2021-2022,2021-2022,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"ARKANSAS PINE BLUFF 6,207",arkansas-pine-bluff,Arkansas-Pine Bluff,TRUE,1,2021-2022,2021-2022,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,"ARKANSAS STATE 2,460",arkansas-state,Arkansas State,TRUE,1,1997-1998,1997-1998,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"ARKANSAS STATE2 4,768",arkansas-state,Arkansas State,TRUE,1,2015-2016,2015-2016,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
-baylor,"ARKANSAS-PINE BLUFF 2,319",arkansas-pine-bluff,UAPB,TRUE,1,2000-2001,2000-2001,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"ARKANSAS-PINE BLUFF 2,501",arkansas-pine-bluff,UAPB,TRUE,1,1999-2000,1999-2000,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"ARKANSAS-PINE BLUFF 2,504",arkansas-pine-bluff,UAPB,TRUE,1,2004-2005,2004-2005,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"ARKANSAS-PINE BLUFF 2,319",arkansas-pine-bluff,Arkansas-Pine Bluff,TRUE,1,2000-2001,2000-2001,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"ARKANSAS-PINE BLUFF 2,501",arkansas-pine-bluff,Arkansas-Pine Bluff,TRUE,1,1999-2000,1999-2000,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"ARKANSAS-PINE BLUFF 2,504",arkansas-pine-bluff,Arkansas-Pine Bluff,TRUE,1,2004-2005,2004-2005,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,"ARKANSAS5 10,627",arkansas,Arkansas,TRUE,1,2022-2023,2022-2023,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,ARLINGTON BAPTIST,arlington-baptist,Arlington Baptist,FALSE,1,2025-2026,2025-2026,RESOLVED,historical/non-current identity research,,Current non-D1 institution
 baylor,"ARLINGTON BAPTIST 7,500",arlington-baptist,Arlington Baptist,FALSE,1,2024-2025,2024-2025,RESOLVED,historical/non-current identity research,,Current non-D1 institution
@@ -825,11 +825,11 @@ baylor,"TEXAS STATE 7,640",texas-state,Texas State,TRUE,1,2019-2020,2019-2020,RE
 baylor,TEXAS TECH,texas-tech,Texas Tech,TRUE,2,1949-1950,1953-1954,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"TEXAS TECH 2,350",texas-tech,Texas Tech,TRUE,1,2020-2021,2020-2021,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,TEXAS WESLEYAN,texas-wesleyan,Texas Wesleyan,FALSE,4,1949-1950,1978-1979,RESOLVED,historical/non-current identity research,,Current non-D1 institution
-baylor,TEXAS-PAN AMERICAN,ut-rio-grande-valley,UTRGV,TRUE,1,1976-1977,1976-1977,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"TEXAS-PAN AMERICAN 1,610",ut-rio-grande-valley,UTRGV,TRUE,1,1996-1997,1996-1997,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"TEXAS-PAN AMERICAN 1,611",ut-rio-grande-valley,UTRGV,TRUE,1,1998-1999,1998-1999,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"TEXAS-PAN AMERICAN 3,593",ut-rio-grande-valley,UTRGV,TRUE,1,2003-2004,2003-2004,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"TEXAS-PAN AMERICAN 5,197",ut-rio-grande-valley,UTRGV,TRUE,1,2002-2003,2002-2003,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,TEXAS-PAN AMERICAN,ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,1976-1977,1976-1977,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"TEXAS-PAN AMERICAN 1,610",ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,1996-1997,1996-1997,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"TEXAS-PAN AMERICAN 1,611",ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,1998-1999,1998-1999,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"TEXAS-PAN AMERICAN 3,593",ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,2003-2004,2003-2004,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"TEXAS-PAN AMERICAN 5,197",ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,2002-2003,2002-2003,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,TEXAS2,texas,Texas,TRUE,1,1981-1982,1981-1982,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,TRINITY,trinity-texas,Trinity (Texas),FALSE,7,1929-1930,1984-1985,RESOLVED,historical/non-current identity research,,Current non-D1 institution; Baylor/Texas context
 baylor,"TROY 2,035",troy,Troy,TRUE,1,1997-1998,1997-1998,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
@@ -838,7 +838,7 @@ baylor,TULSA,tulsa,Tulsa,TRUE,3,1955-1956,1986-1987,RESOLVED,current-D1 registry
 baylor,"TULSA 4,210",tulsa,Tulsa,TRUE,1,1992-1993,1992-1993,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,UAB,uab,UAB,TRUE,1,1982-1983,1982-1983,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry
 baylor,"UALR 2,553",little-rock,Little Rock,TRUE,1,2000-2001,2000-2001,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,"UAPB 2,350",arkansas-pine-bluff,UAPB,TRUE,1,2020-2021,2020-2021,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,"UAPB 2,350",arkansas-pine-bluff,Arkansas-Pine Bluff,TRUE,1,2020-2021,2020-2021,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,"UMASS 7,779",massachusetts,Massachusetts,TRUE,1,2009-2010,2009-2010,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,"UMKC 2,079",kansas-city,Kansas City,TRUE,1,1994-1995,1994-1995,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,"UMKC 2,115",kansas-city,Kansas City,TRUE,1,1996-1997,1996-1997,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
@@ -852,7 +852,7 @@ baylor,"UT ARLINGTON 5,556",ut-arlington,UT Arlington,TRUE,1,2008-2009,2008-2009
 baylor,"UT ARLINGTON 5,988",ut-arlington,UT Arlington,TRUE,1,2011-2012,2011-2012,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry
 baylor,UTAH,utah,Utah,TRUE,1,2025-2026,2025-2026,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,UTEP,utep,UTEP,TRUE,1,1978-1979,1978-1979,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry
-baylor,UTRGV,ut-rio-grande-valley,UTRGV,TRUE,1,2025-2026,2025-2026,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,UTRGV,ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,2025-2026,2025-2026,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,UTSA,utsa,UTSA,TRUE,4,1981-1982,1991-1992,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry
 baylor,"UTSA 3,855",utsa,UTSA,TRUE,1,2003-2004,2003-2004,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry
 baylor,"VALPARAISO1 6,138",valparaiso,Valparaiso,TRUE,1,1992-1993,1992-1993,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
@@ -1045,7 +1045,7 @@ baylor,"at Texas 2,532",texas,Texas,TRUE,1,2020-2021,2020-2021,RESOLVED,current-
 baylor,"at Texas A&M 9,056",texas-a-m,Texas A&M,TRUE,1,2015-2016,2015-2016,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,at Texas State,texas-state,Texas State,TRUE,1,1991-1992,1991-1992,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"at Texas Tech 4,250",texas-tech,Texas Tech,TRUE,1,2020-2021,2020-2021,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
-baylor,at Texas-Pan American,ut-rio-grande-valley,UTRGV,TRUE,1,1977-1978,1977-1978,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,at Texas-Pan American,ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,1977-1978,1977-1978,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,at Trinity,trinity-texas,Trinity (Texas),FALSE,3,1961-1962,1965-1966,RESOLVED,historical/non-current identity research,,Current non-D1 institution; Baylor/Texas context
 baylor,at Tulane,tulane,Tulane,TRUE,8,1946-1947,1971-1972,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,at Tulsa,tulsa,Tulsa,TRUE,4,1954-1955,1991-1992,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
@@ -1312,7 +1312,7 @@ baylor,vs. Texas Tech3,texas-tech,Texas Tech,TRUE,2,1983-1984,1987-1988,RESOLVED
 baylor,"vs. Texas Tech3 12,000",texas-tech,Texas Tech,TRUE,1,2002-2003,2002-2003,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,vs. Texas Tech4,texas-tech,Texas Tech,TRUE,1,1976-1977,1976-1977,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"vs. Texas Tech5 19,135",texas-tech,Texas Tech,TRUE,1,2024-2025,2024-2025,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
-baylor,vs. Texas-Pan American1,ut-rio-grande-valley,UTRGV,TRUE,1,2001-2002,2001-2002,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
+baylor,vs. Texas-Pan American1,ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,2001-2002,2001-2002,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,vs. Texas1,texas,Texas,TRUE,5,1938-1939,1958-1959,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"vs. Texas1 19,100",texas,Texas,TRUE,1,2000-2001,2000-2001,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,vs. Texas2,texas,Texas,TRUE,1,1949-1950,1949-1950,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
@@ -1362,7 +1362,7 @@ baylor,"vs. West Virginia4 18,972",west-virginia,West Virginia,TRUE,1,2014-2015,
 baylor,"vs. West Virginia5 17,653",west-virginia,West Virginia,TRUE,1,2017-2018,2017-2018,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"vs. Wichita State1 2,132",wichita-state,Wichita State,TRUE,1,2007-2008,2007-2008,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,vs. Wichita State2,wichita-state,Wichita State,TRUE,1,1960-1961,1960-1961,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
-baylor,vs. William & Mary2,william-and-mary,William & Mary,TRUE,1,1968-1969,1968-1969,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
+baylor,vs. William & Mary2,william-mary,William & Mary,TRUE,1,1968-1969,1968-1969,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"vs. Winthrop1 3,325",winthrop,Winthrop,TRUE,1,2007-2008,2007-2008,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"vs. Wisconsin2 10,243",wisconsin,Wisconsin,TRUE,1,2017-2018,2017-2018,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"vs. Wisconsin6 1,250",wisconsin,Wisconsin,TRUE,1,2020-2021,2020-2021,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
