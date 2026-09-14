@@ -831,7 +831,7 @@ baylor,"TEXAS-PAN AMERICAN 1,611",ut-rio-grande-valley,UT Rio Grande Valley,TRUE
 baylor,"TEXAS-PAN AMERICAN 3,593",ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,2003-2004,2003-2004,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,"TEXAS-PAN AMERICAN 5,197",ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,2002-2003,2002-2003,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
 baylor,TEXAS2,texas,Texas,TRUE,1,1981-1982,1981-1982,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
-baylor,TRINITY,trinity-texas,Trinity (Texas),FALSE,7,1929-1930,1984-1985,RESOLVED,historical/non-current identity research,,Current non-D1 institution; Baylor/Texas context
+baylor,TRINITY,trinity-texas,Trinity (TX),FALSE,7,1929-1930,1984-1985,RESOLVED,historical/non-current identity research,,Current non-D1 institution; Baylor/Texas context
 baylor,"TROY 2,035",troy,Troy,TRUE,1,1997-1998,1997-1998,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,TULANE,tulane,Tulane,TRUE,5,1915-1916,1972-1973,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,TULSA,tulsa,Tulsa,TRUE,3,1955-1956,1986-1987,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
@@ -1046,7 +1046,7 @@ baylor,"at Texas A&M 9,056",texas-a-m,Texas A&M,TRUE,1,2015-2016,2015-2016,RESOL
 baylor,at Texas State,texas-state,Texas State,TRUE,1,1991-1992,1991-1992,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,"at Texas Tech 4,250",texas-tech,Texas Tech,TRUE,1,2020-2021,2020-2021,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,at Texas-Pan American,ut-rio-grande-valley,UT Rio Grande Valley,TRUE,1,1977-1978,1977-1978,RESOLVED,current-D1 alias/lineage normalization,,Current project program registry plus Baylor official series/rename evidence
-baylor,at Trinity,trinity-texas,Trinity (Texas),FALSE,3,1961-1962,1965-1966,RESOLVED,historical/non-current identity research,,Current non-D1 institution; Baylor/Texas context
+baylor,at Trinity,trinity-texas,Trinity (TX),FALSE,3,1961-1962,1965-1966,RESOLVED,historical/non-current identity research,,Current non-D1 institution; Baylor/Texas context
 baylor,at Tulane,tulane,Tulane,TRUE,8,1946-1947,1971-1972,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,at Tulsa,tulsa,Tulsa,TRUE,4,1954-1955,1991-1992,RESOLVED,current-D1 registry exact/normalized match,,Current project program registry; Baylor source label
 baylor,at U.S. International,us-international,U.S. International,FALSE,1,1990-1991,1990-1991,RESOLVED,historical/non-current identity research,,Historical/defunct non-current institution
