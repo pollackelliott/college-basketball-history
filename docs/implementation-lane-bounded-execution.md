@@ -57,6 +57,8 @@ Follow `docs/codespace-terminal-safety.md` exactly. In particular:
 
 For recurring Implementation operations already owned by permanent repository tooling, invoke that tooling directly by default. Do not replace an existing supported operation with bespoke shell or `/tmp` Python merely because the same result can be scripted. In particular, use supported review-fill, rehearsal, onboarding, site-gate, package-check, and release commands for the responsibilities they own. Temporary helpers are appropriate for genuinely school-specific diagnostics or operations not represented by current tooling, and should remain narrow rather than reimplementing permanent invariants.
 
+Before sending an owner-executed bespoke wrapper, establish from current repository state the exact precondition, intended mutation or read-only effect, allowed changed paths/derived changes, and success condition. If the relay wraps a permanent repository command, inspect and trust that command's actual contract rather than adding an undocumented invariant that the owner must disprove by execution.
+
 The preferred execution order is:
 
 `permanent repository command -> pasted standard command/guard -> pasted temporary helper -> manual helper-file transport`
