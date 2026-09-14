@@ -59,3 +59,21 @@ and no opponent normalization changed as a result of Stage 5.
 
 ## Stage 7 immutable research freeze
 The accepted Stage 6 package was promoted to the final immutable Research package on 2026-09-12. Only research-status prose in `notes.md` / `source-notes.md` was updated during Stage 7; no game, opponent, venue, conference-membership, score, H/A/N, or site-research conclusion was changed. Serialized Implementation must verify this package/hash and perform the authoritative current-main rebase before tracked Phase 0.
+
+## Implementation Stage 2 — 2018 Hall of Fame Classic site correction
+
+Two 2018-19 rows inherited Texas Tech's ordinary home-chronology assignment
+because the year-by-year record-book listing did not mark them with `vs.`.
+Implementation adversarial review corrected that stale inference:
+
+- 2018-11-19 vs USC: neutral, Sprint Center, Kansas City, Missouri.
+- 2018-11-20 vs Nebraska: neutral, Sprint Center, Kansas City, Missouri.
+
+Evidence: Texas Tech's official 2018 Hall of Fame Classic announcement,
+official 2018-19 schedule, USC game recap, Nebraska championship recap and
+Nebraska box score. The project-global venue authority registers Sprint Center
+as a historical alias of T-Mobile Center (`VEN-000202`).
+
+This is a bounded Implementation correction to stale site interpretation;
+game identity, score, opponent identity, and competitive-game universe are
+unchanged.
