@@ -23,6 +23,8 @@ Before beginning a serial repair loop, perform one comprehensive deterministic c
 - predicted opponent-display collisions;
 - the deterministic publication/site-completeness defects covered below.
 
+Exercise the permanent repository detection surfaces that already own these checks before adding bespoke diagnostics; do not treat a category as challenged merely because the lane reasoned about it without running the available non-destructive builder/gate/check that can expose it.
+
 Repair that bounded inventory as a coherent population where safe, then regenerate authoritative preflight/challenge state. Do not intentionally rely on successive full simulations to discover deterministic defects one at a time.
 
 This is an execution-order rule, not a new gate and not authority for speculative research. Integrated-state issues that cannot safely be known until a simulation or reciprocal reconciliation may still emerge iteratively; diagnose those normally rather than forcing unsupported early conclusions.
