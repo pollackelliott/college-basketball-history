@@ -443,7 +443,7 @@
       "state": "TX",
       "primary_hex": "#154734",
       "secondary_hex": "#FFB81C",
-      "history_start_season": null,
+      "history_start_season": "1906-1907",
       "conference_regular_season_championships": 7,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 17,
@@ -452,7 +452,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2021,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
