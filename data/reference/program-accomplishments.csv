@@ -110,7 +110,7 @@ hawai-i,3,5,6,0,0,ROUND_OF_32,2016,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-
 high-point,7,2,2,0,0,ROUND_OF_32,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 hofstra,10,7,5,0,0,ROUND_OF_32,1977,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 holy-cross,6,8,13,2,1,NATIONAL_CHAMPION,1947,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-houston,13,9,27,7,0,NATIONAL_RUNNER_UP,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+houston,13,9,27,7,0,NATIONAL_RUNNER_UP,2025,VERIFIED,Houston authoritative historical records support the stored accomplishment reference values.,MATCH,Verified through onboarding plan 1a168276faae.
 houston-christian,2,1,1,0,0,PLAY_IN_ROUND,1984,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 howard,6,6,5,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 idaho,8,5,5,0,0,SWEET_SIXTEEN,1982,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

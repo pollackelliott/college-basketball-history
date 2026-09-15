@@ -2699,7 +2699,7 @@
       "state": "TX",
       "primary_hex": "#C8102E",
       "secondary_hex": "#B4B2B4",
-      "history_start_season": null,
+      "history_start_season": "1950-1951",
       "conference_regular_season_championships": 13,
       "conference_tournament_championships": 9,
       "ncaa_tournament_appearances": 27,
@@ -2708,7 +2708,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 2025,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
