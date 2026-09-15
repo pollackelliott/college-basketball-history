@@ -1,0 +1,8 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,tcu,1908-1909,1908-1909,independent,Independent,Independent,No,TCU program begins in 1908-09; TCU institutional conference history begins TIAA membership in 1909.,Pre-conference season.
+1,tcu,1909-1910,1922-1923,texas-intercollegiate-athletic-association,Texas Intercollegiate Athletic Association,Full Member,No,TCU institutional athletics history lists TIAA membership from 1909 through 1922.,Historical identity is not present in the recorded research-base conference registry; serialized Implementation must register/rebase it.
+2,tcu,1923-1924,1995-1996,southwest-conference,Southwest Conference,Full Member,No,TCU institutional athletics history and basketball conference records.,TCU joined the Southwest Conference in 1923.
+3,tcu,1996-1997,2000-2001,wac,WAC,Full Member,No,TCU Athletics conference history.,
+4,tcu,2001-2002,2004-2005,cusa,CUSA,Full Member,No,TCU Athletics conference history.,
+5,tcu,2005-2006,2011-2012,mountain-west,Mountain West,Full Member,No,TCU Athletics conference history.,
+6,tcu,2012-2013,,big-12,Big 12,Full Member,Yes,TCU Athletics conference history; Big 12 membership begins 2012-13.,

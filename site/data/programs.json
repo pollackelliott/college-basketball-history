@@ -6995,7 +6995,7 @@
       "state": "TX",
       "primary_hex": "#4D1979",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1908-1909",
       "conference_regular_season_championships": 11,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 12,
@@ -7004,7 +7004,7 @@
       "best_finish_key": "ELITE_EIGHT",
       "best_finish_year": 1968,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
