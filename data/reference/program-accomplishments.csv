@@ -289,7 +289,7 @@ stonehill,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program basel
 stony-brook,4,1,1,0,0,ROUND_OF_64,2016,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 syracuse,9,8,37,6,1,NATIONAL_CHAMPION,2003,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 tarleton-state,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-tcu,11,0,12,0,0,ELITE_EIGHT,1968,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+tcu,11,0,12,0,0,ELITE_EIGHT,1968,VERIFIED,"Owner Gate 1: verified against authoritative TCU program records during Stage 2 — 11 regular-season conference championships, 0 conference tournament championships, 12 NCAA appearances, 0 Final Fours, 0 national championships, best finish Elite Eight in 1968.",MATCH,Verified through onboarding plan bb52d3aa3867.
 temple,19,10,33,2,0,FINAL_FOUR,1958,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 tennessee,12,5,28,0,0,ELITE_EIGHT,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,MATCH,
 tennessee-state,3,3,3,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

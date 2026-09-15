@@ -4608,7 +4608,7 @@
       "opponent_key": "tcu",
       "opponent_name": "TCU",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -33447,12 +33447,12 @@
     {
       "canonical_game_id": "CBBG-0042237",
       "season_label": "1965-1966",
-      "game_date": "1965-12-07",
+      "game_date": "1965-12-03",
       "date_precision": "EXACT",
       "opponent_key": "tcu",
       "opponent_name": "TCU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 76,
       "opponent_score": 75,
       "score_known": true,
@@ -50302,7 +50302,7 @@
       "opponent_key": "tcu",
       "opponent_name": "TCU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 77,
       "opponent_score": 72,
       "score_known": true,

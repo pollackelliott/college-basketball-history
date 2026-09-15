@@ -4672,7 +4672,7 @@
       "opponent_key": "tcu",
       "opponent_name": "TCU",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -44019,7 +44019,7 @@
       "opponent_key": "tcu",
       "opponent_name": "TCU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 103,
       "opponent_score": 53,
       "score_known": true,
@@ -59494,7 +59494,7 @@
       "opponent_key": "tcu",
       "opponent_name": "TCU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 124,
       "opponent_score": 80,
       "score_known": true,
