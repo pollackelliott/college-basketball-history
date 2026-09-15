@@ -212,3 +212,10 @@ The pre-Gate deterministic site builder identified historical opponent keys whos
 - `HOU-R-01016` is durably matched to `CBBG-0066772`; the 1986 date conflict remains explicit because Houston and Texas A&M historical materials disagree.
 - `HOU-R-02245` is durably matched to `CBBG-0100631`; its source date was normalized from 2025-03-06 to 2025-03-08 using agreeing Houston and Baylor official box scores.
 - `HOU-R-02108` normalized game-level locality from Las Vegas, NV to the project-standard physical jurisdiction Paradise, NV for Michelob ULTRA Arena (`VEN-000135`); literal source wording remains preserved in source provenance.
+
+## Implementation Stage 2 owner-directed venue display correction
+
+- `VEN-000291` remains one physical Houston venue with stable key `hofheinz-pavilion`. Per owner direction, its project/website display is now `Fertitta Center`; `Hofheinz Pavilion` remains the historical alias/former name. No second physical venue identity was created.
+- Houston's local venue registry likewise uses `Fertitta Center` as the canonical label for `VEN-000291` while retaining `Hofheinz Pavilion` as an alias.
+- `CBBG-0014488` / `HOU-R-02244`: venue/location corrected to `VEN-000291` / `hofheinz-pavilion` (`Fertitta Center`), Houston, TX. The HOME-vs-NEUTRAL historical disposition remains in Owner Gate 1.
+- `CBBG-0002316`: venue identity corrected from Kemper Arena to `municipal-auditorium-kc` / `VEN-000143` (`Municipal Auditorium`), Kansas City, MO. The Houston source H/A/N normalization remains in Owner Gate 1.
