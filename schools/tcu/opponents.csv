@@ -43,7 +43,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 41,tcu,Butler,butler,Butler,Yes,2,1999-2000,2000-2001,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: Butler | at Butler
 42,tcu,CSU Bakersfield,cal-state-bakersfield,Cal State Bakersfield,Yes,1,2018-2019,2018-2019,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: CSU Bakersfield
 43,tcu,Cal Poly,cal-poly,Cal Poly,Yes,1,2012-2013,2012-2013,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: Cal Poly
-44,tcu,Cal State Northridge,cal-state-northridge,CSUN,Yes,1,2009-2010,2009-2010,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: #Cal State Northridge
+44,tcu,Cal State Northridge,cal-state-northridge,Cal State Northridge,Yes,1,2009-2010,2009-2010,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: #Cal State Northridge
 45,tcu,California,california,California,Yes,3,1971-1972,2022-2023,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: #California | & vs. California
 46,tcu,California Baptist,california-baptist,California Baptist,Yes,1,1983-1984,1983-1984,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: California Baptist
 47,tcu,Campbell,campbell,Campbell,Yes,1,1984-1985,1984-1985,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: Campbell
@@ -186,7 +186,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 184,tcu,McNeese State,mcneese,McNeese,Yes,3,1996-1997,2014-2015,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: McNeese State
 185,tcu,Memphis,memphis,Memphis,Yes,9,1976-1977,2004-2005,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: *Memphis | *at (20) Memphis | *at (24) Memphis | *at Memphis | at Memphis
 186,tcu,Memphis State,memphis,Memphis,Yes,2,1966-1967,1967-1968,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: Memphis State | at Memphis State
-187,tcu,Miami (FL),miami,Miami,Yes,1,1957-1958,1957-1958,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: #Miami (FL)
+187,tcu,Miami (FL),miami,Miami (FL),Yes,1,1957-1958,1957-1958,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: #Miami (FL)
 188,tcu,Miami (OH),miami-oh,Miami (OH),Yes,1,2004-2005,2004-2005,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: ^at Miami (OH)
 189,tcu,Michigan,michigan,Michigan,Yes,3,1962-1963,2025-2026,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: #6 Michigan | at Michigan
 190,tcu,Michigan State,michigan-state,Michigan State,Yes,2,1986-1987,1987-1988,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,Stage 2 identity status: CURRENT_D1_DIRECT_OR_VARIANT. Representative raw labels: Michigan State | at Michigan State
