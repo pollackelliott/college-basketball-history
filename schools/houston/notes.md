@@ -219,3 +219,10 @@ The pre-Gate deterministic site builder identified historical opponent keys whos
 - Houston's local venue registry likewise uses `Fertitta Center` as the canonical label for `VEN-000291` while retaining `Hofheinz Pavilion` as an alias.
 - `CBBG-0014488` / `HOU-R-02244`: venue/location corrected to `VEN-000291` / `hofheinz-pavilion` (`Fertitta Center`), Houston, TX. The HOME-vs-NEUTRAL historical disposition remains in Owner Gate 1.
 - `CBBG-0002316`: venue identity corrected from Kemper Arena to `municipal-auditorium-kc` / `VEN-000143` (`Municipal Auditorium`), Kansas City, MO. The Houston source H/A/N normalization remains in Owner Gate 1.
+
+## Implementation Stage 2 site-conflict normalization
+
+Predicted-publication challenge identified a finite Houston H/A/N conflict population. Source-side classifications were normalized only where independent evidence supports the retained canonical site classification. Remaining canonical H/A/N changes remain owner-gated.
+
+Coleman Coliseum reuses existing global physical identity VEN-000048. Houston-local VEN-000453 no longer claims the bare `Municipal Auditorium` alias; Kansas City Municipal Auditorium remains VEN-000143.
+
