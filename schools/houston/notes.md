@@ -200,3 +200,7 @@ The pre-Gate deterministic site builder identified historical opponent keys whos
 - `trinity-texas`: `Trinity University (Texas)` → `Trinity (TX)`; target derived from the single normalized display signature already present in pre-Houston packages.
 - `wabash`: `Wabash College` → `Wabash`; target derived from the single normalized display signature already present in pre-Houston packages.
 - `west-texas-a-m`: `West Texas A&M University` → `West Texas A&M`; target derived from the single normalized display signature already present in pre-Houston packages.
+
+## Implementation Stage 2 current-program display normalization
+
+- `pennsylvania`: `Penn` → `Pennsylvania`. The opponent key already exists in the current global program registry; the registry program name is therefore the project-stable display identity. Houston raw/source opponent labels remain unchanged.
