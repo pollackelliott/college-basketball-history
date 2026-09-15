@@ -204,3 +204,11 @@ The pre-Gate deterministic site builder identified historical opponent keys whos
 ## Implementation Stage 2 current-program display normalization
 
 - `pennsylvania`: `Penn` → `Pennsylvania`. The opponent key already exists in the current global program registry; the registry program name is therefore the project-stable display identity. Houston raw/source opponent labels remain unchanged.
+
+## Implementation Stage 2 identity and locality resolution
+
+- `HOU-R-00755` is durably matched to the existing Texas Tech reciprocal game represented by `CBBG-0098095`; the 1978 date conflict remains explicit for reconciliation.
+- `HOU-R-00920` is durably matched to `CBBG-0057559`; independent Houston/Maryland evidence supports 1983-03-19.
+- `HOU-R-01016` is durably matched to `CBBG-0066772`; the 1986 date conflict remains explicit because Houston and Texas A&M historical materials disagree.
+- `HOU-R-02245` is durably matched to `CBBG-0100631`; its source date was normalized from 2025-03-06 to 2025-03-08 using agreeing Houston and Baylor official box scores.
+- `HOU-R-02108` normalized game-level locality from Las Vegas, NV to the project-standard physical jurisdiction Paradise, NV for Michelob ULTRA Arena (`VEN-000135`); literal source wording remains preserved in source provenance.
