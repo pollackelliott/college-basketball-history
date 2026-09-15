@@ -179,3 +179,24 @@ Stage 6 is complete only as the bounded pre-freeze research state. Stage 7 remai
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=3989158d6e461a3dfb7be919586c5b388f8ef83d` from `research_base_sha=0b8cf20e3b14517031a5a0e62b362883966e51c1`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Implementation Stage 2 deterministic opponent-display normalization
+
+The pre-Gate deterministic site builder identified historical opponent keys whose Houston display strings conflicted with the project-stable display identity already established by pre-Houston school packages. Raw/source opponent labels remain unchanged; only normalized/canonical display strings were aligned mechanically.
+- `centenary-louisiana`: `Centenary College (Louisiana)` → `Centenary (LA)`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `hawaii-loa`: `Hawai'i Loa College` → `Hawaii Loa`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `louisiana-christian`: `Louisiana Christian University` → `Louisiana Christian`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `loyola-new-orleans`: `Loyola University New Orleans` → `Loyola New Orleans`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `mcmurry`: `McMurry University` → `McMurry`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `midwestern-state`: `Midwestern State University` → `Midwestern State`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `northwestern-oklahoma-state`: `Northwestern Oklahoma State University` → `Northwestern Oklahoma State`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `oklahoma-city`: `Oklahoma City University` → `Oklahoma City`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `rogers-state`: `Rogers State University` → `Rogers State`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `southwestern-texas`: `Southwestern University (Texas)` → `Southwestern Texas`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `st-thomas-florida`: `St. Thomas University (Florida)` → `St. Thomas University (FL)`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `texas-a-m-kingsville`: `Texas A&M University-Kingsville` → `Texas A&M-Kingsville`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `texas-lutheran`: `Texas Lutheran University` → `Texas Lutheran`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `texas-wesleyan`: `Texas Wesleyan University` → `Texas Wesleyan`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `trinity-texas`: `Trinity University (Texas)` → `Trinity (TX)`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `wabash`: `Wabash College` → `Wabash`; target derived from the single normalized display signature already present in pre-Houston packages.
+- `west-texas-a-m`: `West Texas A&M University` → `West Texas A&M`; target derived from the single normalized display signature already present in pre-Houston packages.
