@@ -44,13 +44,20 @@ class GlobalVenueReferenceTests(unittest.TestCase):
             self.venues_by_key["thompson-boling-arena"]["display_name"],
             "Thompson-Boling Arena",
         )
-        self.assertEqual(
-            (
-                self.venues_by_key["t-mobile-arena"]["city"],
-                self.venues_by_key["t-mobile-arena"]["state"],
-            ),
-            ("Paradise", "NV"),
-        )
+        for venue_key in (
+            "mgm-grand-garden-arena",
+            "michelob-ultra-arena",
+            "t-mobile-arena",
+            "orleans-arena",
+            "thomas-and-mack-center",
+        ):
+            self.assertEqual(
+                (
+                    self.venues_by_key[venue_key]["city"],
+                    self.venues_by_key[venue_key]["state"],
+                ),
+                ("Las Vegas", "NV"),
+            )
 
     def test_all_school_rows_reference_global_identity(self):
         total = 0

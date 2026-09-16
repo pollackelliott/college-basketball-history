@@ -790,8 +790,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "2013-2014",
       "last_season": "2013-2014",
@@ -76390,7 +76390,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -76415,7 +76415,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -76440,7 +76440,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

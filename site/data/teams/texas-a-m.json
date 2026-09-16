@@ -865,8 +865,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1947-1948",
       "last_season": "2024-2025",
@@ -3259,6 +3259,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1992-1993",
+      "last_season": "2021-2022",
+      "games": 5,
+      "wins": 3,
+      "losses": 2,
+      "ties": 0
+    },
+    {
       "opponent_key": "magnolia-dealers",
       "opponent_name": "Magnolia Dealers",
       "current_d1": false,
@@ -3799,22 +3815,6 @@
       "games": 8,
       "wins": 2,
       "losses": 6,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1992-1993",
-      "last_season": "2021-2022",
-      "games": 5,
-      "wins": 3,
-      "losses": 2,
       "ties": 0
     },
     {
@@ -5134,8 +5134,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1973-1974",
       "last_season": "2020-2021",
@@ -5706,8 +5706,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1970-1971",
       "last_season": "1972-1973",
@@ -52786,7 +52786,7 @@
       "game_date": "1992-12-29",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 55,
@@ -54011,7 +54011,7 @@
       "game_date": "1994-03-16",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 73,
@@ -69511,7 +69511,7 @@
       "game_date": "2014-11-28",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 87,
@@ -74361,7 +74361,7 @@
       "game_date": "2020-11-29",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 82,
@@ -74948,7 +74948,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -74986,7 +74986,7 @@
       "game_date": "2021-11-30",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 85,
@@ -77723,7 +77723,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -77748,7 +77748,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -77773,7 +77773,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

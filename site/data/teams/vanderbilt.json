@@ -3260,6 +3260,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1989-1990",
+      "last_season": "2024-2025",
+      "games": 4,
+      "wins": 4,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "macon-ymca",
       "opponent_name": "Macon YMCA",
       "current_d1": false,
@@ -3905,22 +3921,6 @@
       "last_season": "1997-1998",
       "games": 3,
       "wins": 3,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1989-1990",
-      "last_season": "2024-2025",
-      "games": 4,
-      "wins": 4,
       "losses": 0,
       "ties": 0
     },
@@ -52343,7 +52343,7 @@
       "game_date": "1990-03-21",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 88,
@@ -55468,7 +55468,7 @@
       "game_date": "1994-03-21",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 78,
@@ -64268,7 +64268,7 @@
       "game_date": "2005-12-20",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 78,
@@ -73305,7 +73305,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -80018,7 +80018,7 @@
       "game_date": "2024-12-30",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 100,
