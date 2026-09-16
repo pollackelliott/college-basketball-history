@@ -762,8 +762,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "2020-2021",
       "last_season": "2023-2024",
@@ -5307,8 +5307,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1965-1966",
       "last_season": "2020-2021",
@@ -75290,7 +75290,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "NCAA_TOURNAMENT",
       "postseason_round": "Sweet Sixteen",

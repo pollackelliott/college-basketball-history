@@ -881,8 +881,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1957-1958",
       "last_season": "2024-2025",
@@ -3027,6 +3027,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "2018-2019",
+      "last_season": "2024-2025",
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "macon-ymca",
       "opponent_name": "Macon YMCA",
       "current_d1": false,
@@ -3502,22 +3518,6 @@
       "games": 11,
       "wins": 6,
       "losses": 5,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "2018-2019",
-      "last_season": "2024-2025",
-      "games": 2,
-      "wins": 2,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -4860,8 +4860,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1920-1921",
       "last_season": "2025-2026",
@@ -5348,8 +5348,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1962-1963",
       "last_season": "2011-2012",
@@ -73573,7 +73573,7 @@
       "game_date": "2018-12-29",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 84,
@@ -74910,7 +74910,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -74935,7 +74935,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -76585,7 +76585,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -76610,7 +76610,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -78373,7 +78373,7 @@
       "game_date": "2024-11-27",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 91,
@@ -79185,7 +79185,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -79210,7 +79210,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -79235,7 +79235,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -79910,7 +79910,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "POSTSEASON",
       "postseason_round": null,
@@ -79935,7 +79935,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "POSTSEASON",
       "postseason_round": null,

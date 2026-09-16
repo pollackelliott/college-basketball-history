@@ -3433,6 +3433,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "2013-2014",
+      "last_season": "2013-2014",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "maine",
       "opponent_name": "Maine",
       "current_d1": true,
@@ -4040,22 +4056,6 @@
       },
       "first_season": "2009-2010",
       "last_season": "2009-2010",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "2013-2014",
-      "last_season": "2013-2014",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -5723,8 +5723,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "2009-2010",
       "last_season": "2009-2010",
@@ -71541,7 +71541,7 @@
       "game_date": "2013-12-28",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 101,
@@ -75928,7 +75928,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

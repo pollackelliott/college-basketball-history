@@ -22,8 +22,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       }
     },
     {
@@ -3747,6 +3747,30 @@
       }
     },
     {
+      "program_key": "new-orleans",
+      "program_name": "LSU New Orleans",
+      "display_name": "LSU New Orleans",
+      "nickname": "Privateers",
+      "city": "New Orleans",
+      "state": "LA",
+      "primary_hex": "#461D7C",
+      "secondary_hex": "#FDD023",
+      "history_start_season": null,
+      "conference_regular_season_championships": 8,
+      "conference_tournament_championships": 4,
+      "ncaa_tournament_appearances": 5,
+      "final_four_appearances": 0,
+      "national_championships": 0,
+      "best_finish_key": "ROUND_OF_32",
+      "best_finish_year": 1987,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      }
+    },
+    {
       "program_key": "maine",
       "program_name": "Maine",
       "display_name": "Maine",
@@ -4656,30 +4680,6 @@
       "current_conference": {
         "conference_key": "cusa",
         "conference_name": "CUSA"
-      }
-    },
-    {
-      "program_key": "new-orleans",
-      "program_name": "New Orleans",
-      "display_name": "New Orleans",
-      "nickname": "Privateers",
-      "city": "New Orleans",
-      "state": "LA",
-      "primary_hex": "#005CA6",
-      "secondary_hex": "#A3A9AC",
-      "history_start_season": null,
-      "conference_regular_season_championships": 8,
-      "conference_tournament_championships": 4,
-      "ncaa_tournament_appearances": 5,
-      "final_four_appearances": 0,
-      "national_championships": 0,
-      "best_finish_key": "ROUND_OF_32",
-      "best_finish_year": 1987,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
       }
     },
     {
@@ -6982,8 +6982,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       }
     },
     {
@@ -7846,8 +7846,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       }
     },
     {

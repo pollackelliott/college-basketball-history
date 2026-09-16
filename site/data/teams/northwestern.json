@@ -3035,6 +3035,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1978-1979",
+      "last_season": "2021-2022",
+      "games": 5,
+      "wins": 5,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "maine",
       "opponent_name": "Maine",
       "current_d1": true,
@@ -3519,22 +3535,6 @@
       "games": 1,
       "wins": 0,
       "losses": 1,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1978-1979",
-      "last_season": "2021-2022",
-      "games": 5,
-      "wins": 5,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -40596,7 +40596,7 @@
       "game_date": "1978-12-29",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 65,
@@ -66008,7 +66008,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -67571,7 +67571,7 @@
       "game_date": "2015-11-28",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 90,
@@ -68446,7 +68446,7 @@
       "game_date": "2016-12-11",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 83,
@@ -69946,7 +69946,7 @@
       "game_date": "2018-11-08",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 82,
@@ -72171,7 +72171,7 @@
       "game_date": "2021-11-16",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 83,

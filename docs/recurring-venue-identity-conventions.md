@@ -1,7 +1,7 @@
 # Recurring Venue Identity Conventions
 
 - **Status:** Durable project convention for recurring venue-identity/locality decisions
-- **Applies to:** Research current-main rebase, Implementation Stage 2 adversarial review, reconciliation, and publication metadata
+- **Applies to:** Research package construction and current-main rebase, Implementation Stage 2 adversarial review, reconciliation, and publication metadata
 - **Purpose:** Prevent repeated owner review of venue questions whose answer is stable across schools.
 
 ## Principle
@@ -37,33 +37,33 @@ Useful historical anchors:
 
 Primary/authoritative evidence used for this convention includes the National Park Service history of MSG III, Madison Square Garden's current-complex history, the Madison Square Park Conservancy history of the earlier Gardens, and the New York Knicks historical media guide for the 1968 transition.
 
-## Paradise, Nevada versus Las Vegas mailing geography
+## Paradise, Nevada and canonical Las Vegas normalization
 
-For physical venue identity, the project uses the actual municipality/unincorporated town of the venue, not merely the postal city printed in a mailing address or an event source.
+For project-facing canonical geography, physical venues in Paradise, Nevada are normalized to **Las Vegas, Nevada**. This is a deliberate project display convention; it does not assert that the unincorporated town of Paradise is part of the incorporated City of Las Vegas.
 
-A Las Vegas postal address therefore does **not** establish that a venue is physically inside the incorporated City of Las Vegas.
-
-Clark County's Assessor identifies major Strip parcels such as MGM Grand and T-Mobile Arena as located in the unincorporated town of **Paradise, Nevada** even though their mailing addresses say `Las Vegas, NV`.
+Source truth and canonical/registry truth may legitimately differ. Preserve the source's literal venue/locality evidence in source assertions and raw/source-label fields. Do not rewrite a literal source merely because the project's normalized canonical display geography differs.
 
 ### Canonical rule
 
-When the venue is physically in Paradise:
+When a resolved physical venue is in Paradise:
 
-- global venue registry city = `Paradise`;
-- canonical game site city = `Paradise` when canonical geography is derived from that physical venue;
-- preserve `Las Vegas` in the source assertion when that is what the school/event source literally reports;
-- do not classify the source/canonical difference as information loss merely because source mailing/event geography says `Las Vegas` and the registry says `Paradise`.
+- global venue registry city = `Las Vegas`;
+- canonical game site city = `Las Vegas` when geography is derived from that resolved venue;
+- Research packages should use `Las Vegas` in normalized/resolved venue and site geography once the physical venue identity is established;
+- Implementation/reconciliation should carry that same `Las Vegas` canonical normalization into the global venue registry and canonical games;
+- preserve literal `Paradise` or `Las Vegas` source wording separately when that is what the school, event, or archival source reports.
 
-The physical-jurisdiction convention outranks postal-city shorthand for canonical/registry geography.
+The project therefore treats `Las Vegas, NV` as the canonical public/normalized locality for these Paradise physical venues while retaining source provenance separately.
 
 ### Established recurring examples
 
-- `MGM Grand Garden Arena` / `VEN-000133` = **Paradise, NV**. Clark County Assessor parcel 162-21-414-001, location address 3799 S Las Vegas Blvd, identifies `City/Unincorporated Town: PARADISE`.
-- `T-Mobile Arena` / `VEN-000201` = **Paradise, NV**. Clark County Assessor parcel 162-20-810-003, location address 3780 S Las Vegas Blvd, identifies `City/Unincorporated Town: PARADISE`.
-- `Michelob ULTRA Arena` at Mandalay Bay should follow the same physical-jurisdiction rule: **Paradise, NV**, despite the property's Las Vegas postal address. The existing registry should be corrected through an ordinary global-reference cleanup if it still says `Las Vegas`.
-- UNLV-area venues such as Thomas & Mack Center should likewise use **Paradise, NV** when Clark County jurisdiction evidence establishes Paradise; do not infer from the `Las Vegas` postal city alone.
+- `MGM Grand Garden Arena` / `VEN-000133` = canonical **Las Vegas, NV**.
+- `Michelob ULTRA Arena` / `VEN-000135` = canonical **Las Vegas, NV**.
+- `T-Mobile Arena` / `VEN-000201` = canonical **Las Vegas, NV**.
+- `Orleans Arena` / `VEN-000356` = canonical **Las Vegas, NV**.
+- `Thomas & Mack Center` / `VEN-000377` = canonical **Las Vegas, NV**.
 
-This is not a blanket rule that every venue marketed as being in `Las Vegas` is in Paradise. Downtown Las Vegas and other incorporated-city venues remain `Las Vegas`. Determine the actual physical jurisdiction once, then reuse the established global venue identity thereafter.
+This is not a blanket instruction to collapse unrelated Nevada localities into Las Vegas. It applies when the physical venue identity has been established as a Paradise venue covered by this convention. Literal source geography remains evidence and must not be rewritten simply to match the canonical display normalization.
 
 ## Workflow consequence
 
@@ -74,4 +74,4 @@ They should:
 1. resolve the physical venue using the rules above;
 2. reuse the existing global venue key when the identity is established;
 3. preserve literal source wording separately;
-4. escalate only if the game falls in a genuine MSG transition ambiguity, identifies an earlier unregistered Garden, or evidence materially contradicts the established physical-jurisdiction convention.
+4. escalate only if the game falls in a genuine MSG transition ambiguity, identifies an earlier unregistered Garden, or evidence materially contradicts the established venue identity or this canonical Las Vegas normalization rule.

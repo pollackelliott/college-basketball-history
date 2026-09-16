@@ -902,8 +902,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "2018-2019",
       "last_season": "2018-2019",
@@ -5113,8 +5113,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "2013-2014",
       "last_season": "2014-2015",
@@ -70554,7 +70554,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -78204,7 +78204,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -82379,7 +82379,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

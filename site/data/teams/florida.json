@@ -2818,6 +2818,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1989-1990",
+      "last_season": "2002-2003",
+      "games": 3,
+      "wins": 3,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "lynchburg",
       "opponent_name": "Lynchburg",
       "current_d1": false,
@@ -3363,22 +3379,6 @@
       "last_season": "2017-2018",
       "games": 4,
       "wins": 4,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1989-1990",
-      "last_season": "2002-2003",
-      "games": 3,
-      "wins": 3,
       "losses": 0,
       "ties": 0
     },
@@ -44184,7 +44184,7 @@
       "game_date": "1989-12-27",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 69,
@@ -53534,7 +53534,7 @@
       "game_date": "2001-12-22",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 76,
@@ -54684,7 +54684,7 @@
       "game_date": "2003-02-17",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 77,
@@ -74221,7 +74221,7 @@
       "venue_key": "t-mobile-arena",
       "venue_id": "VEN-000201",
       "venue_name": "T-Mobile Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

@@ -874,8 +874,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1984-1985",
       "last_season": "1984-1985",
@@ -2800,6 +2800,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1997-1998",
+      "last_season": "1998-1999",
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "luther",
       "opponent_name": "Luther",
       "current_d1": false,
@@ -3362,22 +3378,6 @@
       "games": 3,
       "wins": 1,
       "losses": 2,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1997-1998",
-      "last_season": "1998-1999",
-      "games": 2,
-      "wins": 2,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -5050,8 +5050,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1986-1987",
       "last_season": "1997-1998",
@@ -55339,7 +55339,7 @@
       "game_date": "1997-12-29",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 70,
@@ -56026,7 +56026,7 @@
       "venue_key": "thomas-and-mack-center",
       "venue_id": "VEN-000377",
       "venue_name": "Thomas & Mack Center",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -56039,7 +56039,7 @@
       "game_date": "1998-12-22",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 61,
@@ -63176,7 +63176,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -63201,7 +63201,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -67076,7 +67076,7 @@
       "venue_key": "thomas-and-mack-center",
       "venue_id": "VEN-000377",
       "venue_name": "Thomas & Mack Center",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -67101,7 +67101,7 @@
       "venue_key": "thomas-and-mack-center",
       "venue_id": "VEN-000377",
       "venue_name": "Thomas & Mack Center",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -78001,7 +78001,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -78026,7 +78026,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -78051,7 +78051,7 @@
       "venue_key": "mgm-grand-garden-arena",
       "venue_id": "VEN-000133",
       "venue_name": "MGM Grand Garden Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

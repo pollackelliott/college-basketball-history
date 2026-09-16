@@ -31,6 +31,7 @@ button,input,select{font:inherit}button{touch-action:manipulation}.college{font-
 .section-head{text-align:center;margin:30px 0 13px}.section-head h2{font-family:Graduate,"Rockwell Extra Bold",Rockwell,"Arial Black",serif;text-transform:uppercase;margin:0;font-size:24px}.section-head p{margin:7px 0 0;color:var(--muted);font-size:13px}
 .panel{min-width:0;background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 3px 12px rgba(17,34,56,.04)}.panel-title{text-align:center;padding:14px 16px;border-bottom:1px solid var(--line);font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:14px;letter-spacing:.035em}
 .directory-panel{overflow:hidden}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(180px,260px) minmax(160px,220px);gap:10px;padding:14px;border-bottom:1px solid var(--line);background:#f8fafc}.directory-control label,.filter-field label{display:block;color:#526174;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:0 0 5px}.directory-control input,.directory-control select{width:100%;min-height:42px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:9px 10px}.directory-count{padding:10px 14px;text-align:center;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)}
+.directory-az{display:none}
 .program-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:12px}.program-card{appearance:none;min-width:0;width:100%;min-height:108px;text-align:center;padding:14px;border:1px solid #111;border-top:6px solid var(--secondary);border-radius:9px;background:var(--primary);color:var(--cardText);box-shadow:0 0 0 1px #111,0 3px 11px rgba(17,34,56,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.program-card.enabled{cursor:pointer}.program-card.enabled:hover{transform:translateY(-2px);box-shadow:0 0 0 1px #111,0 10px 22px rgba(17,34,56,.18)}.program-card:disabled{cursor:not-allowed;opacity:.70}.program-card .program-name{display:block;font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:20px;line-height:1.2;overflow-wrap:anywhere}.program-card .program-meta{display:block;margin-top:7px;font-size:13px;line-height:1.35;opacity:.92}
 .logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}
 .team-hero{border-radius:11px;overflow:hidden;background:white;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:18px}.team-strip{height:10px;background:var(--team)}
@@ -70,7 +71,7 @@ footer{max-width:1280px;margin:0 auto;padding:0 22px 35px;color:#7b8a9a;font-siz
 @media(max-width:720px){.team-context-title{max-width:100%;padding:5px 8px;border-radius:6px;font-size:15px;letter-spacing:.015em}}
 @media(max-width:1080px){.program-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:950px){.statbar{grid-template-columns:repeat(2,minmax(0,1fr))}.match-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.subgrid{grid-template-columns:1fr}.topbar-inner{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"brand title nav"}.searchbox{display:none}.mobile-search-toggle{display:block}.navlinks{margin-left:0}}
-@media(max-width:720px){.shell{padding:16px 12px 40px}.topbar-inner{padding:8px 10px;gap:8px}.brand{width:58px;white-space:normal;font-size:15px;line-height:.95;letter-spacing:.035em}.brand small{display:none}.navlinks{gap:0;flex-direction:column;align-items:flex-end}.navlinks button{min-height:26px;padding:2px 4px;font-size:10px;line-height:1.05}.hero{padding:24px 16px}.hero h1{font-size:27px}.hero p{font-size:13px;line-height:1.55}.statbar{gap:8px}.stat{padding:11px 7px}.stat b{font-size:20px}.stat span{font-size:10px}.section-head h2{font-size:21px}.directory-controls{grid-template-columns:1fr;padding:12px}.program-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.program-card{min-height:112px;padding:11px;border-top-width:5px}.program-card .program-name{font-size:16px}.program-card .program-meta{font-size:12px}.team-head{padding:20px 14px}.team-head h1{font-size:27px}.team-head .logo-disc{width:66px;height:66px;font-size:21px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.metric{padding:11px 7px}.metric b{font-size:17px}.metric span{font-size:10px}.history-panel{width:calc(100% + 16px);margin-inline:-8px}.history-panel .mobile-game-row summary{padding-left:8px;padding-right:8px}.history-panel .mobile-game-details{padding-left:8px;padding-right:8px}.mobile-filter-toggle{display:flex}.filters{display:none;padding:11px;align-items:stretch}.filters.mobile-open{display:grid;grid-template-columns:1fr}.filter-field,.filter-field.opponent-field{width:100%;max-width:none;min-width:0}.filter-clear{min-height:44px}.desktop-history{display:none}.mobile-history{display:block}.pager{justify-content:space-between;gap:10px;padding:11px}.pager>span:first-child{width:100%;text-align:center}.pager button{min-height:44px;min-width:92px}.conference-group summary{text-align:left;padding:13px}.conference-group summary span{display:block;margin:4px 0 0}.opponent-breakdown .data-note{padding-left:13px!important;padding-right:13px!important}.opponent-breakdown table{table-layout:fixed;font-size:10px}.opponent-breakdown th,.opponent-breakdown td{padding:8px 5px;white-space:normal}.opponent-breakdown th:first-child,.opponent-breakdown td:first-child{width:43%;text-align:left}.match-head{grid-template-columns:1fr;gap:12px;padding:18px 14px}.match-head .vs{font-size:17px}.side-team h2{font-size:23px}.match-metrics{gap:8px}.series-score{font-size:26px}.series-caption{line-height:1.5;padding:0 8px}.mobile-search-dialog{margin-top:18px}.panel-title{font-size:13px}.mini-table{font-size:11px}.notice{font-size:11px}.data-note{font-size:11px}}
+@media(max-width:720px){.shell{padding:16px 12px 40px}.topbar-inner{padding:8px 10px;gap:8px}.brand{width:58px;white-space:normal;font-size:15px;line-height:.95;letter-spacing:.035em}.brand small{display:none}.navlinks{gap:0;flex-direction:column;align-items:flex-end}.navlinks button{min-height:26px;padding:2px 4px;font-size:10px;line-height:1.05}.hero{padding:24px 16px}.hero h1{font-size:27px}.hero p{font-size:13px;line-height:1.55}.statbar{gap:8px}.stat{padding:11px 7px}.stat b{font-size:20px}.stat span{font-size:10px}.section-head h2{font-size:21px}.directory-controls{grid-template-columns:1fr;padding:12px}.program-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px}.directory-az{position:fixed;right:2px;top:50%;transform:translateY(-50%);z-index:19;display:flex;flex-direction:column;align-items:center;gap:0;padding:3px 2px;border:1px solid rgba(15,23,42,.14);border-radius:8px 0 0 8px;background:rgba(255,255,255,.84);box-shadow:0 2px 10px rgba(15,23,42,.12);opacity:.42;transition:opacity .15s ease;max-height:72vh;overflow-y:auto;overscroll-behavior:contain}.directory-az:hover,.directory-az:focus-within{opacity:.98}.directory-az-letter{appearance:none;border:0;background:transparent;color:var(--nav);font-size:10px;font-weight:800;line-height:1;min-width:24px;min-height:18px;padding:2px 4px;border-radius:4px;cursor:pointer}.directory-az-letter:active,.directory-az-letter:focus-visible{background:#e8f0f8}.program-card[data-directory-letter]{scroll-margin-top:78px}.program-card{min-height:112px;padding:11px;border-top-width:5px}.program-card .program-name{font-size:16px}.program-card .program-meta{font-size:12px}.team-head{padding:20px 14px}.team-head h1{font-size:27px}.team-head .logo-disc{width:66px;height:66px;font-size:21px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.metric{padding:11px 7px}.metric b{font-size:17px}.metric span{font-size:10px}.history-panel{width:calc(100% + 16px);margin-inline:-8px}.history-panel .mobile-game-row summary{padding-left:8px;padding-right:8px}.history-panel .mobile-game-details{padding-left:8px;padding-right:8px}.mobile-filter-toggle{display:flex}.filters{display:none;padding:11px;align-items:stretch}.filters.mobile-open{display:grid;grid-template-columns:1fr}.filter-field,.filter-field.opponent-field{width:100%;max-width:none;min-width:0}.filter-clear{min-height:44px}.desktop-history{display:none}.mobile-history{display:block}.pager{justify-content:space-between;gap:10px;padding:11px}.pager>span:first-child{width:100%;text-align:center}.pager button{min-height:44px;min-width:92px}.conference-group summary{text-align:left;padding:13px}.conference-group summary span{display:block;margin:4px 0 0}.opponent-breakdown .data-note{padding-left:13px!important;padding-right:13px!important}.opponent-breakdown table{table-layout:fixed;font-size:10px}.opponent-breakdown th,.opponent-breakdown td{padding:8px 5px;white-space:normal}.opponent-breakdown th:first-child,.opponent-breakdown td:first-child{width:43%;text-align:left}.match-head{grid-template-columns:1fr;gap:12px;padding:18px 14px}.match-head .vs{font-size:17px}.side-team h2{font-size:23px}.match-metrics{gap:8px}.series-score{font-size:26px}.series-caption{line-height:1.5;padding:0 8px}.mobile-search-dialog{margin-top:18px}.panel-title{font-size:13px}.mini-table{font-size:11px}.notice{font-size:11px}.data-note{font-size:11px}}
 @media(max-width:700px){
 .mobile-history-season-group{position:relative}
 .mobile-history-season{position:sticky;top:var(--sticky-topbar,58px);z-index:11;background:#16324a;color:#fff;padding:7px 12px;font-family:Graduate,"Arial Black",serif;font-size:11px;letter-spacing:.04em;border-bottom:1px solid rgba(255,255,255,.16)}
@@ -663,6 +664,56 @@ function filteredDirectoryPrograms() {
   });
 }
 
+
+function directoryInitial(program) {
+  const letter = String(program?.name || "").trim().charAt(0).toUpperCase();
+  return /^[A-Z]$/.test(letter) ? letter : "";
+}
+
+function jumpDirectoryLetter(letter) {
+  const target = document.getElementById(`directory-letter-${letter}`);
+  if (!target) return;
+  const reducedMotion = window.matchMedia
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+    block: "start"
+  });
+}
+
+function refreshDirectoryAZ(programs) {
+  const grid = document.getElementById("programGrid");
+  const nav = document.getElementById("directoryAZ");
+  if (!grid || !nav) return;
+
+  const cards = [...grid.querySelectorAll(".program-card")];
+  cards.forEach((card) => {
+    card.removeAttribute("id");
+    card.removeAttribute("data-directory-letter");
+  });
+
+  const letters = [];
+  const seen = new Set();
+
+  programs.forEach((program, index) => {
+    const letter = directoryInitial(program);
+    if (!letter || seen.has(letter)) return;
+    const card = cards[index];
+    if (!card) return;
+    seen.add(letter);
+    letters.push(letter);
+    card.id = `directory-letter-${letter}`;
+    card.dataset.directoryLetter = letter;
+  });
+
+  nav.innerHTML = letters.map((letter) =>
+    `<button type="button" class="directory-az-letter" ` +
+    `onclick="jumpDirectoryLetter('${letter}')" ` +
+    `aria-label="Jump to programs beginning with ${letter}">${letter}</button>`
+  ).join("");
+  nav.hidden = letters.length === 0;
+}
+
 function updateDirectory() {
   const query = document.getElementById("directorySearch");
   const conference = document.getElementById("directoryConference");
@@ -678,6 +729,7 @@ function updateDirectory() {
     ? programs.map(directoryCard).join("")
     : '<div class="empty" style="grid-column:1/-1">No programs match these directory filters.</div>';
   count.textContent = `${fmtNum(programs.length)} of ${fmtNum(DB.programs.length)} current Division I programs shown`;
+  refreshDirectoryAZ(programs);
 }
 
 function homeView() {
@@ -694,7 +746,7 @@ function homeView() {
   const conferenceOptions = conferences.map((conference) => `<option value="${esc(conference)}">${esc(conference)}</option>`).join("");
   const allPrograms = DB.programs.map(directoryCard).join("");
 
-  return `<section class="hero"><h1>College Basketball History</h1><p>Explore complete program histories, season-by-season results, and every available opponent series. New histories appear in the same Division I directory as soon as their verified data is published.</p><div class="statbar"><div class="stat"><b>${fmtNum(DB.activeKeys.length)}</b><span>complete histories</span></div><div class="stat"><b>${fmtNum(DB.programs.length)}</b><span>current D1 programs</span></div><div class="stat"><b>${fmtNum(teamRows)}</b><span>team-history rows</span></div><div class="stat"><b>${fmtNum(seriesKeys.size)}</b><span>opponent series</span></div></div></section><div class="section-head"><h2>Current D-I Directory</h2></div><div class="panel directory-panel"><div class="directory-controls"><div class="directory-control"><label for="directorySearch">Find a program</label><input id="directorySearch" type="search" placeholder="School, nickname, city…" autocomplete="off" oninput="updateDirectory()"></div><div class="directory-control"><label for="directoryConference">Conference</label><select id="directoryConference" onchange="updateDirectory()"><option value="all">All conferences</option>${conferenceOptions}</select></div><div class="directory-control"><label for="directoryAvailability">Availability</label><select id="directoryAvailability" onchange="updateDirectory()"><option value="all">All programs</option><option value="available">Published</option><option value="coming">Not yet published</option></select></div></div><div id="directoryCount" class="directory-count">${fmtNum(DB.programs.length)} of ${fmtNum(DB.programs.length)} current Division I programs shown</div><div id="programGrid" class="program-grid">${allPrograms}</div></div>`;
+  return `<section class="hero"><h1>College Basketball History</h1><p>Explore complete program histories, season-by-season results, and every available opponent series. New histories appear in the same Division I directory as soon as their verified data is published.</p><div class="statbar"><div class="stat"><b>${fmtNum(DB.activeKeys.length)}</b><span>complete histories</span></div><div class="stat"><b>${fmtNum(DB.programs.length)}</b><span>current D1 programs</span></div><div class="stat"><b>${fmtNum(teamRows)}</b><span>team-history rows</span></div><div class="stat"><b>${fmtNum(seriesKeys.size)}</b><span>opponent series</span></div></div></section><div class="section-head"><h2>Current D-I Directory</h2></div><div class="panel directory-panel"><div class="directory-controls"><div class="directory-control"><label for="directorySearch">Find a program</label><input id="directorySearch" type="search" placeholder="School, nickname, city…" autocomplete="off" oninput="updateDirectory()"></div><div class="directory-control"><label for="directoryConference">Conference</label><select id="directoryConference" onchange="updateDirectory()"><option value="all">All conferences</option>${conferenceOptions}</select></div><div class="directory-control"><label for="directoryAvailability">Availability</label><select id="directoryAvailability" onchange="updateDirectory()"><option value="all">All programs</option><option value="available">Published</option><option value="coming">Not yet published</option></select></div></div><div id="directoryCount" class="directory-count">${fmtNum(DB.programs.length)} of ${fmtNum(DB.programs.length)} current Division I programs shown</div><div id="programGrid" class="program-grid">${allPrograms}</div><nav id="directoryAZ" class="directory-az" aria-label="Jump to programs by first letter" hidden></nav></div>`;
 }
 
 function canonicalWinnerKey(game, teamA, teamB) {
@@ -1608,6 +1660,7 @@ function render() {
     app.innerHTML = matchupView(route[1], route[2]);
   } else {
     app.innerHTML = homeView();
+    setTimeout(() => refreshDirectoryAZ(DB.programs), 0);
   }
   forceRouteTop();
   syncStickyOffsets();

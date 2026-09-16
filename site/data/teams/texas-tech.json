@@ -748,8 +748,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1925-1926",
       "last_season": "2020-2021",
@@ -2685,6 +2685,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1987-1988",
+      "last_season": "2025-2026",
+      "games": 3,
+      "wins": 2,
+      "losses": 1,
+      "ties": 0
+    },
+    {
       "opponent_key": "lubbock-army-air-field",
       "opponent_name": "Lubbock Army Air Field",
       "current_d1": false,
@@ -3244,22 +3260,6 @@
       "games": 1,
       "wins": 1,
       "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1987-1988",
-      "last_season": "2025-2026",
-      "games": 3,
-      "wins": 2,
-      "losses": 1,
       "ties": 0
     },
     {
@@ -5004,8 +5004,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "wac",
-        "conference_name": "WAC"
+        "conference_key": "united-athletic",
+        "conference_name": "United Athletic"
       },
       "first_season": "1967-1968",
       "last_season": "2023-2024",
@@ -44259,7 +44259,7 @@
       "game_date": "1988-01-11",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 52,
@@ -44984,7 +44984,7 @@
       "game_date": "1989-01-14",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 64,
@@ -50721,7 +50721,7 @@
       "venue_key": "thomas-and-mack-center",
       "venue_id": "VEN-000377",
       "venue_name": "Thomas & Mack Center",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -64946,7 +64946,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -64971,7 +64971,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -69096,7 +69096,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -69121,7 +69121,7 @@
       "venue_key": "orleans-arena",
       "venue_id": "VEN-000356",
       "venue_name": "Orleans Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -74109,7 +74109,7 @@
       "game_date": "2025-11-26",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 82,

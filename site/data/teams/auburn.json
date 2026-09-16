@@ -2938,6 +2938,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "new-orleans",
+      "opponent_name": "LSU New Orleans",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "2003-2004",
+      "last_season": "2003-2004",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "lynn",
       "opponent_name": "Lynn",
       "current_d1": false,
@@ -3465,22 +3481,6 @@
       },
       "first_season": "2018-2019",
       "last_season": "2018-2019",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "2003-2004",
-      "last_season": "2003-2004",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -57170,7 +57170,7 @@
       "game_date": "2004-01-02",
       "date_precision": "EXACT",
       "opponent_key": "new-orleans",
-      "opponent_name": "New Orleans",
+      "opponent_name": "LSU New Orleans",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 70,
@@ -74857,7 +74857,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -74882,7 +74882,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
@@ -74907,7 +74907,7 @@
       "venue_key": "michelob-ultra-arena",
       "venue_id": "VEN-000135",
       "venue_name": "Michelob ULTRA Arena",
-      "site_city": "Paradise",
+      "site_city": "Las Vegas",
       "site_state": "NV",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,

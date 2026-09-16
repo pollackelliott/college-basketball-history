@@ -77,7 +77,7 @@ class NcaaSafetyTests(unittest.TestCase):
             "CBBG-0005748": (
                 "t-mobile-arena",
                 "VEN-000201",
-                "Paradise",
+                "Las Vegas",
                 "NV",
             ),
             "CBBG-0031836": (
