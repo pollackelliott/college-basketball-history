@@ -251,8 +251,8 @@
       "state": "AZ",
       "primary_hex": "#CC0033",
       "secondary_hex": "#003366",
-      "history_start_season": null,
-      "conference_regular_season_championships": 30,
+      "history_start_season": "1904-1905",
+      "conference_regular_season_championships": 32,
       "conference_tournament_championships": 10,
       "ncaa_tournament_appearances": 40,
       "final_four_appearances": 5,
@@ -260,7 +260,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1997,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
