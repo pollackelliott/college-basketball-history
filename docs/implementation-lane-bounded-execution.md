@@ -161,7 +161,10 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 - before serial repair, run the comprehensive deterministic candidate sweep defined by `docs/implementation-pre-gate-adversarial-challenge.md` and inventory presently detectable normalization, current-source, reciprocal, display, site-metadata, and predicted-publication defects together;
 - correct the bounded inventory of demonstrable mechanical/package-normalization defects coherently where safe before owner review;
 - regenerate preflight after such narrow fixes;
-- research every genuine owner-relevant decision row;
+- research every genuine owner-relevant decision row **to recommendation, not necessarily to resolution**: eliminate mechanical explanations, assemble the material competing evidence, and make a supported recommendation; do not delay Gate 1 merely to eliminate reasonable historical uncertainty;
+- treat Gate 1 as the **Owner Reconciliation Packet**: for each material historical conflict, summarize the competing interpretations, recommendation and basis, and meaningful residual uncertainty so the owner can approve, choose another supported disposition, or return that specific item for additional bounded research;
+- construct the exact proposed recommendation map that will underlie Gate 1 and run the full disposable pre-Gate rehearsal required by `docs/implementation-pre-gate-adversarial-challenge.md` against that map;
+- repair deterministic/mechanical failures exposed by the rehearsal before owner review; when the rehearsal exposes a genuine historical conflict, investigate it only far enough to produce a responsible recommendation and include it in Gate 1 rather than turning Stage 2 into open-ended archaeology;
 - consolidate recommendations, evidence bases, accomplishments, and publication decisions into one readable Gate 1 packet;
 - run the pre-Gate releaseability challenge required by current policy, including implementation site completeness, stale venue fallback checks, physical venue propagation, target no-op prediction, accomplishment/publication readiness, and deterministic fingerprint-changing corrections that can be made before owner review.
 
@@ -173,7 +176,7 @@ Stop at:
 OWNER GATE 1 READY
 ```
 
-The owner receives one consolidated historical decision packet. Do not encode, seal, or apply owner decisions before the owner actually supplies them.
+The owner receives one consolidated **Owner Reconciliation Packet**. Every material historical conflict should normally carry an agent recommendation even when uncertainty remains. A recommendation is not permission to decide silently for the owner. Do not encode, seal, or apply owner decisions before the owner actually supplies them.
 
 ## 7. Owner Gate 1 — historical decision packet
 
@@ -183,7 +186,7 @@ The owner reviews the consolidated batch and supplies the required dispositions/
 
 A generic `Proceed` is not enough unless the owner has already clearly approved the exact recommendations/decisions being referenced.
 
-If the owner changes or flags any recommendation, research only the affected issue unless the new evidence exposes a broader contradiction.
+The owner may approve a recommendation, choose another supported disposition, or return a specific item for additional bounded research. If the owner changes or flags any recommendation, research only the affected issue unless the new evidence exposes a broader contradiction.
 
 ## 8. Implementation Stage 3 — Encode, rehearse, seal, apply, and post-apply validation
 
@@ -194,6 +197,7 @@ Turn the owner-approved Gate 1 batch into a technically validated applied releas
 ### Work
 
 - encode the approved review using current generic tooling;
+- execute the approved-decision mechanical sequence as one guarded Stage 3 operation where current permanent tooling safely permits it: fill/encode -> disposable rehearsal -> seal only on PASS -> transactional apply -> post-apply validation;
 - run disposable pre-seal rehearsal;
 - diagnose and repair purely technical failures generically where possible;
 - if tracked inputs change but substantive owner decisions remain identical, regenerate preflight and use supported carry-forward rather than re-asking the owner;
