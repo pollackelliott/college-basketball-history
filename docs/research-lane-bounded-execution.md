@@ -182,6 +182,32 @@ The formal owner NON_D1 sanity scan does **not** occur yet; it occurs after pack
 
 Research H/A/N classification and physical venue/site identity for the non-postseason population while keeping those two concepts independent.
 
+### Finite work plan — required before substantial research
+
+Before substantial Stage 3A research, partition every unresolved row by **research responsibility** and **systematic evidence class**. This is a working plan, not a new schema, artifact contract, lifecycle stage, or owner gate.
+
+At minimum, distinguish:
+
+- active school-owned HOME/site research;
+- active school-owned NEUTRAL/event-site research;
+- safe mechanical propagation from already accepted reciprocal/shared evidence;
+- opponent-home/shared-reference work that is deferred or nonblocking under current policy;
+- already researched terminal/accounted UNKNOWN debt.
+
+Within the active school-owned population, group rows by the finite evidence class that can reasonably resolve them, such as a home-facility era, recurring event/site family, published-opponent reciprocal scan, or another identified systematic/high-yield source family.
+
+For each active evidence class, define **before researching it** what bounded systematic pass will exhaust that class. Work the class to that completion test, apply supported findings, preserve unsupported exact-building identity as UNKNOWN/accounted debt, and then move to the next already identified evidence class.
+
+The governing Stage 3A rule is:
+
+> **Completion of an evidence class means the planned reasonable systematic pass is exhausted; it does not mean every row became known. Remaining UNKNOWN rows do not by themselves authorize inventing another research strategy.**
+
+A new evidence class may be opened only when there is a specific, reasonably high-yield systematic opportunity or a genuine contradiction/material blocker. The mere existence of residual blanks, or the possibility that another newspaper/yearbook/archive might exist, is not sufficient.
+
+Do not turn ordinary `OPPONENT_HOME` physical-building blanks into school-specific venue archaeology when shared-reference/site-completeness policy classifies them as deferred or accounted. Conversely, do not use that boundary to evade genuine school-owned HOME or NEUTRAL research.
+
+When a substantial evidence class completes, serialize its accepted findings before beginning another substantial class when §3.3 requires it. A recovery checkpoint should therefore identify the **completed evidence classes, current evidence class and exact remaining population, and not-yet-started evidence classes**, so a successor can continue without reopening exhausted work.
+
 ### Work
 
 - establish home-facility chronology from authoritative evidence;
