@@ -7883,7 +7883,7 @@
       "state": "UT",
       "primary_hex": "#BE0000",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1908-1909",
       "conference_regular_season_championships": 29,
       "conference_tournament_championships": 5,
       "ncaa_tournament_appearances": 29,
@@ -7892,7 +7892,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1944,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
