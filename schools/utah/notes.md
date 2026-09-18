@@ -308,3 +308,35 @@ mechanically corrected deterministic package drift:
 
 No game identity, score, date, H/A/N, physical venue, postseason
 classification, or accepted Research adjudication was changed.
+
+## Stage 2 current-source normalization challenge
+
+The required Implementation pre-Gate adversarial sweep compared presently
+detectable modern normalized values against Utah Athletics' current official
+schedule/result surfaces. Eight source rows contained deterministic
+record-book/extraction drift and were corrected in curated fields while their
+frozen `raw_text` remains unchanged:
+
+- 2007-12-08 Oregon: normalized from OPPONENT_HOME with blank site metadata
+  to NEUTRAL at the Rose Garden / current project physical identity Moda
+  Center, Portland, Oregon. Utah's current schedule and opponent history
+  explicitly classify the Pape Jam game as neutral.
+- 2009-03-08 TCU date -> 2009-03-07.
+- 2016-03-05 Colorado score 77-75 -> 57-55.
+- 2022-02-12 Colorado score 77-81 -> 76-81.
+- 2022-11-07 LIU score 93-58 -> 89-48. Utah's current schedule shows
+  93-58 as the excluded Nov. 2 Westminster exhibition, not the LIU result.
+- 2022-11-15 Sam Houston date -> 2022-11-17.
+- 2022-11-20 Georgia Tech date -> 2022-11-21.
+- 2022-11-21 Mississippi State date -> 2022-11-23.
+
+Authoritative Utah Athletics current-source surfaces used:
+- https://utahutes.com/sports/mens-basketball/schedule/2007-08
+- https://utahutes.com/sports/mens-basketball/schedule/2008-09
+- https://utahutes.com/sports/mens-basketball/schedule/2015-16
+- https://utahutes.com/sports/mens-basketball/schedule/2021-22
+- https://utahutes.com/sports/mens-basketball/schedule/2022-23
+
+These corrections do not alter the accepted competitive-game universe.
+They repair demonstrable normalized date/score/site defects before Owner
+Gate 1 and preserve the literal frozen Research evidence.
