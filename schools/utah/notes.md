@@ -356,3 +356,26 @@ labels were unchanged.
 Each replacement was mechanically verified against an existing published
 school package before mutation. No basketball fact or opponent identity
 changed.
+
+## Stage 2 predicted-publication site blocker repair
+
+The disposable predicted-state site gate exposed two inherited HOME
+canonical gaps.
+
+`CBBG-0068010` / `UTA-S1-00361`:
+Utah Athletics' current USC series table identifies the program's first
+USC meeting as a HOME game on 1934-01-05. This supersedes the frozen
+row's `vs`-derived NEUTRAL site normalization. Once HOME was independently
+established, the accepted Utah home-facility chronology placed the game
+at Deseret Gymnasium, Salt Lake City, Utah. USC and Utah institutional
+sources still conflict on the exact date/score; that disagreement remains
+for Owner Gate 1 rather than being forced.
+
+`CBBG-0079219`:
+Washington's published reciprocal source establishes the 1970-12-19
+89-78 game as at Utah. Washington Athletics later explicitly identifies
+that meeting as having been played in the Huntsman Center in Salt Lake
+City. The existing canonical game was enriched to global physical venue
+`VEN-000097` / `jon-m-huntsman-center`, Salt Lake City, Utah.
+
+No new competitive game was created by either correction.
