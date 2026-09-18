@@ -173,15 +173,20 @@ If the problem is purely technical and the historical inputs/decisions remain id
 
 Historical decisions reopen only when historical inputs materially change.
 
-## 8. Permanent tooling outranks bespoke wrapper assertions
+## 8. Permanent tooling owns its invariants
 
 Before adding an assertion to an owner-run relay, ask whether a permanent repository command already verifies the same invariant.
 
-If yes:
+If yes, **do not build a bespoke shell/Python validation wrapper that independently reimplements, predicts, or second-guesses that invariant** unless the permanent tool lacks an observable result required for the current bounded task.
 
-- rely on the permanent tool's contract and result;
-- do not recreate the same logic in shell merely for extra reassurance;
+Instead:
+
+- rely on the permanent tool's documented contract, lifecycle preconditions, and result;
+- run it at the lifecycle point it was designed to validate;
+- diagnose its own failure output rather than surrounding it with guessed school-specific counts or expected blocker totals;
 - add an independent check only when a documented gap remains or when the check protects a materially different invariant.
+
+Focused read-only diagnostics remain appropriate when permanent tooling does not assemble the historical evidence needed to understand a specific conflict. The prohibition is against duplicating an owned invariant, not against useful investigation.
 
 A wrapper that duplicates repository logic can become the least reliable part of the workflow. Independent verification is valuable; redundant reimplementation is not.
 
