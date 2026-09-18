@@ -32,7 +32,7 @@ bryant,2,2,2,0,0,ROUND_OF_64,2025,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-p
 bucknell,19,8,8,0,0,ROUND_OF_32,2006,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 buffalo,4,4,4,0,0,ROUND_OF_32,2019,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 butler,13,7,16,2,0,NATIONAL_RUNNER_UP,2011,VERIFIED,"Butler Athletics states 20 conference championships: 13 regular season and seven tournament titles. Canonical NCAA cross-check supports 16 appearances, 2 Final Fours, 0 championships, and national runner-up as the best finish (latest year 2011).",MATCH,Verified through onboarding plan e23013c89b88.
-byu,29,3,33,0,0,ELITE_EIGHT,1981,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+byu,29,3,33,0,0,ELITE_EIGHT,1981,VERIFIED,"Current authoritative BYU material supports 33 NCAA Tournament appearances, an Elite Eight best finish in 1981, 29 regular-season conference championships, and three conference-tournament titles (1991, 1992, 2001); no Final Four or national championship.",MATCH,Verified through onboarding plan e0935262ede0.
 cal-poly,1,1,1,0,0,ROUND_OF_64,2014,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 cal-state-bakersfield,1,1,1,0,0,ROUND_OF_64,2016,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 cal-state-fullerton,2,4,4,0,0,ELITE_EIGHT,1978,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

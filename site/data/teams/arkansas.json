@@ -1168,7 +1168,7 @@
       "opponent_key": "byu",
       "opponent_name": "BYU",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -19680,9 +19680,9 @@
       "opponent_key": "byu",
       "opponent_name": "BYU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 58,
-      "opponent_score": 68,
+      "opponent_score": 65,
       "score_known": true,
       "result": "L",
       "overtime_periods": 0,
