@@ -297,10 +297,11 @@ def preferred_display_name(names: set[str]) -> str:
     )[0]
 
 
-def load_opponent_names(
+def opponent_names_by_key(
     repo_root: Path,
     programs: dict[str, dict[str, str]],
-) -> dict[str, str]:
+) -> dict[str, set[str]]:
+    """Collect every registered/source display label for each opponent key."""
     names_by_key: dict[str, set[str]] = defaultdict(set)
 
     for key, program in programs.items():
@@ -315,25 +316,43 @@ def load_opponent_names(
                 if key and name:
                     names_by_key[key].add(name)
 
-    resolved_names: dict[str, str] = {}
-    true_conflicts: dict[str, list[str]] = {}
+    return names_by_key
 
+
+def historical_opponent_display_conflicts(
+    repo_root: Path,
+    programs: dict[str, dict[str, str]],
+) -> dict[str, list[str]]:
+    """Return true historical display-name collisions using publication semantics."""
+    conflicts: dict[str, list[str]] = {}
+    for key, names in opponent_names_by_key(repo_root, programs).items():
+        if key in programs:
+            continue
+        signatures = {normalized_name_signature(name) for name in names}
+        if len(signatures) > 1:
+            conflicts[key] = sorted(names)
+    return dict(sorted(conflicts.items()))
+
+
+def load_opponent_names(
+    repo_root: Path,
+    programs: dict[str, dict[str, str]],
+) -> dict[str, str]:
+    names_by_key = opponent_names_by_key(repo_root, programs)
+    true_conflicts = historical_opponent_display_conflicts(repo_root, programs)
+
+    resolved_names: dict[str, str] = {}
     for key, names in names_by_key.items():
         if key in programs:
             resolved_names[key] = programs[key]["program_name"].strip()
             continue
-
-        signatures = {normalized_name_signature(name) for name in names}
-
-        if len(signatures) == 1:
+        if key not in true_conflicts:
             resolved_names[key] = preferred_display_name(names)
-        else:
-            true_conflicts[key] = sorted(names)
 
     if true_conflicts:
         sample = "; ".join(
             f"{key}: {names}"
-            for key, names in list(sorted(true_conflicts.items()))[:10]
+            for key, names in list(true_conflicts.items())[:10]
         )
         raise ValueError(
             "Conflicting historical opponent display names found after "
