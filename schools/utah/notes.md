@@ -363,13 +363,16 @@ The disposable predicted-state site gate exposed two inherited HOME
 canonical gaps.
 
 `CBBG-0068010` / `UTA-S1-00361`:
-Utah Athletics' current USC series table identifies the program's first
-USC meeting as a HOME game on 1934-01-05. This supersedes the frozen
-row's `vs`-derived NEUTRAL site normalization. Once HOME was independently
-established, the accepted Utah home-facility chronology placed the game
-at Deseret Gymnasium, Salt Lake City, Utah. USC and Utah institutional
-sources still conflict on the exact date/score; that disagreement remains
-for Owner Gate 1 rather than being forced.
+Utah Athletics' current USC series history explicitly places the first
+meeting on 1934-01-05 in San Francisco, with Utah losing 32-43. USC's
+institutional year-by-year history instead records its 1934 Utah meeting
+as a 40-35 USC win on Dec. 21. Both institutional histories treat this
+as the first meeting, so the records are retained as conflicting evidence
+for one game rather than manufactured into two games. The explicit San
+Francisco location establishes NEUTRAL H/A/N; exact physical venue remains
+unsupported after the completed site research. The earlier Stage 2
+HOME/Deseret interpretation was incorrect and is superseded by this
+current-source correction. Date and score remain for Owner Gate 1.
 
 `CBBG-0079219`:
 Washington's published reciprocal source establishes the 1970-12-19
