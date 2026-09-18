@@ -9,7 +9,8 @@ repeatable work earlier and makes it executable:
 - ``carry-forward``: reuse prior owner decisions only when the decision universe is
   substantively identical after a purely technical repair;
 - ``rehearse-review``: run the complete disposable transaction and automated gate
-  suite before Gate 1 is cryptographically sealed.
+  suite before Gate 1; with ``--map``, rehearse an agent recommendation map without
+  mutating the real review or implying owner approval.
 """
 
 from __future__ import annotations
@@ -430,7 +431,7 @@ def _decision_map(path: Path) -> dict[str, Any]:
 
 
 def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
-    """Fill review.csv from one compact owner-approved decision map."""
+    """Fill review.csv from one compact decision map."""
 
     with review_path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
@@ -456,7 +457,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     not_applicable_basis = str(
         defaults.get(
             "not_applicable_basis",
-            "Owner Gate 1 approved: this conditional discrepancy belongs to an unselected canonical identity candidate, or the source game was approved as FORCE_NEW.",
+            "This conditional discrepancy belongs to an unselected canonical identity candidate, or the source game is proposed/approved as FORCE_NEW.",
         )
     ).strip()
 
@@ -784,6 +785,17 @@ def parse_args() -> argparse.Namespace:
     rehearse.add_argument("--repo", type=Path, default=None)
     rehearse.add_argument("--plan-file", type=Path, default=None)
     rehearse.add_argument("--review-file", type=Path, default=None)
+    rehearse.add_argument(
+        "--map",
+        dest="map_path",
+        type=Path,
+        default=None,
+        help=(
+            "Optional compact recommendation map. When supplied, fill a temporary "
+            "copy of review.csv and rehearse that proposal without mutating the real "
+            "review or implying owner approval."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -844,6 +856,38 @@ def main() -> int:
                 if args.plan_file
                 else output_dir / "plan.json"
             )
+            if args.map_path:
+                with tempfile.TemporaryDirectory(
+                    prefix=f"proposal-review-{args.school_key}-"
+                ) as temporary:
+                    proposal_review = Path(temporary) / "review.csv"
+                    proposal_review.write_bytes(review_path.read_bytes())
+                    counts = fill_review_from_map(
+                        proposal_review,
+                        args.map_path.resolve(),
+                    )
+                    print("Rehearsing agent recommendation map (owner not yet approved).")
+                    print("Proposed action counts:")
+                    for action, count in sorted(counts.items()):
+                        print(f"  {action}: {count}")
+                    result = rehearse_review(
+                        repo,
+                        args.school_key,
+                        plan_path=plan_path,
+                        review_path=proposal_review,
+                    )
+                print("\nPROPOSED RECOMMENDATION REHEARSAL PASSED")
+                print(
+                    "Preview approved-plan hash: "
+                    + result["approved_plan_hash_preview"]
+                )
+                print(f"Changed paths: {len(result['changed_paths']):,}")
+                print(
+                    "The real review.csv and tracked repository were not changed. "
+                    "This is technical proof of the agent proposal, not Owner Gate 1 approval."
+                )
+                return 0
+
             result = rehearse_review(
                 repo,
                 args.school_key,
