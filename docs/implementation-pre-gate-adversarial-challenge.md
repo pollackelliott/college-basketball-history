@@ -7,7 +7,9 @@
 
 Stage 2 is not complete merely because preflight produced a decision list. Before `OWNER GATE 1 READY`, the Implementation lane must challenge the *predicted post-reconciliation result* as if the proposed recommendations had already been applied.
 
-This is a pre-Gate challenge, not a new owner gate. It must not invent historical facts or replace the disposable Stage 3 rehearsal.
+This is a pre-Gate challenge, not a new owner gate. It must not invent historical facts or replace the independent disposable Stage 3 rehearsal of the **owner-approved** review.
+
+The Stage 2 standard is **research to recommendation, not necessarily to resolution**. Once a genuine historical conflict has been investigated enough to eliminate mechanical explanations, characterize the material competing evidence, and support a responsible recommendation, residual uncertainty belongs in the Owner Reconciliation Packet. Do not prolong Stage 2 merely to make the owner unnecessary.
 
 Before researching or escalating a recurring venue-identity/locality question, apply `docs/recurring-venue-identity-conventions.md`. Stable project conventions such as Madison Square Garden physical-building splits and Paradise-vs-Las-Vegas venue geography should be reused mechanically rather than re-litigated for each school unless game-specific evidence creates a genuine contradiction.
 
@@ -71,7 +73,21 @@ Scan staged game-level normalized values for technically valid but historically 
 
 At minimum, overtime counts must be challenged when they exceed a conservative plausibility threshold. A value such as `69` must never reach Owner Gate 1 as an accepted ordinary integer merely because the schema permits nonnegative integers. Recover the supported value from source evidence or present the affected row as unresolved/owner-relevant if history is genuinely ambiguous.
 
-### 6. Gate-1 packet maturity
+### 6. Exact-recommendation disposable rehearsal
+
+Before `OWNER GATE 1 READY`, construct the exact recommendation map the lane proposes to present to the owner and run it through the permanent full disposable rehearsal surface. The rehearsal must exercise the proposed identities and dispositions through actual conditional applicability, reconciliation, deterministic publication/site generation, implementation site completeness, target no-op behavior, and the current automated gate/test suite.
+
+This is a **proposal rehearsal**, not owner approval and not cryptographic sealing. It must not write owner-approval semantics into tracked state.
+
+Classify rehearsal findings as follows:
+
+- **mechanical/deterministic failure:** repair it before Gate 1 and rerun the proposal rehearsal;
+- **genuine historical conflict:** perform bounded investigation sufficient for a supported recommendation, then include the conflict in Gate 1 with the competing evidence and residual uncertainty;
+- **tool/lifecycle misuse or wrapper defect:** correct the execution path rather than treating the false failure as basketball evidence.
+
+When conflicting institutional records share a strong fingerprint—such as identical date and score but different opponent identity—present that fingerprint as competing evidence. Do not assume either the incoming school or existing canonical source is authoritative merely because one is newer, already published, or locally convenient.
+
+### 7. Gate-1 packet maturity
 
 Do not declare `OWNER GATE 1 READY` until:
 
@@ -79,11 +95,13 @@ Do not declare `OWNER GATE 1 READY` until:
 - deterministic display/normalization defects are repaired;
 - proposed site/H-A-N recommendations have survived the publication-shape challenge;
 - the predicted post-reconciliation site-completeness result has no unexplained blocker;
+- every material historical conflict has been investigated to a responsible recommendation or explicitly identified as requiring a narrow owner-directed research return;
+- the exact proposed recommendation map has passed the full disposable proposal rehearsal, except that genuine historical choices surfaced by that rehearsal are represented explicitly in the packet rather than silently resolved;
 - all remaining items truly require historical owner judgment.
 
 The intended normal path is:
 
-`Stage 2 comprehensive challenge -> one Owner Gate 1 -> Stage 3 rehearsal/seal/apply -> Preview`
+`Stage 2 comprehensive challenge -> exact recommendation-map proposal rehearsal -> one Owner Reconciliation Packet / Gate 1 -> Stage 3 owner-approved rehearsal/seal/apply -> Preview`
 
 A supplemental owner gate remains correct when genuinely new historical evidence or a changed substantive decision universe appears later. The goal is to eliminate avoidable supplemental gates caused by defects Stage 2 could have found deterministically.
 
