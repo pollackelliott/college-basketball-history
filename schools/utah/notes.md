@@ -340,3 +340,19 @@ Authoritative Utah Athletics current-source surfaces used:
 These corrections do not alter the accepted competitive-game universe.
 They repair demonstrable normalized date/score/site defects before Owner
 Gate 1 and preserve the literal frozen Research evidence.
+
+## Stage 2 historical opponent display normalization
+
+The disposable pre-Gate publication challenge exposed four historical
+non-current opponent keys whose Utah normalized display differed from an
+already-published project display. Identity keys and literal Utah source
+labels were unchanged.
+
+- `pacific-oregon`: `Pacific (OR)` -> `Pacific (Oregon)`
+- `st-francis-illinois`: `St. Francis (IL)` -> `St. Francis (Ill.)`
+- `st-thomas-florida`: `St. Thomas (FL)` -> `St. Thomas University (FL)`
+- `westminster-utah`: `Westminster (UT)` -> `Westminster`
+
+Each replacement was mechanically verified against an existing published
+school package before mutation. No basketball fact or opponent identity
+changed.
