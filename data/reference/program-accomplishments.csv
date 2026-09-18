@@ -328,7 +328,7 @@ usc,14,1,21,2,0,FINAL_FOUR,1954,VERIFIED,"Owner Gate 1 approved 2026-09-02 (Amer
 ut-arlington,3,1,1,0,0,ROUND_OF_64,2008,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 ut-martin,2,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 ut-rio-grande-valley,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-utah,29,5,29,4,1,NATIONAL_CHAMPION,1944,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+utah,29,5,29,4,1,NATIONAL_CHAMPION,1944,VERIFIED,"Owner Gate 1 approved verification of Utah accomplishment reference values after the Stage 2 source challenge. Utah Athletics institutional material supports 29 regular-season conference championships, five conference-tournament titles (1995, 1997, 1999, 2004, 2009), 29 NCAA appearances, four Final Fours, and the 1944 NCAA championship. Authoritative source set includes Utah Athletics historical/quick-facts material and the 2009 conference-tournament guide preserved in the Stage 2 review.",MATCH,Verified through onboarding plan c7922e48c1c9.
 utah-state,18,11,26,0,0,ELITE_EIGHT,1970,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 utah-tech,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 utah-valley,7,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
