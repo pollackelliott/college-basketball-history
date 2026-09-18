@@ -287,3 +287,24 @@ classification, or Research conclusion was reopened.
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=9738fe4f54b813aad4d2a12344a2c8279c3590ee` from `research_base_sha=e5078cd6b57d68f59048f32b7dace422544eff9f`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Stage 2 deterministic current-main normalization
+
+Before Owner Gate 1, the comprehensive current-main sweep identified and
+mechanically corrected deterministic package drift:
+
+- research-base keys `florida-a-and-m`, `prairie-view-a-and-m`, and
+  `texas-a-and-m` were rebased to current project keys `florida-a-m`,
+  `prairie-view-a-m`, and `texas-a-m`;
+- stable current project opponent displays were normalized to `CSUN`,
+  `Mizzou`, `UNC Asheville`, and `Penn`, while literal Utah source labels
+  remain preserved;
+- the 32 competitive 2025-26 supplement rows were reworded from the
+  game-level phrase `exhibitions excluded` to `non-countable contests
+  excluded` solely to avoid a generic substring false positive.
+  `source-notes.md` continues to preserve the explicit Research conclusion
+  that Nevada (2025-10-17) and Oregon (2025-10-24) were exhibitions and were
+  excluded.
+
+No game identity, score, date, H/A/N, physical venue, postseason
+classification, or accepted Research adjudication was changed.
