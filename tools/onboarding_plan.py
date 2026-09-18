@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 import ingest_school
+from build_site_data import historical_opponent_display_conflicts
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
     append_note,
@@ -450,6 +451,20 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
 
     programs = read_csv(repo / "data/reference/programs.csv")
     errors.extend(current_d1_opponent_key_errors(programs, opponents))
+
+    program_registry = {
+        row.get("program_key", "").strip(): row
+        for row in programs
+        if row.get("program_key", "").strip()
+    }
+    display_conflicts = historical_opponent_display_conflicts(repo, program_registry)
+    for key, names in display_conflicts.items():
+        errors.append(
+            "historical opponent display conflict: "
+            f"{key}: {names}. Normalize the school opponent display to existing "
+            "project authority before Gate 1."
+        )
+
     target_programs = [row for row in programs if row.get("program_key") == school_key]
     if len(target_programs) != 1:
         errors.append("Target must have exactly one programs.csv row")
