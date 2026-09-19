@@ -1,0 +1,8 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,california,1907-1908,1914-1915,independent,Independent,Independent,No,California institutional history and project conference chronology.,Pre-PCC varsity history.
+1,california,1915-1916,1958-1959,pacific-coast,Pacific Coast Conference,Full Member,No,California institutional history; owner-approved project conference registry.,PCC membership through dissolution after 1958-59.
+2,california,1959-1960,1967-1968,aawu,Athletic Association of Western Universities,Full Member,No,California institutional history; owner-approved project conference registry.,AAWU naming era.
+3,california,1968-1969,1977-1978,pac-8,Pacific-8 Conference,Full Member,No,California institutional history; owner-approved project conference registry.,Pac-8 naming era.
+4,california,1978-1979,2010-2011,pac-10,Pacific-10 Conference,Full Member,No,California institutional history; owner-approved project conference registry.,Pac-10 naming era.
+5,california,2011-2012,2023-2024,pac-12,Pac-12,Full Member,No,California institutional history; owner-approved project conference registry.,Pac-12 naming era.
+6,california,2024-2025,,acc,ACC,Full Member,Yes,California institutional history and current ACC membership.,Ongoing beginning 2024-25.

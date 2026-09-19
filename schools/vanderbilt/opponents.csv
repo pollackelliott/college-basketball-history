@@ -45,7 +45,7 @@
 43,vanderbilt,Cal Poly,cal-poly,Cal Poly,Yes,1,2001-2002,2001-2002,RESOLVED,Inherited established project identity,,
 44,vanderbilt,Cal Poly-Pomona,cal-poly-pomona,Cal Poly Pomona,No,3,1977-1978,1979-1980,RESOLVED,Inherited established project identity,,
 45,vanderbilt,Cal State Northridge,cal-state-northridge,CSUN,Yes,1,2004-2005,2004-2005,RESOLVED,Inherited established project identity,,
-46,vanderbilt,California,california,California,Yes,2,1965-1966,2024-2025,RESOLVED,Curated alias / current D1 registry,,
+46,vanderbilt,California,california,California,Yes,1,2024-2025,2024-2025,RESOLVED,Curated alias / current D1 registry,,
 47,vanderbilt,Calumet,calumet,Calumet,No,3,1917-1918,1923-1924,RESOLVED,Inherited established project identity,,
 48,vanderbilt,Camp Benning,camp-benning,Camp Benning,No,1,1921-1922,1921-1922,RESOLVED,Inherited established project identity,,
 49,vanderbilt,Camp Forest,camp-forest,Camp Forest,No,1,1941-1942,1941-1942,RESOLVED,Inherited established project identity,,
@@ -353,3 +353,4 @@
 351,vanderbilt,Xavier,xavier,Xavier,Yes,7,1935-1936,2021-2022,RESOLVED,Inherited established project identity,,
 352,vanderbilt,Yale,yale,Yale,Yes,7,1907-1908,2022-2023,RESOLVED,Inherited established project identity,,
 353,vanderbilt,YMHA Peps,ymha-peps,YMHA Peps,No,1,1923-1924,1923-1924,RESOLVED,Inherited established project identity,,
+354,vanderbilt,California,uc-santa-barbara,UC Santa Barbara,Yes,1,1965-1966,1965-1966,RESOLVED,Game-scoped historical identity correction; Vanderbilt literal source label preserved.,,1965-12-21 Vanderbilt 91-64 opponent identified as UC Santa Barbara; source fact book prints California.

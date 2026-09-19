@@ -30,7 +30,7 @@
     "ties": 0,
     "first_season": "1900-1901",
     "last_season": "2025-2026",
-    "opponents": 336
+    "opponents": 337
   },
   "seasons": [
     {
@@ -1560,15 +1560,15 @@
       "opponent_key": "california",
       "opponent_name": "California",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
       },
-      "first_season": "1965-1966",
+      "first_season": "2024-2025",
       "last_season": "2024-2025",
-      "games": 2,
-      "wins": 2,
+      "games": 1,
+      "wins": 1,
       "losses": 0,
       "ties": 0
     },
@@ -5312,6 +5312,22 @@
       "games": 6,
       "wins": 4,
       "losses": 2,
+      "ties": 0
+    },
+    {
+      "opponent_key": "uc-santa-barbara",
+      "opponent_name": "UC Santa Barbara",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      },
+      "first_season": "1965-1966",
+      "last_season": "1965-1966",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -34992,8 +35008,8 @@
       "season_label": "1965-1966",
       "game_date": "1965-12-21",
       "date_precision": "EXACT",
-      "opponent_key": "california",
-      "opponent_name": "California",
+      "opponent_key": "uc-santa-barbara",
+      "opponent_name": "UC Santa Barbara",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 91,
@@ -79770,7 +79786,7 @@
       "opponent_key": "california",
       "opponent_name": "California",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 85,
       "opponent_score": 69,
       "score_known": true,
