@@ -569,6 +569,15 @@ def main() -> int:
                     f"{summary.get('discrepancies_to_add', 0):,} definite / "
                     f"{summary.get('conditional_discrepancies', 0):,} conditional discrepancies"
                 )
+                if summary.get("pre_cutoff_rows", 0):
+                    print(
+                        "PUBLIC SCOPE: published history begins with "
+                        f"{summary.get('history_start_season') or '[unknown]'}; "
+                        f"{summary.get('pre_cutoff_rows', 0):,} researched rows from "
+                        f"{summary.get('pre_cutoff_first_season') or '[unknown]'} through "
+                        f"{summary.get('pre_cutoff_last_season') or '[unknown]'} "
+                        "will remain outside the public page unless history scope changes."
+                    )
             print(f"Review:      {paths['report']}")
             print(f"Decision CSV:{paths['review']}")
             if plan.get("blockers"):
