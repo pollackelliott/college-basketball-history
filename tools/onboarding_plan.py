@@ -1103,7 +1103,13 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 "canonical_value": "Yes",
                 "relevant_evidence": (
                     f"{len(sources):,} in-scope source rows; "
-                    f"{identity_counts[ingest_school.REVIEW]:,} identity reviews; "
+                    + (
+                        f"{len(pre_cutoff):,} researched pre-cutoff rows remain outside "
+                        f"the public page before {program.get('history_start_season', '').strip()}; "
+                        if pre_cutoff
+                        else ""
+                    )
+                    + f"{identity_counts[ingest_school.REVIEW]:,} identity reviews; "
                     f"{predicted_conflicts:,} definite and "
                     f"{conditional_conflicts:,} conditional discrepancies."
                 ),
@@ -1117,10 +1123,20 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             }
         )
 
+    pre_cutoff_seasons = sorted(
+        {
+            row.get("season_label", "").strip()
+            for row in pre_cutoff
+            if row.get("season_label", "").strip()
+        }
+    )
     summary = {
         "source_rows": len(all_sources),
         "in_scope_source_rows": len(sources),
         "pre_cutoff_rows": len(pre_cutoff),
+        "history_start_season": program.get("history_start_season", "").strip(),
+        "pre_cutoff_first_season": pre_cutoff_seasons[0] if pre_cutoff_seasons else "",
+        "pre_cutoff_last_season": pre_cutoff_seasons[-1] if pre_cutoff_seasons else "",
         "existing_game_matches": identity_counts[ingest_school.CONFIDENT],
         "new_canonical_games": identity_counts[ingest_school.NEW_GAME],
         "identity_review_required": identity_counts[ingest_school.REVIEW],
@@ -1165,6 +1181,7 @@ def render_report(plan: dict[str, Any], approved_hash: str = "") -> str:
         labels = (
             ("Source rows", "source_rows"),
             ("In-scope rows", "in_scope_source_rows"),
+            ("Pre-cutoff researched rows", "pre_cutoff_rows"),
             ("Existing matches", "existing_game_matches"),
             ("New canonical games", "new_canonical_games"),
             ("Identity reviews", "identity_review_required"),
@@ -1179,6 +1196,15 @@ def render_report(plan: dict[str, Any], approved_hash: str = "") -> str:
             "- Affected existing public programs: "
             + (", ".join(affected) if affected else "none")
         )
+        if summary.get("pre_cutoff_rows", 0):
+            lines.append(
+                "- **PUBLIC SCOPE:** the published page begins with "
+                f"{summary.get('history_start_season') or '[unknown]'}; "
+                f"{summary.get('pre_cutoff_rows', 0):,} researched rows from "
+                f"{summary.get('pre_cutoff_first_season') or '[unknown]'} through "
+                f"{summary.get('pre_cutoff_last_season') or '[unknown]'} remain preserved "
+                "but will not appear on the public page unless history scope changes."
+            )
     else:
         lines.append("- Counts unavailable because package blockers stopped planning.")
 

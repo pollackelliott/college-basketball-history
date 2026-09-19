@@ -39,9 +39,9 @@ After interruption, reconstruct from Git/GitHub, tracked files, ignored `.onboar
 
 ### 3.2 Owner relay should be phase-sized and thin
 
-When the owner's Codespace is the only execution surface, prefer one guarded phase-sized child script or compact command block per bounded phase rather than repeated one-command-at-a-time handoffs.
+When the owner's Codespace is the only execution surface, invoke the supported permanent repository command directly by default. Use a guarded child script or pasted helper only for genuinely bespoke work that current tooling does not own.
 
-"Phase-sized" does not mean monolithic. The normal relay should contain one principal repository operation plus its immediate validation. Do not combine mutation, regenerated preflight, rehearsal, release preparation, and unrelated confidence checks into one giant wrapper merely to reduce the number of pastes.
+"Phase-sized" does not mean monolithic. The normal relay should contain one principal repository operation plus its immediate validation. Do not wrap a permanent command in a large bespoke program merely to restate its branch, lifecycle, validation, or release invariants, and do not combine mutation, regenerated preflight, rehearsal, release preparation, and unrelated confidence checks into one giant wrapper merely to reduce the number of pastes.
 
 Follow `docs/codespace-terminal-safety.md` exactly. In particular:
 
@@ -134,6 +134,7 @@ Accept the incoming `RESEARCH_FROZEN` portfolio against **current protected main
 - preserve completed NON_D1 owner approval unless current-main rebase materially changes an affected identity;
 - if the portfolio predates the NON_D1 owner-scan policy, perform that required checkpoint before Integration Freeze;
 - rerun package QA/hashes after rebase;
+- if configured history scope excludes researched rows, state the publication consequence in plain English: the public start season, how many researched rows/seasons remain outside the page, and the preserved season range; do not treat a prior scope reference as proof that the owner understood this product consequence;
 - create the durable integration-freeze checkpoint required by current tooling.
 
 ### Completion standard
@@ -158,9 +159,9 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 - install the six-file package and required current-main reference additions;
 - create/verify the stable Phase 0 checkpoint;
 - run generic onboarding preflight;
-- before serial repair, run the comprehensive deterministic candidate sweep defined by `docs/implementation-pre-gate-adversarial-challenge.md` and inventory presently detectable normalization, current-source, reciprocal, display, site-metadata, and predicted-publication defects together;
-- correct the bounded inventory of demonstrable mechanical/package-normalization defects coherently where safe before owner review;
-- regenerate preflight after such narrow fixes;
+- before any fingerprint-changing Stage 2 repair, run the comprehensive deterministic candidate sweep defined by `docs/implementation-pre-gate-adversarial-challenge.md` and classify the presently detectable normalization, current-source, reciprocal, display, site-metadata, predicted-publication, and historical-conflict population together;
+- correct the classified deterministic population in one coherent repair batch wherever safe; split it only when a later repair genuinely depends on changed state from an earlier repair, and name that dependency rather than using regeneration itself as a discovery strategy;
+- regenerate authoritative preflight after the coherent repair batch, not merely because one individual item became clear;
 - research every genuine owner-relevant decision row **to recommendation, not necessarily to resolution**: eliminate mechanical explanations, assemble the material competing evidence, and make a supported recommendation; do not delay Gate 1 merely to eliminate reasonable historical uncertainty;
 - treat Gate 1 as the **Owner Reconciliation Packet**: for each material historical conflict, summarize the competing interpretations, recommendation and basis, and meaningful residual uncertainty so the owner can approve, choose another supported disposition, or return that specific item for additional bounded research;
 - construct the exact proposed recommendation map that will underlie Gate 1 and run the full disposable pre-Gate rehearsal required by `docs/implementation-pre-gate-adversarial-challenge.md` against that map;

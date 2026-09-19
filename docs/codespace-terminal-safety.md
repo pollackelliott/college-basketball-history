@@ -103,17 +103,16 @@ A large 100-200 line pasted block can fail for reasons unrelated to the underlyi
 - accidental `exit` of the interactive terminal;
 - partial completion that is hard to reconstruct.
 
-For substantial Phase 0, Gate 1 encoding, or recovery work:
+Do not create a child script merely to wrap a permanent repository command. Run supported Phase 0, preflight, rehearsal, apply, verification, and release commands directly unless the current bounded task truly needs bespoke logic.
+
+When substantial bespoke logic is genuinely necessary:
 
 1. write a quoted heredoc to `/tmp`;
-2. execute the script once;
-3. make the script print clear stage headings and a final PASS/STOP result;
-4. keep diagnostic logs in `/tmp` or ignored `.onboarding/` paths;
-5. do not place helper scripts in the repository root.
+2. execute it once;
+3. print a compact PASS/STOP result and keep verbose diagnostics in `/tmp` or ignored `.onboarding/` paths;
+4. do not place helper scripts in the repository root.
 
-Several short guarded commands are also preferable when the work has natural checkpoints.
-
-A phase-sized relay is **not** permission to build a monolithic wrapper around several independent repository operations. Prefer one principal operation plus its immediate validation. If later rehearsal, regeneration, or release preparation is independently supported by permanent tooling, run it as the next bounded operation rather than embedding it in the same giant relay.
+A phase-sized relay is **not** permission to build a monolithic wrapper around several independent repository operations. Prefer one principal operation plus its immediate validation. If later rehearsal, regeneration, or release preparation is independently supported by permanent tooling, run the permanent command directly as the next bounded operation rather than embedding it in the same giant relay.
 
 ## 5. Keep transport and helper artifacts out of the tracked-worktree boundary
 
