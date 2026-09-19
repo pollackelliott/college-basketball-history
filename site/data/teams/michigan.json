@@ -1277,7 +1277,7 @@
       "opponent_key": "california",
       "opponent_name": "California",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -27305,7 +27305,7 @@
       "opponent_key": "california",
       "opponent_name": "California",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 67,
       "opponent_score": 76,
       "score_known": true,

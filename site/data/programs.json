@@ -923,7 +923,7 @@
       "state": "CA",
       "primary_hex": "#003262",
       "secondary_hex": "#FDB515",
-      "history_start_season": null,
+      "history_start_season": "1907-1908",
       "conference_regular_season_championships": 15,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 19,
@@ -932,7 +932,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1959,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"

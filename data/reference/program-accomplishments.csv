@@ -37,7 +37,7 @@ cal-poly,1,1,1,0,0,ROUND_OF_64,2014,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365
 cal-state-bakersfield,1,1,1,0,0,ROUND_OF_64,2016,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 cal-state-fullerton,2,4,4,0,0,ELITE_EIGHT,1978,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 cal-state-northridge,2,2,2,0,0,ROUND_OF_64,2009,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-california,15,0,19,3,1,NATIONAL_CHAMPION,1959,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+california,15,0,19,3,1,NATIONAL_CHAMPION,1959,VERIFIED,"California official program history supports 15 conference championships, 19 NCAA Tournament appearances, Final Four appearances in 1946/1959/1960, the 1959 national championship, and the 1960 runner-up finish. After the deterministic 1946 round normalization, the synthetic canonical NCAA cross-check matches the stored NCAA-derived values.",MATCH,Verified through onboarding plan 63ad9da85a3e.
 california-baptist,0,1,1,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 campbell,2,1,1,0,0,ROUND_OF_64,1992,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 canisius,4,1,4,0,0,ELITE_EIGHT,1956,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
