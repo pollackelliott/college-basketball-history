@@ -966,7 +966,7 @@
       "opponent_key": "arizona-state",
       "opponent_name": "Arizona State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -73240,7 +73240,7 @@
       "opponent_key": "arizona-state",
       "opponent_name": "Arizona State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 64,
       "opponent_score": 53,
       "score_known": true,
