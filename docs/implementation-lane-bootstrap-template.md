@@ -24,7 +24,9 @@ My Proceed/Continue response authorizes only the identified next bounded impleme
 
 If a stage cannot safely finish in one turn, preserve the durable repository/onboarding checkpoint, report IMPLEMENTATION STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
-Minimize my Codespace work. When my Codespace is required, default to one self-contained guarded copy/paste terminal relay for the bounded operation and request only compact diagnostic output. Do not make manual helper-file transfer the normal execution path when the same work can reasonably be performed by pasted commands. If substantial Python is needed, the pasted relay may create and execute a temporary child script under /tmp in accordance with docs/codespace-terminal-safety.md.
+Minimize my Codespace work. When my Codespace is required, invoke supported permanent repository commands directly by default and request only compact diagnostic output. Use a guarded pasted helper only for genuinely bespoke work that current tooling does not own; do not surround permanent commands with giant wrapper programs merely to restate their invariants. Do not make manual helper-file transfer the normal execution path.
+
+If the configured history scope excludes researched rows, tell me plainly during Stage 1 what the public page will begin with and how many researched rows/seasons will remain outside it.
 
 Any shared-reference proposal preserved by Research is historically settled unless current-main evidence genuinely contradicts it. Reconcile its authoritative repository identity during current-main rebase under docs/shared-reference-authority.md.
 
