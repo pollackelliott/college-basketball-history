@@ -134,6 +134,30 @@ class DateCompleteReviewTests(unittest.TestCase):
         report = render_report(plan)
         self.assertIn("Dates: source 2020-12-30; canonical 2020-12-29", report)
 
+    def test_markdown_report_states_public_scope_consequence_plainly(self):
+        plan = {
+            "school_key": "alpha",
+            "created_at": "2026-08-14T00:00:00+00:00",
+            "input_fingerprint": {"sha256": "abc"},
+            "summary": {
+                "source_rows": 100,
+                "in_scope_source_rows": 80,
+                "pre_cutoff_rows": 20,
+                "history_start_season": "1950-1951",
+                "pre_cutoff_first_season": "1911-1912",
+                "pre_cutoff_last_season": "1949-1950",
+                "affected_public_programs": [],
+            },
+            "blockers": [],
+            "warnings": [],
+            "decisions": [],
+        }
+        report = render_report(plan)
+        self.assertIn("PUBLIC SCOPE", report)
+        self.assertIn("20 researched rows", report)
+        self.assertIn("1911-1912 through 1949-1950", report)
+        self.assertIn("will not appear on the public page", report)
+
 
 class ApprovalContractTests(unittest.TestCase):
     @classmethod
