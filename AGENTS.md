@@ -49,6 +49,13 @@ when the program became or remained top-level. Multiple listed intervals are con
 do not collapse them to only the current stint. Bring scope back to the owner only for a
 genuine contradiction, ambiguous school identity, or a target absent from the reference.
 
+For Stage 3A, begin substantial historical searching only after a whole-universe
+responsibility/evidence-class census under `docs/research-lane-bounded-execution.md`.
+Chronological slices alone are not evidence classes. Regular-season `OPPONENT_HOME`
+exact physical-building reconstruction is outside the source school's Research
+responsibility unless usable authoritative source/reciprocal/shared evidence is already
+available; do not convert ordinary away-building blanks into an active research queue.
+
 ### Research shared-reference authority
 
 Research may fully establish historical identities that have global implications, but an
@@ -178,6 +185,10 @@ unresolved discrepancies.
   an obvious current-program opponent identity to survive under a stale/non-D1 key, or
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
+- Flag any Stage 3A workflow that substitutes repeated chronological micro-passes for
+  the required whole-universe responsibility/evidence-class plan, or that turns ordinary
+  regular-season `OPPONENT_HOME` physical-building blanks into active source-school
+  historical research.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
   as authority for such a write. Settled shared identities should normally be carried to
