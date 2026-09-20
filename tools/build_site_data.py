@@ -344,7 +344,7 @@ def load_opponent_names(
     resolved_names: dict[str, str] = {}
     for key, names in names_by_key.items():
         if key in programs:
-            resolved_names[key] = programs[key]["program_name"].strip()
+            resolved_names[key] = (programs[key].get("display_name", "").strip() or programs[key]["program_name"].strip())
             continue
         if key not in true_conflicts:
             resolved_names[key] = preferred_display_name(names)
