@@ -364,7 +364,8 @@ function administrativeChip(game) {
 function normalizeProgram(program) {
   return {
     key: program.program_key,
-    name: program.program_name,
+    name: program.display_name || program.program_name,
+    formalName: program.program_name,
     display: program.display_name || program.program_name,
     nickname: program.nickname || "",
     city: program.city || "",
@@ -403,9 +404,12 @@ function normalizeProgram(program) {
 }
 
 function normalizeOpponent(opponent) {
+  const currentProgram = opponent.current_d1
+    ? DB.programs.find((program) => program.key === opponent.opponent_key)
+    : null;
   return {
     key: opponent.opponent_key,
-    name: opponent.opponent_name,
+    name: currentProgram?.display || opponent.opponent_name,
     currentD1: Boolean(opponent.current_d1),
     enabled: Boolean(opponent.public_page_enabled),
     conference: conferenceName(opponent.current_conference)
@@ -427,7 +431,7 @@ function normalizeGame(game, opponentsByKey) {
     date: game.game_date,
     datePrecision: game.date_precision,
     opponentKey: game.opponent_key,
-    opponent: game.opponent_name,
+    opponent: opponent?.name || game.opponent_name,
     opponentCurrentD1: Boolean(game.opponent_current_d1),
     opponentPublicPageEnabled: Boolean(game.opponent_public_page_enabled),
     opponentConference: opponent?.conference
@@ -659,7 +663,7 @@ function filteredDirectoryPrograms() {
     if (directoryState.availability === "available" && !program.enabled) return false;
     if (directoryState.availability === "coming" && program.enabled) return false;
     if (!query) return true;
-    const searchable = `${program.name} ${program.display} ${program.nickname} ${program.conference} ${program.location}`.toLowerCase();
+    const searchable = `${program.name} ${program.formalName || ""} ${program.display} ${program.nickname} ${program.conference} ${program.location}`.toLowerCase();
     return searchable.includes(query);
   });
 }
@@ -1678,7 +1682,7 @@ function renderProgramSearch(input, results, mobile) {
     return;
   }
   const hits = DB.programs
-    .filter((program) => `${program.name} ${program.display} ${program.nickname} ${program.conference} ${program.location}`.toLowerCase().includes(query))
+    .filter((program) => `${program.name} ${program.formalName || ""} ${program.display} ${program.nickname} ${program.conference} ${program.location}`.toLowerCase().includes(query))
     .slice(0, 12);
   results.innerHTML = hits.length
     ? hits.map((program) => `<button type="button" class="search-result ${program.enabled ? "enabled" : "disabled"}" style="--searchColor:${program.primary}" ${program.enabled ? `onclick="openProgramFromSearch('${program.key}','${input.id}','${results.id}',${mobile})"` : "disabled"}><span><b>${esc(program.name)}</b><br><small>${esc(program.nickname)} · ${esc(program.conference)}</small></span><span>${program.enabled ? "Open" : "Coming later"}</span></button>`).join("")

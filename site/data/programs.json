@@ -2045,7 +2045,7 @@
     {
       "program_key": "florida-atlantic",
       "program_name": "Florida Atlantic",
-      "display_name": "FAU",
+      "display_name": "Florida Atlantic",
       "nickname": "Owls",
       "city": "Boca Raton",
       "state": "FL",
@@ -2069,7 +2069,7 @@
     {
       "program_key": "florida-international",
       "program_name": "Florida International",
-      "display_name": "FIU",
+      "display_name": "Florida International",
       "nickname": "Panthers",
       "city": "Miami",
       "state": "FL",
@@ -3485,7 +3485,7 @@
     {
       "program_key": "long-island-university",
       "program_name": "Long Island University",
-      "display_name": "LIU",
+      "display_name": "Long Island",
       "nickname": "Sharks",
       "city": "Brooklyn",
       "state": "NY",
@@ -4301,7 +4301,7 @@
     {
       "program_key": "missouri",
       "program_name": "Missouri",
-      "display_name": "Mizzou",
+      "display_name": "Missouri",
       "nickname": "Tigers",
       "city": "Columbia",
       "state": "MO",
@@ -4517,7 +4517,7 @@
     {
       "program_key": "nc-state",
       "program_name": "NC State",
-      "display_name": "NC State",
+      "display_name": "North Carolina State",
       "nickname": "Wolfpack",
       "city": "Raleigh",
       "state": "NC",
@@ -5477,7 +5477,7 @@
     {
       "program_key": "pennsylvania",
       "program_name": "Pennsylvania",
-      "display_name": "Penn",
+      "display_name": "Pennsylvania",
       "nickname": "Quakers",
       "city": "Philadelphia",
       "state": "PA",
@@ -6293,7 +6293,7 @@
     {
       "program_key": "seattle-u",
       "program_name": "Seattle U",
-      "display_name": "Seattle U",
+      "display_name": "Seattle",
       "nickname": "Redhawks",
       "city": "Seattle",
       "state": "WA",
@@ -6317,7 +6317,7 @@
     {
       "program_key": "southeast-missouri-state",
       "program_name": "Southeast Missouri State",
-      "display_name": "SEMO",
+      "display_name": "Southeast Missouri State",
       "nickname": "Redhawks",
       "city": "Cape Girardeau",
       "state": "MO",
