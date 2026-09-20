@@ -40,7 +40,7 @@ cal-state-northridge,2026-2027,big-west,Big West
 california,2026-2027,acc,ACC
 california-baptist,2026-2027,big-west,Big West
 campbell,2026-2027,caa,CAA
-canisius,2026-2027,maac,MAAC
+canisius,2026-2027,metro,Metro
 central-arkansas,2026-2027,united-athletic,United Athletic
 central-connecticut,2026-2027,nec,NEC
 central-michigan,2026-2027,mac,MAC
@@ -81,7 +81,7 @@ eastern-michigan,2026-2027,mac,MAC
 eastern-washington,2026-2027,big-sky,Big Sky
 elon,2026-2027,caa,CAA
 evansville,2026-2027,missouri-valley,Missouri Valley
-fairfield,2026-2027,maac,MAAC
+fairfield,2026-2027,metro,Metro
 fairleigh-dickinson,2026-2027,nec,NEC
 florida,2026-2027,sec,SEC
 florida-a-m,2026-2027,swac,SWAC
@@ -120,7 +120,7 @@ illinois-state,2026-2027,missouri-valley,Missouri Valley
 incarnate-word,2026-2027,southland,Southland
 indiana,2026-2027,big-ten,Big Ten
 indiana-state,2026-2027,missouri-valley,Missouri Valley
-iona,2026-2027,maac,MAAC
+iona,2026-2027,metro,Metro
 iowa,2026-2027,big-ten,Big Ten
 iowa-state,2026-2027,big-12,Big 12
 iu-indianapolis,2026-2027,horizon,Horizon
@@ -154,8 +154,8 @@ loyola-maryland,2026-2027,patriot,Patriot
 loyola-marymount,2026-2027,wcc,WCC
 lsu,2026-2027,sec,SEC
 maine,2026-2027,america-east,America East
-manhattan,2026-2027,maac,MAAC
-marist,2026-2027,maac,MAAC
+manhattan,2026-2027,metro,Metro
+marist,2026-2027,metro,Metro
 marquette,2026-2027,big-east,Big East
 marshall,2026-2027,sun-belt,Sun Belt
 maryland,2026-2027,big-ten,Big Ten
@@ -165,7 +165,7 @@ mcneese,2026-2027,southland,Southland
 memphis,2026-2027,american,American
 mercer,2026-2027,southern,Southern
 mercyhurst,2026-2027,nec,NEC
-merrimack,2026-2027,maac,MAAC
+merrimack,2026-2027,metro,Metro
 miami,2026-2027,acc,ACC
 miami-oh,2026-2027,mac,MAC
 michigan,2026-2027,big-ten,Big Ten
@@ -182,7 +182,7 @@ montana,2026-2027,big-sky,Big Sky
 montana-state,2026-2027,big-sky,Big Sky
 morehead-state,2026-2027,ohio-valley,Ohio Valley
 morgan-state,2026-2027,meac,MEAC
-mount-st-mary-s,2026-2027,maac,MAAC
+mount-st-mary-s,2026-2027,metro,Metro
 murray-state,2026-2027,missouri-valley,Missouri Valley
 navy,2026-2027,patriot,Patriot
 nc-state,2026-2027,acc,ACC
@@ -193,7 +193,7 @@ new-haven,2026-2027,nec,NEC
 new-mexico,2026-2027,mountain-west,Mountain West
 new-mexico-state,2026-2027,cusa,CUSA
 new-orleans,2026-2027,southland,Southland
-niagara,2026-2027,maac,MAAC
+niagara,2026-2027,metro,Metro
 nicholls,2026-2027,southland,Southland
 njit,2026-2027,america-east,America East
 norfolk-state,2026-2027,meac,MEAC
@@ -239,20 +239,20 @@ providence,2026-2027,big-east,Big East
 purdue,2026-2027,big-ten,Big Ten
 purdue-fort-wayne,2026-2027,horizon,Horizon
 queens-university,2026-2027,atlantic-sun,Atlantic Sun
-quinnipiac,2026-2027,maac,MAAC
+quinnipiac,2026-2027,metro,Metro
 radford,2026-2027,big-south,Big South
 rhode-island,2026-2027,atlantic-10,Atlantic 10
 rice,2026-2027,american,American
 richmond,2026-2027,atlantic-10,Atlantic 10
-rider,2026-2027,maac,MAAC
+rider,2026-2027,metro,Metro
 robert-morris,2026-2027,horizon,Horizon
 rutgers,2026-2027,big-ten,Big Ten
 sacramento-state,2026-2027,big-west,Big West
-sacred-heart,2026-2027,maac,MAAC
+sacred-heart,2026-2027,metro,Metro
 saint-joseph-s,2026-2027,atlantic-10,Atlantic 10
 saint-louis,2026-2027,atlantic-10,Atlantic 10
 saint-mary-s,2026-2027,wcc,WCC
-saint-peter-s,2026-2027,maac,MAAC
+saint-peter-s,2026-2027,metro,Metro
 sam-houston,2026-2027,cusa,CUSA
 samford,2026-2027,southern,Southern
 san-diego,2026-2027,wcc,WCC
@@ -263,7 +263,7 @@ santa-clara,2026-2027,wcc,WCC
 se-louisiana,2026-2027,southland,Southland
 seattle-u,2026-2027,wcc,WCC
 seton-hall,2026-2027,big-east,Big East
-siena,2026-2027,maac,MAAC
+siena,2026-2027,metro,Metro
 siu-edwardsville,2026-2027,ohio-valley,Ohio Valley
 smu,2026-2027,acc,ACC
 south-alabama,2026-2027,sun-belt,Sun Belt
