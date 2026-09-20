@@ -182,9 +182,26 @@ The formal owner NON_D1 sanity scan does **not** occur yet; it occurs after pack
 
 Research H/A/N classification and physical venue/site identity for the non-postseason population while keeping those two concepts independent.
 
+### Whole-universe entry census — required before substantial research
+
+Before substantial Stage 3A historical searching, mechanically account for the **entire regular-season universe** in one finite work census. This is a planning/control surface, not a new schema, school-package file, lifecycle stage, owner gate, or permanent artifact requirement.
+
+The census must distinguish at least:
+
+- H/A/N rows already supported;
+- H/A/N rows requiring active classification;
+- already researched/accounted terminal H/A/N debt;
+- HOME physical-site rows that are active source-school research responsibility;
+- NEUTRAL physical-site rows that are active source-school research responsibility;
+- OPPONENT_HOME rows for which usable accepted source/reciprocal/shared venue evidence is already available;
+- OPPONENT_HOME physical-building blanks that are outside the source school's research responsibility;
+- already researched/accounted terminal site debt.
+
+The whole universe must reconcile mechanically. The purpose is to make the actual active Stage 3A responsibility finite **before** browsing begins, rather than allowing the research plan to emerge one chronological slice at a time.
+
 ### Finite work plan — required before substantial research
 
-Before substantial Stage 3A research, partition every unresolved row by **research responsibility** and **systematic evidence class**. This is a working plan, not a new schema, artifact contract, lifecycle stage, or owner gate.
+After the entry census, partition every unresolved active-responsibility row by **research responsibility** and **systematic evidence class**. This is a working plan, not a new schema, artifact contract, lifecycle stage, or owner gate.
 
 At minimum, distinguish:
 
@@ -196,6 +213,8 @@ At minimum, distinguish:
 
 Within the active school-owned population, group rows by the finite evidence class that can reasonably resolve them, such as a home-facility era, recurring event/site family, published-opponent reciprocal scan, or another identified systematic/high-yield source family.
 
+A chronological range is **not**, by itself, a systematic evidence class. Chronology may bound a real evidence class — for example, a documented home-facility era, a source-coverage era, or a recurring event family — but `research the next N seasons`, `research through year X`, or an equivalent chronological micro-pass is not a valid Stage 3A work plan merely because it is finite. Chronology may order rows **within** a defined evidence class; it may not substitute for defining the class.
+
 For each active evidence class, define **before researching it** what bounded systematic pass will exhaust that class. Work the class to that completion test, apply supported findings, preserve unsupported exact-building identity as UNKNOWN/accounted debt, and then move to the next already identified evidence class.
 
 The governing Stage 3A rule is:
@@ -204,9 +223,13 @@ The governing Stage 3A rule is:
 
 A new evidence class may be opened only when there is a specific, reasonably high-yield systematic opportunity or a genuine contradiction/material blocker. The mere existence of residual blanks, or the possibility that another newspaper/yearbook/archive might exist, is not sufficient.
 
-Do not turn ordinary `OPPONENT_HOME` physical-building blanks into school-specific venue archaeology when shared-reference/site-completeness policy classifies them as deferred or accounted. Conversely, do not use that boundary to evade genuine school-owned HOME or NEUTRAL research.
+**Regular-season `OPPONENT_HOME` physical-building reconstruction is not the source school's Research responsibility.** The source school must establish H/A/N from supported evidence and must preserve/use exact venue evidence when it is already available cheaply and authoritatively from the source itself, an accepted reciprocal package, or shared-reference evidence. But an `OPPONENT_HOME` building blank must not become an active historical research queue merely because the exact building is unknown. The opponent's own Research lane owns its home-facility chronology.
+
+Conversely, do not use that responsibility boundary to evade genuine source-school HOME or NEUTRAL research.
 
 When a substantial evidence class completes, serialize its accepted findings before beginning another substantial class when §3.3 requires it. A recovery checkpoint should therefore identify the **completed evidence classes, current evidence class and exact remaining population, and not-yet-started evidence classes**, so a successor can continue without reopening exhausted work.
+
+A Stage 3A continuation checkpoint organized only as `completed through season X; seasons Y-Z remain` is insufficient when the remaining population spans multiple research responsibilities or evidence classes. Chronological coverage may be reported as supporting context, but the durable continuation state must preserve the evidence-class/responsibility decomposition that controls what work is actually still open.
 
 ### Work
 
