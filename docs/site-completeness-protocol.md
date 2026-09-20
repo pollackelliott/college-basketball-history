@@ -41,7 +41,7 @@ Only when exhaustive historical research establishes HOME and city/state but can
 
 ### Away rows
 
-Away regular-season venue completeness is not a research-freeze blocker. A school's own research lane is not required to reconstruct every opponent building.
+Away regular-season exact physical venue completeness is **not the source school's Research responsibility** and must not become an active research queue solely because an `OPPONENT_HOME` building field is blank. The source school still owns supported H/A/N classification. If exact venue evidence is already available cheaply and authoritatively from the source itself, an accepted reciprocal package, or shared-reference evidence, preserve and use it; otherwise leave physical-building reconstruction to the opponent's own home-facility research.
 
 If the away opponent is not yet published, venue/location blanks are expected reciprocal debt and may remain until that opponent is researched. When the home opponent is already published, its home-site research should be available for canonical propagation and may not be silently discarded. A published home program's valid researched-unresolved venue exception may propagate as an explicitly researched blank venue, with the known city/state retained.
 
