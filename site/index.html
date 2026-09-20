@@ -1089,6 +1089,18 @@ function updateOpponentBreakdown(key) {
   body.innerHTML = opponentBreakdown(key);
 }
 
+function conferenceTimelineDisplayName(key, membership) {
+  const approvedOverrides = {
+    "pac-10": "Pac-10",
+    "pac-8": "Pac-8",
+    "southwest-conference": "Southwest",
+  };
+  return approvedOverrides[membership.conference_key]
+    || DB.conferenceNames[key]?.[membership.conference_key]
+    || membership.conference_name
+    || "Conference";
+}
+
 function conferenceMembershipYearRange(membership) {
   const startMatch = String(membership.start_season || "").match(/^(\d{4})-(\d{4})$/);
   const endMatch = String(membership.end_season || "").match(/^(\d{4})-(\d{4})$/);
@@ -1106,13 +1118,13 @@ function conferenceHistoryMarkup(key) {
 
   const desktop = history.map((membership) => {
     const current = !membership.end_season;
-    const name = DB.conferenceNames[key]?.[membership.conference_key] || membership.conference_name || "Conference";
+    const name = conferenceTimelineDisplayName(key, membership);
     return `<div class="conference-era${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-name">${esc(name)}</div><div class="conference-era-seasons">${esc(conferenceMembershipYearRange(membership))}</div><div class="conference-era-dot" aria-hidden="true"></div></div>`;
   }).join("");
 
   const mobile = history.map((membership) => {
     const current = !membership.end_season;
-    const name = DB.conferenceNames[key]?.[membership.conference_key] || membership.conference_name || "Conference";
+    const name = conferenceTimelineDisplayName(key, membership);
     return `<div class="conference-era-mobile${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-mobile-name">${esc(name)}</div><div class="conference-era-mobile-seasons">${esc(conferenceMembershipYearRange(membership))}</div></div>`;
   }).join("");
 
