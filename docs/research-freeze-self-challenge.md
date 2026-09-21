@@ -63,6 +63,11 @@ If any `RESEARCHED_UNRESOLVED_HOME_VENUE` rows remain, the lane must report and 
 
 A broad unexplored pre-arena era does not qualify merely because city/state are known.
 
+The historical safety valve is especially relevant to genuinely difficult HOME games from
+the **1930s or earlier**, but that era is not an automatic waiver. The self-challenge must
+still ask whether obvious institutional, facility, archival, schedule, reciprocal, or
+game-level evidence was actually exhausted.
+
 If the self-challenge exposes a documented temporary home, alternate home, predecessor building, transition date, or reciprocal venue assertion, repair those rows before freeze.
 
 Once a bounded population challenge establishes that a known aggregate facility allocation cannot safely be assigned at the individual-game level, preserve those rows as researched unresolved rather than repeatedly reopening the same allocation question.
@@ -136,13 +141,33 @@ Before `RESEARCH_FROZEN`, there should be zero known/obvious current-program key
 
 ## 7. Neutral and postseason debt
 
-Material neutral and non-NCAA postseason gaps may remain when genuinely unresolved, but the lane should challenge large or modern populations before freeze.
+Material neutral and non-NCAA postseason gaps may remain when genuinely unresolved, but
+Stage 3A neutral debt must be challenged under the era-specific standard in
+`docs/stage3a-regular-season-site-research.md`.
 
-In particular:
+For regular-season neutral rows:
+
+- first verify that an exact same-game canonical/accepted reciprocal lookup was performed;
+- **1984-85 through present:** apply a strong exact-venue expectation and challenge
+  tournament/event, host, opponent-institutional, reciprocal, and contemporary evidence
+  before accepting unresolved debt;
+- **before 1984-85:** work the obvious recurring-event/site-family and other systematic
+  high-yield evidence classes, then allow explicitly researched residual uncertainty
+  after proportionate exhaustion;
+- a large or surprising modern neutral residual is a self-challenge trigger even if every
+  row already has formal research-accounting metadata;
+- do not reopen an older terminal neutral population merely because another archive might
+  theoretically exist after the reasonable systematic paths are exhausted.
+
+For postseason:
 
 - NCAA physical venue + city + state remains mandatory and non-waivable;
 - published-vs-published neutral gaps require heightened reciprocal review;
-- conference-tournament, NIT, and other postseason gaps must be explicitly researched/accounted rather than inherited silently from a sparse primary ledger.
+- conference-tournament, NIT, and other postseason gaps must be explicitly
+  researched/accounted rather than inherited silently from a sparse primary ledger.
+
+The self-challenge must not turn ordinary regular-season `OPPONENT_HOME` building
+blanks into source-school research debt.
 
 ## 8. No arbitrary numerical failure threshold
 
@@ -185,6 +210,8 @@ VENUES:
   existing reuses: <count>
   genuinely new candidates: <count>
   ambiguous identities: 0
+  modern neutral unresolved (1984-85+): <count>
+  pre-1984-85 neutral unresolved: <count>
 
 OPPONENT IDENTITIES:
   current-program key splits found/repaired: <count>
@@ -207,6 +234,7 @@ Only after the self-challenge and any bounded repairs may the lane declare:
 - NCAA site gaps = 0;
 - unaccounted material site gaps = 0;
 - ambiguous physical venue identities = 0;
+- authoritative row-level Stage 3A state is present and mechanically reconciles to the Stage 1 universe;
 - `PRE-FREEZE SELF-CHALLENGE: PASS`.
 
 Then the lane may emit the immutable six-file ZIP/hash and declare:

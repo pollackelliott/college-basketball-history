@@ -178,84 +178,112 @@ The formal owner NON_D1 sanity scan does **not** occur yet; it occurs after pack
 
 ## 7. Stage 3A — Regular-season H/A/N and physical venues
 
+### Controlling standard
+
+Read and follow `docs/stage3a-regular-season-site-research.md`. That document is
+controlling for Stage 3A research responsibility, venue-completeness expectations,
+canonical/shared reuse, stopping, and the mandatory final row-level Stage 3A state.
+
 ### Objective
 
-Research H/A/N classification and physical venue/site identity for the non-postseason population while keeping those two concepts independent.
+Research regular-season H/A/N classification and physical venue/site identity while
+keeping classification independent from venue and assigning venue work according to
+source-school responsibility.
+
+The governing responsibility model is:
+
+- **HOME:** active source-school venue research; exact venue expected, with the narrow
+  researched-unresolved safety valve when deliberate/exhaustive historical work cannot
+  establish a building. This safety valve is especially relevant to genuinely difficult
+  1930s-or-earlier home games, but it is never automatic.
+- **OPPONENT_HOME:** no dedicated source-school building research. Preserve/reuse an
+  exact venue when accepted evidence already supplies it; otherwise the opponent's own
+  Research lane owns its home-building chronology.
+- **NEUTRAL:** active venue research. For **1984-85 through present**, apply a strong
+  exact-venue expectation. For earlier neutral games, research seriously but
+  proportionately and preserve a researched unknown after the reasonable systematic
+  paths are exhausted.
 
 ### Whole-universe entry census — required before substantial research
 
-Before substantial Stage 3A historical searching, mechanically account for the **entire regular-season universe** in one finite work census. This is a planning/control surface, not a new schema, school-package file, lifecycle stage, owner gate, or permanent artifact requirement.
-
-The census must distinguish at least:
+Before browsing, mechanically account for the entire Stage 3A working universe and
+distinguish at least:
 
 - H/A/N rows already supported;
 - H/A/N rows requiring active classification;
-- already researched/accounted terminal H/A/N debt;
-- HOME physical-site rows that are active source-school research responsibility;
-- NEUTRAL physical-site rows that are active source-school research responsibility;
-- OPPONENT_HOME rows for which usable accepted source/reciprocal/shared venue evidence is already available;
-- OPPONENT_HOME physical-building blanks that are outside the source school's research responsibility;
-- already researched/accounted terminal site debt.
+- HOME rows requiring active venue research;
+- NEUTRAL rows, separated into 1984-85+ and pre-1984-85 populations;
+- OPPONENT_HOME rows with usable accepted venue evidence already available;
+- OPPONENT_HOME venue blanks outside source-school research responsibility;
+- already researched/accounted terminal debt.
 
-The whole universe must reconcile mechanically. The purpose is to make the actual active Stage 3A responsibility finite **before** browsing begins, rather than allowing the research plan to emerge one chronological slice at a time.
+For unresolved neutral games, perform the read-only exact-game lookup against usable
+canonical/evidence layers and accepted reciprocal/shared project data before launching
+external historical research.
 
-### Finite work plan — required before substantial research
+### Finite evidence-class plan
 
-After the entry census, partition every unresolved active-responsibility row by **research responsibility** and **systematic evidence class**. This is a working plan, not a new schema, artifact contract, lifecycle stage, or owner gate.
+Partition unresolved active HOME and NEUTRAL work by real systematic evidence class
+before substantial searching. Examples include home-facility eras, transition/temporary
+home classes, recurring event/site families, reciprocal institutional series, modern
+neutral source families, or a finite one-off neutral residual after higher-yield classes
+are exhausted.
 
-At minimum, distinguish:
+Chronology may order a real evidence class but is not itself an evidence class. Do not
+substitute repeated `next N seasons` micro-passes for a population/evidence-class plan.
 
-- active school-owned HOME/site research;
-- active school-owned NEUTRAL/event-site research;
-- safe mechanical propagation from already accepted reciprocal/shared evidence;
-- opponent-home/shared-reference work that is deferred or nonblocking under current policy;
-- already researched terminal/accounted UNKNOWN debt.
-
-Within the active school-owned population, group rows by the finite evidence class that can reasonably resolve them, such as a home-facility era, recurring event/site family, published-opponent reciprocal scan, or another identified systematic/high-yield source family.
-
-A chronological range is **not**, by itself, a systematic evidence class. Chronology may bound a real evidence class — for example, a documented home-facility era, a source-coverage era, or a recurring event family — but `research the next N seasons`, `research through year X`, or an equivalent chronological micro-pass is not a valid Stage 3A work plan merely because it is finite. Chronology may order rows **within** a defined evidence class; it may not substitute for defining the class.
-
-For each active evidence class, define **before researching it** what bounded systematic pass will exhaust that class. Work the class to that completion test, apply supported findings, preserve unsupported exact-building identity as UNKNOWN/accounted debt, and then move to the next already identified evidence class.
-
-The governing Stage 3A rule is:
-
-> **Completion of an evidence class means the planned reasonable systematic pass is exhausted; it does not mean every row became known. Remaining UNKNOWN rows do not by themselves authorize inventing another research strategy.**
-
-A new evidence class may be opened only when there is a specific, reasonably high-yield systematic opportunity or a genuine contradiction/material blocker. The mere existence of residual blanks, or the possibility that another newspaper/yearbook/archive might exist, is not sufficient.
-
-**Regular-season `OPPONENT_HOME` physical-building reconstruction is not the source school's Research responsibility.** The source school must establish H/A/N from supported evidence and must preserve/use exact venue evidence when it is already available cheaply and authoritatively from the source itself, an accepted reciprocal package, or shared-reference evidence. But an `OPPONENT_HOME` building blank must not become an active historical research queue merely because the exact building is unknown. The opponent's own Research lane owns its home-facility chronology.
-
-Conversely, do not use that responsibility boundary to evade genuine source-school HOME or NEUTRAL research.
-
-When a substantial evidence class completes, serialize its accepted findings before beginning another substantial class when §3.3 requires it. A recovery checkpoint should therefore identify the **completed evidence classes, current evidence class and exact remaining population, and not-yet-started evidence classes**, so a successor can continue without reopening exhausted work.
-
-A Stage 3A continuation checkpoint organized only as `completed through season X; seasons Y-Z remain` is insufficient when the remaining population spans multiple research responsibilities or evidence classes. Chronological coverage may be reported as supporting context, but the durable continuation state must preserve the evidence-class/responsibility decomposition that controls what work is actually still open.
+Do not impose a universal row-count cap. When one coherent evidence class has a
+systematic source structure, it may be audited as one class. If execution/context risk
+becomes material, serialize at a coherent class boundary rather than splitting the class
+arbitrarily.
 
 ### Work
 
 - establish home-facility chronology from authoritative evidence;
-- research alternate/temporary/off-campus home games rather than bulk-assigning solely from era;
-- resolve H/A/N from explicit/game-level evidence, never geography inference;
-- research recurring neutral events and one-off neutral sites;
+- research alternate/temporary/off-campus home games rather than bulk-assigning solely
+  from era;
+- resolve H/A/N from supported game-level evidence, never geography inference;
+- preserve accepted opponent-home venue evidence when it already exists, but do not
+  create a research queue from ordinary away-building blanks;
+- for neutral rows, reuse exact same-game canonical/accepted reciprocal evidence first;
+- research neutral event/site families and one-offs under the modern/historical
+  expectations in the controlling Stage 3A standard;
 - distinguish venue naming eras/aliases from physical buildings;
-- identify research-base registry reuses versus genuinely new physical venue candidates;
-- preserve researched unresolved building identity where evidence is insufficient;
-- quantify UNKNOWN H/A/N and material site debt by era;
-- maintain explicit site-research accounting required by `docs/site-completeness-protocol.md`.
+- preserve researched unresolved building identity where evidence remains insufficient;
+- maintain explicit site-research accounting under `docs/site-completeness-protocol.md`.
+
+### Mandatory durable closeout
+
+Stage 3A must emit one authoritative row-level state. Aggregate counts plus a chain of
+overlays are not a sufficient final product.
+
+The durable Stage 3A state must mechanically preserve the exact Stage 1 partition,
+regular-season H/A/N, known physical site fields, site-research status/basis, and accepted
+boundary corrections. It must identify the exact regular-season and
+postseason-deferred/handoff stable-ID populations.
+
+If an accepted correction changes Stage 3A after an earlier checkpoint, regenerate or
+explicitly supersede the authoritative row-level ledger. Do not leave downstream stages
+to reconstruct accepted Stage 3A truth from conversational summaries or partial overlays.
 
 ### Completion standard
 
-Produce a mechanically closed regular-season population with:
+Produce a mechanically closed Stage 3A population with:
 
-- final H/A/N census;
-- UNKNOWN H/A/N count and era concentration;
-- HOME physical-venue unresolved count and era concentration;
-- regular-season neutral physical-venue unresolved count;
+- exact Stage 1 partition accounting;
+- final regular-season H/A/N census derived from row-level state;
+- HOME venue gaps limited to valid researched-unresolved HOME exceptions;
+- ordinary OPPONENT_HOME venue blanks excluded from the active source-school research
+  queue;
+- modern neutral (1984-85+) rows subjected to the strong exact-venue pass;
+- older neutral rows subjected to the proportionate systematic pass;
+- every material unresolved site fact explicitly researched/accounted;
 - ambiguous physical venue identities = 0;
-- game-level/site working state preserved durably;
-- exact partition/accounting against the Stage 1 universe.
+- one authoritative row-level Stage 3A ledger sufficient for a successor chat and Stage 4.
 
-If research converges but full mechanical closeout/artifact emission does not fit safely in the same turn, use the closeout rule in §3.3 and resume Stage 3A only.
+If research converges but closeout/artifact emission cannot fit safely in the same turn,
+serialize the current authoritative row state and use the §3.3 closeout rule. Do not
+replace row-level state with aggregate-only checkpoint prose.
 
 ## 8. Stage 3B — Postseason classification and sites
 
