@@ -56,11 +56,14 @@ def sha256_file(path: Path) -> str:
 
 
 def _year(season: str) -> int | None:
-    match = re.fullmatch(r"(\d{4})-(\d{4})", season.strip())
+    match = re.fullmatch(r"(\d{4})-(\d{2}|\d{4})", season.strip())
     if not match:
         return None
-    start, end = map(int, match.groups())
-    return start if end == start + 1 else None
+    start = int(match.group(1))
+    end_text = match.group(2)
+    if len(end_text) == 2:
+        return start if int(end_text) == (start + 1) % 100 else None
+    return start if int(end_text) == start + 1 else None
 
 
 def _ids(rows: Iterable[dict[str, str]]) -> Counter[str]:
