@@ -14,6 +14,7 @@ Read these process documents together before onboarding work:
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
+- `docs/stage3a-regular-season-site-research.md`
 - `docs/research-freeze-self-challenge.md`
 - `docs/research-convergence-and-stopping.md`
 - `docs/shared-reference-authority.md`
@@ -49,12 +50,19 @@ when the program became or remained top-level. Multiple listed intervals are con
 do not collapse them to only the current stint. Bring scope back to the owner only for a
 genuine contradiction, ambiguous school identity, or a target absent from the reference.
 
-For Stage 3A, begin substantial historical searching only after a whole-universe
-responsibility/evidence-class census under `docs/research-lane-bounded-execution.md`.
-Chronological slices alone are not evidence classes. Regular-season `OPPONENT_HOME`
-exact physical-building reconstruction is outside the source school's Research
-responsibility unless usable authoritative source/reciprocal/shared evidence is already
-available; do not convert ordinary away-building blanks into an active research queue.
+For Stage 3A, `docs/stage3a-regular-season-site-research.md` is controlling for
+research responsibility, venue-completeness expectations, stopping, canonical/shared
+reuse, and the mandatory final row-level Stage 3A state. Begin substantial historical
+searching only after the whole-universe responsibility/evidence-class census in
+`docs/research-lane-bounded-execution.md`. HOME is a source-school venue-research
+responsibility, with a documented ancient-home safety valve when exhaustive research
+cannot establish a specific building. Regular-season `OPPONENT_HOME` exact-building
+reconstruction is not an active source-school research obligation unless usable accepted
+venue evidence is already present. NEUTRAL games require active venue research:
+1984-85 through present carries a strong exact-venue expectation, while older neutral
+research remains serious but proportionate. Before external neutral-site searching,
+check the exact same game against usable canonical/accepted reciprocal project evidence.
+Chronological slices alone are not evidence classes.
 
 ### Research shared-reference authority
 
@@ -186,9 +194,11 @@ unresolved discrepancies.
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
 - Flag any Stage 3A workflow that substitutes repeated chronological micro-passes for
-  the required whole-universe responsibility/evidence-class plan, or that turns ordinary
+  the required whole-universe responsibility/evidence-class plan; turns ordinary
   regular-season `OPPONENT_HOME` physical-building blanks into active source-school
-  historical research.
+  historical research; accepts shallow modern (1984-85+) neutral-site debt without the
+  required canonical/shared and systematic evidence pass; or reaches Stage 3A completion
+  without one authoritative row-level Stage 3A ledger sufficient for downstream use.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
   as authority for such a write. Settled shared identities should normally be carried to
