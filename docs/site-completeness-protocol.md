@@ -31,27 +31,65 @@ The site census covers at least:
 
 ### Home rows
 
-Every in-scope `SOURCE_PROGRAM_HOME` row must resolve to complete city/state geography before `RESEARCH_FROZEN`. Venue identity is also mandatory unless the row satisfies the dedicated historical-unrecoverable exception described below.
+Every in-scope `SOURCE_PROGRAM_HOME` row must resolve to complete city/state geography
+before `RESEARCH_FROZEN`. Exact physical venue identity is the expected result and
+remains an active source-school research responsibility.
 
-`RESEARCHED_PARTIAL` or ordinary `RESEARCHED_UNRESOLVED` may be used while research is still in progress, but neither status waives a home-site gap. The research lane is expected to use the school's documented facility chronology to fill predecessor arenas, facility transitions, alternate home sites, temporary sites, and known one-off home venues.
+The lane must use documented facility chronology, predecessor buildings, transitions,
+temporary sites, alternate sites, and game-level/reciprocal evidence before accepting a
+blank venue.
 
-A broad historical gap such as an entire pre-arena era must be treated as unfinished research rather than accepted as a permanent blank.
+A genuine historical safety valve remains available through
+`RESEARCHED_UNRESOLVED_HOME_VENUE`. It is especially relevant to difficult games from
+the **1930s or earlier**, but that era is not an automatic waiver. The exception applies
+only after deliberate/exhaustive research establishes HOME and city/state while the
+surviving record still cannot support a specific physical building.
 
-Only when exhaustive historical research establishes HOME and city/state but cannot establish a specific physical venue identity may the row use `RESEARCHED_UNRESOLVED_HOME_VENUE`. That status waives only `home_missing_venue`; it never waives missing city/state and never substitutes for NCAA Tournament site completeness. The research basis must document what was checked and why stronger identification is unsupported.
+A broad unexplored pre-arena era remains unfinished research.
 
 ### Away rows
 
-Away regular-season exact physical venue completeness is **not the source school's Research responsibility** and must not become an active research queue solely because an `OPPONENT_HOME` building field is blank. The source school still owns supported H/A/N classification. If exact venue evidence is already available cheaply and authoritatively from the source itself, an accepted reciprocal package, or shared-reference evidence, preserve and use it; otherwise leave physical-building reconstruction to the opponent's own home-facility research.
+Regular-season `OPPONENT_HOME` exact-building completeness is **not** the source
+school's Research responsibility.
 
-If the away opponent is not yet published, venue/location blanks are expected reciprocal debt and may remain until that opponent is researched. When the home opponent is already published, its home-site research should be available for canonical propagation and may not be silently discarded. A published home program's valid researched-unresolved venue exception may propagate as an explicitly researched blank venue, with the known city/state retained.
+The source school still owns supported H/A/N classification. If exact opponent-home
+venue evidence is already present in the source, an accepted reciprocal package,
+canonical/evidence layers, or approved shared-reference evidence, preserve and use it
+with provenance. Otherwise, do not browse historical sources solely to fill the
+opponent's home building; leave that chronology to the opponent's own Research lane.
+
+If the home opponent is already published, known accepted home-site evidence should be
+available for propagation and may not be silently discarded. A published home program's
+valid researched-unresolved venue exception may propagate as an explicitly researched
+blank venue, with known city/state retained.
 
 ### Neutral rows
 
-Neutral-site games should have city/state whenever the historical record supports it, and venue identity should also be researched where practical.
+Neutral-site games are an active Stage 3A venue-research responsibility.
 
-When both participants are published, both source packages are available. A remaining neutral-location blank therefore requires heightened review: known evidence from either side must be propagated, and a genuinely unresolved result should reflect targeted review of both published source packages rather than a silent blank.
+Before external historical searching, check whether the **exact same game** already has
+usable accepted venue evidence in current canonical/evidence layers, published reciprocal
+packages, or other approved shared project data. Reuse only an unambiguous same-game
+match with traceable provenance; do not infer a neutral venue from city, usual arena,
+nearby games, or another edition of an event.
 
-NCAA Tournament rows retain the stricter existing requirement: physical venue, city, and state are mandatory. A research-status marker cannot waive NCAA completeness.
+For the **1984-85 season through present**, apply a strong exact-venue expectation. A
+modern neutral row should not survive as unresolved merely because the source school's
+primary ledger omits the building. Challenge the obvious event/tournament, host,
+opponent-institutional, reciprocal, and contemporary evidence paths before accepting
+research debt.
+
+For neutral games **before 1984-85**, research remains serious but proportionate.
+Recurring events/site families and obvious reciprocal/institutional evidence should be
+worked systematically, but a genuinely unsupported exact building may remain explicitly
+researched unresolved after the reasonable high-yield evidence paths are exhausted.
+
+When both participants are published, both source packages are available and known
+same-game evidence must be propagated. A genuinely unresolved result should reflect
+targeted review rather than a silent blank.
+
+NCAA Tournament rows retain the stricter existing requirement: physical venue, city, and
+state are mandatory. A research-status marker cannot waive NCAA completeness.
 
 ## Research-accounting columns
 
