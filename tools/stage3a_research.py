@@ -27,7 +27,7 @@ CLEAR = "__CLEAR__"
 REQUIRED = {
     "research_game_id", "source_program_key", "season_label", "game_date",
     "normalized_opponent_key", "stage3a_disposition", "stage3a_han",
-    "stage3a_venue_name", "stage3a_city", "stage3a_state",
+    "stage3a_han_basis", "stage3a_venue_name", "stage3a_city", "stage3a_state",
     "stage3a_site_research_status", "stage3a_site_research_basis",
     "stage3a_boundary_correction", "stage3a_next_action",
 }
@@ -109,8 +109,9 @@ def stage3a_state_report(
 
     disp, han, actions = Counter(), Counter(), Counter()
     bad: dict[str, list[str]] = {k: [] for k in [
-        "identity", "season", "disposition", "han", "action", "postseason_action",
-        "unknown_terminal", "status_basis", "home", "away", "neutral",
+        "identity", "season", "disposition", "han", "han_basis", "action",
+        "postseason_action", "unknown_terminal", "status_basis", "site_provenance",
+        "home", "away", "neutral",
     ]}
     counts = Counter()
     postseason_ids: set[str] = set()
@@ -140,7 +141,7 @@ def stage3a_state_report(
             bad["action"].append(gid)
         elif action not in TERMINAL_ACTIONS:
             actions[action] += 1
-        if bool(status) != bool(basis):
+        if status and not basis:
             bad["status_basis"].append(gid)
 
         if disposition == POSTSEASON:
@@ -150,7 +151,10 @@ def stage3a_state_report(
             continue
 
         site = row["stage3a_han"].strip().upper()
+        han_basis = row["stage3a_han_basis"].strip()
         han[site] += 1
+        if not han_basis:
+            bad["han_basis"].append(gid)
         if site not in {"HOME", "OPPONENT_HOME", "NEUTRAL", "UNKNOWN"}:
             bad["han"].append(gid)
             continue
@@ -168,6 +172,8 @@ def stage3a_state_report(
             counts["home_rows"] += 1
             if venue and city and state:
                 counts["home_exact_rows"] += 1
+                if not basis:
+                    bad["site_provenance"].append(gid)
             elif not venue and city and state and status == HOME_EXCEPTION and basis:
                 counts["home_researched_unresolved_venue_rows"] += 1
             elif action in TERMINAL_ACTIONS:
@@ -183,11 +189,15 @@ def stage3a_state_report(
                     bad["away"].append(gid)
             elif not city or not state:
                 bad["away"].append(gid)
+            elif not basis:
+                bad["site_provenance"].append(gid)
 
         else:
             counts["neutral_rows"] += 1
             if venue and city and state:
                 counts["neutral_exact_rows"] += 1
+                if not basis:
+                    bad["site_provenance"].append(gid)
             else:
                 modern = year is not None and year >= 1984
                 counts["modern_neutral_unresolved_rows" if modern else "historical_neutral_unresolved_rows"] += 1
@@ -200,10 +210,12 @@ def stage3a_state_report(
         "season": "invalid season_label",
         "disposition": "invalid stage3a_disposition",
         "han": "invalid stage3a_han",
+        "han_basis": "regular-season row missing stage3a_han_basis provenance",
         "action": "blank stage3a_next_action",
         "postseason_action": "postseason row not marked POSTSEASON_HANDOFF action",
         "unknown_terminal": "UNKNOWN H/A/N incorrectly marked terminal",
-        "status_basis": "site research status/basis not paired",
+        "status_basis": "site research status populated without basis/provenance",
+        "site_provenance": "exact Stage 3A venue missing stage3a_site_research_basis provenance",
         "home": "HOME row lacks exact site or valid HOME exception",
         "away": "OPPONENT_HOME row violates source-school responsibility accounting",
         "neutral": "NEUTRAL gap lacks researched-debt accounting",
