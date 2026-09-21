@@ -13,7 +13,7 @@ Every in-scope home game for a published program should have:
 
 This is a publication requirement, not merely a research-accounting requirement. A broad historical hole such as an entire pre-arena era is incomplete research, not an acceptable permanent unknown.
 
-There is one narrow exception: when exhaustive historical research establishes the HOME classification and city/state but the surviving record does not support a specific physical venue identity, the venue may remain blank under the dedicated `RESEARCHED_UNRESOLVED_HOME_VENUE` policy. This exception may waive only the venue field; HOME city/state remain mandatory. It must be machine-visible, supported by a substantive research basis, survive reciprocal-evidence review, and remain explicitly visible in canonical/public reporting rather than being treated as ordinary completeness.
+There is one narrow exception: when exhaustive historical research establishes the HOME classification and city/state but the surviving record does not support a specific physical venue identity, the venue may remain blank under the dedicated `RESEARCHED_UNRESOLVED_HOME_VENUE` policy. This exception may waive only the venue field; HOME city/state remain mandatory. It must be machine-visible, supported by a substantive research basis, survive reciprocal-evidence review, and remain explicitly visible in canonical/public reporting rather than being treated as ordinary completeness. The safety valve is especially relevant to genuinely difficult games from the 1930s or earlier, but that era is not an automatic waiver.
 
 The detailed requirements are in `docs/home-venue-research-unresolved-policy.md`.
 
@@ -29,11 +29,28 @@ If the home opponent is already published, the away game should inherit the publ
 
 ### 3. Published-team neutral games
 
-Neutral-site games should have location information whenever it can be established safely. Venue identity is also desirable and should be researched where practical.
+Neutral-site games should have location information whenever it can be established safely,
+and exact physical venue identity is an active Research concern.
 
-For neutral games between two published programs, both schools' research/evidence are available. Missing neutral geography therefore receives heightened scrutiny: available source/reciprocal location evidence must be propagated, and if city/state still cannot be established the unresolved state must be explicit and supported by targeted review of both published source packages.
+For regular-season neutral games, first reuse unambiguous exact same-game venue evidence
+already present in canonical/evidence layers or accepted reciprocal school packages.
 
-NCAA Tournament venue and geography remain strictly mandatory under the existing NCAA completeness rule.
+For the **1984-85 season through present**, exact physical venue is strongly expected.
+A modern neutral blank should survive only after the obvious tournament/event, host,
+opponent-institutional, reciprocal, and contemporary evidence paths have been deliberately
+checked.
+
+For neutral games **before 1984-85**, research remains serious but proportionate.
+Recurring events/site families and obvious reciprocal evidence should be worked
+systematically; a genuinely unsupported exact building may remain explicitly researched
+unresolved after the reasonable evidence paths are exhausted.
+
+For neutral games between two published programs, both schools' research/evidence are
+available. Missing neutral geography or venue therefore receives heightened scrutiny and
+known same-game evidence must be propagated.
+
+NCAA Tournament venue and geography remain strictly mandatory under the existing NCAA
+completeness rule.
 
 ## Priority order for retroactive remediation
 
