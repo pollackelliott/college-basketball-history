@@ -61,8 +61,20 @@ reconstruction is not an active source-school research obligation unless usable 
 venue evidence is already present. NEUTRAL games require active venue research:
 1984-85 through present carries a strong exact-venue expectation, while older neutral
 research remains serious but proportionate. Before external neutral-site searching,
-check the exact same game against usable canonical/accepted reciprocal project evidence.
-Chronological slices alone are not evidence classes.
+run the read-only exact-game first pass with
+`python tools/stage3a_research.py neutral-lookup ...`. Treat its output as evidence,
+not an automatic override; H/A/N disagreements are bounded contradictions. Maintain the
+full Stage 3A ledger as write-through state, using
+`python tools/stage3a_research.py apply-updates ...` when helpful, and require
+`python tools/stage3a_research.py check ... --require-complete` before Stage 3A may
+declare complete. Chronological slices alone are not evidence classes.
+
+Research execution safety is separate from research scope. Evidence classes remain the
+intellectual unit of work, but once a substantive turn approaches roughly 15 minutes,
+do not launch more searching unless closeout/serialization is imminent. If it is not,
+write the current full row state and exact residual queue and return a durable incomplete
+checkpoint. Do not knowingly push a research turn beyond roughly 20 minutes without a
+current checkpoint and only imminent mechanical closeout remaining.
 
 ### Research shared-reference authority
 
@@ -198,7 +210,11 @@ unresolved discrepancies.
   regular-season `OPPONENT_HOME` physical-building blanks into active source-school
   historical research; accepts shallow modern (1984-85+) neutral-site debt without the
   required canonical/shared and systematic evidence pass; or reaches Stage 3A completion
-  without one authoritative row-level Stage 3A ledger sufficient for downstream use.
+  without one authoritative row-level Stage 3A ledger sufficient for downstream use and
+  a passing `tools/stage3a_research.py check --require-complete` result.
+- Flag Stage 3A accepted findings that survive only in class-specific overlays or prose
+  after later research has begun; accepted row truth must be written through to the
+  current full authoritative ledger.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
   as authority for such a write. Settled shared identities should normally be carried to

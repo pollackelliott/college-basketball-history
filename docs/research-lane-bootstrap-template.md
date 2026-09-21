@@ -43,6 +43,11 @@ Proceed.
 
 That means exactly what `docs/research-lane-bounded-execution.md` defines: execute the identified next bounded stage and stop again at its boundary.
 
+Do not routinely expand `Proceed` into a stage-specific instruction block. The repository
+is the durable process authority. Add extra continuation wording only for a genuine
+blocker, recovery, owner ruling, or narrowly scoped contradiction that is not already
+covered by current repository policy.
+
 After an incomplete stage:
 
 ```text

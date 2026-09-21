@@ -63,6 +63,27 @@ If substantive research is complete but the full-population mechanical applicati
 
 Do not manufacture final counts or hashes that were not actually generated and checked.
 
+#### Elapsed-time crash protection
+
+Evidence classes remain the intellectual unit of research; this is **not** a row-count cap.
+Elapsed time is only an execution-safety signal.
+
+- At roughly **15 minutes** of substantive searching in one turn, assess whether the
+  current bounded objective can be applied to durable row state, validated, packaged,
+  and returned imminently.
+- If not, stop launching new searches. Promote every accepted finding into the current
+  full working ledger, serialize the exact residual queue, verify the checkpoint, and
+  return an incomplete-stage handoff.
+- Do not knowingly extend a research turn beyond roughly **20 minutes** without a
+  current durable checkpoint already written and the remaining work limited to
+  mechanical closeout that is genuinely imminent.
+- If the environment does not expose reliable elapsed time, use context/tool volume and
+  the amount of completed-but-unserialized work conservatively as the trigger.
+
+A checkpoint may split execution in the middle of one evidence class. That does not
+redefine the class or lower the research standard; the next `Proceed` resumes the same
+class from the exact residual queue.
+
 ### 3.4 Honest incomplete checkpoint is valid
 
 A stage that unexpectedly becomes large may stop before completion. Preserve the exact completed work and the exact residual population, including a row-/label-level remaining queue sufficient for continuation, and do not begin another domain.
@@ -219,7 +240,21 @@ distinguish at least:
 
 For unresolved neutral games, perform the read-only exact-game lookup against usable
 canonical/evidence layers and accepted reciprocal/shared project data before launching
-external historical research.
+external historical research. The permanent helper is the default first pass:
+
+```bash
+python tools/stage3a_research.py neutral-lookup \
+  --ledger <stage3a-ledger.csv> \
+  --output <neutral-canonical-candidates.csv>
+```
+
+The helper returns evidence candidates only. It never mutates Stage 3A rows and any
+H/A/N disagreement is surfaced as a contradiction rather than treated as an override.
+
+Before substantial searching, run the structural ledger check without
+`--require-complete`. A healthy incomplete bootstrap may contain active research
+actions, but the Stage 1 ID universe, row schema, partition, and responsibility
+accounting must already be machine-visible.
 
 ### Finite evidence-class plan
 
@@ -256,6 +291,26 @@ arbitrarily.
 
 Stage 3A must emit one authoritative row-level state. Aggregate counts plus a chain of
 overlays are not a sufficient final product.
+
+Accepted findings are **write-through state**, not overlay-only state. After a
+substantial research class is accepted, apply its row changes to the full authoritative
+ledger before starting another substantial class. A class-specific overlay may be kept
+as evidence/audit history, but it may not be the only durable location of accepted truth.
+Use `python tools/stage3a_research.py apply-updates ...` when a sparse update file is
+convenient.
+
+Before declaring Stage 3A complete, run:
+
+```bash
+python tools/stage3a_research.py check \
+  --universe <stage1-ledger.csv> \
+  --ledger <stage3a-ledger.csv> \
+  --handoff <postseason-handoff.csv> \
+  --require-complete
+```
+
+The command must pass. Its row-derived census is the QA authority; do not fit individual
+rows to a remembered aggregate.
 
 The durable Stage 3A state must mechanically preserve the exact Stage 1 partition,
 regular-season H/A/N, known physical site fields, site-research status/basis, and accepted
