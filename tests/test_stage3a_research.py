@@ -128,7 +128,7 @@ class Stage3AStateTests(unittest.TestCase):
         rows = [
             row(
                 "A",
-                season_label="1920-1921",
+                season_label="1920-21",
                 stage3a_venue_name="",
                 stage3a_city="Cincinnati",
                 stage3a_state="OH",
