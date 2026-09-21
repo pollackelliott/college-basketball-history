@@ -33,19 +33,55 @@ Historical interest by itself is not a freeze blocker.
 
 ## 3. Stage 3A convergence
 
-Stage 3A should research regular-season H/A/N and physical venues rigorously, but it must work populations rather than recursively turning every surviving historical blank into a new independent research project.
+`docs/stage3a-regular-season-site-research.md` controls Stage 3A responsibility and
+completeness. Convergence must respect the different obligations for HOME,
+OPPONENT_HOME, and NEUTRAL rows rather than treating every venue blank as equivalent.
 
-For a coherent residual population:
+### HOME
 
-1. establish the relevant facility/era/event context;
-2. inspect the strongest systematic evidence classes available;
-3. apply supported recoveries in a bounded batch;
-4. account explicitly for the remainder;
-5. if no comparable systematic/high-yield evidence class remains and repository policy permits the uncertainty, stop.
+HOME exact venue is the expected result. Continue systematic home-facility research
+until the row is resolved or qualifies for the dedicated researched-unresolved HOME
+exception. Difficult games from the 1930s or earlier are the paradigmatic safety-valve
+case, but the era itself is not a waiver and obvious evidence classes must still be
+exhausted.
 
-A smaller remainder produced by a successful batch is not, by itself, a reason to begin another exhaustive pass.
+### OPPONENT_HOME
 
-Do not infer H/A/N from geography or assign a physical building merely because an aggregate facility chronology makes it plausible. Supported unknown remains preferable to unsupported certainty.
+Do not create continued research merely because the opponent's exact home building is
+blank. Preserve/reuse accepted venue evidence already present in the project or source,
+but otherwise leave the opponent's home chronology to that opponent's Research lane.
+
+### NEUTRAL
+
+Before external searching, perform the exact-game canonical/accepted reciprocal lookup.
+
+For **1984-85 through present**, apply a strong exact-venue expectation. Modern neutral
+debt requires a deliberate challenge of the obvious tournament/event, host, opponent,
+reciprocal, and contemporary source classes before it may survive.
+
+For **pre-1984-85** neutral rows, research seriously but proportionately. Work recurring
+event/site families and other systematic/high-yield evidence classes. Once those paths
+are exhausted and the remaining uncertainty is historically plausible, preserve the
+researched unknown and stop rather than turning every old one-off into open-ended
+archaeology.
+
+Across Stage 3A, work coherent populations/evidence classes rather than recursively
+turning each surviving blank into a new research project. Do not impose an arbitrary
+row-count cap when one systematic evidence class can be audited cleanly as a whole.
+
+A smaller remainder produced by a successful pass is not, by itself, a reason to invent
+another research strategy. Conversely, a large or surprising modern neutral residual is
+evidence that the class has probably **not** converged and must be challenged before
+freeze.
+
+Do not infer H/A/N from geography or assign a physical building merely because an
+aggregate facility chronology makes it plausible. Supported unknown remains preferable
+to unsupported certainty.
+
+Finally, convergence is not complete until the accepted Stage 3A conclusions have been
+serialized into the single authoritative row-level state required by the controlling
+Stage 3A standard. Aggregate counts and partial overlays do not constitute durable
+convergence.
 
 ## 4. Stage 3B convergence
 
