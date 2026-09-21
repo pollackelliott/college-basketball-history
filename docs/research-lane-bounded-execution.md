@@ -63,6 +63,33 @@ If substantive research is complete but the full-population mechanical applicati
 
 Do not manufacture final counts or hashes that were not actually generated and checked.
 
+#### Operational execution safety valve
+
+Evidence-class coherence controls the research plan; wall-clock safety controls whether one
+chat turn should keep running. These are separate concerns.
+
+When a substantial Research turn is approaching roughly **15–20 minutes of continuous
+execution without an owner-facing deliverable**, and more than a small deterministic
+closeout remains, prefer an early durable checkpoint over continuing to accumulate
+chat-local work. Treat 15–20 minutes as an operational target, not a hard historical
+research limit and not a universal row-count cap.
+
+Before returning that checkpoint:
+
+1. fold every accepted finding already established in the turn into the current durable
+   row-level working state;
+2. serialize the exact residual queue/evidence class;
+3. write/hash the checkpoint when the environment permits;
+4. return `STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED`.
+
+The next `Proceed` resumes the same evidence class from that checkpoint. Do not restart
+the class, and do not conceptually split a coherent evidence class merely because it took
+more than one execution turn.
+
+This safety valve exists to prevent the failure pattern
+`long research -> no response -> lost accepted work`. It does not authorize shallower
+research or smaller arbitrary batches.
+
 ### 3.4 Honest incomplete checkpoint is valid
 
 A stage that unexpectedly becomes large may stop before completion. Preserve the exact completed work and the exact residual population, including a row-/label-level remaining queue sufficient for continuation, and do not begin another domain.
