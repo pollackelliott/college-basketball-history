@@ -194,6 +194,7 @@ canonical lookup can operate without school-specific adapters:
 - `normalized_opponent_key`
 - `stage3a_disposition` — `REGULAR_SEASON` or `POSTSEASON_HANDOFF`
 - `stage3a_han` — `HOME`, `OPPONENT_HOME`, `NEUTRAL`, or active `UNKNOWN`
+- `stage3a_han_basis` — row-level evidence/provenance supporting the H/A/N classification
 - `stage3a_venue_name`
 - `stage3a_city`
 - `stage3a_state`
@@ -206,9 +207,13 @@ canonical lookup can operate without school-specific adapters:
 `NO_SOURCE_SCHOOL_VENUE_RESEARCH`, and `POSTSEASON_HANDOFF`; any other nonblank
 value denotes active work and therefore keeps Stage 3A incomplete.
 
-The ledger must preserve final regular-season H/A/N, exact physical venue when known,
-city/state when known and required, explicit site-research status/basis for accepted
-historical debt, and every accepted boundary correction affecting a row.
+The ledger must preserve final regular-season H/A/N and its row-level basis, exact
+physical venue when known, city/state when known and required, and every accepted
+boundary correction affecting a row. `stage3a_site_research_basis` is also the durable
+site provenance field: it is required for exact HOME/NEUTRAL venue assignments and for
+an exact OPPONENT_HOME venue when one is preserved. A nonblank research status always
+requires a basis, but an exact supported venue may have a nonblank basis with blank
+status; status is primarily the explicit marker for researched partial/unresolved debt.
 
 The final Stage 3A artifact must mechanically identify:
 
