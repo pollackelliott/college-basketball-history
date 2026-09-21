@@ -113,6 +113,20 @@ Do not infer a neutral venue from:
 
 Research lanes may read and cite protected-main canonical/shared evidence. They still may not mutate protected-main shared registries outside the shared-reference authority policy.
 
+Use the permanent read-only helper as the default exact-game canonical first pass:
+
+```bash
+python tools/stage3a_research.py neutral-lookup \
+  --ledger <stage3a-ledger.csv> \
+  --output <neutral-canonical-candidates.csv>
+```
+
+The helper matches by exact date plus the source/opponent program pair, resolves the
+protected-main venue display identity when available, and returns provenance. It does
+**not** mutate the research ledger. A canonical H/A/N disagreement is emitted as
+`H_A_N_CONTRADICTION`, which requires narrow adjudication rather than automatic
+override.
+
 ## 4. Whole-population execution model
 
 Before substantial Stage 3A searching:
@@ -168,16 +182,33 @@ Stage 3A is not complete merely because aggregate counts and a sequence of overl
 
 Before Stage 3A may declare complete, it must serialize **one authoritative row-level Stage 3A state** sufficient for a fresh chat and for Stage 4 to consume without reconstructing prior work.
 
-The durable Stage 3A ledger must cover the full Stage 1 universe or otherwise provide an exact mechanically provable partition, and must preserve at minimum:
+The durable Stage 3A ledger must cover the full Stage 1 universe or otherwise provide an exact mechanically provable partition.
 
-- stable `research_game_id`;
-- current Stage 3A population disposition: regular season vs postseason-deferred/handoff;
-- final regular-season H/A/N classification;
-- exact physical venue when known;
-- city/state when known and required;
-- site-research status;
-- site-research basis/provenance;
-- any accepted boundary correction affecting the row.
+For new lanes, use this machine-readable row contract so the permanent validator and
+canonical lookup can operate without school-specific adapters:
+
+- `research_game_id`
+- `source_program_key`
+- `season_label`
+- `game_date` (blank is allowed only when historically unresolved)
+- `normalized_opponent_key`
+- `stage3a_disposition` — `REGULAR_SEASON` or `POSTSEASON_HANDOFF`
+- `stage3a_han` — `HOME`, `OPPONENT_HOME`, `NEUTRAL`, or active `UNKNOWN`
+- `stage3a_venue_name`
+- `stage3a_city`
+- `stage3a_state`
+- `stage3a_site_research_status`
+- `stage3a_site_research_basis`
+- `stage3a_boundary_correction`
+- `stage3a_next_action`
+
+`stage3a_next_action` is the durable queue field. Terminal values are `NONE`,
+`NO_SOURCE_SCHOOL_VENUE_RESEARCH`, and `POSTSEASON_HANDOFF`; any other nonblank
+value denotes active work and therefore keeps Stage 3A incomplete.
+
+The ledger must preserve final regular-season H/A/N, exact physical venue when known,
+city/state when known and required, explicit site-research status/basis for accepted
+historical debt, and every accepted boundary correction affecting a row.
 
 The final Stage 3A artifact must mechanically identify:
 
@@ -189,6 +220,20 @@ The final Stage 3A artifact must mechanically identify:
 - OPPONENT_HOME rows whose venue remains intentionally outside source-school responsibility.
 
 If an accepted Stage 3A correction changes any row after an earlier checkpoint, the authoritative row-level ledger must be regenerated or explicitly superseded. Additive overlays alone are not an acceptable final Stage 3A product.
+
+Accepted research must be written through to the full ledger before another substantial
+evidence class begins. Class-specific overlay files are useful audit trails, but they may
+not become the only durable location of accepted truth. The helper
+
+```bash
+python tools/stage3a_research.py apply-updates \
+  --ledger <current-full-ledger.csv> \
+  --updates <accepted-row-updates.csv> \
+  --output <next-full-ledger.csv>
+```
+
+provides a generic sparse write-through path. Blank update cells mean leave unchanged;
+`__CLEAR__` explicitly clears a field.
 
 Aggregate counts are QA checks; they may never be used to choose row classifications merely to make arithmetic fit.
 
@@ -205,6 +250,20 @@ Stage 3A may complete only when:
 - every material unresolved site fact has explicit research accounting;
 - ambiguous physical venue identities = 0;
 - the single authoritative row-level Stage 3A ledger is written, hashed/verified when checkpoint packaging is used, and sufficient for downstream assembly without historical reconstruction.
+
+Immediately before Stage 3A completion, validate the authoritative state mechanically:
+
+```bash
+python tools/stage3a_research.py check \
+  --universe <stage1-ledger.csv> \
+  --ledger <stage3a-ledger.csv> \
+  --handoff <postseason-handoff.csv> \
+  --require-complete
+```
+
+During bootstrap or an incomplete stage, run the same command without
+`--require-complete`; active `stage3a_next_action` rows are then reported as a healthy
+incomplete queue rather than being hidden in prose.
 
 The pre-freeze self-challenge remains required and should specifically challenge surprising modern neutral debt and any claimed HOME exception.
 
