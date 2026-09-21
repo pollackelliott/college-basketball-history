@@ -10,6 +10,8 @@ A published program's HOME venue is ordinarily mandatory. The only permanent exc
 
 This exception exists to prevent false certainty. It is not a convenience mechanism and must never be used to avoid building a known home-venue chronology.
 
+The exception is especially relevant to genuinely difficult HOME games from the **1930s or earlier**, where surviving facility documentation may be sparse. That era emphasis is a safety valve, not an automatic waiver: deliberate research and the applicable evidence classes are still required.
+
 ## Machine-visible status
 
 Use `site_research_status=RESEARCHED_UNRESOLVED_HOME_VENUE` only when all of the following are true:
@@ -54,7 +56,7 @@ Before assigning this status, the research lane should review, as applicable:
 - known venue chronology and transition dates;
 - game-level location or special-site evidence.
 
-A broad unexplored era, an absent first-pass venue table, or a generic claim that a site is "unknown" does not qualify.
+A broad unexplored era, an absent first-pass venue table, or a generic claim that a site is "unknown" does not qualify. For 1930s-or-earlier rows, the lane may stop once the reasonable institutional, facility, archival, schedule, reciprocal, and game-level paths have been deliberately exhausted and the exact building remains unsupported; it need not invent certainty or continue unlimited archaeology.
 
 ## Owner ruling
 
