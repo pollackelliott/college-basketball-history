@@ -20,6 +20,7 @@ FIELDS = [
     "normalized_opponent_key",
     "stage3a_disposition",
     "stage3a_han",
+    "stage3a_han_basis",
     "stage3a_venue_name",
     "stage3a_city",
     "stage3a_state",
@@ -39,11 +40,12 @@ def row(gid, **overrides):
         "normalized_opponent_key": "iowa",
         "stage3a_disposition": "REGULAR_SEASON",
         "stage3a_han": "HOME",
+        "stage3a_han_basis": "fixture H/A/N evidence",
         "stage3a_venue_name": "Shoemaker Center",
         "stage3a_city": "Cincinnati",
         "stage3a_state": "OH",
         "stage3a_site_research_status": "",
-        "stage3a_site_research_basis": "",
+        "stage3a_site_research_basis": "fixture site evidence",
         "stage3a_boundary_correction": "",
         "stage3a_next_action": "NONE",
     }
@@ -61,6 +63,7 @@ class Stage3AStateTests(unittest.TestCase):
                 stage3a_venue_name="",
                 stage3a_city="",
                 stage3a_state="",
+                stage3a_site_research_basis="",
                 stage3a_next_action="NO_SOURCE_SCHOOL_VENUE_RESEARCH",
             ),
             row(
@@ -87,6 +90,7 @@ class Stage3AStateTests(unittest.TestCase):
                 stage3a_venue_name="",
                 stage3a_city="",
                 stage3a_state="",
+                stage3a_site_research_basis="",
                 stage3a_next_action="POSTSEASON_HANDOFF",
             ),
         ]
@@ -141,6 +145,22 @@ class Stage3AStateTests(unittest.TestCase):
         )
         self.assertTrue(report["complete"])
         self.assertEqual(report["counts"]["home_researched_unresolved_venue_rows"], 1)
+
+    def test_exact_home_requires_site_provenance(self):
+        rows = [row("A", stage3a_site_research_basis="")]
+        report = stage3a_state_report(
+            ["research_game_id"], [{"research_game_id": "A"}], FIELDS, rows
+        )
+        self.assertFalse(report["complete"])
+        self.assertTrue(any("missing stage3a_site_research_basis" in error for error in report["errors"]))
+
+    def test_regular_row_requires_han_basis(self):
+        rows = [row("A", stage3a_han_basis="")]
+        report = stage3a_state_report(
+            ["research_game_id"], [{"research_game_id": "A"}], FIELDS, rows
+        )
+        self.assertFalse(report["complete"])
+        self.assertTrue(any("missing stage3a_han_basis" in error for error in report["errors"]))
 
     def test_postseason_handoff_must_match_disposition_exactly(self):
         rows = [
