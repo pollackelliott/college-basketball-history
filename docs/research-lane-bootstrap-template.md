@@ -14,7 +14,7 @@ https://github.com/pollackelliott/college-basketball-history
 
 This chat is ONE INDEPENDENT RESEARCH LANE for one school. It is not the serialized repository-integration lane.
 
-Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
+Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
 
 Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
@@ -58,7 +58,7 @@ Use this when a prior chat/session failed or must be replaced but durable resear
 ```text
 We are recovering an existing Research lane for <school> in my College Basketball History project.
 
-Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md and docs/shared-reference-authority.md.
+Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, and docs/shared-reference-authority.md.
 
 I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
 
