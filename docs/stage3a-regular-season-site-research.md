@@ -92,7 +92,7 @@ Do not turn a difficult one-off neutral game from an early era into unlimited ne
 
 ## 3. Canonical/shared-project first pass for neutral games
 
-Before external historical searching for an unresolved neutral game, check whether the **exact same game** already exists in the current project with usable accepted venue evidence.
+Before external historical searching for an unresolved neutral game, perform a **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
 
 Useful read-only sources can include:
 
@@ -101,7 +101,7 @@ Useful read-only sources can include:
 - accepted published school packages or reciprocal research artifacts;
 - other approved shared-reference evidence.
 
-Reuse is valid only when the same-game match is unambiguous and the venue evidence has traceable provenance.
+Reuse is valid only when the same-game match is unambiguous and the venue evidence has traceable provenance. If the lookup exposes a genuine H/A/N or historical-site contradiction, isolate that row for narrow adjudication under normal Research rules; do not automatically overwrite the source-school conclusion and do not reopen unrelated accepted populations.
 
 Do not infer a neutral venue from:
 
@@ -189,6 +189,14 @@ The final Stage 3A artifact must mechanically identify:
 - OPPONENT_HOME rows whose venue remains intentionally outside source-school responsibility.
 
 If an accepted Stage 3A correction changes any row after an earlier checkpoint, the authoritative row-level ledger must be regenerated or explicitly superseded. Additive overlays alone are not an acceptable final Stage 3A product.
+
+### Write-through durability during Stage 3A
+
+Do not wait until Stage 3A closeout to consolidate accepted findings. After a substantial coherent evidence class is resolved, write those accepted row-level findings through into the cumulative authoritative working ledger before beginning another substantial class whenever the execution environment permits.
+
+Evidence-class overlays, research notes, and source registers remain useful audit artifacts, but they are supplemental. They must not become the only durable location of accepted H/A/N or venue truth.
+
+If execution/context risk becomes material before the class is complete, preserve the current full working ledger plus the exact residual queue for that same class under the bounded-execution safety valve. A later continuation must be able to resume without reconstructing accepted rows from prose or scattered overlays.
 
 Aggregate counts are QA checks; they may never be used to choose row classifications merely to make arithmetic fit.
 

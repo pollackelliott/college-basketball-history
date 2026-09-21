@@ -61,7 +61,17 @@ reconstruction is not an active source-school research obligation unless usable 
 venue evidence is already present. NEUTRAL games require active venue research:
 1984-85 through present carries a strong exact-venue expectation, while older neutral
 research remains serious but proportionate. Before external neutral-site searching,
-check the exact same game against usable canonical/accepted reciprocal project evidence.
+perform the bounded read-only exact-game lookup against usable canonical/accepted
+reciprocal project evidence. Treat a conflict surfaced by that lookup as a narrow
+Research adjudication, not as automatic canonical override or a mandate to reopen
+unrelated accepted work. After substantial coherent Stage 3A evidence classes, write
+accepted row-level findings through into the cumulative working ledger; overlays are
+supplemental, not the sole durable truth. Apply the long-turn safety valve in
+`docs/research-lane-bounded-execution.md`: evidence classes are not arbitrarily row-capped,
+but when a substantial turn approaches roughly 15–20 minutes without safe closeout,
+prioritize a verified full-state checkpoint plus exact residual queue over additional
+searching. Ordinary stage transitions should require only the owner's short `Proceed`;
+do not make the owner restate stage instructions already controlled by repository policy.
 Chronological slices alone are not evidence classes.
 
 ### Research shared-reference authority

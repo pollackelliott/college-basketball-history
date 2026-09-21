@@ -69,7 +69,23 @@ A stage that unexpectedly becomes large may stop before completion. Preserve the
 
 An incomplete checkpoint is preferable to unsupported certainty, lost work, or a silent/overlong execution failure.
 
-### 3.5 Owner questions remain exceptional
+### 3.5 Long-turn execution safety valve
+
+Evidence classes remain the intellectual unit of research. Do **not** impose an arbitrary row-count cap merely to shorten a turn.
+
+Execution durability is a separate concern. A coherent evidence class may be larger than one safe chat/tool-execution window. If a substantial research turn is approaching roughly **15–20 minutes** without a safely achievable stage/class closeout, prioritize durability over continuing to search:
+
+1. stop launching new searches within that class;
+2. fold every accepted finding already established into the cumulative working state;
+3. serialize the full current row-level state plus the exact residual queue for that same evidence class;
+4. verify/hash the checkpoint when the environment permits;
+5. return `STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED` and identify the exact bounded continuation.
+
+This is **not** a research stopping rule, not a row cap, and not permission to abandon a coherent evidence class. The next `Proceed` resumes the same class from the durable residual queue.
+
+Do not wait until the natural end of a long research class to begin serialization when execution risk is already material. The failure pattern to avoid is `long research -> more research -> serialization last -> lost response`.
+
+### 3.6 Owner questions remain exceptional
 
 A stage boundary is not an owner historical gate. Contact the owner for substantive judgment only when existing repository policy requires it or a genuine historical ambiguity/contradiction requires owner disposition.
 
