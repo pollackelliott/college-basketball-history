@@ -2,7 +2,7 @@
 
 Use this as the compact opening handoff for a **new school Research lane** after `docs/research-lane-bounded-execution.md` is present on protected `main`.
 
-The repository documents are the durable instructions. Do not paste the entire research manual into each new chat.
+The repository documents are the durable instructions. Do not paste the entire research manual into each new chat. A normal new-school handoff should be brief: target school, owner-supplied sources/constraints, and authorization to begin Stage 1. Methodology belongs in version-controlled repository policy, not repeated owner prompts.
 
 ## New-school bootstrap
 
@@ -42,6 +42,8 @@ Proceed.
 ```
 
 That means exactly what `docs/research-lane-bounded-execution.md` defines: execute the identified next bounded stage and stop again at its boundary.
+
+Do not require the owner to restate "Stage X only" or re-copy stage instructions at ordinary boundaries. The bounded-execution protocol already defines plain `Proceed` as authorization for only the identified next bounded stage. Longer continuation prompts are reserved for genuine recovery, contradiction, migration, or owner-disposition cases.
 
 After an incomplete stage:
 
