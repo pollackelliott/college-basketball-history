@@ -66,8 +66,19 @@ researched unknown and stop rather than turning every old one-off into open-ende
 archaeology.
 
 Across Stage 3A, work coherent populations/evidence classes rather than recursively
-turning each surviving blank into a new research project. Do not impose an arbitrary
-row-count cap when one systematic evidence class can be audited cleanly as a whole.
+turning each surviving blank into a new research project. Preserve the distinction
+between **research coherence** and **execution size**:
+
+- one systematic evidence class may be audited cleanly as a whole when a shared source
+  structure or deterministic rule resolves the population without separate external
+  adjudication for each row;
+- when the same coherent class requires separate row-level external searches or
+  historical judgments, execute no more than **25 individual adjudications per turn**,
+  write accepted findings through, checkpoint the exact residual queue, and resume the
+  same class on the next turn.
+
+The execution cap does not mean the class has converged and does not waive any remaining
+research obligation.
 
 A smaller remainder produced by a successful pass is not, by itself, a reason to invent
 another research strategy. Conversely, a large or surprising modern neutral residual is
@@ -78,10 +89,11 @@ Do not infer H/A/N from geography or assign a physical building merely because a
 aggregate facility chronology makes it plausible. Supported unknown remains preferable
 to unsupported certainty.
 
-Finally, convergence is not complete until the accepted Stage 3A conclusions have been
-serialized into the single authoritative row-level state required by the controlling
-Stage 3A standard. Aggregate counts and partial overlays do not constitute durable
-convergence.
+Finally, convergence is not complete until Stage 3A-4 has mechanically serialized the
+accepted Stage 3A conclusions into the single authoritative row-level state required by
+the controlling Stage 3A standard. Substantial historical research should finish in
+Stages 3A-1 through 3A-3; Stage 3A-4 is a separate closeout transaction. Aggregate counts
+and partial overlays do not constitute durable convergence.
 
 ## 4. Stage 3B convergence
 
