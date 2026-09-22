@@ -18,7 +18,9 @@ Before beginning research, inspect current protected main, record research_base_
 
 Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
-My Proceed/Continue response authorizes only the identified next bounded stage or unfinished remainder, not all remaining research through RESEARCH_FROZEN.
+Stage 3A has additional required substages (3A-0 through 3A-4) and evidence-class execution boundaries defined in the controlling repository documents. Treat those as real stop boundaries too; do not collapse Stage 3A into one large turn.
+
+My Proceed/Continue response authorizes only the identified next bounded stage, Stage 3A substage/evidence-class assignment, or unfinished remainder—not all remaining research through RESEARCH_FROZEN.
 
 Preserve accepted prior stages unless later evidence produces a genuine contradiction. Durable artifacts outrank chat memory. A replacement chat should be able to attach the latest checkpoint, verify it, and continue without rediscovering completed work. Historical uncertainty remains valid; unsupported certainty is worse than a researched unknown.
 
@@ -41,9 +43,9 @@ After a clean completed stage, the owner normally needs to send only:
 Proceed.
 ```
 
-That means exactly what `docs/research-lane-bounded-execution.md` defines: execute the identified next bounded stage and stop again at its boundary.
+That means exactly what `docs/research-lane-bounded-execution.md` defines: execute the identified next bounded stage and stop again at its boundary. During Stage 3A, it means execute only the identified next substage or evidence-class continuation and stop at that boundary.
 
-Do not require the owner to restate "Stage X only" or re-copy stage instructions at ordinary boundaries. The bounded-execution protocol already defines plain `Proceed` as authorization for only the identified next bounded stage. Longer continuation prompts are reserved for genuine recovery, contradiction, migration, or owner-disposition cases.
+Do not require the owner to restate "Stage X only", a Stage 3A substage name, or re-copy stage instructions at ordinary boundaries. The bounded-execution protocol already defines plain `Proceed` as authorization for only the identified next bounded assignment. Longer continuation prompts are reserved for genuine recovery, contradiction, migration, or owner-disposition cases.
 
 After an incomplete stage:
 
@@ -64,7 +66,7 @@ Before acting, inspect current protected main and read current AGENTS.md plus do
 
 I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
 
-Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage.
+Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage. If that stage is Stage 3A, resume the exact incomplete Stage 3A substage/evidence class serialized by the checkpoint; do not broaden the assignment.
 
 Do not restart completed stages. Do not perform open-ended archaeology for hidden/chat-local state. Do not reconstruct completed work from old prose merely because a prior chat said it existed. If the required residual queue is genuinely missing from the attached checkpoint, stop and identify the exact missing artifact/state before doing reconstruction.
 

@@ -69,21 +69,20 @@ A stage that unexpectedly becomes large may stop before completion. Preserve the
 
 An incomplete checkpoint is preferable to unsupported certainty, lost work, or a silent/overlong execution failure.
 
-### 3.5 Long-turn execution safety valve
+### 3.5 Workload-bounded execution safety valve
 
-Evidence classes remain the intellectual unit of research. Do **not** impose an arbitrary row-count cap merely to shorten a turn.
+Evidence classes remain the intellectual unit of research, but **execution transactions must be smaller than the conceptual research class when the class requires many independent judgments**.
 
-Execution durability is a separate concern. A coherent evidence class may be larger than one safe chat/tool-execution window. If a substantial research turn is approaching roughly **15–20 minutes** without a safely achievable stage/class closeout, prioritize durability over continuing to search:
+Use the source structure—not elapsed wall-clock time—to decide whether a class can safely run in one turn:
 
-1. stop launching new searches within that class;
-2. fold every accepted finding already established into the cumulative working state;
-3. serialize the full current row-level state plus the exact residual queue for that same evidence class;
-4. verify/hash the checkpoint when the environment permits;
-5. return `STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED` and identify the exact bounded continuation.
+- **Systematic/mechanical class:** when one authoritative source, one event table, one facility chronology, one reciprocal package, or one deterministic rule can resolve a coherent population without separate external adjudication for each row, the full class may be processed in one turn even when it contains more than 25 rows.
+- **Independent row-by-row class:** when resolution requires separate external searching, source comparison, or historical adjudication for individual games, a single turn may adjudicate **no more than 25 rows**. After the 25th independently researched row—or earlier if execution risk is evident—stop researching, write accepted findings through, serialize the exact remaining queue for that same class, verify/hash the checkpoint when feasible, and return an incomplete durable checkpoint.
 
-This is **not** a research stopping rule, not a row cap, and not permission to abandon a coherent evidence class. The next `Proceed` resumes the same class from the durable residual queue.
+The 25-row limit is an **execution cap, not a research stopping rule**. It does not redefine the evidence class, waive unresolved rows, or authorize shallow research. The next `Proceed` resumes the same class from the durable residual queue.
 
-Do not wait until the natural end of a long research class to begin serialization when execution risk is already material. The failure pattern to avoid is `long research -> more research -> serialization last -> lost response`.
+Do not rely on the model to notice elapsed time and self-interrupt. The durable boundary is defined by the workload shape above. The failure pattern to avoid is `large residual -> many independent lookups -> serialization last -> lost response`.
+
+For Stage 3A specifically, substantial historical research and final mechanical closeout are separate bounded assignments. Do not finish a large research pass and then continue directly into full-ledger regeneration, census, QA, packaging, and hashing unless the active assignment is already the dedicated mechanical closeout substage.
 
 ### 3.6 Owner questions remain exceptional
 
@@ -198,108 +197,154 @@ The formal owner NON_D1 sanity scan does **not** occur yet; it occurs after pack
 
 Read and follow `docs/stage3a-regular-season-site-research.md`. That document is
 controlling for Stage 3A research responsibility, venue-completeness expectations,
-canonical/shared reuse, stopping, and the mandatory final row-level Stage 3A state.
+canonical/shared reuse, stopping, the substage architecture below, and the mandatory
+final row-level Stage 3A state.
 
-### Objective
+Stage 3A is **not one monolithic execution unit**. It is divided into five required
+substage boundaries. Each substage is a real stop boundary for chat execution.
 
-Research regular-season H/A/N classification and physical venue/site identity while
-keeping classification independent from venue and assigning venue work according to
-source-school responsibility.
+A plain owner `Proceed` after a Stage 3A boundary authorizes only the exact next
+substage or evidence-class continuation identified in the prior response.
 
-The governing responsibility model is:
+### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
 
-- **HOME:** active source-school venue research; exact venue expected, with the narrow
-  researched-unresolved safety valve when deliberate/exhaustive historical work cannot
-  establish a building. This safety valve is especially relevant to genuinely difficult
-  1930s-or-earlier home games, but it is never automatic.
-- **OPPONENT_HOME:** no dedicated source-school building research. Preserve/reuse an
-  exact venue when accepted evidence already supplies it; otherwise the opponent's own
-  Research lane owns its home-building chronology.
-- **NEUTRAL:** active venue research. For **1984-85 through present**, apply a strong
-  exact-venue expectation. For earlier neutral games, research seriously but
-  proportionately and preserve a researched unknown after the reasonable systematic
-  paths are exhausted.
+This substage is mechanical/read-only except for writing accepted same-game evidence
+through into the working ledger.
 
-### Whole-universe entry census — required before substantial research
+Before broad historical searching:
 
-Before browsing, mechanically account for the entire Stage 3A working universe and
-distinguish at least:
+1. mechanically partition the exact Stage 1 universe into regular-season Stage 3A rows
+   and postseason Stage 3B handoff rows;
+2. derive the whole-population H/A/N work census;
+3. identify HOME, OPPONENT_HOME, NEUTRAL, and unresolved H/A/N responsibilities;
+4. separate NEUTRAL rows into 1984-85+ and pre-1984-85 populations;
+5. perform the bounded exact-game canonical/accepted reciprocal lookup;
+6. preserve unmatched or contradictory candidates without forcing them;
+7. write unambiguous accepted same-game evidence through into the cumulative row-level
+   working state;
+8. serialize the exact residual queues required by Stage 3A-1 through 3A-3.
 
-- H/A/N rows already supported;
-- H/A/N rows requiring active classification;
-- HOME rows requiring active venue research;
-- NEUTRAL rows, separated into 1984-85+ and pre-1984-85 populations;
-- OPPONENT_HOME rows with usable accepted venue evidence already available;
-- OPPONENT_HOME venue blanks outside source-school research responsibility;
-- already researched/accounted terminal debt.
+Do **not** begin broad HOME chronology research, broad NEUTRAL historical research, or
+large row-by-row H/A/N adjudication in Stage 3A-0.
 
-For unresolved neutral games, perform the read-only exact-game lookup against usable
-canonical/evidence layers and accepted reciprocal/shared project data before launching
-external historical research.
+Completion response:
 
-### Finite evidence-class plan
+```text
+STAGE 3A-0: COMPLETE
+Next bounded assignment: Stage 3A-1 — H/A/N completion
+STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
+```
 
-Partition unresolved active HOME and NEUTRAL work by real systematic evidence class
-before substantial searching. Examples include home-facility eras, transition/temporary
-home classes, recurring event/site families, reciprocal institutional series, modern
-neutral source families, or a finite one-off neutral residual after higher-yield classes
-are exhausted.
+### Stage 3A-1 — H/A/N completion
 
-Chronology may order a real evidence class but is not itself an evidence class. Do not
-substitute repeated `next N seasons` micro-passes for a population/evidence-class plan.
+Resolve the regular-season H/A/N residual before broad venue research.
 
-Do not impose a universal row-count cap. When one coherent evidence class has a
-systematic source structure, it may be audited as one class. If execution/context risk
-becomes material, serialize at a coherent class boundary rather than splitting the class
-arbitrarily.
+First partition the unresolved H/A/N population into coherent evidence classes. Work
+**one evidence class per turn**.
 
-### Work
+- A systematic class supported by one source structure may be resolved in full.
+- If a class requires independent row-by-row external research/adjudication, apply the
+  §3.5 cap of at most 25 independently researched rows in that turn.
+- Write accepted H/A/N findings through into the cumulative authoritative working ledger
+  before stopping.
+- Preserve contradictions or genuine researched unknowns explicitly; never infer H/A/N
+  from geography.
+- Do not start HOME or NEUTRAL venue research merely because the H/A/N class finished
+  early in the turn.
 
-- establish home-facility chronology from authoritative evidence;
-- research alternate/temporary/off-campus home games rather than bulk-assigning solely
-  from era;
-- resolve H/A/N from supported game-level evidence, never geography inference;
-- preserve accepted opponent-home venue evidence when it already exists, but do not
-  create a research queue from ordinary away-building blanks;
-- for neutral rows, reuse exact same-game canonical/accepted reciprocal evidence first;
-- research neutral event/site families and one-offs under the modern/historical
-  expectations in the controlling Stage 3A standard;
-- distinguish venue naming eras/aliases from physical buildings;
-- preserve researched unresolved building identity where evidence remains insufficient;
-- maintain explicit site-research accounting under `docs/site-completeness-protocol.md`.
+If the H/A/N substage remains incomplete after one evidence class or one capped
+row-by-row tranche, return:
 
-### Mandatory durable closeout
+```text
+STAGE 3A-1: INCOMPLETE — DURABLE CHECKPOINT PRESERVED
+Next bounded assignment: Stage 3A-1 — <exact remaining evidence class/tranche>
+STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
+```
 
-Stage 3A must emit one authoritative row-level state. Aggregate counts plus a chain of
-overlays are not a sufficient final product.
+When H/A/N is fully researched/accounted, stop with `STAGE 3A-1: COMPLETE`.
 
-The durable Stage 3A state must mechanically preserve the exact Stage 1 partition,
-regular-season H/A/N, known physical site fields, site-research status/basis, and accepted
-boundary corrections. It must identify the exact regular-season and
-postseason-deferred/handoff stable-ID populations.
+### Stage 3A-2 — HOME venue research
 
-If an accepted correction changes Stage 3A after an earlier checkpoint, regenerate or
-explicitly supersede the authoritative row-level ledger. Do not leave downstream stages
-to reconstruct accepted Stage 3A truth from conversational summaries or partial overlays.
+Only after Stage 3A-1 completes, research source-program HOME physical venues.
 
-### Completion standard
+- Establish the home-facility chronology from authoritative evidence.
+- Work one coherent HOME evidence class per turn: a facility era, transition/temporary
+  home class, off-campus class, or finite one-off residual.
+- A chronology or one systematic source may resolve a large class mechanically, but
+  explicit game-level evidence overrides chronology.
+- If separate row-level external adjudications are required, apply the §3.5 maximum of
+  25 independently researched rows in that turn.
+- Write accepted venue/location/provenance findings through before stopping.
+- Use the dedicated `RESEARCHED_UNRESOLVED_HOME_VENUE` exception only under its
+  controlling evidence standard.
+- Ordinary OPPONENT_HOME building blanks are not an active HOME research queue.
 
-Produce a mechanically closed Stage 3A population with:
+Stop after each evidence class/tranche. When all HOME obligations are researched/accounted,
+stop with `STAGE 3A-2: COMPLETE`.
+
+### Stage 3A-3 — NEUTRAL venue research
+
+Only after Stage 3A-2 completes, research remaining regular-season NEUTRAL physical
+venues.
+
+The Stage 3A-0 exact-game harvest remains controlling project evidence and must not be
+repeated wholesale unless a specific contradiction or newly changed project state makes
+a narrow recheck necessary.
+
+Work **one coherent NEUTRAL evidence class per turn**, such as a recurring tournament,
+event/site family, reciprocal institutional series, modern source family, or finite
+one-off residual.
+
+- For 1984-85 through present, apply the strong exact-venue expectation.
+- For pre-1984-85 rows, research seriously but proportionately under the historical
+  stopping standard.
+- A systematic source may resolve a large class in one turn.
+- If separate row-level external adjudications are required, apply the §3.5 maximum of
+  25 independently researched rows in that turn.
+- Write accepted venue/location/provenance findings through before stopping.
+
+Stop after each evidence class/tranche. When all NEUTRAL obligations are
+researched/accounted, stop with `STAGE 3A-3: COMPLETE`.
+
+### Stage 3A-4 — Mechanical closeout and QA
+
+This is a **mechanical closeout substage**, not another historical research pass.
+
+Do not launch broad new historical searching here. If closeout exposes a genuine
+historical contradiction or a missing required research population, stop and return that
+specific population to the appropriate earlier Stage 3A substage.
+
+Otherwise:
+
+1. regenerate or supersede the single authoritative row-level Stage 3A ledger;
+2. reconcile the exact regular-season/postseason handoff partition to Stage 1;
+3. derive the final regular-season H/A/N census from rows;
+4. identify valid HOME researched-unresolved exceptions;
+5. identify NEUTRAL researched debt by modern vs pre-1984-85 era;
+6. identify OPPONENT_HOME rows intentionally outside source-school building responsibility;
+7. run Stage 3A QA;
+8. serialize/hash the final Stage 3A completion checkpoint.
+
+Stage 3A may declare complete only after Stage 3A-4 passes. The completion state must
+include:
 
 - exact Stage 1 partition accounting;
 - final regular-season H/A/N census derived from row-level state;
 - HOME venue gaps limited to valid researched-unresolved HOME exceptions;
-- ordinary OPPONENT_HOME venue blanks excluded from the active source-school research
-  queue;
-- modern neutral (1984-85+) rows subjected to the strong exact-venue pass;
+- ordinary OPPONENT_HOME venue blanks excluded from active source-school research;
+- modern neutral rows subjected to the strong exact-venue pass;
 - older neutral rows subjected to the proportionate systematic pass;
 - every material unresolved site fact explicitly researched/accounted;
 - ambiguous physical venue identities = 0;
 - one authoritative row-level Stage 3A ledger sufficient for a successor chat and Stage 4.
 
-If research converges but closeout/artifact emission cannot fit safely in the same turn,
-serialize the current authoritative row state and use the §3.3 closeout rule. Do not
-replace row-level state with aggregate-only checkpoint prose.
+Completion response:
+
+```text
+STAGE 3A: COMPLETE
+Next bounded stage: Stage 3B — Postseason classification and sites
+STOPPING AT THE REQUIRED STAGE BOUNDARY.
+```
 
 ## 8. Stage 3B — Postseason classification and sites
 
