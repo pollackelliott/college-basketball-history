@@ -939,7 +939,7 @@
     },
     {
       "opponent_key": "app-state",
-      "opponent_name": "App State",
+      "opponent_name": "Appalachian State",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -999,22 +999,6 @@
       "games": 8,
       "wins": 4,
       "losses": 4,
-      "ties": 0
-    },
-    {
-      "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "swac",
-        "conference_name": "SWAC"
-      },
-      "first_season": "2009-2010",
-      "last_season": "2011-2012",
-      "games": 2,
-      "wins": 2,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -1634,6 +1618,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "uconn",
+      "opponent_name": "Connecticut",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      },
+      "first_season": "1939-1940",
+      "last_season": "2025-2026",
+      "games": 5,
+      "wins": 3,
+      "losses": 2,
+      "ties": 0
+    },
+    {
       "opponent_key": "coppin-state",
       "opponent_name": "Coppin State",
       "current_d1": true,
@@ -1995,8 +1995,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "2001-2002",
       "last_season": "2004-2005",
@@ -2578,7 +2578,7 @@
     },
     {
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -2903,8 +2903,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "1964-1965",
       "last_season": "1974-1975",
@@ -2943,22 +2943,6 @@
       "games": 25,
       "wins": 15,
       "losses": 10,
-      "ties": 0
-    },
-    {
-      "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "meac",
-        "conference_name": "MEAC"
-      },
-      "first_season": "2016-2017",
-      "last_season": "2016-2017",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -3182,8 +3166,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "2016-2017",
       "last_season": "2016-2017",
@@ -3248,22 +3232,6 @@
       "games": 2,
       "wins": 1,
       "losses": 1,
-      "ties": 0
-    },
-    {
-      "opponent_key": "nc-state",
-      "opponent_name": "NC State",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "acc",
-        "conference_name": "ACC"
-      },
-      "first_season": "1949-1950",
-      "last_season": "2015-2016",
-      "games": 7,
-      "wins": 4,
-      "losses": 3,
       "ties": 0
     },
     {
@@ -3392,6 +3360,22 @@
       "games": 2,
       "wins": 2,
       "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "nc-state",
+      "opponent_name": "North Carolina State",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      },
+      "first_season": "1949-1950",
+      "last_season": "2015-2016",
+      "games": 7,
+      "wins": 4,
+      "losses": 3,
       "ties": 0
     },
     {
@@ -4057,7 +4041,7 @@
     },
     {
       "opponent_key": "san-jose-state",
-      "opponent_name": "San José State",
+      "opponent_name": "San Jose State",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -4207,22 +4191,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "south-carolina-upstate",
-      "opponent_name": "South Carolina Upstate",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-south",
-        "conference_name": "Big South"
-      },
-      "first_season": "2010-2011",
-      "last_season": "2010-2011",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "south-dakota-state",
       "opponent_name": "South Dakota State",
       "current_d1": true,
@@ -4364,7 +4332,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -4407,7 +4375,7 @@
     },
     {
       "opponent_key": "tarleton-state",
-      "opponent_name": "Tarleton State",
+      "opponent_name": "Tarleton",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -4627,6 +4595,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "arkansas-pine-bluff",
+      "opponent_name": "UAPB",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "swac",
+        "conference_name": "SWAC"
+      },
+      "first_season": "2009-2010",
+      "last_season": "2011-2012",
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "uc-riverside",
       "opponent_name": "UC Riverside",
       "current_d1": true,
@@ -4691,22 +4675,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "uconn",
-      "opponent_name": "UConn",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-east",
-        "conference_name": "Big East"
-      },
-      "first_season": "1939-1940",
-      "last_season": "2025-2026",
-      "games": 5,
-      "wins": 3,
-      "losses": 2,
-      "ties": 0
-    },
-    {
       "opponent_key": "uic",
       "opponent_name": "UIC",
       "current_d1": true,
@@ -4749,6 +4717,22 @@
       },
       "first_season": "2006-2007",
       "last_season": "2006-2007",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "maryland-eastern-shore",
+      "opponent_name": "UMES",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      },
+      "first_season": "2016-2017",
+      "last_season": "2016-2017",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -4800,6 +4784,22 @@
       "games": 4,
       "wins": 3,
       "losses": 1,
+      "ties": 0
+    },
+    {
+      "opponent_key": "south-carolina-upstate",
+      "opponent_name": "USC Upstate",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      },
+      "first_season": "2010-2011",
+      "last_season": "2010-2011",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -15578,7 +15578,7 @@
       "game_date": "1939-12-18",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 62,
@@ -18905,7 +18905,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 45,
       "opponent_score": 37,
       "score_known": true,
@@ -20030,18 +20030,18 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 51,
       "opponent_score": 53,
       "score_known": true,
       "result": "L",
       "overtime_periods": 0,
-      "site": "AWAY",
+      "site": "NEUTRAL",
       "venue_key": null,
       "venue_id": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "San Francisco",
+      "site_state": "CA",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
@@ -20528,7 +20528,7 @@
       "game_date": "1949-12-19",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 54,
@@ -20553,7 +20553,7 @@
       "game_date": "1949-12-20",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 52,
@@ -21078,7 +21078,7 @@
       "game_date": "1950-12-18",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 62,
@@ -21105,7 +21105,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 66,
       "opponent_score": 77,
       "score_known": true,
@@ -26080,7 +26080,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 52,
       "opponent_score": 59,
       "score_known": true,
@@ -27853,7 +27853,7 @@
       "game_date": "1962-12-19",
       "date_precision": "EXACT",
       "opponent_key": "san-jose-state",
-      "opponent_name": "San José State",
+      "opponent_name": "San Jose State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 66,
@@ -57303,7 +57303,7 @@
       "game_date": "2003-01-04",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 84,
@@ -57828,7 +57828,7 @@
       "game_date": "2003-12-02",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 68,
@@ -60378,7 +60378,7 @@
       "game_date": "2006-11-27",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 67,
@@ -62453,7 +62453,7 @@
       "game_date": "2009-02-07",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 61,
@@ -62903,7 +62903,7 @@
       "game_date": "2009-12-05",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 67,
@@ -63153,7 +63153,7 @@
       "game_date": "2010-01-17",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 68,
@@ -63553,7 +63553,7 @@
       "game_date": "2010-11-13",
       "date_precision": "EXACT",
       "opponent_key": "south-carolina-upstate",
-      "opponent_name": "South Carolina Upstate",
+      "opponent_name": "USC Upstate",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 66,
@@ -64653,7 +64653,7 @@
       "game_date": "2011-12-13",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 63,
@@ -65303,7 +65303,7 @@
       "game_date": "2012-11-12",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 91,
@@ -65403,7 +65403,7 @@
       "game_date": "2012-11-27",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 79,
@@ -66505,7 +66505,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 68,
       "opponent_score": 65,
       "score_known": true,
@@ -68053,7 +68053,7 @@
       "game_date": "2015-11-25",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 60,
@@ -68128,7 +68128,7 @@
       "game_date": "2015-12-01",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 66,
@@ -68903,7 +68903,7 @@
       "game_date": "2016-11-13",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 77,
@@ -69153,7 +69153,7 @@
       "game_date": "2016-12-17",
       "date_precision": "EXACT",
       "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
+      "opponent_name": "UMES",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 98,
@@ -71778,7 +71778,7 @@
       "game_date": "2019-11-05",
       "date_precision": "EXACT",
       "opponent_key": "app-state",
-      "opponent_name": "App State",
+      "opponent_name": "Appalachian State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 79,
@@ -73378,7 +73378,7 @@
       "game_date": "2021-11-24",
       "date_precision": "EXACT",
       "opponent_key": "tarleton-state",
-      "opponent_name": "Tarleton State",
+      "opponent_name": "Tarleton",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 65,
@@ -75080,7 +75080,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 83,
       "opponent_score": 78,
       "score_known": true,
@@ -75853,7 +75853,7 @@
       "game_date": "2024-11-21",
       "date_precision": "EXACT",
       "opponent_key": "tarleton-state",
-      "opponent_name": "Tarleton State",
+      "opponent_name": "Tarleton",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 72,
@@ -77653,7 +77653,7 @@
       "game_date": "2026-04-06",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 69,

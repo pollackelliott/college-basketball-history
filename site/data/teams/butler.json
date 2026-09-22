@@ -1023,7 +1023,7 @@
     },
     {
       "opponent_key": "app-state",
-      "opponent_name": "App State",
+      "opponent_name": "Appalachian State",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -1333,22 +1333,6 @@
       "games": 2,
       "wins": 1,
       "losses": 1,
-      "ties": 0
-    },
-    {
-      "opponent_key": "cal-state-northridge",
-      "opponent_name": "Cal State Northridge",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-west",
-        "conference_name": "Big West"
-      },
-      "first_season": "1991-1992",
-      "last_season": "1991-1992",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -1707,6 +1691,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "uconn",
+      "opponent_name": "Connecticut",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-east",
+        "conference_name": "Big East"
+      },
+      "first_season": "2010-2011",
+      "last_season": "2025-2026",
+      "games": 13,
+      "wins": 0,
+      "losses": 13,
+      "ties": 0
+    },
+    {
       "opponent_key": "cornell",
       "opponent_name": "Cornell",
       "current_d1": true,
@@ -1736,6 +1736,22 @@
       "games": 34,
       "wins": 12,
       "losses": 22,
+      "ties": 0
+    },
+    {
+      "opponent_key": "cal-state-northridge",
+      "opponent_name": "CSUN",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      },
+      "first_season": "1991-1992",
+      "last_season": "1991-1992",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -2775,7 +2791,7 @@
     },
     {
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -3032,7 +3048,7 @@
     },
     {
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -3057,6 +3073,22 @@
       },
       "first_season": "2000-2001",
       "last_season": "2000-2001",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "ul-monroe",
+      "opponent_name": "Louisiana-Monroe",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      },
+      "first_season": "2019-2020",
+      "last_season": "2019-2020",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -3233,22 +3265,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "meac",
-        "conference_name": "MEAC"
-      },
-      "first_season": "1995-1996",
-      "last_season": "1995-1996",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "massachusetts",
       "opponent_name": "Massachusetts",
       "current_d1": true,
@@ -3286,8 +3302,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "2024-2025",
       "last_season": "2024-2025",
@@ -3536,8 +3552,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "1999-2000",
       "last_season": "2001-2002",
@@ -3588,22 +3604,6 @@
       "last_season": "1977-1978",
       "games": 2,
       "wins": 1,
-      "losses": 1,
-      "ties": 0
-    },
-    {
-      "opponent_key": "nc-state",
-      "opponent_name": "NC State",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "acc",
-        "conference_name": "ACC"
-      },
-      "first_season": "2022-2023",
-      "last_season": "2022-2023",
-      "games": 1,
-      "wins": 0,
       "losses": 1,
       "ties": 0
     },
@@ -3717,6 +3717,22 @@
       "games": 6,
       "wins": 3,
       "losses": 3,
+      "ties": 0
+    },
+    {
+      "opponent_key": "nc-state",
+      "opponent_name": "North Carolina State",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      },
+      "first_season": "2022-2023",
+      "last_season": "2022-2023",
+      "games": 1,
+      "wins": 0,
+      "losses": 1,
       "ties": 0
     },
     {
@@ -4399,8 +4415,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "1994-1995",
       "last_season": "1994-1995",
@@ -4502,8 +4518,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "2009-2010",
       "last_season": "2010-2011",
@@ -4514,7 +4530,7 @@
     },
     {
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -4776,7 +4792,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -5055,22 +5071,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "uconn",
-      "opponent_name": "UConn",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-east",
-        "conference_name": "Big East"
-      },
-      "first_season": "2010-2011",
-      "last_season": "2025-2026",
-      "games": 13,
-      "wins": 0,
-      "losses": 13,
-      "ties": 0
-    },
-    {
       "opponent_key": "uic",
       "opponent_name": "UIC",
       "current_d1": true,
@@ -5087,16 +5087,16 @@
       "ties": 0
     },
     {
-      "opponent_key": "ul-monroe",
-      "opponent_name": "UL Monroe",
+      "opponent_key": "maryland-eastern-shore",
+      "opponent_name": "UMES",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "sun-belt",
-        "conference_name": "Sun Belt"
+        "conference_key": "meac",
+        "conference_name": "MEAC"
       },
-      "first_season": "2019-2020",
-      "last_season": "2019-2020",
+      "first_season": "1995-1996",
+      "last_season": "1995-1996",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -5167,22 +5167,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "2002-2003",
-      "last_season": "2002-2003",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "utah",
       "opponent_name": "Utah",
       "current_d1": true,
@@ -5225,6 +5209,22 @@
       },
       "first_season": "2009-2010",
       "last_season": "2009-2010",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "ut-rio-grande-valley",
+      "opponent_name": "UTRGV",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "2002-2003",
+      "last_season": "2002-2003",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -19609,7 +19609,7 @@
       "game_date": null,
       "date_precision": "SEASON",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 44,
@@ -20284,7 +20284,7 @@
       "game_date": null,
       "date_precision": "SEASON",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 35,
@@ -23459,7 +23459,7 @@
       "game_date": "1948-12-23",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 63,
@@ -43959,7 +43959,7 @@
       "game_date": "1980-12-06",
       "date_precision": "EXACT",
       "opponent_key": "app-state",
-      "opponent_name": "App State",
+      "opponent_name": "Appalachian State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 73,
@@ -45359,7 +45359,7 @@
       "game_date": "1982-12-20",
       "date_precision": "EXACT",
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 49,
@@ -51559,7 +51559,7 @@
       "game_date": "1991-11-22",
       "date_precision": "EXACT",
       "opponent_key": "cal-state-northridge",
-      "opponent_name": "Cal State Northridge",
+      "opponent_name": "CSUN",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 82,
@@ -54434,7 +54434,7 @@
       "game_date": "1995-11-25",
       "date_precision": "EXACT",
       "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
+      "opponent_name": "UMES",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 75,
@@ -56061,7 +56061,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 86,
       "opponent_score": 99,
       "score_known": true,
@@ -56134,7 +56134,7 @@
       "game_date": "1997-12-10",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 83,
@@ -57259,7 +57259,7 @@
       "game_date": "1999-02-01",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 80,
@@ -57984,7 +57984,7 @@
       "game_date": "2000-01-24",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 70,
@@ -60134,7 +60134,7 @@
       "game_date": "2002-12-28",
       "date_precision": "EXACT",
       "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
+      "opponent_name": "UTRGV",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 67,
@@ -66761,7 +66761,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 83,
       "opponent_score": 50,
       "score_known": true,
@@ -67459,7 +67459,7 @@
       "game_date": "2011-04-04",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 41,
@@ -67786,18 +67786,18 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 71,
       "opponent_score": 66,
       "score_known": true,
       "result": "W",
       "overtime_periods": 0,
       "site": "AWAY",
-      "venue_key": null,
-      "venue_id": null,
-      "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "venue_key": "maples-pavilion",
+      "venue_id": "VEN-000542",
+      "venue_name": "Maples Pavilion",
+      "site_city": "Stanford",
+      "site_state": "CA",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
@@ -68584,7 +68584,7 @@
       "game_date": "2012-12-05",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 87,
@@ -71034,7 +71034,7 @@
       "game_date": "2015-11-28",
       "date_precision": "EXACT",
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 89,
@@ -71209,7 +71209,7 @@
       "game_date": "2015-12-28",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 92,
@@ -74309,7 +74309,7 @@
       "game_date": "2019-11-06",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 80,
@@ -74461,7 +74461,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 68,
       "opponent_score": 67,
       "score_known": true,
@@ -74609,7 +74609,7 @@
       "game_date": "2019-12-28",
       "date_precision": "EXACT",
       "opponent_key": "ul-monroe",
-      "opponent_name": "UL Monroe",
+      "opponent_name": "Louisiana-Monroe",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 67,
@@ -75284,7 +75284,7 @@
       "game_date": "2021-01-09",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 60,
@@ -75384,7 +75384,7 @@
       "game_date": "2021-01-26",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 51,
@@ -75709,7 +75709,7 @@
       "game_date": "2021-11-09",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 56,
@@ -76109,7 +76109,7 @@
       "game_date": "2022-01-18",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 59,
@@ -76134,7 +76134,7 @@
       "game_date": "2022-01-20",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 56,
@@ -76684,7 +76684,7 @@
       "game_date": "2022-11-25",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 61,
@@ -76809,7 +76809,7 @@
       "game_date": "2022-12-17",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 46,
@@ -77034,7 +77034,7 @@
       "game_date": "2023-01-22",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 56,
@@ -77684,7 +77684,7 @@
       "game_date": "2024-01-05",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 81,
@@ -77884,7 +77884,7 @@
       "game_date": "2024-02-06",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 62,
@@ -78459,7 +78459,7 @@
       "game_date": "2024-12-21",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 74,
@@ -78609,7 +78609,7 @@
       "game_date": "2025-01-21",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 78,
@@ -79059,7 +79059,7 @@
       "game_date": "2025-11-08",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 112,
@@ -79284,7 +79284,7 @@
       "game_date": "2025-12-16",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 60,
@@ -79634,7 +79634,7 @@
       "game_date": "2026-02-11",
       "date_precision": "EXACT",
       "opponent_key": "uconn",
-      "opponent_name": "UConn",
+      "opponent_name": "Connecticut",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 70,

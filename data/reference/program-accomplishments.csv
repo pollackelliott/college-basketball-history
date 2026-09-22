@@ -282,7 +282,7 @@ southern-utah,3,3,1,0,0,ROUND_OF_64,2001,OWNER_BASELINE_UNVERIFIED,Owner-supplie
 st-bonaventure,6,2,8,1,0,FINAL_FOUR,1970,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 st-john-s,16,7,32,2,0,NATIONAL_RUNNER_UP,1952,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 st-thomas-minnesota,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-stanford,11,1,17,2,1,NATIONAL_CHAMPION,1942,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+stanford,11,1,17,2,1,NATIONAL_CHAMPION,1942,VERIFIED,"Stanford historical material supports the project reference values, including 11 regular-season conference championships, one conference tournament championship, 17 NCAA appearances, two project-metric Final Four seasons, and the 1942 national championship.",MATCH,Verified through onboarding plan 87a0232dbafa.
 stephen-f-austin,10,5,5,0,0,ROUND_OF_32,2016,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 stetson,0,1,1,0,0,ROUND_OF_64,2024,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 stonehill,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
