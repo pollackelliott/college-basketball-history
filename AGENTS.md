@@ -52,26 +52,33 @@ genuine contradiction, ambiguous school identity, or a target absent from the re
 
 For Stage 3A, `docs/stage3a-regular-season-site-research.md` is controlling for
 research responsibility, venue-completeness expectations, stopping, canonical/shared
-reuse, and the mandatory final row-level Stage 3A state. Begin substantial historical
-searching only after the whole-universe responsibility/evidence-class census in
-`docs/research-lane-bounded-execution.md`. HOME is a source-school venue-research
-responsibility, with a documented ancient-home safety valve when exhaustive research
-cannot establish a specific building. Regular-season `OPPONENT_HOME` exact-building
-reconstruction is not an active source-school research obligation unless usable accepted
-venue evidence is already present. NEUTRAL games require active venue research:
-1984-85 through present carries a strong exact-venue expectation, while older neutral
-research remains serious but proportionate. Before external neutral-site searching,
-perform the bounded read-only exact-game lookup against usable canonical/accepted
-reciprocal project evidence. Treat a conflict surfaced by that lookup as a narrow
-Research adjudication, not as automatic canonical override or a mandate to reopen
-unrelated accepted work. After substantial coherent Stage 3A evidence classes, write
-accepted row-level findings through into the cumulative working ledger; overlays are
-supplemental, not the sole durable truth. Apply the long-turn safety valve in
-`docs/research-lane-bounded-execution.md`: evidence classes are not arbitrarily row-capped,
-but when a substantial turn approaches roughly 15–20 minutes without safe closeout,
-prioritize a verified full-state checkpoint plus exact residual queue over additional
-searching. Ordinary stage transitions should require only the owner's short `Proceed`;
-do not make the owner restate stage instructions already controlled by repository policy.
+reuse, the required Stage 3A-0 through Stage 3A-4 execution architecture, and the
+mandatory final row-level Stage 3A state. Stage 3A is not one monolithic turn:
+3A-0 mechanically closes the census/regular-postseason partition and bounded project
+evidence harvest; 3A-1 completes H/A/N; 3A-2 researches HOME venues; 3A-3 researches
+NEUTRAL venues; 3A-4 performs mechanical ledger closeout and QA. Stop at every substage
+boundary, and within 3A-1 through 3A-3 work one coherent evidence class per turn.
+
+HOME is a source-school venue-research responsibility, with the documented ancient-home
+safety valve when exhaustive research cannot establish a specific building.
+Regular-season `OPPONENT_HOME` exact-building reconstruction is not an active
+source-school research obligation unless usable accepted venue evidence is already
+present. NEUTRAL games require active venue research: 1984-85 through present carries a
+strong exact-venue expectation, while older neutral research remains serious but
+proportionate. Before external neutral-site searching, use the bounded read-only
+exact-game lookup against usable canonical/accepted reciprocal project evidence. Treat a
+conflict surfaced by that lookup as a narrow Research adjudication, not as automatic
+canonical override or a mandate to reopen unrelated accepted work.
+
+Preserve the difference between research coherence and execution size. One systematic
+source/rule may resolve a large evidence class in one turn. If a class instead requires
+separate external searching or historical adjudication for individual rows, adjudicate
+no more than **25 rows per turn**, write accepted findings through into the cumulative
+working ledger, checkpoint the exact residual queue, and stop. The next `Proceed`
+resumes that same class. Do not rely on elapsed wall-clock time as the primary safety
+mechanism. Substantial Stage 3A historical research and Stage 3A-4 closeout are separate
+bounded assignments. Ordinary continuation should require only the owner's short
+`Proceed`; do not make the owner restate repository-controlled stage instructions.
 Chronological slices alone are not evidence classes.
 
 ### Research shared-reference authority
@@ -203,12 +210,16 @@ unresolved discrepancies.
   an obvious current-program opponent identity to survive under a stale/non-D1 key, or
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
-- Flag any Stage 3A workflow that substitutes repeated chronological micro-passes for
-  the required whole-universe responsibility/evidence-class plan; turns ordinary
-  regular-season `OPPONENT_HOME` physical-building blanks into active source-school
-  historical research; accepts shallow modern (1984-85+) neutral-site debt without the
-  required canonical/shared and systematic evidence pass; or reaches Stage 3A completion
-  without one authoritative row-level Stage 3A ledger sufficient for downstream use.
+- Flag any Stage 3A workflow that collapses Stage 3A-0 through 3A-4 into one monolithic
+  execution unit; automatically rolls from one Stage 3A substage into the next without
+  an owner `Proceed`; works more than 25 independently researched/adjudicated rows in
+  one turn; combines substantial Stage 3A historical research with Stage 3A-4 mechanical
+  closeout; substitutes repeated chronological micro-passes for the required coherent
+  evidence-class plan; turns ordinary regular-season `OPPONENT_HOME` physical-building
+  blanks into active source-school historical research; accepts shallow modern
+  (1984-85+) neutral-site debt without the required canonical/shared and systematic
+  evidence pass; or reaches Stage 3A completion without one authoritative row-level
+  Stage 3A ledger sufficient for downstream use.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
   as authority for such a write. Settled shared identities should normally be carried to
