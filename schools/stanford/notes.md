@@ -181,3 +181,20 @@ extracted integration copy:
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=dba25e022e1f30cacff0e8f0f530fd54c23f3fe3` from `research_base_sha=3989158d6e461a3dfb7be919586c5b388f8ef83d`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+## Implementation Stage 2 deterministic reconciliation
+
+Before Owner Gate 1, the adversarial challenge repaired three reciprocal game
+identity pairings without changing the frozen Stanford source facts:
+
+- STAN-R-1100 -> Oregon ORERAW-01352
+- STAN-R-1101 -> Oregon ORERAW-01353
+- STAN-R-0451 -> California CAL-R1-00396
+
+Current project display identities were also normalized mechanically.
+
+For reciprocal-only TCU games CBBG-0102405 and CBBG-0102406, the owner accepted
+Stanford, CA as the HOME locality while preserving the physical venue as
+research-exhausted unknown. Stanford's frozen varsity ledger contains no
+corresponding source rows, so no building is inferred. The canonical provenance
+markers identify the exact TCU assertions supporting those reciprocal-only games.

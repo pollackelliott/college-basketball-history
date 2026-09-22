@@ -25,6 +25,7 @@ from site_completeness import (
 
 HOME_VENUE_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 RECONCILED_HOME_VENUE_EXCEPTION_MARKER = "[RECONCILED_UNRESOLVED_HOME_VENUE"
+RECIPROCAL_ONLY_HOME_VENUE_EXCEPTION_MARKER = "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE"
 
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -290,6 +291,92 @@ def _canonical_home_venue_exception(
     return True
 
 
+
+def _reciprocal_only_home_venue_exception_marker_for_school(
+    game: dict[str, str],
+    school_key: str,
+) -> bool:
+    return (
+        f"{RECIPROCAL_ONLY_HOME_VENUE_EXCEPTION_MARKER} target={school_key} "
+        in game.get("notes", "")
+    )
+
+
+def _reciprocal_only_home_venue_exception(
+    game: dict[str, str],
+    school_key: str,
+    source_rows: list[dict[str, str]],
+    all_assertions: list[dict[str, str]],
+) -> bool:
+    """Validate a researched-exhausted HOME venue with reciprocal-only game evidence.
+
+    This is intentionally narrower than ordinary review accounting. It applies only
+    when the target program has no source assertion for the canonical game, the
+    canonical HOME locality is complete, a specifically named reciprocal assertion
+    supports that HOME classification, and neither that reciprocal assertion nor any
+    agreeing assertion supplies a physical venue.
+    """
+
+    if not _target_home(game, school_key):
+        return False
+    if _venue_known(game):
+        return False
+    if not _complete_pair(game.get("site_city", ""), game.get("site_state", "")):
+        return False
+    if game.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
+        return False
+    if source_rows:
+        return False
+
+    pattern = re.compile(
+        r"\[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+        r"target=([^\s\]]+) "
+        r"reciprocal=([^/\s]+)/([^\s\]]+)\]"
+    )
+    matches = [
+        match for match in pattern.findall(game.get("notes", ""))
+        if match[0] == school_key
+    ]
+    if len(matches) != 1:
+        return False
+
+    _, reciprocal_program, reciprocal_game_id = matches[0]
+
+    reciprocal = next(
+        (
+            assertion
+            for assertion in all_assertions
+            if assertion.get("source_program_key", "").strip()
+            == reciprocal_program
+            and assertion.get("source_game_id", "").strip()
+            == reciprocal_game_id
+        ),
+        None,
+    )
+    if reciprocal is None:
+        return False
+
+    if reciprocal.get("normalized_opponent_key", "").strip() != school_key:
+        return False
+    if _source_site_to_canonical(reciprocal) != game.get("site_type", "").strip():
+        return False
+    if reciprocal.get("curated_venue_name", "").strip():
+        return False
+
+    agreeing_assertions = [
+        assertion
+        for assertion in all_assertions
+        if _source_site_to_canonical(assertion)
+        == game.get("site_type", "").strip()
+    ]
+    if any(
+        assertion.get("curated_venue_name", "").strip()
+        for assertion in agreeing_assertions
+    ):
+        return False
+
+    return True
+
 _DISCREPANCY_FIELDS = {
     "site_type": {"site_type"},
     "venue": {"venue", "venue_key", "venue_id"},
@@ -443,10 +530,23 @@ def implementation_site_report(
             all_game_assertions,
             game_discrepancies,
         )
-        home_exception = source_home_exception or reconciled_home_exception
+        reciprocal_only_home_exception = _reciprocal_only_home_venue_exception(
+            game,
+            school_key,
+            source_rows,
+            all_game_assertions,
+        )
+        home_exception = (
+            source_home_exception
+            or reconciled_home_exception
+            or reciprocal_only_home_exception
+        )
         marker_present = (
             _home_venue_exception_marker_for_school(game, school_key)
             or _reconciled_home_venue_exception_marker_for_school(game, school_key)
+            or _reciprocal_only_home_venue_exception_marker_for_school(
+                game, school_key
+            )
         )
 
         if marker_present and not home_exception:
@@ -464,6 +564,11 @@ def implementation_site_report(
                     record("researched_unresolved_home_venue", canonical_id)
                     if reconciled_home_exception:
                         record("reconciled_unresolved_home_venue", canonical_id)
+                    if reciprocal_only_home_exception:
+                        record(
+                            "reciprocal_only_unresolved_home_venue",
+                            canonical_id,
+                        )
                 else:
                     strict_home_gap_rows += 1
                     record("strict_home_gap", canonical_id)
