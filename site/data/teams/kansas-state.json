@@ -983,6 +983,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "ualbany",
+      "opponent_name": "Albany",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "america-east",
+        "conference_name": "America East"
+      },
+      "first_season": "2021-2022",
+      "last_season": "2021-2022",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "alcorn-state",
       "opponent_name": "Alcorn State",
       "current_d1": true,
@@ -1000,7 +1016,7 @@
     },
     {
       "opponent_key": "american-university",
-      "opponent_name": "American University",
+      "opponent_name": "American",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -1075,22 +1091,6 @@
       "last_season": "1976-1977",
       "games": 1,
       "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "swac",
-        "conference_name": "SWAC"
-      },
-      "first_season": "1996-1997",
-      "last_season": "2024-2025",
-      "games": 6,
-      "wins": 6,
       "losses": 0,
       "ties": 0
     },
@@ -1400,22 +1400,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "cal-state-northridge",
-      "opponent_name": "Cal State Northridge",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-west",
-        "conference_name": "Big West"
-      },
-      "first_season": "1983-1984",
-      "last_season": "1987-1988",
-      "games": 2,
-      "wins": 2,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "california",
       "opponent_name": "California",
       "current_d1": true,
@@ -1450,8 +1434,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "1947-1948",
       "last_season": "1949-1950",
@@ -1773,6 +1757,22 @@
       "games": 17,
       "wins": 9,
       "losses": 8,
+      "ties": 0
+    },
+    {
+      "opponent_key": "cal-state-northridge",
+      "opponent_name": "CSUN",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-west",
+        "conference_name": "Big West"
+      },
+      "first_season": "1983-1984",
+      "last_season": "1987-1988",
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -2696,7 +2696,7 @@
     },
     {
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -3001,7 +3001,7 @@
     },
     {
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -3058,6 +3058,22 @@
       },
       "first_season": "1975-1976",
       "last_season": "1975-1976",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "ul-monroe",
+      "opponent_name": "Louisiana-Monroe",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt"
+      },
+      "first_season": "2025-2026",
+      "last_season": "2025-2026",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -3205,22 +3221,6 @@
       "games": 2,
       "wins": 0,
       "losses": 2,
-      "ties": 0
-    },
-    {
-      "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "meac",
-        "conference_name": "MEAC"
-      },
-      "first_season": "2006-2007",
-      "last_season": "2015-2016",
-      "games": 3,
-      "wins": 3,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -3548,22 +3548,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "nc-state",
-      "opponent_name": "NC State",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "acc",
-        "conference_name": "ACC"
-      },
-      "first_season": "1958-1959",
-      "last_season": "1997-1998",
-      "games": 4,
-      "wins": 2,
-      "losses": 2,
-      "ties": 0
-    },
-    {
       "opponent_key": "nebraska",
       "opponent_name": "Nebraska",
       "current_d1": true,
@@ -3712,6 +3696,22 @@
       "games": 1,
       "wins": 1,
       "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "nc-state",
+      "opponent_name": "North Carolina State",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
+      },
+      "first_season": "1958-1959",
+      "last_season": "1997-1998",
+      "games": 4,
+      "wins": 2,
+      "losses": 2,
       "ties": 0
     },
     {
@@ -4352,8 +4352,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "2007-2008",
       "last_season": "2007-2008",
@@ -4576,7 +4576,7 @@
     },
     {
       "opponent_key": "seattle-u",
-      "opponent_name": "Seattle U",
+      "opponent_name": "Seattle",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -4612,8 +4612,8 @@
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "maac",
-        "conference_name": "MAAC"
+        "conference_key": "metro",
+        "conference_name": "Metro"
       },
       "first_season": "1993-1994",
       "last_season": "1993-1994",
@@ -4624,7 +4624,7 @@
     },
     {
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
@@ -4683,22 +4683,6 @@
       "last_season": "2015-2016",
       "games": 1,
       "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "south-carolina-upstate",
-      "opponent_name": "South Carolina Upstate",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "big-south",
-        "conference_name": "Big South"
-      },
-      "first_season": "2012-2013",
-      "last_season": "2017-2018",
-      "games": 2,
-      "wins": 2,
       "losses": 0,
       "ties": 0
     },
@@ -4870,7 +4854,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -4922,6 +4906,22 @@
       "current_conference": null,
       "first_season": "1985-1986",
       "last_season": "1985-1986",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "texas-a-m-corpus-christi",
+      "opponent_name": "TAMUCC",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "2003-2004",
+      "last_season": "2003-2004",
       "games": 1,
       "wins": 1,
       "losses": 0,
@@ -5037,22 +5037,6 @@
       "games": 28,
       "wins": 18,
       "losses": 10,
-      "ties": 0
-    },
-    {
-      "opponent_key": "texas-a-m-corpus-christi",
-      "opponent_name": "Texas A&M-Corpus Christi",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "2003-2004",
-      "last_season": "2003-2004",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
       "ties": 0
     },
     {
@@ -5207,18 +5191,18 @@
       "ties": 0
     },
     {
-      "opponent_key": "ualbany",
-      "opponent_name": "UAlbany",
+      "opponent_key": "arkansas-pine-bluff",
+      "opponent_name": "UAPB",
       "current_d1": true,
       "public_page_enabled": false,
       "current_conference": {
-        "conference_key": "america-east",
-        "conference_name": "America East"
+        "conference_key": "swac",
+        "conference_name": "SWAC"
       },
-      "first_season": "2021-2022",
-      "last_season": "2021-2022",
-      "games": 1,
-      "wins": 1,
+      "first_season": "1996-1997",
+      "last_season": "2024-2025",
+      "games": 6,
+      "wins": 6,
       "losses": 0,
       "ties": 0
     },
@@ -5303,22 +5287,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "ul-monroe",
-      "opponent_name": "UL Monroe",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "sun-belt",
-        "conference_name": "Sun Belt"
-      },
-      "first_season": "2025-2026",
-      "last_season": "2025-2026",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "umbc",
       "opponent_name": "UMBC",
       "current_d1": true,
@@ -5331,6 +5299,22 @@
       "last_season": "2017-2018",
       "games": 1,
       "wins": 1,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "maryland-eastern-shore",
+      "opponent_name": "UMES",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "meac",
+        "conference_name": "MEAC"
+      },
+      "first_season": "2006-2007",
+      "last_season": "2015-2016",
+      "games": 3,
+      "wins": 3,
       "losses": 0,
       "ties": 0
     },
@@ -5412,6 +5396,22 @@
       "ties": 0
     },
     {
+      "opponent_key": "south-carolina-upstate",
+      "opponent_name": "USC Upstate",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "big-south",
+        "conference_name": "Big South"
+      },
+      "first_season": "2012-2013",
+      "last_season": "2017-2018",
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "ut-arlington",
       "opponent_name": "UT Arlington",
       "current_d1": true,
@@ -5424,22 +5424,6 @@
       "last_season": "1988-1989",
       "games": 2,
       "wins": 2,
-      "losses": 0,
-      "ties": 0
-    },
-    {
-      "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "southland",
-        "conference_name": "Southland"
-      },
-      "first_season": "1984-1985",
-      "last_season": "2022-2023",
-      "games": 4,
-      "wins": 4,
       "losses": 0,
       "ties": 0
     },
@@ -5489,6 +5473,22 @@
       "games": 4,
       "wins": 3,
       "losses": 1,
+      "ties": 0
+    },
+    {
+      "opponent_key": "ut-rio-grande-valley",
+      "opponent_name": "UTRGV",
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "southland",
+        "conference_name": "Southland"
+      },
+      "first_season": "1984-1985",
+      "last_season": "2022-2023",
+      "games": 4,
+      "wins": 4,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -24297,7 +24297,7 @@
       "game_date": "1948-01-06",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 47,
@@ -24897,7 +24897,7 @@
       "game_date": "1948-12-18",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 60,
@@ -25397,7 +25397,7 @@
       "game_date": "1949-12-08",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 58,
@@ -25922,7 +25922,7 @@
       "game_date": "1950-12-02",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 59,
@@ -26297,7 +26297,7 @@
       "game_date": "1951-01-31",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 85,
@@ -30647,7 +30647,7 @@
       "game_date": "1958-03-21",
       "date_precision": "EXACT",
       "opponent_key": "seattle-u",
-      "opponent_name": "Seattle U",
+      "opponent_name": "Seattle",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 51,
@@ -30822,7 +30822,7 @@
       "game_date": "1958-12-19",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 69,
@@ -31422,7 +31422,7 @@
       "game_date": "1959-12-11",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 59,
@@ -35449,7 +35449,7 @@
       "opponent_key": "stanford",
       "opponent_name": "Stanford",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 73,
       "opponent_score": 65,
       "score_known": true,
@@ -37397,7 +37397,7 @@
       "game_date": "1968-12-20",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 66,
@@ -44397,7 +44397,7 @@
       "game_date": "1978-12-14",
       "date_precision": "EXACT",
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 91,
@@ -48222,7 +48222,7 @@
       "game_date": "1983-12-23",
       "date_precision": "EXACT",
       "opponent_key": "cal-state-northridge",
-      "opponent_name": "Cal State Northridge",
+      "opponent_name": "CSUN",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 64,
@@ -48922,7 +48922,7 @@
       "game_date": "1984-12-27",
       "date_precision": "EXACT",
       "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
+      "opponent_name": "UTRGV",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 75,
@@ -49522,7 +49522,7 @@
       "game_date": "1985-12-04",
       "date_precision": "EXACT",
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 83,
@@ -51022,7 +51022,7 @@
       "game_date": "1987-11-30",
       "date_precision": "EXACT",
       "opponent_key": "cal-state-northridge",
-      "opponent_name": "Cal State Northridge",
+      "opponent_name": "CSUN",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 91,
@@ -54322,7 +54322,7 @@
       "game_date": "1992-01-11",
       "date_precision": "EXACT",
       "opponent_key": "siu-edwardsville",
-      "opponent_name": "SIU Edwardsville",
+      "opponent_name": "SIUE",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 89,
@@ -55647,7 +55647,7 @@
       "game_date": "1993-12-07",
       "date_precision": "EXACT",
       "opponent_key": "long-island-university",
-      "opponent_name": "Long Island University",
+      "opponent_name": "Long Island",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 85,
@@ -58022,7 +58022,7 @@
       "game_date": "1996-12-23",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 69,
@@ -59197,7 +59197,7 @@
       "game_date": "1998-03-11",
       "date_precision": "EXACT",
       "opponent_key": "nc-state",
-      "opponent_name": "NC State",
+      "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 39,
@@ -60997,7 +60997,7 @@
       "game_date": "2001-01-02",
       "date_precision": "EXACT",
       "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
+      "opponent_name": "UTRGV",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 69,
@@ -62297,7 +62297,7 @@
       "game_date": "2002-12-04",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 76,
@@ -62347,7 +62347,7 @@
       "game_date": "2002-12-11",
       "date_precision": "EXACT",
       "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
+      "opponent_name": "UTRGV",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 102,
@@ -63097,7 +63097,7 @@
       "game_date": "2003-12-20",
       "date_precision": "EXACT",
       "opponent_key": "texas-a-m-corpus-christi",
-      "opponent_name": "Texas A&M-Corpus Christi",
+      "opponent_name": "TAMUCC",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 89,
@@ -63722,7 +63722,7 @@
       "game_date": "2004-11-29",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 76,
@@ -65322,7 +65322,7 @@
       "game_date": "2006-12-19",
       "date_precision": "EXACT",
       "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
+      "opponent_name": "UMES",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 79,
@@ -67747,7 +67747,7 @@
       "game_date": "2009-11-28",
       "date_precision": "EXACT",
       "opponent_key": "iu-indianapolis",
-      "opponent_name": "IU Indianapolis",
+      "opponent_name": "IU Indy",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 70,
@@ -67897,7 +67897,7 @@
       "game_date": "2009-12-21",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 90,
@@ -69447,7 +69447,7 @@
       "game_date": "2011-11-22",
       "date_precision": "EXACT",
       "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
+      "opponent_name": "UMES",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 92,
@@ -70372,7 +70372,7 @@
       "game_date": "2012-12-02",
       "date_precision": "EXACT",
       "opponent_key": "south-carolina-upstate",
-      "opponent_name": "South Carolina Upstate",
+      "opponent_name": "USC Upstate",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 72,
@@ -72722,7 +72722,7 @@
       "game_date": "2015-11-13",
       "date_precision": "EXACT",
       "opponent_key": "maryland-eastern-shore",
-      "opponent_name": "Maryland Eastern Shore",
+      "opponent_name": "UMES",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 80,
@@ -74422,7 +74422,7 @@
       "game_date": "2017-11-10",
       "date_precision": "EXACT",
       "opponent_key": "american-university",
-      "opponent_name": "American University",
+      "opponent_name": "American",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 83,
@@ -74622,7 +74622,7 @@
       "game_date": "2017-12-05",
       "date_precision": "EXACT",
       "opponent_key": "south-carolina-upstate",
-      "opponent_name": "South Carolina Upstate",
+      "opponent_name": "USC Upstate",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 86,
@@ -76272,7 +76272,7 @@
       "game_date": "2019-11-19",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 62,
@@ -77847,7 +77847,7 @@
       "game_date": "2021-12-01",
       "date_precision": "EXACT",
       "opponent_key": "ualbany",
-      "opponent_name": "UAlbany",
+      "opponent_name": "Albany",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 71,
@@ -78497,7 +78497,7 @@
       "game_date": "2022-11-07",
       "date_precision": "EXACT",
       "opponent_key": "ut-rio-grande-valley",
-      "opponent_name": "UT Rio Grande Valley",
+      "opponent_name": "UTRGV",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 93,
@@ -80422,7 +80422,7 @@
       "game_date": "2024-12-01",
       "date_precision": "EXACT",
       "opponent_key": "arkansas-pine-bluff",
-      "opponent_name": "Arkansas-Pine Bluff",
+      "opponent_name": "UAPB",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 120,
@@ -81372,7 +81372,7 @@
       "game_date": "2025-12-28",
       "date_precision": "EXACT",
       "opponent_key": "ul-monroe",
-      "opponent_name": "UL Monroe",
+      "opponent_name": "Louisiana-Monroe",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
       "team_score": 94,

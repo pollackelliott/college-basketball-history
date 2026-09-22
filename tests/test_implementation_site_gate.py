@@ -367,6 +367,81 @@ class ImplementationSiteGateTests(unittest.TestCase):
             self.assertEqual(report["status"], "FAIL")
             self.assertEqual(report["source_site_counts"]["home_publication_blocker_rows"], 1)
 
+    def test_reciprocal_only_home_venue_exception_passes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            canonical = canonical_row(
+                venue_key="",
+                venue_id="",
+                site_city="Example City",
+                site_state="EX",
+                notes=(
+                    "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+                    "target=test reciprocal=other/OTHRAW-1]"
+                ),
+            )
+            reciprocal = {
+                "canonical_game_id": "CBBG-0000001",
+                "source_program_key": "other",
+                "source_game_id": "OTHRAW-1",
+                "normalized_opponent_key": "test",
+                "curated_site_type": "OPPONENT_HOME",
+                "curated_venue_name": "",
+                "city": "",
+                "state": "",
+            }
+            self.make_repo(
+                root,
+                sources=[],
+                canonical=[canonical],
+                assertions=[reciprocal],
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 0)
+            self.assertEqual(
+                report["counts"]["researched_unresolved_home_venue_rows"], 1
+            )
+            self.assertEqual(
+                report["counts"]["reciprocal_only_unresolved_home_venue"], 1
+            )
+
+    def test_reciprocal_only_exception_rejects_known_reciprocal_venue(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            canonical = canonical_row(
+                venue_key="",
+                venue_id="",
+                site_city="Example City",
+                site_state="EX",
+                notes=(
+                    "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+                    "target=test reciprocal=other/OTHRAW-1]"
+                ),
+            )
+            reciprocal = {
+                "canonical_game_id": "CBBG-0000001",
+                "source_program_key": "other",
+                "source_game_id": "OTHRAW-1",
+                "normalized_opponent_key": "test",
+                "curated_site_type": "OPPONENT_HOME",
+                "curated_venue_name": "Known Arena",
+                "city": "Example City",
+                "state": "EX",
+            }
+            self.make_repo(
+                root,
+                sources=[],
+                canonical=[canonical],
+                assertions=[reciprocal],
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 1)
+            self.assertEqual(
+                report["counts"]["invalid_home_venue_exception_marker_rows"], 1
+            )
+
     def test_ncaa_canonical_site_gap_is_non_waivable(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

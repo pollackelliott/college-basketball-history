@@ -2043,54 +2043,6 @@
       }
     },
     {
-      "program_key": "florida-atlantic",
-      "program_name": "Florida Atlantic",
-      "display_name": "Florida Atlantic",
-      "nickname": "Owls",
-      "city": "Boca Raton",
-      "state": "FL",
-      "primary_hex": "#003366",
-      "secondary_hex": "#CC0000",
-      "history_start_season": null,
-      "conference_regular_season_championships": 2,
-      "conference_tournament_championships": 2,
-      "ncaa_tournament_appearances": 3,
-      "final_four_appearances": 1,
-      "national_championships": 0,
-      "best_finish_key": "FINAL_FOUR",
-      "best_finish_year": 2023,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "american",
-        "conference_name": "American"
-      }
-    },
-    {
-      "program_key": "florida-international",
-      "program_name": "Florida International",
-      "display_name": "Florida International",
-      "nickname": "Panthers",
-      "city": "Miami",
-      "state": "FL",
-      "primary_hex": "#081E3F",
-      "secondary_hex": "#B6862C",
-      "history_start_season": null,
-      "conference_regular_season_championships": 1,
-      "conference_tournament_championships": 1,
-      "ncaa_tournament_appearances": 1,
-      "final_four_appearances": 0,
-      "national_championships": 0,
-      "best_finish_key": "ROUND_OF_64",
-      "best_finish_year": 1995,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "cusa",
-        "conference_name": "CUSA"
-      }
-    },
-    {
       "program_key": "florida",
       "program_name": "Florida",
       "display_name": "Florida",
@@ -2139,6 +2091,30 @@
       }
     },
     {
+      "program_key": "florida-atlantic",
+      "program_name": "Florida Atlantic",
+      "display_name": "Florida Atlantic",
+      "nickname": "Owls",
+      "city": "Boca Raton",
+      "state": "FL",
+      "primary_hex": "#003366",
+      "secondary_hex": "#CC0000",
+      "history_start_season": null,
+      "conference_regular_season_championships": 2,
+      "conference_tournament_championships": 2,
+      "ncaa_tournament_appearances": 3,
+      "final_four_appearances": 1,
+      "national_championships": 0,
+      "best_finish_key": "FINAL_FOUR",
+      "best_finish_year": 2023,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "american",
+        "conference_name": "American"
+      }
+    },
+    {
       "program_key": "florida-gulf-coast",
       "program_name": "Florida Gulf Coast",
       "display_name": "Florida Gulf Coast",
@@ -2160,6 +2136,30 @@
       "current_conference": {
         "conference_key": "atlantic-sun",
         "conference_name": "Atlantic Sun"
+      }
+    },
+    {
+      "program_key": "florida-international",
+      "program_name": "Florida International",
+      "display_name": "Florida International",
+      "nickname": "Panthers",
+      "city": "Miami",
+      "state": "FL",
+      "primary_hex": "#081E3F",
+      "secondary_hex": "#B6862C",
+      "history_start_season": null,
+      "conference_regular_season_championships": 1,
+      "conference_tournament_championships": 1,
+      "ncaa_tournament_appearances": 1,
+      "final_four_appearances": 0,
+      "national_championships": 0,
+      "best_finish_key": "ROUND_OF_64",
+      "best_finish_year": 1995,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
       }
     },
     {
@@ -3483,30 +3483,6 @@
       }
     },
     {
-      "program_key": "long-island-university",
-      "program_name": "Long Island University",
-      "display_name": "Long Island",
-      "nickname": "Sharks",
-      "city": "Brooklyn",
-      "state": "NY",
-      "primary_hex": "#69B3E7",
-      "secondary_hex": "#FFC72C",
-      "history_start_season": null,
-      "conference_regular_season_championships": 13,
-      "conference_tournament_championships": 8,
-      "ncaa_tournament_appearances": 8,
-      "final_four_appearances": 0,
-      "national_championships": 0,
-      "best_finish_key": "ROUND_OF_64",
-      "best_finish_year": 2026,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "nec",
-        "conference_name": "NEC"
-      }
-    },
-    {
       "program_key": "long-beach-state",
       "program_name": "Long Beach State",
       "display_name": "Long Beach State",
@@ -3528,6 +3504,30 @@
       "current_conference": {
         "conference_key": "big-west",
         "conference_name": "Big West"
+      }
+    },
+    {
+      "program_key": "long-island-university",
+      "program_name": "Long Island University",
+      "display_name": "Long Island",
+      "nickname": "Sharks",
+      "city": "Brooklyn",
+      "state": "NY",
+      "primary_hex": "#69B3E7",
+      "secondary_hex": "#FFC72C",
+      "history_start_season": null,
+      "conference_regular_season_championships": 13,
+      "conference_tournament_championships": 8,
+      "ncaa_tournament_appearances": 8,
+      "final_four_appearances": 0,
+      "national_championships": 0,
+      "best_finish_key": "ROUND_OF_64",
+      "best_finish_year": 2026,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "nec",
+        "conference_name": "NEC"
       }
     },
     {
@@ -4275,30 +4275,6 @@
       }
     },
     {
-      "program_key": "missouri-state",
-      "program_name": "Missouri State",
-      "display_name": "Missouri State",
-      "nickname": "Bears",
-      "city": "Springfield",
-      "state": "MO",
-      "primary_hex": "#530009",
-      "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 5,
-      "conference_tournament_championships": 3,
-      "ncaa_tournament_appearances": 6,
-      "final_four_appearances": 0,
-      "national_championships": 0,
-      "best_finish_key": "SWEET_SIXTEEN",
-      "best_finish_year": 1999,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "cusa",
-        "conference_name": "CUSA"
-      }
-    },
-    {
       "program_key": "missouri",
       "program_name": "Missouri",
       "display_name": "Missouri",
@@ -4320,6 +4296,30 @@
       "current_conference": {
         "conference_key": "sec",
         "conference_name": "SEC"
+      }
+    },
+    {
+      "program_key": "missouri-state",
+      "program_name": "Missouri State",
+      "display_name": "Missouri State",
+      "nickname": "Bears",
+      "city": "Springfield",
+      "state": "MO",
+      "primary_hex": "#530009",
+      "secondary_hex": "#FFFFFF",
+      "history_start_season": null,
+      "conference_regular_season_championships": 5,
+      "conference_tournament_championships": 3,
+      "ncaa_tournament_appearances": 6,
+      "final_four_appearances": 0,
+      "national_championships": 0,
+      "best_finish_key": "SWEET_SIXTEEN",
+      "best_finish_year": 1999,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "cusa",
+        "conference_name": "CUSA"
       }
     },
     {
@@ -4512,30 +4512,6 @@
       "current_conference": {
         "conference_key": "patriot",
         "conference_name": "Patriot"
-      }
-    },
-    {
-      "program_key": "nc-state",
-      "program_name": "NC State",
-      "display_name": "North Carolina State",
-      "nickname": "Wolfpack",
-      "city": "Raleigh",
-      "state": "NC",
-      "primary_hex": "#CC0000",
-      "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 13,
-      "conference_tournament_championships": 18,
-      "ncaa_tournament_appearances": 30,
-      "final_four_appearances": 4,
-      "national_championships": 2,
-      "best_finish_key": "NATIONAL_CHAMPION",
-      "best_finish_year": 1983,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "acc",
-        "conference_name": "ACC"
       }
     },
     {
@@ -4872,6 +4848,30 @@
       "current_conference": {
         "conference_key": "meac",
         "conference_name": "MEAC"
+      }
+    },
+    {
+      "program_key": "nc-state",
+      "program_name": "NC State",
+      "display_name": "North Carolina State",
+      "nickname": "Wolfpack",
+      "city": "Raleigh",
+      "state": "NC",
+      "primary_hex": "#CC0000",
+      "secondary_hex": "#FFFFFF",
+      "history_start_season": null,
+      "conference_regular_season_championships": 13,
+      "conference_tournament_championships": 18,
+      "ncaa_tournament_appearances": 30,
+      "final_four_appearances": 4,
+      "national_championships": 2,
+      "best_finish_key": "NATIONAL_CHAMPION",
+      "best_finish_year": 1983,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "acc",
+        "conference_name": "ACC"
       }
     },
     {
@@ -5475,30 +5475,6 @@
       }
     },
     {
-      "program_key": "pennsylvania",
-      "program_name": "Pennsylvania",
-      "display_name": "Pennsylvania",
-      "nickname": "Quakers",
-      "city": "Philadelphia",
-      "state": "PA",
-      "primary_hex": "#011F5B",
-      "secondary_hex": "#990000",
-      "history_start_season": null,
-      "conference_regular_season_championships": 39,
-      "conference_tournament_championships": 2,
-      "ncaa_tournament_appearances": 25,
-      "final_four_appearances": 1,
-      "national_championships": 0,
-      "best_finish_key": "FINAL_FOUR",
-      "best_finish_year": 1979,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "ivy",
-        "conference_name": "Ivy"
-      }
-    },
-    {
       "program_key": "penn-state",
       "program_name": "Penn State",
       "display_name": "Penn State",
@@ -5520,6 +5496,30 @@
       "current_conference": {
         "conference_key": "big-ten",
         "conference_name": "Big Ten"
+      }
+    },
+    {
+      "program_key": "pennsylvania",
+      "program_name": "Pennsylvania",
+      "display_name": "Pennsylvania",
+      "nickname": "Quakers",
+      "city": "Philadelphia",
+      "state": "PA",
+      "primary_hex": "#011F5B",
+      "secondary_hex": "#990000",
+      "history_start_season": null,
+      "conference_regular_season_championships": 39,
+      "conference_tournament_championships": 2,
+      "ncaa_tournament_appearances": 25,
+      "final_four_appearances": 1,
+      "national_championships": 0,
+      "best_finish_key": "FINAL_FOUR",
+      "best_finish_year": 1979,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ivy",
+        "conference_name": "Ivy"
       }
     },
     {
@@ -6315,30 +6315,6 @@
       }
     },
     {
-      "program_key": "southeast-missouri-state",
-      "program_name": "Southeast Missouri State",
-      "display_name": "Southeast Missouri State",
-      "nickname": "Redhawks",
-      "city": "Cape Girardeau",
-      "state": "MO",
-      "primary_hex": "#C8102E",
-      "secondary_hex": "#000000",
-      "history_start_season": null,
-      "conference_regular_season_championships": 2,
-      "conference_tournament_championships": 2,
-      "ncaa_tournament_appearances": 2,
-      "final_four_appearances": 0,
-      "national_championships": 0,
-      "best_finish_key": "ROUND_OF_64",
-      "best_finish_year": 2000,
-      "current_d1": true,
-      "public_page_enabled": false,
-      "current_conference": {
-        "conference_key": "ohio-valley",
-        "conference_name": "Ohio Valley"
-      }
-    },
-    {
       "program_key": "seton-hall",
       "program_name": "Seton Hall",
       "display_name": "Seton Hall",
@@ -6579,6 +6555,30 @@
       }
     },
     {
+      "program_key": "southeast-missouri-state",
+      "program_name": "Southeast Missouri State",
+      "display_name": "Southeast Missouri State",
+      "nickname": "Redhawks",
+      "city": "Cape Girardeau",
+      "state": "MO",
+      "primary_hex": "#C8102E",
+      "secondary_hex": "#000000",
+      "history_start_season": null,
+      "conference_regular_season_championships": 2,
+      "conference_tournament_championships": 2,
+      "ncaa_tournament_appearances": 2,
+      "final_four_appearances": 0,
+      "national_championships": 0,
+      "best_finish_key": "ROUND_OF_64",
+      "best_finish_year": 2000,
+      "current_d1": true,
+      "public_page_enabled": false,
+      "current_conference": {
+        "conference_key": "ohio-valley",
+        "conference_name": "Ohio Valley"
+      }
+    },
+    {
       "program_key": "se-louisiana",
       "program_name": "SE Louisiana",
       "display_name": "Southeastern Louisiana",
@@ -6803,7 +6803,7 @@
       "state": "CA",
       "primary_hex": "#8C1515",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1913-1914",
       "conference_regular_season_championships": 11,
       "conference_tournament_championships": 1,
       "ncaa_tournament_appearances": 17,
@@ -6812,7 +6812,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1942,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"

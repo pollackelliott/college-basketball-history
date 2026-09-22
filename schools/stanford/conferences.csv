@@ -1,0 +1,8 @@
+index,source_program_key,start_season,end_season,conference_key,conference_name,membership_type,ongoing,basis,notes
+0,stanford,1913-1914,1917-1918,independent,Independent,FULL,No,Stanford program inception predates its 1918 Pacific Coast Conference entry.,
+1,stanford,1918-1919,1958-1959,pacific-coast,Pacific Coast Conference,FULL,No,Stanford Athletics/Pac history: Stanford joined the Pacific Coast Conference in 1918; PCC dissolved after 1958-59.,
+2,stanford,1959-1960,1967-1968,aawu,Athletic Association of Western Universities,FULL,No,AAWU formed in 1959 with Stanford as an original member.,
+3,stanford,1968-1969,1977-1978,pac-8,Pacific-8 Conference,FULL,No,AAWU adopted the Pacific-8 name for 1968-69; Stanford season records use Pac-8.,
+4,stanford,1978-1979,2010-2011,pac-10,Pacific-10 Conference,FULL,No,Conference expanded/named Pacific-10 beginning 1978-79; Stanford season records use Pac-10.,
+5,stanford,2011-2012,2023-2024,pac-12,Pac-12,FULL,No,Pac-12 naming era begins 2011-12; 2023-24 was Stanford's final Pac-12 season.,
+6,stanford,2024-2025,2025-2026,acc,ACC,FULL,Yes,Stanford accepted ACC membership beginning August 2024; 2024-25 was its inaugural ACC basketball season.,
