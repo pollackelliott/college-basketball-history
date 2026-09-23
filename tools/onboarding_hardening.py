@@ -5,7 +5,10 @@ The sealed-plan authority remains ``tools/onboard_school.py``. This companion mo
 repeatable work earlier and makes it executable:
 
 - ``research-check``: accept/reject a six-file portfolio before RESEARCH_FROZEN;
-- ``fill-review``: expand one compact Gate 1 decision map into review.csv;
+- ``freeze-drift``: verify that substantive historical meaning still matches
+  INTEGRATION_FROZEN before Gate 1;
+- ``fill-review``: expand one compact Gate 1 decision map, including optional
+  owner-reviewed source/canonical patch payloads, into review.csv;
 - ``carry-forward``: reuse prior owner decisions only when the decision universe is
   substantively identical after a purely technical repair;
 - ``rehearse-review``: run the complete disposable transaction and automated gate
@@ -28,7 +31,18 @@ from pathlib import Path
 from typing import Any
 
 import onboard_school
-from onboarding_plan import REQUIRED_PACKAGE_FILES, WorkflowError, approve_plan
+from integration_freeze_guard import (
+    assert_no_unapproved_semantic_drift,
+    print_semantic_drift_report,
+    semantic_drift_report,
+)
+from onboarding_plan import (
+    CANONICAL_PATCH_FIELDS,
+    REQUIRED_PACKAGE_FILES,
+    SOURCE_PATCH_FIELDS,
+    WorkflowError,
+    approve_plan,
+)
 from site_completeness import source_site_completeness_report
 
 
@@ -443,10 +457,35 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     explicit = decision_map.get("decisions", {})
     bases = decision_map.get("basis_by_decision", {})
     defaults = decision_map.get("defaults", {})
-    if not all(isinstance(value, dict) for value in (identities, explicit, bases, defaults)):
+    canonical_patches = decision_map.get("canonical_patch_by_decision", {})
+    source_patches = decision_map.get("source_patch_by_decision", {})
+    notes_by_decision = decision_map.get("notes_by_decision", {})
+    objects = (
+        identities,
+        explicit,
+        bases,
+        defaults,
+        canonical_patches,
+        source_patches,
+        notes_by_decision,
+    )
+    if not all(isinstance(value, dict) for value in objects):
         raise WorkflowError(
-            "identity, decisions, basis_by_decision, and defaults must be JSON objects"
+            "identity, decisions, basis_by_decision, defaults, patch maps, and "
+            "notes_by_decision must be JSON objects"
         )
+
+    known_decision_ids = {row.get("decision_id", "") for row in rows}
+    for label, mapping in (
+        ("canonical_patch_by_decision", canonical_patches),
+        ("source_patch_by_decision", source_patches),
+        ("notes_by_decision", notes_by_decision),
+    ):
+        unknown = sorted(set(mapping) - known_decision_ids)
+        if unknown:
+            raise WorkflowError(
+                f"{label} contains unknown decision IDs: {unknown[:10]}"
+            )
 
     default_discrepancy = str(defaults.get("discrepancy", "")).strip()
     default_selected_conditional = str(
@@ -542,6 +581,48 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
             raise WorkflowError(
                 f"blank resolution_basis remains for {row['decision_id']}"
             )
+
+        did = row["decision_id"]
+        category = row.get("category", "").strip()
+        if did in canonical_patches or did in source_patches:
+            if category not in {"discrepancy", "conditional_discrepancy"}:
+                raise WorkflowError(
+                    f"{did}: historical patches are only valid on discrepancy decisions"
+                )
+
+        if did in canonical_patches:
+            patch = canonical_patches[did]
+            if not isinstance(patch, dict):
+                raise WorkflowError(f"{did}: canonical patch must be a JSON object")
+            unknown_fields = sorted(set(patch) - CANONICAL_PATCH_FIELDS)
+            if unknown_fields:
+                raise WorkflowError(
+                    f"{did}: forbidden canonical patch fields: "
+                    + ", ".join(unknown_fields)
+                )
+            row["canonical_patch_json"] = json.dumps(
+                patch, ensure_ascii=False, sort_keys=True
+            )
+
+        if did in source_patches:
+            patch = source_patches[did]
+            if not isinstance(patch, dict):
+                raise WorkflowError(f"{did}: source patch must be a JSON object")
+            unknown_fields = sorted(set(patch) - SOURCE_PATCH_FIELDS)
+            if unknown_fields:
+                raise WorkflowError(
+                    f"{did}: forbidden source patch fields: "
+                    + ", ".join(unknown_fields)
+                )
+            row["source_patch_json"] = json.dumps(
+                patch, ensure_ascii=False, sort_keys=True
+            )
+
+        if did in notes_by_decision:
+            note = notes_by_decision[did]
+            if not isinstance(note, str):
+                raise WorkflowError(f"{did}: notes_by_decision value must be a string")
+            row["notes"] = note
 
     _write_review(review_path, fieldnames, rows)
     return Counter(row["decision"] for row in rows)
@@ -698,6 +779,7 @@ def rehearse_review(
     """Run the exact disposable apply transaction before cryptographic sealing."""
 
     onboard_school.ensure_package_checkpoint(repo)
+    assert_no_unapproved_semantic_drift(repo, school_key)
     approved, approved_hash = approve_plan(
         repo,
         plan_path,
@@ -749,6 +831,16 @@ def parse_args() -> argparse.Namespace:
     research.add_argument("school_key")
     research.add_argument("package", type=Path)
     research.add_argument("--expected-sha256", default="")
+
+    drift = sub.add_parser(
+        "freeze-drift",
+        help=(
+            "Compare tracked source-game historical meaning with the "
+            "INTEGRATION_FROZEN baseline."
+        ),
+    )
+    drift.add_argument("school_key")
+    drift.add_argument("--repo", type=Path, default=None)
 
     fill = sub.add_parser(
         "fill-review",
@@ -812,6 +904,12 @@ def main() -> int:
             return 0 if report["status"] == "PASS" else 1
 
         repo = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
+
+        if args.command == "freeze-drift":
+            report = semantic_drift_report(repo, args.school_key)
+            print_semantic_drift_report(report)
+            return 0 if report["status"] == "PASS" else 1
+
         output_dir = repo / ".onboarding" / args.school_key
         review_path = (
             args.review_file.resolve()

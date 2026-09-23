@@ -11,6 +11,7 @@ Read these process documents together before onboarding work:
 - `docs/school-onboarding-fast-path.md`
 - `docs/onboarding-process-hardening.md`
 - `docs/implementation-efficiency-recovery.md`
+- `docs/implementation-gate1-authority-boundary.md`
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
@@ -130,17 +131,26 @@ validation; unrelated shared-row changes are a STOP.
    `INTEGRATION_FROZEN` or beginning tracked Phase 0; do not reopen unrelated historical
    research merely to add this checkpoint.
 4. Run `python tools/onboard_school.py <school_key> --preflight` from the clean Phase 0
-   checkpoint.
+   checkpoint. Preflight must pass the Integration Freeze semantic-drift guard. After the
+   first blocker-free preflight, decision count is informational, not a target to reduce.
+   Perform one comprehensive deterministic representation/identity sweep and at most one
+   coherent repair batch; do not create a second Research/adjudication cycle by rewriting
+   frozen dates, scores, overtime, H/A/N, venue/location meaning, game type, postseason
+   round, result, or literal source evidence.
 5. Present every owner-relevant decision as one consolidated Gate 1 batch. Every
    game-specific review item must show its date. If date is disputed, show the source
-   date and canonical date separately; never collapse them into one date.
+   date and canonical date separately; never collapse them into one date. Supported
+   historical corrections discovered during Implementation remain in this packet rather
+   than being pre-applied.
 6. Obtain one explicit owner decision and evidence basis for every pending row. Before
    presenting the batch, research each row and provide a recommended disposition; the
    owner may approve routine recommendations in bulk.
 7. Encode the approved batch with
    `python tools/onboarding_hardening.py fill-review ...` rather than a school-specific
    CSV-editing script. Let the tool expand selected versus rejected conditional identity
-   rows.
+   rows. When Gate 1 authorizes a newly discovered historical correction, encode it with
+   `source_patch_by_decision` / `canonical_patch_by_decision` rather than editing the
+   frozen source package first.
 8. Before cryptographically sealing Gate 1, run
    `python tools/onboarding_hardening.py rehearse-review <school_key>`. This disposable
    pre-seal rehearsal must pass ingestion, reconciliation, publication metadata,
@@ -210,6 +220,13 @@ unresolved discrepancies.
   Preview deployment as Production.
 - Flag any onboarding path that seals Gate 1 before the filled review has passed the
   disposable pre-seal technical rehearsal.
+- Flag any pre-Gate Implementation workflow that changes frozen historical meaning after
+  `INTEGRATION_FROZEN` merely because new evidence was found. Date, score, result,
+  overtime, H/A/N, venue/location meaning, game type, postseason round, source evidence,
+  and similar historical corrections belong in Gate 1 patch/reconciliation authority.
+  Representation-only current-main key/display/shared-reference rebase remains valid.
+  Decision-count reduction is never sufficient justification for a substantive package
+  mutation.
 - Flag any research-freeze path that allows material site gaps to remain silent, treats
   a mechanical `research-check` pass as sufficient without the required adversarial
   self-challenge, allows large residual HOME/H-A-N/date debt to survive without the

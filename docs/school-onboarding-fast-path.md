@@ -14,14 +14,17 @@ preserved in `onboarding-process-efficiency.md`. Treat that document as a requir
 companion when deciding how much technical work to batch, what to ask the owner to
 review, and when a failure should or should not reopen historical decisions.
 
-Two additional operating companions are now required:
+Three additional operating companions are now required:
 
 - `codespace-terminal-safety.md` — prevents shell-driving failures such as RVM
   nounset crashes, accidental interactive-shell exits, expected-negative probes
   under `set -e`, and repository-root helper clutter;
 - `parallel-portfolio-pipeline.md` — defines the optional high-major “five in the
   holster” model: parallel source/portfolio research with strictly serialized
-  current-main integration.
+  current-main integration;
+- `implementation-gate1-authority-boundary.md` — defines the post-Research boundary
+  between deterministic integration representation and historical meaning that must
+  remain owner-visible at Gate 1.
 
 ## Why this replaced the serial procedure
 
@@ -184,11 +187,25 @@ accomplishments, and publication; collapse same-season candidate identities usin
 available date/score/result/site context; and research only the rows where added
 evidence can materially change the disposition.
 
-Before asking the owner to adjudicate a row, correct any demonstrable package
-normalization defect that created the row in the first place. Examples include a
-malformed opponent token mapped to the wrong institution or a shared venue/display
-identity collision. Regenerate preflight after the narrow package fix rather than
-asking the owner to rule on an extraction error.
+Before asking the owner to adjudicate a row, correct demonstrable **representation**
+defects that created the row in the first place. Examples include an unambiguous stale
+current-program key, current display-name drift, exact reciprocal assertion pairing,
+or a shared venue/display identity collision.
+
+Do **not** reinterpret this authority as permission to rewrite frozen historical
+meaning. A newly supported change to date, score, overtime, H/A/N, venue/location
+meaning, game type, postseason round, result, or preserved source evidence remains a
+Gate 1 recommendation even when the collaborator strongly prefers one answer.
+
+The governing test is:
+
+> **Can the correction be derived without choosing which competing historical assertion is true?**
+
+If yes, it may be deterministic integration cleanup. If no, investigate it, recommend
+it, and carry it through the review/patch machinery.
+
+After the first blocker-free preflight, decision count is informational—not a quality
+score. Do not repeatedly mutate the package merely to make the Gate 1 universe smaller.
 
 If a large report is clipped or awkward to paste, request only the smallest missing
 subset with a targeted extractor. Do not make the owner reproduce already available
@@ -201,6 +218,10 @@ In `review.csv`, fill only:
 - optional `canonical_patch_json`
 - optional `source_patch_json`
 - optional explanatory `notes`
+
+Historical corrections discovered during Implementation should normally be expressed
+through these patch fields rather than by editing the frozen package before Gate 1.
+The compact `fill-review` map supports per-decision source/canonical patch payloads.
 
 Allowed discrepancy dispositions are:
 
