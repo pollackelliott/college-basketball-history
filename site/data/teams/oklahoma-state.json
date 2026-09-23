@@ -5527,7 +5527,7 @@
       "opponent_key": "washington-state",
       "opponent_name": "Washington State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
@@ -64287,7 +64287,7 @@
       "opponent_key": "washington-state",
       "opponent_name": "Washington State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 81,
       "opponent_score": 29,
       "score_known": true,
@@ -70062,7 +70062,7 @@
       "opponent_key": "washington-state",
       "opponent_name": "Washington State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 64,
       "opponent_score": 74,
       "score_known": true,
