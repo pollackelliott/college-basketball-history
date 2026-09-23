@@ -18,7 +18,7 @@ Investigate those populations before declaring `RESEARCH_FROZEN`, not after.
 
 ## 1. General rule
 
-The self-challenge is a bounded final research audit, not an invitation to restart the school from scratch.
+The self-challenge is a bounded final research audit, not an invitation to restart the school from scratch. Residual populations enter this stage as accepted researched debt from completed earlier stages; Stage 6 must identify a concrete contradiction, deficiency, or systematic opportunity before reopening any portion of them.
 
 It should target the largest or most suspicious residual debt classes, especially:
 
@@ -36,7 +36,10 @@ Unsupported certainty remains worse than a researched unknown.
 
 ### Terminal researched debt
 
-The self-challenge has a stopping rule. For a meaningful residual population, challenge the population as a class and inspect obvious authoritative/institutional/reciprocal evidence classes plus any specific systematic high-yield recovery opportunity. Repair supported defects in bounded batches.
+The self-challenge has a stopping rule. For a meaningful residual population, challenge
+the population as a class and inspect obvious authoritative/institutional/reciprocal
+evidence plus any **specific** systematic high-yield recovery opportunity. Repair supported
+defects in batch and isolate genuine contradictions narrowly.
 
 When the surviving population is:
 
@@ -46,9 +49,13 @@ When the surviving population is:
 - free of a known material publication blocker; and
 - no further comparable systematic/high-yield evidence class is identified,
 
-it may be classified as **terminal researched historical debt**. Do not then launch independent row-by-row searches merely to drive the unknown count toward zero.
+it remains **terminal researched historical debt**. Do not then launch independent
+row-by-row searches merely to drive the unknown count toward zero.
 
-A new systematic evidence class or genuine contradiction may reopen the affected population. The mere fact that residual rows remain does not.
+A new systematic evidence class or genuine contradiction may reopen the affected
+population. The mere fact that residual rows remain does not. After one systematic
+opportunity is exhausted, surviving rows revert immediately to terminal debt unless
+another comparably concrete opportunity has already been identified.
 
 ## 2. HOME venue self-challenge
 
@@ -104,7 +111,7 @@ When meaningful exact-date debt remains, the lane must report:
 
 Recover only uniquely or sufficiently supported dates. Field-specific evidence may be used field-specifically: a reciprocal source can support a date without silently replacing a conflicting played score or other source fact.
 
-For a large residual, first ask whether a **specific systematic source class** can materially reduce the population (for example, current-main published reciprocal packages or an authoritative opponent archive covering a concentrated series). Pursue such opportunities proportionately. If those opportunities are exhausted and the remainder is early/historical, explicitly accounted, and otherwise release-safe, serialize it as terminal exact-date debt rather than performing one independent search per remaining game.
+For a large residual, first ask whether a **specific systematic source class** can materially reduce the population (for example, current-main published reciprocal packages or an authoritative opponent archive covering a concentrated series). Pursue each concentrated opportunity as one institutional/source-family challenge rather than as many independent game searches. If it does not materially resolve the population, preserve its survivors as terminal debt and move on. Once the comparable systematic opportunities are exhausted and the remainder is early/historical, explicitly accounted, and otherwise release-safe, serialize it as terminal exact-date debt rather than performing one independent search per remaining game.
 
 ## 5. Venue physical-identity self-challenge
 
@@ -250,7 +257,7 @@ The self-challenge belongs to the Research lane and should not create another ro
 
 Once the owner has authorized research, perform the self-challenge autonomously within the bounded Stage 6 authorization. Contact the owner only if it exposes a genuine owner-level historical judgment or materially contradicts an owner-supplied assumption.
 
-Under the bounded-stage protocol, a completed Stage 6 still stops before Stage 7. Within Stage 6 itself, however, the owner should not need to approve each repair batch or terminal-debt decision. A healthy Stage 6 should normally require only `Proceed` to resume an incomplete durable checkpoint, not continuous research steering.
+Under the bounded-stage protocol, a completed Stage 6 still stops before Stage 7. Within Stage 6 itself, however, the owner should not need to approve each repair batch or terminal-debt decision. Routine recoveries from the same class-level challenge should be batched before a durability checkpoint; do not return after one or two ordinary repairs merely because they were individually interesting. A healthy Stage 6 should require minimal owner steering.
 
 ## 12. Relationship to Implementation
 
