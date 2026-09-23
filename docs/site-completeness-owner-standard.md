@@ -11,7 +11,7 @@ Every in-scope home game for a published program should have:
 - a canonical venue identity; and
 - complete canonical city/state geography.
 
-This is a publication requirement, not merely a research-accounting requirement. A broad historical hole such as an entire pre-arena era is incomplete research, not an acceptable permanent unknown.
+This is a publication requirement, not merely a research-accounting requirement. A broad **unexplored** historical hole such as an untouched pre-arena era is incomplete research. A homogeneous ancient residual may use the dedicated unresolved-building exception only after the reasonable systematic facility/institutional/reciprocal paths have been exhausted and complete HOME geography is established.
 
 There is one narrow exception: when exhaustive historical research establishes the HOME classification and city/state but the surviving record does not support a specific physical venue identity, the venue may remain blank under the dedicated `RESEARCHED_UNRESOLVED_HOME_VENUE` policy. This exception may waive only the venue field; HOME city/state remain mandatory. It must be machine-visible, supported by a substantive research basis, survive reciprocal-evidence review, and remain explicitly visible in canonical/public reporting rather than being treated as ordinary completeness. The safety valve is especially relevant to genuinely difficult games from the 1930s or earlier, but that era is not an automatic waiver.
 
@@ -20,6 +20,8 @@ The detailed requirements are in `docs/home-venue-research-unresolved-policy.md`
 `RESEARCHED_PARTIAL` and ordinary `RESEARCHED_UNRESOLVED` never waive a published program's own home-site requirement.
 
 Research lanes must therefore build and use the program's home-venue chronology, including predecessor facilities, arena transitions, alternate home sites, temporary sites, and known one-off home venues before invoking the historical-unrecoverable exception.
+
+Where authoritative evidence establishes a normal home venue or normal source-program home geography for a defined era, Research should use a **default-plus-exceptions** model: apply that supported fact across the exact covered HOME population and isolate affirmative alternate/off-campus/special-site exceptions. Do not re-prove the same modern home venue game by game. Propagating supported HOME city/state across already-established HOME rows is not H/A/N inference.
 
 ### 2. Published-team away games
 
