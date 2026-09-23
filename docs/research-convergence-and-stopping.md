@@ -88,6 +88,14 @@ obvious opponent institutional evidence, then at most one specific high-yield au
 fallback family when justified. Generic search is only a locator for those source families.
 Once those paths are exhausted, converge rather than opening unrelated domains.
 
+Stage 3A-3 requires the same fanout discipline plus **tier discipline**. Neutral research
+must stay within one coherent tier/research mode per substantial turn: modern recurring,
+modern one-offs, historical recurring, or historical one-offs. Recurring families should
+reuse event/host/participant source families across multiple rows; one-offs should use a
+small authoritative hierarchy. Once the bounded event/host/participant/fallback paths are
+exhausted, write through supported recoveries and converge the surviving historical debt
+rather than starting an exact-source tail chase.
+
 For old H/A/N and historical neutral residuals, once the obvious systematic/high-yield
 paths have been exhausted, population-level terminalization is valid. The project does
 not require every surviving ancient opponent family or one-off game to receive bespoke
