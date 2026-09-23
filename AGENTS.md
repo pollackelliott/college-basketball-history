@@ -18,6 +18,7 @@ Read these process documents together before onboarding work:
 - `docs/stage3a-regular-season-site-research.md`
 - `docs/stage3a0-local-only-contract.md`
 - `docs/stage3a1-source-fanout-contract.md`
+- `docs/stage3a3-neutral-tranche-contract.md`
 - `docs/research-freeze-self-challenge.md`
 - `docs/research-convergence-and-stopping.md`
 - `docs/shared-reference-authority.md`
@@ -59,6 +60,8 @@ reuse, the required Stage 3A-0 through Stage 3A-4 architecture, and the mandator
 row-level Stage 3A state. `docs/stage3a0-local-only-contract.md` is controlling for
 Stage 3A-0 execution scope. `docs/stage3a1-source-fanout-contract.md` is controlling
 for Stage 3A-1 source hierarchy, fanout, and convergence.
+`docs/stage3a3-neutral-tranche-contract.md` is controlling for Stage 3A-3 tier
+boundaries, tranche sizing, source fanout, and neutral-venue convergence.
 
 Stage 3A substages are owner-facing boundaries; evidence classes inside 3A-1 through 3A-3
 are not automatically owner-facing boundaries. Use the **largest safely completable
@@ -96,9 +99,14 @@ exhausted, but complete supported city/state must be written through before 3A-2
 systematically established source-program HOME geography may be propagated across
 already-established HOME rows when no accepted evidence indicates an alternate location.
 3A-3 should proceed in the default order: accepted evidence, modern recurring families,
-modern one-offs, historical recurring families, historical one-offs. Recurring families
-should be resolved at family/event level where supported; historical one-off residuals
-should converge at population level rather than become bespoke archaeology projects.
+modern one-offs, historical recurring families, historical one-offs. A Stage 3A-3 turn
+must stay within one coherent neutral-research tier and one coherent research mode after
+substantial research begins; do not roll from modern recurring to modern one-offs to
+historical work in one continuous turn. Recurring families should be resolved at
+family/event level where supported, using a small hierarchy of project evidence,
+event/host sources, participant institutional sources, and at most one specific
+authoritative fallback family. Historical one-off residuals should converge at population
+level rather than become bespoke archaeology projects.
 
 Regular-season `OPPONENT_HOME` exact-building reconstruction remains outside active
 source-school research unless usable accepted venue evidence is already present. The
@@ -265,8 +273,12 @@ unresolved discrepancies.
   project-evidence join; lets Stage 3A-1 turn a bounded row queue into unbounded source
   discovery, opens many unrelated domains for individual rows, substitutes Reddit/forums/
   mirrors/aggregators for the required institutional hierarchy, or continues searching
-  after the obvious authoritative source paths are exhausted instead of converging;
-  works more than 25 independently researched/adjudicated rows in one turn; repeatedly
+  after the obvious authoritative source paths are exhausted instead of converging; lets
+  Stage 3A-3 cross multiple neutral-research tiers in one long turn, opens many unrelated
+  source families for one event/row, turns recurring families into game-by-game hunting,
+  or continues "locating exact sources for missing patches" after the bounded
+  event/host/participant/fallback hierarchy is exhausted; works more than 25 independently
+  researched/adjudicated rows in one turn; repeatedly
   checkpoints tiny 3–8 row/family units when a larger homogeneous tranche is safely
   completable; attempts an open-ended sweep across a large heterogeneous residual;
   combines substantial Stage 3A historical research with Stage 3A-4 mechanical closeout;
