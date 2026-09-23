@@ -61,7 +61,7 @@ Stage 3A-0 should normally be completed as one structured local pass:
 2. mechanically partition regular season versus postseason;
 3. derive the row-level H/A/N census;
 4. derive HOME / OPPONENT_HOME / NEUTRAL / UNKNOWN work queues;
-5. split NEUTRAL into 1984-85+ and pre-1984-85 populations;
+5. split NEUTRAL into 1996-97+ and 1995-96-and-earlier populations;
 6. perform a structured exact-game join against already-present local project evidence;
 7. write through only unambiguous accepted same-game evidence;
 8. serialize unmatched rows and contradictions without researching them;
