@@ -3,7 +3,7 @@
 - **Status:** Controlling Research-lane turn-execution protocol
 - **Applies to:** new school Research lanes and recovery of unfinished Research lanes
 - **Does not replace:** historical/data-quality policy, six-file schema, site-completeness policy, opponent-identity policy, NON_D1 owner sanity scan, or research-freeze self-challenge
-- **Pilot basis:** empirically validated during Kansas State research, September 2026; durability/stopping rules hardened after the DePaul postmortem
+- **Pilot basis:** empirically validated during Kansas State research, September 2026; durability/stopping rules hardened after the DePaul postmortem; execution/convergence revised after the Oregon State retrospective
 
 ## 1. Purpose
 
@@ -11,9 +11,11 @@ Research quality standards are unchanged. This protocol changes **how autonomous
 
 The governing rule is:
 
-> **One bounded research objective per turn. A completed stage boundary is an intentional execution handoff. Do not automatically begin the next stage.**
+> **Use the largest safely completable bounded execution unit: high historical standards, systematic evidence reuse, aggressive proportional convergence, and durable write-through before execution risk becomes material.**
 
-The owner should not need to manage the research itself. Most stage transitions require only a short `Proceed` response. That response authorizes the next bounded unit of execution; it is not an owner adjudication of historical facts.
+A completed major stage or required Stage 3A substage boundary is an intentional owner-facing handoff. Evidence classes are research units, not automatically owner-facing stop boundaries. Several small families or classes that use the same research mode should normally be bundled into one meaningful tranche when they can be completed safely.
+
+The owner should not need to manage the research itself. Most major stage/substage transitions require only a short `Proceed` response. Within an authorized stage/substage, routine evidence-class transitions should be handled autonomously unless a genuine owner judgment, a durability boundary, or a materially different research mode requires a stop.
 
 ## 2. Authority and startup
 
@@ -69,26 +71,38 @@ A stage that unexpectedly becomes large may stop before completion. Preserve the
 
 An incomplete checkpoint is preferable to unsupported certainty, lost work, or a silent/overlong execution failure.
 
-### 3.5 Workload-bounded execution safety valve
+### 3.5 Workload-bounded execution and anti-microbatching
 
-Evidence classes remain the intellectual unit of research, but **execution transactions must be smaller than the conceptual research class when the class requires many independent judgments**.
+Evidence classes remain the intellectual unit of research, but an evidence class is **not automatically a turn boundary**. The execution unit should be the largest safely completable tranche that uses a coherent research mode and can be durably written through before context/execution risk becomes material.
 
-Use the source structure—not elapsed wall-clock time—to decide whether a class can safely run in one turn:
+Use the workload shape—not elapsed wall-clock time—to size the turn:
 
-- **Systematic/mechanical class:** when one authoritative source, one event table, one facility chronology, one reciprocal package, or one deterministic rule can resolve a coherent population without separate external adjudication for each row, the full class may be processed in one turn even when it contains more than 25 rows.
-- **Independent row-by-row class:** when resolution requires separate external searching, source comparison, or historical adjudication for individual games, a single turn may adjudicate **no more than 25 rows**. After the 25th independently researched row—or earlier if execution risk is evident—stop researching, write accepted findings through, serialize the exact remaining queue for that same class, verify/hash the checkpoint when feasible, and return an incomplete durable checkpoint.
+- **Systematic/mechanical work:** when one authoritative source structure, event history, facility chronology, reciprocal package family, or deterministic rule can resolve many rows, process the supported population in bulk. Multiple small families that use the same research method should normally be bundled rather than checkpointed one family at a time.
+- **Independent row-by-row work:** when resolution requires separate external searching, source comparison, or historical adjudication for individual games, a single turn may adjudicate **no more than 25 rows**.
+- **Batching floor in practice:** when a homogeneous independent-row residual contains 25 or fewer rows and no special blocker is present, normally process the whole residual in one turn. Do not manufacture 3–8 row owner handoffs merely because each tiny subset could be described as its own evidence class.
+- **Heterogeneous large residuals:** do not interpret "systematic" so broadly that one turn becomes an open-ended campaign across dozens of unrelated families or research modes. Bundle related families; do not attempt the entire heterogeneous residual merely because all rows belong to the same Stage 3A bucket.
 
-The 25-row limit is an **execution cap, not a research stopping rule**. It does not redefine the evidence class, waive unresolved rows, or authorize shallow research. The next `Proceed` resumes the same class from the durable residual queue.
+The 25-row limit is an **execution cap for independent adjudications, not a research stopping rule**. It does not cap mechanical/systematic application and does not waive unresolved rows.
 
-Do not rely on the model to notice elapsed time and self-interrupt. The durable boundary is defined by the workload shape above. The failure pattern to avoid is `large residual -> many independent lookups -> serialization last -> lost response`.
+After a meaningful tranche, write accepted findings through into the cumulative row-level state. Checkpoint when the tranche completes, a genuine contradiction/blocker requires isolation, or execution risk becomes material. A checkpoint exists for durability; it is not a requirement to return to the owner after every small family.
 
-For Stage 3A specifically, substantial historical research and final mechanical closeout are separate bounded assignments. Do not finish a large research pass and then continue directly into full-ledger regeneration, census, QA, packaging, and hashing unless the active assignment is already the dedicated mechanical closeout substage.
+Do not rely on the model to notice elapsed wall-clock time and self-interrupt. Avoid both failure patterns: `large heterogeneous residual -> unbounded discovery -> serialization last -> lost response` and `tiny family -> checkpoint -> owner Proceed -> repeat`.
+
+For Stage 3A specifically, substantial historical research and Stage 3A-4 final mechanical closeout remain separate bounded assignments.
 
 ### 3.6 Owner questions remain exceptional
 
 A stage boundary is not an owner historical gate. Contact the owner for substantive judgment only when existing repository policy requires it or a genuine historical ambiguity/contradiction requires owner disposition.
 
-The formal NON_D1 sanity scan remains a required owner checkpoint. Other ordinary stage transitions are execution authorization only.
+The formal NON_D1 sanity scan remains a required owner checkpoint. Other ordinary major stage/substage transitions are execution authorization only. Do not turn ordinary evidence-class completion into repeated owner interaction.
+
+### 3.7 Planned fresh-chat rollover is normal hygiene
+
+A Research lane may span one or a small number of chats. A replacement chat is not only emergency recovery.
+
+When a long school has accumulated substantial durable history—especially after a large Stage 3A substage or before Stage 6—it is acceptable to start a fresh chat from the latest verified portable checkpoint rather than wait for the conversation to hit its context ceiling.
+
+The controlling continuity model is the durable checkpoint, not one uninterrupted conversation. A planned rollover must preserve the exact stage/substage state and must not reopen completed work.
 
 ## 4. Required turn-ending contract
 
@@ -201,10 +215,13 @@ canonical/shared reuse, stopping, the substage architecture below, and the manda
 final row-level Stage 3A state.
 
 Stage 3A is **not one monolithic execution unit**. It is divided into five required
-substage boundaries. Each substage is a real stop boundary for chat execution.
+substage boundaries. Each substage is a real owner-facing stop boundary.
 
-A plain owner `Proceed` after a Stage 3A boundary authorizes only the exact next
-substage or evidence-class continuation identified in the prior response.
+Within Stages 3A-1 through 3A-3, evidence classes guide research but are **not** mandatory
+owner-facing stop boundaries. Bundle multiple small classes that use the same research
+mode into a meaningful tranche when safe. A plain owner `Proceed` after a required
+Stage 3A substage boundary authorizes the exact next substage; after a durability
+checkpoint it authorizes the serialized unfinished tranche.
 
 ### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
 
@@ -239,48 +256,63 @@ STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 
 Resolve the regular-season H/A/N residual before broad venue research.
 
-First partition the unresolved H/A/N population into coherent evidence classes. Work
-**one evidence class per turn**.
+First partition the unresolved H/A/N population into coherent evidence classes. Then work
+the **largest safely completable bundle of related classes** that use the same research
+mode.
 
-- A systematic class supported by one source structure may be resolved in full.
-- If a class requires independent row-by-row external research/adjudication, apply the
-  §3.5 cap of at most 25 independently researched rows in that turn.
-- Write accepted H/A/N findings through into the cumulative authoritative working ledger
-  before stopping.
+- A systematic source family may resolve a large population in one turn.
+- Multiple small opponent/source families should normally be bundled rather than returned
+  to the owner one by one.
+- If work requires independent row-by-row external research/adjudication, apply the §3.5
+  maximum of 25 independent adjudications; when a homogeneous residual is already 25 or
+  fewer rows, normally process it as one tranche.
+- Write accepted H/A/N findings through before the durability boundary.
 - Preserve contradictions or genuine researched unknowns explicitly; never infer H/A/N
   from geography.
-- Do not start HOME or NEUTRAL venue research merely because the H/A/N class finished
-  early in the turn.
+- Do not start HOME or NEUTRAL venue research merely because H/A/N finishes early in the
+  same turn.
 
-If the H/A/N substage remains incomplete after one evidence class or one capped
-row-by-row tranche, return:
+**Ancient/historical convergence:** after the whole-population/project-evidence pass and
+the obvious systematic institutional/reciprocal/source-family opportunities have been
+exhausted, a homogeneous old historical/non-D1 residual may be closed at the population
+level as terminal `RESEARCHED_UNRESOLVED` H/A/N debt. Do not require every surviving
+opponent family or every ancient row to prove independently that no deeper archive exists.
 
-```text
-STAGE 3A-1: INCOMPLETE — DURABLE CHECKPOINT PRESERVED
-Next bounded assignment: Stage 3A-1 — <exact remaining evidence class/tranche>
-STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
-```
-
-When H/A/N is fully researched/accounted, stop with `STAGE 3A-1: COMPLETE`.
+Return an incomplete checkpoint only after a meaningful tranche or when execution risk,
+a genuine contradiction, or a materially different research mode requires a stop. When
+H/A/N is fully researched/accounted, stop with `STAGE 3A-1: COMPLETE`.
 
 ### Stage 3A-2 — HOME venue research
 
 Only after Stage 3A-1 completes, research source-program HOME physical venues.
 
-- Establish the home-facility chronology from authoritative evidence.
-- Work one coherent HOME evidence class per turn: a facility era, transition/temporary
-  home class, off-campus class, or finite one-off residual.
-- A chronology or one systematic source may resolve a large class mechanically, but
-  explicit game-level evidence overrides chronology.
-- If separate row-level external adjudications are required, apply the §3.5 maximum of
-  25 independently researched rows in that turn.
-- Write accepted venue/location/provenance findings through before stopping.
-- Use the dedicated `RESEARCHED_UNRESOLVED_HOME_VENUE` exception only under its
-  controlling evidence standard.
-- Ordinary OPPONENT_HOME building blanks are not an active HOME research queue.
+Use a **facility chronology + default/exception model**:
 
-Stop after each evidence class/tranche. When all HOME obligations are researched/accounted,
-stop with `STAGE 3A-2: COMPLETE`.
+- establish the program's authoritative home-facility chronology and season-level home
+  evidence;
+- when a normal home venue is systematically established for a season/era and there is
+  no evidence of an alternate site, apply that supported venue across the exact covered
+  HOME population rather than re-proving the building through individual box scores;
+- use count mismatches, explicit source text, alternate-site markers, temporary/off-campus
+  evidence, or contradictions to isolate exception rows for exact-game research;
+- explicit game-level evidence always overrides the systematic default;
+- bundle related facility eras/classes that use the same research mode when safe;
+- if separate row-level adjudications are required, apply the §3.5 maximum of 25;
+- write accepted venue/location/provenance findings through before the durability boundary.
+
+For ancient HOME residuals, after the reasonable institutional/facility/reciprocal and
+other obvious systematic paths are exhausted, close the homogeneous residual under
+`RESEARCHED_UNRESOLVED_HOME_VENUE` rather than creating one archaeology project per
+game. **Before Stage 3A-2 may complete, every such row must also have supported city/state
+geography written through.** Systematically established source-program home geography may
+be propagated across already-established HOME rows when no accepted evidence indicates an
+alternate/off-campus location; this is geography propagation, not H/A/N inference.
+Isolate exceptions rather than forcing the default.
+
+Ordinary OPPONENT_HOME building blanks are not an active HOME research queue.
+
+When all HOME obligations and HOME geography are researched/accounted, stop with
+`STAGE 3A-2: COMPLETE`.
 
 ### Stage 3A-3 — NEUTRAL venue research
 
@@ -288,23 +320,41 @@ Only after Stage 3A-2 completes, research remaining regular-season NEUTRAL physi
 venues.
 
 The Stage 3A-0 exact-game harvest remains controlling project evidence and must not be
-repeated wholesale unless a specific contradiction or newly changed project state makes
-a narrow recheck necessary.
+repeated wholesale unless a specific contradiction or changed project state makes a
+narrow recheck necessary.
 
-Work **one coherent NEUTRAL evidence class per turn**, such as a recurring tournament,
-event/site family, reciprocal institutional series, modern source family, or finite
-one-off residual.
+Use this default execution order:
 
-- For 1984-85 through present, apply the strong exact-venue expectation.
-- For pre-1984-85 rows, research seriously but proportionately under the historical
-  stopping standard.
-- A systematic source may resolve a large class in one turn.
-- If separate row-level external adjudications are required, apply the §3.5 maximum of
-  25 independently researched rows in that turn.
-- Write accepted venue/location/provenance findings through before stopping.
+1. **mechanical accepted-evidence application** already present in the durable state;
+2. **1984-85+ recurring event/site families**, using event/host/tournament history and
+   default-plus-exceptions family evidence;
+3. **1984-85+ one-offs**, under the strong exact-venue standard;
+4. **pre-1984-85 recurring families**, bundled into related multi-family sweeps using the
+   same research mode;
+5. **pre-1984-85 one-offs**, with aggressive proportional convergence after the obvious
+   reasonable paths are exhausted.
 
-Stop after each evidence class/tranche. When all NEUTRAL obligations are
-researched/accounted, stop with `STAGE 3A-3: COMPLETE`.
+For recurring families, prove the event/site pattern once for the exact covered editions
+and apply it systematically; research only genuine exceptions or multi-venue editions
+individually. Do not re-prove the same venue game by game.
+
+For historical recurring work, bundle several related families rather than checkpointing
+after every two- or three-game event, but do not attempt an entire large heterogeneous
+residual in one open-ended sweep.
+
+For historical one-offs, when the systematic/high-yield paths have already removed the
+recoverable population, treat the surviving homogeneous residual as eligible for
+population-level terminal researched venue debt. Do not give every surviving old one-off
+its own newspaper/archive project merely to reduce the blank count.
+
+If independent adjudications are required, apply the §3.5 maximum of 25; when a homogeneous
+one-off residual is already at or below that ceiling, normally process the whole residual
+as one convergence tranche.
+
+Do not infer a venue from city, event custom, nearby editions, opponent home arena, or
+chronology alone. Write accepted venue/location/provenance findings through before the
+durability boundary. When all NEUTRAL obligations are researched/accounted, stop with
+`STAGE 3A-3: COMPLETE`.
 
 ### Stage 3A-4 — Mechanical closeout and QA
 
@@ -467,18 +517,20 @@ If a real defect is exposed, repair only the affected research fields, rerun aff
 
 ### Terminal-debt stopping rule
 
-Stage 6 is an adversarial audit, not a command to eliminate every permitted historical unknown.
+Stage 6 is an adversarial audit, not a command to eliminate every permitted historical unknown. **Residual populations enter Stage 6 as accepted researched debt from completed earlier stages, not as freshly reopened research queues.**
 
 For each meaningful residual class:
 
 1. challenge the population as a class;
-2. inspect obvious authoritative/institutional/reciprocal evidence classes and any specific systematic high-yield opportunity;
-3. repair supported defects in bounded batches;
-4. if the surviving population is homogeneous, explicitly researched/accounted, policy-permitted, and no further comparable systematic evidence class is identified, classify it as **terminal researched historical debt** and stop individual searching merely to reduce the count.
+2. identify a concrete contradiction, material deficiency, or specific systematic/high-yield opportunity that could materially change the class;
+3. repair supported defects in batch and isolate genuine contradictions narrowly;
+4. once that systematic opportunity is exhausted, return the surviving rows immediately to **terminal researched historical debt** unless another comparably concrete opportunity is already identified.
 
-Do not recursively treat every smaller remainder as a new mandate for exhaustive row-by-row research. Large residual counts are review triggers, not zero-unknown requirements.
+The burden is on the self-challenge to justify reopening a portion of the accepted debt. The mere existence of unresolved rows does not do so.
 
-A systematic opportunity may justify one proportionate batch even when many rows remain. Once that opportunity is exhausted, the lane should test Stage 6 acceptance rather than begin hundreds of independent searches.
+Do not recursively treat every smaller remainder as a new mandate for exhaustive row-by-row research. Do not stop for owner interaction after one or two ordinary repairs if the same systematic challenge can safely continue across the class. Large residual counts are review triggers, not zero-unknown requirements.
+
+For exact-date debt, pursue concentrated institutional/reciprocal opportunities (for example, a large opponent series) as class-level challenges; if the concentrated source does not materially resolve the population, terminalize the survivors rather than switching to newspaper archaeology.
 
 ### Completion standard
 

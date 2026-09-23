@@ -12,15 +12,15 @@ We are continuing my College Basketball History project.
 Repository:
 https://github.com/pollackelliott/college-basketball-history
 
-This chat is ONE INDEPENDENT RESEARCH LANE for one school. It is not the serialized repository-integration lane.
+This is ONE INDEPENDENT RESEARCH LANE for one school. It is not the serialized repository-integration lane. A long Research lane may span a small number of chats through verified durable checkpoints; one uninterrupted conversation is not required.
 
 Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
 
 Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
-Stage 3A has additional required substages (3A-0 through 3A-4) and evidence-class execution boundaries defined in the controlling repository documents. Treat those as real stop boundaries too; do not collapse Stage 3A into one large turn.
+Stage 3A has required substages (3A-0 through 3A-4). Treat those substages as real owner-facing stop boundaries. Evidence classes inside 3A-1 through 3A-3 are research units, not automatic owner-facing stops: bundle multiple small classes that use the same research mode into meaningful safe tranches.
 
-My Proceed/Continue response authorizes only the identified next bounded stage, Stage 3A substage/evidence-class assignment, or unfinished remainder—not all remaining research through RESEARCH_FROZEN.
+My Proceed/Continue response authorizes only the identified next bounded stage, Stage 3A substage, or unfinished serialized tranche—not all remaining research through RESEARCH_FROZEN.
 
 Preserve accepted prior stages unless later evidence produces a genuine contradiction. Durable artifacts outrank chat memory. A replacement chat should be able to attach the latest checkpoint, verify it, and continue without rediscovering completed work. Historical uncertainty remains valid; unsupported certainty is worse than a researched unknown.
 
@@ -43,9 +43,9 @@ After a clean completed stage, the owner normally needs to send only:
 Proceed.
 ```
 
-That means exactly what `docs/research-lane-bounded-execution.md` defines: execute the identified next bounded stage and stop again at its boundary. During Stage 3A, it means execute only the identified next substage or evidence-class continuation and stop at that boundary.
+That means exactly what `docs/research-lane-bounded-execution.md` defines: execute the identified next bounded stage and stop again at its required boundary. During Stage 3A, it means execute the identified next substage or serialized unfinished tranche; routine transitions among small evidence classes inside that substage should not require repeated owner relays.
 
-Do not require the owner to restate "Stage X only", a Stage 3A substage name, or re-copy stage instructions at ordinary boundaries. The bounded-execution protocol already defines plain `Proceed` as authorization for only the identified next bounded assignment. Longer continuation prompts are reserved for genuine recovery, contradiction, migration, or owner-disposition cases.
+Do not require the owner to restate "Stage X only", a Stage 3A substage name, or re-copy stage instructions at ordinary boundaries. The bounded-execution protocol already defines plain `Proceed` as authorization for the identified next bounded assignment. Longer continuation prompts are reserved for genuine recovery, contradiction, migration, or owner-disposition cases.
 
 After an incomplete stage:
 
@@ -66,13 +66,13 @@ Before acting, inspect current protected main and read current AGENTS.md plus do
 
 I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
 
-Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage. If that stage is Stage 3A, resume the exact incomplete Stage 3A substage/evidence class serialized by the checkpoint; do not broaden the assignment.
+Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage. If that stage is Stage 3A, resume the exact incomplete Stage 3A substage/tranche serialized by the checkpoint; do not reopen completed substages or broaden into another research mode.
 
 Do not restart completed stages. Do not perform open-ended archaeology for hidden/chat-local state. Do not reconstruct completed work from old prose merely because a prior chat said it existed. If the required residual queue is genuinely missing from the attached checkpoint, stop and identify the exact missing artifact/state before doing reconstruction.
 
 Any settled shared-reference proposal remains historically resolved but pending current-main Integration unless current-main evidence creates a genuine contradiction. Do not mutate protected-main shared registries from this Research lane.
 
-Use the repository bounded-stage response contract. One bounded objective per turn; stop at every stage boundary.
+Use the repository bounded-stage response contract. Use the largest safely completable bounded tranche; stop at required major stage/substage boundaries and at genuine durability/blocker boundaries, not after every tiny evidence family.
 
 LATEST DURABLE CHECKPOINT / EXPECTED HASH:
 <attach artifact and insert hash/status>

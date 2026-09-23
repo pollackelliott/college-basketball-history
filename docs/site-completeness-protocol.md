@@ -39,13 +39,27 @@ The lane must use documented facility chronology, predecessor buildings, transit
 temporary sites, alternate sites, and game-level/reciprocal evidence before accepting a
 blank venue.
 
+For eras where authoritative institutional/facility evidence establishes the normal home
+venue, use a **default-plus-exceptions** model: apply the supported venue across the exact
+covered HOME population and research only rows with affirmative evidence of alternate,
+temporary, off-campus, special-site, or contradictory treatment. Do not require an
+individual box score merely to re-prove an already established normal home building.
+
 A genuine historical safety valve remains available through
 `RESEARCHED_UNRESOLVED_HOME_VENUE`. It is especially relevant to difficult games from
 the **1930s or earlier**, but that era is not an automatic waiver. The exception applies
-only after deliberate/exhaustive research establishes HOME and city/state while the
-surviving record still cannot support a specific physical building.
+only after deliberate/exhaustive systematic research establishes HOME and city/state
+while the surviving record still cannot support a specific physical building.
 
-A broad unexplored pre-arena era remains unfinished research.
+When the source program's HOME geography is systematically established for an era,
+city/state may be propagated across already-established HOME rows under the same
+default-plus-exceptions model, provided alternate/off-campus exceptions are isolated.
+This is not permission to infer H/A/N from geography.
+
+A broad unexplored pre-arena era remains unfinished research. A homogeneous ancient
+residual whose reasonable systematic paths have been exhausted may be terminalized as a
+population rather than reopened game by game, but every such row must have complete
+city/state before Stage 3A-2 closes.
 
 ### Away rows
 
