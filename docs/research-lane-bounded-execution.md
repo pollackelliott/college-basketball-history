@@ -347,6 +347,9 @@ When all HOME obligations and HOME geography are researched/accounted, stop with
 Only after Stage 3A-2 completes, research remaining regular-season NEUTRAL physical
 venues.
 
+`docs/stage3a3-neutral-tranche-contract.md` is controlling for Stage 3A-3 tier
+boundaries, tranche sizing, source fanout, and recovery.
+
 The Stage 3A-0 exact-game harvest remains controlling project evidence and must not be
 repeated wholesale unless a specific contradiction or changed project state makes a
 narrow recheck necessary.
@@ -362,13 +365,30 @@ Use this default execution order:
 5. **pre-1984-85 one-offs**, with aggressive proportional convergence after the obvious
    reasonable paths are exhausted.
 
+After substantial research begins in one tier, **do not cross into the next materially
+different tier in the same turn**. Finish the active tier/tranche, write accepted findings
+through, serialize the exact residual by tier, and stop at a durable continuation point.
+The owner should normally need only `Proceed` to continue.
+
 For recurring families, prove the event/site pattern once for the exact covered editions
 and apply it systematically; research only genuine exceptions or multi-venue editions
 individually. Do not re-prove the same venue game by game.
 
+Use this source hierarchy for recurring families:
+
+1. accepted project/canonical/reciprocal evidence;
+2. official event/tournament/host institutional source family;
+3. target-school or obvious participant institutional source family;
+4. at most one specific high-yield authoritative fallback family when justified.
+
 For historical recurring work, bundle several related families rather than checkpointing
 after every two- or three-game event, but do not attempt an entire large heterogeneous
-residual in one open-ended sweep.
+residual in one open-ended sweep or multiply source paths by game count.
+
+For one-offs, use accepted project evidence, target-school institutional evidence,
+obvious opponent/event/host institutional evidence, and at most one specific named
+authoritative fallback source. Generic web search is discovery-only, not an evidence
+class.
 
 For historical one-offs, when the systematic/high-yield paths have already removed the
 recoverable population, treat the surviving homogeneous residual as eligible for
@@ -377,7 +397,10 @@ its own newspaper/archive project merely to reduce the blank count.
 
 If independent adjudications are required, apply the §3.5 maximum of 25; when a homogeneous
 one-off residual is already at or below that ceiling, normally process the whole residual
-as one convergence tranche.
+as one convergence tranche only when that does not require many unrelated source paths.
+
+Do not continue a "locate exact sources for missing patches" tail chase after the bounded
+source hierarchy is exhausted.
 
 Do not infer a venue from city, event custom, nearby editions, opponent home arena, or
 chronology alone. Write accepted venue/location/provenance findings through before the
@@ -636,6 +659,7 @@ Existing documents remain controlling for their substantive domains, including:
 
 - `docs/stage3a0-local-only-contract.md` — strict local-only Stage 3A-0 execution scope;
 - `docs/stage3a1-source-fanout-contract.md` — bounded Stage 3A-1 source hierarchy and convergence;
+- `docs/stage3a3-neutral-tranche-contract.md` — bounded Stage 3A-3 neutral tiers, source fanout, and convergence;
 - `docs/site-completeness-protocol.md` — site research/accounting and NCAA completeness;
 - `docs/non-d1-owner-sanity-scan.md` — required owner NON_D1 checkpoint;
 - `docs/research-freeze-self-challenge.md` — final adversarial acceptance review;
