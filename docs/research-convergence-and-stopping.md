@@ -57,15 +57,18 @@ but otherwise leave the opponent's home chronology to that opponent's Research l
 
 Before external searching, perform the exact-game canonical/accepted reciprocal lookup.
 
-For **1984-85 through present**, apply a strong exact-venue expectation. Modern neutral
+For **1996-97 through present**, apply a strong exact-venue expectation. Modern neutral
 debt requires a deliberate challenge of the obvious tournament/event, host, opponent,
 reciprocal, and contemporary source classes before it may survive.
 
-For **pre-1984-85** neutral rows, research seriously but proportionately. Work recurring
-event/site families and other systematic/high-yield evidence classes. Once those paths
-are exhausted and the remaining uncertainty is historically plausible, preserve the
-researched unknown and stop rather than turning every old one-off into open-ended
-archaeology.
+For **1995-96 and earlier** regular-season neutral rows, research seriously but
+proportionately. Work recurring event/site families and other systematic/high-yield
+evidence classes. Once those paths are exhausted and the remaining uncertainty is
+historically plausible, preserve the researched unknown and stop rather than turning
+every old one-off into open-ended archaeology. Surviving exact-building debt is explicit
+historical enrichment debt, not a publication blocker. Preserve supported city/state and
+partial venue information, and do not reopen already-supported exact venues merely
+because they now fall on the historical side of the cutoff.
 
 Across Stage 3A, work coherent populations/evidence classes rather than recursively
 turning each surviving blank into a new research project. Preserve the distinction
@@ -102,9 +105,11 @@ not require every surviving ancient opponent family or one-off game to receive b
 archive research before the residual can converge.
 
 A smaller remainder produced by a successful pass is not, by itself, a reason to invent
-another research strategy. Conversely, a large or surprising modern neutral residual is
-evidence that the class has probably **not** converged and must be challenged before
-freeze.
+another research strategy. Conversely, a large or surprising **1996-97+** modern neutral
+residual is evidence that the class has probably **not** converged and must be challenged
+before freeze. A substantial 1995-96-and-earlier exact-building residual may still be
+publication-safe when it is explicitly researched/accounted and no comparable systematic
+high-yield opportunity remains.
 
 Do not infer H/A/N from geography or assign a physical building merely because an
 aggregate facility chronology makes it plausible. Supported unknown remains preferable

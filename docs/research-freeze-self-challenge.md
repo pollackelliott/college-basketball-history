@@ -155,16 +155,19 @@ Stage 3A neutral debt must be challenged under the era-specific standard in
 For regular-season neutral rows:
 
 - first verify that an exact same-game canonical/accepted reciprocal lookup was performed;
-- **1984-85 through present:** apply a strong exact-venue expectation and challenge
+- **1996-97 through present:** apply a strong exact-venue expectation and challenge
   tournament/event, host, opponent-institutional, reciprocal, and contemporary evidence
   before accepting unresolved debt;
-- **before 1984-85:** work the obvious recurring-event/site-family and other systematic
-  high-yield evidence classes, then allow explicitly researched residual uncertainty
-  after proportionate exhaustion;
+- **1995-96 and earlier:** work the obvious recurring-event/site-family and other
+  systematic high-yield evidence classes, then allow explicitly researched residual
+  uncertainty after proportionate exhaustion. Surviving exact-building debt is historical
+  enrichment debt and is not a publication blocker when explicitly accounted;
 - a large or surprising modern neutral residual is a self-challenge trigger even if every
   row already has formal research-accounting metadata;
 - do not reopen an older terminal neutral population merely because another archive might
-  theoretically exist after the reasonable systematic paths are exhausted.
+  theoretically exist after the reasonable systematic paths are exhausted;
+- preserve any already-supported exact venue when a game falls on the historical side of
+  the 1996-97 cutoff; the cutoff changes unresolved research priority, not accepted facts.
 
 For postseason:
 
@@ -217,8 +220,8 @@ VENUES:
   existing reuses: <count>
   genuinely new candidates: <count>
   ambiguous identities: 0
-  modern neutral unresolved (1984-85+): <count>
-  pre-1984-85 neutral unresolved: <count>
+  modern neutral unresolved (1996-97+): <count>
+  historical regular-season neutral venue debt (1995-96 and earlier): <count>
 
 OPPONENT IDENTITIES:
   current-program key splits found/repaired: <count>

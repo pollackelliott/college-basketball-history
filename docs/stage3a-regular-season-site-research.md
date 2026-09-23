@@ -5,6 +5,7 @@
 - **Owner-approved:** 2026-09-20
 - **Execution refactor approved:** 2026-09-21
 - **Post-Oregon-State execution amendment approved:** 2026-09-23
+- **Neutral publication-priority amendment approved:** 2026-09-23
 - **Purpose:** make Stage 3A rigorous, finite, reusable, operationally bounded, and directly consumable by later stages
 
 This document controls when older Stage 3A wording is more general or would produce a different research obligation.
@@ -67,9 +68,9 @@ Neutral-site games should receive active physical-venue research.
 
 The research standard differs by era.
 
-#### Modern neutral games: 1984-85 through present
+#### Modern neutral games: 1996-97 through present
 
-For the **1984-85 season through the present**, an exact physical venue is strongly expected.
+For regular-season neutral venue research, **modern** means the **1996-97 season through the present**. An exact physical venue is strongly expected.
 
 Modern neutral games ordinarily have sufficient tournament, institutional, host, arena, schedule, box-score, newspaper, or web-era documentation that a shallow first-pass failure is not an acceptable stopping point.
 
@@ -84,13 +85,17 @@ For unresolved modern neutral rows, Stage 3A should systematically use, as appli
 
 A modern neutral row may remain unresolved only after a deliberate, documented pass through the reasonable evidence paths for that row or evidence class. Do not create an unresolved status merely because the source school's primary ledger omits the building.
 
-#### Historical neutral games: before 1984-85
+#### Historical neutral games: 1995-96 and earlier
 
-Pre-1984-85 neutral games still deserve real research, especially when they belong to a recurring event, tournament, city/site family, or useful reciprocal institutional series.
+Regular-season neutral games from **1995-96 and earlier** still deserve real research, especially when they belong to a recurring event, tournament, city/site family, or useful reciprocal institutional series.
 
-Research should remain proportionate. After the canonical/shared first pass and the obvious systematic event/reciprocal evidence classes have been exhausted, a genuinely unsupported exact building may remain `RESEARCHED_PARTIAL` or `RESEARCHED_UNRESOLVED` under existing site-accounting policy.
+Research should remain proportionate. After the canonical/shared first pass and the obvious systematic event/host/participant/reciprocal evidence classes have been exhausted, a genuinely unsupported exact building may remain `RESEARCHED_PARTIAL` or `RESEARCHED_UNRESOLVED` under existing site-accounting policy.
 
-Do not turn a difficult one-off neutral game from an early era into unlimited newspaper/yearbook archaeology merely to drive the unknown count to zero.
+For this historical population, exact-building recovery is **desirable enrichment, not a publication blocker**, once the reasonable systematic/high-yield opportunities have been exhausted. Preserve supported city/state and any supported partial venue information rather than withholding the school from publication solely because the exact building remains unknown.
+
+Do not turn a difficult historical neutral one-off into unlimited newspaper/yearbook archaeology merely to drive the unknown count to zero. A surviving researched venue gap may be carried as explicit terminal historical debt and revisited later as enrichment.
+
+This policy change is prospective for unresolved debt. Do not remove, reopen, or downgrade an already-supported exact venue merely because that game now falls on the historical side of the cutoff.
 
 ## 3. Canonical/shared-project first pass for neutral games
 
@@ -152,7 +157,7 @@ Before broad historical research:
    handoff population;
 3. derive the whole-population H/A/N work census;
 4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
-5. separate NEUTRAL rows into 1984-85+ and pre-1984-85 populations;
+5. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
 6. perform one structured exact-game join against already-present local canonical,
    assertion, published-package, and accepted reciprocal evidence;
 7. write through only unambiguous accepted same-game evidence;
@@ -260,10 +265,10 @@ tranche sizing, source fanout, and proportional convergence.
 Only after Stage 3A-2 completes, use this default execution order:
 
 1. accepted exact-game venue evidence already present in the durable state;
-2. modern (1984-85+) recurring event/site families;
-3. modern one-offs;
-4. pre-1984-85 recurring families;
-5. pre-1984-85 one-offs.
+2. modern (1996-97+) recurring event/site families;
+3. modern (1996-97+) one-offs;
+4. historical (1995-96 and earlier) recurring families;
+5. historical (1995-96 and earlier) one-offs.
 
 After substantial work begins in one tier, **do not cross into the next materially
 different tier in the same turn**. Bring the active tier/tranche to disposition, write
@@ -301,8 +306,7 @@ merely to reduce the blank count.
 Do not continue a "locate exact sources for missing patches" tail chase after the bounded
 event/host/participant/fallback hierarchy is exhausted.
 
-The 1984-85+ population retains the strong exact-venue expectation. Historical
-proportionality does not weaken that modern standard.
+The 1996-97+ population retains the strong exact-venue expectation. For 1995-96-and-earlier regular-season neutrals, proportional historical research plus explicit terminal debt is publication-safe after the reasonable systematic/high-yield opportunities are exhausted. This does not weaken the anti-inference rule or any postseason requirement.
 
 ### 4.5 Stage 3A-4 — mechanical closeout and QA
 
@@ -344,13 +348,13 @@ A blank physical building is not a Stage 3A research blocker by itself.
 
 Do not create or extend a research queue solely to fill opponent-home buildings.
 
-### NEUTRAL, 1984-85 through present
+### NEUTRAL, 1996-97 through present
 
 Apply a strong completeness expectation. Canonical/shared reuse and the obvious modern event/host/opponent evidence classes must be challenged before accepting unresolved debt.
 
-### NEUTRAL, before 1984-85
+### NEUTRAL, 1995-96 and earlier
 
-Apply serious but proportionate research. Once the obvious systematic/high-yield evidence classes have been exhausted and the remaining uncertainty is historically plausible, preserve the researched unknown and stop.
+Apply serious but proportionate research. Once the obvious systematic/high-yield evidence classes have been exhausted and the remaining uncertainty is historically plausible, preserve the researched unknown and stop. Exact-building recovery is enrichment rather than a publication blocker at that point.
 
 ## 6. Mandatory durable Stage 3A row state
 
@@ -375,7 +379,7 @@ The final Stage 3A artifact must mechanically identify:
 - the exact postseason-deferred/handoff stable-ID population;
 - the final H/A/N census derived from those rows;
 - HOME unresolved venue exceptions;
-- NEUTRAL unresolved venue debt, including modern vs pre-1984-85 concentration;
+- NEUTRAL unresolved venue debt, including modern (1996-97+) vs historical (1995-96 and earlier) concentration;
 - OPPONENT_HOME rows whose venue remains intentionally outside source-school responsibility.
 
 If an accepted Stage 3A correction changes any row after an earlier checkpoint, the authoritative row-level ledger must be regenerated or explicitly superseded. Additive overlays alone are not an acceptable final Stage 3A product.
@@ -400,8 +404,8 @@ Stage 3A may complete only after Stage 3A-0 through Stage 3A-4 have each closed 
 - regular-season H/A/N is fully researched/accounted under repository policy;
 - HOME venue work satisfies the strong source-school standard, with only valid researched-unresolved home exceptions remaining;
 - no ordinary `OPPONENT_HOME` building blank remains in an active source-school research queue;
-- modern neutral games (1984-85 through present) have received the strong completeness pass;
-- historical neutral games have received the proportionate systematic pass;
+- modern neutral games (1996-97 through present) have received the strong completeness pass;
+- historical neutral games (1995-96 and earlier) have received the proportionate systematic/high-yield pass, with any surviving exact-building gaps explicitly accounted as nonblocking terminal venue debt;
 - every material unresolved site fact has explicit research accounting;
 - ambiguous physical venue identities = 0;
 - the single authoritative row-level Stage 3A ledger is written, hashed/verified when checkpoint packaging is used, and sufficient for downstream assembly without historical reconstruction.

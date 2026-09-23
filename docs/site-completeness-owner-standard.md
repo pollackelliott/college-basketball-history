@@ -37,15 +37,18 @@ and exact physical venue identity is an active Research concern.
 For regular-season neutral games, first reuse unambiguous exact same-game venue evidence
 already present in canonical/evidence layers or accepted reciprocal school packages.
 
-For the **1984-85 season through present**, exact physical venue is strongly expected.
+For the **1996-97 season through present**, exact physical venue is strongly expected.
 A modern neutral blank should survive only after the obvious tournament/event, host,
 opponent-institutional, reciprocal, and contemporary evidence paths have been deliberately
 checked.
 
-For neutral games **before 1984-85**, research remains serious but proportionate.
-Recurring events/site families and obvious reciprocal evidence should be worked
-systematically; a genuinely unsupported exact building may remain explicitly researched
-unresolved after the reasonable evidence paths are exhausted.
+For regular-season neutral games **1995-96 and earlier**, research remains serious but
+proportionate. Recurring events/site families and obvious reciprocal evidence should be
+worked systematically; a genuinely unsupported exact building may remain explicitly
+researched unresolved after the reasonable evidence paths are exhausted. At that point
+the exact-building gap is historical enrichment debt, not a publication blocker. Preserve
+supported city/state and partial venue information, and do not reopen already-supported
+exact venues merely because they fall on the historical side of the cutoff.
 
 For neutral games between two published programs, both schools' research/evidence are
 available. Missing neutral geography or venue therefore receives heightened scrutiny and
