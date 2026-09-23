@@ -270,6 +270,9 @@ STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 
 Resolve the regular-season H/A/N residual before broad venue research.
 
+`docs/stage3a1-source-fanout-contract.md` is controlling for source hierarchy and
+fanout. **A bounded row queue does not authorize unbounded source discovery.**
+
 First partition the unresolved H/A/N population into coherent evidence classes. Then work
 the **largest safely completable bundle of related classes** that use the same research
 mode.
@@ -279,7 +282,17 @@ mode.
   to the owner one by one.
 - If work requires independent row-by-row external research/adjudication, apply the §3.5
   maximum of 25 independent adjudications; when a homogeneous residual is already 25 or
-  fewer rows, normally process it as one tranche.
+  fewer rows, normally process it as one tranche only when the same small set of source
+  families can support that tranche.
+- Before external research, define the evidence-class source plan: accepted project
+  evidence -> target-school institutional family -> obvious opponent institutional family
+  -> at most one specific high-yield authoritative fallback family when justified.
+- For one row, normally do not exceed one target-school institutional path plus one
+  opponent institutional path after project evidence. A third external path requires a
+  specific named authoritative source already identified as plausibly decisive.
+- Generic web search is discovery-only. Do not fan out through Reddit, forums, mirrors,
+  scraped schedule sites, aggregators, random wikis, or unrelated search results merely
+  because institutional evidence did not resolve the row.
 - Write accepted H/A/N findings through before the durability boundary.
 - Preserve contradictions or genuine researched unknowns explicitly; never infer H/A/N
   from geography.
@@ -289,8 +302,9 @@ mode.
 **Ancient/historical convergence:** after the whole-population/project-evidence pass and
 the obvious systematic institutional/reciprocal/source-family opportunities have been
 exhausted, a homogeneous old historical/non-D1 residual may be closed at the population
-level as terminal `RESEARCHED_UNRESOLVED` H/A/N debt. Do not require every surviving
-opponent family or every ancient row to prove independently that no deeper archive exists.
+level as terminal `RESEARCHED_UNRESOLVED` H/A/N debt. Once the bounded authoritative
+source hierarchy has been exhausted for a row/class, the mere possibility of another
+archive is not a reason to continue searching.
 
 Return an incomplete checkpoint only after a meaningful tranche or when execution risk,
 a genuine contradiction, or a materially different research mode requires a stop. When
@@ -621,6 +635,7 @@ This document controls **Research-lane turn boundaries and continuation semantic
 Existing documents remain controlling for their substantive domains, including:
 
 - `docs/stage3a0-local-only-contract.md` — strict local-only Stage 3A-0 execution scope;
+- `docs/stage3a1-source-fanout-contract.md` — bounded Stage 3A-1 source hierarchy and convergence;
 - `docs/site-completeness-protocol.md` — site research/accounting and NCAA completeness;
 - `docs/non-d1-owner-sanity-scan.md` — required owner NON_D1 checkpoint;
 - `docs/research-freeze-self-challenge.md` — final adversarial acceptance review;

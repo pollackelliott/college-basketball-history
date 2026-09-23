@@ -80,6 +80,14 @@ between **research coherence** and **execution size**:
 - do not stretch "systematic" into one open-ended sweep across a large heterogeneous
   residual with many unrelated families or research modes.
 
+Also preserve the distinction between **row count** and **source fanout**. A small queue can
+still fail operationally if every row opens an independent discovery tree. For Stage 3A-1,
+the controlling source-fanout contract requires a small authoritative hierarchy rather
+than broad searching: accepted project evidence, target-school institutional evidence,
+obvious opponent institutional evidence, then at most one specific high-yield authoritative
+fallback family when justified. Generic search is only a locator for those source families.
+Once those paths are exhausted, converge rather than opening unrelated domains.
+
 For old H/A/N and historical neutral residuals, once the obvious systematic/high-yield
 paths have been exhausted, population-level terminalization is valid. The project does
 not require every surviving ancient opponent family or one-off game to receive bespoke

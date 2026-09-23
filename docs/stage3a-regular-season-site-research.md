@@ -181,6 +181,9 @@ H/A/N adjudication before Stage 3A-0 is durably closed.
 
 Resolve the H/A/N residual before broad venue research.
 
+`docs/stage3a1-source-fanout-contract.md` is controlling for source hierarchy,
+source-fanout limits, and proportional convergence in this substage.
+
 Partition unresolved H/A/N rows into real evidence classes, then bundle multiple small
 classes that can be handled through the same source/research mode.
 
@@ -188,7 +191,26 @@ A systematic source family may resolve a large population in one turn. When a cl
 requires separate external searching, source comparison, or historical adjudication for
 individual games, one turn may adjudicate **no more than 25 rows**. When a homogeneous
 independent-row residual is already 25 or fewer rows, normally process the whole residual
-rather than creating several smaller owner handoffs.
+rather than creating several smaller owner handoffs **only when the same small set of
+coherent source families can support that tranche**.
+
+Before opening external sources, define the evidence-class plan and use the required
+hierarchy:
+
+1. already-accepted project evidence;
+2. target-school institutional source family;
+3. obvious opponent institutional source family;
+4. at most one specific high-yield authoritative fallback family when justified.
+
+For an individual row, do not turn that hierarchy into unlimited searching. Normally
+inspect no more than one target-school institutional path and one opponent institutional
+path after project evidence. A third external path is allowed only when a specific named
+authoritative source is already identified as plausibly decisive.
+
+Generic web search may locate an authoritative source, but it is not an evidence class.
+Do not fan out through Reddit, fan forums, mirrors, scraped schedule sites, aggregators,
+random wikis, or unrelated search results merely because the obvious institutional paths
+did not resolve the row.
 
 Write accepted H/A/N findings through into the cumulative authoritative working ledger
 before the durability boundary. Do not begin HOME or NEUTRAL venue research merely because
@@ -198,7 +220,9 @@ After the whole-population/project-evidence pass and the obvious systematic
 institutional/reciprocal/source-family opportunities have been exhausted, a homogeneous
 ancient historical/non-D1 residual may be closed **at the population level** as terminal
 `RESEARCHED_UNRESOLVED` H/A/N debt. Do not require every surviving opponent family or
-every ancient row to prove independently that no deeper archive exists.
+every ancient row to prove independently that no deeper archive exists. Once the bounded
+authoritative source hierarchy is exhausted for a row/class, another theoretical source
+is not sufficient reason to keep searching.
 
 ### 4.3 Stage 3A-2 — HOME venue research
 

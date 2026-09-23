@@ -17,6 +17,7 @@ Read these process documents together before onboarding work:
 - `docs/site-completeness-protocol.md`
 - `docs/stage3a-regular-season-site-research.md`
 - `docs/stage3a0-local-only-contract.md`
+- `docs/stage3a1-source-fanout-contract.md`
 - `docs/research-freeze-self-challenge.md`
 - `docs/research-convergence-and-stopping.md`
 - `docs/shared-reference-authority.md`
@@ -56,7 +57,8 @@ For Stage 3A, `docs/stage3a-regular-season-site-research.md` is controlling for
 research responsibility, venue-completeness expectations, stopping, canonical/shared
 reuse, the required Stage 3A-0 through Stage 3A-4 architecture, and the mandatory final
 row-level Stage 3A state. `docs/stage3a0-local-only-contract.md` is controlling for
-Stage 3A-0 execution scope.
+Stage 3A-0 execution scope. `docs/stage3a1-source-fanout-contract.md` is controlling
+for Stage 3A-1 source hierarchy, fanout, and convergence.
 
 Stage 3A substages are owner-facing boundaries; evidence classes inside 3A-1 through 3A-3
 are not automatically owner-facing boundaries. Use the **largest safely completable
@@ -77,9 +79,17 @@ not inspect opponent files one by one when a structured local join can answer th
 question. An unmatched local candidate stays unresolved for 3A-1/2/3; it is not permission
 to open the web.
 
-3A-1 should use population-level convergence for homogeneous ancient historical/non-D1
-H/A/N residuals after the obvious systematic institutional/reciprocal opportunities are
-exhausted. 3A-2 should use authoritative home-facility chronology plus a
+3A-1 must bound **source fanout as well as row count**. Before opening external sources,
+define coherent evidence classes and use the required hierarchy: accepted project evidence,
+target-school institutional evidence, obvious opponent institutional evidence, then at most
+one specific high-yield authoritative fallback family when justified. Generic web search is
+discovery-only, not an evidence class. Do not fan out through Reddit, forums, mirrors,
+aggregators, random wikis, or unrelated search results merely because institutional evidence
+did not resolve a row. A <=25-row queue is not permission for <=25 separate deep web
+investigations. After the obvious authoritative paths are exhausted, converge the row/class
+as supported or `RESEARCHED_UNRESOLVED` and move on. 3A-1 should also use population-level
+convergence for homogeneous ancient historical/non-D1 H/A/N residuals after the obvious
+systematic institutional/reciprocal opportunities are exhausted. 3A-2 should use authoritative home-facility chronology plus a
 default-with-exceptions model rather than re-proving ordinary modern HOME venues game by
 game. Ancient HOME venue debt may terminalize after the reasonable systematic paths are
 exhausted, but complete supported city/state must be written through before 3A-2 closes;
@@ -252,13 +262,17 @@ unresolved discrepancies.
   without an owner `Proceed`; lets Stage 3A-0 perform public-web research, institutional
   archive browsing, external source discovery, broad GitHub/code search, opponent-by-
   opponent source hunting, or historical adjudication instead of a structured local
-  project-evidence join; works more than 25 independently researched/adjudicated rows in
-  one turn; repeatedly checkpoints tiny 3–8 row/family units when a larger homogeneous
-  tranche is safely completable; attempts an open-ended sweep across a large heterogeneous
-  residual; combines substantial Stage 3A historical research with Stage 3A-4 mechanical
-  closeout; re-proves ordinary established HOME venues game by game instead of using
-  supported facility chronology plus exceptions; allows unresolved HOME venue exceptions
-  to reach 3A-4 without complete supported city/state; turns ordinary regular-season
+  project-evidence join; lets Stage 3A-1 turn a bounded row queue into unbounded source
+  discovery, opens many unrelated domains for individual rows, substitutes Reddit/forums/
+  mirrors/aggregators for the required institutional hierarchy, or continues searching
+  after the obvious authoritative source paths are exhausted instead of converging;
+  works more than 25 independently researched/adjudicated rows in one turn; repeatedly
+  checkpoints tiny 3–8 row/family units when a larger homogeneous tranche is safely
+  completable; attempts an open-ended sweep across a large heterogeneous residual;
+  combines substantial Stage 3A historical research with Stage 3A-4 mechanical closeout;
+  re-proves ordinary established HOME venues game by game instead of using supported
+  facility chronology plus exceptions; allows unresolved HOME venue exceptions to reach
+  3A-4 without complete supported city/state; turns ordinary regular-season
   `OPPONENT_HOME` physical-building blanks into active source-school historical research;
   accepts shallow modern (1984-85+) neutral-site debt without the required canonical/shared
   and systematic evidence pass; or reaches Stage 3A completion without one authoritative
