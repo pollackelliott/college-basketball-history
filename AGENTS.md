@@ -109,9 +109,14 @@ authoritative fallback family. Historical one-off residuals should converge at p
 level rather than become bespoke archaeology projects.
 
 Regular-season `OPPONENT_HOME` exact-building reconstruction remains outside active
-source-school research unless usable accepted venue evidence is already present. The
-1984-85+ neutral population retains the strong exact-venue expectation. Do not infer
-H/A/N from geography or a venue from city/event custom/nearby editions.
+source-school research unless usable accepted venue evidence is already present. For
+regular-season neutral venue research, **modern means 1996-97 through present** and that
+population retains the strong exact-venue expectation. For 1995-96 and earlier, exact-
+building recovery is historical enrichment rather than a publication blocker after the
+reasonable systematic/high-yield opportunities are exhausted; preserve supported
+city/state/partial venue evidence and explicit terminal debt. Do not reopen already-
+supported exact venues merely because they now fall on the historical side of the cutoff.
+Do not infer H/A/N from geography or a venue from city/event custom/nearby editions.
 
 Durable checkpoints control continuity. A long Research lane may deliberately roll to a
 fresh chat at a verified major stage/substage checkpoint rather than wait for context
@@ -286,8 +291,10 @@ unresolved discrepancies.
   facility chronology plus exceptions; allows unresolved HOME venue exceptions to reach
   3A-4 without complete supported city/state; turns ordinary regular-season
   `OPPONENT_HOME` physical-building blanks into active source-school historical research;
-  accepts shallow modern (1984-85+) neutral-site debt without the required canonical/shared
-  and systematic evidence pass; or reaches Stage 3A completion without one authoritative
+  accepts shallow modern (1996-97+) neutral-site debt without the required canonical/shared
+  and systematic evidence pass; treats 1995-96-and-earlier regular-season neutral exact-
+  building debt as a publication blocker after proportionate systematic/high-yield
+  exhaustion; or reaches Stage 3A completion without one authoritative
   row-level Stage 3A ledger sufficient for downstream use.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
