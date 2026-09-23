@@ -238,7 +238,7 @@ Before broad historical searching:
    and postseason Stage 3B handoff rows;
 2. derive the whole-population H/A/N work census;
 3. identify HOME, OPPONENT_HOME, NEUTRAL, and unresolved H/A/N responsibilities;
-4. separate NEUTRAL rows into 1984-85+ and pre-1984-85 populations;
+4. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
 5. perform one structured local exact-game join against already-present canonical,
    assertion, published-package, and accepted reciprocal evidence;
 6. preserve unmatched or contradictory candidates without forcing or researching them;
@@ -357,12 +357,12 @@ narrow recheck necessary.
 Use this default execution order:
 
 1. **mechanical accepted-evidence application** already present in the durable state;
-2. **1984-85+ recurring event/site families**, using event/host/tournament history and
+2. **1996-97+ recurring event/site families**, using event/host/tournament history and
    default-plus-exceptions family evidence;
-3. **1984-85+ one-offs**, under the strong exact-venue standard;
-4. **pre-1984-85 recurring families**, bundled into related multi-family sweeps using the
+3. **1996-97+ one-offs**, under the strong exact-venue standard;
+4. **1995-96-and-earlier recurring families**, bundled into related multi-family sweeps using the
    same research mode;
-5. **pre-1984-85 one-offs**, with aggressive proportional convergence after the obvious
+5. **1995-96-and-earlier one-offs**, with aggressive proportional convergence after the obvious
    reasonable paths are exhausted.
 
 After substantial research begins in one tier, **do not cross into the next materially
@@ -393,7 +393,10 @@ class.
 For historical one-offs, when the systematic/high-yield paths have already removed the
 recoverable population, treat the surviving homogeneous residual as eligible for
 population-level terminal researched venue debt. Do not give every surviving old one-off
-its own newspaper/archive project merely to reduce the blank count.
+its own newspaper/archive project merely to reduce the blank count. For regular-season
+neutral games from 1995-96 and earlier, surviving exact-building debt is not a publication
+blocker after proportionate systematic/high-yield exhaustion; preserve supported city/state
+and partial venue information and carry the remainder explicitly as terminal historical debt.
 
 If independent adjudications are required, apply the §3.5 maximum of 25; when a homogeneous
 one-off residual is already at or below that ceiling, normally process the whole residual
@@ -421,7 +424,7 @@ Otherwise:
 2. reconcile the exact regular-season/postseason handoff partition to Stage 1;
 3. derive the final regular-season H/A/N census from rows;
 4. identify valid HOME researched-unresolved exceptions;
-5. identify NEUTRAL researched debt by modern vs pre-1984-85 era;
+5. identify NEUTRAL researched debt by modern (1996-97+) vs historical (1995-96 and earlier) era;
 6. identify OPPONENT_HOME rows intentionally outside source-school building responsibility;
 7. run Stage 3A QA;
 8. serialize/hash the final Stage 3A completion checkpoint.
@@ -433,8 +436,8 @@ include:
 - final regular-season H/A/N census derived from row-level state;
 - HOME venue gaps limited to valid researched-unresolved HOME exceptions;
 - ordinary OPPONENT_HOME venue blanks excluded from active source-school research;
-- modern neutral rows subjected to the strong exact-venue pass;
-- older neutral rows subjected to the proportionate systematic pass;
+- modern neutral rows (1996-97+) subjected to the strong exact-venue pass;
+- historical neutral rows (1995-96 and earlier) subjected to the proportionate systematic/high-yield pass, with surviving exact-building gaps allowed as explicitly accounted nonblocking terminal debt;
 - every material unresolved site fact explicitly researched/accounted;
 - ambiguous physical venue identities = 0;
 - one authoritative row-level Stage 3A ledger sufficient for a successor chat and Stage 4.
