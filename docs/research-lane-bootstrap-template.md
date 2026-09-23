@@ -14,11 +14,11 @@ https://github.com/pollackelliott/college-basketball-history
 
 This is ONE INDEPENDENT RESEARCH LANE for one school. It is not the serialized repository-integration lane. A long Research lane may span a small number of chats through verified durable checkpoints; one uninterrupted conversation is not required.
 
-Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
+Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, docs/stage3a0-local-only-contract.md, and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
 
 Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
-Stage 3A has required substages (3A-0 through 3A-4). Treat those substages as real owner-facing stop boundaries. Evidence classes inside 3A-1 through 3A-3 are research units, not automatic owner-facing stops: bundle multiple small classes that use the same research mode into meaningful safe tranches.
+Stage 3A has required substages (3A-0 through 3A-4). Treat those substages as real owner-facing stop boundaries. Stage 3A-0 is a strict local-only mechanical pass: no public-web research, external source discovery, institutional archive browsing, or broad GitHub/code search is authorized. Evidence classes inside 3A-1 through 3A-3 are research units, not automatic owner-facing stops: bundle multiple small classes that use the same research mode into meaningful safe tranches.
 
 My Proceed/Continue response authorizes only the identified next bounded stage, Stage 3A substage, or unfinished serialized tranche—not all remaining research through RESEARCH_FROZEN.
 
@@ -62,11 +62,13 @@ Use this when a prior chat/session failed or must be replaced but durable resear
 ```text
 We are recovering an existing Research lane for <school> in my College Basketball History project.
 
-Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, and docs/shared-reference-authority.md.
+Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, docs/stage3a0-local-only-contract.md, and docs/shared-reference-authority.md.
 
 I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
 
 Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage. If that stage is Stage 3A, resume the exact incomplete Stage 3A substage/tranche serialized by the checkpoint; do not reopen completed substages or broaden into another research mode.
+
+If the earliest incomplete work is Stage 3A-0, resume only its unfinished **local mechanical** census/partition/project-evidence queue. Use only the checkpoint and already-present current-project evidence. Do not search the web, discover external opponent sources, browse institutional archives, or investigate venue candidates. If local project evidence does not resolve a candidate, preserve it for the later Stage 3A research substage rather than broadening the search.
 
 Do not restart completed stages. Do not perform open-ended archaeology for hidden/chat-local state. Do not reconstruct completed work from old prose merely because a prior chat said it existed. If the required residual queue is genuinely missing from the attached checkpoint, stop and identify the exact missing artifact/state before doing reconstruction.
 

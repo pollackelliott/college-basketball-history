@@ -16,6 +16,7 @@ Read these process documents together before onboarding work:
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
 - `docs/stage3a-regular-season-site-research.md`
+- `docs/stage3a0-local-only-contract.md`
 - `docs/research-freeze-self-challenge.md`
 - `docs/research-convergence-and-stopping.md`
 - `docs/shared-reference-authority.md`
@@ -54,7 +55,8 @@ genuine contradiction, ambiguous school identity, or a target absent from the re
 For Stage 3A, `docs/stage3a-regular-season-site-research.md` is controlling for
 research responsibility, venue-completeness expectations, stopping, canonical/shared
 reuse, the required Stage 3A-0 through Stage 3A-4 architecture, and the mandatory final
-row-level Stage 3A state.
+row-level Stage 3A state. `docs/stage3a0-local-only-contract.md` is controlling for
+Stage 3A-0 execution scope.
 
 Stage 3A substages are owner-facing boundaries; evidence classes inside 3A-1 through 3A-3
 are not automatically owner-facing boundaries. Use the **largest safely completable
@@ -63,6 +65,17 @@ avoid both repeated 3–8 row micro-checkpoints and open-ended sweeps across lar
 heterogeneous residuals. Independent row-level adjudication remains capped at 25 rows per
 turn, but a homogeneous residual already at or below that ceiling should normally be
 processed as one tranche.
+
+**Stage 3A-0 is a strict local-only mechanical pass.** It performs zero public-web
+research and zero external source discovery. During 3A-0, use only the verified durable
+checkpoint plus already-present project evidence in the checked-out/current protected-main
+repository. Published reciprocal lookup means a structured local join against canonical
+games, game assertions, already-published school packages, or accepted reciprocal
+artifacts already present in the project. Do not browse institutional sites, media guides,
+newspapers, external PDFs, GitHub/code search for new sources, or opponent archives. Do
+not inspect opponent files one by one when a structured local join can answer the same
+question. An unmatched local candidate stays unresolved for 3A-1/2/3; it is not permission
+to open the web.
 
 3A-1 should use population-level convergence for homogeneous ancient historical/non-D1
 H/A/N residuals after the obvious systematic institutional/reciprocal opportunities are
@@ -236,17 +249,20 @@ unresolved discrepancies.
   non-D1 owner sanity scan.
 - Flag any Stage 3A workflow that collapses Stage 3A-0 through 3A-4 into one monolithic
   execution unit; automatically rolls from one required Stage 3A substage into the next
-  without an owner `Proceed`; works more than 25 independently researched/adjudicated
-  rows in one turn; repeatedly checkpoints tiny 3–8 row/family units when a larger
-  homogeneous tranche is safely completable; attempts an open-ended sweep across a large
-  heterogeneous residual; combines substantial Stage 3A historical research with Stage
-  3A-4 mechanical closeout; re-proves ordinary established HOME venues game by game
-  instead of using supported facility chronology plus exceptions; allows unresolved HOME
-  venue exceptions to reach 3A-4 without complete supported city/state; turns ordinary
-  regular-season `OPPONENT_HOME` physical-building blanks into active source-school
-  historical research; accepts shallow modern (1984-85+) neutral-site debt without the
-  required canonical/shared and systematic evidence pass; or reaches Stage 3A completion
-  without one authoritative row-level Stage 3A ledger sufficient for downstream use.
+  without an owner `Proceed`; lets Stage 3A-0 perform public-web research, institutional
+  archive browsing, external source discovery, broad GitHub/code search, opponent-by-
+  opponent source hunting, or historical adjudication instead of a structured local
+  project-evidence join; works more than 25 independently researched/adjudicated rows in
+  one turn; repeatedly checkpoints tiny 3–8 row/family units when a larger homogeneous
+  tranche is safely completable; attempts an open-ended sweep across a large heterogeneous
+  residual; combines substantial Stage 3A historical research with Stage 3A-4 mechanical
+  closeout; re-proves ordinary established HOME venues game by game instead of using
+  supported facility chronology plus exceptions; allows unresolved HOME venue exceptions
+  to reach 3A-4 without complete supported city/state; turns ordinary regular-season
+  `OPPONENT_HOME` physical-building blanks into active source-school historical research;
+  accepts shallow modern (1984-85+) neutral-site debt without the required canonical/shared
+  and systematic evidence pass; or reaches Stage 3A completion without one authoritative
+  row-level Stage 3A ledger sufficient for downstream use.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
   as authority for such a write. Settled shared identities should normally be carried to

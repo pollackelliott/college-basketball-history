@@ -225,8 +225,12 @@ checkpoint it authorizes the serialized unfinished tranche.
 
 ### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
 
-This substage is mechanical/read-only except for writing accepted same-game evidence
-through into the working ledger.
+This substage is **strictly local-only and mechanical**. It is read-only except for
+writing unambiguous accepted same-game project evidence through into the working ledger.
+The detailed controlling scope is `docs/stage3a0-local-only-contract.md`.
+
+Allowed evidence is limited to the verified durable checkpoint/working state and
+already-present project evidence in the checked-out/current protected-main repository.
 
 Before broad historical searching:
 
@@ -235,14 +239,24 @@ Before broad historical searching:
 2. derive the whole-population H/A/N work census;
 3. identify HOME, OPPONENT_HOME, NEUTRAL, and unresolved H/A/N responsibilities;
 4. separate NEUTRAL rows into 1984-85+ and pre-1984-85 populations;
-5. perform the bounded exact-game canonical/accepted reciprocal lookup;
-6. preserve unmatched or contradictory candidates without forcing them;
+5. perform one structured local exact-game join against already-present canonical,
+   assertion, published-package, and accepted reciprocal evidence;
+6. preserve unmatched or contradictory candidates without forcing or researching them;
 7. write unambiguous accepted same-game evidence through into the cumulative row-level
    working state;
 8. serialize the exact residual queues required by Stage 3A-1 through 3A-3.
 
+**Zero external research is authorized in Stage 3A-0.** Do not search the public web,
+institutional athletics sites, media guides, newspapers, external PDFs, or GitHub/code
+hosting for new sources. Do not discover opponent source families or investigate venue
+candidates externally. Do not inspect opponent packages one-by-one when a structured
+local join can produce the same population.
+
+If local project evidence cannot resolve a candidate, preserve it for Stage 3A-1, 3A-2,
+or 3A-3. Lack of a local answer is not permission to broaden the search.
+
 Do **not** begin broad HOME chronology research, broad NEUTRAL historical research, or
-large row-by-row H/A/N adjudication in Stage 3A-0.
+row-by-row H/A/N adjudication in Stage 3A-0.
 
 Completion response:
 
@@ -606,6 +620,7 @@ This document controls **Research-lane turn boundaries and continuation semantic
 
 Existing documents remain controlling for their substantive domains, including:
 
+- `docs/stage3a0-local-only-contract.md` — strict local-only Stage 3A-0 execution scope;
 - `docs/site-completeness-protocol.md` — site research/accounting and NCAA completeness;
 - `docs/non-d1-owner-sanity-scan.md` — required owner NON_D1 checkpoint;
 - `docs/research-freeze-self-challenge.md` — final adversarial acceptance review;
