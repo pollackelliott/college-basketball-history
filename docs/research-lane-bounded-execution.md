@@ -3,7 +3,7 @@
 - **Status:** Controlling Research-lane turn-execution protocol
 - **Applies to:** new school Research lanes and recovery of unfinished Research lanes
 - **Does not replace:** historical/data-quality policy, six-file schema, site-completeness policy, opponent-identity policy, NON_D1 owner sanity scan, or research-freeze self-challenge
-- **Pilot basis:** empirically validated during Kansas State research, September 2026; durability/stopping rules hardened after the DePaul postmortem
+- **Pilot basis:** empirically validated during Kansas State research, September 2026; durability/stopping rules hardened after the DePaul postmortem; execution/convergence revised after the Oregon State retrospective
 
 ## 1. Purpose
 
@@ -11,9 +11,11 @@ Research quality standards are unchanged. This protocol changes **how autonomous
 
 The governing rule is:
 
-> **One bounded research objective per turn. A completed stage boundary is an intentional execution handoff. Do not automatically begin the next stage.**
+> **Use the largest safely completable bounded execution unit: high historical standards, systematic evidence reuse, aggressive proportional convergence, and durable write-through before execution risk becomes material.**
 
-The owner should not need to manage the research itself. Most stage transitions require only a short `Proceed` response. That response authorizes the next bounded unit of execution; it is not an owner adjudication of historical facts.
+A completed major stage or required Stage 3A substage boundary is an intentional owner-facing handoff. Evidence classes are research units, not automatically owner-facing stop boundaries. Several small families or classes that use the same research mode should normally be bundled into one meaningful tranche when they can be completed safely.
+
+The owner should not need to manage the research itself. Most major stage/substage transitions require only a short `Proceed` response. Within an authorized stage/substage, routine evidence-class transitions should be handled autonomously unless a genuine owner judgment, a durability boundary, or a materially different research mode requires a stop.
 
 ## 2. Authority and startup
 
@@ -69,26 +71,38 @@ A stage that unexpectedly becomes large may stop before completion. Preserve the
 
 An incomplete checkpoint is preferable to unsupported certainty, lost work, or a silent/overlong execution failure.
 
-### 3.5 Workload-bounded execution safety valve
+### 3.5 Workload-bounded execution and anti-microbatching
 
-Evidence classes remain the intellectual unit of research, but **execution transactions must be smaller than the conceptual research class when the class requires many independent judgments**.
+Evidence classes remain the intellectual unit of research, but an evidence class is **not automatically a turn boundary**. The execution unit should be the largest safely completable tranche that uses a coherent research mode and can be durably written through before context/execution risk becomes material.
 
-Use the source structure—not elapsed wall-clock time—to decide whether a class can safely run in one turn:
+Use the workload shape—not elapsed wall-clock time—to size the turn:
 
-- **Systematic/mechanical class:** when one authoritative source, one event table, one facility chronology, one reciprocal package, or one deterministic rule can resolve a coherent population without separate external adjudication for each row, the full class may be processed in one turn even when it contains more than 25 rows.
-- **Independent row-by-row class:** when resolution requires separate external searching, source comparison, or historical adjudication for individual games, a single turn may adjudicate **no more than 25 rows**. After the 25th independently researched row—or earlier if execution risk is evident—stop researching, write accepted findings through, serialize the exact remaining queue for that same class, verify/hash the checkpoint when feasible, and return an incomplete durable checkpoint.
+- **Systematic/mechanical work:** when one authoritative source structure, event history, facility chronology, reciprocal package family, or deterministic rule can resolve many rows, process the supported population in bulk. Multiple small families that use the same research method should normally be bundled rather than checkpointed one family at a time.
+- **Independent row-by-row work:** when resolution requires separate external searching, source comparison, or historical adjudication for individual games, a single turn may adjudicate **no more than 25 rows**.
+- **Batching floor in practice:** when a homogeneous independent-row residual contains 25 or fewer rows and no special blocker is present, normally process the whole residual in one turn. Do not manufacture 3–8 row owner handoffs merely because each tiny subset could be described as its own evidence class.
+- **Heterogeneous large residuals:** do not interpret "systematic" so broadly that one turn becomes an open-ended campaign across dozens of unrelated families or research modes. Bundle related families; do not attempt the entire heterogeneous residual merely because all rows belong to the same Stage 3A bucket.
 
-The 25-row limit is an **execution cap, not a research stopping rule**. It does not redefine the evidence class, waive unresolved rows, or authorize shallow research. The next `Proceed` resumes the same class from the durable residual queue.
+The 25-row limit is an **execution cap for independent adjudications, not a research stopping rule**. It does not cap mechanical/systematic application and does not waive unresolved rows.
 
-Do not rely on the model to notice elapsed time and self-interrupt. The durable boundary is defined by the workload shape above. The failure pattern to avoid is `large residual -> many independent lookups -> serialization last -> lost response`.
+After a meaningful tranche, write accepted findings through into the cumulative row-level state. Checkpoint when the tranche completes, a genuine contradiction/blocker requires isolation, or execution risk becomes material. A checkpoint exists for durability; it is not a requirement to return to the owner after every small family.
 
-For Stage 3A specifically, substantial historical research and final mechanical closeout are separate bounded assignments. Do not finish a large research pass and then continue directly into full-ledger regeneration, census, QA, packaging, and hashing unless the active assignment is already the dedicated mechanical closeout substage.
+Do not rely on the model to notice elapsed wall-clock time and self-interrupt. Avoid both failure patterns: `large heterogeneous residual -> unbounded discovery -> serialization last -> lost response` and `tiny family -> checkpoint -> owner Proceed -> repeat`.
+
+For Stage 3A specifically, substantial historical research and Stage 3A-4 final mechanical closeout remain separate bounded assignments.
 
 ### 3.6 Owner questions remain exceptional
 
 A stage boundary is not an owner historical gate. Contact the owner for substantive judgment only when existing repository policy requires it or a genuine historical ambiguity/contradiction requires owner disposition.
 
-The formal NON_D1 sanity scan remains a required owner checkpoint. Other ordinary stage transitions are execution authorization only.
+The formal NON_D1 sanity scan remains a required owner checkpoint. Other ordinary major stage/substage transitions are execution authorization only. Do not turn ordinary evidence-class completion into repeated owner interaction.
+
+### 3.7 Planned fresh-chat rollover is normal hygiene
+
+A Research lane may span one or a small number of chats. A replacement chat is not only emergency recovery.
+
+When a long school has accumulated substantial durable history—especially after a large Stage 3A substage or before Stage 6—it is acceptable to start a fresh chat from the latest verified portable checkpoint rather than wait for the conversation to hit its context ceiling.
+
+The controlling continuity model is the durable checkpoint, not one uninterrupted conversation. A planned rollover must preserve the exact stage/substage state and must not reopen completed work.
 
 ## 4. Required turn-ending contract
 
