@@ -94,6 +94,11 @@ Do not turn a difficult one-off neutral game from an early era into unlimited ne
 
 ## 3. Canonical/shared-project first pass for neutral games
 
+**Stage 3A-0 note:** when this lookup occurs during Stage 3A-0, the stricter
+`docs/stage3a0-local-only-contract.md` applies. The lookup is limited to evidence
+already present in the verified checkpoint or checked-out/current protected-main project.
+Do not use the web or discover new reciprocal sources during 3A-0.
+
 Before external historical searching for an unresolved neutral game, perform a **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
 
 Useful read-only sources can include:
@@ -133,6 +138,13 @@ A plain owner `Proceed` authorizes the identified next substage or serialized un
 
 ### 4.1 Stage 3A-0 — census, partition, and exact-game project evidence
 
+Stage 3A-0 is **strictly local-only and mechanical**. It performs zero external
+historical research.
+
+Allowed inputs are limited to the verified durable checkpoint/working state plus
+already-present project evidence in the checked-out/current protected-main repository.
+Direct reads of known repository files are allowed. Open-ended discovery is not.
+
 Before broad historical research:
 
 1. mechanically identify the exact Stage 1 game universe;
@@ -141,13 +153,29 @@ Before broad historical research:
 3. derive the whole-population H/A/N work census;
 4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
 5. separate NEUTRAL rows into 1984-85+ and pre-1984-85 populations;
-6. perform the bounded read-only exact-game canonical/accepted reciprocal lookup;
+6. perform one structured exact-game join against already-present local canonical,
+   assertion, published-package, and accepted reciprocal evidence;
 7. write through only unambiguous accepted same-game evidence;
-8. preserve unmatched/contradictory candidates without forcing them;
+8. preserve unmatched/contradictory candidates without forcing or researching them;
 9. serialize the exact H/A/N, HOME, and NEUTRAL residual queues.
 
-Do not begin broad HOME chronology research, broad NEUTRAL venue research, or large
-row-by-row H/A/N adjudication before Stage 3A-0 is durably closed.
+During Stage 3A-0, do **not**:
+
+- search the public web;
+- browse institutional archives, schedules, media guides, newspapers, or external PDFs;
+- search GitHub/code hosting to discover new source files;
+- find new opponent source families;
+- research venue candidates externally;
+- adjudicate contradictions that require new evidence;
+- inspect opponent packages one by one when the same population can be joined
+  mechanically from local files.
+
+A whole-project reciprocal pass should be a structured local file/data operation. If
+the project does not already contain enough evidence to resolve a candidate, leave that
+candidate for the appropriate later Stage 3A research substage.
+
+Do not begin broad HOME chronology research, broad NEUTRAL venue research, or row-by-row
+H/A/N adjudication before Stage 3A-0 is durably closed.
 
 ### 4.2 Stage 3A-1 — H/A/N completion
 
