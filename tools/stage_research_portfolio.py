@@ -38,6 +38,10 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+from integration_freeze_guard import (
+    build_source_game_semantic_snapshot,
+    semantic_snapshot_sha256,
+)
 from onboarding_hardening import research_portfolio_report
 from onboarding_plan import (
     REQUIRED_PACKAGE_FILES,
@@ -681,8 +685,11 @@ def main() -> int:
                 name: sha256_file(package_root / name)
                 for name in REQUIRED_PACKAGE_FILES
             }
+            semantic_snapshot = build_source_game_semantic_snapshot(
+                package_root / "source-games.csv"
+            )
             manifest = {
-                "schema_version": 1,
+                "schema_version": 2,
                 "school_key": args.school_key,
                 "status": "INTEGRATION_FROZEN",
                 "research_base_sha": args.research_base,
@@ -690,6 +697,11 @@ def main() -> int:
                 "origin_main_sha": origin_main,
                 "research_zip_sha256": actual_sha,
                 "package_member_sha256": staged_hashes,
+                "source_game_semantic_guard": {
+                    "schema_version": 1,
+                    "snapshot_sha256": semantic_snapshot_sha256(semantic_snapshot),
+                    "snapshot": semantic_snapshot,
+                },
                 "venue_mapping": mappings,
                 "program_alias_mapping": program_alias_mappings,
                 "history_scope": {
@@ -706,6 +718,11 @@ def main() -> int:
             print(f"Integration base:      {current_head}")
             print(f"Research ZIP SHA-256:  {actual_sha}")
             print(f"Venue rows rebased:    {len(mappings)}")
+            print(
+                "Semantic freeze rows:  "
+                f"{len(semantic_snapshot['rows']):,} "
+                f"({semantic_snapshot_sha256(semantic_snapshot)})"
+            )
             print(
                 f"Program aliases rebased: {len(program_alias_mappings)} "
                 f"mapping row(s), "
