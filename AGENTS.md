@@ -52,34 +52,39 @@ genuine contradiction, ambiguous school identity, or a target absent from the re
 
 For Stage 3A, `docs/stage3a-regular-season-site-research.md` is controlling for
 research responsibility, venue-completeness expectations, stopping, canonical/shared
-reuse, the required Stage 3A-0 through Stage 3A-4 execution architecture, and the
-mandatory final row-level Stage 3A state. Stage 3A is not one monolithic turn:
-3A-0 mechanically closes the census/regular-postseason partition and bounded project
-evidence harvest; 3A-1 completes H/A/N; 3A-2 researches HOME venues; 3A-3 researches
-NEUTRAL venues; 3A-4 performs mechanical ledger closeout and QA. Stop at every substage
-boundary, and within 3A-1 through 3A-3 work one coherent evidence class per turn.
+reuse, the required Stage 3A-0 through Stage 3A-4 architecture, and the mandatory final
+row-level Stage 3A state.
 
-HOME is a source-school venue-research responsibility, with the documented ancient-home
-safety valve when exhaustive research cannot establish a specific building.
-Regular-season `OPPONENT_HOME` exact-building reconstruction is not an active
-source-school research obligation unless usable accepted venue evidence is already
-present. NEUTRAL games require active venue research: 1984-85 through present carries a
-strong exact-venue expectation, while older neutral research remains serious but
-proportionate. Before external neutral-site searching, use the bounded read-only
-exact-game lookup against usable canonical/accepted reciprocal project evidence. Treat a
-conflict surfaced by that lookup as a narrow Research adjudication, not as automatic
-canonical override or a mandate to reopen unrelated accepted work.
+Stage 3A substages are owner-facing boundaries; evidence classes inside 3A-1 through 3A-3
+are not automatically owner-facing boundaries. Use the **largest safely completable
+meaningful tranche**. Bundle multiple small families that use the same research mode;
+avoid both repeated 3–8 row micro-checkpoints and open-ended sweeps across large
+heterogeneous residuals. Independent row-level adjudication remains capped at 25 rows per
+turn, but a homogeneous residual already at or below that ceiling should normally be
+processed as one tranche.
 
-Preserve the difference between research coherence and execution size. One systematic
-source/rule may resolve a large evidence class in one turn. If a class instead requires
-separate external searching or historical adjudication for individual rows, adjudicate
-no more than **25 rows per turn**, write accepted findings through into the cumulative
-working ledger, checkpoint the exact residual queue, and stop. The next `Proceed`
-resumes that same class. Do not rely on elapsed wall-clock time as the primary safety
-mechanism. Substantial Stage 3A historical research and Stage 3A-4 closeout are separate
-bounded assignments. Ordinary continuation should require only the owner's short
-`Proceed`; do not make the owner restate repository-controlled stage instructions.
-Chronological slices alone are not evidence classes.
+3A-1 should use population-level convergence for homogeneous ancient historical/non-D1
+H/A/N residuals after the obvious systematic institutional/reciprocal opportunities are
+exhausted. 3A-2 should use authoritative home-facility chronology plus a
+default-with-exceptions model rather than re-proving ordinary modern HOME venues game by
+game. Ancient HOME venue debt may terminalize after the reasonable systematic paths are
+exhausted, but complete supported city/state must be written through before 3A-2 closes;
+systematically established source-program HOME geography may be propagated across
+already-established HOME rows when no accepted evidence indicates an alternate location.
+3A-3 should proceed in the default order: accepted evidence, modern recurring families,
+modern one-offs, historical recurring families, historical one-offs. Recurring families
+should be resolved at family/event level where supported; historical one-off residuals
+should converge at population level rather than become bespoke archaeology projects.
+
+Regular-season `OPPONENT_HOME` exact-building reconstruction remains outside active
+source-school research unless usable accepted venue evidence is already present. The
+1984-85+ neutral population retains the strong exact-venue expectation. Do not infer
+H/A/N from geography or a venue from city/event custom/nearby editions.
+
+Durable checkpoints control continuity. A long Research lane may deliberately roll to a
+fresh chat at a verified major stage/substage checkpoint rather than wait for context
+exhaustion. Ordinary owner continuation should still require only a short `Proceed`;
+do not make the owner relay every small evidence class.
 
 ### Research shared-reference authority
 
@@ -181,6 +186,8 @@ unresolved discrepancies.
 * A technical failure after owner approval must be diagnosed and repaired generically where possible; do not ask the owner to re-review unchanged historical decisions merely because the tooling implementation changed.
 * Technical work should be batched at phase boundaries. Repeated one-command-at-a-time owner handoffs for deterministic setup are a process regression unless repository state is unexpected.
 * Research lanes should perform the required pre-freeze self-challenge autonomously; do not create an extra owner approval loop merely because large researched-unknown populations require adversarial review.
+* Evidence-class completion inside an authorized Research substage should not create a routine owner handoff. Bundle related small classes into meaningful safe tranches and return only at required stage/substage boundaries, genuine blockers/owner judgments, or necessary durability checkpoints.
+* Stage 6 residuals begin as accepted researched debt. Challenge them systematically; do not convert the audit into a second row-by-row research cycle or return to the owner after one or two ordinary repairs when the same class-level challenge can safely continue.
 * The non-D1 owner sanity scan is a quick completeness check, not a transfer of research responsibility: the collaborator must research suspicious identities before presentation and must not require the owner to verify every legitimate non-D1 opponent independently.
 * Do not use the owner as a transport layer for files, logs, helper scripts, or state the agent can inspect directly from repository/GitHub/onboarding artifacts. When the owner's Codespace is the only execution surface, request the smallest diagnostic output needed and default to a copy/paste relay rather than manual helper-file upload/download loops.
 
@@ -211,15 +218,18 @@ unresolved discrepancies.
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
 - Flag any Stage 3A workflow that collapses Stage 3A-0 through 3A-4 into one monolithic
-  execution unit; automatically rolls from one Stage 3A substage into the next without
-  an owner `Proceed`; works more than 25 independently researched/adjudicated rows in
-  one turn; combines substantial Stage 3A historical research with Stage 3A-4 mechanical
-  closeout; substitutes repeated chronological micro-passes for the required coherent
-  evidence-class plan; turns ordinary regular-season `OPPONENT_HOME` physical-building
-  blanks into active source-school historical research; accepts shallow modern
-  (1984-85+) neutral-site debt without the required canonical/shared and systematic
-  evidence pass; or reaches Stage 3A completion without one authoritative row-level
-  Stage 3A ledger sufficient for downstream use.
+  execution unit; automatically rolls from one required Stage 3A substage into the next
+  without an owner `Proceed`; works more than 25 independently researched/adjudicated
+  rows in one turn; repeatedly checkpoints tiny 3–8 row/family units when a larger
+  homogeneous tranche is safely completable; attempts an open-ended sweep across a large
+  heterogeneous residual; combines substantial Stage 3A historical research with Stage
+  3A-4 mechanical closeout; re-proves ordinary established HOME venues game by game
+  instead of using supported facility chronology plus exceptions; allows unresolved HOME
+  venue exceptions to reach 3A-4 without complete supported city/state; turns ordinary
+  regular-season `OPPONENT_HOME` physical-building blanks into active source-school
+  historical research; accepts shallow modern (1984-85+) neutral-site debt without the
+  required canonical/shared and systematic evidence pass; or reaches Stage 3A completion
+  without one authoritative row-level Stage 3A ledger sufficient for downstream use.
 - Flag any independent Research-lane workflow that directly mutates protected-main
   shared reference registries, or that interprets general repository-mutation permission
   as authority for such a write. Settled shared identities should normally be carried to
