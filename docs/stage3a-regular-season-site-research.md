@@ -254,6 +254,9 @@ This is not inference of H/A/N from geography.
 
 ### 4.4 Stage 3A-3 — NEUTRAL venue research
 
+`docs/stage3a3-neutral-tranche-contract.md` is controlling for execution tiers,
+tranche sizing, source fanout, and proportional convergence.
+
 Only after Stage 3A-2 completes, use this default execution order:
 
 1. accepted exact-game venue evidence already present in the durable state;
@@ -262,19 +265,41 @@ Only after Stage 3A-2 completes, use this default execution order:
 4. pre-1984-85 recurring families;
 5. pre-1984-85 one-offs.
 
+After substantial work begins in one tier, **do not cross into the next materially
+different tier in the same turn**. Bring the active tier/tranche to disposition, write
+accepted findings through, serialize the exact residual, and stop at a durable continuation
+point. A tier boundary is an execution boundary, not a new owner historical gate.
+
 For recurring families, establish the event/site pattern once for the exact supported
 editions and apply it systematically; research only genuine exceptions, contradictions,
-or multi-venue editions individually. Multiple small families using the same research mode
-should normally be bundled into one meaningful tranche.
+or multi-venue editions individually. Multiple small related families using the same
+research mode should normally be bundled into one meaningful tranche.
+
+Use a bounded source hierarchy for recurring families:
+
+1. accepted project/canonical/reciprocal evidence;
+2. official event/tournament/host institutional source family;
+3. target-school or obvious participant institutional source family;
+4. at most one specific high-yield authoritative fallback family when justified.
 
 For historical recurring work, avoid both one-family micro-checkpoints and one open-ended
 sweep across all remaining heterogeneous families. Work bounded bundles of related
-families.
+families and do not multiply source paths by game count.
+
+For one-offs, use accepted project evidence, target-school institutional evidence,
+obvious opponent/event/host institutional evidence, and at most one specific named
+authoritative fallback source. Generic web search is discovery-only. Do not fan out
+through forums, mirrors, scraped schedule sites, aggregators, random wikis, or unrelated
+venue-history pages merely because the obvious authoritative paths did not name the
+building.
 
 For historical one-offs, after systematic/high-yield work has removed the recoverable
 population, treat the surviving homogeneous residual as eligible for population-level
 terminal researched venue debt. Do not give every old one-off its own archival project
 merely to reduce the blank count.
+
+Do not continue a "locate exact sources for missing patches" tail chase after the bounded
+event/host/participant/fallback hierarchy is exhausted.
 
 The 1984-85+ population retains the strong exact-venue expectation. Historical
 proportionality does not weaken that modern standard.
