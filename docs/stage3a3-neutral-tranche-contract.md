@@ -21,10 +21,10 @@ Stage 3A-3 must preserve both:
 Use this exact order:
 
 1. accepted exact-game/project evidence already present;
-2. modern (1984-85+) recurring event/site families;
-3. modern (1984-85+) one-offs;
-4. pre-1984-85 recurring event/site families;
-5. pre-1984-85 one-offs.
+2. modern (1996-97+) recurring event/site families;
+3. modern (1996-97+) one-offs;
+4. historical (1995-96 and earlier) recurring event/site families;
+5. historical (1995-96 and earlier) one-offs.
 
 The mechanical accepted-evidence application may be combined with the first active research tier when small.
 
@@ -91,17 +91,17 @@ merely because the first authoritative paths did not name the building.
 
 ## 6. Modern versus historical convergence
 
-### Modern (1984-85+)
+### Modern (1996-97+)
 
-The strong exact-venue expectation remains.
+For regular-season neutral research, modern means 1996-97 through present. The strong exact-venue expectation remains.
 
 Modern recurring families should normally receive a systematic event/host challenge plus exception review. Modern one-offs should receive the bounded authoritative hierarchy above.
 
 A modern row may remain unresolved only after the required authoritative paths are genuinely exhausted and the evidentiary gap is explicitly preserved.
 
-### Pre-1984-85
+### Historical (1995-96 and earlier)
 
-Research seriously but proportionately.
+Research seriously but proportionately. Exact-building recovery is desirable enrichment, not a publication blocker, after the reasonable systematic/high-yield opportunities are exhausted.
 
 For recurring families:
 
@@ -116,6 +116,10 @@ For historical one-offs:
 - after the bounded authoritative paths are exhausted, terminalize the surviving homogeneous residual as researched venue debt.
 
 Residual difficulty after high-yield passes is evidence for stopping, not automatic justification for deeper source discovery.
+
+Preserve supported city/state and any partial venue identity. Surviving exact-building gaps in the 1995-96-and-earlier regular-season neutral population may be carried as explicit terminal researched venue debt and revisited later as enrichment. Do not reopen or downgrade already-supported exact venues merely because they now fall on the historical side of the cutoff.
+
+This cutoff change affects unresolved research priority only. HOME standards and all postseason venue requirements are unchanged.
 
 ## 7. No venue inference
 
