@@ -6,7 +6,7 @@
 
 Iowa proved that the permanent onboarding architecture is sound, but exposed a specific inefficiency: deterministic technical failures were first discovered after Owner Gate 1 had been sealed. That produced repeated preflight → carry-forward → reseal cycles even when basketball-history decisions had not changed.
 
-This amendment moves repeatable checks earlier, automates Gate 1 mechanics, and replaces one-command-at-a-time technical handoffs with guarded phase-sized operations. The historical rules in `new-team-onboarding-runbook.md`, shell rules in `codespace-terminal-safety.md`, parallelism rules in `parallel-portfolio-pipeline.md`, release guarantees in `school-onboarding-fast-path.md`, research adversarial acceptance in `research-freeze-self-challenge.md`, and post-A&M operational recovery rules in `implementation-efficiency-recovery.md` remain authoritative.
+This amendment moves repeatable checks earlier, automates Gate 1 mechanics, and replaces one-command-at-a-time technical handoffs with guarded phase-sized operations. The historical rules in `new-team-onboarding-runbook.md`, shell rules in `codespace-terminal-safety.md`, parallelism rules in `parallel-portfolio-pipeline.md`, release guarantees in `school-onboarding-fast-path.md`, research adversarial acceptance in `research-freeze-self-challenge.md`, post-A&M operational recovery rules in `implementation-efficiency-recovery.md`, and post-Washington-State Gate 1 authority boundary in `implementation-gate1-authority-boundary.md` remain authoritative.
 
 ## 1. Interaction standard: phase-sized, not command-sized
 
@@ -85,7 +85,7 @@ Review the mapping summary, then normally rerun with:
 
 The staging tool requires the onboarding branch to point exactly at current `origin/main`, requires `research_base_sha` to be an ancestor of current main, verifies the ZIP and research acceptance gate, rebases venue identities, reuses mechanically safe global identities, ignores research-time numeric IDs when creating genuinely new physical venues, assigns every new physical venue the next authoritative global ID from current main, stops on ambiguous physical identity, installs the six files, applies owner-confirmed scope metadata, validates, writes ignored `.onboarding/<school>/integration-freeze.json`, and can create the stable Phase 0 checkpoint.
 
-`RESEARCH_FROZEN` remains immutable source/research provenance. The integration manifest records the current-main `INTEGRATION_FROZEN` mapping and fresh member hashes.
+`RESEARCH_FROZEN` remains immutable source/research provenance. The integration manifest records the current-main `INTEGRATION_FROZEN` mapping, fresh member hashes, and a semantic snapshot of substantive source-game historical/evidentiary fields. That snapshot is the pre-Gate historical boundary used by the semantic-drift guard.
 
 ## 4. One authoritative preflight and one owner packet
 
@@ -94,6 +94,28 @@ From the clean Phase 0 checkpoint:
 ```bash
 python tools/onboard_school.py <school_key> --preflight
 ```
+
+The command now verifies the Integration Freeze semantic boundary before building the
+plan. Historical meaning in the staged source ledger may not drift silently between
+`INTEGRATION_FROZEN` and Gate 1. Representation-only current-main reconciliation
+remains allowed under `docs/implementation-gate1-authority-boundary.md`.
+
+If explicit inspection is useful:
+
+```bash
+python tools/onboarding_hardening.py freeze-drift <school_key>
+```
+
+After the first blocker-free preflight, perform one comprehensive deterministic
+representation/identity sweep and, when needed, one coherent repair batch. Regenerate
+authoritative preflight after that batch. **Do not optimize for a smaller decision
+count.** A mature 150- or 250-row Gate 1 universe is acceptable when the agent can
+compress it into supported recommendations.
+
+When new reciprocal/current-main evidence supports changing date, score, overtime,
+H/A/N, venue/location meaning, game type, postseason round, result, or another frozen
+historical fact, investigate it fully but do not rewrite the staged source package.
+Carry the proposed correction into Gate 1.
 
 The agent compresses the machine review into one human Gate 1 packet. The owner should not manually parse or fill a large CSV.
 
@@ -104,7 +126,13 @@ python tools/onboarding_hardening.py fill-review <school_key> \
   --map /tmp/<school>-gate1-map.json
 ```
 
-The map supports identity choices, ordinary discrepancy defaults, selected-candidate conditional defaults, exact overrides, and exact/default bases. The tool parses full `CBBG-#######` IDs and automatically marks rejected identity-candidate conditionals `NOT_APPLICABLE`.
+The map supports identity choices, ordinary discrepancy defaults, selected-candidate
+conditional defaults, exact overrides, exact/default bases, and owner-reviewed
+`source_patch_by_decision`, `canonical_patch_by_decision`, and
+`notes_by_decision` payloads. This lets the lane rehearse a historical correction
+without first mutating the frozen source package.
+
+The tool parses full `CBBG-#######` IDs and automatically marks rejected identity-candidate conditionals `NOT_APPLICABLE`.
 
 That automation specifically prevents the Iowa bug caused by ad hoc hyphen-splitting of canonical IDs.
 
@@ -132,7 +160,7 @@ This constructs the approved plan in memory and runs the same disposable-reposit
 
 The real tracked repository is not mutated and no `approved-plan.json` is sealed.
 
-A passing result prints `TECHNICAL READINESS PASSED`. Only then should Gate 1 be cryptographically sealed.
+A passing result prints `TECHNICAL READINESS PASSED`. The rehearsal also rechecks the Integration Freeze semantic boundary. Only then should Gate 1 be cryptographically sealed.
 
 This is designed to surface defects like Iowa's legacy partial Los Angeles state, unresolved canonical Play-in normalization, and stale scope regression test before the approval boundary.
 
