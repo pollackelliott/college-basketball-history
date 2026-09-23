@@ -5,7 +5,10 @@ The sealed-plan authority remains ``tools/onboard_school.py``. This companion mo
 repeatable work earlier and makes it executable:
 
 - ``research-check``: accept/reject a six-file portfolio before RESEARCH_FROZEN;
-- ``fill-review``: expand one compact Gate 1 decision map into review.csv;
+- ``freeze-drift``: verify that substantive historical meaning still matches
+  INTEGRATION_FROZEN before Gate 1;
+- ``fill-review``: expand one compact Gate 1 decision map, including optional
+  owner-reviewed source/canonical patch payloads, into review.csv;
 - ``carry-forward``: reuse prior owner decisions only when the decision universe is
   substantively identical after a purely technical repair;
 - ``rehearse-review``: run the complete disposable transaction and automated gate
