@@ -215,10 +215,13 @@ canonical/shared reuse, stopping, the substage architecture below, and the manda
 final row-level Stage 3A state.
 
 Stage 3A is **not one monolithic execution unit**. It is divided into five required
-substage boundaries. Each substage is a real stop boundary for chat execution.
+substage boundaries. Each substage is a real owner-facing stop boundary.
 
-A plain owner `Proceed` after a Stage 3A boundary authorizes only the exact next
-substage or evidence-class continuation identified in the prior response.
+Within Stages 3A-1 through 3A-3, evidence classes guide research but are **not** mandatory
+owner-facing stop boundaries. Bundle multiple small classes that use the same research
+mode into a meaningful tranche when safe. A plain owner `Proceed` after a required
+Stage 3A substage boundary authorizes the exact next substage; after a durability
+checkpoint it authorizes the serialized unfinished tranche.
 
 ### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
 
@@ -253,48 +256,63 @@ STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 
 Resolve the regular-season H/A/N residual before broad venue research.
 
-First partition the unresolved H/A/N population into coherent evidence classes. Work
-**one evidence class per turn**.
+First partition the unresolved H/A/N population into coherent evidence classes. Then work
+the **largest safely completable bundle of related classes** that use the same research
+mode.
 
-- A systematic class supported by one source structure may be resolved in full.
-- If a class requires independent row-by-row external research/adjudication, apply the
-  §3.5 cap of at most 25 independently researched rows in that turn.
-- Write accepted H/A/N findings through into the cumulative authoritative working ledger
-  before stopping.
+- A systematic source family may resolve a large population in one turn.
+- Multiple small opponent/source families should normally be bundled rather than returned
+  to the owner one by one.
+- If work requires independent row-by-row external research/adjudication, apply the §3.5
+  maximum of 25 independent adjudications; when a homogeneous residual is already 25 or
+  fewer rows, normally process it as one tranche.
+- Write accepted H/A/N findings through before the durability boundary.
 - Preserve contradictions or genuine researched unknowns explicitly; never infer H/A/N
   from geography.
-- Do not start HOME or NEUTRAL venue research merely because the H/A/N class finished
-  early in the turn.
+- Do not start HOME or NEUTRAL venue research merely because H/A/N finishes early in the
+  same turn.
 
-If the H/A/N substage remains incomplete after one evidence class or one capped
-row-by-row tranche, return:
+**Ancient/historical convergence:** after the whole-population/project-evidence pass and
+the obvious systematic institutional/reciprocal/source-family opportunities have been
+exhausted, a homogeneous old historical/non-D1 residual may be closed at the population
+level as terminal `RESEARCHED_UNRESOLVED` H/A/N debt. Do not require every surviving
+opponent family or every ancient row to prove independently that no deeper archive exists.
 
-```text
-STAGE 3A-1: INCOMPLETE — DURABLE CHECKPOINT PRESERVED
-Next bounded assignment: Stage 3A-1 — <exact remaining evidence class/tranche>
-STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
-```
-
-When H/A/N is fully researched/accounted, stop with `STAGE 3A-1: COMPLETE`.
+Return an incomplete checkpoint only after a meaningful tranche or when execution risk,
+a genuine contradiction, or a materially different research mode requires a stop. When
+H/A/N is fully researched/accounted, stop with `STAGE 3A-1: COMPLETE`.
 
 ### Stage 3A-2 — HOME venue research
 
 Only after Stage 3A-1 completes, research source-program HOME physical venues.
 
-- Establish the home-facility chronology from authoritative evidence.
-- Work one coherent HOME evidence class per turn: a facility era, transition/temporary
-  home class, off-campus class, or finite one-off residual.
-- A chronology or one systematic source may resolve a large class mechanically, but
-  explicit game-level evidence overrides chronology.
-- If separate row-level external adjudications are required, apply the §3.5 maximum of
-  25 independently researched rows in that turn.
-- Write accepted venue/location/provenance findings through before stopping.
-- Use the dedicated `RESEARCHED_UNRESOLVED_HOME_VENUE` exception only under its
-  controlling evidence standard.
-- Ordinary OPPONENT_HOME building blanks are not an active HOME research queue.
+Use a **facility chronology + default/exception model**:
 
-Stop after each evidence class/tranche. When all HOME obligations are researched/accounted,
-stop with `STAGE 3A-2: COMPLETE`.
+- establish the program's authoritative home-facility chronology and season-level home
+  evidence;
+- when a normal home venue is systematically established for a season/era and there is
+  no evidence of an alternate site, apply that supported venue across the exact covered
+  HOME population rather than re-proving the building through individual box scores;
+- use count mismatches, explicit source text, alternate-site markers, temporary/off-campus
+  evidence, or contradictions to isolate exception rows for exact-game research;
+- explicit game-level evidence always overrides the systematic default;
+- bundle related facility eras/classes that use the same research mode when safe;
+- if separate row-level adjudications are required, apply the §3.5 maximum of 25;
+- write accepted venue/location/provenance findings through before the durability boundary.
+
+For ancient HOME residuals, after the reasonable institutional/facility/reciprocal and
+other obvious systematic paths are exhausted, close the homogeneous residual under
+`RESEARCHED_UNRESOLVED_HOME_VENUE` rather than creating one archaeology project per
+game. **Before Stage 3A-2 may complete, every such row must also have supported city/state
+geography written through.** Systematically established source-program home geography may
+be propagated across already-established HOME rows when no accepted evidence indicates an
+alternate/off-campus location; this is geography propagation, not H/A/N inference.
+Isolate exceptions rather than forcing the default.
+
+Ordinary OPPONENT_HOME building blanks are not an active HOME research queue.
+
+When all HOME obligations and HOME geography are researched/accounted, stop with
+`STAGE 3A-2: COMPLETE`.
 
 ### Stage 3A-3 — NEUTRAL venue research
 
@@ -302,23 +320,41 @@ Only after Stage 3A-2 completes, research remaining regular-season NEUTRAL physi
 venues.
 
 The Stage 3A-0 exact-game harvest remains controlling project evidence and must not be
-repeated wholesale unless a specific contradiction or newly changed project state makes
-a narrow recheck necessary.
+repeated wholesale unless a specific contradiction or changed project state makes a
+narrow recheck necessary.
 
-Work **one coherent NEUTRAL evidence class per turn**, such as a recurring tournament,
-event/site family, reciprocal institutional series, modern source family, or finite
-one-off residual.
+Use this default execution order:
 
-- For 1984-85 through present, apply the strong exact-venue expectation.
-- For pre-1984-85 rows, research seriously but proportionately under the historical
-  stopping standard.
-- A systematic source may resolve a large class in one turn.
-- If separate row-level external adjudications are required, apply the §3.5 maximum of
-  25 independently researched rows in that turn.
-- Write accepted venue/location/provenance findings through before stopping.
+1. **mechanical accepted-evidence application** already present in the durable state;
+2. **1984-85+ recurring event/site families**, using event/host/tournament history and
+   default-plus-exceptions family evidence;
+3. **1984-85+ one-offs**, under the strong exact-venue standard;
+4. **pre-1984-85 recurring families**, bundled into related multi-family sweeps using the
+   same research mode;
+5. **pre-1984-85 one-offs**, with aggressive proportional convergence after the obvious
+   reasonable paths are exhausted.
 
-Stop after each evidence class/tranche. When all NEUTRAL obligations are
-researched/accounted, stop with `STAGE 3A-3: COMPLETE`.
+For recurring families, prove the event/site pattern once for the exact covered editions
+and apply it systematically; research only genuine exceptions or multi-venue editions
+individually. Do not re-prove the same venue game by game.
+
+For historical recurring work, bundle several related families rather than checkpointing
+after every two- or three-game event, but do not attempt an entire large heterogeneous
+residual in one open-ended sweep.
+
+For historical one-offs, when the systematic/high-yield paths have already removed the
+recoverable population, treat the surviving homogeneous residual as eligible for
+population-level terminal researched venue debt. Do not give every surviving old one-off
+its own newspaper/archive project merely to reduce the blank count.
+
+If independent adjudications are required, apply the §3.5 maximum of 25; when a homogeneous
+one-off residual is already at or below that ceiling, normally process the whole residual
+as one convergence tranche.
+
+Do not infer a venue from city, event custom, nearby editions, opponent home arena, or
+chronology alone. Write accepted venue/location/provenance findings through before the
+durability boundary. When all NEUTRAL obligations are researched/accounted, stop with
+`STAGE 3A-3: COMPLETE`.
 
 ### Stage 3A-4 — Mechanical closeout and QA
 
