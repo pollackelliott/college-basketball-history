@@ -3,7 +3,7 @@
 - **Status:** Controlling Research-lane proportionality and convergence policy
 - **Applies to:** opponent-identity research, Stage 3A, Stage 3B, and Stage 6 pre-freeze self-challenge
 - **Does not replace:** game-universe requirements, site-completeness requirements, NCAA-site completeness, opponent-identity correctness, NON_D1 owner sanity scan, or the Research Freeze self-challenge
-- **Evidence basis:** Oklahoma State and Kansas State demonstrated that rigorous school research can reach `RESEARCH_FROZEN` efficiently in one Research conversation; Duke and North Carolina demonstrated a later-stage failure mode in which already well-researched residual ambiguity could trigger repeated low-yield investigation and delayed convergence.
+- **Evidence basis:** Oklahoma State and Kansas State demonstrated efficient rigorous Research; Duke and North Carolina demonstrated late-stage low-yield reopening; Oregon State demonstrated that durable but over-granular Stage 3A execution can still create excessive owner handoffs and context pressure.
 
 ## 1. Purpose
 
@@ -11,9 +11,9 @@ Research rigor is unchanged. This policy prevents rigor from turning into open-e
 
 The normal operating target is:
 
-> **One school should normally reach `RESEARCH_FROZEN` within one Research chat. A replacement chat is recovery insurance, not a planned phase of school research.**
+> **One school should normally reach `RESEARCH_FROZEN` within one or a small number of Research chats, with durable checkpoints controlling continuity.**
 
-This is an operational target, not permission to rush a genuine blocker. If a conversation fails or an exceptional school requires recovery, the portable-checkpoint rules remain controlling.
+A planned fresh-chat rollover at a durable major stage/substage boundary is normal hygiene for a long school, not process failure. Do not preserve one-chat continuity at the cost of context exhaustion or excessive owner relays.
 
 ## 2. Materiality test for continued research
 
@@ -30,6 +30,8 @@ After the obvious authoritative, institutional, reciprocal, archival, facility, 
 If additional searching would not materially affect one of those outcomes, preserve the evidence already checked, classify the uncertainty honestly under existing policy, and move on.
 
 Historical interest by itself is not a freeze blocker.
+
+Residual difficulty is itself evidence for proportional stopping. After high-yield systematic passes have removed the readily recoverable population, the surviving homogeneous ancient/historical residual should face a **higher bar for further bespoke research**, not automatically receive another opponent-by-opponent or game-by-game cycle.
 
 ## 3. Stage 3A convergence
 
@@ -69,16 +71,19 @@ Across Stage 3A, work coherent populations/evidence classes rather than recursiv
 turning each surviving blank into a new research project. Preserve the distinction
 between **research coherence** and **execution size**:
 
-- one systematic evidence class may be audited cleanly as a whole when a shared source
-  structure or deterministic rule resolves the population without separate external
-  adjudication for each row;
-- when the same coherent class requires separate row-level external searches or
-  historical judgments, execute no more than **25 individual adjudications per turn**,
-  write accepted findings through, checkpoint the exact residual queue, and resume the
-  same class on the next turn.
+- one systematic evidence structure may resolve a large population as a whole;
+- multiple small families using the same source/research mode should normally be bundled
+  into one meaningful tranche;
+- independent row-level research is capped at 25 adjudications per turn, but when a
+  homogeneous residual is already 25 or fewer rows, normally process the whole residual
+  rather than creating repeated 3–8 row checkpoints;
+- do not stretch "systematic" into one open-ended sweep across a large heterogeneous
+  residual with many unrelated families or research modes.
 
-The execution cap does not mean the class has converged and does not waive any remaining
-research obligation.
+For old H/A/N and historical neutral residuals, once the obvious systematic/high-yield
+paths have been exhausted, population-level terminalization is valid. The project does
+not require every surviving ancient opponent family or one-off game to receive bespoke
+archive research before the residual can converge.
 
 A smaller remainder produced by a successful pass is not, by itself, a reason to invent
 another research strategy. Conversely, a large or surprising modern neutral residual is
@@ -120,19 +125,31 @@ String similarity, shared city names, later institutional names, or historical i
 
 ## 6. Stage 6 is an audit, not a second research cycle
 
-Stage 6 must challenge the portfolio adversarially, but it may not broadly restart populations already researched and accepted in Stages 1–3B.
+Stage 6 must challenge the portfolio adversarially, but every residual population enters
+Stage 6 as **accepted researched debt from completed earlier stages**, not as a freshly
+active research queue.
 
-For each challenged residual class, classify the remaining work as:
+For each challenged residual class, classify the work as:
 
 1. **Material blocker** — current policy requires resolution before `RESEARCH_FROZEN`.
-2. **Bounded repair** — a specific defect or high-yield evidence opportunity has been identified and can be repaired without reopening the population generally.
-3. **Terminal researched historical debt** — the relevant systematic/high-yield evidence classes have been exhausted, the uncertainty is explicitly accounted, no material publication blocker remains, and current policy permits the residual.
+2. **Bounded repair** — a specific contradiction, deficiency, or systematic/high-yield
+   opportunity has been identified and can be repaired without reopening the population
+   generally.
+3. **Terminal researched historical debt** — the relevant systematic opportunities have
+   been exhausted, the uncertainty is explicitly accounted, and current policy permits
+   the residual.
 
-Resolve material blockers and bounded repairs proportionately. Document category 3 and stop researching it.
+The burden is on Stage 6 to identify a concrete reason to reopen part of category 3.
+Large counts alone do not reactivate the rows.
 
-Stage 6 may reopen an accepted population only when the self-challenge identifies a **specific contradiction, material deficiency, or newly identified systematic/high-yield evidence opportunity**. The mere presence of unresolved rows, an interesting historical question, or the possibility that another source might exist is not sufficient.
+Challenge each class systematically, batch supported repairs, isolate contradictions
+narrowly, and return survivors immediately to terminal debt once that opportunity is
+exhausted. Do not convert a systematic reciprocal/date/venue challenge into independent
+row-by-row archaeology.
 
-Once all remaining residual classes are either repaired or valid terminal researched historical debt and the existing acceptance requirements pass, Stage 6 should complete. Do not create another investigative pass solely to reduce residual counts.
+Do not stop for owner interaction after one or two ordinary repairs if the same class-level
+audit can safely continue. Once all residual classes are either repaired or valid terminal
+debt and the acceptance requirements pass, Stage 6 should complete.
 
 ## 7. Owner intervention
 
