@@ -87,16 +87,20 @@ packages, or other approved shared project data. Reuse only an unambiguous same-
 match with traceable provenance; do not infer a neutral venue from city, usual arena,
 nearby games, or another edition of an event.
 
-For the **1984-85 season through present**, apply a strong exact-venue expectation. A
+For the **1996-97 season through present**, apply a strong exact-venue expectation. A
 modern neutral row should not survive as unresolved merely because the source school's
 primary ledger omits the building. Challenge the obvious event/tournament, host,
 opponent-institutional, reciprocal, and contemporary evidence paths before accepting
 research debt.
 
-For neutral games **before 1984-85**, research remains serious but proportionate.
-Recurring events/site families and obvious reciprocal/institutional evidence should be
-worked systematically, but a genuinely unsupported exact building may remain explicitly
-researched unresolved after the reasonable high-yield evidence paths are exhausted.
+For regular-season neutral games **1995-96 and earlier**, research remains serious but
+proportionate. Recurring events/site families and obvious reciprocal/institutional
+evidence should be worked systematically, but a genuinely unsupported exact building may
+remain explicitly researched unresolved after the reasonable high-yield evidence paths
+are exhausted. Such surviving exact-building debt is nonblocking historical enrichment
+debt; preserve supported city/state and partial venue information and do not reopen
+already-supported exact venues merely because they fall on the historical side of the
+cutoff.
 
 When both participants are published, both source packages are available and known
 same-game evidence must be propagated. A genuinely unresolved result should reflect
