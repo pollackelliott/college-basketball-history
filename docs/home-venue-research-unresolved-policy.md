@@ -58,9 +58,32 @@ Before assigning this status, the research lane should review, as applicable:
 
 A broad unexplored era, an absent first-pass venue table, or a generic claim that a site is "unknown" does not qualify. For 1930s-or-earlier rows, the lane may stop once the reasonable institutional, facility, archival, schedule, reciprocal, and game-level paths have been deliberately exhausted and the exact building remains unsupported; it need not invent certainty or continue unlimited archaeology.
 
+### Systematic HOME geography propagation
+
+The unresolved-building exception still requires complete city/state, but that geography
+does **not** need to be re-proved game by game when the source program's home geography is
+systematically established for the relevant era.
+
+For already-established HOME rows, the Research lane may propagate a supported source-program
+home city/state across the exact covered population when:
+
+- authoritative institutional/facility/history evidence establishes that home geography
+  for the era;
+- no accepted row-level evidence indicates an alternate/off-campus HOME location; and
+- any known temporary, alternate, or special-site exceptions are isolated and handled
+  separately.
+
+This is geography propagation for rows whose HOME classification is already established.
+It must never be used to infer H/A/N from geography.
+
+When an ancient HOME residual is terminalized under
+`RESEARCHED_UNRESOLVED_HOME_VENUE`, the same Stage 3A-2 closeout must populate the
+supported city/state before the substage is declared complete. Stage 3A-4 should not
+discover a large avoidable HOME-location blocker after venue research has already closed.
+
 ## Owner ruling
 
-Approved by the project owner on 2026-08-30. The governing intent is: a truthful researched blank is preferable to inventing a historical venue solely to satisfy a completeness counter.
+Approved by the project owner on 2026-08-30. Post-Oregon-State systematic HOME-geography propagation amendment approved on 2026-09-23. The governing intent is: a truthful researched blank is preferable to inventing a historical venue solely to satisfy a completeness counter, while established HOME geography should be propagated systematically rather than re-researched row by row.
 
 ## Reconciliation-backed canonical HOME supplement
 
