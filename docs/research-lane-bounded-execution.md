@@ -517,18 +517,20 @@ If a real defect is exposed, repair only the affected research fields, rerun aff
 
 ### Terminal-debt stopping rule
 
-Stage 6 is an adversarial audit, not a command to eliminate every permitted historical unknown.
+Stage 6 is an adversarial audit, not a command to eliminate every permitted historical unknown. **Residual populations enter Stage 6 as accepted researched debt from completed earlier stages, not as freshly reopened research queues.**
 
 For each meaningful residual class:
 
 1. challenge the population as a class;
-2. inspect obvious authoritative/institutional/reciprocal evidence classes and any specific systematic high-yield opportunity;
-3. repair supported defects in bounded batches;
-4. if the surviving population is homogeneous, explicitly researched/accounted, policy-permitted, and no further comparable systematic evidence class is identified, classify it as **terminal researched historical debt** and stop individual searching merely to reduce the count.
+2. identify a concrete contradiction, material deficiency, or specific systematic/high-yield opportunity that could materially change the class;
+3. repair supported defects in batch and isolate genuine contradictions narrowly;
+4. once that systematic opportunity is exhausted, return the surviving rows immediately to **terminal researched historical debt** unless another comparably concrete opportunity is already identified.
 
-Do not recursively treat every smaller remainder as a new mandate for exhaustive row-by-row research. Large residual counts are review triggers, not zero-unknown requirements.
+The burden is on the self-challenge to justify reopening a portion of the accepted debt. The mere existence of unresolved rows does not do so.
 
-A systematic opportunity may justify one proportionate batch even when many rows remain. Once that opportunity is exhausted, the lane should test Stage 6 acceptance rather than begin hundreds of independent searches.
+Do not recursively treat every smaller remainder as a new mandate for exhaustive row-by-row research. Do not stop for owner interaction after one or two ordinary repairs if the same systematic challenge can safely continue across the class. Large residual counts are review triggers, not zero-unknown requirements.
+
+For exact-date debt, pursue concentrated institutional/reciprocal opportunities (for example, a large opponent series) as class-level challenges; if the concentrated source does not materially resolve the population, terminalize the survivors rather than switching to newspaper archaeology.
 
 ### Completion standard
 
