@@ -26,6 +26,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from integration_freeze_guard import assert_no_unapproved_semantic_drift
 from onboarding_plan import (
     WorkflowError,
     approve_plan,
@@ -553,6 +554,7 @@ def main() -> int:
     try:
         if args.preflight:
             ensure_package_checkpoint(repo)
+            assert_no_unapproved_semantic_drift(repo, args.school_key)
             plan = build_plan(repo, args.school_key)
             paths = write_preflight_artifacts(plan, output_dir)
             summary = plan.get("summary", {})
@@ -594,6 +596,7 @@ def main() -> int:
 
         if args.approve:
             ensure_package_checkpoint(repo)
+            assert_no_unapproved_semantic_drift(repo, args.school_key)
             approved, approved_hash = approve_plan(
                 repo,
                 plan_path,
@@ -612,6 +615,7 @@ def main() -> int:
             return 0
 
         if args.apply:
+            assert_no_unapproved_semantic_drift(repo, args.school_key)
             if not approved_path.is_file():
                 raise WorkflowError(f"approved plan file not found: {approved_path}")
             approved = json.loads(approved_path.read_text(encoding="utf-8"))
