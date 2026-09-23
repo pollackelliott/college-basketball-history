@@ -629,6 +629,76 @@ class ReviewAutomationTests(unittest.TestCase):
                 carry_forward_review(old, new)
 
 
+    def test_fill_review_accepts_owner_patch_payloads_from_compact_map(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            review = root / "review.csv"
+            mapping = root / "map.json"
+            write_csv(review, REVIEW_FIELDS, self.sample_rows())
+
+            target_id = "DISCREPANCY-TESTRAW-00003-SCORE"
+            mapping.write_text(
+                json.dumps(
+                    {
+                        "identity": {
+                            "TESTRAW-00001": "MATCH_CANONICAL:CBBG-0000001"
+                        },
+                        "defaults": {
+                            "discrepancy": "KEEP_CANONICAL",
+                            "selected_conditional": "KEEP_CANONICAL",
+                            "basis": "Owner Gate 1 approved recommendation.",
+                            "identity_basis": "Owner Gate 1 approved identity.",
+                        },
+                        "decisions": {
+                            "PUBLICATION-TEST": "ENABLE_PUBLIC_PAGE"
+                        },
+                        "basis_by_decision": {
+                            "PUBLICATION-TEST": "Owner Gate 1 approved publication."
+                        },
+                        "source_patch_by_decision": {
+                            target_id: {
+                                "team_score": "50",
+                                "overtime_periods": "1",
+                            }
+                        },
+                        "canonical_patch_by_decision": {
+                            target_id: {
+                                "overtime_periods": "1",
+                            }
+                        },
+                        "notes_by_decision": {
+                            target_id: (
+                                "Owner-authorized historical correction discovered "
+                                "during Implementation; frozen raw_text preserved."
+                            )
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            fill_review_from_map(review, mapping)
+
+            with review.open(encoding="utf-8-sig", newline="") as handle:
+                rows = {
+                    row["decision_id"]: row
+                    for row in csv.DictReader(handle)
+                }
+            target = rows[target_id]
+            self.assertEqual(
+                json.loads(target["source_patch_json"]),
+                {"team_score": "50", "overtime_periods": "1"},
+            )
+            self.assertEqual(
+                json.loads(target["canonical_patch_json"]),
+                {"overtime_periods": "1"},
+            )
+            self.assertIn(
+                "Owner-authorized historical correction",
+                target["notes"],
+            )
+
+
 class VenueRebaseTests(unittest.TestCase):
     def test_collision_renumbers_new_identity_and_exact_key_reuses_existing(self):
         global_rows = [
