@@ -30,7 +30,9 @@ The default interaction unit is a complete reversible phase.
 
 A phase handoff should normally contain one runnable command block or one guarded operation, not a sequence of messages where the owner must execute and paste one command at a time.
 
-When several deterministic commands are required, prefer a guarded child script or repository tool that:
+When several deterministic commands are required, prefer the permanent repository tool directly. Use a guarded child script only when no permanent phase command represents the operation cleanly. The Stanford retrospective showed that large bespoke wrapper/heredoc orchestration can create ambiguity even when the underlying permanent tools are sound.
+
+When a guarded child script is genuinely required, it should:
 
 1. performs the complete phase;
 2. stops safely on the first real blocker;
@@ -146,6 +148,16 @@ Prefer commands that print machine-readable or deliberately compact summaries.
 Operational efficiency must not fragment historical judgment.
 
 Authoritative preflight still becomes one consolidated owner packet. The owner should not receive separate messages for deterministic identity consequences, routine normalization, and each individual discrepancy when they can be researched and presented together.
+
+**Packet size is not an efficiency metric.** Do not spend pre-Gate turns rewriting
+frozen historical assertions merely to reduce the number of decisions. The agent should
+research the packet, compress repetitive recommendations, and use Gate 1 patch payloads
+for supported historical corrections discovered during Implementation.
+
+The first blocker-free preflight is the point at which the lane should switch from
+"clear technical/current-main incompatibilities" to "mature and rehearse the owner
+packet." A later change to substantive historical meaning belongs in Gate 1 unless a
+permanent machine rule explicitly classifies it as deterministic.
 
 If technical repair after approval leaves the substantive decision universe unchanged, use supported carry-forward rather than asking for another full Gate 1 review.
 
