@@ -195,10 +195,16 @@ def run_stage2(
     *,
     map_path: Path | None = None,
 ) -> tuple[int, dict[str, Any], Path]:
-    status = _base_status(repo, school_key)
+    status: dict[str, Any] = {
+        "schema_version": STATUS_SCHEMA_VERSION,
+        "school_key": school_key,
+        "stage": "IMPLEMENTATION_STAGE_2",
+        "status": "RUNNING",
+    }
     status_path = repo / ".onboarding" / school_key / STATUS_FILENAME
 
     try:
+        status.update(_base_status(repo, school_key))
         onboard_school.ensure_package_checkpoint(repo)
         drift = semantic_drift_report(repo, school_key)
         if drift.get("status") != "PASS":
