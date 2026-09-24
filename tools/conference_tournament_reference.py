@@ -8,6 +8,7 @@ LibreOffice, openpyxl, or another spreadsheet dependency.
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import gzip
 import hashlib
@@ -22,7 +23,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SITES_OUT = ROOT / "data/reference/conference-tournament-sites.csv.gz"
+SITES_OUT = ROOT / "data/reference/conference-tournament-sites.csv.gz.b64"
 COVERAGE_OUT = ROOT / "data/reference/conference-tournament-site-coverage.csv"
 META_OUT = ROOT / "data/reference/conference-tournament-sites.meta.json"
 
@@ -226,7 +227,7 @@ def parse_workbook(source: Path) -> tuple[list[dict[str, str]], list[dict[str, s
         "conference_checklist_rows": len(coverage),
         "conference_checklist_complete": sum(1 for row in coverage if row["filled_in_to_completion"] == "Yes"),
         "conference_checklist_incomplete": sum(1 for row in coverage if row["filled_in_to_completion"] == "No"),
-        "normalized_snapshot": "data/reference/conference-tournament-sites.csv.gz",
+        "normalized_snapshot": "data/reference/conference-tournament-sites.csv.gz.b64",
     }
     return sites, coverage, meta
 
@@ -242,14 +243,16 @@ def _csv_text(rows: list[dict[str, str]], fieldnames: list[str]) -> str:
 def refresh_from_workbook(source: Path) -> None:
     sites, coverage, meta = parse_workbook(source)
     csv_bytes = _csv_text(sites, SITE_FIELDS).encode("utf-8")
-    SITES_OUT.write_bytes(gzip.compress(csv_bytes, compresslevel=9, mtime=0))
+    compressed = gzip.compress(csv_bytes, compresslevel=9, mtime=0)
+    SITES_OUT.write_text(base64.b64encode(compressed).decode("ascii") + "\n", encoding="ascii")
     COVERAGE_OUT.write_text(_csv_text(coverage, COVERAGE_FIELDS), encoding="utf-8")
     META_OUT.write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def load_snapshot() -> list[dict[str, str]]:
-    with gzip.open(SITES_OUT, "rt", encoding="utf-8", newline="") as f:
-        return list(csv.DictReader(f))
+    encoded = SITES_OUT.read_text(encoding="ascii").strip()
+    csv_text = gzip.decompress(base64.b64decode(encoded)).decode("utf-8")
+    return list(csv.DictReader(io.StringIO(csv_text)))
 
 
 def check_snapshot() -> int:
