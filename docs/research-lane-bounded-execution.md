@@ -360,10 +360,8 @@ Use this default execution order:
 2. **1996-97+ recurring event/site families**, using event/host/tournament history and
    default-plus-exceptions family evidence;
 3. **1996-97+ one-offs**, under the strong exact-venue standard;
-4. **1995-96-and-earlier recurring families**, bundled into related multi-family sweeps using the
-   same research mode;
-5. **1995-96-and-earlier one-offs**, with aggressive proportional convergence after the obvious
-   reasonable paths are exhausted.
+4. one **1995-96-and-earlier historical location-enrichment pass** across the remaining
+   regular-season neutral residual.
 
 After substantial research begins in one tier, **do not cross into the next materially
 different tier in the same turn**. Finish the active tier/tranche, write accepted findings
@@ -381,29 +379,21 @@ Use this source hierarchy for recurring families:
 3. target-school or obvious participant institutional source family;
 4. at most one specific high-yield authoritative fallback family when justified.
 
-For historical recurring work, bundle several related families rather than checkpointing
-after every two- or three-game event, but do not attempt an entire large heterogeneous
-residual in one open-ended sweep or multiply source paths by game count.
+For the historical location-enrichment pass, mechanically regroup the remaining residual
+by obvious event/opponent/locality structures when useful, but do not turn those groups
+into separate exact-building research obligations. Use accepted project evidence plus the
+obvious systematic event/host/participant institutional opportunity. Preserve supported
+event identity and city/state; accept an exact building when that same evidence directly
+supplies it.
 
-For one-offs, use accepted project evidence, target-school institutional evidence,
-obvious opponent/event/host institutional evidence, and at most one specific named
-authoritative fallback source. Generic web search is discovery-only, not an evidence
-class.
+Once city/state is supported, do not open another source path solely to recover the exact
+building. Terminalize the blank building as historical enrichment debt. If locality itself
+remains unsupported after the obvious systematic opportunity, preserve the researched
+unknown rather than escalating into row-level archive research.
 
-For historical one-offs, when the systematic/high-yield paths have already removed the
-recoverable population, treat the surviving homogeneous residual as eligible for
-population-level terminal researched venue debt. Do not give every surviving old one-off
-its own newspaper/archive project merely to reduce the blank count. For regular-season
-neutral games from 1995-96 and earlier, surviving exact-building debt is not a publication
-blocker after proportionate systematic/high-yield exhaustion; preserve supported city/state
-and partial venue information and carry the remainder explicitly as terminal historical debt.
-
-If independent adjudications are required, apply the §3.5 maximum of 25; when a homogeneous
-one-off residual is already at or below that ceiling, normally process the whole residual
-as one convergence tranche only when that does not require many unrelated source paths.
-
-Do not continue a "locate exact sources for missing patches" tail chase after the bounded
-source hierarchy is exhausted.
+The independent-adjudication ceiling still applies when the historical pass unexpectedly
+breaks into genuinely separate row-level adjudications, but the normal goal is one
+population-level location pass rather than repeated small owner-facing packages.
 
 Do not infer a venue from city, event custom, nearby editions, opponent home arena, or
 chronology alone. Write accepted venue/location/provenance findings through before the
@@ -437,7 +427,7 @@ include:
 - HOME venue gaps limited to valid researched-unresolved HOME exceptions;
 - ordinary OPPONENT_HOME venue blanks excluded from active source-school research;
 - modern neutral rows (1996-97+) subjected to the strong exact-venue pass;
-- historical neutral rows (1995-96 and earlier) subjected to the proportionate systematic/high-yield pass, with surviving exact-building gaps allowed as explicitly accounted nonblocking terminal debt;
+- historical regular-season neutral rows (1995-96 and earlier) subjected to the location-first systematic pass, with supported event/city/state preserved and surviving exact-building gaps allowed as explicitly accounted nonblocking terminal enrichment debt;
 - every material unresolved site fact explicitly researched/accounted;
 - ambiguous physical venue identities = 0;
 - one authoritative row-level Stage 3A ledger sufficient for a successor chat and Stage 4.
@@ -461,18 +451,24 @@ Close conference-tournament, NCAA, NIT, and other postseason classification/site
 - identify the exact postseason population and taxonomy;
 - normalize controlled rounds under repository policy;
 - research H/A/N independently from physical venue identity;
-- research conference-tournament sites, including split-site/campus-round structures;
+- research **every postseason game's exact physical venue + city/state to exhaustion** across NCAA, NIT, conference tournaments, and other postseason events;
+- research conference-tournament sites, including split-site/campus-round structures and host-site exceptions;
 - use owner-supplied tournament-site references only within their explicitly authorized school/conference scope and cross-verify prudently;
-- research NCAA Tournament physical venue + city + state completely;
-- research NIT/other postseason sites and explicitly account for any genuine residual unknowns;
+- use official tournament/conference/host/participant sources and targeted archival evidence as needed until the reasonable authoritative paths are exhausted;
 - reconcile physical venue aliases/naming eras;
 - preserve correction overlays when stronger postseason evidence corrects a Stage 1 field without changing game identity.
+
+The historical regular-season neutral shortcut does **not** apply to Stage 3B. Do not stop
+postseason exact-venue research merely because city/state is known. Exact building identity
+remains an active research obligation for NCAA, NIT, conference-tournament, and every other
+postseason row.
 
 ### Completion standard
 
 - complete postseason partition and H/A/N census;
 - NCAA physical venue + city + state gaps = 0;
-- conference/NIT/other material site gaps explicitly researched/accounted;
+- NIT, conference-tournament, and other postseason exact-venue gaps have been researched to exhaustion and any genuinely unrecoverable survivor is explicitly documented with the exact authoritative paths exhausted;
+- no postseason row is terminalized under the historical regular-season neutral enrichment shortcut;
 - ambiguous physical venue identities = 0;
 - postseason + regular-season partitions account exactly for Stage 1;
 - durable mapping/audit artifacts emitted when feasible.
