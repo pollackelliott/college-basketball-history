@@ -2,7 +2,7 @@
   "conference_checklist_complete": 35,
   "conference_checklist_incomplete": 9,
   "conference_checklist_rows": 44,
-  "normalized_snapshot": "data/reference/conference-tournament-sites.csv.gz",
+  "normalized_snapshot": "data/reference/conference-tournament-sites.csv.gz.b64",
   "reference_status_counts": {
     "COMPLETE": 1373,
     "PARTIAL": 22,
