@@ -61,14 +61,17 @@ For **1996-97 through present**, apply a strong exact-venue expectation. Modern 
 debt requires a deliberate challenge of the obvious tournament/event, host, opponent,
 reciprocal, and contemporary source classes before it may survive.
 
-For **1995-96 and earlier** regular-season neutral rows, research seriously but
-proportionately. Work recurring event/site families and other systematic/high-yield
-evidence classes. Once those paths are exhausted and the remaining uncertainty is
-historically plausible, preserve the researched unknown and stop rather than turning
-every old one-off into open-ended archaeology. Surviving exact-building debt is explicit
-historical enrichment debt, not a publication blocker. Preserve supported city/state and
-partial venue information, and do not reopen already-supported exact venues merely
-because they now fall on the historical side of the cutoff.
+For **1995-96 and earlier** regular-season neutral rows, use the location-first historical
+standard. Work accepted project evidence plus the obvious systematic event/host/participant
+institutional opportunity. Preserve supported event identity and city/state, and accept an
+exact building when that same evidence directly supplies it.
+
+Once supported city/state is established, do not open another source path solely to recover
+the physical building. Preserve the researched locality and stop; the blank building is
+explicit historical enrichment debt, not a publication blocker. If locality itself remains
+unsupported after the obvious systematic opportunity, preserve the researched unknown rather
+than escalating into bespoke row-level archaeology. Do not reopen already-supported exact
+venues merely because they fall on the historical side of the cutoff.
 
 Across Stage 3A, work coherent populations/evidence classes rather than recursively
 turning each surviving blank into a new research project. Preserve the distinction
@@ -91,13 +94,13 @@ obvious opponent institutional evidence, then at most one specific high-yield au
 fallback family when justified. Generic search is only a locator for those source families.
 Once those paths are exhausted, converge rather than opening unrelated domains.
 
-Stage 3A-3 requires the same fanout discipline plus **tier discipline**. Neutral research
-must stay within one coherent tier/research mode per substantial turn: modern recurring,
-modern one-offs, historical recurring, or historical one-offs. Recurring families should
-reuse event/host/participant source families across multiple rows; one-offs should use a
-small authoritative hierarchy. Once the bounded event/host/participant/fallback paths are
-exhausted, write through supported recoveries and converge the surviving historical debt
-rather than starting an exact-source tail chase.
+Stage 3A-3 requires the same fanout discipline plus **tier discipline**. Modern neutral
+research stays in modern recurring or modern one-off tiers. After those close, the remaining
+1995-96-and-earlier regular-season neutral residual receives one location-enrichment pass.
+That pass may regroup rows mechanically by event/opponent/locality, but those groupings are
+not separate exact-building obligations. Once the obvious project/event/host/participant
+location evidence is exhausted, write through supported event/city/state findings and
+terminalize remaining building blanks rather than starting another source tree.
 
 For old H/A/N and historical neutral residuals, once the obvious systematic/high-yield
 paths have been exhausted, population-level terminalization is valid. The project does
@@ -108,8 +111,8 @@ A smaller remainder produced by a successful pass is not, by itself, a reason to
 another research strategy. Conversely, a large or surprising **1996-97+** modern neutral
 residual is evidence that the class has probably **not** converged and must be challenged
 before freeze. A substantial 1995-96-and-earlier exact-building residual may still be
-publication-safe when it is explicitly researched/accounted and no comparable systematic
-high-yield opportunity remains.
+publication-safe when the location-first pass is complete and the surviving blanks are
+explicitly researched/accounted.
 
 Do not infer H/A/N from geography or assign a physical building merely because an
 aggregate facility chronology makes it plausible. Supported unknown remains preferable
@@ -123,11 +126,25 @@ and partial overlays do not constitute durable convergence.
 
 ## 4. Stage 3B convergence
 
-Stage 3B retains the strict postseason standards already in repository policy, especially the non-waivable NCAA physical venue + city/state requirement.
+Stage 3B uses a **strict postseason exact-venue standard**. The regular-season historical
+neutral shortcut does not apply.
 
-For conference-tournament, NIT, and other non-NCAA postseason residuals, use the same population-level convergence rule as Stage 3A: exhaust obvious authoritative and systematic/high-yield evidence, repair supported facts, explicitly account for permitted residual debt, and stop when further individual searching is disproportionate and would not change publication safety.
+For NCAA, NIT, conference-tournament, and every other postseason row, exact physical venue
+plus city/state remains an active research obligation. Research the postseason population
+to exhaustion using official tournament/conference/host/participant sources, accepted
+project/reciprocal evidence, and targeted archival material when needed.
 
-Do not repeatedly reopen a completed postseason population merely because another source might theoretically exist. A completed population reopens only for a concrete contradiction, a newly identified systematic evidence class likely to change material results, or a repository-required blocker.
+NCAA physical venue + city + state remains mandatory and non-waivable.
+
+For NIT, conference-tournament, and other postseason games, do not stop merely because
+city/state is known. Continue exact-building research until the reasonable authoritative
+paths are exhausted. A genuinely unrecoverable survivor may remain only with explicit
+documentation of the exact source families/paths exhausted and why stronger certainty is
+unsupported.
+
+Do not repeatedly reopen a completed postseason population merely because another source
+might theoretically exist after that exhaustive pass. Reopen only for a concrete
+contradiction, newly identified authoritative evidence, or a repository-required blocker.
 
 ## 5. Historical and NON_D1 opponent identity stopping rule
 
