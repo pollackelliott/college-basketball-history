@@ -19,6 +19,7 @@ Read these process documents together before onboarding work:
 - `docs/stage3a0-local-only-contract.md`
 - `docs/stage3a1-source-fanout-contract.md`
 - `docs/stage3a3-neutral-tranche-contract.md`
+- `docs/conference-tournament-site-reference.md`
 - `docs/research-freeze-self-challenge.md`
 - `docs/research-convergence-and-stopping.md`
 - `docs/shared-reference-authority.md`
@@ -119,6 +120,14 @@ historical enrichment debt. This shortcut applies only to regular-season neutral
 NCAA, NIT, conference-tournament, and all other postseason exact venues remain active Stage
 3B research obligations and must be researched to exhaustion. Do not infer H/A/N from
 geography or a venue from city/event custom/nearby editions.
+
+For confirmed conference-tournament games, consult the owner-authorized shared site reference
+under `docs/conference-tournament-site-reference.md` before opening external site research.
+A scope-matching `COMPLETE` row is accepted shared project evidence for venue/city/state and
+normally avoids redundant site re-research absent material contradictory authoritative evidence.
+The reference does not establish postseason classification or H/A/N. Missing, `PARTIAL`,
+`UNCERTAIN`, `UNRESOLVED`, campus-round, boundary-mismatched, or contradicted cases remain
+active Stage 3B research-to-exhaustion obligations.
 
 Durable checkpoints control continuity. A long Research lane may deliberately roll to a
 fresh chat at a verified major stage/substage checkpoint rather than wait for context
