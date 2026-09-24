@@ -453,7 +453,9 @@ Close conference-tournament, NCAA, NIT, and other postseason classification/site
 - research H/A/N independently from physical venue identity;
 - research **every postseason game's exact physical venue + city/state to exhaustion** across NCAA, NIT, conference tournaments, and other postseason events;
 - research conference-tournament sites, including split-site/campus-round structures and host-site exceptions;
-- use owner-supplied tournament-site references only within their explicitly authorized school/conference scope and cross-verify prudently;
+- for confirmed conference-tournament rows, consult `data/reference/conference-tournament-sites.csv.gz.b64` through `tools/conference_tournament_reference.py` before external site research;
+- treat a season/conference/date-or-round-scope-matching `COMPLETE` row under `docs/conference-tournament-site-reference.md` as accepted shared project evidence for physical venue/city/state unless material contradictory authoritative evidence is present;
+- do not use the shared reference to establish postseason classification or H/A/N, and continue normal Stage 3B research to exhaustion for absent, `PARTIAL`, `UNCERTAIN`, `UNRESOLVED`, campus-round, boundary-mismatched, or contradicted cases;
 - use official tournament/conference/host/participant sources and targeted archival evidence as needed until the reasonable authoritative paths are exhausted;
 - reconcile physical venue aliases/naming eras;
 - preserve correction overlays when stronger postseason evidence corrects a Stage 1 field without changing game identity.

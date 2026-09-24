@@ -1,0 +1,22 @@
+{
+  "conference_checklist_complete": 35,
+  "conference_checklist_incomplete": 9,
+  "conference_checklist_rows": 44,
+  "normalized_snapshot": "data/reference/conference-tournament-sites.csv.gz.b64",
+  "reference_status_counts": {
+    "COMPLETE": 1373,
+    "PARTIAL": 22,
+    "UNCERTAIN": 40,
+    "UNRESOLVED": 98
+  },
+  "schema_version": 1,
+  "source_filename": "ct venues(8).xlsm",
+  "source_rows": 1533,
+  "source_sha256": "156a88311c2d76159dd22edd22c13a2b6cb422ec626745d6f9e183200fed80e0",
+  "source_sheet": "Tournament Sites",
+  "source_table": "ConferenceTournamentSites",
+  "source_url_populated_rows": 0,
+  "tournament_year_max": 2026,
+  "tournament_year_min": 1921,
+  "unique_conference_keys": 52
+}
