@@ -658,6 +658,30 @@ def validate_decision_map(
     }
 
 
+def rehearse_decision_map(
+    repo: Path,
+    school_key: str,
+    *,
+    plan_path: Path,
+    review_path: Path,
+    map_path: Path,
+) -> dict[str, Any]:
+    """Rehearse one recommendation map without mutating the real owner review."""
+
+    with tempfile.TemporaryDirectory(prefix=f"proposal-review-{school_key}-") as temporary:
+        proposal_review = Path(temporary) / "review.csv"
+        proposal_review.write_bytes(review_path.read_bytes())
+        counts = fill_review_from_map(proposal_review, map_path)
+        result = rehearse_review(
+            repo,
+            school_key,
+            plan_path=plan_path,
+            review_path=proposal_review,
+        )
+    result["action_counts"] = dict(sorted(counts.items()))
+    return result
+
+
 def carry_forward_review(
     old_path: Path,
     new_path: Path,
@@ -1036,25 +1060,17 @@ def main() -> int:
                 else output_dir / "plan.json"
             )
             if args.map_path:
-                with tempfile.TemporaryDirectory(
-                    prefix=f"proposal-review-{args.school_key}-"
-                ) as temporary:
-                    proposal_review = Path(temporary) / "review.csv"
-                    proposal_review.write_bytes(review_path.read_bytes())
-                    counts = fill_review_from_map(
-                        proposal_review,
-                        args.map_path.resolve(),
-                    )
-                    print("Rehearsing agent recommendation map (owner not yet approved).")
-                    print("Proposed action counts:")
-                    for action, count in sorted(counts.items()):
-                        print(f"  {action}: {count}")
-                    result = rehearse_review(
-                        repo,
-                        args.school_key,
-                        plan_path=plan_path,
-                        review_path=proposal_review,
-                    )
+                print("Rehearsing agent recommendation map (owner not yet approved).")
+                result = rehearse_decision_map(
+                    repo,
+                    args.school_key,
+                    plan_path=plan_path,
+                    review_path=review_path,
+                    map_path=args.map_path.resolve(),
+                )
+                print("Proposed action counts:")
+                for action, count in sorted(result["action_counts"].items()):
+                    print(f"  {action}: {count}")
                 print("\nPROPOSED RECOMMENDATION REHEARSAL PASSED")
                 print(
                     "Preview approved-plan hash: "
