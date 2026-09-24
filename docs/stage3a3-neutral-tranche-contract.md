@@ -23,12 +23,13 @@ Use this exact order:
 1. accepted exact-game/project evidence already present;
 2. modern (1996-97+) recurring event/site families;
 3. modern (1996-97+) one-offs;
-4. historical (1995-96 and earlier) recurring event/site families;
-5. historical (1995-96 and earlier) one-offs.
+4. one historical (1995-96 and earlier) regular-season neutral **location-enrichment pass**.
 
 The mechanical accepted-evidence application may be combined with the first active research tier when small.
 
 After substantial research in one tier, **do not cross into the next materially different tier in the same turn**. Write accepted findings through, serialize the exact remaining queue, and stop at a durable continuation point.
+
+The historical location-enrichment pass is intentionally broader than the former recurring/one-off split. It may regroup the remaining historical residual mechanically by event, opponent, locality, or marker structure, but those groupings are execution aids rather than separate exact-building obligations.
 
 A tier boundary is an execution/durability boundary, not a new historical owner gate. The owner should normally need only `Proceed` to continue.
 
@@ -36,58 +37,47 @@ A tier boundary is an execution/durability boundary, not a new historical owner 
 
 Within one tier, use the **largest safely completable coherent tranche**.
 
-For recurring work:
+For modern recurring work:
 
 - bundle multiple related event/site families when they use the same source mode;
 - prefer a systematic event/host source that can resolve several editions or games;
 - do not checkpoint after every two- or three-game family merely because it is independently describable;
-- do not attempt the entire heterogeneous tier when it contains many unrelated event families and source modes.
+- do not attempt the entire heterogeneous modern tier when it contains many unrelated event families and source modes.
 
-For one-offs:
+For the historical location-enrichment pass:
 
-- if the residual is homogeneous and at or below the independent-adjudication ceiling, normally process the whole residual in one tranche;
-- if the one-offs require many unrelated source paths, split by coherent source mode or geography/event class rather than opening a separate discovery tree for every row.
+- prefer a broad mechanical regroup of the residual into obvious event/opponent/locality structures;
+- use the obvious systematic project/event/host/participant opportunity for each structure;
+- preserve event identity and city/state where supported;
+- accept exact buildings only when the same obvious evidence directly supplies them;
+- once city/state is established, do not open another source path solely to recover a building;
+- terminalize surviving exact-building blanks as historical enrichment debt rather than creating another owner-facing package.
 
-The Oregon State model remains the guide: meaningful related-family bundles, not microscopic family-by-family turns and not whole-residual mega-sweeps.
+The Oregon State model remains the guide for durability, but the historical pass should favor broad location completion over repeated family-by-family building research.
 
-## 4. Source hierarchy for recurring event/site families
+## 4. Source hierarchy for modern neutral research
 
-For each coherent recurring family or bundle, use:
+For each coherent modern recurring family or modern one-off, use:
 
 1. accepted project/canonical/reciprocal evidence;
 2. official event/tournament/host institutional source family;
 3. target-school or obvious participant institutional source family;
 4. at most one specific high-yield authoritative fallback family when justified.
 
-Examples of valid fallback families include one municipal/arena history, one archival tournament history, or one institutional yearbook collection that can resolve multiple rows.
+Generic web search may locate one of those source families, but generic search is not an evidence class. Do not fan out through forums, mirrors, scraped schedule sites, aggregators, random wikis, or unrelated venue-history chains merely because the first authoritative paths did not name the building.
 
-Do not multiply source paths by game count.
+## 5. Historical location-enrichment source rule
 
-Once the obvious event/host/participant paths are exhausted, do not begin a new "locate exact sources for missing patches" campaign merely because some rows remain unresolved.
+For 1995-96-and-earlier **regular-season neutral** rows, use:
 
-## 5. Source hierarchy for one-offs
+1. accepted project/canonical/reciprocal evidence;
+2. the obvious systematic event/host/participant institutional opportunity for the row/class.
 
-For a one-off neutral row, use:
+That is normally sufficient. A third source path is not justified merely because city/state is known but the building is blank.
 
-1. accepted project evidence;
-2. target-school institutional evidence;
-3. obvious opponent/event/host institutional evidence;
-4. at most one specific named authoritative fallback source when already identified as plausibly decisive.
+Once supported city/state is established, **stop building research for that row**. Accept an exact building only when the same obvious evidence directly supplies it. Preserve the locality and terminalize the blank building as historical enrichment debt.
 
-Generic web search may locate one of those source families, but generic search is not an evidence class.
-
-Do not fan out through:
-
-- Reddit;
-- fan forums;
-- mirrors of uncertain provenance;
-- scraped schedule sites;
-- generic aggregators;
-- random wikis;
-- broad search-result chains;
-- unrelated venue-history sites;
-
-merely because the first authoritative paths did not name the building.
+If locality itself remains unknown after the obvious systematic opportunity, preserve the researched unknown rather than escalating to individual newspaper/yearbook/archive searches.
 
 ## 6. Modern versus historical convergence
 
@@ -101,25 +91,15 @@ A modern row may remain unresolved only after the required authoritative paths a
 
 ### Historical (1995-96 and earlier)
 
-Research seriously but proportionately. Exact-building recovery is desirable enrichment, not a publication blocker, after the reasonable systematic/high-yield opportunities are exhausted.
+Use the location-first historical standard.
 
-For recurring families:
+The objective is a defensible event/locality record, not exhaustive building reconstruction. Work the obvious systematic project/event/host/participant opportunity, preserve supported event identity and city/state, and accept an exact venue when that same evidence directly supplies it.
 
-- use systematic event/host/participant evidence;
-- apply supported family-level venue patterns across the exact editions covered by evidence;
-- research only genuine exceptions or multi-venue editions individually;
-- when the obvious systematic paths are exhausted, preserve the surviving family as researched/accounted venue debt.
+Once city/state is supported, do not open another source path solely to recover the building. Surviving exact-building gaps are explicit terminal historical enrichment debt and may be revisited later. If locality itself remains unsupported after the obvious systematic opportunity, preserve the researched unknown rather than escalating to row-level archaeology.
 
-For historical one-offs:
+Do not reopen or downgrade already-supported exact venues merely because they fall on the historical side of the cutoff.
 
-- do not convert the final residual into newspaper/archive archaeology row by row;
-- after the bounded authoritative paths are exhausted, terminalize the surviving homogeneous residual as researched venue debt.
-
-Residual difficulty after high-yield passes is evidence for stopping, not automatic justification for deeper source discovery.
-
-Preserve supported city/state and any partial venue identity. Surviving exact-building gaps in the 1995-96-and-earlier regular-season neutral population may be carried as explicit terminal researched venue debt and revisited later as enrichment. Do not reopen or downgrade already-supported exact venues merely because they now fall on the historical side of the cutoff.
-
-This cutoff change affects unresolved research priority only. HOME standards and all postseason venue requirements are unchanged.
+This standard applies only to **regular-season neutral** rows. HOME standards and all postseason venue requirements are unchanged. NCAA, NIT, conference-tournament, and other postseason exact venues remain active Stage 3B research obligations.
 
 ## 7. No venue inference
 
@@ -183,4 +163,6 @@ Flag a Stage 3A-3 execution if it:
 
 The intended Stage 3A-3 shape is:
 
-> **one tier -> coherent family/one-off tranche -> small authoritative source hierarchy -> write through -> serialize residual -> stop/continue only by explicit next bounded turn**
+> **accepted evidence -> modern recurring -> modern one-offs -> one historical location-enrichment pass -> write through -> closeout**
+
+For the historical pass, do not create a new owner relay merely because one event/opponent subgroup still lacks exact buildings once supported locality has been established.
