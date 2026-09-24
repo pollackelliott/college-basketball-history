@@ -158,10 +158,12 @@ For regular-season neutral rows:
 - **1996-97 through present:** apply a strong exact-venue expectation and challenge
   tournament/event, host, opponent-institutional, reciprocal, and contemporary evidence
   before accepting unresolved debt;
-- **1995-96 and earlier:** work the obvious recurring-event/site-family and other
-  systematic high-yield evidence classes, then allow explicitly researched residual
-  uncertainty after proportionate exhaustion. Surviving exact-building debt is historical
-  enrichment debt and is not a publication blocker when explicitly accounted;
+- **1995-96 and earlier:** apply the location-first historical standard. Use accepted
+  project evidence plus the obvious systematic event/host/participant opportunity to
+  establish event/city/state where possible; accept an exact building when that same
+  evidence directly supplies it. Once city/state is supported, do not reopen the row
+  solely to recover the building. Surviving building blanks are nonblocking historical
+  enrichment debt when explicitly accounted;
 - a large or surprising modern neutral residual is a self-challenge trigger even if every
   row already has formal research-accounting metadata;
 - do not reopen an older terminal neutral population merely because another archive might
@@ -171,10 +173,14 @@ For regular-season neutral rows:
 
 For postseason:
 
+- the historical regular-season neutral shortcut does not apply;
 - NCAA physical venue + city + state remains mandatory and non-waivable;
+- NIT, conference-tournament, and all other postseason exact venues must be researched to
+  exhaustion, not merely locality-accounted;
 - published-vs-published neutral gaps require heightened reciprocal review;
-- conference-tournament, NIT, and other postseason gaps must be explicitly
-  researched/accounted rather than inherited silently from a sparse primary ledger.
+- a genuinely unrecoverable non-NCAA postseason exact venue may survive only with explicit
+  documentation of the official tournament/conference/host/participant and targeted
+  authoritative paths exhausted.
 
 The self-challenge must not turn ordinary regular-season `OPPONENT_HOME` building
 blanks into source-school research debt.
@@ -221,7 +227,8 @@ VENUES:
   genuinely new candidates: <count>
   ambiguous identities: 0
   modern neutral unresolved (1996-97+): <count>
-  historical regular-season neutral venue debt (1995-96 and earlier): <count>
+  historical regular-season neutral building debt after location-first pass (1995-96 and earlier): <count>
+  postseason exact-venue unresolved after exhaustive research: <count>
 
 OPPONENT IDENTITIES:
   current-program key splits found/repaired: <count>
