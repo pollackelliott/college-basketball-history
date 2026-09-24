@@ -42,28 +42,33 @@ A modern neutral blank should survive only after the obvious tournament/event, h
 opponent-institutional, reciprocal, and contemporary evidence paths have been deliberately
 checked.
 
-For regular-season neutral games **1995-96 and earlier**, research remains serious but
-proportionate. Recurring events/site families and obvious reciprocal evidence should be
-worked systematically; a genuinely unsupported exact building may remain explicitly
-researched unresolved after the reasonable evidence paths are exhausted. At that point
-the exact-building gap is historical enrichment debt, not a publication blocker. Preserve
-supported city/state and partial venue information, and do not reopen already-supported
-exact venues merely because they fall on the historical side of the cutoff.
+For regular-season neutral games **1995-96 and earlier**, use the location-first
+historical standard. Work accepted project evidence plus the obvious systematic
+event/host/participant institutional opportunity. Preserve supported event identity and
+city/state, and accept an exact building when that same evidence directly supplies it.
+Once city/state is established, do not open another source path solely to recover the
+building. The surviving building blank is historical enrichment debt, not a publication
+blocker. Do not reopen already-supported exact venues merely because they fall on the
+historical side of the cutoff.
 
 For neutral games between two published programs, both schools' research/evidence are
 available. Missing neutral geography or venue therefore receives heightened scrutiny and
 known same-game evidence must be propagated.
 
-NCAA Tournament venue and geography remain strictly mandatory under the existing NCAA
-completeness rule.
+Postseason uses a stricter standard than historical regular-season neutrals. NCAA
+Tournament physical venue + city/state remains mandatory and non-waivable. NIT,
+conference-tournament, and every other postseason exact venue must be researched to
+exhaustion; city/state alone is not sufficient to invoke the historical regular-season
+neutral shortcut.
 
 ## Priority order for retroactive remediation
 
 1. Published-program home venue/location completeness, with only rigorously documented historical-unrecoverable venue exceptions remaining.
 2. Reciprocal propagation for away games whose home opponent is already published.
-3. Neutral-site city/state completion, prioritizing published-vs-published games and postseason.
-4. Neutral venue completion where support is available.
-5. Remaining H/A/N and identity/reference cleanup.
+3. Postseason exact-venue + city/state completion, with NCAA mandatory and NIT/conference-tournament/other postseason researched to exhaustion.
+4. Modern (1996-97+) regular-season neutral venue completion.
+5. Historical (1995-96 and earlier) regular-season neutral event/city/state enrichment; exact building is opportunistic rather than blocking.
+6. Remaining H/A/N and identity/reference cleanup.
 
 ## Release interpretation
 

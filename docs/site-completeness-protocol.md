@@ -93,21 +93,24 @@ primary ledger omits the building. Challenge the obvious event/tournament, host,
 opponent-institutional, reciprocal, and contemporary evidence paths before accepting
 research debt.
 
-For regular-season neutral games **1995-96 and earlier**, research remains serious but
-proportionate. Recurring events/site families and obvious reciprocal/institutional
-evidence should be worked systematically, but a genuinely unsupported exact building may
-remain explicitly researched unresolved after the reasonable high-yield evidence paths
-are exhausted. Such surviving exact-building debt is nonblocking historical enrichment
-debt; preserve supported city/state and partial venue information and do not reopen
-already-supported exact venues merely because they fall on the historical side of the
-cutoff.
+For regular-season neutral games **1995-96 and earlier**, use the location-first
+historical standard. Work accepted project evidence plus the obvious systematic
+event/host/participant institutional opportunity. Preserve supported event identity and
+city/state, and accept an exact building when that same evidence directly supplies it.
+Once city/state is established, do not open another source path solely to recover the
+building. Such surviving exact-building debt is nonblocking historical enrichment debt.
+If locality itself remains unsupported after the obvious systematic opportunity, preserve
+the researched unknown rather than escalating into bespoke row-level archive research.
 
 When both participants are published, both source packages are available and known
 same-game evidence must be propagated. A genuinely unresolved result should reflect
 targeted review rather than a silent blank.
 
-NCAA Tournament rows retain the stricter existing requirement: physical venue, city, and
-state are mandatory. A research-status marker cannot waive NCAA completeness.
+Postseason rows retain a stricter standard than historical regular-season neutrals.
+NCAA Tournament physical venue, city, and state are mandatory and non-waivable. NIT,
+conference-tournament, and every other postseason exact venue must be researched to
+exhaustion; city/state alone is not enough to stop exact-building research. A research-
+status marker does not authorize the historical regular-season shortcut for postseason.
 
 ## Research-accounting columns
 
@@ -213,9 +216,10 @@ Existing published debt is repaired separately from generic hardening. The prefe
 
 1. published-program HOME venue/location research to zero unexcepted blockers, with only rigorously documented historical-unrecoverable venue exceptions remaining;
 2. reciprocal propagation for away games whose home opponent is already published;
-3. neutral-site city/state completion, prioritizing published-vs-published games and postseason;
-4. neutral venue completion where support is available;
-5. remaining H/A/N classification and identity/reference cleanup;
-6. rerun the same database-wide completeness audit and quantify both the researched-unresolved HOME venue exceptions and remaining genuinely unresolved non-home debt.
+3. postseason exact-venue + city/state completion, with NCAA mandatory and NIT/conference-tournament/other postseason researched to exhaustion;
+4. modern (1996-97+) regular-season neutral venue completion;
+5. historical (1995-96 and earlier) regular-season neutral event/city/state enrichment; exact building is opportunistic rather than blocking;
+6. remaining H/A/N classification and identity/reference cleanup;
+7. rerun the same database-wide completeness audit and quantify both the researched-unresolved HOME venue exceptions and remaining genuinely unresolved non-home debt.
 
 Generic hardening and historical-data repair should not be mixed into one pull request.

@@ -87,15 +87,22 @@ A modern neutral row may remain unresolved only after a deliberate, documented p
 
 #### Historical neutral games: 1995-96 and earlier
 
-Regular-season neutral games from **1995-96 and earlier** still deserve real research, especially when they belong to a recurring event, tournament, city/site family, or useful reciprocal institutional series.
+Regular-season neutral games from **1995-96 and earlier** use a **location-first historical standard**.
 
-Research should remain proportionate. After the canonical/shared first pass and the obvious systematic event/host/participant/reciprocal evidence classes have been exhausted, a genuinely unsupported exact building may remain `RESEARCHED_PARTIAL` or `RESEARCHED_UNRESOLVED` under existing site-accounting policy.
+The research objective is to establish the best defensible event/locality record, not to exhaustively reconstruct every physical building. Use accepted project evidence plus the obvious systematic event/host/participant institutional opportunity for the row or class. Preserve:
 
-For this historical population, exact-building recovery is **desirable enrichment, not a publication blocker**, once the reasonable systematic/high-yield opportunities have been exhausted. Preserve supported city/state and any supported partial venue information rather than withholding the school from publication solely because the exact building remains unknown.
+- event/tournament identity when supported;
+- city/state when supported;
+- exact physical venue when the same obvious evidence directly supplies it;
+- explicit `RESEARCHED_PARTIAL` / `RESEARCHED_UNRESOLVED` accounting when stronger detail is unsupported.
 
-Do not turn a difficult historical neutral one-off into unlimited newspaper/yearbook archaeology merely to drive the unknown count to zero. A surviving researched venue gap may be carried as explicit terminal historical debt and revisited later as enrichment.
+**Once supported city/state is established, do not open additional source paths solely to recover the exact physical building.** Do not launch building-only newspaper, yearbook, arena-history, or row-level archive searches merely because the building remains blank.
 
-This policy change is prospective for unresolved debt. Do not remove, reopen, or downgrade an already-supported exact venue merely because that game now falls on the historical side of the cutoff.
+If the obvious systematic evidence supplies an exact building, accept it. If it supplies only locality/event context, preserve that locality and terminalize the building blank as historical enrichment debt. If even locality remains unsupported after the obvious systematic opportunity, preserve the researched unknown rather than escalating into bespoke archaeology.
+
+Exact-building recovery for this historical regular-season neutral population is desirable enrichment, not a publication blocker. Existing accepted exact venues remain accepted and must not be removed, reopened, or downgraded merely because they fall on the historical side of the cutoff.
+
+This historical shortcut applies **only to regular-season neutral rows**. It does not apply to NCAA, NIT, conference-tournament, or any other postseason game. Postseason exact-venue research remains a separate Stage 3B obligation.
 
 ## 3. Canonical/shared-project first pass for neutral games
 
@@ -267,8 +274,7 @@ Only after Stage 3A-2 completes, use this default execution order:
 1. accepted exact-game venue evidence already present in the durable state;
 2. modern (1996-97+) recurring event/site families;
 3. modern (1996-97+) one-offs;
-4. historical (1995-96 and earlier) recurring families;
-5. historical (1995-96 and earlier) one-offs.
+4. one historical (1995-96 and earlier) **location-enrichment pass** across the remaining regular-season neutral residual.
 
 After substantial work begins in one tier, **do not cross into the next materially
 different tier in the same turn**. Bring the active tier/tranche to disposition, write
@@ -287,26 +293,24 @@ Use a bounded source hierarchy for recurring families:
 3. target-school or obvious participant institutional source family;
 4. at most one specific high-yield authoritative fallback family when justified.
 
-For historical recurring work, avoid both one-family micro-checkpoints and one open-ended
-sweep across all remaining heterogeneous families. Work bounded bundles of related
-families and do not multiply source paths by game count.
+For the historical location-enrichment pass, group rows by the largest sensible systematic
+event/opponent/locality structures already visible in the authoritative residual, but do not
+turn those groups into separate building-research campaigns. Use accepted project evidence
+plus the obvious event/host/participant institutional opportunity. The goal is event/locality
+completion and opportunistic exact-venue recovery when that same evidence supplies it.
 
-For one-offs, use accepted project evidence, target-school institutional evidence,
-obvious opponent/event/host institutional evidence, and at most one specific named
-authoritative fallback source. Generic web search is discovery-only. Do not fan out
-through forums, mirrors, scraped schedule sites, aggregators, random wikis, or unrelated
-venue-history pages merely because the obvious authoritative paths did not name the
-building.
+Once city/state is established for a historical regular-season neutral row, do not open
+another source path solely to recover the building. Surviving exact-building blanks become
+terminal historical enrichment debt with explicit research accounting. Historical one-offs
+must not become row-by-row archive searches.
 
-For historical one-offs, after systematic/high-yield work has removed the recoverable
-population, treat the surviving homogeneous residual as eligible for population-level
-terminal researched venue debt. Do not give every old one-off its own archival project
-merely to reduce the blank count.
+Do not continue a "locate exact sources for missing patches" tail chase after the obvious
+systematic location evidence is exhausted.
 
-Do not continue a "locate exact sources for missing patches" tail chase after the bounded
-event/host/participant/fallback hierarchy is exhausted.
-
-The 1996-97+ population retains the strong exact-venue expectation. For 1995-96-and-earlier regular-season neutrals, proportional historical research plus explicit terminal debt is publication-safe after the reasonable systematic/high-yield opportunities are exhausted. This does not weaken the anti-inference rule or any postseason requirement.
+The 1996-97+ population retains the strong exact-venue expectation. The 1995-96-and-earlier
+regular-season neutral population uses the location-first standard above. This does not
+weaken the anti-inference rule and does not apply to postseason. NCAA, NIT, conference-
+tournament, and other postseason exact venues remain Stage 3B research obligations.
 
 ### 4.5 Stage 3A-4 — mechanical closeout and QA
 
@@ -354,7 +358,7 @@ Apply a strong completeness expectation. Canonical/shared reuse and the obvious 
 
 ### NEUTRAL, 1995-96 and earlier
 
-Apply serious but proportionate research. Once the obvious systematic/high-yield evidence classes have been exhausted and the remaining uncertainty is historically plausible, preserve the researched unknown and stop. Exact-building recovery is enrichment rather than a publication blocker at that point.
+Apply the location-first historical standard. Use accepted project evidence and the obvious systematic event/host/participant opportunity to establish event and city/state where possible. Accept an exact building when that same evidence directly supplies it. Once supported city/state is established, do not continue searching solely for the building. A surviving building blank is nonblocking historical enrichment debt.
 
 ## 6. Mandatory durable Stage 3A row state
 
@@ -405,7 +409,7 @@ Stage 3A may complete only after Stage 3A-0 through Stage 3A-4 have each closed 
 - HOME venue work satisfies the strong source-school standard, with only valid researched-unresolved home exceptions remaining;
 - no ordinary `OPPONENT_HOME` building blank remains in an active source-school research queue;
 - modern neutral games (1996-97 through present) have received the strong completeness pass;
-- historical neutral games (1995-96 and earlier) have received the proportionate systematic/high-yield pass, with any surviving exact-building gaps explicitly accounted as nonblocking terminal venue debt;
+- historical regular-season neutral games (1995-96 and earlier) have received the location-first systematic pass, with supported event/city/state preserved and surviving exact-building gaps explicitly accounted as nonblocking terminal enrichment debt;
 - every material unresolved site fact has explicit research accounting;
 - ambiguous physical venue identities = 0;
 - the single authoritative row-level Stage 3A ledger is written, hashed/verified when checkpoint packaging is used, and sufficient for downstream assembly without historical reconstruction.
