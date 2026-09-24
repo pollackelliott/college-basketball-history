@@ -2,7 +2,7 @@
 
 - **Status:** Owner-authorized shared Research reference
 - **Applies to:** Stage 3B conference-tournament site research
-- **Normalized snapshot:** `data/reference/conference-tournament-sites.csv.gz`
+- **Normalized snapshot:** `data/reference/conference-tournament-sites.csv.gz.b64`
 - **Coverage ledger:** `data/reference/conference-tournament-site-coverage.csv`
 - **Source metadata:** `data/reference/conference-tournament-sites.meta.json`
 - **Tool:** `tools/conference_tournament_reference.py`
