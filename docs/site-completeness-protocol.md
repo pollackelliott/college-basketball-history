@@ -216,9 +216,10 @@ Existing published debt is repaired separately from generic hardening. The prefe
 
 1. published-program HOME venue/location research to zero unexcepted blockers, with only rigorously documented historical-unrecoverable venue exceptions remaining;
 2. reciprocal propagation for away games whose home opponent is already published;
-3. neutral-site city/state completion, prioritizing published-vs-published games and postseason;
-4. neutral venue completion where support is available;
-5. remaining H/A/N classification and identity/reference cleanup;
-6. rerun the same database-wide completeness audit and quantify both the researched-unresolved HOME venue exceptions and remaining genuinely unresolved non-home debt.
+3. postseason exact-venue + city/state completion, with NCAA mandatory and NIT/conference-tournament/other postseason researched to exhaustion;
+4. modern (1996-97+) regular-season neutral venue completion;
+5. historical (1995-96 and earlier) regular-season neutral event/city/state enrichment; exact building is opportunistic rather than blocking;
+6. remaining H/A/N classification and identity/reference cleanup;
+7. rerun the same database-wide completeness audit and quantify both the researched-unresolved HOME venue exceptions and remaining genuinely unresolved non-home debt.
 
 Generic hardening and historical-data repair should not be mixed into one pull request.
