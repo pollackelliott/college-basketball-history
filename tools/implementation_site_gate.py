@@ -846,8 +846,16 @@ def main() -> int:
     try:
         report = implementation_site_report(repo, args.school_key)
     except (FileNotFoundError, ValueError) as exc:
-        print(f"FAIL: {exc}")
-        return 1
+        report = {
+            "status": "FAIL",
+            "school_key": args.school_key,
+            "history_start_season": "",
+            "errors": [str(exc)],
+            "warnings": [],
+            "counts": {},
+            "source_site_counts": {},
+            "examples": {},
+        }
     if args.json_output:
         output = args.json_output.resolve()
         output.parent.mkdir(parents=True, exist_ok=True)
