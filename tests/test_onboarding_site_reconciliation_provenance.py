@@ -15,10 +15,12 @@ from onboarding_plan import (  # noqa: E402
     _record_reconciled_unresolved_home_venue_markers,
 )
 from test_implementation_site_gate import (  # noqa: E402
+    SOURCE_FIELDS,
     ImplementationSiteGateTests,
     canonical_row,
     source_row,
     target_assertion,
+    write_csv,
 )
 
 
@@ -47,7 +49,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             )
             assertions = [
                 target_assertion(
-                    curated_site_type="OPPONENT_HOME",
+                    curated_site_type="NEUTRAL",
                     curated_venue_name="",
                     city="",
                     state="",
@@ -219,6 +221,246 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
         self.assertTrue(
             all(row["status"] == "UNDER_REVIEW" for row in discrepancies)
         )
+
+    def test_keep_canonical_records_resolved_dependent_site_provenance(self):
+        canonical = {
+            "canonical_game_id": "CBBG-1",
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "site_type": "NEUTRAL",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+        }
+        source = {
+            "source_game_id": "TESTRAW-1",
+            "source_program_key": "test",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "curated_venue_name": "Source Arena",
+            "city": "Example City",
+            "state": "EX",
+        }
+        items = [
+            {
+                "decision_id": "D-1",
+                "canonical_game_id": "CBBG-1",
+                "source_game_id": "TESTRAW-1",
+                "field_name": "site_type",
+                "decision": "KEEP_CANONICAL",
+                "resolution_basis": "Owner approved the retained canonical H/A/N.",
+            }
+        ]
+        discrepancies = []
+
+        first = _record_dependent_site_gap_discrepancies(
+            "test",
+            items,
+            {"CBBG-1": canonical},
+            {"TESTRAW-1": source},
+            discrepancies,
+        )
+        second = _record_dependent_site_gap_discrepancies(
+            "test",
+            items,
+            {"CBBG-1": canonical},
+            {"TESTRAW-1": source},
+            discrepancies,
+        )
+
+        self.assertEqual(first["dependent_site_gap_discrepancies_added"], 2)
+        self.assertEqual(second["dependent_site_gap_discrepancies_existing"], 2)
+        self.assertEqual(len(discrepancies), 2)
+        self.assertEqual(
+            {row["field_name"] for row in discrepancies},
+            {"venue", "location"},
+        )
+        self.assertTrue(all(row["status"] == "RESOLVED" for row in discrepancies))
+        self.assertTrue(
+            all(
+                "retained the canonical H/A/N classification"
+                in row["notes"]
+                for row in discrepancies
+            )
+        )
+
+    def test_matching_site_does_not_create_dependent_site_provenance(self):
+        canonical = {
+            "canonical_game_id": "CBBG-1",
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "site_type": "TEAM_B_HOME",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+        }
+        source = {
+            "source_game_id": "TESTRAW-1",
+            "source_program_key": "test",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "curated_venue_name": "Source Arena",
+            "city": "Example City",
+            "state": "EX",
+        }
+        items = [
+            {
+                "decision_id": "D-1",
+                "canonical_game_id": "CBBG-1",
+                "source_game_id": "TESTRAW-1",
+                "field_name": "site_type",
+                "decision": "KEEP_CANONICAL",
+                "resolution_basis": "Owner approved canonical.",
+            }
+        ]
+        discrepancies = []
+
+        result = _record_dependent_site_gap_discrepancies(
+            "test",
+            items,
+            {"CBBG-1": canonical},
+            {"TESTRAW-1": source},
+            discrepancies,
+        )
+
+        self.assertEqual(result, {})
+        self.assertEqual(discrepancies, [])
+
+    def test_reciprocal_research_accounting_covers_matching_neutral_site_gap(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = ImplementationSiteGateTests()
+            target = source_row(
+                curated_site_type="OPPONENT_HOME",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="",
+                site_research_basis="",
+            )
+            canonical = canonical_row(
+                team_a_key="other",
+                team_b_key="test",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+            )
+            assertions = [
+                target_assertion(
+                    curated_site_type="OPPONENT_HOME",
+                    curated_venue_name="",
+                    city="",
+                    state="",
+                ),
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "source_program_key": "other",
+                    "source_game_id": "OTHRAW-1",
+                    "normalized_opponent_key": "test",
+                    "curated_site_type": "NEUTRAL",
+                    "curated_venue_name": "",
+                    "city": "",
+                    "state": "",
+                },
+            ]
+            fixture.make_repo(
+                root,
+                sources=[target],
+                canonical=[canonical],
+                assertions=assertions,
+            )
+            reciprocal = source_row(
+                source_game_id="OTHRAW-1",
+                source_program_key="other",
+                normalized_opponent_key="test",
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis="Institutional site research exhausted.",
+            )
+            write_csv(
+                root / "schools/other/source-games.csv",
+                SOURCE_FIELDS,
+                [reciprocal],
+            )
+
+            report = implementation_site_report(root, "test")
+
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
+            self.assertEqual(report["counts"]["reciprocal_research_accounted_gap"], 1)
+
+    def test_reciprocal_research_accounting_requires_matching_han(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = ImplementationSiteGateTests()
+            target = source_row(
+                curated_site_type="OPPONENT_HOME",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="",
+                site_research_basis="",
+            )
+            canonical = canonical_row(
+                team_a_key="other",
+                team_b_key="test",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+            )
+            assertions = [
+                target_assertion(
+                    curated_site_type="OPPONENT_HOME",
+                    curated_venue_name="",
+                    city="",
+                    state="",
+                ),
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "source_program_key": "other",
+                    "source_game_id": "OTHRAW-1",
+                    "normalized_opponent_key": "test",
+                    "curated_site_type": "SOURCE_PROGRAM_HOME",
+                    "curated_venue_name": "",
+                    "city": "",
+                    "state": "",
+                },
+            ]
+            fixture.make_repo(
+                root,
+                sources=[target],
+                canonical=[canonical],
+                assertions=assertions,
+            )
+            reciprocal = source_row(
+                source_game_id="OTHRAW-1",
+                source_program_key="other",
+                normalized_opponent_key="test",
+                curated_site_type="SOURCE_PROGRAM_HOME",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis="Institutional site research exhausted.",
+            )
+            write_csv(
+                root / "schools/other/source-games.csv",
+                SOURCE_FIELDS,
+                [reciprocal],
+            )
+
+            report = implementation_site_report(root, "test")
+
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 1)
+            self.assertEqual(report["counts"].get("reciprocal_research_accounted_gap", 0), 0)
 
     def test_reconciled_home_marker_is_generated_from_resolved_site_conflict(self):
         canonical = {

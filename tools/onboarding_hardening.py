@@ -24,6 +24,7 @@ import datetime as dt
 import hashlib
 import json
 import re
+import shutil
 import tempfile
 import zipfile
 from collections import Counter
@@ -628,6 +629,59 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     return Counter(row["decision"] for row in rows)
 
 
+def validate_decision_map(
+    repo: Path,
+    school_key: str,
+    *,
+    plan_path: Path,
+    review_path: Path,
+    map_path: Path,
+) -> dict[str, Any]:
+    """Validate one compact recommendation map with the authoritative review parser."""
+
+    onboard_school.ensure_package_checkpoint(repo)
+    assert_no_unapproved_semantic_drift(repo, school_key)
+    with tempfile.TemporaryDirectory(prefix=f"validate-map-{school_key}-") as temporary:
+        proposal_review = Path(temporary) / "review.csv"
+        proposal_review.write_bytes(review_path.read_bytes())
+        counts = fill_review_from_map(proposal_review, map_path)
+        _, approved_hash = approve_plan(
+            repo,
+            plan_path,
+            proposal_review,
+            "map-validation",
+        )
+    return {
+        "action_counts": dict(sorted(counts.items())),
+        "decision_count": sum(counts.values()),
+        "approved_plan_hash_preview": approved_hash,
+    }
+
+
+def rehearse_decision_map(
+    repo: Path,
+    school_key: str,
+    *,
+    plan_path: Path,
+    review_path: Path,
+    map_path: Path,
+) -> dict[str, Any]:
+    """Rehearse one recommendation map without mutating the real owner review."""
+
+    with tempfile.TemporaryDirectory(prefix=f"proposal-review-{school_key}-") as temporary:
+        proposal_review = Path(temporary) / "review.csv"
+        proposal_review.write_bytes(review_path.read_bytes())
+        counts = fill_review_from_map(proposal_review, map_path)
+        result = rehearse_review(
+            repo,
+            school_key,
+            plan_path=plan_path,
+            review_path=proposal_review,
+        )
+    result["action_counts"] = dict(sorted(counts.items()))
+    return result
+
+
 def carry_forward_review(
     old_path: Path,
     new_path: Path,
@@ -804,12 +858,29 @@ def rehearse_review(
                 "pre-seal rehearsal attempted files outside the apply allow-list:\n  "
                 + "\n  ".join(forbidden)
             )
-        gates = onboard_school.run_gates(
-            rehearsal,
-            school_key,
-            changed,
-            include_tests=True,
-        )
+        try:
+            gates = onboard_school.run_gates(
+                rehearsal,
+                school_key,
+                changed,
+                include_tests=True,
+            )
+        finally:
+            source_diagnostic = (
+                rehearsal
+                / ".onboarding"
+                / school_key
+                / "implementation-site-gate.json"
+            )
+            if source_diagnostic.is_file():
+                target_diagnostic = (
+                    repo
+                    / ".onboarding"
+                    / school_key
+                    / "last-rehearsal-site-gate.json"
+                )
+                target_diagnostic.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source_diagnostic, target_diagnostic)
     return {
         "approved_plan_hash_preview": approved_hash,
         "changed_paths": changed,
@@ -850,6 +921,16 @@ def parse_args() -> argparse.Namespace:
     fill.add_argument("--map", dest="map_path", type=Path, required=True)
     fill.add_argument("--repo", type=Path, default=None)
     fill.add_argument("--review-file", type=Path, default=None)
+
+    validate_map = sub.add_parser(
+        "validate-map",
+        help="Validate one compact Gate 1 recommendation map without mutating review.csv.",
+    )
+    validate_map.add_argument("school_key")
+    validate_map.add_argument("--map", dest="map_path", type=Path, required=True)
+    validate_map.add_argument("--repo", type=Path, default=None)
+    validate_map.add_argument("--review-file", type=Path, default=None)
+    validate_map.add_argument("--plan-file", type=Path, default=None)
 
     carry = sub.add_parser(
         "carry-forward",
@@ -926,6 +1007,30 @@ def main() -> int:
             print("Next: run rehearse-review before sealing Gate 1.")
             return 0
 
+        if args.command == "validate-map":
+            plan_path = (
+                args.plan_file.resolve()
+                if args.plan_file
+                else output_dir / "plan.json"
+            )
+            result = validate_decision_map(
+                repo,
+                args.school_key,
+                plan_path=plan_path,
+                review_path=review_path,
+                map_path=args.map_path.resolve(),
+            )
+            print("PASS: Gate 1 recommendation map is valid.")
+            print("Action counts:")
+            for action, count in sorted(result["action_counts"].items()):
+                print(f"  {action}: {count}")
+            print(
+                "Preview approved-plan hash: "
+                + result["approved_plan_hash_preview"]
+            )
+            print("Next: run rehearse-review --map before Owner Gate 1.")
+            return 0
+
         if args.command == "carry-forward":
             carry_plan_path = (
                 args.plan_file.resolve()
@@ -955,25 +1060,17 @@ def main() -> int:
                 else output_dir / "plan.json"
             )
             if args.map_path:
-                with tempfile.TemporaryDirectory(
-                    prefix=f"proposal-review-{args.school_key}-"
-                ) as temporary:
-                    proposal_review = Path(temporary) / "review.csv"
-                    proposal_review.write_bytes(review_path.read_bytes())
-                    counts = fill_review_from_map(
-                        proposal_review,
-                        args.map_path.resolve(),
-                    )
-                    print("Rehearsing agent recommendation map (owner not yet approved).")
-                    print("Proposed action counts:")
-                    for action, count in sorted(counts.items()):
-                        print(f"  {action}: {count}")
-                    result = rehearse_review(
-                        repo,
-                        args.school_key,
-                        plan_path=plan_path,
-                        review_path=proposal_review,
-                    )
+                print("Rehearsing agent recommendation map (owner not yet approved).")
+                result = rehearse_decision_map(
+                    repo,
+                    args.school_key,
+                    plan_path=plan_path,
+                    review_path=review_path,
+                    map_path=args.map_path.resolve(),
+                )
+                print("Proposed action counts:")
+                for action, count in sorted(result["action_counts"].items()):
+                    print(f"  {action}: {count}")
                 print("\nPROPOSED RECOMMENDATION REHEARSAL PASSED")
                 print(
                     "Preview approved-plan hash: "

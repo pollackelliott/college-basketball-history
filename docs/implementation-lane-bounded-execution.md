@@ -39,7 +39,7 @@ After interruption, reconstruct from Git/GitHub, tracked files, ignored `.onboar
 
 ### 3.2 Owner relay should be phase-sized and thin
 
-When the owner's Codespace is the only execution surface, invoke the supported permanent repository command directly by default. Use a guarded child script or pasted helper only for genuinely bespoke work that current tooling does not own.
+When the owner's Codespace is the only execution surface, invoke the supported permanent repository command directly by default. Assistant-authored multi-line shell/Python orchestration is not a normal Implementation interface. Use a narrow temporary helper only for genuinely bespoke work that current tooling does not own; if the same operation can recur, treat that as a permanent-tooling gap and repair the repository instead of normalizing the helper.
 
 "Phase-sized" does not mean monolithic. The normal relay should contain one principal repository operation plus its immediate validation. Do not wrap a permanent command in a large bespoke program merely to restate its branch, lifecycle, validation, or release invariants, and do not combine mutation, regenerated preflight, rehearsal, release preparation, and unrelated confidence checks into one giant wrapper merely to reduce the number of pastes.
 
@@ -55,7 +55,7 @@ Follow `docs/codespace-terminal-safety.md` exactly. In particular:
 - keep verbose logs local and return compact PASS/STOP output;
 - inspect and classify state before rerunning a failed phase.
 
-For recurring Implementation operations already owned by permanent repository tooling, invoke that tooling directly by default. Do not replace an existing supported operation with bespoke shell or `/tmp` Python merely because the same result can be scripted. In particular, use supported review-fill, rehearsal, onboarding, site-gate, package-check, and release commands for the responsibilities they own. Temporary helpers are appropriate for genuinely school-specific diagnostics or operations not represented by current tooling, and should remain narrow rather than reimplementing permanent invariants.
+For recurring Implementation operations already owned by permanent repository tooling, invoke that tooling directly by default. Do not replace an existing supported operation with bespoke shell or `/tmp` Python merely because the same result can be scripted. In particular, Stage 2 uses `python tools/implementation_stage2.py <school>` for authoritative preflight/recovery state and reruns that command with `--map <recommendation-map.json>` for permanent map validation plus proposal rehearsal. Use supported review-fill, onboarding, site-gate, package-check, and release commands for the later responsibilities they own. Temporary helpers are appropriate for genuinely school-specific diagnostics or operations not represented by current tooling, and should remain narrow rather than reimplementing permanent invariants.
 
 Before sending an owner-executed bespoke wrapper, establish from current repository state the exact precondition, intended mutation or read-only effect, allowed changed paths/derived changes, and success condition. If the relay wraps a permanent repository command, inspect and trust that command's actual contract rather than adding an undocumented invariant that the owner must disprove by execution.
 
@@ -158,16 +158,17 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 - establish/verify `data/<school_key>-onboarding` from the correct base;
 - install the six-file package and required current-main reference additions;
 - create/verify the stable Phase 0 checkpoint;
-- run generic onboarding preflight;
+- run the repository-owned Stage-2 coordinator (`python tools/implementation_stage2.py <school>`) to verify semantic freeze, regenerate authoritative preflight, and write the durable `.onboarding/<school>/implementation-stage2-status.json` recovery artifact;
 - before any fingerprint-changing Stage 2 repair, run the comprehensive deterministic candidate sweep defined by `docs/implementation-pre-gate-adversarial-challenge.md` and classify the presently detectable normalization, current-source, reciprocal, display, site-metadata, predicted-publication, and historical-conflict population together;
 - correct the classified deterministic population in one coherent repair batch wherever safe; split it only when a later repair genuinely depends on changed state from an earlier repair, and name that dependency rather than using regeneration itself as a discovery strategy;
 - regenerate authoritative preflight after the coherent repair batch, not merely because one individual item became clear;
 - research every genuine owner-relevant decision row **to recommendation, not necessarily to resolution**: eliminate mechanical explanations, assemble the material competing evidence, and make a supported recommendation; do not delay Gate 1 merely to eliminate reasonable historical uncertainty;
 - treat Gate 1 as the **Owner Reconciliation Packet**: for each material historical conflict, summarize the competing interpretations, recommendation and basis, and meaningful residual uncertainty so the owner can approve, choose another supported disposition, or return that specific item for additional bounded research;
-- construct the exact proposed recommendation map that will underlie Gate 1 and run the full disposable pre-Gate rehearsal required by `docs/implementation-pre-gate-adversarial-challenge.md` against that map;
-- repair deterministic/mechanical failures exposed by the rehearsal before owner review; when the rehearsal exposes a genuine historical conflict, investigate it only far enough to produce a responsible recommendation and include it in Gate 1 rather than turning Stage 2 into open-ended archaeology;
+- construct the exact proposed recommendation map that will underlie Gate 1 and rerun the Stage-2 coordinator with `--map <recommendation-map.json>`; the coordinator must validate the map with the authoritative review parser and run the full disposable pre-Gate rehearsal required by `docs/implementation-pre-gate-adversarial-challenge.md`;
+- repair deterministic/mechanical failures exposed by the rehearsal before owner review; when the site gate runs, use the preserved `.onboarding/<school>/last-rehearsal-site-gate.json` diagnostic rather than rebuilding a school-specific classifier; when the rehearsal exposes a genuine historical conflict, investigate it only far enough to produce a responsible recommendation and include it in Gate 1 rather than turning Stage 2 into open-ended archaeology;
 - consolidate recommendations, evidence bases, accomplishments, and publication decisions into one readable Gate 1 packet;
-- run the pre-Gate releaseability challenge required by current policy, including implementation site completeness, stale venue fallback checks, physical venue propagation, target no-op prediction, accomplishment/publication readiness, and deterministic fingerprint-changing corrections that can be made before owner review.
+- run the pre-Gate releaseability challenge required by current policy, including implementation site completeness, stale venue fallback checks, physical venue propagation, target no-op prediction, accomplishment/publication readiness, and deterministic fingerprint-changing corrections that can be made before owner review;
+- if Stage 2 exposes a generic permanent-tool defect, checkpoint as a technical tooling repair, fix the generic tool, add a regression test for the exact failure topology, and rerun the repository-owned Stage-2 coordinator. Do not substitute a bespoke wrapper or mix the tooling repair into a new unbounded historical-research pass.
 
 ### Completion standard
 

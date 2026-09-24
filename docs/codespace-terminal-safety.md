@@ -103,7 +103,7 @@ A large 100-200 line pasted block can fail for reasons unrelated to the underlyi
 - accidental `exit` of the interactive terminal;
 - partial completion that is hard to reconstruct.
 
-Do not create a child script merely to wrap a permanent repository command. Run supported Phase 0, preflight, rehearsal, apply, verification, and release commands directly unless the current bounded task truly needs bespoke logic.
+Do not create a child script merely to wrap a permanent repository command. Run supported Phase 0, Stage-2, review, apply, verification, and release commands directly unless the current bounded task truly needs bespoke logic. In normal Stage 2, use `python tools/implementation_stage2.py <school>` and its `--map` form; do not replace that coordinator with assistant-authored worktree/clone management, count assertions, or multi-command shell orchestration.
 
 When substantial bespoke logic is genuinely necessary:
 
@@ -112,7 +112,7 @@ When substantial bespoke logic is genuinely necessary:
 3. print a compact PASS/STOP result and keep verbose diagnostics in `/tmp` or ignored `.onboarding/` paths;
 4. do not place helper scripts in the repository root.
 
-A phase-sized relay is **not** permission to build a monolithic wrapper around several independent repository operations. Prefer one principal operation plus its immediate validation. If later rehearsal, regeneration, or release preparation is independently supported by permanent tooling, run the permanent command directly as the next bounded operation rather than embedding it in the same giant relay.
+A phase-sized relay is **not** permission to build a monolithic wrapper around several independent repository operations. Prefer one principal permanent repository operation plus its immediate validation. Assistant-authored multi-line shell/Python is exceptional recovery tooling, not the default Implementation surface. If later rehearsal, regeneration, or release preparation is independently supported by permanent tooling, run the permanent command directly as the next bounded operation rather than embedding it in the same giant relay.
 
 ## 5. Keep transport and helper artifacts out of the tracked-worktree boundary
 
@@ -155,7 +155,7 @@ Before prescribing a repair, classify the stop explicitly as one of:
 - `HISTORICAL REVIEW` — the evidence genuinely requires owner judgment or a narrow research reopen;
 - `ASSISTANT WRAPPER DEFECT` — the relay's own assertion, path census, formatting, arithmetic, or shell logic was wrong while the underlying repository operation was healthy.
 
-If the failure is `ASSISTANT WRAPPER DEFECT`, repair or remove the wrapper defect first. Do not make the owner troubleshoot basketball data that did not fail.
+If the failure is `ASSISTANT WRAPPER DEFECT`, repair or remove the wrapper defect first. Do not make the owner troubleshoot basketball data that did not fail. If the wrapper exists only because permanent tooling lacks a recurring operation, treat the incident as a repository-tooling defect and add the missing permanent capability before the pattern repeats.
 
 ## 7. Do not reopen historical decisions for a shell failure
 
@@ -185,7 +185,7 @@ Instead:
 - diagnose its own failure output rather than surrounding it with guessed school-specific counts or expected blocker totals;
 - add an independent check only when a documented gap remains or when the check protects a materially different invariant.
 
-Focused read-only diagnostics remain appropriate when permanent tooling does not assemble the historical evidence needed to understand a specific conflict. The prohibition is against duplicating an owned invariant, not against useful investigation.
+Focused read-only diagnostics remain appropriate when permanent tooling does not assemble the historical evidence needed to understand a specific conflict. The prohibition is against duplicating an owned invariant, not against useful investigation. A generic permanent-tool repair exposed by a school must include a regression test for the exact failure topology before the repair is considered complete.
 
 A wrapper that duplicates repository logic can become the least reliable part of the workflow. Independent verification is valuable; redundant reimplementation is not.
 

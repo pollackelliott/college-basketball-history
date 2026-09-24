@@ -28,9 +28,9 @@ Verbose evidence should live in files or ignored `.onboarding/` / `/tmp` artifac
 
 The default interaction unit is a complete reversible phase.
 
-A phase handoff should normally contain one runnable command block or one guarded operation, not a sequence of messages where the owner must execute and paste one command at a time.
+A phase handoff should normally contain one direct permanent repository command, not a sequence of messages where the owner must execute and paste one command at a time.
 
-When several deterministic commands are required, prefer the permanent repository tool directly. Use a guarded child script only when no permanent phase command represents the operation cleanly. The Stanford retrospective showed that large bespoke wrapper/heredoc orchestration can create ambiguity even when the underlying permanent tools are sound.
+When several deterministic commands are required, the repository should own their phase orchestration. Stage 2 uses `python tools/implementation_stage2.py <school>` and its `--map` form. Use a guarded child script only when no permanent operation represents genuinely bespoke work cleanly; recurring gaps belong in permanent tooling instead. The Stanford retrospective showed that large bespoke wrapper/heredoc orchestration can create ambiguity even when the underlying permanent tools are sound.
 
 When a guarded child script is genuinely required, it should:
 
@@ -101,6 +101,18 @@ Do not rerun a successful phase merely because the prior chat turn ended unexpec
 Unexpected tracked state remains a STOP; recovery must not use blind reset, stash, force-push, or branch deletion.
 
 ## 6. Chat interruption recovery capsule
+
+During Implementation Stage 2, the primary recovery capsule is machine-readable:
+
+`.onboarding/<school>/implementation-stage2-status.json`
+
+If proposal rehearsal reached the site gate, the latest structured site result is preserved at:
+
+`.onboarding/<school>/last-rehearsal-site-gate.json`
+
+A replacement chat must inspect these durable artifacts and actual Git/GitHub state before reconstructing Stage 2 from prose. Do not rerun preflight or proposal rehearsal merely because the chat changed.
+
+For other stages, or when the Stage-2 artifact itself cannot exist yet, use the compact manual capsule below.
 
 If the chat becomes laggy or unusable before the school is complete, the lane should be able to emit a compact recovery capsule rather than a giant narrative handoff.
 

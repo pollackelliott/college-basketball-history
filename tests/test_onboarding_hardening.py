@@ -4,6 +4,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +14,7 @@ sys.path.insert(0, str(TOOLS))
 from onboarding_hardening import (  # noqa: E402
     carry_forward_review,
     fill_review_from_map,
+    rehearse_review,
     research_portfolio_report,
 )
 from stage_research_portfolio import rebase_venues  # noqa: E402
@@ -188,6 +190,88 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     for error in report["errors"]
                 )
             )
+
+
+class RehearsalDiagnosticTests(unittest.TestCase):
+    def test_failed_rehearsal_preserves_site_gate_diagnostic(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            plan = root / "plan.json"
+            review = root / "review.csv"
+            plan.write_text("{}\n", encoding="utf-8")
+            review.write_text("decision_id\n", encoding="utf-8")
+
+            def fake_copy_repository(repo, rehearsal):
+                rehearsal.mkdir(parents=True, exist_ok=True)
+
+            def fake_run_gates(rehearsal, school_key, changed, include_tests=True):
+                diagnostic = (
+                    rehearsal
+                    / ".onboarding"
+                    / school_key
+                    / "implementation-site-gate.json"
+                )
+                diagnostic.parent.mkdir(parents=True, exist_ok=True)
+                diagnostic.write_text(
+                    json.dumps(
+                        {
+                            "status": "FAIL",
+                            "counts": {"unaccounted_public_gap_rows": 2},
+                            "examples": {
+                                "unaccounted_public_gap": ["CBBG-1", "CBBG-2"]
+                            },
+                            "errors": ["2 gaps"],
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                raise Exception("site gate failed")
+
+            with (
+                patch("onboarding_hardening.onboard_school.ensure_package_checkpoint"),
+                patch("onboarding_hardening.assert_no_unapproved_semantic_drift"),
+                patch(
+                    "onboarding_hardening.approve_plan",
+                    return_value=({"school_key": "test"}, "approved-hash"),
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.tree_hashes",
+                    side_effect=[{}, {}],
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.copy_repository",
+                    side_effect=fake_copy_repository,
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.execute_approved_in_place",
+                    return_value={},
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.changed_paths",
+                    return_value=[],
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.run_gates",
+                    side_effect=fake_run_gates,
+                ),
+            ):
+                with self.assertRaisesRegex(Exception, "site gate failed"):
+                    rehearse_review(
+                        root,
+                        "test",
+                        plan_path=plan,
+                        review_path=review,
+                    )
+
+            preserved = (
+                root
+                / ".onboarding"
+                / "test"
+                / "last-rehearsal-site-gate.json"
+            )
+            self.assertTrue(preserved.is_file())
+            payload = json.loads(preserved.read_text(encoding="utf-8"))
+            self.assertEqual(payload["counts"]["unaccounted_public_gap_rows"], 2)
 
 
 class ReviewAutomationTests(unittest.TestCase):
