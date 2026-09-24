@@ -486,6 +486,37 @@ def implementation_site_report(
         for row in in_scope_sources
         if row.get("source_game_id", "").strip()
     }
+
+    # Published reciprocal assertions may correspond to source rows that already
+    # carry explicit site-research accounting.  The assertion ledger deliberately
+    # stores basketball evidence but not site_research_status/site_research_basis,
+    # so recover that narrow metadata from the published reciprocal package.
+    target_game_ids = {
+        row.get("canonical_game_id", "").strip()
+        for row in target_games
+        if row.get("canonical_game_id", "").strip()
+    }
+    reciprocal_ids_by_program: dict[str, set[str]] = defaultdict(set)
+    for assertion in assertions:
+        if assertion.get("canonical_game_id", "").strip() not in target_game_ids:
+            continue
+        program = assertion.get("source_program_key", "").strip()
+        source_id = assertion.get("source_game_id", "").strip()
+        if not program or program == school_key or not source_id:
+            continue
+        reciprocal_ids_by_program[program].add(source_id)
+
+    reciprocal_source_by_key: dict[tuple[str, str], dict[str, str]] = {}
+    for program, wanted_ids in sorted(reciprocal_ids_by_program.items()):
+        reciprocal_path = repo / "schools" / program / "source-games.csv"
+        if not reciprocal_path.exists():
+            continue
+        _, reciprocal_rows = read_csv(reciprocal_path)
+        for reciprocal_row in reciprocal_rows:
+            source_id = reciprocal_row.get("source_game_id", "").strip()
+            if source_id in wanted_ids:
+                reciprocal_source_by_key[(program, source_id)] = reciprocal_row
+
     discrepancies_by_canonical: dict[str, list[dict[str, str]]] = defaultdict(list)
     for discrepancy in discrepancies:
         discrepancies_by_canonical[
@@ -573,7 +604,30 @@ def implementation_site_report(
                     strict_home_gap_rows += 1
                     record("strict_home_gap", canonical_id)
 
-            research_accounted = any(_researched_source_row(row) for row in source_rows)
+            target_research_accounted = any(
+                _researched_source_row(row) for row in source_rows
+            )
+            canonical_site = game.get("site_type", "").strip()
+            reciprocal_research_accounted = any(
+                assertion.get("source_program_key", "").strip() != school_key
+                and _source_site_to_canonical(assertion) == canonical_site
+                and _researched_source_row(
+                    reciprocal_source_by_key.get(
+                        (
+                            assertion.get("source_program_key", "").strip(),
+                            assertion.get("source_game_id", "").strip(),
+                        ),
+                        {},
+                    )
+                )
+                for assertion in all_game_assertions
+            )
+            research_accounted = (
+                target_research_accounted or reciprocal_research_accounted
+            )
+            if reciprocal_research_accounted and not target_research_accounted:
+                record("reciprocal_research_accounted_gap", canonical_id)
+
             review_accounted = _review_accounts_for_gap(categories, game_discrepancies)
             if not (research_accounted or review_accounted or home_exception):
                 unaccounted_public_gap_rows += 1

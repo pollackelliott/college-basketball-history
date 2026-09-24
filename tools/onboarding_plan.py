@@ -1751,12 +1751,14 @@ def _record_dependent_site_gap_discrepancies(
     source_by_id: dict[str, dict[str, str]],
     discrepancy_rows: list[dict[str, str]],
 ) -> dict[str, int]:
-    """Record primitive site-field provenance behind an unresolved H/A/N conflict.
+    """Record primitive site-field provenance behind a rejected H/A/N assertion.
 
-    When the owner deliberately leaves site_type unresolved, venue/location evidence
-    from the losing site classification cannot safely be projected onto the retained
-    canonical site.  The primitive public gaps must still have explicit reconciliation
-    provenance instead of appearing as unexplained publication loss.
+    Venue/location evidence attached to a losing site classification cannot safely
+    be projected onto the retained canonical site.  This applies both when the
+    owner deliberately leaves the H/A/N conflict unresolved and when Gate 1
+    affirmatively keeps the canonical H/A/N.  Primitive public gaps must still
+    carry field-specific reconciliation provenance instead of appearing as
+    unexplained publication loss.
     """
 
     counts = Counter()
@@ -1775,7 +1777,9 @@ def _record_dependent_site_gap_discrepancies(
     for item in reconciliation_items:
         if item.get("field_name") != "site_type":
             continue
-        if item.get("decision") != "LEAVE_UNRESOLVED":
+
+        decision = item.get("decision")
+        if decision not in {"LEAVE_UNRESOLVED", "KEEP_CANONICAL"}:
             continue
 
         game_id = item["canonical_game_id"]
@@ -1828,6 +1832,21 @@ def _record_dependent_site_gap_discrepancies(
                 )
             )
 
+        status = "UNDER_REVIEW" if decision == "LEAVE_UNRESOLVED" else "RESOLVED"
+        if decision == "LEAVE_UNRESOLVED":
+            note = (
+                "Dependent site metadata remains unresolved because the sealed "
+                "owner-approved site_type conflict prevents projecting venue or "
+                "location evidence from the losing H/A/N classification."
+            )
+        else:
+            note = (
+                "Dependent site metadata is intentionally not projected because "
+                "the sealed owner-approved site_type reconciliation retained the "
+                "canonical H/A/N classification and rejected the source H/A/N "
+                "premise to which this venue/location evidence belongs."
+            )
+
         for field_name, source_value, canonical_value in candidates:
             key = (game_id, field_name, school_key)
             matches = existing.get(key, [])
@@ -1849,13 +1868,9 @@ def _record_dependent_site_gap_discrepancies(
                 "source_b_program_key": "",
                 "source_b_value": "",
                 "canonical_value": canonical_value,
-                "status": "UNDER_REVIEW",
+                "status": status,
                 "resolution_basis": item.get("resolution_basis", ""),
-                "notes": (
-                    "Dependent site metadata remains unresolved because the sealed "
-                    "owner-approved site_type conflict prevents projecting venue or "
-                    "location evidence from the losing H/A/N classification."
-                ),
+                "notes": note,
             }
             discrepancy_rows.append(row)
             existing[key].append(row)
