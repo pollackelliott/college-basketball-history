@@ -141,7 +141,7 @@ dataset-specific policy, but may not edit the shared dataset incidentally from a
 
 `docs/conference-tournament-site-reference.md` is the first such dataset-specific authority.
 Its incomplete or uncertain rows do not become assertions merely because the dataset is shared;
-updates to that reference return through a dedicated maintenance/refesh PR with source-version
+updates to that reference return through a dedicated maintenance/refresh PR with source-version
 provenance and intent-constrained diff review.
 
 ## 9. What does not change
