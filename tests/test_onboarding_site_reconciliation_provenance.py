@@ -49,7 +49,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             )
             assertions = [
                 target_assertion(
-                    curated_site_type="OPPONENT_HOME",
+                    curated_site_type="NEUTRAL",
                     curated_venue_name="",
                     city="",
                     state="",
@@ -326,12 +326,12 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
         self.assertEqual(result, {})
         self.assertEqual(discrepancies, [])
 
-    def test_reciprocal_research_accounting_covers_matching_away_site_gap(self):
+    def test_reciprocal_research_accounting_covers_matching_neutral_site_gap(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             fixture = ImplementationSiteGateTests()
             target = source_row(
-                curated_site_type="OPPONENT_HOME",
+                curated_site_type="NEUTRAL",
                 curated_venue_name="",
                 city="",
                 state="",
@@ -341,7 +341,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             canonical = canonical_row(
                 team_a_key="other",
                 team_b_key="test",
-                site_type="TEAM_A_HOME",
+                site_type="NEUTRAL",
                 venue_key="",
                 venue_id="",
                 site_city="",
@@ -349,7 +349,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             )
             assertions = [
                 target_assertion(
-                    curated_site_type="OPPONENT_HOME",
+                    curated_site_type="NEUTRAL",
                     curated_venue_name="",
                     city="",
                     state="",
@@ -399,7 +399,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             root = Path(temporary)
             fixture = ImplementationSiteGateTests()
             target = source_row(
-                curated_site_type="OPPONENT_HOME",
+                curated_site_type="NEUTRAL",
                 curated_venue_name="",
                 city="",
                 state="",
@@ -409,7 +409,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             canonical = canonical_row(
                 team_a_key="other",
                 team_b_key="test",
-                site_type="TEAM_A_HOME",
+                site_type="NEUTRAL",
                 venue_key="",
                 venue_id="",
                 site_city="",
