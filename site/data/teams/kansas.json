@@ -4267,7 +4267,7 @@
       "opponent_key": "oregon-state",
       "opponent_name": "Oregon State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
@@ -78434,7 +78434,7 @@
       "opponent_key": "oregon-state",
       "opponent_name": "Oregon State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 84,
       "opponent_score": 78,
       "score_known": true,
@@ -81184,7 +81184,7 @@
       "opponent_key": "oregon-state",
       "opponent_name": "Oregon State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 82,
       "opponent_score": 67,
       "score_known": true,
