@@ -37,7 +37,7 @@ This is an execution-order rule, not a new gate and not authority for speculativ
 
 Use the repository's actual onboarding/reconciliation logic to determine which conditional discrepancies would be selected by the proposed canonical identities. Do not infer applicability from an ad-hoc field or from the raw count of conditional rows.
 
-Before Gate 1, report the selected/applicable conditional count and include every owner-relevant selected conditional in the consolidated packet.
+Before Gate 1, report the selected/applicable conditional count and include every owner-relevant selected conditional in the consolidated packet. Validate the recommendation map through the permanent parser (`tools/onboarding_hardening.py validate-map` or the Stage-2 coordinator), not through assistant-authored action-count logic.
 
 ### 2. Site/H-A-N `KEEP_CANONICAL` challenge
 
@@ -75,15 +75,15 @@ At minimum, overtime counts must be challenged when they exceed a conservative p
 
 ### 6. Exact-recommendation disposable rehearsal
 
-Before `OWNER GATE 1 READY`, construct the exact recommendation map the lane proposes to present to the owner and run it through the permanent full disposable rehearsal surface. The rehearsal must exercise the proposed identities and dispositions through actual conditional applicability, reconciliation, deterministic publication/site generation, implementation site completeness, target no-op behavior, and the current automated gate/test suite.
+Before `OWNER GATE 1 READY`, construct the exact recommendation map the lane proposes to present to the owner and run `python tools/implementation_stage2.py <school> --map <recommendation-map.json>`. The coordinator validates the map with the authoritative review parser and runs it through the permanent full disposable rehearsal surface. The rehearsal must exercise the proposed identities and dispositions through actual conditional applicability, reconciliation, deterministic publication/site generation, implementation site completeness, target no-op behavior, and the current automated gate/test suite.
 
 This is a **proposal rehearsal**, not owner approval and not cryptographic sealing. It must not write owner-approval semantics into tracked state.
 
 Classify rehearsal findings as follows:
 
-- **mechanical/deterministic failure:** repair it before Gate 1 and rerun the proposal rehearsal;
+- **mechanical/deterministic failure:** inspect the repository-owned durable diagnostic first, repair it before Gate 1, and rerun the Stage-2 coordinator; if the defect is in generic permanent tooling, add a regression test for the exact exposed topology before treating the repair as complete;
 - **genuine historical conflict:** perform bounded investigation sufficient for a supported recommendation, then include the conflict in Gate 1 with the competing evidence and residual uncertainty;
-- **tool/lifecycle misuse or wrapper defect:** correct the execution path rather than treating the false failure as basketball evidence.
+- **tool/lifecycle misuse or wrapper defect:** correct the execution path rather than treating the false failure as basketball evidence. Do not replace a failed permanent coordinator with a custom worktree, clone, arithmetic assertion, or giant shell wrapper.
 
 When conflicting institutional records share a strong fingerprint—such as identical date and score but different opponent identity—present that fingerprint as competing evidence. Do not assume either the incoming school or existing canonical source is authoritative merely because one is newer, already published, or locally convenient.
 
@@ -101,7 +101,9 @@ Do not declare `OWNER GATE 1 READY` until:
 
 The intended normal path is:
 
-`Stage 2 comprehensive challenge -> exact recommendation-map proposal rehearsal -> one Owner Reconciliation Packet / Gate 1 -> Stage 3 owner-approved rehearsal/seal/apply -> Preview`
+`Stage-2 coordinator preflight -> bounded comprehensive challenge -> Stage-2 coordinator --map -> one Owner Reconciliation Packet / Gate 1 -> Stage 3 owner-approved rehearsal/seal/apply -> Preview`
+
+The ignored Stage-2 status artifact is the recovery authority for this phase; verbose rehearsal/site diagnostics stay in ignored artifacts rather than the chat transcript.
 
 A supplemental owner gate remains correct when genuinely new historical evidence or a changed substantive decision universe appears later. The goal is to eliminate avoidable supplemental gates caused by defects Stage 2 could have found deterministically.
 
