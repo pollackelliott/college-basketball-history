@@ -198,6 +198,13 @@ def run_gates(
                 school_key,
                 "--repo",
                 str(repo),
+                "--json-output",
+                str(
+                    repo
+                    / ".onboarding"
+                    / school_key
+                    / "implementation-site-gate.json"
+                ),
             ],
         ),
         (
