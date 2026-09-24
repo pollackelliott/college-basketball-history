@@ -331,7 +331,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             root = Path(temporary)
             fixture = ImplementationSiteGateTests()
             target = source_row(
-                curated_site_type="NEUTRAL",
+                curated_site_type="OPPONENT_HOME",
                 curated_venue_name="",
                 city="",
                 state="",
@@ -349,7 +349,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             )
             assertions = [
                 target_assertion(
-                    curated_site_type="NEUTRAL",
+                    curated_site_type="OPPONENT_HOME",
                     curated_venue_name="",
                     city="",
                     state="",
@@ -399,7 +399,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             root = Path(temporary)
             fixture = ImplementationSiteGateTests()
             target = source_row(
-                curated_site_type="NEUTRAL",
+                curated_site_type="OPPONENT_HOME",
                 curated_venue_name="",
                 city="",
                 state="",
@@ -417,7 +417,7 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             )
             assertions = [
                 target_assertion(
-                    curated_site_type="NEUTRAL",
+                    curated_site_type="OPPONENT_HOME",
                     curated_venue_name="",
                     city="",
                     state="",
