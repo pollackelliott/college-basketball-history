@@ -134,6 +134,13 @@ plus city/state remains an active research obligation. Research the postseason p
 to exhaustion using official tournament/conference/host/participant sources, accepted
 project/reciprocal evidence, and targeted archival material when needed.
 
+For a confirmed conference-tournament row, first consult the owner-authorized shared reference
+defined in `docs/conference-tournament-site-reference.md`. A matching `COMPLETE` row may satisfy
+the exact-site research obligation for the shared-site facts it covers without redundant external
+research. A missing, `PARTIAL`, `UNCERTAIN`, `UNRESOLVED`, campus-round, boundary-mismatched,
+or materially contradicted entry is not a stopping condition and remains subject to the normal
+postseason research-to-exhaustion standard.
+
 NCAA physical venue + city + state remains mandatory and non-waivable.
 
 For NIT, conference-tournament, and other postseason games, do not stop merely because
