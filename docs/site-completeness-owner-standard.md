@@ -65,9 +65,10 @@ neutral shortcut.
 
 1. Published-program home venue/location completeness, with only rigorously documented historical-unrecoverable venue exceptions remaining.
 2. Reciprocal propagation for away games whose home opponent is already published.
-3. Neutral-site city/state completion, prioritizing published-vs-published games and postseason.
-4. Neutral venue completion where support is available.
-5. Remaining H/A/N and identity/reference cleanup.
+3. Postseason exact-venue + city/state completion, with NCAA mandatory and NIT/conference-tournament/other postseason researched to exhaustion.
+4. Modern (1996-97+) regular-season neutral venue completion.
+5. Historical (1995-96 and earlier) regular-season neutral event/city/state enrichment; exact building is opportunistic rather than blocking.
+6. Remaining H/A/N and identity/reference cleanup.
 
 ## Release interpretation
 
