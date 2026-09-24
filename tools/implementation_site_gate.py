@@ -831,6 +831,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("school_key")
     parser.add_argument("--repo", type=Path, default=None)
+    parser.add_argument(
+        "--json-output",
+        type=Path,
+        default=None,
+        help="Optional machine-readable report path for durable Implementation diagnostics.",
+    )
     return parser.parse_args()
 
 
@@ -842,6 +848,13 @@ def main() -> int:
     except (FileNotFoundError, ValueError) as exc:
         print(f"FAIL: {exc}")
         return 1
+    if args.json_output:
+        output = args.json_output.resolve()
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(
+            json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
     print_report(report)
     return 0 if report["status"] == "PASS" else 1
 
