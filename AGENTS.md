@@ -142,9 +142,11 @@ validation; unrelated shared-row changes are a STOP.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
    `python tools/onboarding_hardening.py research-check ...` on an incoming six-file
    portfolio before Phase 0. A portfolio may preserve genuinely unresolved historical
-   site facts, but HOME venue/location gaps, UNKNOWN H/A/N, non-NCAA neutral gaps, and
-   conference-tournament/NIT/POSTSEASON site gaps must be explicitly research-accounted;
-   silent blanks do not pass. NCAA rows retain the stricter complete-site requirement.
+   site facts, but HOME venue/location gaps, UNKNOWN H/A/N, and non-postseason neutral gaps
+   must be explicitly research-accounted; silent blanks do not pass. Conference-tournament,
+   NIT, and other postseason exact venues must be researched to exhaustion with any genuine
+   survivor explicitly documenting the authoritative paths exhausted. NCAA rows retain the
+   stricter mandatory complete-site requirement.
    A Research lane must also complete the required adversarial pre-freeze self-challenge
    in `docs/research-freeze-self-challenge.md`; a mechanical `research-check` pass alone
    is not sufficient to certify `RESEARCH_FROZEN`. `unresolved opponent identities = 0`
