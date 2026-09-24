@@ -9,7 +9,7 @@
 
 > **A Stage 3A-3 turn must stay within one coherent neutral-research tier and one coherent research mode.**
 
-A large neutral queue is not authorization to cross from modern recurring work into modern one-offs, then historical recurring families, then historical one-offs in one continuous turn.
+A large neutral queue is not authorization to cross from modern recurring work into modern one-offs and then into the historical location-enrichment pass in one continuous turn.
 
 Stage 3A-3 must preserve both:
 
@@ -156,7 +156,7 @@ Flag a Stage 3A-3 execution if it:
 - turns a recurring-event bundle into game-by-game source searching;
 - treats generic web search as an evidence class;
 - continues "locating exact sources for missing patches" after the obvious authoritative paths are exhausted;
-- uses historical one-offs as an excuse for row-by-row newspaper archaeology;
+- turns the historical location-enrichment pass into row-by-row newspaper/yearbook/building archaeology;
 - delays durable write-through until after broad source discovery;
 - restarts completed modern/historical families after recovery;
 - infers exact venue from city/event custom/nearby editions rather than direct supported evidence.
