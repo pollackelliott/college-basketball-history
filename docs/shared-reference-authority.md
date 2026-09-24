@@ -132,6 +132,18 @@ Shared-reference proposals should be preserved in the existing durable Research 
 
 If repeated live use later proves that a dedicated machine-readable proposal artifact materially improves reliability, that may be considered separately. This policy does not create one now.
 
+### Owner-maintained shared research datasets
+
+A Control-Center-authorized dedicated maintenance PR may also register a reusable owner-maintained
+research dataset whose purpose is to prevent repeated school-by-school research. Once merged, school
+Research lanes may consume that dataset as read-only shared project evidence under its controlling
+dataset-specific policy, but may not edit the shared dataset incidentally from a school lane.
+
+`docs/conference-tournament-site-reference.md` is the first such dataset-specific authority.
+Its incomplete or uncertain rows do not become assertions merely because the dataset is shared;
+updates to that reference return through a dedicated maintenance/refesh PR with source-version
+provenance and intent-constrained diff review.
+
 ## 9. What does not change
 
 This boundary does not weaken Research. Research still fully resolves, to current policy standards:
