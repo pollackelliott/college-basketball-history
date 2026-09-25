@@ -518,6 +518,49 @@ def rebase_venues(
                     reason = "REUSE_REGISTERED_ALIAS"
 
             if chosen is None and candidate_ids:
+                local_name_set = [name]
+                local_name_set.extend(
+                    alias.strip()
+                    for alias in local.get("aliases", "").split(";")
+                    if alias.strip()
+                )
+                normalized_name_set = [
+                    normalize_name(value)
+                    for value in local_name_set
+                    if normalize_name(value)
+                ]
+
+                resolved_name_ids: list[set[str]] = []
+                for normalized_name in normalized_name_set:
+                    ids = {
+                        venue_id
+                        for venue_id in ids_by_name.get(normalized_name, set())
+                        if geography_compatible(local, global_by_id[venue_id])
+                    }
+                    if ids:
+                        resolved_name_ids.append(ids)
+
+                if (
+                    len(normalized_name_set) >= 2
+                    and len(resolved_name_ids) == len(normalized_name_set)
+                    and all(len(ids) == 1 for ids in resolved_name_ids)
+                ):
+                    resolved_ids = {
+                        next(iter(ids))
+                        for ids in resolved_name_ids
+                    }
+                    if len(resolved_ids) == 1:
+                        candidate_id = next(iter(resolved_ids))
+                        has_registered_alias = any(
+                            normalized_name
+                            in historical_alias_names_by_id.get(candidate_id, set())
+                            for normalized_name in normalized_name_set
+                        )
+                        if has_registered_alias:
+                            chosen = global_by_id[candidate_id]
+                            reason = "REUSE_REGISTERED_NAME_CLUSTER"
+
+            if chosen is None and candidate_ids:
                 raise WorkflowError(
                     f"venue {name!r} has a possible physical venue match "
                     f"({', '.join(sorted(candidate_ids))}) by name/geography, "
