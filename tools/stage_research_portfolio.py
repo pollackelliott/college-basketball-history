@@ -432,11 +432,19 @@ def rebase_venues(
             ids_by_name.setdefault(normalized, set()).add(row["venue_id"])
 
     registered_names_by_id: dict[str, set[str]] = {}
+    historical_alias_names_by_id: dict[str, set[str]] = {}
     for row in name_rows:
-        registered_names_by_id.setdefault(row["venue_id"], set()).add(
+        normalized_registered = (
             row.get("normalized_name", "").strip()
             or normalize_name(row.get("venue_name", ""))
         )
+        registered_names_by_id.setdefault(row["venue_id"], set()).add(
+            normalized_registered
+        )
+        if row.get("name_type", "").strip() == "HISTORICAL_OR_ALIAS":
+            historical_alias_names_by_id.setdefault(row["venue_id"], set()).add(
+                normalized_registered
+            )
 
     used_ids = set(global_by_id)
     mappings: list[dict[str, Any]] = []
@@ -503,9 +511,11 @@ def rebase_venues(
             }
             if len(candidate_ids) == 1:
                 candidate_id = next(iter(candidate_ids))
-                if normalized in registered_names_by_id.get(candidate_id, set()):
+                if normalized in historical_alias_names_by_id.get(
+                    candidate_id, set()
+                ):
                     chosen = global_by_id[candidate_id]
-                    reason = "REUSE_REGISTERED_NAME"
+                    reason = "REUSE_REGISTERED_ALIAS"
 
             if chosen is None and candidate_ids:
                 raise WorkflowError(
