@@ -13,7 +13,7 @@ Stage 3A-0 may read only:
 
 - the verified durable checkpoint / serialized Research state for the target school;
 - the checked-out/current protected-main repository;
-- known repository paths containing canonical games, game assertions, published school packages, and accepted shared-reference/project evidence already present in the project.
+- known repository paths containing the target school's canonical games, game assertions, and accepted shared-reference/project evidence needed for one bounded bulk join.
 
 Stage 3A-0 may not:
 
@@ -31,19 +31,19 @@ Stage 3A-0 may not:
 
 If a local exact-game lookup exposes a contradiction, record and serialize the contradiction for the appropriate later Stage 3A substage. Do not investigate it externally during Stage 3A-0.
 
-## 2. What "published reciprocal lookup" means in Stage 3A-0
+## 2. What local project-evidence harvest means in Stage 3A-0
 
-The phrase **published reciprocal lookup** means only a structured lookup against project evidence that is already present in the repository or checkpoint.
+Stage 3A-0 uses **one bounded bulk exact-game join** against target-school canonical/assertion
+evidence and any accepted same-game evidence already serialized in the checkpoint.
 
 Examples:
 
-- `data/canonical/games.csv`;
-- `data/evidence/game-assertions.csv`;
-- already-published school `source-games.csv` files present under the checked-out repository;
-- accepted reciprocal artifacts already serialized in the checkpoint;
-- other known local project evidence already accepted under repository policy.
+- target-school rows from `data/canonical/games.csv`;
+- target-school rows from `data/evidence/game-assertions.csv`;
+- accepted same-game evidence already serialized in the controlling checkpoint.
 
-It does **not** mean:
+Stage 3A-0 does **not** fetch or inspect published opponent-school `source-games.csv`
+packages, even though they exist inside the repository. It also does not:
 
 - find an opponent's institutional history page;
 - search the web for an opponent schedule;
@@ -51,7 +51,8 @@ It does **not** mean:
 - search GitHub for additional archives or CSV blobs;
 - discover a new reciprocal evidence source.
 
-Those activities belong to Stage 3A-1, 3A-2, or 3A-3 when their research responsibility is actually authorized.
+Targeted reciprocal/package evidence belongs to Stage 3A-1, 3A-2, or 3A-3 when the relevant
+source family is known and that research responsibility is actually authorized.
 
 ## 3. Mechanical execution shape
 
