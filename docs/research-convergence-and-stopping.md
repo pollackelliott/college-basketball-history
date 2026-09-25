@@ -180,7 +180,7 @@ Do not repeatedly reopen a completed postseason population merely because anothe
 might theoretically exist after that exhaustive pass. Reopen only for a concrete
 contradiction, newly identified authoritative evidence, or a repository-required blocker.
 
-## 5. Historical and NON_D1 opponent identity stopping rule
+## 6. Historical and NON_D1 opponent identity stopping rule
 
 Opponent research exists to establish defensible canonical identity, preserve literal evidence, and prevent false merges/splits—especially false attachment of an unrelated historical opponent to a current-D1 program.
 
@@ -223,13 +223,13 @@ Do not stop for owner interaction after one or two ordinary repairs if the same 
 audit can safely continue. Once all residual classes are either repaired or valid terminal
 debt and the acceptance requirements pass, Stage 6 should complete.
 
-## 7. Owner intervention
+## 8. Owner intervention
 
 These stopping decisions belong to the Research lane. They should not create a new routine owner gate.
 
 Contact the owner only when existing repository policy requires owner disposition or when evidence leaves a genuine material historical choice that affects canonical publication. Do not ask the owner to resolve an obscure historical lineage question that can safely remain a defensible historical/NON_D1 identity under this policy.
 
-## 8. Relationship to existing standards
+## 9. Relationship to existing standards
 
 This document narrows **when continued research is warranted**. It does not lower substantive acceptance requirements.
 
