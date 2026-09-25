@@ -165,7 +165,8 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 - establish/verify `data/<school_key>-onboarding` from the correct base;
 - install the six-file package and required current-main reference additions;
 - create/verify the stable Phase 0 checkpoint;
-- run the repository-owned Stage-2 coordinator (`python tools/implementation_stage2.py <school>`) to verify semantic freeze, regenerate authoritative preflight, and write the durable `.onboarding/<school>/implementation-stage2-status.json` recovery artifact;
+- run the repository-owned Stage-2 coordinator (`python tools/implementation_stage2.py <school>`) to verify semantic freeze, regenerate authoritative preflight, and write both the durable `.onboarding/<school>/implementation-stage2-status.json` recovery artifact and `.onboarding/<school>/implementation-stage2-capability-census.json`;
+- treat `CAPABILITY_CENSUS_READY`, not a blocker-free raw preflight, as the first healthy Stage-2 discovery boundary; the census must inventory the presently detectable decision/site/H-A-N representation topology before the first fingerprint-changing Stage-2 repair;
 - before any fingerprint-changing Stage 2 repair, run the comprehensive deterministic candidate sweep defined by `docs/implementation-pre-gate-adversarial-challenge.md` and classify the presently detectable normalization, current-source, reciprocal, display, site-metadata, predicted-publication, and historical-conflict population together;
 - correct the classified deterministic population in one coherent repair batch wherever safe; split it only when a later repair genuinely depends on changed state from an earlier repair, and name that dependency rather than using regeneration itself as a discovery strategy;
 - regenerate authoritative preflight after the coherent repair batch, not merely because one individual item became clear;
@@ -175,9 +176,11 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 - repair deterministic/mechanical failures exposed by the rehearsal before owner review; when the site gate runs, use the preserved `.onboarding/<school>/last-rehearsal-site-gate.json` diagnostic rather than rebuilding a school-specific classifier; when the rehearsal exposes a genuine historical conflict, investigate it only far enough to produce a responsible recommendation and include it in Gate 1 rather than turning Stage 2 into open-ended archaeology;
 - consolidate recommendations, evidence bases, accomplishments, and publication decisions into one readable Gate 1 packet;
 - run the pre-Gate releaseability challenge required by current policy, including implementation site completeness, stale venue fallback checks, physical venue propagation, target no-op prediction, accomplishment/publication readiness, and deterministic fingerprint-changing corrections that can be made before owner review;
-- if Stage 2 exposes a generic permanent-tool defect, checkpoint as a technical tooling repair, fix the generic tool, add a regression test for the exact failure topology, and rerun the repository-owned Stage-2 coordinator. Do not substitute a bespoke wrapper or mix the tooling repair into a new unbounded historical-research pass.
+- if Stage 2 exposes a generic permanent-tool defect, checkpoint as a technical tooling repair, classify the **complete currently detected defect population** in the durable capability census, and define one consolidated repair scope before merging the first repair; batch same-family capability defects into one protected-main tooling PR wherever technically coherent, add regression coverage for every exposed topology, then rerun the repository-owned Stage-2 coordinator. Do not use repeated repair/merge/rerun cycles as the discovery mechanism, substitute a bespoke wrapper, or mix the tooling repair into a new unbounded historical-research pass.
 
 ### Completion standard
+
+A blocker-free raw preflight is not a completion state. `CAPABILITY_CENSUS_READY` means only that the durable population-level discovery record exists and the lane may mature the recommendation map.
 
 Stop at:
 
@@ -185,7 +188,7 @@ Stop at:
 OWNER GATE 1 READY
 ```
 
-The owner receives one consolidated **Owner Reconciliation Packet**. Every material historical conflict should normally carry an agent recommendation even when uncertainty remains. A recommendation is not permission to decide silently for the owner. Do not encode, seal, or apply owner decisions before the owner actually supplies them.
+only after the exact recommendation map passes the full disposable proposal rehearsal and the capability census records `PASS`. The owner receives one consolidated **Owner Reconciliation Packet**. Every material historical conflict should normally carry an agent recommendation even when uncertainty remains. A recommendation is not permission to decide silently for the owner. Do not encode, seal, or apply owner decisions before the owner actually supplies them.
 
 ## 7. Owner Gate 1 — historical decision packet
 
