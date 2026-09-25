@@ -290,6 +290,53 @@ def _run_validation(repo: Path):
         raise TransactionError("validate_data failed")
 
 
+def _site_json_paths(repo: Path) -> set[Path]:
+    site_data = repo / "site" / "data"
+    if not site_data.exists():
+        return set()
+    return {path for path in site_data.rglob("*.json") if path.is_file()}
+
+
+def _snapshot_site_data(repo: Path) -> dict[Path, bytes]:
+    return {path: path.read_bytes() for path in _site_json_paths(repo)}
+
+
+def _restore_site_data(repo: Path, snapshot: dict[Path, bytes]) -> None:
+    before_paths = set(snapshot)
+    for path in _site_json_paths(repo) - before_paths:
+        path.unlink()
+    for path, payload in snapshot.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+
+
+def _run_site_refresh(repo: Path) -> None:
+    commands = (
+        [sys.executable, "tools/build_site_data.py"],
+        [sys.executable, "tools/check_site_data_freshness.py"],
+    )
+    for command in commands:
+        result = subprocess.run(command, cwd=repo)
+        if result.returncode:
+            raise TransactionError(
+                "derived site refresh failed: " + " ".join(command[1:])
+            )
+
+
+def _changed_site_file_count(
+    repo: Path,
+    snapshot: dict[Path, bytes],
+) -> int:
+    paths = set(snapshot) | _site_json_paths(repo)
+    changed = 0
+    for path in paths:
+        before = snapshot.get(path)
+        after = path.read_bytes() if path.is_file() else None
+        if before != after:
+            changed += 1
+    return changed
+
+
 def apply_transaction(
     repo: Path,
     spec_path: Path,
@@ -320,6 +367,8 @@ def apply_transaction(
             paths.add(repo / item["path"])
 
     originals = {path: path.read_bytes() for path in paths}
+    site_originals = _snapshot_site_data(repo) if run_validation else {}
+    site_files_refreshed = 0
 
     try:
         vfields, venues = read_csv(venue_path)
@@ -480,10 +529,17 @@ def apply_transaction(
 
         if run_validation:
             _run_validation(repo)
+            _run_site_refresh(repo)
+            site_files_refreshed = _changed_site_file_count(
+                repo,
+                site_originals,
+            )
 
     except Exception:
         for path, data in originals.items():
             path.write_bytes(data)
+        if run_validation:
+            _restore_site_data(repo, site_originals)
         raise
 
     return {
@@ -494,6 +550,7 @@ def apply_transaction(
         "school_rows_updated": school_updates,
         "venue_name_rows_reassigned": names_reassigned,
         "venues_retired": len(plan["merges"]),
+        "site_files_refreshed": site_files_refreshed,
     }
 
 
