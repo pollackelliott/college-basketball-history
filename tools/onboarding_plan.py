@@ -2177,14 +2177,15 @@ def _record_dependent_site_gap_discrepancies(
     source_by_id: dict[str, dict[str, str]],
     discrepancy_rows: list[dict[str, str]],
 ) -> dict[str, int]:
-    """Record primitive site-field provenance behind a rejected H/A/N assertion.
+    """Record primitive site-field provenance behind a reviewed H/A/N conflict.
 
     Venue/location evidence attached to a losing site classification cannot safely
-    be projected onto the retained canonical site.  This applies both when the
-    owner deliberately leaves the H/A/N conflict unresolved and when Gate 1
-    affirmatively keeps the canonical H/A/N.  Primitive public gaps must still
-    carry field-specific reconciliation provenance instead of appearing as
-    unexplained publication loss.
+    be projected onto the retained canonical site.  The retained canonical H/A/N
+    can also carry a primitive venue/location gap even when the losing source did
+    not supply that dependent field.  This applies both when the owner deliberately
+    leaves the H/A/N conflict unresolved and when Gate 1 affirmatively keeps the
+    canonical H/A/N.  Primitive public gaps must still carry field-specific
+    reconciliation provenance instead of appearing as unexplained publication loss.
     """
 
     counts = Counter()
@@ -2235,21 +2236,22 @@ def _record_dependent_site_gap_discrepancies(
             or canonical.get("venue_id", "").strip()
         )
         source_venue = source.get("curated_venue_name", "").strip()
-        if canonical_venue_blank and source_venue:
+        if canonical_venue_blank:
             candidates.append(("venue", source_venue, ""))
 
         source_city = source.get("city", "").strip()
         source_state = source.get("state", "").strip()
         canonical_city = canonical.get("site_city", "").strip()
         canonical_state = canonical.get("site_state", "").strip()
-        if (
-            location_pair_status(source_city, source_state) == "complete"
-            and location_pair_status(canonical_city, canonical_state) != "complete"
-        ):
+        if location_pair_status(canonical_city, canonical_state) != "complete":
             candidates.append(
                 (
                     "location",
-                    f"{source_city}, {source_state}",
+                    (
+                        f"{source_city}, {source_state}"
+                        if location_pair_status(source_city, source_state) == "complete"
+                        else ""
+                    ),
                     (
                         f"{canonical_city}, {canonical_state}"
                         if canonical_city or canonical_state
@@ -2262,15 +2264,16 @@ def _record_dependent_site_gap_discrepancies(
         if decision == "LEAVE_UNRESOLVED":
             note = (
                 "Dependent site metadata remains unresolved because the sealed "
-                "owner-approved site_type conflict prevents projecting venue or "
-                "location evidence from the losing H/A/N classification."
+                "owner-approved site_type conflict preserves the canonical H/A/N "
+                "while preventing unsupported venue/location projection from the "
+                "losing H/A/N classification."
             )
         else:
             note = (
-                "Dependent site metadata is intentionally not projected because "
+                "Dependent site metadata is intentionally left unresolved because "
                 "the sealed owner-approved site_type reconciliation retained the "
-                "canonical H/A/N classification and rejected the source H/A/N "
-                "premise to which this venue/location evidence belongs."
+                "canonical H/A/N classification. Unsupported venue/location values "
+                "from the losing H/A/N premise are not projected onto that site."
             )
 
         for field_name, source_value, canonical_value in candidates:
