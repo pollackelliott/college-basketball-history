@@ -48,6 +48,11 @@ from onboarding_plan import (
     WorkflowError,
     write_csv_preserving_format,
 )
+from stage1_reference_reconciliation import (
+    conference_reconciliation_inventory,
+    load_conference_reconciliation,
+    register_conferences,
+)
 
 
 def run(command: list[str], *, cwd: Path, echo: bool = False) -> str:
@@ -87,6 +92,37 @@ def load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         return list(reader.fieldnames or []), list(reader)
+
+
+def load_existing_school_venues(
+    repo: Path,
+    *,
+    exclude_school_key: str = "",
+) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for path in sorted((repo / "schools").glob("*/venues.csv")):
+        if exclude_school_key and path.parent.name == exclude_school_key:
+            continue
+        _, school_rows = load_csv(path)
+        for row in school_rows:
+            copy = dict(row)
+            copy["_school_key"] = path.parent.name
+            rows.append(copy)
+    return rows
+
+
+def snapshot_file_bytes(paths: list[Path]) -> dict[Path, bytes | None]:
+    return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def restore_file_bytes(snapshot: dict[Path, bytes | None]) -> None:
+    for path, data in snapshot.items():
+        if data is None:
+            if path.exists():
+                path.unlink()
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
 
 
 
@@ -387,6 +423,37 @@ def geography_compatible(
     return True
 
 
+def incompatible_school_venue_key_rows(
+    local: dict[str, str],
+    key: str,
+    existing_school_venues: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    if not key:
+        return []
+    return [
+        row
+        for row in existing_school_venues
+        if row.get("venue_key", "").strip() == key
+        and not geography_compatible(local, row)
+    ]
+
+
+def disambiguated_new_venue_key(
+    key: str,
+    school_key: str,
+    reserved_keys: set[str],
+) -> str:
+    if not key or not school_key:
+        raise WorkflowError("venue-key disambiguation requires key and school_key")
+    base = f"{key}-{school_key}"
+    candidate = base
+    suffix = 2
+    while candidate in reserved_keys:
+        candidate = f"{base}-{suffix}"
+        suffix += 1
+    return candidate
+
+
 def research_base_venue_reuse_hint(
     local: dict[str, str],
 ) -> tuple[str, str] | None:
@@ -425,6 +492,9 @@ def venue_reconciliation_inventory(
     local_rows: list[dict[str, str]],
     global_rows: list[dict[str, str]],
     name_rows: list[dict[str, str]],
+    *,
+    school_key: str = "",
+    existing_school_venues: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Inventory all venue-reconciliation outcomes without mutating repository state."""
 
@@ -461,6 +531,12 @@ def venue_reconciliation_inventory(
             historical_alias_names_by_id.setdefault(venue_id, set()).add(normalized)
 
     results: list[dict[str, Any]] = []
+    existing_school_venues = existing_school_venues or []
+    reserved_keys = {
+        row.get("venue_key", "").strip()
+        for row in [*global_rows, *existing_school_venues, *local_rows]
+        if row.get("venue_key", "").strip()
+    }
 
     for local in local_rows:
         key = local.get("venue_key", "").strip()
@@ -653,7 +729,35 @@ def venue_reconciliation_inventory(
                 )
             else:
                 item["classification"] = "NEW_GLOBAL_IDENTITY"
-                item["resolution"] = "NEW_GLOBAL_IDENTITY"
+                collisions = incompatible_school_venue_key_rows(
+                    local,
+                    key,
+                    existing_school_venues,
+                )
+                if collisions:
+                    target_key = disambiguated_new_venue_key(
+                        key,
+                        school_key,
+                        reserved_keys,
+                    )
+                    reserved_keys.add(target_key)
+                    item["resolution"] = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
+                    item["target_venue_key"] = target_key
+                    item["issues"].append("SCHOOL_LOCAL_KEY_GEOGRAPHY_COLLISION")
+                    item["issues"].append(
+                        "COLLIDES_WITH_SCHOOL_KEYS:"
+                        + ",".join(
+                            sorted(
+                                {
+                                    row.get("_school_key", "").strip() or "[unknown]"
+                                    for row in collisions
+                                }
+                            )
+                        )
+                    )
+                else:
+                    item["resolution"] = "NEW_GLOBAL_IDENTITY"
+                    item["target_venue_key"] = key
 
         results.append(item)
 
@@ -765,27 +869,44 @@ def build_stage1_reconciliation_inventory(
     programs: list[dict[str, str]],
     program_aliases: list[dict[str, str]],
     local_opponents: list[dict[str, str]],
+    *,
+    local_conferences: list[dict[str, str]] | None = None,
+    global_conferences: list[dict[str, str]] | None = None,
+    conference_registrations: list[dict[str, str]] | None = None,
+    existing_school_venues: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     venue = venue_reconciliation_inventory(
         local_venues,
         global_venues,
         venue_names,
+        school_key=school_key,
+        existing_school_venues=existing_school_venues,
     )
     program = program_alias_inventory(
         programs,
         program_aliases,
         local_opponents,
     )
-    blocker_count = venue["blocker_count"] + program["blocker_count"]
+    conference = conference_reconciliation_inventory(
+        local_conferences or [],
+        global_conferences or [],
+        conference_registrations or [],
+    )
+    blocker_count = (
+        venue["blocker_count"]
+        + program["blocker_count"]
+        + conference["blocker_count"]
+    )
     maintenance = venue["classification_counts"].get(
         "SHARED_GLOBAL_MAINTENANCE", 0
     )
     ambiguous = (
         venue["classification_counts"].get("STOP_AMBIGUOUS", 0)
         + program["classification_counts"].get("STOP_AMBIGUOUS", 0)
+        + conference["classification_counts"].get("STOP_AMBIGUOUS", 0)
     )
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "school_key": school_key,
         "status": (
             "MAINTENANCE_REQUIRED"
@@ -799,6 +920,7 @@ def build_stage1_reconciliation_inventory(
         "ambiguous_stop_count": ambiguous,
         "venue": venue,
         "program_alias": program,
+        "conference": conference,
     }
 
 
@@ -821,6 +943,8 @@ def rebase_venues(
     local_rows: list[dict[str, str]],
     global_rows: list[dict[str, str]],
     name_rows: list[dict[str, str]],
+    *,
+    existing_school_venues: list[dict[str, str]] | None = None,
 ) -> tuple[
     list[dict[str, str]],
     list[dict[str, str]],
@@ -866,6 +990,12 @@ def rebase_venues(
             )
 
     used_ids = set(global_by_id)
+    existing_school_venues = existing_school_venues or []
+    reserved_keys = {
+        row.get("venue_key", "").strip()
+        for row in [*global_rows, *existing_school_venues, *local_rows]
+        if row.get("venue_key", "").strip()
+    }
     mappings: list[dict[str, Any]] = []
 
     for local in local_rows:
@@ -994,9 +1124,25 @@ def rebase_venues(
             final_id = next_venue_id(used_ids)
             used_ids.add(final_id)
 
+            collisions = incompatible_school_venue_key_rows(
+                local,
+                key,
+                existing_school_venues,
+            )
+            final_key = key
+            reason = "NEW_GLOBAL_IDENTITY"
+            if collisions:
+                final_key = disambiguated_new_venue_key(
+                    key,
+                    school_key,
+                    reserved_keys,
+                )
+                reserved_keys.add(final_key)
+                reason = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
+
             chosen = {
                 "venue_id": final_id,
-                "venue_key": key,
+                "venue_key": final_key,
                 "display_name": name,
                 "city": local.get("city", "").strip(),
                 "state": local.get("state", "").strip(),
@@ -1028,7 +1174,8 @@ def rebase_venues(
             ids_by_name.setdefault(normalize_name(chosen["display_name"]), set()).add(
                 chosen["venue_id"]
             )
-            reason = "NEW_GLOBAL_IDENTITY"
+            if reason == "NEW_GLOBAL_IDENTITY":
+                reserved_keys.add(chosen["venue_key"])
 
         final_id = chosen["venue_id"]
         local["venue_id"] = final_id
@@ -1039,7 +1186,7 @@ def rebase_venues(
         # canonical geography must match the global venue registry so the same
         # venue_key cannot carry conflicting location representations across
         # school packages. Frozen source-games.csv geography is untouched.
-        if reason != "NEW_GLOBAL_IDENTITY":
+        if not reason.startswith("NEW_GLOBAL_IDENTITY"):
             local["city"] = chosen.get("city", "").strip()
             local["state"] = chosen.get("state", "").strip()
 
@@ -1051,7 +1198,7 @@ def rebase_venues(
             (
                 name,
                 "PROJECT_DISPLAY"
-                if reason == "NEW_GLOBAL_IDENTITY"
+                if reason.startswith("NEW_GLOBAL_IDENTITY")
                 else "HISTORICAL_OR_ALIAS",
             )
         ]
@@ -1086,6 +1233,7 @@ def rebase_venues(
         mappings.append(
             {
                 "venue_key": key,
+                "final_venue_key": chosen["venue_key"],
                 "canonical_name": name,
                 "research_venue_id": research_id,
                 "final_venue_id": final_id,
@@ -1162,6 +1310,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--history-start-season", required=True)
     parser.add_argument("--history-scope-basis", required=True)
     parser.add_argument("--history-scope-notes", required=True)
+    parser.add_argument("--conference-reconciliation", type=Path, default=None)
     parser.add_argument("--repo", type=Path, default=None)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--commit", action="store_true")
@@ -1221,10 +1370,31 @@ def main() -> int:
             source_fields, source_games = load_csv(
                 package_root / "source-games.csv"
             )
+            conference_history_fields, local_conferences = load_csv(
+                package_root / "conferences.csv"
+            )
             global_fields, global_venues = load_csv(repo / "data/reference/venues.csv")
             name_fields, venue_names = load_csv(repo / "data/reference/venue-names.csv")
             program_fields, programs = load_csv(repo / "data/reference/programs.csv")
             _, program_aliases = load_csv(repo / "data/reference/program-names.csv")
+            conference_fields, global_conferences = load_csv(
+                repo / "data/reference/conferences.csv"
+            )
+            existing_school_venues = load_existing_school_venues(
+                repo,
+                exclude_school_key=args.school_key,
+            )
+
+            replacement_history, conference_registrations, conference_meta = (
+                load_conference_reconciliation(
+                    args.conference_reconciliation,
+                    school_key=args.school_key,
+                    conferences_path=package_root / "conferences.csv",
+                    local_fields=conference_history_fields,
+                )
+            )
+            if replacement_history is not None:
+                local_conferences = replacement_history
 
             stage1_inventory = build_stage1_reconciliation_inventory(
                 args.school_key,
@@ -1234,6 +1404,10 @@ def main() -> int:
                 programs,
                 program_aliases,
                 local_opponents,
+                local_conferences=local_conferences,
+                global_conferences=global_conferences,
+                conference_registrations=conference_registrations,
+                existing_school_venues=existing_school_venues,
             )
             inventory_path = write_stage1_reconciliation_inventory(
                 repo,
@@ -1267,6 +1441,12 @@ def main() -> int:
                         f"{row['classification']} | "
                         f"{','.join(row['candidate_program_keys'])}"
                     )
+                for row in stage1_inventory["conference"]["blockers"]:
+                    print(
+                        "  conference blocker: "
+                        f"{row['conference_key']} | {row['conference_name']} | "
+                        f"{row['classification']} | {','.join(row['issues'])}"
+                    )
                 raise WorkflowError(
                     "Stage 1 reconciliation inventory is not clean. "
                     "Resolve the complete declared blocker/maintenance population "
@@ -1284,6 +1464,12 @@ def main() -> int:
                 local_venues,
                 global_venues,
                 venue_names,
+                existing_school_venues=existing_school_venues,
+            )
+
+            global_conferences, conference_mappings = register_conferences(
+                global_conferences,
+                conference_registrations,
             )
 
             (
@@ -1320,6 +1506,11 @@ def main() -> int:
                 source_fields,
                 source_games,
             )
+            write_csv_preserving_format(
+                package_root / "conferences.csv",
+                conference_history_fields,
+                local_conferences,
+            )
             notes_path = package_root / "notes.md"
             notes = notes_path.read_text(encoding="utf-8")
             if not notes.endswith("\n"):
@@ -1333,6 +1524,12 @@ def main() -> int:
                 "`.onboarding/<school>/integration-freeze.json` manifest. "
                 "Status: **INTEGRATION_FROZEN**.\n"
             )
+            if conference_meta is not None:
+                notes += (
+                    "\nOwner-authorized Stage 1 conference-history reconciliation "
+                    "was applied during current-main integration; the exact correction "
+                    "specification and hash are recorded in the Integration Freeze manifest.\n"
+                )
             notes_path.write_text(notes, encoding="utf-8")
 
             staged_hashes = {
@@ -1358,6 +1555,8 @@ def main() -> int:
                 },
                 "venue_mapping": mappings,
                 "program_alias_mapping": program_alias_mappings,
+                "conference_mapping": conference_mappings,
+                "conference_reconciliation": conference_meta,
                 "history_scope": {
                     "history_start_season": args.history_start_season,
                     "history_scope_status": "OWNER_CONFIRMED",
@@ -1383,6 +1582,9 @@ def main() -> int:
                 f"{sum(row['source_games_rebased'] for row in program_alias_mappings)} "
                 "source game(s)"
             )
+            print(
+                f"Conference registrations: {len(conference_mappings)} mapping row(s)"
+            )
             print("Venue outcomes:")
             for key, count in sorted(
                 {
@@ -1402,44 +1604,65 @@ def main() -> int:
                 return 0
 
             school_dir = repo / "schools" / args.school_key
-            school_dir.mkdir()
-            for name in REQUIRED_PACKAGE_FILES:
-                shutil.copy2(package_root / name, school_dir / name)
-
-            write_csv_preserving_format(
-                repo / "data/reference/programs.csv",
-                program_fields,
-                programs,
-            )
-            write_csv_preserving_format(
-                repo / "data/reference/venues.csv",
-                global_fields,
-                global_venues,
-            )
-            write_csv_preserving_format(
-                repo / "data/reference/venue-names.csv",
-                name_fields,
-                venue_names,
-            )
-
             output_dir = repo / ".onboarding" / args.school_key
             output_dir.mkdir(parents=True, exist_ok=True)
             manifest_path = output_dir / "integration-freeze.json"
-            manifest_path.write_text(
-                json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
-                encoding="utf-8",
-            )
+            protected_paths = [
+                repo / "data/reference/programs.csv",
+                repo / "data/reference/venues.csv",
+                repo / "data/reference/venue-names.csv",
+                repo / "data/reference/conferences.csv",
+                manifest_path,
+            ]
+            pre_apply_snapshot = snapshot_file_bytes(protected_paths)
 
-        run(
-            [sys.executable, str(repo / "tools/validate_data.py")],
-            cwd=repo,
-            echo=True,
-        )
+            try:
+                school_dir.mkdir()
+                for name in REQUIRED_PACKAGE_FILES:
+                    shutil.copy2(package_root / name, school_dir / name)
+
+                write_csv_preserving_format(
+                    repo / "data/reference/programs.csv",
+                    program_fields,
+                    programs,
+                )
+                write_csv_preserving_format(
+                    repo / "data/reference/venues.csv",
+                    global_fields,
+                    global_venues,
+                )
+                write_csv_preserving_format(
+                    repo / "data/reference/venue-names.csv",
+                    name_fields,
+                    venue_names,
+                )
+                write_csv_preserving_format(
+                    repo / "data/reference/conferences.csv",
+                    conference_fields,
+                    global_conferences,
+                )
+
+                manifest_path.write_text(
+                    json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8",
+                )
+
+                run(
+                    [sys.executable, str(repo / "tools/validate_data.py")],
+                    cwd=repo,
+                    echo=True,
+                )
+            except Exception:
+                if school_dir.exists():
+                    shutil.rmtree(school_dir)
+                restore_file_bytes(pre_apply_snapshot)
+                raise
 
         expected_paths = [
             "data/reference/programs.csv",
             "data/reference/venues.csv",
             "data/reference/venue-names.csv",
+            "data/reference/conferences.csv",
             *[
                 f"schools/{args.school_key}/{name}"
                 for name in REQUIRED_PACKAGE_FILES
