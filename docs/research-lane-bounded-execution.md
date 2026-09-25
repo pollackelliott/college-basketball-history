@@ -96,13 +96,13 @@ A stage boundary is not an owner historical gate. Contact the owner for substant
 
 The formal NON_D1 sanity scan remains a required owner checkpoint. Other ordinary major stage/substage transitions are execution authorization only. Do not turn ordinary evidence-class completion into repeated owner interaction.
 
-### 3.7 Planned fresh-chat rollover is normal hygiene
+### 3.7 One-chat baseline; rollover is recovery, not an expected lifecycle step
 
-A Research lane may span one or a small number of chats. A replacement chat is not only emergency recovery.
+A Research lane should normally complete in **one chat**. Durable checkpoints exist so the lane can recover cleanly if context, rendering, or execution genuinely degrades; they are not an expectation that the owner routinely open a replacement chat at stage boundaries.
 
-When a long school has accumulated substantial durable history—especially after a large Stage 3A substage or before Stage 6—it is acceptable to start a fresh chat from the latest verified portable checkpoint rather than wait for the conversation to hit its context ceiling.
+Stay in the same healthy chat across ordinary `Proceed` transitions. Use a replacement chat only when there is concrete operational evidence that continuity is becoming unreliable or the current conversation can no longer safely carry the next bounded assignment.
 
-The controlling continuity model is the durable checkpoint, not one uninterrupted conversation. A planned rollover must preserve the exact stage/substage state and must not reopen completed work.
+When rollover is actually necessary, recover from the latest verified portable checkpoint rather than conversational reconstruction. The controlling continuity model remains durable state, and the replacement chat must not reopen completed work.
 
 ## 4. Required turn-ending contract
 

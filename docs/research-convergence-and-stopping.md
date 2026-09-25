@@ -11,9 +11,9 @@ Research rigor is unchanged. This policy prevents rigor from turning into open-e
 
 The normal operating target is:
 
-> **One school should normally reach `RESEARCH_FROZEN` within one or a small number of Research chats, with durable checkpoints controlling continuity.**
+> **One school should normally reach `RESEARCH_FROZEN` within one Research chat, with durable checkpoints controlling recovery if continuity genuinely degrades.**
 
-A planned fresh-chat rollover at a durable major stage/substage boundary is normal hygiene for a long school, not process failure. Do not preserve one-chat continuity at the cost of context exhaustion or excessive owner relays.
+A second chat is a supported recovery path, not an expected lifecycle step. Do not roll merely because a major stage/substage boundary was reached. Stay in the same healthy chat when possible; move to a verified checkpoint only when context, rendering, or execution has become concretely unreliable.
 
 ## 2. Materiality test for continued research
 

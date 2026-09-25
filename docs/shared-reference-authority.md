@@ -64,6 +64,18 @@ If the identity is already present, reuse it. If it is still new and mechanicall
 
 This is analogous to provisional Research-time venue identity: Research establishes physical/historical meaning; Integration establishes the final authoritative repository identity against current `main`.
 
+### Stage 1 maintenance visibility
+
+Serialized Implementation may resolve a Research-settled shared identity, but the **mechanism matters**.
+
+Target-school additions/registrations that are part of the guarded Phase 0 transaction remain normal Stage 1 authority. By contrast, if reconciliation requires a dedicated protected-main maintenance PR that rewrites existing global/shared state or already-published school/canonical representation, the lane must first surface one consolidated declared maintenance scope and receive explicit Control Center authorization for that batch.
+
+An ordinary `Proceed` authorizes the named school Implementation stage. It does not silently authorize an open-ended sequence of dedicated protected-main maintenance PRs affecting already-published/global state.
+
+Before the first such maintenance mutation, use the repository-owned Stage 1 read-only reconciliation inventory to expose the complete presently detectable blocker population. Known members of one shared-reference problem family should be planned together rather than discovered and merged one at a time. After the authorized maintenance batch lands, rerun the inventory against refreshed protected main before establishing Integration Freeze.
+
+Pure generic tooling repairs required to execute the authorized Stage 1 contract do not create a historical owner gate, but they must remain narrow, regression-tested, and should be batched by defect family when the inventory shows multiple manifestations of the same underlying representation problem.
+
 ## 5. Early shared-reference registration exception
 
 Occasionally several active lanes may immediately benefit from a newly established shared identity before the discovering school reaches Implementation.

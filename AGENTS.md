@@ -81,7 +81,10 @@ artifacts already present in the project. Do not browse institutional sites, med
 newspapers, external PDFs, GitHub/code search for new sources, or opponent archives. Do
 not inspect opponent files one by one when a structured local join can answer the same
 question. An unmatched local candidate stays unresolved for 3A-1/2/3; it is not permission
-to open the web.
+to open the web. Once the structured local join is exhausted, unresolved/contradictory rows
+become serialized outputs and Stage 3A-0 closes. If a public-web or external-source path is
+opened accidentally during 3A-0, do not use that evidence; audit write-through back to
+authorized local-only provenance and close/checkpoint mechanically.
 
 3A-1 must bound **source fanout as well as row count**. Before opening external sources,
 define coherent evidence classes and use the required hierarchy: accepted project evidence,
@@ -129,10 +132,12 @@ The reference does not establish postseason classification or H/A/N. Missing, `P
 `UNCERTAIN`, `UNRESOLVED`, campus-round, boundary-mismatched, or contradicted cases remain
 active Stage 3B research-to-exhaustion obligations.
 
-Durable checkpoints control continuity. A long Research lane may deliberately roll to a
-fresh chat at a verified major stage/substage checkpoint rather than wait for context
-exhaustion. Ordinary owner continuation should still require only a short `Proceed`;
-do not make the owner relay every small evidence class.
+Durable checkpoints control continuity, but **one Research chat is the normal baseline**.
+Do not plan routine chat replacement merely because a major stage/substage boundary was
+reached. Stay in the same healthy chat across ordinary `Proceed` transitions; roll to a
+verified checkpoint only when context, rendering, or execution shows concrete degradation.
+Ordinary owner continuation should still require only a short `Proceed`; do not make the
+owner relay every small evidence class.
 
 ### Research shared-reference authority
 
@@ -166,15 +171,22 @@ validation; unrelated shared-row changes are a STOP.
    `NON_D1` opponent list, game counts, and representative raw labels under
    `docs/non-d1-owner-sanity-scan.md`; any owner-flagged identity must be explained or
    corrected before freeze.
-3. Perform current-main rebase and stable Phase 0 staging with
-   `python tools/stage_research_portfolio.py ...`; prefer one guarded phase-sized
-   operation over many tiny interactive command handoffs. Ambiguous global identity
-   is a STOP, never a guess. Recheck both physical venue identity and opponent/program
-   identity against current main; an intervening school may establish the authoritative
-   global key/alias that a frozen portfolio did not yet know. Reconcile any settled
-   Research shared-reference proposals under `docs/shared-reference-authority.md`; do not
-   reopen their historical conclusion unless current-main evidence creates a genuine
-   conflict. For portfolios that reached `RESEARCH_FROZEN` before the non-D1 owner
+3. Before any Stage 1 mutation, run the complete read-only reconciliation inventory with
+   `python tools/implementation_stage1_inventory.py <school> <research.zip> ...`.
+   The controlling artifact is `.onboarding/<school>/stage1-reconciliation.json`.
+   Discovery must collect the complete current-main venue/program blocker population;
+   do not use repeated Phase 0 attempts as a blocker-discovery loop. If the inventory
+   identifies shared/global maintenance affecting already-published/global state, present
+   one consolidated maintenance scope and obtain explicit Control Center authorization
+   before opening/merging that dedicated maintenance batch. Pure target-school new
+   identities and mechanically safe Phase 0 registrations remain normal Implementation
+   authority. After the inventory is clean, perform current-main rebase and stable Phase 0
+   staging with `python tools/stage_research_portfolio.py ...`; mutation remains fail-fast.
+   Recheck both physical venue identity and opponent/program identity against current main;
+   an intervening school may establish the authoritative global key/alias that a frozen
+   portfolio did not yet know. Reconcile any settled Research shared-reference proposals
+   under `docs/shared-reference-authority.md`; do not reopen their historical conclusion
+   unless current-main evidence creates a genuine conflict. For portfolios that reached `RESEARCH_FROZEN` before the non-D1 owner
    sanity-scan policy was adopted, perform that same complete owner scan during
    current-main rebase and resolve any flagged identities before declaring
    `INTEGRATION_FROZEN` or beginning tracked Phase 0; do not reopen unrelated historical
