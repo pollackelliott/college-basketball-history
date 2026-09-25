@@ -149,6 +149,98 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             "REUSE_RESEARCH_BASE_IDENTITY",
         )
 
+    def test_exact_key_reuse_allows_same_jurisdiction_locality_variant(self):
+        globals_ = [
+            global_venue(
+                "VEN-000088",
+                "imperial-arena",
+                "Imperial Arena",
+                "Nassau",
+                "BS",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE.",
+                    city="Paradise Island",
+                    state="BS",
+                ),
+                "venue_key": "imperial-arena",
+                "canonical_name": "Imperial Arena",
+            }
+        ]
+
+        local_rows, global_rows, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            [],
+        )
+
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000088")
+        self.assertEqual(local_rows[0]["city"], "Paradise Island")
+        self.assertEqual(global_rows[0]["city"], "Nassau")
+        self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
+
+    def test_exact_key_reuse_normalizes_us_state_name(self):
+        globals_ = [
+            global_venue(
+                "VEN-000148",
+                "nationwide-arena",
+                "Nationwide Arena",
+                "Columbus",
+                "OH",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE.",
+                    city="Columbus",
+                    state="Ohio",
+                ),
+                "venue_key": "nationwide-arena",
+                "canonical_name": "Nationwide Arena",
+            }
+        ]
+
+        local_rows, _globals, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            [],
+        )
+
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000148")
+        self.assertEqual(local_rows[0]["state"], "Ohio")
+        self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
+
+    def test_exact_key_reuse_still_blocks_jurisdiction_conflict(self):
+        globals_ = [
+            global_venue(
+                "VEN-000088",
+                "imperial-arena",
+                "Imperial Arena",
+                "Nassau",
+                "BS",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE.",
+                    city="Miami",
+                    state="FL",
+                ),
+                "venue_key": "imperial-arena",
+                "canonical_name": "Imperial Arena",
+            }
+        ]
+
+        with self.assertRaisesRegex(WorkflowError, "jurisdiction conflicts"):
+            rebase_venues("test-school", locals_, globals_, [])
+
     def test_research_base_reuse_hint_still_blocks_state_conflict(self):
         globals_ = [
             global_venue(
@@ -169,7 +261,7 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             )
         ]
 
-        with self.assertRaisesRegex(WorkflowError, "state conflicts"):
+        with self.assertRaisesRegex(WorkflowError, "jurisdiction conflicts"):
             rebase_venues("test-school", locals_, globals_, [])
 
 
