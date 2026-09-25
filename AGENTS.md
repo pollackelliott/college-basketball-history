@@ -330,6 +330,7 @@ unresolved discrepancies.
   an obvious current-program opponent identity to survive under a stale/non-D1 key, or
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
+- Flag any Stage 3A-0 workflow that conversationally reconstructs the deterministic census/join when the permanent `tools/research_stage3a0.py` entrypoint can perform it; that reads documents/media guides to fill missing structured partition fields; or that treats the tool's serialized unmatched/unclassified output as permission for iterative discovery.
 - Flag any Stage 3A workflow that collapses Stage 3A-0 through 3A-4 into one monolithic
   execution unit; automatically rolls from one required Stage 3A substage into the next
   without an owner `Proceed`; lets Stage 3A-0 perform public-web research, institutional
