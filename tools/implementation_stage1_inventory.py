@@ -31,9 +31,11 @@ from stage_research_portfolio import (
     copy_package,
     ensure_phase0_state,
     load_csv,
+    load_existing_school_venues,
     sha256_file,
     write_stage1_reconciliation_inventory,
 )
+from stage1_reference_reconciliation import load_conference_reconciliation
 
 
 def parse_args() -> argparse.Namespace:
@@ -44,6 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("package", type=Path)
     parser.add_argument("--expected-sha256", required=True)
     parser.add_argument("--research-base", required=True)
+    parser.add_argument("--conference-reconciliation", type=Path, default=None)
     parser.add_argument("--repo", type=Path, default=None)
     return parser.parse_args()
 
@@ -87,10 +90,29 @@ def main() -> int:
 
             _, local_venues = load_csv(package_root / "venues.csv")
             _, local_opponents = load_csv(package_root / "opponents.csv")
+            conference_fields, local_conferences = load_csv(
+                package_root / "conferences.csv"
+            )
             _, global_venues = load_csv(repo / "data/reference/venues.csv")
             _, venue_names = load_csv(repo / "data/reference/venue-names.csv")
             _, programs = load_csv(repo / "data/reference/programs.csv")
             _, program_aliases = load_csv(repo / "data/reference/program-names.csv")
+            _, global_conferences = load_csv(repo / "data/reference/conferences.csv")
+            existing_school_venues = load_existing_school_venues(
+                repo,
+                exclude_school_key=args.school_key,
+            )
+
+            replacement_history, conference_registrations, conference_meta = (
+                load_conference_reconciliation(
+                    args.conference_reconciliation,
+                    school_key=args.school_key,
+                    conferences_path=package_root / "conferences.csv",
+                    local_fields=conference_fields,
+                )
+            )
+            if replacement_history is not None:
+                local_conferences = replacement_history
 
             report = build_stage1_reconciliation_inventory(
                 args.school_key,
@@ -100,7 +122,12 @@ def main() -> int:
                 programs,
                 program_aliases,
                 local_opponents,
+                local_conferences=local_conferences,
+                global_conferences=global_conferences,
+                conference_registrations=conference_registrations,
+                existing_school_venues=existing_school_venues,
             )
+            report["conference_reconciliation"] = conference_meta
             report["integration_base_sha"] = head
             report["origin_main_sha"] = origin_main
             report["research_base_sha"] = args.research_base
@@ -137,6 +164,16 @@ def main() -> int:
                     f"{key}={value}"
                     for key, value
                     in report["program_alias"]["classification_counts"].items()
+                )
+            )
+        if report["conference"]["classification_counts"]:
+            print(
+                "Conference classifications:"
+                + " "
+                + ", ".join(
+                    f"{key}={value}"
+                    for key, value
+                    in report["conference"]["classification_counts"].items()
                 )
             )
         print(f"Artifact:                  {output}")
