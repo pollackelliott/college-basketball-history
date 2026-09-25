@@ -56,6 +56,18 @@ source family is known and that research responsibility is actually authorized.
 
 ## 3. Mechanical execution shape
 
+The default execution surface is the permanent repository entrypoint:
+
+```bash
+python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv>
+```
+
+Use that command, or an explicitly equivalent repository-owned structured operation, instead of reconstructing the join through conversational inspection. If required structured partition fields are absent, the command's serialized residual is the Stage 3A-0 output: preserve it and stop. **Do not read documents, media guides, or historical sources to manufacture the missing structured field inside Stage 3A-0.**
+
+The phrase "project-evidence harvest" means only this deterministic structured-data operation. It does not authorize document reading or iterative local discovery.
+
+
+
 Stage 3A-0 should normally be completed as one structured local pass:
 
 1. load the exact Stage 1 universe from durable state;
