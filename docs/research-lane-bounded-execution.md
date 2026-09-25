@@ -272,7 +272,8 @@ writing unambiguous accepted same-game project evidence through into the working
 The detailed controlling scope is `docs/stage3a0-local-only-contract.md`.
 
 Allowed evidence is limited to the verified durable checkpoint/working state and
-already-present project evidence in the checked-out/current protected-main repository.
+already-present structured project evidence in the checked-out/current protected-main repository.
+"Project-evidence harvest" does not authorize reading documents or source files for interpretation.
 
 Before broad historical searching:
 
@@ -281,8 +282,9 @@ Before broad historical searching:
 2. derive the whole-population H/A/N work census;
 3. identify HOME, OPPONENT_HOME, NEUTRAL, and unresolved H/A/N responsibilities;
 4. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
-5. perform one structured local exact-game join against already-present canonical,
-   assertion, published-package, and accepted reciprocal evidence;
+5. run the repository-owned deterministic Stage 3A-0 structured-data operation (normally
+   `python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv>`) and
+   perform its one target-school canonical/assertion exact-game join;
 6. preserve unmatched or contradictory candidates without forcing or researching them;
 7. write unambiguous accepted same-game evidence through into the cumulative row-level
    working state;
