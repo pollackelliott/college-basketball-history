@@ -314,6 +314,20 @@ def geography_compatible(
     return True
 
 
+def research_base_venue_reuse_hint(
+    local: dict[str, str],
+) -> tuple[str, str] | None:
+    """Read an explicit frozen Research-time global venue reuse hint."""
+    match = re.search(
+        r"\bresearch-base key=([^;]+);\s*research-base venue_id=(VEN-\d{6})\b",
+        local.get("notes", ""),
+        flags=re.IGNORECASE,
+    )
+    if match is None:
+        return None
+    return match.group(1).strip(), match.group(2).strip()
+
+
 def rebase_venues(
     school_key: str,
     local_rows: list[dict[str, str]],
@@ -367,7 +381,37 @@ def rebase_venues(
         chosen: dict[str, str] | None = None
         reason = ""
 
-        if key and key in global_by_key:
+        research_base_hint = research_base_venue_reuse_hint(local)
+
+        if research_base_hint is not None:
+            hinted_key, hinted_id = research_base_hint
+            hinted_by_key = global_by_key.get(hinted_key)
+            hinted_by_id = global_by_id.get(hinted_id)
+
+            if (
+                hinted_by_key is None
+                or hinted_by_id is None
+                or hinted_by_key.get("venue_id", "").strip() != hinted_id
+                or hinted_by_id.get("venue_key", "").strip() != hinted_key
+            ):
+                raise WorkflowError(
+                    "research-base venue reuse hint no longer matches current main: "
+                    f"local_key={key!r}, hinted_key={hinted_key!r}, "
+                    f"hinted_id={hinted_id!r}"
+                )
+
+            if not geography_compatible(local, hinted_by_id):
+                raise WorkflowError(
+                    f"research-base venue reuse hint geography conflicts for {key!r}: "
+                    f"local={local.get('city','')},{local.get('state','')} "
+                    f"global={hinted_by_id.get('city','')},"
+                    f"{hinted_by_id.get('state','')}"
+                )
+
+            chosen = hinted_by_id
+            reason = "REUSE_RESEARCH_BASE_IDENTITY"
+
+        elif key and key in global_by_key:
             candidate = global_by_key[key]
             if not geography_compatible(local, candidate):
                 raise WorkflowError(
