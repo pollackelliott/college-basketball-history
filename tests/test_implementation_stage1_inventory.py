@@ -391,6 +391,7 @@ class Stage1VenueInventoryTests(unittest.TestCase):
         local = local_venue(
             "arena-1968",
             "Shared Arena IV",
+            aliases="Shared Arena",
             city="New York",
             state="NY",
         )
