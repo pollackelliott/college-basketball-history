@@ -39,7 +39,19 @@ from onboarding_plan import (
 
 STATUS_SCHEMA_VERSION = 1
 STATUS_FILENAME = "implementation-stage2-status.json"
+CAPABILITY_CENSUS_FILENAME = "implementation-stage2-capability-census.json"
 SITE_DIAGNOSTIC_FILENAME = "last-rehearsal-site-gate.json"
+
+SITE_REVIEW_FIELDS = {
+    "site_type",
+    "venue",
+    "venue_key",
+    "venue_id",
+    "location",
+    "site_city",
+    "site_state",
+    "site_metadata",
+}
 
 
 def _sha256_bytes(payload: bytes) -> str:
@@ -112,6 +124,131 @@ def _write_status(repo: Path, school_key: str, status: dict[str, Any]) -> Path:
     return output
 
 
+def _capability_census(
+    plan: dict[str, Any],
+    *,
+    site_diagnostic: dict[str, Any] | None = None,
+    proposal_rehearsal_passed: bool = False,
+) -> dict[str, Any]:
+    decisions = list(plan.get("decisions", []))
+    decision_categories = Counter(
+        str(row.get("category", "")) for row in decisions
+    )
+    decision_fields = Counter(
+        str(row.get("field_name", "")) for row in decisions
+        if str(row.get("field_name", ""))
+    )
+    site_review_ids = sorted(
+        str(row.get("decision_id", ""))
+        for row in decisions
+        if row.get("category") == "canonical_site_patch"
+        or str(row.get("field_name", "")) in SITE_REVIEW_FIELDS
+    )
+
+    topology_groups: list[dict[str, Any]] = []
+    blockers = list(plan.get("blockers", []))
+    warnings = list(plan.get("warnings", []))
+    if blockers:
+        topology_groups.append(
+            {
+                "topology": "preflight_blockers",
+                "count": len(blockers),
+                "classification": "UNCLASSIFIED",
+            }
+        )
+    if warnings:
+        topology_groups.append(
+            {
+                "topology": "preflight_warnings",
+                "count": len(warnings),
+                "classification": "UNCLASSIFIED",
+            }
+        )
+    if site_review_ids:
+        topology_groups.append(
+            {
+                "topology": "site_or_han_review_population",
+                "count": len(site_review_ids),
+                "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+            }
+        )
+
+    site_counts: dict[str, Any] = {}
+    site_examples: dict[str, Any] = {}
+    if site_diagnostic:
+        site_counts = dict(site_diagnostic.get("counts", {}))
+        site_examples = dict(site_diagnostic.get("examples", {}))
+        for key in (
+            "strict_home_gap_rows",
+            "strict_ncaa_gap_rows",
+            "target_source_information_loss",
+            "reciprocal_unpropagated",
+            "unaccounted_public_gap_rows",
+            "invalid_home_venue_exception_marker_rows",
+        ):
+            count = int(site_counts.get(key, 0) or 0)
+            if count:
+                topology_groups.append(
+                    {
+                        "topology": key,
+                        "count": count,
+                        "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+                        "examples": list(site_examples.get(key, [])),
+                    }
+                )
+
+    if proposal_rehearsal_passed:
+        census_status = "PASS"
+    elif site_diagnostic and site_diagnostic.get("status") == "FAIL":
+        census_status = "REPAIR_SCOPE_REQUIRED"
+    elif blockers:
+        census_status = "PREFLIGHT_BLOCKED"
+    else:
+        census_status = "CENSUS_CAPTURED"
+
+    return {
+        "schema_version": 1,
+        "status": census_status,
+        "preflight": {
+            "blocker_count": len(blockers),
+            "warning_count": len(warnings),
+            "decision_count": len(decisions),
+            "decision_categories": dict(sorted(decision_categories.items())),
+            "decision_fields": dict(sorted(decision_fields.items())),
+            "canonical_site_patch_reviews": int(
+                plan.get("summary", {}).get("canonical_site_patch_reviews", 0) or 0
+            ),
+            "site_or_han_review_decision_ids": site_review_ids,
+        },
+        "site_diagnostic": {
+            "status": site_diagnostic.get("status") if site_diagnostic else "",
+            "counts": site_counts,
+            "examples": site_examples,
+        },
+        "topology_groups": topology_groups,
+        "repair_rule": (
+            "If any topology is a generic permanent-tool defect, classify the complete "
+            "currently detected defect population and define one consolidated repair "
+            "scope before merging the first tooling repair. Rerun/regeneration is "
+            "verification, not the discovery mechanism."
+        ),
+    }
+
+
+def _write_capability_census(
+    repo: Path,
+    school_key: str,
+    census: dict[str, Any],
+) -> Path:
+    output = repo / ".onboarding" / school_key / CAPABILITY_CENSUS_FILENAME
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        json.dumps(census, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return output
+
+
 def _base_status(repo: Path, school_key: str) -> dict[str, Any]:
     git_state = _git_state(repo)
     manifest = _integration_manifest(repo, school_key)
@@ -177,6 +314,12 @@ def _print_status(status: dict[str, Any], status_path: Path) -> None:
             "Proposal proof:   "
             + str(rehearsal.get("approved_plan_hash_preview", ""))
         )
+    census = status.get("capability_census")
+    if census:
+        print(
+            "Capability census:"
+            f" {census.get('status', '')} at {census.get('path', '')}"
+        )
     site = status.get("site_diagnostic")
     if site:
         print(
@@ -202,6 +345,7 @@ def run_stage2(
         "status": "RUNNING",
     }
     status_path = repo / ".onboarding" / school_key / STATUS_FILENAME
+    plan: dict[str, Any] | None = None
 
     try:
         status.update(_base_status(repo, school_key))
@@ -224,22 +368,35 @@ def run_stage2(
         status["preflight"]["plan_path"] = _relative(repo, paths["plan"])
         status["preflight"]["review_path"] = _relative(repo, paths["review"])
 
+        census = _capability_census(plan)
+        census_path = _write_capability_census(repo, school_key, census)
+        status["capability_census"] = {
+            "path": _relative(repo, census_path),
+            "status": census["status"],
+            "topology_group_count": len(census["topology_groups"]),
+        }
+
         if plan.get("blockers"):
             status["status"] = "BLOCKED"
             status["blockers"] = plan["blockers"]
             status["next_action"] = (
-                "Resolve the authoritative preflight blockers, preserve the current "
-                "checkpoint, then rerun this same Stage-2 command."
+                "Classify the complete durable capability census before the first "
+                "generic tooling repair. Resolve the authoritative preflight blockers "
+                "as one coherent repair scope where they share a topology, then rerun "
+                "this same Stage-2 command."
             )
             status_path = _write_status(repo, school_key, status)
             return 1, status, status_path
 
         if map_path is None:
-            status["status"] = "PREFLIGHT_READY"
+            status["status"] = "CAPABILITY_CENSUS_READY"
             status["next_action"] = (
-                "Complete the bounded deterministic/adversarial review and supported "
-                "historical recommendations, write one compact recommendation map, "
-                "then rerun this command with --map <path>."
+                "Review the durable capability census, complete the bounded "
+                "deterministic/adversarial review and supported historical "
+                "recommendations, then write one compact recommendation map and rerun "
+                "this command with --map <path>. Do not merge the first generic "
+                "tooling repair until the complete currently detected repair scope is "
+                "classified."
             )
             status_path = _write_status(repo, school_key, status)
             return 0, status, status_path
@@ -271,6 +428,17 @@ def run_stage2(
             "action_counts": rehearsal.get("action_counts", {}),
         }
         status["site_diagnostic"] = _site_diagnostic(repo, school_key)
+        census = _capability_census(
+            plan,
+            site_diagnostic=status["site_diagnostic"],
+            proposal_rehearsal_passed=True,
+        )
+        census_path = _write_capability_census(repo, school_key, census)
+        status["capability_census"] = {
+            "path": _relative(repo, census_path),
+            "status": census["status"],
+            "topology_group_count": len(census["topology_groups"]),
+        }
         status["status"] = "OWNER_GATE_1_READY"
         status["next_action"] = (
             "Present the single consolidated Owner Gate 1 reconciliation packet. "
@@ -283,11 +451,25 @@ def run_stage2(
         status["status"] = "BLOCKED"
         status["last_error"] = str(exc)
         status["site_diagnostic"] = _site_diagnostic(repo, school_key)
+        if plan is not None:
+            census = _capability_census(
+                plan,
+                site_diagnostic=status["site_diagnostic"],
+                proposal_rehearsal_passed=False,
+            )
+            census_path = _write_capability_census(repo, school_key, census)
+            status["capability_census"] = {
+                "path": _relative(repo, census_path),
+                "status": census["status"],
+                "topology_group_count": len(census["topology_groups"]),
+            }
         if status["site_diagnostic"]:
             status["next_action"] = (
-                "Inspect the preserved site diagnostic and classify only the listed "
-                "failure population before changing history or tooling; do not invent "
-                "a replacement rehearsal wrapper."
+                "Inspect the preserved site diagnostic and durable capability census. "
+                "Classify the complete detected failure population before changing "
+                "history or tooling; if generic permanent tooling is defective, define "
+                "one consolidated repair scope before merging the first repair. Do not "
+                "invent a replacement rehearsal wrapper."
             )
         else:
             status["next_action"] = (
