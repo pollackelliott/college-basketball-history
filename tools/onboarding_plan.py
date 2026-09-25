@@ -105,6 +105,7 @@ CANONICAL_PATCH_FIELDS = {
     "site_type",
     "designated_home_team_key",
     "venue_key",
+    "venue_id",
     "site_city",
     "site_state",
     "game_type",
@@ -1775,21 +1776,35 @@ def _venue_maps(
 def _apply_canonical_patch(
     canonical: dict[str, str],
     patch: dict[str, str],
+    *,
+    valid_venue_pairs: set[tuple[str, str]] | None = None,
 ) -> int:
-    previous_venue_key = canonical.get("venue_key", "").strip()
+    venue_key_requested = "venue_key" in patch
+    venue_id_requested = "venue_id" in patch
+    if venue_key_requested != venue_id_requested:
+        raise WorkflowError(
+            "canonical venue identity patch must provide venue_key and venue_id together"
+        )
+
+    if venue_key_requested:
+        proposed_key = str(patch.get("venue_key", "") or "").strip()
+        proposed_id = str(patch.get("venue_id", "") or "").strip()
+        if bool(proposed_key) != bool(proposed_id):
+            raise WorkflowError(
+                "canonical venue identity patch must set or clear venue_key/venue_id together"
+            )
+        if (
+            proposed_key
+            and valid_venue_pairs is not None
+            and (proposed_id, proposed_key) not in valid_venue_pairs
+        ):
+            raise WorkflowError(
+                "canonical venue identity patch does not match the global venue registry: "
+                f"{proposed_id}/{proposed_key}"
+            )
 
     for field, value in patch.items():
         canonical[field] = value
-
-    if "venue_key" in patch:
-        patched_venue_key = canonical.get("venue_key", "").strip()
-        if not patched_venue_key:
-            canonical["venue_id"] = ""
-        elif patched_venue_key != previous_venue_key:
-            raise WorkflowError(
-                "nonblank canonical venue_key patch may not change physical venue "
-                "identity without deterministic venue_id resolution"
-            )
 
     if bool(canonical.get("venue_key", "").strip()) != bool(
         canonical.get("venue_id", "").strip()
@@ -2230,6 +2245,14 @@ def apply_reconciliation_decisions(
 
     target_venue_metadata: dict[str, dict[str, str]] | None = None
     venue_names: dict[str, str] | None = None
+    global_venue_pairs = {
+        (
+            row.get("venue_id", "").strip(),
+            row.get("venue_key", "").strip(),
+        )
+        for row in read_csv(repo / "data/reference/venues.csv")
+        if row.get("venue_id", "").strip() and row.get("venue_key", "").strip()
+    }
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
@@ -2308,6 +2331,7 @@ def apply_reconciliation_decisions(
         counts["registry_fallbacks_retired"] += _apply_canonical_patch(
             canonical,
             item.get("canonical_patch", {}),
+            valid_venue_pairs=global_venue_pairs,
         )
         for field, value in item.get("source_patch", {}).items():
             source[field] = value
