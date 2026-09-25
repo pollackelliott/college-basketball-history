@@ -1,7 +1,7 @@
 # Stage 3A-0 Local-Only Execution Contract
 
 - **Status:** Controlling Research-lane execution policy
-- **Applies to:** every Stage 3A-0 mechanical census / partition / project-evidence harvest
+- **Applies to:** every Stage 3A-0 mechanical census / partition / target-only structured-data join
 - **Approved:** 2026-09-23 after repeated Virginia Stage 3A-0 runtime failures
 - **Purpose:** prevent Stage 3A-0 from expanding into external historical research or source discovery
 
@@ -54,7 +54,25 @@ packages, even though they exist inside the repository. It also does not:
 Targeted reciprocal/package evidence belongs to Stage 3A-1, 3A-2, or 3A-3 when the relevant
 source family is known and that research responsibility is actually authorized.
 
-## 3. Mechanical execution shape
+## 3. Repository-owned execution surface
+
+Stage 3A-0 must normally be executed through the permanent repository entrypoint:
+
+```text
+python tools/research_stage3a0.py <school_key>
+```
+
+Do not reconstruct the join interactively when the structured target-school working ledger is already staged under `schools/<school_key>/source-games.csv`. The command is the normal execution surface; manual inspection is recovery/diagnostic work only when the command reports an exact structured-input blocker.
+
+The command deliberately reads only the target-school structured ledger and target-school rows from canonical project data. It does not enumerate or inspect opponent packages. Its durable output is:
+
+```text
+.research/<school_key>/stage3a0-ledger.json
+```
+
+Unmatched rows, contradictions, and a large residual population are successful serialized outputs. They are not permission to begin document reading, source interpretation, or iterative discovery inside Stage 3A-0.
+
+## 4. Mechanical execution shape
 
 Stage 3A-0 should normally be completed as one structured local pass:
 
@@ -79,7 +97,7 @@ the exact unresolved/contradictory queues and stop. Do not inspect opponent pack
 second local discovery pass, or open the web merely to reduce those queues. A large residual
 population is a valid Stage 3A-0 outcome.
 
-## 4. Runtime / convergence rule
+## 5. Runtime / convergence rule
 
 Stage 3A-0 should be one of the least expensive Stage 3A substages.
 
@@ -95,7 +113,7 @@ If the local project-evidence pass itself is too large to complete safely in one
 
 Do not convert execution difficulty into broader historical research.
 
-## 5. Recovery rule
+## 6. Recovery rule
 
 When recovering an incomplete Stage 3A-0 from a durable checkpoint:
 
@@ -108,7 +126,7 @@ When recovering an incomplete Stage 3A-0 from a durable checkpoint:
 
 Any work performed after the controlling checkpoint during a failed/stalled chat is non-authoritative unless it was durably serialized and explicitly accepted.
 
-## 6. Completion standard
+## 7. Completion standard
 
 A complete Stage 3A-0 must report and durably preserve:
 
@@ -132,7 +150,7 @@ Next bounded assignment: Stage 3A-1 — H/A/N completion
 STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 ```
 
-## 7. Review rule
+## 8. Review rule
 
 Flag a Stage 3A-0 implementation if it:
 

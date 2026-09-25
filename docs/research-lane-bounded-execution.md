@@ -265,11 +265,13 @@ mode into a meaningful tranche when safe. A plain owner `Proceed` after a requir
 Stage 3A substage boundary authorizes the exact next substage; after a durability
 checkpoint it authorizes the serialized unfinished tranche.
 
-### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
+### Stage 3A-0 — Mechanical census, partition, and target-only structured-data join
 
 This substage is **strictly local-only and mechanical**. It is read-only except for
 writing unambiguous accepted same-game project evidence through into the working ledger.
 The detailed controlling scope is `docs/stage3a0-local-only-contract.md`.
+
+Use `python tools/research_stage3a0.py <school_key>` as the normal execution surface once the target structured ledger is staged. Do not rebuild this deterministic join through repeated interactive inspection. Unmatched/contradictory rows are serialized outputs, not new 3A-0 research tasks.
 
 Allowed evidence is limited to the verified durable checkpoint/working state and
 already-present project evidence in the checked-out/current protected-main repository.

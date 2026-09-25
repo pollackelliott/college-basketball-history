@@ -151,7 +151,7 @@ Stage 3A research standards are unchanged, but Stage 3A is **not** a single chat
 
 It must run through five ordered substages:
 
-1. **Stage 3A-0 — mechanical census, partition, and project-evidence harvest**
+1. **Stage 3A-0 — mechanical census, partition, and target-only structured-data join**
 2. **Stage 3A-1 — H/A/N completion**
 3. **Stage 3A-2 — HOME venue research**
 4. **Stage 3A-3 — NEUTRAL venue research**
@@ -165,6 +165,8 @@ A plain owner `Proceed` authorizes the identified next substage or serialized un
 
 Stage 3A-0 is **strictly local-only and mechanical**. It performs zero external
 historical research.
+
+Run `python tools/research_stage3a0.py <school_key>` as the normal repository-owned execution surface once the target structured ledger is staged. Do not substitute repeated document inspection or interactive join construction for this command.
 
 Allowed inputs are limited to the verified durable checkpoint/working state plus
 already-present project evidence in the checked-out/current protected-main repository.
