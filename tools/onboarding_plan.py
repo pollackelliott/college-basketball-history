@@ -285,6 +285,43 @@ def current_d1_opponent_key_errors(
     return errors
 
 
+_EXHIBITION_WORD_RE = re.compile(r"\bexhib(?:ition|itions)?\b", re.IGNORECASE)
+_EXHIBITION_NONGAME_PATTERNS = (
+    re.compile(
+        r"\b(?:preseason\s+)?exhibitions?\s+(?:were\s+)?excluded\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bexcluding\s+(?:preseason\s+)?exhibitions?\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:sports\s+and\s+)?exhibition\s+(?:complex|center|centre|hall)\b",
+        re.IGNORECASE,
+    ),
+)
+
+
+def exhibition_warning_required(
+    raw_text: str,
+    event_or_tournament: str,
+    notes: str,
+) -> bool:
+    """Return whether exhibition wording still describes the game after safe exclusions.
+
+    The warning is intended to catch possible non-competitive exhibition rows, not venue
+    proper names such as "Sports and Exhibition Complex" or explicit provenance notes
+    stating that preseason exhibitions were excluded from the competitive universe.
+    """
+
+    audit_text = " ".join(
+        [raw_text or "", event_or_tournament or "", notes or ""]
+    )
+    for pattern in _EXHIBITION_NONGAME_PATTERNS:
+        audit_text = pattern.sub(" ", audit_text)
+    return _EXHIBITION_WORD_RE.search(audit_text) is not None
+
+
 def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     """Run the permanent equivalent of the former pasted package-QA snippet."""
 
@@ -437,10 +474,11 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         venue = row.get("curated_venue_name", "").strip()
         if venue and venue.casefold() not in venue_names:
             errors.append(f"{label}: curated venue {venue!r} absent from venues.csv")
-        audit_text = " ".join(
-            [row.get("raw_text", ""), row.get("event_or_tournament", ""), row.get("notes", "")]
-        ).casefold()
-        if "exhib" in audit_text:
+        if exhibition_warning_required(
+            row.get("raw_text", ""),
+            row.get("event_or_tournament", ""),
+            row.get("notes", ""),
+        ):
             warnings.append(f"{label}: exhibition-like wording requires manual confirmation")
 
     for filename, rows in (("opponents.csv", opponents), ("conferences.csv", conferences)):
