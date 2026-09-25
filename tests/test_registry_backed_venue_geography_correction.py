@@ -102,21 +102,33 @@ class RegistryBackedVenueGeographyCorrectionTests(unittest.TestCase):
         self.assertEqual(changes["site_city"], "Rosemont")
         self.assertEqual(changes["site_state"], "IL")
 
-    def test_source_registry_disagreement_still_blocks(self):
+    def test_source_event_locality_may_differ_from_resolved_physical_venue(self):
         src = source(city="Chicago", state="IL")
+        before = dict(src)
         can = canonical()
 
         correction = ingest_school.registry_backed_geography_correction(
             src, can, venue_map()
         )
-        self.assertIsNone(correction)
+        self.assertIsNotNone(correction)
+        self.assertEqual(correction["canonical_city"], "Chicago")
+        self.assertEqual(correction["registry_city"], "Rosemont")
 
         conflict = ingest_school.venue_geography_enrichment_conflict(
             src, can, venue_map()
         )
-        self.assertIsNotNone(conflict)
-        self.assertEqual(conflict["canonical_city"], "Chicago")
-        self.assertEqual(conflict["registry_city"], "Rosemont")
+        self.assertIsNone(conflict)
+
+        changes = dict(
+            ingest_school.canonical_enrichment_candidates(
+                src, can, venue_map()
+            )
+        )
+        self.assertEqual(changes["venue_key"], "allstate-arena")
+        self.assertEqual(changes["venue_id"], "VEN-000004")
+        self.assertEqual(changes["site_city"], "Rosemont")
+        self.assertEqual(changes["site_state"], "IL")
+        self.assertEqual(src, before)
 
     def test_existing_canonical_venue_identity_is_not_replaced(self):
         src = source()
