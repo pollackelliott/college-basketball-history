@@ -122,6 +122,7 @@ class VenueIdentityTransactionTests(unittest.TestCase):
                 "venue_id",
                 "site_city",
                 "site_state",
+                "notes",
             ],
             [
                 {
@@ -130,6 +131,32 @@ class VenueIdentityTransactionTests(unittest.TestCase):
                     "venue_id": "VEN-000002",
                     "site_city": "Test City",
                     "site_state": "TX",
+                    "notes": (
+                        "[VENUE_REGISTRY_FALLBACK "
+                        "source=test/S1;venue_key=duplicate;"
+                        "site_type=NEUTRAL;fields=venue_id,venue_key]"
+                    ),
+                }
+            ],
+        )
+        write_csv(
+            repo / "data/evidence/game-assertions.csv",
+            [
+                "assertion_id",
+                "canonical_game_id",
+                "source_program_key",
+                "source_game_id",
+                "game_date",
+                "curated_venue_name",
+            ],
+            [
+                {
+                    "assertion_id": "A1",
+                    "canonical_game_id": "G1",
+                    "source_program_key": "test",
+                    "source_game_id": "S1",
+                    "game_date": "2000-01-01",
+                    "curated_venue_name": "Test Arena (City)",
                 }
             ],
         )
@@ -187,6 +214,7 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(plan["blockers"], [])
         self.assertEqual(plan["merges"][0]["canonical_rows"], 1)
         self.assertEqual(plan["merges"][0]["school_rows"], 1)
+        self.assertEqual(plan["merges"][0]["provenance_markers"], 1)
 
         result = transaction.apply_transaction(
             repo,
@@ -196,6 +224,7 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         )
         self.assertEqual(result["venues_retired"], 1)
         self.assertEqual(result["canonical_rows_updated"], 1)
+        self.assertEqual(result["provenance_markers_updated"], 1)
         self.assertEqual(result["school_rows_updated"], 1)
 
         venues = read_rows(repo / "data/reference/venues.csv")
@@ -205,6 +234,8 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         canonical = read_rows(repo / "data/canonical/games.csv")
         self.assertEqual(canonical[0]["venue_id"], "VEN-000001")
         self.assertEqual(canonical[0]["venue_key"], "survivor")
+        self.assertIn(";venue_key=survivor;", canonical[0]["notes"])
+        self.assertNotIn(";venue_key=duplicate;", canonical[0]["notes"])
 
         school = read_rows(repo / "schools/test/venues.csv")
         self.assertEqual(school[0]["venue_id"], "VEN-000001")
