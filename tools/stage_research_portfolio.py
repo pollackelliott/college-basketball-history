@@ -351,6 +351,10 @@ US_STATE_ABBREVIATIONS = {
     "WISCONSIN": "WI",
     "WYOMING": "WY",
     "DISTRICT OF COLUMBIA": "DC",
+    "U.S. VIRGIN ISLANDS": "VI",
+    "US VIRGIN ISLANDS": "VI",
+    "VIRGIN ISLANDS": "VI",
+    "U.S.V.I.": "VI",
 }
 
 
@@ -373,9 +377,9 @@ def geography_compatible(
     global_row: dict[str, str],
 ) -> bool:
     lcity = local.get("city", "").strip().casefold()
-    lstate = local.get("state", "").strip().upper()
+    lstate = normalize_jurisdiction(local.get("state", ""))
     gcity = global_row.get("city", "").strip().casefold()
-    gstate = global_row.get("state", "").strip().upper()
+    gstate = normalize_jurisdiction(global_row.get("state", ""))
     if lcity and gcity and lcity != gcity:
         return False
     if lstate and gstate and lstate != gstate:
@@ -581,7 +585,21 @@ def venue_reconciliation_inventory(
             chosen_notes = (chosen.get("notes", "") or "").casefold()
             conflicting_ids = sorted(all_name_candidates - {chosen_id})
 
-            if conflicting_ids:
+            intentional_split_ids = [
+                venue_id
+                for venue_id in conflicting_ids
+                if reason in {"REUSE_EXACT_KEY", "REUSE_RESEARCH_BASE_IDENTITY"}
+                and chosen.get("identity_status", "").strip() == "RESEARCHED_SPLIT"
+                and global_by_id[venue_id].get("identity_status", "").strip()
+                == "RESEARCHED_SPLIT"
+            ]
+            unresolved_conflicting_ids = sorted(
+                set(conflicting_ids) - set(intentional_split_ids)
+            )
+            if intentional_split_ids:
+                item["issues"].append("INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP")
+
+            if unresolved_conflicting_ids:
                 item["classification"] = (
                     "SHARED_GLOBAL_MAINTENANCE"
                     if pending_shared
