@@ -501,7 +501,13 @@ def rebase_venues(
                 for venue_id in ids_by_name.get(normalized, set())
                 if geography_compatible(local, global_by_id[venue_id])
             }
-            if candidate_ids:
+            if len(candidate_ids) == 1:
+                candidate_id = next(iter(candidate_ids))
+                if normalized in registered_names_by_id.get(candidate_id, set()):
+                    chosen = global_by_id[candidate_id]
+                    reason = "REUSE_REGISTERED_NAME"
+
+            if chosen is None and candidate_ids:
                 raise WorkflowError(
                     f"venue {name!r} has a possible physical venue match "
                     f"({', '.join(sorted(candidate_ids))}) by name/geography, "
@@ -554,6 +560,7 @@ def rebase_venues(
 
         final_id = chosen["venue_id"]
         local["venue_id"] = final_id
+        local["venue_key"] = chosen["venue_key"]
         local_notes = local.get("notes", "").strip()
         integration_note = f"Integration rebase resolved final global venue ID {final_id}."
         local["notes"] = local_notes + (" " if local_notes else "") + integration_note
