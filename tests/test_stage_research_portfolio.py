@@ -169,6 +169,139 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             "REUSE_REGISTERED_ALIAS",
         )
 
+    def test_current_display_plus_registered_alias_cluster_reuses_identity(self):
+        globals_ = [
+            global_venue(
+                "VEN-000179",
+                "rocket-arena",
+                "Rocket Arena",
+                "Cleveland",
+                "OH",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Research resolves the naming eras as one physical building.",
+                    city="Cleveland",
+                    state="OH",
+                ),
+                "venue_key": "rocket-arena-cleveland-physical",
+                "canonical_name": "Rocket Arena",
+                "aliases": "Quicken Loans Arena; Rocket Mortgage FieldHouse",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000179",
+                "venue_name": "Rocket Arena",
+                "normalized_name": "rocketarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+            {
+                "venue_id": "VEN-000179",
+                "venue_name": "Quicken Loans Arena",
+                "normalized_name": "quickenloansarena",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+            {
+                "venue_id": "VEN-000179",
+                "venue_name": "Rocket Mortgage FieldHouse",
+                "normalized_name": "rocketmortgagefieldhouse",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+        ]
+
+        local_rows, global_rows, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            names,
+        )
+
+        self.assertEqual(len(global_rows), 1)
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000179")
+        self.assertEqual(local_rows[0]["venue_key"], "rocket-arena")
+        self.assertEqual(
+            mappings[0]["resolution"],
+            "REUSE_REGISTERED_NAME_CLUSTER",
+        )
+
+    def test_name_cluster_stops_when_aliases_resolve_to_different_ids(self):
+        globals_ = [
+            global_venue(
+                "VEN-000179",
+                "rocket-arena",
+                "Rocket Arena",
+                "Cleveland",
+                "OH",
+            ),
+            global_venue(
+                "VEN-000999",
+                "other-arena",
+                "Other Arena",
+                "Cleveland",
+                "OH",
+            ),
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Conflicting cluster test.",
+                    city="Cleveland",
+                    state="OH",
+                ),
+                "venue_key": "rocket-arena-cleveland-physical",
+                "canonical_name": "Rocket Arena",
+                "aliases": "Quicken Loans Arena",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000179",
+                "venue_name": "Rocket Arena",
+                "normalized_name": "rocketarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+            {
+                "venue_id": "VEN-000999",
+                "venue_name": "Quicken Loans Arena",
+                "normalized_name": "quickenloansarena",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+        ]
+
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "possible physical venue match",
+        ):
+            rebase_venues("test-school", locals_, globals_, names)
+
     def test_project_display_name_without_alias_still_stops(self):
         globals_ = [
             global_venue(
