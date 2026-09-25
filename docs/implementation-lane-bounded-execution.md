@@ -126,6 +126,12 @@ Accept the incoming `RESEARCH_FROZEN` portfolio against **current protected main
 - verify the immutable research ZIP/hash and exactly-six-file contract;
 - inspect current protected `main`, branch/worktree state, and research baseline;
 - rerun the research acceptance check under current tooling;
+- **before any Stage 1 mutation**, run `python tools/implementation_stage1_inventory.py <school> <research.zip> ...` and preserve `.onboarding/<school>/stage1-reconciliation.json`;
+- require the read-only inventory to scan the complete frozen venue/program reconciliation population rather than stopping discovery at the first mutation blocker;
+- classify the population into mechanically safe reuse/new identity, shared/global maintenance, and genuine ambiguous STOP cases before deciding how to mutate;
+- if existing published/global state must be changed through a dedicated maintenance PR, present one consolidated declared maintenance scope and obtain explicit Control Center authorization before that protected-main maintenance batch; ordinary `Proceed` for Stage 1 does not by itself authorize a hidden sequence of dedicated maintenance PRs;
+- batch same-family generic Stage 1 tooling defects into one coherent repair wherever the complete inventory shows they are members of the same representation problem; do not use rerun/regeneration as the discovery mechanism;
+- after any authorized maintenance/tooling batch lands, refresh protected main once and rerun the complete read-only inventory; establish Integration Freeze only after the inventory is clean;
 - recheck every provisional/shared physical venue identity against current main;
 - recheck opponent/program aliases and shared reference identities that may have changed since `research_base_sha`;
 - reuse identities added by intervening schools when they represent the same real entity;
@@ -139,6 +145,7 @@ Accept the incoming `RESEARCH_FROZEN` portfolio against **current protected main
 
 ### Completion standard
 
+- latest read-only Stage 1 reconciliation inventory status = `PASS`;
 - current-main rebase complete;
 - ambiguous shared/global identities = 0;
 - current package QA clean;
