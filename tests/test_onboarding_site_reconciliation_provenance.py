@@ -284,6 +284,110 @@ class OnboardingSiteReconciliationProvenanceTests(unittest.TestCase):
             )
         )
 
+    def test_keep_canonical_accounts_for_blank_neutral_venue_without_source_venue(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = ImplementationSiteGateTests()
+
+            source = source_row(
+                curated_site_type="OPPONENT_HOME",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="",
+                site_research_basis="",
+            )
+            canonical = canonical_row(
+                team_a_key="other",
+                team_b_key="test",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="Pittsburgh",
+                site_state="PA",
+            )
+            assertions = [
+                target_assertion(
+                    curated_site_type="OPPONENT_HOME",
+                    curated_venue_name="",
+                    city="",
+                    state="",
+                )
+            ]
+            discrepancies = [
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "field_name": "site_type",
+                    "source_a_program_key": "test",
+                    "status": "RESOLVED",
+                    "resolution_basis": (
+                        "Owner retained the canonical neutral classification."
+                    ),
+                }
+            ]
+            items = [
+                {
+                    "decision_id": "D-1",
+                    "canonical_game_id": "CBBG-0000001",
+                    "source_game_id": "TESTRAW-00001",
+                    "field_name": "site_type",
+                    "decision": "KEEP_CANONICAL",
+                    "resolution_basis": (
+                        "Owner retained the canonical neutral classification and "
+                        "accepted the unresolved historical exact-venue gap."
+                    ),
+                }
+            ]
+
+            result = _record_dependent_site_gap_discrepancies(
+                "test",
+                items,
+                {"CBBG-0000001": canonical},
+                {"TESTRAW-00001": source},
+                discrepancies,
+            )
+
+            self.assertEqual(result["dependent_site_gap_discrepancies_added"], 1)
+
+            dependent = [
+                row for row in discrepancies
+                if row.get("field_name") == "venue"
+            ]
+            self.assertEqual(len(dependent), 1)
+            self.assertEqual(dependent[0]["source_a_value"], "")
+            self.assertEqual(dependent[0]["canonical_value"], "")
+            self.assertEqual(dependent[0]["status"], "RESOLVED")
+            self.assertTrue(dependent[0]["resolution_basis"])
+
+            gate_discrepancies = [
+                {
+                    key: row.get(key, "")
+                    for key in (
+                        "canonical_game_id",
+                        "source_a_program_key",
+                        "field_name",
+                        "status",
+                        "resolution_basis",
+                    )
+                }
+                for row in discrepancies
+            ]
+
+            fixture.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=assertions,
+                discrepancies=gate_discrepancies,
+            )
+
+            report = implementation_site_report(root, "test")
+
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["public_gap_rows"], 1)
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 0)
+            self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
+
     def test_matching_site_does_not_create_dependent_site_provenance(self):
         canonical = {
             "canonical_game_id": "CBBG-1",
