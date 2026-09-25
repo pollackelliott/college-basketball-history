@@ -1,9 +1,9 @@
 # Research Convergence and Stopping Discipline
 
 - **Status:** Controlling Research-lane proportionality and convergence policy
-- **Applies to:** opponent-identity research, Stage 3A, Stage 3B, and Stage 6 pre-freeze self-challenge
+- **Applies to:** Stage 1 discrepancy research, opponent-identity research, Stage 3A, Stage 3B, and Stage 6 pre-freeze self-challenge
 - **Does not replace:** game-universe requirements, site-completeness requirements, NCAA-site completeness, opponent-identity correctness, NON_D1 owner sanity scan, or the Research Freeze self-challenge
-- **Evidence basis:** Oklahoma State and Kansas State demonstrated efficient rigorous Research; Duke and North Carolina demonstrated late-stage low-yield reopening; Oregon State demonstrated that durable but over-granular Stage 3A execution can still create excessive owner handoffs and context pressure.
+- **Evidence basis:** Oklahoma State and Kansas State demonstrated efficient rigorous Research; Duke and North Carolina demonstrated late-stage low-yield reopening; Oregon State demonstrated that durable but over-granular Stage 3A execution can still create excessive owner handoffs and context pressure; repeated fresh-team Stage 1 overruns demonstrated that game-universe work also needs an explicit durability/convergence boundary.
 
 ## 1. Purpose
 
@@ -34,7 +34,24 @@ Historical interest by itself is not a freeze blocker.
 
 Residual difficulty is itself evidence for proportional stopping. After high-yield systematic passes have removed the readily recoverable population, the surviving homogeneous ancient/historical residual should face a **higher bar for further bespoke research**, not automatically receive another opponent-by-opponent or game-by-game cycle.
 
-## 3. Stage 3A convergence
+## 3. Stage 1 convergence
+
+`docs/stage1-game-universe-contract.md` controls Stage 1 durability and completion.
+
+Once the game universe and season census are stable, continued discrepancy research must
+still satisfy the materiality test above. Exact-date or exact-score uncertainty is not by
+itself a reason to keep Stage 1 open when game identity, inclusion, season allocation, and
+on-court result are independently established.
+
+The Stage 1 baseline ledger should be serialized before a substantial historical
+discrepancy campaign. After that point, work coherent discrepancy families and write
+accepted repairs through between materially different research modes.
+
+Do not recursively validate a reconciled universe merely because another source family
+might exist. When the remaining rows are explicit nonblocking field debt under the Stage 1
+contract, close/checkpoint Stage 1 and move to the next owner-authorized stage.
+
+## 4. Stage 3A convergence
 
 `docs/stage3a-regular-season-site-research.md` controls Stage 3A responsibility and
 completeness. Convergence must respect the different obligations for HOME,
@@ -127,7 +144,7 @@ the controlling Stage 3A standard. Substantial historical research should finish
 Stages 3A-1 through 3A-3; Stage 3A-4 is a separate closeout transaction. Aggregate counts
 and partial overlays do not constitute durable convergence.
 
-## 4. Stage 3B convergence
+## 5. Stage 3B convergence
 
 Stage 3B uses a **strict postseason exact-venue standard for U.S. sites**. The regular-season
 historical neutral shortcut does not apply, but the owner-approved outside-the-United-States
@@ -163,7 +180,7 @@ Do not repeatedly reopen a completed postseason population merely because anothe
 might theoretically exist after that exhaustive pass. Reopen only for a concrete
 contradiction, newly identified authoritative evidence, or a repository-required blocker.
 
-## 5. Historical and NON_D1 opponent identity stopping rule
+## 6. Historical and NON_D1 opponent identity stopping rule
 
 Opponent research exists to establish defensible canonical identity, preserve literal evidence, and prevent false merges/splits—especially false attachment of an unrelated historical opponent to a current-D1 program.
 
@@ -178,7 +195,7 @@ If evidence supports that a historical opponent is **not** a predecessor/current
 
 String similarity, shared city names, later institutional names, or historical interest do not justify forcing a current-program merge.
 
-## 6. Stage 6 is an audit, not a second research cycle
+## 7. Stage 6 is an audit, not a second research cycle
 
 Stage 6 must challenge the portfolio adversarially, but every residual population enters
 Stage 6 as **accepted researched debt from completed earlier stages**, not as a freshly
@@ -206,13 +223,13 @@ Do not stop for owner interaction after one or two ordinary repairs if the same 
 audit can safely continue. Once all residual classes are either repaired or valid terminal
 debt and the acceptance requirements pass, Stage 6 should complete.
 
-## 7. Owner intervention
+## 8. Owner intervention
 
 These stopping decisions belong to the Research lane. They should not create a new routine owner gate.
 
 Contact the owner only when existing repository policy requires owner disposition or when evidence leaves a genuine material historical choice that affects canonical publication. Do not ask the owner to resolve an obscure historical lineage question that can safely remain a defensible historical/NON_D1 identity under this policy.
 
-## 8. Relationship to existing standards
+## 9. Relationship to existing standards
 
 This document narrows **when continued research is warranted**. It does not lower substantive acceptance requirements.
 

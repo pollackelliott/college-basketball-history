@@ -169,9 +169,51 @@ Establish the complete competitive game universe and a defensible row-level work
 - establish stable research-local game IDs;
 - produce a durable controlling ledger and season reconciliation.
 
+### Internal execution boundary
+
+After primary-source extraction and the first mechanical season census, **serialize the
+baseline row ledger before an extended historical discrepancy campaign**.
+
+That baseline should already preserve:
+
+- the complete candidate competitive universe;
+- season counts derived from rows;
+- explicit exclusions/non-games;
+- duplicate/omitted/bleed candidates;
+- exact date/score/result discrepancy queues;
+- stable research-local game IDs where mechanically possible.
+
+This is an internal durability boundary, not a new owner-facing stop. Continue Stage 1 in
+the same authorized turn/chat when healthy, but research subsequent discrepancy families
+from this durable baseline rather than keeping the only authoritative state in scratch
+reasoning.
+
+Repair discrepancies in coherent evidence families. After substantial work in one
+materially different family, write accepted corrections through before opening another.
+Do not treat `Stage 1` itself as one giant heterogeneous discrepancy family.
+
 ### Completion standard
 
-Stage 1 is complete when the competitive universe is mechanically reconciled, material game-identity questions are resolved or explicitly owner-blocked, and the controlling ledger is durably preserved.
+Stage 1 is complete when:
+
+- the competitive universe is mechanically reconciled;
+- season counts are reconciled or source-internal differences are explicitly explained;
+- material game-identity/inclusion/duplicate questions are resolved or genuinely owner-blocked;
+- accepted corrections are written through with literal evidence preserved;
+- surviving exact-date/score/result uncertainties are explicit row-level residuals and do
+  not threaten game identity, inclusion, season accounting, or on-court result;
+- the controlling ledger and residual queues are durably preserved.
+
+A field may remain unknown without keeping Stage 1 open. In particular, an exact date or
+score discrepancy is nonblocking when the game itself, season allocation, inclusion, and
+on-court result are independently stable.
+
+Once these completion conditions are met, the required next action is Stage 1
+checkpoint/closeout. Do not open another historical source family merely because a missing
+field might theoretically be recoverable.
+
+Read `docs/stage1-game-universe-contract.md` for the controlling blocking/nonblocking
+criteria and durability requirements.
 
 Do not begin opponent normalization or broad site/venue research in this stage except where necessary to distinguish game identity.
 
