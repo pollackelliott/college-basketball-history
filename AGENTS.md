@@ -15,6 +15,7 @@ Read these process documents together before onboarding work:
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
+- `docs/stage1-game-universe-contract.md`
 - `docs/stage3a-regular-season-site-research.md`
 - `docs/stage3a0-local-only-contract.md`
 - `docs/stage3a1-source-fanout-contract.md`
@@ -32,9 +33,9 @@ more specific than the older fast-path wording. The site-completeness protocol i
 controlling for research-accounted venue/location/H-A-N gaps and the independent
 post-reconciliation publication gate. The research-freeze self-challenge is controlling
 for the final adversarial review required before a Research lane may certify large or
-suspicious residual debt as genuinely unresolved. The Research convergence/stopping
-policy is controlling for proportional continuation in opponent identity, Stages 3A/3B,
-and Stage 6; it prevents already researched residual ambiguity from becoming an
+suspicious residual debt as genuinely unresolved. The Stage 1 game-universe contract is controlling for Stage 1 durability, discrepancy
+repair, and completion semantics. The Research convergence/stopping policy is controlling
+for proportional continuation in Stage 1, opponent identity, Stages 3A/3B, and Stage 6; it prevents already researched residual ambiguity from becoming an
 open-ended second research cycle without weakening substantive acceptance gates. The
 shared-reference authority policy is controlling for the boundary between parallel
 Research findings and authoritative protected-main/global reference mutation. The
@@ -137,6 +138,24 @@ normally avoids redundant site re-research absent material contradictory authori
 The reference does not establish postseason classification or H/A/N. Missing, `PARTIAL`,
 `UNCERTAIN`, `UNRESOLVED`, campus-round, boundary-mismatched, or contradicted cases remain
 active Stage 3B research-to-exhaustion obligations.
+
+### Research Stage 1 execution
+
+Stage 1 follows `docs/stage1-game-universe-contract.md`.
+
+Do not keep the authoritative game universe only in scratch reasoning while recursively
+researching historical discrepancies. Once the candidate universe, season census,
+exclusions, and discrepancy classes are mechanically known, serialize the baseline ledger
+and exact residual queues before opening an extended historical discrepancy campaign.
+
+Stage 1 may close with explicit nonblocking field-level debt when game identity/inclusion,
+season accounting, and on-court result are stable. Exact-date blanks and score
+contradictions are not automatically blockers. Once the Stage 1 completion conditions are
+satisfied, checkpoint/close out instead of opening another source family merely because one
+might exist.
+
+This is an internal execution boundary, not a new owner gate. The owner should still
+normally experience one Stage 1 return and then a simple `Proceed` to Stage 2.
 
 Durable checkpoints control continuity, but **one Research chat is the normal baseline**.
 Do not plan routine chat replacement merely because a major stage/substage boundary was
