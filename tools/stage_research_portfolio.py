@@ -111,6 +111,20 @@ def load_existing_school_venues(
     return rows
 
 
+def snapshot_file_bytes(paths: list[Path]) -> dict[Path, bytes | None]:
+    return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def restore_file_bytes(snapshot: dict[Path, bytes | None]) -> None:
+    for path, data in snapshot.items():
+        if data is None:
+            if path.exists():
+                path.unlink()
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+
+
 
 def season_start(value: str) -> int | None:
     text = (value or "").strip()
@@ -1590,44 +1604,59 @@ def main() -> int:
                 return 0
 
             school_dir = repo / "schools" / args.school_key
-            school_dir.mkdir()
-            for name in REQUIRED_PACKAGE_FILES:
-                shutil.copy2(package_root / name, school_dir / name)
-
-            write_csv_preserving_format(
-                repo / "data/reference/programs.csv",
-                program_fields,
-                programs,
-            )
-            write_csv_preserving_format(
-                repo / "data/reference/venues.csv",
-                global_fields,
-                global_venues,
-            )
-            write_csv_preserving_format(
-                repo / "data/reference/venue-names.csv",
-                name_fields,
-                venue_names,
-            )
-            write_csv_preserving_format(
-                repo / "data/reference/conferences.csv",
-                conference_fields,
-                global_conferences,
-            )
-
             output_dir = repo / ".onboarding" / args.school_key
             output_dir.mkdir(parents=True, exist_ok=True)
             manifest_path = output_dir / "integration-freeze.json"
-            manifest_path.write_text(
-                json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
-                encoding="utf-8",
-            )
+            protected_paths = [
+                repo / "data/reference/programs.csv",
+                repo / "data/reference/venues.csv",
+                repo / "data/reference/venue-names.csv",
+                repo / "data/reference/conferences.csv",
+                manifest_path,
+            ]
+            pre_apply_snapshot = snapshot_file_bytes(protected_paths)
 
-        run(
-            [sys.executable, str(repo / "tools/validate_data.py")],
-            cwd=repo,
-            echo=True,
-        )
+            try:
+                school_dir.mkdir()
+                for name in REQUIRED_PACKAGE_FILES:
+                    shutil.copy2(package_root / name, school_dir / name)
+
+                write_csv_preserving_format(
+                    repo / "data/reference/programs.csv",
+                    program_fields,
+                    programs,
+                )
+                write_csv_preserving_format(
+                    repo / "data/reference/venues.csv",
+                    global_fields,
+                    global_venues,
+                )
+                write_csv_preserving_format(
+                    repo / "data/reference/venue-names.csv",
+                    name_fields,
+                    venue_names,
+                )
+                write_csv_preserving_format(
+                    repo / "data/reference/conferences.csv",
+                    conference_fields,
+                    global_conferences,
+                )
+
+                manifest_path.write_text(
+                    json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8",
+                )
+
+                run(
+                    [sys.executable, str(repo / "tools/validate_data.py")],
+                    cwd=repo,
+                    echo=True,
+                )
+            except Exception:
+                if school_dir.exists():
+                    shutil.rmtree(school_dir)
+                restore_file_bytes(pre_apply_snapshot)
+                raise
 
         expected_paths = [
             "data/reference/programs.csv",
