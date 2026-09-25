@@ -8171,7 +8171,7 @@
       "state": "VA",
       "primary_hex": "#232D4B",
       "secondary_hex": "#F84C1E",
-      "history_start_season": null,
+      "history_start_season": "1905-1906",
       "conference_regular_season_championships": 12,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 27,
@@ -8180,7 +8180,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2019,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
