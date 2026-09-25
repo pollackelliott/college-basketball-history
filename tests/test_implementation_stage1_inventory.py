@@ -245,6 +245,84 @@ class Stage1VenueInventoryTests(unittest.TestCase):
             ["VEN-000179", "VEN-000420"],
         )
 
+    def test_resolved_history_without_registered_current_name_is_maintenance(self):
+        local = local_venue(
+            "birmingham-city-auditorium-birmingham",
+            "Municipal Auditorium (Birmingham)",
+            aliases="Municipal Auditorium",
+            city="Birmingham",
+            state="AL",
+            notes=(
+                "Historical physical identity: RESOLVED. Research-base exact/unique "
+                "alias reconciliation did not establish one authoritative shared venue "
+                "identity. Global registration/current-main reuse decision remains for "
+                "serialized Implementation."
+            ),
+        )
+        global_row = global_venue(
+            "VEN-000515",
+            "birmingham-city-auditorium",
+            "Birmingham City Auditorium",
+            "Birmingham",
+            "AL",
+        )
+
+        report = venue_reconciliation_inventory(
+            [local],
+            [global_row],
+            [venue_name("VEN-000515", "Birmingham City Auditorium", "PROJECT_DISPLAY")],
+        )
+
+        self.assertEqual(report["blocker_count"], 1)
+        row = report["blockers"][0]
+        self.assertEqual(row["classification"], "SHARED_GLOBAL_MAINTENANCE")
+        self.assertEqual(row["candidate_venue_ids"], [])
+        self.assertIn(
+            "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING",
+            row["issues"],
+        )
+
+    def test_registered_alias_closes_resolved_history_name_gap(self):
+        local = local_venue(
+            "birmingham-city-auditorium-birmingham",
+            "Municipal Auditorium (Birmingham)",
+            aliases="Municipal Auditorium",
+            city="Birmingham",
+            state="AL",
+            notes=(
+                "Historical physical identity: RESOLVED. Global registration/current-main "
+                "reuse decision remains for serialized Implementation."
+            ),
+        )
+        global_row = global_venue(
+            "VEN-000515",
+            "birmingham-city-auditorium",
+            "Birmingham City Auditorium",
+            "Birmingham",
+            "AL",
+        )
+        names = [
+            venue_name("VEN-000515", "Birmingham City Auditorium", "PROJECT_DISPLAY"),
+            venue_name(
+                "VEN-000515",
+                "Municipal Auditorium (Birmingham)",
+                "HISTORICAL_OR_ALIAS",
+            ),
+            venue_name(
+                "VEN-000515",
+                "Municipal Auditorium",
+                "HISTORICAL_OR_ALIAS",
+            ),
+        ]
+
+        report = venue_reconciliation_inventory([local], [global_row], names)
+
+        self.assertEqual(report["blocker_count"], 0)
+        row = report["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["resolution"], "REUSE_REGISTERED_ALIAS")
+        self.assertEqual(row["target_venue_id"], "VEN-000515")
+
     def test_inventory_collects_multiple_blockers_in_one_pass(self):
         deferred = local_venue(
             "the-pit",
