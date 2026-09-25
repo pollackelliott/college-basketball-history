@@ -37,6 +37,17 @@ from program_history import (
     derive_ncaa_accomplishments,
     history_scope_errors,
     partition_source_rows,
+    season_is_in_scope,
+)
+from plan_home_chronology_remediation import (
+    _dedupe_relationships,
+    _home_relationships,
+    _registry_identity,
+    clean as chronology_clean,
+    parse_boundary,
+    parse_game_date,
+    relationship_covers,
+    valid_home_exception_shape,
 )
 from site_completeness import (
     _row_gap_categories,
@@ -88,6 +99,8 @@ ACCOMPLISHMENT_ACTIONS = {
     "KEEP_UNDER_REVIEW",
 }
 PUBLICATION_ACTIONS = {"ENABLE_PUBLIC_PAGE", "KEEP_DISABLED"}
+CANONICAL_SITE_PATCH_ACTIONS = {"APPLY_CANONICAL_PATCH", "LEAVE_UNRESOLVED"}
+CANONICAL_SITE_PATCH_FIELDS = {"venue_key", "venue_id", "site_city", "site_state"}
 
 SOURCE_ASSERTION_COPY_FIELDS = tuple(
     field
@@ -760,6 +773,225 @@ def _planned_ncaa_safety_errors(
     return canonical_ncaa_errors([candidate], global_venues_by_id)
 
 
+def _full_season_home_relationship_covered(
+    rel: dict[str, str],
+    season_label: str,
+) -> bool:
+    if not season_label:
+        return False
+    season_start = parse_boundary(season_label, end=False)
+    season_end = parse_boundary(season_label, end=True)
+    rel_start = parse_boundary(rel.get("relationship_start", ""), end=False)
+    rel_end = parse_boundary(rel.get("relationship_end", ""), end=True)
+    if season_start is None or season_end is None:
+        return False
+    if rel_start is None and rel_end is None:
+        return False
+    if rel_start is not None and rel_start > season_start:
+        return False
+    if rel_end is not None and rel_end < season_end:
+        return False
+    return True
+
+
+def _canonical_home_program(game: dict[str, str]) -> str:
+    site = chronology_clean(game.get("site_type"))
+    if site == "TEAM_A_HOME":
+        return chronology_clean(game.get("team_a_key"))
+    if site == "TEAM_B_HOME":
+        return chronology_clean(game.get("team_b_key"))
+    return ""
+
+
+def _home_relationship_candidates(
+    game: dict[str, str],
+    relationships: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    game_day = parse_game_date(game.get("game_date", ""))
+    if game_day is not None:
+        return _dedupe_relationships(
+            [rel for rel in relationships if relationship_covers(rel, game_day)]
+        )
+    season_label = chronology_clean(game.get("season_label"))
+    return _dedupe_relationships(
+        [
+            rel
+            for rel in relationships
+            if _full_season_home_relationship_covered(rel, season_label)
+        ]
+    )
+
+
+def _deterministic_reciprocal_home_backfill_available(
+    game: dict[str, str],
+    relationships: list[dict[str, str]],
+    venues_by_id: dict[str, dict[str, str]],
+    venues_by_key: dict[str, dict[str, str]],
+) -> bool:
+    matches = _home_relationship_candidates(game, relationships)
+    if len(matches) != 1:
+        return False
+
+    rel = matches[0]
+    if not chronology_clean(rel.get("source_basis")):
+        return False
+    registry, registry_error = _registry_identity(
+        rel,
+        venues_by_id,
+        venues_by_key,
+    )
+    if registry_error or registry is None:
+        return False
+
+    desired = {
+        "venue_id": chronology_clean(registry.get("venue_id")),
+        "venue_key": chronology_clean(registry.get("venue_key")),
+        "site_city": chronology_clean(registry.get("city")),
+        "site_state": chronology_clean(registry.get("state")),
+    }
+    for field, proposed in desired.items():
+        current = chronology_clean(game.get(field))
+        if current and current != proposed:
+            return False
+    return True
+
+
+def _canonical_site_patch_review_decisions(
+    *,
+    school_key: str,
+    history_start_season: str,
+    canonical_rows: list[dict[str, str]],
+    assertions_by_game: dict[str, list[dict[str, str]]],
+    planned_target_canonical_ids: set[str],
+    school_venue_rows: list[dict[str, str]],
+    venues_by_id: dict[str, dict[str, str]],
+    venues_by_key: dict[str, dict[str, str]],
+) -> list[dict[str, Any]]:
+    """Surface reciprocal-only target HOME site gaps requiring owner judgment."""
+
+    relationships = _home_relationships(school_venue_rows)
+    decisions: list[dict[str, Any]] = []
+
+    for game in canonical_rows:
+        game_id = chronology_clean(game.get("canonical_game_id"))
+        season = chronology_clean(game.get("season_label"))
+        if (
+            not game_id
+            or not season_is_in_scope(season, history_start_season)
+            or school_key
+            not in {
+                chronology_clean(game.get("team_a_key")),
+                chronology_clean(game.get("team_b_key")),
+            }
+            or _canonical_home_program(game) != school_key
+            or game_id in planned_target_canonical_ids
+        ):
+            continue
+
+        game_assertions = assertions_by_game.get(game_id, [])
+        if any(
+            chronology_clean(row.get("source_program_key")) == school_key
+            for row in game_assertions
+        ):
+            continue
+        reciprocal_assertions = [
+            row
+            for row in game_assertions
+            if chronology_clean(row.get("source_program_key"))
+            and chronology_clean(row.get("source_program_key")) != school_key
+        ]
+        if not reciprocal_assertions:
+            continue
+
+        venue_complete = bool(
+            chronology_clean(game.get("venue_id"))
+            and chronology_clean(game.get("venue_key"))
+        )
+        location_complete = bool(
+            chronology_clean(game.get("site_city"))
+            and chronology_clean(game.get("site_state"))
+        )
+        if (venue_complete and location_complete) or valid_home_exception_shape(game):
+            continue
+
+        if _deterministic_reciprocal_home_backfill_available(
+            game,
+            relationships,
+            venues_by_id,
+            venues_by_key,
+        ):
+            continue
+
+        candidates = _home_relationship_candidates(game, relationships)
+        candidate_names = sorted(
+            {
+                chronology_clean(rel.get("canonical_name"))
+                or chronology_clean(rel.get("venue_key"))
+                or chronology_clean(rel.get("venue_id"))
+                for rel in candidates
+                if (
+                    chronology_clean(rel.get("canonical_name"))
+                    or chronology_clean(rel.get("venue_key"))
+                    or chronology_clean(rel.get("venue_id"))
+                )
+            }
+        )
+        reciprocal_programs = sorted(
+            {
+                chronology_clean(row.get("source_program_key"))
+                for row in reciprocal_assertions
+                if chronology_clean(row.get("source_program_key"))
+            }
+        )
+        current_site = {
+            "site_type": chronology_clean(game.get("site_type")),
+            "venue_id": chronology_clean(game.get("venue_id")),
+            "venue_key": chronology_clean(game.get("venue_key")),
+            "site_city": chronology_clean(game.get("site_city")),
+            "site_state": chronology_clean(game.get("site_state")),
+        }
+        chronology_detail = (
+            ", ".join(candidate_names)
+            if candidate_names
+            else "no uniquely covering HOME venue relationship"
+        )
+        decisions.append(
+            {
+                "decision_id": _decision_id("CANONICAL-SITE-PATCH", game_id),
+                "category": "canonical_site_patch",
+                "source_game_id": "",
+                "canonical_game_id": game_id,
+                "season_label": season,
+                **_date_fields("", game.get("game_date", "")),
+                "matchup": (
+                    f"{game.get('team_a_key', '')} vs {game.get('team_b_key', '')}"
+                ),
+                "field_name": "site_metadata",
+                "source_value": "[no target source row]",
+                "canonical_value": canonical_json(current_site),
+                "relevant_evidence": (
+                    "Canonical target-HOME game is preserved only by reciprocal "
+                    f"assertion(s) from {', '.join(reciprocal_programs)}; documented "
+                    f"target HOME chronology yields {len(candidates)} candidate "
+                    f"physical venue(s): {chronology_detail}. An explicit owner-reviewed "
+                    "site patch is required rather than a chronology guess."
+                ),
+                "recommended_action": "REVIEW_REQUIRED",
+                "allowed_actions": sorted(CANONICAL_SITE_PATCH_ACTIONS),
+                "decision": "PENDING",
+                "resolution_basis": "",
+                "canonical_patch_json": "{}",
+                "source_patch_json": "{}",
+                "notes": (
+                    "Reciprocal-only canonical target HOME site gap; no target assertion "
+                    "will be fabricated."
+                ),
+            }
+        )
+
+    return decisions
+
+
 def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     repo = repo.resolve()
     package = validate_package(repo, school_key)
@@ -847,6 +1079,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     }
 
     decisions: list[dict[str, Any]] = []
+    planned_target_canonical_ids: set[str] = set()
     identity_counts = Counter()
     predicted_conflicts = 0
     conditional_conflicts = 0
@@ -859,7 +1092,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         for row in programs
         if row.get("public_page_enabled") == "Yes"
     }
-    global_venues_by_id, _, _ = load_global_venue_reference(repo)
+    global_venues_by_id, global_venues_by_key, _ = load_global_venue_reference(repo)
     venue_metadata = ingest_school.load_venue_metadata_map(
         repo / "schools" / school_key / "venues.csv",
         global_venues_by_id,
@@ -893,6 +1126,14 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             )
             status, game_id, method = override or ingest_school.identify_game(source, candidates)
         identity_counts[status] += 1
+        if status == ingest_school.CONFIDENT and game_id:
+            planned_target_canonical_ids.add(game_id)
+        elif status == ingest_school.REVIEW:
+            planned_target_canonical_ids.update(
+                row.get("canonical_game_id", "").strip()
+                for row in candidates
+                if row.get("canonical_game_id", "").strip()
+            )
 
         accomplishment_crosscheck_games.append(
             _accomplishment_crosscheck_game(
@@ -1116,6 +1357,23 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 }
             )
 
+    canonical_site_patch_decisions = _canonical_site_patch_review_decisions(
+        school_key=school_key,
+        history_start_season=program.get("history_start_season", "").strip(),
+        canonical_rows=canonical,
+        assertions_by_game=assertions_by_game,
+        planned_target_canonical_ids=planned_target_canonical_ids,
+        school_venue_rows=read_csv(repo / "schools" / school_key / "venues.csv"),
+        venues_by_id=global_venues_by_id,
+        venues_by_key=global_venues_by_key,
+    )
+    decisions.extend(canonical_site_patch_decisions)
+    for item in canonical_site_patch_decisions:
+        game = canonical_by_id.get(item.get("canonical_game_id", ""), {})
+        for participant in (game.get("team_a_key", ""), game.get("team_b_key", "")):
+            if participant != school_key and participant in public_keys:
+                affected_public_programs.add(participant)
+
     if accomplishment is not None:
         # Cross-check the target package as the primary history source while
         # preserving richer non-conflicting NCAA round metadata from confident
@@ -1238,6 +1496,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         "canonical_enrichment_fields": predicted_enrichment_fields,
         "discrepancies_to_add": predicted_conflicts,
         "conditional_discrepancies": conditional_conflicts,
+        "canonical_site_patch_reviews": len(canonical_site_patch_decisions),
         "affected_public_programs": sorted(affected_public_programs),
         "already_public": program.get("public_page_enabled") == "Yes",
     }
@@ -1278,6 +1537,7 @@ def render_report(plan: dict[str, Any], approved_hash: str = "") -> str:
             ("Safe enrichment fields", "canonical_enrichment_fields"),
             ("Discrepancies", "discrepancies_to_add"),
             ("Conditional discrepancies", "conditional_discrepancies"),
+            ("Canonical-only site reviews", "canonical_site_patch_reviews"),
         )
         for label, key in labels:
             lines.append(f"- {label}: {summary.get(key, 0):,}")
@@ -1475,6 +1735,29 @@ def approve_plan(
         )
         unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
+        if item.get("category") == "canonical_site_patch":
+            forbidden_site_fields = sorted(
+                set(canonical_patch) - CANONICAL_SITE_PATCH_FIELDS
+            )
+            if forbidden_site_fields:
+                raise WorkflowError(
+                    f"{decision_id}: canonical-only site patch may change only "
+                    "venue_key, venue_id, site_city, and site_state; forbidden: "
+                    + ", ".join(forbidden_site_fields)
+                )
+            if source_patch:
+                raise WorkflowError(
+                    f"{decision_id}: canonical-only site patch may not create or "
+                    "modify target source evidence"
+                )
+            if decision == "APPLY_CANONICAL_PATCH" and not canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: APPLY_CANONICAL_PATCH requires canonical_patch_json"
+                )
+            if decision == "LEAVE_UNRESOLVED" and canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: LEAVE_UNRESOLVED may not carry a canonical patch"
+                )
         if unknown_canonical:
             raise WorkflowError(
                 f"{decision_id}: forbidden canonical patch fields: {', '.join(unknown_canonical)}"
@@ -2231,7 +2514,7 @@ def apply_reconciliation_decisions(
     reconciliation_items = [
         item
         for item in approved.get("decisions", [])
-        if item.get("category") == "discrepancy"
+        if item.get("category") in {"discrepancy", "canonical_site_patch"}
     ]
     if not reconciliation_items:
         return {}
@@ -2269,14 +2552,69 @@ def apply_reconciliation_decisions(
     touched_source_ids: set[str] = set()
     for item in reconciliation_items:
         game_id = item["canonical_game_id"]
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(f"{item['decision_id']}: canonical row is missing after ingestion")
+
+        if item.get("category") == "canonical_site_patch":
+            touched_canonical_ids.add(game_id)
+            decision = item["decision"]
+            canonical_patch = item.get("canonical_patch", {})
+            if decision == "APPLY_CANONICAL_PATCH":
+                forbidden_site_fields = sorted(
+                    set(canonical_patch) - CANONICAL_SITE_PATCH_FIELDS
+                )
+                if forbidden_site_fields:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: forbidden canonical-only site fields: "
+                        + ", ".join(forbidden_site_fields)
+                    )
+                if (
+                    str(canonical_patch.get("venue_key", "") or "").strip()
+                    or str(canonical_patch.get("venue_id", "") or "").strip()
+                ):
+                    if global_venue_pairs is None:
+                        global_venue_pairs = {
+                            (
+                                row.get("venue_id", "").strip(),
+                                row.get("venue_key", "").strip(),
+                            )
+                            for row in read_csv(repo / "data/reference/venues.csv")
+                            if row.get("venue_id", "").strip()
+                            and row.get("venue_key", "").strip()
+                        }
+                counts["registry_fallbacks_retired"] += _apply_canonical_patch(
+                    canonical,
+                    canonical_patch,
+                    valid_venue_pairs=global_venue_pairs,
+                )
+                canonical["notes"] = _append_note(
+                    canonical.get("notes", ""),
+                    "[OWNER_APPROVED_CANONICAL_SITE_PATCH "
+                    f"school={school_key} decision={item['decision_id']} "
+                    f"plan={approved['approved_plan_hash'][:12]}]",
+                )
+                counts["canonical_site_patches"] += 1
+            elif decision == "LEAVE_UNRESOLVED":
+                if canonical_patch:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: unresolved canonical site decision "
+                        "may not carry a patch"
+                    )
+                counts["canonical_site_left_unresolved"] += 1
+            else:
+                raise WorkflowError(
+                    f"{item['decision_id']}: unsupported canonical site decision {decision}"
+                )
+            continue
+
         field_name = item["field_name"]
         source_game_id = item["source_game_id"]
-        canonical = canonical_by_id.get(game_id)
         source = source_by_id.get(source_game_id)
         assertions = assertion_by_source.get((school_key, source_game_id), [])
         discrepancy_matches = discrepancy_index.get((game_id, field_name, school_key), [])
-        if canonical is None or source is None:
-            raise WorkflowError(f"{item['decision_id']}: canonical or source row is missing after ingestion")
+        if source is None:
+            raise WorkflowError(f"{item['decision_id']}: source row is missing after ingestion")
         touched_canonical_ids.add(game_id)
         touched_source_ids.add(source_game_id)
         if len(assertions) != 1:
