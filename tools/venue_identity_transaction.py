@@ -75,6 +75,17 @@ def merge_text(left: str, right: str) -> str:
     return " | ".join(parts)
 
 
+def registry_marker_token(venue_key: str) -> str:
+    return f";venue_key={venue_key};"
+
+
+def rewrite_registry_marker_keys(notes: str, absorbed_key: str, survivor_key: str):
+    old = registry_marker_token(absorbed_key)
+    new = registry_marker_token(survivor_key)
+    count = (notes or "").count(old)
+    return (notes or "").replace(old, new), count
+
+
 def load_spec(path: Path):
     doc = json.loads(path.read_text(encoding="utf-8"))
     if doc.get("schema_version") != 1 or not isinstance(doc.get("merges"), list):
@@ -162,6 +173,11 @@ def build_plan(repo: Path, spec_path: Path):
         canonical_count = sum(
             1 for row in canonical if clean(row.get("venue_id")) == absorbed_id
         )
+        provenance_marker_count = sum(
+            clean(row.get("notes")).count(registry_marker_token(clean(absorbed.get("venue_key"))))
+            for row in canonical
+            if clean(row.get("venue_id")) == absorbed_id
+        )
         assertion_count = sum(
             1
             for row in assertions
@@ -205,6 +221,7 @@ def build_plan(repo: Path, spec_path: Path):
                 "city": clean(survivor.get("city")),
                 "state": clean(survivor.get("state")),
                 "canonical_rows": canonical_count,
+                "provenance_markers": provenance_marker_count,
                 "assertion_rows": assertion_count,
                 "school_rows": school_count,
                 "school_files": school_refs,
@@ -314,6 +331,7 @@ def apply_transaction(
             afields, assertions = [], []
 
         canonical_updates = 0
+        provenance_marker_updates = 0
         assertion_updates = 0
         school_updates = 0
         names_reassigned = 0
@@ -366,6 +384,14 @@ def apply_transaction(
                     row["site_city"] = clean(survivor.get("city"))
                 if "site_state" in cfields:
                     row["site_state"] = clean(survivor.get("state"))
+                if "notes" in cfields:
+                    rewritten, marker_count = rewrite_registry_marker_keys(
+                        row.get("notes", ""),
+                        absorbed_key,
+                        survivor_key,
+                    )
+                    row["notes"] = rewritten
+                    provenance_marker_updates += marker_count
                 canonical_updates += 1
 
             for row in assertions:
@@ -427,6 +453,18 @@ def apply_transaction(
             raise TransactionError("postcondition: absorbed venue remains in venue-names.csv")
         if any(clean(row.get("venue_id")) in absorbed_ids for row in canonical_check):
             raise TransactionError("postcondition: absorbed venue remains in canonical games")
+        absorbed_keys = {
+            merge["absorbed_venue_key"]
+            for merge in plan["merges"]
+        }
+        if any(
+            registry_marker_token(key) in clean(row.get("notes"))
+            for row in canonical_check
+            for key in absorbed_keys
+        ):
+            raise TransactionError(
+                "postcondition: absorbed venue_key remains in canonical provenance marker"
+            )
         for path in structured_school_paths(repo):
             _, rows = read_csv(path)
             if any(clean(row.get("venue_id")) in absorbed_ids for row in rows):
@@ -451,6 +489,7 @@ def apply_transaction(
     return {
         "plan_sha256": plan["plan_sha256"],
         "canonical_rows_updated": canonical_updates,
+        "provenance_markers_updated": provenance_marker_updates,
         "assertion_rows_updated": assertion_updates,
         "school_rows_updated": school_updates,
         "venue_name_rows_reassigned": names_reassigned,
@@ -499,6 +538,7 @@ def main():
                     print(
                         f"{merge['survivor_venue_id']} <- {merge['absorbed_venue_id']}: "
                         f"canonical={merge['canonical_rows']} "
+                        f"markers={merge['provenance_markers']} "
                         f"assertions={merge['assertion_rows']} "
                         f"school={merge['school_rows']} names={merge['venue_name_rows']}"
                     )
