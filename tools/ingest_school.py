@@ -38,6 +38,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from administrative_status import administrative_status_errors
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
     append_note,
@@ -1361,6 +1362,9 @@ def main() -> int:
         existing_source_pairs,
         registry_venue_names,
     )
+    for source in sources:
+        label = source.get("source_game_id", "").strip() or "[unknown source row]"
+        preflight_errors.extend(administrative_status_errors(source, label))
     conference_registry = registry_by_key(conference_registry_rows)
     preflight_errors.extend(
         f"conferences.csv {problem}"

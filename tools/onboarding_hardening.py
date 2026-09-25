@@ -32,6 +32,7 @@ from pathlib import Path
 from typing import Any
 
 import onboard_school
+from administrative_status import administrative_status_errors
 from integration_freeze_guard import (
     assert_no_unapproved_semantic_drift,
     print_semantic_drift_report,
@@ -270,6 +271,8 @@ def research_portfolio_report(
             label = row.get("source_game_id", "").strip() or f"line {line_number}"
             if row.get("source_program_key", "").strip() != school_key:
                 errors.append(f"{label}: wrong source_program_key")
+
+            errors.extend(administrative_status_errors(row, label))
 
             season = row.get("season_label", "").strip()
             if not _valid_season(season):

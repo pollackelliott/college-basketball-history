@@ -19,6 +19,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 import ingest_school
+from administrative_status import ALLOWED_ADMINISTRATIVE_STATUSES
 
 from conference_reference import (
     REQUIRED_HISTORY_COLUMNS,
@@ -81,13 +82,6 @@ ALLOWED_CANONICAL_STATUSES = {
     "PROVISIONAL",
     "VERIFIED",
     "UNDER_REVIEW",
-}
-
-ALLOWED_ADMINISTRATIVE_STATUSES = {
-    "",
-    "FORFEIT",
-    "VACATED_GAME",
-    "VACATED_WIN",
 }
 
 REQUIRED_CANONICAL_COLUMNS = {
