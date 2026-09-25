@@ -23,7 +23,8 @@ After the obvious authoritative, institutional, reciprocal, archival, facility, 
 - canonical opponent identity or prevention of a false merge/split;
 - required H/A/N classification;
 - a required physical venue/site fact or publication-safety determination;
-- NCAA physical venue + city/state completeness;
+- NCAA physical venue + city/state completeness for U.S. sites, or the owner-approved
+  locality-sufficient standard for neutral NCAA sites outside the United States;
 - a genuine current-program identity question;
 - another explicit repository acceptance blocker.
 
