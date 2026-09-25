@@ -55,6 +55,8 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
         root: Path,
         ncaa_complete=True,
         overtime_periods="0",
+        administrative_status="",
+        administrative_note="",
     ):
         game_fields = [
             "source_game_id",
@@ -67,6 +69,8 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             "opponent_score",
             "played_result",
             "overtime_periods",
+            "administrative_status",
+            "administrative_note",
             "curated_site_type",
             "curated_venue_name",
             "city",
@@ -91,6 +95,8 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     "opponent_score": "60",
                     "played_result": "W",
                     "overtime_periods": overtime_periods,
+                    "administrative_status": administrative_status,
+                    "administrative_note": administrative_note,
                     "curated_site_type": "NEUTRAL",
                     "curated_venue_name": "Example Arena" if ncaa_complete else "",
                     "city": "Example City" if ncaa_complete else "",
@@ -187,6 +193,52 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                 any(
                     "overtime_periods must be blank or a nonnegative integer"
                     in error
+                    for error in report["errors"]
+                )
+            )
+
+
+    def test_supported_vacated_win_passes_research_freeze(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                administrative_status="VACATED_WIN",
+                administrative_note="Official record states this win was vacated.",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+
+    def test_unsupported_administrative_status_blocks_research_freeze(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                administrative_status="VACATED_SEASON_CONTEXT",
+                administrative_note="Victories from this season were later vacated.",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertTrue(
+                any(
+                    "invalid administrative_status" in error
+                    for error in report["errors"]
+                )
+            )
+
+    def test_administrative_status_requires_note(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                administrative_status="VACATED_WIN",
+                administrative_note="",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertTrue(
+                any(
+                    "administrative_note is required" in error
                     for error in report["errors"]
                 )
             )

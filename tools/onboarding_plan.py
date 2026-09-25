@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 import ingest_school
+from administrative_status import administrative_status_errors
 from build_site_data import historical_opponent_display_conflicts
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
@@ -200,6 +201,7 @@ def plan_input_paths(repo: Path, school_key: str) -> list[Path]:
             repo / "data/reference/program-accomplishments.csv",
             repo / "data/reference/conference-membership.csv",
             repo / "data/reference/conferences.csv",
+            repo / "tools/administrative_status.py",
             repo / "tools/build_site_data.py",
             repo / "tools/conference_reference.py",
             repo / "tools/ingest_school.py",
@@ -424,6 +426,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         label = row.get("source_game_id", "").strip() or f"line {line_number}"
         if row.get("source_program_key", "").strip() != school_key:
             errors.append(f"{label}: wrong source_program_key")
+        errors.extend(administrative_status_errors(row, label))
         season = row.get("season_label", "").strip()
         if not _season_is_valid(season):
             errors.append(f"{label}: invalid season_label {season!r}")
