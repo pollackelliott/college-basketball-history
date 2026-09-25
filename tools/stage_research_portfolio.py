@@ -397,6 +397,407 @@ def research_base_venue_reuse_hint(
     return match.group(1).strip(), match.group(2).strip()
 
 
+
+def research_declares_pending_shared_venue(local: dict[str, str]) -> bool:
+    """Return whether frozen Research explicitly deferred global venue identity work."""
+
+    notes = (local.get("notes", "") or "").casefold()
+    return any(
+        phrase in notes
+        for phrase in (
+            "defers authoritative id reconciliation to implementation",
+            "defers authoritative shared-id reconciliation to implementation",
+            "authoritative shared-id reconciliation is deferred to implementation",
+            "global registration/current-main reuse decision remains for serialized implementation",
+            "global registration: pending_current_main_rebase",
+        )
+    ) or (
+        "historical physical identity: resolved" in notes
+        and "implementation" in notes
+    )
+
+
+def venue_reconciliation_inventory(
+    local_rows: list[dict[str, str]],
+    global_rows: list[dict[str, str]],
+    name_rows: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Inventory all venue-reconciliation outcomes without mutating repository state."""
+
+    global_by_key = {
+        row.get("venue_key", "").strip(): row
+        for row in global_rows
+        if row.get("venue_key", "").strip()
+    }
+    global_by_id = {
+        row.get("venue_id", "").strip(): row
+        for row in global_rows
+        if row.get("venue_id", "").strip()
+    }
+
+    ids_by_name: dict[str, set[str]] = {}
+    registered_names_by_id: dict[str, set[str]] = {}
+    historical_alias_names_by_id: dict[str, set[str]] = {}
+
+    for row in global_rows:
+        normalized = normalize_name(row.get("display_name", ""))
+        if normalized:
+            ids_by_name.setdefault(normalized, set()).add(row["venue_id"])
+
+    for row in name_rows:
+        venue_id = row.get("venue_id", "").strip()
+        normalized = row.get("normalized_name", "").strip() or normalize_name(
+            row.get("venue_name", "")
+        )
+        if not venue_id or not normalized:
+            continue
+        ids_by_name.setdefault(normalized, set()).add(venue_id)
+        registered_names_by_id.setdefault(venue_id, set()).add(normalized)
+        if row.get("name_type", "").strip() == "HISTORICAL_OR_ALIAS":
+            historical_alias_names_by_id.setdefault(venue_id, set()).add(normalized)
+
+    results: list[dict[str, Any]] = []
+
+    for local in local_rows:
+        key = local.get("venue_key", "").strip()
+        name = local.get("canonical_name", "").strip()
+        normalized = normalize_name(name)
+        local_names = [name]
+        local_names.extend(
+            alias.strip()
+            for alias in local.get("aliases", "").split(";")
+            if alias.strip()
+        )
+        normalized_names = [
+            normalize_name(value)
+            for value in local_names
+            if normalize_name(value)
+        ]
+        pending_shared = research_declares_pending_shared_venue(local)
+
+        item: dict[str, Any] = {
+            "venue_key": key,
+            "canonical_name": name,
+            "research_venue_id": local.get("venue_id", "").strip(),
+            "city": local.get("city", "").strip(),
+            "state": local.get("state", "").strip(),
+            "classification": "",
+            "resolution": "",
+            "target_venue_id": "",
+            "target_venue_key": "",
+            "issues": [],
+            "candidate_venue_ids": [],
+            "missing_registered_names": [],
+        }
+
+        chosen: dict[str, str] | None = None
+        reason = ""
+        hard_stop = ""
+
+        hint = research_base_venue_reuse_hint(local)
+        if hint is not None:
+            hinted_key, hinted_id = hint
+            hinted_by_key = global_by_key.get(hinted_key)
+            hinted_by_id = global_by_id.get(hinted_id)
+            if (
+                hinted_by_key is None
+                or hinted_by_id is None
+                or hinted_by_key.get("venue_id", "").strip() != hinted_id
+                or hinted_by_id.get("venue_key", "").strip() != hinted_key
+            ):
+                hard_stop = "RESEARCH_BASE_HINT_STALE"
+            elif not jurisdiction_compatible(local, hinted_by_id):
+                hard_stop = "JURISDICTION_CONFLICT"
+            else:
+                chosen = hinted_by_id
+                reason = "REUSE_RESEARCH_BASE_IDENTITY"
+        elif key and key in global_by_key:
+            candidate = global_by_key[key]
+            if not jurisdiction_compatible(local, candidate):
+                hard_stop = "JURISDICTION_CONFLICT"
+            else:
+                chosen = candidate
+                reason = "REUSE_EXACT_KEY"
+
+        canonical_candidate_ids: set[str] = set()
+        if not hard_stop and chosen is None and normalized:
+            canonical_candidate_ids = {
+                venue_id
+                for venue_id in ids_by_name.get(normalized, set())
+                if venue_id in global_by_id
+                and geography_compatible(local, global_by_id[venue_id])
+            }
+            if len(canonical_candidate_ids) == 1:
+                candidate_id = next(iter(canonical_candidate_ids))
+                if normalized in historical_alias_names_by_id.get(
+                    candidate_id, set()
+                ):
+                    chosen = global_by_id[candidate_id]
+                    reason = "REUSE_REGISTERED_ALIAS"
+
+            if chosen is None and canonical_candidate_ids:
+                resolved_name_ids: list[set[str]] = []
+                for normalized_name in normalized_names:
+                    ids = {
+                        venue_id
+                        for venue_id in ids_by_name.get(normalized_name, set())
+                        if venue_id in global_by_id
+                        and geography_compatible(local, global_by_id[venue_id])
+                    }
+                    if ids:
+                        resolved_name_ids.append(ids)
+
+                if (
+                    len(normalized_names) >= 2
+                    and len(resolved_name_ids) == len(normalized_names)
+                    and all(len(ids) == 1 for ids in resolved_name_ids)
+                ):
+                    resolved_ids = {next(iter(ids)) for ids in resolved_name_ids}
+                    if len(resolved_ids) == 1:
+                        candidate_id = next(iter(resolved_ids))
+                        if any(
+                            normalized_name
+                            in historical_alias_names_by_id.get(candidate_id, set())
+                            for normalized_name in normalized_names
+                        ):
+                            chosen = global_by_id[candidate_id]
+                            reason = "REUSE_REGISTERED_NAME_CLUSTER"
+
+        all_name_candidates: set[str] = set()
+        for normalized_name in normalized_names:
+            all_name_candidates.update(
+                venue_id
+                for venue_id in ids_by_name.get(normalized_name, set())
+                if venue_id in global_by_id
+                and geography_compatible(local, global_by_id[venue_id])
+            )
+        item["candidate_venue_ids"] = sorted(all_name_candidates)
+
+        if hard_stop:
+            item["classification"] = "STOP_AMBIGUOUS"
+            item["issues"].append(hard_stop)
+        elif chosen is not None:
+            chosen_id = chosen.get("venue_id", "").strip()
+            chosen_notes = (chosen.get("notes", "") or "").casefold()
+            conflicting_ids = sorted(all_name_candidates - {chosen_id})
+
+            if conflicting_ids:
+                item["classification"] = (
+                    "SHARED_GLOBAL_MAINTENANCE"
+                    if pending_shared
+                    else "STOP_AMBIGUOUS"
+                )
+                item["issues"].append("CONFLICTING_REGISTERED_NAME_IDENTITIES")
+            elif (
+                pending_shared
+                and reason == "REUSE_EXACT_KEY"
+                and "retired during shared-reference reconciliation" not in chosen_notes
+            ):
+                item["classification"] = "SHARED_GLOBAL_MAINTENANCE"
+                item["issues"].append(
+                    "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING"
+                )
+            else:
+                item["classification"] = "SAFE_REPRESENTATION_REUSE"
+
+            item["resolution"] = reason
+            item["target_venue_id"] = chosen_id
+            item["target_venue_key"] = chosen.get("venue_key", "").strip()
+
+            if (
+                local.get("city", "").strip() != chosen.get("city", "").strip()
+                or normalize_jurisdiction(local.get("state", ""))
+                != normalize_jurisdiction(chosen.get("state", ""))
+                or local.get("state", "").strip() != chosen.get("state", "").strip()
+            ):
+                item["issues"].append("CANONICAL_GEOGRAPHY_NORMALIZATION")
+
+            registered = registered_names_by_id.get(chosen_id, set())
+            missing = [
+                original
+                for original in local_names
+                if normalize_name(original)
+                and normalize_name(original) not in registered
+            ]
+            item["missing_registered_names"] = missing
+            if missing:
+                item["issues"].append("GLOBAL_NAME_REGISTRATION_DURING_PHASE0")
+        else:
+            if pending_shared:
+                item["classification"] = "SHARED_GLOBAL_MAINTENANCE"
+                item["issues"].append(
+                    "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING"
+                )
+            elif all_name_candidates or canonical_candidate_ids:
+                item["classification"] = "STOP_AMBIGUOUS"
+                item["issues"].append(
+                    "POSSIBLE_PHYSICAL_MATCH_REQUIRES_RECONCILIATION"
+                )
+            else:
+                item["classification"] = "NEW_GLOBAL_IDENTITY"
+                item["resolution"] = "NEW_GLOBAL_IDENTITY"
+
+        results.append(item)
+
+    counts: dict[str, int] = {}
+    for row in results:
+        classification = row["classification"]
+        counts[classification] = counts.get(classification, 0) + 1
+
+    blockers = [
+        row
+        for row in results
+        if row["classification"]
+        in {"SHARED_GLOBAL_MAINTENANCE", "STOP_AMBIGUOUS"}
+    ]
+    return {
+        "schema_version": 1,
+        "venue_count": len(results),
+        "classification_counts": dict(sorted(counts.items())),
+        "blocker_count": len(blockers),
+        "blockers": blockers,
+        "rows": results,
+    }
+
+
+def program_alias_inventory(
+    programs: list[dict[str, str]],
+    alias_rows: list[dict[str, str]],
+    opponent_rows: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Inventory verified current-program alias rebases without mutating rows."""
+
+    program_keys = {
+        row.get("program_key", "").strip()
+        for row in programs
+        if row.get("program_key", "").strip()
+    }
+    aliases_by_name: dict[str, list[dict[str, str]]] = {}
+    for alias in alias_rows:
+        if alias.get("verification_status", "").strip() != "VERIFIED":
+            continue
+        normalized = normalize_name(alias.get("alias_name", ""))
+        if normalized:
+            aliases_by_name.setdefault(normalized, []).append(alias)
+
+    results: list[dict[str, Any]] = []
+    for row in opponent_rows:
+        old_key = row.get("canonical_opponent_key", "").strip()
+        if not old_key or old_key in program_keys:
+            continue
+        name = row.get("canonical_opponent_name", "").strip()
+        normalized = normalize_name(name)
+        applicable = [
+            alias
+            for alias in aliases_by_name.get(normalized, [])
+            if program_alias_applies(
+                alias,
+                row.get("first_season", ""),
+                row.get("last_season", ""),
+            )
+        ]
+        keys = sorted(
+            {
+                alias.get("program_key", "").strip()
+                for alias in applicable
+                if alias.get("program_key", "").strip()
+            }
+        )
+        classification = (
+            "STOP_AMBIGUOUS"
+            if len(keys) > 1
+            else "SAFE_PROGRAM_ALIAS_REUSE"
+            if len(keys) == 1
+            else "NO_CURRENT_VERIFIED_ALIAS"
+        )
+
+        results.append(
+            {
+                "source_opponent_label": row.get("source_opponent_label", "").strip(),
+                "canonical_opponent_name": name,
+                "from_program_key": old_key,
+                "classification": classification,
+                "candidate_program_keys": keys,
+            }
+        )
+
+    counts: dict[str, int] = {}
+    for row in results:
+        classification = row["classification"]
+        counts[classification] = counts.get(classification, 0) + 1
+
+    blockers = [
+        row for row in results if row["classification"] == "STOP_AMBIGUOUS"
+    ]
+    return {
+        "schema_version": 1,
+        "row_count": len(results),
+        "classification_counts": dict(sorted(counts.items())),
+        "blocker_count": len(blockers),
+        "blockers": blockers,
+        "rows": results,
+    }
+
+
+def build_stage1_reconciliation_inventory(
+    school_key: str,
+    local_venues: list[dict[str, str]],
+    global_venues: list[dict[str, str]],
+    venue_names: list[dict[str, str]],
+    programs: list[dict[str, str]],
+    program_aliases: list[dict[str, str]],
+    local_opponents: list[dict[str, str]],
+) -> dict[str, Any]:
+    venue = venue_reconciliation_inventory(
+        local_venues,
+        global_venues,
+        venue_names,
+    )
+    program = program_alias_inventory(
+        programs,
+        program_aliases,
+        local_opponents,
+    )
+    blocker_count = venue["blocker_count"] + program["blocker_count"]
+    maintenance = venue["classification_counts"].get(
+        "SHARED_GLOBAL_MAINTENANCE", 0
+    )
+    ambiguous = (
+        venue["classification_counts"].get("STOP_AMBIGUOUS", 0)
+        + program["classification_counts"].get("STOP_AMBIGUOUS", 0)
+    )
+    return {
+        "schema_version": 1,
+        "school_key": school_key,
+        "status": (
+            "MAINTENANCE_REQUIRED"
+            if maintenance
+            else "BLOCKED"
+            if ambiguous
+            else "PASS"
+        ),
+        "blocker_count": blocker_count,
+        "maintenance_required_count": maintenance,
+        "ambiguous_stop_count": ambiguous,
+        "venue": venue,
+        "program_alias": program,
+    }
+
+
+def write_stage1_reconciliation_inventory(
+    repo: Path,
+    school_key: str,
+    report: dict[str, Any],
+) -> Path:
+    output = repo / ".onboarding" / school_key / "stage1-reconciliation.json"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return output
+
+
 def rebase_venues(
     school_key: str,
     local_rows: list[dict[str, str]],
@@ -806,6 +1207,54 @@ def main() -> int:
             name_fields, venue_names = load_csv(repo / "data/reference/venue-names.csv")
             program_fields, programs = load_csv(repo / "data/reference/programs.csv")
             _, program_aliases = load_csv(repo / "data/reference/program-names.csv")
+
+            stage1_inventory = build_stage1_reconciliation_inventory(
+                args.school_key,
+                local_venues,
+                global_venues,
+                venue_names,
+                programs,
+                program_aliases,
+                local_opponents,
+            )
+            inventory_path = write_stage1_reconciliation_inventory(
+                repo,
+                args.school_key,
+                stage1_inventory,
+            )
+            print("Stage 1 reconciliation inventory:")
+            print(f"  status: {stage1_inventory['status']}")
+            print(f"  blockers: {stage1_inventory['blocker_count']}")
+            print(
+                "  shared/global maintenance: "
+                f"{stage1_inventory['maintenance_required_count']}"
+            )
+            print(
+                "  ambiguous stops: "
+                f"{stage1_inventory['ambiguous_stop_count']}"
+            )
+            print(f"  artifact: {inventory_path}")
+            if stage1_inventory["blocker_count"]:
+                for row in stage1_inventory["venue"]["blockers"]:
+                    print(
+                        "  venue blocker: "
+                        f"{row['venue_key']} | {row['canonical_name']} | "
+                        f"{row['classification']} | "
+                        f"{','.join(row['issues'])}"
+                    )
+                for row in stage1_inventory["program_alias"]["blockers"]:
+                    print(
+                        "  program blocker: "
+                        f"{row['canonical_opponent_name']} | "
+                        f"{row['classification']} | "
+                        f"{','.join(row['candidate_program_keys'])}"
+                    )
+                raise WorkflowError(
+                    "Stage 1 reconciliation inventory is not clean. "
+                    "Resolve the complete declared blocker/maintenance population "
+                    "before retrying Phase 0; do not use repeated staging attempts "
+                    "as a discovery loop."
+                )
 
             (
                 local_venues,
