@@ -458,7 +458,8 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         )
 
         self.assertEqual(local_rows[0]["venue_id"], "VEN-000084")
-        self.assertEqual(local_rows[0]["city"], "Lake Buena Vista")
+        self.assertEqual(local_rows[0]["city"], "Orlando")
+        self.assertEqual(local_rows[0]["state"], "FL")
         self.assertEqual(global_rows[0]["city"], "Orlando")
         self.assertEqual(
             mappings[0]["resolution"],
@@ -495,7 +496,8 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         )
 
         self.assertEqual(local_rows[0]["venue_id"], "VEN-000088")
-        self.assertEqual(local_rows[0]["city"], "Paradise Island")
+        self.assertEqual(local_rows[0]["city"], "Nassau")
+        self.assertEqual(local_rows[0]["state"], "BS")
         self.assertEqual(global_rows[0]["city"], "Nassau")
         self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
 
@@ -529,8 +531,65 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         )
 
         self.assertEqual(local_rows[0]["venue_id"], "VEN-000148")
-        self.assertEqual(local_rows[0]["state"], "Ohio")
+        self.assertEqual(local_rows[0]["city"], "Columbus")
+        self.assertEqual(local_rows[0]["state"], "OH")
         self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
+
+    def test_registered_alias_reuse_canonicalizes_global_geography(self):
+        globals_ = [
+            global_venue(
+                "VEN-000505",
+                "rochester-war-memorial",
+                "Rochester War Memorial",
+                "Rochester",
+                "NY",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Historical alias maps to the current global identity.",
+                    city="Rochester City",
+                    state="NY",
+                ),
+                "venue_key": "blue-cross-blue-shield-arena",
+                "canonical_name": "Blue Cross/Blue Shield Arena",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000505",
+                "venue_name": "Blue Cross/Blue Shield Arena",
+                "normalized_name": "bluecrossblueshieldarena",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            }
+        ]
+
+        # Alias detection itself still requires compatible geography, so use
+        # an exact compatible city for resolution and then verify the reused
+        # row receives registry-owned geography.
+        locals_[0]["city"] = "Rochester"
+
+        local_rows, _globals, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            names,
+        )
+
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000505")
+        self.assertEqual(local_rows[0]["venue_key"], "rochester-war-memorial")
+        self.assertEqual(local_rows[0]["city"], "Rochester")
+        self.assertEqual(local_rows[0]["state"], "NY")
+        self.assertEqual(
+            mappings[0]["resolution"],
+            "REUSE_REGISTERED_ALIAS",
+        )
 
     def test_exact_key_reuse_still_blocks_jurisdiction_conflict(self):
         globals_ = [
