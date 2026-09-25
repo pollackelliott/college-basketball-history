@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000129",
+      "absorbed_venue_id": "VEN-000407",
+      "expected_canonical_rows": 9,
+      "expected_school_rows": 3,
+      "resolution_basis": "Control Center approved Cincinnati Stage 1 maintenance: current main contains duplicate Lexington Memorial Coliseum physical identities. Preserve long-established VEN-000129 / memorial-coliseum-kentucky and retire later duplicate VEN-000407 / memorial-coliseum-lexington."
+    },
+    {
+      "survivor_venue_id": "VEN-000143",
+      "absorbed_venue_id": "VEN-000410",
+      "expected_canonical_rows": 6,
+      "expected_school_rows": 3,
+      "resolution_basis": "Control Center approved Cincinnati Stage 1 maintenance: current main contains duplicate Kansas City Municipal Auditorium physical identities. Preserve long-established VEN-000143 / municipal-auditorium-kc and retire later duplicate VEN-000410 / municipal-auditorium-kansas-city."
+    }
+  ]
+}
