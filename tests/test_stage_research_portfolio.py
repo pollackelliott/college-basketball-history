@@ -86,6 +86,189 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             "REUSE_RESEARCH_BASE_IDENTITY",
         )
 
+    def test_explicit_research_base_reuse_hint_canonicalizes_local_key(self):
+        globals_ = [
+            global_venue(
+                "VEN-000038",
+                "cfe-arena",
+                "Addition Financial Arena",
+                "Orlando",
+                "FL",
+            )
+        ]
+        locals_ = [
+            local_venue(
+                "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE; "
+                "historical/local label maps to research-base key=cfe-arena; "
+                "research-base venue_id=VEN-000038."
+            )
+        ]
+
+        local_rows, _globals, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            [],
+        )
+
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000038")
+        self.assertEqual(local_rows[0]["venue_key"], "cfe-arena")
+        self.assertEqual(
+            mappings[0]["resolution"],
+            "REUSE_RESEARCH_BASE_IDENTITY",
+        )
+
+    def test_unique_registered_alias_reuses_authoritative_identity(self):
+        globals_ = [
+            global_venue(
+                "VEN-000505",
+                "rochester-war-memorial",
+                "Rochester War Memorial",
+                "Rochester",
+                "NY",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Research resolved Blue Cross Arena as the Rochester "
+                    "War Memorial physical facility.",
+                    city="Rochester",
+                    state="NY",
+                ),
+                "venue_key": "blue-cross-blue-shield-arena",
+                "canonical_name": "Blue Cross/Blue Shield Arena",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000505",
+                "venue_name": "Blue Cross/Blue Shield Arena",
+                "normalized_name": "bluecrossblueshieldarena",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            }
+        ]
+
+        local_rows, global_rows, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            names,
+        )
+
+        self.assertEqual(len(global_rows), 1)
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000505")
+        self.assertEqual(local_rows[0]["venue_key"], "rochester-war-memorial")
+        self.assertEqual(
+            mappings[0]["resolution"],
+            "REUSE_REGISTERED_ALIAS",
+        )
+
+    def test_project_display_name_without_alias_still_stops(self):
+        globals_ = [
+            global_venue(
+                "VEN-000505",
+                "rochester-war-memorial",
+                "Rochester War Memorial",
+                "Rochester",
+                "NY",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Display-name-only match is not enough.",
+                    city="Rochester",
+                    state="NY",
+                ),
+                "venue_key": "different-local-key",
+                "canonical_name": "Rochester War Memorial",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000505",
+                "venue_name": "Rochester War Memorial",
+                "normalized_name": "rochesterwarmemorial",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            }
+        ]
+
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "possible physical venue match",
+        ):
+            rebase_venues("test-school", locals_, globals_, names)
+
+    def test_registered_alias_still_stops_when_multiple_physical_ids_match(self):
+        globals_ = [
+            global_venue(
+                "VEN-000505",
+                "rochester-war-memorial",
+                "Rochester War Memorial",
+                "Rochester",
+                "NY",
+            ),
+            global_venue(
+                "VEN-000999",
+                "other-rochester-arena",
+                "Other Rochester Arena",
+                "Rochester",
+                "NY",
+            ),
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Ambiguous alias test.",
+                    city="Rochester",
+                    state="NY",
+                ),
+                "venue_key": "blue-cross-blue-shield-arena",
+                "canonical_name": "Blue Cross/Blue Shield Arena",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000505",
+                "venue_name": "Blue Cross/Blue Shield Arena",
+                "normalized_name": "bluecrossblueshieldarena",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+            {
+                "venue_id": "VEN-000999",
+                "venue_name": "Blue Cross/Blue Shield Arena",
+                "normalized_name": "bluecrossblueshieldarena",
+                "name_type": "HISTORICAL_OR_ALIAS",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+        ]
+
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "possible physical venue match",
+        ):
+            rebase_venues("test-school", locals_, globals_, names)
+
     def test_research_base_reuse_hint_must_still_match_current_main(self):
         globals_ = [
             global_venue(
