@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000326",
+      "absorbed_venue_id": "VEN-000608",
+      "expected_canonical_rows": 2,
+      "expected_school_rows": 2,
+      "resolution_basis": "Control Center approved Virginia Stage 1 maintenance: official MassMutual Center and City of Springfield evidence establish Springfield Civic Center and MassMutual Center as the same physical arena. Preserve earlier-established physical identity VEN-000326, retire duplicate VEN-000608, and retain Springfield Civic Center as a historical name while using MassMutual Center as the current project display."
+    }
+  ]
+}

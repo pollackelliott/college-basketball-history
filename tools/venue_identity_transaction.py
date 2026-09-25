@@ -312,7 +312,7 @@ def _restore_site_data(repo: Path, snapshot: dict[Path, bytes]) -> None:
 
 def _run_site_refresh(repo: Path) -> None:
     commands = (
-        [sys.executable, "tools/build_site_data.py"],
+        [sys.executable, "tools/build_site_data.py", "--apply"],
         [sys.executable, "tools/check_site_data_freshness.py"],
     )
     for command in commands:
