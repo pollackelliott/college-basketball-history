@@ -76,6 +76,8 @@ Before the first such maintenance mutation, use the repository-owned Stage 1 rea
 
 Pure generic tooling repairs required to execute the authorized Stage 1 contract do not create a historical owner gate, but they must remain narrow, regression-tested, and should be batched by defect family when the inventory shows multiple manifestations of the same underlying representation problem.
 
+When an authorized shared-reference transaction deterministically changes generated site output, the transaction/maintenance batch owns that derived refresh and freshness proof. Do not merge the source/reference mutation first and open a second protected-main PR merely to regenerate predictable derived site JSON. The refresh must participate in the same rollback/validation boundary where permanent tooling supports it.
+
 ## 5. Early shared-reference registration exception
 
 Occasionally several active lanes may immediately benefit from a newly established shared identity before the discovering school reaches Implementation.
