@@ -216,13 +216,21 @@ validation; unrelated shared-row changes are a STOP.
    current-main rebase and resolve any flagged identities before declaring
    `INTEGRATION_FROZEN` or beginning tracked Phase 0; do not reopen unrelated historical
    research merely to add this checkpoint.
-4. Run `python tools/onboard_school.py <school_key> --preflight` from the clean Phase 0
-   checkpoint. Preflight must pass the Integration Freeze semantic-drift guard. After the
-   first blocker-free preflight, decision count is informational, not a target to reduce.
-   Perform one comprehensive deterministic representation/identity sweep and at most one
-   coherent repair batch; do not create a second Research/adjudication cycle by rewriting
-   frozen dates, scores, overtime, H/A/N, venue/location meaning, game type, postseason
-   round, result, or literal source evidence.
+4. Run `python tools/implementation_stage2.py <school_key>` from the clean Phase 0
+   checkpoint. The coordinator must pass the Integration Freeze semantic-drift guard,
+   regenerate authoritative preflight, and write both
+   `.onboarding/<school>/implementation-stage2-status.json` and the durable
+   `.onboarding/<school>/implementation-stage2-capability-census.json`. A blocker-free
+   raw preflight is **not** `PREFLIGHT_READY`; the durable state is
+   `CAPABILITY_CENSUS_READY` until the complete currently detectable Stage-2
+   representation/capability population has been classified and the exact recommendation
+   map survives disposable proposal rehearsal. Decision count is informational, not a
+   target to reduce. If the census or rehearsal exposes a generic permanent-tool defect,
+   finish classifying the complete currently detected defect population and define one
+   consolidated repair scope before merging the first tooling repair. Do not use
+   rerun/regeneration as the discovery mechanism. Do not create a second
+   Research/adjudication cycle by rewriting frozen dates, scores, overtime, H/A/N,
+   venue/location meaning, game type, postseason round, result, or literal source evidence.
 5. Present every owner-relevant decision as one consolidated Gate 1 batch. Every
    game-specific review item must show its date. If date is disputed, show the source
    date and canonical date separately; never collapse them into one date. Supported
@@ -271,7 +279,7 @@ unresolved discrepancies.
 * Batch deterministic technical work by phase. One owner relay per reversible phase is the default; one-command-at-a-time copy/paste loops are a process regression unless a real blocker requires them.
 * **Default owner execution interface: direct permanent repository commands.** For Implementation Stage 2, use `python tools/implementation_stage2.py <school>` for authoritative preflight/recovery state and rerun it with `--map <recommendation-map.json>` for permanent map validation plus disposable proposal rehearsal. Assistant-authored multi-line Bash/Python orchestration is not a supported normal execution surface. Use a narrow temporary helper only when the repository genuinely lacks the required operation; if the same gap can recur, repair permanent tooling instead of institutionalizing the helper.
 * A generic Implementation-tool defect exposed by a school is not fully repaired until the exact failure topology has a regression test. Preserve the school state, fix the permanent tool, add the regression, and rerun the repository-owned phase entrypoint. Do not mix generic tooling repair with a new bespoke historical-research conveyor.
-* `.onboarding/<school>/implementation-stage2-status.json` is the controlling Stage-2 recovery capsule. A failed proposal rehearsal also preserves `.onboarding/<school>/last-rehearsal-site-gate.json` when the site gate ran. Inspect these artifacts before asking the owner to replay commands or paste verbose diagnostics.
+* `.onboarding/<school>/implementation-stage2-status.json` is the controlling Stage-2 recovery capsule. The companion `.onboarding/<school>/implementation-stage2-capability-census.json` is the durable population-level discovery record for currently detectable Stage-2 representation/capability topologies. A failed proposal rehearsal also preserves `.onboarding/<school>/last-rehearsal-site-gate.json` when the site gate ran. Inspect these artifacts before asking the owner to replay commands or paste verbose diagnostics.
 * Live terminal output should be compact: phase, HEAD/base/fingerprint, counts, exact failing IDs/paths, verbose-log path, and next safe action. Redirect large diagnostics to `/tmp` or ignored `.onboarding/` artifacts.
 * Durable repository state outranks chat memory. After interruption, inspect Git/GitHub and `.onboarding/<school>/` state and resume from the earliest incomplete phase rather than replaying successful phases.
 * A Codespace/chat failure does not authorize blind reset, stash, force push, branch deletion, or re-running an already completed phase whose fingerprint remains valid.
@@ -364,6 +372,10 @@ unresolved discrepancies.
   scan was not completed before its original research freeze.
 - Flag any implementation/release path that can lose known target/reciprocal site
   evidence without field-specific reconciliation provenance.
+- Flag any Stage-2 workflow that labels a blocker-free raw preflight `PREFLIGHT_READY`
+  before the durable capability census and exact-map proposal rehearsal are complete, or
+  that begins merging a serial generic-tooling repair campaign before classifying the
+  complete currently detected defect population into one consolidated repair scope.
 - Flag school-specific hard-coded pre-scope exclusion counts; scope tests must enforce
   the reciprocal-evidence invariant generically.
 - Flag implementation instructions that require repeated owner copy/paste of verbose
