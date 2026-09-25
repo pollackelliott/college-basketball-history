@@ -20,6 +20,7 @@ from onboarding_plan import (  # noqa: E402
     apply_reconciliation_decisions,
     build_plan,
     date_label,
+    exhibition_warning_required,
     render_report,
     set_canonical_field,
     validate_package,
@@ -157,6 +158,41 @@ class DateCompleteReviewTests(unittest.TestCase):
         self.assertIn("20 researched rows", report)
         self.assertIn("1911-1912 through 1949-1950", report)
         self.assertIn("will not appear on the public page", report)
+
+
+class ExhibitionWarningTests(unittest.TestCase):
+    def test_true_exhibition_wording_still_warns(self):
+        self.assertTrue(
+            exhibition_warning_required(
+                "10/25/2025 Example State — Exhibition",
+                "",
+                "",
+            )
+        )
+
+    def test_excluded_preseason_exhibitions_note_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "11/3/2025 Western Carolina W 94-63",
+                "",
+                (
+                    "2025-26 competitive game from official Cincinnati schedule; "
+                    "preseason exhibitions excluded from Stage 1 competitive universe."
+                ),
+            )
+        )
+
+    def test_exhibition_complex_venue_name_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "18 Hofstra W 79-65 A - -",
+                "National Invitation Tournament",
+                (
+                    "Hofstra official box score identifies the game at "
+                    "David S. Mack Sports and Exhibition Complex, Hempstead, New York."
+                ),
+            )
+        )
 
 
 class ApprovalContractTests(unittest.TestCase):
