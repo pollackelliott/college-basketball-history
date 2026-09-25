@@ -145,26 +145,33 @@ Run package/repository QA, then commit this stable package/reference foundation
 checkpoint before global ingestion. Do not add school-specific reconciliation code
 unless the generic workflow truly cannot represent the problem.
 
-## Phase 1 — one preflight and one owner decision batch
+## Phase 1 — Stage 2 capability census and one owner decision batch
 
 Run:
 
 ```bash
-python tools/onboard_school.py "$school_key" --preflight
+python tools/implementation_stage2.py "$school_key"
 ```
 
-The command writes ignored working artifacts under:
+The coordinator writes ignored working artifacts under:
 
 ```text
 .onboarding/<school_key>/
 ├── plan.json
 ├── review.csv
-└── review.md
+├── review.md
+├── implementation-stage2-status.json
+└── implementation-stage2-capability-census.json
 ```
 
 It checks the six-file contract, history scope, locations, conferences, canonical
 identity, safe enrichments, reciprocal evidence, discrepancies, accomplishments,
-publication readiness, and affected existing public pages.
+publication readiness, and affected existing public pages. A blocker-free raw preflight
+is reported as `CAPABILITY_CENSUS_READY`, not `PREFLIGHT_READY`. Before the first
+generic Stage-2 tooling repair is merged, classify the complete currently detected
+capability/representation population and define one consolidated repair scope. After the
+recommendation map is mature, rerun the coordinator with `--map <recommendation-map.json>`;
+only a successful exact-map disposable rehearsal may report `OWNER_GATE_1_READY`.
 
 ### Date requirement
 

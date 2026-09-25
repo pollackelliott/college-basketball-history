@@ -105,12 +105,24 @@ class ImplementationStage2CoordinatorTests(unittest.TestCase):
                 code, status, status_path = stage2.run_stage2(root, "test")
 
             self.assertEqual(code, 0)
-            self.assertEqual(status["status"], "PREFLIGHT_READY")
+            self.assertEqual(status["status"], "CAPABILITY_CENSUS_READY")
             self.assertEqual(status["preflight"]["decision_count"], 2)
             self.assertTrue(status["preflight"]["decision_universe_sha256"])
+            self.assertEqual(
+                status["capability_census"]["status"],
+                "CENSUS_CAPTURED",
+            )
+            census_path = root / ".onboarding/test/implementation-stage2-capability-census.json"
+            self.assertTrue(census_path.is_file())
+            census = json.loads(census_path.read_text(encoding="utf-8"))
+            self.assertEqual(census["status"], "CENSUS_CAPTURED")
+            self.assertEqual(
+                census["preflight"]["decision_categories"]["discrepancy"],
+                1,
+            )
             self.assertTrue(status_path.is_file())
             persisted = json.loads(status_path.read_text(encoding="utf-8"))
-            self.assertEqual(persisted["status"], "PREFLIGHT_READY")
+            self.assertEqual(persisted["status"], "CAPABILITY_CENSUS_READY")
 
     def test_validated_map_and_rehearsal_reach_owner_gate(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -170,6 +182,7 @@ class ImplementationStage2CoordinatorTests(unittest.TestCase):
                 status["proposal_rehearsal"]["approved_plan_hash_preview"],
                 "preview-hash",
             )
+            self.assertEqual(status["capability_census"]["status"], "PASS")
 
     def test_failed_rehearsal_preserves_site_diagnostic_in_status(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -225,7 +238,18 @@ class ImplementationStage2CoordinatorTests(unittest.TestCase):
                 status["site_diagnostic"]["counts"]["unaccounted_public_gap_rows"],
                 3,
             )
-            self.assertIn("do not invent", status["next_action"])
+            self.assertEqual(
+                status["capability_census"]["status"],
+                "REPAIR_SCOPE_REQUIRED",
+            )
+            census_path = root / ".onboarding/test/implementation-stage2-capability-census.json"
+            census = json.loads(census_path.read_text(encoding="utf-8"))
+            topologies = {
+                row["topology"]: row["count"]
+                for row in census["topology_groups"]
+            }
+            self.assertEqual(topologies["unaccounted_public_gap_rows"], 3)
+            self.assertIn("consolidated repair scope", status["next_action"])
             self.assertTrue(status_path.is_file())
 
 

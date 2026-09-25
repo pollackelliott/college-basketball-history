@@ -106,6 +106,14 @@ During Implementation Stage 2, the primary recovery capsule is machine-readable:
 
 `.onboarding/<school>/implementation-stage2-status.json`
 
+The companion population-level discovery record is:
+
+`.onboarding/<school>/implementation-stage2-capability-census.json`
+
+A recovery chat must inspect both before restarting Stage-2 diagnosis. The census prevents a
+replacement chat from fixing only the first visible topology while forgetting other
+currently detected capability/representation defects from the same stage.
+
 If proposal rehearsal reached the site gate, the latest structured site result is preserved at:
 
 `.onboarding/<school>/last-rehearsal-site-gate.json`

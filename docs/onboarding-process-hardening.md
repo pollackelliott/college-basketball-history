@@ -89,16 +89,22 @@ The staging tool requires the onboarding branch to point exactly at current `ori
 
 ## 4. One authoritative preflight and one owner packet
 
-From the clean Phase 0 checkpoint:
+From the clean Phase 0 checkpoint, use the repository-owned Stage-2 coordinator:
 
 ```bash
-python tools/onboard_school.py <school_key> --preflight
+python tools/implementation_stage2.py <school_key>
 ```
 
-The command now verifies the Integration Freeze semantic boundary before building the
-plan. Historical meaning in the staged source ledger may not drift silently between
-`INTEGRATION_FROZEN` and Gate 1. Representation-only current-main reconciliation
+The coordinator verifies the Integration Freeze semantic boundary, regenerates the
+authoritative preflight, and writes both the Stage-2 recovery status and the durable
+capability census. Historical meaning in the staged source ledger may not drift silently
+between `INTEGRATION_FROZEN` and Gate 1. Representation-only current-main reconciliation
 remains allowed under `docs/implementation-gate1-authority-boundary.md`.
+
+A blocker-free raw preflight is **not** called `PREFLIGHT_READY`. The normal intermediate
+state is `CAPABILITY_CENSUS_READY`: the decision universe is known, but the lane must still
+classify the complete currently detectable representation/capability population and
+rehearse the exact proposed recommendation map before `OWNER_GATE_1_READY`.
 
 If explicit inspection is useful:
 
@@ -107,10 +113,13 @@ python tools/onboarding_hardening.py freeze-drift <school_key>
 ```
 
 After the first blocker-free preflight, perform one comprehensive deterministic
-representation/identity sweep and, when needed, one coherent repair batch. Regenerate
-authoritative preflight after that batch. **Do not optimize for a smaller decision
-count.** A mature 150- or 250-row Gate 1 universe is acceptable when the agent can
-compress it into supported recommendations.
+representation/identity sweep and, when needed, one coherent repair batch. The durable
+`.onboarding/<school>/implementation-stage2-capability-census.json` records the
+currently detectable topology population. If any item is a generic permanent-tool defect,
+finish classifying the complete detected population and define one consolidated repair scope
+**before merging the first tooling repair**. Regenerate authoritative preflight after that
+batch. **Do not optimize for a smaller decision count.** A mature 150- or 250-row Gate 1
+universe is acceptable when the agent can compress it into supported recommendations.
 
 When new reciprocal/current-main evidence supports changing date, score, overtime,
 H/A/N, venue/location meaning, game type, postseason round, result, or another frozen
@@ -198,7 +207,8 @@ Run only the exact sealed apply command printed by that tool.
 The expected normal path is now:
 
 ```text
-preflight
+Stage-2 preflight + capability census
+→ exact-map disposable proposal rehearsal PASS
 → one Owner Gate 1 packet
 → fill-review
 → pre-seal rehearsal PASS
