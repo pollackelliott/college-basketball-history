@@ -178,8 +178,8 @@ Before broad historical research:
 3. derive the whole-population H/A/N work census;
 4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
 5. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
-6. perform one structured exact-game join against already-present canonical and assertion
-   evidence for the target school using a bounded bulk read;
+6. use the permanent repository Stage 3A-0 entrypoint for one structured exact-game join
+   against already-present canonical and assertion evidence for the target school;
 7. write through only unambiguous accepted same-game evidence;
 8. preserve unmatched/contradictory candidates without forcing or researching them;
 9. serialize the exact H/A/N, HOME, and NEUTRAL residual queues.
