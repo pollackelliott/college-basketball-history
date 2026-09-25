@@ -4,6 +4,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
@@ -226,6 +227,7 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(result["canonical_rows_updated"], 1)
         self.assertEqual(result["provenance_markers_updated"], 1)
         self.assertEqual(result["school_rows_updated"], 1)
+        self.assertEqual(result["site_files_refreshed"], 0)
 
         venues = read_rows(repo / "data/reference/venues.csv")
         self.assertEqual([row["venue_id"] for row in venues], ["VEN-000001"])
@@ -256,6 +258,79 @@ class VenueIdentityTransactionTests(unittest.TestCase):
                 and row["name_type"] == "HISTORICAL_OR_ALIAS"
                 for row in names
             )
+        )
+
+    def test_site_refresh_failure_rolls_back_reference_and_generated_state(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+
+        generated = repo / "site/data/teams/test.json"
+        generated.parent.mkdir(parents=True, exist_ok=True)
+        generated.write_text('{"state":"before"}\n', encoding="utf-8")
+
+        plan = transaction.build_plan(repo, spec)
+
+        def fail_refresh(repo_arg):
+            target = repo_arg / "site/data/teams/test.json"
+            target.write_text('{"state":"after"}\n', encoding="utf-8")
+            extra = repo_arg / "site/data/teams/new.json"
+            extra.write_text('{"state":"new"}\n', encoding="utf-8")
+            raise transaction.TransactionError("synthetic refresh failure")
+
+        with (
+            patch.object(transaction, "_run_validation"),
+            patch.object(transaction, "_run_site_refresh", side_effect=fail_refresh),
+        ):
+            with self.assertRaises(transaction.TransactionError):
+                transaction.apply_transaction(
+                    repo,
+                    spec,
+                    plan["plan_sha256"],
+                    run_validation=True,
+                )
+
+        venues = read_rows(repo / "data/reference/venues.csv")
+        self.assertEqual(
+            [row["venue_id"] for row in venues],
+            ["VEN-000001", "VEN-000002"],
+        )
+        self.assertEqual(
+            generated.read_text(encoding="utf-8"),
+            '{"state":"before"}\n',
+        )
+        self.assertFalse((repo / "site/data/teams/new.json").exists())
+
+    def test_site_refresh_is_counted_inside_transaction(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+
+        generated = repo / "site/data/teams/test.json"
+        generated.parent.mkdir(parents=True, exist_ok=True)
+        generated.write_text('{"state":"before"}\n', encoding="utf-8")
+
+        plan = transaction.build_plan(repo, spec)
+
+        def refresh(repo_arg):
+            (repo_arg / "site/data/teams/test.json").write_text(
+                '{"state":"after"}\n',
+                encoding="utf-8",
+            )
+
+        with (
+            patch.object(transaction, "_run_validation"),
+            patch.object(transaction, "_run_site_refresh", side_effect=refresh),
+        ):
+            result = transaction.apply_transaction(
+                repo,
+                spec,
+                plan["plan_sha256"],
+                run_validation=True,
+            )
+
+        self.assertEqual(result["site_files_refreshed"], 1)
+        self.assertEqual(
+            generated.read_text(encoding="utf-8"),
+            '{"state":"after"}\n',
         )
 
     def test_expected_count_mismatch_blocks_plan(self):
