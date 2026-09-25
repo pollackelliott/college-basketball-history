@@ -75,13 +75,13 @@ processed as one tranche.
 **Stage 3A-0 is a strict local-only mechanical pass.** It performs zero public-web
 research and zero external source discovery. During 3A-0, use only the verified durable
 checkpoint plus already-present project evidence in the checked-out/current protected-main
-repository. Published reciprocal lookup means a structured local join against canonical
-games, game assertions, already-published school packages, or accepted reciprocal
-artifacts already present in the project. Do not browse institutional sites, media guides,
-newspapers, external PDFs, GitHub/code search for new sources, or opponent archives. Do
-not inspect opponent files one by one when a structured local join can answer the same
-question. An unmatched local candidate stays unresolved for 3A-1/2/3; it is not permission
-to open the web. Once the structured local join is exhausted, unresolved/contradictory rows
+repository. The Stage 3A-0 evidence harvest is deliberately narrow: perform one bounded bulk exact-game
+join against the target school's current canonical/assertion evidence. Do **not** enumerate,
+fetch, or inspect published opponent-school packages during 3A-0, even though those packages
+are local project evidence; targeted reciprocal/package use belongs to 3A-1/2/3. Do not
+browse institutional sites, media guides, newspapers, external PDFs, GitHub/code search for
+new sources, or opponent archives. An unmatched local candidate stays unresolved for
+3A-1/2/3; it is not permission to open another local discovery path or the web. Once the structured local join is exhausted, unresolved/contradictory rows
 become serialized outputs and Stage 3A-0 closes. If a public-web or external-source path is
 opened accidentally during 3A-0, do not use that evidence; audit write-through back to
 authorized local-only provenance and close/checkpoint mechanically.
@@ -114,14 +114,20 @@ historical enrichment debt rather than creating another owner-facing package.
 
 Regular-season `OPPONENT_HOME` exact-building reconstruction remains outside active
 source-school research unless usable accepted venue evidence is already present. For
-regular-season neutral venue research, **modern means 1996-97 through present** and that
-population retains the strong exact-venue expectation. For 1995-96 and earlier, use the
+regular-season neutral venue research, **modern means 1996-97 through present** and U.S.
+neutral sites retain the strong exact-venue expectation. For any neutral-site game outside
+the United States, supported city + country and, where applicable, state/province/territory/
+first-level administrative area is sufficient; accept an exact building when the same
+obvious source immediately supplies it, otherwise spend no further research time solely on
+the building. For 1995-96 and earlier, use the
 location-first historical standard: preserve supported event/city/state and accept an exact
 building when the same obvious evidence directly supplies it; once city/state is known, do
 not continue solely to recover the building. Surviving building blanks are nonblocking
 historical enrichment debt. This shortcut applies only to regular-season neutral rows.
-NCAA, NIT, conference-tournament, and all other postseason exact venues remain active Stage
-3B research obligations and must be researched to exhaustion. Do not infer H/A/N from
+NCAA, NIT, conference-tournament, and other postseason exact venues remain active Stage 3B
+research obligations for U.S. sites and must be researched to exhaustion. The
+outside-the-United-States neutral locality-sufficient exception applies to postseason exact
+building research as well. Do not infer H/A/N from
 geography or a venue from city/event custom/nearby editions.
 
 For confirmed conference-tournament games, consult the owner-authorized shared site reference
