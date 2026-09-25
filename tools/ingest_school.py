@@ -841,11 +841,10 @@ def registry_backed_geography_correction(
     canonical_city = canonical.get("site_city", "").strip()
     canonical_state = canonical.get("site_state", "").strip()
 
-    if location_pair_status(source_city, source_state) != "complete":
+    source_location_status = location_pair_status(source_city, source_state)
+    if source_location_status not in {"blank", "complete"}:
         return None
     if location_pair_status(registry_city, registry_state) != "complete":
-        return None
-    if (source_city, source_state) != (registry_city, registry_state):
         return None
     canonical_location_status = location_pair_status(canonical_city, canonical_state)
     if canonical_location_status not in {"partial", "complete"}:
