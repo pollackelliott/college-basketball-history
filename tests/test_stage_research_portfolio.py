@@ -166,8 +166,49 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         self.assertEqual(local_rows[0]["venue_key"], "rochester-war-memorial")
         self.assertEqual(
             mappings[0]["resolution"],
-            "REUSE_REGISTERED_NAME",
+            "REUSE_REGISTERED_ALIAS",
         )
+
+    def test_project_display_name_without_alias_still_stops(self):
+        globals_ = [
+            global_venue(
+                "VEN-000505",
+                "rochester-war-memorial",
+                "Rochester War Memorial",
+                "Rochester",
+                "NY",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Display-name-only match is not enough.",
+                    city="Rochester",
+                    state="NY",
+                ),
+                "venue_key": "different-local-key",
+                "canonical_name": "Rochester War Memorial",
+            }
+        ]
+        names = [
+            {
+                "venue_id": "VEN-000505",
+                "venue_name": "Rochester War Memorial",
+                "normalized_name": "rochesterwarmemorial",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            }
+        ]
+
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "possible physical venue match",
+        ):
+            rebase_venues("test-school", locals_, globals_, names)
 
     def test_registered_alias_still_stops_when_multiple_physical_ids_match(self):
         globals_ = [
