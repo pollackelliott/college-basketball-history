@@ -349,7 +349,7 @@ washington-state,2,0,7,1,0,NATIONAL_RUNNER_UP,1941,VERIFIED,WSU official history
 weber-state,22,10,16,0,0,SWEET_SIXTEEN,1972,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 west-florida,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 west-georgia,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-west-virginia,14,13,31,2,0,NATIONAL_RUNNER_UP,1959,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+west-virginia,14,13,31,2,0,NATIONAL_RUNNER_UP,1959,VERIFIED,"The canonical cross-check now independently matches 31 NCAA appearances, two Final Fours, zero NCAA championships, and 1959 NATIONAL_RUNNER_UP. Official WVU NCAA history identifies 1959 and 2010 as the two Final Four seasons, and official WVU conference-tournament history supports the tournament-title record. The 14 regular-season championship figure follows the project's owner-supplied full-conference-title convention rather than counting division-only finishes.",MATCH,Verified through onboarding plan a2ddbbd2d467.
 western-carolina,0,1,1,0,0,ROUND_OF_64,1996,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 western-illinois,2,1,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 western-kentucky,29,20,24,1,0,ELITE_EIGHT,1940,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
