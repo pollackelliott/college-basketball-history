@@ -110,7 +110,46 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         ):
             rebase_venues("test-school", locals_, globals_, [])
 
-    def test_research_base_reuse_hint_does_not_override_geography_conflict(self):
+    def test_research_base_reuse_hint_allows_same_state_locality_variant(self):
+        globals_ = [
+            global_venue(
+                "VEN-000084",
+                "hp-field-house",
+                "HP Field House",
+                "Orlando",
+                "FL",
+            )
+        ]
+        locals_ = [
+            {
+                **local_venue(
+                    "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE; "
+                    "historical/local label maps to research-base key=hp-field-house; "
+                    "research-base venue_id=VEN-000084.",
+                    city="Lake Buena Vista",
+                    state="FL",
+                ),
+                "venue_key": "hp-field-house",
+                "canonical_name": "HP Field House",
+            }
+        ]
+
+        local_rows, global_rows, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            globals_,
+            [],
+        )
+
+        self.assertEqual(local_rows[0]["venue_id"], "VEN-000084")
+        self.assertEqual(local_rows[0]["city"], "Lake Buena Vista")
+        self.assertEqual(global_rows[0]["city"], "Orlando")
+        self.assertEqual(
+            mappings[0]["resolution"],
+            "REUSE_RESEARCH_BASE_IDENTITY",
+        )
+
+    def test_research_base_reuse_hint_still_blocks_state_conflict(self):
         globals_ = [
             global_venue(
                 "VEN-000038",
@@ -125,12 +164,12 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
                 "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE; "
                 "historical/local label maps to research-base key=cfe-arena; "
                 "research-base venue_id=VEN-000038.",
-                city="Miami",
-                state="FL",
+                city="Atlanta",
+                state="GA",
             )
         ]
 
-        with self.assertRaisesRegex(WorkflowError, "geography conflicts"):
+        with self.assertRaisesRegex(WorkflowError, "state conflicts"):
             rebase_venues("test-school", locals_, globals_, [])
 
 
