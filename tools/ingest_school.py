@@ -845,8 +845,11 @@ def registry_backed_geography_correction(
         return None
     if location_pair_status(registry_city, registry_state) != "complete":
         return None
-    if (source_city, source_state) != (registry_city, registry_state):
-        return None
+
+    # A resolved physical venue owns canonical/public geography even when the
+    # source uses a broader event, mailing, or locality convention. Preserve
+    # the source city/state in its assertion; this helper only proposes the
+    # canonical registry-backed correction.
     canonical_location_status = location_pair_status(canonical_city, canonical_state)
     if canonical_location_status not in {"partial", "complete"}:
         return None
