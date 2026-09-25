@@ -30,6 +30,8 @@ class GlobalVenueReferenceTests(unittest.TestCase):
         self.assertGreaterEqual(len(self.venues_by_id), 237)
         self.assertNotIn("VEN-000075", self.venues_by_id)
         self.assertNotIn("VEN-000207", self.venues_by_id)
+        self.assertNotIn("VEN-000407", self.venues_by_id)
+        self.assertNotIn("VEN-000410", self.venues_by_id)
         self.assertEqual(
             self.venues_by_id["VEN-000076"]["display_name"],
             "Greensboro Coliseum",

@@ -22,6 +22,7 @@ def global_venue(
     state: str,
     *,
     notes: str = "",
+    identity_status: str = "TEST",
 ):
     return {
         "venue_id": venue_id,
@@ -32,7 +33,7 @@ def global_venue(
         "opened": "",
         "closed": "",
         "date_precision": "",
-        "identity_status": "TEST",
+        "identity_status": identity_status,
         "source_basis": "test",
         "notes": notes,
     }
@@ -384,6 +385,110 @@ class Stage1VenueInventoryTests(unittest.TestCase):
             report["classification_counts"]["STOP_AMBIGUOUS"],
             1,
         )
+
+
+    def test_exact_key_researched_split_ignores_generic_name_overlap(self):
+        local = local_venue(
+            "arena-1968",
+            "Shared Arena IV",
+            aliases="Shared Arena",
+            city="New York",
+            state="NY",
+        )
+        globals_ = [
+            global_venue(
+                "VEN-000100",
+                "arena-1925",
+                "Shared Arena",
+                "New York",
+                "NY",
+                identity_status="RESEARCHED_SPLIT",
+            ),
+            global_venue(
+                "VEN-000101",
+                "arena-1968",
+                "Shared Arena",
+                "New York",
+                "NY",
+                identity_status="RESEARCHED_SPLIT",
+            ),
+        ]
+        names = [
+            venue_name("VEN-000100", "Shared Arena", "PROJECT_DISPLAY"),
+            venue_name("VEN-000101", "Shared Arena", "PROJECT_DISPLAY"),
+            venue_name("VEN-000101", "Shared Arena IV", "HISTORICAL_OR_ALIAS"),
+        ]
+
+        report = venue_reconciliation_inventory([local], globals_, names)
+
+        self.assertEqual(report["blocker_count"], 0)
+        row = report["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["target_venue_id"], "VEN-000101")
+        self.assertIn("INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP", row["issues"])
+
+    def test_exact_key_non_split_duplicate_name_remains_blocked(self):
+        local = local_venue(
+            "memorial-coliseum-kentucky",
+            "Memorial Coliseum",
+            city="Lexington",
+            state="KY",
+        )
+        globals_ = [
+            global_venue(
+                "VEN-000129",
+                "memorial-coliseum-kentucky",
+                "Memorial Coliseum",
+                "Lexington",
+                "KY",
+            ),
+            global_venue(
+                "VEN-000407",
+                "memorial-coliseum-lexington",
+                "Memorial Coliseum (Lexington)",
+                "Lexington",
+                "KY",
+            ),
+        ]
+        names = [
+            venue_name("VEN-000129", "Memorial Coliseum", "PROJECT_DISPLAY"),
+            venue_name("VEN-000407", "Memorial Coliseum (Lexington)", "PROJECT_DISPLAY"),
+            venue_name("VEN-000407", "Memorial Coliseum", "HISTORICAL_OR_ALIAS"),
+        ]
+
+        report = venue_reconciliation_inventory([local], globals_, names)
+
+        self.assertEqual(report["blocker_count"], 1)
+        self.assertEqual(
+            report["blockers"][0]["issues"],
+            ["CONFLICTING_REGISTERED_NAME_IDENTITIES"],
+        )
+
+    def test_us_virgin_islands_jurisdiction_normalizes_to_vi(self):
+        local = local_venue(
+            "sports-and-fitness-center",
+            "Sports and Fitness Center",
+            city="St. Thomas",
+            state="U.S. Virgin Islands",
+        )
+        global_row = global_venue(
+            "VEN-000191",
+            "sports-and-fitness-center",
+            "Sports and Fitness Center",
+            "St. Thomas",
+            "VI",
+        )
+        report = venue_reconciliation_inventory(
+            [local],
+            [global_row],
+            [venue_name("VEN-000191", "Sports and Fitness Center", "PROJECT_DISPLAY")],
+        )
+
+        self.assertEqual(report["blocker_count"], 0)
+        row = report["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["target_venue_id"], "VEN-000191")
+        self.assertIn("CANONICAL_GEOGRAPHY_NORMALIZATION", row["issues"])
 
 
 class Stage1ProgramInventoryTests(unittest.TestCase):
