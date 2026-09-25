@@ -123,10 +123,11 @@ class CanonicalOnlySiteReviewTests(unittest.TestCase):
         self.assertIn("Arena A", decision["relevant_evidence"])
         self.assertIn("Arena B", decision["relevant_evidence"])
 
-    def test_unique_chronology_remains_automatic_not_owner_review(self):
+    def test_unique_open_ended_chronology_remains_automatic_not_owner_review(self):
         game = canonical_game()
         assertions = {"CBBG-1": [reciprocal_assertion()]}
         rel = relationship("VEN-1", "arena-a", "Arena A")
+        rel["relationship_end"] = "present"
         reg = registry("VEN-1", "arena-a", "Arena A")
 
         decisions = _canonical_site_patch_review_decisions(
