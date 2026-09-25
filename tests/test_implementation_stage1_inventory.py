@@ -197,6 +197,44 @@ class Stage1VenueInventoryTests(unittest.TestCase):
             "SAFE_REPRESENTATION_REUSE",
         )
 
+    def test_registered_shared_reference_note_closes_research_deferred_exact_key(self):
+        local = local_venue(
+            "curb-event-center",
+            "Curb Event Center",
+            city="Nashville",
+            state="TN",
+            notes=(
+                "Historical identity: RESOLVED. "
+                "Global registration: PENDING_CURRENT_MAIN_REBASE."
+            ),
+        )
+        registered = global_venue(
+            "VEN-000688",
+            "curb-event-center",
+            "Curb Event Center",
+            "Nashville",
+            "TN",
+            notes=(
+                "Registered during shared-reference reconciliation for a serialized "
+                "Implementation Stage 1 maintenance batch."
+            ),
+        )
+        report = venue_reconciliation_inventory(
+            [local],
+            [registered],
+            [venue_name("VEN-000688", "Curb Event Center", "PROJECT_DISPLAY")],
+        )
+
+        self.assertEqual(report["blocker_count"], 0)
+        self.assertEqual(
+            report["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_REUSE",
+        )
+        self.assertEqual(
+            report["rows"][0]["resolution"],
+            "REUSE_EXACT_KEY",
+        )
+
     def test_conflicting_registered_name_identity_is_collected_not_raised(self):
         local = local_venue(
             "rocket-arena",

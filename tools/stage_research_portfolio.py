@@ -685,7 +685,13 @@ def venue_reconciliation_inventory(
             elif (
                 pending_shared
                 and reason == "REUSE_EXACT_KEY"
-                and "retired during shared-reference reconciliation" not in chosen_notes
+                and not any(
+                    marker in chosen_notes
+                    for marker in (
+                        "retired during shared-reference reconciliation",
+                        "registered during shared-reference reconciliation",
+                    )
+                )
             ):
                 item["classification"] = "SHARED_GLOBAL_MAINTENANCE"
                 item["issues"].append(
