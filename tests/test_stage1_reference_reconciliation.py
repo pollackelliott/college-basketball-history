@@ -129,6 +129,8 @@ class Stage1ReferenceReconciliationTests(unittest.TestCase):
         self.assertEqual(replacement[1]["start_season"], "1910-1911")
         self.assertEqual(len(registrations), 1)
         self.assertEqual(meta["replacement_row_count"], 2)
+        self.assertEqual(meta["replacement_history"], replacement)
+        self.assertEqual(meta["registrations"], registrations)
 
         global_rows = [
             {
