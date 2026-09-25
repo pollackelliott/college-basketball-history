@@ -260,6 +260,32 @@ class VenueIdentityTransactionTests(unittest.TestCase):
             )
         )
 
+    def test_site_refresh_applies_generated_data_before_freshness_check(self):
+        calls = []
+
+        class Result:
+            returncode = 0
+
+        def fake_run(command, cwd):
+            calls.append((command, cwd))
+            return Result()
+
+        repo = Path("/tmp/venue-transaction-regression")
+
+        with patch.object(transaction.subprocess, "run", side_effect=fake_run):
+            transaction._run_site_refresh(repo)
+
+        self.assertEqual(
+            calls[0][0],
+            [sys.executable, "tools/build_site_data.py", "--apply"],
+        )
+        self.assertEqual(
+            calls[1][0],
+            [sys.executable, "tools/check_site_data_freshness.py"],
+        )
+        self.assertEqual(calls[0][1], repo)
+        self.assertEqual(calls[1][1], repo)
+
     def test_site_refresh_failure_rolls_back_reference_and_generated_state(self):
         temporary, repo, spec = self.make_repo()
         self.addCleanup(temporary.cleanup)
