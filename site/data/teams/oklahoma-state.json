@@ -5450,7 +5450,7 @@
       "opponent_key": "virginia",
       "opponent_name": "Virginia",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -42487,7 +42487,7 @@
       "opponent_key": "virginia",
       "opponent_name": "Virginia",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 72,
       "opponent_score": 69,
       "score_known": true,
