@@ -1781,12 +1781,29 @@ def _apply_canonical_patch(
 ) -> int:
     venue_key_requested = "venue_key" in patch
     venue_id_requested = "venue_id" in patch
-    if venue_key_requested != venue_id_requested:
-        raise WorkflowError(
-            "canonical venue identity patch must provide venue_key and venue_id together"
-        )
 
     if venue_key_requested:
+        proposed_key = str(patch.get("venue_key", "") or "").strip()
+
+        # Backward-compatible clearing shorthand: an explicit blank venue_key
+        # retires both halves of the canonical physical venue identity.
+        if not proposed_key and not venue_id_requested:
+            canonical["venue_key"] = ""
+            canonical["venue_id"] = ""
+            patch = {field: value for field, value in patch.items() if field != "venue_key"}
+            venue_key_requested = False
+        elif not venue_id_requested:
+            raise WorkflowError(
+                "nonblank canonical venue identity patch must provide venue_key "
+                "and venue_id together"
+            )
+
+    if venue_id_requested and not venue_key_requested:
+        raise WorkflowError(
+            "canonical venue_id patch requires venue_key in the same payload"
+        )
+
+    if venue_key_requested and venue_id_requested:
         proposed_key = str(patch.get("venue_key", "") or "").strip()
         proposed_id = str(patch.get("venue_id", "") or "").strip()
         if bool(proposed_key) != bool(proposed_id):
@@ -2245,14 +2262,7 @@ def apply_reconciliation_decisions(
 
     target_venue_metadata: dict[str, dict[str, str]] | None = None
     venue_names: dict[str, str] | None = None
-    global_venue_pairs = {
-        (
-            row.get("venue_id", "").strip(),
-            row.get("venue_key", "").strip(),
-        )
-        for row in read_csv(repo / "data/reference/venues.csv")
-        if row.get("venue_id", "").strip() and row.get("venue_key", "").strip()
-    }
+    global_venue_pairs: set[tuple[str, str]] | None = None
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
@@ -2328,9 +2338,24 @@ def apply_reconciliation_decisions(
         else:
             raise WorkflowError(f"{item['decision_id']}: unsupported discrepancy action {decision}")
 
+        canonical_patch = item.get("canonical_patch", {})
+        if (
+            str(canonical_patch.get("venue_key", "") or "").strip()
+            or str(canonical_patch.get("venue_id", "") or "").strip()
+        ):
+            if global_venue_pairs is None:
+                global_venue_pairs = {
+                    (
+                        row.get("venue_id", "").strip(),
+                        row.get("venue_key", "").strip(),
+                    )
+                    for row in read_csv(repo / "data/reference/venues.csv")
+                    if row.get("venue_id", "").strip()
+                    and row.get("venue_key", "").strip()
+                }
         counts["registry_fallbacks_retired"] += _apply_canonical_patch(
             canonical,
-            item.get("canonical_patch", {}),
+            canonical_patch,
             valid_venue_pairs=global_venue_pairs,
         )
         for field, value in item.get("source_patch", {}).items():
