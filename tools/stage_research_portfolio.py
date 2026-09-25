@@ -299,6 +299,75 @@ def next_venue_id(used: set[str]) -> str:
             return candidate
 
 
+US_STATE_ABBREVIATIONS = {
+    "ALABAMA": "AL",
+    "ALASKA": "AK",
+    "ARIZONA": "AZ",
+    "ARKANSAS": "AR",
+    "CALIFORNIA": "CA",
+    "COLORADO": "CO",
+    "CONNECTICUT": "CT",
+    "DELAWARE": "DE",
+    "FLORIDA": "FL",
+    "GEORGIA": "GA",
+    "HAWAII": "HI",
+    "IDAHO": "ID",
+    "ILLINOIS": "IL",
+    "INDIANA": "IN",
+    "IOWA": "IA",
+    "KANSAS": "KS",
+    "KENTUCKY": "KY",
+    "LOUISIANA": "LA",
+    "MAINE": "ME",
+    "MARYLAND": "MD",
+    "MASSACHUSETTS": "MA",
+    "MICHIGAN": "MI",
+    "MINNESOTA": "MN",
+    "MISSISSIPPI": "MS",
+    "MISSOURI": "MO",
+    "MONTANA": "MT",
+    "NEBRASKA": "NE",
+    "NEVADA": "NV",
+    "NEW HAMPSHIRE": "NH",
+    "NEW JERSEY": "NJ",
+    "NEW MEXICO": "NM",
+    "NEW YORK": "NY",
+    "NORTH CAROLINA": "NC",
+    "NORTH DAKOTA": "ND",
+    "OHIO": "OH",
+    "OKLAHOMA": "OK",
+    "OREGON": "OR",
+    "PENNSYLVANIA": "PA",
+    "RHODE ISLAND": "RI",
+    "SOUTH CAROLINA": "SC",
+    "SOUTH DAKOTA": "SD",
+    "TENNESSEE": "TN",
+    "TEXAS": "TX",
+    "UTAH": "UT",
+    "VERMONT": "VT",
+    "VIRGINIA": "VA",
+    "WASHINGTON": "WA",
+    "WEST VIRGINIA": "WV",
+    "WISCONSIN": "WI",
+    "WYOMING": "WY",
+    "DISTRICT OF COLUMBIA": "DC",
+}
+
+
+def normalize_jurisdiction(value: str) -> str:
+    normalized = (value or "").strip().upper()
+    return US_STATE_ABBREVIATIONS.get(normalized, normalized)
+
+
+def jurisdiction_compatible(
+    local: dict[str, str],
+    global_row: dict[str, str],
+) -> bool:
+    lstate = normalize_jurisdiction(local.get("state", ""))
+    gstate = normalize_jurisdiction(global_row.get("state", ""))
+    return not (lstate and gstate and lstate != gstate)
+
+
 def geography_compatible(
     local: dict[str, str],
     global_row: dict[str, str],
@@ -400,11 +469,9 @@ def rebase_venues(
                     f"hinted_id={hinted_id!r}"
                 )
 
-            local_state = local.get("state", "").strip().upper()
-            global_state = hinted_by_id.get("state", "").strip().upper()
-            if local_state and global_state and local_state != global_state:
+            if not jurisdiction_compatible(local, hinted_by_id):
                 raise WorkflowError(
-                    f"research-base venue reuse hint state conflicts for {key!r}: "
+                    f"research-base venue reuse hint jurisdiction conflicts for {key!r}: "
                     f"local={local.get('city','')},{local.get('state','')} "
                     f"global={hinted_by_id.get('city','')},"
                     f"{hinted_by_id.get('state','')}"
@@ -419,9 +486,9 @@ def rebase_venues(
 
         elif key and key in global_by_key:
             candidate = global_by_key[key]
-            if not geography_compatible(local, candidate):
+            if not jurisdiction_compatible(local, candidate):
                 raise WorkflowError(
-                    f"venue key {key!r} exists globally but geography conflicts: "
+                    f"venue key {key!r} exists globally but jurisdiction conflicts: "
                     f"local={local.get('city','')},{local.get('state','')} "
                     f"global={candidate.get('city','')},{candidate.get('state','')}"
                 )
