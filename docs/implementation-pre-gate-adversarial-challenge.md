@@ -13,6 +13,20 @@ The Stage 2 standard is **research to recommendation, not necessarily to resolut
 
 Before researching or escalating a recurring venue-identity/locality question, apply `docs/recurring-venue-identity-conventions.md`. Stable project conventions such as Madison Square Garden physical-building splits and Paradise-vs-Las-Vegas venue geography should be reused mechanically rather than re-litigated for each school unless game-specific evidence creates a genuine contradiction.
 
+### Durable capability census before serial repair
+
+The Stage-2 coordinator writes:
+
+`.onboarding/<school>/implementation-stage2-capability-census.json`
+
+on every authoritative Stage-2 run. This is the durable population-level discovery record for the **currently detectable** representation/capability surface. A blocker-free preflight therefore reports `CAPABILITY_CENSUS_READY`, not `PREFLIGHT_READY`.
+
+The census is not a promise that no later integrated-state defect can exist. It is an enforcement mechanism against the avoidable pattern:
+
+`first defect -> tooling PR -> merge -> rerun -> second already-detectable defect -> tooling PR`.
+
+When any census/rehearsal finding is classified as a generic permanent-tool defect, finish classifying the complete currently detected defect population before merging the first repair. Define one consolidated repair scope and batch same-family capability fixes where technically coherent. Verification reruns confirm the repair; they are not the intended discovery mechanism.
+
 ### Comprehensive deterministic sweep before serial repair
 
 Before beginning a serial repair loop, perform one comprehensive deterministic candidate sweep across the staged package and predicted integrated state using the current repository tooling and evidence already available to Implementation. Inventory together, where presently detectable:
@@ -81,7 +95,7 @@ This is a **proposal rehearsal**, not owner approval and not cryptographic seali
 
 Classify rehearsal findings as follows:
 
-- **mechanical/deterministic failure:** inspect the repository-owned durable diagnostic first, repair it before Gate 1, and rerun the Stage-2 coordinator; if the defect is in generic permanent tooling, add a regression test for the exact exposed topology before treating the repair as complete;
+- **mechanical/deterministic failure:** inspect the repository-owned durable diagnostic and capability census first; classify the complete currently detected failure population before beginning a generic tooling campaign; if the defect is in generic permanent tooling, define one consolidated repair scope, add regression coverage for every exposed topology in that scope, repair it before Gate 1, and rerun the Stage-2 coordinator;
 - **genuine historical conflict:** perform bounded investigation sufficient for a supported recommendation, then include the conflict in Gate 1 with the competing evidence and residual uncertainty;
 - **tool/lifecycle misuse or wrapper defect:** correct the execution path rather than treating the false failure as basketball evidence. Do not replace a failed permanent coordinator with a custom worktree, clone, arithmetic assertion, or giant shell wrapper.
 
@@ -97,6 +111,7 @@ Do not declare `OWNER GATE 1 READY` until:
 - the predicted post-reconciliation site-completeness result has no unexplained blocker;
 - every material historical conflict has been investigated to a responsible recommendation or explicitly identified as requiring a narrow owner-directed research return;
 - the exact proposed recommendation map has passed the full disposable proposal rehearsal, except that genuine historical choices surfaced by that rehearsal are represented explicitly in the packet rather than silently resolved;
+- the durable capability census records `PASS`;
 - all remaining items truly require historical owner judgment.
 
 The intended normal path is:
