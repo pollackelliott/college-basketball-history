@@ -400,14 +400,20 @@ def rebase_venues(
                     f"hinted_id={hinted_id!r}"
                 )
 
-            if not geography_compatible(local, hinted_by_id):
+            local_state = local.get("state", "").strip().upper()
+            global_state = hinted_by_id.get("state", "").strip().upper()
+            if local_state and global_state and local_state != global_state:
                 raise WorkflowError(
-                    f"research-base venue reuse hint geography conflicts for {key!r}: "
+                    f"research-base venue reuse hint state conflicts for {key!r}: "
                     f"local={local.get('city','')},{local.get('state','')} "
                     f"global={hinted_by_id.get('city','')},"
                     f"{hinted_by_id.get('state','')}"
                 )
 
+            # The global venue registry owns canonical physical-venue geography.
+            # Frozen school source assertions keep their own game-level city/state.
+            # Therefore an exact key+VEN-ID reuse hint may survive a same-state
+            # locality-label difference without rewriting frozen historical evidence.
             chosen = hinted_by_id
             reason = "REUSE_RESEARCH_BASE_IDENTITY"
 
