@@ -773,6 +773,25 @@ def _planned_ncaa_safety_errors(
     return canonical_ncaa_errors([candidate], global_venues_by_id)
 
 
+def _home_relationship_boundary(value: str, *, end: bool):
+    value = chronology_clean(value)
+    if end and value.casefold() in {"present", "current"}:
+        return None
+    return parse_boundary(value, end=end)
+
+
+def _home_relationship_covers(rel: dict[str, str], game_day) -> bool:
+    start = _home_relationship_boundary(rel.get("relationship_start", ""), end=False)
+    end = _home_relationship_boundary(rel.get("relationship_end", ""), end=True)
+    if start is None and end is None:
+        return False
+    if start is not None and game_day < start:
+        return False
+    if end is not None and game_day > end:
+        return False
+    return True
+
+
 def _full_season_home_relationship_covered(
     rel: dict[str, str],
     season_label: str,
@@ -781,8 +800,8 @@ def _full_season_home_relationship_covered(
         return False
     season_start = parse_boundary(season_label, end=False)
     season_end = parse_boundary(season_label, end=True)
-    rel_start = parse_boundary(rel.get("relationship_start", ""), end=False)
-    rel_end = parse_boundary(rel.get("relationship_end", ""), end=True)
+    rel_start = _home_relationship_boundary(rel.get("relationship_start", ""), end=False)
+    rel_end = _home_relationship_boundary(rel.get("relationship_end", ""), end=True)
     if season_start is None or season_end is None:
         return False
     if rel_start is None and rel_end is None:
@@ -810,7 +829,7 @@ def _home_relationship_candidates(
     game_day = parse_game_date(game.get("game_date", ""))
     if game_day is not None:
         return _dedupe_relationships(
-            [rel for rel in relationships if relationship_covers(rel, game_day)]
+            [rel for rel in relationships if _home_relationship_covers(rel, game_day)]
         )
     season_label = chronology_clean(game.get("season_label"))
     return _dedupe_relationships(
