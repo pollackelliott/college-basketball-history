@@ -150,7 +150,7 @@ virginia,Gettysburg,gettysburg,Gettysburg,No,4,1948-1949,1953-1954,RESOLVED,HIST
 virginia,Gonzaga,gonzaga,Gonzaga,Yes,1,2006-2007,2006-2007,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,Virginia media guide all-time series table category=D1 canonical=Gonzaga
 virginia,Gonzaga (10),gonzaga,Gonzaga,Yes,1,2005-2006,2005-2006,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,Virginia media guide all-time series table category=D1 canonical=Gonzaga
 virginia,Green Bay,green-bay,Green Bay,Yes,2,2011-2012,2012-2013,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,Virginia media guide all-time series table category=D1 canonical=Green Bay
-virginia,Guilford,guilford,Guilford,No,3,1910-1911,1921-1922,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,Virginia media guide all-time series table category=NON_D1_COLLEGE canonical=Guilford
+virginia,Guilford,guilford,Guilford College,No,3,1910-1911,1921-1922,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,Virginia media guide all-time series table category=NON_D1_COLLEGE canonical=Guilford
 virginia,Hampden-Sydney,hampden-sydney,Hampden-Sydney,No,30,1909-1910,1975-1976,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,Virginia media guide all-time series table category=NON_D1_COLLEGE canonical=Hampden-Sydney
 virginia,Hampton,hampton,Hampton,Yes,7,1998-1999,2025-2026,RESOLVED,CURRENT_D1_REGISTRY_OR_HISTORICAL_ALIAS,,Virginia media guide all-time series table category=D1 canonical=Hampton
 virginia,Hampton YMCA,hampton-ymca,Hampton YMCA,No,1,1909-1910,1909-1910,RESOLVED,HISTORICAL_NON_D1_SOURCE_IDENTITY_RETAINED,,Virginia media guide all-time series table category=NON_COLLEGIATE canonical=Hampton YMCA
