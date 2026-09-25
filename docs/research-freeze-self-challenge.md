@@ -155,9 +155,12 @@ Stage 3A neutral debt must be challenged under the era-specific standard in
 For regular-season neutral rows:
 
 - first verify that an exact same-game canonical/accepted reciprocal lookup was performed;
-- **1996-97 through present:** apply a strong exact-venue expectation and challenge
-  tournament/event, host, opponent-institutional, reciprocal, and contemporary evidence
-  before accepting unresolved debt;
+- **1996-97 through present:** apply a strong exact-venue expectation for U.S. neutral sites
+  and challenge tournament/event, host, opponent-institutional, reciprocal, and contemporary
+  evidence before accepting unresolved debt; for neutral sites outside the United States,
+  supported city + country and, where applicable, state/province/territory/first-level
+  administrative area is sufficient, and exact-building research stops unless the same
+  obvious source immediately supplies the building;
 - **1995-96 and earlier:** apply the location-first historical standard. Use accepted
   project evidence plus the obvious systematic event/host/participant opportunity to
   establish event/city/state where possible; accept an exact building when that same
@@ -174,9 +177,13 @@ For regular-season neutral rows:
 For postseason:
 
 - the historical regular-season neutral shortcut does not apply;
-- NCAA physical venue + city + state remains mandatory and non-waivable;
-- NIT, conference-tournament, and all other postseason exact venues must be researched to
-  exhaustion, not merely locality-accounted;
+- NCAA physical venue + city + state remains mandatory and non-waivable for U.S. sites;
+- NIT, conference-tournament, and all other U.S. postseason exact venues must be researched
+  to exhaustion, not merely locality-accounted;
+- for a neutral postseason site outside the United States, supported city + country and,
+  where applicable, state/province/territory/first-level administrative area is sufficient;
+  accept an exact building only when the same obvious source immediately supplies it and do
+  not open another source path solely for the building;
 - published-vs-published neutral gaps require heightened reciprocal review;
 - a genuinely unrecoverable non-NCAA postseason exact venue may survive only with explicit
   documentation of the official tournament/conference/host/participant and targeted

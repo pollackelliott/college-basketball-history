@@ -23,7 +23,8 @@ After the obvious authoritative, institutional, reciprocal, archival, facility, 
 - canonical opponent identity or prevention of a false merge/split;
 - required H/A/N classification;
 - a required physical venue/site fact or publication-safety determination;
-- NCAA physical venue + city/state completeness;
+- NCAA physical venue + city/state completeness for U.S. sites, or the owner-approved
+  locality-sufficient standard for neutral NCAA sites outside the United States;
 - a genuine current-program identity question;
 - another explicit repository acceptance blocker.
 
@@ -57,9 +58,11 @@ but otherwise leave the opponent's home chronology to that opponent's Research l
 
 Before external searching, perform the exact-game canonical/accepted reciprocal lookup.
 
-For **1996-97 through present**, apply a strong exact-venue expectation. Modern neutral
-debt requires a deliberate challenge of the obvious tournament/event, host, opponent,
-reciprocal, and contemporary source classes before it may survive.
+For **1996-97 through present**, apply a strong exact-venue expectation **for U.S. neutral
+sites**. For a neutral site outside the United States, supported city + country and, where
+applicable, state/province/territory/first-level administrative area is sufficient. Accept
+an exact building when the same obvious source immediately supplies it; otherwise stop
+building research rather than opening another source path.
 
 For **1995-96 and earlier** regular-season neutral rows, use the location-first historical
 standard. Work accepted project evidence plus the obvious systematic event/host/participant
@@ -126,11 +129,16 @@ and partial overlays do not constitute durable convergence.
 
 ## 4. Stage 3B convergence
 
-Stage 3B uses a **strict postseason exact-venue standard**. The regular-season historical
-neutral shortcut does not apply.
+Stage 3B uses a **strict postseason exact-venue standard for U.S. sites**. The regular-season
+historical neutral shortcut does not apply, but the owner-approved outside-the-United-States
+neutral exception does.
 
-For NCAA, NIT, conference-tournament, and every other postseason row, exact physical venue
-plus city/state remains an active research obligation. Research the postseason population
+For NCAA, NIT, conference-tournament, and every other U.S. postseason row, exact physical
+venue plus city/state remains an active research obligation. For a neutral postseason site
+outside the United States, supported city + country and, where applicable, first-level
+administrative area is sufficient when the exact building is not immediately supplied by
+the same obvious authoritative source. Do not open another research path solely for the
+building. Research the postseason population
 to exhaustion using official tournament/conference/host/participant sources, accepted
 project/reciprocal evidence, and targeted archival material when needed.
 
@@ -141,7 +149,9 @@ research. A missing, `PARTIAL`, `UNCERTAIN`, `UNRESOLVED`, campus-round, boundar
 or materially contradicted entry is not a stopping condition and remains subject to the normal
 postseason research-to-exhaustion standard.
 
-NCAA physical venue + city + state remains mandatory and non-waivable.
+NCAA physical venue + city + state remains mandatory and non-waivable for U.S. sites.
+For a neutral NCAA site outside the United States, the locality-sufficient exception above
+controls the exact-building field.
 
 For NIT, conference-tournament, and other postseason games, do not stop merely because
 city/state is known. Continue exact-building research until the reasonable authoritative
@@ -213,7 +223,9 @@ The following remain unchanged:
 - unsupported certainty is worse than a researched unknown;
 - H/A/N is never inferred from geography;
 - physical venue identity remains independent from game-site classification;
-- NCAA physical venue + city/state completeness remains mandatory;
+- NCAA physical venue + city/state completeness remains mandatory for U.S. sites; the
+  owner-approved outside-the-United-States neutral locality exception controls non-U.S.
+  exact-building debt;
 - ambiguous physical venue identities must be zero at freeze;
 - known current-program opponent key splits and ambiguous current-program matches must be zero at freeze;
 - HOME publication blockers and unaccounted material site gaps must be zero at freeze;

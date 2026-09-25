@@ -55,17 +55,26 @@ For neutral games between two published programs, both schools' research/evidenc
 available. Missing neutral geography or venue therefore receives heightened scrutiny and
 known same-game evidence must be propagated.
 
-Postseason uses a stricter standard than historical regular-season neutrals. NCAA
-Tournament physical venue + city/state remains mandatory and non-waivable. NIT,
-conference-tournament, and every other postseason exact venue must be researched to
-exhaustion; city/state alone is not sufficient to invoke the historical regular-season
-neutral shortcut.
+**Outside-the-United-States exception:** for any neutral-site game with supported locality
+outside the United States, city + country and, where applicable, state/province/territory/
+first-level administrative area is publication-sufficient. Preserve an exact building when
+already known or immediately supplied by the same obvious authoritative source; otherwise,
+do not spend additional research time solely to recover the building. The exact-building
+blank must remain explicitly research-accounted rather than silently missing.
+
+Postseason uses a stricter standard than historical regular-season neutrals **inside the
+United States**. NCAA Tournament physical venue + city/state remains mandatory for U.S.
+sites. NIT, conference-tournament, and every other U.S. postseason exact venue must be
+researched to exhaustion. For a postseason neutral site outside the United States, the
+outside-the-United-States exception above controls: supported city + country/first-level
+administrative area is sufficient when an exact building is not immediately supplied by
+the same obvious source.
 
 ## Priority order for retroactive remediation
 
 1. Published-program home venue/location completeness, with only rigorously documented historical-unrecoverable venue exceptions remaining.
 2. Reciprocal propagation for away games whose home opponent is already published.
-3. Postseason exact-venue + city/state completion, with NCAA mandatory and NIT/conference-tournament/other postseason researched to exhaustion.
+3. Postseason site completion under the geographic rule above: exact venue + city/state for U.S. sites; locality/country sufficient for neutral sites outside the United States unless the exact building is immediately available.
 4. Modern (1996-97+) regular-season neutral venue completion.
 5. Historical (1995-96 and earlier) regular-season neutral event/city/state enrichment; exact building is opportunistic rather than blocking.
 6. Remaining H/A/N and identity/reference cleanup.

@@ -102,7 +102,20 @@ If the obvious systematic evidence supplies an exact building, accept it. If it 
 
 Exact-building recovery for this historical regular-season neutral population is desirable enrichment, not a publication blocker. Existing accepted exact venues remain accepted and must not be removed, reopened, or downgraded merely because they fall on the historical side of the cutoff.
 
-This historical shortcut applies **only to regular-season neutral rows**. It does not apply to NCAA, NIT, conference-tournament, or any other postseason game. Postseason exact-venue research remains a separate Stage 3B obligation.
+### 2.4 Neutral games outside the United States — locality is sufficient
+
+For any neutral-site game whose supported location is **outside the United States**, exact-building research is opportunistic only.
+
+Once the row has a defensible city plus country and, where applicable, state/province/territory/first-level administrative area:
+
+- accept an exact venue if it is already present in accepted project evidence or is immediately supplied by the same obvious authoritative source;
+- otherwise stop exact-building research for that row;
+- do not open an additional source path solely to recover the building;
+- preserve the supported locality/country and mark the exact-building blank as explicitly researched/accounted rather than unresolved active debt.
+
+This owner directive applies regardless of era and overrides the otherwise stronger modern-neutral exact-venue expectation for the exact-building field.
+
+This historical shortcut applies **only to regular-season neutral rows**. It does not apply to NCAA, NIT, conference-tournament, or any other postseason game. Postseason exact-venue research remains a separate Stage 3B obligation, subject to the same outside-the-United-States locality-sufficient exception defined above.
 
 ## 3. Canonical/shared-project first pass for neutral games
 
@@ -165,8 +178,8 @@ Before broad historical research:
 3. derive the whole-population H/A/N work census;
 4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
 5. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
-6. perform one structured exact-game join against already-present local canonical,
-   assertion, published-package, and accepted reciprocal evidence;
+6. perform one structured exact-game join against already-present canonical and assertion
+   evidence for the target school using a bounded bulk read;
 7. write through only unambiguous accepted same-game evidence;
 8. preserve unmatched/contradictory candidates without forcing or researching them;
 9. serialize the exact H/A/N, HOME, and NEUTRAL residual queues.
@@ -182,9 +195,13 @@ During Stage 3A-0, do **not**:
 - inspect opponent packages one by one when the same population can be joined
   mechanically from local files.
 
-A whole-project reciprocal pass should be a structured local file/data operation. If
-the project does not already contain enough evidence to resolve a candidate, leave that
-candidate for the appropriate later Stage 3A research substage.
+Stage 3A-0 does **not** enumerate, fetch, or inspect published opponent school packages,
+even though those packages are local project evidence. Targeted reciprocal/published-package
+use belongs to Stage 3A-1/2/3, where source-family scope is explicit and bounded.
+
+If the canonical/assertion bulk join does not resolve a candidate, leave that candidate for
+the appropriate later Stage 3A research substage. Stage 3A-0 succeeds by producing exact
+mechanical populations and queues, not by minimizing the residual counts.
 
 Do not begin broad HOME chronology research, broad NEUTRAL venue research, or row-by-row
 H/A/N adjudication before Stage 3A-0 is durably closed.
