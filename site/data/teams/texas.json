@@ -5204,7 +5204,7 @@
       "opponent_key": "ucf",
       "opponent_name": "UCF",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
@@ -81460,12 +81460,12 @@
     {
       "canonical_game_id": "CBBG-0061282",
       "season_label": "2023-2024",
-      "game_date": "2024-01-16",
+      "game_date": "2024-01-17",
       "date_precision": "EXACT",
       "opponent_key": "ucf",
       "opponent_name": "UCF",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 71,
       "opponent_score": 77,
       "score_known": true,
