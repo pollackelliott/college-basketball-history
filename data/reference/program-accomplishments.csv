@@ -49,7 +49,7 @@ charleston-southern,4,4,1,0,0,ROUND_OF_64,1997,OWNER_BASELINE_UNVERIFIED,Owner-s
 charlotte,5,5,11,1,0,ELITE_EIGHT,1977,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 chattanooga,15,12,12,0,0,SWEET_SIXTEEN,1997,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,Owner explicitly ruled Final Fours and national championships as zero.
 chicago-state,0,1,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-cincinnati,29,12,33,6,2,NATIONAL_CHAMPION,1962,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+cincinnati,29,12,33,6,2,NATIONAL_CHAMPION,1962,VERIFIED,"Cincinnati's 2025-26 institutional history verifies 29 conference regular-season championships, 12 conference tournament championships, 33 NCAA appearances, 6 Final Fours, 2 national championships, best finish NATIONAL_CHAMPION, and latest championship/best-finish year 1962.",MATCH,Verified through onboarding plan e5c30d4f7a79.
 clemson,1,1,16,0,0,ELITE_EIGHT,2024,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 cleveland-state,6,3,3,0,0,SWEET_SIXTEEN,1986,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 coastal-carolina,8,5,4,0,0,ROUND_OF_64,2015,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
