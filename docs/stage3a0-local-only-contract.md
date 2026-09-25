@@ -72,7 +72,11 @@ A whole-project reciprocal scan should be implemented as a structured local join
 
 If a candidate cannot be established from local project evidence, leave it unresolved for the later research substage. **Lack of a local answer is not permission to open the web.**
 
-An unresolved row is a Stage 3A-0 **output**, not a new Stage 3A-0 research task. Once the structured local join has exhausted the accepted project-evidence paths, the next operation is serialization of the exact unresolved/contradictory queues and stop. Do not add a discovery pass merely to reduce those queues.
+An unresolved row is a Stage 3A-0 **output**, not a new Stage 3A-0 research task. Once the
+single bounded canonical/assertion join is complete, the next operation is serialization of
+the exact unresolved/contradictory queues and stop. Do not inspect opponent packages, add a
+second local discovery pass, or open the web merely to reduce those queues. A large residual
+population is a valid Stage 3A-0 outcome.
 
 ## 4. Runtime / convergence rule
 
@@ -142,6 +146,6 @@ Flag a Stage 3A-0 implementation if it:
 
 The intended Stage 3A-0 experience is:
 
-> **checkpoint -> one structured local mechanical join -> unresolved rows become exact queues -> stop**
+> **checkpoint -> census/partition -> one target canonical/assertion bulk join -> unresolved rows become exact queues -> stop**
 
 Repeated local staging/inspection attempts must not be used as a discovery loop, and unresolved rows must not cause Stage 3A-0 to expand its evidence universe.
