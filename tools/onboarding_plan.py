@@ -565,6 +565,49 @@ def _identity_candidates(
     return ids, dates, "; ".join(evidence)
 
 
+def _accomplishment_crosscheck_game(
+    source: dict[str, str],
+    status: str,
+    game_id: str,
+    canonical_by_id: dict[str, dict[str, str]],
+    venue_name_map: dict[str, str],
+    venue_metadata: dict[str, list[dict[str, str]]],
+    synthetic_id: str,
+) -> dict[str, str]:
+    """Build one target-perspective game for accomplishment cross-checking.
+
+    The target source remains primary.  For a CONFIDENT NCAA identity, a blank
+    target postseason round may inherit an already-known canonical round because
+    blank source evidence does not conflict with richer reciprocal canonical
+    metadata.  Nonblank target rounds and review-required identities are never
+    overwritten by this fallback.
+    """
+
+    candidate = ingest_school.build_new_canonical(
+        source,
+        synthetic_id,
+        venue_name_map,
+        venue_metadata,
+    )
+
+    if status != ingest_school.CONFIDENT:
+        return candidate
+
+    canonical = canonical_by_id.get(game_id)
+    if canonical is None:
+        return candidate
+
+    if (
+        candidate.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+        and canonical.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+        and not candidate.get("postseason_round", "").strip()
+        and canonical.get("postseason_round", "").strip()
+    ):
+        candidate["postseason_round"] = canonical["postseason_round"].strip()
+
+    return candidate
+
+
 def _accomplishment_conflicts(
     program: dict[str, str],
     reference: dict[str, str],
@@ -770,6 +813,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     conditional_conflicts = 0
     predicted_enrichment_fields = 0
     predicted_enrichment_games: set[str] = set()
+    accomplishment_crosscheck_games: list[dict[str, str]] = []
     affected_public_programs: set[str] = set()
     public_keys = {
         row["program_key"]
@@ -810,6 +854,21 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             )
             status, game_id, method = override or ingest_school.identify_game(source, candidates)
         identity_counts[status] += 1
+
+        accomplishment_crosscheck_games.append(
+            _accomplishment_crosscheck_game(
+                source,
+                status,
+                game_id,
+                canonical_by_id,
+                venue_name_map,
+                venue_metadata,
+                (
+                    "PREFLIGHT-ACCOMPLISHMENT-"
+                    + (source.get("source_game_id", "").strip() or "UNKNOWN")
+                ),
+            )
+        )
 
         for problem in _planned_venue_geography_errors(
             source,
@@ -1019,23 +1078,15 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             )
 
     if accomplishment is not None:
-        # Cross-check the target package itself, not only the current global
-        # canonical layer.  A first-time school is not present globally yet,
-        # so using current canonical games would incorrectly report zero NCAA
-        # history and block every legitimate onboarding.
-        synthetic_target_games = [
-            ingest_school.build_new_canonical(
-                source,
-                f"PREFLIGHT-{number:07d}",
-                venue_name_map,
-                venue_metadata,
-            )
-            for number, source in enumerate(sources, start=1)
-        ]
+        # Cross-check the target package as the primary history source while
+        # preserving richer non-conflicting NCAA round metadata from confident
+        # reciprocal canonical matches.  This avoids both zero-history checks
+        # for first-time schools and false aggregate blockers when the target
+        # source is honestly blank on a round already established elsewhere.
         derived, accomplishment_conflicts = _accomplishment_conflicts(
             program,
             accomplishment,
-            synthetic_target_games,
+            accomplishment_crosscheck_games,
         )
         if accomplishment_conflicts:
             blockers.append(
