@@ -55,6 +55,17 @@ For the historical location-enrichment pass:
 
 The Oregon State model remains the guide for durability, but the historical pass should favor broad location completion over repeated family-by-family building research.
 
+## 3A. Outside-the-United-States neutral stopping rule
+
+For a neutral game with supported location outside the United States, city + country and,
+where applicable, state/province/territory/first-level administrative area is sufficient
+for Research completion.
+
+If the exact building is already in accepted project evidence or immediately appears in the
+same obvious authoritative source, preserve it. Otherwise, do not open another source path
+solely to recover the building. This rule applies to both modern and historical regular-season
+neutral rows and overrides the normal modern exact-building expectation for the building field.
+
 ## 4. Source hierarchy for modern neutral research
 
 For each coherent modern recurring family or modern one-off, use:
