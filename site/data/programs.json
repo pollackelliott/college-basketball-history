@@ -8411,7 +8411,7 @@
       "state": "WV",
       "primary_hex": "#002855",
       "secondary_hex": "#FAAA00",
-      "history_start_season": null,
+      "history_start_season": "1903-1904",
       "conference_regular_season_championships": 14,
       "conference_tournament_championships": 13,
       "ncaa_tournament_appearances": 31,
@@ -8420,7 +8420,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 1959,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
