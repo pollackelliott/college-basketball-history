@@ -7547,7 +7547,7 @@
       "state": "FL",
       "primary_hex": "#BA9B37",
       "secondary_hex": "#000000",
-      "history_start_season": null,
+      "history_start_season": "1984-1985",
       "conference_regular_season_championships": 1,
       "conference_tournament_championships": 4,
       "ncaa_tournament_appearances": 6,
@@ -7556,7 +7556,7 @@
       "best_finish_key": "ROUND_OF_32",
       "best_finish_year": 2019,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-12",
         "conference_name": "Big 12"
