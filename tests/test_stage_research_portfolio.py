@@ -616,6 +616,52 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         with self.assertRaisesRegex(WorkflowError, "jurisdiction conflicts"):
             rebase_venues("test-school", locals_, globals_, [])
 
+    def test_new_venue_disambiguates_existing_school_key_geography_collision(self):
+        globals_ = []
+        locals_ = [
+            {
+                **local_venue(
+                    "New Cincinnati physical identity.",
+                    city="Cincinnati",
+                    state="OH",
+                ),
+                "source_program_key": "cincinnati",
+                "venue_key": "armory-fieldhouse",
+                "canonical_name": "Armory Fieldhouse",
+            }
+        ]
+        existing_school_venues = [
+            {
+                "source_program_key": "tennessee",
+                "venue_key": "armory-fieldhouse",
+                "venue_id": "VEN-000199",
+                "canonical_name": "Armory-Fieldhouse",
+                "city": "Knoxville",
+                "state": "TN",
+                "_school_key": "tennessee",
+            }
+        ]
+
+        local_rows, global_rows, _names, mappings = rebase_venues(
+            "cincinnati",
+            locals_,
+            globals_,
+            [],
+            existing_school_venues=existing_school_venues,
+        )
+
+        self.assertEqual(len(global_rows), 1)
+        self.assertEqual(local_rows[0]["venue_key"], "armory-fieldhouse-cincinnati")
+        self.assertEqual(global_rows[0]["venue_key"], "armory-fieldhouse-cincinnati")
+        self.assertEqual(
+            mappings[0]["resolution"],
+            "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY",
+        )
+        self.assertEqual(
+            mappings[0]["final_venue_key"],
+            "armory-fieldhouse-cincinnati",
+        )
+
     def test_research_base_reuse_hint_still_blocks_state_conflict(self):
         globals_ = [
             global_venue(
