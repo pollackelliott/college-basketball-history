@@ -614,6 +614,16 @@ def rebase_venues(
         final_id = chosen["venue_id"]
         local["venue_id"] = final_id
         local["venue_key"] = chosen["venue_key"]
+
+        # School-local venues.csv is integration representation, not literal
+        # game-level source evidence. Once a physical identity is reused, its
+        # canonical geography must match the global venue registry so the same
+        # venue_key cannot carry conflicting location representations across
+        # school packages. Frozen source-games.csv geography is untouched.
+        if reason != "NEW_GLOBAL_IDENTITY":
+            local["city"] = chosen.get("city", "").strip()
+            local["state"] = chosen.get("state", "").strip()
+
         local_notes = local.get("notes", "").strip()
         integration_note = f"Integration rebase resolved final global venue ID {final_id}."
         local["notes"] = local_notes + (" " if local_notes else "") + integration_note
