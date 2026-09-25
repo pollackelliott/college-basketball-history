@@ -160,6 +160,8 @@ def load_conference_reconciliation(
         "owner_approval_basis": str(document["owner_approval_basis"]).strip(),
         "replacement_row_count": len(replacement_rows),
         "registration_count": len(registrations),
+        "replacement_history": replacement_rows,
+        "registrations": registrations,
     }
     return replacement_rows, registrations, metadata
 
