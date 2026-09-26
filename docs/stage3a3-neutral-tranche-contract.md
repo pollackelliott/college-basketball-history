@@ -25,7 +25,13 @@ Use this exact order:
 3. modern (1996-97+) one-offs;
 4. one historical (1995-96 and earlier) regular-season neutral **location-enrichment pass**.
 
-The mechanical accepted-evidence application may be combined with the first active research tier when small.
+Tier 1 accepted-evidence reuse is a mandatory mechanical operation before active neutral research. Run the permanent repository entrypoint:
+
+```bash
+python tools/research_stage3a3_tier1.py <school_key> <stage3a2-ledger.csv>
+```
+
+For a nontrivial neutral population, do not combine Tier 1 with modern recurring research in the same turn. The command must pin one protected-main SHA, bulk-scan the permitted accepted project-evidence surfaces, serialize unambiguous exact-game reuse, contradictions, and the exact remaining modern/historical queues, emit `stage3a3-tier1-status.json`, and stop. A no-match is a successful Tier-1 output, not permission for source discovery.
 
 After substantial research in one tier, **do not cross into the next materially different tier in the same turn**. Write accepted findings through, serialize the exact remaining queue, and stop at a durable continuation point.
 
@@ -137,6 +143,8 @@ After a meaningful tranche:
 - record source families already attempted so a recovery chat does not repeat them.
 
 If context/execution risk becomes material, **write through first** and stop. Do not spend the remaining budget opening another source family.
+
+Before reporting Tier-1 status, read `stage3a3-tier1-status.json`; do not reconstruct completion from chat memory or scratch work.
 
 On recovery:
 
