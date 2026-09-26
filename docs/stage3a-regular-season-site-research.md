@@ -124,7 +124,7 @@ This historical shortcut applies **only to regular-season neutral rows**. It doe
 already present in the verified checkpoint or checked-out/current protected-main project.
 Do not use the web or discover new reciprocal sources during 3A-0.
 
-Before external historical searching for an unresolved neutral game, perform a **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
+Before external historical searching for an unresolved neutral game, perform the repository-owned Stage 3A-3 Tier 1 pass with `tools/research_stage3a3_tier1.py`. It performs the **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
 
 Useful read-only sources can include:
 
