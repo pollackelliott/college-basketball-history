@@ -79,6 +79,7 @@ Once all of the following are true:
 - every season census is reconciled or its source-internal discrepancy is explicitly explained;
 - duplicate/omitted/bleed/inclusion questions are resolved or genuinely owner-blocked;
 - stable research-local game IDs exist;
+- every game has a structured `game_type` sufficient to distinguish `REGULAR_SEASON` from postseason; this is a Stage 1 invariant for new Research lanes and Stage 2 must preserve it unchanged;
 - accepted corrections are written through with literal evidence preserved;
 - remaining field-level unknowns are explicitly queued and do not threaten game identity, inclusion, season accounting, or on-court result;
 
@@ -109,6 +110,7 @@ A complete Stage 1 checkpoint should contain, directly or through its manifest:
 - accepted corrections ledger;
 - exact residual queue grouped by defect class;
 - stable research-local IDs;
+- structured `game_type` on every game, with postseason identity sufficient for the later mechanical Stage 3A/3B partition;
 - provenance/literal-source preservation;
 - completion status and next bounded stage;
 - manifest/hash verification when the environment supports it.
