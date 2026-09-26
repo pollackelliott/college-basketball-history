@@ -33,13 +33,12 @@ If a local exact-game lookup exposes a contradiction, record and serialize the c
 
 ## 2. What local project-evidence harvest means in Stage 3A-0
 
-Stage 3A-0 uses **one bounded bulk exact-game join** against target-school canonical/assertion
+Stage 3A-0 uses **one bounded bulk exact-game join** against target-school canonical
 evidence and any accepted same-game evidence already serialized in the checkpoint.
 
 Examples:
 
 - target-school rows from `data/canonical/games.csv`;
-- target-school rows from `data/evidence/game-assertions.csv`;
 - accepted same-game evidence already serialized in the controlling checkpoint.
 
 Stage 3A-0 does **not** fetch or inspect published opponent-school `source-games.csv`
@@ -171,6 +170,6 @@ Flag a Stage 3A-0 implementation if it:
 
 The intended Stage 3A-0 experience is:
 
-> **checkpoint -> census/partition -> one target canonical/assertion bulk join -> unresolved rows become exact queues -> stop**
+> **checkpoint -> census/partition -> one target canonical bulk join -> unresolved rows become exact queues -> stop**
 
 Repeated local staging/inspection attempts must not be used as a discovery loop, and unresolved rows must not cause Stage 3A-0 to expand its evidence universe.
