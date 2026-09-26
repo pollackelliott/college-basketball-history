@@ -105,7 +105,7 @@ game. Ancient HOME venue debt may terminalize after the reasonable systematic pa
 exhausted, but complete supported city/state must be written through before 3A-2 closes;
 systematically established source-program HOME geography may be propagated across
 already-established HOME rows when no accepted evidence indicates an alternate location.
-3A-3 should proceed in the default order: accepted evidence, modern recurring families,
+3A-3 must begin with the permanent `tools/research_stage3a3_tier1.py` accepted-evidence pass. For a nontrivial neutral population, Tier 1 is a mechanical durable boundary and must not be combined with active modern recurring research. Read `stage3a3-tier1-status.json` before reporting its status; unmatched Tier-1 rows authorize no source discovery. After Tier 1, 3A-3 should proceed in the default order: modern recurring families,
 modern one-offs, then one historical (1995-96 and earlier) regular-season neutral
 location-enrichment pass. A Stage 3A-3 turn must stay within one coherent neutral-research
 tier/research mode after substantial research begins. Modern recurring families should be
