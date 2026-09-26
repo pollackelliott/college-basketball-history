@@ -179,7 +179,7 @@ Before broad historical research:
 4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
 5. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
 6. use the permanent repository Stage 3A-0 entrypoint for one structured exact-game join
-   against already-present canonical and assertion evidence for the target school;
+   against already-present canonical evidence for the target school;
 7. write through only unambiguous accepted same-game evidence;
 8. preserve unmatched/contradictory candidates without forcing or researching them;
 9. serialize the exact H/A/N, HOME, and NEUTRAL residual queues.
@@ -199,7 +199,7 @@ Stage 3A-0 does **not** enumerate, fetch, or inspect published opponent school p
 even though those packages are local project evidence. Targeted reciprocal/published-package
 use belongs to Stage 3A-1/2/3, where source-family scope is explicit and bounded.
 
-If the canonical/assertion bulk join does not resolve a candidate, leave that candidate for
+If the canonical bulk join does not resolve a candidate, leave that candidate for
 the appropriate later Stage 3A research substage. Stage 3A-0 succeeds by producing exact
 mechanical populations and queues, not by minimizing the residual counts.
 
