@@ -284,7 +284,7 @@ Before broad historical searching:
 4. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
 5. run the repository-owned deterministic Stage 3A-0 structured-data operation (normally
    `python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv>`) and
-   perform its one target-school canonical/assertion exact-game join;
+   perform its one target-school canonical exact-game join;
 6. preserve unmatched or contradictory candidates without forcing or researching them;
 7. write unambiguous accepted same-game evidence through into the cumulative row-level
    working state;
