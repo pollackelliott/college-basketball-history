@@ -124,7 +124,7 @@ This historical shortcut applies **only to regular-season neutral rows**. It doe
 already present in the verified checkpoint or checked-out/current protected-main project.
 Do not use the web or discover new reciprocal sources during 3A-0.
 
-Before external historical searching for an unresolved neutral game, perform a **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
+Before external historical searching for an unresolved neutral game, perform the repository-owned Stage 3A-3 Tier 1 pass with `tools/research_stage3a3_tier1.py`. It performs the **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
 
 Useful read-only sources can include:
 
@@ -179,7 +179,7 @@ Before broad historical research:
 4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
 5. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
 6. use the permanent repository Stage 3A-0 entrypoint for one structured exact-game join
-   against already-present canonical and assertion evidence for the target school;
+   against already-present canonical evidence for the target school;
 7. write through only unambiguous accepted same-game evidence;
 8. preserve unmatched/contradictory candidates without forcing or researching them;
 9. serialize the exact H/A/N, HOME, and NEUTRAL residual queues.
@@ -199,7 +199,7 @@ Stage 3A-0 does **not** enumerate, fetch, or inspect published opponent school p
 even though those packages are local project evidence. Targeted reciprocal/published-package
 use belongs to Stage 3A-1/2/3, where source-family scope is explicit and bounded.
 
-If the canonical/assertion bulk join does not resolve a candidate, leave that candidate for
+If the canonical bulk join does not resolve a candidate, leave that candidate for
 the appropriate later Stage 3A research substage. Stage 3A-0 succeeds by producing exact
 mechanical populations and queues, not by minimizing the residual counts.
 

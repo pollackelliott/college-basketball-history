@@ -33,13 +33,12 @@ If a local exact-game lookup exposes a contradiction, record and serialize the c
 
 ## 2. What local project-evidence harvest means in Stage 3A-0
 
-Stage 3A-0 uses **one bounded bulk exact-game join** against target-school canonical/assertion
+Stage 3A-0 uses **one bounded bulk exact-game join** against target-school canonical
 evidence and any accepted same-game evidence already serialized in the checkpoint.
 
 Examples:
 
 - target-school rows from `data/canonical/games.csv`;
-- target-school rows from `data/evidence/game-assertions.csv`;
 - accepted same-game evidence already serialized in the controlling checkpoint.
 
 Stage 3A-0 does **not** fetch or inspect published opponent-school `source-games.csv`
@@ -56,13 +55,23 @@ source family is known and that research responsibility is actually authorized.
 
 ## 3. Mechanical execution shape
 
+Before execution, pin the exact protected-main SHA for the pass. When the global canonical file is inconvenient to consume directly, generate the bounded target-only projection with:
+
+```bash
+python tools/export_stage3a0_local_evidence.py <school_key>
+```
+
 The default execution surface is the permanent repository entrypoint:
 
 ```bash
 python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv>
 ```
 
-Use that command, or an explicitly equivalent repository-owned structured operation, instead of reconstructing the join through conversational inspection. If required structured partition fields are absent, the command's serialized residual is the Stage 3A-0 output: preserve it and stop. **Do not read documents, media guides, or historical sources to manufacture the missing structured field inside Stage 3A-0.**
+Use that command, or an explicitly equivalent repository-owned structured operation, instead of reconstructing the join through conversational inspection. The command must pass its whole-ledger readiness preflight before any evidence join. Missing stable IDs, game type, site type, opponent keys, duplicate IDs, or unrecognized enums produce `STAGE_3A0_INPUT_NOT_READY`, not ordinary Stage 3A-0 research debt.
+
+For a checkpoint created before the structured-input invariant, exit Stage 3A-0 and perform one narrow compatibility repair from the already accepted institutional source/state. Validate it with `tools/research_stage3a0_migrate.py`; declared intent `MISSING_GAME_TYPE_ONLY` permits no changes to row identity, season/date, opponent, score/result, H/A/N, or literal source evidence. Then rerun Stage 3A-0. Do not broadly reopen Stage 1/2 and do not conduct the compatibility repair inside Stage 3A-0.
+
+When the accepted Stage 1 row spine conflicts with a specialized postseason table, the specialized table may establish postseason classification but must not silently overwrite accepted Stage 1 date/score/result. Such a contradiction remains explicit unless separately adjudicated under the controlling Stage 1 evidence policy.
 
 The phrase "project-evidence harvest" means only this deterministic structured-data operation. It does not authorize document reading or iterative local discovery.
 
@@ -134,6 +143,8 @@ A complete Stage 3A-0 must report and durably preserve:
 - unmatched local candidates;
 - isolated contradictions;
 - exact residual queues for Stage 3A-1 through Stage 3A-3;
+- the exact protected-main SHA used for the target-only evidence projection/join;
+- an explicit `stage3a0-status.json` terminal sentinel; status reporting must read this artifact before claiming whether the stage has run or completed;
 - an explicit `external historical research used: NO` completion attestation. If an external path was accidentally opened, the attestation may be made only after auditing write-through and confirming that no accepted Stage 3A-0 conclusion depends on it.
 
 Then stop:
@@ -159,6 +170,6 @@ Flag a Stage 3A-0 implementation if it:
 
 The intended Stage 3A-0 experience is:
 
-> **checkpoint -> census/partition -> one target canonical/assertion bulk join -> unresolved rows become exact queues -> stop**
+> **checkpoint -> census/partition -> one target canonical bulk join -> unresolved rows become exact queues -> stop**
 
 Repeated local staging/inspection attempts must not be used as a discovery loop, and unresolved rows must not cause Stage 3A-0 to expand its evidence universe.
