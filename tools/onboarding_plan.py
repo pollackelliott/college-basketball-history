@@ -32,6 +32,7 @@ from location_safety import (
     registry_fallback_marker,
     retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
+    venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
 from program_history import (
@@ -390,6 +391,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         for row in opponents
         if row.get("canonical_opponent_key", "").strip()
     }
+    city_contamination_names = venue_names_for_city_contamination(venues)
     venue_names: set[str] = set()
     for row in venues:
         canonical_name = row.get("canonical_name", "").strip().casefold()
@@ -472,7 +474,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         if location_pair_status(row.get("city", ""), row.get("state", "")) == "partial":
             errors.append(f"{label}: normalized city/state must be both populated or both blank")
         city = row.get("city", "").strip()
-        if city.casefold() in venue_names:
+        if city.casefold() in city_contamination_names:
             errors.append(f"{label}: normalized city contains a venue name")
         if " and " in city.casefold():
             errors.append(f"{label}: normalized city contains a combined multi-city value")
@@ -1067,7 +1069,9 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     venue_name_map = ingest_school.load_venue_name_map(
         repo / "schools" / school_key / "venues.csv"
     )
-    venue_names = set(venue_name_map)
+    venue_names = venue_names_for_city_contamination(
+        read_csv(repo / "schools" / school_key / "venues.csv")
+    )
     location_errors, location_warnings = source_location_preflight(
         sources,
         existing_pairs,

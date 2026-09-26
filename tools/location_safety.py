@@ -52,6 +52,34 @@ def public_location_pair(city: str, state: str) -> tuple[str | None, str | None]
     return city.strip(), state.strip()
 
 
+def venue_names_for_city_contamination(
+    venue_rows: list[dict[str, str]],
+) -> set[str]:
+    """Return venue names that can safely diagnose city-field contamination.
+
+    A venue alias may legitimately be a locality shorthand for a venue in that
+    same complete city/state, for example ``Greensboro`` for Greensboro
+    Coliseum in Greensboro, NC. Such an alias must not make the valid city
+    value itself look contaminated. Canonical venue names and all other
+    aliases remain contamination candidates.
+    """
+    names: set[str] = set()
+    for row in venue_rows:
+        canonical = row.get("canonical_name", "").strip().casefold()
+        if canonical:
+            names.add(canonical)
+
+        city = row.get("city", "").strip().casefold()
+        complete_location = (
+            location_pair_status(row.get("city", ""), row.get("state", ""))
+            == "complete"
+        )
+        for alias in row.get("aliases", "").split(";"):
+            folded = alias.strip().casefold()
+            if folded and not (complete_location and folded == city):
+                names.add(folded)
+    return names
+
 def obvious_city_contamination(
     city: str,
     source_venue_name: str = "",

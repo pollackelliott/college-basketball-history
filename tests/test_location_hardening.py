@@ -15,6 +15,7 @@ from location_safety import (  # noqa: E402
     retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
     venue_location_conflicts,
+    venue_names_for_city_contamination,
 )
 
 
@@ -58,6 +59,50 @@ class SourcePackagePreflightTests(unittest.TestCase):
     def test_venue_name_in_city_is_rejected(self):
         errors, _ = self.preflight("Example Arena", "EX")
         self.assertIn("venue name", errors[0])
+
+    def test_locality_shorthand_venue_alias_does_not_poison_city(self):
+        registry_names = venue_names_for_city_contamination(
+            [
+                {
+                    "canonical_name": "Greensboro Coliseum",
+                    "aliases": "Greensboro; H*",
+                    "city": "Greensboro",
+                    "state": "NC",
+                }
+            ]
+        )
+        self.assertIn("greensboro coliseum", registry_names)
+        self.assertIn("h*", registry_names)
+        self.assertNotIn("greensboro", registry_names)
+
+        row = source_row("Greensboro", "NC")
+        row["source_venue_name"] = ""
+        row["curated_venue_name"] = ""
+        self.assertEqual(
+            source_location_preflight([row], set(), registry_names),
+            ([], []),
+        )
+
+    def test_unrelated_registry_alias_still_rejects_city_contamination(self):
+        registry_names = venue_names_for_city_contamination(
+            [
+                {
+                    "canonical_name": "Example Arena",
+                    "aliases": "Downtown Arena",
+                    "city": "Exampleville",
+                    "state": "EX",
+                }
+            ]
+        )
+        row = source_row("Downtown Arena", "EX")
+        row["source_venue_name"] = ""
+        row["curated_venue_name"] = ""
+        errors, warnings = source_location_preflight(
+            [row], set(), registry_names
+        )
+        self.assertEqual(len(errors), 1)
+        self.assertIn("venue name", errors[0])
+        self.assertEqual(warnings, [])
 
     def test_combined_city_is_rejected(self):
         errors, _ = self.preflight("Alpha and Beta", "EX")
