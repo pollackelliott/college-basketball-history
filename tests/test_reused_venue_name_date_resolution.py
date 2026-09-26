@@ -84,6 +84,105 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 self.make_map(),
             )
 
+    def memorial_map(self):
+        return {
+            "memorial coliseum": [
+                {
+                    "venue_key": "memorial-coliseum-winston-salem",
+                    "venue_id": "VEN-WINSTON",
+                    "city": "Winston-Salem",
+                    "state": "NC",
+                    "local_valid_from": "",
+                    "local_valid_to": "",
+                    "physical_opened": "",
+                    "physical_closed": "",
+                },
+                {
+                    "venue_key": "memorial-coliseum-kentucky",
+                    "venue_id": "VEN-LEXINGTON",
+                    "city": "Lexington",
+                    "state": "KY",
+                    "local_valid_from": "",
+                    "local_valid_to": "",
+                    "physical_opened": "",
+                    "physical_closed": "",
+                },
+            ]
+        }
+
+    def test_complete_geography_resolves_reused_name_across_cities(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id": "WF-EXAMPLE",
+                "game_date": "1955-12-06",
+                "season_label": "1955-1956",
+                "curated_venue_name": "Memorial Coliseum",
+                "city": "Winston-Salem",
+                "state": "NC",
+            },
+            self.memorial_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-WINSTON")
+
+    def test_complete_geography_resolves_other_physical_candidate(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id": "LEX-EXAMPLE",
+                "game_date": "1955-12-06",
+                "season_label": "1955-1956",
+                "curated_venue_name": "Memorial Coliseum",
+                "city": "Lexington",
+                "state": "KY",
+            },
+            self.memorial_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-LEXINGTON")
+
+    def test_same_city_reused_name_still_requires_date_resolution(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id": "CHARLOTTE-EXAMPLE",
+                "game_date": "1976-03-13",
+                "season_label": "1975-1976",
+                "curated_venue_name": "Charlotte Coliseum",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+            self.make_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-000040")
+
+    def test_partial_geography_preserves_existing_date_resolution(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id": "PARTIAL-EXAMPLE",
+                "game_date": "1976-03-13",
+                "season_label": "1975-1976",
+                "curated_venue_name": "Charlotte Coliseum",
+                "city": "Charlotte",
+                "state": "",
+            },
+            self.make_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-000040")
+
+    def test_conflicting_complete_geography_stops_before_date_fallback(self):
+        with self.assertRaisesRegex(
+            ValueError,
+            "does not match any registered physical candidate",
+        ):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "CONFLICTING-GEOGRAPHY",
+                    "game_date": "1976-03-13",
+                    "season_label": "1975-1976",
+                    "curated_venue_name": "Charlotte Coliseum",
+                    "city": "Raleigh",
+                    "state": "NC",
+                },
+                self.make_map(),
+            )
+
     def make_msg_map(self):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)

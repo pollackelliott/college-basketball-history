@@ -675,6 +675,52 @@ def resolve_venue_metadata(
     if len(candidates) == 1:
         return candidates[0]
 
+    # A reused textual venue name may identify unrelated physical buildings in
+    # different cities. Complete researched source geography may narrow that
+    # physical-identity population before date/season resolution. If multiple
+    # buildings share the same geography, retain the existing date-aware rule.
+    source_city = source.get("city", "").strip()
+    source_state = source.get("state", "").strip()
+    if location_pair_status(source_city, source_state) == "complete":
+        geography_matching = [
+            candidate
+            for candidate in candidates
+            if candidate.get("city", "").strip().casefold()
+            == source_city.casefold()
+            and candidate.get("state", "").strip().casefold()
+            == source_state.casefold()
+        ]
+        geography_ids = {
+            candidate.get("venue_id", "")
+            for candidate in geography_matching
+            if candidate.get("venue_id", "")
+        }
+        if len(geography_ids) == 1 and geography_matching:
+            return geography_matching[0]
+        if not geography_matching:
+            candidate_locations = ", ".join(
+                sorted(
+                    {
+                        (
+                            candidate.get("city", "").strip()
+                            + ", "
+                            + candidate.get("state", "").strip()
+                        ).strip(", ")
+                        for candidate in candidates
+                        if candidate.get("city", "").strip()
+                        or candidate.get("state", "").strip()
+                    }
+                )
+            ) or "[unknown]"
+            raise ValueError(
+                f"source game {source.get('source_game_id','[unknown]')}: venue name "
+                f"{venue_name!r} has complete source geography "
+                f"{source_city}, {source_state} that does not match any registered "
+                f"physical candidate ({candidate_locations}); explicit "
+                "venue-identity research is required"
+            )
+        candidates = geography_matching
+
     game_date_text = source.get("game_date", "").strip()
     try:
         game_date = dt.date.fromisoformat(game_date_text)
