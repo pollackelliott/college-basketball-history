@@ -73,6 +73,8 @@ heterogeneous residuals. Independent row-level adjudication remains capped at 25
 turn, but a homogeneous residual already at or below that ceiling should normally be
 processed as one tranche.
 
+For new Research lanes, Stage 1 must serialize structured `game_type` on every game and Stage 2 must preserve it. Before Stage 3A-0 evidence work, run the repository readiness gate. A pre-hardening checkpoint that lacks a required field uses only the documented narrow compatibility migration + declared-intent validator; do not improvise a repair inside 3A-0.
+
 **Stage 3A-0 is a strict local-only mechanical pass.** It performs zero public-web
 research and zero external source discovery. During 3A-0, use only the verified durable
 checkpoint plus already-present project evidence in the checked-out/current protected-main
@@ -83,7 +85,7 @@ are local project evidence; targeted reciprocal/package use belongs to 3A-1/2/3.
 browse institutional sites, media guides, newspapers, external PDFs, GitHub/code search for
 new sources, or opponent archives. An unmatched local candidate stays unresolved for
 3A-1/2/3; it is not permission to open another local discovery path or the web. Once the structured local join is exhausted, unresolved/contradictory rows
-become serialized outputs and Stage 3A-0 closes. If a public-web or external-source path is
+become serialized outputs and Stage 3A-0 closes. Pin one protected-main SHA for the pass and use `tools/export_stage3a0_local_evidence.py` when a bounded target-only canonical projection is needed. Before reporting status, read the terminal `stage3a0-status.json`; unmatched rows are explicitly nonblocking and authorize no additional discovery. If a public-web or external-source path is
 opened accidentally during 3A-0, do not use that evidence; audit write-through back to
 authorized local-only provenance and close/checkpoint mechanically.
 
