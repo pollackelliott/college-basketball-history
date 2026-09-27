@@ -69,3 +69,15 @@ def test_legacy_migration_rejects_non_game_type_change(tmp_path):
     write_csv(fixed,[{"research_game_id":"C-1","game_date":"1982-03-05","opponent_key":"virginia","site_type":"HOME","game_type":"CONFERENCE_TOURNAMENT"}])
     p=subprocess.run([sys.executable,str(migration),str(base),str(fixed)],text=True,capture_output=True)
     assert p.returncode==2 and "non-game-type fields changed" in p.stdout
+
+
+def test_policy_stops_when_stage3a0_execution_environment_is_unavailable():
+    root=Path(__file__).parents[1]
+    contract=(root/"docs"/"stage3a0-local-only-contract.md").read_text(encoding="utf-8")
+    bounded=(root/"docs"/"research-lane-bounded-execution.md").read_text(encoding="utf-8")
+    agents=(root/"AGENTS.md").read_text(encoding="utf-8")
+    sentinel="STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE"
+    assert sentinel in contract and sentinel in bounded and sentinel in agents
+    assert "search the filesystem for the tool or another checkout" in contract
+    assert "Do not web-search, clone, reconstruct" in bounded
+    assert "inspect remote tool source" in agents
