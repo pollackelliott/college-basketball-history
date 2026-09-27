@@ -289,6 +289,14 @@ HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL / postseason queue emission.
 
 Do not manually inspect the checkpoint schema, tool source, or ledger population before running
 this entrypoint merely to prepare Stage 3A-0. Do not search for a separate readiness command.
+
+If the current environment does **not already provide a runnable repository checkout and Python
+execution surface capable of invoking the supplied command**, report
+`STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` and stop. Do not web-search, clone, reconstruct
+or fetch a repository snapshot, search the filesystem for another checkout/tool, inspect remote
+tool source, or simulate the command conversationally. The predecessor Stage 2 checkpoint remains
+the controlling durable state until Stage 3A-0 resumes in an already-runnable environment.
+
 If the command returns `STAGE_3A0_ENTRY_NOT_READY` or `STAGE_3A0_INPUT_NOT_READY`, read the
 serialized `stage3a0-status.json`, follow only its exact bounded remediation, and stop before
 historical/source research.

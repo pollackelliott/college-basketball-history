@@ -78,7 +78,34 @@ Do **not** manually inspect checkpoint members, inspect the Stage 3A-0 tool sour
 
 When the same healthy Research chat already read the controlling policy and the pinned protected-main SHA has not changed, do not repeat a broad policy/source inspection at this boundary. A replacement chat or changed protected-main SHA still performs the normal required policy refresh once, then runs the command.
 
-`tools/export_stage3a0_local_evidence.py` remains an optional bounded diagnostic/export helper, not a prerequisite or separate readiness gate.
+### 3.2 Execution-environment gate
+
+Command-first also means **environment-first-stop**. Before any Stage 3A-0 discovery or repository inspection beyond the required policy/SHA refresh, determine only whether the current execution environment already provides:
+
+- a runnable checkout of the repository at the pinned protected-main state;
+- the permanent `tools/research_stage3a0.py` entrypoint in that checkout;
+- access to the authoritative Stage 2 checkpoint/structured ledger supplied for the run; and
+- a Python execution surface capable of invoking the command.
+
+This is a binary availability check, not an authorization to build the environment.
+
+If those prerequisites are not already available, report exactly:
+
+`STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`
+
+and stop. Do **not**:
+
+- search the public web for another execution path;
+- clone or reconstruct the repository;
+- fetch or assemble a repository snapshot;
+- search the filesystem for the tool or another checkout;
+- inspect the Stage 3A-0 tool source through GitHub or another remote surface;
+- unpack/inspect the checkpoint in order to simulate the command conversationally; or
+- continue Stage 3A-0 analysis while waiting for a runnable environment.
+
+No Stage 3A-0 artifact is required when the command could not run. The predecessor Stage 2 checkpoint remains authoritative. A later owner-authorized continuation may resume Stage 3A-0 in a Codespace or other already-runnable checkout.
+
+`tools/export_stage3a0_local_evidence.py` remains an optional bounded diagnostic/export helper **after** a runnable checkout exists; it is not a bootstrap mechanism, prerequisite, or separate readiness gate.
 
 Missing stable IDs, game type, site type, opponent keys, duplicate IDs, or unrecognized enums produce `STAGE_3A0_INPUT_NOT_READY`, not ordinary Stage 3A-0 research debt.
 
@@ -127,7 +154,7 @@ If the local project-evidence pass itself is too large to complete safely in one
 - checkpoint;
 - resume the same structured local operation later.
 
-A Stage 3A-0 turn that has not invoked the permanent entrypoint and has no concrete execution blocker is simply **NOT STARTED**. Do not continue inspecting schemas, tools, or reconciliation state in hopes of becoming more ready; run the command or stop and report the exact missing execution prerequisite.
+A Stage 3A-0 turn that has not invoked the permanent entrypoint and has no concrete execution blocker is simply **NOT STARTED**. If the concrete blocker is absence of an already-runnable checkout/execution surface, the required terminal state is `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`. Do not continue inspecting schemas, tools, repository snapshots, filesystem paths, or reconciliation state in hopes of becoming more ready; run the command or stop.
 
 Do not convert execution difficulty into broader historical research.
 
@@ -176,6 +203,7 @@ STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 Flag a Stage 3A-0 implementation if it:
 
 - performs conversational checkpoint-schema/tool-source inspection instead of invoking the command-first entrypoint when the Stage 2 checkpoint/ledger is already available;
+- responds to a missing runnable checkout by web searching, cloning, fetching a repository snapshot, searching the filesystem, inspecting the remote tool source, or conversationally simulating Stage 3A-0 instead of stopping at `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`;
 - searches for or invents a separate readiness gate even though `research_stage3a0.py` owns readiness;
 - invokes public web research;
 - searches institutional archives or media guides;
