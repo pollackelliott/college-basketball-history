@@ -3,7 +3,8 @@
 - **Status:** Controlling Research-lane execution policy
 - **Applies to:** every Stage 3A-0 mechanical census / partition / project-evidence harvest
 - **Approved:** 2026-09-23 after repeated Virginia Stage 3A-0 runtime failures
-- **Purpose:** prevent Stage 3A-0 from expanding into external historical research or source discovery
+- **Command-first entry hardening:** 2026-09-27 after repeated pre-execution stalls
+- **Purpose:** prevent Stage 3A-0 from expanding into external historical research or source discovery, including conversational preflight loops before the permanent command runs
 
 ## 1. Governing rule
 
@@ -55,19 +56,31 @@ source family is known and that research responsibility is actually authorized.
 
 ## 3. Mechanical execution shape
 
-Before execution, pin the exact protected-main SHA for the pass. When the global canonical file is inconvenient to consume directly, generate the bounded target-only projection with:
+### 3.1 Command-first entry rule
+
+After the owner authorizes Stage 3A-0, confirm the exact protected-main SHA for the pass. The **first Stage 3A-0 repository operation** is then the permanent entrypoint. The readiness gate is built into this command; there is no separate conversational readiness-analysis step.
+
+Preferred entry from the durable Stage 2 checkpoint:
 
 ```bash
-python tools/export_stage3a0_local_evidence.py <school_key>
+python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
 ```
 
-The default execution surface is the permanent repository entrypoint:
+Direct structured-ledger entry remains supported:
 
 ```bash
-python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv>
+python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv> --main-sha <protected-main-sha>
 ```
 
-Use that command, or an explicitly equivalent repository-owned structured operation, instead of reconstructing the join through conversational inspection. The command must pass its whole-ledger readiness preflight before any evidence join. Missing stable IDs, game type, site type, opponent keys, duplicate IDs, or unrecognized enums produce `STAGE_3A0_INPUT_NOT_READY`, not ordinary Stage 3A-0 research debt.
+The command accepts either input form. For a checkpoint ZIP it locates the unique structured Stage 2 ledger, records the selected member and hashes, copies that ledger into the Stage 3A-0 output directory, runs readiness, performs the census/partition and target-only canonical join when ready, and emits the exact downstream queues.
+
+Do **not** manually inspect checkpoint members, inspect the Stage 3A-0 tool source, pre-partition the ledger, or search for another readiness command before invoking the permanent entrypoint. If the checkpoint contains no unique structured ledger, the command emits `STAGE_3A0_ENTRY_NOT_READY` and stops. If structured readiness fails, it emits `STAGE_3A0_INPUT_NOT_READY` with the exact defects and next action.
+
+When the same healthy Research chat already read the controlling policy and the pinned protected-main SHA has not changed, do not repeat a broad policy/source inspection at this boundary. A replacement chat or changed protected-main SHA still performs the normal required policy refresh once, then runs the command.
+
+`tools/export_stage3a0_local_evidence.py` remains an optional bounded diagnostic/export helper, not a prerequisite or separate readiness gate.
+
+Missing stable IDs, game type, site type, opponent keys, duplicate IDs, or unrecognized enums produce `STAGE_3A0_INPUT_NOT_READY`, not ordinary Stage 3A-0 research debt.
 
 For a checkpoint created before the structured-input invariant, exit Stage 3A-0 and perform one narrow compatibility repair from the already accepted institutional source/state. Validate it with `tools/research_stage3a0_migrate.py`; declared intent `MISSING_GAME_TYPE_ONLY` permits no changes to row identity, season/date, opponent, score/result, H/A/N, or literal source evidence. Then rerun Stage 3A-0. Do not broadly reopen Stage 1/2 and do not conduct the compatibility repair inside Stage 3A-0.
 
@@ -114,6 +127,8 @@ If the local project-evidence pass itself is too large to complete safely in one
 - checkpoint;
 - resume the same structured local operation later.
 
+A Stage 3A-0 turn that has not invoked the permanent entrypoint and has no concrete execution blocker is simply **NOT STARTED**. Do not continue inspecting schemas, tools, or reconciliation state in hopes of becoming more ready; run the command or stop and report the exact missing execution prerequisite.
+
 Do not convert execution difficulty into broader historical research.
 
 ## 5. Recovery rule
@@ -139,6 +154,7 @@ A complete Stage 3A-0 must report and durably preserve:
 - H/A/N census derived from rows;
 - exact HOME / OPPONENT_HOME / NEUTRAL / UNKNOWN queues;
 - exact modern versus historical NEUTRAL split;
+- exact postseason Stage 3B handoff queue;
 - accepted same-game local-project evidence written through;
 - unmatched local candidates;
 - isolated contradictions;
@@ -159,6 +175,8 @@ STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 
 Flag a Stage 3A-0 implementation if it:
 
+- performs conversational checkpoint-schema/tool-source inspection instead of invoking the command-first entrypoint when the Stage 2 checkpoint/ledger is already available;
+- searches for or invents a separate readiness gate even though `research_stage3a0.py` owns readiness;
 - invokes public web research;
 - searches institutional archives or media guides;
 - discovers new external source families;
