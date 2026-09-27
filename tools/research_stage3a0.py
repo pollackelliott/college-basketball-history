@@ -149,7 +149,7 @@ def main():
       "target_only_join":{"matched":len(matches),"unmatched":len(unmatched),"contradictions":len(contradictions),"unmatched_is_blocking_stage3a0":False,"external_discovery_authorized":False,"handoff_to_later_stage":True},
       "next_action":"STOP_AT_STAGE_3A0_BOUNDARY","next_bounded_assignment":"Stage 3A-1 — H/A/N completion"}
     arts={"summary":dump(out,"stage3a0-summary.json",summary),"status":dump(out,"stage3a0-status.json",summary),"matches":dump(out,"target-canonical-matches.json",matches),"unmatched":dump(out,"unmatched-local-candidates.json",unmatched),"contradictions":dump(out,"local-contradictions.json",contradictions),
-      "home_queue":dump(out,"stage3a1-home-queue.json",queues["HOME"]),"opponent_home_queue":dump(out,"stage3a1-opponent-home-queue.json",queues["OPPONENT_HOME"]),"unknown_queue":dump(out,"stage3a1-unknown-han-queue.json",queues["UNKNOWN"]),
+      "home_queue":dump(out,"stage3a2-home-queue.json",queues["HOME"]),"opponent_home_queue":dump(out,"stage3a0-opponent-home-queue.json",queues["OPPONENT_HOME"]),"unknown_queue":dump(out,"stage3a1-unknown-han-queue.json",queues["UNKNOWN"]),
       "neutral_queue":dump(out,"stage3a3-neutral-queue.json",queues["NEUTRAL"]),"neutral_modern_queue":dump(out,"stage3a3-modern-neutral-queue.json",queues["NEUTRAL_MODERN"]),"neutral_historical_queue":dump(out,"stage3a3-historical-neutral-queue.json",queues["NEUTRAL_HISTORICAL"]),"postseason_queue":dump(out,"stage3b-postseason-handoff.json",queues["POSTSEASON"])}
     dump(out,"manifest.json",{k:{"path":str(p),"sha256":sha256(p)} for k,p in arts.items()});print(json.dumps(summary,indent=2));print("STAGE 3A-0: COMPLETE");return 0
 if __name__=="__main__":raise SystemExit(main())
