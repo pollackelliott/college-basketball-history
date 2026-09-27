@@ -163,26 +163,29 @@ A plain owner `Proceed` authorizes the identified next substage or serialized un
 
 ### 4.1 Stage 3A-0 — census, partition, and exact-game project evidence
 
-Stage 3A-0 is **strictly local-only and mechanical**. It performs zero external
+Stage 3A-0 is **strictly local-only, mechanical, and command-first**. It performs zero external
 historical research.
 
 Allowed inputs are limited to the verified durable checkpoint/working state plus
 already-present project evidence in the checked-out/current protected-main repository.
 Direct reads of known repository files are allowed. Open-ended discovery is not.
 
-Before broad historical research:
+After the owner authorizes Stage 3A-0 and the protected-main SHA is confirmed, run the
+permanent entrypoint immediately:
 
-1. mechanically identify the exact Stage 1 game universe;
-2. partition it into the regular-season Stage 3A population and postseason Stage 3B
-   handoff population;
-3. derive the whole-population H/A/N work census;
-4. separate venue responsibility into `HOME`, `OPPONENT_HOME`, and `NEUTRAL`;
-5. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
-6. use the permanent repository Stage 3A-0 entrypoint for one structured exact-game join
-   against already-present canonical evidence for the target school;
-7. write through only unambiguous accepted same-game evidence;
-8. preserve unmatched/contradictory candidates without forcing or researching them;
-9. serialize the exact H/A/N, HOME, and NEUTRAL residual queues.
+```bash
+python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
+```
+
+A direct structured Stage 2 ledger may be supplied instead. The command owns the readiness
+gate, checkpoint-ledger selection, Stage 1 universe load, regular-season/postseason partition,
+H/A/N census, HOME / OPPONENT_HOME / NEUTRAL / UNKNOWN queues, modern/historical NEUTRAL
+split, target-only canonical exact-game join, and postseason Stage 3B handoff queue.
+
+Do not manually perform those steps before invoking the command. Do not inspect checkpoint
+members or tool source merely to prepare Stage 3A-0, and do not search for a separate
+readiness operation. If the command reports entry/readiness failure, use the serialized
+`stage3a0-status.json` as the controlling stop/remediation artifact.
 
 During Stage 3A-0, do **not**:
 
