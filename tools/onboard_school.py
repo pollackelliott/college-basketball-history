@@ -300,6 +300,7 @@ def backfill_reciprocal_only_home_chronology(
         for row in assertions
         if chronology_clean(row.get("source_program_key")) == school_key
         and chronology_clean(row.get("canonical_game_id"))
+        and chronology_clean(row.get("curated_site_type")) not in {"", "UNKNOWN"}
     }
 
     relationships = _home_relationships(school_venues)
