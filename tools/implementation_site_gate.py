@@ -26,6 +26,7 @@ from site_completeness import (
 HOME_VENUE_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 RECONCILED_HOME_VENUE_EXCEPTION_MARKER = "[RECONCILED_UNRESOLVED_HOME_VENUE"
 RECIPROCAL_ONLY_HOME_VENUE_EXCEPTION_MARKER = "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE"
+RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE_MARKER = "[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE"
 
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -182,6 +183,56 @@ def _reconciled_home_venue_exception(
         game.get("site_city", "").strip(),
         game.get("site_state", "").strip(),
     ):
+        return False
+
+    return True
+
+
+
+def _reciprocal_only_unknown_site_provenance(
+    game: dict[str, str],
+    school_key: str,
+    source_rows: list[dict[str, str]],
+    all_assertions: list[dict[str, str]],
+) -> bool:
+    """Validate explicit provenance for a reciprocal-only canonical UNKNOWN site."""
+
+    if game.get("site_type", "").strip() not in {"", "UNKNOWN"}:
+        return False
+    if source_rows:
+        return False
+
+    pattern = re.compile(
+        r"\[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE "
+        r"target=([^\s\]]+) "
+        r"reciprocal=([^/\s]+)/([^\s\]]+)\]"
+    )
+    matches = [
+        match
+        for match in pattern.findall(game.get("notes", ""))
+        if match[0] == school_key
+    ]
+    if len(matches) != 1:
+        return False
+
+    _, reciprocal_program, reciprocal_game_id = matches[0]
+
+    reciprocal = next(
+        (
+            assertion
+            for assertion in all_assertions
+            if assertion.get("source_program_key", "").strip()
+            == reciprocal_program
+            and assertion.get("source_game_id", "").strip()
+            == reciprocal_game_id
+        ),
+        None,
+    )
+    if reciprocal is None:
+        return False
+    if reciprocal_program == school_key:
+        return False
+    if _source_site_to_canonical(reciprocal) != "UNKNOWN":
         return False
 
     return True
@@ -622,11 +673,26 @@ def implementation_site_report(
                 )
                 for assertion in all_game_assertions
             )
+            reciprocal_only_unknown_site_provenance = (
+                _reciprocal_only_unknown_site_provenance(
+                    game,
+                    school_key,
+                    source_rows,
+                    all_game_assertions,
+                )
+            )
             research_accounted = (
-                target_research_accounted or reciprocal_research_accounted
+                target_research_accounted
+                or reciprocal_research_accounted
+                or reciprocal_only_unknown_site_provenance
             )
             if reciprocal_research_accounted and not target_research_accounted:
                 record("reciprocal_research_accounted_gap", canonical_id)
+            if reciprocal_only_unknown_site_provenance:
+                record(
+                    "reciprocal_only_unknown_site_provenance",
+                    canonical_id,
+                )
 
             review_accounted = _review_accounts_for_gap(categories, game_discrepancies)
             if not (research_accounted or review_accounted or home_exception):

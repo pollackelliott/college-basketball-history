@@ -445,6 +445,108 @@ def backfill_reciprocal_only_home_chronology(
     }
 
 
+
+def annotate_reciprocal_only_unknown_site_provenance(
+    repo: Path,
+    school_key: str,
+) -> dict[str, int]:
+    """Record provenance for canonical UNKNOWN site rows backed only by reciprocal evidence.
+
+    This does not infer or change H/A/N, venue, or location. It applies only when the
+    target school has no assertion for the canonical game, exactly one reciprocal
+    assertion exists, and that reciprocal assertion itself carries no usable H/A/N
+    classification. The marker makes the preserved canonical UNKNOWN explicit rather
+    than silent.
+    """
+
+    canonical_path = repo / "data/canonical/games.csv"
+    assertions_path = repo / "data/evidence/game-assertions.csv"
+
+    canonical_fields, canonical_rows = read_csv_table(canonical_path)
+    assertions = chronology_read_csv(assertions_path)
+
+    assertions_by_game: dict[str, list[dict[str, str]]] = {}
+    for assertion in assertions:
+        game_id = chronology_clean(assertion.get("canonical_game_id"))
+        if game_id:
+            assertions_by_game.setdefault(game_id, []).append(assertion)
+
+    annotated_games = 0
+    already_annotated = 0
+
+    for game in canonical_rows:
+        if school_key not in {
+            chronology_clean(game.get("team_a_key")),
+            chronology_clean(game.get("team_b_key")),
+        }:
+            continue
+
+        if chronology_clean(game.get("site_type")).upper() not in {"", "UNKNOWN"}:
+            continue
+
+        game_id = chronology_clean(game.get("canonical_game_id"))
+        if not game_id:
+            continue
+
+        game_assertions = assertions_by_game.get(game_id, [])
+        if any(
+            chronology_clean(assertion.get("source_program_key")) == school_key
+            for assertion in game_assertions
+        ):
+            continue
+
+        reciprocal = [
+            assertion
+            for assertion in game_assertions
+            if chronology_clean(assertion.get("source_program_key"))
+            and chronology_clean(assertion.get("source_program_key")) != school_key
+        ]
+        if len(reciprocal) != 1:
+            continue
+
+        assertion = reciprocal[0]
+        if chronology_clean(assertion.get("curated_site_type")).upper() not in {
+            "",
+            "UNKNOWN",
+        }:
+            continue
+
+        reciprocal_program = chronology_clean(assertion.get("source_program_key"))
+        reciprocal_game_id = chronology_clean(assertion.get("source_game_id"))
+        if not reciprocal_program or not reciprocal_game_id:
+            continue
+
+        provenance = (
+            "[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE "
+            f"target={school_key} "
+            f"reciprocal={reciprocal_program}/{reciprocal_game_id}]"
+        )
+
+        notes = game.get("notes", "")
+        if provenance in notes:
+            already_annotated += 1
+            continue
+
+        game["notes"] = (
+            notes.rstrip()
+            + (" | " if notes.strip() else "")
+            + provenance
+        )
+        annotated_games += 1
+
+    if annotated_games:
+        write_csv_preserving_format(
+            canonical_path,
+            canonical_fields,
+            canonical_rows,
+        )
+
+    return {
+        "annotated_games": annotated_games,
+        "already_annotated": already_annotated,
+    }
+
+
 def execute_approved_in_place(
     repo: Path,
     approved: dict[str, Any],
@@ -481,6 +583,15 @@ def execute_approved_in_place(
     )
     print(json.dumps(reciprocal_home_chronology, sort_keys=True))
 
+    print("\n=== reciprocal-only UNKNOWN site provenance ===")
+    reciprocal_unknown_site_provenance = (
+        annotate_reciprocal_only_unknown_site_provenance(
+            repo,
+            school_key,
+        )
+    )
+    print(json.dumps(reciprocal_unknown_site_provenance, sort_keys=True))
+
     print("\n=== publication metadata ===")
     publication = apply_publication_decisions(repo, approved)
     print(json.dumps(publication, sort_keys=True))
@@ -509,6 +620,7 @@ def execute_approved_in_place(
         "ingestion_output": ingestion_output,
         "reconciliation": reconciliation,
         "reciprocal_home_chronology": reciprocal_home_chronology,
+        "reciprocal_unknown_site_provenance": reciprocal_unknown_site_provenance,
         "publication": publication,
         "site_output": site_output,
         "archive": archive.relative_to(repo).as_posix(),

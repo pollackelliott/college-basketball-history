@@ -9,7 +9,10 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
-from onboard_school import backfill_reciprocal_only_home_chronology  # noqa: E402
+from onboard_school import (  # noqa: E402
+    annotate_reciprocal_only_unknown_site_provenance,
+    backfill_reciprocal_only_home_chronology,
+)
 
 
 def write_csv(path: Path, fieldnames, rows):
@@ -331,6 +334,49 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
             row = read_csv(repo / "data/canonical/games.csv")[0]
             self.assertEqual(row["venue_id"], "")
             self.assertEqual(row["site_city"], "")
+
+
+    def test_annotates_reciprocal_only_unknown_site_provenance(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000005",
+                    "season_label": "1907-1908",
+                    "game_date": "",
+                    "team_a_key": "auburn",
+                    "team_b_key": "cincinnati",
+                    "site_type": "UNKNOWN",
+                    "designated_home_team_key": "",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000005",
+                    "source_program_key": "auburn",
+                    "source_game_id": "AUBRAW-1",
+                    "curated_site_type": "UNKNOWN",
+                }],
+            )
+
+            result = annotate_reciprocal_only_unknown_site_provenance(
+                repo,
+                "cincinnati",
+            )
+
+            self.assertEqual(result["annotated_games"], 1)
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertIn(
+                "RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE "
+                "target=cincinnati reciprocal=auburn/AUBRAW-1",
+                row["notes"],
+            )
+
 
 
 if __name__ == "__main__":
