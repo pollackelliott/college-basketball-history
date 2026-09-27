@@ -25,6 +25,9 @@ def test_complete_target_only_join(tmp_path):
     assert s["entry_mode"]=="ledger_csv"
     assert s["partition"]=={"postseason":1,"regular_season":2,"unclassified":0}
     assert s["target_only_join"]["matched"]==1 and s["target_only_join"]["unmatched_is_blocking_stage3a0"] is False
+    assert len(json.loads((out/"stage3a1-home-queue.json").read_text()))==1
+    assert len(json.loads((out/"stage3b-postseason-handoff.json").read_text()))==1
+    assert len(json.loads((out/"stage3a3-historical-neutral-queue.json").read_text()))==1
 def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     ledger_rows=base_rows();checkpoint=tmp_path/"stage2-complete.zip"
     with zipfile.ZipFile(checkpoint,"w") as z:
