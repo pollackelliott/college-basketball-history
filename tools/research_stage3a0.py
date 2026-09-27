@@ -129,14 +129,17 @@ def main():
         if a.school_key not in (aa,bb):continue
         opp=bb if aa==a.school_key else aa;idx.setdefault((pick(r,"game_date"),opp),[]).append(r)
     counts=Counter();eras=Counter();matches=[];unmatched=[];contradictions=[]
+    queues={"HOME":[],"OPPONENT_HOME":[],"NEUTRAL":[],"UNKNOWN":[],"POSTSEASON":[],"NEUTRAL_MODERN":[],"NEUTRAL_HISTORICAL":[]}
     for r in ledger:
         gc=game_class(pick(r,"game_type","season_type","competition_type"));sc=site_class(pick(r,*SITE_FIELDS));counts[gc]+=1
+        if gc=="POSTSEASON":queues["POSTSEASON"].append(r);continue
         if gc!="REGULAR_SEASON":continue
-        counts["RS_"+sc]+=1
+        counts["RS_"+sc]+=1;queues[sc].append(r)
         if sc=="NEUTRAL":
             try:y=int(pick(r,"season_label","season")[:4])
             except Exception:y=None
-            eras["MODERN_1996_97_PLUS" if y is not None and y>=1996 else "HISTORICAL_1995_96_OR_EARLIER"]+=1
+            era="MODERN_1996_97_PLUS" if y is not None and y>=1996 else "HISTORICAL_1995_96_OR_EARLIER";eras[era]+=1
+            queues["NEUTRAL_MODERN" if era=="MODERN_1996_97_PLUS" else "NEUTRAL_HISTORICAL"].append(r)
         date=pick(r,"game_date","date");opp=pick(r,*OPP_FIELDS);cs=idx.get((date,opp),[]) if date else []
         if len(cs)==1:matches.append({"research_game_id":rid(r),"canonical_game_id":pick(cs[0],"canonical_game_id"),"game_date":date,"opponent_key":opp})
         elif len(cs)>1:contradictions.append({"research_game_id":rid(r),"reason":"MULTIPLE_EXACT_DATE_OPPONENT_MATCHES","game_date":date,"opponent_key":opp,"candidate_ids":[pick(x,"canonical_game_id") for x in cs]})
@@ -145,6 +148,8 @@ def main():
       "regular_season_site_census":{k:counts["RS_"+k] for k in ("HOME","OPPONENT_HOME","NEUTRAL","UNKNOWN")},"neutral_era_census":dict(eras),
       "target_only_join":{"matched":len(matches),"unmatched":len(unmatched),"contradictions":len(contradictions),"unmatched_is_blocking_stage3a0":False,"external_discovery_authorized":False,"handoff_to_later_stage":True},
       "next_action":"STOP_AT_STAGE_3A0_BOUNDARY","next_bounded_assignment":"Stage 3A-1 — H/A/N completion"}
-    arts={"summary":dump(out,"stage3a0-summary.json",summary),"status":dump(out,"stage3a0-status.json",summary),"matches":dump(out,"target-canonical-matches.json",matches),"unmatched":dump(out,"unmatched-local-candidates.json",unmatched),"contradictions":dump(out,"local-contradictions.json",contradictions)}
+    arts={"summary":dump(out,"stage3a0-summary.json",summary),"status":dump(out,"stage3a0-status.json",summary),"matches":dump(out,"target-canonical-matches.json",matches),"unmatched":dump(out,"unmatched-local-candidates.json",unmatched),"contradictions":dump(out,"local-contradictions.json",contradictions),
+      "home_queue":dump(out,"stage3a1-home-queue.json",queues["HOME"]),"opponent_home_queue":dump(out,"stage3a1-opponent-home-queue.json",queues["OPPONENT_HOME"]),"unknown_queue":dump(out,"stage3a1-unknown-han-queue.json",queues["UNKNOWN"]),
+      "neutral_queue":dump(out,"stage3a3-neutral-queue.json",queues["NEUTRAL"]),"neutral_modern_queue":dump(out,"stage3a3-modern-neutral-queue.json",queues["NEUTRAL_MODERN"]),"neutral_historical_queue":dump(out,"stage3a3-historical-neutral-queue.json",queues["NEUTRAL_HISTORICAL"]),"postseason_queue":dump(out,"stage3b-postseason-handoff.json",queues["POSTSEASON"])}
     dump(out,"manifest.json",{k:{"path":str(p),"sha256":sha256(p)} for k,p in arts.items()});print(json.dumps(summary,indent=2));print("STAGE 3A-0: COMPLETE");return 0
 if __name__=="__main__":raise SystemExit(main())
