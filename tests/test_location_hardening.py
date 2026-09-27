@@ -1,3 +1,4 @@
+import inspect
 import sys
 import unittest
 from pathlib import Path
@@ -81,6 +82,13 @@ class SourcePackagePreflightTests(unittest.TestCase):
         self.assertEqual(
             source_location_preflight([row], set(), registry_names),
             ([], []),
+        )
+
+    def test_ingestion_preflight_uses_locality_safe_venue_name_census(self):
+        source = inspect.getsource(ingest_school.main)
+        self.assertIn(
+            "registry_venue_names = venue_names_for_city_contamination(venue_rows)",
+            source,
         )
 
     def test_unrelated_registry_alias_still_rejects_city_contamination(self):

@@ -47,6 +47,7 @@ from location_safety import (
     location_pair_status,
     registry_fallback_marker,
     source_location_preflight,
+    venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
 from program_history import history_scope_errors, partition_source_rows
@@ -1402,7 +1403,7 @@ def main() -> int:
     for row in assertions:
         assertions_by_source[(row.get("source_program_key", ""), row.get("source_game_id", ""))].append(row)
 
-    registry_venue_names = set(venue_name_map)
+    registry_venue_names = venue_names_for_city_contamination(venue_rows)
     preflight_errors, legacy_location_warnings = source_location_preflight(
         sources,
         existing_source_pairs,

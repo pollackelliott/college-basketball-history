@@ -4586,7 +4586,7 @@
       "opponent_key": "wake-forest",
       "opponent_name": "Wake Forest",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -48153,7 +48153,7 @@
       "opponent_key": "wake-forest",
       "opponent_name": "Wake Forest",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 84,
       "opponent_score": 56,
       "score_known": true,

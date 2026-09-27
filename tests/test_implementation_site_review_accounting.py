@@ -118,5 +118,53 @@ class ImplementationSiteReviewAccountingTests(unittest.TestCase):
             self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
 
 
+    def test_reciprocal_only_unknown_site_provenance_accounts_for_gap(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = ImplementationSiteGateTests()
+
+            canonical = canonical_row(
+                site_type="UNKNOWN",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+                notes=(
+                    "[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE "
+                    "target=test reciprocal=other/OTHER-1]"
+                ),
+            )
+            reciprocal = target_assertion(
+                source_program_key="other",
+                source_game_id="OTHER-1",
+                normalized_opponent_key="test",
+                curated_site_type="UNKNOWN",
+                curated_venue_name="",
+                city="",
+                state="",
+            )
+
+            fixture.make_repo(
+                root,
+                sources=[],
+                canonical=[canonical],
+                assertions=[reciprocal],
+                discrepancies=[],
+            )
+
+            report = implementation_site_report(root, "test")
+
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(
+                report["counts"]["unaccounted_public_gap_rows"],
+                0,
+            )
+            self.assertEqual(
+                report["counts"]["reciprocal_only_unknown_site_provenance"],
+                1,
+            )
+
+
+
 if __name__ == "__main__":
     unittest.main()

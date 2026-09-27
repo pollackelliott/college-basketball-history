@@ -9,7 +9,10 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
-from onboard_school import backfill_reciprocal_only_home_chronology  # noqa: E402
+from onboard_school import (  # noqa: E402
+    annotate_reciprocal_only_unknown_site_provenance,
+    backfill_reciprocal_only_home_chronology,
+)
 
 
 def write_csv(path: Path, fieldnames, rows):
@@ -44,6 +47,7 @@ ASSERTION_FIELDS = [
     "canonical_game_id",
     "source_program_key",
     "source_game_id",
+    "curated_site_type",
 ]
 
 SCHOOL_VENUE_FIELDS = [
@@ -188,6 +192,75 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
             self.assertEqual(early["site_city"], "Cincinnati")
             self.assertEqual(early["site_state"], "OH")
 
+    def test_unknown_target_site_assertion_allows_deterministic_home_chronology_backfill(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000004",
+                    "season_label": "1935-1936",
+                    "game_date": "1936-02-04",
+                    "team_a_key": "north-carolina",
+                    "team_b_key": "cincinnati",
+                    "site_type": "TEAM_B_HOME",
+                    "designated_home_team_key": "cincinnati",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [
+                    {
+                        "canonical_game_id": "CBBG-0000004",
+                        "source_program_key": "north-carolina",
+                        "source_game_id": "UNC-1",
+                        "curated_site_type": "OPPONENT_HOME",
+                    },
+                    {
+                        "canonical_game_id": "CBBG-0000004",
+                        "source_program_key": "cincinnati",
+                        "source_game_id": "CIN-1",
+                        "curated_site_type": "UNKNOWN",
+                    },
+                ],
+            )
+            write_csv(
+                repo / "schools/cincinnati/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000684",
+                    "venue_key": "schmidlapp-gym",
+                    "canonical_name": "Schmidlapp Gym",
+                    "city": "Cincinnati",
+                    "state": "OH",
+                    "relationship_type": "source_program_home",
+                    "relationship_start": "1911-1912",
+                    "relationship_end": "1953-1954",
+                    "source_basis": "documented home chronology",
+                }],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000684",
+                    "venue_key": "schmidlapp-gym",
+                    "display_name": "Schmidlapp Gym",
+                    "city": "Cincinnati",
+                    "state": "OH",
+                }],
+            )
+
+            result = backfill_reciprocal_only_home_chronology(repo, "cincinnati")
+            self.assertEqual(result["applied_games"], 1)
+
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(row["venue_id"], "VEN-000684")
+            self.assertEqual(row["site_city"], "Cincinnati")
+
     def test_target_school_assertion_prevents_reciprocal_only_backfill(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)
@@ -220,6 +293,7 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
                         "canonical_game_id": "CBBG-0000003",
                         "source_program_key": "cincinnati",
                         "source_game_id": "CIN-STG1-1",
+                        "curated_site_type": "SOURCE_PROGRAM_HOME",
                     },
                 ],
             )
@@ -260,6 +334,49 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
             row = read_csv(repo / "data/canonical/games.csv")[0]
             self.assertEqual(row["venue_id"], "")
             self.assertEqual(row["site_city"], "")
+
+
+    def test_annotates_reciprocal_only_unknown_site_provenance(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000005",
+                    "season_label": "1907-1908",
+                    "game_date": "",
+                    "team_a_key": "auburn",
+                    "team_b_key": "cincinnati",
+                    "site_type": "UNKNOWN",
+                    "designated_home_team_key": "",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000005",
+                    "source_program_key": "auburn",
+                    "source_game_id": "AUBRAW-1",
+                    "curated_site_type": "UNKNOWN",
+                }],
+            )
+
+            result = annotate_reciprocal_only_unknown_site_provenance(
+                repo,
+                "cincinnati",
+            )
+
+            self.assertEqual(result["annotated_games"], 1)
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertIn(
+                "RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE "
+                "target=cincinnati reciprocal=auburn/AUBRAW-1",
+                row["notes"],
+            )
+
 
 
 if __name__ == "__main__":
