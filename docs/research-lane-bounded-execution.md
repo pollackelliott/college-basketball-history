@@ -267,7 +267,7 @@ checkpoint it authorizes the serialized unfinished tranche.
 
 ### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
 
-This substage is **strictly local-only and mechanical**. It is read-only except for
+This substage is **strictly local-only, mechanical, and command-first**. It is read-only except for
 writing unambiguous accepted same-game project evidence through into the working ledger.
 The detailed controlling scope is `docs/stage3a0-local-only-contract.md`.
 
@@ -275,20 +275,23 @@ Allowed evidence is limited to the verified durable checkpoint/working state and
 already-present structured project evidence in the checked-out/current protected-main repository.
 "Project-evidence harvest" does not authorize reading documents or source files for interpretation.
 
-Before broad historical searching:
+After the owner authorizes Stage 3A-0 and the exact protected-main SHA is confirmed, the first
+Stage 3A-0 repository operation is:
 
-1. mechanically partition the exact Stage 1 universe into regular-season Stage 3A rows
-   and postseason Stage 3B handoff rows;
-2. derive the whole-population H/A/N work census;
-3. identify HOME, OPPONENT_HOME, NEUTRAL, and unresolved H/A/N responsibilities;
-4. separate NEUTRAL rows into 1996-97+ and 1995-96-and-earlier populations;
-5. run the repository-owned deterministic Stage 3A-0 structured-data operation (normally
-   `python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv>`) and
-   perform its one target-school canonical exact-game join;
-6. preserve unmatched or contradictory candidates without forcing or researching them;
-7. write unambiguous accepted same-game evidence through into the cumulative row-level
-   working state;
-8. serialize the exact residual queues required by Stage 3A-1 through 3A-3.
+```bash
+python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
+```
+
+A direct structured Stage 2 ledger may be supplied instead of the ZIP. The command itself owns
+checkpoint-ledger selection, structured readiness, regular-season/postseason partitioning,
+H/A/N census, modern/historical neutral split, target-only canonical exact-game join, and exact
+HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL / postseason queue emission.
+
+Do not manually inspect the checkpoint schema, tool source, or ledger population before running
+this entrypoint merely to prepare Stage 3A-0. Do not search for a separate readiness command.
+If the command returns `STAGE_3A0_ENTRY_NOT_READY` or `STAGE_3A0_INPUT_NOT_READY`, read the
+serialized `stage3a0-status.json`, follow only its exact bounded remediation, and stop before
+historical/source research.
 
 **Zero external research is authorized in Stage 3A-0.** Do not search the public web,
 institutional athletics sites, media guides, newspapers, external PDFs, or GitHub/code
