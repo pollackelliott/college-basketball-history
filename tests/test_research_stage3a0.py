@@ -93,5 +93,5 @@ def test_policy_makes_stage3a0_checkpoint_only_and_connector_portable():
     assert "checkpoint-only" in agents.lower()
     assert "repository archive is not required for Stage 3A-0" in portable
     assert "fetch the exact `tools/research_stage3a0.py` file" in portable
-    assert "codeload" not in contract.lower()
+    assert "Do not use codeload" in contract
     assert "target-only canonical exact-game join" not in contract
