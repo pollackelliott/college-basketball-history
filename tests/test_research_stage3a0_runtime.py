@@ -112,6 +112,49 @@ class Stage3A0RuntimeTests(unittest.TestCase):
                 ["@", "N"],
             )
 
+    def test_current_checkpoint_accepts_ncaa_tournament_as_postseason(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            checkpoint = root / "stage2-current.zip"
+            rows = [
+                {
+                    "research_game_id": "FSU-STG1-00001",
+                    "season": "2025-2026",
+                    "game_date": "2025-11-10",
+                    "opponent_key": "florida",
+                    "site_type": "UNKNOWN",
+                    "game_type": "REGULAR_SEASON",
+                },
+                {
+                    "research_game_id": "FSU-STG1-00002",
+                    "season": "2025-2026",
+                    "game_date": "2026-03-20",
+                    "opponent_key": "duke",
+                    "site_type": "UNKNOWN",
+                    "game_type": "NCAA_TOURNAMENT",
+                },
+            ]
+            with zipfile.ZipFile(checkpoint, "w") as archive:
+                archive.writestr("structured-stage2-ledger.csv", csv_text(rows))
+
+            proc, status, out = self.run_checkpoint(checkpoint)
+            self.assertEqual(proc.returncode, 0, proc.stderr or proc.stdout)
+            self.assertEqual(status["status"], "COMPLETE")
+            self.assertEqual(
+                status["partition"],
+                {
+                    "postseason": 1,
+                    "regular_season": 1,
+                    "unclassified": 0,
+                },
+            )
+            handoff = json.loads((out / "stage3b-postseason-handoff.json").read_text())
+            self.assertEqual(
+                [row["research_game_id"] for row in handoff],
+                ["FSU-STG1-00002"],
+            )
+            self.assertEqual(handoff[0]["game_type"], "NCAA_TOURNAMENT")
+
     def test_bad_mapping_count_fails_closed_with_status(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
