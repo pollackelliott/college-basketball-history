@@ -31,6 +31,10 @@ Tier 1 accepted-evidence reuse is a mandatory mechanical operation before active
 python tools/research_stage3a3_tier1.py <school_key> <stage3a2-ledger.csv>
 ```
 
+If no exact-state runnable checkout is present, use the bounded portable execution path in `docs/research-portable-execution.md`: one temporary repository archive pinned to the full exact protected-main SHA, then invoke the same permanent Tier-1 tool with explicit `--repo-root` and `--main-sha`. The owner is not required to provide a Codespace for this mechanical pass.
+
+The disposable snapshot does not broaden Tier 1 evidence authority. The permanent tool still owns the canonical/published-reciprocal evidence scan and exact-game reuse logic.
+
 For a nontrivial neutral population, do not combine Tier 1 with modern recurring research in the same turn. The command must pin one protected-main SHA, bulk-scan the permitted accepted project-evidence surfaces, serialize unambiguous exact-game reuse, contradictions, and the exact remaining modern/historical queues, emit `stage3a3-tier1-status.json`, and stop. A no-match is a successful Tier-1 output, not permission for source discovery.
 
 After substantial research in one tier, **do not cross into the next materially different tier in the same turn**. Write accepted findings through, serialize the exact remaining queue, and stop at a durable continuation point.

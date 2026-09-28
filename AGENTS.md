@@ -18,6 +18,7 @@ Read these process documents together before onboarding work:
 - `docs/stage1-game-universe-contract.md`
 - `docs/stage3a-regular-season-site-research.md`
 - `docs/stage3a0-local-only-contract.md`
+- `docs/research-portable-execution.md`
 - `docs/stage3a1-source-fanout-contract.md`
 - `docs/stage3a3-neutral-tranche-contract.md`
 - `docs/conference-tournament-site-reference.md`
@@ -73,12 +74,12 @@ heterogeneous residuals. Independent row-level adjudication remains capped at 25
 turn, but a homogeneous residual already at or below that ceiling should normally be
 processed as one tranche.
 
-For new Research lanes, Stage 1 must serialize structured `game_type` on every game and Stage 2 must preserve it. Stage 3A-0 is **command-first**: after owner authorization and protected-main SHA confirmation, invoke `python tools/research_stage3a0.py <school_key> <stage2-checkpoint.zip> --main-sha <sha>` (or pass the structured Stage 2 ledger directly). That command is the readiness gate; do not search for a separate readiness operation, manually inspect checkpoint members, inspect the tool source, or conversationally pre-partition the ledger first. The tool owns checkpoint-ledger selection, readiness, census/partition, target-only join, and exact downstream queue emission. If the current environment does not already provide a runnable checkout/Python surface capable of executing that command, report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` and stop; do not web-search, clone/reconstruct/fetch a repository snapshot, search the filesystem for another checkout/tool, inspect remote tool source, or simulate Stage 3A-0 conversationally. A pre-hardening checkpoint that lacks a required field uses only the documented narrow compatibility migration + declared-intent validator; do not improvise a repair inside 3A-0.
+For new Research lanes, Stage 1 must serialize structured `game_type` on every game and Stage 2 must preserve it. Stage 3A-0 is **command-first**: after owner authorization and protected-main SHA confirmation, invoke `python tools/research_stage3a0.py <school_key> <stage2-checkpoint.zip> --main-sha <sha>` (or pass the structured Stage 2 ledger directly). That command is the readiness gate; do not search for a separate readiness operation, manually inspect checkpoint members, inspect the tool source, or conversationally pre-partition the ledger first. The tool owns checkpoint-ledger selection, readiness, census/partition, target-only join, and exact downstream queue emission. If no exact-state runnable checkout is already present, use the bounded disposable exact-SHA snapshot path in `docs/research-portable-execution.md`. Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when neither an exact-state checkout nor that portable execution path is available. Do not clone, use a moving or unpinned archive, search for alternate snapshots or tools, inspect remote tool source to derive historical conclusions, or simulate Stage 3A-0 conversationally. A pre-hardening checkpoint that lacks a required field uses only the documented narrow compatibility migration + declared-intent validator; do not improvise a repair inside 3A-0.
 
 **Stage 3A-0 is a strict local-only mechanical pass.** It performs zero public-web
 research and zero external source discovery. During 3A-0, use only the verified durable
-checkpoint plus already-present project evidence in the checked-out/current protected-main
-repository. The Stage 3A-0 evidence harvest is deliberately narrow: perform one bounded bulk exact-game
+checkpoint plus project evidence at the exact protected-main SHA, supplied either by an
+exact-state checkout or the authorized disposable exact-SHA snapshot. The Stage 3A-0 evidence harvest is deliberately narrow: perform one bounded bulk exact-game
 join against the target school's current canonical/assertion evidence. Do **not** enumerate,
 fetch, or inspect published opponent-school packages during 3A-0, even though those packages
 are local project evidence; targeted reciprocal/package use belongs to 3A-1/2/3. Do not
@@ -332,7 +333,7 @@ unresolved discrepancies.
   an obvious current-program opponent identity to survive under a stale/non-D1 key, or
   allows a newly researched school to reach `RESEARCH_FROZEN` without the required
   non-D1 owner sanity scan.
-- Flag any Stage 3A-0 workflow that delays the permanent `tools/research_stage3a0.py` entrypoint with conversational checkpoint-schema inspection, tool-source inspection, manual pre-partitioning, or a search for a separate readiness gate when the Stage 2 checkpoint/ledger is already available; that responds to a missing runnable checkout by web-searching, cloning, fetching/reconstructing snapshots, filesystem-hunting, remote tool-source inspection, or conversational simulation instead of stopping at `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`; that conversationally reconstructs the deterministic census/join; that reads documents/media guides to fill missing structured partition fields; or that treats the tool's serialized unmatched/unclassified output as permission for iterative discovery.
+- Flag any Stage 3A-0 workflow that delays the permanent `tools/research_stage3a0.py` entrypoint with conversational checkpoint-schema inspection, tool-source inspection, manual pre-partitioning, or a search for a separate readiness gate when the Stage 2 checkpoint/ledger is already available; that responds to a missing runnable checkout by failing to use the authorized exact-SHA portable path when available, or by web-searching, cloning, using moving/unpinned or alternate snapshots, filesystem-hunting, remote tool-source inspection for historical conclusions, or conversational simulation; that conversationally reconstructs the deterministic census/join; that reads documents/media guides to fill missing structured partition fields; or that treats the tool's serialized unmatched/unclassified output as permission for iterative discovery.
 - Flag any Stage 3A workflow that collapses Stage 3A-0 through 3A-4 into one monolithic
   execution unit; automatically rolls from one required Stage 3A substage into the next
   without an owner `Proceed`; lets Stage 3A-0 perform public-web research, institutional

@@ -71,13 +71,23 @@ def test_legacy_migration_rejects_non_game_type_change(tmp_path):
     assert p.returncode==2 and "non-game-type fields changed" in p.stdout
 
 
-def test_policy_stops_when_stage3a0_execution_environment_is_unavailable():
-    root=Path(__file__).parents[1]
-    contract=(root/"docs"/"stage3a0-local-only-contract.md").read_text(encoding="utf-8")
-    bounded=(root/"docs"/"research-lane-bounded-execution.md").read_text(encoding="utf-8")
-    agents=(root/"AGENTS.md").read_text(encoding="utf-8")
-    sentinel="STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE"
-    assert sentinel in contract and sentinel in bounded and sentinel in agents
-    assert "search the filesystem for the tool or another checkout" in contract
-    assert "Do not web-search, clone, reconstruct" in bounded
-    assert "inspect remote tool source" in agents
+def test_policy_supports_portable_exact_sha_research_execution():
+    root = Path(__file__).parents[1]
+
+    contract = (root / "docs" / "stage3a0-local-only-contract.md").read_text(encoding="utf-8")
+    bounded = (root / "docs" / "research-lane-bounded-execution.md").read_text(encoding="utf-8")
+    portable = (root / "docs" / "research-portable-execution.md").read_text(encoding="utf-8")
+    neutral = (root / "docs" / "stage3a3-neutral-tranche-contract.md").read_text(encoding="utf-8")
+    agents = (root / "AGENTS.md").read_text(encoding="utf-8")
+
+    sentinel = "STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE"
+
+    assert sentinel in contract
+    assert sentinel in bounded
+    assert sentinel in portable
+    assert sentinel in agents
+
+    assert "docs/research-portable-execution.md" in agents
+    assert "exact-protected-main-sha" in portable
+    assert "The owner is not required to provide a Codespace" in neutral
+    assert "same checkpoint + same protected-main SHA + same permanent tool" in portable
