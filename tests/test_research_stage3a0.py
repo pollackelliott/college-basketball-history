@@ -339,6 +339,27 @@ def test_legacy_checkpoint_requires_complete_label_mapping(tmp_path):
     assert not (out / "stage3a0-summary.json").exists()
 
 
+def test_legacy_checkpoint_rejects_incorrect_mapping_game_counts(tmp_path):
+    checkpoint = tmp_path / "legacy-bad-count.zip"
+    census = [dict(row) for row in creighton_opponent_census()]
+    census[0]["game_count"] = "2"
+    with zipfile.ZipFile(checkpoint, "w") as archive:
+        archive.writestr(
+            "school_stage1_working_ledger.csv",
+            csv_text(creighton_legacy_stage1_rows()),
+        )
+        archive.writestr(
+            "school_stage2_opponent_census.csv",
+            csv_text(census),
+        )
+
+    process, status, _ = run_path(tmp_path, checkpoint)
+    assert process.returncode == 2
+    assert status["entry_error"].startswith(
+        "NO_COMPLETE_LEGACY_STAGE2_OPPONENT_MAPPING"
+    )
+
+
 def test_equivalent_complete_mapping_candidates_are_deterministic(tmp_path):
     checkpoint = tmp_path / "legacy-equivalent.zip"
     with zipfile.ZipFile(checkpoint, "w") as archive:
