@@ -20,16 +20,19 @@ def base_rows():
       {"research_game_id":"C-1","season_label":"2024-2025","game_date":"2024-11-01","opponent_key":"duke","site_type":"HOME","game_type":"REGULAR_SEASON"},
       {"research_game_id":"C-2","season_label":"1990-1991","game_date":"1991-03-15","opponent_key":"unc","site_type":"NEUTRAL","game_type":"NCAA"},
       {"research_game_id":"C-3","season_label":"1995-1996","game_date":"1995-12-01","opponent_key":"wake-forest","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}]
-def canonical_rows():return [{"canonical_game_id":"G-1","game_date":"2024-11-01","team_a_key":"clemson","team_b_key":"duke"}]
-def test_complete_target_only_join(tmp_path):
-    p,s,out=run(tmp_path,base_rows(),canonical_rows())
+def test_complete_checkpoint_only_partition_without_repository(tmp_path):
+    p,s,out=run(tmp_path,base_rows())
     assert p.returncode==0 and s["status"]=="COMPLETE" and s["protected_main_sha"]=="PINNED"
     assert s["entry_mode"]=="ledger_csv"
+    assert s["repository_state_required"] is False
+    assert s["project_evidence_reuse"]["performed_in_stage3a0"] is False
     assert s["partition"]=={"postseason":1,"regular_season":2,"unclassified":0}
-    assert s["target_only_join"]["matched"]==1 and s["target_only_join"]["unmatched_is_blocking_stage3a0"] is False
+    assert s["regular_season_site_census"]=={"HOME":1,"OPPONENT_HOME":0,"NEUTRAL":1,"UNKNOWN":0}
     assert len(json.loads((out/"stage3a2-home-queue.json").read_text()))==1
     assert len(json.loads((out/"stage3b-postseason-handoff.json").read_text()))==1
     assert len(json.loads((out/"stage3a3-historical-neutral-queue.json").read_text()))==1
+    assert not (out/"target-canonical-matches.json").exists()
+    assert not (tmp_path/"data").exists()
 def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     ledger_rows=base_rows();checkpoint=tmp_path/"stage2-complete.zip"
     with zipfile.ZipFile(checkpoint,"w") as z:
