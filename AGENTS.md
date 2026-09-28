@@ -74,21 +74,11 @@ heterogeneous residuals. Independent row-level adjudication remains capped at 25
 turn, but a homogeneous residual already at or below that ceiling should normally be
 processed as one tranche.
 
-For new Research lanes, Stage 1 must serialize structured `game_type` on every game and Stage 2 must preserve it. Stage 3A-0 is **command-first**: after owner authorization and protected-main SHA confirmation, invoke `python tools/research_stage3a0.py <school_key> <stage2-checkpoint.zip> --main-sha <sha>` (or pass the structured Stage 2 ledger directly). That command is the readiness gate; do not search for a separate readiness operation, manually inspect checkpoint members, inspect the tool source, or conversationally pre-partition the ledger first. The tool owns checkpoint-ledger selection, readiness, census/partition, target-only join, and exact downstream queue emission. If no exact-state runnable checkout is already present, use the bounded disposable exact-SHA snapshot path in `docs/research-portable-execution.md`. Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when neither an exact-state checkout nor that portable execution path is available. Do not clone, use a moving or unpinned archive, search for alternate snapshots or tools, inspect remote tool source to derive historical conclusions, or simulate Stage 3A-0 conversationally. A pre-hardening checkpoint that lacks a required field uses only the documented narrow compatibility migration + declared-intent validator; do not improvise a repair inside 3A-0.
+For new Research lanes, Stage 1 must serialize structured `game_type` on every game and Stage 2 must preserve it. Stage 3A-0 is **checkpoint-only and command-first**: after owner authorization and protected-main SHA confirmation, invoke `python tools/research_stage3a0.py <school_key> <stage2-checkpoint.zip> --main-sha <sha>` (or pass the structured Stage 2 ledger directly). The tool owns checkpoint-ledger selection, readiness, census/partition, modern/historical neutral split, and exact downstream queue emission. Stage 3A-0 does **not** perform a canonical/project-evidence join and does not require repository basketball state.
 
-**Stage 3A-0 is a strict local-only mechanical pass.** It performs zero public-web
-research and zero external source discovery. During 3A-0, use only the verified durable
-checkpoint plus project evidence at the exact protected-main SHA, supplied either by an
-exact-state checkout or the authorized disposable exact-SHA snapshot. The Stage 3A-0 evidence harvest is deliberately narrow: perform one bounded bulk exact-game
-join against the target school's current canonical/assertion evidence. Do **not** enumerate,
-fetch, or inspect published opponent-school packages during 3A-0, even though those packages
-are local project evidence; targeted reciprocal/package use belongs to 3A-1/2/3. Do not
-browse institutional sites, media guides, newspapers, external PDFs, GitHub/code search for
-new sources, or opponent archives. An unmatched local candidate stays unresolved for
-3A-1/2/3; it is not permission to open another local discovery path or the web. Once the structured local join is exhausted, unresolved/contradictory rows
-become serialized outputs and Stage 3A-0 closes. Pin one protected-main SHA for the pass and use `tools/export_stage3a0_local_evidence.py` when a bounded target-only canonical projection is needed. Before reporting status, read the terminal `stage3a0-status.json`; unmatched rows are explicitly nonblocking and authorize no additional discovery. If a public-web or external-source path is
-opened accidentally during 3A-0, do not use that evidence; audit write-through back to
-authorized local-only provenance and close/checkpoint mechanically.
+If no runnable checkout is present, use the exact-tool portable path in `docs/research-portable-execution.md`: fetch the exact `tools/research_stage3a0.py` file through the authenticated GitHub connector at the confirmed full protected-main SHA, write those exact bytes to temporary storage, and run it against the authoritative checkpoint/ledger with explicit `--main-sha`. Do not use codeload, clone, or a full repository archive merely for Stage 3A-0. Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when the lane cannot access the checkpoint/ledger, exact tool bytes, or temporary Python/filesystem execution.
+
+**Stage 3A-0 performs zero historical research and zero project-evidence discovery.** Do not browse institutional sites, media guides, newspapers, external PDFs, opponent packages, canonical data, or venue sources in order to reduce its queues. Large HOME, UNKNOWN, or NEUTRAL residuals are valid mechanical outputs. Read the terminal `stage3a0-status.json` before reporting completion. A pre-hardening checkpoint that lacks a required field uses only the documented narrow compatibility migration + declared-intent validator; do not improvise a repair inside 3A-0.
 
 3A-1 must bound **source fanout as well as row count**. Before opening external sources,
 define coherent evidence classes and use the required hierarchy: accepted project evidence,
