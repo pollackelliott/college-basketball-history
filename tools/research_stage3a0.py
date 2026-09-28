@@ -49,6 +49,7 @@ MAPPING_KEY_FIELDS = (
     "opponent_key",
     "opponent_program_key",
 )
+COUNT_FIELDS = ("game_count", "games")
 SITE_FIELDS = ("site_type", "site", "han", "home_away_neutral")
 SEASON_FIELDS = ("season_label", "season")
 GAME_TYPE_FIELDS = ("game_type", "season_type", "competition_type")
