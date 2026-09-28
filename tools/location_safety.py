@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
+from typing import Callable
 
 
 SOURCE_ASSERTION_SYNC_FIELDS = (
@@ -227,18 +228,51 @@ def append_note(existing: str, marker: str) -> str:
     return f"{existing} {marker}".strip()
 
 
+def _registry_fallback_from_match(match: re.Match[str]) -> dict[str, str]:
+    return {
+        "source_program_key": match.group(1),
+        "source_game_id": match.group(2),
+        "venue_key": match.group(3),
+        "site_type": match.group(4),
+        "fields": match.group(5),
+    }
+
+
 def parse_registry_fallback_markers(notes: str) -> list[dict[str, str]]:
     """Parse deterministic registry-fallback audit markers from canonical notes."""
     return [
-        {
-            "source_program_key": match.group(1),
-            "source_game_id": match.group(2),
-            "venue_key": match.group(3),
-            "site_type": match.group(4),
-            "fields": match.group(5),
-        }
+        _registry_fallback_from_match(match)
         for match in _REGISTRY_FALLBACK_RE.finditer(notes or "")
     ]
+
+
+def retire_registry_fallbacks(
+    notes: str,
+    should_retire: Callable[[dict[str, str]], bool],
+) -> tuple[str, int]:
+    """Remove only registry-fallback markers rejected by the supplied predicate."""
+    value = notes or ""
+    if not value:
+        return value, 0
+
+    retired = 0
+    result = value
+    matches = list(_REGISTRY_FALLBACK_RE.finditer(value))
+    for match in reversed(matches):
+        marker = _registry_fallback_from_match(match)
+        if not should_retire(marker):
+            continue
+
+        start, end = match.span()
+        if start > 0 and result[start - 1 : start] == " ":
+            start -= 1
+        elif end < len(result) and result[end : end + 1] == " ":
+            end += 1
+
+        result = result[:start] + result[end:]
+        retired += 1
+
+    return result.strip(), retired
 
 
 def retire_site_mismatched_registry_fallbacks(
@@ -253,28 +287,13 @@ def retire_site_mismatched_registry_fallbacks(
     # row and must be removed rather than rewritten. Matching markers are retained,
     # including any new marker created from the newly selected source.
     site_type = (canonical_site_type or "").strip()
-    value = notes or ""
-    if not site_type or not value:
-        return value, 0
+    if not site_type:
+        return notes or "", 0
 
-    retired = 0
-    result = value
-    matches = list(_REGISTRY_FALLBACK_RE.finditer(value))
-    for match in reversed(matches):
-        if match.group(4).strip() == site_type:
-            continue
-
-        start, end = match.span()
-        if start > 0 and result[start - 1 : start] == " ":
-            start -= 1
-        elif end < len(result) and result[end : end + 1] == " ":
-            end += 1
-
-        result = result[:start] + result[end:]
-        retired += 1
-
-    return result.strip(), retired
-
+    return retire_registry_fallbacks(
+        notes,
+        lambda marker: marker["site_type"].strip() != site_type,
+    )
 
 def venue_location_conflicts(
     registry_rows: list[tuple[str, dict[str, str]]],
