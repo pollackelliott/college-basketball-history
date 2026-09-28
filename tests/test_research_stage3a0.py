@@ -80,23 +80,18 @@ def test_legacy_migration_rejects_non_game_type_change(tmp_path):
     assert p.returncode==2 and "non-game-type fields changed" in p.stdout
 
 
-def test_policy_supports_portable_exact_sha_research_execution():
+def test_policy_makes_stage3a0_checkpoint_only_and_connector_portable():
     root = Path(__file__).parents[1]
 
     contract = (root / "docs" / "stage3a0-local-only-contract.md").read_text(encoding="utf-8")
     bounded = (root / "docs" / "research-lane-bounded-execution.md").read_text(encoding="utf-8")
     portable = (root / "docs" / "research-portable-execution.md").read_text(encoding="utf-8")
-    neutral = (root / "docs" / "stage3a3-neutral-tranche-contract.md").read_text(encoding="utf-8")
     agents = (root / "AGENTS.md").read_text(encoding="utf-8")
 
-    sentinel = "STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE"
-
-    assert sentinel in contract
-    assert sentinel in bounded
-    assert sentinel in portable
-    assert sentinel in agents
-
-    assert "docs/research-portable-execution.md" in agents
-    assert "exact-protected-main-sha" in portable
-    assert "The owner is not required to provide a Codespace" in neutral
-    assert "same checkpoint + same protected-main SHA + same permanent tool" in portable
+    assert "checkpoint-only" in contract.lower()
+    assert "checkpoint-only" in bounded.lower()
+    assert "checkpoint-only" in agents.lower()
+    assert "repository archive is not required for Stage 3A-0" in portable
+    assert "fetch the exact `tools/research_stage3a0.py` file" in portable
+    assert "codeload" not in contract.lower()
+    assert "target-only canonical exact-game join" not in contract
