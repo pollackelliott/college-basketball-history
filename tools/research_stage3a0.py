@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic Stage 3A-0 entry/readiness, census/partition, and target-only canonical join."""
+"""Deterministic checkpoint-only Stage 3A-0 entry/readiness and census/partition."""
 from __future__ import annotations
 import argparse,csv,hashlib,io,json,subprocess,zipfile
 from collections import Counter
@@ -7,7 +7,7 @@ from pathlib import Path
 
 REGULAR={"REGULAR_SEASON","REGULAR","RS"}
 POST={"POSTSEASON","NCAA","NIT","CONFERENCE_TOURNAMENT","OTHER_POSTSEASON","CBI","CIT","CROWN"}
-HOME={"HOME","TEAM_HOME","TARGET_HOME"}; AWAY={"AWAY","OPPONENT_HOME","OPP_HOME","ROAD"}; NEUTRAL={"NEUTRAL","N"}
+HOME={"HOME","TEAM_HOME","TARGET_HOME"}; AWAY={"AWAY","OPPONENT_HOME","OPP_HOME","ROAD"}; NEUTRAL={"NEUTRAL","N"}; UNKNOWN_SITE={"UNKNOWN","UNK","?"}
 LEDGER_BASENAMES=("structured-stage2-ledger.csv","structured-stage2-ledger-with-game-type.csv","stage2-ledger.csv","stage2-working-ledger.csv")
 ID_FIELDS=("research_game_id","source_game_id","game_id","id")
 OPP_FIELDS=("opponent_key","opponent_program_key")
@@ -36,7 +36,8 @@ def site_class(v):
     if x in HOME:return "HOME"
     if x in AWAY:return "OPPONENT_HOME"
     if x in NEUTRAL:return "NEUTRAL"
-    return "UNKNOWN"
+    if x in UNKNOWN_SITE:return "UNKNOWN"
+    return "INVALID"
 def sha256(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def sha256_bytes(b):return hashlib.sha256(b).hexdigest()
 def git_sha():
@@ -94,7 +95,7 @@ def readiness(ledger):
       "missing_game_type":[rid(r) or f"ROW-{i+1}" for i,r in enumerate(ledger) if not pick(r,"game_type","season_type","competition_type")],
       "unrecognized_game_type":[rid(r) or f"ROW-{i+1}" for i,r in enumerate(ledger) if pick(r,"game_type","season_type","competition_type") and game_class(pick(r,"game_type","season_type","competition_type"))=="UNCLASSIFIED"],
       "missing_site_type":[rid(r) or f"ROW-{i+1}" for i,r in enumerate(ledger) if not pick(r,*SITE_FIELDS)],
-      "unrecognized_site_type":[rid(r) or f"ROW-{i+1}" for i,r in enumerate(ledger) if pick(r,*SITE_FIELDS) and site_class(pick(r,*SITE_FIELDS))=="UNKNOWN"],
+      "unrecognized_site_type":[rid(r) or f"ROW-{i+1}" for i,r in enumerate(ledger) if pick(r,*SITE_FIELDS) and site_class(pick(r,*SITE_FIELDS))=="INVALID"],
       "missing_opponent_key":[rid(r) or f"ROW-{i+1}" for i,r in enumerate(ledger) if not pick(r,*OPP_FIELDS)],
     }
     blocking={k:v for k,v in defects.items() if v}
@@ -103,12 +104,12 @@ def readiness(ledger):
 def main():
     ap=argparse.ArgumentParser(description="Command-first Stage 3A-0 gate. INPUT may be the Stage 2 checkpoint ZIP or structured Stage 2 ledger CSV.")
     ap.add_argument("school_key");ap.add_argument("input",type=Path)
-    ap.add_argument("--canonical",type=Path,default=Path("data/canonical/games.csv"));ap.add_argument("--output-dir",type=Path)
+    ap.add_argument("--canonical",type=Path,help=argparse.SUPPRESS);ap.add_argument("--output-dir",type=Path)
     ap.add_argument("--main-sha");a=ap.parse_args();out=a.output_dir or Path(".research")/a.school_key/"stage3a0";out.mkdir(parents=True,exist_ok=True)
     pinned=a.main_sha or git_sha()
     try:ledger,input_meta=load_input(a.input,out)
     except (OSError,ValueError) as e:
-        status={"schema_version":3,"school_key":a.school_key,"status":"STAGE_3A0_ENTRY_NOT_READY","protected_main_sha":pinned,
+        status={"schema_version":4,"school_key":a.school_key,"status":"STAGE_3A0_ENTRY_NOT_READY","protected_main_sha":pinned,"repository_state_required":False,
           "input_artifact":str(a.input),"entry_error":str(e),"external_historical_research_used":False,
           "next_action":"STOP_AND_FIX_STAGE2_INPUT_ARTIFACT","remediation":"Provide the durable Stage 2 checkpoint ZIP or structured Stage 2 ledger directly to this command. Do not inspect checkpoint members or conduct historical/source discovery inside Stage 3A-0."}
         if a.input.exists():status["input_artifact_sha256"]=sha256(a.input)
@@ -116,19 +117,14 @@ def main():
     pre=readiness(ledger)
     blocking_keys=set(pre["blocking_defects"])
     missing_game_type_only=blocking_keys=={"missing_game_type"}
-    status={"schema_version":3,"school_key":a.school_key,"status":"INPUT_READY" if pre["ready"] else "STAGE_3A0_INPUT_NOT_READY",
-      **input_meta,"protected_main_sha":pinned,"readiness":pre,"external_historical_research_used":False}
+    status={"schema_version":4,"school_key":a.school_key,"status":"INPUT_READY" if pre["ready"] else "STAGE_3A0_INPUT_NOT_READY",
+      **input_meta,"protected_main_sha":pinned,"repository_state_required":False,"project_evidence_reuse_deferred":True,"readiness":pre,"external_historical_research_used":False}
     if not pre["ready"]:
         status["remediation_code"]="MISSING_GAME_TYPE_ONLY" if missing_game_type_only else "STRUCTURED_INPUT_DEFECTS"
         status["next_action"]="STOP_STAGE_3A0_AND_RUN_NARROW_GAME_TYPE_MIGRATION" if missing_game_type_only else "STOP_AND_REPAIR_STRUCTURED_INPUT_AT_PRIOR_STAGE"
         status["remediation"]="For a pre-hardening accepted checkpoint only: exit Stage 3A-0, perform one narrow compatibility repair from accepted source/state, validate it with research_stage3a0_migrate.py, then rerun. Do not improvise discovery inside Stage 3A-0." if missing_game_type_only else "Stop Stage 3A-0. Repair only the serialized structured-input defects at the controlling prior stage/checkpoint; do not research around the readiness gate."
         dump(out,"stage3a0-status.json",status);print(json.dumps(status,indent=2));return 2
-    canonical=rows(a.canonical);idx={}
-    for r in canonical:
-        aa=pick(r,"team_a_key");bb=pick(r,"team_b_key")
-        if a.school_key not in (aa,bb):continue
-        opp=bb if aa==a.school_key else aa;idx.setdefault((pick(r,"game_date"),opp),[]).append(r)
-    counts=Counter();eras=Counter();matches=[];unmatched=[];contradictions=[]
+    counts=Counter();eras=Counter()
     queues={"HOME":[],"OPPONENT_HOME":[],"NEUTRAL":[],"UNKNOWN":[],"POSTSEASON":[],"NEUTRAL_MODERN":[],"NEUTRAL_HISTORICAL":[]}
     for r in ledger:
         gc=game_class(pick(r,"game_type","season_type","competition_type"));sc=site_class(pick(r,*SITE_FIELDS));counts[gc]+=1
@@ -140,15 +136,11 @@ def main():
             except Exception:y=None
             era="MODERN_1996_97_PLUS" if y is not None and y>=1996 else "HISTORICAL_1995_96_OR_EARLIER";eras[era]+=1
             queues["NEUTRAL_MODERN" if era=="MODERN_1996_97_PLUS" else "NEUTRAL_HISTORICAL"].append(r)
-        date=pick(r,"game_date","date");opp=pick(r,*OPP_FIELDS);cs=idx.get((date,opp),[]) if date else []
-        if len(cs)==1:matches.append({"research_game_id":rid(r),"canonical_game_id":pick(cs[0],"canonical_game_id"),"game_date":date,"opponent_key":opp})
-        elif len(cs)>1:contradictions.append({"research_game_id":rid(r),"reason":"MULTIPLE_EXACT_DATE_OPPONENT_MATCHES","game_date":date,"opponent_key":opp,"candidate_ids":[pick(x,"canonical_game_id") for x in cs]})
-        else:unmatched.append({"research_game_id":rid(r),"reason":"NO_UNIQUE_EXACT_DATE_OPPONENT_MATCH","game_date":date,"opponent_key":opp})
     summary={**status,"status":"COMPLETE","ledger_rows":len(ledger),"partition":{"regular_season":counts["REGULAR_SEASON"],"postseason":counts["POSTSEASON"],"unclassified":0},
       "regular_season_site_census":{k:counts["RS_"+k] for k in ("HOME","OPPONENT_HOME","NEUTRAL","UNKNOWN")},"neutral_era_census":dict(eras),
-      "target_only_join":{"matched":len(matches),"unmatched":len(unmatched),"contradictions":len(contradictions),"unmatched_is_blocking_stage3a0":False,"external_discovery_authorized":False,"handoff_to_later_stage":True},
+      "project_evidence_reuse":{"performed_in_stage3a0":False,"reason":"Stage 3A-0 is checkpoint-only census/partition.","deferred_to":["STAGE_3A1","STAGE_3A2","STAGE_3A3_TIER1"]},
       "next_action":"STOP_AT_STAGE_3A0_BOUNDARY","next_bounded_assignment":"Stage 3A-1 — H/A/N completion"}
-    arts={"summary":dump(out,"stage3a0-summary.json",summary),"status":dump(out,"stage3a0-status.json",summary),"matches":dump(out,"target-canonical-matches.json",matches),"unmatched":dump(out,"unmatched-local-candidates.json",unmatched),"contradictions":dump(out,"local-contradictions.json",contradictions),
+    arts={"summary":dump(out,"stage3a0-summary.json",summary),"status":dump(out,"stage3a0-status.json",summary),
       "home_queue":dump(out,"stage3a2-home-queue.json",queues["HOME"]),"opponent_home_queue":dump(out,"stage3a0-opponent-home-queue.json",queues["OPPONENT_HOME"]),"unknown_queue":dump(out,"stage3a1-unknown-han-queue.json",queues["UNKNOWN"]),
       "neutral_queue":dump(out,"stage3a3-neutral-queue.json",queues["NEUTRAL"]),"neutral_modern_queue":dump(out,"stage3a3-modern-neutral-queue.json",queues["NEUTRAL_MODERN"]),"neutral_historical_queue":dump(out,"stage3a3-historical-neutral-queue.json",queues["NEUTRAL_HISTORICAL"]),"postseason_queue":dump(out,"stage3b-postseason-handoff.json",queues["POSTSEASON"])}
     dump(out,"manifest.json",{k:{"path":str(p),"sha256":sha256(p)} for k,p in arts.items()});print(json.dumps(summary,indent=2));print("STAGE 3A-0: COMPLETE");return 0
