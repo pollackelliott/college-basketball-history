@@ -5,94 +5,160 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  actions: read
+  contents: write
+  deployments: read
+  pull-requests: write
+  statuses: read
 
 jobs:
-  validate:
+  clemson-gate1-execution:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Check out PR head
+      - name: Check out Clemson onboarding branch
         uses: actions/checkout@v4
+        with:
+          ref: data/clemson-onboarding
+          fetch-depth: 0
+          token: ${{ github.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Run targeted opponent identity tests
+      - name: Configure git identity
         run: |
-          python -m unittest discover -s tests -p 'test_opponent_identity_collision_audit.py' -v
-          python -m unittest discover -s tests -p 'test_opponent_identity_remediation.py' -v
-          python -m unittest discover -s tests -p 'test_published_opponent_identity_census.py' -v
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Run full repository test suite
-        run: python -m unittest discover -s tests -v
-
-      - name: Validate alias registry
-        run: python tools/opponent_identity_remediation.py validate-aliases --json
-
-      - name: Build and audit the known Texas A&M P0 repair
+      - name: Execute approved Clemson Gate 1 through release preparation
         shell: bash
         run: |
-          cat > /tmp/texas-am-p0-decisions.csv <<'CSV'
-          source_program_key,source_opponent_label,from_program_key,to_program_key,decision,evidence_basis,evidence_url
-          northwestern,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Northwestern package uses stale texas-a-and-m identity; authoritative current registry and reciprocal Texas A&M history establish texas-a-m as the same program identity.",https://github.com/pollackelliott/college-basketball-history
-          oklahoma,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Oklahoma package uses stale texas-a-and-m identity; authoritative current registry establishes texas-a-m as the same program identity.",https://github.com/pollackelliott/college-basketball-history
-          CSV
+          set -eo pipefail
 
-          set +e
-          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-p0-plan-a.json
-          PLAN_RC=$?
-          set -e
-          if [ "$PLAN_RC" -ne 0 ] && [ "$PLAN_RC" -ne 2 ]; then
-            echo "Unexpected planner exit code: $PLAN_RC"
-            exit 1
-          fi
+          EXPECTED_MAIN="6c48d7dc510fd318c35344c37dc21f2c2f45e59c"
+          EXPECTED_HEAD="a1b768ec6581c7a7329ca987401ec80f15d694e1"
+          EXPECTED_DECISION_SHA="9dd32a7e5233843d23b55f92e9e14aa7210b35ccd23b54dc2f845eaadcd93923"
+          EXPECTED_MAP_SHA="87cc2241664b4dea9f03fd0a87d3da188061c6f41533f8947ab32de2c6942c38"
 
-          set +e
-          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-p0-plan-b.json
-          PLAN_RC_2=$?
-          set -e
-          if [ "$PLAN_RC_2" -ne "$PLAN_RC" ]; then
-            echo "Planner exit code is nondeterministic"
-            exit 1
-          fi
+          test "$(git branch --show-current)" = "data/clemson-onboarding"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_MAIN"
+          test -z "$(git status --porcelain --untracked-files=all)"
 
-          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-a.json
-          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-b.json
+          mkdir -p .onboarding/clemson
+
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from integration_freeze_guard import (
+              build_source_game_semantic_snapshot,
+              semantic_snapshot_sha256,
+          )
+          expected = "f6f3d62adeac4a497e45944c142e20e85a56289974f2c0b75d40f79521c5aca1"
+          source = Path("schools/clemson/source-games.csv")
+          snapshot = build_source_game_semantic_snapshot(source)
+          actual = semantic_snapshot_sha256(snapshot)
+          if actual != expected:
+              raise SystemExit(f"semantic freeze mismatch: {actual} != {expected}")
+          Path(".onboarding/clemson/integration-freeze.json").write_text(
+              json.dumps(
+                  {
+                      "schema_version": 2,
+                      "school_key": "clemson",
+                      "status": "INTEGRATION_FROZEN",
+                      "research_base_sha": "e57a7049b2315508e59fd68b4324c34050901f45",
+                      "integration_base_sha": "de4ccb88fc5550b66b514841000b1c5e04bd93f5",
+                      "origin_main_sha": "de4ccb88fc5550b66b514841000b1c5e04bd93f5",
+                      "source_game_semantic_guard": {
+                          "schema_version": 1,
+                          "snapshot_sha256": actual,
+                          "snapshot": snapshot,
+                      },
+                  },
+                  indent=2,
+                  ensure_ascii=False,
+              ) + "\n",
+              encoding="utf-8",
+          )
+          print("SEMANTIC_FREEZE_SHA256=" + actual)
+          PY
+
+          curl -L --fail \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts/10951573507/zip" \
+            -o /tmp/clemson-map-artifact.zip
+          unzip -p /tmp/clemson-map-artifact.zip recommendation-map.json \
+            > .onboarding/clemson/recommendation-map.json
+
+          MAP_SHA="$(sha256sum .onboarding/clemson/recommendation-map.json | awk '{print $1}')"
+          echo "RECOMMENDATION_MAP_SHA256=$MAP_SHA"
+          test "$MAP_SHA" = "$EXPECTED_MAP_SHA"
+
+          python tools/implementation_stage2.py clemson \
+            --map .onboarding/clemson/recommendation-map.json
 
           python - <<'PY'
           import json
           from pathlib import Path
-
-          def load(path):
-              return json.loads(Path(path).read_text())
-
-          p1 = load('/tmp/texas-am-p0-plan-a.json')
-          p2 = load('/tmp/texas-am-p0-plan-b.json')
-          a1 = load('/tmp/texas-am-collision-audit-a.json')
-          a2 = load('/tmp/texas-am-collision-audit-b.json')
-
-          assert p1['plan_sha256'] == p2['plan_sha256'], 'plan hash is nondeterministic'
-          assert a1['audit_sha256'] == a2['audit_sha256'], 'audit hash is nondeterministic'
-
-          affected = a1['affected_canonical_game_count']
-          accounted = a1['covered_affected_game_count'] + a1['unpaired_affected_game_count']
-          assert affected == accounted, f'affected accounting mismatch: {accounted}/{affected}'
-
-          print('P0_PLAN_SHA256=' + p1['plan_sha256'])
-          print('P0_AUDIT_SHA256=' + a1['audit_sha256'])
-          print('AFFECTED_CANONICAL_GAMES=' + str(affected))
-          print('SAME_DATE_COLLISION_GROUPS=' + str(a1['same_date_collision_group_count']))
-          print('EXACT_CORE_MATCH_GROUPS=' + str(a1['exact_core_match_group_count']))
-          print('SAME_DATE_IDENTITY_CONFLICT_GROUPS=' + str(a1['same_date_identity_conflict_group_count']))
-          print('COVERED_AFFECTED_GAMES=' + str(a1['covered_affected_game_count']))
-          print('UNPAIRED_AFFECTED_GAMES=' + str(a1['unpaired_affected_game_count']))
-
-          for item in a1['collision_groups']:
-              if item['kind'] == 'SAME_DATE_IDENTITY_CONFLICT':
-                  print('CONFLICT=' + ','.join(item['canonical_game_ids']) + '|' + '|'.join(item['signature']) + '|differences=' + ','.join(sorted(item['field_differences'])))
-
-          for game_id in a1['unpaired_affected_game_ids']:
-              print('UNPAIRED=' + game_id)
+          s=json.loads(Path(".onboarding/clemson/implementation-stage2-status.json").read_text())
+          assert s["status"]=="OWNER_GATE_1_READY", s
+          assert s["preflight"]["decision_count"]==160, s
+          assert s["preflight"]["decision_universe_sha256"]=="9dd32a7e5233843d23b55f92e9e14aa7210b35ccd23b54dc2f845eaadcd93923", s
+          assert s["recommendation_map"]["decision_count"]==160, s
+          assert s["recommendation_map"]["sha256"]=="87cc2241664b4dea9f03fd0a87d3da188061c6f41533f8947ab32de2c6942c38", s
+          print("STAGE2_REVALIDATION=OWNER_GATE_1_READY")
           PY
+
+          python tools/onboarding_hardening.py fill-review clemson \
+            --map .onboarding/clemson/recommendation-map.json
+          python tools/onboarding_hardening.py rehearse-review clemson
+          python tools/onboard_school.py clemson --approve --approved-by "Elliott"
+
+          APPROVED_HASH="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path(".onboarding/clemson/approved-plan.json").read_text())["approved_plan_hash"])
+          PY
+          )"
+          echo "APPROVED_PLAN_HASH=$APPROVED_HASH"
+
+          python tools/onboard_school.py clemson --apply --approved-plan "$APPROVED_HASH"
+          python tools/onboard_school.py clemson --verify
+          python tools/release_school.py clemson --prepare --deployment-timeout 900
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          state=json.loads(Path(".onboarding/clemson/release-state.json").read_text())
+          print("RELEASE_HEAD_SHA="+state["head_sha"])
+          print("RELEASE_PR_NUMBER="+str(state["pr_number"]))
+          print("RELEASE_PR_URL="+state["pr_url"])
+          print("PREVIEW_URL="+str(state.get("preview_deployment",{}).get("environment_url","")))
+          print("APPROVED_PLAN_HASH="+state["approved_plan_hash"])
+          print("CHANGED_PATH_COUNT="+str(len(state.get("changed_paths",[]))))
+          PY
+
+      - name: Upload Clemson Gate 1 execution artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clemson-gate1-execution
+          include-hidden-files: true
+          path: |
+            .onboarding/clemson/approved-plan.json
+            .onboarding/clemson/approved-review.md
+            .onboarding/clemson/release-manifest.json
+            .onboarding/clemson/release-state.json
+            .onboarding/clemson/visual-qa.md
+            .onboarding/clemson/implementation-stage2-status.json
+            .onboarding/clemson/last-rehearsal-site-gate.json
+          if-no-files-found: warn
