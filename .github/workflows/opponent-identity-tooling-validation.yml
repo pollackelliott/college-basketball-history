@@ -5,6 +5,7 @@ on:
     branches: [main]
 
 permissions:
+  actions: read
   contents: read
 
 jobs:
@@ -18,6 +19,126 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+
+      - name: Rehearse preserved Clemson Stage 2 recommendation map
+        shell: bash
+        run: |
+          git switch -c data/clemson-onboarding-map-proof
+
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          sys.path.insert(0, "tools")
+          from integration_freeze_guard import (
+              build_source_game_semantic_snapshot,
+              semantic_snapshot_sha256,
+          )
+
+          expected = "f6f3d62adeac4a497e45944c142e20e85a56289974f2c0b75d40f79521c5aca1"
+          source = Path("schools/clemson/source-games.csv")
+          snapshot = build_source_game_semantic_snapshot(source)
+          actual = semantic_snapshot_sha256(snapshot)
+          if actual != expected:
+              raise SystemExit(
+                  f"semantic freeze mismatch before Stage 2 rehearsal: {actual} != {expected}"
+              )
+
+          output = Path(".onboarding/clemson/integration-freeze.json")
+          output.parent.mkdir(parents=True, exist_ok=True)
+          output.write_text(
+              json.dumps(
+                  {
+                      "schema_version": 2,
+                      "school_key": "clemson",
+                      "status": "INTEGRATION_FROZEN",
+                      "research_base_sha": "e57a7049b2315508e59fd68b4324c34050901f45",
+                      "integration_base_sha": "de4ccb88fc5550b66b514841000b1c5e04bd93f5",
+                      "origin_main_sha": "de4ccb88fc5550b66b514841000b1c5e04bd93f5",
+                      "source_game_semantic_guard": {
+                          "schema_version": 1,
+                          "snapshot_sha256": actual,
+                          "snapshot": snapshot,
+                      },
+                  },
+                  indent=2,
+                  ensure_ascii=False,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          print("SEMANTIC_FREEZE_SHA256=" + actual)
+          PY
+
+          curl -L --fail \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts/10952140311/zip" \
+            -o /tmp/clemson-map-artifact.zip
+          unzip -p /tmp/clemson-map-artifact.zip recommendation-map.json \
+            > .onboarding/clemson/recommendation-map.json
+
+          MAP_SHA="$(sha256sum .onboarding/clemson/recommendation-map.json | awk '{print $1}')"
+          echo "RECOMMENDATION_MAP_SHA256=$MAP_SHA"
+          test "$MAP_SHA" = "87cc2241664b4dea9f03fd0a87d3da188061c6f41533f8947ab32de2c6942c38"
+
+          set +e
+          python tools/implementation_stage2.py clemson \
+            --map .onboarding/clemson/recommendation-map.json
+          STAGE2_RC=$?
+          set -e
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          status = json.loads(
+              Path(".onboarding/clemson/implementation-stage2-status.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          preflight = status.get("preflight", {})
+          recommendation = status.get("recommendation_map", {})
+          rehearsal = status.get("proposal_rehearsal", {})
+          site = status.get("site_diagnostic")
+
+          print("CLEMSON_STAGE2_STATUS=" + str(status.get("status", "")))
+          print("CLEMSON_DECISION_COUNT=" + str(preflight.get("decision_count", "")))
+          print("CLEMSON_DECISION_SHA256=" + str(preflight.get("decision_universe_sha256", "")))
+          print("MAP_DECISION_COUNT=" + str(recommendation.get("decision_count", "")))
+          print("MAP_SHA256=" + str(recommendation.get("sha256", "")))
+          print("MAP_ACTION_COUNTS=" + json.dumps(recommendation.get("action_counts", {}), sort_keys=True))
+          print("PROPOSAL_REHEARSAL=" + ("PASS" if rehearsal else "FAIL"))
+          print("PROPOSAL_REHEARSAL_DETAIL=" + json.dumps(rehearsal, sort_keys=True))
+          print("SITE_DIAGNOSTIC=" + json.dumps(site, sort_keys=True))
+          if status.get("last_error"):
+              print("STAGE2_LAST_ERROR=" + str(status["last_error"]))
+
+          expected_decision_sha = "9dd32a7e5233843d23b55f92e9e14aa7210b35ccd23b54dc2f845eaadcd93923"
+          expected_map_sha = "87cc2241664b4dea9f03fd0a87d3da188061c6f41533f8947ab32de2c6942c38"
+          if status.get("status") == "OWNER_GATE_1_READY":
+              assert preflight.get("decision_count") == 160
+              assert preflight.get("decision_universe_sha256") == expected_decision_sha
+              assert recommendation.get("decision_count") == 160
+              assert recommendation.get("sha256") == expected_map_sha
+              assert rehearsal
+          PY
+
+          exit "$STAGE2_RC"
+
+      - name: Upload Clemson Stage 2 post-repair rehearsal artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clemson-stage2-post-provenance-rehearsal
+          path: |
+            .onboarding/clemson/recommendation-map.json
+            .onboarding/clemson/implementation-stage2-status.json
+            .onboarding/clemson/implementation-stage2-capability-census.json
+            .onboarding/clemson/last-rehearsal-site-gate.json
+          if-no-files-found: warn
 
       - name: Run targeted opponent identity tests
         run: |
