@@ -265,54 +265,40 @@ mode into a meaningful tranche when safe. A plain owner `Proceed` after a requir
 Stage 3A substage boundary authorizes the exact next substage; after a durability
 checkpoint it authorizes the serialized unfinished tranche.
 
-### Stage 3A-0 — Mechanical census, partition, and project-evidence harvest
+### Stage 3A-0 — Mechanical checkpoint-only census and partition
 
-This substage is **strictly local-only, mechanical, and command-first**. It is read-only except for
-writing unambiguous accepted same-game project evidence through into the working ledger.
-The detailed controlling scope is `docs/stage3a0-local-only-contract.md`.
+This substage is **strictly checkpoint-only, mechanical, and command-first**. The detailed
+controlling scope is `docs/stage3a0-local-only-contract.md`.
 
-Allowed evidence is limited to the verified durable checkpoint/working state and
-structured project evidence at the exact protected-main SHA, supplied either by an exact-state checkout or the authorized disposable exact-SHA snapshot.
-"Project-evidence harvest" does not authorize reading documents or source files for interpretation.
-
-After the owner authorizes Stage 3A-0 and the exact protected-main SHA is confirmed, the first
-Stage 3A-0 repository operation is:
+After the owner authorizes Stage 3A-0 and the exact protected-main SHA is confirmed, run:
 
 ```bash
 python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
 ```
 
-A direct structured Stage 2 ledger may be supplied instead of the ZIP. The command itself owns
-checkpoint-ledger selection, structured readiness, regular-season/postseason partitioning,
-H/A/N census, modern/historical neutral split, target-only canonical exact-game join, and exact
-HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL / postseason queue emission.
+A direct structured Stage 2 ledger may be supplied instead of the ZIP. The command owns
+checkpoint-ledger selection, readiness, regular-season/postseason partitioning, H/A/N census,
+modern/historical neutral split, and exact HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL /
+postseason queue emission.
 
-Do not manually inspect the checkpoint schema, tool source, or ledger population before running
-this entrypoint merely to prepare Stage 3A-0. Do not search for a separate readiness command.
+Stage 3A-0 does **not** require canonical/project basketball state and does not perform a
+project-evidence join. Accepted project-evidence reuse belongs to Stage 3A-1, Stage 3A-2,
+or Stage 3A-3 Tier 1 as appropriate.
 
-If no runnable exact-state checkout is already present, use the bounded portable execution path
-in `docs/research-portable-execution.md`: one disposable repository archive pinned to the full
-exact protected-main SHA, extracted into temporary storage, then execute the same permanent command
-with explicit `--main-sha`. Do not clone, use a moving or unpinned archive, search for alternate
-snapshots or tools, inspect remote tool source to derive historical conclusions, or simulate the
-command conversationally. Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when neither
-an exact-state checkout nor the bounded portable execution path is available.
+If no runnable checkout is available, use the exact-tool portable path in
+`docs/research-portable-execution.md`: fetch the exact
+`tools/research_stage3a0.py` file through the authenticated GitHub connector at the
+confirmed full protected-main SHA, write it to temporary storage, and execute it against
+the authoritative checkpoint. Do not use codeload or a full repository archive merely for
+Stage 3A-0.
 
-If the command returns `STAGE_3A0_ENTRY_NOT_READY` or `STAGE_3A0_INPUT_NOT_READY`, read the
-serialized `stage3a0-status.json`, follow only its exact bounded remediation, and stop before
-historical/source research.
+If the command returns `STAGE_3A0_ENTRY_NOT_READY` or
+`STAGE_3A0_INPUT_NOT_READY`, read the serialized `stage3a0-status.json`, follow only
+its bounded prior-stage/input remediation, and stop before historical research.
 
-**Zero external research is authorized in Stage 3A-0.** Do not search the public web,
-institutional athletics sites, media guides, newspapers, external PDFs, or GitHub/code
-hosting for new sources. Do not discover opponent source families or investigate venue
-candidates externally. Do not inspect opponent packages one-by-one when a structured
-local join can produce the same population.
-
-If local project evidence cannot resolve a candidate, preserve it for Stage 3A-1, 3A-2,
-or 3A-3. Lack of a local answer is not permission to broaden the search.
-
-Do **not** begin broad HOME chronology research, broad NEUTRAL historical research, or
-row-by-row H/A/N adjudication in Stage 3A-0.
+**Zero external research is authorized in Stage 3A-0.** Do not browse institutional
+sites, media guides, newspapers, external PDFs, opponent packages, or venue sources.
+A large downstream queue is a valid output.
 
 Completion response:
 

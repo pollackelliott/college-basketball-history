@@ -1,189 +1,124 @@
-# Stage 3A-0 Local-Only Execution Contract
+# Stage 3A-0 Checkpoint-Only Census Contract
 
 - **Status:** Controlling Research-lane execution policy
-- **Applies to:** every Stage 3A-0 mechanical census / partition / project-evidence harvest
-- **Approved:** 2026-09-23 after repeated Virginia Stage 3A-0 runtime failures
-- **Command-first entry hardening:** 2026-09-27 after repeated pre-execution stalls
-- **Purpose:** prevent Stage 3A-0 from expanding into external historical research or source discovery, including conversational preflight loops before the permanent command runs
+- **Applies to:** every Stage 3A-0 census / partition pass
+- **Simplified:** 2026-09-28 after live Research execution failures
+- **Purpose:** keep Stage 3A-0 an introductory mechanical census rather than a repository-transport or historical-research problem
 
 ## 1. Governing rule
 
-> **Stage 3A-0 is local-only, mechanical, and bounded. It performs zero external historical research.**
+> **Stage 3A-0 is checkpoint-only, mechanical, deterministic, and bounded.**
 
-Stage 3A-0 may read only:
+Its historical job is intentionally small: validate the structured Stage 2 Research state, partition the accepted game universe, derive the H/A/N census, and emit the exact downstream queues.
 
-- the verified durable checkpoint / serialized Research state for the target school;
-- project state at the exact protected-main SHA, supplied either by an exact-state checkout or the authorized disposable exact-SHA snapshot;
-- known repository paths containing the target school's canonical games, game assertions, and accepted shared-reference/project evidence needed for one bounded bulk join.
+Stage 3A-0 performs:
 
-Stage 3A-0 may not:
+- zero public-web research;
+- zero external source discovery;
+- zero opponent-package research;
+- zero venue archaeology;
+- zero historical adjudication;
+- zero required canonical/project-evidence lookup.
 
-- search the public web;
-- browse institutional athletics sites;
-- search newspaper/yearbook/archive sources;
-- discover new opponent source families;
-- use GitHub/code search as an open-ended source-discovery mechanism;
-- inspect external PDFs or media guides not already serialized as accepted project evidence;
-- perform opponent-by-opponent historical research;
-- adjudicate a historical contradiction that requires new evidence;
-- begin HOME chronology research;
-- begin NEUTRAL venue research;
-- begin row-by-row H/A/N research.
+Project-evidence reuse belongs to the later substage that actually needs it:
 
-If a local exact-game lookup exposes a contradiction, record and serialize the contradiction for the appropriate later Stage 3A substage. Do not investigate it externally during Stage 3A-0.
+- Stage 3A-1 for H/A/N reconciliation;
+- Stage 3A-2 for HOME chronology/exceptions;
+- Stage 3A-3 Tier 1 for neutral accepted-project-evidence reuse.
 
-## 2. What local project-evidence harvest means in Stage 3A-0
+## 2. Required input
 
-Stage 3A-0 uses **one bounded bulk exact-game join** against target-school canonical
-evidence and any accepted same-game evidence already serialized in the checkpoint.
+The authoritative input is either:
 
-Examples:
+- the durable Stage 2 checkpoint ZIP; or
+- the structured Stage 2 ledger directly.
 
-- target-school rows from `data/canonical/games.csv`;
-- accepted same-game evidence already serialized in the controlling checkpoint.
+The permanent command owns checkpoint-ledger selection and readiness. Do not manually inspect checkpoint members, pre-partition the ledger, or invent a separate readiness step before running it.
 
-Stage 3A-0 does **not** fetch or inspect published opponent-school `source-games.csv`
-packages, even though they exist inside the repository. It also does not:
+Required structured fields remain:
 
-- find an opponent's institutional history page;
-- search the web for an opponent schedule;
-- locate a media guide;
-- search GitHub for additional archives or CSV blobs;
-- discover a new reciprocal evidence source.
+- stable research/source row ID;
+- season;
+- opponent key;
+- H/A/N/site classification;
+- game type.
 
-Targeted reciprocal/package evidence belongs to Stage 3A-1, 3A-2, or 3A-3 when the relevant
-source family is known and that research responsibility is actually authorized.
+Explicit `UNKNOWN` H/A/N is a valid Stage 3A-0 value and belongs in the UNKNOWN queue. A missing or unrecognized site value is an input defect.
 
-## 3. Mechanical execution shape
+A pre-hardening checkpoint that lacks required `game_type` may use only the documented narrow compatibility migration plus declared-intent validator. Do not broaden that repair into historical research.
 
-### 3.1 Command-first entry rule
+## 3. Permanent execution
 
-After the owner authorizes Stage 3A-0, confirm the exact protected-main SHA for the pass. The **first Stage 3A-0 repository operation** is then the permanent entrypoint. The readiness gate is built into this command; there is no separate conversational readiness-analysis step.
-
-Preferred entry from the durable Stage 2 checkpoint:
+After the owner authorizes Stage 3A-0 and current protected `main` is confirmed, run:
 
 ```bash
-python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
+python tools/research_stage3a0.py <school_key> <stage2-checkpoint.zip> --main-sha <protected-main-sha>
 ```
 
-Direct structured-ledger entry remains supported:
+A structured Stage 2 ledger may be supplied instead of the ZIP.
 
-```bash
-python tools/research_stage3a0.py <school_key> <structured-stage2-ledger.csv> --main-sha <protected-main-sha>
-```
+The permanent tool owns:
 
-The command accepts either input form. For a checkpoint ZIP it locates the unique structured Stage 2 ledger, records the selected member and hashes, copies that ledger into the Stage 3A-0 output directory, runs readiness, performs the census/partition and target-only canonical join when ready, and emits the exact downstream queues.
+1. checkpoint/ledger entry;
+2. structured readiness;
+3. exact row count;
+4. regular-season/postseason partition;
+5. HOME / OPPONENT_HOME / NEUTRAL / UNKNOWN census;
+6. modern versus historical regular-season NEUTRAL split;
+7. exact downstream queue emission;
+8. durable status/manifest generation.
 
-Do **not** manually inspect checkpoint members, inspect the Stage 3A-0 tool source, pre-partition the ledger, or search for another readiness command before invoking the permanent entrypoint. If the checkpoint contains no unique structured ledger, the command emits `STAGE_3A0_ENTRY_NOT_READY` and stops. If structured readiness fails, it emits `STAGE_3A0_INPUT_NOT_READY` with the exact defects and next action.
+The protected-main SHA is recorded for policy/version traceability. Stage 3A-0 does **not** require repository basketball data to compute its census.
 
-When the same healthy Research chat already read the controlling policy and the pinned protected-main SHA has not changed, do not repeat a broad policy/source inspection at this boundary. A replacement chat or changed protected-main SHA still performs the normal required policy refresh once, then runs the command.
+The deprecated `--canonical` argument may remain accepted for backward-compatible old commands, but Stage 3A-0 ignores it.
 
-### 3.2 Portable execution / environment gate
+## 4. No-checkout execution
 
-Command-first does not require a persistent owner-managed checkout.
+A persistent checkout is not required.
 
-After confirming the exact protected-main SHA:
+When an exact-state checkout is already available, the command may run there.
 
-1. use an already-runnable checkout at that exact state when available;
-2. otherwise use the bounded disposable exact-SHA snapshot path in `docs/research-portable-execution.md` when temporary filesystem, Python, and direct download/extraction are available;
-3. only when neither route exists, report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` and stop.
+Otherwise use the authenticated GitHub connector to fetch the exact `tools/research_stage3a0.py` file at the confirmed full protected-main SHA, write those exact bytes to temporary storage, and execute that file against the attached checkpoint/ledger with explicit `--main-sha`.
 
-Portable bootstrap is project-state transport, not external historical research. It is limited to one archive pinned to the full exact protected-main SHA from the canonical repository endpoint.
+This is executable transport of the repository-owned permanent tool, not source discovery and not permission to reinterpret or rewrite the algorithm conversationally.
 
-Do not clone, use a moving or unpinned archive, search for alternate snapshots or tools, inspect remote tool source to derive historical conclusions, or broaden the Stage 3A-0 evidence universe.
+**Do not use codeload, clone the repository, download a full repository archive, or ask the owner to open Codespaces merely to run Stage 3A-0.**
 
-From the extracted exact-SHA snapshot, invoke the permanent Stage 3A-0 entrypoint with the authoritative Stage 2 checkpoint/ledger and explicit `--main-sha`.
+Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when the lane cannot access one of:
 
-The sentinel means that both the existing-checkout route and the bounded portable route are unavailable. It is not triggered merely because no persistent checkout is mounted or because the owner is using the mobile app.
+- the authoritative checkpoint/ledger;
+- the exact permanent tool bytes at the confirmed protected-main SHA;
+- temporary Python/filesystem execution sufficient to run the tool.
 
-If neither execution route is available, no Stage 3A-0 artifact is required. The predecessor Stage 2 checkpoint remains the controlling durable state until Stage 3A-0 resumes.
+That sentinel should be exceptional, not a normal Research boundary.
 
-`tools/export_stage3a0_local_evidence.py` remains an optional bounded diagnostic/export helper after a runnable exact-state project surface exists; it is not a prerequisite or separate readiness gate.
+## 5. Required durable outputs
 
-Missing stable IDs, game type, site type, opponent keys, duplicate IDs, or unrecognized enums produce `STAGE_3A0_INPUT_NOT_READY`, not ordinary Stage 3A-0 research debt.
+A successful Stage 3A-0 must durably preserve:
 
-For a checkpoint created before the structured-input invariant, exit Stage 3A-0 and perform one narrow compatibility repair from the already accepted institutional source/state. Validate it with `tools/research_stage3a0_migrate.py`; declared intent `MISSING_GAME_TYPE_ONLY` permits no changes to row identity, season/date, opponent, score/result, H/A/N, or literal source evidence. Then rerun Stage 3A-0. Do not broadly reopen Stage 1/2 and do not conduct the compatibility repair inside Stage 3A-0.
-
-When the accepted Stage 1 row spine conflicts with a specialized postseason table, the specialized table may establish postseason classification but must not silently overwrite accepted Stage 1 date/score/result. Such a contradiction remains explicit unless separately adjudicated under the controlling Stage 1 evidence policy.
-
-The phrase "project-evidence harvest" means only this deterministic structured-data operation. It does not authorize document reading or iterative local discovery.
-
-
-
-Stage 3A-0 should normally be completed as one structured local pass:
-
-1. load the exact Stage 1 universe from durable state;
-2. mechanically partition regular season versus postseason;
-3. derive the row-level H/A/N census;
-4. derive HOME / OPPONENT_HOME / NEUTRAL / UNKNOWN work queues;
-5. split NEUTRAL into 1996-97+ and 1995-96-and-earlier populations;
-6. perform a structured exact-game join against already-present local project evidence;
-7. write through only unambiguous accepted same-game evidence;
-8. serialize unmatched rows and contradictions without researching them;
-9. emit the exact Stage 3A-1 / 3A-2 / 3A-3 queues;
-10. stop.
-
-A whole-project reciprocal scan should be implemented as a structured local join/filter over already-present files. Do not manually browse dozens of opponent files one at a time when the same population can be derived mechanically.
-
-If a candidate cannot be established from local project evidence, leave it unresolved for the later research substage. **Lack of a local answer is not permission to open the web.**
-
-An unresolved row is a Stage 3A-0 **output**, not a new Stage 3A-0 research task. Once the
-single bounded canonical/assertion join is complete, the next operation is serialization of
-the exact unresolved/contradictory queues and stop. Do not inspect opponent packages, add a
-second local discovery pass, or open the web merely to reduce those queues. A large residual
-population is a valid Stage 3A-0 outcome.
-
-## 4. Runtime / convergence rule
-
-Stage 3A-0 should be one of the least expensive Stage 3A substages.
-
-If a Stage 3A-0 turn begins expanding into source discovery, archive browsing, external search, or prolonged opponent-by-opponent inspection, stop that mode immediately and return to the local mechanical contract.
-
-**Invoking a public-web/external-source research path during Stage 3A-0 is itself a contract failure.** Do not use information obtained through that path. Audit any conclusions already written during the turn and retain only those independently supported by authorized local project evidence. Then perform mechanical closeout/checkpointing; do not continue the external search in order to "finish" the row.
-
-If the local project-evidence pass itself is too large to complete safely in one turn:
-
-- serialize the exact remaining local candidate queue;
-- checkpoint;
-- resume the same structured local operation later.
-
-A Stage 3A-0 turn that has not invoked the permanent entrypoint and has no concrete execution blocker is simply **NOT STARTED**. If no already-runnable exact-state checkout exists, use the bounded portable exact-SHA execution path in `docs/research-portable-execution.md`. Only when neither execution route is available is the required terminal state `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`. Do not continue inspecting schemas, alternate snapshots, tools, filesystem paths, or reconciliation state in hopes of becoming more ready; run the permanent command or stop.
-
-Do not convert execution difficulty into broader historical research.
-
-## 5. Recovery rule
-
-When recovering an incomplete Stage 3A-0 from a durable checkpoint:
-
-- verify the checkpoint first;
-- preserve every completed census/partition/local-evidence result already serialized;
-- resume only the exact unfinished local mechanical queue;
-- do not repeat completed project-evidence scans;
-- do not search externally to "improve" the checkpoint;
-- stop at `STAGE 3A-0: COMPLETE`.
-
-Any work performed after the controlling checkpoint during a failed/stalled chat is non-authoritative unless it was durably serialized and explicitly accepted.
-
-## 6. Completion standard
-
-A complete Stage 3A-0 must report and durably preserve:
-
-- exact Stage 1 total;
-- exact regular-season Stage 3A population;
-- exact postseason Stage 3B handoff population;
+- exact input artifact/member and hashes;
+- exact ledger row count;
+- exact regular-season count;
+- exact postseason Stage 3B handoff count and queue;
+- HOME queue;
+- OPPONENT_HOME queue;
+- UNKNOWN H/A/N queue;
+- full NEUTRAL queue;
+- modern NEUTRAL queue;
+- historical NEUTRAL queue;
 - H/A/N census derived from rows;
-- exact HOME / OPPONENT_HOME / NEUTRAL / UNKNOWN queues;
-- exact modern versus historical NEUTRAL split;
-- exact postseason Stage 3B handoff queue;
-- accepted same-game local-project evidence written through;
-- unmatched local candidates;
-- isolated contradictions;
-- exact residual queues for Stage 3A-1 through Stage 3A-3;
-- the exact protected-main SHA used for the target-only evidence projection/join;
-- an explicit `stage3a0-status.json` terminal sentinel; status reporting must read this artifact before claiming whether the stage has run or completed;
-- an explicit `external historical research used: NO` completion attestation. If an external path was accidentally opened, the attestation may be made only after auditing write-through and confirming that no accepted Stage 3A-0 conclusion depends on it.
+- `stage3a0-summary.json`;
+- `stage3a0-status.json`;
+- manifest/hashes;
+- explicit `external_historical_research_used: false`.
 
-Then stop:
+No target-canonical match, unmatched-candidate, or contradiction artifact is required for Stage 3A-0.
+
+## 6. Stop behavior
+
+If entry/readiness fails, read `stage3a0-status.json`, perform only the bounded prior-stage/input remediation it names, and stop. Do not research around the gate.
+
+If execution succeeds, stop at:
 
 ```text
 STAGE 3A-0: COMPLETE
@@ -191,24 +126,19 @@ Next bounded assignment: Stage 3A-1 — H/A/N completion
 STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 ```
 
-## 7. Review rule
+A large UNKNOWN, HOME, or NEUTRAL queue is a valid Stage 3A-0 result. Stage 3A-0 succeeds by producing correct populations, not by minimizing residual counts.
 
-Flag a Stage 3A-0 implementation if it:
+## 7. Recovery rule
 
-- performs conversational checkpoint-schema/tool-source inspection instead of invoking the command-first entrypoint when the Stage 2 checkpoint/ledger is already available;
-- responds to a missing runnable checkout by failing to use the authorized exact-SHA portable path when available, or by web searching, cloning, using a moving/unpinned or alternate snapshot, searching the filesystem for another checkout/tool, inspecting remote tool source to derive historical conclusions, or conversationally simulating Stage 3A-0;
-- searches for or invents a separate readiness gate even though `research_stage3a0.py` owns readiness;
-- invokes public web research;
-- searches institutional archives or media guides;
-- discovers new external source families;
-- uses broad GitHub/code search instead of direct reads/structured joins over known project paths;
-- researches venues or H/A/N beyond accepted local evidence;
-- manually inspects opponent sources one by one when a structured local join is available;
-- treats an unresolved local candidate as permission to research externally;
-- continues into Stage 3A-1 without owner authorization.
+When recovering Stage 3A-0:
 
-The intended Stage 3A-0 experience is:
+- verify the controlling Stage 2 checkpoint;
+- preserve its immutable Research baseline;
+- rerun the permanent checkpoint-only operation if no valid Stage 3A-0 completion artifact exists;
+- never reconstruct prior scratch work from prose;
+- never open historical sources merely because the mechanical queue is large.
 
-> **checkpoint -> census/partition -> one target canonical bulk join -> unresolved rows become exact queues -> stop**
+The intended owner experience is:
 
-Repeated local staging/inspection attempts must not be used as a discovery loop, and unresolved rows must not cause Stage 3A-0 to expand its evidence universe.
+> **Stage 2 checkpoint -> Proceed -> Stage 3A-0 completes mechanically -> concise census -> Proceed to Stage 3A-1**
+
