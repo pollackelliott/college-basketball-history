@@ -61,12 +61,17 @@ def test_missing_game_type_fails_readiness_before_join(tmp_path):
     assert s["readiness"]["blocking_defects"]["missing_game_type"]==["C-1"]
     assert s["remediation_code"]=="MISSING_GAME_TYPE_ONLY"
     assert not (out/"target-canonical-matches.json").exists()
-def test_collision_is_serialized_not_chosen(tmp_path):
-    p,s,out=run(tmp_path,[{"research_game_id":"C-V","season_label":"1981-1982","game_date":"1982-03-05","opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}],
-      [{"canonical_game_id":"G-A","game_date":"1982-03-05","team_a_key":"clemson","team_b_key":"virginia"},{"canonical_game_id":"G-B","game_date":"1982-03-05","team_a_key":"virginia","team_b_key":"clemson"}])
+def test_explicit_unknown_site_is_a_valid_queue_value(tmp_path):
+    p,s,out=run(tmp_path,[{"research_game_id":"C-U","season_label":"1912-1913","game_date":"1913-01-01","opponent_key":"davidson","site_type":"UNKNOWN","game_type":"REGULAR_SEASON"}])
     assert p.returncode==0
-    c=json.loads((out/"local-contradictions.json").read_text())
-    assert len(c)==1 and c[0]["reason"]=="MULTIPLE_EXACT_DATE_OPPONENT_MATCHES"
+    assert s["regular_season_site_census"]["UNKNOWN"]==1
+    q=json.loads((out/"stage3a1-unknown-han-queue.json").read_text())
+    assert [row["research_game_id"] for row in q]==["C-U"]
+
+def test_unrecognized_site_type_is_rejected(tmp_path):
+    p,s,out=run(tmp_path,[{"research_game_id":"C-BAD","season_label":"1912-1913","game_date":"1913-01-01","opponent_key":"davidson","site_type":"MYSTERY","game_type":"REGULAR_SEASON"}])
+    assert p.returncode==2
+    assert s["readiness"]["blocking_defects"]["unrecognized_site_type"]==["C-BAD"]
 def test_legacy_migration_rejects_non_game_type_change(tmp_path):
     base=tmp_path/"base.csv";fixed=tmp_path/"fixed.csv";migration=Path(__file__).parents[1]/"tools"/"research_stage3a0_migrate.py"
     write_csv(base,[{"research_game_id":"C-1","game_date":"1982-02-13","opponent_key":"virginia","site_type":"HOME","game_type":""}])
