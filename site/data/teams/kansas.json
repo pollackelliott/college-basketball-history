@@ -1610,7 +1610,7 @@
       "opponent_key": "clemson",
       "opponent_name": "Clemson",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -83734,9 +83734,9 @@
       "opponent_key": "clemson",
       "opponent_name": "Clemson",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 80,
-      "opponent_score": 77,
+      "opponent_score": 76,
       "score_known": true,
       "result": "W",
       "overtime_periods": 0,
