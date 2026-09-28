@@ -37,7 +37,7 @@ def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     ledger_rows=base_rows();checkpoint=tmp_path/"stage2-complete.zip"
     with zipfile.ZipFile(checkpoint,"w") as z:
         z.writestr("nested/structured-stage2-ledger.csv",csv_text(ledger_rows));z.writestr("manifest.json","{}")
-    p,s,out=run(tmp_path,ledger_rows,canonical_rows(),checkpoint)
+    p,s,out=run(tmp_path,ledger_rows,checkpoint)
     assert p.returncode==0 and s["status"]=="COMPLETE"
     assert s["entry_mode"]=="checkpoint_zip"
     assert s["input_checkpoint_member"]=="nested/structured-stage2-ledger.csv"
@@ -46,18 +46,17 @@ def test_checkpoint_zip_fallback_finds_unique_structured_ledger(tmp_path):
     ledger_rows=base_rows();checkpoint=tmp_path/"legacy-stage2.zip"
     with zipfile.ZipFile(checkpoint,"w") as z:
         z.writestr("stage2/final-games.csv",csv_text(ledger_rows));z.writestr("stage2/season-summary.csv","season,count\n2024-2025,1\n")
-    p,s,out=run(tmp_path,ledger_rows,canonical_rows(),checkpoint)
+    p,s,out=run(tmp_path,ledger_rows,checkpoint)
     assert p.returncode==0 and s["input_checkpoint_member"]=="stage2/final-games.csv"
 def test_checkpoint_zip_without_ledger_fails_entry_without_join(tmp_path):
     ledger_rows=base_rows();checkpoint=tmp_path/"bad.zip"
     with zipfile.ZipFile(checkpoint,"w") as z:z.writestr("counts.csv","season,count\n2024-2025,1\n")
-    p,s,out=run(tmp_path,ledger_rows,canonical_rows(),checkpoint)
+    p,s,out=run(tmp_path,ledger_rows,checkpoint)
     assert p.returncode==2 and s["status"]=="STAGE_3A0_ENTRY_NOT_READY"
     assert s["entry_error"]=="NO_STAGE2_LEDGER_FOUND"
     assert not (out/"target-canonical-matches.json").exists()
 def test_missing_game_type_fails_readiness_before_join(tmp_path):
-    p,s,out=run(tmp_path,[{"research_game_id":"C-1","season_label":"1912-1913","game_date":"1913-01-01","opponent_key":"davidson","site_type":"HOME","game_type":""}],
-      [{"canonical_game_id":"G-X","game_date":"1913-01-01","team_a_key":"clemson","team_b_key":"davidson"}])
+    p,s,out=run(tmp_path,[{"research_game_id":"C-1","season_label":"1912-1913","game_date":"1913-01-01","opponent_key":"davidson","site_type":"HOME","game_type":""}])
     assert p.returncode==2 and s["status"]=="STAGE_3A0_INPUT_NOT_READY"
     assert s["readiness"]["blocking_defects"]["missing_game_type"]==["C-1"]
     assert s["remediation_code"]=="MISSING_GAME_TYPE_ONLY"
