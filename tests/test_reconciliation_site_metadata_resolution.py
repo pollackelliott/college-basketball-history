@@ -6,7 +6,11 @@ TOOLS = Path(__file__).resolve().parents[1] / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import onboarding_plan  # noqa: E402
-from location_safety import registry_fallback_marker  # noqa: E402
+from location_safety import (  # noqa: E402
+    parse_registry_fallback_markers,
+    registry_fallback_marker,
+    retire_registry_fallbacks,
+)
 
 
 class ReconciliationSiteMetadataResolutionTests(unittest.TestCase):
@@ -144,6 +148,146 @@ class ReconciliationSiteMetadataResolutionTests(unittest.TestCase):
         self.assertEqual(canonical["site_state"], "MO")
         self.assertNotIn("VENUE_REGISTRY_FALLBACK", canonical["notes"])
 
+    def _fallback_fixture(self):
+        marker = registry_fallback_marker(
+            "test",
+            "TESTRAW-1",
+            "old-arena",
+            "NEUTRAL",
+            ("venue_key", "venue_id", "site_city", "site_state"),
+        )
+        canonical = {
+            "canonical_game_id": "CBBG-1",
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "site_type": "NEUTRAL",
+            "venue_key": "old-arena",
+            "venue_id": "VEN-OLD",
+            "site_city": "Old City",
+            "site_state": "OS",
+            "notes": marker,
+        }
+        assertion = {
+            "canonical_game_id": "CBBG-1",
+            "source_program_key": "test",
+            "source_game_id": "TESTRAW-1",
+            "normalized_opponent_key": "other",
+            "game_date": "1940-01-01",
+            "curated_site_type": "NEUTRAL",
+            "curated_venue_name": "Old Arena",
+        }
+        venue_metadata = {
+            "old arena": [
+                {
+                    "venue_key": "old-arena",
+                    "venue_id": "VEN-OLD",
+                    "city": "Old City",
+                    "state": "OS",
+                    "local_valid_from": "",
+                    "local_valid_to": "",
+                    "physical_opened": "",
+                    "physical_closed": "",
+                }
+            ],
+        }
+        return marker, canonical, assertion, venue_metadata
+
+    def _marker_supported(self, canonical, assertion, venue_metadata):
+        marker = parse_registry_fallback_markers(canonical["notes"])[0]
+        return onboarding_plan._registry_fallback_marker_supported(
+            canonical,
+            marker,
+            assertion,
+            venue_metadata,
+        )
+
+    def _retire_if_unsupported(self, canonical, assertion, venue_metadata):
+        cleaned, retired = retire_registry_fallbacks(
+            canonical["notes"],
+            lambda marker: not onboarding_plan._registry_fallback_marker_supported(
+                canonical, marker, assertion, venue_metadata
+            ),
+        )
+        canonical["notes"] = cleaned
+        return retired
+
+    def test_same_site_venue_clearing_retires_old_registry_fallback(self):
+        _, canonical, assertion, venue_metadata = self._fallback_fixture()
+        canonical["venue_key"] = ""
+        canonical["venue_id"] = ""
+
+        self.assertFalse(self._marker_supported(canonical, assertion, venue_metadata))
+        self.assertEqual(
+            self._retire_if_unsupported(canonical, assertion, venue_metadata),
+            1,
+        )
+        self.assertNotIn("VENUE_REGISTRY_FALLBACK", canonical["notes"])
+
+    def test_same_site_venue_replacement_retires_old_registry_fallback(self):
+        _, canonical, assertion, venue_metadata = self._fallback_fixture()
+        canonical["venue_key"] = "new-arena"
+        canonical["venue_id"] = "VEN-NEW"
+        canonical["site_city"] = "New City"
+        canonical["site_state"] = "NS"
+
+        self.assertFalse(self._marker_supported(canonical, assertion, venue_metadata))
+        self.assertEqual(
+            self._retire_if_unsupported(canonical, assertion, venue_metadata),
+            1,
+        )
+
+    def test_same_site_location_replacement_or_clearing_retires_marker(self):
+        for city, state in (("New City", "NS"), ("", "")):
+            with self.subTest(city=city, state=state):
+                _, canonical, assertion, venue_metadata = self._fallback_fixture()
+                canonical["site_city"] = city
+                canonical["site_state"] = state
+
+                self.assertFalse(
+                    self._marker_supported(canonical, assertion, venue_metadata)
+                )
+                self.assertEqual(
+                    self._retire_if_unsupported(
+                        canonical, assertion, venue_metadata
+                    ),
+                    1,
+                )
+
+    def test_still_valid_matching_registry_fallback_is_preserved(self):
+        marker, canonical, assertion, venue_metadata = self._fallback_fixture()
+
+        self.assertTrue(self._marker_supported(canonical, assertion, venue_metadata))
+        self.assertEqual(
+            self._retire_if_unsupported(canonical, assertion, venue_metadata),
+            0,
+        )
+        self.assertEqual(canonical["notes"], marker)
+
+    def test_exact_four_error_topology_is_retired_before_validation(self):
+        _, canonical, assertion, venue_metadata = self._fallback_fixture()
+        # This is the rehearsal failure shape: same H/A/N, but the approved
+        # source/canonical patches clear the assertion venue and all four
+        # registry-derived canonical fields while the old marker still claims them.
+        assertion["curated_venue_name"] = ""
+        canonical["venue_key"] = ""
+        canonical["venue_id"] = ""
+        canonical["site_city"] = ""
+        canonical["site_state"] = ""
+        marker = parse_registry_fallback_markers(canonical["notes"])[0]
+
+        self.assertFalse(assertion["curated_venue_name"])
+        self.assertNotEqual(canonical["venue_key"], marker["venue_key"])
+        self.assertNotEqual(canonical["venue_id"], "VEN-OLD")
+        self.assertNotEqual(
+            (canonical["site_city"], canonical["site_state"]),
+            ("Old City", "OS"),
+        )
+        self.assertFalse(self._marker_supported(canonical, assertion, venue_metadata))
+        self.assertEqual(
+            self._retire_if_unsupported(canonical, assertion, venue_metadata),
+            1,
+        )
+        self.assertNotIn("VENUE_REGISTRY_FALLBACK", canonical["notes"])
     def test_nonblank_patch_cannot_silently_change_physical_venue(self):
         canonical = {
             "site_type": "NEUTRAL",
