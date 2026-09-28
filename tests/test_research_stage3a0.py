@@ -8,10 +8,12 @@ def write_csv(path,rows):
 def csv_text(rows):
     import io
     s=io.StringIO();w=csv.DictWriter(s,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows);return s.getvalue()
-def run(tmp_path,ledger_rows,canonical_rows,input_path=None):
-    ledger=tmp_path/"ledger.csv";canonical=tmp_path/"canonical.csv";out=tmp_path/"out";write_csv(ledger,ledger_rows);write_csv(canonical,canonical_rows)
+def run(tmp_path,ledger_rows,input_path=None,extra_args=None):
+    ledger=tmp_path/"ledger.csv";out=tmp_path/"out";write_csv(ledger,ledger_rows)
     target=input_path or ledger
-    p=subprocess.run([sys.executable,str(SCRIPT),"clemson",str(target),"--canonical",str(canonical),"--output-dir",str(out),"--main-sha","PINNED"],text=True,capture_output=True)
+    args=[sys.executable,str(SCRIPT),"clemson",str(target),"--output-dir",str(out),"--main-sha","PINNED"]
+    if extra_args:args.extend(extra_args)
+    p=subprocess.run(args,text=True,capture_output=True,cwd=tmp_path)
     return p,json.loads((out/"stage3a0-status.json").read_text()),out
 def base_rows():
     return [
