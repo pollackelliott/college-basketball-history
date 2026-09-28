@@ -276,10 +276,17 @@ After the owner authorizes Stage 3A-0 and the exact protected-main SHA is confir
 python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
 ```
 
-A direct structured Stage 2 ledger may be supplied instead of the ZIP. The command owns
-checkpoint-ledger selection, readiness, regular-season/postseason partitioning, H/A/N census,
-modern/historical neutral split, and exact HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL /
-postseason queue emission.
+A direct structured Stage 2 ledger may be supplied instead of the ZIP. Current-policy
+Stage 2 checkpoints must include `structured-stage2-ledger.csv`. For an accepted legacy
+Stage 2 checkpoint that predates that write-through, the same command may mechanically
+materialize the game-level ledger only when the ZIP contains both a full accepted game
+ledger and a complete label-level opponent mapping. It must require complete coverage,
+preserve raw source/site fields, and write `site_type=UNKNOWN` when standardized H/A/N
+has not already been established; raw site notation is not an H/A/N inference rule.
+
+The command owns checkpoint-ledger selection/materialization, readiness,
+regular-season/postseason partitioning, H/A/N census, modern/historical neutral split,
+and exact HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL / postseason queue emission.
 
 Stage 3A-0 does **not** require canonical/project basketball state and does not perform a
 project-evidence join. Accepted project-evidence reuse belongs to Stage 3A-1, Stage 3A-2,
