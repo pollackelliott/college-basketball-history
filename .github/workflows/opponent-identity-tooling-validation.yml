@@ -96,3 +96,81 @@ jobs:
           for game_id in a1['unpaired_affected_game_ids']:
               print('UNPAIRED=' + game_id)
           PY
+
+      - name: Prove Clemson Stage 2 post-tooling state
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          sys.path.insert(0, "tools")
+          from integration_freeze_guard import (
+              build_source_game_semantic_snapshot,
+              semantic_snapshot_sha256,
+          )
+
+          expected = "f6f3d62adeac4a497e45944c142e20e85a56289974f2c0b75d40f79521c5aca1"
+          source = Path("schools/clemson/source-games.csv")
+          snapshot = build_source_game_semantic_snapshot(source)
+          actual = semantic_snapshot_sha256(snapshot)
+          if actual != expected:
+              raise SystemExit(
+                  f"semantic freeze mismatch before Stage 2 proof: {actual} != {expected}"
+              )
+
+          output = Path(".onboarding/clemson/integration-freeze.json")
+          output.parent.mkdir(parents=True, exist_ok=True)
+          output.write_text(
+              json.dumps(
+                  {
+                      "schema_version": 2,
+                      "school_key": "clemson",
+                      "status": "INTEGRATION_FROZEN",
+                      "research_base_sha": "e57a7049b2315508e59fd68b4324c34050901f45",
+                      "integration_base_sha": "de4ccb88fc5550b66b514841000b1c5e04bd93f5",
+                      "origin_main_sha": "de4ccb88fc5550b66b514841000b1c5e04bd93f5",
+                      "source_game_semantic_guard": {
+                          "schema_version": 1,
+                          "snapshot_sha256": actual,
+                          "snapshot": snapshot,
+                      },
+                  },
+                  indent=2,
+                  ensure_ascii=False,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          print("SEMANTIC_FREEZE_SHA256=" + actual)
+          PY
+
+          python tools/implementation_stage2.py clemson
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          status = json.loads(
+              Path(".onboarding/clemson/implementation-stage2-status.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          preflight = status["preflight"]
+          expected_sha = (
+              "9dd32a7e5233843d23b55f92e9e14aa7210b35ccd23b54dc2f845eaadcd93923"
+          )
+          assert status["status"] == "CAPABILITY_CENSUS_READY", status
+          assert status["semantic_drift"]["status"] == "PASS", status
+          assert status["semantic_drift"]["change_count"] == 0, status
+          assert preflight["blocker_count"] == 0, preflight
+          assert preflight["warning_count"] == 0, preflight
+          assert preflight["decision_count"] == 160, preflight
+          assert preflight["decision_universe_sha256"] == expected_sha, preflight
+          print("CLEMSON_STAGE2_STATUS=" + status["status"])
+          print("CLEMSON_DECISION_COUNT=" + str(preflight["decision_count"]))
+          print("CLEMSON_DECISION_SHA256=" + preflight["decision_universe_sha256"])
+          print("CLEMSON_SEMANTIC_DRIFT=PASS:0")
+          PY
+
