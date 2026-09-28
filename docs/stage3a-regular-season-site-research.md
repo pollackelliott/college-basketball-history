@@ -151,7 +151,7 @@ Stage 3A research standards are unchanged, but Stage 3A is **not** a single chat
 
 It must run through five ordered substages:
 
-1. **Stage 3A-0 — mechanical census, partition, and project-evidence harvest**
+1. **Stage 3A-0 — mechanical checkpoint entry, census, and partition**
 2. **Stage 3A-1 — H/A/N completion**
 3. **Stage 3A-2 — HOME venue research**
 4. **Stage 3A-3 — NEUTRAL venue research**
@@ -176,7 +176,12 @@ protected-main SHA confirmation:
 python tools/research_stage3a0.py <school_key> <stage2-complete-checkpoint.zip> --main-sha <protected-main-sha>
 ```
 
-A direct structured Stage 2 ledger may be supplied instead.
+A direct structured Stage 2 ledger may be supplied instead. Current-policy Stage 2
+checkpoints must carry a full `structured-stage2-ledger.csv`. When an accepted legacy
+checkpoint predates that write-through but embeds both a full accepted game ledger and a
+complete label-level opponent mapping, the permanent command may materialize the game-level
+Stage 2 ledger mechanically. Missing standardized H/A/N becomes `UNKNOWN`; raw source-site
+tokens are preserved and are not interpreted as H/A/N.
 
 A repository checkout is not required for this substage. When one is unavailable, fetch the
 exact permanent tool file through the authenticated GitHub connector at the confirmed
