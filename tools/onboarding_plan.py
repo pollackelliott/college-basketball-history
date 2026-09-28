@@ -29,9 +29,12 @@ from location_safety import (
     append_note,
     assertion_drift,
     location_pair_status,
+    parse_registry_fallback_markers,
     registry_fallback_marker,
+    retire_registry_fallbacks,
     retire_site_mismatched_registry_fallbacks,
     source_location_preflight,
+    source_site_agrees_with_canonical,
     venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
@@ -2089,6 +2092,122 @@ def _venue_maps(
     return target_metadata, names_by_key
 
 
+def _registry_fallback_marker_supported(
+    canonical: dict[str, str],
+    marker: dict[str, str],
+    assertion: dict[str, str],
+    venue_metadata: dict[str, list[dict[str, str]]],
+) -> bool:
+    """Return whether one marker still supports every canonical field it claims."""
+    allowed_fields = {"venue_key", "venue_id", "site_city", "site_state"}
+    fields = {field.strip() for field in marker.get("fields", "").split(",") if field.strip()}
+    if not fields or not fields <= allowed_fields:
+        return False
+
+    site_type = canonical.get("site_type", "").strip()
+    if not site_type or site_type == "UNKNOWN":
+        return False
+    if marker.get("site_type", "").strip() != site_type:
+        return False
+    if not source_site_agrees_with_canonical(assertion, canonical):
+        return False
+
+    if not assertion.get("curated_venue_name", "").strip():
+        return False
+    try:
+        resolved = ingest_school.resolve_venue_metadata(assertion, venue_metadata)
+    except ValueError:
+        return False
+
+    marker_key = marker.get("venue_key", "").strip()
+    if not marker_key or resolved.get("venue_key", "").strip() != marker_key:
+        return False
+
+    if "venue_key" in fields and canonical.get("venue_key", "").strip() != marker_key:
+        return False
+
+    if "venue_id" in fields:
+        resolved_id = resolved.get("venue_id", "").strip()
+        if not resolved_id or canonical.get("venue_id", "").strip() != resolved_id:
+            return False
+
+    if fields & {"site_city", "site_state"}:
+        if location_pair_status(
+            resolved.get("city", ""), resolved.get("state", "")
+        ) != "complete":
+            return False
+        canonical_location = (
+            canonical.get("site_city", "").strip(),
+            canonical.get("site_state", "").strip(),
+        )
+        resolved_location = (
+            resolved.get("city", "").strip(),
+            resolved.get("state", "").strip(),
+        )
+        if canonical_location != resolved_location:
+            return False
+
+    return True
+
+
+def _retire_invalid_registry_fallbacks_after_site_reconciliation(
+    repo: Path,
+    canonical: dict[str, str],
+    assertion_by_source: dict[tuple[str, str], list[dict[str, str]]],
+    support_cache: dict[str, Any],
+) -> int:
+    """Retire only fallback markers no longer traceable after site reconciliation."""
+    notes = canonical.get("notes", "")
+    if not parse_registry_fallback_markers(notes):
+        return 0
+
+    game_id = canonical.get("canonical_game_id", "").strip()
+    global_venues_by_id = support_cache.get("global_venues_by_id")
+    if global_venues_by_id is None:
+        global_venues_by_id, _, _ = load_global_venue_reference(repo)
+        support_cache["global_venues_by_id"] = global_venues_by_id
+    venue_metadata_by_program = support_cache.setdefault(
+        "venue_metadata_by_program",
+        {},
+    )
+
+    def should_retire(marker: dict[str, str]) -> bool:
+        pair = (
+            marker.get("source_program_key", "").strip(),
+            marker.get("source_game_id", "").strip(),
+        )
+        linked = [
+            assertion
+            for assertion in assertion_by_source.get(pair, [])
+            if assertion.get("canonical_game_id", "").strip() == game_id
+        ]
+        if len(linked) != 1:
+            return True
+
+        program = pair[0]
+        if program not in venue_metadata_by_program:
+            venue_path = repo / "schools" / program / "venues.csv"
+            if not venue_path.exists():
+                venue_metadata_by_program[program] = {}
+            else:
+                try:
+                    venue_metadata_by_program[program] = ingest_school.load_venue_metadata_map(
+                        venue_path,
+                        global_venues_by_id,
+                    )
+                except ValueError:
+                    venue_metadata_by_program[program] = {}
+
+        return not _registry_fallback_marker_supported(
+            canonical,
+            marker,
+            linked[0],
+            venue_metadata_by_program[program],
+        )
+
+    canonical["notes"], retired = retire_registry_fallbacks(notes, should_retire)
+    return retired
+
 def _ensure_source_research_patch_schema(
     source_fields: list[str],
     source_rows: list[dict[str, str]],
@@ -2617,6 +2736,10 @@ def apply_reconciliation_decisions(
     target_venue_metadata: dict[str, dict[str, str]] | None = None
     venue_names: dict[str, str] | None = None
     global_venue_pairs: set[tuple[str, str]] | None = None
+    registry_fallback_support_cache: dict[str, Any] = {
+        "global_venues_by_id": None,
+        "venue_metadata_by_program": {},
+    }
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
@@ -2658,6 +2781,14 @@ def apply_reconciliation_decisions(
                     canonical,
                     canonical_patch,
                     valid_venue_pairs=global_venue_pairs,
+                )
+                counts["registry_fallbacks_retired"] += (
+                    _retire_invalid_registry_fallbacks_after_site_reconciliation(
+                        repo,
+                        canonical,
+                        assertion_by_source,
+                        registry_fallback_support_cache,
+                    )
                 )
                 canonical["notes"] = _append_note(
                     canonical.get("notes", ""),
@@ -2777,6 +2908,30 @@ def apply_reconciliation_decisions(
             source["notes"] = _append_note(source.get("notes", ""), note)
         for field in SOURCE_ASSERTION_COPY_FIELDS:
             assertion[field] = source.get(field, "")
+
+        site_provenance_touched = (
+            field_name == "site_type"
+            or bool(set(canonical_patch) & CANONICAL_SITE_PATCH_FIELDS)
+            or bool(
+                set(item.get("source_patch", {}))
+                & {
+                    "game_date",
+                    "curated_site_type",
+                    "curated_venue_name",
+                    "city",
+                    "state",
+                }
+            )
+        )
+        if site_provenance_touched:
+            counts["registry_fallbacks_retired"] += (
+                _retire_invalid_registry_fallbacks_after_site_reconciliation(
+                    repo,
+                    canonical,
+                    assertion_by_source,
+                    registry_fallback_support_cache,
+                )
+            )
 
         discrepancy["canonical_value"] = canonical_field_value(canonical, field_name)
         discrepancy["resolution_basis"] = item["resolution_basis"]
