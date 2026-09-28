@@ -230,10 +230,10 @@ def build_complete_label_map(
     ledger: list[dict[str, str]],
 ) -> tuple[dict[str, str], str]:
     labels = [source_label(row) for row in ledger]
-    missing_labels = sorted({label for label in labels if not label})
-    if missing_labels:
+    if any(not label for label in labels):
         raise ValueError("LEGACY_STAGE1_LEDGER_MISSING_SOURCE_OPPONENT_LABEL")
 
+    expected_counts = Counter(labels)
     wanted = set(labels)
     qualifying: list[tuple[int, str, dict[str, str]]] = []
     for member in members:
@@ -244,20 +244,33 @@ def build_complete_label_map(
         score = mapping_header_score(header, member)
         if score < 0:
             continue
+        if any(field in header for field in COUNT_FIELDS):
+            score += 1
         data = csv_bytes(archive.read(member))
         mapping: dict[str, str] = {}
-        conflict = False
+        seen_rows: set[str] = set()
+        invalid = False
         for row in data:
             label = source_label(row)
             key = pick(row, *MAPPING_KEY_FIELDS)
             if not label or not key:
                 continue
-            prior = mapping.get(label)
-            if prior and prior != key:
-                conflict = True
+            if label in seen_rows:
+                invalid = True
                 break
+            seen_rows.add(label)
+            count_text = pick(row, *COUNT_FIELDS)
+            if label in wanted and count_text:
+                try:
+                    count_value = int(float(count_text))
+                except ValueError:
+                    invalid = True
+                    break
+                if count_value != expected_counts[label]:
+                    invalid = True
+                    break
             mapping[label] = key
-        if conflict:
+        if invalid:
             continue
         if wanted.issubset(mapping):
             qualifying.append((score, member, mapping))
@@ -308,8 +321,10 @@ def materialize_legacy_checkpoint(
         raise ValueError("AMBIGUOUS_LEGACY_GAME_LEDGER: " + ",".join(best_members))
 
     ledger_member = best_members[0]
-    base_rows = csv_bytes(archive.read(ledger_member))
+    ledger_bytes = archive.read(ledger_member)
+    base_rows = csv_bytes(ledger_bytes)
     mapping, mapping_member = build_complete_label_map(archive, members, base_rows)
+    mapping_bytes = archive.read(mapping_member)
 
     projected: list[dict[str, str]] = []
     for row in base_rows:
@@ -324,7 +339,9 @@ def materialize_legacy_checkpoint(
     return projected, {
         "entry_mode": "legacy_stage2_materialized",
         "legacy_game_ledger_member": ledger_member,
+        "legacy_game_ledger_sha256": sha256_bytes(ledger_bytes),
         "legacy_opponent_mapping_member": mapping_member,
+        "legacy_opponent_mapping_sha256": sha256_bytes(mapping_bytes),
         "legacy_opponent_labels_required": len(set(source_label(row) for row in base_rows)),
         "legacy_opponent_mapping_coverage": "COMPLETE",
         "site_type_defaulted_to_unknown_count": defaulted_site_count,
@@ -365,8 +382,15 @@ def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, o
         exact: list[str] = []
         for basename in LEDGER_BASENAMES:
             hits = [name for name in members if Path(name).name.lower() == basename]
-            if hits:
-                exact = hits
+            valid_hits = []
+            for name in hits:
+                try:
+                    if ledger_header_score(csv_header(archive, name), name) >= 0:
+                        valid_hits.append(name)
+                except (UnicodeDecodeError, csv.Error):
+                    continue
+            if valid_hits:
+                exact = valid_hits
                 break
         if len(exact) > 1:
             raise ValueError("AMBIGUOUS_STAGE2_LEDGER: " + ",".join(sorted(exact)))
@@ -606,6 +630,7 @@ def main() -> int:
     }
 
     artifacts = {
+        "input_ledger": Path(str(summary["input_ledger"])),
         "summary": dump(out, "stage3a0-summary.json", summary),
         "status": dump(out, "stage3a0-status.json", summary),
         "home_queue": dump(out, "stage3a2-home-queue.json", queues["HOME"]),
