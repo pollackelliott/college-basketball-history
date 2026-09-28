@@ -13,7 +13,7 @@
 Stage 3A-0 may read only:
 
 - the verified durable checkpoint / serialized Research state for the target school;
-- the checked-out/current protected-main repository;
+- project state at the exact protected-main SHA, supplied either by an exact-state checkout or the authorized disposable exact-SHA snapshot;
 - known repository paths containing the target school's canonical games, game assertions, and accepted shared-reference/project evidence needed for one bounded bulk join.
 
 Stage 3A-0 may not:
@@ -78,34 +78,27 @@ Do **not** manually inspect checkpoint members, inspect the Stage 3A-0 tool sour
 
 When the same healthy Research chat already read the controlling policy and the pinned protected-main SHA has not changed, do not repeat a broad policy/source inspection at this boundary. A replacement chat or changed protected-main SHA still performs the normal required policy refresh once, then runs the command.
 
-### 3.2 Execution-environment gate
+### 3.2 Portable execution / environment gate
 
-Command-first also means **environment-first-stop**. Before any Stage 3A-0 discovery or repository inspection beyond the required policy/SHA refresh, determine only whether the current execution environment already provides:
+Command-first does not require a persistent owner-managed checkout.
 
-- a runnable checkout of the repository at the pinned protected-main state;
-- the permanent `tools/research_stage3a0.py` entrypoint in that checkout;
-- access to the authoritative Stage 2 checkpoint/structured ledger supplied for the run; and
-- a Python execution surface capable of invoking the command.
+After confirming the exact protected-main SHA:
 
-This is a binary availability check, not an authorization to build the environment.
+1. use an already-runnable checkout at that exact state when available;
+2. otherwise use the bounded disposable exact-SHA snapshot path in `docs/research-portable-execution.md` when temporary filesystem, Python, and direct download/extraction are available;
+3. only when neither route exists, report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` and stop.
 
-If those prerequisites are not already available, report exactly:
+Portable bootstrap is project-state transport, not external historical research. It is limited to one archive pinned to the full exact protected-main SHA from the canonical repository endpoint.
 
-`STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`
+Do not clone, use a moving or unpinned archive, search for alternate snapshots or tools, inspect remote tool source to derive historical conclusions, or broaden the Stage 3A-0 evidence universe.
 
-and stop. Do **not**:
+From the extracted exact-SHA snapshot, invoke the permanent Stage 3A-0 entrypoint with the authoritative Stage 2 checkpoint/ledger and explicit `--main-sha`.
 
-- search the public web for another execution path;
-- clone or reconstruct the repository;
-- fetch or assemble a repository snapshot;
-- search the filesystem for the tool or another checkout;
-- inspect the Stage 3A-0 tool source through GitHub or another remote surface;
-- unpack/inspect the checkpoint in order to simulate the command conversationally; or
-- continue Stage 3A-0 analysis while waiting for a runnable environment.
+The sentinel means that both the existing-checkout route and the bounded portable route are unavailable. It is not triggered merely because no persistent checkout is mounted or because the owner is using the mobile app.
 
-No Stage 3A-0 artifact is required when the command could not run. The predecessor Stage 2 checkpoint remains authoritative. A later owner-authorized continuation may resume Stage 3A-0 in a Codespace or other already-runnable checkout.
+If neither execution route is available, no Stage 3A-0 artifact is required. The predecessor Stage 2 checkpoint remains the controlling durable state until Stage 3A-0 resumes.
 
-`tools/export_stage3a0_local_evidence.py` remains an optional bounded diagnostic/export helper **after** a runnable checkout exists; it is not a bootstrap mechanism, prerequisite, or separate readiness gate.
+`tools/export_stage3a0_local_evidence.py` remains an optional bounded diagnostic/export helper after a runnable exact-state project surface exists; it is not a prerequisite or separate readiness gate.
 
 Missing stable IDs, game type, site type, opponent keys, duplicate IDs, or unrecognized enums produce `STAGE_3A0_INPUT_NOT_READY`, not ordinary Stage 3A-0 research debt.
 
@@ -154,7 +147,7 @@ If the local project-evidence pass itself is too large to complete safely in one
 - checkpoint;
 - resume the same structured local operation later.
 
-A Stage 3A-0 turn that has not invoked the permanent entrypoint and has no concrete execution blocker is simply **NOT STARTED**. If the concrete blocker is absence of an already-runnable checkout/execution surface, the required terminal state is `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`. Do not continue inspecting schemas, tools, repository snapshots, filesystem paths, or reconciliation state in hopes of becoming more ready; run the command or stop.
+A Stage 3A-0 turn that has not invoked the permanent entrypoint and has no concrete execution blocker is simply **NOT STARTED**. If no already-runnable exact-state checkout exists, use the bounded portable exact-SHA execution path in `docs/research-portable-execution.md`. Only when neither execution route is available is the required terminal state `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`. Do not continue inspecting schemas, alternate snapshots, tools, filesystem paths, or reconciliation state in hopes of becoming more ready; run the permanent command or stop.
 
 Do not convert execution difficulty into broader historical research.
 
@@ -203,7 +196,7 @@ STOPPING AT THE REQUIRED STAGE 3A SUBSTAGE BOUNDARY.
 Flag a Stage 3A-0 implementation if it:
 
 - performs conversational checkpoint-schema/tool-source inspection instead of invoking the command-first entrypoint when the Stage 2 checkpoint/ledger is already available;
-- responds to a missing runnable checkout by web searching, cloning, fetching a repository snapshot, searching the filesystem, inspecting the remote tool source, or conversationally simulating Stage 3A-0 instead of stopping at `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE`;
+- responds to a missing runnable checkout by failing to use the authorized exact-SHA portable path when available, or by web searching, cloning, using a moving/unpinned or alternate snapshot, searching the filesystem for another checkout/tool, inspecting remote tool source to derive historical conclusions, or conversationally simulating Stage 3A-0;
 - searches for or invents a separate readiness gate even though `research_stage3a0.py` owns readiness;
 - invokes public web research;
 - searches institutional archives or media guides;

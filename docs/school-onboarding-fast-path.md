@@ -1,7 +1,7 @@
 # Permanent School Onboarding Fast Path
 
 - **Status:** Required for every new school beginning August 14, 2026
-- **Execution environment:** Project GitHub Codespace, preferably with Codex
+- **Execution environment:** Serialized Implementation/integration uses the project GitHub Codespace, preferably with Codex; Research follows the portable execution rules in `AGENTS.md` and `docs/research-portable-execution.md`
 - **Human gates:** Two
 
 This procedure consolidates package validation, canonical matching,

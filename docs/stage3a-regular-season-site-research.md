@@ -121,7 +121,8 @@ This historical shortcut applies **only to regular-season neutral rows**. It doe
 
 **Stage 3A-0 note:** when this lookup occurs during Stage 3A-0, the stricter
 `docs/stage3a0-local-only-contract.md` applies. The lookup is limited to evidence
-already present in the verified checkpoint or checked-out/current protected-main project.
+already present in the verified checkpoint or exact protected-main project state supplied
+by an exact-state checkout or the authorized disposable exact-SHA snapshot.
 Do not use the web or discover new reciprocal sources during 3A-0.
 
 Before external historical searching for an unresolved neutral game, perform the repository-owned Stage 3A-3 Tier 1 pass with `tools/research_stage3a3_tier1.py`. It performs the **bounded, read-only exact-game lookup** to determine whether the exact same game already exists in the current project with usable accepted venue evidence. Treat this as a mechanical first-pass reuse check, not as a mandate to reconcile every historical disagreement with canonical data.
@@ -167,8 +168,10 @@ Stage 3A-0 is **strictly local-only, mechanical, and command-first**. It perform
 historical research.
 
 Allowed inputs are limited to the verified durable checkpoint/working state plus
-already-present project evidence in the checked-out/current protected-main repository.
-Direct reads of known repository files are allowed. Open-ended discovery is not.
+already-present project evidence at the exact protected-main SHA. That project state may come
+from an already-runnable checkout or from the bounded disposable exact-SHA snapshot authorized by
+`docs/research-portable-execution.md`. Direct reads of known repository files are allowed.
+Open-ended discovery is not.
 
 After the owner authorizes Stage 3A-0 and the protected-main SHA is confirmed, run the
 permanent entrypoint immediately:

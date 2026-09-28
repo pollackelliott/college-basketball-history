@@ -272,7 +272,7 @@ writing unambiguous accepted same-game project evidence through into the working
 The detailed controlling scope is `docs/stage3a0-local-only-contract.md`.
 
 Allowed evidence is limited to the verified durable checkpoint/working state and
-already-present structured project evidence in the checked-out/current protected-main repository.
+structured project evidence at the exact protected-main SHA, supplied either by an exact-state checkout or the authorized disposable exact-SHA snapshot.
 "Project-evidence harvest" does not authorize reading documents or source files for interpretation.
 
 After the owner authorizes Stage 3A-0 and the exact protected-main SHA is confirmed, the first
@@ -290,12 +290,13 @@ HOME / OPPONENT_HOME / UNKNOWN / NEUTRAL / postseason queue emission.
 Do not manually inspect the checkpoint schema, tool source, or ledger population before running
 this entrypoint merely to prepare Stage 3A-0. Do not search for a separate readiness command.
 
-If the current environment does **not already provide a runnable repository checkout and Python
-execution surface capable of invoking the supplied command**, report
-`STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` and stop. Do not web-search, clone, reconstruct
-or fetch a repository snapshot, search the filesystem for another checkout/tool, inspect remote
-tool source, or simulate the command conversationally. The predecessor Stage 2 checkpoint remains
-the controlling durable state until Stage 3A-0 resumes in an already-runnable environment.
+If no runnable exact-state checkout is already present, use the bounded portable execution path
+in `docs/research-portable-execution.md`: one disposable repository archive pinned to the full
+exact protected-main SHA, extracted into temporary storage, then execute the same permanent command
+with explicit `--main-sha`. Do not clone, use a moving or unpinned archive, search for alternate
+snapshots or tools, inspect remote tool source to derive historical conclusions, or simulate the
+command conversationally. Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when neither
+an exact-state checkout nor the bounded portable execution path is available.
 
 If the command returns `STAGE_3A0_ENTRY_NOT_READY` or `STAGE_3A0_INPUT_NOT_READY`, read the
 serialized `stage3a0-status.json`, follow only its exact bounded remediation, and stop before
