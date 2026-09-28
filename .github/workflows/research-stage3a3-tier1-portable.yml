@@ -1,0 +1,41 @@
+name: Research Stage 3A-3 Tier 1 portable state
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact protected-main commit
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build exact Tier 1 project-state snapshot
+        run: |
+          python tools/research_stage3a3_tier1_portable.py build \
+            --repo-root . \
+            --output-dir "$RUNNER_TEMP/research-stage3a3-tier1-state" \
+            --main-sha "${{ github.sha }}"
+
+      - name: Verify exact Tier 1 project-state snapshot
+        run: |
+          python tools/research_stage3a3_tier1_portable.py verify \
+            "$RUNNER_TEMP/research-stage3a3-tier1-state" \
+            --main-sha "${{ github.sha }}"
+
+      - name: Publish exact-SHA Tier 1 project-state snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-stage3a3-tier1-state-${{ github.sha }}
+          path: ${{ runner.temp }}/research-stage3a3-tier1-state
+          if-no-files-found: error
+          retention-days: 7
