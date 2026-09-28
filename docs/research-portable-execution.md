@@ -46,10 +46,11 @@ For such an operation:
 
 1. confirm the exact protected-main SHA;
 2. use an already-runnable checkout at that exact state when available;
-3. otherwise, if temporary filesystem, Python, and direct HTTPS download/extraction are available, fetch one disposable repository archive pinned to that exact SHA;
-4. run the permanent repository command from the extracted snapshot, passing the exact protected-main SHA explicitly;
-5. preserve the command outputs/checkpoint;
-6. discard the temporary snapshot.
+3. otherwise, if direct HTTPS download/extraction works, fetch one disposable repository archive pinned to that exact SHA;
+4. if the archive transport is unavailable, use the authenticated GitHub exact-SHA artifact fallback described below;
+5. run the permanent repository command from the verified snapshot, passing the exact protected-main SHA explicitly;
+6. preserve the command outputs/checkpoint;
+7. discard the temporary snapshot.
 
 The authorized full-repository portable archive for a stateful operation remains:
 
@@ -59,13 +60,52 @@ Use the full 40-character commit SHA. Never use `main`, `HEAD`, a tag, or anothe
 
 This archive path is **not** the Stage 3A-0 execution path.
 
+### Authenticated exact-SHA artifact fallback
+
+Protected `main` publishes a short-retention GitHub Actions artifact named
+`research-stage3a3-tier1-state-<exact-protected-main-sha>`. It is built from the
+exact pushed commit by `.github/workflows/research-stage3a3-tier1-portable.yml`.
+
+The artifact contains exactly the permanent Tier-1 executable surface and its complete
+repository evidence surface:
+
+- `tools/research_stage3a3_tier1.py`;
+- `tools/research_stage3a3_tier1_portable.py`;
+- `data/canonical/games.csv`;
+- every `schools/*/source-games.csv`;
+- `research-stage3a3-tier1-state-manifest.json` with the exact protected-main SHA,
+  file sizes, and SHA-256 hashes.
+
+This is not a row-filtered or conversationally selected evidence subset. It is the
+complete set of repository files the permanent Tier-1 algorithm reads.
+
+When codeload/archive transport is unavailable:
+
+1. query GitHub Actions through the authenticated GitHub connector for the successful
+   `Research Stage 3A-3 Tier 1 portable state` push run whose `head_sha` is the
+   exact protected-main SHA;
+2. require the artifact name to contain that exact SHA;
+3. download/materialize that artifact into temporary storage;
+4. verify the extracted snapshot with
+   `python tools/research_stage3a3_tier1_portable.py verify <snapshot-dir> --main-sha <exact-sha>`;
+5. only after verification succeeds, run the unchanged permanent Tier-1 command using
+   that snapshot as `--repo-root` and the same exact `--main-sha`.
+
+Do not use an artifact from another commit, an expired artifact without re-establishing
+exact state, a hand-selected file subset, or reconstructed project evidence.
+
 ## Stage 3A-3 Tier 1
 
-Until its own architecture is separately reviewed, Stage 3A-3 Tier 1 continues to use the current permanent `tools/research_stage3a3_tier1.py` accepted-evidence pass and therefore requires protected-main project state.
+Stage 3A-3 Tier 1 continues to use the unchanged permanent
+`tools/research_stage3a3_tier1.py` accepted-evidence pass and therefore requires exact
+protected-main project state.
 
-When no exact-state checkout exists, the exact-SHA disposable snapshot remains the current authorized fallback.
+When no exact-state checkout exists, use the exact-SHA codeload snapshot when available.
+If that transport fails, use the authenticated exact-SHA Actions artifact above. Both
+transports expose the same complete Tier-1 evidence surface.
 
-The snapshot does not broaden evidence authority. The permanent Tier-1 tool still owns the canonical/published-reciprocal evidence scan and exact-game reuse logic.
+The snapshot does not broaden evidence authority. The permanent Tier-1 tool still owns
+the canonical/published-reciprocal evidence scan and exact-game reuse logic.
 
 Do not substitute a different evidence surface merely because portable transport is inconvenient.
 
@@ -77,7 +117,7 @@ For Stage 3A-0, `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` is appropriate onl
 - the exact permanent Stage 3A-0 tool file at the confirmed SHA; or
 - temporary Python/filesystem execution.
 
-For a stateful deterministic pass, the relevant execution-unavailable state applies only when neither an exact-state checkout nor the currently authorized exact-SHA project-state transport works.
+For a stateful deterministic pass, the relevant execution-unavailable state applies only when no exact-state checkout is available and both authorized exact-SHA transports fail: the pinned codeload/archive path and the authenticated GitHub Actions artifact path.
 
 Execution difficulty is never permission to begin historical research, clone moving state, use an unpinned snapshot, or transfer routine command execution to the owner.
 
