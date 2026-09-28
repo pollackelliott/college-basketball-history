@@ -2154,8 +2154,7 @@ def _retire_invalid_registry_fallbacks_after_site_reconciliation(
     repo: Path,
     canonical: dict[str, str],
     assertion_by_source: dict[tuple[str, str], list[dict[str, str]]],
-    global_venues_by_id: dict[str, dict[str, str]],
-    venue_metadata_by_program: dict[str, dict[str, list[dict[str, str]]]],
+    support_cache: dict[str, Any],
 ) -> int:
     """Retire only fallback markers no longer traceable after site reconciliation."""
     notes = canonical.get("notes", "")
@@ -2163,6 +2162,14 @@ def _retire_invalid_registry_fallbacks_after_site_reconciliation(
         return 0
 
     game_id = canonical.get("canonical_game_id", "").strip()
+    global_venues_by_id = support_cache.get("global_venues_by_id")
+    if global_venues_by_id is None:
+        global_venues_by_id, _, _ = load_global_venue_reference(repo)
+        support_cache["global_venues_by_id"] = global_venues_by_id
+    venue_metadata_by_program = support_cache.setdefault(
+        "venue_metadata_by_program",
+        {},
+    )
 
     def should_retire(marker: dict[str, str]) -> bool:
         pair = (
@@ -2729,10 +2736,10 @@ def apply_reconciliation_decisions(
     target_venue_metadata: dict[str, dict[str, str]] | None = None
     venue_names: dict[str, str] | None = None
     global_venue_pairs: set[tuple[str, str]] | None = None
-    global_venues_by_id, _, _ = load_global_venue_reference(repo)
-    venue_metadata_by_program: dict[
-        str, dict[str, list[dict[str, str]]]
-    ] = {}
+    registry_fallback_support_cache: dict[str, Any] = {
+        "global_venues_by_id": None,
+        "venue_metadata_by_program": {},
+    }
     counts = Counter()
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
@@ -2780,8 +2787,7 @@ def apply_reconciliation_decisions(
                         repo,
                         canonical,
                         assertion_by_source,
-                        global_venues_by_id,
-                        venue_metadata_by_program,
+                        registry_fallback_support_cache,
                     )
                 )
                 canonical["notes"] = _append_note(
@@ -2923,8 +2929,7 @@ def apply_reconciliation_decisions(
                     repo,
                     canonical,
                     assertion_by_source,
-                    global_venues_by_id,
-                    venue_metadata_by_program,
+                    registry_fallback_support_cache,
                 )
             )
 
