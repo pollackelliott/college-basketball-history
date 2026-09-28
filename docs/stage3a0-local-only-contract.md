@@ -31,21 +31,57 @@ Project-evidence reuse belongs to the later substage that actually needs it:
 The authoritative input is either:
 
 - the durable Stage 2 checkpoint ZIP; or
-- the structured Stage 2 ledger directly.
+- the structured Stage 2 game ledger directly.
 
-The permanent command owns checkpoint-ledger selection and readiness. Do not manually inspect checkpoint members, pre-partition the ledger, or invent a separate readiness step before running it.
+For checkpoints created under current policy, Stage 2 completion must include a full
+game-level `structured-stage2-ledger.csv`. That ledger is the accepted Stage 1 game
+universe with Stage 2 opponent identity written through to every row. It must preserve
+stable row IDs, season, game type, literal/raw source fields, and any already-established
+H/A/N value.
 
-Required structured fields remain:
+If Stage 2 has not established standardized H/A/N for a row, write
+`site_type=UNKNOWN`. Stage 2 and Stage 3A-0 must **never infer H/A/N from
+source_site_token** merely to populate the structured ledger.
+
+### Legacy Stage 2 compatibility
+
+Some accepted pre-hardening Stage 2 checkpoints completed opponent identity at the
+label/family level but did not serialize those conclusions back into a full per-game
+Stage 2 ledger.
+
+Stage 3A-0 may mechanically materialize a legacy checkpoint only when the ZIP itself
+contains both:
+
+1. one full game-level accepted ledger with stable row IDs, season, game type, and source
+   opponent label; and
+2. one complete label-level opponent mapping that deterministically supplies one opponent
+   key for every source opponent label used by that game ledger.
+
+The permanent command owns that mechanical join. It must require complete label coverage,
+reject conflicting complete mappings, preserve the accepted game rows and raw site tokens,
+write the resolved opponent key onto each row, and use `site_type=UNKNOWN` whenever the
+legacy ledger lacks an already-standardized H/A/N value.
+
+This compatibility path is not Stage 2 research, is not permission to reconstruct missing
+state from prose, and must not parse raw source-site notation into H/A/N.
+
+If the checkpoint lacks either a full game-level ledger or complete deterministic opponent
+mapping, Stage 3A-0 remains entry-not-ready and stops.
+
+Required structured fields after direct entry or mechanical legacy materialization are:
 
 - stable research/source row ID;
 - season;
-- opponent key;
-- H/A/N/site classification;
+- resolved opponent key;
+- H/A/N/site classification, including explicit `UNKNOWN`;
 - game type.
 
-Explicit `UNKNOWN` H/A/N is a valid Stage 3A-0 value and belongs in the UNKNOWN queue. A missing or unrecognized site value is an input defect.
+Explicit `UNKNOWN` H/A/N is a valid Stage 3A-0 value and belongs in the UNKNOWN queue.
+A present but unrecognized standardized site value is an input defect.
 
-A pre-hardening checkpoint that lacks required `game_type` may use only the documented narrow compatibility migration plus declared-intent validator. Do not broaden that repair into historical research.
+A pre-hardening checkpoint that lacks required `game_type` may use only the documented
+narrow compatibility migration plus declared-intent validator. Do not broaden that repair
+into historical research.
 
 ## 3. Permanent execution
 
