@@ -130,11 +130,18 @@ CANONICAL_PATCH_FIELDS = {
     "canonical_status",
     "notes",
 }
-SOURCE_PATCH_FIELDS = set(SOURCE_ASSERTION_COPY_FIELDS) - {
-    "source_program_key",
-    "source_game_id",
-    "raw_text",
-}
+SOURCE_RESEARCH_PATCH_FIELDS = (
+    "site_research_status",
+    "site_research_basis",
+)
+SOURCE_PATCH_FIELDS = (
+    set(SOURCE_ASSERTION_COPY_FIELDS)
+    - {
+        "source_program_key",
+        "source_game_id",
+        "raw_text",
+    }
+) | set(SOURCE_RESEARCH_PATCH_FIELDS)
 
 
 class WorkflowError(RuntimeError):
@@ -2082,6 +2089,36 @@ def _venue_maps(
     return target_metadata, names_by_key
 
 
+def _ensure_source_research_patch_schema(
+    source_fields: list[str],
+    source_rows: list[dict[str, str]],
+    reconciliation_items: list[dict[str, Any]],
+) -> None:
+    """Ensure source research-accounting patches have a durable paired schema."""
+
+    requested = any(
+        set(item.get("source_patch", {})) & set(SOURCE_RESEARCH_PATCH_FIELDS)
+        for item in reconciliation_items
+    )
+    if not requested:
+        return
+
+    present = [
+        field for field in SOURCE_RESEARCH_PATCH_FIELDS if field in source_fields
+    ]
+    if present and len(present) != len(SOURCE_RESEARCH_PATCH_FIELDS):
+        raise WorkflowError(
+            "source-games.csv must contain both site_research_status and "
+            "site_research_basis when either column is present"
+        )
+
+    if not present:
+        source_fields.extend(SOURCE_RESEARCH_PATCH_FIELDS)
+        for row in source_rows:
+            for field in SOURCE_RESEARCH_PATCH_FIELDS:
+                row.setdefault(field, "")
+
+
 def _apply_canonical_patch(
     canonical: dict[str, str],
     patch: dict[str, str],
@@ -2556,6 +2593,11 @@ def apply_reconciliation_decisions(
     assertion_fields, assertion_rows = read_csv_table(assertions_path)
     discrepancy_fields, discrepancy_rows = read_csv_table(discrepancies_path)
     source_fields, source_rows = read_csv_table(source_path)
+    _ensure_source_research_patch_schema(
+        source_fields,
+        source_rows,
+        reconciliation_items,
+    )
     canonical_by_id = {row["canonical_game_id"]: row for row in canonical_rows}
     source_by_id = {row["source_game_id"]: row for row in source_rows}
     assertion_by_source: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
