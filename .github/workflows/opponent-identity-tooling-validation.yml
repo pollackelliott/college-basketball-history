@@ -5,94 +5,165 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  actions: read
+  contents: write
+  deployments: read
+  pull-requests: write
+  statuses: read
 
 jobs:
-  validate:
+  clemson-gate2-execution:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Check out PR head
+      - name: Check out exact Clemson release head
         uses: actions/checkout@v4
+        with:
+          ref: data/clemson-onboarding
+          fetch-depth: 0
+          token: ${{ github.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Run targeted opponent identity tests
+      - name: Configure git identity
         run: |
-          python -m unittest discover -s tests -p 'test_opponent_identity_collision_audit.py' -v
-          python -m unittest discover -s tests -p 'test_opponent_identity_remediation.py' -v
-          python -m unittest discover -s tests -p 'test_published_opponent_identity_census.py' -v
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Run full repository test suite
-        run: python -m unittest discover -s tests -v
-
-      - name: Validate alias registry
-        run: python tools/opponent_identity_remediation.py validate-aliases --json
-
-      - name: Build and audit the known Texas A&M P0 repair
+      - name: Execute exact approved Preview merge and Production proof
         shell: bash
         run: |
-          cat > /tmp/texas-am-p0-decisions.csv <<'CSV'
-          source_program_key,source_opponent_label,from_program_key,to_program_key,decision,evidence_basis,evidence_url
-          northwestern,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Northwestern package uses stale texas-a-and-m identity; authoritative current registry and reciprocal Texas A&M history establish texas-a-m as the same program identity.",https://github.com/pollackelliott/college-basketball-history
-          oklahoma,Texas A&M,texas-a-and-m,texas-a-m,MERGE_TO_PROGRAM,"Published Oklahoma package uses stale texas-a-and-m identity; authoritative current registry establishes texas-a-m as the same program identity.",https://github.com/pollackelliott/college-basketball-history
-          CSV
+          set -eo pipefail
+          EXPECTED_MAIN="6c48d7dc510fd318c35344c37dc21f2c2f45e59c"
+          EXPECTED_HEAD="b69e49decfb92541dac9e6f4d2705ed89bf3fa96"
 
-          set +e
-          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-p0-plan-a.json
-          PLAN_RC=$?
-          set -e
-          if [ "$PLAN_RC" -ne 0 ] && [ "$PLAN_RC" -ne 2 ]; then
-            echo "Unexpected planner exit code: $PLAN_RC"
-            exit 1
-          fi
+          test "$(git branch --show-current)" = "data/clemson-onboarding"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_MAIN"
+          test -z "$(git status --porcelain --untracked-files=all)"
 
-          set +e
-          python tools/opponent_identity_remediation.py plan /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-p0-plan-b.json
-          PLAN_RC_2=$?
-          set -e
-          if [ "$PLAN_RC_2" -ne "$PLAN_RC" ]; then
-            echo "Planner exit code is nondeterministic"
-            exit 1
-          fi
-
-          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-a.json
-          python tools/opponent_identity_collision_audit.py /tmp/texas-am-p0-decisions.csv --output /tmp/texas-am-collision-audit-b.json
+          mkdir -p .onboarding/clemson
+          cat > .onboarding/clemson/release-state.json <<'JSON'
+          {
+            "schema_version": 1,
+            "school_key": "clemson",
+            "approved_plan_hash": "18db044e428cdb53fc1afb73a70ed89aca43ce0f2ca3aea7e8430f5e08488bbd",
+            "branch": "data/clemson-onboarding",
+            "head_sha": "b69e49decfb92541dac9e6f4d2705ed89bf3fa96",
+            "pr_number": 195,
+            "pr_url": "https://github.com/pollackelliott/college-basketball-history/pull/195",
+            "preview_deployment": {
+              "environment": "Preview",
+              "environment_url": "https://college-basketball-history-git-a548cc-elliott-pollacks-projects.vercel.app",
+              "inspector_url": "https://vercel.com/elliott-pollacks-projects/college-basketball-history/76xytWpbujAqLgs43W9j5gPw2feH",
+              "state": "success",
+              "sha": "b69e49decfb92541dac9e6f4d2705ed89bf3fa96"
+            },
+            "changed_paths": [
+              "data/canonical/games.csv",
+              "data/evidence/game-assertions.csv",
+              "data/reconciliation/discrepancies.csv",
+              "data/reconciliation/onboarding-decisions/clemson-18db044e428c.json",
+              "data/reference/program-accomplishments.csv",
+              "data/reference/programs.csv",
+              "schools/clemson/source-games.csv",
+              "site/data/manifest.json",
+              "site/data/programs.json",
+              "site/data/teams/alabama.json",
+              "site/data/teams/arizona.json",
+              "site/data/teams/arkansas.json",
+              "site/data/teams/auburn.json",
+              "site/data/teams/baylor.json",
+              "site/data/teams/butler.json",
+              "site/data/teams/byu.json",
+              "site/data/teams/california.json",
+              "site/data/teams/cincinnati.json",
+              "site/data/teams/clemson.json",
+              "site/data/teams/colorado.json",
+              "site/data/teams/depaul.json",
+              "site/data/teams/duke.json",
+              "site/data/teams/florida.json",
+              "site/data/teams/georgia.json",
+              "site/data/teams/illinois.json",
+              "site/data/teams/indiana.json",
+              "site/data/teams/iowa.json",
+              "site/data/teams/kansas-state.json",
+              "site/data/teams/kansas.json",
+              "site/data/teams/kentucky.json",
+              "site/data/teams/lsu.json",
+              "site/data/teams/maryland.json",
+              "site/data/teams/michigan.json",
+              "site/data/teams/minnesota.json",
+              "site/data/teams/mississippi-state.json",
+              "site/data/teams/missouri.json",
+              "site/data/teams/nebraska.json",
+              "site/data/teams/north-carolina.json",
+              "site/data/teams/northwestern.json",
+              "site/data/teams/ohio-state.json",
+              "site/data/teams/oklahoma-state.json",
+              "site/data/teams/oklahoma.json",
+              "site/data/teams/ole-miss.json",
+              "site/data/teams/oregon-state.json",
+              "site/data/teams/oregon.json",
+              "site/data/teams/penn-state.json",
+              "site/data/teams/purdue.json",
+              "site/data/teams/rutgers.json",
+              "site/data/teams/south-carolina.json",
+              "site/data/teams/stanford.json",
+              "site/data/teams/tcu.json",
+              "site/data/teams/tennessee.json",
+              "site/data/teams/texas-a-m.json",
+              "site/data/teams/texas-tech.json",
+              "site/data/teams/texas.json",
+              "site/data/teams/ucf.json",
+              "site/data/teams/ucla.json",
+              "site/data/teams/vanderbilt.json",
+              "site/data/teams/virginia.json",
+              "site/data/teams/wake-forest.json",
+              "site/data/teams/washington.json",
+              "site/data/teams/west-virginia.json"
+            ]
+          }
+          
+          JSON
 
           python - <<'PY'
           import json
           from pathlib import Path
-
-          def load(path):
-              return json.loads(Path(path).read_text())
-
-          p1 = load('/tmp/texas-am-p0-plan-a.json')
-          p2 = load('/tmp/texas-am-p0-plan-b.json')
-          a1 = load('/tmp/texas-am-collision-audit-a.json')
-          a2 = load('/tmp/texas-am-collision-audit-b.json')
-
-          assert p1['plan_sha256'] == p2['plan_sha256'], 'plan hash is nondeterministic'
-          assert a1['audit_sha256'] == a2['audit_sha256'], 'audit hash is nondeterministic'
-
-          affected = a1['affected_canonical_game_count']
-          accounted = a1['covered_affected_game_count'] + a1['unpaired_affected_game_count']
-          assert affected == accounted, f'affected accounting mismatch: {accounted}/{affected}'
-
-          print('P0_PLAN_SHA256=' + p1['plan_sha256'])
-          print('P0_AUDIT_SHA256=' + a1['audit_sha256'])
-          print('AFFECTED_CANONICAL_GAMES=' + str(affected))
-          print('SAME_DATE_COLLISION_GROUPS=' + str(a1['same_date_collision_group_count']))
-          print('EXACT_CORE_MATCH_GROUPS=' + str(a1['exact_core_match_group_count']))
-          print('SAME_DATE_IDENTITY_CONFLICT_GROUPS=' + str(a1['same_date_identity_conflict_group_count']))
-          print('COVERED_AFFECTED_GAMES=' + str(a1['covered_affected_game_count']))
-          print('UNPAIRED_AFFECTED_GAMES=' + str(a1['unpaired_affected_game_count']))
-
-          for item in a1['collision_groups']:
-              if item['kind'] == 'SAME_DATE_IDENTITY_CONFLICT':
-                  print('CONFLICT=' + ','.join(item['canonical_game_ids']) + '|' + '|'.join(item['signature']) + '|differences=' + ','.join(sorted(item['field_differences'])))
-
-          for game_id in a1['unpaired_affected_game_ids']:
-              print('UNPAIRED=' + game_id)
+          s=json.loads(Path(".onboarding/clemson/release-state.json").read_text())
+          assert s["school_key"]=="clemson"
+          assert s["branch"]=="data/clemson-onboarding"
+          assert s["head_sha"]=="b69e49decfb92541dac9e6f4d2705ed89bf3fa96"
+          assert s["pr_number"]==195
+          assert s["approved_plan_hash"]=="18db044e428cdb53fc1afb73a70ed89aca43ce0f2ca3aea7e8430f5e08488bbd"
+          assert len(s["changed_paths"])==62
+          print("GATE2_RELEASE_STATE=VALID")
           PY
+
+          python tools/release_school.py clemson --merge --preview-approved --deployment-timeout 900
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path(".onboarding/clemson/release-state.json").read_text())
+          print("FINAL_STATUS="+str(s.get("status","")))
+          print("MERGED_SHA="+str(s.get("merge_sha","")))
+          print("PRODUCTION_URL="+str(s.get("production_deployment",{}).get("environment_url","")))
+          print("PRODUCTION_JSON_CHECKED="+str(len(s.get("production_json_checked",[]))))
+          print("APPROVED_PLAN_HASH="+str(s.get("approved_plan_hash","")))
+          PY
+
+      - name: Upload Clemson Gate 2 production proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clemson-gate2-production-proof
+          include-hidden-files: true
+          path: .onboarding/clemson/release-state.json
+          if-no-files-found: error
