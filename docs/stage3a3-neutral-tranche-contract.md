@@ -35,6 +35,8 @@ If no exact-state runnable checkout is present, use the bounded portable executi
 
 The portable snapshot does not broaden Tier 1 evidence authority. Both transports expose the complete evidence surface consumed by the unchanged permanent tool: canonical games plus every published reciprocal `source-games.csv`. The permanent tool still owns the canonical/published-reciprocal evidence scan and exact-game reuse logic.
 
+Tier 1 reuse is **completeness-aware**. An unambiguous accepted exact-game fact may be written through even when it is partial, but a row leaves the downstream residual queue only when the accepted facts satisfy that row's current Stage 3A-3 obligation. For U.S.-style row data this means modern rows (1996-97+) require exact venue plus locality, while historical rows require locality even when the building remains blank. Partial accepted evidence must be serialized with its missing required fields and the row must remain in the appropriate modern/historical queue. Stage 3A-4 is a safety net, not the normal place to rediscover Tier-1 partials.
+
 For a nontrivial neutral population, do not combine Tier 1 with modern recurring research in the same turn. The command must pin one protected-main SHA, bulk-scan the permitted accepted project-evidence surfaces, serialize unambiguous exact-game reuse, contradictions, and the exact remaining modern/historical queues, emit `stage3a3-tier1-status.json`, and stop. A no-match is a successful Tier-1 output, not permission for source discovery.
 
 After substantial research in one tier, **do not cross into the next materially different tier in the same turn**. Write accepted findings through, serialize the exact remaining queue, and stop at a durable continuation point.

@@ -276,6 +276,8 @@ Once the owner has authorized research, perform the self-challenge autonomously 
 
 Under the bounded-stage protocol, a completed Stage 6 still stops before Stage 7. Within Stage 6 itself, however, the owner should not need to approve each repair batch or terminal-debt decision. Routine recoveries from the same class-level challenge should be batched before a durability checkpoint; do not return after one or two ordinary repairs merely because they were individually interesting. A healthy Stage 6 should require minimal owner steering.
 
+Terminal completion is also an execution boundary. Once the lane has durably written and verified `COMPLETE_PRE_FREEZE_SELF_CHALLENGE_PASS`, it must return immediately. Do not continue with fresh canonical/evidence/reference fetches, repository discovery, or additional matching after that terminal artifact exists; those operations belong before completion if they are actually required. This prevents a completed audit from appearing stalled behind unnecessary post-completion transport work.
+
 ## 12. Relationship to Implementation
 
 The self-challenge strengthens Research Freeze; it does not replace serialized Implementation safeguards.
