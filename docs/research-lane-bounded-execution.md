@@ -547,6 +547,16 @@ Construct exactly the current-schema six flat files:
 5. `notes.md`
 6. `source-notes.md`
 
+Once all six files exist, run the permanent mechanical closeout:
+
+```bash
+python tools/research_stage4_closeout.py <school_key> <six-file-directory> <stage3b-complete-checkpoint.zip> --main-sha <protected-main-sha>
+```
+
+The command owns the Stage 3B parent/manifest check, exact game-ID and core-semantic reconciliation, the permanent `research-check`, deterministic six-file package/checkpoint creation, and the complete distinct `NON_D1` owner-scan generation. If `notes.md`, `source-notes.md`, or another required package member is missing, it stops immediately with `PACKAGE_AUTHORING_INCOMPLETE`; finish only the named package-authoring residual and rerun. Do not answer a mechanical closeout stop by opening new historical research, broad canonical/evidence retrieval, or hand-reconstructing QA.
+
+When no runnable checkout is available, use the exact-SHA portable Stage 4 tool bundle in `docs/research-portable-execution.md`. The portable path changes transport only; the unchanged permanent closeout command still owns the result.
+
 Then:
 
 - apply accepted Stage 1–3B research mechanically;

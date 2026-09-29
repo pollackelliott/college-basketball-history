@@ -140,6 +140,28 @@ the canonical/published-reciprocal evidence scan and exact-game reuse logic.
 
 Do not substitute a different evidence surface merely because portable transport is inconvenient.
 
+## Research Stage 4 mechanical closeout
+
+Stage 4 closeout is also portable because it consumes only the already-authored six-file package, the completed Stage 3B checkpoint, and repository-owned validation/orchestration code. It does not require canonical basketball state or a mutable checkout.
+
+The permanent entrypoint is:
+
+```bash
+python tools/research_stage4_closeout.py <school_key> <six-file-directory> <stage3b-complete-checkpoint.zip> --main-sha <exact-protected-main-sha>
+```
+
+Protected `main` publishes a short-retention exact-SHA Actions artifact named `research-stage4-tool-<exact-protected-main-sha>` from `.github/workflows/research-stage4-portable.yml`. The bundle contains the exact `tools/*.py` executable dependency surface from that protected-main commit and `research-stage4-tool-manifest.json`; it contains no canonical games, registries, school packages, or other basketball evidence.
+
+When no runnable checkout exists:
+
+1. confirm the exact protected-main SHA;
+2. retrieve the successful `Research Stage 4 portable tool` push artifact whose `head_sha` and artifact name both contain that exact SHA;
+3. materialize it into temporary storage;
+4. verify it with `python tools/research_stage4_portable.py verify <bundle-dir> --main-sha <exact-sha>`;
+5. run the unchanged permanent closeout tool from that verified bundle against the authoritative six-file directory and Stage 3B checkpoint.
+
+A missing package-authored file is not an execution-environment failure. Read `stage4-status.json`; `PACKAGE_AUTHORING_INCOMPLETE` means finish only the named Stage 4 package-authoring residual and rerun.
+
 ## Execution-unavailable sentinels
 
 For Stage 3A-0, `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` is appropriate only when the lane cannot access the authoritative checkpoint/ledger, cannot obtain and execute the exact permanent Stage 3A-0 tool through either the direct authenticated-file path or the authenticated exact-SHA artifact fallback, or lacks temporary Python/filesystem execution after those transports are exhausted.
