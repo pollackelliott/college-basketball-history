@@ -28,6 +28,14 @@ def state(r):return pick(r,"state","venue_state")
 def season_year(r):
     try:return int(pick(r,"season_label","season")[:4])
     except:return None
+def required_site_gaps(row,fact):
+    venue_name,city_name,state_name=fact
+    gaps=[]
+    if not city_name:gaps.append("city")
+    if not state_name:gaps.append("state")
+    y=season_year(row)
+    if y is not None and y>=1996 and not venue_name:gaps.append("venue_name")
+    return gaps
 def exact_key(r,school=None):
     d=pick(r,"game_date","date");o=opp(r)
     if school and not o:
@@ -71,7 +79,10 @@ def main():
             f=(venue(e),city(e),state(e))
             if any(f):facts.setdefault(f,[]).append(e)
         if len(facts)==1:
-            f,srcs=next(iter(facts.items()));accepted.append({"research_game_id":rid(r),"game_date":k[0],"opponent_key":k[1],"venue_name":f[0],"city":f[1],"state":f[2],"provenance":[{"kind":x["_evidence_source"],"path":x["_evidence_path"],"evidence_game_id":pick(x,"canonical_game_id","source_game_id")} for x in srcs]})
+            f,srcs=next(iter(facts.items()))
+            gaps=required_site_gaps(r,f)
+            accepted.append({"research_game_id":rid(r),"game_date":k[0],"opponent_key":k[1],"venue_name":f[0],"city":f[1],"state":f[2],"downstream_complete":not gaps,"missing_required_fields":gaps,"provenance":[{"kind":x["_evidence_source"],"path":x["_evidence_path"],"evidence_game_id":pick(x,"canonical_game_id","source_game_id")} for x in srcs]})
+            if gaps:remaining.append(r)
         elif len(facts)>1:
             contr.append({"research_game_id":rid(r),"game_date":k[0],"opponent_key":k[1],"reason":"CONFLICTING_ACCEPTED_PROJECT_SITE_EVIDENCE","candidate_facts":[{"venue_name":f[0],"city":f[1],"state":f[2],"count":len(xs)} for f,xs in facts.items()]});remaining.append(r)
         else:
@@ -80,7 +91,7 @@ def main():
         y=season_year(r)
         if y is not None and y>=1996:modern+=1
         else:historical+=1
-    status.update({"status":"COMPLETE","accepted_count":len(accepted),"contradiction_count":len(contr),"unresolved_count":len(unresolved),"remaining_modern":modern,"remaining_historical":historical,"next_bounded_assignment":"Stage 3A-3 — modern recurring event/site families"})
+    status.update({"status":"COMPLETE","accepted_count":len(accepted),"accepted_complete_count":sum(bool(x["downstream_complete"]) for x in accepted),"accepted_partial_count":sum(not bool(x["downstream_complete"]) for x in accepted),"contradiction_count":len(contr),"unresolved_count":len(unresolved),"remaining_modern":modern,"remaining_historical":historical,"next_bounded_assignment":"Stage 3A-3 — modern recurring event/site families"})
     arts={"status":dump("stage3a3-tier1-status.json",status),"accepted":dump("accepted-project-evidence.json",accepted),"contradictions":dump("tier1-contradictions.json",contr),"unresolved":dump("tier1-unresolved.json",unresolved),"remaining":dump("remaining-neutral-queue.json",remaining)}
     dump("manifest.json",{k:{"path":str(p),"sha256":sha(p)} for k,p in arts.items()});print(json.dumps(status,indent=2));print("STAGE 3A-3: IN PROGRESS — TIER 1 COMPLETE");return 0
 if __name__=="__main__":raise SystemExit(main())
