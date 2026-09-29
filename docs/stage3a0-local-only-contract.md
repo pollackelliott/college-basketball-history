@@ -114,17 +114,26 @@ A persistent checkout is not required.
 
 When an exact-state checkout is already available, the command may run there.
 
-Otherwise use the authenticated GitHub connector to fetch the exact `tools/research_stage3a0.py` file at the confirmed full protected-main SHA, write those exact bytes to temporary storage, and execute that file against the attached checkpoint/ledger with explicit `--main-sha`.
+Otherwise first use the authenticated GitHub connector to fetch the exact
+`tools/research_stage3a0.py` file at the confirmed full protected-main SHA. When those
+authenticated bytes can be written into temporary storage, execute that exact file against
+the attached checkpoint/ledger with explicit `--main-sha`.
+
+If the connector can retrieve the exact file content but the current tool environment cannot
+materialize/write those bytes into the execution filesystem, use the authenticated
+exact-SHA Actions artifact fallback. The successful
+`Research Stage 3A-0 portable tool` push run for that exact protected-main SHA publishes
+`research-stage3a0-tool-<sha>`, containing only the permanent Stage 3A-0 tool, its portable
+bundle verifier, and a manifest of exact SHA-256 hashes/file sizes. Download/materialize the
+artifact, verify it with
+`python tools/research_stage3a0_portable.py verify <bundle-dir> --main-sha <sha>`, then
+run the unchanged permanent `research_stage3a0.py` against the authoritative checkpoint.
 
 This is executable transport of the repository-owned permanent tool, not source discovery and not permission to reinterpret or rewrite the algorithm conversationally.
 
 **Do not use codeload, clone the repository, download a full repository archive, or ask the owner to open Codespaces merely to run Stage 3A-0.**
 
-Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only when the lane cannot access one of:
-
-- the authoritative checkpoint/ledger;
-- the exact permanent tool bytes at the confirmed protected-main SHA;
-- temporary Python/filesystem execution sufficient to run the tool.
+Report `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` only after the lane has the authoritative checkpoint/ledger but cannot obtain and execute the exact permanent Stage 3A-0 tool through either authorized no-checkout transport, or when temporary Python/filesystem execution itself is unavailable.
 
 That sentinel should be exceptional, not a normal Research boundary.
 
