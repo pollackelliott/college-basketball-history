@@ -134,6 +134,8 @@ The reference does not establish postseason classification or H/A/N. Missing, `P
 `UNCERTAIN`, `UNRESOLVED`, campus-round, boundary-mismatched, or contradicted cases remain
 active Stage 3B research-to-exhaustion obligations.
 
+Stage 4 package closeout is **mechanical and command-first after the six files are authored**. Run `python tools/research_stage4_closeout.py <school_key> <six-file-directory> <stage3b-complete-checkpoint.zip> --main-sha <sha>`. The command owns Stage 3B parent/game-ID/core-semantic reconciliation, permanent research acceptance, deterministic package/checkpoint emission, and the complete distinct `NON_D1` owner-scan generation. If a required package member is missing or empty, honor `PACKAGE_AUTHORING_INCOMPLETE` and finish only that package-authoring residual; do not launch broad repository/canonical/evidence discovery. When no runnable checkout is present, use the exact-SHA `research-stage4-tool-<sha>` artifact path in `docs/research-portable-execution.md`. Do not begin Stage 5 automatically.
+
 ### Research Stage 1 execution
 
 Stage 1 follows `docs/stage1-game-universe-contract.md`.
