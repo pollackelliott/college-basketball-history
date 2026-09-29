@@ -233,6 +233,7 @@ Resolve every game to the correct historical/canonical opponent identity without
 - produce the working distinct `NON_D1` census;
 - produce the informational self-corrected-opponent list;
 - preserve a game-level opponent mapping and identity provenance.
+- when an accepted target source explicitly documents an H/A/N notation convention, mechanically normalize the preserved source token into standardized `site_type` no later than Stage 2 while preserving the raw token; do not open new site research for this step, infer from geography, or interpret an undocumented token convention.
 
 For obscure historical/NON_D1 opponents, research must remain proportionate to the purpose: establish a defensible canonical identity, avoid false merges/splits, and preserve literal evidence. Do not pursue exhaustive institutional genealogy after available evidence is exhausted when it would not materially affect canonical identity, duplicate handling, or the game universe. Genuine unresolved historical identity remains preferable to unsupported certainty when repository policy permits it.
 
@@ -243,7 +244,8 @@ For obscure historical/NON_D1 opponents, research must remain proportionate to t
 - known current-program key splits = 0;
 - ambiguous current-program matches = 0;
 - Stage 1 universe remains accounted exactly;
-- opponent artifacts are durable.
+- opponent artifacts are durable;
+- the full game-level Stage 2 ledger carries any H/A/N that was mechanically established from an explicit documented source convention; only rows without safely established source meaning remain `UNKNOWN` for Stage 3A-1.
 
 The formal owner NON_D1 sanity scan does **not** occur yet; it occurs after package assembly/QA in Stage 5.
 
@@ -282,7 +284,9 @@ Stage 2 checkpoint that predates that write-through, the same command may mechan
 materialize the game-level ledger only when the ZIP contains both a full accepted game
 ledger and a complete label-level opponent mapping. It must require complete coverage,
 preserve raw source/site fields, and write `site_type=UNKNOWN` when standardized H/A/N
-has not already been established; raw site notation is not an H/A/N inference rule.
+has not already been established. Explicit source-defined H/A/N that was mechanically
+normalized under the documented Stage 1/2 convention must be preserved. Stage 3A-0 itself
+never interprets raw site notation and does not turn `source_site_token` into H/A/N.
 
 The command owns checkpoint-ledger selection/materialization, readiness,
 regular-season/postseason partitioning, H/A/N census, modern/historical neutral split,
@@ -647,6 +651,8 @@ Stage 6 ends only when the required self-challenge passes and package-level rese
 - unaccounted material site gaps = 0;
 - ambiguous physical venue identities = 0;
 - `PRE-FREEZE SELF-CHALLENGE: PASS`.
+
+Once the terminal Stage 6 status/checkpoint has been durably written and verified as `COMPLETE_PRE_FREEZE_SELF_CHALLENGE_PASS`, **return immediately**. Do not begin new repository discovery, refetch full canonical/evidence/reference files, or perform additional read-only matching after the terminal artifact exists. Any data needed for the self-challenge must be obtained before terminal completion is written. A post-completion fetch is execution overrun, not additional Stage 6 rigor.
 
 Stop at the stage boundary. Do not silently proceed into immutable packaging unless the owner authorizes Stage 7.
 
