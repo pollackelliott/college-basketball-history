@@ -25,7 +25,7 @@ import json
 import re
 import zipfile
 from collections import defaultdict
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from onboarding_hardening import research_portfolio_report
@@ -88,26 +88,206 @@ def write_deterministic_zip(path: Path, members: dict[str, bytes]) -> None:
             archive.writestr(info, members[name])
 
 
-def validate_checkpoint_manifest(archive: zipfile.ZipFile) -> dict[str, Any]:
+CURRENT_STAGE3B_PARENT_MEMBERS = {
+    "checkpoint-manifest.json",
+    "stage3b-status.json",
+    "stage3b-working-ledger.csv",
+}
+LEGACY_STAGE3B_PARENT_MEMBERS = {
+    "manifest.json",
+    "stage3b-status.json",
+    "stage3b-ledger.csv",
+}
+
+
+def _safe_relative_member(name: str) -> str:
+    path = PurePosixPath(name)
+    if (
+        not name
+        or path.is_absolute()
+        or ".." in path.parts
+        or name.startswith("./")
+    ):
+        raise ValueError(
+            f"unsafe Stage 3B manifest member name: {name!r}"
+        )
+    return path.as_posix()
+
+
+def _manifest_records(
+    manifest: dict[str, Any],
+    *,
+    legacy: bool,
+) -> list[dict[str, Any]]:
+    files = manifest.get("files", {})
+    if legacy:
+        if not isinstance(files, dict):
+            raise ValueError(
+                "legacy Stage 3B manifest files must be a "
+                "filename-keyed object"
+            )
+        records: list[dict[str, Any]] = []
+        for name, metadata in files.items():
+            if not isinstance(metadata, dict):
+                raise ValueError(
+                    "legacy Stage 3B manifest file metadata "
+                    f"must be an object: {name!r}"
+                )
+            record = dict(metadata)
+            record["name"] = str(name)
+            records.append(record)
+        return records
+
+    if not isinstance(files, list):
+        raise ValueError(
+            "current Stage 3B manifest files must be a list"
+        )
+    records = []
+    for item in files:
+        if not isinstance(item, dict):
+            raise ValueError(
+                "current Stage 3B manifest file records "
+                "must be objects"
+            )
+        records.append(dict(item))
+    return records
+
+
+def resolve_stage3b_parent_layout(
+    archive: zipfile.ZipFile,
+) -> dict[str, str]:
+    names = {
+        name for name in archive.namelist()
+        if name and not name.endswith("/")
+    }
+
+    current_complete = CURRENT_STAGE3B_PARENT_MEMBERS.issubset(
+        names
+    )
+
+    legacy_candidates: list[str] = []
+    prefixes = {
+        name.split("/", 1)[0]
+        for name in names
+        if "/" in name
+    }
+    for prefix in sorted(prefixes):
+        required = {
+            f"{prefix}/{name}"
+            for name in LEGACY_STAGE3B_PARENT_MEMBERS
+        }
+        if required.issubset(names):
+            legacy_candidates.append(prefix)
+
+    if current_complete and legacy_candidates:
+        raise ValueError(
+            "Stage 3B checkpoint has ambiguous mixed current/legacy "
+            "parent layouts"
+        )
+    if len(legacy_candidates) > 1:
+        raise ValueError(
+            "Stage 3B checkpoint has multiple legacy parent directories: "
+            + ", ".join(legacy_candidates)
+        )
+
+    if current_complete:
+        return {
+            "topology": "CURRENT_ROOT",
+            "prefix": "",
+            "manifest_path": "checkpoint-manifest.json",
+            "status_path": "stage3b-status.json",
+            "ledger_path": "stage3b-working-ledger.csv",
+        }
+
+    if len(legacy_candidates) == 1:
+        prefix = legacy_candidates[0]
+        outside = sorted(
+            name
+            for name in names
+            if not name.startswith(prefix + "/")
+        )
+        if outside:
+            raise ValueError(
+                "legacy Stage 3B checkpoint must contain exactly one "
+                "containing directory; outside members: "
+                + ", ".join(outside[:10])
+            )
+        return {
+            "topology": "LEGACY_SINGLE_DIRECTORY",
+            "prefix": prefix + "/",
+            "manifest_path": f"{prefix}/manifest.json",
+            "status_path": f"{prefix}/stage3b-status.json",
+            "ledger_path": f"{prefix}/stage3b-ledger.csv",
+        }
+
+    raise ValueError(
+        "Stage 3B checkpoint does not match the current root layout "
+        "or the supported single-directory legacy layout"
+    )
+
+
+def validate_checkpoint_manifest(
+    archive: zipfile.ZipFile,
+    layout: dict[str, str],
+) -> dict[str, Any]:
     names = set(archive.namelist())
-    if "checkpoint-manifest.json" not in names:
-        raise ValueError("Stage 3B checkpoint is missing checkpoint-manifest.json")
-    manifest = json.loads(archive.read("checkpoint-manifest.json"))
+    manifest_path = layout["manifest_path"]
+    if manifest_path not in names:
+        raise ValueError(
+            "Stage 3B checkpoint is missing "
+            + manifest_path
+        )
+
+    manifest = json.loads(archive.read(manifest_path))
+    legacy = layout["topology"] == "LEGACY_SINGLE_DIRECTORY"
+    records = _manifest_records(manifest, legacy=legacy)
+
     defects: list[dict[str, Any]] = []
-    for item in manifest.get("files", []):
-        name = str(item.get("name", ""))
-        if not name or name == "checkpoint-manifest.json":
+    for item in records:
+        logical_name = _safe_relative_member(
+            str(item.get("name", ""))
+        )
+        if logical_name in {
+            "checkpoint-manifest.json",
+            "manifest.json",
+        }:
             continue
-        if name not in names:
-            defects.append({"reason": "MISSING_MEMBER", "name": name})
+        member_name = (
+            layout["prefix"] + logical_name
+            if legacy
+            else logical_name
+        )
+        if member_name not in names:
+            defects.append(
+                {
+                    "reason": "MISSING_MEMBER",
+                    "name": logical_name,
+                }
+            )
             continue
-        data = archive.read(name)
+        data = archive.read(member_name)
         expected_sha = item.get("sha256")
-        expected_size = item.get("bytes", item.get("size_bytes"))
+        expected_size = item.get(
+            "bytes",
+            item.get("size_bytes", item.get("size")),
+        )
         if expected_sha and sha256_bytes(data) != expected_sha:
-            defects.append({"reason": "HASH_MISMATCH", "name": name})
-        if expected_size is not None and len(data) != int(expected_size):
-            defects.append({"reason": "SIZE_MISMATCH", "name": name})
+            defects.append(
+                {
+                    "reason": "HASH_MISMATCH",
+                    "name": logical_name,
+                }
+            )
+        if (
+            expected_size is not None
+            and len(data) != int(expected_size)
+        ):
+            defects.append(
+                {
+                    "reason": "SIZE_MISMATCH",
+                    "name": logical_name,
+                }
+            )
     if defects:
         raise ValueError(
             "Stage 3B checkpoint manifest validation failed: "
@@ -496,21 +676,15 @@ def closeout(
     parent_bytes = stage3b_checkpoint.read_bytes()
     parent_sha = sha256_bytes(parent_bytes)
     with zipfile.ZipFile(io.BytesIO(parent_bytes)) as parent_zip:
-        parent_manifest = validate_checkpoint_manifest(parent_zip)
-        required_parent = {
-            "stage3b-status.json",
-            "stage3b-working-ledger.csv",
-        }
-        absent = sorted(
-            required_parent - set(parent_zip.namelist())
+        parent_layout = resolve_stage3b_parent_layout(
+            parent_zip
         )
-        if absent:
-            raise ValueError(
-                "Stage 3B checkpoint missing required closeout members: "
-                + ", ".join(absent)
-            )
+        parent_manifest = validate_checkpoint_manifest(
+            parent_zip,
+            parent_layout,
+        )
         parent_status = json.loads(
-            parent_zip.read("stage3b-status.json")
+            parent_zip.read(parent_layout["status_path"])
         )
         if str(parent_status.get("status", "")).upper() != "COMPLETE":
             raise ValueError(
@@ -527,7 +701,7 @@ def closeout(
                 f"found {parent_status.get('school_key')!r}"
             )
         _, parent_rows = read_csv_bytes(
-            parent_zip.read("stage3b-working-ledger.csv")
+            parent_zip.read(parent_layout["ledger_path"])
         )
 
     package_members = {
@@ -558,6 +732,10 @@ def closeout(
         "status": "PASS",
         "stage3b_checkpoint_sha256": parent_sha,
         "stage3b_manifest_validation": "PASS",
+        "stage3b_parent_topology": parent_layout["topology"],
+        "stage3b_manifest_member": parent_layout["manifest_path"],
+        "stage3b_status_member": parent_layout["status_path"],
+        "stage3b_ledger_member": parent_layout["ledger_path"],
         "stage3b_parent_rows": len(parent_rows),
         "package_source_game_rows": len(package_rows),
         "stage3b_parent_game_ids_unique": (

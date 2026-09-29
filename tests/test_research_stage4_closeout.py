@@ -239,6 +239,43 @@ def make_parent(path: Path, ids=("G1",)):
     mod.write_deterministic_zip(path, members)
 
 
+def make_legacy_parent(
+    path: Path,
+    ids=("G1",),
+    *,
+    prefix="test-stage3b-complete-checkpoint",
+):
+    current = path.with_name(path.stem + "-current.zip")
+    make_parent(current, ids)
+    with zipfile.ZipFile(current) as archive:
+        ledger = archive.read("stage3b-working-ledger.csv")
+        status = archive.read("stage3b-status.json")
+    current.unlink()
+
+    logical_members = {
+        "stage3b-ledger.csv": ledger,
+        "stage3b-status.json": status,
+    }
+    manifest = {
+        "files": {
+            name: {
+                "bytes": len(data),
+                "sha256": mod.sha256_bytes(data),
+            }
+            for name, data in sorted(logical_members.items())
+        },
+        "research_base_sha": "a" * 40,
+    }
+    members = {
+        f"{prefix}/{name}": data
+        for name, data in logical_members.items()
+    }
+    members[f"{prefix}/manifest.json"] = (
+        json.dumps(manifest, sort_keys=True) + "\n"
+    ).encode()
+    mod.write_deterministic_zip(path, members)
+
+
 def fake_report(
     package,
     *,
@@ -407,6 +444,173 @@ class Stage4CloseoutTests(unittest.TestCase):
                 "Old College Alias",
                 rows[0]["representative_source_labels"],
             )
+
+    def test_legacy_single_directory_parent_is_accepted_unchanged(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            package = root / "pkg"
+            make_package(package, ("G1", "G2"))
+            parent = root / "legacy-parent.zip"
+            make_legacy_parent(parent, ("G1", "G2"))
+            parent_bytes = parent.read_bytes()
+            parent_sha = mod.sha256_bytes(parent_bytes)
+
+            with patch.object(
+                mod,
+                "research_portfolio_report",
+                side_effect=fake_report,
+            ):
+                status = mod.closeout(
+                    "test",
+                    package,
+                    parent,
+                    "b" * 40,
+                    root / "out",
+                )
+
+            self.assertEqual(
+                status["source_stage3b_complete_checkpoint_sha256"],
+                parent_sha,
+            )
+            sanity = json.loads(
+                (
+                    root
+                    / "out"
+                    / "stage4-parent-sanity-check.json"
+                ).read_text()
+            )
+            self.assertEqual(
+                sanity["stage3b_parent_topology"],
+                "LEGACY_SINGLE_DIRECTORY",
+            )
+            self.assertEqual(
+                sanity["stage3b_parent_rows"],
+                2,
+            )
+            self.assertTrue(
+                sanity["source_game_id_population_exact_match"]
+            )
+            self.assertEqual(
+                sanity[
+                    "semantic_comparison_unexpected_mismatches"
+                ],
+                0,
+            )
+
+            checkpoint = (
+                root
+                / "out"
+                / "test-stage4-complete-checkpoint.zip"
+            )
+            with zipfile.ZipFile(checkpoint) as archive:
+                embedded = archive.read(
+                    "stage3b-complete-checkpoint.zip"
+                )
+            self.assertEqual(embedded, parent_bytes)
+            self.assertEqual(
+                mod.sha256_bytes(embedded),
+                parent_sha,
+            )
+
+    def test_mixed_current_and_legacy_parent_layout_stops(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            package = root / "pkg"
+            make_package(package)
+            parent = root / "mixed-parent.zip"
+            make_legacy_parent(parent)
+
+            with zipfile.ZipFile(parent, "a") as archive:
+                prefix = "test-stage3b-complete-checkpoint"
+                ledger = archive.read(
+                    f"{prefix}/stage3b-ledger.csv"
+                )
+                status = archive.read(
+                    f"{prefix}/stage3b-status.json"
+                )
+                manifest = {
+                    "files": [
+                        {
+                            "name": "stage3b-working-ledger.csv",
+                            "bytes": len(ledger),
+                            "sha256": mod.sha256_bytes(ledger),
+                        },
+                        {
+                            "name": "stage3b-status.json",
+                            "bytes": len(status),
+                            "sha256": mod.sha256_bytes(status),
+                        },
+                    ]
+                }
+                archive.writestr(
+                    "stage3b-working-ledger.csv",
+                    ledger,
+                )
+                archive.writestr(
+                    "stage3b-status.json",
+                    status,
+                )
+                archive.writestr(
+                    "checkpoint-manifest.json",
+                    json.dumps(manifest),
+                )
+
+            with patch.object(
+                mod,
+                "research_portfolio_report",
+                side_effect=fake_report,
+            ):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "ambiguous mixed current/legacy",
+                ):
+                    mod.closeout(
+                        "test",
+                        package,
+                        parent,
+                        "b" * 40,
+                        root / "out",
+                    )
+
+    def test_corrupt_legacy_parent_manifest_stops(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            package = root / "pkg"
+            make_package(package)
+            parent = root / "legacy-parent.zip"
+            make_legacy_parent(parent)
+            prefix = "test-stage3b-complete-checkpoint"
+
+            with zipfile.ZipFile(parent, "a") as archive:
+                manifest = json.loads(
+                    archive.read(
+                        f"{prefix}/manifest.json"
+                    )
+                )
+                manifest["files"]["stage3b-ledger.csv"][
+                    "sha256"
+                ] = "0" * 64
+                archive.writestr(
+                    f"{prefix}/manifest.json",
+                    json.dumps(manifest),
+                )
+
+            with patch.object(
+                mod,
+                "research_portfolio_report",
+                side_effect=fake_report,
+            ):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "manifest validation failed",
+                ):
+                    mod.closeout(
+                        "test",
+                        package,
+                        parent,
+                        "b" * 40,
+                        root / "out",
+                    )
 
     def test_semantic_drift_stops(self):
         with tempfile.TemporaryDirectory() as temporary:
