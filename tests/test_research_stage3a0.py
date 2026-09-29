@@ -235,6 +235,32 @@ def test_missing_standardized_site_defaults_to_unknown_without_parsing_raw_token
     assert queue[0]["source_site_token"] == "@"
 
 
+def test_explicit_source_defined_site_type_survives_with_raw_token(tmp_path):
+    process, status, out = run_rows(
+        tmp_path,
+        [
+            {
+                "research_game_id": "C-SOURCE-HAN",
+                "season_label": "2024-2025",
+                "game_date": "2024-11-01",
+                "opponent_key": "duke",
+                "source_site_token": "@",
+                "site_type": "OPPONENT_HOME",
+                "game_type": "REGULAR_SEASON",
+            }
+        ],
+    )
+    assert process.returncode == 0
+    assert status["site_type_defaulted_to_unknown_count"] == 0
+    assert status["regular_season_site_census"]["OPPONENT_HOME"] == 1
+    with (out / "stage3a0-input-ledger.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        row = next(csv.DictReader(handle))
+    assert row["site_type"] == "OPPONENT_HOME"
+    assert row["source_site_token"] == "@"
+
+
 def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     checkpoint = tmp_path / "stage2-complete.zip"
     with zipfile.ZipFile(checkpoint, "w") as archive:
@@ -534,6 +560,9 @@ def test_policy_makes_stage3a0_materialize_legacy_stage2_and_future_stage2_write
         encoding="utf-8"
     )
     agents = (root / "AGENTS.md").read_text(encoding="utf-8")
+    self_challenge = (root / "docs" / "research-freeze-self-challenge.md").read_text(
+        encoding="utf-8"
+    )
 
     assert "legacy Stage 2" in contract
     assert "complete label-level opponent mapping" in contract
@@ -541,6 +570,11 @@ def test_policy_makes_stage3a0_materialize_legacy_stage2_and_future_stage2_write
     assert "structured-stage2-ledger.csv" in contract
     assert "structured-stage2-ledger.csv" in agents
     assert "site_type=UNKNOWN" in agents
+    assert "explicitly documents an H/A/N notation convention" in agents
+    assert "raw `source_site_token` alone is never an H/A/N inference rule" in agents
+    assert "mechanically normalize the preserved source token" in bounded
+    assert "COMPLETE_PRE_FREEZE_SELF_CHALLENGE_PASS" in bounded
+    assert "return immediately" in self_challenge
     assert "checkpoint-only" in bounded.lower()
     assert "repository archive is not required for Stage 3A-0" in portable
     assert "fetch the exact `tools/research_stage3a0.py` file" in portable
