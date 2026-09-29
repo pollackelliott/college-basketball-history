@@ -22,15 +22,46 @@ After confirming the exact protected-main SHA:
 
 1. if an exact-state runnable checkout already exists, run the permanent command there;
 2. otherwise use the authenticated GitHub connector to fetch the exact `tools/research_stage3a0.py` file at that full SHA;
-3. write those exact bytes to temporary storage;
-4. run that file against the authoritative Stage 2 checkpoint/ledger with explicit `--main-sha`;
+3. when those authenticated bytes can be written to temporary storage, run that exact file against the authoritative Stage 2 checkpoint/ledger with explicit `--main-sha`;
+4. if the connector can read the file but cannot materialize/write those bytes into the execution filesystem, use the authenticated exact-SHA Stage 3A-0 artifact fallback described below;
 5. preserve the emitted Stage 3A-0 artifacts.
 
 A repository archive is not required for Stage 3A-0.
 
-The connector fetch is executable transport. Do not inspect the tool source to derive basketball conclusions, edit the fetched algorithm conversationally, or substitute a hand-reimplemented census.
+The connector fetch and the exact-SHA artifact are executable transport. Do not inspect the tool source to derive basketball conclusions, edit the fetched algorithm conversationally, or substitute a hand-reimplemented census.
 
-Do not use codeload, clone the repository, search for alternate snapshots, or ask the owner to open Codespaces merely to run Stage 3A-0.
+### Stage 3A-0 authenticated exact-SHA artifact fallback
+
+Protected `main` publishes a short-retention GitHub Actions artifact named
+`research-stage3a0-tool-<exact-protected-main-sha>`. It is built from the exact pushed
+commit by `.github/workflows/research-stage3a0-portable.yml`.
+
+The artifact contains exactly:
+
+- `tools/research_stage3a0.py`;
+- `tools/research_stage3a0_portable.py`;
+- `research-stage3a0-tool-manifest.json` with the exact protected-main SHA, file sizes,
+  and SHA-256 hashes.
+
+It deliberately contains no canonical games, registries, school packages, or other
+basketball/project state because Stage 3A-0 does not read them.
+
+When direct exact-file transport cannot be materialized into the execution filesystem:
+
+1. query GitHub Actions through the authenticated GitHub connector for the successful
+   `Research Stage 3A-0 portable tool` push run whose `head_sha` is the exact
+   protected-main SHA;
+2. require the artifact name to contain that exact SHA;
+3. download/materialize that artifact into temporary storage;
+4. verify the extracted bundle with
+   `python tools/research_stage3a0_portable.py verify <bundle-dir> --main-sha <exact-sha>`;
+5. only after verification succeeds, run the unchanged
+   `tools/research_stage3a0.py` against the authoritative Stage 2 checkpoint/ledger with
+   the same exact `--main-sha`.
+
+Do not use an artifact from another commit, an expired artifact without re-establishing
+exact state, a hand-reconstructed tool file, codeload, a clone, a full repository archive,
+or owner-operated Codespaces merely to run Stage 3A-0.
 
 The Stage 3A-0 invariant is:
 
@@ -111,11 +142,7 @@ Do not substitute a different evidence surface merely because portable transport
 
 ## Execution-unavailable sentinels
 
-For Stage 3A-0, `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` is appropriate only when the lane cannot access:
-
-- the authoritative checkpoint/ledger;
-- the exact permanent Stage 3A-0 tool file at the confirmed SHA; or
-- temporary Python/filesystem execution.
+For Stage 3A-0, `STAGE_3A0_EXECUTION_ENVIRONMENT_UNAVAILABLE` is appropriate only when the lane cannot access the authoritative checkpoint/ledger, cannot obtain and execute the exact permanent Stage 3A-0 tool through either the direct authenticated-file path or the authenticated exact-SHA artifact fallback, or lacks temporary Python/filesystem execution after those transports are exhausted.
 
 For a stateful deterministic pass, the relevant execution-unavailable state applies only when no exact-state checkout is available and both authorized exact-SHA transports fail: the pinned codeload/archive path and the authenticated GitHub Actions artifact path.
 
