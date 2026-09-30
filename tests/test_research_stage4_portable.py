@@ -46,6 +46,10 @@ class ResearchStage4PortableTests(unittest.TestCase):
                 )
             )
             self.assertEqual(
+                manifest["entrypoint"],
+                "tools/research_stage4.py",
+            )
+            self.assertEqual(
                 {
                     item["path"]
                     for item in manifest["files"]
