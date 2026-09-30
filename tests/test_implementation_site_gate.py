@@ -153,6 +153,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
         assertions=None,
         discrepancies=None,
         history_start="1900-1901",
+        history_scope_intervals="",
     ):
         sources = sources if sources is not None else [source_row()]
         canonical = canonical if canonical is not None else [canonical_row()]
@@ -162,8 +163,12 @@ class ImplementationSiteGateTests(unittest.TestCase):
         write_csv(root / "schools/test/source-games.csv", SOURCE_FIELDS, sources)
         write_csv(
             root / "data/reference/programs.csv",
-            ["program_key", "history_start_season"],
-            [{"program_key": "test", "history_start_season": history_start}],
+            ["program_key", "history_start_season", "history_scope_intervals"],
+            [{
+                "program_key": "test",
+                "history_start_season": history_start,
+                "history_scope_intervals": history_scope_intervals,
+            }],
         )
         write_csv(root / "data/canonical/games.csv", CANONICAL_FIELDS, canonical)
         write_csv(root / "data/evidence/game-assertions.csv", ASSERTION_FIELDS, assertions)
@@ -500,6 +505,37 @@ class ImplementationSiteGateTests(unittest.TestCase):
             report = implementation_site_report(root, "test")
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["counts"]["target_canonical_games"], 0)
+
+    def test_interrupted_history_scope_excludes_internal_gap(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                season_label="1901-1902",
+                curated_venue_name="",
+                city="",
+                state="",
+            )
+            canonical = canonical_row(
+                season_label="1901-1902",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+            )
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=[target_assertion()],
+                history_start="1900-1901",
+                history_scope_intervals=(
+                    "1900-01..1900-01|1902-03+"
+                ),
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["target_canonical_games"], 0)
+            self.assertEqual(report["source_site_counts"]["material_gap_rows"], 0)
 
 
 if __name__ == "__main__":

@@ -16,6 +16,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from program_history import partition_source_rows, scope_canonical_games
 from site_completeness import (
     ALLOWED_SITE_RESEARCH_STATUSES,
     POSTSEASON_TYPES_REQUIRING_ACCOUNTING,
@@ -497,28 +498,25 @@ def implementation_site_report(
     history_start = program.get("history_start_season", "").strip()
     if not history_start:
         raise ValueError(f"{school_key} has no history_start_season")
+    history_scope_intervals = program.get("history_scope_intervals", "").strip()
 
-    in_scope_sources = [
-        row
-        for row in all_sources
-        if row.get("season_label", "").strip() >= history_start
-    ]
+    in_scope_sources, _ = partition_source_rows(
+        all_sources,
+        history_start,
+        history_scope_intervals,
+    )
     source_report = source_site_completeness_report(
         source_fields,
         in_scope_sources,
         example_limit=example_limit,
     )
 
-    target_games = [
-        row
-        for row in canonical
-        if school_key
-        in {
-            row.get("team_a_key", "").strip(),
-            row.get("team_b_key", "").strip(),
-        }
-        and row.get("season_label", "").strip() >= history_start
-    ]
+    target_games = scope_canonical_games(
+        canonical,
+        school_key,
+        history_start,
+        history_scope_intervals,
+    )
 
     assertions_by_canonical: dict[str, list[dict[str, str]]] = defaultdict(list)
     target_source_ids_by_canonical: dict[str, list[str]] = defaultdict(list)
