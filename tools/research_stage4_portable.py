@@ -12,6 +12,7 @@ from pathlib import Path
 MANIFEST = "research-stage4-tool-manifest.json"
 SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 REQUIRED_FIXED = {
+    "tools/research_stage4.py",
     "tools/research_stage4_closeout.py",
     "tools/research_stage4_portable.py",
     "tools/onboarding_hardening.py",
