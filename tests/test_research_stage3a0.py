@@ -274,6 +274,55 @@ def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     assert (out / "stage3a0-input-ledger.csv").exists()
 
 
+def test_stage2_checkpoint_carries_stage4_authoring_capsule(tmp_path):
+    checkpoint = tmp_path / "stage2-complete.zip"
+    opponent_bytes = b"source_program_key,source_opponent_label\ncreighton,Drake\n"
+    venue_bytes = b"source_program_key,venue_key\ncreighton,test-gym\n"
+    conference_bytes = (
+        b"source_program_key,start_season\ncreighton,1911-1912\n"
+    )
+    with zipfile.ZipFile(checkpoint, "w") as archive:
+        archive.writestr(
+            "nested/structured-stage2-ledger.csv",
+            csv_text(base_rows()),
+        )
+        archive.writestr(
+            "nested/stage4-authoring/opponents.csv",
+            opponent_bytes,
+        )
+        archive.writestr(
+            "nested/stage4-authoring/venues.csv",
+            venue_bytes,
+        )
+        archive.writestr(
+            "nested/stage4-authoring/conferences.csv",
+            conference_bytes,
+        )
+
+    process, status, out = run_path(tmp_path, checkpoint)
+    assert process.returncode == 0
+    assert status["status"] == "COMPLETE"
+    assert set(status["stage4_authoring_carried"]) == {
+        "opponents.csv",
+        "venues.csv",
+        "conferences.csv",
+    }
+    assert (
+        out / "stage4-authoring" / "opponents.csv"
+    ).read_bytes() == opponent_bytes
+    assert (
+        out / "stage4-authoring" / "venues.csv"
+    ).read_bytes() == venue_bytes
+    assert (
+        out / "stage4-authoring" / "conferences.csv"
+    ).read_bytes() == conference_bytes
+
+    manifest = json.loads((out / "manifest.json").read_text())
+    assert "stage4_authoring_opponents" in manifest
+    assert "stage4_authoring_venues" in manifest
+    assert "stage4_authoring_conferences" in manifest
+
+
 def test_creighton_shaped_legacy_checkpoint_materializes_complete_stage2_ledger(tmp_path):
     checkpoint = tmp_path / "creighton-stage2-complete-checkpoint.zip"
     with zipfile.ZipFile(checkpoint, "w") as archive:
