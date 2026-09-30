@@ -341,6 +341,7 @@ class Stage4AuthoringTests(unittest.TestCase):
             root = Path(temporary)
             checkpoint = root / "legacy.zip"
             make_checkpoint(checkpoint, legacy=True)
+            original_parent = checkpoint.read_bytes()
 
             fake_closeout = {
                 "status": "COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
@@ -371,7 +372,7 @@ class Stage4AuthoringTests(unittest.TestCase):
             self.assertEqual(row["city"], "Testville")
             self.assertEqual(row["state"], "TS")
             self.assertEqual(row["curated_game_type"], "NCAA_TOURNAMENT")
-            self.assertEqual(checkpoint.read_bytes(), checkpoint.read_bytes())
+            self.assertEqual(checkpoint.read_bytes(), original_parent)
             self.assertTrue((root / "out" / "package" / "notes.md").is_file())
             self.assertTrue(
                 (root / "out" / "package" / "source-notes.md").is_file()
