@@ -895,7 +895,7 @@ def _canonical_site_patch_review_decisions(
     *,
     school_key: str,
     history_start_season: str,
-    history_scope_intervals: str,
+    history_scope_intervals: str = "",
     canonical_rows: list[dict[str, str]],
     assertions_by_game: dict[str, list[dict[str, str]]],
     planned_target_canonical_ids: set[str],
