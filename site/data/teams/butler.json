@@ -3316,7 +3316,7 @@
       "opponent_key": "miami",
       "opponent_name": "Miami (FL)",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -71011,7 +71011,7 @@
       "opponent_key": "miami",
       "opponent_name": "Miami (FL)",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 75,
       "opponent_score": 85,
       "score_known": true,
