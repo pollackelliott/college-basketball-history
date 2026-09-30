@@ -452,6 +452,53 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
     }
 
 
+def _normalized_venue_name(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
+
+
+def _package_venue_matches_parent_key(
+    package_row: dict[str, str],
+    expected_venue_key: str,
+    venue_rows_by_key: dict[str, list[dict[str, str]]],
+) -> bool:
+    candidates = venue_rows_by_key.get(expected_venue_key, [])
+    if len(candidates) != 1:
+        return False
+
+    venue_row = candidates[0]
+    package_name = _normalized_venue_name(
+        package_row.get("curated_venue_name", "")
+    )
+    accepted_names = {
+        _normalized_venue_name(name)
+        for name in (
+            [venue_row.get("canonical_name", "").strip()]
+            + [
+                alias.strip()
+                for alias in venue_row.get("aliases", "").split(";")
+            ]
+        )
+        if name.strip()
+    }
+    if not package_name or package_name not in accepted_names:
+        return False
+
+    for game_field, venue_field in (
+        ("city", "city"),
+        ("state", "state"),
+    ):
+        game_value = package_row.get(game_field, "").strip()
+        venue_value = venue_row.get(venue_field, "").strip()
+        if (
+            game_value
+            and venue_value
+            and game_value.casefold() != venue_value.casefold()
+        ):
+            return False
+
+    return True
+
+
 def compare_parent_semantics(
     parent_rows: list[dict[str, str]],
     package_rows: list[dict[str, str]],
@@ -465,17 +512,11 @@ def compare_parent_semantics(
         str(r.get("source_game_id") or "").strip(): r
         for r in package_rows
     }
-    venue_name_to_key: dict[str, str] = {}
+    venue_rows_by_key: dict[str, list[dict[str, str]]] = defaultdict(list)
     for venue_row in venue_rows:
         key = venue_row.get("venue_key", "").strip()
-        names = [venue_row.get("canonical_name", "").strip()] + [
-            x.strip() for x in venue_row.get("aliases", "").split(";")
-        ]
-        for name in names:
-            if name:
-                venue_name_to_key[
-                    re.sub(r"[^a-z0-9]+", "", name.casefold())
-                ] = key
+        if key:
+            venue_rows_by_key[key].append(venue_row)
 
     mismatches: list[dict[str, str]] = []
     for game_id in sorted(parent):
@@ -500,14 +541,6 @@ def compare_parent_semantics(
             "venue_present": (
                 "1" if actual_row.get("curated_venue_name", "").strip() else "0"
             ),
-            "venue_key": venue_name_to_key.get(
-                re.sub(
-                    r"[^a-z0-9]+",
-                    "",
-                    actual_row.get("curated_venue_name", "").casefold(),
-                ),
-                "",
-            ),
             "city": actual_row.get("city", "").strip(),
             "state": actual_row.get("state", "").strip(),
             "curated_game_type": actual_row.get(
@@ -516,19 +549,31 @@ def compare_parent_semantics(
             "raw_text": actual_row.get("raw_text", ""),
         }
         for field in expected:
-            if field == "venue_key" and not expected[field]:
-                continue
-            if expected[field] != actual[field]:
+            if field == "venue_key":
+                if not expected[field]:
+                    continue
+                package_value = (
+                    expected[field]
+                    if _package_venue_matches_parent_key(
+                        actual_row,
+                        expected[field],
+                        venue_rows_by_key,
+                    )
+                    else ""
+                )
+            else:
+                package_value = actual[field]
+
+            if expected[field] != package_value:
                 mismatches.append(
                     {
                         "source_game_id": game_id,
                         "field": field,
                         "parent_value": expected[field],
-                        "package_value": actual[field],
+                        "package_value": package_value,
                     }
                 )
     return mismatches
-
 
 def current_d1_flag(value: str) -> bool | None:
     folded = (value or "").strip().casefold()
