@@ -73,5 +73,66 @@ class SiteEvidenceHardeningTests(unittest.TestCase):
         self.assertFalse(game["venue_id"])
 
 
+    def test_matched_home_exception_does_not_mark_known_canonical_venue(self):
+        source = {
+            "source_program_key": "south-carolina",
+            "source_game_id": "TEST-3",
+            "normalized_opponent_key": "furman",
+            "season_label": "1908-1909",
+            "game_date": "1908-10-30",
+            "team_score": "19",
+            "opponent_score": "21",
+            "played_result": "L",
+            "overtime_periods": "0",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "curated_venue_name": "",
+            "city": "Columbia",
+            "state": "SC",
+            "curated_game_type": "REGULAR_SEASON",
+            "curated_postseason_round": "",
+            "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+            "site_research_basis": (
+                "HOME and Columbia established; exact building unrecoverable."
+            ),
+        }
+        canonical = {
+            "canonical_game_id": "CBBG-TEST",
+            "season_label": "1908-1909",
+            "game_date": "1908-10-30",
+            "date_precision": "EXACT",
+            "team_a_key": "furman",
+            "team_b_key": "south-carolina",
+            "team_a_score": "21",
+            "team_b_score": "19",
+            "result_winner_team_key": "furman",
+            "overtime_periods": "0",
+            "site_type": "TEAM_B_HOME",
+            "designated_home_team_key": "south-carolina",
+            "venue_key": "known-arena",
+            "venue_id": "VEN-999999",
+            "site_city": "Columbia",
+            "site_state": "SC",
+            "game_type": "REGULAR_SEASON",
+            "postseason_round": "",
+            "notes": "[EXISTING_VENUE_PROVENANCE]",
+        }
+
+        candidates = ingest_school.canonical_enrichment_candidates(
+            source,
+            canonical,
+            {},
+        )
+        note_values = [
+            value for field, value in candidates if field == "notes"
+        ]
+        self.assertFalse(
+            any(
+                "RESEARCHED_UNRESOLVED_HOME_VENUE" in value
+                for value in note_values
+            )
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()

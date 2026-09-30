@@ -1117,13 +1117,16 @@ def canonical_enrichment_candidates(
         if new_notes != canonical.get("notes", ""):
             result.append(("notes", new_notes))
 
-    # A researched-unresolved HOME venue exception must survive matching.
-    # New canonical games already receive this provenance marker in
-    # build_new_canonical(); matched canonical games need the same marker
-    # after independently established H/A/N agrees. The exception remains
-    # venue-only: canonical city/state are still enriched above and are never
-    # waived by this marker.
-    if researched_unresolved_home_venue(source):
+    # A researched-unresolved HOME venue exception must survive matching only
+    # while the matched canonical game still lacks a physical venue identity.
+    # If reciprocal or previously published evidence already supplies a venue,
+    # the source research debt remains preserved on the source row but must not
+    # become contradictory canonical provenance.
+    if (
+        researched_unresolved_home_venue(source)
+        and not canonical.get("venue_key", "").strip()
+        and not canonical.get("venue_id", "").strip()
+    ):
         marker = (
             "[RESEARCHED_UNRESOLVED_HOME_VENUE "
             f"source={source.get('source_program_key', '').strip()}/"
