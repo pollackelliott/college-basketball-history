@@ -753,5 +753,239 @@ class Stage4CloseoutTests(unittest.TestCase):
                     )
 
 
+    def test_reused_charlotte_coliseum_names_resolve_by_parent_key(self):
+        parent = [
+            {
+                "research_game_id": "C1955",
+                "source_program_key": "test",
+                "season_label": "1970-1971",
+                "game_date": "1971-01-01",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "NEUTRAL",
+                "stage3a_curated_venue_key": "charlotte-coliseum-1955",
+                "stage3a_curated_venue_name": "Charlotte Coliseum",
+                "stage3a_site_city": "Charlotte",
+                "stage3a_site_state": "NC",
+            },
+            {
+                "research_game_id": "C1988",
+                "source_program_key": "test",
+                "season_label": "1990-1991",
+                "game_date": "1991-01-01",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "NEUTRAL",
+                "stage3a_curated_venue_key": "charlotte-coliseum-1988",
+                "stage3a_curated_venue_name": "Charlotte Coliseum",
+                "stage3a_site_city": "Charlotte",
+                "stage3a_site_state": "NC",
+            },
+        ]
+        package = [
+            {
+                "source_game_id": row["research_game_id"],
+                "source_program_key": "test",
+                "season_label": row["season_label"],
+                "game_date": row["game_date"],
+                "normalized_opponent_key": "old-college",
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Charlotte Coliseum",
+                "city": "Charlotte",
+                "state": "NC",
+                "curated_game_type": "REGULAR_SEASON",
+            }
+            for row in parent
+        ]
+        venues = [
+            {
+                "venue_key": "charlotte-coliseum-1955",
+                "canonical_name": "Charlotte Coliseum",
+                "aliases": "",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+            {
+                "venue_key": "charlotte-coliseum-1988",
+                "canonical_name": "Charlotte Coliseum",
+                "aliases": "",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+        ]
+
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
+    def test_reused_madison_square_garden_names_resolve_by_parent_key(self):
+        parent = [
+            {
+                "research_game_id": "M1925",
+                "source_program_key": "test",
+                "season_label": "1948-1949",
+                "game_date": "1948-12-20",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "NEUTRAL",
+                "stage3a_curated_venue_key": "madison-square-garden-1925",
+                "stage3a_curated_venue_name": "Madison Square Garden",
+                "stage3a_site_city": "New York",
+                "stage3a_site_state": "NY",
+            },
+            {
+                "research_game_id": "M1968",
+                "source_program_key": "test",
+                "season_label": "1970-1971",
+                "game_date": "1970-03-13",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "NEUTRAL",
+                "stage3a_curated_venue_key": "madison-square-garden-1968",
+                "stage3a_curated_venue_name": "Madison Square Garden",
+                "stage3a_site_city": "New York",
+                "stage3a_site_state": "NY",
+            },
+        ]
+        package = [
+            {
+                "source_game_id": row["research_game_id"],
+                "source_program_key": "test",
+                "season_label": row["season_label"],
+                "game_date": row["game_date"],
+                "normalized_opponent_key": "old-college",
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Madison Square Garden",
+                "city": "New York",
+                "state": "NY",
+                "curated_game_type": "REGULAR_SEASON",
+            }
+            for row in parent
+        ]
+        venues = [
+            {
+                "venue_key": "madison-square-garden-1925",
+                "canonical_name": "Madison Square Garden",
+                "aliases": "Madison Square Garden (1925)",
+                "city": "New York",
+                "state": "NY",
+            },
+            {
+                "venue_key": "madison-square-garden-1968",
+                "canonical_name": "Madison Square Garden",
+                "aliases": "Madison Square Garden (1968)",
+                "city": "New York",
+                "state": "NY",
+            },
+        ]
+
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
+    def test_parent_venue_key_rejects_incompatible_exact_venue_row(self):
+        parent = [
+            {
+                "research_game_id": "DRIFT",
+                "source_program_key": "test",
+                "season_label": "1970-1971",
+                "game_date": "1971-01-01",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "NEUTRAL",
+                "stage3a_curated_venue_key": "charlotte-coliseum-1955",
+                "stage3a_curated_venue_name": "Charlotte Coliseum",
+                "stage3a_site_city": "Charlotte",
+                "stage3a_site_state": "NC",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "DRIFT",
+                "source_program_key": "test",
+                "season_label": "1970-1971",
+                "game_date": "1971-01-01",
+                "normalized_opponent_key": "old-college",
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Charlotte Coliseum",
+                "city": "Charlotte",
+                "state": "NC",
+                "curated_game_type": "REGULAR_SEASON",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "charlotte-coliseum-1955",
+                "canonical_name": "Charlotte Coliseum",
+                "aliases": "",
+                "city": "Greensboro",
+                "state": "NC",
+            },
+            {
+                "venue_key": "charlotte-coliseum-1988",
+                "canonical_name": "Charlotte Coliseum",
+                "aliases": "",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+        ]
+
+        mismatches = mod.compare_parent_semantics(parent, package, venues)
+        self.assertEqual(len(mismatches), 1)
+        self.assertEqual(mismatches[0]["field"], "venue_key")
+        self.assertEqual(
+            mismatches[0]["parent_value"],
+            "charlotte-coliseum-1955",
+        )
+        self.assertEqual(mismatches[0]["package_value"], "")
+
+    def test_unique_venue_name_comparison_remains_unchanged(self):
+        parent = [
+            {
+                "research_game_id": "UNIQUE",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "HOME",
+                "stage3a_curated_venue_key": "test-gym",
+                "stage3a_curated_venue_name": "Test Gym",
+                "stage3a_site_city": "Testville",
+                "stage3a_site_state": "TS",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "UNIQUE",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "normalized_opponent_key": "old-college",
+                "curated_site_type": "HOME",
+                "curated_venue_name": "Old Test Gym",
+                "city": "Testville",
+                "state": "TS",
+                "curated_game_type": "REGULAR_SEASON",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "test-gym",
+                "canonical_name": "Test Gym",
+                "aliases": "Old Test Gym",
+                "city": "Testville",
+                "state": "TS",
+            }
+        ]
+
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
