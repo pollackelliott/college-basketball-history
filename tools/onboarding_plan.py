@@ -684,6 +684,7 @@ def _accomplishment_conflicts(
         canonical_games,
         program["program_key"],
         program.get("history_start_season", "").strip(),
+        program.get("history_scope_intervals", "").strip(),
     )
     comparisons = {
         "ncaa_tournament_appearances": str(derived["ncaa_tournament_appearances"]),
@@ -894,6 +895,7 @@ def _canonical_site_patch_review_decisions(
     *,
     school_key: str,
     history_start_season: str,
+    history_scope_intervals: str = "",
     canonical_rows: list[dict[str, str]],
     assertions_by_game: dict[str, list[dict[str, str]]],
     planned_target_canonical_ids: set[str],
@@ -911,7 +913,11 @@ def _canonical_site_patch_review_decisions(
         season = chronology_clean(game.get("season_label"))
         if (
             not game_id
-            or not season_is_in_scope(season, history_start_season)
+            or not season_is_in_scope(
+                season,
+                history_start_season,
+                history_scope_intervals,
+            )
             or school_key
             not in {
                 chronology_clean(game.get("team_a_key")),
@@ -1052,6 +1058,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     sources, pre_cutoff = partition_source_rows(
         all_sources,
         program["history_start_season"].strip(),
+        program.get("history_scope_intervals", "").strip(),
     )
     canonical = read_csv(repo / "data/canonical/games.csv")
     assertions = read_csv(repo / "data/evidence/game-assertions.csv")
@@ -1396,6 +1403,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     canonical_site_patch_decisions = _canonical_site_patch_review_decisions(
         school_key=school_key,
         history_start_season=program.get("history_start_season", "").strip(),
+        history_scope_intervals=program.get("history_scope_intervals", "").strip(),
         canonical_rows=canonical,
         assertions_by_game=assertions_by_game,
         planned_target_canonical_ids=planned_target_canonical_ids,

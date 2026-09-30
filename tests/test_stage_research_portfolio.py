@@ -7,7 +7,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from onboarding_plan import WorkflowError  # noqa: E402
-from stage_research_portfolio import rebase_venues  # noqa: E402
+from stage_research_portfolio import rebase_venues, update_program_scope  # noqa: E402
 
 
 def global_venue(venue_id: str, venue_key: str, name: str, city: str, state: str):
@@ -684,6 +684,32 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
 
         with self.assertRaisesRegex(WorkflowError, "jurisdiction conflicts"):
             rebase_venues("test-school", locals_, globals_, [])
+
+
+class StageResearchPortfolioHistoryScopeTests(unittest.TestCase):
+    def test_update_program_scope_persists_interrupted_intervals(self):
+        programs = [
+            {
+                "program_key": "miami",
+                "history_start_season": "",
+                "history_scope_status": "",
+                "history_scope_basis": "",
+                "history_scope_notes": "",
+                "history_scope_intervals": "",
+            }
+        ]
+        intervals = "1948-49..1952-53|1954-55..1970-71|1985-86+"
+        update_program_scope(
+            programs,
+            "miami",
+            start_season="1948-1949",
+            basis="TOP_LEVEL_INTERVALS",
+            intervals=intervals,
+            notes="Owner-confirmed interrupted scope.",
+        )
+        self.assertEqual(programs[0]["history_start_season"], "1948-1949")
+        self.assertEqual(programs[0]["history_scope_basis"], "TOP_LEVEL_INTERVALS")
+        self.assertEqual(programs[0]["history_scope_intervals"], intervals)
 
 
 if __name__ == "__main__":

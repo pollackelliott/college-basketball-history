@@ -9,6 +9,7 @@ Normal use from a clean ``data/<school>-onboarding`` branch created from current
       --research-base <research_base_sha> \
       --history-start-season YYYY-YYYY \
       --history-scope-basis ALWAYS_TOP_LEVEL_FROM_INCEPTION \
+      --history-scope-intervals "" \
       --history-scope-notes "Owner-confirmed scope..." \
       --apply --commit
 
@@ -48,6 +49,7 @@ from onboarding_plan import (
     WorkflowError,
     write_csv_preserving_format,
 )
+from program_history import history_scope_errors
 from stage1_reference_reconciliation import (
     conference_reconciliation_inventory,
     load_conference_reconciliation,
@@ -1256,6 +1258,7 @@ def update_program_scope(
     *,
     start_season: str,
     basis: str,
+    intervals: str,
     notes: str,
 ) -> None:
     targets = [row for row in programs if row.get("program_key") == school_key]
@@ -1268,6 +1271,7 @@ def update_program_scope(
     row["history_scope_status"] = "OWNER_CONFIRMED"
     row["history_scope_basis"] = basis
     row["history_scope_notes"] = notes
+    row["history_scope_intervals"] = intervals
 
 
 def package_hashes(root: Path) -> dict[str, str]:
@@ -1315,6 +1319,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--research-base", required=True)
     parser.add_argument("--history-start-season", required=True)
     parser.add_argument("--history-scope-basis", required=True)
+    parser.add_argument("--history-scope-intervals", default="")
     parser.add_argument("--history-scope-notes", required=True)
     parser.add_argument("--conference-reconciliation", type=Path, default=None)
     parser.add_argument("--repo", type=Path, default=None)
@@ -1494,8 +1499,19 @@ def main() -> int:
                 args.school_key,
                 start_season=args.history_start_season,
                 basis=args.history_scope_basis,
+                intervals=args.history_scope_intervals,
                 notes=args.history_scope_notes,
             )
+            target_program = next(
+                row
+                for row in programs
+                if row.get("program_key") == args.school_key
+            )
+            scope_problems = history_scope_errors(target_program, required=True)
+            if scope_problems:
+                raise WorkflowError(
+                    "history scope staging failed: " + "; ".join(scope_problems)
+                )
 
             write_csv_preserving_format(
                 package_root / "venues.csv",
@@ -1567,6 +1583,7 @@ def main() -> int:
                     "history_start_season": args.history_start_season,
                     "history_scope_status": "OWNER_CONFIRMED",
                     "history_scope_basis": args.history_scope_basis,
+                    "history_scope_intervals": args.history_scope_intervals,
                     "history_scope_notes": args.history_scope_notes,
                 },
             }

@@ -1385,8 +1385,11 @@ def main() -> int:
         return 1
 
     history_start = target_program["history_start_season"].strip()
+    history_intervals = target_program.get("history_scope_intervals", "").strip()
     sources, pre_cutoff_sources = partition_source_rows(
-        all_sources, history_start
+        all_sources,
+        history_start,
+        history_intervals,
     )
 
     index: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)

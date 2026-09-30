@@ -31,7 +31,12 @@ def compare_program(
         print(f"{program_key}: INCOMPLETE — {'; '.join(scope_problems)}")
         return False
 
-    derived = derive_ncaa_accomplishments(canonical_games, program_key, cutoff)
+    derived = derive_ncaa_accomplishments(
+        canonical_games,
+        program_key,
+        cutoff,
+        program.get("history_scope_intervals", "").strip(),
+    )
     comparisons = {
         "ncaa_tournament_appearances": derived["ncaa_tournament_appearances"],
         "final_four_appearances": derived["final_four_appearances"],
