@@ -612,6 +612,58 @@ class Stage4CloseoutTests(unittest.TestCase):
                         root / "out",
                     )
 
+    def test_legacy_stage3_semantic_vocabulary_compares_cleanly(self):
+        parent = [
+            {
+                "research_game_id": "G1",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2001-03-15",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "game_type": "NCAA",
+                "raw_text": "raw G1",
+                "stage3a_final_han": "NEUTRAL",
+                "stage3b_curated_venue_key": "test-gym",
+                "stage3b_curated_venue_name": "Test Gym",
+                "stage3b_site_city": "Testville",
+                "stage3b_site_state": "TS",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "G1",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2001-03-15",
+                "normalized_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Test Gym",
+                "city": "Testville",
+                "state": "TS",
+                "curated_game_type": "NCAA_TOURNAMENT",
+                "raw_text": "raw G1",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "test-gym",
+                "canonical_name": "Test Gym",
+                "aliases": "",
+            }
+        ]
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
     def test_semantic_drift_stops(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

@@ -15,6 +15,7 @@ class ResearchStage4PortableTests(unittest.TestCase):
             tools.mkdir(parents=True)
 
             for name, body in {
+                "research_stage4.py": "print('author')\n",
                 "research_stage4_closeout.py": "print('closeout')\n",
                 "research_stage4_portable.py": "print('portable')\n",
                 "onboarding_hardening.py": "print('hardening')\n",
@@ -33,7 +34,7 @@ class ResearchStage4PortableTests(unittest.TestCase):
                 built["protected_main_sha"],
                 sha,
             )
-            self.assertEqual(len(built["files"]), 4)
+            self.assertEqual(len(built["files"]), 5)
 
             result = mod.verify(output, sha)
             self.assertEqual(result["status"], "COMPLETE")
@@ -45,11 +46,16 @@ class ResearchStage4PortableTests(unittest.TestCase):
                 )
             )
             self.assertEqual(
+                manifest["entrypoint"],
+                "tools/research_stage4.py",
+            )
+            self.assertEqual(
                 {
                     item["path"]
                     for item in manifest["files"]
                 },
                 {
+                    "tools/research_stage4.py",
                     "tools/research_stage4_closeout.py",
                     "tools/research_stage4_portable.py",
                     "tools/onboarding_hardening.py",

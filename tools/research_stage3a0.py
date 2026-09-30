@@ -352,6 +352,50 @@ def materialize_legacy_checkpoint(
     }
 
 
+STAGE4_AUTHORING_BASENAMES = {
+    "opponents.csv",
+    "venues.csv",
+    "conferences.csv",
+}
+
+
+def carry_stage4_authoring(
+    archive: zipfile.ZipFile,
+    out: Path,
+) -> dict[str, dict[str, str]]:
+    """Carry any durable Stage 4 authoring capsule through Stage 3A-0 unchanged."""
+
+    by_basename: dict[str, list[str]] = {}
+    for name in archive.namelist():
+        if name.endswith("/") or "/stage4-authoring/" not in "/" + name:
+            continue
+        basename = Path(name).name.lower()
+        if basename not in STAGE4_AUTHORING_BASENAMES:
+            continue
+        by_basename.setdefault(basename, []).append(name)
+
+    carried: dict[str, dict[str, str]] = {}
+    for basename, members in sorted(by_basename.items()):
+        if len(members) != 1:
+            raise ValueError(
+                "AMBIGUOUS_STAGE4_AUTHORING_MEMBER: "
+                + basename
+                + ":"
+                + ",".join(sorted(members))
+            )
+        member = members[0]
+        data = archive.read(member)
+        target = out / "stage4-authoring" / basename
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        carried[basename] = {
+            "input_member": member,
+            "sha256": sha256_bytes(data),
+            "output_path": str(target),
+        }
+    return carried
+
+
 def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, object]]:
     if path.suffix.lower() != ".zip":
         raw = rows(path)
@@ -376,6 +420,7 @@ def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, o
         raise ValueError(f"INVALID_CHECKPOINT_ZIP: {exc}") from exc
 
     with archive:
+        stage4_authoring = carry_stage4_authoring(archive, out)
         members = [
             name
             for name in archive.namelist()
@@ -432,12 +477,14 @@ def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, o
                 "site_type_defaulted_to_unknown_count": defaulted_site_count,
                 "input_ledger": str(projected_path),
                 "input_ledger_sha256": sha256(projected_path),
+                "stage4_authoring_carried": stage4_authoring,
             }
 
         legacy_rows, legacy_meta = materialize_legacy_checkpoint(archive, members, out)
         return legacy_rows, {
             "input_artifact": str(path),
             "input_artifact_sha256": checkpoint_sha,
+            "stage4_authoring_carried": stage4_authoring,
             **legacy_meta,
         }
 
@@ -657,6 +704,11 @@ def main() -> int:
             out, "stage3b-postseason-handoff.json", queues["POSTSEASON"]
         ),
     }
+    for basename, metadata in summary.get("stage4_authoring_carried", {}).items():
+        output_path = Path(metadata["output_path"])
+        if output_path.is_file():
+            artifacts["stage4_authoring_" + basename.replace(".csv", "")] = output_path
+
     dump(
         out,
         "manifest.json",

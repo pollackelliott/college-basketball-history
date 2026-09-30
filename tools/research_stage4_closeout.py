@@ -313,65 +313,141 @@ def season_start(value: str) -> str:
     return match.group(1) if match else (value or "").strip()
 
 
+def _first_parent_value(row: dict[str, str], *fields: str) -> str:
+    for field in fields:
+        value = row.get(field, "").strip()
+        if value:
+            return value
+    return ""
+
+
+def normalize_game_type(value: str) -> str:
+    folded = (value or "").strip().upper()
+    return {
+        "NCAA": "NCAA_TOURNAMENT",
+        "NCAA_TOURNAMENT": "NCAA_TOURNAMENT",
+        "REGULAR": "REGULAR_SEASON",
+        "REGULAR_SEASON": "REGULAR_SEASON",
+        "CONFERENCE_TOURNAMENT": "CONFERENCE_TOURNAMENT",
+        "NIT": "NIT",
+        "POSTSEASON": "POSTSEASON",
+    }.get(folded, folded)
+
+
 def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
+    stage3b_status = row.get("stage3b_status", "").strip()
+    stage3b_payload_present = any(
+        row.get(field, "").strip()
+        for field in (
+            "stage3b_physical_venue_name",
+            "stage3b_curated_venue_name",
+            "stage3b_venue_city",
+            "stage3b_site_city",
+            "stage3b_venue_state",
+            "stage3b_site_state",
+            "stage3b_current_main_venue_key",
+            "stage3b_curated_venue_key",
+        )
+    )
     stage3b_active = (
-        bool(row.get("stage3b_status", "").strip())
-        and row.get("stage3b_status", "").strip()
-        != "NOT_APPLICABLE_REGULAR_SEASON"
+        stage3b_status != "NOT_APPLICABLE_REGULAR_SEASON"
+        and (bool(stage3b_status) or stage3b_payload_present)
+    )
+
+    site = _first_parent_value(
+        row,
+        "stage3b_site_type",
+        "stage3a_final_site_type",
+        "stage3a_final_han",
+        "curated_site_type",
+        "site_type",
     )
     if stage3b_active:
-        site = (
-            row.get("stage3b_site_type", "")
-            or row.get("stage3a_final_site_type", "")
-            or row.get("site_type", "")
+        venue = _first_parent_value(
+            row,
+            "stage3b_physical_venue_name",
+            "stage3b_curated_venue_name",
+            "stage3a_final_physical_venue_name",
+            "stage3a_curated_venue_name",
         )
-        venue = row.get("stage3b_physical_venue_name", "")
-        city = row.get("stage3b_venue_city", "")
-        state = row.get("stage3b_venue_state", "")
+        city = _first_parent_value(
+            row,
+            "stage3b_venue_city",
+            "stage3b_site_city",
+            "stage3a_final_venue_city",
+            "stage3a_site_city",
+        )
+        state = _first_parent_value(
+            row,
+            "stage3b_venue_state",
+            "stage3b_site_state",
+            "stage3a_final_venue_state",
+            "stage3a_site_state",
+        )
+        venue_key = _first_parent_value(
+            row,
+            "stage3b_current_main_venue_key",
+            "stage3b_curated_venue_key",
+            "stage3a_final_current_main_venue_key",
+            "stage3a_curated_venue_key",
+        )
     else:
-        site = row.get("stage3a_final_site_type", "") or row.get("site_type", "")
-        venue = (
-            row.get("stage3a_final_physical_venue_name", "")
-            or row.get("stage3a2_physical_venue_name", "")
-            or row.get("stage3a3_physical_venue_name", "")
+        venue = _first_parent_value(
+            row,
+            "stage3a_final_physical_venue_name",
+            "stage3a_curated_venue_name",
+            "stage3a2_physical_venue_name",
+            "stage3a3_physical_venue_name",
         )
-        city = (
-            row.get("stage3a_final_venue_city", "")
-            or row.get("stage3a2_venue_city", "")
-            or row.get("stage3a3_venue_city", "")
+        city = _first_parent_value(
+            row,
+            "stage3a_final_venue_city",
+            "stage3a_site_city",
+            "stage3a2_venue_city",
+            "stage3a3_venue_city",
         )
-        state = (
-            row.get("stage3a_final_venue_state", "")
-            or row.get("stage3a2_venue_state", "")
-            or row.get("stage3a3_venue_state", "")
+        state = _first_parent_value(
+            row,
+            "stage3a_final_venue_state",
+            "stage3a_site_state",
+            "stage3a2_venue_state",
+            "stage3a3_venue_state",
         )
+        venue_key = _first_parent_value(
+            row,
+            "stage3a_final_current_main_venue_key",
+            "stage3a_curated_venue_key",
+            "stage3a2_current_main_venue_key",
+            "stage3a3_current_main_venue_key",
+        )
+
     return {
         "source_program_key": row.get("source_program_key", "").strip(),
         "season_start": season_start(row.get("season_label", "")),
         "game_date": row.get("game_date", "").strip(),
-        "normalized_opponent_key": (
-            row.get("opponent_program_key", "")
-            or row.get("normalized_opponent_key", "")
-        ).strip(),
+        "normalized_opponent_key": _first_parent_value(
+            row,
+            "opponent_program_key",
+            "normalized_opponent_key",
+            "opponent_key",
+        ),
         "team_score": row.get("team_score", "").strip(),
         "opponent_score": row.get("opponent_score", "").strip(),
         "played_result": row.get("played_result", "").strip(),
         "overtime_periods": row.get("overtime_periods", "").strip(),
         "curated_site_type": normalize_site(site),
         "venue_present": "1" if venue.strip() else "0",
-        "venue_key": (
-            row.get("stage3b_current_main_venue_key", "")
-            if stage3b_active
-            else row.get("stage3a_final_current_main_venue_key", "")
-        )
-        or row.get("stage3a2_current_main_venue_key", "")
-        or row.get("stage3a3_current_main_venue_key", ""),
+        "venue_key": venue_key,
         "city": city.strip(),
         "state": state.strip(),
-        "curated_game_type": (
-            row.get("game_type", "")
-            or row.get("structured_game_type", "")
-        ).strip(),
+        "curated_game_type": normalize_game_type(
+            _first_parent_value(
+                row,
+                "curated_game_type",
+                "game_type",
+                "structured_game_type",
+            )
+        ),
         "raw_text": row.get("raw_text", ""),
     }
 

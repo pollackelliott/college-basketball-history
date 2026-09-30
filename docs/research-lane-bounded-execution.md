@@ -232,7 +232,8 @@ Resolve every game to the correct historical/canonical opponent identity without
 - distinguish true historical non-D1 opponents from current-D1 aliases;
 - produce the working distinct `NON_D1` census;
 - produce the informational self-corrected-opponent list;
-- preserve a game-level opponent mapping and identity provenance.
+- preserve a game-level opponent mapping and identity provenance;
+- serialize the complete accepted package-ready opponent table as `stage4-authoring/opponents.csv` under `docs/research-stage4-authoring-contract.md`; include canonical display, current-D1 classification at the immutable Research base, resolution method/provenance, and every literal source-label mapping needed later by `opponents.csv`;
 - when an accepted target source explicitly documents an H/A/N notation convention, mechanically normalize the preserved source token into standardized `site_type` no later than Stage 2 while preserving the raw token; do not open new site research for this step, infer from geography, or interpret an undocumented token convention.
 
 For obscure historical/NON_D1 opponents, research must remain proportionate to the purpose: establish a defensible canonical identity, avoid false merges/splits, and preserve literal evidence. Do not pursue exhaustive institutional genealogy after available evidence is exhausted when it would not materially affect canonical identity, duplicate handling, or the game universe. Genuine unresolved historical identity remains preferable to unsupported certainty when repository policy permits it.
@@ -244,7 +245,7 @@ For obscure historical/NON_D1 opponents, research must remain proportionate to t
 - known current-program key splits = 0;
 - ambiguous current-program matches = 0;
 - Stage 1 universe remains accounted exactly;
-- opponent artifacts are durable;
+- opponent artifacts are durable, including manifested `stage4-authoring/opponents.csv`; a per-game opponent key alone is not sufficient;
 - the full game-level Stage 2 ledger carries any H/A/N that was mechanically established from an explicit documented source convention; only rows without safely established source meaning remain `UNKNOWN` for Stage 3A-1.
 
 The formal owner NON_D1 sanity scan does **not** occur yet; it occurs after package assembly/QA in Stage 5.
@@ -470,7 +471,8 @@ Otherwise:
 5. identify NEUTRAL researched debt by modern (1996-97+) vs historical (1995-96 and earlier) era;
 6. identify OPPONENT_HOME rows intentionally outside source-school building responsibility;
 7. run Stage 3A QA;
-8. serialize/hash the final Stage 3A completion checkpoint.
+8. serialize/update the package-ready `stage4-authoring/venues.csv` from accepted Stage 3A venue state, preserving any carried Stage 2 authoring members;
+9. serialize/hash the final Stage 3A completion checkpoint.
 
 Stage 3A may declare complete only after Stage 3A-4 passes. The completion state must
 include:
@@ -483,6 +485,8 @@ include:
 - historical regular-season neutral rows (1995-96 and earlier) subjected to the location-first systematic pass, with supported event/city/state preserved and surviving exact-building gaps allowed as explicitly accounted nonblocking terminal enrichment debt;
 - every material unresolved site fact explicitly researched/accounted;
 - ambiguous physical venue identities = 0;
+- carried `stage4-authoring/opponents.csv` remains durable;
+- package-ready `stage4-authoring/venues.csv` is durable and manifested;
 - one authoritative row-level Stage 3A ledger sufficient for a successor chat and Stage 4.
 
 Completion response:
@@ -526,7 +530,13 @@ postseason row.
 - no postseason row is terminalized under the historical regular-season neutral enrichment shortcut;
 - ambiguous physical venue identities = 0;
 - postseason + regular-season partitions account exactly for Stage 1;
-- durable mapping/audit artifacts emitted when feasible.
+- durable mapping/audit artifacts emitted when feasible;
+- all previously established `stage4-authoring/` members are preserved;
+- package-ready `stage4-authoring/venues.csv` includes accepted postseason additions/updates;
+- package-ready `stage4-authoring/conferences.csv` contains the accepted conference chronology needed by the final package;
+- the completed checkpoint passes `python tools/research_stage4.py preflight <school_key> <stage3b-checkpoint.zip>`.
+
+The Stage 4 authoring preflight is part of Stage 3B mechanical closeout. If it reports a missing or invalid authoring member, repair only that durable representation while Stage 2/3 evidence is still available; do not declare Stage 3B COMPLETE and defer the loss to a later chat.
 
 Do not begin six-file finalization during this stage unless the stage itself is already fully closed and the owner has separately authorized the next bounded stage; normally stop here.
 
@@ -538,35 +548,24 @@ Mechanically assemble the researched school portfolio and reach readiness for th
 
 ### Work
 
-Construct exactly the current-schema six flat files:
-
-1. `source-games.csv`
-2. `opponents.csv`
-3. `venues.csv`
-4. `conferences.csv`
-5. `notes.md`
-6. `source-notes.md`
-
-Once all six files exist, run the permanent mechanical closeout:
+Stage 4 is command-first. Run:
 
 ```bash
-python tools/research_stage4_closeout.py <school_key> <six-file-directory> <stage3b-complete-checkpoint.zip> --main-sha <protected-main-sha>
+python tools/research_stage4.py author <school_key> <stage3b-complete-checkpoint.zip> --main-sha <protected-main-sha>
 ```
 
-The command owns the Stage 3B parent/manifest check, exact game-ID and core-semantic reconciliation, the permanent `research-check`, deterministic six-file package/checkpoint creation, and the complete distinct `NON_D1` owner-scan generation. It accepts both the current root Stage 3B checkpoint topology and the repository's accepted legacy single-containing-directory topology; legacy manifests are normalized only in memory, while the original parent ZIP bytes/hash remain immutable and are carried forward unchanged. Ambiguous or mixed parent layouts are a STOP. If `notes.md`, `source-notes.md`, or another required package member is missing, it stops immediately with `PACKAGE_AUTHORING_INCOMPLETE`; finish only the named package-authoring residual and rerun. Do not answer a mechanical closeout stop by opening new historical research, broad canonical/evidence retrieval, or hand-reconstructing QA.
+The coordinator requires the Stage 3B checkpoint to have already passed the authoring preflight and to contain manifested package-ready `stage4-authoring/opponents.csv`, `stage4-authoring/venues.csv`, and `stage4-authoring/conferences.csv`.
 
-When no runnable checkout is available, use the exact-SHA portable Stage 4 tool bundle in `docs/research-portable-execution.md`. The portable path changes transport only; the unchanged permanent closeout command still owns the result.
+The command then:
 
-Then:
+1. projects accepted final Stage 3B row state mechanically into current-schema `source-games.csv`;
+2. copies the three durable authoring tables without rediscovering their historical meaning;
+3. generates `notes.md` and `source-notes.md` from durable checkpoint/status/source-register state;
+4. invokes the permanent closeout, which performs Stage 3B parent/game-ID/core-semantic reconciliation, `research-check`, deterministic package/checkpoint creation, and complete distinct `NON_D1` scan generation.
 
-- apply accepted Stage 1–3B research mechanically;
-- apply documented correction overlays without erasing literal raw evidence;
-- establish conference chronology/accomplishment/source notes required by current schema/policy;
-- run applicable research/package QA and repair mechanical defects;
-- reconcile venue identities against `research_base_sha` while keeping new numeric global IDs provisional;
-- confirm site-completeness accounting and NCAA completeness;
-- generate the complete distinct working `NON_D1` owner-scan presentation;
-- include the informational self-corrected-opponent section.
+The Stage 4 tools accept current and repository-supported legacy Stage 3B field/topology vocabularies in memory while preserving the original parent ZIP bytes/hash. Missing current-policy authoring state is a prior-stage durability defect. Do not reconstruct opponent identity, venue meaning, conference chronology, or source provenance from current registries, conversational memory, or broad new research merely to make Stage 4 run.
+
+When no runnable checkout is available, use the exact-SHA portable Stage 4 tool bundle in `docs/research-portable-execution.md`. The portable path changes transport only; the unchanged permanent coordinator/closeout own the result.
 
 ### Completion standard
 

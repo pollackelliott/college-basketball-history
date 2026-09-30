@@ -140,17 +140,23 @@ the canonical/published-reciprocal evidence scan and exact-game reuse logic.
 
 Do not substitute a different evidence surface merely because portable transport is inconvenient.
 
-## Research Stage 4 mechanical closeout
+## Research Stage 4 deterministic authoring + closeout
 
-Stage 4 closeout is also portable because it consumes only the already-authored six-file package, the completed Stage 3B checkpoint, and repository-owned validation/orchestration code. It does not require canonical basketball state or a mutable checkout.
+Stage 4 is portable because a current-policy Stage 3B COMPLETE checkpoint already carries the package-ready `stage4-authoring/` capsule. The Stage 4 command therefore consumes only that checkpoint plus repository-owned authoring/validation code. It does not require canonical basketball state, current registries, web research, or a mutable checkout.
 
 The permanent entrypoint is:
 
 ```bash
-python tools/research_stage4_closeout.py <school_key> <six-file-directory> <stage3b-complete-checkpoint.zip> --main-sha <exact-protected-main-sha>
+python tools/research_stage4.py author <school_key> <stage3b-complete-checkpoint.zip> --main-sha <exact-protected-main-sha>
 ```
 
-Protected `main` publishes a short-retention exact-SHA Actions artifact named `research-stage4-tool-<exact-protected-main-sha>` from `.github/workflows/research-stage4-portable.yml`. The bundle contains the exact `tools/*.py` executable dependency surface from that protected-main commit and `research-stage4-tool-manifest.json`; it contains no canonical games, registries, school packages, or other basketball evidence.
+Before Stage 3B is reported complete, the same exact tool is used as:
+
+```bash
+python tools/research_stage4.py preflight <school_key> <stage3b-complete-checkpoint.zip>
+```
+
+Protected `main` publishes a short-retention exact-SHA Actions artifact named `research-stage4-tool-<exact-protected-main-sha>` from `.github/workflows/research-stage4-portable.yml`. The bundle contains the exact `tools/*.py` dependency surface, including `research_stage4.py` and `research_stage4_closeout.py`, plus `research-stage4-tool-manifest.json`. It contains no canonical games, registries, school packages, or other basketball evidence.
 
 When no runnable checkout exists:
 
@@ -158,9 +164,9 @@ When no runnable checkout exists:
 2. retrieve the successful `Research Stage 4 portable tool` push artifact whose `head_sha` and artifact name both contain that exact SHA;
 3. materialize it into temporary storage;
 4. verify it with `python tools/research_stage4_portable.py verify <bundle-dir> --main-sha <exact-sha>`;
-5. run the unchanged permanent closeout tool from that verified bundle against the authoritative six-file directory and Stage 3B checkpoint.
+5. run the unchanged permanent `research_stage4.py` preflight/author command from that verified bundle against the authoritative Stage 3B checkpoint.
 
-A missing package-authored file is not an execution-environment failure. Read `stage4-status.json`; `PACKAGE_AUTHORING_INCOMPLETE` means finish only the named Stage 4 package-authoring residual and rerun.
+`STAGE4_AUTHORING_INPUT_INCOMPLETE` or `STAGE4_AUTHORING_INPUT_INVALID` is not an execution-environment failure. For a current-policy lane it means the prior Research checkpoint is not yet durably package-authoring-ready; repair only that serialized state while remaining at the Stage 3B closeout boundary. Do not compensate by reconstructing prior decisions from current repository state.
 
 ## Execution-unavailable sentinels
 
