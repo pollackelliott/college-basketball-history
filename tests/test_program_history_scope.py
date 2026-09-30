@@ -16,6 +16,7 @@ from program_history import (  # noqa: E402
     history_scope_errors,
     partition_source_rows,
     scope_canonical_games,
+    season_is_in_scope,
     trim_conference_history,
 )
 
@@ -67,6 +68,90 @@ class ProgramHistoryScopeTests(unittest.TestCase):
             "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
         }
         self.assertEqual(history_scope_errors(confirmed, required=True), [])
+
+    def test_interrupted_scope_excludes_mid_history_reciprocal_games(self):
+        intervals = "1948-49..1952-53|1954-55..1970-71|1985-86+"
+        games = [
+            canonical_game("CBBG-A", "1952-1953"),
+            canonical_game("CBBG-B", "1953-1954"),
+            canonical_game("CBBG-C", "1954-1955"),
+            canonical_game("CBBG-D", "1979-1980"),
+            canonical_game("CBBG-E", "1985-1986"),
+        ]
+        scoped = scope_canonical_games(
+            games,
+            "program-a",
+            "1948-1949",
+            intervals,
+        )
+        self.assertEqual(
+            [game["canonical_game_id"] for game in scoped],
+            ["CBBG-A", "CBBG-C", "CBBG-E"],
+        )
+
+    def test_interrupted_scope_partitions_mid_history_source_rows(self):
+        intervals = "1948-49..1952-53|1954-55..1970-71|1985-86+"
+        rows = [
+            {"season_label": "1952-1953", "raw_text": "accepted"},
+            {"season_label": "1953-1954", "raw_text": "gap"},
+            {"season_label": "1979-1980", "raw_text": "gap"},
+            {"season_label": "1985-1986", "raw_text": "accepted"},
+        ]
+        in_scope, outside_scope = partition_source_rows(
+            rows,
+            "1948-1949",
+            intervals,
+        )
+        self.assertEqual(
+            [row["raw_text"] for row in in_scope],
+            ["accepted", "accepted"],
+        )
+        self.assertEqual(
+            [row["raw_text"] for row in outside_scope],
+            ["gap", "gap"],
+        )
+
+    def test_interrupted_scope_splits_public_conference_history(self):
+        intervals = "1948-49..1952-53|1954-55..1970-71|1985-86+"
+        source = [
+            {
+                "start_season": "1948-1949",
+                "end_season": "",
+                "conference_key": "independent",
+            }
+        ]
+        public = trim_conference_history(
+            source,
+            "1948-1949",
+            intervals,
+        )
+        self.assertEqual(
+            [(row["start_season"], row["end_season"]) for row in public],
+            [
+                ("1948-1949", "1952-1953"),
+                ("1954-1955", "1970-1971"),
+                ("1985-1986", ""),
+            ],
+        )
+        self.assertEqual(source[0]["end_season"], "")
+
+    def test_interval_scope_validation_requires_matching_first_interval(self):
+        confirmed = {
+            "history_start_season": "1948-1949",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "TOP_LEVEL_INTERVALS",
+            "history_scope_intervals": (
+                "1948-49..1952-53|1954-55..1970-71|1985-86+"
+            ),
+        }
+        self.assertEqual(history_scope_errors(confirmed, required=True), [])
+
+        mismatched = dict(confirmed)
+        mismatched["history_start_season"] = "1954-1955"
+        self.assertIn(
+            "history_start_season must equal the first accepted interval start",
+            history_scope_errors(mismatched, required=True),
+        )
 
     def test_one_game_can_be_out_of_scope_for_a_and_in_scope_for_b(self):
         game = canonical_game("CBBG-OLD", "1999-2000")
@@ -145,12 +230,18 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         ]
         for key in public_keys:
             start = programs[key]["history_start_season"]
+            intervals = programs[key].get("history_scope_intervals", "").strip()
             all_games = [
                 game
                 for game in games
                 if key in {game["team_a_key"], game["team_b_key"]}
             ]
-            scoped = scope_canonical_games(all_games, key, start)
+            scoped = scope_canonical_games(
+                all_games,
+                key,
+                start,
+                intervals,
+            )
             scoped_ids = {game["canonical_game_id"] for game in scoped}
             excluded = [
                 game
@@ -158,7 +249,14 @@ class ProgramHistoryScopeTests(unittest.TestCase):
                 if game["canonical_game_id"] not in scoped_ids
             ]
             for game in excluded:
-                self.assertLess(game["season_label"], start, key)
+                self.assertFalse(
+                    season_is_in_scope(
+                        game["season_label"],
+                        start,
+                        intervals,
+                    ),
+                    key,
+                )
                 sources = assertion_sources.get(game["canonical_game_id"], set())
                 self.assertNotIn(key, sources, game["canonical_game_id"])
                 self.assertTrue(sources, game["canonical_game_id"])

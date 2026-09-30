@@ -563,6 +563,7 @@ def main() -> int:
             )
 
         history_start = program.get("history_start_season", "").strip()
+        history_intervals = program.get("history_scope_intervals", "").strip()
         if not history_start:
             raise ValueError(
                 f"{program_key}: public program has no history_start_season."
@@ -573,13 +574,18 @@ def main() -> int:
             if program_key in {row["team_a_key"], row["team_b_key"]}
         ]
         scoped_canonical = scope_canonical_games(
-            all_program_games, program_key, history_start
+            all_program_games,
+            program_key,
+            history_start,
+            history_intervals,
         )
         scope_exclusion_counts[program_key] = (
             len(all_program_games) - len(scoped_canonical)
         )
         public_conference_history = trim_conference_history(
-            conference_history, history_start
+            conference_history,
+            history_start,
+            history_intervals,
         )
 
         perspective_games = [

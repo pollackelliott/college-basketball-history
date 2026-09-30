@@ -14,6 +14,7 @@ HISTORY_SCOPE_BASES = {
     "",
     "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
     "FIRST_TOP_LEVEL_SEASON",
+    "TOP_LEVEL_INTERVALS",
 }
 
 BEST_FINISH_LABELS = {
@@ -77,11 +78,79 @@ def valid_season_label(value: str) -> bool:
     return int(match.group(2)) == int(match.group(1)) + 1
 
 
-def season_is_in_scope(season_label: str, history_start_season: str) -> bool:
+def normalize_scope_season(value: str) -> str:
+    """Normalize YYYY-YY or YYYY-YYYY scope tokens to YYYY-YYYY."""
+    text = (value or "").strip()
+    match = re.fullmatch(r"(\d{4})-(\d{2}|\d{4})", text)
+    if not match:
+        raise ValueError(f"invalid scope season {text!r}")
+
+    start = int(match.group(1))
+    end_token = match.group(2)
+    end = int(end_token) if len(end_token) == 4 else start + 1
+    if len(end_token) == 2 and int(end_token) != (start + 1) % 100:
+        raise ValueError(f"nonconsecutive scope season {text!r}")
+    normalized = f"{start:04d}-{end:04d}"
+    if not valid_season_label(normalized):
+        raise ValueError(f"nonconsecutive scope season {text!r}")
+    return normalized
+
+
+def parse_history_scope_intervals(value: str) -> list[tuple[str, str | None]]:
+    """Parse explicit accepted top-level intervals in owner-reference syntax."""
+    text = (value or "").strip()
+    if not text:
+        return []
+
+    intervals: list[tuple[str, str | None]] = []
+    for raw_part in text.split("|"):
+        part = raw_part.strip()
+        if not part:
+            raise ValueError("blank history-scope interval")
+
+        if part.endswith("+"):
+            if ".." in part:
+                raise ValueError(f"invalid open history-scope interval {part!r}")
+            start = normalize_scope_season(part[:-1])
+            end = None
+        else:
+            if part.count("..") != 1:
+                raise ValueError(f"invalid closed history-scope interval {part!r}")
+            start_token, end_token = part.split("..")
+            start = normalize_scope_season(start_token)
+            end = normalize_scope_season(end_token)
+            if end < start:
+                raise ValueError(f"history-scope interval ends before it starts: {part!r}")
+
+        if intervals:
+            prior_end = intervals[-1][1]
+            if prior_end is None:
+                raise ValueError("open history-scope interval must be last")
+            if start <= prior_end:
+                raise ValueError("history-scope intervals must be ordered and non-overlapping")
+
+        intervals.append((start, end))
+
+    return intervals
+
+
+def season_is_in_scope(
+    season_label: str,
+    history_start_season: str,
+    history_scope_intervals: str = "",
+) -> bool:
     """Return whether a valid game season belongs to one program's perspective."""
+    if not valid_season_label(season_label):
+        return False
+
+    if history_scope_intervals.strip():
+        return any(
+            season_label >= start and (end is None or season_label <= end)
+            for start, end in parse_history_scope_intervals(history_scope_intervals)
+        )
+
     return (
-        valid_season_label(season_label)
-        and valid_season_label(history_start_season)
+        valid_season_label(history_start_season)
         and season_label >= history_start_season
     )
 
@@ -90,6 +159,7 @@ def scope_canonical_games(
     games: Iterable[dict[str, Any]],
     program_key: str,
     history_start_season: str,
+    history_scope_intervals: str = "",
 ) -> list[dict[str, Any]]:
     """Select canonical games that count for one program's approved perspective."""
     return [
@@ -97,40 +167,75 @@ def scope_canonical_games(
         for game in games
         if program_key in {game.get("team_a_key"), game.get("team_b_key")}
         and season_is_in_scope(
-            str(game.get("season_label", "")), history_start_season
+            str(game.get("season_label", "")),
+            history_start_season,
+            history_scope_intervals,
         )
     ]
 
 
 def partition_source_rows(
-    rows: Iterable[dict[str, str]], history_start_season: str
+    rows: Iterable[dict[str, str]],
+    history_start_season: str,
+    history_scope_intervals: str = "",
 ) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
     """Partition target source evidence without altering either set of rows."""
     in_scope: list[dict[str, str]] = []
-    pre_cutoff: list[dict[str, str]] = []
+    outside_scope: list[dict[str, str]] = []
     for row in rows:
         season = row.get("season_label", "").strip()
-        if valid_season_label(season) and season < history_start_season:
-            pre_cutoff.append(row)
+        if valid_season_label(season) and not season_is_in_scope(
+            season,
+            history_start_season,
+            history_scope_intervals,
+        ):
+            outside_scope.append(row)
         else:
             in_scope.append(row)
-    return in_scope, pre_cutoff
+    return in_scope, outside_scope
 
 
 def trim_conference_history(
-    history_rows: Iterable[dict[str, str]], history_start_season: str
+    history_rows: Iterable[dict[str, str]],
+    history_start_season: str,
+    history_scope_intervals: str = "",
 ) -> list[dict[str, str]]:
-    """Return public interval copies clipped to the program history boundary."""
+    """Return public conference-history copies clipped to accepted scope."""
+    if not history_scope_intervals.strip():
+        trimmed: list[dict[str, str]] = []
+        for source in history_rows:
+            start = source.get("start_season", "").strip()
+            end = source.get("end_season", "").strip()
+            if end and end < history_start_season:
+                continue
+            row = dict(source)
+            if start < history_start_season:
+                row["start_season"] = history_start_season
+            trimmed.append(row)
+        return trimmed
+
+    accepted = parse_history_scope_intervals(history_scope_intervals)
     trimmed: list[dict[str, str]] = []
     for source in history_rows:
-        start = source.get("start_season", "").strip()
-        end = source.get("end_season", "").strip()
-        if end and end < history_start_season:
-            continue
-        row = dict(source)
-        if start < history_start_season:
-            row["start_season"] = history_start_season
-        trimmed.append(row)
+        source_start = source.get("start_season", "").strip()
+        source_end = source.get("end_season", "").strip() or None
+        if not valid_season_label(source_start):
+            raise ValueError(f"invalid conference-history start season {source_start!r}")
+        if source_end is not None and not valid_season_label(source_end):
+            raise ValueError(f"invalid conference-history end season {source_end!r}")
+
+        for accepted_start, accepted_end in accepted:
+            start = max(source_start, accepted_start)
+            ends = [value for value in (source_end, accepted_end) if value is not None]
+            end = min(ends) if ends else None
+            if end is not None and start > end:
+                continue
+
+            row = dict(source)
+            row["start_season"] = start
+            row["end_season"] = end or ""
+            trimmed.append(row)
+
     return trimmed
 
 
@@ -140,11 +245,31 @@ def history_scope_errors(program: dict[str, str], required: bool) -> list[str]:
     start = program.get("history_start_season", "").strip()
     status = program.get("history_scope_status", "").strip()
     basis = program.get("history_scope_basis", "").strip()
+    interval_text = program.get("history_scope_intervals", "").strip()
 
     if status not in HISTORY_SCOPE_STATUSES:
         errors.append(f"unknown history_scope_status {status!r}")
     if basis not in HISTORY_SCOPE_BASES:
         errors.append(f"unknown history_scope_basis {basis!r}")
+
+    parsed_intervals: list[tuple[str, str | None]] = []
+    if interval_text:
+        try:
+            parsed_intervals = parse_history_scope_intervals(interval_text)
+        except ValueError as exc:
+            errors.append(f"invalid history_scope_intervals: {exc}")
+        if basis != "TOP_LEVEL_INTERVALS":
+            errors.append(
+                "history_scope_intervals requires history_scope_basis=TOP_LEVEL_INTERVALS"
+            )
+    elif basis == "TOP_LEVEL_INTERVALS":
+        errors.append("TOP_LEVEL_INTERVALS requires history_scope_intervals")
+
+    if parsed_intervals and valid_season_label(start):
+        if parsed_intervals[0][0] != start:
+            errors.append(
+                "history_start_season must equal the first accepted interval start"
+            )
 
     if required:
         if not valid_season_label(start):
@@ -153,7 +278,7 @@ def history_scope_errors(program: dict[str, str], required: bool) -> list[str]:
             errors.append("history_scope_status must be OWNER_CONFIRMED")
         if basis not in HISTORY_SCOPE_BASES - {""}:
             errors.append("history_scope_basis is required")
-    elif any((start, status, basis)):
+    elif any((start, status, basis, interval_text)):
         if not valid_season_label(start):
             errors.append("partially populated history scope needs a valid season")
         if not status or not basis:
@@ -188,10 +313,14 @@ def derive_ncaa_accomplishments(
     canonical_games: Iterable[dict[str, Any]],
     program_key: str,
     history_start_season: str,
+    history_scope_intervals: str = "",
 ) -> dict[str, Any]:
     """Derive on-court NCAA accomplishments within one program's scope."""
     scoped = scope_canonical_games(
-        canonical_games, program_key, history_start_season
+        canonical_games,
+        program_key,
+        history_start_season,
+        history_scope_intervals,
     )
     ncaa_games = [g for g in scoped if g.get("game_type") == "NCAA_TOURNAMENT"]
     by_season: dict[str, list[dict[str, Any]]] = defaultdict(list)

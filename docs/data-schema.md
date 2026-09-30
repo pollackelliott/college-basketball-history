@@ -116,22 +116,25 @@ If exhibition metadata is ever retained, it remains outside the canonical compet
 
 ### Program-perspective history boundary
 
-Every published program has an owner-approved `history_start_season` in
-`data/reference/programs.csv`. Before onboarding, the owner must state either:
-
-- "Program has always been D1/top-level for our site purposes."
-- "First year in D1/top-level for our site purposes is YYYY-YY."
+Every published program has an owner-approved history scope in
+`data/reference/programs.csv`. `history_start_season` stores the first accepted
+season. Programs with uninterrupted history may continue to use that lower bound alone.
+Programs whose accepted top-level history has gaps additionally store the exact accepted
+interval expression in `history_scope_intervals` with
+`history_scope_basis=TOP_LEVEL_INTERVALS`.
 
 This is a site-scope ruling, not a claim that the formal NCAA Division I label existed
 throughout the period. A canonical game may remain globally valid while being outside
 one participant's public perspective. Builders filter by displayed program before
 calculating games, records, seasons, opponents, postseason figures, conference history,
-or any other aggregate. Raw pre-cutoff source rows remain preserved; ingestion excludes
+or any other aggregate. Raw out-of-scope source rows remain preserved; ingestion excludes
 them from the target perspective without rewriting `raw_text`.
 
 The program registry stores `history_start_season`, `history_scope_status`,
-`history_scope_basis`, and `history_scope_notes`. A public program requires an
-owner-confirmed scope.
+`history_scope_basis`, `history_scope_notes`, and `history_scope_intervals`.
+A public program requires an owner-confirmed scope. When
+`history_scope_intervals` is populated, it is the authoritative perspective filter and
+`history_start_season` must equal its first accepted interval start.
 
 ## Program accomplishments
 

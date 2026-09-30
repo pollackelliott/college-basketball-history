@@ -61,6 +61,8 @@ Every interval listed is independently accepted. Games outside every listed inte
 
 During implementation, a newly researched school's final accepted history metadata should be reconciled with current-main `programs.csv` under the normal serialized workflow. A prior explicit owner ruling already recorded in `programs.csv` remains valid unless this reference or newly discovered authoritative evidence creates a real contradiction.
 
+`programs.csv` retains `history_start_season` as the first accepted season for backward-compatible display and validation. When accepted history is interrupted, Implementation also writes the exact owner-approved interval expression to `history_scope_intervals` and uses `history_scope_basis=TOP_LEVEL_INTERVALS`. Publication, ingestion, reciprocal-only review, conference-history clipping, and accomplishment cross-checking must use `history_scope_intervals` when it is present rather than collapsing the program to a single lower-bound cutoff.
+
 ## 6. Validation status
 
 The 2026-09-02 bounded audit confirmed:
