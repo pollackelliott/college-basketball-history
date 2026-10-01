@@ -379,5 +379,104 @@ class Stage4AuthoringTests(unittest.TestCase):
             )
 
 
+    def test_projection_preserves_blank_overtime(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "research_game_id": "BLANK-OT",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "overtime_periods": "",
+                }
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(games[0]["overtime_periods"], "")
+
+    def test_projection_accepts_legacy_venue_location_aliases_and_key(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        ledger = [
+            {
+                "research_game_id": "FINAL-ALIASES",
+                "source_program_key": "test",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "stage3a_final_venue_name": "Test Gym",
+                "stage3a_final_city": "Testville",
+                "stage3a_final_state": "TS",
+            },
+            {
+                "research_game_id": "ACCEPTED-ALIASES",
+                "source_program_key": "test",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "accepted_venue_name": "Old Test Gym",
+                "accepted_city": "Testville",
+                "accepted_state": "TS",
+                "accepted_venue_key": "test-gym",
+            },
+            {
+                "research_game_id": "ACCEPTED-KEY",
+                "source_program_key": "test",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "accepted_venue_key": "test-gym",
+            },
+        ]
+        games, defects = mod._projection(ledger, opponents, venues)
+        self.assertEqual(defects, [])
+        by_id = {row["source_game_id"]: row for row in games}
+
+        final_aliases = by_id["FINAL-ALIASES"]
+        self.assertEqual(final_aliases["curated_venue_name"], "Test Gym")
+        self.assertEqual(final_aliases["city"], "Testville")
+        self.assertEqual(final_aliases["state"], "TS")
+
+        accepted_aliases = by_id["ACCEPTED-ALIASES"]
+        self.assertEqual(accepted_aliases["curated_venue_name"], "Old Test Gym")
+        self.assertEqual(accepted_aliases["city"], "Testville")
+        self.assertEqual(accepted_aliases["state"], "TS")
+
+        accepted_key = by_id["ACCEPTED-KEY"]
+        self.assertEqual(accepted_key["curated_venue_name"], "Test Gym")
+        self.assertEqual(accepted_key["city"], "Testville")
+        self.assertEqual(accepted_key["state"], "TS")
+
+    def test_projection_carries_postseason_han_research_accounting(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "research_game_id": "HAN-DEBT",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "stage3b_postseason_han_status": "RESEARCHED_UNRESOLVED",
+                    "stage3b_postseason_han_basis": (
+                        "Accepted postseason H/A/N evidence paths exhausted."
+                    ),
+                }
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(
+            games[0]["site_research_status"],
+            "RESEARCHED_UNRESOLVED",
+        )
+        self.assertEqual(
+            games[0]["site_research_basis"],
+            "Accepted postseason H/A/N evidence paths exhausted.",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
