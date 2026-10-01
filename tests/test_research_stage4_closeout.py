@@ -987,5 +987,119 @@ class Stage4CloseoutTests(unittest.TestCase):
         )
 
 
+    def test_accepted_legacy_venue_aliases_compare_cleanly(self):
+        parent = [
+            {
+                "research_game_id": "ACCEPTED",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "",
+                "game_type": "REGULAR_SEASON",
+                "raw_text": "raw ACCEPTED",
+                "stage3a_final_han": "HOME",
+                "accepted_venue_key": "test-gym",
+                "accepted_venue_name": "Old Test Gym",
+                "accepted_city": "Testville",
+                "accepted_state": "TS",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "ACCEPTED",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "normalized_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "",
+                "curated_site_type": "HOME",
+                "curated_venue_name": "Old Test Gym",
+                "city": "Testville",
+                "state": "TS",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "raw ACCEPTED",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "test-gym",
+                "canonical_name": "Test Gym",
+                "aliases": "Old Test Gym",
+                "city": "Testville",
+                "state": "TS",
+            }
+        ]
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
+    def test_blank_overtime_remains_semantically_strict(self):
+        parent = [
+            {
+                "research_game_id": "BLANK-OT",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "",
+                "game_type": "REGULAR_SEASON",
+                "raw_text": "raw BLANK-OT",
+                "stage3a_final_han": "HOME",
+                "stage3a_final_venue_name": "Test Gym",
+                "stage3a_final_city": "Testville",
+                "stage3a_final_state": "TS",
+                "accepted_venue_key": "test-gym",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "BLANK-OT",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "normalized_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "",
+                "curated_site_type": "HOME",
+                "curated_venue_name": "Test Gym",
+                "city": "Testville",
+                "state": "TS",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "raw BLANK-OT",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "test-gym",
+                "canonical_name": "Test Gym",
+                "aliases": "",
+                "city": "Testville",
+                "state": "TS",
+            }
+        ]
+
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+        package[0]["overtime_periods"] = "0"
+        mismatches = mod.compare_parent_semantics(parent, package, venues)
+        self.assertEqual(len(mismatches), 1)
+        self.assertEqual(mismatches[0]["field"], "overtime_periods")
+
+
 if __name__ == "__main__":
     unittest.main()

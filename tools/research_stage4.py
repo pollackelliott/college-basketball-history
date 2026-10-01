@@ -193,6 +193,7 @@ def _table_defects(
 def _projection(
     ledger: list[dict[str, str]],
     opponents: list[dict[str, str]],
+    venues: list[dict[str, str]],
 ) -> tuple[list[dict[str, str]], list[dict[str, Any]]]:
     names: dict[str, set[str]] = defaultdict(set)
     for row in opponents:
@@ -214,6 +215,12 @@ def _projection(
             )
         else:
             canonical_name[key] = next(iter(values))
+
+    venues_by_key: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for venue in venues:
+        venue_key = venue.get("venue_key", "").strip()
+        if venue_key:
+            venues_by_key[venue_key].append(venue)
 
     projected: list[dict[str, str]] = []
     seen: set[str] = set()
@@ -246,11 +253,28 @@ def _projection(
         research_status = _first(
             row,
             "stage3b_site_research_status",
+            "stage3b_postseason_han_status",
             "stage3a_site_research_status",
             "site_research_status",
         )
         if research_status not in ALLOWED_RESEARCH_STATUSES:
             research_status = ""
+
+        accepted_venue_key = _first(row, "accepted_venue_key")
+        accepted_venue: dict[str, str] = {}
+        if accepted_venue_key:
+            candidates = venues_by_key.get(accepted_venue_key, [])
+            if len(candidates) != 1:
+                defects.append(
+                    {
+                        "reason": "ACCEPTED_VENUE_KEY_NOT_UNIQUE",
+                        "source_game_id": game_id,
+                        "accepted_venue_key": accepted_venue_key,
+                        "matches": len(candidates),
+                    }
+                )
+            else:
+                accepted_venue = candidates[0]
 
         projected.append(
             {
@@ -270,7 +294,7 @@ def _projection(
                 "team_score": _first(row, "team_score"),
                 "opponent_score": _first(row, "opponent_score"),
                 "played_result": _first(row, "played_result", "on_court_result"),
-                "overtime_periods": _first(row, "overtime_periods") or "0",
+                "overtime_periods": _first(row, "overtime_periods"),
                 "source_site_candidate": _first(
                     row, "source_site_candidate", "source_site_token"
                 ),
@@ -290,31 +314,40 @@ def _projection(
                     "stage3b_physical_venue_name",
                     "stage3b_curated_venue_name",
                     "stage3a_final_physical_venue_name",
+                    "stage3a_final_venue_name",
+                    "accepted_venue_name",
                     "stage3a_curated_venue_name",
                     "stage3a2_physical_venue_name",
                     "stage3a3_physical_venue_name",
                     "curated_venue_name",
-                ),
+                )
+                or accepted_venue.get("canonical_name", "").strip(),
                 "city": _first(
                     row,
                     "stage3b_venue_city",
                     "stage3b_site_city",
                     "stage3a_final_venue_city",
+                    "stage3a_final_city",
+                    "accepted_city",
                     "stage3a_site_city",
                     "stage3a2_venue_city",
                     "stage3a3_venue_city",
                     "city",
-                ),
+                )
+                or accepted_venue.get("city", "").strip(),
                 "state": _first(
                     row,
                     "stage3b_venue_state",
                     "stage3b_site_state",
                     "stage3a_final_venue_state",
+                    "stage3a_final_state",
+                    "accepted_state",
                     "stage3a_site_state",
                     "stage3a2_venue_state",
                     "stage3a3_venue_state",
                     "state",
-                ),
+                )
+                or accepted_venue.get("state", "").strip(),
                 "event_or_tournament": _first(
                     row, "event_or_tournament", "stage3a3_event_name"
                 ),
@@ -337,6 +370,7 @@ def _projection(
                     _first(
                         row,
                         "stage3b_site_research_basis",
+                        "stage3b_postseason_han_basis",
                         "stage3a_site_research_basis",
                         "site_research_basis",
                     )
@@ -533,7 +567,7 @@ def inspect_checkpoint(school_key: str, checkpoint: Path) -> dict[str, Any]:
         opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
         venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         conf_fields, conferences = _csv_bytes(archive.read(members["conferences.csv"]))
-        games, projection_defects = _projection(ledger, opponents)
+        games, projection_defects = _projection(ledger, opponents, venues)
 
         result["defects"].extend(
             _table_defects(
@@ -631,7 +665,8 @@ def author(
             for filename in AUTHORING_FILES
         }
         _, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
-        games, defects = _projection(ledger, opponents)
+        _, venues = _csv_bytes(archive.read(members["venues.csv"]))
+        games, defects = _projection(ledger, opponents, venues)
         if defects:
             raise ValueError(
                 "Stage 4 source-game projection defects: "
