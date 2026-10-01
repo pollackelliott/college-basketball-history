@@ -478,5 +478,121 @@ class Stage4AuthoringTests(unittest.TestCase):
         )
 
 
+    def test_projection_prefers_source_game_id_namespace(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "source_game_id": "SRC-1",
+                    "research_game_id": "RG-1",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "2000-01",
+                }
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(games[0]["source_game_id"], "SRC-1")
+
+    def test_projection_preserves_literal_raw_text_and_fallback(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "research_game_id": "RAW-PRIMARY",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "2000-01",
+                    "raw_text": "  literal source text  \t",
+                    "source_raw_text": "fallback should not win",
+                },
+                {
+                    "research_game_id": "RAW-FALLBACK",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "2000-01",
+                    "raw_text": "",
+                    "source_raw_text": "  fallback source text  ",
+                },
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(
+            games[0]["raw_text"],
+            "  literal source text  \t",
+        )
+        self.assertEqual(
+            games[1]["raw_text"],
+            "  fallback source text  ",
+        )
+
+    def test_projection_expands_valid_compact_season_label(self):
+        self.assertEqual(
+            mod.project_season_label("1999-00"),
+            "1999-2000",
+        )
+        self.assertEqual(
+            mod.project_season_label("2000-2001"),
+            "2000-2001",
+        )
+
+    def test_projection_rejects_malformed_or_inconsistent_season_label(self):
+        for value in ("1999-01", "1999-0x", "1999-2002"):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    mod.project_season_label(value)
+
+    def test_projection_normalizes_only_legacy_forfeit_loss(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "research_game_id": "FORFEIT-LOSS",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "1986-87",
+                    "played_result": "W",
+                    "administrative_status": "FORFEIT_LOSS",
+                    "raw_text": "accepted literal",
+                }
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        row = games[0]
+        self.assertEqual(row["administrative_status"], "FORFEIT")
+        self.assertEqual(row["played_result"], "W")
+        self.assertEqual(row["raw_text"], "accepted literal")
+        self.assertIn(
+            "FORFEIT_LOSS projected to FORFEIT",
+            row["administrative_note"],
+        )
+        self.assertIn(
+            "played_result=W unchanged",
+            row["administrative_note"],
+        )
+
+        status, note = mod.project_administrative_status(
+            {
+                "administrative_status": "FORFEIT_WIN",
+                "played_result": "L",
+            }
+        )
+        self.assertEqual(status, "FORFEIT_WIN")
+        self.assertEqual(note, "")
+
+
 if __name__ == "__main__":
     unittest.main()

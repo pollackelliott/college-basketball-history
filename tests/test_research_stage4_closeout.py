@@ -1101,5 +1101,50 @@ class Stage4CloseoutTests(unittest.TestCase):
         self.assertEqual(mismatches[0]["field"], "overtime_periods")
 
 
+    def test_dual_id_parent_namespace_and_projection_semantics_compare_cleanly(self):
+        parent = [
+            {
+                "source_game_id": "SRC-1",
+                "research_game_id": "RG-1",
+                "source_program_key": "test",
+                "season_label": "1999-00",
+                "game_date": "2000-03-15",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "",
+                "game_type": "REGULAR_SEASON",
+                "raw_text": "",
+                "source_raw_text": "  accepted literal  ",
+                "stage3a_final_han": "HOME",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "SRC-1",
+                "source_program_key": "test",
+                "season_label": "1999-2000",
+                "game_date": "2000-03-15",
+                "normalized_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "",
+                "curated_site_type": "SOURCE_PROGRAM_HOME",
+                "curated_venue_name": "",
+                "city": "",
+                "state": "",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "  accepted literal  ",
+            }
+        ]
+        self.assertEqual(mod.project_game_id(parent[0]), "SRC-1")
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, []),
+            [],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
