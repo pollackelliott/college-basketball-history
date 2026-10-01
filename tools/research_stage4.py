@@ -25,8 +25,12 @@ from typing import Any
 
 from research_stage4_closeout import (
     closeout,
+    first_literal,
     normalize_game_type,
     normalize_site,
+    project_administrative_status,
+    project_game_id,
+    project_season_label,
     resolve_stage3b_parent_layout,
     sha256_bytes,
     validate_checkpoint_manifest,
@@ -225,7 +229,7 @@ def _projection(
     projected: list[dict[str, str]] = []
     seen: set[str] = set()
     for row in ledger:
-        game_id = _first(row, "source_game_id", "research_game_id")
+        game_id = project_game_id(row)
         if not game_id:
             defects.append({"reason": "BLANK_GAME_ID"})
             continue
@@ -276,12 +280,18 @@ def _projection(
             else:
                 accepted_venue = candidates[0]
 
+        administrative_status, administrative_note = (
+            project_administrative_status(row)
+        )
+
         projected.append(
             {
                 "source_game_id": game_id,
                 "source_program_key": _first(row, "source_program_key"),
                 "source_era": _first(row, "source_era", "season_source"),
-                "season_label": _first(row, "season_label"),
+                "season_label": project_season_label(
+                    _first(row, "season_label")
+                ),
                 "game_date": _first(row, "game_date"),
                 "source_opponent_label": _first(
                     row,
@@ -359,11 +369,13 @@ def _projection(
                     row, "curated_postseason_round", "stage3b_postseason_round"
                 ),
                 "source_page": _first(row, "source_page", "source_pdf_page"),
-                "raw_text": _first(row, "raw_text", "source_raw_text"),
+                "raw_text": first_literal(
+                    row, "raw_text", "source_raw_text"
+                ),
                 "normalization_status": _first(row, "normalization_status")
                 or "RESEARCH_ACCEPTED",
-                "administrative_status": _first(row, "administrative_status"),
-                "administrative_note": _first(row, "administrative_note"),
+                "administrative_status": administrative_status,
+                "administrative_note": administrative_note,
                 "notes": _first(row, "notes", "stage1_notes"),
                 "site_research_status": research_status,
                 "site_research_basis": (

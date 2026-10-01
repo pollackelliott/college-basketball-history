@@ -321,6 +321,79 @@ def _first_parent_value(row: dict[str, str], *fields: str) -> str:
     return ""
 
 
+def first_literal(row: dict[str, str], *fields: str) -> str:
+    """Return the first populated literal field without normalizing its bytes."""
+
+    for field in fields:
+        value = row.get(field)
+        if value is not None and value != "":
+            return value
+    return ""
+
+
+def project_game_id(row: dict[str, str]) -> str:
+    """Project one accepted stable game ID across Research/Stage 4 namespaces."""
+
+    for field in ("source_game_id", "research_game_id"):
+        value = str(row.get(field, "") or "").strip()
+        if value:
+            return value
+    return ""
+
+
+def project_season_label(value: str) -> str:
+    """Project accepted season labels into the six-file YYYY-YYYY form."""
+
+    label = (value or "").strip()
+    if not label:
+        return ""
+
+    full = re.fullmatch(r"(\d{4})-(\d{4})", label)
+    compact = re.fullmatch(r"(\d{4})-(\d{2})", label)
+    if full:
+        start = int(full.group(1))
+        end = int(full.group(2))
+        if end != start + 1:
+            raise ValueError(
+                f"inconsistent full season_label {label!r}; expected "
+                f"{start:04d}-{start + 1:04d}"
+            )
+        return label
+    if compact:
+        start = int(compact.group(1))
+        suffix = int(compact.group(2))
+        expected_suffix = (start + 1) % 100
+        if suffix != expected_suffix:
+            raise ValueError(
+                f"inconsistent compact season_label {label!r}; expected "
+                f"{start:04d}-{expected_suffix:02d}"
+            )
+        return f"{start:04d}-{start + 1:04d}"
+
+    raise ValueError(
+        f"unsupported season_label {label!r}; expected YYYY-YY or YYYY-YYYY"
+    )
+
+
+def project_administrative_status(
+    row: dict[str, str],
+) -> tuple[str, str]:
+    """Project accepted legacy administrative vocabulary without changing play."""
+
+    status = row.get("administrative_status", "").strip()
+    note = row.get("administrative_note", "").strip()
+    if status != "FORFEIT_LOSS":
+        return status, note
+
+    played = row.get("played_result", "").strip()
+    provenance = (
+        "Stage 4 representation normalization: accepted legacy "
+        "administrative_status FORFEIT_LOSS projected to FORFEIT; "
+        f"on-court played_result={played or '[blank]'} unchanged."
+    )
+    return "FORFEIT", f"{note} {provenance}".strip()
+
+
 def normalize_game_type(value: str) -> str:
     folded = (value or "").strip().upper()
     return {
@@ -469,7 +542,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
                 "structured_game_type",
             )
         ),
-        "raw_text": row.get("raw_text", ""),
+        "raw_text": first_literal(row, "raw_text", "source_raw_text"),
     }
 
 
@@ -526,7 +599,7 @@ def compare_parent_semantics(
     venue_rows: list[dict[str, str]],
 ) -> list[dict[str, str]]:
     parent = {
-        str(r.get("research_game_id") or r.get("source_game_id") or "").strip(): r
+        project_game_id(r): r
         for r in parent_rows
     }
     package = {
@@ -862,14 +935,7 @@ def closeout(
         r.get("source_game_id", "").strip()
         for r in package_rows
     ]
-    parent_ids = [
-        str(
-            r.get("research_game_id")
-            or r.get("source_game_id")
-            or ""
-        ).strip()
-        for r in parent_rows
-    ]
+    parent_ids = [project_game_id(r) for r in parent_rows]
     parent_sanity = {
         "status": "PASS",
         "stage3b_checkpoint_sha256": parent_sha,
