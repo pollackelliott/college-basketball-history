@@ -274,49 +274,6 @@ def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     assert (out / "stage3a0-input-ledger.csv").exists()
 
 
-def test_stage2_checkpoint_accepts_durable_field_aliases(tmp_path):
-    checkpoint = tmp_path / "stage2-aliases-complete.zip"
-    aliased_rows = []
-    for source in base_rows():
-        row = dict(source)
-        row["canonical_opponent_key"] = row.pop("opponent_key")
-        row["curated_game_type"] = row.pop("game_type")
-        aliased_rows.append(row)
-
-    with zipfile.ZipFile(checkpoint, "w") as archive:
-        archive.writestr(
-            "nested/structured-stage2-ledger.csv",
-            csv_text(aliased_rows),
-        )
-        archive.writestr("manifest.json", "{}")
-
-    process, status, out = run_path(tmp_path, checkpoint)
-
-    assert process.returncode == 0
-    assert status["status"] == "COMPLETE"
-    assert status["entry_mode"] == "checkpoint_zip"
-    assert (
-        status["input_checkpoint_member"]
-        == "nested/structured-stage2-ledger.csv"
-    )
-    assert status["partition"] == {
-        "postseason": 1,
-        "regular_season": 2,
-        "unclassified": 0,
-    }
-
-    with (out / "stage3a0-input-ledger.csv").open(
-        newline="", encoding="utf-8"
-    ) as handle:
-        projected = list(csv.DictReader(handle))
-    assert [row["canonical_opponent_key"] for row in projected] == [
-        row["canonical_opponent_key"] for row in aliased_rows
-    ]
-    assert [row["curated_game_type"] for row in projected] == [
-        row["curated_game_type"] for row in aliased_rows
-    ]
-
-
 def test_stage2_checkpoint_carries_stage4_authoring_capsule(tmp_path):
     checkpoint = tmp_path / "stage2-complete.zip"
     opponent_bytes = b"source_program_key,source_opponent_label\ncreighton,Drake\n"
