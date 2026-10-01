@@ -21,7 +21,7 @@ def head():
 def rid(r):return pick(r,"research_game_id","source_game_id","game_id","id")
 def is_regular(r):return pick(r,"game_type","curated_game_type","season_type","competition_type").upper() in {"REGULAR_SEASON","REGULAR","RS"}
 def is_neutral(r):return pick(r,"site_type","curated_site_type","site","han","home_away_neutral").upper() in {"NEUTRAL","N"}
-def opp(r):return pick(r,"opponent_key","opponent_program_key","normalized_opponent_key")
+def opp(r):return pick(r,"opponent_key","opponent_program_key","normalized_opponent_key","canonical_opponent_key")
 def venue(r):return pick(r,"curated_venue_name","venue_name","venue")
 def city(r):return pick(r,"city","venue_city")
 def state(r):return pick(r,"state","venue_state")
