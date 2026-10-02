@@ -2,9 +2,12 @@
 """Sealed source-scoped opponent-identity reconciliation.
 
 This transaction is intentionally narrower than the global opponent-identity tools.
-It corrects one literal source-label population whose normalized opponent key is
-wrong, then absorbs the resulting duplicate canonical row into an explicitly named
-counterpart. It never creates a global old-key -> new-key mapping.
+It corrects one explicitly named source game whose normalized opponent key is wrong,
+including when that game belongs to a mixed literal-label population, then absorbs the
+resulting duplicate canonical row into an explicitly named counterpart. It may also
+seal one explicit canonical game-date reconciliation when the two counterpart rows
+carry conflicting dates. It never creates a global old-key -> new-key mapping and it
+never rewrites literal source labels or raw evidence.
 
 Default mode is dry-run. ``--apply`` requires the exact SHA-256 printed by the
 same plan against the same repository state.
@@ -162,6 +165,7 @@ def build_plan(
     stale_canonical_id: str,
     survivor_canonical_id: str,
     basis: str,
+    canonical_game_date: str = "",
 ) -> dict[str, Any]:
     repo = repo.resolve()
     if not all(
@@ -221,22 +225,38 @@ def build_plan(
         expected_games = int(clean(opponent_matches[0].get("games_with_source_label")))
     except ValueError as exc:
         raise ScopedIdentityError("opponents.csv games_with_source_label is invalid") from exc
-    if expected_games != 1:
-        raise ScopedIdentityError(
-            "source-scoped transaction currently requires a one-game literal label population"
-        )
 
     _, source_games = read_csv(paths["source_games"])
-    game_matches = [
+    population_matches = [
         row
         for row in source_games
-        if clean(row.get("source_game_id")) == source_game_id
-        and clean(row.get("source_opponent_label")) == source_label
+        if clean(row.get("source_opponent_label")) == source_label
         and clean(row.get("normalized_opponent_key")) == old_key
+    ]
+    if len(population_matches) != expected_games:
+        raise ScopedIdentityError(
+            f"literal-label population count differs from opponents.csv: "
+            f"expected {expected_games}, found {len(population_matches)}"
+        )
+    game_matches = [
+        row
+        for row in population_matches
+        if clean(row.get("source_game_id")) == source_game_id
     ]
     if len(game_matches) != 1:
         raise ScopedIdentityError(
             f"expected exactly one source game {source_game_id!r} with old identity; found {len(game_matches)}"
+        )
+    target_opponent_matches = [
+        row
+        for row in opponents
+        if clean(row.get("source_opponent_label")) == source_label
+        and clean(row.get("canonical_opponent_key")) == new_key
+    ]
+    if len(target_opponent_matches) > 1:
+        raise ScopedIdentityError(
+            f"expected at most one existing opponents.csv row for {source_label!r}/{new_key!r}; "
+            f"found {len(target_opponent_matches)}"
         )
 
     _, assertions = read_csv(paths["assertions"])
@@ -275,11 +295,20 @@ def build_plan(
     if stale is None or survivor is None:
         raise ScopedIdentityError("stale or survivor canonical row is missing")
     stale_mapped = canonical_view(stale, old_key, new_key)
+    canonical_game_date = clean(canonical_game_date)
+    if canonical_game_date:
+        candidate_dates = {
+            clean(stale_mapped.get("game_date")),
+            clean(survivor.get("game_date")),
+        }
+        candidate_dates.discard("")
+        if canonical_game_date not in candidate_dates:
+            raise ScopedIdentityError(
+                "explicit canonical game date must match one of the two counterpart dates"
+            )
 
-    for field in (
+    exact_fields = [
         "season_label",
-        "game_date",
-        "date_precision",
         "team_a_key",
         "team_b_key",
         "team_a_score",
@@ -287,7 +316,10 @@ def build_plan(
         "result_winner_team_key",
         "overtime_periods",
         "game_type",
-    ):
+    ]
+    if not canonical_game_date:
+        exact_fields.extend(["game_date", "date_precision"])
+    for field in exact_fields:
         if clean(stale_mapped.get(field)) != clean(survivor.get(field)):
             raise ScopedIdentityError(
                 f"named rows are not the same real game after scoped remap: {field} "
@@ -297,6 +329,17 @@ def build_plan(
     final_values: dict[str, str] = {}
     for field in MERGE_FIELDS:
         if field not in canonical_fields:
+            continue
+        if field == "game_date" and canonical_game_date:
+            final_values[field] = canonical_game_date
+            continue
+        if field == "date_precision" and canonical_game_date:
+            chosen = (
+                stale_mapped
+                if clean(stale_mapped.get("game_date")) == canonical_game_date
+                else survivor
+            )
+            final_values[field] = clean(chosen.get("date_precision")) or "EXACT"
             continue
         final_values[field] = merge_value(
             field,
@@ -311,6 +354,46 @@ def build_plan(
     )
     final_values["notes"] = append_note(survivor.get("notes", ""), marker)
 
+    new_discrepancies: list[dict[str, str]] = []
+    if canonical_game_date:
+        existing_ids = [
+            int(clean(row.get("discrepancy_id"))[5:])
+            for row in discrepancies
+            if clean(row.get("discrepancy_id")).startswith("DISC-")
+            and clean(row.get("discrepancy_id"))[5:].isdigit()
+        ]
+        next_id = max(existing_ids or [0]) + 1
+        stale_assertion = assertion_matches[0]
+        survivor_assertions = [
+            row
+            for row in assertions
+            if clean(row.get("canonical_game_id")) == survivor_canonical_id
+        ]
+        for assertion in survivor_assertions:
+            asserted_date = clean(assertion.get("game_date"))
+            if not asserted_date or asserted_date == canonical_game_date:
+                continue
+            new_discrepancies.append(
+                {
+                    "discrepancy_id": f"DISC-{next_id:06d}",
+                    "canonical_game_id": survivor_canonical_id,
+                    "field_name": "game_date",
+                    "source_a_program_key": clean(assertion.get("source_program_key")),
+                    "source_a_value": asserted_date,
+                    "source_b_program_key": source_program,
+                    "source_b_value": clean(stale_assertion.get("game_date")),
+                    "canonical_value": canonical_game_date,
+                    "status": "RESOLVED",
+                    "resolution_basis": basis,
+                    "notes": (
+                        "Source-scoped opponent identity reconciliation preserved the "
+                        "conflicting reciprocal assertion date while selecting the "
+                        "explicitly authorized canonical game date."
+                    ),
+                }
+            )
+            next_id += 1
+
     payload = {
         "schema_version": 1,
         "git_head": git_head(repo),
@@ -323,7 +406,12 @@ def build_plan(
         "stale_canonical_id": stale_canonical_id,
         "survivor_canonical_id": survivor_canonical_id,
         "basis": basis,
+        "canonical_game_date": canonical_game_date,
+        "original_literal_label_games": expected_games,
+        "remaining_old_identity_games": expected_games - 1,
+        "target_mapping_preexisting": bool(target_opponent_matches),
         "final_canonical_values": final_values,
+        "new_discrepancies": new_discrepancies,
         "fingerprints": {
             str(path.relative_to(repo)): sha_file(path)
             for path in paths.values()
@@ -352,6 +440,7 @@ def apply_plan(repo: Path, plan: dict[str, Any], expected_sha256: str) -> dict[s
         repo / "schools" / source_program / "source-games.csv",
         repo / "data/canonical/games.csv",
         repo / "data/evidence/game-assertions.csv",
+        repo / "data/reconciliation/discrepancies.csv",
     ]
     originals = {path: path.read_bytes() for path in paths}
     try:
@@ -364,10 +453,15 @@ def apply_plan(repo: Path, plan: dict[str, Any], expected_sha256: str) -> dict[s
         ]
         if len(opp_matches) != 1:
             raise ScopedIdentityError("opponents.csv changed after sealing")
-        opp_matches[0]["canonical_opponent_key"] = new_key
-        opp_matches[0]["canonical_opponent_name"] = new_name
-        if "current_d1" in opp_fields:
-            opp_matches[0]["current_d1"] = "Yes"
+        old_opponent_row = opp_matches[0]
+        target_opp_matches = [
+            row
+            for row in opponents
+            if clean(row.get("source_opponent_label")) == source_label
+            and clean(row.get("canonical_opponent_key")) == new_key
+        ]
+        if len(target_opp_matches) > 1:
+            raise ScopedIdentityError("target opponents.csv mapping changed after sealing")
 
         source_fields, source_games = read_csv(paths[1])
         source_matches = [
@@ -387,6 +481,72 @@ def apply_plan(repo: Path, plan: dict[str, Any], expected_sha256: str) -> dict[s
             source_matches[0].get("notes", ""),
             f"Identity correction during Implementation: literal source label {source_label!r} resolves to {new_name} ({new_key}), not {old_key}.",
         )
+
+        def mapping_rows(key: str) -> list[dict[str, str]]:
+            return [
+                row
+                for row in source_games
+                if clean(row.get("source_opponent_label")) == source_label
+                and clean(row.get("normalized_opponent_key")) == key
+            ]
+
+        def refresh_mapping(row: dict[str, str], rows: list[dict[str, str]]) -> None:
+            seasons = sorted(
+                clean(item.get("season_label"))
+                for item in rows
+                if clean(item.get("season_label"))
+            )
+            row["games_with_source_label"] = str(len(rows))
+            row["first_season"] = seasons[0] if seasons else ""
+            row["last_season"] = seasons[-1] if seasons else ""
+
+        remaining_old = mapping_rows(old_key)
+        target_rows = mapping_rows(new_key)
+        if not target_rows:
+            raise ScopedIdentityError("corrected source row is missing from target mapping")
+
+        if remaining_old:
+            refresh_mapping(old_opponent_row, remaining_old)
+            if target_opp_matches:
+                target_row = target_opp_matches[0]
+            else:
+                target_row = dict(old_opponent_row)
+                if "index" in opp_fields:
+                    numeric = [
+                        int(clean(row.get("index")))
+                        for row in opponents
+                        if clean(row.get("index")).isdigit()
+                    ]
+                    target_row["index"] = str(max(numeric or [-1]) + 1)
+                target_row["canonical_opponent_key"] = new_key
+                target_row["canonical_opponent_name"] = new_name
+                if "current_d1" in opp_fields:
+                    target_row["current_d1"] = "Yes"
+                if "resolution_status" in opp_fields:
+                    target_row["resolution_status"] = "RESOLVED"
+                if "resolution_method" in opp_fields:
+                    target_row["resolution_method"] = (
+                        "Implementation source-scoped opponent identity reconciliation."
+                    )
+                if "user_choice" in opp_fields:
+                    target_row["user_choice"] = ""
+                if "audit_note" in opp_fields:
+                    target_row["audit_note"] = append_note(
+                        target_row.get("audit_note", ""),
+                        f"{payload['basis']} [source_game_id={source_game_id}]",
+                    )
+                opponents.append(target_row)
+            target_row["canonical_opponent_key"] = new_key
+            target_row["canonical_opponent_name"] = new_name
+            if "current_d1" in opp_fields:
+                target_row["current_d1"] = "Yes"
+            refresh_mapping(target_row, target_rows)
+        else:
+            old_opponent_row["canonical_opponent_key"] = new_key
+            old_opponent_row["canonical_opponent_name"] = new_name
+            if "current_d1" in opp_fields:
+                old_opponent_row["current_d1"] = "Yes"
+            refresh_mapping(old_opponent_row, target_rows)
 
         canonical_fields, canonical = read_csv(paths[2])
         by_id = {
@@ -423,10 +583,23 @@ def apply_plan(repo: Path, plan: dict[str, Any], expected_sha256: str) -> dict[s
         if "match_method" in assertion_fields:
             assertion_matches[0]["match_method"] = "SOURCE_SCOPED_IDENTITY_RECONCILIATION"
 
+        discrepancy_fields, discrepancy_rows = read_csv(paths[4])
+        existing_discrepancy_ids = {
+            clean(row.get("discrepancy_id")) for row in discrepancy_rows
+        }
+        for row in payload.get("new_discrepancies", []):
+            if clean(row.get("discrepancy_id")) in existing_discrepancy_ids:
+                raise ScopedIdentityError("discrepancy row changed after sealing")
+            discrepancy_rows.append(
+                {field: clean(row.get(field)) for field in discrepancy_fields}
+            )
+            existing_discrepancy_ids.add(clean(row.get("discrepancy_id")))
+
         write_csv(paths[0], opp_fields, opponents)
         write_csv(paths[1], source_fields, source_games)
         write_csv(paths[2], canonical_fields, canonical)
         write_csv(paths[3], assertion_fields, assertions)
+        write_csv(paths[4], discrepancy_fields, discrepancy_rows)
 
         validation = subprocess.run(
             [sys.executable, "tools/validate_data.py"], cwd=repo, text=True
@@ -443,6 +616,8 @@ def apply_plan(repo: Path, plan: dict[str, Any], expected_sha256: str) -> dict[s
         "source_rows_changed": 1,
         "assertions_repointed": 1,
         "canonical_rows_absorbed": 1,
+        "opponent_mapping_split": int(payload.get("remaining_old_identity_games", 0) > 0),
+        "discrepancies_added": len(payload.get("new_discrepancies", [])),
         "survivor_canonical_id": survivor_id,
     }
 
@@ -459,6 +634,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--stale-canonical-id", required=True)
     parser.add_argument("--survivor-canonical-id", required=True)
     parser.add_argument("--basis", required=True)
+    parser.add_argument(
+        "--canonical-game-date",
+        default="",
+        help=(
+            "Optional explicitly authorized canonical date when stale and survivor "
+            "counterparts disagree on game_date. Must equal one counterpart date."
+        ),
+    )
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--expected-plan-sha256", default="")
@@ -480,6 +663,7 @@ def main() -> int:
             stale_canonical_id=args.stale_canonical_id,
             survivor_canonical_id=args.survivor_canonical_id,
             basis=args.basis,
+            canonical_game_date=args.canonical_game_date,
         )
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -493,6 +677,16 @@ def main() -> int:
             print(
                 "Canonical absorb:     "
                 f"{plan['payload']['stale_canonical_id']} -> {plan['payload']['survivor_canonical_id']}"
+            )
+            if plan["payload"].get("canonical_game_date"):
+                print(
+                    "Canonical date:       "
+                    + plan["payload"]["canonical_game_date"]
+                )
+            print(
+                "Literal-label split:   "
+                f"{plan['payload']['original_literal_label_games']} -> "
+                f"{plan['payload']['remaining_old_identity_games']} old / 1 corrected"
             )
             print(f"Plan SHA-256:         {plan['sha256']}")
             print("DRY RUN: no tracked basketball data changed.")
