@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000226",
+      "absorbed_venue_id": "VEN-000677",
+      "expected_canonical_rows": 2,
+      "expected_school_rows": 1,
+      "resolution_basis": "Control Center approved Georgia Tech Stage 1 maintenance: current main contains duplicate physical identities for San Diego's Cox Arena/Viejas Arena building. Preserve established VEN-000226 / viejas-arena, whose registry already carries Cox Arena as a historical alias with institutional source basis, and retire later Cincinnati-onboarding duplicate VEN-000677 / cox-arena-at-aztec-bowl. Georgia Tech Research historical meaning is unchanged."
+    }
+  ]
+}
