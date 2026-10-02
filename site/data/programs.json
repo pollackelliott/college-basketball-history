@@ -2435,7 +2435,7 @@
       "state": "GA",
       "primary_hex": "#B3A369",
       "secondary_hex": "#003057",
-      "history_start_season": null,
+      "history_start_season": "1905-1906",
       "conference_regular_season_championships": 3,
       "conference_tournament_championships": 5,
       "ncaa_tournament_appearances": 17,
@@ -2444,7 +2444,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 2004,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
