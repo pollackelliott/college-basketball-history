@@ -194,6 +194,7 @@ class HistoricalRoundAccomplishmentCrosscheckTests(unittest.TestCase):
                     "season_label": "1959-1960",
                     "game_date": "1960-03-07",
                     "normalized_opponent_key": "opponent",
+                    "played_result": "L",
                 },
                 "canonical_game_id": "",
                 "canonical_game_date": "",
@@ -212,6 +213,37 @@ class HistoricalRoundAccomplishmentCrosscheckTests(unittest.TestCase):
         self.assertEqual(len(decisions), 1)
         self.assertEqual(decisions[0]["category"], "ncaa_round_patch")
         self.assertIn("APPLY_NCAA_ROUND_PATCH", decisions[0]["allowed_actions"])
+
+    def test_round_gap_requires_enough_distinct_candidate_seasons(self):
+        reference = dict(self.reference)
+        reference["final_four_appearances"] = "3"
+        reference["best_finish_key"] = "FINAL_FOUR"
+        reference["best_finish_year"] = "1954"
+        derived, _ = _accomplishment_conflicts(
+            self.program,
+            self.reference,
+            self.games,
+        )
+        candidates = [
+            {
+                "source": {
+                    "source_game_id": "USC-1960-ROUND",
+                    "season_label": "1959-1960",
+                    "game_date": "1960-03-07",
+                    "normalized_opponent_key": "opponent",
+                    "played_result": "L",
+                },
+                "calendar_year": 1960,
+            }
+        ]
+
+        self.assertFalse(
+            _accomplishment_round_conflict_is_reviewable(
+                reference,
+                derived,
+                candidates,
+            )
+        )
 
     def test_round_gap_cannot_hide_shallower_reference(self):
         reference = dict(self.reference)
