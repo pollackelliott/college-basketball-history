@@ -30,6 +30,7 @@ from integration_freeze_guard import assert_no_unapproved_semantic_drift
 from onboarding_plan import (
     WorkflowError,
     approve_plan,
+    apply_pre_ingest_source_patches,
     apply_publication_decisions,
     apply_reconciliation_decisions,
     archive_approved_plan,
@@ -552,6 +553,11 @@ def execute_approved_in_place(
     approved: dict[str, Any],
 ) -> dict[str, Any]:
     school_key = approved["school_key"]
+
+    print("\n=== owner-approved pre-ingest source patches ===")
+    pre_ingest_source_patches = apply_pre_ingest_source_patches(repo, approved)
+    print(json.dumps(pre_ingest_source_patches, sort_keys=True))
+
     plan_path = write_plan_for_ingest(repo, approved)
     try:
         print("\n=== ingestion apply ===")
@@ -617,6 +623,7 @@ def execute_approved_in_place(
         raise WorkflowError("site/data changed during the deterministic replay")
     print("PASS: repeated site build produced identical JSON hashes.")
     return {
+        "pre_ingest_source_patches": pre_ingest_source_patches,
         "ingestion_output": ingestion_output,
         "reconciliation": reconciliation,
         "reciprocal_home_chronology": reciprocal_home_chronology,
