@@ -117,6 +117,12 @@ NCAA_ROUND_PATCH_VALUES = {
     "Final Four",
     "Championship",
 }
+NEW_GAME_SITE_PATCH_ACTIONS = {"APPLY_SOURCE_SITE_PATCH"}
+NEW_GAME_SITE_PATCH_VALUES = {
+    "SOURCE_PROGRAM_HOME",
+    "OPPONENT_HOME",
+    "NEUTRAL",
+}
 
 SOURCE_ASSERTION_COPY_FIELDS = tuple(
     field
@@ -876,6 +882,90 @@ def _ncaa_round_patch_decisions(
     return decisions
 
 
+def _new_game_site_patch_decision(
+    school_key: str,
+    source: dict[str, str],
+    status: str,
+    venue_name_map: dict[str, str],
+    venue_metadata: dict[str, list[dict[str, str]]],
+    global_venues_by_id: dict[str, dict[str, str]],
+) -> dict[str, Any] | None:
+    """Return an owner-gated H/A/N patch decision for a new NCAA game when safe.
+
+    This path is deliberately narrow. It applies only when Research already fixed
+    the exact physical venue/location, the new game remains UNKNOWN for H/A/N, and
+    at least one explicit non-UNKNOWN source-site classification would make the
+    projected NCAA canonical row fully valid. The frozen source row is not changed
+    during preflight; any approved patch is applied transactionally before ingestion.
+    """
+
+    if (
+        status != ingest_school.NEW_GAME
+        or source.get("curated_game_type", "").strip() != "NCAA_TOURNAMENT"
+        or source.get("curated_site_type", "").strip() != "UNKNOWN"
+        or not source.get("curated_venue_name", "").strip()
+    ):
+        return None
+
+    venue = ingest_school.resolve_venue_metadata(source, venue_metadata)
+    venue_key = venue.get("venue_key", "").strip()
+    venue_id = venue.get("venue_id", "").strip()
+    if not venue_key or not venue_id:
+        return None
+
+    viable_sites: list[str] = []
+    for proposed_site in sorted(NEW_GAME_SITE_PATCH_VALUES):
+        projected = dict(source)
+        projected["curated_site_type"] = proposed_site
+        source_id = source.get("source_game_id", "").strip() or "UNKNOWN"
+        candidate = ingest_school.build_new_canonical(
+            projected,
+            f"PREFLIGHT-NCAA-{source_id}",
+            venue_name_map,
+            venue_metadata,
+        )
+        if not canonical_ncaa_errors([candidate], global_venues_by_id):
+            viable_sites.append(proposed_site)
+
+    if not viable_sites:
+        return None
+
+    source_game_id = source.get("source_game_id", "").strip()
+    opponent = source.get("normalized_opponent_key", "").strip()
+    return {
+        "decision_id": _decision_id("NEW-GAME-SITE-PATCH", source_game_id),
+        "category": "new_game_site_patch",
+        "source_game_id": source_game_id,
+        "canonical_game_id": "",
+        "season_label": source.get("season_label", "").strip(),
+        **_date_fields(source.get("game_date", "").strip(), ""),
+        "matchup": f"{school_key} vs {opponent}",
+        "field_name": "site_type",
+        "source_value": "UNKNOWN",
+        "canonical_value": "[new canonical game]",
+        "relevant_evidence": (
+            "New NCAA Tournament game has an exact accepted physical venue "
+            f"{source.get('curated_venue_name', '').strip()} "
+            f"({venue_key}/{venue_id}) with registry geography "
+            f"{venue.get('city', '').strip()}, {venue.get('state', '').strip()}, "
+            "but frozen H/A/N remains UNKNOWN. NCAA publication requires the exact "
+            "venue/location and an explicit owner historical ruling is required before "
+            "the source H/A/N may change."
+        ),
+        "recommended_action": "REVIEW_REQUIRED",
+        "allowed_actions": sorted(NEW_GAME_SITE_PATCH_ACTIONS),
+        "allowed_source_site_values": viable_sites,
+        "decision": "PENDING",
+        "resolution_basis": "",
+        "canonical_patch_json": "{}",
+        "source_patch_json": "{}",
+        "notes": (
+            "If approved, the sealed transaction patches curated_site_type before "
+            "ingestion; raw_text and the Integration Freeze baseline remain preserved."
+        ),
+    }
+
+
 def _planned_venue_geography_errors(
     source: dict[str, str],
     status: str,
@@ -1390,7 +1480,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 + problem
             )
 
-        for problem in _planned_ncaa_safety_errors(
+        ncaa_problems = _planned_ncaa_safety_errors(
             source,
             status,
             game_id,
@@ -1398,11 +1488,24 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             venue_name_map,
             venue_metadata,
             global_venues_by_id,
-        ):
-            blockers.append(
-                f"{source.get('source_game_id', '')}: NCAA safety before owner review: "
-                + problem
+        )
+        if ncaa_problems:
+            site_patch_decision = _new_game_site_patch_decision(
+                school_key,
+                source,
+                status,
+                venue_name_map,
+                venue_metadata,
+                global_venues_by_id,
             )
+            if site_patch_decision is not None:
+                decisions.append(site_patch_decision)
+            else:
+                for problem in ncaa_problems:
+                    blockers.append(
+                        f"{source.get('source_game_id', '')}: "
+                        "NCAA safety before owner review: " + problem
+                    )
 
         if status == ingest_school.REVIEW:
             if method == "SOURCE_ASSERTION_LINKS_MULTIPLE_CANONICAL_GAMES":
@@ -1988,6 +2091,30 @@ def approve_plan(
         )
         unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
+        if item.get("category") == "new_game_site_patch":
+            if decision != "APPLY_SOURCE_SITE_PATCH":
+                raise WorkflowError(
+                    f"{decision_id}: unsupported new-game site decision {decision!r}"
+                )
+            if canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: new-game site patch may not carry a canonical patch"
+                )
+            if set(source_patch) != {"curated_site_type"}:
+                raise WorkflowError(
+                    f"{decision_id}: APPLY_SOURCE_SITE_PATCH requires exactly "
+                    "source curated_site_type"
+                )
+            desired_site = source_patch["curated_site_type"].strip()
+            allowed_sites = set(item.get("allowed_source_site_values", []))
+            if (
+                desired_site not in NEW_GAME_SITE_PATCH_VALUES
+                or desired_site not in allowed_sites
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: source site patch {desired_site!r} is not one "
+                    "of the preflight-proven viable values"
+                )
         if item.get("category") == "ncaa_round_patch":
             if decision == "APPLY_NCAA_ROUND_PATCH":
                 if set(canonical_patch) != {"postseason_round"}:
@@ -2936,6 +3063,84 @@ def _record_reciprocal_discrepancies(
             next_number += 1
             counts["reciprocal_discrepancies_added"] += 1
 
+    return dict(counts)
+
+
+def apply_pre_ingest_source_patches(
+    repo: Path,
+    approved: dict[str, Any],
+) -> dict[str, int]:
+    """Apply sealed source-only patches that must exist before ingestion.
+
+    The only supported population is owner-approved H/A/N for a NEW_GAME whose
+    authoritative preflight could not otherwise satisfy NCAA site safety. This runs
+    only inside the sealed disposable/apply transaction, never during preflight.
+    """
+
+    items = [
+        item
+        for item in approved.get("decisions", [])
+        if item.get("category") == "new_game_site_patch"
+    ]
+    if not items:
+        return {}
+
+    school_key = approved["school_key"]
+    source_path = repo / "schools" / school_key / "source-games.csv"
+    source_fields, source_rows = read_csv_table(source_path)
+    source_by_id = {
+        row.get("source_game_id", "").strip(): row
+        for row in source_rows
+        if row.get("source_game_id", "").strip()
+    }
+    counts = Counter()
+
+    for item in items:
+        decision_id = item["decision_id"]
+        if item.get("decision") != "APPLY_SOURCE_SITE_PATCH":
+            raise WorkflowError(
+                f"{decision_id}: unsupported pre-ingest source decision "
+                f"{item.get('decision')!r}"
+            )
+        source_game_id = item.get("source_game_id", "").strip()
+        source = source_by_id.get(source_game_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: source row {source_game_id!r} is missing"
+            )
+        current_site = source.get("curated_site_type", "").strip()
+        expected_site = str(item.get("source_value", "") or "").strip()
+        if current_site != expected_site:
+            raise WorkflowError(
+                f"{decision_id}: frozen source site changed before sealed apply; "
+                f"expected {expected_site!r}, found {current_site!r}"
+            )
+        patch = item.get("source_patch", {})
+        if set(patch) != {"curated_site_type"}:
+            raise WorkflowError(
+                f"{decision_id}: pre-ingest site patch must contain only "
+                "curated_site_type"
+            )
+        desired_site = str(patch["curated_site_type"]).strip()
+        allowed_sites = set(item.get("allowed_source_site_values", []))
+        if (
+            desired_site not in NEW_GAME_SITE_PATCH_VALUES
+            or desired_site not in allowed_sites
+        ):
+            raise WorkflowError(
+                f"{decision_id}: sealed site {desired_site!r} is not a "
+                "preflight-proven viable value"
+            )
+
+        source["curated_site_type"] = desired_site
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "Owner-approved new-game H/A/N patch applied by sealed onboarding "
+            f"decision {decision_id}; raw_text preserved.",
+        )
+        counts["new_game_site_patches"] += 1
+
+    write_csv_preserving_format(source_path, source_fields, source_rows)
     return dict(counts)
 
 

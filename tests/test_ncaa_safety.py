@@ -1,5 +1,6 @@
 import csv
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -10,7 +11,12 @@ sys.path.insert(0, str(TOOLS))
 
 import ingest_school  # noqa: E402
 from ncaa_safety import canonical_ncaa_errors, ncaa_evidence_errors  # noqa: E402
-from onboarding_plan import _planned_ncaa_safety_errors, build_plan  # noqa: E402
+from onboarding_plan import (  # noqa: E402
+    _new_game_site_patch_decision,
+    _planned_ncaa_safety_errors,
+    apply_pre_ingest_source_patches,
+    build_plan,
+)
 from venue_reference import load_global_venue_reference  # noqa: E402
 
 
@@ -228,6 +234,131 @@ class NcaaSafetyTests(unittest.TestCase):
         )
         self.assertTrue(errors)
         self.assertTrue(any("site is incomplete" in error for error in errors))
+        self.assertIsNone(
+            _new_game_site_patch_decision(
+                "alpha",
+                source,
+                ingest_school.NEW_GAME,
+                {},
+                {},
+                self.venues_by_id,
+            )
+        )
+
+    def test_new_unknown_site_ncaa_with_exact_venue_becomes_owner_patch_decision(self):
+        source = {
+            "source_program_key": "alpha",
+            "source_game_id": "NEW-NCAA-SITE",
+            "season_label": "2025-2026",
+            "game_date": "2026-03-20",
+            "normalized_opponent_key": "beta",
+            "team_score": "70",
+            "opponent_score": "65",
+            "played_result": "W",
+            "overtime_periods": "0",
+            "curated_site_type": "UNKNOWN",
+            "curated_venue_name": "Greensboro Coliseum",
+            "city": "Greensboro",
+            "state": "NC",
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "R64",
+        }
+        venue_metadata = {
+            "greensboro coliseum": [
+                {
+                    "venue_key": "greensboro-coliseum",
+                    "venue_id": "VEN-000076",
+                    "city": "Greensboro",
+                    "state": "NC",
+                    "local_valid_from": "",
+                    "local_valid_to": "",
+                    "physical_opened": "",
+                    "physical_closed": "",
+                }
+            ]
+        }
+
+        errors = _planned_ncaa_safety_errors(
+            source,
+            ingest_school.NEW_GAME,
+            "",
+            {},
+            {},
+            venue_metadata,
+            self.venues_by_id,
+        )
+        self.assertTrue(any("site is incomplete" in error for error in errors))
+
+        decision = _new_game_site_patch_decision(
+            "alpha",
+            source,
+            ingest_school.NEW_GAME,
+            {},
+            venue_metadata,
+            self.venues_by_id,
+        )
+        self.assertIsNotNone(decision)
+        self.assertEqual(decision["category"], "new_game_site_patch")
+        self.assertEqual(
+            decision["allowed_actions"],
+            ["APPLY_SOURCE_SITE_PATCH"],
+        )
+        self.assertEqual(
+            set(decision["allowed_source_site_values"]),
+            {"SOURCE_PROGRAM_HOME", "OPPONENT_HOME", "NEUTRAL"},
+        )
+
+    def test_pre_ingest_owner_site_patch_changes_only_curated_site_and_notes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            school = repo / "schools" / "alpha"
+            school.mkdir(parents=True)
+            source_path = school / "source-games.csv"
+            fieldnames = [
+                "source_game_id",
+                "curated_site_type",
+                "notes",
+                "raw_text",
+            ]
+            with source_path.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerow(
+                    {
+                        "source_game_id": "NEW-NCAA-SITE",
+                        "curated_site_type": "UNKNOWN",
+                        "notes": "",
+                        "raw_text": "literal source evidence",
+                    }
+                )
+
+            approved = {
+                "school_key": "alpha",
+                "approved_plan_hash": "a" * 64,
+                "decisions": [
+                    {
+                        "decision_id": "NEW-GAME-SITE-PATCH-NEW-NCAA-SITE",
+                        "category": "new_game_site_patch",
+                        "source_game_id": "NEW-NCAA-SITE",
+                        "source_value": "UNKNOWN",
+                        "allowed_source_site_values": ["SOURCE_PROGRAM_HOME"],
+                        "decision": "APPLY_SOURCE_SITE_PATCH",
+                        "source_patch": {
+                            "curated_site_type": "SOURCE_PROGRAM_HOME",
+                        },
+                    }
+                ],
+            }
+
+            counts = apply_pre_ingest_source_patches(repo, approved)
+            self.assertEqual(counts, {"new_game_site_patches": 1})
+            updated = rows(source_path)[0]
+            self.assertEqual(
+                updated["curated_site_type"],
+                "SOURCE_PROGRAM_HOME",
+            )
+            self.assertEqual(updated["raw_text"], "literal source evidence")
+            self.assertIn("Owner-approved new-game H/A/N patch", updated["notes"])
 
     def test_existing_vanderbilt_plan_is_not_retroactively_blocked(self):
         plan = build_plan(ROOT, "vanderbilt")
