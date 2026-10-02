@@ -2953,10 +2953,7 @@ def apply_reconciliation_decisions(
     touched_canonical_ids: set[str] = set()
     touched_source_ids: set[str] = set()
     for item in reconciliation_items:
-        game_id = item["canonical_game_id"]
-        canonical = canonical_by_id.get(game_id)
-        if canonical is None:
-            raise WorkflowError(f"{item['decision_id']}: canonical row is missing after ingestion")
+        game_id = item.get("canonical_game_id", "").strip()
 
         if item.get("category") == "ncaa_round_patch":
             source_game_id = item["source_game_id"]
@@ -3046,6 +3043,12 @@ def apply_reconciliation_decisions(
             touched_canonical_ids.add(actual_game_id)
             touched_source_ids.add(source_game_id)
             continue
+
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"{item['decision_id']}: canonical row is missing after ingestion"
+            )
 
         if item.get("category") == "canonical_site_patch":
             touched_canonical_ids.add(game_id)
