@@ -1,0 +1,173 @@
+name: Disposable Alabama Baylor source-scoped repair
+
+on:
+  push:
+    branches:
+      - control-center/alabama-baylor-source-scoped-repair-exec
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out execution branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify execution base
+        shell: bash
+        run: |
+          test "$(git merge-base origin/main HEAD)" = "cbf381b819f4d250d6afc11434a6b8f0d8545018"
+          test "$(git rev-parse origin/main)" = "cbf381b819f4d250d6afc11434a6b8f0d8545018"
+
+      - name: Build sealed source-scoped plan
+        shell: bash
+        run: |
+          python tools/remediate_source_scoped_opponent_identity.py \
+            --source-program alabama \
+            --source-opponent-label "Virginia Tech ^" \
+            --source-game-id ALARAW-00923 \
+            --from-key virginia-tech \
+            --to-key baylor \
+            --to-name Baylor \
+            --stale-canonical-id CBBG-0028395 \
+            --survivor-canonical-id CBBG-0099629 \
+            --canonical-game-date 1960-12-16 \
+            --basis "Owner-authorized Alabama/Baylor reconciliation: Alabama's preserved source row records a 72-55 win on 1960-12-16; the Baylor reciprocal assertion is preserved as conflicting date evidence at 1960-12-14; the false Virginia Tech identity is corrected only for ALARAW-00923." \
+            --output /tmp/alabama-baylor-plan.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/alabama-baylor-plan.json'))
+          assert p['payload']['original_literal_label_games'] == 3
+          assert p['payload']['remaining_old_identity_games'] == 2
+          assert p['payload']['canonical_game_date'] == '1960-12-16'
+          assert len(p['payload']['new_discrepancies']) == 1
+          print('PLAN_SHA256='+p['sha256'])
+          PY
+
+      - name: Apply exact sealed plan
+        shell: bash
+        run: |
+          PLAN_SHA="$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/alabama-baylor-plan.json'))['sha256'])
+          PY
+          )"
+          python tools/remediate_source_scoped_opponent_identity.py \
+            --source-program alabama \
+            --source-opponent-label "Virginia Tech ^" \
+            --source-game-id ALARAW-00923 \
+            --from-key virginia-tech \
+            --to-key baylor \
+            --to-name Baylor \
+            --stale-canonical-id CBBG-0028395 \
+            --survivor-canonical-id CBBG-0099629 \
+            --canonical-game-date 1960-12-16 \
+            --basis "Owner-authorized Alabama/Baylor reconciliation: Alabama's preserved source row records a 72-55 win on 1960-12-16; the Baylor reciprocal assertion is preserved as conflicting date evidence at 1960-12-14; the false Virginia Tech identity is corrected only for ALARAW-00923." \
+            --expected-plan-sha256 "$PLAN_SHA" \
+            --apply
+
+      - name: Refresh generated site data and verify repository
+        shell: bash
+        run: |
+          python tools/build_site_data.py --apply
+          python tools/validate_data.py
+          python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
+
+      - name: Verify exact Alabama Baylor outcome
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as f:
+                  return list(csv.DictReader(f))
+
+          sources=rows('schools/alabama/source-games.csv')
+          by_source={r['source_game_id']:r for r in sources}
+          assert by_source['ALARAW-00923']['normalized_opponent_key']=='baylor'
+          assert by_source['ALARAW-00923']['game_date']=='1960-12-16'
+          assert by_source['ALARAW-00923']['raw_text']=='Dec. 16 vs. Virginia Tech ^ -/- W 72 55'
+          assert by_source['ALARAW-00948']['normalized_opponent_key']=='virginia-tech'
+          assert by_source['ALARAW-01025']['normalized_opponent_key']=='virginia-tech'
+
+          opponents=rows('schools/alabama/opponents.csv')
+          label=[r for r in opponents if r['source_opponent_label']=='Virginia Tech ^']
+          old=[r for r in label if r['canonical_opponent_key']=='virginia-tech']
+          new=[r for r in label if r['canonical_opponent_key']=='baylor']
+          assert len(old)==1 and old[0]['games_with_source_label']=='2'
+          assert old[0]['first_season']=='1961-1962'
+          assert old[0]['last_season']=='1964-1965'
+          assert len(new)==1 and new[0]['games_with_source_label']=='1'
+          assert new[0]['first_season']=='1960-1961'
+          assert new[0]['last_season']=='1960-1961'
+
+          games=rows('data/canonical/games.csv')
+          by_game={r['canonical_game_id']:r for r in games}
+          assert 'CBBG-0028395' not in by_game
+          assert by_game['CBBG-0099629']['game_date']=='1960-12-16'
+          assert by_game['CBBG-0099629']['site_city']=='Birmingham'
+          assert by_game['CBBG-0099629']['site_state']=='AL'
+
+          assertions=rows('data/evidence/game-assertions.csv')
+          a=next(r for r in assertions if r['source_program_key']=='alabama' and r['source_game_id']=='ALARAW-00923')
+          b=next(r for r in assertions if r['source_program_key']=='baylor' and r['canonical_game_id']=='CBBG-0099629')
+          assert a['canonical_game_id']=='CBBG-0099629'
+          assert a['normalized_opponent_key']=='baylor'
+          assert a['game_date']=='1960-12-16'
+          assert b['game_date']=='1960-12-14'
+
+          discrepancies=rows('data/reconciliation/discrepancies.csv')
+          d=[
+              r for r in discrepancies
+              if r['canonical_game_id']=='CBBG-0099629'
+              and r['field_name']=='game_date'
+              and r['status']=='RESOLVED'
+              and r['canonical_value']=='1960-12-16'
+          ]
+          assert len(d)==1
+          assert d[0]['source_a_program_key']=='baylor'
+          assert d[0]['source_a_value']=='1960-12-14'
+          assert d[0]['source_b_program_key']=='alabama'
+          assert d[0]['source_b_value']=='1960-12-16'
+          print('ALABAMA_BAYLOR_SOURCE_SCOPED_REPAIR=PASS')
+          PY
+
+      - name: Commit verified execution result
+        shell: bash
+        run: |
+          python - <<'PY'
+          import subprocess
+          allowed_core={
+              'schools/alabama/opponents.csv',
+              'schools/alabama/source-games.csv',
+              'data/canonical/games.csv',
+              'data/evidence/game-assertions.csv',
+              'data/reconciliation/discrepancies.csv',
+          }
+          changed=subprocess.check_output(['git','diff','--name-only'], text=True).splitlines()
+          unexpected=[p for p in changed if p not in allowed_core and not p.startswith('site/data/')]
+          if unexpected:
+              raise SystemExit('unexpected changed path(s): '+', '.join(unexpected))
+          if not set(allowed_core).issubset(set(changed)):
+              raise SystemExit('missing expected core path(s): '+', '.join(sorted(allowed_core-set(changed))))
+          print('CHANGED_PATHS')
+          for p in changed:
+              print(p)
+          subprocess.run(['git','add','--',*changed], check=True)
+          PY
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Repair Alabama Baylor source-scoped identity"
+          git push origin HEAD:${{ github.ref_name }}
