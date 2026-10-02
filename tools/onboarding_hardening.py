@@ -593,6 +593,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
                 "discrepancy",
                 "conditional_discrepancy",
                 "canonical_site_patch",
+                "ncaa_round_patch",
             }:
                 raise WorkflowError(
                     f"{did}: historical patches are not valid on {category} decisions"
