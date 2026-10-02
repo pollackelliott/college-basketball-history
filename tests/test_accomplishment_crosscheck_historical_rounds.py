@@ -11,6 +11,8 @@ import ingest_school  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     _accomplishment_conflicts,
     _accomplishment_crosscheck_game,
+    _accomplishment_round_conflict_is_reviewable,
+    _ncaa_round_patch_decisions,
 )
 
 
@@ -174,6 +176,102 @@ class HistoricalRoundAccomplishmentCrosscheckTests(unittest.TestCase):
             derived["incomplete_reasons"],
         )
         self.assertEqual(conflicts, [])
+
+    def test_deeper_reference_with_blank_round_candidate_is_gate_reviewable(self):
+        reference = dict(self.reference)
+        reference["final_four_appearances"] = "2"
+        reference["best_finish_key"] = "NATIONAL_RUNNER_UP"
+        reference["best_finish_year"] = "1960"
+        derived, _ = _accomplishment_conflicts(
+            self.program,
+            reference,
+            self.games,
+        )
+        candidates = [
+            {
+                "source": {
+                    "source_game_id": "USC-1960-TITLE",
+                    "season_label": "1959-1960",
+                    "game_date": "1960-03-07",
+                    "normalized_opponent_key": "opponent",
+                    "played_result": "L",
+                },
+                "canonical_game_id": "",
+                "canonical_game_date": "",
+                "calendar_year": 1960,
+            }
+        ]
+
+        self.assertTrue(
+            _accomplishment_round_conflict_is_reviewable(
+                reference,
+                derived,
+                candidates,
+            )
+        )
+        decisions = _ncaa_round_patch_decisions("usc", candidates)
+        self.assertEqual(len(decisions), 1)
+        self.assertEqual(decisions[0]["category"], "ncaa_round_patch")
+        self.assertIn("APPLY_NCAA_ROUND_PATCH", decisions[0]["allowed_actions"])
+
+    def test_round_gap_requires_enough_distinct_candidate_seasons(self):
+        reference = dict(self.reference)
+        reference["final_four_appearances"] = "3"
+        reference["best_finish_key"] = "FINAL_FOUR"
+        reference["best_finish_year"] = "1954"
+        derived, _ = _accomplishment_conflicts(
+            self.program,
+            self.reference,
+            self.games,
+        )
+        candidates = [
+            {
+                "source": {
+                    "source_game_id": "USC-1960-ROUND",
+                    "season_label": "1959-1960",
+                    "game_date": "1960-03-07",
+                    "normalized_opponent_key": "opponent",
+                    "played_result": "L",
+                },
+                "calendar_year": 1960,
+            }
+        ]
+
+        self.assertFalse(
+            _accomplishment_round_conflict_is_reviewable(
+                reference,
+                derived,
+                candidates,
+            )
+        )
+
+    def test_round_gap_cannot_hide_shallower_reference(self):
+        reference = dict(self.reference)
+        reference["final_four_appearances"] = "0"
+        derived, _ = _accomplishment_conflicts(
+            self.program,
+            self.reference,
+            self.games,
+        )
+        candidates = [
+            {
+                "source": {
+                    "source_game_id": "USC-1960-ROUND",
+                    "season_label": "1959-1960",
+                    "game_date": "1960-03-07",
+                    "normalized_opponent_key": "opponent",
+                },
+                "calendar_year": 1960,
+            }
+        ]
+
+        self.assertFalse(
+            _accomplishment_round_conflict_is_reviewable(
+                reference,
+                derived,
+                candidates,
+            )
+        )
 
     def test_blank_round_diagnostic_remains_when_aggregates_conflict(self):
         reference = dict(self.reference)
