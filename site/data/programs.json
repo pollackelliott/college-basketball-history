@@ -4859,7 +4859,7 @@
       "state": "NC",
       "primary_hex": "#CC0000",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "1910-1911",
       "conference_regular_season_championships": 13,
       "conference_tournament_championships": 18,
       "ncaa_tournament_appearances": 30,
@@ -4868,7 +4868,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1983,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
