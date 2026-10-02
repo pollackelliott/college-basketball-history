@@ -39,6 +39,7 @@ from location_safety import (
 )
 from ncaa_safety import canonical_ncaa_errors
 from program_history import (
+    BEST_FINISH_RANK,
     derive_ncaa_accomplishments,
     history_scope_errors,
     partition_source_rows,
@@ -106,6 +107,16 @@ ACCOMPLISHMENT_ACTIONS = {
 PUBLICATION_ACTIONS = {"ENABLE_PUBLIC_PAGE", "KEEP_DISABLED"}
 CANONICAL_SITE_PATCH_ACTIONS = {"APPLY_CANONICAL_PATCH", "LEAVE_UNRESOLVED"}
 CANONICAL_SITE_PATCH_FIELDS = {"venue_key", "venue_id", "site_city", "site_state"}
+NCAA_ROUND_PATCH_ACTIONS = {"APPLY_NCAA_ROUND_PATCH", "LEAVE_UNRESOLVED"}
+NCAA_ROUND_PATCH_VALUES = {
+    "Play-in",
+    "R64",
+    "R32",
+    "Sweet Sixteen",
+    "Elite Eight",
+    "Final Four",
+    "Championship",
+}
 
 SOURCE_ASSERTION_COPY_FIELDS = tuple(
     field
@@ -713,6 +724,114 @@ def _accomplishment_conflicts(
     return derived, conflicts
 
 
+def _accomplishment_round_conflict_is_reviewable(
+    reference: dict[str, str],
+    derived: dict[str, Any],
+    candidates: list[dict[str, Any]],
+) -> bool:
+    """Return whether missing NCAA rounds can plausibly explain the aggregate mismatch.
+
+    This is deliberately conservative. Missing round metadata may reveal a deeper
+    finish, but it may not reduce an already-derived accomplishment or change the
+    number of NCAA appearance seasons. The exact round remains an owner-reviewed
+    historical fact and is never inferred here.
+    """
+
+    if not candidates:
+        return False
+
+    try:
+        reference_appearances = int(reference.get("ncaa_tournament_appearances", ""))
+        reference_final_fours = int(reference.get("final_four_appearances", ""))
+        reference_titles = int(reference.get("national_championships", ""))
+    except ValueError:
+        return False
+
+    if reference_appearances != int(derived["ncaa_tournament_appearances"]):
+        return False
+    if reference_final_fours < int(derived["final_four_appearances"]):
+        return False
+    if reference_titles < int(derived["national_championships"]):
+        return False
+
+    reference_finish = reference.get("best_finish_key", "").strip()
+    derived_finish = str(derived.get("best_finish_key", "") or "").strip()
+    if reference_finish not in BEST_FINISH_RANK:
+        return False
+    if derived_finish and (
+        derived_finish not in BEST_FINISH_RANK
+        or BEST_FINISH_RANK[reference_finish] < BEST_FINISH_RANK[derived_finish]
+    ):
+        return False
+
+    reference_year = reference.get("best_finish_year", "").strip()
+    derived_year = (
+        str(derived.get("best_finish_year"))
+        if derived.get("best_finish_year") is not None
+        else ""
+    )
+    if reference_year and reference_year != derived_year:
+        candidate_years = {
+            str(item.get("calendar_year", "") or "")
+            for item in candidates
+            if item.get("calendar_year") is not None
+        }
+        if reference_year not in candidate_years:
+            return False
+
+    return True
+
+
+def _ncaa_round_patch_decisions(
+    school_key: str,
+    candidates: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Surface unresolved projected NCAA rounds as explicit Gate-1 authority."""
+
+    decisions: list[dict[str, Any]] = []
+    for item in candidates:
+        source = item["source"]
+        game_id = str(item.get("canonical_game_id", "") or "")
+        source_date = source.get("game_date", "").strip()
+        canonical_date = str(item.get("canonical_game_date", "") or source_date)
+        source_game_id = source.get("source_game_id", "").strip()
+        opponent = source.get("normalized_opponent_key", "").strip()
+        decisions.append(
+            {
+                "decision_id": _decision_id(
+                    "NCAA-ROUND-PATCH",
+                    source_game_id,
+                ),
+                "category": "ncaa_round_patch",
+                "source_game_id": source_game_id,
+                "canonical_game_id": game_id,
+                "season_label": source.get("season_label", "").strip(),
+                **_date_fields(source_date, canonical_date),
+                "matchup": f"{school_key} vs {opponent}",
+                "field_name": "postseason_round",
+                "source_value": "",
+                "canonical_value": "",
+                "relevant_evidence": (
+                    "Projected NCAA game remains round-blank after the safe canonical "
+                    "fallback. A deeper verified program accomplishment may depend on "
+                    "this row, but the exact round must come from authoritative evidence "
+                    "and explicit Owner Gate 1 approval."
+                ),
+                "recommended_action": "REVIEW_REQUIRED",
+                "allowed_actions": sorted(NCAA_ROUND_PATCH_ACTIONS),
+                "decision": "PENDING",
+                "resolution_basis": "",
+                "canonical_patch_json": "{}",
+                "source_patch_json": "{}",
+                "notes": (
+                    "Historical NCAA round enrichment only; raw source text remains "
+                    "unchanged."
+                ),
+            }
+        )
+    return decisions
+
+
 def _planned_venue_geography_errors(
     source: dict[str, str],
     status: str,
@@ -1129,6 +1248,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     predicted_enrichment_fields = 0
     predicted_enrichment_games: set[str] = set()
     accomplishment_crosscheck_games: list[dict[str, str]] = []
+    accomplishment_round_candidates: list[dict[str, Any]] = []
     affected_public_programs: set[str] = set()
     public_keys = {
         row["program_key"]
@@ -1178,20 +1298,41 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 if row.get("canonical_game_id", "").strip()
             )
 
-        accomplishment_crosscheck_games.append(
-            _accomplishment_crosscheck_game(
-                source,
-                status,
-                game_id,
-                canonical_by_id,
-                venue_name_map,
-                venue_metadata,
-                (
-                    "PREFLIGHT-ACCOMPLISHMENT-"
-                    + (source.get("source_game_id", "").strip() or "UNKNOWN")
-                ),
-            )
+        accomplishment_candidate = _accomplishment_crosscheck_game(
+            source,
+            status,
+            game_id,
+            canonical_by_id,
+            venue_name_map,
+            venue_metadata,
+            (
+                "PREFLIGHT-ACCOMPLISHMENT-"
+                + (source.get("source_game_id", "").strip() or "UNKNOWN")
+            ),
         )
+        accomplishment_crosscheck_games.append(accomplishment_candidate)
+        if (
+            status != ingest_school.REVIEW
+            and source.get("curated_game_type", "").strip() == "NCAA_TOURNAMENT"
+            and not accomplishment_candidate.get("postseason_round", "").strip()
+        ):
+            canonical_match = canonical_by_id.get(game_id, {})
+            source_date = source.get("game_date", "").strip()
+            calendar_year = (
+                int(source_date[:4])
+                if re.fullmatch(r"\d{4}-\d{2}-\d{2}", source_date)
+                else int(source.get("season_label", "0000-0000").split("-")[1])
+                if re.fullmatch(r"\d{4}-\d{4}", source.get("season_label", ""))
+                else None
+            )
+            accomplishment_round_candidates.append(
+                {
+                    "source": source,
+                    "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
+                    "canonical_game_date": canonical_match.get("game_date", ""),
+                    "calendar_year": calendar_year,
+                }
+            )
 
         for problem in _planned_venue_geography_errors(
             source,
@@ -1421,22 +1562,38 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     if accomplishment is not None:
         # Cross-check the target package as the primary history source while
         # preserving richer non-conflicting NCAA round metadata from confident
-        # reciprocal canonical matches.  This avoids both zero-history checks
-        # for first-time schools and false aggregate blockers when the target
-        # source is honestly blank on a round already established elsewhere.
+        # reciprocal canonical matches. If the remaining aggregate mismatch can
+        # only become deeper through still-blank projected NCAA rounds, expose
+        # those historical round facts at Gate 1 rather than blocking before the
+        # owner can review them.
         derived, accomplishment_conflicts = _accomplishment_conflicts(
             program,
             accomplishment,
             accomplishment_crosscheck_games,
         )
-        if accomplishment_conflicts:
+        round_review_decisions: list[dict[str, Any]] = []
+        if accomplishment_conflicts and _accomplishment_round_conflict_is_reviewable(
+            accomplishment,
+            derived,
+            accomplishment_round_candidates,
+        ):
+            round_review_decisions = _ncaa_round_patch_decisions(
+                school_key,
+                accomplishment_round_candidates,
+            )
+            decisions.extend(round_review_decisions)
+        elif accomplishment_conflicts:
             blockers.append(
                 "Accomplishment reference conflicts with canonical cross-check: "
                 + "; ".join(accomplishment_conflicts)
             )
-        elif (
-            accomplishment.get("verification_status") != "VERIFIED"
-            or accomplishment.get("canonical_crosscheck_status") != "MATCH"
+
+        if (
+            not blockers
+            and (
+                accomplishment.get("verification_status") != "VERIFIED"
+                or accomplishment.get("canonical_crosscheck_status") != "MATCH"
+            )
         ):
             decisions.append(
                 {
@@ -1470,7 +1627,15 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                             "best_finish_year": derived["best_finish_year"],
                         }
                     ),
-                    "relevant_evidence": "Canonical NCAA fields match; conference titles still require authoritative source verification.",
+                    "relevant_evidence": (
+                        "Projected NCAA aggregate remains incomplete pending the "
+                        "owner-reviewed NCAA round decisions in this same Gate 1 packet; "
+                        "the disposable recommendation-map rehearsal must prove that the "
+                        "final canonical aggregate matches before verification."
+                        if round_review_decisions
+                        else "Canonical NCAA fields match; conference titles still "
+                        "require authoritative source verification."
+                    ),
                     "recommended_action": "VERIFY_REFERENCE_VALUES",
                     "allowed_actions": sorted(ACCOMPLISHMENT_ACTIONS),
                     "decision": "PENDING",
@@ -1779,6 +1944,37 @@ def approve_plan(
         )
         unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
+        if item.get("category") == "ncaa_round_patch":
+            if decision == "APPLY_NCAA_ROUND_PATCH":
+                if set(canonical_patch) != {"postseason_round"}:
+                    raise WorkflowError(
+                        f"{decision_id}: APPLY_NCAA_ROUND_PATCH requires exactly "
+                        "canonical postseason_round"
+                    )
+                if set(source_patch) != {"curated_postseason_round"}:
+                    raise WorkflowError(
+                        f"{decision_id}: APPLY_NCAA_ROUND_PATCH requires exactly "
+                        "source curated_postseason_round"
+                    )
+                canonical_round = canonical_patch["postseason_round"].strip()
+                source_round = source_patch["curated_postseason_round"].strip()
+                if (
+                    canonical_round != source_round
+                    or canonical_round not in NCAA_ROUND_PATCH_VALUES
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: NCAA round patches must use the same controlled "
+                        "nonblank round value"
+                    )
+            elif decision == "LEAVE_UNRESOLVED":
+                if canonical_patch or source_patch:
+                    raise WorkflowError(
+                        f"{decision_id}: LEAVE_UNRESOLVED may not carry NCAA round patches"
+                    )
+            else:
+                raise WorkflowError(
+                    f"{decision_id}: unsupported NCAA round decision {decision!r}"
+                )
         if item.get("category") == "canonical_site_patch":
             forbidden_site_fields = sorted(
                 set(canonical_patch) - CANONICAL_SITE_PATCH_FIELDS
@@ -2707,7 +2903,11 @@ def apply_reconciliation_decisions(
     reconciliation_items = [
         item
         for item in approved.get("decisions", [])
-        if item.get("category") in {"discrepancy", "canonical_site_patch"}
+        if item.get("category") in {
+            "discrepancy",
+            "canonical_site_patch",
+            "ncaa_round_patch",
+        }
     ]
     if not reconciliation_items:
         return {}
@@ -2757,6 +2957,95 @@ def apply_reconciliation_decisions(
         canonical = canonical_by_id.get(game_id)
         if canonical is None:
             raise WorkflowError(f"{item['decision_id']}: canonical row is missing after ingestion")
+
+        if item.get("category") == "ncaa_round_patch":
+            source_game_id = item["source_game_id"]
+            source = source_by_id.get(source_game_id)
+            assertions = assertion_by_source.get((school_key, source_game_id), [])
+            if source is None:
+                raise WorkflowError(
+                    f"{item['decision_id']}: NCAA round source row is missing after ingestion"
+                )
+            if len(assertions) != 1:
+                raise WorkflowError(
+                    f"{item['decision_id']}: expected one target assertion after ingestion; "
+                    f"found {len(assertions)}"
+                )
+            assertion = assertions[0]
+            actual_game_id = assertion.get("canonical_game_id", "").strip()
+            planned_game_id = item.get("canonical_game_id", "").strip()
+            if planned_game_id and planned_game_id != actual_game_id:
+                raise WorkflowError(
+                    f"{item['decision_id']}: canonical identity changed after Gate 1 planning"
+                )
+            canonical = canonical_by_id.get(actual_game_id)
+            if canonical is None:
+                raise WorkflowError(
+                    f"{item['decision_id']}: ingested canonical game is missing"
+                )
+            if (
+                source.get("curated_game_type", "").strip() != "NCAA_TOURNAMENT"
+                or canonical.get("game_type", "").strip() != "NCAA_TOURNAMENT"
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: NCAA round patch requires NCAA Tournament game type"
+                )
+
+            decision = item["decision"]
+            canonical_patch = item.get("canonical_patch", {})
+            source_patch = item.get("source_patch", {})
+            if decision == "APPLY_NCAA_ROUND_PATCH":
+                desired = str(canonical_patch.get("postseason_round", "")).strip()
+                source_desired = str(
+                    source_patch.get("curated_postseason_round", "")
+                ).strip()
+                if desired != source_desired or desired not in NCAA_ROUND_PATCH_VALUES:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: invalid sealed NCAA round patch"
+                    )
+                current_values = {
+                    "source": source.get("curated_postseason_round", "").strip(),
+                    "assertion": assertion.get("curated_postseason_round", "").strip(),
+                    "canonical": canonical.get("postseason_round", "").strip(),
+                }
+                conflicts = {
+                    label: value
+                    for label, value in current_values.items()
+                    if value and value != desired
+                }
+                if conflicts:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: refuses to overwrite established NCAA "
+                        f"round metadata: {conflicts}"
+                    )
+                source["curated_postseason_round"] = desired
+                assertion["curated_postseason_round"] = desired
+                canonical["postseason_round"] = desired
+                source["notes"] = _append_note(
+                    source.get("notes", ""),
+                    "Owner-approved NCAA round enrichment; raw_text preserved.",
+                )
+                canonical["notes"] = _append_note(
+                    canonical.get("notes", ""),
+                    "[OWNER_APPROVED_NCAA_ROUND_PATCH "
+                    f"school={school_key} source={source_game_id} "
+                    f"decision={item['decision_id']} "
+                    f"plan={approved['approved_plan_hash'][:12]}]",
+                )
+                counts["ncaa_round_patches"] += 1
+            elif decision == "LEAVE_UNRESOLVED":
+                if canonical_patch or source_patch:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: unresolved NCAA round may not carry a patch"
+                    )
+                counts["ncaa_rounds_left_unresolved"] += 1
+            else:
+                raise WorkflowError(
+                    f"{item['decision_id']}: unsupported NCAA round decision {decision}"
+                )
+            touched_canonical_ids.add(actual_game_id)
+            touched_source_ids.add(source_game_id)
+            continue
 
         if item.get("category") == "canonical_site_patch":
             touched_canonical_ids.add(game_id)
