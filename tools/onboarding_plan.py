@@ -749,9 +749,30 @@ def _accomplishment_round_conflict_is_reviewable(
 
     if reference_appearances != int(derived["ncaa_tournament_appearances"]):
         return False
-    if reference_final_fours < int(derived["final_four_appearances"]):
+
+    derived_final_fours = int(derived["final_four_appearances"])
+    derived_titles = int(derived["national_championships"])
+    if reference_final_fours < derived_final_fours:
         return False
-    if reference_titles < int(derived["national_championships"]):
+    if reference_titles < derived_titles:
+        return False
+
+    candidate_seasons = {
+        str(item.get("source", {}).get("season_label", "") or "").strip()
+        for item in candidates
+        if str(item.get("source", {}).get("season_label", "") or "").strip()
+    }
+    if reference_final_fours - derived_final_fours > len(candidate_seasons):
+        return False
+
+    candidate_win_seasons = {
+        str(item.get("source", {}).get("season_label", "") or "").strip()
+        for item in candidates
+        if str(item.get("source", {}).get("played_result", "") or "").strip().upper()
+        == "W"
+        and str(item.get("source", {}).get("season_label", "") or "").strip()
+    }
+    if reference_titles - derived_titles > len(candidate_win_seasons):
         return False
 
     reference_finish = reference.get("best_finish_key", "").strip()
@@ -777,6 +798,29 @@ def _accomplishment_round_conflict_is_reviewable(
             if item.get("calendar_year") is not None
         }
         if reference_year not in candidate_years:
+            return False
+
+    if reference_year:
+        year_candidates = [
+            item
+            for item in candidates
+            if str(item.get("calendar_year", "") or "") == reference_year
+        ]
+        if reference_finish == "NATIONAL_CHAMPION" and not any(
+            str(item.get("source", {}).get("played_result", "") or "")
+            .strip()
+            .upper()
+            == "W"
+            for item in year_candidates
+        ):
+            return False
+        if reference_finish == "NATIONAL_RUNNER_UP" and not any(
+            str(item.get("source", {}).get("played_result", "") or "")
+            .strip()
+            .upper()
+            == "L"
+            for item in year_candidates
+        ):
             return False
 
     return True
