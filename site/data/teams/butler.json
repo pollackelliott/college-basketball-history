@@ -3723,7 +3723,7 @@
       "opponent_key": "nc-state",
       "opponent_name": "North Carolina State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -76686,7 +76686,7 @@
       "opponent_key": "nc-state",
       "opponent_name": "North Carolina State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 61,
       "opponent_score": 76,
       "score_known": true,
