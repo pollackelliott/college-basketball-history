@@ -640,7 +640,7 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 638,alabama,Virginia Tech #,virginia-tech,Virginia Tech,Yes,1,1972-1973,1972-1973,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 639,alabama,Virginia Tech $,virginia-tech,Virginia Tech,Yes,1,2017-2018,2017-2018,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 640,alabama,Virginia Tech &,virginia-tech,Virginia Tech,Yes,2,1956-1957,1976-1977,RESOLVED,Current D1 registry / straightforward naming normalization.,,
-641,alabama,Virginia Tech ^,virginia-tech,Virginia Tech,Yes,3,1960-1961,1964-1965,RESOLVED,Current D1 registry / straightforward naming normalization.,,
+641,alabama,Virginia Tech ^,virginia-tech,Virginia Tech,Yes,2,1961-1962,1964-1965,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 642,alabama,VMI,vmi,VMI,Yes,3,1927-1928,1994-1995,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 643,alabama,Wagner ^,wagner,Wagner,Yes,1,1978-1979,1978-1979,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 644,alabama,Wake Forest,wake-forest,Wake Forest,Yes,3,1956-1957,1990-1991,RESOLVED,Current D1 registry / straightforward naming normalization.,,
@@ -680,3 +680,4 @@ index,source_program_key,source_opponent_label,canonical_opponent_key,canonical_
 678,alabama,Yale,yale,Yale,Yes,2,2008-2009,2025-2026,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 679,alabama,Youngstown State,youngstown-state,Youngstown State,Yes,1,1984-1985,1984-1985,RESOLVED,Current D1 registry / straightforward naming normalization.,,
 680,alabama,Zanesville,zanesville,Zanesville,No,1,1925-1926,1925-1926,RESOLVED,Historical/non-current source identity.,,
+681,alabama,Virginia Tech ^,baylor,Baylor,Yes,1,1960-1961,1960-1961,RESOLVED,Implementation source-scoped opponent identity reconciliation.,,Owner-authorized Alabama/Baylor reconciliation: Alabama's preserved source row records a 72-55 win on 1960-12-16; the Baylor reciprocal assertion is preserved as conflicting date evidence at 1960-12-14; the false Virginia Tech identity is corrected only for ALARAW-00923. [source_game_id=ALARAW-00923]
