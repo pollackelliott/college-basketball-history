@@ -8195,7 +8195,7 @@
       "state": "VA",
       "primary_hex": "#630031",
       "secondary_hex": "#CF4420",
-      "history_start_season": null,
+      "history_start_season": "1908-1909",
       "conference_regular_season_championships": 1,
       "conference_tournament_championships": 2,
       "ncaa_tournament_appearances": 13,
@@ -8204,7 +8204,7 @@
       "best_finish_key": "ELITE_EIGHT",
       "best_finish_year": 1967,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
