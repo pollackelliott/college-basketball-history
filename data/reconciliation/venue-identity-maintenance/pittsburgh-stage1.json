@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000229",
+      "absorbed_venue_id": "VEN-000258",
+      "expected_school_rows": 2,
+      "resolution_basis": "Control Center approved Pittsburgh Stage 1 maintenance: current protected main contains duplicate Evanston physical-venue identities for McGaw Memorial Hall / Welsh-Ryan Arena. Preserve the earlier-established VEN-000229 / welsh-ryan-arena identity, which already carries McGaw Memorial Hall as a historical alias, and retire later duplicate VEN-000258 / mcgaw-memorial-hall."
+    },
+    {
+      "survivor_venue_id": "VEN-000206",
+      "absorbed_venue_id": "VEN-000416",
+      "expected_school_rows": 1,
+      "resolution_basis": "Control Center approved Pittsburgh Stage 1 maintenance: current protected main contains duplicate Auburn Hills physical-venue identities for The Palace of Auburn Hills / Palace of Auburn Hills. Preserve the earlier-established VEN-000206 / the-palace-of-auburn-hills identity and retire later duplicate VEN-000416 / palace-of-auburn-hills."
+    }
+  ]
+}
