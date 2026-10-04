@@ -482,6 +482,8 @@ def research_declares_pending_shared_venue(local: dict[str, str]) -> bool:
             "defers authoritative shared-id reconciliation to implementation",
             "authoritative shared-id reconciliation is deferred to implementation",
             "global registration/current-main reuse decision remains for serialized implementation",
+            "global venue registration pending current-main rebase",
+            "global registration pending current-main rebase",
             "global registration: pending_current_main_rebase",
         )
     ) or (
