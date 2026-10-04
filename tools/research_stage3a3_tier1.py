@@ -62,7 +62,7 @@ def main():
     ledger=read(a.ledger);neutral=[r for r in ledger if is_regular(r) and is_neutral(r)]
     defects=[];ids=[rid(r) for r in neutral];dups=[k for k,v in Counter(ids).items() if k and v>1]
     if dups:defects.append({"reason":"DUPLICATE_RESEARCH_IDS","ids":dups})
-    missing=[rid(r) or f"ROW-{i+1}" for i,r in enumerate(neutral) if not rid(r) or not exact_key(r)]
+    missing=[rid(r) or f"ROW-{i+1}" for i,r in enumerate(neutral) if not rid(r) or not opp(r)]
     if missing:defects.append({"reason":"MISSING_EXACT_GAME_KEY","ids":missing})
     status={"schema_version":1,"school_key":a.school_key,"protected_main_sha":pinned,"input_ledger_sha256":sha(a.ledger),"neutral_rows":len(neutral),"status":"INPUT_READY" if not defects else "STAGE_3A3_TIER1_INPUT_NOT_READY","defects":defects,"external_research_used":False}
     def dump(n,o):
@@ -74,7 +74,12 @@ def main():
         if all(k):idx.setdefault(k,[]).append(r)
     accepted=[];contr=[];unresolved=[];remaining=[];modern=historical=0
     for r in neutral:
-        k=exact_key(r);cands=idx.get(k,[]);facts={}
+        k=exact_key(r)
+        if k is None:
+            unresolved.append({"research_game_id":rid(r),"game_date":pick(r,"game_date","date"),"opponent_key":opp(r),"reason":"NO_EXACT_DATE_FOR_TIER1_MATCH"})
+            remaining.append(r)
+            continue
+        cands=idx.get(k,[]);facts={}
         for e in cands:
             f=(venue(e),city(e),state(e))
             if any(f):facts.setdefault(f,[]).append(e)
