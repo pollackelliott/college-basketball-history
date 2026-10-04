@@ -5203,7 +5203,7 @@
       "opponent_key": "syracuse",
       "opponent_name": "Syracuse",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -25691,7 +25691,7 @@
       "opponent_key": "syracuse",
       "opponent_name": "Syracuse",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 57,
       "opponent_score": 74,
       "score_known": true,
