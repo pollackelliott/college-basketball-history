@@ -4299,7 +4299,7 @@
       "opponent_key": "pittsburgh",
       "opponent_name": "Pittsburgh",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -23566,7 +23566,7 @@
       "opponent_key": "pittsburgh",
       "opponent_name": "Pittsburgh",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 65,
       "opponent_score": 44,
       "score_known": true,
@@ -55716,7 +55716,7 @@
       "opponent_key": "pittsburgh",
       "opponent_name": "Pittsburgh",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 86,
       "opponent_score": 65,
       "score_known": true,
