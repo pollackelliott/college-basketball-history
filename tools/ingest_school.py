@@ -357,11 +357,22 @@ def discrepancy_candidates(
 
     src_site, _ = source_site_to_canonical(source)
     can_site = canonical.get("site_type", "").strip()
+    researched_unknown_site = (
+        source.get("curated_site_type", "").strip().upper() == "UNKNOWN"
+        and source.get("site_research_status", "").strip().upper()
+        == "RESEARCHED_UNRESOLVED"
+        and bool(source.get("site_research_basis", "").strip())
+    )
     if src_site != "UNKNOWN":
         if not can_site or can_site == "UNKNOWN":
             result.append(("site_type", src_site, can_site or "UNKNOWN"))
         elif src_site != can_site:
             result.append(("site_type", src_site, can_site))
+    elif researched_unknown_site and can_site not in {"", "UNKNOWN"}:
+        # A deliberately researched unresolved H/A/N conclusion is historical
+        # evidence, not an absent value. Surface it for Gate 1 instead of
+        # silently inheriting a known canonical site classification.
+        result.append(("site_type", "UNKNOWN", can_site))
 
     src_game_type = source.get("curated_game_type", "").strip()
     can_game_type = canonical.get("game_type", "").strip()
