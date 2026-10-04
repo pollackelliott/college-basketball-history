@@ -162,6 +162,32 @@ class Stage1VenueInventoryTests(unittest.TestCase):
             row["issues"],
         )
 
+    def test_legacy_pending_registration_phrasings_are_shared_maintenance(self):
+        note_variants = (
+            "Research-resolved historical identity; global venue registration "
+            "pending current-main rebase.",
+            "Research-resolved historical identity; global registration "
+            "pending current-main rebase.",
+        )
+        for notes in note_variants:
+            with self.subTest(notes=notes):
+                local = local_venue(
+                    "legacy-pending-venue",
+                    "Legacy Pending Venue",
+                    city="Pittsburgh",
+                    state="PA",
+                    notes=notes,
+                )
+                report = venue_reconciliation_inventory([local], [], [])
+
+                self.assertEqual(report["blocker_count"], 1)
+                row = report["blockers"][0]
+                self.assertEqual(row["classification"], "SHARED_GLOBAL_MAINTENANCE")
+                self.assertIn(
+                    "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING",
+                    row["issues"],
+                )
+
     def test_reconciled_survivor_note_closes_research_deferred_exact_key(self):
         local = local_venue(
             "the-pit",
