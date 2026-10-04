@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000065",
+      "absorbed_venue_id": "VEN-000423",
+      "expected_canonical_rows": 3,
+      "expected_school_rows": 2,
+      "resolution_basis": "Owner-approved Syracuse Implementation Stage 1 shared-reference maintenance: current protected main contains duplicate Phoenix physical-venue identities for Footprint Center / Mortgage Matchup Center and US Airways Center. Preserve established VEN-000065 / footprint-center, which already carries the historical naming lineage for the same physical arena, and retire later duplicate VEN-000423 / us-airways-center. Complete approved impact population: 3 canonical NCAA Tournament rows, 3 canonical provenance markers, 2 published school venue rows, 1 venue-name row, 0 evidence assertions. Syracuse frozen Research historical meaning is unchanged."
+    }
+  ]
+}
