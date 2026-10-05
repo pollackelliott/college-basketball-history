@@ -587,7 +587,7 @@
       "state": "MA",
       "primary_hex": "#98002E",
       "secondary_hex": "#BC9B61",
-      "history_start_season": null,
+      "history_start_season": "1904-1905",
       "conference_regular_season_championships": 4,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 18,
@@ -596,7 +596,7 @@
       "best_finish_key": "ELITE_EIGHT",
       "best_finish_year": 1994,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
