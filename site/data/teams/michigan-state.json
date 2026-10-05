@@ -5028,7 +5028,7 @@
       "opponent_key": "smu",
       "opponent_name": "SMU",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -42693,7 +42693,7 @@
       "opponent_key": "smu",
       "opponent_name": "SMU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 95,
       "opponent_score": 69,
       "score_known": true,
@@ -42703,8 +42703,8 @@
       "venue_key": null,
       "venue_id": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Norfolk",
+      "site_state": "VA",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
