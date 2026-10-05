@@ -23,7 +23,7 @@ belmont,13,8,8,0,0,ROUND_OF_64,2019,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365
 bethune-cookman,3,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 binghamton,1,1,1,0,0,ROUND_OF_64,2009,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 boise-state,7,6,10,0,0,ROUND_OF_32,1976,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-boston-college,4,3,18,0,0,ELITE_EIGHT,1994,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+boston-college,4,3,18,0,0,ELITE_EIGHT,1994,VERIFIED,"Boston College institutional history supports four regular-season conference championships (1981, 1983, 2001, 2005), three conference/postseason-tournament championships under repository taxonomy (1975 ECAC New England, 1997 Big East, 2001 Big East), 18 NCAA Tournament appearances through 2009, zero Final Fours, zero national titles, and 1994 Elite Eight as the best NCAA finish; the Stage 2 canonical NCAA cross-check independently matches.",MATCH,Verified through onboarding plan a2775e3a3f2b.
 boston-university,8,7,7,0,0,ELITE_EIGHT,1959,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 bowling-green,9,0,4,0,0,SWEET_SIXTEEN,1963,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 bradley,8,4,9,2,0,NATIONAL_RUNNER_UP,1954,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

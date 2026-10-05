@@ -1283,7 +1283,7 @@
       "opponent_key": "boston-college",
       "opponent_name": "Boston College",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -76976,7 +76976,7 @@
       "opponent_key": "boston-college",
       "opponent_name": "Boston College",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 71,
       "opponent_score": 62,
       "score_known": true,
@@ -80976,7 +80976,7 @@
       "opponent_key": "boston-college",
       "opponent_name": "Boston College",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 88,
       "opponent_score": 67,
       "score_known": true,
