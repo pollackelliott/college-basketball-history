@@ -941,6 +941,51 @@ class Stage4CloseoutTests(unittest.TestCase):
         )
         self.assertEqual(mismatches[0]["package_value"], "")
 
+    def test_venue_key_allows_game_locality_alias_without_competing_venue(self):
+        parent = [
+            {
+                "research_game_id": "IMPERIAL",
+                "source_program_key": "test",
+                "season_label": "2024-2025",
+                "game_date": "2024-11-28",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "stage3a_final_han": "NEUTRAL",
+                "accepted_venue_key": "imperial-arena",
+                "accepted_venue_name": "Imperial Arena",
+                "accepted_city": "Paradise Island",
+                "accepted_state": "BS",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "IMPERIAL",
+                "source_program_key": "test",
+                "season_label": "2024-2025",
+                "game_date": "2024-11-28",
+                "normalized_opponent_key": "old-college",
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Imperial Arena",
+                "city": "Paradise Island",
+                "state": "BS",
+                "curated_game_type": "REGULAR_SEASON",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "imperial-arena",
+                "canonical_name": "Imperial Arena",
+                "aliases": "Imperial Arena at Atlantis Resort",
+                "city": "Nassau",
+                "state": "BS",
+            }
+        ]
+
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
     def test_unique_venue_name_comparison_remains_unchanged(self):
         parent = [
             {
