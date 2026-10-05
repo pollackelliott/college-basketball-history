@@ -2899,7 +2899,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -4721,19 +4721,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "us-international",
-      "opponent_name": "U.S. International",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1979-1980",
-      "last_season": "1979-1980",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "arkansas-pine-bluff",
       "opponent_name": "UAPB",
       "current_d1": true,
@@ -4907,6 +4894,19 @@
       "games": 6,
       "wins": 2,
       "losses": 4,
+      "ties": 0
+    },
+    {
+      "opponent_key": "us-international",
+      "opponent_name": "US International",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1979-1980",
+      "last_season": "1979-1980",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -38518,7 +38518,7 @@
       "game_date": "1979-12-17",
       "date_precision": "EXACT",
       "opponent_key": "us-international",
-      "opponent_name": "U.S. International",
+      "opponent_name": "US International",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 63,
@@ -50420,7 +50420,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 82,
       "opponent_score": 92,
       "score_known": true,

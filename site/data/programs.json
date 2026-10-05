@@ -3635,7 +3635,7 @@
       "state": "KY",
       "primary_hex": "#AD0000",
       "secondary_hex": "#000000",
-      "history_start_season": null,
+      "history_start_season": "1911-1912",
       "conference_regular_season_championships": 23,
       "conference_tournament_championships": 17,
       "ncaa_tournament_appearances": 45,
@@ -3644,7 +3644,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2013,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"

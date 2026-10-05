@@ -3058,7 +3058,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -5484,19 +5484,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "us-international",
-      "opponent_name": "U.S. International",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1987-1988",
-      "last_season": "1987-1988",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "u-s-nat-bank-portland",
       "opponent_name": "U.S. Nat. Bank Portland",
       "current_d1": false,
@@ -5725,6 +5712,19 @@
       "games": 4,
       "wins": 1,
       "losses": 3,
+      "ties": 0
+    },
+    {
+      "opponent_key": "us-international",
+      "opponent_name": "US International",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1987-1988",
+      "last_season": "1987-1988",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -55399,7 +55399,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 62,
       "opponent_score": 56,
       "score_known": true,
@@ -55409,8 +55409,8 @@
       "venue_key": null,
       "venue_id": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Tokyo",
+      "site_state": "Japan",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
@@ -59822,7 +59822,7 @@
       "game_date": "1987-12-12",
       "date_precision": "EXACT",
       "opponent_key": "us-international",
-      "opponent_name": "U.S. International",
+      "opponent_name": "US International",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 85,
@@ -60474,7 +60474,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 61,
       "opponent_score": 70,
       "score_known": true,
