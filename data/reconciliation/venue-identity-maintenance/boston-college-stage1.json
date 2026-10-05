@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000224",
+      "absorbed_venue_id": "VEN-000409",
+      "expected_canonical_rows": 1,
+      "expected_school_rows": 1,
+      "resolution_basis": "Control Center-authorized Boston College Stage 1 maintenance. Current main contains a duplicate physical identity for the Milwaukee Arena building. Wisconsin Historical Society records identify historic Milwaukee Arena at 444 W Kilbourn Ave as the same building later named U.S. Cellular Arena and UW-Milwaukee Panther Arena. Preserve long-established VEN-000224 / uw-milwaukee-panther-arena and retire later duplicate VEN-000409 / milwaukee-arena."
+    },
+    {
+      "survivor_venue_id": "VEN-000224",
+      "absorbed_venue_id": "VEN-000682",
+      "expected_canonical_rows": 1,
+      "expected_school_rows": 1,
+      "resolution_basis": "Control Center-authorized Boston College Stage 1 maintenance. Current main contains a duplicate physical identity for the same Milwaukee Arena building under MECCA Arena. Wisconsin Historical Society records describe Milwaukee's MECCA Arena as the arena later known as U.S. Cellular Arena, the same historic Milwaukee Arena property now represented by VEN-000224. Preserve VEN-000224 / uw-milwaukee-panther-arena and retire later duplicate VEN-000682 / mecca-arena."
+    }
+  ]
+}
