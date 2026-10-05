@@ -123,6 +123,12 @@ NEW_GAME_SITE_PATCH_VALUES = {
     "OPPONENT_HOME",
     "NEUTRAL",
 }
+SOURCE_CONSISTENCY_ACTIONS = {"APPLY_SOURCE_CONSISTENCY_PATCH"}
+SOURCE_CONSISTENCY_PATCH_FIELDS = {
+    "team_score",
+    "opponent_score",
+    "played_result",
+}
 
 SOURCE_ASSERTION_COPY_FIELDS = tuple(
     field
@@ -366,17 +372,50 @@ def exhibition_warning_required(
     return _EXHIBITION_WORD_RE.search(audit_text) is not None
 
 
+def score_result_consistency_issue(row: dict[str, str]) -> dict[str, str] | None:
+    """Return a structured score/result contradiction, if one exists."""
+
+    team_score = row.get("team_score", "").strip()
+    opponent_score = row.get("opponent_score", "").strip()
+    played_result = row.get("played_result", "").strip().upper()
+    if not team_score or not opponent_score or not played_result:
+        return None
+    try:
+        team_number = int(team_score)
+        opponent_number = int(opponent_score)
+    except ValueError:
+        return None
+    expected_result = (
+        "W"
+        if team_number > opponent_number
+        else "L"
+        if opponent_number > team_number
+        else "T"
+    )
+    if played_result == expected_result:
+        return None
+    return {
+        "source_game_id": row.get("source_game_id", "").strip(),
+        "team_score": team_score,
+        "opponent_score": opponent_score,
+        "played_result": played_result,
+        "score_implied_result": expected_result,
+    }
+
+
 def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     """Run the permanent equivalent of the former pasted package-QA snippet."""
 
     school = repo / "schools" / school_key
     errors: list[str] = []
     warnings: list[str] = []
+    source_consistency_issues: list[dict[str, str]] = []
     missing = [name for name in REQUIRED_PACKAGE_FILES if not (school / name).is_file()]
     if missing:
         return {
             "errors": ["Missing package files: " + ", ".join(missing)],
             "warnings": [],
+            "source_consistency_issues": [],
             "counts": {},
         }
 
@@ -483,14 +522,9 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
             except ValueError:
                 errors.append(f"{label}: score is not an integer")
             else:
-                expected = (
-                    "W" if team_number > opponent_number else "L" if opponent_number > team_number else "T"
-                )
-                played = row.get("played_result", "").strip().upper()
-                if played and played != expected:
-                    warnings.append(
-                        f"{label}: score implies {expected}, curated result says {played}"
-                    )
+                issue = score_result_consistency_issue(row)
+                if issue is not None:
+                    source_consistency_issues.append(issue)
 
         overtime = row.get("overtime_periods", "").strip()
         if overtime and (not overtime.isdigit() or int(overtime) < 0):
@@ -571,11 +605,13 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     return {
         "errors": errors,
         "warnings": warnings,
+        "source_consistency_issues": source_consistency_issues,
         "counts": {
             "source_games": len(games),
             "opponents": len(opponents),
             "venues": len(venues),
             "conference_intervals": len(conferences),
+            "source_consistency_issues": len(source_consistency_issues),
         },
     }
 
@@ -1313,6 +1349,11 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         program["history_start_season"].strip(),
         program.get("history_scope_intervals", "").strip(),
     )
+    source_consistency_by_id = {
+        item.get("source_game_id", ""): item
+        for item in package.get("source_consistency_issues", [])
+        if item.get("source_game_id", "")
+    }
     canonical = read_csv(repo / "data/canonical/games.csv")
     assertions = read_csv(repo / "data/evidence/game-assertions.csv")
     discrepancies = read_csv(repo / "data/reconciliation/discrepancies.csv")
@@ -1430,6 +1471,71 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 row.get("canonical_game_id", "").strip()
                 for row in candidates
                 if row.get("canonical_game_id", "").strip()
+            )
+
+        consistency_issue = source_consistency_by_id.get(
+            source.get("source_game_id", "").strip()
+        )
+        if consistency_issue is not None:
+            if status == ingest_school.CONFIDENT and game_id in canonical_by_id:
+                canonical_row = canonical_by_id[game_id]
+                canonical_context = (
+                    f"score={_canonical_value(canonical_row, 'score')}; "
+                    f"winner={canonical_row.get('result_winner_team_key', '') or '[TIE]'}"
+                )
+                canonical_date = canonical_row.get("game_date", "")
+            elif status == ingest_school.NEW_GAME:
+                canonical_context = "[new canonical game]"
+                canonical_date = ""
+            else:
+                canonical_context = "[identity pending]"
+                canonical_date = ""
+            decisions.append(
+                {
+                    "decision_id": _decision_id(
+                        "SOURCE-CONSISTENCY",
+                        source.get("source_game_id", ""),
+                    ),
+                    "category": "source_consistency",
+                    "source_game_id": source.get("source_game_id", ""),
+                    "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
+                    "season_label": season,
+                    **_date_fields(source.get("game_date", ""), canonical_date),
+                    "matchup": f"{school_key} vs {opponent}",
+                    "field_name": "score_result_consistency",
+                    "source_value": (
+                        f"score={consistency_issue['team_score']}-"
+                        f"{consistency_issue['opponent_score']}; "
+                        f"played_result={consistency_issue['played_result']}"
+                    ),
+                    "canonical_value": canonical_context,
+                    "relevant_evidence": (
+                        "Frozen structured score implies "
+                        f"{consistency_issue['score_implied_result']} while "
+                        "frozen played_result is "
+                        f"{consistency_issue['played_result']}. "
+                        "Gate 1 must choose an explicit source-only structured correction; "
+                        "raw_text remains immutable."
+                    ),
+                    "recommended_action": "REVIEW_REQUIRED",
+                    "allowed_actions": sorted(SOURCE_CONSISTENCY_ACTIONS),
+                    "decision": "PENDING",
+                    "resolution_basis": "",
+                    "canonical_patch_json": "{}",
+                    "source_patch_json": "{}",
+                    "source_consistency_expected": {
+                        "team_score": consistency_issue["team_score"],
+                        "opponent_score": consistency_issue["opponent_score"],
+                        "played_result": consistency_issue["played_result"],
+                    },
+                    "planned_identity_status": status,
+                    "identity_method": method,
+                    "notes": (
+                        "Owner-approved source consistency repair may patch only "
+                        "team_score, opponent_score, and/or played_result; raw_text "
+                        "must remain preserved."
+                    ),
+                }
             )
 
         accomplishment_candidate = _accomplishment_crosscheck_game(
@@ -2091,6 +2197,54 @@ def approve_plan(
         )
         unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
+        if item.get("category") == "source_consistency":
+            if decision != "APPLY_SOURCE_CONSISTENCY_PATCH":
+                raise WorkflowError(
+                    f"{decision_id}: unsupported source-consistency decision {decision!r}"
+                )
+            if canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: source-consistency repair may not carry a canonical patch"
+                )
+            if (
+                not source_patch
+                or set(source_patch) - SOURCE_CONSISTENCY_PATCH_FIELDS
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: source-consistency repair requires a nonempty "
+                    "source patch limited to team_score, opponent_score, and played_result"
+                )
+            expected_state = dict(item.get("source_consistency_expected", {}))
+            projected = {
+                "team_score": str(expected_state.get("team_score", "")),
+                "opponent_score": str(expected_state.get("opponent_score", "")),
+                "played_result": str(expected_state.get("played_result", "")),
+            }
+            projected.update(source_patch)
+            try:
+                team_number = int(projected["team_score"])
+                opponent_number = int(projected["opponent_score"])
+            except (TypeError, ValueError):
+                raise WorkflowError(
+                    f"{decision_id}: source-consistency score patch must leave integer scores"
+                )
+            played = projected["played_result"].strip().upper()
+            if played not in {"W", "L", "T"}:
+                raise WorkflowError(
+                    f"{decision_id}: source-consistency patch must leave played_result W/L/T"
+                )
+            implied = (
+                "W"
+                if team_number > opponent_number
+                else "L"
+                if opponent_number > team_number
+                else "T"
+            )
+            if played != implied:
+                raise WorkflowError(
+                    f"{decision_id}: source-consistency patch remains contradictory; "
+                    f"score implies {implied}, played_result is {played}"
+                )
         if item.get("category") == "new_game_site_patch":
             if decision != "APPLY_SOURCE_SITE_PATCH":
                 raise WorkflowError(
@@ -3158,7 +3312,12 @@ def apply_reconciliation_decisions(
             "ncaa_round_patch",
         }
     ]
-    if not reconciliation_items:
+    source_consistency_items = [
+        item
+        for item in approved.get("decisions", [])
+        if item.get("category") == "source_consistency"
+    ]
+    if not reconciliation_items and not source_consistency_items:
         return {}
     canonical_path = repo / "data/canonical/games.csv"
     assertions_path = repo / "data/evidence/game-assertions.csv"
@@ -3497,6 +3656,123 @@ def apply_reconciliation_decisions(
                 "the original discrepancy value remain preserved."
             )
         counts["processed"] += 1
+
+    identity_choices = {
+        item.get("source_game_id", ""): item.get("decision", "")
+        for item in approved.get("decisions", [])
+        if item.get("category") == "identity"
+    }
+    reviewed_by_source_field: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in approved.get("decisions", []):
+        if item.get("category") == "discrepancy":
+            reviewed_by_source_field[
+                (item.get("source_game_id", ""), item.get("field_name", ""))
+            ].append(item)
+
+    for item in source_consistency_items:
+        decision_id = item["decision_id"]
+        if item.get("decision") != "APPLY_SOURCE_CONSISTENCY_PATCH":
+            raise WorkflowError(
+                f"{decision_id}: unsupported source-consistency decision "
+                f"{item.get('decision')!r}"
+            )
+        source_game_id = item.get("source_game_id", "").strip()
+        source = source_by_id.get(source_game_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: source row {source_game_id!r} is missing after ingestion"
+            )
+
+        expected_state = dict(item.get("source_consistency_expected", {}))
+        for field in SOURCE_CONSISTENCY_PATCH_FIELDS:
+            expected = str(expected_state.get(field, ""))
+            current = source.get(field, "").strip()
+            if current != expected:
+                raise WorkflowError(
+                    f"{decision_id}: frozen source {field} changed before sealed apply; "
+                    f"expected {expected!r}, found {current!r}"
+                )
+
+        patch = dict(item.get("source_patch", {}))
+        if not patch or set(patch) - SOURCE_CONSISTENCY_PATCH_FIELDS:
+            raise WorkflowError(
+                f"{decision_id}: invalid sealed source-consistency patch fields"
+            )
+        for field, value in patch.items():
+            source[field] = str(value)
+
+        remaining_issue = score_result_consistency_issue(source)
+        if remaining_issue is not None:
+            raise WorkflowError(
+                f"{decision_id}: sealed source-consistency patch remains contradictory"
+            )
+
+        assertions = assertion_by_source.get((school_key, source_game_id), [])
+        if len(assertions) != 1:
+            raise WorkflowError(
+                f"{decision_id}: expected one target assertion after ingestion; "
+                f"found {len(assertions)}"
+            )
+        assertion = assertions[0]
+        for field in SOURCE_ASSERTION_COPY_FIELDS:
+            assertion[field] = source.get(field, "")
+
+        actual_game_id = assertion.get("canonical_game_id", "").strip()
+        canonical = canonical_by_id.get(actual_game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"{decision_id}: ingested canonical game {actual_game_id!r} is missing"
+            )
+
+        created_from_source = (
+            item.get("planned_identity_status") == ingest_school.NEW_GAME
+            or identity_choices.get(source_game_id) == "FORCE_NEW"
+        )
+        if created_from_source:
+            score_a, score_b = ingest_school.source_scores_in_canonical_orientation(
+                assertion
+            )
+            if not score_a or not score_b:
+                raise WorkflowError(
+                    f"{decision_id}: corrected new-game source must retain both scores"
+                )
+            set_canonical_field(canonical, "score", f"{score_a}-{score_b}")
+            counts["source_consistency_canonical_syncs"] += 1
+        else:
+            for field_name in ("score", "result_winner_team_key"):
+                post_patch_value = _assertion_value(
+                    assertion,
+                    canonical,
+                    field_name,
+                )
+                canonical_value = _canonical_value(canonical, field_name)
+                if post_patch_value == canonical_value:
+                    continue
+                reviewed = reviewed_by_source_field.get(
+                    (source_game_id, field_name),
+                    [],
+                )
+                if not any(
+                    review.get("source_value", "") == post_patch_value
+                    for review in reviewed
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: source-consistency patch would create an "
+                        f"unreviewed {field_name} conflict with canonical "
+                        f"{actual_game_id}: source={post_patch_value!r}, "
+                        f"canonical={canonical_value!r}"
+                    )
+
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "Owner-approved structured score/result consistency repair applied by "
+            f"sealed onboarding decision {decision_id}; raw_text preserved.",
+        )
+        for field in SOURCE_ASSERTION_COPY_FIELDS:
+            assertion[field] = source.get(field, "")
+        touched_source_ids.add(source_game_id)
+        touched_canonical_ids.add(actual_game_id)
+        counts["source_consistency_patches"] += 1
 
     # Location integrity is a property of the completed reconciliation
     # transaction, not of an arbitrary intermediate decision ordering.
