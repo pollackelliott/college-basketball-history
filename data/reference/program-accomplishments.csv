@@ -148,7 +148,7 @@ long-island-university,13,8,8,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Own
 longwood,1,2,2,0,0,ROUND_OF_64,2024,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 louisiana,8,8,11,0,0,SWEET_SIXTEEN,1973,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 louisiana-tech,10,6,5,0,0,SWEET_SIXTEEN,1985,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-louisville,23,17,45,10,3,NATIONAL_CHAMPION,2013,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+louisville,23,17,45,10,3,NATIONAL_CHAMPION,2013,VERIFIED,Frozen Louisville accomplishment values match the current owner baseline; rehearsal must confirm NCAA-round enrichment yields the expected on-court aggregate before Gate 1.,MATCH,Verified through onboarding plan b4834548b039.
 loyola-chicago,8,4,8,2,1,NATIONAL_CHAMPION,1963,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 loyola-maryland,0,2,2,0,0,ROUND_OF_64,2012,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 loyola-marymount,3,2,5,0,0,ELITE_EIGHT,1990,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

@@ -2611,7 +2611,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -4810,19 +4810,6 @@
       "ties": 0
     },
     {
-      "opponent_key": "us-international",
-      "opponent_name": "U.S. International",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1980-1981",
-      "last_season": "1980-1981",
-      "games": 1,
-      "wins": 1,
-      "losses": 0,
-      "ties": 0
-    },
-    {
       "opponent_key": "uab",
       "opponent_name": "UAB",
       "current_d1": true,
@@ -4980,6 +4967,19 @@
       "games": 4,
       "wins": 2,
       "losses": 2,
+      "ties": 0
+    },
+    {
+      "opponent_key": "us-international",
+      "opponent_name": "US International",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1980-1981",
+      "last_season": "1980-1981",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -38909,7 +38909,7 @@
       "game_date": "1980-12-10",
       "date_precision": "EXACT",
       "opponent_key": "us-international",
-      "opponent_name": "U.S. International",
+      "opponent_name": "US International",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 77,
@@ -69161,7 +69161,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 70,
       "opponent_score": 57,
       "score_known": true,
@@ -71486,7 +71486,7 @@
       "opponent_key": "louisville",
       "opponent_name": "Louisville",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 70,
       "opponent_score": 38,
       "score_known": true,
