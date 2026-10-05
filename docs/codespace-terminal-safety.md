@@ -121,7 +121,9 @@ Untracked files in the repository root can block clean-worktree guards even when
 Rules:
 
 - transport ZIPs are temporary inputs, not repository content;
-- after verified extraction, remove the ZIP from the repository root;
+- in browser GitHub Codespaces, the owner may drag the incoming `RESEARCH_FROZEN` ZIP into the repository root because that is the normal Explorer upload surface;
+- for Implementation Stage 1, do not ask the owner to run a separate `cp`/`mv` command merely to clear that upload from the worktree: `tools/implementation_stage1_inventory.py` verifies the expected ZIP SHA-256 and automatically relocates an untracked repository-root ZIP to `/tmp/cbh-implementation-inputs/` before its branch/cleanliness-sensitive checks;
+- a tracked ZIP must never be auto-relocated, and a transport artifact that the permanent intake tool does not own must still be removed from the repository root before cleanliness-sensitive work;
 - helper scripts belong in `/tmp`;
 - generated onboarding artifacts belong under ignored `.onboarding/<school>/` when appropriate;
 - never broaden a cleanliness guard merely because a convenience file was left in the repo.

@@ -26,6 +26,8 @@ If a stage cannot safely finish in one turn, preserve the durable repository/onb
 
 Minimize my Codespace work. When my Codespace is required, invoke supported permanent repository commands directly by default and request only compact diagnostic output. Use a guarded pasted helper only for genuinely bespoke work that current tooling does not own; do not surround permanent commands with giant wrapper programs merely to restate their invariants. Do not make manual helper-file transfer the normal execution path.
 
+For browser GitHub Codespaces, I may drag the incoming RESEARCH_FROZEN ZIP into the repository root. Treat that as the standard transport path: pass the root ZIP directly to the permanent Stage 1 inventory command and let that tool relocate the untracked transport ZIP outside the worktree before cleanliness-sensitive checks. Do not ask me to manually copy/move it to /tmp first.
+
 If the configured history scope excludes researched rows, tell me plainly during Stage 1 what the public page will begin with and how many researched rows/seasons will remain outside it.
 
 Any shared-reference proposal preserved by Research is historically settled unless current-main evidence genuinely contradicts it. Reconcile its authoritative repository identity during current-main rebase under docs/shared-reference-authority.md.

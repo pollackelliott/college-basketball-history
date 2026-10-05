@@ -1,4 +1,7 @@
+import hashlib
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -7,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
+from implementation_stage1_inventory import stage_transport_input_if_needed  # noqa: E402
+from onboarding_plan import WorkflowError  # noqa: E402
 from stage_research_portfolio import (  # noqa: E402
     build_stage1_reconciliation_inventory,
     program_alias_inventory,
@@ -630,6 +635,92 @@ class Stage1ProgramInventoryTests(unittest.TestCase):
 
         self.assertEqual(report["status"], "MAINTENANCE_REQUIRED")
         self.assertEqual(report["maintenance_required_count"], 1)
+
+
+class Stage1TransportInputTests(unittest.TestCase):
+    def _git_repo(self, root: Path) -> Path:
+        repo = root / "repo"
+        repo.mkdir()
+        subprocess.run(
+            ["git", "init", str(repo)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return repo
+
+    def test_root_browser_upload_moves_to_temp_before_cleanliness_checks(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            repo = self._git_repo(root)
+            package = repo / "school-research-frozen-package.zip"
+            package.write_bytes(b"research package")
+            digest = hashlib.sha256(package.read_bytes()).hexdigest()
+
+            staged, staged_from = stage_transport_input_if_needed(
+                package,
+                repo,
+                "test-school",
+                digest,
+                temp_root=root / "tmp",
+            )
+
+            self.assertEqual(staged_from, package.resolve())
+            self.assertFalse(package.exists())
+            self.assertTrue(staged.exists())
+            self.assertEqual(
+                hashlib.sha256(staged.read_bytes()).hexdigest(),
+                digest,
+            )
+            self.assertIn("cbh-implementation-inputs", staged.parts)
+
+    def test_tracked_root_zip_is_never_relocated(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            repo = self._git_repo(root)
+            package = repo / "tracked.zip"
+            package.write_bytes(b"tracked package")
+            subprocess.run(
+                ["git", "-C", str(repo), "add", package.name],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            digest = hashlib.sha256(package.read_bytes()).hexdigest()
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "tracked repository content",
+            ):
+                stage_transport_input_if_needed(
+                    package,
+                    repo,
+                    "test-school",
+                    digest,
+                    temp_root=root / "tmp",
+                )
+
+            self.assertTrue(package.exists())
+
+    def test_external_package_path_is_left_unchanged(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            repo = self._git_repo(root)
+            package = root / "external.zip"
+            package.write_bytes(b"external package")
+            digest = hashlib.sha256(package.read_bytes()).hexdigest()
+
+            staged, staged_from = stage_transport_input_if_needed(
+                package,
+                repo,
+                "test-school",
+                digest,
+                temp_root=root / "tmp",
+            )
+
+            self.assertEqual(staged, package.resolve())
+            self.assertIsNone(staged_from)
+            self.assertTrue(package.exists())
 
 
 if __name__ == "__main__":
