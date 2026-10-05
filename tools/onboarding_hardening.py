@@ -590,6 +590,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
         category = row.get("category", "").strip()
         if did in canonical_patches or did in source_patches:
             if category not in {
+                "identity",
                 "discrepancy",
                 "conditional_discrepancy",
                 "canonical_site_patch",

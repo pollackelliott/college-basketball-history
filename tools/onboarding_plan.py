@@ -129,6 +129,7 @@ SOURCE_CONSISTENCY_PATCH_FIELDS = {
     "opponent_score",
     "played_result",
 }
+CROSS_SEASON_IDENTITY_PATCH_FIELDS = {"season_label", "game_date"}
 
 SOURCE_ASSERTION_COPY_FIELDS = tuple(
     field
@@ -678,11 +679,63 @@ def _identity_candidates(
             }
         )
         evidence.append(
-            f"{candidate['canonical_game_id']} {candidate.get('game_date') or '[unknown]'} "
+            f"{candidate['canonical_game_id']} "
+            f"{candidate.get('season_label') or '[unknown season]'} "
+            f"{candidate.get('game_date') or '[unknown]'} "
             f"{candidate.get('team_a_score','')}-{candidate.get('team_b_score','')} "
             f"sources={','.join(programs) or '[none]'}"
         )
     return ids, dates, "; ".join(evidence)
+
+
+def _unique_adjacent_season_score_identity_candidate(
+    source: dict[str, str],
+    canonical_index: dict[tuple[str, str, str], list[dict[str, str]]],
+) -> dict[str, str] | None:
+    """Return one exact-score adjacent-season candidate or None.
+
+    This is deliberately narrow.  It never competes with an exact-score candidate
+    in the source row's frozen season, and it refuses ambiguous adjacent-season
+    populations.  A candidate must also have an exact canonical date because an
+    owner-approved cross-season identity choice is represented by a sealed source
+    patch to both season_label and game_date before ingestion.
+    """
+
+    school = source.get("source_program_key", "").strip()
+    opponent = source.get("normalized_opponent_key", "").strip()
+    season = source.get("season_label", "").strip()
+    if not school or not opponent:
+        return None
+    match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+    if not match:
+        return None
+    start_year = int(match.group(1))
+    end_year = int(match.group(2))
+    if end_year != start_year + 1:
+        return None
+
+    team_a, team_b = ingest_school.ordered_pair(school, opponent)
+    current_candidates = canonical_index.get((team_a, team_b, season), [])
+    if any(ingest_school.scores_match(source, row) for row in current_candidates):
+        return None
+
+    adjacent_seasons = (
+        f"{start_year - 1}-{end_year - 1}",
+        f"{start_year + 1}-{end_year + 1}",
+    )
+    matches: list[dict[str, str]] = []
+    for adjacent_season in adjacent_seasons:
+        for candidate in canonical_index.get(
+            (team_a, team_b, adjacent_season),
+            [],
+        ):
+            if (
+                candidate.get("game_date", "").strip()
+                and ingest_school.scores_match(source, candidate)
+            ):
+                matches.append(candidate)
+
+    return matches[0] if len(matches) == 1 else None
 
 
 def _accomplishment_crosscheck_game(
@@ -1443,6 +1496,8 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         season = source.get("season_label", "").strip()
         team_a, team_b = ingest_school.ordered_pair(school_key, opponent)
         candidates = canonical_index.get((team_a, team_b, season), [])
+        identity_candidates = list(candidates)
+        adjacent_season_candidate: dict[str, str] | None = None
         pair = (school_key, source.get("source_game_id", ""))
         prior_ids = sorted(
             {
@@ -1451,6 +1506,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 if row.get("canonical_game_id", "").strip()
             }
         )
+        override = None
         if len(prior_ids) == 1:
             status, game_id, method = ingest_school.CONFIDENT, prior_ids[0], "EXISTING_SOURCE_ASSERTION"
         elif len(prior_ids) > 1:
@@ -1463,13 +1519,28 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 canonical_by_id,
             )
             status, game_id, method = override or ingest_school.identify_game(source, candidates)
+            if override is None and status in {ingest_school.REVIEW, ingest_school.NEW_GAME}:
+                adjacent_season_candidate = (
+                    _unique_adjacent_season_score_identity_candidate(
+                        source,
+                        canonical_index,
+                    )
+                )
+                if adjacent_season_candidate is not None:
+                    identity_candidates.append(adjacent_season_candidate)
+                    status = ingest_school.REVIEW
+                    game_id = ""
+                    method = (
+                        method
+                        + "+UNIQUE_ADJACENT_SEASON_EXACT_SCORE_CANDIDATE"
+                    )
         identity_counts[status] += 1
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
         elif status == ingest_school.REVIEW:
             planned_target_canonical_ids.update(
                 row.get("canonical_game_id", "").strip()
-                for row in candidates
+                for row in identity_candidates
                 if row.get("canonical_game_id", "").strip()
             )
 
@@ -1621,11 +1692,23 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 )
                 continue
             candidate_ids, candidate_dates, evidence = _identity_candidates(
-                candidates,
+                identity_candidates,
                 assertions_by_game,
             )
-            allowed = [f"MATCH_CANONICAL:{row['canonical_game_id']}" for row in candidates]
+            allowed = [
+                f"MATCH_CANONICAL:{row['canonical_game_id']}"
+                for row in identity_candidates
+            ]
             allowed.append("FORCE_NEW")
+            cross_season_source_patch_by_action: dict[str, dict[str, str]] = {}
+            if adjacent_season_candidate is not None:
+                adjacent_id = adjacent_season_candidate["canonical_game_id"]
+                cross_season_source_patch_by_action[
+                    f"MATCH_CANONICAL:{adjacent_id}"
+                ] = {
+                    "season_label": adjacent_season_candidate["season_label"].strip(),
+                    "game_date": adjacent_season_candidate["game_date"].strip(),
+                }
             decisions.append(
                 {
                     "decision_id": _decision_id("IDENTITY", source.get("source_game_id", "")),
@@ -1647,19 +1730,42 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                     "resolution_basis": "",
                     "canonical_patch_json": "{}",
                     "source_patch_json": "{}",
+                    "source_identity_expected": {
+                        "season_label": season,
+                        "game_date": source.get("game_date", "").strip(),
+                    },
+                    "cross_season_source_patch_by_action": (
+                        cross_season_source_patch_by_action
+                    ),
                     "notes": method,
                 }
             )
-            for candidate in candidates:
+            for candidate in identity_candidates:
                 candidate_id = candidate["canonical_game_id"]
                 for participant in (candidate["team_a_key"], candidate["team_b_key"]):
                     if participant != school_key and participant in public_keys:
                         affected_public_programs.add(participant)
+                projected_source = source
+                if (
+                    adjacent_season_candidate is not None
+                    and candidate_id
+                    == adjacent_season_candidate.get("canonical_game_id", "")
+                ):
+                    projected_source = dict(source)
+                    projected_source["season_label"] = candidate.get(
+                        "season_label", ""
+                    ).strip()
+                    projected_source["game_date"] = candidate.get(
+                        "game_date", ""
+                    ).strip()
                 for (
                     field_name,
                     source_value,
                     canonical_value,
-                ) in ingest_school.discrepancy_candidates(source, candidate):
+                ) in ingest_school.discrepancy_candidates(
+                    projected_source,
+                    candidate,
+                ):
                     key = (candidate_id, field_name, school_key)
                     if key in existing_discrepancy_keys:
                         continue
@@ -2197,6 +2303,37 @@ def approve_plan(
         )
         unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
+        if item.get("category") == "identity":
+            if canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: identity review may not carry a canonical patch"
+                )
+            cross_patches = item.get(
+                "cross_season_source_patch_by_action",
+                {},
+            )
+            expected_cross_patch = cross_patches.get(decision)
+            if expected_cross_patch is None:
+                if source_patch:
+                    raise WorkflowError(
+                        f"{decision_id}: source patches are permitted only for a "
+                        "preflight-proven adjacent-season identity choice"
+                    )
+            else:
+                expected_cross_patch = {
+                    key: str(value)
+                    for key, value in expected_cross_patch.items()
+                }
+                if (
+                    set(expected_cross_patch)
+                    != CROSS_SEASON_IDENTITY_PATCH_FIELDS
+                    or source_patch != expected_cross_patch
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: adjacent-season identity choice requires "
+                        "the exact preflight-proven season_label and game_date "
+                        "source patch"
+                    )
         if item.get("category") == "source_consistency":
             if decision != "APPLY_SOURCE_CONSISTENCY_PATCH":
                 raise WorkflowError(
@@ -3226,17 +3363,34 @@ def apply_pre_ingest_source_patches(
 ) -> dict[str, int]:
     """Apply sealed source-only patches that must exist before ingestion.
 
-    The only supported population is owner-approved H/A/N for a NEW_GAME whose
-    authoritative preflight could not otherwise satisfy NCAA site safety. This runs
-    only inside the sealed disposable/apply transaction, never during preflight.
+    Supported populations are:
+    - owner-approved H/A/N for a NEW_GAME whose authoritative preflight could
+      not otherwise satisfy NCAA site safety; and
+    - an owner-approved adjacent-season identity match whose exact source
+      season/date correction was preflight-proven.
+
+    This runs only inside the sealed disposable/apply transaction, never during
+    preflight.
     """
 
-    items = [
+    site_items = [
         item
         for item in approved.get("decisions", [])
         if item.get("category") == "new_game_site_patch"
     ]
-    if not items:
+    cross_season_identity_items = []
+    for item in approved.get("decisions", []):
+        if item.get("category") != "identity":
+            continue
+        action = item.get("decision", "")
+        expected = item.get(
+            "cross_season_source_patch_by_action",
+            {},
+        ).get(action)
+        if expected is not None:
+            cross_season_identity_items.append(item)
+
+    if not site_items and not cross_season_identity_items:
         return {}
 
     school_key = approved["school_key"]
@@ -3249,7 +3403,7 @@ def apply_pre_ingest_source_patches(
     }
     counts = Counter()
 
-    for item in items:
+    for item in site_items:
         decision_id = item["decision_id"]
         if item.get("decision") != "APPLY_SOURCE_SITE_PATCH":
             raise WorkflowError(
@@ -3293,6 +3447,89 @@ def apply_pre_ingest_source_patches(
             f"decision {decision_id}; raw_text preserved.",
         )
         counts["new_game_site_patches"] += 1
+
+    canonical_by_id: dict[str, dict[str, str]] = {}
+    if cross_season_identity_items:
+        canonical_by_id = {
+            row.get("canonical_game_id", "").strip(): row
+            for row in read_csv(repo / "data/canonical/games.csv")
+            if row.get("canonical_game_id", "").strip()
+        }
+
+    for item in cross_season_identity_items:
+        decision_id = item["decision_id"]
+        action = item.get("decision", "")
+        if not action.startswith("MATCH_CANONICAL:"):
+            raise WorkflowError(
+                f"{decision_id}: adjacent-season source patch requires an exact "
+                "MATCH_CANONICAL identity decision"
+            )
+        canonical_game_id = action.split(":", 1)[1]
+        expected_patch = item.get(
+            "cross_season_source_patch_by_action",
+            {},
+        ).get(action)
+        patch = item.get("source_patch", {})
+        if (
+            not isinstance(expected_patch, dict)
+            or set(expected_patch) != CROSS_SEASON_IDENTITY_PATCH_FIELDS
+            or patch != expected_patch
+        ):
+            raise WorkflowError(
+                f"{decision_id}: sealed adjacent-season source patch does not "
+                "match the preflight-proven patch"
+            )
+
+        source_game_id = item.get("source_game_id", "").strip()
+        source = source_by_id.get(source_game_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: source row {source_game_id!r} is missing"
+            )
+        expected_frozen = item.get("source_identity_expected", {})
+        for field in CROSS_SEASON_IDENTITY_PATCH_FIELDS:
+            current = source.get(field, "").strip()
+            expected = str(expected_frozen.get(field, "")).strip()
+            if current != expected:
+                raise WorkflowError(
+                    f"{decision_id}: frozen source {field} changed before sealed "
+                    f"apply; expected {expected!r}, found {current!r}"
+                )
+
+        canonical = canonical_by_id.get(canonical_game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"{decision_id}: reviewed canonical game {canonical_game_id!r} "
+                "is missing before sealed apply"
+            )
+        school = source.get("source_program_key", "").strip()
+        opponent = source.get("normalized_opponent_key", "").strip()
+        team_a, team_b = ingest_school.ordered_pair(school, opponent)
+        if (
+            canonical.get("team_a_key", "").strip(),
+            canonical.get("team_b_key", "").strip(),
+        ) != (team_a, team_b):
+            raise WorkflowError(
+                f"{decision_id}: reviewed cross-season canonical team pair drifted"
+            )
+        if (
+            canonical.get("season_label", "").strip()
+            != str(expected_patch["season_label"]).strip()
+            or canonical.get("game_date", "").strip()
+            != str(expected_patch["game_date"]).strip()
+        ):
+            raise WorkflowError(
+                f"{decision_id}: reviewed cross-season canonical season/date drifted"
+            )
+
+        source["season_label"] = str(expected_patch["season_label"]).strip()
+        source["game_date"] = str(expected_patch["game_date"]).strip()
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "Owner-approved adjacent-season identity correction applied by "
+            f"sealed onboarding decision {decision_id}; raw_text preserved.",
+        )
+        counts["adjacent_season_identity_patches"] += 1
 
     write_csv_preserving_format(source_path, source_fields, source_rows)
     return dict(counts)
