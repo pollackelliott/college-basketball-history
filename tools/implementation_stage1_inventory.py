@@ -141,6 +141,8 @@ def main() -> int:
             args.school_key,
             actual_sha,
         )
+        if staged_from is not None:
+            print(f"Transport ZIP relocated: {staged_from} -> {package}")
 
         head, origin_main = ensure_phase0_state(
             repo,
@@ -221,8 +223,6 @@ def main() -> int:
         print(f"School:                    {args.school_key}")
         print(f"Current protected main:    {origin_main}")
         print(f"Research base:             {args.research_base}")
-        if staged_from is not None:
-            print(f"Transport ZIP relocated:   {staged_from} -> {package}")
         print(f"Status:                    {report['status']}")
         print(f"Total blockers:            {report['blocker_count']}")
         print(
