@@ -329,10 +329,10 @@ class SourceConsistencyApplyTests(unittest.TestCase):
                 played_result="L",
             )
             canonical = self.base_canonical(
-                team_a_key="beta",
-                team_b_key="alpha",
-                team_a_score="73",
-                team_b_score="71",
+                team_a_key="alpha",
+                team_b_key="beta",
+                team_a_score="71",
+                team_b_score="73",
                 result_winner_team_key="beta",
             )
             discrepancy = blank_row(
@@ -341,8 +341,8 @@ class SourceConsistencyApplyTests(unittest.TestCase):
                 canonical_game_id="CBBG-1",
                 field_name="score",
                 source_a_program_key="alpha",
-                source_a_value="56-64",
-                canonical_value="73-71",
+                source_a_value="64-56",
+                canonical_value="71-73",
                 status="UNDER_REVIEW",
             )
             self.prepare_repo(repo, canonical, source, [discrepancy])
@@ -366,8 +366,8 @@ class SourceConsistencyApplyTests(unittest.TestCase):
                 "source_game_id": "ALPHA-1",
                 "canonical_game_id": "CBBG-1",
                 "field_name": "score",
-                "source_value": "56-64",
-                "canonical_value": "73-71",
+                "source_value": "64-56",
+                "canonical_value": "71-73",
                 "decision": "KEEP_CANONICAL",
                 "resolution_basis": "Reciprocal authoritative score controls.",
                 "canonical_patch": {},
@@ -388,8 +388,8 @@ class SourceConsistencyApplyTests(unittest.TestCase):
             )
             self.assertEqual((corrected["team_score"], corrected["opponent_score"]), ("71", "73"))
             self.assertEqual((assertion["team_score"], assertion["opponent_score"]), ("71", "73"))
-            self.assertEqual((canonical_after["team_a_score"], canonical_after["team_b_score"]), ("73", "71"))
-            self.assertEqual(discrepancy_after["source_a_value"], "56-64")
+            self.assertEqual((canonical_after["team_a_score"], canonical_after["team_b_score"]), ("71", "73"))
+            self.assertEqual(discrepancy_after["source_a_value"], "64-56")
             self.assertEqual(discrepancy_after["status"], "RESOLVED")
             self.assertEqual(counts["canonical_retentions"], 1)
             self.assertEqual(counts["source_consistency_patches"], 1)
