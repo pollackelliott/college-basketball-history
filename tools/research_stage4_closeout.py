@@ -554,6 +554,7 @@ def _package_venue_matches_parent_key(
     package_row: dict[str, str],
     expected_venue_key: str,
     venue_rows_by_key: dict[str, list[dict[str, str]]],
+    venue_rows: list[dict[str, str]],
 ) -> bool:
     candidates = venue_rows_by_key.get(expected_venue_key, [])
     if len(candidates) != 1:
@@ -577,10 +578,8 @@ def _package_venue_matches_parent_key(
     if not package_name or package_name not in accepted_names:
         return False
 
-    for game_field, venue_field in (
-        ("city", "city"),
-        ("state", "state"),
-    ):
+    locality_conflict = False
+    for game_field, venue_field in (("city", "city"), ("state", "state")):
         game_value = package_row.get(game_field, "").strip()
         venue_value = venue_row.get(venue_field, "").strip()
         if (
@@ -588,6 +587,50 @@ def _package_venue_matches_parent_key(
             and venue_value
             and game_value.casefold() != venue_value.casefold()
         ):
+            locality_conflict = True
+            break
+
+    if not locality_conflict:
+        return True
+
+    # A game may preserve an accepted locality label that differs from the
+    # canonical locality stored for the same physical venue. Venue-key
+    # identity is ambiguous only when another same-name venue row is
+    # compatible with the accepted game locality. The game city/state fields
+    # are compared separately against the Stage 3B parent and remain strict.
+    package_city = package_row.get("city", "").strip()
+    package_state = package_row.get("state", "").strip()
+    for other in venue_rows:
+        other_key = other.get("venue_key", "").strip()
+        if not other_key or other_key == expected_venue_key:
+            continue
+        other_names = {
+            _normalized_venue_name(name)
+            for name in (
+                [other.get("canonical_name", "").strip()]
+                + [
+                    alias.strip()
+                    for alias in other.get("aliases", "").split(";")
+                ]
+            )
+            if name.strip()
+        }
+        if package_name not in other_names:
+            continue
+
+        other_city = other.get("city", "").strip()
+        other_state = other.get("state", "").strip()
+        city_matches = (
+            not package_city
+            or not other_city
+            or package_city.casefold() == other_city.casefold()
+        )
+        state_matches = (
+            not package_state
+            or not other_state
+            or package_state.casefold() == other_state.casefold()
+        )
+        if city_matches and state_matches:
             return False
 
     return True
@@ -652,6 +695,7 @@ def compare_parent_semantics(
                         actual_row,
                         expected[field],
                         venue_rows_by_key,
+                        venue_rows,
                     )
                     else ""
                 )
