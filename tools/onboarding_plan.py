@@ -3448,11 +3448,13 @@ def apply_pre_ingest_source_patches(
         )
         counts["new_game_site_patches"] += 1
 
-    canonical_by_id = {
-        row.get("canonical_game_id", "").strip(): row
-        for row in read_csv(repo / "data/canonical/games.csv")
-        if row.get("canonical_game_id", "").strip()
-    }
+    canonical_by_id: dict[str, dict[str, str]] = {}
+    if cross_season_identity_items:
+        canonical_by_id = {
+            row.get("canonical_game_id", "").strip(): row
+            for row in read_csv(repo / "data/canonical/games.csv")
+            if row.get("canonical_game_id", "").strip()
+        }
 
     for item in cross_season_identity_items:
         decision_id = item["decision_id"]
