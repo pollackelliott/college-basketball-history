@@ -21,6 +21,8 @@ maintenance/ambiguity population is resolved.
 from __future__ import annotations
 
 import argparse
+import shutil
+import subprocess
 import tempfile
 from pathlib import Path
 
@@ -36,6 +38,70 @@ from stage_research_portfolio import (
     write_stage1_reconciliation_inventory,
 )
 from stage1_reference_reconciliation import load_conference_reconciliation
+
+
+def stage_transport_input_if_needed(
+    package: Path,
+    repo: Path,
+    school_key: str,
+    actual_sha: str,
+    *,
+    temp_root: Path | None = None,
+) -> tuple[Path, Path | None]:
+    """Move a browser-uploaded root ZIP outside the Git worktree.
+
+    GitHub Codespaces browser uploads commonly land in the repository root.
+    Stage 1 cleanliness guards should not force the owner to manually copy or
+    move that transport artifact before running the permanent inventory tool.
+
+    Only an untracked ZIP directly in the repository root is eligible. Any
+    other input path is left unchanged.
+    """
+    package = package.resolve()
+    repo = repo.resolve()
+    if package.parent != repo or package.suffix.casefold() != ".zip":
+        return package, None
+
+    tracked = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "ls-files",
+            "--error-unmatch",
+            "--",
+            package.name,
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if tracked.returncode == 0:
+        raise WorkflowError(
+            "research ZIP is tracked repository content; refusing to relocate it "
+            f"from the worktree: {package.name}"
+        )
+
+    staging_root = (
+        temp_root.resolve()
+        if temp_root is not None
+        else Path(tempfile.gettempdir()).resolve()
+    ) / "cbh-implementation-inputs"
+    staging_root.mkdir(parents=True, exist_ok=True)
+    staged = staging_root / f"{school_key}-{actual_sha}.zip"
+
+    if staged.exists():
+        staged_sha = sha256_file(staged)
+        if staged_sha.lower() != actual_sha.lower():
+            raise WorkflowError(
+                "staged research ZIP hash collision at "
+                f"{staged}: expected {actual_sha}, found {staged_sha}"
+            )
+        package.unlink()
+    else:
+        shutil.move(str(package), str(staged))
+
+    return staged.resolve(), package
 
 
 def parse_args() -> argparse.Namespace:
@@ -63,6 +129,13 @@ def main() -> int:
                 f"research ZIP SHA-256 mismatch: expected {args.expected_sha256}, "
                 f"found {actual_sha}"
             )
+
+        package, staged_from = stage_transport_input_if_needed(
+            package,
+            repo,
+            args.school_key,
+            actual_sha,
+        )
 
         head, origin_main = ensure_phase0_state(
             repo,
@@ -143,6 +216,8 @@ def main() -> int:
         print(f"School:                    {args.school_key}")
         print(f"Current protected main:    {origin_main}")
         print(f"Research base:             {args.research_base}")
+        if staged_from is not None:
+            print(f"Transport ZIP relocated:   {staged_from} -> {package}")
         print(f"Status:                    {report['status']}")
         print(f"Total blockers:            {report['blocker_count']}")
         print(
