@@ -13,6 +13,11 @@ Normal use:
 The durable result is written to:
     .onboarding/<school>/stage1-reconciliation.json
 
+In browser GitHub Codespaces the owner may drag the research ZIP into the
+repository root. After the expected SHA-256 is verified, this command
+automatically relocates an untracked root ZIP to /tmp/cbh-implementation-inputs/
+before branch/cleanliness-sensitive Stage 1 checks.
+
 A non-PASS inventory is an expected planning result, not a shell failure. The
 subsequent guarded staging command will refuse to proceed until the complete
 maintenance/ambiguity population is resolved.
