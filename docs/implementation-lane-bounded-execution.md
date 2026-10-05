@@ -43,6 +43,8 @@ When the owner's Codespace is the only execution surface, invoke the supported p
 
 "Phase-sized" does not mean monolithic. The normal relay should contain one principal repository operation plus its immediate validation. Do not wrap a permanent command in a large bespoke program merely to restate its branch, lifecycle, validation, or release invariants, and do not combine mutation, regenerated preflight, rehearsal, release preparation, and unrelated confidence checks into one giant wrapper merely to reduce the number of pastes.
 
+Browser Codespaces transport convention: the owner may drag the immutable `RESEARCH_FROZEN` ZIP into the repository root in the Explorer. Do **not** ask the owner to manually copy or move that ZIP to `/tmp`. The permanent `python tools/implementation_stage1_inventory.py ...` command accepts that repository-root path, verifies the expected SHA-256 first, and then relocates an untracked root ZIP to `/tmp/cbh-implementation-inputs/` before any branch/cleanliness-sensitive Stage 1 guard runs. A tracked ZIP is never relocated. Inputs already outside the repository root are left unchanged.
+
 Follow `docs/codespace-terminal-safety.md` exactly. In particular:
 
 - never use `set -u`, `set -euo pipefail`, or `set -eo pipefail` directly in the owner's interactive shell;
