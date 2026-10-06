@@ -1106,6 +1106,8 @@ def closeout(
         "research_acceptance_contract_warnings": len(
             research_check.get("warnings", [])
         ),
+        "research_coverage": counts.get("coverage", {}),
+        "home_chronology": counts.get("home_chronology", {}),
         "owner_scan": scan_summary,
         "mechanical_stage4_csv_repairs_required": 0,
         "mechanical_stage4_csv_repairs_applied": 0,
@@ -1153,6 +1155,15 @@ def closeout(
             "site_completeness"
         ].get("unaccounted_gap_rows", 0),
         "ncaa_rows": counts["ncaa_rows"],
+        "primary_source_historical_cutoff": counts.get("coverage", {}).get(
+            "primary_source_historical_cutoff", ""
+        ),
+        "required_completed_season_cutoff": counts.get("coverage", {}).get(
+            "required_completed_season_cutoff", ""
+        ),
+        "home_chronology_conflicts": counts.get("home_chronology", {}).get(
+            "home_chronology_conflicts", 0
+        ),
         "non_d1_owner_scan_distinct_identities": scan_summary[
             "distinct_identities"
         ],
