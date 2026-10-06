@@ -7,13 +7,17 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
-from site_completeness import source_site_completeness_report  # noqa: E402
+from site_completeness import (  # noqa: E402
+    source_home_chronology_report,
+    source_site_completeness_report,
+)
 
 
 FIELDS = [
     "source_game_id",
     "season_label",
     "curated_site_type",
+    "source_venue_name",
     "curated_venue_name",
     "city",
     "state",
@@ -28,6 +32,7 @@ def row(**overrides):
         "source_game_id": "TESTRAW-00001",
         "season_label": "2025-2026",
         "curated_site_type": "SOURCE_PROGRAM_HOME",
+        "source_venue_name": "",
         "curated_venue_name": "Example Arena",
         "city": "Example City",
         "state": "EX",
@@ -156,6 +161,7 @@ class SourceSiteCompletenessTests(unittest.TestCase):
             [
                 row(
                     curated_site_type="OPPONENT_HOME",
+                    source_venue_name="",
                     curated_venue_name="",
                     city="",
                     state="",
@@ -165,6 +171,54 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["material_gap_rows"], 0)
         self.assertEqual(report["counts"]["home_publication_blocker_rows"], 0)
+
+    def test_explicit_opponent_home_source_venue_cannot_disappear_silently(self):
+        report = source_site_completeness_report(
+            FIELDS,
+            [
+                row(
+                    curated_site_type="OPPONENT_HOME",
+                    source_venue_name="Opponent Arena",
+                    curated_venue_name="",
+                    city="",
+                    state="",
+                )
+            ],
+        )
+        self.assertEqual(report["counts"]["material_gap_rows"], 1)
+        self.assertEqual(report["counts"]["unaccounted_gap_rows"], 1)
+        self.assertEqual(
+            report["counts"]["opponent_home_source_venue_unpreserved"],
+            1,
+        )
+        self.assertEqual(
+            report["counts"]["opponent_home_source_site_location_missing"],
+            1,
+        )
+
+    def test_ambiguous_explicit_opponent_home_evidence_can_be_accounted(self):
+        report = source_site_completeness_report(
+            FIELDS,
+            [
+                row(
+                    curated_site_type="OPPONENT_HOME",
+                    source_venue_name="Armory",
+                    curated_venue_name="",
+                    city="",
+                    state="",
+                    site_research_status="RESEARCHED_PARTIAL",
+                    site_research_basis=(
+                        "Target source preserves the literal venue label, but the "
+                        "physical identity/locality is ambiguous; no opponent-home "
+                        "archaeology was opened."
+                    ),
+                )
+            ],
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["material_gap_rows"], 1)
+        self.assertEqual(report["counts"]["researched_gap_rows"], 1)
+        self.assertEqual(report["counts"]["unaccounted_gap_rows"], 0)
 
     def test_non_ncaa_neutral_and_postseason_gaps_are_counted(self):
         report = source_site_completeness_report(
@@ -244,6 +298,77 @@ class SourceSiteCompletenessTests(unittest.TestCase):
         self.assertEqual(report["by_decade"]["home_missing_both"]["1900s"], 1)
         self.assertEqual(report["by_decade"]["home_missing_both"]["1970s"], 1)
         self.assertEqual(report["counts"]["home_publication_blocker_rows"], 2)
+
+
+
+class HomeChronologyChallengeTests(unittest.TestCase):
+    def venue(self, name, relationship_type="", start="", end="", aliases=""):
+        return {
+            "source_program_key": "test",
+            "canonical_name": name,
+            "aliases": aliases,
+            "relationship_type": relationship_type,
+            "relationship_start": start,
+            "relationship_end": end,
+        }
+
+    def home_game(self, venue_name, game_date="2026-01-15"):
+        return row(
+            source_game_id="HOME-1",
+            season_label="2025-2026",
+            game_date=game_date,
+            curated_site_type="SOURCE_PROGRAM_HOME",
+            curated_venue_name=venue_name,
+            city="Example City",
+            state="EX",
+        )
+
+    def test_primary_home_relationship_passes(self):
+        report = source_home_chronology_report(
+            [self.home_game("Example Arena")],
+            [
+                self.venue(
+                    "Example Arena",
+                    "primary_home",
+                    "2020-11-01",
+                    "2030-03-31",
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_documented_alternate_home_exception_passes(self):
+        report = source_home_chronology_report(
+            [self.home_game("Downtown Arena")],
+            [
+                self.venue("Example Arena", "primary_home", "2020-11-01", "2030-03-31"),
+                self.venue(
+                    "Downtown Arena",
+                    "alternate_home",
+                    "2026-01-15",
+                    "2026-01-15",
+                ),
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_exact_home_venue_outside_documented_chronology_is_flagged_only(self):
+        game = self.home_game("Opponent Gym")
+        report = source_home_chronology_report(
+            [game],
+            [
+                self.venue("Example Arena", "primary_home", "2020-11-01", "2030-03-31"),
+                self.venue("Opponent Gym"),
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
+        self.assertTrue(any("adversarial review signal only" in e for e in report["errors"]))
+        self.assertEqual(game["curated_site_type"], "SOURCE_PROGRAM_HOME")
 
 
 if __name__ == "__main__":
