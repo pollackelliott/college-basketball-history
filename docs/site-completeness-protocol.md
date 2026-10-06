@@ -24,6 +24,10 @@ The site census covers at least:
 
 - `SOURCE_PROGRAM_HOME` rows missing `curated_venue_name`;
 - `SOURCE_PROGRAM_HOME` rows missing city/state;
+- fully populated `SOURCE_PROGRAM_HOME` rows whose exact venue is not supported by
+  the documented source-program HOME relationship chronology for that date/season;
+- `OPPONENT_HOME` rows that already preserve an explicit source venue but lose the
+  curated venue and/or normalized locality without research accounting;
 - every `UNKNOWN` `curated_site_type` row;
 - non-NCAA `NEUTRAL` rows missing venue and/or city/state;
 - `CONFERENCE_TOURNAMENT`, `NIT`, and `POSTSEASON` rows missing venue and/or city/state;
@@ -56,6 +60,13 @@ city/state may be propagated across already-established HOME rows under the same
 default-plus-exceptions model, provided alternate/off-campus exceptions are isolated.
 This is not permission to infer H/A/N from geography.
 
+Before freeze, also adversarially compare every exact `SOURCE_PROGRAM_HOME` venue
+against the package's documented HOME relationships (for example `primary_home`,
+`alternate_home`, or `temporary_home`) and their accepted date ranges. A mismatch is
+a **review signal, not an automatic reclassification**. Resolve it from historical
+authority by either correcting H/A/N/site meaning or documenting the supported HOME
+exception/relationship. Venue geography alone never supplies that answer.
+
 A broad unexplored pre-arena era remains unfinished research. A homogeneous ancient
 residual whose reasonable systematic paths have been exhausted may be terminalized as a
 population rather than reopened game by game, but every such row must have complete
@@ -69,8 +80,12 @@ school's Research responsibility.
 The source school still owns supported H/A/N classification. If exact opponent-home
 venue evidence is already present in the source, an accepted reciprocal package,
 canonical/evidence layers, or approved shared-reference evidence, preserve and use it
-with provenance. Otherwise, do not browse historical sources solely to fill the
-opponent's home building; leave that chronology to the opponent's own Research lane.
+with provenance. In particular, a nonblank literal `source_venue_name` may not simply
+become a blank curated venue/locality at freeze. Preserve the accepted site, or if the
+literal label cannot safely be resolved to a physical venue/locality, keep the literal
+evidence and explicitly research-account that ambiguity. Otherwise, do not browse
+historical sources solely to fill the opponent's home building; leave that chronology to
+the opponent's own Research lane.
 
 If the home opponent is already published, known accepted home-site evidence should be
 available for propagation and may not be silently discarded. A published home program's
@@ -156,9 +171,12 @@ The columns are source-research metadata. They are not canonical basketball fact
 
 `RESEARCH_FROZEN` fails when:
 
+- any exact source-program HOME venue conflicts with the documented HOME relationship
+  chronology without a supported HOME relationship/exception;
 - any source-program HOME row lacks complete city/state;
 - any source-program HOME venue blank lacks a valid `RESEARCHED_UNRESOLVED_HOME_VENUE` research finding;
-- any other material site-gap row is merely blank and unaccounted;
+- any other material site-gap row is merely blank and unaccounted, including explicit
+  opponent-home source venue evidence that was silently dropped;
 - any stricter existing rule such as NCAA site completeness fails.
 
 A portfolio therefore cannot pass solely because:
@@ -180,6 +198,7 @@ home rows missing venue: <count>
 home rows missing location: 0
 home rows missing both: 0
 home publication blockers: 0
+home chronology conflicts: 0
 researched-unresolved home venue rows: <count>
 unknown H/A/N rows: <count>
 neutral rows missing venue/location: <count>/<count>
