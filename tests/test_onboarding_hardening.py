@@ -57,6 +57,12 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
         overtime_periods="0",
         administrative_status="",
         administrative_note="",
+        season_label="2025-2026",
+        game_date="2026-03-19",
+        raw_text="NCAA Tournament game",
+        primary_source_cutoff="2024-2025",
+        required_completed_cutoff="2025-2026",
+        include_coverage=True,
     ):
         game_fields = [
             "source_game_id",
@@ -87,8 +93,8 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                 {
                     "source_game_id": "TESTRAW-00001",
                     "source_program_key": "test",
-                    "season_label": "2025-2026",
-                    "game_date": "2026-03-19",
+                    "season_label": season_label,
+                    "game_date": game_date,
                     "source_opponent_label": "Example",
                     "normalized_opponent_key": "example",
                     "team_score": "70",
@@ -104,7 +110,7 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     "event_or_tournament": "NCAA Tournament",
                     "curated_game_type": "NCAA_TOURNAMENT",
                     "curated_postseason_round": "R64" if ncaa_complete else "",
-                    "raw_text": "NCAA Tournament game",
+                    "raw_text": raw_text,
                 }
             ],
         )
@@ -142,7 +148,14 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             [{"source_program_key": "test"}],
         )
         (root / "notes.md").write_text("# notes\n", encoding="utf-8")
-        (root / "source-notes.md").write_text("# source notes\n", encoding="utf-8")
+        source_notes = "# source notes\n"
+        if include_coverage:
+            source_notes += (
+                "\n## Research coverage declaration\n\n"
+                f"- Primary-source historical results cutoff: {primary_source_cutoff}\n"
+                f"- Required completed-season cutoff: {required_completed_cutoff}\n"
+            )
+        (root / "source-notes.md").write_text(source_notes, encoding="utf-8")
 
     def test_complete_ncaa_site_passes_research_freeze(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -151,6 +164,72 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             report = research_portfolio_report(root, school_key="test")
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["errors"], [])
+
+    def test_preseason_guide_cutoff_can_precede_required_completed_season(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                primary_source_cutoff="2024-2025",
+                required_completed_cutoff="2025-2026",
+                season_label="2025-2026",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(
+                report["counts"]["coverage"]["primary_source_historical_cutoff"],
+                "2024-2025",
+            )
+            self.assertEqual(
+                report["counts"]["coverage"]["required_completed_season_cutoff"],
+                "2025-2026",
+            )
+            self.assertEqual(report["counts"]["coverage"]["required_season_rows"], 1)
+
+    def test_declared_required_completed_season_must_be_in_target_rows(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                season_label="2024-2025",
+                game_date="2025-03-19",
+                primary_source_cutoff="2024-2025",
+                required_completed_cutoff="2025-2026",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertTrue(
+                any(
+                    "contains zero competitive target-school rows for that season"
+                    in error
+                    for error in report["errors"]
+                )
+            )
+
+    def test_legacy_package_without_coverage_declaration_remains_readable(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(root, include_coverage=False)
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertTrue(
+                any("legacy compatibility" in warning for warning in report["warnings"])
+            )
+
+    def test_exhibition_cannot_satisfy_completed_season_coverage(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                raw_text="Exhibition game",
+                primary_source_cutoff="2024-2025",
+                required_completed_cutoff="2025-2026",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertTrue(
+                any("exhibition-like wording" in error for error in report["errors"])
+            )
 
     def test_incomplete_ncaa_site_blocks_research_freeze(self):
         with tempfile.TemporaryDirectory() as temporary:
