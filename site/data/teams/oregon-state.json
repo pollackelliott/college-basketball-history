@@ -3822,7 +3822,7 @@
       "opponent_key": "notre-dame",
       "opponent_name": "Notre Dame",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "acc",
         "conference_name": "ACC"
@@ -58274,7 +58274,7 @@
       "opponent_key": "notre-dame",
       "opponent_name": "Notre Dame",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 70,
       "opponent_score": 79,
       "score_known": true,
@@ -64974,7 +64974,7 @@
       "opponent_key": "notre-dame",
       "opponent_name": "Notre Dame",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 69,
       "opponent_score": 72,
       "score_known": true,
