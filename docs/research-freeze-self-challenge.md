@@ -59,6 +59,14 @@ another comparably concrete opportunity has already been identified.
 
 ## 2. HOME venue self-challenge
 
+The HOME challenge applies to **both blanks and fully populated exact venues**. Before
+freeze, compare every exact `SOURCE_PROGRAM_HOME` venue against the documented
+source-program HOME relationship chronology for that game date/season. A venue outside
+that chronology is a bounded adversarial review population: it may represent an H/A/N
+mistake, a legitimate alternate/temporary HOME exception that needs durable relationship
+documentation, or another historical issue. The audit must never change H/A/N from
+geography alone.
+
 If any `RESEARCHED_UNRESOLVED_HOME_VENUE` rows remain, the lane must report and validate:
 
 - total count;
@@ -75,7 +83,12 @@ the **1930s or earlier**, but that era is not an automatic waiver. The self-chal
 still ask whether obvious institutional, facility, archival, schedule, reciprocal, or
 game-level evidence was actually exhausted.
 
-If the self-challenge exposes a documented temporary home, alternate home, predecessor building, transition date, or reciprocal venue assertion, repair those rows before freeze.
+If the self-challenge exposes a documented temporary home, alternate home, predecessor
+building, transition date, reciprocal venue assertion, or an exact HOME venue outside the
+recorded HOME relationship chronology, repair/adjudicate those rows before freeze. A
+legitimate exception should be represented durably as a supported HOME relationship;
+a chronology mismatch may not be waived merely because the row has a complete venue and
+city/state.
 
 Once a bounded population challenge establishes that a known aggregate facility allocation cannot safely be assigned at the individual-game level, preserve those rows as researched unresolved rather than repeatedly reopening the same allocation question.
 
