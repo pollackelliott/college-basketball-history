@@ -510,6 +510,90 @@ class Stage4AuthoringTests(unittest.TestCase):
         self.assertEqual(accepted_key["city"], "Testville")
         self.assertEqual(accepted_key["state"], "TS")
 
+    def test_projection_preserves_legacy_stage3a4_site_fields(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        ledger = [
+            {
+                "research_game_id": "HOME-DEBT",
+                "source_program_key": "test",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "season_label": "1920-1921",
+                "stage3a_final_site_type": "SOURCE_PROGRAM_HOME",
+                "venue_city": "Testville",
+                "venue_state": "TS",
+                "han_research_status": "PREESTABLISHED",
+                "han_research_note": "H/A/N already established.",
+                "venue_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+                "venue_research_note": (
+                    "HOME and locality established; exact building unresolved."
+                ),
+            },
+            {
+                "research_game_id": "EXACT-HOME",
+                "source_program_key": "test",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "season_label": "2024-2025",
+                "stage3a_final_site_type": "SOURCE_PROGRAM_HOME",
+                "venue_key": "test-gym",
+                "venue_name": "Test Gym",
+                "venue_city": "Testville",
+                "venue_state": "TS",
+                "han_research_status": "PREESTABLISHED",
+                "venue_research_status": "RESOLVED_EXACT_HOME_VENUE",
+            },
+            {
+                "research_game_id": "UNKNOWN-HAN",
+                "source_program_key": "test",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "season_label": "1965-1966",
+                "stage3a_final_site_type": "UNKNOWN",
+                "han_research_status": "RESEARCHED_UNRESOLVED",
+                "han_research_note": (
+                    "Accepted institutional evidence remains contradictory."
+                ),
+                "venue_research_status": "STAGE3A1_RESEARCHED_UNRESOLVED_HAN",
+            },
+        ]
+
+        games, defects = mod._projection(ledger, opponents, venues)
+        self.assertEqual(defects, [])
+        by_id = {row["source_game_id"]: row for row in games}
+
+        debt = by_id["HOME-DEBT"]
+        self.assertEqual(debt["curated_venue_name"], "")
+        self.assertEqual(debt["city"], "Testville")
+        self.assertEqual(debt["state"], "TS")
+        self.assertEqual(
+            debt["site_research_status"],
+            "RESEARCHED_UNRESOLVED_HOME_VENUE",
+        )
+        self.assertEqual(
+            debt["site_research_basis"],
+            "HOME and locality established; exact building unresolved.",
+        )
+
+        exact = by_id["EXACT-HOME"]
+        self.assertEqual(exact["curated_venue_name"], "Test Gym")
+        self.assertEqual(exact["city"], "Testville")
+        self.assertEqual(exact["state"], "TS")
+        self.assertEqual(exact["site_research_status"], "")
+        self.assertEqual(exact["site_research_basis"], "")
+
+        unknown = by_id["UNKNOWN-HAN"]
+        self.assertEqual(unknown["curated_site_type"], "UNKNOWN")
+        self.assertEqual(
+            unknown["site_research_status"],
+            "RESEARCHED_UNRESOLVED",
+        )
+        self.assertEqual(
+            unknown["site_research_basis"],
+            "Accepted institutional evidence remains contradictory.",
+        )
+
     def test_projection_carries_postseason_han_research_accounting(self):
         _, opponents = mod._csv_bytes(opponent_bytes())
         _, venues = mod._csv_bytes(venue_bytes())

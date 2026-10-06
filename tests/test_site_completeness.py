@@ -427,6 +427,48 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         )
         self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
 
+    def test_legacy_per_game_home_support_passes_without_interval(self):
+        report = source_home_chronology_report(
+            [self.home_game("Mixed Use Arena", "1981-03-07")],
+            [
+                self.venue(
+                    "Mixed Use Arena",
+                    site_rule=(
+                        "Per-game accepted venue assignment; venue identity "
+                        "does not establish H/A/N."
+                    ),
+                    notes=(
+                        "Venue can host SOURCE_PROGRAM_HOME and explicitly "
+                        "NEUTRAL games; accepted assignments are game-level."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["chronology_rows"], 1)
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_per_game_rule_without_explicit_home_authority_still_fails(self):
+        report = source_home_chronology_report(
+            [self.home_game("Neutral Event Arena", "1981-03-07")],
+            [
+                self.venue(
+                    "Neutral Event Arena",
+                    site_rule="Per-game accepted venue assignment.",
+                    notes="Accepted neutral-event assignments only.",
+                ),
+                self.venue(
+                    "Example Arena",
+                    "primary_home",
+                    "2020-11-01",
+                    "2030-03-31",
+                ),
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
+
     def test_exact_home_venue_outside_documented_chronology_is_flagged_only(self):
         game = self.home_game("Opponent Gym")
         report = source_home_chronology_report(

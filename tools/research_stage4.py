@@ -151,6 +151,51 @@ def _first(row: dict[str, str], *fields: str) -> str:
     return ""
 
 
+def _research_accounting(
+    row: dict[str, str],
+) -> tuple[str, str]:
+    """Project accepted research-accounting fields across schema generations.
+
+    Legacy Stage 3A ledgers may split H/A/N accounting from venue accounting.
+    Skip resolved/nonterminal status values and preserve the first actual
+    research-debt status together with its matching basis instead of letting
+    an unrelated resolved status mask a later unresolved one.
+    """
+
+    candidates = (
+        (
+            "stage3b_site_research_status",
+            ("stage3b_site_research_basis",),
+        ),
+        (
+            "stage3b_postseason_han_status",
+            ("stage3b_postseason_han_basis",),
+        ),
+        (
+            "stage3a_site_research_status",
+            ("stage3a_site_research_basis",),
+        ),
+        (
+            "site_research_status",
+            ("site_research_basis",),
+        ),
+        (
+            "han_research_status",
+            ("han_research_note", "han_research_basis"),
+        ),
+        (
+            "venue_research_status",
+            ("venue_research_note", "venue_research_basis"),
+        ),
+    )
+    for status_field, basis_fields in candidates:
+        status = row.get(status_field, "").strip().upper()
+        if status not in ALLOWED_RESEARCH_STATUSES:
+            continue
+        return status, _first(row, *basis_fields)
+    return "", ""
+
+
 def _norm_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.casefold())
 
@@ -312,15 +357,7 @@ def _projection(
                 }
             )
 
-        research_status = _first(
-            row,
-            "stage3b_site_research_status",
-            "stage3b_postseason_han_status",
-            "stage3a_site_research_status",
-            "site_research_status",
-        )
-        if research_status not in ALLOWED_RESEARCH_STATUSES:
-            research_status = ""
+        research_status, research_basis = _research_accounting(row)
 
         accepted_venue_key = _first(row, "accepted_venue_key")
         accepted_venue: dict[str, str] = {}
@@ -388,6 +425,7 @@ def _projection(
                     "stage3a2_physical_venue_name",
                     "stage3a3_physical_venue_name",
                     "curated_venue_name",
+                    "venue_name",
                 )
                 or accepted_venue.get("canonical_name", "").strip(),
                 "city": _first(
@@ -401,6 +439,7 @@ def _projection(
                     "stage3a2_venue_city",
                     "stage3a3_venue_city",
                     "city",
+                    "venue_city",
                 )
                 or accepted_venue.get("city", "").strip(),
                 "state": _first(
@@ -414,6 +453,7 @@ def _projection(
                     "stage3a2_venue_state",
                     "stage3a3_venue_state",
                     "state",
+                    "venue_state",
                 )
                 or accepted_venue.get("state", "").strip(),
                 "event_or_tournament": _first(
@@ -436,17 +476,7 @@ def _projection(
                 "administrative_note": administrative_note,
                 "notes": _first(row, "notes", "stage1_notes"),
                 "site_research_status": research_status,
-                "site_research_basis": (
-                    _first(
-                        row,
-                        "stage3b_site_research_basis",
-                        "stage3b_postseason_han_basis",
-                        "stage3a_site_research_basis",
-                        "site_research_basis",
-                    )
-                    if research_status
-                    else ""
-                ),
+                "site_research_basis": research_basis if research_status else "",
             }
         )
     return projected, defects

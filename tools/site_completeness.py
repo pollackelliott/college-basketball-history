@@ -168,13 +168,47 @@ def _documented_home_exception_dates(
     return dates
 
 
+def _legacy_per_game_home_support(
+    venue: dict[str, str],
+) -> bool:
+    """Recognize explicit legacy per-game HOME relationship representation.
+
+    Some accepted pre-hardening venue capsules intentionally avoided a broad
+    date interval for mixed-use facilities and instead documented that venue
+    assignments were accepted per game. Treat that as HOME support only when
+    the structured relationship field is blank, the site rule explicitly says
+    assignments are per-game accepted, and the durable basis/notes explicitly
+    identify HOME use. This does not infer H/A/N from the venue itself and does
+    not create a continuous HOME interval.
+    """
+
+    if venue.get("relationship_type", "").strip():
+        return False
+
+    site_rule = " ".join(
+        (venue.get("site_rule", "") or "").casefold().split()
+    )
+    if "per-game accepted venue assignment" not in site_rule:
+        return False
+
+    authority = "\n".join(
+        venue.get(field, "") or ""
+        for field in ("source_basis", "notes")
+    )
+    folded_authority = authority.casefold()
+    return (
+        "source_program_home" in folded_authority
+        or bool(re.search(r"\bhome\b", authority, flags=re.IGNORECASE))
+    )
+
+
 def _home_relationship_supports_game(
     venue: dict[str, str],
     game: dict[str, str],
 ) -> bool:
     relationship = venue.get("relationship_type", "").strip().casefold()
     if "home" not in relationship:
-        return False
+        return _legacy_per_game_home_support(venue)
 
     game_interval = _game_interval(game)
     if game_interval is None:
@@ -217,8 +251,10 @@ def source_home_chronology_report(
 
     This is an adversarial signal only. It never infers or rewrites H/A/N from
     geography, venue identity, or opponent identity. A legitimate alternate or
-    temporary HOME site should be represented by a dated venue relationship whose
-    relationship_type contains the word home.
+    temporary HOME site should normally be represented by a dated venue relationship
+    whose relationship_type contains the word home. Accepted legacy capsules may
+    instead carry explicit per-game HOME support in durable venue metadata; that
+    narrow representation is consumed in memory without creating a date interval.
     """
 
     game_rows = list(games)
@@ -227,7 +263,10 @@ def source_home_chronology_report(
         row
         for row in venue_rows
         if row.get("source_program_key", "").strip() in {"", school_key}
-        and "home" in row.get("relationship_type", "").strip().casefold()
+        and (
+            "home" in row.get("relationship_type", "").strip().casefold()
+            or _legacy_per_game_home_support(row)
+        )
     ]
     warnings: list[str] = []
     if not chronology_rows:

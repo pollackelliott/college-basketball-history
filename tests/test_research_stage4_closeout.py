@@ -664,6 +664,66 @@ class Stage4CloseoutTests(unittest.TestCase):
             [],
         )
 
+    def test_legacy_stage3a4_venue_fields_match_author_projection(self):
+        parent = [
+            {
+                "research_game_id": "LEGACY-STG3A4",
+                "source_program_key": "test",
+                "season_label": "2024-2025",
+                "game_date": "2025-01-15",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "game_type": "REGULAR_SEASON",
+                "raw_text": "raw LEGACY-STG3A4",
+                "stage3a_final_site_type": "SOURCE_PROGRAM_HOME",
+                "venue_name": "Test Gym",
+                "venue_city": "Testville",
+                "venue_state": "TS",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "LEGACY-STG3A4",
+                "source_program_key": "test",
+                "season_label": "2024-2025",
+                "game_date": "2025-01-15",
+                "normalized_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "curated_site_type": "SOURCE_PROGRAM_HOME",
+                "curated_venue_name": "Test Gym",
+                "city": "Testville",
+                "state": "TS",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "raw LEGACY-STG3A4",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "test-gym",
+                "canonical_name": "Test Gym",
+                "aliases": "",
+                "city": "Testville",
+                "state": "TS",
+            }
+        ]
+
+        self.assertEqual(
+            mod.compare_parent_semantics(parent, package, venues),
+            [],
+        )
+
+        changed = [dict(package[0])]
+        changed[0]["city"] = "Elsewhere"
+        mismatches = mod.compare_parent_semantics(parent, changed, venues)
+        self.assertEqual(len(mismatches), 1)
+        self.assertEqual(mismatches[0]["field"], "city")
+
     def test_base_venue_locality_fields_match_author_projection(self):
         parent = [
             {
