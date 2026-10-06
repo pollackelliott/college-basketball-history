@@ -16,6 +16,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from integration_freeze_guard import SEMANTIC_SOURCE_GAME_FIELDS
 from program_history import partition_source_rows, scope_canonical_games
 from site_completeness import (
     ALLOWED_SITE_RESEARCH_STATUSES,
@@ -34,6 +35,85 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         return list(reader.fieldnames or []), list(reader)
+
+
+CORRECTION_WORKFLOW_KIND = "POST_PUBLICATION_CORRECTION"
+
+
+def _correction_source_validation_scope(
+    repo: Path,
+    school_key: str,
+    rows: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], dict[str, Any]]:
+    """Scope source-side Research debt only for an explicit correction integration.
+
+    Standard/new-school Integration Freeze manifests do not carry workflow_kind and
+    therefore retain the existing full-source validation behavior unchanged.
+    """
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        return rows, {
+            "mode": "FULL_SOURCE_PACKAGE",
+            "scoped_source_games": len(rows),
+        }
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("workflow_kind") != CORRECTION_WORKFLOW_KIND:
+        return rows, {
+            "mode": "FULL_SOURCE_PACKAGE",
+            "scoped_source_games": len(rows),
+        }
+
+    correction_ids = {
+        str(value).strip()
+        for value in manifest.get("correction_source_game_ids", [])
+        if str(value).strip()
+    }
+    guard = manifest.get("pre_correction_source_semantic_guard", {})
+    snapshot = guard.get("snapshot", {}) if isinstance(guard, dict) else {}
+    baseline_rows = snapshot.get("rows", {}) if isinstance(snapshot, dict) else {}
+    if not correction_ids or not isinstance(baseline_rows, dict):
+        raise ValueError(
+            "correction Integration Freeze lacks correction_source_game_ids or "
+            "pre-correction semantic baseline"
+        )
+
+    current_by_id = {
+        row.get("source_game_id", "").strip(): row
+        for row in rows
+        if row.get("source_game_id", "").strip()
+    }
+
+    # Include any later Gate-1 source patch as well as the original correction
+    # population, so a correction cannot hide a newly introduced source-side gap.
+    scoped_ids = set(correction_ids)
+    for source_id, row in current_by_id.items():
+        current_semantics = {
+            field: row.get(field, "")
+            for field in SEMANTIC_SOURCE_GAME_FIELDS
+        }
+        baseline = baseline_rows.get(source_id)
+        if baseline is None or current_semantics != baseline:
+            scoped_ids.add(source_id)
+
+    missing = sorted(scoped_ids - set(current_by_id))
+    if missing:
+        raise ValueError(
+            "correction source validation references missing in-scope source rows: "
+            + ", ".join(missing[:20])
+        )
+
+    scoped = [
+        row
+        for row in rows
+        if row.get("source_game_id", "").strip() in scoped_ids
+    ]
+    return scoped, {
+        "mode": "CORRECTION_DELTA",
+        "scoped_source_games": len(scoped),
+        "correction_source_games": len(correction_ids),
+    }
 
 
 def _complete_pair(first: str, second: str) -> bool:
@@ -505,9 +585,12 @@ def implementation_site_report(
         history_start,
         history_scope_intervals,
     )
+    source_validation_rows, source_validation_scope = (
+        _correction_source_validation_scope(repo, school_key, in_scope_sources)
+    )
     source_report = source_site_completeness_report(
         source_fields,
-        in_scope_sources,
+        source_validation_rows,
         example_limit=example_limit,
     )
 
@@ -859,6 +942,7 @@ def implementation_site_report(
             "reciprocal_unpropagated": reciprocal_total,
         },
         "source_site_counts": source_report["counts"],
+        "source_validation_scope": source_validation_scope,
         "examples": {key: value for key, value in sorted(examples.items())},
     }
 
@@ -873,6 +957,12 @@ def print_report(report: dict[str, Any]) -> None:
         "Source-site counts:   "
         + json.dumps(report["source_site_counts"], sort_keys=True)
     )
+    scope = report.get("source_validation_scope", {})
+    if scope.get("mode") == "CORRECTION_DELTA":
+        print(
+            "Source validation:  correction delta "
+            f"({scope.get('scoped_source_games', 0):,} row(s))"
+        )
     if report["examples"]:
         print("Examples:             " + json.dumps(report["examples"], sort_keys=True))
     for warning in report["warnings"]:
