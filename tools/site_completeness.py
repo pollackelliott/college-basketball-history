@@ -136,6 +136,38 @@ def _game_interval(row: dict[str, str]) -> tuple[dt.date, dt.date] | None:
     return _season_interval(row.get("season_label", ""))
 
 
+def _documented_home_exception_dates(
+    venue: dict[str, str],
+) -> set[dt.date]:
+    """Return exact dated HOME exceptions encoded on a HOME relationship row.
+
+    Current Research venue state may preserve a default HOME interval plus
+    explicitly researched one-game exceptions on the same physical venue row.
+    That representation is active only when relationship_type itself declares
+    an exception topology; arbitrary dates mentioned in ordinary venue notes
+    never waive chronology review.
+    """
+
+    relationship = venue.get("relationship_type", "").strip().casefold()
+    if "home" not in relationship or "exception" not in relationship:
+        return set()
+
+    rendered = "\n".join(
+        venue.get(field, "") or ""
+        for field in ("site_rule", "notes")
+    )
+    dates: set[dt.date] = set()
+    for token in re.findall(
+        r"(?<!\d)(\d{4}-\d{2}-\d{2})(?!\d)",
+        rendered,
+    ):
+        try:
+            dates.add(dt.date.fromisoformat(token))
+        except ValueError:
+            continue
+    return dates
+
+
 def _home_relationship_supports_game(
     venue: dict[str, str],
     game: dict[str, str],
@@ -156,6 +188,17 @@ def _home_relationship_supports_game(
         venue.get("relationship_end", ""), end=True
     )
     game_start, game_end = game_interval
+
+    # A single exact game date may be explicitly documented as a later/earlier
+    # HOME exception on the same venue relationship row.  This is narrower
+    # than extending the relationship interval and therefore preserves the
+    # chronology guard for every unlisted game.
+    if (
+        game_start == game_end
+        and game_start in _documented_home_exception_dates(venue)
+    ):
+        return True
+
     if relation_start and game_end < relation_start:
         return False
     if relation_end and game_start > relation_end:
