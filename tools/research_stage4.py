@@ -359,17 +359,7 @@ def _projection(
 
         research_status, research_basis = _research_accounting(row)
 
-        accepted_venue_key = _first(
-            row,
-            "accepted_venue_key",
-            "stage3b_current_main_venue_key",
-            "stage3b_curated_venue_key",
-            "stage3a_final_current_main_venue_key",
-            "stage3a_curated_venue_key",
-            "stage3a2_current_main_venue_key",
-            "stage3a3_current_main_venue_key",
-            "venue_key",
-        )
+        accepted_venue_key = _first(row, "accepted_venue_key")
         accepted_venue: dict[str, str] = {}
         if accepted_venue_key:
             candidates = venues_by_key.get(accepted_venue_key, [])
