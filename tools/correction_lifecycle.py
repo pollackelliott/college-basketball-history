@@ -102,7 +102,7 @@ def by_id(fields: list[str], rows: list[dict[str, str]], label: str) -> dict[str
     return out
 
 
-def source_diff(before: bytes, after: bytes) -> dict[str, Any]:
+def source_game_diff(before: bytes, after: bytes) -> dict[str, Any]:
     bf, br = csv_bytes(before)
     af, ar = csv_bytes(after)
     if bf != af:
@@ -119,7 +119,7 @@ def source_diff(before: bytes, after: bytes) -> dict[str, Any]:
         if fields:
             modified.append({"source_game_id": key, "fields": fields})
     ids = [r["source_game_id"] for r in added] + [r["source_game_id"] for r in modified]
-    return {"added": added, "modified": modified, "deleted": [], "changed_source_game_ids": ids}
+    return {"added": added, "modified": modified, "deleted": [],\n            "added_count": len(added), "modified_count": len(modified), "deleted_count": 0,\n            "changed_source_game_ids": ids}
 
 
 def exact_diff(base: dict[str, bytes], root: Path) -> dict[str, Any]:
@@ -135,15 +135,15 @@ def exact_diff(base: dict[str, bytes], root: Path) -> dict[str, Any]:
         members[name] = {"baseline_sha256": sha_bytes(before), "candidate_sha256": sha_bytes(after),
                          "changed": before != after, "unified_diff": unified}
     return {"schema_version": 1, "members": members,
-            "source_games": source_diff(base["source-games.csv"], (root / "source-games.csv").read_bytes())}
+            "source_games": source_game_diff(base["source-games.csv"], (root / "source-games.csv").read_bytes())}
 
 
-def scoped_acceptance(root: Path, school: str, ids: list[str]) -> dict[str, Any]:
+def validate_correction_candidate(root: Path, school_key: str, changed_source_game_ids: list[str]) -> dict[str, Any]:
     fields, games = csv_file(root / "source-games.csv")
     _, opponents = csv_file(root / "opponents.csv")
     _, venues = csv_file(root / "venues.csv")
     rows = by_id(fields, games, "candidate")
-    missing = sorted(set(ids) - set(rows))
+    ids = list(changed_source_game_ids)\n    school = school_key\n    missing = sorted(set(ids) - set(rows))
     errors = ["missing correction source IDs: " + ", ".join(missing)] if missing else []
     changed = [rows[k] for k in ids if k in rows]
     opp_keys = {r.get("canonical_opponent_key", "").strip() for r in opponents}
@@ -184,7 +184,7 @@ def freeze(args: argparse.Namespace, repo: Path) -> int:
         ids = diff["source_games"]["changed_source_game_ids"]
         if not ids:
             raise WorkflowError("candidate changes no source-game rows")
-        acceptance = scoped_acceptance(root, args.school_key, ids)
+        acceptance = validate_correction_candidate(root, args.school_key, ids)
         report = {"school_key": args.school_key, "research_base_sha": args.research_base,
                   "scope": args.scope, "research_authority_ref": args.research_authority_ref,
                   "research_authority_digest": args.research_authority_digest,
@@ -273,7 +273,7 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
         drift = [n for n in REQUIRED_PACKAGE_FILES if current[n] != frozen["baseline_package_sha256"][n]]
         if drift: raise WorkflowError("target package changed since correction Research: " + ", ".join(drift))
         ids = list(frozen["correction_source_game_ids"])
-        acceptance = scoped_acceptance(root, school, ids)
+        acceptance = validate_correction_candidate(root, school, ids)
         if acceptance["status"] != "PASS": raise WorkflowError("frozen candidate no longer passes scoped acceptance")
         validate_registered_venues(repo, root, ids)
         pre = build_source_game_semantic_snapshot(school_dir / "source-games.csv")
