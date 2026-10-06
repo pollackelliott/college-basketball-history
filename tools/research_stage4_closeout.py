@@ -454,6 +454,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a2_physical_venue_name",
             "stage3a3_physical_venue_name",
             "curated_venue_name",
+            "venue_name",
         )
         city = _first_parent_value(
             row,
@@ -466,6 +467,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a2_venue_city",
             "stage3a3_venue_city",
             "city",
+            "venue_city",
         )
         state = _first_parent_value(
             row,
@@ -478,6 +480,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a2_venue_state",
             "stage3a3_venue_state",
             "state",
+            "venue_state",
         )
         venue_key = _first_parent_value(
             row,
@@ -497,6 +500,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a2_physical_venue_name",
             "stage3a3_physical_venue_name",
             "curated_venue_name",
+            "venue_name",
         )
         city = _first_parent_value(
             row,
@@ -507,6 +511,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a2_venue_city",
             "stage3a3_venue_city",
             "city",
+            "venue_city",
         )
         state = _first_parent_value(
             row,
@@ -517,6 +522,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a2_venue_state",
             "stage3a3_venue_state",
             "state",
+            "venue_state",
         )
         venue_key = _first_parent_value(
             row,
