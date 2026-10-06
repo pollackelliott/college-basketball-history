@@ -168,22 +168,20 @@ def _documented_home_exception_dates(
     return dates
 
 
-def _legacy_per_game_home_support(
+def _per_game_home_support(
     venue: dict[str, str],
 ) -> bool:
-    """Recognize explicit legacy per-game HOME relationship representation.
+    """Recognize explicit per-game HOME venue support.
 
-    Some accepted pre-hardening venue capsules intentionally avoided a broad
-    date interval for mixed-use facilities and instead documented that venue
-    assignments were accepted per game. Treat that as HOME support only when
-    the structured relationship field is blank, the site rule explicitly says
-    assignments are per-game accepted, and the durable basis/notes explicitly
-    identify HOME use. This does not infer H/A/N from the venue itself and does
-    not create a continuous HOME interval.
+    A mixed-use facility may have both a continuous HOME relationship interval
+    and separately accepted game-level HOME assignments outside that interval.
+    Treat an exact game assignment as supported only when the durable site rule
+    explicitly declares per-game accepted venue assignment and HOME authority
+    is explicit in the structured relationship or durable basis/notes.
+
+    This does not infer H/A/N from venue identity and does not extend any
+    continuous relationship interval.
     """
-
-    if venue.get("relationship_type", "").strip():
-        return False
 
     site_rule = " ".join(
         (venue.get("site_rule", "") or "").casefold().split()
@@ -191,13 +189,15 @@ def _legacy_per_game_home_support(
     if "per-game accepted venue assignment" not in site_rule:
         return False
 
+    relationship = venue.get("relationship_type", "").strip().casefold()
     authority = "\n".join(
         venue.get(field, "") or ""
         for field in ("source_basis", "notes")
     )
     folded_authority = authority.casefold()
     return (
-        "source_program_home" in folded_authority
+        "home" in relationship
+        or "source_program_home" in folded_authority
         or bool(re.search(r"\bhome\b", authority, flags=re.IGNORECASE))
     )
 
@@ -207,8 +207,14 @@ def _home_relationship_supports_game(
     game: dict[str, str],
 ) -> bool:
     relationship = venue.get("relationship_type", "").strip().casefold()
+
+    # Per-game support is an independent accepted relationship form. It may
+    # coexist with a continuous HOME interval on the same mixed-use venue row.
+    if _per_game_home_support(venue):
+        return True
+
     if "home" not in relationship:
-        return _legacy_per_game_home_support(venue)
+        return False
 
     game_interval = _game_interval(game)
     if game_interval is None:
@@ -252,9 +258,10 @@ def source_home_chronology_report(
     This is an adversarial signal only. It never infers or rewrites H/A/N from
     geography, venue identity, or opponent identity. A legitimate alternate or
     temporary HOME site should normally be represented by a dated venue relationship
-    whose relationship_type contains the word home. Accepted legacy capsules may
-    instead carry explicit per-game HOME support in durable venue metadata; that
-    narrow representation is consumed in memory without creating a date interval.
+    whose relationship_type contains the word home. A mixed-use venue may also
+    carry explicit accepted per-game HOME support in durable venue metadata,
+    including alongside a continuous HOME interval; that representation does not
+    create or extend a date interval.
     """
 
     game_rows = list(games)
@@ -265,7 +272,7 @@ def source_home_chronology_report(
         if row.get("source_program_key", "").strip() in {"", school_key}
         and (
             "home" in row.get("relationship_type", "").strip().casefold()
-            or _legacy_per_game_home_support(row)
+            or _per_game_home_support(row)
         )
     ]
     warnings: list[str] = []

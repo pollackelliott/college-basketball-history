@@ -427,7 +427,7 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         )
         self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
 
-    def test_legacy_per_game_home_support_passes_without_interval(self):
+    def test_per_game_home_support_passes_without_interval(self):
         report = source_home_chronology_report(
             [self.home_game("Mixed Use Arena", "1981-03-07")],
             [
@@ -448,6 +448,55 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["chronology_rows"], 1)
         self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_hybrid_home_interval_and_per_game_support_passes_outside_interval(self):
+        report = source_home_chronology_report(
+            [
+                self.home_game("Hybrid Arena", "1979-02-28"),
+                self.home_game("Hybrid Arena", "1990-01-15"),
+            ],
+            [
+                self.venue(
+                    "Hybrid Arena",
+                    "source_program_home",
+                    "1983-1984",
+                    "1999-2000",
+                    site_rule=(
+                        "Per-game accepted venue assignment; venue identity "
+                        "does not establish H/A/N."
+                    ),
+                    notes=(
+                        "Earlier SOURCE_PROGRAM_HOME assignments remain accepted "
+                        "at game level; the continuous interval documents the later "
+                        "primary HOME era."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["chronology_rows"], 1)
+        self.assertEqual(report["counts"]["home_rows_checked"], 2)
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_home_interval_without_per_game_rule_still_blocks_outside_interval(self):
+        report = source_home_chronology_report(
+            [self.home_game("Hybrid Arena", "1979-02-28")],
+            [
+                self.venue(
+                    "Hybrid Arena",
+                    "source_program_home",
+                    "1983-1984",
+                    "1999-2000",
+                    notes=(
+                        "Primary HOME relationship is limited to the documented "
+                        "continuous interval."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
 
     def test_per_game_rule_without_explicit_home_authority_still_fails(self):
         report = source_home_chronology_report(
