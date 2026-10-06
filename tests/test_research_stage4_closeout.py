@@ -664,6 +664,87 @@ class Stage4CloseoutTests(unittest.TestCase):
             [],
         )
 
+    def test_base_venue_locality_fields_match_author_projection(self):
+        parent = [
+            {
+                "research_game_id": "BASE-FIELDS",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "game_type": "REGULAR_SEASON",
+                "raw_text": "raw BASE-FIELDS",
+                "stage3b_status": "COMPLETE",
+                "curated_site_type": "SOURCE_PROGRAM_HOME",
+                "curated_venue_name": "Test Gym",
+                "city": "Testville",
+                "state": "TS",
+            }
+        ]
+        package = [
+            {
+                "source_game_id": "BASE-FIELDS",
+                "source_program_key": "test",
+                "season_label": "2000-2001",
+                "game_date": "2000-12-01",
+                "normalized_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "curated_site_type": "SOURCE_PROGRAM_HOME",
+                "curated_venue_name": "Test Gym",
+                "city": "Testville",
+                "state": "TS",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "raw BASE-FIELDS",
+            }
+        ]
+        venues = [
+            {
+                "venue_key": "test-gym",
+                "canonical_name": "Test Gym",
+                "aliases": "",
+                "city": "Testville",
+                "state": "TS",
+            }
+        ]
+
+        for stage3b_status in (
+            "COMPLETE",
+            "NOT_APPLICABLE_REGULAR_SEASON",
+        ):
+            with self.subTest(stage3b_status=stage3b_status):
+                parent[0]["stage3b_status"] = stage3b_status
+                self.assertEqual(
+                    mod.compare_parent_semantics(parent, package, venues),
+                    [],
+                )
+
+        parent[0]["stage3b_status"] = "COMPLETE"
+        for field, value, expected_field in (
+            ("city", "Elsewhere", "city"),
+            ("state", "ZZ", "state"),
+            ("curated_venue_name", "", "venue_present"),
+        ):
+            with self.subTest(field=field):
+                changed = [dict(package[0])]
+                changed[0][field] = value
+                mismatches = mod.compare_parent_semantics(
+                    parent,
+                    changed,
+                    venues,
+                )
+                self.assertEqual(len(mismatches), 1)
+                self.assertEqual(
+                    mismatches[0]["field"],
+                    expected_field,
+                )
+
     def test_semantic_drift_stops(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
