@@ -84,6 +84,23 @@ Before reporting a current-policy Stage 3B checkpoint COMPLETE, run:
 
 PASS is required.
 
+Stage 4 also requires the two explicit Research coverage declarations:
+`primary_source_historical_cutoff` and `required_completed_season_cutoff`. These
+values may already be durable in the checkpoint status. For an accepted in-flight
+checkpoint that predates this hardening, supply them explicitly to preflight without
+rewriting the parent checkpoint:
+
+    python tools/research_stage4.py preflight <school_key> <stage3b-checkpoint.zip> \
+      --primary-source-historical-cutoff <YYYY-YYYY> \
+      --required-completed-season-cutoff <YYYY-YYYY>
+
+The first value describes where the primary institutional historical results actually
+stop. The second describes the latest completed season the target Research package must
+contain. **Never infer either value from a media-guide title or filename.** A preseason
+2025-26 guide ending with 2024-25 results is normal; if 2025-26 is already completed when
+Research is performed, the target universe supplements that season from official
+institutional schedule/results evidence.
+
 The preflight verifies:
 
 - Stage 3B is complete;
@@ -93,6 +110,7 @@ The preflight verifies:
 - every game has durable opponent presentation authority;
 - literal source-label -> opponent-key mappings are represented;
 - every curated venue name is represented by the durable venue table;
+- the Research coverage declaration is complete and internally ordered;
 - the final game ledger can be projected mechanically into the current source-games.csv vocabulary.
 
 If preflight returns STAGE4_AUTHORING_INPUT_INCOMPLETE or STAGE4_AUTHORING_INPUT_INVALID, remain in Stage 3B mechanical closeout. Repair only the durable representation/capsule defect. Do not reopen historical research unless the defect exposes an actual unresolved historical question.
@@ -103,12 +121,17 @@ After owner continuation from Stage 3B, Stage 4 begins with:
 
     python tools/research_stage4.py author <school_key> <stage3b-checkpoint.zip> --main-sha <protected-main-sha>
 
+If the accepted parent checkpoint does not itself carry the coverage declaration, pass
+the same two explicit cutoff arguments used for preflight. This is a compatibility input,
+not new historical research and not an owner gate.
+
 The coordinator:
 
 1. reruns Stage 4 authoring preflight;
 2. projects the accepted final Stage 3B ledger to current source-games.csv;
 3. copies the three durable authoring tables unchanged;
-4. generates notes.md and source-notes.md mechanically from durable checkpoint state;
+4. generates notes.md and source-notes.md mechanically from durable checkpoint state,
+   including machine-readable primary-source and required-completed-season cutoffs;
 5. invokes the permanent Stage 4 closeout gate;
 6. emits the package, QA, NON_D1 scan, and durable Stage 4 checkpoint.
 
@@ -117,6 +140,11 @@ Stage 4 must not independently rediscover opponent identity, physical venue mean
 ## 6. Legacy checkpoint compatibility
 
 Accepted legacy checkpoints remain authoritative and immutable.
+
+Already-frozen six-file packages that predate the coverage declaration remain readable by
+`research-check` with an explicit legacy warning rather than becoming retroactive
+failures. New Stage 4 authoring runs, however, must supply the declaration before they may
+complete.
 
 The permanent Stage 4 tools may normalize known legacy field vocabulary and checkpoint topology in memory. They must not rewrite the source checkpoint merely to satisfy the current representation.
 
@@ -133,7 +161,8 @@ The permanent Stage 4 coordinator generates their mechanical baseline from:
 - Stage 3B status/checkpoint hashes;
 - final game/site/type censuses;
 - row-level source metadata;
-- durable source registers present in the checkpoint.
+- durable source registers present in the checkpoint;
+- the explicit Research coverage declaration.
 
 They are not a reason to keep essential Research conclusions only in prose/chat.
 
