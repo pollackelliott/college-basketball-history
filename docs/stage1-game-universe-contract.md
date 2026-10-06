@@ -20,6 +20,13 @@ Stage 1 has one owner-facing stage boundary, but internally it should proceed in
 1. **Primary-source inventory and extraction**
    - understand the source structure before row extraction;
    - establish played seasons and source season headings/counts;
+   - record the **primary-source historical results cutoff** from the actual completed
+     results contained by the source, never from a media-guide title or filename;
+   - separately record the **required completed-season cutoff** for the target Research
+     package. If that cutoff is later than the primary-source cutoff, supplement the
+     missing completed season(s) from the current official institutional schedule/results
+     source rather than treating the primary source's normal preseason cutoff as the end
+     of the game universe;
    - extract the complete candidate competitive-game ledger;
    - preserve literal source text/labels;
    - separate obvious non-games such as cancellations, postponements, exhibitions, and duplicate representations.
@@ -77,6 +84,9 @@ Once all of the following are true:
 
 - the competitive game universe is mechanically reconciled;
 - every season census is reconciled or its source-internal discrepancy is explicitly explained;
+- the target game universe reaches its explicitly declared required completed-season
+  cutoff, even when the primary media guide/record book naturally stops one completed
+  season earlier;
 - duplicate/omitted/bleed/inclusion questions are resolved or genuinely owner-blocked;
 - stable research-local game IDs exist;
 - every game has a structured `game_type` sufficient to distinguish `REGULAR_SEASON` from postseason; this is a Stage 1 invariant for new Research lanes and Stage 2 must preserve it unchanged;
@@ -112,6 +122,9 @@ A complete Stage 1 checkpoint should contain, directly or through its manifest:
 - stable research-local IDs;
 - structured `game_type` on every game, with postseason identity sufficient for the later mechanical Stage 3A/3B partition;
 - provenance/literal-source preservation;
+- explicit `primary_source_historical_cutoff` and
+  `required_completed_season_cutoff` declarations, or an equivalent manifested
+  durable representation carried forward for Stage 4;
 - completion status and next bounded stage;
 - manifest/hash verification when the environment supports it.
 
@@ -141,6 +154,8 @@ Flag and stop these Stage 1 behaviors:
 
 - extracting the full universe but postponing all serialization until every historical discrepancy is researched;
 - treating every exact-date or score blank as a Stage 1 blocker;
+- deriving a source-results cutoff from a media-guide title/filename, or treating a
+  normal preseason guide cutoff as permission to omit a later already-completed target season;
 - reopening already reconciled seasons merely because another source family exists;
 - moving from one unrelated discrepancy family to another without writing accepted repairs through;
 - continuing research after the completion conditions in §4 are already satisfied;
