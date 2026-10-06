@@ -1,0 +1,555 @@
+{
+  "schema": "notre-dame-han-correction-research-checkpoint-v1",
+  "checkpoint_status": "CORRECTION_STATE_DURABLE_NOT_FREEZE_READY",
+  "target_school": "Notre Dame",
+  "school_key": "notre-dame",
+  "research_base_sha": "68599c3220f05dfef42bea1f4ce9e85b16f6564c",
+  "protected_main_sha_at_checkpoint": "68599c3220f05dfef42bea1f4ce9e85b16f6564c",
+  "published_package_identity": {
+    "source_games_blob_sha": "5e002621a74cf61b616addd9411616c5f09ab0ad",
+    "opponents_blob_sha": "0b72bb716280e3f2c1471a05059836c8b8a6ae7c",
+    "venues_blob_sha": "ac699c7ed1275934f547a0c1fa76015a3d216928",
+    "conferences_blob_sha": "953c338ec1d1f7c151e7b5e70335e5024d068025",
+    "notes_blob_sha": "d0447a28282436f5385be7ec706515cd3d055976",
+    "source_notes_blob_sha": "2b98990d9f4db872e2067ac7a6814b0e0d075bdf",
+    "competitive_game_rows": 3137
+  },
+  "authority": {
+    "owner_historical_authority_final": true,
+    "re_adjudication_performed": false,
+    "geography_used_for_historical_authority": false,
+    "note": "Locality was used only as a mechanical identity fingerprint to recover the already-defined 27-row Control Center audit population from the published package. The six/21 H/A/N decisions come solely from the owner's final ruling."
+  },
+  "population_validation": {
+    "expected": 27,
+    "actual": 27,
+    "identity_fields": [
+      "source_game_id",
+      "game_date",
+      "source_opponent_label",
+      "curated_venue_name",
+      "city",
+      "state"
+    ],
+    "status": "PASS"
+  },
+  "correction_map": {
+    "neutral_expected": 6,
+    "neutral_actual": 6,
+    "opponent_home_expected": 21,
+    "opponent_home_actual": 21,
+    "neutral": [
+      {
+        "source_game_id": "ND-STG1-00937",
+        "game_date": "1953-02-14",
+        "opponent": "Saint Louis",
+        "opponent_key": "saint-louis",
+        "venue": "Chicago Stadium",
+        "city": "Chicago",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "NEUTRAL"
+      },
+      {
+        "source_game_id": "ND-STG1-01026",
+        "game_date": "1956-12-29",
+        "opponent": "+Manhattan",
+        "opponent_key": "manhattan",
+        "venue": "Madison Square Garden",
+        "city": "New York",
+        "state": "NY",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "NEUTRAL"
+      },
+      {
+        "source_game_id": "ND-STG1-01170",
+        "game_date": "1962-02-19",
+        "opponent": "Purdue",
+        "opponent_key": "purdue",
+        "venue": "FW Memorial Coliseum",
+        "city": "Fort Wayne",
+        "state": "IN",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "NEUTRAL"
+      },
+      {
+        "source_game_id": "ND-STG1-01190",
+        "game_date": "1963-01-21",
+        "opponent": "Purdue",
+        "opponent_key": "purdue",
+        "venue": "FW Memorial Coliseum",
+        "city": "Fort Wayne",
+        "state": "IN",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "NEUTRAL"
+      },
+      {
+        "source_game_id": "ND-STG1-01394",
+        "game_date": "1970-12-10",
+        "opponent": "Northwestern",
+        "opponent_key": "northwestern",
+        "venue": "Chicago Stadium",
+        "city": "Chicago",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "NEUTRAL"
+      },
+      {
+        "source_game_id": "ND-STG1-01740",
+        "game_date": "1982-12-01",
+        "opponent": "Kentucky",
+        "opponent_key": "kentucky",
+        "venue": "Freedom Hall",
+        "city": "Louisville",
+        "state": "KY",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "NEUTRAL"
+      }
+    ],
+    "opponent_home": [
+      {
+        "source_game_id": "ND-STG1-00028",
+        "game_date": "1908-02-27",
+        "opponent": "Michigan State",
+        "opponent_key": "michigan-state",
+        "venue": "The Armory",
+        "city": "East Lansing",
+        "state": "MI",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00031",
+        "game_date": "1908-12-18",
+        "opponent": "Armour Institute",
+        "opponent_key": "illinois-tech",
+        "venue": "Chicago Central YMCA",
+        "city": "Chicago",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00195",
+        "game_date": "1919-02-17",
+        "opponent": "DePauw",
+        "opponent_key": "depauw",
+        "venue": "Bowman Memorial Gym",
+        "city": "Greencastle",
+        "state": "IN",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00234",
+        "game_date": "1921-02-05",
+        "opponent": "Marquette",
+        "opponent_key": "marquette",
+        "venue": "Marquette Gym",
+        "city": "Milwaukee",
+        "state": "WI",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00243",
+        "game_date": "1921-12-16",
+        "opponent": "Armour Institute",
+        "opponent_key": "illinois-tech",
+        "venue": "Armour Gym",
+        "city": "Chicago",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00291",
+        "game_date": "1924-01-16",
+        "opponent": "Loyola (Chicago)",
+        "opponent_key": "loyola-chicago",
+        "venue": "Alumni Gym",
+        "city": "Chicago",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00404",
+        "game_date": "1929-02-09",
+        "opponent": "Pittsburgh",
+        "opponent_key": "pittsburgh",
+        "venue": "Pitt Pavilion",
+        "city": "Pittsburgh",
+        "state": "PA",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00544",
+        "game_date": "1935-12-16",
+        "opponent": "Northwestern",
+        "opponent_key": "northwestern",
+        "venue": "Patton Gymnasium",
+        "city": "Evanston",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00589",
+        "game_date": "1937-12-18",
+        "opponent": "Northwestern",
+        "opponent_key": "northwestern",
+        "venue": "Patton Gymnasium",
+        "city": "Evanston",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00613",
+        "game_date": "1938-12-22",
+        "opponent": "Northwestern",
+        "opponent_key": "northwestern",
+        "venue": "Patton Gymnasium",
+        "city": "Evanston",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00626",
+        "game_date": "1939-02-25",
+        "opponent": "Marquette",
+        "opponent_key": "marquette",
+        "venue": "Marquette Gym",
+        "city": "Milwaukee",
+        "state": "WI",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00809",
+        "game_date": "1948-01-17",
+        "opponent": "Saint Louis",
+        "opponent_key": "saint-louis",
+        "venue": "Kiel Auditorium",
+        "city": "St. Louis",
+        "state": "MO",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00895",
+        "game_date": "1951-12-01",
+        "opponent": "St. Thomas (MN)",
+        "opponent_key": "st-thomas-minnesota",
+        "venue": "Armory",
+        "city": "Saint Paul",
+        "state": "MN",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-00946",
+        "game_date": "1953-12-07",
+        "opponent": "Northwestern",
+        "opponent_key": "northwestern",
+        "venue": "Welsh-Ryan Arena",
+        "city": "Evanston",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-01013",
+        "game_date": "1956-02-18",
+        "opponent": "Purdue",
+        "opponent_key": "purdue",
+        "venue": "Lambert Fieldhouse",
+        "city": "West Lafayette",
+        "state": "IN",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-01110",
+        "game_date": "1960-01-05",
+        "opponent": "Butler",
+        "opponent_key": "butler",
+        "venue": "Hinkle Fieldhouse",
+        "city": "Indianapolis",
+        "state": "IN",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-01211",
+        "game_date": "1964-01-08",
+        "opponent": "DePaul",
+        "opponent_key": "depaul",
+        "venue": "Alumni Hall",
+        "city": "Chicago",
+        "state": "IL",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-01255",
+        "game_date": "1965-12-11",
+        "opponent": "Michigan State",
+        "opponent_key": "michigan-state",
+        "venue": "Jenison Fieldhouse",
+        "city": "East Lansing",
+        "state": "MI",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-01827",
+        "game_date": "1985-03-09",
+        "opponent": "Dayton",
+        "opponent_key": "dayton",
+        "venue": "University of Dayton Arena",
+        "city": "Dayton",
+        "state": "OH",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-01870",
+        "game_date": "1987-01-12",
+        "opponent": "Creighton",
+        "opponent_key": "creighton",
+        "venue": "Omaha Civic Auditorium",
+        "city": "Omaha",
+        "state": "NE",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      },
+      {
+        "source_game_id": "ND-STG1-02049",
+        "game_date": "1992-12-28",
+        "opponent": "+New Orleans",
+        "opponent_key": "new-orleans",
+        "venue": "Lakefront Arena",
+        "city": "New Orleans",
+        "state": "LA",
+        "before": "SOURCE_PROGRAM_HOME",
+        "after": "OPPONENT_HOME"
+      }
+    ]
+  },
+  "mechanical_field_changes": {
+    "changed_fields": [
+      "curated_site_type"
+    ],
+    "changed_row_count": 27,
+    "dependent_field_changes_required": [],
+    "preserved_fields": [
+      "source_venue_name",
+      "curated_venue_name",
+      "city",
+      "state",
+      "raw_text",
+      "team_score",
+      "opponent_score",
+      "played_result",
+      "overtime_periods",
+      "source_opponent_label",
+      "normalized_opponent_key",
+      "normalized_opponent_name"
+    ],
+    "target_rows_with_preexisting_site_or_admin_metadata": []
+  },
+  "safeguards": {
+    "target_scope": {
+      "status": "PASS",
+      "exact_population": true,
+      "exact_owner_map": true,
+      "target_rows_have_complete_existing_venue_city_state": true,
+      "no_target_row_requires_site_research_metadata_change": true
+    },
+    "current_full_package_rule_evaluation": {
+      "status": "FAIL",
+      "note": "Current PR #252 research-check/site logic was evaluated against the published package with only the 27 approved site_type changes applied in memory. No out-of-scope repair was performed.",
+      "site_type_counts_before": {
+        "NEUTRAL": 382,
+        "OPPONENT_HOME": 1157,
+        "SOURCE_PROGRAM_HOME": 1537,
+        "UNKNOWN": 61
+      },
+      "site_type_counts_after": {
+        "NEUTRAL": 388,
+        "OPPONENT_HOME": 1178,
+        "SOURCE_PROGRAM_HOME": 1510,
+        "UNKNOWN": 61
+      },
+      "home_chronology_before": {
+        "home_rows_checked": 1537,
+        "home_chronology_conflicts": 56,
+        "conflict_source_game_ids": [
+          "ND-STG1-00028",
+          "ND-STG1-00031",
+          "ND-STG1-00032",
+          "ND-STG1-00102",
+          "ND-STG1-00109",
+          "ND-STG1-00195",
+          "ND-STG1-00234",
+          "ND-STG1-00243",
+          "ND-STG1-00249",
+          "ND-STG1-00254",
+          "ND-STG1-00256",
+          "ND-STG1-00275",
+          "ND-STG1-00279",
+          "ND-STG1-00281",
+          "ND-STG1-00286",
+          "ND-STG1-00288",
+          "ND-STG1-00289",
+          "ND-STG1-00290",
+          "ND-STG1-00291",
+          "ND-STG1-00292",
+          "ND-STG1-00293",
+          "ND-STG1-00294",
+          "ND-STG1-00298",
+          "ND-STG1-00301",
+          "ND-STG1-00306",
+          "ND-STG1-00310",
+          "ND-STG1-00311",
+          "ND-STG1-00314",
+          "ND-STG1-00317",
+          "ND-STG1-00319",
+          "ND-STG1-00320",
+          "ND-STG1-00321",
+          "ND-STG1-00324",
+          "ND-STG1-00404",
+          "ND-STG1-00541",
+          "ND-STG1-00542",
+          "ND-STG1-00544",
+          "ND-STG1-00589",
+          "ND-STG1-00613",
+          "ND-STG1-00626",
+          "ND-STG1-00809",
+          "ND-STG1-00895",
+          "ND-STG1-00937",
+          "ND-STG1-00946",
+          "ND-STG1-01013",
+          "ND-STG1-01026",
+          "ND-STG1-01110",
+          "ND-STG1-01170",
+          "ND-STG1-01190",
+          "ND-STG1-01211",
+          "ND-STG1-01255",
+          "ND-STG1-01394",
+          "ND-STG1-01740",
+          "ND-STG1-01827",
+          "ND-STG1-01870",
+          "ND-STG1-02049"
+        ]
+      },
+      "home_chronology_after": {
+        "home_rows_checked": 1510,
+        "home_chronology_conflicts": 29,
+        "conflict_source_game_ids": [
+          "ND-STG1-00032",
+          "ND-STG1-00102",
+          "ND-STG1-00109",
+          "ND-STG1-00249",
+          "ND-STG1-00254",
+          "ND-STG1-00256",
+          "ND-STG1-00275",
+          "ND-STG1-00279",
+          "ND-STG1-00281",
+          "ND-STG1-00286",
+          "ND-STG1-00288",
+          "ND-STG1-00289",
+          "ND-STG1-00290",
+          "ND-STG1-00292",
+          "ND-STG1-00293",
+          "ND-STG1-00294",
+          "ND-STG1-00298",
+          "ND-STG1-00301",
+          "ND-STG1-00306",
+          "ND-STG1-00310",
+          "ND-STG1-00311",
+          "ND-STG1-00314",
+          "ND-STG1-00317",
+          "ND-STG1-00319",
+          "ND-STG1-00320",
+          "ND-STG1-00321",
+          "ND-STG1-00324",
+          "ND-STG1-00541",
+          "ND-STG1-00542"
+        ]
+      },
+      "site_completeness_after": {
+        "counts": {
+          "opponent_home_source_venue_unpreserved": 1096,
+          "opponent_home_source_site_location_missing": 1095,
+          "unknown_site_type": 61,
+          "material_gap_rows": 1157,
+          "researched_gap_rows": 61,
+          "unaccounted_gap_rows": 1096,
+          "home_publication_blocker_rows": 0,
+          "researched_unresolved_home_venue_rows": 0
+        },
+        "warning_unnecessary_site_metadata_rows": 8
+      },
+      "blocking_populations": [
+        {
+          "kind": "OPPONENT_HOME_SOURCE_SITE_PRESERVATION",
+          "rows": 1096,
+          "detail": "1096 rows retain explicit source venue evidence without curated venue; 1095 also lack normalized locality. This population is outside the authorized 27-row correction."
+        },
+        {
+          "kind": "SOURCE_PROGRAM_HOME_RELATIONSHIP_CHRONOLOGY",
+          "rows": 29,
+          "source_game_ids": [
+            "ND-STG1-00032",
+            "ND-STG1-00102",
+            "ND-STG1-00109",
+            "ND-STG1-00249",
+            "ND-STG1-00254",
+            "ND-STG1-00256",
+            "ND-STG1-00275",
+            "ND-STG1-00279",
+            "ND-STG1-00281",
+            "ND-STG1-00286",
+            "ND-STG1-00288",
+            "ND-STG1-00289",
+            "ND-STG1-00290",
+            "ND-STG1-00292",
+            "ND-STG1-00293",
+            "ND-STG1-00294",
+            "ND-STG1-00298",
+            "ND-STG1-00301",
+            "ND-STG1-00306",
+            "ND-STG1-00310",
+            "ND-STG1-00311",
+            "ND-STG1-00314",
+            "ND-STG1-00317",
+            "ND-STG1-00319",
+            "ND-STG1-00320",
+            "ND-STG1-00321",
+            "ND-STG1-00324",
+            "ND-STG1-00541",
+            "ND-STG1-00542"
+          ],
+          "detail": "These 29 remaining conflicts are outside the authorized 27-row correction population and were not reopened."
+        }
+      ],
+      "nonblocking_legacy_warnings": [
+        "source-notes.md predates the explicit primary-source/required-completed-season coverage declaration; current research-check accepts this only as a legacy compatibility warning.",
+        "8 row(s) have site-research metadata despite no current material site gap."
+      ]
+    },
+    "correction_self_challenge": {
+      "status": "PASS_FOR_BOUNDED_DELTA",
+      "basis": "The owner map is final authority; the audit only challenged population identity, mapping cardinality, evidence preservation, dependent-field consistency, and whether the approved delta creates new site gaps. It did not reopen unrelated Notre Dame history."
+    }
+  },
+  "freeze_ready": false,
+  "freeze_blocker": "The exact 27-row correction delta is durable, but current full-package Research acceptance is blocked by out-of-scope legacy site-preservation and HOME-relationship populations exposed by PR #252. Scope forbids repairing or reopening those rows here.",
+  "implementation_started": false,
+  "protected_main_mutated": false
+}
