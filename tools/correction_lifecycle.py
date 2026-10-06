@@ -119,7 +119,9 @@ def source_game_diff(before: bytes, after: bytes) -> dict[str, Any]:
         if fields:
             modified.append({"source_game_id": key, "fields": fields})
     ids = [r["source_game_id"] for r in added] + [r["source_game_id"] for r in modified]
-    return {"added": added, "modified": modified, "deleted": [],\n            "added_count": len(added), "modified_count": len(modified), "deleted_count": 0,\n            "changed_source_game_ids": ids}
+    return {"added": added, "modified": modified, "deleted": [],
+            "added_count": len(added), "modified_count": len(modified), "deleted_count": 0,
+            "changed_source_game_ids": ids}
 
 
 def exact_diff(base: dict[str, bytes], root: Path) -> dict[str, Any]:
@@ -143,7 +145,9 @@ def validate_correction_candidate(root: Path, school_key: str, changed_source_ga
     _, opponents = csv_file(root / "opponents.csv")
     _, venues = csv_file(root / "venues.csv")
     rows = by_id(fields, games, "candidate")
-    ids = list(changed_source_game_ids)\n    school = school_key\n    missing = sorted(set(ids) - set(rows))
+    ids = list(changed_source_game_ids)
+    school = school_key
+    missing = sorted(set(ids) - set(rows))
     errors = ["missing correction source IDs: " + ", ".join(missing)] if missing else []
     changed = [rows[k] for k in ids if k in rows]
     opp_keys = {r.get("canonical_opponent_key", "").strip() for r in opponents}
