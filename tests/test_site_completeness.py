@@ -462,8 +462,8 @@ class HomeChronologyChallengeTests(unittest.TestCase):
                     "1983-1984",
                     "1999-2000",
                     site_rule=(
-                        "Per-game accepted venue assignment; venue identity "
-                        "does not establish H/A/N."
+                        "Per-game accepted regular-season HOME assignment; "
+                        "venue identity does not establish H/A/N."
                     ),
                     notes=(
                         "Earlier SOURCE_PROGRAM_HOME assignments remain accepted "
@@ -478,6 +478,25 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         self.assertEqual(report["counts"]["chronology_rows"], 1)
         self.assertEqual(report["counts"]["home_rows_checked"], 2)
         self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_per_game_home_wording_without_accepted_semantics_still_fails(self):
+        report = source_home_chronology_report(
+            [self.home_game("Hybrid Arena", "1979-02-28")],
+            [
+                self.venue(
+                    "Hybrid Arena",
+                    "source_program_home",
+                    "1983-1984",
+                    "1999-2000",
+                    site_rule=(
+                        "Per-game proposed regular-season HOME assignment; "
+                        "venue identity does not establish H/A/N."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
 
     def test_home_interval_without_per_game_rule_still_blocks_outside_interval(self):
         report = source_home_chronology_report(
