@@ -302,7 +302,16 @@ class SourceSiteCompletenessTests(unittest.TestCase):
 
 
 class HomeChronologyChallengeTests(unittest.TestCase):
-    def venue(self, name, relationship_type="", start="", end="", aliases=""):
+    def venue(
+        self,
+        name,
+        relationship_type="",
+        start="",
+        end="",
+        aliases="",
+        site_rule="",
+        notes="",
+    ):
         return {
             "source_program_key": "test",
             "canonical_name": name,
@@ -310,6 +319,8 @@ class HomeChronologyChallengeTests(unittest.TestCase):
             "relationship_type": relationship_type,
             "relationship_start": start,
             "relationship_end": end,
+            "site_rule": site_rule,
+            "notes": notes,
         }
 
     def home_game(self, venue_name, game_date="2026-01-15"):
@@ -355,6 +366,66 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         )
         self.assertEqual(report["errors"], [])
         self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_documented_later_home_exception_on_same_venue_row_passes(self):
+        report = source_home_chronology_report(
+            [self.home_game("Legacy Arena", "2000-12-07")],
+            [
+                self.venue(
+                    "Legacy Arena",
+                    "PRIMARY_HOME_WITH_LATER_EXCEPTIONS",
+                    "1950-11-01",
+                    "1988-03-12",
+                    site_rule=(
+                        "Primary HOME through 1988; later HOME exceptions: "
+                        "1998-12-01; 1999-12-07; 1999-12-29; "
+                        "2000-12-07; 2002-01-02."
+                    ),
+                    notes=(
+                        "Accepted institutional facility chronology; exact "
+                        "listed exception dates override the primary interval."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
+    def test_unlisted_date_still_fails_exception_relationship(self):
+        report = source_home_chronology_report(
+            [self.home_game("Legacy Arena", "2000-12-08")],
+            [
+                self.venue(
+                    "Legacy Arena",
+                    "PRIMARY_HOME_WITH_LATER_EXCEPTIONS",
+                    "1950-11-01",
+                    "1988-03-12",
+                    site_rule="Later HOME exception: 2000-12-07.",
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
+
+    def test_date_in_ordinary_home_notes_does_not_waive_chronology(self):
+        report = source_home_chronology_report(
+            [self.home_game("Legacy Arena", "2000-12-07")],
+            [
+                self.venue(
+                    "Legacy Arena",
+                    "primary_home",
+                    "1950-11-01",
+                    "1988-03-12",
+                    notes=(
+                        "Research note mentions 2000-12-07, but this "
+                        "relationship does not declare an exception topology."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
 
     def test_exact_home_venue_outside_documented_chronology_is_flagged_only(self):
         game = self.home_game("Opponent Gym")
