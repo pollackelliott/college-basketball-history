@@ -10,6 +10,7 @@ qualifies for the dedicated researched-unresolved-home-venue exception.
 
 from __future__ import annotations
 
+import datetime as dt
 import re
 from collections import Counter, defaultdict
 from typing import Any, Iterable
@@ -44,6 +45,7 @@ def _season_decade(season_label: str) -> str:
 def _row_gap_categories(row: dict[str, str]) -> list[str]:
     site = row.get("curated_site_type", "").strip().upper()
     game_type = row.get("curated_game_type", "").strip().upper()
+    source_venue = row.get("source_venue_name", "").strip()
     venue = row.get("curated_venue_name", "").strip()
     city = row.get("city", "").strip()
     state = row.get("state", "").strip()
@@ -58,6 +60,12 @@ def _row_gap_categories(row: dict[str, str]) -> list[str]:
             categories.append("home_missing_location")
         if not venue and location_missing:
             categories.append("home_missing_both")
+
+    if site == "OPPONENT_HOME" and source_venue:
+        if not venue:
+            categories.append("opponent_home_source_venue_unpreserved")
+        if location_missing:
+            categories.append("opponent_home_source_site_location_missing")
 
     if site == "UNKNOWN":
         categories.append("unknown_site_type")
@@ -77,6 +85,189 @@ def _row_gap_categories(row: dict[str, str]) -> list[str]:
             categories.append("postseason_missing_location")
 
     return categories
+
+
+def _normalize_venue_name(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
+
+
+def _season_interval(value: str) -> tuple[dt.date, dt.date] | None:
+    match = re.fullmatch(r"(\d{4})-(\d{2}|\d{4})", (value or "").strip())
+    if not match:
+        return None
+    start = int(match.group(1))
+    end_token = match.group(2)
+    end = (
+        int(end_token)
+        if len(end_token) == 4
+        else (start // 100) * 100 + int(end_token)
+    )
+    if end != start + 1:
+        return None
+    return dt.date(start, 7, 1), dt.date(end, 6, 30)
+
+
+def _relationship_bound(value: str, *, end: bool) -> dt.date | None:
+    raw = (value or "").strip()
+    if not raw:
+        return None
+    try:
+        return dt.date.fromisoformat(raw)
+    except ValueError:
+        pass
+    season = _season_interval(raw)
+    if season:
+        return season[1] if end else season[0]
+    if re.fullmatch(r"\d{4}", raw):
+        year = int(raw)
+        return dt.date(year, 12, 31) if end else dt.date(year, 1, 1)
+    return None
+
+
+def _game_interval(row: dict[str, str]) -> tuple[dt.date, dt.date] | None:
+    raw_date = row.get("game_date", "").strip()
+    if raw_date:
+        try:
+            game_date = dt.date.fromisoformat(raw_date)
+        except ValueError:
+            pass
+        else:
+            return game_date, game_date
+    return _season_interval(row.get("season_label", ""))
+
+
+def _home_relationship_supports_game(
+    venue: dict[str, str],
+    game: dict[str, str],
+) -> bool:
+    relationship = venue.get("relationship_type", "").strip().casefold()
+    if "home" not in relationship:
+        return False
+
+    game_interval = _game_interval(game)
+    if game_interval is None:
+        # Missing/ambiguous dates cannot prove a chronology contradiction.
+        return True
+
+    relation_start = _relationship_bound(
+        venue.get("relationship_start", ""), end=False
+    )
+    relation_end = _relationship_bound(
+        venue.get("relationship_end", ""), end=True
+    )
+    game_start, game_end = game_interval
+    if relation_start and game_end < relation_start:
+        return False
+    if relation_end and game_start > relation_end:
+        return False
+    return True
+
+
+def source_home_chronology_report(
+    games: Iterable[dict[str, str]],
+    venues: Iterable[dict[str, str]],
+    *,
+    school_key: str,
+    example_limit: int = 25,
+) -> dict[str, Any]:
+    """Challenge exact HOME venues against documented HOME relationships.
+
+    This is an adversarial signal only. It never infers or rewrites H/A/N from
+    geography, venue identity, or opponent identity. A legitimate alternate or
+    temporary HOME site should be represented by a dated venue relationship whose
+    relationship_type contains the word home.
+    """
+
+    game_rows = list(games)
+    venue_rows = list(venues)
+    chronology_rows = [
+        row
+        for row in venue_rows
+        if row.get("source_program_key", "").strip() in {"", school_key}
+        and "home" in row.get("relationship_type", "").strip().casefold()
+    ]
+    warnings: list[str] = []
+    if not chronology_rows:
+        warnings.append(
+            "venues.csv has no documented HOME relationship chronology; exact "
+            "SOURCE_PROGRAM_HOME venue chronology challenge skipped for legacy "
+            "compatibility"
+        )
+        return {
+            "errors": [],
+            "warnings": warnings,
+            "counts": {
+                "chronology_rows": 0,
+                "home_rows_checked": 0,
+                "home_chronology_conflicts": 0,
+            },
+            "conflict_examples": [],
+        }
+
+    by_name: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for venue in venue_rows:
+        names = [venue.get("canonical_name", "")]
+        names.extend(venue.get("aliases", "").split(";"))
+        for name in names:
+            normalized = _normalize_venue_name(name)
+            if normalized:
+                by_name[normalized].append(venue)
+
+    checked = 0
+    conflict_count = 0
+    conflicts: list[dict[str, str]] = []
+    for row in game_rows:
+        if row.get("curated_site_type", "").strip().upper() != "SOURCE_PROGRAM_HOME":
+            continue
+        venue_name = row.get("curated_venue_name", "").strip()
+        if not venue_name:
+            continue
+        candidates = by_name.get(_normalize_venue_name(venue_name), [])
+        if not candidates:
+            # The general research acceptance gate separately rejects an unknown
+            # curated venue identity. Do not duplicate that error here.
+            continue
+        checked += 1
+        if any(_home_relationship_supports_game(venue, row) for venue in candidates):
+            continue
+        conflict_count += 1
+        if len(conflicts) < example_limit:
+            conflicts.append(
+                {
+                    "source_game_id": row.get("source_game_id", "").strip(),
+                    "season_label": row.get("season_label", "").strip(),
+                    "game_date": row.get("game_date", "").strip(),
+                    "curated_venue_name": venue_name,
+                }
+            )
+
+    errors: list[str] = []
+    if conflict_count:
+        rendered = "; ".join(
+            f"{item['source_game_id'] or '[unknown id]'} "
+            f"({item['game_date'] or item['season_label'] or 'date unknown'}: "
+            f"{item['curated_venue_name']})"
+            for item in conflicts
+        )
+        errors.append(
+            f"{conflict_count:,} SOURCE_PROGRAM_HOME row(s) use an exact venue "
+            "not supported by the documented source-program HOME relationship "
+            "chronology. This is an adversarial review signal only: do not infer "
+            "H/A/N from geography. Correct H/A/N from accepted historical evidence "
+            "or document the venue as a supported HOME relationship/exception in "
+            f"venues.csv. Examples: {rendered}"
+        )
+
+    return {
+        "errors": errors,
+        "warnings": warnings,
+        "counts": {
+            "chronology_rows": len(chronology_rows),
+            "home_rows_checked": checked,
+            "home_chronology_conflicts": conflict_count,
+        },
+        "conflict_examples": conflicts,
+    }
 
 
 def researched_unresolved_home_venue(row: dict[str, str]) -> bool:
@@ -111,13 +302,17 @@ def source_site_completeness_report(
     A material gap is one of:
 
     - source-program HOME missing venue and/or location;
+    - OPPONENT_HOME rows that already carry explicit source venue evidence but
+      silently drop the curated venue and/or normalized locality;
     - UNKNOWN H/A/N;
     - non-NCAA NEUTRAL missing venue and/or location;
     - conference-tournament, NIT, or generic POSTSEASON missing venue/location.
 
-    Away regular-season rows are intentionally not research-freeze blockers here: a
-    school's own research lane is not required to reconstruct every opponent building.
-    NCAA Tournament rows remain governed by the stricter non-waivable NCAA gate.
+    Ordinary away regular-season blanks remain outside source-school research
+    responsibility. Only already-present source venue evidence activates the
+    OPPONENT_HOME preservation accounting here; this does not require opponent-home
+    archaeology. NCAA Tournament rows remain governed by the stricter non-waivable
+    NCAA gate.
 
     Research metadata may account for most material gaps. A HOME location gap is never
     waivable. A HOME venue-only gap is waivable only through the dedicated

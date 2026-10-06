@@ -45,7 +45,10 @@ from onboarding_plan import (
     WorkflowError,
     approve_plan,
 )
-from site_completeness import source_site_completeness_report
+from site_completeness import (
+    source_home_chronology_report,
+    source_site_completeness_report,
+)
 
 
 SUBSTANTIVE_REVIEW_FIELDS = (
@@ -137,6 +140,107 @@ def _valid_season(value: str) -> bool:
     return bool(match and int(match.group(2)) == int(match.group(1)) + 1)
 
 
+PRIMARY_SOURCE_CUTOFF_LABEL = "Primary-source historical results cutoff"
+REQUIRED_COMPLETED_CUTOFF_LABEL = "Required completed-season cutoff"
+
+
+def _coverage_note_value(text: str, label: str) -> str:
+    match = re.search(
+        rf"(?mi)^\s*-\s*{re.escape(label)}:\s*(\S+)\s*$",
+        text or "",
+    )
+    return match.group(1).strip() if match else ""
+
+
+def _research_coverage_report(
+    source_notes: str,
+    games: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Validate the explicit Research coverage declaration.
+
+    Coverage is never inferred from a media-guide filename/title. Legacy frozen
+    packages that predate the declaration remain readable, but every package that
+    supplies either marker must supply and satisfy both.
+    """
+
+    primary = _coverage_note_value(source_notes, PRIMARY_SOURCE_CUTOFF_LABEL)
+    required = _coverage_note_value(
+        source_notes, REQUIRED_COMPLETED_CUTOFF_LABEL
+    )
+    errors: list[str] = []
+    warnings: list[str] = []
+    season_counts = Counter(
+        row.get("season_label", "").strip()
+        for row in games
+        if row.get("season_label", "").strip()
+    )
+
+    if not primary and not required:
+        warnings.append(
+            "research package predates the explicit completed-season coverage "
+            "declaration; accepted for legacy compatibility only"
+        )
+        return {
+            "errors": errors,
+            "warnings": warnings,
+            "primary_source_historical_cutoff": "",
+            "required_completed_season_cutoff": "",
+            "required_season_rows": 0,
+            "latest_package_season": max(
+                (season for season in season_counts if _valid_season(season)),
+                key=lambda value: int(value[:4]),
+                default="",
+            ),
+            "legacy_coverage_declaration_missing": True,
+        }
+
+    if not primary or not required:
+        errors.append(
+            "source-notes.md coverage declaration must contain both "
+            f"{PRIMARY_SOURCE_CUTOFF_LABEL!r} and "
+            f"{REQUIRED_COMPLETED_CUTOFF_LABEL!r}"
+        )
+
+    for label, value in (
+        (PRIMARY_SOURCE_CUTOFF_LABEL, primary),
+        (REQUIRED_COMPLETED_CUTOFF_LABEL, required),
+    ):
+        if value and not _valid_season(value):
+            errors.append(
+                f"source-notes.md {label} must use YYYY-YYYY with consecutive "
+                f"years; found {value!r}"
+            )
+
+    if _valid_season(primary) and _valid_season(required):
+        if int(required[:4]) < int(primary[:4]):
+            errors.append(
+                "required completed-season cutoff cannot precede the primary-source "
+                f"historical results cutoff: {required} < {primary}"
+            )
+
+    required_rows = season_counts.get(required, 0) if _valid_season(required) else 0
+    if _valid_season(required) and required_rows == 0:
+        errors.append(
+            f"research package declares required completed-season cutoff {required} "
+            "but contains zero competitive target-school rows for that season"
+        )
+
+    latest = max(
+        (season for season in season_counts if _valid_season(season)),
+        key=lambda value: int(value[:4]),
+        default="",
+    )
+    return {
+        "errors": errors,
+        "warnings": warnings,
+        "primary_source_historical_cutoff": primary,
+        "required_completed_season_cutoff": required,
+        "required_season_rows": required_rows,
+        "latest_package_season": latest,
+        "legacy_coverage_declaration_missing": False,
+    }
+
+
 def _package_root(
     package: Path,
     *,
@@ -219,6 +323,19 @@ def research_portfolio_report(
         site_completeness = source_site_completeness_report(game_fields, games)
         errors.extend(site_completeness["errors"])
         warnings.extend(site_completeness["warnings"])
+
+        source_notes = (root / "source-notes.md").read_text(encoding="utf-8")
+        coverage = _research_coverage_report(source_notes, games)
+        errors.extend(coverage["errors"])
+        warnings.extend(coverage["warnings"])
+
+        home_chronology = source_home_chronology_report(
+            games,
+            venues,
+            school_key=school_key,
+        )
+        errors.extend(home_chronology["errors"])
+        warnings.extend(home_chronology["warnings"])
 
         opponent_keys = {
             row.get("canonical_opponent_key", "").strip()
@@ -401,6 +518,12 @@ def research_portfolio_report(
                 "site_completeness": site_completeness["counts"],
                 "site_gap_decades": site_completeness["by_decade"],
                 "site_gap_seasons": site_completeness["by_season"],
+                "coverage": {
+                    key: value
+                    for key, value in coverage.items()
+                    if key not in {"errors", "warnings"}
+                },
+                "home_chronology": home_chronology["counts"],
             },
         }
     finally:
@@ -425,6 +548,14 @@ def print_research_report(report: dict[str, Any]) -> None:
     print(
         "Site completeness:   "
         + json.dumps(counts["site_completeness"], sort_keys=True)
+    )
+    print(
+        "Research coverage:    "
+        + json.dumps(counts.get("coverage", {}), sort_keys=True)
+    )
+    print(
+        "HOME chronology:      "
+        + json.dumps(counts.get("home_chronology", {}), sort_keys=True)
     )
     if counts["site_gap_decades"]:
         print(

@@ -155,6 +155,64 @@ def _norm_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.casefold())
 
 
+def _coverage_declaration(
+    status: dict[str, Any],
+    *,
+    primary_source_historical_cutoff: str = "",
+    required_completed_season_cutoff: str = "",
+) -> tuple[dict[str, str], list[dict[str, Any]]]:
+    nested = status.get("research_coverage", {})
+    if not isinstance(nested, dict):
+        nested = {}
+    primary = (
+        primary_source_historical_cutoff.strip()
+        or str(status.get("primary_source_historical_cutoff", "")).strip()
+        or str(nested.get("primary_source_historical_cutoff", "")).strip()
+    )
+    required = (
+        required_completed_season_cutoff.strip()
+        or str(status.get("required_completed_season_cutoff", "")).strip()
+        or str(nested.get("required_completed_season_cutoff", "")).strip()
+    )
+    defects: list[dict[str, Any]] = []
+    normalized: dict[str, str] = {
+        "primary_source_historical_cutoff": "",
+        "required_completed_season_cutoff": "",
+    }
+    for key, value in (
+        ("primary_source_historical_cutoff", primary),
+        ("required_completed_season_cutoff", required),
+    ):
+        if not value:
+            defects.append(
+                {
+                    "reason": "RESEARCH_COVERAGE_DECLARATION_MISSING",
+                    "field": key,
+                }
+            )
+            continue
+        try:
+            normalized[key] = project_season_label(value)
+        except ValueError:
+            defects.append(
+                {
+                    "reason": "INVALID_RESEARCH_COVERAGE_SEASON",
+                    "field": key,
+                    "value": value,
+                }
+            )
+    if all(normalized.values()) and int(
+        normalized["required_completed_season_cutoff"][:4]
+    ) < int(normalized["primary_source_historical_cutoff"][:4]):
+        defects.append(
+            {
+                "reason": "REQUIRED_COVERAGE_PRECEDES_PRIMARY_SOURCE_CUTOFF",
+                **normalized,
+            }
+        )
+    return normalized, defects
+
+
 def _manifest_names(manifest: dict[str, Any]) -> set[str]:
     files = manifest.get("files", {})
     if isinstance(files, list):
@@ -451,6 +509,7 @@ def _notes(
     parent_sha: str,
     status: dict[str, Any],
     games: list[dict[str, str]],
+    coverage: dict[str, str],
 ) -> str:
     types = Counter(row["curated_game_type"] for row in games)
     sites = Counter(row["curated_site_type"] for row in games)
@@ -463,6 +522,9 @@ def _notes(
         f"- Research base SHA: {status.get('research_base_sha', '')}",
         f"- Stage 3B status: {status.get('status', '')}",
         f"- Competitive games: {len(games):,}",
+        f"- Primary-source historical results cutoff: {coverage['primary_source_historical_cutoff']}",
+        f"- Required completed-season cutoff: {coverage['required_completed_season_cutoff']}",
+        "- Coverage cutoffs are explicit Research declarations; media-guide titles and filenames are not coverage inference rules.",
         "- Package authoring was mechanical from durable Stage 3B state; no historical research or reinterpretation was performed by Stage 4.",
         "",
         "## Final game census",
@@ -479,6 +541,7 @@ def _source_notes(
     ledger: list[dict[str, str]],
     archive: zipfile.ZipFile,
     prefix: str,
+    coverage: dict[str, str],
 ) -> str:
     kinds = Counter(
         _first(row, "source_kind")
@@ -496,6 +559,12 @@ def _source_notes(
         f"# {school_key} source notes",
         "",
         "Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.",
+        "",
+        "## Research coverage declaration",
+        "",
+        f"- Primary-source historical results cutoff: {coverage['primary_source_historical_cutoff']}",
+        f"- Required completed-season cutoff: {coverage['required_completed_season_cutoff']}",
+        "- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.",
         "",
         "## Durable row-level source families",
         "",
@@ -531,7 +600,13 @@ def _source_notes(
     return "\n".join(lines) + "\n"
 
 
-def inspect_checkpoint(school_key: str, checkpoint: Path) -> dict[str, Any]:
+def inspect_checkpoint(
+    school_key: str,
+    checkpoint: Path,
+    *,
+    primary_source_historical_cutoff: str = "",
+    required_completed_season_cutoff: str = "",
+) -> dict[str, Any]:
     parent = checkpoint.read_bytes()
     parent_sha = sha256_bytes(parent)
     with zipfile.ZipFile(io.BytesIO(parent)) as archive:
@@ -539,6 +614,11 @@ def inspect_checkpoint(school_key: str, checkpoint: Path) -> dict[str, Any]:
         manifest = validate_checkpoint_manifest(archive, layout)
         status = json.loads(archive.read(layout["status_path"]))
         _, ledger = _csv_bytes(archive.read(layout["ledger_path"]))
+        coverage, coverage_defects = _coverage_declaration(
+            status,
+            primary_source_historical_cutoff=primary_source_historical_cutoff,
+            required_completed_season_cutoff=required_completed_season_cutoff,
+        )
 
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
@@ -563,7 +643,8 @@ def inspect_checkpoint(school_key: str, checkpoint: Path) -> dict[str, Any]:
             "ledger_rows": len(ledger),
             "authoring_members": members,
             "missing_authoring_files": missing,
-            "defects": [],
+            "coverage": coverage,
+            "defects": list(coverage_defects),
         }
         if missing:
             return result
@@ -655,8 +736,16 @@ def author(
     checkpoint: Path,
     main_sha: str,
     output_dir: Path,
+    *,
+    primary_source_historical_cutoff: str = "",
+    required_completed_season_cutoff: str = "",
 ) -> dict[str, Any]:
-    preflight = inspect_checkpoint(school_key, checkpoint)
+    preflight = inspect_checkpoint(
+        school_key,
+        checkpoint,
+        primary_source_historical_cutoff=primary_source_historical_cutoff,
+        required_completed_season_cutoff=required_completed_season_cutoff,
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
     write_json(output_dir / "stage4-authoring-preflight.json", preflight)
     if preflight["status"] != "PASS":
@@ -688,11 +777,23 @@ def author(
         for filename in AUTHORING_FILES:
             (package / filename).write_bytes(archive.read(members[filename]))
         (package / "notes.md").write_text(
-            _notes(school_key, sha256_bytes(parent), status, games),
+            _notes(
+                school_key,
+                sha256_bytes(parent),
+                status,
+                games,
+                preflight["coverage"],
+            ),
             encoding="utf-8",
         )
         (package / "source-notes.md").write_text(
-            _source_notes(school_key, ledger, archive, layout["prefix"]),
+            _source_notes(
+                school_key,
+                ledger,
+                archive,
+                layout["prefix"],
+                preflight["coverage"],
+            ),
             encoding="utf-8",
         )
 
@@ -710,6 +811,7 @@ def author(
         "status": closeout_status["status"],
         "stage3b_checkpoint_sha256": sha256_bytes(parent),
         "research_base_sha": preflight["research_base_sha"],
+        "coverage": preflight["coverage"],
         "package_dir": str(package),
         "closeout": closeout_status,
         "repository_mutations": 0,
@@ -728,18 +830,27 @@ def main() -> int:
     preflight.add_argument("school_key")
     preflight.add_argument("stage3b_checkpoint", type=Path)
     preflight.add_argument("--output-dir", type=Path)
+    preflight.add_argument("--primary-source-historical-cutoff", default="")
+    preflight.add_argument("--required-completed-season-cutoff", default="")
 
     author_p = sub.add_parser("author")
     author_p.add_argument("school_key")
     author_p.add_argument("stage3b_checkpoint", type=Path)
     author_p.add_argument("--main-sha", required=True)
     author_p.add_argument("--output-dir", type=Path)
+    author_p.add_argument("--primary-source-historical-cutoff", default="")
+    author_p.add_argument("--required-completed-season-cutoff", default="")
 
     args = parser.parse_args()
     output = args.output_dir or Path(".research") / args.school_key / "stage4"
     try:
         if args.command == "preflight":
-            result = inspect_checkpoint(args.school_key, args.stage3b_checkpoint)
+            result = inspect_checkpoint(
+                args.school_key,
+                args.stage3b_checkpoint,
+                primary_source_historical_cutoff=args.primary_source_historical_cutoff,
+                required_completed_season_cutoff=args.required_completed_season_cutoff,
+            )
             output.mkdir(parents=True, exist_ok=True)
             write_json(output / "stage4-authoring-preflight.json", result)
             print(json.dumps(result, indent=2, sort_keys=True))
@@ -750,6 +861,8 @@ def main() -> int:
             args.stage3b_checkpoint,
             args.main_sha,
             output,
+            primary_source_historical_cutoff=args.primary_source_historical_cutoff,
+            required_completed_season_cutoff=args.required_completed_season_cutoff,
         )
         print(json.dumps(result, indent=2, sort_keys=True))
         return (

@@ -194,17 +194,29 @@ def legacy_ledger_bytes():
     )
 
 
-def make_checkpoint(path, *, legacy=False, include_capsule=True, manifest_capsule=True):
+def make_checkpoint(
+    path,
+    *,
+    legacy=False,
+    include_capsule=True,
+    manifest_capsule=True,
+    include_coverage=True,
+):
     ledger = legacy_ledger_bytes() if legacy else current_ledger_bytes()
-    status = json.dumps(
-        {
-            "stage": "STAGE_3B",
-            "status": "COMPLETE",
-            "school_key": "test",
-            "research_base_sha": "a" * 40,
-        },
-        sort_keys=True,
-    ).encode()
+    status_payload = {
+        "stage": "STAGE_3B",
+        "status": "COMPLETE",
+        "school_key": "test",
+        "research_base_sha": "a" * 40,
+    }
+    if include_coverage:
+        status_payload.update(
+            {
+                "primary_source_historical_cutoff": "1999-2000",
+                "required_completed_season_cutoff": "2000-2001",
+            }
+        )
+    status = json.dumps(status_payload, sort_keys=True).encode()
 
     capsule = {
         "opponents.csv": opponent_bytes(),
@@ -296,6 +308,44 @@ class Stage4AuthoringTests(unittest.TestCase):
             self.assertEqual(result["venue_rows"], 1)
             self.assertEqual(result["conference_rows"], 1)
 
+    def test_missing_coverage_declaration_stops_preflight(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "current.zip"
+            make_checkpoint(checkpoint, include_coverage=False)
+            result = mod.inspect_checkpoint("test", checkpoint)
+            self.assertEqual(result["status"], "STAGE4_AUTHORING_INPUT_INVALID")
+            self.assertEqual(
+                {
+                    item["field"]
+                    for item in result["defects"]
+                    if item["reason"] == "RESEARCH_COVERAGE_DECLARATION_MISSING"
+                },
+                {
+                    "primary_source_historical_cutoff",
+                    "required_completed_season_cutoff",
+                },
+            )
+
+    def test_explicit_coverage_overrides_recover_inflight_checkpoint(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "current.zip"
+            make_checkpoint(checkpoint, include_coverage=False)
+            result = mod.inspect_checkpoint(
+                "test",
+                checkpoint,
+                primary_source_historical_cutoff="1999-2000",
+                required_completed_season_cutoff="2000-2001",
+            )
+            self.assertEqual(result["status"], "PASS")
+            self.assertEqual(
+                result["coverage"]["primary_source_historical_cutoff"],
+                "1999-2000",
+            )
+            self.assertEqual(
+                result["coverage"]["required_completed_season_cutoff"],
+                "2000-2001",
+            )
+
     def test_missing_authoring_capsule_stops_cleanly(self):
         with tempfile.TemporaryDirectory() as temporary:
             checkpoint = Path(temporary) / "current.zip"
@@ -374,8 +424,20 @@ class Stage4AuthoringTests(unittest.TestCase):
             self.assertEqual(row["curated_game_type"], "NCAA_TOURNAMENT")
             self.assertEqual(checkpoint.read_bytes(), original_parent)
             self.assertTrue((root / "out" / "package" / "notes.md").is_file())
-            self.assertTrue(
-                (root / "out" / "package" / "source-notes.md").is_file()
+            source_notes = (
+                root / "out" / "package" / "source-notes.md"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "- Primary-source historical results cutoff: 1999-2000",
+                source_notes,
+            )
+            self.assertIn(
+                "- Required completed-season cutoff: 2000-2001",
+                source_notes,
+            )
+            self.assertIn(
+                "media-guide title or filename never establishes the results cutoff",
+                source_notes,
             )
 
 
