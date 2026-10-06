@@ -195,7 +195,11 @@ def _legacy_per_game_home_support(
         venue.get(field, "") or ""
         for field in ("source_basis", "notes")
     )
-    return bool(re.search(r"\bhome\b", authority, flags=re.IGNORECASE))
+    folded_authority = authority.casefold()
+    return (
+        "source_program_home" in folded_authority
+        or bool(re.search(r"\bhome\b", authority, flags=re.IGNORECASE))
+    )
 
 
 def _home_relationship_supports_game(
