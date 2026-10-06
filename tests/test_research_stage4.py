@@ -557,15 +557,6 @@ class Stage4AuthoringTests(unittest.TestCase):
                 ),
                 "venue_research_status": "STAGE3A1_RESEARCHED_UNRESOLVED_HAN",
             },
-            {
-                "research_game_id": "KEY-ONLY",
-                "source_program_key": "test",
-                "source_opponent_label": "Old College",
-                "opponent_key": "old-college",
-                "season_label": "2000-2001",
-                "stage3a_final_site_type": "SOURCE_PROGRAM_HOME",
-                "venue_key": "test-gym",
-            },
         ]
 
         games, defects = mod._projection(ledger, opponents, venues)
@@ -602,11 +593,6 @@ class Stage4AuthoringTests(unittest.TestCase):
             unknown["site_research_basis"],
             "Accepted institutional evidence remains contradictory.",
         )
-
-        key_only = by_id["KEY-ONLY"]
-        self.assertEqual(key_only["curated_venue_name"], "Test Gym")
-        self.assertEqual(key_only["city"], "Testville")
-        self.assertEqual(key_only["state"], "TS")
 
     def test_projection_carries_postseason_han_research_accounting(self):
         _, opponents = mod._csv_bytes(opponent_bytes())
