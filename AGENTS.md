@@ -51,6 +51,16 @@ tracked integration. The program top-level scope reference is controlling as the
 owner-supplied research baseline for each current D1 program's accepted top-level /
 Division I-equivalent history intervals.
 
+### Post-publication corrections
+
+For a bounded correction to an already-published school, read
+`docs/post-publication-correction-lifecycle.md`. That workflow is additive and isolated:
+do not route a new school through it, do not weaken ordinary new-school Research acceptance
+or Phase 0 behavior, and do not turn a bounded correction into a whole-school re-research
+merely because current policy exposes unchanged legacy debt. Correction freeze authority is
+the exact accepted delta against an immutable published baseline; current-main staging and
+all downstream Gate 1 / sealed apply / Preview / Production-proof safeguards remain required.
+
 Research lanes must read `data/reference/program-top-level-scope.csv` at startup. When the
 target school is present and authoritative evidence encountered during ordinary research
 does not materially contradict the row, use that scope without asking the owner to restate
