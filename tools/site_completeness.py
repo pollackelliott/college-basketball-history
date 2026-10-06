@@ -176,8 +176,8 @@ def _per_game_home_support(
     A mixed-use facility may have both a continuous HOME relationship interval
     and separately accepted game-level HOME assignments outside that interval.
     Treat an exact game assignment as supported only when the durable site rule
-    explicitly declares per-game accepted venue assignment and HOME authority
-    is explicit in the structured relationship or durable basis/notes.
+    explicitly declares an accepted per-game venue/HOME assignment and HOME
+    authority is explicit in the structured relationship or durable basis/notes.
 
     This does not infer H/A/N from venue identity and does not extend any
     continuous relationship interval.
@@ -186,7 +186,15 @@ def _per_game_home_support(
     site_rule = " ".join(
         (venue.get("site_rule", "") or "").casefold().split()
     )
-    if "per-game accepted venue assignment" not in site_rule:
+    # Accept the durable semantic form rather than one exact sentence. The
+    # per-game clause must still say that an assignment is accepted and must
+    # identify either venue or HOME meaning; HOME authority is separately
+    # required below.
+    per_game_assignment = re.search(
+        r"\bper-game\s+accepted\b[^.;\n]*\b(?:venue|home)\b[^.;\n]*\bassignment\b",
+        site_rule,
+    )
+    if not per_game_assignment:
         return False
 
     relationship = venue.get("relationship_type", "").strip().casefold()
