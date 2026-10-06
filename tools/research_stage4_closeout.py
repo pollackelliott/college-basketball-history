@@ -1090,6 +1090,7 @@ def closeout(
         encoding="utf-8",
     )
 
+    counts = research_check["counts"]
     package_qa = {
         "status": "PASS",
         "protected_main_sha": main_sha,
@@ -1117,7 +1118,6 @@ def closeout(
         package_qa,
     )
 
-    counts = research_check["counts"]
     status = {
         "schema_version": 1,
         "school_key": school_key,
