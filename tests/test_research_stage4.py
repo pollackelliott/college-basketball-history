@@ -892,7 +892,7 @@ class Stage4AuthoringTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     mod.project_season_label(value)
 
-    def test_projection_normalizes_only_legacy_forfeit_loss(self):
+    def test_projection_normalizes_legacy_administrative_statuses(self):
         _, opponents = mod._csv_bytes(opponent_bytes())
         _, venues = mod._csv_bytes(venue_bytes())
         games, defects = mod._projection(
@@ -905,34 +905,131 @@ class Stage4AuthoringTests(unittest.TestCase):
                     "season_label": "1986-87",
                     "played_result": "W",
                     "administrative_status": "FORFEIT_LOSS",
-                    "raw_text": "accepted literal",
-                }
+                    "administrative_note": "Accepted forfeit loss.",
+                    "raw_text": "accepted literal forfeit loss",
+                },
+                {
+                    "research_game_id": "FORFEIT-WIN",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "1979-80",
+                    "played_result": "L",
+                    "administrative_status": "FORFEIT_WIN",
+                    "administrative_note": "Opponent forfeited after the game.",
+                    "raw_text": "accepted literal forfeit win",
+                },
+                {
+                    "research_game_id": "VACATED-WIN",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "1995-96",
+                    "played_result": "W",
+                    "administrative_status": "VACATED",
+                    "administrative_note": "This game was later vacated.",
+                    "raw_text": "accepted literal vacated win",
+                },
+                {
+                    "research_game_id": "VACATED-LOSS",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "2017-18",
+                    "played_result": "L",
+                    "administrative_status": "VACATED",
+                    "administrative_note": "This game was later vacated.",
+                    "raw_text": "accepted literal vacated loss",
+                },
             ],
             opponents,
             venues,
         )
         self.assertEqual(defects, [])
-        row = games[0]
-        self.assertEqual(row["administrative_status"], "FORFEIT")
-        self.assertEqual(row["played_result"], "W")
-        self.assertEqual(row["raw_text"], "accepted literal")
-        self.assertIn(
-            "FORFEIT_LOSS projected to FORFEIT",
-            row["administrative_note"],
+        by_id = {row["source_game_id"]: row for row in games}
+
+        for game_id, expected_status, expected_played, literal in (
+            (
+                "FORFEIT-LOSS",
+                "FORFEIT",
+                "W",
+                "accepted literal forfeit loss",
+            ),
+            (
+                "FORFEIT-WIN",
+                "FORFEIT",
+                "L",
+                "accepted literal forfeit win",
+            ),
+            (
+                "VACATED-WIN",
+                "VACATED_GAME",
+                "W",
+                "accepted literal vacated win",
+            ),
+            (
+                "VACATED-LOSS",
+                "VACATED_GAME",
+                "L",
+                "accepted literal vacated loss",
+            ),
+        ):
+            with self.subTest(game_id=game_id):
+                row = by_id[game_id]
+                self.assertEqual(row["administrative_status"], expected_status)
+                self.assertEqual(row["played_result"], expected_played)
+                self.assertEqual(row["raw_text"], literal)
+                self.assertIn(
+                    f"projected to {expected_status}",
+                    row["administrative_note"],
+                )
+                self.assertIn(
+                    f"played_result={expected_played} unchanged",
+                    row["administrative_note"],
+                )
+
+        self.assertTrue(
+            by_id["FORFEIT-WIN"]["administrative_note"].startswith(
+                "Opponent forfeited after the game."
+            )
+        )
+        self.assertTrue(
+            by_id["VACATED-WIN"]["administrative_note"].startswith(
+                "This game was later vacated."
+            )
         )
         self.assertIn(
-            "played_result=W unchanged",
-            row["administrative_note"],
+            "administrative_status FORFEIT_WIN projected to FORFEIT",
+            by_id["FORFEIT-WIN"]["administrative_note"],
+        )
+        self.assertIn(
+            "administrative_status VACATED projected to VACATED_GAME",
+            by_id["VACATED-WIN"]["administrative_note"],
         )
 
+    def test_projection_leaves_current_administrative_vocabulary_unchanged(self):
+        for status in ("", "FORFEIT", "VACATED_GAME", "VACATED_WIN"):
+            with self.subTest(status=status):
+                projected, note = mod.project_administrative_status(
+                    {
+                        "administrative_status": status,
+                        "administrative_note": "accepted current note",
+                        "played_result": "W",
+                    }
+                )
+                self.assertEqual(projected, status)
+                self.assertEqual(note, "accepted current note")
+
+    def test_projection_does_not_consume_vacated_season_context_sentinel(self):
         status, note = mod.project_administrative_status(
             {
-                "administrative_status": "FORFEIT_WIN",
-                "played_result": "L",
+                "administrative_status": "VACATED_SEASON_CONTEXT",
+                "administrative_note": "Victories were vacated.",
+                "played_result": "W",
             }
         )
-        self.assertEqual(status, "FORFEIT_WIN")
-        self.assertEqual(note, "")
+        self.assertEqual(status, "VACATED_SEASON_CONTEXT")
+        self.assertEqual(note, "Victories were vacated.")
 
 
 if __name__ == "__main__":
