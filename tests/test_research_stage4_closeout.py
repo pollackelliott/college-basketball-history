@@ -276,6 +276,55 @@ def make_legacy_parent(
     mod.write_deterministic_zip(path, members)
 
 
+def make_descriptive_parent(
+    path: Path,
+    ids=("G1",),
+):
+    current = path.with_name(path.stem + "-current.zip")
+    make_parent(current, ids)
+    with zipfile.ZipFile(current) as archive:
+        ledger = archive.read("stage3b-working-ledger.csv")
+        prior_status = json.loads(archive.read("stage3b-status.json"))
+    current.unlink()
+
+    ledger_name = "stage3b-postseason-research-complete-ledger.csv"
+    status_name = "stage3b-preflight-ready-status.json"
+    status = json.dumps(
+        {
+            **prior_status,
+            "stage": "STAGE_3B",
+            "status": "COMPLETE",
+            "durable_stage3b_complete": True,
+            "authoritative_working_ledger": {
+                "path": ledger_name,
+                "rows": len(ids),
+                "sha256": mod.sha256_bytes(ledger),
+            },
+        },
+        sort_keys=True,
+    ).encode()
+    logical_members = {
+        ledger_name: ledger,
+        status_name: status,
+    }
+    manifest = {
+        "checkpoint_status": "STAGE_3B_COMPLETE",
+        "research_base_sha": "a" * 40,
+        "files": {
+            name: {
+                "size_bytes": len(data),
+                "sha256": mod.sha256_bytes(data),
+            }
+            for name, data in sorted(logical_members.items())
+        },
+    }
+    members = dict(logical_members)
+    members["manifest.json"] = (
+        json.dumps(manifest, sort_keys=True) + "\n"
+    ).encode()
+    mod.write_deterministic_zip(path, members)
+
+
 def fake_report(
     package,
     *,
@@ -444,6 +493,67 @@ class Stage4CloseoutTests(unittest.TestCase):
                 "Old College Alias",
                 rows[0]["representative_source_labels"],
             )
+
+    def test_descriptive_root_parent_is_accepted_unchanged(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            package = root / "pkg"
+            make_package(package, ("G1", "G2"))
+            parent = root / "descriptive-parent.zip"
+            make_descriptive_parent(parent, ("G1", "G2"))
+            parent_bytes = parent.read_bytes()
+            parent_sha = mod.sha256_bytes(parent_bytes)
+
+            with patch.object(
+                mod,
+                "research_portfolio_report",
+                side_effect=fake_report,
+            ):
+                status = mod.closeout(
+                    "test",
+                    package,
+                    parent,
+                    "b" * 40,
+                    root / "out",
+                )
+
+            self.assertEqual(
+                status["source_stage3b_complete_checkpoint_sha256"],
+                parent_sha,
+            )
+            sanity = json.loads(
+                (
+                    root
+                    / "out"
+                    / "stage4-parent-sanity-check.json"
+                ).read_text()
+            )
+            self.assertEqual(
+                sanity["stage3b_parent_topology"],
+                "MANIFESTED_DESCRIPTIVE_ROOT",
+            )
+            self.assertEqual(
+                sanity["stage3b_parent_rows"],
+                2,
+            )
+            self.assertTrue(
+                sanity["source_game_id_population_exact_match"]
+            )
+            self.assertEqual(
+                sanity["semantic_comparison_unexpected_mismatches"],
+                0,
+            )
+            checkpoint = (
+                root
+                / "out"
+                / "test-stage4-complete-checkpoint.zip"
+            )
+            with zipfile.ZipFile(checkpoint) as archive:
+                embedded = archive.read(
+                    "stage3b-complete-checkpoint.zip"
+                )
+            self.assertEqual(embedded, parent_bytes)
+            self.assertEqual(mod.sha256_bytes(embedded), parent_sha)
 
     def test_legacy_single_directory_parent_is_accepted_unchanged(self):
         with tempfile.TemporaryDirectory() as temporary:
