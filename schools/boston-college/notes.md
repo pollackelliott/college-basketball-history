@@ -50,3 +50,13 @@ PRE-FREEZE SELF-CHALLENGE: PASS
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=1dd4dcd145c3afa57b1fd3054a8e04fd629a439a` from `research_base_sha=80be0cb32669e03e9d064f34420bb861f8a8783c`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+
+## 2025-26 bounded post-publication correction
+
+- Correction Research checkpoint SHA-256: efb128ef0a078854a170c81f879be10ffa4e1006cc517e0b7ea01cdf648e5b6d
+- Accepted competitive 2025-26 rows added to the source package: 31 (1 exhibition excluded).
+- Current package competitive games after correction: 2,422.
+- Current game-type census after correction: 81 CONFERENCE_TOURNAMENT; 41 NCAA_TOURNAMENT; 32 NIT; 2,268 REGULAR_SEASON.
+- Current H/A/N census after correction: 367 NEUTRAL; 940 OPPONENT_HOME; 1,077 SOURCE_PROGRAM_HOME; 38 UNKNOWN.
+- Canonical reconciliation topology remains 17 existing games / 14 genuinely new games; canonical adjudication is downstream Implementation authority.
