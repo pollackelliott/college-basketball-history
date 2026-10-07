@@ -24,9 +24,9 @@
     }
   },
   "summary": {
-    "games": 3123,
+    "games": 3124,
     "wins": 2114,
-    "losses": 1008,
+    "losses": 1009,
     "ties": 1,
     "first_season": "1900-1901",
     "last_season": "2025-2026",
@@ -35,9 +35,9 @@
   "seasons": [
     {
       "season_label": "2025-2026",
-      "games": 20,
+      "games": 21,
       "wins": 6,
-      "losses": 14,
+      "losses": 15,
       "ties": 0
     },
     {
@@ -1290,10 +1290,10 @@
         "conference_name": "ACC"
       },
       "first_season": "1958-1959",
-      "last_season": "2024-2025",
-      "games": 87,
+      "last_season": "2025-2026",
+      "games": 88,
       "wins": 60,
-      "losses": 27,
+      "losses": 28,
       "ties": 0
     },
     {
@@ -83171,6 +83171,31 @@
       "venue_name": "Carrier Dome",
       "site_city": "Syracuse",
       "site_state": "NY",
+      "game_type": "REGULAR_SEASON",
+      "postseason_round": null,
+      "administrative_status": null,
+      "administrative_note": null
+    },
+    {
+      "canonical_game_id": "CBBG-0148315",
+      "season_label": "2025-2026",
+      "game_date": "2026-01-17",
+      "date_precision": "EXACT",
+      "opponent_key": "boston-college",
+      "opponent_name": "Boston College",
+      "opponent_current_d1": true,
+      "opponent_public_page_enabled": true,
+      "team_score": 73,
+      "opponent_score": 81,
+      "score_known": true,
+      "result": "L",
+      "overtime_periods": 0,
+      "site": "AWAY",
+      "venue_key": "conte-forum",
+      "venue_id": "VEN-000272",
+      "venue_name": "Conte Forum",
+      "site_city": "Chestnut Hill",
+      "site_state": "MA",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
