@@ -399,6 +399,34 @@ class Stage4AuthoringTests(unittest.TestCase):
             )
             self.assertEqual(preflight["projected_source_games"], 1)
 
+    def test_author_accepts_descriptive_complete_parent(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkpoint = root / "descriptive-complete.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                status_value="COMPLETE",
+            )
+            fake_closeout = {
+                "status": "COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
+                "checkpoint_sha256": "c" * 64,
+            }
+            with patch.object(
+                mod,
+                "closeout",
+                return_value=fake_closeout,
+            ):
+                result = mod.author(
+                    "test",
+                    checkpoint,
+                    "b" * 40,
+                    root / "out",
+                )
+            self.assertEqual(
+                result["status"],
+                "COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
+            )
+
     def test_author_rejects_descriptive_preflight_ready_parent(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
