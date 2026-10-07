@@ -296,6 +296,69 @@ def make_checkpoint(
     write_deterministic_zip(path, members)
 
 
+def make_descriptive_checkpoint(
+    path,
+    *,
+    status_value="RESEARCH_SUBSTANTIVELY_COMPLETE_PREFLIGHT_READY",
+    duplicate_terminal=False,
+    manifest_ledger=True,
+    ledger_sha_override="",
+):
+    ledger_name = "stage3b-postseason-research-complete-ledger.csv"
+    status_name = "stage3b-preflight-ready-status.json"
+    ledger = current_ledger_bytes()
+    status_payload = {
+        "stage": "STAGE_3B",
+        "status": status_value,
+        "school_key": "test",
+        "research_base_sha": "a" * 40,
+        "primary_source_historical_cutoff": "1999-2000",
+        "required_completed_season_cutoff": "2000-2001",
+        "durable_stage3b_complete": status_value == "COMPLETE",
+        "authoritative_working_ledger": {
+            "path": ledger_name,
+            "rows": 1,
+            "sha256": ledger_sha_override or mod.sha256_bytes(ledger),
+        },
+    }
+    status = json.dumps(status_payload, sort_keys=True).encode()
+
+    logical = {
+        ledger_name: ledger,
+        status_name: status,
+        "stage4-authoring/opponents.csv": opponent_bytes(),
+        "stage4-authoring/venues.csv": venue_bytes(),
+        "stage4-authoring/conferences.csv": conference_bytes(),
+    }
+    if duplicate_terminal:
+        duplicate = dict(status_payload)
+        duplicate["status"] = "COMPLETE"
+        logical["stage3b-other-terminal-status.json"] = json.dumps(
+            duplicate,
+            sort_keys=True,
+        ).encode()
+
+    manifested = dict(logical)
+    if not manifest_ledger:
+        manifested.pop(ledger_name)
+    manifest = {
+        "checkpoint_status": "STAGE_3B_" + status_value,
+        "research_base_sha": "a" * 40,
+        "files": {
+            name: {
+                "size_bytes": len(data),
+                "sha256": mod.sha256_bytes(data),
+            }
+            for name, data in sorted(manifested.items())
+        },
+    }
+    members = dict(logical)
+    members["manifest.json"] = (
+        json.dumps(manifest, sort_keys=True) + "\n"
+    ).encode()
+    write_deterministic_zip(path, members)
+
+
 class Stage4AuthoringTests(unittest.TestCase):
     def test_current_checkpoint_preflight_passes(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -307,6 +370,110 @@ class Stage4AuthoringTests(unittest.TestCase):
             self.assertEqual(result["opponent_rows"], 1)
             self.assertEqual(result["venue_rows"], 1)
             self.assertEqual(result["conference_rows"], 1)
+
+
+    def test_descriptive_root_preflight_ready_passes_only_for_preflight(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "descriptive.zip"
+            make_descriptive_checkpoint(checkpoint)
+
+            ordinary = mod.inspect_checkpoint("test", checkpoint)
+            self.assertEqual(
+                ordinary["status"],
+                "STAGE4_AUTHORING_INPUT_INVALID",
+            )
+            self.assertIn(
+                "STAGE3B_NOT_COMPLETE",
+                {item["reason"] for item in ordinary["defects"]},
+            )
+
+            preflight = mod.inspect_checkpoint(
+                "test",
+                checkpoint,
+                allow_preflight_ready=True,
+            )
+            self.assertEqual(preflight["status"], "PASS")
+            self.assertEqual(
+                preflight["stage3b_parent_topology"],
+                "MANIFESTED_DESCRIPTIVE_ROOT",
+            )
+            self.assertEqual(preflight["projected_source_games"], 1)
+
+    def test_author_rejects_descriptive_preflight_ready_parent(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkpoint = root / "descriptive.zip"
+            make_descriptive_checkpoint(checkpoint)
+            with patch.object(
+                mod,
+                "closeout",
+                side_effect=AssertionError("closeout must not run"),
+            ):
+                result = mod.author(
+                    "test",
+                    checkpoint,
+                    "b" * 40,
+                    root / "out",
+                )
+            self.assertEqual(
+                result["status"],
+                "STAGE4_AUTHORING_INPUT_INVALID",
+            )
+            self.assertIn(
+                "STAGE3B_NOT_COMPLETE",
+                {item["reason"] for item in result["defects"]},
+            )
+
+    def test_descriptive_root_multiple_terminal_statuses_stop(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "ambiguous.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                duplicate_terminal=True,
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "multiple terminal descriptive-root",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
+
+    def test_descriptive_root_unmanifested_ledger_stops(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "unmanifested.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                manifest_ledger=False,
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "ledger is not manifested",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
+
+    def test_descriptive_root_ledger_pointer_hash_mismatch_stops(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "bad-pointer.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                ledger_sha_override="0" * 64,
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "ledger hash mismatch",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
 
     def test_missing_coverage_declaration_stops_preflight(self):
         with tempfile.TemporaryDirectory() as temporary:
