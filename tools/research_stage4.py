@@ -636,6 +636,7 @@ def inspect_checkpoint(
     *,
     primary_source_historical_cutoff: str = "",
     required_completed_season_cutoff: str = "",
+    allow_preflight_ready: bool = False,
 ) -> dict[str, Any]:
     parent = checkpoint.read_bytes()
     parent_sha = sha256_bytes(parent)
@@ -742,9 +743,17 @@ def inspect_checkpoint(
                     "checkpoint_school_key": status.get("school_key"),
                 }
             )
-        if str(status.get("status", "")).upper() != "COMPLETE":
+        stage3b_status = str(status.get("status", "")).strip().upper()
+        stage3b_ready_for_preflight = (
+            allow_preflight_ready
+            and stage3b_status.endswith("PREFLIGHT_READY")
+        )
+        if stage3b_status != "COMPLETE" and not stage3b_ready_for_preflight:
             result["defects"].append(
-                {"reason": "STAGE3B_NOT_COMPLETE", "status": status.get("status", "")}
+                {
+                    "reason": "STAGE3B_NOT_COMPLETE",
+                    "status": status.get("status", ""),
+                }
             )
 
         result.update(
@@ -880,6 +889,7 @@ def main() -> int:
                 args.stage3b_checkpoint,
                 primary_source_historical_cutoff=args.primary_source_historical_cutoff,
                 required_completed_season_cutoff=args.required_completed_season_cutoff,
+                allow_preflight_ready=True,
             )
             output.mkdir(parents=True, exist_ok=True)
             write_json(output / "stage4-authoring-preflight.json", result)
