@@ -84,6 +84,13 @@ Before reporting a current-policy Stage 3B checkpoint COMPLETE, run:
 
 PASS is required.
 
+A Stage 3B candidate may enter this preflight while its durable status is explicitly
+preflight-ready rather than already `COMPLETE`. This avoids circular completion
+semantics: the preflight command may inspect a terminal `*_PREFLIGHT_READY` Stage 3B
+candidate, but `research_stage4.py author` still requires the parent checkpoint to be
+durably `COMPLETE`. A preflight PASS therefore authorizes the Research lane to serialize
+its final Stage 3B COMPLETE checkpoint; it does not begin Stage 4 automatically.
+
 Stage 4 also requires the two explicit Research coverage declarations:
 `primary_source_historical_cutoff` and `required_completed_season_cutoff`. These
 values may already be durable in the checkpoint status. For an accepted in-flight
@@ -146,7 +153,7 @@ Already-frozen six-file packages that predate the coverage declaration remain re
 failures. New Stage 4 authoring runs, however, must supply the declaration before they may
 complete.
 
-The permanent Stage 4 tools may normalize known legacy field vocabulary and checkpoint topology in memory. They must not rewrite the source checkpoint merely to satisfy the current representation.
+The permanent Stage 4 tools may normalize known legacy field vocabulary and checkpoint topology in memory. They must not rewrite the source checkpoint merely to satisfy the current representation. In addition to the current exact-root and accepted single-directory legacy layouts, a manifested root-level descriptive checkpoint may be consumed when exactly one terminal Stage 3B status document is manifested and that status explicitly names its manifested authoritative working ledger. Multiple terminal candidates, broken or unmanifested ledger pointers, and ledger-pointer hash mismatches are stops rather than filename guesses.
 
 A legacy Stage 3B checkpoint that predates this authoring-capsule contract may legitimately lack package-authoring state. That is a bounded compatibility-recovery problem, not permission to reconstruct prior opponent/conference decisions from present-day registry state or conversational memory.
 
