@@ -114,43 +114,146 @@ def _safe_relative_member(name: str) -> str:
     return path.as_posix()
 
 
+
 def _manifest_records(
     manifest: dict[str, Any],
-    *,
-    legacy: bool,
 ) -> list[dict[str, Any]]:
+    """Normalize both supported manifest file-record encodings."""
+
     files = manifest.get("files", {})
-    if legacy:
-        if not isinstance(files, dict):
-            raise ValueError(
-                "legacy Stage 3B manifest files must be a "
-                "filename-keyed object"
-            )
+    if isinstance(files, dict):
         records: list[dict[str, Any]] = []
         for name, metadata in files.items():
             if not isinstance(metadata, dict):
                 raise ValueError(
-                    "legacy Stage 3B manifest file metadata "
-                    f"must be an object: {name!r}"
+                    "Stage 3B manifest file metadata must be an object: "
+                    f"{name!r}"
                 )
             record = dict(metadata)
             record["name"] = str(name)
             records.append(record)
         return records
 
-    if not isinstance(files, list):
+    if isinstance(files, list):
+        records = []
+        for item in files:
+            if not isinstance(item, dict):
+                raise ValueError(
+                    "Stage 3B manifest file records must be objects"
+                )
+            records.append(dict(item))
+        return records
+
+    raise ValueError(
+        "Stage 3B manifest files must be a filename-keyed object "
+        "or a list of file records"
+    )
+
+
+def _stage3b_terminal_status(payload: dict[str, Any]) -> bool:
+    """Return whether a Stage 3B status is a terminal/preflight-ready state."""
+
+    if str(payload.get("stage", "")).strip().upper() != "STAGE_3B":
+        return False
+    status = str(payload.get("status", "")).strip().upper()
+    if status == "COMPLETE":
+        return True
+    if status.endswith("PREFLIGHT_READY"):
+        return True
+    return payload.get("durable_stage3b_complete") is True
+
+
+def _manifest_names_for_layout(manifest: dict[str, Any]) -> set[str]:
+    return {
+        _safe_relative_member(str(item.get("name", "")))
+        for item in _manifest_records(manifest)
+        if item.get("name")
+    }
+
+
+def _descriptive_root_layout(
+    archive: zipfile.ZipFile,
+    names: set[str],
+) -> dict[str, str] | None:
+    """Resolve a manifested root checkpoint with descriptive Stage 3B names.
+
+    The root manifest, terminal Stage 3B status, and authoritative working
+    ledger must all be manifested. The status owns the ledger pointer; file
+    names themselves are not treated as authority. Ambiguous terminal statuses
+    or broken/unmanifested pointers are explicit stops.
+    """
+
+    if "manifest.json" not in names:
+        return None
+
+    try:
+        manifest = json.loads(archive.read("manifest.json"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
         raise ValueError(
-            "current Stage 3B manifest files must be a list"
+            "descriptive-root Stage 3B manifest.json is not valid JSON"
+        ) from exc
+
+    manifest_names = _manifest_names_for_layout(manifest)
+    candidates: list[tuple[str, str]] = []
+
+    for status_path in sorted(manifest_names):
+        if "/" in status_path or not status_path.endswith(".json"):
+            continue
+        if status_path not in names:
+            continue
+        try:
+            payload = json.loads(archive.read(status_path))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        if not isinstance(payload, dict) or not _stage3b_terminal_status(payload):
+            continue
+
+        authoritative = payload.get("authoritative_working_ledger")
+        if not isinstance(authoritative, dict):
+            continue
+        ledger_path = _safe_relative_member(
+            str(authoritative.get("path", "")).strip()
         )
-    records = []
-    for item in files:
-        if not isinstance(item, dict):
+        if "/" in ledger_path:
             raise ValueError(
-                "current Stage 3B manifest file records "
-                "must be objects"
+                "descriptive-root authoritative Stage 3B ledger must be "
+                f"root-level: {ledger_path!r}"
             )
-        records.append(dict(item))
-    return records
+        if ledger_path not in manifest_names:
+            raise ValueError(
+                "descriptive-root authoritative Stage 3B ledger is not "
+                f"manifested: {ledger_path}"
+            )
+        if ledger_path not in names:
+            raise ValueError(
+                "descriptive-root authoritative Stage 3B ledger is missing: "
+                + ledger_path
+            )
+        expected_sha = str(authoritative.get("sha256", "")).strip()
+        if expected_sha and sha256_bytes(archive.read(ledger_path)) != expected_sha:
+            raise ValueError(
+                "descriptive-root authoritative Stage 3B ledger hash "
+                f"mismatch: {ledger_path}"
+            )
+        candidates.append((status_path, ledger_path))
+
+    if not candidates:
+        return None
+    if len(candidates) > 1:
+        raise ValueError(
+            "Stage 3B checkpoint has multiple terminal descriptive-root "
+            "status/ledger candidates: "
+            + ", ".join(status for status, _ in candidates)
+        )
+
+    status_path, ledger_path = candidates[0]
+    return {
+        "topology": "MANIFESTED_DESCRIPTIVE_ROOT",
+        "prefix": "",
+        "manifest_path": "manifest.json",
+        "status_path": status_path,
+        "ledger_path": ledger_path,
+    }
 
 
 def resolve_stage3b_parent_layout(
@@ -179,10 +282,17 @@ def resolve_stage3b_parent_layout(
         if required.issubset(names):
             legacy_candidates.append(prefix)
 
-    if current_complete and legacy_candidates:
+    descriptive = _descriptive_root_layout(archive, names)
+
+    resolved_count = (
+        int(current_complete)
+        + int(bool(legacy_candidates))
+        + int(descriptive is not None)
+    )
+    if resolved_count > 1:
         raise ValueError(
-            "Stage 3B checkpoint has ambiguous mixed current/legacy "
-            "parent layouts"
+            "Stage 3B checkpoint has ambiguous mixed current/legacy/"
+            "descriptive parent layouts"
         )
     if len(legacy_candidates) > 1:
         raise ValueError(
@@ -220,11 +330,14 @@ def resolve_stage3b_parent_layout(
             "ledger_path": f"{prefix}/stage3b-ledger.csv",
         }
 
-    raise ValueError(
-        "Stage 3B checkpoint does not match the current root layout "
-        "or the supported single-directory legacy layout"
-    )
+    if descriptive is not None:
+        return descriptive
 
+    raise ValueError(
+        "Stage 3B checkpoint does not match the current root layout, "
+        "the supported single-directory legacy layout, or a manifested "
+        "descriptive-root Stage 3B layout"
+    )
 
 def validate_checkpoint_manifest(
     archive: zipfile.ZipFile,
@@ -239,8 +352,7 @@ def validate_checkpoint_manifest(
         )
 
     manifest = json.loads(archive.read(manifest_path))
-    legacy = layout["topology"] == "LEGACY_SINGLE_DIRECTORY"
-    records = _manifest_records(manifest, legacy=legacy)
+    records = _manifest_records(manifest)
 
     defects: list[dict[str, Any]] = []
     for item in records:
@@ -252,11 +364,7 @@ def validate_checkpoint_manifest(
             "manifest.json",
         }:
             continue
-        member_name = (
-            layout["prefix"] + logical_name
-            if legacy
-            else logical_name
-        )
+        member_name = layout["prefix"] + logical_name
         if member_name not in names:
             defects.append(
                 {
