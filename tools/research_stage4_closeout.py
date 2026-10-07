@@ -490,16 +490,21 @@ def project_administrative_status(
 
     status = row.get("administrative_status", "").strip()
     note = row.get("administrative_note", "").strip()
-    if status != "FORFEIT_LOSS":
+    target = {
+        "FORFEIT_LOSS": "FORFEIT",
+        "FORFEIT_WIN": "FORFEIT",
+        "VACATED": "VACATED_GAME",
+    }.get(status)
+    if target is None:
         return status, note
 
     played = row.get("played_result", "").strip()
     provenance = (
         "Stage 4 representation normalization: accepted legacy "
-        "administrative_status FORFEIT_LOSS projected to FORFEIT; "
+        f"administrative_status {status} projected to {target}; "
         f"on-court played_result={played or '[blank]'} unchanged."
     )
-    return "FORFEIT", f"{note} {provenance}".strip()
+    return target, f"{note} {provenance}".strip()
 
 
 def normalize_game_type(value: str) -> str:
