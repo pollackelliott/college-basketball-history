@@ -81,6 +81,87 @@ class ConferenceHistoryTests(unittest.TestCase):
             )
         )
 
+    def test_explicit_one_season_dual_membership_preserves_both(self):
+        notes = (
+            "Concurrent dual conference membership in the institution's "
+            "inaugural season; supported by its official affiliation history."
+        )
+        rows = [
+            dict(
+                history_row("1916-1917", "1916-1917", "sec"),
+                notes=notes,
+                basis="Official institutional conference-affiliation chronology.",
+            ),
+            dict(
+                history_row("1916-1917", "1916-1917", "southern"),
+                notes=notes,
+                basis="Official institutional conference-affiliation chronology.",
+            ),
+            history_row("1917-1918", "1921-1922", "independent"),
+        ]
+        self.assertEqual(
+            history_errors(rows, set(REGISTRY), expected_program_key="example"),
+            [],
+        )
+        self.assertEqual(len(matching_history_rows(rows, "1916-1917")), 2)
+        # Never assign an arbitrary single conference to games when two exist.
+        self.assertIsNone(resolved_history_key(rows, "1916-1917"))
+        self.assertIsNone(resolved_history_key(rows, "1917-1918"))
+
+    def test_undocumented_same_season_overlap_still_fails(self):
+        annotated = dict(
+            history_row("1916-1917", "1916-1917", "sec"),
+            notes="Concurrent dual conference membership, independently documented.",
+        )
+        unannotated = history_row("1916-1917", "1916-1917", "southern")
+        problems = history_errors([annotated, unannotated], set(REGISTRY))
+        self.assertEqual(len(problems), 1)
+        self.assertIn("conference-history intervals overlap", problems[0])
+
+    def test_dual_membership_requires_two_distinct_conferences_and_sources(self):
+        note = "Concurrent dual conference membership documented by official source."
+        first = dict(history_row("1916-1917", "1916-1917", "sec"), notes=note)
+        same_conference = dict(first)
+        self.assertTrue(
+            any(
+                "conference-history intervals overlap" in problem
+                for problem in history_errors([first, same_conference], set(REGISTRY))
+            )
+        )
+        second = dict(
+            history_row("1916-1917", "1916-1917", "southern"), notes=note,
+            basis="",
+        )
+        self.assertTrue(
+            any(
+                "conference-history intervals overlap" in problem
+                for problem in history_errors([first, second], set(REGISTRY))
+            )
+        )
+
+    def test_dual_note_cannot_waive_longer_overlaps_or_three_memberships(self):
+        note = "Concurrent dual conference membership documented by official source."
+        two_season = [
+            dict(history_row("1916-1917", "1917-1918", "sec"), notes=note),
+            dict(history_row("1916-1917", "1917-1918", "southern"), notes=note),
+        ]
+        self.assertTrue(history_errors(two_season, set(REGISTRY)))
+        three = [
+            dict(history_row("1916-1917", "1916-1917", key), notes=note)
+            for key in ("sec", "southern", "siaa")
+        ]
+        self.assertTrue(history_errors(three, set(REGISTRY)))
+        independent = [
+            dict(history_row("1916-1917", "1916-1917", key), notes=note)
+            for key in ("sec", "independent")
+        ]
+        self.assertTrue(history_errors(independent, set(REGISTRY)))
+        open_ended = [
+            dict(history_row("1916-1917", "", "sec"), notes=note),
+            dict(history_row("1917-1918", "", "southern"), notes=note),
+        ]
+        self.assertTrue(history_errors(open_ended, set(REGISTRY)))
+
     def test_unknown_registry_identity_is_rejected(self):
         errors = history_errors(
             [history_row("2000-2001", "", "unknown-league")],
