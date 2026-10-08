@@ -12,6 +12,7 @@ sys.path.insert(0, str(TOOLS))
 from onboard_school import (  # noqa: E402
     annotate_reciprocal_only_unknown_site_provenance,
     backfill_reciprocal_only_home_chronology,
+    backfill_resolved_target_home_chronology,
 )
 
 
@@ -47,7 +48,11 @@ ASSERTION_FIELDS = [
     "canonical_game_id",
     "source_program_key",
     "source_game_id",
+    "normalized_opponent_key",
     "curated_site_type",
+    "curated_venue_name",
+    "city",
+    "state",
 ]
 
 SCHOOL_VENUE_FIELDS = [
@@ -68,6 +73,17 @@ GLOBAL_VENUE_FIELDS = [
     "display_name",
     "city",
     "state",
+]
+
+DISCREPANCY_FIELDS = [
+    "discrepancy_id",
+    "canonical_game_id",
+    "field_name",
+    "source_a_program_key",
+    "source_a_value",
+    "canonical_value",
+    "status",
+    "resolution_basis",
 ]
 
 
@@ -331,6 +347,186 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
             result = backfill_reciprocal_only_home_chronology(repo, "cincinnati")
             self.assertEqual(result["applied_games"], 0)
 
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(row["venue_id"], "")
+            self.assertEqual(row["site_city"], "")
+
+
+    def test_resolved_target_site_conflict_backfills_canonical_only_from_home_chronology(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000006",
+                    "season_label": "1967-1968",
+                    "game_date": "1968-02-19",
+                    "team_a_key": "alpha",
+                    "team_b_key": "beta",
+                    "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "alpha",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [
+                    {
+                        "canonical_game_id": "CBBG-0000006",
+                        "source_program_key": "alpha",
+                        "source_game_id": "ALPHA-1",
+                        "normalized_opponent_key": "beta",
+                        "curated_site_type": "OPPONENT_HOME",
+                    },
+                    {
+                        "canonical_game_id": "CBBG-0000006",
+                        "source_program_key": "beta",
+                        "source_game_id": "BETA-1",
+                        "normalized_opponent_key": "alpha",
+                        "curated_site_type": "OPPONENT_HOME",
+                    },
+                ],
+            )
+            write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                DISCREPANCY_FIELDS,
+                [{
+                    "discrepancy_id": "DISC-1",
+                    "canonical_game_id": "CBBG-0000006",
+                    "field_name": "site_type",
+                    "source_a_program_key": "alpha",
+                    "source_a_value": "TEAM_B_HOME",
+                    "canonical_value": "TEAM_A_HOME",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Owner-confirmed canonical HOME classification.",
+                }],
+            )
+            write_csv(
+                repo / "schools/alpha/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000437",
+                    "venue_key": "alpha-field-house",
+                    "canonical_name": "Alpha Field House",
+                    "city": "Alpha City",
+                    "state": "AA",
+                    "relationship_type": "PRIMARY_HOME",
+                    "relationship_start": "1951-12-15",
+                    "relationship_end": "2002-03-02",
+                    "source_basis": "documented home chronology",
+                }],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000437",
+                    "venue_key": "alpha-field-house",
+                    "display_name": "Alpha Field House",
+                    "city": "Alpha City",
+                    "state": "AA",
+                }],
+            )
+
+            result = backfill_resolved_target_home_chronology(repo, "alpha")
+
+            self.assertEqual(result["applied_games"], 1)
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(row["site_type"], "TEAM_A_HOME")
+            self.assertEqual(row["venue_id"], "VEN-000437")
+            self.assertEqual(row["venue_key"], "alpha-field-house")
+            self.assertEqual(row["site_city"], "Alpha City")
+            self.assertEqual(row["site_state"], "AA")
+            self.assertIn(
+                "RESOLVED_TARGET_HOME_CHRONOLOGY_BACKFILL",
+                row["notes"],
+            )
+
+            assertions = read_csv(repo / "data/evidence/game-assertions.csv")
+            target = next(
+                item for item in assertions
+                if item["source_program_key"] == "alpha"
+            )
+            self.assertEqual(target["curated_site_type"], "OPPONENT_HOME")
+            self.assertEqual(target["curated_venue_name"], "")
+            self.assertEqual(target["city"], "")
+            self.assertEqual(target["state"], "")
+
+    def test_resolved_target_home_backfill_requires_resolved_site_discrepancy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000007",
+                    "season_label": "1967-1968",
+                    "game_date": "1968-02-19",
+                    "team_a_key": "alpha",
+                    "team_b_key": "beta",
+                    "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "alpha",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000007",
+                    "source_program_key": "alpha",
+                    "source_game_id": "ALPHA-2",
+                    "normalized_opponent_key": "beta",
+                    "curated_site_type": "OPPONENT_HOME",
+                }],
+            )
+            write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                DISCREPANCY_FIELDS,
+                [{
+                    "discrepancy_id": "DISC-2",
+                    "canonical_game_id": "CBBG-0000007",
+                    "field_name": "site_type",
+                    "source_a_program_key": "alpha",
+                    "source_a_value": "TEAM_B_HOME",
+                    "canonical_value": "TEAM_A_HOME",
+                    "status": "UNDER_REVIEW",
+                    "resolution_basis": "",
+                }],
+            )
+            write_csv(
+                repo / "schools/alpha/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000437",
+                    "venue_key": "alpha-field-house",
+                    "canonical_name": "Alpha Field House",
+                    "city": "Alpha City",
+                    "state": "AA",
+                    "relationship_type": "PRIMARY_HOME",
+                    "relationship_start": "1951-12-15",
+                    "relationship_end": "2002-03-02",
+                    "source_basis": "documented home chronology",
+                }],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000437",
+                    "venue_key": "alpha-field-house",
+                    "display_name": "Alpha Field House",
+                    "city": "Alpha City",
+                    "state": "AA",
+                }],
+            )
+
+            result = backfill_resolved_target_home_chronology(repo, "alpha")
+
+            self.assertEqual(result["applied_games"], 0)
+            self.assertEqual(result["skipped_no_resolved_site_conflict"], 1)
             row = read_csv(repo / "data/canonical/games.csv")[0]
             self.assertEqual(row["venue_id"], "")
             self.assertEqual(row["site_city"], "")
