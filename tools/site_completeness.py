@@ -260,6 +260,7 @@ def source_home_chronology_report(
     *,
     school_key: str,
     example_limit: int = 25,
+    accepted_game_exceptions: set[tuple[str, str, str]] | None = None,
 ) -> dict[str, Any]:
     """Challenge exact HOME venues against documented HOME relationships.
 
@@ -274,6 +275,9 @@ def source_home_chronology_report(
 
     game_rows = list(games)
     venue_rows = list(venues)
+    # Only a separately authorized, exact immutable-package registry may populate
+    # these triples. No venue, geography, or game row creates its own waiver.
+    accepted_game_exceptions = accepted_game_exceptions or set()
     chronology_rows = [
         row
         for row in venue_rows
@@ -297,6 +301,7 @@ def source_home_chronology_report(
                 "chronology_rows": 0,
                 "home_rows_checked": 0,
                 "home_chronology_conflicts": 0,
+                "approved_frozen_home_exception_rows": 0,
             },
             "conflict_examples": [],
         }
@@ -312,6 +317,7 @@ def source_home_chronology_report(
 
     checked = 0
     conflict_count = 0
+    approved_frozen_exceptions_used = 0
     conflicts: list[dict[str, str]] = []
     for row in game_rows:
         if row.get("curated_site_type", "").strip().upper() != "SOURCE_PROGRAM_HOME":
@@ -326,6 +332,14 @@ def source_home_chronology_report(
             continue
         checked += 1
         if any(_home_relationship_supports_game(venue, row) for venue in candidates):
+            continue
+        exception_key = (
+            row.get("source_game_id", "").strip(),
+            row.get("game_date", "").strip(),
+            venue_name,
+        )
+        if exception_key in accepted_game_exceptions:
+            approved_frozen_exceptions_used += 1
             continue
         conflict_count += 1
         if len(conflicts) < example_limit:
@@ -362,6 +376,7 @@ def source_home_chronology_report(
             "chronology_rows": len(chronology_rows),
             "home_rows_checked": checked,
             "home_chronology_conflicts": conflict_count,
+            "approved_frozen_home_exception_rows": approved_frozen_exceptions_used,
         },
         "conflict_examples": conflicts,
     }

@@ -282,6 +282,85 @@ def _package_root(
     return temporary, root
 
 
+def frozen_home_exception_keys(
+    package: Path,
+    *,
+    school_key: str,
+    games: list[dict[str, str]],
+    registry_path: Path | None = None,
+) -> set[tuple[str, str, str]]:
+    """Load explicitly reviewed, frozen-package-specific HOME chronology exceptions.
+
+    The authority is a protected-main register bound to an exact Research ZIP
+    SHA-256, school, source game ID, game date, and venue. The frozen six-file
+    archive is never rewritten. Ordinary or modified Research packages never
+    acquire exemptions from shared venue names or unstructured notes.
+    """
+    if not package.is_file():
+        return set()
+    if registry_path is None:
+        registry_path = (
+            Path(__file__).resolve().parents[1]
+            / "data/reference/frozen-home-venue-exceptions.csv"
+        )
+    if not registry_path.is_file():
+        return set()
+
+    package_sha = sha256_file(package).lower()
+    by_id = {
+        row.get("source_game_id", "").strip(): row
+        for row in games
+        if row.get("source_game_id", "").strip()
+    }
+    approved: set[tuple[str, str, str]] = set()
+    with registry_path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {
+            "school_key",
+            "research_zip_sha256",
+            "source_game_id",
+            "game_date",
+            "curated_venue_name",
+            "authority_basis",
+        }
+        if not required.issubset(set(reader.fieldnames or [])):
+            raise WorkflowError(
+                "frozen HOME exception register has missing required columns"
+            )
+        for entry in reader:
+            if (
+                entry.get("school_key", "").strip() != school_key
+                or entry.get("research_zip_sha256", "").strip().lower()
+                != package_sha
+            ):
+                continue
+            source_game_id = entry.get("source_game_id", "").strip()
+            game_date = entry.get("game_date", "").strip()
+            venue_name = entry.get("curated_venue_name", "").strip()
+            basis = entry.get("authority_basis", "").strip()
+            key = (source_game_id, game_date, venue_name)
+            game = by_id.get(source_game_id)
+            if (
+                not all(key)
+                or not basis
+                or key in approved
+                or game is None
+                or game.get("source_program_key", "").strip() != school_key
+                or game.get("game_date", "").strip() != game_date
+                or game.get("curated_venue_name", "").strip() != venue_name
+                or game.get("curated_site_type", "").strip() != "SOURCE_PROGRAM_HOME"
+                or game.get("normalization_status", "").strip()
+                != "RESEARCH_ACCEPTED"
+            ):
+                raise WorkflowError(
+                    "invalid frozen HOME exception for "
+                    f"{school_key} / {source_game_id or '[blank]'}: "
+                    "registered tuple must exactly match accepted Research evidence"
+                )
+            approved.add(key)
+    return approved
+
+
 def research_portfolio_report(
     package: Path,
     *,
@@ -329,10 +408,16 @@ def research_portfolio_report(
         errors.extend(coverage["errors"])
         warnings.extend(coverage["warnings"])
 
+        accepted_home_exceptions = frozen_home_exception_keys(
+            package,
+            school_key=school_key,
+            games=games,
+        )
         home_chronology = source_home_chronology_report(
             games,
             venues,
             school_key=school_key,
+            accepted_game_exceptions=accepted_home_exceptions,
         )
         errors.extend(home_chronology["errors"])
         warnings.extend(home_chronology["warnings"])
