@@ -111,7 +111,7 @@ After correction staging, use the existing repository-owned Stage 2, Gate 1, sea
 
 No historical conflict is silently pre-applied. If the accepted correction checkpoint deliberately preserved a Gate 1 conflict, it remains a Gate 1 decision. Previously explicit owner historical authority may be carried through as durable correction authority without manufacturing a second owner decision.
 
-The implementation site gate remains full-strength for canonical/public output. For source-side Research debt only, an explicit correction Integration Freeze scopes the source-side Research gate to rows changed by the correction (plus later semantic source patches). Unchanged pre-existing source debt therefore cannot force an unrelated whole-school re-research. Standard new-school manifests do not activate this exception and retain the existing full-source gate unchanged.
+The implementation site gate remains full-strength for canonical/public output. For source-side Research debt only, an explicit correction Integration Freeze scopes the source-side Research gate to rows changed by the correction (plus later semantic source patches). Unchanged pre-existing source debt therefore cannot force an unrelated whole-school re-research. Stage 2 package preflight applies the same authority boundary narrowly to an exact unchanged published-baseline source row whose curated venue is absent from the target school's local venue table: that legacy registration gap is recorded as a warning rather than absorbed into the correction. Correction rows and any subsequently modified legacy row remain subject to the ordinary blocking validator. Standard new-school manifests do not activate either exception and retain the existing full-source gate unchanged.
 
 ## 7. Stop conditions
 
