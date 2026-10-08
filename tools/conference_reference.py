@@ -76,7 +76,9 @@ def history_errors(
     expected_program_key: str | None = None,
 ) -> list[str]:
     errors: list[str] = []
-    intervals: list[tuple[int, int | None, int, str]] = []
+    # Preserve the complete row so documented, simultaneous dual conference
+    # affiliations can be distinguished from accidental interval collisions.
+    intervals: list[tuple[int, int | None, int, str, dict[str, str]]] = []
 
     for line_number, row in enumerate(rows, start=2):
         program_key = row.get("source_program_key", "").strip()
@@ -102,15 +104,52 @@ def history_errors(
         if start is not None and end is not None and end < start:
             errors.append(f"line {line_number}: end_season precedes start_season")
         if start is not None and (not end_text or end is not None):
-            intervals.append((start, end, line_number, conference_key))
+            intervals.append((start, end, line_number, conference_key, row))
 
     intervals.sort(key=lambda interval: (interval[0], interval[1] or 9999))
-    for left, right in zip(intervals, intervals[1:]):
-        left_end = left[1]
-        if left_end is None or right[0] <= left_end:
-            errors.append(
-                f"lines {left[2]} and {right[2]}: conference-history intervals overlap"
+    for index, left in enumerate(intervals):
+        for right in intervals[index + 1 :]:
+            left_end = left[1]
+            if left_end is not None and right[0] > left_end:
+                break
+
+            # An accepted Research record may explicitly document concurrent
+            # affiliation with TWO distinct conferences in one season. Require
+            # the same one-season interval, matching program, non-independent
+            # identities, per-row source authority, and explicit dual-membership
+            # documentation on BOTH rows. Never infer dual membership from the
+            # overlap itself or allow open-ended / multi-season overlaps.
+            same_single_season = (
+                left[0] == right[0] == left[1] == right[1]
             )
+            same_season_memberships = (
+                sum(
+                    1
+                    for candidate in intervals
+                    if candidate[0] <= left[0]
+                    and (candidate[1] is None or left[0] <= candidate[1])
+                )
+                if same_single_season
+                else 0
+            )
+            documented_dual = (
+                same_single_season
+                and same_season_memberships == 2
+                and left[3] != right[3]
+                and all(key and key != "independent" for key in (left[3], right[3]))
+                and left[4].get("source_program_key", "").strip()
+                == right[4].get("source_program_key", "").strip()
+                and all(
+                    row.get("basis", "").strip()
+                    and "concurrent dual conference membership"
+                    in row.get("notes", "").casefold()
+                    for row in (left[4], right[4])
+                )
+            )
+            if not documented_dual:
+                errors.append(
+                    f"lines {left[2]} and {right[2]}: conference-history intervals overlap"
+                )
 
     return errors
 
