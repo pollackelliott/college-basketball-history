@@ -27,6 +27,7 @@ from administrative_status import administrative_status_errors
 from build_site_data import historical_opponent_display_conflicts
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
+    SOURCE_ASSERTION_SYNC_FIELDS,
     append_note,
     assertion_drift,
     location_pair_status,
@@ -485,6 +486,183 @@ def _correction_unchanged_published_source_ids(
         ):
             unchanged.add(source_id)
     return unchanged
+
+
+def _correction_assertion_reconciliation_context(
+    repo: Path,
+    school_key: str,
+) -> dict[str, Any] | None:
+    """Return verified correction snapshots used only to classify assertion drift.
+
+    Ordinary/new-school workflows return None and retain the historical blocking
+    behavior. A correction context is trusted only when both Integration Freeze
+    semantic snapshots are present and their recorded hashes match their contents.
+    """
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        return None
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("workflow_kind") != CORRECTION_WORKFLOW_KIND:
+        return None
+    if manifest.get("status") != "INTEGRATION_FROZEN":
+        raise WorkflowError(
+            "correction Integration Freeze must have status INTEGRATION_FROZEN "
+            "before Stage 2 assertion reconciliation"
+        )
+    if manifest.get("school_key") != school_key:
+        raise WorkflowError("correction Integration Freeze belongs to another school")
+
+    correction_ids = {
+        str(value).strip()
+        for value in manifest.get("correction_source_game_ids", [])
+        if str(value).strip()
+    }
+    if not correction_ids:
+        raise WorkflowError(
+            "correction Integration Freeze lacks correction_source_game_ids"
+        )
+
+    snapshots: dict[str, dict[str, Any]] = {}
+    for key in (
+        "pre_correction_source_semantic_guard",
+        "source_game_semantic_guard",
+    ):
+        guard = manifest.get(key)
+        if not isinstance(guard, dict) or not isinstance(guard.get("snapshot"), dict):
+            raise WorkflowError(
+                f"correction Integration Freeze lacks verified {key} snapshot"
+            )
+        snapshot = guard["snapshot"]
+        expected_hash = str(guard.get("snapshot_sha256", "")).strip()
+        actual_hash = sha256_text(canonical_json(snapshot))
+        if expected_hash and expected_hash != actual_hash:
+            raise WorkflowError(
+                f"correction Integration Freeze {key} snapshot hash mismatch"
+            )
+        fields = snapshot.get("fields")
+        rows = snapshot.get("rows")
+        if not isinstance(fields, list) or not isinstance(rows, dict):
+            raise WorkflowError(
+                f"correction Integration Freeze {key} snapshot is malformed"
+            )
+        if not set(SOURCE_ASSERTION_SYNC_FIELDS).issubset(set(fields)):
+            raise WorkflowError(
+                f"correction Integration Freeze {key} snapshot lacks assertion-sync fields"
+            )
+        snapshots[key] = {
+            "fields": list(fields),
+            "rows": rows,
+            "sha256": actual_hash,
+        }
+
+    pre = snapshots["pre_correction_source_semantic_guard"]
+    post = snapshots["source_game_semantic_guard"]
+    if pre["fields"] != post["fields"]:
+        raise WorkflowError(
+            "correction Integration Freeze semantic snapshot field sets differ"
+        )
+    missing_post = sorted(correction_ids - set(post["rows"]))
+    if missing_post:
+        raise WorkflowError(
+            "correction Integration Freeze post-correction snapshot is missing "
+            "correction source rows: "
+            + ", ".join(missing_post[:20])
+        )
+
+    return {
+        "correction_source_game_ids": correction_ids,
+        "fields": post["fields"],
+        "pre_rows": pre["rows"],
+        "post_rows": post["rows"],
+    }
+
+
+def _is_authorized_correction_assertion_drift(
+    context: dict[str, Any] | None,
+    source: dict[str, str],
+    assertion: dict[str, str],
+    drift: dict[str, tuple[str, str]],
+) -> bool:
+    """Return whether drift is exactly the frozen correction delta awaiting Gate 1.
+
+    The existing global assertion must still reproduce the immutable pre-correction
+    source semantics. The tracked source row must reproduce the post-correction
+    Integration Freeze semantics. Only assertion-sync fields actually changed by that
+    exact baseline-to-frozen delta may differ.
+    """
+
+    if context is None or not drift:
+        return False
+
+    source_id = source.get("source_game_id", "").strip()
+    if source_id not in context["correction_source_game_ids"]:
+        return False
+
+    pre = context["pre_rows"].get(source_id)
+    post = context["post_rows"].get(source_id)
+    if not isinstance(pre, dict) or not isinstance(post, dict):
+        return False
+
+    for field in context["fields"]:
+        if source.get(field, "") != str(post.get(field, "")):
+            return False
+
+    for field in SOURCE_ASSERTION_SYNC_FIELDS:
+        if assertion.get(field, "") != str(pre.get(field, "")):
+            return False
+
+    authorized_fields = {
+        field
+        for field in SOURCE_ASSERTION_SYNC_FIELDS
+        if str(pre.get(field, "")) != str(post.get(field, ""))
+    }
+    if set(drift) != authorized_fields:
+        return False
+
+    return all(
+        source_value == str(post.get(field, ""))
+        and assertion_value == str(pre.get(field, ""))
+        for field, (source_value, assertion_value) in drift.items()
+    )
+
+
+def _source_assertion_sync_issues(
+    repo: Path,
+    school_key: str,
+    sources: list[dict[str, str]],
+    assertions_by_source: dict[tuple[str, str], list[dict[str, str]]],
+) -> tuple[list[str], list[str]]:
+    """Classify source/global assertion drift without suppressing correction decisions."""
+
+    context = _correction_assertion_reconciliation_context(repo, school_key)
+    errors: list[str] = []
+    warnings: list[str] = []
+
+    for source in sources:
+        pair = (school_key, source.get("source_game_id", ""))
+        linked = assertions_by_source.get(pair, [])
+        if len(linked) == 1:
+            drift = assertion_drift(source, linked[0])
+            if not drift:
+                continue
+            fields = ", ".join(sorted(drift))
+            if _is_authorized_correction_assertion_drift(
+                context, source, linked[0], drift
+            ):
+                warnings.append(
+                    f"{pair[1]}: global assertion differs in {fields} "
+                    "(authorized correction delta pending sealed reconciliation)"
+                )
+            else:
+                errors.append(
+                    f"{pair[1]}: global assertion differs in {fields}"
+                )
+        elif len(linked) > 1:
+            errors.append(f"{pair[1]}: multiple global assertions exist")
+
+    return errors, warnings
 
 
 def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
@@ -1538,20 +1716,14 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     blockers.extend(location_errors)
     warnings.extend(location_warnings)
 
-    sync_errors: list[str] = []
-    for source in sources:
-        pair = (school_key, source.get("source_game_id", ""))
-        linked = assertions_by_source.get(pair, [])
-        if len(linked) == 1:
-            drift = assertion_drift(source, linked[0])
-            if drift:
-                sync_errors.append(
-                    f"{pair[1]}: global assertion differs in {', '.join(sorted(drift))}"
-                )
-        elif len(linked) > 1:
-            sync_errors.append(f"{pair[1]}: multiple global assertions exist")
-    if sync_errors:
-        blockers.extend(sync_errors)
+    sync_errors, sync_warnings = _source_assertion_sync_issues(
+        repo,
+        school_key,
+        sources,
+        assertions_by_source,
+    )
+    blockers.extend(sync_errors)
+    warnings.extend(sync_warnings)
 
     existing_discrepancy_keys = {
         (
