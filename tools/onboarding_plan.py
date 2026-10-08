@@ -14,6 +14,7 @@ from __future__ import annotations
 import csv
 import datetime as dt
 import hashlib
+import io
 import json
 import re
 import subprocess
@@ -404,6 +405,88 @@ def score_result_consistency_issue(row: dict[str, str]) -> dict[str, str] | None
     }
 
 
+CORRECTION_WORKFLOW_KIND = "POST_PUBLICATION_CORRECTION"
+
+
+def _correction_unchanged_published_source_ids(
+    repo: Path,
+    school_key: str,
+    game_fields: list[str],
+    games: list[dict[str, str]],
+) -> set[str]:
+    """Return exact unchanged baseline rows for a verified correction integration.
+
+    This is deliberately narrower than a general validation bypass. Standard/new-school
+    workflows return an empty set. Correction rows themselves, and any legacy row whose
+    full package representation differs from the immutable published baseline, remain
+    subject to the ordinary current validator.
+    """
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        return set()
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("workflow_kind") != CORRECTION_WORKFLOW_KIND:
+        return set()
+    if manifest.get("status") != "INTEGRATION_FROZEN":
+        raise WorkflowError(
+            "correction Integration Freeze must have status INTEGRATION_FROZEN "
+            "before Stage 2 package scoping"
+        )
+    if manifest.get("school_key") != school_key:
+        raise WorkflowError("correction Integration Freeze belongs to another school")
+
+    research_base_sha = str(manifest.get("research_base_sha", "")).strip()
+    correction_ids = {
+        str(value).strip()
+        for value in manifest.get("correction_source_game_ids", [])
+        if str(value).strip()
+    }
+    if not research_base_sha or not correction_ids:
+        raise WorkflowError(
+            "correction Integration Freeze lacks research_base_sha or "
+            "correction_source_game_ids"
+        )
+
+    relative = f"schools/{school_key}/source-games.csv"
+    try:
+        baseline_text = subprocess.check_output(
+            ["git", "show", f"{research_base_sha}:{relative}"],
+            cwd=repo,
+            text=True,
+            stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise WorkflowError(
+            "cannot read immutable published source baseline for correction Stage 2"
+        ) from exc
+
+    reader = csv.DictReader(io.StringIO(baseline_text, newline=""))
+    baseline_fields = list(reader.fieldnames or [])
+    if baseline_fields != list(game_fields):
+        raise WorkflowError(
+            "correction source-games.csv header differs from immutable published baseline"
+        )
+    baseline_rows = {
+        row.get("source_game_id", "").strip(): row
+        for row in reader
+        if row.get("source_game_id", "").strip()
+    }
+
+    unchanged: set[str] = set()
+    for row in games:
+        source_id = row.get("source_game_id", "").strip()
+        if (
+            source_id
+            and source_id not in correction_ids
+            and source_id in baseline_rows
+            and row == baseline_rows[source_id]
+        ):
+            unchanged.add(source_id)
+    return unchanged
+
+
 def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     """Run the permanent equivalent of the former pasted package-QA snippet."""
 
@@ -424,6 +507,9 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     _, opponents = read_csv_table(school / "opponents.csv")
     _, venues = read_csv_table(school / "venues.csv")
     _, conferences = read_csv_table(school / "conferences.csv")
+    correction_legacy_ids = _correction_unchanged_published_source_ids(
+        repo, school_key, game_fields, games
+    )
 
     required_game_fields = {
         "source_game_id",
@@ -554,7 +640,14 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
 
         venue = row.get("curated_venue_name", "").strip()
         if venue and venue.casefold() not in venue_names:
-            errors.append(f"{label}: curated venue {venue!r} absent from venues.csv")
+            message = f"{label}: curated venue {venue!r} absent from venues.csv"
+            if label in correction_legacy_ids:
+                warnings.append(
+                    message
+                    + " (unchanged published legacy debt outside this correction)"
+                )
+            else:
+                errors.append(message)
         if exhibition_warning_required(
             row.get("raw_text", ""),
             row.get("event_or_tournament", ""),
@@ -609,6 +702,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         "source_consistency_issues": source_consistency_issues,
         "counts": {
             "source_games": len(games),
+            "correction_unchanged_published_rows": len(correction_legacy_ids),
             "opponents": len(opponents),
             "venues": len(venues),
             "conference_intervals": len(conferences),
