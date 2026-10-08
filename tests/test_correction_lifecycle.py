@@ -356,6 +356,255 @@ class CorrectionStage2LegacyPackageScopeTests(unittest.TestCase):
             )
 
 
+class CorrectionStage2AssertionDriftScopeTests(unittest.TestCase):
+    semantic_fields = [
+        "season_label",
+        "game_date",
+        "team_score",
+        "opponent_score",
+        "played_result",
+        "overtime_periods",
+        "curated_site_type",
+        "curated_venue_name",
+        "city",
+        "state",
+        "event_or_tournament",
+        "curated_game_type",
+        "curated_postseason_round",
+        "source_opponent_label",
+        "raw_text",
+    ]
+
+    def snapshot(self, rows):
+        return {
+            "schema_version": 1,
+            "fields": list(self.semantic_fields),
+            "rows": {
+                item["source_game_id"]: {
+                    field: item.get(field, "")
+                    for field in self.semantic_fields
+                }
+                for item in rows
+            },
+        }
+
+    def guard(self, snapshot):
+        return {
+            "schema_version": 1,
+            "snapshot_sha256": onboarding_plan.sha256_text(
+                onboarding_plan.canonical_json(snapshot)
+            ),
+            "snapshot": snapshot,
+        }
+
+    def write_manifest(self, repo, before, after, correction_ids):
+        pre = self.snapshot(before)
+        post = self.snapshot(after)
+        onboard = repo / ".onboarding" / "example"
+        onboard.mkdir(parents=True, exist_ok=True)
+        (onboard / "integration-freeze.json").write_text(
+            json.dumps(
+                {
+                    "workflow_kind": "POST_PUBLICATION_CORRECTION",
+                    "status": "INTEGRATION_FROZEN",
+                    "school_key": "example",
+                    "research_base_sha": "a" * 40,
+                    "correction_source_game_ids": correction_ids,
+                    "pre_correction_source_semantic_guard": self.guard(pre),
+                    "source_game_semantic_guard": self.guard(post),
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    def issues(self, repo, sources, assertions):
+        by_source = {
+            ("example", item["source_game_id"]): [item]
+            for item in assertions
+        }
+        return onboarding_plan._source_assertion_sync_issues(
+            repo,
+            "example",
+            sources,
+            by_source,
+        )
+
+    def test_exact_27_row_site_correction_drift_reaches_reconciliation(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = [
+                row(f"ND-STG1-{index:05d}")
+                for index in range(1, 28)
+            ]
+            after = []
+            for index, item in enumerate(before):
+                updated = dict(item)
+                updated["curated_site_type"] = (
+                    "NEUTRAL" if index < 6 else "OPPONENT_HOME"
+                )
+                after.append(updated)
+
+            ids = [item["source_game_id"] for item in after]
+            self.write_manifest(repo, before, after, ids)
+            errors, warnings = self.issues(repo, after, before)
+
+            self.assertEqual(errors, [])
+            self.assertEqual(len(warnings), 27)
+            self.assertEqual(
+                sum("curated_site_type" in warning for warning in warnings),
+                27,
+            )
+            self.assertEqual(
+                sum(item["curated_site_type"] == "NEUTRAL" for item in after),
+                6,
+            )
+            self.assertEqual(
+                sum(item["curated_site_type"] == "OPPONENT_HOME" for item in after),
+                21,
+            )
+            self.assertTrue(
+                all(
+                    "authorized correction delta pending sealed reconciliation"
+                    in warning
+                    for warning in warnings
+                )
+            )
+
+    def test_standard_workflow_assertion_drift_still_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = row("G1")
+            after = row("G1", curated_site_type="OPPONENT_HOME")
+
+            errors, warnings = self.issues(repo, [after], [before])
+
+            self.assertEqual(warnings, [])
+            self.assertEqual(
+                errors,
+                ["G1: global assertion differs in curated_site_type"],
+            )
+
+    def test_out_of_scope_correction_assertion_drift_still_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            correction_before = row("C1")
+            correction_after = row("C1", curated_site_type="OPPONENT_HOME")
+            other_before = row("OTHER")
+            other_after = row("OTHER", curated_site_type="NEUTRAL")
+            self.write_manifest(
+                repo,
+                [correction_before, other_before],
+                [correction_after, other_after],
+                ["C1"],
+            )
+
+            errors, warnings = self.issues(
+                repo,
+                [correction_after, other_after],
+                [correction_before, other_before],
+            )
+
+            self.assertEqual(len(warnings), 1)
+            self.assertEqual(
+                errors,
+                ["OTHER: global assertion differs in curated_site_type"],
+            )
+
+    def test_wrong_original_assertion_value_still_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = row("G1")
+            after = row("G1", curated_site_type="OPPONENT_HOME")
+            wrong_assertion = row("G1", curated_site_type="NEUTRAL")
+            self.write_manifest(repo, [before], [after], ["G1"])
+
+            errors, warnings = self.issues(
+                repo,
+                [after],
+                [wrong_assertion],
+            )
+
+            self.assertEqual(warnings, [])
+            self.assertEqual(
+                errors,
+                ["G1: global assertion differs in curated_site_type"],
+            )
+
+    def test_extra_assertion_drift_field_not_in_correction_delta_still_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = row("G1")
+            after = row("G1", curated_site_type="OPPONENT_HOME")
+            assertion = dict(before)
+            assertion["raw_text"] = "unrelated global assertion drift"
+            self.write_manifest(repo, [before], [after], ["G1"])
+
+            errors, warnings = self.issues(repo, [after], [assertion])
+
+            self.assertEqual(warnings, [])
+            self.assertEqual(
+                errors,
+                ["G1: global assertion differs in curated_site_type, raw_text"],
+            )
+
+    def test_staged_source_must_match_frozen_post_correction_snapshot(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = row("G1")
+            frozen = row("G1", curated_site_type="OPPONENT_HOME")
+            drifted_source = row("G1", curated_site_type="NEUTRAL")
+            self.write_manifest(repo, [before], [frozen], ["G1"])
+
+            errors, warnings = self.issues(
+                repo,
+                [drifted_source],
+                [before],
+            )
+
+            self.assertEqual(warnings, [])
+            self.assertEqual(
+                errors,
+                ["G1: global assertion differs in curated_site_type"],
+            )
+
+    def test_multiple_global_assertions_still_block_in_correction_mode(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = row("G1")
+            after = row("G1", curated_site_type="OPPONENT_HOME")
+            self.write_manifest(repo, [before], [after], ["G1"])
+            assertions = {
+                ("example", "G1"): [dict(before), dict(before)],
+            }
+
+            errors, warnings = onboarding_plan._source_assertion_sync_issues(
+                repo,
+                "example",
+                [after],
+                assertions,
+            )
+
+            self.assertEqual(warnings, [])
+            self.assertEqual(errors, ["G1: multiple global assertions exist"])
+
+    def test_untrusted_correction_snapshot_hash_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            before = row("G1")
+            after = row("G1", curated_site_type="OPPONENT_HOME")
+            self.write_manifest(repo, [before], [after], ["G1"])
+            manifest_path = repo / ".onboarding/example/integration-freeze.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["source_game_semantic_guard"]["snapshot_sha256"] = "bad"
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                onboarding_plan.WorkflowError,
+                "snapshot hash mismatch",
+            ):
+                self.issues(repo, [after], [before])
+
+
 class CorrectionSiteScopeTests(unittest.TestCase):
     def test_standard_manifest_keeps_full_source_scope(self):
         with tempfile.TemporaryDirectory() as td:
