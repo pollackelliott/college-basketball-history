@@ -551,6 +551,51 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         self.assertTrue(any("adversarial review signal only" in e for e in report["errors"]))
         self.assertEqual(game["curated_site_type"], "SOURCE_PROGRAM_HOME")
 
+    def test_exact_frozen_exception_only_waives_registered_game_tuple(self):
+        first = self.home_game("Alternate Hall", "2026-01-15")
+        second = self.home_game("Alternate Hall", "2026-01-16")
+        second["source_game_id"] = "HOME-2"
+        report = source_home_chronology_report(
+            [first, second],
+            [
+                self.venue(
+                    "Primary Arena", "primary_home", "2020-11-01", "2030-03-31"
+                ),
+                self.venue("Alternate Hall"),
+            ],
+            school_key="test",
+            accepted_game_exceptions={
+                ("HOME-1", "2026-01-15", "Alternate Hall")
+            },
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
+        self.assertEqual(
+            report["counts"]["approved_frozen_home_exception_rows"], 1
+        )
+        self.assertIn("HOME-2", report["errors"][0])
+        self.assertNotIn("HOME-1", report["errors"][0])
+
+    def test_frozen_exception_does_not_apply_to_other_venue(self):
+        report = source_home_chronology_report(
+            [self.home_game("Different Hall")],
+            [
+                self.venue(
+                    "Primary Arena", "primary_home", "2020-11-01", "2030-03-31"
+                ),
+                self.venue("Different Hall"),
+            ],
+            school_key="test",
+            accepted_game_exceptions={
+                ("HOME-1", "2026-01-15", "Alternate Hall")
+            },
+        )
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 1)
+        self.assertEqual(
+            report["counts"]["approved_frozen_home_exception_rows"], 0
+        )
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
