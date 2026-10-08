@@ -512,7 +512,9 @@ def research_declares_registration_only_pending(local: dict[str, str]) -> bool:
         marker in notes
         for marker in (
             "historical identity: resolved",
+            "historical identity resolved",
             "historical physical identity: resolved",
+            "historical physical identity resolved",
             "research-resolved historical identity",
         )
     )

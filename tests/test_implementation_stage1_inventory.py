@@ -195,6 +195,63 @@ class Stage1VenueInventoryTests(unittest.TestCase):
                 )
                 self.assertEqual(local["venue_id"], "")
 
+    def test_marquette_settled_registration_handoff_spelling_is_safe(self):
+        cases = (
+            (
+                "al-mcguire-center",
+                "Al McGuire Center",
+                "Milwaukee",
+                "WI",
+                "Historical identity resolved. No matching physical venue row exists "
+                "in protected-main registry; global registration pending current-main rebase.",
+            ),
+            (
+                "resch-center",
+                "Resch Center",
+                "Green Bay",
+                "WI",
+                "Historical identity resolved from target source; no matching protected-main "
+                "venue row. Global registration: PENDING_CURRENT_MAIN_REBASE.",
+            ),
+        )
+        for key, name, city, state, notes in cases:
+            with self.subTest(venue_key=key):
+                report = venue_reconciliation_inventory(
+                    [local_venue(key, name, city=city, state=state, notes=notes)],
+                    [],
+                    [],
+                )
+                self.assertEqual(report["blocker_count"], 0)
+                self.assertEqual(
+                    report["rows"][0]["classification"], "NEW_GLOBAL_IDENTITY"
+                )
+                self.assertIn(
+                    "SETTLED_PENDING_REGISTRATION_READY_FOR_PHASE0",
+                    report["rows"][0]["issues"],
+                )
+
+    def test_settled_wording_never_waives_unresolved_reuse(self):
+        report = venue_reconciliation_inventory(
+            [local_venue(
+                "disputed-venue",
+                "Disputed Venue",
+                city="Omaha",
+                state="NE",
+                notes=(
+                    "Historical identity resolved; global registration pending "
+                    "current-main rebase. Research did not establish one authoritative "
+                    "shared venue identity; reuse decision remains."
+                ),
+            )],
+            [],
+            [],
+        )
+        self.assertEqual(report["blocker_count"], 1)
+        self.assertEqual(
+            report["blockers"][0]["classification"],
+            "SHARED_GLOBAL_MAINTENANCE",
+        )
+
     def test_unresolved_history_note_does_not_waive_global_registration_review(self):
         local = local_venue(
             "unconfirmed-gym",
