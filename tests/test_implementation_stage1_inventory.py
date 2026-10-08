@@ -167,7 +167,7 @@ class Stage1VenueInventoryTests(unittest.TestCase):
             row["issues"],
         )
 
-    def test_legacy_pending_registration_phrasings_are_shared_maintenance(self):
+    def test_registration_only_pending_phrasings_are_safe_new_identities(self):
         note_variants = (
             "Research-resolved historical identity; global venue registration "
             "pending current-main rebase.",
@@ -185,13 +185,93 @@ class Stage1VenueInventoryTests(unittest.TestCase):
                 )
                 report = venue_reconciliation_inventory([local], [], [])
 
-                self.assertEqual(report["blocker_count"], 1)
-                row = report["blockers"][0]
-                self.assertEqual(row["classification"], "SHARED_GLOBAL_MAINTENANCE")
+                self.assertEqual(report["blocker_count"], 0)
+                row = report["rows"][0]
+                self.assertEqual(row["classification"], "NEW_GLOBAL_IDENTITY")
+                self.assertEqual(row["resolution"], "NEW_GLOBAL_IDENTITY")
                 self.assertIn(
-                    "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING",
+                    "SETTLED_PENDING_REGISTRATION_READY_FOR_PHASE0",
                     row["issues"],
                 )
+                self.assertEqual(local["venue_id"], "")
+
+    def test_unresolved_history_note_does_not_waive_global_registration_review(self):
+        local = local_venue(
+            "unconfirmed-gym",
+            "Unconfirmed Gym",
+            city="Omaha",
+            state="NE",
+            notes="Global registration: PENDING_CURRENT_MAIN_REBASE.",
+        )
+        report = venue_reconciliation_inventory([local], [], [])
+        self.assertEqual(report["blocker_count"], 1)
+        self.assertEqual(
+            report["blockers"][0]["classification"],
+            "SHARED_GLOBAL_MAINTENANCE",
+        )
+
+    def test_registration_only_pending_exact_key_reuses_current_global_id(self):
+        local = local_venue(
+            "raider-arena",
+            "Raider Arena",
+            city="Niceville",
+            state="FL",
+            notes=(
+                "Historical physical identity: RESOLVED. "
+                "Global registration: PENDING_CURRENT_MAIN_REBASE."
+            ),
+        )
+        global_row = global_venue(
+            "VEN-000271", "raider-arena", "Raider Arena", "Niceville", "FL",
+        )
+        report = venue_reconciliation_inventory(
+            [local],
+            [global_row],
+            [venue_name("VEN-000271", "Raider Arena", "PROJECT_DISPLAY")],
+        )
+        self.assertEqual(report["blocker_count"], 0)
+        row = report["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["target_venue_id"], "VEN-000271")
+        self.assertEqual(row["resolution"], "REUSE_EXACT_KEY")
+        self.assertIn(
+            "SETTLED_PENDING_REGISTRATION_RESOLVED_BY_EXACT_REUSE",
+            row["issues"],
+        )
+
+    def test_pending_registration_with_conflicting_current_alias_still_blocks(self):
+        local = local_venue(
+            "venue-one",
+            "Venue One",
+            aliases="Venue Two",
+            city="Omaha",
+            state="NE",
+            notes=(
+                "Historical identity: RESOLVED. "
+                "Global registration: PENDING_CURRENT_MAIN_REBASE."
+            ),
+        )
+        globals_ = [
+            global_venue("VEN-000101", "venue-one", "Venue One", "Omaha", "NE"),
+            global_venue("VEN-000102", "venue-two", "Venue Two", "Omaha", "NE"),
+        ]
+        report = venue_reconciliation_inventory(
+            [local],
+            globals_,
+            [
+                venue_name("VEN-000101", "Venue One", "PROJECT_DISPLAY"),
+                venue_name("VEN-000102", "Venue Two", "PROJECT_DISPLAY"),
+            ],
+        )
+        self.assertEqual(report["blocker_count"], 1)
+        self.assertEqual(
+            report["blockers"][0]["classification"],
+            "SHARED_GLOBAL_MAINTENANCE",
+        )
+        self.assertIn(
+            "CONFLICTING_REGISTERED_NAME_IDENTITIES",
+            report["blockers"][0]["issues"],
+        )
 
     def test_reconciled_survivor_note_closes_research_deferred_exact_key(self):
         local = local_venue(

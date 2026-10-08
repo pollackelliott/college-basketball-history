@@ -492,6 +492,45 @@ def research_declares_pending_shared_venue(local: dict[str, str]) -> bool:
     )
 
 
+def research_declares_registration_only_pending(local: dict[str, str]) -> bool:
+    """Recognize a frozen, settled identity awaiting mechanical registration.
+
+    An explicit registration-only handoff can proceed through guarded Stage 1
+    when current-main identity checks are clean. A note that also records an
+    unresolved existing identity, collision, or reuse decision is not a waiver.
+    """
+    notes = (local.get("notes", "") or "").casefold()
+    registration_only = any(
+        marker in notes
+        for marker in (
+            "global registration: pending_current_main_rebase",
+            "global registration pending current-main rebase",
+            "global venue registration pending current-main rebase",
+        )
+    )
+    settled_identity = any(
+        marker in notes
+        for marker in (
+            "historical identity: resolved",
+            "historical physical identity: resolved",
+            "research-resolved historical identity",
+        )
+    )
+    unresolved_identity = any(
+        marker in notes
+        for marker in (
+            "reuse decision remains",
+            "did not establish one authoritative shared venue identity",
+            "defers authoritative id reconciliation",
+            "defers authoritative shared-id reconciliation",
+            "duplicate physical",
+            "conflicting physical",
+            "multiple physical",
+        )
+    )
+    return registration_only and settled_identity and not unresolved_identity
+
+
 def venue_reconciliation_inventory(
     local_rows: list[dict[str, str]],
     global_rows: list[dict[str, str]],
@@ -558,6 +597,7 @@ def venue_reconciliation_inventory(
             if normalize_name(value)
         ]
         pending_shared = research_declares_pending_shared_venue(local)
+        registration_only = research_declares_registration_only_pending(local)
 
         item: dict[str, Any] = {
             "venue_key": key,
@@ -689,6 +729,7 @@ def venue_reconciliation_inventory(
             elif (
                 pending_shared
                 and reason == "REUSE_EXACT_KEY"
+                and not registration_only
                 and not any(
                     marker in chosen_notes
                     for marker in (
@@ -703,6 +744,10 @@ def venue_reconciliation_inventory(
                 )
             else:
                 item["classification"] = "SAFE_REPRESENTATION_REUSE"
+                if pending_shared and registration_only:
+                    item["issues"].append(
+                        "SETTLED_PENDING_REGISTRATION_RESOLVED_BY_EXACT_REUSE"
+                    )
 
             item["resolution"] = reason
             item["target_venue_id"] = chosen_id
@@ -727,7 +772,7 @@ def venue_reconciliation_inventory(
             if missing:
                 item["issues"].append("GLOBAL_NAME_REGISTRATION_DURING_PHASE0")
         else:
-            if pending_shared:
+            if pending_shared and not registration_only:
                 item["classification"] = "SHARED_GLOBAL_MAINTENANCE"
                 item["issues"].append(
                     "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING"
@@ -739,6 +784,10 @@ def venue_reconciliation_inventory(
                 )
             else:
                 item["classification"] = "NEW_GLOBAL_IDENTITY"
+                if pending_shared and registration_only:
+                    item["issues"].append(
+                        "SETTLED_PENDING_REGISTRATION_READY_FOR_PHASE0"
+                    )
                 collisions = incompatible_school_venue_key_rows(
                     local,
                     key,
