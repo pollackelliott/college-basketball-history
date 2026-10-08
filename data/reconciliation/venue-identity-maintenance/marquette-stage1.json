@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000146",
+      "absorbed_venue_id": "VEN-000558",
+      "resolution_basis": "Owner-authorized Marquette Stage 1 shared-venue maintenance, 2026-10-08. City of Oklahoma City confirms that the 1972 Myriad Convention Center later became the Cox Convention Center at the same downtown Oklahoma City site (https://www.okc.gov/News-articles/Former-convention-center-skybridge-and-wall-scheduled-for-removal-June-9-13%3B-streetcar-service-interruption). Preserve VEN-000146 / myriad-convention-center as the established physical identity, retire duplicate VEN-000558 / cox-center, retain Cox Center as a historical alias, and transactionally propagate to all canonical, asserted, published school venue and generated site references. Do not change Tulsa Cox Business Convention Center or source literal venue labels."
+    }
+  ]
+}
