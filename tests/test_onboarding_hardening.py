@@ -332,7 +332,7 @@ class RehearsalDiagnosticTests(unittest.TestCase):
             plan.write_text("{}\n", encoding="utf-8")
             review.write_text("decision_id\n", encoding="utf-8")
 
-            def fake_copy_repository(repo, rehearsal):
+            def fake_copy_repository(repo, rehearsal, *, school_key=None):
                 rehearsal.mkdir(parents=True, exist_ok=True)
 
             def fake_run_gates(rehearsal, school_key, changed, include_tests=True):
