@@ -137,6 +137,7 @@ def history_errors(
                 and same_season_memberships == 2
                 and left[3] != right[3]
                 and all(key and key != "independent" for key in (left[3], right[3]))
+                and bool(left[4].get("source_program_key", "").strip())
                 and left[4].get("source_program_key", "").strip()
                 == right[4].get("source_program_key", "").strip()
                 and all(
