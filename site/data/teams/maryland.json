@@ -1571,7 +1571,7 @@
       "opponent_key": "creighton",
       "opponent_name": "Creighton",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -36050,12 +36050,12 @@
     {
       "canonical_game_id": "CBBG-0057331",
       "season_label": "1974-1975",
-      "game_date": "1975-03-18",
+      "game_date": "1975-03-15",
       "date_precision": "EXACT",
       "opponent_key": "creighton",
       "opponent_name": "Creighton",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 83,
       "opponent_score": 79,
       "score_known": true,
@@ -54380,7 +54380,7 @@
       "opponent_key": "creighton",
       "opponent_name": "Creighton",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 75,
       "opponent_score": 63,
       "score_known": true,

@@ -1733,7 +1733,7 @@
       "opponent_key": "creighton",
       "opponent_name": "Creighton",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -49578,12 +49578,12 @@
     {
       "canonical_game_id": "CBBG-0136689",
       "season_label": "1989-1990",
-      "game_date": "1989-12-29",
+      "game_date": "1989-12-30",
       "date_precision": "EXACT",
       "opponent_key": "creighton",
       "opponent_name": "Creighton",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 84,
       "opponent_score": 89,
       "score_known": true,
