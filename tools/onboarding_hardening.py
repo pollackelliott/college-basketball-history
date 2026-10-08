@@ -990,7 +990,7 @@ def rehearse_review(
     with tempfile.TemporaryDirectory(prefix=f"preseal-{school_key}-") as temporary:
         rehearsal = Path(temporary) / "repository"
         print(f"Rehearsing filled review in {rehearsal}")
-        onboard_school.copy_repository(repo, rehearsal)
+        onboard_school.copy_repository(repo, rehearsal, school_key=school_key)
         execution = onboard_school.execute_approved_in_place(rehearsal, approved)
         after = onboard_school.tree_hashes(rehearsal)
         changed = onboard_school.changed_paths(before, after)

@@ -28,7 +28,12 @@ from typing import Any
 
 import ingest_school
 
-from integration_freeze_guard import assert_no_unapproved_semantic_drift
+from integration_freeze_guard import (
+    SEMANTIC_SOURCE_GAME_FIELDS,
+    assert_no_unapproved_semantic_drift,
+    build_source_game_semantic_snapshot,
+    semantic_snapshot_sha256,
+)
 from onboarding_plan import (
     WorkflowError,
     approve_plan,
@@ -882,7 +887,89 @@ def execute_approved_in_place(
     }
 
 
-def copy_repository(source: Path, destination: Path) -> None:
+def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes | None:
+    """Authorize only an exact correction Integration Freeze for disposable execution.
+
+    Other ignored onboarding state must not cross this boundary. Both the frozen
+    pre-correction baseline and the post-correction snapshot are required to
+    prevent a forged or stale scope from suppressing unrelated source-site debt.
+    """
+    path = source / ".onboarding" / school_key / "integration-freeze.json"
+    if not path.is_file():
+        return None
+    payload = path.read_bytes()
+    try:
+        manifest = json.loads(payload)
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise WorkflowError(f"invalid Integration Freeze manifest: {path}") from exc
+    if not isinstance(manifest, dict):
+        raise WorkflowError("Integration Freeze manifest must be an object")
+    if manifest.get("workflow_kind") != "POST_PUBLICATION_CORRECTION":
+        return None
+
+    if (
+        manifest.get("schema_version") != 2
+        or manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+    ):
+        raise WorkflowError("invalid correction Integration Freeze identity/status")
+
+    ids = manifest.get("correction_source_game_ids")
+    if (
+        not isinstance(ids, list)
+        or not ids
+        or any(not isinstance(i, str) or not i.strip() for i in ids)
+        or len(set(ids)) != len(ids)
+    ):
+        raise WorkflowError("invalid correction Integration Freeze source IDs")
+
+    snapshots = []
+    for name in ("pre_correction_source_semantic_guard", "source_game_semantic_guard"):
+        guard = manifest.get(name)
+        if not isinstance(guard, dict) or guard.get("schema_version") != 1:
+            raise WorkflowError(f"invalid correction Integration Freeze {name}")
+        snapshot = guard.get("snapshot")
+        if (
+            not isinstance(snapshot, dict)
+            or snapshot.get("schema_version") != 1
+            or snapshot.get("fields") != list(SEMANTIC_SOURCE_GAME_FIELDS)
+            or not isinstance(snapshot.get("rows"), dict)
+            or not all(isinstance(v, dict) for v in snapshot["rows"].values())
+            or guard.get("snapshot_sha256") != semantic_snapshot_sha256(snapshot)
+        ):
+            raise WorkflowError(f"untrusted correction Integration Freeze {name}")
+        snapshots.append(snapshot)
+
+    before, after = (snap["rows"] for snap in snapshots)
+    changed_ids = {
+        i for i in set(before) | set(after) if before.get(i) != after.get(i)
+    }
+    if not changed_ids.issubset(set(ids)):
+        raise WorkflowError("correction semantic delta exceeds authorized source IDs")
+    if not set(ids).issubset(set(after)):
+        raise WorkflowError("correction source IDs missing from frozen post-correction state")
+
+    source_games = source / "schools" / school_key / "source-games.csv"
+    member_hashes = manifest.get("package_member_sha256")
+    if (
+        not isinstance(member_hashes, dict)
+        or member_hashes.get("source-games.csv") != file_sha(source_games)
+        or build_source_game_semantic_snapshot(source_games) != snapshots[1]
+    ):
+        raise WorkflowError("tracked source does not match correction Integration Freeze")
+    return payload
+
+
+def copy_repository(
+    source: Path, destination: Path, *, school_key: str | None = None
+) -> None:
+    # Verify the exceptional ignored authority BEFORE constructing the copy.
+    correction_freeze = (
+        _validated_correction_freeze_bytes(source, school_key)
+        if school_key is not None
+        else None
+    )
+
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {
             name
@@ -891,6 +978,10 @@ def copy_repository(source: Path, destination: Path) -> None:
         }
 
     shutil.copytree(source, destination, ignore=ignore)
+    if correction_freeze is not None:
+        target = destination / ".onboarding" / school_key / "integration-freeze.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(correction_freeze)
 
 
 def copy_validated_changes(
@@ -1029,7 +1120,7 @@ def transactional_apply(
     with tempfile.TemporaryDirectory(prefix=f"onboard-{approved['school_key']}-") as temporary:
         rehearsal = Path(temporary) / "repository"
         print(f"Rehearsing the sealed plan in {rehearsal}")
-        copy_repository(repo, rehearsal)
+        copy_repository(repo, rehearsal, school_key=approved["school_key"])
         execution = execute_approved_in_place(rehearsal, approved)
         after = tree_hashes(rehearsal)
         changed = changed_paths(before, after)
