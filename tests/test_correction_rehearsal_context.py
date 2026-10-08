@@ -95,6 +95,18 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
                 ("CORRECTION_DELTA", ["CORRECTION", "SAFE"]))
             self.assertTrue(errors)
 
+    def test_correction_row_new_home_gap_still_blocks(self):
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "original", Path(temp) / "copy"
+            _, rows = self.fixture(src)
+            onboard_school.copy_repository(src, dst, school_key="example")
+            rows[1].update(curated_site_type="SOURCE_PROGRAM_HOME",
+                curated_venue_name="", city="", state="")
+            mode, selected, errors = self.scoped_gate(dst, rows)
+            self.assertEqual((mode, selected),
+                ("CORRECTION_DELTA", ["CORRECTION"]))
+            self.assertTrue(errors)
+
     def test_standard_workflow_stays_full_source(self):
         with tempfile.TemporaryDirectory() as temp:
             src, dst = Path(temp) / "original", Path(temp) / "copy"
