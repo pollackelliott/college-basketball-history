@@ -1,15 +1,18 @@
 import csv
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from correction_lifecycle import source_game_diff, validate_correction_candidate  # noqa: E402
+import onboarding_plan  # noqa: E402
 from implementation_site_gate import _correction_source_validation_scope  # noqa: E402
 
 
@@ -167,6 +170,190 @@ class CorrectionDiffTests(unittest.TestCase):
             )
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["counts"]["changed_source_games"], 1)
+
+
+class CorrectionStage2LegacyPackageScopeTests(unittest.TestCase):
+    def git(self, repo, *args):
+        return subprocess.check_output(
+            ["git", *args],
+            cwd=repo,
+            text=True,
+            stderr=subprocess.STDOUT,
+        ).strip()
+
+    def write_package(self, repo, rows):
+        school = repo / "schools" / "example"
+        write_csv(school / "source-games.csv", FIELDS, rows)
+        write_csv(
+            school / "opponents.csv",
+            [
+                "source_program_key",
+                "source_opponent_label",
+                "canonical_opponent_key",
+            ],
+            [{
+                "source_program_key": "example",
+                "source_opponent_label": "Opponent",
+                "canonical_opponent_key": "opponent",
+            }],
+        )
+        write_csv(
+            school / "venues.csv",
+            [
+                "source_program_key",
+                "venue_key",
+                "venue_id",
+                "canonical_name",
+                "aliases",
+                "city",
+                "state",
+                "relationship_type",
+                "relationship_start",
+                "relationship_end",
+            ],
+            [{
+                "source_program_key": "example",
+                "venue_key": "example-arena",
+                "venue_id": "VEN-000001",
+                "canonical_name": "Example Arena",
+                "aliases": "",
+                "city": "Example City",
+                "state": "EX",
+                "relationship_type": "PRIMARY_HOME",
+                "relationship_start": "2020-01-01",
+                "relationship_end": "",
+            }],
+        )
+        write_csv(
+            school / "conferences.csv",
+            ["source_program_key", "conference_key", "start_season", "end_season"],
+            [],
+        )
+        (school / "notes.md").write_text("fixture\n", encoding="utf-8")
+        (school / "source-notes.md").write_text("fixture\n", encoding="utf-8")
+
+    def validate(self, repo):
+        with (
+            patch.object(onboarding_plan, "current_d1_opponent_key_errors", return_value=[]),
+            patch.object(onboarding_plan, "historical_opponent_display_conflicts", return_value={}),
+            patch.object(onboarding_plan, "history_scope_errors", return_value=[]),
+            patch.object(onboarding_plan, "history_errors", return_value=[]),
+        ):
+            return onboarding_plan.validate_package(repo, "example")
+
+    def make_repo(self, root):
+        self.git(root, "init")
+        self.git(root, "config", "user.email", "fixture@example.com")
+        self.git(root, "config", "user.name", "Fixture")
+        (root / "data/reference").mkdir(parents=True)
+        write_csv(
+            root / "data/reference/programs.csv",
+            ["program_key"],
+            [{"program_key": "example"}],
+        )
+        write_csv(
+            root / "data/reference/conferences.csv",
+            ["conference_key"],
+            [],
+        )
+        legacy = row(
+            "OLD",
+            season_label="1922-1923",
+            game_date="1923-01-06",
+            played_result="L",
+            team_score="15",
+            opponent_score="32",
+            curated_site_type="OPPONENT_HOME",
+            source_venue_name="Old Armory",
+            curated_venue_name="Old Armory",
+            city="State College",
+            state="PA",
+        )
+        self.write_package(root, [legacy])
+        self.git(root, "add", "schools/example", "data/reference")
+        self.git(root, "commit", "-m", "published baseline")
+        return self.git(root, "rev-parse", "HEAD"), legacy
+
+    def write_manifest(self, root, base_sha, correction_ids):
+        onboard = root / ".onboarding" / "example"
+        onboard.mkdir(parents=True, exist_ok=True)
+        (onboard / "integration-freeze.json").write_text(
+            json.dumps(
+                {
+                    "workflow_kind": "POST_PUBLICATION_CORRECTION",
+                    "status": "INTEGRATION_FROZEN",
+                    "school_key": "example",
+                    "research_base_sha": base_sha,
+                    "correction_source_game_ids": correction_ids,
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    def test_unchanged_published_missing_venue_is_warning_only_for_correction(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            base_sha, legacy = self.make_repo(root)
+            changed = row("NEW", curated_venue_name="Example Arena")
+            self.write_package(root, [legacy, changed])
+            self.write_manifest(root, base_sha, ["NEW"])
+
+            report = self.validate(root)
+
+            self.assertEqual(report["errors"], [])
+            self.assertTrue(
+                any(
+                    "OLD: curated venue 'Old Armory' absent from venues.csv" in warning
+                    and "unchanged published legacy debt outside this correction" in warning
+                    for warning in report["warnings"]
+                )
+            )
+            self.assertEqual(
+                report["counts"]["correction_unchanged_published_rows"],
+                1,
+            )
+
+    def test_correction_or_modified_legacy_missing_venue_still_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            base_sha, legacy = self.make_repo(root)
+            modified_legacy = dict(legacy)
+            modified_legacy["curated_venue_name"] = "Changed Armory"
+            correction = row("NEW", curated_venue_name="Missing Correction Arena")
+            self.write_package(root, [modified_legacy, correction])
+            self.write_manifest(root, base_sha, ["NEW"])
+
+            report = self.validate(root)
+
+            self.assertIn(
+                "OLD: curated venue 'Changed Armory' absent from venues.csv",
+                report["errors"],
+            )
+            self.assertIn(
+                "NEW: curated venue 'Missing Correction Arena' absent from venues.csv",
+                report["errors"],
+            )
+            self.assertEqual(
+                report["counts"]["correction_unchanged_published_rows"],
+                0,
+            )
+
+    def test_standard_workflow_missing_venue_still_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _, legacy = self.make_repo(root)
+            self.write_package(root, [legacy])
+
+            report = self.validate(root)
+
+            self.assertIn(
+                "OLD: curated venue 'Old Armory' absent from venues.csv",
+                report["errors"],
+            )
+            self.assertEqual(
+                report["counts"]["correction_unchanged_published_rows"],
+                0,
+            )
 
 
 class CorrectionSiteScopeTests(unittest.TestCase):
