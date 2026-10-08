@@ -59,7 +59,7 @@ colorado-state,4,2,13,0,0,ELITE_EIGHT,1969,OWNER_BASELINE_UNVERIFIED,Owner-suppl
 columbia,13,0,3,0,0,SWEET_SIXTEEN,1968,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 coppin-state,11,4,4,0,0,ROUND_OF_32,1997,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 cornell,8,0,5,0,0,SWEET_SIXTEEN,2010,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-creighton,20,12,26,0,0,ELITE_EIGHT,2023,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+creighton,20,12,26,0,0,ELITE_EIGHT,2023,VERIFIED,"Proposed verification only. Owner counting convention: 20 regular-season conference championships, excluding the two simultaneous 1916-17 titles; historical evidence remains preserved. Other existing reference values require successful NCAA aggregate crosscheck before Gate 1.",MATCH,Verified through onboarding plan ffacbbda83d9.
 dartmouth,12,0,7,2,0,NATIONAL_RUNNER_UP,1944,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 davidson,25,13,15,0,0,ELITE_EIGHT,2008,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 dayton,3,2,19,1,0,NATIONAL_RUNNER_UP,1967,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
