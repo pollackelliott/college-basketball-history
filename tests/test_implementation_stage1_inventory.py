@@ -195,6 +195,21 @@ class Stage1VenueInventoryTests(unittest.TestCase):
                 )
                 self.assertEqual(local["venue_id"], "")
 
+    def test_unresolved_history_note_does_not_waive_global_registration_review(self):
+        local = local_venue(
+            "unconfirmed-gym",
+            "Unconfirmed Gym",
+            city="Omaha",
+            state="NE",
+            notes="Global registration: PENDING_CURRENT_MAIN_REBASE.",
+        )
+        report = venue_reconciliation_inventory([local], [], [])
+        self.assertEqual(report["blocker_count"], 1)
+        self.assertEqual(
+            report["blockers"][0]["classification"],
+            "SHARED_GLOBAL_MAINTENANCE",
+        )
+
     def test_registration_only_pending_exact_key_reuses_current_global_id(self):
         local = local_venue(
             "raider-arena",
