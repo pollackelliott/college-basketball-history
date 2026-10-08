@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "school_key": "creighton",
+  "owner_approval_basis": "Owner explicitly approved the consolidated Creighton Stage 1 reconciliation on 2026-10-08: preserve all nine accepted frozen conference-history rows, concurrent 1916-17 memberships, and register three distinct historical conference identities with non-assertive display fallbacks.",
+  "expected_conferences_sha256": "7bdff3cc59556f432aa07727c411304dbdaf8ef5f222afcf9e4efc63e73225ce",
+  "replacement_history": [
+    {
+      "source_program_key": "creighton",
+      "start_season": "1916-1917",
+      "end_season": "1916-1917",
+      "conference_key": "nebraska-collegiate-conference",
+      "conference_name": "Nebraska Collegiate Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide Conference Affiliation section states the Bluejays began play in 1916-17 with membership in both the Nebraska Collegiate Conference and Western Catholic Conference.",
+      "notes": "Concurrent dual conference membership in the program's inaugural season; historical identity resolved in Research, global registration pending current-main rebase."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1916-1917",
+      "end_season": "1916-1917",
+      "conference_key": "western-catholic-conference",
+      "conference_name": "Western Catholic Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide Conference Affiliation section states the Bluejays began play in 1916-17 with membership in both the Nebraska Collegiate Conference and Western Catholic Conference.",
+      "notes": "Concurrent dual conference membership in the program's inaugural season; historical identity resolved in Research, global registration pending current-main rebase."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1917-1918",
+      "end_season": "1921-1922",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide Conference Affiliation section says Creighton played the next five seasons as an independent after 1916-17.",
+      "notes": "Five-season independent interval before North Central Conference membership."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1922-1923",
+      "end_season": "1926-1927",
+      "conference_key": "north-central-conference",
+      "conference_name": "North Central Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide Conference Affiliation section states North Central Conference membership from 1922-27; Yearly Statistics records conference marks and North Central titles in 1922-23 through 1926-27.",
+      "notes": "Historical identity resolved in Research; global registration pending current-main rebase."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1927-1928",
+      "end_season": "1927-1928",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "No",
+      "basis": "Creighton institutional affiliation chronology ends North Central membership with 1926-27 and begins the first Missouri Valley stint in 1928-29.",
+      "notes": "One-season transition between North Central Conference and Missouri Valley membership."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1928-1929",
+      "end_season": "1947-1948",
+      "conference_key": "missouri-valley",
+      "conference_name": "Missouri Valley",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide Conference Affiliation section gives the first Missouri Valley affiliation as 1928-48; Yearly Statistics begins MVC play in 1928-29 and the guide says Creighton withdrew following 1947-48.",
+      "notes": "Protected-main `missouri-valley` identity reused."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1948-1949",
+      "end_season": "1976-1977",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide says the program withdrew from the MVC prior to 1948-49 and remained independent until rejoining the Valley in 1977.",
+      "notes": "Independent interval between the two Missouri Valley stints."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "1977-1978",
+      "end_season": "2012-2013",
+      "conference_key": "missouri-valley",
+      "conference_name": "Missouri Valley",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Creighton 2025-26 media guide gives Missouri Valley affiliation 1977-2013 and explicitly notes the 1977-78 return; Creighton left for the Big East effective July 1, 2013.",
+      "notes": "Protected-main `missouri-valley` identity reused."
+    },
+    {
+      "source_program_key": "creighton",
+      "start_season": "2013-2014",
+      "end_season": "",
+      "conference_key": "big-east",
+      "conference_name": "Big East",
+      "membership_type": "primary",
+      "ongoing": "Yes",
+      "basis": "Creighton 2025-26 media guide states the university officially joined the Big East on July 1, 2013 and that 2025-26 is its 13th league season.",
+      "notes": "Protected-main `big-east` identity reused; ongoing through the 2025-26 Research cutoff."
+    }
+  ],
+  "registrations": [
+    {
+      "conference_key": "nebraska-collegiate-conference",
+      "conference_name": "Nebraska Collegiate Conference",
+      "tournament_label": "Nebraska Collegiate Conference",
+      "status": "historical",
+      "notes": "Owner-approved during Creighton Stage 1; display fallback only. No conference tournament existence is asserted."
+    },
+    {
+      "conference_key": "western-catholic-conference",
+      "conference_name": "Western Catholic Conference",
+      "tournament_label": "Western Catholic Conference",
+      "status": "historical",
+      "notes": "Owner-approved during Creighton Stage 1; display fallback only. No conference tournament existence is asserted."
+    },
+    {
+      "conference_key": "north-central-conference",
+      "conference_name": "North Central Conference",
+      "tournament_label": "North Central Conference",
+      "status": "historical",
+      "notes": "Owner-approved during Creighton Stage 1; display fallback only. No conference tournament existence is asserted."
+    }
+  ]
+}
