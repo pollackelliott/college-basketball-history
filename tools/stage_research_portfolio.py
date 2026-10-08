@@ -508,6 +508,14 @@ def research_declares_registration_only_pending(local: dict[str, str]) -> bool:
             "global venue registration pending current-main rebase",
         )
     )
+    settled_identity = any(
+        marker in notes
+        for marker in (
+            "historical identity: resolved",
+            "historical physical identity: resolved",
+            "research-resolved historical identity",
+        )
+    )
     unresolved_identity = any(
         marker in notes
         for marker in (
@@ -520,7 +528,7 @@ def research_declares_registration_only_pending(local: dict[str, str]) -> bool:
             "multiple physical",
         )
     )
-    return registration_only and not unresolved_identity
+    return registration_only and settled_identity and not unresolved_identity
 
 
 def venue_reconciliation_inventory(
