@@ -944,7 +944,7 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
     changed_ids = {
         i for i in set(before) | set(after) if before.get(i) != after.get(i)
     }
-    if not changed_ids or not changed_ids.issubset(set(ids)):
+    if not changed_ids.issubset(set(ids)):
         raise WorkflowError("correction semantic delta exceeds authorized source IDs")
     if not set(ids).issubset(set(after)):
         raise WorkflowError("correction source IDs missing from frozen post-correction state")
