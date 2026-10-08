@@ -36,3 +36,15 @@ Generated mechanically from durable Research checkpoint evidence. Literal row-le
 - source — Exact 2012-03-21 reciprocal independently establishes Butler SOURCE_PROGRAM_HOME at Hinkle Fieldhouse.
 - source — 2012-03-26 CBI final Game 1 at Beasley Coliseum, Pullman; WSU home court.
 - source — 2012-03-28 and 2012-03-30 Washington State at Pitt, Petersen Events Center; championship-series game numbering.
+
+
+## 2025-26 bounded post-publication correction source
+
+- Pittsburgh Athletics official completed 2025-26 schedule/results, preserved row-by-row in `source-games.csv`: https://pittsburghpanthers.com/sports/mens-basketball/schedule/text/2025-26
+- Durable correction checkpoint SHA-256: 96c28c57d125a4f252216809ea26c8148e1fe11632a0cb568fc3a4187a7d8497.
+- Providence and Pitt-Johnstown exhibitions excluded; 33 competitive games retained.
+- Pittsburgh institutional evidence records 1 OT for 2026-01-27 Wake Forest and 2026-03-07 Syracuse; the Wake Forest canonical conflict remains reserved for Owner Gate 1.
+- Syracuse official reciprocal schedule evidence is used only for the two Syracuse site rows recorded in the checkpoint.
+- The 2026-01-21 game at Boston College retains Chestnut Hill, MA with the opponent-home exact building blank explicitly nonblocking under source-school responsibility.
+- Pitt source wording `Hope Coliseum` resolves to the existing WVU Coliseum physical identity VEN-000235 under current global venue-name authority.
+
