@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import sys
 import tempfile
@@ -16,6 +17,7 @@ from onboarding_hardening import (  # noqa: E402
     fill_review_from_map,
     rehearse_review,
     research_portfolio_report,
+    frozen_home_exception_keys,
 )
 from stage_research_portfolio import rebase_venues  # noqa: E402
 
@@ -1092,6 +1094,99 @@ class VenueRebaseTests(unittest.TestCase):
             "possible physical venue match",
         ):
             rebase_venues("test", local, global_rows, names)
+
+
+class FrozenHomeExceptionRegistryTests(unittest.TestCase):
+    def make_case(self, root):
+        package = root / "frozen.zip"
+        package.write_bytes(b"exact frozen package placeholder")
+        digest = hashlib.sha256(package.read_bytes()).hexdigest()
+        registry = root / "exceptions.csv"
+        fieldnames = [
+            "school_key", "research_zip_sha256", "source_game_id",
+            "game_date", "curated_venue_name", "authority_basis",
+        ]
+        entry = {
+            "school_key": "test",
+            "research_zip_sha256": digest,
+            "source_game_id": "HOME-1",
+            "game_date": "2026-01-15",
+            "curated_venue_name": "Alternate Hall",
+            "authority_basis": "Previously accepted game-specific HOME evidence",
+        }
+        write_csv(registry, fieldnames, [entry])
+        game = {
+            "source_game_id": "HOME-1",
+            "source_program_key": "test",
+            "game_date": "2026-01-15",
+            "curated_venue_name": "Alternate Hall",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "normalization_status": "RESEARCH_ACCEPTED",
+        }
+        return package, registry, fieldnames, entry, game
+
+    def test_registry_requires_exact_sha_and_frozen_game_tuple(self):
+        with tempfile.TemporaryDirectory() as directory:
+            package, registry, _, _, game = self.make_case(Path(directory))
+            result = frozen_home_exception_keys(
+                package, school_key="test", games=[game], registry_path=registry
+            )
+            self.assertEqual(
+                result, {("HOME-1", "2026-01-15", "Alternate Hall")}
+            )
+
+            unrelated_zip = Path(directory) / "different.zip"
+            unrelated_zip.write_bytes(b"different frozen package")
+            self.assertEqual(
+                frozen_home_exception_keys(
+                    unrelated_zip, school_key="test",
+                    games=[game], registry_path=registry,
+                ),
+                set(),
+            )
+            self.assertEqual(
+                frozen_home_exception_keys(
+                    package, school_key="different",
+                    games=[game], registry_path=registry,
+                ),
+                set(),
+            )
+
+            changed = dict(game, game_date="2026-01-16")
+            with self.assertRaisesRegex(Exception, "must exactly match"):
+                frozen_home_exception_keys(
+                    package, school_key="test",
+                    games=[changed], registry_path=registry,
+                )
+            changed = dict(game, curated_site_type="NEUTRAL")
+            with self.assertRaisesRegex(Exception, "must exactly match"):
+                frozen_home_exception_keys(
+                    package, school_key="test",
+                    games=[changed], registry_path=registry,
+                )
+
+    def test_registry_rejects_duplicate_or_unsupported_exception(self):
+        with tempfile.TemporaryDirectory() as directory:
+            package, registry, fields, entry, game = self.make_case(
+                Path(directory)
+            )
+            write_csv(registry, fields, [entry, entry])
+            with self.assertRaisesRegex(Exception, "must exactly match"):
+                frozen_home_exception_keys(
+                    package, school_key="test",
+                    games=[game], registry_path=registry,
+                )
+            write_csv(
+                registry, fields,
+                [dict(entry, authority_basis="")],
+            )
+            with self.assertRaisesRegex(Exception, "must exactly match"):
+                frozen_home_exception_keys(
+                    package, school_key="test",
+                    games=[game], registry_path=registry,
+                )
+
+
 
 
 if __name__ == "__main__":
