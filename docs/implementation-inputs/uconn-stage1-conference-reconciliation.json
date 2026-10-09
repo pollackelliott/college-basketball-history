@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "school_key": "uconn",
+  "owner_approval_basis": "Owner approved the full Connecticut Stage 1 two-blocker diagnosis on 2026-10-09, including registration of the settled Yankee Conference historical identity and the nonassertive tournament-label display fallback 'Yankee Conference'. Preserve all six RESEARCH_FROZEN conference rows unchanged; registration asserts no tournament existence.",
+  "expected_conferences_sha256": "4fd8a9e96bc9f0fff9bfd818bcb74662e43f4cdc6dc5eca6c38f3fcbe4c1c199",
+  "replacement_history": [
+    {
+      "source_program_key": "uconn",
+      "start_season": "1901-1902",
+      "end_season": "1946-1947",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "UConn 2025-26 institutional record book year-by-year history; represented Research ledger begins 1901-02, and the 1946-47 season precedes the first season explicitly labeled Yankee Conference champion.",
+      "notes": "In-scope pre-Yankee program history; no conference membership inferred from opponent patterns."
+    },
+    {
+      "source_program_key": "uconn",
+      "start_season": "1947-1948",
+      "end_season": "1975-1976",
+      "conference_key": "yankee",
+      "conference_name": "Yankee Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "UConn 2025-26 institutional record book explicitly labels 1947-48 Yankee Conference Champion; its Yankee Conference Honor Roll is labeled 1948-49 through 1975-76. UConn institutional athletics history states UConn and the other New England land-grant universities established the Yankee Conference in 1946.",
+      "notes": "Historical identity resolved from UConn institutional evidence. Proposed stable key `yankee`; Global registration: PENDING_CURRENT_MAIN_REBASE. The honor-roll endpoint establishes continued basketball conference affiliation through 1975-76."
+    },
+    {
+      "source_program_key": "uconn",
+      "start_season": "1976-1977",
+      "end_season": "1978-1979",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "UConn 2025-26 institutional record book Yankee Conference Honor Roll ends with 1975-76; year-by-year history shows 1976-77 through 1978-79 before BIG EAST conference play begins in 1979-80.",
+      "notes": "Bounded post-Yankee/pre-BIG EAST independent interval. ECAC postseason participation does not create a program-level conference-membership interval."
+    },
+    {
+      "source_program_key": "uconn",
+      "start_season": "1979-1980",
+      "end_season": "2012-2013",
+      "conference_key": "big-east",
+      "conference_name": "Big East",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "UConn record book first shows a conference record in 1979-80; official BIG EAST history identifies Connecticut as an original member competing from 1979-80 through 2012-13.",
+      "notes": "Repository-standard key `big-east`."
+    },
+    {
+      "source_program_key": "uconn",
+      "start_season": "2013-2014",
+      "end_season": "2019-2020",
+      "conference_key": "american",
+      "conference_name": "American Athletic Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Official BIG EAST readmission history states Connecticut competed in the American Athletic Conference from 2013-14 through 2019-20; The American states UConn membership ended effective July 1, 2020.",
+      "notes": "Repository-standard key `american`, already used by current protected-main school chronology."
+    },
+    {
+      "source_program_key": "uconn",
+      "start_season": "2020-2021",
+      "end_season": "",
+      "conference_key": "big-east",
+      "conference_name": "Big East",
+      "membership_type": "conference",
+      "ongoing": "True",
+      "basis": "Official BIG EAST states UConn formally rejoined July 1, 2020; UConn record book shows continuing conference records through 2024-25 and the durable Research package includes official institutional 2025-26 results evidence.",
+      "notes": "Ongoing through required completed-season cutoff 2025-26; repository-standard key `big-east`."
+    }
+  ],
+  "registrations": [
+    {
+      "conference_key": "yankee",
+      "conference_name": "Yankee Conference",
+      "tournament_label": "Yankee Conference",
+      "status": "historical",
+      "notes": "Owner-approved Connecticut Stage 1 registration (2026-10-09). Nonassertive display fallback only; does not assert Yankee Conference tournament existence."
+    }
+  ]
+}
