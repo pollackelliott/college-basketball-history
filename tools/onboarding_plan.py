@@ -40,6 +40,15 @@ from location_safety import (
     venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
+from postseason_classification_review import (
+    REVIEW_ACTIONS as POSTSEASON_CLASSIFICATION_ACTIONS,
+    REVIEW_TYPES as POSTSEASON_CLASSIFICATION_TYPES,
+    NCAA_ROUNDS as POSTSEASON_REVIEW_NCAA_ROUNDS,
+    REVIEW_SITES as POSTSEASON_REVIEW_SITES,
+    build_review_rows as build_postseason_classification_reviews,
+    mismatch_is_reviewable as postseason_mismatch_is_reviewable,
+    row_fingerprint as postseason_row_fingerprint,
+)
 from program_history import (
     BEST_FINISH_RANK,
     derive_ncaa_accomplishments,
@@ -1743,6 +1752,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     predicted_enrichment_games: set[str] = set()
     accomplishment_crosscheck_games: list[dict[str, str]] = []
     accomplishment_round_candidates: list[dict[str, Any]] = []
+    generic_postseason_candidates: list[dict[str, Any]] = []
     affected_public_programs: set[str] = set()
     public_keys = {
         row["program_key"]
@@ -1888,6 +1898,19 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             ),
         )
         accomplishment_crosscheck_games.append(accomplishment_candidate)
+        if source.get("curated_game_type", "").strip() == "POSTSEASON":
+            generic_postseason_candidates.append({
+                "source": source,
+                "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
+                "canonical_game_date": (
+                    canonical_by_id.get(game_id, {}).get("game_date", "")
+                    if status == ingest_school.CONFIDENT else ""
+                ),
+                "canonical_game_type": (
+                    canonical_by_id.get(game_id, {}).get("game_type", "")
+                    if status == ingest_school.CONFIDENT else ""
+                ),
+            })
         if (
             status != ingest_school.REVIEW
             and source.get("curated_game_type", "").strip() == "NCAA_TOURNAMENT"
@@ -2197,6 +2220,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             accomplishment_crosscheck_games,
         )
         round_review_decisions: list[dict[str, Any]] = []
+        classification_review_decisions: list[dict[str, Any]] = []
         if accomplishment_conflicts and _accomplishment_round_conflict_is_reviewable(
             accomplishment,
             derived,
@@ -2207,6 +2231,13 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 accomplishment_round_candidates,
             )
             decisions.extend(round_review_decisions)
+        elif accomplishment_conflicts and postseason_mismatch_is_reviewable(
+            accomplishment, derived, generic_postseason_candidates,
+        ):
+            classification_review_decisions = build_postseason_classification_reviews(
+                school_key, generic_postseason_candidates,
+            )
+            decisions.extend(classification_review_decisions)
         elif accomplishment_conflicts:
             blockers.append(
                 "Accomplishment reference conflicts with canonical cross-check: "
@@ -2258,8 +2289,16 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                         "the disposable recommendation-map rehearsal must prove that the "
                         "final canonical aggregate matches before verification."
                         if round_review_decisions
-                        else "Canonical NCAA fields match; conference titles still "
-                        "require authoritative source verification."
+                        else (
+                            "Projected NCAA totals depend on explicit owner-reviewed "
+                            "classification and round decisions for generic postseason "
+                            "source games; the normal sealed disposable rehearsal must "
+                            "establish exact canonical accomplishment equality before "
+                            "publication or VERIFIED status."
+                            if classification_review_decisions
+                            else "Canonical NCAA fields match; conference titles still "
+                            "require authoritative source verification."
+                        )
                     ),
                     "recommended_action": "VERIFY_REFERENCE_VALUES",
                     "allowed_actions": sorted(ACCOMPLISHMENT_ACTIONS),
