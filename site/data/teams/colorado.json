@@ -1640,7 +1640,7 @@
       "opponent_key": "uconn",
       "opponent_name": "Connecticut",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -66295,7 +66295,7 @@
       "opponent_key": "uconn",
       "opponent_name": "Connecticut",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 67,
       "opponent_score": 74,
       "score_known": true,
@@ -73220,7 +73220,7 @@
       "opponent_key": "uconn",
       "opponent_name": "Connecticut",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 73,
       "opponent_score": 72,
       "score_known": true,
