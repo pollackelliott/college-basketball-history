@@ -3851,7 +3851,7 @@
       "state": "WI",
       "primary_hex": "#003366",
       "secondary_hex": "#FFCC00",
-      "history_start_season": null,
+      "history_start_season": "1916-1917",
       "conference_regular_season_championships": 4,
       "conference_tournament_championships": 2,
       "ncaa_tournament_appearances": 37,
@@ -3860,7 +3860,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1977,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
