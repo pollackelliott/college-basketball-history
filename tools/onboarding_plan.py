@@ -40,6 +40,15 @@ from location_safety import (
     venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
+from postseason_classification_review import (
+    REVIEW_ACTIONS as POSTSEASON_CLASSIFICATION_ACTIONS,
+    REVIEW_TYPES as POSTSEASON_CLASSIFICATION_TYPES,
+    NCAA_ROUNDS as POSTSEASON_REVIEW_NCAA_ROUNDS,
+    REVIEW_SITES as POSTSEASON_REVIEW_SITES,
+    build_review_rows as build_postseason_classification_reviews,
+    mismatch_is_reviewable as postseason_mismatch_is_reviewable,
+    row_fingerprint as postseason_row_fingerprint,
+)
 from program_history import (
     BEST_FINISH_RANK,
     derive_ncaa_accomplishments,
@@ -1743,6 +1752,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     predicted_enrichment_games: set[str] = set()
     accomplishment_crosscheck_games: list[dict[str, str]] = []
     accomplishment_round_candidates: list[dict[str, Any]] = []
+    generic_postseason_candidates: list[dict[str, Any]] = []
     affected_public_programs: set[str] = set()
     public_keys = {
         row["program_key"]
@@ -1888,6 +1898,19 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             ),
         )
         accomplishment_crosscheck_games.append(accomplishment_candidate)
+        if source.get("curated_game_type", "").strip() == "POSTSEASON":
+            generic_postseason_candidates.append({
+                "source": source,
+                "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
+                "canonical_game_date": (
+                    canonical_by_id.get(game_id, {}).get("game_date", "")
+                    if status == ingest_school.CONFIDENT else ""
+                ),
+                "canonical_game_type": (
+                    canonical_by_id.get(game_id, {}).get("game_type", "")
+                    if status == ingest_school.CONFIDENT else ""
+                ),
+            })
         if (
             status != ingest_school.REVIEW
             and source.get("curated_game_type", "").strip() == "NCAA_TOURNAMENT"
@@ -2197,6 +2220,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             accomplishment_crosscheck_games,
         )
         round_review_decisions: list[dict[str, Any]] = []
+        classification_review_decisions: list[dict[str, Any]] = []
         if accomplishment_conflicts and _accomplishment_round_conflict_is_reviewable(
             accomplishment,
             derived,
@@ -2207,6 +2231,13 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 accomplishment_round_candidates,
             )
             decisions.extend(round_review_decisions)
+        elif accomplishment_conflicts and postseason_mismatch_is_reviewable(
+            accomplishment, derived, generic_postseason_candidates,
+        ):
+            classification_review_decisions = build_postseason_classification_reviews(
+                school_key, generic_postseason_candidates,
+            )
+            decisions.extend(classification_review_decisions)
         elif accomplishment_conflicts:
             blockers.append(
                 "Accomplishment reference conflicts with canonical cross-check: "
@@ -2258,8 +2289,16 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                         "the disposable recommendation-map rehearsal must prove that the "
                         "final canonical aggregate matches before verification."
                         if round_review_decisions
-                        else "Canonical NCAA fields match; conference titles still "
-                        "require authoritative source verification."
+                        else (
+                            "Projected NCAA totals depend on explicit owner-reviewed "
+                            "classification and round decisions for generic postseason "
+                            "source games; the normal sealed disposable rehearsal must "
+                            "establish exact canonical accomplishment equality before "
+                            "publication or VERIFIED status."
+                            if classification_review_decisions
+                            else "Canonical NCAA fields match; conference titles still "
+                            "require authoritative source verification."
+                        )
                     ),
                     "recommended_action": "VERIFY_REFERENCE_VALUES",
                     "allowed_actions": sorted(ACCOMPLISHMENT_ACTIONS),
@@ -2600,6 +2639,56 @@ def approve_plan(
                         "the exact preflight-proven season_label and game_date "
                         "source patch"
                     )
+        if item.get("category") == "postseason_classification":
+            if canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: postseason classification is an owner-gated "
+                    "source patch, not a canonical-only override"
+                )
+            if decision == "KEEP_POSTSEASON_UNRESOLVED":
+                if source_patch:
+                    raise WorkflowError(
+                        f"{decision_id}: unresolved postseason cannot carry source patches"
+                    )
+            elif decision == "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+                allowed_fields = {
+                    "curated_game_type", "curated_postseason_round", "curated_site_type",
+                }
+                if not source_patch or set(source_patch) - allowed_fields:
+                    raise WorkflowError(
+                        f"{decision_id}: classification patch may set only "
+                        "curated_game_type, curated_postseason_round and curated_site_type"
+                    )
+                desired_type = source_patch.get("curated_game_type", "").strip()
+                if desired_type not in POSTSEASON_CLASSIFICATION_TYPES:
+                    raise WorkflowError(
+                        f"{decision_id}: invalid proposed postseason game type {desired_type!r}"
+                    )
+                desired_round = source_patch.get("curated_postseason_round", "").strip()
+                if desired_type == "NCAA_TOURNAMENT":
+                    if desired_round and desired_round not in POSTSEASON_REVIEW_NCAA_ROUNDS:
+                        raise WorkflowError(
+                            f"{decision_id}: invalid controlled NCAA round {desired_round!r}"
+                        )
+                elif desired_round not in {"", "Championship"}:
+                    raise WorkflowError(
+                        f"{decision_id}: non-NCAA tournament round must be blank "
+                        "or Championship"
+                    )
+                proposed_site = source_patch.get("curated_site_type")
+                if proposed_site is not None:
+                    if proposed_site not in POSTSEASON_REVIEW_SITES:
+                        raise WorkflowError(
+                            f"{decision_id}: unsupported proposed site {proposed_site!r}"
+                        )
+                    if proposed_site == item.get("original_site_type", ""):
+                        raise WorkflowError(
+                            f"{decision_id}: omit redundant H/A/N patches"
+                        )
+            else:
+                raise WorkflowError(
+                    f"{decision_id}: unsupported postseason review action {decision!r}"
+                )
         if item.get("category") == "source_consistency":
             if decision != "APPLY_SOURCE_CONSISTENCY_PATCH":
                 raise WorkflowError(
@@ -3639,6 +3728,11 @@ def apply_pre_ingest_source_patches(
     preflight.
     """
 
+    classification_items = [
+        item
+        for item in approved.get("decisions", [])
+        if item.get("category") == "postseason_classification"
+    ]
     site_items = [
         item
         for item in approved.get("decisions", [])
@@ -3656,7 +3750,7 @@ def apply_pre_ingest_source_patches(
         if expected is not None:
             cross_season_identity_items.append(item)
 
-    if not site_items and not cross_season_identity_items:
+    if not classification_items and not site_items and not cross_season_identity_items:
         return {}
 
     school_key = approved["school_key"]
@@ -3668,6 +3762,83 @@ def apply_pre_ingest_source_patches(
         if row.get("source_game_id", "").strip()
     }
     counts = Counter()
+
+    # This is the ONLY place where owner-reviewed generic postseason meanings
+    # may change before ingestion.  The real source and its Integration Freeze
+    # baseline stay untouched until a sealed disposable/apply transaction.
+    for item in classification_items:
+        decision_id = item["decision_id"]
+        source_id = item.get("source_game_id", "").strip()
+        source = source_by_id.get(source_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: reviewed postseason source game is missing"
+            )
+        if (source.get("curated_game_type", "").strip() != "POSTSEASON"
+                or source.get("season_label", "").strip() != item.get("season_label", "")
+                or source.get("game_date", "").strip() != item.get("source_game_date", "")
+                or postseason_row_fingerprint(source) != item.get("source_row_sha256", "")):
+            raise WorkflowError(
+                f"{decision_id}: frozen postseason source row changed before sealed apply"
+            )
+        action = item.get("decision", "")
+        patch = dict(item.get("source_patch", {}))
+        if action == "KEEP_POSTSEASON_UNRESOLVED":
+            if patch:
+                raise WorkflowError(
+                    f"{decision_id}: unresolved postseason must remain unchanged"
+                )
+            counts["postseason_classifications_left_unresolved"] += 1
+            continue
+        if action != "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+            raise WorkflowError(
+                f"{decision_id}: unsupported sealed postseason classification action"
+            )
+        if item.get("canonical_patch"):
+            raise WorkflowError(
+                f"{decision_id}: forbidden canonical patch on source classification"
+            )
+        desired_type = str(patch.get("curated_game_type", "")).strip()
+        desired_round = str(patch.get("curated_postseason_round", "")).strip()
+        if desired_type not in POSTSEASON_CLASSIFICATION_TYPES:
+            raise WorkflowError(
+                f"{decision_id}: invalid sealed postseason type {desired_type!r}"
+            )
+        if (desired_type == "NCAA_TOURNAMENT"
+                and desired_round
+                and desired_round not in POSTSEASON_REVIEW_NCAA_ROUNDS):
+            raise WorkflowError(
+                f"{decision_id}: invalid NCAA round {desired_round!r}"
+            )
+        if desired_type != "NCAA_TOURNAMENT" and desired_round not in {"", "Championship"}:
+            raise WorkflowError(
+                f"{decision_id}: invalid non-NCAA postseason round"
+            )
+        if set(patch) - {
+            "curated_game_type", "curated_postseason_round", "curated_site_type",
+        }:
+            raise WorkflowError(
+                f"{decision_id}: sealed classification includes forbidden source fields"
+            )
+        site = patch.get("curated_site_type")
+        if site is not None:
+            if (site not in POSTSEASON_REVIEW_SITES
+                    or site == source.get("curated_site_type", "").strip()):
+                raise WorkflowError(
+                    f"{decision_id}: invalid or redundant historical H/A/N patch"
+                )
+        source["curated_game_type"] = desired_type
+        if "curated_postseason_round" in patch:
+            source["curated_postseason_round"] = desired_round
+        if site is not None:
+            source["curated_site_type"] = site
+            counts["postseason_owner_site_patches"] += 1
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "Owner-approved postseason source classification through sealed "
+            f"decision {decision_id}; literal raw_text preserved.",
+        )
+        counts["postseason_classifications_applied"] += 1
 
     for item in site_items:
         decision_id = item["decision_id"]
@@ -3820,7 +3991,11 @@ def apply_reconciliation_decisions(
         for item in approved.get("decisions", [])
         if item.get("category") == "source_consistency"
     ]
-    if not reconciliation_items and not source_consistency_items:
+    classification_items = [
+        item for item in approved.get("decisions", [])
+        if item.get("category") == "postseason_classification"
+    ]
+    if not reconciliation_items and not source_consistency_items and not classification_items:
         return {}
     canonical_path = repo / "data/canonical/games.csv"
     assertions_path = repo / "data/evidence/game-assertions.csv"
@@ -3863,6 +4038,64 @@ def apply_reconciliation_decisions(
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
     touched_source_ids: set[str] = set()
+    classification_by_source: dict[str, str] = {}
+    for item in classification_items:
+        if item.get("decision") != "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+            continue
+        source_id = item["source_game_id"]
+        source = source_by_id.get(source_id)
+        assertions = assertion_by_source.get((school_key, source_id), [])
+        if source is None or len(assertions) != 1:
+            raise WorkflowError(
+                f"{item['decision_id']}: classification requires one ingested target assertion"
+            )
+        assertion = assertions[0]
+        game_id = assertion["canonical_game_id"]
+        expected_game_id = item.get("canonical_game_id", "")
+        if expected_game_id and game_id != expected_game_id:
+            raise WorkflowError(
+                f"{item['decision_id']}: source game identity changed after planning"
+            )
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"{item['decision_id']}: classified canonical game is missing"
+            )
+        desired = str(item["source_patch"]["curated_game_type"])
+        if (source.get("curated_game_type") != desired
+                or assertion.get("curated_game_type") != desired):
+            raise WorkflowError(
+                f"{item['decision_id']}: sealed pre-ingest source classification did not persist"
+            )
+        classification_by_source[source_id] = desired
+        previous_type = canonical.get("game_type", "").strip()
+        if previous_type == "POSTSEASON":
+            canonical["game_type"] = desired
+            changed_field_bases[(game_id, "game_type")] = item["resolution_basis"]
+            counts["postseason_canonical_types_enriched"] += 1
+        elif previous_type != desired:
+            if not any(
+                review.get("category") == "discrepancy"
+                and review.get("source_game_id") == source_id
+                and review.get("field_name") == "game_type"
+                for review in reconciliation_items
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: a conflicting non-generic canonical game "
+                    "type requires its own explicit Gate 1 discrepancy decision"
+                )
+        patch_round = item["source_patch"].get("curated_postseason_round")
+        if patch_round:
+            old_round = canonical.get("postseason_round", "").strip()
+            if old_round and old_round != patch_round:
+                raise WorkflowError(
+                    f"{item['decision_id']}: cannot overwrite established canonical postseason round"
+                )
+            canonical["postseason_round"] = patch_round
+            counts["postseason_canonical_rounds_enriched"] += 1
+        touched_canonical_ids.add(game_id)
+        touched_source_ids.add(source_id)
+
     for item in reconciliation_items:
         game_id = item.get("canonical_game_id", "").strip()
 
@@ -4026,6 +4259,24 @@ def apply_reconciliation_decisions(
         source = source_by_id.get(source_game_id)
         assertions = assertion_by_source.get((school_key, source_game_id), [])
         discrepancy_matches = discrepancy_index.get((game_id, field_name, school_key), [])
+        classified_type = (
+            classification_by_source.get(source_game_id, "")
+            if field_name == "game_type" else ""
+        )
+        if classified_type:
+            if item.get("source_value") != "POSTSEASON":
+                raise WorkflowError(
+                    f"{item['decision_id']}: classification overlaps an unrelated game-type review"
+                )
+            if source is None or source.get("curated_game_type") != classified_type:
+                raise WorkflowError(
+                    f"{item['decision_id']}: classified source disagrees with sealed review"
+                )
+            if not discrepancy_matches and canonical_field_value(
+                canonical, field_name,
+            ) == classified_type:
+                counts["postseason_prior_discrepancies_satisfied"] += 1
+                continue
         if source is None:
             raise WorkflowError(f"{item['decision_id']}: source row is missing after ingestion")
         touched_canonical_ids.add(game_id)
@@ -4036,14 +4287,15 @@ def apply_reconciliation_decisions(
             raise WorkflowError(f"{item['decision_id']}: expected one discrepancy; found {len(discrepancy_matches)}")
         assertion = assertions[0]
         discrepancy = discrepancy_matches[0]
-        if discrepancy.get("source_a_value", "") != item.get("source_value", ""):
+        effective_source_value = classified_type or item.get("source_value", "")
+        if discrepancy.get("source_a_value", "") != effective_source_value:
             raise WorkflowError(f"{item['decision_id']}: ingested source discrepancy value changed")
 
         current = canonical_field_value(canonical, field_name)
         expected = item.get("canonical_value", "")
         decision = item["decision"]
         if current != expected and not (
-            decision == "USE_SOURCE" and current == item.get("source_value", "")
+            decision == "USE_SOURCE" and current == effective_source_value
         ):
             raise WorkflowError(
                 f"{item['decision_id']}: canonical {field_name} is {current!r}, expected {expected!r}"
@@ -4051,7 +4303,7 @@ def apply_reconciliation_decisions(
 
         final_value = current
         if decision == "USE_SOURCE":
-            final_value = item["source_value"]
+            final_value = effective_source_value
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
                 if target_venue_metadata is None or venue_names is None:
