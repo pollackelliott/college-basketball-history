@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000012",
+      "absorbed_venue_id": "VEN-000680",
+      "resolution_basis": "Owner explicitly approved Connecticut Stage 1 / Control Center shared-reference maintenance on 2026-10-09. Amway Center and Kia Center are one Orlando, FL physical arena, renamed effective December 20, 2023; Kia America's 2023-12-20 release https://www.prnewswire.com/news-releases/orlandos-premier-downtown-sports-and-entertainment-destination-to-be-renamed-kia-center-302020176.html and City of Orlando 2023 annual report confirm continuity. Retain physical identity VEN-000012 / amway-center; retire duplicate VEN-000680 / kia-center; reassign Kia Center to historical aliases with proper name chronology. Preserve frozen source-era venue names and H/A/N, migrate all canonical/assertion/published-school references and site-derived data using repository-owned sealed venue_identity_transaction.py. This is a global shared identity repair, not Connecticut historical re-research."
+    }
+  ]
+}
