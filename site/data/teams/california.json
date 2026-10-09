@@ -1678,7 +1678,7 @@
       "opponent_key": "uconn",
       "opponent_name": "Connecticut",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -51692,7 +51692,7 @@
       "opponent_key": "uconn",
       "opponent_name": "Connecticut",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 72,
       "opponent_score": 73,
       "score_known": true,
@@ -52492,7 +52492,7 @@
       "opponent_key": "uconn",
       "opponent_name": "Connecticut",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 54,
       "opponent_score": 74,
       "score_known": true,
@@ -52505,7 +52505,7 @@
       "site_city": "Hartford",
       "site_state": "CT",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": "Sweet Sixteen",
+      "postseason_round": "R32",
       "administrative_status": null,
       "administrative_note": null
     },
