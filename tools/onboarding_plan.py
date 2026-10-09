@@ -2640,10 +2640,13 @@ def approve_plan(
                         "source patch"
                     )
         if item.get("category") == "postseason_classification":
-            if canonical_patch:
+            if canonical_patch and (
+                decision != "APPLY_POSTSEASON_CLASSIFICATION_PATCH"
+                or set(canonical_patch) != {"postseason_round"}
+            ):
                 raise WorkflowError(
-                    f"{decision_id}: postseason classification is an owner-gated "
-                    "source patch, not a canonical-only override"
+                    f"{decision_id}: classification permits only an explicit "
+                    "canonical postseason_round correction alongside a source patch"
                 )
             if decision == "KEEP_POSTSEASON_UNRESOLVED":
                 if source_patch:
@@ -2675,6 +2678,40 @@ def approve_plan(
                         f"{decision_id}: non-NCAA tournament round must be blank "
                         "or Championship"
                     )
+                if canonical_patch:
+                    corrected_round = canonical_patch["postseason_round"].strip()
+                    if (
+                        desired_type != "NCAA_TOURNAMENT"
+                        or not desired_round
+                        or corrected_round != desired_round
+                    ):
+                        raise WorkflowError(
+                            f"{decision_id}: explicit canonical NCAA round correction "
+                            "must equal the reviewed nonblank source NCAA round"
+                        )
+                    game_id = str(item.get("canonical_game_id", "")).strip()
+                    existing_game = next(
+                        (
+                            row
+                            for row in read_csv(repo / "data/canonical/games.csv")
+                            if row.get("canonical_game_id", "").strip() == game_id
+                        ),
+                        None,
+                    ) if game_id else None
+                    old_round = (
+                        existing_game.get("postseason_round", "").strip()
+                        if existing_game else ""
+                    )
+                    if (
+                        existing_game is None
+                        or existing_game.get("game_type", "").strip() != "NCAA_TOURNAMENT"
+                        or not old_round
+                        or old_round == desired_round
+                    ):
+                        raise WorkflowError(
+                            f"{decision_id}: explicit canonical round correction "
+                            "requires an established, conflicting NCAA Tournament round"
+                        )
                 proposed_site = source_patch.get("curated_site_type")
                 if proposed_site is not None:
                     if proposed_site not in POSTSEASON_REVIEW_SITES:
@@ -3794,9 +3831,17 @@ def apply_pre_ingest_source_patches(
             raise WorkflowError(
                 f"{decision_id}: unsupported sealed postseason classification action"
             )
-        if item.get("canonical_patch"):
+        canonical_patch = dict(item.get("canonical_patch", {}))
+        if canonical_patch and (
+            action != "APPLY_POSTSEASON_CLASSIFICATION_PATCH"
+            or set(canonical_patch) != {"postseason_round"}
+            or patch.get("curated_game_type") != "NCAA_TOURNAMENT"
+            or not patch.get("curated_postseason_round")
+            or canonical_patch["postseason_round"] != patch["curated_postseason_round"]
+        ):
             raise WorkflowError(
-                f"{decision_id}: forbidden canonical patch on source classification"
+                f"{decision_id}: sealed canonical round correction must match "
+                "the owner-reviewed source NCAA classification"
             )
         desired_type = str(patch.get("curated_game_type", "")).strip()
         desired_round = str(patch.get("curated_postseason_round", "")).strip()
@@ -4085,14 +4130,39 @@ def apply_reconciliation_decisions(
                     "type requires its own explicit Gate 1 discrepancy decision"
                 )
         patch_round = item["source_patch"].get("curated_postseason_round")
+        canonical_patch = dict(item.get("canonical_patch", {}))
         if patch_round:
             old_round = canonical.get("postseason_round", "").strip()
             if old_round and old_round != patch_round:
-                raise WorkflowError(
-                    f"{item['decision_id']}: cannot overwrite established canonical postseason round"
+                if (
+                    canonical_patch != {"postseason_round": patch_round}
+                    or previous_type != "NCAA_TOURNAMENT"
+                    or desired != "NCAA_TOURNAMENT"
+                ):
+                    raise WorkflowError(
+                        f"{item['decision_id']}: cannot overwrite established "
+                        "canonical postseason round without an exact owner-reviewed patch"
+                    )
+                canonical["notes"] = _append_note(
+                    canonical.get("notes", ""),
+                    "Owner-approved established NCAA round correction "
+                    f"{old_round!r} -> {patch_round!r}; "
+                    f"decision={item['decision_id']}; "
+                    f"plan={approved['approved_plan_hash'][:12]}.",
                 )
+                changed_field_bases[(game_id, "postseason_round")] = item["resolution_basis"]
+                counts["postseason_canonical_rounds_corrected"] += 1
+            elif canonical_patch:
+                raise WorkflowError(
+                    f"{item['decision_id']}: redundant canonical postseason round correction"
+                )
+            else:
+                counts["postseason_canonical_rounds_enriched"] += 1
             canonical["postseason_round"] = patch_round
-            counts["postseason_canonical_rounds_enriched"] += 1
+        elif canonical_patch:
+            raise WorkflowError(
+                f"{item['decision_id']}: canonical round correction requires a source NCAA round"
+            )
         touched_canonical_ids.add(game_id)
         touched_source_ids.add(source_id)
 
