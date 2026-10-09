@@ -361,6 +361,6 @@ wisconsin,20,3,29,4,1,NATIONAL_CHAMPION,1941,VERIFIED,"Owner Gate 1 verified Wis
 wofford,4,6,6,0,0,ROUND_OF_32,2019,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 wright-state,5,5,5,0,0,ROUND_OF_64,2026,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 wyoming,21,3,16,1,1,NATIONAL_CHAMPION,1943,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-xavier,17,10,30,0,0,ELITE_EIGHT,2017,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+xavier,17,10,30,0,0,ELITE_EIGHT,2017,VERIFIED,"Xavier official 2025 NCAA notes list 30 tournament appearances and Elite Eights in 2004, 2008, 2017. Remaining conference-title totals come from frozen Xavier source; final predicted aggregate must pass disposable reconciliation. https://goxavier.com/news/2017/3/24/mens-basketball-xavier-faces-off-against-gonzaga-in-elite-eight-matchup-on-saturday",MATCH,Verified through onboarding plan 6ab1ec21e959.
 yale,18,4,8,0,0,ELITE_EIGHT,1949,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 youngstown-state,1,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
