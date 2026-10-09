@@ -3087,7 +3087,7 @@
       "opponent_key": "marquette",
       "opponent_name": "Marquette",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -80035,7 +80035,7 @@
       "opponent_key": "marquette",
       "opponent_name": "Marquette",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 75,
       "opponent_score": 74,
       "score_known": true,
