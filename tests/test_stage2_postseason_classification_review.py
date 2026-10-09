@@ -6,14 +6,15 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import ingest_school  # noqa: E402
 from onboarding_plan import (  # noqa: E402
-    WorkflowError, apply_pre_ingest_source_patches,
-    apply_reconciliation_decisions,
+    REVIEW_COLUMNS, WorkflowError, approve_plan,
+    apply_pre_ingest_source_patches, apply_reconciliation_decisions,
 )
 from postseason_classification_review import (  # noqa: E402
     build_review_rows, mismatch_is_reviewable, row_fingerprint,
@@ -218,7 +219,10 @@ class SealedPreIngestTests(unittest.TestCase):
 
 
 class PostIngestCanonicalTests(unittest.TestCase):
-    def make_repo(self, root, canonical_type="POSTSEASON", source_type="NCAA_TOURNAMENT"):
+    def make_repo(
+        self, root, canonical_type="POSTSEASON",
+        source_type="NCAA_TOURNAMENT", canonical_round="",
+    ):
         src = sample_source()
         src["curated_game_type"] = source_type
         src["curated_postseason_round"] = "Championship"
@@ -244,7 +248,7 @@ class PostIngestCanonicalTests(unittest.TestCase):
             "team_b_key": "school",
             "site_type": "NEUTRAL",
             "game_type": canonical_type,
-            "postseason_round": "",
+            "postseason_round": canonical_round,
         })
         write_csv(
             root / "data/canonical/games.csv",
@@ -291,6 +295,108 @@ class PostIngestCanonicalTests(unittest.TestCase):
             self.make_repo(repo, canonical_type="REGULAR_SEASON")
             with self.assertRaisesRegex(WorkflowError, "own explicit Gate 1"):
                 apply_reconciliation_decisions(repo, self.make_approved())
+
+    def test_established_round_is_not_silently_overwritten(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self.make_repo(
+                repo, canonical_type="NCAA_TOURNAMENT",
+                canonical_round="Sweet Sixteen",
+            )
+            with self.assertRaisesRegex(WorkflowError, "cannot overwrite established"):
+                apply_reconciliation_decisions(repo, self.make_approved())
+
+    def test_explicit_sealed_canonical_round_correction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            source_path = self.make_repo(
+                repo, canonical_type="NCAA_TOURNAMENT",
+                canonical_round="Sweet Sixteen",
+            )
+            approved = self.make_approved()
+            approved["decisions"][0]["canonical_patch"] = {
+                "postseason_round": "Championship",
+            }
+            result = apply_reconciliation_decisions(repo, approved)
+            self.assertEqual(result["postseason_canonical_rounds_corrected"], 1)
+            canonical = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(canonical["postseason_round"], "Championship")
+            self.assertIn("Sweet Sixteen", canonical["notes"])
+            self.assertIn("POSTSEASON-CLASSIFICATION-SCHOOL-POST-01", canonical["notes"])
+            self.assertEqual(read_csv(source_path)[0]["raw_text"],
+                             "Institutional 2024 title score; immutable literal.")
+
+    def test_wrong_or_redundant_canonical_round_patch_rejected(self):
+        for old_round, correction in (
+            ("Sweet Sixteen", "R32"),
+            ("Championship", "Championship"),
+        ):
+            with self.subTest(old_round=old_round, correction=correction):
+                with tempfile.TemporaryDirectory() as tmp:
+                    repo = Path(tmp)
+                    self.make_repo(
+                        repo, canonical_type="NCAA_TOURNAMENT",
+                        canonical_round=old_round,
+                    )
+                    approved = self.make_approved()
+                    approved["decisions"][0]["canonical_patch"] = {
+                        "postseason_round": correction,
+                    }
+                    with self.assertRaisesRegex(
+                        WorkflowError, "exact owner-reviewed patch|redundant",
+                    ):
+                        apply_reconciliation_decisions(repo, approved)
+
+    def test_owner_review_validates_round_correction_before_sealing(self):
+        for prior, correction, expected_error in (
+            ("Sweet Sixteen", "Championship", None),
+            ("Sweet Sixteen", "R32", "must equal"),
+            ("", "Championship", "established, conflicting"),
+            ("Championship", "Championship", "established, conflicting"),
+        ):
+            with self.subTest(prior=prior, correction=correction):
+                with tempfile.TemporaryDirectory() as tmp:
+                    repo = Path(tmp)
+                    self.make_repo(
+                        repo, canonical_type="NCAA_TOURNAMENT",
+                        canonical_round=prior,
+                    )
+                    item = review_item(canonical_game_id="CBBG-0000001")
+                    plan = {
+                        "school_key": "school",
+                        "blockers": [],
+                        "input_fingerprint": {"sha256": "frozen"},
+                        "decisions": [item],
+                    }
+                    plan_path = repo / "plan.json"
+                    plan_path.write_text(json.dumps(plan), encoding="utf-8")
+                    review = {
+                        **item,
+                        "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+                        "canonical_patch_json": json.dumps(
+                            {"postseason_round": correction}
+                        ),
+                        "source_patch_json": json.dumps(item["source_patch"]),
+                    }
+                    review_path = repo / "review.csv"
+                    write_csv(review_path, list(REVIEW_COLUMNS), [
+                        {field: review.get(field, "") for field in REVIEW_COLUMNS}
+                    ])
+                    with patch(
+                        "onboarding_plan.input_fingerprint",
+                        return_value={"sha256": "frozen"},
+                    ):
+                        if expected_error:
+                            with self.assertRaisesRegex(WorkflowError, expected_error):
+                                approve_plan(repo, plan_path, review_path, "owner")
+                        else:
+                            sealed, _ = approve_plan(
+                                repo, plan_path, review_path, "owner",
+                            )
+                            self.assertEqual(
+                                sealed["decisions"][0]["canonical_patch"],
+                                {"postseason_round": "Championship"},
+                            )
 
     def test_original_review_population_not_auto_approved(self):
         source = sample_source()
