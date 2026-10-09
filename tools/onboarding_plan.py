@@ -2639,6 +2639,56 @@ def approve_plan(
                         "the exact preflight-proven season_label and game_date "
                         "source patch"
                     )
+        if item.get("category") == "postseason_classification":
+            if canonical_patch:
+                raise WorkflowError(
+                    f"{decision_id}: postseason classification is an owner-gated "
+                    "source patch, not a canonical-only override"
+                )
+            if decision == "KEEP_POSTSEASON_UNRESOLVED":
+                if source_patch:
+                    raise WorkflowError(
+                        f"{decision_id}: unresolved postseason cannot carry source patches"
+                    )
+            elif decision == "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+                allowed_fields = {
+                    "curated_game_type", "curated_postseason_round", "curated_site_type",
+                }
+                if not source_patch or set(source_patch) - allowed_fields:
+                    raise WorkflowError(
+                        f"{decision_id}: classification patch may set only "
+                        "curated_game_type, curated_postseason_round and curated_site_type"
+                    )
+                desired_type = source_patch.get("curated_game_type", "").strip()
+                if desired_type not in POSTSEASON_CLASSIFICATION_TYPES:
+                    raise WorkflowError(
+                        f"{decision_id}: invalid proposed postseason game type {desired_type!r}"
+                    )
+                desired_round = source_patch.get("curated_postseason_round", "").strip()
+                if desired_type == "NCAA_TOURNAMENT":
+                    if desired_round and desired_round not in POSTSEASON_REVIEW_NCAA_ROUNDS:
+                        raise WorkflowError(
+                            f"{decision_id}: invalid controlled NCAA round {desired_round!r}"
+                        )
+                elif desired_round not in {"", "Championship"}:
+                    raise WorkflowError(
+                        f"{decision_id}: non-NCAA tournament round must be blank "
+                        "or Championship"
+                    )
+                proposed_site = source_patch.get("curated_site_type")
+                if proposed_site is not None:
+                    if proposed_site not in POSTSEASON_REVIEW_SITES:
+                        raise WorkflowError(
+                            f"{decision_id}: unsupported proposed site {proposed_site!r}"
+                        )
+                    if proposed_site == item.get("original_site_type", ""):
+                        raise WorkflowError(
+                            f"{decision_id}: omit redundant H/A/N patches"
+                        )
+            else:
+                raise WorkflowError(
+                    f"{decision_id}: unsupported postseason review action {decision!r}"
+                )
         if item.get("category") == "source_consistency":
             if decision != "APPLY_SOURCE_CONSISTENCY_PATCH":
                 raise WorkflowError(
