@@ -3728,6 +3728,11 @@ def apply_pre_ingest_source_patches(
     preflight.
     """
 
+    classification_items = [
+        item
+        for item in approved.get("decisions", [])
+        if item.get("category") == "postseason_classification"
+    ]
     site_items = [
         item
         for item in approved.get("decisions", [])
@@ -3745,7 +3750,7 @@ def apply_pre_ingest_source_patches(
         if expected is not None:
             cross_season_identity_items.append(item)
 
-    if not site_items and not cross_season_identity_items:
+    if not classification_items and not site_items and not cross_season_identity_items:
         return {}
 
     school_key = approved["school_key"]
@@ -3757,6 +3762,83 @@ def apply_pre_ingest_source_patches(
         if row.get("source_game_id", "").strip()
     }
     counts = Counter()
+
+    # This is the ONLY place where owner-reviewed generic postseason meanings
+    # may change before ingestion.  The real source and its Integration Freeze
+    # baseline stay untouched until a sealed disposable/apply transaction.
+    for item in classification_items:
+        decision_id = item["decision_id"]
+        source_id = item.get("source_game_id", "").strip()
+        source = source_by_id.get(source_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: reviewed postseason source game is missing"
+            )
+        if (source.get("curated_game_type", "").strip() != "POSTSEASON"
+                or source.get("season_label", "").strip() != item.get("season_label", "")
+                or source.get("game_date", "").strip() != item.get("source_game_date", "")
+                or postseason_row_fingerprint(source) != item.get("source_row_sha256", "")):
+            raise WorkflowError(
+                f"{decision_id}: frozen postseason source row changed before sealed apply"
+            )
+        action = item.get("decision", "")
+        patch = dict(item.get("source_patch", {}))
+        if action == "KEEP_POSTSEASON_UNRESOLVED":
+            if patch:
+                raise WorkflowError(
+                    f"{decision_id}: unresolved postseason must remain unchanged"
+                )
+            counts["postseason_classifications_left_unresolved"] += 1
+            continue
+        if action != "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+            raise WorkflowError(
+                f"{decision_id}: unsupported sealed postseason classification action"
+            )
+        if item.get("canonical_patch"):
+            raise WorkflowError(
+                f"{decision_id}: forbidden canonical patch on source classification"
+            )
+        desired_type = str(patch.get("curated_game_type", "")).strip()
+        desired_round = str(patch.get("curated_postseason_round", "")).strip()
+        if desired_type not in POSTSEASON_CLASSIFICATION_TYPES:
+            raise WorkflowError(
+                f"{decision_id}: invalid sealed postseason type {desired_type!r}"
+            )
+        if (desired_type == "NCAA_TOURNAMENT"
+                and desired_round
+                and desired_round not in POSTSEASON_REVIEW_NCAA_ROUNDS):
+            raise WorkflowError(
+                f"{decision_id}: invalid NCAA round {desired_round!r}"
+            )
+        if desired_type != "NCAA_TOURNAMENT" and desired_round not in {"", "Championship"}:
+            raise WorkflowError(
+                f"{decision_id}: invalid non-NCAA postseason round"
+            )
+        if set(patch) - {
+            "curated_game_type", "curated_postseason_round", "curated_site_type",
+        }:
+            raise WorkflowError(
+                f"{decision_id}: sealed classification includes forbidden source fields"
+            )
+        site = patch.get("curated_site_type")
+        if site is not None:
+            if (site not in POSTSEASON_REVIEW_SITES
+                    or site == source.get("curated_site_type", "").strip()):
+                raise WorkflowError(
+                    f"{decision_id}: invalid or redundant historical H/A/N patch"
+                )
+        source["curated_game_type"] = desired_type
+        if "curated_postseason_round" in patch:
+            source["curated_postseason_round"] = desired_round
+        if site is not None:
+            source["curated_site_type"] = site
+            counts["postseason_owner_site_patches"] += 1
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "Owner-approved postseason source classification through sealed "
+            f"decision {decision_id}; literal raw_text preserved.",
+        )
+        counts["postseason_classifications_applied"] += 1
 
     for item in site_items:
         decision_id = item["decision_id"]
