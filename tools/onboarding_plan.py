@@ -3991,7 +3991,11 @@ def apply_reconciliation_decisions(
         for item in approved.get("decisions", [])
         if item.get("category") == "source_consistency"
     ]
-    if not reconciliation_items and not source_consistency_items:
+    classification_items = [
+        item for item in approved.get("decisions", [])
+        if item.get("category") == "postseason_classification"
+    ]
+    if not reconciliation_items and not source_consistency_items and not classification_items:
         return {}
     canonical_path = repo / "data/canonical/games.csv"
     assertions_path = repo / "data/evidence/game-assertions.csv"
@@ -4034,6 +4038,64 @@ def apply_reconciliation_decisions(
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
     touched_source_ids: set[str] = set()
+    classification_by_source: dict[str, str] = {}
+    for item in classification_items:
+        if item.get("decision") != "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+            continue
+        source_id = item["source_game_id"]
+        source = source_by_id.get(source_id)
+        assertions = assertion_by_source.get((school_key, source_id), [])
+        if source is None or len(assertions) != 1:
+            raise WorkflowError(
+                f"{item['decision_id']}: classification requires one ingested target assertion"
+            )
+        assertion = assertions[0]
+        game_id = assertion["canonical_game_id"]
+        expected_game_id = item.get("canonical_game_id", "")
+        if expected_game_id and game_id != expected_game_id:
+            raise WorkflowError(
+                f"{item['decision_id']}: source game identity changed after planning"
+            )
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"{item['decision_id']}: classified canonical game is missing"
+            )
+        desired = str(item["source_patch"]["curated_game_type"])
+        if (source.get("curated_game_type") != desired
+                or assertion.get("curated_game_type") != desired):
+            raise WorkflowError(
+                f"{item['decision_id']}: sealed pre-ingest source classification did not persist"
+            )
+        classification_by_source[source_id] = desired
+        previous_type = canonical.get("game_type", "").strip()
+        if previous_type == "POSTSEASON":
+            canonical["game_type"] = desired
+            changed_field_bases[(game_id, "game_type")] = item["resolution_basis"]
+            counts["postseason_canonical_types_enriched"] += 1
+        elif previous_type != desired:
+            if not any(
+                review.get("category") == "discrepancy"
+                and review.get("source_game_id") == source_id
+                and review.get("field_name") == "game_type"
+                for review in reconciliation_items
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: a conflicting non-generic canonical game "
+                    "type requires its own explicit Gate 1 discrepancy decision"
+                )
+        patch_round = item["source_patch"].get("curated_postseason_round")
+        if patch_round:
+            old_round = canonical.get("postseason_round", "").strip()
+            if old_round and old_round != patch_round:
+                raise WorkflowError(
+                    f"{item['decision_id']}: cannot overwrite established canonical postseason round"
+                )
+            canonical["postseason_round"] = patch_round
+            counts["postseason_canonical_rounds_enriched"] += 1
+        touched_canonical_ids.add(game_id)
+        touched_source_ids.add(source_id)
+
     for item in reconciliation_items:
         game_id = item.get("canonical_game_id", "").strip()
 
@@ -4197,6 +4259,24 @@ def apply_reconciliation_decisions(
         source = source_by_id.get(source_game_id)
         assertions = assertion_by_source.get((school_key, source_game_id), [])
         discrepancy_matches = discrepancy_index.get((game_id, field_name, school_key), [])
+        classified_type = (
+            classification_by_source.get(source_game_id, "")
+            if field_name == "game_type" else ""
+        )
+        if classified_type:
+            if item.get("source_value") != "POSTSEASON":
+                raise WorkflowError(
+                    f"{item['decision_id']}: classification overlaps an unrelated game-type review"
+                )
+            if source is None or source.get("curated_game_type") != classified_type:
+                raise WorkflowError(
+                    f"{item['decision_id']}: classified source disagrees with sealed review"
+                )
+            if not discrepancy_matches and canonical_field_value(
+                canonical, field_name,
+            ) == classified_type:
+                counts["postseason_prior_discrepancies_satisfied"] += 1
+                continue
         if source is None:
             raise WorkflowError(f"{item['decision_id']}: source row is missing after ingestion")
         touched_canonical_ids.add(game_id)
@@ -4207,14 +4287,15 @@ def apply_reconciliation_decisions(
             raise WorkflowError(f"{item['decision_id']}: expected one discrepancy; found {len(discrepancy_matches)}")
         assertion = assertions[0]
         discrepancy = discrepancy_matches[0]
-        if discrepancy.get("source_a_value", "") != item.get("source_value", ""):
+        effective_source_value = classified_type or item.get("source_value", "")
+        if discrepancy.get("source_a_value", "") != effective_source_value:
             raise WorkflowError(f"{item['decision_id']}: ingested source discrepancy value changed")
 
         current = canonical_field_value(canonical, field_name)
         expected = item.get("canonical_value", "")
         decision = item["decision"]
         if current != expected and not (
-            decision == "USE_SOURCE" and current == item.get("source_value", "")
+            decision == "USE_SOURCE" and current == effective_source_value
         ):
             raise WorkflowError(
                 f"{item['decision_id']}: canonical {field_name} is {current!r}, expected {expected!r}"
@@ -4222,7 +4303,7 @@ def apply_reconciliation_decisions(
 
         final_value = current
         if decision == "USE_SOURCE":
-            final_value = item["source_value"]
+            final_value = effective_source_value
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
                 if target_venue_metadata is None or venue_names is None:
