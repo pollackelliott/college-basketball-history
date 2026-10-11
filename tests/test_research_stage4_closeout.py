@@ -1442,5 +1442,60 @@ class Stage4CloseoutTests(unittest.TestCase):
         )
 
 
+    def test_legacy_on_court_result_alias_preserves_strict_semantics(self):
+        parent_base = {
+            "research_game_id": "LEGACY-RESULT",
+            "source_program_key": "test",
+            "season_label": "2000-2001",
+            "game_date": "2000-12-01",
+            "opponent_key": "old-college",
+            "team_score": "70",
+            "opponent_score": "60",
+            "overtime_periods": "0",
+            "game_type": "REGULAR_SEASON",
+            "stage3a_final_han": "HOME",
+            "raw_text": "accepted historical source",
+        }
+        package_row = {
+            "source_game_id": "LEGACY-RESULT",
+            "source_program_key": "test",
+            "season_label": "2000-2001",
+            "game_date": "2000-12-01",
+            "normalized_opponent_key": "old-college",
+            "team_score": "70",
+            "opponent_score": "60",
+            "played_result": "W",
+            "overtime_periods": "0",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "curated_game_type": "REGULAR_SEASON",
+            "raw_text": "accepted historical source",
+        }
+        for result_fields in (
+            {"on_court_result": "W"},
+            {"played_result": "W"},
+            {"played_result": "", "on_court_result": "W"},
+            {"played_result": "W", "on_court_result": "L"},
+        ):
+            with self.subTest(result_fields=result_fields):
+                parent = [{**parent_base, **result_fields}]
+                self.assertEqual(
+                    mod.expected_parent_values(parent[0])["played_result"],
+                    "W",
+                )
+                self.assertEqual(
+                    mod.compare_parent_semantics(parent, [package_row], []),
+                    [],
+                )
+
+                altered = dict(package_row, played_result="L")
+                mismatches = mod.compare_parent_semantics(
+                    parent, [altered], []
+                )
+                self.assertEqual(len(mismatches), 1)
+                self.assertEqual(mismatches[0]["field"], "played_result")
+                self.assertEqual(mismatches[0]["parent_value"], "W")
+                self.assertEqual(mismatches[0]["package_value"], "L")
+
+
 if __name__ == "__main__":
     unittest.main()
