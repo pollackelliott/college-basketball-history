@@ -76,14 +76,31 @@ A Stage 1 residual may be **nonblocking** when game identity/inclusion and seaso
 - administrative/vacated-result differences when on-court participation and result policy are explicitly preserved;
 - literal-source defects where a stronger same-source or authoritative source supports the curated field and the literal defect remains preserved.
 
-Nonblocking does not mean “ignore.” Every surviving residual must be explicit, row-level, and provenance-preserving.
+Nonblocking does not mean “ignore.” Every surviving identifiable-game residual must be explicit, row-level, and provenance-preserving.
+
+### Narrow exception: source-acknowledged unidentified historical games
+
+An institution may explicitly acknowledge that one or more historical games are absent from its detailed game list while the identity of those games is not recoverable. Those *unidentified games* have no defensible row-level identity. Their source-acknowledged omission is a **season-level coverage gap**, not permission to create an anonymous game row or to silently declare the published game universe exhaustive.
+
+A bounded Stage 1 closeout may carry such gaps **without holding every otherwise identified game hostage**, but only when **all** the following apply:
+
+1. The primary institutional source itself explicitly identifies the affected season and the **number of missing games** (an inferred gap from a secondary record total alone does not qualify). Preserve its exact note, source page/context, detailed-game tally, and any conflicting season heading/aggregate separately.
+2. The accepted competitive-game ledger has stable unique IDs, source-backed opponent labels, structured game types, reconciled inclusions/exclusions, and all other Stage 1 universe defects resolved. No unidentified game is added to the ledger, game counts, or canonical game identities.
+3. Bounded institutional/obvious reciprocal/source-family research has genuinely failed to identify each absent game's opponent or other sufficient same-game identity. The investigated authoritative paths and exact evidentiary limits are serialized. Do not continue an unbounded source campaign solely to clear an acknowledged source omission.
+4. The number of unidentified games, source count note, ledger/census difference, and remaining discrepancy records reconcile. A season whose detailed row tally already matches its heading **must still retain** a conflicting explicit missing-game note and must not invent an additional win or loss from a secondary aggregate.
+5. **Every other Stage 1 blocker is absent.** This is never a waiver for uncertain inclusion of *identified* rows, suspected duplicates, game-type/season allocation, omitted extractable games, or unresolved on-court results on identified games.
+6. The repository-owned read-only check `tools/research_stage1_coverage_gap.py` reports `ELIGIBLE_FOR_SOURCE_ACKNOWLEDGED_COVERAGE_GAP` against an exact SHA-pinned, manifest-verified checkpoint and its manifested bounded-research evidence. Eligibility is not itself a Stage 1 COMPLETE checkpoint or an authorization to enter Stage 2.
+
+The Research lane then makes **one explicit, separately hashed Stage 1 closeout successor** preserving the original checkpoint byte-for-byte as parent and carrying the unchanged identified-game ledger, source/literal evidence, season-census contradiction, the exact season-level missing-game counts and research exhaustion, and the audit report. It reclassifies *only* those qualifying blocker records as terminal `SOURCE_ACKNOWLEDGED_UNIDENTIFIED_GAME_GAP` coverage records. Keep identified-game count and unidentified-game count separate in downstream Stage 2 / Research Freeze / Implementation handoffs and any public coverage statement. Never represent the missing games as canonical games or silently adopt an aggregate record as the verified per-game W/L sum. Reopen only when new concrete evidence establishes a real game identity.
+
+This exception creates no automatic school-specific exemption or new owner gate. A genuine contrary historical judgment still belongs to the owner. All other Stage 1 completion, documentation, and acceptance rules remain unchanged.
 
 ## 4. Stage 1 convergence rule
 
 Once all of the following are true:
 
-- the competitive game universe is mechanically reconciled;
-- every season census is reconciled or its source-internal discrepancy is explicitly explained;
+- the **identified** competitive-game universe is mechanically reconciled, with any source-acknowledged unidentified-game coverage gap separately audited under §3;
+- every season census is reconciled or its source-internal discrepancy is explicitly explained, including the approved §3 season-level coverage-gap representation;
 - the target game universe reaches its explicitly declared required completed-season
   cutoff, even when the primary media guide/record book naturally stops one completed
   season earlier;
@@ -118,7 +135,7 @@ A complete Stage 1 checkpoint should contain, directly or through its manifest:
 - season census/reconciliation;
 - excluded non-game rows;
 - accepted corrections ledger;
-- exact residual queue grouped by defect class;
+- exact residual queue grouped by defect class, plus any separately audited source-acknowledged unidentified-game coverage record with institution's literal count note, season/source, evidence exhaustion, the preserved aggregate/ledger contradiction, and original parent checkpoint SHA;
 - stable research-local IDs;
 - structured `game_type` on every game, with postseason identity sufficient for the later mechanical Stage 3A/3B partition;
 - provenance/literal-source preservation;
