@@ -540,7 +540,7 @@ def explicit_opponent_home_site(row: dict[str, str]) -> tuple[str, str, str] | N
     if not building or building.startswith("(") or not location:
         return None
     location = location.split(" / ", 1)[0].strip()
-    match = re.fullmatch(r"([A-Za-z][A-Za-z .'-]*),\\s*([A-Za-z. ]+)", location)
+    match = re.fullmatch(r"([A-Za-z][A-Za-z .'-]*),\s*([A-Za-z. ]+)", location)
     if not match:
         return None
     city, state_literal = match.groups()
