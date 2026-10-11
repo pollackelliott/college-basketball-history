@@ -163,6 +163,11 @@ season accounting, and on-court result are stable. Exact-date blanks and score
 contradictions are not automatically blockers. Once the Stage 1 completion conditions are
 satisfied, checkpoint/close out instead of opening another source family merely because one
 might exist.
+A narrow exception for primary-source-acknowledged but unidentified historical games is
+controlled by `docs/stage1-game-universe-contract.md` §3 and the read-only exact-checkpoint
+`tools/research_stage1_coverage_gap.py` audit. Never invent anonymous game rows or
+silently fold unidentified games into the identified-game total; eligibility alone does
+not close Stage 1 or authorize Stage 2.
 
 This is an internal execution boundary, not a new owner gate. The owner should still
 normally experience one Stage 1 return and then a simple `Proceed` to Stage 2.
