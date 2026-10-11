@@ -51,6 +51,14 @@ Do not recursively validate a reconciled universe merely because another source 
 might exist. When the remaining rows are explicit nonblocking field debt under the Stage 1
 contract, close/checkpoint Stage 1 and move to the next owner-authorized stage.
 
+A **primary-institution source-explicit number of unidentified missing historical games**
+may converge as *season-level coverage debt* only through the strict exception and
+exact-checkpoint audit in `docs/stage1-game-universe-contract.md` §3. This does not
+manufacture game identities, waive other Stage 1 blockers, reconcile missing games into
+a played-game ledger, or authorize Stage 2 without a subsequent durable Stage 1 COMPLETE
+checkpoint. Record the identified-game count separately from the unidentified source
+coverage gap in all subsequent handoffs.
+
 ## 4. Stage 3A convergence
 
 `docs/stage3a-regular-season-site-research.md` controls Stage 3A responsibility and
