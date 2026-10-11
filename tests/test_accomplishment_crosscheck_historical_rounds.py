@@ -214,6 +214,45 @@ class HistoricalRoundAccomplishmentCrosscheckTests(unittest.TestCase):
         self.assertEqual(decisions[0]["category"], "ncaa_round_patch")
         self.assertIn("APPLY_NCAA_ROUND_PATCH", decisions[0]["allowed_actions"])
 
+
+    def test_established_runner_up_allows_later_final_four_review(self):
+        reference = {
+            "ncaa_tournament_appearances": "2",
+            "final_four_appearances": "2",
+            "national_championships": "0",
+            "best_finish_key": "NATIONAL_RUNNER_UP",
+            "best_finish_year": "1952",
+        }
+        derived = {
+            "ncaa_tournament_appearances": 2,
+            "final_four_appearances": 1,
+            "national_championships": 0,
+            "best_finish_key": "NATIONAL_RUNNER_UP",
+            "best_finish_year": 1952,
+        }
+        candidates = [{
+            "source": {
+                "source_game_id": "1985-SEMIFINAL",
+                "season_label": "1984-1985",
+                "played_result": "L",
+            },
+            "calendar_year": 1985,
+        }]
+        self.assertTrue(
+            _accomplishment_round_conflict_is_reviewable(
+                reference, derived, candidates
+            )
+        )
+
+        # A newly claimed runner-up finish still requires evidence
+        # from the year to which that claim refers.
+        derived["best_finish_key"] = "FINAL_FOUR"
+        self.assertFalse(
+            _accomplishment_round_conflict_is_reviewable(
+                reference, derived, candidates
+            )
+        )
+
     def test_round_gap_requires_enough_distinct_candidate_seasons(self):
         reference = dict(self.reference)
         reference["final_four_appearances"] = "3"

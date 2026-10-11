@@ -4722,7 +4722,7 @@
       "opponent_key": "st-john-s",
       "opponent_name": "St. John's",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -52062,7 +52062,7 @@
       "opponent_key": "st-john-s",
       "opponent_name": "St. John's",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 64,
       "opponent_score": 76,
       "score_known": true,

@@ -1176,7 +1176,9 @@ def _accomplishment_round_conflict_is_reviewable(
         if reference_year not in candidate_years:
             return False
 
-    if reference_year:
+    if reference_year and (
+        reference_year != derived_year or reference_finish != derived_finish
+    ):
         year_candidates = [
             item
             for item in candidates

@@ -199,6 +199,25 @@ def source_result_winner(
     if played_result == "T":
         return True, ""
 
+    if (
+        row.get("administrative_status", "").strip() == "FORFEIT"
+        and not played_result
+    ):
+        # Derive an administrative winner only from explicit literal evidence.
+        # Do not convert this into a completed on-court W/L or invent scores.
+        awards = {
+            label.upper()
+            for label in re.findall(
+                r"\b([WL])\s+by\s+forfeit\b",
+                row.get("raw_text", ""),
+                re.IGNORECASE,
+            )
+        }
+        if awards == {"W"}:
+            return True, school
+        if awards == {"L"}:
+            return True, opp
+
     return False, ""
 
 
