@@ -4507,7 +4507,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -41629,7 +41629,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 66,
       "opponent_score": 70,
       "score_known": true,
@@ -74654,7 +74654,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 69,
       "opponent_score": 70,
       "score_known": true,
@@ -74667,7 +74667,7 @@
       "site_city": "Raleigh",
       "site_state": "NC",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": null,
+      "postseason_round": "R64",
       "administrative_status": null,
       "administrative_note": null
     },
@@ -75504,7 +75504,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 75,
       "opponent_score": 71,
       "score_known": true,
@@ -75517,7 +75517,7 @@
       "site_city": "Dayton",
       "site_state": "OH",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": null,
+      "postseason_round": "Play-in",
       "administrative_status": null,
       "administrative_note": null
     },

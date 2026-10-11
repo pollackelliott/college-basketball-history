@@ -3795,7 +3795,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -33554,7 +33554,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 98,
       "opponent_score": 81,
       "score_known": true,
@@ -36754,7 +36754,7 @@
       "opponent_key": "providence",
       "opponent_name": "Providence",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 101,
       "opponent_score": 77,
       "score_known": true,
