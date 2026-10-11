@@ -1497,5 +1497,109 @@ class Stage4CloseoutTests(unittest.TestCase):
                 self.assertEqual(mismatches[0]["package_value"], "L")
 
 
+    def test_legacy_ncaa_curated_locality_and_postseason_alias(self):
+        row = {
+            "source_program_key": "test",
+            "season_label": "1984-1985",
+            "game_type": "NCAA",
+            "curated_city": "Lexington",
+            "curated_state": "KY",
+        }
+        result = mod.expected_parent_values(row)
+        self.assertEqual((result["city"], result["state"]), ("Lexington", "KY"))
+        self.assertEqual(result["curated_game_type"], "NCAA_TOURNAMENT")
+        row["game_type"] = "OTHER_POSTSEASON"
+        self.assertEqual(
+            mod.expected_parent_values(row)["curated_game_type"], "POSTSEASON"
+        )
+
+    def test_explicit_opponent_home_site_only_accepts_exact_literal_localities(self):
+        complete = (
+            ("John E. Glaser Arena | Philadelphia, Pa.",
+             ("John E. Glaser Arena", "Philadelphia", "PA")),
+            ("Crisler Center | Ann Arbor, Mich.",
+             ("Crisler Center", "Ann Arbor", "MI")),
+            ("Prudential Center | Newark, N.J.",
+             ("Prudential Center", "Newark", "NJ")),
+            ("Hinkle Fieldhouse | Indianapolis, Ind.",
+             ("Hinkle Fieldhouse", "Indianapolis", "IN")),
+            ("Fiserv Forum | Milwaukee, Wis.",
+             ("Fiserv Forum", "Milwaukee", "WI")),
+            ("Amica Mutual Pavilion | Providence, R.I.",
+             ("Amica Mutual Pavilion", "Providence", "RI")),
+            ("PeoplesBank Arena | Hartford, Conn. / OT",
+             ("PeoplesBank Arena", "Hartford", "CT")),
+            ("Capital One Arena | Washington, D.C.",
+             ("Capital One Arena", "Washington", "DC")),
+            ("CHI Health Center Omaha | Omaha, Neb.",
+             ("CHI Health Center Omaha", "Omaha", "NE")),
+            ("Cintas Center | Cincinnati, Ohio / OT",
+             ("Cintas Center", "Cincinnati", "OH")),
+            ("Madison Square Garden | New York, N.Y.",
+             ("Madison Square Garden", "New York", "NY")),
+            ("Wintrust Arena | Chicago, Ill.",
+             ("Wintrust Arena", "Chicago", "IL")),
+        )
+        for literal, expected in complete:
+            with self.subTest(literal=literal):
+                self.assertEqual(
+                    mod.explicit_opponent_home_site({
+                        "site_type": "AWAY", "source_venue_name": literal
+                    }), expected
+                )
+        for literal in ("(MSG)", "(NY)", "(Palestra)", "(Meadowlands)",
+                        "(The Spectrum)", "Unverified Arena | City, ZZ",
+                        "Arena | City", "(MSG) | New York, N.Y."):
+            with self.subTest(shorthand=literal):
+                self.assertIsNone(mod.explicit_opponent_home_site({
+                    "site_type": "AWAY", "source_venue_name": literal
+                }))
+        self.assertIsNone(mod.explicit_opponent_home_site({
+            "site_type": "NEUTRAL",
+            "source_venue_name": "Madison Square Garden | New York, N.Y.",
+        }))
+
+    def test_literal_opponent_home_site_is_strictly_semantically_guarded(self):
+        parent = [{
+            "research_game_id": "EXACT-AWAY-SOURCE",
+            "source_program_key": "test",
+            "season_label": "2025-2026",
+            "game_date": "2025-11-19",
+            "opponent_key": "old-college",
+            "team_score": "70",
+            "opponent_score": "55",
+            "game_type": "REGULAR_SEASON",
+            "stage3a_final_han": "AWAY",
+            "source_venue_name": "John E. Glaser Arena | Philadelphia, Pa.",
+            "raw_text": "accepted literal",
+        }]
+        projected = [{
+            "source_game_id": "EXACT-AWAY-SOURCE",
+            "source_program_key": "test",
+            "season_label": "2025-2026",
+            "game_date": "2025-11-19",
+            "normalized_opponent_key": "old-college",
+            "team_score": "70",
+            "opponent_score": "55",
+            "curated_site_type": "OPPONENT_HOME",
+            "curated_venue_name": "John E. Glaser Arena",
+            "city": "Philadelphia",
+            "state": "PA",
+            "curated_game_type": "REGULAR_SEASON",
+            "raw_text": "accepted literal",
+        }]
+        self.assertEqual(mod.compare_parent_semantics(parent, projected, []), [])
+        for field, bad_value in (
+            ("curated_venue_name", "Different Arena"),
+            ("city", "Newark"),
+            ("state", "NJ"),
+        ):
+            with self.subTest(field=field):
+                changed = [dict(projected[0], **{field: bad_value})]
+                mismatches = mod.compare_parent_semantics(parent, changed, [])
+                self.assertEqual(len(mismatches), 1)
+                self.assertEqual(mismatches[0]["field"], field)
+
+
 if __name__ == "__main__":
     unittest.main()

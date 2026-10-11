@@ -1057,5 +1057,126 @@ class Stage4AuthoringTests(unittest.TestCase):
                 self.assertIn("on-court played_result=W unchanged.", note)
 
 
+    def test_legacy_stage3a_accounting_preserves_exact_accepted_debt(self):
+        cases = (
+            (
+                "UNKNOWN", "REGULAR_SEASON",
+                {"season_label": "1947-1948",
+                 "stage3a1_status": "RESEARCHED_UNRESOLVED",
+                 "stage3a1_evidence_basis": "Official guide ambiguous H/A/N."},
+                "RESEARCHED_UNRESOLVED",
+            ),
+            (
+                "NEUTRAL", "REGULAR_SEASON",
+                {"season_label": "1950-1951", "city": "New Orleans", "state": "LA",
+                 "stage3a3_historical_location_status": "LOCATION_ACCEPTED",
+                 "stage3a3_historical_venue_status": "HISTORICAL_VENUE_NOT_REQUIRED",
+                 "stage3a3_historical_evidence_basis": "Official event code."},
+                "RESEARCHED_PARTIAL",
+            ),
+            (
+                "NEUTRAL", "REGULAR_SEASON",
+                {"season_label": "1973-1974", "city": "New Orleans", "state": "LA"},
+                "RESEARCHED_PARTIAL",
+            ),
+            (
+                "NEUTRAL", "REGULAR_SEASON",
+                {"season_label": "1996-1997", "city": "Bayamon", "state": "PR",
+                 "stage3a3_modern_recurring_status":
+                     "RESEARCHED_UNRESOLVED_EXACT_VENUE_UNIT2",
+                 "stage3a3_modern_recurring_provenance":
+                     "Exact-edition official conflicting site reports."},
+                "RESEARCHED_UNRESOLVED",
+            ),
+            (
+                "OPPONENT_HOME", "REGULAR_SEASON",
+                {"season_label": "1965-1966", "source_venue_name": "(MSG)",
+                 "stage3a1_status": "RESOLVED",
+                 "stage3a1_evidence_basis": "Official all-time series marks AWAY."},
+                "RESEARCHED_PARTIAL",
+            ),
+        )
+        for site, game_type, details, expected in cases:
+            with self.subTest(site=site, details=details):
+                status, basis = mod._research_accounting({
+                    "site_type": site, "game_type": game_type, **details
+                })
+                self.assertEqual(status, expected)
+                self.assertTrue(basis)
+        for row in (
+            {"site_type": "NEUTRAL", "game_type": "NCAA",
+             "season_label": "1950-1951", "city": "New Orleans", "state": "LA"},
+            {"site_type": "NEUTRAL", "game_type": "REGULAR_SEASON",
+             "season_label": "2017-2018", "city": "Orlando", "state": "FL"},
+            {"site_type": "OPPONENT_HOME", "game_type": "REGULAR_SEASON",
+             "source_venue_name": "(MSG)", "stage3a1_status": "RESOLVED"},
+            {"site_type": "OPPONENT_HOME", "game_type": "REGULAR_SEASON",
+             "source_venue_name": "John E. Glaser Arena | Philadelphia, Pa.",
+             "stage3a1_evidence_basis": "Official schedule."},
+        ):
+            with self.subTest(must_fail_closed=row):
+                self.assertEqual(mod._research_accounting(row), ("", ""))
+
+    def test_legacy_stage4_projector_maps_ncaa_locality_postseason_and_away_site(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        inputs = (
+            {
+                "research_game_id": "NCAA-LEGACY",
+                "source_program_key": "test",
+                "season_label": "1984-1985",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "game_type": "NCAA",
+                "site_type": "NEUTRAL",
+                "curated_venue_name": "Test Gym",
+                "curated_city": "Lexington",
+                "curated_state": "KY",
+            },
+            {
+                "research_game_id": "OTHER-LEGACY",
+                "source_program_key": "test",
+                "season_label": "2024-2025",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "game_type": "OTHER_POSTSEASON",
+                "site_type": "NEUTRAL",
+            },
+            {
+                "research_game_id": "AWAY-LEGACY",
+                "source_program_key": "test",
+                "season_label": "2025-2026",
+                "source_opponent_label": "Old College",
+                "opponent_key": "old-college",
+                "game_type": "REGULAR_SEASON",
+                "site_type": "AWAY",
+                "source_venue_name": "Crisler Center | Ann Arbor, Mich.",
+            },
+        )
+        games, defects = mod._projection(list(inputs), opponents, venues)
+        self.assertEqual(defects, [])
+        by_id = {game["source_game_id"]: game for game in games}
+        self.assertEqual(
+            (by_id["NCAA-LEGACY"]["city"], by_id["NCAA-LEGACY"]["state"]),
+            ("Lexington", "KY"),
+        )
+        self.assertEqual(
+            by_id["NCAA-LEGACY"]["curated_game_type"], "NCAA_TOURNAMENT"
+        )
+        self.assertEqual(
+            by_id["OTHER-LEGACY"]["curated_game_type"], "POSTSEASON"
+        )
+        self.assertEqual(
+            (by_id["AWAY-LEGACY"]["curated_venue_name"],
+             by_id["AWAY-LEGACY"]["city"], by_id["AWAY-LEGACY"]["state"]),
+            ("Crisler Center", "Ann Arbor", "MI"),
+        )
+        self.assertEqual(
+            by_id["AWAY-LEGACY"]["source_venue_name"],
+            "Crisler Center | Ann Arbor, Mich.",
+        )
+        self.assertEqual(by_id["AWAY-LEGACY"]["site_research_status"], "")
+
+
 if __name__ == "__main__":
     unittest.main()

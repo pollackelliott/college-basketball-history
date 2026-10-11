@@ -31,6 +31,7 @@ from research_stage4_closeout import (
     project_administrative_status,
     project_game_id,
     project_season_label,
+    explicit_opponent_home_site,
     resolve_stage3b_parent_layout,
     sha256_bytes,
     validate_checkpoint_manifest,
@@ -187,12 +188,78 @@ def _research_accounting(
             "venue_research_status",
             ("venue_research_note", "venue_research_basis"),
         ),
+        (
+            "stage3a1_status",
+            ("stage3a1_evidence_basis", "stage3a1_review_notes"),
+        ),
     )
     for status_field, basis_fields in candidates:
         status = row.get(status_field, "").strip().upper()
         if status not in ALLOWED_RESEARCH_STATUSES:
             continue
         return status, _first(row, *basis_fields)
+
+    # Preserve terminal historical site research across accepted schema eras.
+    # The site classification, locality and blank venue must all be accepted;
+    # never apply the historical building exception to postseason or modern rows.
+    site = normalize_site(_first(
+        row, "curated_site_type", "stage3b_site_type",
+        "stage3a_final_site_type", "stage3a_final_han", "site_type",
+    ))
+    game_type = normalize_game_type(_first(
+        row, "curated_game_type", "game_type", "structured_game_type",
+    ))
+    accepted_venue = _first(
+        row, "stage3b_physical_venue_name", "stage3b_curated_venue_name",
+        "stage3a_final_physical_venue_name", "stage3a_final_venue_name",
+        "accepted_venue_name", "stage3a_curated_venue_name",
+        "stage3a2_physical_venue_name", "stage3a3_physical_venue_name",
+        "curated_venue_name", "venue_name",
+    )
+    if game_type == "REGULAR_SEASON" and site == "NEUTRAL" and not accepted_venue:
+        modern_status = _first(row, "stage3a3_modern_recurring_status")
+        if modern_status.startswith("RESEARCHED_UNRESOLVED_EXACT_VENUE"):
+            basis = _first(row, "stage3a3_modern_recurring_provenance")
+            if basis:
+                notes = _first(row, "stage3a3_modern_recurring_notes")
+                return "RESEARCHED_UNRESOLVED", (
+                    f"Accepted Stage 3A-3 modern tournament evidence: {basis}"
+                    + (f"; {notes}" if notes else "")
+                )
+        season = _first(row, "season_label")
+        city = _first(row, "stage3a_final_city", "accepted_city",
+                      "curated_city", "city", "venue_city")
+        state = _first(row, "stage3a_final_state", "accepted_state",
+                       "curated_state", "state", "venue_state")
+        if season[:4].isdigit() and int(season[:4]) <= 1995 and city and state:
+            basis = _first(row, "stage3a3_historical_evidence_basis")
+            if basis:
+                return "RESEARCHED_PARTIAL", (
+                    f"Accepted Stage 3A-3 historical neutral location {city}, {state}: "
+                    f"{basis}; exact building not established under location-first policy."
+                )
+            return "RESEARCHED_PARTIAL", (
+                f"Accepted Stage 3A neutral location {city}, {state}; "
+                "exact physical building not established and is historical "
+                "enrichment debt under the location-first research standard."
+            )
+
+    # Opponent-home venue archaeology is outside the source-school obligation.
+    # Preserve the literal label instead of inventing a physical identity from
+    # shorthand such as (MSG), (NY), or (Palestra). The accepted source was
+    # already examined for H/A/N in Stage 3A-1.
+    if game_type == "REGULAR_SEASON" and site == "OPPONENT_HOME":
+        literal = _first(row, "source_venue_name")
+        if literal and not explicit_opponent_home_site(row):
+            source_basis = _first(row, "stage3a1_evidence_basis")
+            if source_basis:
+                return "RESEARCHED_PARTIAL", (
+                    f"Accepted opponent-home source label {literal!r} retained "
+                    "without asserting an unidentified physical venue or locality; "
+                    f"Stage 3A-1 institutional H/A/N evidence: {source_basis}. "
+                    "Opponent-home building archaeology remains outside this "
+                    "source-school's Research obligation."
+                )
     return "", ""
 
 
@@ -358,6 +425,7 @@ def _projection(
             )
 
         research_status, research_basis = _research_accounting(row)
+        literal_opponent_home = explicit_opponent_home_site(row)
 
         accepted_venue_key = _first(row, "accepted_venue_key")
         accepted_venue: dict[str, str] = {}
@@ -427,7 +495,8 @@ def _projection(
                     "curated_venue_name",
                     "venue_name",
                 )
-                or accepted_venue.get("canonical_name", "").strip(),
+                or accepted_venue.get("canonical_name", "").strip()
+                or (literal_opponent_home[0] if literal_opponent_home else ""),
                 "city": _first(
                     row,
                     "stage3b_venue_city",
@@ -438,10 +507,12 @@ def _projection(
                     "stage3a_site_city",
                     "stage3a2_venue_city",
                     "stage3a3_venue_city",
+                    "curated_city",
                     "city",
                     "venue_city",
                 )
-                or accepted_venue.get("city", "").strip(),
+                or accepted_venue.get("city", "").strip()
+                or (literal_opponent_home[1] if literal_opponent_home else ""),
                 "state": _first(
                     row,
                     "stage3b_venue_state",
@@ -452,10 +523,12 @@ def _projection(
                     "stage3a_site_state",
                     "stage3a2_venue_state",
                     "stage3a3_venue_state",
+                    "curated_state",
                     "state",
                     "venue_state",
                 )
-                or accepted_venue.get("state", "").strip(),
+                or accepted_venue.get("state", "").strip()
+                or (literal_opponent_home[2] if literal_opponent_home else ""),
                 "event_or_tournament": _first(
                     row, "event_or_tournament", "stage3a3_event_name"
                 ),
