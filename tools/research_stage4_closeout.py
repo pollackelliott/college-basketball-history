@@ -517,7 +517,43 @@ def normalize_game_type(value: str) -> str:
         "CONFERENCE_TOURNAMENT": "CONFERENCE_TOURNAMENT",
         "NIT": "NIT",
         "POSTSEASON": "POSTSEASON",
+        "OTHER_POSTSEASON": "POSTSEASON",
     }.get(folded, folded)
+
+
+def explicit_opponent_home_site(row: dict[str, str]) -> tuple[str, str, str] | None:
+    """Parse exact literal 'building | city, state' opponent-home source evidence.
+
+    This is source-text representation, not venue archaeology or registry matching.
+    Parenthesized shorthand and unsupported localities fail closed.
+    """
+    site = _first_parent_value(
+        row, "curated_site_type", "stage3b_site_type",
+        "stage3a_final_site_type", "stage3a_final_han", "site_type",
+    )
+    if normalize_site(site) != "OPPONENT_HOME":
+        return None
+    literal = row.get("source_venue_name", "").strip()
+    if literal.count(" | ") != 1:
+        return None
+    building, location = (part.strip() for part in literal.split(" | ", 1))
+    if not building or building.startswith("(") or not location:
+        return None
+    location = location.split(" / ", 1)[0].strip()
+    match = re.fullmatch(r"([A-Za-z][A-Za-z .'-]*),\\s*([A-Za-z. ]+)", location)
+    if not match:
+        return None
+    city, state_literal = match.groups()
+    states = {
+        "Pa.": "PA", "Mich.": "MI", "N.J.": "NJ",
+        "Ind.": "IN", "Wis.": "WI", "R.I.": "RI",
+        "Conn.": "CT", "D.C.": "DC", "Neb.": "NE",
+        "Ohio": "OH", "N.Y.": "NY", "Ill.": "IL",
+    }
+    state = states.get(state_literal.strip())
+    if not state:
+        return None
+    return building, city.strip(), state
 
 
 def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
@@ -576,6 +612,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_city",
             "stage3a_final_city",
             "accepted_city",
+            "curated_city",
             "stage3a_site_city",
             "stage3a2_venue_city",
             "stage3a3_venue_city",
@@ -589,6 +626,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_state",
             "stage3a_final_state",
             "accepted_state",
+            "curated_state",
             "stage3a_site_state",
             "stage3a2_venue_state",
             "stage3a3_venue_state",
@@ -620,6 +658,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_city",
             "stage3a_final_city",
             "accepted_city",
+            "curated_city",
             "stage3a_site_city",
             "stage3a2_venue_city",
             "stage3a3_venue_city",
@@ -631,6 +670,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_state",
             "stage3a_final_state",
             "accepted_state",
+            "curated_state",
             "stage3a_site_state",
             "stage3a2_venue_state",
             "stage3a3_venue_state",
@@ -646,7 +686,14 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a3_current_main_venue_key",
         )
 
-    return {
+    parsed_source_site = explicit_opponent_home_site(row)
+    original_venue_present = bool(venue.strip())
+    if parsed_source_site:
+        venue = venue or parsed_source_site[0]
+        city = city or parsed_source_site[1]
+        state = state or parsed_source_site[2]
+
+    expected = {
         "source_program_key": row.get("source_program_key", "").strip(),
         "season_start": season_start(row.get("season_label", "")),
         "game_date": row.get("game_date", "").strip(),
@@ -677,6 +724,10 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         ),
         "raw_text": first_literal(row, "raw_text", "source_raw_text"),
     }
+    if parsed_source_site and not original_venue_present:
+        # Guard the exact source building, not just venue presence.
+        expected["curated_venue_name"] = parsed_source_site[0]
+    return expected
 
 
 def _normalized_venue_name(value: str) -> str:
@@ -804,6 +855,7 @@ def compare_parent_semantics(
             "team_score": actual_row.get("team_score", "").strip(),
             "opponent_score": actual_row.get("opponent_score", "").strip(),
             "played_result": actual_row.get("played_result", "").strip(),
+            "curated_venue_name": actual_row.get("curated_venue_name", "").strip(),
             "overtime_periods": actual_row.get("overtime_periods", "").strip(),
             "curated_site_type": normalize_site(
                 actual_row.get("curated_site_type", "")
