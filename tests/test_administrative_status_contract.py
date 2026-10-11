@@ -13,6 +13,9 @@ from administrative_status import (  # noqa: E402
 from normalize_legacy_administrative_status import normalize_rows  # noqa: E402
 
 
+from ingest_school import build_new_canonical, source_result_winner  # noqa: E402
+
+
 class AdministrativeStatusContractTests(unittest.TestCase):
     def test_supported_status_requires_note(self):
         row = {
@@ -77,6 +80,38 @@ class AdministrativeStatusContractTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(ValueError, "victories were vacated"):
             normalize_legacy_vacated_season_context_row(row)
+
+    def test_scoreless_forfeit_requires_explicit_literal_award(self):
+        row = {
+            "source_program_key": "example",
+            "normalized_opponent_key": "alumni",
+            "team_score": "",
+            "opponent_score": "",
+            "played_result": "",
+            "administrative_status": "FORFEIT",
+            "administrative_note": "Administrative outcome, not on-court.",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "raw_text": "Alumni W by forfeit",
+        }
+        self.assertEqual(source_result_winner(row), (True, "example"))
+
+        canonical = build_new_canonical(row, "TEST-FORFEIT", {}, {})
+        self.assertEqual(canonical["result_winner_team_key"], "example")
+        self.assertEqual(canonical["team_a_score"], "")
+        self.assertEqual(canonical["team_b_score"], "")
+        self.assertEqual(row["played_result"], "")
+
+        other = dict(row, raw_text="Alumni L by forfeit")
+        self.assertEqual(source_result_winner(other), (True, "alumni"))
+
+        ambiguous = dict(row, raw_text="W by forfeit; L by forfeit")
+        self.assertEqual(source_result_winner(ambiguous), (False, ""))
+
+        unsupported = dict(row, raw_text="Game ended early")
+        self.assertEqual(source_result_winner(unsupported), (False, ""))
+
+        not_a_forfeit = dict(row, administrative_status="")
+        self.assertEqual(source_result_winner(not_a_forfeit), (False, ""))
 
     def test_population_normalization_reports_exact_partition(self):
         rows = [
