@@ -1032,5 +1032,30 @@ class Stage4AuthoringTests(unittest.TestCase):
         self.assertEqual(note, "Victories were vacated.")
 
 
+    def test_legacy_on_court_result_provenance_preserves_play(self):
+        for status, expected_status in (
+            ("FORFEIT_LOSS", "FORFEIT"),
+            ("FORFEIT_WIN", "FORFEIT"),
+            ("VACATED", "VACATED_GAME"),
+        ):
+            with self.subTest(status=status):
+                row = {
+                    "administrative_status": status,
+                    "administrative_note": "accepted note",
+                    "on_court_result": "L",
+                }
+                projected, note = mod.project_administrative_status(row)
+                self.assertEqual(projected, expected_status)
+                self.assertTrue(note.startswith("accepted note"))
+                self.assertIn("on-court played_result=L unchanged.", note)
+                self.assertNotIn("[blank]", note)
+
+                # Current vocabulary takes precedence if both fields exist.
+                row["played_result"] = "W"
+                projected, note = mod.project_administrative_status(row)
+                self.assertEqual(projected, expected_status)
+                self.assertIn("on-court played_result=W unchanged.", note)
+
+
 if __name__ == "__main__":
     unittest.main()
