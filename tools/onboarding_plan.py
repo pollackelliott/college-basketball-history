@@ -2841,16 +2841,29 @@ def approve_plan(
                     "of the preflight-proven viable values"
                 )
         if item.get("category") == "ncaa_round_patch":
+            date_patch = _reviewed_new_game_date_patch(item, source_patch)
+            round_source_patch = {
+                field: value for field, value in source_patch.items()
+                if field != "game_date"
+            }
+            if date_patch and not (
+                str(review.get("notes", "") or "").find(item["source_game_date"]) >= 0
+                and date_patch in str(review.get("notes", "") or "")
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: date patch notes must record original and "
+                    "corrected dates with the authoritative evidence basis"
+                )
             if decision == "APPLY_NCAA_ROUND_PATCH":
                 if set(canonical_patch) != {"postseason_round"}:
                     raise WorkflowError(
                         f"{decision_id}: APPLY_NCAA_ROUND_PATCH requires exactly "
                         "canonical postseason_round"
                     )
-                if set(source_patch) != {"curated_postseason_round"}:
+                if set(round_source_patch) != {"curated_postseason_round"}:
                     raise WorkflowError(
-                        f"{decision_id}: APPLY_NCAA_ROUND_PATCH requires exactly "
-                        "source curated_postseason_round"
+                        f"{decision_id}: APPLY_NCAA_ROUND_PATCH requires "
+                        "curated_postseason_round and optionally reviewed game_date"
                     )
                 canonical_round = canonical_patch["postseason_round"].strip()
                 source_round = source_patch["curated_postseason_round"].strip()
@@ -2863,7 +2876,7 @@ def approve_plan(
                         "nonblank round value"
                     )
             elif decision == "LEAVE_UNRESOLVED":
-                if canonical_patch or source_patch:
+                if canonical_patch or round_source_patch:
                     raise WorkflowError(
                         f"{decision_id}: LEAVE_UNRESOLVED may not carry NCAA round patches"
                     )
@@ -3791,6 +3804,51 @@ def _record_reciprocal_discrepancies(
     return dict(counts)
 
 
+def _reviewed_new_game_date_patch(
+    item: dict[str, Any],
+    source_patch: dict[str, str],
+) -> str | None:
+    """Validate an explicit, sealed date correction on a new NCAA game.
+
+    This is optional on an existing NCAA round-review decision; it does not
+    create a new reviewer decision, infer a date, or authorize changes to
+    an already-canonical game. Both the old and new dates remain recorded
+    in the sealed review and historical provenance.
+    """
+    if "game_date" not in source_patch:
+        return None
+    decision_id = item.get("decision_id", "")
+    if item.get("category") != "ncaa_round_patch" or item.get("canonical_game_id"):
+        raise WorkflowError(
+            f"{decision_id}: date patch requires a NEW_GAME NCAA review"
+        )
+    original = str(item.get("source_game_date", "")).strip()
+    corrected = str(source_patch["game_date"]).strip()
+    try:
+        old_day = dt.date.fromisoformat(original)
+        new_day = dt.date.fromisoformat(corrected)
+    except ValueError as exc:
+        raise WorkflowError(
+            f"{decision_id}: new-game date patch requires exact ISO dates"
+        ) from exc
+    if new_day == old_day:
+        raise WorkflowError(
+            f"{decision_id}: new-game date patch must change the frozen date"
+        )
+    season = str(item.get("season_label", "")).strip()
+    match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+        raise WorkflowError(
+            f"{decision_id}: new-game date patch requires a valid season"
+        )
+    expected_year = int(match.group(1)) if new_day.month >= 7 else int(match.group(2))
+    if new_day.year != expected_year:
+        raise WorkflowError(
+            f"{decision_id}: new-game date patch cannot change the season"
+        )
+    return corrected
+
+
 def apply_pre_ingest_source_patches(
     repo: Path,
     approved: dict[str, Any],
@@ -3817,6 +3875,11 @@ def apply_pre_ingest_source_patches(
         for item in approved.get("decisions", [])
         if item.get("category") == "new_game_site_patch"
     ]
+    date_items = [
+        item for item in approved.get("decisions", [])
+        if item.get("category") == "ncaa_round_patch"
+        and "game_date" in item.get("source_patch", {})
+    ]
     cross_season_identity_items = []
     for item in approved.get("decisions", []):
         if item.get("category") != "identity":
@@ -3829,7 +3892,9 @@ def apply_pre_ingest_source_patches(
         if expected is not None:
             cross_season_identity_items.append(item)
 
-    if not classification_items and not site_items and not cross_season_identity_items:
+    if not (
+        classification_items or site_items or cross_season_identity_items or date_items
+    ):
         return {}
 
     school_key = approved["school_key"]
@@ -3971,6 +4036,55 @@ def apply_pre_ingest_source_patches(
             f"decision {decision_id}; raw_text preserved.",
         )
         counts["new_game_site_patches"] += 1
+
+    for item in date_items:
+        decision_id = item["decision_id"]
+        corrected = _reviewed_new_game_date_patch(item, item["source_patch"])
+        source_id = str(item.get("source_game_id", "")).strip()
+        source = source_by_id.get(source_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: date-patch source game is missing"
+            )
+        original = str(item.get("source_game_date", "")).strip()
+        if (
+            source.get("source_program_key", "").strip() != school_key
+            or source.get("game_date", "").strip() != original
+            or source.get("season_label", "").strip()
+            != str(item.get("season_label", "")).strip()
+            or source.get("curated_game_type", "").strip() != "NCAA_TOURNAMENT"
+            or source.get("curated_postseason_round", "").strip()
+        ):
+            raise WorkflowError(
+                f"{decision_id}: frozen new-game date/season/NCAA state changed"
+            )
+        # A date correction cannot silently convert a planned new game into an
+        # existing same-game match. Such identity evidence requires its own gate.
+        pair = ingest_school.ordered_pair(
+            school_key, source.get("normalized_opponent_key", "").strip()
+        )
+        for canonical in read_csv(repo / "data/canonical/games.csv"):
+            if (
+                canonical.get("season_label", "").strip()
+                == source["season_label"].strip()
+                and canonical.get("game_date", "").strip() == corrected
+                and (
+                    canonical.get("team_a_key", "").strip(),
+                    canonical.get("team_b_key", "").strip(),
+                ) == pair
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: corrected date collides with an existing "
+                    "canonical matchup; explicit identity review required"
+                )
+        source["game_date"] = corrected
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "[OWNER_APPROVED_NEW_GAME_DATE_PATCH "
+            f"source={source_id} old={original} new={corrected} "
+            f"decision={decision_id}]; raw_text preserved.",
+        )
+        counts["new_game_date_patches"] += 1
 
     canonical_by_id: dict[str, dict[str, str]] = {}
     if cross_season_identity_items:
@@ -4247,6 +4361,26 @@ def apply_reconciliation_decisions(
             decision = item["decision"]
             canonical_patch = item.get("canonical_patch", {})
             source_patch = item.get("source_patch", {})
+            if "game_date" in source_patch:
+                corrected = _reviewed_new_game_date_patch(item, source_patch)
+                if not (
+                    source.get("game_date", "").strip() == corrected
+                    and assertion.get("game_date", "").strip() == corrected
+                    and canonical.get("game_date", "").strip() == corrected
+                ):
+                    raise WorkflowError(
+                        f"{item['decision_id']}: owner-approved new-game date "
+                        "did not persist through ingestion"
+                    )
+                canonical["notes"] = _append_note(
+                    canonical.get("notes", ""),
+                    "[OWNER_APPROVED_NEW_GAME_DATE_PATCH "
+                    f"school={school_key} source={source_game_id} "
+                    f"old={item['source_game_date']} new={corrected} "
+                    f"decision={item['decision_id']} "
+                    f"plan={approved['approved_plan_hash'][:12]}]",
+                )
+                counts["new_game_dates_verified"] += 1
             if decision == "APPLY_NCAA_ROUND_PATCH":
                 desired = str(canonical_patch.get("postseason_round", "")).strip()
                 source_desired = str(
