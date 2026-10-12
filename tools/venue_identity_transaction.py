@@ -538,9 +538,9 @@ def apply_transaction(
         write_csv(venue_path, vfields, venues)
         write_csv(names_path, nfields, names)
         write_csv(canonical_path, cfields, canonical)
-        if assertions_path.exists():
+        if assertions_path.exists() and assertion_updates:
             write_csv(assertions_path, afields, assertions)
-        if ncaa_path.exists():
+        if ncaa_path.exists() and ncaa_evidence_updates:
             write_csv(ncaa_path, ncaa_fields, ncaa_evidence)
 
         absorbed_ids = {merge["absorbed_venue_id"] for merge in plan["merges"]}
