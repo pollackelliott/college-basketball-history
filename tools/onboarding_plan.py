@@ -4421,9 +4421,10 @@ def apply_reconciliation_decisions(
                 )
                 counts["ncaa_round_patches"] += 1
             elif decision == "LEAVE_UNRESOLVED":
-                if canonical_patch or source_patch:
+                if canonical_patch or set(source_patch) - {"game_date"}:
                     raise WorkflowError(
-                        f"{item['decision_id']}: unresolved NCAA round may not carry a patch"
+                        f"{item['decision_id']}: unresolved NCAA round may not "
+                        "carry a round patch"
                     )
                 counts["ncaa_rounds_left_unresolved"] += 1
             else:
