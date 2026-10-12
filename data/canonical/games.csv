@@ -12777,8 +12777,8 @@ CBBG-0012776,1970-1971,1971-03-06,EXACT,kansas,oklahoma,54,52,kansas,1,TEAM_A_HO
 CBBG-0012777,1970-1971,1971-03-13,EXACT,kansas,nebraska,59,54,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0012778,1970-1971,1971-03-18,EXACT,houston,kansas,77,78,kansas,0,NEUTRAL,,charles-koch-arena,VEN-000039,Wichita,KS,NCAA_TOURNAMENT,Sweet Sixteen,,,PROVISIONAL,
 CBBG-0012779,1970-1971,1971-03-20,EXACT,drake,kansas,71,73,kansas,0,NEUTRAL,,charles-koch-arena,VEN-000039,Wichita,KS,NCAA_TOURNAMENT,Elite Eight,,,PROVISIONAL,
-CBBG-0012780,1970-1971,1971-03-25,EXACT,kansas,ucla,60,68,ucla,0,NEUTRAL,,astrodome,VEN-000014,Houston,TX,NCAA_TOURNAMENT,Final Four,,,PROVISIONAL,
-CBBG-0012781,1970-1971,1971-03-27,EXACT,kansas,western-kentucky,75,77,western-kentucky,0,NEUTRAL,,astrodome,VEN-000014,Houston,TX,NCAA_TOURNAMENT,,,,PROVISIONAL,
+CBBG-0012780,1970-1971,1971-03-25,EXACT,kansas,ucla,60,68,ucla,0,NEUTRAL,,houston-astrodome,VEN-000395,Houston,TX,NCAA_TOURNAMENT,Final Four,,,PROVISIONAL,
+CBBG-0012781,1970-1971,1971-03-27,EXACT,kansas,western-kentucky,75,77,western-kentucky,0,NEUTRAL,,houston-astrodome,VEN-000395,Houston,TX,NCAA_TOURNAMENT,,,,PROVISIONAL,
 CBBG-0012782,1971-1972,1971-12-01,EXACT,kansas,xavier,75,57,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0012783,1971-1972,1971-12-04,EXACT,kansas,kentucky,69,79,kentucky,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0012784,1971-1972,1971-12-06,EXACT,indiana,kansas,59,56,indiana,0,TEAM_A_HOME,indiana,simon-skjodt-assembly-hall,VEN-000186,Bloomington,IN,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=indiana/IURAW-01362;venue_key=simon-skjodt-assembly-hall;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"

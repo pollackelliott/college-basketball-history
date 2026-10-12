@@ -15,7 +15,7 @@ VEN-000010,American Airlines Center,americanairlinescenter,PROJECT_DISPLAY,,,,Mi
 VEN-000011,Amica Mutual Pavilion,amicamutualpavilion,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000012,Amway Center,amwaycenter,PROJECT_DISPLAY,,2023-12-19,EXACT,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000013,ARCO Arena,arcoarena,PROJECT_DISPLAY,1988-11-08,2016,EXACT_START_YEAR_END,Sacramento Kings official history: ARCO Arena II opened for NBA play on 1988-11-08.,
-VEN-000014,Astrodome,astrodome,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
+VEN-000395,Astrodome,astrodome,HISTORICAL_OR_ALIAS,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,Reassigned from retired VEN-000014 to VEN-000395.
 VEN-000015,AT&T Stadium,attstadium,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000016,Alumni Gymnasium,alumnigymnasium,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,
 VEN-000017,Auburn Sports Arena,auburnsportsarena,PROJECT_DISPLAY,,,,Migration seed from existing curated school venue registries and/or owner-completed NCAA archival site audit.,

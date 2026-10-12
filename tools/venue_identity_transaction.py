@@ -138,6 +138,7 @@ def build_plan(repo: Path, spec_path: Path):
     names_path = repo / "data/reference/venue-names.csv"
     canonical_path = repo / "data/canonical/games.csv"
     assertions_path = repo / "data/evidence/game-assertions.csv"
+    ncaa_path = repo / "data/evidence/ncaa-tournament-sites.csv"
 
     _, venues = read_csv(venue_path)
     _, names = read_csv(names_path)
@@ -146,6 +147,7 @@ def build_plan(repo: Path, spec_path: Path):
         afields, assertions = read_csv(assertions_path)
     else:
         afields, assertions = [], []
+    _, ncaa_evidence = read_csv(ncaa_path) if ncaa_path.exists() else ([], [])
 
     by_id = {clean(row.get("venue_id")): row for row in venues}
     blockers = []
@@ -199,6 +201,28 @@ def build_plan(repo: Path, spec_path: Path):
         name_count = sum(
             1 for row in names if clean(row.get("venue_id")) == absorbed_id
         )
+        absorbed_key = clean(absorbed.get("venue_key"))
+        affected_canonical_ids = {
+            clean(row.get("canonical_game_id"))
+            for row in canonical
+            if clean(row.get("venue_id")) == absorbed_id
+        }
+        ncaa_matches = [
+            row for row in ncaa_evidence
+            if clean(row.get("venue_id")) == absorbed_id
+            or clean(row.get("venue_key")) == absorbed_key
+        ]
+        for evidence in ncaa_matches:
+            game_id = clean(evidence.get("canonical_game_id"))
+            if (
+                clean(evidence.get("venue_id")) != absorbed_id
+                or clean(evidence.get("venue_key")) != absorbed_key
+                or game_id not in affected_canonical_ids
+            ):
+                blockers.append(
+                    f"{survivor_id}<-{absorbed_id}: NCAA site evidence {game_id} "
+                    "disagrees with the absorbed canonical venue identity"
+                )
 
         _assert_expected(
             f"{survivor_id}<-{absorbed_id} canonical rows",
@@ -223,6 +247,7 @@ def build_plan(repo: Path, spec_path: Path):
                 "canonical_rows": canonical_count,
                 "provenance_markers": provenance_marker_count,
                 "assertion_rows": assertion_count,
+                "ncaa_evidence_rows": len(ncaa_matches),
                 "school_rows": school_count,
                 "school_files": school_refs,
                 "venue_name_rows": name_count,
@@ -237,6 +262,8 @@ def build_plan(repo: Path, spec_path: Path):
     ]
     if assertions_path.exists():
         fingerprint_paths.append(assertions_path)
+    if ncaa_path.exists():
+        fingerprint_paths.append(ncaa_path)
     fingerprint_paths.extend(sorted(touched_school_paths))
     fingerprints = {
         str(path.relative_to(repo)) if path.is_relative_to(repo) else str(path): hfile(path)
@@ -358,10 +385,13 @@ def apply_transaction(
     names_path = repo / "data/reference/venue-names.csv"
     canonical_path = repo / "data/canonical/games.csv"
     assertions_path = repo / "data/evidence/game-assertions.csv"
+    ncaa_path = repo / "data/evidence/ncaa-tournament-sites.csv"
 
     paths = {venue_path, names_path, canonical_path}
     if assertions_path.exists():
         paths.add(assertions_path)
+    if ncaa_path.exists():
+        paths.add(ncaa_path)
     for merge in plan["merges"]:
         for item in merge["school_files"]:
             paths.add(repo / item["path"])
@@ -378,10 +408,14 @@ def apply_transaction(
             afields, assertions = read_csv(assertions_path)
         else:
             afields, assertions = [], []
+        ncaa_fields, ncaa_evidence = (
+            read_csv(ncaa_path) if ncaa_path.exists() else ([], [])
+        )
 
         canonical_updates = 0
         provenance_marker_updates = 0
         assertion_updates = 0
+        ncaa_evidence_updates = 0
         school_updates = 0
         names_reassigned = 0
 
@@ -458,6 +492,21 @@ def apply_transaction(
                         row["site_state"] = clean(survivor.get("state"))
                     assertion_updates += 1
 
+            ncaa_changed = 0
+            for row in ncaa_evidence:
+                if (
+                    clean(row.get("venue_id")) == absorbed_id
+                    or clean(row.get("venue_key")) == absorbed_key
+                ):
+                    row["venue_id"] = survivor_id
+                    row["venue_key"] = survivor_key
+                    ncaa_changed += 1
+            if ncaa_changed != merge["ncaa_evidence_rows"]:
+                raise TransactionError(
+                    "planned NCAA site-evidence updates differ from applied updates"
+                )
+            ncaa_evidence_updates += ncaa_changed
+
             for item in merge["school_files"]:
                 path = repo / item["path"]
                 fields, rows = read_csv(path)
@@ -489,8 +538,10 @@ def apply_transaction(
         write_csv(venue_path, vfields, venues)
         write_csv(names_path, nfields, names)
         write_csv(canonical_path, cfields, canonical)
-        if assertions_path.exists():
+        if assertions_path.exists() and assertion_updates:
             write_csv(assertions_path, afields, assertions)
+        if ncaa_path.exists() and ncaa_evidence_updates:
+            write_csv(ncaa_path, ncaa_fields, ncaa_evidence)
 
         absorbed_ids = {merge["absorbed_venue_id"] for merge in plan["merges"]}
         _, venues_check = read_csv(venue_path)
@@ -527,6 +578,15 @@ def apply_transaction(
             ):
                 raise TransactionError("postcondition: absorbed venue remains in assertions")
 
+        if ncaa_path.exists():
+            _, ncaa_check = read_csv(ncaa_path)
+            if any(
+                clean(row.get("venue_id")) in absorbed_ids
+                or clean(row.get("venue_key")) in absorbed_keys
+                for row in ncaa_check
+            ):
+                raise TransactionError("postcondition: retired identity remains in NCAA site evidence")
+
         if run_validation:
             _run_validation(repo)
             _run_site_refresh(repo)
@@ -547,6 +607,7 @@ def apply_transaction(
         "canonical_rows_updated": canonical_updates,
         "provenance_markers_updated": provenance_marker_updates,
         "assertion_rows_updated": assertion_updates,
+        "ncaa_evidence_rows_updated": ncaa_evidence_updates,
         "school_rows_updated": school_updates,
         "venue_name_rows_reassigned": names_reassigned,
         "venues_retired": len(plan["merges"]),
@@ -597,6 +658,7 @@ def main():
                         f"canonical={merge['canonical_rows']} "
                         f"markers={merge['provenance_markers']} "
                         f"assertions={merge['assertion_rows']} "
+                        f"ncaa={merge['ncaa_evidence_rows']} "
                         f"school={merge['school_rows']} names={merge['venue_name_rows']}"
                     )
                 print(f"blockers={len(plan['blockers'])}")
