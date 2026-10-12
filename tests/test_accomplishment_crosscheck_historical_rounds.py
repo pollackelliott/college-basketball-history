@@ -12,6 +12,7 @@ from onboarding_plan import (  # noqa: E402
     _accomplishment_conflicts,
     _accomplishment_crosscheck_game,
     _accomplishment_round_conflict_is_reviewable,
+    _project_accomplishment_games_with_existing_seasons,
     _ncaa_round_patch_decisions,
 )
 
@@ -331,6 +332,167 @@ class HistoricalRoundAccomplishmentCrosscheckTests(unittest.TestCase):
         self.assertIn(
             "1959-1960 has no resolved NCAA round",
             conflicts,
+        )
+
+
+    def test_canonical_only_ncaa_season_reconciles_projected_appearance_count(self):
+        # Target Research is a complete accepted ledger, but a previously
+        # canonical NCAA appearance season may still have no target rows.
+        source = [
+            ncaa_game("SOURCE-1939", "1938-1939", "1939-03-18", ""),
+            ncaa_game(
+                "SOURCE-1985", "1984-1985", "1985-04-01", "",
+                opponent="georgetown", winner="usc",
+            ),
+        ]
+        previously_canonical = [
+            ncaa_game("CAN-1939", "1938-1939", "1939-03-18", ""),
+            ncaa_game("CAN-1985", "1984-1985", "1985-03-17", "R32"),
+            ncaa_game(
+                "CAN-1971", "1970-1971", "1971-03-27", "Championship",
+                opponent="ucla", winner="ucla",
+            ),
+            ncaa_game(
+                "CAN-2026", "2025-2026", "2026-03-20", "R64",
+                opponent="opponent", winner="opponent",
+            ),
+        ]
+        projected = _project_accomplishment_games_with_existing_seasons(
+            self.program, source, previously_canonical,
+        )
+        self.assertEqual(
+            [g["canonical_game_id"] for g in projected],
+            ["SOURCE-1939", "SOURCE-1985", "CAN-1971", "CAN-2026"],
+        )
+        reference = {
+            "ncaa_tournament_appearances": "4",
+            "final_four_appearances": "3",
+            "national_championships": "1",
+            "best_finish_key": "NATIONAL_CHAMPION",
+            "best_finish_year": "1985",
+        }
+        projected_derived, conflicts = _accomplishment_conflicts(
+            self.program, reference, projected,
+        )
+        self.assertEqual(projected_derived["ncaa_tournament_appearances"], 4)
+        self.assertEqual(projected_derived["final_four_appearances"], 1)
+        self.assertEqual(projected_derived["national_championships"], 0)
+        self.assertTrue(conflicts)
+
+        candidates = [
+            {
+                "source": {
+                    "source_game_id": "SOURCE-1939",
+                    "season_label": "1938-1939",
+                    "game_date": "1939-03-18",
+                    "normalized_opponent_key": "ohio-state",
+                    "played_result": "L",
+                },
+                "canonical_game_id": "CAN-1939",
+                "canonical_game_date": "1939-03-18",
+                "calendar_year": 1939,
+            },
+            {
+                "source": {
+                    "source_game_id": "SOURCE-1985",
+                    "season_label": "1984-1985",
+                    "game_date": "1985-04-01",
+                    "normalized_opponent_key": "georgetown",
+                    "played_result": "W",
+                },
+                # The new title game's ID is unknown before ingestion.
+                "canonical_game_id": "",
+                "canonical_game_date": "",
+                "calendar_year": 1985,
+            },
+        ]
+        self.assertTrue(
+            _accomplishment_round_conflict_is_reviewable(
+                reference, projected_derived, candidates,
+            )
+        )
+        decisions = _ncaa_round_patch_decisions("usc", candidates)
+        self.assertEqual(len(decisions), 2)
+        self.assertEqual(decisions[0]["canonical_game_id"], "CAN-1939")
+        self.assertEqual(decisions[1]["canonical_game_id"], "")
+        self.assertEqual(
+            {item["category"] for item in decisions},
+            {"ncaa_round_patch"},
+        )
+        self.assertEqual(
+            {item["decision"] for item in decisions}, {"PENDING"},
+        )
+
+        # Without the accepted supplemental appearances the original
+        # source-only projection must still fail the guard.
+        incomplete, _ = _accomplishment_conflicts(
+            self.program, reference, source,
+        )
+        self.assertFalse(
+            _accomplishment_round_conflict_is_reviewable(
+                reference, incomplete, candidates,
+            )
+        )
+
+    def test_projection_excludes_generic_postseason_and_other_programs(self):
+        source = [
+            ncaa_game("SOURCE-1954", "1953-1954", "1954-03-19", "Final Four"),
+        ]
+        duplicate_ncaa = ncaa_game(
+            "CAN-1954-CHAMP", "1953-1954", "1954-04-01", "Championship",
+            winner="usc",
+        )
+        generic_postseason = ncaa_game(
+            "CAN-CROWN", "2025-2026", "2026-04-01", "Championship",
+            winner="usc",
+        )
+        generic_postseason["game_type"] = "POSTSEASON"
+        other_program = ncaa_game(
+            "CAN-OTHER", "2024-2025", "2025-04-01", "Championship",
+            winner="other",
+        )
+        other_program["team_a_key"] = "other"
+        other_program["team_b_key"] = "second-other"
+        projected = _project_accomplishment_games_with_existing_seasons(
+            self.program, source,
+            [duplicate_ncaa, generic_postseason, other_program],
+        )
+        self.assertEqual(
+            [g["canonical_game_id"] for g in projected], ["SOURCE-1954"],
+        )
+        derived = _accomplishment_conflicts(
+            self.program,
+            {
+                "ncaa_tournament_appearances": "1",
+                "final_four_appearances": "1",
+                "national_championships": "0",
+                "best_finish_key": "FINAL_FOUR",
+                "best_finish_year": "1954",
+            },
+            projected,
+        )[0]
+        self.assertEqual(derived["ncaa_tournament_appearances"], 1)
+        self.assertEqual(derived["national_championships"], 0)
+
+    def test_projection_does_not_infer_missing_round(self):
+        source = [ncaa_game(
+            "SOURCE-1960", "1959-1960", "1960-03-07", "",
+        )]
+        preexisting = [
+            ncaa_game("CAN-1960", "1959-1960", "1960-03-07", "Championship"),
+            ncaa_game("CAN-1961", "1960-1961", "1961-03-07", ""),
+        ]
+        projection = _project_accomplishment_games_with_existing_seasons(
+            self.program, source, preexisting,
+        )
+        self.assertEqual(len(projection), 2)
+        self.assertEqual(projection[0]["postseason_round"], "")
+        self.assertEqual(projection[1]["postseason_round"], "")
+        self.assertEqual(
+            _accomplishment_conflicts(
+                self.program, self.reference, projection,
+            )[0]["national_championships"],
+            0,
         )
 
 
