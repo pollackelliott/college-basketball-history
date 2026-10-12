@@ -612,6 +612,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_city",
             "stage3a_final_city",
             "accepted_city",
+            "curated_venue_city",
             "curated_city",
             "stage3a_site_city",
             "stage3a2_venue_city",
@@ -626,6 +627,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_state",
             "stage3a_final_state",
             "accepted_state",
+            "curated_venue_state",
             "curated_state",
             "stage3a_site_state",
             "stage3a2_venue_state",
@@ -658,6 +660,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_city",
             "stage3a_final_city",
             "accepted_city",
+            "curated_venue_city",
             "curated_city",
             "stage3a_site_city",
             "stage3a2_venue_city",
@@ -670,6 +673,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3a_final_venue_state",
             "stage3a_final_state",
             "accepted_state",
+            "curated_venue_state",
             "curated_state",
             "stage3a_site_state",
             "stage3a2_venue_state",
@@ -714,6 +718,9 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         "venue_key": venue_key,
         "city": city.strip(),
         "state": state.strip(),
+        "country": _first_parent_value(
+            row, "curated_venue_country", "country", "venue_country"
+        ),
         "curated_game_type": normalize_game_type(
             _first_parent_value(
                 row,
@@ -824,6 +831,8 @@ def compare_parent_semantics(
     parent_rows: list[dict[str, str]],
     package_rows: list[dict[str, str]],
     venue_rows: list[dict[str, str]],
+    *,
+    school_key: str = "",
 ) -> list[dict[str, str]]:
     parent = {
         project_game_id(r): r
@@ -844,6 +853,8 @@ def compare_parent_semantics(
         if game_id not in package:
             continue
         expected = expected_parent_values(parent[game_id])
+        if not expected["source_program_key"] and school_key:
+            expected["source_program_key"] = school_key
         actual_row = package[game_id]
         actual = {
             "source_program_key": actual_row.get("source_program_key", "").strip(),
@@ -865,6 +876,7 @@ def compare_parent_semantics(
             ),
             "city": actual_row.get("city", "").strip(),
             "state": actual_row.get("state", "").strip(),
+            "country": actual_row.get("country", "").strip(),
             "curated_game_type": actual_row.get(
                 "curated_game_type", ""
             ).strip(),
@@ -1214,6 +1226,7 @@ def closeout(
         parent_rows,
         package_rows,
         venue_rows,
+        school_key=school_key,
     )
     parent_sanity[
         "semantic_comparison_unexpected_mismatches"
