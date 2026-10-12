@@ -42,6 +42,24 @@ def _season_decade(season_label: str) -> str:
     return f"{start_year // 10 * 10}s"
 
 
+def has_supported_foreign_locality(row: dict[str, str]) -> bool:
+    """Accept a foreign city without province only with explicit country authority.
+
+    Never invent a U.S. state/province or replace the state field with a country.
+    """
+    city = (row.get("city", "") or "").strip()
+    state = (row.get("state", "") or "").strip()
+    country = (row.get("country", "") or "").strip()
+    domestic = {
+        "us", "usa", "u.s.", "u.s.a.", "united states",
+        "united states of america",
+    }
+    return bool(
+        city and not state and country
+        and country.casefold() not in domestic
+    )
+
+
 def _row_gap_categories(row: dict[str, str]) -> list[str]:
     site = row.get("curated_site_type", "").strip().upper()
     game_type = row.get("curated_game_type", "").strip().upper()
@@ -49,7 +67,7 @@ def _row_gap_categories(row: dict[str, str]) -> list[str]:
     venue = row.get("curated_venue_name", "").strip()
     city = row.get("city", "").strip()
     state = row.get("state", "").strip()
-    location_missing = not city or not state
+    location_missing = (not city or not state) and not has_supported_foreign_locality(row)
 
     categories: list[str] = []
 

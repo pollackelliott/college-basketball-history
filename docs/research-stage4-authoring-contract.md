@@ -62,6 +62,23 @@ The table must be package-ready and must preserve the accepted physical venue id
 
 Do not infer missing facility chronology in Stage 4 from first/last game dates merely to fill this table.
 
+Stage 4 mechanically preserves source-accepted `curated_venue_city`,
+`curated_venue_state`, and `curated_venue_country` from the game ledger.
+`source-games.csv` may carry the optional `country` column. For a venue
+outside the United States whose accepted locality has a city and country
+but genuinely no state/province, the country's value must remain a separate
+country, **not** be invented as a U.S. state or substituted into `state`.
+Research acceptance may recognize city-only venue/locality when the matching
+game explicitly preserves a non-US country. A venue's narrative note alone
+cannot waive the pair-validation rule. U.S. NCAA sites retain their strict
+physical venue + city/state requirement.
+
+Game-level HOME classification never creates its own authoring-table
+HOME relationship: a supported one-game alternate HOME venue must be
+durably represented as an explicit exact-date relationship or accepted
+per-game HOME assignment in `stage4-authoring/venues.csv` before Stage 4
+closeout. The generic chronological check remains mandatory.
+
 ### Conferences
 
 Conference chronology used by the Research package must be durable no later than Stage 3B closeout as stage4-authoring/conferences.csv.

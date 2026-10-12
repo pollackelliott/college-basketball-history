@@ -108,6 +108,7 @@ SOURCE_GAME_FIELDS = [
     "curated_venue_name",
     "city",
     "state",
+    "country",
     "event_or_tournament",
     "source_round",
     "curated_game_type",
@@ -228,11 +229,14 @@ def _research_accounting(
                 )
         season = _first(row, "season_label")
         city = _first(row, "stage3a_final_city", "accepted_city",
-                      "curated_city", "city", "venue_city")
+                      "curated_venue_city", "curated_city", "city", "venue_city")
         state = _first(row, "stage3a_final_state", "accepted_state",
-                       "curated_state", "state", "venue_state")
+                       "curated_venue_state", "curated_state", "state", "venue_state")
         if season[:4].isdigit() and int(season[:4]) <= 1995 and city and state:
-            basis = _first(row, "stage3a3_historical_evidence_basis")
+            basis = _first(
+                row, "stage3a3_historical_evidence_basis",
+                "venue_research_basis", "site_research_basis",
+            )
             if basis:
                 return "RESEARCHED_PARTIAL", (
                     f"Accepted Stage 3A-3 historical neutral location {city}, {state}: "
@@ -368,6 +372,8 @@ def _projection(
     ledger: list[dict[str, str]],
     opponents: list[dict[str, str]],
     venues: list[dict[str, str]],
+    *,
+    school_key: str = "",
 ) -> tuple[list[dict[str, str]], list[dict[str, Any]]]:
     names: dict[str, set[str]] = defaultdict(set)
     for row in opponents:
@@ -450,7 +456,7 @@ def _projection(
         projected.append(
             {
                 "source_game_id": game_id,
-                "source_program_key": _first(row, "source_program_key"),
+                "source_program_key": _first(row, "source_program_key") or school_key,
                 "source_era": _first(row, "source_era", "season_source"),
                 "season_label": project_season_label(
                     _first(row, "season_label")
@@ -501,6 +507,7 @@ def _projection(
                     row,
                     "stage3b_venue_city",
                     "stage3b_site_city",
+                    "curated_venue_city",
                     "stage3a_final_venue_city",
                     "stage3a_final_city",
                     "accepted_city",
@@ -517,6 +524,7 @@ def _projection(
                     row,
                     "stage3b_venue_state",
                     "stage3b_site_state",
+                    "curated_venue_state",
                     "stage3a_final_venue_state",
                     "stage3a_final_state",
                     "accepted_state",
@@ -529,6 +537,9 @@ def _projection(
                 )
                 or accepted_venue.get("state", "").strip()
                 or (literal_opponent_home[2] if literal_opponent_home else ""),
+                "country": _first(
+                    row, "curated_venue_country", "country", "venue_country"
+                ),
                 "event_or_tournament": _first(
                     row, "event_or_tournament", "stage3a3_event_name"
                 ),
@@ -764,7 +775,7 @@ def inspect_checkpoint(
         opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
         venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         conf_fields, conferences = _csv_bytes(archive.read(members["conferences.csv"]))
-        games, projection_defects = _projection(ledger, opponents, venues)
+        games, projection_defects = _projection(ledger, opponents, venues, school_key=school_key)
 
         result["defects"].extend(
             _table_defects(
@@ -879,7 +890,7 @@ def author(
         }
         _, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
         _, venues = _csv_bytes(archive.read(members["venues.csv"]))
-        games, defects = _projection(ledger, opponents, venues)
+        games, defects = _projection(ledger, opponents, venues, school_key=school_key)
         if defects:
             raise ValueError(
                 "Stage 4 source-game projection defects: "
