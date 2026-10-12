@@ -423,6 +423,35 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         self.assertTrue(plan["blockers"])
         self.assertIn("NCAA site evidence", plan["blockers"][0])
 
+    def test_unaffected_evidence_files_are_not_rewritten(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+        assertions = repo / "data/evidence/game-assertions.csv"
+        assertions.write_bytes(b"")
+        ncaa = repo / "data/evidence/ncaa-tournament-sites.csv"
+        original_ncaa = ncaa.read_bytes()
+        plan = transaction.build_plan(repo, spec)
+        transaction.apply_transaction(
+            repo, spec, plan["plan_sha256"], run_validation=False
+        )
+        self.assertEqual(assertions.read_bytes(), b"")
+        self.assertNotEqual(ncaa.read_bytes(), original_ncaa)
+
+    def test_unaffected_ncaa_evidence_preserves_original_bytes(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+        ncaa = repo / "data/evidence/ncaa-tournament-sites.csv"
+        ncaa.write_text(ncaa.read_text().replace(
+            ",VEN-000002,duplicate,", ",VEN-000001,survivor,"
+        ))
+        before = ncaa.read_bytes()
+        plan = transaction.build_plan(repo, spec)
+        self.assertEqual(plan["merges"][0]["ncaa_evidence_rows"], 0)
+        transaction.apply_transaction(
+            repo, spec, plan["plan_sha256"], run_validation=False
+        )
+        self.assertEqual(ncaa.read_bytes(), before)
+
     def test_expected_count_mismatch_blocks_plan(self):
         temporary, repo, spec = self.make_repo()
         self.addCleanup(temporary.cleanup)
