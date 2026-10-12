@@ -162,6 +162,31 @@ class VenueIdentityTransactionTests(unittest.TestCase):
             ],
         )
         write_csv(
+            repo / "data/evidence/ncaa-tournament-sites.csv",
+            [
+                "canonical_game_id", "venue_id", "venue_key",
+                "site_city", "site_state", "source_authority",
+                "source_index_url", "source_document_title",
+                "source_document_url", "source_locator", "source_scope",
+                "resolution_basis", "notes",
+            ],
+            [{
+                "canonical_game_id": "G1",
+                "venue_id": "VEN-000002",
+                "venue_key": "duplicate",
+                "site_city": "Test City",
+                "site_state": "TX",
+                "source_authority": "NCAA",
+                "source_index_url": "https://example.org/index",
+                "source_document_title": "Test record",
+                "source_document_url": "https://example.org/record",
+                "source_locator": "page 1",
+                "source_scope": "NCAA sites",
+                "resolution_basis": "accepted NCAA evidence",
+                "notes": "retain literal provenance",
+            }],
+        )
+        write_csv(
             repo / "schools/test/venues.csv",
             [
                 "source_program_key",
@@ -216,6 +241,8 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(plan["merges"][0]["canonical_rows"], 1)
         self.assertEqual(plan["merges"][0]["school_rows"], 1)
         self.assertEqual(plan["merges"][0]["provenance_markers"], 1)
+        self.assertEqual(plan["merges"][0]["ncaa_evidence_rows"], 1)
+        self.assertIn("data/evidence/ncaa-tournament-sites.csv", plan["fingerprints"])
 
         result = transaction.apply_transaction(
             repo,
@@ -227,6 +254,7 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(result["canonical_rows_updated"], 1)
         self.assertEqual(result["provenance_markers_updated"], 1)
         self.assertEqual(result["school_rows_updated"], 1)
+        self.assertEqual(result["ncaa_evidence_rows_updated"], 1)
         self.assertEqual(result["site_files_refreshed"], 0)
 
         venues = read_rows(repo / "data/reference/venues.csv")
@@ -238,6 +266,11 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         self.assertEqual(canonical[0]["venue_key"], "survivor")
         self.assertIn(";venue_key=survivor;", canonical[0]["notes"])
         self.assertNotIn(";venue_key=duplicate;", canonical[0]["notes"])
+
+        ncaa = read_rows(repo / "data/evidence/ncaa-tournament-sites.csv")[0]
+        self.assertEqual((ncaa["venue_id"], ncaa["venue_key"]), ("VEN-000001", "survivor"))
+        self.assertEqual(ncaa["source_document_url"], "https://example.org/record")
+        self.assertEqual(ncaa["notes"], "retain literal provenance")
 
         school = read_rows(repo / "schools/test/venues.csv")
         self.assertEqual(school[0]["venue_id"], "VEN-000001")
@@ -295,6 +328,7 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         generated.write_text('{"state":"before"}\n', encoding="utf-8")
 
         plan = transaction.build_plan(repo, spec)
+        original_ncaa = (repo / "data/evidence/ncaa-tournament-sites.csv").read_bytes()
 
         def fail_refresh(repo_arg):
             target = repo_arg / "site/data/teams/test.json"
@@ -325,6 +359,10 @@ class VenueIdentityTransactionTests(unittest.TestCase):
             '{"state":"before"}\n',
         )
         self.assertFalse((repo / "site/data/teams/new.json").exists())
+        self.assertEqual(
+            (repo / "data/evidence/ncaa-tournament-sites.csv").read_bytes(),
+            original_ncaa,
+        )
 
     def test_site_refresh_is_counted_inside_transaction(self):
         temporary, repo, spec = self.make_repo()
@@ -358,6 +396,32 @@ class VenueIdentityTransactionTests(unittest.TestCase):
             generated.read_text(encoding="utf-8"),
             '{"state":"after"}\n',
         )
+
+    def test_plan_fingerprint_changes_on_ncaa_evidence_edit(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+        before = transaction.build_plan(repo, spec)
+        path = repo / "data/evidence/ncaa-tournament-sites.csv"
+        path.write_text(path.read_text().replace(
+            "retain literal provenance", "changed source note"
+        ))
+        after = transaction.build_plan(repo, spec)
+        self.assertNotEqual(before["plan_sha256"], after["plan_sha256"])
+        with self.assertRaises(transaction.TransactionError):
+            transaction.apply_transaction(
+                repo, spec, before["plan_sha256"], run_validation=False
+            )
+
+    def test_conflicting_ncaa_evidence_identity_blocks_plan(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+        path = repo / "data/evidence/ncaa-tournament-sites.csv"
+        path.write_text(path.read_text().replace(
+            ",VEN-000002,duplicate,", ",VEN-000002,other-identity,"
+        ))
+        plan = transaction.build_plan(repo, spec)
+        self.assertTrue(plan["blockers"])
+        self.assertIn("NCAA site evidence", plan["blockers"][0])
 
     def test_expected_count_mismatch_blocks_plan(self):
         temporary, repo, spec = self.make_repo()
