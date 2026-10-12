@@ -8147,7 +8147,7 @@
       "state": "PA",
       "primary_hex": "#00205B",
       "secondary_hex": "#13B5EA",
-      "history_start_season": null,
+      "history_start_season": "1920-1921",
       "conference_regular_season_championships": 14,
       "conference_tournament_championships": 8,
       "ncaa_tournament_appearances": 42,
@@ -8156,7 +8156,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 2018,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
