@@ -1062,6 +1062,39 @@ def _accomplishment_crosscheck_game(
     return candidate
 
 
+
+def _project_accomplishment_games_with_existing_seasons(
+    program: dict[str, str],
+    target_games: list[dict[str, str]],
+    canonical_games: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    """Project NCAA appearance seasons that will survive target ingestion.
+
+    The target's frozen source projections remain primary within each season.
+    Previously accepted canonical NCAA games supply only appearance seasons
+    wholly absent from the target projection. The final ingestion keeps those
+    existing seasons, so a source-only tally can undercount and prematurely
+    suppress historical NCAA-round reviews.
+
+    This method neither infers rounds nor reclassifies generic POSTSEASON games.
+    """
+    school_key = program["program_key"]
+    target_ncaa_seasons = {
+        str(game.get("season_label", "")).strip()
+        for game in target_games
+        if game.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+    }
+    supplemental = [
+        game for game in canonical_games
+        if game.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+        and school_key in {
+            game.get("team_a_key", "").strip(),
+            game.get("team_b_key", "").strip(),
+        }
+        and game.get("season_label", "").strip() not in target_ncaa_seasons
+    ]
+    return [*target_games, *supplemental]
+
 def _accomplishment_conflicts(
     program: dict[str, str],
     reference: dict[str, str],
@@ -2216,10 +2249,17 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         # only become deeper through still-blank projected NCAA rounds, expose
         # those historical round facts at Gate 1 rather than blocking before the
         # owner can review them.
+        projected_accomplishment_games = (
+            _project_accomplishment_games_with_existing_seasons(
+                program,
+                accomplishment_crosscheck_games,
+                canonical,
+            )
+        )
         derived, accomplishment_conflicts = _accomplishment_conflicts(
             program,
             accomplishment,
-            accomplishment_crosscheck_games,
+            projected_accomplishment_games,
         )
         round_review_decisions: list[dict[str, Any]] = []
         classification_review_decisions: list[dict[str, Any]] = []
