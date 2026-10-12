@@ -46,6 +46,7 @@ from onboarding_plan import (
     approve_plan,
 )
 from site_completeness import (
+    has_supported_foreign_locality,
     source_home_chronology_report,
     source_site_completeness_report,
 )
@@ -428,6 +429,16 @@ def research_portfolio_report(
             if row.get("canonical_opponent_key", "").strip()
         }
 
+        # A foreign city-only venue must match an explicitly country-qualified
+        # game at the same physical venue; an arbitrary venue note is insufficient.
+        foreign_venue_city = {
+            (
+                _normalize_name(game.get("curated_venue_name", "")),
+                game.get("city", "").strip(),
+            )
+            for game in games
+            if has_supported_foreign_locality(game)
+        }
         venue_names: set[str] = set()
         for row in venues:
             owner = row.get("source_program_key", "").strip()
@@ -437,7 +448,13 @@ def research_portfolio_report(
                 )
             city = row.get("city", "").strip()
             state = row.get("state", "").strip()
-            if bool(city) != bool(state):
+            venue_labels = [row.get("canonical_name", "")]
+            venue_labels.extend(row.get("aliases", "").split(";"))
+            supported_foreign_venue = bool(city and not state) and any(
+                (_normalize_name(name), city) in foreign_venue_city
+                for name in venue_labels if name.strip()
+            )
+            if bool(city) != bool(state) and not supported_foreign_venue:
                 errors.append(
                     f"venue {row.get('venue_key', '[blank]')}: city/state must be both populated or both blank"
                 )
@@ -530,7 +547,7 @@ def research_portfolio_report(
 
             city = row.get("city", "").strip()
             state = row.get("state", "").strip()
-            if bool(city) != bool(state):
+            if bool(city) != bool(state) and not has_supported_foreign_locality(row):
                 errors.append(
                     f"{label}: normalized city/state must be both populated or both blank"
                 )
