@@ -6,7 +6,7 @@ Protected-main census baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This queue is mechanically derived from every census row with disposition `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`.
 
-There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 2, **61 rows representing 60 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item.
+There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 3, **58 rows representing 57 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item.
 
 The split is organizational, not historical authority. The owner may reassign any item. No result becomes authoritative merely because one side researched it; findings must be written back to the durable census/research ledger with authoritative evidence and, where needed, explicit owner adjudication.
 
@@ -74,16 +74,22 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000316` | `PERIODIZE` | Hershey Sports Arena → Hersheypark Arena. Hershey Community Archives documents the 1936 opening-era Sports Arena identity and describes Hershey Sports Arena as now called Hersheypark Arena; current Hershey Entertainment usage confirms the no-space `Hersheypark Arena` form. Existing `Hershey Arena` / `Hershey Park Arena` forms are aliases/variants. Exact rename boundary remains implementation-date verification. Sources: https://hersheyarchives.org/encyclopedia/hershey-arena/ ; https://hersheyarchives.org/encyclopedia/the-great-building-campaign/ ; https://www.hersheyentertainment.com/hersheypark-stadium/hersheypark-arena.php |
 | `VEN-000344` | `ALIAS_ONLY` | Carolina Coliseum remains the building identity; Frank McGuire Arena is the named playing area/competition space inside it. The University of South Carolina-affiliated South Carolina Encyclopedia states that Frank McGuire Arena in the Carolina Coliseum was named in his honor in 1977. Treat as competition-space alias, not a physical-building naming period. Source: https://www.scencyclopedia.org/sce/entries/mcguire-frank-joseph/ |
 
+## Completed assistant research — tranche 3
+
+| Venue | Result | Durable evidence / residual |
+|---|---|---|
+| `VEN-000346` | `ALIAS_ONLY` | South Carolina’s institutional history establishes same-building continuity but not a basketball-era rename sequence: the second-story Carolina Gymnasium was created/named in 1910 and served as the basketball home through 1927; the building was later named Longstreet Gymnasium in 1968 and converted/renamed Longstreet Theatre in 1977. Treat the later theater name as post-basketball building-use/location continuity, not a basketball-venue naming period. Sources: https://sc.edu/uofsc/posts/2023/11/remembering_the_days_hoops_venues_episode_74.php ; https://www.sc.edu/about/our_history/university_history/presidential_commission/commission_reports/final_report/appendices/appendix-11/recommended-for-removal/longstreet_theatre.php |
+| `VEN-000353` | `ALIAS_ONLY` | Harrah’s Cherokee Center – Asheville is the surrounding civic-center facility/complex; ExploreAsheville.com Arena is the specific arena inside it. City/HCCA sources explicitly describe the Center as home to ExploreAsheville.com Arena and Thomas Wolfe Auditorium, and the arena name continued when the complex changed from U.S. Cellular Center to Harrah’s Cherokee Center. These are concurrent complex-versus-interior-arena names, not successive arena names. Sources: https://www.harrahscherokeecenterasheville.com/about/ ; https://www.ashevillenc.gov/news/asheville-city-council-votes-to-accept-civic-center-naming-rights-proposal-from-harrahs-cherokee/ ; https://www.ashevillecvb.com/wp-content/uploads/02-BCTDA-Mtg-Minutes-05.29.19.pdf |
+| `VEN-000382` | `IDENTITY_RECONCILE` | Physical identity is resolved and the current shared row is wrong: Einar Nielsen Field House is the University of Utah arena in Salt Lake City, while George Albert Smith Fieldhouse is BYU’s distinct Provo building. University of Utah and BYU sources independently confirm the separate campuses/buildings, and BYU’s historical material explicitly distinguishes Nielsen Fieldhouse in Salt Lake City from the later Smith Fieldhouse in Provo. Move this case to Control Center shared-reference reconciliation; never convert Nielsen into a Smith Fieldhouse naming period. Sources: https://www.cap.utah.edu/einar-nielsen-fieldhouse/ ; https://utahutes.com/news/2007/11/13/moment_no_15_feb_22_1969 ; https://byucougars.com/winning-a-byu-tradition ; https://byucougars.com/news/2010/10/18/remember-when-the-marriott-center-opened |
+| `VEN-000388` | `ALIAS_ONLY` | Baoshan Sports Center is the overall sports-center complex; the basketball venue is the center’s basketball arena/gymnasium. Shanghai Sports Bureau material explicitly uses `宝山体育中心篮球馆` (“Baoshan Sports Center basketball gymnasium/arena”), establishing complex-versus-interior-space semantics rather than a rename. Keep Baoshan Sports Center as complex/location wording, not a formal arena naming period. Sources: https://tyj.sh.gov.cn/cmsres/0e/0ea14bd5a1054b85bf01c9279ef0197b/d043e202cd11e2af2b95c32532ff91a5.pdf ; https://tyj.sh.gov.cn/cmsres/40/406d230087c54e969b424c694137c7ff/066541862db9547e3d2641423e8e8181.pdf |
+| `VEN-000396` | remains `RESEARCH_HOLD` | Same-building continuity is established for the fieldhouse beside the former Public School/Jeppesen/Robertson Stadium. Repository institutional provenance and UH history support both Public School Fieldhouse and Jeppesen Fieldhouse/Gymnasium for that facility, but the bounded pass did not establish a safe exact formal transition. UH fixes the adjacent stadium’s Jeppesen rename to 1958, while UH basketball/history material uses Jeppesen Fieldhouse retrospectively for earlier years; the stadium boundary must not be borrowed for the fieldhouse. Stop here pending a stronger archival source. Sources: https://exhibits.lib.uh.edu/s/robertson/page/planning ; https://uhcougars.com/sports/2018/6/12/trads-hou-trads-robertson-html |
+
 ## Assistant source-heavy queue
 
 | Venue | Disposition | Research question |
 |---|---|---|
 | `VEN-000234` | `RESEARCH_HOLD` | Tranche 1 residual only: opening identity is supported as Centrum in Worcester; later sources use Worcester’s Centrum Centre; DCU naming-rights agreement was reached in October 2004. Resolve exact formal status/adoption boundary of Worcester’s Centrum Centre and exact DCU effective day without inventing dates. |
-| `VEN-000346` | `RESEARCH_HOLD` | Research Carolina Gymnasium / Longstreet Theater chronology and later reuse before deciding whether post-basketball naming belongs in the period model. |
-| `VEN-000353` | `RESEARCH_HOLD` | Distinguish Harrah’s Cherokee Center complex naming from ExploreAsheville.com Arena interior-arena naming before periodization. |
-| `VEN-000382` | `RESEARCH_HOLD` | Verify whether Nielsen Field House is the same physical building as George Albert Smith Field House / Smith Fieldhouse before any naming-period treatment. |
-| `VEN-000388` | `RESEARCH_HOLD` | Determine whether Baoshan Sports Center is the overall complex and Baoshan Arena the specific arena before treating as naming history. |
-| `VEN-000396` | `RESEARCH_HOLD` | Research Public School Fieldhouse → Jeppesen Fieldhouse/Gymnasium chronology; may represent a true formal rename. |
+| `VEN-000396` | `RESEARCH_HOLD` | Tranche 3 residual only: same-building continuity and both Public School / Jeppesen naming families are established, but exact formal adoption chronology for the fieldhouse is not. UH fixes the adjacent stadium’s Jeppesen rename to 1958 while retrospective fieldhouse material uses Jeppesen earlier. Do not borrow the stadium boundary; hold for a stronger archival source. |
 | `VEN-000439` | `RESEARCH_HOLD` | Determine physical/name relationship between Highland Park Gym and Highland Park Masonic Hall before periodization. |
 | `VEN-000453` | `PERIODIZE_RESEARCH` | Municipal Auditorium → Civic Center Music Hall, subject to same-building chronology verification. |
 | `VEN-000454` | `PERIODIZE_RESEARCH` | Research Tulsa Convention Center → Cox Business Center → Arvest Convention Center chronology and determine whether Cox Business Convention Center was a separate formal name or variant. |
@@ -108,10 +114,11 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000823` | `PERIODIZE_RESEARCH` | Research RPI Field House → Houston Field House chronology and verify formal rename boundary. |
 
 
-## Control Center mechanical/canonical verification
+## Control Center mechanical/canonical/identity verification
 
 | Venue | Disposition | Research question |
 |---|---|---|
+| `VEN-000382` | `IDENTITY_RECONCILE` | Historical research complete: Einar Nielsen Field House is University of Utah / Salt Lake City and George Albert Smith Fieldhouse is BYU / Provo. Later dedicated shared-reference reconciliation must remove Nielsen from VEN-000382 and assign it to a correct distinct global venue identity without disturbing Smith Fieldhouse. No shared registry mutation is authorized by this queue. |
 | `VEN-000324` | `CANONICAL_CORRECTION` | One physical Richmond venue; proper canonical name is Robins Center. Robbins Center is erroneous variant, not a naming period. |
 | `VEN-000371` | `CANONICAL_CORRECTION` | One Guerra Sports Complex identity; verify authoritative first name spelling, Eugenio vs Eugene, rather than creating naming periods. |
 | `VEN-000585` | `CANONICAL_CORRECTION` | State Fair Arena is the physical venue; State Farm Arena [BC source wording] is erroneous source wording, not a historical period. |
