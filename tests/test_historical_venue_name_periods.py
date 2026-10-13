@@ -19,20 +19,135 @@ PERIODS_PATH = ROOT / "site/data/venue-name-periods.json"
 EXPECTED = {
     "schema_version": 1,
     "venues": {
+        "VEN-000015": [
+            {
+                "venue_name": "Cowboys Stadium",
+                "valid_from": "2009-05-13",
+                "valid_to": "2013-07-24"
+            },
+            {
+                "venue_name": "AT&T Stadium",
+                "valid_from": "2013-07-25",
+                "valid_to": ""
+            }
+        ],
         "VEN-000052": [
-            {"venue_name": "CU Events/Conference Center", "valid_from": "1979-08-08", "valid_to": "1990-09-19"},
-            {"venue_name": "Coors Events Center", "valid_from": "1990-09-20", "valid_to": "2018-06-30"},
-            {"venue_name": "CU Events Center", "valid_from": "2018-07-01", "valid_to": ""},
+            {
+                "venue_name": "CU Events/Conference Center",
+                "valid_from": "1979-08-08",
+                "valid_to": "1990-09-19"
+            },
+            {
+                "venue_name": "Coors Events Center",
+                "valid_from": "1990-09-20",
+                "valid_to": "2018-06-30"
+            },
+            {
+                "venue_name": "CU Events Center",
+                "valid_from": "2018-07-01",
+                "valid_to": ""
+            }
         ],
         "VEN-000096": [
-            {"venue_name": "Carrier Dome", "valid_from": "1980-09-20", "valid_to": "2022-05-18"},
-            {"venue_name": "JMA Wireless Dome", "valid_from": "2022-05-19", "valid_to": ""},
+            {
+                "venue_name": "Carrier Dome",
+                "valid_from": "1980-09-20",
+                "valid_to": "2022-05-18"
+            },
+            {
+                "venue_name": "JMA Wireless Dome",
+                "valid_from": "2022-05-19",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000135": [
+            {
+                "venue_name": "Mandalay Bay Events Center",
+                "valid_from": "1999-04-10",
+                "valid_to": "2021-02-10"
+            },
+            {
+                "venue_name": "Michelob ULTRA Arena",
+                "valid_from": "2021-02-11",
+                "valid_to": ""
+            }
         ],
         "VEN-000196": [
-            {"venue_name": "Assembly Hall", "valid_from": "1963-03-02", "valid_to": "2013-04-28"},
-            {"venue_name": "State Farm Center", "valid_from": "2013-04-29", "valid_to": ""},
+            {
+                "venue_name": "Assembly Hall",
+                "valid_from": "1963-03-02",
+                "valid_to": "2013-04-28"
+            },
+            {
+                "venue_name": "State Farm Center",
+                "valid_from": "2013-04-29",
+                "valid_to": ""
+            }
         ],
-    },
+        "VEN-000228": [
+            {
+                "venue_name": "Wells Fargo Arena",
+                "valid_from": "2005-07-12",
+                "valid_to": "2025-06-30"
+            },
+            {
+                "venue_name": "Casey's Center",
+                "valid_from": "2025-07-01",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000686": [
+            {
+                "venue_name": "Special Events Arena",
+                "valid_from": "1994-10-21",
+                "valid_to": "1998-02-19"
+            },
+            {
+                "venue_name": "Stan Sheriff Center",
+                "valid_from": "1998-02-20",
+                "valid_to": "2020-11-11"
+            },
+            {
+                "venue_name": "SimpliFi Arena at Stan Sheriff Center",
+                "valid_from": "2020-11-12",
+                "valid_to": "2025-08-25"
+            },
+            {
+                "venue_name": "Bankoh Arena at Stan Sheriff Center",
+                "valid_from": "2025-08-26",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000698": [
+            {
+                "venue_name": "American Bank Center Arena",
+                "valid_from": "2004-05-20",
+                "valid_to": "2025-08-31"
+            },
+            {
+                "venue_name": "Hilliard Center Arena",
+                "valid_from": "2025-09-01",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000714": [
+            {
+                "venue_name": "Coliseum Arena",
+                "valid_from": "1922-04-04",
+                "valid_to": "2003-10-31"
+            },
+            {
+                "venue_name": "Ricoh Coliseum",
+                "valid_from": "2003-11-01",
+                "valid_to": "2018-07-10"
+            },
+            {
+                "venue_name": "Coca-Cola Coliseum",
+                "valid_from": "2018-07-11",
+                "valid_to": ""
+            }
+        ]
+    }
 }
 
 
@@ -45,10 +160,10 @@ class HistoricalVenueNamingTests(unittest.TestCase):
         with CSV_PATH.open(encoding="utf-8", newline="") as fp:
             rows = list(csv.DictReader(fp))
         official = [r for r in rows if r["name_type"] == "OFFICIAL_NAMING_PERIOD"]
-        self.assertEqual(len(official), 7)
+        self.assertEqual(len(official), 22)
         self.assertEqual(
             {r["venue_id"] for r in official},
-            {"VEN-000052", "VEN-000096", "VEN-000196"},
+            set(EXPECTED["venues"]),
         )
         self.assertTrue(all(r["source_basis"].startswith("https://") for r in official))
 
@@ -133,6 +248,22 @@ assert.equal(show("VEN-000052","1985-01-01"),"CU Events/Conference Center");
 assert.equal(show("VEN-000052","1995-01-01"),"Coors Events Center");
 assert.equal(show("VEN-000052","2020-01-01"),"CU Events Center");
 assert.equal(show("VEN-000052",null,""),"CU Events Center");
+
+assert.equal(show("VEN-000015","2010-01-01"),"Cowboys Stadium");
+assert.equal(show("VEN-000015","2013-07-25"),"AT&T Stadium");
+assert.equal(show("VEN-000135","2020-01-01"),"Mandalay Bay Events Center");
+assert.equal(show("VEN-000135","2021-02-11"),"Michelob ULTRA Arena");
+assert.equal(show("VEN-000228","2025-06-30"),"Wells Fargo Arena");
+assert.equal(show("VEN-000228","2025-07-01"),"Casey's Center");
+assert.equal(show("VEN-000686","1997-01-01"),"Special Events Arena");
+assert.equal(show("VEN-000686","1998-02-20"),"Stan Sheriff Center");
+assert.equal(show("VEN-000686","2020-11-12"),"SimpliFi Arena at Stan Sheriff Center");
+assert.equal(show("VEN-000686","2025-08-26"),"Bankoh Arena at Stan Sheriff Center");
+assert.equal(show("VEN-000698","2025-08-31"),"American Bank Center Arena");
+assert.equal(show("VEN-000698","2025-09-01"),"Hilliard Center Arena");
+assert.equal(show("VEN-000714","2000-01-01"),"Coliseum Arena");
+assert.equal(show("VEN-000714","2003-11-01"),"Ricoh Coliseum");
+assert.equal(show("VEN-000714","2018-07-11"),"Coca-Cola Coliseum");
 
 assert.equal(show("VEN-000186","2013-04-29"),"Project fallback");
 assert.equal(show("VEN-999999",null,""),"Project fallback");
