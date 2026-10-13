@@ -228,6 +228,8 @@ The following single-name venues now warrant later bounded chronology research:
 
 Do not periodize or mutate shared registries from this screen alone.
 
+Chronology follow-up is tracked separately in `docs/historical-venue-single-name-chronology.md`. Tranche 1 has researched VEN-000015, VEN-000089, VEN-000135, and VEN-000228; the remaining 10 screen-positive candidates are still pending there.
+
 ## Stopping rule
 
 **Satisfied.** High-yield candidate discovery has converged. The screen is closed at 14 positive candidates. Research only that positive candidate population in later bounded source-authority tranches; do not descend into individual negative-proof research for the 445 low-signal venues.
