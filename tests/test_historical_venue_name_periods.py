@@ -90,6 +90,8 @@ class HistoricalVenueNamingTests(unittest.TestCase):
     def test_frontend_uses_identity_dates_and_current_name_fallback(self):
         self.assertIn("game.venue_id, game.game_date, game.date_precision", INDEX)
         self.assertIn("periods[periods.length - 1].venue_name", INDEX)
+        self.assertIn("venueCanonical: game.venue_name || humanizeKey(game.venue_key)", INDEX)
+        self.assertIn("venueCanonical: game.venueCanonical", INDEX)
         self.assertIn("venueOptionMatchesGame(state.venueQuery", INDEX)
         self.assertIn("(game) => game.venueId || game.venueKey", INDEX)
         if not shutil.which("node"):
@@ -109,7 +111,8 @@ class HistoricalVenueNamingTests(unittest.TestCase):
             section("bucket", "miniPanel"),
             r"""
 const old = {venueId:"VEN-000196",venueKey:"state-farm-center",
-             venue:"Assembly Hall",location:"Champaign, IL",winner:"illinois"};
+             venue:"Assembly Hall",venueCanonical:"Assembly Hall",
+             location:"Champaign, IL",winner:"illinois"};
 const modern = {...old, venue:"State Farm Center",winner:"opponent"};
 const different = {venueId:"VEN-000186",venueKey:"simon-skjodt-assembly-hall",
                    venue:"Assembly Hall",location:"Bloomington, IN",winner:"illinois"};
@@ -142,7 +145,20 @@ const summaries = bucket([old,modern],"illinois","opponent",aggregateVenueLabel,
   game => game.venueId || game.venueKey);
 assert.equal(summaries.length,1);
 assert.equal(summaries[0].games,2);
-assert.equal(summaries[0].label,"Assembly Hall / State Farm Center");
+assert.equal(summaries[0].label,"State Farm Center");
+
+const syracuse = {venueId:"VEN-000096",venueKey:"jma-wireless-dome",
+                  venue:"Carrier Dome",venueCanonical:"Carrier Dome",
+                  location:"Syracuse, NY",winner:"syracuse"};
+assert.equal(aggregateVenueLabel(syracuse),"JMA Wireless Dome");
+
+DB.venueNamePeriods["VEN-CLOSED"] = [
+  {venue_name:"Old Closed Name",valid_from:"1980-01-01",valid_to:"1990-12-31"},
+  {venue_name:"Last Closed Name",valid_from:"1991-01-01",valid_to:"2000-12-31"},
+];
+const closed = {venueId:"VEN-CLOSED",venue:"Old Closed Name",
+                venueCanonical:"Canonical Closed Venue",location:"Somewhere"};
+assert.equal(aggregateVenueLabel(closed),"Canonical Closed Venue");
 """,
         ]
         result = subprocess.run(
