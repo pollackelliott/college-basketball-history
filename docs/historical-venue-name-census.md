@@ -204,7 +204,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000259` | `PERIODIZE` | Capital Centre → USAir Arena. |
 | `VEN-000267` | `ALIAS_ONLY` | One continuous Baha Mar Convention Center identity; Baha Mar Convention, Arts & Entertainment Center is expanded/formal wording rather than a separate era. |
 | `VEN-000270` | `ALIAS_ONLY` | One continuous John M. Parker Agricultural Coliseum identity; Cow Palace is a nickname/source alias. |
-| `VEN-000271` | `RESEARCH_HOLD` | Determine whether The Arena at Northwest Florida State College → Raider Arena was a true formal rename or alternate branding. |
+| `VEN-000271` | `ALIAS_ONLY` | One continuous Raider Arena identity. Northwest Florida State College's facilities master plan identifies the completed 2011 Building 200 project as Community Services Complex and Raider Arena; current institutional usage remains Raider Arena. `The Arena` / `The Arena at Northwest Florida State College` are descriptive/source variants, not historical formal-name periods. |
 | `VEN-000272` | `ALIAS_ONLY` | One continuous Conte Forum identity; Silvio O. Conte Forum is the full formal name. |
 | `VEN-000274` | `ALIAS_ONLY` | One continuous Atlanta Municipal Auditorium identity; Municipal Auditorium / City Auditorium are source shorthand. |
 | `VEN-000275` | `ALIAS_ONLY` | One continuous Athens YMCA identity; Old Athens YMCA is descriptive alias. |
@@ -212,19 +212,19 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000277` | `ALIAS_ONLY` | One continuous The Octagon identity; Octagon is shorthand. |
 | `VEN-000280` | `PERIODIZE` | Carolina First Arena → TD Arena. |
 | `VEN-000292` | `ALIAS_ONLY` | One continuous Armory identity; The Armory is alias. |
-| `VEN-000296` | `RESEARCH_HOLD` | Determine whether Kansas Coliseum is the overall complex and Britt Brown Arena the basketball arena inside it rather than a historical rename. |
+| `VEN-000296` | `ALIAS_ONLY` | Britt Brown Arena is the physical arena. Wichita State and Sedgwick County describe the Kansas Coliseum as the larger complex containing Britt Brown Arena plus multiple pavilions/RV facilities. `Kansas Coliseum` is complex/location wording, not a historical rename of the arena. |
 | `VEN-000301` | `ALIAS_ONLY` | One continuous Allen County War Memorial Coliseum identity; War Memorial Coliseum / FW Memorial Coliseum are shorthand. |
 | `VEN-000302` | `PERIODIZE` | Alumni Memorial Fieldhouse → Hagan Arena. |
 | `VEN-000303` | `ALIAS_ONLY` | One continuous Bryce Jordan Center identity; BJC / Bryce Center are aliases. |
 | `VEN-000305` | `ALIAS_ONLY` | One continuous Keaney Gymnasium identity; Keaney Gym is shorthand. |
 | `VEN-000306` | `ALIAS_ONLY` | One continuous Matthew Knight Arena identity; Matt Knight Arena / MKA are aliases. |
 | `VEN-000307` | `ALIAS_ONLY` | One continuous Penn State Armory identity; The Armory is shorthand. |
-| `VEN-000308` | `RESEARCH_HOLD` | Determine whether Recreation Building → Recreation Hall / Rec Hall represents a true formal rename or interchangeable wording. |
+| `VEN-000308` | `PERIODIZE` | Recreation Hall → Recreation Building. Penn State's University Libraries campus-history collection states that the building was originally named Recreation Hall and was renamed Recreation Building in 1957; `Rec Hall` is the common nickname. Exact 1957 effective day remains implementation-date verification. |
 | `VEN-000309` | `ALIAS_ONLY` | One continuous The Hazell Center identity; Hazell Center is article-only variant. |
 | `VEN-000310` | `ALIAS_ONLY` | One continuous Grant Memorial Hall identity; Grant Hall is shorthand. |
 | `VEN-000311` | `ALIAS_ONLY` | One continuous State Fairgrounds Coliseum identity; Nebraska State Fairgrounds Coliseum is institution/location-qualified form. |
 | `VEN-000312` | `ALIAS_ONLY` | One continuous Nebraska Coliseum identity; NU Coliseum is shorthand. |
-| `VEN-000316` | `RESEARCH_HOLD` | Research full Hershey Park Arena / Hershey Arena naming chronology before periodization; current registry may omit a genuine earlier formal arena name. |
+| `VEN-000316` | `PERIODIZE` | Hershey Sports Arena → Hersheypark Arena. Hershey Community Archives confirms the 1936 opening-era Hershey Sports Arena identity and that the building is now called Hersheypark Arena; current operator usage confirms the no-space `Hersheypark Arena` form. Existing `Hershey Arena` / `Hershey Park Arena` forms are aliases/variants. Exact rename boundary remains implementation-date verification. |
 | `VEN-000318` | `ALIAS_ONLY` | One continuous Loyola Field House identity; Loyola University Fieldhouse is expanded institutional wording/spelling variant. |
 | `VEN-000324` | `CANONICAL_CORRECTION` | One physical Richmond venue; proper canonical name is Robins Center. Robbins Center is erroneous variant, not a naming period. |
 | `VEN-000325` | `PERIODIZE` | Special Events Center → Don Haskins Center; Haskins Center is shorthand of second era. |
@@ -236,7 +236,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000339` | `PERIODIZE` | UIC Pavilion → Credit Union 1 Arena. |
 | `VEN-000342` | `ALIAS_ONLY` | One continuous R.O.T.C. Armory identity; ROTC Armory is punctuation-only variant. |
 | `VEN-000343` | `ALIAS_ONLY` | One continuous Mississippi Coliseum identity; The Big House is nickname. |
-| `VEN-000344` | `RESEARCH_HOLD` | Determine whether Frank McGuire Arena is a competition-space/court name or erroneous cross-venue alias rather than a Carolina Coliseum rename. |
+| `VEN-000344` | `ALIAS_ONLY` | One continuous Carolina Coliseum building identity. University of South Carolina-affiliated historical evidence states that the playing area inside the Coliseum was named Frank McGuire Arena in 1977. Treat `Frank McGuire Arena` as a competition-space alias, not a building rename period. |
 | `VEN-000346` | `RESEARCH_HOLD` | Research Carolina Gymnasium / Longstreet Theater chronology and later reuse before deciding whether post-basketball naming belongs in the period model. |
 | `VEN-000347` | `ALIAS_ONLY` | One continuous Coliseo Rubén Rodríguez identity; Ruben Rodriguez Coliseum is English/transliteration variant. |
 | `VEN-000348` | `ALIAS_ONLY` | One continuous Colonial Hall identity; Colonial Hall at The Greenbrier is resort-qualified form. |
