@@ -1070,7 +1070,8 @@ function venueOptionsForGames(games) {
     const item = venueFilterValue(game);
     const periodNames = (DB.venueNamePeriods[game.venueId] || []).map((p) => p.venue_name);
     // Both period names filter to the SAME physical venue ID.
-    const labels = new Set([game.venue, ...periodNames]);
+    const venueLabel = game.venue && game.venue !== "—" ? game.venue : "Unknown / unresolved venue";
+    const labels = new Set([venueLabel, ...periodNames]);
     for (const label of labels) {
       if (!label) continue;
       const displayed = `${label}${game.location ? ` — ${game.location}` : ""}`;
