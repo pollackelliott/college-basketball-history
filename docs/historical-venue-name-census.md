@@ -99,7 +99,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000176` | `RESEARCH_HOLD` | Research Cincinnati formal sequence and determine status of The Crown before owner ruling. |
 | `VEN-000179` | `PERIODIZE` | Gund Arena → Quicken Loans Arena → Rocket Mortgage FieldHouse → Rocket Arena. |
 | `VEN-000183` | `PERIODIZE` | San Jose Arena → Compaq Center at San Jose → HP Pavilion → SAP Center. |
-| `VEN-000185` | `PERIODIZE_RESEARCH` | Alltel Arena → Verizon Arena → Simmons Bank Arena; current registry omits Verizon era, so verify full chronology. |
+| `VEN-000185` | `PERIODIZE` | Research tranche 1 resolved formal sequence Alltel Arena → Verizon Arena → Simmons Bank Arena. Alltel opened in October 1999; Verizon naming began 2009-07-01; Simmons Bank naming began 2019-10-03. Exact first-period valid_from still requires implementation-date verification against the operational opening record. |
 | `VEN-000186` | `PERIODIZE` | Assembly Hall → Simon Skjodt Assembly Hall. |
 | `VEN-000187` | `PERIODIZE` | The Pavilion at Ole Miss → Sandy and John Black Pavilion at Ole Miss; SJB Pavilion / The Pavilion aliases. |
 | `VEN-000188` | `PERIODIZE` | New Orleans Arena → Smoothie King Center. |
@@ -171,14 +171,14 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000126` | `ALIAS_ONLY` | One continuous McArthur Court identity; Mac Court is nickname/shorthand. |
 | `VEN-000129` | `ALIAS_ONLY` | One continuous Memorial Coliseum (Lexington) identity; location-qualified variants only. |
 | `VEN-000143` | `ALIAS_ONLY` | One continuous Municipal Auditorium (Kansas City) identity; city-qualified variants only. |
-| `VEN-000146` | `PERIODIZE_RESEARCH` | Myriad Convention Center → Cox Center; verify the exact formal second-era name/boundary before implementation. The Myriad / Myriad Center are aliases of the first era. |
+| `VEN-000146` | `PERIODIZE` | Research tranche 1 resolved formal history as Myriad Convention Center (expanded official title Allen M. Street Myriad Convention Center) → Cox Business Services Convention Center → Prairie Surf Studios. Oklahoma City council approved the Cox naming agreement on 2002-02-05; Prairie Surf took over 2021-01-01. Exact naming-period boundary semantics remain implementation-date verification, not a conceptual ambiguity. |
 | `VEN-000151` | `ALIAS_ONLY` | One continuous New Gymnasium identity; The New Gym is shorthand. |
 | `VEN-000153` | `RESEARCH_HOLD` | Research full Oakland Coliseum Arena naming chronology before periodization; current registry omits major formal eras such as Oracle Arena. |
 | `VEN-000155` | `ALIAS_ONLY` | One continuous Old Gym identity; Vanderbilt Old Gym is location/institution-qualified form. |
 | `VEN-000157` | `ALIAS_ONLY` | One continuous Omni Coliseum identity; The Omni / Omni are shorthand. |
 | `VEN-000158` | `PERIODIZE` | Orlando Arena → TD Waterhouse Centre → Amway Arena. |
 | `VEN-000159` | `ALIAS_ONLY` | One continuous Palestra identity; The Palestra is article-prefixed variant. |
-| `VEN-000160` | `RESEARCH_HOLD` | Resolve Patton Gymnasium vs Patten Gymnasium as a canonical spelling/history issue; do not create separate periods unless authoritative evidence establishes them. |
+| `VEN-000160` | `CANONICAL_CORRECTION` | Research tranche 1 resolved the correct spelling as Patten Gymnasium. VEN-000160 is the original 1909 Patten Gymnasium that hosted the 1939 NCAA championship and was razed in 1940; Northwestern then built a distinct replacement Patten Gymnasium. `Patton Gymnasium` is erroneous and the two physical buildings must not be merged. |
 | `VEN-000163` | `PERIODIZE` | LSU Assembly Center → Pete Maravich Assembly Center; Maravich Assembly Center / Assembly Center are aliases. |
 | `VEN-000170` | `ALIAS_ONLY` | One continuous Prudential Center identity; Newark, NJ / Prudential Center is location-decorated source text. |
 | `VEN-000177` | `ALIAS_ONLY` | One continuous Roberts Municipal Stadium identity; Roberts Stadium is shorthand. |
@@ -193,14 +193,14 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000227` | `PERIODIZE` | Jacksonville Veterans Memorial Arena → VyStar Veterans Memorial Arena; Memorial Arena / Veterans Memorial Arena are shorthand unless later evidence proves otherwise. |
 | `VEN-000229` | `PERIODIZE` | McGaw Memorial Hall → Welsh-Ryan Arena; McGaw Hall / Northwestern McGaw Hall are aliases. |
 | `VEN-000232` | `ALIAS_ONLY` | One continuous Wisconsin Field House identity; UW Field House is shorthand. |
-| `VEN-000234` | `RESEARCH_HOLD` | Research Worcester Centrum / DCU Center full chronology before periodization; registry may omit or collapse formal intermediate wording. |
+| `VEN-000234` | `RESEARCH_HOLD` | Research tranche 1 bounded residual: opening identity is supported as Centrum in Worcester, later sources use Worcester’s Centrum Centre, and the DCU naming-rights agreement was reached in October 2004. Available evidence conflicts on the exact adoption boundary/formal status of Worcester’s Centrum Centre, and the exact DCU effective day remains insufficiently established. Preserve hold; do not invent dates. |
 | `VEN-000235` | `PERIODIZE` | WVU Coliseum → Hope Coliseum. Owner explicitly rules these as two distinct periods. |
 | `VEN-000238` | `PERIODIZE` | USF Sun Dome → Yuengling Center; Sun Dome is alias/short form of first era. |
 | `VEN-000240` | `ALIAS_ONLY` | One continuous C.M. “Tad” Smith Coliseum identity; Tad Smith Coliseum is shortened form. |
 | `VEN-000241` | `PERIODIZE` | Civic Arena → Mellon Arena; Pittsburgh Civic Arena is location-qualified first-era alias. |
 | `VEN-000248` | `PERIODIZE` | Jefferson County Armory → Louisville Convention Center → Louisville Gardens, subject to exact continuity/boundary verification; The Armory is alias. |
 | `VEN-000249` | `PERIODIZE` | Alexander Memorial Coliseum → McCamish Pavilion. |
-| `VEN-000250` | `RESEARCH_HOLD` | Determine whether New Gym was contemporary shorthand or a genuine formal predecessor of McCarthy Gymnasium before periodization. |
+| `VEN-000250` | `PERIODIZE` | Research tranche 1 resolved formal history as Mississippi State Gymnasium → McCarthy Gymnasium. `New Gym` is contemporary shorthand for Mississippi State Gymnasium, not a separate formal period. Basketball opened there 1950-12-15; the building was renamed for Babe McCarthy after his 1975 death, but the exact 1975 rename date remains implementation-date verification. |
 | `VEN-000259` | `PERIODIZE` | Capital Centre → USAir Arena. |
 | `VEN-000267` | `ALIAS_ONLY` | One continuous Baha Mar Convention Center identity; Baha Mar Convention, Arts & Entertainment Center is expanded/formal wording rather than a separate era. |
 | `VEN-000270` | `ALIAS_ONLY` | One continuous John M. Parker Agricultural Coliseum identity; Cow Palace is a nickname/source alias. |
