@@ -1,6 +1,6 @@
 # Historical venue single-name high-yield screen
 
-Status: **IN PROGRESS — LIGHT SCREEN ONLY**  
+Status: **COMPLETE — LIGHT HIGH-YIELD SCREEN CONVERGED**  
 Source census: `docs/historical-venue-name-census.md`  
 Protected-main screen baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
@@ -160,6 +160,53 @@ The screen question remains binary: did the same building obviously operate unde
 
 The zero-positive result in this tranche is a material convergence signal. It does not prove the remaining population has no omitted renames, but it argues against broadening into generic eponym/short-name searching. The five remaining members of this exact commercial-brand tier may be checked as one later bounded slice; after that, continuation of the overall screen should require a demonstrably higher-yield mechanical signal rather than individual negative-proof research.
 
+
+## Tranche 5 — expanded exact commercial-brand tier, slice B / convergence closeout
+
+This tranche exhausts the final five members of the 13-venue expanded exact commercial-brand tier. The same binary screen question applies: did the same building obviously operate under another formal name, or was the current name established before/at opening? No full chronology research or exact date-boundary verification was performed.
+
+| Venue | Baseline single name | Screen result | Discovery basis / next step |
+|---|---|---|---|
+| `VEN-000231` | Wintrust Arena | `SCREEN_CLEAR_CURRENT_PASS` | DePaul announced the Wintrust Arena naming-rights agreement on 2016-11-16 while the new arena was still under construction for a fall 2017 opening. The sponsor name predates operation. Sources: https://depaulbluedemons.com/news/2016/11/16/Event_Center_at_McCormick_Square_to_be_named_Wintrust_Arena ; https://www.wintrustarena.com/about/history |
+| `VEN-000242` | Acrisure Arena | `SCREEN_CLEAR_CURRENT_PASS` | Acrisure/Oak View Group announced the arena naming-rights agreement on 2022-01-26; the arena opened on 2022-12-14. The current name predates operation. Sources: https://acrisurearena.com/tag/acrisure-arena/page/11/ ; https://www.acrisurearena.com/about |
+| `VEN-000260` | Target Center | `SCREEN_CLEAR_CURRENT_PASS` | Target Center states that it opened in October 1990 and that Target has been the naming-rights partner since opening. No predecessor operational name surfaced. Source: https://www.targetcenter.com/target-center_info/about-target-center |
+| `VEN-000304` | GIANT Center | `SCREEN_CLEAR_CURRENT_PASS` | GIANT Center states that Giant Food Stores has been title sponsor since 2000; the venue's first announced act was in 2002 and the Hershey Bears moved there in 2002. The sponsor name predates operation. Sources: https://www.hersheyentertainment.com/giant-center/info/ ; https://www.hersheyentertainment.com/giant-center/hershey-bears.php |
+| `VEN-000397` | Kaiser Permanente Arena | `SCREEN_CLEAR_CURRENT_PASS` | Santa Cruz Warriors institutional history identifies the September 2012 approval and construction of Kaiser Permanente Arena before the team's first home game there on 2012-12-23. No predecessor operational name surfaced. Sources: https://cdn.warriors.com/pdf/SCW_1516_MediaGuide.pdf ; https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/Documents/ViewDocument/Summary%20Sheet%20for%20-%20Amendments%20to%20extend%20the%20term%20of%20the%20Ground%20Lease%2C%20T.pdf?documentType=Agenda&isSection=false&itemId=33457&meetingId=2153&publishId=50150 |
+
+### Tranche 5 count
+
+- Screened: **5**
+- `SCREEN_POSITIVE`: **0**
+- `SCREEN_CLEAR_CURRENT_PASS`: **5**
+- Deep chronology research performed: **0**
+- Expanded exact commercial-brand tier remaining: **0**
+
+### Final light-screen count
+
+- Individually screened through high-yield tiers: **38 / 483**
+- `SCREEN_POSITIVE`: **14**
+- `SCREEN_CLEAR_CURRENT_PASS`: **24**
+- Low-signal venues not individually searched: **445**
+- Deep chronology research performed: **0**
+
+### Convergence decision
+
+The high-yield screen is **COMPLETE**.
+
+The screen intentionally does not require 483 individual historical searches. Its purpose was to discover obvious omitted formal naming histories efficiently.
+
+Observed yield by the risk-ranked phase:
+
+- Conservative explicit sponsor/brand tier: **3 positives / 8 screened**
+- Expanded exact commercial-brand tier: **0 positives / 13 screened**
+
+The broader tier therefore produced **zero additional candidates across all 13 venues**. Combined with the completed repository-internal cross-check (0 alternate-name hits across all 483 single-name IDs), this is sufficient convergence for the agreed light screen.
+
+The remaining **445 low-signal single-name venues are closed as unscreened-by-design for this program**, not asserted to have no historical renames. Do not perform individual negative-proof research on them absent a new material signal.
+
+Any later discovery of materially stronger evidence may create a bounded new candidate, but that does not reopen this completed screen wholesale.
+
+
 ## Current candidate queue
 
 The following single-name venues now warrant later bounded chronology research:
@@ -183,6 +230,4 @@ Do not periodize or mutate shared registries from this screen alone.
 
 ## Stopping rule
 
-Continue in small high-yield tranches of obvious sponsor/rebrand-risk names. A venue that produces no clear rename signal in the light pass is marked screened and left alone; do not open a bespoke historical investigation merely to prove a negative.
-
-When high-yield candidate discovery converges, stop the screen and research only the positive candidate population in bounded source-authority tranches.
+**Satisfied.** High-yield candidate discovery has converged. The screen is closed at 14 positive candidates. Research only that positive candidate population in later bounded source-authority tranches; do not descend into individual negative-proof research for the 445 low-signal venues.
