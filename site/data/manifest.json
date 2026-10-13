@@ -6,6 +6,7 @@
   "canonical_game_count": 162045,
   "files": {
     "programs": "programs.json",
+    "display_labels": "program-display-labels.json",
     "teams_root": "teams/"
   }
 }

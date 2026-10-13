@@ -32,7 +32,7 @@ button,input,select{font:inherit}button{touch-action:manipulation}.college{font-
 .panel{min-width:0;background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 3px 12px rgba(17,34,56,.04)}.panel-title{text-align:center;padding:14px 16px;border-bottom:1px solid var(--line);font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:14px;letter-spacing:.035em}
 .directory-panel{overflow:hidden}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(180px,260px) minmax(160px,220px);gap:10px;padding:14px;border-bottom:1px solid var(--line);background:#f8fafc}.directory-control label,.filter-field label{display:block;color:#526174;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:0 0 5px}.directory-control input,.directory-control select{width:100%;min-height:42px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:9px 10px}.directory-count{padding:10px 14px;text-align:center;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)}
 .program-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:12px}.program-card{appearance:none;min-width:0;width:100%;min-height:108px;text-align:center;padding:14px;border:1px solid #111;border-top:6px solid var(--secondary);border-radius:9px;background:var(--primary);color:var(--cardText);box-shadow:0 0 0 1px #111,0 3px 11px rgba(17,34,56,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.program-card.enabled{cursor:pointer}.program-card.enabled:hover{transform:translateY(-2px);box-shadow:0 0 0 1px #111,0 10px 22px rgba(17,34,56,.18)}.program-card:disabled{cursor:not-allowed;opacity:.70}.program-card .program-name{display:block;font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:20px;line-height:1.2;overflow-wrap:anywhere}.program-card .program-meta{display:block;margin-top:7px;font-size:13px;line-height:1.35;opacity:.92}
-.logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}
+.logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}.logo-initialism{display:inline-block;white-space:nowrap;line-height:1;text-align:center}
 .team-hero{border-radius:11px;overflow:hidden;background:white;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:18px}.team-strip{height:10px;background:var(--team)}
 .team-head{text-align:center;padding:24px;display:flex;flex-direction:column;align-items:center;gap:10px}.team-head h1{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:35px;line-height:1.2;margin:0}.team-head h1+.kicker{margin-top:8px}.team-head .logo-disc{width:76px;height:76px;font-size:25px}
 .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}.metric{min-width:0;min-height:82px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.metric.champion-finish{border-color:#C9A227}.metric b{font-size:23px;line-height:1.1;display:block;overflow-wrap:anywhere}.metric span{display:block;margin:0;font-size:12px;line-height:1.28;font-weight:600;color:#526174}
@@ -154,6 +154,7 @@ const DB = {
   conferenceHistory: {},
   conferenceNames: {},
   conferenceTournamentLabels: {},
+  displayLabels: {},
   pairs: {},
 };
 
@@ -393,6 +394,8 @@ function normalizeProgram(program) {
     state: program.state || "",
     location: programLocation(program),
     conference: conferenceName(program.current_conference) || "Independent",
+    headerShort: DB.displayLabels[program.program_key]?.header_short || program.display_name || program.program_name,
+    badgeInitialism: DB.displayLabels[program.program_key]?.badge_initialism || initials(program.display_name || program.program_name),
     primary: safeHex(program.primary_hex, "#334155"),
     secondary: safeHex(program.secondary_hex, "#FFFFFF"),
     historyStartSeason: program.history_start_season || "",
@@ -545,6 +548,13 @@ async function loadData() {
   const programsDocument = await fetchJSON(`data/${programsPath}`);
   if (!Array.isArray(programsDocument.programs)) throw new Error("programs.json does not contain a programs array");
 
+  const displayLabelsPath = manifest.files?.display_labels || "program-display-labels.json";
+  const displayLabelsDocument = await fetchJSON(`data/${displayLabelsPath}`);
+  if (displayLabelsDocument.schema_version !== 1 || !displayLabelsDocument.programs) {
+    throw new Error("Unsupported or missing program display-label data");
+  }
+  DB.displayLabels = displayLabelsDocument.programs;
+
   DB.programs = programsDocument.programs
     .map(normalizeProgram)
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -624,7 +634,24 @@ function teamLogo(keyOrProgram) {
   const team = typeof keyOrProgram === "string" ? programByKey(keyOrProgram) : keyOrProgram;
   if (!team) return "";
   const color = textColor(team.primary);
-  return `<div class="logo-disc" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}">${initials(team.name)}</div>`;
+  const initialism = team.badgeInitialism || initials(team.name);
+  return `<div class="logo-disc" role="img" aria-label="${esc(team.name)}" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}"><span class="logo-initialism" aria-hidden="true">${esc(initialism)}</span></div>`;
+}
+
+function fitLogoBadgeText() {
+  document.querySelectorAll(".logo-disc").forEach((disc) => {
+    const label = disc.querySelector(".logo-initialism");
+    if (!label || !disc.clientWidth) return;
+    const characters = Array.from(label.textContent || "").length;
+    const originalSize = Number.parseFloat(getComputedStyle(disc).fontSize);
+    let size = originalSize * (characters >= 5 ? 0.56 : characters === 4 ? 0.70 : characters === 3 ? 0.84 : 1);
+    const available = disc.clientWidth - 8;
+    label.style.fontSize = `${size}px`;
+    while (label.getBoundingClientRect().width > available + 0.5 && size > 8) {
+      size = Math.max(8, size - 0.5);
+      label.style.fontSize = `${size}px`;
+    }
+  });
 }
 
 function forceRouteTop() {
@@ -844,19 +871,22 @@ function hideTeamContextTitle() {
 function fitTeamContextTitle() {
   const title = document.getElementById("teamContextTitle");
   if (!title || !title.textContent) return;
-  const preferredMinSize = 12;
-  const absoluteMinSize = 10;
+  const overflowed = () => title.scrollWidth > title.clientWidth + 1;
   let size = 20;
-  title.style.fontSize = "20px";
+  title.style.fontSize = size + "px";
   title.style.letterSpacing = ".025em";
-  while (title.scrollWidth > title.clientWidth && size > preferredMinSize) {
-    size = Math.max(preferredMinSize, size - 0.5);
+  while (overflowed() && size > 12) {
+    size -= 0.5;
     title.style.fontSize = size + "px";
   }
-  if (title.scrollWidth > title.clientWidth) {
-    title.style.letterSpacing = "0";
-    while (title.scrollWidth > title.clientWidth && size > absoluteMinSize) {
-      size = Math.max(absoluteMinSize, size - 0.5);
+  // Only abbreviate when the registered full name cannot actually fit.
+  if (overflowed() && title.dataset.shortName && title.dataset.shortName !== title.textContent) {
+    title.textContent = title.dataset.shortName;
+    size = 20;
+    title.style.fontSize = size + "px";
+    title.style.letterSpacing = ".025em";
+    while (overflowed() && size > 10) {
+      size -= 0.5;
       title.style.fontSize = size + "px";
     }
   }
@@ -886,24 +916,30 @@ function fitSeriesContextTitle() {
   const container = document.getElementById("seriesContextTitle");
   const badges = [document.getElementById("seriesContextA"), document.getElementById("seriesContextB")].filter(Boolean);
   if (!container || badges.length !== 2 || !badges.every((badge) => badge.textContent)) return;
-  let size = window.innerWidth <= 720 ? 13 : 17;
-  const preferredMin = window.innerWidth <= 720 ? 9 : 11;
-  const absoluteMin = 8;
-  badges.forEach((badge) => {
-    badge.style.fontSize = size + "px";
-    badge.style.letterSpacing = window.innerWidth <= 720 ? ".01em" : ".02em";
-  });
-  while (container.scrollWidth > container.clientWidth + 1 && size > preferredMin) {
-    size -= 1;
-    badges.forEach((badge) => { badge.style.fontSize = size + "px"; });
+  const startingSize = window.innerWidth <= 720 ? 13 : 17;
+  const preferredMin = window.innerWidth <= 720 ? 11 : 13;
+  const overflowed = () => container.scrollWidth > container.clientWidth + 1
+    || badges.some((badge) => badge.scrollWidth > badge.clientWidth + 1);
+  let size = startingSize;
+  function useSize(value) {
+    size = value;
+    badges.forEach((badge) => {
+      badge.style.fontSize = size + "px";
+      badge.style.letterSpacing = window.innerWidth <= 720 ? ".01em" : ".02em";
+    });
   }
-  if (container.scrollWidth > container.clientWidth + 1) {
-    badges.forEach((badge) => { badge.style.letterSpacing = "0"; });
-    while (container.scrollWidth > container.clientWidth + 1 && size > absoluteMin) {
-      size -= 1;
-      badges.forEach((badge) => { badge.style.fontSize = size + "px"; });
-    }
+  // Each resize starts with both original full names; keep them if they fit.
+  badges.forEach((badge) => { badge.textContent = badge.dataset.fullName || badge.textContent; });
+  useSize(startingSize);
+  while (overflowed() && size > preferredMin) useSize(size - 1);
+  if (overflowed()) {
+    badges.forEach((badge) => {
+      badge.textContent = badge.dataset.shortName || badge.dataset.fullName || badge.textContent;
+    });
+    useSize(startingSize);
+    while (overflowed() && size > 9) useSize(size - 1);
   }
+  // Ellipsis is now only the last fallback for unusually narrow screens.
 }
 
 function syncTeamContextTitle() {
@@ -932,6 +968,9 @@ function syncTeamContextTitle() {
     const background = colors?.background || team.primary || "#FFFFFF";
     const foreground = colors?.foreground || textColor(background);
     title.textContent = team.name;
+    title.dataset.shortName = team.headerShort || team.name;
+    title.setAttribute("aria-label", team.name);
+    title.setAttribute("title", team.name);
     title.style.setProperty("--team-context-bg", background);
     title.style.setProperty("--team-context-fg", foreground);
     fitTeamContextTitle();
@@ -955,8 +994,16 @@ function syncTeamContextTitle() {
       hideSeriesContextTitle();
       return;
     }
+    badgeA.dataset.fullName = teamA.name;
+    badgeA.dataset.shortName = teamA.headerShort || teamA.name;
+    badgeB.dataset.fullName = teamB.name;
+    badgeB.dataset.shortName = teamB.headerShort || teamB.name;
     badgeA.textContent = teamA.name;
     badgeB.textContent = teamB.name;
+    badgeA.setAttribute("aria-label", teamA.name);
+    badgeB.setAttribute("aria-label", teamB.name);
+    badgeA.setAttribute("title", teamA.name);
+    badgeB.setAttribute("title", teamB.name);
     applyContextBadgeColors(badgeA, teamAKey, teamA);
     applyContextBadgeColors(badgeB, teamBKey, teamB);
     fitSeriesContextTitle();
@@ -1681,6 +1728,7 @@ function render() {
     app.innerHTML = homeView();
   }
   forceRouteTop();
+  fitLogoBadgeText();
   syncStickyOffsets();
   syncTeamContextTitle();
 }
@@ -1789,10 +1837,18 @@ async function boot() {
     syncStickyOffsets();
     syncTeamContextTitle();
     window.addEventListener("resize", () => {
+      fitLogoBadgeText();
       syncStickyOffsets();
       scheduleTeamContextTitleSync();
     });
     window.addEventListener("scroll", scheduleTeamContextTitleSync, { passive: true });
+    // Refit after web fonts finish loading; initial fallback-font widths can differ.
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        fitLogoBadgeText();
+        scheduleTeamContextTitleSync();
+      });
+    }
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.addEventListener("popstate", () => renderRouteAtomically());
     render();
