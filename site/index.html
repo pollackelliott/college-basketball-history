@@ -1842,6 +1842,13 @@ async function boot() {
       scheduleTeamContextTitleSync();
     });
     window.addEventListener("scroll", scheduleTeamContextTitleSync, { passive: true });
+    // Refit after web fonts finish loading; initial fallback-font widths can differ.
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        fitLogoBadgeText();
+        scheduleTeamContextTitleSync();
+      });
+    }
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.addEventListener("popstate", () => renderRouteAtomically());
     render();
