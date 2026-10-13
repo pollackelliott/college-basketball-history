@@ -871,19 +871,22 @@ function hideTeamContextTitle() {
 function fitTeamContextTitle() {
   const title = document.getElementById("teamContextTitle");
   if (!title || !title.textContent) return;
-  const preferredMinSize = 12;
-  const absoluteMinSize = 10;
+  const overflowed = () => title.scrollWidth > title.clientWidth + 1;
   let size = 20;
-  title.style.fontSize = "20px";
+  title.style.fontSize = size + "px";
   title.style.letterSpacing = ".025em";
-  while (title.scrollWidth > title.clientWidth && size > preferredMinSize) {
-    size = Math.max(preferredMinSize, size - 0.5);
+  while (overflowed() && size > 12) {
+    size -= 0.5;
     title.style.fontSize = size + "px";
   }
-  if (title.scrollWidth > title.clientWidth) {
-    title.style.letterSpacing = "0";
-    while (title.scrollWidth > title.clientWidth && size > absoluteMinSize) {
-      size = Math.max(absoluteMinSize, size - 0.5);
+  // Only abbreviate when the registered full name cannot actually fit.
+  if (overflowed() && title.dataset.shortName && title.dataset.shortName !== title.textContent) {
+    title.textContent = title.dataset.shortName;
+    size = 20;
+    title.style.fontSize = size + "px";
+    title.style.letterSpacing = ".025em";
+    while (overflowed() && size > 10) {
+      size -= 0.5;
       title.style.fontSize = size + "px";
     }
   }
@@ -913,24 +916,30 @@ function fitSeriesContextTitle() {
   const container = document.getElementById("seriesContextTitle");
   const badges = [document.getElementById("seriesContextA"), document.getElementById("seriesContextB")].filter(Boolean);
   if (!container || badges.length !== 2 || !badges.every((badge) => badge.textContent)) return;
-  let size = window.innerWidth <= 720 ? 13 : 17;
-  const preferredMin = window.innerWidth <= 720 ? 9 : 11;
-  const absoluteMin = 8;
-  badges.forEach((badge) => {
-    badge.style.fontSize = size + "px";
-    badge.style.letterSpacing = window.innerWidth <= 720 ? ".01em" : ".02em";
-  });
-  while (container.scrollWidth > container.clientWidth + 1 && size > preferredMin) {
-    size -= 1;
-    badges.forEach((badge) => { badge.style.fontSize = size + "px"; });
+  const startingSize = window.innerWidth <= 720 ? 13 : 17;
+  const preferredMin = window.innerWidth <= 720 ? 11 : 13;
+  const overflowed = () => container.scrollWidth > container.clientWidth + 1
+    || badges.some((badge) => badge.scrollWidth > badge.clientWidth + 1);
+  let size = startingSize;
+  function useSize(value) {
+    size = value;
+    badges.forEach((badge) => {
+      badge.style.fontSize = size + "px";
+      badge.style.letterSpacing = window.innerWidth <= 720 ? ".01em" : ".02em";
+    });
   }
-  if (container.scrollWidth > container.clientWidth + 1) {
-    badges.forEach((badge) => { badge.style.letterSpacing = "0"; });
-    while (container.scrollWidth > container.clientWidth + 1 && size > absoluteMin) {
-      size -= 1;
-      badges.forEach((badge) => { badge.style.fontSize = size + "px"; });
-    }
+  // Each resize starts with both original full names; keep them if they fit.
+  badges.forEach((badge) => { badge.textContent = badge.dataset.fullName || badge.textContent; });
+  useSize(startingSize);
+  while (overflowed() && size > preferredMin) useSize(size - 1);
+  if (overflowed()) {
+    badges.forEach((badge) => {
+      badge.textContent = badge.dataset.shortName || badge.dataset.fullName || badge.textContent;
+    });
+    useSize(startingSize);
+    while (overflowed() && size > 9) useSize(size - 1);
   }
+  // Ellipsis is now only the last fallback for unusually narrow screens.
 }
 
 function syncTeamContextTitle() {
@@ -959,6 +968,9 @@ function syncTeamContextTitle() {
     const background = colors?.background || team.primary || "#FFFFFF";
     const foreground = colors?.foreground || textColor(background);
     title.textContent = team.name;
+    title.dataset.shortName = team.headerShort || team.name;
+    title.setAttribute("aria-label", team.name);
+    title.setAttribute("title", team.name);
     title.style.setProperty("--team-context-bg", background);
     title.style.setProperty("--team-context-fg", foreground);
     fitTeamContextTitle();
@@ -982,8 +994,16 @@ function syncTeamContextTitle() {
       hideSeriesContextTitle();
       return;
     }
+    badgeA.dataset.fullName = teamA.name;
+    badgeA.dataset.shortName = teamA.headerShort || teamA.name;
+    badgeB.dataset.fullName = teamB.name;
+    badgeB.dataset.shortName = teamB.headerShort || teamB.name;
     badgeA.textContent = teamA.name;
     badgeB.textContent = teamB.name;
+    badgeA.setAttribute("aria-label", teamA.name);
+    badgeB.setAttribute("aria-label", teamB.name);
+    badgeA.setAttribute("title", teamA.name);
+    badgeB.setAttribute("title", teamB.name);
     applyContextBadgeColors(badgeA, teamAKey, teamA);
     applyContextBadgeColors(badgeB, teamBKey, teamB);
     fitSeriesContextTitle();
