@@ -1,9 +1,11 @@
 # Historical venue-name census
 
-Status: **MULTI-NAME CENSUS COMPLETE — RESEARCH QUEUE PENDING**  
+Status: **MULTI-NAME CENSUS COMPLETE — RESEARCH QUEUE READY**  
 Protected-main baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This file preserves the owner-adjudicated state of the repository-wide historical physical-venue naming census. It is a recovery artifact and working ledger, not yet the final permanent protocol. It does not itself create `OFFICIAL_NAMING_PERIOD` rows.
+
+Research queue: `docs/historical-venue-name-research-queue.md`
 
 ## Controlling model
 
