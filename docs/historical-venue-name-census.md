@@ -229,6 +229,41 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000326` | `PERIODIZE` | Springfield Civic Center → MassMutual Center; Springfield CC is shorthand of first era. |
 | `VEN-000328` | `ALIAS_ONLY` | One continuous Frank Thompson Gymnasium identity; Thompson Gym / Frank Thompson Gym are shortened forms. |
 | `VEN-000329` | `PERIODIZE` | Virginia Tech Coliseum → Cassell Coliseum. |
+| `VEN-000335` | `ALIAS_ONLY` | One continuous Gregory Gymnasium identity; Gregory Gym is shorthand. |
+| `VEN-000338` | `ALIAS_ONLY` | One continuous Men’s Gym identity; University Men’s Gym is expanded institutional form. |
+| `VEN-000339` | `PERIODIZE` | UIC Pavilion → Credit Union 1 Arena. |
+| `VEN-000342` | `ALIAS_ONLY` | One continuous R.O.T.C. Armory identity; ROTC Armory is punctuation-only variant. |
+| `VEN-000343` | `ALIAS_ONLY` | One continuous Mississippi Coliseum identity; The Big House is nickname. |
+| `VEN-000344` | `RESEARCH_HOLD` | Determine whether Frank McGuire Arena is a competition-space/court name or erroneous cross-venue alias rather than a Carolina Coliseum rename. |
+| `VEN-000346` | `RESEARCH_HOLD` | Research Carolina Gymnasium / Longstreet Theater chronology and later reuse before deciding whether post-basketball naming belongs in the period model. |
+| `VEN-000347` | `ALIAS_ONLY` | One continuous Coliseo Rubén Rodríguez identity; Ruben Rodriguez Coliseum is English/transliteration variant. |
+| `VEN-000348` | `ALIAS_ONLY` | One continuous Colonial Hall identity; Colonial Hall at The Greenbrier is resort-qualified form. |
+| `VEN-000349` | `PERIODIZE_RESEARCH` | Research full Glendale arena chronology; current registry has Gila River Arena → Desert Diamond Arena but likely omits earlier Glendale Arena / Jobing.com Arena eras. |
+| `VEN-000350` | `PERIODIZE_RESEARCH` | Research Shoemaker Center → Fifth Third Arena chronology and determine whether Fifth Third Arena at Shoemaker Center is retained-building wording rather than another era. |
+| `VEN-000351` | `ALIAS_ONLY` | One continuous Gampel Pavilion identity; Harry A. Gampel Pavilion is full formal name. |
+| `VEN-000352` | `ALIAS_ONLY` | One continuous Hard Rock Hotel Riviera Maya Convention Center identity; ballroom/resort variants are descriptive source wording. |
+| `VEN-000353` | `RESEARCH_HOLD` | Distinguish Harrah’s Cherokee Center complex naming from ExploreAsheville.com Arena interior-arena naming before periodization. |
+| `VEN-000356` | `ALIAS_ONLY` | One continuous Orleans Arena identity; article/hotel-qualified variants are aliases. |
+| `VEN-000358` | `ALIAS_ONLY` | One continuous Puerto Vallarta International Convention Center identity; ICC is abbreviation. |
+| `VEN-000363` | `ALIAS_ONLY` | One continuous William and Mary Hall identity; William & Mary Hall is typography/style variant. |
+| `VEN-000369` | `PERIODIZE` | Redbird Arena → CEFCU Arena. |
+| `VEN-000371` | `CANONICAL_CORRECTION` | One Guerra Sports Complex identity; verify authoritative first name spelling, Eugenio vs Eugene, rather than creating naming periods. |
+| `VEN-000373` | `PERIODIZE` | Oregon State Coliseum → Gill Coliseum. |
+| `VEN-000377` | `ALIAS_ONLY` | One continuous Thomas & Mack Center identity; Tarkanian Court is competition-space name and Thomas & Mack Arena is variant. |
+| `VEN-000382` | `RESEARCH_HOLD` | Verify whether Nielsen Field House is the same physical building as George Albert Smith Field House / Smith Fieldhouse before any naming-period treatment. |
+| `VEN-000384` | `ALIAS_ONLY` | One continuous Men’s Gymnasium identity; Men’s Gym / University Gymnasium are variants. |
+| `VEN-000385` | `ALIAS_ONLY` | One continuous Old University Gymnasium identity; University Gymnasium / Old Gymnasium are variants. |
+| `VEN-000386` | `ALIAS_ONLY` | One continuous Anaheim Convention Center arena identity; Arena specifies the basketball space rather than a rename. |
+| `VEN-000388` | `RESEARCH_HOLD` | Determine whether Baoshan Sports Center is the overall complex and Baoshan Arena the specific arena before treating as naming history. |
+| `VEN-000389` | `ALIAS_ONLY` | One continuous Cannon Activities Center identity; George Q. Cannon/full and Cannon Event Center forms are aliases unless later evidence establishes a formal rename. |
+| `VEN-000395` | `ALIAS_ONLY` | One continuous Astrodome identity; Houston qualifier only. Prior duplicate physical venue ID already retired. |
+| `VEN-000396` | `RESEARCH_HOLD` | Research Public School Fieldhouse → Jeppesen Fieldhouse/Gymnasium chronology; may represent a true formal rename. |
+| `VEN-000405` | `ALIAS_ONLY` | One continuous Marriott Center identity; Mariott Center is typo only. |
+| `VEN-000408` | `ALIAS_ONLY` | One continuous UCLA Men’s Gymnasium identity; Men’s Gym is shorthand. |
+| `VEN-000411` | `ALIAS_ONLY` | One continuous Municipal Auditorium (New Orleans) identity; city qualifier only. |
+| `VEN-000413` | `ALIAS_ONLY` | One continuous Olympic Auditorium identity; Grand Olympic Auditorium is expanded/full-name treatment unless later evidence establishes otherwise. |
+| `VEN-000430` | `ALIAS_ONLY` | One continuous Venice High School Gym identity; Gym/Gymnasium wording only. |
+| `VEN-000431` | `ALIAS_ONLY` | One continuous Atlanta Auditorium identity; The Auditorium is shorthand. |
 
 ## Future protocol agreed in principle
 
