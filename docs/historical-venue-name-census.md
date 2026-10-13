@@ -271,15 +271,15 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000434` | `ALIAS_ONLY` | One continuous Charles E. Smith Center identity; Smith Center is shorthand. |
 | `VEN-000435` | `ALIAS_ONLY` | One continuous College Avenue Gym identity; College Avenue Gymnasium and The Barn are aliases. |
 | `VEN-000438` | `ALIAS_ONLY` | One continuous Galactic Ballroom at Moon Palace Resort identity; Moon Palace Resort is broader resort-level source wording. |
-| `VEN-000439` | `RESEARCH_HOLD` | Determine physical/name relationship between Highland Park Gym and Highland Park Masonic Hall before periodization. |
+| `VEN-000439` | `RESEARCH_HOLD` | Tranche 4 bounded residual: Rutgers institutional history establishes Highland Park Gym as its 1929-31 home (10-1). Contemporaneous New Brunswick reporting independently establishes an active Masonic Hall basketball court in Highland Park during the same period, including state-tournament play. The bounded pass did not find an authoritative source directly equating Rutgers' `Highland Park Gym` label with Highland Park Masonic Hall, so do not merge/name-normalize them yet. |
 | `VEN-000440` | `ALIAS_ONLY` | One continuous Jadwin Gymnasium identity; Jadwin Gym / Jadwin Fieldhouse are variants. |
 | `VEN-000443` | `PERIODIZE` | Sears Centre → NOW Arena; Sears Centre Arena is first-era variant. |
 | `VEN-000444` | `PERIODIZE` | Air Canada Centre → Scotiabank Arena. |
 | `VEN-000445` | `ALIAS_ONLY` | One continuous South Padre Island Convention Center identity; Centre is spelling variant. |
 | `VEN-000447` | `ALIAS_ONLY` | One continuous Brick Breeden Fieldhouse identity; Worthington Arena / Max Worthington Arena are competition-space names within the fieldhouse. |
 | `VEN-000449` | `PERIODIZE` | McKeon Pavilion → University Credit Union Pavilion. |
-| `VEN-000453` | `PERIODIZE_RESEARCH` | Municipal Auditorium → Civic Center Music Hall, subject to same-building chronology verification. |
-| `VEN-000454` | `PERIODIZE_RESEARCH` | Research Tulsa Convention Center → Cox Business Center → Arvest Convention Center chronology and determine whether Cox Business Convention Center was a separate formal name or variant. |
+| `VEN-000453` | `PERIODIZE` | Municipal Auditorium → Civic Center Music Hall. Oklahoma City's official facility history states the building opened in 1937 as Municipal Auditorium and, after the 1967 theatre-within-a-theatre renovation, became Civic Center Music Hall; City history confirms the current music hall is the shell of the original auditorium. Exact 1967 effective day remains implementation-date verification. |
+| `VEN-000454` | `PERIODIZE` | Same-building formal history is resolved conceptually as Tulsa Assembly Center → James L. Maxwell Convention Center → Tulsa Convention Center → Cox Business Center → Cox Business Convention Center → Arvest Convention Center. City records show `Assembly Center` usage in 1981 and state that the civic center was renamed James L. Maxwell Convention Center in 1985; the City used Tulsa Convention Center before the 2013 Cox naming transaction. The 2013 naming-rights agreement renamed the facility Cox Business Center effective 2013-07-01. `Cox Business Convention Center` was a later formal wording, not a mere source variant: City records use it by 2020-21. Arvest naming became effective 2025-03-01. Exact Maxwell→Tulsa Convention Center and Cox Business Center→Cox Business Convention Center boundaries remain implementation-date verification. |
 | `VEN-000457` | `PERIODIZE` | Convocation Center → BankUnited Center → Watsco Center. |
 | `VEN-000458` | `PERIODIZE` | SIU Arena → Banterra Center. |
 | `VEN-000459` | `ALIAS_ONLY` | One continuous Beeghly Center identity; Zidian Family Arena at Beeghly Center is a named competition-space/sponsor overlay. |
@@ -288,8 +288,8 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000467` | `ALIAS_ONLY` | One continuous Coliseo Roberto Clemente identity; Roberto Clemente Coliseum is English translation. |
 | `VEN-000470` | `ALIAS_ONLY` | One continuous John Gray Gymnasium identity; John Gray Gym is shorthand. |
 | `VEN-000471` | `ALIAS_ONLY` | One continuous Coliseo de Puerto Rico / José Miguel Agrelot Coliseum identity; treat the formulations as same formal identity rather than successive periods. |
-| `VEN-000474` | `RESEARCH_HOLD` | Determine whether CU Fieldhouse → Balch Fieldhouse was a true formal rename and establish chronology. |
-| `VEN-000475` | `RESEARCH_HOLD` | Determine whether Men’s Gymnasium → Carlson Gymnasium was a true rename and establish chronology. |
+| `VEN-000474` | `PERIODIZE` | CU Fieldhouse → Balch Fieldhouse. Colorado Athletics states the 1937 building was known simply as the CU Fieldhouse in its early years and that its name was changed to Balch Fieldhouse in the 1976-77 season in honor of Roland E. Balch. Exact effective day remains implementation-date verification. |
+| `VEN-000475` | `PERIODIZE` | Men’s Gymnasium → Carlson Gymnasium. The 1924 building opened as the Men’s Gymnasium and was renamed Carlson Gymnasium in 1976 for Harry Carlson. `Physical Education Building` is documented as an alternate/intervening functional reference but is not established in this bounded pass as a separate formal naming era, so retain it as alias/descriptor unless exact institutional evidence later proves otherwise. Exact 1976 effective day remains implementation-date verification. |
 | `VEN-000485` | `ALIAS_ONLY` | One continuous Sun Devil Gymnasium identity; Sun Devil Gym is shorthand. |
 | `VEN-000489` | `ALIAS_ONLY` | One continuous Jacksonville Veterans Memorial Coliseum identity; Jacksonville Memorial Coliseum / Jacksonville Coliseum are shortened variants unless later evidence establishes otherwise. |
 | `VEN-000492` | `PERIODIZE` | Centennial Hall → Savage Hall → Savage Arena. |
