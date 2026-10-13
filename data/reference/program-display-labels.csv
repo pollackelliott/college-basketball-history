@@ -1,0 +1,366 @@
+school,header_short,badge_initialism
+Abilene Christian,ACU,ACU
+Air Force,AFA,AF
+Akron,AKR,A
+Alabama,ALA,A
+Alabama A&M,AAMU,AAMU
+Alabama State,ALAST,ASU
+Alcorn State,ALC,ASU
+American University,AMER,AU
+App State,APP,ASU
+Arizona,ARIZ,A
+Arizona State,AZST,ASU
+Arkansas,ARK,A
+Arkansas State,ARKST,ASU
+Arkansas-Pine Bluff,UAPB,UAPB
+Army,ARMY,A
+Auburn,AUB,AU
+Austin Peay,PEAY,AP
+Ball State,BALL,BSU
+Baylor,BAY,B
+Bellarmine,BELL,B
+Belmont,BELM,B
+Bethune-Cookman,BTHCK,BC
+Binghamton,BING,B
+Boise State,BOISE,BSU
+Boston College,BC,BC
+Boston University,BU,BU
+Bowling Green,BGSU,BG
+Bradley,BRAD,B
+Brown,BROWN,B
+Bryant,BRY,B
+Bucknell,BUCK,B
+Buffalo,BUFF,UB
+Butler,BUT,B
+BYU,BYU,Y
+Cal Poly,CALPLY,CP
+Cal State Bakersfield,CSUBK,B
+Cal State Fullerton,FULL,F
+Cal State Northridge,CSUN,CSUN
+California,CAL,C
+California Baptist,CALBPT,CBU
+Campbell,CAMP,C
+Canisius,CAN,C
+Central Arkansas,CARK,UCA
+Central Connecticut,CCSU,CC
+Central Michigan,CMU,CMU
+Charleston,CHARL,C
+Charleston Southern,CHARSO,CSU
+Charlotte,CHAR,C
+Chattanooga,CHAT,C
+Chicago State,CHIST,CSU
+Cincinnati,CIN,UC
+Clemson,CLEM,C
+Cleveland State,CLEVST,CSU
+Coastal Carolina,CSTCAR,CC
+Colgate,COLG,C
+Colorado,COL,CU
+Colorado State,COLST,CSU
+Columbia,COLUM,C
+Coppin State,COPP,CSU
+Cornell,CORN,C
+Creighton,CREI,C
+Dartmouth,DART,D
+Davidson,DAV,D
+Dayton,DAY,D
+Delaware,DEL,D
+Delaware State,DELST,DSU
+Denver,DEN,D
+DePaul,DEP,D
+Detroit Mercy,DET,D
+Drake,DRAKE,D
+Drexel,DREX,D
+Duke,DUKE,D
+Duquesne,DUQ,D
+East Carolina,ECU,ECU
+East Tennessee State,ETSU,E
+East Texas A&M,ETAMU,E
+Eastern Illinois,EIU,EIU
+Eastern Kentucky,EKU,EKU
+Eastern Michigan,EMU,EMU
+Eastern Washington,EWU,EWU
+Elon,ELON,E
+Evansville,EVAN,E
+Fairfield,FAIR,F
+Fairleigh Dickinson,FDU,FDU
+Florida,FLA,UF
+Florida A&M,FAMU,FAMU
+Florida Atlantic,FAU,FAU
+Florida Gulf Coast,FGCU,FGCU
+Florida International,FIU,FIU
+Florida State,FSU,FSU
+Fordham,FORD,F
+Fresno State,FRES,FSU
+Furman,FUR,F
+Gardner-Webb,GARDW,GW
+George Mason,MASON,GMU
+George Washington,GW,GW
+Georgetown,GTOWN,G
+Georgia,UGA,G
+Georgia Southern,GASO,GSU
+Georgia State,GAST,GSU
+Georgia Tech,GT,GT
+Gonzaga,ZAGA,G
+Grambling,GRAM,G
+Grand Canyon,GCU,GC
+Green Bay,GB,GB
+Hampton,HAMP,H
+Harvard,HARV,H
+Hawai'i,HAW,H
+High Point,HP,HP
+Hofstra,HOF,H
+Holy Cross,HC,HC
+Houston,HOU,H
+Houston Christian,HOUCHR,HCU
+Howard,HOW,H
+Idaho,IDAHO,I
+Idaho State,IDST,ISU
+Illinois,ILL,I
+Illinois State,ILLST,ISU
+Incarnate Word,UIW,UIW
+Indiana,IU,IU
+Indiana State,INST,ISU
+Iona,IONA,I
+Iowa,IOWA,I
+Iowa State,IAST,ISU
+IU Indianapolis,IUINDY,IUI
+Jackson State,JCKST,JSU
+Jacksonville,JAX,J
+Jacksonville State,JAXST,JSU
+James Madison,JMU,JMU
+Kansas,KU,KU
+Kansas City,KC,KC
+Kansas State,KSU,KSU
+Kennesaw State,KENN,KSU
+Kent State,KENTST,KSU
+Kentucky,UK,UK
+La Salle,LAS,L
+Lafayette,LAF,L
+Lamar,LAMAR,L
+Le Moyne,LEM,L
+Lehigh,LEH,L
+Liberty,LIB,L
+Lindenwood,LIND,L
+Lipscomb,LIP,L
+Little Rock,LR,LR
+Long Beach State,LBSU,LBSU
+Long Island University,LIU,LIU
+Longwood,LONG,L
+Louisiana,ULL,L
+Louisiana Tech,LATECH,LT
+Louisville,LOU,L
+Loyola Chicago,LOYCHI,LUC
+Loyola Maryland,LOYMD,L
+Loyola Marymount,LMARY,LMU
+LSU,LSU,LSU
+Maine,MAINE,M
+Manhattan,MANH,M
+Marist,MAR,M
+Marquette,MARQ,M
+Marshall,MARS,M
+Maryland,TERPS,M
+Maryland Eastern Shore,UMES,UMES
+Massachusetts,UMASS,M
+McNeese,MCN,M
+Memphis,MEM,M
+Mercer,MERC,M
+Mercyhurst,MHURST,M
+Merrimack,MERR,M
+Miami,MIAMI,M
+Miami (OH),MOH,M
+Michigan,MICH,M
+Michigan State,MIST,MSU
+Middle Tennessee,MTSU,MT
+Milwaukee,MILW,M
+Minnesota,MINN,M
+Mississippi State,MSST,MSU
+Mississippi Valley State,MVSU,MVSU
+Missouri,MIZ,M
+Missouri State,MOST,MSU
+Monmouth,MONM,M
+Montana,MONT,M
+Montana State,MTST,MSU
+Morehead State,MORE,MSU
+Morgan State,MORG,MSU
+Mount St. Mary's,MOUNT,MSM
+Murray State,MURR,MSU
+Navy,NAVY,N
+NC State,NCSU,NCSU
+Nebraska,NEB,N
+Nevada,NEV,N
+New Hampshire,UNH,NH
+New Haven,NWHVN,NH
+New Mexico,UNM,NM
+New Mexico State,NMSU,NMSU
+New Orleans,UNO,LSUN
+Niagara,NIAG,N
+Nicholls,NICH,N
+NJIT,NJIT,NJIT
+Norfolk State,NORF,NSU
+North Alabama,NORAL,NA
+North Carolina,UNC,UNC
+North Carolina A&T,NCAT,NCAT
+North Carolina Central,NCCU,NCC
+North Dakota,NODAK,ND
+North Dakota State,NDSU,NDSU
+North Florida,UNF,UNF
+North Texas,NTX,UNT
+Northeastern,NE,N
+Northern Arizona,NOAZ,NA
+Northern Colorado,NOCO,UNC
+Northern Illinois,NIU,NIU
+Northern Iowa,UNI,UNI
+Northern Kentucky,NKU,NK
+Northwestern,NU,N
+Northwestern State,NWST,NSU
+Notre Dame,ND,ND
+Oakland,OAK,O
+Ohio,OHIO,O
+Ohio State,OSU,OSU
+Oklahoma,OU,OU
+Oklahoma State,OKST,OSU
+Old Dominion,ODU,OD
+Ole Miss,MISS,M
+Omaha,OMA,O
+Oral Roberts,ORU,OR
+Oregon,UO,O
+Oregon State,ORST,OSU
+Pacific,PAC,P
+Penn State,PSU,PSU
+Pennsylvania,PENN,P
+Pepperdine,PEPP,P
+Pittsburgh,PITT,P
+Portland,PORT,P
+Portland State,PORTST,PSU
+Prairie View A&M,PVAMU,PVAM
+Presbyterian,PRES,P
+Princeton,PRIN,P
+Providence,PROV,P
+Purdue,PUR,P
+Purdue Fort Wayne,PFW,PFW
+Queens University,QUEENS,Q
+Quinnipiac,QUIN,Q
+Radford,RAD,R
+Rhode Island,URI,RI
+Rice,RICE,R
+Richmond,RICH,R
+Rider,RIDER,R
+Robert Morris,RMU,RM
+Rutgers,RUTG,R
+Sacramento State,SACST,S
+Sacred Heart,SHU,SH
+Saint Francis,SFU,SF
+Saint Joseph's,JOES,SJ
+Saint Louis,SLU,SLU
+Saint Mary's,SMC,SM
+Saint Peter's,STPET,SP
+Sam Houston,SHSU,SH
+Samford,SAM,S
+San Diego,SANDG,SD
+San Diego State,SDGST,SDSU
+San Francisco,SANF,SF
+San José State,SJSU,SJSU
+Santa Clara,SNTCL,SC
+SE Louisiana,SELA,SLU
+Seattle U,SEA,S
+Seton Hall,HALL,SH
+Siena,SIENA,S
+SIU Edwardsville,SIUE,SIUE
+SMU,SMU,SMU
+South Alabama,USA,USA
+South Carolina,SCAR,USC
+South Carolina State,SCSU,SCSU
+South Carolina Upstate,SCUP,U
+South Dakota,SDAK,SD
+South Dakota State,SDKST,SDSU
+South Florida,USF,USF
+Southeast Missouri State,SEMO,SEMO
+Southern,SOU,S
+Southern Illinois,SIU,SIU
+Southern Indiana,USI,USI
+Southern Miss,SOMISS,SM
+Southern Utah,SUU,SUU
+St. Bonaventure,BON,SB
+St. John's,STJ,SJ
+St. Thomas-Minnesota,STTHO,ST
+Stanford,STAN,S
+Stephen F. Austin,SFA,SFA
+Stetson,STET,S
+Stonehill,STON,S
+Stony Brook,SB,SB
+Syracuse,CUSE,S
+Tarleton State,TARL,T
+TCU,TCU,TCU
+Temple,TEMP,T
+Tennessee,TENN,T
+Tennessee State,TENST,TSU
+Tennessee Tech,TTU,TT
+Texas,TEX,T
+Texas A&M,TAMU,A&M
+Texas A&M-Corpus Christi,TAMUCC,CC
+Texas Southern,TXSO,TSU
+Texas State,TXST,TSU
+Texas Tech,TT,TT
+The Citadel,CITA,C
+Toledo,TOL,T
+Towson,TOW,T
+Troy,TROY,T
+Tulane,TUL,T
+Tulsa,TULSA,T
+UAB,UAB,UAB
+UAlbany,ALB,A
+UC Davis,UCDAV,D
+UC Irvine,UCI,I
+UC Riverside,UCR,R
+UC San Diego,UCSD,SD
+UC Santa Barbara,UCSB,SB
+UCF,UCF,UCF
+UCLA,UCLA,UCLA
+UConn,UCONN,C
+UIC,UIC,UIC
+UL Monroe,ULM,ULM
+UMass Lowell,LOWELL,UML
+UMBC,UMBC,UMBC
+UNC Asheville,UNCA,A
+UNC Greensboro,UNCG,G
+UNC Wilmington,UNCW,W
+UNLV,UNLV,UNLV
+USC,USC,USC
+UT Arlington,UTA,UTA
+UT Martin,UTM,UTM
+UT Rio Grande Valley,UTRGV,UTRGV
+Utah,UTAH,U
+Utah State,UTST,USU
+Utah Tech,UTU,UT
+Utah Valley,UVU,UVU
+UTEP,UTEP,UTEP
+UTSA,UTSA,UTSA
+Valparaiso,VALPO,V
+Vanderbilt,VAND,V
+VCU,VCU,VCU
+Vermont,VERM,V
+Villanova,NOVA,V
+Virginia,UVA,V
+Virginia Tech,VT,VT
+VMI,VMI,VMI
+Wagner,WAG,W
+Wake Forest,WAKE,WF
+Washington,WASH,W
+Washington State,WSU,WSU
+Weber State,WEBER,WSU
+West Georgia,WGA,WG
+West Virginia,WV,WV
+Western Carolina,WCU,WCU
+Western Illinois,WIU,WIU
+Western Kentucky,WKU,WKU
+Western Michigan,WMU,WMU
+Wichita State,WICH,WSU
+William & Mary,WM,W&M
+Winthrop,WINT,W
+Wisconsin,WISC,W
+Wofford,WOFF,W
+Wright State,WRIG,WSU
+Wyoming,WYO,W
+Xavier,XAV,X
+Yale,YALE,Y
+Youngstown State,YSU,YSU
