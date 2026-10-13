@@ -44,6 +44,31 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def public_program_display_labels(
+    program_rows: list[dict[str, str]],
+    display_rows: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Publish visual labels without changing registered program identity."""
+    program_keys = {row["program_key"] for row in program_rows}
+    labels: dict[str, dict[str, str]] = {}
+    for row in display_rows:
+        key = row.get("program_key", "").strip()
+        header = row.get("header_short", "").strip()
+        badge = row.get("badge_initialism", "").strip()
+        if not key or key in labels or not header or not badge:
+            raise ValueError(f"Missing/duplicate program display label or empty field: {key!r}")
+        if len(header) > 16 or len(badge) > 8:
+            raise ValueError(f"Program display labels exceed supported lengths: {key}")
+        labels[key] = {"header_short": header, "badge_initialism": badge}
+    if set(labels) != program_keys:
+        raise ValueError(
+            "program-display-labels.csv must cover current programs exactly; "
+            f"missing={sorted(program_keys - set(labels))}, "
+            f"unknown={sorted(set(labels) - program_keys)}"
+        )
+    return {"schema_version": 1, "programs": labels}
+
+
 def yes(value: str) -> bool:
     return value.strip().lower() == "yes"
 
@@ -420,6 +445,10 @@ def main() -> int:
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
 
     program_rows = read_csv(programs_path)
+    display_labels = public_program_display_labels(
+        program_rows,
+        read_csv(repo_root / "data" / "reference" / "program-display-labels.csv"),
+    )
     accomplishment_rows = read_csv(accomplishments_path)
     membership_rows = read_csv(memberships_path)
     conference_rows = read_csv(conferences_path)
@@ -719,6 +748,7 @@ def main() -> int:
         "canonical_game_count": len(canonical_rows),
         "files": {
             "programs": "programs.json",
+            "display_labels": "program-display-labels.json",
             "teams_root": "teams/",
         },
     }
@@ -732,6 +762,7 @@ def main() -> int:
     planned = {
         repo_root / "site" / "data" / "manifest.json": json_text(manifest),
         repo_root / "site" / "data" / "programs.json": json_text(programs_payload),
+        repo_root / "site" / "data" / "program-display-labels.json": json_text(display_labels),
     }
     for program_key, payload in team_payloads.items():
         planned[
