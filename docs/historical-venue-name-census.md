@@ -226,7 +226,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000312` | `ALIAS_ONLY` | One continuous Nebraska Coliseum identity; NU Coliseum is shorthand. |
 | `VEN-000316` | `PERIODIZE` | Hershey Sports Arena → Hersheypark Arena. Hershey Community Archives confirms the 1936 opening-era Hershey Sports Arena identity and that the building is now called Hersheypark Arena; current operator usage confirms the no-space `Hersheypark Arena` form. Existing `Hershey Arena` / `Hershey Park Arena` forms are aliases/variants. Exact rename boundary remains implementation-date verification. |
 | `VEN-000318` | `ALIAS_ONLY` | One continuous Loyola Field House identity; Loyola University Fieldhouse is expanded institutional wording/spelling variant. |
-| `VEN-000324` | `CANONICAL_CORRECTION` | One physical Richmond venue; proper canonical name is Robins Center. Robbins Center is erroneous variant, not a naming period. |
+| `VEN-000324` | `CANONICAL_CORRECTION` | Verified: the Richmond facility is Robins Center, named for the E. Claiborne Robins family; University of Richmond Athletics consistently uses `Robins Center` from its 1972 opening through the present. `Robbins Center` is an erroneous spelling, not a historical name. Later shared-reference maintenance should correct the PROJECT_DISPLAY spelling and retain no false naming period. |
 | `VEN-000325` | `PERIODIZE` | Special Events Center → Don Haskins Center; Haskins Center is shorthand of second era. |
 | `VEN-000326` | `PERIODIZE` | Springfield Civic Center → MassMutual Center; Springfield CC is shorthand of first era. |
 | `VEN-000328` | `ALIAS_ONLY` | One continuous Frank Thompson Gymnasium identity; Thompson Gym / Frank Thompson Gym are shortened forms. |
@@ -249,7 +249,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000358` | `ALIAS_ONLY` | One continuous Puerto Vallarta International Convention Center identity; ICC is abbreviation. |
 | `VEN-000363` | `ALIAS_ONLY` | One continuous William and Mary Hall identity; William & Mary Hall is typography/style variant. |
 | `VEN-000369` | `PERIODIZE` | Redbird Arena → CEFCU Arena. |
-| `VEN-000371` | `CANONICAL_CORRECTION` | One Guerra Sports Complex identity; verify authoritative first name spelling, Eugenio vs Eugene, rather than creating naming periods. |
+| `VEN-000371` | `CANONICAL_CORRECTION` | Verified canonical form is Eugenio Guerra Sports Complex. Multiple institutional schedules/records, including Georgia Tech, Maryland, Ole Miss, and contemporaneous American University of Puerto Rico tournament material, use `Eugenio Guerra Sports Complex`; `Eugene Guerra Sports Complex` appears as an English/source error variant. No naming periods are warranted. The existing PROJECT_DISPLAY already has the correct Eugenio form; later registry cleanup should demote/remove the erroneous Eugene alias as appropriate. |
 | `VEN-000373` | `PERIODIZE` | Oregon State Coliseum → Gill Coliseum. |
 | `VEN-000377` | `ALIAS_ONLY` | One continuous Thomas & Mack Center identity; Tarkanian Court is competition-space name and Thomas & Mack Arena is variant. |
 | `VEN-000382` | `IDENTITY_RECONCILE` | Physical identity resolved: Einar Nielsen Field House is the University of Utah arena in Salt Lake City, opened in 1939; George Albert Smith Fieldhouse is BYU’s distinct Provo building, opened for BYU basketball in 1951. Current VEN-000382 conflates two different institutions/cities/buildings. Never periodize Nielsen as a Smith Fieldhouse alias. Later shared-reference maintenance must split/reassign the Nielsen row to its own correct venue identity while preserving Smith Fieldhouse under VEN-000382. |
@@ -328,7 +328,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000582` | `ALIAS_ONLY` | One continuous Einar Nielsen Fieldhouse identity; Nielsen Fieldhouse is shorthand. |
 | `VEN-000583` | `ALIAS_ONLY` | One continuous Donald W. Reynolds Center identity; Reynolds Center is shorthand. |
 | `VEN-000584` | `ALIAS_ONLY` | One continuous Sam Houston Coliseum identity; Houston Coliseum is shorthand. |
-| `VEN-000585` | `CANONICAL_CORRECTION` | State Fair Arena is the physical venue; State Farm Arena [BC source wording] is erroneous source wording, not a historical period. |
+| `VEN-000585` | `PERIODIZE` | State Fair Arena → Jim Norick Arena. City of Oklahoma City states the arena debuted in September 1965 as State Fair Arena and was rechristened Jim Norick Arena in 1971. `State Farm Arena [BC source wording]` is erroneous source wording and must not become a naming period. Exact 1971 rechristening day remains implementation-date verification. |
 | `VEN-000594` | `ALIAS_ONLY` | One continuous JSerra Pavilion identity; The Pavilion at JSerra is expanded form. |
 | `VEN-000597` | `ALIAS_ONLY` | One continuous Robertson Memorial Fieldhouse identity; Memorial Field House is shorthand. |
 | `VEN-000600` | `ALIAS_ONLY` | One continuous Ladies/Women’s Gymnasium identity; Old Ladies Gymnasium is retrospective descriptor rather than a separate period. |
@@ -343,7 +343,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000654` | `PERIODIZE` | Charleston Civic Center → Charleston Coliseum & Convention Center; Charleston Coliseum is shorthand/current arena wording. |
 | `VEN-000673` | `ALIAS_ONLY` | One continuous WVU Armory identity; ROTC Armory / Armory are aliases unless later evidence establishes a formal rename. |
 | `VEN-000674` | `ALIAS_ONLY` | One continuous Armory Fieldhouse identity. University of Cincinnati Athletics states the facility opened 1954-12-18 as Armory Fieldhouse and consistently treats that as the historical basketball venue name. `UC Fieldhouse` is source/institutional shorthand rather than a verified formal predecessor name; no naming-period conversion is warranted. |
-| `VEN-000683` | `CANONICAL_CORRECTION` | Duplicate literal Orange County Civic Center rows represent one naming identity; registry cleanup only, no periodization. |
+| `VEN-000683` | `CANONICAL_CORRECTION` | Verified mechanical duplicate: protected main contains two literal `Orange County Civic Center` rows for VEN-000683, one PROJECT_DISPLAY and one HISTORICAL_OR_ALIAS, with the same normalized name and no distinct historical-name claim. This is one naming identity; later registry cleanup should remove the redundant alias row only. No periodization or historical adjudication is required. |
 | `VEN-000695` | `ALIAS_ONLY` | One continuous Devlin Fieldhouse identity; Avron B. Fogelman Arena is the named competition space within the same building. |
 | `VEN-000708` | `ALIAS_ONLY` | One continuous Memorial Coliseum (Winston-Salem) identity; W-S Coliseum is shorthand. |
 | `VEN-000709` | `ALIAS_ONLY` | One continuous Montego Bay Convention Center identity; Centre is spelling variant. |
