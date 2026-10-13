@@ -1,0 +1,1260 @@
+{
+  "allowed_changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/evidence/ncaa-tournament-sites.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/arizona-state/venues.csv",
+    "schools/boston-college/venues.csv",
+    "schools/california/venues.csv",
+    "schools/cincinnati/venues.csv",
+    "schools/colorado/venues.csv",
+    "schools/georgia-tech/venues.csv",
+    "schools/houston/venues.csv",
+    "schools/maryland/source-games.csv",
+    "schools/maryland/venues.csv",
+    "schools/miami/venues.csv",
+    "schools/north-carolina/venues.csv",
+    "schools/northwestern/source-games.csv",
+    "schools/northwestern/venues.csv",
+    "schools/notre-dame/venues.csv",
+    "schools/ohio-state/source-games.csv",
+    "schools/ohio-state/venues.csv",
+    "schools/oregon/venues.csv",
+    "schools/providence/venues.csv",
+    "schools/south-carolina/source-games.csv",
+    "schools/south-carolina/venues.csv",
+    "schools/st-john-s/source-games.csv",
+    "schools/st-john-s/venues.csv",
+    "schools/syracuse/venues.csv",
+    "schools/texas-tech/venues.csv",
+    "schools/utah/venues.csv",
+    "schools/virginia-tech/source-games.csv",
+    "schools/virginia-tech/venues.csv",
+    "schools/virginia/venues.csv",
+    "schools/west-virginia/venues.csv",
+    "site/data/*.json",
+    "site/data/**/*.json"
+  ],
+  "expected_base_sha": "49207239a9336f0433cc8289fff0e1cec149db0f",
+  "postconditions": [
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "display_name": "Evanston Township High School",
+          "venue_id": "VEN-000865",
+          "venue_key": "evanston-township-high-school"
+        }
+      },
+      "path": "data/reference/venues.csv"
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "display_name": "Patten Gymnasium",
+          "venue_id": "VEN-000160",
+          "venue_key": "patten-gymnasium-1909"
+        }
+      },
+      "path": "data/reference/venues.csv"
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "display_name": "Patten Gymnasium",
+          "venue_id": "VEN-000156",
+          "venue_key": "patten-gymnasium-1940"
+        }
+      },
+      "path": "data/reference/venues.csv"
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "display_name": "Robins Center",
+          "venue_id": "VEN-000324",
+          "venue_key": "robins-center"
+        }
+      },
+      "path": "data/reference/venues.csv"
+    },
+    {
+      "expected_count": 0,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000382",
+          "venue_name": "Nielsen Field House"
+        }
+      },
+      "path": "data/reference/venue-names.csv"
+    },
+    {
+      "expected_count": 0,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000554",
+          "venue_name": "Rice Field House"
+        }
+      },
+      "path": "data/reference/venue-names.csv"
+    },
+    {
+      "expected_count": 0,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000371",
+          "venue_name": "Eugene Guerra Sports Complex"
+        }
+      },
+      "path": "data/reference/venue-names.csv"
+    },
+    {
+      "expected_count": 0,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000433",
+          "venue_name": "Atlantic City Convention Center"
+        }
+      },
+      "path": "data/reference/venue-names.csv"
+    },
+    {
+      "expected_count": 3,
+      "match": {
+        "eq": {
+          "name_type": "OFFICIAL_NAMING_PERIOD",
+          "venue_id": "VEN-000433"
+        }
+      },
+      "path": "data/reference/venue-names.csv"
+    },
+    {
+      "expected_count": 79,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME",
+          "curated_venue_name": "Chicago Stadium"
+        },
+        "regex": {
+          "raw_text": "\\(C\\)"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv"
+    },
+    {
+      "expected_count": 89,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME",
+          "curated_venue_name": "Evanston Township High School"
+        },
+        "gt": {
+          "game_date": "1939-03-27"
+        },
+        "lt": {
+          "game_date": "1952-12-06"
+        },
+        "not_regex": {
+          "raw_text": "\\(C\\)"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv"
+    },
+    {
+      "expected_count": 19,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME",
+          "curated_venue_name": ""
+        },
+        "lt": {
+          "game_date": "1910-01-01"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv"
+    },
+    {
+      "expected_count": 0,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000156"
+        }
+      },
+      "path": "schools/northwestern/venues.csv"
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "games_currently_assigned": "79",
+          "venue_id": "VEN-000044"
+        }
+      },
+      "path": "schools/northwestern/venues.csv"
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "games_currently_assigned": "89",
+          "venue_id": "VEN-000865"
+        }
+      },
+      "path": "schools/northwestern/venues.csv"
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "games_currently_assigned": "1017",
+          "venue_id": "VEN-000229"
+        }
+      },
+      "path": "schools/northwestern/venues.csv"
+    }
+  ],
+  "schema_version": 1,
+  "school_venue_additions": [
+    {
+      "path": "schools/northwestern/venues.csv",
+      "row": {
+        "canonical_name": "Chicago Stadium",
+        "city": "Chicago",
+        "first_assigned_game": "1931-12-17",
+        "games_currently_assigned": "79",
+        "known_closed": "",
+        "known_opened": "",
+        "last_assigned_game": "1974-02-08",
+        "notes": "Exact game-level alternate home site; venue identity does not alter HOME classification.",
+        "relationship_date_precision": "EXACT_GAME",
+        "relationship_end": "",
+        "relationship_start": "",
+        "relationship_type": "alternate_home_site",
+        "site_rule": "Assign only to exact Northwestern SOURCE_PROGRAM_HOME rows whose preserved raw_text carries the institutional (C) marker.",
+        "source_basis": "Northwestern historical media-guide year-by-year legend: (C) denotes Chicago Stadium.",
+        "source_program_key": "northwestern",
+        "state": "IL",
+        "venue_date_precision": "",
+        "venue_id": "VEN-000044",
+        "venue_key": "chicago-stadium",
+        "venue_type": "arena"
+      },
+      "unique_match": {
+        "eq": {
+          "venue_id": "VEN-000044"
+        }
+      }
+    },
+    {
+      "path": "schools/northwestern/venues.csv",
+      "row": {
+        "canonical_name": "Evanston Township High School",
+        "city": "Evanston",
+        "first_assigned_game": "1939-12-05",
+        "games_currently_assigned": "89",
+        "known_closed": "",
+        "known_opened": "",
+        "last_assigned_game": "1952-03-01",
+        "notes": "Northwestern varsity men played home games here during the off-campus interval; Chicago Stadium exceptions remain exact-game assignments.",
+        "relationship_date_precision": "season",
+        "relationship_end": "1951-1952",
+        "relationship_start": "1939-1940",
+        "relationship_type": "primary_home",
+        "site_rule": "Default Northwestern HOME site after the original Patten closed and before McGaw opened, except exact rows marked (C) for Chicago Stadium.",
+        "source_basis": "Northwestern institutional Patten Gymnasium history plus preserved historical media-guide game log.",
+        "source_program_key": "northwestern",
+        "state": "IL",
+        "venue_date_precision": "",
+        "venue_id": "VEN-000865",
+        "venue_key": "evanston-township-high-school",
+        "venue_type": "gymnasium"
+      },
+      "unique_match": {
+        "eq": {
+          "venue_id": "VEN-000865"
+        }
+      }
+    }
+  ],
+  "school_venue_deletes": [
+    {
+      "expected": {
+        "games_currently_assigned": "306",
+        "venue_key": "old-patton-gymnasium"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000156"
+        }
+      },
+      "path": "schools/northwestern/venues.csv"
+    }
+  ],
+  "school_venue_updates": [
+    {
+      "expected": {
+        "aliases": "Nielsen Field House",
+        "canonical_name": "Smith Fieldhouse",
+        "venue_key": "smith-fieldhouse"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000382"
+        }
+      },
+      "path": "schools/utah/venues.csv",
+      "remove_aliases": [
+        "Nielsen Field House"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "aliases": "Rice Field House;Rice Gym;Autry Court",
+        "venue_key": "autry-court"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000554"
+        }
+      },
+      "path": "schools/houston/venues.csv",
+      "remove_aliases": [
+        "Rice Field House"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "canonical_name": "Rice Gymnasium",
+        "venue_key": "rice-gymnasium"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000564"
+        }
+      },
+      "path": "schools/texas-tech/venues.csv",
+      "set": {
+        "canonical_name": "Rice Field House",
+        "venue_key": "rice-field-house"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/arizona-state/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/california/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/maryland/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/miami/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/north-carolina/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/providence/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/south-carolina/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/st-john-s/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/syracuse/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/virginia-tech/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/virginia/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "venue_key": "robbins-center"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000324"
+        }
+      },
+      "path": "schools/west-virginia/venues.csv",
+      "remove_aliases": [
+        "Robbins Center",
+        "Robins Center"
+      ],
+      "set": {
+        "canonical_name": "Robins Center",
+        "venue_key": "robins-center"
+      }
+    },
+    {
+      "expected": {
+        "aliases": "Eugene Guerra Sports Complex"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000371"
+        }
+      },
+      "path": "schools/arizona-state/venues.csv",
+      "remove_aliases": [
+        "Eugene Guerra Sports Complex"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "aliases": "Eugene Guerra Sports Complex"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000371"
+        }
+      },
+      "path": "schools/boston-college/venues.csv",
+      "remove_aliases": [
+        "Eugene Guerra Sports Complex"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "aliases": "Eugene Guerra Sports Complex"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000371"
+        }
+      },
+      "path": "schools/cincinnati/venues.csv",
+      "remove_aliases": [
+        "Eugene Guerra Sports Complex"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "aliases": "Eugene Guerra Sports Complex"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000371"
+        }
+      },
+      "path": "schools/colorado/venues.csv",
+      "remove_aliases": [
+        "Eugene Guerra Sports Complex"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "aliases": "Eugene Guerra Sports Complex"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000371"
+        }
+      },
+      "path": "schools/utah/venues.csv",
+      "remove_aliases": [
+        "Eugene Guerra Sports Complex"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "aliases": "Atlantic City Convention Center; Atlantic City Convention Hall"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000433"
+        }
+      },
+      "path": "schools/georgia-tech/venues.csv",
+      "remove_aliases": [
+        "Atlantic City Convention Center"
+      ],
+      "set": {}
+    },
+    {
+      "expected": {
+        "canonical_name": "Patton Gymnasium",
+        "games_currently_assigned": "142",
+        "venue_key": "patton-gymnasium"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000160"
+        }
+      },
+      "path": "schools/northwestern/venues.csv",
+      "set": {
+        "canonical_name": "Patten Gymnasium",
+        "first_assigned_game": "1910-01-23",
+        "games_currently_assigned": "281",
+        "known_closed": "1940",
+        "known_opened": "1909",
+        "last_assigned_game": "1939-02-25",
+        "notes": "Original 1909 Patten Gymnasium. Exact game-level source evidence overrides chronology; the institutional (C) marker denotes Chicago Stadium.",
+        "relationship_date_precision": "season",
+        "relationship_end": "1938-1939",
+        "relationship_start": "1909-1910",
+        "relationship_type": "primary_home",
+        "site_rule": "",
+        "source_basis": "Northwestern institutional Patten Gymnasium history and preserved media-guide game log",
+        "venue_date_precision": "year",
+        "venue_key": "patten-gymnasium-1909"
+      }
+    },
+    {
+      "expected": {
+        "games_currently_assigned": "1028"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000229"
+        }
+      },
+      "path": "schools/northwestern/venues.csv",
+      "set": {
+        "games_currently_assigned": "1017"
+      }
+    },
+    {
+      "expected": {
+        "canonical_name": "Patton Gymnasium",
+        "venue_key": "patton-gymnasium"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000160"
+        }
+      },
+      "path": "schools/notre-dame/venues.csv",
+      "remove_aliases": [
+        "Patten Gymnasium",
+        "Patton Gymnasium"
+      ],
+      "set": {
+        "canonical_name": "Patten Gymnasium",
+        "venue_key": "patten-gymnasium-1909"
+      }
+    },
+    {
+      "expected": {
+        "canonical_name": "Patton Gymnasium",
+        "venue_key": "patton-gymnasium"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000160"
+        }
+      },
+      "path": "schools/ohio-state/venues.csv",
+      "remove_aliases": [
+        "Patten Gymnasium",
+        "Patton Gymnasium"
+      ],
+      "set": {
+        "canonical_name": "Patten Gymnasium",
+        "venue_key": "patten-gymnasium-1909"
+      }
+    },
+    {
+      "expected": {
+        "canonical_name": "Patten Gymnasium",
+        "venue_key": "patton-gymnasium"
+      },
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "venue_id": "VEN-000160"
+        }
+      },
+      "path": "schools/oregon/venues.csv",
+      "remove_aliases": [
+        "Patten Gymnasium",
+        "Patton Gymnasium"
+      ],
+      "set": {
+        "canonical_name": "Patten Gymnasium",
+        "venue_key": "patten-gymnasium-1909"
+      }
+    }
+  ],
+  "source_game_rules": [
+    {
+      "description": "Pre-1910 HOME rows: clear unsupported exact venue",
+      "expected_count": 19,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME",
+          "curated_venue_name": "Old Patton Gymnasium"
+        },
+        "lt": {
+          "game_date": "1910-01-01"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv",
+      "set": {
+        "city": "Evanston",
+        "curated_venue_name": "",
+        "state": "IL"
+      }
+    },
+    {
+      "description": "Original Patten HOME rows, excluding Chicago Stadium marker",
+      "expected_count": 281,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME"
+        },
+        "gte": {
+          "game_date": "1910-01-01"
+        },
+        "lte": {
+          "game_date": "1939-03-27"
+        },
+        "not_regex": {
+          "raw_text": "\\(C\\)"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv",
+      "set": {
+        "city": "Evanston",
+        "curated_venue_name": "Patten Gymnasium",
+        "state": "IL"
+      }
+    },
+    {
+      "description": "Every institutional (C) HOME row is Chicago Stadium",
+      "expected_count": 79,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME"
+        },
+        "regex": {
+          "raw_text": "\\(C\\)"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv",
+      "set": {
+        "city": "Chicago",
+        "curated_venue_name": "Chicago Stadium",
+        "state": "IL"
+      }
+    },
+    {
+      "description": "Off-campus Evanston HOME rows between Patten and McGaw, excluding Chicago Stadium",
+      "expected_count": 89,
+      "match": {
+        "eq": {
+          "curated_site_type": "SOURCE_PROGRAM_HOME"
+        },
+        "gt": {
+          "game_date": "1939-03-27"
+        },
+        "lt": {
+          "game_date": "1952-12-06"
+        },
+        "not_regex": {
+          "raw_text": "\\(C\\)"
+        }
+      },
+      "path": "schools/northwestern/source-games.csv",
+      "set": {
+        "city": "Evanston",
+        "curated_venue_name": "Evanston Township High School",
+        "state": "IL"
+      }
+    },
+    {
+      "description": "Correct derived NCAA venue spelling while preserving raw source text",
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "curated_venue_name": "Patton Gymnasium",
+          "source_game_id": "OSURAW-00661"
+        }
+      },
+      "path": "schools/ohio-state/source-games.csv",
+      "set": {
+        "city": "Evanston",
+        "curated_venue_name": "Patten Gymnasium",
+        "state": "IL"
+      }
+    },
+    {
+      "description": "Correct derived Robins Center spelling",
+      "expected_count": 2,
+      "match": {
+        "eq": {
+          "curated_venue_name": "Robbins Center"
+        },
+        "in": {
+          "source_game_id": [
+            "MDRAW-01662",
+            "MDRAW-01663"
+          ]
+        }
+      },
+      "path": "schools/maryland/source-games.csv",
+      "set": {
+        "city": "Richmond",
+        "curated_venue_name": "Robins Center",
+        "state": "VA"
+      }
+    },
+    {
+      "description": "Correct derived Robins Center spelling",
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "curated_venue_name": "Robbins Center",
+          "source_game_id": "SCARAW-01739"
+        }
+      },
+      "path": "schools/south-carolina/source-games.csv",
+      "set": {
+        "city": "Richmond",
+        "curated_venue_name": "Robins Center",
+        "state": "VA"
+      }
+    },
+    {
+      "description": "Correct derived Robins Center spelling",
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "curated_venue_name": "Robbins Center",
+          "source_game_id": "SJ-GUIDE-2008-2009-034"
+        }
+      },
+      "path": "schools/st-john-s/source-games.csv",
+      "set": {
+        "city": "Richmond",
+        "curated_venue_name": "Robins Center",
+        "state": "VA"
+      }
+    },
+    {
+      "description": "Correct derived Robins Center spelling on exact accepted game-site rows",
+      "expected_count": 2,
+      "match": {
+        "eq": {
+          "curated_venue_name": "Robbins Center"
+        },
+        "in": {
+          "source_game_id": [
+            "VTST1-001394",
+            "VTST1-001813"
+          ]
+        }
+      },
+      "path": "schools/virginia-tech/source-games.csv",
+      "set": {
+        "city": "Richmond",
+        "curated_venue_name": "Robins Center",
+        "state": "VA"
+      }
+    }
+  ],
+  "validation_tests": [
+    "tests.test_global_venue_reference",
+    "tests.test_historical_venue_name_periods"
+  ],
+  "venue_additions": [
+    {
+      "require_next_numeric_id": true,
+      "row": {
+        "city": "Evanston",
+        "closed": "",
+        "date_precision": "",
+        "display_name": "Evanston Township High School",
+        "identity_status": "RESEARCHED_HISTORICAL_CORRECTION",
+        "notes": "Northwestern men's basketball primary Evanston home after the original Patten Gymnasium closed and before McGaw Memorial Hall opened; exact game assignments preserve Chicago Stadium exceptions from the institutional source legend.",
+        "opened": "",
+        "source_basis": "https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html",
+        "state": "IL",
+        "venue_id": "VEN-000865",
+        "venue_key": "evanston-township-high-school"
+      }
+    }
+  ],
+  "venue_name_additions": [
+    {
+      "row": {        "date_precision": "",
+        "name_type": "PROJECT_DISPLAY",
+        "normalized_name": "evanstontownshiphighschool",
+        "notes": "Registered for exact Northwestern historical home-site assignments.",
+        "source_basis": "https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html",
+        "valid_from": "",
+        "valid_to": "",
+        "venue_id": "VEN-000865",
+        "venue_name": "Evanston Township High School"
+      }
+    },
+    {
+      "row": {
+        "date_precision": "EXACT",
+        "name_type": "OFFICIAL_NAMING_PERIOD",
+        "normalized_name": "atlanticcityconventionhall",
+        "notes": "Formal opening-era name of the 1929 hall.",
+        "source_basis": "https://www.boardwalkhall.com/about-us",
+        "valid_from": "1929-05-31",
+        "valid_to": "2001-10-10",
+        "venue_id": "VEN-000433",
+        "venue_name": "Atlantic City Convention Hall"
+      }
+    },
+    {
+      "row": {
+        "date_precision": "EXACT",
+        "name_type": "OFFICIAL_NAMING_PERIOD",
+        "normalized_name": "boardwalkhall",
+        "notes": "Boardwalk Hall rename/reopening period.",
+        "source_basis": "https://www.boardwalkhall.com/about-us",
+        "valid_from": "2001-10-11",
+        "valid_to": "2018-01-15",
+        "venue_id": "VEN-000433",
+        "venue_name": "Boardwalk Hall"
+      }
+    },
+    {
+      "row": {
+        "date_precision": "EXACT",
+        "name_type": "OFFICIAL_NAMING_PERIOD",
+        "normalized_name": "jimwhelanboardwalkhall",
+        "notes": "New Jersey statutory designation effective 2018-01-16.",
+        "source_basis": "https://www.nj.gov/casinos/law/act/docs_article16/cca-article16.pdf",
+        "valid_from": "2018-01-16",
+        "valid_to": "",
+        "venue_id": "VEN-000433",
+        "venue_name": "Jim Whelan Boardwalk Hall"
+      }
+    }
+  ],
+  "venue_name_deletes": [
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000382",
+          "venue_name": "Nielsen Field House"
+        }
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000554",
+          "venue_name": "Rice Field House"
+        }
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000324",
+          "venue_name": "Robins Center"
+        }
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000371",
+          "venue_name": "Eugene Guerra Sports Complex"
+        }
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000683",
+          "venue_name": "Orange County Civic Center"
+        }
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000433",
+          "venue_name": "Atlantic City Convention Center"
+        }
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "HISTORICAL_OR_ALIAS",
+          "venue_id": "VEN-000160",
+          "venue_name": "Patten Gymnasium"
+        }
+      }
+    }
+  ],
+  "venue_name_updates": [
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "PROJECT_DISPLAY",
+          "venue_id": "VEN-000564",
+          "venue_name": "Rice Gymnasium"
+        }
+      },
+      "set": {
+        "normalized_name": "ricefieldhouse",
+        "notes": "Corrected to the pre-1950 Rice Field House identity; 1947 Rice Gymnasium wording remains source-scoped provenance.",
+        "source_basis": "https://riceowls.com/sports/2018/7/17/facilities-track-soccer-stadium-html | https://facilities.rice.edu/construction/the-first-100-years",
+        "venue_name": "Rice Field House"
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "PROJECT_DISPLAY",
+          "venue_id": "VEN-000324",
+          "venue_name": "Robbins Center"
+        }
+      },
+      "set": {
+        "normalized_name": "robinscenter",
+        "venue_name": "Robins Center"
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "PROJECT_DISPLAY",
+          "venue_id": "VEN-000160",
+          "venue_name": "Patton Gymnasium"
+        }
+      },
+      "set": {
+        "normalized_name": "pattengymnasium",
+        "notes": "Correct spelling and original 1909 physical identity.",
+        "source_basis": "https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html",
+        "venue_name": "Patten Gymnasium"
+      }
+    },
+    {
+      "expected_count": 1,
+      "match": {
+        "eq": {
+          "name_type": "PROJECT_DISPLAY",
+          "venue_id": "VEN-000156",
+          "venue_name": "Old Patton Gymnasium"
+        }
+      },
+      "set": {
+        "normalized_name": "pattengymnasium",
+        "notes": "Distinct 1940 replacement building; display name is the formal Patten Gymnasium name.",
+        "source_basis": "https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html",
+        "venue_name": "Patten Gymnasium"
+      }
+    }
+  ],
+  "venue_updates": [
+    {
+      "expected": {
+        "display_name": "Rice Gymnasium",
+        "venue_key": "rice-gymnasium"
+      },
+      "expected_assertion_rows": 0,
+      "expected_canonical_rows": 0,
+      "expected_ncaa_rows": 0,
+      "set": {
+        "display_name": "Rice Field House",
+        "identity_status": "RESEARCHED_HISTORICAL_CORRECTION",
+        "notes": "Corrected to the pre-1950 Rice Field House physical identity. The 1947 Texas Tech source-literal Rice Gymnasium wording remains preserved only in source provenance.",
+        "source_basis": "https://riceowls.com/sports/2018/7/17/facilities-track-soccer-stadium-html | https://facilities.rice.edu/construction/the-first-100-years",
+        "venue_key": "rice-field-house"
+      },
+      "venue_id": "VEN-000564"
+    },
+    {
+      "expected": {
+        "display_name": "Robbins Center",
+        "venue_key": "robbins-center"
+      },
+      "expected_assertion_rows": 0,
+      "expected_canonical_rows": 0,
+      "expected_ncaa_rows": 0,
+      "set": {
+        "display_name": "Robins Center",
+        "venue_key": "robins-center"
+      },
+      "venue_id": "VEN-000324"
+    },
+    {
+      "expected": {
+        "display_name": "Patton Gymnasium",
+        "venue_key": "patton-gymnasium"
+      },
+      "expected_assertion_rows": 0,
+      "expected_canonical_rows": 0,
+      "expected_ncaa_rows": 0,
+      "set": {
+        "closed": "1940",
+        "date_precision": "year",
+        "display_name": "Patten Gymnasium",
+        "identity_status": "RESEARCHED_HISTORICAL_CORRECTION",
+        "notes": "Original 1909 Patten Gymnasium; hosted the 1939 NCAA championship and was demolished in 1940. Distinct from the 1940 replacement building.",
+        "opened": "1909",
+        "source_basis": "https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html | https://maps.northwestern.edu/txt/facility/154",
+        "venue_key": "patten-gymnasium-1909"
+      },
+      "venue_id": "VEN-000160"
+    },
+    {
+      "expected": {
+        "display_name": "Old Patton Gymnasium",
+        "venue_key": "old-patton-gymnasium"
+      },
+      "expected_assertion_rows": 0,
+      "expected_canonical_rows": 0,
+      "expected_ncaa_rows": 0,
+      "set": {
+        "closed": "",
+        "date_precision": "year",
+        "display_name": "Patten Gymnasium",
+        "identity_status": "RESEARCHED_HISTORICAL_CORRECTION",
+        "notes": "Distinct 1940 replacement Patten Gymnasium. Northwestern varsity men's basketball did not use this building as its home venue.",
+        "opened": "1940",
+        "source_basis": "https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html | https://maps.northwestern.edu/txt/facility/154",
+        "venue_key": "patten-gymnasium-1940"
+      },
+      "venue_id": "VEN-000156"
+    }
+  ]
+}

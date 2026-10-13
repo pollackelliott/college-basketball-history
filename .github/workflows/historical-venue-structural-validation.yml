@@ -1,0 +1,176 @@
+name: Historical venue structural maintenance validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/venue_structural_transaction.py'
+      - 'tests/test_venue_structural_transaction.py'
+      - 'tests/test_historical_venue_name_periods.py'
+      - 'tests/test_historical_venue_structural_corrections.py'
+      - 'data/reconciliation/venue-structural-maintenance/**'
+      - 'data/reconciliation/venue-identity-maintenance/historical-seattle-center.json'
+      - 'data/reference/venues.csv'
+      - 'data/reference/venue-names.csv'
+      - 'schools/**/venues.csv'
+      - 'schools/**/source-games.csv'
+      - 'site/data/**'
+      - '.github/workflows/historical-venue-structural-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run transaction fixture tests
+        run: |
+          python -m py_compile tools/venue_structural_transaction.py
+          python -m unittest tests.test_venue_structural_transaction -v
+          python -m unittest tests.test_venue_identity_transaction -v
+
+      - name: Detect structural-maintenance lifecycle state
+        id: lifecycle
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, os
+          from pathlib import Path
+
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as handle:
+                  return list(csv.DictReader(handle))
+
+          venues = {r['venue_id']: r for r in rows('data/reference/venues.csv')}
+          names = rows('data/reference/venue-names.csv')
+          pre = (
+              'VEN-000315' in venues
+              and venues.get('VEN-000324', {}).get('display_name') == 'Robbins Center'
+              and 'VEN-000865' not in venues
+              and any(r.get('venue_id') == 'VEN-000382' and r.get('venue_name') == 'Nielsen Field House' for r in names)
+          )
+          post = (
+              'VEN-000315' not in venues
+              and venues.get('VEN-000324', {}).get('display_name') == 'Robins Center'
+              and venues.get('VEN-000865', {}).get('venue_key') == 'evanston-township-high-school'
+              and not any(r.get('venue_id') == 'VEN-000382' and r.get('venue_name') == 'Nielsen Field House' for r in names)
+          )
+          if pre == post:
+              raise SystemExit('FAIL: repository is in neither exact pre-state nor exact post-state')
+          state = 'pre' if pre else 'post'
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as handle:
+              handle.write(f'state={state}\n')
+          print('STRUCTURAL_MAINTENANCE_STATE=' + state)
+          PY
+
+      - name: Rehearse Seattle merge and structural transaction
+        if: steps.lifecycle.outputs.state == 'pre'
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/venue-structural-rehearsal /tmp/venue-structural-output
+          cp -a "$GITHUB_WORKSPACE" /tmp/venue-structural-rehearsal
+          cd /tmp/venue-structural-rehearsal
+          git config user.email actions@github.com
+          git config user.name 'GitHub Actions rehearsal'
+
+          python tools/venue_identity_transaction.py plan \
+            data/reconciliation/venue-identity-maintenance/historical-seattle-center.json \
+            --output /tmp/seattle-plan.json
+          SEATTLE_SHA=$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/seattle-plan.json'))['plan_sha256'])
+          PY
+          )
+          python tools/venue_identity_transaction.py apply \
+            data/reconciliation/venue-identity-maintenance/historical-seattle-center.json \
+            --expected-plan-sha256 "$SEATTLE_SHA" --apply
+
+          git add -A
+          git commit -m 'rehearsal: Seattle venue identity merge'
+
+          python tools/venue_structural_transaction.py plan \
+            data/reconciliation/venue-structural-maintenance/historical-venue-structural-corrections.json \
+            --output /tmp/structural-plan.json
+          STRUCTURAL_SHA=$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/structural-plan.json'))['plan_sha256'])
+          PY
+          )
+          python tools/venue_structural_transaction.py apply \
+            data/reconciliation/venue-structural-maintenance/historical-venue-structural-corrections.json \
+            --expected-plan-sha256 "$STRUCTURAL_SHA" --apply
+
+          python tools/validate_data.py
+          python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
+
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          def rows(path):
+              with Path(path).open(encoding='utf-8-sig', newline='') as h:
+                  return list(csv.DictReader(h))
+          venues={r['venue_id']:r for r in rows('data/reference/venues.csv')}
+          assert 'VEN-000315' not in venues
+          assert venues['VEN-000102']['venue_key']=='keyarena'
+          assert venues['VEN-000160']['venue_key']=='patten-gymnasium-1909'
+          assert venues['VEN-000156']['venue_key']=='patten-gymnasium-1940'
+          assert venues['VEN-000865']['venue_key']=='evanston-township-high-school'
+          names=rows('data/reference/venue-names.csv')
+          periods=[r for r in names if r.get('venue_id')=='VEN-000433' and r.get('name_type')=='OFFICIAL_NAMING_PERIOD']
+          assert [(r['venue_name'],r['valid_from'],r['valid_to']) for r in periods] == [
+              ('Atlantic City Convention Hall','1929-05-31','2001-10-10'),
+              ('Boardwalk Hall','2001-10-11','2018-01-15'),
+              ('Jim Whelan Boardwalk Hall','2018-01-16',''),
+          ]
+          nw=rows('schools/northwestern/source-games.csv')
+          home=[r for r in nw if r.get('curated_site_type')=='SOURCE_PROGRAM_HOME']
+          assert sum(r.get('curated_venue_name')=='Chicago Stadium' and '(C)' in r.get('raw_text','') for r in home)==79
+          assert sum(r.get('curated_venue_name')=='Evanston Township High School' for r in home)==89
+          assert sum(r.get('curated_venue_name')=='' and r.get('game_date','')<'1910-01-01' for r in home)==19
+          print('STRUCTURAL_POSTCONDITIONS=PASS')
+          PY
+
+          ORIGIN_SHA='${{ github.event.pull_request.head.sha }}'
+          git diff --check "$ORIGIN_SHA"
+          git diff --name-only "$ORIGIN_SHA" > /tmp/changed-files.txt
+          mkdir -p /tmp/venue-structural-output/files /tmp/venue-structural-output/plans
+          while IFS= read -r path; do
+            [ -n "$path" ] || continue
+            mkdir -p "/tmp/venue-structural-output/files/$(dirname "$path")"
+            cp "$path" "/tmp/venue-structural-output/files/$path"
+          done < /tmp/changed-files.txt
+          cp /tmp/seattle-plan.json /tmp/venue-structural-output/plans/
+          cp /tmp/structural-plan.json /tmp/venue-structural-output/plans/
+          cp /tmp/changed-files.txt /tmp/venue-structural-output/
+          git diff --binary "$ORIGIN_SHA" > /tmp/venue-structural-output/transaction.patch
+          printf 'SEATTLE_PLAN_SHA=%s\nSTRUCTURAL_PLAN_SHA=%s\n' "$SEATTLE_SHA" "$STRUCTURAL_SHA" > /tmp/venue-structural-output/plan-shas.txt
+
+      - name: Upload exact rehearsed transaction output
+        if: steps.lifecycle.outputs.state == 'pre'
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-venue-structural-transaction-output
+          path: /tmp/venue-structural-output
+          retention-days: 7
+
+      - name: Validate committed post-transaction state
+        if: steps.lifecycle.outputs.state == 'post'
+        run: |
+          python tools/validate_data.py
+          python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
+          git diff --check
