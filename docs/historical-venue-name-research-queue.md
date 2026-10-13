@@ -6,7 +6,7 @@ Protected-main census baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This queue is mechanically derived from every census row with disposition `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`.
 
-There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 1, **66 rows representing 65 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item.
+There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 2, **61 rows representing 60 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item.
 
 The split is organizational, not historical authority. The owner may reassign any item. No result becomes authoritative merely because one side researched it; findings must be written back to the durable census/research ledger with authoritative evidence and, where needed, explicit owner adjudication.
 
@@ -64,16 +64,21 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000250` | `PERIODIZE` | Mississippi State Gymnasium → McCarthy Gymnasium. `New Gym` is shorthand, not a separate formal period. Mississippi State Athletics states the building was initially called Mississippi State Gymnasium and was renamed for Babe McCarthy after his death in 1975. Exact 1975 rename day remains implementation-date verification. Source: https://hailstate.com/news/2022/9/26/womens-basketball-basketball-set-to-host-annual-maroon-madness-event-but-with-a-twist |
 | `VEN-000234` | remains `RESEARCH_HOLD` | Bounded research did not establish a reliable exact boundary/formal status for Worcester’s Centrum Centre, nor an exact effective day for DCU naming. Official DCU evidence confirms an October 2004 naming-rights partnership. Stop here until a stronger city/venue archival source resolves the residual. Source: https://www.dcucenter.com/venue-info/dcu-digital-federal-credit-union/ |
 
+## Completed assistant research — tranche 2
+
+| Venue | Result | Durable evidence / residual |
+|---|---|---|
+| `VEN-000271` | `ALIAS_ONLY` | One continuous Raider Arena identity. Northwest Florida State College's facilities master plan records Building 200 — Community Services Complex and Raider Arena — as completed in 2011, and current institutional facility/event usage remains Raider Arena. `The Arena` / `The Arena at Northwest Florida State College` are descriptive/source variants, not formal historical periods. Sources: https://www.nwfsc.edu/wp-content/uploads/2023/09/ITN-Document.pdf ; https://www.nwfsc.edu/events/ |
+| `VEN-000296` | `ALIAS_ONLY` | Britt Brown Arena is the physical arena; Kansas Coliseum is the surrounding complex. Wichita State states that the Kansas Coliseum consisted of four pavilions, an RV park, and Britt Brown Arena; Sedgwick County likewise describes the Kansas Coliseum Complex as including Britt Brown Arena and the Kansas Pavilions. No naming-period conversion is warranted. Sources: https://www.wichita.edu/industry_and_defense/NIAR/Laboratories/astec/astec.php ; https://www.sedgwickcounty.org/media/27013/kansas_pavilions.pdf |
+| `VEN-000308` | `PERIODIZE` | Recreation Hall → Recreation Building. Penn State University Libraries' campus-history collection states the building was originally named Recreation Hall and was renamed Recreation Building in 1957; Penn State Athletics describes `Rec Hall` as the more common name for Recreation Building. Exact 1957 effective day remains implementation-date verification. Sources: https://digital.libraries.psu.edu/digital/collection/psuimages/id/2109/ ; https://gopsusports.com/rec-hall |
+| `VEN-000316` | `PERIODIZE` | Hershey Sports Arena → Hersheypark Arena. Hershey Community Archives documents the 1936 opening-era Sports Arena identity and describes Hershey Sports Arena as now called Hersheypark Arena; current Hershey Entertainment usage confirms the no-space `Hersheypark Arena` form. Existing `Hershey Arena` / `Hershey Park Arena` forms are aliases/variants. Exact rename boundary remains implementation-date verification. Sources: https://hersheyarchives.org/encyclopedia/hershey-arena/ ; https://hersheyarchives.org/encyclopedia/the-great-building-campaign/ ; https://www.hersheyentertainment.com/hersheypark-stadium/hersheypark-arena.php |
+| `VEN-000344` | `ALIAS_ONLY` | Carolina Coliseum remains the building identity; Frank McGuire Arena is the named playing area/competition space inside it. The University of South Carolina-affiliated South Carolina Encyclopedia states that Frank McGuire Arena in the Carolina Coliseum was named in his honor in 1977. Treat as competition-space alias, not a physical-building naming period. Source: https://www.scencyclopedia.org/sce/entries/mcguire-frank-joseph/ |
+
 ## Assistant source-heavy queue
 
 | Venue | Disposition | Research question |
 |---|---|---|
 | `VEN-000234` | `RESEARCH_HOLD` | Tranche 1 residual only: opening identity is supported as Centrum in Worcester; later sources use Worcester’s Centrum Centre; DCU naming-rights agreement was reached in October 2004. Resolve exact formal status/adoption boundary of Worcester’s Centrum Centre and exact DCU effective day without inventing dates. |
-| `VEN-000271` | `RESEARCH_HOLD` | Determine whether The Arena at Northwest Florida State College → Raider Arena was a true formal rename or alternate branding. |
-| `VEN-000296` | `RESEARCH_HOLD` | Determine whether Kansas Coliseum is the overall complex and Britt Brown Arena the basketball arena inside it rather than a historical rename. |
-| `VEN-000308` | `RESEARCH_HOLD` | Determine whether Recreation Building → Recreation Hall / Rec Hall represents a true formal rename or interchangeable wording. |
-| `VEN-000316` | `RESEARCH_HOLD` | Research full Hershey Park Arena / Hershey Arena naming chronology before periodization; current registry may omit a genuine earlier formal arena name. |
-| `VEN-000344` | `RESEARCH_HOLD` | Determine whether Frank McGuire Arena is a competition-space/court name or erroneous cross-venue alias rather than a Carolina Coliseum rename. |
 | `VEN-000346` | `RESEARCH_HOLD` | Research Carolina Gymnasium / Longstreet Theater chronology and later reuse before deciding whether post-basketball naming belongs in the period model. |
 | `VEN-000353` | `RESEARCH_HOLD` | Distinguish Harrah’s Cherokee Center complex naming from ExploreAsheville.com Arena interior-arena naming before periodization. |
 | `VEN-000382` | `RESEARCH_HOLD` | Verify whether Nielsen Field House is the same physical building as George Albert Smith Field House / Smith Fieldhouse before any naming-period treatment. |
