@@ -485,6 +485,7 @@ function normalizeGame(game, opponentsByKey) {
       game.venue_id, game.game_date, game.date_precision,
       game.venue_name || humanizeKey(game.venue_key),
     ),
+    venueCanonical: game.venue_name || humanizeKey(game.venue_key),
     venueId: game.venue_id || null,
     venueKey: game.venue_key,
     location: gameLocation(game),
@@ -1621,8 +1622,9 @@ function bucket(games, teamA, teamB, labelFunction, identityFunction = labelFunc
 
 function aggregateVenueLabel(game) {
   const periods = DB.venueNamePeriods[game.venueId] || [];
-  if (periods.length > 1) return [...new Set(periods.map((period) => period.venue_name))].join(" / ");
-  return game.venue || game.location || "Venue not resolved";
+  const latest = periods.length ? periods[periods.length - 1] : null;
+  if (latest && !latest.valid_to) return latest.venue_name;
+  return game.venueCanonical || game.venue || game.location || "Venue not resolved";
 }
 
 function miniPanel(title, rows, teamA) {
