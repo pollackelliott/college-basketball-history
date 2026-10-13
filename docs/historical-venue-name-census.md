@@ -1,11 +1,12 @@
 # Historical venue-name census
 
-Status: **MULTI-NAME AMBIGUITY RESEARCH COMPLETE — SINGLE-NAME SCREEN NEXT**  
+Status: **MULTI-NAME AMBIGUITY RESEARCH COMPLETE — SINGLE-NAME SCREEN IN PROGRESS**  
 Protected-main baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This file preserves the owner-adjudicated state of the repository-wide historical physical-venue naming census. It is a recovery artifact and working ledger, not yet the final permanent protocol. It does not itself create `OFFICIAL_NAMING_PERIOD` rows.
 
 Research queue: `docs/historical-venue-name-research-queue.md`
+Single-name high-yield screen: `docs/historical-venue-single-name-screen.md`
 
 ## Controlling model
 
@@ -417,5 +418,5 @@ The final permanent policy should be linked from `AGENTS.md`, `docs/historical-v
 
 - Multi-name ambiguity research is complete. The three surviving unresolved cases are explicitly owner-accepted `RESEARCH_EXHAUSTED` residuals and must not be reopened absent materially stronger evidence.
 - Verify exact transition dates for approved periodized histories where the ledger still marks date verification as pending.
-- Perform the agreed **light high-yield screen of the 483 single-name venues** for obvious missing historical rename histories. This is not permission for 483 deep research campaigns.
+- Continue the agreed **light high-yield screen of the 483 single-name venues** for obvious missing historical rename histories. The repository-internal cross-check is complete, and screening tranche 1 found 9 positive candidates among 10 sponsor/rebrand-risk venues. This is not permission for 483 deep research campaigns.
 - After that screen, finalize rollout tranches and implement approved naming periods / shared-reference cleanups in bounded maintenance PRs under current repository policy.
