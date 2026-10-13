@@ -6,7 +6,7 @@ Protected-main census baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This queue is mechanically derived from every census row with disposition `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`.
 
-There are **70 research-needed ledger rows representing 69 work items**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item.
+There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 1, **66 rows representing 65 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item.
 
 The split is organizational, not historical authority. The owner may reassign any item. No result becomes authoritative merely because one side researched it; findings must be written back to the durable census/research ledger with authoritative evidence and, where needed, explicit owner adjudication.
 
@@ -54,15 +54,21 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000863` | `RESEARCH_HOLD` | Research A.J. Palumbo Center lineage into UPMC Cooper Fieldhouse; verify same-building continuity and full chronology before periodization. |
 
 
+## Completed assistant research — tranche 1
+
+| Venue | Result | Durable evidence / residual |
+|---|---|---|
+| `VEN-000185` | `PERIODIZE` | Alltel Arena → Verizon Arena → Simmons Bank Arena. Official arena history confirms the 1999 Alltel opening; Arkansas reference history confirms the three-era sequence; North Little Rock's 2019 announcement fixes the Simmons transition to 2019-10-03. Working 2009 Verizon boundary is 2009-07-01; recheck exact first-period opening date during implementation-date verification. Sources: https://www.simmonsbankarena.com/about-the-arena/ ; https://encyclopediaofarkansas.net/entries/Simmons-Bank-Arena-8326/ ; https://northlittlerock.org/simmons-bank-to-assume-naming-rights-to-verizon-arena-oct-3/ |
+| `VEN-000146` | `PERIODIZE` | Myriad Convention Center → Cox Business Services Convention Center → Prairie Surf Studios. City of Oklahoma City confirms the formal sequence; contemporaneous reporting records council approval of the Cox naming deal on 2002-02-05; the studio lease began 2021-01-01. Exact naming-boundary semantics remain implementation-date verification. Sources: https://www.okc.gov/News-articles/Traffic-Advisory-New-arena-utility-work-to-affect-N-Broadway-Avenue ; https://journalrecord.com/2002/02/06/the-myriad-no-longer/ ; https://www.paycomcenter.com/interact-with-us/prairie-surf-studios |
+| `VEN-000160` | `CANONICAL_CORRECTION` | Correct spelling is Patten Gymnasium. VEN-000160 is the original 1909 building that hosted the 1939 NCAA title game and was razed in 1940; Northwestern built a distinct replacement Patten Gymnasium in 1940. `Patton Gymnasium` is erroneous; never merge the two physical buildings. Sources: https://www.northwestern.edu/magazine/fall2012/feature/whats-in-a-name-sidebar/patten-gymnasium.html ; https://maps.northwestern.edu/txt/facility/154 |
+| `VEN-000250` | `PERIODIZE` | Mississippi State Gymnasium → McCarthy Gymnasium. `New Gym` is shorthand, not a separate formal period. Mississippi State Athletics states the building was initially called Mississippi State Gymnasium and was renamed for Babe McCarthy after his death in 1975. Exact 1975 rename day remains implementation-date verification. Source: https://hailstate.com/news/2022/9/26/womens-basketball-basketball-set-to-host-annual-maroon-madness-event-but-with-a-twist |
+| `VEN-000234` | remains `RESEARCH_HOLD` | Bounded research did not establish a reliable exact boundary/formal status for Worcester’s Centrum Centre, nor an exact effective day for DCU naming. Official DCU evidence confirms an October 2004 naming-rights partnership. Stop here until a stronger city/venue archival source resolves the residual. Source: https://www.dcucenter.com/venue-info/dcu-digital-federal-credit-union/ |
+
 ## Assistant source-heavy queue
 
 | Venue | Disposition | Research question |
 |---|---|---|
-| `VEN-000185` | `PERIODIZE_RESEARCH` | Alltel Arena → Verizon Arena → Simmons Bank Arena; current registry omits Verizon era, so verify full chronology. |
-| `VEN-000146` | `PERIODIZE_RESEARCH` | Myriad Convention Center → Cox Center; verify the exact formal second-era name/boundary before implementation. The Myriad / Myriad Center are aliases of the first era. |
-| `VEN-000160` | `RESEARCH_HOLD` | Resolve Patton Gymnasium vs Patten Gymnasium as a canonical spelling/history issue; do not create separate periods unless authoritative evidence establishes them. |
-| `VEN-000234` | `RESEARCH_HOLD` | Research Worcester Centrum / DCU Center full chronology before periodization; registry may omit or collapse formal intermediate wording. |
-| `VEN-000250` | `RESEARCH_HOLD` | Determine whether New Gym was contemporary shorthand or a genuine formal predecessor of McCarthy Gymnasium before periodization. |
+| `VEN-000234` | `RESEARCH_HOLD` | Tranche 1 residual only: opening identity is supported as Centrum in Worcester; later sources use Worcester’s Centrum Centre; DCU naming-rights agreement was reached in October 2004. Resolve exact formal status/adoption boundary of Worcester’s Centrum Centre and exact DCU effective day without inventing dates. |
 | `VEN-000271` | `RESEARCH_HOLD` | Determine whether The Arena at Northwest Florida State College → Raider Arena was a true formal rename or alternate branding. |
 | `VEN-000296` | `RESEARCH_HOLD` | Determine whether Kansas Coliseum is the overall complex and Britt Brown Arena the basketball arena inside it rather than a historical rename. |
 | `VEN-000308` | `RESEARCH_HOLD` | Determine whether Recreation Building → Recreation Hall / Rec Hall represents a true formal rename or interchangeable wording. |
