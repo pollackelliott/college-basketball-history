@@ -155,6 +155,7 @@ const DB = {
   conferenceNames: {},
   conferenceTournamentLabels: {},
   displayLabels: {},
+  venueNamePeriods: {},
   pairs: {},
 };
 
@@ -447,6 +448,17 @@ function normalizeOpponent(opponent) {
   };
 }
 
+function historicalVenueName(venueId, gameDate, datePrecision, fallback) {
+  const periods = DB.venueNamePeriods[venueId] || [];
+  // Never infer a naming period from a year-only or unknown game date.
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(gameDate || "")) return fallback;
+  if (datePrecision && datePrecision !== "EXACT") return fallback;
+  const match = periods.find((period) =>
+    gameDate >= period.valid_from && (!period.valid_to || gameDate <= period.valid_to)
+  );
+  return match?.venue_name || fallback;
+}
+
 function normalizeGame(game, opponentsByKey) {
   const opponent = opponentsByKey.get(game.opponent_key);
   return {
@@ -466,7 +478,11 @@ function normalizeGame(game, opponentsByKey) {
     result: game.result,
     overtimePeriods: Number(game.overtime_periods || 0),
     site: game.site || "UNKNOWN",
-    venue: game.venue_name || humanizeKey(game.venue_key),
+    venue: historicalVenueName(
+      game.venue_id, game.game_date, game.date_precision,
+      game.venue_name || humanizeKey(game.venue_key),
+    ),
+    venueId: game.venue_id || null,
     venueKey: game.venue_key,
     location: gameLocation(game),
     siteCity: game.site_city,
@@ -522,6 +538,8 @@ function buildPairs() {
         overtimePeriods: game.overtimePeriods,
         site: pairSite(game.site, teamKey, opponentKey),
         venue: game.venue,
+        venueId: game.venueId,
+        venueKey: game.venueKey,
         location: game.location,
         gameType: game.gameType,
         postseasonRound: game.postseasonRound,
@@ -547,6 +565,13 @@ async function loadData() {
   const programsPath = manifest.files?.programs || "programs.json";
   const programsDocument = await fetchJSON(`data/${programsPath}`);
   if (!Array.isArray(programsDocument.programs)) throw new Error("programs.json does not contain a programs array");
+
+  const venuePeriodsPath = manifest.files?.venue_name_periods || "venue-name-periods.json";
+  const namingDocument = await fetchJSON(`data/${venuePeriodsPath}`);
+  if (namingDocument.schema_version !== 1 || !namingDocument.venues) {
+    throw new Error("Unsupported or missing official venue naming-period data");
+  }
+  DB.venueNamePeriods = namingDocument.venues;
 
   const displayLabelsPath = manifest.files?.display_labels || "program-display-labels.json";
   const displayLabelsDocument = await fetchJSON(`data/${displayLabelsPath}`);
@@ -797,6 +822,7 @@ function seriesGamesFor(teamKey, opponentKey) {
       overtimePeriods: game.overtimePeriods,
       site: game.site === "HOME" ? `at ${team.name}` : game.site === "AWAY" ? `at ${opponent.name}` : game.site === "NEUTRAL" ? "Neutral" : "Unknown",
       venue: game.venue,
+      venueId: game.venueId,
       venueKey: game.venueKey,
       location: game.location,
       siteCity: game.siteCity,
