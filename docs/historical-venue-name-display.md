@@ -31,7 +31,14 @@ If an exact game date falls outside every established period, preserve the
 existing project display rather than concealing a chronology gap.
 
 Game filters accept every verified official-period name for the same physical
-venue. Venue aggregates group by `venue_id`, not by displayed historical name.
+venue.
+
+Head-to-head and other venue aggregate summaries use **one label per physical
+venue**, never a concatenation of historical names. If the latest verified
+official naming period is open-ended, use that current official name. If the
+venue's naming history is closed/inactive, use the canonical project display
+name. Aggregate counts continue to group by `venue_id`, not by displayed
+historical name.
 
 ## Owner display conventions superseded by this feature
 
