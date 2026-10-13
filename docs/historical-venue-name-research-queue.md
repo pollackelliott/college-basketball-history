@@ -1,12 +1,12 @@
 # Historical venue-name research queue
 
-Status: **THREE BOUNDED RESIDUAL HOLDS REMAIN**  
+Status: **CLOSED — MULTI-NAME AMBIGUITY RESEARCH COMPLETE**  
 Source census: `docs/historical-venue-name-census.md`  
 Protected-main census baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This queue is mechanically derived from census rows whose disposition still requires active ambiguity work: `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`. `IDENTITY_RESOLVED` means the historical/physical reconciliation is complete and any later shared-reference mutation is maintenance work outside this research queue.
 
-There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 8, Control Center canonical/mechanical verification, owner tranche 6, and final Control Center identity reconciliation, **3 rows representing 3 active research work items remain**. The owner high-profile queue is complete. The Control Center identity-reconciliation queue is complete. The only remaining active ambiguity rows are the three bounded assistant/source-heavy residual holds documented below.
+There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 8, Control Center canonical/mechanical verification, owner tranche 6, final Control Center identity reconciliation, and explicit owner closure of the three bounded residuals, **0 active ambiguity rows remain**. The multi-name ambiguity research queue is closed. The three unresolved historical residuals remain durably preserved as `RESEARCH_EXHAUSTED`, not silently converted into unsupported naming assertions.
 
 The split is organizational, not historical authority. The owner may reassign any item. No result becomes authoritative merely because one side researched it; findings must be written back to the durable census/research ledger with authoritative evidence and, where needed, explicit owner adjudication.
 
@@ -161,13 +161,17 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000815` | `PERIODIZE` | University Gym → Joseph J. Vinardi Center. Creighton says its first official men's basketball game in 1917 was played in the newly constructed University Gym and identifies that same building as today's Vinardi Center. Current Creighton style guidance makes `Joseph J. Vinardi Center` the formal building name while `Vinardi Center` / `Old Gymnasium` are informal forms; athletics usage of `Vinardi Athletic Center` is an expanded functional form, not a separately established naming era. First-party evidence confirms Vinardi usage by the 1991-92 season, but this bounded pass did not establish the exact University Gym→Vinardi effective date; leave that for implementation-date verification. Sources: https://www.creighton.edu/sites/default/files/2022-03/SMR_2018_CU_MAG_final.pdf ; https://gocreighton.com/documents/download/2016/10/3/1617mbb_smallB.pdf ; https://www.creighton.edu/fileadmin/user/PublicRelations/GraphicStandard/styles/CU_Editorial_Style_Guide.pdf ; https://gocreighton.com/news/2009/11/18/204836012 |
 | `VEN-000823` | `PERIODIZE` | RPI Field House → Livingston W. Houston Field House / Houston Field House. RPI Institute Archives preserves records specifically documenting the 1978 renaming of the RPI Field House for former president Livingston W. Houston. RPI Athletics fixes the boundary exactly: at Commencement on 1978-05-26 it was announced that the building would henceforth be known as Houston Field House. `Rensselaer Polytechnic Institute Field House` is an expanded first-era form; combined `RPI Field House (Houston Field House)` wording is retrospective, not another era. Sources: https://guides.archives.rpi.edu/repositories/resources?field%5B%5D=title&from_year%5B%5D=&limit=resource&op%5B%5D=&page=19&q%5B%5D=%2A&sort=title_sort+asc&to_year%5B%5D= ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/rpiathletics.com/documents/2005/12/9/0506MHKYGuide.pdf ; https://archives.rpi.edu/institute-history/building-histories/houston-field-house |
 
+## Completed research-exhausted residuals
+
+| Venue | Terminal disposition | Preserved uncertainty |
+|---|---|---|
+| `VEN-000234` | `RESEARCH_EXHAUSTED` | Owner accepted bounded exhaustion. Centrum opening identity and October 2004 DCU naming partnership are supported, but the exact formal status/adoption boundary of Worcester’s Centrum Centre and exact DCU effective day are not. Do not invent dates; reopen only on materially stronger archival evidence. |
+| `VEN-000396` | `RESEARCH_EXHAUSTED` | Owner accepted bounded exhaustion. Public School Fieldhouse / Jeppesen Fieldhouse same-building continuity is supported, but no safe exact fieldhouse rename boundary was established. Do not borrow the adjacent stadium’s 1958 Jeppesen boundary; reopen only on materially stronger archival evidence. |
+| `VEN-000439` | `RESEARCH_EXHAUSTED` | Owner accepted bounded exhaustion. Rutgers’ Highland Park Gym and a contemporaneous Highland Park Masonic Hall basketball court are independently established, but direct physical equivalence was not. Keep them unmerged unless materially stronger archival evidence appears. |
+
 ## Assistant source-heavy queue
 
-| Venue | Disposition | Research question |
-|---|---|---|
-| `VEN-000234` | `RESEARCH_HOLD` | Tranche 1 residual only: opening identity is supported as Centrum in Worcester; later sources use Worcester’s Centrum Centre; DCU naming-rights agreement was reached in October 2004. Resolve exact formal status/adoption boundary of Worcester’s Centrum Centre and exact DCU effective day without inventing dates. |
-| `VEN-000396` | `RESEARCH_HOLD` | Tranche 3 residual only: same-building continuity and both Public School / Jeppesen naming families are established, but exact formal adoption chronology for the fieldhouse is not. UH fixes the adjacent stadium’s Jeppesen rename to 1958 while retrospective fieldhouse material uses Jeppesen earlier. Do not borrow the stadium boundary; hold for a stronger archival source. |
-| `VEN-000439` | `RESEARCH_HOLD` | Tranche 4 residual only: Rutgers’ 1929-31 Highland Park Gym home era and a contemporaneous Highland Park Masonic Hall basketball court are independently established, but no authoritative source found in the bounded pass directly equates them. Hold without merging/name-normalizing until a stronger archival source appears. |
+No active rows remain.
 
 
 ## Completed Control Center canonical/mechanical verification
@@ -194,11 +198,13 @@ No active rows remain. Historical identity work is complete; any resulting share
 
 ## Completion condition
 
-This queue closes when every row above has one of:
+**Satisfied.** Every original ambiguity row now has one of:
 - a verified historical chronology and final naming-period disposition;
 - a verified alias/competition-space/complex-name disposition;
 - a verified physical-identity reconciliation;
 - a verified canonical cleanup; or
-- an explicitly documented research-exhausted residual requiring a genuine owner decision.
+- an explicitly owner-accepted `RESEARCH_EXHAUSTED` residual.
 
-No shared-reference registry mutation is authorized by this queue alone.
+This queue is closed. No shared-reference registry mutation is authorized by this queue alone.
+
+The next agreed research unit is the light high-yield screen of the 483 single-name venues for obvious omitted historical rename histories. That screen is not permission for 483 deep research campaigns and does not begin automatically from this closure checkpoint.
