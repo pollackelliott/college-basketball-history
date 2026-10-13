@@ -1,6 +1,6 @@
 # Historical venue single-name candidate chronology research
 
-Status: **IN PROGRESS — 12 / 14 CANDIDATES RESEARCHED**  
+Status: **COMPLETE — 14 / 14 CANDIDATES RESEARCHED; 6 PERIODIZE_READY / 8 PARTIAL**  
 Source screen: `docs/historical-venue-single-name-screen.md`  
 Protected-main research baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
@@ -357,6 +357,102 @@ Opening-date reconciliation:
 Remaining candidates:
 - `VEN-000698`
 - `VEN-000714`
+
+
+## Research tranche 4 — final two candidates
+
+### VEN-000698 — Hilliard Center Arena / American Bank Center Arena — Corpus Christi, Texas
+
+**Disposition: `PERIODIZE_READY`**
+
+Same physical arena. The earlier **Bayfront Plaza Convention Center** is **not** a predecessor physical-arena identity.
+
+Physical-scope reconciliation:
+- The City/venue record states that the new arena was constructed adjacent to the existing convention center, with groundbreaking on 2002-11-03 and construction completed in fall 2004.
+- The 2004 naming-rights announcement says the expanded complex had previously been known as Bayfront Plaza Convention Center, but it separately identifies the arena as a **new multipurpose arena under construction**.
+- Therefore Bayfront Plaza belongs to the older convention-center complex history; it must not be treated as an earlier formal name of this arena.
+
+| Inclusive official period | Name | Basis |
+|---|---|---|
+| 2004-05-20 through 2025-08-31 | American Bank Center Arena | On 2004-05-20 the City/SMG announced American Bank's naming-rights agreement for the expanded complex, including the new arena, and the arena thereafter operated as American Bank Center Arena. |
+| 2025-09-01 onward | Hilliard Center Arena | City of Corpus Christi announced on 2025-08-05 that the facility would officially become Hilliard Center effective 2025-09-01; the current venue site identifies the physical basketball/hockey building as Hilliard Center Arena. |
+
+Authoritative / facility sources:
+- https://americanbankcenter.com/newsroom/id-938
+- https://www.americanbankcenter.com/info/history
+- https://www.corpuschristitx.gov/news/posts/american-bank-to-end-naming-rights-at-the-american-bank-center/
+- https://www.corpuschristitx.gov/news/posts/news-post-hilliard-law-officially-acquires-naming-rights-for-corpus-christis-event-center/
+- https://www.hilliardcenter.com/about/
+- https://www.hilliardcenter.com/hilliard-center-arena/
+
+Notes:
+- The 2004-05-20 `valid_from` is the exact formal naming announcement, several months before arena completion. It is preferable to inventing a later opening-day boundary where the official naming status was already established.
+- Preserve any historical source-literal `American Bank Center` wording as an alias/provenance form; the physical arena's current official component name is Hilliard Center Arena.
+
+### VEN-000714 — Coca-Cola Coliseum — Toronto, Ontario
+
+**Disposition: `PERIODIZE_READY`**
+
+Same physical 1922 Coliseum building. The 2003 work was a major renovation, not replacement construction.
+
+| Inclusive official period | Name | Basis |
+|---|---|---|
+| 1922-04-04 through 2003-10-31 | Coliseum Arena | Official venue history identifies the original 1922 building as Coliseum Arena and documents an event there on 1922-04-04; this is the earliest exact supported operational date in the bounded first-party record. |
+| 2003-11-01 through 2018-07-10 | Ricoh Coliseum | Exhibition Place's official plaque and City/Board records state that the renovated Ricoh Coliseum officially opened on 2003-11-01. |
+| 2018-07-11 onward | Coca-Cola Coliseum | Exhibition Place and MLSE announced the Coca-Cola naming-rights partnership and rename on 2018-07-11. |
+
+Authoritative / facility sources:
+- https://www.coca-colacoliseum.com/venue-info/history
+- https://www.explace.on.ca/about/story-heritage/plaques/
+- https://www.explace.on.ca/about/story-heritage/facts-figures/
+- https://www.explace.on.ca/news/announcements/announcing-the-coca-cola-coliseum/
+- https://www.toronto.ca/legdocs/mmis/2023/ep/bgrd/backgroundfile-238968.pdf
+
+Boundary notes:
+- Exhibition Place records show Ricoh became the naming partner during 2003 renovation work, but the bounded first-party record does not provide a precise June agreement day. Using the **2003-11-01 official reopening** as the operational naming-period boundary is supported and avoids inventing a closed-for-renovation display interval.
+- The 1922 `valid_from` is anchored to the earliest exact official-history event date, not an inferred construction-completion day.
+- The wartime `#1 Manning Depot` terminology describes the military camp/use while the CNE grounds were closed to the public; it is not treated as a formal public venue naming period.
+
+## Tranche 4 result
+
+- Candidates researched: **2**
+- `PERIODIZE_READY`: **2**
+- `PARTIAL_PERIODIZE_RESEARCH`: **0**
+- New identity conflicts: **0**
+- Physical-scope corrections established: **1** (VEN-000698 Bayfront Plaza is not an arena predecessor name)
+- Shared-reference mutations performed: **0**
+
+## Final chronology result
+
+- Candidates researched: **14 / 14**
+- `PERIODIZE_READY`: **6**
+  - `VEN-000015`
+  - `VEN-000135`
+  - `VEN-000228`
+  - `VEN-000686`
+  - `VEN-000698`
+  - `VEN-000714`
+- `PARTIAL_PERIODIZE_RESEARCH`: **8**
+  - `VEN-000089`
+  - `VEN-000244`
+  - `VEN-000450`
+  - `VEN-000596`
+  - `VEN-000607`
+  - `VEN-000641`
+  - `VEN-000642`
+  - `VEN-000675`
+- New unresolved physical-identity conflicts: **0**
+- Shared-reference mutations performed: **0**
+
+## Completion condition
+
+**Satisfied for this bounded candidate-research phase.** Every screen-positive single-name candidate has received authoritative chronology research and is now either:
+- exact-date `PERIODIZE_READY`; or
+- `PARTIAL_PERIODIZE_RESEARCH` with the exact unsupported boundary explicitly preserved.
+
+The eight partials are not permission for an open-ended second archaeology cycle. Exact-date recovery should be attempted only in a separately bounded verification unit where the missing boundary materially affects a proposed rollout; otherwise preserve the chronology and uncertainty.
+
+Do not begin implementation or global shared-reference mutation from this research document alone.
 
 ## Stopping rule
 
