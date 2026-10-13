@@ -228,7 +228,7 @@ The following single-name venues now warrant later bounded chronology research:
 
 Do not periodize or mutate shared registries from this screen alone.
 
-Chronology follow-up is tracked separately in `docs/historical-venue-single-name-chronology.md`. Tranches 1-2 have researched 8 of the 14 screen-positive candidates; 6 remain pending there.
+Chronology follow-up is tracked separately in `docs/historical-venue-single-name-chronology.md`. Tranches 1-3 have researched 12 of the 14 screen-positive candidates; only VEN-000698 and VEN-000714 remain pending there.
 
 ## Stopping rule
 
