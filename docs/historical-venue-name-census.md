@@ -335,6 +335,40 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000606` | `PERIODIZE` | Toso Pavilion → Leavey Center; Harold J. Toso Pavilion and Leavey Event Center are variants within those eras. |
 | `VEN-000615` | `ALIAS_ONLY` | One continuous Omaha Civic Auditorium identity; Civic Auditorium is shorthand. |
 | `VEN-000616` | `ALIAS_ONLY` | One continuous Perkins Gymnasium identity; Perkins Gym is shorthand. |
+| `VEN-000618` | `RESEARCH_HOLD` | Resolve Tucson Community Center Arena / Tucson Convention Center Arena / Tucson Arena and distinguish arena naming from surrounding-complex naming. |
+| `VEN-000634` | `ALIAS_ONLY` | One continuous Norfolk Scope identity; Scope / Norfolk Scope Arena are aliases. |
+| `VEN-000637` | `ALIAS_ONLY` | One continuous Encina Gymnasium identity; Encina Gym is shorthand. |
+| `VEN-000654` | `PERIODIZE` | Charleston Civic Center → Charleston Coliseum & Convention Center; Charleston Coliseum is shorthand/current arena wording. |
+| `VEN-000673` | `ALIAS_ONLY` | One continuous WVU Armory identity; ROTC Armory / Armory are aliases unless later evidence establishes a formal rename. |
+| `VEN-000674` | `RESEARCH_HOLD` | Determine whether UC Fieldhouse → Armory Fieldhouse was a genuine formal rename. |
+| `VEN-000683` | `CANONICAL_CORRECTION` | Duplicate literal Orange County Civic Center rows represent one naming identity; registry cleanup only, no periodization. |
+| `VEN-000695` | `ALIAS_ONLY` | One continuous Devlin Fieldhouse identity; Avron B. Fogelman Arena is the named competition space within the same building. |
+| `VEN-000708` | `ALIAS_ONLY` | One continuous Memorial Coliseum (Winston-Salem) identity; W-S Coliseum is shorthand. |
+| `VEN-000709` | `ALIAS_ONLY` | One continuous Montego Bay Convention Center identity; Centre is spelling variant. |
+| `VEN-000710` | `ALIAS_ONLY` | One continuous R.J. Reynolds High School identity; Reynolds HS / Reynolds High School are aliases. |
+| `VEN-000711` | `RESEARCH_HOLD` | Clarify Murray State Sports Arena / Racer Arena / Carlisle Cutchin Fieldhouse and arena-within-fieldhouse relationship. |
+| `VEN-000712` | `ALIAS_ONLY` | One continuous Wake Forest College Gymnasium identity; Gymnasium / old Gymnasium are descriptive variants. |
+| `VEN-000715` | `ALIAS_ONLY` | One continuous Fike Field House identity; Clemson Field House is alias. |
+| `VEN-000716` | `ALIAS_ONLY` | One continuous Holtzendorff YMCA identity; YMCA Building / YMCA are shorthand. |
+| `VEN-000729` | `PERIODIZE_RESEARCH` | Research full Gwinnett arena chronology from Arena at Gwinnett through omitted sponsored era(s) to Gas South Arena. |
+| `VEN-000736` | `ALIAS_ONLY` | One continuous Rafael A. Mangual Coliseum identity; Spanish/English ordering only. |
+| `VEN-000737` | `ALIAS_ONLY` | One continuous Poliforum Benito Juárez identity; Poliforum Cancún is alternate/local shorthand. |
+| `VEN-000742` | `ALIAS_ONLY` | One continuous Minges Coliseum identity; Williams Arena is the named competition space within Minges Coliseum. |
+| `VEN-000743` | `ALIAS_ONLY` | One continuous Trees Gymnasium identity; Trees Gym is shorthand. |
+| `VEN-000748` | `ALIAS_ONLY` | One continuous Rose Hill Gymnasium identity; Fordham Gym is institutional shorthand. |
+| `VEN-000749` | `RESEARCH_HOLD` | Research Philadelphia Auditorium / Philadelphia Arena full chronology; current registry may omit earlier formal wording. |
+| `VEN-000750` | `ALIAS_ONLY` | One continuous Archbold Gymnasium identity; Archbold Gym is shorthand. |
+| `VEN-000753` | `RESEARCH_HOLD` | Clarify Manley Field House / John A. Lally Athletics Complex relationship: true rename, larger-complex designation, or materially reconfigured facility. |
+| `VEN-000754` | `RESEARCH_HOLD` | Research Old Gym / Gymnasium and YMCA Building / Women’s Gymnasium chronology; may reflect genuine successive institutional uses/names. |
+| `VEN-000755` | `PERIODIZE` | State Fair Coliseum → Toyota Coliseum; New York State Fair Coliseum / Fairgrounds Coliseum are expanded first-era forms. |
+| `VEN-000757` | `PERIODIZE_RESEARCH` | Research exact Onondaga County War Memorial → Oncenter War Memorial → Upstate Medical University Arena naming chronology. |
+| `VEN-000761` | `ALIAS_ONLY` | One continuous West Jefferson Street Armory identity; Jefferson Street Armory is shorthand. |
+| `VEN-000766` | `PERIODIZE` | Boston Arena → Matthews Arena. |
+| `VEN-000778` | `PERIODIZE_RESEARCH` | Research full Portland, Maine arena chronology from Cumberland County Civic Center through later Cross Insurance Arena era; Portland Civic Center appears shorthand and registry is incomplete. |
+| `VEN-000779` | `ALIAS_ONLY` | One continuous Percy Hedgecock Gymnasium identity; Hedgecock Gym is shorthand. |
+| `VEN-000781` | `PERIODIZE_RESEARCH` | Research full Bridgeport arena chronology: Arena at Harbor Yard → Webster Bank Arena → omitted later/current naming era(s). |
+| `VEN-000785` | `ALIAS_ONLY` | One continuous Calumet Club identity; parenthetical locality is disambiguation only. |
+| `VEN-000786` | `ALIAS_ONLY` | One continuous Coast Guard Air Station Borinquen Hangar identity; CGAS/U.S. Coast Guard expansions are aliases. |
 
 ## Future protocol agreed in principle
 
