@@ -1,6 +1,18 @@
 {
   "schema_version": 1,
   "venues": {
+    "VEN-000015": [
+      {
+        "venue_name": "Cowboys Stadium",
+        "valid_from": "2009-05-13",
+        "valid_to": "2013-07-24"
+      },
+      {
+        "venue_name": "AT&T Stadium",
+        "valid_from": "2013-07-25",
+        "valid_to": ""
+      }
+    ],
     "VEN-000052": [
       {
         "venue_name": "CU Events/Conference Center",
@@ -30,6 +42,18 @@
         "valid_to": ""
       }
     ],
+    "VEN-000135": [
+      {
+        "venue_name": "Mandalay Bay Events Center",
+        "valid_from": "1999-04-10",
+        "valid_to": "2021-02-10"
+      },
+      {
+        "venue_name": "Michelob ULTRA Arena",
+        "valid_from": "2021-02-11",
+        "valid_to": ""
+      }
+    ],
     "VEN-000196": [
       {
         "venue_name": "Assembly Hall",
@@ -39,6 +63,69 @@
       {
         "venue_name": "State Farm Center",
         "valid_from": "2013-04-29",
+        "valid_to": ""
+      }
+    ],
+    "VEN-000228": [
+      {
+        "venue_name": "Wells Fargo Arena",
+        "valid_from": "2005-07-12",
+        "valid_to": "2025-06-30"
+      },
+      {
+        "venue_name": "Casey's Center",
+        "valid_from": "2025-07-01",
+        "valid_to": ""
+      }
+    ],
+    "VEN-000686": [
+      {
+        "venue_name": "Special Events Arena",
+        "valid_from": "1994-10-21",
+        "valid_to": "1998-02-19"
+      },
+      {
+        "venue_name": "Stan Sheriff Center",
+        "valid_from": "1998-02-20",
+        "valid_to": "2020-11-11"
+      },
+      {
+        "venue_name": "SimpliFi Arena at Stan Sheriff Center",
+        "valid_from": "2020-11-12",
+        "valid_to": "2025-08-25"
+      },
+      {
+        "venue_name": "Bankoh Arena at Stan Sheriff Center",
+        "valid_from": "2025-08-26",
+        "valid_to": ""
+      }
+    ],
+    "VEN-000698": [
+      {
+        "venue_name": "American Bank Center Arena",
+        "valid_from": "2004-05-20",
+        "valid_to": "2025-08-31"
+      },
+      {
+        "venue_name": "Hilliard Center Arena",
+        "valid_from": "2025-09-01",
+        "valid_to": ""
+      }
+    ],
+    "VEN-000714": [
+      {
+        "venue_name": "Coliseum Arena",
+        "valid_from": "1922-04-04",
+        "valid_to": "2003-10-31"
+      },
+      {
+        "venue_name": "Ricoh Coliseum",
+        "valid_from": "2003-11-01",
+        "valid_to": "2018-07-10"
+      },
+      {
+        "venue_name": "Coca-Cola Coliseum",
+        "valid_from": "2018-07-11",
         "valid_to": ""
       }
     ]
