@@ -89,6 +89,65 @@ Institutional evidence:
 - https://cuse.com/news/2005/9/20/Domefirstevent
 - https://cuse.com/news/2022/5/18/general-syracuse-university-jma-wireless-announce-naming-rights-partnership-usher-in-the-jma-wireless-dome-era
 
+
+## Rollout tranche 2
+
+### Arlington — `VEN-000015`
+
+| Inclusive official period | Name |
+|---|---|
+| 2009-05-13 through 2013-07-24 | Cowboys Stadium |
+| 2013-07-25 onward | AT&T Stadium |
+
+### Las Vegas — `VEN-000135`
+
+| Inclusive official period | Name |
+|---|---|
+| 1999-04-10 through 2021-02-10 | Mandalay Bay Events Center |
+| 2021-02-11 onward | Michelob ULTRA Arena |
+
+### Des Moines — `VEN-000228`
+
+| Inclusive official period | Name |
+|---|---|
+| 2005-07-12 through 2025-06-30 | Wells Fargo Arena |
+| 2025-07-01 onward | Casey's Center |
+
+### Honolulu — `VEN-000686`
+
+| Inclusive official period | Name |
+|---|---|
+| 1994-10-21 through 1998-02-19 | Special Events Arena |
+| 1998-02-20 through 2020-11-11 | Stan Sheriff Center |
+| 2020-11-12 through 2025-08-25 | SimpliFi Arena at Stan Sheriff Center |
+| 2025-08-26 onward | Bankoh Arena at Stan Sheriff Center |
+
+### Corpus Christi — `VEN-000698`
+
+| Inclusive official period | Name |
+|---|---|
+| 2004-05-20 through 2025-08-31 | American Bank Center Arena |
+| 2025-09-01 onward | Hilliard Center Arena |
+
+Bayfront Plaza Convention Center is the older adjacent convention-center identity,
+not a predecessor naming period for this arena.
+
+### Toronto — `VEN-000714`
+
+| Inclusive official period | Name |
+|---|---|
+| 1922-04-04 through 2003-10-31 | Coliseum Arena |
+| 2003-11-01 through 2018-07-10 | Ricoh Coliseum |
+| 2018-07-11 onward | Coca-Cola Coliseum |
+
+The 2003 work is treated as renovation of the same 1922 physical building, not
+replacement construction.
+
+Authoritative evidence for these six histories is preserved in
+`data/reference/venue-names.csv` and the durable Control Center chronology
+research on the venue-census maintenance branch.
+
+
 ## Publication contract
 
 `tools/build_site_data.py` validates naming periods and publishes compact,
