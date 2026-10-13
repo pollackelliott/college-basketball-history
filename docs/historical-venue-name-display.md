@@ -1,69 +1,107 @@
-# Historical physical-venue name display — Illinois pilot
+# Historical physical-venue name display
 
-This is a bounded **site presentation** feature, not a change to canonical
-physical venue identity, historical site evidence, or school Research packages.
+This is a **site presentation** feature. It does not change canonical physical
+venue identity, game identity, H/A/N, scores, source evidence, or school
+Research packages.
 
 ## Source of truth
 
 Use the existing `data/reference/venue-names.csv` with one
-`OFFICIAL_NAMING_PERIOD` row for each verified formal-name stint. Preserve
-existing `PROJECT_DISPLAY` and `HISTORICAL_OR_ALIAS` rows: those remain
-fallback display and name-identity evidence, **not** automatically dated
-official names. One physical venue retains one stable `venue_id`.
+`OFFICIAL_NAMING_PERIOD` row for each independently verified formal-name
+stint. Preserve `PROJECT_DISPLAY` and `HISTORICAL_OR_ALIAS` rows for stable
+registry identity and lookup. One physical building retains one stable
+`venue_id`.
 
-An official naming-period row must contain an exact `valid_from` date,
-optional exact inclusive `valid_to`, `date_precision=EXACT`, official name,
-and source basis. Periods for one venue cannot overlap. If a source supplies
-only year-level dates, preserve that uncertainty instead of inventing a day.
-Such uncertain names may remain registered as aliases until a safe naming
-boundary is established.
+A naming-period row requires an exact `valid_from`, optional exact inclusive
+`valid_to`, `date_precision=EXACT`, official venue name, and institutional
+source basis. Periods for one venue may not overlap. Do not invent an exact
+boundary from year-only evidence.
 
-## Exact pilot: Illinois
+## Website display rule
 
-`VEN-000196` (State Farm Center / Assembly Hall, Champaign, IL):
+For a game with an exact date, choose the official name whose verified naming
+period contains that date.
 
-| Official display period (inclusive) | Name |
+If the game date is absent or not precise enough to select a historical period,
+display the **most recent verified and accepted official name** for that
+physical venue. This is the project-wide fallback rule for migrated venues.
+Do not guess which historical period contained an imprecisely dated game.
+
+If an exact game date falls outside every established period, preserve the
+existing project display rather than concealing a chronology gap.
+
+Game filters accept every verified official-period name for the same physical
+venue. Venue aggregates group by `venue_id`, not by displayed historical name.
+
+## Owner display conventions superseded by this feature
+
+Owner ruling, 2026-10-13: earlier project-display conventions for **Illinois,
+Indiana, and Tennessee** do not constrain the date-aware historical naming
+system. Once verified naming periods are registered for those venues, the
+period-based website display controls. Existing project-display rows may remain
+as registry/fallback identities; they are not authority to force one name
+across all historical dates.
+
+## Verified reference example: Illinois
+
+`VEN-000196`, Champaign, IL:
+
+| Inclusive official period | Name |
 |---|---|
 | 1963-03-02 through 2013-04-28 | Assembly Hall |
 | 2013-04-29 onward | State Farm Center |
 
-The University of Illinois athletics facility history identifies opening
-on March 2, 1963 and the name change on April 29, 2013. Its April 29
-announcement specifies immediate public use of the new name:
-
+Institutional evidence:
 - https://fightingillini.com/facilities/state-farm-center/2
 - https://fightingillini.com/news/2013/4/29/ui_state_farm_unveil_naming_of_state_farm_center
 
-This is **Illinois**, not Indiana's unrelated Assembly Hall
-(`VEN-000186`).
+The Illinois POC was production-verified against actual public game display.
 
-## Site contract
+## Rollout tranche 1
 
-`tools/build_site_data.py` validates sourced naming periods and publishes
-a compact deterministic `site/data/venue-name-periods.json` referenced in
-`site/data/manifest.json`.
+### Colorado — `VEN-000052`
 
-On loading a game, the browser chooses the unique official name only when
-both permanent venue ID and game date provide an exact period match.
-Otherwise it retains the preexisting project display name. This keeps
-the existing 79 large per-team historical game JSON files byte-for-byte
-unchanged, rather than requiring a large redundant reserialization for a
-site label. Future game or source ingestion continues under normal policy.
+| Inclusive official period | Name |
+|---|---|
+| 1979-08-08 through 1990-09-19 | CU Events/Conference Center |
+| 1990-09-20 through 2018-06-30 | Coors Events Center |
+| 2018-07-01 onward | CU Events Center |
 
-Game filters accept any known official name period for the same venue
-identity. Site/venue aggregate game counts group by physical venue ID, not
-by the particular name displayed on individual historical games.
+Institutional evidence:
+- https://cubuffs.com/news/2018/7/3/general-cus-sports-arena-renamed-cu-events-center
+- https://cubuffs.com/sports/2005/5/4/119110
 
-Adding another independently verified naming history later requires
-updating only `venue-names.csv`, running
-`python tools/build_site_data.py --apply`, and committing its generated
-compact periods reference (plus any other builder-reported changes).
-Verify `python tools/check_site_data_freshness.py` and applicable tests.
-Do not use a name match to create or merge physical venue IDs.
+### Syracuse — `VEN-000096`
 
-## Exclusions
+| Inclusive official period | Name |
+|---|---|
+| 1980-09-20 through 2022-05-18 | Carrier Dome |
+| 2022-05-19 onward | JMA Wireless Dome |
 
-No historical venue archaeology or naming-period guesses for other
-venues are authorized by this pilot. No change to H/A/N, canonical games,
-scores, venues.csv identities, Illinois school venue authoring,
-published school scopes, or Research/Implementation gate decisions.
+Institutional evidence:
+- https://cuse.com/news/2005/9/20/Domefirstevent
+- https://cuse.com/news/2022/5/18/general-syracuse-university-jma-wireless-announce-naming-rights-partnership-usher-in-the-jma-wireless-dome-era
+
+## Publication contract
+
+`tools/build_site_data.py` validates naming periods and publishes compact,
+deterministic `site/data/venue-name-periods.json`, referenced from the site
+manifest. The browser resolves the displayed name from permanent venue identity
+plus game date/precision.
+
+Adding a later verified venue history normally requires:
+1. adding sourced `OFFICIAL_NAMING_PERIOD` rows;
+2. running `python tools/build_site_data.py --apply`;
+3. committing the compact generated periods reference and any builder-reported
+   deterministic outputs;
+4. running site freshness and applicable regression tests.
+
+Do not create or merge physical venue IDs from name similarity.
+
+## Rollout discipline
+
+The registry contains many aliases that are not necessarily formal historical
+renames. Do not mass-convert aliases into naming periods. Prefer bounded
+tranches of clearly same-building renames with institutional date evidence.
+Spelling variants, shorthand, replacement buildings, uncertain identity, and
+year-only boundaries remain outside a tranche until independently resolved.
