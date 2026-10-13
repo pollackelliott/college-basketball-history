@@ -52,18 +52,48 @@ Only obvious sponsor/rebrand-risk names are checked, in bounded tranches. Generi
 - `SCREEN_CLEAR_CURRENT_PASS`: **1**
 - Deep chronology research performed: **0**
 
+## Tranche 2 — remaining obvious sponsor-risk names
+
+This tranche was mechanically limited to the seven unscreened single-name venues whose current project display names matched the sponsor/rebrand-risk filter. No additional venues were added merely to reach an arbitrary tranche size.
+
+| Venue | Baseline single name | Screen result | Discovery basis / next step |
+|---|---|---|---|
+| `VEN-000010` | American Airlines Center | `SCREEN_CLEAR_CURRENT_PASS` | American Airlines Center's own history says the Dallas building has operated under that name since opening in 2001. No omitted operational naming era surfaced in this light pass. Source: https://www.americanairlinescenter.com/about-aacenter/ |
+| `VEN-000165` | Pinnacle Bank Arena | `SCREEN_CLEAR_CURRENT_PASS` | Nebraska/City of Lincoln announced the Pinnacle Bank name in 2011, before the arena's 2013 opening. The sponsor name therefore predates operation; no omitted operational predecessor era surfaced. Sources: https://huskers.com/news/2011/12/06/city-announces-arena-name ; https://huskers.com/news/2013/08/30/pinnacle-bank-arena-opens |
+| `VEN-000222` | US Bank Stadium | `SCREEN_CLEAR_CURRENT_PASS` | U.S. Bank Stadium opened in 2016 under its current name. No prior operational venue-name era surfaced in the light pass; construction/project labels are not naming periods. Source: https://www.minneapolis.org/things-to-do/itineraries/52-must-sees/us-bank-stadium/ |
+| `VEN-000228` | Wells Fargo Arena | `SCREEN_POSITIVE` | Iowa Events Center states Wells Fargo Arena was renamed Casey's Center effective 2025-07-01. The protected-main single-name row is now both incomplete and stale. Later research should verify the full 2005-2025 Wells Fargo era and Casey's boundary from owner/facility authority. Sources: https://www.iowaeventscenter.com/about ; https://www.desmoinesarena.com/about/ |
+| `VEN-000294` | Suncoast Credit Union Arena | `SCREEN_CLEAR_CURRENT_PASS` | Florida SouthWestern identifies the arena as a 2016-built facility and current institutional material continues the Suncoast Credit Union Arena identity. No clear operational rename signal surfaced in this light pass. Source: https://www.fsw.edu/arena/about |
+| `VEN-000567` | Alaska Airlines Center | `SCREEN_CLEAR_CURRENT_PASS` | UAA announced the Alaska Airlines Center name in 2013 while the new arena was still under construction; it opened under that name in September 2014. Earlier project/planning labels are not operational naming periods. Sources: https://goseawolves.com/news/2013/3/21/206822709.aspx ; https://www.uaa.alaska.edu/news/archive/2014/09/aac-benefits-uaa-larger-community.cshtml/%5E0 |
+| `VEN-000698` | American Bank Center | `SCREEN_POSITIVE` | Corpus Christi visitor/facility material states the complex formerly known as American Bank Center is now Hilliard Center; the original American Bank naming announcement also states the expanded complex had previously been Bayfront Plaza Convention Center. This is a clear multi-era candidate requiring later physical-scope/arena-vs-complex chronology research. Sources: https://www.visitcorpuschristi.com/meet/venues/convention-center/ ; https://americanbankcenter.com/newsroom/id-938 |
+
+### Tranche 2 count
+
+- Screened: **7**
+- `SCREEN_POSITIVE`: **2**
+- `SCREEN_CLEAR_CURRENT_PASS`: **5**
+- Deep chronology research performed: **0**
+
+### Cumulative light-screen count
+
+- Screened: **17 / 483**
+- `SCREEN_POSITIVE`: **11**
+- `SCREEN_CLEAR_CURRENT_PASS`: **6**
+- Deep chronology research performed: **0**
+
 ## Current candidate queue
 
 The following single-name venues now warrant later bounded chronology research:
 
 - `VEN-000089`
 - `VEN-000135`
+- `VEN-000228`
 - `VEN-000244`
 - `VEN-000596`
 - `VEN-000607`
 - `VEN-000642`
 - `VEN-000675`
 - `VEN-000686`
+- `VEN-000698`
 - `VEN-000714`
 
 Do not periodize or mutate shared registries from this screen alone.
