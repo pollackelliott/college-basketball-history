@@ -164,6 +164,41 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000091` | `ALIAS_ONLY` | One continuous Iowa Field House identity; Iowa City Fieldhouse is location/spacing variant. |
 | `VEN-000102` | `IDENTITY_RECONCILE` | Owner ruling: KeyArena lineage and VEN-000315 Climate Pledge Arena are one physical Seattle Center arena identity. Later shared-reference implementation must reconcile to one surviving global venue_id and research complete naming chronology. |
 | `VEN-000315` | `IDENTITY_RECONCILE` | Owner ruling: Climate Pledge Arena and VEN-000102 KeyArena lineage are one physical Seattle Center arena identity. Later shared-reference implementation must reconcile to one surviving global venue_id and research complete naming chronology. |
+| `VEN-000123` | `ALIAS_ONLY` | One continuous Madison Square Garden III physical-building identity; MSG III / Old Madison Square Garden / 1925-building variants are disambiguation or shorthand only. |
+| `VEN-000124` | `ALIAS_ONLY` | One continuous Madison Square Garden IV physical-building identity; MSG IV / 1968-building variants are disambiguation or shorthand only. |
+| `VEN-000126` | `ALIAS_ONLY` | One continuous McArthur Court identity; Mac Court is nickname/shorthand. |
+| `VEN-000129` | `ALIAS_ONLY` | One continuous Memorial Coliseum (Lexington) identity; location-qualified variants only. |
+| `VEN-000143` | `ALIAS_ONLY` | One continuous Municipal Auditorium (Kansas City) identity; city-qualified variants only. |
+| `VEN-000146` | `PERIODIZE_RESEARCH` | Myriad Convention Center → Cox Center; verify the exact formal second-era name/boundary before implementation. The Myriad / Myriad Center are aliases of the first era. |
+| `VEN-000151` | `ALIAS_ONLY` | One continuous New Gymnasium identity; The New Gym is shorthand. |
+| `VEN-000153` | `RESEARCH_HOLD` | Research full Oakland Coliseum Arena naming chronology before periodization; current registry omits major formal eras such as Oracle Arena. |
+| `VEN-000155` | `ALIAS_ONLY` | One continuous Old Gym identity; Vanderbilt Old Gym is location/institution-qualified form. |
+| `VEN-000157` | `ALIAS_ONLY` | One continuous Omni Coliseum identity; The Omni / Omni are shorthand. |
+| `VEN-000158` | `PERIODIZE` | Orlando Arena → TD Waterhouse Centre → Amway Arena. |
+| `VEN-000159` | `ALIAS_ONLY` | One continuous Palestra identity; The Palestra is article-prefixed variant. |
+| `VEN-000160` | `RESEARCH_HOLD` | Resolve Patton Gymnasium vs Patten Gymnasium as a canonical spelling/history issue; do not create separate periods unless authoritative evidence establishes them. |
+| `VEN-000163` | `PERIODIZE` | LSU Assembly Center → Pete Maravich Assembly Center; Maravich Assembly Center / Assembly Center are aliases. |
+| `VEN-000170` | `ALIAS_ONLY` | One continuous Prudential Center identity; Newark, NJ / Prudential Center is location-decorated source text. |
+| `VEN-000177` | `ALIAS_ONLY` | One continuous Roberts Municipal Stadium identity; Roberts Stadium is shorthand. |
+| `VEN-000182` | `RESEARCH_HOLD` | Research San Diego Sports Arena full naming chronology and remove erroneous Cox Arena/Viejas cross-venue aliasing only after physical-identity verification. |
+| `VEN-000191` | `ALIAS_ONLY` | One continuous UVI Sports and Fitness Center identity; full-name, ampersand, singular/plural and institution-qualified variants are aliases. |
+| `VEN-000199` | `PERIODIZE` | Armory Fieldhouse → Stokely Athletics Center; Stokely Center and combined source strings are aliases. |
+| `VEN-000206` | `ALIAS_ONLY` | One continuous The Palace of Auburn Hills identity; Palace of Auburn Hills / The Palace are aliases. |
+| `VEN-000220` | `ALIAS_ONLY` | One continuous University Gymnasium identity; The Gym is shorthand. |
+| `VEN-000221` | `ALIAS_ONLY` | One continuous University of Dayton Arena identity; UD Arena / Dayton Arena / abbreviated institutional forms are aliases. |
+| `VEN-000225` | `PERIODIZE` | Value City Arena → Schottenstein Center. Owner explicitly rules these as two distinct periods. |
+| `VEN-000226` | `PERIODIZE` | Cox Arena → Viejas Arena; Cox Arena at Aztec Bowl is alias/expanded form of first era. |
+| `VEN-000227` | `PERIODIZE` | Jacksonville Veterans Memorial Arena → VyStar Veterans Memorial Arena; Memorial Arena / Veterans Memorial Arena are shorthand unless later evidence proves otherwise. |
+| `VEN-000229` | `PERIODIZE` | McGaw Memorial Hall → Welsh-Ryan Arena; McGaw Hall / Northwestern McGaw Hall are aliases. |
+| `VEN-000232` | `ALIAS_ONLY` | One continuous Wisconsin Field House identity; UW Field House is shorthand. |
+| `VEN-000234` | `RESEARCH_HOLD` | Research Worcester Centrum / DCU Center full chronology before periodization; registry may omit or collapse formal intermediate wording. |
+| `VEN-000235` | `PERIODIZE` | WVU Coliseum → Hope Coliseum. Owner explicitly rules these as two distinct periods. |
+| `VEN-000238` | `PERIODIZE` | USF Sun Dome → Yuengling Center; Sun Dome is alias/short form of first era. |
+| `VEN-000240` | `ALIAS_ONLY` | One continuous C.M. “Tad” Smith Coliseum identity; Tad Smith Coliseum is shortened form. |
+| `VEN-000241` | `PERIODIZE` | Civic Arena → Mellon Arena; Pittsburgh Civic Arena is location-qualified first-era alias. |
+| `VEN-000248` | `PERIODIZE` | Jefferson County Armory → Louisville Convention Center → Louisville Gardens, subject to exact continuity/boundary verification; The Armory is alias. |
+| `VEN-000249` | `PERIODIZE` | Alexander Memorial Coliseum → McCamish Pavilion. |
+| `VEN-000250` | `RESEARCH_HOLD` | Determine whether New Gym was contemporary shorthand or a genuine formal predecessor of McCarthy Gymnasium before periodization. |
 
 ## Future protocol agreed in principle
 
