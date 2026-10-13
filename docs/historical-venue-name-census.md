@@ -1,6 +1,6 @@
 # Historical venue-name census
 
-Status: **WORKING DURABLE CHECKPOINT — CENSUS IN PROGRESS**  
+Status: **MULTI-NAME CENSUS COMPLETE — RESEARCH QUEUE PENDING**  
 Protected-main baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This file preserves the owner-adjudicated state of the repository-wide historical physical-venue naming census. It is a recovery artifact and working ledger, not yet the final permanent protocol. It does not itself create `OFFICIAL_NAMING_PERIOD` rows.
@@ -369,6 +369,33 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000781` | `PERIODIZE_RESEARCH` | Research full Bridgeport arena chronology: Arena at Harbor Yard → Webster Bank Arena → omitted later/current naming era(s). |
 | `VEN-000785` | `ALIAS_ONLY` | One continuous Calumet Club identity; parenthetical locality is disambiguation only. |
 | `VEN-000786` | `ALIAS_ONLY` | One continuous Coast Guard Air Station Borinquen Hangar identity; CGAS/U.S. Coast Guard expansions are aliases. |
+| `VEN-000787` | `ALIAS_ONLY` | One continuous Louisville Elks Club identity; article-only variation. |
+| `VEN-000788` | `RESEARCH_HOLD` | Determine whether College Park Gym was an actual predecessor name of Spencer Memorial Gymnasium or a source/location conflation. |
+| `VEN-000789` | `ALIAS_ONLY` | One continuous Belknap Campus Gym identity; UofL / Gymnasium variants are aliases. |
+| `VEN-000790` | `ALIAS_ONLY` | One continuous Weaver Health Building identity; Weaver Gymnasium / Weaver Gym describe basketball use/space rather than a separate naming era. |
+| `VEN-000791` | `ALIAS_ONLY` | One continuous Health & Physical Education Building identity for basketball purposes; Helm Library building is later-use physical-building locator, not a basketball naming period. |
+| `VEN-000792` | `ALIAS_ONLY` | One continuous Coliseo Guillermo Angulo identity; Guillermo Arena is translated shorthand and Angul is truncation/typo. |
+| `VEN-000794` | `ALIAS_ONLY` | One continuous Dallas YMCA (Commerce Street) identity; Y.M.C.A. is typography variant. |
+| `VEN-000796` | `ALIAS_ONLY` | One continuous SMU Basketball Pavilion identity; Basketball Pavilion is shorthand. |
+| `VEN-000797` | `ALIAS_ONLY` | One continuous SMU Gymnasium identity; SMU Gym is shorthand. |
+| `VEN-000804` | `ALIAS_ONLY` | One continuous Carroll Hall Gym identity; Carroll gym is shorthand. |
+| `VEN-000808` | `ALIAS_ONLY` | One continuous Marquette Gymnasium identity; Marquette Gym is shorthand. |
+| `VEN-000809` | `ALIAS_ONLY` | One continuous original Notre Dame Fieldhouse physical identity; Fieldhouse / original Notre Dame Fieldhouse are disambiguation variants. Keep distinct from VEN-000810. |
+| `VEN-000810` | `ALIAS_ONLY` | One continuous rebuilt Notre Dame Fieldhouse physical identity; Old Fieldhouse is retrospective shorthand. Keep distinct from VEN-000809. |
+| `VEN-000815` | `PERIODIZE_RESEARCH` | Research Creighton University Gym/Old Gymnasium → Vinardi Center chronology and determine whether Vinardi Athletic Center is another formal era or expanded form. |
+| `VEN-000819` | `PERIODIZE` | JQH Arena → Great Southern Bank Arena. |
+| `VEN-000821` | `ALIAS_ONLY` | One continuous Al McGuire Center identity; The Al is nickname. |
+| `VEN-000823` | `PERIODIZE_RESEARCH` | Research RPI Field House → Houston Field House chronology and verify formal rename boundary. |
+| `VEN-000825` | `ALIAS_ONLY` | One continuous St. Xavier College Gym identity; St. Xavier Gym is shorthand. |
+| `VEN-000826` | `ALIAS_ONLY` | One continuous Middletown High School (Girard Avenue) identity; Girard Avenue is physical-campus disambiguation. |
+| `VEN-000838` | `ALIAS_ONLY` | One continuous Alumni Hall (Providence) identity; Providence College qualifier is alias. |
+| `VEN-000839` | `ALIAS_ONLY` | One continuous St. John’s College Gymnasium identity; Lewis Avenue qualifier and shorter St. John’s Gym forms are aliases. |
+| `VEN-000840` | `ALIAS_ONLY` | One continuous DeGray Gymnasium identity; DeGray Gym is shorthand. |
+| `VEN-000858` | `ALIAS_ONLY` | One continuous West Catholic High School Gymnasium identity; school-only form is shorthand. |
+| `VEN-000859` | `ALIAS_ONLY` | One continuous Alumni Hall (Villanova) identity; Alumni Gym / Villanova Alumni Hall are aliases. |
+| `VEN-000860` | `PERIODIZE_RESEARCH` | Villanova Field House → Jake Nevin Field House; owner approves two periods, exact rename boundary to verify. |
+| `VEN-000861` | `PERIODIZE` | Sovereign Bank Arena → Sun National Bank Center → CURE Insurance Arena. |
+| `VEN-000863` | `RESEARCH_HOLD` | Research A.J. Palumbo Center lineage into UPMC Cooper Fieldhouse; verify same-building continuity and full chronology before periodization. |
 
 ## Future protocol agreed in principle
 
