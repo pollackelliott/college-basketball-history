@@ -19,6 +19,7 @@ import json
 import re
 import unicodedata
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -412,6 +413,62 @@ def load_venue_names(repo_root: Path) -> dict[str, str]:
     return result
 
 
+def official_venue_name_periods(repo_root: Path) -> dict[str, Any]:
+    """Publish only independently sourced official naming periods.
+
+    Aliases and PROJECT_DISPLAY names are lookup/fallback identities, never
+    automatically authoritative date spans. Intervals are inclusive.
+    """
+    rows = read_csv(repo_root / "data/reference/venue-names.csv")
+    names_by_id: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for line_number, row in enumerate(rows, start=2):
+        if row.get("name_type", "").strip() != "OFFICIAL_NAMING_PERIOD":
+            continue
+        venue_id = row.get("venue_id", "").strip()
+        name = row.get("venue_name", "").strip()
+        first = row.get("valid_from", "").strip()
+        last = row.get("valid_to", "").strip()
+        precision = row.get("date_precision", "").strip()
+        source = row.get("source_basis", "").strip()
+        if not venue_id or not name or not source or precision != "EXACT":
+            raise ValueError(
+                f"venue-names.csv line {line_number}: official naming "
+                "period requires venue ID, name, source, and EXACT precision"
+            )
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", first) or (
+            last and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", last)
+        ):
+            raise ValueError(
+                f"venue-names.csv line {line_number}: expected exact ISO date interval"
+            )
+        try:
+            start_day = date.fromisoformat(first)
+            end_day = date.fromisoformat(last) if last else date.max
+        except ValueError as exc:
+            raise ValueError(
+                f"venue-names.csv line {line_number}: invalid exact naming date"
+            ) from exc
+        if start_day > end_day:
+            raise ValueError(
+                f"venue-names.csv line {line_number}: naming period ends before start"
+            )
+        names_by_id[venue_id].append({
+            "venue_name": name, "valid_from": first, "valid_to": last,
+        })
+
+    result: dict[str, list[dict[str, str]]] = {}
+    for venue_id, periods in sorted(names_by_id.items()):
+        periods.sort(key=lambda row: row["valid_from"])
+        for previous, current in zip(periods, periods[1:]):
+            if not previous["valid_to"] or previous["valid_to"] >= current["valid_from"]:
+                raise ValueError(
+                    f"{venue_id}: overlapping official venue naming periods: "
+                    f"{previous['venue_name']} / {current['venue_name']}"
+                )
+        result[venue_id] = periods
+    return {"schema_version": 1, "venues": result}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -445,6 +502,7 @@ def main() -> int:
     assertions_path = repo_root / "data" / "evidence" / "game-assertions.csv"
 
     program_rows = read_csv(programs_path)
+    venue_naming_periods = official_venue_name_periods(repo_root)
     display_labels = public_program_display_labels(
         program_rows,
         read_csv(repo_root / "data" / "reference" / "program-display-labels.csv"),
@@ -749,6 +807,7 @@ def main() -> int:
         "files": {
             "programs": "programs.json",
             "display_labels": "program-display-labels.json",
+            "venue_name_periods": "venue-name-periods.json",
             "teams_root": "teams/",
         },
     }
@@ -763,6 +822,7 @@ def main() -> int:
         repo_root / "site" / "data" / "manifest.json": json_text(manifest),
         repo_root / "site" / "data" / "programs.json": json_text(programs_payload),
         repo_root / "site" / "data" / "program-display-labels.json": json_text(display_labels),
+        repo_root / "site" / "data" / "venue-name-periods.json": json_text(venue_naming_periods),
     }
     for program_key, payload in team_payloads.items():
         planned[
