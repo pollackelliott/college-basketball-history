@@ -450,9 +450,12 @@ function normalizeOpponent(opponent) {
 
 function historicalVenueName(venueId, gameDate, datePrecision, fallback) {
   const periods = DB.venueNamePeriods[venueId] || [];
-  // Never infer a naming period from a year-only or unknown game date.
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(gameDate || "")) return fallback;
-  if (datePrecision && datePrecision !== "EXACT") return fallback;
+  // Exact game dates use the historically applicable official name.
+  // If the game date cannot select a period safely, use the most recent
+  // verified official name for that physical venue.
+  const latest = periods.length ? periods[periods.length - 1].venue_name : fallback;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(gameDate || "")) return latest;
+  if (datePrecision && datePrecision !== "EXACT") return latest;
   const match = periods.find((period) =>
     gameDate >= period.valid_from && (!period.valid_to || gameDate <= period.valid_to)
   );
@@ -482,6 +485,7 @@ function normalizeGame(game, opponentsByKey) {
       game.venue_id, game.game_date, game.date_precision,
       game.venue_name || humanizeKey(game.venue_key),
     ),
+    venueCanonical: game.venue_name || humanizeKey(game.venue_key),
     venueId: game.venue_id || null,
     venueKey: game.venue_key,
     location: gameLocation(game),
@@ -538,6 +542,7 @@ function buildPairs() {
         overtimePeriods: game.overtimePeriods,
         site: pairSite(game.site, teamKey, opponentKey),
         venue: game.venue,
+        venueCanonical: game.venueCanonical,
         venueId: game.venueId,
         venueKey: game.venueKey,
         location: game.location,
@@ -1618,8 +1623,9 @@ function bucket(games, teamA, teamB, labelFunction, identityFunction = labelFunc
 
 function aggregateVenueLabel(game) {
   const periods = DB.venueNamePeriods[game.venueId] || [];
-  if (periods.length > 1) return [...new Set(periods.map((period) => period.venue_name))].join(" / ");
-  return game.venue || game.location || "Venue not resolved";
+  const latest = periods.length ? periods[periods.length - 1] : null;
+  if (latest && !latest.valid_to) return latest.venue_name;
+  return game.venueCanonical || game.venue || game.location || "Venue not resolved";
 }
 
 function miniPanel(title, rows, teamA) {
