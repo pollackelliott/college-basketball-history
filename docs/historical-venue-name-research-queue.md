@@ -6,7 +6,7 @@ Protected-main census baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This queue is mechanically derived from every census row with disposition `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`.
 
-There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 8, **38 rows representing 37 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item. The fresh assistant/source-heavy queue is exhausted; its only remaining rows are three bounded residual holds already documented below.
+There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 8 and Control Center canonical/mechanical verification, **34 rows representing 33 active research work items remain**. `VEN-000102` and `VEN-000315` are one linked Seattle Center physical-identity work item. The fresh assistant/source-heavy queue is exhausted; its only remaining rows are three bounded residual holds already documented below.
 
 The split is organizational, not historical authority. The owner may reassign any item. No result becomes authoritative merely because one side researched it; findings must be written back to the durable census/research ledger with authoritative evidence and, where needed, explicit owner adjudication.
 
@@ -140,16 +140,21 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000439` | `RESEARCH_HOLD` | Tranche 4 residual only: Rutgers’ 1929-31 Highland Park Gym home era and a contemporaneous Highland Park Masonic Hall basketball court are independently established, but no authoritative source found in the bounded pass directly equates them. Hold without merging/name-normalizing until a stronger archival source appears. |
 
 
+## Completed Control Center canonical/mechanical verification
+
+| Venue | Result | Durable evidence / residual |
+|---|---|---|
+| `VEN-000324` | `CANONICAL_CORRECTION` | Verified canonical spelling is Robins Center. University of Richmond Athletics consistently identifies the 1972 facility as Robins Center, named for the E. Claiborne Robins family. `Robbins Center` is an erroneous spelling, not a formal era. Later shared-reference maintenance should correct the PROJECT_DISPLAY row. Sources: https://richmondspiders.com/facilities/robins-center/7 ; https://richmondspiders.com/documents/download/2011/7/28/0304mg-46-60-rc-oppts.pdf |
+| `VEN-000371` | `CANONICAL_CORRECTION` | Verified canonical form is Eugenio Guerra Sports Complex. Georgia Tech, Maryland, Ole Miss, and contemporaneous American University of Puerto Rico material use `Eugenio Guerra Sports Complex`; `Eugene Guerra Sports Complex` appears as an English/source error variant. Existing PROJECT_DISPLAY is already correct; later registry cleanup should remove/demote the erroneous Eugene alias, with no naming periods. Sources: https://ramblinwreck.com/sports/m-baskbl/schedule/season/1997-98/ ; https://umterps.com/sports/mens-basketball/schedule/1998-99 ; https://olemisssports.com/news/1999/6/21/rebels_meet_up_with_buckeyes_in_title_game ; American University of Puerto Rico opponent material preserved in period institutional media-guide evidence. |
+| `VEN-000585` | `PERIODIZE` | State Fair Arena → Jim Norick Arena. City of Oklahoma City states the arena debuted in September 1965 as State Fair Arena and was rechristened Jim Norick Arena in 1971. `State Farm Arena [BC source wording]` is erroneous wording and must not become a naming period. Exact 1971 rename day remains implementation-date verification. Source: https://www.okc.gov/Home/Components/News/News/4365/18 |
+| `VEN-000683` | `CANONICAL_CORRECTION` | Mechanical duplicate confirmed in protected main: two literal Orange County Civic Center rows exist for VEN-000683 with the same normalized name, one PROJECT_DISPLAY and one HISTORICAL_OR_ALIAS. They represent one naming identity. Later shared-reference cleanup should remove the redundant alias row only; no historical research or periodization is required. |
+
 ## Control Center mechanical/canonical/identity verification
 
 | Venue | Disposition | Research question |
 |---|---|---|
 | `VEN-000554` | `IDENTITY_RECONCILE` | Historical research complete: the 1920/21 Rice Field House is a distinct predecessor building from the 1950 Rice Gymnasium/Autry Court physical venue. Later dedicated shared-reference reconciliation must remove `Rice Field House` from VEN-000554 and assign it to a separate correct global venue identity. Preserve VEN-000554 for the 1950 building; Autry Court is its competition-space name, and Rice Gymnasium → Tudor Fieldhouse is the formal building chronology. No shared registry mutation is authorized by this queue. |
 | `VEN-000382` | `IDENTITY_RECONCILE` | Historical research complete: Einar Nielsen Field House is University of Utah / Salt Lake City and George Albert Smith Fieldhouse is BYU / Provo. Later dedicated shared-reference reconciliation must remove Nielsen from VEN-000382 and assign it to a correct distinct global venue identity without disturbing Smith Fieldhouse. No shared registry mutation is authorized by this queue. |
-| `VEN-000324` | `CANONICAL_CORRECTION` | One physical Richmond venue; proper canonical name is Robins Center. Robbins Center is erroneous variant, not a naming period. |
-| `VEN-000371` | `CANONICAL_CORRECTION` | One Guerra Sports Complex identity; verify authoritative first name spelling, Eugenio vs Eugene, rather than creating naming periods. |
-| `VEN-000585` | `CANONICAL_CORRECTION` | State Fair Arena is the physical venue; State Farm Arena [BC source wording] is erroneous source wording, not a historical period. |
-| `VEN-000683` | `CANONICAL_CORRECTION` | Duplicate literal Orange County Civic Center rows represent one naming identity; registry cleanup only, no periodization. |
 
 
 ## Completion condition
