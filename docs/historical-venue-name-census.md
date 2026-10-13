@@ -264,6 +264,41 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000413` | `ALIAS_ONLY` | One continuous Olympic Auditorium identity; Grand Olympic Auditorium is expanded/full-name treatment unless later evidence establishes otherwise. |
 | `VEN-000430` | `ALIAS_ONLY` | One continuous Venice High School Gym identity; Gym/Gymnasium wording only. |
 | `VEN-000431` | `ALIAS_ONLY` | One continuous Atlanta Auditorium identity; The Auditorium is shorthand. |
+| `VEN-000432` | `ALIAS_ONLY` | One continuous Ballantine Gymnasium identity; Ballantine Gym is shorthand. |
+| `VEN-000433` | `RESEARCH_HOLD` | Research Boardwalk Hall / Atlantic City Convention Hall chronology and distinguish the historic hall from the separate modern Atlantic City Convention Center before periodization. |
+| `VEN-000434` | `ALIAS_ONLY` | One continuous Charles E. Smith Center identity; Smith Center is shorthand. |
+| `VEN-000435` | `ALIAS_ONLY` | One continuous College Avenue Gym identity; College Avenue Gymnasium and The Barn are aliases. |
+| `VEN-000438` | `ALIAS_ONLY` | One continuous Galactic Ballroom at Moon Palace Resort identity; Moon Palace Resort is broader resort-level source wording. |
+| `VEN-000439` | `RESEARCH_HOLD` | Determine physical/name relationship between Highland Park Gym and Highland Park Masonic Hall before periodization. |
+| `VEN-000440` | `ALIAS_ONLY` | One continuous Jadwin Gymnasium identity; Jadwin Gym / Jadwin Fieldhouse are variants. |
+| `VEN-000443` | `PERIODIZE` | Sears Centre → NOW Arena; Sears Centre Arena is first-era variant. |
+| `VEN-000444` | `PERIODIZE` | Air Canada Centre → Scotiabank Arena. |
+| `VEN-000445` | `ALIAS_ONLY` | One continuous South Padre Island Convention Center identity; Centre is spelling variant. |
+| `VEN-000447` | `ALIAS_ONLY` | One continuous Brick Breeden Fieldhouse identity; Worthington Arena / Max Worthington Arena are competition-space names within the fieldhouse. |
+| `VEN-000449` | `PERIODIZE` | McKeon Pavilion → University Credit Union Pavilion. |
+| `VEN-000453` | `PERIODIZE_RESEARCH` | Municipal Auditorium → Civic Center Music Hall, subject to same-building chronology verification. |
+| `VEN-000454` | `PERIODIZE_RESEARCH` | Research Tulsa Convention Center → Cox Business Center → Arvest Convention Center chronology and determine whether Cox Business Convention Center was a separate formal name or variant. |
+| `VEN-000457` | `PERIODIZE` | Convocation Center → BankUnited Center → Watsco Center. |
+| `VEN-000458` | `PERIODIZE` | SIU Arena → Banterra Center. |
+| `VEN-000459` | `ALIAS_ONLY` | One continuous Beeghly Center identity; Zidian Family Arena at Beeghly Center is a named competition-space/sponsor overlay. |
+| `VEN-000460` | `ALIAS_ONLY` | One continuous Arsenal Technical High School identity; Tech H.S. / Arsenal Tech are aliases. |
+| `VEN-000464` | `ALIAS_ONLY` | One continuous Ervin J. Nutter Center identity; Nutter Center is shorthand. |
+| `VEN-000467` | `ALIAS_ONLY` | One continuous Coliseo Roberto Clemente identity; Roberto Clemente Coliseum is English translation. |
+| `VEN-000470` | `ALIAS_ONLY` | One continuous John Gray Gymnasium identity; John Gray Gym is shorthand. |
+| `VEN-000471` | `ALIAS_ONLY` | One continuous Coliseo de Puerto Rico / José Miguel Agrelot Coliseum identity; treat the formulations as same formal identity rather than successive periods. |
+| `VEN-000474` | `RESEARCH_HOLD` | Determine whether CU Fieldhouse → Balch Fieldhouse was a true formal rename and establish chronology. |
+| `VEN-000475` | `RESEARCH_HOLD` | Determine whether Men’s Gymnasium → Carlson Gymnasium was a true rename and establish chronology. |
+| `VEN-000485` | `ALIAS_ONLY` | One continuous Sun Devil Gymnasium identity; Sun Devil Gym is shorthand. |
+| `VEN-000489` | `ALIAS_ONLY` | One continuous Jacksonville Veterans Memorial Coliseum identity; Jacksonville Memorial Coliseum / Jacksonville Coliseum are shortened variants unless later evidence establishes otherwise. |
+| `VEN-000492` | `PERIODIZE` | Centennial Hall → Savage Hall → Savage Arena. |
+| `VEN-000494` | `ALIAS_ONLY` | One continuous Iowa State Armory identity; The Armory is shorthand. |
+| `VEN-000499` | `PERIODIZE_RESEARCH` | Research full Miami arena chronology: AmericanAirlines Arena → FTX Arena → interim Miami-Dade naming → Kaseya Center; current registry omits formal eras. |
+| `VEN-000503` | `PERIODIZE_RESEARCH` | McGrath Arena → McGrath-Phillips Arena, subject to formal rename-date verification. |
+| `VEN-000505` | `PERIODIZE_RESEARCH` | Research Rochester War Memorial lineage → Blue Cross Arena and determine whether Rochester Community War Memorial and Blue Cross/Blue Shield Arena were distinct formal eras or variants. |
+| `VEN-000509` | `PERIODIZE_RESEARCH` | Research full Quad Cities arena chronology from The MARK of the Quad Cities through omitted sponsored eras to Vibrant Arena at The MARK. |
+| `VEN-000512` | `ALIAS_ONLY` | One continuous Buffalo Memorial Auditorium identity; Memorial Auditorium is shorthand. |
+| `VEN-000513` | `RESEARCH_HOLD` | Determine whether Alumni Memorial Gymnasium → Brodie Gym was an actual formal rename of the same physical building. |
+| `VEN-000514` | `ALIAS_ONLY` | One continuous Angier B. Duke Gymnasium identity; Angier Duke Gymnasium and The Ark are aliases/nickname. |
 
 ## Future protocol agreed in principle
 
