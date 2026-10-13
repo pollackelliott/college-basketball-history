@@ -418,5 +418,5 @@ The final permanent policy should be linked from `AGENTS.md`, `docs/historical-v
 
 - Multi-name ambiguity research is complete. The three surviving unresolved cases are explicitly owner-accepted `RESEARCH_EXHAUSTED` residuals and must not be reopened absent materially stronger evidence.
 - Verify exact transition dates for approved periodized histories where the ledger still marks date verification as pending.
-- Continue the agreed **light high-yield screen of the 483 single-name venues** for obvious missing historical rename histories. The repository-internal cross-check is complete, and screening tranche 1 found 9 positive candidates among 10 sponsor/rebrand-risk venues. This is not permission for 483 deep research campaigns.
+- Continue the agreed **light high-yield screen of the 483 single-name venues** for obvious missing historical rename histories. The repository-internal cross-check is complete; screening tranches 1-2 have screened 17 venues and found 11 positive candidates, with 6 clear on the current light pass. This is not permission for 483 deep research campaigns.
 - After that screen, finalize rollout tranches and implement approved naming periods / shared-reference cleanups in bounded maintenance PRs under current repository policy.
