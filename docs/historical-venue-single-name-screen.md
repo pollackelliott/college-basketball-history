@@ -123,6 +123,43 @@ This tranche exhausts the first conservative registry-local risk tier. External 
 
 The 458 not-yet-individually-screened venues are **not a requirement for 458 separate searches**. The next bounded unit, if authorized, should mechanically define a broader medium-risk tier and inspect only that population. If candidate yield converges downward, the light screen should stop rather than descend into venue-by-venue negative-proof research.
 
+
+## Tranche 4 — expanded exact commercial-brand tier, slice A
+
+The broader mechanical pass deliberately avoids the 148-name overcapture produced by generic short-name/eponym heuristics. Instead it uses an expanded **exact commercial-brand lexicon** against the remaining single-name registry rows. This produced **13 medium-risk venues**. Tranche 4 is the deterministic first slice: the first eight by `venue_id`.
+
+The screen question remains binary: did the same building obviously operate under another formal name, or did the current name exist before/opening? No full chronology research or date-boundary verification was performed.
+
+| Venue | Baseline single name | Screen result | Discovery basis / next step |
+|---|---|---|---|
+| `VEN-000024` | BOK Center | `SCREEN_CLEAR_CURRENT_PASS` | Contemporary 2005 reporting says the still-future Tulsa arena would be called BOK Center after Bank of Oklahoma bought naming rights; the venue opened in 2008. No prior operational name surfaced. Sources: https://membership.ibat.org/web/BankersDigest/Archive/2005/BD_2005_1121.pdf ; https://www.bokcenter.com/about |
+| `VEN-000042` | Chase Center | `SCREEN_CLEAR_CURRENT_PASS` | Chase Center's own press kit states the arena opened in September 2019 as Chase Center. No prior operational name surfaced. Source: https://www.chasecenter.com/press-kit/ |
+| `VEN-000045` | Cintas Center | `SCREEN_CLEAR_CURRENT_PASS` | Xavier states the building was dedicated/opened in 2000 and named for Cintas Corporation. No predecessor operational name surfaced. Sources: https://www.xavier.edu/mission-identity/xaviers-mission/archived/buildings-statues-and-beauty/cintas-center ; https://www.cintascenter.com/about/ |
+| `VEN-000057` | Dickies Arena | `SCREEN_CLEAR_CURRENT_PASS` | The arena announced the Dickies naming-rights deal in April 2017 for the new building, which was then scheduled to open in November 2019. The sponsor name predates operation. Source: https://dickiesarena.com/multipurpose-arena-fort-worth-and-dickies-announce-naming-rights-deal-for-new-fort-worth-arena/ |
+| `VEN-000063` | Fiserv Forum | `SCREEN_CLEAR_CURRENT_PASS` | Fiserv Forum identifies Fiserv as the exclusive naming-rights partner, and its fact sheet states the new arena opened on 2018-08-26. No predecessor operational name surfaced. Sources: https://www.fiservforum.com/about/naming-rights-and-founding-partners ; https://www.fiservforum.com/assets/doc/Fiserv-Forum_FactSheet_8.5x11-7075c776c1.pdf |
+| `VEN-000074` | Golden 1 Center | `SCREEN_CLEAR_CURRENT_PASS` | Golden 1 Center's own 10-year history identifies the arena opening under that name in 2016. No predecessor operational name surfaced. Source: https://www.golden1center.com/news/detail/golden-1-center-celebrates-10-years-as-the-center-of-it-all/ |
+| `VEN-000113` | Little Caesars Arena | `SCREEN_CLEAR_CURRENT_PASS` | The new Detroit arena was publicly named Little Caesars Arena in April 2016 before opening for the 2017-18 season; sponsor history likewise describes the new building under that name. No predecessor operational name surfaced. Sources: https://www.nhl.com/news/red-wings-new-building-named-little-caesars-arena-280502882 ; https://littlecaesars.com/en-us/about-us/hometown-pride/ |
+| `VEN-000120` | Lucas Oil Stadium | `SCREEN_CLEAR_CURRENT_PASS` | Lucas Oil Stadium's own history states Lucas Oil Products secured naming rights in 2006 and the stadium opened to the public in August 2008. The current name predates operation. Source: https://www.lucasoilstadium.com/tours-stadium-info/background-history/ |
+
+### Tranche 4 count
+
+- Screened: **8**
+- `SCREEN_POSITIVE`: **0**
+- `SCREEN_CLEAR_CURRENT_PASS`: **8**
+- Deep chronology research performed: **0**
+- Expanded exact commercial-brand tier: **13 total**
+- Expanded exact commercial-brand tier remaining after this tranche: **5**
+
+### Cumulative light-screen count after tranche 4
+
+- Screened: **33 / 483**
+- `SCREEN_POSITIVE`: **14**
+- `SCREEN_CLEAR_CURRENT_PASS`: **19**
+- Not individually screened: **450**
+- Deep chronology research performed: **0**
+
+The zero-positive result in this tranche is a material convergence signal. It does not prove the remaining population has no omitted renames, but it argues against broadening into generic eponym/short-name searching. The five remaining members of this exact commercial-brand tier may be checked as one later bounded slice; after that, continuation of the overall screen should require a demonstrably higher-yield mechanical signal rather than individual negative-proof research.
+
 ## Current candidate queue
 
 The following single-name venues now warrant later bounded chronology research:
