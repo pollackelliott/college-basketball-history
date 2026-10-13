@@ -141,6 +141,29 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000828` | `RESEARCH_HOLD` | Research relationship among The Cage, The Hangar/Hanger, Basketball Hangar, and Quonset Hut before owner ruling. |
 | `VEN-000829` | `PERIODIZE_RESEARCH` | Field House family → Hugh S. Greer Field House; verify the exact formal first-era name among UConn Field House / Storrs Field House. |
 
+| `VEN-000002` | `ALIAS_ONLY` | One continuous Alamodome identity; Alamaodome is typo only. |
+| `VEN-000007` | `ALIAS_ONLY` | One continuous Alumni Gym identity; Alumni Gymnasium / Alumni Memorial Auditorium-Gymnasium / Alumni Memorial Gym are formal/descriptive variants, not separate eras. |
+| `VEN-000012` | `PERIODIZE` | Amway Center → Kia Center. |
+| `VEN-000020` | `ALIAS_ONLY` | One continuous Barclays Center identity; Brooklyn, NY / Barclays Center is location-decorated source text. |
+| `VEN-000026` | `PERIODIZE` | Bradley Center → BMO Harris Bradley Center. |
+| `VEN-000029` | `ALIAS_ONLY` | One continuous Breslin Center identity; Jack Breslin Student Events Center is the expanded formal name. |
+| `VEN-000037` | `ALIAS_ONLY` | One continuous Carver-Hawkeye Arena identity; dash typography variant only. |
+| `VEN-000040` | `RESEARCH_HOLD` | Research full formal chronology of the 1955 Charlotte Coliseum building, including Independence Arena / Bojangles Coliseum and any omitted eras, before periodization. |
+| `VEN-000041` | `ALIAS_ONLY` | One continuous 1988 Charlotte Coliseum identity; Charlotte Coliseum II / year/building variants are physical-disambiguation labels, not naming eras. |
+| `VEN-000048` | `PERIODIZE` | Memorial Coliseum → Coleman Coliseum. |
+| `VEN-000050` | `ALIAS_ONLY` | One continuous Convention Hall identity; Kansas City Convention Hall is location-qualified form. |
+| `VEN-000053` | `ALIAS_ONLY` | One continuous Dean Smith Center identity; Dean E. Smith Student Activities Center / Smith Center are expanded/short forms. |
+| `VEN-000054` | `ALIAS_ONLY` | One continuous Dee Events Center identity; Dee Event Center is singular/plural source variant. |
+| `VEN-000062` | `ALIAS_ONLY` | One continuous FedExForum identity; FedEx Forum is spacing variant. |
+| `VEN-000068` | `ALIAS_ONLY` | One continuous Frank Erwin Center identity; Erwin Center is shorthand. |
+| `VEN-000072` | `PERIODIZE` | Gallagher Hall → Gallagher-Iba Arena. |
+| `VEN-000079` | `ALIAS_ONLY` | One continuous Hilton Coliseum identity; James Hilton Coliseum is expanded naming form. |
+| `VEN-000085` | `ALIAS_ONLY` | One continuous Hubert H. Humphrey Metrodome identity; HHH Metrodome / Metrodome are short forms. |
+| `VEN-000088` | `ALIAS_ONLY` | One continuous Imperial Arena identity; Imperial Arena at Atlantis / Atlantis Imperial Arena / Imperial Ballroom are source/event/resort variants rather than naming eras. |
+| `VEN-000090` | `ALIAS_ONLY` | One continuous INTRUST Bank Arena identity; Intrust Bank Arena is capitalization variant. |
+| `VEN-000091` | `ALIAS_ONLY` | One continuous Iowa Field House identity; Iowa City Fieldhouse is location/spacing variant. |
+| `VEN-000102` | `IDENTITY_RECONCILE` | Owner ruling: KeyArena lineage and VEN-000315 Climate Pledge Arena are one physical Seattle Center arena identity. Later shared-reference implementation must reconcile to one surviving global venue_id and research complete naming chronology. |
+| `VEN-000315` | `IDENTITY_RECONCILE` | Owner ruling: Climate Pledge Arena and VEN-000102 KeyArena lineage are one physical Seattle Center arena identity. Later shared-reference implementation must reconcile to one surviving global venue_id and research complete naming chronology. |
 
 ## Future protocol agreed in principle
 
