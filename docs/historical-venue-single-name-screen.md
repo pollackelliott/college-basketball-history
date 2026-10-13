@@ -30,6 +30,16 @@ This means the existing published school venue tables do not themselves expose o
 
 Only obvious sponsor/rebrand-risk names are checked, in bounded tranches. Generic web search is discovery only. A positive hit means later focused authoritative chronology research is warranted.
 
+### Efficiency reset after tranche 2
+
+The screen is now **risk-ranked before any external research**. The remaining single-name population is mechanically evaluated with a conservative exact-token sponsor/brand heuristic using only registry display names. Generic facility words such as `Arena`, `Center`, `Coliseum`, and `Fieldhouse` do not create a hit by themselves.
+
+The first high-risk tier recognizes explicit naming-rights signals such as financial institutions, telecom/airline brands, auto brands, and other known sponsor tokens. Matching is token-aware rather than substring-based: for example, `Rockford` must not trigger `Ford`, `Sanford` must not trigger `Ford`, and `Las Vegas` must not trigger `gas`.
+
+This classifier is a **work-ranking device, not a historical conclusion**. A venue that does not trigger the current tier remains unscreened rather than being marked clear. The purpose is to exhaust the highest-yield population first, measure candidate yield, and only then decide whether a broader second-risk tier is justified. Individual historical research of all 483 single-name venues is not required for completion of this light screen.
+
+At the tranche-3 baseline, the exact-token high-risk tier found **8 of the 466 then-unscreened venues**. Those eight, and only those eight, were externally checked in tranche 3.
+
 ## Tranche 1 — sponsor/rebrand-risk venues
 
 | Venue | Baseline single name | Screen result | Discovery basis / next step |
@@ -80,16 +90,52 @@ This tranche was mechanically limited to the seven unscreened single-name venues
 - `SCREEN_CLEAR_CURRENT_PASS`: **6**
 - Deep chronology research performed: **0**
 
+## Tranche 3 — mechanically ranked explicit sponsor/brand tier
+
+This tranche exhausts the first conservative registry-local risk tier. External checking was limited to the binary screen question: **did this same physical venue obviously operate under another formal name, or did it open under the current name?** No exact transition-date research or full chronology archaeology was performed.
+
+| Venue | Baseline single name | Screen result | Discovery basis / next step |
+|---|---|---|---|
+| `VEN-000015` | AT&T Stadium | `SCREEN_POSITIVE` | Dallas Cowboys authority confirms the building opened in 2009 as Cowboys Stadium and was renamed AT&T Stadium in 2013. This is an obvious omitted predecessor era; later chronology work can verify exact implementation boundaries. Source: https://www.dallascowboys.com/news/at-t-takes-naming-rights-of-stadium-now-at-t-stadium-339351 |
+| `VEN-000066` | Ford Field | `SCREEN_CLEAR_CURRENT_PASS` | Ford Field's own history identifies the 2002 opening and inaugural events under the Ford Field name. No prior operational venue-name era surfaced in this light pass. Source: https://www.fordfield.com/stadium-info/about-ford-field |
+| `VEN-000104` | KFC Yum! Center | `SCREEN_CLEAR_CURRENT_PASS` | The venue and Louisville Arena Authority identify the building as opening in 2010 as KFC Yum! Center. No prior operational venue-name era surfaced. Sources: https://www.kfcyumcenter.com/about ; https://www.kfcyumcenter.com/about/louisville-arena-authority |
+| `VEN-000148` | Nationwide Arena | `SCREEN_CLEAR_CURRENT_PASS` | Nationwide Arena's own history says naming-rights partner Nationwide supported the project and the arena opened in September 2000 under the current name. No predecessor operational name surfaced. Source: https://www.nationwidearena.com/history |
+| `VEN-000201` | T-Mobile Arena | `SCREEN_CLEAR_CURRENT_PASS` | The arena's own material identifies its April 2016 opening as T-Mobile Arena. No predecessor operational name surfaced. Sources: https://www.t-mobilearena.com/arena-information ; https://www.t-mobilearena.com/news/detail/t-mobile-arena-debuts-on-the-las-vegas-strip |
+| `VEN-000213` | Toyota Center | `SCREEN_CLEAR_CURRENT_PASS` | Houston Toyota Center states that it opened in October 2003 as Toyota Center. No predecessor operational name surfaced in this light pass. Source: https://www.toyotacenter.com/arena-info/about-us |
+| `VEN-000450` | Mercedes-Benz Arena | `SCREEN_POSITIVE` | The Shanghai arena's own 2026 press center states that the building was originally built as the Shanghai World Expo Cultural Center in 2010; current arena material confirms the Mercedes-Benz naming-rights identity. This is an obvious predecessor-name candidate; later research should establish formal boundary semantics. Sources: https://www.mercedes-benzarena.com/en/News?page=1 ; https://www.mercedes-benzarena.com/en/newsinfo/270 |
+| `VEN-000641` | Toyota Center | `SCREEN_POSITIVE` | Kennewick Toyota Center's own history gives the same-building sequence beginning as Tri-Cities Coliseum in 1988, later Three Rivers Coliseum, with Toyota naming rights completed in 2005. This is a clear multi-era candidate. Source: https://yourtoyotacenter.com/venue-info/history/ |
+
+### Tranche 3 count
+
+- Screened: **8**
+- `SCREEN_POSITIVE`: **3**
+- `SCREEN_CLEAR_CURRENT_PASS`: **5**
+- Deep chronology research performed: **0**
+- Conservative explicit sponsor/brand tier remaining: **0**
+
+### Cumulative light-screen count after tranche 3
+
+- Screened: **25 / 483**
+- `SCREEN_POSITIVE`: **14**
+- `SCREEN_CLEAR_CURRENT_PASS`: **11**
+- Not individually screened: **458**
+- Deep chronology research performed: **0**
+
+The 458 not-yet-individually-screened venues are **not a requirement for 458 separate searches**. The next bounded unit, if authorized, should mechanically define a broader medium-risk tier and inspect only that population. If candidate yield converges downward, the light screen should stop rather than descend into venue-by-venue negative-proof research.
+
 ## Current candidate queue
 
 The following single-name venues now warrant later bounded chronology research:
 
+- `VEN-000015`
 - `VEN-000089`
 - `VEN-000135`
 - `VEN-000228`
 - `VEN-000244`
+- `VEN-000450`
 - `VEN-000596`
 - `VEN-000607`
+- `VEN-000641`
 - `VEN-000642`
 - `VEN-000675`
 - `VEN-000686`
