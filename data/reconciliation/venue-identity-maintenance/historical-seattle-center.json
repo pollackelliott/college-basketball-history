@@ -2,7 +2,7 @@
   "merges": [
     {
       "absorbed_venue_id": "VEN-000315",
-      "expected_canonical_rows": 0,
+      "expected_canonical_rows": 7,
       "expected_school_rows": 5,
       "resolution_basis": "Control Center venue census resolves VEN-000102 and VEN-000315 as one Seattle Center arena lineage; preserve earlier-established VEN-000102 and retire duplicate VEN-000315.",
       "survivor_venue_id": "VEN-000102"

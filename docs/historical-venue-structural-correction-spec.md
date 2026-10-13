@@ -33,11 +33,19 @@ Declared merge:
   - Oregon
   - UCLA
   - UConn
-- expected canonical rows using absorbed ID on this protected-main basis: **0**
+- expected canonical rows using absorbed ID on this protected-main basis: **7**
+- exact canonical rows using absorbed ID on this protected-main basis:
+  - `CBBG-0058651`
+  - `CBBG-0058652`
+  - `CBBG-0073394`
+  - `CBBG-0073395`
+  - `CBBG-0075741`
+  - `CBBG-0111308`
+  - `CBBG-0156418`
 - expected game-assertion rows using absorbed ID/key on this protected-main basis: **0**
 - expected NCAA-site evidence rows using absorbed ID/key on this protected-main basis: **0**
 
-The existing transaction owns retirement of `VEN-000315`, dependent school-row rebinding, global-name reassignment/deduplication, any canonical/assertion/NCAA rewrites discovered at replan time, deterministic site rebuild, freshness proof, validation, postconditions, and rollback.
+Earlier conversational/API sampling incorrectly reported zero canonical uses; the repository-owned sealed planner on the exact protected-main data exposed the seven rows above. This is a mechanical census correction only and does not change the settled same-building identity conclusion.\n\nThe existing transaction owns retirement of `VEN-000315`, dependent school-row rebinding, global-name reassignment/deduplication, any canonical/assertion/NCAA rewrites discovered at replan time, deterministic site rebuild, freshness proof, validation, postconditions, and rollback.
 
 ### Transaction B — generic intent-constrained non-merge correction
 
