@@ -32,7 +32,7 @@ button,input,select{font:inherit}button{touch-action:manipulation}.college{font-
 .panel{min-width:0;background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 3px 12px rgba(17,34,56,.04)}.panel-title{text-align:center;padding:14px 16px;border-bottom:1px solid var(--line);font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:14px;letter-spacing:.035em}
 .directory-panel{overflow:hidden}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(180px,260px) minmax(160px,220px);gap:10px;padding:14px;border-bottom:1px solid var(--line);background:#f8fafc}.directory-control label,.filter-field label{display:block;color:#526174;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:0 0 5px}.directory-control input,.directory-control select{width:100%;min-height:42px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:9px 10px}.directory-count{padding:10px 14px;text-align:center;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)}
 .program-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:12px}.program-card{appearance:none;min-width:0;width:100%;min-height:108px;text-align:center;padding:14px;border:1px solid #111;border-top:6px solid var(--secondary);border-radius:9px;background:var(--primary);color:var(--cardText);box-shadow:0 0 0 1px #111,0 3px 11px rgba(17,34,56,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.program-card.enabled{cursor:pointer}.program-card.enabled:hover{transform:translateY(-2px);box-shadow:0 0 0 1px #111,0 10px 22px rgba(17,34,56,.18)}.program-card:disabled{cursor:not-allowed;opacity:.70}.program-card .program-name{display:block;font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:20px;line-height:1.2;overflow-wrap:anywhere}.program-card .program-meta{display:block;margin-top:7px;font-size:13px;line-height:1.35;opacity:.92}
-.logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}
+.logo-disc{width:48px;height:48px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:Graduate,"Arial Black",serif;font-weight:800;font-size:17px;background:var(--team);color:var(--teamText);border:3px solid var(--secondary)}.logo-initialism{display:inline-block;white-space:nowrap;line-height:1;text-align:center}
 .team-hero{border-radius:11px;overflow:hidden;background:white;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:18px}.team-strip{height:10px;background:var(--team)}
 .team-head{text-align:center;padding:24px;display:flex;flex-direction:column;align-items:center;gap:10px}.team-head h1{font-family:Graduate,"Arial Black",serif;text-transform:uppercase;font-size:35px;line-height:1.2;margin:0}.team-head h1+.kicker{margin-top:8px}.team-head .logo-disc{width:76px;height:76px;font-size:25px}
 .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}.metric{min-width:0;min-height:82px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.metric.champion-finish{border-color:#C9A227}.metric b{font-size:23px;line-height:1.1;display:block;overflow-wrap:anywhere}.metric span{display:block;margin:0;font-size:12px;line-height:1.28;font-weight:600;color:#526174}
@@ -154,6 +154,7 @@ const DB = {
   conferenceHistory: {},
   conferenceNames: {},
   conferenceTournamentLabels: {},
+  displayLabels: {},
   pairs: {},
 };
 
@@ -393,6 +394,8 @@ function normalizeProgram(program) {
     state: program.state || "",
     location: programLocation(program),
     conference: conferenceName(program.current_conference) || "Independent",
+    headerShort: DB.displayLabels[program.program_key]?.header_short || program.display_name || program.program_name,
+    badgeInitialism: DB.displayLabels[program.program_key]?.badge_initialism || initials(program.display_name || program.program_name),
     primary: safeHex(program.primary_hex, "#334155"),
     secondary: safeHex(program.secondary_hex, "#FFFFFF"),
     historyStartSeason: program.history_start_season || "",
@@ -545,6 +548,13 @@ async function loadData() {
   const programsDocument = await fetchJSON(`data/${programsPath}`);
   if (!Array.isArray(programsDocument.programs)) throw new Error("programs.json does not contain a programs array");
 
+  const displayLabelsPath = manifest.files?.display_labels || "program-display-labels.json";
+  const displayLabelsDocument = await fetchJSON(`data/${displayLabelsPath}`);
+  if (displayLabelsDocument.schema_version !== 1 || !displayLabelsDocument.programs) {
+    throw new Error("Unsupported or missing program display-label data");
+  }
+  DB.displayLabels = displayLabelsDocument.programs;
+
   DB.programs = programsDocument.programs
     .map(normalizeProgram)
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -624,7 +634,24 @@ function teamLogo(keyOrProgram) {
   const team = typeof keyOrProgram === "string" ? programByKey(keyOrProgram) : keyOrProgram;
   if (!team) return "";
   const color = textColor(team.primary);
-  return `<div class="logo-disc" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}">${initials(team.name)}</div>`;
+  const initialism = team.badgeInitialism || initials(team.name);
+  return `<div class="logo-disc" role="img" aria-label="${esc(team.name)}" style="--team:${team.primary};--secondary:${team.secondary || "#fff"};--teamText:${color};background:${team.primary};color:${color};border-color:${team.secondary || "#fff"}"><span class="logo-initialism" aria-hidden="true">${esc(initialism)}</span></div>`;
+}
+
+function fitLogoBadgeText() {
+  document.querySelectorAll(".logo-disc").forEach((disc) => {
+    const label = disc.querySelector(".logo-initialism");
+    if (!label || !disc.clientWidth) return;
+    const characters = Array.from(label.textContent || "").length;
+    const originalSize = Number.parseFloat(getComputedStyle(disc).fontSize);
+    let size = originalSize * (characters >= 5 ? 0.56 : characters === 4 ? 0.70 : characters === 3 ? 0.84 : 1);
+    const available = disc.clientWidth - 8;
+    label.style.fontSize = `${size}px`;
+    while (label.getBoundingClientRect().width > available + 0.5 && size > 8) {
+      size = Math.max(8, size - 0.5);
+      label.style.fontSize = `${size}px`;
+    }
+  });
 }
 
 function forceRouteTop() {
@@ -1681,6 +1708,7 @@ function render() {
     app.innerHTML = homeView();
   }
   forceRouteTop();
+  fitLogoBadgeText();
   syncStickyOffsets();
   syncTeamContextTitle();
 }
@@ -1789,6 +1817,7 @@ async function boot() {
     syncStickyOffsets();
     syncTeamContextTitle();
     window.addEventListener("resize", () => {
+      fitLogoBadgeText();
       syncStickyOffsets();
       scheduleTeamContextTitleSync();
     });
