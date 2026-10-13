@@ -299,6 +299,42 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000512` | `ALIAS_ONLY` | One continuous Buffalo Memorial Auditorium identity; Memorial Auditorium is shorthand. |
 | `VEN-000513` | `RESEARCH_HOLD` | Determine whether Alumni Memorial Gymnasium → Brodie Gym was an actual formal rename of the same physical building. |
 | `VEN-000514` | `ALIAS_ONLY` | One continuous Angier B. Duke Gymnasium identity; Angier Duke Gymnasium and The Ark are aliases/nickname. |
+| `VEN-000515` | `ALIAS_ONLY` | One continuous Birmingham City Auditorium identity; Municipal Auditorium variants are shorthand/location-qualified forms. |
+| `VEN-000516` | `ALIAS_ONLY` | One continuous Card Gymnasium identity; Card Gym is shorthand. |
+| `VEN-000521` | `RESEARCH_HOLD` | Research Raleigh Auditorium / Municipal Auditorium / Old City Auditorium / City Hall and Auditorium same-building and naming-history relationship before periodization. |
+| `VEN-000522` | `ALIAS_ONLY` | One continuous Raleigh Memorial Auditorium identity; Memorial Auditorium and combined source wording are aliases. |
+| `VEN-000523` | `ALIAS_ONLY` | One continuous War Memorial Gymnasium identity; War Memorial Gym is shorthand. |
+| `VEN-000525` | `ALIAS_ONLY` | One continuous Alumni Hall identity; Navy Alumni Hall is institution-qualified wording. |
+| `VEN-000526` | `ALIAS_ONLY` | One continuous Aoyama Gakuin Memorial Hall/Arena identity; English Hall/Arena renderings treated as translational variants rather than successive periods. |
+| `VEN-000529` | `ALIAS_ONLY` | One continuous Bynum Gymnasium identity; Bynum Gym is shorthand. |
+| `VEN-000531` | `PERIODIZE` | Carmichael Auditorium → Carmichael Arena. |
+| `VEN-000538` | `ALIAS_ONLY` | One continuous Indoor Athletic Court identity; Tin Can is nickname. |
+| `VEN-000539` | `ALIAS_ONLY` | One continuous James L. Knight Center identity; Knight Center is shorthand. |
+| `VEN-000547` | `ALIAS_ONLY` | One continuous Roanoke City Auditorium identity; City Auditorium is shorthand. |
+| `VEN-000552` | `ALIAS_ONLY` | One continuous Woollen Gymnasium identity; Woollen Gym is shorthand. |
+| `VEN-000554` | `RESEARCH_HOLD` | Research Rice Field House / Rice Gymnasium / Autry Court chronology; may represent genuine formal naming eras. |
+| `VEN-000555` | `PERIODIZE_RESEARCH` | Research full Bossier City arena chronology; CenturyTel Center → likely omitted CenturyLink era → Brookshire Grocery Arena. |
+| `VEN-000557` | `RESEARCH_HOLD` | Research Comerica Center full chronology; Comerica Arena may be erroneous variant and earlier formal naming history may be omitted. |
+| `VEN-000560` | `ALIAS_ONLY` | One continuous Delmar Fieldhouse identity; Delmar Gym is shorthand. |
+| `VEN-000563` | `PERIODIZE_RESEARCH` | Research Philadelphia Convention Hall / Municipal Auditorium / Philadelphia Civic Center chronology and exact period boundaries. |
+| `VEN-000565` | `ALIAS_ONLY` | One continuous Tech Gym identity; The Barn is nickname. |
+| `VEN-000570` | `ALIAS_ONLY` | One continuous Fair Park Recreation Building identity; Fair Park Rec. Center is shorthand/variant. |
+| `VEN-000574` | `ALIAS_ONLY` | One continuous Civic Auditorium (San Francisco) identity; San Francisco / SF qualifiers are aliases. |
+| `VEN-000576` | `PERIODIZE` | Patriot Center → EagleBank Arena. |
+| `VEN-000578` | `PERIODIZE_RESEARCH` | Research full Estero arena chronology; Germain Arena → Hertz Arena is real but current registry likely omits an earlier formal arena name. |
+| `VEN-000580` | `PERIODIZE` | Lubbock Coliseum → City Bank Coliseum. |
+| `VEN-000582` | `ALIAS_ONLY` | One continuous Einar Nielsen Fieldhouse identity; Nielsen Fieldhouse is shorthand. |
+| `VEN-000583` | `ALIAS_ONLY` | One continuous Donald W. Reynolds Center identity; Reynolds Center is shorthand. |
+| `VEN-000584` | `ALIAS_ONLY` | One continuous Sam Houston Coliseum identity; Houston Coliseum is shorthand. |
+| `VEN-000585` | `CANONICAL_CORRECTION` | State Fair Arena is the physical venue; State Farm Arena [BC source wording] is erroneous source wording, not a historical period. |
+| `VEN-000594` | `ALIAS_ONLY` | One continuous JSerra Pavilion identity; The Pavilion at JSerra is expanded form. |
+| `VEN-000597` | `ALIAS_ONLY` | One continuous Robertson Memorial Fieldhouse identity; Memorial Field House is shorthand. |
+| `VEN-000600` | `ALIAS_ONLY` | One continuous Ladies/Women’s Gymnasium identity; Old Ladies Gymnasium is retrospective descriptor rather than a separate period. |
+| `VEN-000602` | `PERIODIZE` | Prescott Valley Event Center → Tim’s Toyota Center → Findlay Toyota Center. |
+| `VEN-000605` | `PERIODIZE` | Glens Falls Civic Center → Cool Insuring Arena → Harding Mazzotti Arena. |
+| `VEN-000606` | `PERIODIZE` | Toso Pavilion → Leavey Center; Harold J. Toso Pavilion and Leavey Event Center are variants within those eras. |
+| `VEN-000615` | `ALIAS_ONLY` | One continuous Omaha Civic Auditorium identity; Civic Auditorium is shorthand. |
+| `VEN-000616` | `ALIAS_ONLY` | One continuous Perkins Gymnasium identity; Perkins Gym is shorthand. |
 
 ## Future protocol agreed in principle
 
