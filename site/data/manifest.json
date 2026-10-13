@@ -7,6 +7,7 @@
   "files": {
     "programs": "programs.json",
     "display_labels": "program-display-labels.json",
-    "teams_root": "teams/"
+    "teams_root": "teams/",
+    "venue_name_periods": "venue-name-periods.json"
   }
 }
