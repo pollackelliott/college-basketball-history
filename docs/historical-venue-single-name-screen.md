@@ -228,7 +228,7 @@ The following single-name venues now warrant later bounded chronology research:
 
 Do not periodize or mutate shared registries from this screen alone.
 
-Chronology follow-up is tracked separately in `docs/historical-venue-single-name-chronology.md`. Tranches 1-3 have researched 12 of the 14 screen-positive candidates; only VEN-000698 and VEN-000714 remain pending there.
+Chronology follow-up is complete in `docs/historical-venue-single-name-chronology.md`. All 14 screen-positive candidates received bounded authoritative research: 6 are `PERIODIZE_READY` and 8 retain explicit exact-date residuals as `PARTIAL_PERIODIZE_RESEARCH`. No shared-reference mutation is authorized by the screen or chronology documents alone.
 
 ## Stopping rule
 
