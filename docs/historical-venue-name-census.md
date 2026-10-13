@@ -37,17 +37,17 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000008` | `PERIODIZE` | St. Pete Times Forum → Amalie Arena → Benchmark International Arena; research may reveal omitted formal eras. |
 | `VEN-000009` | `PERIODIZE` | National Car Rental Center → BankAtlantic Center → BB&T Center → FLA Live Arena → Amerant Bank Arena. |
 | `VEN-000011` | `PERIODIZE` | Providence Civic Center → Dunkin’ Donuts Center → Amica Mutual Pavilion. |
-| `VEN-000013` | `RESEARCH_HOLD` | Research full Sacramento chronology. ARCO Arena II is building disambiguation, not a period. Working expectation includes ARCO Arena → Power Balance Pavilion → Sleep Train Arena. |
+| `VEN-000013` | `PERIODIZE` | Owner chronology verified: ARCO Arena → Power Balance Pavilion → Sleep Train Arena. `ARCO Arena II` is repository/building disambiguation only, never a formal arena-name period. Sacramento Kings material confirms ARCO usage through 2010-11, Power Balance Pavilion in 2011-12, and Sleep Train Arena from the 2012-13 era onward. Contemporary naming coverage places the transitions at 2011-03-01 and 2012-10-15; reverify exact effective-day semantics during implementation. |
 | `VEN-000018` | `PERIODIZE` | Pepsi Center → Ball Arena. |
-| `VEN-000019` | `RESEARCH_HOLD` | Baltimore registry is incomplete; research full formal chronology before owner periodization. |
-| `VEN-000023` | `RESEARCH_HOLD` | Determine whether NU Sports Complex was a genuine predecessor name of Bob Devaney Sports Center or source shorthand. |
+| `VEN-000019` | `PERIODIZE` | Baltimore Civic Center → Baltimore Arena → 1st Mariner Arena → Baltimore Arena → Royal Farms Arena → Baltimore Arena → CFG Bank Arena. The 1962 building became Baltimore Arena in 1986; 1st Mariner naming ran 2003-2013, followed by a Baltimore Arena reversion; Baltimore City approved Royal Farms title sponsorship in 2014, terminated effective 2022-06-27, after which `Baltimore Arena` again served as the unsponsored name during redevelopment; CFG naming rights were announced 2022-10-24 for the reopened venue. Owner-supplied `Royal Farms Arena in 2022` is corrected to 2014-2022. Exact 1986/2003/2013 and CFG naming-period day semantics remain implementation-date verification. |
+| `VEN-000023` | `RESEARCH_HOLD` | Owner requested `Bob Devaney Sports Center` for all time, but authoritative/contemporaneous evidence materially contradicts that treatment. Nebraska opened the facility in 1976 before the Devaney naming; contemporaneous 1977-78/1978-79 basketball evidence calls the home court `NU Sports Complex`, and Nebraska historical material states the building was renamed Bob Devaney Sports Center in 1978 (secondary contemporary retrospective narrows the rename to November 1978). Preserve this as a genuine historical-authority conflict rather than silently treating `NU Sports Complex` as shorthand. Exact 1978 boundary remains unresolved. |
 | `VEN-000025` | `PERIODIZE` | BI-LO Center → Bon Secours Wellness Arena; The Well is alias only. |
 | `VEN-000028` | `PERIODIZE` | Brendan Byrne Arena → Continental Airlines Arena → IZOD Center → Meadowlands Arena; Meadowlands is alias only. |
 | `VEN-000031` | `PERIODIZE` | Gaylord Entertainment Center → Sommet Center → Bridgestone Arena; Gaylor Entertainment Center is typo only. |
 | `VEN-000034` | `PERIODIZE` | Louisiana Superdome → Mercedes-Benz Superdome → Caesars Superdome; Superdome is alias only. |
 | `VEN-000035` | `PERIODIZE` | Duke Indoor Stadium → Cameron Indoor Stadium. |
 | `VEN-000036` | `PERIODIZE` | MCI Center → Verizon Center → Capital One Arena. |
-| `VEN-000038` | `RESEARCH_HOLD` | Research full UCF chronology; working expectation UCF Arena → CFE Arena → Addition Financial Arena. |
+| `VEN-000038` | `PERIODIZE` | Owner chronology verified: UCF Arena → CFE Arena → Addition Financial Arena. UCF states the arena opened in 2007; CFE acquired naming rights and `UCF Arena` became `CFE Arena` on 2013-05-23; Addition Financial's own release and UCF Board materials fix the CFE→Addition Financial Arena transition to 2019-05-01. |
 | `VEN-000039` | `PERIODIZE` | University of Wichita Field House → WSU Field House → Levitt Arena → Charles Koch Arena. Owner working years 1955–64 / 1964–69 / 1969–2003 / 2003–present; exact boundaries to verify. |
 | `VEN-000043` | `PERIODIZE` | Qwest Center → CenturyLink Center → CHI Health Center Omaha; variants without Omaha are aliases of matching eras. |
 | `VEN-000049` | `PERIODIZE` | Carolina Center → Colonial Center → Colonial Life Arena. |
@@ -61,7 +61,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000064` | `ALIAS_ONLY` | One continuous Florida Gym identity; Florida Gymnasium variant, Alligator Alley nickname. |
 | `VEN-000065` | `PERIODIZE` | America West Arena → US Airways Center → Talking Stick Resort Arena → Footprint Center → Mortgage Matchup Center; research may reveal omitted formal eras. |
 | `VEN-000070` | `PERIODIZE` | Conseco Fieldhouse → Bankers Life Fieldhouse → Gainbridge Fieldhouse. |
-| `VEN-000076` | `RESEARCH_HOLD` | Research whether Greensboro Memorial Coliseum was an earlier formal name and reconcile Greensboro Coliseum / First Horizon Coliseum chronology. |
+| `VEN-000076` | `PERIODIZE` | Owner chronology verified conceptually: Greensboro Memorial Coliseum → Greensboro Coliseum → First Horizon Coliseum. Existing institutional game evidence supports the `Greensboro Memorial Coliseum` form in the 1960s; accepted historical references place the shortened Greensboro Coliseum era from 1980; and the City of Greensboro states the First Horizon naming-rights agreement took effect immediately on 2024-10-02. Exact 1980 transition day remains implementation-date verification. |
 | `VEN-000078` | `ALIAS_ONLY` | One continuous Hec Edmundson Pavilion identity; Bank of America Arena / Alaska Airlines Arena treated as sponsor overlays. |
 | `VEN-000080` | `PERIODIZE` | Butler Fieldhouse → Hinkle Fieldhouse. |
 | `VEN-000082` | `PERIODIZE` | Arrowhead Pond of Anaheim → Honda Center; Arrowhead Pond / The Pond are aliases. |
