@@ -1,6 +1,6 @@
 # Historical venue-name census
 
-Status: **MULTI-NAME CENSUS COMPLETE — RESEARCH QUEUE READY**  
+Status: **MULTI-NAME AMBIGUITY RESEARCH COMPLETE — SINGLE-NAME SCREEN NEXT**  
 Protected-main baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
 This file preserves the owner-adjudicated state of the repository-wide historical physical-venue naming census. It is a recovery artifact and working ledger, not yet the final permanent protocol. It does not itself create `OFFICIAL_NAMING_PERIOD` rows.
@@ -193,7 +193,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000227` | `PERIODIZE` | Jacksonville Veterans Memorial Arena → VyStar Veterans Memorial Arena; Memorial Arena / Veterans Memorial Arena are shorthand unless later evidence proves otherwise. |
 | `VEN-000229` | `PERIODIZE` | McGaw Memorial Hall → Welsh-Ryan Arena; McGaw Hall / Northwestern McGaw Hall are aliases. |
 | `VEN-000232` | `ALIAS_ONLY` | One continuous Wisconsin Field House identity; UW Field House is shorthand. |
-| `VEN-000234` | `RESEARCH_HOLD` | Research tranche 1 bounded residual: opening identity is supported as Centrum in Worcester, later sources use Worcester’s Centrum Centre, and the DCU naming-rights agreement was reached in October 2004. Available evidence conflicts on the exact adoption boundary/formal status of Worcester’s Centrum Centre, and the exact DCU effective day remains insufficiently established. Preserve hold; do not invent dates. |
+| `VEN-000234` | `RESEARCH_EXHAUSTED` | Owner closed the bounded residual as research exhausted. Opening identity is supported as Centrum in Worcester; later sources use Worcester’s Centrum Centre; the DCU naming-rights agreement was reached in October 2004. Available authoritative evidence does not establish a reliable exact adoption boundary/formal status for Worcester’s Centrum Centre or an exact DCU effective day. Preserve the uncertainty and do not invent dates. Reopen only if a materially stronger city/venue archival source appears. |
 | `VEN-000235` | `PERIODIZE` | WVU Coliseum → Hope Coliseum. Owner explicitly rules these as two distinct periods. |
 | `VEN-000238` | `PERIODIZE` | USF Sun Dome → Yuengling Center; Sun Dome is alias/short form of first era. |
 | `VEN-000240` | `ALIAS_ONLY` | One continuous C.M. “Tad” Smith Coliseum identity; Tad Smith Coliseum is shortened form. |
@@ -259,7 +259,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000388` | `ALIAS_ONLY` | Baoshan Sports Center is the overall Shanghai sports-center complex; the basketball competition space is its basketball arena/gymnasium. Shanghai Sports Bureau material explicitly refers to the Baoshan Sports Center basketball gymnasium (宝山体育中心篮球馆). `Baoshan Sports Center` is complex/location wording for the arena, not a historical rename of Baoshan Arena. |
 | `VEN-000389` | `ALIAS_ONLY` | One continuous Cannon Activities Center identity; George Q. Cannon/full and Cannon Event Center forms are aliases unless later evidence establishes a formal rename. |
 | `VEN-000395` | `ALIAS_ONLY` | One continuous Astrodome identity; Houston qualifier only. Prior duplicate physical venue ID already retired. |
-| `VEN-000396` | `RESEARCH_HOLD` | Tranche 3 bounded residual: same-building continuity is established for the fieldhouse beside the former Public School/Jeppesen/Robertson Stadium, and institutional/registry evidence supports both `Public School Fieldhouse` and `Jeppesen Fieldhouse`; `Jeppesen Gymnasium` is wording for that same facility. However the bounded pass did not establish an authoritative exact formal adoption boundary for the fieldhouse. UH’s stadium history fixes the adjacent stadium’s Jeppesen rename to 1958, while UH basketball/history material retroactively uses Jeppesen Fieldhouse for earlier years. Do not borrow the stadium’s 1958 boundary or manufacture a fieldhouse period until a stronger archival source resolves it. |
+| `VEN-000396` | `RESEARCH_EXHAUSTED` | Owner closed the bounded residual as research exhausted. Same-building continuity is established for the fieldhouse beside the former Public School/Jeppesen/Robertson Stadium, and institutional/registry evidence supports both `Public School Fieldhouse` and `Jeppesen Fieldhouse`; `Jeppesen Gymnasium` is wording for that same facility. The bounded authoritative pass did not establish a safe formal adoption boundary. Do not borrow the adjacent stadium’s 1958 Jeppesen rename or manufacture a fieldhouse period. Reopen only if materially stronger archival evidence appears. |
 | `VEN-000405` | `ALIAS_ONLY` | One continuous Marriott Center identity; Mariott Center is typo only. |
 | `VEN-000408` | `ALIAS_ONLY` | One continuous UCLA Men’s Gymnasium identity; Men’s Gym is shorthand. |
 | `VEN-000411` | `ALIAS_ONLY` | One continuous Municipal Auditorium (New Orleans) identity; city qualifier only. |
@@ -271,7 +271,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000434` | `ALIAS_ONLY` | One continuous Charles E. Smith Center identity; Smith Center is shorthand. |
 | `VEN-000435` | `ALIAS_ONLY` | One continuous College Avenue Gym identity; College Avenue Gymnasium and The Barn are aliases. |
 | `VEN-000438` | `ALIAS_ONLY` | One continuous Galactic Ballroom at Moon Palace Resort identity; Moon Palace Resort is broader resort-level source wording. |
-| `VEN-000439` | `RESEARCH_HOLD` | Tranche 4 bounded residual: Rutgers institutional history establishes Highland Park Gym as its 1929-31 home (10-1). Contemporaneous New Brunswick reporting independently establishes an active Masonic Hall basketball court in Highland Park during the same period, including state-tournament play. The bounded pass did not find an authoritative source directly equating Rutgers' `Highland Park Gym` label with Highland Park Masonic Hall, so do not merge/name-normalize them yet. |
+| `VEN-000439` | `RESEARCH_EXHAUSTED` | Owner closed the bounded residual as research exhausted. Rutgers institutional history establishes Highland Park Gym as its 1929-31 home (10-1), while contemporaneous New Brunswick reporting independently establishes a Masonic Hall basketball court in Highland Park during the same period. No authoritative source found in the bounded pass directly equates the two. Preserve them as unmerged identities/wording and do not manufacture equivalence. Reopen only if materially stronger archival evidence appears. |
 | `VEN-000440` | `ALIAS_ONLY` | One continuous Jadwin Gymnasium identity; Jadwin Gym / Jadwin Fieldhouse are variants. |
 | `VEN-000443` | `PERIODIZE` | Sears Centre → NOW Arena; Sears Centre Arena is first-era variant. |
 | `VEN-000444` | `PERIODIZE` | Air Canada Centre → Scotiabank Arena. |
@@ -415,8 +415,7 @@ The final permanent policy should be linked from `AGENTS.md`, `docs/historical-v
 
 ## Remaining census obligations
 
-- Continue owner adjudication of the still-unreviewed multi-name venue population.
-- Research every `RESEARCH_HOLD` and every `PERIODIZE_RESEARCH` chronology before implementation.
-- Verify exact transition dates for approved periodized histories.
-- After the multi-name population is closed, perform a **light high-yield screen of the 483 single-name venues** for obvious missing historical rename histories. This is not permission for 483 deep research campaigns.
-- Only after the census is complete should rollout tranches be finalized and repository-wide period rows implemented in bounded shared-reference maintenance PRs.
+- Multi-name ambiguity research is complete. The three surviving unresolved cases are explicitly owner-accepted `RESEARCH_EXHAUSTED` residuals and must not be reopened absent materially stronger evidence.
+- Verify exact transition dates for approved periodized histories where the ledger still marks date verification as pending.
+- Perform the agreed **light high-yield screen of the 483 single-name venues** for obvious missing historical rename histories. This is not permission for 483 deep research campaigns.
+- After that screen, finalize rollout tranches and implement approved naming periods / shared-reference cleanups in bounded maintenance PRs under current repository policy.
