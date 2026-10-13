@@ -1,6 +1,35 @@
 {
   "schema_version": 1,
   "venues": {
+    "VEN-000052": [
+      {
+        "venue_name": "CU Events/Conference Center",
+        "valid_from": "1979-08-08",
+        "valid_to": "1990-09-19"
+      },
+      {
+        "venue_name": "Coors Events Center",
+        "valid_from": "1990-09-20",
+        "valid_to": "2018-06-30"
+      },
+      {
+        "venue_name": "CU Events Center",
+        "valid_from": "2018-07-01",
+        "valid_to": ""
+      }
+    ],
+    "VEN-000096": [
+      {
+        "venue_name": "Carrier Dome",
+        "valid_from": "1980-09-20",
+        "valid_to": "2022-05-18"
+      },
+      {
+        "venue_name": "JMA Wireless Dome",
+        "valid_from": "2022-05-19",
+        "valid_to": ""
+      }
+    ],
     "VEN-000196": [
       {
         "venue_name": "Assembly Hall",
