@@ -1,6 +1,6 @@
 # Historical venue single-name candidate chronology research
 
-Status: **IN PROGRESS — 8 / 14 CANDIDATES RESEARCHED**  
+Status: **IN PROGRESS — 12 / 14 CANDIDATES RESEARCHED**  
 Source screen: `docs/historical-venue-single-name-screen.md`  
 Protected-main research baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
@@ -232,6 +232,129 @@ Remaining candidates:
 - `VEN-000642`
 - `VEN-000675`
 - `VEN-000686`
+- `VEN-000698`
+- `VEN-000714`
+
+
+## Research tranche 3 — next four candidates by venue ID
+
+### VEN-000641 — Toyota Center — Kennewick, Washington
+
+**Disposition: `PARTIAL_PERIODIZE_RESEARCH`**
+
+Same physical arena.
+
+Supported chronology:
+- The building opened in 1988 as **Tri-Cities Coliseum**.
+- The official venue history states that the complex was renamed in 2004, with the Coliseum becoming **Three Rivers Coliseum**.
+- In October 2005, a naming-rights sponsorship agreement between the City of Kennewick, VenuWorks, Toyota USA, and Toyota of Tri-Cities branded the Coliseum as **Toyota Center**.
+
+Authoritative source:
+- https://yourtoyotacenter.com/venue-info/history/
+
+**Residuals:**
+- The official facility history gives only the year 1988 for opening, not an exact opening day.
+- It gives 2004 for the Three Rivers Coliseum transition but no exact effective day.
+- It gives October 2005 for the Toyota naming-rights agreement but no exact day.
+
+The three-era same-building chronology is settled; exact periodization boundaries are not yet implementation-ready.
+
+### VEN-000642 — Idaho Central Arena — Boise, Idaho
+
+**Disposition: `PARTIAL_PERIODIZE_RESEARCH`**
+
+Same physical arena.
+
+Supported chronology:
+- The arena opened in the fall of 1997 and was originally **Bank of America Centre**.
+- It later became **Qwest Arena** in 2005.
+- Idaho Steelheads / Block 22 announced the change from Qwest Arena to **CenturyLink Arena Boise** on 2011-08-17.
+- Idaho Steelheads / Block 22 and Idaho Central Credit Union announced on 2020-09-17 that CenturyLink Arena would now be named **Idaho Central Arena**.
+
+Authoritative / facility sources:
+- https://idahocentralarena.com/about-us/
+- https://idahosteelheads.com/news/2011/08/qwest-arena-becomes-centurylink-arena-boise
+- https://idahosteelheads.com/news/2020/09/centurylink-arena-home-of-the-idaho-steelheads-to-be-renamed-idaho-central-arena
+
+Strong local corroboration:
+- https://boisedev.com/news/2020/09/16/idaho-central-arena-boise/
+
+Exact settled recent boundaries:
+- Qwest Arena through **2011-08-16**
+- CenturyLink Arena Boise from **2011-08-17 through 2020-09-16**
+- Idaho Central Arena from **2020-09-17 onward**
+
+**Residuals:**
+- The official arena site gives only fall 1997 for opening.
+- The bounded pass confirms Bank of America Centre → Qwest Arena in 2005 but did not establish an exact authoritative effective day for that transition.
+
+Do not import third-party exact dates for the 1997 opening or 2005 rename merely to complete the early periods.
+
+### VEN-000675 — Truist Arena — Highland Heights, Kentucky
+
+**Disposition: `PARTIAL_PERIODIZE_RESEARCH`**
+
+Same physical arena.
+
+Supported chronology:
+- Northern Kentucky University states that the venue opened in 2008 as **The Bank of Kentucky Center**.
+- NKU Athletics announced on **2015-06-22** that the venue had a new name, **BB&T Arena at Northern Kentucky University**, after BB&T acquired The Bank of Kentucky.
+- The arena was subsequently renamed **Truist Arena** in April 2022 after the BB&T/SunTrust merger and Truist rebrand.
+
+Authoritative sources:
+- https://nkunorse.com/news/2015/6/22/GEN_0622150627.aspx
+- https://www.nku.edu/campus-planning/building/other/bbt/
+
+Strong contemporaneous corroboration for the 2022 rebrand:
+- https://linknky.com/sports/2022/04/05/bbt-arena-is-now-truist-arena/
+- https://nkytribune.com/2022/04/nkus-on-campus-arena-undergoes-its-third-name-change-in-history-now-truist-arena/
+
+Exact settled middle boundary:
+- The Bank of Kentucky Center through **2015-06-21**
+- BB&T Arena from **2015-06-22**
+
+**Residuals:**
+- NKU's campus record establishes 2008 opening/occupancy chronology but does not provide one unambiguous exact operational opening day suitable for the first naming-period `valid_from`.
+- The bounded pass found contemporaneous reporting that NKU's Truist change was effective immediately in April 2022, but did not recover the underlying first-party NKU/facility release at an exact permanent URL. Preserve the April 2022 chronology without manufacturing an implementation boundary from secondary reporting alone.
+
+### VEN-000686 — Bankoh Arena at Stan Sheriff Center — Honolulu, Hawai‘i
+
+**Disposition: `PERIODIZE_READY`**
+
+Same physical arena.
+
+| Inclusive official period | Name | Basis |
+|---|---|---|
+| 1994-10-21 through 1998-02-19 | Special Events Arena | Multiple UH Athletics histories identify the first event/opening on 1994-10-21 under the Special Events Arena name. |
+| 1998-02-20 through 2020-11-11 | Stan Sheriff Center | Current UH game notes state the arena was officially renamed for Stan Sheriff on 1998-02-20. |
+| 2020-11-12 through 2025-08-25 | SimpliFi Arena at Stan Sheriff Center | UH Athletics announced the Bank of Hawai‘i naming-rights agreement and new SimpliFi name on 2020-11-12. |
+| 2025-08-26 onward | Bankoh Arena at Stan Sheriff Center | UH Athletics announced on 2025-08-26 that the venue had been renamed Bankoh Arena at Stan Sheriff Center. |
+
+Authoritative sources:
+- https://hawaiiathletics.com/sports/2012/6/14/GEN_0614125128
+- https://hawaiiathletics.com/news/2024/8/26/womens-volleyball-faces-smu-san-diego-to-open-2024-season.aspx
+- https://hawaiiathletics.com/news/2020/11/12/general-bank-of-hawaii-sponsors-naming-rights-for-stan-sheriff-center.aspx
+- https://hawaiiathletics.com/news/2025/8/26/general-bank-of-hawai-i-unveils-new-name-for-uh-facility-bankoh-arena-at-stan-sheriff-center.aspx
+- 2025-26 Hawai‘i women's basketball game notes, official UH Athletics PDF: https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/hawaiiathletics.com/documents/2026/2/27/24-Cal_State_Fullerton.pdf
+
+Opening-date reconciliation:
+- One 2019 UH anniversary article contains an isolated 1994-10-20 statement.
+- Multiple other UH sources, including the WAC timeline, 2004 anniversary material, 2019 match notes, and 2024 volleyball notes, identify the inaugural Special Events Arena event as **1994-10-21**.
+- Treat 1994-10-21 as the supported opening/name boundary; the isolated 10/20 statement is a source inconsistency, not a reason to invent a different period.
+
+## Tranche 3 result
+
+- Candidates researched: **4**
+- `PERIODIZE_READY`: **1**
+- `PARTIAL_PERIODIZE_RESEARCH`: **3**
+- New identity conflicts: **0**
+- Shared-reference mutations performed: **0**
+- Cumulative researched: **12 / 14**
+- Cumulative `PERIODIZE_READY`: **4**
+- Cumulative `PARTIAL_PERIODIZE_RESEARCH`: **8**
+- Remaining candidate population: **2**
+
+Remaining candidates:
 - `VEN-000698`
 - `VEN-000714`
 
