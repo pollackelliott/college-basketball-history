@@ -1,12 +1,12 @@
 # Historical venue-name research queue
 
-Status: **READY FOR DIVIDE-AND-CONQUER RESEARCH**  
+Status: **THREE BOUNDED RESIDUAL HOLDS REMAIN**  
 Source census: `docs/historical-venue-name-census.md`  
 Protected-main census baseline: `3f9edc3de0237fde453a87000cf6755b97962687`
 
-This queue is mechanically derived from every census row with disposition `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`.
+This queue is mechanically derived from census rows whose disposition still requires active ambiguity work: `RESEARCH_HOLD`, `PERIODIZE_RESEARCH`, `IDENTITY_RECONCILE`, or `CANONICAL_CORRECTION`. `IDENTITY_RESOLVED` means the historical/physical reconciliation is complete and any later shared-reference mutation is maintenance work outside this research queue.
 
-There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 8, Control Center canonical/mechanical verification, and owner tranche 6, **7 rows representing 6 active research work items remain**. The owner high-profile research queue is complete. `VEN-000102` and `VEN-000315` remain one linked Seattle Center physical-identity reconciliation work item in the Control Center identity queue. The assistant/source-heavy queue contains only three bounded residual holds already documented below.
+There were **70 research-needed ledger rows representing 69 work items** at queue creation. After assistant research tranche 8, Control Center canonical/mechanical verification, owner tranche 6, and final Control Center identity reconciliation, **3 rows representing 3 active research work items remain**. The owner high-profile queue is complete. The Control Center identity-reconciliation queue is complete. The only remaining active ambiguity rows are the three bounded assistant/source-heavy residual holds documented below.
 
 The split is organizational, not historical authority. The owner may reassign any item. No result becomes authoritative merely because one side researched it; findings must be written back to the durable census/research ledger with authoritative evidence and, where needed, explicit owner adjudication.
 
@@ -179,14 +179,17 @@ The split is organizational, not historical authority. The owner may reassign an
 | `VEN-000585` | `PERIODIZE` | State Fair Arena → Jim Norick Arena. City of Oklahoma City states the arena debuted in September 1965 as State Fair Arena and was rechristened Jim Norick Arena in 1971. `State Farm Arena [BC source wording]` is erroneous wording and must not become a naming period. Exact 1971 rename day remains implementation-date verification. Source: https://www.okc.gov/Home/Components/News/News/4365/18 |
 | `VEN-000683` | `CANONICAL_CORRECTION` | Mechanical duplicate confirmed in protected main: two literal Orange County Civic Center rows exist for VEN-000683 with the same normalized name, one PROJECT_DISPLAY and one HISTORICAL_OR_ALIAS. They represent one naming identity. Later shared-reference cleanup should remove the redundant alias row only; no historical research or periodization is required. |
 
+## Completed Control Center identity reconciliation
+
+| Venue | Result | Durable reconciliation / later maintenance action |
+|---|---|---|
+| `VEN-000102` / `VEN-000315` | `IDENTITY_RESOLVED` | One Seattle Center physical arena lineage. Preserve earlier-established VEN-000102 and retire VEN-000315 in a later dedicated shared-reference maintenance transaction. Current-main census found VEN-000315 referenced by five published school venue tables and by no canonical-game, game-assertion, or NCAA-site evidence rows; VEN-000102 already carries the established historical/NCAA identity. Preserve the accepted Seattle naming history and do not invent an intra-1962 Washington State Pavilion/Coliseum boundary. |
+| `VEN-000382` / `VEN-000582` | `IDENTITY_RESOLVED` | Smith Fieldhouse in Provo remains VEN-000382. Einar Nielsen Fieldhouse in Salt Lake City already has the correct separate identity VEN-000582. Later maintenance must remove the erroneous `Nielsen Field House` alias from VEN-000382 and the corresponding false alias on Utah’s local Smith Fieldhouse row; no new Nielsen venue ID is needed. |
+| `VEN-000554` / `VEN-000564` | `IDENTITY_RESOLVED` | VEN-000554 is the 1950 Rice Gymnasium → Tudor Fieldhouse building, with Autry Court as competition-space name. Remove `Rice Field House` from that identity. Current main’s VEN-000564 exists only for the accepted 1947-12-08 Texas–Texas Tech neutral-site row at source-literal `Rice Gymnasium`; because the 1950 gym did not yet exist and Rice institutional history identifies the pre-1950 indoor athletics building as the old Rice Field House, later maintenance should correct VEN-000564 to the old Rice Field House physical identity while preserving the 1947 source wording as scoped provenance rather than an unrestricted timeless alias. |
+
 ## Control Center mechanical/canonical/identity verification
 
-| Venue | Disposition | Research question |
-|---|---|---|
-| `VEN-000102` | `IDENTITY_RECONCILE` | Historical research complete and owner ruling verified: VEN-000102 and VEN-000315 are one Seattle Center arena lineage. Later dedicated shared-reference reconciliation must select one surviving global venue_id, preserve the accepted naming history, and eliminate the duplicate physical identity. Fair-era Washington State Pavilion / Washington State Coliseum semantics remain an implementation-source-detail issue; no intra-1962 boundary may be invented. |
-| `VEN-000315` | `IDENTITY_RECONCILE` | Linked Seattle duplicate of VEN-000102. Climate Pledge Arena is the same owner-approved physical lineage despite the 2018-2021 redevelopment beneath the preserved historic roof/structure. Reconcile into the surviving Seattle Center arena venue_id; no separate physical venue may remain. |
-| `VEN-000554` | `IDENTITY_RECONCILE` | Historical research complete: the 1920/21 Rice Field House is a distinct predecessor building from the 1950 Rice Gymnasium/Autry Court physical venue. Later dedicated shared-reference reconciliation must remove `Rice Field House` from VEN-000554 and assign it to a separate correct global venue identity. Preserve VEN-000554 for the 1950 building; Autry Court is its competition-space name, and Rice Gymnasium → Tudor Fieldhouse is the formal building chronology. No shared registry mutation is authorized by this queue. |
-| `VEN-000382` | `IDENTITY_RECONCILE` | Historical research complete: Einar Nielsen Field House is University of Utah / Salt Lake City and George Albert Smith Fieldhouse is BYU / Provo. Later dedicated shared-reference reconciliation must remove Nielsen from VEN-000382 and assign it to a correct distinct global venue identity without disturbing Smith Fieldhouse. No shared registry mutation is authorized by this queue. |
+No active rows remain. Historical identity work is complete; any resulting shared-reference mutation requires a separately authorized dedicated maintenance transaction.
 
 
 ## Completion condition
