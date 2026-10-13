@@ -348,11 +348,11 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000708` | `ALIAS_ONLY` | One continuous Memorial Coliseum (Winston-Salem) identity; W-S Coliseum is shorthand. |
 | `VEN-000709` | `ALIAS_ONLY` | One continuous Montego Bay Convention Center identity; Centre is spelling variant. |
 | `VEN-000710` | `ALIAS_ONLY` | One continuous R.J. Reynolds High School identity; Reynolds HS / Reynolds High School are aliases. |
-| `VEN-000711` | `RESEARCH_HOLD` | Clarify Murray State Sports Arena / Racer Arena / Carlisle Cutchin Fieldhouse and arena-within-fieldhouse relationship. |
+| `VEN-000711` | `PERIODIZE` | Murray State Sports Arena → Racer Arena. Murray State Athletics explicitly identifies Murray State Sports Arena as the original arena name before Racer Arena. Separate institutional facility evidence establishes that in 1993 the building housing Racer Arena was named Cutchin Fieldhouse; current Murray State campus material still describes Cutchin Fieldhouse as housing Racer Arena. Therefore `Carlisle Cutchin Fieldhouse` is the enclosing building name, not a third replacement arena-name period, and `Racer Arena/Carlisle Cutchin Fieldhouse` is expanded combined facility wording. Exact Sports Arena→Racer Arena effective boundary remains implementation-date verification. |
 | `VEN-000712` | `ALIAS_ONLY` | One continuous Wake Forest College Gymnasium identity; Gymnasium / old Gymnasium are descriptive variants. |
 | `VEN-000715` | `ALIAS_ONLY` | One continuous Fike Field House identity; Clemson Field House is alias. |
 | `VEN-000716` | `ALIAS_ONLY` | One continuous Holtzendorff YMCA identity; YMCA Building / YMCA are shorthand. |
-| `VEN-000729` | `PERIODIZE_RESEARCH` | Research full Gwinnett arena chronology from Arena at Gwinnett through omitted sponsored era(s) to Gas South Arena. |
+| `VEN-000729` | `PERIODIZE` | Arena at Gwinnett Center → Infinite Energy Arena → Gas South Arena. The arena opened in February 2003 as Arena at Gwinnett Center. Infinite Energy acquired naming rights in August 2015, formally creating Infinite Energy Arena. Gas South announced the immediate rebrand to Gas South Arena on 2021-05-25 after acquiring Infinite Energy. Exact 2015 effective day/signage transition remains implementation-date verification if required. |
 | `VEN-000736` | `ALIAS_ONLY` | One continuous Rafael A. Mangual Coliseum identity; Spanish/English ordering only. |
 | `VEN-000737` | `ALIAS_ONLY` | One continuous Poliforum Benito Juárez identity; Poliforum Cancún is alternate/local shorthand. |
 | `VEN-000742` | `ALIAS_ONLY` | One continuous Minges Coliseum identity; Williams Arena is the named competition space within Minges Coliseum. |
@@ -366,13 +366,13 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000757` | `PERIODIZE_RESEARCH` | Research exact Onondaga County War Memorial → Oncenter War Memorial → Upstate Medical University Arena naming chronology. |
 | `VEN-000761` | `ALIAS_ONLY` | One continuous West Jefferson Street Armory identity; Jefferson Street Armory is shorthand. |
 | `VEN-000766` | `PERIODIZE` | Boston Arena → Matthews Arena. |
-| `VEN-000778` | `PERIODIZE_RESEARCH` | Research full Portland, Maine arena chronology from Cumberland County Civic Center through later Cross Insurance Arena era; Portland Civic Center appears shorthand and registry is incomplete. |
+| `VEN-000778` | `PERIODIZE` | Cumberland County Civic Center → Cross Insurance Arena. The county-owned arena opened in 1977 under the Cumberland County Civic Center name; naming rights were sold on 2014-06-18 and the building was renamed Cross Insurance Arena. `Portland Civic Center` is shorthand/location wording rather than a separate formal era. |
 | `VEN-000779` | `ALIAS_ONLY` | One continuous Percy Hedgecock Gymnasium identity; Hedgecock Gym is shorthand. |
-| `VEN-000781` | `PERIODIZE_RESEARCH` | Research full Bridgeport arena chronology: Arena at Harbor Yard → Webster Bank Arena → omitted later/current naming era(s). |
+| `VEN-000781` | `PERIODIZE` | Arena at Harbor Yard → Webster Bank Arena at Harbor Yard → Total Mortgage Arena. The Bridgeport venue opened in 2001 as Arena at Harbor Yard. Webster Bank's naming-rights agreement became effective immediately in January 2011, formally producing `Webster Bank Arena at Harbor Yard`; shortened `Webster Bank Arena` is an alias of that era. Total Mortgage Arena became effective immediately on 2022-03-07. |
 | `VEN-000785` | `ALIAS_ONLY` | One continuous Calumet Club identity; parenthetical locality is disambiguation only. |
 | `VEN-000786` | `ALIAS_ONLY` | One continuous Coast Guard Air Station Borinquen Hangar identity; CGAS/U.S. Coast Guard expansions are aliases. |
 | `VEN-000787` | `ALIAS_ONLY` | One continuous Louisville Elks Club identity; article-only variation. |
-| `VEN-000788` | `RESEARCH_HOLD` | Determine whether College Park Gym was an actual predecessor name of Spencer Memorial Gymnasium or a source/location conflation. |
+| `VEN-000788` | `ALIAS_ONLY` | Same physical 1926 building, but the chronology is opposite the registry implication: Spencer Memorial Gymnasium was Kentucky Wesleyan's basketball-era name from 1926-1951; after KWC left Winchester, the former campus became College Park and the gym later became known as College Park Gym. KWC itself explicitly describes the present College Park Gym as the former Spencer Memorial Gymnasium. Treat `College Park Gym` as later post-KWC building-use/location continuity, not a predecessor basketball naming period. |
 | `VEN-000789` | `ALIAS_ONLY` | One continuous Belknap Campus Gym identity; UofL / Gymnasium variants are aliases. |
 | `VEN-000790` | `ALIAS_ONLY` | One continuous Weaver Health Building identity; Weaver Gymnasium / Weaver Gym describe basketball use/space rather than a separate naming era. |
 | `VEN-000791` | `ALIAS_ONLY` | One continuous Health & Physical Education Building identity for basketball purposes; Helm Library building is later-use physical-building locator, not a basketball naming period. |
