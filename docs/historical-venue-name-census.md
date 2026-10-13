@@ -314,16 +314,16 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000539` | `ALIAS_ONLY` | One continuous James L. Knight Center identity; Knight Center is shorthand. |
 | `VEN-000547` | `ALIAS_ONLY` | One continuous Roanoke City Auditorium identity; City Auditorium is shorthand. |
 | `VEN-000552` | `ALIAS_ONLY` | One continuous Woollen Gymnasium identity; Woollen Gym is shorthand. |
-| `VEN-000554` | `RESEARCH_HOLD` | Research Rice Field House / Rice Gymnasium / Autry Court chronology; may represent genuine formal naming eras. |
-| `VEN-000555` | `PERIODIZE_RESEARCH` | Research full Bossier City arena chronology; CenturyTel Center → likely omitted CenturyLink era → Brookshire Grocery Arena. |
-| `VEN-000557` | `RESEARCH_HOLD` | Research Comerica Center full chronology; Comerica Arena may be erroneous variant and earlier formal naming history may be omitted. |
+| `VEN-000554` | `IDENTITY_RECONCILE` | Current row conflates two physical Rice venues. Rice Athletics states the first basketball teams used the Field House at the east end of the old track before moving into Autry Court in 1950; Rice historical evidence identifies that original Field House as a 1920/21 structure, while the current 1950 basketball building was Rice Gymnasium and contains the arena/competition space named Autry Court. The 1950 building was renamed Tudor Fieldhouse after the 2007-08 renovation. Later shared-reference maintenance must remove `Rice Field House` from VEN-000554 and assign the old Field House to its own physical identity. Within VEN-000554, `Autry Court` is the competition-space name; the formal building chronology is Rice Gymnasium → Tudor Fieldhouse. |
+| `VEN-000555` | `PERIODIZE` | Bossier City Arena → CenturyTel Center → CenturyLink Center → Brookshire Grocery Arena. The arena opened in 2000; CenturyTel held the original naming-rights relationship, the venue was rebranded CenturyLink Center under the successor agreement around 2010-11, and the Brookshire naming-rights agreement was signed 2020-12-09 for a term beginning 2021-01-01. Exact opening-era Bossier City Arena→CenturyTel and CenturyTel→CenturyLink effective days remain implementation-date verification. |
+| `VEN-000557` | `PERIODIZE` | Deja Blue Arena at the Dr Pepper StarCenter → Dr Pepper Arena → Comerica Center. The original 2003 facility used the Deja Blue Arena name; after the 2008-09 expansion, Dr Pepper Arena opened 2009-06-01 and became the name of the entire complex. Comerica naming rights were announced 2019-01-18. `Comerica Arena` is an erroneous/source variant, not a formal period. |
 | `VEN-000560` | `ALIAS_ONLY` | One continuous Delmar Fieldhouse identity; Delmar Gym is shorthand. |
 | `VEN-000563` | `PERIODIZE_RESEARCH` | Research Philadelphia Convention Hall / Municipal Auditorium / Philadelphia Civic Center chronology and exact period boundaries. |
 | `VEN-000565` | `ALIAS_ONLY` | One continuous Tech Gym identity; The Barn is nickname. |
 | `VEN-000570` | `ALIAS_ONLY` | One continuous Fair Park Recreation Building identity; Fair Park Rec. Center is shorthand/variant. |
 | `VEN-000574` | `ALIAS_ONLY` | One continuous Civic Auditorium (San Francisco) identity; San Francisco / SF qualifiers are aliases. |
 | `VEN-000576` | `PERIODIZE` | Patriot Center → EagleBank Arena. |
-| `VEN-000578` | `PERIODIZE_RESEARCH` | Research full Estero arena chronology; Germain Arena → Hertz Arena is real but current registry likely omits an earlier formal arena name. |
+| `VEN-000578` | `PERIODIZE` | Everblades Arena → TECO Arena → Germain Arena → Hertz Arena. The 1998 opening-era venue was Everblades Arena; TECO/Peoples Gas acquired naming rights in 1999; Florida Everblades management announced Germain Arena on 2004-06-01; and the Germain→Hertz change became effective 2018-10-01. Exact 1999 Everblades→TECO effective day remains implementation-date verification. |
 | `VEN-000580` | `PERIODIZE` | Lubbock Coliseum → City Bank Coliseum. |
 | `VEN-000582` | `ALIAS_ONLY` | One continuous Einar Nielsen Fieldhouse identity; Nielsen Fieldhouse is shorthand. |
 | `VEN-000583` | `ALIAS_ONLY` | One continuous Donald W. Reynolds Center identity; Reynolds Center is shorthand. |
@@ -342,7 +342,7 @@ The latest mechanical classifier produced only provisional triage counts (158 al
 | `VEN-000637` | `ALIAS_ONLY` | One continuous Encina Gymnasium identity; Encina Gym is shorthand. |
 | `VEN-000654` | `PERIODIZE` | Charleston Civic Center → Charleston Coliseum & Convention Center; Charleston Coliseum is shorthand/current arena wording. |
 | `VEN-000673` | `ALIAS_ONLY` | One continuous WVU Armory identity; ROTC Armory / Armory are aliases unless later evidence establishes a formal rename. |
-| `VEN-000674` | `RESEARCH_HOLD` | Determine whether UC Fieldhouse → Armory Fieldhouse was a genuine formal rename. |
+| `VEN-000674` | `ALIAS_ONLY` | One continuous Armory Fieldhouse identity. University of Cincinnati Athletics states the facility opened 1954-12-18 as Armory Fieldhouse and consistently treats that as the historical basketball venue name. `UC Fieldhouse` is source/institutional shorthand rather than a verified formal predecessor name; no naming-period conversion is warranted. |
 | `VEN-000683` | `CANONICAL_CORRECTION` | Duplicate literal Orange County Civic Center rows represent one naming identity; registry cleanup only, no periodization. |
 | `VEN-000695` | `ALIAS_ONLY` | One continuous Devlin Fieldhouse identity; Avron B. Fogelman Arena is the named competition space within the same building. |
 | `VEN-000708` | `ALIAS_ONLY` | One continuous Memorial Coliseum (Winston-Salem) identity; W-S Coliseum is shorthand. |
