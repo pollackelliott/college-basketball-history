@@ -416,6 +416,8 @@ The final permanent policy should be linked from `AGENTS.md`, `docs/historical-v
 
 ## Remaining census obligations
 
+- Control Center rollout consolidation is complete in `docs/historical-venue-name-rollout-inventory.md`. The first recommended maintenance tranche is the six explicitly `PERIODIZE_READY` single-name venues only; identity/alias repair and legacy exact-date readiness remain separate bounded families. No implementation is authorized by this research branch alone.
+
 - Multi-name ambiguity research is complete. The three surviving unresolved cases are explicitly owner-accepted `RESEARCH_EXHAUSTED` residuals and must not be reopened absent materially stronger evidence.
 - Verify exact transition dates for approved periodized histories where the ledger still marks date verification as pending.
 - The agreed **light high-yield screen of the 483 single-name venues is COMPLETE**. The repository-internal cross-check found 0 alternate-name hits across all 483 IDs. Risk-ranked external screening individually checked 38 venues: 14 `SCREEN_POSITIVE` candidates and 24 `SCREEN_CLEAR_CURRENT_PASS`. The conservative explicit sponsor/brand tier yielded 3 positives among 8; the broader exact commercial-brand tier then yielded 0 positives across all 13 of its members. That zero-yield broader tier satisfies the agreed convergence/stopping rule. The remaining 445 low-signal venues are unscreened-by-design for this program and do not require 445 individual negative-proof searches; they may be revisited only if a new material signal appears. The 14 positive candidates were then carried into the bounded chronology phase documented below.
