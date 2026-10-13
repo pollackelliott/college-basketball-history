@@ -451,7 +451,7 @@ function normalizeOpponent(opponent) {
 function historicalVenueName(venueId, gameDate, datePrecision, fallback) {
   const periods = DB.venueNamePeriods[venueId] || [];
   // Never infer a naming period from a year-only or unknown game date.
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(gameDate || "")) return fallback;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(gameDate || "")) return fallback;
   if (datePrecision && datePrecision !== "EXACT") return fallback;
   const match = periods.find((period) =>
     gameDate >= period.valid_from && (!period.valid_to || gameDate <= period.valid_to)
