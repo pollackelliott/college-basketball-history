@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "venues": {
+    "VEN-000196": [
+      {
+        "venue_name": "Assembly Hall",
+        "valid_from": "1963-03-02",
+        "valid_to": "2013-04-28"
+      },
+      {
+        "venue_name": "State Farm Center",
+        "valid_from": "2013-04-29",
+        "valid_to": ""
+      }
+    ]
+  }
+}
