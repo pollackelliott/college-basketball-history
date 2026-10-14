@@ -1,4 +1,4 @@
-name: One-shot Seattle canonical refresh
+name: One-shot Seattle and Robins dependency refresh
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   repair:
-    if: github.event.head_commit.message == 'Run bounded Seattle canonical refresh'
+    if: github.event.head_commit.message == 'Run bounded Seattle and Robins dependency refresh'
     runs-on: ubuntu-latest
     steps:
       - name: Check out exact maintenance branch
@@ -24,27 +24,81 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Apply exact Seattle canonical remap
+      - name: Apply exact canonical and assertion dependencies
         run: |
           python - <<'PY'
+          import csv
           from pathlib import Path
 
-          path = Path("data/canonical/games.csv")
-          payload = path.read_bytes()
-          counts = {
+          canonical = Path("data/canonical/games.csv")
+          payload = canonical.read_bytes()
+
+          seattle = {
               "venue_id": payload.count(b"VEN-000315"),
               "venue_key": payload.count(b"climate-pledge-arena"),
               "marker": payload.count(b";venue_key=climate-pledge-arena;"),
           }
-          assert counts == {"venue_id": 7, "venue_key": 14, "marker": 7}, counts
+          assert seattle == {"venue_id": 7, "venue_key": 14, "marker": 7}, seattle
+
+          robins = {
+              "venue_id": payload.count(b"VEN-000324"),
+              "venue_key": payload.count(b"robbins-center"),
+              "marker": payload.count(b";venue_key=robbins-center;"),
+          }
+          assert robins == {"venue_id": 14, "venue_key": 28, "marker": 14}, robins
 
           payload = payload.replace(b"VEN-000315", b"VEN-000102")
           payload = payload.replace(b"climate-pledge-arena", b"keyarena")
+          payload = payload.replace(b"robbins-center", b"robins-center")
 
           assert payload.count(b"VEN-000315") == 0
           assert payload.count(b"climate-pledge-arena") == 0
-          path.write_bytes(payload)
-          print("SEATTLE_CANONICAL_ROWS=7 PROVENANCE_MARKERS=7")
+          assert payload.count(b"robbins-center") == 0
+          canonical.write_bytes(payload)
+
+          assertion_path = Path("data/evidence/game-assertions.csv")
+          raw = assertion_path.read_bytes()
+          bom = raw.startswith(b"\xef\xbb\xbf")
+          newline = "\r\n" if b"\r\n" in raw else "\n"
+          encoding = "utf-8-sig" if bom else "utf-8"
+
+          source_ids = {
+              "MDRAW-01662",
+              "MDRAW-01663",
+              "SCARAW-01739",
+              "SJ-GUIDE-2008-2009-034",
+              "VTST1-001394",
+              "VTST1-001813",
+          }
+
+          with assertion_path.open(encoding=encoding, newline="") as handle:
+              reader = csv.DictReader(handle)
+              fields = list(reader.fieldnames or [])
+              rows = list(reader)
+
+          assert "source_game_id" in fields and "curated_venue_name" in fields, fields
+          matched = []
+          for row in rows:
+              if row.get("source_game_id") in source_ids:
+                  matched.append(row["source_game_id"])
+                  assert row.get("curated_venue_name") == "Robbins Center", (
+                      row.get("source_game_id"),
+                      row.get("curated_venue_name"),
+                  )
+                  row["curated_venue_name"] = "Robins Center"
+
+          assert sorted(matched) == sorted(source_ids), (sorted(matched), sorted(source_ids))
+
+          tmp = assertion_path.with_suffix(".csv.tmp")
+          with tmp.open("w", encoding=encoding, newline="") as handle:
+              writer = csv.DictWriter(handle, fieldnames=fields, lineterminator=newline)
+              writer.writeheader()
+              writer.writerows({field: row.get(field, "") for field in fields} for row in rows)
+          tmp.replace(assertion_path)
+
+          print("SEATTLE_CANONICAL_ROWS=7 SEATTLE_MARKERS=7")
+          print("ROBINS_CANONICAL_ROWS=14 ROBINS_MARKERS=14")
+          print("ROBINS_ASSERTION_ROWS=6")
           PY
 
       - name: Rebuild and validate deterministic site data
@@ -52,38 +106,40 @@ jobs:
           python tools/validate_data.py
           python tools/build_site_data.py --apply
           python tools/check_site_data_freshness.py
+          python -m unittest discover -s tests -v
+          git diff --check
 
           python - <<'PY'
           import subprocess
 
-          changed = set(subprocess.check_output(
+          changed = subprocess.check_output(
               ["git", "diff", "--name-only"], text=True
-          ).splitlines())
-          expected = {
+          ).splitlines()
+
+          allowed_fixed = {
               "data/canonical/games.csv",
-              "site/data/teams/arizona.json",
-              "site/data/teams/maryland.json",
-              "site/data/teams/oregon.json",
-              "site/data/teams/ucla.json",
-              "site/data/teams/uconn.json",
+              "data/evidence/game-assertions.csv",
           }
-          assert changed == expected, (sorted(changed), sorted(expected))
-          print("DERIVED_SITE_FILES=5")
+          bad = [
+              path for path in changed
+              if path not in allowed_fixed and not path.startswith("site/data/teams/")
+          ]
+          assert not bad, bad
+          assert "data/canonical/games.csv" in changed
+          assert "data/evidence/game-assertions.csv" in changed
+
+          site = [path for path in changed if path.startswith("site/data/teams/")]
+          assert site, changed
+          print("DERIVED_SITE_FILES=" + str(len(site)))
+          for path in site:
+              print("DERIVED=" + path)
           PY
 
-          python -m unittest discover -s tests -v
-          git diff --check
-
-      - name: Commit exact bounded refresh
+      - name: Commit exact bounded dependency refresh
         run: |
           git config user.email actions@github.com
           git config user.name "GitHub Actions"
-          git add data/canonical/games.csv \
-            site/data/teams/arizona.json \
-            site/data/teams/maryland.json \
-            site/data/teams/oregon.json \
-            site/data/teams/ucla.json \
-            site/data/teams/uconn.json
+          git add data/canonical/games.csv data/evidence/game-assertions.csv site/data/teams
           git diff --cached --name-only
-          git commit -m "Complete bounded Seattle canonical remap"
+          git commit -m "Complete bounded venue dependency refresh"
           git push origin HEAD:maintenance/historical-venue-structural-cleanup
