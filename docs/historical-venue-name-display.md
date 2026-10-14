@@ -180,6 +180,22 @@ are preserved, but the available evidence does not justify manufacturing an exac
 boundary merely to make them publishable.
 
 
+
+## Structural cleanup chronology — Atlantic City
+
+`VEN-000433` remains the single 1929 physical Boardwalk Hall building.
+
+| Inclusive official period | Name |
+|---|---|
+| 1929-05-31 through 2001-10-10 | Atlantic City Convention Hall |
+| 2001-10-11 through 2018-01-15 | Boardwalk Hall |
+| 2018-01-16 onward | Jim Whelan Boardwalk Hall |
+
+The modern Atlantic City Convention Center opened as a distinct facility in 1997.
+Its name is not an unrestricted alias for `VEN-000433`; literal historical source
+wording remains preserved where a source itself used “Atlantic City Convention Center”.
+
+
 ## Publication contract
 
 `tools/build_site_data.py` validates naming periods and publishes compact,

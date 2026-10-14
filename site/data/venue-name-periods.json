@@ -167,6 +167,23 @@
         "valid_to": ""
       }
     ],
+    "VEN-000433": [
+      {
+        "venue_name": "Atlantic City Convention Hall",
+        "valid_from": "1929-05-31",
+        "valid_to": "2001-10-10"
+      },
+      {
+        "venue_name": "Boardwalk Hall",
+        "valid_from": "2001-10-11",
+        "valid_to": "2018-01-15"
+      },
+      {
+        "venue_name": "Jim Whelan Boardwalk Hall",
+        "valid_from": "2018-01-16",
+        "valid_to": ""
+      }
+    ],
     "VEN-000444": [
       {
         "venue_name": "Air Canada Centre",
