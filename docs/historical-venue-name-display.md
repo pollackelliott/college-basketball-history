@@ -148,6 +148,38 @@ Authoritative evidence for these six histories is preserved in
 research on the venue-census maintenance branch.
 
 
+
+## Rollout tranche 3
+
+This tranche uses the same date-aware display mechanism as the Illinois proof of concept.
+It adds only exact formal naming periods; no physical venue IDs, game rows, school packages,
+or H/A/N classifications change.
+
+| Venue | Inclusive official periods |
+|---|---|
+| Orlando — `VEN-000012` | Amway Center: 2010-10-01–2023-12-19; Kia Center: 2023-12-20 onward |
+| Denver — `VEN-000018` | Pepsi Center: 1999-10-01–2020-10-21; Ball Arena: 2020-10-22 onward |
+| Orlando/UCF — `VEN-000038` | UCF Arena: 2007-09-08–2013-05-22; CFE Arena: 2013-05-23–2019-04-30; Addition Financial Arena: 2019-05-01 onward |
+| Los Angeles — `VEN-000051` | Staples Center: 1999-10-17–2021-12-24; Crypto.com Arena: 2021-12-25 onward |
+| Pittsburgh — `VEN-000167` | CONSOL Energy Center: 2010-08-18–2016-10-03; PPG Paints Arena: 2016-10-04 onward |
+| Oxford — `VEN-000187` | The Pavilion at Ole Miss: 2016-01-07–2021-06-16; Sandy and John Black Pavilion at Ole Miss: 2021-06-17 onward |
+| Kansas City — `VEN-000202` | Sprint Center: 2007-10-10–2020-07-08; T-Mobile Center: 2020-07-09 onward |
+| Toronto — `VEN-000444` | Air Canada Centre: 1999-02-20–2018-06-30; Scotiabank Arena: 2018-07-01 onward |
+| Miami — `VEN-000499` | AmericanAirlines Arena: 1999-12-31–2021-06-03; FTX Arena: 2021-06-04–2023-01-12; Miami-Dade Arena: 2023-01-13–2023-04-03; Kaseya Center: 2023-04-04 onward |
+| Fairfax — `VEN-000576` | Patriot Center: 1985-10-04–2015-06-30; EagleBank Arena: 2015-07-01 onward |
+| Portland — `VEN-000778` | Cumberland County Civic Center: 1977-03-03–2014-06-17; Cross Insurance Arena: 2014-06-18 onward |
+| Springfield — `VEN-000819` | JQH Arena: 2008-11-13–2022-04-20; Great Southern Bank Arena: 2022-04-21 onward |
+| Villanova — `VEN-000860` | Villanova Field House: 1932-04-01–1985-11-21; Jake Nevin Field House: 1985-11-22 onward |
+
+The exact source basis for every boundary is carried on the corresponding
+`OFFICIAL_NAMING_PERIOD` row in `data/reference/venue-names.csv`.
+
+Two previously suspected rollout candidates remain intentionally outside this tranche:
+`VEN-000503` (DePaul) and `VEN-000863` (Duquesne). Their historical rename conclusions
+are preserved, but the available evidence does not justify manufacturing an exact first-period
+boundary merely to make them publishable.
+
+
 ## Publication contract
 
 `tools/build_site_data.py` validates naming periods and publishes compact,

@@ -146,6 +146,177 @@ EXPECTED = {
                 "valid_from": "2018-07-11",
                 "valid_to": ""
             }
+        ],
+        "VEN-000012": [
+            {
+                "venue_name": "Amway Center",
+                "valid_from": "2010-10-01",
+                "valid_to": "2023-12-19"
+            },
+            {
+                "venue_name": "Kia Center",
+                "valid_from": "2023-12-20",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000018": [
+            {
+                "venue_name": "Pepsi Center",
+                "valid_from": "1999-10-01",
+                "valid_to": "2020-10-21"
+            },
+            {
+                "venue_name": "Ball Arena",
+                "valid_from": "2020-10-22",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000038": [
+            {
+                "venue_name": "UCF Arena",
+                "valid_from": "2007-09-08",
+                "valid_to": "2013-05-22"
+            },
+            {
+                "venue_name": "CFE Arena",
+                "valid_from": "2013-05-23",
+                "valid_to": "2019-04-30"
+            },
+            {
+                "venue_name": "Addition Financial Arena",
+                "valid_from": "2019-05-01",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000051": [
+            {
+                "venue_name": "Staples Center",
+                "valid_from": "1999-10-17",
+                "valid_to": "2021-12-24"
+            },
+            {
+                "venue_name": "Crypto.com Arena",
+                "valid_from": "2021-12-25",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000167": [
+            {
+                "venue_name": "CONSOL Energy Center",
+                "valid_from": "2010-08-18",
+                "valid_to": "2016-10-03"
+            },
+            {
+                "venue_name": "PPG Paints Arena",
+                "valid_from": "2016-10-04",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000187": [
+            {
+                "venue_name": "The Pavilion at Ole Miss",
+                "valid_from": "2016-01-07",
+                "valid_to": "2021-06-16"
+            },
+            {
+                "venue_name": "Sandy and John Black Pavilion at Ole Miss",
+                "valid_from": "2021-06-17",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000202": [
+            {
+                "venue_name": "Sprint Center",
+                "valid_from": "2007-10-10",
+                "valid_to": "2020-07-08"
+            },
+            {
+                "venue_name": "T-Mobile Center",
+                "valid_from": "2020-07-09",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000444": [
+            {
+                "venue_name": "Air Canada Centre",
+                "valid_from": "1999-02-20",
+                "valid_to": "2018-06-30"
+            },
+            {
+                "venue_name": "Scotiabank Arena",
+                "valid_from": "2018-07-01",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000499": [
+            {
+                "venue_name": "AmericanAirlines Arena",
+                "valid_from": "1999-12-31",
+                "valid_to": "2021-06-03"
+            },
+            {
+                "venue_name": "FTX Arena",
+                "valid_from": "2021-06-04",
+                "valid_to": "2023-01-12"
+            },
+            {
+                "venue_name": "Miami-Dade Arena",
+                "valid_from": "2023-01-13",
+                "valid_to": "2023-04-03"
+            },
+            {
+                "venue_name": "Kaseya Center",
+                "valid_from": "2023-04-04",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000576": [
+            {
+                "venue_name": "Patriot Center",
+                "valid_from": "1985-10-04",
+                "valid_to": "2015-06-30"
+            },
+            {
+                "venue_name": "EagleBank Arena",
+                "valid_from": "2015-07-01",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000778": [
+            {
+                "venue_name": "Cumberland County Civic Center",
+                "valid_from": "1977-03-03",
+                "valid_to": "2014-06-17"
+            },
+            {
+                "venue_name": "Cross Insurance Arena",
+                "valid_from": "2014-06-18",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000819": [
+            {
+                "venue_name": "JQH Arena",
+                "valid_from": "2008-11-13",
+                "valid_to": "2022-04-20"
+            },
+            {
+                "venue_name": "Great Southern Bank Arena",
+                "valid_from": "2022-04-21",
+                "valid_to": ""
+            }
+        ],
+        "VEN-000860": [
+            {
+                "venue_name": "Villanova Field House",
+                "valid_from": "1932-04-01",
+                "valid_to": "1985-11-21"
+            },
+            {
+                "venue_name": "Jake Nevin Field House",
+                "valid_from": "1985-11-22",
+                "valid_to": ""
+            }
         ]
     }
 }
@@ -160,7 +331,7 @@ class HistoricalVenueNamingTests(unittest.TestCase):
         with CSV_PATH.open(encoding="utf-8", newline="") as fp:
             rows = list(csv.DictReader(fp))
         official = [r for r in rows if r["name_type"] == "OFFICIAL_NAMING_PERIOD"]
-        self.assertEqual(len(official), 22)
+        self.assertEqual(len(official), 51)
         self.assertEqual(
             {r["venue_id"] for r in official},
             set(EXPECTED["venues"]),
@@ -264,6 +435,35 @@ assert.equal(show("VEN-000698","2025-09-01"),"Hilliard Center Arena");
 assert.equal(show("VEN-000714","2000-01-01"),"Coliseum Arena");
 assert.equal(show("VEN-000714","2003-11-01"),"Ricoh Coliseum");
 assert.equal(show("VEN-000714","2018-07-11"),"Coca-Cola Coliseum");
+
+assert.equal(show("VEN-000012","2015-01-01"),"Amway Center");
+assert.equal(show("VEN-000012","2023-12-20"),"Kia Center");
+assert.equal(show("VEN-000018","2019-01-01"),"Pepsi Center");
+assert.equal(show("VEN-000018","2020-10-22"),"Ball Arena");
+assert.equal(show("VEN-000038","2010-01-01"),"UCF Arena");
+assert.equal(show("VEN-000038","2015-01-01"),"CFE Arena");
+assert.equal(show("VEN-000038","2019-05-01"),"Addition Financial Arena");
+assert.equal(show("VEN-000051","2021-12-24"),"Staples Center");
+assert.equal(show("VEN-000051","2021-12-25"),"Crypto.com Arena");
+assert.equal(show("VEN-000167","2016-10-03"),"CONSOL Energy Center");
+assert.equal(show("VEN-000167","2016-10-04"),"PPG Paints Arena");
+assert.equal(show("VEN-000187","2021-06-16"),"The Pavilion at Ole Miss");
+assert.equal(show("VEN-000187","2021-06-17"),"Sandy and John Black Pavilion at Ole Miss");
+assert.equal(show("VEN-000202","2020-07-08"),"Sprint Center");
+assert.equal(show("VEN-000202","2020-07-09"),"T-Mobile Center");
+assert.equal(show("VEN-000444","2018-06-30"),"Air Canada Centre");
+assert.equal(show("VEN-000444","2018-07-01"),"Scotiabank Arena");
+assert.equal(show("VEN-000499","2021-06-04"),"FTX Arena");
+assert.equal(show("VEN-000499","2023-01-13"),"Miami-Dade Arena");
+assert.equal(show("VEN-000499","2023-04-04"),"Kaseya Center");
+assert.equal(show("VEN-000576","2015-06-30"),"Patriot Center");
+assert.equal(show("VEN-000576","2015-07-01"),"EagleBank Arena");
+assert.equal(show("VEN-000778","2014-06-17"),"Cumberland County Civic Center");
+assert.equal(show("VEN-000778","2014-06-18"),"Cross Insurance Arena");
+assert.equal(show("VEN-000819","2022-04-20"),"JQH Arena");
+assert.equal(show("VEN-000819","2022-04-21"),"Great Southern Bank Arena");
+assert.equal(show("VEN-000860","1985-11-21"),"Villanova Field House");
+assert.equal(show("VEN-000860","1985-11-22"),"Jake Nevin Field House");
 
 assert.equal(show("VEN-000186","2013-04-29"),"Project fallback");
 assert.equal(show("VEN-999999",null,""),"Project fallback");
