@@ -1,0 +1,89 @@
+name: One-shot Seattle canonical refresh
+
+on:
+  push:
+    branches:
+      - maintenance/historical-venue-structural-cleanup
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.event.head_commit.message == 'Run bounded Seattle canonical refresh'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact maintenance branch
+        uses: actions/checkout@v4
+        with:
+          ref: maintenance/historical-venue-structural-cleanup
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply exact Seattle canonical remap
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("data/canonical/games.csv")
+          payload = path.read_bytes()
+          counts = {
+              "venue_id": payload.count(b"VEN-000315"),
+              "venue_key": payload.count(b"climate-pledge-arena"),
+              "marker": payload.count(b";venue_key=climate-pledge-arena;"),
+          }
+          assert counts == {"venue_id": 7, "venue_key": 14, "marker": 7}, counts
+
+          payload = payload.replace(b"VEN-000315", b"VEN-000102")
+          payload = payload.replace(b"climate-pledge-arena", b"keyarena")
+
+          assert payload.count(b"VEN-000315") == 0
+          assert payload.count(b"climate-pledge-arena") == 0
+          path.write_bytes(payload)
+          print("SEATTLE_CANONICAL_ROWS=7 PROVENANCE_MARKERS=7")
+          PY
+
+      - name: Rebuild and validate deterministic site data
+        run: |
+          python tools/validate_data.py
+          python tools/build_site_data.py --apply
+          python tools/check_site_data_freshness.py
+
+          python - <<'PY'
+          import subprocess
+
+          changed = set(subprocess.check_output(
+              ["git", "diff", "--name-only"], text=True
+          ).splitlines())
+          expected = {
+              "data/canonical/games.csv",
+              "site/data/teams/arizona.json",
+              "site/data/teams/maryland.json",
+              "site/data/teams/oregon.json",
+              "site/data/teams/ucla.json",
+              "site/data/teams/uconn.json",
+          }
+          assert changed == expected, (sorted(changed), sorted(expected))
+          print("DERIVED_SITE_FILES=5")
+          PY
+
+          python -m unittest discover -s tests -v
+          git diff --check
+
+      - name: Commit exact bounded refresh
+        run: |
+          git config user.email actions@github.com
+          git config user.name "GitHub Actions"
+          git add data/canonical/games.csv \
+            site/data/teams/arizona.json \
+            site/data/teams/maryland.json \
+            site/data/teams/oregon.json \
+            site/data/teams/ucla.json \
+            site/data/teams/uconn.json
+          git diff --cached --name-only
+          git commit -m "Complete bounded Seattle canonical remap"
+          git push origin HEAD:maintenance/historical-venue-structural-cleanup
