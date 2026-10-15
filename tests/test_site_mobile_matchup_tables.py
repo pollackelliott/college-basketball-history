@@ -12,8 +12,8 @@ SITE = (Path(__file__).resolve().parents[1] / "site" / "index.html").read_text(
 
 class MobileMatchupTableTests(unittest.TestCase):
     def test_shared_summary_renderer_keeps_full_labels(self):
-        self.assertIn('<table class=\\"mini-table\\">', SITE)
-        self.assertIn("<td>\u0024{esc(row.label)}</td>", SITE)
+        self.assertIn('<table class="mini-table">', SITE)
+        self.assertIn("<td>${esc(row.label)}</td>", SITE)
         for title in ("Record by Site", "Record by Decade", "Most-Used Venues"):
             with self.subTest(title=title):
                 self.assertIn(f'miniPanel("{title}",', SITE)
