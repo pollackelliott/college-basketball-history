@@ -112,3 +112,7 @@ The surviving 142 exact-date blanks, 12 aggregate-only UNKNOWN H/A/N rows, and 9
 **PRE-FREEZE SELF-CHALLENGE: PASS**
 
 Stage 7 immutable packaging remains separately owner-authorized work; `RESEARCH_FROZEN` is still `NO` at Stage 6 completion.
+
+## Objective C1 — October 15, 2026 Arizona four-game correction authority
+
+Bounded post-publication four-game correction from controlling protected-main 9bb40935cd2995fe8d775131ec7596fa70c8b49c. The 1942-01-02 and 1942-01-03 Arizona–Stanford physical site is Phoenix Union High School Gymnasium, VEN-000866; January 2 directly attested, January 3 owner-approved same-series site. Arizona original source labels both NEUTRAL; previous owner Gate 1 accepted Arizona HOME. For 1954-12-21 Arizona–Stanford and 1959-12-22 Arizona–Washington State, Arizona original source says OPPONENT_HOME while reciprocal schools disagree; owner approved canonical Stanford HOME and Washington State HOME, respectively. Preserve source H/A/N and prior discrepancy provenance; correct canonical only through guarded Gate 1 and sealed reconciliation. Source-game dates for 1942 are not invented. Arizona 1942 Phoenix site: https://oregonnews.uoregon.edu/lccn/sn85042472/1942-01-03/ed-1/seq-8/ ; Phoenix Union 1942 yearbook: https://azmemory.azlibrary.gov/nodes/view/143880 ; physical-building history: https://arizona-content.usedirect.com/storage1/gallery/MPDFS/Phoenix_Educational_Bldgs_MPDF.PDF ; Arizona 1941-42 schedule: https://arizonawildcats.com/sports/mens-basketball/schedule/1941-42 .
