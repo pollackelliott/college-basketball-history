@@ -4612,6 +4612,13 @@ def apply_reconciliation_decisions(
                 raise WorkflowError(
                     f"{item['decision_id']}: frozen source semantic drift"
                 )
+            drift = assertion_drift(source, linked[0])
+            if drift and not _is_authorized_correction_assertion_drift(
+                context, source, linked[0], drift
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: unapproved global assertion drift"
+                )
             old = {
                 key: canonical.get(key, "").strip()
                 for key in CORRECTION_SITE_PATCH_FIELDS
