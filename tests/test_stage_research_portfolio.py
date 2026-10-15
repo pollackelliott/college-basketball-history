@@ -72,7 +72,7 @@ class StageResearchPortfolioVenueChronologyTests(unittest.TestCase):
             "first_assigned_game": "1938-12-30",
         }
         inventory = venue_reconciliation_inventory([local], [replacement], [])
-        result = inventory["results"][0]
+        result = inventory["rows"][0]
         self.assertEqual(result["classification"], "STOP_AMBIGUOUS")
         self.assertIn("PHYSICAL_VENUE_CHRONOLOGY_CONFLICT", result["issues"])
         self.assertIn("1938-12-30", result["chronology_conflicts"][0])
@@ -165,7 +165,7 @@ class StageResearchPortfolioVenueChronologyTests(unittest.TestCase):
         )
         self.assertEqual(inventory["blocker_count"], 0)
         self.assertEqual(
-            inventory["results"][0]["classification"],
+            inventory["rows"][0]["classification"],
             "SAFE_REPRESENTATION_REUSE",
         )
         staged, globals_, _, _ = rebase_venues(
