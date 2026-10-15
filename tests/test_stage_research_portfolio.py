@@ -7,7 +7,10 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from onboarding_plan import WorkflowError  # noqa: E402
-from stage_research_portfolio import rebase_venues, update_program_scope  # noqa: E402
+from stage_research_portfolio import (  # noqa: E402
+    rebase_venues, update_program_scope, venue_reconciliation_inventory,
+    venue_date_bounds,
+)
 
 
 def global_venue(venue_id: str, venue_key: str, name: str, city: str, state: str):
@@ -50,6 +53,149 @@ def local_venue(notes: str, *, city: str = "", state: str = ""):
         "source_basis": "test",
         "notes": notes,
     }
+
+
+class StageResearchPortfolioVenueChronologyTests(unittest.TestCase):
+    """Two identically named physical buildings must not be conflated by rebase."""
+
+    def test_1940_replacement_rejects_1938_game_even_with_exact_key(self):
+        replacement = global_venue(
+            "VEN-000156", "patten-gymnasium-1940",
+            "Patten Gymnasium (1940 building)", "Evanston", "IL",
+        )
+        replacement["opened"] = "1940"
+        replacement["date_precision"] = "YEAR"
+        local = {
+            **local_venue("", city="Evanston", state="IL"),
+            "venue_key": "patten-gymnasium-1940",
+            "canonical_name": "Patten Gymnasium",
+            "first_assigned_game": "1938-12-30",
+        }
+        inventory = venue_reconciliation_inventory([local], [replacement], [])
+        result = inventory["rows"][0]
+        self.assertEqual(result["classification"], "STOP_AMBIGUOUS")
+        self.assertIn("PHYSICAL_VENUE_CHRONOLOGY_CONFLICT", result["issues"])
+        self.assertIn("1938-12-30", result["chronology_conflicts"][0])
+        with self.assertRaisesRegex(WorkflowError, "before physical opening"):
+            rebase_venues("test-school", [local], [replacement], [])
+
+    def test_original_1909_building_rejects_1942_game(self):
+        original = global_venue(
+            "VEN-000160", "patten-gymnasium-1909",
+            "Patten Gymnasium", "Evanston", "IL",
+        )
+        original.update(opened="1909", closed="1940", date_precision="YEAR")
+        local = {
+            **local_venue("", city="Evanston", state="IL"),
+            "venue_key": "patten-gymnasium-1909",
+            "canonical_name": "Patten Gymnasium",
+            "last_assigned_game": "1942-02-09",
+        }
+        inventory = venue_reconciliation_inventory([local], [original], [])
+        self.assertEqual(inventory["blocker_count"], 1)
+        with self.assertRaisesRegex(WorkflowError, "after physical closing"):
+            rebase_venues("test-school", [local], [original], [])
+
+    def test_earlier_local_closure_rejects_new_building_reuse(self):
+        replacement = global_venue(
+            "VEN-000156", "patten-gymnasium-1940",
+            "Patten Gymnasium (1940 building)", "Evanston", "IL",
+        )
+        replacement.update(opened="1940", date_precision="YEAR")
+        local = {
+            **local_venue("", city="Evanston", state="IL"),
+            "venue_key": "patten-gymnasium-1940",
+            "canonical_name": "Patten Gymnasium",
+            "known_opened": "1909",
+            "known_closed": "1939",
+        }
+        inventory = venue_reconciliation_inventory([local], [replacement], [])
+        self.assertEqual(inventory["blocker_count"], 1)
+        with self.assertRaisesRegex(WorkflowError, "known_closed=1939"):
+            rebase_venues("test-school", [local], [replacement], [])
+
+    def test_research_base_hint_cannot_bypass_chronology(self):
+        replacement = global_venue(
+            "VEN-000156", "patten-gymnasium-1940",
+            "Patten Gymnasium (1940 building)", "Evanston", "IL",
+        )
+        replacement.update(opened="1940", date_precision="YEAR")
+        local = {
+            **local_venue(
+                "Research physical identity: DEFINITE_RESEARCH_BASE_REUSE; "
+                "research-base key=patten-gymnasium-1940; "
+                "research-base venue_id=VEN-000156.",
+                city="Evanston", state="IL",
+            ),
+            "first_assigned_game": "1938-12-30",
+        }
+        inventory = venue_reconciliation_inventory([local], [replacement], [])
+        self.assertEqual(inventory["blocker_count"], 1)
+        with self.assertRaisesRegex(WorkflowError, "before physical opening"):
+            rebase_venues("test-school", [local], [replacement], [])
+
+    def test_boundary_year_and_documented_split_are_safe(self):
+        original = global_venue(
+            "VEN-000160", "patten-gymnasium-1909",
+            "Patten Gymnasium", "Evanston", "IL",
+        )
+        original.update(opened="1909", closed="1940", date_precision="YEAR",
+                        identity_status="RESEARCHED_SPLIT")
+        replacement = global_venue(
+            "VEN-000156", "patten-gymnasium-1940",
+            "Patten Gymnasium (1940 building)", "Evanston", "IL",
+        )
+        replacement.update(opened="1940", date_precision="YEAR",
+                           identity_status="RESEARCHED_SPLIT")
+        alias = {
+            "venue_id": "VEN-000156",
+            "venue_name": "Patten Gymnasium",
+            "normalized_name": "pattengymnasium",
+            "name_type": "HISTORICAL_OR_ALIAS",
+            "valid_from": "", "valid_to": "", "date_precision": "",
+        }
+        local = {
+            **local_venue("", city="Evanston", state="IL"),
+            "venue_key": "patten-gymnasium-1940",
+            "canonical_name": "Patten Gymnasium",
+            "first_assigned_game": "1940-12-01",
+        }
+        inventory = venue_reconciliation_inventory(
+            [local], [original, replacement], [alias],
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            inventory["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_REUSE",
+        )
+        staged, globals_, _, _ = rebase_venues(
+            "test-school", [local], [original, replacement], [alias],
+        )
+        self.assertEqual(staged[0]["venue_id"], "VEN-000156")
+        self.assertEqual(len(globals_), 2)
+
+    def test_unknown_and_partial_dates_do_not_infer_a_venue(self):
+        replacement = global_venue(
+            "VEN-000156", "patten-gymnasium-1940",
+            "Patten Gymnasium (1940 building)", "Evanston", "IL",
+        )
+        replacement.update(opened="1940", date_precision="YEAR")
+        local = {
+            **local_venue("", city="Evanston", state="IL"),
+            "venue_key": "patten-gymnasium-1940",
+            "canonical_name": "Patten Gymnasium",
+            "first_assigned_game": "circa 1938",
+        }
+        inventory = venue_reconciliation_inventory([local], [replacement], [])
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertIsNone(venue_date_bounds("circa 1938"))
+        self.assertEqual(
+            venue_date_bounds("1940")[0].isoformat(), "1940-01-01"
+        )
+        staged, _, _, _ = rebase_venues(
+            "test-school", [local], [replacement], [],
+        )
+        self.assertEqual(staged[0]["venue_id"], "VEN-000156")
 
 
 class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
