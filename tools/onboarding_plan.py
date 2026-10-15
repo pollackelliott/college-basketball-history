@@ -118,6 +118,8 @@ ACCOMPLISHMENT_ACTIONS = {
 PUBLICATION_ACTIONS = {"ENABLE_PUBLIC_PAGE", "KEEP_DISABLED"}
 CANONICAL_SITE_PATCH_ACTIONS = {"APPLY_CANONICAL_PATCH", "LEAVE_UNRESOLVED"}
 CANONICAL_SITE_PATCH_FIELDS = {"venue_key", "venue_id", "site_city", "site_state"}
+# Only the verified post-publication correction path may patch established H/A/N.
+CORRECTION_SITE_PATCH_FIELDS = {"site_type", "venue_key", "venue_id", "site_city", "site_state"}
 NCAA_ROUND_PATCH_ACTIONS = {"APPLY_NCAA_ROUND_PATCH", "LEAVE_UNRESOLVED"}
 NCAA_ROUND_PATCH_VALUES = {
     "Play-in",
@@ -1549,6 +1551,105 @@ def _deterministic_reciprocal_home_backfill_available(
     return True
 
 
+def _post_publication_site_review_decisions(
+    repo: Path,
+    school_key: str,
+    sources: list[dict[str, str]],
+    canonical_by_id: dict[str, dict[str, str]],
+    assertions_by_source: dict[tuple[str, str], list[dict[str, str]]],
+    assertions_by_game: dict[str, list[dict[str, str]]],
+) -> list[dict[str, Any]]:
+    """Propose explicit Gate 1 site reviews for frozen published corrections only.
+
+    No school, H/A/N, venue, or correction outcome is inferred. The verified
+    Integration Freeze restricts the exact source IDs and the owner supplies an
+    explicit complete site patch for each resulting review decision.
+    """
+    context = _correction_assertion_reconciliation_context(repo, school_key)
+    if context is None:
+        return []
+    by_source = {row.get("source_game_id", ""): row for row in sources}
+    decisions: list[dict[str, Any]] = []
+    for source_id in sorted(context["correction_source_game_ids"]):
+        source = by_source.get(source_id)
+        if source is None:
+            raise WorkflowError(
+                f"correction site review: {source_id} not in published source scope"
+            )
+        assertions = assertions_by_source.get((school_key, source_id), [])
+        if len(assertions) != 1:
+            raise WorkflowError(
+                f"correction site review: {source_id} requires exactly one assertion"
+            )
+        assertion = assertions[0]
+        game_id = assertion.get("canonical_game_id", "").strip()
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"correction site review: {source_id} lacks an existing canonical game"
+            )
+        post = context["post_rows"].get(source_id)
+        pre = context["pre_rows"].get(source_id)
+        if not isinstance(post, dict) or not isinstance(pre, dict):
+            raise WorkflowError(
+                f"correction site review: {source_id} lacks verified snapshots"
+            )
+        if any(source.get(field, "") != str(post.get(field, ""))
+               for field in context["fields"]):
+            raise WorkflowError(
+                f"correction site review: {source_id} differs from frozen source"
+            )
+        drift = assertion_drift(source, assertion)
+        if drift and not _is_authorized_correction_assertion_drift(
+            context, source, assertion, drift
+        ):
+            raise WorkflowError(
+                f"correction site review: {source_id} has unauthorized assertion drift"
+            )
+        expected = {
+            key: canonical.get(key, "").strip()
+            for key in CORRECTION_SITE_PATCH_FIELDS
+        }
+        reciprocal = sorted({
+            row.get("source_program_key", "").strip()
+            for row in assertions_by_game.get(game_id, [])
+            if row.get("source_program_key", "").strip() not in {"", school_key}
+        })
+        decisions.append({
+            "decision_id": _decision_id("CORRECTION-SITE", source_id, game_id),
+            "category": "correction_site_patch",
+            "source_game_id": source_id,
+            "canonical_game_id": game_id,
+            "season_label": canonical.get("season_label", ""),
+            **_date_fields(source.get("game_date", ""), canonical.get("game_date", "")),
+            "matchup": (
+                f"{canonical.get('team_a_key', '')} vs "
+                f"{canonical.get('team_b_key', '')}"
+            ),
+            "field_name": "site_metadata",
+            "source_value": source.get("curated_site_type", ""),
+            "canonical_value": canonical_json(expected),
+            "canonical_site_expected": expected,
+            "relevant_evidence": (
+                f"Authorized frozen source {source_id}; reciprocal assertions "
+                f"{', '.join(reciprocal) or '[none]'}; original source "
+                f"H/A/N={source.get('curated_site_type', '')}; "
+                f"preserved research notes: {source.get('notes', '')}"
+            ),
+            "recommended_action": "REVIEW_REQUIRED",
+            "allowed_actions": ["APPLY_CANONICAL_PATCH"],
+            "decision": "PENDING",
+            "resolution_basis": "",
+            "canonical_patch_json": "{}",
+            "source_patch_json": "{}",
+            "notes": (
+                "Frozen published site correction only. Gate 1 must explicitly "
+                "set all five canonical site fields; do not change source H/A/N."
+            ),
+        })
+    return decisions
+
+
 def _canonical_site_patch_review_decisions(
     *,
     school_key: str,
@@ -2224,6 +2325,17 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 }
             )
 
+    correction_site_decisions = _post_publication_site_review_decisions(
+        repo, school_key, sources, canonical_by_id,
+        assertions_by_source, assertions_by_game,
+    )
+    decisions.extend(correction_site_decisions)
+    for item in correction_site_decisions:
+        game = canonical_by_id[item["canonical_game_id"]]
+        for participant in (game.get("team_a_key", ""), game.get("team_b_key", "")):
+            if participant != school_key and participant in public_keys:
+                affected_public_programs.add(participant)
+
     canonical_site_patch_decisions = _canonical_site_patch_review_decisions(
         school_key=school_key,
         history_start_season=program.get("history_start_season", "").strip(),
@@ -2884,6 +2996,26 @@ def approve_plan(
                 raise WorkflowError(
                     f"{decision_id}: unsupported NCAA round decision {decision!r}"
                 )
+        if item.get("category") == "correction_site_patch":
+            if decision != "APPLY_CANONICAL_PATCH":
+                raise WorkflowError(
+                    f"{decision_id}: frozen site correction requires a Gate 1 patch"
+                )
+            if set(canonical_patch) != CORRECTION_SITE_PATCH_FIELDS or source_patch:
+                raise WorkflowError(
+                    f"{decision_id}: correction requires all five canonical site "
+                    "fields and forbids source patches"
+                )
+            if canonical_patch["site_type"] not in {
+                "TEAM_A_HOME", "TEAM_B_HOME", "NEUTRAL",
+            }:
+                raise WorkflowError(f"{decision_id}: invalid H/A/N correction")
+            if bool(canonical_patch["venue_key"]) != bool(canonical_patch["venue_id"]):
+                raise WorkflowError(f"{decision_id}: venue key and ID must be paired")
+            if bool(canonical_patch["site_city"]) != bool(canonical_patch["site_state"]):
+                raise WorkflowError(f"{decision_id}: site city and state must be paired")
+            if canonical_patch == item.get("canonical_site_expected"):
+                raise WorkflowError(f"{decision_id}: no-op correction site patch")
         if item.get("category") == "canonical_site_patch":
             forbidden_site_fields = sorted(
                 set(canonical_patch) - CANONICAL_SITE_PATCH_FIELDS
@@ -4184,6 +4316,7 @@ def apply_reconciliation_decisions(
         if item.get("category") in {
             "discrepancy",
             "canonical_site_patch",
+            "correction_site_patch",
             "ncaa_round_patch",
         }
     ]
@@ -4440,6 +4573,110 @@ def apply_reconciliation_decisions(
             raise WorkflowError(
                 f"{item['decision_id']}: canonical row is missing after ingestion"
             )
+
+        if item.get("category") == "correction_site_patch":
+            source_id = item.get("source_game_id", "").strip()
+            source = source_by_id.get(source_id)
+            linked = assertion_by_source.get((school_key, source_id), [])
+            if source is None or len(linked) != 1:
+                raise WorkflowError(
+                    f"{item['decision_id']}: missing correction source/assertion"
+                )
+            if linked[0].get("canonical_game_id") != game_id:
+                raise WorkflowError(
+                    f"{item['decision_id']}: canonical identity changed"
+                )
+            context = _correction_assertion_reconciliation_context(repo, school_key)
+            if context is None or source_id not in context["correction_source_game_ids"]:
+                raise WorkflowError(
+                    f"{item['decision_id']}: correction freeze authority missing"
+                )
+            post = context["post_rows"].get(source_id, {})
+            if any(source.get(f, "") != str(post.get(f, ""))
+                   for f in context["fields"]):
+                raise WorkflowError(
+                    f"{item['decision_id']}: frozen source semantic drift"
+                )
+            old = {
+                key: canonical.get(key, "").strip()
+                for key in CORRECTION_SITE_PATCH_FIELDS
+            }
+            if old != item.get("canonical_site_expected"):
+                raise WorkflowError(
+                    f"{item['decision_id']}: canonical site drifted since review"
+                )
+            patch = dict(item.get("canonical_patch", {}))
+            if (
+                item.get("decision") != "APPLY_CANONICAL_PATCH"
+                or set(patch) != CORRECTION_SITE_PATCH_FIELDS
+                or item.get("source_patch")
+                or patch == old
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: invalid or empty correction patch"
+                )
+            if patch["site_type"] not in {
+                "TEAM_A_HOME", "TEAM_B_HOME", "NEUTRAL",
+            }:
+                raise WorkflowError(f"{item['decision_id']}: invalid H/A/N")
+            if bool(patch["site_city"]) != bool(patch["site_state"]):
+                raise WorkflowError(f"{item['decision_id']}: partial site location")
+            if bool(patch["venue_key"]) != bool(patch["venue_id"]):
+                raise WorkflowError(f"{item['decision_id']}: partial venue pair")
+            global_venues = read_csv(repo / "data/reference/venues.csv")
+            global_pairs = {
+                (v.get("venue_id", "").strip(), v.get("venue_key", "").strip()): v
+                for v in global_venues
+            }
+            if patch["venue_id"]:
+                venue = global_pairs.get((patch["venue_id"], patch["venue_key"]))
+                if venue is None:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: venue not globally registered"
+                    )
+                if (
+                    venue.get("city", "").strip() != patch["site_city"]
+                    or venue.get("state", "").strip() != patch["site_state"]
+                ):
+                    raise WorkflowError(
+                        f"{item['decision_id']}: venue geography mismatch"
+                    )
+            set_canonical_field(canonical, "site_type", patch["site_type"])
+            counts["registry_fallbacks_retired"] += _apply_canonical_patch(
+                canonical,
+                {key: value for key, value in patch.items() if key != "site_type"},
+                valid_venue_pairs=set(global_pairs),
+            )
+            for field in SOURCE_ASSERTION_COPY_FIELDS:
+                linked[0][field] = source.get(field, "")
+            for discrepancy in discrepancy_rows:
+                if (
+                    discrepancy.get("canonical_game_id") == game_id
+                    and discrepancy.get("field_name") == "site_type"
+                ):
+                    previous = (
+                        f"Prior canonical={discrepancy.get('canonical_value', '')}; "
+                        f"prior basis={discrepancy.get('resolution_basis', '')}"
+                    )
+                    discrepancy["canonical_value"] = patch["site_type"]
+                    discrepancy["status"] = "RESOLVED"
+                    discrepancy["resolution_basis"] = item["resolution_basis"]
+                    discrepancy["notes"] = _append_note(
+                        discrepancy.get("notes", ""),
+                        f"{previous}; corrected under {item['decision_id']}",
+                    )
+            if old["site_type"] != patch["site_type"]:
+                changed_field_bases[(game_id, "site_type")] = item["resolution_basis"]
+            canonical["notes"] = _append_note(
+                canonical.get("notes", ""),
+                f"[OWNER_APPROVED_CORRECTION_SITE_PATCH school={school_key} "
+                f"source={source_id} decision={item['decision_id']} "
+                f"plan={approved['approved_plan_hash'][:12]}]",
+            )
+            touched_canonical_ids.add(game_id)
+            touched_source_ids.add(source_id)
+            counts["correction_site_patches"] += 1
+            continue
 
         if item.get("category") == "canonical_site_patch":
             touched_canonical_ids.add(game_id)
