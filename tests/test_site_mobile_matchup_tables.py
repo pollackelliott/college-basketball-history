@@ -45,7 +45,9 @@ class MobileMatchupTableTests(unittest.TestCase):
             ".subgrid .mini-table td:last-child{width:14%}",
             css,
         )
-        self.assertEqual(50 + 36 + 14, 100)
+        percentages = [int(value) for value in re.findall(r"width:(\d+)%", css)]
+        self.assertEqual(percentages, [50, 36, 14])
+        self.assertEqual(sum(percentages), 100)
 
     def test_desktop_and_game_history_layouts_remain_separate(self):
         self.assertIn(".subgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))", SITE)
