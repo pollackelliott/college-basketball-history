@@ -204,5 +204,146 @@ class CorrectionSiteApprovalTests(unittest.TestCase):
             self.review({}, decision="LEAVE_UNRESOLVED")
 
 
+class CorrectionSiteApplyTests(unittest.TestCase):
+    """A sealed Phoenix site patch must preserve source H/A/N and discrepancy history."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+        def write(relative, fields, rows):
+            path = self.root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with path.open("w", newline="", encoding="utf-8") as stream:
+                writer = csv.DictWriter(stream, fieldnames=fields)
+                writer.writeheader()
+                writer.writerows(rows)
+
+        self.source = {"source_game_id": "PHOENIX-1",
+                       "source_program_key": "arizona",
+                       "curated_site_type": "NEUTRAL",
+                       "curated_venue_name": "Phoenix Union High School Gymnasium",
+                       "notes": "Owner approved physical venue; source NEUTRAL preserved"}
+        self.canonical = {
+            "canonical_game_id": "CBBG-0000001",
+            "team_a_key": "arizona", "team_b_key": "stanford",
+            "site_type": "TEAM_A_HOME",
+            "designated_home_team_key": "arizona",
+            "venue_key": "", "venue_id": "", "site_city": "", "site_state": "",
+            "notes": "",
+        }
+        write("schools/arizona/source-games.csv", list(self.source), [self.source])
+        write("data/canonical/games.csv", list(self.canonical), [self.canonical])
+        write("data/evidence/game-assertions.csv", [
+            "assertion_id", "canonical_game_id", "source_program_key",
+            "source_game_id", "curated_site_type", "curated_venue_name",
+        ], [{
+            "assertion_id": "ASSERT-1", "canonical_game_id": "CBBG-0000001",
+            "source_program_key": "arizona", "source_game_id": "PHOENIX-1",
+            "curated_site_type": "NEUTRAL", "curated_venue_name": "",
+        }])
+        write("data/reconciliation/discrepancies.csv", [
+            "discrepancy_id", "canonical_game_id", "field_name",
+            "source_a_program_key", "source_a_value", "source_b_program_key",
+            "source_b_value", "canonical_value", "status", "resolution_basis", "notes",
+        ], [{
+            "discrepancy_id": "DISC-000001", "canonical_game_id": "CBBG-0000001",
+            "field_name": "site_type", "source_a_program_key": "arizona",
+            "source_a_value": "NEUTRAL", "source_b_program_key": "",
+            "source_b_value": "", "canonical_value": "TEAM_A_HOME",
+            "status": "RESOLVED", "resolution_basis": "Original Gate 1 decision",
+            "notes": "Original history retained",
+        }])
+        write("data/reference/venues.csv", ["venue_id", "venue_key", "city", "state"], [
+            {"venue_id": "VEN-000866",
+             "venue_key": "phoenix-union-high-school-gymnasium",
+             "city": "Phoenix", "state": "AZ"}
+        ])
+        self.patch = {
+            "site_type": "TEAM_A_HOME",
+            "venue_id": "VEN-000866",
+            "venue_key": "phoenix-union-high-school-gymnasium",
+            "site_city": "Phoenix", "site_state": "AZ",
+        }
+        self.context = {
+            "correction_source_game_ids": {"PHOENIX-1"},
+            "fields": ["curated_site_type", "curated_venue_name"],
+            "post_rows": {"PHOENIX-1": {
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Phoenix Union High School Gymnasium"}},
+        }
+
+    def read(self, name):
+        with (self.root / name).open(newline="", encoding="utf-8") as stream:
+            return list(csv.DictReader(stream))
+
+    def apply(self, patch_values=None, authorized_drift=True):
+        approved = {
+            "school_key": "arizona", "approved_plan_hash": "0" * 64,
+            "decisions": [{
+                "category": "correction_site_patch",
+                "decision_id": "CORRECTION-SITE-PHOENIX-1",
+                "source_game_id": "PHOENIX-1",
+                "canonical_game_id": "CBBG-0000001",
+                "decision": "APPLY_CANONICAL_PATCH",
+                "canonical_site_expected": {
+                    k: self.canonical.get(k, "") for k in plan.CORRECTION_SITE_PATCH_FIELDS
+                },
+                "canonical_patch": patch_values if patch_values is not None else self.patch,
+                "source_patch": {},
+                "resolution_basis": "Accepted institutional and owner 1942 Phoenix decision",
+            }],
+        }
+        with (
+            patch.object(plan, "_correction_assertion_reconciliation_context",
+                         return_value=self.context),
+            patch.object(plan, "SOURCE_ASSERTION_COPY_FIELDS",
+                         ("curated_site_type", "curated_venue_name")),
+            patch.object(plan, "assertion_drift",
+                         return_value={"curated_venue_name": (
+                             "Phoenix Union High School Gymnasium", "")}),
+            patch.object(plan, "_is_authorized_correction_assertion_drift",
+                         return_value=authorized_drift),
+            patch.object(plan, "_record_dependent_site_gap_discrepancies",
+                         return_value={}),
+            patch.object(plan, "_record_reconciled_unresolved_home_venue_markers",
+                         return_value={}),
+            patch.object(plan, "_record_reciprocal_discrepancies",
+                         return_value={}),
+        ):
+            return plan.apply_reconciliation_decisions(self.root, approved)
+
+    def test_phoenix_sealed_apply_patches_canonical_and_assertion_only(self):
+        counts = self.apply()
+        self.assertEqual(counts["correction_site_patches"], 1)
+        canonical = self.read("data/canonical/games.csv")[0]
+        self.assertEqual(canonical["site_type"], "TEAM_A_HOME")
+        self.assertEqual(canonical["designated_home_team_key"], "arizona")
+        self.assertEqual(canonical["venue_id"], "VEN-000866")
+        self.assertEqual((canonical["site_city"], canonical["site_state"]),
+                         ("Phoenix", "AZ"))
+        source = self.read("schools/arizona/source-games.csv")[0]
+        assertion = self.read("data/evidence/game-assertions.csv")[0]
+        self.assertEqual(source["curated_site_type"], "NEUTRAL")
+        self.assertEqual(assertion["curated_site_type"], "NEUTRAL")
+        self.assertEqual(assertion["curated_venue_name"],
+                         "Phoenix Union High School Gymnasium")
+        discrepancy = self.read("data/reconciliation/discrepancies.csv")[0]
+        self.assertIn("Original Gate 1 decision", discrepancy["notes"])
+        self.assertEqual(discrepancy["source_a_value"], "NEUTRAL")
+        self.assertEqual(discrepancy["status"], "RESOLVED")
+
+    def test_unregistered_physical_identity_fails_closed(self):
+        proposed = dict(self.patch, venue_id="VEN-NOT-REGISTERED")
+        with self.assertRaisesRegex(plan.WorkflowError, "not globally registered"):
+            self.apply(proposed)
+
+    def test_injected_assertion_drift_fails_closed(self):
+        with self.assertRaisesRegex(plan.WorkflowError, "unapproved global assertion drift"):
+            self.apply(authorized_drift=False)
+
+
+
 if __name__ == "__main__":
     unittest.main()
