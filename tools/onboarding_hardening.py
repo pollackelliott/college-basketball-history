@@ -827,6 +827,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
                 "discrepancy",
                 "conditional_discrepancy",
                 "canonical_site_patch",
+                "correction_site_patch",
                 "ncaa_round_patch",
                 "new_game_site_patch",
                 "source_consistency",
@@ -835,7 +836,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
                 raise WorkflowError(
                     f"{did}: historical patches are not valid on {category} decisions"
                 )
-            if category == "canonical_site_patch" and did in source_patches:
+            if category in {"canonical_site_patch", "correction_site_patch"} and did in source_patches:
                 raise WorkflowError(
                     f"{did}: canonical-only site review may not patch target source evidence"
                 )
