@@ -1606,6 +1606,21 @@ def _post_publication_site_review_decisions(
             raise WorkflowError(
                 f"correction site review: {source_id} has unauthorized assertion drift"
             )
+        # A correction may cover scores, dates, or other non-site fields.
+        # Site reviews are limited to site-field changes or an explicit
+        # owner-authorized canonical site amendment in the corrected notes.
+        site_fields = {"curated_site_type", "curated_venue_name", "city", "state"}
+        site_delta = any(
+            str(pre.get(field, "")) != str(post.get(field, ""))
+            for field in site_fields
+        )
+        note = source.get("notes", "").casefold()
+        explicit_site_authority = (
+            bool(re.search(r"\bowner[- ]approved\b[^\n]{0,80}\bcanonical\b", note))
+            and bool(re.search(r"\b(home|neutral|h/a/n|site)\b", note))
+        )
+        if not site_delta and not explicit_site_authority:
+            continue
         expected = {
             key: canonical.get(key, "").strip()
             for key in CORRECTION_SITE_PATCH_FIELDS
