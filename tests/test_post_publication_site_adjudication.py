@@ -29,7 +29,8 @@ class CorrectionSiteDecisionTests(unittest.TestCase):
                 "curated_site_type": site, "curated_venue_name": venue,
                 "season_label": "1941-1942" if i < 2 else "1954-1955",
                 "game_date": "" if i < 2 else "1954-12-21",
-                "notes": "Accepted owner historical correction, source H/A/N preserved.",
+                "notes": ("Owner approved canonical Stanford HOME correction; source preserved."
+                          if i >= 2 else "Phoenix venue site correction; source preserved."),
             }
             assertion = dict(source, curated_venue_name=old_venue)
             sources.append(source)
@@ -84,6 +85,23 @@ class CorrectionSiteDecisionTests(unittest.TestCase):
 
     def test_standard_new_school_has_no_correction_site_decisions(self):
         self.assertEqual(self.generate(None), [])
+
+    def test_non_site_correction_does_not_create_site_review(self):
+        sources, linked, by_game, canon, context = self.fixture()
+        for i, source in enumerate(sources):
+            source["curated_venue_name"] = ""
+            source["notes"] = "Approved score correction only."
+            context["post_rows"][source["source_game_id"]]["curated_venue_name"] = ""
+            context["pre_rows"][source["source_game_id"]]["curated_venue_name"] = ""
+        with (
+            patch.object(plan, "_correction_assertion_reconciliation_context",
+                         return_value=context),
+            patch.object(plan, "assertion_drift", return_value={}),
+        ):
+            rows = plan._post_publication_site_review_decisions(
+                Path("/not-used"), "arizona", sources, canon, linked, by_game,
+            )
+        self.assertEqual(rows, [])
 
     def test_out_of_scope_source_id_fails_closed(self):
         context = self.fixture()[-1]
