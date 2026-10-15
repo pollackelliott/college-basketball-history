@@ -26,7 +26,9 @@ Ambiguous physical venue identity is a STOP, never a guess.
 from __future__ import annotations
 
 import argparse
+import calendar
 import csv
+import datetime as dt
 import hashlib
 import json
 import re
@@ -425,6 +427,78 @@ def geography_compatible(
     return True
 
 
+
+def venue_date_bounds(value: str) -> tuple[dt.date, dt.date] | None:
+    """Conservative inclusive bounds for an exact, month-only, or year-only date."""
+    match = re.fullmatch(
+        r"(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?",
+        (value or "").strip(),
+    )
+    if not match:
+        return None
+    year, month, day = match.groups()
+    try:
+        start = dt.date(int(year), int(month or "1"), int(day or "1"))
+        if day:
+            end = start
+        elif month:
+            end = dt.date(
+                start.year,
+                start.month,
+                calendar.monthrange(start.year, start.month)[1],
+            )
+        else:
+            end = dt.date(start.year, 12, 31)
+        return start, end
+    except ValueError:
+        return None
+
+
+def venue_chronology_conflicts(
+    local: dict[str, str],
+    global_row: dict[str, str],
+) -> list[str]:
+    """Report provable physical-building date conflicts during identity reuse.
+
+    Unknown or partial dates are not evidence for choosing a building. Year-only
+    boundaries are deliberately inclusive so events in a boundary year are not
+    rejected without an exact opening or closing date. Never infer H/A/N here.
+    """
+    opened_text = global_row.get("opened", "").strip()
+    closed_text = global_row.get("closed", "").strip()
+    opened = venue_date_bounds(opened_text)
+    closed = venue_date_bounds(closed_text)
+    conflicts: list[str] = []
+    for field in ("first_assigned_game", "last_assigned_game"):
+        use_text = local.get(field, "").strip()
+        use = venue_date_bounds(use_text)
+        if use is None:
+            continue
+        if opened and use[1] < opened[0]:
+            conflicts.append(
+                f"{field}={use_text} is before physical opening={opened_text}"
+            )
+        if closed and use[0] > closed[1]:
+            conflicts.append(
+                f"{field}={use_text} is after physical closing={closed_text}"
+            )
+
+    local_close_text = local.get("known_closed", "").strip()
+    local_close = venue_date_bounds(local_close_text)
+    if opened and local_close and local_close[1] < opened[0]:
+        conflicts.append(
+            f"known_closed={local_close_text} is before physical opening={opened_text}"
+        )
+
+    local_open_text = local.get("known_opened", "").strip()
+    local_open = venue_date_bounds(local_open_text)
+    if closed and local_open and local_open[0] > closed[1]:
+        conflicts.append(
+            f"known_opened={local_open_text} is after physical closing={closed_text}"
+        )
+    return conflicts
+
+
 def incompatible_school_venue_key_rows(
     local: dict[str, str],
     key: str,
@@ -614,6 +688,7 @@ def venue_reconciliation_inventory(
             "issues": [],
             "candidate_venue_ids": [],
             "missing_registered_names": [],
+            "chronology_conflicts": [],
         }
 
         chosen: dict[str, str] | None = None
@@ -704,6 +779,8 @@ def venue_reconciliation_inventory(
             item["issues"].append(hard_stop)
         elif chosen is not None:
             chosen_id = chosen.get("venue_id", "").strip()
+            chronology_conflicts = venue_chronology_conflicts(local, chosen)
+            item["chronology_conflicts"] = chronology_conflicts
             chosen_notes = (chosen.get("notes", "") or "").casefold()
             conflicting_ids = sorted(all_name_candidates - {chosen_id})
 
@@ -721,7 +798,10 @@ def venue_reconciliation_inventory(
             if intentional_split_ids:
                 item["issues"].append("INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP")
 
-            if unresolved_conflicting_ids:
+            if chronology_conflicts:
+                item["classification"] = "STOP_AMBIGUOUS"
+                item["issues"].append("PHYSICAL_VENUE_CHRONOLOGY_CONFLICT")
+            elif unresolved_conflicting_ids:
                 item["classification"] = (
                     "SHARED_GLOBAL_MAINTENANCE"
                     if pending_shared
@@ -1176,6 +1256,17 @@ def rebase_venues(
                     f"({', '.join(sorted(candidate_ids))}) by name/geography, "
                     f"but venue_key {key!r} does not exactly match current main; "
                     "resolve physical identity explicitly before Phase 0"
+                )
+
+        # Exact keys, research-base hints, and registered aliases cannot override
+        # a provably impossible physical-building chronology.
+        if chosen is not None:
+            chronology_conflicts = venue_chronology_conflicts(local, chosen)
+            if chronology_conflicts:
+                raise WorkflowError(
+                    "physical venue chronology conflict before Phase 0: "
+                    f"local_key={key!r}, global_id={chosen['venue_id']!r}: "
+                    + "; ".join(chronology_conflicts)
                 )
 
         # Research-time numeric venue IDs are transport provenance only.
