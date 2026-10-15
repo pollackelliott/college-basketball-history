@@ -317,6 +317,23 @@ EXPECTED = {
                 "valid_from": "1985-11-22",
                 "valid_to": ""
             }
+        ],
+        "VEN-000433": [
+            {
+                "venue_name": "Atlantic City Convention Hall",
+                "valid_from": "1929-05-31",
+                "valid_to": "2001-10-10"
+            },
+            {
+                "venue_name": "Boardwalk Hall",
+                "valid_from": "2001-10-11",
+                "valid_to": "2018-01-15"
+            },
+            {
+                "venue_name": "Jim Whelan Boardwalk Hall",
+                "valid_from": "2018-01-16",
+                "valid_to": ""
+            }
         ]
     }
 }
@@ -331,7 +348,7 @@ class HistoricalVenueNamingTests(unittest.TestCase):
         with CSV_PATH.open(encoding="utf-8", newline="") as fp:
             rows = list(csv.DictReader(fp))
         official = [r for r in rows if r["name_type"] == "OFFICIAL_NAMING_PERIOD"]
-        self.assertEqual(len(official), 51)
+        self.assertEqual(len(official), 54)
         self.assertEqual(
             {r["venue_id"] for r in official},
             set(EXPECTED["venues"]),
@@ -464,6 +481,12 @@ assert.equal(show("VEN-000819","2022-04-20"),"JQH Arena");
 assert.equal(show("VEN-000819","2022-04-21"),"Great Southern Bank Arena");
 assert.equal(show("VEN-000860","1985-11-21"),"Villanova Field House");
 assert.equal(show("VEN-000860","1985-11-22"),"Jake Nevin Field House");
+assert.equal(show("VEN-000433","1996-12-07"),"Atlantic City Convention Hall");
+assert.equal(show("VEN-000433","2001-10-10"),"Atlantic City Convention Hall");
+assert.equal(show("VEN-000433","2001-10-11"),"Boardwalk Hall");
+assert.equal(show("VEN-000433","2018-01-15"),"Boardwalk Hall");
+assert.equal(show("VEN-000433","2018-01-16"),"Jim Whelan Boardwalk Hall");
+assert.equal(show("VEN-000433",null,""),"Jim Whelan Boardwalk Hall");
 
 assert.equal(show("VEN-000186","2013-04-29"),"Project fallback");
 assert.equal(show("VEN-999999",null,""),"Project fallback");

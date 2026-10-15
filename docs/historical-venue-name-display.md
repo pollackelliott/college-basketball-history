@@ -180,6 +180,40 @@ are preserved, but the available evidence does not justify manufacturing an exac
 boundary merely to make them publishable.
 
 
+
+## Light structural cleanup and Boardwalk Hall chronology
+
+This maintenance pass also removes several known false or redundant aliases without
+changing physical venue identity, games, scores, or H/A/N:
+
+- `VEN-000382` remains Smith Fieldhouse in Provo; the false `Nielsen Field House`
+  alias belongs to the distinct Salt Lake City `VEN-000582` Einar Nielsen Fieldhouse.
+- `VEN-000371` remains Eugenio Guerra Sports Complex; the erroneous `Eugene Guerra
+  Sports Complex` curated alias is removed while literal source/provenance wording
+  remains preserved where it appeared historically.
+- `VEN-000683` retains one Orange County Civic Center project-display identity; its
+  duplicate same-name alias is removed.
+- `VEN-000433` is the 1929 Atlantic City building. The modern Atlantic City
+  Convention Center is a distinct facility and is not an unrestricted alias for it.
+
+### Atlantic City — `VEN-000433`
+
+| Inclusive official period | Name |
+|---|---|
+| 1929-05-31 through 2001-10-10 | Atlantic City Convention Hall |
+| 2001-10-11 through 2018-01-15 | Boardwalk Hall |
+| 2018-01-16 onward | Jim Whelan Boardwalk Hall |
+
+Authoritative evidence:
+- https://www.boardwalkhall.com/arena-information/history
+- https://www.boardwalkhall.com/about-us
+- https://nj.gov/casinos/law/act/docs_article16/cca-article16.pdf
+
+The Boardwalk Hall official history establishes the May 31, 1929 dedication of the
+same physical building. Its official facility history states that the renovated building
+reopened as Boardwalk Hall on October 11, 2001. New Jersey P.L.2017, c.319 designated
+it Jim Whelan Boardwalk Hall effective January 16, 2018.
+
 ## Publication contract
 
 `tools/build_site_data.py` validates naming periods and publishes compact,
