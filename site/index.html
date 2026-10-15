@@ -117,6 +117,17 @@ body.nav-home .topbar-inner{display:flex;align-items:center;gap:16px}body.nav-ho
 
 
 
+/* Keep matchup summary tables inside narrow panels without abbreviating labels. */
+@media(max-width:720px){
+  .subgrid .mini-table{table-layout:fixed}
+  .subgrid .mini-table th,.subgrid .mini-table td{padding:8px 5px}
+  .subgrid .mini-table th:first-child,.subgrid .mini-table td:first-child{
+    width:50%;text-align:left;white-space:normal;overflow-wrap:anywhere
+  }
+  .subgrid .mini-table th:nth-child(2),.subgrid .mini-table td:nth-child(2){width:36%}
+  .subgrid .mini-table th:last-child,.subgrid .mini-table td:last-child{width:14%}
+}
+
 /* Keep the old painted route visible until the new route is captured at the top. */
 ::view-transition-old(root),::view-transition-new(root){animation:none}
 
