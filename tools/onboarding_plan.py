@@ -548,7 +548,7 @@ def _correction_assertion_reconciliation_context(
         snapshot = guard["snapshot"]
         expected_hash = str(guard.get("snapshot_sha256", "")).strip()
         actual_hash = sha256_text(canonical_json(snapshot))
-        if expected_hash and expected_hash != actual_hash:
+        if not re.fullmatch(r"[0-9a-f]{64}", expected_hash) or expected_hash != actual_hash:
             raise WorkflowError(
                 f"correction Integration Freeze {key} snapshot hash mismatch"
             )
@@ -4663,12 +4663,33 @@ def apply_reconciliation_decisions(
                     raise WorkflowError(
                         f"{item['decision_id']}: venue geography mismatch"
                     )
+            if old["venue_id"] and not patch["venue_id"]:
+                raise WorkflowError(
+                    f"{item['decision_id']}: established canonical venue cannot be erased "
+                    "by a blank correction venue"
+                )
             set_canonical_field(canonical, "site_type", patch["site_type"])
             counts["registry_fallbacks_retired"] += _apply_canonical_patch(
                 canonical,
                 {key: value for key, value in patch.items() if key != "site_type"},
                 valid_venue_pairs=set(global_pairs),
             )
+            # Preserve frozen source notes, including any superseded historical
+            # proposal, and append the sealed owner-approved canonical outcome.
+            # Only explanatory notes change here: source H/A/N and raw text do not.
+            supersession_note = (
+                "OWNER GATE 1 SUPERSEDING CANONICAL SITE: "
+                f"site_type={patch['site_type']}; "
+                f"home={canonical.get('designated_home_team_key', '') or '[neutral]'}; "
+                f"venue_id={patch['venue_id'] or '[unresolved]'}; "
+                f"venue_key={patch['venue_key'] or '[unresolved]'}; "
+                f"locality={patch['site_city']}, {patch['site_state']}; "
+                f"basis={item['resolution_basis']}; "
+                "any contradictory earlier owner-approval claim in preserved notes "
+                "is superseded; source H/A/N and raw_text remain unchanged; "
+                f"decision={item['decision_id']}."
+            )
+            source["notes"] = _append_note(source.get("notes", ""), supersession_note)
             for field in SOURCE_ASSERTION_COPY_FIELDS:
                 linked[0][field] = source.get(field, "")
             for discrepancy in discrepancy_rows:

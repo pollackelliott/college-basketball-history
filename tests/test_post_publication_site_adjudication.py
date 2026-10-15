@@ -211,6 +211,7 @@ class CorrectionSiteApplyTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
+        self.school = getattr(self, "school", "arizona")
 
         def write(relative, fields, rows):
             path = self.root / relative
@@ -221,27 +222,29 @@ class CorrectionSiteApplyTests(unittest.TestCase):
                 writer.writerows(rows)
 
         self.source = {"source_game_id": "PHOENIX-1",
-                       "source_program_key": "arizona",
+                       "source_program_key": self.school,
                        "curated_site_type": "NEUTRAL",
                        "curated_venue_name": "Phoenix Union High School Gymnasium",
                        "notes": "Owner approved physical venue; source NEUTRAL preserved"}
         self.canonical = {
             "canonical_game_id": "CBBG-0000001",
-            "team_a_key": "arizona", "team_b_key": "stanford",
+            "team_a_key": self.school,
+            "team_b_key": "arizona" if self.school == "stanford" else "stanford",
             "site_type": "TEAM_A_HOME",
             "designated_home_team_key": "arizona",
             "venue_key": "", "venue_id": "", "site_city": "", "site_state": "",
             "notes": "",
         }
-        write("schools/arizona/source-games.csv", list(self.source), [self.source])
+        write(f"schools/{self.school}/source-games.csv", list(self.source), [self.source])
         write("data/canonical/games.csv", list(self.canonical), [self.canonical])
         write("data/evidence/game-assertions.csv", [
             "assertion_id", "canonical_game_id", "source_program_key",
-            "source_game_id", "curated_site_type", "curated_venue_name",
+            "source_game_id", "curated_site_type", "curated_venue_name", "notes",
         ], [{
             "assertion_id": "ASSERT-1", "canonical_game_id": "CBBG-0000001",
-            "source_program_key": "arizona", "source_game_id": "PHOENIX-1",
+            "source_program_key": self.school, "source_game_id": "PHOENIX-1",
             "curated_site_type": "NEUTRAL", "curated_venue_name": "",
+            "notes": "Owner approved physical venue; source NEUTRAL preserved",
         }])
         write("data/reconciliation/discrepancies.csv", [
             "discrepancy_id", "canonical_game_id", "field_name",
@@ -249,7 +252,7 @@ class CorrectionSiteApplyTests(unittest.TestCase):
             "source_b_value", "canonical_value", "status", "resolution_basis", "notes",
         ], [{
             "discrepancy_id": "DISC-000001", "canonical_game_id": "CBBG-0000001",
-            "field_name": "site_type", "source_a_program_key": "arizona",
+            "field_name": "site_type", "source_a_program_key": self.school,
             "source_a_value": "NEUTRAL", "source_b_program_key": "",
             "source_b_value": "", "canonical_value": "TEAM_A_HOME",
             "status": "RESOLVED", "resolution_basis": "Original Gate 1 decision",
@@ -278,9 +281,15 @@ class CorrectionSiteApplyTests(unittest.TestCase):
         with (self.root / name).open(newline="", encoding="utf-8") as stream:
             return list(csv.DictReader(stream))
 
+    def rewrite(self, name, rows):
+        with (self.root / name).open("w", newline="", encoding="utf-8") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+            writer.writeheader()
+            writer.writerows(rows)
+
     def apply(self, patch_values=None, authorized_drift=True):
         approved = {
-            "school_key": "arizona", "approved_plan_hash": "0" * 64,
+            "school_key": self.school, "approved_plan_hash": "0" * 64,
             "decisions": [{
                 "category": "correction_site_patch",
                 "decision_id": "CORRECTION-SITE-PHOENIX-1",
@@ -299,7 +308,7 @@ class CorrectionSiteApplyTests(unittest.TestCase):
             patch.object(plan, "_correction_assertion_reconciliation_context",
                          return_value=self.context),
             patch.object(plan, "SOURCE_ASSERTION_COPY_FIELDS",
-                         ("curated_site_type", "curated_venue_name")),
+                         ("curated_site_type", "curated_venue_name", "notes")),
             patch.object(plan, "assertion_drift",
                          return_value={"curated_venue_name": (
                              "Phoenix Union High School Gymnasium", "")}),
@@ -319,7 +328,7 @@ class CorrectionSiteApplyTests(unittest.TestCase):
         self.assertEqual(counts["correction_site_patches"], 1)
         canonical = self.read("data/canonical/games.csv")[0]
         self.assertEqual(canonical["site_type"], "TEAM_A_HOME")
-        self.assertEqual(canonical["designated_home_team_key"], "arizona")
+        self.assertEqual(canonical["designated_home_team_key"], self.school)
         self.assertEqual(canonical["venue_id"], "VEN-000866")
         self.assertEqual((canonical["site_city"], canonical["site_state"]),
                          ("Phoenix", "AZ"))
@@ -329,6 +338,8 @@ class CorrectionSiteApplyTests(unittest.TestCase):
         self.assertEqual(assertion["curated_site_type"], "NEUTRAL")
         self.assertEqual(assertion["curated_venue_name"],
                          "Phoenix Union High School Gymnasium")
+        self.assertEqual(source["notes"], assertion["notes"])
+        self.assertIn("OWNER GATE 1 SUPERSEDING CANONICAL SITE", source["notes"])
         discrepancy = self.read("data/reconciliation/discrepancies.csv")[0]
         self.assertIn("Original Gate 1 decision", discrepancy["notes"])
         self.assertEqual(discrepancy["source_a_value"], "NEUTRAL")
@@ -344,6 +355,105 @@ class CorrectionSiteApplyTests(unittest.TestCase):
             self.apply(authorized_drift=False)
 
 
+
+
+    def test_registered_venue_geography_must_match(self):
+        wrong = dict(self.patch, site_city="Stanford", site_state="CA")
+        with self.assertRaisesRegex(plan.WorkflowError, "venue geography mismatch"):
+            self.apply(wrong)
+
+    def test_existing_venue_cannot_be_erased(self):
+        row = dict(self.canonical,
+                   venue_id="VEN-000866",
+                   venue_key="phoenix-union-high-school-gymnasium",
+                   site_city="Phoenix", site_state="AZ")
+        self.canonical = row
+        self.rewrite("data/canonical/games.csv", [row])
+        blank = {"site_type": "TEAM_B_HOME", "venue_id": "", "venue_key": "",
+                 "site_city": "Stanford", "site_state": "CA"}
+        with self.assertRaisesRegex(plan.WorkflowError,
+                                    "established canonical venue cannot be erased"):
+            self.apply(blank)
+
+    def test_superseded_claim_is_preserved_and_marked_overridden(self):
+        name = f"schools/{self.school}/source-games.csv"
+        row = self.read(name)[0]
+        claim = "Prior notes claimed owner-approved OPPONENT HOME."
+        row["notes"] = claim
+        self.rewrite(name, [row])
+        self.apply()
+        updated = self.read(name)[0]
+        assertion = self.read("data/evidence/game-assertions.csv")[0]
+        self.assertIn(claim, updated["notes"])
+        self.assertIn("OWNER GATE 1 SUPERSEDING CANONICAL SITE", updated["notes"])
+        self.assertIn("home=" + self.school, updated["notes"])
+        self.assertIn("venue_id=VEN-000866", updated["notes"])
+        self.assertEqual(updated["notes"], assertion["notes"])
+        self.assertEqual(updated["curated_site_type"], "NEUTRAL")
+
+
+class NonArizonaResolvedSiteTests(CorrectionSiteApplyTests):
+    """An existing RESOLVED site conflict outside Arizona is still reviewable."""
+
+    school = "stanford"
+
+    def test_non_arizona_prior_resolved_discrepancy_and_venue(self):
+        self.rewrite("data/reference/venues.csv", [{
+            "venue_id": "VEN-000422", "venue_key": "stanford-pavilion",
+            "city": "Stanford", "state": "CA",
+        }])
+        proposed = {"site_type": "TEAM_A_HOME",
+                    "venue_id": "VEN-000422", "venue_key": "stanford-pavilion",
+                    "site_city": "Stanford", "site_state": "CA"}
+        counts = self.apply(proposed)
+        self.assertEqual(counts["correction_site_patches"], 1)
+        canonical = self.read("data/canonical/games.csv")[0]
+        self.assertEqual(canonical["designated_home_team_key"], "stanford")
+        self.assertEqual(canonical["venue_id"], "VEN-000422")
+        discrepancy = self.read("data/reconciliation/discrepancies.csv")[0]
+        self.assertEqual(discrepancy["status"], "RESOLVED")
+        self.assertIn("Original Gate 1 decision", discrepancy["notes"])
+        self.assertEqual(
+            self.read("schools/stanford/source-games.csv")[0]["curated_site_type"],
+            "NEUTRAL",
+        )
+
+
+class CorrectionAuthorityManifestTests(unittest.TestCase):
+    def test_missing_manifest_snapshot_digest_is_rejected(self):
+        snapshot = {"fields": list(plan.SOURCE_ASSERTION_SYNC_FIELDS),
+                    "rows": {"CORRECTION-1": {}}}
+        self._check_bad_manifest(snapshot, snapshot, "")
+
+    def test_tampered_manifest_snapshot_is_rejected(self):
+        snapshot = {"fields": list(plan.SOURCE_ASSERTION_SYNC_FIELDS),
+                    "rows": {"CORRECTION-1": {}}}
+        altered = {"fields": snapshot["fields"],
+                   "rows": {"CORRECTION-1": {"curated_site_type": "FORGED"}}}
+        good = plan.sha256_text(plan.canonical_json(snapshot))
+        self._check_bad_manifest(snapshot, altered, good)
+
+    def _check_bad_manifest(self, pre, post, post_digest):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            folder = repo / ".onboarding" / "arizona"
+            folder.mkdir(parents=True)
+            manifest = {
+                "school_key": "arizona",
+                "status": "INTEGRATION_FROZEN",
+                "workflow_kind": plan.CORRECTION_WORKFLOW_KIND,
+                "correction_source_game_ids": ["CORRECTION-1"],
+                "pre_correction_source_semantic_guard": {
+                    "snapshot": pre,
+                    "snapshot_sha256": plan.sha256_text(plan.canonical_json(pre)),
+                },
+                "source_game_semantic_guard": {
+                    "snapshot": post, "snapshot_sha256": post_digest,
+                },
+            }
+            (folder / "integration-freeze.json").write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(plan.WorkflowError, "snapshot hash mismatch"):
+                plan._correction_assertion_reconciliation_context(repo, "arizona")
 
 if __name__ == "__main__":
     unittest.main()
