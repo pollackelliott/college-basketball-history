@@ -231,7 +231,7 @@ class CorrectionSiteApplyTests(unittest.TestCase):
             "team_a_key": self.school,
             "team_b_key": "arizona" if self.school == "stanford" else "stanford",
             "site_type": "TEAM_A_HOME",
-            "designated_home_team_key": "arizona",
+            "designated_home_team_key": self.school,
             "venue_key": "", "venue_id": "", "site_city": "", "site_state": "",
             "notes": "",
         }
@@ -332,7 +332,7 @@ class CorrectionSiteApplyTests(unittest.TestCase):
         self.assertEqual(canonical["venue_id"], "VEN-000866")
         self.assertEqual((canonical["site_city"], canonical["site_state"]),
                          ("Phoenix", "AZ"))
-        source = self.read("schools/arizona/source-games.csv")[0]
+        source = self.read(f"schools/{self.school}/source-games.csv")[0]
         assertion = self.read("data/evidence/game-assertions.csv")[0]
         self.assertEqual(source["curated_site_type"], "NEUTRAL")
         self.assertEqual(assertion["curated_site_type"], "NEUTRAL")
