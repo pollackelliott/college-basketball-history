@@ -113,7 +113,7 @@ Institutional evidence:
 | 2005-07-12 through 2025-06-30 | Wells Fargo Arena |
 | 2025-07-01 onward | Casey's Center |
 
-### Honolulu — `VEN-000686`
+### Honolulu — `VEN-000194`
 
 | Inclusive official period | Name |
 |---|---|
