@@ -96,7 +96,7 @@ EXPECTED = {
                 "valid_to": ""
             }
         ],
-        "VEN-000686": [
+        "VEN-000194": [
             {
                 "venue_name": "Special Events Arena",
                 "valid_from": "1994-10-21",
@@ -443,10 +443,10 @@ assert.equal(show("VEN-000135","2020-01-01"),"Mandalay Bay Events Center");
 assert.equal(show("VEN-000135","2021-02-11"),"Michelob ULTRA Arena");
 assert.equal(show("VEN-000228","2025-06-30"),"Wells Fargo Arena");
 assert.equal(show("VEN-000228","2025-07-01"),"Casey's Center");
-assert.equal(show("VEN-000686","1997-01-01"),"Special Events Arena");
-assert.equal(show("VEN-000686","1998-02-20"),"Stan Sheriff Center");
-assert.equal(show("VEN-000686","2020-11-12"),"SimpliFi Arena at Stan Sheriff Center");
-assert.equal(show("VEN-000686","2025-08-26"),"Bankoh Arena at Stan Sheriff Center");
+assert.equal(show("VEN-000194","1997-01-01"),"Special Events Arena");
+assert.equal(show("VEN-000194","1998-02-20"),"Stan Sheriff Center");
+assert.equal(show("VEN-000194","2020-11-12"),"SimpliFi Arena at Stan Sheriff Center");
+assert.equal(show("VEN-000194","2025-08-26"),"Bankoh Arena at Stan Sheriff Center");
 assert.equal(show("VEN-000698","2025-08-31"),"American Bank Center Arena");
 assert.equal(show("VEN-000698","2025-09-01"),"Hilliard Center Arena");
 assert.equal(show("VEN-000714","2000-01-01"),"Coliseum Arena");
