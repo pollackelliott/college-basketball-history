@@ -131,6 +131,28 @@
         "valid_to": ""
       }
     ],
+    "VEN-000194": [
+      {
+        "venue_name": "Special Events Arena",
+        "valid_from": "1994-10-21",
+        "valid_to": "1998-02-19"
+      },
+      {
+        "venue_name": "Stan Sheriff Center",
+        "valid_from": "1998-02-20",
+        "valid_to": "2020-11-11"
+      },
+      {
+        "venue_name": "SimpliFi Arena at Stan Sheriff Center",
+        "valid_from": "2020-11-12",
+        "valid_to": "2025-08-25"
+      },
+      {
+        "venue_name": "Bankoh Arena at Stan Sheriff Center",
+        "valid_from": "2025-08-26",
+        "valid_to": ""
+      }
+    ],
     "VEN-000196": [
       {
         "venue_name": "Assembly Hall",
@@ -227,28 +249,6 @@
       {
         "venue_name": "EagleBank Arena",
         "valid_from": "2015-07-01",
-        "valid_to": ""
-      }
-    ],
-    "VEN-000686": [
-      {
-        "venue_name": "Special Events Arena",
-        "valid_from": "1994-10-21",
-        "valid_to": "1998-02-19"
-      },
-      {
-        "venue_name": "Stan Sheriff Center",
-        "valid_from": "1998-02-20",
-        "valid_to": "2020-11-11"
-      },
-      {
-        "venue_name": "SimpliFi Arena at Stan Sheriff Center",
-        "valid_from": "2020-11-12",
-        "valid_to": "2025-08-25"
-      },
-      {
-        "venue_name": "Bankoh Arena at Stan Sheriff Center",
-        "valid_from": "2025-08-26",
         "valid_to": ""
       }
     ],
