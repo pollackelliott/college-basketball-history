@@ -9,7 +9,10 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
-from published_site_completeness_census import build_census  # noqa: E402
+from published_site_completeness_census import (  # noqa: E402
+    _published_perspectives,
+    build_census,
+)
 
 
 SOURCE_FIELDS = [
@@ -305,6 +308,62 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
             self.assertNotIn("gamma", report["published_program_keys"])
             self.assertEqual(report["published_unique_canonical_games"], 4)
 
+
+
+    def test_discontinuous_scope_excludes_gap_for_only_in_scope_program(self):
+        """A gap-season game must not enter a program's public perspective."""
+        published = {
+            "miami": {
+                "history_start_season": "1925-1926",
+                "history_scope_intervals": "1925-1926..1939-1940|1954-1955+",
+            },
+            "beta": {
+                "history_start_season": "1900-1901",
+                "history_scope_intervals": "",
+            },
+        }
+        game = {
+            "season_label": "1953-1954",
+            "team_a_key": "miami",
+            "team_b_key": "unpublished",
+        }
+        self.assertEqual(_published_perspectives(game, published), [])
+        game["team_b_key"] = "beta"
+        self.assertEqual(_published_perspectives(game, published), ["beta"])
+        game["season_label"] = "1954-1955"
+        self.assertEqual(_published_perspectives(game, published), ["beta", "miami"])
+        game["season_label"] = "1935-1936"
+        self.assertEqual(_published_perspectives(game, published), ["beta", "miami"])
+
+    def test_intervals_change_unique_denominator_and_team_counts(self):
+        """Out-of-scope history cannot contaminate overall site-debt counts."""
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_repo(root)
+            programs_file = root / "data/reference/programs.csv"
+            with programs_file.open(newline="", encoding="utf-8") as handle:
+                programs = list(csv.DictReader(handle))
+            for row in programs:
+                row["history_scope_intervals"] = (
+                    "1900-1901..1901-1902|2030-2031+"
+                    if row["program_key"] == "alpha" else ""
+                )
+            write_csv(programs_file, [
+                "program_key", "display_name", "history_start_season",
+                "history_scope_intervals", "public_page_enabled",
+            ], programs)
+            canonical_file = root / "data/canonical/games.csv"
+            with canonical_file.open(newline="", encoding="utf-8") as handle:
+                games = list(csv.DictReader(handle))
+            for game in games:
+                if game["canonical_game_id"] == "CBBG-5":
+                    game["team_a_key"] = "alpha"
+                    game["team_b_key"] = "gamma"
+            write_csv(canonical_file, CANONICAL_FIELDS, games)
+            report = build_census(root)
+            self.assertEqual(report["published_unique_canonical_games"], 4)
+            self.assertEqual(report["by_team"]["alpha"]["total_games"], 0)
+            self.assertEqual(report["by_team"]["beta"]["total_games"], 4)
 
 if __name__ == "__main__":
     unittest.main()

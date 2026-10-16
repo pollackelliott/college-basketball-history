@@ -9,7 +9,7 @@ It does **not** mutate canonical games, source assertions, reconciliation record
 The census derives the published universe from `data/reference/programs.csv`:
 
 - `public_page_enabled=yes`
-- each program's owner-approved `history_start_season`
+- each program's owner-approved `history_start_season` **and full `history_scope_intervals`** (when present), excluding intervening out-of-scope seasons
 - the union of canonical games that are in scope for at least one published program
 
 A canonical game is counted once in global totals even when both participants have published pages. Per-team sections intentionally count the game once from each published program perspective.

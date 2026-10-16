@@ -2,7 +2,8 @@
 """Authoritative read-only census of published game-site completeness debt.
 
 The census measures the exact public-game universe implied by programs.csv and each
-published program's approved history_start_season. It never mutates basketball data.
+published program's approved history start and any explicit history-scope intervals.
+It never mutates basketball data.
 
 HOME exception accounting is deliberately delegated to implementation_site_gate so
 this scoreboard cannot drift from the hardened per-school release semantics.
@@ -106,7 +107,11 @@ def _published_perspectives(
     for key in {row.get("team_a_key", "").strip(), row.get("team_b_key", "").strip()}:
         if not key or key not in published:
             continue
-        if season_is_in_scope(season, published[key]["history_start_season"]):
+        if season_is_in_scope(
+            season,
+            published[key]["history_start_season"],
+            published[key]["history_scope_intervals"],
+        ):
             perspectives.append(key)
     return sorted(perspectives)
 
@@ -149,6 +154,7 @@ def build_census(repo: Path, *, example_limit: int = 10) -> dict[str, Any]:
             "program_key": key,
             "display_name": row.get("display_name", "").strip() or key,
             "history_start_season": history_start,
+            "history_scope_intervals": row.get("history_scope_intervals", "").strip(),
         }
 
     if not published:
