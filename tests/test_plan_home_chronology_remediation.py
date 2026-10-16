@@ -2,6 +2,7 @@ import csv
 import sys
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 
 
@@ -9,7 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
-from plan_home_chronology_remediation import build_plan  # noqa: E402
+from plan_home_chronology_remediation import (  # noqa: E402
+    HomeChronologyPlanError,
+    build_plan,
+    parse_boundary,
+)
 
 
 def write_csv(path: Path, fieldnames, rows):
@@ -256,6 +261,63 @@ class HomeChronologyPlannerTests(unittest.TestCase):
             self.assertEqual(plan["review_count"], 1)
             self.assertEqual(plan["reviews"][0]["reason"], "ambiguous_home_chronology")
 
+
+
+    def test_existing_human_readable_boundaries_preserve_precision(self):
+        pairs = [
+            ("January 1930", date(1930, 1, 1), date(1930, 1, 31)),
+            ("1971-1972 season", date(1971, 7, 1), date(1972, 6, 30)),
+            ("2004-2005 season", date(2004, 7, 1), date(2005, 6, 30)),
+        ]
+        for text, expected_start, expected_end in pairs:
+            with self.subTest(boundary=text):
+                self.assertEqual(parse_boundary(text, end=False), expected_start)
+                self.assertEqual(parse_boundary(text, end=True), expected_end)
+        self.assertIsNone(parse_boundary("program beginning", end=False))
+        self.assertIsNone(parse_boundary("present", end=True))
+
+    def test_unbounded_markers_do_not_reverse_meaning(self):
+        with self.assertRaises(HomeChronologyPlanError):
+            parse_boundary("program beginning", end=True)
+        with self.assertRaises(HomeChronologyPlanError):
+            parse_boundary("present", end=False)
+        with self.assertRaises(HomeChronologyPlanError):
+            parse_boundary("NotAMonth 1930", end=False)
+
+    def test_human_readable_single_home_chronology_is_candidate(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_repo(root)
+            path = root / "schools/alpha/venues.csv"
+            with path.open(encoding="utf-8", newline="") as handle:
+                relationships = list(csv.DictReader(handle))
+            relationships[0]["relationship_start"] = "program beginning"
+            relationships[0]["relationship_end"] = "December 1924"
+            write_csv(path, SCHOOL_VENUE_FIELDS, relationships)
+            plan = build_plan(root, ["alpha"])["payload"]
+            self.assertEqual(plan["candidate_count"], 1)
+            self.assertEqual(plan["review_count"], 0)
+
+    def test_named_month_transition_overlap_stops_for_review(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_repo(root, second_relationship=True)
+            game_path = root / "data/canonical/games.csv"
+            with game_path.open(encoding="utf-8", newline="") as handle:
+                games = list(csv.DictReader(handle))
+            games[0]["game_date"] = "1925-01-15"
+            write_csv(game_path, CANONICAL_FIELDS, games)
+            venue_path = root / "schools/alpha/venues.csv"
+            with venue_path.open(encoding="utf-8", newline="") as handle:
+                relationships = list(csv.DictReader(handle))
+            relationships[0]["relationship_end"] = "January 1925"
+            relationships[1]["relationship_start"] = "January 1925"
+            relationships[1]["relationship_end"] = "present"
+            write_csv(venue_path, SCHOOL_VENUE_FIELDS, relationships)
+            plan = build_plan(root, ["alpha"])["payload"]
+            self.assertEqual(plan["candidate_count"], 0)
+            self.assertEqual(plan["review_count"], 1)
+            self.assertEqual(plan["reviews"][0]["reason"], "ambiguous_home_chronology")
 
 if __name__ == "__main__":
     unittest.main()

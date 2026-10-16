@@ -26,6 +26,7 @@ import hashlib
 import json
 import re
 import subprocess
+from calendar import month_name
 from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
@@ -36,6 +37,11 @@ PLAN_VERSION = 1
 HOME_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 SEASON_RE = re.compile(r"^(\d{4})-(\d{4})$")
 YEAR_MONTH_RE = re.compile(r"^(\d{4})-(\d{2})$")
+NAMED_MONTH_YEAR_RE = re.compile(r"^([A-Za-z]+)\s+(\d{4})$")
+SEASON_SUFFIX_RE = re.compile(r"^(\d{4}-\d{4})\s+season$", re.IGNORECASE)
+MONTH_NUMBER_BY_NAME = {
+    name.casefold(): number for number, name in enumerate(month_name) if name
+}
 
 
 class HomeChronologyPlanError(RuntimeError):
@@ -91,14 +97,37 @@ def _month_end(year: int, month: int) -> date:
 def parse_boundary(value: str, *, end: bool) -> date | None:
     """Parse exact/year/month/basketball-season relationship boundaries.
 
-    A basketball season such as 1923-1924 is interpreted as July 1, 1923 through
-    June 30, 1924.  This is intentionally generous around the playing season while
-    remaining deterministic for chronology coverage.
+    A basketball season such as 1923-1924 (also "1923-1924 season") means
+    July 1, 1923 through June 30, 1924. Named month/year bounds cover
+    the full named month, preserving uncertainty at facility transitions.
+    "program beginning" is an open start and "present" is an open end.
+    Multiple matching HOME relationships are review-only; never choose one.
     """
 
     value = clean(value)
     if not value:
         return None
+
+    if value.casefold() == "program beginning":
+        if end:
+            raise HomeChronologyPlanError("program beginning is not a valid relationship end")
+        return None
+    if value.casefold() == "present":
+        if not end:
+            raise HomeChronologyPlanError("present is not a valid relationship start")
+        return None
+
+    named_month = NAMED_MONTH_YEAR_RE.fullmatch(value)
+    if named_month:
+        month = MONTH_NUMBER_BY_NAME.get(named_month.group(1).casefold())
+        if month is None:
+            raise HomeChronologyPlanError(f"unknown relationship month {value!r}")
+        year = int(named_month.group(2))
+        return _month_end(year, month) if end else date(year, month, 1)
+
+    season_suffix = SEASON_SUFFIX_RE.fullmatch(value)
+    if season_suffix:
+        value = season_suffix.group(1)
 
     try:
         return date.fromisoformat(value)
