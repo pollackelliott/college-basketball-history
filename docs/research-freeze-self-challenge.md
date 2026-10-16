@@ -202,6 +202,24 @@ For postseason:
   documentation of the official tournament/conference/host/participant and targeted
   authoritative paths exhausted.
 
+### NCAA Tournament round self-challenge
+
+Before `RESEARCH_FROZEN`, perform one bounded, school-wide review of **both populated
+and blank** NCAA Tournament round assignments against the actual historical bracket
+structure and available authoritative NCAA/institutional evidence. Use the project's
+standardized labels for rounds that actually occurred (for example, `R32`,
+`Sweet Sixteen`, `Elite Eight`, `Final Four`, `Championship`), even if
+contemporary sources used other names. `R64` is valid only for an actual round
+of 64 and never before 1978-79. Do not manufacture a round from geography,
+date, opponent, era, or a modern bracket assumption.
+
+An NCAA round may remain blank when no historically honest mapping is supported.
+Record the basis for the surviving blank in the existing self-challenge summary,
+correct supported mislabels in the bounded Research workflow, and refer genuinely
+contested historical-authority decisions to the existing owner-review process.
+This is not a new owner gate or permission to reopen previously accepted research
+without a concrete contradiction or new evidence.
+
 The self-challenge must not turn ordinary regular-season `OPPONENT_HOME` building
 blanks into source-school research debt.
 
@@ -249,6 +267,12 @@ VENUES:
   modern neutral unresolved (1996-97+): <count>
   historical regular-season neutral building debt after location-first pass (1995-96 and earlier): <count>
   postseason exact-venue unresolved after exhaustive research: <count>
+
+NCAA ROUNDS:
+  populated/blank assignments reviewed: <count>/<count>
+  supported corrections during self-challenge: <count/summary>
+  historically justified blank assignments: <count/basis>
+  genuine owner-level conflicts: <none or disposition>
 
 OPPONENT IDENTITIES:
   current-program key splits found/repaired: <count>
