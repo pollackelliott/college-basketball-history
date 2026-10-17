@@ -185,5 +185,70 @@ class HistoricalOpponentDisplayNormalizerTests(unittest.TestCase):
             self.assertEqual(plan["change_row_count"], 0)
 
 
+    def test_sync_uses_reconciled_historical_table_and_preserves_source_evidence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            write_programs(repo, ["florida"])
+            write_opponents(repo, "alpha", [
+                {"source_opponent_label": "Western Maryland",
+                 "canonical_opponent_key": "mcdaniel", "canonical_opponent_name": "McDaniel"},
+                {"source_opponent_label": "Florida",
+                 "canonical_opponent_key": "florida", "canonical_opponent_name": "Florida"},
+            ])
+            write_opponents(repo, "beta", [
+                {"source_opponent_label": "McDaniel",
+                 "canonical_opponent_key": "mcdaniel", "canonical_opponent_name": "McDaniel"},
+            ])
+            source = repo / "schools" / "alpha" / "source-games.csv"
+            fields = ["source_game_id", "normalized_opponent_key", "normalized_opponent_name",
+                      "source_opponent_label", "raw_text", "game_date", "team_score", "opponent_score"]
+            write_csv(source, fields, [
+                {"source_game_id": "A-1", "normalized_opponent_key": "mcdaniel",
+                 "normalized_opponent_name": "McDaniel College (formerly Western Maryland College)",
+                 "source_opponent_label": "Western Maryland", "raw_text": "at Western Maryland",
+                 "game_date": "1938-02-03", "team_score": "38", "opponent_score": "29"},
+                {"source_game_id": "A-2", "normalized_opponent_key": "florida",
+                 "normalized_opponent_name": "Historical Florida label",
+                 "source_opponent_label": "Gators", "raw_text": "Florida",
+                 "game_date": "1938-02-04", "team_score": "30", "opponent_score": "40"},
+            ])
+            before = list(csv.DictReader(source.open(encoding="utf-8", newline="")))
+            opponent_plan = normalizer.build_normalization_plan(repo, "alpha")
+            self.assertEqual(opponent_plan["change_row_count"], 0)
+            plan = normalizer.build_source_display_plan(repo, "alpha", opponent_plan)
+            self.assertEqual((plan["change_row_count"], plan["change_key_count"]), (1, 1))
+            normalizer.write_csv_preserving(
+                plan["path"], plan["fields"], plan["rows"], plan["encoding"], plan["line_ending"],
+            )
+            after = list(csv.DictReader(source.open(encoding="utf-8", newline="")))
+            self.assertEqual(after[0]["normalized_opponent_name"], "McDaniel")
+            self.assertEqual(after[1], before[1])  # current-D1 identity not touched
+            for field in fields:
+                if field != "normalized_opponent_name":
+                    self.assertEqual(after[0][field], before[0][field])
+            again = normalizer.build_source_display_plan(repo, "alpha", opponent_plan)
+            self.assertEqual(again["change_row_count"], 0)
+
+    def test_sync_rejects_ambiguous_project_authority(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            write_programs(repo, [])
+            for school, name in (("alpha", "Beloit"), ("beta", "Beloit"),
+                                 ("gamma", "Beloit College")):
+                write_opponents(repo, school, [
+                    {"source_opponent_label": name, "canonical_opponent_key": "beloit",
+                     "canonical_opponent_name": name},
+                ])
+            write_csv(repo / "schools" / "alpha" / "source-games.csv",
+                ["source_game_id", "normalized_opponent_key", "normalized_opponent_name"],
+                [{"source_game_id": "A-1", "normalized_opponent_key": "beloit",
+                  "normalized_opponent_name": "Beloit College"}])
+            opponent_plan = normalizer.build_normalization_plan(repo, "alpha")
+            self.assertEqual(opponent_plan["status"], "BLOCKED")
+            with self.assertRaisesRegex(ValueError, "ambiguous"):
+                normalizer.build_source_display_plan(repo, "alpha", opponent_plan)
+
+
+
 if __name__ == "__main__":
     unittest.main()
