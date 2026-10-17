@@ -51,7 +51,7 @@ from location_safety import (
 )
 from ncaa_safety import canonical_ncaa_errors
 from program_history import history_scope_errors, partition_source_rows
-from site_completeness import researched_unresolved_home_venue
+from site_completeness import has_supported_foreign_locality, researched_unresolved_home_venue
 from venue_reference import (
     load_global_venue_reference,
     school_venue_reference_errors,
@@ -920,7 +920,10 @@ def registry_backed_geography_correction(
     canonical_state = canonical.get("site_state", "").strip()
 
     source_location_status = location_pair_status(source_city, source_state)
-    if source_location_status not in {"blank", "complete"}:
+    if (
+        source_location_status not in {"blank", "complete"}
+        and not has_supported_foreign_locality(source)
+    ):
         return None
     if location_pair_status(registry_city, registry_state) != "complete":
         return None
@@ -1105,7 +1108,10 @@ def canonical_enrichment_candidates(
     if (
         venue_identity_compatible
         and registry_location_status == "complete"
-        and source_location_status in {"blank", "complete"}
+        and (
+            source_location_status in {"blank", "complete"}
+            or has_supported_foreign_locality(source)
+        )
     ):
         candidate_city = venue_metadata["city"].strip()
         candidate_state = venue_metadata["state"].strip()
@@ -1268,7 +1274,10 @@ def build_new_canonical(
     if (
         resolved_venue_identity
         and registry_location_status == "complete"
-        and source_location_status in {"blank", "complete"}
+        and (
+            source_location_status in {"blank", "complete"}
+            or has_supported_foreign_locality(source)
+        )
     ):
         site_city = venue_metadata["city"].strip()
         site_state = venue_metadata["state"].strip()
