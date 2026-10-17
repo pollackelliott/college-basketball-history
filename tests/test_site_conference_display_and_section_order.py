@@ -30,7 +30,10 @@ class SitePresentationTests(unittest.TestCase):
             "midwestern-city": "MCC",
             "midwestern-collegiate": "MCC",
         }
-        self.assertEqual(conference_label_overrides(), expected)
+        self.assertEqual(
+            conference_label_overrides(),
+            {**expected, "metropolitan-collegiate-conference": "Metropolitan"},
+        )
         with (ROOT / "data" / "reference" / "conferences.csv").open(
             encoding="utf-8", newline=""
         ) as handle:

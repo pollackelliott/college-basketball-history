@@ -6323,7 +6323,7 @@
       "state": "NJ",
       "primary_hex": "#004488",
       "secondary_hex": "#A2AAAD",
-      "history_start_season": null,
+      "history_start_season": "1903-1904",
       "conference_regular_season_championships": 4,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 14,
@@ -6332,7 +6332,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 1989,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
