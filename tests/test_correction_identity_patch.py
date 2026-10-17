@@ -236,6 +236,83 @@ class CorrectionIdentityTests(unittest.TestCase):
             self.assertEqual(review[0]["canonical_site_expected"]["site_type"],
                              "TEAM_A_HOME")
 
+    def test_normal_ingestion_locality_fill_is_accepted_only_when_exact(self):
+        before = {
+            "site_type": "TEAM_A_HOME",
+            "venue_key": "", "venue_id": "",
+            "site_city": "Lexington", "site_state": "",
+        }
+        after = {**before, "site_state": "KY"}
+        src = source("georgetown-ky", "KY")
+        self.assertTrue(plan._verified_correction_ingest_locality_enrichment(
+            src, before, after
+        ))
+        self.assertFalse(plan._verified_correction_ingest_locality_enrichment(
+            src, before, {**after, "site_city": "Louisville"}
+        ))
+        self.assertFalse(plan._verified_correction_ingest_locality_enrichment(
+            src, before, {**after, "site_type": "NEUTRAL"}
+        ))
+        self.assertFalse(plan._verified_correction_ingest_locality_enrichment(
+            src, before, {**after, "venue_key": "unsupported"}
+        ))
+        self.assertFalse(plan._verified_correction_ingest_locality_enrichment(
+            src, before, before
+        ))
+
+    def test_sealed_site_reconciliation_accepts_exact_prior_ingestion_fill(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            identity_decisions, projected = self.reviews(root)
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            site_reviews = plan._post_publication_site_review_decisions(
+                root, "tennessee",
+                plan.read_csv(root / "schools/tennessee/source-games.csv"),
+                projected,
+                {("tennessee", "TENRAW-00136"): a},
+                {"CBBG-0020298": a},
+            )
+            self.assertEqual(len(site_reviews), 1)
+            site_item = {
+                **site_reviews[0],
+                "decision": "APPLY_CANONICAL_PATCH",
+                "resolution_basis": "Owner-authorized correction of Kentucky locality",
+                "canonical_patch": {
+                    **site_reviews[0]["canonical_site_expected"],
+                    "site_state": "KY",
+                },
+                "source_patch": {},
+            }
+            approved = self.approved(identity_decisions[0])
+            approved["decisions"].append(site_item)
+            plan.apply_pre_ingest_correction_identity_patches(root, approved)
+            # This exact state is what ordinary ingestion may safely enrich.
+            canonical_path = root / "data/canonical/games.csv"
+            games = plan.read_csv(canonical_path)
+            games[0]["site_state"] = "KY"
+            write_table(canonical_path, ingest_school.CANONICAL_FIELDS, games)
+            write_table(
+                root / "data/reconciliation/discrepancies.csv",
+                ingest_school.DISCREPANCY_FIELDS, []
+            )
+            write_table(
+                root / "data/reference/venues.csv",
+                ["venue_id", "venue_key", "city", "state"], []
+            )
+            result = plan.apply_reconciliation_decisions(root, approved)
+            self.assertEqual(result["correction_site_patches"], 1)
+            actual = plan.read_csv(canonical_path)[0]
+            self.assertEqual((actual["site_city"], actual["site_state"]),
+                             ("Lexington", "KY"))
+            self.assertEqual(actual["team_a_key"], "georgetown-ky")
+            self.assertIn("OWNER_APPROVED_CORRECTION_SITE_PATCH", actual["notes"])
+            assertion_row = plan.read_csv(
+                root / "data/evidence/game-assertions.csv"
+            )[0]
+            self.assertEqual((assertion_row["city"], assertion_row["state"]),
+                             ("Lexington", "KY"))
+
     def test_lexicographic_flip_preserves_score_winner_and_site(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
