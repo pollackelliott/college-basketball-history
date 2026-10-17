@@ -28,6 +28,7 @@ from build_site_data import historical_opponent_display_conflicts
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
     SOURCE_ASSERTION_SYNC_FIELDS,
+    atomic_location_enrichments,
     append_note,
     assertion_drift,
     location_pair_status,
@@ -1812,6 +1813,30 @@ def apply_pre_ingest_correction_identity_patches(
     write_csv_preserving_format(canonical_path, cf, canonicals)
     write_csv_preserving_format(assertion_path, af, assertions)
     return {"correction_identity_patches": len(items)}
+
+
+def _verified_correction_ingest_locality_enrichment(
+    source: dict[str, str],
+    expected: dict[str, str],
+    actual: dict[str, str],
+) -> bool:
+    """Admit ONLY the atomic city/state fill performed by ordinary ingestion.
+
+    This does not authorize a changed venue, site type, home designation, or
+    arbitrary canonical mutation. A Gate 1 patch remains mandatory even if
+    ingestion already supplied exactly its historically supported locality.
+    """
+    if expected == actual:
+        return False
+    filled = dict(expected)
+    for field, value in atomic_location_enrichments(
+        expected.get("site_city", ""),
+        expected.get("site_state", ""),
+        source.get("city", ""),
+        source.get("state", ""),
+    ):
+        filled[field] = value
+    return filled != expected and filled == actual
 
 
 def _post_publication_site_review_decisions(
@@ -4903,7 +4928,14 @@ def apply_reconciliation_decisions(
                 key: canonical.get(key, "").strip()
                 for key in CORRECTION_SITE_PATCH_FIELDS
             }
-            if old != item.get("canonical_site_expected"):
+            expected_before_ingest = item.get("canonical_site_expected")
+            safe_ingest_locality_fill = (
+                isinstance(expected_before_ingest, dict)
+                and _verified_correction_ingest_locality_enrichment(
+                    source, expected_before_ingest, old
+                )
+            )
+            if old != expected_before_ingest and not safe_ingest_locality_fill:
                 raise WorkflowError(
                     f"{item['decision_id']}: canonical site drifted since review"
                 )
@@ -4912,7 +4944,7 @@ def apply_reconciliation_decisions(
                 item.get("decision") != "APPLY_CANONICAL_PATCH"
                 or set(patch) != CORRECTION_SITE_PATCH_FIELDS
                 or item.get("source_patch")
-                or patch == old
+                or (patch == old and not safe_ingest_locality_fill)
             ):
                 raise WorkflowError(
                     f"{item['decision_id']}: invalid or empty correction patch"
