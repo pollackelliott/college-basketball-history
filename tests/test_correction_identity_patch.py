@@ -160,9 +160,12 @@ class CorrectionIdentityTests(unittest.TestCase):
         canonicals = plan.read_csv(root / "data/canonical/games.csv")
         assertions = plan.read_csv(root / "data/evidence/game-assertions.csv")
         game_by_id = {r["canonical_game_id"]: r for r in canonicals}
-        by_source = {("tennessee", "TENRAW-00136"): assertions}
+        by_source = {}
         by_game = {}
         for a in assertions:
+            by_source.setdefault(
+                (a["source_program_key"], a["source_game_id"]), []
+            ).append(a)
             by_game.setdefault(a["canonical_game_id"], []).append(a)
         return plan._post_publication_identity_review_decisions(
             root, "tennessee", src, game_by_id, by_source, by_game
