@@ -68,6 +68,7 @@ from plan_home_chronology_remediation import (
 )
 from site_completeness import (
     _row_gap_categories,
+    has_supported_foreign_locality,
     researched_unresolved_home_venue,
 )
 from venue_reference import load_global_venue_reference
@@ -808,7 +809,10 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         site = row.get("curated_site_type", "").strip().upper()
         if site not in allowed_sites:
             errors.append(f"{label}: invalid curated_site_type {site!r}")
-        if location_pair_status(row.get("city", ""), row.get("state", "")) == "partial":
+        if (
+            location_pair_status(row.get("city", ""), row.get("state", "")) == "partial"
+            and not has_supported_foreign_locality(row)
+        ):
             errors.append(f"{label}: normalized city/state must be both populated or both blank")
         city = row.get("city", "").strip()
         if city.casefold() in city_contamination_names:
@@ -5082,6 +5086,7 @@ def apply_reconciliation_decisions(
                 source.get("state", ""),
             )
             == "partial"
+            and not has_supported_foreign_locality(source)
         ):
             raise WorkflowError(
                 f"{source_game_id}: final reconciliation leaves partial source city/state"
