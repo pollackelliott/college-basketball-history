@@ -4190,7 +4190,7 @@
       "opponent_key": "seton-hall",
       "opponent_name": "Seton Hall",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -61461,7 +61461,7 @@
       "opponent_key": "seton-hall",
       "opponent_name": "Seton Hall",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 87,
       "opponent_score": 69,
       "score_known": true,
@@ -67236,7 +67236,7 @@
       "opponent_key": "seton-hall",
       "opponent_name": "Seton Hall",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 79,
       "opponent_score": 89,
       "score_known": true,
