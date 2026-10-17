@@ -262,7 +262,7 @@ san-jose-state,San José State,San Jose State,Spartans,San Jose,CA,#0055A2,#E5A8
 santa-clara,Santa Clara,Santa Clara,Broncos,Santa Clara,CA,#862633,#FFFFFF,Yes,No,,,,,
 se-louisiana,SE Louisiana,Southeastern Louisiana,Lions,Hammond,LA,#006341,#EAAA00,Yes,No,,,,,
 seattle-u,Seattle U,Seattle,Redhawks,Seattle,WA,#AA0000,#000000,Yes,No,,,,,
-seton-hall,Seton Hall,Seton Hall,Pirates,Newark,NJ,#004488,#A2AAAD,Yes,No,,,,,
+seton-hall,Seton Hall,Seton Hall,Pirates,Newark,NJ,#004488,#A2AAAD,Yes,No,1903-1904,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-approved INCEPTION+ scope; accepted Seton Hall Research begins 1903-04.,
 siena,Siena,Siena,Saints,Albany,NY,#006747,#FFC72C,Yes,No,,,,,
 siu-edwardsville,SIU Edwardsville,SIUE,Cougars,Edwardsville,IL,#EF3829,#CFAA7A,Yes,No,,,,,
 smu,SMU,SMU,Mustangs,Dallas,TX,#0033A0,#C8102E,Yes,Yes,1916-1917,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-supplied program-top-level-scope.csv sets SMU to INCEPTION+; frozen SMU Research establishes varsity inception in 1916-17 with no contradictory scope evidence.,
