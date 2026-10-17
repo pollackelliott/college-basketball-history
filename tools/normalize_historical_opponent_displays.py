@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 """Normalize one staged school's historical opponent display names to project authority.
 
-This is a representation-only Stage-2 helper. It never changes opponent keys or
-source-game evidence. Existing integrated school packages provide the display-name
-authority for historical/non-registry opponent keys.
+This is a representation-only Stage-2 helper. It never changes opponent keys,
+literal source labels, raw evidence, or historical game fields. Its opt-in
+--sync-source-games mode also aligns normalized_opponent_name only. Existing
+integrated school packages provide the display-name authority for historical/non-registry keys.
 
 Dry run:
     python tools/normalize_historical_opponent_displays.py <school_key>
 
 Apply:
     python tools/normalize_historical_opponent_displays.py <school_key> --apply
+
+Opt-in source-game display synchronization:
+    python tools/normalize_historical_opponent_displays.py <school_key> --sync-source-games
+    python tools/normalize_historical_opponent_displays.py <school_key> --sync-source-games --apply
 """
 
 from __future__ import annotations
@@ -187,6 +192,80 @@ def build_normalization_plan(repo: Path, school_key: str) -> dict[str, Any]:
     }
 
 
+
+def build_source_display_plan(repo: Path, school_key: str, opponent_plan: dict[str, Any]) -> dict[str, Any]:
+    """Sync only historical game-level normalized names to unambiguous project authority.
+
+    Registered program keys, raw evidence, source opponent labels, and all frozen
+    historical meaning are deliberately excluded.
+    """
+    if opponent_plan["status"] != "PASS":
+        raise ValueError("ambiguous historical display authority; cannot synchronize source games")
+
+    source_path = repo / "schools" / school_key / "source-games.csv"
+    if not source_path.is_file():
+        raise FileNotFoundError(source_path)
+    fields, rows, encoding, line_ending = read_csv_preserving(source_path)
+    required = {"source_game_id", "normalized_opponent_key", "normalized_opponent_name"}
+    if not required.issubset(fields):
+        raise ValueError(
+            "source-games.csv missing columns: " + ", ".join(sorted(required - set(fields)))
+        )
+
+    program_keys = project_program_keys(repo)
+    authority = authority_names_by_key(repo, school_key, program_keys=program_keys)
+    names_by_key: dict[str, set[str]] = defaultdict(set)
+    for row in opponent_plan["rows"]:
+        key = row.get("canonical_opponent_key", "").strip()
+        name = row.get("canonical_opponent_name", "").strip()
+        if key and name:
+            names_by_key[key].add(name)
+
+    stable: dict[str, str] = {}
+    for key in sorted(names_by_key):
+        if key in program_keys or key not in authority:
+            continue
+        signatures = {
+            build_site_data.normalized_name_signature(name)
+            for name in authority[key]
+            if build_site_data.normalized_name_signature(name)
+        }
+        if len(signatures) != 1:
+            raise ValueError(f"ambiguous established display name for {key}")
+        if len(names_by_key[key]) != 1:
+            raise ValueError(f"multiple target opponent display names for {key}")
+        name = next(iter(names_by_key[key]))
+        if build_site_data.normalized_name_signature(name) not in signatures:
+            raise ValueError(f"target opponent display disagrees with project authority for {key}")
+        stable[key] = name
+
+    updates: list[dict[str, str]] = []
+    output_rows: list[dict[str, str]] = []
+    for row in rows:
+        updated = dict(row)
+        key = row.get("normalized_opponent_key", "").strip()
+        target = stable.get(key)
+        if target is not None and row.get("normalized_opponent_name", "") != target:
+            updated["normalized_opponent_name"] = target
+            updates.append({
+                "source_game_id": row.get("source_game_id", ""),
+                "normalized_opponent_key": key,
+                "from_name": row.get("normalized_opponent_name", ""),
+                "to_name": target,
+            })
+        output_rows.append(updated)
+    return {
+        "path": source_path,
+        "fields": fields,
+        "rows": output_rows,
+        "encoding": encoding,
+        "line_ending": line_ending,
+        "change_row_count": len(updates),
+        "change_key_count": len({x["normalized_opponent_key"] for x in updates}),
+        "changes": updates,
+    }
+
+
 def public_report(plan: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": plan["schema_version"],
@@ -205,6 +284,8 @@ def main() -> int:
     parser.add_argument("school_key")
     parser.add_argument("--repo", type=Path, default=None)
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--sync-source-games", action="store_true",
+                        help="Also align only source-games.csv normalized_opponent_name")
     parser.add_argument("--json-output", type=Path, default=None)
     args = parser.parse_args()
 
@@ -231,7 +312,19 @@ def main() -> int:
         print(f"FAIL: {exc}")
         return 1
 
+    source_plan = None
+    if args.sync_source_games and plan["status"] == "PASS":
+        try:
+            source_plan = build_source_display_plan(repo, args.school_key, plan)
+        except (FileNotFoundError, ValueError) as exc:
+            print(f"FAIL: {exc}")
+            return 1
+
     report = public_report(plan)
+    if source_plan is not None:
+        report["source_game_display_change_rows"] = source_plan["change_row_count"]
+        report["source_game_display_change_keys"] = source_plan["change_key_count"]
+        report["source_game_display_changes"] = source_plan["changes"]
     if args.json_output:
         args.json_output.parent.mkdir(parents=True, exist_ok=True)
         args.json_output.write_text(
@@ -245,6 +338,9 @@ def main() -> int:
     print(f"Keys to normalize:  {plan['change_key_count']}")
     print(f"Rows to normalize:  {plan['change_row_count']}")
     print(f"Ambiguous keys:     {plan['ambiguous_key_count']}")
+    if source_plan is not None:
+        print(f"Source-game display rows: {source_plan['change_row_count']}")
+        print(f"Source-game display keys: {source_plan['change_key_count']}")
 
     if plan["ambiguous"]:
         for item in plan["ambiguous"]:
@@ -256,8 +352,10 @@ def main() -> int:
         print("STOP: existing project authority is not mechanically unique; no files changed.")
         return 1
 
-    if not plan["change_row_count"]:
-        print("NO-OP: target package already matches historical display authority.")
+    if not plan["change_row_count"] and not (
+        source_plan and source_plan["change_row_count"]
+    ):
+        print("NO-OP: requested display representation already matches project authority.")
         return 0
 
     if not args.apply:
@@ -265,14 +363,17 @@ def main() -> int:
         print("Next: rerun with --apply.")
         return 0
 
-    write_csv_preserving(
-        plan["path"],
-        plan["fields"],
-        plan["rows"],
-        plan["encoding"],
-        plan["line_ending"],
-    )
-    print("PASS: opponents.csv display representation normalized; keys and source-games.csv unchanged.")
+    if plan["change_row_count"]:
+        write_csv_preserving(
+            plan["path"], plan["fields"], plan["rows"],
+            plan["encoding"], plan["line_ending"],
+        )
+    if source_plan and source_plan["change_row_count"]:
+        write_csv_preserving(
+            source_plan["path"], source_plan["fields"], source_plan["rows"],
+            source_plan["encoding"], source_plan["line_ending"],
+        )
+    print("PASS: display representation normalized; opponent keys and frozen evidence unchanged.")
     return 0
 
 
