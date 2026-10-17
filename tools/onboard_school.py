@@ -37,6 +37,7 @@ from integration_freeze_guard import (
 from onboarding_plan import (
     WorkflowError,
     approve_plan,
+    apply_pre_ingest_correction_identity_patches,
     apply_pre_ingest_source_patches,
     apply_publication_decisions,
     apply_reconciliation_decisions,
@@ -799,6 +800,12 @@ def execute_approved_in_place(
 ) -> dict[str, Any]:
     school_key = approved["school_key"]
 
+    print("\n=== sealed correction-only identity retarget ===")
+    correction_identity_patches = apply_pre_ingest_correction_identity_patches(
+        repo, approved
+    )
+    print(json.dumps(correction_identity_patches, sort_keys=True))
+
     print("\n=== owner-approved pre-ingest source patches ===")
     pre_ingest_source_patches = apply_pre_ingest_source_patches(repo, approved)
     print(json.dumps(pre_ingest_source_patches, sort_keys=True))
@@ -875,6 +882,7 @@ def execute_approved_in_place(
         raise WorkflowError("site/data changed during the deterministic replay")
     print("PASS: repeated site build produced identical JSON hashes.")
     return {
+        "correction_identity_patches": correction_identity_patches,
         "pre_ingest_source_patches": pre_ingest_source_patches,
         "ingestion_output": ingestion_output,
         "reconciliation": reconciliation,
