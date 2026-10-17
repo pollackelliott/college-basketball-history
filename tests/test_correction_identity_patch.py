@@ -1,0 +1,422 @@
+"""Fail-closed regressions for sealed post-publication canonical identity repair."""
+
+from __future__ import annotations
+
+import csv
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+import ingest_school  # noqa: E402
+import onboard_school  # noqa: E402
+import onboarding_plan as plan  # noqa: E402
+from integration_freeze_guard import (  # noqa: E402
+    SEMANTIC_SOURCE_GAME_FIELDS,
+    semantic_snapshot_sha256,
+)
+
+
+SOURCE_FIELDS = list(dict.fromkeys([
+    "source_game_id", "source_program_key",
+    "normalized_opponent_key", "normalized_opponent_name",
+    *SEMANTIC_SOURCE_GAME_FIELDS,
+]))
+
+
+def write_table(path, fields, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({field: row.get(field, "") for field in fields})
+
+
+def source(opponent="georgetown", state="", **changes):
+    row = dict.fromkeys(SOURCE_FIELDS, "")
+    row.update({
+        "source_game_id": "TENRAW-00136",
+        "source_program_key": "tennessee",
+        "normalized_opponent_key": opponent,
+        "normalized_opponent_name": (
+            "Georgetown" if opponent == "georgetown"
+            else "Georgetown (Ky.)" if opponent == "georgetown-ky"
+            else "Test College"
+        ),
+        "season_label": "1918-1919",
+        "game_date": "1919-02-27",
+        "source_opponent_label": "Georgetown",
+        "team_score": "33", "opponent_score": "34", "played_result": "L",
+        "curated_site_type": "OPPONENT_HOME",
+        "city": "Lexington", "state": state,
+        "curated_game_type": "REGULAR_SEASON",
+        "raw_text": "F27 at Georgetown L, 33-34 Lexington",
+    })
+    row.update(changes)
+    return row
+
+
+def canonical(**changes):
+    row = dict.fromkeys(ingest_school.CANONICAL_FIELDS, "")
+    row.update({
+        "canonical_game_id": "CBBG-0020298",
+        "season_label": "1918-1919",
+        "game_date": "1919-02-27",
+        "date_precision": "EXACT",
+        "team_a_key": "georgetown", "team_b_key": "tennessee",
+        "team_a_score": "34", "team_b_score": "33",
+        "result_winner_team_key": "georgetown",
+        "site_type": "TEAM_A_HOME",
+        "designated_home_team_key": "georgetown",
+        "site_city": "Lexington", "site_state": "",
+        "game_type": "REGULAR_SEASON",
+    })
+    row.update(changes)
+    return row
+
+
+def assertion(previous, **changes):
+    row = dict.fromkeys(ingest_school.ASSERTION_FIELDS, "")
+    row.update(previous)
+    row.update({
+        "assertion_id": "ASSERT-TENRAW-00136",
+        "canonical_game_id": "CBBG-0020298",
+        "source_program_key": "tennessee",
+        "source_game_id": "TENRAW-00136",
+        "normalized_opponent_key": previous["normalized_opponent_key"],
+        "normalized_opponent_name": previous["normalized_opponent_name"],
+    })
+    row.update(changes)
+    return row
+
+
+def snapshot(rows):
+    value = {
+        "schema_version": 1,
+        "fields": list(SEMANTIC_SOURCE_GAME_FIELDS),
+        "rows": {
+            row["source_game_id"]: {
+                field: row.get(field, "") for field in SEMANTIC_SOURCE_GAME_FIELDS
+            }
+            for row in rows
+        },
+    }
+    return {
+        "schema_version": 1,
+        "snapshot": value,
+        "snapshot_sha256": semantic_snapshot_sha256(value),
+    }
+
+
+class CorrectionIdentityTests(unittest.TestCase):
+    def fixture(self, root, *, new_opponent="georgetown-ky", correction_ids=None):
+        root.mkdir(parents=True, exist_ok=True)
+        before = source()
+        after = source(new_opponent, "KY")
+        source_path = root / "schools/tennessee/source-games.csv"
+        write_table(source_path, SOURCE_FIELDS, [before])
+        subprocess.run(["git", "init", "-q", str(root)], check=True)
+        subprocess.run(["git", "add", "schools/tennessee/source-games.csv"],
+                       cwd=root, check=True)
+        subprocess.run([
+            "git", "-c", "user.name=Regression", "-c",
+            "user.email=regression@example.test", "commit", "-qm", "baseline"
+        ], cwd=root, check=True)
+        base_sha = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=root, text=True
+        ).strip()
+        write_table(source_path, SOURCE_FIELDS, [after])
+        write_table(root / "data/canonical/games.csv",
+                    ingest_school.CANONICAL_FIELDS, [canonical()])
+        write_table(root / "data/evidence/game-assertions.csv",
+                    ingest_school.ASSERTION_FIELDS, [assertion(before)])
+        manifest = {
+            "schema_version": 2,
+            "workflow_kind": "POST_PUBLICATION_CORRECTION",
+            "status": "INTEGRATION_FROZEN",
+            "school_key": "tennessee",
+            "research_base_sha": base_sha,
+            "correction_source_game_ids": correction_ids if correction_ids is not None
+                                          else ["TENRAW-00136"],
+            "pre_correction_source_semantic_guard": snapshot([before]),
+            "source_game_semantic_guard": snapshot([after]),
+            "package_member_sha256": {
+                "source-games.csv": plan.sha256_file(source_path)
+            },
+        }
+        manifest_path = root / ".onboarding/tennessee/integration-freeze.json"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        return before, after, manifest_path
+
+    def reviews(self, root):
+        src = plan.read_csv(root / "schools/tennessee/source-games.csv")
+        canonicals = plan.read_csv(root / "data/canonical/games.csv")
+        assertions = plan.read_csv(root / "data/evidence/game-assertions.csv")
+        game_by_id = {r["canonical_game_id"]: r for r in canonicals}
+        by_source = {("tennessee", "TENRAW-00136"): assertions}
+        by_game = {}
+        for a in assertions:
+            by_game.setdefault(a["canonical_game_id"], []).append(a)
+        return plan._post_publication_identity_review_decisions(
+            root, "tennessee", src, game_by_id, by_source, by_game
+        )
+
+    def approved(self, decision):
+        decision = {**decision,
+                    "decision": plan.CORRECTION_IDENTITY_ACTION,
+                    "resolution_basis": "Owner-authorized historical identity correction",
+                    "source_patch": {}, "canonical_patch": {}}
+        return {
+            "school_key": "tennessee",
+            "approved_plan_hash": "e" * 64,
+            "decisions": [decision],
+        }
+
+    def test_exact_tennessee_correction_preserves_ids_literal_evidence_and_home(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            before, after, _ = self.fixture(root)
+            decisions, projected = self.reviews(root)
+            self.assertEqual(len(decisions), 1)
+            decision = decisions[0]
+            self.assertEqual(decision["old_opponent_key"], "georgetown")
+            self.assertEqual(decision["new_opponent_key"], "georgetown-ky")
+            self.assertEqual(decision["canonical_game_id"], "CBBG-0020298")
+            self.assertEqual(projected["CBBG-0020298"]["team_a_key"], "georgetown-ky")
+            self.assertEqual(plan.apply_pre_ingest_correction_identity_patches(
+                root, self.approved(decision)
+            ), {"correction_identity_patches": 1})
+            game = plan.read_csv(root / "data/canonical/games.csv")[0]
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")[0]
+            s = plan.read_csv(root / "schools/tennessee/source-games.csv")[0]
+            self.assertEqual(game["canonical_game_id"], "CBBG-0020298")
+            self.assertEqual((game["team_a_key"], game["team_b_key"]),
+                             ("georgetown-ky", "tennessee"))
+            self.assertEqual((game["team_a_score"], game["team_b_score"]), ("34", "33"))
+            self.assertEqual(game["result_winner_team_key"], "georgetown-ky")
+            self.assertEqual(game["site_type"], "TEAM_A_HOME")
+            self.assertEqual(game["designated_home_team_key"], "georgetown-ky")
+            # Locality remains an explicit Gate 1 site operation, never silently patched.
+            self.assertEqual((game["site_city"], game["site_state"]), ("Lexington", ""))
+            self.assertEqual((s["city"], s["state"]), ("Lexington", "KY"))
+            self.assertEqual((a["assertion_id"], a["canonical_game_id"]),
+                             ("ASSERT-TENRAW-00136", "CBBG-0020298"))
+            self.assertEqual(a["normalized_opponent_key"], "georgetown-ky")
+            self.assertEqual(a["normalized_opponent_name"], "Georgetown (Ky.)")
+            self.assertEqual(a["source_opponent_label"], "Georgetown")
+            self.assertEqual(a["raw_text"], before["raw_text"])
+            self.assertEqual(s["raw_text"], after["raw_text"])
+
+    def test_site_gate_review_is_projected_after_identity_retarget(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            decisions, projected = self.reviews(root)
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            review = plan._post_publication_site_review_decisions(
+                root, "tennessee",
+                plan.read_csv(root / "schools/tennessee/source-games.csv"),
+                projected,
+                {("tennessee", "TENRAW-00136"): a},
+                {"CBBG-0020298": a},
+            )
+            self.assertEqual(len(decisions), 1)
+            self.assertEqual(len(review), 1)
+            self.assertEqual(review[0]["category"], "correction_site_patch")
+            self.assertEqual(review[0]["canonical_site_expected"]["site_type"],
+                             "TEAM_A_HOME")
+
+    def test_lexicographic_flip_preserves_score_winner_and_site(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root, new_opponent="zz-college")
+            decisions, _ = self.reviews(root)
+            plan.apply_pre_ingest_correction_identity_patches(
+                root, self.approved(decisions[0])
+            )
+            game = plan.read_csv(root / "data/canonical/games.csv")[0]
+            self.assertEqual((game["team_a_key"], game["team_b_key"]),
+                             ("tennessee", "zz-college"))
+            self.assertEqual((game["team_a_score"], game["team_b_score"]), ("33", "34"))
+            self.assertEqual(game["result_winner_team_key"], "zz-college")
+            self.assertEqual(game["site_type"], "TEAM_B_HOME")
+            self.assertEqual(game["designated_home_team_key"], "zz-college")
+
+    def test_single_source_multiple_assertions_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            a.append({**a[0], "assertion_id": "ANOTHER"})
+            write_table(root / "data/evidence/game-assertions.csv",
+                        ingest_school.ASSERTION_FIELDS, a)
+            with self.assertRaisesRegex(plan.WorkflowError, "exactly one"):
+                self.reviews(root)
+
+    def test_other_assertion_on_same_canonical_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            a.append({**a[0], "assertion_id": "OTHER", "source_program_key": "other"})
+            write_table(root / "data/evidence/game-assertions.csv",
+                        ingest_school.ASSERTION_FIELDS, a)
+            with self.assertRaisesRegex(plan.WorkflowError, "exclusively"):
+                self.reviews(root)
+
+    def test_collision_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            rows = plan.read_csv(root / "data/canonical/games.csv")
+            rows.append(canonical(canonical_game_id="CBBG-COLLISION",
+                                  team_a_key="georgetown-ky"))
+            write_table(root / "data/canonical/games.csv",
+                        ingest_school.CANONICAL_FIELDS, rows)
+            with self.assertRaisesRegex(plan.WorkflowError, "collision"):
+                self.reviews(root)
+
+    def test_original_published_opponent_must_match_existing_assertion(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            a[0]["normalized_opponent_key"] = "unrelated"
+            write_table(root / "data/evidence/game-assertions.csv",
+                        ingest_school.ASSERTION_FIELDS, a)
+            with self.assertRaisesRegex(plan.WorkflowError, "original assertion"):
+                self.reviews(root)
+
+    def test_out_of_scope_source_id_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            decisions, _ = self.reviews(root)
+            manifest_path = root / ".onboarding/tennessee/integration-freeze.json"
+            manifest = json.loads(manifest_path.read_text())
+            manifest["correction_source_game_ids"] = ["OTHER"]
+            manifest_path.write_text(json.dumps(manifest))
+            with self.assertRaises(plan.WorkflowError):
+                plan.apply_pre_ingest_correction_identity_patches(
+                    root, self.approved(decisions[0])
+                )
+
+    def test_stale_frozen_package_hash_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            decisions, _ = self.reviews(root)
+            source_path = root / "schools/tennessee/source-games.csv"
+            rows = plan.read_csv(source_path)
+            rows[0]["normalized_opponent_name"] = "stale unsealed value"
+            write_table(source_path, SOURCE_FIELDS, rows)
+            with self.assertRaisesRegex(plan.WorkflowError, "frozen package/source hash"):
+                plan.apply_pre_ingest_correction_identity_patches(
+                    root, self.approved(decisions[0])
+                )
+
+    def test_corrupted_snapshot_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            decisions, _ = self.reviews(root)
+            path = root / ".onboarding/tennessee/integration-freeze.json"
+            manifest = json.loads(path.read_text())
+            manifest["source_game_semantic_guard"]["snapshot_sha256"] = "f" * 64
+            path.write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(plan.WorkflowError, "hash mismatch"):
+                plan.apply_pre_ingest_correction_identity_patches(
+                    root, self.approved(decisions[0])
+                )
+
+    def test_source_semantic_drift_outside_authorized_delta_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            a[0]["raw_text"] = "changed literal evidence"
+            write_table(root / "data/evidence/game-assertions.csv",
+                        ingest_school.ASSERTION_FIELDS, a)
+            with self.assertRaisesRegex(plan.WorkflowError, "unapproved assertion drift"):
+                self.reviews(root)
+
+    def test_no_correction_manifest_cannot_retarget_standard_ingestion(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            decisions, _ = self.reviews(root)
+            (root / ".onboarding/tennessee/integration-freeze.json").unlink()
+            self.assertEqual(self.reviews(root)[0], [])
+            with self.assertRaisesRegex(plan.WorkflowError, "verified correction freeze"):
+                plan.apply_pre_ingest_correction_identity_patches(
+                    root, self.approved(decisions[0])
+                )
+
+    def test_disposable_copy_preserves_exact_scope_and_rejects_tampering(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "original"
+            copy = Path(temp) / "disposable"
+            self.fixture(root)
+            decisions, _ = self.reviews(root)
+            onboard_school.copy_repository(root, copy, school_key="tennessee")
+            self.assertEqual(
+                (root / ".onboarding/tennessee/integration-freeze.json").read_bytes(),
+                (copy / ".onboarding/tennessee/integration-freeze.json").read_bytes(),
+            )
+            plan.apply_pre_ingest_correction_identity_patches(
+                copy, self.approved(decisions[0])
+            )
+            self.assertEqual(
+                plan.read_csv(copy / "data/canonical/games.csv")[0]["team_a_key"],
+                "georgetown-ky",
+            )
+            self.assertEqual(
+                plan.read_csv(root / "data/canonical/games.csv")[0]["team_a_key"],
+                "georgetown",
+            )
+            target = Path(temp) / "rejected"
+            manifest_path = root / ".onboarding/tennessee/integration-freeze.json"
+            payload = json.loads(manifest_path.read_text())
+            payload["package_member_sha256"]["source-games.csv"] = "f" * 64
+            manifest_path.write_text(json.dumps(payload))
+            with self.assertRaises(onboard_school.WorkflowError):
+                onboard_school.copy_repository(root, target, school_key="tennessee")
+
+    def test_seal_rejects_unreviewed_canonical_identity_payload(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            decisions, _ = self.reviews(root)
+            item = decisions[0]
+            planned = {
+                "school_key": "tennessee",
+                "decisions": [item],
+                "blockers": [],
+                "input_fingerprint": {"sha256": "same"},
+            }
+            plan_path, review_path = root / "plan.json", root / "review.csv"
+            plan_path.write_text(json.dumps(planned))
+            with review_path.open("w", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=plan.REVIEW_COLUMNS)
+                writer.writeheader()
+                writer.writerow({
+                    **{k: item.get(k, "") for k in plan.REVIEW_COLUMNS},
+                    "decision": plan.CORRECTION_IDENTITY_ACTION,
+                    "resolution_basis": "Owner-authorized historical correction",
+                    "canonical_patch_json": '{"team_a_key":"unreviewed"}',
+                    "source_patch_json": "{}",
+                })
+            with patch.object(plan, "input_fingerprint", return_value={"sha256": "same"}):
+                with self.assertRaisesRegex(plan.WorkflowError, "without field patches"):
+                    plan.approve_plan(root, plan_path, review_path, "Owner")
+
+
+if __name__ == "__main__":
+    unittest.main()
