@@ -72,6 +72,7 @@ from site_completeness import (
     researched_unresolved_home_venue,
 )
 from venue_reference import load_global_venue_reference
+from remediate_source_scoped_opponent_identity import canonical_view as correction_canonical_view
 
 
 WORKFLOW_VERSION = 1
@@ -121,6 +122,12 @@ CANONICAL_SITE_PATCH_ACTIONS = {"APPLY_CANONICAL_PATCH", "LEAVE_UNRESOLVED"}
 CANONICAL_SITE_PATCH_FIELDS = {"venue_key", "venue_id", "site_city", "site_state"}
 # Only the verified post-publication correction path may patch established H/A/N.
 CORRECTION_SITE_PATCH_FIELDS = {"site_type", "venue_key", "venue_id", "site_city", "site_state"}
+CORRECTION_IDENTITY_ACTION = "APPLY_CORRECTION_IDENTITY_PATCH"
+CORRECTION_IDENTITY_FIELDS = (
+    "season_label", "team_a_key", "team_b_key", "team_a_score",
+    "team_b_score", "result_winner_team_key", "site_type",
+    "designated_home_team_key",
+)
 NCAA_ROUND_PATCH_ACTIONS = {"APPLY_NCAA_ROUND_PATCH", "LEAVE_UNRESOLVED"}
 NCAA_ROUND_PATCH_VALUES = {
     "Play-in",
@@ -1555,6 +1562,258 @@ def _deterministic_reciprocal_home_backfill_available(
     return True
 
 
+
+def _verified_correction_identity_context(
+    repo: Path, school_key: str,
+) -> dict[str, Any] | None:
+    """Require a frozen, byte-matching correction package for identity changes.
+
+    Unlike ordinary assertion/site drift, an opponent key is representation
+    metadata outside the semantic snapshot. The package hash therefore matters.
+    This deliberately reads no Git history: disposable copies have no .git.
+    """
+    context = _correction_assertion_reconciliation_context(repo, school_key)
+    if context is None:
+        return None
+    path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    expected = manifest.get("package_member_sha256", {})
+    source = repo / "schools" / school_key / "source-games.csv"
+    if (
+        not isinstance(expected, dict)
+        or not re.fullmatch(r"[0-9a-f]{64}", str(expected.get("source-games.csv", "")))
+        or sha256_file(source) != expected["source-games.csv"]
+        or not re.fullmatch(r"[0-9a-f]{40}", str(manifest.get("research_base_sha", "")))
+    ):
+        raise WorkflowError(
+            "correction identity requires the exact verified frozen package/source hash"
+        )
+    return {**context, "research_base_sha": manifest["research_base_sha"]}
+
+
+def _published_correction_opponent_rows(
+    repo: Path, school_key: str, research_base_sha: str,
+) -> dict[str, dict[str, str]]:
+    """Use immutable published source identities only in real-repo preflight."""
+    try:
+        raw = subprocess.check_output(
+            ["git", "show", f"{research_base_sha}:schools/{school_key}/source-games.csv"],
+            cwd=repo, text=True, stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise WorkflowError("cannot inspect correction's immutable opponent baseline") from exc
+    rows = list(csv.DictReader(io.StringIO(raw, newline="")))
+    by_id = {row.get("source_game_id", "").strip(): row for row in rows}
+    if len(by_id) != len(rows) or "" in by_id:
+        raise WorkflowError("immutable correction baseline has invalid source IDs")
+    return by_id
+
+
+def _post_publication_identity_review_decisions(
+    repo: Path,
+    school_key: str,
+    sources: list[dict[str, str]],
+    canonical_by_id: dict[str, dict[str, str]],
+    assertions_by_source: dict[tuple[str, str], list[dict[str, str]]],
+    assertions_by_game: dict[str, list[dict[str, str]]],
+) -> tuple[list[dict[str, Any]], dict[str, dict[str, str]]]:
+    """Review only exact, collision-free one-assertion opponent corrections."""
+    projected = dict(canonical_by_id)
+    context = _verified_correction_identity_context(repo, school_key)
+    if context is None:
+        return [], projected
+    baseline = _published_correction_opponent_rows(
+        repo, school_key, context["research_base_sha"]
+    )
+    source_by_id = {row.get("source_game_id", "").strip(): row for row in sources}
+    decisions: list[dict[str, Any]] = []
+    for sid in sorted(context["correction_source_game_ids"]):
+        source = source_by_id.get(sid)
+        if source is None:
+            continue  # Newly added/out-of-scope correction rows cannot retarget an assertion.
+        original = baseline.get(sid)
+        if original is None:
+            continue  # A newly added source game has no published identity to repair.
+        old_key = original.get("normalized_opponent_key", "").strip()
+        new_key = source.get("normalized_opponent_key", "").strip()
+        if old_key == new_key:
+            continue
+        if not old_key or not new_key or new_key == school_key:
+            raise WorkflowError(f"{sid}: invalid frozen correction opponent identity")
+        if any(
+            source.get(field, "") != str(context["post_rows"].get(sid, {}).get(field, ""))
+            for field in context["fields"]
+        ):
+            raise WorkflowError(f"{sid}: correction identity source differs from frozen snapshot")
+        linked = assertions_by_source.get((school_key, sid), [])
+        if len(linked) != 1:
+            raise WorkflowError(f"{sid}: correction identity needs exactly one source assertion")
+        assertion = linked[0]
+        game_id = assertion.get("canonical_game_id", "").strip()
+        game = canonical_by_id.get(game_id)
+        if game is None or len(assertions_by_game.get(game_id, [])) != 1:
+            raise WorkflowError(f"{sid}: correction identity needs an exclusively linked canonical game")
+        if (
+            assertion.get("normalized_opponent_key", "").strip() != old_key
+            or assertion.get("source_program_key", "").strip() != school_key
+            or assertion.get("source_game_id", "").strip() != sid
+            or assertion.get("season_label", "").strip() != source.get("season_label", "").strip()
+            or tuple(sorted((school_key, old_key))) !=
+                (game.get("team_a_key", "").strip(), game.get("team_b_key", "").strip())
+            or game.get("season_label", "").strip() != source.get("season_label", "").strip()
+            or original.get("source_program_key", "").strip() != school_key
+        ):
+            raise WorkflowError(f"{sid}: original assertion/canonical identity does not match published baseline")
+        drift = assertion_drift(source, assertion)
+        if drift and not _is_authorized_correction_assertion_drift(
+            context, source, assertion, drift
+        ):
+            raise WorkflowError(f"{sid}: identity correction also has unapproved assertion drift")
+        target_pair = tuple(sorted((school_key, new_key)))
+        if any(
+            candidate.get("canonical_game_id") != game_id
+            and (candidate.get("team_a_key"), candidate.get("team_b_key")) == target_pair
+            and candidate.get("season_label") == game.get("season_label")
+            for candidate in canonical_by_id.values()
+        ):
+            raise WorkflowError(f"{sid}: corrected canonical pair/season collision")
+        mapped = correction_canonical_view(game, old_key, new_key)
+        expected = {field: game.get(field, "") for field in CORRECTION_IDENTITY_FIELDS}
+        outcome = {field: mapped.get(field, "") for field in CORRECTION_IDENTITY_FIELDS}
+        projected[game_id] = mapped
+        decisions.append({
+            "decision_id": _decision_id("CORRECTION-IDENTITY", sid, game_id),
+            "category": "correction_identity_patch",
+            "source_game_id": sid,
+            "canonical_game_id": game_id,
+            "season_label": source.get("season_label", ""),
+            **_date_fields(source.get("game_date", ""), game.get("game_date", "")),
+            "matchup": f"{school_key} vs {new_key}",
+            "field_name": "normalized_opponent_key",
+            "source_value": new_key,
+            "canonical_value": old_key,
+            "old_opponent_key": old_key,
+            "new_opponent_key": new_key,
+            "assertion_id": assertion.get("assertion_id", ""),
+            "canonical_identity_expected": expected,
+            "canonical_identity_projected": outcome,
+            "relevant_evidence": (
+                f"Immutable published {sid}: {old_key}; corrected frozen source: {new_key}; "
+                f"one assertion {assertion.get('assertion_id', '')}; canonical {game_id}; "
+                "no corrected-pair collision. Literal source evidence is retained."
+            ),
+            "recommended_action": CORRECTION_IDENTITY_ACTION,
+            "allowed_actions": [CORRECTION_IDENTITY_ACTION],
+            "decision": "PENDING",
+            "resolution_basis": "",
+            "canonical_patch_json": "{}",
+            "source_patch_json": "{}",
+            "notes": "Retarget the existing canonical ID before ingestion; no free-form identity patch.",
+        })
+    return decisions, projected
+
+
+def apply_pre_ingest_correction_identity_patches(
+    repo: Path, approved: dict[str, Any],
+) -> dict[str, int]:
+    """Sealed correction-only retarget, before ordinary existing-assertion ingestion.
+
+    This code is reachable only through an approved sealed transaction. It never
+    changes source literal labels, raw text, or normal ingestion semantics.
+    """
+    items = [
+        item for item in approved.get("decisions", [])
+        if item.get("category") == "correction_identity_patch"
+    ]
+    if not items:
+        return {}
+    school = approved["school_key"]
+    context = _verified_correction_identity_context(repo, school)
+    if context is None:
+        raise WorkflowError("correction identity patches require a verified correction freeze")
+    source_path = repo / "schools" / school / "source-games.csv"
+    canonical_path = repo / "data/canonical/games.csv"
+    assertion_path = repo / "data/evidence/game-assertions.csv"
+    sources = {row.get("source_game_id", ""): row for row in read_csv(source_path)}
+    cf, canonicals = read_csv_table(canonical_path)
+    af, assertions = read_csv_table(assertion_path)
+    canonical_by_id = {r.get("canonical_game_id", ""): r for r in canonicals}
+    by_source: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    by_game: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in assertions:
+        by_source[(row.get("source_program_key", ""), row.get("source_game_id", ""))].append(row)
+        by_game[row.get("canonical_game_id", "")].append(row)
+
+    seen: set[str] = set()
+    for item in items:
+        sid = str(item.get("source_game_id", "")).strip()
+        did = str(item.get("decision_id", "")).strip()
+        game_id = str(item.get("canonical_game_id", "")).strip()
+        old_key = str(item.get("old_opponent_key", "")).strip()
+        new_key = str(item.get("new_opponent_key", "")).strip()
+        source = sources.get(sid)
+        linked = by_source.get((school, sid), [])
+        game = canonical_by_id.get(game_id)
+        if (
+            sid in seen or sid not in context["correction_source_game_ids"]
+            or item.get("decision") != CORRECTION_IDENTITY_ACTION
+            or item.get("canonical_patch") or item.get("source_patch")
+            or source is None or game is None or len(linked) != 1
+            or len(by_game.get(game_id, [])) != 1
+            or not old_key or not new_key or old_key == new_key or new_key == school
+        ):
+            raise WorkflowError(f"{did}: invalid or out-of-scope sealed correction identity")
+        seen.add(sid)
+        assertion = linked[0]
+        if (
+            assertion.get("assertion_id") != item.get("assertion_id")
+            or assertion.get("canonical_game_id") != game_id
+            or assertion.get("normalized_opponent_key") != old_key
+            or source.get("normalized_opponent_key") != new_key
+            or source.get("source_program_key") != school
+            or source.get("season_label") != game.get("season_label")
+            or (game.get("team_a_key"), game.get("team_b_key")) !=
+                tuple(sorted((school, old_key)))
+            or any(
+                source.get(field, "") != str(context["post_rows"].get(sid, {}).get(field, ""))
+                for field in context["fields"]
+            )
+        ):
+            raise WorkflowError(f"{did}: frozen source/assertion/original canonical identity changed")
+        drift = assertion_drift(source, assertion)
+        if drift and not _is_authorized_correction_assertion_drift(
+            context, source, assertion, drift
+        ):
+            raise WorkflowError(f"{did}: unauthorized correction assertion drift")
+        expected = {field: game.get(field, "") for field in CORRECTION_IDENTITY_FIELDS}
+        mapped = correction_canonical_view(game, old_key, new_key)
+        outcome = {field: mapped.get(field, "") for field in CORRECTION_IDENTITY_FIELDS}
+        if (
+            expected != item.get("canonical_identity_expected")
+            or outcome != item.get("canonical_identity_projected")
+            or any(
+                other.get("canonical_game_id") != game_id
+                and (other.get("team_a_key"), other.get("team_b_key")) ==
+                    tuple(sorted((school, new_key)))
+                and other.get("season_label") == game.get("season_label")
+                for other in canonicals
+            )
+        ):
+            raise WorkflowError(f"{did}: canonical identity changed or collides")
+        game.update(outcome)
+        game["notes"] = _append_note(
+            game.get("notes", ""),
+            f"[OWNER_APPROVED_CORRECTION_IDENTITY school={school} source={sid} "
+            f"old={old_key} new={new_key} decision={did} "
+            f"plan={approved['approved_plan_hash'][:12]}]",
+        )
+        assertion["normalized_opponent_key"] = new_key
+        assertion["normalized_opponent_name"] = source.get("normalized_opponent_name", "")
+    write_csv_preserving_format(canonical_path, cf, canonicals)
+    write_csv_preserving_format(assertion_path, af, assertions)
+    return {"correction_identity_patches": len(items)}
+
+
 def _post_publication_site_review_decisions(
     repo: Path,
     school_key: str,
@@ -2344,8 +2603,20 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 }
             )
 
+    correction_identity_decisions, post_identity_canonical = (
+        _post_publication_identity_review_decisions(
+            repo, school_key, sources, canonical_by_id,
+            assertions_by_source, assertions_by_game,
+        )
+    )
+    decisions.extend(correction_identity_decisions)
+    for item in correction_identity_decisions:
+        prior = item["old_opponent_key"]
+        if prior in public_keys:
+            affected_public_programs.add(prior)
+
     correction_site_decisions = _post_publication_site_review_decisions(
-        repo, school_key, sources, canonical_by_id,
+        repo, school_key, sources, post_identity_canonical,
         assertions_by_source, assertions_by_game,
     )
     decisions.extend(correction_site_decisions)
@@ -3014,6 +3285,11 @@ def approve_plan(
             else:
                 raise WorkflowError(
                     f"{decision_id}: unsupported NCAA round decision {decision!r}"
+                )
+        if item.get("category") == "correction_identity_patch":
+            if decision != CORRECTION_IDENTITY_ACTION or canonical_patch or source_patch:
+                raise WorkflowError(
+                    f"{decision_id}: correction identity must use the exact sealed action without field patches"
                 )
         if item.get("category") == "correction_site_patch":
             if decision != "APPLY_CANONICAL_PATCH":
