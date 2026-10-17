@@ -7,6 +7,8 @@ import re
 from collections import defaultdict
 from typing import Callable
 
+from site_completeness import has_supported_foreign_locality
+
 
 SOURCE_ASSERTION_SYNC_FIELDS = (
     "game_date",
@@ -130,7 +132,10 @@ def source_location_preflight(
         state = row.get("state", "")
 
         problem = None
-        if location_pair_status(city, state) == "partial":
+        if (
+            location_pair_status(city, state) == "partial"
+            and not has_supported_foreign_locality(row)
+        ):
             problem = "partial normalized location; city and state must be both populated or both blank"
         else:
             problem = obvious_city_contamination(
