@@ -290,6 +290,70 @@ class CorrectionStage2LegacyPackageScopeTests(unittest.TestCase):
             encoding="utf-8",
         )
 
+    def test_utf8_bom_published_baseline_retains_exact_legacy_scope(self):
+        """Tennessee's published CSV begins with a BOM; baseline fields must match."""
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _, legacy = self.make_repo(root)
+            source_path = root / "schools/example/source-games.csv"
+            source_path.write_bytes(b"\xef\xbb\xbf" + source_path.read_bytes())
+            self.git(root, "add", "schools/example/source-games.csv")
+            self.git(root, "commit", "-m", "published BOM-formatted baseline")
+            bom_base = self.git(root, "rev-parse", "HEAD")
+
+            # Preserve exactly the same BOM in the correction candidate.
+            changed = row("NEW", curated_venue_name="Example Arena")
+            self.write_package(root, [legacy, changed])
+            source_path.write_bytes(b"\xef\xbb\xbf" + source_path.read_bytes())
+            self.write_manifest(root, bom_base, ["NEW"])
+
+            report = self.validate(root)
+            self.assertEqual(report["errors"], [])
+            self.assertEqual(
+                report["counts"]["correction_unchanged_published_rows"], 1
+            )
+            baseline_by_id = onboarding_plan._published_correction_opponent_rows(
+                root, "example", bom_base
+            )
+            self.assertEqual(list(baseline_by_id["OLD"]), FIELDS)
+            self.assertEqual(baseline_by_id["OLD"]["raw_text"], legacy["raw_text"])
+
+            # The BOM exception must not authorize any true header change.
+            source_path.write_bytes(
+                source_path.read_bytes().replace(
+                    b"normalized_opponent_key", b"unreviewed_opponent_key", 1
+                )
+            )
+            with self.assertRaisesRegex(
+                onboarding_plan.WorkflowError, "header differs"
+            ):
+                self.validate(root)
+
+    def test_utf8_bom_baseline_still_rejects_modified_legacy_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _, legacy = self.make_repo(root)
+            source_path = root / "schools/example/source-games.csv"
+            source_path.write_bytes(b"\xef\xbb\xbf" + source_path.read_bytes())
+            self.git(root, "add", "schools/example/source-games.csv")
+            self.git(root, "commit", "-m", "published BOM-formatted baseline")
+            bom_base = self.git(root, "rev-parse", "HEAD")
+
+            modified_legacy = dict(legacy)
+            modified_legacy["curated_venue_name"] = "Altered Armory"
+            self.write_package(root, [modified_legacy])
+            source_path.write_bytes(b"\xef\xbb\xbf" + source_path.read_bytes())
+            self.write_manifest(root, bom_base, ["NOT_THE_LEGACY_ID"])
+
+            report = self.validate(root)
+            self.assertIn(
+                "OLD: curated venue 'Altered Armory' absent from venues.csv",
+                report["errors"],
+            )
+            self.assertEqual(
+                report["counts"]["correction_unchanged_published_rows"], 0
+            )
+
     def test_unchanged_published_missing_venue_is_warning_only_for_correction(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
