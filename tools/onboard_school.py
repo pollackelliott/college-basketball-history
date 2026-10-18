@@ -1335,7 +1335,13 @@ def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
             "",
             "- repository validation — PASS",
             "- target package no-op — PASS",
-            "- implementation site completeness — PASS",
+            (
+                "- correction-only site nonregression — PASS; inherited full-gate "
+                "failures remain reported"
+                if summary.get("correction_transaction_kind")
+                == "SINGLE_GAME_IDENTITY_SITE"
+                else "- implementation site completeness — PASS"
+            ),
             "- accomplishment cross-check — PASS",
             "- deterministic site build — PASS",
             "- unit tests — PASS",
