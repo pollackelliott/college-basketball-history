@@ -349,9 +349,39 @@ class CorrectionIdentityTests(unittest.TestCase):
             write_table(root / "data/reference/venues.csv",
                         ["venue_id", "venue_key", "city", "state"], [])
             archive = root / "data/reconciliation/onboarding-decisions/test.json"
+            baseline_site = {
+                "school_key": "tennessee",
+                "history_start_season": "1908-1909",
+                "source_validation_scope": {
+                    "mode": "CORRECTION_DELTA", "scoped_source_games": 1,
+                    "correction_source_games": 1,
+                },
+                "source_site_counts": {"rows": 1},
+                "counts": {
+                    "target_canonical_games": 1,
+                    "target_source_location_lost": 1,
+                },
+                "examples": {
+                    "target_source_location_lost": ["CBBG-0020298"],
+                },
+                "status": "FAIL", "errors": ["legacy gap"], "warnings": [],
+            }
+            corrected_site = {
+                **baseline_site,
+                "counts": {
+                    "target_canonical_games": 1,
+                    "target_source_location_lost": 0,
+                },
+                "examples": {},
+                "status": "PASS", "errors": [], "warnings": [],
+            }
             with (
                 patch.object(onboard_school, "archive_approved_plan", return_value=archive),
                 patch.object(onboard_school, "run", return_value="site build mocked"),
+                patch.object(
+                    onboard_school, "capture_correction_site_report",
+                    side_effect=[baseline_site, corrected_site],
+                ),
             ):
                 result = onboard_school.execute_approved_in_place(root, approved)
             self.assertEqual(result["transaction_kind"], "SINGLE_GAME_IDENTITY_SITE")
