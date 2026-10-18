@@ -192,6 +192,7 @@ def run_gates(
     changed: list[str] | None = None,
     *,
     include_tests: bool = True,
+    correction_source_id: str = "",
 ) -> dict[str, str]:
     python = sys.executable
     outputs: dict[str, str] = {}
@@ -209,6 +210,10 @@ def run_gates(
                 "--check-package",
                 "--repo",
                 str(repo),
+                *(
+                    ["--source-game-id", correction_source_id]
+                    if correction_source_id else []
+                ),
             ],
         ),
         (
@@ -1142,7 +1147,13 @@ def transactional_apply(
                 "sealed apply attempted files outside the allow-list:\n  "
                 + "\n  ".join(forbidden)
             )
-        run_gates(rehearsal, approved["school_key"], changed, include_tests=True)
+        run_gates(
+            rehearsal, approved["school_key"], changed, include_tests=True,
+            correction_source_id=approved.get("summary", {}).get(
+                "correction_source_game_id", ""
+            ) if approved.get("summary", {}).get("correction_transaction_kind")
+                 == "SINGLE_GAME_IDENTITY_SITE" else "",
+        )
         copy_validated_changes(rehearsal, repo, after, changed)
 
     print("\n=== copied-state verification ===")
@@ -1151,6 +1162,10 @@ def transactional_apply(
         approved["school_key"],
         changed,
         include_tests=False,
+        correction_source_id=approved.get("summary", {}).get(
+            "correction_source_game_id", ""
+        ) if approved.get("summary", {}).get("correction_transaction_kind")
+             == "SINGLE_GAME_IDENTITY_SITE" else "",
     )
     output_dir.mkdir(parents=True, exist_ok=True)
     manifest = {
