@@ -863,8 +863,28 @@ def _prove_single_game_correction_boundary(
                 )
             )
         elif kind == "canonical":
-            authorized = prior.get(field) == current.get(field) == game_id
+            # Identity repointing may reverse lexicographic teams/scores and
+            # home designations; the reviewed site patch controls geography.
+            allowed = {
+                "team_a_key", "team_b_key", "team_a_score", "team_b_score",
+                "result_winner_team_key", "site_type",
+                "designated_home_team_key", "site_city", "site_state",
+                "venue_key", "venue_id", "notes",
+            }
+            authorized = (
+                prior.get(field) == current.get(field) == game_id
+                and all(
+                    prior.get(key) == current.get(key)
+                    for key in set(old_fields) - allowed
+                )
+            )
         else:
+            # Only metadata copied from the frozen changed source and the
+            # owner-reviewed site outcome may change in the linked assertion.
+            allowed = {
+                "normalized_opponent_key", "normalized_opponent_name",
+                "opponent_current_d1", "state", "notes",
+            }
             authorized = (
                 prior.get("source_program_key") == school
                 and current.get("source_program_key") == school
@@ -872,8 +892,10 @@ def _prove_single_game_correction_boundary(
                     == current.get("source_game_id") == source_id
                 and prior.get("canonical_game_id")
                     == current.get("canonical_game_id") == game_id
-                and prior.get("raw_text") == current.get("raw_text")
-                and prior.get("assertion_id") == current.get("assertion_id")
+                and all(
+                    prior.get(key) == current.get(key)
+                    for key in set(old_fields) - allowed
+                )
             )
         if not authorized:
             raise WorkflowError(
