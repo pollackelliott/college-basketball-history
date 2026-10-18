@@ -28,6 +28,11 @@ from typing import Any
 
 import ingest_school
 
+from correction_site_nonregression import (
+    capture as capture_correction_site_report,
+    prove as prove_correction_site_nonregression,
+    verify_current as verify_correction_site_report,
+)
 from integration_freeze_guard import (
     SEMANTIC_SOURCE_GAME_FIELDS,
     assert_no_unapproved_semantic_drift,
@@ -193,6 +198,7 @@ def run_gates(
     *,
     include_tests: bool = True,
     correction_source_id: str = "",
+    correction_site_proof: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     python = sys.executable
     outputs: dict[str, str] = {}
@@ -266,7 +272,34 @@ def run_gates(
         )
     for label, command in commands:
         print(f"\n=== {label} ===")
-        outputs[label] = run(command, cwd=repo, label=label)
+        if label == "site_completeness" and correction_site_proof is not None:
+            if not correction_source_id:
+                raise WorkflowError("correction site proof lacks source identity")
+            # The independent gate STILL runs and emits its full report.
+            failure = None
+            try:
+                run(command, cwd=repo, label=label, echo=False)
+            except WorkflowError as exc:
+                failure = str(exc)
+            report_path = (
+                repo / ".onboarding" / school_key / "implementation-site-gate.json"
+            )
+            if not report_path.is_file():
+                raise WorkflowError("independent site gate produced no durable report")
+            independent = json.loads(report_path.read_text(encoding="utf-8"))
+            full = capture_correction_site_report(repo, school_key)
+            verify_correction_site_report(full, correction_site_proof, school_key)
+            if independent["status"] != full["status"] or (
+                (failure is None) != (full["status"] == "PASS")
+            ):
+                raise WorkflowError("independent site gate status conflicts with proof")
+            outputs[label] = (
+                "CORRECTION NONREGRESSION PASS; independent full site gate "
+                + full["status"] + "; inherited published debt remains visible."
+            )
+            print(outputs[label])
+        else:
+            outputs[label] = run(command, cwd=repo, label=label)
     if changed is not None:
         bad = whitespace_errors(repo, changed)
         if bad:
@@ -946,6 +979,7 @@ def _execute_single_game_correction(
         raise WorkflowError("invalid sealed two-decision correction-only scope")
 
     before = _single_game_correction_snapshot(repo, school)
+    before_site = capture_correction_site_report(repo, school)
     print("\n=== correction-only identity retarget ===")
     identity = apply_pre_ingest_correction_identity_patches(repo, approved)
     print(json.dumps(identity, sort_keys=True))
@@ -976,7 +1010,15 @@ def _execute_single_game_correction(
     )
     if first != site_hashes(repo):
         raise WorkflowError("correction site build was not deterministic")
+    site_proof = prove_correction_site_nonregression(
+        before_site, capture_correction_site_report(repo, school), gid,
+    )
+    print(
+        "PASS: correction site nonregression; inherited full-gate status: "
+        + site_proof["corrected_site_status"]
+    )
     return {
+        "correction_site_nonregression": site_proof,
         "correction_identity_patches": identity,
         "reconciliation": reconciliation,
         "transaction_kind": "SINGLE_GAME_IDENTITY_SITE",
@@ -1340,7 +1382,8 @@ def transactional_apply(
         run_gates(
             rehearsal, approved["school_key"], changed, include_tests=True,
             **({
-                "correction_source_id": approved["summary"]["correction_source_game_id"]
+                "correction_source_id": approved["summary"]["correction_source_game_id"],
+                "correction_site_proof": execution["correction_site_nonregression"],
             } if approved.get("summary", {}).get("correction_transaction_kind")
                    == "SINGLE_GAME_IDENTITY_SITE" else {}),
         )
@@ -1353,7 +1396,8 @@ def transactional_apply(
         changed,
         include_tests=False,
         **({
-            "correction_source_id": approved["summary"]["correction_source_game_id"]
+            "correction_source_id": approved["summary"]["correction_source_game_id"],
+            "correction_site_proof": execution["correction_site_nonregression"],
         } if approved.get("summary", {}).get("correction_transaction_kind")
                == "SINGLE_GAME_IDENTITY_SITE" else {}),
     )
