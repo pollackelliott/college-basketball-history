@@ -476,6 +476,7 @@ def _correction_unchanged_published_source_ids(
             ["git", "show", f"{research_base_sha}:{relative}"],
             cwd=repo,
             text=True,
+            encoding="utf-8-sig",
             stderr=subprocess.PIPE,
         )
     except (OSError, subprocess.CalledProcessError) as exc:
@@ -1599,7 +1600,7 @@ def _published_correction_opponent_rows(
     try:
         raw = subprocess.check_output(
             ["git", "show", f"{research_base_sha}:schools/{school_key}/source-games.csv"],
-            cwd=repo, text=True, stderr=subprocess.PIPE,
+            cwd=repo, text=True, encoding="utf-8-sig", stderr=subprocess.PIPE,
         )
     except (OSError, subprocess.CalledProcessError) as exc:
         raise WorkflowError("cannot inspect correction's immutable opponent baseline") from exc
