@@ -1353,6 +1353,14 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--source-game-id",
+        default="",
+        help=(
+            "Limit --check-package dry-run/no-op verification to one existing "
+            "source-game ID; never supported for --apply."
+        ),
+    )
+    parser.add_argument(
         "--identity-decisions",
         type=Path,
         default=None,
@@ -1363,6 +1371,8 @@ def main() -> int:
     )
     parser.add_argument("--repo", type=Path, default=None)
     args = parser.parse_args()
+    if args.source_game_id and (not args.check_package or args.apply):
+        parser.error("--source-game-id is restricted to --check-package without --apply")
 
     repo_root = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
     source_path = repo_root / "schools" / args.school_key / "source-games.csv"
@@ -1433,6 +1443,15 @@ def main() -> int:
         history_start,
         history_intervals,
     )
+    if args.source_game_id:
+        matches = [
+            row for row in sources
+            if row.get("source_game_id", "").strip() == args.source_game_id
+        ]
+        if len(matches) != 1:
+            print("FAIL: scoped no-op requires exactly one in-scope source-game ID")
+            return 1
+        sources = matches
 
     index: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
     canonical_by_id = {}

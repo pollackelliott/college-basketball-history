@@ -24,7 +24,7 @@ from integration_freeze_guard import (  # noqa: E402
 
 SOURCE_FIELDS = list(dict.fromkeys([
     "source_game_id", "source_program_key",
-    "normalized_opponent_key", "normalized_opponent_name",
+    "normalized_opponent_key", "normalized_opponent_name", "notes",
     *SEMANTIC_SOURCE_GAME_FIELDS,
 ]))
 
@@ -312,6 +312,135 @@ class CorrectionIdentityTests(unittest.TestCase):
             )[0]
             self.assertEqual((assertion_row["city"], assertion_row["state"]),
                              ("Lexington", "KY"))
+
+    def test_one_game_sealed_execution_changes_only_authorized_records(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            identity_decisions, projected = self.reviews(root)
+            assertions = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            sites = plan._post_publication_site_review_decisions(
+                root, "tennessee",
+                plan.read_csv(root / "schools/tennessee/source-games.csv"),
+                projected,
+                {("tennessee", "TENRAW-00136"): assertions},
+                {"CBBG-0020298": assertions},
+            )
+            self.assertEqual((len(identity_decisions), len(sites)), (1, 1))
+            site = {
+                **sites[0],
+                "decision": "APPLY_CANONICAL_PATCH",
+                "resolution_basis": "Frozen Lexington, KY opponent-home site",
+                "canonical_patch": {
+                    "site_type": "TEAM_A_HOME", "site_city": "Lexington",
+                    "site_state": "KY", "venue_id": "", "venue_key": "",
+                },
+                "source_patch": {},
+            }
+            approved = self.approved(identity_decisions[0])
+            approved["decisions"].append(site)
+            approved["summary"] = {
+                "correction_transaction_kind": "SINGLE_GAME_IDENTITY_SITE",
+                "correction_source_game_id": "TENRAW-00136",
+                "correction_canonical_game_id": "CBBG-0020298",
+            }
+            write_table(root / "data/reconciliation/discrepancies.csv",
+                        ingest_school.DISCREPANCY_FIELDS, [])
+            write_table(root / "data/reference/venues.csv",
+                        ["venue_id", "venue_key", "city", "state"], [])
+            archive = root / "data/reconciliation/onboarding-decisions/test.json"
+            baseline_site = {
+                "school_key": "tennessee",
+                "history_start_season": "1908-1909",
+                "source_validation_scope": {
+                    "mode": "CORRECTION_DELTA", "scoped_source_games": 1,
+                    "correction_source_games": 1,
+                },
+                "source_site_counts": {"rows": 1},
+                "counts": {
+                    "target_canonical_games": 1,
+                    "target_source_location_lost": 1,
+                },
+                "examples": {
+                    "target_source_location_lost": ["CBBG-0020298"],
+                },
+                "status": "FAIL", "errors": ["legacy gap"], "warnings": [],
+            }
+            corrected_site = {
+                **baseline_site,
+                "counts": {
+                    "target_canonical_games": 1,
+                    "target_source_location_lost": 0,
+                },
+                "examples": {},
+                "status": "PASS", "errors": [], "warnings": [],
+            }
+            with (
+                patch.object(onboard_school, "archive_approved_plan", return_value=archive),
+                patch.object(onboard_school, "run", return_value="site build mocked"),
+                patch.object(
+                    onboard_school, "capture_correction_site_report",
+                    side_effect=[baseline_site, corrected_site],
+                ),
+            ):
+                result = onboard_school.execute_approved_in_place(root, approved)
+            self.assertEqual(result["transaction_kind"], "SINGLE_GAME_IDENTITY_SITE")
+            game = plan.read_csv(root / "data/canonical/games.csv")[0]
+            a = plan.read_csv(root / "data/evidence/game-assertions.csv")[0]
+            src = plan.read_csv(root / "schools/tennessee/source-games.csv")[0]
+            self.assertEqual((game["team_a_key"], game["result_winner_team_key"]),
+                             ("georgetown-ky", "georgetown-ky"))
+            self.assertEqual((game["site_city"], game["site_state"]),
+                             ("Lexington", "KY"))
+            self.assertEqual((a["normalized_opponent_key"], a["state"]),
+                             ("georgetown-ky", "KY"))
+            self.assertEqual(src["raw_text"], source()["raw_text"])
+            self.assertEqual(plan.read_csv(root / "data/reconciliation/discrepancies.csv"), [])
+
+    def test_single_game_delta_guard_rejects_any_other_game_or_discrepancy(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            write_table(root / "data/reconciliation/discrepancies.csv",
+                        ingest_school.DISCREPANCY_FIELDS, [])
+            old = onboard_school._single_game_correction_snapshot(root, "tennessee")
+            other = canonical(canonical_game_id="CBBG-9999999", game_date="1919-03-03")
+            cp = root / "data/canonical/games.csv"
+            write_table(cp, ingest_school.CANONICAL_FIELDS, [canonical(), other])
+            after = onboard_school._single_game_correction_snapshot(root, "tennessee")
+            with self.assertRaisesRegex(plan.WorkflowError, "canonical row IDs"):
+                onboard_school._prove_single_game_correction_boundary(
+                    old, after, source_id="TENRAW-00136",
+                    game_id="CBBG-0020298", school="tennessee",
+                )
+            write_table(cp, ingest_school.CANONICAL_FIELDS, [canonical()])
+            disc = {field: "" for field in ingest_school.DISCREPANCY_FIELDS}
+            disc["discrepancy_id"] = "DISC-999999"
+            write_table(root / "data/reconciliation/discrepancies.csv",
+                        ingest_school.DISCREPANCY_FIELDS, [disc])
+            after = onboard_school._single_game_correction_snapshot(root, "tennessee")
+            with self.assertRaisesRegex(plan.WorkflowError, "discrepancy row IDs"):
+                onboard_school._prove_single_game_correction_boundary(
+                    old, after, source_id="TENRAW-00136",
+                    game_id="CBBG-0020298", school="tennessee",
+                )
+
+    def test_single_game_delta_guard_prohibits_changes_to_raw_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            write_table(root / "data/reconciliation/discrepancies.csv",
+                        ingest_school.DISCREPANCY_FIELDS, [])
+            old = onboard_school._single_game_correction_snapshot(root, "tennessee")
+            source_path = root / "schools/tennessee/source-games.csv"
+            changed = source("georgetown-ky", "KY", raw_text="invented evidence")
+            write_table(source_path, SOURCE_FIELDS, [changed])
+            after = onboard_school._single_game_correction_snapshot(root, "tennessee")
+            with self.assertRaisesRegex(plan.WorkflowError, "unauthorized source evidence"):
+                onboard_school._prove_single_game_correction_boundary(
+                    old, after, source_id="TENRAW-00136",
+                    game_id="CBBG-0020298", school="tennessee",
+                )
 
     def test_lexicographic_flip_preserves_score_winner_and_site(self):
         with tempfile.TemporaryDirectory() as temp:

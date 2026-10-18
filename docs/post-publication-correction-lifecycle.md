@@ -115,6 +115,32 @@ The implementation site gate remains full-strength for canonical/public output. 
 
 Stage 2 source/global assertion synchronization also recognizes one narrow correction-only intermediate state. When exactly one existing global assertion still reproduces the immutable pre-correction semantic snapshot, the tracked correction source row exactly reproduces the post-correction Integration Freeze snapshot, and the assertion mismatch is exactly the authorized baseline-to-frozen delta for a listed correction source ID, preflight records that mismatch as pending correction reconciliation rather than blocking before the decision universe can be generated. The corresponding discrepancy decision remains in Gate 1 and the global assertion is not synchronized until the ordinary sealed apply authorizes it. Any out-of-scope assertion drift, incorrect original assertion value, extra mismatched field, multiple assertion, untrusted snapshot, or modified correction row remains a blocker. Standard new-school manifests do not activate these correction-only exceptions and retain the existing full-source behavior unchanged.\n\nDisposable recommendation rehearsal, pre-seal technical rehearsal, and sealed apply must preserve this exact correction-only authority boundary. The shared repository-copy helper continues to exclude all ignored `.onboarding/` state by default; for a verified correction Integration Freeze it transfers only that school's exact validated `integration-freeze.json` into the temporary repository. Verification checks the school/status, correction IDs, both hashed semantic snapshots, the authorized pre/post delta, and the tracked frozen source ledger before copying. No other onboarding artifact is transferred, no authority is reconstructed in the copy, and the copy remains outside the tracked apply allow-list. Invalid correction context fails closed; ordinary new-school copies retain full-source site validation. Both disposable and copied-state publication/canonical site gates remain full-strength.
 
+### Correction-only existing-publication site nonregression
+
+An *already published* program's exact frozen one-game identity/site correction
+may expose unrelated pre-existing canonical site-completeness debt. The
+independent full-strength `implementation_site_gate.py` must still execute,
+preserve its report, and report those existing failures honestly; it is **not**
+marked as a general site-completeness PASS.
+
+For the strictly two-decision `SINGLE_GAME_IDENTITY_SITE` transaction only, a
+separate correction-acceptance proof may establish that no site failure was
+introduced or worsened. It requires the validated correction Integration
+Freeze; exactly one source, canonical and assertion row updated; no changes to
+other source/canonical/assertion rows or discrepancy records; identical
+canonical-game census and source-validation scope; and complete, untruncated
+before/after site-failure populations compared by category **and canonical
+game ID**, not merely equal counts. Any newly failing game/category, added
+source-side Research debt, site information loss, broader source mutation,
+or changed independent post-apply site report stops the transaction.
+
+The proof is generated in disposable rehearsal, rerun by the permanent site
+gate, and checked again after the sealed transaction copies its validated
+changes. The remaining historical site debt is explicitly recorded for
+separate remediation; it is neither waived for new changes nor silently
+reclassified as researched/complete. This narrow correction transaction
+does not authorize a new-school exception or retroactive Tennessee research.
+
 ## 7. Stop conditions
 
 Stop rather than broadening the correction when any of these occurs:

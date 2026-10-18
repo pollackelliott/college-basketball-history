@@ -2910,6 +2910,64 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         "already_public": program.get("public_page_enabled") == "Yes",
     }
 
+    # An already-published, frozen single-game opponent retarget must not turn
+    # every unrelated, previously accepted source/canonical residual into a new
+    # correction transaction. This narrow branch deliberately rejects other
+    # correction topologies until a separately tested transaction exists.
+    if correction_identity_decisions:
+        context = _verified_correction_identity_context(repo, school_key)
+        ids = set(context["correction_source_game_ids"]) if context else set()
+        if len(ids) != 1 or len(correction_identity_decisions) != 1 or len(correction_site_decisions) != 1:
+            raise WorkflowError(
+                "single-game correction requires exactly one frozen source identity "
+                "and one canonical site review; broader corrections need explicit tooling"
+            )
+        identity = correction_identity_decisions[0]
+        site = correction_site_decisions[0]
+        source_id = next(iter(ids))
+        game_id = identity["canonical_game_id"]
+        if (
+            identity["source_game_id"] != source_id
+            or site["source_game_id"] != source_id
+            or site["canonical_game_id"] != game_id
+        ):
+            raise WorkflowError("correction identity/site decisions target different games")
+
+        # The winner disagreement is already resolved by the sealed identity
+        # retarget, which rewrites the old opponent winner key. It must not be
+        # applied again as a generic discrepancy after the old key disappears.
+        duplicates = [
+            d for d in decisions
+            if d.get("category") == "discrepancy"
+            and d.get("source_game_id") == source_id
+            and d.get("canonical_game_id") == game_id
+            and d.get("field_name") == "result_winner_team_key"
+            and d.get("source_value") == identity["new_opponent_key"]
+            and d.get("canonical_value") == identity["old_opponent_key"]
+        ]
+        related = [
+            d for d in decisions
+            if d.get("source_game_id") == source_id
+            or d.get("canonical_game_id") == game_id
+        ]
+        if set(d["decision_id"] for d in related) != {
+            identity["decision_id"], site["decision_id"],
+            *(d["decision_id"] for d in duplicates),
+        }:
+            raise WorkflowError(
+                "correction has additional same-game reviews; single-game "
+                "identity/site transaction cannot silently omit them"
+            )
+        excluded_count = len(decisions) - len(related)
+        decisions = [identity, site]
+        summary["correction_transaction_kind"] = "SINGLE_GAME_IDENTITY_SITE"
+        summary["correction_source_game_id"] = source_id
+        summary["correction_canonical_game_id"] = game_id
+        summary["inherited_unrelated_reviews_excluded"] = excluded_count
+        summary["discrepancies_to_add"] = 0
+        summary["new_canonical_games"] = 0
+        summary["assertions_to_add"] = 0
+
     return {
         "schema_version": PLAN_SCHEMA_VERSION,
         "workflow_version": WORKFLOW_VERSION,

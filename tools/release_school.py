@@ -25,7 +25,9 @@ from typing import Any
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
-from onboard_school import run_gates, whitespace_errors
+from onboard_school import (
+    run_gates, whitespace_errors, correction_gate_kwargs_from_manifest,
+)
 from onboarding_plan import WorkflowError, read_csv
 
 
@@ -369,7 +371,10 @@ def prepare(repo: Path, school_key: str, artifacts: Path, timeout: int) -> int:
 
     paths = verify_change_boundary(repo, manifest)
     print("=== final local release gate ===")
-    run_gates(repo, school_key, paths, include_tests=True)
+    run_gates(
+        repo, school_key, paths, include_tests=True,
+        **correction_gate_kwargs_from_manifest(manifest, school_key),
+    )
     stage_exact_paths(repo, paths)
     display = program_display_name(repo, school_key)
     run(
@@ -538,7 +543,11 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
             f"verification ({merge_sha} != {expected_merge_sha})"
         )
     print("\n=== merged-main reproducibility ===")
-    run_gates(repo, school_key, [], include_tests=True)
+    manifest = load_json(artifacts / "release-manifest.json")
+    run_gates(
+        repo, school_key, [], include_tests=True,
+        **correction_gate_kwargs_from_manifest(manifest, school_key),
+    )
     deployment = wait_for_deployment(
         repo,
         repository_slug(repo),
