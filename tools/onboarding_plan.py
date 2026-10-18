@@ -509,6 +509,59 @@ def _correction_unchanged_published_source_ids(
     return unchanged
 
 
+def _correction_inherited_current_d1_errors(repo: Path, school_key: str) -> set[str]:
+    """Return only opponent metadata errors proven present in published baseline.
+
+    This applies solely to a verified post-publication correction whose complete
+    opponents.csv is byte-identical to the immutable published package. A mismatch
+    introduced by a changed current-D1 registry cannot be inherited from baseline.
+    Ordinary onboarding and changed opponent packages retain strict validation.
+    """
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        return set()
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("workflow_kind") != CORRECTION_WORKFLOW_KIND:
+        return set()
+    if (
+        manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+    ):
+        raise WorkflowError("invalid correction Integration Freeze for opponent metadata")
+
+    expected = str(manifest.get("package_member_sha256", {}).get("opponents.csv", ""))
+    if not re.fullmatch(r"[0-9a-f]{64}", expected):
+        return set()  # Missing authority cannot grandfather any opponent errors.
+    current_file = repo / "schools" / school_key / "opponents.csv"
+    if sha256_file(current_file) != expected:
+        return set()
+    research_base = str(manifest.get("research_base_sha", ""))
+    if not re.fullmatch(r"[0-9a-f]{40}", research_base):
+        raise WorkflowError("invalid published correction baseline SHA")
+
+    try:
+        published_opponents = subprocess.check_output(
+            ["git", "show", f"{research_base}:schools/{school_key}/opponents.csv"],
+            cwd=repo, stderr=subprocess.PIPE,
+        )
+        published_programs = subprocess.check_output(
+            ["git", "show", f"{research_base}:data/reference/programs.csv"],
+            cwd=repo, stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise WorkflowError("cannot read immutable correction opponent/D1 baseline") from exc
+
+    if published_opponents != current_file.read_bytes():
+        return set()
+
+    def rows(data: bytes) -> list[dict[str, str]]:
+        return list(csv.DictReader(io.StringIO(data.decode("utf-8-sig"), newline="")))
+
+    return set(current_d1_opponent_key_errors(
+        rows(published_programs), rows(published_opponents)
+    ))
+
+
 def _correction_assertion_reconciliation_context(
     repo: Path,
     school_key: str,
@@ -822,7 +875,13 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
             location_pair_status(row.get("city", ""), row.get("state", "")) == "partial"
             and not has_supported_foreign_locality(row)
         ):
-            errors.append(f"{label}: normalized city/state must be both populated or both blank")
+            message = f"{label}: normalized city/state must be both populated or both blank"
+            if label in correction_legacy_ids:
+                warnings.append(
+                    message + " (unchanged published legacy debt outside this correction)"
+                )
+            else:
+                errors.append(message)
         city = row.get("city", "").strip()
         if city.casefold() in city_contamination_names:
             errors.append(f"{label}: normalized city contains a venue name")
@@ -864,7 +923,14 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
                 errors.append(f"{filename} line {line_number}: wrong source_program_key {value!r}")
 
     programs = read_csv(repo / "data/reference/programs.csv")
-    errors.extend(current_d1_opponent_key_errors(programs, opponents))
+    inherited_d1_errors = _correction_inherited_current_d1_errors(repo, school_key)
+    for message in current_d1_opponent_key_errors(programs, opponents):
+        if message in inherited_d1_errors:
+            warnings.append(
+                message + " (unchanged published opponent metadata outside this correction)"
+            )
+        else:
+            errors.append(message)
 
     program_registry = {
         row.get("program_key", "").strip(): row
