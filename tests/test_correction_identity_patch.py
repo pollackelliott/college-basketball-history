@@ -24,7 +24,7 @@ from integration_freeze_guard import (  # noqa: E402
 
 SOURCE_FIELDS = list(dict.fromkeys([
     "source_game_id", "source_program_key",
-    "normalized_opponent_key", "normalized_opponent_name",
+    "normalized_opponent_key", "normalized_opponent_name", "notes",
     *SEMANTIC_SOURCE_GAME_FIELDS,
 ]))
 
