@@ -179,6 +179,32 @@ def allowed_apply_path(path: str, school_key: str, approved_hash: str) -> bool:
     return path in exact or path.startswith("site/data/")
 
 
+def correction_gate_kwargs_from_manifest(
+    manifest: dict[str, Any], school_key: str,
+) -> dict[str, Any]:
+    """Carry the exact sealed correction proof into verify/Preview/Production gates."""
+    summary = manifest.get("summary", {})
+    if summary.get("correction_transaction_kind") != "SINGLE_GAME_IDENTITY_SITE":
+        return {}
+    execution = manifest.get("execution", {})
+    proof = execution.get("correction_site_nonregression", {})
+    source_id = summary.get("correction_source_game_id", "")
+    game_id = summary.get("correction_canonical_game_id", "")
+    if (
+        manifest.get("school_key") != school_key
+        or not source_id or not game_id
+        or not isinstance(proof, dict)
+        or proof.get("mode") != "SINGLE_GAME_CORRECTION_NONREGRESSION"
+        or proof.get("school_key") != school_key
+        or proof.get("target_game_id") != game_id
+    ):
+        raise WorkflowError("invalid sealed correction site proof in release manifest")
+    return {
+        "correction_source_id": source_id,
+        "correction_site_proof": proof,
+    }
+
+
 def whitespace_errors(repo: Path, paths: list[str]) -> list[str]:
     errors: list[str] = []
     for relative in paths:
@@ -1558,7 +1584,18 @@ def main() -> int:
             for line in git(repo, "diff", "--name-only", "HEAD").splitlines()
             if line.strip()
         ]
-        run_gates(repo, args.school_key, changed, include_tests=True)
+        manifest_path = output_dir / "release-manifest.json"
+        gate_kwargs = {}
+        if manifest_path.is_file():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if manifest.get("school_key") != args.school_key:
+                raise WorkflowError("verification manifest belongs to another school")
+            gate_kwargs = correction_gate_kwargs_from_manifest(
+                manifest, args.school_key,
+            )
+        run_gates(
+            repo, args.school_key, changed, include_tests=True, **gate_kwargs
+        )
         print("\nPASS: verification suite completed.")
         return 0
     except (WorkflowError, FileNotFoundError, KeyError, ValueError) as exc:
