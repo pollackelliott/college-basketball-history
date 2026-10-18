@@ -20295,7 +20295,7 @@ CBBG-0020294,1918-1919,1919-02-18,EXACT,tennessee,union-college-ky,61,20,tenness
 CBBG-0020295,1918-1919,1919-02-19,EXACT,maryville-tn,tennessee,21,18,maryville-tn,0,TEAM_B_HOME,tennessee,knoxville-ymca-gymnasium,VEN-000106,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020296,1918-1919,1919-02-20,EXACT,chattanooga,tennessee,27,22,chattanooga,0,TEAM_A_HOME,chattanooga,,,Chattanooga,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020297,1918-1919,1919-02-26,EXACT,centre,tennessee,55,26,centre,0,TEAM_A_HOME,centre,,,Danville,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0020298,1918-1919,1919-02-27,EXACT,georgetown,tennessee,34,33,georgetown,0,TEAM_A_HOME,georgetown,,,Lexington,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0020298,1918-1919,1919-02-27,EXACT,georgetown-ky,tennessee,34,33,georgetown-ky,0,TEAM_A_HOME,georgetown-ky,,,Lexington,KY,REGULAR_SEASON,,,,PROVISIONAL,[OWNER_APPROVED_CORRECTION_IDENTITY school=tennessee source=TENRAW-00136 old=georgetown new=georgetown-ky decision=CORRECTION-IDENTITY-TENRAW-00136-CBBG-0020298 plan=34b549cd868d]; [OWNER_APPROVED_CORRECTION_SITE_PATCH school=tennessee source=TENRAW-00136 decision=CORRECTION-SITE-TENRAW-00136-CBBG-0020298 plan=34b549cd868d]
 CBBG-0020299,1918-1919,1919-03-01,EXACT,tennessee,union-college-ky,35,53,union-college-ky,0,TEAM_B_HOME,union-college-ky,,,Barbourville,KY,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020300,1919-1920,1920-01-17,EXACT,jellico-ymca,tennessee,19,49,tennessee,0,TEAM_B_HOME,tennessee,knoxville-ymca-gymnasium,VEN-000106,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0020301,1919-1920,1920-01-19,EXACT,tennessee,tusculum,41,35,tennessee,0,TEAM_A_HOME,tennessee,knoxville-ymca-gymnasium,VEN-000106,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
