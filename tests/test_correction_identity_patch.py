@@ -346,6 +346,8 @@ class CorrectionIdentityTests(unittest.TestCase):
             }
             write_table(root / "data/reconciliation/discrepancies.csv",
                         ingest_school.DISCREPANCY_FIELDS, [])
+            write_table(root / "data/reference/venues.csv",
+                        ["venue_id", "venue_key", "city", "state"], [])
             archive = root / "data/reconciliation/onboarding-decisions/test.json"
             with (
                 patch.object(onboard_school, "archive_approved_plan", return_value=archive),
