@@ -824,6 +824,7 @@ def _prove_single_game_correction_boundary(
         "source": "source_game_id",
         "assertion": "assertion_id",
     }
+    changed_counts: dict[str, int] = {}
     for kind, field in keys.items():
         old_fields, old_rows = before[kind]
         new_fields, new_rows = after[kind]
@@ -846,9 +847,12 @@ def _prove_single_game_correction_boundary(
                     "single-game correction created/changed unrelated discrepancies"
                 )
             continue
+        changed_counts[kind] = len(altered)
+        if not altered:
+            continue
         if len(altered) != 1:
             raise WorkflowError(
-                f"single-game correction requires one {kind} row, got {len(altered)}"
+                f"single-game correction changed multiple {kind} rows"
             )
         prior, current = altered[0]
         if kind == "source":
@@ -900,6 +904,12 @@ def _prove_single_game_correction_boundary(
         if not authorized:
             raise WorkflowError(
                 f"single-game correction changed unauthorized {kind} evidence"
+            )
+    for kind in ("source", "canonical", "assertion"):
+        if changed_counts.get(kind, 0) != 1:
+            raise WorkflowError(
+                f"single-game correction requires one {kind} row, "
+                f"got {changed_counts.get(kind, 0)}"
             )
 
 
