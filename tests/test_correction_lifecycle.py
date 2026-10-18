@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import subprocess
 import sys
@@ -353,6 +354,121 @@ class CorrectionStage2LegacyPackageScopeTests(unittest.TestCase):
             self.assertEqual(
                 report["counts"]["correction_unchanged_published_rows"], 0
             )
+
+    def test_legacy_partial_location_is_warning_only_when_unmodified(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _, legacy = self.make_repo(root)
+            legacy = dict(legacy, curated_venue_name="Example Arena", state="")
+            self.write_package(root, [legacy])
+            self.git(root, "add", "schools/example")
+            self.git(root, "commit", "-m", "published incomplete location")
+            published = self.git(root, "rev-parse", "HEAD")
+            correction = row("NEW", curated_venue_name="Example Arena")
+            self.write_package(root, [legacy, correction])
+            self.write_manifest(root, published, ["NEW"])
+
+            report = self.validate(root)
+            debt = "OLD: normalized city/state must be both populated or both blank"
+            self.assertNotIn(debt, report["errors"])
+            self.assertTrue(any(debt in item for item in report["warnings"]))
+            self.assertEqual(report["counts"]["correction_unchanged_published_rows"], 1)
+
+            changed_legacy = dict(legacy, normalized_opponent_name="Changed")
+            self.write_package(root, [changed_legacy, correction])
+            report = self.validate(root)
+            self.assertIn(debt, report["errors"])
+            self.assertEqual(report["counts"]["correction_unchanged_published_rows"], 0)
+
+            changed_correction = dict(correction, city="New City", state="")
+            self.write_package(root, [legacy, changed_correction])
+            report = self.validate(root)
+            self.assertIn(
+                "NEW: normalized city/state must be both populated or both blank",
+                report["errors"],
+            )
+
+    def test_published_current_d1_debt_requires_exact_opponents_and_old_registry(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.make_repo(root)
+            old = row("OLD", curated_venue_name="Example Arena")
+            self.write_package(root, [old])
+            opponents_path = root / "schools/example/opponents.csv"
+            opponent_fields = [
+                "source_program_key", "source_opponent_label",
+                "canonical_opponent_key", "current_d1",
+            ]
+            opponent_rows = [
+                {
+                    "source_program_key": "example", "source_opponent_label": "Opponent",
+                    "canonical_opponent_key": "opponent", "current_d1": "No",
+                },
+                {
+                    "source_program_key": "example",
+                    "source_opponent_label": "South Carolina State",
+                    "canonical_opponent_key": "south-carolina-state", "current_d1": "No",
+                },
+            ]
+            programs_path = root / "data/reference/programs.csv"
+            program_fields = ["program_key", "current_d1"]
+            program_rows = [
+                {"program_key": "example", "current_d1": "Yes"},
+                {"program_key": "opponent", "current_d1": "No"},
+                {"program_key": "south-carolina-state", "current_d1": "Yes"},
+            ]
+            write_csv(opponents_path, opponent_fields, opponent_rows)
+            write_csv(programs_path, program_fields, program_rows)
+            self.git(root, "add", "schools/example", "data/reference")
+            self.git(root, "commit", "-m", "published D1 metadata discrepancy")
+            base = self.git(root, "rev-parse", "HEAD")
+            self.write_manifest(root, base, ["UNRELATED_CORRECTION"])
+            manifest_path = root / ".onboarding/example/integration-freeze.json"
+            manifest = json.loads(manifest_path.read_text())
+            manifest["package_member_sha256"] = {
+                "opponents.csv": hashlib.sha256(opponents_path.read_bytes()).hexdigest()
+            }
+            manifest_path.write_text(json.dumps(manifest))
+            def validate_d1():
+                with (
+                    patch.object(onboarding_plan, "historical_opponent_display_conflicts", return_value={}),
+                    patch.object(onboarding_plan, "history_scope_errors", return_value=[]),
+                    patch.object(onboarding_plan, "history_errors", return_value=[]),
+                ):
+                    return onboarding_plan.validate_package(root, "example")
+
+            debt = (
+                "opponent key 'south-carolina-state' is current D1 in programs.csv "
+                "but the school package does not mark it current D1"
+            )
+            report = validate_d1()
+            self.assertEqual(report["errors"], [])
+            self.assertTrue(any(debt in item for item in report["warnings"]))
+
+            # Any changed opponent package must re-enable strict D1 checking.
+            altered = [dict(item) for item in opponent_rows]
+            altered[1]["source_opponent_label"] = "Altered Identity"
+            write_csv(opponents_path, opponent_fields, altered)
+            report = validate_d1()
+            self.assertTrue(any(debt in item for item in report["errors"]))
+
+            write_csv(opponents_path, opponent_fields, opponent_rows)
+            # An issue newly introduced by registry change is not inherited.
+            new_programs = [dict(item) for item in program_rows]
+            new_programs[1]["current_d1"] = "Yes"
+            write_csv(programs_path, program_fields, new_programs)
+            report = validate_d1()
+            self.assertTrue(any(debt in item for item in report["warnings"]))
+            self.assertTrue(any(
+                "opponent key 'opponent' is current D1 in programs.csv" in item
+                for item in report["errors"]
+            ))
+
+            # Without correction authority, even old metadata debt blocks.
+            manifest_path.unlink()
+            write_csv(programs_path, program_fields, program_rows)
+            report = validate_d1()
+            self.assertTrue(any(debt in item for item in report["errors"]))
 
     def test_unchanged_published_missing_venue_is_warning_only_for_correction(self):
         with tempfile.TemporaryDirectory() as td:
