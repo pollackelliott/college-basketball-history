@@ -131,6 +131,10 @@ location-first historical standard: preserve supported event/city/state and acce
 building when the same obvious evidence directly supplies it; once city/state is known, do
 not continue solely to recover the building. Surviving building blanks are nonblocking
 historical enrichment debt. This shortcut applies only to regular-season neutral rows.
+Only the explicit owner-authorized, per-row opponent-host campus
+conference-tournament road exception in docs/site-completeness-protocol.md
+may retain unresearched opponent-building debt; it does not authorize
+any inferred venue or waive NCAA/NIT or other postseason obligations.
 NCAA, NIT, conference-tournament, and other postseason exact venues remain active Stage 3B
 research obligations for U.S. sites and must be researched to exhaustion. The
 outside-the-United-States neutral locality-sufficient exception applies to postseason exact

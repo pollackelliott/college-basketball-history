@@ -200,6 +200,50 @@ def _research_accounting(
             continue
         return status, _first(row, *basis_fields)
 
+    # Accepted historical-location-only neutral building debt is not a new
+    # absence of research.  Preserve the exact checkpoint basis, not merely
+    # a generic status inferred from the missing building.
+    historical = row.get("neutral_venue_research_status", "").strip().upper()
+    if historical == "HISTORICAL_LOCATION_ACCEPTED_EXACT_BUILDING_ENRICHMENT_UNRESOLVED":
+        site = normalize_site(_first(row, "curated_site_type", "stage3b_site_type",
+                                    "stage3a_final_site_type", "site_type"))
+        game_type = normalize_game_type(_first(row, "curated_game_type",
+                                               "game_type", "structured_game_type"))
+        season = _first(row, "season_label", "season")
+        city = _first(row, "curated_venue_city", "curated_city", "city")
+        state = _first(row, "curated_venue_state", "curated_state", "state")
+        venue = _first(row, "curated_venue_name", "accepted_venue_name")
+        basis = _first(row, "neutral_venue_research_basis")
+        if (game_type == "REGULAR_SEASON" and site == "NEUTRAL"
+                and season[:4].isdigit() and int(season[:4]) <= 1995
+                and city and state and not venue and basis):
+            return "RESEARCHED_PARTIAL", (
+                f"Accepted historical-neutral location {city}, {state}: {basis}; "
+                "exact-building enrichment remains unresolved under location-first policy."
+            )
+        return "", ""  # Projection parity preflight will fail this unsupported shape.
+
+    # Narrow owner-approved campus-road conference-tournament boundary.
+    # This is NOT a claim of exhaustive venue research, or a general waiver
+    # for NIT/NCAA/neutral/postseason sites.
+    postseason = row.get("postseason_site_research_status", "").strip().upper()
+    if postseason == "OPPONENT_HOME_VENUE_OUTSIDE_TARGET_RESEARCH_RESPONSIBILITY":
+        site = normalize_site(_first(row, "curated_site_type", "stage3b_site_type",
+                                    "stage3a_final_site_type", "site_type"))
+        game_type = normalize_game_type(_first(row, "curated_game_type",
+                                               "game_type", "structured_game_type"))
+        basis = _first(row, "postseason_site_research_basis")
+        shared_row = _first(row, "postseason_shared_ref_source_row")
+        if (site == "OPPONENT_HOME" and game_type == "CONFERENCE_TOURNAMENT"
+                and basis.startswith("OWNER_EXPLICIT_NEC_ROAD_SITE_SCOPE")
+                and shared_row):
+            return "RESEARCHED_PARTIAL", (
+                "Owner-approved NEC campus-hosted road conference-tournament "
+                f"opponent-building research exclusion: {basis}; shared site "
+                f"reference row {shared_row}; not claimed research-exhausted."
+            )
+        return "", ""  # Fail closed for unrelated game/site/research shapes.
+
     # Preserve terminal historical site research across accepted schema eras.
     # The site classification, locality and blank venue must all be accepted;
     # never apply the historical building exception to postseason or modern rows.
@@ -227,7 +271,7 @@ def _research_accounting(
                     f"Accepted Stage 3A-3 modern tournament evidence: {basis}"
                     + (f"; {notes}" if notes else "")
                 )
-        season = _first(row, "season_label")
+        season = _first(row, "season_label", "season")
         city = _first(row, "stage3a_final_city", "accepted_city",
                       "curated_venue_city", "curated_city", "city", "venue_city")
         state = _first(row, "stage3a_final_state", "accepted_state",
@@ -431,6 +475,7 @@ def _projection(
             )
 
         research_status, research_basis = _research_accounting(row)
+        source_round, curated_round, round_note = _round_projection(row)
         literal_opponent_home = explicit_opponent_home_site(row)
 
         accepted_venue_key = _first(row, "accepted_venue_key")
@@ -459,7 +504,7 @@ def _projection(
                 "source_program_key": _first(row, "source_program_key") or school_key,
                 "source_era": _first(row, "source_era", "season_source"),
                 "season_label": project_season_label(
-                    _first(row, "season_label")
+                    _first(row, "season_label", "season")
                 ),
                 "game_date": _first(row, "game_date"),
                 "source_opponent_label": _first(
@@ -470,9 +515,9 @@ def _projection(
                 ),
                 "normalized_opponent_key": opponent_key,
                 "normalized_opponent_name": opponent_name,
-                "team_score": _first(row, "team_score"),
-                "opponent_score": _first(row, "opponent_score"),
-                "played_result": _first(row, "played_result", "on_court_result"),
+                "team_score": _first(row, "team_score", "wagner_points"),
+                "opponent_score": _first(row, "opponent_score", "opponent_points"),
+                "played_result": _first(row, "played_result", "on_court_result", "source_result"),
                 "overtime_periods": _first(row, "overtime_periods"),
                 "source_site_candidate": _first(
                     row, "source_site_candidate", "source_site_token"
@@ -543,14 +588,12 @@ def _projection(
                 "event_or_tournament": _first(
                     row, "event_or_tournament", "stage3a3_event_name"
                 ),
-                "source_round": _first(row, "source_round", "stage3b_source_round"),
+                "source_round": source_round,
                 "curated_game_type": normalize_game_type(
                     _first(row, "curated_game_type", "game_type", "structured_game_type")
                 ),
-                "curated_postseason_round": _first(
-                    row, "curated_postseason_round", "stage3b_postseason_round"
-                ),
-                "source_page": _first(row, "source_page", "source_pdf_page"),
+                "curated_postseason_round": curated_round,
+                "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
                     row, "raw_text", "source_raw_text"
                 ),
@@ -558,12 +601,83 @@ def _projection(
                 or "RESEARCH_ACCEPTED",
                 "administrative_status": administrative_status,
                 "administrative_note": administrative_note,
-                "notes": _first(row, "notes", "stage1_notes"),
+                "notes": " ".join(part for part in (
+                    _first(row, "notes", "stage1_notes"), round_note
+                ) if part),
                 "site_research_status": research_status,
                 "site_research_basis": research_basis if research_status else "",
             }
         )
+        defects.extend(_semantic_projection_defects(row, projected[-1]))
     return projected, defects
+
+
+def _round_projection(row: dict[str, str]) -> tuple[str, str, str]:
+    """Preserve accepted postseason detail without violating controlled round vocab.
+
+    For non-NCAA tournaments only Championship belongs in the curated field;
+    earlier-round detail remains in source_round and, if source wording differs,
+    in notes.  First Four -> Play-in is controlled-vocabulary normalization.
+    """
+    game_type = normalize_game_type(_first(row, "curated_game_type",
+                                           "game_type", "structured_game_type"))
+    accepted = _first(row, "curated_postseason_round",
+                      "stage3b_postseason_round", "postseason_round")
+    source = _first(row, "source_round", "stage3b_source_round")
+    if game_type == "NCAA_TOURNAMENT":
+        curated = "Play-in" if accepted == "First Four" else accepted
+    elif game_type in {"CONFERENCE_TOURNAMENT", "NIT", "POSTSEASON"}:
+        curated = accepted if accepted == "Championship" else ""
+    else:
+        curated = ""
+    evidence_note = (
+        f"Accepted Stage 3B postseason round: {accepted}."
+        if accepted and accepted != curated and source and accepted != source
+        else ""
+    )
+    return source or accepted, curated, evidence_note
+
+
+def _semantic_projection_defects(
+    parent: dict[str, str], projected: dict[str, str],
+) -> list[dict[str, str]]:
+    """Independent population-level anti-loss checks for accepted source facts."""
+    pairs = {
+        "season_label": ("season_label", "season"),
+        "team_score": ("team_score", "wagner_points"),
+        "opponent_score": ("opponent_score", "opponent_points"),
+        "played_result": ("played_result", "on_court_result", "source_result"),
+        "source_page": ("source_page", "source_pdf_page", "source_locator"),
+    }
+    defects = []
+    game_id = projected["source_game_id"]
+    for target, aliases in pairs.items():
+        original = _first(parent, *aliases)
+        if not original:
+            continue
+        expected = project_season_label(original) if target == "season_label" else original
+        if projected[target] != expected:
+            defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
+                            "source_game_id": game_id, "field": target})
+    accepted_round = _first(parent, "curated_postseason_round",
+                            "stage3b_postseason_round", "postseason_round")
+    if accepted_round and all(
+        accepted_round not in projected[field]
+        for field in ("source_round", "curated_postseason_round", "notes")
+    ):
+        defects.append({"reason": "ACCEPTED_POSTSEASON_ROUND_LOST",
+                        "source_game_id": game_id})
+    for source_status in (
+        "neutral_venue_research_status", "postseason_site_research_status"
+    ):
+        if parent.get(source_status, "").strip().upper() in {
+            "HISTORICAL_LOCATION_ACCEPTED_EXACT_BUILDING_ENRICHMENT_UNRESOLVED",
+            "OPPONENT_HOME_VENUE_OUTSIDE_TARGET_RESEARCH_RESPONSIBILITY",
+        } and (not projected["site_research_status"]
+               or not projected["site_research_basis"]):
+            defects.append({"reason": "ACCEPTED_SITE_RESEARCH_ACCOUNTING_LOST",
+                            "source_game_id": game_id, "field": source_status})
+    return defects
 
 
 def _mapping_defects(

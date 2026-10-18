@@ -158,6 +158,11 @@ Stage 3B uses a **strict postseason exact-venue standard for U.S. sites**. The r
 historical neutral shortcut does not apply, but the owner-approved outside-the-United-States
 neutral exception does.
 
+The separately documented owner-approved opponent-host campus
+conference-tournament road exception in docs/site-completeness-protocol.md
+may preserve opponent-building/locality debt only under its exact predicates.
+This is not a general postseason research-exhaustion shortcut.
+
 For NCAA, NIT, conference-tournament, and every other U.S. postseason row, exact physical
 venue plus city/state remains an active research obligation. For a neutral postseason site
 outside the United States, supported city + country and, where applicable, first-level
