@@ -1600,6 +1600,17 @@ class Stage4CloseoutTests(unittest.TestCase):
                 self.assertEqual(len(mismatches), 1)
                 self.assertEqual(mismatches[0]["field"], field)
 
+    def test_legacy_parent_score_and_season_parity_is_not_silently_ignored(self):
+        row = {
+            "season": "1989-90", "wagner_points": "73",
+            "opponent_points": "69", "source_result": "W",
+        }
+        expected = mod.expected_parent_values(row)
+        self.assertEqual(expected["season_start"], "1989")
+        self.assertEqual(expected["team_score"], "73")
+        self.assertEqual(expected["opponent_score"], "69")
+        self.assertEqual(expected["played_result"], "W")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -139,6 +139,20 @@ The preflight verifies:
 
 If preflight returns STAGE4_AUTHORING_INPUT_INCOMPLETE or STAGE4_AUTHORING_INPUT_INVALID, remain in Stage 3B mechanical closeout. Repair only the durable representation/capsule defect. Do not reopen historical research unless the defect exposes an actual unresolved historical question.
 
+### Semantic preservation across accepted ledger vocabularies
+
+Preflight must compare all populated parent season labels, source-side scores,
+on-court results, postseason round evidence, locators, and accepted research-debt
+accounting against their proposed six-file representation. A structurally valid
+six-file projection that silently drops a populated field is INVALID, even if
+the downstream research checker does not independently require that field.
+
+For non-NCAA postseason games, source-round evidence remains in source_round
+(and an explicit accepted-round note when different); only the package's
+permitted curated-round vocabulary may enter curated_postseason_round. The
+accepted label "First Four" projects to NCAA's controlled "Play-in" label,
+without changing the event or original literal source evidence.
+
 ## 5. Stage 4 command-first authoring
 
 After owner continuation from Stage 3B, Stage 4 begins with:

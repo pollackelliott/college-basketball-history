@@ -517,6 +517,11 @@ Close conference-tournament, NCAA, NIT, and other postseason classification/site
 - reconcile physical venue aliases/naming eras;
 - preserve correction overlays when stronger postseason evidence corrects a Stage 1 field without changing game identity.
 
+The narrow owner-approved opponent-hosted campus conference-tournament road
+exception in docs/site-completeness-protocol.md applies only with recorded
+H/A/N, campus-format evidence, and explicit owner scope provenance. It does
+not claim exact-building research exhaustion or alter NCAA/NIT requirements.
+
 The historical regular-season neutral shortcut does **not** apply to Stage 3B. Do not stop
 postseason exact-venue research merely because city/state is known. Exact building identity
 remains an active research obligation for NCAA, NIT, conference-tournament, and every other

@@ -121,6 +121,16 @@ When both participants are published, both source packages are available and kno
 same-game evidence must be propagated. A genuinely unresolved result should reflect
 targeted review rather than a silent blank.
 
+An exceptional owner-authorized, documented research-responsibility exclusion
+may apply only to an independently established OPPONENT_HOME conference-tournament
+game at an opponent-hosted campus site. An accepted source/league campus-hosting
+record, an explicit owner decision, and per-game provenance are required.
+Such rows may preserve blank opponent-host building/locality as documented
+RESEARCHED_PARTIAL source-side debt: this denotes the narrow owner exclusion,
+**not** exhausted building research or inferred venue. This does not apply to
+NCAA, NIT, NEUTRAL, SOURCE_PROGRAM_HOME, UNKNOWN, or unapproved postseason rows;
+known venue facts from target/reciprocal evidence must still be preserved.
+
 Postseason rows retain a stricter standard than historical regular-season neutrals.
 NCAA Tournament physical venue, city, and state are mandatory and non-waivable. NIT,
 conference-tournament, and every other postseason exact venue must be researched to

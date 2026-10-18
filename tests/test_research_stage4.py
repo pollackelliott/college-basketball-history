@@ -1177,6 +1177,105 @@ class Stage4AuthoringTests(unittest.TestCase):
         )
         self.assertEqual(by_id["AWAY-LEGACY"]["site_research_status"], "")
 
+    def test_wagner_legacy_fields_preserve_semantics_and_scope_exceptions(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        base = {
+            "source_program_key": "test",
+            "source_opponent_label": "Old College",
+            "opponent_key": "old-college",
+            "season": "1989-90",
+            "wagner_points": "73",
+            "opponent_points": "69",
+            "source_result": "W",
+            "source_locator": "Official guide p. 70",
+        }
+        neutral = {
+            **base, "research_game_id": "NEUTRAL", "game_type": "REGULAR_SEASON",
+            "site_type": "NEUTRAL", "curated_venue_city": "Springfield",
+            "curated_venue_state": "MA",
+            "neutral_venue_research_status":
+                "HISTORICAL_LOCATION_ACCEPTED_EXACT_BUILDING_ENRICHMENT_UNRESOLVED",
+            "neutral_venue_research_basis": "Official host archive checked",
+        }
+        road = {
+            **base, "research_game_id": "ROAD", "game_type": "CONFERENCE_TOURNAMENT",
+            "site_type": "OPPONENT_HOME", "postseason_round": "Quarterfinal",
+            "postseason_site_research_status":
+                "OPPONENT_HOME_VENUE_OUTSIDE_TARGET_RESEARCH_RESPONSIBILITY",
+            "postseason_site_research_basis":
+                "OWNER_EXPLICIT_NEC_ROAD_SITE_SCOPE_AND_OFFICIAL_CAMPUS_FORMAT",
+            "postseason_shared_ref_source_row": "1274",
+        }
+        ncaa = {
+            **base, "research_game_id": "NCAA", "game_type": "NCAA",
+            "site_type": "NEUTRAL", "postseason_round": "First Four",
+            "source_round": "NCAA First Four",
+            "curated_venue_name": "Test Gym",
+        }
+        nit = {
+            **base, "research_game_id": "NIT", "game_type": "NIT",
+            "site_type": "OPPONENT_HOME", "postseason_round": "Second Round",
+            "source_round": "NIT second-round official source",
+        }
+        games, defects = mod._projection([neutral, road, ncaa, nit], opponents, venues)
+        self.assertEqual(defects, [])
+        by_id = {g["source_game_id"]: g for g in games}
+        for g in games:
+            self.assertEqual(g["season_label"], "1989-1990")
+            self.assertEqual(g["team_score"], "73")
+            self.assertEqual(g["opponent_score"], "69")
+            self.assertEqual(g["played_result"], "W")
+            self.assertEqual(g["source_page"], "Official guide p. 70")
+        self.assertEqual(by_id["NEUTRAL"]["site_research_status"], "RESEARCHED_PARTIAL")
+        self.assertIn("Official host archive", by_id["NEUTRAL"]["site_research_basis"])
+        self.assertEqual(by_id["ROAD"]["site_research_status"], "RESEARCHED_PARTIAL")
+        self.assertIn("not claimed research-exhausted",
+                      by_id["ROAD"]["site_research_basis"])
+        self.assertEqual(by_id["ROAD"]["source_round"], "Quarterfinal")
+        self.assertEqual(by_id["ROAD"]["curated_postseason_round"], "")
+        self.assertEqual(by_id["NCAA"]["curated_postseason_round"], "Play-in")
+        self.assertEqual(by_id["NIT"]["curated_postseason_round"], "")
+        self.assertIn("Accepted Stage 3B postseason round: Second Round.",
+                      by_id["NIT"]["notes"])
+
+    def test_scope_exception_fails_closed_without_owner_and_shared_reference(self):
+        row = {
+            "game_type": "NCAA", "site_type": "NEUTRAL",
+            "postseason_site_research_status":
+                "OPPONENT_HOME_VENUE_OUTSIDE_TARGET_RESEARCH_RESPONSIBILITY",
+            "postseason_site_research_basis":
+                "OWNER_EXPLICIT_NEC_ROAD_SITE_SCOPE_AND_OFFICIAL_CAMPUS_FORMAT",
+        }
+        self.assertEqual(mod._research_accounting(row), ("", ""))
+        row.update({"game_type": "CONFERENCE_TOURNAMENT",
+                    "site_type": "OPPONENT_HOME"})
+        self.assertEqual(mod._research_accounting(row), ("", ""))
+        row["postseason_shared_ref_source_row"] = "1274"
+        self.assertEqual(mod._research_accounting(row)[0], "RESEARCHED_PARTIAL")
+
+    def test_semantic_parity_detects_silent_field_and_accounting_loss(self):
+        parent = {
+            "season": "1982-83", "wagner_points": "80",
+            "opponent_points": "79", "source_result": "W",
+            "postseason_round": "Semifinal",
+            "source_locator": "Guide p. 72",
+            "neutral_venue_research_status":
+                "HISTORICAL_LOCATION_ACCEPTED_EXACT_BUILDING_ENRICHMENT_UNRESOLVED",
+        }
+        projected = {
+            "source_game_id": "G1", "season_label": "", "team_score": "",
+            "opponent_score": "", "played_result": "", "source_page": "",
+            "source_round": "", "curated_postseason_round": "", "notes": "",
+            "site_research_status": "", "site_research_basis": "",
+        }
+        defects = mod._semantic_projection_defects(parent, projected)
+        self.assertEqual(
+            {d["reason"] for d in defects},
+            {"ACCEPTED_SOURCE_FIELD_LOST", "ACCEPTED_POSTSEASON_ROUND_LOST",
+             "ACCEPTED_SITE_RESEARCH_ACCOUNTING_LOST"},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
