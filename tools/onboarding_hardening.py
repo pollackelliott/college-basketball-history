@@ -1115,7 +1115,8 @@ def rehearse_review(
                 changed,
                 include_tests=True,
                 **({
-                    "correction_source_id": approved["summary"]["correction_source_game_id"]
+                    "correction_source_id": approved["summary"]["correction_source_game_id"],
+                    "correction_site_proof": execution["correction_site_nonregression"],
                 } if approved.get("summary", {}).get("correction_transaction_kind")
                        == "SINGLE_GAME_IDENTITY_SITE" else {}),
             )
