@@ -819,10 +819,10 @@ def _prove_single_game_correction_boundary(
 ) -> None:
     """Reject additions/deletions or changes to ANY other canonical/source evidence."""
     keys = {
-        "source": "source_game_id",
         "canonical": "canonical_game_id",
-        "assertion": "assertion_id",
         "discrepancy": "discrepancy_id",
+        "source": "source_game_id",
+        "assertion": "assertion_id",
     }
     for kind, field in keys.items():
         old_fields, old_rows = before[kind]
@@ -1307,10 +1307,10 @@ def transactional_apply(
             )
         run_gates(
             rehearsal, approved["school_key"], changed, include_tests=True,
-            correction_source_id=approved.get("summary", {}).get(
-                "correction_source_game_id", ""
-            ) if approved.get("summary", {}).get("correction_transaction_kind")
-                 == "SINGLE_GAME_IDENTITY_SITE" else "",
+            **({
+                "correction_source_id": approved["summary"]["correction_source_game_id"]
+            } if approved.get("summary", {}).get("correction_transaction_kind")
+                   == "SINGLE_GAME_IDENTITY_SITE" else {}),
         )
         copy_validated_changes(rehearsal, repo, after, changed)
 
@@ -1320,10 +1320,10 @@ def transactional_apply(
         approved["school_key"],
         changed,
         include_tests=False,
-        correction_source_id=approved.get("summary", {}).get(
-            "correction_source_game_id", ""
-        ) if approved.get("summary", {}).get("correction_transaction_kind")
-             == "SINGLE_GAME_IDENTITY_SITE" else "",
+        **({
+            "correction_source_id": approved["summary"]["correction_source_game_id"]
+        } if approved.get("summary", {}).get("correction_transaction_kind")
+               == "SINGLE_GAME_IDENTITY_SITE" else {}),
     )
     output_dir.mkdir(parents=True, exist_ok=True)
     manifest = {
