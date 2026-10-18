@@ -1114,10 +1114,10 @@ def rehearse_review(
                 school_key,
                 changed,
                 include_tests=True,
-                correction_source_id=approved.get("summary", {}).get(
-                    "correction_source_game_id", ""
-                ) if approved.get("summary", {}).get("correction_transaction_kind")
-                     == "SINGLE_GAME_IDENTITY_SITE" else "",
+                **({
+                    "correction_source_id": approved["summary"]["correction_source_game_id"]
+                } if approved.get("summary", {}).get("correction_transaction_kind")
+                       == "SINGLE_GAME_IDENTITY_SITE" else {}),
             )
         finally:
             source_diagnostic = (
