@@ -6875,7 +6875,7 @@
       "state": "MA",
       "primary_hex": "#2F2975",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
+      "history_start_season": "2022-2023",
       "conference_regular_season_championships": 0,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 0,
@@ -6884,7 +6884,7 @@
       "best_finish_key": null,
       "best_finish_year": null,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"

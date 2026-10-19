@@ -4558,7 +4558,7 @@
       "opponent_key": "stonehill",
       "opponent_name": "Stonehill",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -42066,7 +42066,7 @@
       "opponent_key": "stonehill",
       "opponent_name": "Stonehill",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 101,
       "opponent_score": 55,
       "score_known": true,
@@ -83341,7 +83341,7 @@
       "opponent_key": "stonehill",
       "opponent_name": "Stonehill",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 77,
       "opponent_score": 48,
       "score_known": true,
