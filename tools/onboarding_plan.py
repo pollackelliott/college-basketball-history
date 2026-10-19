@@ -1815,7 +1815,22 @@ def _verified_applied_correction_source_note_delta(
         raise WorkflowError(
             f"{source_id}: cannot inspect staged correction source package"
         ) from exc
-    if hashlib.sha256(staged_bytes).hexdigest() != context["expected_source_game_hash"]:
+    expected_source_hash = str(context.get("expected_source_game_hash", ""))
+    if not re.fullmatch(r"[0-9a-f]{64}", expected_source_hash):
+        manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise WorkflowError(
+                f"{source_id}: cannot read correction Integration Freeze for applied source proof"
+            ) from exc
+        expected_source_hash = str(
+            manifest.get("package_member_sha256", {}).get("source-games.csv", "")
+        )
+    if (
+        not re.fullmatch(r"[0-9a-f]{64}", expected_source_hash)
+        or hashlib.sha256(staged_bytes).hexdigest() != expected_source_hash
+    ):
         raise WorkflowError(
             f"{source_id}: HEAD source package does not match frozen correction package"
         )
@@ -2072,7 +2087,7 @@ def apply_pre_ingest_correction_identity_patches(
         raise WorkflowError("correction identity patches require a verified correction freeze")
     if not context.get("source_package_exact"):
         raise WorkflowError(
-            "correction identity apply requires the exact frozen source package"
+            "correction identity requires the exact verified frozen package/source hash"
         )
     source_path = repo / "schools" / school / "source-games.csv"
     canonical_path = repo / "data/canonical/games.csv"
