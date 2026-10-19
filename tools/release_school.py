@@ -14,11 +14,13 @@ integration.  It never runs a manual Vercel deployment.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
 import shutil
 import subprocess
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -110,6 +112,81 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def output_dir(repo: Path, school_key: str, supplied: Path | None) -> Path:
     return supplied.resolve() if supplied else repo / ".onboarding" / school_key
+
+
+def correction_integration_freeze_bytes(
+    repo: Path,
+    school_key: str,
+    manifest: dict[str, Any],
+) -> bytes | None:
+    """Return the exact ignored correction authority used by release gates.
+
+    Standard/new-school releases return None. Correction releases require the
+    school/status/source identity to match the sealed release manifest. Preview
+    preparation hashes these exact bytes; merge rechecks that hash before the
+    irreversible GitHub merge and transfers only these bytes into Production proof.
+    """
+    gate_kwargs = correction_gate_kwargs_from_manifest(manifest, school_key)
+    if not gate_kwargs:
+        return None
+    path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not path.is_file():
+        raise WorkflowError(
+            "correction release requires its exact Integration Freeze authority"
+        )
+    payload = path.read_bytes()
+    try:
+        freeze = json.loads(payload)
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise WorkflowError("correction Integration Freeze is unreadable") from exc
+    source_id = gate_kwargs["correction_source_id"]
+    correction_ids = freeze.get("correction_source_game_ids", [])
+    if (
+        not isinstance(freeze, dict)
+        or freeze.get("status") != "INTEGRATION_FROZEN"
+        or freeze.get("workflow_kind") != "POST_PUBLICATION_CORRECTION"
+        or freeze.get("school_key") != school_key
+        or not isinstance(correction_ids, list)
+        or source_id not in correction_ids
+    ):
+        raise WorkflowError(
+            "correction Integration Freeze identity does not match sealed release"
+        )
+    return payload
+
+
+def create_production_proof_repository(
+    source: Path,
+    destination: Path,
+    merge_sha: str,
+    *,
+    school_key: str,
+    correction_freeze: bytes | None,
+) -> None:
+    """Create an isolated exact-merge checkout without claiming local branch main."""
+    clone = run(
+        [
+            "git", "clone", "--shared", "--no-checkout", "--quiet",
+            str(source), str(destination),
+        ],
+        cwd=source,
+        label="production proof clone",
+        echo=False,
+    )
+    del clone
+    git(destination, "checkout", "--detach", "--quiet", merge_sha)
+    if git(destination, "rev-parse", "HEAD").strip() != merge_sha:
+        raise WorkflowError("Production proof checkout did not land on exact merge SHA")
+    if correction_freeze is not None:
+        target = (
+            destination / ".onboarding" / school_key / "integration-freeze.json"
+        )
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(correction_freeze)
+    if git(
+        destination, "status", "--porcelain", "--untracked-files=all"
+    ).strip():
+        raise WorkflowError("Production proof checkout is not clean")
 
 
 def verify_change_boundary(repo: Path, manifest: dict[str, Any]) -> list[str]:
@@ -369,6 +446,9 @@ def prepare(repo: Path, school_key: str, artifacts: Path, timeout: int) -> int:
             "the approved plan did not publish a team JSON file; use a data-only PR procedure instead"
         )
 
+    correction_freeze = correction_integration_freeze_bytes(
+        repo, school_key, manifest
+    )
     paths = verify_change_boundary(repo, manifest)
     print("=== final local release gate ===")
     run_gates(
@@ -418,6 +498,11 @@ def prepare(repo: Path, school_key: str, artifacts: Path, timeout: int) -> int:
         "pr_url": state["url"],
         "preview_deployment": deployment,
         "changed_paths": paths,
+        "correction_integration_freeze_sha256": (
+            hashlib.sha256(correction_freeze).hexdigest()
+            if correction_freeze is not None
+            else None
+        ),
     }
     (artifacts / "release-state.json").write_text(
         json.dumps(release_state, indent=2) + "\n",
@@ -510,6 +595,21 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
         timeout_seconds=min(timeout, PR_MERGEABILITY_TIMEOUT_SECONDS),
     )
 
+    manifest = load_json(artifacts / "release-manifest.json")
+    correction_freeze = correction_integration_freeze_bytes(
+        repo, school_key, manifest
+    )
+    expected_freeze_hash = state.get("correction_integration_freeze_sha256")
+    actual_freeze_hash = (
+        hashlib.sha256(correction_freeze).hexdigest()
+        if correction_freeze is not None
+        else None
+    )
+    if expected_freeze_hash != actual_freeze_hash:
+        raise WorkflowError(
+            "correction Integration Freeze changed after Preview approval"
+        )
+
     display = program_display_name(repo, school_key)
     gh(
         repo,
@@ -534,36 +634,53 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
         raise WorkflowError(f"GitHub did not confirm PR #{pr_number} as merged")
     expected_merge_sha = merged_pr["mergeCommit"]["oid"]
     git(repo, "fetch", "origin", echo=True)
-    git(repo, "switch", "main", echo=True)
-    git(repo, "pull", "--ff-only", "origin", "main", echo=True)
-    merge_sha = git(repo, "rev-parse", "HEAD").strip()
+    merge_sha = git(repo, "rev-parse", "origin/main").strip()
     if merge_sha != expected_merge_sha:
         raise WorkflowError(
             "origin/main advanced beyond the visually approved merge before production "
             f"verification ({merge_sha} != {expected_merge_sha})"
         )
-    print("\n=== merged-main reproducibility ===")
-    manifest = load_json(artifacts / "release-manifest.json")
-    run_gates(
-        repo, school_key, [], include_tests=True,
-        **correction_gate_kwargs_from_manifest(manifest, school_key),
-    )
-    deployment = wait_for_deployment(
-        repo,
-        repository_slug(repo),
-        merge_sha,
-        "Production",
-        timeout,
-    )
-    checked = production_data_check(
-        repo,
-        school_key,
-        merge_sha,
-        state.get("changed_paths", []),
-    )
-    status = git(repo, "status", "-sb").strip()
-    if status != "## main...origin/main":
-        raise WorkflowError(f"main is not clean and synchronized after merge: {status}")
+
+    with tempfile.TemporaryDirectory(
+        prefix=f"production-proof-{school_key}-"
+    ) as temporary:
+        proof_repo = Path(temporary) / "repository"
+        create_production_proof_repository(
+            repo,
+            proof_repo,
+            merge_sha,
+            school_key=school_key,
+            correction_freeze=correction_freeze,
+        )
+        print("\n=== merged-main reproducibility ===")
+        run_gates(
+            proof_repo, school_key, [], include_tests=True,
+            **correction_gate_kwargs_from_manifest(manifest, school_key),
+        )
+        deployment = wait_for_deployment(
+            proof_repo,
+            repository_slug(repo),
+            merge_sha,
+            "Production",
+            timeout,
+        )
+        checked = production_data_check(
+            proof_repo,
+            school_key,
+            merge_sha,
+            state.get("changed_paths", []),
+        )
+
+    git(repo, "fetch", "origin", echo=True)
+    final_origin_main = git(repo, "rev-parse", "origin/main").strip()
+    if final_origin_main != merge_sha:
+        raise WorkflowError(
+            "origin/main advanced during exact Production verification "
+            f"({final_origin_main} != {merge_sha})"
+        )
+    if git(repo, "status", "--porcelain", "--untracked-files=all").strip():
+        raise WorkflowError("release branch changed during Production verification")
+
     final = {
         **state,
         "merge_sha": merge_sha,
@@ -579,7 +696,7 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
     print(f"Merged SHA: {merge_sha}")
     print(f"Production: {deployment.get('environment_url') or PRODUCTION_BASE}")
     print(f"Exact JSON documents verified: {len(checked):,}")
-    print("main is clean and synchronized with origin/main.")
+    print("origin/main remains the exact merged SHA; release branch remains clean.")
     return 0
 
 
