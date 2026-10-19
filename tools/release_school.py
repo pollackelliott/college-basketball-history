@@ -634,36 +634,53 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
         raise WorkflowError(f"GitHub did not confirm PR #{pr_number} as merged")
     expected_merge_sha = merged_pr["mergeCommit"]["oid"]
     git(repo, "fetch", "origin", echo=True)
-    git(repo, "switch", "main", echo=True)
-    git(repo, "pull", "--ff-only", "origin", "main", echo=True)
-    merge_sha = git(repo, "rev-parse", "HEAD").strip()
+    merge_sha = git(repo, "rev-parse", "origin/main").strip()
     if merge_sha != expected_merge_sha:
         raise WorkflowError(
             "origin/main advanced beyond the visually approved merge before production "
             f"verification ({merge_sha} != {expected_merge_sha})"
         )
-    print("\n=== merged-main reproducibility ===")
-    manifest = load_json(artifacts / "release-manifest.json")
-    run_gates(
-        repo, school_key, [], include_tests=True,
-        **correction_gate_kwargs_from_manifest(manifest, school_key),
-    )
-    deployment = wait_for_deployment(
-        repo,
-        repository_slug(repo),
-        merge_sha,
-        "Production",
-        timeout,
-    )
-    checked = production_data_check(
-        repo,
-        school_key,
-        merge_sha,
-        state.get("changed_paths", []),
-    )
-    status = git(repo, "status", "-sb").strip()
-    if status != "## main...origin/main":
-        raise WorkflowError(f"main is not clean and synchronized after merge: {status}")
+
+    with tempfile.TemporaryDirectory(
+        prefix=f"production-proof-{school_key}-"
+    ) as temporary:
+        proof_repo = Path(temporary) / "repository"
+        create_production_proof_repository(
+            repo,
+            proof_repo,
+            merge_sha,
+            school_key=school_key,
+            correction_freeze=correction_freeze,
+        )
+        print("\n=== merged-main reproducibility ===")
+        run_gates(
+            proof_repo, school_key, [], include_tests=True,
+            **correction_gate_kwargs_from_manifest(manifest, school_key),
+        )
+        deployment = wait_for_deployment(
+            proof_repo,
+            repository_slug(repo),
+            merge_sha,
+            "Production",
+            timeout,
+        )
+        checked = production_data_check(
+            proof_repo,
+            school_key,
+            merge_sha,
+            state.get("changed_paths", []),
+        )
+
+    git(repo, "fetch", "origin", echo=True)
+    final_origin_main = git(repo, "rev-parse", "origin/main").strip()
+    if final_origin_main != merge_sha:
+        raise WorkflowError(
+            "origin/main advanced during exact Production verification "
+            f"({final_origin_main} != {merge_sha})"
+        )
+    if git(repo, "status", "--porcelain", "--untracked-files=all").strip():
+        raise WorkflowError("release branch changed during Production verification")
+
     final = {
         **state,
         "merge_sha": merge_sha,
@@ -679,7 +696,7 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
     print(f"Merged SHA: {merge_sha}")
     print(f"Production: {deployment.get('environment_url') or PRODUCTION_BASE}")
     print(f"Exact JSON documents verified: {len(checked):,}")
-    print("main is clean and synchronized with origin/main.")
+    print("origin/main remains the exact merged SHA; release branch remains clean.")
     return 0
 
 
