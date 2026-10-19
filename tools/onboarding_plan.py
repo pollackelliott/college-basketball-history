@@ -2358,8 +2358,14 @@ def _canonical_site_patch_review_decisions(
     school_venue_rows: list[dict[str, str]],
     venues_by_id: dict[str, dict[str, str]],
     venues_by_key: dict[str, dict[str, str]],
+    candidate_identity_source_ids_by_canonical: dict[str, set[str]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Surface reciprocal-only target HOME site gaps requiring owner judgment."""
+    """Surface reciprocal-only HOME gaps, including potential rejected identity matches.
+
+    A merely possible canonical identity does not establish a target assertion.
+    Such a candidate receives a conditional site review, which the approved
+    identity choice will make inapplicable if that same canonical game is matched.
+    """
 
     relationships = _home_relationships(school_venue_rows)
     decisions: list[dict[str, Any]] = []
@@ -2418,6 +2424,9 @@ def _canonical_site_patch_review_decisions(
         ):
             continue
 
+        identity_candidate_sources = sorted(
+            (candidate_identity_source_ids_by_canonical or {}).get(game_id, set())
+        )
         candidates = _home_relationship_candidates(game, relationships)
         candidate_names = sorted(
             {
@@ -2455,6 +2464,8 @@ def _canonical_site_patch_review_decisions(
             {
                 "decision_id": _decision_id("CANONICAL-SITE-PATCH", game_id),
                 "category": "canonical_site_patch",
+                **({"conditional_identity_source_game_ids": identity_candidate_sources}
+                   if identity_candidate_sources else {}),
                 "source_game_id": "",
                 "canonical_game_id": game_id,
                 "season_label": season,
@@ -2471,6 +2482,11 @@ def _canonical_site_patch_review_decisions(
                     f"target HOME chronology yields {len(candidates)} candidate "
                     f"physical venue(s): {chronology_detail}. An explicit owner-reviewed "
                     "site patch is required rather than a chronology guess."
+                    + (
+                        " This review applies only if no pending target identity "
+                        "is approved as a match to this canonical game."
+                        if identity_candidate_sources else ""
+                    )
                 ),
                 "recommended_action": "REVIEW_REQUIRED",
                 "allowed_actions": sorted(CANONICAL_SITE_PATCH_ACTIONS),
@@ -2599,7 +2615,9 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     }
 
     decisions: list[dict[str, Any]] = []
+    # A possible identity candidate is not yet a target source assertion.
     planned_target_canonical_ids: set[str] = set()
+    candidate_identity_source_ids_by_canonical: dict[str, set[str]] = defaultdict(set)
     identity_counts = Counter()
     predicted_conflicts = 0
     conditional_conflicts = 0
@@ -2669,11 +2687,11 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
         elif status == ingest_school.REVIEW:
-            planned_target_canonical_ids.update(
-                row.get("canonical_game_id", "").strip()
-                for row in identity_candidates
-                if row.get("canonical_game_id", "").strip()
-            )
+            source_id = source.get("source_game_id", "").strip()
+            for candidate in identity_candidates:
+                candidate_id = candidate.get("canonical_game_id", "").strip()
+                if candidate_id and source_id:
+                    candidate_identity_source_ids_by_canonical[candidate_id].add(source_id)
 
         consistency_issue = source_consistency_by_id.get(
             source.get("source_game_id", "").strip()
@@ -3074,6 +3092,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         canonical_rows=canonical,
         assertions_by_game=assertions_by_game,
         planned_target_canonical_ids=planned_target_canonical_ids,
+        candidate_identity_source_ids_by_canonical=candidate_identity_source_ids_by_canonical,
         school_venue_rows=read_csv(repo / "schools" / school_key / "venues.csv"),
         venues_by_id=global_venues_by_id,
         venues_by_key=global_venues_by_key,
@@ -3516,6 +3535,31 @@ def approve_plan(
             raise WorkflowError(f"review.csv is missing {decision_id}")
         decision = review.get("decision", "").strip()
         basis = review.get("resolution_basis", "").strip()
+        if item.get("category") == "canonical_site_patch":
+            possible_sources = item.get("conditional_identity_source_game_ids", [])
+            if possible_sources:
+                if any(source_id not in identity_choices for source_id in possible_sources):
+                    raise WorkflowError(
+                        f"{decision_id}: conditional site patch has a missing identity review"
+                    )
+                chosen_matches = [
+                    source_id for source_id in possible_sources
+                    if identity_choices[source_id]
+                    == f"MATCH_CANONICAL:{item['canonical_game_id']}"
+                ]
+                if chosen_matches:
+                    sealed = dict(item)
+                    sealed.update({
+                        "decision": "NOT_APPLICABLE",
+                        "resolution_basis": (
+                            "Not applicable because target identity was matched to this "
+                            "canonical game: " + ", ".join(chosen_matches)
+                        ),
+                        "canonical_patch": {},
+                        "source_patch": {},
+                    })
+                    sealed_items.append(sealed)
+                    continue
         if item.get("category") == "conditional_discrepancy":
             selected_identity = identity_choices.get(item.get("source_game_id", ""))
             applies = selected_identity == item.get("applies_if_identity_decision")
@@ -5511,6 +5555,13 @@ def apply_reconciliation_decisions(
             continue
 
         if item.get("category") == "canonical_site_patch":
+            if item["decision"] == "NOT_APPLICABLE":
+                if not item.get("conditional_identity_source_game_ids"):
+                    raise WorkflowError(
+                        f"{item['decision_id']}: unconditioned site patch cannot be NOT_APPLICABLE"
+                    )
+                counts["conditional_canonical_site_not_applicable"] += 1
+                continue
             touched_canonical_ids.add(game_id)
             decision = item["decision"]
             canonical_patch = item.get("canonical_patch", {})
