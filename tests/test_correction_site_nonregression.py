@@ -7,7 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from correction_site_nonregression import prove, digest, verify_current
 from onboarding_plan import WorkflowError
-from onboard_school import correction_gate_kwargs_from_manifest
+from onboard_school import correction_gate_kwargs_from_manifest, pr_body
 
 
 def report(*, gaps=("CBBG-1", "CBBG-2"), lost=1):
@@ -80,24 +80,48 @@ class CorrectionSiteNonregressionTests(unittest.TestCase):
     def test_release_gate_reuses_only_valid_one_game_proof(self):
         after = report(lost=0)
         proof = prove(report(), after, "CBBG-0020298")
-        manifest = {
-            "school_key": "tennessee",
-            "summary": {
-                "correction_transaction_kind": "SINGLE_GAME_IDENTITY_SITE",
-                "correction_source_game_id": "TENRAW-00136",
-                "correction_canonical_game_id": "CBBG-0020298",
+        for transaction_kind in (
+            "SINGLE_GAME_IDENTITY",
+            "SINGLE_GAME_IDENTITY_SITE",
+        ):
+            with self.subTest(transaction_kind=transaction_kind):
+                manifest = {
+                    "school_key": "tennessee",
+                    "summary": {
+                        "correction_transaction_kind": transaction_kind,
+                        "correction_source_game_id": "TENRAW-00136",
+                        "correction_canonical_game_id": "CBBG-0020298",
+                    },
+                    "execution": {"correction_site_nonregression": proof},
+                }
+                kwargs = correction_gate_kwargs_from_manifest(manifest, "tennessee")
+                self.assertEqual(kwargs["correction_source_id"], "TENRAW-00136")
+                verify_current(after, kwargs["correction_site_proof"], "tennessee")
+                corrupt = copy.deepcopy(manifest)
+                corrupt["summary"]["correction_canonical_game_id"] = "CBBG-OTHER"
+                with self.assertRaisesRegex(WorkflowError, "invalid sealed correction"):
+                    correction_gate_kwargs_from_manifest(corrupt, "tennessee")
+                with self.assertRaisesRegex(WorkflowError, "invalid sealed correction"):
+                    correction_gate_kwargs_from_manifest(manifest, "georgetown")
+
+    def test_identity_only_pr_body_reports_correction_nonregression(self):
+        body = pr_body(
+            {
+                "school_key": "vanderbilt",
+                "approved_plan_hash": "abc123",
+                "summary": {
+                    "correction_transaction_kind": "SINGLE_GAME_IDENTITY",
+                    "source_rows": 1,
+                    "pre_cutoff_rows": 0,
+                    "existing_game_matches": 1,
+                    "new_canonical_games": 0,
+                },
+                "decisions": [],
             },
-            "execution": {"correction_site_nonregression": proof},
-        }
-        kwargs = correction_gate_kwargs_from_manifest(manifest, "tennessee")
-        self.assertEqual(kwargs["correction_source_id"], "TENRAW-00136")
-        verify_current(after, kwargs["correction_site_proof"], "tennessee")
-        corrupt = copy.deepcopy(manifest)
-        corrupt["summary"]["correction_canonical_game_id"] = "CBBG-OTHER"
-        with self.assertRaisesRegex(WorkflowError, "invalid sealed correction"):
-            correction_gate_kwargs_from_manifest(corrupt, "tennessee")
-        with self.assertRaisesRegex(WorkflowError, "invalid sealed correction"):
-            correction_gate_kwargs_from_manifest(manifest, "georgetown")
+            ["data/canonical/games.csv"],
+        )
+        self.assertIn("correction-only site nonregression — PASS", body)
+        self.assertNotIn("implementation site completeness — PASS", body)
 
     def test_current_report_must_match_exact_proved_after_state(self):
         after = report(lost=0)

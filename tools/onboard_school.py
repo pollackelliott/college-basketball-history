@@ -68,6 +68,11 @@ from plan_home_chronology_remediation import (
 
 TEXT_SUFFIXES = {".csv", ".py", ".html", ".json", ".md", ".txt"}
 
+SINGLE_GAME_CORRECTION_KINDS = frozenset({
+    "SINGLE_GAME_IDENTITY",
+    "SINGLE_GAME_IDENTITY_SITE",
+})
+
 
 def run(
     command: list[str],
@@ -184,7 +189,7 @@ def correction_gate_kwargs_from_manifest(
 ) -> dict[str, Any]:
     """Carry the exact sealed correction proof into verify/Preview/Production gates."""
     summary = manifest.get("summary", {})
-    if summary.get("correction_transaction_kind") != "SINGLE_GAME_IDENTITY_SITE":
+    if summary.get("correction_transaction_kind") not in SINGLE_GAME_CORRECTION_KINDS:
         return {}
     execution = manifest.get("execution", {})
     proof = execution.get("correction_site_nonregression", {})
@@ -987,10 +992,7 @@ def _execute_single_game_correction(
         raise WorkflowError("single-game correction lacks trusted Integration Freeze")
     summary = approved.get("summary", {})
     transaction_kind = summary.get("correction_transaction_kind", "")
-    if transaction_kind not in {
-        "SINGLE_GAME_IDENTITY",
-        "SINGLE_GAME_IDENTITY_SITE",
-    }:
+    if transaction_kind not in SINGLE_GAME_CORRECTION_KINDS:
         raise WorkflowError("invalid sealed single-game correction transaction kind")
     requires_site = transaction_kind == "SINGLE_GAME_IDENTITY_SITE"
     sid = summary.get("correction_source_game_id", "")
@@ -1084,7 +1086,7 @@ def execute_approved_in_place(
     school_key = approved["school_key"]
     if approved.get("summary", {}).get(
         "correction_transaction_kind"
-    ) in {"SINGLE_GAME_IDENTITY", "SINGLE_GAME_IDENTITY_SITE"}:
+    ) in SINGLE_GAME_CORRECTION_KINDS:
         return _execute_single_game_correction(repo, approved)
 
     print("\n=== sealed correction-only identity retarget ===")
@@ -1389,7 +1391,7 @@ def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
                 "- correction-only site nonregression — PASS; inherited full-gate "
                 "failures remain reported"
                 if summary.get("correction_transaction_kind")
-                == "SINGLE_GAME_IDENTITY_SITE"
+                in SINGLE_GAME_CORRECTION_KINDS
                 else "- implementation site completeness — PASS"
             ),
             "- accomplishment cross-check — PASS",
@@ -1441,7 +1443,7 @@ def transactional_apply(
                 "correction_source_id": approved["summary"]["correction_source_game_id"],
                 "correction_site_proof": execution["correction_site_nonregression"],
             } if approved.get("summary", {}).get("correction_transaction_kind")
-                   == "SINGLE_GAME_IDENTITY_SITE" else {}),
+                   in SINGLE_GAME_CORRECTION_KINDS else {}),
         )
         copy_validated_changes(rehearsal, repo, after, changed)
 
@@ -1455,7 +1457,7 @@ def transactional_apply(
             "correction_source_id": approved["summary"]["correction_source_game_id"],
             "correction_site_proof": execution["correction_site_nonregression"],
         } if approved.get("summary", {}).get("correction_transaction_kind")
-               == "SINGLE_GAME_IDENTITY_SITE" else {}),
+               in SINGLE_GAME_CORRECTION_KINDS else {}),
     )
     output_dir.mkdir(parents=True, exist_ok=True)
     manifest = {
