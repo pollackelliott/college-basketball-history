@@ -106,8 +106,8 @@
 104,tennessee,Geo. Washington,george-washington,George Washington,Yes,2,2000-2001,2015-2016,RESOLVED,Current D1 registry / Tennessee alias normalization,,
 105,tennessee,George Mason,george-mason,George Mason,Yes,2,2003-2004,2023-2024,RESOLVED,Inherited established project identity,,
 106,tennessee,George Washington,george-washington,George Washington,Yes,2,1916-1917,1937-1938,RESOLVED,Inherited established project identity,,
-107,tennessee,Georgetown,georgetown,Georgetown,Yes,4,1918-1919,2012-2013,RESOLVED,Inherited established project identity,,
-108,tennessee,Georgetown (Ky.),georgetown-ky,Georgetown (Ky.),No,7,1911-1912,1928-1929,RESOLVED,Historical/non-current source identity,,
+107,tennessee,Georgetown,georgetown,Georgetown,Yes,3,2002-2003,2012-2013,RESOLVED,Inherited established project identity,,
+108,tennessee,Georgetown (Ky.),georgetown-college-ky,Georgetown College (KY),No,7,1911-1912,1928-1929,RESOLVED,Historical/non-current source identity,,
 109,tennessee,Georgia,georgia,Georgia,Yes,162,1912-1913,2025-2026,RESOLVED,Inherited established project identity,,
 110,tennessee,Georgia Southern,georgia-southern,Georgia Southern,Yes,1,2023-2024,2023-2024,RESOLVED,Inherited established project identity,,
 111,tennessee,Georgia State,georgia-state,Georgia State,Yes,5,1977-1978,2003-2004,RESOLVED,Current D1 registry / Tennessee alias normalization,,
@@ -360,3 +360,4 @@
 358,tennessee,Wyoming,wyoming,Wyoming,Yes,3,1958-1959,2009-2010,RESOLVED,Inherited established project identity,,
 359,tennessee,Xavier,xavier,Xavier,Yes,17,1935-1936,2013-2014,RESOLVED,Inherited established project identity,,
 360,tennessee,Yale,yale,Yale,Yes,2,1959-1960,1961-1962,RESOLVED,Inherited established project identity,,
+361,tennessee,Georgetown,georgetown-college-ky,Georgetown College (KY),No,1,1918-1919,1918-1919,RESOLVED,Owner-authorized consolidated Georgetown College (Kentucky) identity repair; literal source label split from Georgetown University.,,TENRAW-00136 (1918-1919) literal Georgetown identifies Georgetown College (Kentucky); source evidence and raw label preserved.

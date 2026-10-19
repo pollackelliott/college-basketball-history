@@ -2209,8 +2209,8 @@
       "ties": 0
     },
     {
-      "opponent_key": "georgetown-ky",
-      "opponent_name": "Georgetown (Ky.)",
+      "opponent_key": "georgetown-college-ky",
+      "opponent_name": "Georgetown College (KY)",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -11713,8 +11713,8 @@
       "season_label": "1927-1928",
       "game_date": null,
       "date_precision": "SEASON",
-      "opponent_key": "georgetown-ky",
-      "opponent_name": "Georgetown (Ky.)",
+      "opponent_key": "georgetown-college-ky",
+      "opponent_name": "Georgetown College (KY)",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 31,
