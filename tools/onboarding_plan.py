@@ -2161,6 +2161,28 @@ def _canonical_site_patch_review_decisions(
     return decisions
 
 
+
+def _single_game_correction_transaction_kind(
+    correction_source_ids: set[str],
+    identity_decisions: list[dict[str, Any]],
+    site_decisions: list[dict[str, Any]],
+) -> str:
+    """Classify the only supported bounded one-game correction topologies."""
+    if (
+        len(correction_source_ids) != 1
+        or len(identity_decisions) != 1
+        or len(site_decisions) > 1
+    ):
+        raise WorkflowError(
+            "single-game correction requires exactly one frozen source identity "
+            "and zero or one canonical site review; broader corrections need explicit tooling"
+        )
+    return (
+        "SINGLE_GAME_IDENTITY_SITE"
+        if site_decisions
+        else "SINGLE_GAME_IDENTITY"
+    )
+
 def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     repo = repo.resolve()
     package = validate_package(repo, school_key)
@@ -2917,18 +2939,17 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     if correction_identity_decisions:
         context = _verified_correction_identity_context(repo, school_key)
         ids = set(context["correction_source_game_ids"]) if context else set()
-        if len(ids) != 1 or len(correction_identity_decisions) != 1 or len(correction_site_decisions) != 1:
-            raise WorkflowError(
-                "single-game correction requires exactly one frozen source identity "
-                "and one canonical site review; broader corrections need explicit tooling"
-            )
+        transaction_kind = _single_game_correction_transaction_kind(
+            ids, correction_identity_decisions, correction_site_decisions
+        )
         identity = correction_identity_decisions[0]
-        site = correction_site_decisions[0]
+        site = correction_site_decisions[0] if correction_site_decisions else None
         source_id = next(iter(ids))
         game_id = identity["canonical_game_id"]
-        if (
-            identity["source_game_id"] != source_id
-            or site["source_game_id"] != source_id
+        if identity["source_game_id"] != source_id:
+            raise WorkflowError("correction identity decision targets the wrong source game")
+        if site is not None and (
+            site["source_game_id"] != source_id
             or site["canonical_game_id"] != game_id
         ):
             raise WorkflowError("correction identity/site decisions target different games")
@@ -2950,23 +2971,27 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             if d.get("source_game_id") == source_id
             or d.get("canonical_game_id") == game_id
         ]
-        if set(d["decision_id"] for d in related) != {
-            identity["decision_id"], site["decision_id"],
+        expected_related_ids = {
+            identity["decision_id"],
             *(d["decision_id"] for d in duplicates),
-        }:
+        }
+        if site is not None:
+            expected_related_ids.add(site["decision_id"])
+        if set(d["decision_id"] for d in related) != expected_related_ids:
             raise WorkflowError(
                 "correction has additional same-game reviews; single-game "
-                "identity/site transaction cannot silently omit them"
+                "correction transaction cannot silently omit them"
             )
         excluded_count = len(decisions) - len(related)
-        decisions = [identity, site]
-        summary["correction_transaction_kind"] = "SINGLE_GAME_IDENTITY_SITE"
+        decisions = [identity] + ([site] if site is not None else [])
+        summary["correction_transaction_kind"] = transaction_kind
         summary["correction_source_game_id"] = source_id
         summary["correction_canonical_game_id"] = game_id
         summary["inherited_unrelated_reviews_excluded"] = excluded_count
         summary["discrepancies_to_add"] = 0
         summary["new_canonical_games"] = 0
         summary["assertions_to_add"] = 0
+
 
     return {
         "schema_version": PLAN_SCHEMA_VERSION,

@@ -115,10 +115,13 @@ def snapshot(rows):
 
 
 class CorrectionIdentityTests(unittest.TestCase):
-    def fixture(self, root, *, new_opponent="georgetown-ky", correction_ids=None):
+    def fixture(
+        self, root, *, new_opponent="georgetown-ky", new_state="KY",
+        correction_ids=None,
+    ):
         root.mkdir(parents=True, exist_ok=True)
         before = source()
-        after = source(new_opponent, "KY")
+        after = source(new_opponent, new_state)
         source_path = root / "schools/tennessee/source-games.csv"
         write_table(source_path, SOURCE_FIELDS, [before])
         subprocess.run(["git", "init", "-q", str(root)], check=True)
@@ -313,6 +316,93 @@ class CorrectionIdentityTests(unittest.TestCase):
             self.assertEqual((assertion_row["city"], assertion_row["state"]),
                              ("Lexington", "KY"))
 
+    def test_single_game_transaction_kind_accepts_identity_only(self):
+        self.assertEqual(
+            plan._single_game_correction_transaction_kind(
+                {"TENRAW-00136"}, [{"decision_id": "identity"}], []
+            ),
+            "SINGLE_GAME_IDENTITY",
+        )
+        self.assertEqual(
+            plan._single_game_correction_transaction_kind(
+                {"TENRAW-00136"},
+                [{"decision_id": "identity"}],
+                [{"decision_id": "site"}],
+            ),
+            "SINGLE_GAME_IDENTITY_SITE",
+        )
+
+    def test_single_game_transaction_kind_rejects_broader_scope(self):
+        with self.assertRaisesRegex(
+            plan.WorkflowError, "zero or one canonical site review"
+        ):
+            plan._single_game_correction_transaction_kind(
+                {"TENRAW-00136"},
+                [{"decision_id": "identity"}],
+                [{"decision_id": "site-1"}, {"decision_id": "site-2"}],
+            )
+
+    def test_one_game_identity_only_execution_preserves_staged_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root, new_state="")
+            identity_decisions, projected = self.reviews(root)
+            assertions = plan.read_csv(root / "data/evidence/game-assertions.csv")
+            sites = plan._post_publication_site_review_decisions(
+                root, "tennessee",
+                plan.read_csv(root / "schools/tennessee/source-games.csv"),
+                projected,
+                {("tennessee", "TENRAW-00136"): assertions},
+                {"CBBG-0020298": assertions},
+            )
+            self.assertEqual((len(identity_decisions), len(sites)), (1, 0))
+            approved = self.approved(identity_decisions[0])
+            approved["summary"] = {
+                "correction_transaction_kind": "SINGLE_GAME_IDENTITY",
+                "correction_source_game_id": "TENRAW-00136",
+                "correction_canonical_game_id": "CBBG-0020298",
+            }
+            write_table(root / "data/reconciliation/discrepancies.csv",
+                        ingest_school.DISCREPANCY_FIELDS, [])
+            write_table(root / "data/reference/venues.csv",
+                        ["venue_id", "venue_key", "city", "state"], [])
+            archive = root / "data/reconciliation/onboarding-decisions/test.json"
+            site_report = {
+                "school_key": "tennessee",
+                "history_start_season": "1908-1909",
+                "source_validation_scope": {
+                    "mode": "CORRECTION_DELTA", "scoped_source_games": 1,
+                    "correction_source_games": 1,
+                },
+                "source_site_counts": {"rows": 1},
+                "counts": {"target_canonical_games": 1},
+                "examples": {},
+                "status": "PASS", "errors": [], "warnings": [],
+            }
+            source_path = root / "schools/tennessee/source-games.csv"
+            source_before = source_path.read_bytes()
+            with (
+                patch.object(onboard_school, "archive_approved_plan", return_value=archive),
+                patch.object(onboard_school, "run", return_value="site build mocked"),
+                patch.object(
+                    onboard_school, "capture_correction_site_report",
+                    side_effect=[site_report, site_report],
+                ),
+            ):
+                result = onboard_school.execute_approved_in_place(root, approved)
+            self.assertEqual(result["transaction_kind"], "SINGLE_GAME_IDENTITY")
+            self.assertEqual(source_path.read_bytes(), source_before)
+            game = plan.read_csv(root / "data/canonical/games.csv")[0]
+            assertion_row = plan.read_csv(
+                root / "data/evidence/game-assertions.csv"
+            )[0]
+            self.assertEqual(game["team_a_key"], "georgetown-ky")
+            self.assertEqual(game["result_winner_team_key"], "georgetown-ky")
+            self.assertEqual(assertion_row["normalized_opponent_key"], "georgetown-ky")
+            self.assertEqual(
+                assertion_row["normalized_opponent_name"], "Georgetown (Ky.)"
+            )
+
     def test_one_game_sealed_execution_changes_only_authorized_records(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
@@ -396,6 +486,31 @@ class CorrectionIdentityTests(unittest.TestCase):
                              ("georgetown-ky", "KY"))
             self.assertEqual(src["raw_text"], source()["raw_text"])
             self.assertEqual(plan.read_csv(root / "data/reconciliation/discrepancies.csv"), [])
+
+    def test_identity_only_boundary_rejects_source_note_mutation(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root, new_state="")
+            write_table(root / "data/reconciliation/discrepancies.csv",
+                        ingest_school.DISCREPANCY_FIELDS, [])
+            before = onboard_school._single_game_correction_snapshot(
+                root, "tennessee"
+            )
+            source_path = root / "schools/tennessee/source-games.csv"
+            rows = plan.read_csv(source_path)
+            rows[0]["notes"] = "unexpected mutation"
+            write_table(source_path, SOURCE_FIELDS, rows)
+            after = onboard_school._single_game_correction_snapshot(
+                root, "tennessee"
+            )
+            with self.assertRaisesRegex(
+                plan.WorkflowError, "identity-only correction changed staged source row"
+            ):
+                onboard_school._prove_single_game_correction_boundary(
+                    before, after, source_id="TENRAW-00136",
+                    game_id="CBBG-0020298", school="tennessee",
+                    expect_source_change=False,
+                )
 
     def test_single_game_delta_guard_rejects_any_other_game_or_discrepancy(self):
         with tempfile.TemporaryDirectory() as td:
