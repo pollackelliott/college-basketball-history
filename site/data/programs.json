@@ -2339,7 +2339,7 @@
       "state": "DC",
       "primary_hex": "#041E42",
       "secondary_hex": "#8D817B",
-      "history_start_season": null,
+      "history_start_season": "1906-1907",
       "conference_regular_season_championships": 9,
       "conference_tournament_championships": 11,
       "ncaa_tournament_appearances": 31,
@@ -2348,7 +2348,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1984,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
