@@ -2,6 +2,7 @@
 
 import csv
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -72,6 +73,48 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
         scoped, meta = _correction_source_validation_scope(repo, "example", rows)
         report = source_site_completeness_report(FIELDS, scoped)
         return meta["mode"], [r["source_game_id"] for r in scoped], report["errors"]
+
+    def test_git_backed_copy_preserves_history_and_current_worktree_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "original", Path(temp) / "copy"
+            self.fixture(src)
+            sentinel = src / "baseline-sentinel.txt"
+            sentinel.write_text("published baseline\n", encoding="utf-8")
+            subprocess.run(["git", "init", "-q", str(src)], check=True)
+            subprocess.run(["git", "add", "."], cwd=src, check=True)
+            subprocess.run(
+                [
+                    "git", "-c", "user.name=Regression",
+                    "-c", "user.email=regression@example.test",
+                    "commit", "-qm", "baseline",
+                ],
+                cwd=src,
+                check=True,
+            )
+            base_sha = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=src, text=True
+            ).strip()
+            sentinel.write_text("current worktree\n", encoding="utf-8")
+
+            onboard_school.copy_repository(src, dst, school_key="example")
+
+            self.assertTrue((dst / ".git").exists())
+            self.assertEqual(
+                subprocess.check_output(
+                    ["git", "show", f"{base_sha}:baseline-sentinel.txt"],
+                    cwd=dst,
+                    text=True,
+                ),
+                "published baseline\n",
+            )
+            self.assertEqual(
+                (dst / "baseline-sentinel.txt").read_text(encoding="utf-8"),
+                "current worktree\n",
+            )
+            self.assertEqual(
+                (dst / ".onboarding/example/integration-freeze.json").read_bytes(),
+                (src / ".onboarding/example/integration-freeze.json").read_bytes(),
+            )
 
     def test_exact_manifest_transferred_but_not_other_onboarding_files(self):
         with tempfile.TemporaryDirectory() as temp:

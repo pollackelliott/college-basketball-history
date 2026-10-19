@@ -1274,7 +1274,52 @@ def copy_repository(
             if name in {".git", ".onboarding", "__pycache__"} or name.endswith(".pyc")
         }
 
-    shutil.copytree(source, destination, ignore=ignore)
+    # A real disposable repository must retain readable Git history. Correction
+    # Stage 2 validates unchanged published rows against research_base_sha, and
+    # the full rehearsal test suite may make the same immutable-baseline reads.
+    # Use an isolated local clone so refs/index/worktree mutations stay inside
+    # the disposable copy; --shared only borrows immutable object storage for
+    # this short-lived checkout. Then overlay the exact source worktree bytes so
+    # callers using synthetic/uncommitted fixtures retain their current state.
+    probe = subprocess.run(
+        ["git", "rev-parse", "--verify", "HEAD"],
+        cwd=source,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if probe.returncode == 0:
+        source_head = probe.stdout.strip()
+        clone = subprocess.run(
+            [
+                "git", "clone", "--shared", "--no-checkout", "--quiet",
+                str(source), str(destination),
+            ],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        if clone.returncode:
+            raise WorkflowError(
+                "cannot construct history-preserving disposable repository copy"
+                + (f"\n{clone.stdout.rstrip()}" if clone.stdout else "")
+            )
+        checkout = subprocess.run(
+            ["git", "checkout", "--detach", "--quiet", source_head],
+            cwd=destination,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        if checkout.returncode:
+            raise WorkflowError(
+                "cannot checkout source HEAD in disposable repository copy"
+                + (f"\n{checkout.stdout.rstrip()}" if checkout.stdout else "")
+            )
+        shutil.copytree(source, destination, dirs_exist_ok=True, ignore=ignore)
+    else:
+        shutil.copytree(source, destination, ignore=ignore)
+
     if correction_freeze is not None:
         target = destination / ".onboarding" / school_key / "integration-freeze.json"
         target.parent.mkdir(parents=True, exist_ok=True)
