@@ -30,7 +30,7 @@
     "ties": 0,
     "first_season": "1900-1901",
     "last_season": "2025-2026",
-    "opponents": 337
+    "opponents": 338
   },
   "seasons": [
     {
@@ -2447,11 +2447,24 @@
         "conference_key": "big-east",
         "conference_name": "Big East"
       },
-      "first_season": "1909-1910",
+      "first_season": "1990-1991",
       "last_season": "2006-2007",
-      "games": 5,
-      "wins": 2,
+      "games": 4,
+      "wins": 1,
       "losses": 3,
+      "ties": 0
+    },
+    {
+      "opponent_key": "georgetown-college-ky",
+      "opponent_name": "Georgetown College (KY)",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1909-1910",
+      "last_season": "1909-1910",
+      "games": 1,
+      "wins": 1,
+      "losses": 0,
       "ties": 0
     },
     {
@@ -7833,9 +7846,9 @@
       "season_label": "1909-1910",
       "game_date": null,
       "date_precision": "SEASON",
-      "opponent_key": "georgetown",
-      "opponent_name": "Georgetown",
-      "opponent_current_d1": true,
+      "opponent_key": "georgetown-college-ky",
+      "opponent_name": "Georgetown College (KY)",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 45,
       "opponent_score": 34,

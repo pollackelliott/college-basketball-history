@@ -22723,7 +22723,7 @@ CBBG-0022722,1909-1910,,SEASON,alumni,vanderbilt,21,41,vanderbilt,0,TEAM_B_HOME,
 CBBG-0022723,1909-1910,,SEASON,cumberland,vanderbilt,13,57,vanderbilt,0,TEAM_B_HOME,vanderbilt,old-gym,VEN-000155,Nashville,TN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=vanderbilt/VANRAW-00069;venue_key=old-gym;site_type=TEAM_B_HOME;fields=venue_key]
 CBBG-0022724,1909-1910,,SEASON,sewanee,vanderbilt,10,61,vanderbilt,0,TEAM_B_HOME,vanderbilt,old-gym,VEN-000155,Nashville,TN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=vanderbilt/VANRAW-00070;venue_key=old-gym;site_type=TEAM_B_HOME;fields=venue_key]
 CBBG-0022725,1909-1910,,SEASON,centre,vanderbilt,52,28,centre,0,TEAM_A_HOME,centre,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0022726,1909-1910,,SEASON,georgetown,vanderbilt,34,45,vanderbilt,0,TEAM_A_HOME,georgetown,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0022726,1909-1910,,SEASON,georgetown-college-ky,vanderbilt,34,45,vanderbilt,0,TEAM_A_HOME,georgetown-college-ky,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OWNER_APPROVED_CORRECTION_IDENTITY school=vanderbilt source=VANRAW-00072 old=georgetown new=georgetown-college-ky decision=CORRECTION-IDENTITY-VANRAW-00072-CBBG-0022726 plan=6082ecdef41a]
 CBBG-0022727,1909-1910,,SEASON,centre,vanderbilt,70,21,centre,0,TEAM_A_HOME,centre,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022728,1909-1910,,SEASON,louisville-ymca,vanderbilt,39,54,vanderbilt,0,TEAM_A_HOME,louisville-ymca,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0022729,1909-1910,,SEASON,nashville-ymca,vanderbilt,39,53,vanderbilt,0,TEAM_B_HOME,vanderbilt,old-gym,VEN-000155,Nashville,TN,REGULAR_SEASON,,,,PROVISIONAL,[VENUE_REGISTRY_FALLBACK source=vanderbilt/VANRAW-00075;venue_key=old-gym;site_type=TEAM_B_HOME;fields=venue_key]
