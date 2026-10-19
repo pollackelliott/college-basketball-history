@@ -445,6 +445,18 @@ class CorrectionIdentityTests(unittest.TestCase):
                 "correction_source_game_id": "TENRAW-00136",
                 "correction_canonical_game_id": "CBBG-0020298",
             }
+            subprocess.run(
+                ["git", "add", "schools/tennessee/source-games.csv"],
+                cwd=root, check=True,
+            )
+            subprocess.run(
+                [
+                    "git", "-c", "user.name=Regression", "-c",
+                    "user.email=regression@example.test",
+                    "commit", "-qm", "staged correction package",
+                ],
+                cwd=root, check=True,
+            )
             write_table(root / "data/reconciliation/discrepancies.csv",
                         ingest_school.DISCREPANCY_FIELDS, [])
             write_table(root / "data/reference/venues.csv",

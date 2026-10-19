@@ -1647,16 +1647,24 @@ def _verified_correction_identity_context(
     manifest = json.loads(path.read_text(encoding="utf-8"))
     expected = manifest.get("package_member_sha256", {})
     source = repo / "schools" / school_key / "source-games.csv"
+    expected_source_hash = (
+        str(expected.get("source-games.csv", ""))
+        if isinstance(expected, dict)
+        else ""
+    )
     if (
-        not isinstance(expected, dict)
-        or not re.fullmatch(r"[0-9a-f]{64}", str(expected.get("source-games.csv", "")))
-        or sha256_file(source) != expected["source-games.csv"]
+        not re.fullmatch(r"[0-9a-f]{64}", expected_source_hash)
         or not re.fullmatch(r"[0-9a-f]{40}", str(manifest.get("research_base_sha", "")))
     ):
         raise WorkflowError(
             "correction identity requires the exact verified frozen package/source hash"
         )
-    return {**context, "research_base_sha": manifest["research_base_sha"]}
+    return {
+        **context,
+        "research_base_sha": manifest["research_base_sha"],
+        "expected_source_game_hash": expected_source_hash,
+        "source_package_exact": sha256_file(source) == expected_source_hash,
+    }
 
 
 def _published_correction_opponent_rows(
@@ -1764,6 +1772,121 @@ def _archived_applied_correction_decision(
     return item
 
 
+def _verified_applied_correction_source_note_delta(
+    repo: Path,
+    school_key: str,
+    source_id: str,
+    canonical: dict[str, str],
+    context: dict[str, Any],
+) -> None:
+    """Verify the only supported post-apply source-package mutation.
+
+    Identity+site correction execution may append one deterministic explanatory
+    note to the authorized source row. The staged HEAD package must equal the
+    frozen package hash, every other row/field must remain exact, and the note
+    must be reproduced exactly from the archived sealed site decision.
+    """
+    if context.get("source_package_exact"):
+        return
+
+    applied_site = _archived_applied_correction_decision(
+        repo,
+        school_key,
+        source_id,
+        canonical.get("canonical_game_id", "").strip(),
+        canonical,
+        marker_kind="site",
+        expected_category="correction_site_patch",
+        expected_action="APPLY_CANONICAL_PATCH",
+    )
+    if applied_site is None:
+        raise WorkflowError(
+            f"{source_id}: correction source package changed without sealed site authority"
+        )
+
+    relative = f"schools/{school_key}/source-games.csv"
+    try:
+        staged_bytes = subprocess.check_output(
+            ["git", "show", f"HEAD:{relative}"],
+            cwd=repo,
+            stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise WorkflowError(
+            f"{source_id}: cannot inspect staged correction source package"
+        ) from exc
+    if hashlib.sha256(staged_bytes).hexdigest() != context["expected_source_game_hash"]:
+        raise WorkflowError(
+            f"{source_id}: HEAD source package does not match frozen correction package"
+        )
+
+    current_path = repo / relative
+    staged_text = staged_bytes.decode("utf-8-sig")
+    staged_reader = csv.DictReader(io.StringIO(staged_text, newline=""))
+    staged_fields = list(staged_reader.fieldnames or [])
+    current_fields, current_rows = read_csv_table(current_path)
+    staged_rows = list(staged_reader)
+    if staged_fields != current_fields or len(staged_rows) != len(current_rows):
+        raise WorkflowError(
+            f"{source_id}: applied correction source package structure changed"
+        )
+
+    staged_by_id = {
+        row.get("source_game_id", "").strip(): row for row in staged_rows
+    }
+    current_by_id = {
+        row.get("source_game_id", "").strip(): row for row in current_rows
+    }
+    if (
+        set(staged_by_id) != set(current_by_id)
+        or len(staged_by_id) != len(staged_rows)
+        or len(current_by_id) != len(current_rows)
+    ):
+        raise WorkflowError(
+            f"{source_id}: applied correction source package row IDs changed"
+        )
+    patch = applied_site.get("canonical_patch")
+    if not isinstance(patch, dict) or set(patch) != CORRECTION_SITE_PATCH_FIELDS:
+        raise WorkflowError(
+            f"{source_id}: archived sealed site decision has invalid canonical patch"
+        )
+    staged = staged_by_id.get(source_id)
+    current = current_by_id.get(source_id)
+    if staged is None or current is None:
+        raise WorkflowError(
+            f"{source_id}: applied correction source row is missing"
+        )
+    expected_note = _append_note(
+        staged.get("notes", ""),
+        (
+            "OWNER GATE 1 SUPERSEDING CANONICAL SITE: "
+            f"site_type={patch['site_type']}; "
+            f"home={canonical.get('designated_home_team_key', '') or '[neutral]'}; "
+            f"venue_id={patch['venue_id'] or '[unresolved]'}; "
+            f"venue_key={patch['venue_key'] or '[unresolved]'}; "
+            f"locality={patch['site_city']}, {patch['site_state']}; "
+            f"basis={applied_site['resolution_basis']}; "
+            "any contradictory earlier owner-approval claim in preserved notes "
+            "is superseded; source H/A/N and raw_text remain unchanged; "
+            f"decision={applied_site['decision_id']}."
+        ),
+    )
+    for sid, staged_row in staged_by_id.items():
+        current_row = current_by_id[sid]
+        if sid != source_id:
+            if current_row != staged_row:
+                raise WorkflowError(
+                    f"{source_id}: unrelated source row changed after sealed correction"
+                )
+            continue
+        for field in staged_fields:
+            expected_value = expected_note if field == "notes" else staged_row.get(field, "")
+            if current_row.get(field, "") != expected_value:
+                raise WorkflowError(
+                    f"{source_id}: applied correction source row has unauthorized {field} drift"
+                )
+
+
 def _post_publication_identity_review_decisions(
     repo: Path,
     school_key: str,
@@ -1848,6 +1971,9 @@ def _post_publication_identity_review_decisions(
                 raise WorkflowError(
                     f"{sid}: corrected identity exists without sealed applied authority"
                 )
+            _verified_applied_correction_source_note_delta(
+                repo, school_key, sid, game, context
+            )
             current_identity = {
                 field: game.get(field, "") for field in CORRECTION_IDENTITY_FIELDS
             }
@@ -1872,6 +1998,10 @@ def _post_publication_identity_review_decisions(
         if not old_identity_state:
             raise WorkflowError(
                 f"{sid}: original assertion/canonical identity does not match published baseline"
+            )
+        if not context.get("source_package_exact"):
+            raise WorkflowError(
+                f"{sid}: pre-apply correction source package no longer matches frozen package"
             )
         drift = assertion_drift(source, assertion)
         if drift and not _is_authorized_correction_assertion_drift(
@@ -1940,6 +2070,10 @@ def apply_pre_ingest_correction_identity_patches(
     context = _verified_correction_identity_context(repo, school)
     if context is None:
         raise WorkflowError("correction identity patches require a verified correction freeze")
+    if not context.get("source_package_exact"):
+        raise WorkflowError(
+            "correction identity apply requires the exact frozen source package"
+        )
     source_path = repo / "schools" / school / "source-games.csv"
     canonical_path = repo / "data/canonical/games.csv"
     assertion_path = repo / "data/evidence/game-assertions.csv"
@@ -2129,6 +2263,9 @@ def _post_publication_site_review_decisions(
             expected_action="APPLY_CANONICAL_PATCH",
         )
         if applied_site is not None:
+            _verified_applied_correction_source_note_delta(
+                repo, school_key, source_id, canonical, context
+            )
             patch = applied_site.get("canonical_patch")
             current_site = {
                 key: canonical.get(key, "").strip()
