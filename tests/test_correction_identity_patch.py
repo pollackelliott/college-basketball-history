@@ -382,7 +382,6 @@ class CorrectionIdentityTests(unittest.TestCase):
             source_path = root / "schools/tennessee/source-games.csv"
             source_before = source_path.read_bytes()
             with (
-                patch.object(onboard_school, "archive_approved_plan", return_value=archive),
                 patch.object(onboard_school, "run", return_value="site build mocked"),
                 patch.object(
                     onboard_school, "capture_correction_site_report",
@@ -402,6 +401,18 @@ class CorrectionIdentityTests(unittest.TestCase):
             self.assertEqual(
                 assertion_row["normalized_opponent_name"], "Georgetown (Ky.)"
             )
+            rerun_identity, rerun_projected = self.reviews(root)
+            rerun_assertions = plan.read_csv(
+                root / "data/evidence/game-assertions.csv"
+            )
+            rerun_sites = plan._post_publication_site_review_decisions(
+                root, "tennessee",
+                plan.read_csv(root / "schools/tennessee/source-games.csv"),
+                rerun_projected,
+                {("tennessee", "TENRAW-00136"): rerun_assertions},
+                {"CBBG-0020298": rerun_assertions},
+            )
+            self.assertEqual((rerun_identity, rerun_sites), ([], []))
 
     def test_one_game_sealed_execution_changes_only_authorized_records(self):
         with tempfile.TemporaryDirectory() as td:
@@ -434,6 +445,18 @@ class CorrectionIdentityTests(unittest.TestCase):
                 "correction_source_game_id": "TENRAW-00136",
                 "correction_canonical_game_id": "CBBG-0020298",
             }
+            subprocess.run(
+                ["git", "add", "schools/tennessee/source-games.csv"],
+                cwd=root, check=True,
+            )
+            subprocess.run(
+                [
+                    "git", "-c", "user.name=Regression", "-c",
+                    "user.email=regression@example.test",
+                    "commit", "-qm", "staged correction package",
+                ],
+                cwd=root, check=True,
+            )
             write_table(root / "data/reconciliation/discrepancies.csv",
                         ingest_school.DISCREPANCY_FIELDS, [])
             write_table(root / "data/reference/venues.csv",
@@ -466,7 +489,6 @@ class CorrectionIdentityTests(unittest.TestCase):
                 "status": "PASS", "errors": [], "warnings": [],
             }
             with (
-                patch.object(onboard_school, "archive_approved_plan", return_value=archive),
                 patch.object(onboard_school, "run", return_value="site build mocked"),
                 patch.object(
                     onboard_school, "capture_correction_site_report",
@@ -486,6 +508,31 @@ class CorrectionIdentityTests(unittest.TestCase):
                              ("georgetown-ky", "KY"))
             self.assertEqual(src["raw_text"], source()["raw_text"])
             self.assertEqual(plan.read_csv(root / "data/reconciliation/discrepancies.csv"), [])
+            rerun_identity, rerun_projected = self.reviews(root)
+            rerun_assertions = plan.read_csv(
+                root / "data/evidence/game-assertions.csv"
+            )
+            rerun_sites = plan._post_publication_site_review_decisions(
+                root, "tennessee",
+                plan.read_csv(root / "schools/tennessee/source-games.csv"),
+                rerun_projected,
+                {("tennessee", "TENRAW-00136"): rerun_assertions},
+                {"CBBG-0020298": rerun_assertions},
+            )
+            self.assertEqual((rerun_identity, rerun_sites), ([], []))
+
+    def test_applied_identity_without_archived_plan_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root, new_state="")
+            decisions, _ = self.reviews(root)
+            plan.apply_pre_ingest_correction_identity_patches(
+                root, self.approved(decisions[0])
+            )
+            with self.assertRaisesRegex(
+                plan.WorkflowError, "lacks archived sealed plan"
+            ):
+                self.reviews(root)
 
     def test_identity_only_boundary_rejects_source_note_mutation(self):
         with tempfile.TemporaryDirectory() as td:
