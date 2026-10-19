@@ -1,4 +1,7 @@
+import json
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -118,6 +121,98 @@ class PullRequestBodyTests(unittest.TestCase):
         )
         self.assertIn("`data/canonical/games.csv`", body)
         self.assertNotIn("## Change boundary", body)
+
+
+class ProductionProofCheckoutTests(unittest.TestCase):
+    def git(self, repo, *args):
+        return subprocess.check_output(
+            ["git", *args], cwd=repo, text=True
+        ).strip()
+
+    def test_detached_proof_does_not_require_local_main_branch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            main_owner = root / "main-owner"
+            proof = root / "proof"
+            source.mkdir()
+            subprocess.run(["git", "init", "-q", "-b", "main"], cwd=source, check=True)
+            (source / "tracked.txt").write_text("merged\n", encoding="utf-8")
+            subprocess.run(["git", "add", "tracked.txt"], cwd=source, check=True)
+            subprocess.run(
+                [
+                    "git", "-c", "user.name=Regression",
+                    "-c", "user.email=regression@example.test",
+                    "commit", "-qm", "base",
+                ],
+                cwd=source,
+                check=True,
+            )
+            merge_sha = self.git(source, "rev-parse", "HEAD")
+            subprocess.run(
+                ["git", "branch", "data/example-onboarding"],
+                cwd=source,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "switch", "-q", "data/example-onboarding"],
+                cwd=source,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "worktree", "add", "-q", str(main_owner), "main"],
+                cwd=source,
+                check=True,
+            )
+
+            release_school.create_production_proof_repository(
+                source,
+                proof,
+                merge_sha,
+                school_key="example",
+                correction_freeze=None,
+            )
+
+            self.assertEqual(self.git(proof, "rev-parse", "HEAD"), merge_sha)
+            self.assertEqual(
+                self.git(source, "branch", "--show-current"),
+                "data/example-onboarding",
+            )
+            self.assertEqual((proof / "tracked.txt").read_text(), "merged\n")
+
+    def test_detached_proof_transfers_only_exact_correction_freeze(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            proof = root / "proof"
+            source.mkdir()
+            subprocess.run(["git", "init", "-q", "-b", "main"], cwd=source, check=True)
+            (source / ".gitignore").write_text(".onboarding/\n", encoding="utf-8")
+            (source / "tracked.txt").write_text("merged\n", encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=source, check=True)
+            subprocess.run(
+                [
+                    "git", "-c", "user.name=Regression",
+                    "-c", "user.email=regression@example.test",
+                    "commit", "-qm", "base",
+                ],
+                cwd=source,
+                check=True,
+            )
+            merge_sha = self.git(source, "rev-parse", "HEAD")
+            payload = b'{"status":"INTEGRATION_FROZEN"}\n'
+
+            release_school.create_production_proof_repository(
+                source,
+                proof,
+                merge_sha,
+                school_key="example",
+                correction_freeze=payload,
+            )
+
+            target = proof / ".onboarding/example/integration-freeze.json"
+            self.assertEqual(target.read_bytes(), payload)
+            self.assertFalse((proof / ".onboarding/example/other.json").exists())
 
 
 class ProtectedMainMergeTests(unittest.TestCase):
