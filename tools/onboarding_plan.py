@@ -1677,6 +1677,93 @@ def _published_correction_opponent_rows(
     return by_id
 
 
+def _archived_applied_correction_decision(
+    repo: Path,
+    school_key: str,
+    source_id: str,
+    game_id: str,
+    canonical: dict[str, str],
+    *,
+    marker_kind: str,
+    expected_category: str,
+    expected_action: str,
+) -> dict[str, Any] | None:
+    """Return one exact archived sealed correction decision already applied.
+
+    A current canonical note is not authority by itself. The note must identify
+    an archived approved plan whose full hash, school, decision, source, game,
+    category, and action all match the current correction context.
+    """
+    if marker_kind == "identity":
+        marker = (
+            r"\[OWNER_APPROVED_CORRECTION_IDENTITY "
+            + rf"school={re.escape(school_key)} "
+            + rf"source={re.escape(source_id)} "
+            + r"old=[^\s\]]+ new=[^\s\]]+ "
+            + r"decision=([^\s\]]+) plan=([0-9a-f]{12})\]"
+        )
+    elif marker_kind == "site":
+        marker = (
+            r"\[OWNER_APPROVED_CORRECTION_SITE_PATCH "
+            + rf"school={re.escape(school_key)} "
+            + rf"source={re.escape(source_id)} "
+            + r"decision=([^\s\]]+) plan=([0-9a-f]{12})\]"
+        )
+    else:
+        raise WorkflowError("invalid correction applied-state marker kind")
+
+    matches = re.findall(marker, canonical.get("notes", ""))
+    if not matches:
+        return None
+    if len(matches) != 1:
+        raise WorkflowError(
+            f"{source_id}: ambiguous applied correction marker population"
+        )
+    decision_id, plan_prefix = matches[0]
+    archive = (
+        repo / "data/reconciliation/onboarding-decisions"
+        / f"{school_key}-{plan_prefix}.json"
+    )
+    if not archive.is_file():
+        raise WorkflowError(
+            f"{source_id}: applied correction marker lacks archived sealed plan"
+        )
+    try:
+        approved = json.loads(archive.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise WorkflowError(
+            f"{source_id}: archived sealed correction plan is unreadable"
+        ) from exc
+    approved_hash = str(approved.get("approved_plan_hash", ""))
+    if (
+        approved.get("school_key") != school_key
+        or not re.fullmatch(r"[0-9a-f]{64}", approved_hash)
+        or not approved_hash.startswith(plan_prefix)
+    ):
+        raise WorkflowError(
+            f"{source_id}: archived sealed correction plan identity mismatch"
+        )
+    items = [
+        item for item in approved.get("decisions", [])
+        if item.get("decision_id") == decision_id
+    ]
+    if len(items) != 1:
+        raise WorkflowError(
+            f"{source_id}: archived sealed correction decision is missing or duplicated"
+        )
+    item = items[0]
+    if (
+        item.get("category") != expected_category
+        or item.get("decision") != expected_action
+        or item.get("source_game_id") != source_id
+        or item.get("canonical_game_id") != game_id
+    ):
+        raise WorkflowError(
+            f"{source_id}: archived sealed correction decision context mismatch"
+        )
+    return item
+
+
 def _post_publication_identity_review_decisions(
     repo: Path,
     school_key: str,
@@ -1721,17 +1808,71 @@ def _post_publication_identity_review_decisions(
         game = canonical_by_id.get(game_id)
         if game is None or len(assertions_by_game.get(game_id, [])) != 1:
             raise WorkflowError(f"{sid}: correction identity needs an exclusively linked canonical game")
-        if (
-            assertion.get("normalized_opponent_key", "").strip() != old_key
-            or assertion.get("source_program_key", "").strip() != school_key
-            or assertion.get("source_game_id", "").strip() != sid
-            or assertion.get("season_label", "").strip() != source.get("season_label", "").strip()
-            or tuple(sorted((school_key, old_key))) !=
+        common_identity_context_ok = (
+            assertion.get("source_program_key", "").strip() == school_key
+            and assertion.get("source_game_id", "").strip() == sid
+            and assertion.get("season_label", "").strip()
+                == source.get("season_label", "").strip()
+            and game.get("season_label", "").strip()
+                == source.get("season_label", "").strip()
+            and original.get("source_program_key", "").strip() == school_key
+        )
+        old_identity_state = (
+            assertion.get("normalized_opponent_key", "").strip() == old_key
+            and tuple(sorted((school_key, old_key))) ==
                 (game.get("team_a_key", "").strip(), game.get("team_b_key", "").strip())
-            or game.get("season_label", "").strip() != source.get("season_label", "").strip()
-            or original.get("source_program_key", "").strip() != school_key
-        ):
-            raise WorkflowError(f"{sid}: original assertion/canonical identity does not match published baseline")
+        )
+        new_identity_state = (
+            assertion.get("normalized_opponent_key", "").strip() == new_key
+            and assertion.get("normalized_opponent_name", "").strip()
+                == source.get("normalized_opponent_name", "").strip()
+            and tuple(sorted((school_key, new_key))) ==
+                (game.get("team_a_key", "").strip(), game.get("team_b_key", "").strip())
+        )
+        if not common_identity_context_ok:
+            raise WorkflowError(
+                f"{sid}: assertion/canonical correction context does not match published baseline"
+            )
+        if new_identity_state:
+            applied = _archived_applied_correction_decision(
+                repo,
+                school_key,
+                sid,
+                game_id,
+                game,
+                marker_kind="identity",
+                expected_category="correction_identity_patch",
+                expected_action=CORRECTION_IDENTITY_ACTION,
+            )
+            if applied is None:
+                raise WorkflowError(
+                    f"{sid}: corrected identity exists without sealed applied authority"
+                )
+            current_identity = {
+                field: game.get(field, "") for field in CORRECTION_IDENTITY_FIELDS
+            }
+            if (
+                applied.get("old_opponent_key") != old_key
+                or applied.get("new_opponent_key") != new_key
+                or applied.get("assertion_id") != assertion.get("assertion_id")
+                or applied.get("canonical_identity_projected") != current_identity
+            ):
+                raise WorkflowError(
+                    f"{sid}: applied correction identity differs from archived sealed decision"
+                )
+            drift = assertion_drift(source, assertion)
+            if drift and not _is_authorized_correction_assertion_drift(
+                context, source, assertion, drift
+            ):
+                raise WorkflowError(
+                    f"{sid}: applied correction has unauthorized assertion drift"
+                )
+            projected[game_id] = game
+            continue
+        if not old_identity_state:
+            raise WorkflowError(
+                f"{sid}: original assertion/canonical identity does not match published baseline"
+            )
         drift = assertion_drift(source, assertion)
         if drift and not _is_authorized_correction_assertion_drift(
             context, source, assertion, drift
@@ -1976,6 +2117,40 @@ def _post_publication_site_review_decisions(
         )
         if not site_delta and not explicit_site_authority:
             continue
+
+        applied_site = _archived_applied_correction_decision(
+            repo,
+            school_key,
+            source_id,
+            game_id,
+            canonical,
+            marker_kind="site",
+            expected_category="correction_site_patch",
+            expected_action="APPLY_CANONICAL_PATCH",
+        )
+        if applied_site is not None:
+            patch = applied_site.get("canonical_patch")
+            current_site = {
+                key: canonical.get(key, "").strip()
+                for key in CORRECTION_SITE_PATCH_FIELDS
+            }
+            expected_site = (
+                {
+                    key: str(patch.get(key, "") or "").strip()
+                    for key in CORRECTION_SITE_PATCH_FIELDS
+                }
+                if isinstance(patch, dict)
+                else {}
+            )
+            if (
+                set(patch or {}) != set(CORRECTION_SITE_PATCH_FIELDS)
+                or current_site != expected_site
+            ):
+                raise WorkflowError(
+                    f"correction site review: {source_id} differs from archived sealed patch"
+                )
+            continue
+
         expected = {
             key: canonical.get(key, "").strip()
             for key in CORRECTION_SITE_PATCH_FIELDS
