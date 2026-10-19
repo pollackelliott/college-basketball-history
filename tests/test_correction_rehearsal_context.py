@@ -142,6 +142,89 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
                 with self.assertRaises(onboard_school.WorkflowError):
                     onboard_school.copy_repository(src, dst, school_key="example")
 
+    def test_identity_only_proof_reaches_rehearsal_and_sealed_apply_gates(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp) / "repo"
+            self.fixture(repo)
+            plan, review = repo / "plan.json", repo / "review.csv"
+            plan.write_text("{}\n")
+            review.write_text("decision_id\n")
+            proof = {
+                "mode": "SINGLE_GAME_CORRECTION_NONREGRESSION",
+                "school_key": "example",
+                "target_game_id": "CBBG-EXAMPLE",
+            }
+            approved = {
+                "school_key": "example",
+                "approved_plan_hash": "approved-hash",
+                "summary": {
+                    "correction_transaction_kind": "SINGLE_GAME_IDENTITY",
+                    "correction_source_game_id": "CORRECTION",
+                    "correction_canonical_game_id": "CBBG-EXAMPLE",
+                },
+            }
+            execution = {"correction_site_nonregression": proof}
+            observations = []
+
+            def gate(
+                checkout, school_key, changed, include_tests=True,
+                correction_source_id="", correction_site_proof=None,
+            ):
+                observations.append(
+                    (correction_source_id, correction_site_proof, include_tests)
+                )
+                return {"site_completeness": "CORRECTION NONREGRESSION PASS"}
+
+            with (
+                patch("onboarding_hardening.onboard_school.ensure_package_checkpoint"),
+                patch("onboarding_hardening.assert_no_unapproved_semantic_drift"),
+                patch(
+                    "onboarding_hardening.approve_plan",
+                    return_value=(approved, "approved-hash"),
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.execute_approved_in_place",
+                    return_value=execution,
+                ),
+                patch(
+                    "onboarding_hardening.onboard_school.run_gates",
+                    side_effect=gate,
+                ),
+            ):
+                result = onboarding_hardening.rehearse_review(
+                    repo, "example", plan_path=plan, review_path=review
+                )
+                self.assertEqual(
+                    result["gates"]["site_completeness"],
+                    "CORRECTION NONREGRESSION PASS",
+                )
+
+            with (
+                patch("onboard_school.ensure_clean_worktree"),
+                patch(
+                    "onboard_school.execute_approved_in_place",
+                    return_value=execution,
+                ),
+                patch("onboard_school.run_gates", side_effect=gate),
+                patch("onboard_school.git", return_value="maintenance-branch"),
+            ):
+                result = onboard_school.transactional_apply(
+                    repo, approved, repo / ".onboarding/example"
+                )
+                self.assertEqual(
+                    result["copied_state_gates"]["site_completeness"],
+                    "CORRECTION NONREGRESSION PASS",
+                )
+
+            self.assertEqual(
+                observations,
+                [
+                    ("CORRECTION", proof, True),
+                    ("CORRECTION", proof, True),
+                    ("CORRECTION", proof, False),
+                ],
+            )
+
     def test_rehearsal_and_sealed_apply_use_correction_scope(self):
         with tempfile.TemporaryDirectory() as temp:
             repo = Path(temp) / "repo"
