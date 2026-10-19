@@ -2384,7 +2384,7 @@
       "opponent_key": "georgetown",
       "opponent_name": "Georgetown",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "big-east",
         "conference_name": "Big East"
@@ -44956,7 +44956,7 @@
       "opponent_key": "georgetown",
       "opponent_name": "Georgetown",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 81,
       "opponent_score": 80,
       "score_known": true,
