@@ -108,7 +108,7 @@
 106,vanderbilt,Furman,furman,Furman,Yes,7,1962-1963,2008-2009,RESOLVED,Inherited established project identity,,
 107,vanderbilt,Gardner-Webb,gardner-webb,Gardner-Webb,Yes,1,2015-2016,2015-2016,RESOLVED,Inherited established project identity,,
 108,vanderbilt,George Washington,george-washington,George Washington,Yes,2,1990-1991,2006-2007,RESOLVED,Curated alias / current D1 registry,,
-109,vanderbilt,Georgetown,georgetown,Georgetown,Yes,5,1909-1910,2006-2007,RESOLVED,Inherited established project identity,,
+109,vanderbilt,Georgetown,georgetown,Georgetown,Yes,4,1990-1991,2006-2007,RESOLVED,Inherited established project identity,,
 110,vanderbilt,Georgia,georgia,Georgia,Yes,154,1913-1914,2025-2026,RESOLVED,Inherited established project identity,,
 111,vanderbilt,Georgia Southern,georgia-southern,Georgia Southern,Yes,1,2002-2003,2002-2003,RESOLVED,Inherited established project identity,,
 112,vanderbilt,Georgia State,georgia-state,Georgia State,Yes,2,1979-1980,2013-2014,RESOLVED,Inherited established project identity,,
@@ -354,3 +354,4 @@
 352,vanderbilt,Yale,yale,Yale,Yes,7,1907-1908,2022-2023,RESOLVED,Inherited established project identity,,
 353,vanderbilt,YMHA Peps,ymha-peps,YMHA Peps,No,1,1923-1924,1923-1924,RESOLVED,Inherited established project identity,,
 354,vanderbilt,California,uc-santa-barbara,UC Santa Barbara,Yes,1,1965-1966,1965-1966,RESOLVED,Game-scoped historical identity correction; Vanderbilt literal source label preserved.,,1965-12-21 Vanderbilt 91-64 opponent identified as UC Santa Barbara; source fact book prints California.
+355,vanderbilt,Georgetown,georgetown-college-ky,Georgetown College (KY),No,1,1909-1910,1909-1910,RESOLVED,Game-scoped historical identity correction; Vanderbilt literal source label preserved.,,1909-1910 Vanderbilt 45-34 opponent identified as Georgetown College (KY); source fact book prints Georgetown.
