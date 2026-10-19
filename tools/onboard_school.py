@@ -875,6 +875,7 @@ def _prove_single_game_correction_boundary(
     after: dict[str, tuple[list[str], list[dict[str, str]]]],
     *,
     source_id: str, game_id: str, school: str,
+    expect_source_change: bool = True,
 ) -> None:
     """Reject additions/deletions or changes to ANY other canonical/source evidence."""
     keys = {
@@ -915,6 +916,10 @@ def _prove_single_game_correction_boundary(
             )
         prior, current = altered[0]
         if kind == "source":
+            if not expect_source_change:
+                raise WorkflowError(
+                    "single-game identity-only correction changed staged source row"
+                )
             authorized = (
                 prior.get(field) == current.get(field) == source_id
                 and prior.get("raw_text") == current.get("raw_text")
@@ -965,9 +970,10 @@ def _prove_single_game_correction_boundary(
                 f"single-game correction changed unauthorized {kind} evidence"
             )
     for kind in ("source", "canonical", "assertion"):
-        if changed_counts.get(kind, 0) != 1:
+        expected = 0 if kind == "source" and not expect_source_change else 1
+        if changed_counts.get(kind, 0) != expected:
             raise WorkflowError(
-                f"single-game correction requires one {kind} row, "
+                f"single-game correction requires {expected} changed {kind} row(s), "
                 f"got {changed_counts.get(kind, 0)}"
             )
 
@@ -980,29 +986,38 @@ def _execute_single_game_correction(
     if _validated_correction_freeze_bytes(repo, school) is None:
         raise WorkflowError("single-game correction lacks trusted Integration Freeze")
     summary = approved.get("summary", {})
+    transaction_kind = summary.get("correction_transaction_kind", "")
+    if transaction_kind not in {
+        "SINGLE_GAME_IDENTITY",
+        "SINGLE_GAME_IDENTITY_SITE",
+    }:
+        raise WorkflowError("invalid sealed single-game correction transaction kind")
+    requires_site = transaction_kind == "SINGLE_GAME_IDENTITY_SITE"
     sid = summary.get("correction_source_game_id", "")
     gid = summary.get("correction_canonical_game_id", "")
     items = approved.get("decisions", [])
+    expected_categories = {"correction_identity_patch"}
+    if requires_site:
+        expected_categories.add("correction_site_patch")
     if (
-        not sid or not gid or len(items) != 2
-        or {row.get("category") for row in items}
-            != {"correction_identity_patch", "correction_site_patch"}
+        not sid or not gid
+        or len(items) != (2 if requires_site else 1)
+        or {row.get("category") for row in items} != expected_categories
         or any(
             row.get("source_game_id") != sid
             or row.get("canonical_game_id") != gid
             for row in items
         )
         or any(
-            row.get("decision") != action
-            for row in items
-            for action in (
-                ["APPLY_CORRECTION_IDENTITY_PATCH"]
-                if row["category"] == "correction_identity_patch"
-                else ["APPLY_CANONICAL_PATCH"]
+            row.get("decision") != (
+                "APPLY_CORRECTION_IDENTITY_PATCH"
+                if row.get("category") == "correction_identity_patch"
+                else "APPLY_CANONICAL_PATCH"
             )
+            for row in items
         )
     ):
-        raise WorkflowError("invalid sealed two-decision correction-only scope")
+        raise WorkflowError("invalid sealed single-game correction-only scope")
 
     before = _single_game_correction_snapshot(repo, school)
     before_site = capture_correction_site_report(repo, school)
@@ -1012,15 +1027,24 @@ def _execute_single_game_correction(
     print("\n=== correction-only canonical site and assertion reconciliation ===")
     reconciliation = apply_reconciliation_decisions(repo, approved)
     print(json.dumps(reconciliation, sort_keys=True))
-    if identity.get("correction_identity_patches") != 1 or reconciliation.get(
-        "correction_site_patches"
-    ) != 1:
-        raise WorkflowError("single-game correction did not apply exactly both patches")
+    expected_site_patches = 1 if requires_site else 0
+    if (
+        identity.get("correction_identity_patches") != 1
+        or reconciliation.get("correction_site_patches", 0) != expected_site_patches
+    ):
+        raise WorkflowError(
+            "single-game correction did not apply the exact sealed correction patches"
+        )
     after = _single_game_correction_snapshot(repo, school)
     _prove_single_game_correction_boundary(
-        before, after, source_id=sid, game_id=gid, school=school
+        before,
+        after,
+        source_id=sid,
+        game_id=gid,
+        school=school,
+        expect_source_change=requires_site,
     )
-    print("PASS: exact one-game source/canonical/assertion delta; no other rows changed")
+    print("PASS: exact one-game correction delta; no other rows changed")
 
     archive = archive_approved_plan(repo, approved)
     print(f"Archived sealed decisions: {archive.relative_to(repo)}")
@@ -1047,7 +1071,7 @@ def _execute_single_game_correction(
         "correction_site_nonregression": site_proof,
         "correction_identity_patches": identity,
         "reconciliation": reconciliation,
-        "transaction_kind": "SINGLE_GAME_IDENTITY_SITE",
+        "transaction_kind": transaction_kind,
         "archive": archive.relative_to(repo).as_posix(),
         "site_output": site_output,
     }
@@ -1060,7 +1084,7 @@ def execute_approved_in_place(
     school_key = approved["school_key"]
     if approved.get("summary", {}).get(
         "correction_transaction_kind"
-    ) == "SINGLE_GAME_IDENTITY_SITE":
+    ) in {"SINGLE_GAME_IDENTITY", "SINGLE_GAME_IDENTITY_SITE"}:
         return _execute_single_game_correction(repo, approved)
 
     print("\n=== sealed correction-only identity retarget ===")
