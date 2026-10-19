@@ -4595,7 +4595,7 @@
       "state": "CT",
       "primary_hex": "#004B8D",
       "secondary_hex": "#FFC423",
-      "history_start_season": null,
+      "history_start_season": "2025-2026",
       "conference_regular_season_championships": 0,
       "conference_tournament_championships": 0,
       "ncaa_tournament_appearances": 0,
@@ -4604,7 +4604,7 @@
       "best_finish_key": null,
       "best_finish_year": null,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"

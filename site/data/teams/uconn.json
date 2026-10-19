@@ -3303,7 +3303,7 @@
       "opponent_key": "new-haven",
       "opponent_name": "New Haven",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -77093,7 +77093,7 @@
       "opponent_key": "new-haven",
       "opponent_name": "New Haven",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 79,
       "opponent_score": 55,
       "score_known": true,
