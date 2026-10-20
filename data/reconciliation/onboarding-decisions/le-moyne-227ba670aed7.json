@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "le-moyne",
+  "created_at": "2026-10-20T03:57:20.788534+00:00",
+  "input_fingerprint": {
+    "sha256": "dcf82160078db83fbea5fa010e9814a20e994b5bab87304c32072fde113fbe1c",
+    "git_head": "8d72051b9d99b6e006e0d7c923983a2033898819",
+    "files": {
+      "schools/le-moyne/source-games.csv": "5af696405173224271d0690c92a81136ad8442ff545d1295216ef7ee14b22db3",
+      "schools/le-moyne/opponents.csv": "323716ace8cb13e378187500a40f3ad3ebc9807271378be2e8d32b902820fc2a",
+      "schools/le-moyne/venues.csv": "ff96b9a0575b1f95041441319406bf92774af05a8e5b32814bae275979881795",
+      "schools/le-moyne/conferences.csv": "6213312636440497041ecf38c4e2517a67591085ff5eaea663fd95601ebdca67",
+      "schools/le-moyne/notes.md": "a7b2f3a9bcab967ec589da83872a939e6bc0b8b256b950d6461ab3f7ec5b004e",
+      "schools/le-moyne/source-notes.md": "bddef11f936c63ab05f2ba1b11fc118fc051aa4ceade81c4519938cd65423664",
+      "data/canonical/games.csv": "6f17c5de41b0e7e2a3f0f384a983545fd7813fb55f1ba298e9a22b1c5d3de65c",
+      "data/evidence/game-assertions.csv": "2d13cb410c010980378d32caa022f61c5edbd7ec9465ac79bc04cb124a65aa84",
+      "data/reconciliation/discrepancies.csv": "4ca57459c4050daf2f2720fcf0cad6f94f75d6df1a5be22053afa101d56e368e",
+      "data/reference/programs.csv": "c49578a151101fa2317fe2966936b6e3dfacb37cea8df6c9890593b2e6c86624",
+      "data/reference/program-names.csv": "b60faf2e8009d6df00097309d2537b29644a535fb26800ed52ccc6452828c65e",
+      "data/reference/program-accomplishments.csv": "1ea8700012788e3926572c93e5676ff7839f1dab6571bddbe5cf37db74547eb9",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "3a8f60da6f0cd89198dc48df12e13a55f07dc9247bfd737f62a84dfb9bb3fbdc",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "23537ef3a9d1825c38c22189d9274980f10759970b978a600948bef74d6895f8",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "2ff31bbef154741e7be730206e2c8dfdcb0a26626fbaab593b305ed9eef4e794",
+      "tools/onboarding_plan.py": "72e87798ed6d5f014b58b74b081fbb40fb4c75fa9d8460c7fa06ae42ebc0ed00",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 96,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 45,
+      "venues": 7,
+      "conference_intervals": 1,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "summary": {
+    "source_rows": 96,
+    "in_scope_source_rows": 96,
+    "pre_cutoff_rows": 0,
+    "history_start_season": "2023-2024",
+    "pre_cutoff_first_season": "",
+    "pre_cutoff_last_season": "",
+    "existing_game_matches": 18,
+    "new_canonical_games": 78,
+    "identity_review_required": 0,
+    "assertions_to_add": 96,
+    "canonical_enrichment_games": 2,
+    "canonical_enrichment_fields": 8,
+    "discrepancies_to_add": 0,
+    "conditional_discrepancies": 0,
+    "canonical_site_patch_reviews": 0,
+    "affected_public_programs": [
+      "boston-college",
+      "georgetown",
+      "new-haven",
+      "notre-dame",
+      "penn-state",
+      "stonehill",
+      "syracuse",
+      "texas",
+      "uconn",
+      "villanova",
+      "xavier"
+    ],
+    "already_public": false
+  },
+  "decisions": [
+    {
+      "decision_id": "ACCOMPLISHMENTS-LE-MOYNE",
+      "category": "accomplishments",
+      "source_game_id": "",
+      "season_label": "",
+      "source_game_date": "[unknown]",
+      "canonical_game_date": "[unknown]",
+      "matchup": "le-moyne",
+      "field_name": "program_accomplishments",
+      "source_value": "{\"best_finish_key\":\"\",\"best_finish_year\":\"\",\"conference_regular_season_championships\":\"0\",\"conference_tournament_championships\":\"0\",\"final_four_appearances\":\"0\",\"national_championships\":\"0\",\"ncaa_tournament_appearances\":\"0\"}",
+      "canonical_value": "{\"best_finish_key\":null,\"best_finish_year\":null,\"final_four_appearances\":0,\"national_championships\":0,\"ncaa_tournament_appearances\":0}",
+      "relevant_evidence": "Canonical NCAA fields match; conference titles still require authoritative source verification.",
+      "recommended_action": "VERIFY_REFERENCE_VALUES",
+      "allowed_actions": [
+        "KEEP_UNDER_REVIEW",
+        "VERIFY_REFERENCE_VALUES"
+      ],
+      "decision": "VERIFY_REFERENCE_VALUES",
+      "resolution_basis": "The official NEC men's basketball championship history (https://necsports.com/sports/2011/9/22/mbball_443.aspx) identifies other regular-season and tournament champions in 2023-24, 2024-25 and 2025-26. Le Moyne's official schedules and accepted 96-game ledger show no NCAA Tournament appearances in its approved 2023-24+ Division I scope. The recorded zero NCAA, Final Four, national-title and conference-title values are supported.",
+      "canonical_patch_json": "{}",
+      "source_patch_json": "{}",
+      "notes": "Approval basis must cite the authoritative accomplishment source.",
+      "canonical_patch": {},
+      "source_patch": {}
+    },
+    {
+      "decision_id": "PUBLICATION-LE-MOYNE",
+      "category": "publication",
+      "source_game_id": "",
+      "season_label": "",
+      "source_game_date": "[unknown]",
+      "canonical_game_date": "[unknown]",
+      "matchup": "le-moyne",
+      "field_name": "public_page_enabled",
+      "source_value": "No",
+      "canonical_value": "Yes",
+      "relevant_evidence": "96 in-scope source rows; 0 identity reviews; 0 definite and 0 conditional discrepancies.",
+      "recommended_action": "ENABLE_PUBLIC_PAGE",
+      "allowed_actions": [
+        "ENABLE_PUBLIC_PAGE",
+        "KEEP_DISABLED"
+      ],
+      "decision": "ENABLE_PUBLIC_PAGE",
+      "resolution_basis": "Enable the owner-approved 2023-24+ public history through 2025-26. All 96 source games are in scope; preflight reports 18 canonical matches, 78 new games, zero identity reviews, zero discrepancies, zero warnings and zero blockers. Publication remains subject to successful rehearsal and explicit Owner Gate 1 approval.",
+      "canonical_patch_json": "{}",
+      "source_patch_json": "{}",
+      "notes": "Publication occurs only after every approved decision and automated gate passes.",
+      "canonical_patch": {},
+      "source_patch": {}
+    }
+  ],
+  "approval": {
+    "approved_by": "Elliott",
+    "approved_at": "2026-10-20T04:08:17.654758+00:00"
+  },
+  "approved_plan_hash": "227ba670aed779d2e5873d6a669d73418ccc9c8a22ce62d093124e2d03fd27aa"
+}
