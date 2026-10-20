@@ -137,7 +137,7 @@ kentucky,52,33,64,17,8,NATIONAL_CHAMPION,2012,OWNER_BASELINE_UNVERIFIED,Owner-su
 la-salle,8,8,12,2,1,NATIONAL_CHAMPION,1954,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 lafayette,15,3,4,0,0,SWEET_SIXTEEN,1957,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 lamar,9,4,6,0,0,SWEET_SIXTEEN,1980,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-le-moyne,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+le-moyne,0,0,0,0,0,,,VERIFIED,"The official NEC men's basketball championship history (https://necsports.com/sports/2011/9/22/mbball_443.aspx) identifies other regular-season and tournament champions in 2023-24, 2024-25 and 2025-26. Le Moyne's official schedules and accepted 96-game ledger show no NCAA Tournament appearances in its approved 2023-24+ Division I scope. The recorded zero NCAA, Final Four, national-title and conference-title values are supported.",MATCH,Verified through onboarding plan 227ba670aed7.
 lehigh,4,6,6,0,0,ROUND_OF_32,2012,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 liberty,8,7,6,0,0,ROUND_OF_32,2019,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 lindenwood,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
