@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "mercyhurst",
+  "created_at": "2026-10-20T04:57:56.538333+00:00",
+  "input_fingerprint": {
+    "sha256": "936434d297507968fe468b0f62e175d00ccd07ab535bf6bdb757103e72b05e51",
+    "git_head": "de287a47206e9d4537acc44062eaa29dd132d52d",
+    "files": {
+      "schools/mercyhurst/source-games.csv": "24dcfbd2f8b8b44077f65f0e858d73686b980c27c89f773bf21283b4eb0f6a7a",
+      "schools/mercyhurst/opponents.csv": "3ffc15fea952864b9143ece47ae30d23b01be14672556546617100bb7e1f2968",
+      "schools/mercyhurst/venues.csv": "199ebea1cc1640242b6f8b9f6c4cdf8c41f6cbfb747b8307be8ed3ab214483ab",
+      "schools/mercyhurst/conferences.csv": "5a55cd6cd09a81854fac6ccb42afacfb82aa3ff262c50e4e35ff818622d7c7d2",
+      "schools/mercyhurst/notes.md": "dcab29a7a0e7e87cf04984b41bceba902e080dc47a598eca51a5f24044111096",
+      "schools/mercyhurst/source-notes.md": "68bac9de6ee3342f0632cf707671745b71d1a39f05985871d28ed66094ec63d7",
+      "data/canonical/games.csv": "ce24a2c26ca38ab261181c3adba521b88268418e5b87acc2a29c266078ac7b95",
+      "data/evidence/game-assertions.csv": "de98147267b368e38d334408b3b8df904dfa404fb98772b4310bdf9f36626699",
+      "data/reconciliation/discrepancies.csv": "4ca57459c4050daf2f2720fcf0cad6f94f75d6df1a5be22053afa101d56e368e",
+      "data/reference/programs.csv": "03981dfd75e8bcf196bb8a380494d03233b2357d29a7c54d89dd3cf71f0a8c22",
+      "data/reference/program-names.csv": "b60faf2e8009d6df00097309d2537b29644a535fb26800ed52ccc6452828c65e",
+      "data/reference/program-accomplishments.csv": "9c2166cb8cdd46410dd92e6f6b22db5a5338bd606e9ac0deb1fbd4477e30f031",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "3a8f60da6f0cd89198dc48df12e13a55f07dc9247bfd737f62a84dfb9bb3fbdc",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "23537ef3a9d1825c38c22189d9274980f10759970b978a600948bef74d6895f8",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "2ff31bbef154741e7be730206e2c8dfdcb0a26626fbaab593b305ed9eef4e794",
+      "tools/onboarding_plan.py": "72e87798ed6d5f014b58b74b081fbb40fb4c75fa9d8460c7fa06ae42ebc0ed00",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 65,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 43,
+      "venues": 2,
+      "conference_intervals": 1,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "summary": {
+    "source_rows": 65,
+    "in_scope_source_rows": 65,
+    "pre_cutoff_rows": 0,
+    "history_start_season": "2024-2025",
+    "pre_cutoff_first_season": "",
+    "pre_cutoff_last_season": "",
+    "existing_game_matches": 16,
+    "new_canonical_games": 49,
+    "identity_review_required": 0,
+    "assertions_to_add": 65,
+    "canonical_enrichment_games": 3,
+    "canonical_enrichment_fields": 11,
+    "discrepancies_to_add": 0,
+    "conditional_discrepancies": 0,
+    "canonical_site_patch_reviews": 0,
+    "affected_public_programs": [
+      "california",
+      "le-moyne",
+      "new-haven",
+      "northwestern",
+      "stonehill",
+      "syracuse",
+      "west-virginia"
+    ],
+    "already_public": false
+  },
+  "decisions": [
+    {
+      "decision_id": "ACCOMPLISHMENTS-MERCYHURST",
+      "category": "accomplishments",
+      "source_game_id": "",
+      "season_label": "",
+      "source_game_date": "[unknown]",
+      "canonical_game_date": "[unknown]",
+      "matchup": "mercyhurst",
+      "field_name": "program_accomplishments",
+      "source_value": "{\"best_finish_key\":\"\",\"best_finish_year\":\"\",\"conference_regular_season_championships\":\"0\",\"conference_tournament_championships\":\"0\",\"final_four_appearances\":\"0\",\"national_championships\":\"0\",\"ncaa_tournament_appearances\":\"0\"}",
+      "canonical_value": "{\"best_finish_key\":null,\"best_finish_year\":null,\"final_four_appearances\":0,\"national_championships\":0,\"ncaa_tournament_appearances\":0}",
+      "relevant_evidence": "Canonical NCAA fields match; conference titles still require authoritative source verification.",
+      "recommended_action": "VERIFY_REFERENCE_VALUES",
+      "allowed_actions": [
+        "KEEP_UNDER_REVIEW",
+        "VERIFY_REFERENCE_VALUES"
+      ],
+      "decision": "VERIFY_REFERENCE_VALUES",
+      "resolution_basis": "Owner-approved 2024-25+ scope. Official NEC 2024-25 and 2025-26 standings establish no Mercyhurst regular-season title. Saint Francis won the 2025 NEC Tournament and LIU won the 2026 tournament; Mercyhurst was 2026 runner-up. Accepted 65-game research package shows no NCAA Tournament appearances. Sources: https://necsports.com/sports/2011/9/22/mbball_446.aspx?path=mbball ; https://necsports.com/news/2025/3/17/MBB_NCAA_Announcement_SFU_25.aspx ; https://necsports.com/sports/2025/7/10/GEN_Championships25-26.aspx ; https://hurstathletics.com/news/2026/3/10/mens-basketball-closes-out-season-at-liu-named-runner-up-in-nec-tournament.aspx",
+      "canonical_patch_json": "{}",
+      "source_patch_json": "{}",
+      "notes": "Approval basis must cite the authoritative accomplishment source.",
+      "canonical_patch": {},
+      "source_patch": {}
+    },
+    {
+      "decision_id": "PUBLICATION-MERCYHURST",
+      "category": "publication",
+      "source_game_id": "",
+      "season_label": "",
+      "source_game_date": "[unknown]",
+      "canonical_game_date": "[unknown]",
+      "matchup": "mercyhurst",
+      "field_name": "public_page_enabled",
+      "source_value": "No",
+      "canonical_value": "Yes",
+      "relevant_evidence": "65 in-scope source rows; 0 identity reviews; 0 definite and 0 conditional discrepancies.",
+      "recommended_action": "ENABLE_PUBLIC_PAGE",
+      "allowed_actions": [
+        "ENABLE_PUBLIC_PAGE",
+        "KEEP_DISABLED"
+      ],
+      "decision": "ENABLE_PUBLIC_PAGE",
+      "resolution_basis": "Owner-approved 2024-25+ initial publication scope, complete accepted 65-game Research Freeze, successful current-main rebase and clean canonical preflight. Publication recommended subject to exact-map technical rehearsal, explicit Owner Gate 1 approval, sealed apply, exact Preview approval, and Production verification.",
+      "canonical_patch_json": "{}",
+      "source_patch_json": "{}",
+      "notes": "Publication occurs only after every approved decision and automated gate passes.",
+      "canonical_patch": {},
+      "source_patch": {}
+    }
+  ],
+  "approval": {
+    "approved_by": "Elliott",
+    "approved_at": "2026-10-20T05:09:13.445115+00:00"
+  },
+  "approved_plan_hash": "5d7152abc76a593e4d17d7a9fa29d1fa395d2b530f5ec1a29f060b7412b9f613"
+}

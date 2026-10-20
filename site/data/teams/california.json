@@ -3012,7 +3012,7 @@
       "opponent_key": "mercyhurst",
       "opponent_name": "Mercyhurst",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -79367,7 +79367,7 @@
       "opponent_key": "mercyhurst",
       "opponent_name": "Mercyhurst",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 81,
       "opponent_score": 55,
       "score_known": true,
