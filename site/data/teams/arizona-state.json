@@ -1152,7 +1152,7 @@
       "opponent_key": "chicago-state",
       "opponent_name": "Chicago State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -50528,7 +50528,7 @@
       "opponent_key": "chicago-state",
       "opponent_name": "Chicago State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 86,
       "opponent_score": 50,
       "score_known": true,
