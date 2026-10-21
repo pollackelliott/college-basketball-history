@@ -1511,7 +1511,7 @@
       "opponent_key": "chicago-state",
       "opponent_name": "Chicago State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -4420,7 +4420,7 @@
     },
     {
       "opponent_key": "saint-joseph-s-indiana",
-      "opponent_name": "Saint Joseph’s (IN)",
+      "opponent_name": "Saint Joseph's (IN)",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -22072,7 +22072,7 @@
       "game_date": "1952-01-12",
       "date_precision": "EXACT",
       "opponent_key": "saint-joseph-s-indiana",
-      "opponent_name": "Saint Joseph’s (IN)",
+      "opponent_name": "Saint Joseph's (IN)",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 104,
@@ -62974,7 +62974,7 @@
       "opponent_key": "chicago-state",
       "opponent_name": "Chicago State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 78,
       "opponent_score": 54,
       "score_known": true,
