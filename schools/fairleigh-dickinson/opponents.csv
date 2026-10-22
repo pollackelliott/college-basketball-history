@@ -1,0 +1,519 @@
+source_program_key,source_opponent_label,canonical_opponent_key,canonical_opponent_name,current_d1,games_with_source_label,first_season,last_season,resolution_status,resolution_method,user_choice,audit_note
+fairleigh-dickinson,#1 Gonzaga,gonzaga,Gonzaga,Yes,1,2018-19,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#1 Merrimack$,merrimack,Merrimack,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#1 Purdue,purdue,Purdue,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#1 Saint Francis U$,saint-francis-pa,Saint Francis (PA),No,1,2018-19,2018-19,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,#11/9 Villanova,villanova,Villanova,Yes,1,2015-16,2015-16,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#16 Prairie View A&M,prairie-view-a-m,Prairie View A&M,Yes,1,2018-19,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#16 Texas Southern,texas-southern,Texas Southern,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#22 Maryland,maryland,Maryland,Yes,1,1999-00,1999-00,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#23 Cincinnati,cincinnati,Cincinnati,Yes,1,2016-17,2016-17,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#23 Iowa,iowa,Iowa,Yes,1,2013-14,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#24 Rutgers,rutgers,Rutgers,Yes,1,2020-21,2020-21,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#3 Mercyhurst,mercyhurst,Mercyhurst,Yes,1,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#3 SAINT FRANCIS U$,saint-francis-pa,Saint Francis (PA),No,1,2022-23,2022-23,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,#3 Saint Francis U$,saint-francis-pa,Saint Francis (PA),No,1,2017-18,2017-18,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,#3 Wagner$,wagner,Wagner,Yes,1,2016-17,2016-17,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#4 LIU Brooklyn$,long-island-university,Long Island,Yes,1,2017-18,2017-18,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,#4 LIU$,long-island-university,Long Island,Yes,1,2019-20,2019-20,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,#4 Le Moyne,le-moyne,Le Moyne,Yes,1,2023-24,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#4 Louisville,louisville,Louisville,Yes,1,2011-12,2011-12,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#4 Robert Morris$,robert-morris,Robert Morris,Yes,1,2018-19,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#5 Arizona !,arizona,Arizona,Yes,1,2013-14,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#7 ST. FRANCIS BROOKLYN$,st-francis-brooklyn,St. Francis Brooklyn,No,1,2022-23,2022-23,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,#7 Wagner$,wagner,Wagner,Yes,1,2018-19,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#8 Kentucky,kentucky,Kentucky,Yes,1,2019-20,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,#9 CCSU$,central-connecticut,Central Connecticut,Yes,1,2021-22,2021-22,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,#9 Florida Atlantic,florida-atlantic,Florida Atlantic,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,AKRON,akron,Akron,Yes,1,2008-09,2008-09,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,ALBANY,ualbany,Albany,Yes,1,2010-11,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,AMERICAN,american-university,American,Yes,1,2003-04,2003-04,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,ARMY,army,Army,Yes,2,2004-05,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Adelphi,adelphi,Adelphi,No,6,1967-68,1972-73,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project identity; published key variant adelphi-university noted for current-main rebase.
+fairleigh-dickinson,Albany,ualbany,Albany,Yes,1,2011-12,2011-12,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Albright !,albright,Albright,No,1,1968-69,1968-69,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,American,american-university,American,Yes,3,1975-76,2001-02,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,American Intl.,american-international,American International,No,5,1969-70,1973-74,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,American U.,american-university,American,Yes,3,1967-68,1970-71,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,American U. @,american-university,American,Yes,1,1972-73,1972-73,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Arizona State,arizona-state,Arizona State,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Army,army,Army,Yes,12,1968-69,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Army$,army,Army,Yes,1,2024-25,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Auburn,auburn,Auburn,Yes,1,1976-77,1976-77,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,BRYANT *,bryant,Bryant,Yes,2,2012-13,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,BRYANT*,bryant,Bryant,Yes,6,2009-10,2020-21,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,BUFFALO,buffalo,Buffalo,Yes,1,2003-04,2003-04,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Ball State !,ball-state,Ball State,Yes,1,1982-83,1982-83,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Bloomfield,bloomfield,Bloomfield College,No,1,1999-00,1999-00,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,Boston College,boston-college,Boston College,Yes,3,1992-93,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Boston U.,boston-university,Boston University,Yes,2,1979-80,1981-82,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Boston Univ.,boston-university,Boston University,Yes,2,1989-90,1990-91,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Boston University,boston-university,Boston University,Yes,1,1978-79,1978-79,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Bridgeport,bridgeport,Bridgeport,No,14,1967-68,1980-81,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Brooklyn,brooklyn-college,Brooklyn College,No,1,1982-83,1982-83,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project identity; source shorthand Brooklyn resolved to Brooklyn College in project evidence.
+fairleigh-dickinson,Brooklyn College,brooklyn-college,Brooklyn College,No,3,1981-82,1984-85,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project identity; source shorthand Brooklyn resolved to Brooklyn College in project evidence.
+fairleigh-dickinson,Bryant,bryant,Bryant,Yes,1,2008-09,2008-09,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Bryant *,bryant,Bryant,Yes,2,2011-12,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Bryant*,bryant,Bryant,Yes,13,2009-10,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Buffalo,buffalo,Buffalo,Yes,8,1972-73,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Buffalo (OT),buffalo,Buffalo,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,C.W. Post,c-w-post,C.W. Post,No,7,1967-68,1973-74,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical branch identity; not merged into current LIU.
+fairleigh-dickinson,CABRINI,cabrini,Cabrini,No,1,2003-04,2003-04,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,CALDWELL,caldwell,Caldwell,No,1,2013-14,2013-14,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,CANISIUS,canisius,Canisius,Yes,1,2006-07,2006-07,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,CCNY,ccny,CCNY,No,6,1967-68,1972-73,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,CCSU,central-connecticut,Central Connecticut,Yes,1,2019-20,2019-20,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CCSU*,central-connecticut,Central Connecticut,Yes,20,2005-06,2023-24,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENT. MICHIGAN,central-michigan,Central Michigan,Yes,1,2009-10,2009-10,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENTENARY,centenary-new-jersey,Centenary (NJ),No,1,2022-23,2022-23,RESOLVED,TARGET_INSTITUTIONAL_EXACT_GAME,,Official FDU 2022-23 recap/box score identifies Centenary (N.J.); not Centenary (LA).
+fairleigh-dickinson,CENTRAL CONN*,central-connecticut,Central Connecticut,Yes,1,2007-08,2007-08,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENTRAL CONN. *,central-connecticut,Central Connecticut,Yes,1,2004-05,2004-05,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENTRAL CONN. ST *,central-connecticut,Central Connecticut,Yes,1,2012-13,2012-13,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENTRAL CONN. ST. *,central-connecticut,Central Connecticut,Yes,1,2013-14,2013-14,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENTRAL CONN. ST.*,central-connecticut,Central Connecticut,Yes,1,2003-04,2003-04,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CENTRAL CONN.*,central-connecticut,Central Connecticut,Yes,4,2006-07,2010-11,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,CHICAGO STATE,chicago-state,Chicago State,Yes,1,2023-24,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,COLUMBIA,columbia,Columbia,Yes,1,2023-24,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Caldwell College,caldwell,Caldwell,No,1,1987-88,1987-88,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,California,california,California,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Canisius,canisius,Canisius,Yes,1,2005-06,2005-06,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Catholic U.,catholic-university,Catholic University,No,5,1976-77,1980-81,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,Central Conn. St.,central-connecticut,Central Connecticut,Yes,4,1988-89,1991-92,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Conn. St. !,central-connecticut,Central Connecticut,Yes,1,2003-04,2003-04,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Conn. St. *,central-connecticut,Central Connecticut,Yes,9,1997-98,2004-05,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Conn. St. *!,central-connecticut,Central Connecticut,Yes,1,2024-25,2024-25,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Conn. St.*,central-connecticut,Central Connecticut,Yes,7,2000-01,2024-25,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Conn. State *,central-connecticut,Central Connecticut,Yes,2,2011-12,2013-14,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Conn.*,central-connecticut,Central Connecticut,Yes,4,2006-07,2010-11,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Central Connecticut,central-connecticut,Central Connecticut,Yes,2,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Central Michigan,central-michigan,Central Michigan,Yes,1,2008-09,2008-09,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Charlotte,charlotte,Charlotte,Yes,1,2007-08,2007-08,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Cheyney State,cheyney-state,Cheyney State,No,2,1971-72,1972-73,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,Cheyney State !,cheyney-state,Cheyney State,No,1,1971-72,1971-72,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,Chicago State,chicago-state,Chicago State,Yes,2,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Chicago State*,chicago-state,Chicago State,Yes,2,2024-25,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Cincinnati,cincinnati,Cincinnati,Yes,2,1973-74,1991-92,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Cleveland St. !,cleveland-state,Cleveland State,Yes,1,1987-88,1987-88,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Cleveland State,cleveland-state,Cleveland State,Yes,4,1974-75,1980-81,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Coastal Carolina,coastal-carolina,Coastal Carolina,Yes,2,1999-00,2000-01,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Colgate,colgate,Colgate,Yes,1,1972-73,1972-73,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Coll. of Charleston,charleston,Charleston,Yes,1,2006-07,2006-07,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Columbia,columbia,Columbia,Yes,4,2011-12,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Concordia College,concordia-new-york,Concordia College (NY),No,2,1985-86,1987-88,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Conservative historical identity for the regional Concordia College source label; no current-D1 match.
+fairleigh-dickinson,Connecticut,uconn,Connecticut,Yes,1,2010-11,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Connecticut #,uconn,Connecticut,Yes,1,1997-98,1997-98,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Coppin State,coppin-state,Coppin State,Yes,1,1985-86,1985-86,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,DELAWARE,delaware,Delaware,Yes,1,2014-15,2014-15,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,DOMINICAN,dominican-new-york,Dominican (NY),No,1,2004-05,2004-05,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Conservative historical identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,DOWLING,dowling,Dowling,No,1,2005-06,2005-06,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,DREXEL,drexel,Drexel,Yes,2,2005-06,2020-21,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Dartmouth,dartmouth,Dartmouth,Yes,2,1993-94,1994-95,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Dartmouth !,dartmouth,Dartmouth,Yes,1,1970-71,1970-71,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Davidson,davidson,Davidson,Yes,2,1995-96,1996-97,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Dayton,dayton,Dayton,Yes,1,1989-90,1989-90,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,DePaul,depaul,DePaul,Yes,2,1982-83,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Delaware,delaware,Delaware,Yes,1,2015-16,2015-16,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Delaware @,delaware,Delaware,Yes,1,1984-85,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Delaware State,delaware-state,Delaware State,Yes,4,1984-85,2002-03,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Delaware State !,delaware-state,Delaware State,Yes,1,2012-13,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Dominican,dominican-new-york,Dominican (NY),No,1,1998-99,1998-99,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Conservative historical identity; no current-D1 match after registry/project sweep.
+fairleigh-dickinson,Dowling,dowling,Dowling,No,1,1984-85,1984-85,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Drexel,drexel,Drexel,Yes,10,1976-77,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Drexel College,drexel,Drexel,Yes,1,1979-80,1979-80,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,EASTERN KENTUCKY,eastern-kentucky,Eastern Kentucky,Yes,1,2008-09,2008-09,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,East Carolina,east-carolina,East Carolina,Yes,1,1973-74,1973-74,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,East Stroudsburg !,east-stroudsburg,East Stroudsburg,No,1,1980-81,1980-81,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,East Texas A&M,east-texas-a-m,East Texas A&M,Yes,1,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Eastern Kentucky!,eastern-kentucky,Eastern Kentucky,Yes,1,2009-10,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Elon !,elon,Elon,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,FAIRFIELD,fairfield,Fairfield,Yes,2,2021-22,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,FDU - Florham,fdu-florham,FDU-Florham,No,2,2015-16,2016-17,RESOLVED,TARGET_INSTITUTIONAL_IDENTITY,,FDU institutional history establishes Madison/Florham as the separate Florham campus; FDU-Florham is Division III and distinct from the Knights.
+fairleigh-dickinson,FDU-FLORHAM,fdu-florham,FDU-Florham,No,2,2014-15,2019-20,RESOLVED,TARGET_INSTITUTIONAL_IDENTITY,,FDU institutional history establishes Madison/Florham as the separate Florham campus; FDU-Florham is Division III and distinct from the Knights.
+fairleigh-dickinson,FDU-Florham,fdu-florham,FDU-Florham,No,1,2017-18,2017-18,RESOLVED,TARGET_INSTITUTIONAL_IDENTITY,,FDU institutional history establishes Madison/Florham as the separate Florham campus; FDU-Florham is Division III and distinct from the Knights.
+fairleigh-dickinson,FDU-Madison,fdu-florham,FDU-Florham,No,1,1993-94,1993-94,RESOLVED,TARGET_INSTITUTIONAL_IDENTITY,,FDU institutional history establishes Madison/Florham as the separate Florham campus; FDU-Florham is Division III and distinct from the Knights.
+fairleigh-dickinson,Fairfield,fairfield,Fairfield,Yes,11,1967-68,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Fairfield @,fairfield,Fairfield,Yes,1,1973-74,1973-74,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Florida Gulf Coast (16),florida-gulf-coast,Florida Gulf Coast,Yes,1,2015-16,2015-16,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Florida International,florida-international,Florida International,Yes,1,1992-93,1992-93,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Florida Intl.,florida-international,Florida International,Yes,3,1992-93,1995-96,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Florida State,florida-state,Florida State,Yes,3,1973-74,2003-04,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Fordham,fordham,Fordham,Yes,6,2015-16,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,GWU !,george-washington,George Washington,Yes,1,1972-73,1972-73,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Gannon,gannon,Gannon University,No,1,1967-68,1967-68,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,"Historical identity resolved; published project contains Gannon key variants, deferred to current-main rebase."
+fairleigh-dickinson,George Mason,george-mason,George Mason,Yes,3,1978-79,1980-81,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Georgetown,georgetown,Georgetown,Yes,6,1967-68,1975-76,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Georgia,georgia,Georgia,Yes,2,1975-76,1976-77,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Georgia Southern,georgia-southern,Georgia Southern,Yes,5,1971-72,1974-75,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Georgia State,georgia-state,Georgia State,Yes,2,1974-75,1975-76,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,HARTFORD,hartford,Hartford,No,1,2012-13,2012-13,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Former Division I program; current_d1=No at immutable research base.
+fairleigh-dickinson,HOFSTRA,hofstra,Hofstra,Yes,1,2013-14,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,HOUSTON BAPTIST,houston-christian,Houston Christian,Yes,1,2010-11,2010-11,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Hartford,hartford,Hartford,No,7,1989-90,2022-23,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Former Division I program; current_d1=No at immutable research base.
+fairleigh-dickinson,Hartford @,hartford,Hartford,No,1,1988-89,1988-89,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Former Division I program; current_d1=No at immutable research base.
+fairleigh-dickinson,Hofstra,hofstra,Hofstra,Yes,6,1969-70,2020-21,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Hofstra !,hofstra,Hofstra,Yes,2,1975-76,1985-86,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Hofstra *,hofstra,Hofstra,Yes,2,1967-68,1968-69,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Hofstra @,hofstra,Hofstra,Yes,1,1983-84,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Holy Cross,holy-cross,Holy Cross,Yes,2,2017-18,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Houston Baptist,houston-christian,Houston Christian,Yes,1,2009-10,2009-10,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Howard,howard,Howard,Yes,4,1967-68,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Howard @,howard,Howard,Yes,1,1984-85,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,IONA,iona,Iona,Yes,1,2009-10,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,IUPUI,iu-indianapolis,IU Indianapolis,Yes,1,2006-07,2006-07,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Illinios State,illinois-state,Illinois State,Yes,1,1974-75,1974-75,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Illinois (#1),illinois,Illinois,Yes,1,2004-05,2004-05,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Illinois State,illinois-state,Illinois State,Yes,4,1973-74,1995-96,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Illinois State !,illinois-state,Illinois State,Yes,1,2012-13,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Indiana State,indiana-state,Indiana State,Yes,4,1973-74,1996-97,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Iona,iona,Iona,Yes,17,1969-70,2017-18,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Iona # *,iona,Iona,Yes,1,1967-68,1967-68,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Iona *,iona,Iona,Yes,1,1968-69,1968-69,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Iona @,iona,Iona,Yes,1,1987-88,1987-88,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Iona College,iona,Iona,Yes,1,1977-78,1977-78,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Jacksonville,jacksonville,Jacksonville,Yes,3,1978-79,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,James Madison !,james-madison,James Madison,Yes,2,1982-83,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Kansas,kansas,Kansas,Yes,2,1977-78,1978-79,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Kansas State,kansas-state,Kansas State,Yes,1,2001-02,2001-02,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Kean,kean,Kean,No,1,2017-18,2017-18,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,King’s Point,merchant-marine,U.S. Merchant Marine Academy,No,2,1970-71,1971-72,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project institutional identity for Kings Point.
+fairleigh-dickinson,LAFAYETTE,lafayette,Lafayette,Yes,4,2008-09,2014-15,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,LE MOYNE*,le-moyne,Le Moyne,Yes,1,2023-24,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,LEHIGH,lehigh,Lehigh,Yes,1,2011-12,2011-12,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,LIU,long-island-university,Long Island,Yes,2,2025-26,2025-26,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,LIU BROOKLYN *,long-island-university,Long Island,Yes,2,2011-12,2012-13,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,LIU BROOKLYN*,long-island-university,Long Island,Yes,1,2014-15,2014-15,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,LIU Brooklyn *,long-island-university,Long Island,Yes,3,2011-12,2013-14,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,LIU Brooklyn*,long-island-university,Long Island,Yes,9,2014-15,2018-19,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,LIU*,long-island-university,Long Island,Yes,12,2019-20,2024-25,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,LONG ISLAND $,long-island-university,Long Island,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,LONG ISLAND *,long-island-university,Long Island,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,LONG ISLAND*,long-island-university,Long Island,Yes,5,2003-04,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,LONGWOOD,longwood,Longwood,Yes,2,2009-10,2011-12,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,La Salle,la-salle,La Salle,Yes,3,2019-20,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,La. Monroe!,ul-monroe,Louisiana-Monroe,Yes,1,2005-06,2005-06,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Lafayette,lafayette,Lafayette,Yes,6,2007-08,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Le Moyne,le-moyne,Le Moyne,Yes,2,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Le Moyne*,le-moyne,Le Moyne,Yes,3,2023-24,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Lehigh,lehigh,Lehigh,Yes,1,2012-13,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Lehman,lehman,Lehman,No,2,2024-25,2025-26,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match.
+fairleigh-dickinson,Lipscomb (at Ford.),lipscomb,Lipscomb,Yes,1,2016-17,2016-17,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Beach St.,long-beach-state,Long Beach State,Yes,1,1993-94,1993-94,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Long Island,long-island-university,Long Island,Yes,13,1969-70,1997-98,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Island #,long-island-university,Long Island,Yes,1,1985-86,1985-86,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Island $,long-island-university,Long Island,Yes,1,1984-85,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Island *,long-island-university,Long Island,Yes,44,1967-68,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Island *!,long-island-university,Long Island,Yes,1,1984-85,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Island U.,long-island-university,Long Island,Yes,3,1970-71,1977-78,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Long Island*,long-island-university,Long Island,Yes,8,2001-02,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Long Island^,long-island-university,Long Island,Yes,1,2009-10,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Longwood,longwood,Longwood,Yes,2,2010-11,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Longwood@,longwood,Longwood,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Louisiana State,lsu,LSU,Yes,1,1975-76,1975-76,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Louisville,louisville,Louisville,Yes,2,1986-87,2005-06,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Loyola,loyola-maryland,Loyola Maryland,Yes,1,2002-03,2002-03,RESOLVED,OFFICIAL_RECIPROCAL_EXACT_GAME,,"Loyola Maryland official opponent history records the exact 2002-12-02 FDU game (61-56), resolving the otherwise ambiguous Loyola label."
+fairleigh-dickinson,Loyola (Md.),loyola-maryland,Loyola Maryland,Yes,2,1984-85,2001-02,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Loyola (Md.) $,loyola-maryland,Loyola Maryland,Yes,1,1986-87,1986-87,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Loyola (Md.) *,loyola-maryland,Loyola Maryland,Yes,14,1981-82,1988-89,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Loyola Chicago,loyola-chicago,Loyola Chicago,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MANHATTAN,manhattan,Manhattan,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MERCY,mercy-new-york,Mercy (NY),No,1,2006-07,2006-07,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Source labels Mercy/Mercy (N.Y.) preserved as the New York institution; distinct from Mercyhurst.
+fairleigh-dickinson,MERCY (N.Y.),mercy-new-york,Mercy (NY),No,1,2022-23,2022-23,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Source labels Mercy/Mercy (N.Y.) preserved as the New York institution; distinct from Mercyhurst.
+fairleigh-dickinson,MERRIMACK*,merrimack,Merrimack,Yes,3,2019-20,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MONMOUTH *,monmouth,Monmouth,Yes,2,2011-12,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MONMOUTH * %,monmouth,Monmouth,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MONMOUTH*,monmouth,Monmouth,Yes,7,2003-04,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MOUNT ST. MARY’S *,mount-st-mary-s,Mount St. Mary's,Yes,3,2011-12,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MOUNT ST. MARY’S*,mount-st-mary-s,Mount St. Mary's,Yes,7,2003-04,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,MOUNT$,mount-st-mary-s,Mount St. Mary's,Yes,1,2015-16,2015-16,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,MT ST. MARY’S*,mount-st-mary-s,Mount St. Mary's,Yes,1,2008-09,2008-09,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,MT. ST. MARY’S,mount-st-mary-s,Mount St. Mary's,Yes,1,2007-08,2007-08,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,MT. ST. MARY’S *,mount-st-mary-s,Mount St. Mary's,Yes,1,2004-05,2004-05,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,MT. ST. MARY’S*,mount-st-mary-s,Mount St. Mary's,Yes,1,2005-06,2005-06,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Maine,maine,Maine,Yes,13,1971-72,1998-99,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Maine !,maine,Maine,Yes,1,1991-92,1991-92,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Manhattan,manhattan,Manhattan,Yes,11,1969-70,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Manhattan !,manhattan,Manhattan,Yes,1,1981-82,1981-82,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Manhattan *,manhattan,Manhattan,Yes,1,1967-68,1967-68,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Manhattan * @,manhattan,Manhattan,Yes,1,1968-69,1968-69,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Manhattan$,manhattan,Manhattan,Yes,1,2024-25,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Manor,manor-college,Manor College,No,1,2025-26,2025-26,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match.
+fairleigh-dickinson,Marist,marist,Marist,Yes,2,1986-87,1992-93,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Marist !,marist,Marist,Yes,1,1981-82,1981-82,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Marist #,marist,Marist,Yes,1,1985-86,1985-86,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Marist *,marist,Marist,Yes,29,1981-82,1996-97,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Marist *@,marist,Marist,Yes,1,1985-86,1985-86,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Marist College *,marist,Marist,Yes,2,1985-86,1990-91,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Marquette,marquette,Marquette,Yes,1,1994-95,1994-95,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Marshall,marshall,Marshall,Yes,2,1974-75,1975-76,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Maryland,maryland,Maryland,Yes,6,1980-81,2017-18,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Md. Eastern Shore,maryland-eastern-shore,UMES,Yes,2,1994-95,1995-96,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Md.-Balt. County *,umbc,UMBC,Yes,2,1998-99,2000-01,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Md.-Balt. County*,umbc,UMBC,Yes,2,1998-99,2000-01,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Mercy,mercy-new-york,Mercy (NY),No,3,1980-81,1989-90,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Source labels Mercy/Mercy (N.Y.) preserved as the New York institution; distinct from Mercyhurst.
+fairleigh-dickinson,Mercyhurst,mercyhurst,Mercyhurst,Yes,3,1982-83,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Mercyhurst*,mercyhurst,Mercyhurst,Yes,2,2024-25,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Merrimack*,merrimack,Merrimack,Yes,6,2019-20,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Metro State !,metro-state,Metro State,No,1,2013-14,2013-14,RESOLVED,TARGET_INSTITUTIONAL_EXACT_GAME,,Official FDU 2013-14 evidence identifies Metro State in the NIT Season Tip-Off; non-D1 identity.
+fairleigh-dickinson,Miami,miami,Miami (FL),Yes,1,2024-25,2024-25,RESOLVED,TARGET_INSTITUTIONAL_EXACT_GAME,,"Official FDU 2024-25 recap/box score identifies the 2024-11-04 opponent as Miami (FL), resolving the otherwise ambiguous Miami label."
+fairleigh-dickinson,Miami (Fla.),miami,Miami (FL),Yes,1,1987-88,1987-88,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Miami (Fla.) @,miami,Miami (FL),Yes,1,1986-87,1986-87,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Michigan #,michigan,Michigan,Yes,1,1984-85,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Minnesota,minnesota,Minnesota,Yes,3,2002-03,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Mississippi St.,mississippi-state,Mississippi State,Yes,1,2008-09,2008-09,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Missouri,missouri,Missouri,Yes,2,1975-76,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Monmouth,monmouth,Monmouth,Yes,12,1972-73,1996-97,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Monmouth !,monmouth,Monmouth,Yes,1,2002-03,2002-03,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Monmouth $,monmouth,Monmouth,Yes,1,2000-01,2000-01,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Monmouth *,monmouth,Monmouth,Yes,37,1985-86,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Monmouth$,monmouth,Monmouth,Yes,1,2005-06,2005-06,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Monmouth*,monmouth,Monmouth,Yes,9,2001-02,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Montclair State,montclair-state,Montclair State,No,12,1967-68,1992-93,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Montclair State !,montclair-state,Montclair State,No,1,1976-77,1976-77,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Montclair State @,montclair-state,Montclair State,No,2,1971-72,1972-73,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Moravian,moravian,Moravian,No,1,1974-75,1974-75,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Morgan State,morgan-state,Morgan State,Yes,7,1975-76,2003-04,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Mount St. Mary’s *,mount-st-mary-s,Mount St. Mary's,Yes,4,2002-03,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Mount St. Mary’s*,mount-st-mary-s,Mount St. Mary's,Yes,13,2006-07,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Mt. St. Mary (N.Y.),mount-saint-mary-new-york,Mount Saint Mary (NY),No,1,1986-87,1986-87,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Explicit source N.Y. qualifier distinguishes this non-D1 institution from Mount St. Mary’s (MD).
+fairleigh-dickinson,Mt. St. Mary’s (N.Y.),mount-saint-mary-new-york,Mount Saint Mary (NY),No,1,1985-86,1985-86,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Explicit source N.Y. qualifier distinguishes this non-D1 institution from Mount St. Mary’s (MD).
+fairleigh-dickinson,Mt. St. Mary’s *,mount-st-mary-s,Mount St. Mary's,Yes,23,1989-90,2000-01,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Mt. St. Mary’s * (OT),mount-st-mary-s,Mount St. Mary's,Yes,1,2004-05,2004-05,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Mt. St. Mary’s @,mount-st-mary-s,Mount St. Mary's,Yes,1,1999-00,1999-00,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Mt. St. Mary’s*,mount-st-mary-s,Mount St. Mary's,Yes,5,2001-02,2007-08,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,NC A&T,north-carolina-a-t,North Carolina A&T,Yes,1,1976-77,1976-77,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,NC State,nc-state,North Carolina State,Yes,1,2002-03,2002-03,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,NJIT,njit,NJIT,Yes,9,2010-11,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,NORFOLK,norfolk-state,Norfolk State,Yes,1,2007-08,2007-08,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,NYIT,new-york-tech,New York Institute of Technology,No,1,2018-19,2018-19,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical New York Institute of Technology identity; no current-D1 match.
+fairleigh-dickinson,NYU,nyu,NYU,No,1,1969-70,1969-70,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical/current non-D1 university identity.
+fairleigh-dickinson,Navy,navy,Navy,Yes,3,1969-70,1984-85,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Nebraska,nebraska,Nebraska,Yes,2,2003-04,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,New Haven,new-haven,New Haven,Yes,2,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,New Jersey Tech,njit,NJIT,Yes,1,1985-86,1985-86,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,New Orleans !,new-orleans,LSU New Orleans,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,New York Tech,new-york-tech,New York Institute of Technology,No,1,1988-89,1988-89,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical New York Institute of Technology identity; no current-D1 match.
+fairleigh-dickinson,New York U.,nyu,NYU,No,2,1968-69,1970-71,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical/current non-D1 university identity.
+fairleigh-dickinson,New York U. *,nyu,NYU,No,1,1967-68,1967-68,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical/current non-D1 university identity.
+fairleigh-dickinson,Niagara,niagara,Niagara,Yes,4,1976-77,1990-91,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,No. 11/9 Illinois,illinois,Illinois,Yes,1,2023-24,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,No. 15 Creighton,creighton,Creighton,Yes,1,2024-25,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,No. 16 Iowa State,iowa-state,Iowa State,Yes,1,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,No. Carolina A&T,north-carolina-a-t,North Carolina A&T,Yes,1,1978-79,1978-79,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Norfolk State @,norfolk-state,Norfolk State,Yes,1,2013-14,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,North Carolina A&T,north-carolina-a-t,North Carolina A&T,Yes,2,1975-76,1977-78,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,North Carolina St.,nc-state,North Carolina State,Yes,2,1982-83,2010-11,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Northeastern,northeastern,Northeastern,Yes,9,1967-68,1991-92,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Northeastern U.,northeastern,Northeastern,Yes,8,1968-69,1990-91,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Northern Illinois !,northern-illinois,Northern Illinois,Yes,1,1983-84,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Northwestern,northwestern,Northwestern,Yes,1,2021-22,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Northwestern !,northwestern,Northwestern,Yes,1,2012-13,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Notre Dame,notre-dame,Notre Dame,Yes,2,2014-15,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Ohio State,ohio-state,Ohio State,Yes,1,2016-17,2016-17,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Old Dominion,old-dominion,Old Dominion,Yes,1,1983-84,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Oral Roberts,oral-roberts,Oral Roberts,Yes,1,1972-73,1972-73,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,PRINCETON,princeton,Princeton,Yes,2,2014-15,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,PSU BRANDYWINE,psu-brandywine,Penn State Brandywine,No,1,2023-24,2023-24,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal branch-campus identity; no current-D1 match.
+fairleigh-dickinson,PSU SCHUYLKILL,psu-schuylkill,Penn State Schuylkill,No,1,2023-24,2023-24,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal branch-campus identity; no current-D1 match.
+fairleigh-dickinson,Penn Military !,penn-military,Penn Military,No,1,1971-72,1971-72,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Penn State,penn-state,Penn State,Yes,2,1979-80,2017-18,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Pennsylvania,pennsylvania,Pennsylvania,Yes,2,1993-94,1994-95,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Pepperdine !,pepperdine,Pepperdine,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Pitt,pittsburgh,Pittsburgh,Yes,1,2022-23,2022-23,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Pittsburgh,pittsburgh,Pittsburgh,Yes,1,2008-09,2008-09,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Prairie View A&M !,prairie-view-a-m,Prairie View A&M,Yes,1,2012-13,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Prairie View!,prairie-view-a-m,Prairie View A&M,Yes,1,2001-02,2001-02,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Princeton,princeton,Princeton,Yes,5,2013-14,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Providence,providence,Providence,Yes,6,1984-85,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Purchase,purchase,Purchase,No,1,2024-25,2024-25,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match.
+fairleigh-dickinson,Purdue #,purdue,Purdue,Yes,1,1987-88,1987-88,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,QUEENS (N.C.),queens-university,Queens,Yes,1,2022-23,2022-23,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,QUINNIPIAC,quinnipiac,Quinnipiac,Yes,1,2019-20,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,QUINNIPIAC *,quinnipiac,Quinnipiac,Yes,2,2004-05,2011-12,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,QUINNIPIAC*,quinnipiac,Quinnipiac,Yes,7,2003-04,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Queens (N.C.),queens-university,Queens,Yes,1,2023-24,2023-24,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Queens (NY),queens-new-york,Queens College (NY),No,1,2018-19,2018-19,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Source explicitly labels Queens (NY); distinct from current-D1 Queens University (NC).
+fairleigh-dickinson,Quinnipiac,quinnipiac,Quinnipiac,Yes,3,1985-86,2020-21,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Quinnipiac *,quinnipiac,Quinnipiac,Yes,8,1998-99,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Quinnipiac$,quinnipiac,Quinnipiac,Yes,1,2005-06,2005-06,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Quinnipiac*,quinnipiac,Quinnipiac,Yes,8,2001-02,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Quinnipiac*$,quinnipiac,Quinnipiac,Yes,1,2006-07,2006-07,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,RHODE ISLAND,rhode-island,Rhode Island,Yes,1,2008-09,2008-09,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,RIDER,rider,Rider,Yes,2,2003-04,2006-07,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,ROBERT MORRIS *,robert-morris,Robert Morris,Yes,3,2011-12,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,ROBERT MORRIS*,robert-morris,Robert Morris,Yes,9,2003-04,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rhode Island,rhode-island,Rhode Island,Yes,4,1978-79,2007-08,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Richmond,richmond,Richmond,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rider,rider,Rider,Yes,17,1967-68,2007-08,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rider !,rider,Rider,Yes,2,1973-74,1980-81,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rider *,rider,Rider,Yes,10,1992-93,1996-97,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rider University,rider,Rider,Yes,1,1971-72,1971-72,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Robert Morris,robert-morris,Robert Morris,Yes,6,1979-80,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Robert Morris !,robert-morris,Robert Morris,Yes,1,1997-98,1997-98,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Robert Morris #,robert-morris,Robert Morris,Yes,1,1983-84,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Robert Morris $,robert-morris,Robert Morris,Yes,2,1984-85,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Robert Morris *,robert-morris,Robert Morris,Yes,42,1981-82,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Robert Morris$,robert-morris,Robert Morris,Yes,1,2005-06,2005-06,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Robert Morris*,robert-morris,Robert Morris,Yes,17,2001-02,2019-20,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rollins,rollins,Rollins,No,1,1971-72,1971-72,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Rutgers,rutgers,Rutgers,Yes,14,1981-82,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rutgers @,rutgers,Rutgers,Yes,1,2013-14,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Rutgers!,rutgers,Rutgers,Yes,1,2001-02,2001-02,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,S. Dakota St. !,south-dakota-state,South Dakota State,Yes,1,1972-73,1972-73,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,SACRED HEART,sacred-heart,Sacred Heart,Yes,1,2006-07,2006-07,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,SACRED HEART *,sacred-heart,Sacred Heart,Yes,3,2004-05,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,SACRED HEART*,sacred-heart,Sacred Heart,Yes,9,2005-06,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,SAINT FRANCIS (PA)*,saint-francis-pa,Saint Francis (PA),No,1,2003-04,2003-04,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT FRANCIS PA *,saint-francis-pa,Saint Francis (PA),No,1,2004-05,2004-05,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT FRANCIS PA*,saint-francis-pa,Saint Francis (PA),No,6,2005-06,2010-11,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT FRANCIS Pa.,saint-francis-pa,Saint Francis (PA),No,1,2011-12,2011-12,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT FRANCIS U *,saint-francis-pa,Saint Francis (PA),No,2,2012-13,2013-14,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT FRANCIS U$,saint-francis-pa,Saint Francis (PA),No,1,2015-16,2015-16,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT FRANCIS U*,saint-francis-pa,Saint Francis (PA),No,6,2014-15,2023-24,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,SAINT PETER’S,saint-peter-s,Saint Peter's,Yes,3,2011-12,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,SFNY *,st-francis-brooklyn,St. Francis Brooklyn,No,1,1991-92,1991-92,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,SIUE@,siu-edwardsville,SIUE,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,ST. FRANCIS (NY)*,st-francis-brooklyn,St. Francis Brooklyn,No,1,2003-04,2003-04,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS BK*,st-francis-brooklyn,St. Francis Brooklyn,No,1,2014-15,2014-15,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS BROOKLYN *,st-francis-brooklyn,St. Francis Brooklyn,No,2,2012-13,2013-14,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS BROOKLYN*,st-francis-brooklyn,St. Francis Brooklyn,No,4,2020-21,2022-23,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS N.Y.,st-francis-brooklyn,St. Francis Brooklyn,No,1,2011-12,2011-12,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS NY $,st-francis-brooklyn,St. Francis Brooklyn,No,1,2004-05,2004-05,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS NY *,st-francis-brooklyn,St. Francis Brooklyn,No,1,2004-05,2004-05,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. FRANCIS NY*,st-francis-brooklyn,St. Francis Brooklyn,No,5,2005-06,2010-11,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,ST. PETER’S,saint-peter-s,Saint Peter's,Yes,2,2004-05,2007-08,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,STONEHILL*,stonehill,Stonehill,Yes,2,2022-23,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,STONY BROOK,stony-brook,Stony Brook,Yes,2,2007-08,2010-11,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Sacred Heart,sacred-heart,Sacred Heart,Yes,1,2006-07,2006-07,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Sacred Heart *,sacred-heart,Sacred Heart,Yes,6,1999-00,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Sacred Heart*,sacred-heart,Sacred Heart,Yes,24,2000-01,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Saint Elizabeth,saint-elizabeth,Saint Elizabeth,No,1,2025-26,2025-26,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match.
+fairleigh-dickinson,Saint Francis,saint-francis-pa,Saint Francis (PA),No,2,2025-26,2025-26,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (PA) *,saint-francis-pa,Saint Francis (PA),No,2,1996-97,2002-03,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (PA)*,saint-francis-pa,Saint Francis (PA),No,2,1996-97,2003-04,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.),saint-francis-pa,Saint Francis (PA),No,13,1968-69,1990-91,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.) !,saint-francis-pa,Saint Francis (PA),No,2,1968-69,1969-70,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.) #,saint-francis-pa,Saint Francis (PA),No,1,1988-89,1988-89,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.) *,saint-francis-pa,Saint Francis (PA),No,34,1981-82,2000-01,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.) *!,saint-francis-pa,Saint Francis (PA),No,1,1988-89,1988-89,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.) @,saint-francis-pa,Saint Francis (PA),No,1,1967-68,1967-68,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.)*,saint-francis-pa,Saint Francis (PA),No,1,2001-02,2001-02,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis (Pa.)@,saint-francis-pa,Saint Francis (PA),No,1,1971-72,1971-72,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis PA *,saint-francis-pa,Saint Francis (PA),No,1,2004-05,2004-05,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis PA*,saint-francis-pa,Saint Francis (PA),No,5,2005-06,2010-11,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis Pa. *,saint-francis-pa,Saint Francis (PA),No,1,2011-12,2011-12,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis U *,saint-francis-pa,Saint Francis (PA),No,2,2012-13,2013-14,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis U*,saint-francis-pa,Saint Francis (PA),No,13,2014-15,2023-24,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis(PA)*,saint-francis-pa,Saint Francis (PA),No,1,2024-25,2024-25,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Francis*,saint-francis-pa,Saint Francis (PA),No,1,2024-25,2024-25,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,Saint Joseph’s,saint-joseph-s,Saint Joseph's,Yes,2,2014-15,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Saint Peter's,saint-peter-s,Saint Peter's,Yes,2,2009-10,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Saint Peter’s,saint-peter-s,Saint Peter's,Yes,11,2002-03,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Saint Peter’s (at Ford.),saint-peter-s,Saint Peter's,Yes,1,2016-17,2016-17,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Sam Houston St. !,sam-houston,Sam Houston,Yes,1,1986-87,1986-87,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,San Francisco,san-francisco,San Francisco,Yes,1,1990-91,1990-91,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,San Jose State!,san-jose-state,San Jose State,Yes,1,2001-02,2001-02,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Seton Hall,seton-hall,Seton Hall,Yes,13,1977-78,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Seton Hall !,seton-hall,Seton Hall,Yes,2,1977-78,1992-93,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Seton Hall $,seton-hall,Seton Hall,Yes,1,1997-98,1997-98,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Seton Hall *,seton-hall,Seton Hall,Yes,2,1967-68,1968-69,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Siena,siena,Siena,Yes,10,1975-76,2007-08,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Siena !,siena,Siena,Yes,2,1990-91,1998-99,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Siena #,siena,Siena,Yes,1,1983-84,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Siena *,siena,Siena,Yes,6,1981-82,1983-84,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,South Florida,south-florida,South Florida,Yes,2,1974-75,2018-19,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Southampton,liu-southampton,LIU-Southampton,No,1,1984-85,1984-85,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical Southampton/LIU-Southampton branch identity; kept distinct from current LIU.
+fairleigh-dickinson,Springfield Coll. !,springfield,Springfield,No,1,1972-73,1972-73,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match.
+fairleigh-dickinson,St. Bonaventure,st-bonaventure,St. Bonaventure,Yes,2,1976-77,2000-01,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,St. Francis (N.Y),st-francis-brooklyn,St. Francis Brooklyn,No,1,1975-76,1975-76,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (N.Y.),st-francis-brooklyn,St. Francis Brooklyn,No,10,1970-71,1980-81,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (N.Y.) $,st-francis-brooklyn,St. Francis Brooklyn,No,1,1969-70,1969-70,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (N.Y.) $ *,st-francis-brooklyn,St. Francis Brooklyn,No,1,1967-68,1967-68,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (N.Y.) *,st-francis-brooklyn,St. Francis Brooklyn,No,35,1968-69,2000-01,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (N.Y.) @,st-francis-brooklyn,St. Francis Brooklyn,No,2,1982-83,1998-99,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (N.Y.)*,st-francis-brooklyn,St. Francis Brooklyn,No,4,1993-94,2001-02,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (NY),st-francis-brooklyn,St. Francis Brooklyn,No,1,1996-97,1996-97,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (NY) *,st-francis-brooklyn,St. Francis Brooklyn,No,2,2002-03,2002-03,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (NY)*,st-francis-brooklyn,St. Francis Brooklyn,No,3,1996-97,2003-04,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis (PA) *,saint-francis-pa,Saint Francis (PA),No,1,2002-03,2002-03,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,Saint Francis University (PA) series identity; current_d1=No at immutable 2026 research base.
+fairleigh-dickinson,St. Francis BK*,st-francis-brooklyn,St. Francis Brooklyn,No,1,2015-16,2015-16,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis Brooklyn *,st-francis-brooklyn,St. Francis Brooklyn,No,4,2012-13,2017-18,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis Brooklyn*,st-francis-brooklyn,St. Francis Brooklyn,No,9,2014-15,2022-23,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis N.Y. *,st-francis-brooklyn,St. Francis Brooklyn,No,1,2011-12,2011-12,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis NY !,st-francis-brooklyn,St. Francis Brooklyn,No,1,2002-03,2002-03,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis NY *,st-francis-brooklyn,St. Francis Brooklyn,No,1,2004-05,2004-05,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. Francis NY*,st-francis-brooklyn,St. Francis Brooklyn,No,4,2006-07,2009-10,RESOLVED,FORMER_D1_HISTORICAL_IDENTITY,,St. Francis College/Brooklyn historical series identity; current_d1=No at immutable research base.
+fairleigh-dickinson,St. John’s,st-john-s,St. John's,Yes,9,1980-81,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,St. John’s !,st-john-s,St. John's,Yes,2,1985-86,1993-94,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,St. John’s #,st-john-s,St. John's,Yes,1,1986-87,1986-87,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,St. Joseph’s,saint-joseph-s,Saint Joseph's,Yes,2,1997-98,2007-08,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,St. Mary’s College,st-marys-college,St. Mary’s College,No,1,1986-87,1986-87,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Conservative literal historical identity; bounded project/target review did not establish a safe current-D1 attachment.
+fairleigh-dickinson,St. Peter’s,saint-peter-s,Saint Peter's,Yes,24,1969-70,2006-07,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,St. Peter’s !,saint-peter-s,Saint Peter's,Yes,1,1977-78,1977-78,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,St. Peter’s ! *,saint-peter-s,Saint Peter's,Yes,1,1967-68,1967-68,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,St. Peter’s *,saint-peter-s,Saint Peter's,Yes,1,1968-69,1968-69,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,St. Rose,saint-rose,Saint Rose,No,1,1988-89,1988-89,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional identity; no current-D1 match.
+fairleigh-dickinson,Stetson,stetson,Stetson,Yes,2,1973-74,1974-75,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Stonehill,stonehill,Stonehill,Yes,2,2025-26,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Stonehill*,stonehill,Stonehill,Yes,4,2022-23,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Stonehill*!,stonehill,Stonehill,Yes,1,2024-25,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Stony Brook,stony-brook,Stony Brook,Yes,4,1973-74,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Temple,temple,Temple,Yes,1,2015-16,2015-16,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Temple !,temple,Temple,Yes,1,1993-94,1993-94,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Tennessee Tech,tennessee-tech,Tennessee Tech,Yes,1,1978-79,1978-79,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Tex-San Antonio!,utsa,UTSA,Yes,1,2009-10,2009-10,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Texas,texas,Texas,Yes,2,1975-76,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,The Citadel,the-citadel,The Citadel,Yes,1,1971-72,1971-72,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Towson,towson,Towson,Yes,3,2014-15,2016-17,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Towson State,towson,Towson,Yes,2,1978-79,1979-80,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Towson State *,towson,Towson,Yes,1,1981-82,1981-82,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,U. of Wisc.-GB^^,green-bay,Green Bay,Yes,1,2005-06,2005-06,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,U.S. Intl.,us-international,U.S. International,No,1,1990-91,1990-91,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical institutional identity; no current-D1 match.
+fairleigh-dickinson,UC-Irvine!,uc-irvine,UC Irvine,Yes,1,2009-10,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,UMBC *,umbc,UMBC,Yes,3,1999-00,2002-03,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,UMBC*,umbc,UMBC,Yes,2,2001-02,2001-02,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,UMass,massachusetts,Massachusetts,Yes,1,2018-19,2018-19,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,UNC-Charlotte,charlotte,Charlotte,Yes,1,1973-74,1973-74,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,UNC-Greensboro,unc-greensboro,UNC Greensboro,Yes,2,1991-92,1992-93,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,UNC-Wilmington,unc-wilmington,UNC Wilmington,Yes,2,1976-77,1977-78,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Univ. of Baltimore,university-of-baltimore,University of Baltimore,No,2,1979-80,1980-81,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical varsity identity; no current-D1 match.
+fairleigh-dickinson,Univ. of Baltimore *,university-of-baltimore,University of Baltimore,No,2,1981-82,1982-83,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Historical varsity identity; no current-D1 match.
+fairleigh-dickinson,Univ. of Hartford,hartford,Hartford,No,1,1984-85,1984-85,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Former Division I program; current_d1=No at immutable research base.
+fairleigh-dickinson,Univ. of Vermont,vermont,Vermont,Yes,1,1981-82,1981-82,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Utah,utah,Utah,Yes,1,1977-78,1977-78,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Utah State,utah-state,Utah State,Yes,1,1977-78,1977-78,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Utica,utica,Utica,No,5,1981-82,1985-86,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,Utica !,utica,Utica,No,1,1986-87,1986-87,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Accepted published-project historical identity.
+fairleigh-dickinson,VCU,vcu,VCU,Yes,2,1972-73,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,VERMONT,vermont,Vermont,Yes,1,2011-12,2011-12,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,VMI,vmi,VMI,Yes,1,2022-23,2022-23,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Va. Commonwlth,vcu,VCU,Yes,1,1971-72,1971-72,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Va. Military Inst.,vmi,VMI,Yes,1,1978-79,1978-79,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Va. Military Institute,vmi,VMI,Yes,1,1979-80,1979-80,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Vermont,vermont,Vermont,Yes,2,1980-81,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Vermont St. Rand.,vermont-state-randolph,Vermont State Randolph,No,1,2024-25,2024-25,RESOLVED,POPULATION_LEVEL_LITERAL_HISTORICAL_IDENTITY,,Literal institutional/campus identity; no current-D1 match.
+fairleigh-dickinson,Villanova,villanova,Villanova,Yes,4,1999-00,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Virginia,virginia,Virginia,Yes,2,1988-89,2021-22,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Virginia Tech,virginia-tech,Virginia Tech,Yes,2,1974-75,1976-77,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,WAGNER $,wagner,Wagner,Yes,1,2004-05,2004-05,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,WAGNER *,wagner,Wagner,Yes,4,2004-05,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,WAGNER*,wagner,Wagner,Yes,12,2003-04,2023-24,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,WISCONSIN-GB,green-bay,Green Bay,Yes,1,2006-07,2006-07,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Wagner,wagner,Wagner,Yes,17,1969-70,2025-26,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wagner !,wagner,Wagner,Yes,3,1973-74,2003-04,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wagner #,wagner,Wagner,Yes,1,1985-86,1985-86,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wagner *,wagner,Wagner,Yes,45,1967-68,2013-14,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wagner$,wagner,Wagner,Yes,1,2015-16,2015-16,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wagner*,wagner,Wagner,Yes,25,2000-01,2024-25,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wake Forest,wake-forest,Wake Forest,Yes,7,1974-75,1991-92,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Washington St.,washington-state,Washington State,Yes,1,2008-09,2008-09,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Washington and Lee,washington-and-lee,Washington & Lee,No,2,1969-70,1970-71,RESOLVED,ACCEPTED_PUBLISHED_PROJECT_IDENTITY,,Historical identity resolved; published project key variant washington-lee deferred to current-main rebase.
+fairleigh-dickinson,Wayne State,wayne-state-michigan,Wayne State (MI),No,2,1974-75,1976-77,RESOLVED,OFFICIAL_RECIPROCAL_EXACT_GAME,,Wayne State official history and FDU opponent history identify the exact 1974-75/1976-77 series as Wayne State (Michigan).
+fairleigh-dickinson,West Virginia,west-virginia,West Virginia,Yes,1,1977-78,1977-78,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Western Michigan,western-michigan,Western Michigan,Yes,2,1991-92,1991-92,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wichita State!,wichita-state,Wichita State,Yes,1,2009-10,2009-10,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wisc.-Milwaukee,milwaukee,Milwaukee,Yes,4,1973-74,1999-00,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Wofford!,wofford,Wofford,Yes,1,2005-06,2005-06,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Wright State,wright-state,Wright State,Yes,2,1994-95,1994-95,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Xavier,xavier,Xavier,Yes,1,2012-13,2012-13,RESOLVED,IMMUTABLE_RESEARCH_BASE_REGISTRY_EXACT,,
+fairleigh-dickinson,Yale University,yale,Yale,Yes,1,1990-91,1990-91,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.
+fairleigh-dickinson,Youngstown St.,youngstown-state,Youngstown State,Yes,2,1997-98,1998-99,RESOLVED,CURRENT_PROGRAM_ALIAS_RECONCILED,,Source abbreviation/historical or alternate label reconciled to the current program identity at the immutable Research base; literal source label preserved.

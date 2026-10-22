@@ -2018,7 +2018,7 @@
       "opponent_key": "fairleigh-dickinson",
       "opponent_name": "Fairleigh Dickinson",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -41978,7 +41978,7 @@
       "opponent_key": "fairleigh-dickinson",
       "opponent_name": "Fairleigh Dickinson",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 60,
       "opponent_score": 52,
       "score_known": true,
@@ -70203,7 +70203,7 @@
       "opponent_key": "fairleigh-dickinson",
       "opponent_name": "Fairleigh Dickinson",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 81,
       "opponent_score": 57,
       "score_known": true,
