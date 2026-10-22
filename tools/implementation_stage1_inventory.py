@@ -43,6 +43,7 @@ from stage_research_portfolio import (
     write_stage1_reconciliation_inventory,
 )
 from stage1_reference_reconciliation import load_conference_reconciliation
+from stage1_venue_reconciliation import load_venue_reconciliation
 
 
 def stage_transport_input_if_needed(
@@ -118,6 +119,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--expected-sha256", required=True)
     parser.add_argument("--research-base", required=True)
     parser.add_argument("--conference-reconciliation", type=Path, default=None)
+    parser.add_argument("--venue-reconciliation", type=Path, default=None)
     parser.add_argument("--repo", type=Path, default=None)
     return parser.parse_args()
 
@@ -183,6 +185,13 @@ def main() -> int:
                 exclude_school_key=args.school_key,
             )
 
+            venue_reconciliation, venue_reconciliation_meta = load_venue_reconciliation(
+                args.venue_reconciliation,
+                school_key=args.school_key,
+                package_path=package,
+                local_venues=local_venues,
+                global_venues=global_venues,
+            )
             replacement_history, conference_registrations, conference_meta = (
                 load_conference_reconciliation(
                     args.conference_reconciliation,
@@ -206,8 +215,10 @@ def main() -> int:
                 global_conferences=global_conferences,
                 conference_registrations=conference_registrations,
                 existing_school_venues=existing_school_venues,
+                venue_reconciliation=venue_reconciliation,
             )
             report["conference_reconciliation"] = conference_meta
+            report["venue_reconciliation"] = venue_reconciliation_meta
             report["integration_base_sha"] = head
             report["origin_main_sha"] = origin_main
             report["research_base_sha"] = args.research_base
