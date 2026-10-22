@@ -52,6 +52,7 @@ from onboarding_plan import (
     write_csv_preserving_format,
 )
 from program_history import history_scope_errors
+from stage1_venue_reconciliation import load_venue_reconciliation
 from stage1_reference_reconciliation import (
     conference_reconciliation_inventory,
     load_conference_reconciliation,
@@ -614,6 +615,7 @@ def venue_reconciliation_inventory(
     *,
     school_key: str = "",
     existing_school_venues: list[dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Inventory all venue-reconciliation outcomes without mutating repository state."""
 
@@ -651,6 +653,7 @@ def venue_reconciliation_inventory(
 
     results: list[dict[str, Any]] = []
     existing_school_venues = existing_school_venues or []
+    venue_reconciliation = venue_reconciliation or {}
     reserved_keys = {
         row.get("venue_key", "").strip()
         for row in [*global_rows, *existing_school_venues, *local_rows]
@@ -695,8 +698,19 @@ def venue_reconciliation_inventory(
         reason = ""
         hard_stop = ""
 
+        explicit = venue_reconciliation.get(key)
         hint = research_base_venue_reuse_hint(local)
-        if hint is not None:
+        if explicit is not None:
+            candidate = global_by_id.get(explicit["global_venue_id"])
+            if (candidate is None
+                or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]):
+                hard_stop = "EXPLICIT_RECONCILIATION_STALE"
+            elif not geography_compatible(local, candidate):
+                hard_stop = "EXPLICIT_RECONCILIATION_GEOGRAPHY_CONFLICT"
+            else:
+                chosen = candidate
+                reason = "REUSE_EXPLICIT_RECONCILIATION"
+        elif hint is not None:
             hinted_key, hinted_id = hint
             hinted_by_key = global_by_key.get(hinted_key)
             hinted_by_id = global_by_id.get(hinted_id)
@@ -1015,6 +1029,7 @@ def build_stage1_reconciliation_inventory(
     global_conferences: list[dict[str, str]] | None = None,
     conference_registrations: list[dict[str, str]] | None = None,
     existing_school_venues: list[dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     venue = venue_reconciliation_inventory(
         local_venues,
@@ -1022,6 +1037,7 @@ def build_stage1_reconciliation_inventory(
         venue_names,
         school_key=school_key,
         existing_school_venues=existing_school_venues,
+        venue_reconciliation=venue_reconciliation,
     )
     program = program_alias_inventory(
         programs,
@@ -1086,6 +1102,7 @@ def rebase_venues(
     name_rows: list[dict[str, str]],
     *,
     existing_school_venues: list[dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, str]] | None = None,
 ) -> tuple[
     list[dict[str, str]],
     list[dict[str, str]],
@@ -1132,6 +1149,7 @@ def rebase_venues(
 
     used_ids = set(global_by_id)
     existing_school_venues = existing_school_venues or []
+    venue_reconciliation = venue_reconciliation or {}
     reserved_keys = {
         row.get("venue_key", "").strip()
         for row in [*global_rows, *existing_school_venues, *local_rows]
@@ -1148,9 +1166,20 @@ def rebase_venues(
         chosen: dict[str, str] | None = None
         reason = ""
 
+        explicit = venue_reconciliation.get(key)
         research_base_hint = research_base_venue_reuse_hint(local)
 
-        if research_base_hint is not None:
+        if explicit is not None:
+            candidate = global_by_id.get(explicit["global_venue_id"])
+            if (candidate is None
+                or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]
+                or not geography_compatible(local, candidate)):
+                raise WorkflowError(
+                    f"explicit venue reconciliation no longer matches current main: {key!r}"
+                )
+            chosen = candidate
+            reason = "REUSE_EXPLICIT_RECONCILIATION"
+        elif research_base_hint is not None:
             hinted_key, hinted_id = research_base_hint
             hinted_by_key = global_by_key.get(hinted_key)
             hinted_by_id = global_by_id.get(hinted_id)
@@ -1466,6 +1495,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--history-scope-intervals", default="")
     parser.add_argument("--history-scope-notes", required=True)
     parser.add_argument("--conference-reconciliation", type=Path, default=None)
+    parser.add_argument("--venue-reconciliation", type=Path, default=None)
     parser.add_argument("--repo", type=Path, default=None)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--commit", action="store_true")
@@ -1540,6 +1570,13 @@ def main() -> int:
                 exclude_school_key=args.school_key,
             )
 
+            venue_reconciliation, venue_reconciliation_meta = load_venue_reconciliation(
+                args.venue_reconciliation,
+                school_key=args.school_key,
+                package_path=package,
+                local_venues=local_venues,
+                global_venues=global_venues,
+            )
             replacement_history, conference_registrations, conference_meta = (
                 load_conference_reconciliation(
                     args.conference_reconciliation,
@@ -1563,7 +1600,9 @@ def main() -> int:
                 global_conferences=global_conferences,
                 conference_registrations=conference_registrations,
                 existing_school_venues=existing_school_venues,
+                venue_reconciliation=venue_reconciliation,
             )
+            stage1_inventory["venue_reconciliation"] = venue_reconciliation_meta
             inventory_path = write_stage1_reconciliation_inventory(
                 repo,
                 args.school_key,
@@ -1620,6 +1659,7 @@ def main() -> int:
                 global_venues,
                 venue_names,
                 existing_school_venues=existing_school_venues,
+                venue_reconciliation=venue_reconciliation,
             )
 
             global_conferences, conference_mappings = register_conferences(
@@ -1690,6 +1730,12 @@ def main() -> int:
                 "`.onboarding/<school>/integration-freeze.json` manifest. "
                 "Status: **INTEGRATION_FROZEN**.\n"
             )
+            if venue_reconciliation_meta is not None:
+                notes += (
+                    "\nExplicit Stage 1 venue-identity reconciliation applied; "
+                    "the hash-bound spec and historical basis are recorded in "
+                    "the Integration Freeze manifest.\n"
+                )
             if conference_meta is not None:
                 notes += (
                     "\nOwner-authorized Stage 1 conference-history reconciliation "
@@ -1723,6 +1769,7 @@ def main() -> int:
                 "program_alias_mapping": program_alias_mappings,
                 "conference_mapping": conference_mappings,
                 "conference_reconciliation": conference_meta,
+                "venue_reconciliation": venue_reconciliation_meta,
                 "history_scope": {
                     "history_start_season": args.history_start_season,
                     "history_scope_status": "OWNER_CONFIRMED",
