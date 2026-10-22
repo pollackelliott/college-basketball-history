@@ -2027,7 +2027,7 @@
       "state": "NJ",
       "primary_hex": "#283341",
       "secondary_hex": "#72293C",
-      "history_start_season": null,
+      "history_start_season": "1967-1968",
       "conference_regular_season_championships": 6,
       "conference_tournament_championships": 6,
       "ncaa_tournament_appearances": 7,
@@ -2036,7 +2036,7 @@
       "best_finish_key": "ROUND_OF_32",
       "best_finish_year": 2023,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
