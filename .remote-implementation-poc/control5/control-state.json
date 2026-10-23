@@ -10,7 +10,7 @@
   ],
   "active_boundary": "C",
   "active_fixture_id": "remote-proof5-fixture",
-  "active_lock_commit": null,
+  "active_lock_commit": "03ce26d4fb6c9e8a9453d4544a22d41b594da320",
   "active_lock_owner": "github-actions:39887323505:1",
   "active_operation": "FAIL_BOUNDARY_C",
   "active_prepared_commit_sha": null,
