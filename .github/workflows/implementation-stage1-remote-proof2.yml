@@ -1,0 +1,763 @@
+name: Remote Implementation Proof 2 - Durable Replay
+
+on:
+  push:
+    branches:
+      - experiment/remote-implementation-proof2
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  author-checkpoint:
+    name: Author hash-bound durable checkpoint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    outputs:
+      checkpoint_commit: ${{ steps.author.outputs.checkpoint_commit }}
+      manifest_sha256: ${{ steps.author.outputs.manifest_sha256 }}
+      stage1_sha256: ${{ steps.author.outputs.stage1_sha256 }}
+
+    steps:
+      - name: Check out Proof 2 experiment branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify Proof 1 source artifact and commit durable checkpoint
+        id: author
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          expected_branch="experiment/remote-implementation-proof2"
+          proof1_run_id="39880637424"
+          proof1_artifact_id="12469979104"
+          proof1_artifact_name="remote-implementation-proof1-39880637424"
+          proof1_archive_digest="sha256:2bab786e33e09c79a80f1434a30527eb4e066f6cbd7a2e7d06363a9452a8547b"
+          proof1_archive_sha="2bab786e33e09c79a80f1434a30527eb4e066f6cbd7a2e7d06363a9452a8547b"
+          proof1_experiment_sha="c34ba9de312a97d03d910be40e8091c576080cfa"
+          protected_main_sha="396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+          research_zip_sha="c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+          research_base_sha="8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
+          stage1_sha="495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+          checkpoint_dir=".remote-implementation-poc/checkpoints/long-island-university/proof1"
+          work="$RUNNER_TEMP/proof2-author"
+
+          if [[ "$GITHUB_REF_NAME" != "$expected_branch" ]]; then
+            echo "FAIL: unexpected branch $GITHUB_REF_NAME"
+            exit 1
+          fi
+
+          if [[ -e "$checkpoint_dir/stage1-reconciliation.json" ]] \
+             || [[ -e "$checkpoint_dir/checkpoint-manifest.json" ]] \
+             || [[ -e "$checkpoint_dir/checkpoint-manifest.sha256" ]]; then
+            echo "FAIL: checkpoint paths already exist at trigger commit; refusing implicit overwrite"
+            exit 1
+          fi
+
+          mkdir -p "$work/artifact" "$checkpoint_dir"
+
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$proof1_artifact_id" \
+            > "$work/artifact-metadata.json"
+
+          python - "$work/artifact-metadata.json" <<'PY'
+          import json
+          import os
+          import sys
+
+          p = sys.argv[1]
+          with open(p, encoding="utf-8") as f:
+              data = json.load(f)
+
+          expected = {
+              "id": 12469979104,
+              "name": "remote-implementation-proof1-39880637424",
+              "digest": "sha256:2bab786e33e09c79a80f1434a30527eb4e066f6cbd7a2e7d06363a9452a8547b",
+          }
+          for key, value in expected.items():
+              if data.get(key) != value:
+                  raise SystemExit(
+                      f"FAIL: Proof 1 artifact metadata {key} mismatch: "
+                      f"expected {value!r}, found {data.get(key)!r}"
+                  )
+
+          workflow_run = data.get("workflow_run") or {}
+          if workflow_run.get("id") != 39880637424:
+              raise SystemExit(
+                  "FAIL: Proof 1 artifact workflow run mismatch: "
+                  f"{workflow_run.get('id')!r}"
+              )
+          if workflow_run.get("head_sha") != "c34ba9de312a97d03d910be40e8091c576080cfa":
+              raise SystemExit(
+                  "FAIL: Proof 1 artifact head SHA mismatch: "
+                  f"{workflow_run.get('head_sha')!r}"
+              )
+
+          print("PASS: Proof 1 artifact metadata identity/digest verified")
+          PY
+
+          curl --fail --location --silent --show-error \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$proof1_artifact_id/zip" \
+            -o "$work/proof1-artifact.zip"
+
+          actual_archive_sha="$(sha256sum "$work/proof1-artifact.zip" | awk '{print $1}')"
+          if [[ "$actual_archive_sha" != "$proof1_archive_sha" ]]; then
+            echo "FAIL: Proof 1 archive digest mismatch: expected $proof1_archive_sha, found $actual_archive_sha"
+            exit 1
+          fi
+
+          unzip -q "$work/proof1-artifact.zip" -d "$work/artifact"
+
+          actual_stage1_sha="$(sha256sum "$work/artifact/stage1-reconciliation.json" | awk '{print $1}')"
+          if [[ "$actual_stage1_sha" != "$stage1_sha" ]]; then
+            echo "FAIL: Stage 1 JSON hash mismatch: expected $stage1_sha, found $actual_stage1_sha"
+            exit 1
+          fi
+
+          cp "$work/artifact/stage1-reconciliation.json" "$checkpoint_dir/stage1-reconciliation.json"
+
+          python - "$work/artifact/stage1-reconciliation.json" "$checkpoint_dir/checkpoint-manifest.json" <<'PY'
+          import json
+          import os
+          import sys
+
+          report_path, manifest_path = sys.argv[1:3]
+          with open(report_path, encoding="utf-8") as f:
+              report = json.load(f)
+
+          venue = report.get("venue", {})
+          conference = report.get("conference", {})
+          program_alias = report.get("program_alias", {})
+
+          manifest = {
+              "schema_version": 1,
+              "workflow_kind": "REMOTE_IMPLEMENTATION_DURABLE_CHECKPOINT",
+              "checkpoint_kind": "IMPLEMENTATION_STAGE1_RECONCILIATION",
+              "school_key": "long-island-university",
+              "checkpoint_state": "EXPERIMENTAL_REMOTE_EXECUTION_CHECKPOINT",
+              "integration_frozen": False,
+              "authority_statement": (
+                  "Experimental remote-execution checkpoint only. "
+                  "This checkpoint is not INTEGRATION_FROZEN and does not authorize "
+                  "Phase 0, shared/global mutation, or a real onboarding branch."
+              ),
+              "source_provenance": {
+                  "proof1_run_id": 39880637424,
+                  "proof1_artifact_id": 12469979104,
+                  "proof1_artifact_name": "remote-implementation-proof1-39880637424",
+                  "proof1_artifact_archive_digest": (
+                      "sha256:2bab786e33e09c79a80f1434a30527eb4e066f6cbd7a2e7d06363a9452a8547b"
+                  ),
+                  "proof1_experiment_commit_sha": (
+                      "c34ba9de312a97d03d910be40e8091c576080cfa"
+                  ),
+                  "protected_main_sha_tested": (
+                      "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+                  ),
+                  "research_freeze_sha256": (
+                      "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+                  ),
+                  "research_base_sha": (
+                      "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
+                  ),
+                  "stage1_reconciliation_sha256": (
+                      "495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+                  ),
+              },
+              "stage1_summary": {
+                  "status": report.get("status"),
+                  "blocker_count": report.get("blocker_count"),
+                  "ambiguous_stop_count": report.get("ambiguous_stop_count"),
+                  "maintenance_required_count": report.get("maintenance_required_count"),
+                  "venue_row_count": venue.get("row_count"),
+                  "venue_classification_counts": venue.get("classification_counts", {}),
+                  "conference_classification_counts": conference.get("classification_counts", {}),
+                  "program_alias_classification_counts": program_alias.get(
+                      "classification_counts", {}
+                  ),
+                  "program_alias_blocker_count": program_alias.get("blocker_count"),
+                  "integration_base_sha": report.get("integration_base_sha"),
+                  "origin_main_sha": report.get("origin_main_sha"),
+                  "research_zip_sha256": report.get("research_zip_sha256"),
+              },
+              "creation_provenance": {
+                  "github_repository": os.environ["GITHUB_REPOSITORY"],
+                  "proof2_run_id": int(os.environ["GITHUB_RUN_ID"]),
+                  "proof2_run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+                  "proof2_trigger_commit_sha": os.environ["GITHUB_SHA"],
+                  "proof2_branch": os.environ["GITHUB_REF_NAME"],
+                  "workflow_path": (
+                      ".github/workflows/implementation-stage1-remote-proof2.yml"
+                  ),
+                  "source_retrieval": (
+                      "Proof 1 GitHub Actions artifact API; archive and contained "
+                      "Stage 1 JSON independently hash-verified before checkpoint commit."
+                  ),
+              },
+          }
+
+          with open(manifest_path, "w", encoding="utf-8", newline="\n") as f:
+              json.dump(manifest, f, indent=2, sort_keys=True)
+              f.write("\n")
+          PY
+
+          manifest_sha="$(sha256sum "$checkpoint_dir/checkpoint-manifest.json" | awk '{print $1}')"
+          printf '%s  %s\n' "$manifest_sha" "checkpoint-manifest.json" \
+            > "$checkpoint_dir/checkpoint-manifest.sha256"
+
+          git add \
+            "$checkpoint_dir/stage1-reconciliation.json" \
+            "$checkpoint_dir/checkpoint-manifest.json" \
+            "$checkpoint_dir/checkpoint-manifest.sha256"
+
+          mapfile -t staged < <(git diff --cached --name-only)
+          if [[ "${#staged[@]}" -ne 3 ]]; then
+            echo "FAIL: expected exactly three staged checkpoint files"
+            printf '  %s\n' "${staged[@]}"
+            exit 1
+          fi
+
+          for expected_path in \
+            "$checkpoint_dir/stage1-reconciliation.json" \
+            "$checkpoint_dir/checkpoint-manifest.json" \
+            "$checkpoint_dir/checkpoint-manifest.sha256"
+          do
+            found=false
+            for staged_path in "${staged[@]}"; do
+              if [[ "$staged_path" == "$expected_path" ]]; then
+                found=true
+                break
+              fi
+            done
+            if [[ "$found" != "true" ]]; then
+              echo "FAIL: expected staged path missing: $expected_path"
+              exit 1
+            fi
+          done
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Persist Proof 1 remote Implementation checkpoint"
+
+          checkpoint_commit="$(git rev-parse HEAD)"
+          git push origin "HEAD:refs/heads/$expected_branch"
+
+          echo "checkpoint_commit=$checkpoint_commit" >> "$GITHUB_OUTPUT"
+          echo "manifest_sha256=$manifest_sha" >> "$GITHUB_OUTPUT"
+          echo "stage1_sha256=$actual_stage1_sha" >> "$GITHUB_OUTPUT"
+
+          echo "Proof 1 archive SHA:       $actual_archive_sha"
+          echo "Stage 1 JSON SHA:          $actual_stage1_sha"
+          echo "Checkpoint manifest SHA:   $manifest_sha"
+          echo "Durable checkpoint commit: $checkpoint_commit"
+
+  replay:
+    name: Fresh-runner exact checkpoint replay
+    needs: author-checkpoint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+
+    steps:
+      - name: Check out exact durable checkpoint commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.author-checkpoint.outputs.checkpoint_commit }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Recover checkpoint from Git history and reject tamper
+        id: recover
+        shell: bash
+        env:
+          CHECKPOINT_COMMIT: ${{ needs.author-checkpoint.outputs.checkpoint_commit }}
+          EXPECTED_MANIFEST_SHA: ${{ needs.author-checkpoint.outputs.manifest_sha256 }}
+        run: |
+          set -euo pipefail
+
+          checkpoint_dir=".remote-implementation-poc/checkpoints/long-island-university/proof1"
+          recovered="$RUNNER_TEMP/recovered-checkpoint"
+          mkdir -p "$recovered"
+
+          if [[ "$(git rev-parse HEAD)" != "$CHECKPOINT_COMMIT" ]]; then
+            echo "FAIL: fresh runner did not check out exact checkpoint commit"
+            exit 1
+          fi
+
+          git show "$CHECKPOINT_COMMIT:$checkpoint_dir/stage1-reconciliation.json" \
+            > "$recovered/stage1-reconciliation.json"
+          git show "$CHECKPOINT_COMMIT:$checkpoint_dir/checkpoint-manifest.json" \
+            > "$recovered/checkpoint-manifest.json"
+          git show "$CHECKPOINT_COMMIT:$checkpoint_dir/checkpoint-manifest.sha256" \
+            > "$recovered/checkpoint-manifest.sha256"
+
+          actual_manifest_sha="$(sha256sum "$recovered/checkpoint-manifest.json" | awk '{print $1}')"
+          if [[ "$actual_manifest_sha" != "$EXPECTED_MANIFEST_SHA" ]]; then
+            echo "FAIL: recovered manifest hash does not match authoring-job checkpoint hash"
+            exit 1
+          fi
+
+          (
+            cd "$recovered"
+            sha256sum -c checkpoint-manifest.sha256
+          )
+
+          cat > "$RUNNER_TEMP/verify_remote_checkpoint.py" <<'PY'
+          import hashlib
+          import json
+          import sys
+
+          manifest_path, report_path = sys.argv[1:3]
+
+          def stop(message):
+              print(f"STOP: {message}")
+              raise SystemExit(2)
+
+          with open(manifest_path, encoding="utf-8") as f:
+              manifest = json.load(f)
+
+          expected = {
+              "schema_version": 1,
+              "workflow_kind": "REMOTE_IMPLEMENTATION_DURABLE_CHECKPOINT",
+              "checkpoint_kind": "IMPLEMENTATION_STAGE1_RECONCILIATION",
+              "school_key": "long-island-university",
+              "checkpoint_state": "EXPERIMENTAL_REMOTE_EXECUTION_CHECKPOINT",
+              "integration_frozen": False,
+          }
+          for key, value in expected.items():
+              if manifest.get(key) != value:
+                  stop(
+                      f"manifest field {key} mismatch: "
+                      f"expected {value!r}, found {manifest.get(key)!r}"
+                  )
+
+          source = manifest.get("source_provenance") or {}
+          expected_source = {
+              "proof1_run_id": 39880637424,
+              "proof1_artifact_id": 12469979104,
+              "proof1_artifact_name": "remote-implementation-proof1-39880637424",
+              "proof1_artifact_archive_digest": (
+                  "sha256:2bab786e33e09c79a80f1434a30527eb4e066f6cbd7a2e7d06363a9452a8547b"
+              ),
+              "proof1_experiment_commit_sha": (
+                  "c34ba9de312a97d03d910be40e8091c576080cfa"
+              ),
+              "protected_main_sha_tested": (
+                  "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+              ),
+              "research_freeze_sha256": (
+                  "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+              ),
+              "research_base_sha": (
+                  "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
+              ),
+              "stage1_reconciliation_sha256": (
+                  "495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+              ),
+          }
+          for key, value in expected_source.items():
+              if source.get(key) != value:
+                  stop(
+                      f"source provenance {key} mismatch: "
+                      f"expected {value!r}, found {source.get(key)!r}"
+                  )
+
+          payload = open(report_path, "rb").read()
+          actual_report_sha = hashlib.sha256(payload).hexdigest()
+          if actual_report_sha != source["stage1_reconciliation_sha256"]:
+              stop(
+                  "Stage 1 reconciliation hash mismatch: "
+                  f"expected {source['stage1_reconciliation_sha256']}, "
+                  f"found {actual_report_sha}"
+              )
+
+          with open(report_path, encoding="utf-8") as f:
+              report = json.load(f)
+
+          summary = manifest.get("stage1_summary") or {}
+          observed = {
+              "status": report.get("status"),
+              "blocker_count": report.get("blocker_count"),
+              "ambiguous_stop_count": report.get("ambiguous_stop_count"),
+              "maintenance_required_count": report.get("maintenance_required_count"),
+              "venue_row_count": report.get("venue", {}).get("row_count"),
+              "venue_classification_counts": report.get("venue", {}).get(
+                  "classification_counts", {}
+              ),
+              "conference_classification_counts": report.get("conference", {}).get(
+                  "classification_counts", {}
+              ),
+              "program_alias_classification_counts": report.get(
+                  "program_alias", {}
+              ).get("classification_counts", {}),
+              "program_alias_blocker_count": report.get(
+                  "program_alias", {}
+              ).get("blocker_count"),
+              "integration_base_sha": report.get("integration_base_sha"),
+              "origin_main_sha": report.get("origin_main_sha"),
+              "research_zip_sha256": report.get("research_zip_sha256"),
+          }
+          if summary != observed:
+              stop("manifest Stage 1 summary does not exactly match checkpoint JSON fields")
+
+          print("PASS: checkpoint manifest and Stage 1 payload verified")
+          PY
+
+          python "$RUNNER_TEMP/verify_remote_checkpoint.py" \
+            "$recovered/checkpoint-manifest.json" \
+            "$recovered/stage1-reconciliation.json" \
+            > "$RUNNER_TEMP/checkpoint-verification.log"
+
+          cp "$recovered/stage1-reconciliation.json" "$RUNNER_TEMP/tampered-stage1.json"
+          printf ' ' >> "$RUNNER_TEMP/tampered-stage1.json"
+
+          set +e
+          python "$RUNNER_TEMP/verify_remote_checkpoint.py" \
+            "$recovered/checkpoint-manifest.json" \
+            "$RUNNER_TEMP/tampered-stage1.json" \
+            > "$RUNNER_TEMP/tamper-rejection.log" 2>&1
+          tamper_rc=$?
+          set -e
+
+          if [[ "$tamper_rc" -eq 0 ]]; then
+            echo "FAIL: tampered checkpoint was accepted"
+            cat "$RUNNER_TEMP/tamper-rejection.log"
+            exit 1
+          fi
+
+          if ! grep -q "Stage 1 reconciliation hash mismatch" "$RUNNER_TEMP/tamper-rejection.log"; then
+            echo "FAIL: tampered checkpoint stopped for an unexpected reason"
+            cat "$RUNNER_TEMP/tamper-rejection.log"
+            exit 1
+          fi
+
+          actual_stage1_sha="$(sha256sum "$recovered/stage1-reconciliation.json" | awk '{print $1}')"
+          echo "manifest_sha=$actual_manifest_sha" >> "$GITHUB_OUTPUT"
+          echo "stage1_sha=$actual_stage1_sha" >> "$GITHUB_OUTPUT"
+
+          echo "PASS: durable checkpoint recovered from Git commit $CHECKPOINT_COMMIT"
+          echo "PASS: temporary one-byte-equivalent tamper (valid JSON whitespace) rejected before Stage 1 execution"
+
+      - name: Reconstruct exact Research Freeze and classify checkpoint freshness
+        id: inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          proof1_experiment_sha="c34ba9de312a97d03d910be40e8091c576080cfa"
+          replay_base_sha="396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+          research_zip_sha="c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+          runtime_zip="$RUNNER_TEMP/liu-research-frozen.zip"
+
+          git fetch --no-tags origin \
+            '+refs/heads/experiment/remote-implementation-stage1:refs/remotes/origin/proof1-stage1'
+          git cat-file -e "$proof1_experiment_sha^{commit}"
+
+          mapfile -t fixture_parts < <(
+            git ls-tree -r --name-only "$proof1_experiment_sha" \
+              .remote-implementation-poc/inputs \
+              | grep '^.remote-implementation-poc/inputs/liu-research-frozen.zip.b64.part' \
+              | sort
+          )
+
+          if [[ "${#fixture_parts[@]}" -eq 0 ]]; then
+            echo "FAIL: no Proof 1 Research Freeze transport parts found at exact Proof 1 commit"
+            exit 1
+          fi
+
+          : > "$RUNNER_TEMP/liu-research-frozen.b64"
+          for part in "${fixture_parts[@]}"; do
+            git show "$proof1_experiment_sha:$part" \
+              >> "$RUNNER_TEMP/liu-research-frozen.b64"
+          done
+
+          base64 --decode "$RUNNER_TEMP/liu-research-frozen.b64" > "$runtime_zip"
+
+          actual_zip_sha="$(sha256sum "$runtime_zip" | awk '{print $1}')"
+          if [[ "$actual_zip_sha" != "$research_zip_sha" ]]; then
+            echo "FAIL: reconstructed Research Freeze hash mismatch"
+            exit 1
+          fi
+
+          git fetch --no-tags origin \
+            '+refs/heads/main:refs/remotes/origin/proof2-current-main'
+          current_main_sha="$(git rev-parse refs/remotes/origin/proof2-current-main)"
+
+          if [[ "$current_main_sha" == "$replay_base_sha" ]]; then
+            base_classification="CURRENT"
+          else
+            base_classification="STALE_FOR_NEW_MUTATION"
+          fi
+
+          echo "runtime_zip=$runtime_zip" >> "$GITHUB_OUTPUT"
+          echo "research_zip_sha=$actual_zip_sha" >> "$GITHUB_OUTPUT"
+          echo "current_main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+          echo "base_classification=$base_classification" >> "$GITHUB_OUTPUT"
+
+          echo "Research Freeze SHA:  $actual_zip_sha"
+          echo "Current main SHA:      $current_main_sha"
+          echo "Original replay base:  $replay_base_sha"
+          echo "Checkpoint base:       $base_classification"
+
+      - name: Reconstruct ignored Stage 1 state and execute byte-exact replay
+        id: replay
+        shell: bash
+        env:
+          RUNTIME_ZIP: ${{ steps.inputs.outputs.runtime_zip }}
+        run: |
+          set -euo pipefail
+
+          replay_base_sha="396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+          expected_stage1_sha="495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+          research_base_sha="8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
+          checkpoint_copy="$RUNNER_TEMP/recovered-checkpoint/stage1-reconciliation.json"
+
+          # Preserve the independently fetched live main in origin/proof2-current-main.
+          # For exact historical replay only, pin the runner-local origin/main ref to the
+          # original Proof 1 protected-main snapshot required by the permanent Stage 1 guard.
+          git update-ref refs/remotes/origin/main "$replay_base_sha"
+          git switch -C data/long-island-university-onboarding "$replay_base_sha"
+
+          if [[ "$(git rev-parse HEAD)" != "$replay_base_sha" ]]; then
+            echo "FAIL: local replay branch is not at original Proof 1 base"
+            exit 1
+          fi
+          if [[ "$(git rev-parse origin/main)" != "$replay_base_sha" ]]; then
+            echo "FAIL: runner-local replay origin/main snapshot is not at original Proof 1 base"
+            exit 1
+          fi
+
+          if git ls-remote --exit-code --heads origin \
+            refs/heads/data/long-island-university-onboarding >/dev/null 2>&1; then
+            echo "FAIL: a real remote LIU onboarding branch exists"
+            exit 1
+          fi
+
+          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+            echo "FAIL: replay worktree is not clean before ignored-state reconstruction"
+            git status --short
+            exit 1
+          fi
+
+          mkdir -p .onboarding/long-island-university
+          cp "$checkpoint_copy" \
+            .onboarding/long-island-university/stage1-reconciliation.json
+
+          cmp --silent \
+            "$checkpoint_copy" \
+            .onboarding/long-island-university/stage1-reconciliation.json
+
+          reconstructed_sha="$(
+            sha256sum .onboarding/long-island-university/stage1-reconciliation.json \
+              | awk '{print $1}'
+          )"
+          if [[ "$reconstructed_sha" != "$expected_stage1_sha" ]]; then
+            echo "FAIL: reconstructed ignored Stage 1 state hash mismatch"
+            exit 1
+          fi
+
+          set +e
+          python tools/implementation_stage1_inventory.py \
+            long-island-university \
+            "$RUNTIME_ZIP" \
+            --expected-sha256 c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2 \
+            --research-base "$research_base_sha" \
+            > "$RUNNER_TEMP/stage1-replay.log" 2>&1
+          rc=$?
+          set -e
+
+          cat "$RUNNER_TEMP/stage1-replay.log"
+
+          if [[ "$rc" -ne 0 ]]; then
+            echo "FAIL: permanent Stage 1 replay exit status was $rc"
+            exit 1
+          fi
+
+          replay_report=".onboarding/long-island-university/stage1-reconciliation.json"
+          replay_sha="$(sha256sum "$replay_report" | awk '{print $1}')"
+
+          if [[ "$replay_sha" != "$expected_stage1_sha" ]]; then
+            echo "FAIL: replay Stage 1 hash mismatch: expected $expected_stage1_sha, found $replay_sha"
+            exit 1
+          fi
+
+          if ! cmp --silent "$checkpoint_copy" "$replay_report"; then
+            echo "FAIL: replay Stage 1 artifact is not byte-identical to durable checkpoint"
+            exit 1
+          fi
+
+          tracked_clean=true
+          if [[ -n "$(git status --porcelain --untracked-files=no)" ]] \
+             || ! git diff --quiet HEAD -- \
+             || ! git diff --cached --quiet HEAD --; then
+            tracked_clean=false
+          fi
+
+          if [[ "$tracked_clean" != "true" ]]; then
+            echo "FAIL: Stage 1 replay modified tracked repository state"
+            git status --short --untracked-files=no
+            exit 1
+          fi
+
+          cp "$replay_report" "$RUNNER_TEMP/replayed-stage1-reconciliation.json"
+
+          echo "replay_sha=$replay_sha" >> "$GITHUB_OUTPUT"
+          echo "tracked_clean=$tracked_clean" >> "$GITHUB_OUTPUT"
+
+          echo "PASS: BYTE-EXACT STAGE 1 REPLAY"
+          echo "PASS: tracked repository state unchanged"
+
+      - name: Write Proof 2 execution summary
+        if: always()
+        shell: bash
+        env:
+          CHECKPOINT_COMMIT: ${{ needs.author-checkpoint.outputs.checkpoint_commit }}
+          MANIFEST_SHA: ${{ steps.recover.outputs.manifest_sha }}
+          STAGE1_SHA: ${{ steps.recover.outputs.stage1_sha }}
+          REPLAY_SHA: ${{ steps.replay.outputs.replay_sha }}
+          CURRENT_MAIN_SHA: ${{ steps.inputs.outputs.current_main_sha }}
+          BASE_CLASSIFICATION: ${{ steps.inputs.outputs.base_classification }}
+          TRACKED_CLEAN: ${{ steps.replay.outputs.tracked_clean }}
+        run: |
+          set -euo pipefail
+
+          out="$RUNNER_TEMP/remote-implementation-proof2"
+          mkdir -p "$out"
+
+          cp "$RUNNER_TEMP/recovered-checkpoint/checkpoint-manifest.json" \
+            "$out/checkpoint-manifest.json"
+          cp "$RUNNER_TEMP/recovered-checkpoint/checkpoint-manifest.sha256" \
+            "$out/checkpoint-manifest.sha256"
+          cp "$RUNNER_TEMP/recovered-checkpoint/stage1-reconciliation.json" \
+            "$out/checkpoint-stage1-reconciliation.json"
+          cp "$RUNNER_TEMP/replayed-stage1-reconciliation.json" \
+            "$out/replayed-stage1-reconciliation.json"
+          cp "$RUNNER_TEMP/checkpoint-verification.log" \
+            "$out/checkpoint-verification.log"
+          cp "$RUNNER_TEMP/tamper-rejection.log" \
+            "$out/tamper-rejection.log"
+          cp "$RUNNER_TEMP/stage1-replay.log" \
+            "$out/stage1-replay.log"
+
+          python - "$out/execution-summary.json" <<'PY'
+          import json
+          import os
+          import sys
+
+          output = sys.argv[1]
+          original_base = "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+          expected_stage1 = "495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+
+          summary = {
+              "proof": "REMOTE IMPLEMENTATION PROOF 2 - DURABLE CHECKPOINT / EXACT REPLAY",
+              "github_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "github_run_url": (
+                  f"https://github.com/{os.environ['GITHUB_REPOSITORY']}"
+                  f"/actions/runs/{os.environ['GITHUB_RUN_ID']}"
+              ),
+              "proof2_experiment_branch": "experiment/remote-implementation-proof2",
+              "durable_checkpoint_commit_sha": os.environ.get("CHECKPOINT_COMMIT"),
+              "checkpoint_manifest_sha256": os.environ.get("MANIFEST_SHA"),
+              "stage1_reconciliation_sha256": os.environ.get("STAGE1_SHA"),
+              "replayed_stage1_sha256": os.environ.get("REPLAY_SHA"),
+              "original_replay_base_sha": original_base,
+              "current_protected_main_sha": os.environ.get("CURRENT_MAIN_SHA"),
+              "checkpoint_base_classification": os.environ.get("BASE_CLASSIFICATION"),
+              "byte_exact_stage1_replay": (
+                  os.environ.get("REPLAY_SHA") == expected_stage1
+              ),
+              "tamper_rejection": True,
+              "tracked_repository_mutation": (
+                  os.environ.get("TRACKED_CLEAN") != "true"
+              ),
+              "real_liu_onboarding_branch_pushed": False,
+              "integration_frozen": False,
+              "phase0_started": False,
+          }
+
+          with open(output, "w", encoding="utf-8") as f:
+              json.dump(summary, f, indent=2, sort_keys=True)
+              f.write("\n")
+
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+
+          {
+            echo "tracked_clean=${TRACKED_CLEAN:-false}"
+            echo "remote_liu_onboarding_branch=absent"
+            echo "protected_main_mutated=false"
+            echo "shared_global_mutation=false"
+            echo "phase0_started=false"
+          } > "$out/tracked-mutation-check.txt"
+
+          {
+            echo '### Remote Implementation Proof 2'
+            echo
+            echo '\`\`\`json'
+            cat "$out/execution-summary.json"
+            echo '\`\`\`'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Proof 2 diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-proof2-${{ github.run_id }}
+          path: ${{ runner.temp }}/remote-implementation-proof2
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Assert Proof 2 success conditions
+        shell: bash
+        env:
+          STAGE1_SHA: ${{ steps.recover.outputs.stage1_sha }}
+          REPLAY_SHA: ${{ steps.replay.outputs.replay_sha }}
+          TRACKED_CLEAN: ${{ steps.replay.outputs.tracked_clean }}
+          BASE_CLASSIFICATION: ${{ steps.inputs.outputs.base_classification }}
+        run: |
+          set -euo pipefail
+
+          expected_stage1_sha="495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+
+          if [[ "$STAGE1_SHA" != "$expected_stage1_sha" ]]; then
+            echo "FAIL: recovered durable Stage 1 hash mismatch"
+            exit 1
+          fi
+          if [[ "$REPLAY_SHA" != "$expected_stage1_sha" ]]; then
+            echo "FAIL: regenerated Stage 1 hash mismatch"
+            exit 1
+          fi
+          if [[ "$TRACKED_CLEAN" != "true" ]]; then
+            echo "FAIL: tracked mutation boundary violated"
+            exit 1
+          fi
+          if [[ "$BASE_CLASSIFICATION" != "CURRENT" ]] \
+             && [[ "$BASE_CLASSIFICATION" != "STALE_FOR_NEW_MUTATION" ]]; then
+            echo "FAIL: checkpoint-base freshness classification missing"
+            exit 1
+          fi
+
+          echo "REMOTE IMPLEMENTATION PROOF 2: PASS"
+          echo "BYTE-EXACT STAGE 1 REPLAY: PASS"
+          echo "TAMPER REJECTION: PASS"
+          echo "CHECKPOINT BASE: $BASE_CLASSIFICATION"
