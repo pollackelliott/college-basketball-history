@@ -1,8 +1,8 @@
 # Guarded Remote Implementation Runner
 
 - **Status:** Controlling execution-environment policy for serialized Implementation through stable Phase 0 and the narrowly productionized Stage 2 remote boundary
-- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, and the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair
-- **Does not apply to:** arbitrary or other Stage 2 tracked repairs, recommendation-map submission, `--map`, proposal rehearsal, `OWNER_GATE_1_READY`, Owner Gate 1, sealed apply, Preview, Owner Gate 2, merge, or Production proof
+- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair, and exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or an honest durable `BLOCKED` checkpoint
+- **Does not apply to:** arbitrary or other Stage 2 tracked repairs, Owner Gate 1 approval itself, fill/seal/apply of the real owner-approved review, Preview, Owner Gate 2, merge, or Production proof
 
 ## 1. Execution environments
 
@@ -19,6 +19,7 @@ For the currently productionized remote lifecycle, the permanent commands remain
 python tools/implementation_stage1_inventory.py ...
 python tools/stage_research_portfolio.py ... --apply --commit
 python tools/implementation_stage2.py <school>
+python tools/implementation_stage2.py <school> --map <recommendation-map.json>
 python tools/normalize_historical_opponent_displays.py <school> --sync-source-games [--apply]
 ```
 
@@ -30,10 +31,11 @@ Tracked repository capability:
 
 - `tools/remote_implementation_control.py` — request/state validation, replay refusal, mutation classification, sidecar hashing, and Git-ref CAS primitives.
 - `tools/remote_implementation_io.py` — hash-bound checkpoint transport, isolated worktrees, permanent-command invocation, and control-branch CAS helpers.
-- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, the single opponent-display normalization mutation, and explicit recovery.
+- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, exact-map proposal rehearsal, the single opponent-display normalization mutation, and explicit recovery.
 - `tools/remote_implementation_stage2_census.py` — exact Phase 0 authority restoration, read-only Stage 2 coordinator invocation, artifact hashing, and tracked-mutation proof shared by the runner and verifier.
 - `tools/remote_implementation_stage2_opponent_display.py` — exact census/Freeze authentication, permanent normalizer dry-run/apply orchestration, representation-only field proof, and post-repair Stage 2 regeneration.
-- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of completed Phase 0, Stage 2 census, or opponent-display normalization state.
+- `tools/remote_implementation_stage2_proposal.py` — exact blocker-free Stage 2 authority authentication, immutable recommendation-map transport binding, runtime/target-worktree separation, permanent `--map` invocation, proposal artifact hashing, and tracked-mutation proof.
+- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of completed Phase 0, Stage 2 census, opponent-display normalization, or proposal-rehearsal state.
 - `.github/workflows/remote-implementation.yml` — push-driven repository Action for the permanent control branch.
 - `config/remote-implementation-control-state.initial.json` — canonical initial IDLE state for creating the operational control branch.
 
@@ -89,6 +91,7 @@ Supported operations are:
 - `PHASE0`
 - `STAGE2_CENSUS`
 - `STAGE2_OPPONENT_DISPLAY_NORMALIZE`
+- `STAGE2_PROPOSAL_REHEARSAL`
 - `RECOVER`
 
 No request in this lifecycle may carry Owner Gate 1, Owner Gate 2, or release authority.
@@ -193,7 +196,7 @@ A permanent Stage 2 blocker is durable discovery evidence, not a remote-executio
 
 Fresh verification reconstructs the same onboarding SHA and exact Integration Freeze, reruns unchanged `implementation_stage2.py <school>`, requires the same decision-universe SHA and capability-census semantics, and again proves no tracked mutation. Exact artifact bytes must match when deterministic; the only permitted normalized equivalence is replacement of the fresh runner's absolute repository path with the explicit `<REPO>` token.
 
-This remote capability does **not** authorize tracked Stage 2 repairs, recommendation-map submission, `--map`, proposal rehearsal, `OWNER_GATE_1_READY`, owner approval, sealing/apply, Preview, or release.
+`STAGE2_CENSUS` itself does **not** authorize tracked Stage 2 repairs, recommendation-map submission, `--map`, proposal rehearsal, `OWNER_GATE_1_READY`, owner approval, sealing/apply, Preview, or release. A separate exact-map `STAGE2_PROPOSAL_REHEARSAL` request is required after blocker-free Stage 2 authority and a mature recommendation map exist.
 
 ### Stage 2 opponent-display normalization mutation
 
@@ -237,6 +240,51 @@ Recovery reuses the ordinary mutation classifier. `PREPARED_NOT_PUBLISHED` may b
 Fresh verification independently reauthenticates the original census request, reproduces the permanent normalizer dry run from the predecessor, recomputes the predecessor→prepared field proof, authenticates/restores the exact Integration Freeze, confirms semantic drift remains `PASS`, reruns unchanged Stage 2 without `--map`, compares exact/normalized discovery artifacts, and verifies no further tracked mutation.
 
 This operation authorizes no recommendation map, proposal rehearsal, `OWNER_GATE_1_READY`, Gate 1, sealed apply, Preview, release, or arbitrary Stage 2 repair.
+
+### Stage 2 proposal rehearsal request
+
+`STAGE2_PROPOSAL_REHEARSAL` is read-only with respect to tracked basketball state. It exists only to authenticate one exact blocker-free Stage 2 authority record and one exact recommendation-map payload, then invoke the unchanged permanent coordinator through its existing `--map` path.
+
+The request binds:
+
+- exact current protected-main SHA;
+- exact existing onboarding branch and SHA;
+- exact blocker-free Stage 2 census checkpoint or post-repair successor path/hash;
+- exact Integration Freeze SHA-256 and semantic snapshot SHA-256;
+- exact decision-universe SHA-256;
+- exact recommendation-map path in the request commit and exact map SHA-256;
+- explicit proposal-rehearsal authority with Owner Gate 1, Owner Gate 2, fill/seal/apply, release, and unrelated tracked-repair authority absent.
+
+The recommendation map is immutable request transport. The runner verifies its bytes/hash and never derives, rewrites, completes, or interprets recommendation actions. The permanent `validate_decision_map` path inside `implementation_stage2.py` remains the only map schema/completeness/action authority.
+
+The runner authenticates the request-bound Stage 2 authority, restores only the exact ignored `.onboarding/<school>/integration-freeze.json`, creates an exact worktree at the request-bound onboarding SHA, and invokes current production runtime tooling conceptually as:
+
+```bash
+python <runtime>/tools/implementation_stage2.py <school> --repo <exact-target-worktree> --map <exact-map>
+```
+
+Basketball/package bytes come from the exact target worktree. Permanent tooling comes from the current production runtime checkout. Stale tool copies embedded in an older onboarding commit are not executed.
+
+Before and after the permanent invocation, the runner proves exact HEAD/tree stability and a clean non-ignored worktree. The required result is:
+
+```text
+TRACKED_STAGE2_MUTATION = NONE
+```
+
+No target-branch push or tracked-mutation CAS exists for this operation.
+
+A normal permanent result is either:
+
+- `OWNER_GATE_1_READY`, meaning only that the exact recommendation map survived the permanent disposable proposal rehearsal; or
+- `BLOCKED`, preserving the permanent failure evidence without synthesizing a replacement outcome.
+
+The durable checkpoint preserves, where generated: the exact recommendation map, Stage 2 status/capability census, plan, review CSV/Markdown, site-gate diagnostic, permanent proposal-rehearsal summary, approved-plan-hash preview, action/changed-path counts, exact and normalized artifact hashes, runtime tool hash/current-main commit, Stage 2 authority binding, Integration Freeze/semantic bindings, decision-universe hash, and tracked-mutation proof.
+
+A malformed/incomplete/stale recommendation map, invalid action, proposal-apply failure, site/releaseability gate failure, or other permanent coordinator stop is a **PERMANENT PROPOSAL REHEARSAL BLOCKED** result when the permanent status artifact is successfully produced. Failure before a durable permanent result—such as payload hash mismatch, changed target ref, authority tampering, or runner/tool execution failure—is a **REMOTE EXECUTION FAILURE** and uses the existing non-replayable accepted-request recovery model.
+
+Fresh verification independently reauthenticates the same target SHA, Stage 2 authority, Integration Freeze, semantic snapshot, decision universe, and map bytes; reruns unchanged `implementation_stage2.py --map`; reproduces the same permanent status, approved-plan-hash preview when present, site/capability semantics, and exact/normalized artifact set; and again proves no tracked mutation.
+
+`OWNER_GATE_1_READY` is not owner approval. This operation does not authorize filling, sealing, or applying the real review; Owner Gate 1 approval; Preview; Owner Gate 2; merge; Production proof; or arbitrary Stage 2 tracked repair.
 
 ## 9. Write-ahead and objective mutation state
 
@@ -312,7 +360,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census plus the single census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair described above. All other tracked Stage 2 repairs, recommendation-map submission/proposal rehearsal, `--map`, owner gates, sealed apply, Preview, merge, and Production proof remain outside the remote capability until separately productionized and tested.
+Remote Stage 2 capability is limited to the read-only census, the single census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, and exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED` as described above. All other tracked Stage 2 repairs, Owner Gate 1 approval itself, fill/seal/apply of the real approved review, Preview, Owner Gate 2, merge, and Production proof remain outside the remote capability until separately productionized and tested.
 
 ## 13. Mobile / ChatGPT operation
 
