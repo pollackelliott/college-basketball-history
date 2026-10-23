@@ -8,7 +8,8 @@ repeatable work earlier and makes it executable:
 - ``freeze-drift``: verify that substantive historical meaning still matches
   INTEGRATION_FROZEN before Gate 1;
 - ``fill-review``: expand one compact Gate 1 decision map, including optional
-  owner-reviewed source/canonical patch payloads, into review.csv;
+  owner-reviewed source/canonical patches and decision-bound accomplishment value
+  corrections, into review.csv;
 - ``carry-forward``: reuse prior owner decisions only when the decision universe is
   substantively identical after a purely technical repair;
 - ``rehearse-review``: run the complete disposable transaction and automated gate
@@ -39,6 +40,7 @@ from integration_freeze_guard import (
     semantic_drift_report,
 )
 from onboarding_plan import (
+    ACCOMPLISHMENT_PATCH_FIELDS,
     CANONICAL_PATCH_FIELDS,
     REQUIRED_PACKAGE_FILES,
     SOURCE_PATCH_FIELDS,
@@ -832,6 +834,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
                 "new_game_site_patch",
                 "source_consistency",
                 "postseason_classification",
+                "accomplishments",
             }:
                 raise WorkflowError(
                     f"{did}: historical patches are not valid on {category} decisions"
@@ -840,15 +843,29 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
                 raise WorkflowError(
                     f"{did}: canonical-only site review may not patch target source evidence"
                 )
+            if category == "accomplishments" and did in source_patches:
+                raise WorkflowError(
+                    f"{did}: accomplishment review may not carry a source patch"
+                )
 
         if did in canonical_patches:
             patch = canonical_patches[did]
             if not isinstance(patch, dict):
                 raise WorkflowError(f"{did}: canonical patch must be a JSON object")
-            unknown_fields = sorted(set(patch) - CANONICAL_PATCH_FIELDS)
+            allowed_patch_fields = (
+                ACCOMPLISHMENT_PATCH_FIELDS
+                if category == "accomplishments"
+                else CANONICAL_PATCH_FIELDS
+            )
+            unknown_fields = sorted(set(patch) - allowed_patch_fields)
             if unknown_fields:
+                label = (
+                    "accomplishment"
+                    if category == "accomplishments"
+                    else "canonical"
+                )
                 raise WorkflowError(
-                    f"{did}: forbidden canonical patch fields: "
+                    f"{did}: forbidden {label} patch fields: "
                     + ", ".join(unknown_fields)
                 )
             row["canonical_patch_json"] = json.dumps(

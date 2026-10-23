@@ -152,6 +152,28 @@ A pre-Gate tooling repair is acceptable only when:
 - regression tests cover both acceptance and rejection cases; and
 - the repair does not create a bypass around the sealed-plan decision authority.
 
+When the current authorized school workflow itself exposes a generic prerequisite defect that
+blocks the current phase, the same serialized school Implementation lane may perform one
+bounded generic tooling-repair subphase without creating a second Implementation lane when
+all of the following are true:
+
+- the school historical/package state is frozen and remains unchanged during the repair;
+- the complete currently detectable defect topology is classified before the first repair merge;
+- the repair is reusable generic tooling, not a school-name or school-value special case;
+- regression coverage includes the exposed topology plus relevant rejection/nonregression cases;
+- protected-main mutation uses an isolated tooling branch, normal PR/check/merge governance,
+  and no direct protected-main writes;
+- any remote-control runtime activation copies only the exact merged generic runtime required
+  by the already-authorized remote architecture;
+- after the tooling merge, the lane proves the school onboarding head and substantive decision
+  universe are unchanged before carrying recommendations forward; and
+- the lane returns to the exact durable school checkpoint rather than restarting Research,
+  Integration Freeze, or already-completed Implementation phases.
+
+This bounded repair authority does **not** cover a new historical choice, a global-data truth
+decision, an explicit owner gate, an unrelated repository migration, or a second school
+Implementation mutation. Those remain stop/escalation boundaries under the ordinary policy.
+
 "Make this school pass" is not sufficient justification for a generic gate exception.
 
 ## 8. What this does not change
