@@ -164,6 +164,8 @@ Install the integration-frozen portfolio on the serialized onboarding branch, ru
 
 ### Work
 
+The repository-owned guarded remote runner may execute only the initial read-only Stage 2 census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint. Any tracked deterministic repair, recommendation-map work, proposal rehearsal, or Gate 1 readiness remains outside the remote capability and requires the separately authorized Stage 2 execution path.
+
 - establish/verify `data/<school_key>-onboarding` from the correct base;
 - install the six-file package and required current-main reference additions;
 - create/verify the stable Phase 0 checkpoint;
