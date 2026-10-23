@@ -45,15 +45,29 @@ def normalize_artifact_bytes(
     """Normalize only documented non-semantic replay variance.
 
     The permanent preflight records a wall-clock ``created_at`` in plan.json and
-    renders the same value as ``Generated:`` in review.md. Those fields are
-    diagnostic chronology, not decision-universe authority. Absolute runner
-    repository paths may also vary. No other content is normalized.
+    renders the same value as ``Generated:`` in review.md. Stage-2 status also
+    records the ephemeral local worktree branch name. Those fields are diagnostic
+    runner metadata, not decision-universe authority. Absolute runner repository
+    paths may also vary. No other content is normalized.
     """
     result = data
     for value in {str(repo), str(repo.resolve())}:
         if value:
             result = result.replace(value.encode("utf-8"), b"<REPO>")
-    if name == STAGE2_PLAN:
+    if name == STAGE2_STATUS:
+        doc = json.loads(result)
+        if "branch" in doc:
+            doc["branch"] = "<WORKTREE_BRANCH>"
+        result = (
+            json.dumps(
+                doc,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
+    elif name == STAGE2_PLAN:
         doc = json.loads(result)
         if "created_at" in doc:
             doc["created_at"] = "<GENERATED_AT>"
