@@ -143,6 +143,24 @@ def fetch_operational_refs(target_branch: str | None = None) -> tuple[str, str]:
     )
 
 
+def assert_protected_main_unchanged(expected_sha: str) -> None:
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/main:refs/remotes/origin/main",
+    )
+    actual = git(
+        "rev-parse",
+        "refs/remotes/origin/main",
+    ).stdout.strip()
+    if actual != expected_sha:
+        raise Stop(
+            "PROTECTED_MAIN_CHANGED_DURING_REMOTE_OPERATION expected=%s actual=%s"
+            % (expected_sha, actual)
+        )
+
+
 def materialize_research_checkpoint(request: dict[str, Any], out_path: Path) -> dict[str, Any]:
     checkpoint = request["research_checkpoint"]
     transport = checkpoint["transport"]
