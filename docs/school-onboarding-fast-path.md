@@ -63,6 +63,8 @@ integration-freeze distinction and the current-main rebase checklist.
 
 ## Phase 0 — package checkpoint
 
+Serialized Implementation may perform this Stage 1 / Integration Freeze / stable Phase 0 boundary either in the project Codespace or through the repository-owned guarded remote runner documented in `remote-implementation-runner.md`. The remote path invokes the same permanent Stage 1 and Phase 0 commands, uses the same exact current-main rebase, and shares the project-wide one-active-Implementation invariant. It does not authorize Stage 2, owner gates, sealed apply, Preview, merge, or Production proof remotely.
+
 Prefer to finish and QA the complete six-file portfolio before it mutates global
 repository data. If the portfolio was prepared outside the Codespace and transferred
 as a ZIP, treat the ZIP as a transport artifact rather than repository content.
@@ -80,7 +82,7 @@ Before any tracked write, run one read-only checkpoint that verifies:
 Do not automatically stash, reset, delete an existing branch, or overwrite unexpected
 tracked work. Stop and identify any state that differs from the expected checkpoint.
 
-Then, in the Codespace:
+For the traditional local execution path, then in the Codespace:
 
 ```bash
 git switch main
