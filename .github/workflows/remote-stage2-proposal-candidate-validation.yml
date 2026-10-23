@@ -1,0 +1,40 @@
+name: Remote Stage 2 proposal candidate validation
+
+on:
+  push:
+    branches:
+      - tooling/remote-stage2-proposal-rehearsal
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile remote proposal tooling
+        run: |
+          python -m py_compile             tools/remote_implementation_control.py             tools/remote_implementation_runner.py             tools/remote_implementation_stage2_proposal.py             tools/remote_implementation_verify.py
+      - name: Focused remote and Stage 2 regression
+        run: |
+          python -m unittest             tests.test_implementation_stage2             tests.test_remote_implementation_control             tests.test_remote_implementation_stage2_census             tests.test_remote_implementation_stage2_opponent_display             tests.test_remote_implementation_stage2_opponent_display_recovery             tests.test_remote_implementation_stage2_proposal
+
+  full:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Repository data validation
+        run: python tools/validate_data.py
+      - name: Full unit test suite
+        run: python -m unittest discover -s tests
