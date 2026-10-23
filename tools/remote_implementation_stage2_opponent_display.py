@@ -39,6 +39,7 @@ DISPLAY_BLOCKER_RE = re.compile(
     r"^historical opponent display conflict: ([a-z0-9][a-z0-9-]*):"
 )
 ALLOWED_REPAIR_PATH_NAMES = ("opponents.csv", "source-games.csv")
+RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -235,6 +236,8 @@ def run_normalizer_dry_run(
     freeze_bytes: bytes,
     expected_blocker_keys: list[str],
     diag: Path,
+    *,
+    tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     restore_integration_freeze(repo, school_key, freeze_bytes)
     drift = _require_semantic_pass(repo, school_key, "before")
@@ -246,9 +249,13 @@ def run_normalizer_dry_run(
     report_path = diag / "opponent-display-normalization-dry-run.json"
     if report_path.exists():
         report_path.unlink()
+    runtime_repo = (tool_repo or RUNTIME_ROOT).resolve()
+    tool_path = runtime_repo / "tools/normalize_historical_opponent_displays.py"
+    if not tool_path.is_file():
+        raise Stop("OPPONENT_DISPLAY_RUNTIME_TOOL_MISSING:%s" % tool_path)
     cmd = [
         sys.executable,
-        str(repo / "tools/normalize_historical_opponent_displays.py"),
+        str(tool_path),
         school_key,
         "--repo",
         str(repo),
@@ -256,7 +263,7 @@ def run_normalizer_dry_run(
         "--json-output",
         str(report_path),
     ]
-    cp = run(cmd, cwd=repo, check=False)
+    cp = run(cmd, cwd=runtime_repo, check=False)
     (diag / "opponent-display-normalization-dry-run.log").write_text(
         cp.stdout,
         encoding="utf-8",
@@ -414,6 +421,8 @@ def apply_and_prepare_repair(
     dry_run: dict[str, Any],
     expected_blocker_keys: list[str],
     diag: Path,
+    *,
+    tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     before_state = tracked_worktree_state(repo)
     if before_state["head_sha"] != predecessor_sha or before_state["status"]:
@@ -429,16 +438,20 @@ def apply_and_prepare_repair(
         cwd=repo,
     )
 
+    runtime_repo = (tool_repo or RUNTIME_ROOT).resolve()
+    tool_path = runtime_repo / "tools/normalize_historical_opponent_displays.py"
+    if not tool_path.is_file():
+        raise Stop("OPPONENT_DISPLAY_RUNTIME_TOOL_MISSING:%s" % tool_path)
     cmd = [
         sys.executable,
-        str(repo / "tools/normalize_historical_opponent_displays.py"),
+        str(tool_path),
         school_key,
         "--repo",
         str(repo),
         "--sync-source-games",
         "--apply",
     ]
-    cp = run(cmd, cwd=repo, check=False)
+    cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "opponent-display-normalization-apply.log").write_text(
         cp.stdout,
@@ -576,12 +589,15 @@ def post_repair_stage2_result(
     school_key: str,
     freeze_bytes: bytes,
     diag: Path,
+    *,
+    tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     return run_stage2_census_tool(
         repo,
         school_key,
         freeze_bytes,
         diag,
+        tool_repo=(tool_repo or RUNTIME_ROOT),
     )
 
 
