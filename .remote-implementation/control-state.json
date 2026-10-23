@@ -7,7 +7,7 @@
     "liu-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "d144bd2648d91d6957c6e3bb36a0aac4ba508d6a",
-  "active_lock_commit": null,
+  "active_lock_commit": "afdae333bc94580ecd8a9bf4815f978bf3bfedee",
   "active_lock_owner": "github-actions:40001175018:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
