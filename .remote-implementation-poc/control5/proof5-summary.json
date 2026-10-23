@@ -1,0 +1,101 @@
+{
+  "authority_statement": "Experimental Proof 5 transaction evidence only. No basketball mutation, LIU Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
+  "basketball_data_mutation": false,
+  "control_branch": "experiment/remote-implementation-proof5",
+  "disposable_target_branch": "experiment/remote-implementation-proof5-target",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_MUTATION_ATOMICITY",
+  "final_control": {
+    "commit": "8751da114d2195c207bf59dc1cf62ac12b69f6b8",
+    "lifecycle_state": "IDLE",
+    "sequence": 6,
+    "sha256": "58d35fa129a3784bdaf803b87f149ee50232a4cd4182f425aff4e7913dc1bf7b",
+    "transaction_state": "COMPLETE"
+  },
+  "final_target_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+  "initial_control": {
+    "commit": "4e1aefe2bfe78b9564dc7fdf716782e709e36e0a",
+    "sha256": "e3f42a891460fa57e162e007bc08ed80817c9b7e000559f7f83633bafd118f76"
+  },
+  "owner_interaction": {
+    "desktop_codespaces_required": false,
+    "github_ui_required": false,
+    "mobile_chatgpt_authorization_only": true
+  },
+  "protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "state_classifier": {
+    "complete": "PASS",
+    "diverged_stop": "PASS",
+    "not_attempted": "PASS",
+    "prepared_not_published": "PASS",
+    "published_not_finalized": "PASS"
+  },
+  "successor": {
+    "commit": "8751da114d2195c207bf59dc1cf62ac12b69f6b8",
+    "manifest_sha256": "5d1df8687c7afc14182578253718cd42c823bb43068156014ab1117a13160dc2",
+    "recovery_disposition": "ADOPT_EXACT_PUBLISHED_MUTATION"
+  },
+  "target_ref_cas": "PASS",
+  "target_starting_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "transactions": {
+    "A": {
+      "classification": "NOT_ATTEMPTED",
+      "failure_request_commit": "a522b2680b32b33de9bd60085f17ae1f91acad5d",
+      "failure_request_id": "proof5-boundary-a-0001",
+      "failure_request_sha256": "1d9260a3d0377f11a9b8b3fa6a1b8811be7c8e5bb72709e1ffb24b346eec8e89",
+      "failure_run_id": 39886613992,
+      "lock_commit": "0cf4664ff6b1bd0fe945a26826a89ae4ac4e259b",
+      "recovery_commit": "6e88f3033c48a126e86444c7a76ec62d39c37149",
+      "recovery_disposition": "ABANDON_NOT_ATTEMPTED",
+      "recovery_request_commit": "203f15697bd692d8ba833950aee0e6cbc24a34a4",
+      "recovery_request_id": "proof5-recovery-a-0001",
+      "recovery_run_id": 39886856484,
+      "rerun_attempt": 2,
+      "rerun_result": "ACCEPTED_MUTATION_REQUEST_REPLAY: REJECTED",
+      "writeahead_commit": null,
+      "writeahead_manifest_sha256": null
+    },
+    "B": {
+      "classification": "PREPARED_NOT_PUBLISHED",
+      "failure_request_commit": "550c448875effeb28e7ddbc35b8b5acc908559b1",
+      "failure_request_id": "proof5-boundary-b-0001",
+      "failure_request_sha256": "f8a86e5699800b79802f9c3c1c5b84ccbc11216e35acddcf34754ab9dfcd6912",
+      "failure_run_id": 39886953427,
+      "lock_commit": "14f6a8bc07b2813f6e9b3f04a064ec36c7860006",
+      "prepared_commit_sha": "937ab1e3ead0b417884ed77caa6e0887150db206",
+      "prepared_tree_sha": "57008c4f8bd085729395587c79909ead3f5c6a42",
+      "recovery_commit": "e2c55a7b23963e1aef82f9280b85336e5611be73",
+      "recovery_disposition": "ABANDON_PREPARED_NOT_PUBLISHED",
+      "recovery_request_commit": "a61eb839fbaf359c703d843d8b1cbd2681f2227d",
+      "recovery_request_id": "proof5-recovery-b-0001",
+      "recovery_run_id": 39887203412,
+      "rerun_attempt": 2,
+      "rerun_result": "ACCEPTED_MUTATION_REQUEST_REPLAY: REJECTED",
+      "sidecar_authority_sha256": "15b925d661e1152a8e61dd7b76e4794c301dc2b499e549edab437096a2c2093b",
+      "target_payload_sha256": "416dcdcc4a1e4b4bde68b0d25708cba96255c60f2f12366bbe933df90476e205",
+      "writeahead_commit": "ecb6b4d7139ba806040b72a24e1aa3ac4f120ba0",
+      "writeahead_manifest_sha256": "cb4a2ff1f57546600a9159cd75348c52eea3b61bac5cbddbc1d347631753ebe9"
+    },
+    "C": {
+      "classification_before_recovery": "PUBLISHED_NOT_FINALIZED",
+      "divergence_test": "DIVERGED_STOP",
+      "failure_request_commit": "641a32c6126d86cfb367bd177382844430e1ec09",
+      "failure_request_id": "proof5-boundary-c-0001",
+      "failure_request_sha256": "cee5cf16a1ae16bbbfa5ce72652f0f2a6b0a2d045213fbd0a4583bb4527899d2",
+      "failure_run_id": 39887323505,
+      "lock_commit": "03ce26d4fb6c9e8a9453d4544a22d41b594da320",
+      "prepared_commit_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+      "prepared_tree_sha": "7d2b756c342dadd2103fd84f80549a5b0fed979c",
+      "recovery_disposition": "ADOPT_EXACT_PUBLISHED_MUTATION",
+      "recovery_request_commit": "ce0c49b467a0b14d2dbe767227c8b52b196eb4c2",
+      "recovery_request_id": "proof5-recovery-c-0001",
+      "recovery_run_id": 39887687648,
+      "rerun_attempt": 2,
+      "rerun_result": "ACCEPTED_MUTATION_REQUEST_REPLAY: REJECTED",
+      "sidecar_authority_sha256": "c34d3f347e277574a246c774611cef0e63e26d7a93ca341b2f0e36586ddaa8fd",
+      "target_payload_sha256": "1c33a1a469294707544a451cd9ba21e8eed8e04a17092d5b72311edbff4aa188",
+      "target_ref_cas": "PASS",
+      "writeahead_commit": "d63faba7977a417e4ea15e3751b4331ca7765833",
+      "writeahead_manifest_sha256": "1ce84fd24848e063227ccfe482925752a4b4a02732f73890d166f5cc837117c5"
+    }
+  }
+}
