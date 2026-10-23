@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "liu-stage1-0001",
+  "request_id": "liu-phase0-0001",
   "school_key": "long-island-university",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "b80e3a20220d26680ba6da3c2ff45f7a4ec35b2c",
-  "previous_control_state_sha256": "ba339d9b11f6d620d51b6af8a77aa320848a224e94a1c07903a9af721653b35c",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "4067f8426d1cbc64d50f816e1500507166acbfa8",
+  "previous_control_state_sha256": "89b4e953236442ee689bef52c523b20629f89b5a060b0b105a6959f9892c9200",
   "expected_protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
   "research_checkpoint": {
     "sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
@@ -18,22 +18,33 @@
     }
   },
   "venue_reconciliation": {
-    "path": ".remote-implementation/payloads/liu-stage1-0001/venue-reconciliation.json",
+    "path": ".remote-implementation/payloads/liu-phase0-0001/venue-reconciliation.json",
     "sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
   },
   "conference_reconciliation": {
-    "path": ".remote-implementation/payloads/liu-stage1-0001/conference-reconciliation.json",
+    "path": ".remote-implementation/payloads/liu-phase0-0001/conference-reconciliation.json",
     "sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b"
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-stage1-0001/checkpoint-manifest.json",
+    "sha256": "8bcefd8d7d65241cbc82f2d3ac3575735a2baa034fd7afa74ae912c52f1b0e3d"
+  },
+  "target_branch": "data/long-island-university-onboarding",
+  "history_scope": {
+    "start_season": "1928-1929",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1928-29..1950-51|1968-69+",
+    "notes": "Owner-confirmed Long Island University accepted top-level scope; 1951-52 through 1967-68 are excluded."
   },
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner explicitly authorized authoritative LIU Implementation Stage 1 inventory as the first bounded operation of real remote Implementation Stage 1."
+    "authorization": "Owner explicitly authorized authoritative LIU Integration Freeze and stable Phase 0 after a fresh production Stage 1 PASS. No Stage 2 authority."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false
   }
 }

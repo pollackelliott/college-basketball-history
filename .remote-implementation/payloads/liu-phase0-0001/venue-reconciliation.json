@@ -1,0 +1,196 @@
+{
+  "expected_research_zip_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+  "expected_venues_sha256": "3d068bcf6981a13950b720fa81d9260fce9ed1ff5ca434c31cdda4d604d061f5",
+  "mappings": [
+    {
+      "expected_global_city": "Charlotte",
+      "expected_global_state": "NC",
+      "expected_local_city": "Charlotte",
+      "expected_local_name": "Charlotte Coliseum (1955–1988 building)",
+      "expected_local_state": "NC",
+      "global_venue_id": "VEN-000040",
+      "global_venue_key": "charlotte-coliseum-1955",
+      "local_venue_key": "charlotte-coliseum-original",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Hackensack",
+      "expected_global_state": "NJ",
+      "expected_local_city": "Hackensack",
+      "expected_local_name": "Rothman Center (Stratis Arena)",
+      "expected_local_state": "NJ",
+      "global_venue_id": "VEN-000916",
+      "global_venue_key": "bogota-savings-bank-center",
+      "local_venue_key": "fdu-rothman-center",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Brooklyn",
+      "expected_global_state": "NY",
+      "expected_local_city": "Brooklyn",
+      "expected_local_name": "Barclays Center",
+      "expected_local_state": "NY",
+      "global_venue_id": "VEN-000020",
+      "global_venue_key": "barclays-center",
+      "local_venue_key": "liu-barclays",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Boston",
+      "expected_global_state": "MA",
+      "expected_local_city": "Boston",
+      "expected_local_name": "Boston Garden",
+      "expected_local_state": "MA",
+      "global_venue_id": "VEN-000313",
+      "global_venue_key": "boston-garden",
+      "local_venue_key": "liu-boston-garden",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Brooklyn",
+      "expected_global_state": "NY",
+      "expected_local_city": "Brooklyn",
+      "expected_local_name": "Arnold and Marie Schwartz Athletic Center",
+      "expected_local_state": "NY",
+      "global_venue_id": "VEN-000949",
+      "global_venue_key": "schwartz-athletic-center",
+      "local_venue_key": "liu-schwartz",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Brooklyn",
+      "expected_global_state": "NY",
+      "expected_local_city": "Brooklyn",
+      "expected_local_name": "Steinberg Wellness Center",
+      "expected_local_state": "NY",
+      "global_venue_id": "VEN-000611",
+      "global_venue_key": "steinberg-wellness-center",
+      "local_venue_key": "liu-wellness",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Baltimore",
+      "expected_global_state": "MD",
+      "expected_local_city": "Baltimore",
+      "expected_local_name": "Reitz Arena",
+      "expected_local_state": "MD",
+      "global_venue_id": "VEN-000925",
+      "global_venue_key": "reitz-arena-loyola-maryland",
+      "local_venue_key": "loyola-reitz-arena",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Hamden",
+      "expected_global_state": "CT",
+      "expected_local_city": "Hamden",
+      "expected_local_name": "TD Bank Sports Center (M&T Bank Arena)",
+      "expected_local_state": "CT",
+      "global_venue_id": "VEN-000918",
+      "global_venue_key": "m-t-bank-arena",
+      "local_venue_key": "quinnipiac-td-bank-sports-center",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Moon Township",
+      "expected_global_state": "PA",
+      "expected_local_city": "Moon Township",
+      "expected_local_name": "UPMC Events Center",
+      "expected_local_state": "PA",
+      "global_venue_id": "VEN-000907",
+      "global_venue_key": "upmc-events-center",
+      "local_venue_key": "robert-morris-upmc-events-center",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Loretto",
+      "expected_global_state": "PA",
+      "expected_local_city": "Loretto",
+      "expected_local_name": "DeGol Arena",
+      "expected_local_state": "PA",
+      "global_venue_id": "VEN-000911",
+      "global_venue_key": "degol-arena",
+      "local_venue_key": "saint-francis-pa-degol-arena",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Honolulu",
+      "expected_global_state": "HI",
+      "expected_local_city": "Honolulu",
+      "expected_local_name": "Special Events Arena (Stan Sheriff Center)",
+      "expected_local_state": "HI",
+      "global_venue_id": "VEN-000194",
+      "global_venue_key": "stan-sheriff-center",
+      "local_venue_key": "special-events-arena-hawaii",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Tampa",
+      "expected_global_state": "FL",
+      "expected_local_city": "Tampa",
+      "expected_local_name": "Sun Dome (University of South Florida)",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-000238",
+      "global_venue_key": "yuengling-center",
+      "local_venue_key": "sun-dome-tampa",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Charlotte",
+      "expected_global_state": "NC",
+      "expected_local_city": "Charlotte",
+      "expected_local_name": "Time Warner Cable Arena (Spectrum Center)",
+      "expected_local_state": "NC",
+      "global_venue_id": "VEN-000190",
+      "global_venue_key": "spectrum-center",
+      "local_venue_key": "time-warner-cable-arena-charlotte",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Birmingham",
+      "expected_global_state": "AL",
+      "expected_local_city": "Birmingham",
+      "expected_local_name": "UAB Arena (Bartow Arena)",
+      "expected_local_state": "AL",
+      "global_venue_id": "VEN-000527",
+      "global_venue_key": "bartow-arena",
+      "local_venue_key": "uab-arena-bartow",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Orlando",
+      "expected_global_state": "FL",
+      "expected_local_city": "Orlando",
+      "expected_local_name": "UCF Arena (2007)",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-000038",
+      "global_venue_key": "cfe-arena",
+      "local_venue_key": "ucf-arena",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Staten Island",
+      "expected_global_state": "NY",
+      "expected_local_city": "Staten Island",
+      "expected_local_name": "Spiro Sports Center",
+      "expected_local_state": "NY",
+      "global_venue_id": "VEN-000914",
+      "global_venue_key": "spiro-sports-center",
+      "local_venue_key": "wagner-spiro-sports-center",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    },
+    {
+      "expected_global_city": "Tempe",
+      "expected_global_state": "AZ",
+      "expected_local_city": "Tempe",
+      "expected_local_name": "Wells Fargo Arena (Arizona State)",
+      "expected_local_state": "AZ",
+      "global_venue_id": "VEN-000056",
+      "global_venue_key": "desert-financial-arena",
+      "local_venue_key": "wells-fargo-arena-asu",
+      "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+    }
+  ],
+  "owner_approval_basis": "Control Center-authorized generic Stage 1 tooling repair post-merge read-only regression; LIU is a discovered fixture only.",
+  "schema_version": 1,
+  "school_key": "long-island-university"
+}
