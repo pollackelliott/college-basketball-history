@@ -8,7 +8,7 @@
   ],
   "active_boundary": "B",
   "active_fixture_id": "remote-proof5-fixture",
-  "active_lock_commit": null,
+  "active_lock_commit": "14f6a8bc07b2813f6e9b3f04a064ec36c7860006",
   "active_lock_owner": "github-actions:39886953427:1",
   "active_operation": "FAIL_BOUNDARY_B",
   "active_prepared_commit_sha": null,
