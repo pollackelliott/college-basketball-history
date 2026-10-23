@@ -1,0 +1,82 @@
+{
+  "authority_statement": "Experimental Proof 4 control-plane evidence only. No basketball mutation, Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
+  "basketball_data_mutation": false,
+  "cas": {
+    "competing_recovery_candidate_commit": "3019233e1e2bc6edfdc4520739e7e6febb1b7868",
+    "result": "REJECTED_BY_EXACT_HEAD_LEASE"
+  },
+  "cross_school_exclusion": {
+    "fixture": "remote-proof-school-b",
+    "request_commit": "8a178a940515be85dbbaf61952e6b73c7faf19eb",
+    "request_id": "proof4-contender-0001",
+    "result": "IMPLEMENTATION_LOCK_OCCUPIED: REJECTED",
+    "run_id": 39884676098
+  },
+  "experiment_branch": "experiment/remote-implementation-proof4",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_GLOBAL_LOCK_FAILURE_RECOVERY",
+  "failed_run": {
+    "attempt_1_conclusion": "failure",
+    "attempt_2_conclusion": "failure",
+    "attempt_2_result": "DURABLE_ACTIVE_REQUEST_EXISTS: STOP",
+    "run_id": 39884417122
+  },
+  "failure_request": {
+    "commit": "40c3c8491655cb966c6c81a53f3c8ddcc49a2893",
+    "fixture": "remote-proof-school-a",
+    "request_id": "proof4-failure-0001",
+    "sha256": "1fe4284c41812bdef5ad6c3f19b6c70f7adea2109897ac567b938d9ab0b2a3b3"
+  },
+  "final_control": {
+    "commit": "e449fe2ca96be9fbe871316ae6474799842b4f34",
+    "lifecycle_state": "IDLE",
+    "sequence": 3,
+    "sha256": "0dce3b6cd1319f2d39d8e9dcfaf520e973af42bfde60400a72a081f9a9dc330c"
+  },
+  "global_lock": {
+    "lock_acquisition_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
+    "stranded_active_control_commit": "d5f08efcdfb909499d35866e2bdf7e2e72d6e3db",
+    "stranded_active_state_sha256": "8f7c1b3b3f131fec790d35307d9d501a6b546c689abf7e43371ef033212e4b2c"
+  },
+  "initial_control": {
+    "commit": "dd6e4839dbef01cb5d13e2c565891b2473084c06",
+    "lifecycle_state": "IDLE",
+    "sha256": "cce44a92f394a57d6a6562970d0a8f9fe92f4784456249f056b367ace42686a1"
+  },
+  "owner_interaction": {
+    "desktop_codespaces_required": false,
+    "github_ui_required": false,
+    "mobile_chatgpt_authorization_only": true
+  },
+  "post_recovery_admission": {
+    "final_control_commit": "e449fe2ca96be9fbe871316ae6474799842b4f34",
+    "fixture": "remote-proof-school-b",
+    "request_commit": "10ef70da4e7fcfed858c28b54b2842a3a7e75805",
+    "request_id": "proof4-postrecovery-b-0001",
+    "result": "GLOBAL_LOCK_ADMISSION_AVAILABLE",
+    "run_id": 39885131693
+  },
+  "protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "recovery": {
+    "disposition": "ABANDONED_NO_MUTATION",
+    "recovered_control_commit": "8e08e29134733b43cde9a99436e48f2565f22259",
+    "recovered_control_state_sha256": "8f9a4ab9f6b2644eea0f1a991b456233ab8d35514df10987e6ed5dfbd3e8cdc0",
+    "recovery_manifest_sha256": "27a19ac9d19014806c8bddb17e156db775f21a337cd33d0f48ab5119a03f5c46",
+    "request_commit": "609e214b452dedc5669ba191649298f690f5f68a",
+    "request_id": "proof4-recovery-0001",
+    "request_sha256": "a0dba1cbdd64af1d09e46ada8d09ddb4cdbc4e577100e5f825216b6d6b24bb21",
+    "run_id": 39884900656
+  },
+  "replay_refusal": {
+    "request_commit": "6f2532e596475a562cc039451a1ceea8da195d58",
+    "request_id": "proof4-failure-0001",
+    "result": "REQUEST_ALREADY_ACCEPTED_OR_ACTIVE: REJECTED",
+    "run_id": 39884779047
+  },
+  "schema_version": 1,
+  "stale_recovery": {
+    "request_commit": "46cf2b3ebc6c159837acbdfd97d5e13cde29895c",
+    "request_id": "proof4-recovery-stale-0002",
+    "result": "RECOVERY_PREDECESSOR_STALE: REJECTED",
+    "run_id": 39885036173
+  }
+}
