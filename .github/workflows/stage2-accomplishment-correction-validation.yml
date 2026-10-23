@@ -1,0 +1,34 @@
+name: Stage 2 accomplishment correction validation
+
+on:
+  push:
+    branches:
+      - tooling/stage2-accomplishment-correction
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile touched Python surfaces
+        run: python -m compileall tools tests/test_stage2_accomplishment_patch.py
+
+      - name: New accomplishment correction regression
+        run: python tests/test_stage2_accomplishment_patch.py
+
+      - name: Existing hardening regression
+        run: python tests/test_onboarding_hardening.py
+
+      - name: Existing Stage 2 coordinator regression
+        run: python tests/test_implementation_stage2.py
+
+      - name: Existing remote proposal regression
+        run: python tests/test_remote_implementation_stage2_proposal.py
+
+      - name: Whitespace
+        run: git diff --check origin/main...HEAD
