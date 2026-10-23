@@ -1,0 +1,23 @@
+{
+  "authority": {
+    "basketball_mutation_authorized": false,
+    "experimental_control_only": true,
+    "integration_freeze_authorized": false,
+    "phase0_authorized": false
+  },
+  "creation_provenance": {
+    "architecture_lane": "ChatGPT remote Implementation architecture experiment",
+    "owner_authorization": "Proof 4 authorized in ChatGPT",
+    "owner_desktop_interaction_required": false,
+    "owner_github_ui_interaction_required": false
+  },
+  "expected_outcome": "INTENTIONAL_FAILURE_AFTER_DURABLE_LOCK",
+  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_REQUEST",
+  "fixture_id": "remote-proof-school-a",
+  "operation": "TEST_DURABLE_LOCK_FAILURE",
+  "previous_control_state_commit": "dd6e4839dbef01cb5d13e2c565891b2473084c06",
+  "previous_control_state_sha256": "cce44a92f394a57d6a6562970d0a8f9fe92f4784456249f056b367ace42686a1",
+  "request_id": "proof4-failure-0001",
+  "schema_version": 1
+}
