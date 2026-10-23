@@ -1,4 +1,6 @@
 {
+  "abandoned_request_id": "proof4-failure-0001",
+  "active_lock_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
   "authority": {
     "basketball_mutation_authorized": false,
     "experimental_control_only": true,
@@ -7,16 +9,26 @@
   },
   "creation_provenance": {
     "architecture_lane": "ChatGPT remote Implementation architecture experiment",
-    "owner_authorization": "Proof 4 authorized in ChatGPT",
-    "replay_test": true
+    "owner_authorization": "Proof 4 recovery authorized within the Proof 4 experiment",
+    "owner_desktop_interaction_required": false,
+    "owner_github_ui_interaction_required": false
   },
-  "expected_outcome": "REQUEST_ALREADY_ACCEPTED_OR_ACTIVE",
+  "durable_active_state_commit": "e550db01db91164d61c93f93c12ed5e3aea22305",
+  "durable_active_state_sha256": "60e414c4f1315d847ecca1bb003e58cda13fe099db507ba4c3cc64014493f5b6",
+  "evidence": {
+    "cross_school_rejection_run_id": 39884676098,
+    "original_request_replay_run_id": 39884779047
+  },
+  "expected_outcome": "RECOVERY_SUCCESS",
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_REQUEST",
+  "failed_action_rerun_attempt": 2,
+  "failed_action_run_attempt": 1,
+  "failed_action_run_id": 39884417122,
   "fixture_id": "remote-proof-school-a",
-  "operation": "TEST_DURABLE_LOCK_FAILURE",
-  "previous_control_state_commit": "8a178a940515be85dbbaf61952e6b73c7faf19eb",
+  "operation": "RECOVER_ABANDONED_EXPERIMENT_LOCK",
+  "previous_control_state_commit": "6f2532e596475a562cc039451a1ceea8da195d58",
   "previous_control_state_sha256": "8f7c1b3b3f131fec790d35307d9d501a6b546c689abf7e43371ef033212e4b2c",
-  "request_id": "proof4-failure-0001",
+  "request_id": "proof4-recovery-0001",
   "schema_version": 1
 }
