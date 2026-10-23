@@ -559,6 +559,12 @@ def persist_stage2_proposal_checkpoint(
         "integration_freeze_sha256": request["integration_freeze_sha256"],
         "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
         "decision_universe_sha256": request["decision_universe_sha256"],
+        "runtime_decision_universe_sha256": (
+            result.get("decision_universe_compatibility") or {}
+        ).get("runtime_decision_universe_sha256"),
+        "decision_universe_compatibility": result.get(
+            "decision_universe_compatibility"
+        ) or {},
         "recommendation_map_request_path": request["recommendation_map"]["path"],
         "recommendation_map_checkpoint_path": map_target.as_posix(),
         "recommendation_map_sha256": request["recommendation_map"]["sha256"],
@@ -603,6 +609,12 @@ def persist_stage2_proposal_checkpoint(
             "checkpoint_manifest_sha256": manifest_sha,
             "stage2_status": result["stage2_status"],
             "decision_universe_sha256": request["decision_universe_sha256"],
+            "runtime_decision_universe_sha256": (
+                result.get("decision_universe_compatibility") or {}
+            ).get("runtime_decision_universe_sha256"),
+            "decision_universe_compatibility": result.get(
+                "decision_universe_compatibility"
+            ) or {},
             "recommendation_map_sha256": request["recommendation_map"]["sha256"],
             "approved_plan_hash_preview": approved_plan_hash,
             "capability_census_status": census.get("status"),
