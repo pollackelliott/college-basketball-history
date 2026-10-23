@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "liu-phase0-0001",
+  "school_key": "long-island-university",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "4067f8426d1cbc64d50f816e1500507166acbfa8",
+  "previous_control_state_sha256": "89b4e953236442ee689bef52c523b20629f89b5a060b0b105a6959f9892c9200",
+  "expected_protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "research_checkpoint": {
+    "sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+    "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c34ba9de312a97d03d910be40e8091c576080cfa",
+      "path_prefix": ".remote-implementation-poc/inputs/liu-research-frozen.zip.b64.part",
+      "part_count": 9
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/liu-phase0-0001/venue-reconciliation.json",
+    "sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/payloads/liu-phase0-0001/conference-reconciliation.json",
+    "sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b"
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-stage1-0001/checkpoint-manifest.json",
+    "sha256": "8bcefd8d7d65241cbc82f2d3ac3575735a2baa034fd7afa74ae912c52f1b0e3d"
+  },
+  "target_branch": "data/long-island-university-onboarding",
+  "history_scope": {
+    "start_season": "1928-1929",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1928-29..1950-51|1968-69+",
+    "notes": "Owner-confirmed Long Island University accepted top-level scope; 1951-52 through 1967-68 are excluded."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized authoritative LIU Integration Freeze and stable Phase 0 after a fresh production Stage 1 PASS. No Stage 2 authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": true,
+    "recovery": false
+  }
+}
