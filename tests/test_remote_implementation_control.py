@@ -215,6 +215,56 @@ class RemoteImplementationControlTests(unittest.TestCase):
         with self.assertRaisesRegex(RemoteImplementationError, "GLOBAL_IMPLEMENTATION_LOCK_OCCUPIED"):
             verify_request_predecessor(active, data, PRED, second, MAIN)
 
+    def test_stage2_census_blocks_another_implementation_transition(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_STAGE2_CENSUS, "stage2-active"),
+            "7" * 64,
+            run_id="203",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        data = canonical_json_bytes(state)
+        second = request(OP_PHASE0, "phase0-second")
+        second["previous_control_state_sha256"] = sha256_bytes(data)
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "GLOBAL_IMPLEMENTATION_LOCK_OCCUPIED",
+        ):
+            verify_request_predecessor(
+                state,
+                data,
+                PRED,
+                second,
+                MAIN,
+            )
+
+    def test_stage2_census_read_only_recovery_is_exact(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_STAGE2_CENSUS, "stage2-old"),
+            "7" * 64,
+            run_id="204",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        data = canonical_json_bytes(state)
+        recovery = request(OP_RECOVER, "stage2-recovery")
+        recovery["previous_control_state_sha256"] = sha256_bytes(data)
+        recovery["recovery"] = {
+            "abandoned_request_id": "stage2-old",
+            "lock_commit": None,
+            "target_branch": None,
+        }
+        verify_request_predecessor(
+            state,
+            data,
+            PRED,
+            recovery,
+            MAIN,
+            allow_active_recovery=True,
+        )
+
     def test_active_lock_persists_recovery_required(self):
         state = initial_control_state()
         active = begin_request(
