@@ -1,0 +1,17 @@
+{
+  "action_run_attempt": 1,
+  "action_run_id": 39884417122,
+  "active_control_state_sha256": "60e414c4f1315d847ecca1bb003e58cda13fe099db507ba4c3cc64014493f5b6",
+  "actual_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "basketball_mutation_authorized": false,
+  "expected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_STRANDED_LOCK",
+  "fixture_id": "remote-proof-school-a",
+  "lock_acquisition_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
+  "normal_successor_emitted": false,
+  "operation": "TEST_DURABLE_LOCK_FAILURE",
+  "recovery_required": true,
+  "request_id": "proof4-failure-0001",
+  "request_sha256": "1fe4284c41812bdef5ad6c3f19b6c70f7adea2109897ac567b938d9ab0b2a3b3",
+  "schema_version": 1
+}

@@ -4,7 +4,7 @@
     "proof4-failure-0001"
   ],
   "active_fixture_id": "remote-proof-school-a",
-  "active_lock_commit": "PENDING_LOCK_COMMIT_IDENTITY",
+  "active_lock_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
   "active_lock_owner": "github-actions:39884417122:1",
   "active_operation": "TEST_DURABLE_LOCK_FAILURE",
   "active_request_id": "proof4-failure-0001",
@@ -14,7 +14,7 @@
     "proof3-control-0001"
   ],
   "current_sequence": 1,
-  "durable_active_state_commit": "PENDING_ACTIVE_STATE_IDENTITY",
+  "durable_active_state_commit": "COMMIT_CONTAINING_THIS_ACTIVE_STATE",
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE",
