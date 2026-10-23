@@ -262,6 +262,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_census") is not True,
             "STAGE1_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is not True,
+            "STAGE1_REQUEST_STAGE2_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_PHASE0:
         _require(authority.get("phase0") is True, "PHASE0_REQUEST_AUTHORITY_REQUIRED")
@@ -276,6 +280,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_census") is not True,
             "PHASE0_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is not True,
+            "PHASE0_REQUEST_STAGE2_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_STAGE2_CENSUS:
         _require(
@@ -289,6 +297,10 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("recovery") is False,
             "STAGE2_CENSUS_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is not True,
+            "STAGE2_CENSUS_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
         )
         expected_target = f"data/{school_key}-onboarding"
         _require(
