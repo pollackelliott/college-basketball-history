@@ -94,6 +94,36 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+  fresh-stage2-opponent-display-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'STAGE2_OPPONENT_DISPLAY_NORMALIZE'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest durable control state
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct and verify Stage 2 opponent-display repair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/remote_implementation_verify.py
+
+      - name: Upload Stage 2 opponent-display verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-stage2-opponent-display-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
+
   fresh-phase0-verification:
     needs: process-request
     if: needs.process-request.result == 'success' && (needs.process-request.outputs.operation == 'PHASE0' || needs.process-request.outputs.operation == 'RECOVER')
