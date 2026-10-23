@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_RECOVERY_REQUEST",
+  "request_id": "proof6-recovery-stage1-blocker-0001",
+  "operation": "RECOVER_FAILED_REHEARSAL_BEFORE_PHASE0",
+  "authority_statement": "Narrow recovery of the stranded Proof 6 experimental global lock only. No LIU Integration Freeze, real Phase 0, real onboarding branch, Stage 2, Gate 1, release, or protected-main mutation authority.",
+  "previous_control_state_commit": "f830cfe3b1e063437c057b7d2fde9c064406ceaf",
+  "previous_control_state_sha256": "b2cbe2e4f4ad4d7277d3bbe5ff1a65d1ed7bcc331d82796eab3c3ddc472694cd",
+  "abandoned_request_id": "proof6-liu-phase0-0001",
+  "active_lock_commit": "d42056d06b72694e4745e72afe05bd5b2a371b20",
+  "failed_action_run_id": 39896265711,
+  "failed_action_run_attempt": 1,
+  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "required_facts": {
+    "failed_run_conclusion": "failure",
+    "transaction_state": "LOCKED",
+    "writeahead_commit": null,
+    "disposable_target_branch_exists": false,
+    "real_liu_onboarding_branch_exists": false,
+    "phase0_command_executed": false
+  },
+  "recovery_disposition": "ABANDON_STAGE1_RECONCILIATION_BLOCKER",
+  "blocker": {
+    "kind": "GENERIC_STAGE1_REPRESENTATION_TOOLING_DEFECT",
+    "venue_key": "charlotte-coliseum-original",
+    "selected_global_venue_id": "VEN-000040",
+    "selected_global_venue_key": "charlotte-coliseum-1955",
+    "conflicting_registered_name_candidate": "VEN-000041",
+    "inventory_issue": "CONFLICTING_REGISTERED_NAME_IDENTITIES",
+    "explanation": "Explicit reconciliation correctly selects the original 1955 Charlotte Coliseum, but the Stage 1 intentional RESEARCHED_SPLIT name-overlap exception does not include REUSE_EXPLICIT_RECONCILIATION, so the complete reconciled inventory remains BLOCKED with one non-historical representation blocker."
+  },
+  "owner_interaction": {
+    "desktop_codespaces_required": false,
+    "github_ui_required": false,
+    "chatgpt_authorization_basis": "Proof 6 bounded architecture experiment"
+  }
+}
