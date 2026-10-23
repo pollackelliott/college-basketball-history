@@ -41,6 +41,7 @@ from remote_implementation_io import (
     STATE_PATH,
     Stop,
     add_isolated_worktree,
+    assert_protected_main_unchanged,
     commit_control,
     commit_file_hashes,
     configure_git,
@@ -245,6 +246,7 @@ def run_read_only_stage1(
         conference_spec,
         DIAG,
     )
+    assert_protected_main_unchanged(live_main)
     checkpoint_commit = persist_stage1_checkpoint(
         state=active,
         request=request,
@@ -396,6 +398,7 @@ def run_phase0(
             "PERMANENT_PHASE0_COMMAND_FAILED\n" + phase0_cp.stdout[-10000:]
         )
 
+    assert_protected_main_unchanged(live_main)
     prepared = git("rev-parse", "HEAD", cwd=worktree).stdout.strip()
     parent = git(
         "rev-parse",
@@ -568,6 +571,7 @@ def run_phase0(
         [STATE_PATH],
     )
 
+    assert_protected_main_unchanged(live_main)
     publish_ref_cas(
         ROOT,
         branch=target_branch,
