@@ -25,11 +25,11 @@
   "current_sequence": 2,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
     "operation": "PHASE0",
     "protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "liu-phase0-0001",
     "school_key": "long-island-university",
     "successor_manifest_path": ".remote-implementation/successors/long-island-university/liu-phase0-0001/successor-manifest.json",

@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "e037473888024efe176798566c99ca208c54f984",
+  "prepared_parent_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "prepared_tree_sha": "5fe8b315a3112ffa815c067b7a907dd55d533fd1",
+  "protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "liu-phase0-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "e037473888024efe176798566c99ca208c54f984"
+}
