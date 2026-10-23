@@ -17,6 +17,7 @@ from integration_freeze_guard import (  # noqa: E402
     semantic_snapshot_sha256,
 )
 from remote_implementation_control import RemoteImplementationError  # noqa: E402
+import remote_implementation_stage2_opponent_display as display_runtime  # noqa: E402
 from remote_implementation_stage2_opponent_display import (  # noqa: E402
     apply_and_prepare_repair,
     field_level_mutation_proof,
@@ -56,6 +57,11 @@ class RemoteStage2OpponentDisplayTests(unittest.TestCase):
     def make_repo(self, *, mode: str = "normal") -> tuple[Path, str, bytes]:
         repo = Path(tempfile.mkdtemp(prefix="stage2-display-test-"))
         self.addCleanup(lambda: shutil.rmtree(repo, ignore_errors=True))
+        previous_runtime_root = display_runtime.RUNTIME_ROOT
+        display_runtime.RUNTIME_ROOT = repo
+        self.addCleanup(
+            lambda: setattr(display_runtime, "RUNTIME_ROOT", previous_runtime_root)
+        )
         self.git(repo, "init")
         self.git(repo, "config", "user.name", "Test")
         self.git(repo, "config", "user.email", "test@example.com")
@@ -260,6 +266,39 @@ raise SystemExit(0 if ready else 1)
         predecessor = self.git(repo, "rev-parse", "HEAD")
         self.git(repo, "branch", "-m", "remote-fixture")
         return repo, predecessor, freeze_bytes
+
+    def test_normalizer_runtime_tool_is_separate_from_target_snapshot(self):
+        repo, predecessor, freeze = self.make_repo()
+        runtime = Path(tempfile.mkdtemp(prefix="display-runtime-tool-"))
+        self.addCleanup(lambda: shutil.rmtree(runtime, ignore_errors=True))
+        (runtime / "tools").mkdir(parents=True)
+        shutil.copyfile(
+            repo / "tools/normalize_historical_opponent_displays.py",
+            runtime / "tools/normalize_historical_opponent_displays.py",
+        )
+        (repo / "tools/normalize_historical_opponent_displays.py").write_text(
+            "raise SystemExit('STALE TARGET NORMALIZER EXECUTED')\n",
+            encoding="utf-8",
+        )
+        self.git(repo, "add", "tools/normalize_historical_opponent_displays.py")
+        self.git(repo, "commit", "-m", "install stale target normalizer")
+        result = run_normalizer_dry_run(
+            repo,
+            SCHOOL,
+            freeze,
+            KEYS,
+            repo.parent / "diag-runtime-boundary",
+            tool_repo=runtime,
+        )
+        self.assertEqual(result["report"]["status"], "PASS")
+        self.assertEqual(
+            sorted(
+                item["canonical_opponent_key"]
+                for item in result["report"]["changes"]
+            ),
+            KEYS,
+        )
+        self.assertNotEqual(self.git(repo, "rev-parse", "HEAD"), predecessor)
 
     def test_dry_run_is_exact_and_has_no_tracked_mutation(self):
         repo, predecessor, freeze = self.make_repo()
