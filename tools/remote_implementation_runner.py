@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,7 @@ from remote_implementation_control import (
     OP_RECOVER,
     OP_STAGE1,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     RemoteImplementationError,
     abandon_active,
     begin_request,
@@ -66,6 +68,14 @@ from remote_implementation_stage2_census import (
     add_existing_onboarding_worktree,
     run_stage2_census_tool,
     verify_phase0_authority,
+)
+from remote_implementation_stage2_opponent_display import (
+    apply_and_prepare_repair,
+    post_repair_stage2_result,
+    run_normalizer_dry_run,
+    stage2_result_summary,
+    verify_census_and_freeze_authority,
+    verify_prepared_commit_field_boundary,
 )
 
 DIAG = Path(
@@ -455,6 +465,420 @@ def run_read_only_stage2_census(
     print(
         "REMOTE STAGE 2 CENSUS: %s checkpoint_commit=%s"
         % (result["stage2_status"], checkpoint_commit)
+    )
+
+
+
+def _copy_stage2_result_artifacts(
+    *,
+    worktree: Path,
+    school: str,
+    result: dict[str, Any],
+    directory: Path,
+) -> tuple[dict[str, str], dict[str, str]]:
+    artifact_hashes: dict[str, str] = {}
+    normalized_hashes: dict[str, str] = {}
+    source_dir = worktree / ".onboarding" / school
+    for name in STAGE2_ARTIFACT_NAMES:
+        source = source_dir / name
+        if not source.is_file():
+            continue
+        target = directory / name
+        shutil.copyfile(source, target)
+        artifact_hashes[name] = sha256_file(target)
+        normalized_hashes[name] = result["artifact_normalized_sha256"][name]
+        if artifact_hashes[name] != result["artifact_sha256"][name]:
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_ARTIFACT_COPY_HASH_MISMATCH:%s"
+                % name
+            )
+    return artifact_hashes, normalized_hashes
+
+
+def finalize_stage2_opponent_display_successor(
+    *,
+    active: dict[str, Any],
+    original_request: dict[str, Any],
+    request_sha256: str,
+    live_main: str,
+    writeahead: dict[str, Any],
+    writeahead_path: str,
+    writeahead_sha256: str,
+    writeahead_commit: str | None,
+    expected_remote: str,
+    freeze_bytes: bytes,
+    publication_cas: str,
+    extra_commit_paths: list[Path | str] | None = None,
+    recovery_request_id: str | None = None,
+    recovery_classification: str | None = None,
+) -> str:
+    school = original_request["school_key"]
+    rid = original_request["request_id"]
+    prepared = writeahead["prepared_commit_sha"]
+    target_branch = original_request["target_branch"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_TARGET_NOT_PREPARED_COMMIT")
+
+    stage2_worktree = add_existing_onboarding_worktree(
+        target_branch,
+        prepared,
+        school,
+    )
+    result = post_repair_stage2_result(
+        stage2_worktree,
+        school,
+        freeze_bytes,
+        DIAG / "post-repair-stage2",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_TARGET_CHANGED_DURING_REGENERATION")
+
+    successor_dir = Path(
+        ".remote-implementation/successors/%s/%s" % (school, rid)
+    )
+    successor_dir.mkdir(parents=True, exist_ok=True)
+    artifact_hashes, normalized_hashes = _copy_stage2_result_artifacts(
+        worktree=stage2_worktree,
+        school=school,
+        result=result,
+        directory=successor_dir,
+    )
+    summary = stage2_result_summary(result)
+    summary["artifact_sha256"] = artifact_hashes
+    summary["artifact_normalized_sha256"] = normalized_hashes
+
+    successor = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        "operation": OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+        "request_id": rid,
+        "request_sha256": request_sha256,
+        "school_key": school,
+        "global_lock_commit": active["active_lock_commit"],
+        "writeahead_commit": writeahead_commit,
+        "writeahead_manifest_path": writeahead_path,
+        "writeahead_manifest_sha256": writeahead_sha256,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": writeahead[
+            "expected_target_predecessor_sha"
+        ],
+        "prepared_commit_sha": prepared,
+        "prepared_tree_sha": writeahead["prepared_tree_sha"],
+        "prepared_parent_sha": writeahead["prepared_parent_sha"],
+        "actual_published_target_sha": prepared,
+        "changed_paths": writeahead["changed_paths"],
+        "changed_file_sha256": writeahead["changed_file_sha256"],
+        "stage2_census_checkpoint_path": writeahead[
+            "stage2_census_checkpoint_path"
+        ],
+        "stage2_census_checkpoint_sha256": writeahead[
+            "stage2_census_checkpoint_sha256"
+        ],
+        "expected_blocker_keys": writeahead["expected_blocker_keys"],
+        "normalization_report_sha256": writeahead[
+            "normalization_report_sha256"
+        ],
+        "field_level_proof_sha256": writeahead[
+            "field_level_proof_sha256"
+        ],
+        "source_game_normalized_name_row_count": writeahead[
+            "source_game_normalized_name_row_count"
+        ],
+        "integration_freeze_sha256": writeahead[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": writeahead[
+            "semantic_snapshot_sha256"
+        ],
+        "semantic_drift_before": writeahead["semantic_drift_before"],
+        "semantic_drift_after": writeahead["semantic_drift_after"],
+        "repository_validation": writeahead["repository_validation"],
+        "publication_cas": publication_cas,
+        "post_repair_stage2": summary,
+        "recovery_request_id": recovery_request_id,
+        "recovery_classification": recovery_classification,
+        "final_transaction_state": "COMPLETE",
+    }
+    successor_path = successor_dir / "successor-manifest.json"
+    write_json(successor_path, successor)
+    successor_sha = sha256_file(successor_path)
+
+    final_state = finalize_success(
+        active,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": target_branch,
+            "target_predecessor_sha": writeahead[
+                "expected_target_predecessor_sha"
+            ],
+            "target_sha": prepared,
+            "writeahead_manifest_path": writeahead_path,
+            "writeahead_manifest_sha256": writeahead_sha256,
+            "successor_manifest_path": successor_path.as_posix(),
+            "successor_manifest_sha256": successor_sha,
+            "integration_freeze_sha256": writeahead[
+                "integration_freeze_sha256"
+            ],
+            "semantic_snapshot_sha256": writeahead[
+                "semantic_snapshot_sha256"
+            ],
+            "stage2_status": result["stage2_status"],
+            "decision_universe_sha256": (
+                result.get("status", {}).get("preflight", {})
+            ).get("decision_universe_sha256"),
+            "capability_census_status": (
+                result.get("capability_census") or {}
+            ).get("status"),
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_opponent_display_equivalence": "PENDING",
+            "recovery_request_id": recovery_request_id,
+            "recovery_classification": recovery_classification,
+        },
+    )
+    if recovery_request_id and recovery_request_id not in final_state[
+        "consumed_request_ids"
+    ]:
+        final_state["consumed_request_ids"].append(recovery_request_id)
+    write_json(STATE_PATH, final_state)
+    paths: list[Path | str] = [STATE_PATH, successor_dir]
+    if extra_commit_paths:
+        paths.extend(extra_commit_paths)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 opponent-display normalization %s" % rid,
+        paths,
+    )
+
+
+def run_stage2_opponent_display_normalize(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    authority = verify_census_and_freeze_authority(
+        request,
+        predecessor_commit,
+    )
+    target_branch = request["target_branch"]
+    target_sha = request["target_sha"]
+    actual_target = remote_head(ROOT, target_branch)
+    if actual_target != target_sha:
+        raise Stop(
+            "STAGE2_OPPONENT_DISPLAY_TARGET_HEAD_MISMATCH expected=%s actual=%s"
+            % (target_sha, actual_target or "[missing]")
+        )
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    lock_commit = commit_control(
+        request_commit,
+        "acquire global Implementation lock %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    active = bind_lock_commit(active, lock_commit)
+    write_json(STATE_PATH, active)
+    lock_bound_commit = commit_control(
+        lock_commit,
+        "bind global Implementation lock %s" % request["request_id"],
+        [STATE_PATH],
+    )
+    print("GLOBAL IMPLEMENTATION LOCK: ACQUIRED %s" % lock_commit)
+
+    worktree = add_existing_onboarding_worktree(
+        target_branch,
+        target_sha,
+        request["school_key"],
+    )
+    dry_run = run_normalizer_dry_run(
+        worktree,
+        request["school_key"],
+        authority["freeze_bytes"],
+        authority["blocker_keys"],
+        DIAG / "opponent-display",
+    )
+    prepared = apply_and_prepare_repair(
+        worktree,
+        request["school_key"],
+        target_sha,
+        authority["freeze_bytes"],
+        dry_run,
+        authority["blocker_keys"],
+        DIAG / "opponent-display",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, target_branch) != target_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_TARGET_CHANGED_BEFORE_WRITEAHEAD")
+
+    validation = run(
+        [sys.executable, "tools/validate_data.py"],
+        cwd=worktree,
+        check=False,
+    )
+    DIAG.mkdir(parents=True, exist_ok=True)
+    (DIAG / "opponent-display-validate-data.log").write_text(
+        validation.stdout,
+        encoding="utf-8",
+    )
+    if validation.returncode != 0:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_REPOSITORY_VALIDATION_FAILED")
+
+    writeahead_dir = Path(
+        ".remote-implementation/writeahead/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    writeahead_dir.mkdir(parents=True, exist_ok=True)
+    (writeahead_dir / "integration-freeze.json").write_bytes(
+        authority["freeze_bytes"]
+    )
+    (writeahead_dir / "normalization-report.json").write_bytes(
+        dry_run["report_bytes"]
+    )
+    write_json(
+        writeahead_dir / "field-level-proof.json",
+        prepared["field_level_proof"],
+    )
+    write_json(
+        writeahead_dir / "semantic-drift-proof.json",
+        {
+            "before": dry_run["semantic_drift_before"],
+            "after": prepared["semantic_drift_after"],
+        },
+    )
+    (writeahead_dir / "census-checkpoint-manifest.json").write_bytes(
+        authority["census_manifest_bytes"]
+    )
+    sidecars = {
+        name: sha256_file(writeahead_dir / name)
+        for name in (
+            "integration-freeze.json",
+            "normalization-report.json",
+            "field-level-proof.json",
+            "semantic-drift-proof.json",
+            "census-checkpoint-manifest.json",
+        )
+    }
+    writeahead = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+        "operation": OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "global_lock_commit": lock_commit,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": target_sha,
+        "prepared_commit_sha": prepared["prepared_commit_sha"],
+        "prepared_tree_sha": prepared["prepared_tree_sha"],
+        "prepared_parent_sha": prepared["prepared_parent_sha"],
+        "commit_message": prepared["commit_message"],
+        "changed_paths": prepared["changed_paths"],
+        "changed_file_sha256": prepared["changed_file_sha256"],
+        "allowed_paths": sorted(
+            {
+                "schools/%s/opponents.csv" % request["school_key"],
+                "schools/%s/source-games.csv" % request["school_key"],
+            }
+        ),
+        "sidecars": sidecars,
+        "stage2_census_checkpoint_path": request[
+            "stage2_census_checkpoint"
+        ]["path"],
+        "stage2_census_checkpoint_sha256": request[
+            "stage2_census_checkpoint"
+        ]["sha256"],
+        "expected_blocker_keys": authority["blocker_keys"],
+        "normalization_report_sha256": sidecars[
+            "normalization-report.json"
+        ],
+        "field_level_proof_sha256": sidecars["field-level-proof.json"],
+        "source_game_normalized_name_row_count": prepared[
+            "field_level_proof"
+        ]["source_game_normalized_name_row_count"],
+        "integration_freeze_sha256": request[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": request[
+            "semantic_snapshot_sha256"
+        ],
+        "semantic_drift_before": dry_run["semantic_drift_before"],
+        "semantic_drift_after": prepared["semantic_drift_after"],
+        "repository_validation": "PASS",
+        "mutation_state": "PREPARED_NOT_PUBLISHED",
+    }
+    writeahead_path = writeahead_dir / "writeahead-manifest.json"
+    write_json(writeahead_path, writeahead)
+    writeahead_sha = sha256_file(writeahead_path)
+
+    active["transaction_state"] = "PREPARED_NOT_PUBLISHED"
+    active["active_writeahead_path"] = writeahead_path.as_posix()
+    active["active_writeahead_sha256"] = writeahead_sha
+    active["active_prepared_commit_sha"] = prepared[
+        "prepared_commit_sha"
+    ]
+    active["active_prepared_tree_sha"] = prepared["prepared_tree_sha"]
+    write_json(STATE_PATH, active)
+    writeahead_commit = commit_control(
+        lock_bound_commit,
+        "publish Stage 2 opponent-display write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH, writeahead_dir],
+    )
+    active["active_writeahead_commit"] = writeahead_commit
+    write_json(STATE_PATH, active)
+    writeahead_bound_commit = commit_control(
+        writeahead_commit,
+        "bind Stage 2 opponent-display write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH],
+    )
+
+    assert_protected_main_unchanged(live_main)
+    publish_ref_cas(
+        ROOT,
+        branch=target_branch,
+        prepared_commit=prepared["prepared_commit_sha"],
+        expected_predecessor=target_sha,
+    )
+    if remote_head(ROOT, target_branch) != prepared["prepared_commit_sha"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_TARGET_PUBLICATION_VERIFY_FAILED")
+
+    successor_commit = finalize_stage2_opponent_display_successor(
+        active=active,
+        original_request=request,
+        request_sha256=sha256_bytes(request_bytes),
+        live_main=live_main,
+        writeahead=writeahead,
+        writeahead_path=writeahead_path.as_posix(),
+        writeahead_sha256=writeahead_sha,
+        writeahead_commit=writeahead_commit,
+        expected_remote=writeahead_bound_commit,
+        freeze_bytes=authority["freeze_bytes"],
+        publication_cas="EXISTING_REF_CAS_PASS",
+    )
+    print(
+        "REMOTE STAGE 2 OPPONENT DISPLAY NORMALIZATION: COMPLETE "
+        "target=%s successor_commit=%s"
+        % (prepared["prepared_commit_sha"], successor_commit)
     )
 
 
@@ -1118,6 +1542,15 @@ def main() -> int:
             )
         elif request["operation"] == OP_STAGE2_CENSUS:
             run_read_only_stage2_census(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
+            run_stage2_opponent_display_normalize(
                 state,
                 request,
                 request_bytes,
