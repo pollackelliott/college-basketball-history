@@ -1,0 +1,80 @@
+name: Remote Implementation Proof 6 - Real Phase 0 Disposable Rehearsal
+
+on:
+  push:
+    branches:
+      - experiment/remote-implementation-proof6
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: remote-implementation-global-control
+  cancel-in-progress: false
+
+jobs:
+  phase0-transaction:
+    if: ${{ !startsWith(github.event.head_commit.message, '[proof6-internal]') }}
+    runs-on: ubuntu-latest
+    outputs:
+      has_request: ${{ steps.detect.outputs.has_request }}
+    steps:
+      - name: Check out exact Proof 6 request event
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Detect Proof 6 request
+        id: detect
+        shell: bash
+        run: |
+          if [[ -f .remote-implementation-poc/control6/request.json ]]; then
+            echo "has_request=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_request=false" >> "$GITHUB_OUTPUT"
+            echo "Proof 6 infrastructure-only push; no request."
+          fi
+
+      - name: Execute real-tool disposable Phase 0 transaction
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python .remote-implementation-poc/control6/orchestrator.py
+
+      - name: Upload Proof 6 transaction diagnostics
+        if: steps.detect.outputs.has_request == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-proof6-transaction-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/proof6-diagnostics
+          if-no-files-found: ignore
+          retention-days: 14
+
+  fresh-runner-verification:
+    needs: phase0-transaction
+    if: needs.phase0-transaction.result == 'success' && needs.phase0-transaction.outputs.has_request == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest durable Proof 6 control state
+        uses: actions/checkout@v4
+        with:
+          ref: experiment/remote-implementation-proof6
+          fetch-depth: 0
+
+      - name: Independently reconstruct and authenticate rehearsal
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python .remote-implementation-poc/control6/fresh_verify.py
+
+      - name: Upload fresh-runner verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-proof6-fresh-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/proof6-fresh-verify
+          if-no-files-found: ignore
+          retention-days: 14
