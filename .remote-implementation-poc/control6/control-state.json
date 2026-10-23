@@ -17,7 +17,7 @@
   "active_request_sha256": "6ebc42675b33b6f54e99858acb6347bbe20d62959a8ae3373e2147ae3b307bb8",
   "active_stage1_reconciliation_sha256": "1dbd15a2fce41f7b8f079721a8a66c7c01c77256038c608b37318606b43ffb89",
   "active_venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "679bd01e283a84df39630d56ea8a72f4a6233b82",
   "active_writeahead_manifest_sha256": "ef6a083e109caf8383a52fdafa520f9bb4d9a8b7c3e7226228b98c266dad53a9",
   "authority_statement": "Experimental Proof 6 rehearsal only. No authoritative LIU INTEGRATION_FROZEN, real Phase 0, Stage 2, Gate 1, release, protected-main mutation, or real onboarding-branch authority.",
   "consumed_request_ids": [
