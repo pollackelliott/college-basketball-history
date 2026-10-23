@@ -66,7 +66,7 @@ jobs:
 
   fresh-phase0-verification:
     needs: process-request
-    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'PHASE0'
+    if: needs.process-request.result == 'success' && (needs.process-request.outputs.operation == 'PHASE0' || needs.process-request.outputs.operation == 'RECOVER')
     runs-on: ubuntu-latest
     steps:
       - name: Check out latest durable control state
