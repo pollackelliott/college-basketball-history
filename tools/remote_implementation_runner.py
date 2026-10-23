@@ -772,6 +772,32 @@ def run_recovery(
     )
 
 
+def verify_control_code_matches_main(
+    request_commit: str,
+    live_main: str,
+) -> None:
+    changed = [
+        line.strip()
+        for line in git(
+            "diff",
+            "--name-only",
+            live_main,
+            request_commit,
+        ).stdout.splitlines()
+        if line.strip()
+    ]
+    unexpected = [
+        path
+        for path in changed
+        if not path.startswith(".remote-implementation/")
+    ]
+    if unexpected:
+        raise Stop(
+            "CONTROL_BRANCH_CODE_NOT_EXACT_PROTECTED_MAIN: "
+            + ", ".join(unexpected)
+        )
+
+
 def main() -> int:
     DIAG.mkdir(parents=True, exist_ok=True)
     try:
@@ -794,8 +820,6 @@ def main() -> int:
             request.get("recovery") or {}
         ).get("target_branch")
         live_main, durable_head = fetch_operational_refs(target)
-        if durable_head != request_commit:
-            raise Stop("CONTROL_BRANCH_MOVED_AFTER_REQUEST_EVENT")
 
         if int(os.environ.get("GITHUB_RUN_ATTEMPT", "1")) > 1:
             durable_state = git_show_json(
@@ -807,6 +831,10 @@ def main() -> int:
             raise Stop(
                 "RERUN_ATTEMPT_WITHOUT_DURABLE_ACCEPTANCE_IS_NOT_AUTHORIZED"
             )
+
+        if durable_head != request_commit:
+            raise Stop("CONTROL_BRANCH_MOVED_AFTER_REQUEST_EVENT")
+        verify_control_code_matches_main(request_commit, live_main)
 
         state_bytes = git_show_bytes(
             predecessor_commit,
