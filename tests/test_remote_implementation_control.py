@@ -204,6 +204,29 @@ class RemoteImplementationControlTests(unittest.TestCase):
             allow_active_recovery=True,
         )
 
+    def test_read_only_stage1_recovery_uses_no_lock_or_target(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_STAGE1, "request-old"),
+            "7" * 64,
+            run_id="101",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        data = canonical_json_bytes(state)
+        recovery = request(OP_RECOVER, "recovery-read-only")
+        recovery["recovery"]["lock_commit"] = None
+        recovery["recovery"]["target_branch"] = None
+        recovery["previous_control_state_sha256"] = sha256_bytes(data)
+        verify_request_predecessor(
+            state,
+            data,
+            PRED,
+            recovery,
+            MAIN,
+            allow_active_recovery=True,
+        )
+
     def test_stale_recovery_lock_refused(self):
         state = begin_request(
             initial_control_state(),
