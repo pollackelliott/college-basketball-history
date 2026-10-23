@@ -20,7 +20,7 @@
   "active_sidecar_sha256": "c34d3f347e277574a246c774611cef0e63e26d7a93ca341b2f0e36586ddaa8fd",
   "active_target_payload_sha256": "1c33a1a469294707544a451cd9ba21e8eed8e04a17092d5b72311edbff4aa188",
   "active_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "d63faba7977a417e4ea15e3751b4331ca7765833",
   "active_writeahead_manifest_path": ".remote-implementation-poc/control5/writeahead/proof5-boundary-c-0001/writeahead-manifest.json",
   "active_writeahead_manifest_sha256": "1ce84fd24848e063227ccfe482925752a4b4a02732f73890d166f5cc837117c5",
   "authority_statement": "Experimental Proof 5 mutation-control authority only. No basketball mutation, LIU Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
