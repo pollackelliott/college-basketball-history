@@ -36,14 +36,47 @@ STAGE2_ARTIFACT_NAMES = (
 STAGE2_ALLOWED_STATUSES = {"CAPABILITY_CENSUS_READY", "BLOCKED"}
 
 
-def normalize_artifact_bytes(data: bytes, repo: Path) -> bytes:
-    """Normalize only runner-local absolute repository paths for replay comparison."""
+def normalize_artifact_bytes(
+    name: str,
+    data: bytes,
+    repo: Path,
+) -> bytes:
+    """Normalize only documented non-semantic replay variance.
+
+    The permanent preflight records a wall-clock ``created_at`` in plan.json and
+    renders the same value as ``Generated:`` in review.md. Those fields are
+    diagnostic chronology, not decision-universe authority. Absolute runner
+    repository paths may also vary. No other content is normalized.
+    """
     result = data
     for value in {str(repo), str(repo.resolve())}:
         if value:
             result = result.replace(value.encode("utf-8"), b"<REPO>")
+    if name == STAGE2_PLAN:
+        doc = json.loads(result)
+        if "created_at" in doc:
+            doc["created_at"] = "<GENERATED_AT>"
+        result = (
+            json.dumps(
+                doc,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=False,
+            )
+            + "\n"
+        ).encode("utf-8")
+    elif name == STAGE2_REPORT:
+        text = result.decode("utf-8")
+        lines = [
+            "Generated: <GENERATED_AT>"
+            if line.startswith("Generated: ")
+            else line
+            for line in text.splitlines()
+        ]
+        result = ("\n".join(lines) + ("\n" if text.endswith("\n") else "")).encode(
+            "utf-8"
+        )
     return result
-
 
 def tracked_worktree_state(repo: Path) -> dict[str, str]:
     return {
@@ -226,7 +259,9 @@ def stage2_artifact_hashes(
             continue
         data = path.read_bytes()
         raw[name] = sha256_bytes(data)
-        normalized[name] = sha256_bytes(normalize_artifact_bytes(data, repo))
+        normalized[name] = sha256_bytes(
+            normalize_artifact_bytes(name, data, repo)
+        )
     return raw, normalized
 
 
