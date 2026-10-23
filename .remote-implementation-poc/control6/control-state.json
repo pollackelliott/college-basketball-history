@@ -1,33 +1,78 @@
 {
+  "abandoned_request_ids": [
+    "proof6-liu-phase0-0001"
+  ],
   "accepted_request_ids": [
     "proof6-liu-phase0-0001"
   ],
-  "active_lock_commit": "d42056d06b72694e4745e72afe05bd5b2a371b20",
-  "active_lock_owner": "github-actions:39896265711:1",
-  "active_operation": "REHEARSE_REAL_LIU_PHASE0",
-  "active_request_id": "proof6-liu-phase0-0001",
-  "active_request_sha256": "bdd1c8917ae2e8a646411ef6b4c37a04dd7362b678c5d6d5245e3358b74ee347",
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
+  "active_request_id": null,
+  "active_request_sha256": null,
   "active_writeahead_commit": null,
   "active_writeahead_manifest_sha256": null,
   "authority_statement": "Experimental Proof 6 rehearsal only. No authoritative LIU INTEGRATION_FROZEN, real Phase 0, Stage 2, Gate 1, release, protected-main mutation, or real onboarding-branch authority.",
-  "consumed_request_ids": [],
-  "current_sequence": 0,
+  "consumed_request_ids": [
+    "proof6-recovery-stage1-blocker-0001"
+  ],
+  "current_sequence": 1,
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE_EXPERIMENTAL_SUCCESSOR",
   "inherited_proof5_control_commit": "774e5dac89023faf97955e9ba509694bc314444f",
   "inherited_proof5_control_state_sha256": "58d35fa129a3784bdaf803b87f149ee50232a4cd4182f425aff4e7913dc1bf7b",
   "integration_frozen": false,
-  "last_transaction": null,
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": 1,
-  "lock_acquired_run_id": 39896265711,
-  "lock_acquisition_request_commit": "5bb8a9f94ff22176f9c51b408c4966150bf2efab",
+  "last_transaction": {
+    "architecture_blocker": {
+      "classification": "GENERIC_STAGE1_REPRESENTATION_TOOLING_DEFECT",
+      "detail": "The researched-split duplicate-name exception accepts REUSE_EXACT_KEY and REUSE_RESEARCH_BASE_IDENTITY but not REUSE_EXPLICIT_RECONCILIATION. LIU's explicit mapping to VEN-000040 is therefore still blocked by the intentional VEN-000040/VEN-000041 Charlotte Coliseum name overlap.",
+      "required_repair": "Add a generic regression-tested explicit-reconciliation researched-split handling path before rerunning Proof 6 against refreshed protected main."
+    },
+    "basketball_authoritative_mutation": false,
+    "blocker": {
+      "candidate_venue_ids": [
+        "VEN-000040",
+        "VEN-000041"
+      ],
+      "classification": "STOP_AMBIGUOUS",
+      "inventory_issue": "CONFLICTING_REGISTERED_NAME_IDENTITIES",
+      "local_venue_key": "charlotte-coliseum-original",
+      "selected_global_venue_id": "VEN-000040",
+      "selected_global_venue_key": "charlotte-coliseum-1955"
+    },
+    "conference_classification_counts": {
+      "REUSE_CURRENT_IDENTITY": 3
+    },
+    "conference_reconciliation_blockers": 0,
+    "disposable_target_branch_created": false,
+    "failure_action_run_attempt": 1,
+    "failure_action_run_id": 39896265711,
+    "integration_freeze_produced": false,
+    "original_request_id": "proof6-liu-phase0-0001",
+    "phase0_command_executed": false,
+    "real_liu_onboarding_branch_created": false,
+    "reconciled_stage1_blocker_count": 1,
+    "reconciled_stage1_status": "BLOCKED",
+    "recovery_disposition": "ABANDON_STAGE1_RECONCILIATION_BLOCKER",
+    "recovery_request_id": "proof6-recovery-stage1-blocker-0001",
+    "research_freeze_game_count": 2193,
+    "research_freeze_season_count": 81,
+    "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+    "research_freeze_verified": true,
+    "venue_classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 20,
+      "SAFE_REPRESENTATION_REUSE": 38,
+      "STOP_AMBIGUOUS": 1
+    },
+    "writeahead_authority_created": false
+  },
+  "lifecycle_state": "IDLE",
   "phase0_authorized": false,
   "real_onboarding_branch_authorized": false,
-  "recovery_required": true,
+  "recovery_required": false,
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
   "target_expected_nonexistent": true,
-  "transaction_state": "LOCKED"
+  "transaction_state": "BLOCKED_STAGE1_RECONCILIATION"
 }

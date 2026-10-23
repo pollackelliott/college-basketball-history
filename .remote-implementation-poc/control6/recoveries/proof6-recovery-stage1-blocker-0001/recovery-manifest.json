@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_RECOVERY",
+  "recovery_request_id": "proof6-recovery-stage1-blocker-0001",
+  "recovery_request_commit": "6d3e43ae5a8758304e9209b83498e55a01be46d2",
+  "abandoned_request_id": "proof6-liu-phase0-0001",
+  "abandoned_request_commit": "5bb8a9f94ff22176f9c51b408c4966150bf2efab",
+  "active_lock_commit": "d42056d06b72694e4745e72afe05bd5b2a371b20",
+  "stranded_control_commit": "f830cfe3b1e063437c057b7d2fde9c064406ceaf",
+  "stranded_control_state_sha256": "b2cbe2e4f4ad4d7277d3bbe5ff1a65d1ed7bcc331d82796eab3c3ddc472694cd",
+  "failed_action_run_id": 39896265711,
+  "failed_action_run_attempt": 1,
+  "failed_action_conclusion": "failure",
+  "diagnostic_artifact_id": 12477001015,
+  "diagnostic_artifact_sha256": "7b74b0c342302a1f7bcc6829af4fd4f9b49734301a19ba9321d852c4e0915815",
+  "protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "protected_main_unchanged": true,
+  "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+  "research_freeze_verified": true,
+  "research_freeze_game_count": 2193,
+  "research_freeze_season_count": 81,
+  "reconciled_stage1": {
+    "status": "BLOCKED",
+    "blocker_count": 1,
+    "maintenance_required_count": 0,
+    "ambiguous_stop_count": 1,
+    "venue_classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 20,
+      "SAFE_REPRESENTATION_REUSE": 38,
+      "STOP_AMBIGUOUS": 1
+    },
+    "conference_classification_counts": {
+      "REUSE_CURRENT_IDENTITY": 3
+    },
+    "program_alias_classification_counts": {
+      "NO_CURRENT_VERIFIED_ALIAS": 229
+    },
+    "blocker": {
+      "venue_key": "charlotte-coliseum-original",
+      "canonical_name": "Charlotte Coliseum (1955–1988 building)",
+      "candidate_venue_ids": [
+        "VEN-000040",
+        "VEN-000041"
+      ],
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "target_venue_id": "VEN-000040",
+      "target_venue_key": "charlotte-coliseum-1955",
+      "issues": [
+        "CONFLICTING_REGISTERED_NAME_IDENTITIES",
+        "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+      ]
+    }
+  },
+  "blocker_classification": "GENERIC_STAGE1_REPRESENTATION_TOOLING_DEFECT",
+  "blocker_basis": "Current permanent inventory logic has an intentional RESEARCHED_SPLIT name-overlap exception for REUSE_EXACT_KEY and REUSE_RESEARCH_BASE_IDENTITY, but not for an explicit, hash-bound REUSE_EXPLICIT_RECONCILIATION. Existing tests cover split exact-key reuse and simple explicit reconciliation separately, not the combined topology.",
+  "phase0_command_executed": false,
+  "integration_freeze_produced": false,
+  "writeahead_authority_created": false,
+  "disposable_target_branch_exists": false,
+  "real_liu_onboarding_branch_exists": false,
+  "recovery_disposition": "ABANDON_STAGE1_RECONCILIATION_BLOCKER",
+  "final_global_lifecycle": "IDLE",
+  "final_transaction_state": "BLOCKED_STAGE1_RECONCILIATION",
+  "integration_frozen": false,
+  "phase0_authorized": false,
+  "owner_desktop_interaction_required": false,
+  "owner_github_ui_interaction_required": false
+}
