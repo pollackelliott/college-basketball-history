@@ -117,6 +117,23 @@ DISCREPANCY_ACTIONS = {
 ACCOMPLISHMENT_ACTIONS = {
     "VERIFY_REFERENCE_VALUES",
     "KEEP_UNDER_REVIEW",
+    "APPLY_ACCOMPLISHMENT_PATCH",
+}
+ACCOMPLISHMENT_PATCH_FIELDS = {
+    "conference_regular_season_championships",
+    "conference_tournament_championships",
+    "ncaa_tournament_appearances",
+    "final_four_appearances",
+    "national_championships",
+    "best_finish_key",
+    "best_finish_year",
+}
+ACCOMPLISHMENT_COUNT_PATCH_FIELDS = {
+    "conference_regular_season_championships",
+    "conference_tournament_championships",
+    "ncaa_tournament_appearances",
+    "final_four_appearances",
+    "national_championships",
 }
 PUBLICATION_ACTIONS = {"ENABLE_PUBLIC_PAGE", "KEEP_DISABLED"}
 CANONICAL_SITE_PATCH_ACTIONS = {"APPLY_CANONICAL_PATCH", "LEAVE_UNRESOLVED"}
@@ -205,6 +222,95 @@ def read_csv_table(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     return read_csv_table(path)[1]
+
+
+def project_accomplishment_patch(
+    repo: Path,
+    school_key: str,
+    patch: dict[str, Any],
+) -> dict[str, str]:
+    """Project and validate one decision-bound accomplishment value correction."""
+
+    if not patch:
+        raise WorkflowError(
+            "APPLY_ACCOMPLISHMENT_PATCH requires a nonempty accomplishment patch"
+        )
+    unknown = sorted(set(patch) - ACCOMPLISHMENT_PATCH_FIELDS)
+    if unknown:
+        raise WorkflowError(
+            "forbidden accomplishment patch fields: " + ", ".join(unknown)
+        )
+
+    rows = read_csv(repo / "data/reference/program-accomplishments.csv")
+    current = next(
+        (row for row in rows if row.get("program_key") == school_key),
+        None,
+    )
+    if current is None:
+        raise WorkflowError(
+            f"{school_key}: accomplishment reference row is missing"
+        )
+
+    projected = dict(current)
+    changed = False
+    for field, value in patch.items():
+        normalized = str(value).strip()
+        if projected.get(field, "").strip() != normalized:
+            changed = True
+        projected[field] = normalized
+    if not changed:
+        raise WorkflowError(
+            "APPLY_ACCOMPLISHMENT_PATCH must change at least one accomplishment value"
+        )
+
+    counts: dict[str, int] = {}
+    for field in ACCOMPLISHMENT_COUNT_PATCH_FIELDS:
+        raw = projected.get(field, "").strip()
+        if not re.fullmatch(r"\d+", raw):
+            raise WorkflowError(
+                f"{field} must remain a nonnegative integer after accomplishment patch"
+            )
+        counts[field] = int(raw)
+
+    appearances = counts["ncaa_tournament_appearances"]
+    final_fours = counts["final_four_appearances"]
+    championships = counts["national_championships"]
+    if championships > final_fours or final_fours > appearances:
+        raise WorkflowError(
+            "accomplishment patch leaves championships/final fours/appearances inconsistent"
+        )
+
+    finish = projected.get("best_finish_key", "").strip()
+    year = projected.get("best_finish_year", "").strip()
+    if finish and finish not in BEST_FINISH_RANK:
+        raise WorkflowError(f"unknown best_finish_key {finish!r}")
+    if appearances == 0:
+        if finish or year:
+            raise WorkflowError(
+                "zero NCAA appearances requires blank best_finish_key and best_finish_year"
+            )
+    else:
+        if not finish or not re.fullmatch(r"\d{4}", year):
+            raise WorkflowError(
+                "positive NCAA appearances requires a valid best_finish_key and four-digit best_finish_year"
+            )
+    if championships and finish != "NATIONAL_CHAMPION":
+        raise WorkflowError(
+            "national championships require NATIONAL_CHAMPION best finish"
+        )
+    if finish == "NATIONAL_CHAMPION" and championships == 0:
+        raise WorkflowError(
+            "NATIONAL_CHAMPION best finish requires a national championship"
+        )
+    if (
+        finish
+        and BEST_FINISH_RANK.get(finish, 0) >= BEST_FINISH_RANK["FINAL_FOUR"]
+        and final_fours == 0
+    ):
+        raise WorkflowError(
+            "Final Four-or-better accomplishment patch requires a Final Four appearance"
+        )
+    return projected
 
 
 def write_csv_preserving_format(
@@ -3596,7 +3702,12 @@ def approve_plan(
             review.get("source_patch_json", "{}"),
             f"{decision_id} source_patch_json",
         )
-        unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
+        if item.get("category") == "accomplishments":
+            unknown_canonical = sorted(
+                set(canonical_patch) - ACCOMPLISHMENT_PATCH_FIELDS
+            )
+        else:
+            unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
         if item.get("category") == "identity":
             if canonical_patch:
@@ -3715,6 +3826,26 @@ def approve_plan(
             else:
                 raise WorkflowError(
                     f"{decision_id}: unsupported postseason review action {decision!r}"
+                )
+        if item.get("category") == "accomplishments":
+            if source_patch:
+                raise WorkflowError(
+                    f"{decision_id}: accomplishment review may not carry a source patch"
+                )
+            if decision == "APPLY_ACCOMPLISHMENT_PATCH":
+                project_accomplishment_patch(
+                    repo,
+                    plan["school_key"],
+                    canonical_patch,
+                )
+            elif decision in {"VERIFY_REFERENCE_VALUES", "KEEP_UNDER_REVIEW"}:
+                if canonical_patch:
+                    raise WorkflowError(
+                        f"{decision_id}: {decision} may not carry an accomplishment patch"
+                    )
+            else:
+                raise WorkflowError(
+                    f"{decision_id}: unsupported accomplishment decision {decision!r}"
                 )
         if item.get("category") == "source_consistency":
             if decision != "APPLY_SOURCE_CONSISTENCY_PATCH":
@@ -3912,7 +4043,10 @@ def approve_plan(
         None,
     )
     if publication and publication["decision"] == "ENABLE_PUBLIC_PAGE":
-        if accomplishment and accomplishment["decision"] != "VERIFY_REFERENCE_VALUES":
+        if accomplishment and accomplishment["decision"] not in {
+            "VERIFY_REFERENCE_VALUES",
+            "APPLY_ACCOMPLISHMENT_PATCH",
+        }:
             raise WorkflowError(
                 "Publication cannot be enabled while accomplishments remain under review"
             )
@@ -5990,6 +6124,25 @@ def apply_publication_decisions(
                     f"Verified through onboarding plan {approved['approved_plan_hash'][:12]}.",
                 )
                 counts["accomplishments_verified"] += 1
+                accomplishment_changed = True
+            elif item["decision"] == "APPLY_ACCOMPLISHMENT_PATCH":
+                patch = dict(item.get("canonical_patch", {}))
+                projected = project_accomplishment_patch(repo, school_key, patch)
+                for field in ACCOMPLISHMENT_PATCH_FIELDS:
+                    if field in patch:
+                        accomplishment[field] = projected[field]
+                accomplishment["verification_status"] = "VERIFIED"
+                accomplishment["verification_basis"] = item["resolution_basis"]
+                accomplishment["canonical_crosscheck_status"] = "MATCH"
+                accomplishment["notes"] = _append_note(
+                    accomplishment.get("notes", ""),
+                    (
+                        "Owner-approved accomplishment correction applied and verified "
+                        f"through onboarding plan {approved['approved_plan_hash'][:12]}."
+                    ),
+                )
+                counts["accomplishments_patched"] += 1
+                counts["accomplishment_fields_patched"] += len(patch)
                 accomplishment_changed = True
             elif item["decision"] != "KEEP_UNDER_REVIEW":
                 raise WorkflowError(f"Unsupported accomplishment decision {item['decision']}")
