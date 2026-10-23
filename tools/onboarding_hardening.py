@@ -78,6 +78,9 @@ OWNER_REVIEW_PAYLOAD_FIELDS = (
     "notes",
 )
 
+TECHNICAL_PREVIEW_APPROVED_BY = "technical-readiness-preview"
+TECHNICAL_PREVIEW_APPROVED_AT = "1970-01-01T00:00:00+00:00"
+
 ALLOWED_SITES = {
     "SOURCE_PROGRAM_HOME",
     "OPPONENT_HOME",
@@ -916,7 +919,8 @@ def validate_decision_map(
             repo,
             plan_path,
             proposal_review,
-            "map-validation",
+            TECHNICAL_PREVIEW_APPROVED_BY,
+            approved_at=TECHNICAL_PREVIEW_APPROVED_AT,
         )
     return {
         "action_counts": dict(sorted(counts.items())),
@@ -1105,7 +1109,8 @@ def rehearse_review(
         repo,
         plan_path,
         review_path,
-        "technical-readiness",
+        TECHNICAL_PREVIEW_APPROVED_BY,
+        approved_at=TECHNICAL_PREVIEW_APPROVED_AT,
     )
     before = onboard_school.tree_hashes(repo)
     with tempfile.TemporaryDirectory(prefix=f"preseal-{school_key}-") as temporary:
