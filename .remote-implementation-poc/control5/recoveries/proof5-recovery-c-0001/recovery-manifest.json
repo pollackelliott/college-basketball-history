@@ -1,0 +1,17 @@
+{
+  "actual_target_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+  "basketball_data_mutation": false,
+  "classification": "PUBLISHED_NOT_FINALIZED",
+  "divergence_test": "DIVERGED_STOP",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_RECOVERY",
+  "failed_action_run_attempt": 1,
+  "failed_action_run_id": 39887323505,
+  "original_request_id": "proof5-boundary-c-0001",
+  "prepared_commit_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+  "recovery_action_run_id": 39887687648,
+  "recovery_disposition": "ADOPT_EXACT_PUBLISHED_MUTATION",
+  "recovery_request_id": "proof5-recovery-c-0001",
+  "schema_version": 1,
+  "successor_manifest_sha256": "5d1df8687c7afc14182578253718cd42c823bb43068156014ab1117a13160dc2",
+  "target_ref_cas": "PASS"
+}

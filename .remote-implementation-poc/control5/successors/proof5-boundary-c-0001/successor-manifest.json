@@ -1,0 +1,33 @@
+{
+  "actual_published_target_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+  "allowed_changed_paths": [
+    ".remote-implementation-poc/proof5-target/state.json"
+  ],
+  "basketball_data_mutation": false,
+  "divergence_test": "DIVERGED_STOP",
+  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_SUCCESSOR",
+  "failed_action_run_attempt": 1,
+  "failed_action_run_id": 39887323505,
+  "final_global_lifecycle": "IDLE",
+  "final_transaction_state": "COMPLETE",
+  "integration_frozen": false,
+  "original_lock_commit": "03ce26d4fb6c9e8a9453d4544a22d41b594da320",
+  "original_mutation_request_id": "proof5-boundary-c-0001",
+  "original_mutation_request_sha256": "cee5cf16a1ae16bbbfa5ce72652f0f2a6b0a2d045213fbd0a4583bb4527899d2",
+  "phase0_authorized": false,
+  "predecessor_control_state_commit": "7ddc4030e260072109a9e934f67ec819213ca1a9",
+  "prepared_commit_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+  "prepared_tree_sha": "7d2b756c342dadd2103fd84f80549a5b0fed979c",
+  "recovery_action_run_attempt": 1,
+  "recovery_action_run_id": 39887687648,
+  "recovery_disposition": "ADOPT_EXACT_PUBLISHED_MUTATION",
+  "recovery_request_commit": "ce0c49b467a0b14d2dbe767227c8b52b196eb4c2",
+  "recovery_request_id": "proof5-recovery-c-0001",
+  "schema_version": 1,
+  "sidecar_authority_sha256": "c34d3f347e277574a246c774611cef0e63e26d7a93ca341b2f0e36586ddaa8fd",
+  "target_payload_sha256": "1c33a1a469294707544a451cd9ba21e8eed8e04a17092d5b72311edbff4aa188",
+  "target_ref_cas": "PASS",
+  "writeahead_commit": "d63faba7977a417e4ea15e3751b4331ca7765833",
+  "writeahead_manifest_sha256": "1ce84fd24848e063227ccfe482925752a4b4a02732f73890d166f5cc837117c5"
+}
