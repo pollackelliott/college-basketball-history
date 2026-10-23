@@ -43,6 +43,7 @@ from remote_implementation_stage2_census import (
 )
 from remote_implementation_stage2_opponent_display import (
     run_normalizer_dry_run,
+    verify_census_and_freeze_authority,
     verify_prepared_commit_field_boundary,
 )
 from integration_freeze_guard import semantic_drift_report
@@ -229,6 +230,29 @@ def verify_stage2_opponent_display_normalization(
     target_branch = successor["target_branch"]
     prepared = successor["prepared_commit_sha"]
     predecessor = successor["expected_target_predecessor_sha"]
+
+    request_path = (
+        ".remote-implementation/requests/%s/request.json"
+        % successor["request_id"]
+    )
+    request_bytes = git_show_bytes(control_head, request_path)
+    if sha256_bytes(request_bytes) != successor["request_sha256"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    authority = verify_census_and_freeze_authority(
+        request,
+        control_head,
+    )
+    if authority["blocker_keys"] != successor["expected_blocker_keys"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_CENSUS_KEY_MISMATCH")
+    if (
+        request["stage2_census_checkpoint"]["path"]
+        != successor["stage2_census_checkpoint_path"]
+        or request["stage2_census_checkpoint"]["sha256"]
+        != successor["stage2_census_checkpoint_sha256"]
+    ):
+        raise Stop("OPPONENT_DISPLAY_FRESH_CENSUS_BINDING_MISMATCH")
+
     if remote_head(ROOT, target_branch) != prepared:
         raise Stop("OPPONENT_DISPLAY_FRESH_TARGET_REF_MISMATCH")
     git(
@@ -326,6 +350,8 @@ def verify_stage2_opponent_display_normalization(
     freeze_bytes = (bundle / "integration-freeze.json").read_bytes()
     if sha256_bytes(freeze_bytes) != manifest["integration_freeze_sha256"]:
         raise Stop("OPPONENT_DISPLAY_FRESH_FREEZE_HASH_MISMATCH")
+    if freeze_bytes != authority["freeze_bytes"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_FREEZE_AUTHORITY_MISMATCH")
     dry = run_normalizer_dry_run(
         predecessor_tree,
         successor["school_key"],
