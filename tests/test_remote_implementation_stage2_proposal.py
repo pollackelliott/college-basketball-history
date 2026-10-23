@@ -258,6 +258,129 @@ class RemoteStage2ProposalTests(unittest.TestCase):
             "NONE",
         )
 
+    def test_accomplishment_action_vocabulary_bridge_is_exact(self):
+        legacy = [
+            {
+                "decision_id": "ACCOMPLISHMENTS-EXAMPLE",
+                "category": "accomplishments",
+                "source_value": "{\"conference_regular_season_championships\":\"13\"}",
+                "allowed_actions": [
+                    "KEEP_UNDER_REVIEW",
+                    "VERIFY_REFERENCE_VALUES",
+                ],
+            },
+            {
+                "decision_id": "PUBLICATION-EXAMPLE",
+                "category": "publication",
+                "source_value": "No",
+                "allowed_actions": ["ENABLE_PUBLIC_PAGE", "KEEP_DISABLED"],
+            },
+        ]
+        current = json.loads(json.dumps(legacy))
+        current[0]["allowed_actions"].insert(0, "APPLY_ACCOMPLISHMENT_PATCH")
+        legacy_sha = proposal._decision_universe_sha256(legacy)
+        current_sha = proposal._decision_universe_sha256(current)
+
+        result = proposal.accomplishment_action_compatibility(
+            {"decisions": current},
+            legacy_sha,
+            current_sha,
+        )
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(
+            result["kind"],
+            "ACCOMPLISHMENT_ACTION_VOCABULARY_ADDITION",
+        )
+        self.assertEqual(result["legacy_compatible_sha256"], legacy_sha)
+        self.assertEqual(result["runtime_decision_universe_sha256"], current_sha)
+
+    def test_accomplishment_bridge_refuses_any_substantive_row_change(self):
+        legacy = [
+            {
+                "decision_id": "ACCOMPLISHMENTS-EXAMPLE",
+                "category": "accomplishments",
+                "source_value": "{\"conference_regular_season_championships\":\"13\"}",
+                "allowed_actions": [
+                    "KEEP_UNDER_REVIEW",
+                    "VERIFY_REFERENCE_VALUES",
+                ],
+            }
+        ]
+        current = json.loads(json.dumps(legacy))
+        current[0]["allowed_actions"].insert(0, "APPLY_ACCOMPLISHMENT_PATCH")
+        current[0]["source_value"] = (
+            "{\"conference_regular_season_championships\":\"12\"}"
+        )
+        with self.assertRaisesRegex(
+            Stop,
+            "STAGE2_PROPOSAL_DECISION_UNIVERSE_MISMATCH",
+        ):
+            proposal.accomplishment_action_compatibility(
+                {"decisions": current},
+                proposal._decision_universe_sha256(legacy),
+                proposal._decision_universe_sha256(current),
+            )
+
+    def test_permanent_rehearsal_accepts_only_accomplishment_action_hash_bridge(self):
+        temporary, root, map_path, clean, cp = self._run_fixture(
+            status_name="OWNER_GATE_1_READY",
+            exit_code=0,
+        )
+        self.addCleanup(temporary.cleanup)
+        legacy = [
+            {
+                "decision_id": "ACCOMPLISHMENTS-EXAMPLE",
+                "category": "accomplishments",
+                "source_value": "{\"conference_regular_season_championships\":\"13\"}",
+                "allowed_actions": [
+                    "KEEP_UNDER_REVIEW",
+                    "VERIFY_REFERENCE_VALUES",
+                ],
+            }
+        ]
+        current = json.loads(json.dumps(legacy))
+        current[0]["allowed_actions"].insert(0, "APPLY_ACCOMPLISHMENT_PATCH")
+        legacy_sha = proposal._decision_universe_sha256(legacy)
+        current_sha = proposal._decision_universe_sha256(current)
+        output = root / ".onboarding" / SCHOOL
+        status_path = output / "implementation-stage2-status.json"
+        status = json.loads(status_path.read_text(encoding="utf-8"))
+        status["preflight"]["decision_universe_sha256"] = current_sha
+        status_path.write_text(json.dumps(status) + "\n", encoding="utf-8")
+        (output / "plan.json").write_text(
+            json.dumps({"decisions": current}) + "\n",
+            encoding="utf-8",
+        )
+
+        with (
+            patch.object(proposal, "restore_integration_freeze"),
+            patch.object(
+                proposal,
+                "tracked_worktree_state",
+                side_effect=[clean, clean],
+            ),
+            patch.object(proposal, "run", return_value=cp),
+        ):
+            result = proposal.run_stage2_proposal_tool(
+                root,
+                SCHOOL,
+                b"freeze",
+                map_path,
+                legacy_sha,
+                root / "diag",
+                tool_repo=ROOT,
+            )
+        self.assertEqual(
+            result["decision_universe_compatibility"]["kind"],
+            "ACCOMPLISHMENT_ACTION_VOCABULARY_ADDITION",
+        )
+        self.assertEqual(
+            result["decision_universe_compatibility"][
+                "runtime_decision_universe_sha256"
+            ],
+            current_sha,
+        )
+
     def test_incomplete_map_blocked_result_is_preserved(self):
         temporary, root, map_path, clean, cp = self._run_fixture(
             status_name="BLOCKED",
