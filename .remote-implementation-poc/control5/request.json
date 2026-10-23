@@ -1,21 +1,40 @@
 {
-  "active_lock_commit": "14f6a8bc07b2813f6e9b3f04a064ec36c7860006",
   "authority": {
     "basketball_mutation_authorized": false,
     "experimental_control_only": true,
     "integration_freeze_authorized": false,
     "phase0_authorized": false
   },
-  "expected_classification": "PREPARED_NOT_PUBLISHED",
+  "boundary": "C",
+  "commit_message": "Proof 5 synthetic published mutation C",
+  "commit_metadata": {
+    "author_email": "proof5@example.invalid",
+    "author_name": "Proof 5 Bot",
+    "committer_email": "proof5@example.invalid",
+    "committer_name": "Proof 5 Bot",
+    "timestamp": "2001-01-03T00:00:00+0000"
+  },
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_REQUEST",
-  "failed_action_run_attempt": 1,
-  "failed_action_run_id": 39886953427,
   "fixture_id": "remote-proof5-fixture",
-  "operation": "RECOVER_MUTATION_TRANSACTION",
-  "original_request_id": "proof5-boundary-b-0001",
-  "previous_control_state_commit": "4ef68a9ac4a8ac8e327b5c2bc374271c767ed399",
-  "previous_control_state_sha256": "c8dfe33a1096e101aff618686e87aadf6c4a9b70663f83dd5304306c0f2f0d34",
-  "request_id": "proof5-recovery-b-0001",
-  "schema_version": 1
+  "operation": "FAIL_BOUNDARY_C",
+  "previous_control_state_commit": "e2c55a7b23963e1aef82f9280b85336e5611be73",
+  "previous_control_state_sha256": "8e23a540cacca139b5bb5617dc1c4e73e5687fee2eb43d5b61a1b5f62001e535",
+  "request_id": "proof5-boundary-c-0001",
+  "schema_version": 1,
+  "sidecar_payload": {
+    "authority_kind": "synthetic-integration-authority",
+    "fixture_id": "remote-proof5-fixture",
+    "generation": 2,
+    "integration_frozen": false,
+    "phase0_authorized": false,
+    "request_id": "proof5-boundary-c-0001"
+  },
+  "target_payload": {
+    "generation": 2,
+    "proof": 5,
+    "request_id": "proof5-boundary-c-0001",
+    "state": "PUBLISH_EXACTLY_ONCE_THEN_FAIL"
+  }
 }
