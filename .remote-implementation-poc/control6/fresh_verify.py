@@ -20,9 +20,11 @@ TARGET_BRANCH = "experiment/remote-implementation-proof6-liu-phase0"
 REAL_BRANCH = "data/long-island-university-onboarding"
 STATE_PATH = Path(".remote-implementation-poc/control6/control-state.json")
 SCHOOL = "long-island-university"
-EXPECTED_MAIN = "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+EXPECTED_MAIN = "e7d64d5971d02c5949a1a06539e3e3b641999190"
 RESEARCH_BASE = "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
 RESEARCH_ZIP_SHA = "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+EXPECTED_VENUE_RECON_SHA = "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
+EXPECTED_CONFERENCE_RECON_SHA = "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b"
 PROOF1_COMMIT = "c34ba9de312a97d03d910be40e8091c576080cfa"
 DIAG = Path("/tmp/proof6-fresh-verify")
 REQUIRED_FILES = ["conferences.csv","notes.md","opponents.csv","source-games.csv","source-notes.md","venues.csv"]
@@ -82,6 +84,7 @@ def reconstruct_zip(out_path: Path) -> str:
 def main() -> int:
     DIAG.mkdir(parents=True, exist_ok=True)
     git("fetch","--no-tags","origin",
+        "+refs/heads/main:refs/remotes/origin/main",
         "+refs/heads/main:refs/remotes/origin/proof6-live-main",
         f"+refs/heads/{CONTROL_BRANCH}:refs/remotes/origin/proof6-control",
         f"+refs/heads/{TARGET_BRANCH}:refs/remotes/origin/proof6-target")
@@ -107,11 +110,19 @@ def main() -> int:
     successor = json.loads(successor_bytes)
     wa_bytes = git("show",f"{control_head}:{writeahead_path}",text=False).stdout
     wa = json.loads(wa_bytes)
+    if wa.get("venue_reconciliation_sha256") != EXPECTED_VENUE_RECON_SHA:
+        raise Stop("FRESH_VERIFY_VENUE_RECONCILIATION_SHA_MISMATCH")
+    if wa.get("conference_reconciliation_sha256") != EXPECTED_CONFERENCE_RECON_SHA:
+        raise Stop("FRESH_VERIFY_CONFERENCE_RECONCILIATION_SHA_MISMATCH")
     freeze_path = str(Path(writeahead_path).parent / "integration-freeze.json")
     freeze_bytes = git("show",f"{control_head}:{freeze_path}",text=False).stdout
     if sha256_bytes(freeze_bytes) != wa["integration_freeze_sha256"]:
         raise Stop("FRESH_VERIFY_INTEGRATION_FREEZE_HASH_MISMATCH")
     integration = json.loads(freeze_bytes)
+    if (integration.get("venue_reconciliation") or {}).get("spec_sha256") != EXPECTED_VENUE_RECON_SHA:
+        raise Stop("FRESH_VERIFY_INTEGRATION_VENUE_RECONCILIATION_SHA_MISMATCH")
+    if (integration.get("conference_reconciliation") or {}).get("spec_sha256") != EXPECTED_CONFERENCE_RECON_SHA:
+        raise Stop("FRESH_VERIFY_INTEGRATION_CONFERENCE_RECONCILIATION_SHA_MISMATCH")
 
     for name, expected in [
         ("venue-reconciliation.json", wa["venue_reconciliation_sha256"]),

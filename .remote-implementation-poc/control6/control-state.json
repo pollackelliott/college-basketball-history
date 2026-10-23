@@ -17,7 +17,7 @@
     "proof6-recovery-stage1-blocker-0001"
   ],
   "current_sequence": 1,
-  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "expected_protected_main_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE_EXPERIMENTAL_SUCCESSOR",
   "inherited_proof5_control_commit": "774e5dac89023faf97955e9ba509694bc314444f",
@@ -74,5 +74,15 @@
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
   "target_expected_nonexistent": true,
-  "transaction_state": "BLOCKED_STAGE1_RECONCILIATION"
+  "transaction_state": "IDLE",
+  "rerun_after_tooling_repair": {
+    "repair_pr": 347,
+    "repair_pr_head": "62802bb91060de37b37c6584c2fa2c3734b1f5ca",
+    "repair_merge_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+    "expected_venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
+    "expected_conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
+    "authorization": "REMOTE IMPLEMENTATION PROOF 6 — RERUN AFTER GENERIC TOOLING REPAIR",
+    "prior_request_disposition": "proof6-liu-phase0-0001 ABANDON_STAGE1_RECONCILIATION_BLOCKER",
+    "authority_statement": "Rerun remains disposable Proof 6 only; no real LIU onboarding branch, authoritative Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority."
+  }
 }

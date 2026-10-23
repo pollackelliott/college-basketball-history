@@ -22,9 +22,12 @@ STATE_PATH = Path(".remote-implementation-poc/control6/control-state.json")
 REQUEST_PATH = Path(".remote-implementation-poc/control6/request.json")
 DIAG = Path("/tmp/proof6-diagnostics")
 SCHOOL = "long-island-university"
-EXPECTED_MAIN = "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+EXPECTED_MAIN = "e7d64d5971d02c5949a1a06539e3e3b641999190"
 RESEARCH_BASE = "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
 RESEARCH_ZIP_SHA = "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+ORIGINAL_STAGE1_BASE = "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+EXPECTED_VENUE_RECON_SHA = "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
+EXPECTED_CONFERENCE_RECON_SHA = "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b"
 PROOF1_COMMIT = "c34ba9de312a97d03d910be40e8091c576080cfa"
 PROOF2_CHECKPOINT = "32f11c925f0b17b1840a58f06ec848b20a20cdd7"
 PROOF2_STAGE1_PATH = ".remote-implementation-poc/checkpoints/long-island-university/proof1/stage1-reconciliation.json"
@@ -228,8 +231,8 @@ def build_reconciliation_specs(zip_path: Path, worktree: Path, scratch: Path) ->
     global_conferences = {row["conference_key"].strip(): row for row in csv_rows(worktree / "data/reference/conferences.csv")}
 
     original = json.loads(git_show_text(PROOF2_CHECKPOINT, PROOF2_STAGE1_PATH))
-    if original.get("integration_base_sha") != EXPECTED_MAIN:
-        raise Stop("ORIGINAL_STAGE1_MAIN_MISMATCH")
+    if original.get("integration_base_sha") != ORIGINAL_STAGE1_BASE:
+        raise Stop("ORIGINAL_STAGE1_CHECKPOINT_BASE_MISMATCH")
     original_ambiguous = {
         row["venue_key"] for row in original["venue"]["rows"]
         if row.get("classification") == "STOP_AMBIGUOUS"
@@ -257,21 +260,10 @@ def build_reconciliation_specs(zip_path: Path, worktree: Path, scratch: Path) ->
             raise Stop(f"VENUE_RECONCILIATION_CITY_MISMATCH: {local_key}")
         if local.get("state", "").strip().upper() != target.get("state", "").strip().upper():
             raise Stop(f"VENUE_RECONCILIATION_STATE_MISMATCH: {local_key}")
-        if local_key == "charlotte-coliseum-original":
-            basis = (
-                "Proof 6 owner-authorized current-main physical-identity reconciliation: "
-                "the frozen local identity explicitly names the 1955-1988 Charlotte Coliseum building; "
-                "current main VEN-000040 / charlotte-coliseum-1955 is that original 1955 building, "
-                "while VEN-000041 is the separate 1988 Hornets-era building."
-            )
-        else:
-            basis = (
-                "Proof 6 owner-authorized current-main physical-identity reconciliation: "
-                f"frozen local {local.get('canonical_name','')} ({local_key}) and current-main "
-                f"{target.get('display_name','')} ({target_id}/{target_key}) are the same physical venue; "
-                "the Stage 1 candidate set, matching geography, and protected-main naming/alias chronology "
-                "support representation reuse without changing accepted historical site meaning."
-            )
+        basis = (
+            "Control Center-authorized Proof 6 current-main same-physical-venue "
+            "reconciliation; post-merge read-only verification."
+        )
         mappings.append({
             "local_venue_key": local_key,
             "expected_local_name": local.get("canonical_name", "").strip(),
@@ -288,9 +280,8 @@ def build_reconciliation_specs(zip_path: Path, worktree: Path, scratch: Path) ->
         "schema_version": 1,
         "school_key": SCHOOL,
         "owner_approval_basis": (
-            "Owner explicitly authorized Remote Implementation Proof 6 and the complete LIU current-main "
-            "same-physical-venue reconciliation population. This authority is experimental rehearsal only "
-            "and does not establish authoritative LIU INTEGRATION_FROZEN."
+            "Control Center-authorized generic Stage 1 tooling repair post-merge "
+            "read-only regression; LIU is a discovered fixture only."
         ),
         "expected_research_zip_sha256": RESEARCH_ZIP_SHA,
         "expected_venues_sha256": sha256_bytes(venues_bytes),
@@ -298,6 +289,12 @@ def build_reconciliation_specs(zip_path: Path, worktree: Path, scratch: Path) ->
     }
     venue_path = scratch / "liu-stage1-venue-reconciliation.json"
     write_json(venue_path, venue_spec)
+    venue_sha = sha256_file(venue_path)
+    if venue_sha != EXPECTED_VENUE_RECON_SHA:
+        raise Stop(
+            "VENUE_RECONCILIATION_SHA_MISMATCH "
+            f"expected={EXPECTED_VENUE_RECON_SHA} actual={venue_sha}"
+        )
 
     if "nec" not in global_conferences:
         raise Stop("GLOBAL_NEC_IDENTITY_MISSING")
@@ -315,9 +312,8 @@ def build_reconciliation_specs(zip_path: Path, worktree: Path, scratch: Path) ->
         "schema_version": 1,
         "school_key": SCHOOL,
         "owner_approval_basis": (
-            "Owner explicitly authorized Remote Implementation Proof 6 to reconcile Research-local "
-            "ecac-metro-conference to protected-main nec while preserving the frozen historical ECAC Metro "
-            "conference_name, basis, notes, dates, and membership evidence. Experimental rehearsal only."
+            "Control Center-authorized Proof 6 ECAC Metro to NEC reconciliation; "
+            "post-merge read-only verification."
         ),
         "expected_conferences_sha256": sha256_bytes(conferences_bytes),
         "replacement_history": replacement,
@@ -325,10 +321,16 @@ def build_reconciliation_specs(zip_path: Path, worktree: Path, scratch: Path) ->
     }
     conference_path = scratch / "liu-stage1-conference-reconciliation.json"
     write_json(conference_path, conference_spec)
+    conference_sha = sha256_file(conference_path)
+    if conference_sha != EXPECTED_CONFERENCE_RECON_SHA:
+        raise Stop(
+            "CONFERENCE_RECONCILIATION_SHA_MISMATCH "
+            f"expected={EXPECTED_CONFERENCE_RECON_SHA} actual={conference_sha}"
+        )
 
     return venue_path, conference_path, {
-        "venue_reconciliation_sha256": sha256_file(venue_path),
-        "conference_reconciliation_sha256": sha256_file(conference_path),
+        "venue_reconciliation_sha256": venue_sha,
+        "conference_reconciliation_sha256": conference_sha,
         "frozen_venues_sha256": sha256_bytes(venues_bytes),
         "frozen_conferences_sha256": sha256_bytes(conferences_bytes),
         "original_new_global_venue_keys": original_new,
@@ -355,6 +357,7 @@ def main() -> int:
 
     git(
         "fetch", "--no-tags", "origin",
+        "+refs/heads/main:refs/remotes/origin/main",
         "+refs/heads/main:refs/remotes/origin/proof6-live-main",
         f"+refs/heads/{CONTROL_BRANCH}:refs/remotes/origin/proof6-control",
     )
@@ -394,6 +397,10 @@ def main() -> int:
         raise Stop("STALE_CONTROL_STATE_HASH")
     if request.get("expected_protected_main_sha") != EXPECTED_MAIN or live_main != EXPECTED_MAIN:
         raise Stop("MAIN_SHA_MISMATCH")
+    if request.get("venue_reconciliation_sha256") != EXPECTED_VENUE_RECON_SHA:
+        raise Stop("REQUEST_VENUE_RECONCILIATION_SHA_MISMATCH")
+    if request.get("conference_reconciliation_sha256") != EXPECTED_CONFERENCE_RECON_SHA:
+        raise Stop("REQUEST_CONFERENCE_RECONCILIATION_SHA_MISMATCH")
     if request.get("operation") != "REHEARSE_REAL_LIU_PHASE0":
         raise Stop("OPERATION_NOT_ALLOWED")
     if rid in set(state.get("accepted_request_ids") or []) | set(state.get("consumed_request_ids") or []):
@@ -489,6 +496,23 @@ def main() -> int:
             raise Stop(f"GENUINELY_NEW_VENUE_RECLASSIFIED: {key}")
     if stage1.get("conference", {}).get("blocker_count") != 0:
         raise Stop("CONFERENCE_RECONCILIATION_STILL_BLOCKED")
+    expected_venue_counts = {
+        "NEW_GLOBAL_IDENTITY": 20,
+        "SAFE_REPRESENTATION_REUSE": 39,
+    }
+    if stage1.get("venue", {}).get("venue_count") != 59:
+        raise Stop("RECONCILED_STAGE1_VENUE_COUNT_DRIFT")
+    if stage1.get("venue", {}).get("classification_counts") != expected_venue_counts:
+        raise Stop(
+            "RECONCILED_STAGE1_VENUE_TOPOLOGY_DRIFT: "
+            + json.dumps(stage1.get("venue", {}).get("classification_counts"), sort_keys=True)
+        )
+    if stage1.get("conference", {}).get("classification_counts") != {"REUSE_CURRENT_IDENTITY": 3}:
+        raise Stop("RECONCILED_STAGE1_CONFERENCE_TOPOLOGY_DRIFT")
+    if stage1.get("program_alias", {}).get("blocker_count") != 0:
+        raise Stop("RECONCILED_STAGE1_PROGRAM_ALIAS_BLOCKED")
+    if stage1.get("program_alias", {}).get("classification_counts") != {"NO_CURRENT_VERIFIED_ALIAS": 229}:
+        raise Stop("RECONCILED_STAGE1_PROGRAM_ALIAS_TOPOLOGY_DRIFT")
     print("FINAL RECONCILED STAGE 1: PASS")
 
     input_dir = Path(f".remote-implementation-poc/control6/inputs/{rid}")
@@ -592,6 +616,12 @@ def main() -> int:
         or scope.get("history_scope_status") != "OWNER_CONFIRMED"
     ):
         raise Stop("INTEGRATION_FREEZE_SCOPE_MISMATCH")
+    venue_meta = integration.get("venue_reconciliation") or {}
+    conference_meta = integration.get("conference_reconciliation") or {}
+    if venue_meta.get("spec_sha256") != EXPECTED_VENUE_RECON_SHA:
+        raise Stop("INTEGRATION_FREEZE_VENUE_RECONCILIATION_HASH_MISMATCH")
+    if conference_meta.get("spec_sha256") != EXPECTED_CONFERENCE_RECON_SHA:
+        raise Stop("INTEGRATION_FREEZE_CONFERENCE_RECONCILIATION_HASH_MISMATCH")
 
     package_hashes = integration.get("package_member_sha256") or {}
     for name in REQUIRED_FILES:
@@ -635,6 +665,11 @@ def main() -> int:
         "integration_freeze_sha256": freeze_sha,
         "integration_freeze_package_member_sha256": package_hashes,
         "semantic_snapshot_sha256": integration.get("source_game_semantic_guard", {}).get("snapshot_sha256"),
+        "venue_mapping": integration.get("venue_mapping"),
+        "conference_mapping": integration.get("conference_mapping"),
+        "program_alias_mapping": integration.get("program_alias_mapping"),
+        "venue_reconciliation_metadata": venue_meta,
+        "conference_reconciliation_metadata": conference_meta,
         "history_scope": scope,
         "known_scope_reference_debt": input_verification["known_scope_reference_debt"],
         "permanent_command": "python tools/stage_research_portfolio.py long-island-university <exact-research-freeze> --expected-sha256 <exact> --research-base <exact> --history-start-season 1928-1929 --history-scope-basis TOP_LEVEL_INTERVALS --history-scope-intervals 1928-29..1950-51|1968-69+ --history-scope-notes <owner-confirmed> --venue-reconciliation <exact> --conference-reconciliation <exact> --apply --commit",
