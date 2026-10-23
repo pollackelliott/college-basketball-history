@@ -1,0 +1,31 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "recovery": false,
+    "release": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly authorized exactly one bounded Long Island University STAGE2_OPPONENT_DISPLAY_NORMALIZE operation against the authoritative Stage 2 census; no Phase 0, recovery, recommendation-map, proposal rehearsal, Owner Gate 1/2, sealed apply, Preview, merge, Production, release, unrelated opponent cleanup, or other Stage 2 mutation authority.",
+    "origin": "ChatGPT"
+  },
+  "expected_protected_main_sha": "d144bd2648d91d6957c6e3bb36a0aac4ba508d6a",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "8d6872d9c2f460294f18615d7ce0ea77772e6b1d",
+  "previous_control_state_sha256": "8a2c285453c6a79287a1d001d4e97852d7561ef282d5919b5b789d771fed3fc4",
+  "request_id": "liu-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "691d0abe1e4d1f43225ac15c7bd3adf7f4e6079ca442516f7a80cc69f569cb1a"
+  },
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "e037473888024efe176798566c99ca208c54f984"
+}
