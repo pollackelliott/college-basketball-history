@@ -12,7 +12,7 @@ It must **not** parallelize canonical integration, Owner Gate 1 sealing/apply, o
 The operating model is:
 
 ```text
-5 independent research lanes  ->  1 serialized Codespace integration lane
+5 independent research lanes  ->  1 serialized Implementation integration lane
 ```
 
 As one school leaves the integration lane, another research-frozen portfolio enters it and a new research chat may be started to keep the queue full.
@@ -113,7 +113,7 @@ A genuine historical site unknown may remain unresolved. It may not remain an un
 
 ### Integration-frozen portfolio
 
-An integration-frozen portfolio is created only when that school reaches the front of the Codespace queue.
+An integration-frozen portfolio is created only when that school reaches the front of the serialized Implementation queue, whether execution occurs in the project Codespace or through the guarded remote runner.
 
 It means the research-frozen package has been rebased against **current** `main`, all shared/global identities have been reconciled, package QA has been rerun, and fresh hashes have been recorded.
 
@@ -280,7 +280,7 @@ This does **not** mean redo the research. It means perform the current-main shar
 
 ## 11. One integration lock
 
-The owner should treat the project Codespace as having one logical integration lock.
+The project has one logical Implementation integration lock across every execution environment. The Codespace and the guarded remote runner are not independent mutation lanes.
 
 At any moment:
 
@@ -288,7 +288,7 @@ At any moment:
 - several ZIPs may be waiting;
 - only one school may be mutating the active repository through the onboarding workflow.
 
-Do not interleave tracked Phase 0 work for School A with Gate 1/apply work for School B in the same checkout.
+Do not interleave tracked Phase 0 work for School A with Gate 1/apply work for School B in another environment. A remote ACTIVE lock excludes Codespace mutation, and an active Codespace Implementation lane excludes a new remote mutation request.
 
 Finish or safely stop one integration before switching the repository to another team.
 
