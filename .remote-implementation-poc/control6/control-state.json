@@ -1,10 +1,12 @@
 {
-  "accepted_request_ids": [],
+  "accepted_request_ids": [
+    "proof6-liu-phase0-0001"
+  ],
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
+  "active_lock_owner": "github-actions:39896265711:1",
+  "active_operation": "REHEARSE_REAL_LIU_PHASE0",
+  "active_request_id": "proof6-liu-phase0-0001",
+  "active_request_sha256": "bdd1c8917ae2e8a646411ef6b4c37a04dd7362b678c5d6d5245e3358b74ee347",
   "active_writeahead_commit": null,
   "active_writeahead_manifest_sha256": null,
   "authority_statement": "Experimental Proof 6 rehearsal only. No authoritative LIU INTEGRATION_FROZEN, real Phase 0, Stage 2, Gate 1, release, protected-main mutation, or real onboarding-branch authority.",
@@ -17,12 +19,15 @@
   "inherited_proof5_control_state_sha256": "58d35fa129a3784bdaf803b87f149ee50232a4cd4182f425aff4e7913dc1bf7b",
   "integration_frozen": false,
   "last_transaction": null,
-  "lifecycle_state": "IDLE",
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": 1,
+  "lock_acquired_run_id": 39896265711,
+  "lock_acquisition_request_commit": "5bb8a9f94ff22176f9c51b408c4966150bf2efab",
   "phase0_authorized": false,
   "real_onboarding_branch_authorized": false,
-  "recovery_required": false,
+  "recovery_required": true,
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
   "target_expected_nonexistent": true,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
