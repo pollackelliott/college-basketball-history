@@ -64,6 +64,8 @@ class Stage2AccomplishmentPatchTests(unittest.TestCase):
             "program_key": SCHOOL,
             "public_page_enabled": "No",
             "history_start_season": "1928-1929",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
             "history_scope_intervals": "",
         }
 
@@ -74,6 +76,8 @@ class Stage2AccomplishmentPatchTests(unittest.TestCase):
                 "program_key",
                 "public_page_enabled",
                 "history_start_season",
+                "history_scope_status",
+                "history_scope_basis",
                 "history_scope_intervals",
             ),
             [self.program_row()],
