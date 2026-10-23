@@ -8,20 +8,26 @@
     "release": false,
     "stage2": false
   },
+  "conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
   "creation_provenance": {
     "architecture_lane": "ChatGPT remote Implementation architecture experiment",
-    "owner_authorization": "Remote Implementation Architecture — Proof 6",
+    "owner_authorization": "REMOTE IMPLEMENTATION PROOF 6 — RERUN AFTER GENERIC TOOLING REPAIR",
     "owner_desktop_interaction_required": false,
     "owner_github_ui_interaction_required": false
   },
-  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "expected_protected_main_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_REQUEST",
   "fixture_id": "long-island-university",
   "operation": "REHEARSE_REAL_LIU_PHASE0",
-  "previous_control_state_commit": "c28ffad96be624d1533a960b0609899c2f1ab973",
-  "previous_control_state_sha256": "8dbd35e230fb622a3ee46246e0e9152c31c6c0ca11ebb827617b56a4e7b64900",
-  "request_id": "proof6-liu-phase0-0001",
+  "previous_control_state_commit": "9ab3a68d1f06381d9fa4ea4e172fcea933f466d2",
+  "previous_control_state_sha256": "f5fc5c831456c685f091f45ea5b763e6210c0b16e032ede0c2130dd821d650ff",
+  "prior_failed_request_id": "proof6-liu-phase0-0001",
+  "prior_failed_request_disposition": "ABANDON_STAGE1_RECONCILIATION_BLOCKER",
+  "repair_merge_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+  "repair_pr": 347,
+  "request_id": "proof6-liu-phase0-0002",
   "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
   "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
-  "schema_version": 1
+  "schema_version": 1,
+  "venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
 }
