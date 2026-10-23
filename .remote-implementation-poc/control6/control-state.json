@@ -3,13 +3,14 @@
     "proof6-liu-phase0-0001"
   ],
   "accepted_request_ids": [
-    "proof6-liu-phase0-0001"
+    "proof6-liu-phase0-0001",
+    "proof6-liu-phase0-0002"
   ],
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
+  "active_lock_owner": "github-actions:39903659540:1",
+  "active_operation": "REHEARSE_REAL_LIU_PHASE0",
+  "active_request_id": "proof6-liu-phase0-0002",
+  "active_request_sha256": "6ebc42675b33b6f54e99858acb6347bbe20d62959a8ae3373e2147ae3b307bb8",
   "active_writeahead_commit": null,
   "active_writeahead_manifest_sha256": null,
   "authority_statement": "Experimental Proof 6 rehearsal only. No authoritative LIU INTEGRATION_FROZEN, real Phase 0, Stage 2, Gate 1, release, protected-main mutation, or real onboarding-branch authority.",
@@ -67,22 +68,25 @@
     },
     "writeahead_authority_created": false
   },
-  "lifecycle_state": "IDLE",
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": 1,
+  "lock_acquired_run_id": 39903659540,
+  "lock_acquisition_request_commit": "b0baa48e634e59059537758e554e055061c723b7",
   "phase0_authorized": false,
   "real_onboarding_branch_authorized": false,
-  "recovery_required": false,
+  "recovery_required": true,
+  "rerun_after_tooling_repair": {
+    "authority_statement": "Rerun remains disposable Proof 6 only; no real LIU onboarding branch, authoritative Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
+    "authorization": "REMOTE IMPLEMENTATION PROOF 6 — RERUN AFTER GENERIC TOOLING REPAIR",
+    "expected_conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
+    "expected_venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
+    "prior_request_disposition": "proof6-liu-phase0-0001 ABANDON_STAGE1_RECONCILIATION_BLOCKER",
+    "repair_merge_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+    "repair_pr": 347,
+    "repair_pr_head": "62802bb91060de37b37c6584c2fa2c3734b1f5ca"
+  },
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
   "target_expected_nonexistent": true,
-  "transaction_state": "IDLE",
-  "rerun_after_tooling_repair": {
-    "repair_pr": 347,
-    "repair_pr_head": "62802bb91060de37b37c6584c2fa2c3734b1f5ca",
-    "repair_merge_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
-    "expected_venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
-    "expected_conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
-    "authorization": "REMOTE IMPLEMENTATION PROOF 6 — RERUN AFTER GENERIC TOOLING REPAIR",
-    "prior_request_disposition": "proof6-liu-phase0-0001 ABANDON_STAGE1_RECONCILIATION_BLOCKER",
-    "authority_statement": "Rerun remains disposable Proof 6 only; no real LIU onboarding branch, authoritative Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority."
-  }
+  "transaction_state": "LOCKED"
 }
