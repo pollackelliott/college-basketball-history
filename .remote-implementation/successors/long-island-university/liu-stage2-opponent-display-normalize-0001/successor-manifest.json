@@ -1,0 +1,107 @@
+{
+  "actual_published_target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "changed_file_sha256": {
+    "schools/long-island-university/opponents.csv": "25f29181b2ceebe374cea7c9b7e547288bf6be58f400f45b6a50b6333fb4aeb9",
+    "schools/long-island-university/source-games.csv": "374442754a2a42262d2f91d19f2d84184989610f921fdd159c695a46b6f957fa"
+  },
+  "changed_paths": [
+    "schools/long-island-university/opponents.csv",
+    "schools/long-island-university/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "albany-law-school",
+    "bloomfield",
+    "centenary-new-jersey",
+    "charleston-west-virginia",
+    "city-college-of-new-york",
+    "john-jay",
+    "medgar-evers",
+    "new-york-athletic-club",
+    "saint-francis-pennsylvania"
+  ],
+  "expected_target_predecessor_sha": "e037473888024efe176798566c99ca208c54f984",
+  "field_level_proof_sha256": "b8382e8bf24e811c10fafb070bfea2387e9530c41c4e8c5a9d008bebbdf6bbc6",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "afdae333bc94580ecd8a9bf4815f978bf3bfedee",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "b998334cc442c00160c407a3d54c252b6cf313c3a8921793c6027340946c56ed",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "19bef14cec2d0057bbedba1dc25bb30692e469ed7b2c0c1dad4b8883d36757ee",
+      "implementation-stage2-status.json": "7c2490d1887a12c9531963bc24a359f38839061ed922ca95f699c6e2b186e74b",
+      "plan.json": "4827b9275b4fc527afe6da58fc8da0b3d413d1981f835eb707af9d3ca90b283e",
+      "review.csv": "87fac46521d12f865bfd8abd3b05627d94c156f1dc7dcf33e71b8ca3a70e78ce",
+      "review.md": "308ffa954da6e8e1caf48feb6b62f5ef50a19a10f1076b4b69679372eea62d5b"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "19bef14cec2d0057bbedba1dc25bb30692e469ed7b2c0c1dad4b8883d36757ee",
+      "implementation-stage2-status.json": "eb9582f9f3c73b21ab6b670cb18ad5e8d2663d7708dd2fafe339d0d95baef8f2",
+      "plan.json": "aa0509b5e751065c5ca93095a4807680522df93fc811dafd1c720e09acf8a9e1",
+      "review.csv": "87fac46521d12f865bfd8abd3b05627d94c156f1dc7dcf33e71b8ca3a70e78ce",
+      "review.md": "eab96034747c8c3ab2dbab8e9b17afec11f95cf04b5b794cf928527744d03520"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 73,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 97,
+    "decision_universe_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+      "after_status": "",
+      "after_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+      "before_head_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+      "before_status": "",
+      "before_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "prepared_parent_sha": "e037473888024efe176798566c99ca208c54f984",
+  "prepared_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+  "protected_main_sha": "d144bd2648d91d6957c6e3bb36a0aac4ba508d6a",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "liu-stage2-opponent-display-normalize-0001",
+  "request_sha256": "1484db5576859c5953d7ac09937e5efd33c989da7b0a3343df868166ea2edae6",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_drift_after": {
+    "baseline_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "school_key": "long-island-university",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "school_key": "long-island-university",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "source_game_normalized_name_row_count": 121,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "691d0abe1e4d1f43225ac15c7bd3adf7f4e6079ca442516f7a80cc69f569cb1a",
+  "target_branch": "data/long-island-university-onboarding",
+  "writeahead_commit": "7547bcac44e22597d78d18bb34be61dfa3c1a6ad",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/long-island-university/liu-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "cab69fdfd27ef16a97f4891c04fa46dd1a3a8fefe3ba9671f2c13412c9a396c9"
+}
