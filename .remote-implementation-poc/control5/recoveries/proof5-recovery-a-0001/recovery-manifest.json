@@ -1,0 +1,17 @@
+{
+  "basketball_data_mutation": false,
+  "classification": "NOT_ATTEMPTED",
+  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_RECOVERY",
+  "failed_action_run_attempt": 1,
+  "failed_action_run_id": 39886613992,
+  "final_global_lifecycle": "IDLE",
+  "original_request_id": "proof5-boundary-a-0001",
+  "recovery_action_run_attempt": 1,
+  "recovery_action_run_id": 39886856484,
+  "recovery_disposition": "ABANDON_NOT_ATTEMPTED",
+  "recovery_request_id": "proof5-recovery-a-0001",
+  "schema_version": 1,
+  "target_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "writeahead_manifest_sha256": null
+}

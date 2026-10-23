@@ -1,41 +1,49 @@
 {
-  "abandoned_request_ids": [],
+  "abandoned_request_ids": [
+    "proof5-boundary-a-0001"
+  ],
   "accepted_request_ids": [
     "proof5-boundary-a-0001"
   ],
-  "active_boundary": "A",
-  "active_fixture_id": "remote-proof5-fixture",
-  "active_lock_commit": "0cf4664ff6b1bd0fe945a26826a89ae4ac4e259b",
-  "active_lock_owner": "github-actions:39886613992:1",
-  "active_operation": "FAIL_BOUNDARY_A",
+  "active_boundary": null,
+  "active_fixture_id": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "proof5-boundary-a-0001",
-  "active_request_sha256": "1d9260a3d0377f11a9b8b3fa6a1b8811be7c8e5bb72709e1ffb24b346eec8e89",
+  "active_request_id": null,
+  "active_request_sha256": null,
   "active_sidecar_sha256": null,
   "active_target_payload_sha256": null,
-  "active_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "active_target_predecessor_sha": null,
   "active_writeahead_commit": null,
   "active_writeahead_manifest_path": null,
   "active_writeahead_manifest_sha256": null,
   "authority_statement": "Experimental Proof 5 mutation-control authority only. No basketball mutation, LIU Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
-  "consumed_request_ids": [],
-  "current_sequence": 3,
+  "consumed_request_ids": [
+    "proof5-recovery-a-0001"
+  ],
+  "current_sequence": 4,
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE",
   "inherited_proof4_control_commit": "4dfb0df573d84507cf5a1f556525e3215a632703",
   "inherited_proof4_control_state_sha256": "0dce3b6cd1319f2d39d8e9dcfaf520e973af42bfde60400a72a081f9a9dc330c",
   "integration_frozen": false,
-  "last_transaction": null,
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": 1,
-  "lock_acquired_run_id": 39886613992,
-  "lock_acquisition_request_commit": "a522b2680b32b33de9bd60085f17ae1f91acad5d",
+  "last_transaction": {
+    "basketball_data_mutation": false,
+    "classification": "NOT_ATTEMPTED",
+    "original_request_id": "proof5-boundary-a-0001",
+    "recovery_disposition": "ABANDON_NOT_ATTEMPTED",
+    "recovery_request_id": "proof5-recovery-a-0001",
+    "target_sha": "4465002033e935756931fd03f4c49efe3e6a4e34"
+  },
+  "lifecycle_state": "IDLE",
   "phase0_authorized": false,
-  "recovery_required": true,
+  "recovery_required": false,
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof5-target",
   "target_starting_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
-  "transaction_state": "LOCKED"
+  "transaction_state": "IDLE"
 }
