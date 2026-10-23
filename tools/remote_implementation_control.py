@@ -25,12 +25,14 @@ OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
+OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
 OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
     OP_STAGE1,
     OP_PHASE0,
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_RECOVER,
 }
 
@@ -41,6 +43,7 @@ LIFECYCLE_ACTIVE = "ACTIVE"
 TX_IDLE = "IDLE"
 TX_STAGE1_RUNNING = "STAGE1_RUNNING"
 TX_STAGE2_CENSUS_RUNNING = "STAGE2_CENSUS_RUNNING"
+TX_STAGE2_PROPOSAL_RUNNING = "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 TX_LOCKED = "LOCKED"
 TX_INPUTS_VERIFIED = "INPUTS_VERIFIED"
 TX_PREPARED = "PREPARED_NOT_PUBLISHED"
@@ -146,6 +149,7 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_IDLE,
             TX_STAGE1_RUNNING,
             TX_STAGE2_CENSUS_RUNNING,
+            TX_STAGE2_PROPOSAL_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
             TX_PREPARED,
@@ -266,6 +270,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_opponent_display_normalize") is not True,
             "STAGE1_REQUEST_STAGE2_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_proposal_rehearsal") is not True,
+            "STAGE1_REQUEST_STAGE2_PROPOSAL_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_PHASE0:
         _require(authority.get("phase0") is True, "PHASE0_REQUEST_AUTHORITY_REQUIRED")
@@ -284,6 +292,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_opponent_display_normalize") is not True,
             "PHASE0_REQUEST_STAGE2_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_proposal_rehearsal") is not True,
+            "PHASE0_REQUEST_STAGE2_PROPOSAL_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_STAGE2_CENSUS:
         _require(
@@ -301,6 +313,10 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("stage2_opponent_display_normalize") is not True,
             "STAGE2_CENSUS_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_proposal_rehearsal") is not True,
+            "STAGE2_CENSUS_PROPOSAL_AUTHORITY_FORBIDDEN",
         )
         expected_target = f"data/{school_key}-onboarding"
         _require(
@@ -345,6 +361,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_census") is False,
             "STAGE2_OPPONENT_DISPLAY_CENSUS_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_proposal_rehearsal") is not True,
+            "STAGE2_OPPONENT_DISPLAY_PROPOSAL_AUTHORITY_FORBIDDEN",
+        )
         expected_target = f"data/{school_key}-onboarding"
         _require(
             request.get("target_branch") == expected_target,
@@ -369,6 +389,63 @@ def validate_request(request: dict[str, Any]) -> None:
             request.get("semantic_snapshot_sha256"),
             64,
             "STAGE2_OPPONENT_DISPLAY_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
+
+    if operation == OP_STAGE2_PROPOSAL_REHEARSAL:
+        _require(
+            authority.get("stage2_proposal_rehearsal") is True,
+            "STAGE2_PROPOSAL_REQUEST_AUTHORITY_REQUIRED",
+        )
+        _require(
+            authority.get("phase0") is False,
+            "STAGE2_PROPOSAL_PHASE0_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("recovery") is False,
+            "STAGE2_PROPOSAL_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_census") is False,
+            "STAGE2_PROPOSAL_CENSUS_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is False,
+            "STAGE2_PROPOSAL_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "STAGE2_PROPOSAL_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "STAGE2_PROPOSAL_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("stage2_authority"),
+            "stage2_authority",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("recommendation_map"),
+            "recommendation_map",
+            required=True,
+        )
+        _require_sha(
+            request.get("integration_freeze_sha256"),
+            64,
+            "STAGE2_PROPOSAL_INTEGRATION_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("semantic_snapshot_sha256"),
+            64,
+            "STAGE2_PROPOSAL_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("decision_universe_sha256"),
+            64,
+            "STAGE2_PROPOSAL_DECISION_UNIVERSE_SHA_INVALID",
         )
 
     if operation == OP_RECOVER:
@@ -438,7 +515,11 @@ def verify_request_predecessor(
                 == f"data/{state.get('active_school_key')}-onboarding",
                 "STALE_RECOVERY_TARGET_MISMATCH",
             )
-        elif state.get("active_operation") in {OP_STAGE1, OP_STAGE2_CENSUS}:
+        elif state.get("active_operation") in {
+            OP_STAGE1,
+            OP_STAGE2_CENSUS,
+            OP_STAGE2_PROPOSAL_REHEARSAL,
+        }:
             _require(
                 recovery.get("target_branch") is None
                 and recovery.get("lock_commit") is None,
@@ -471,13 +552,18 @@ def begin_request(
     result["lock_acquired_run_id"] = str(run_id)
     result["lock_acquired_run_attempt"] = str(run_attempt)
     result["lock_acquisition_request_commit"] = request_commit
-    if request["operation"] in {OP_STAGE1, OP_STAGE2_CENSUS}:
+    if request["operation"] in {
+        OP_STAGE1,
+        OP_STAGE2_CENSUS,
+        OP_STAGE2_PROPOSAL_REHEARSAL,
+    }:
         result["lifecycle_state"] = LIFECYCLE_READ_ONLY
-        result["transaction_state"] = (
-            TX_STAGE1_RUNNING
-            if request["operation"] == OP_STAGE1
-            else TX_STAGE2_CENSUS_RUNNING
-        )
+        if request["operation"] == OP_STAGE1:
+            result["transaction_state"] = TX_STAGE1_RUNNING
+        elif request["operation"] == OP_STAGE2_CENSUS:
+            result["transaction_state"] = TX_STAGE2_CENSUS_RUNNING
+        else:
+            result["transaction_state"] = TX_STAGE2_PROPOSAL_RUNNING
         result["active_lock_owner"] = None
         result["active_target_branch"] = request.get("target_branch")
         result["recovery_required"] = True
