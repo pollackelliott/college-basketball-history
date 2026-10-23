@@ -14,6 +14,7 @@ from remote_implementation_control import (
     OP_PHASE0,
     OP_RECOVER,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     RemoteImplementationError,
     sha256_bytes,
     validate_control_state,
@@ -40,6 +41,11 @@ from remote_implementation_stage2_census import (
     run_stage2_census_tool,
     verify_phase0_authority,
 )
+from remote_implementation_stage2_opponent_display import (
+    run_normalizer_dry_run,
+    verify_prepared_commit_field_boundary,
+)
+from integration_freeze_guard import semantic_drift_report
 
 DIAG = Path(
     os.environ.get(
@@ -191,6 +197,287 @@ def verify_stage2_census(
     return 0
 
 
+
+def verify_stage2_opponent_display_normalization(
+    live_main: str,
+    control_head: str,
+    state: dict,
+) -> int:
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print(
+            "REMOTE STAGE 2 OPPONENT DISPLAY EQUIVALENCE: PASS "
+            "(already verified)"
+        )
+        return 0
+
+    successor_path = last["successor_manifest_path"]
+    successor_bytes = git_show_bytes(control_head, successor_path)
+    if sha256_bytes(successor_bytes) != last["successor_manifest_sha256"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(successor_bytes)
+    if (
+        successor.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR"
+    ):
+        raise Stop("OPPONENT_DISPLAY_FRESH_SUCCESSOR_KIND_MISMATCH")
+    if successor.get("protected_main_sha") != live_main:
+        raise Stop("OPPONENT_DISPLAY_FRESH_MAIN_CHANGED")
+    if successor.get("operation") != OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
+        raise Stop("OPPONENT_DISPLAY_FRESH_OPERATION_MISMATCH")
+
+    target_branch = successor["target_branch"]
+    prepared = successor["prepared_commit_sha"]
+    predecessor = successor["expected_target_predecessor_sha"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("OPPONENT_DISPLAY_FRESH_TARGET_REF_MISMATCH")
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/%s:refs/remotes/origin/remote-opponent-display-target"
+        % target_branch,
+    )
+
+    writeahead_path = successor["writeahead_manifest_path"]
+    writeahead_bytes = git_show_bytes(control_head, writeahead_path)
+    if (
+        sha256_bytes(writeahead_bytes)
+        != successor["writeahead_manifest_sha256"]
+    ):
+        raise Stop("OPPONENT_DISPLAY_FRESH_WRITEAHEAD_HASH_MISMATCH")
+    manifest = json.loads(writeahead_bytes)
+    if manifest.get("operation") != OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
+        raise Stop("OPPONENT_DISPLAY_FRESH_WRITEAHEAD_OPERATION_MISMATCH")
+    if manifest.get("expected_target_predecessor_sha") != predecessor:
+        raise Stop("OPPONENT_DISPLAY_FRESH_PREDECESSOR_MISMATCH")
+    if manifest.get("prepared_commit_sha") != prepared:
+        raise Stop("OPPONENT_DISPLAY_FRESH_PREPARED_MISMATCH")
+
+    prefix = Path(writeahead_path).parent
+    bundle = Path(tempfile.mkdtemp(prefix="remote-opponent-display-fresh-"))
+    for relative, expected in (manifest.get("sidecars") or {}).items():
+        data = git_show_bytes(
+            control_head,
+            (prefix / relative).as_posix(),
+        )
+        target = bundle / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        if sha256_bytes(data) != expected:
+            raise Stop(
+                "OPPONENT_DISPLAY_FRESH_SIDECAR_HASH_MISMATCH:%s"
+                % relative
+            )
+
+    parent = git("rev-parse", "%s^" % prepared).stdout.strip()
+    tree = git("rev-parse", "%s^{tree}" % prepared).stdout.strip()
+    if parent != manifest["prepared_parent_sha"] or parent != predecessor:
+        raise Stop("OPPONENT_DISPLAY_FRESH_PARENT_MISMATCH")
+    if tree != manifest["prepared_tree_sha"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_TREE_MISMATCH")
+    changed = sorted(
+        line.strip()
+        for line in git(
+            "diff-tree",
+            "--no-commit-id",
+            "--name-only",
+            "-r",
+            prepared,
+        ).stdout.splitlines()
+        if line.strip()
+    )
+    if changed != sorted(manifest["changed_paths"]):
+        raise Stop("OPPONENT_DISPLAY_FRESH_CHANGED_PATH_MISMATCH")
+    for path, expected in manifest["changed_file_sha256"].items():
+        if sha256_bytes(git_show_bytes(prepared, path)) != expected:
+            raise Stop(
+                "OPPONENT_DISPLAY_FRESH_CHANGED_FILE_HASH_MISMATCH:%s"
+                % path
+            )
+
+    field_proof = verify_prepared_commit_field_boundary(
+        ROOT,
+        school_key=successor["school_key"],
+        predecessor_sha=predecessor,
+        prepared_sha=prepared,
+        expected_blocker_keys=manifest["expected_blocker_keys"],
+    )
+    stored_field_proof = json.loads(
+        (bundle / "field-level-proof.json").read_bytes()
+    )
+    if field_proof != stored_field_proof:
+        raise Stop("OPPONENT_DISPLAY_FRESH_FIELD_PROOF_MISMATCH")
+
+    predecessor_tree = Path(
+        tempfile.mkdtemp(prefix="remote-opponent-display-predecessor-")
+    )
+    shutil.rmtree(predecessor_tree)
+    git(
+        "worktree",
+        "add",
+        "-b",
+        "remote-opponent-display-verify/%s"
+        % predecessor[:12],
+        str(predecessor_tree),
+        predecessor,
+    )
+    configure_git(predecessor_tree)
+    freeze_bytes = (bundle / "integration-freeze.json").read_bytes()
+    if sha256_bytes(freeze_bytes) != manifest["integration_freeze_sha256"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_FREEZE_HASH_MISMATCH")
+    dry = run_normalizer_dry_run(
+        predecessor_tree,
+        successor["school_key"],
+        freeze_bytes,
+        manifest["expected_blocker_keys"],
+        DIAG / "opponent-display-dry-run",
+    )
+    if dry["report_sha256"] != manifest["normalization_report_sha256"]:
+        raise Stop("OPPONENT_DISPLAY_FRESH_NORMALIZATION_REPORT_MISMATCH")
+
+    prepared_tree = add_existing_onboarding_worktree(
+        target_branch,
+        prepared,
+        successor["school_key"],
+    )
+    freeze_path = (
+        prepared_tree
+        / ".onboarding"
+        / successor["school_key"]
+        / "integration-freeze.json"
+    )
+    freeze_path.parent.mkdir(parents=True, exist_ok=True)
+    freeze_path.write_bytes(freeze_bytes)
+    drift = semantic_drift_report(
+        prepared_tree,
+        successor["school_key"],
+    )
+    if drift.get("status") != "PASS" or drift.get("changes"):
+        raise Stop("OPPONENT_DISPLAY_FRESH_SEMANTIC_DRIFT")
+
+    result = run_stage2_census_tool(
+        prepared_tree,
+        successor["school_key"],
+        freeze_bytes,
+        DIAG / "opponent-display-stage2",
+    )
+    expected_stage2 = successor.get("post_repair_stage2") or {}
+    actual_preflight = result.get("status", {}).get("preflight", {})
+    actual_census = result.get("capability_census") or {}
+    comparisons = {
+        "stage2_status": result.get("stage2_status"),
+        "blocker_count": int(actual_preflight.get("blocker_count", 0) or 0),
+        "warning_count": int(actual_preflight.get("warning_count", 0) or 0),
+        "decision_count": int(actual_preflight.get("decision_count", 0) or 0),
+        "decision_universe_sha256": actual_preflight.get(
+            "decision_universe_sha256"
+        ),
+        "capability_census_status": actual_census.get("status"),
+    }
+    for key, actual in comparisons.items():
+        if actual != expected_stage2.get(key):
+            raise Stop(
+                "OPPONENT_DISPLAY_FRESH_STAGE2_MISMATCH:%s" % key
+            )
+    if (
+        result["tracked_mutation_proof"].get("tracked_stage2_mutation")
+        != "NONE"
+    ):
+        raise Stop("OPPONENT_DISPLAY_FRESH_STAGE2_TRACKED_MUTATION")
+
+    expected_raw = expected_stage2.get("artifact_sha256") or {}
+    expected_normalized = (
+        expected_stage2.get("artifact_normalized_sha256") or {}
+    )
+    actual_raw = result["artifact_sha256"]
+    actual_normalized = result["artifact_normalized_sha256"]
+    if set(expected_raw) != set(actual_raw):
+        raise Stop("OPPONENT_DISPLAY_FRESH_ARTIFACT_SET_MISMATCH")
+    normalized_equivalence: list[str] = []
+    for name in sorted(expected_raw):
+        if expected_raw[name] == actual_raw.get(name):
+            continue
+        if expected_normalized.get(name) != actual_normalized.get(name):
+            raise Stop(
+                "OPPONENT_DISPLAY_FRESH_ARTIFACT_HASH_MISMATCH:%s"
+                % name
+            )
+        normalized_equivalence.append(name)
+
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+        "request_id": successor["request_id"],
+        "school_key": successor["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "target_predecessor_sha": predecessor,
+        "target_sha": prepared,
+        "target_tree_sha": tree,
+        "changed_paths": changed,
+        "expected_blocker_keys": manifest["expected_blocker_keys"],
+        "normalization_report_sha256": manifest[
+            "normalization_report_sha256"
+        ],
+        "field_level_proof_sha256": manifest["field_level_proof_sha256"],
+        "integration_freeze_sha256": manifest[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": manifest[
+            "semantic_snapshot_sha256"
+        ],
+        "semantic_drift": "PASS",
+        "stage2_status": result["stage2_status"],
+        "decision_universe_sha256": comparisons[
+            "decision_universe_sha256"
+        ],
+        "capability_census_status": comparisons[
+            "capability_census_status"
+        ],
+        "artifact_sha256": actual_raw,
+        "artifact_normalized_sha256": actual_normalized,
+        "normalized_equivalence_artifacts": normalized_equivalence,
+        "tracked_stage2_mutation": "NONE",
+        "remote_stage2_opponent_display_equivalence": "PASS",
+    }
+    verify_dir = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (successor["school_key"], successor["request_id"])
+    )
+    write_json(
+        verify_dir / "stage2-opponent-display-verification.json",
+        verification,
+    )
+
+    local_state = read_json(STATE_PATH)
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (
+        local_last.get("operation")
+        != OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE
+        or local_last.get("request_id") != successor["request_id"]
+    ):
+        raise Stop("OPPONENT_DISPLAY_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last[
+        "remote_stage2_opponent_display_equivalence"
+    ] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        "persist fresh Stage 2 opponent-display verification %s"
+        % successor["request_id"],
+        [STATE_PATH, verify_dir],
+    )
+    print(
+        "REMOTE STAGE 2 OPPONENT DISPLAY EQUIVALENCE: PASS "
+        "verification_commit=%s" % commit
+    )
+    return 0
+
+
 def main() -> int:
     DIAG.mkdir(parents=True, exist_ok=True)
     try:
@@ -203,6 +490,12 @@ def main() -> int:
         last = state.get("last_operation") or {}
         if last.get("operation") == OP_STAGE2_CENSUS:
             return verify_stage2_census(
+                live_main,
+                control_head,
+                state,
+            )
+        if last.get("operation") == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
+            return verify_stage2_opponent_display_normalization(
                 live_main,
                 control_head,
                 state,
