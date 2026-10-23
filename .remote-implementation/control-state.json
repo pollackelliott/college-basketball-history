@@ -3,29 +3,37 @@
   "accepted_request_ids": [
     "liu-stage1-0001"
   ],
-  "active_expected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "liu-stage1-0001",
-  "active_request_sha256": "60754adfd430ea1797f449daccaa8e9dfc1acfd1e1d54f610761a9390feb1839",
-  "active_school_key": "long-island-university",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
-  "consumed_request_ids": [],
-  "current_sequence": 0,
+  "consumed_request_ids": [
+    "liu-stage1-0001"
+  ],
+  "current_sequence": 1,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
-  "last_operation": null,
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "39960066897",
-  "lock_acquisition_request_commit": "b7f23f5ce895435af62fd51b51d4ca548cdb7cc2",
-  "recovery_required": true,
+  "last_operation": {
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/long-island-university/liu-stage1-0001/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "8bcefd8d7d65241cbc82f2d3ac3575735a2baa034fd7afa74ae912c52f1b0e3d",
+    "operation": "STAGE1_INVENTORY",
+    "protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "request_id": "liu-stage1-0001",
+    "school_key": "long-island-university",
+    "stage1_reconciliation_sha256": "865e026677939a950c3c0af834bcc2eb0abd97cfcc16f109e89ee374d5ddb7a0",
+    "stage1_status": "PASS"
+  },
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }
