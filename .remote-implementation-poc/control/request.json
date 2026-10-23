@@ -1,0 +1,23 @@
+{
+  "authority": {
+    "integration_freeze_authorized": false,
+    "phase0_authorized": false,
+    "read_only": true
+  },
+  "creation_provenance": {
+    "architecture_lane": "ChatGPT remote Implementation architecture experiment",
+    "owner_authorization": "Proceed in ChatGPT",
+    "owner_desktop_interaction_required": false,
+    "owner_github_ui_interaction_required": false
+  },
+  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF3_REQUEST",
+  "operation": "VERIFY_AND_REPLAY_STAGE1_CHECKPOINT",
+  "predecessor_checkpoint_commit": "32f11c925f0b17b1840a58f06ec848b20a20cdd7",
+  "predecessor_manifest_sha256": "c4800d2a3b64f36b46d63ea721dc360c6cb48a48786fa6f736b573037110bf1c",
+  "previous_control_state_commit": "9f40719c5db0240e92042b00e720b515a71fdafc",
+  "previous_control_state_sha256": "af92d629575673bfdaaaf4c9c0a91baa63cb4dcfe4011f341c4893a309ee4505",
+  "request_id": "proof3-control-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university"
+}
