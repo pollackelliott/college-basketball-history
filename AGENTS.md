@@ -12,6 +12,7 @@ Read these process documents together before onboarding work:
 - `docs/onboarding-process-hardening.md`
 - `docs/implementation-efficiency-recovery.md`
 - `docs/implementation-gate1-authority-boundary.md`
+- `docs/remote-implementation-runner.md`
 - `docs/codespace-terminal-safety.md`
 - `docs/parallel-portfolio-pipeline.md`
 - `docs/site-completeness-protocol.md`
@@ -29,6 +30,8 @@ Read these process documents together before onboarding work:
 - `docs/published-opponent-identity-census.md`
 - `docs/non-d1-owner-sanity-scan.md`
 - `docs/program-top-level-scope-reference.md`
+
+Through stable Phase 0, serialized Implementation may execute either in the project Codespace or through the repository-owned guarded remote runner under `docs/remote-implementation-runner.md`. The same current-main, one-active-lane, permanent-tool, owner-gate, shared-reference, and release rules apply in either environment. Remote Stage 2, Gate 1, sealed apply, Preview, merge, and Production proof are not authorized until separately productionized.
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
 more specific than the older fast-path wording. The site-completeness protocol is
@@ -196,7 +199,7 @@ authorized dedicated maintenance branch/PR under `docs/shared-reference-authorit
 Any shared-reference mutation must pass both repository validation and declared-intent diff
 validation; unrelated shared-row changes are a STOP.
 
-1. Work in the project Codespace on `data/<school_key>-onboarding`, never on `main`.
+1. Execute serialized Implementation either in the project Codespace on `data/<school_key>-onboarding` or, through stable Phase 0 only, via the guarded remote runner in `docs/remote-implementation-runner.md`; never mutate protected `main` directly.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
    `python tools/onboarding_hardening.py research-check ...` on an incoming six-file
    portfolio before Phase 0. A portfolio may preserve genuinely unresolved historical
