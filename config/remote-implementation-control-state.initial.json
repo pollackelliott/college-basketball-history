@@ -16,6 +16,7 @@
   "active_lock_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
+  "active_writeahead_commit": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
   "active_target_branch": null,
