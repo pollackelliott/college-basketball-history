@@ -1,0 +1,17 @@
+{
+  "basketball_data_mutation": false,
+  "classification": "PREPARED_NOT_PUBLISHED",
+  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_RECOVERY",
+  "failed_action_run_attempt": 1,
+  "failed_action_run_id": 39886953427,
+  "final_global_lifecycle": "IDLE",
+  "original_request_id": "proof5-boundary-b-0001",
+  "recovery_action_run_attempt": 1,
+  "recovery_action_run_id": 39887203412,
+  "recovery_disposition": "ABANDON_PREPARED_NOT_PUBLISHED",
+  "recovery_request_id": "proof5-recovery-b-0001",
+  "schema_version": 1,
+  "target_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "writeahead_manifest_sha256": "cb4a2ff1f57546600a9159cd75348c52eea3b61bac5cbddbc1d347631753ebe9"
+}
