@@ -23,6 +23,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_STAGE1,
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_STAGE2_PROPOSAL_REHEARSAL,
     REQUEST_KIND,
     RemoteImplementationError,
     abandon_active,
@@ -73,6 +74,9 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "stage2_opponent_display_normalize": (
                 operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE
             ),
+            "stage2_proposal_rehearsal": (
+                operation == OP_STAGE2_PROPOSAL_REHEARSAL
+            ),
             "recovery": operation == OP_RECOVER,
         },
     }
@@ -107,6 +111,20 @@ def request(operation=OP_STAGE1, request_id="request-001"):
         }
         base["integration_freeze_sha256"] = "8" * 64
         base["semantic_snapshot_sha256"] = "9" * 64
+    if operation == OP_STAGE2_PROPOSAL_REHEARSAL:
+        base["target_branch"] = "data/example-school-onboarding"
+        base["target_sha"] = "6" * 40
+        base["stage2_authority"] = {
+            "path": ".remote-implementation/successors/example-school/stage2/successor-manifest.json",
+            "sha256": "7" * 64,
+        }
+        base["recommendation_map"] = {
+            "path": ".remote-implementation/requests/request-001/recommendation-map.json",
+            "sha256": "5" * 64,
+        }
+        base["integration_freeze_sha256"] = "8" * 64
+        base["semantic_snapshot_sha256"] = "9" * 64
+        base["decision_universe_sha256"] = "4" * 64
     if operation == OP_PHASE0:
         base["target_branch"] = "data/example-school-onboarding"
         base["stage1_checkpoint"] = {
@@ -152,6 +170,61 @@ class RemoteImplementationControlTests(unittest.TestCase):
 
     def test_valid_stage2_opponent_display_request(self):
         validate_request(request(OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE))
+
+    def test_valid_stage2_proposal_rehearsal_request(self):
+        validate_request(request(OP_STAGE2_PROPOSAL_REHEARSAL))
+
+    def test_stage2_proposal_requires_exact_map_hash(self):
+        req = request(OP_STAGE2_PROPOSAL_REHEARSAL)
+        req["recommendation_map"]["sha256"] = "bad"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "RECOMMENDATION_MAP_SHA_INVALID",
+        ):
+            validate_request(req)
+
+    def test_stage2_proposal_is_read_only_serialized(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_STAGE2_PROPOSAL_REHEARSAL, "proposal-001"),
+            "7" * 64,
+            run_id="207",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        self.assertEqual(state["lifecycle_state"], "READ_ONLY_ACTIVE")
+        self.assertEqual(
+            state["transaction_state"],
+            "STAGE2_PROPOSAL_REHEARSAL_RUNNING",
+        )
+        self.assertIsNone(state["active_lock_commit"])
+        self.assertTrue(state["recovery_required"])
+
+    def test_stage2_proposal_read_only_recovery_has_no_target_or_lock(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_STAGE2_PROPOSAL_REHEARSAL, "proposal-old"),
+            "7" * 64,
+            run_id="208",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        data = canonical_json_bytes(state)
+        recovery = request(OP_RECOVER, "proposal-recovery")
+        recovery["previous_control_state_sha256"] = sha256_bytes(data)
+        recovery["recovery"] = {
+            "abandoned_request_id": "proposal-old",
+            "lock_commit": None,
+            "target_branch": None,
+        }
+        verify_request_predecessor(
+            state,
+            data,
+            PRED,
+            recovery,
+            MAIN,
+            allow_active_recovery=True,
+        )
 
     def test_stage2_opponent_display_requires_exact_census_checkpoint(self):
         req = request(OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE)
