@@ -6,24 +6,25 @@
     "proof6-liu-phase0-0001",
     "proof6-liu-phase0-0002"
   ],
-  "active_conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
-  "active_integration_freeze_sha256": "a0db804501dc12f1e3ef060e60821c1971a4814e3fc8d3209513009cd6ac3e06",
-  "active_lock_commit": "c53276327a06744718d6712f8e2ac30f4b560b7c",
-  "active_lock_owner": "github-actions:39903659540:1",
-  "active_operation": "REHEARSE_REAL_LIU_PHASE0",
-  "active_prepared_commit_sha": "ff9eb5ca1be1e07232ca2245ec4352f1defbe6e7",
-  "active_prepared_tree_sha": "f53fbf5436ab4056232c6771b52105e52af9318c",
-  "active_request_id": "proof6-liu-phase0-0002",
-  "active_request_sha256": "6ebc42675b33b6f54e99858acb6347bbe20d62959a8ae3373e2147ae3b307bb8",
-  "active_stage1_reconciliation_sha256": "1dbd15a2fce41f7b8f079721a8a66c7c01c77256038c608b37318606b43ffb89",
-  "active_venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
-  "active_writeahead_commit": "679bd01e283a84df39630d56ea8a72f4a6233b82",
-  "active_writeahead_manifest_sha256": "ef6a083e109caf8383a52fdafa520f9bb4d9a8b7c3e7226228b98c266dad53a9",
+  "active_conference_reconciliation_sha256": null,
+  "active_integration_freeze_sha256": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
+  "active_prepared_commit_sha": null,
+  "active_prepared_tree_sha": null,
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_stage1_reconciliation_sha256": null,
+  "active_venue_reconciliation_sha256": null,
+  "active_writeahead_commit": null,
+  "active_writeahead_manifest_sha256": null,
   "authority_statement": "Experimental Proof 6 rehearsal only. No authoritative LIU INTEGRATION_FROZEN, real Phase 0, Stage 2, Gate 1, release, protected-main mutation, or real onboarding-branch authority.",
   "consumed_request_ids": [
-    "proof6-recovery-stage1-blocker-0001"
+    "proof6-recovery-stage1-blocker-0001",
+    "proof6-liu-phase0-0002"
   ],
-  "current_sequence": 1,
+  "current_sequence": 2,
   "expected_protected_main_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE_EXPERIMENTAL_SUCCESSOR",
@@ -31,56 +32,24 @@
   "inherited_proof5_control_state_sha256": "58d35fa129a3784bdaf803b87f149ee50232a4cd4182f425aff4e7913dc1bf7b",
   "integration_frozen": false,
   "last_transaction": {
-    "architecture_blocker": {
-      "classification": "GENERIC_STAGE1_REPRESENTATION_TOOLING_DEFECT",
-      "detail": "The researched-split duplicate-name exception accepts REUSE_EXACT_KEY and REUSE_RESEARCH_BASE_IDENTITY but not REUSE_EXPLICIT_RECONCILIATION. LIU's explicit mapping to VEN-000040 is therefore still blocked by the intentional VEN-000040/VEN-000041 Charlotte Coliseum name overlap.",
-      "required_repair": "Add a generic regression-tested explicit-reconciliation researched-split handling path before rerunning Proof 6 against refreshed protected main."
-    },
     "basketball_authoritative_mutation": false,
-    "blocker": {
-      "candidate_venue_ids": [
-        "VEN-000040",
-        "VEN-000041"
-      ],
-      "classification": "STOP_AMBIGUOUS",
-      "inventory_issue": "CONFLICTING_REGISTERED_NAME_IDENTITIES",
-      "local_venue_key": "charlotte-coliseum-original",
-      "selected_global_venue_id": "VEN-000040",
-      "selected_global_venue_key": "charlotte-coliseum-1955"
-    },
-    "conference_classification_counts": {
-      "REUSE_CURRENT_IDENTITY": 3
-    },
-    "conference_reconciliation_blockers": 0,
-    "disposable_target_branch_created": false,
-    "failure_action_run_attempt": 1,
-    "failure_action_run_id": 39896265711,
-    "integration_freeze_produced": false,
-    "original_request_id": "proof6-liu-phase0-0001",
-    "phase0_command_executed": false,
-    "real_liu_onboarding_branch_created": false,
-    "reconciled_stage1_blocker_count": 1,
-    "reconciled_stage1_status": "BLOCKED",
-    "recovery_disposition": "ABANDON_STAGE1_RECONCILIATION_BLOCKER",
-    "recovery_request_id": "proof6-recovery-stage1-blocker-0001",
-    "research_freeze_game_count": 2193,
-    "research_freeze_season_count": 81,
-    "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
-    "research_freeze_verified": true,
-    "venue_classification_counts": {
-      "NEW_GLOBAL_IDENTITY": 20,
-      "SAFE_REPRESENTATION_REUSE": 38,
-      "STOP_AMBIGUOUS": 1
-    },
-    "writeahead_authority_created": false
+    "inputs_path": ".remote-implementation-poc/control6/inputs/proof6-liu-phase0-0002",
+    "integration_freeze_sha256": "a0db804501dc12f1e3ef060e60821c1971a4814e3fc8d3209513009cd6ac3e06",
+    "phase0_commit_sha": "ff9eb5ca1be1e07232ca2245ec4352f1defbe6e7",
+    "phase0_tree_sha": "f53fbf5436ab4056232c6771b52105e52af9318c",
+    "remote_phase0_equivalence": "PENDING_FRESH_RUNNER_VERIFICATION",
+    "repository_validation": "PASS",
+    "request_id": "proof6-liu-phase0-0002",
+    "successor_manifest_path": ".remote-implementation-poc/control6/successors/proof6-liu-phase0-0002/successor-manifest.json",
+    "successor_manifest_sha256": "f04f48e4e36a0eaa8dca46d0a9af50ecafa64fb213868e4ef479efd4507baf54",
+    "target_sha": "ff9eb5ca1be1e07232ca2245ec4352f1defbe6e7",
+    "writeahead_manifest_path": ".remote-implementation-poc/control6/writeahead/proof6-liu-phase0-0002/writeahead-manifest.json",
+    "writeahead_manifest_sha256": "ef6a083e109caf8383a52fdafa520f9bb4d9a8b7c3e7226228b98c266dad53a9"
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": 1,
-  "lock_acquired_run_id": 39903659540,
-  "lock_acquisition_request_commit": "b0baa48e634e59059537758e554e055061c723b7",
+  "lifecycle_state": "IDLE",
   "phase0_authorized": false,
   "real_onboarding_branch_authorized": false,
-  "recovery_required": true,
+  "recovery_required": false,
   "rerun_after_tooling_repair": {
     "authority_statement": "Rerun remains disposable Proof 6 only; no real LIU onboarding branch, authoritative Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
     "authorization": "REMOTE IMPLEMENTATION PROOF 6 — RERUN AFTER GENERIC TOOLING REPAIR",
@@ -94,5 +63,5 @@
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
   "target_expected_nonexistent": true,
-  "transaction_state": "PREPARED_NOT_PUBLISHED"
+  "transaction_state": "COMPLETE"
 }
