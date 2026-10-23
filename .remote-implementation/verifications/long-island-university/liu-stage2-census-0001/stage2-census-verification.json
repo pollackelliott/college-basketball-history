@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "547122ed0b7747201691a1637fa7f757dc25dc0bf710dcb4d6a6f48ad8562525",
+    "implementation-stage2-status.json": "75ae8d5fe61a1b2e87f3050fca0c493dd97e64346fb39995ecea1561abacbf9f",
+    "plan.json": "91dc0bf9d688e5aa24cf5a68dfe64dda8ff7e91afc18873006be0d7d7dcc88e2",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "b0ad8a06816f2b99cc4351a32a41b59a9d22c621051efb61b0a92483c4a24dc8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "547122ed0b7747201691a1637fa7f757dc25dc0bf710dcb4d6a6f48ad8562525",
+    "implementation-stage2-status.json": "75ae8d5fe61a1b2e87f3050fca0c493dd97e64346fb39995ecea1561abacbf9f",
+    "plan.json": "c0210bf92e68fbc7b55ee8204958f26cca4a3f070087d0f281e8b350b8fe8137",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "d6b92ef45ea23f1d19d5149cc33fc9a120843d856662851cafd0a98d2e000832"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "2e0ede0dda573eb28b8cb855bb7ff44aa16ea443",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "liu-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "e037473888024efe176798566c99ca208c54f984",
+  "target_tree_sha": "5fe8b315a3112ffa815c067b7a907dd55d533fd1",
+  "tracked_stage2_mutation": "NONE"
+}
