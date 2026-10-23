@@ -5,7 +5,7 @@
     "liu-phase0-0001"
   ],
   "active_expected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
-  "active_lock_commit": null,
+  "active_lock_commit": "6a45b1e817a047c4c293d97d7b0d4517fee5deab",
   "active_lock_owner": "github-actions:39960641528:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
