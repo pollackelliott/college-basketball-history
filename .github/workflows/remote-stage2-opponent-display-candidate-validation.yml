@@ -32,6 +32,283 @@ jobs:
             tests.test_remote_implementation_control \
             tests.test_normalize_historical_opponent_displays \
             tests.test_remote_implementation_stage2_census \
-            tests.test_remote_implementation_stage2_opponent_display
+            tests.test_remote_implementation_stage2_opponent_display \
+            tests.test_remote_implementation_stage2_opponent_display_recovery
       - name: Repository validation
         run: python tools/validate_data.py
+
+
+  liu-disposable:
+    needs: focused
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch exact durable LIU authority
+        run: |
+          git fetch --no-tags origin \
+            control/remote-implementation \
+            data/long-island-university-onboarding \
+            main
+          test "$(git rev-parse refs/remotes/origin/data/long-island-university-onboarding)" = "e037473888024efe176798566c99ca208c54f984"
+          git cat-file -e d38cf951156ffbd98d931e806de8e4fb1b934d5d^{commit}
+          git cat-file -e 14116bbb46b4b54d04183ea4bd414b217d7d7a00^{commit}
+      - name: Disposable exact-authority repair and fresh replay
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import shutil
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          ROOT = Path.cwd()
+          sys.path.insert(0, str(ROOT / "tools"))
+          from remote_implementation_stage2_opponent_display import (
+              apply_and_prepare_repair,
+              post_repair_stage2_result,
+              run_normalizer_dry_run,
+              stage2_result_summary,
+              verify_census_and_freeze_authority,
+              verify_prepared_commit_field_boundary,
+          )
+
+          SCHOOL = "long-island-university"
+          BRANCH = "data/long-island-university-onboarding"
+          TARGET = "e037473888024efe176798566c99ca208c54f984"
+          CONTROL = "d38cf951156ffbd98d931e806de8e4fb1b934d5d"
+          CHECKPOINT_SHA = "691d0abe1e4d1f43225ac15c7bd3adf7f4e6079ca442516f7a80cc69f569cb1a"
+          FREEZE_SHA = "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a"
+          SEMANTIC_SHA = "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0"
+          EXPECTED_KEYS = [
+              "albany-law-school",
+              "bloomfield",
+              "centenary-new-jersey",
+              "charleston-west-virginia",
+              "city-college-of-new-york",
+              "john-jay",
+              "medgar-evers",
+              "new-york-athletic-club",
+              "saint-francis-pennsylvania",
+          ]
+
+          def sh(*args, cwd=ROOT):
+              cp = subprocess.run(
+                  list(args),
+                  cwd=cwd,
+                  text=True,
+                  stdout=subprocess.PIPE,
+                  stderr=subprocess.STDOUT,
+                  check=False,
+              )
+              if cp.returncode:
+                  raise SystemExit(cp.stdout)
+              return cp.stdout.strip()
+
+          request = {
+              "school_key": SCHOOL,
+              "target_branch": BRANCH,
+              "target_sha": TARGET,
+              "stage2_census_checkpoint": {
+                  "path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-census-0001/checkpoint-manifest.json",
+                  "sha256": CHECKPOINT_SHA,
+              },
+              "integration_freeze_sha256": FREEZE_SHA,
+              "semantic_snapshot_sha256": SEMANTIC_SHA,
+          }
+          authority = verify_census_and_freeze_authority(
+              request,
+              CONTROL,
+              source_repo=ROOT,
+          )
+          if authority["blocker_keys"] != EXPECTED_KEYS:
+              raise SystemExit(
+                  "LIU blocker-key mismatch: %r" % authority["blocker_keys"]
+              )
+
+          work = Path("/tmp/liu-opponent-display-disposable")
+          shutil.rmtree(work, ignore_errors=True)
+          sh(
+              "git", "worktree", "add", "-b",
+              "disposable-liu-opponent-display",
+              str(work), TARGET,
+          )
+          sh("git", "config", "user.name", "Disposable Regression", cwd=work)
+          sh("git", "config", "user.email", "regression@example.com", cwd=work)
+
+          dry = run_normalizer_dry_run(
+              work,
+              SCHOOL,
+              authority["freeze_bytes"],
+              EXPECTED_KEYS,
+              Path("/tmp/liu-opponent-display-diag"),
+          )
+          proposed_keys = sorted(
+              item["canonical_opponent_key"]
+              for item in dry["report"]["changes"]
+          )
+          if proposed_keys != EXPECTED_KEYS:
+              raise SystemExit("LIU dry-run did not reproduce exact nine keys")
+
+          prepared = apply_and_prepare_repair(
+              work,
+              SCHOOL,
+              TARGET,
+              authority["freeze_bytes"],
+              dry,
+              EXPECTED_KEYS,
+              Path("/tmp/liu-opponent-display-diag"),
+          )
+          allowed = {
+              f"schools/{SCHOOL}/opponents.csv",
+              f"schools/{SCHOOL}/source-games.csv",
+          }
+          if not set(prepared["changed_paths"]).issubset(allowed):
+              raise SystemExit("LIU disposable repair changed an unauthorized path")
+          if f"schools/{SCHOOL}/opponents.csv" not in prepared["changed_paths"]:
+              raise SystemExit("LIU disposable repair did not change opponents.csv")
+
+          validation = subprocess.run(
+              [sys.executable, "tools/validate_data.py"],
+              cwd=work,
+              text=True,
+              stdout=subprocess.PIPE,
+              stderr=subprocess.STDOUT,
+              check=False,
+          )
+          Path("/tmp/liu-opponent-display-validate.log").write_text(
+              validation.stdout, encoding="utf-8"
+          )
+          if validation.returncode:
+              raise SystemExit(validation.stdout)
+
+          post = post_repair_stage2_result(
+              work,
+              SCHOOL,
+              authority["freeze_bytes"],
+              Path("/tmp/liu-opponent-display-post-stage2"),
+          )
+          summary = stage2_result_summary(post)
+
+          fresh_pre = Path("/tmp/liu-opponent-display-fresh-pre")
+          shutil.rmtree(fresh_pre, ignore_errors=True)
+          sh(
+              "git", "worktree", "add", "-b",
+              "disposable-liu-opponent-display-fresh-pre",
+              str(fresh_pre), TARGET,
+          )
+          sh("git", "config", "user.name", "Disposable Regression", cwd=fresh_pre)
+          sh("git", "config", "user.email", "regression@example.com", cwd=fresh_pre)
+          fresh_dry = run_normalizer_dry_run(
+              fresh_pre,
+              SCHOOL,
+              authority["freeze_bytes"],
+              EXPECTED_KEYS,
+              Path("/tmp/liu-opponent-display-fresh-dry"),
+          )
+          if fresh_dry["report_sha256"] != dry["report_sha256"]:
+              raise SystemExit("LIU fresh dry-run report mismatch")
+
+          fresh_proof = verify_prepared_commit_field_boundary(
+              ROOT,
+              school_key=SCHOOL,
+              predecessor_sha=TARGET,
+              prepared_sha=prepared["prepared_commit_sha"],
+              expected_blocker_keys=EXPECTED_KEYS,
+          )
+          if fresh_proof != prepared["field_level_proof"]:
+              raise SystemExit("LIU fresh field-level proof mismatch")
+
+          fresh_post = Path("/tmp/liu-opponent-display-fresh-post")
+          shutil.rmtree(fresh_post, ignore_errors=True)
+          sh(
+              "git", "worktree", "add", "-b",
+              "disposable-liu-opponent-display-fresh-post",
+              str(fresh_post), prepared["prepared_commit_sha"],
+          )
+          sh("git", "config", "user.name", "Disposable Regression", cwd=fresh_post)
+          sh("git", "config", "user.email", "regression@example.com", cwd=fresh_post)
+          replay = post_repair_stage2_result(
+              fresh_post,
+              SCHOOL,
+              authority["freeze_bytes"],
+              Path("/tmp/liu-opponent-display-fresh-stage2"),
+          )
+          replay_summary = stage2_result_summary(replay)
+          for key in (
+              "stage2_status",
+              "blocker_count",
+              "warning_count",
+              "decision_count",
+              "decision_universe_sha256",
+              "capability_census_status",
+          ):
+              if replay_summary.get(key) != summary.get(key):
+                  raise SystemExit("LIU fresh Stage 2 mismatch: " + key)
+          if (
+              replay_summary["artifact_normalized_sha256"]
+              != summary["artifact_normalized_sha256"]
+          ):
+              raise SystemExit("LIU fresh normalized artifact mismatch")
+
+          remote_target = sh(
+              "git", "ls-remote", "--heads", "origin",
+              f"refs/heads/{BRANCH}"
+          ).split()[0]
+          if remote_target != TARGET:
+              raise SystemExit("REAL LIU ONBOARDING BRANCH MOVED")
+
+          result = {
+              "authority_control_commit": CONTROL,
+              "authoritative_census_checkpoint_sha256": CHECKPOINT_SHA,
+              "input_onboarding_sha": TARGET,
+              "dry_run": {
+                  "status": dry["report"]["status"],
+                  "ambiguous_key_count": dry["report"]["ambiguous_key_count"],
+                  "change_key_count": dry["report"]["change_key_count"],
+                  "keys": proposed_keys,
+                  "opponent_row_count": dry["report"]["change_row_count"],
+                  "source_game_normalized_name_row_count": dry["report"].get(
+                      "source_game_display_change_rows", 0
+                  ),
+                  "report_sha256": dry["report_sha256"],
+              },
+              "repair": {
+                  "prepared_commit_sha": prepared["prepared_commit_sha"],
+                  "prepared_tree_sha": prepared["prepared_tree_sha"],
+                  "prepared_parent_sha": prepared["prepared_parent_sha"],
+                  "changed_paths": prepared["changed_paths"],
+                  "changed_file_sha256": prepared["changed_file_sha256"],
+                  "field_level_proof": prepared["field_level_proof"],
+                  "semantic_drift_after": prepared["semantic_drift_after"]["status"],
+              },
+              "post_repair_stage2": summary,
+              "fresh_replay": {
+                  "dry_run_equivalence": "PASS",
+                  "field_level_proof": "PASS",
+                  "stage2_normalized_equivalence": "PASS",
+              },
+              "real_liu_remote_sha_after": remote_target,
+          }
+          output = Path("/tmp/liu-disposable-result.json")
+          output.write_text(
+              json.dumps(result, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+      - name: Upload LIU disposable regression
+        uses: actions/upload-artifact@v4
+        with:
+          name: liu-stage2-opponent-display-disposable
+          path: |
+            /tmp/liu-disposable-result.json
+            /tmp/liu-opponent-display-validate.log
+          if-no-files-found: error
+          retention-days: 14
