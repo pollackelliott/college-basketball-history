@@ -1,0 +1,95 @@
+name: Remote Implementation control plane
+
+on:
+  push:
+    branches:
+      - control/remote-implementation
+
+permissions:
+  contents: write
+
+concurrency:
+  group: remote-implementation-global-control
+  cancel-in-progress: false
+
+jobs:
+  process-request:
+    if: ${{ !startsWith(github.event.head_commit.message, '[remote-implementation-internal]') }}
+    runs-on: ubuntu-latest
+    outputs:
+      has_request: ${{ steps.detect.outputs.has_request }}
+      operation: ${{ steps.detect.outputs.operation }}
+    steps:
+      - name: Check out exact control request
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Detect bounded request
+        id: detect
+        shell: bash
+        run: |
+          if [[ -f .remote-implementation/request.json ]]; then
+            echo "has_request=true" >> "$GITHUB_OUTPUT"
+            python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          request=json.loads(Path(".remote-implementation/request.json").read_text())
+          print("operation="+str(request.get("operation","")))
+          PY
+          else
+            echo "has_request=false" >> "$GITHUB_OUTPUT"
+            echo "operation=" >> "$GITHUB_OUTPUT"
+            echo "Control branch update contains no request."
+          fi
+
+      - name: Process remote Implementation request
+        if: steps.detect.outputs.has_request == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/remote_implementation_runner.py
+
+      - name: Upload request diagnostics
+        if: steps.detect.outputs.has_request == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-diagnostics
+          if-no-files-found: ignore
+          retention-days: 14
+
+  fresh-phase0-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'PHASE0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest durable control state
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct and verify stable Phase 0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/remote_implementation_verify.py
+
+      - name: Upload verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
