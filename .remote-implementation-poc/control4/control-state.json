@@ -14,7 +14,7 @@
     "proof3-control-0001"
   ],
   "current_sequence": 1,
-  "durable_active_state_commit": "COMMIT_CONTAINING_THIS_ACTIVE_STATE",
+  "durable_active_state_commit": "e550db01db91164d61c93f93c12ed5e3aea22305",
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE",
