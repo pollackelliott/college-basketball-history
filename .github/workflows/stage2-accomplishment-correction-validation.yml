@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - tooling/stage2-accomplishment-correction
+  pull_request:
+    branches:
+      - main
 
 jobs:
   regression:
