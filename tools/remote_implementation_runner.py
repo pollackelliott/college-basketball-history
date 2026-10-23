@@ -683,9 +683,15 @@ def run_recovery(
             state["active_writeahead_path"],
             state["active_writeahead_sha256"],
         )
-    actual_target = remote_head(ROOT, target_branch)
+    actual_target = (
+        remote_head(ROOT, target_branch)
+        if target_branch
+        else None
+    )
     classification = classify_mutation(
-        manifest.get("expected_target_predecessor_sha") if manifest else None,
+        manifest.get("expected_target_predecessor_sha")
+        if manifest
+        else None,
         actual_target,
         manifest=manifest,
     )
@@ -702,13 +708,14 @@ def run_recovery(
         "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
         "request_id": request["request_id"],
         "recovered_request_id": recovery["abandoned_request_id"],
-        "lock_commit": recovery["lock_commit"],
+        "lock_commit": recovery.get("lock_commit"),
         "protected_main_sha": live_main,
         "target_branch": target_branch,
         "actual_target_sha": actual_target,
         "mutation_classification": classification,
     }
     write_json(directory / "recovery-manifest.json", recovery_manifest)
+    commit_paths: list[Path | str] = [STATE_PATH, directory]
 
     if classification in {MUTATION_NOT_ATTEMPTED, MUTATION_PREPARED}:
         final_state = abandon_active(
@@ -720,29 +727,97 @@ def run_recovery(
     elif classification in {MUTATION_PUBLISHED, MUTATION_COMPLETE}:
         if not manifest:
             raise Stop("RECOVERY_PUBLISHED_WITHOUT_WRITEAHEAD")
+        if manifest.get("protected_main_sha") != live_main:
+            raise Stop("RECOVERY_PUBLISHED_STALE_PROTECTED_MAIN")
         prepared = manifest["prepared_commit_sha"]
-        if actual_target != prepared:
+        if not target_branch or actual_target != prepared:
             raise Stop("RECOVERY_TARGET_NOT_EXACT_PREPARED_COMMIT")
-        if (
-            git("rev-parse", "%s^" % prepared).stdout.strip()
-            != manifest["prepared_parent_sha"]
-        ):
+        parent = git("rev-parse", "%s^" % prepared).stdout.strip()
+        tree = git("rev-parse", "%s^{tree}" % prepared).stdout.strip()
+        if parent != manifest["prepared_parent_sha"]:
             raise Stop("RECOVERY_PREPARED_PARENT_MISMATCH")
-        if (
-            git("rev-parse", "%s^{tree}" % prepared).stdout.strip()
-            != manifest["prepared_tree_sha"]
-        ):
+        if tree != manifest["prepared_tree_sha"]:
             raise Stop("RECOVERY_PREPARED_TREE_MISMATCH")
+        changed = sorted(
+            line.strip()
+            for line in git(
+                "diff-tree",
+                "--no-commit-id",
+                "--name-only",
+                "-r",
+                prepared,
+            ).stdout.splitlines()
+            if line.strip()
+        )
+        if changed != sorted(manifest["changed_paths"]):
+            raise Stop("RECOVERY_CHANGED_PATH_MISMATCH")
+        for path, expected in manifest["changed_file_sha256"].items():
+            if sha256_bytes(git_show_bytes(prepared, path)) != expected:
+                raise Stop(
+                    "RECOVERY_CHANGED_FILE_HASH_MISMATCH:%s" % path
+                )
+
+        original_request_id = state["active_request_id"]
+        successor_dir = Path(
+            ".remote-implementation/successors/%s/%s"
+            % (request["school_key"], original_request_id)
+        )
+        successor_dir.mkdir(parents=True, exist_ok=True)
+        successor = {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_SUCCESSOR",
+            "request_id": original_request_id,
+            "school_key": request["school_key"],
+            "request_sha256": state["active_request_sha256"],
+            "global_lock_commit": state["active_lock_commit"],
+            "writeahead_commit": state.get(
+                "active_writeahead_commit"
+            ),
+            "writeahead_manifest_path": state[
+                "active_writeahead_path"
+            ],
+            "writeahead_manifest_sha256": state[
+                "active_writeahead_sha256"
+            ],
+            "protected_main_sha": live_main,
+            "prepared_commit_sha": prepared,
+            "prepared_tree_sha": tree,
+            "prepared_parent_sha": parent,
+            "actual_published_target_sha": actual_target,
+            "target_branch": target_branch,
+            "changed_paths": changed,
+            "changed_file_sha256": manifest[
+                "changed_file_sha256"
+            ],
+            "integration_freeze_sha256": manifest[
+                "integration_freeze_sha256"
+            ],
+            "semantic_snapshot_sha256": manifest[
+                "semantic_snapshot_sha256"
+            ],
+            "repository_validation": manifest[
+                "repository_validation"
+            ],
+            "publication_cas": "RECOVERY_ADOPTION_EXACT_MATCH",
+            "recovery_request_id": request["request_id"],
+            "recovery_classification": classification,
+            "final_transaction_state": "COMPLETE",
+        }
+        successor_path = (
+            successor_dir / "successor-manifest.json"
+        )
+        write_json(successor_path, successor)
+        successor_sha = sha256_file(successor_path)
+        commit_paths.append(successor_dir)
+
         final_state = finalize_success(
             state,
-            request_id=state["active_request_id"],
+            request_id=original_request_id,
             last_operation={
-                "operation": OP_RECOVER,
-                "recovery_request_id": request["request_id"],
-                "recovered_request_id": recovery[
-                    "abandoned_request_id"
-                ],
-                "mutation_classification": classification,
+                "operation": OP_PHASE0,
+                "request_id": original_request_id,
+                "school_key": request["school_key"],
+                "protected_main_sha": live_main,
                 "target_branch": target_branch,
                 "target_sha": actual_target,
                 "writeahead_manifest_path": state[
@@ -751,20 +826,34 @@ def run_recovery(
                 "writeahead_manifest_sha256": state[
                     "active_writeahead_sha256"
                 ],
+                "successor_manifest_path": (
+                    successor_path.as_posix()
+                ),
+                "successor_manifest_sha256": successor_sha,
+                "integration_freeze_sha256": manifest[
+                    "integration_freeze_sha256"
+                ],
+                "fresh_runner_verification": "PENDING",
+                "remote_phase0_equivalence": "PENDING",
+                "recovery_request_id": request["request_id"],
+                "recovery_classification": classification,
             },
         )
-        if request["request_id"] not in final_state["consumed_request_ids"]:
+        if request["request_id"] not in final_state[
+            "consumed_request_ids"
+        ]:
             final_state["consumed_request_ids"].append(
                 request["request_id"]
             )
     else:
         raise Stop("RECOVERY_CLASSIFICATION_UNSUPPORTED")
+
     write_json(STATE_PATH, final_state)
     commit = commit_control(
         request_commit,
         "recover remote Implementation request %s"
         % request["request_id"],
-        [STATE_PATH, directory],
+        commit_paths,
     )
     print(
         "REMOTE IMPLEMENTATION RECOVERY: %s commit=%s"
