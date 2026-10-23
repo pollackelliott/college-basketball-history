@@ -34,6 +34,7 @@ STAGE2_ARTIFACT_NAMES = (
     STAGE2_REPORT,
 )
 STAGE2_ALLOWED_STATUSES = {"CAPABILITY_CENSUS_READY", "BLOCKED"}
+RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 
 
 def normalize_artifact_bytes(
@@ -270,20 +271,26 @@ def run_stage2_census_tool(
     school_key: str,
     freeze_bytes: bytes,
     diag: Path,
+    *,
+    tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     restore_integration_freeze(repo, school_key, freeze_bytes)
     before = tracked_worktree_state(repo)
     if before["status"]:
         raise Stop("STAGE2_TRACKED_STATE_DIRTY_BEFORE_RUN")
 
+    runtime_repo = (tool_repo or RUNTIME_ROOT).resolve()
+    tool_path = runtime_repo / "tools/implementation_stage2.py"
+    if not tool_path.is_file():
+        raise Stop("STAGE2_RUNTIME_TOOL_MISSING:%s" % tool_path)
     cmd = [
         sys.executable,
-        str(repo / "tools/implementation_stage2.py"),
+        str(tool_path),
         school_key,
         "--repo",
         str(repo),
     ]
-    cp = run(cmd, cwd=repo, check=False)
+    cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-census.log").write_text(cp.stdout, encoding="utf-8")
 
