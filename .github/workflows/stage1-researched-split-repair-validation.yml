@@ -1,0 +1,200 @@
+name: Stage 1 researched-split repair validation
+
+on:
+  push:
+    branches:
+      - tooling/stage1-explicit-researched-split-reuse
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repair candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Focused Stage 1 and portfolio regressions
+        run: |
+          python -m unittest discover -s tests -p 'test_stage_research_portfolio.py' -v
+          python -m unittest discover -s tests -p 'test_stage1_venue_reconciliation.py' -v
+          python -m unittest discover -s tests -p 'test_implementation_stage1_inventory.py' -v
+
+      - name: Full repository test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Repository validation
+        run: python tools/validate_data.py
+
+      - name: Exact LIU Stage 1 regression fixture
+        shell: bash
+        run: |
+          git fetch --no-tags origin experiment/remote-implementation-stage1
+          python - <<'PY'
+          import base64
+          import csv
+          import hashlib
+          import io
+          import json
+          import subprocess
+          import zipfile
+          from pathlib import Path
+
+          PROOF1_COMMIT = "c34ba9de312a97d03d910be40e8091c576080cfa"
+          EXPECTED_ZIP = "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+          venue_reuse = {
+              "liu-schwartz": ("VEN-000949", "schwartz-athletic-center"),
+              "liu-wellness": ("VEN-000611", "steinberg-wellness-center"),
+              "liu-barclays": ("VEN-000020", "barclays-center"),
+              "uab-arena-bartow": ("VEN-000527", "bartow-arena"),
+              "special-events-arena-hawaii": ("VEN-000194", "stan-sheriff-center"),
+              "sun-dome-tampa": ("VEN-000238", "yuengling-center"),
+              "wells-fargo-arena-asu": ("VEN-000056", "desert-financial-arena"),
+              "ucf-arena": ("VEN-000038", "cfe-arena"),
+              "liu-boston-garden": ("VEN-000313", "boston-garden"),
+              "wagner-spiro-sports-center": ("VEN-000914", "spiro-sports-center"),
+              "fdu-rothman-center": ("VEN-000916", "bogota-savings-bank-center"),
+              "quinnipiac-td-bank-sports-center": ("VEN-000918", "m-t-bank-arena"),
+              "robert-morris-upmc-events-center": ("VEN-000907", "upmc-events-center"),
+              "saint-francis-pa-degol-arena": ("VEN-000911", "degol-arena"),
+              "loyola-reitz-arena": ("VEN-000925", "reitz-arena-loyola-maryland"),
+              "charlotte-coliseum-original": ("VEN-000040", "charlotte-coliseum-1955"),
+              "time-warner-cable-arena-charlotte": ("VEN-000190", "spectrum-center"),
+          }
+
+          def git_show(path):
+              return subprocess.check_output(["git", "show", f"{PROOF1_COMMIT}:{path}"])
+
+          prefix = ".remote-implementation-poc/inputs/liu-research-frozen.zip.b64.part"
+          paths = subprocess.check_output(
+              ["git", "ls-tree", "-r", "--name-only", PROOF1_COMMIT,
+               ".remote-implementation-poc/inputs"],
+              text=True,
+          ).splitlines()
+          parts = sorted(path for path in paths if path.startswith(prefix))
+          assert len(parts) == 9, parts
+          encoded = b"".join(git_show(path) for path in parts)
+          package = Path("/tmp/liu-research-frozen.zip")
+          package.write_bytes(base64.b64decode(encoded))
+          assert hashlib.sha256(package.read_bytes()).hexdigest() == EXPECTED_ZIP
+
+          with zipfile.ZipFile(package) as zf:
+              venues_bytes = zf.read("venues.csv")
+              conferences_bytes = zf.read("conferences.csv")
+          local_venues = list(csv.DictReader(io.StringIO(venues_bytes.decode("utf-8-sig"))))
+          local_conferences = list(csv.DictReader(io.StringIO(conferences_bytes.decode("utf-8-sig"))))
+          global_venues = list(csv.DictReader(Path("data/reference/venues.csv").open(
+              encoding="utf-8-sig", newline=""
+          )))
+          by_local = {row["venue_key"]: row for row in local_venues}
+          by_id = {row["venue_id"]: row for row in global_venues}
+
+          mappings = []
+          for local_key, (venue_id, venue_key) in sorted(venue_reuse.items()):
+              local = by_local[local_key]
+              target = by_id[venue_id]
+              assert target["venue_key"] == venue_key
+              mappings.append({
+                  "local_venue_key": local_key,
+                  "expected_local_name": local["canonical_name"],
+                  "expected_local_city": local["city"],
+                  "expected_local_state": local["state"],
+                  "global_venue_id": venue_id,
+                  "global_venue_key": venue_key,
+                  "expected_global_city": target["city"],
+                  "expected_global_state": target["state"],
+                  "resolution_basis": (
+                      "Control Center-authorized Proof 6 current-main same-physical-venue "
+                      "reconciliation; regression verification for the generic Stage 1 repair."
+                  ),
+              })
+
+          venue_spec = {
+              "schema_version": 1,
+              "school_key": "long-island-university",
+              "owner_approval_basis": (
+                  "Control Center-authorized generic Stage 1 tooling repair regression; "
+                  "LIU is a read-only discovered fixture only."
+              ),
+              "expected_research_zip_sha256": EXPECTED_ZIP,
+              "expected_venues_sha256": hashlib.sha256(venues_bytes).hexdigest(),
+              "mappings": mappings,
+          }
+          replacement = []
+          ecac_rows = 0
+          for row in local_conferences:
+              row = dict(row)
+              if row["conference_key"] == "ecac-metro-conference":
+                  row["conference_key"] = "nec"
+                  ecac_rows += 1
+              replacement.append(row)
+          assert ecac_rows > 0
+          conference_spec = {
+              "schema_version": 1,
+              "school_key": "long-island-university",
+              "owner_approval_basis": (
+                  "Control Center-authorized Proof 6 reconciliation: map Research-local "
+                  "ECAC Metro identity to protected-main nec while preserving historical naming/evidence."
+              ),
+              "expected_conferences_sha256": hashlib.sha256(conferences_bytes).hexdigest(),
+              "replacement_history": replacement,
+              "registrations": [],
+          }
+
+          def write(path, obj):
+              Path(path).write_text(
+                  json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+                  encoding="utf-8",
+              )
+
+          write("/tmp/liu-venue-reconciliation.json", venue_spec)
+          write("/tmp/liu-conference-reconciliation.json", conference_spec)
+          print("VENUE_RECONCILIATION_SHA256=" + hashlib.sha256(
+              Path("/tmp/liu-venue-reconciliation.json").read_bytes()).hexdigest())
+          print("CONFERENCE_RECONCILIATION_SHA256=" + hashlib.sha256(
+              Path("/tmp/liu-conference-reconciliation.json").read_bytes()).hexdigest())
+          PY
+
+          CANDIDATE_SHA="$(git rev-parse HEAD)"
+          git switch -c data/long-island-university-onboarding
+          git update-ref refs/remotes/origin/main "$CANDIDATE_SHA"
+
+          python tools/implementation_stage1_inventory.py             long-island-university             /tmp/liu-research-frozen.zip             --expected-sha256 c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2             --research-base 8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e             --venue-reconciliation /tmp/liu-venue-reconciliation.json             --conference-reconciliation /tmp/liu-conference-reconciliation.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path(
+              ".onboarding/long-island-university/stage1-reconciliation.json"
+          ).read_text())
+          assert report["status"] == "PASS", report["status"]
+          assert report["blocker_count"] == 0
+          assert report["maintenance_required_count"] == 0
+          assert report["ambiguous_stop_count"] == 0
+          assert report["venue"]["venue_count"] == 59
+          assert report["venue"]["classification_counts"] == {
+              "NEW_GLOBAL_IDENTITY": 20,
+              "SAFE_REPRESENTATION_REUSE": 39,
+          }, report["venue"]["classification_counts"]
+          assert report["conference"]["blocker_count"] == 0
+          assert report["program_alias"]["blocker_count"] == 0
+          print("LIU_STAGE1_STATUS=PASS")
+          print("LIU_STAGE1_BLOCKERS=0")
+          print("LIU_VENUE_COUNTS=" + json.dumps(
+              report["venue"]["classification_counts"], sort_keys=True
+          ))
+          print("LIU_CONFERENCE_COUNTS=" + json.dumps(
+              report["conference"]["classification_counts"], sort_keys=True
+          ))
+          print("LIU_PROGRAM_ALIAS_COUNTS=" + json.dumps(
+              report["program_alias"]["classification_counts"], sort_keys=True
+          ))
+          PY
