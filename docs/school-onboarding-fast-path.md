@@ -63,7 +63,7 @@ integration-freeze distinction and the current-main rebase checklist.
 
 ## Phase 0 — package checkpoint
 
-Serialized Implementation may perform this Stage 1 / Integration Freeze / stable Phase 0 boundary either in the project Codespace or through the repository-owned guarded remote runner documented in `remote-implementation-runner.md`. The remote path invokes the same permanent Stage 1 and Phase 0 commands, uses the same exact current-main rebase, and shares the project-wide one-active-Implementation invariant. It does not authorize Stage 2, owner gates, sealed apply, Preview, merge, or Production proof remotely.
+Serialized Implementation may perform this Stage 1 / Integration Freeze / stable Phase 0 boundary either in the project Codespace or through the repository-owned guarded remote runner documented in `remote-implementation-runner.md`. The remote path invokes the same permanent Stage 1 and Phase 0 commands, uses the same exact current-main rebase, and shares the project-wide one-active-Implementation invariant. After stable Phase 0, the remote runner may also execute exactly one read-only `STAGE2_CENSUS` operation that invokes unchanged `implementation_stage2.py <school>` and stops at `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint. It does not authorize Stage 2 tracked repairs, recommendation-map submission, proposal rehearsal, owner gates, sealed apply, Preview, merge, or Production proof remotely.
 
 Prefer to finish and QA the complete six-file portfolio before it mutates global
 repository data. If the portfolio was prepared outside the Codespace and transferred
