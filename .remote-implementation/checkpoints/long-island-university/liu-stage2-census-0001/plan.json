@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "long-island-university",
+  "created_at": "2026-10-23T15:51:43.815304+00:00",
+  "input_fingerprint": {
+    "sha256": "d054f7c0d4600589d2dc09186b5b12352c0df989e1f924ba309d65ef80be05df",
+    "git_head": "e037473888024efe176798566c99ca208c54f984",
+    "files": {
+      "schools/long-island-university/source-games.csv": "6cbcc0b2d11ea357a813dc3a802becce8f9e2b38ad68dab35f2dd183ec0f752c",
+      "schools/long-island-university/opponents.csv": "d606d05945f2311f803cbc849161506c5f486d595f510b38a9041bc71a531f53",
+      "schools/long-island-university/venues.csv": "2e56db1172b5381858d1a57baf9589066fbcbb2c751e4fe622c9f1b1b90690c3",
+      "schools/long-island-university/conferences.csv": "1f3ae9d4d11ead8e116c702e920c1896b398f4fce6951de23367b61b8ee66017",
+      "schools/long-island-university/notes.md": "7e8e0e5c6c8473594c3ca5cd3f540512b0c888e99dc9524fa2041c3a54d2e219",
+      "schools/long-island-university/source-notes.md": "4fbd435264319250f50823358ae69dee386799c9b33497140bf8a2b98180a4c1",
+      "data/canonical/games.csv": "769fa9d102b5d0be00e51d027155ac95b35af7429010905acaf95ae81688b84c",
+      "data/evidence/game-assertions.csv": "44e2e3c8e0796eb2dbd669df5597b0319092147284cf8ba6614c09550faf0e7a",
+      "data/reconciliation/discrepancies.csv": "bb91499ffdf4dd8e32f9a177dbcee40a4f75d2d32c9289c07a573973c99dde50",
+      "data/reference/programs.csv": "d83d29a40ae88a46e628170c68536bc32d0066b05830e94852dc4522c59394c0",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "3e35444139f7232386a82183cba895b94bcdde22adb8d1087f5d32f9af722fe4",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "4d8c561c1fb1d6464fcc4294c07fafced37bce0518af18439522c7f1de90c8e7",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "23537ef3a9d1825c38c22189d9274980f10759970b978a600948bef74d6895f8",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "2ff31bbef154741e7be730206e2c8dfdcb0a26626fbaab593b305ed9eef4e794",
+      "tools/onboarding_plan.py": "72e87798ed6d5f014b58b74b081fbb40fb4c75fa9d8460c7fa06ae42ebc0ed00",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: albany-law-school: ['Albany Law', 'Albany Law School']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: bloomfield: ['Bloomfield', 'Bloomfield College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: centenary-new-jersey: ['Centenary (NJ)', 'Centenary University (New Jersey)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: charleston-west-virginia: ['Charleston (WV)', 'University of Charleston (WV)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: city-college-of-new-york: ['CCNY', 'City College of New York']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: john-jay: ['John Jay', 'John Jay College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: medgar-evers: ['Medgar Evers', 'Medgar Evers College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: new-york-athletic-club: ['New York Ath. Club', 'New York Athletic Club']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: saint-francis-pennsylvania: ['Saint Francis (PA)', 'Saint Francis University (Pa.)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [
+      {
+        "source_game_id": "LIU-S1-01154",
+        "team_score": "81",
+        "opponent_score": "72",
+        "played_result": "L",
+        "score_implied_result": "W"
+      }
+    ],
+    "counts": {
+      "source_games": 2193,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 757,
+      "venues": 59,
+      "conference_intervals": 5,
+      "source_consistency_issues": 1
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: albany-law-school: ['Albany Law', 'Albany Law School']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: bloomfield: ['Bloomfield', 'Bloomfield College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: centenary-new-jersey: ['Centenary (NJ)', 'Centenary University (New Jersey)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: charleston-west-virginia: ['Charleston (WV)', 'University of Charleston (WV)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: city-college-of-new-york: ['CCNY', 'City College of New York']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: john-jay: ['John Jay', 'John Jay College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: medgar-evers: ['Medgar Evers', 'Medgar Evers College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: new-york-athletic-club: ['New York Ath. Club', 'New York Athletic Club']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-francis-pennsylvania: ['Saint Francis (PA)', 'Saint Francis University (Pa.)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

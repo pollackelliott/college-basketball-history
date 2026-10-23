@@ -1,0 +1,46 @@
+{
+  "blockers": [
+    "historical opponent display conflict: albany-law-school: ['Albany Law', 'Albany Law School']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: bloomfield: ['Bloomfield', 'Bloomfield College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: centenary-new-jersey: ['Centenary (NJ)', 'Centenary University (New Jersey)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: charleston-west-virginia: ['Charleston (WV)', 'University of Charleston (WV)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: city-college-of-new-york: ['CCNY', 'City College of New York']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: john-jay: ['John Jay', 'John Jay College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: medgar-evers: ['Medgar Evers', 'Medgar Evers College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: new-york-athletic-club: ['New York Ath. Club', 'New York Athletic Club']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-francis-pennsylvania: ['Saint Francis (PA)', 'Saint Francis University (Pa.)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/long-island-university-e03747388802",
+  "capability_census": {
+    "path": ".onboarding/long-island-university/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "e037473888024efe176798566c99ca208c54f984",
+  "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "integration_semantic_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "preflight": {
+    "blocker_count": 9,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/long-island-university/plan.json",
+    "review_path": ".onboarding/long-island-university/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
