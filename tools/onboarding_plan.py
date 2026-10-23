@@ -3592,6 +3592,8 @@ def approve_plan(
     plan_path: Path,
     review_path: Path,
     approved_by: str,
+    *,
+    approved_at: str | None = None,
 ) -> tuple[dict[str, Any], str]:
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     if plan.get("blockers"):
@@ -4059,7 +4061,11 @@ def approve_plan(
     )
     approved["approval"] = {
         "approved_by": approved_by,
-        "approved_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "approved_at": (
+            approved_at
+            if approved_at is not None
+            else dt.datetime.now(dt.timezone.utc).isoformat()
+        ),
     }
     approved_hash = sha256_text(canonical_json(approved))
     approved["approved_plan_hash"] = approved_hash
