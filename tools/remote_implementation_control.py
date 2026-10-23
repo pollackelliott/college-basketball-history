@@ -23,8 +23,8 @@ REQUEST_SCHEMA_VERSION = 1
 
 OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
-OP_RECOVER_PHASE0 = "RECOVER_PHASE0"
-SUPPORTED_OPERATIONS = {OP_STAGE1, OP_PHASE0, OP_RECOVER_PHASE0}
+OP_RECOVER = "RECOVER"
+SUPPORTED_OPERATIONS = {OP_STAGE1, OP_PHASE0, OP_RECOVER}
 
 LIFECYCLE_IDLE = "IDLE"
 LIFECYCLE_READ_ONLY = "READ_ONLY_ACTIVE"
@@ -258,7 +258,7 @@ def validate_request(request: dict[str, Any]) -> None:
         for key in ("start_season", "basis", "intervals", "notes"):
             _require(bool(str(scope.get(key) or "").strip()), f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING")
 
-    if operation == OP_RECOVER_PHASE0:
+    if operation == OP_RECOVER:
         _require(authority.get("recovery") is True, "RECOVERY_REQUEST_AUTHORITY_REQUIRED")
         recovery = request.get("recovery")
         _require(isinstance(recovery, dict), "RECOVERY_REQUEST_DETAILS_MISSING")
@@ -296,7 +296,7 @@ def verify_request_predecessor(
     )
     request_id = request["request_id"]
     _require(not request_used(state, request_id), "REQUEST_REPLAY_REFUSED")
-    if request["operation"] == OP_RECOVER_PHASE0 and allow_active_recovery:
+    if request["operation"] == OP_RECOVER and allow_active_recovery:
         _require(state.get("lifecycle_state") == LIFECYCLE_ACTIVE, "STALE_RECOVERY_NO_ACTIVE_LOCK")
         recovery = request["recovery"]
         _require(
@@ -417,7 +417,7 @@ def abandon_active(
         result["consumed_request_ids"].append(recovery_request_id)
     result["current_sequence"] = int(result.get("current_sequence", 0)) + 1
     result["last_operation"] = {
-        "operation": OP_RECOVER_PHASE0,
+        "operation": OP_RECOVER,
         "recovered_request_id": active,
         "disposition": disposition,
         "recovery_manifest": recovery_manifest,
