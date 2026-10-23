@@ -266,9 +266,15 @@ def validate_request(request: dict[str, Any]) -> None:
             bool(REQUEST_ID_RE.fullmatch(str(recovery.get("abandoned_request_id") or ""))),
             "RECOVERY_REQUEST_ABANDONED_ID_INVALID",
         )
-        _require_sha(recovery.get("lock_commit"), 40, "RECOVERY_REQUEST_LOCK_COMMIT_INVALID")
-        target = str(recovery.get("target_branch") or "")
-        _require(target == f"data/{school_key}-onboarding", "RECOVERY_TARGET_BRANCH_INVALID")
+        lock_commit = recovery.get("lock_commit")
+        if lock_commit is not None:
+            _require_sha(lock_commit, 40, "RECOVERY_REQUEST_LOCK_COMMIT_INVALID")
+        target = recovery.get("target_branch")
+        if target is not None:
+            _require(
+                str(target) == f"data/{school_key}-onboarding",
+                "RECOVERY_TARGET_BRANCH_INVALID",
+            )
 
 
 def verify_request_predecessor(
@@ -304,9 +310,21 @@ def verify_request_predecessor(
             "STALE_RECOVERY_REQUEST_MISMATCH",
         )
         _require(
-            state.get("active_lock_commit") == recovery["lock_commit"],
+            state.get("active_lock_commit") == recovery.get("lock_commit"),
             "STALE_RECOVERY_LOCK_MISMATCH",
         )
+        if state.get("active_operation") == OP_PHASE0:
+            _require(
+                recovery.get("target_branch")
+                == f"data/{state.get('active_school_key')}-onboarding",
+                "STALE_RECOVERY_TARGET_MISMATCH",
+            )
+        elif state.get("active_operation") == OP_STAGE1:
+            _require(
+                recovery.get("target_branch") is None
+                and recovery.get("lock_commit") is None,
+                "STALE_STAGE1_RECOVERY_BOUNDARY_MISMATCH",
+            )
         _require(state.get("recovery_required") is True, "STALE_RECOVERY_NOT_REQUIRED")
     else:
         _require(state.get("lifecycle_state") == LIFECYCLE_IDLE, "GLOBAL_IMPLEMENTATION_LOCK_OCCUPIED")
