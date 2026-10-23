@@ -1,8 +1,8 @@
 # Guarded Remote Implementation Runner
 
 - **Status:** Controlling execution-environment policy for serialized Implementation through stable Phase 0
-- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, and stable Phase 0
-- **Does not apply to:** Stage 2, Owner Gate 1, sealed apply, Preview, Owner Gate 2, merge, or Production proof
+- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, and the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint
+- **Does not apply to:** Stage 2 tracked repairs, recommendation-map submission, proposal rehearsal, `OWNER_GATE_1_READY`, Owner Gate 1, sealed apply, Preview, Owner Gate 2, merge, or Production proof
 
 ## 1. Execution environments
 
@@ -18,6 +18,7 @@ For the currently productionized remote lifecycle, the permanent commands remain
 ```bash
 python tools/implementation_stage1_inventory.py ...
 python tools/stage_research_portfolio.py ... --apply --commit
+python tools/implementation_stage2.py <school>
 ```
 
 The remote runner must not reimplement their basketball, venue, opponent, conference, scope, reconciliation, or validation logic.
@@ -28,8 +29,9 @@ Tracked repository capability:
 
 - `tools/remote_implementation_control.py` — request/state validation, replay refusal, mutation classification, sidecar hashing, and Git-ref CAS primitives.
 - `tools/remote_implementation_io.py` — hash-bound checkpoint transport, isolated worktrees, permanent-command invocation, and control-branch CAS helpers.
-- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, and explicit recovery.
-- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of a completed Phase 0.
+- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, and explicit recovery.
+- `tools/remote_implementation_stage2_census.py` — exact Phase 0 authority restoration, read-only Stage 2 coordinator invocation, artifact hashing, and tracked-mutation proof shared by the runner and verifier.
+- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of a completed Phase 0 or Stage 2 census checkpoint.
 - `.github/workflows/remote-implementation.yml` — push-driven repository Action for the permanent control branch.
 - `config/remote-implementation-control-state.initial.json` — canonical initial IDLE state for creating the operational control branch.
 
@@ -83,6 +85,7 @@ Supported operations are:
 
 - `STAGE1_INVENTORY`
 - `PHASE0`
+- `STAGE2_CENSUS`
 - `RECOVER`
 
 No request in this lifecycle may carry Owner Gate 1, Owner Gate 2, or release authority.
@@ -156,7 +159,40 @@ Normal Phase 0 refuses a pre-existing target branch. It never silently overwrite
 
 The permanent Phase 0 command owns the commit/tree. Remote orchestration does not incrementally edit the target branch through GitHub file APIs.
 
-## 8. Write-ahead and objective mutation state
+## 8. Stage 2 capability census request
+
+`STAGE2_CENSUS` is read-only with respect to tracked basketball state and stops at the permanent coordinator's first discovery boundary.
+
+The request binds the exact current protected-main SHA, exact existing onboarding branch and SHA, exact Phase 0 successor manifest path/hash, exact Integration Freeze SHA-256, and exact source-game semantic snapshot SHA-256. A changed or missing onboarding head is a STOP.
+
+The runner authenticates the Phase 0 successor and write-ahead authority already preserved on the control branch, restores only the exact ignored `.onboarding/<school>/integration-freeze.json` required by the permanent Stage 2 coordinator, and verifies the frozen six-file package hashes against the request-bound onboarding commit. It does not regenerate Integration Freeze and does not copy arbitrary historical `.onboarding` state.
+
+It then invokes unchanged:
+
+```bash
+python tools/implementation_stage2.py <school>
+```
+
+inside an isolated worktree at the exact onboarding SHA. Before and after execution it records HEAD/tree and a complete non-ignored worktree status. Success requires:
+
+```text
+TRACKED_STAGE2_MUTATION = NONE
+```
+
+The runner persists only the defined discovery artifacts emitted by that invocation when present: `implementation-stage2-status.json`, `implementation-stage2-capability-census.json`, `plan.json`, `review.csv`, and `review.md`. The checkpoint records exact and runner-path-normalized SHA-256 values, permanent-command exit code, Stage 2 status, preflight counts, decision-universe SHA, capability-census status/topology, exact onboarding tree, Phase 0 authority hashes, and the tracked-mutation proof.
+
+A normal result is either:
+
+- `CAPABILITY_CENSUS_READY`; or
+- an honest permanent-tool `BLOCKED` checkpoint.
+
+A permanent Stage 2 blocker is durable discovery evidence, not a remote-execution failure. An accepted request that fails before a durable checkpoint remains non-replayable and requires explicit `RECOVER`, using the same read-only recovery boundary as Stage 1.
+
+Fresh verification reconstructs the same onboarding SHA and exact Integration Freeze, reruns unchanged `implementation_stage2.py <school>`, requires the same decision-universe SHA and capability-census semantics, and again proves no tracked mutation. Exact artifact bytes must match when deterministic; the only permitted normalized equivalence is replacement of the fresh runner's absolute repository path with the explicit `<REPO>` token.
+
+This remote capability does **not** authorize tracked Stage 2 repairs, recommendation-map submission, `--map`, proposal rehearsal, `OWNER_GATE_1_READY`, owner approval, sealing/apply, Preview, or release.
+
+## 9. Write-ahead and objective mutation state
 
 Before target publication, the control branch must durably preserve a write-ahead manifest containing at minimum:
 
@@ -184,7 +220,7 @@ Recovery classifies durable state objectively as:
 
 An Action conclusion alone is never mutation authority.
 
-## 9. Publication and fresh verification
+## 10. Publication and fresh verification
 
 Tracked mutation publication is one exact Git ref update using expected-head/create-once CAS.
 
@@ -206,7 +242,7 @@ Only then may the durable verification record say:
 REMOTE PHASE 0 EQUIVALENCE: PASS
 ```
 
-## 10. Recovery
+## 11. Recovery
 
 There is no automatic retry of an accepted request.
 
@@ -219,7 +255,7 @@ A recovery request must bind the exact active request and exact lock commit. It 
 
 Another school may not enter while the global control is not IDLE.
 
-## 11. Permissions and protected main
+## 12. Permissions and protected main
 
 The permanent workflow receives only repository `contents: write` permission because it must:
 
@@ -230,9 +266,9 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Stage 2, owner gates, sealed apply, Preview, merge, and Production proof remain outside the remote capability until separately productionized and tested.
+Only the read-only Stage 2 capability census is remote-enabled. Stage 2 tracked repairs, recommendation-map submission/proposal rehearsal, owner gates, sealed apply, Preview, merge, and Production proof remain outside the remote capability until separately productionized and tested.
 
-## 12. Mobile / ChatGPT operation
+## 13. Mobile / ChatGPT operation
 
 The normal remote interaction is:
 
@@ -249,7 +285,7 @@ owner in ChatGPT
 
 Routine owner desktop, Codespaces, or GitHub UI interaction is not required for the supported lifecycle.
 
-## 13. Experimental provenance
+## 14. Experimental provenance
 
 The accepted architecture experiments remain historical audit evidence on the existing `experiment/remote-implementation-proof*` branches.
 
