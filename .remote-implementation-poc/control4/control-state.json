@@ -1,20 +1,23 @@
 {
-  "abandoned_request_ids": [],
+  "abandoned_request_ids": [
+    "proof4-failure-0001"
+  ],
   "accepted_request_ids": [
     "proof4-failure-0001"
   ],
-  "active_fixture_id": "remote-proof-school-a",
-  "active_lock_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
-  "active_lock_owner": "github-actions:39884417122:1",
-  "active_operation": "TEST_DURABLE_LOCK_FAILURE",
-  "active_request_id": "proof4-failure-0001",
-  "active_request_sha256": "1fe4284c41812bdef5ad6c3f19b6c70f7adea2109897ac567b938d9ab0b2a3b3",
+  "active_fixture_id": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
+  "active_request_id": null,
+  "active_request_sha256": null,
   "authority_statement": "Experimental project-wide remote Implementation control only. No basketball mutation, Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
   "consumed_request_ids": [
-    "proof3-control-0001"
+    "proof3-control-0001",
+    "proof4-recovery-0001"
   ],
-  "current_sequence": 1,
-  "durable_active_state_commit": "e550db01db91164d61c93f93c12ed5e3aea22305",
+  "current_sequence": 2,
+  "durable_active_state_commit": null,
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_GLOBAL_CONTROL",
   "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE",
@@ -22,13 +25,17 @@
   "inherited_proof3_control_state_sha256": "d919ad082a12d94abc8b47471567e0feaed51f4dad3d3d07e524b4a71382f1c2",
   "integration_frozen": false,
   "last_admission_test": null,
-  "last_recovery": null,
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": 1,
-  "lock_acquired_run_id": 39884417122,
-  "lock_acquisition_request_commit": "40c3c8491655cb966c6c81a53f3c8ddcc49a2893",
+  "last_recovery": {
+    "abandoned_request_id": "proof4-failure-0001",
+    "disposition": "ABANDONED_NO_MUTATION",
+    "original_failed_action_run_attempt": 1,
+    "original_failed_action_run_id": 39884417122,
+    "recovered_from_lock_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
+    "recovery_request_id": "proof4-recovery-0001"
+  },
+  "lifecycle_state": "IDLE",
   "normal_successor_emitted": false,
   "phase0_authorized": false,
-  "recovery_required": true,
+  "recovery_required": false,
   "schema_version": 1
 }
