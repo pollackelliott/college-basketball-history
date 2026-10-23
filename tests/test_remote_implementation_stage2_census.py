@@ -195,9 +195,43 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
     def test_path_normalization_is_explicit_and_bounded(self):
         repo = Path("/tmp/runner-one")
         raw = b'{"repo":"/tmp/runner-one","other":"/tmp/not-runner"}\n'
-        normalized = normalize_artifact_bytes(raw, repo)
+        normalized = normalize_artifact_bytes("implementation-stage2-status.json", raw, repo)
         self.assertIn(b"<REPO>", normalized)
         self.assertIn(b"/tmp/not-runner", normalized)
+
+    def test_generated_timestamp_normalization_is_explicit(self):
+        repo = Path("/tmp/runner-one")
+        plan_one = (
+            json.dumps(
+                {
+                    "created_at": "2026-10-23T00:00:00+00:00",
+                    "value": "same",
+                },
+                indent=2,
+            )
+            + "\n"
+        ).encode()
+        plan_two = (
+            json.dumps(
+                {
+                    "created_at": "2026-10-23T00:01:00+00:00",
+                    "value": "same",
+                },
+                indent=2,
+            )
+            + "\n"
+        ).encode()
+        self.assertEqual(
+            normalize_artifact_bytes("plan.json", plan_one, repo),
+            normalize_artifact_bytes("plan.json", plan_two, repo),
+        )
+        review_one = b"# Review\n\nGenerated: one\nStable\n"
+        review_two = b"# Review\n\nGenerated: two\nStable\n"
+        self.assertEqual(
+            normalize_artifact_bytes("review.md", review_one, repo),
+            normalize_artifact_bytes("review.md", review_two, repo),
+        )
+
 
     def make_authority_repo(self):
         repo = Path(tempfile.mkdtemp(prefix="stage2-authority-test-"))
