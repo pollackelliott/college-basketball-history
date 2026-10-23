@@ -27,7 +27,7 @@ BRANCH = "data/example-school-onboarding"
 TARGET = "a" * 40
 TREE = "b" * 40
 MAIN = "c" * 40
-DECISION_SHA = "d" * 64
+DECISION_SHA = proposal._decision_universe_sha256([{"decision_id": "SYNTHETIC-1"}])
 SEMANTIC_SHA = "e" * 64
 
 
