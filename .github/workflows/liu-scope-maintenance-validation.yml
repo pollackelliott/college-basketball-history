@@ -26,9 +26,9 @@ jobs:
           p=Path("data/reference/program-top-level-scope.csv")
           rows=list(csv.DictReader(p.open(encoding="utf-8-sig", newline="")))
           assert len(rows)==365, len(rows)
-          names=[r["program_name"] for r in rows]
+          names=[r["school"] for r in rows]
           assert len(names)==len(set(names))
-          liu=[r for r in rows if r["program_name"]=="Long Island University"]
+          liu=[r for r in rows if r["school"]=="Long Island University"]
           assert len(liu)==1, liu
           assert liu[0]["top_level_scope"]=="1928-29..1950-51|1968-69+", liu[0]
           print("LIU_SCOPE_REFERENCE: PASS")
