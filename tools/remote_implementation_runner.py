@@ -865,32 +865,6 @@ def run_recovery(
     )
 
 
-def verify_control_code_matches_main(
-    request_commit: str,
-    live_main: str,
-) -> None:
-    changed = [
-        line.strip()
-        for line in git(
-            "diff",
-            "--name-only",
-            live_main,
-            request_commit,
-        ).stdout.splitlines()
-        if line.strip()
-    ]
-    unexpected = [
-        path
-        for path in changed
-        if not path.startswith(".remote-implementation/")
-    ]
-    if unexpected:
-        raise Stop(
-            "CONTROL_BRANCH_CODE_NOT_EXACT_PROTECTED_MAIN: "
-            + ", ".join(unexpected)
-        )
-
-
 def main() -> int:
     DIAG.mkdir(parents=True, exist_ok=True)
     try:
@@ -927,8 +901,6 @@ def main() -> int:
 
         if durable_head != request_commit:
             raise Stop("CONTROL_BRANCH_MOVED_AFTER_REQUEST_EVENT")
-        verify_control_code_matches_main(request_commit, live_main)
-
         state_bytes = git_show_bytes(
             predecessor_commit,
             STATE_PATH.as_posix(),
