@@ -1,0 +1,35 @@
+{
+  "authority": {
+    "basketball_mutation_authorized": false,
+    "experimental_control_only": true,
+    "integration_freeze_authorized": false,
+    "phase0_authorized": false
+  },
+  "boundary": "A",
+  "commit_message": "Proof 5 Boundary A should never prepare",
+  "commit_metadata": {
+    "author_email": "proof5@example.invalid",
+    "author_name": "Proof 5 Bot",
+    "committer_email": "proof5@example.invalid",
+    "committer_name": "Proof 5 Bot",
+    "timestamp": "2001-01-01T00:00:00+0000"
+  },
+  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_REQUEST",
+  "fixture_id": "remote-proof5-fixture",
+  "operation": "FAIL_BOUNDARY_A",
+  "previous_control_state_commit": "4e1aefe2bfe78b9564dc7fdf716782e709e36e0a",
+  "previous_control_state_sha256": "e3f42a891460fa57e162e007bc08ed80817c9b7e000559f7f83633bafd118f76",
+  "request_id": "proof5-boundary-a-0001",
+  "schema_version": 1,
+  "sidecar_payload": {
+    "boundary": "A",
+    "note": "must never be prepared"
+  },
+  "target_payload": {
+    "boundary": "A",
+    "note": "must never be prepared",
+    "proof": 5
+  }
+}
