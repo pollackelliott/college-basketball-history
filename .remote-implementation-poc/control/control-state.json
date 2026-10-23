@@ -1,6 +1,6 @@
 {
-  "active_lock_owner": null,
-  "active_request_id": null,
+  "active_lock_owner": "github-actions:39883432937:1",
+  "active_request_id": "proof3-control-0001",
   "authority_statement": "Experimental remote Implementation control state only. Does not authorize LIU Integration Freeze, Phase 0, Stage 2, Gate 1, release, or any basketball-data mutation.",
   "consumed_request_ids": [],
   "current_sequence": 0,
@@ -10,7 +10,9 @@
   "last_accepted_checkpoint_commit": "32f11c925f0b17b1840a58f06ec848b20a20cdd7",
   "last_accepted_checkpoint_manifest_sha256": "c4800d2a3b64f36b46d63ea721dc360c6cb48a48786fa6f736b573037110bf1c",
   "last_successful_successor": null,
-  "lifecycle_state": "IDLE",
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_id": 39883432937,
+  "lock_acquired_trigger_commit": "67f3ad1ad02272f5bdf4e0e76159fdf3927664b8",
   "phase0_authorized": false,
   "schema_version": 1,
   "school_key": "long-island-university"
