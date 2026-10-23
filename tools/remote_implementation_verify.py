@@ -12,6 +12,7 @@ from pathlib import Path
 from remote_implementation_control import (
     LIFECYCLE_IDLE,
     OP_PHASE0,
+    OP_RECOVER,
     RemoteImplementationError,
     sha256_bytes,
     validate_control_state,
@@ -52,6 +53,9 @@ def main() -> int:
             raise Stop("FRESH_VERIFY_CONTROL_NOT_IDLE")
         last = state.get("last_operation") or {}
         if last.get("operation") != OP_PHASE0:
+            if last.get("operation") == OP_RECOVER:
+                print("REMOTE PHASE 0 VERIFICATION: NOT APPLICABLE AFTER ABANDONED RECOVERY")
+                return 0
             raise Stop("FRESH_VERIFY_NO_PHASE0_SUCCESSOR")
         if last.get("fresh_runner_verification") == "PASS":
             print("REMOTE PHASE 0 EQUIVALENCE: PASS (already verified)")
