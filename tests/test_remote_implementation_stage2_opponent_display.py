@@ -358,7 +358,7 @@ write(src,fields,rows)
         ).encode()
         with self.assertRaisesRegex(
             RemoteImplementationError,
-            "OPPONENT_KEY_CHANGED|KEY_POPULATION_MISMATCH",
+            "OPPONENT_FIELD_CHANGED|OPPONENT_KEY_CHANGED|KEY_POPULATION_MISMATCH",
         ):
             field_level_mutation_proof(
                 school_key=SCHOOL,
