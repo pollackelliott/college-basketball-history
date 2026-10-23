@@ -1,40 +1,21 @@
 {
+  "active_lock_commit": "03ce26d4fb6c9e8a9453d4544a22d41b594da320",
   "authority": {
     "basketball_mutation_authorized": false,
     "experimental_control_only": true,
     "integration_freeze_authorized": false,
     "phase0_authorized": false
   },
-  "boundary": "C",
-  "commit_message": "Proof 5 synthetic published mutation C",
-  "commit_metadata": {
-    "author_email": "proof5@example.invalid",
-    "author_name": "Proof 5 Bot",
-    "committer_email": "proof5@example.invalid",
-    "committer_name": "Proof 5 Bot",
-    "timestamp": "2001-01-03T00:00:00+0000"
-  },
+  "expected_classification": "PUBLISHED_NOT_FINALIZED",
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
-  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_REQUEST",
+  "failed_action_run_attempt": 1,
+  "failed_action_run_id": 39887323505,
   "fixture_id": "remote-proof5-fixture",
-  "operation": "FAIL_BOUNDARY_C",
-  "previous_control_state_commit": "e2c55a7b23963e1aef82f9280b85336e5611be73",
-  "previous_control_state_sha256": "8e23a540cacca139b5bb5617dc1c4e73e5687fee2eb43d5b61a1b5f62001e535",
-  "request_id": "proof5-boundary-c-0001",
-  "schema_version": 1,
-  "sidecar_payload": {
-    "authority_kind": "synthetic-integration-authority",
-    "fixture_id": "remote-proof5-fixture",
-    "generation": 2,
-    "integration_frozen": false,
-    "phase0_authorized": false,
-    "request_id": "proof5-boundary-c-0001"
-  },
-  "target_payload": {
-    "generation": 2,
-    "proof": 5,
-    "request_id": "proof5-boundary-c-0001",
-    "state": "PUBLISH_EXACTLY_ONCE_THEN_FAIL"
-  }
+  "operation": "RECOVER_MUTATION_TRANSACTION",
+  "original_request_id": "proof5-boundary-c-0001",
+  "previous_control_state_commit": "7ddc4030e260072109a9e934f67ec819213ca1a9",
+  "previous_control_state_sha256": "1cdbc38f7e8fa561683ae8393e2931ad54d0d69fe8aa7553ce5269fc7b47b8ef",
+  "request_id": "proof5-recovery-c-0001",
+  "schema_version": 1
 }
