@@ -1,6 +1,4 @@
 {
-  "abandoned_request_id": "proof4-failure-0001",
-  "active_lock_commit": "9f9fc5b0c39cc69103817ae30ecfac20f702ab60",
   "authority": {
     "basketball_mutation_authorized": false,
     "experimental_control_only": true,
@@ -9,20 +7,17 @@
   },
   "creation_provenance": {
     "architecture_lane": "ChatGPT remote Implementation architecture experiment",
-    "owner_authorization": "Proof 4 stale-recovery negative test"
+    "owner_authorization": "Proof 4 post-recovery admission test",
+    "owner_desktop_interaction_required": false,
+    "owner_github_ui_interaction_required": false
   },
-  "durable_active_state_commit": "e550db01db91164d61c93f93c12ed5e3aea22305",
-  "durable_active_state_sha256": "60e414c4f1315d847ecca1bb003e58cda13fe099db507ba4c3cc64014493f5b6",
-  "expected_outcome": "RECOVERY_PREDECESSOR_STALE",
+  "expected_outcome": "GLOBAL_LOCK_ADMISSION_AVAILABLE",
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_REQUEST",
-  "failed_action_rerun_attempt": 2,
-  "failed_action_run_attempt": 1,
-  "failed_action_run_id": 39884417122,
-  "fixture_id": "remote-proof-school-a",
-  "operation": "RECOVER_ABANDONED_EXPERIMENT_LOCK",
-  "previous_control_state_commit": "8e08e29134733b43cde9a99436e48f2565f22259",
+  "fixture_id": "remote-proof-school-b",
+  "operation": "TEST_GLOBAL_LOCK_ADMISSION",
+  "previous_control_state_commit": "46cf2b3ebc6c159837acbdfd97d5e13cde29895c",
   "previous_control_state_sha256": "8f9a4ab9f6b2644eea0f1a991b456233ab8d35514df10987e6ed5dfbd3e8cdc0",
-  "request_id": "proof4-recovery-stale-0002",
+  "request_id": "proof4-postrecovery-b-0001",
   "schema_version": 1
 }
