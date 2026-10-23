@@ -303,7 +303,10 @@ def verify_request_predecessor(
     request_id = request["request_id"]
     _require(not request_used(state, request_id), "REQUEST_REPLAY_REFUSED")
     if request["operation"] == OP_RECOVER and allow_active_recovery:
-        _require(state.get("lifecycle_state") == LIFECYCLE_ACTIVE, "STALE_RECOVERY_NO_ACTIVE_LOCK")
+        _require(
+            state.get("lifecycle_state") in {LIFECYCLE_ACTIVE, LIFECYCLE_READ_ONLY},
+            "STALE_RECOVERY_NO_ACTIVE_REQUEST",
+        )
         recovery = request["recovery"]
         _require(
             state.get("active_request_id") == recovery["abandoned_request_id"],
