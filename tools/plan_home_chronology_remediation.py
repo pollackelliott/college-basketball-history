@@ -36,6 +36,7 @@ from typing import Any
 PLAN_VERSION = 1
 HOME_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 SEASON_RE = re.compile(r"^(\d{4})-(\d{4})$")
+COMPACT_SEASON_RE = re.compile(r"^(\d{4})-(\d{2})$")
 YEAR_MONTH_RE = re.compile(r"^(\d{4})-(\d{2})$")
 NAMED_MONTH_YEAR_RE = re.compile(r"^([A-Za-z]+)\s+(\d{4})$")
 SEASON_SUFFIX_RE = re.compile(r"^(\d{4}-\d{4})\s+season$", re.IGNORECASE)
@@ -141,6 +142,14 @@ def parse_boundary(value: str, *, end: bool) -> date | None:
         if second != first + 1:
             raise HomeChronologyPlanError(f"invalid basketball season boundary {value!r}")
         return date(second, 6, 30) if end else date(first, 7, 1)
+
+    compact = COMPACT_SEASON_RE.fullmatch(value)
+    if compact:
+        first = int(compact.group(1))
+        suffix = int(compact.group(2))
+        if suffix == (first + 1) % 100:
+            second = first + 1
+            return date(second, 6, 30) if end else date(first, 7, 1)
 
     if len(value) == 4 and value.isdigit():
         year = int(value)
