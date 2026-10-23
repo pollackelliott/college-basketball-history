@@ -1,0 +1,52 @@
+{
+  "authority_statement": "Experimental remote-execution checkpoint only. This checkpoint is not INTEGRATION_FROZEN and does not authorize Phase 0, shared/global mutation, or a real onboarding branch.",
+  "checkpoint_kind": "IMPLEMENTATION_STAGE1_RECONCILIATION",
+  "checkpoint_state": "EXPERIMENTAL_REMOTE_EXECUTION_CHECKPOINT",
+  "creation_provenance": {
+    "github_repository": "pollackelliott/college-basketball-history",
+    "proof2_branch": "experiment/remote-implementation-proof2",
+    "proof2_run_attempt": 1,
+    "proof2_run_id": 39882321919,
+    "proof2_trigger_commit_sha": "68702ed5a166260d0f9c7784e11c1c655fbf4fbd",
+    "source_retrieval": "Proof 1 GitHub Actions artifact API; archive and contained Stage 1 JSON independently hash-verified before checkpoint commit.",
+    "workflow_path": ".github/workflows/implementation-stage1-remote-proof2.yml"
+  },
+  "integration_frozen": false,
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "source_provenance": {
+    "proof1_artifact_archive_digest": "sha256:2bab786e33e09c79a80f1434a30527eb4e066f6cbd7a2e7d06363a9452a8547b",
+    "proof1_artifact_id": 12469979104,
+    "proof1_artifact_name": "remote-implementation-proof1-39880637424",
+    "proof1_experiment_commit_sha": "c34ba9de312a97d03d910be40e8091c576080cfa",
+    "proof1_run_id": 39880637424,
+    "protected_main_sha_tested": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+    "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+    "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+    "stage1_reconciliation_sha256": "495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+  },
+  "stage1_summary": {
+    "ambiguous_stop_count": 18,
+    "blocker_count": 18,
+    "conference_classification_counts": {
+      "REUSE_CURRENT_IDENTITY": 3,
+      "STOP_AMBIGUOUS": 1
+    },
+    "integration_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+    "maintenance_required_count": 0,
+    "origin_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+    "program_alias_blocker_count": 0,
+    "program_alias_classification_counts": {
+      "NO_CURRENT_VERIFIED_ALIAS": 229
+    },
+    "research_zip_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+    "status": "BLOCKED",
+    "venue_classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 20,
+      "SAFE_REPRESENTATION_REUSE": 22,
+      "STOP_AMBIGUOUS": 17
+    },
+    "venue_row_count": null
+  },
+  "workflow_kind": "REMOTE_IMPLEMENTATION_DURABLE_CHECKPOINT"
+}
