@@ -21,6 +21,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_PHASE0,
     OP_RECOVER,
     OP_STAGE1,
+    OP_STAGE2_CENSUS,
     REQUEST_KIND,
     RemoteImplementationError,
     abandon_active,
@@ -67,6 +68,7 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "owner_gate_2": False,
             "release": False,
             "phase0": operation == OP_PHASE0,
+            "stage2_census": operation == OP_STAGE2_CENSUS,
             "recovery": operation == OP_RECOVER,
         },
     }
@@ -83,6 +85,15 @@ def request(operation=OP_STAGE1, request_id="request-001"):
         }
         base["venue_reconciliation"] = None
         base["conference_reconciliation"] = None
+    if operation == OP_STAGE2_CENSUS:
+        base["target_branch"] = "data/example-school-onboarding"
+        base["target_sha"] = "6" * 40
+        base["phase0_successor"] = {
+            "path": ".remote-implementation/successors/example-school/phase0/successor-manifest.json",
+            "sha256": "7" * 64,
+        }
+        base["integration_freeze_sha256"] = "8" * 64
+        base["semantic_snapshot_sha256"] = "9" * 64
     if operation == OP_PHASE0:
         base["target_branch"] = "data/example-school-onboarding"
         base["stage1_checkpoint"] = {
@@ -122,6 +133,44 @@ class RemoteImplementationControlTests(unittest.TestCase):
 
     def test_valid_bounded_phase0_request(self):
         validate_request(request(OP_PHASE0))
+
+    def test_valid_bounded_stage2_census_request(self):
+        validate_request(request(OP_STAGE2_CENSUS))
+
+    def test_stage2_census_requires_exact_target_branch(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["target_branch"] = "data/other-school-onboarding"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_CENSUS_TARGET_BRANCH_INVALID",
+        ):
+            validate_request(req)
+
+    def test_stage2_census_requires_target_sha(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["target_sha"] = "not-a-sha"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_CENSUS_TARGET_SHA_INVALID",
+        ):
+            validate_request(req)
+
+    def test_stage2_census_is_read_only_serialized(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_STAGE2_CENSUS, "stage2-census-001"),
+            "7" * 64,
+            run_id="202",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        self.assertEqual(state["lifecycle_state"], "READ_ONLY_ACTIVE")
+        self.assertEqual(
+            state["transaction_state"],
+            "STAGE2_CENSUS_RUNNING",
+        )
+        self.assertIsNone(state["active_lock_commit"])
+        self.assertTrue(state["recovery_required"])
 
     def test_stale_predecessor_refused(self):
         state, data = self.state_and_bytes()
