@@ -276,6 +276,18 @@ class HomeChronologyPlannerTests(unittest.TestCase):
         self.assertIsNone(parse_boundary("program beginning", end=False))
         self.assertIsNone(parse_boundary("present", end=True))
 
+    def test_compact_basketball_seasons_preserve_season_semantics(self):
+        pairs = [
+            ("1931-32", date(1931, 7, 1), date(1932, 6, 30)),
+            ("2011-12", date(2011, 7, 1), date(2012, 6, 30)),
+        ]
+        for text, expected_start, expected_end in pairs:
+            with self.subTest(boundary=text):
+                self.assertEqual(parse_boundary(text, end=False), expected_start)
+                self.assertEqual(parse_boundary(text, end=True), expected_end)
+        self.assertEqual(parse_boundary("2011-06", end=False), date(2011, 6, 1))
+        self.assertEqual(parse_boundary("2011-06", end=True), date(2011, 6, 30))
+
     def test_unbounded_markers_do_not_reverse_meaning(self):
         with self.assertRaises(HomeChronologyPlanError):
             parse_boundary("program beginning", end=True)

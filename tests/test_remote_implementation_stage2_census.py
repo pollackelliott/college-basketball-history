@@ -13,6 +13,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from remote_implementation_control import RemoteImplementationError, sha256_bytes  # noqa: E402
+import remote_implementation_stage2_census as stage2_runtime  # noqa: E402
 from remote_implementation_stage2_census import (  # noqa: E402
     STAGE2_ARTIFACT_NAMES,
     add_existing_onboarding_worktree,
@@ -44,6 +45,11 @@ class RemoteStage2CensusTests(unittest.TestCase):
     def make_tool_repo(self, mode: str = "ready") -> Path:
         repo = Path(tempfile.mkdtemp(prefix="stage2-census-test-"))
         self.addCleanup(lambda: shutil.rmtree(repo, ignore_errors=True))
+        previous_runtime_root = stage2_runtime.RUNTIME_ROOT
+        stage2_runtime.RUNTIME_ROOT = repo
+        self.addCleanup(
+            lambda: setattr(stage2_runtime, "RUNTIME_ROOT", previous_runtime_root)
+        )
         self.git(repo, "init")
         self.git(repo, "config", "user.name", "Test")
         self.git(repo, "config", "user.email", "test@example.com")
@@ -132,6 +138,31 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self.git(repo, "commit", "-m", "fixture")
         return repo
 
+    def test_runtime_tool_is_separate_from_target_snapshot(self):
+        repo = self.make_tool_repo("ready")
+        runtime = Path(tempfile.mkdtemp(prefix="stage2-runtime-tool-"))
+        self.addCleanup(lambda: shutil.rmtree(runtime, ignore_errors=True))
+        (runtime / "tools").mkdir(parents=True)
+        shutil.copyfile(
+            repo / "tools/implementation_stage2.py",
+            runtime / "tools/implementation_stage2.py",
+        )
+        (repo / "tools/implementation_stage2.py").write_text(
+            "raise SystemExit('STALE TARGET TOOL EXECUTED')\n",
+            encoding="utf-8",
+        )
+        self.git(repo, "add", "tools/implementation_stage2.py")
+        self.git(repo, "commit", "-m", "install stale target tool")
+        result = run_stage2_census_tool(
+            repo,
+            SCHOOL,
+            b'{"status":"INTEGRATION_FROZEN"}\n',
+            repo.parent / "diag-runtime-boundary",
+            tool_repo=runtime,
+        )
+        self.assertEqual(result["stage2_status"], "CAPABILITY_CENSUS_READY")
+        self.assertEqual(result["exit_code"], 0)
+
     def test_capability_census_ready_checkpoint_surface(self):
         repo = self.make_tool_repo("ready")
         result = run_stage2_census_tool(
@@ -200,6 +231,43 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         normalized = normalize_artifact_bytes("implementation-stage2-status.json", raw, repo)
         self.assertIn(b"<REPO>", normalized)
         self.assertIn(b"/tmp/not-runner", normalized)
+
+    def test_worktree_branch_normalization_is_explicit(self):
+        repo = Path("/tmp/runner-one")
+        one = (
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "status": "CAPABILITY_CENSUS_READY",
+                    "branch": "remote-stage2-census/example-aaaaaaaaaaaa",
+                    "head_sha": "a" * 40,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode()
+        two = (
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "status": "CAPABILITY_CENSUS_READY",
+                    "branch": "remote-stage2-census/example-bbbbbbbbbbbb",
+                    "head_sha": "a" * 40,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode()
+        self.assertEqual(
+            normalize_artifact_bytes(
+                "implementation-stage2-status.json", one, repo
+            ),
+            normalize_artifact_bytes(
+                "implementation-stage2-status.json", two, repo
+            ),
+        )
 
     def test_generated_timestamp_normalization_is_explicit(self):
         repo = Path("/tmp/runner-one")

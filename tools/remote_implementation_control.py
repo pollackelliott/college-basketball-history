@@ -24,8 +24,15 @@ REQUEST_SCHEMA_VERSION = 1
 OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
+OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
 OP_RECOVER = "RECOVER"
-SUPPORTED_OPERATIONS = {OP_STAGE1, OP_PHASE0, OP_STAGE2_CENSUS, OP_RECOVER}
+SUPPORTED_OPERATIONS = {
+    OP_STAGE1,
+    OP_PHASE0,
+    OP_STAGE2_CENSUS,
+    OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_RECOVER,
+}
 
 LIFECYCLE_IDLE = "IDLE"
 LIFECYCLE_READ_ONLY = "READ_ONLY_ACTIVE"
@@ -255,6 +262,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_census") is not True,
             "STAGE1_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is not True,
+            "STAGE1_REQUEST_STAGE2_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_PHASE0:
         _require(authority.get("phase0") is True, "PHASE0_REQUEST_AUTHORITY_REQUIRED")
@@ -269,6 +280,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_census") is not True,
             "PHASE0_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is not True,
+            "PHASE0_REQUEST_STAGE2_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_STAGE2_CENSUS:
         _require(
@@ -282,6 +297,10 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("recovery") is False,
             "STAGE2_CENSUS_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is not True,
+            "STAGE2_CENSUS_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
         )
         expected_target = f"data/{school_key}-onboarding"
         _require(
@@ -307,6 +326,49 @@ def validate_request(request: dict[str, Any]) -> None:
             request.get("semantic_snapshot_sha256"),
             64,
             "STAGE2_CENSUS_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
+
+    if operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
+        _require(
+            authority.get("stage2_opponent_display_normalize") is True,
+            "STAGE2_OPPONENT_DISPLAY_REQUEST_AUTHORITY_REQUIRED",
+        )
+        _require(
+            authority.get("phase0") is False,
+            "STAGE2_OPPONENT_DISPLAY_PHASE0_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("recovery") is False,
+            "STAGE2_OPPONENT_DISPLAY_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_census") is False,
+            "STAGE2_OPPONENT_DISPLAY_CENSUS_AUTHORITY_FORBIDDEN",
+        )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "STAGE2_OPPONENT_DISPLAY_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "STAGE2_OPPONENT_DISPLAY_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("stage2_census_checkpoint"),
+            "stage2_census_checkpoint",
+            required=True,
+        )
+        _require_sha(
+            request.get("integration_freeze_sha256"),
+            64,
+            "STAGE2_OPPONENT_DISPLAY_INTEGRATION_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("semantic_snapshot_sha256"),
+            64,
+            "STAGE2_OPPONENT_DISPLAY_SEMANTIC_SNAPSHOT_SHA_INVALID",
         )
 
     if operation == OP_RECOVER:
@@ -367,7 +429,10 @@ def verify_request_predecessor(
             state.get("active_lock_commit") == recovery.get("lock_commit"),
             "STALE_RECOVERY_LOCK_MISMATCH",
         )
-        if state.get("active_operation") == OP_PHASE0:
+        if state.get("active_operation") in {
+            OP_PHASE0,
+            OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+        }:
             _require(
                 recovery.get("target_branch")
                 == f"data/{state.get('active_school_key')}-onboarding",

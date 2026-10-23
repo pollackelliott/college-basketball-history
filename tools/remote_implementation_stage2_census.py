@@ -34,6 +34,7 @@ STAGE2_ARTIFACT_NAMES = (
     STAGE2_REPORT,
 )
 STAGE2_ALLOWED_STATUSES = {"CAPABILITY_CENSUS_READY", "BLOCKED"}
+RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 
 
 def normalize_artifact_bytes(
@@ -44,15 +45,29 @@ def normalize_artifact_bytes(
     """Normalize only documented non-semantic replay variance.
 
     The permanent preflight records a wall-clock ``created_at`` in plan.json and
-    renders the same value as ``Generated:`` in review.md. Those fields are
-    diagnostic chronology, not decision-universe authority. Absolute runner
-    repository paths may also vary. No other content is normalized.
+    renders the same value as ``Generated:`` in review.md. Stage-2 status also
+    records the ephemeral local worktree branch name. Those fields are diagnostic
+    runner metadata, not decision-universe authority. Absolute runner repository
+    paths may also vary. No other content is normalized.
     """
     result = data
     for value in {str(repo), str(repo.resolve())}:
         if value:
             result = result.replace(value.encode("utf-8"), b"<REPO>")
-    if name == STAGE2_PLAN:
+    if name == STAGE2_STATUS:
+        doc = json.loads(result)
+        if "branch" in doc:
+            doc["branch"] = "<WORKTREE_BRANCH>"
+        result = (
+            json.dumps(
+                doc,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
+    elif name == STAGE2_PLAN:
         doc = json.loads(result)
         if "created_at" in doc:
             doc["created_at"] = "<GENERATED_AT>"
@@ -270,20 +285,26 @@ def run_stage2_census_tool(
     school_key: str,
     freeze_bytes: bytes,
     diag: Path,
+    *,
+    tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     restore_integration_freeze(repo, school_key, freeze_bytes)
     before = tracked_worktree_state(repo)
     if before["status"]:
         raise Stop("STAGE2_TRACKED_STATE_DIRTY_BEFORE_RUN")
 
+    runtime_repo = (tool_repo or RUNTIME_ROOT).resolve()
+    tool_path = runtime_repo / "tools/implementation_stage2.py"
+    if not tool_path.is_file():
+        raise Stop("STAGE2_RUNTIME_TOOL_MISSING:%s" % tool_path)
     cmd = [
         sys.executable,
-        str(repo / "tools/implementation_stage2.py"),
+        str(tool_path),
         school_key,
         "--repo",
         str(repo),
     ]
-    cp = run(cmd, cwd=repo, check=False)
+    cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-census.log").write_text(cp.stdout, encoding="utf-8")
 

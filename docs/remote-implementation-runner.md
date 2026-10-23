@@ -1,8 +1,8 @@
 # Guarded Remote Implementation Runner
 
-- **Status:** Controlling execution-environment policy for serialized Implementation through stable Phase 0
-- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, and the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint
-- **Does not apply to:** Stage 2 tracked repairs, recommendation-map submission, proposal rehearsal, `OWNER_GATE_1_READY`, Owner Gate 1, sealed apply, Preview, Owner Gate 2, merge, or Production proof
+- **Status:** Controlling execution-environment policy for serialized Implementation through stable Phase 0 and the narrowly productionized Stage 2 remote boundary
+- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, and the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair
+- **Does not apply to:** arbitrary or other Stage 2 tracked repairs, recommendation-map submission, `--map`, proposal rehearsal, `OWNER_GATE_1_READY`, Owner Gate 1, sealed apply, Preview, Owner Gate 2, merge, or Production proof
 
 ## 1. Execution environments
 
@@ -19,6 +19,7 @@ For the currently productionized remote lifecycle, the permanent commands remain
 python tools/implementation_stage1_inventory.py ...
 python tools/stage_research_portfolio.py ... --apply --commit
 python tools/implementation_stage2.py <school>
+python tools/normalize_historical_opponent_displays.py <school> --sync-source-games [--apply]
 ```
 
 The remote runner must not reimplement their basketball, venue, opponent, conference, scope, reconciliation, or validation logic.
@@ -29,9 +30,10 @@ Tracked repository capability:
 
 - `tools/remote_implementation_control.py` — request/state validation, replay refusal, mutation classification, sidecar hashing, and Git-ref CAS primitives.
 - `tools/remote_implementation_io.py` — hash-bound checkpoint transport, isolated worktrees, permanent-command invocation, and control-branch CAS helpers.
-- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, and explicit recovery.
+- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, the single opponent-display normalization mutation, and explicit recovery.
 - `tools/remote_implementation_stage2_census.py` — exact Phase 0 authority restoration, read-only Stage 2 coordinator invocation, artifact hashing, and tracked-mutation proof shared by the runner and verifier.
-- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of a completed Phase 0 or Stage 2 census checkpoint.
+- `tools/remote_implementation_stage2_opponent_display.py` — exact census/Freeze authentication, permanent normalizer dry-run/apply orchestration, representation-only field proof, and post-repair Stage 2 regeneration.
+- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of completed Phase 0, Stage 2 census, or opponent-display normalization state.
 - `.github/workflows/remote-implementation.yml` — push-driven repository Action for the permanent control branch.
 - `config/remote-implementation-control-state.initial.json` — canonical initial IDLE state for creating the operational control branch.
 
@@ -86,6 +88,7 @@ Supported operations are:
 - `STAGE1_INVENTORY`
 - `PHASE0`
 - `STAGE2_CENSUS`
+- `STAGE2_OPPONENT_DISPLAY_NORMALIZE`
 - `RECOVER`
 
 No request in this lifecycle may carry Owner Gate 1, Owner Gate 2, or release authority.
@@ -192,6 +195,49 @@ Fresh verification reconstructs the same onboarding SHA and exact Integration Fr
 
 This remote capability does **not** authorize tracked Stage 2 repairs, recommendation-map submission, `--map`, proposal rehearsal, `OWNER_GATE_1_READY`, owner approval, sealing/apply, Preview, or release.
 
+### Stage 2 opponent-display normalization mutation
+
+`STAGE2_OPPONENT_DISPLAY_NORMALIZE` is the sole productionized remote tracked Stage 2 repair. It is not a generic repair executor. It may run only when an exact prior `STAGE2_CENSUS` checkpoint is `BLOCKED` solely by deterministic historical opponent-display conflicts, with zero warnings and zero owner decisions.
+
+The request binds the exact current protected-main SHA, existing onboarding branch and predecessor SHA, authoritative Stage 2 census checkpoint path/hash, Integration Freeze SHA-256, semantic snapshot SHA-256, and an authority boundary that excludes Phase 0, recovery, owner gates, release, and unrelated Stage 2 work. A changed onboarding head is a STOP.
+
+The runner uses the real global mutation lock and executes this sequence:
+
+```text
+IDLE
+→ exact request/census/Freeze authenticated
+→ global Implementation lock durable
+→ isolated exact predecessor worktree
+→ permanent normalizer dry-run with --sync-source-games
+→ exact census blocker-key equality + ambiguous-key count zero
+→ permanent normalizer --sync-source-games --apply
+→ representation-only field proof + semantic-drift PASS
+→ repository validation
+→ exact prepared commit/tree/diff
+→ write-ahead authority durable
+→ existing onboarding ref predecessor→prepared CAS
+→ unchanged implementation_stage2.py <school> regeneration without --map
+→ durable successor + lock release → IDLE
+→ fresh-runner equivalence verification
+```
+
+The permanent helper, not the remote runner, chooses the authoritative display. The mutation boundary is exact:
+
+- only `schools/<school>/opponents.csv` and `schools/<school>/source-games.csv` may change;
+- `opponents.csv` may change only `canonical_opponent_name`;
+- `source-games.csv` may change only `normalized_opponent_name`;
+- opponent keys, literal source opponent labels, raw text, game identity, dates, scores/results, H/A/N, venues/locations, game type/postseason fields, and every other column must remain unchanged;
+- the Integration Freeze semantic guard must be `PASS` before and after;
+- the dry-run key population must equal the complete bound census blocker population exactly. A broader proposal is a STOP, not opportunistic cleanup.
+
+Before publication, write-ahead state preserves the exact request, lock, census binding, target predecessor, prepared commit/tree, changed paths/file hashes, normalization report, field-level proof, Integration Freeze/semantic hashes, and semantic-drift proof. Publication is an expected-head CAS on the already-existing onboarding ref; unrestricted force updates are forbidden.
+
+Recovery reuses the ordinary mutation classifier. `PREPARED_NOT_PUBLISHED` may be abandoned by explicit recovery; `PUBLISHED_NOT_FINALIZED` may be adopted only when the target is the exact prepared commit and all write-ahead/field proofs match, after which Stage 2 is regenerated before completion. Any other target is `DIVERGED_STOP`.
+
+Fresh verification independently reauthenticates the original census request, reproduces the permanent normalizer dry run from the predecessor, recomputes the predecessor→prepared field proof, authenticates/restores the exact Integration Freeze, confirms semantic drift remains `PASS`, reruns unchanged Stage 2 without `--map`, compares exact/normalized discovery artifacts, and verifies no further tracked mutation.
+
+This operation authorizes no recommendation map, proposal rehearsal, `OWNER_GATE_1_READY`, Gate 1, sealed apply, Preview, release, or arbitrary Stage 2 repair.
+
 ## 9. Write-ahead and objective mutation state
 
 Before target publication, the control branch must durably preserve a write-ahead manifest containing at minimum:
@@ -266,7 +312,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Only the read-only Stage 2 capability census is remote-enabled. Stage 2 tracked repairs, recommendation-map submission/proposal rehearsal, owner gates, sealed apply, Preview, merge, and Production proof remain outside the remote capability until separately productionized and tested.
+Remote Stage 2 capability is limited to the read-only census plus the single census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair described above. All other tracked Stage 2 repairs, recommendation-map submission/proposal rehearsal, `--map`, owner gates, sealed apply, Preview, merge, and Production proof remain outside the remote capability until separately productionized and tested.
 
 ## 13. Mobile / ChatGPT operation
 
