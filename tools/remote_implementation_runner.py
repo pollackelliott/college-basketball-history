@@ -574,7 +574,7 @@ def run_phase0(
         prepared_commit=prepared,
         expected_predecessor=None,
     )
-    actual_target = remote_head(ROOT, target_branch)
+    actual_target = remote_head(ROOT, target_branch) if target_branch else None
     if actual_target != prepared:
         raise Stop("PHASE0_TARGET_PUBLICATION_VERIFY_FAILED")
 
@@ -675,7 +675,7 @@ def run_recovery(
     live_main: str,
 ) -> None:
     recovery = request["recovery"]
-    target_branch = recovery["target_branch"]
+    target_branch = recovery.get("target_branch")
     manifest = None
     if state.get("active_writeahead_path"):
         manifest = load_writeahead(
