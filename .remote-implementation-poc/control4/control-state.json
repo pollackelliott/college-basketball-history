@@ -1,0 +1,26 @@
+{
+  "abandoned_request_ids": [],
+  "accepted_request_ids": [],
+  "active_fixture_id": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
+  "active_request_id": null,
+  "authority_statement": "Experimental project-wide remote Implementation control only. No basketball mutation, Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
+  "consumed_request_ids": [
+    "proof3-control-0001"
+  ],
+  "current_sequence": 1,
+  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_GLOBAL_CONTROL",
+  "global_lock_scope": "ONE_ACTIVE_IMPLEMENTATION_PROJECT_WIDE",
+  "inherited_proof3_control_commit": "399fe3213ce012c534a239eda2376c5bcc4202e4",
+  "inherited_proof3_control_state_sha256": "d919ad082a12d94abc8b47471567e0feaed51f4dad3d3d07e524b4a71382f1c2",
+  "integration_frozen": false,
+  "last_admission_test": null,
+  "last_recovery": null,
+  "lifecycle_state": "IDLE",
+  "phase0_authorized": false,
+  "recovery_required": false,
+  "schema_version": 1
+}

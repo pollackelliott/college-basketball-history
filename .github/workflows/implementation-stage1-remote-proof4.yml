@@ -1,0 +1,541 @@
+name: Remote Implementation Proof 4 - Global Lock Failure Recovery
+
+on:
+  push:
+    branches:
+      - experiment/remote-implementation-proof4
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: remote-implementation-proof4-global-control
+  cancel-in-progress: false
+
+jobs:
+  control-transition:
+    if: ${{ !startsWith(github.event.head_commit.message, '[proof4-internal]') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out exact request event
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Detect Proof 4 request
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          request=".remote-implementation-poc/control4/request.json"
+          if [[ -f "$request" ]]; then
+            echo "has_request=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_request=false" >> "$GITHUB_OUTPUT"
+            echo "Proof 4 infrastructure-only push; no control request."
+          fi
+
+      - name: Authenticate request against durable global control
+        if: steps.detect.outputs.has_request == 'true'
+        id: verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="experiment/remote-implementation-proof4"
+          state=".remote-implementation-poc/control4/control-state.json"
+          request=".remote-implementation-poc/control4/request.json"
+          verifier=".remote-implementation-poc/control4/verify_control.py"
+
+          git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/proof4-live-main'
+          live_main="$(git rev-parse refs/remotes/origin/proof4-live-main)"
+
+          git fetch --no-tags origin "+refs/heads/$branch:refs/remotes/origin/proof4-current"
+          durable_head="$(git rev-parse refs/remotes/origin/proof4-current)"
+          git show "$durable_head:$state" > "$RUNNER_TEMP/durable-state.json"
+
+          request_id="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["request_id"])')"
+          operation="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["operation"])')"
+          expected_outcome="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["expected_outcome"])')"
+          request_sha="$(sha256sum "$request" | awk '{print $1}')"
+
+          if [[ "$GITHUB_RUN_ATTEMPT" -gt 1 ]]; then
+            set +e
+            python "$verifier" rerun-guard "$RUNNER_TEMP/durable-state.json" "$request"               > "$RUNNER_TEMP/rerun-guard.log" 2>&1
+            rerun_rc=$?
+            set -e
+            cat "$RUNNER_TEMP/rerun-guard.log"
+            if [[ "$rerun_rc" -eq 0 ]]; then
+              echo "FAIL: rerun guard unexpectedly allowed an already-triggered request"
+              exit 1
+            fi
+            if ! grep -q '^DURABLE_ACTIVE_REQUEST_EXISTS: REJECTED' "$RUNNER_TEMP/rerun-guard.log"                && ! grep -q '^REQUEST_REPLAY: REJECTED' "$RUNNER_TEMP/rerun-guard.log"; then
+              echo "FAIL: rerun stopped for an unexpected reason"
+              exit 1
+            fi
+            echo "DURABLE_ACTIVE_REQUEST_EXISTS: STOP"
+            exit 42
+          fi
+
+          prior_state_commit="$(git rev-parse "$GITHUB_SHA^")"
+          git show "$prior_state_commit:$state" > "$RUNNER_TEMP/prior-state.json"
+          prior_state_sha="$(sha256sum "$RUNNER_TEMP/prior-state.json" | awk '{print $1}')"
+
+          set +e
+          python "$verifier" evaluate "$RUNNER_TEMP/prior-state.json" "$request"             --live-main "$live_main" --state-commit "$prior_state_commit"             > "$RUNNER_TEMP/request-evaluation.log" 2>&1
+          eval_rc=$?
+          set -e
+          cat "$RUNNER_TEMP/request-evaluation.log"
+
+          mode=""
+          if [[ "$eval_rc" -ne 0 ]]; then
+            if grep -q "^$expected_outcome: REJECTED" "$RUNNER_TEMP/request-evaluation.log"; then
+              mode="expected_rejection"
+              echo "EXPECTED CONTROL REJECTION: $expected_outcome"
+            else
+              echo "FAIL: request rejected for an unexpected reason; expected $expected_outcome"
+              exit 1
+            fi
+          else
+            case "$operation:$expected_outcome" in
+              TEST_DURABLE_LOCK_FAILURE:INTENTIONAL_FAILURE_AFTER_DURABLE_LOCK)
+                grep -q '^FAILURE_REQUEST_ADMISSIBLE$' "$RUNNER_TEMP/request-evaluation.log"
+                mode="failure"
+                ;;
+              RECOVER_ABANDONED_EXPERIMENT_LOCK:RECOVERY_SUCCESS)
+                grep -q '^RECOVERY_REQUEST_ADMISSIBLE$' "$RUNNER_TEMP/request-evaluation.log"
+                mode="recovery"
+                ;;
+              TEST_GLOBAL_LOCK_ADMISSION:GLOBAL_LOCK_ADMISSION_AVAILABLE)
+                grep -q '^GLOBAL_LOCK_ADMISSION_AVAILABLE$' "$RUNNER_TEMP/request-evaluation.log"
+                mode="admission"
+                ;;
+              *)
+                echo "FAIL: accepted request has an unexpected operation/outcome pair"
+                exit 1
+                ;;
+            esac
+          fi
+
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "request_id=$request_id" >> "$GITHUB_OUTPUT"
+          echo "request_sha=$request_sha" >> "$GITHUB_OUTPUT"
+          echo "operation=$operation" >> "$GITHUB_OUTPUT"
+          echo "live_main=$live_main" >> "$GITHUB_OUTPUT"
+          echo "prior_state_commit=$prior_state_commit" >> "$GITHUB_OUTPUT"
+          echo "prior_state_sha=$prior_state_sha" >> "$GITHUB_OUTPUT"
+          echo "durable_head_at_start=$durable_head" >> "$GITHUB_OUTPUT"
+
+      - name: Acquire durable lock then intentionally fail
+        if: steps.verify.outputs.mode == 'failure'
+        id: failtest
+        shell: bash
+        env:
+          REQUEST_ID: ${{ steps.verify.outputs.request_id }}
+          REQUEST_SHA: ${{ steps.verify.outputs.request_sha }}
+          LIVE_MAIN: ${{ steps.verify.outputs.live_main }}
+        run: |
+          set -euo pipefail
+          branch="experiment/remote-implementation-proof4"
+          state=".remote-implementation-poc/control4/control-state.json"
+          request=".remote-implementation-poc/control4/request.json"
+          failure_dir=".remote-implementation-poc/control4/failures/$REQUEST_ID"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          fixture_id="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["fixture_id"])')"
+          operation="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["operation"])')"
+
+          mkdir -p "$failure_dir"
+          cp "$request" "$failure_dir/original-request.json"
+
+          python - "$state" "$REQUEST_ID" "$REQUEST_SHA" "$fixture_id" "$operation" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" "$GITHUB_SHA" <<'PY'
+          import json, sys
+          path, request_id, request_sha, fixture, operation, run_id, attempt, trigger = sys.argv[1:9]
+          data = json.load(open(path))
+          if data.get("lifecycle_state") != "IDLE":
+              raise SystemExit("FAIL: global lock ceased to be IDLE before acquisition")
+          accepted = list(data.get("accepted_request_ids") or [])
+          accepted.append(request_id)
+          data.update({
+              "accepted_request_ids": accepted,
+              "lifecycle_state": "ACTIVE",
+              "active_request_id": request_id,
+              "active_fixture_id": fixture,
+              "active_operation": operation,
+              "active_lock_owner": f"github-actions:{run_id}:{attempt}",
+              "active_request_sha256": request_sha,
+              "lock_acquired_run_id": int(run_id),
+              "lock_acquired_run_attempt": int(attempt),
+              "lock_acquisition_request_commit": trigger,
+              "active_lock_commit": "PENDING_LOCK_COMMIT_IDENTITY",
+              "durable_active_state_commit": "PENDING_ACTIVE_STATE_IDENTITY",
+              "recovery_required": True,
+              "normal_successor_emitted": False
+          })
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+
+          git add "$state" "$failure_dir/original-request.json"
+          git commit -m "[proof4-internal] acquire global experimental lock for $REQUEST_ID"
+          lock_commit="$(git rev-parse HEAD)"
+
+          git push --force-with-lease=refs/heads/$branch:$GITHUB_SHA origin "$lock_commit:refs/heads/$branch"
+
+          python - "$state" "$lock_commit" <<'PY'
+          import json, sys
+          path, lock_commit = sys.argv[1:3]
+          data = json.load(open(path))
+          data["active_lock_commit"] = lock_commit
+          data["durable_active_state_commit"] = "COMMIT_CONTAINING_THIS_ACTIVE_STATE"
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+          active_state_sha="$(sha256sum "$state" | awk '{print $1}')"
+
+          python - "$failure_dir/active-lock-manifest.json" "$lock_commit" "$active_state_sha" <<'PY'
+          import json, os, sys
+          path, lock_commit, state_sha = sys.argv[1:4]
+          data = {
+              "schema_version": 1,
+              "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_STRANDED_LOCK",
+              "request_id": os.environ["REQUEST_ID"],
+              "request_sha256": os.environ["REQUEST_SHA"],
+              "fixture_id": "remote-proof-school-a",
+              "operation": "TEST_DURABLE_LOCK_FAILURE",
+              "lock_acquisition_commit": lock_commit,
+              "active_control_state_sha256": state_sha,
+              "action_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "action_run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "expected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+              "actual_main_sha": os.environ["LIVE_MAIN"],
+              "normal_successor_emitted": False,
+              "recovery_required": True,
+              "basketball_mutation_authorized": False
+          }
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(data, f, indent=2, sort_keys=True)
+              f.write("\n")
+          PY
+
+          git add "$state" "$failure_dir/active-lock-manifest.json"
+          git commit -m "[proof4-internal] annotate stranded global lock $REQUEST_ID"
+          active_state_commit="$(git rev-parse HEAD)"
+
+          python - "$state" "$active_state_commit" <<'PY'
+          import json, sys
+          path, commit = sys.argv[1:3]
+          data = json.load(open(path))
+          data["durable_active_state_commit"] = commit
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+          git add "$state"
+          git commit -m "[proof4-internal] bind stranded ACTIVE state identity $REQUEST_ID"
+          bound_active_commit="$(git rev-parse HEAD)"
+          bound_state_sha="$(sha256sum "$state" | awk '{print $1}')"
+
+          git push --force-with-lease=refs/heads/$branch:$lock_commit origin "$bound_active_commit:refs/heads/$branch"
+
+          {
+            echo "request_id=$REQUEST_ID"
+            echo "request_sha=$REQUEST_SHA"
+            echo "lock_commit=$lock_commit"
+            echo "active_state_commit=$bound_active_commit"
+            echo "active_state_sha=$bound_state_sha"
+            echo "run_id=$GITHUB_RUN_ID"
+            echo "run_attempt=$GITHUB_RUN_ATTEMPT"
+            echo "INTENTIONAL_PROOF4_FAILURE_AFTER_DURABLE_LOCK=true"
+          } > "$RUNNER_TEMP/proof4-failure-evidence.txt"
+
+          echo "PASS: global lock durably acquired at $lock_commit"
+          echo "PASS: stranded ACTIVE state durably bound at $bound_active_commit"
+          echo "INTENTIONAL PROOF 4 FAILURE: terminating after durable lock acquisition"
+          exit 44
+
+      - name: Validate and recover exact abandoned lock
+        if: steps.verify.outputs.mode == 'recovery'
+        id: recovery
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUEST_ID: ${{ steps.verify.outputs.request_id }}
+          REQUEST_SHA: ${{ steps.verify.outputs.request_sha }}
+          LIVE_MAIN: ${{ steps.verify.outputs.live_main }}
+          PRIOR_STATE_SHA: ${{ steps.verify.outputs.prior_state_sha }}
+        run: |
+          set -euo pipefail
+          branch="experiment/remote-implementation-proof4"
+          state=".remote-implementation-poc/control4/control-state.json"
+          request=".remote-implementation-poc/control4/request.json"
+          recovery_dir=".remote-implementation-poc/control4/recoveries/$REQUEST_ID"
+          proof3_base="399fe3213ce012c534a239eda2376c5bcc4202e4"
+
+          abandoned_id="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["abandoned_request_id"])')"
+          lock_commit="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["active_lock_commit"])')"
+          active_state_commit="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["durable_active_state_commit"])')"
+          active_state_sha="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["durable_active_state_sha256"])')"
+          failed_run="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["failed_action_run_id"])')"
+          failed_attempt="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["failed_action_run_attempt"])')"
+          rerun_attempt="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control4/request.json"))["failed_action_rerun_attempt"])')"
+
+          git cat-file -e "$lock_commit^{commit}"
+          git cat-file -e "$active_state_commit^{commit}"
+          git show "$active_state_commit:$state" > "$RUNNER_TEMP/stranded-active-state.json"
+          if [[ "$(sha256sum "$RUNNER_TEMP/stranded-active-state.json" | awk '{print $1}')" != "$active_state_sha" ]]; then
+            echo "FAIL: recovery's stranded ACTIVE state hash does not authenticate"
+            exit 1
+          fi
+
+          if [[ "$(python -c 'import json; print(json.load(open("'"$RUNNER_TEMP"'/stranded-active-state.json"))["active_request_id"])')" != "$abandoned_id" ]]; then
+            echo "FAIL: stranded state names a different active request"
+            exit 1
+          fi
+
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$failed_run/attempts/$failed_attempt" > "$RUNNER_TEMP/failed-attempt.json"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$failed_run" > "$RUNNER_TEMP/current-failed-run.json"
+          python - "$RUNNER_TEMP/failed-attempt.json" "$RUNNER_TEMP/current-failed-run.json" "$failed_attempt" "$rerun_attempt" <<'PY'
+          import json, sys
+          first = json.load(open(sys.argv[1]))
+          current = json.load(open(sys.argv[2]))
+          failed_attempt = int(sys.argv[3])
+          rerun_attempt = int(sys.argv[4])
+          if int(first.get("run_attempt", -1)) != failed_attempt or first.get("status") != "completed" or first.get("conclusion") != "failure":
+              raise SystemExit("FAIL: original failed attempt is not durably completed/failure")
+          if int(current.get("run_attempt", -1)) != rerun_attempt or current.get("status") != "completed" or current.get("conclusion") != "failure":
+              raise SystemExit("FAIL: rerun attempt is not durably completed/failure")
+          print("PASS: original and rerun attempts are both completed/failure")
+          PY
+
+          if [[ -e ".remote-implementation-poc/control4/successors/$abandoned_id" ]]; then
+            echo "FAIL: abandoned operation unexpectedly has a normal successor"
+            exit 1
+          fi
+
+          bad_paths="$(
+            git diff --name-only "$proof3_base" "$GITHUB_SHA"               | grep -Ev '^\.remote-implementation-poc/control4/|^\.github/workflows/implementation-stage1-remote-proof4\.yml$'               || true
+          )"
+          if [[ -n "$bad_paths" ]]; then
+            echo "FAIL: non-experimental paths changed before recovery"
+            printf '%s\n' "$bad_paths"
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git reset --hard "$GITHUB_SHA"
+          python - "$state" "$REQUEST_ID" <<'PY'
+          import json, sys
+          path, request_id = sys.argv[1:3]
+          data = json.load(open(path))
+          data["synthetic_competing_recovery_candidate"] = request_id
+          data["lifecycle_state"] = "IDLE"
+          data["active_request_id"] = None
+          data["active_fixture_id"] = None
+          data["active_operation"] = None
+          data["active_lock_owner"] = None
+          data["recovery_required"] = False
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+          git add "$state"
+          git commit -m "[proof4-internal] synthetic competing recovery candidate $REQUEST_ID"
+          competing_commit="$(git rev-parse HEAD)"
+
+          git reset --hard "$GITHUB_SHA"
+          mkdir -p "$recovery_dir"
+
+          python - "$state" "$REQUEST_ID" "$abandoned_id" "$lock_commit" "$failed_run" "$failed_attempt" <<'PY'
+          import json, sys
+          path, recovery_id, abandoned_id, lock_commit, failed_run, failed_attempt = sys.argv[1:7]
+          data = json.load(open(path))
+          if data.get("lifecycle_state") != "ACTIVE" or data.get("active_request_id") != abandoned_id:
+              raise SystemExit("FAIL: abandoned ACTIVE state changed before recovery")
+          abandoned = list(data.get("abandoned_request_ids") or [])
+          abandoned.append(abandoned_id)
+          consumed = list(data.get("consumed_request_ids") or [])
+          consumed.append(recovery_id)
+          data["abandoned_request_ids"] = abandoned
+          data["consumed_request_ids"] = consumed
+          data["current_sequence"] = int(data.get("current_sequence", 0)) + 1
+          data["lifecycle_state"] = "IDLE"
+          data["active_request_id"] = None
+          data["active_fixture_id"] = None
+          data["active_operation"] = None
+          data["active_lock_owner"] = None
+          data["active_request_sha256"] = None
+          data["active_lock_commit"] = None
+          data["durable_active_state_commit"] = None
+          data["recovery_required"] = False
+          data["normal_successor_emitted"] = False
+          data["last_recovery"] = {
+              "disposition": "ABANDONED_NO_MUTATION",
+              "recovery_request_id": recovery_id,
+              "abandoned_request_id": abandoned_id,
+              "recovered_from_lock_commit": lock_commit,
+              "original_failed_action_run_id": int(failed_run),
+              "original_failed_action_run_attempt": int(failed_attempt)
+          }
+          for key in [
+              "lock_acquired_run_id", "lock_acquired_run_attempt",
+              "lock_acquisition_request_commit"
+          ]:
+              data.pop(key, None)
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+
+          python - "$recovery_dir/recovery-manifest.json" "$competing_commit" <<'PY'
+          import json, os, sys
+          path, competing = sys.argv[1:3]
+          req = json.load(open(".remote-implementation-poc/control4/request.json"))
+          data = {
+              "schema_version": 1,
+              "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_RECOVERY",
+              "recovery_request_id": req["request_id"],
+              "recovery_request_sha256": os.environ["REQUEST_SHA"],
+              "recovery_request_commit": os.environ["GITHUB_SHA"],
+              "abandoned_request_id": req["abandoned_request_id"],
+              "active_lock_commit": req["active_lock_commit"],
+              "durable_active_state_commit": req["durable_active_state_commit"],
+              "durable_active_state_sha256": req["durable_active_state_sha256"],
+              "failed_action_run_id": req["failed_action_run_id"],
+              "failed_action_run_attempt": req["failed_action_run_attempt"],
+              "failed_action_rerun_attempt": req["failed_action_rerun_attempt"],
+              "cross_school_rejection_run_id": req["evidence"]["cross_school_rejection_run_id"],
+              "original_request_replay_run_id": req["evidence"]["original_request_replay_run_id"],
+              "expected_main_sha": req["expected_protected_main_sha"],
+              "actual_main_sha": os.environ["LIVE_MAIN"],
+              "recovery_action_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "recovery_action_run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "disposition": "ABANDONED_NO_MUTATION",
+              "competing_recovery_candidate_commit": competing,
+              "basketball_data_mutation": False,
+              "final_lifecycle": "IDLE",
+              "integration_frozen": False,
+              "phase0_authorized": False
+          }
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(data, f, indent=2, sort_keys=True)
+              f.write("\n")
+          PY
+          manifest_sha="$(sha256sum "$recovery_dir/recovery-manifest.json" | awk '{print $1}')"
+          printf '%s  %s\n' "$manifest_sha" "recovery-manifest.json" > "$recovery_dir/recovery-manifest.sha256"
+
+          git add "$state" "$recovery_dir"
+          git commit -m "[proof4-internal] recover abandoned global lock $abandoned_id"
+          recovery_commit="$(git rev-parse HEAD)"
+          recovered_state_sha="$(sha256sum "$state" | awk '{print $1}')"
+
+          git push --force-with-lease=refs/heads/$branch:$GITHUB_SHA origin "$recovery_commit:refs/heads/$branch"
+
+          set +e
+          git push --force-with-lease=refs/heads/$branch:$GITHUB_SHA origin "$competing_commit:refs/heads/$branch"             > "$RUNNER_TEMP/recovery-cas.log" 2>&1
+          cas_rc=$?
+          set -e
+          if [[ "$cas_rc" -eq 0 ]]; then
+            echo "FAIL: competing recovery candidate overwrote successful recovery"
+            exit 1
+          fi
+          echo "RECOVERY_CAS: REJECTED" >> "$RUNNER_TEMP/recovery-cas.log"
+
+          echo "recovery_commit=$recovery_commit" >> "$GITHUB_OUTPUT"
+          echo "recovered_state_sha=$recovered_state_sha" >> "$GITHUB_OUTPUT"
+          echo "recovery_manifest_sha=$manifest_sha" >> "$GITHUB_OUTPUT"
+          echo "competing_commit=$competing_commit" >> "$GITHUB_OUTPUT"
+
+          echo "PASS: abandoned lock recovered to IDLE"
+          echo "PASS: original failed request remains accepted/abandoned and non-replayable"
+          echo "PASS: competing recovery CAS rejected"
+
+      - name: Commit post-recovery admission receipt
+        if: steps.verify.outputs.mode == 'admission'
+        id: admission
+        shell: bash
+        env:
+          REQUEST_ID: ${{ steps.verify.outputs.request_id }}
+          REQUEST_SHA: ${{ steps.verify.outputs.request_sha }}
+          LIVE_MAIN: ${{ steps.verify.outputs.live_main }}
+        run: |
+          set -euo pipefail
+          branch="experiment/remote-implementation-proof4"
+          state=".remote-implementation-poc/control4/control-state.json"
+          receipt_dir=".remote-implementation-poc/control4/admissions/$REQUEST_ID"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p "$receipt_dir"
+
+          python - "$state" "$REQUEST_ID" "$GITHUB_RUN_ID" <<'PY'
+          import json, sys
+          path, request_id, run_id = sys.argv[1:4]
+          data = json.load(open(path))
+          if data.get("lifecycle_state") != "IDLE":
+              raise SystemExit("FAIL: admission test lost IDLE state")
+          consumed = list(data.get("consumed_request_ids") or [])
+          consumed.append(request_id)
+          data["consumed_request_ids"] = consumed
+          data["current_sequence"] = int(data.get("current_sequence", 0)) + 1
+          data["last_admission_test"] = {
+              "request_id": request_id,
+              "result": "GLOBAL_LOCK_ADMISSION_AVAILABLE",
+              "action_run_id": int(run_id)
+          }
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+
+          python - "$receipt_dir/admission.json" <<'PY'
+          import json, os
+          req = json.load(open(".remote-implementation-poc/control4/request.json"))
+          data = {
+              "schema_version": 1,
+              "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_ADMISSION",
+              "request_id": req["request_id"],
+              "request_sha256": os.environ["REQUEST_SHA"],
+              "fixture_id": req["fixture_id"],
+              "result": "GLOBAL_LOCK_ADMISSION_AVAILABLE",
+              "expected_main_sha": req["expected_protected_main_sha"],
+              "actual_main_sha": os.environ["LIVE_MAIN"],
+              "action_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "basketball_data_mutation": False,
+              "final_lifecycle": "IDLE"
+          }
+          with open(".remote-implementation-poc/control4/admissions/" + req["request_id"] + "/admission.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, indent=2, sort_keys=True)
+              f.write("\n")
+          PY
+
+          git add "$state" "$receipt_dir"
+          git commit -m "[proof4-internal] record global lock admission $REQUEST_ID"
+          admission_commit="$(git rev-parse HEAD)"
+          final_state_sha="$(sha256sum "$state" | awk '{print $1}')"
+          git push --force-with-lease=refs/heads/$branch:$GITHUB_SHA origin "$admission_commit:refs/heads/$branch"
+
+          echo "admission_commit=$admission_commit" >> "$GITHUB_OUTPUT"
+          echo "final_state_sha=$final_state_sha" >> "$GITHUB_OUTPUT"
+          echo "GLOBAL LOCK ADMISSION: AVAILABLE"
+
+      - name: Record expected rejection
+        if: steps.verify.outputs.mode == 'expected_rejection'
+        shell: bash
+        run: |
+          echo "PASS: unsafe Proof 4 transition rejected before any control-state mutation."
+
+      - name: Upload Proof 4 per-run diagnostics
+        if: steps.detect.outputs.has_request == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-proof4-run-${{ github.run_id }}-attempt-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/request-evaluation.log
+            ${{ runner.temp }}/rerun-guard.log
+            ${{ runner.temp }}/proof4-failure-evidence.txt
+            ${{ runner.temp }}/recovery-cas.log
+          if-no-files-found: ignore
+          retention-days: 14
