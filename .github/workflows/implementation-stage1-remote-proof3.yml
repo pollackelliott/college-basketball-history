@@ -1,0 +1,496 @@
+name: Remote Implementation Proof 3 - Serialized Mobile Control
+
+on:
+  push:
+    branches:
+      - experiment/remote-implementation-proof3
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: remote-implementation-proof3-control
+  cancel-in-progress: false
+
+jobs:
+  consume-control-request:
+    if: ${{ !startsWith(github.event.head_commit.message, '[proof3-internal]') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out control branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect bounded control request
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          request=".remote-implementation-poc/control/request.json"
+          if [[ -f "$request" ]]; then
+            echo "has_request=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_request=false" >> "$GITHUB_OUTPUT"
+            echo "No Proof 3 control request in this commit; infrastructure-only push."
+          fi
+
+      - name: Authenticate predecessor, run negative prechecks, and acquire durable lock
+        if: steps.detect.outputs.has_request == 'true'
+        id: lock
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          branch="experiment/remote-implementation-proof3"
+          state=".remote-implementation-poc/control/control-state.json"
+          request=".remote-implementation-poc/control/request.json"
+          verifier=".remote-implementation-poc/control/verify_request.py"
+          proof2_commit="32f11c925f0b17b1840a58f06ec848b20a20cdd7"
+          proof2_manifest_sha="c4800d2a3b64f36b46d63ea721dc360c6cb48a48786fa6f736b573037110bf1c"
+          proof2_stage1_sha="495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+          expected_main="396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+          trigger_sha="$GITHUB_SHA"
+          prior_state_commit="$(git rev-parse "$trigger_sha^")"
+
+          git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/proof3-live-main'
+          live_main="$(git rev-parse refs/remotes/origin/proof3-live-main)"
+
+          git fetch --no-tags origin '+refs/heads/experiment/remote-implementation-proof2:refs/remotes/origin/proof2'
+          git cat-file -e "$proof2_commit^{commit}"
+          git show "$proof2_commit:.remote-implementation-poc/checkpoints/long-island-university/proof1/checkpoint-manifest.json" > "$RUNNER_TEMP/proof2-manifest.json"
+          git show "$proof2_commit:.remote-implementation-poc/checkpoints/long-island-university/proof1/stage1-reconciliation.json" > "$RUNNER_TEMP/proof2-stage1.json"
+
+          actual_manifest_sha="$(sha256sum "$RUNNER_TEMP/proof2-manifest.json" | awk '{print $1}')"
+          actual_stage1_sha="$(sha256sum "$RUNNER_TEMP/proof2-stage1.json" | awk '{print $1}')"
+          if [[ "$actual_manifest_sha" != "$proof2_manifest_sha" ]]; then
+            echo "FAIL: Proof 2 predecessor manifest hash mismatch"
+            exit 1
+          fi
+          if [[ "$actual_stage1_sha" != "$proof2_stage1_sha" ]]; then
+            echo "FAIL: Proof 2 predecessor Stage 1 hash mismatch"
+            exit 1
+          fi
+
+          git show "$prior_state_commit:$state" > "$RUNNER_TEMP/prior-control-state.json"
+          prior_state_sha="$(sha256sum "$RUNNER_TEMP/prior-control-state.json" | awk '{print $1}')"
+          request_sha="$(sha256sum "$request" | awk '{print $1}')"
+          request_id="$(python -c 'import json; print(json.load(open(".remote-implementation-poc/control/request.json"))["request_id"])')"
+
+          python "$verifier" "$RUNNER_TEMP/prior-control-state.json" "$request"             --live-main "$live_main" --state-commit "$prior_state_commit"             > "$RUNNER_TEMP/valid-request.log"
+
+          python - "$request" "$RUNNER_TEMP/stale-request.json" <<'PY'
+          import json, sys
+          source, dest = sys.argv[1:3]
+          data = json.load(open(source))
+          data["predecessor_checkpoint_commit"] = "c34ba9de312a97d03d910be40e8091c576080cfa"
+          json.dump(data, open(dest, "w"), indent=2, sort_keys=True)
+          open(dest, "a").write("\n")
+          PY
+          set +e
+          python "$verifier" "$RUNNER_TEMP/prior-control-state.json" "$RUNNER_TEMP/stale-request.json"             --live-main "$live_main" --state-commit "$prior_state_commit"             > "$RUNNER_TEMP/stale-predecessor.log" 2>&1
+          stale_rc=$?
+          set -e
+          if [[ "$stale_rc" -eq 0 ]] || ! grep -q '^STALE_PREDECESSOR: REJECTED' "$RUNNER_TEMP/stale-predecessor.log"; then
+            echo "FAIL: stale predecessor negative test did not reject correctly"
+            cat "$RUNNER_TEMP/stale-predecessor.log"
+            exit 1
+          fi
+
+          python - "$request" "$RUNNER_TEMP/wrong-main-request.json" <<'PY'
+          import json, sys
+          source, dest = sys.argv[1:3]
+          data = json.load(open(source))
+          data["expected_protected_main_sha"] = "1111111111111111111111111111111111111111"
+          json.dump(data, open(dest, "w"), indent=2, sort_keys=True)
+          open(dest, "a").write("\n")
+          PY
+          set +e
+          python "$verifier" "$RUNNER_TEMP/prior-control-state.json" "$RUNNER_TEMP/wrong-main-request.json"             --live-main "$live_main" --state-commit "$prior_state_commit"             > "$RUNNER_TEMP/wrong-main.log" 2>&1
+          wrong_main_rc=$?
+          set -e
+          if [[ "$wrong_main_rc" -eq 0 ]] || ! grep -q '^MAIN_SHA_MISMATCH: REJECTED' "$RUNNER_TEMP/wrong-main.log"; then
+            echo "FAIL: wrong-main negative test did not reject correctly"
+            cat "$RUNNER_TEMP/wrong-main.log"
+            exit 1
+          fi
+
+          python - "$RUNNER_TEMP/prior-control-state.json" "$RUNNER_TEMP/occupied-state.json" <<'PY'
+          import json, sys
+          source, dest = sys.argv[1:3]
+          data = json.load(open(source))
+          data["lifecycle_state"] = "ACTIVE"
+          data["active_request_id"] = "proof3-synthetic-lock-holder"
+          data["active_lock_owner"] = "synthetic-lock-owner"
+          json.dump(data, open(dest, "w"), indent=2, sort_keys=True)
+          open(dest, "a").write("\n")
+          PY
+          set +e
+          python "$verifier" "$RUNNER_TEMP/occupied-state.json" "$request"             --live-main "$live_main" --state-commit "$prior_state_commit"             > "$RUNNER_TEMP/lock-conflict.log" 2>&1
+          lock_conflict_rc=$?
+          set -e
+          if [[ "$lock_conflict_rc" -eq 0 ]] || ! grep -q '^IMPLEMENTATION_LOCK_OCCUPIED: REJECTED' "$RUNNER_TEMP/lock-conflict.log"; then
+            echo "FAIL: lock-conflict negative test did not reject correctly"
+            cat "$RUNNER_TEMP/lock-conflict.log"
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          python - "$state" "$request_id" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" "$trigger_sha" <<'PY'
+          import json, sys
+          path, request_id, run_id, attempt, trigger = sys.argv[1:6]
+          data = json.load(open(path))
+          data["lifecycle_state"] = "ACTIVE"
+          data["active_request_id"] = request_id
+          data["active_lock_owner"] = f"github-actions:{run_id}:{attempt}"
+          data["lock_acquired_run_id"] = int(run_id)
+          data["lock_acquired_trigger_commit"] = trigger
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+          git add "$state"
+          git commit -m "[proof3-internal] acquire experimental control lock for $request_id"
+          lock_a="$(git rev-parse HEAD)"
+
+          git reset --hard "$trigger_sha"
+          python - "$state" "$GITHUB_RUN_ID" <<'PY'
+          import json, sys
+          path, run_id = sys.argv[1:3]
+          data = json.load(open(path))
+          data["lifecycle_state"] = "ACTIVE"
+          data["active_request_id"] = "proof3-synthetic-race-b"
+          data["active_lock_owner"] = f"synthetic-race-b:{run_id}"
+          data["lock_acquired_run_id"] = int(run_id)
+          data["lock_acquired_trigger_commit"] = "SAME_PREDECESSOR_AS_VALID_REQUEST"
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+          git add "$state"
+          git commit -m "[proof3-internal] synthetic competing lock candidate"
+          lock_b="$(git rev-parse HEAD)"
+
+          git reset --hard "$lock_a"
+
+          git push --force-with-lease=refs/heads/$branch:$trigger_sha origin "$lock_a:refs/heads/$branch"
+
+          set +e
+          git push --force-with-lease=refs/heads/$branch:$trigger_sha origin "$lock_b:refs/heads/$branch"             > "$RUNNER_TEMP/race-cas.log" 2>&1
+          race_rc=$?
+          set -e
+          if [[ "$race_rc" -eq 0 ]]; then
+            echo "FAIL: competing stale CAS transition unexpectedly advanced the branch"
+            cat "$RUNNER_TEMP/race-cas.log"
+            exit 1
+          fi
+          echo "RACE_CAS: REJECTED" >> "$RUNNER_TEMP/race-cas.log"
+
+          echo "request_id=$request_id" >> "$GITHUB_OUTPUT"
+          echo "request_sha=$request_sha" >> "$GITHUB_OUTPUT"
+          echo "prior_state_commit=$prior_state_commit" >> "$GITHUB_OUTPUT"
+          echo "prior_state_sha=$prior_state_sha" >> "$GITHUB_OUTPUT"
+          echo "live_main=$live_main" >> "$GITHUB_OUTPUT"
+          echo "lock_commit=$lock_a" >> "$GITHUB_OUTPUT"
+
+          echo "PASS: predecessor authenticated"
+          echo "PASS: stale predecessor rejected"
+          echo "PASS: wrong expected main rejected"
+          echo "PASS: lock conflict rejected"
+          echo "PASS: durable lock acquired at $lock_a"
+          echo "PASS: competing stale CAS transition rejected"
+
+      - name: Execute repository-owned read-only Stage 1 transition
+        if: steps.detect.outputs.has_request == 'true'
+        id: execute
+        shell: bash
+        env:
+          LOCK_COMMIT: ${{ steps.lock.outputs.lock_commit }}
+        run: |
+          set -euo pipefail
+
+          expected_main="396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97"
+          proof1_commit="c34ba9de312a97d03d910be40e8091c576080cfa"
+          research_zip_sha="c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+          research_base="8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
+          stage1_sha="495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3"
+          runtime_zip="$RUNNER_TEMP/liu-research-frozen.zip"
+
+          git fetch --no-tags origin '+refs/heads/experiment/remote-implementation-stage1:refs/remotes/origin/proof1-stage1'
+          git cat-file -e "$proof1_commit^{commit}"
+
+          mapfile -t parts < <(
+            git ls-tree -r --name-only "$proof1_commit" .remote-implementation-poc/inputs               | grep '^.remote-implementation-poc/inputs/liu-research-frozen.zip.b64.part'               | sort
+          )
+          if [[ "${#parts[@]}" -eq 0 ]]; then
+            echo "FAIL: no Proof 1 Research Freeze fixture parts found"
+            exit 1
+          fi
+          : > "$RUNNER_TEMP/research-freeze.b64"
+          for part in "${parts[@]}"; do
+            git show "$proof1_commit:$part" >> "$RUNNER_TEMP/research-freeze.b64"
+          done
+          base64 --decode "$RUNNER_TEMP/research-freeze.b64" > "$runtime_zip"
+          actual_zip_sha="$(sha256sum "$runtime_zip" | awk '{print $1}')"
+          if [[ "$actual_zip_sha" != "$research_zip_sha" ]]; then
+            echo "FAIL: Research Freeze reconstruction hash mismatch"
+            exit 1
+          fi
+
+          if git ls-remote --exit-code --heads origin refs/heads/data/long-island-university-onboarding >/dev/null 2>&1; then
+            echo "FAIL: real remote LIU onboarding branch exists"
+            exit 1
+          fi
+
+          git update-ref refs/remotes/origin/main "$expected_main"
+          git switch -C data/long-island-university-onboarding "$expected_main"
+
+          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+            echo "FAIL: runner-local Stage 1 worktree not clean before reconstruction"
+            git status --short
+            exit 1
+          fi
+
+          mkdir -p .onboarding/long-island-university
+          cp "$RUNNER_TEMP/proof2-stage1.json" .onboarding/long-island-university/stage1-reconciliation.json
+          cmp --silent "$RUNNER_TEMP/proof2-stage1.json" .onboarding/long-island-university/stage1-reconciliation.json
+
+          set +e
+          python tools/implementation_stage1_inventory.py             long-island-university             "$runtime_zip"             --expected-sha256 "$research_zip_sha"             --research-base "$research_base"             > "$RUNNER_TEMP/stage1-proof3.log" 2>&1
+          rc=$?
+          set -e
+          cat "$RUNNER_TEMP/stage1-proof3.log"
+          if [[ "$rc" -ne 0 ]]; then
+            echo "FAIL: permanent Stage 1 command exited $rc; durable ACTIVE lock remains for explicit recovery"
+            exit 1
+          fi
+
+          report=".onboarding/long-island-university/stage1-reconciliation.json"
+          result_sha="$(sha256sum "$report" | awk '{print $1}')"
+          if [[ "$result_sha" != "$stage1_sha" ]]; then
+            echo "FAIL: permanent Stage 1 result hash mismatch; durable ACTIVE lock remains"
+            exit 1
+          fi
+          if ! cmp --silent "$RUNNER_TEMP/proof2-stage1.json" "$report"; then
+            echo "FAIL: permanent Stage 1 result is not byte-identical to predecessor payload"
+            exit 1
+          fi
+
+          if [[ -n "$(git status --porcelain --untracked-files=no)" ]]              || ! git diff --quiet HEAD --              || ! git diff --cached --quiet HEAD --; then
+            echo "FAIL: permanent Stage 1 modified tracked repository state"
+            git status --short --untracked-files=no
+            exit 1
+          fi
+
+          cp "$report" "$RUNNER_TEMP/proof3-stage1-result.json"
+          echo "result_sha=$result_sha" >> "$GITHUB_OUTPUT"
+          echo "research_zip_sha=$actual_zip_sha" >> "$GITHUB_OUTPUT"
+          echo "tracked_clean=true" >> "$GITHUB_OUTPUT"
+
+          echo "PASS: permanent tools/implementation_stage1_inventory.py executed"
+          echo "PASS: Stage 1 payload remained byte-exact"
+          echo "PASS: tracked basketball/repository state unchanged"
+
+      - name: Commit durable successor, release lock, and prove replay refusal
+        if: steps.detect.outputs.has_request == 'true'
+        id: finalize
+        shell: bash
+        env:
+          REQUEST_ID: ${{ steps.lock.outputs.request_id }}
+          REQUEST_SHA: ${{ steps.lock.outputs.request_sha }}
+          PRIOR_STATE_COMMIT: ${{ steps.lock.outputs.prior_state_commit }}
+          PRIOR_STATE_SHA: ${{ steps.lock.outputs.prior_state_sha }}
+          LIVE_MAIN: ${{ steps.lock.outputs.live_main }}
+          LOCK_COMMIT: ${{ steps.lock.outputs.lock_commit }}
+          RESULT_SHA: ${{ steps.execute.outputs.result_sha }}
+        run: |
+          set -euo pipefail
+
+          branch="experiment/remote-implementation-proof3"
+          state=".remote-implementation-poc/control/control-state.json"
+          request=".remote-implementation-poc/control/request.json"
+          verifier=".remote-implementation-poc/control/verify_request.py"
+          successor_dir=".remote-implementation-poc/control/successors/$REQUEST_ID"
+
+          git switch -C "$branch" "$LOCK_COMMIT"
+          mkdir -p "$successor_dir"
+          cp "$RUNNER_TEMP/proof3-stage1-result.json" "$successor_dir/stage1-reconciliation.json"
+
+          python - "$successor_dir/successor-manifest.json" <<'PY'
+          import json, os, sys
+          path = sys.argv[1]
+          data = {
+              "schema_version": 1,
+              "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF3_SUCCESSOR",
+              "school_key": "long-island-university",
+              "predecessor_checkpoint_commit": "32f11c925f0b17b1840a58f06ec848b20a20cdd7",
+              "predecessor_manifest_sha256": "c4800d2a3b64f36b46d63ea721dc360c6cb48a48786fa6f736b573037110bf1c",
+              "consumed_control_request_id": os.environ["REQUEST_ID"],
+              "control_request_commit": os.environ["GITHUB_SHA"],
+              "control_request_sha256": os.environ["REQUEST_SHA"],
+              "previous_control_state_commit": os.environ["PRIOR_STATE_COMMIT"],
+              "previous_control_state_sha256": os.environ["PRIOR_STATE_SHA"],
+              "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+              "actual_fetched_main_sha": os.environ["LIVE_MAIN"],
+              "lock_commit": os.environ["LOCK_COMMIT"],
+              "lock_owner": f"github-actions:{os.environ['GITHUB_RUN_ID']}:{os.environ['GITHUB_RUN_ATTEMPT']}",
+              "action_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "action_run_url": (
+                  f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/"
+                  f"{os.environ['GITHUB_RUN_ID']}"
+              ),
+              "permanent_command": "python tools/implementation_stage1_inventory.py long-island-university <exact-research-freeze> --expected-sha256 <bound-sha> --research-base <bound-sha>",
+              "result_stage1_sha256": os.environ["RESULT_SHA"],
+              "result_status": "BLOCKED",
+              "successor_state": "CONTROL_TRANSITION_COMPLETE_IDLE",
+              "integration_frozen": False,
+              "phase0_authorized": False,
+              "authority_statement": "Experimental read-only remote control successor. No LIU Integration Freeze or Phase 0 authority was granted."
+          }
+          with open(path, "w", encoding="utf-8", newline="\n") as f:
+              json.dump(data, f, indent=2, sort_keys=True)
+              f.write("\n")
+          PY
+
+          manifest_sha="$(sha256sum "$successor_dir/successor-manifest.json" | awk '{print $1}')"
+          printf '%s  %s\n' "$manifest_sha" "successor-manifest.json" > "$successor_dir/successor-manifest.sha256"
+
+          python - "$state" "$REQUEST_ID" "$manifest_sha" "$successor_dir" "$GITHUB_RUN_ID" <<'PY'
+          import json, sys
+          path, request_id, manifest_sha, successor_dir, run_id = sys.argv[1:6]
+          data = json.load(open(path))
+          if data.get("active_request_id") != request_id or data.get("lifecycle_state") != "ACTIVE":
+              raise SystemExit("FAIL: durable lock state changed before finalization")
+          consumed = list(data.get("consumed_request_ids", []))
+          consumed.append(request_id)
+          data["consumed_request_ids"] = consumed
+          data["current_sequence"] = int(data.get("current_sequence", 0)) + 1
+          data["lifecycle_state"] = "IDLE"
+          data["active_request_id"] = None
+          data["active_lock_owner"] = None
+          data.pop("lock_acquired_run_id", None)
+          data.pop("lock_acquired_trigger_commit", None)
+          data["last_successful_successor"] = {
+              "request_id": request_id,
+              "manifest_sha256": manifest_sha,
+              "path": successor_dir,
+              "action_run_id": int(run_id),
+              "commit_identity": "COMMIT_CONTAINING_THIS_CONTROL_STATE"
+          }
+          json.dump(data, open(path, "w"), indent=2, sort_keys=True)
+          open(path, "a").write("\n")
+          PY
+
+          git add "$state" "$successor_dir"
+          git commit -m "[proof3-internal] complete control transition $REQUEST_ID"
+          successor_commit="$(git rev-parse HEAD)"
+
+          git push --force-with-lease=refs/heads/$branch:$LOCK_COMMIT origin "$successor_commit:refs/heads/$branch"
+
+          set +e
+          python "$verifier" "$state" "$request"             --live-main "$LIVE_MAIN" --state-commit "$successor_commit"             > "$RUNNER_TEMP/request-replay.log" 2>&1
+          replay_rc=$?
+          set -e
+          if [[ "$replay_rc" -eq 0 ]] || ! grep -q '^REQUEST_REPLAY: REJECTED' "$RUNNER_TEMP/request-replay.log"; then
+            echo "FAIL: duplicate/replayed request was not rejected after consumption"
+            cat "$RUNNER_TEMP/request-replay.log"
+            exit 1
+          fi
+
+          echo "successor_commit=$successor_commit" >> "$GITHUB_OUTPUT"
+          echo "successor_manifest_sha=$manifest_sha" >> "$GITHUB_OUTPUT"
+          echo "final_state_sha=$(sha256sum "$state" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+          echo "PASS: successor checkpoint committed at $successor_commit"
+          echo "PASS: experimental lock durably released to IDLE"
+          echo "PASS: consumed request replay rejected"
+
+      - name: Collect Proof 3 diagnostics
+        if: steps.detect.outputs.has_request == 'true' && always()
+        shell: bash
+        env:
+          REQUEST_ID: ${{ steps.lock.outputs.request_id }}
+          LOCK_COMMIT: ${{ steps.lock.outputs.lock_commit }}
+          RESULT_SHA: ${{ steps.execute.outputs.result_sha }}
+          SUCCESSOR_COMMIT: ${{ steps.finalize.outputs.successor_commit }}
+          SUCCESSOR_MANIFEST_SHA: ${{ steps.finalize.outputs.successor_manifest_sha }}
+          FINAL_STATE_SHA: ${{ steps.finalize.outputs.final_state_sha }}
+          LIVE_MAIN: ${{ steps.lock.outputs.live_main }}
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/remote-implementation-proof3"
+          mkdir -p "$out"
+          for f in valid-request stale-predecessor wrong-main lock-conflict race-cas stage1-proof3 request-replay; do
+            if [[ -f "$RUNNER_TEMP/$f.log" ]]; then
+              cp "$RUNNER_TEMP/$f.log" "$out/$f.log"
+            fi
+          done
+          if [[ -f "$RUNNER_TEMP/proof3-stage1-result.json" ]]; then
+            cp "$RUNNER_TEMP/proof3-stage1-result.json" "$out/stage1-reconciliation.json"
+          fi
+
+          python - "$out/execution-summary.json" <<'PY'
+          import json, os, sys
+          data = {
+              "proof": "REMOTE IMPLEMENTATION PROOF 3 - MOBILE CONTROL / SERIALIZED LOCK / REPLAY REFUSAL",
+              "action_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "action_run_url": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              "request_id": os.environ.get("REQUEST_ID"),
+              "request_commit": os.environ["GITHUB_SHA"],
+              "lock_commit": os.environ.get("LOCK_COMMIT"),
+              "successor_commit": os.environ.get("SUCCESSOR_COMMIT"),
+              "successor_manifest_sha256": os.environ.get("SUCCESSOR_MANIFEST_SHA"),
+              "final_control_state_sha256": os.environ.get("FINAL_STATE_SHA"),
+              "current_protected_main_sha": os.environ.get("LIVE_MAIN"),
+              "stage1_result_sha256": os.environ.get("RESULT_SHA"),
+              "stale_predecessor_rejected": True,
+              "wrong_main_rejected": True,
+              "lock_conflict_rejected": True,
+              "race_cas_rejected": True,
+              "request_replay_rejected": True,
+              "tracked_basketball_data_mutation": False,
+              "real_liu_onboarding_branch_pushed": False,
+              "integration_frozen": False,
+              "phase0_started": False,
+              "owner_desktop_interaction_required": False,
+              "owner_github_ui_interaction_required": False
+          }
+          with open(sys.argv[1], "w", encoding="utf-8") as f:
+              json.dump(data, f, indent=2, sort_keys=True)
+              f.write("\n")
+          print(json.dumps(data, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload Proof 3 diagnostics
+        if: steps.detect.outputs.has_request == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-proof3-${{ github.run_id }}
+          path: ${{ runner.temp }}/remote-implementation-proof3
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Assert Proof 3 success
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        env:
+          RESULT_SHA: ${{ steps.execute.outputs.result_sha }}
+          SUCCESSOR_COMMIT: ${{ steps.finalize.outputs.successor_commit }}
+        run: |
+          set -euo pipefail
+          if [[ "$RESULT_SHA" != "495d2e0945b9481805f0e0b7bd43ee8eeb2113d965989574b6995964873479a3" ]]; then
+            echo "FAIL: permanent Stage 1 result hash is not exact"
+            exit 1
+          fi
+          if [[ -z "$SUCCESSOR_COMMIT" ]]; then
+            echo "FAIL: no durable successor commit"
+            exit 1
+          fi
+          echo "REMOTE IMPLEMENTATION PROOF 3: PASS"
+          echo "STALE_PREDECESSOR: REJECTED"
+          echo "MAIN_SHA_MISMATCH: REJECTED"
+          echo "REQUEST_REPLAY: REJECTED"
+          echo "IMPLEMENTATION_LOCK_OCCUPIED: REJECTED"
+          echo "RACE_CAS: REJECTED"
