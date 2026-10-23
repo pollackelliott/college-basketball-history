@@ -20,6 +20,7 @@ from remote_implementation_control import RemoteImplementationError  # noqa: E40
 from remote_implementation_stage2_opponent_display import (  # noqa: E402
     apply_and_prepare_repair,
     field_level_mutation_proof,
+    post_repair_stage2_result,
     run_normalizer_dry_run,
     verify_census_and_freeze_authority,
 )
@@ -211,6 +212,30 @@ write(src,fields,rows)
             normalizer,
             encoding="utf-8",
         )
+        stage2 = r'''#!/usr/bin/env python3
+import csv,json,sys
+from pathlib import Path
+school=sys.argv[1]
+repo=Path(sys.argv[sys.argv.index("--repo")+1]).resolve()
+out=repo/".onboarding"/school
+out.mkdir(parents=True,exist_ok=True)
+with (repo/"schools"/school/"opponents.csv").open(newline="",encoding="utf-8") as h:
+ rows=list(csv.DictReader(h))
+ready=all(row["canonical_opponent_name"].endswith(" authority") for row in rows)
+plan={"blockers":[] if ready else ["display blocker"],"warnings":[],"decisions":[],"summary":{}}
+(out/"plan.json").write_text(json.dumps(plan,indent=2,sort_keys=True)+"\n")
+(out/"review.csv").write_text("decision_id,category\n")
+(out/"review.md").write_text("# Synthetic post-repair review\n")
+census={"schema_version":1,"status":"CENSUS_CAPTURED" if ready else "PREFLIGHT_BLOCKED","preflight":{"blocker_count":0 if ready else 1,"warning_count":0,"decision_count":0,"decision_categories":{},"decision_fields":{},"canonical_site_patch_reviews":0},"topology_groups":[]}
+(out/"implementation-stage2-capability-census.json").write_text(json.dumps(census,indent=2,sort_keys=True)+"\n")
+status={"schema_version":1,"school_key":school,"stage":"IMPLEMENTATION_STAGE_2","status":"CAPABILITY_CENSUS_READY" if ready else "BLOCKED","semantic_drift":{"status":"PASS","change_count":0},"preflight":{"blocker_count":0 if ready else 1,"warning_count":0,"decision_count":0,"decision_categories":{},"decision_universe_sha256":"d"*64},"capability_census":{"path":str(out/"implementation-stage2-capability-census.json"),"status":census["status"],"topology_group_count":0}}
+(out/"implementation-stage2-status.json").write_text(json.dumps(status,indent=2,sort_keys=True)+"\n")
+raise SystemExit(0 if ready else 1)
+'''
+        (tools / "implementation_stage2.py").write_text(
+            stage2,
+            encoding="utf-8",
+        )
 
         snapshot = build_source_game_semantic_snapshot(
             repo / "schools" / SCHOOL / "source-games.csv"
@@ -323,6 +348,39 @@ write(src,fields,rows)
         self.assertEqual(proof["literal_evidence_changes"], 0)
         self.assertEqual(proof["source_game_normalized_name_row_count"], 2)
         self.assertEqual(result["semantic_drift_after"]["status"], "PASS")
+
+    def test_post_repair_stage2_regeneration_is_read_only(self):
+        repo, predecessor, freeze = self.make_repo()
+        dry = run_normalizer_dry_run(
+            repo, SCHOOL, freeze, KEYS, repo.parent / "diag-stage2"
+        )
+        apply_and_prepare_repair(
+            repo,
+            SCHOOL,
+            predecessor,
+            freeze,
+            dry,
+            KEYS,
+            repo.parent / "diag-stage2",
+        )
+        result = post_repair_stage2_result(
+            repo,
+            SCHOOL,
+            freeze,
+            repo.parent / "diag-stage2-regenerated",
+        )
+        self.assertEqual(
+            result["stage2_status"],
+            "CAPABILITY_CENSUS_READY",
+        )
+        self.assertEqual(
+            result["capability_census"]["status"],
+            "CENSUS_CAPTURED",
+        )
+        self.assertEqual(
+            result["tracked_mutation_proof"]["tracked_stage2_mutation"],
+            "NONE",
+        )
 
     def test_apply_rejects_literal_evidence_mutation(self):
         repo, predecessor, freeze = self.make_repo(mode="bad-source")
