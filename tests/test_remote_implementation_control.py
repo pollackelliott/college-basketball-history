@@ -22,6 +22,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_RECOVER,
     OP_STAGE1,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     REQUEST_KIND,
     RemoteImplementationError,
     abandon_active,
@@ -69,6 +70,9 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "release": False,
             "phase0": operation == OP_PHASE0,
             "stage2_census": operation == OP_STAGE2_CENSUS,
+            "stage2_opponent_display_normalize": (
+                operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE
+            ),
             "recovery": operation == OP_RECOVER,
         },
     }
@@ -90,6 +94,15 @@ def request(operation=OP_STAGE1, request_id="request-001"):
         base["target_sha"] = "6" * 40
         base["phase0_successor"] = {
             "path": ".remote-implementation/successors/example-school/phase0/successor-manifest.json",
+            "sha256": "7" * 64,
+        }
+        base["integration_freeze_sha256"] = "8" * 64
+        base["semantic_snapshot_sha256"] = "9" * 64
+    if operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
+        base["target_branch"] = "data/example-school-onboarding"
+        base["target_sha"] = "6" * 40
+        base["stage2_census_checkpoint"] = {
+            "path": ".remote-implementation/checkpoints/example-school/stage2/checkpoint-manifest.json",
             "sha256": "7" * 64,
         }
         base["integration_freeze_sha256"] = "8" * 64
@@ -136,6 +149,66 @@ class RemoteImplementationControlTests(unittest.TestCase):
 
     def test_valid_bounded_stage2_census_request(self):
         validate_request(request(OP_STAGE2_CENSUS))
+
+    def test_valid_stage2_opponent_display_request(self):
+        validate_request(request(OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE))
+
+    def test_stage2_opponent_display_requires_exact_census_checkpoint(self):
+        req = request(OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE)
+        req["stage2_census_checkpoint"]["sha256"] = "bad"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_CENSUS_CHECKPOINT_SHA_INVALID",
+        ):
+            validate_request(req)
+
+    def test_stage2_opponent_display_uses_global_mutation_lock(self):
+        state = begin_request(
+            initial_control_state(),
+            request(
+                OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+                "stage2-display-001",
+            ),
+            "7" * 64,
+            run_id="205",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        self.assertEqual(state["lifecycle_state"], LIFECYCLE_ACTIVE)
+        self.assertEqual(state["transaction_state"], "LOCKED")
+        state = bind_lock_commit(state, LOCK)
+        self.assertEqual(state["active_lock_commit"], LOCK)
+        self.assertTrue(state["recovery_required"])
+
+    def test_stage2_opponent_display_recovery_requires_exact_target_and_lock(self):
+        state = begin_request(
+            initial_control_state(),
+            request(
+                OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+                "stage2-display-old",
+            ),
+            "7" * 64,
+            run_id="206",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        state = bind_lock_commit(state, LOCK)
+        data = canonical_json_bytes(state)
+        recovery = request(OP_RECOVER, "stage2-display-recovery")
+        recovery["previous_control_state_sha256"] = sha256_bytes(data)
+        recovery["recovery"] = {
+            "abandoned_request_id": "stage2-display-old",
+            "lock_commit": LOCK,
+            "target_branch": "data/example-school-onboarding",
+        }
+        verify_request_predecessor(
+            state,
+            data,
+            PRED,
+            recovery,
+            MAIN,
+            allow_active_recovery=True,
+        )
 
     def test_stage2_census_requires_exact_target_branch(self):
         req = request(OP_STAGE2_CENSUS)
@@ -514,6 +587,66 @@ class RemoteImplementationGitCASTests(unittest.TestCase):
         self.assertEqual(
             remote_head(work, "data/example-school-onboarding"),
             prepared,
+        )
+
+    def test_existing_ref_cas_success(self):
+        root, bare, work, prepared = self.make_repo()
+        self.addCleanup(lambda: __import__("shutil").rmtree(root))
+        predecessor = self.git(
+            work, "rev-parse", "origin/main"
+        ).stdout.strip()
+        publish_ref_cas(
+            work,
+            branch="main",
+            prepared_commit=prepared,
+            expected_predecessor=predecessor,
+        )
+        self.assertEqual(remote_head(work, "main"), prepared)
+
+    def test_existing_ref_cas_stale_writer_refused(self):
+        root, bare, work, prepared = self.make_repo()
+        self.addCleanup(lambda: __import__("shutil").rmtree(root))
+        stale = "1" * 40
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "TARGET_PUBLICATION_CAS_PRECONDITION_FAILED",
+        ):
+            publish_ref_cas(
+                work,
+                branch="main",
+                prepared_commit=prepared,
+                expected_predecessor=stale,
+            )
+
+    def test_existing_ref_mutation_classification(self):
+        predecessor = "1" * 40
+        manifest = {
+            "expected_target_predecessor_sha": predecessor,
+            "prepared_commit_sha": PREPARED,
+        }
+        self.assertEqual(
+            classify_mutation(
+                predecessor,
+                predecessor,
+                manifest=manifest,
+            ),
+            MUTATION_PREPARED,
+        )
+        self.assertEqual(
+            classify_mutation(
+                predecessor,
+                PREPARED,
+                manifest=manifest,
+            ),
+            MUTATION_PUBLISHED,
+        )
+        self.assertEqual(
+            classify_mutation(
+                predecessor,
+                "9" * 40,
+                manifest=manifest,
+            ),
+            MUTATION_DIVERGED,
         )
 
     def test_create_once_cas_race_refused(self):
