@@ -1,0 +1,13 @@
+{
+  "action_run_id": 39885131693,
+  "actual_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "basketball_data_mutation": false,
+  "expected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_ADMISSION",
+  "final_lifecycle": "IDLE",
+  "fixture_id": "remote-proof-school-b",
+  "request_id": "proof4-postrecovery-b-0001",
+  "request_sha256": "63081785a002f59eb9cae9cb42f92124aa2cb3a4ff7d46ffbc9de7a5ad52b812",
+  "result": "GLOBAL_LOCK_ADMISSION_AVAILABLE",
+  "schema_version": 1
+}

@@ -14,9 +14,10 @@
   "authority_statement": "Experimental project-wide remote Implementation control only. No basketball mutation, Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
   "consumed_request_ids": [
     "proof3-control-0001",
-    "proof4-recovery-0001"
+    "proof4-recovery-0001",
+    "proof4-postrecovery-b-0001"
   ],
-  "current_sequence": 2,
+  "current_sequence": 3,
   "durable_active_state_commit": null,
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_GLOBAL_CONTROL",
@@ -24,7 +25,11 @@
   "inherited_proof3_control_commit": "399fe3213ce012c534a239eda2376c5bcc4202e4",
   "inherited_proof3_control_state_sha256": "d919ad082a12d94abc8b47471567e0feaed51f4dad3d3d07e524b4a71382f1c2",
   "integration_frozen": false,
-  "last_admission_test": null,
+  "last_admission_test": {
+    "action_run_id": 39885131693,
+    "request_id": "proof4-postrecovery-b-0001",
+    "result": "GLOBAL_LOCK_ADMISSION_AVAILABLE"
+  },
   "last_recovery": {
     "abandoned_request_id": "proof4-failure-0001",
     "disposition": "ABANDONED_NO_MUTATION",
