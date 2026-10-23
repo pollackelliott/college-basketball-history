@@ -8,15 +8,15 @@
   "active_lock_commit": "6a45b1e817a047c4c293d97d7b0d4517fee5deab",
   "active_lock_owner": "github-actions:39960641528:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "e037473888024efe176798566c99ca208c54f984",
+  "active_prepared_tree_sha": "5fe8b315a3112ffa815c067b7a907dd55d533fd1",
   "active_request_id": "liu-phase0-0001",
   "active_request_sha256": "7f339aa7b49796f3eda0e808e6c2d3dbeebf0ebddc2d9bc6d5245cc7e76f461e",
   "active_school_key": "long-island-university",
   "active_target_branch": "data/long-island-university-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/long-island-university/liu-phase0-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "dd4fa4b123d5f9772438016df36060a0d66abbf423f5b53b63d3aab764648b61",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001"
@@ -39,5 +39,5 @@
   "lock_acquisition_request_commit": "37a8bf0191226c76bfec90eb7a1e690ee1a51698",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
