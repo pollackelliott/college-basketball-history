@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,7 @@ sys.path.insert(0, str(TOOLS))
 from remote_implementation_control import RemoteImplementationError, sha256_bytes  # noqa: E402
 from remote_implementation_stage2_census import (  # noqa: E402
     STAGE2_ARTIFACT_NAMES,
+    add_existing_onboarding_worktree,
     normalize_artifact_bytes,
     run_stage2_census_tool,
     verify_phase0_authority,
@@ -327,6 +329,22 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": SEMANTIC,
         }
         return repo, control_sha, request, freeze_path
+
+    def test_wrong_onboarding_sha_is_rejected_before_worktree(self):
+        with patch(
+            "remote_implementation_stage2_census.remote_head",
+            return_value="a" * 40,
+        ):
+            with self.assertRaisesRegex(
+                RemoteImplementationError,
+                "STAGE2_ONBOARDING_HEAD_MISMATCH",
+            ):
+                add_existing_onboarding_worktree(
+                    TARGET_BRANCH,
+                    "b" * 40,
+                    SCHOOL,
+                    source_repo=Path("/tmp/not-used"),
+                )
 
     def test_phase0_authority_and_freeze_are_authenticated(self):
         repo, control_sha, request, _ = self.make_authority_repo()
