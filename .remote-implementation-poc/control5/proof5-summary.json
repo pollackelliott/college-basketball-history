@@ -97,5 +97,10 @@
       "writeahead_commit": "d63faba7977a417e4ea15e3751b4331ca7765833",
       "writeahead_manifest_sha256": "1ce84fd24848e063227ccfe482925752a4b4a02732f73890d166f5cc837117c5"
     }
+  },
+  "target_ref_initialization": {
+    "create_once_semantics": "PASS",
+    "duplicate_create_result": "REJECTED_REFERENCE_ALREADY_EXISTS",
+    "note": "A real absent onboarding ref can be initialized at exact current main as a separate lock-held create-ref transition; duplicate creation fails closed."
   }
 }
