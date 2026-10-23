@@ -1,0 +1,27 @@
+{
+  "authority": {
+    "authoritative_integration_freeze": false,
+    "experimental_rehearsal_only": true,
+    "gate1": false,
+    "real_onboarding_branch": false,
+    "real_phase0": false,
+    "release": false,
+    "stage2": false
+  },
+  "creation_provenance": {
+    "architecture_lane": "ChatGPT remote Implementation architecture experiment",
+    "owner_authorization": "Remote Implementation Architecture — Proof 6",
+    "owner_desktop_interaction_required": false,
+    "owner_github_ui_interaction_required": false
+  },
+  "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_REQUEST",
+  "fixture_id": "long-island-university",
+  "operation": "REHEARSE_REAL_LIU_PHASE0",
+  "previous_control_state_commit": "c28ffad96be624d1533a960b0609899c2f1ab973",
+  "previous_control_state_sha256": "8dbd35e230fb622a3ee46246e0e9152c31c6c0ca11ebb827617b56a4e7b64900",
+  "request_id": "proof6-liu-phase0-0001",
+  "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+  "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+  "schema_version": 1
+}
