@@ -1,0 +1,34 @@
+{
+  "allowed_changed_paths": [
+    ".remote-implementation-poc/proof5-target/state.json"
+  ],
+  "authority_statement": "Experimental synthetic mutation only; no basketball or real Implementation mutation authorized.",
+  "boundary": "C",
+  "commit_message": "Proof 5 synthetic published mutation C",
+  "commit_metadata": {
+    "author_email": "proof5@example.invalid",
+    "author_name": "Proof 5 Bot",
+    "committer_email": "proof5@example.invalid",
+    "committer_name": "Proof 5 Bot",
+    "timestamp": "2001-01-03T00:00:00+0000"
+  },
+  "expected_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF5_WRITEAHEAD",
+  "fixture_id": "remote-proof5-fixture",
+  "global_lock_commit": "03ce26d4fb6c9e8a9453d4544a22d41b594da320",
+  "isolated_preparation_base_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "FAIL_BOUNDARY_C",
+  "prepared_commit_sha": "05f20a34869b88d134ae05c2ff0c6023dc069b6d",
+  "prepared_tree_sha": "7d2b756c342dadd2103fd84f80549a5b0fed979c",
+  "protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "request_id": "proof5-boundary-c-0001",
+  "request_sha256": "cee5cf16a1ae16bbbfa5ce72652f0f2a6b0a2d045213fbd0a4583bb4527899d2",
+  "schema_version": 1,
+  "sidecar_authority_file": "synthetic-integration-authority.json",
+  "sidecar_authority_sha256": "c34d3f347e277574a246c774611cef0e63e26d7a93ca341b2f0e36586ddaa8fd",
+  "target_branch": "experiment/remote-implementation-proof5-target",
+  "target_payload_file": "target-state.json",
+  "target_payload_git_blob_sha": "c1c9e605b408cc9c3153724120c8bae4574b00de",
+  "target_payload_sha256": "1c33a1a469294707544a451cd9ba21e8eed8e04a17092d5b72311edbff4aa188"
+}

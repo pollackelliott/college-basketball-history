@@ -1,0 +1,6 @@
+{
+  "generation": 2,
+  "proof": 5,
+  "request_id": "proof5-boundary-c-0001",
+  "state": "PUBLISH_EXACTLY_ONCE_THEN_FAIL"
+}
