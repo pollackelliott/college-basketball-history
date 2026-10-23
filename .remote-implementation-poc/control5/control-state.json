@@ -5,20 +5,21 @@
   ],
   "accepted_request_ids": [
     "proof5-boundary-a-0001",
-    "proof5-boundary-b-0001"
+    "proof5-boundary-b-0001",
+    "proof5-boundary-c-0001"
   ],
-  "active_boundary": null,
-  "active_fixture_id": null,
+  "active_boundary": "C",
+  "active_fixture_id": "remote-proof5-fixture",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:39887323505:1",
+  "active_operation": "FAIL_BOUNDARY_C",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
+  "active_request_id": "proof5-boundary-c-0001",
+  "active_request_sha256": "cee5cf16a1ae16bbbfa5ce72652f0f2a6b0a2d045213fbd0a4583bb4527899d2",
   "active_sidecar_sha256": null,
   "active_target_payload_sha256": null,
-  "active_target_predecessor_sha": null,
+  "active_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
   "active_writeahead_commit": null,
   "active_writeahead_manifest_path": null,
   "active_writeahead_manifest_sha256": null,
@@ -42,11 +43,14 @@
     "recovery_request_id": "proof5-recovery-b-0001",
     "target_sha": "4465002033e935756931fd03f4c49efe3e6a4e34"
   },
-  "lifecycle_state": "IDLE",
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": 1,
+  "lock_acquired_run_id": 39887323505,
+  "lock_acquisition_request_commit": "641a32c6126d86cfb367bd177382844430e1ec09",
   "phase0_authorized": false,
-  "recovery_required": false,
+  "recovery_required": true,
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof5-target",
   "target_starting_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
