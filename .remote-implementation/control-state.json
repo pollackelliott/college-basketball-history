@@ -14,7 +14,7 @@
   "active_request_sha256": "7f339aa7b49796f3eda0e808e6c2d3dbeebf0ebddc2d9bc6d5245cc7e76f461e",
   "active_school_key": "long-island-university",
   "active_target_branch": "data/long-island-university-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "fc1dcac6cda763a601f270667876931d13ba0faa",
   "active_writeahead_path": ".remote-implementation/writeahead/long-island-university/liu-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "dd4fa4b123d5f9772438016df36060a0d66abbf423f5b53b63d3aab764648b61",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
