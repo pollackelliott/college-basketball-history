@@ -21,6 +21,7 @@ from remote_implementation_control import (
     OP_STAGE1,
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_STAGE2_PROPOSAL_REHEARSAL,
     RemoteImplementationError,
     abandon_active,
     begin_request,
@@ -68,6 +69,11 @@ from remote_implementation_stage2_census import (
     add_existing_onboarding_worktree,
     run_stage2_census_tool,
     verify_phase0_authority,
+)
+from remote_implementation_stage2_proposal import (
+    PROPOSAL_ARTIFACT_NAMES,
+    run_stage2_proposal_tool,
+    verify_stage2_proposal_authority,
 )
 from remote_implementation_stage2_opponent_display import (
     apply_and_prepare_repair,
@@ -467,6 +473,234 @@ def run_read_only_stage2_census(
         % (result["stage2_status"], checkpoint_commit)
     )
 
+
+
+
+def _copy_stage2_proposal_artifacts(
+    *,
+    worktree: Path,
+    school: str,
+    result: dict[str, Any],
+    directory: Path,
+) -> tuple[dict[str, str], dict[str, str]]:
+    artifact_hashes: dict[str, str] = {}
+    normalized_hashes: dict[str, str] = {}
+    source_dir = worktree / ".onboarding" / school
+    for name in PROPOSAL_ARTIFACT_NAMES:
+        source = source_dir / name
+        if not source.is_file():
+            continue
+        target = directory / name
+        shutil.copyfile(source, target)
+        artifact_hashes[name] = sha256_file(target)
+        normalized_hashes[name] = result["artifact_normalized_sha256"][name]
+        if artifact_hashes[name] != result["artifact_sha256"][name]:
+            raise Stop(
+                "STAGE2_PROPOSAL_ARTIFACT_COPY_HASH_MISMATCH:%s" % name
+            )
+    return artifact_hashes, normalized_hashes
+
+
+def persist_stage2_proposal_checkpoint(
+    *,
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    live_main: str,
+    worktree: Path,
+    map_path: Path,
+    result: dict[str, Any],
+    authority: dict[str, Any],
+    expected_remote: str,
+) -> str:
+    rid = request["request_id"]
+    school = request["school_key"]
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s" % (school, rid)
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+    map_target = directory / "recommendation-map.json"
+    shutil.copyfile(map_path, map_target)
+    if sha256_file(map_target) != request["recommendation_map"]["sha256"]:
+        raise Stop("STAGE2_PROPOSAL_CHECKPOINT_MAP_HASH_MISMATCH")
+
+    artifact_hashes, normalized_hashes = _copy_stage2_proposal_artifacts(
+        worktree=worktree,
+        school=school,
+        result=result,
+        directory=directory,
+    )
+    status = result["status"]
+    census = result.get("capability_census") or {}
+    preflight = dict(status.get("preflight") or {})
+    recommendation = dict(status.get("recommendation_map") or {})
+    rehearsal = dict(status.get("proposal_rehearsal") or {})
+    site = result.get("site_diagnostic") or {}
+    approved_plan_hash = (
+        rehearsal.get("approved_plan_hash_preview")
+        or recommendation.get("approved_plan_hash_preview")
+    )
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+        "request_id": rid,
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": school,
+        "protected_main_sha": live_main,
+        "runtime_commit_sha": live_main,
+        "runtime_tool_sha256": result["runtime_tool_sha256"],
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
+        "stage2_authority_path": request["stage2_authority"]["path"],
+        "stage2_authority_sha256": request["stage2_authority"]["sha256"],
+        "stage2_authority_kind": authority["authority_kind"],
+        "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+        "decision_universe_sha256": request["decision_universe_sha256"],
+        "recommendation_map_request_path": request["recommendation_map"]["path"],
+        "recommendation_map_checkpoint_path": map_target.as_posix(),
+        "recommendation_map_sha256": request["recommendation_map"]["sha256"],
+        "permanent_command": result["command"],
+        "command_exit_code": result["exit_code"],
+        "stage2_status": result["stage2_status"],
+        "preflight": preflight,
+        "recommendation_map": recommendation,
+        "proposal_rehearsal": rehearsal,
+        "approved_plan_hash_preview": approved_plan_hash,
+        "action_counts": rehearsal.get("action_counts", {}),
+        "changed_path_count": rehearsal.get("changed_path_count"),
+        "site_diagnostic": site,
+        "capability_census_status": census.get("status"),
+        "capability_topology_groups": census.get("topology_groups", []),
+        "artifact_sha256": artifact_hashes,
+        "artifact_normalized_sha256": normalized_hashes,
+        "tracked_mutation_proof": result["tracked_mutation_proof"],
+        "authority_statement": (
+            "Read-only remote Stage 2 proposal rehearsal checkpoint. "
+            "OWNER_GATE_1_READY means only that this exact recommendation map "
+            "survived the permanent disposable rehearsal. No Owner Gate 1 "
+            "approval, fill/seal/apply, Preview, merge, or release authority "
+            "is included."
+        ),
+    }
+    manifest_path = directory / "checkpoint-manifest.json"
+    write_json(manifest_path, manifest)
+    manifest_sha = sha256_file(manifest_path)
+
+    final_state = finalize_success(
+        state,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_PROPOSAL_REHEARSAL,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "checkpoint_manifest_path": manifest_path.as_posix(),
+            "checkpoint_manifest_sha256": manifest_sha,
+            "stage2_status": result["stage2_status"],
+            "decision_universe_sha256": request["decision_universe_sha256"],
+            "recommendation_map_sha256": request["recommendation_map"]["sha256"],
+            "approved_plan_hash_preview": approved_plan_hash,
+            "capability_census_status": census.get("status"),
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_proposal_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 proposal rehearsal %s" % rid,
+        [STATE_PATH, directory],
+    )
+
+
+def run_read_only_stage2_proposal(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    authority = verify_stage2_proposal_authority(
+        request,
+        predecessor_commit,
+    )
+    actual_target = remote_head(ROOT, request["target_branch"])
+    if actual_target != request["target_sha"]:
+        raise Stop(
+            "STAGE2_PROPOSAL_TARGET_HEAD_MISMATCH expected=%s actual=%s"
+            % (request["target_sha"], actual_target or "[missing]")
+        )
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted_commit = commit_control(
+        request_commit,
+        "accept read-only Stage 2 proposal rehearsal request %s"
+        % request["request_id"],
+        [STATE_PATH, archive],
+    )
+
+    scratch = Path(tempfile.mkdtemp(prefix="remote-stage2-proposal-map-"))
+    map_path = materialize_payload(
+        request_commit,
+        request["recommendation_map"],
+        scratch / "recommendation-map.json",
+    )
+    if map_path is None:
+        raise Stop("STAGE2_PROPOSAL_MAP_MISSING")
+
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"],
+        request["target_sha"],
+        request["school_key"],
+    )
+    target_tree = git("rev-parse", "HEAD^{tree}", cwd=worktree).stdout.strip()
+    if authority.get("target_tree_sha") and target_tree != authority["target_tree_sha"]:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_TREE_MISMATCH")
+
+    result = run_stage2_proposal_tool(
+        worktree,
+        request["school_key"],
+        authority["freeze_bytes"],
+        map_path,
+        request["decision_universe_sha256"],
+        DIAG / "stage2-proposal",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("STAGE2_PROPOSAL_TARGET_CHANGED_DURING_RUN")
+
+    checkpoint_commit = persist_stage2_proposal_checkpoint(
+        state=active,
+        request=request,
+        request_bytes=request_bytes,
+        live_main=live_main,
+        worktree=worktree,
+        map_path=map_path,
+        result=result,
+        authority=authority,
+        expected_remote=accepted_commit,
+    )
+    print(
+        "REMOTE STAGE 2 PROPOSAL REHEARSAL: %s checkpoint_commit=%s"
+        % (result["stage2_status"], checkpoint_commit)
+    )
 
 
 def _copy_stage2_result_artifacts(
@@ -1601,6 +1835,15 @@ def main() -> int:
             )
         elif request["operation"] == OP_STAGE2_CENSUS:
             run_read_only_stage2_census(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_PROPOSAL_REHEARSAL:
+            run_read_only_stage2_proposal(
                 state,
                 request,
                 request_bytes,
