@@ -23,8 +23,9 @@ REQUEST_SCHEMA_VERSION = 1
 
 OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
+OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_RECOVER = "RECOVER"
-SUPPORTED_OPERATIONS = {OP_STAGE1, OP_PHASE0, OP_RECOVER}
+SUPPORTED_OPERATIONS = {OP_STAGE1, OP_PHASE0, OP_STAGE2_CENSUS, OP_RECOVER}
 
 LIFECYCLE_IDLE = "IDLE"
 LIFECYCLE_READ_ONLY = "READ_ONLY_ACTIVE"
@@ -32,6 +33,7 @@ LIFECYCLE_ACTIVE = "ACTIVE"
 
 TX_IDLE = "IDLE"
 TX_STAGE1_RUNNING = "STAGE1_RUNNING"
+TX_STAGE2_CENSUS_RUNNING = "STAGE2_CENSUS_RUNNING"
 TX_LOCKED = "LOCKED"
 TX_INPUTS_VERIFIED = "INPUTS_VERIFIED"
 TX_PREPARED = "PREPARED_NOT_PUBLISHED"
@@ -136,6 +138,7 @@ def validate_control_state(state: dict[str, Any]) -> None:
         in {
             TX_IDLE,
             TX_STAGE1_RUNNING,
+            TX_STAGE2_CENSUS_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
             TX_PREPARED,
@@ -248,6 +251,10 @@ def validate_request(request: dict[str, Any]) -> None:
 
     if operation == OP_STAGE1:
         _require(authority.get("phase0") is False, "STAGE1_REQUEST_PHASE0_AUTHORITY_FORBIDDEN")
+        _require(
+            authority.get("stage2_census") is not True,
+            "STAGE1_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_PHASE0:
         _require(authority.get("phase0") is True, "PHASE0_REQUEST_AUTHORITY_REQUIRED")
@@ -258,6 +265,49 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(isinstance(scope, dict), "REQUEST_HISTORY_SCOPE_MISSING")
         for key in ("start_season", "basis", "intervals", "notes"):
             _require(bool(str(scope.get(key) or "").strip()), f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING")
+        _require(
+            authority.get("stage2_census") is not True,
+            "PHASE0_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",
+        )
+
+    if operation == OP_STAGE2_CENSUS:
+        _require(
+            authority.get("stage2_census") is True,
+            "STAGE2_CENSUS_REQUEST_AUTHORITY_REQUIRED",
+        )
+        _require(
+            authority.get("phase0") is False,
+            "STAGE2_CENSUS_PHASE0_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("recovery") is False,
+            "STAGE2_CENSUS_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "STAGE2_CENSUS_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "STAGE2_CENSUS_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("phase0_successor"),
+            "phase0_successor",
+            required=True,
+        )
+        _require_sha(
+            request.get("integration_freeze_sha256"),
+            64,
+            "STAGE2_CENSUS_INTEGRATION_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("semantic_snapshot_sha256"),
+            64,
+            "STAGE2_CENSUS_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
 
     if operation == OP_RECOVER:
         _require(authority.get("recovery") is True, "RECOVERY_REQUEST_AUTHORITY_REQUIRED")
@@ -323,11 +373,11 @@ def verify_request_predecessor(
                 == f"data/{state.get('active_school_key')}-onboarding",
                 "STALE_RECOVERY_TARGET_MISMATCH",
             )
-        elif state.get("active_operation") == OP_STAGE1:
+        elif state.get("active_operation") in {OP_STAGE1, OP_STAGE2_CENSUS}:
             _require(
                 recovery.get("target_branch") is None
                 and recovery.get("lock_commit") is None,
-                "STALE_STAGE1_RECOVERY_BOUNDARY_MISMATCH",
+                "STALE_READ_ONLY_RECOVERY_BOUNDARY_MISMATCH",
             )
         _require(state.get("recovery_required") is True, "STALE_RECOVERY_NOT_REQUIRED")
     else:
@@ -356,10 +406,15 @@ def begin_request(
     result["lock_acquired_run_id"] = str(run_id)
     result["lock_acquired_run_attempt"] = str(run_attempt)
     result["lock_acquisition_request_commit"] = request_commit
-    if request["operation"] == OP_STAGE1:
+    if request["operation"] in {OP_STAGE1, OP_STAGE2_CENSUS}:
         result["lifecycle_state"] = LIFECYCLE_READ_ONLY
-        result["transaction_state"] = TX_STAGE1_RUNNING
+        result["transaction_state"] = (
+            TX_STAGE1_RUNNING
+            if request["operation"] == OP_STAGE1
+            else TX_STAGE2_CENSUS_RUNNING
+        )
         result["active_lock_owner"] = None
+        result["active_target_branch"] = request.get("target_branch")
         result["recovery_required"] = True
     else:
         result["lifecycle_state"] = LIFECYCLE_ACTIVE

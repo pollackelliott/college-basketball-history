@@ -31,7 +31,7 @@ Read these process documents together before onboarding work:
 - `docs/non-d1-owner-sanity-scan.md`
 - `docs/program-top-level-scope-reference.md`
 
-Through stable Phase 0, serialized Implementation may execute either in the project Codespace or through the repository-owned guarded remote runner under `docs/remote-implementation-runner.md`. The same current-main, one-active-lane, permanent-tool, owner-gate, shared-reference, and release rules apply in either environment. Remote Stage 2, Gate 1, sealed apply, Preview, merge, and Production proof are not authorized until separately productionized.
+Through stable Phase 0 and the read-only Stage 2 capability-census boundary (`STAGE2_CENSUS` → `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint), serialized Implementation may execute either in the project Codespace or through the repository-owned guarded remote runner under `docs/remote-implementation-runner.md`. The same current-main, one-active-lane, permanent-tool, owner-gate, shared-reference, and release rules apply in either environment. Remote Stage 2 tracked repairs, recommendation-map submission, proposal rehearsal, `OWNER_GATE_1_READY`, Gate 1 approval, sealed apply, Preview, merge, and Production proof remain unauthorized until separately productionized.
 
 The post-Iowa hardening amendment is controlling where it makes the execution path
 more specific than the older fast-path wording. The site-completeness protocol is
@@ -199,7 +199,7 @@ authorized dedicated maintenance branch/PR under `docs/shared-reference-authorit
 Any shared-reference mutation must pass both repository validation and declared-intent diff
 validation; unrelated shared-row changes are a STOP.
 
-1. Execute serialized Implementation either in the project Codespace on `data/<school_key>-onboarding` or, through stable Phase 0 only, via the guarded remote runner in `docs/remote-implementation-runner.md`; never mutate protected `main` directly.
+1. Execute serialized Implementation either in the project Codespace on `data/<school_key>-onboarding` or, through stable Phase 0 plus the read-only Stage 2 capability census only, via the guarded remote runner in `docs/remote-implementation-runner.md`; never mutate protected `main` directly.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
    `python tools/onboarding_hardening.py research-check ...` on an incoming six-file
    portfolio before Phase 0. A portfolio may preserve genuinely unresolved historical

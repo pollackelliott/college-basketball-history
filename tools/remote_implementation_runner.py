@@ -18,6 +18,7 @@ from remote_implementation_control import (
     OP_PHASE0,
     OP_RECOVER,
     OP_STAGE1,
+    OP_STAGE2_CENSUS,
     RemoteImplementationError,
     abandon_active,
     begin_request,
@@ -59,6 +60,12 @@ from remote_implementation_io import (
     run_stage1_tool,
     validate_stage1_pass,
     write_json,
+)
+from remote_implementation_stage2_census import (
+    STAGE2_ARTIFACT_NAMES,
+    add_existing_onboarding_worktree,
+    run_stage2_census_tool,
+    verify_phase0_authority,
 )
 
 DIAG = Path(
@@ -262,6 +269,192 @@ def run_read_only_stage1(
     print(
         "REMOTE STAGE 1 CHECKPOINT: %s commit=%s"
         % (report.get("status"), checkpoint_commit)
+    )
+
+
+def persist_stage2_census_checkpoint(
+    *,
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    live_main: str,
+    worktree: Path,
+    result: dict[str, Any],
+    phase0_authority: dict[str, Any],
+    expected_remote: str,
+) -> str:
+    rid = request["request_id"]
+    school = request["school_key"]
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s" % (school, rid)
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+
+    artifact_hashes: dict[str, str] = {}
+    normalized_hashes: dict[str, str] = {}
+    source_dir = worktree / ".onboarding" / school
+    for name in STAGE2_ARTIFACT_NAMES:
+        source = source_dir / name
+        if not source.is_file():
+            continue
+        target = directory / name
+        shutil.copyfile(source, target)
+        artifact_hashes[name] = sha256_file(target)
+        normalized_hashes[name] = result["artifact_normalized_sha256"][name]
+        if artifact_hashes[name] != result["artifact_sha256"][name]:
+            raise Stop("STAGE2_CHECKPOINT_ARTIFACT_COPY_HASH_MISMATCH:%s" % name)
+
+    status = result["status"]
+    census = result.get("capability_census") or {}
+    preflight = dict(status.get("preflight") or {})
+    capability_status = str(census.get("status") or "")
+    capability_hash = artifact_hashes.get(
+        "implementation-stage2-capability-census.json"
+    )
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+        "request_id": rid,
+        "school_key": school,
+        "protected_main_sha": live_main,
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
+        "phase0_successor_path": request["phase0_successor"]["path"],
+        "phase0_successor_sha256": request["phase0_successor"]["sha256"],
+        "phase0_protected_main_sha": phase0_authority[
+            "phase0_protected_main_sha"
+        ],
+        "integration_freeze_sha256": request[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": request[
+            "semantic_snapshot_sha256"
+        ],
+        "permanent_command": result["command"],
+        "command_exit_code": result["exit_code"],
+        "stage2_status": result["stage2_status"],
+        "preflight": preflight,
+        "decision_universe_sha256": preflight.get(
+            "decision_universe_sha256"
+        ),
+        "capability_census_status": capability_status,
+        "capability_census_sha256": capability_hash,
+        "capability_preflight": census.get("preflight", {}),
+        "capability_topology_groups": census.get(
+            "topology_groups", []
+        ),
+        "artifact_sha256": artifact_hashes,
+        "artifact_normalized_sha256": normalized_hashes,
+        "tracked_mutation_proof": result[
+            "tracked_mutation_proof"
+        ],
+        "authority_statement": (
+            "Read-only remote Implementation Stage 2 discovery checkpoint. "
+            "No tracked repair, recommendation map, Gate 1 rehearsal, owner "
+            "approval, sealed apply, Preview, or release authority is included."
+        ),
+    }
+    manifest_path = directory / "checkpoint-manifest.json"
+    write_json(manifest_path, manifest)
+    manifest_sha = sha256_file(manifest_path)
+
+    final_state = finalize_success(
+        state,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_CENSUS,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "checkpoint_manifest_path": manifest_path.as_posix(),
+            "checkpoint_manifest_sha256": manifest_sha,
+            "stage2_status": result["stage2_status"],
+            "decision_universe_sha256": preflight.get(
+                "decision_universe_sha256"
+            ),
+            "capability_census_sha256": capability_hash,
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_census_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 census checkpoint %s" % rid,
+        [STATE_PATH, directory],
+    )
+
+
+def run_read_only_stage2_census(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    phase0_authority = verify_phase0_authority(
+        request,
+        predecessor_commit,
+    )
+    actual_target = remote_head(ROOT, request["target_branch"])
+    if actual_target != request["target_sha"]:
+        raise Stop(
+            "STAGE2_ONBOARDING_HEAD_MISMATCH expected=%s actual=%s"
+            % (request["target_sha"], actual_target or "[missing]")
+        )
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted_commit = commit_control(
+        request_commit,
+        "accept read-only Stage 2 census request %s"
+        % request["request_id"],
+        [STATE_PATH, archive],
+    )
+
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"],
+        request["target_sha"],
+        request["school_key"],
+    )
+    result = run_stage2_census_tool(
+        worktree,
+        request["school_key"],
+        phase0_authority["freeze_bytes"],
+        DIAG,
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("STAGE2_ONBOARDING_HEAD_CHANGED_DURING_RUN")
+
+    checkpoint_commit = persist_stage2_census_checkpoint(
+        state=active,
+        request=request,
+        request_bytes=request_bytes,
+        live_main=live_main,
+        worktree=worktree,
+        result=result,
+        phase0_authority=phase0_authority,
+        expected_remote=accepted_commit,
+    )
+    print(
+        "REMOTE STAGE 2 CENSUS: %s checkpoint_commit=%s"
+        % (result["stage2_status"], checkpoint_commit)
     )
 
 
@@ -921,6 +1114,15 @@ def main() -> int:
                 request,
                 request_bytes,
                 request_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_CENSUS:
+            run_read_only_stage2_census(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
                 live_main,
             )
         elif request["operation"] == OP_PHASE0:
