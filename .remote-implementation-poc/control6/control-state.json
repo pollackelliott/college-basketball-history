@@ -6,7 +6,7 @@
     "proof6-liu-phase0-0001",
     "proof6-liu-phase0-0002"
   ],
-  "active_lock_commit": null,
+  "active_lock_commit": "c53276327a06744718d6712f8e2ac30f4b560b7c",
   "active_lock_owner": "github-actions:39903659540:1",
   "active_operation": "REHEARSE_REAL_LIU_PHASE0",
   "active_request_id": "proof6-liu-phase0-0002",
