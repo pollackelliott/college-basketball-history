@@ -68,6 +68,18 @@ def main() -> int:
         target_sha = remote_head(ROOT, target_branch)
         if target_sha != successor["prepared_commit_sha"]:
             raise Stop("FRESH_VERIFY_TARGET_REF_MISMATCH")
+        git(
+            "fetch",
+            "--no-tags",
+            "origin",
+            "+refs/heads/%s:refs/remotes/origin/remote-target" % target_branch,
+        )
+        fetched_target = git(
+            "rev-parse",
+            "refs/remotes/origin/remote-target",
+        ).stdout.strip()
+        if fetched_target != target_sha:
+            raise Stop("FRESH_VERIFY_TARGET_FETCH_MISMATCH")
 
         writeahead_path = successor["writeahead_manifest_path"]
         writeahead_bytes = git_show_bytes(control_head, writeahead_path)
