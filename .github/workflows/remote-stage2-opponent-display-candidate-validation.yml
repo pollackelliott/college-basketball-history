@@ -1,0 +1,37 @@
+name: Temporary remote Stage 2 opponent-display candidate validation
+
+on:
+  push:
+    branches:
+      - tooling/remote-stage2-opponent-display-normalize
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile remote tooling
+        run: |
+          python -m py_compile \
+            tools/remote_implementation_control.py \
+            tools/remote_implementation_runner.py \
+            tools/remote_implementation_verify.py \
+            tools/remote_implementation_stage2_census.py \
+            tools/remote_implementation_stage2_opponent_display.py
+      - name: Focused tests
+        run: |
+          python -m unittest -v \
+            tests.test_remote_implementation_control \
+            tests.test_normalize_historical_opponent_displays \
+            tests.test_remote_implementation_stage2_census \
+            tests.test_remote_implementation_stage2_opponent_display
+      - name: Repository validation
+        run: python tools/validate_data.py
