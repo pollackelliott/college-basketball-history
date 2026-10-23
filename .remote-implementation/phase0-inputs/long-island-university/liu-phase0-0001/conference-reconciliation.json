@@ -1,0 +1,64 @@
+{
+  "expected_conferences_sha256": "7e2bbd0ef53a5cbbf4afafad27d7742ca40c872fa5b1a2aaf023fba2f9f0a4e1",
+  "owner_approval_basis": "Control Center-authorized Proof 6 ECAC Metro to NEC reconciliation; post-merge read-only verification.",
+  "registrations": [],
+  "replacement_history": [
+    {
+      "basis": "LIU institutional record book year-by-year records and explicit Conference Affiliation History.",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "end_season": "1950-1951",
+      "membership_type": "independent",
+      "notes": "All active-scope seasons in the first interval precede LIU conference-affiliation eras documented by the source; excluded 1951-52 through 1967-68 are not represented.",
+      "ongoing": "No",
+      "source_program_key": "long-island-university",
+      "start_season": "1928-1929"
+    },
+    {
+      "basis": "LIU institutional record book Conference Affiliation History (Metropolitan Conference 1965-69) plus 1968-69 year-by-year conference record; protected-main shared historical identity reused.",
+      "conference_key": "metropolitan-collegiate-conference",
+      "conference_name": "Metropolitan",
+      "end_season": "1968-1969",
+      "membership_type": "primary",
+      "notes": "Only the 1968-69 season is in active LIU target scope after the owner-confirmed re-ascension correction.",
+      "ongoing": "No",
+      "source_program_key": "long-island-university",
+      "start_season": "1968-1969"
+    },
+    {
+      "basis": "LIU institutional year-by-year records show no conference record; explicit Conference Affiliation History lists no affiliation between Metropolitan ending 1968-69 and ECAC Metro beginning 1981-82.",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "end_season": "1980-1981",
+      "membership_type": "independent",
+      "notes": "Accepted 1975-76 and 1980-81 ECAC Metro NY/NJ postseason events are postseason event evidence, not conference membership.",
+      "ongoing": "No",
+      "source_program_key": "long-island-university",
+      "start_season": "1969-1970"
+    },
+    {
+      "basis": "LIU institutional record book Conference Affiliation History (ECAC Metro 1981-1988); NEC official history independently confirms ECAC-Metro formed in 1981 with LIU as a charter member.",
+      "conference_key": "nec",
+      "conference_name": "ECAC Metro",
+      "end_season": "1987-1988",
+      "membership_type": "primary",
+      "notes": "Historical identity: RESOLVED. Global registration: PENDING_CURRENT_MAIN_REBASE. Provisional school-local key distinguishes the actual 1981-88 conference from earlier ECAC Metro postseason events.",
+      "ongoing": "No",
+      "source_program_key": "long-island-university",
+      "start_season": "1981-1982"
+    },
+    {
+      "basis": "LIU institutional record book Conference Affiliation History (Northeast Conference 1988-present), protected-main NEC identity, and accepted Stage 3B NEC tournament evidence through 2025-26.",
+      "conference_key": "nec",
+      "conference_name": "NEC",
+      "end_season": "",
+      "membership_type": "primary",
+      "notes": "The LIU source states that ECAC Metro became the Northeast Conference; ongoing through required completed-season cutoff 2025-26.",
+      "ongoing": "Yes",
+      "source_program_key": "long-island-university",
+      "start_season": "1988-1989"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "long-island-university"
+}

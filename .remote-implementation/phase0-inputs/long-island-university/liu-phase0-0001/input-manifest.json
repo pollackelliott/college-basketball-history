@@ -1,0 +1,22 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "request_id": "liu-phase0-0001",
+  "research_checkpoint_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+  "research_member_sha256": {
+    "conferences.csv": "7e2bbd0ef53a5cbbf4afafad27d7742ca40c872fa5b1a2aaf023fba2f9f0a4e1",
+    "notes.md": "b2fcc96a8b33057ac6e76024a3a7b3c66341510694173ed173b02d67a02ca4fc",
+    "opponents.csv": "d606d05945f2311f803cbc849161506c5f486d595f510b38a9041bc71a531f53",
+    "source-games.csv": "6cbcc0b2d11ea357a813dc3a802becce8f9e2b38ad68dab35f2dd183ec0f752c",
+    "source-notes.md": "4fbd435264319250f50823358ae69dee386799c9b33497140bf8a2b98180a4c1",
+    "venues.csv": "3d068bcf6981a13950b720fa81d9260fce9ed1ff5ca434c31cdda4d604d061f5"
+  },
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "sidecars": {
+    "conference-reconciliation.json": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
+    "stage1-reconciliation.json": "3a4605f0fa95ad3d2cf962aa11137267bca7a9039af2593a8657dcd57449a38e",
+    "venue-reconciliation.json": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
+  },
+  "stage1_status": "PASS"
+}
