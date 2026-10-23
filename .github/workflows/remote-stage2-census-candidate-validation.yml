@@ -31,3 +31,160 @@ jobs:
           python -m unittest \
             tests.test_remote_implementation_control \
             tests.test_remote_implementation_stage2_census -v
+      - name: Run full repository tests
+        run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Validate repository
+        run: python tools/validate_data.py
+
+  liu-disposable-regression:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run real LIU Phase 0 through disposable Stage 2 census control plane
+        shell: bash
+        run: |
+          set -e
+          CANDIDATE="$(git rev-parse HEAD)"
+          LIU_SHA="e037473888024efe176798566c99ca208c54f984"
+          PROD_CONTROL="ce6a4a55b9c4473ece3f79b8d92cfbcae6473638"
+          BARE="/tmp/cbh-stage2-census-regression.git"
+          CONTROL_WT="/tmp/cbh-stage2-control"
+
+          git fetch --no-tags origin \
+            refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation \
+            refs/heads/data/long-island-university-onboarding:refs/remotes/origin/data/long-island-university-onboarding
+
+          test "$(git rev-parse refs/remotes/origin/control/remote-implementation)" = "$PROD_CONTROL"
+          test "$(git rev-parse refs/remotes/origin/data/long-island-university-onboarding)" = "$LIU_SHA"
+
+          git init --bare "$BARE"
+          git push "$BARE" "$CANDIDATE:refs/heads/main"
+          git push "$BARE" \
+            "refs/remotes/origin/data/long-island-university-onboarding:refs/heads/data/long-island-university-onboarding"
+
+          git worktree add --detach "$CONTROL_WT" "$PROD_CONTROL"
+          cd "$CONTROL_WT"
+          git config user.name "Stage2 Census Regression"
+          git config user.email "stage2-census-regression@example.invalid"
+          git switch -c candidate-control
+          git checkout "$CANDIDATE" -- \
+            tools/remote_implementation_control.py \
+            tools/remote_implementation_io.py \
+            tools/remote_implementation_runner.py \
+            tools/remote_implementation_verify.py \
+            tools/remote_implementation_stage2_census.py
+          git add tools
+          git commit -m "Candidate remote Stage 2 census control code"
+          CANDIDATE_CONTROL="$(git rev-parse HEAD)"
+          git remote set-url origin "$BARE"
+          git push origin "HEAD:refs/heads/control/remote-implementation"
+
+          python - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+
+          root=Path("/tmp/cbh-stage2-control")
+          def git(*args):
+              return subprocess.check_output(["git",*args],cwd=root,text=True).strip()
+          pred=git("rev-parse","HEAD")
+          state=(root/".remote-implementation/control-state.json").read_bytes()
+          successor_path=".remote-implementation/successors/long-island-university/liu-phase0-0001/successor-manifest.json"
+          successor_bytes=subprocess.check_output(
+              ["git","show",f"{pred}:{successor_path}"],cwd=root
+          )
+          request={
+              "schema_version":1,
+              "kind":"REMOTE_IMPLEMENTATION_REQUEST",
+              "request_id":"liu-stage2-census-disposable-0001",
+              "school_key":"long-island-university",
+              "operation":"STAGE2_CENSUS",
+              "previous_control_state_commit":pred,
+              "previous_control_state_sha256":hashlib.sha256(state).hexdigest(),
+              "expected_protected_main_sha":subprocess.check_output(
+                  ["git","ls-remote","origin","refs/heads/main"],cwd=root,text=True
+              ).split()[0],
+              "target_branch":"data/long-island-university-onboarding",
+              "target_sha":"e037473888024efe176798566c99ca208c54f984",
+              "phase0_successor":{
+                  "path":successor_path,
+                  "sha256":hashlib.sha256(successor_bytes).hexdigest(),
+              },
+              "integration_freeze_sha256":"336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+              "semantic_snapshot_sha256":"3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+              "creation_provenance":{
+                  "origin":"candidate-regression",
+                  "authorization":"Disposable non-authoritative LIU Stage 2 census regression only.",
+              },
+              "authority":{
+                  "owner_gate_1":False,
+                  "owner_gate_2":False,
+                  "release":False,
+                  "phase0":False,
+                  "stage2_census":True,
+                  "recovery":False,
+              },
+          }
+          (root/".remote-implementation/request.json").write_text(
+              json.dumps(request,indent=2,sort_keys=True)+"\n",encoding="utf-8"
+          )
+          PY
+          git add .remote-implementation/request.json
+          git commit -m "Disposable LIU Stage 2 census request"
+          REQUEST_COMMIT="$(git rev-parse HEAD)"
+          git push origin "HEAD:refs/heads/control/remote-implementation"
+
+          GITHUB_SHA="$REQUEST_COMMIT" \
+          GITHUB_RUN_ID="990001" \
+          GITHUB_RUN_ATTEMPT="1" \
+          REMOTE_IMPLEMENTATION_CONTROL_BRANCH="control/remote-implementation" \
+            python tools/remote_implementation_runner.py | tee /tmp/liu-stage2-runner.log
+
+          while read -r path; do
+            case "$path" in
+              /tmp/remote-stage2-*) git worktree remove --force "$path" ;;
+            esac
+          done < <(git worktree list --porcelain | awk '/^worktree /{print $2}')
+          git branch --list 'remote-stage2-census/*' | sed 's/^..//' | while read -r b; do
+            test -z "$b" || git branch -D "$b"
+          done
+
+          REMOTE_IMPLEMENTATION_CONTROL_BRANCH="control/remote-implementation" \
+            python tools/remote_implementation_verify.py | tee /tmp/liu-stage2-verify.log
+
+          ACTUAL_LIU="$(git ls-remote origin refs/heads/data/long-island-university-onboarding | awk '{print $1}')"
+          test "$ACTUAL_LIU" = "$LIU_SHA"
+
+          git fetch --no-tags origin \
+            +refs/heads/control/remote-implementation:refs/remotes/origin/final-control
+          python - <<'PY'
+          import json, subprocess
+          root="/tmp/cbh-stage2-control"
+          state=json.loads(subprocess.check_output(
+              ["git","show","refs/remotes/origin/final-control:.remote-implementation/control-state.json"],
+              cwd=root,text=True
+          ))
+          last=state["last_operation"]
+          assert state["lifecycle_state"]=="IDLE", state
+          assert state["recovery_required"] is False, state
+          assert last["operation"]=="STAGE2_CENSUS", last
+          assert last["fresh_runner_verification"]=="PASS", last
+          assert last["remote_stage2_census_equivalence"]=="PASS", last
+          checkpoint=json.loads(subprocess.check_output(
+              ["git","show",f"refs/remotes/origin/final-control:{last['checkpoint_manifest_path']}"],
+              cwd=root,text=True
+          ))
+          print("DISPOSABLE_LIU_STAGE2_STATUS="+checkpoint["stage2_status"])
+          print("DISPOSABLE_LIU_DECISION_SHA="+str(checkpoint.get("decision_universe_sha256") or ""))
+          print("DISPOSABLE_LIU_CAPABILITY_STATUS="+str(checkpoint.get("capability_census_status") or ""))
+          print("DISPOSABLE_LIU_BLOCKERS="+str((checkpoint.get("preflight") or {}).get("blocker_count")))
+          print("DISPOSABLE_LIU_WARNINGS="+str((checkpoint.get("preflight") or {}).get("warning_count")))
+          print("DISPOSABLE_LIU_DECISIONS="+str((checkpoint.get("preflight") or {}).get("decision_count")))
+          print("DISPOSABLE_LIU_TRACKED_MUTATION="+checkpoint["tracked_mutation_proof"]["tracked_stage2_mutation"])
+          print("DISPOSABLE_LIU_EQUIVALENCE=PASS")
+          PY
