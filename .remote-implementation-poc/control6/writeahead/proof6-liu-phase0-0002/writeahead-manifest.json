@@ -1,0 +1,822 @@
+{
+  "authority_statement": "Disposable real-tool LIU Phase 0 rehearsal only; no authoritative LIU status or real onboarding-branch authority.",
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "0a70a8e9e046bccc34413ff17c2a3e48ce5aa5020ae9af4e4a08c4a6ad9abaaa",
+    "data/reference/venue-names.csv": "c01653124389240ad9bbbc8a6743ae14506c1230024d7160a370ea5cfae2b9a0",
+    "data/reference/venues.csv": "a83ff0f64e810555783d6f1af47a65640bf2ad234c84beb6c2e4e2fc74abbbb4",
+    "schools/long-island-university/conferences.csv": "1f3ae9d4d11ead8e116c702e920c1896b398f4fce6951de23367b61b8ee66017",
+    "schools/long-island-university/notes.md": "00c19286dd0933f0668acb73aa8ca43365f6c91f13dbe51acb63d15e969450c4",
+    "schools/long-island-university/opponents.csv": "d606d05945f2311f803cbc849161506c5f486d595f510b38a9041bc71a531f53",
+    "schools/long-island-university/source-games.csv": "6cbcc0b2d11ea357a813dc3a802becce8f9e2b38ad68dab35f2dd183ec0f752c",
+    "schools/long-island-university/source-notes.md": "4fbd435264319250f50823358ae69dee386799c9b33497140bf8a2b98180a4c1",
+    "schools/long-island-university/venues.csv": "2e56db1172b5381858d1a57baf9589066fbcbb2c751e4fe622c9f1b1b90690c3"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/conferences.csv",
+    "schools/long-island-university/notes.md",
+    "schools/long-island-university/opponents.csv",
+    "schools/long-island-university/source-games.csv",
+    "schools/long-island-university/source-notes.md",
+    "schools/long-island-university/venues.csv"
+  ],
+  "commit_message": "Add Long Island University onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation_metadata": {
+    "frozen_conferences_sha256": "7e2bbd0ef53a5cbbf4afafad27d7742ca40c872fa5b1a2aaf023fba2f9f0a4e1",
+    "owner_approval_basis": "Control Center-authorized Proof 6 ECAC Metro to NEC reconciliation; post-merge read-only verification.",
+    "registration_count": 0,
+    "registrations": [],
+    "replacement_history": [
+      {
+        "basis": "LIU institutional record book year-by-year records and explicit Conference Affiliation History.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1950-1951",
+        "membership_type": "independent",
+        "notes": "All active-scope seasons in the first interval precede LIU conference-affiliation eras documented by the source; excluded 1951-52 through 1967-68 are not represented.",
+        "ongoing": "No",
+        "source_program_key": "long-island-university",
+        "start_season": "1928-1929"
+      },
+      {
+        "basis": "LIU institutional record book Conference Affiliation History (Metropolitan Conference 1965-69) plus 1968-69 year-by-year conference record; protected-main shared historical identity reused.",
+        "conference_key": "metropolitan-collegiate-conference",
+        "conference_name": "Metropolitan",
+        "end_season": "1968-1969",
+        "membership_type": "primary",
+        "notes": "Only the 1968-69 season is in active LIU target scope after the owner-confirmed re-ascension correction.",
+        "ongoing": "No",
+        "source_program_key": "long-island-university",
+        "start_season": "1968-1969"
+      },
+      {
+        "basis": "LIU institutional year-by-year records show no conference record; explicit Conference Affiliation History lists no affiliation between Metropolitan ending 1968-69 and ECAC Metro beginning 1981-82.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1980-1981",
+        "membership_type": "independent",
+        "notes": "Accepted 1975-76 and 1980-81 ECAC Metro NY/NJ postseason events are postseason event evidence, not conference membership.",
+        "ongoing": "No",
+        "source_program_key": "long-island-university",
+        "start_season": "1969-1970"
+      },
+      {
+        "basis": "LIU institutional record book Conference Affiliation History (ECAC Metro 1981-1988); NEC official history independently confirms ECAC-Metro formed in 1981 with LIU as a charter member.",
+        "conference_key": "nec",
+        "conference_name": "ECAC Metro",
+        "end_season": "1987-1988",
+        "membership_type": "primary",
+        "notes": "Historical identity: RESOLVED. Global registration: PENDING_CURRENT_MAIN_REBASE. Provisional school-local key distinguishes the actual 1981-88 conference from earlier ECAC Metro postseason events.",
+        "ongoing": "No",
+        "source_program_key": "long-island-university",
+        "start_season": "1981-1982"
+      },
+      {
+        "basis": "LIU institutional record book Conference Affiliation History (Northeast Conference 1988-present), protected-main NEC identity, and accepted Stage 3B NEC tournament evidence through 2025-26.",
+        "conference_key": "nec",
+        "conference_name": "NEC",
+        "end_season": "",
+        "membership_type": "primary",
+        "notes": "The LIU source states that ECAC Metro became the Northeast Conference; ongoing through required completed-season cutoff 2025-26.",
+        "ongoing": "Yes",
+        "source_program_key": "long-island-university",
+        "start_season": "1988-1989"
+      }
+    ],
+    "replacement_row_count": 5,
+    "spec_path": "/tmp/proof6-inputs-_ux8ycgm/liu-stage1-conference-reconciliation.json",
+    "spec_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b"
+  },
+  "conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
+  "contract_allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/conferences.csv",
+    "schools/long-island-university/notes.md",
+    "schools/long-island-university/opponents.csv",
+    "schools/long-island-university/source-games.csv",
+    "schools/long-island-university/source-notes.md",
+    "schools/long-island-university/venues.csv"
+  ],
+  "expected_target_nonexistent": true,
+  "expected_target_predecessor": null,
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_WRITEAHEAD",
+  "global_lock_commit": "c53276327a06744718d6712f8e2ac30f4b560b7c",
+  "history_scope": {
+    "history_scope_basis": "TOP_LEVEL_INTERVALS",
+    "history_scope_intervals": "1928-29..1950-51|1968-69+",
+    "history_scope_notes": "Owner-confirmed LIU top-level scope: 1928-29 through 1950-51 and 1968-69 onward; 1951-52 through 1967-68 excluded. Proof 6 disposable rehearsal only.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1928-1929"
+  },
+  "integration_freeze_file": "integration-freeze.json",
+  "integration_freeze_package_member_sha256": {
+    "conferences.csv": "1f3ae9d4d11ead8e116c702e920c1896b398f4fce6951de23367b61b8ee66017",
+    "notes.md": "00c19286dd0933f0668acb73aa8ca43365f6c91f13dbe51acb63d15e969450c4",
+    "opponents.csv": "d606d05945f2311f803cbc849161506c5f486d595f510b38a9041bc71a531f53",
+    "source-games.csv": "6cbcc0b2d11ea357a813dc3a802becce8f9e2b38ad68dab35f2dd183ec0f752c",
+    "source-notes.md": "4fbd435264319250f50823358ae69dee386799c9b33497140bf8a2b98180a4c1",
+    "venues.csv": "2e56db1172b5381858d1a57baf9589066fbcbb2c751e4fe622c9f1b1b90690c3"
+  },
+  "integration_freeze_sha256": "a0db804501dc12f1e3ef060e60821c1971a4814e3fc8d3209513009cd6ac3e06",
+  "known_scope_reference_debt": {
+    "accepted_owner_scope": "1928-29..1950-51|1968-69+",
+    "classification": "SETTLED_SHARED_REFERENCE_MAINTENANCE_DEBT_NOT_MUTATED_BY_PROOF6",
+    "protected_main_row": "1947-48..1950-51|1968-69+"
+  },
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "permanent_command": "python tools/stage_research_portfolio.py long-island-university <exact-research-freeze> --expected-sha256 <exact> --research-base <exact> --history-start-season 1928-1929 --history-scope-basis TOP_LEVEL_INTERVALS --history-scope-intervals 1928-29..1950-51|1968-69+ --history-scope-notes <owner-confirmed> --venue-reconciliation <exact> --conference-reconciliation <exact> --apply --commit",
+  "permanent_command_exit_status": 0,
+  "prepared_phase0_commit_sha": "ff9eb5ca1be1e07232ca2245ec4352f1defbe6e7",
+  "prepared_phase0_parent_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+  "prepared_phase0_tree_sha": "f53fbf5436ab4056232c6771b52105e52af9318c",
+  "program_alias_mapping": [],
+  "protected_main_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+  "repository_validation": "PASS",
+  "request_id": "proof6-liu-phase0-0002",
+  "request_sha256": "6ebc42675b33b6f54e99858acb6347bbe20d62959a8ae3373e2147ae3b307bb8",
+  "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+  "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+  "schema_version": 1,
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "stage1_reconciliation_sha256": "1dbd15a2fce41f7b8f079721a8a66c7c01c77256038c608b37318606b43ffb89",
+  "stage1_status": "PASS",
+  "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
+  "venue_mapping": [
+    {
+      "canonical_name": "Druggist's Den (Brooklyn College of Pharmacy Gymnasium)",
+      "final_venue_id": "VEN-000953",
+      "final_venue_key": "liu-druggists-den",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "liu-druggists-den"
+    },
+    {
+      "canonical_name": "Arnold and Marie Schwartz Athletic Center",
+      "final_venue_id": "VEN-000949",
+      "final_venue_key": "schwartz-athletic-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "liu-schwartz"
+    },
+    {
+      "canonical_name": "Steinberg Wellness Center",
+      "final_venue_id": "VEN-000611",
+      "final_venue_key": "steinberg-wellness-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "liu-wellness"
+    },
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "liu-barclays"
+    },
+    {
+      "canonical_name": "Worthen Arena",
+      "final_venue_id": "VEN-000954",
+      "final_venue_key": "worthen-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "worthen-arena"
+    },
+    {
+      "canonical_name": "Stony Brook Indoor Sports Complex",
+      "final_venue_id": "VEN-000955",
+      "final_venue_key": "stony-brook-indoor-sports-complex",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "stony-brook-indoor-sports-complex"
+    },
+    {
+      "canonical_name": "John Kresse Arena",
+      "final_venue_id": "VEN-000693",
+      "final_venue_key": "john-kresse-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "john-kresse-arena"
+    },
+    {
+      "canonical_name": "Mohegan Sun Arena",
+      "final_venue_id": "VEN-000139",
+      "final_venue_key": "mohegan-sun-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mohegan-sun-arena"
+    },
+    {
+      "canonical_name": "Bren Events Center",
+      "final_venue_id": "VEN-000314",
+      "final_venue_key": "bren-events-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bren-events-center"
+    },
+    {
+      "canonical_name": "Case Gymnasium (The Roof)",
+      "final_venue_id": "VEN-000956",
+      "final_venue_key": "case-gym-boston-university",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "case-gym-boston-university"
+    },
+    {
+      "canonical_name": "Montego Bay Convention Centre",
+      "final_venue_id": "VEN-000957",
+      "final_venue_key": "montego-bay-convention-centre",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "montego-bay-convention-centre"
+    },
+    {
+      "canonical_name": "The SSE Arena, Belfast",
+      "final_venue_id": "VEN-000958",
+      "final_venue_key": "sse-arena-belfast",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "sse-arena-belfast"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Suncoast Credit Union Arena",
+      "final_venue_id": "VEN-000294",
+      "final_venue_key": "suncoast-credit-union-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "suncoast-credit-union-arena"
+    },
+    {
+      "canonical_name": "Kirby Sports Center",
+      "final_venue_id": "VEN-000909",
+      "final_venue_key": "kirby-sports-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kirby-sports-center"
+    },
+    {
+      "canonical_name": "UAB Arena (Bartow Arena)",
+      "final_venue_id": "VEN-000527",
+      "final_venue_key": "bartow-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "uab-arena-bartow"
+    },
+    {
+      "canonical_name": "Special Events Arena (Stan Sheriff Center)",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "special-events-arena-hawaii"
+    },
+    {
+      "canonical_name": "Selland Arena",
+      "final_venue_id": "VEN-000374",
+      "final_venue_key": "selland-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "selland-arena"
+    },
+    {
+      "canonical_name": "Alumni Hall (Fairfield University)",
+      "final_venue_id": "VEN-000959",
+      "final_venue_key": "alumni-hall-fairfield",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "alumni-hall-fairfield"
+    },
+    {
+      "canonical_name": "Golden Panther Arena (FIU)",
+      "final_venue_id": "VEN-000960",
+      "final_venue_key": "golden-panther-arena-fiu",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "golden-panther-arena-fiu"
+    },
+    {
+      "canonical_name": "Sun Dome (University of South Florida)",
+      "final_venue_id": "VEN-000238",
+      "final_venue_key": "yuengling-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "sun-dome-tampa"
+    },
+    {
+      "canonical_name": "Wells Fargo Arena (Arizona State)",
+      "final_venue_id": "VEN-000056",
+      "final_venue_key": "desert-financial-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "wells-fargo-arena-asu"
+    },
+    {
+      "canonical_name": "UCF Arena (2007)",
+      "final_venue_id": "VEN-000038",
+      "final_venue_key": "cfe-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "ucf-arena"
+    },
+    {
+      "canonical_name": "McKenzie Arena",
+      "final_venue_id": "VEN-000961",
+      "final_venue_key": "mckenzie-arena-chattanooga",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "mckenzie-arena-chattanooga"
+    },
+    {
+      "canonical_name": "Truist Arena (Northern Kentucky University)",
+      "final_venue_id": "VEN-000962",
+      "final_venue_key": "truist-arena-northern-kentucky",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "truist-arena-northern-kentucky"
+    },
+    {
+      "canonical_name": "Boston Garden",
+      "final_venue_id": "VEN-000313",
+      "final_venue_key": "boston-garden",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "liu-boston-garden"
+    },
+    {
+      "canonical_name": "Brooklyn Technical High School",
+      "final_venue_id": "VEN-000963",
+      "final_venue_key": "liu-brooklyn-technical-high-school",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "liu-brooklyn-technical-high-school"
+    },
+    {
+      "canonical_name": "Hippodrome Theatre (New York)",
+      "final_venue_id": "VEN-000964",
+      "final_venue_key": "liu-hippodrome-theatre",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "liu-hippodrome-theatre"
+    },
+    {
+      "canonical_name": "Meadowlands Arena (Brendan Byrne Arena)",
+      "final_venue_id": "VEN-000965",
+      "final_venue_key": "liu-meadowlands-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "liu-meadowlands-arena"
+    },
+    {
+      "canonical_name": "Madison Square Garden (1968 building)",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "madison-square-garden-fourth"
+    },
+    {
+      "canonical_name": "Madison Square Garden (1925–1968 building)",
+      "final_venue_id": "VEN-000966",
+      "final_venue_key": "madison-square-garden-third",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "madison-square-garden-third"
+    },
+    {
+      "canonical_name": "Assembly Hall (University of Illinois)",
+      "final_venue_id": "VEN-000967",
+      "final_venue_key": "assembly-hall-illinois",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "assembly-hall-illinois"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "Spiro Sports Center",
+      "final_venue_id": "VEN-000914",
+      "final_venue_key": "spiro-sports-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "wagner-spiro-sports-center"
+    },
+    {
+      "canonical_name": "Sovereign Bank Arena",
+      "final_venue_id": "VEN-000861",
+      "final_venue_key": "sovereign-bank-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_NAME_CLUSTER",
+      "venue_key": "sovereign-bank-arena-trenton"
+    },
+    {
+      "canonical_name": "Rothman Center (Stratis Arena)",
+      "final_venue_id": "VEN-000916",
+      "final_venue_key": "bogota-savings-bank-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "fdu-rothman-center"
+    },
+    {
+      "canonical_name": "Bert Hammel Court (Hammel Court)",
+      "final_venue_id": "VEN-000968",
+      "final_venue_key": "merrimack-hammel-court",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "merrimack-hammel-court"
+    },
+    {
+      "canonical_name": "Boylan Gymnasium",
+      "final_venue_id": "VEN-000951",
+      "final_venue_key": "boylan-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "monmouth-boylan-gymnasium"
+    },
+    {
+      "canonical_name": "TD Bank Sports Center (M&T Bank Arena)",
+      "final_venue_id": "VEN-000918",
+      "final_venue_key": "m-t-bank-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "quinnipiac-td-bank-sports-center"
+    },
+    {
+      "canonical_name": "UPMC Events Center",
+      "final_venue_id": "VEN-000907",
+      "final_venue_key": "upmc-events-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "robert-morris-upmc-events-center"
+    },
+    {
+      "canonical_name": "William H. Pitt Center",
+      "final_venue_id": "VEN-000969",
+      "final_venue_key": "sacred-heart-pitt-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "sacred-heart-pitt-center"
+    },
+    {
+      "canonical_name": "DeGol Arena",
+      "final_venue_id": "VEN-000911",
+      "final_venue_key": "degol-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "saint-francis-pa-degol-arena"
+    },
+    {
+      "canonical_name": "Generoso Pope Athletic Complex",
+      "final_venue_id": "VEN-000970",
+      "final_venue_key": "st-francis-brooklyn-pope-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "st-francis-brooklyn-pope-center"
+    },
+    {
+      "canonical_name": "Jadwin Gymnasium",
+      "final_venue_id": "VEN-000440",
+      "final_venue_key": "jadwin-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_NAME_CLUSTER",
+      "venue_key": "princeton-jadwin"
+    },
+    {
+      "canonical_name": "Sutter Gymnasium",
+      "final_venue_id": "VEN-000914",
+      "final_venue_key": "spiro-sports-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "wagner-sutter-gymnasium"
+    },
+    {
+      "canonical_name": "Nassau Veterans Memorial Coliseum",
+      "final_venue_id": "VEN-000147",
+      "final_venue_key": "nassau-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nassau-coliseum"
+    },
+    {
+      "canonical_name": "John Jay Center",
+      "final_venue_id": "VEN-000971",
+      "final_venue_key": "robert-morris-john-jay-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "robert-morris-john-jay-center"
+    },
+    {
+      "canonical_name": "James J. McCann Recreation Center",
+      "final_venue_id": "VEN-000924",
+      "final_venue_key": "mccann-center-poughkeepsie",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "marist-mccann-center"
+    },
+    {
+      "canonical_name": "Reitz Arena",
+      "final_venue_id": "VEN-000925",
+      "final_venue_key": "reitz-arena-loyola-maryland",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "loyola-reitz-arena"
+    },
+    {
+      "canonical_name": "Charles L. Sewall Center",
+      "final_venue_id": "VEN-000746",
+      "final_venue_key": "sewall-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "robert-morris-sewall-center"
+    },
+    {
+      "canonical_name": "Alumni Gymnasium (Rider University)",
+      "final_venue_id": "VEN-000950",
+      "final_venue_key": "rider-alumni-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rider-alumni-gymnasium"
+    },
+    {
+      "canonical_name": "Knott Arena (Mount St. Mary’s)",
+      "final_venue_id": "VEN-000972",
+      "final_venue_key": "mount-knott-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "mount-knott-arena"
+    },
+    {
+      "canonical_name": "William H. Detrick Gymnasium",
+      "final_venue_id": "VEN-000915",
+      "final_venue_key": "detrick-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "ccsu-detrick-gymnasium"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum (1955–1988 building)",
+      "final_venue_id": "VEN-000040",
+      "final_venue_key": "charlotte-coliseum-1955",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "charlotte-coliseum-original"
+    },
+    {
+      "canonical_name": "The Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "philadelphia-palestra"
+    },
+    {
+      "canonical_name": "Lawrence Joel Veterans Memorial Coliseum",
+      "final_venue_id": "VEN-000115",
+      "final_venue_key": "ljvm-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ljvm-coliseum"
+    },
+    {
+      "canonical_name": "Time Warner Cable Arena (Spectrum Center)",
+      "final_venue_id": "VEN-000190",
+      "final_venue_key": "spectrum-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "time-warner-cable-arena-charlotte"
+    },
+    {
+      "canonical_name": "Nationwide Arena",
+      "final_venue_id": "VEN-000148",
+      "final_venue_key": "nationwide-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nationwide-arena"
+    },
+    {
+      "canonical_name": "Viejas Arena",
+      "final_venue_id": "VEN-000226",
+      "final_venue_key": "viejas-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "viejas-arena"
+    }
+  ],
+  "venue_reconciliation_metadata": {
+    "frozen_venues_sha256": "3d068bcf6981a13950b720fa81d9260fce9ed1ff5ca434c31cdda4d604d061f5",
+    "mappings": [
+      {
+        "expected_global_city": "Charlotte",
+        "expected_global_state": "NC",
+        "expected_local_city": "Charlotte",
+        "expected_local_name": "Charlotte Coliseum (1955–1988 building)",
+        "expected_local_state": "NC",
+        "global_venue_id": "VEN-000040",
+        "global_venue_key": "charlotte-coliseum-1955",
+        "local_venue_key": "charlotte-coliseum-original",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Hackensack",
+        "expected_global_state": "NJ",
+        "expected_local_city": "Hackensack",
+        "expected_local_name": "Rothman Center (Stratis Arena)",
+        "expected_local_state": "NJ",
+        "global_venue_id": "VEN-000916",
+        "global_venue_key": "bogota-savings-bank-center",
+        "local_venue_key": "fdu-rothman-center",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Brooklyn",
+        "expected_global_state": "NY",
+        "expected_local_city": "Brooklyn",
+        "expected_local_name": "Barclays Center",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000020",
+        "global_venue_key": "barclays-center",
+        "local_venue_key": "liu-barclays",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Boston",
+        "expected_global_state": "MA",
+        "expected_local_city": "Boston",
+        "expected_local_name": "Boston Garden",
+        "expected_local_state": "MA",
+        "global_venue_id": "VEN-000313",
+        "global_venue_key": "boston-garden",
+        "local_venue_key": "liu-boston-garden",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Brooklyn",
+        "expected_global_state": "NY",
+        "expected_local_city": "Brooklyn",
+        "expected_local_name": "Arnold and Marie Schwartz Athletic Center",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000949",
+        "global_venue_key": "schwartz-athletic-center",
+        "local_venue_key": "liu-schwartz",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Brooklyn",
+        "expected_global_state": "NY",
+        "expected_local_city": "Brooklyn",
+        "expected_local_name": "Steinberg Wellness Center",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000611",
+        "global_venue_key": "steinberg-wellness-center",
+        "local_venue_key": "liu-wellness",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Baltimore",
+        "expected_global_state": "MD",
+        "expected_local_city": "Baltimore",
+        "expected_local_name": "Reitz Arena",
+        "expected_local_state": "MD",
+        "global_venue_id": "VEN-000925",
+        "global_venue_key": "reitz-arena-loyola-maryland",
+        "local_venue_key": "loyola-reitz-arena",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Hamden",
+        "expected_global_state": "CT",
+        "expected_local_city": "Hamden",
+        "expected_local_name": "TD Bank Sports Center (M&T Bank Arena)",
+        "expected_local_state": "CT",
+        "global_venue_id": "VEN-000918",
+        "global_venue_key": "m-t-bank-arena",
+        "local_venue_key": "quinnipiac-td-bank-sports-center",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Moon Township",
+        "expected_global_state": "PA",
+        "expected_local_city": "Moon Township",
+        "expected_local_name": "UPMC Events Center",
+        "expected_local_state": "PA",
+        "global_venue_id": "VEN-000907",
+        "global_venue_key": "upmc-events-center",
+        "local_venue_key": "robert-morris-upmc-events-center",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Loretto",
+        "expected_global_state": "PA",
+        "expected_local_city": "Loretto",
+        "expected_local_name": "DeGol Arena",
+        "expected_local_state": "PA",
+        "global_venue_id": "VEN-000911",
+        "global_venue_key": "degol-arena",
+        "local_venue_key": "saint-francis-pa-degol-arena",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Honolulu",
+        "expected_global_state": "HI",
+        "expected_local_city": "Honolulu",
+        "expected_local_name": "Special Events Arena (Stan Sheriff Center)",
+        "expected_local_state": "HI",
+        "global_venue_id": "VEN-000194",
+        "global_venue_key": "stan-sheriff-center",
+        "local_venue_key": "special-events-arena-hawaii",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Tampa",
+        "expected_global_state": "FL",
+        "expected_local_city": "Tampa",
+        "expected_local_name": "Sun Dome (University of South Florida)",
+        "expected_local_state": "FL",
+        "global_venue_id": "VEN-000238",
+        "global_venue_key": "yuengling-center",
+        "local_venue_key": "sun-dome-tampa",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Charlotte",
+        "expected_global_state": "NC",
+        "expected_local_city": "Charlotte",
+        "expected_local_name": "Time Warner Cable Arena (Spectrum Center)",
+        "expected_local_state": "NC",
+        "global_venue_id": "VEN-000190",
+        "global_venue_key": "spectrum-center",
+        "local_venue_key": "time-warner-cable-arena-charlotte",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Birmingham",
+        "expected_global_state": "AL",
+        "expected_local_city": "Birmingham",
+        "expected_local_name": "UAB Arena (Bartow Arena)",
+        "expected_local_state": "AL",
+        "global_venue_id": "VEN-000527",
+        "global_venue_key": "bartow-arena",
+        "local_venue_key": "uab-arena-bartow",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Orlando",
+        "expected_global_state": "FL",
+        "expected_local_city": "Orlando",
+        "expected_local_name": "UCF Arena (2007)",
+        "expected_local_state": "FL",
+        "global_venue_id": "VEN-000038",
+        "global_venue_key": "cfe-arena",
+        "local_venue_key": "ucf-arena",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Staten Island",
+        "expected_global_state": "NY",
+        "expected_local_city": "Staten Island",
+        "expected_local_name": "Spiro Sports Center",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000914",
+        "global_venue_key": "spiro-sports-center",
+        "local_venue_key": "wagner-spiro-sports-center",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      },
+      {
+        "expected_global_city": "Tempe",
+        "expected_global_state": "AZ",
+        "expected_local_city": "Tempe",
+        "expected_local_name": "Wells Fargo Arena (Arizona State)",
+        "expected_local_state": "AZ",
+        "global_venue_id": "VEN-000056",
+        "global_venue_key": "desert-financial-arena",
+        "local_venue_key": "wells-fargo-arena-asu",
+        "resolution_basis": "Control Center-authorized Proof 6 current-main same-physical-venue reconciliation; post-merge read-only verification."
+      }
+    ],
+    "owner_approval_basis": "Control Center-authorized generic Stage 1 tooling repair post-merge read-only regression; LIU is a discovered fixture only.",
+    "research_zip_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+    "schema_version": 1,
+    "spec_path": "/tmp/proof6-inputs-_ux8ycgm/liu-stage1-venue-reconciliation.json",
+    "spec_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
+  },
+  "venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92"
+}

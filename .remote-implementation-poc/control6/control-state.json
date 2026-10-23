@@ -7,15 +7,18 @@
     "proof6-liu-phase0-0002"
   ],
   "active_conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
+  "active_integration_freeze_sha256": "a0db804501dc12f1e3ef060e60821c1971a4814e3fc8d3209513009cd6ac3e06",
   "active_lock_commit": "c53276327a06744718d6712f8e2ac30f4b560b7c",
   "active_lock_owner": "github-actions:39903659540:1",
   "active_operation": "REHEARSE_REAL_LIU_PHASE0",
+  "active_prepared_commit_sha": "ff9eb5ca1be1e07232ca2245ec4352f1defbe6e7",
+  "active_prepared_tree_sha": "f53fbf5436ab4056232c6771b52105e52af9318c",
   "active_request_id": "proof6-liu-phase0-0002",
   "active_request_sha256": "6ebc42675b33b6f54e99858acb6347bbe20d62959a8ae3373e2147ae3b307bb8",
   "active_stage1_reconciliation_sha256": "1dbd15a2fce41f7b8f079721a8a66c7c01c77256038c608b37318606b43ffb89",
   "active_venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
   "active_writeahead_commit": null,
-  "active_writeahead_manifest_sha256": null,
+  "active_writeahead_manifest_sha256": "ef6a083e109caf8383a52fdafa520f9bb4d9a8b7c3e7226228b98c266dad53a9",
   "authority_statement": "Experimental Proof 6 rehearsal only. No authoritative LIU INTEGRATION_FROZEN, real Phase 0, Stage 2, Gate 1, release, protected-main mutation, or real onboarding-branch authority.",
   "consumed_request_ids": [
     "proof6-recovery-stage1-blocker-0001"
@@ -91,5 +94,5 @@
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof6-liu-phase0",
   "target_expected_nonexistent": true,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
