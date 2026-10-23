@@ -188,12 +188,19 @@ jobs:
           if validation.returncode:
               raise SystemExit(validation.stdout)
 
-          post = post_repair_stage2_result(
-              work,
-              SCHOOL,
-              authority["freeze_bytes"],
-              Path("/tmp/liu-opponent-display-post-stage2"),
-          )
+          try:
+              post = post_repair_stage2_result(
+                  work,
+                  SCHOOL,
+                  authority["freeze_bytes"],
+                  Path("/tmp/liu-opponent-display-post-stage2"),
+              )
+          except Exception:
+              log = Path("/tmp/liu-opponent-display-post-stage2/stage2-census.log")
+              if log.is_file():
+                  print("=== POST-REPAIR STAGE 2 LOG ===")
+                  print(log.read_text(encoding="utf-8"))
+              raise
           summary = stage2_result_summary(post)
 
           fresh_pre = Path("/tmp/liu-opponent-display-fresh-pre")
@@ -234,12 +241,19 @@ jobs:
           )
           sh("git", "config", "user.name", "Disposable Regression", cwd=fresh_post)
           sh("git", "config", "user.email", "regression@example.com", cwd=fresh_post)
-          replay = post_repair_stage2_result(
-              fresh_post,
-              SCHOOL,
-              authority["freeze_bytes"],
-              Path("/tmp/liu-opponent-display-fresh-stage2"),
-          )
+          try:
+              replay = post_repair_stage2_result(
+                  fresh_post,
+                  SCHOOL,
+                  authority["freeze_bytes"],
+                  Path("/tmp/liu-opponent-display-fresh-stage2"),
+              )
+          except Exception:
+              log = Path("/tmp/liu-opponent-display-fresh-stage2/stage2-census.log")
+              if log.is_file():
+                  print("=== FRESH POST-REPAIR STAGE 2 LOG ===")
+                  print(log.read_text(encoding="utf-8"))
+              raise
           replay_summary = stage2_result_summary(replay)
           for key in (
               "stage2_status",
@@ -304,11 +318,16 @@ jobs:
           print(json.dumps(result, indent=2, sort_keys=True))
           PY
       - name: Upload LIU disposable regression
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: liu-stage2-opponent-display-disposable
           path: |
             /tmp/liu-disposable-result.json
             /tmp/liu-opponent-display-validate.log
-          if-no-files-found: error
+            /tmp/liu-opponent-display-diag
+            /tmp/liu-opponent-display-post-stage2
+            /tmp/liu-opponent-display-fresh-dry
+            /tmp/liu-opponent-display-fresh-stage2
+          if-no-files-found: warn
           retention-days: 14
