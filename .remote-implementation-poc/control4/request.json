@@ -11,13 +11,13 @@
     "owner_desktop_interaction_required": false,
     "owner_github_ui_interaction_required": false
   },
-  "expected_outcome": "INTENTIONAL_FAILURE_AFTER_DURABLE_LOCK",
+  "expected_outcome": "IMPLEMENTATION_LOCK_OCCUPIED",
   "expected_protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
   "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF4_REQUEST",
-  "fixture_id": "remote-proof-school-a",
-  "operation": "TEST_DURABLE_LOCK_FAILURE",
-  "previous_control_state_commit": "dd6e4839dbef01cb5d13e2c565891b2473084c06",
-  "previous_control_state_sha256": "cce44a92f394a57d6a6562970d0a8f9fe92f4784456249f056b367ace42686a1",
-  "request_id": "proof4-failure-0001",
+  "fixture_id": "remote-proof-school-b",
+  "operation": "TEST_GLOBAL_LOCK_ADMISSION",
+  "previous_control_state_commit": "d5f08efcdfb909499d35866e2bdf7e2e72d6e3db",
+  "previous_control_state_sha256": "8f7c1b3b3f131fec790d35307d9d501a6b546c689abf7e43371ef033212e4b2c",
+  "request_id": "proof4-contender-0001",
   "schema_version": 1
 }
