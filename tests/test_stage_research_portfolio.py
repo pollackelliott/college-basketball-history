@@ -199,6 +199,182 @@ class StageResearchPortfolioVenueChronologyTests(unittest.TestCase):
 
 
 class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
+    def test_explicit_reconciliation_allows_intentional_researched_split_name_overlap(self):
+        original = global_venue(
+            "VEN-000100",
+            "shared-arena-1955",
+            "Shared Arena",
+            "Example City",
+            "NY",
+        )
+        original["identity_status"] = "RESEARCHED_SPLIT"
+        replacement = global_venue(
+            "VEN-000101",
+            "shared-arena-1988",
+            "Shared Arena",
+            "Example City",
+            "NY",
+        )
+        replacement["identity_status"] = "RESEARCHED_SPLIT"
+        local = {
+            **local_venue(
+                "Explicit current-main reconciliation resolves the original building.",
+                city="Example City",
+                state="NY",
+            ),
+            "venue_key": "local-shared-arena-original",
+            "canonical_name": "Shared Arena (Original building)",
+            "aliases": "Shared Arena",
+        }
+        names = [
+            {
+                "venue_id": "VEN-000100",
+                "venue_name": "Shared Arena",
+                "normalized_name": "sharedarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+            {
+                "venue_id": "VEN-000101",
+                "venue_name": "Shared Arena",
+                "normalized_name": "sharedarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+        ]
+        reconciliation = {
+            "local-shared-arena-original": {
+                "global_venue_id": "VEN-000100",
+                "global_venue_key": "shared-arena-1955",
+            }
+        }
+
+        inventory = venue_reconciliation_inventory(
+            [dict(local)],
+            [dict(original), dict(replacement)],
+            [dict(row) for row in names],
+            venue_reconciliation=reconciliation,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        row = inventory["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
+        self.assertEqual(row["target_venue_id"], "VEN-000100")
+        self.assertEqual(row["target_venue_key"], "shared-arena-1955")
+        self.assertIn(
+            "INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP",
+            row["issues"],
+        )
+        self.assertIn(
+            "GLOBAL_NAME_REGISTRATION_DURING_PHASE0",
+            row["issues"],
+        )
+        self.assertEqual(
+            row["missing_registered_names"],
+            ["Shared Arena (Original building)"],
+        )
+
+        staged, globals_, staged_names, mappings = rebase_venues(
+            "test-school",
+            [dict(local)],
+            [dict(original), dict(replacement)],
+            [dict(row) for row in names],
+            venue_reconciliation=reconciliation,
+        )
+        self.assertEqual(len(globals_), 2)
+        self.assertEqual(staged[0]["venue_id"], "VEN-000100")
+        self.assertEqual(staged[0]["venue_key"], "shared-arena-1955")
+        self.assertEqual(mappings[0]["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
+        registered = [
+            row for row in staged_names
+            if row["venue_id"] == "VEN-000100"
+            and row["venue_name"] == "Shared Arena (Original building)"
+        ]
+        self.assertEqual(len(registered), 1)
+        self.assertEqual(registered[0]["name_type"], "HISTORICAL_OR_ALIAS")
+
+    def test_explicit_reconciliation_does_not_waive_non_split_name_conflict(self):
+        selected = global_venue(
+            "VEN-000100",
+            "shared-arena-1955",
+            "Shared Arena",
+            "Example City",
+            "NY",
+        )
+        selected["identity_status"] = "RESEARCHED_SPLIT"
+        conflicting = global_venue(
+            "VEN-000101",
+            "other-shared-arena",
+            "Shared Arena",
+            "Example City",
+            "NY",
+        )
+        local = {
+            **local_venue(
+                "Explicit reconciliation must not erase a genuine name conflict.",
+                city="Example City",
+                state="NY",
+            ),
+            "venue_key": "local-shared-arena-original",
+            "canonical_name": "Shared Arena (Original building)",
+            "aliases": "Shared Arena",
+        }
+        names = [
+            {
+                "venue_id": "VEN-000100",
+                "venue_name": "Shared Arena",
+                "normalized_name": "sharedarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+            {
+                "venue_id": "VEN-000101",
+                "venue_name": "Shared Arena",
+                "normalized_name": "sharedarena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "",
+                "valid_to": "",
+                "date_precision": "",
+                "source_basis": "test",
+                "notes": "",
+            },
+        ]
+        reconciliation = {
+            "local-shared-arena-original": {
+                "global_venue_id": "VEN-000100",
+                "global_venue_key": "shared-arena-1955",
+            }
+        }
+
+        inventory = venue_reconciliation_inventory(
+            [local],
+            [selected, conflicting],
+            names,
+            venue_reconciliation=reconciliation,
+        )
+        self.assertEqual(inventory["blocker_count"], 1)
+        row = inventory["rows"][0]
+        self.assertEqual(row["classification"], "STOP_AMBIGUOUS")
+        self.assertEqual(row["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
+        self.assertEqual(row["target_venue_id"], "VEN-000100")
+        self.assertIn("CONFLICTING_REGISTERED_NAME_IDENTITIES", row["issues"])
+        self.assertNotIn(
+            "INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP",
+            row["issues"],
+        )
+
     def test_explicit_research_base_reuse_hint_survives_local_key_drift(self):
         globals_ = [
             global_venue(

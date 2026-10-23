@@ -801,7 +801,11 @@ def venue_reconciliation_inventory(
             intentional_split_ids = [
                 venue_id
                 for venue_id in conflicting_ids
-                if reason in {"REUSE_EXACT_KEY", "REUSE_RESEARCH_BASE_IDENTITY"}
+                if reason in {
+                    "REUSE_EXACT_KEY",
+                    "REUSE_RESEARCH_BASE_IDENTITY",
+                    "REUSE_EXPLICIT_RECONCILIATION",
+                }
                 and chosen.get("identity_status", "").strip() == "RESEARCHED_SPLIT"
                 and global_by_id[venue_id].get("identity_status", "").strip()
                 == "RESEARCHED_SPLIT"
