@@ -69,6 +69,19 @@ def add_existing_onboarding_worktree(
             "STAGE2_ONBOARDING_HEAD_MISMATCH expected=%s actual=%s"
             % (target_sha, actual or "[missing]")
         )
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/%s:refs/remotes/origin/remote-stage2-target"
+        % target_branch,
+    )
+    fetched = git(
+        "rev-parse",
+        "refs/remotes/origin/remote-stage2-target",
+    ).stdout.strip()
+    if fetched != target_sha:
+        raise Stop("STAGE2_ONBOARDING_FETCH_MISMATCH")
     path = Path(tempfile.mkdtemp(prefix="remote-stage2-%s-" % school_key))
     shutil.rmtree(path)
     local_branch = "remote-stage2-census/%s-%s" % (school_key, target_sha[:12])
