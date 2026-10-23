@@ -1,0 +1,235 @@
+name: Remote Implementation Proof 1 - Stage 1
+
+on:
+  push:
+    branches:
+      - experiment/remote-implementation-stage1
+
+permissions:
+  contents: read
+
+jobs:
+  stage1-read-only-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out experiment commit with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Prepare exact fixture and current protected-main state
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          expected_zip_sha="c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2"
+          research_base_sha="8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e"
+          runtime_zip="$RUNNER_TEMP/liu-research-frozen.zip"
+
+          cat .remote-implementation-poc/inputs/liu-research-frozen.zip.b64.part* \
+            | base64 --decode > "$runtime_zip"
+
+          actual_zip_sha="$(sha256sum "$runtime_zip" | awk '{print $1}')"
+          if [[ "$actual_zip_sha" != "$expected_zip_sha" ]]; then
+            echo "FAIL: fixture SHA-256 mismatch: expected $expected_zip_sha, found $actual_zip_sha"
+            exit 1
+          fi
+
+          git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main'
+          protected_main_sha="$(git rev-parse origin/main)"
+
+          if ! git merge-base --is-ancestor "$research_base_sha" "$protected_main_sha"; then
+            echo "FAIL: research base is not an ancestor of current origin/main"
+            exit 1
+          fi
+
+          git switch -C data/long-island-university-onboarding "$protected_main_sha"
+
+          if [[ "$(git rev-parse HEAD)" != "$protected_main_sha" ]]; then
+            echo "FAIL: runner-local onboarding branch is not at exact origin/main"
+            exit 1
+          fi
+
+          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+            echo "FAIL: permanent Stage 1 cleanliness precondition is not satisfied"
+            git status --short
+            exit 1
+          fi
+
+          {
+            echo "EXPERIMENT_SHA=$GITHUB_SHA"
+            echo "PROTECTED_MAIN_SHA=$protected_main_sha"
+            echo "FROZEN_ZIP_SHA=$actual_zip_sha"
+            echo "RESEARCH_BASE_SHA=$research_base_sha"
+            echo "RUNTIME_ZIP=$runtime_zip"
+          } >> "$GITHUB_ENV"
+
+          echo "Experiment commit: $GITHUB_SHA"
+          echo "Protected main:    $protected_main_sha"
+          echo "Frozen ZIP SHA:    $actual_zip_sha"
+          echo "Runner branch:     $(git branch --show-current)"
+          echo "Runner HEAD:       $(git rev-parse HEAD)"
+
+      - name: Execute permanent Stage 1 inventory
+        shell: bash
+        run: |
+          set +e
+          python tools/implementation_stage1_inventory.py \
+            long-island-university \
+            "$RUNTIME_ZIP" \
+            --expected-sha256 c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2 \
+            --research-base 8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e \
+            > "$RUNNER_TEMP/stage1-execution.log" 2>&1
+          rc=$?
+          set -e
+
+          cat "$RUNNER_TEMP/stage1-execution.log"
+          echo "STAGE1_EXIT_STATUS=$rc" >> "$GITHUB_ENV"
+
+      - name: Collect proof evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          out="$RUNNER_TEMP/remote-implementation-proof1"
+          mkdir -p "$out"
+
+          if [[ -f "$RUNNER_TEMP/stage1-execution.log" ]]; then
+            cp "$RUNNER_TEMP/stage1-execution.log" "$out/stage1-execution.log"
+          else
+            printf '%s\n' "Stage 1 execution log was not created." > "$out/stage1-execution.log"
+          fi
+
+          report=".onboarding/long-island-university/stage1-reconciliation.json"
+          report_present=false
+          if [[ -f "$report" ]]; then
+            cp "$report" "$out/stage1-reconciliation.json"
+            report_present=true
+          fi
+
+          tracked_clean=true
+          if [[ -n "$(git status --porcelain --untracked-files=no)" ]] \
+             || ! git diff --quiet HEAD -- \
+             || ! git diff --cached --quiet HEAD --; then
+            tracked_clean=false
+          fi
+
+          echo "REPORT_PRESENT=$report_present" >> "$GITHUB_ENV"
+          echo "TRACKED_CLEAN=$tracked_clean" >> "$GITHUB_ENV"
+
+          {
+            echo "tracked_clean=$tracked_clean"
+            echo "tracked_status:"
+            git status --short --untracked-files=no
+          } > "$out/tracked-mutation-check.txt"
+
+      - name: Write compact execution summary
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          out="$RUNNER_TEMP/remote-implementation-proof1"
+          report="$out/stage1-reconciliation.json"
+
+          python - "$out/execution-summary.json" "$report" <<'PY'
+          import json
+          import os
+          import sys
+
+          output_path, report_path = sys.argv[1:3]
+          stage1_exit = os.environ.get("STAGE1_EXIT_STATUS")
+          summary = {
+              "proof": "REMOTE IMPLEMENTATION PROOF 1 - READ-ONLY STAGE 1",
+              "experiment_commit_sha": os.environ.get("EXPERIMENT_SHA", os.environ.get("GITHUB_SHA")),
+              "protected_main_sha": os.environ.get("PROTECTED_MAIN_SHA"),
+              "frozen_zip_sha256": os.environ.get("FROZEN_ZIP_SHA"),
+              "research_base_sha": os.environ.get(
+                  "RESEARCH_BASE_SHA",
+                  "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+              ),
+              "permanent_tool": "tools/implementation_stage1_inventory.py",
+              "stage1_exit_status": int(stage1_exit) if stage1_exit is not None else None,
+              "report_present": os.path.exists(report_path),
+              "tracked_repository_mutation": os.environ.get("TRACKED_CLEAN") != "true",
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "github_run_url": (
+                  f"https://github.com/{os.environ.get('GITHUB_REPOSITORY')}"
+                  f"/actions/runs/{os.environ.get('GITHUB_RUN_ID')}"
+              ),
+          }
+
+          if os.path.exists(report_path):
+              with open(report_path, encoding="utf-8") as handle:
+                  report = json.load(handle)
+
+              venue_counts = report.get("venue", {}).get("classification_counts", {})
+              program_counts = report.get("program_alias", {}).get("classification_counts", {})
+              conference_counts = report.get("conference", {}).get("classification_counts", {})
+
+              summary["stage1_report"] = {
+                  "status": report.get("status"),
+                  "blocker_count": report.get("blocker_count"),
+                  "maintenance_required_count": report.get("maintenance_required_count"),
+                  "ambiguous_stop_count": report.get("ambiguous_stop_count"),
+                  "venue_row_count": sum(venue_counts.values()),
+                  "venue_classification_counts": venue_counts,
+                  "program_alias_classification_counts": program_counts,
+                  "conference_classification_counts": conference_counts,
+                  "integration_base_sha": report.get("integration_base_sha"),
+                  "origin_main_sha": report.get("origin_main_sha"),
+                  "research_zip_sha256": report.get("research_zip_sha256"),
+              }
+
+          with open(output_path, "w", encoding="utf-8") as handle:
+              json.dump(summary, handle, indent=2, sort_keys=True)
+              handle.write("\n")
+
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+
+          {
+            echo '### Remote Implementation Proof 1'
+            echo
+            echo '\`\`\`json'
+            cat "$out/execution-summary.json"
+            echo '\`\`\`'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload durable proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-proof1-${{ github.run_id }}
+          path: ${{ runner.temp }}/remote-implementation-proof1
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Assert architectural proof conditions
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${STAGE1_EXIT_STATUS:--1}" != "0" ]]; then
+            echo "FAIL: permanent Stage 1 command exit status was ${STAGE1_EXIT_STATUS:--1}"
+            exit 1
+          fi
+          if [[ "${REPORT_PRESENT:-false}" != "true" ]]; then
+            echo "FAIL: normal Stage 1 reconciliation artifact was not produced"
+            exit 1
+          fi
+          if [[ "${TRACKED_CLEAN:-false}" != "true" ]]; then
+            echo "FAIL: Stage 1 modified tracked repository state"
+            exit 1
+          fi
+
+          echo "PASS: permanent Stage 1 executed faithfully and left tracked state unchanged."
