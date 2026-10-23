@@ -1,99 +1,42 @@
 {
-  "schema_version": 1,
-  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_SUMMARY",
-  "result": "REMOTE IMPLEMENTATION PROOF 6: FAIL — REAL PHASE 0 INTEGRATION BLOCKER IDENTIFIED",
-  "protected_main_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
-  "protected_main_protected": true,
+  "architecture_ready_for_real_liu_remote_phase0": true,
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/conferences.csv",
+    "schools/long-island-university/notes.md",
+    "schools/long-island-university/opponents.csv",
+    "schools/long-island-university/source-games.csv",
+    "schools/long-island-university/source-notes.md",
+    "schools/long-island-university/venues.csv"
+  ],
+  "conference_reconciliation_sha256": "62271fed5e97cfd26d9056efd5c24bccb65944a4f17fe7aac695b81082d1722b",
   "control_branch": "experiment/remote-implementation-proof6",
-  "request_id": "proof6-liu-phase0-0001",
-  "request_commit": "5bb8a9f94ff22176f9c51b408c4966150bf2efab",
-  "request_sha256": "bdd1c8917ae2e8a646411ef6b4c37a04dd7362b678c5d6d5245e3358b74ee347",
-  "global_lock_commit": "d42056d06b72694e4745e72afe05bd5b2a371b20",
-  "failed_action_run_id": 39896265711,
-  "failed_action_run_attempt": 1,
-  "failed_action_conclusion": "failure",
-  "diagnostic_artifact_id": 12477001015,
-  "diagnostic_artifact_sha256": "7b74b0c342302a1f7bcc6829af4fd4f9b49734301a19ba9321d852c4e0915815",
-  "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
-  "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
-  "research_freeze_verification": {
-    "result": "PASS",
-    "competitive_games": 2193,
-    "accepted_seasons": 81,
-    "accepted_scope": "1928-29..1950-51|1968-69+"
-  },
-  "venue_reconciliation_sha256": null,
-  "conference_reconciliation_sha256": null,
-  "reconciliation_hash_status": "Generated runner-locally and exercised by permanent Stage 1, but the workflow stopped before the INPUTS_VERIFIED durable checkpoint; therefore no reconciliation spec hash is promoted as accepted durable Proof 6 authority.",
-  "final_reconciled_stage1": {
-    "status": "BLOCKED",
-    "blocker_count": 1,
-    "maintenance_required_count": 0,
-    "ambiguous_stop_count": 1,
-    "venue_classification_counts": {
-      "NEW_GLOBAL_IDENTITY": 20,
-      "SAFE_REPRESENTATION_REUSE": 38,
-      "STOP_AMBIGUOUS": 1
-    },
-    "conference_classification_counts": {
-      "REUSE_CURRENT_IDENTITY": 3
-    },
-    "program_alias_classification_counts": {
-      "NO_CURRENT_VERIFIED_ALIAS": 229
-    },
-    "blocker": {
-      "venue_key": "charlotte-coliseum-original",
-      "canonical_name": "Charlotte Coliseum (1955–1988 building)",
-      "candidate_venue_ids": [
-        "VEN-000040",
-        "VEN-000041"
-      ],
-      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
-      "target_venue_id": "VEN-000040",
-      "target_venue_key": "charlotte-coliseum-1955",
-      "issues": [
-        "CONFLICTING_REGISTERED_NAME_IDENTITIES",
-        "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
-      ]
-    }
-  },
-  "blocker_classification": "GENERIC_STAGE1_REPRESENTATION_TOOLING_DEFECT",
-  "blocker_diagnosis": "Current permanent Stage 1 inventory deliberately permits generic duplicate-name overlap between two RESEARCHED_SPLIT venue identities for REUSE_EXACT_KEY and REUSE_RESEARCH_BASE_IDENTITY, but not for a hash-bound REUSE_EXPLICIT_RECONCILIATION. Existing tests cover split exact-key reuse and ordinary explicit reconciliation separately, but not the combined case. LIU's physical identity is explicitly resolved to the original 1955 Charlotte Coliseum VEN-000040; the remaining stop is mechanical representation policy/tool behavior, not unresolved LIU historical authority.",
-  "permanent_stage1_command_executed": true,
-  "permanent_phase0_command_executed": false,
-  "repository_validation_result": "NOT_RUN_PHASE0_BLOCKED_BEFORE_COMMAND",
-  "phase0_commit_sha": null,
-  "phase0_tree_sha": null,
-  "phase0_parent_sha": null,
-  "changed_path_census": [],
-  "integration_freeze_sha256": null,
-  "writeahead_commit": null,
-  "writeahead_manifest_sha256": null,
   "disposable_target_branch": "experiment/remote-implementation-proof6-liu-phase0",
-  "disposable_publication_result": "NOT_CREATED",
-  "fresh_runner_reconstruction_result": "NOT_RUN_TRANSACTION_FAILED_BEFORE_SUCCESSOR",
-  "remote_phase0_equivalence": "NOT_ESTABLISHED",
-  "known_scope_reference_debt": {
-    "protected_main_row": "1947-48..1950-51|1968-69+",
-    "accepted_owner_scope": "1928-29..1950-51|1968-69+",
-    "status": "UNCHANGED_SETTLED_SHARED_REFERENCE_MAINTENANCE_DEBT"
-  },
-  "recovery": {
-    "request_id": "proof6-recovery-stage1-blocker-0001",
-    "request_commit": "6d3e43ae5a8758304e9209b83498e55a01be46d2",
-    "recovery_commit": "b04d4302d57890f18f3861eab9cd7fdd816609fe",
-    "recovered_control_state_sha256": "2a9b8341cbf0ea45504a598d98afe915066567ea5d583646b5e4f96228ced690",
-    "disposition": "ABANDON_STAGE1_RECONCILIATION_BLOCKER"
-  },
+  "experiment_kind": "REMOTE_IMPLEMENTATION_PROOF6_SUMMARY",
+  "final_reconciled_stage1_status": "PASS",
+  "fresh_runner_reconstruction": "PASS",
   "global_final_lifecycle": "IDLE",
-  "global_final_transaction_state": "BLOCKED_STAGE1_RECONCILIATION",
-  "protected_main_mutated": false,
-  "real_liu_onboarding_branch_exists": false,
-  "authoritative_liu_integration_frozen": false,
-  "authoritative_liu_phase0": false,
-  "stage2_begun": false,
+  "global_lock_result": "ACQUIRED_THROUGH_FINALIZATION_RELEASED_IDLE",
+  "integration_freeze_sha256": "a0db804501dc12f1e3ef060e60821c1971a4814e3fc8d3209513009cd6ac3e06",
   "owner_desktop_interaction_required": false,
   "owner_github_ui_interaction_required": false,
-  "architecture_ready_for_real_liu_remote_phase0": false,
-  "remaining_safety_gap": "Repair the generic Stage 1 researched-split explicit-reconciliation handling with a regression test in permanent repository tooling, merge that repair through normal protected-main governance, refresh main, rerun read-only LIU Stage 1/current-main reconciliation, and rerun Proof 6 end-to-end. Do not bypass the Stage 1 PASS contract."
+  "permanent_phase0_command": "python tools/stage_research_portfolio.py long-island-university <exact-research-freeze> --expected-sha256 <exact> --research-base <exact> --history-start-season 1928-1929 --history-scope-basis TOP_LEVEL_INTERVALS --history-scope-intervals 1928-29..1950-51|1968-69+ --history-scope-notes <owner-confirmed> --venue-reconciliation <exact> --conference-reconciliation <exact> --apply --commit",
+  "phase0_commit_sha": "ff9eb5ca1be1e07232ca2245ec4352f1defbe6e7",
+  "phase0_parent_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+  "phase0_tree_sha": "f53fbf5436ab4056232c6771b52105e52af9318c",
+  "protected_main_mutated": false,
+  "protected_main_sha": "e7d64d5971d02c5949a1a06539e3e3b641999190",
+  "real_liu_onboarding_branch_exists": false,
+  "remaining_safety_gap": "No architecture-level remote-transaction gap remains. Real LIU execution still requires the ordinary repository/Control Center authority to resolve the settled stale program-top-level-scope reference debt at the policy-required real integration boundary and explicit authorization to begin the real Implementation mutation.",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "proof6-liu-phase0-0002",
+  "research_freeze_sha256": "c1e439ec668608271287bc41bde29453b22321e0d1d3d1a4a219e4c516ca60c2",
+  "result": "REMOTE IMPLEMENTATION PROOF 6: PASS",
+  "schema_version": 1,
+  "successor_manifest_sha256": "f04f48e4e36a0eaa8dca46d0a9af50ecafa64fb213868e4ef479efd4507baf54",
+  "venue_reconciliation_sha256": "c07b06387f75c829188800404719f2aa897612008fea19f647de8fbb4ecd0d92",
+  "writeahead_manifest_sha256": "ef6a083e109caf8383a52fdafa520f9bb4d9a8b7c3e7226228b98c266dad53a9"
 }
