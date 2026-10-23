@@ -62,8 +62,10 @@ def add_existing_onboarding_worktree(
     target_branch: str,
     target_sha: str,
     school_key: str,
+    *,
+    source_repo: Path = ROOT,
 ) -> Path:
-    actual = remote_head(ROOT, target_branch)
+    actual = remote_head(source_repo, target_branch)
     if actual != target_sha:
         raise Stop(
             "STAGE2_ONBOARDING_HEAD_MISMATCH expected=%s actual=%s"
@@ -75,17 +77,27 @@ def add_existing_onboarding_worktree(
         "origin",
         "+refs/heads/%s:refs/remotes/origin/remote-stage2-target"
         % target_branch,
+        cwd=source_repo,
     )
     fetched = git(
         "rev-parse",
         "refs/remotes/origin/remote-stage2-target",
+        cwd=source_repo,
     ).stdout.strip()
     if fetched != target_sha:
         raise Stop("STAGE2_ONBOARDING_FETCH_MISMATCH")
     path = Path(tempfile.mkdtemp(prefix="remote-stage2-%s-" % school_key))
     shutil.rmtree(path)
     local_branch = "remote-stage2-census/%s-%s" % (school_key, target_sha[:12])
-    git("worktree", "add", "-b", local_branch, str(path), target_sha)
+    git(
+        "worktree",
+        "add",
+        "-b",
+        local_branch,
+        str(path),
+        target_sha,
+        cwd=source_repo,
+    )
     configure_git(path)
     state = tracked_worktree_state(path)
     if state["head_sha"] != target_sha:
@@ -98,9 +110,11 @@ def add_existing_onboarding_worktree(
 def verify_phase0_authority(
     request: dict[str, Any],
     control_commit: str,
+    *,
+    source_repo: Path = ROOT,
 ) -> dict[str, Any]:
     successor_ref = request["phase0_successor"]
-    successor_bytes = git_show_bytes(control_commit, successor_ref["path"])
+    successor_bytes = git_show_bytes(control_commit, successor_ref["path"], cwd=source_repo)
     if sha256_bytes(successor_bytes) != successor_ref["sha256"]:
         raise Stop("STAGE2_PHASE0_SUCCESSOR_HASH_MISMATCH")
     successor = json.loads(successor_bytes)
@@ -127,7 +141,7 @@ def verify_phase0_authority(
     writeahead_sha = str(successor.get("writeahead_manifest_sha256") or "")
     if not writeahead_path or not writeahead_sha:
         raise Stop("STAGE2_PHASE0_WRITEAHEAD_REFERENCE_MISSING")
-    writeahead_bytes = git_show_bytes(control_commit, writeahead_path)
+    writeahead_bytes = git_show_bytes(control_commit, writeahead_path, cwd=source_repo)
     if sha256_bytes(writeahead_bytes) != writeahead_sha:
         raise Stop("STAGE2_PHASE0_WRITEAHEAD_HASH_MISMATCH")
     writeahead = json.loads(writeahead_bytes)
@@ -147,7 +161,7 @@ def verify_phase0_authority(
     freeze_path = (
         Path(writeahead_path).parent / "integration-freeze.json"
     ).as_posix()
-    freeze_bytes = git_show_bytes(control_commit, freeze_path)
+    freeze_bytes = git_show_bytes(control_commit, freeze_path, cwd=source_repo)
     sidecar_hash = (writeahead.get("sidecars") or {}).get("integration-freeze.json")
     if sidecar_hash != request["integration_freeze_sha256"]:
         raise Stop("STAGE2_PHASE0_FREEZE_SIDECAR_BINDING_MISMATCH")
@@ -171,6 +185,7 @@ def verify_phase0_authority(
             git_show_bytes(
                 request["target_sha"],
                 "schools/%s/%s" % (request["school_key"], name),
+                cwd=source_repo,
             )
         )
         if not expected or actual != expected:
