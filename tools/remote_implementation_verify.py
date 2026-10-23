@@ -146,11 +146,15 @@ def verify_stage2_proposal_rehearsal(
         raise Stop("STAGE2_PROPOSAL_FRESH_RUNTIME_TOOL_MISMATCH")
     if result["stage2_status"] != manifest["stage2_status"]:
         raise Stop("STAGE2_PROPOSAL_FRESH_STATUS_MISMATCH")
-    if (
-        result["status"].get("preflight", {}).get("decision_universe_sha256")
-        != manifest["decision_universe_sha256"]
-    ):
+    runtime_decision_sha = result["status"].get("preflight", {}).get(
+        "decision_universe_sha256"
+    )
+    if runtime_decision_sha != manifest.get("runtime_decision_universe_sha256"):
         raise Stop("STAGE2_PROPOSAL_FRESH_DECISION_UNIVERSE_MISMATCH")
+    if (
+        result.get("decision_universe_compatibility") or {}
+    ) != (manifest.get("decision_universe_compatibility") or {}):
+        raise Stop("STAGE2_PROPOSAL_FRESH_DECISION_COMPATIBILITY_MISMATCH")
     if (
         result["tracked_mutation_proof"].get("tracked_stage2_mutation")
         != "NONE"
@@ -210,6 +214,12 @@ def verify_stage2_proposal_rehearsal(
         "integration_freeze_sha256": manifest["integration_freeze_sha256"],
         "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
         "decision_universe_sha256": manifest["decision_universe_sha256"],
+        "runtime_decision_universe_sha256": manifest.get(
+            "runtime_decision_universe_sha256"
+        ),
+        "decision_universe_compatibility": manifest.get(
+            "decision_universe_compatibility"
+        ) or {},
         "recommendation_map_sha256": manifest["recommendation_map_sha256"],
         "stage2_status": result["stage2_status"],
         "approved_plan_hash_preview": manifest.get("approved_plan_hash_preview"),

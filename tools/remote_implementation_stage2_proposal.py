@@ -29,6 +29,69 @@ from remote_implementation_stage2_census import (
 SITE_DIAGNOSTIC = "last-rehearsal-site-gate.json"
 PROPOSAL_ARTIFACT_NAMES = (*STAGE2_ARTIFACT_NAMES, SITE_DIAGNOSTIC)
 PROPOSAL_ALLOWED_STATUSES = {"OWNER_GATE_1_READY", "BLOCKED"}
+ACCOMPLISHMENT_PATCH_ACTION = "APPLY_ACCOMPLISHMENT_PATCH"
+
+
+def _decision_universe_sha256(decisions: list[dict[str, Any]]) -> str:
+    ordered = sorted(
+        decisions,
+        key=lambda row: str(row.get("decision_id", "")),
+    )
+    payload = json.dumps(
+        ordered,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return sha256_bytes(payload)
+
+
+def accomplishment_action_compatibility(
+    plan: dict[str, Any],
+    expected_decision_universe_sha256: str,
+    runtime_decision_universe_sha256: str,
+) -> dict[str, str]:
+    """Allow only the generic accomplishment action-vocabulary addition."""
+
+    decisions = list(plan.get("decisions") or [])
+    actual_runtime_sha = _decision_universe_sha256(decisions)
+    if actual_runtime_sha != runtime_decision_universe_sha256:
+        raise Stop("STAGE2_PROPOSAL_RUNTIME_PLAN_DECISION_UNIVERSE_MISMATCH")
+    if runtime_decision_universe_sha256 == expected_decision_universe_sha256:
+        return {
+            "status": "EXACT",
+            "kind": "EXACT_DECISION_UNIVERSE",
+            "authority_decision_universe_sha256": expected_decision_universe_sha256,
+            "runtime_decision_universe_sha256": runtime_decision_universe_sha256,
+            "legacy_compatible_sha256": runtime_decision_universe_sha256,
+        }
+
+    legacy: list[dict[str, Any]] = []
+    removed = 0
+    for row in decisions:
+        copy = dict(row)
+        if copy.get("category") == "accomplishments":
+            actions = list(copy.get("allowed_actions") or [])
+            if ACCOMPLISHMENT_PATCH_ACTION in actions:
+                copy["allowed_actions"] = [
+                    action
+                    for action in actions
+                    if action != ACCOMPLISHMENT_PATCH_ACTION
+                ]
+                removed += 1
+        legacy.append(copy)
+    if removed != 1:
+        raise Stop("STAGE2_PROPOSAL_DECISION_UNIVERSE_MISMATCH")
+    legacy_sha = _decision_universe_sha256(legacy)
+    if legacy_sha != expected_decision_universe_sha256:
+        raise Stop("STAGE2_PROPOSAL_DECISION_UNIVERSE_MISMATCH")
+    return {
+        "status": "PASS",
+        "kind": "ACCOMPLISHMENT_ACTION_VOCABULARY_ADDITION",
+        "authority_decision_universe_sha256": expected_decision_universe_sha256,
+        "runtime_decision_universe_sha256": runtime_decision_universe_sha256,
+        "legacy_compatible_sha256": legacy_sha,
+    }
 
 
 def _bound_json(
@@ -284,8 +347,18 @@ def run_stage2_proposal_tool(
         raise Stop("PERMANENT_STAGE2_PROPOSAL_BLOCKED_EXIT_CODE_MISMATCH")
 
     preflight = status.get("preflight") or {}
-    if preflight.get("decision_universe_sha256") != expected_decision_universe_sha256:
-        raise Stop("STAGE2_PROPOSAL_DECISION_UNIVERSE_MISMATCH")
+    runtime_decision_universe_sha256 = str(
+        preflight.get("decision_universe_sha256") or ""
+    )
+    plan_path = repo / ".onboarding" / school_key / "plan.json"
+    if not plan_path.is_file():
+        raise Stop("PERMANENT_STAGE2_PROPOSAL_PLAN_MISSING")
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    decision_universe_compatibility = accomplishment_action_compatibility(
+        plan,
+        expected_decision_universe_sha256,
+        runtime_decision_universe_sha256,
+    )
 
     raw_hashes, normalized_hashes = proposal_artifact_hashes(
         repo, school_key, map_path
@@ -328,6 +401,7 @@ def run_stage2_proposal_tool(
         "artifact_sha256": raw_hashes,
         "artifact_normalized_sha256": normalized_hashes,
         "runtime_tool_sha256": runtime_tool_sha256,
+        "decision_universe_compatibility": decision_universe_compatibility,
         "tracked_mutation_proof": {
             "before_head_sha": before["head_sha"],
             "after_head_sha": after["head_sha"],
