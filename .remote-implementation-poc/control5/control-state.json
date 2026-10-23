@@ -11,16 +11,16 @@
   "active_lock_commit": "14f6a8bc07b2813f6e9b3f04a064ec36c7860006",
   "active_lock_owner": "github-actions:39886953427:1",
   "active_operation": "FAIL_BOUNDARY_B",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "937ab1e3ead0b417884ed77caa6e0887150db206",
+  "active_prepared_tree_sha": "57008c4f8bd085729395587c79909ead3f5c6a42",
   "active_request_id": "proof5-boundary-b-0001",
   "active_request_sha256": "f8a86e5699800b79802f9c3c1c5b84ccbc11216e35acddcf34754ab9dfcd6912",
-  "active_sidecar_sha256": null,
-  "active_target_payload_sha256": null,
+  "active_sidecar_sha256": "15b925d661e1152a8e61dd7b76e4794c301dc2b499e549edab437096a2c2093b",
+  "active_target_payload_sha256": "416dcdcc4a1e4b4bde68b0d25708cba96255c60f2f12366bbe933df90476e205",
   "active_target_predecessor_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
   "active_writeahead_commit": null,
-  "active_writeahead_manifest_path": null,
-  "active_writeahead_manifest_sha256": null,
+  "active_writeahead_manifest_path": ".remote-implementation-poc/control5/writeahead/proof5-boundary-b-0001/writeahead-manifest.json",
+  "active_writeahead_manifest_sha256": "cb4a2ff1f57546600a9159cd75348c52eea3b61bac5cbddbc1d347631753ebe9",
   "authority_statement": "Experimental Proof 5 mutation-control authority only. No basketball mutation, LIU Integration Freeze, Phase 0, Stage 2, Gate 1, or release authority.",
   "consumed_request_ids": [
     "proof5-recovery-a-0001"
@@ -49,5 +49,5 @@
   "schema_version": 1,
   "target_branch": "experiment/remote-implementation-proof5-target",
   "target_starting_sha": "4465002033e935756931fd03f4c49efe3e6a4e34",
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
