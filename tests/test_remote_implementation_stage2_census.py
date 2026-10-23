@@ -232,6 +232,43 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self.assertIn(b"<REPO>", normalized)
         self.assertIn(b"/tmp/not-runner", normalized)
 
+    def test_worktree_branch_normalization_is_explicit(self):
+        repo = Path("/tmp/runner-one")
+        one = (
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "status": "CAPABILITY_CENSUS_READY",
+                    "branch": "remote-stage2-census/example-aaaaaaaaaaaa",
+                    "head_sha": "a" * 40,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode()
+        two = (
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "status": "CAPABILITY_CENSUS_READY",
+                    "branch": "remote-stage2-census/example-bbbbbbbbbbbb",
+                    "head_sha": "a" * 40,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode()
+        self.assertEqual(
+            normalize_artifact_bytes(
+                "implementation-stage2-status.json", one, repo
+            ),
+            normalize_artifact_bytes(
+                "implementation-stage2-status.json", two, repo
+            ),
+        )
+
     def test_generated_timestamp_normalization_is_explicit(self):
         repo = Path("/tmp/runner-one")
         plan_one = (
