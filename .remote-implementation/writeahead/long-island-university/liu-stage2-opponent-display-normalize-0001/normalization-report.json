@@ -1,0 +1,849 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 9,
+  "change_row_count": 24,
+  "changes": [
+    {
+      "authority_names": [
+        "Albany Law School"
+      ],
+      "authority_signature": "albanylawschool",
+      "canonical_opponent_key": "albany-law-school",
+      "from_names": [
+        "Albany Law"
+      ],
+      "target_row_count": 1,
+      "to_name": "Albany Law School"
+    },
+    {
+      "authority_names": [
+        "Bloomfield College"
+      ],
+      "authority_signature": "bloomfieldcollege",
+      "canonical_opponent_key": "bloomfield",
+      "from_names": [
+        "Bloomfield"
+      ],
+      "target_row_count": 1,
+      "to_name": "Bloomfield College"
+    },
+    {
+      "authority_names": [
+        "Centenary (NJ)"
+      ],
+      "authority_signature": "centenarynj",
+      "canonical_opponent_key": "centenary-new-jersey",
+      "from_names": [
+        "Centenary University (New Jersey)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Centenary (NJ)"
+    },
+    {
+      "authority_names": [
+        "Charleston (WV)"
+      ],
+      "authority_signature": "charlestonwv",
+      "canonical_opponent_key": "charleston-west-virginia",
+      "from_names": [
+        "University of Charleston (WV)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Charleston (WV)"
+    },
+    {
+      "authority_names": [
+        "City College of New York"
+      ],
+      "authority_signature": "citycollegeofnewyork",
+      "canonical_opponent_key": "city-college-of-new-york",
+      "from_names": [
+        "CCNY"
+      ],
+      "target_row_count": 3,
+      "to_name": "City College of New York"
+    },
+    {
+      "authority_names": [
+        "John Jay College"
+      ],
+      "authority_signature": "johnjaycollege",
+      "canonical_opponent_key": "john-jay",
+      "from_names": [
+        "John Jay"
+      ],
+      "target_row_count": 1,
+      "to_name": "John Jay College"
+    },
+    {
+      "authority_names": [
+        "Medgar Evers College"
+      ],
+      "authority_signature": "medgareverscollege",
+      "canonical_opponent_key": "medgar-evers",
+      "from_names": [
+        "Medgar Evers"
+      ],
+      "target_row_count": 1,
+      "to_name": "Medgar Evers College"
+    },
+    {
+      "authority_names": [
+        "New York Athletic Club"
+      ],
+      "authority_signature": "newyorkathleticclub",
+      "canonical_opponent_key": "new-york-athletic-club",
+      "from_names": [
+        "New York Ath. Club"
+      ],
+      "target_row_count": 2,
+      "to_name": "New York Athletic Club"
+    },
+    {
+      "authority_names": [
+        "Saint Francis University (Pa.)"
+      ],
+      "authority_signature": "saintfrancisuniversitypa",
+      "canonical_opponent_key": "saint-francis-pennsylvania",
+      "from_names": [
+        "Saint Francis (PA)"
+      ],
+      "target_row_count": 13,
+      "to_name": "Saint Francis University (Pa.)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "source_game_display_change_keys": 9,
+  "source_game_display_change_rows": 121,
+  "source_game_display_changes": [
+    {
+      "from_name": "Albany Law",
+      "normalized_opponent_key": "albany-law-school",
+      "source_game_id": "LIU-S1-00037",
+      "to_name": "Albany Law School"
+    },
+    {
+      "from_name": "New York Ath. Club",
+      "normalized_opponent_key": "new-york-athletic-club",
+      "source_game_id": "LIU-S1-00054",
+      "to_name": "New York Athletic Club"
+    },
+    {
+      "from_name": "Albany Law",
+      "normalized_opponent_key": "albany-law-school",
+      "source_game_id": "LIU-S1-00064",
+      "to_name": "Albany Law School"
+    },
+    {
+      "from_name": "New York Ath. Club",
+      "normalized_opponent_key": "new-york-athletic-club",
+      "source_game_id": "LIU-S1-00250",
+      "to_name": "New York Athletic Club"
+    },
+    {
+      "from_name": "University of Charleston (WV)",
+      "normalized_opponent_key": "charleston-west-virginia",
+      "source_game_id": "LIU-S1-00322",
+      "to_name": "Charleston (WV)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00340",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "New York Ath. Club",
+      "normalized_opponent_key": "new-york-athletic-club",
+      "source_game_id": "LIU-S1-00442",
+      "to_name": "New York Athletic Club"
+    },
+    {
+      "from_name": "Bloomfield",
+      "normalized_opponent_key": "bloomfield",
+      "source_game_id": "LIU-S1-00463",
+      "to_name": "Bloomfield College"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00697",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00722",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-00733",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00747",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-00753",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00782",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-00786",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00807",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-00814",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00839",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00844",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00881",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00909",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-00970",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-00985",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-00997",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "John Jay",
+      "normalized_opponent_key": "john-jay",
+      "source_game_id": "LIU-S1-01009",
+      "to_name": "John Jay College"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-01016",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01022",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01033",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "John Jay",
+      "normalized_opponent_key": "john-jay",
+      "source_game_id": "LIU-S1-01040",
+      "to_name": "John Jay College"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-01048",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01055",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01064",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-01073",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01082",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01092",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01111",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01120",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01138",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01147",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01166",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01176",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01189",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01199",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01213",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01221",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01250",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01258",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01276",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01285",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01306",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01313",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01316",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Medgar Evers",
+      "normalized_opponent_key": "medgar-evers",
+      "source_game_id": "LIU-S1-01317",
+      "to_name": "Medgar Evers College"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01333",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01340",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Medgar Evers",
+      "normalized_opponent_key": "medgar-evers",
+      "source_game_id": "LIU-S1-01345",
+      "to_name": "Medgar Evers College"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01359",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01370",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01381",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01390",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Medgar Evers",
+      "normalized_opponent_key": "medgar-evers",
+      "source_game_id": "LIU-S1-01406",
+      "to_name": "Medgar Evers College"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01422",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01428",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01440",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01457",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01472",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01487",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01504",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01528",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01533",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01562",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01584",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01589",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01609",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01622",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01626",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "CCNY",
+      "normalized_opponent_key": "city-college-of-new-york",
+      "source_game_id": "LIU-S1-01634",
+      "to_name": "City College of New York"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01639",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01651",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01671",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01683",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01706",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01719",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01740",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01759",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01765",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01782",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01794",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01805",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01830",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01856",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01867",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01889",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01899",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01917",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01922",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01950",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01952",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01963",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01980",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-01991",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Centenary University (New Jersey)",
+      "normalized_opponent_key": "centenary-new-jersey",
+      "source_game_id": "LIU-S1-02011",
+      "to_name": "Centenary (NJ)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02018",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02027",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02034",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02035",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02072",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02075",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02101",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02103",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02123",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02135",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02155",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02165",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02195",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "John Jay",
+      "normalized_opponent_key": "john-jay",
+      "source_game_id": "LIU-S1-02209",
+      "to_name": "John Jay College"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02225",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02233",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02255",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02268",
+      "to_name": "Saint Francis University (Pa.)"
+    },
+    {
+      "from_name": "Saint Francis (PA)",
+      "normalized_opponent_key": "saint-francis-pennsylvania",
+      "source_game_id": "LIU-S1-02272",
+      "to_name": "Saint Francis University (Pa.)"
+    }
+  ],
+  "status": "PASS"
+}

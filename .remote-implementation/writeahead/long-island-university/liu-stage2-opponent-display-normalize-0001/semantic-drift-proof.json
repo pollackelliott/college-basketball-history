@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "school_key": "long-island-university",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "school_key": "long-island-university",
+    "status": "PASS"
+  }
+}

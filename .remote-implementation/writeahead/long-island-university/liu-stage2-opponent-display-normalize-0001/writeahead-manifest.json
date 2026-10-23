@@ -1,0 +1,73 @@
+{
+  "allowed_paths": [
+    "schools/long-island-university/opponents.csv",
+    "schools/long-island-university/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/long-island-university/opponents.csv": "25f29181b2ceebe374cea7c9b7e547288bf6be58f400f45b6a50b6333fb4aeb9",
+    "schools/long-island-university/source-games.csv": "374442754a2a42262d2f91d19f2d84184989610f921fdd159c695a46b6f957fa"
+  },
+  "changed_paths": [
+    "schools/long-island-university/opponents.csv",
+    "schools/long-island-university/source-games.csv"
+  ],
+  "commit_message": "Normalize long-island-university historical opponent display representation",
+  "expected_blocker_keys": [
+    "albany-law-school",
+    "bloomfield",
+    "centenary-new-jersey",
+    "charleston-west-virginia",
+    "city-college-of-new-york",
+    "john-jay",
+    "medgar-evers",
+    "new-york-athletic-club",
+    "saint-francis-pennsylvania"
+  ],
+  "expected_target_predecessor_sha": "e037473888024efe176798566c99ca208c54f984",
+  "field_level_proof_sha256": "b8382e8bf24e811c10fafb070bfea2387e9530c41c4e8c5a9d008bebbdf6bbc6",
+  "global_lock_commit": "afdae333bc94580ecd8a9bf4815f978bf3bfedee",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "b998334cc442c00160c407a3d54c252b6cf313c3a8921793c6027340946c56ed",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "prepared_parent_sha": "e037473888024efe176798566c99ca208c54f984",
+  "prepared_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+  "protected_main_sha": "d144bd2648d91d6957c6e3bb36a0aac4ba508d6a",
+  "repository_validation": "PASS",
+  "request_id": "liu-stage2-opponent-display-normalize-0001",
+  "request_sha256": "1484db5576859c5953d7ac09937e5efd33c989da7b0a3343df868166ea2edae6",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_drift_after": {
+    "baseline_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "school_key": "long-island-university",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+    "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+    "school_key": "long-island-university",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "691d0abe1e4d1f43225ac15c7bd3adf7f4e6079ca442516f7a80cc69f569cb1a",
+    "field-level-proof.json": "b8382e8bf24e811c10fafb070bfea2387e9530c41c4e8c5a9d008bebbdf6bbc6",
+    "integration-freeze.json": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+    "normalization-report.json": "b998334cc442c00160c407a3d54c252b6cf313c3a8921793c6027340946c56ed",
+    "semantic-drift-proof.json": "7d5d7d7c9edea811acf861c68fd27940654d8e1b6f22d8db87d7bd32e939d370"
+  },
+  "source_game_normalized_name_row_count": 121,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "691d0abe1e4d1f43225ac15c7bd3adf7f4e6079ca442516f7a80cc69f569cb1a",
+  "target_branch": "data/long-island-university-onboarding"
+}
