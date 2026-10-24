@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "liu-stage2-preseal-0001",
+  "request_id": "liu-stage2-preseal-0002",
   "school_key": "long-island-university",
   "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "4e92cc8fdd2d7949db963bc0e326c04bd2b0c4d5",
-  "previous_control_state_sha256": "83a31319b2ce8a6272f9ebab38de1ef584a45fc57a0ac52f101ac4382c905b7c",
-  "expected_protected_main_sha": "4115f5f99595991e8247499b5a136e746f971238",
+  "previous_control_state_commit": "7f8fadaa47133da96eb13baff5a84751ac66cece",
+  "previous_control_state_sha256": "f22acbdee720c2b33676815f996f4494ec0d36f61212c251c5e4f8fe786ad3d7",
+  "expected_protected_main_sha": "beb1f1cc015037dca8b7c93c09e7e37f9e52a904",
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner explicitly authorized exactly one remote STAGE2_PRESEAL_REHEARSAL for Long Island University against the fresh-verified liu-stage2-gate1-fill-0001 authority. This authorizes permanent rehearse-review only; no cryptographic seal, sealed apply, tracked LIU basketball mutation, Preview, new owner approval, Owner Gate 2, merge, release, or Production authority."
+    "authorization": "Owner explicitly authorized one new remote STAGE2_PRESEAL_REHEARSAL retry for Long Island University against the unchanged fresh-verified liu-stage2-gate1-fill-0001 authority, using the repaired current protected-main semantic-equivalence verifier. This authorizes permanent rehearse-review only; no new Owner Gate 1 approval, cryptographic seal, sealed apply, tracked LIU basketball mutation, Preview, Owner Gate 2, merge, release, or Production authority."
   },
   "authority": {
     "owner_gate_1": false,
