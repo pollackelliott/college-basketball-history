@@ -258,6 +258,31 @@ class RemoteStage2PresealTests(unittest.TestCase):
             ):
                 preseal.verify_stage2_preseal_authority(req, CONTROL)
 
+    def test_log_normalization_removes_temp_roots_and_test_timing(self):
+        repo = Path("/work/target")
+        first = (
+            "Repository: /work/target\n"
+            "/tmp/tmps6yu3v7v/schools/alpha/source-games.csv\n"
+            "/tmp/display-recovery-test-c4ppztya/schools/example/opponents.csv\n"
+            "/tmp/onboard-example-zydzz45i/repository\n"
+            "Ran 865 tests in 65.220s\n"
+        )
+        second = (
+            "Repository: /work/target\n"
+            "/tmp/tmp8a1bcdef/schools/alpha/source-games.csv\n"
+            "/tmp/display-recovery-test-z9y8x7w6/schools/example/opponents.csv\n"
+            "/tmp/onboard-example-a1b2c3d4/repository\n"
+            "Ran 865 tests in 60.033s\n"
+        )
+        self.assertEqual(
+            preseal._normalize_text(first, repo=repo),
+            preseal._normalize_text(second, repo=repo),
+        )
+        normalized = preseal._normalize_text(first, repo=repo)
+        self.assertIn("<TARGET_REPO>", normalized)
+        self.assertIn("<TMPDIR>/schools/alpha/source-games.csv", normalized)
+        self.assertIn("Ran 865 tests in <ELAPSED>s", normalized)
+
     def test_permanent_rehearsal_success_is_ready_to_seal(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -295,6 +320,9 @@ class RemoteStage2PresealTests(unittest.TestCase):
             self.assertEqual(result["preseal_status"], "READY_TO_SEAL")
             self.assertEqual(result["approved_plan_hash_preview"], PLAN_PREVIEW)
             self.assertEqual(result["changed_path_count"], 12)
+            self.assertRegex(result["raw_log_sha256"], r"^[0-9a-f]{64}$")
+            self.assertRegex(result["normalized_log_sha256"], r"^[0-9a-f]{64}$")
+            self.assertRegex(result["equivalence_sha256"], r"^[0-9a-f]{64}$")
             self.assertEqual(
                 result["tracked_mutation_proof"]["tracked_stage2_mutation"],
                 "NONE",
@@ -422,10 +450,14 @@ class RemoteStage2PresealTests(unittest.TestCase):
             "filled_review_sha256": FILLED_REVIEW_SHA,
             "decision_id_set_sha256": DECISION_ID_SHA,
             "preseal_status": "READY_TO_SEAL",
+            "command_exit_code": 0,
             "rehearsal_approved_plan_hash_preview": PLAN_PREVIEW,
             "changed_path_count": 12,
             "normalized_log_sha256": "a" * 64,
             "site_gate_normalized_sha256": "b" * 64,
+            "tracked_mutation_proof": {
+                "tracked_stage2_mutation": "NONE",
+            },
         }
         manifest_bytes = (
             json.dumps(manifest, indent=2, sort_keys=True) + "\n"
@@ -460,12 +492,26 @@ class RemoteStage2PresealTests(unittest.TestCase):
                 request_bytes
             ),
         }
+        expected_equivalence = preseal.preseal_equivalence_sha256(
+            preseal_status="READY_TO_SEAL",
+            exit_code=0,
+            approved_plan_hash_preview=PLAN_PREVIEW,
+            changed_path_count=12,
+            site_gate_normalized_sha256="b" * 64,
+            runtime_tool_sha256=manifest["runtime_tool_sha256"],
+            target_tree_sha=TREE,
+            tracked_stage2_mutation="NONE",
+        )
         result = {
             "runtime_tool_sha256": manifest["runtime_tool_sha256"],
             "preseal_status": "READY_TO_SEAL",
             "approved_plan_hash_preview": PLAN_PREVIEW,
             "changed_path_count": 12,
-            "normalized_log_sha256": "a" * 64,
+            "raw_log_sha256": "c" * 64,
+            # Deliberately different from the durable checkpoint. Diagnostic
+            # log hash inequality must not block semantic fresh equivalence.
+            "normalized_log_sha256": "d" * 64,
+            "equivalence_sha256": expected_equivalence,
             "site_gate_normalized_sha256": "b" * 64,
             "tracked_mutation_proof": {"tracked_stage2_mutation": "NONE"},
         }
@@ -512,6 +558,35 @@ class RemoteStage2PresealTests(unittest.TestCase):
                     ),
                     0,
                 )
+
+    def test_structured_equivalence_hash_changes_on_stable_result_drift(self):
+        baseline = preseal.preseal_equivalence_sha256(
+            preseal_status="READY_TO_SEAL",
+            exit_code=0,
+            approved_plan_hash_preview=PLAN_PREVIEW,
+            changed_path_count=87,
+            site_gate_normalized_sha256="b" * 64,
+            runtime_tool_sha256={
+                "tools/onboarding_hardening.py": "x",
+                "tools/onboard_school.py": "y",
+            },
+            target_tree_sha=TREE,
+            tracked_stage2_mutation="NONE",
+        )
+        changed = preseal.preseal_equivalence_sha256(
+            preseal_status="READY_TO_SEAL",
+            exit_code=0,
+            approved_plan_hash_preview=PLAN_PREVIEW,
+            changed_path_count=88,
+            site_gate_normalized_sha256="b" * 64,
+            runtime_tool_sha256={
+                "tools/onboarding_hardening.py": "x",
+                "tools/onboard_school.py": "y",
+            },
+            target_tree_sha=TREE,
+            tracked_stage2_mutation="NONE",
+        )
+        self.assertNotEqual(baseline, changed)
 
     def test_fresh_verifier_dispatches_preseal_operation(self):
         state = initial_control_state()
