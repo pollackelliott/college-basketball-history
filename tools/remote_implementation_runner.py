@@ -3015,6 +3015,51 @@ def run_recovery(
             )
             return
 
+        if state.get("active_operation") == OP_STAGE2_SEALED_APPLY:
+            if manifest.get("operation") != OP_STAGE2_SEALED_APPLY:
+                raise Stop("RECOVERY_SEALED_APPLY_WRITEAHEAD_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit,
+                original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_SEALED_APPLY_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            proof = verify_prepared_sealed_apply(
+                ROOT,
+                predecessor_sha=manifest["expected_target_predecessor_sha"],
+                prepared_sha=prepared,
+                changed_paths=manifest["changed_paths"],
+                changed_file_sha256=manifest["changed_file_sha256"],
+                deleted_paths=manifest.get("deleted_paths") or [],
+            )
+            if proof["prepared_tree_sha"] != manifest["prepared_tree_sha"]:
+                raise Stop("RECOVERY_SEALED_APPLY_TREE_MISMATCH")
+            commit = finalize_stage2_sealed_apply_successor(
+                active=state,
+                original_request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+            )
+            print(
+                "REMOTE IMPLEMENTATION RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
         successor_dir = Path(
             ".remote-implementation/successors/%s/%s"
             % (request["school_key"], original_request_id)
