@@ -27,6 +27,7 @@ OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
 OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
 OP_STAGE2_GATE1_FILL = "STAGE2_GATE1_FILL"
+OP_STAGE2_PRESEAL_REHEARSAL = "STAGE2_PRESEAL_REHEARSAL"
 OP_STAGE2_RECONCILIATION_DIAGNOSTIC = "STAGE2_RECONCILIATION_DIAGNOSTIC"
 OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
@@ -36,6 +37,7 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
+    OP_STAGE2_PRESEAL_REHEARSAL,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     OP_RECOVER,
 }
@@ -49,6 +51,7 @@ TX_STAGE1_RUNNING = "STAGE1_RUNNING"
 TX_STAGE2_CENSUS_RUNNING = "STAGE2_CENSUS_RUNNING"
 TX_STAGE2_PROPOSAL_RUNNING = "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 TX_STAGE2_GATE1_FILL_RUNNING = "STAGE2_GATE1_FILL_RUNNING"
+TX_STAGE2_PRESEAL_RUNNING = "STAGE2_PRESEAL_REHEARSAL_RUNNING"
 TX_STAGE2_DIAGNOSTIC_RUNNING = "STAGE2_RECONCILIATION_DIAGNOSTIC_RUNNING"
 TX_LOCKED = "LOCKED"
 TX_INPUTS_VERIFIED = "INPUTS_VERIFIED"
@@ -158,6 +161,7 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_STAGE2_CENSUS_RUNNING,
             TX_STAGE2_PROPOSAL_RUNNING,
             TX_STAGE2_GATE1_FILL_RUNNING,
+            TX_STAGE2_PRESEAL_RUNNING,
             TX_STAGE2_DIAGNOSTIC_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
@@ -262,6 +266,16 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("stage2_gate1_fill") is not True,
             "REQUEST_GATE1_FILL_AUTHORITY_FORBIDDEN",
+        )
+    if operation == OP_STAGE2_PRESEAL_REHEARSAL:
+        _require(
+            authority.get("stage2_preseal_rehearsal") is True,
+            "STAGE2_PRESEAL_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("stage2_preseal_rehearsal") is not True,
+            "REQUEST_PRESEAL_AUTHORITY_FORBIDDEN",
         )
     _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
     _require(authority.get("release") is False, "REQUEST_RELEASE_AUTHORITY_FORBIDDEN")
@@ -578,6 +592,71 @@ def validate_request(request: dict[str, Any]) -> None:
             )
 
 
+    if operation == OP_STAGE2_PRESEAL_REHEARSAL:
+        _require(
+            authority.get("phase0") is False,
+            "STAGE2_PRESEAL_PHASE0_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("recovery") is False,
+            "STAGE2_PRESEAL_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_census") is False,
+            "STAGE2_PRESEAL_CENSUS_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is False,
+            "STAGE2_PRESEAL_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_proposal_rehearsal") is False,
+            "STAGE2_PRESEAL_PROPOSAL_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_gate1_fill") is False,
+            "STAGE2_PRESEAL_GATE1_FILL_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is False,
+            "STAGE2_PRESEAL_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "STAGE2_PRESEAL_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "STAGE2_PRESEAL_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("stage2_gate1_fill_checkpoint"),
+            "stage2_gate1_fill_checkpoint",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("stage2_gate1_fill_verification"),
+            "stage2_gate1_fill_verification",
+            required=True,
+        )
+        for field, code in (
+            ("integration_freeze_sha256", "INTEGRATION_FREEZE"),
+            ("semantic_snapshot_sha256", "SEMANTIC_SNAPSHOT"),
+            ("decision_universe_sha256", "DECISION_UNIVERSE"),
+            ("recommendation_map_sha256", "RECOMMENDATION_MAP"),
+            ("approved_plan_hash_preview", "APPROVED_PLAN_PREVIEW"),
+            ("filled_review_sha256", "FILLED_REVIEW"),
+            ("decision_id_set_sha256", "DECISION_ID_SET"),
+        ):
+            _require_sha(
+                request.get(field),
+                64,
+                f"STAGE2_PRESEAL_{code}_SHA_INVALID",
+            )
+
+
     if operation == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
         _require(
             authority.get("stage2_reconciliation_diagnostic") is True,
@@ -719,6 +798,7 @@ def verify_request_predecessor(
             OP_STAGE2_CENSUS,
             OP_STAGE2_PROPOSAL_REHEARSAL,
             OP_STAGE2_GATE1_FILL,
+            OP_STAGE2_PRESEAL_REHEARSAL,
             OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
         }:
             _require(
@@ -758,6 +838,7 @@ def begin_request(
         OP_STAGE2_CENSUS,
         OP_STAGE2_PROPOSAL_REHEARSAL,
         OP_STAGE2_GATE1_FILL,
+        OP_STAGE2_PRESEAL_REHEARSAL,
         OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     }:
         result["lifecycle_state"] = LIFECYCLE_READ_ONLY
@@ -769,6 +850,8 @@ def begin_request(
             result["transaction_state"] = TX_STAGE2_PROPOSAL_RUNNING
         elif request["operation"] == OP_STAGE2_GATE1_FILL:
             result["transaction_state"] = TX_STAGE2_GATE1_FILL_RUNNING
+        elif request["operation"] == OP_STAGE2_PRESEAL_REHEARSAL:
+            result["transaction_state"] = TX_STAGE2_PRESEAL_RUNNING
         else:
             result["transaction_state"] = TX_STAGE2_DIAGNOSTIC_RUNNING
         result["active_lock_owner"] = None
