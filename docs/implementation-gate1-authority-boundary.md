@@ -134,6 +134,8 @@ After a fresh-verified remote fill, `STAGE2_PRESEAL_REHEARSAL` may run the perma
 
 After a fresh-verified `READY_TO_SEAL` result, guarded remote `STAGE2_GATE1_SEAL` may create the cryptographic Gate 1 seal. It must re-run the permanent pre-seal suite on current protected-main runtime before invoking the unchanged permanent `onboard_school.py --approve` path, preserve the exact final `approved_plan_hash`, and independently reconstruct that seal from the exact filled review plus the seal's own approval timestamp. Sealing creates authority only; sealed apply remains the separate mutation boundary.
 
+After a fresh-verified remote seal, guarded remote `STAGE2_SEALED_APPLY` may cross that mutation boundary only with the exact sealed `approved_plan_hash`. It must reauthenticate the full seal chain, replay current-main technical readiness, acquire the serialized mutation lock, run the unchanged permanent transactional `--apply`, persist write-ahead before publication, publish one exact prepared successor through expected-predecessor CAS, and fresh-replay the apply to reproduce the published Git tree. No new historical authority is created by apply; the seal is the sole historical authority.
+
 ## 6. Owner interaction
 
 Do not interrupt the owner merely because one difficult historical row appears before Gate 1.
