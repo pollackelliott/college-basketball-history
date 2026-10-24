@@ -202,7 +202,7 @@ python tools/onboard_school.py <school_key> \
   --approved-by "Elliott"
 ```
 
-Run only the exact sealed apply command printed by that tool.
+Run only the exact sealed apply command printed by that tool, or use guarded remote `STAGE2_SEALED_APPLY` against the exact fresh-verified seal. The remote path must use the same permanent transactional `--apply` command, hold the one-active-Implementation mutation lock, persist write-ahead before target publication, publish by expected-predecessor CAS, and fresh-replay to reproduce the exact successor tree.
 
 The expected normal path is now:
 

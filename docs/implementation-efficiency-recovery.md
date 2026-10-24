@@ -73,7 +73,7 @@ Examples include:
 - filled review plus exact decision-ID set, including the durable remote `STAGE2_GATE1_FILL` checkpoint when that execution path is used;
 - pre-seal technical rehearsal result, including the durable remote `STAGE2_PRESEAL_REHEARSAL` checkpoint when that execution path is used;
 - cryptographic Gate 1 seal checkpoint and exact approved-plan hash, including durable remote `STAGE2_GATE1_SEAL` authority when that execution path is used;
-- sealed apply commit;
+- sealed apply successor commit plus write-ahead/fresh-equivalence authority, including durable remote `STAGE2_SEALED_APPLY` artifacts when that execution path is used;
 - release PR number and exact PR-head SHA;
 - merged-main SHA;
 - exact Production deployment proof.
