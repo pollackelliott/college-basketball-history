@@ -22,6 +22,7 @@ from remote_implementation_control import (
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    OP_STAGE2_GATE1_FILL,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     abandon_active,
@@ -75,6 +76,10 @@ from remote_implementation_stage2_proposal import (
     PROPOSAL_ARTIFACT_NAMES,
     run_stage2_proposal_tool,
     verify_stage2_proposal_authority,
+)
+from remote_implementation_stage2_gate1_fill import (
+    run_stage2_gate1_fill_tool,
+    verify_stage2_gate1_fill_authority,
 )
 from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
@@ -719,6 +724,199 @@ def run_read_only_stage2_proposal(
         % (result["stage2_status"], checkpoint_commit)
     )
 
+
+
+def persist_stage2_gate1_fill_checkpoint(
+    *,
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    live_main: str,
+    result: dict[str, Any],
+    authority: dict[str, Any],
+    expected_remote: str,
+) -> str:
+    rid = request["request_id"]
+    school = request["school_key"]
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s" % (school, rid)
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+
+    source_review = directory / "source-review.csv"
+    source_review.write_bytes(authority["review_bytes"])
+    filled_review = directory / "filled-review.csv"
+    filled_review.write_bytes(result["filled_review_bytes"])
+    plan_target = directory / "plan.json"
+    plan_target.write_bytes(authority["plan_bytes"])
+    map_target = directory / "recommendation-map.json"
+    map_target.write_bytes(authority["map_bytes"])
+
+    if sha256_file(filled_review) != result["filled_review_sha256"]:
+        raise Stop("STAGE2_GATE1_FILL_CHECKPOINT_REVIEW_HASH_MISMATCH")
+    if sha256_file(map_target) != request["recommendation_map_sha256"]:
+        raise Stop("STAGE2_GATE1_FILL_CHECKPOINT_MAP_HASH_MISMATCH")
+    if sha256_file(plan_target) != result["plan_sha256"]:
+        raise Stop("STAGE2_GATE1_FILL_CHECKPOINT_PLAN_HASH_MISMATCH")
+
+    proposal = authority["proposal_manifest"]
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_CHECKPOINT",
+        "request_id": rid,
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": school,
+        "protected_main_sha": live_main,
+        "runtime_commit_sha": live_main,
+        "runtime_tool_sha256": result["runtime_tool_sha256"],
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
+        "stage2_proposal_checkpoint_path": request["stage2_proposal_checkpoint"]["path"],
+        "stage2_proposal_checkpoint_sha256": request["stage2_proposal_checkpoint"]["sha256"],
+        "stage2_proposal_verification_path": request["stage2_proposal_verification"]["path"],
+        "stage2_proposal_verification_sha256": request["stage2_proposal_verification"]["sha256"],
+        "source_proposal_request_id": proposal.get("request_id"),
+        "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+        "decision_universe_sha256": request["decision_universe_sha256"],
+        "recommendation_map_sha256": request["recommendation_map_sha256"],
+        "approved_plan_hash_preview": request["approved_plan_hash_preview"],
+        "owner_gate_1_approval_sha256": authority["owner_gate_1_approval_sha256"],
+        "owner_gate_1_approval": request["owner_gate_1_approval"],
+        "permanent_command": result["command"],
+        "command_exit_code": result["exit_code"],
+        "gate1_fill_status": "FILLED",
+        "source_review_sha256": result["source_review_sha256"],
+        "filled_review_checkpoint_path": filled_review.as_posix(),
+        "filled_review_sha256": result["filled_review_sha256"],
+        "plan_checkpoint_path": plan_target.as_posix(),
+        "plan_sha256": result["plan_sha256"],
+        "recommendation_map_checkpoint_path": map_target.as_posix(),
+        "decision_count": result["decision_count"],
+        "action_counts": result["action_counts"],
+        "decision_id_set_sha256": result["decision_id_set_sha256"],
+        "tracked_mutation_proof": result["tracked_mutation_proof"],
+        "authority_statement": (
+            "Owner Gate 1 fill checkpoint only. The exact explicit owner approval "
+            "is hash-bound to the exact OWNER_GATE_1_READY proposal, decision "
+            "universe, recommendation map, and approved-plan preview. The permanent "
+            "fill-review command populated only ignored review state; no tracked "
+            "basketball mutation, pre-seal rehearsal, cryptographic seal, apply, "
+            "Preview, merge, or release authority is included."
+        ),
+    }
+    manifest_path = directory / "checkpoint-manifest.json"
+    write_json(manifest_path, manifest)
+    manifest_sha = sha256_file(manifest_path)
+
+    final_state = finalize_success(
+        state,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_GATE1_FILL,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "checkpoint_manifest_path": manifest_path.as_posix(),
+            "checkpoint_manifest_sha256": manifest_sha,
+            "source_proposal_request_id": proposal.get("request_id"),
+            "decision_universe_sha256": request["decision_universe_sha256"],
+            "recommendation_map_sha256": request["recommendation_map_sha256"],
+            "approved_plan_hash_preview": request["approved_plan_hash_preview"],
+            "owner_gate_1_approval_sha256": authority["owner_gate_1_approval_sha256"],
+            "filled_review_sha256": result["filled_review_sha256"],
+            "decision_id_set_sha256": result["decision_id_set_sha256"],
+            "gate1_fill_status": "FILLED",
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_gate1_fill_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 Gate 1 fill %s" % rid,
+        [STATE_PATH, directory],
+    )
+
+
+def run_read_only_stage2_gate1_fill(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    authority = verify_stage2_gate1_fill_authority(
+        request,
+        predecessor_commit,
+    )
+    actual_target = remote_head(ROOT, request["target_branch"])
+    if actual_target != request["target_sha"]:
+        raise Stop(
+            "STAGE2_GATE1_FILL_TARGET_HEAD_MISMATCH expected=%s actual=%s"
+            % (request["target_sha"], actual_target or "[missing]")
+        )
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted_commit = commit_control(
+        request_commit,
+        "accept read-only Stage 2 Gate 1 fill request %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"],
+        request["target_sha"],
+        request["school_key"],
+    )
+    target_tree = git("rev-parse", "HEAD^{tree}", cwd=worktree).stdout.strip()
+    if authority.get("target_tree_sha") and target_tree != authority["target_tree_sha"]:
+        raise Stop("STAGE2_GATE1_FILL_AUTHORITY_TREE_MISMATCH")
+
+    result = run_stage2_gate1_fill_tool(
+        worktree,
+        request["school_key"],
+        freeze_bytes=authority["freeze_bytes"],
+        map_bytes=authority["map_bytes"],
+        plan_bytes=authority["plan_bytes"],
+        review_bytes=authority["review_bytes"],
+        expected_action_counts=authority["expected_action_counts"],
+        expected_decision_count=authority["expected_decision_count"],
+        diag=DIAG / "stage2-gate1-fill",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("STAGE2_GATE1_FILL_TARGET_CHANGED_DURING_RUN")
+
+    checkpoint_commit = persist_stage2_gate1_fill_checkpoint(
+        state=active,
+        request=request,
+        request_bytes=request_bytes,
+        live_main=live_main,
+        result=result,
+        authority=authority,
+        expected_remote=accepted_commit,
+    )
+    print(
+        "REMOTE STAGE 2 GATE 1 FILL: PASS checkpoint_commit=%s"
+        % checkpoint_commit
+    )
 
 
 def persist_stage2_reconciliation_diagnostic_checkpoint(
@@ -2042,6 +2240,15 @@ def main() -> int:
             )
         elif request["operation"] == OP_STAGE2_PROPOSAL_REHEARSAL:
             run_read_only_stage2_proposal(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_GATE1_FILL:
+            run_read_only_stage2_gate1_fill(
                 state,
                 request,
                 request_bytes,
