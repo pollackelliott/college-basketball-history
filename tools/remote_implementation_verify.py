@@ -54,6 +54,7 @@ from remote_implementation_stage2_gate1_fill import (
     verify_stage2_gate1_fill_authority,
 )
 from remote_implementation_stage2_preseal import (
+    preseal_equivalence_sha256,
     run_stage2_preseal_rehearsal_tool,
     verify_stage2_preseal_authority,
 )
@@ -479,6 +480,7 @@ def verify_stage2_preseal_rehearsal(
         "changed_path_count",
         "normalized_log_sha256",
         "site_gate_normalized_sha256",
+        "equivalence_sha256",
     ):
         if manifest.get(field) != last.get(field):
             raise Stop("STAGE2_PRESEAL_FRESH_BINDING_MISMATCH:%s" % field)
@@ -532,7 +534,6 @@ def verify_stage2_preseal_rehearsal(
         "preseal_status",
         "approved_plan_hash_preview",
         "changed_path_count",
-        "normalized_log_sha256",
         "site_gate_normalized_sha256",
     ):
         manifest_field = (
@@ -547,6 +548,30 @@ def verify_stage2_preseal_rehearsal(
         != "NONE"
     ):
         raise Stop("STAGE2_PRESEAL_FRESH_TRACKED_MUTATION")
+
+    expected_equivalence_sha256 = manifest.get("equivalence_sha256")
+    if not expected_equivalence_sha256:
+        # Backward-compatible recovery for checkpoints created before the
+        # structured equivalence field existed. All inputs below were already
+        # hash-bound in that durable checkpoint.
+        expected_equivalence_sha256 = preseal_equivalence_sha256(
+            preseal_status=manifest["preseal_status"],
+            exit_code=manifest["command_exit_code"],
+            approved_plan_hash_preview=manifest.get(
+                "rehearsal_approved_plan_hash_preview"
+            ),
+            changed_path_count=manifest.get("changed_path_count"),
+            site_gate_normalized_sha256=manifest.get(
+                "site_gate_normalized_sha256"
+            ),
+            runtime_tool_sha256=manifest["runtime_tool_sha256"],
+            target_tree_sha=manifest["target_tree_sha"],
+            tracked_stage2_mutation=(
+                manifest.get("tracked_mutation_proof") or {}
+            ).get("tracked_stage2_mutation"),
+        )
+    if result["equivalence_sha256"] != expected_equivalence_sha256:
+        raise Stop("STAGE2_PRESEAL_FRESH_EQUIVALENCE_MISMATCH")
 
     verification = {
         "schema_version": 1,
@@ -577,7 +602,22 @@ def verify_stage2_preseal_rehearsal(
         "decision_id_set_sha256": manifest["decision_id_set_sha256"],
         "preseal_status": result["preseal_status"],
         "changed_path_count": result["changed_path_count"],
-        "normalized_log_sha256": result["normalized_log_sha256"],
+        "equivalence_sha256": expected_equivalence_sha256,
+        "checkpoint_raw_log_sha256": manifest.get("raw_log_sha256"),
+        "checkpoint_normalized_log_sha256": manifest.get(
+            "normalized_log_sha256"
+        ),
+        "fresh_raw_log_sha256": result["raw_log_sha256"],
+        "fresh_normalized_log_sha256": result["normalized_log_sha256"],
+        "diagnostic_raw_log_match": (
+            manifest.get("raw_log_sha256") == result["raw_log_sha256"]
+            if manifest.get("raw_log_sha256")
+            else None
+        ),
+        "diagnostic_normalized_log_match": (
+            manifest.get("normalized_log_sha256")
+            == result["normalized_log_sha256"]
+        ),
         "site_gate_normalized_sha256": result[
             "site_gate_normalized_sha256"
         ],
@@ -601,6 +641,11 @@ def verify_stage2_preseal_rehearsal(
         or local_last.get("request_id") != manifest["request_id"]
     ):
         raise Stop("STAGE2_PRESEAL_FRESH_CONTROL_MOVED")
+    local_last["equivalence_sha256"] = expected_equivalence_sha256
+    local_last["diagnostic_normalized_log_match"] = (
+        manifest.get("normalized_log_sha256")
+        == result["normalized_log_sha256"]
+    )
     local_last["fresh_runner_verification"] = "PASS"
     local_last["remote_stage2_preseal_equivalence"] = "PASS"
     local_state["last_operation"] = local_last

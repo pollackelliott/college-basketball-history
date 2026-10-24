@@ -45,13 +45,59 @@ def _bound_bytes(
 
 
 def _normalize_text(text: str, *, repo: Path) -> str:
+    """Normalize ephemeral diagnostics without making them equivalence authority."""
+
     normalized = text.replace(str(repo.resolve()), "<TARGET_REPO>")
+    # Disposable tests create many unrelated tempfile roots. Preserve the
+    # relative path below the tempfile root while removing its random basename.
     normalized = re.sub(
-        r"/tmp/preseal-[^/\s]+(?:/repository)?",
-        "<PRESEAL_REPO>",
+        r"/tmp/[^/\s'\"<>:,)\]]+",
+        "<TMPDIR>",
+        normalized,
+    )
+    # unittest wall-clock duration is expected to vary across fresh runners.
+    normalized = re.sub(
+        r"(Ran\s+\d+\s+tests?\s+in\s+)\d+(?:\.\d+)?s",
+        r"\1<ELAPSED>s",
         normalized,
     )
     return normalized
+
+
+def preseal_equivalence_sha256(
+    *,
+    preseal_status: str,
+    exit_code: int,
+    approved_plan_hash_preview: str | None,
+    changed_path_count: int | None,
+    site_gate_normalized_sha256: str | None,
+    runtime_tool_sha256: dict[str, str],
+    target_tree_sha: str,
+    tracked_stage2_mutation: str,
+) -> str:
+    """Hash only stable technical-readiness facts used for fresh equivalence."""
+
+    payload = {
+        "preseal_status": preseal_status,
+        "command_exit_code": exit_code,
+        "approved_plan_hash_preview": approved_plan_hash_preview,
+        "changed_path_count": changed_path_count,
+        "site_gate_normalized_sha256": site_gate_normalized_sha256,
+        "runtime_tool_sha256": dict(sorted(runtime_tool_sha256.items())),
+        "target_tree_sha": target_tree_sha,
+        "tracked_stage2_mutation": tracked_stage2_mutation,
+    }
+    return sha256_bytes(
+        (
+            json.dumps(
+                payload,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n"
+        ).encode("utf-8")
+    )
 
 
 def _normalize_json(value: Any, *, repo: Path) -> Any:
@@ -284,6 +330,7 @@ def run_stage2_preseal_rehearsal_tool(
             )
         )
 
+    raw_log_sha256 = sha256_bytes(log_text.encode("utf-8"))
     normalized_log = _normalize_text(log_text, repo=repo)
     normalized_log_sha256 = sha256_bytes(normalized_log.encode("utf-8"))
 
@@ -329,6 +376,18 @@ def run_stage2_preseal_rehearsal_tool(
         if "TECHNICAL READINESS PASSED" not in log_text:
             raise Stop("STAGE2_PRESEAL_SUCCESS_MARKER_MISSING")
 
+    tracked_mutation = "NONE"
+    equivalence_sha256 = preseal_equivalence_sha256(
+        preseal_status=status,
+        exit_code=cp.returncode,
+        approved_plan_hash_preview=preview_hash,
+        changed_path_count=changed_path_count,
+        site_gate_normalized_sha256=site_normalized_sha256,
+        runtime_tool_sha256=runtime_tool_sha256,
+        target_tree_sha=after["tree_sha"],
+        tracked_stage2_mutation=tracked_mutation,
+    )
+
     return {
         "command": [
             "python",
@@ -340,7 +399,9 @@ def run_stage2_preseal_rehearsal_tool(
         "preseal_status": status,
         "approved_plan_hash_preview": preview_hash,
         "changed_path_count": changed_path_count,
+        "raw_log_sha256": raw_log_sha256,
         "normalized_log_sha256": normalized_log_sha256,
+        "equivalence_sha256": equivalence_sha256,
         "site_gate": site_json,
         "site_gate_normalized_sha256": site_normalized_sha256,
         "runtime_tool_sha256": runtime_tool_sha256,
@@ -351,6 +412,6 @@ def run_stage2_preseal_rehearsal_tool(
             "after_tree_sha": after["tree_sha"],
             "before_status": before["status"],
             "after_status": after["status"],
-            "tracked_stage2_mutation": "NONE",
+            "tracked_stage2_mutation": tracked_mutation,
         },
     }
