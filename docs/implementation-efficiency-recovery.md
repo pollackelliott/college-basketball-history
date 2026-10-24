@@ -118,7 +118,11 @@ If proposal rehearsal reached the site gate, the latest structured site result i
 
 `.onboarding/<school>/last-rehearsal-site-gate.json`
 
-A replacement chat must inspect these durable artifacts and actual Git/GitHub state before reconstructing Stage 2 from prose. Do not rerun preflight or proposal rehearsal merely because the chat changed.
+If a blocked proposal requires one-game reconciliation-path diagnosis, the permanent diagnostic preserves:
+
+`.onboarding/<school>/last-rehearsal-reconciliation-trace.json`
+
+Use that compact trace instead of reopening interactive CSV/code archaeology for the same failure. A replacement chat must inspect these durable artifacts and actual Git/GitHub state before reconstructing Stage 2 from prose. Do not rerun preflight, proposal rehearsal, or an already-equivalent reconciliation diagnostic merely because the chat changed.
 
 For other stages, or when the Stage-2 artifact itself cannot exist yet, use the compact manual capsule below.
 

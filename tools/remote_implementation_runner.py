@@ -22,6 +22,7 @@ from remote_implementation_control import (
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     abandon_active,
     begin_request,
@@ -74,6 +75,10 @@ from remote_implementation_stage2_proposal import (
     PROPOSAL_ARTIFACT_NAMES,
     run_stage2_proposal_tool,
     verify_stage2_proposal_authority,
+)
+from remote_implementation_stage2_diagnostic import (
+    run_stage2_reconciliation_diagnostic_tool,
+    verify_stage2_diagnostic_authority,
 )
 from remote_implementation_stage2_opponent_display import (
     apply_and_prepare_repair,
@@ -712,6 +717,187 @@ def run_read_only_stage2_proposal(
     print(
         "REMOTE STAGE 2 PROPOSAL REHEARSAL: %s checkpoint_commit=%s"
         % (result["stage2_status"], checkpoint_commit)
+    )
+
+
+
+def persist_stage2_reconciliation_diagnostic_checkpoint(
+    *,
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    live_main: str,
+    result: dict[str, Any],
+    authority: dict[str, Any],
+    expected_remote: str,
+) -> str:
+    rid = request["request_id"]
+    school = request["school_key"]
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s" % (school, rid)
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+    trace_target = directory / "reconciliation-trace.json"
+    trace_target.write_bytes(result["trace_bytes"])
+    if sha256_file(trace_target) != result["trace_sha256"]:
+        raise Stop("STAGE2_DIAGNOSTIC_CHECKPOINT_TRACE_HASH_MISMATCH")
+
+    trace = result["trace"]
+    source_manifest = authority["proposal_manifest"]
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_CHECKPOINT",
+        "request_id": rid,
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": school,
+        "protected_main_sha": live_main,
+        "runtime_commit_sha": live_main,
+        "runtime_tool_sha256": result["runtime_tool_sha256"],
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
+        "stage2_proposal_checkpoint_path": request["stage2_proposal_checkpoint"]["path"],
+        "stage2_proposal_checkpoint_sha256": request["stage2_proposal_checkpoint"]["sha256"],
+        "source_proposal_request_id": source_manifest.get("request_id"),
+        "source_proposal_protected_main_sha": source_manifest.get("protected_main_sha"),
+        "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+        "decision_universe_sha256": request["decision_universe_sha256"],
+        "recommendation_map_sha256": request["recommendation_map_sha256"],
+        "canonical_game_id": request["canonical_game_id"],
+        "permanent_command": result["command"],
+        "command_exit_code": result["exit_code"],
+        "trace_checkpoint_path": trace_target.as_posix(),
+        "trace_sha256": result["trace_sha256"],
+        "diagnostic_status": trace.get("diagnostic_status"),
+        "execution_status": trace.get("execution_status"),
+        "execution_error": trace.get("execution_error"),
+        "partial_location_classification": trace.get(
+            "partial_location_classification"
+        ),
+        "integrity": trace.get("integrity") or {},
+        "decision_count": len(trace.get("decision_order") or []),
+        "mutation_count": len(trace.get("mutations") or []),
+        "site_sync_count": len(trace.get("site_sync_events") or []),
+        "tracked_mutation_proof": result["tracked_mutation_proof"],
+        "authority_statement": (
+            "Read-only Stage 2 reconciliation diagnostic. This checkpoint "
+            "interprets no historical fact, supplies no Owner Gate approval, "
+            "and authorizes no tracked school or protected-main mutation."
+        ),
+    }
+    manifest_path = directory / "checkpoint-manifest.json"
+    write_json(manifest_path, manifest)
+    manifest_sha = sha256_file(manifest_path)
+
+    final_state = finalize_success(
+        state,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "checkpoint_manifest_path": manifest_path.as_posix(),
+            "checkpoint_manifest_sha256": manifest_sha,
+            "source_proposal_request_id": source_manifest.get("request_id"),
+            "canonical_game_id": request["canonical_game_id"],
+            "trace_sha256": result["trace_sha256"],
+            "partial_location_classification": trace.get(
+                "partial_location_classification"
+            ),
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_diagnostic_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 reconciliation diagnostic %s" % rid,
+        [STATE_PATH, directory],
+    )
+
+
+def run_read_only_stage2_reconciliation_diagnostic(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    authority = verify_stage2_diagnostic_authority(
+        request,
+        predecessor_commit,
+    )
+    actual_target = remote_head(ROOT, request["target_branch"])
+    if actual_target != request["target_sha"]:
+        raise Stop(
+            "STAGE2_DIAGNOSTIC_TARGET_HEAD_MISMATCH expected=%s actual=%s"
+            % (request["target_sha"], actual_target or "[missing]")
+        )
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted_commit = commit_control(
+        request_commit,
+        "accept read-only Stage 2 reconciliation diagnostic request %s"
+        % request["request_id"],
+        [STATE_PATH, archive],
+    )
+
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"],
+        request["target_sha"],
+        request["school_key"],
+    )
+    target_tree = git("rev-parse", "HEAD^{tree}", cwd=worktree).stdout.strip()
+    if authority.get("target_tree_sha") and target_tree != authority["target_tree_sha"]:
+        raise Stop("STAGE2_DIAGNOSTIC_AUTHORITY_TREE_MISMATCH")
+
+    result = run_stage2_reconciliation_diagnostic_tool(
+        worktree,
+        request["school_key"],
+        freeze_bytes=authority["freeze_bytes"],
+        map_bytes=authority["map_bytes"],
+        plan_bytes=authority["plan_bytes"],
+        review_bytes=authority["review_bytes"],
+        canonical_game_id=request["canonical_game_id"],
+        diag=DIAG / "stage2-reconciliation-diagnostic",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("STAGE2_DIAGNOSTIC_TARGET_CHANGED_DURING_RUN")
+
+    checkpoint_commit = persist_stage2_reconciliation_diagnostic_checkpoint(
+        state=active,
+        request=request,
+        request_bytes=request_bytes,
+        live_main=live_main,
+        result=result,
+        authority=authority,
+        expected_remote=accepted_commit,
+    )
+    print(
+        "REMOTE STAGE 2 RECONCILIATION DIAGNOSTIC: PASS "
+        "classification=%s checkpoint_commit=%s"
+        % (
+            result["trace"].get("partial_location_classification", ""),
+            checkpoint_commit,
+        )
     )
 
 
@@ -1856,6 +2042,15 @@ def main() -> int:
             )
         elif request["operation"] == OP_STAGE2_PROPOSAL_REHEARSAL:
             run_read_only_stage2_proposal(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
+            run_read_only_stage2_reconciliation_diagnostic(
                 state,
                 request,
                 request_bytes,
