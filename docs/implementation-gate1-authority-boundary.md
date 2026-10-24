@@ -128,6 +128,8 @@ Use these fields when Implementation discovers a supported historical correction
 
 The sealed transactional apply remains the authority that performs an approved source/canonical historical patch.
 
+When the guarded remote runner is used after an explicit owner approval, `STAGE2_GATE1_FILL` may encode that exact approved map into a filled ignored review only when the request hash-binds the fresh-verified `OWNER_GATE_1_READY` proposal checkpoint, decision universe, recommendation map, approved-plan preview, and owner approval. This fill-only operation does not seal or apply the review and must prove tracked repository mutation remains `NONE`.
+
 ## 6. Owner interaction
 
 Do not interrupt the owner merely because one difficult historical row appears before Gate 1.
