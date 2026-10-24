@@ -3596,6 +3596,8 @@ def approve_plan(
     approved_at: str | None = None,
 ) -> tuple[dict[str, Any], str]:
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    if approved_by == "technical-readiness-preview" and approved_at is not None:
+        plan["created_at"] = approved_at
     if plan.get("blockers"):
         raise WorkflowError("Preflight blockers must be cleared before approval")
     current = input_fingerprint(repo, plan["school_key"])
