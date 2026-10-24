@@ -5,18 +5,19 @@
     "liu-phase0-0001",
     "liu-stage2-census-0001",
     "liu-stage2-opponent-display-normalize-0001",
-    "liu-stage2-proposal-0001"
+    "liu-stage2-proposal-0001",
+    "liu-stage2-proposal-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "37a8cb1881bd4cfb378082d099185e2dcc55bbfd",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "liu-stage2-proposal-0002",
+  "active_request_sha256": "9e87977f8e642c041f4412056b4cf2017ad36cd8404e2fc304e928315a071435",
+  "active_school_key": "long-island-university",
+  "active_target_branch": "data/long-island-university-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -55,8 +56,11 @@
     "target_branch": "data/long-island-university-onboarding",
     "target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40049735723",
+  "lock_acquisition_request_commit": "9a9a20677265db4489097c0bf600a5be3ea9f69e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
