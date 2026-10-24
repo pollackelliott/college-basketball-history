@@ -130,6 +130,8 @@ The sealed transactional apply remains the authority that performs an approved s
 
 When the guarded remote runner is used after an explicit owner approval, `STAGE2_GATE1_FILL` may encode that exact approved map into a filled ignored review only when the request hash-binds the fresh-verified `OWNER_GATE_1_READY` proposal checkpoint, decision universe, recommendation map, approved-plan preview, and owner approval. This fill-only operation does not seal or apply the review and must prove tracked repository mutation remains `NONE`.
 
+After a fresh-verified remote fill, `STAGE2_PRESEAL_REHEARSAL` may run the permanent disposable `rehearse-review` suite against that exact filled review. It is technical verification only: `READY_TO_SEAL` does not itself create a cryptographic seal or apply any approved historical mutation.
+
 ## 6. Owner interaction
 
 Do not interrupt the owner merely because one difficult historical row appears before Gate 1.

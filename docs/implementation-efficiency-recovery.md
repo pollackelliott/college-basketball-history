@@ -71,6 +71,7 @@ Examples include:
 - Phase 0 commit SHA;
 - authoritative preflight review files;
 - filled review plus exact decision-ID set, including the durable remote `STAGE2_GATE1_FILL` checkpoint when that execution path is used;
+- pre-seal technical rehearsal result, including the durable remote `STAGE2_PRESEAL_REHEARSAL` checkpoint when that execution path is used;
 - approved-plan hash;
 - sealed apply commit;
 - release PR number and exact PR-head SHA;
