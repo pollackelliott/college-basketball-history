@@ -16,6 +16,7 @@ from remote_implementation_control import (
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    OP_STAGE2_GATE1_FILL,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     sha256_bytes,
@@ -46,6 +47,10 @@ from remote_implementation_stage2_census import (
 from remote_implementation_stage2_proposal import (
     run_stage2_proposal_tool,
     verify_stage2_proposal_authority,
+)
+from remote_implementation_stage2_gate1_fill import (
+    run_stage2_gate1_fill_tool,
+    verify_stage2_gate1_fill_authority,
 )
 from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
@@ -268,6 +273,170 @@ def verify_stage2_proposal_rehearsal(
     )
     return 0
 
+
+
+def verify_stage2_gate1_fill(
+    live_main: str,
+    control_head: str,
+    state: dict,
+) -> int:
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE STAGE 2 GATE 1 FILL EQUIVALENCE: PASS (already verified)")
+        return 0
+
+    checkpoint_path = last["checkpoint_manifest_path"]
+    checkpoint_bytes = git_show_bytes(control_head, checkpoint_path)
+    if sha256_bytes(checkpoint_bytes) != last["checkpoint_manifest_sha256"]:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_CHECKPOINT_HASH_MISMATCH")
+    manifest = json.loads(checkpoint_bytes)
+    if manifest.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_CHECKPOINT":
+        raise Stop("STAGE2_GATE1_FILL_FRESH_CHECKPOINT_KIND_MISMATCH")
+    if manifest.get("protected_main_sha") != live_main:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_MAIN_CHANGED")
+    for field in (
+        "target_sha",
+        "decision_universe_sha256",
+        "recommendation_map_sha256",
+        "approved_plan_hash_preview",
+        "owner_gate_1_approval_sha256",
+        "filled_review_sha256",
+        "decision_id_set_sha256",
+    ):
+        if manifest.get(field) != last.get(field):
+            raise Stop("STAGE2_GATE1_FILL_FRESH_BINDING_MISMATCH:%s" % field)
+
+    directory = Path(checkpoint_path).parent
+    request_bytes = git_show_bytes(
+        control_head,
+        (directory / "request.json").as_posix(),
+    )
+    if sha256_bytes(request_bytes) != manifest.get("request_sha256"):
+        raise Stop("STAGE2_GATE1_FILL_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    if request.get("request_id") != manifest.get("request_id"):
+        raise Stop("STAGE2_GATE1_FILL_FRESH_REQUEST_ID_MISMATCH")
+    authority = verify_stage2_gate1_fill_authority(request, control_head)
+    if (
+        authority["owner_gate_1_approval_sha256"]
+        != manifest["owner_gate_1_approval_sha256"]
+    ):
+        raise Stop("STAGE2_GATE1_FILL_FRESH_OWNER_APPROVAL_HASH_MISMATCH")
+
+    target_branch = manifest["target_branch"]
+    target_sha = remote_head(ROOT, target_branch)
+    if target_sha != manifest["target_sha"]:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_TARGET_REF_MISMATCH")
+    worktree = add_existing_onboarding_worktree(
+        target_branch,
+        target_sha,
+        manifest["school_key"],
+    )
+    tree = git("rev-parse", "HEAD^{tree}", cwd=worktree).stdout.strip()
+    if tree != manifest["target_tree_sha"]:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_TARGET_TREE_MISMATCH")
+    if authority.get("target_tree_sha") and tree != authority["target_tree_sha"]:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_AUTHORITY_TREE_MISMATCH")
+
+    result = run_stage2_gate1_fill_tool(
+        worktree,
+        manifest["school_key"],
+        freeze_bytes=authority["freeze_bytes"],
+        map_bytes=authority["map_bytes"],
+        plan_bytes=authority["plan_bytes"],
+        review_bytes=authority["review_bytes"],
+        expected_action_counts=authority["expected_action_counts"],
+        expected_decision_count=authority["expected_decision_count"],
+        diag=DIAG / "stage2-gate1-fill",
+    )
+    if result["runtime_tool_sha256"] != manifest["runtime_tool_sha256"]:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_RUNTIME_TOOL_MISMATCH")
+    for field in (
+        "source_review_sha256",
+        "filled_review_sha256",
+        "plan_sha256",
+        "recommendation_map_sha256",
+        "decision_count",
+        "action_counts",
+        "decision_id_set_sha256",
+    ):
+        if result.get(field) != manifest.get(field):
+            raise Stop("STAGE2_GATE1_FILL_FRESH_RESULT_MISMATCH:%s" % field)
+    if (
+        result["tracked_mutation_proof"].get("tracked_stage2_mutation")
+        != "NONE"
+    ):
+        raise Stop("STAGE2_GATE1_FILL_FRESH_TRACKED_MUTATION")
+
+    filled_checkpoint = git_show_bytes(
+        control_head,
+        manifest["filled_review_checkpoint_path"],
+    )
+    if sha256_bytes(filled_checkpoint) != result["filled_review_sha256"]:
+        raise Stop("STAGE2_GATE1_FILL_FRESH_FILLED_REVIEW_HASH_MISMATCH")
+
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION",
+        "request_id": manifest["request_id"],
+        "school_key": manifest["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "target_sha": target_sha,
+        "target_tree_sha": tree,
+        "stage2_proposal_checkpoint_sha256": manifest[
+            "stage2_proposal_checkpoint_sha256"
+        ],
+        "stage2_proposal_verification_sha256": manifest[
+            "stage2_proposal_verification_sha256"
+        ],
+        "integration_freeze_sha256": manifest["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+        "decision_universe_sha256": manifest["decision_universe_sha256"],
+        "recommendation_map_sha256": manifest["recommendation_map_sha256"],
+        "approved_plan_hash_preview": manifest["approved_plan_hash_preview"],
+        "owner_gate_1_approval_sha256": manifest[
+            "owner_gate_1_approval_sha256"
+        ],
+        "filled_review_sha256": result["filled_review_sha256"],
+        "decision_id_set_sha256": result["decision_id_set_sha256"],
+        "decision_count": result["decision_count"],
+        "action_counts": result["action_counts"],
+        "tracked_stage2_mutation": "NONE",
+        "remote_stage2_gate1_fill_equivalence": "PASS",
+    }
+    verify_dir = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (manifest["school_key"], manifest["request_id"])
+    )
+    write_json(
+        verify_dir / "stage2-gate1-fill-verification.json",
+        verification,
+    )
+
+    local_state = read_json(STATE_PATH)
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (
+        local_last.get("operation") != OP_STAGE2_GATE1_FILL
+        or local_last.get("request_id") != manifest["request_id"]
+    ):
+        raise Stop("STAGE2_GATE1_FILL_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last["remote_stage2_gate1_fill_equivalence"] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        "persist fresh Stage 2 Gate 1 fill verification %s"
+        % manifest["request_id"],
+        [STATE_PATH, verify_dir],
+    )
+    print(
+        "REMOTE STAGE 2 GATE 1 FILL EQUIVALENCE: PASS verification_commit=%s"
+        % commit
+    )
+    return 0
 
 
 def verify_stage2_reconciliation_diagnostic(
@@ -893,6 +1062,12 @@ def main() -> int:
             )
         if last.get("operation") == OP_STAGE2_PROPOSAL_REHEARSAL:
             return verify_stage2_proposal_rehearsal(
+                live_main,
+                control_head,
+                state,
+            )
+        if last.get("operation") == OP_STAGE2_GATE1_FILL:
+            return verify_stage2_gate1_fill(
                 live_main,
                 control_head,
                 state,
