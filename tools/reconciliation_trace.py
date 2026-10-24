@@ -129,8 +129,8 @@ class ReconciliationTrace:
         if not isinstance(item, dict):
             return None
         game_id = str(
-            local.get("actual_game_id")
-            or item.get("canonical_game_id")
+            item.get("canonical_game_id")
+            or local.get("actual_game_id")
             or local.get("game_id")
             or ""
         )
