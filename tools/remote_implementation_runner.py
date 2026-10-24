@@ -997,7 +997,9 @@ def persist_stage2_preseal_checkpoint(
             "approved_plan_hash_preview"
         ],
         "changed_path_count": result["changed_path_count"],
+        "raw_log_sha256": result["raw_log_sha256"],
         "normalized_log_sha256": result["normalized_log_sha256"],
+        "equivalence_sha256": result["equivalence_sha256"],
         "rehearsal_log_checkpoint_path": (
             log_target.as_posix() if log_target.is_file() else None
         ),
@@ -1012,7 +1014,9 @@ def persist_stage2_preseal_checkpoint(
             "Read-only pre-seal technical rehearsal checkpoint. It authenticates "
             "the exact fresh-verified Owner Gate 1 filled review and invokes the "
             "permanent disposable rehearse-review gate suite. READY_TO_SEAL means "
-            "technical rehearsal passed only. No cryptographic seal, sealed apply, "
+            "technical rehearsal passed only. Raw/normalized rehearsal-log hashes "
+            "are diagnostic evidence; fresh equivalence is bound to the stable "
+            "structured equivalence hash. No cryptographic seal, sealed apply, "
             "tracked onboarding mutation, Preview, Owner Gate 2, merge, or release "
             "authority is included."
         ),
@@ -1054,7 +1058,9 @@ def persist_stage2_preseal_checkpoint(
             ],
             "preseal_status": result["preseal_status"],
             "changed_path_count": result["changed_path_count"],
+            "raw_log_sha256": result["raw_log_sha256"],
             "normalized_log_sha256": result["normalized_log_sha256"],
+            "equivalence_sha256": result["equivalence_sha256"],
             "site_gate_normalized_sha256": result[
                 "site_gate_normalized_sha256"
             ],
