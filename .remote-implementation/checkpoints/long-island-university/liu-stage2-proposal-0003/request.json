@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "liu-stage2-proposal-0003",
+  "school_key": "long-island-university",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "a26ca915d87169fb15235ef9fdeff740576ae25b",
+  "previous_control_state_sha256": "7bed6c6276ee54690ecc18b0e729aef5ff7853d3c28747e7f6999666a8955fd9",
+  "expected_protected_main_sha": "c51d6cfcb23358497ca0e7e517bd79bb58219d1e",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/long-island-university/liu-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "fd8caea7acfc1b7ae0bc8046eb4f6364521470839a4ad1839d7fa743a92b1768"
+  },
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "decision_universe_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/liu-stage2-proposal-0003/recommendation-map.json",
+    "sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized the exact next bounded unit by saying Proceed after the generic deterministic-preview repair was merged to protected main and its exact merged runtime was activated on the remote control branch. This grants only one new exact-map STAGE2_PROPOSAL_REHEARSAL request and fresh verification; no CBBG-0020651 diagnosis, Owner Gate 1 or Owner Gate 2 approval, fill/seal/apply, tracked Stage 2 repair, release, Preview, merge, or Production authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true
+  }
+}

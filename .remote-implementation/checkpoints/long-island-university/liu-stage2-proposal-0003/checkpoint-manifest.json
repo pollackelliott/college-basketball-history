@@ -1,0 +1,121 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "4a9ed0de7701c9f4947203ed3ec7ebff1ba5ac95103a175cb5ce68dd67927ef3",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "19bef14cec2d0057bbedba1dc25bb30692e469ed7b2c0c1dad4b8883d36757ee",
+    "implementation-stage2-status.json": "012a342f28e022d51074887aafd5bb0608e23eaf831b25ef450915cdba257910",
+    "plan.json": "193bedf92a9f85627b39ceee5c85009d6a6f667b8b8b3c72fe1f89d4f56deed6",
+    "review.csv": "f3d42e47978a6092e889ef13bd2c0f057f2abbdbed0e7d91ca717bfadc4c6b59",
+    "review.md": "308ffa954da6e8e1caf48feb6b62f5ef50a19a10f1076b4b69679372eea62d5b"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "19bef14cec2d0057bbedba1dc25bb30692e469ed7b2c0c1dad4b8883d36757ee",
+    "implementation-stage2-status.json": "dee5ce2fc4998fda3100b6ab660d2a23e67cd2727dd705f8213a420bfc2e6f02",
+    "plan.json": "9eb79e1fd3bf6e829487f179bd40ab6a3ecaf744d5ce3d3e6791764105764563",
+    "review.csv": "f3d42e47978a6092e889ef13bd2c0f057f2abbdbed0e7d91ca717bfadc4c6b59",
+    "review.md": "f8e0482c7f0e104856ac50aca8610a72c9767e86b520f4de848a0c718a8f7eb4"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 73,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
+    "kind": "ACCOMPLISHMENT_ACTION_VOCABULARY_ADDITION",
+    "legacy_compatible_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
+    "runtime_decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "status": "PASS"
+  },
+  "decision_universe_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "long-island-university",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 15,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 15,
+      "discrepancy": 69,
+      "identity": 10,
+      "publication": 1,
+      "source_consistency": 1
+    },
+    "decision_count": 97,
+    "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "discrepancies_to_add": 69,
+    "existing_game_matches": 511,
+    "new_canonical_games": 1672,
+    "plan_path": ".onboarding/long-island-university/plan.json",
+    "review_path": ".onboarding/long-island-university/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "c51d6cfcb23358497ca0e7e517bd79bb58219d1e",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_SOURCE_CONSISTENCY_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 7,
+      "LEAVE_UNRESOLVED": 6,
+      "MATCH_CANONICAL:CBBG-0020651": 1,
+      "MATCH_CANONICAL:CBBG-0021924": 1,
+      "MATCH_CANONICAL:CBBG-0077014": 1,
+      "MATCH_CANONICAL:CBBG-0150836": 1,
+      "MATCH_CANONICAL:CBBG-0162447": 1,
+      "MATCH_CANONICAL:CBBG-0162464": 1,
+      "MATCH_CANONICAL:CBBG-0162619": 1,
+      "MATCH_CANONICAL:CBBG-0163424": 1,
+      "MATCH_CANONICAL:CBBG-0169726": 1,
+      "MATCH_CANONICAL:CBBG-0169728": 1,
+      "NOT_APPLICABLE": 3,
+      "USE_SOURCE": 68
+    },
+    "approved_plan_hash_preview": "4a9ed0de7701c9f4947203ed3ec7ebff1ba5ac95103a175cb5ce68dd67927ef3",
+    "decision_count": 97,
+    "path": "/tmp/remote-stage2-proposal-map-x3invzkk/recommendation-map.json",
+    "sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-proposal-0003/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/liu-stage2-proposal-0003/recommendation-map.json",
+  "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
+  "request_id": "liu-stage2-proposal-0003",
+  "request_sha256": "3c0c328e76fbea5ff48bb1db15298a5db6af498e45afb34b42d2a0eb261e1a21",
+  "runtime_commit_sha": "c51d6cfcb23358497ca0e7e517bd79bb58219d1e",
+  "runtime_decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+  "runtime_tool_sha256": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/long-island-university/liu-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_authority_sha256": "fd8caea7acfc1b7ae0bc8046eb4f6364521470839a4ad1839d7fa743a92b1768",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "target_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+  "tracked_mutation_proof": {
+    "after_head_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+    "after_status": "",
+    "after_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+    "before_head_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+    "before_status": "",
+    "before_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
