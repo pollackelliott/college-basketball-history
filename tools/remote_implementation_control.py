@@ -29,6 +29,7 @@ OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
 OP_STAGE2_GATE1_FILL = "STAGE2_GATE1_FILL"
 OP_STAGE2_PRESEAL_REHEARSAL = "STAGE2_PRESEAL_REHEARSAL"
 OP_STAGE2_GATE1_SEAL = "STAGE2_GATE1_SEAL"
+OP_STAGE2_SEALED_APPLY = "STAGE2_SEALED_APPLY"
 OP_STAGE2_RECONCILIATION_DIAGNOSTIC = "STAGE2_RECONCILIATION_DIAGNOSTIC"
 OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
@@ -40,6 +41,7 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_GATE1_FILL,
     OP_STAGE2_PRESEAL_REHEARSAL,
     OP_STAGE2_GATE1_SEAL,
+    OP_STAGE2_SEALED_APPLY,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     OP_RECOVER,
 }
@@ -290,6 +292,16 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("stage2_gate1_seal") is not True,
             "REQUEST_GATE1_SEAL_AUTHORITY_FORBIDDEN",
+        )
+    if operation == OP_STAGE2_SEALED_APPLY:
+        _require(
+            authority.get("stage2_sealed_apply") is True,
+            "STAGE2_SEALED_APPLY_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("stage2_sealed_apply") is not True,
+            "REQUEST_SEALED_APPLY_AUTHORITY_FORBIDDEN",
         )
     _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
     _require(authority.get("release") is False, "REQUEST_RELEASE_AUTHORITY_FORBIDDEN")
@@ -724,6 +736,60 @@ def validate_request(request: dict[str, Any]) -> None:
             )
 
 
+    if operation == OP_STAGE2_SEALED_APPLY:
+        for key, code in (
+            ("phase0", "PHASE0"),
+            ("recovery", "RECOVERY"),
+            ("stage2_census", "CENSUS"),
+            ("stage2_opponent_display_normalize", "OPPONENT_DISPLAY"),
+            ("stage2_proposal_rehearsal", "PROPOSAL"),
+            ("stage2_gate1_fill", "GATE1_FILL"),
+            ("stage2_preseal_rehearsal", "PRESEAL"),
+            ("stage2_gate1_seal", "GATE1_SEAL"),
+            ("stage2_reconciliation_diagnostic", "DIAGNOSTIC"),
+        ):
+            _require(
+                authority.get(key) is False,
+                f"STAGE2_SEALED_APPLY_{code}_AUTHORITY_FORBIDDEN",
+            )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "STAGE2_SEALED_APPLY_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "STAGE2_SEALED_APPLY_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("stage2_gate1_seal_checkpoint"),
+            "stage2_gate1_seal_checkpoint",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("stage2_gate1_seal_verification"),
+            "stage2_gate1_seal_verification",
+            required=True,
+        )
+        for field, code in (
+            ("approved_plan_hash", "APPROVED_PLAN"),
+            ("approved_plan_sha256", "APPROVED_PLAN_FILE"),
+            ("owner_gate_1_approval_sha256", "OWNER_APPROVAL"),
+            ("integration_freeze_sha256", "INTEGRATION_FREEZE"),
+            ("semantic_snapshot_sha256", "SEMANTIC_SNAPSHOT"),
+            ("decision_universe_sha256", "DECISION_UNIVERSE"),
+            ("recommendation_map_sha256", "RECOMMENDATION_MAP"),
+            ("filled_review_sha256", "FILLED_REVIEW"),
+            ("decision_id_set_sha256", "DECISION_ID_SET"),
+        ):
+            _require_sha(
+                request.get(field),
+                64,
+                f"STAGE2_SEALED_APPLY_{code}_SHA_INVALID",
+            )
+
+
     if operation == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
         _require(
             authority.get("stage2_reconciliation_diagnostic") is True,
@@ -854,6 +920,7 @@ def verify_request_predecessor(
         if state.get("active_operation") in {
             OP_PHASE0,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+            OP_STAGE2_SEALED_APPLY,
         }:
             _require(
                 recovery.get("target_branch")
