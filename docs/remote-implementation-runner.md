@@ -363,9 +363,9 @@ The permanent command owns the disposable transaction and gate suite. The remote
 
 A permanent `BLOCKED` rehearsal is durable technical evidence, not a remote-execution failure. Authority/hash drift, changed target refs, runtime failures, or tracked mutation remain remote-execution failures.
 
-Before and after execution, target HEAD/tree and non-ignored status must remain unchanged. The durable checkpoint records the filled-review and approval bindings, runtime tool hashes, pre-seal status, normalized rehearsal-log hash, changed-path count when available, normalized site-gate hash when emitted, and tracked-mutation proof.
+Before and after execution, target HEAD/tree and non-ignored status must remain unchanged. The durable checkpoint records the filled-review and approval bindings, runtime tool hashes, pre-seal status, changed-path count when available, normalized site-gate hash when emitted, tracked-mutation proof, and both raw/normalized rehearsal-log hashes as diagnostic evidence.
 
-Fresh verification independently reauthenticates the same fill checkpoint and target SHA, reruns the same permanent rehearsal, requires the same `READY_TO_SEAL`/`BLOCKED` result and normalized proof hashes/counts, and again proves no tracked mutation.
+Fresh verification independently reauthenticates the same fill checkpoint and target SHA and reruns the same permanent rehearsal. Equivalence is determined only from stable structured technical-readiness facts: the `READY_TO_SEAL`/`BLOCKED` result, permanent-command exit code, approved-plan preview hash, changed-path count, normalized site-gate proof, runtime tool hashes, exact target tree, and tracked-mutation result. Those facts are hashed into a deterministic `equivalence_sha256`. Rehearsal-log hashes are not equivalence authority because disposable temp paths, warning paths, runner timing, and similar diagnostics may differ across otherwise equivalent runs. Raw and normalized log hashes remain preserved for audit and diagnosis, and normalization removes ephemeral `/tmp/<root>` basenames and unittest elapsed time where possible.
 
 This operation supplies **technical readiness only**. It does not cryptographically seal Gate 1, run sealed apply, mutate the onboarding branch, create Preview, approve Owner Gate 2, merge, or release.
 
