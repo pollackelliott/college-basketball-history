@@ -1,0 +1,34 @@
+name: Temporary pre-seal validation
+
+on:
+  push:
+    branches:
+      - tooling/stage2-preseal-rehearsal-remote
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: tooling/stage2-preseal-rehearsal-remote
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile remote runtime
+        run: |
+          python -m py_compile \
+            tools/remote_implementation_control.py \
+            tools/remote_implementation_runner.py \
+            tools/remote_implementation_verify.py \
+            tools/remote_implementation_stage2_preseal.py
+      - name: Run pre-seal regression
+        run: python -m unittest -v tests.test_remote_implementation_stage2_preseal
+      - name: Run existing remote regressions
+        run: |
+          python -m unittest -v \
+            tests.test_remote_implementation_control \
+            tests.test_remote_implementation_stage2_proposal \
+            tests.test_remote_implementation_stage2_gate1_fill \
+            tests.test_remote_implementation_stage2_diagnostic
