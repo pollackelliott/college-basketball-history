@@ -25,6 +25,7 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_FILL,
     OP_STAGE2_PRESEAL_REHEARSAL,
     OP_STAGE2_GATE1_SEAL,
+    OP_STAGE2_SEALED_APPLY,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     abandon_active,
@@ -90,6 +91,12 @@ from remote_implementation_stage2_preseal import (
 from remote_implementation_stage2_seal import (
     run_stage2_gate1_seal_tool,
     verify_stage2_gate1_seal_authority,
+)
+from remote_implementation_stage2_apply import (
+    replay_current_main_preseal,
+    run_sealed_apply_tool,
+    verify_prepared_sealed_apply,
+    verify_stage2_sealed_apply_authority,
 )
 from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
@@ -2032,6 +2039,426 @@ def run_stage2_opponent_display_normalize(
     )
 
 
+def finalize_stage2_sealed_apply_successor(
+    *,
+    active: dict[str, Any],
+    original_request: dict[str, Any],
+    request_sha256: str,
+    live_main: str,
+    writeahead: dict[str, Any],
+    writeahead_path: str,
+    writeahead_sha256: str,
+    writeahead_commit: str | None,
+    expected_remote: str,
+    publication_cas: str,
+    extra_commit_paths: list[Path | str] | None = None,
+    recovery_request_id: str | None = None,
+    recovery_classification: str | None = None,
+) -> str:
+    school = original_request["school_key"]
+    rid = original_request["request_id"]
+    prepared = writeahead["prepared_commit_sha"]
+    target_branch = original_request["target_branch"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("STAGE2_SEALED_APPLY_TARGET_NOT_PREPARED_COMMIT")
+
+    proof = verify_prepared_sealed_apply(
+        ROOT,
+        predecessor_sha=writeahead["expected_target_predecessor_sha"],
+        prepared_sha=prepared,
+        changed_paths=writeahead["changed_paths"],
+        changed_file_sha256=writeahead["changed_file_sha256"],
+        deleted_paths=writeahead.get("deleted_paths") or [],
+    )
+    if proof["prepared_tree_sha"] != writeahead["prepared_tree_sha"]:
+        raise Stop("STAGE2_SEALED_APPLY_FINAL_TREE_MISMATCH")
+
+    successor_dir = Path(
+        ".remote-implementation/successors/%s/%s" % (school, rid)
+    )
+    successor_dir.mkdir(parents=True, exist_ok=True)
+    prefix = Path(writeahead_path).parent
+    for name in (
+        "release-manifest.json",
+        "pr-body.md",
+        "visual-qa.md",
+        "approved-plan.json",
+        "current-main-preseal.json",
+    ):
+        source_path = (prefix / name).as_posix()
+        try:
+            data = git_show_bytes(
+                active.get("active_writeahead_commit") or writeahead_commit or expected_remote,
+                source_path,
+            )
+        except Exception:
+            data = None
+        if data is not None:
+            (successor_dir / name).write_bytes(data)
+
+    successor = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_SUCCESSOR",
+        "operation": OP_STAGE2_SEALED_APPLY,
+        "request_id": rid,
+        "request_sha256": request_sha256,
+        "school_key": school,
+        "global_lock_commit": active["active_lock_commit"],
+        "writeahead_commit": writeahead_commit,
+        "writeahead_manifest_path": writeahead_path,
+        "writeahead_manifest_sha256": writeahead_sha256,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": writeahead[
+            "expected_target_predecessor_sha"
+        ],
+        "prepared_commit_sha": prepared,
+        "prepared_tree_sha": writeahead["prepared_tree_sha"],
+        "prepared_parent_sha": writeahead["prepared_parent_sha"],
+        "actual_published_target_sha": prepared,
+        "changed_paths": writeahead["changed_paths"],
+        "changed_file_sha256": writeahead["changed_file_sha256"],
+        "deleted_paths": writeahead.get("deleted_paths") or [],
+        "approved_plan_hash": writeahead["approved_plan_hash"],
+        "approved_plan_sha256": writeahead["approved_plan_sha256"],
+        "stage2_gate1_seal_checkpoint_path": writeahead[
+            "stage2_gate1_seal_checkpoint_path"
+        ],
+        "stage2_gate1_seal_checkpoint_sha256": writeahead[
+            "stage2_gate1_seal_checkpoint_sha256"
+        ],
+        "stage2_gate1_seal_verification_path": writeahead[
+            "stage2_gate1_seal_verification_path"
+        ],
+        "stage2_gate1_seal_verification_sha256": writeahead[
+            "stage2_gate1_seal_verification_sha256"
+        ],
+        "integration_freeze_sha256": writeahead[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": writeahead[
+            "semantic_snapshot_sha256"
+        ],
+        "decision_universe_sha256": writeahead[
+            "decision_universe_sha256"
+        ],
+        "recommendation_map_sha256": writeahead[
+            "recommendation_map_sha256"
+        ],
+        "filled_review_sha256": writeahead["filled_review_sha256"],
+        "decision_id_set_sha256": writeahead["decision_id_set_sha256"],
+        "owner_gate_1_approval_sha256": writeahead[
+            "owner_gate_1_approval_sha256"
+        ],
+        "current_main_preseal": writeahead["current_main_preseal"],
+        "apply_runtime_tool_sha256": writeahead[
+            "apply_runtime_tool_sha256"
+        ],
+        "release_manifest_sha256": writeahead[
+            "release_manifest_sha256"
+        ],
+        "release_manifest_changed_path_count": writeahead[
+            "release_manifest_changed_path_count"
+        ],
+        "repository_validation": writeahead["repository_validation"],
+        "publication_cas": publication_cas,
+        "recovery_request_id": recovery_request_id,
+        "recovery_classification": recovery_classification,
+        "final_transaction_state": "COMPLETE",
+    }
+    successor_path = successor_dir / "successor-manifest.json"
+    write_json(successor_path, successor)
+    successor_sha = sha256_file(successor_path)
+
+    final_state = finalize_success(
+        active,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_SEALED_APPLY,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": target_branch,
+            "target_predecessor_sha": writeahead[
+                "expected_target_predecessor_sha"
+            ],
+            "target_sha": prepared,
+            "approved_plan_hash": writeahead["approved_plan_hash"],
+            "approved_plan_sha256": writeahead["approved_plan_sha256"],
+            "writeahead_manifest_path": writeahead_path,
+            "writeahead_manifest_sha256": writeahead_sha256,
+            "successor_manifest_path": successor_path.as_posix(),
+            "successor_manifest_sha256": successor_sha,
+            "changed_path_count": len(writeahead["changed_paths"]),
+            "release_manifest_sha256": writeahead[
+                "release_manifest_sha256"
+            ],
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_sealed_apply_equivalence": "PENDING",
+            "recovery_request_id": recovery_request_id,
+            "recovery_classification": recovery_classification,
+        },
+    )
+    if recovery_request_id and recovery_request_id not in final_state[
+        "consumed_request_ids"
+    ]:
+        final_state["consumed_request_ids"].append(recovery_request_id)
+    write_json(STATE_PATH, final_state)
+    paths: list[Path | str] = [STATE_PATH, successor_dir]
+    if extra_commit_paths:
+        paths.extend(extra_commit_paths)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 sealed apply %s" % rid,
+        paths,
+    )
+
+
+def run_stage2_sealed_apply(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    authority = verify_stage2_sealed_apply_authority(
+        request,
+        predecessor_commit,
+    )
+    target_branch = request["target_branch"]
+    target_sha = request["target_sha"]
+    if remote_head(ROOT, target_branch) != target_sha:
+        raise Stop("STAGE2_SEALED_APPLY_TARGET_HEAD_MISMATCH")
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    lock_commit = commit_control(
+        request_commit,
+        "acquire global Implementation lock %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    active = bind_lock_commit(active, lock_commit)
+    write_json(STATE_PATH, active)
+    lock_bound_commit = commit_control(
+        lock_commit,
+        "bind global Implementation lock %s" % request["request_id"],
+        [STATE_PATH],
+    )
+    print("GLOBAL IMPLEMENTATION LOCK: ACQUIRED %s" % lock_commit)
+
+    worktree = add_existing_onboarding_worktree(
+        target_branch,
+        target_sha,
+        request["school_key"],
+    )
+    if authority.get("target_tree_sha"):
+        tree = git("rev-parse", "HEAD^{tree}", cwd=worktree).stdout.strip()
+        if tree != authority["target_tree_sha"]:
+            raise Stop("STAGE2_SEALED_APPLY_AUTHORITY_TREE_MISMATCH")
+
+    current_preseal = replay_current_main_preseal(
+        worktree,
+        request["school_key"],
+        authority=authority,
+        diag=DIAG / "sealed-apply-preseal",
+    )
+    prepared = run_sealed_apply_tool(
+        worktree,
+        request["school_key"],
+        target_sha,
+        authority=authority,
+        diag=DIAG / "sealed-apply",
+        prepare_commit=True,
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, target_branch) != target_sha:
+        raise Stop("STAGE2_SEALED_APPLY_TARGET_CHANGED_BEFORE_WRITEAHEAD")
+
+    writeahead_dir = Path(
+        ".remote-implementation/writeahead/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    writeahead_dir.mkdir(parents=True, exist_ok=True)
+    (writeahead_dir / "integration-freeze.json").write_bytes(
+        authority["freeze_bytes"]
+    )
+    (writeahead_dir / "approved-plan.json").write_bytes(
+        authority["approved_plan_bytes"]
+    )
+    (writeahead_dir / "seal-checkpoint-manifest.json").write_bytes(
+        authority["seal_checkpoint_bytes"]
+    )
+    (writeahead_dir / "seal-verification.json").write_bytes(
+        authority["seal_verification_bytes"]
+    )
+    (writeahead_dir / "release-manifest.json").write_bytes(
+        prepared["release_manifest_bytes"]
+    )
+    if prepared["pr_body_bytes"]:
+        (writeahead_dir / "pr-body.md").write_bytes(
+            prepared["pr_body_bytes"]
+        )
+    if prepared["visual_qa_bytes"]:
+        (writeahead_dir / "visual-qa.md").write_bytes(
+            prepared["visual_qa_bytes"]
+        )
+    write_json(
+        writeahead_dir / "current-main-preseal.json",
+        {
+            "preseal_status": current_preseal["preseal_status"],
+            "approved_plan_hash_preview": current_preseal[
+                "approved_plan_hash_preview"
+            ],
+            "changed_path_count": current_preseal["changed_path_count"],
+            "site_gate_normalized_sha256": current_preseal[
+                "site_gate_normalized_sha256"
+            ],
+            "equivalence_sha256": current_preseal["equivalence_sha256"],
+            "runtime_tool_sha256": current_preseal[
+                "runtime_tool_sha256"
+            ],
+            "tracked_stage2_mutation": "NONE",
+        },
+    )
+    sidecars = {
+        path.name: sha256_file(path)
+        for path in writeahead_dir.iterdir()
+        if path.is_file()
+    }
+
+    writeahead = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+        "operation": OP_STAGE2_SEALED_APPLY,
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "global_lock_commit": lock_commit,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": target_sha,
+        "prepared_commit_sha": prepared["prepared_commit_sha"],
+        "prepared_tree_sha": prepared["prepared_tree_sha"],
+        "prepared_parent_sha": prepared["prepared_parent_sha"],
+        "commit_message": prepared["commit_message"],
+        "changed_paths": prepared["changed_paths"],
+        "changed_file_sha256": prepared["changed_file_sha256"],
+        "deleted_paths": prepared.get("deleted_paths") or [],
+        "sidecars": sidecars,
+        "stage2_gate1_seal_checkpoint_path": request[
+            "stage2_gate1_seal_checkpoint"
+        ]["path"],
+        "stage2_gate1_seal_checkpoint_sha256": request[
+            "stage2_gate1_seal_checkpoint"
+        ]["sha256"],
+        "stage2_gate1_seal_verification_path": request[
+            "stage2_gate1_seal_verification"
+        ]["path"],
+        "stage2_gate1_seal_verification_sha256": request[
+            "stage2_gate1_seal_verification"
+        ]["sha256"],
+        "approved_plan_hash": request["approved_plan_hash"],
+        "approved_plan_sha256": request["approved_plan_sha256"],
+        "owner_gate_1_approval_sha256": request[
+            "owner_gate_1_approval_sha256"
+        ],
+        "integration_freeze_sha256": request[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": request[
+            "semantic_snapshot_sha256"
+        ],
+        "decision_universe_sha256": request[
+            "decision_universe_sha256"
+        ],
+        "recommendation_map_sha256": request[
+            "recommendation_map_sha256"
+        ],
+        "filled_review_sha256": request["filled_review_sha256"],
+        "decision_id_set_sha256": request["decision_id_set_sha256"],
+        "current_main_preseal": json.loads(
+            (writeahead_dir / "current-main-preseal.json").read_text(
+                encoding="utf-8"
+            )
+        ),
+        "apply_runtime_tool_sha256": prepared[
+            "runtime_tool_sha256"
+        ],
+        "release_manifest_sha256": prepared[
+            "release_manifest_sha256"
+        ],
+        "release_manifest_changed_path_count": len(
+            prepared["release_manifest"]["changed_paths"]
+        ),
+        "repository_validation": "PASS",
+        "mutation_state": "PREPARED_NOT_PUBLISHED",
+    }
+    writeahead_path = writeahead_dir / "writeahead-manifest.json"
+    write_json(writeahead_path, writeahead)
+    writeahead_sha = sha256_file(writeahead_path)
+
+    active["transaction_state"] = "PREPARED_NOT_PUBLISHED"
+    active["active_writeahead_path"] = writeahead_path.as_posix()
+    active["active_writeahead_sha256"] = writeahead_sha
+    active["active_prepared_commit_sha"] = prepared[
+        "prepared_commit_sha"
+    ]
+    active["active_prepared_tree_sha"] = prepared["prepared_tree_sha"]
+    write_json(STATE_PATH, active)
+    writeahead_commit = commit_control(
+        lock_bound_commit,
+        "publish Stage 2 sealed apply write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH, writeahead_dir],
+    )
+    active["active_writeahead_commit"] = writeahead_commit
+    write_json(STATE_PATH, active)
+    writeahead_bound_commit = commit_control(
+        writeahead_commit,
+        "bind Stage 2 sealed apply write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH],
+    )
+
+    assert_protected_main_unchanged(live_main)
+    publish_ref_cas(
+        ROOT,
+        branch=target_branch,
+        prepared_commit=prepared["prepared_commit_sha"],
+        expected_predecessor=target_sha,
+    )
+    if remote_head(ROOT, target_branch) != prepared["prepared_commit_sha"]:
+        raise Stop("STAGE2_SEALED_APPLY_TARGET_PUBLICATION_VERIFY_FAILED")
+
+    successor_commit = finalize_stage2_sealed_apply_successor(
+        active=active,
+        original_request=request,
+        request_sha256=sha256_bytes(request_bytes),
+        live_main=live_main,
+        writeahead=writeahead,
+        writeahead_path=writeahead_path.as_posix(),
+        writeahead_sha256=writeahead_sha,
+        writeahead_commit=writeahead_commit,
+        expected_remote=writeahead_bound_commit,
+        publication_cas="EXISTING_REF_CAS_PASS",
+    )
+    print(
+        "REMOTE STAGE 2 SEALED APPLY: COMPLETE target=%s successor_commit=%s"
+        % (prepared["prepared_commit_sha"], successor_commit)
+    )
+
+
 def run_phase0(
     state: dict[str, Any],
     request: dict[str, Any],
@@ -2787,6 +3214,15 @@ def main() -> int:
             )
         elif request["operation"] == OP_STAGE2_GATE1_SEAL:
             run_read_only_stage2_gate1_seal(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_SEALED_APPLY:
+            run_stage2_sealed_apply(
                 state,
                 request,
                 request_bytes,
