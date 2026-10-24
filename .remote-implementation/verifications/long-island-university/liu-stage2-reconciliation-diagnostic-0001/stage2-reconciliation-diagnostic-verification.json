@@ -1,0 +1,20 @@
+{
+  "canonical_game_id": "CBBG-0020651",
+  "decision_universe_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_VERIFICATION",
+  "partial_location_classification": "PREEXISTING_PERSISTED",
+  "protected_main_sha": "ac76facf3d670eb5f5280c61a22826d12fbccab5",
+  "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
+  "remote_stage2_diagnostic_equivalence": "PASS",
+  "request_id": "liu-stage2-reconciliation-diagnostic-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "stage2_proposal_checkpoint_sha256": "095184ae84ebeb7c55fc3f9f0a3dce01c82aa5bcc984b2835ea35ffcfc215b50",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "target_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+  "trace_sha256": "c7fa8e39caa38df820d0bec04b88e87885be1e53a1917600a6f639046fcfb686",
+  "tracked_stage2_mutation": "NONE"
+}
