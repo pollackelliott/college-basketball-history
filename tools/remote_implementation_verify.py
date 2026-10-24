@@ -19,11 +19,13 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_FILL,
     OP_STAGE2_PRESEAL_REHEARSAL,
     OP_STAGE2_GATE1_SEAL,
+    OP_STAGE2_SEALED_APPLY,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     sha256_bytes,
     sha256_file,
     validate_control_state,
+    verify_sidecar_hashes,
 )
 from remote_implementation_io import (
     REQUIRED_PACKAGE_FILES,
@@ -63,6 +65,13 @@ from remote_implementation_stage2_preseal import (
 from remote_implementation_stage2_seal import (
     verify_sealed_plan_bytes,
     verify_stage2_gate1_seal_authority,
+)
+from remote_implementation_stage2_apply import (
+    add_detached_worktree,
+    replay_current_main_preseal,
+    run_sealed_apply_tool,
+    verify_prepared_sealed_apply,
+    verify_stage2_sealed_apply_authority,
 )
 from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
@@ -899,6 +908,232 @@ def verify_stage2_gate1_seal(
     return 0
 
 
+def verify_stage2_sealed_apply(
+    live_main: str,
+    control_head: str,
+    state: dict,
+) -> int:
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE STAGE 2 SEALED APPLY EQUIVALENCE: PASS (already verified)")
+        return 0
+
+    successor_path = last["successor_manifest_path"]
+    successor_bytes = git_show_bytes(control_head, successor_path)
+    if sha256_bytes(successor_bytes) != last["successor_manifest_sha256"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(successor_bytes)
+    if successor.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_SUCCESSOR":
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_SUCCESSOR_KIND_MISMATCH")
+    if successor.get("protected_main_sha") != live_main:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_MAIN_CHANGED")
+    if successor.get("final_transaction_state") != "COMPLETE":
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_SUCCESSOR_INCOMPLETE")
+
+    for field in (
+        "target_sha",
+        "approved_plan_hash",
+        "approved_plan_sha256",
+        "release_manifest_sha256",
+    ):
+        expected = (
+            successor.get("prepared_commit_sha")
+            if field == "target_sha"
+            else successor.get(field)
+        )
+        if last.get(field) != expected:
+            raise Stop("STAGE2_SEALED_APPLY_FRESH_BINDING_MISMATCH:%s" % field)
+
+    writeahead_path = successor["writeahead_manifest_path"]
+    writeahead_bytes = git_show_bytes(control_head, writeahead_path)
+    if sha256_bytes(writeahead_bytes) != successor["writeahead_manifest_sha256"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_WRITEAHEAD_HASH_MISMATCH")
+    writeahead = json.loads(writeahead_bytes)
+    if writeahead.get("kind") != "REMOTE_IMPLEMENTATION_WRITEAHEAD":
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_WRITEAHEAD_KIND_MISMATCH")
+    if writeahead.get("operation") != OP_STAGE2_SEALED_APPLY:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_WRITEAHEAD_OPERATION_MISMATCH")
+
+    writeahead_dir = Path(writeahead_path).parent
+    with tempfile.TemporaryDirectory(prefix="sealed-apply-sidecars-") as temporary:
+        sidecar_dir = Path(temporary)
+        for name in (writeahead.get("sidecars") or {}):
+            (sidecar_dir / name).write_bytes(
+                git_show_bytes(
+                    control_head,
+                    (writeahead_dir / name).as_posix(),
+                )
+            )
+        verify_sidecar_hashes(writeahead, sidecar_dir)
+
+    request_path = (
+        ".remote-implementation/requests/%s/request.json"
+        % successor["request_id"]
+    )
+    request_bytes = git_show_bytes(control_head, request_path)
+    if sha256_bytes(request_bytes) != successor["request_sha256"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    authority = verify_stage2_sealed_apply_authority(request, control_head)
+
+    target_branch = successor["target_branch"]
+    prepared = successor["prepared_commit_sha"]
+    predecessor = successor["expected_target_predecessor_sha"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_TARGET_REF_MISMATCH")
+
+    proof = verify_prepared_sealed_apply(
+        ROOT,
+        predecessor_sha=predecessor,
+        prepared_sha=prepared,
+        changed_paths=successor["changed_paths"],
+        changed_file_sha256=successor["changed_file_sha256"],
+        deleted_paths=successor.get("deleted_paths") or [],
+    )
+    if proof["prepared_tree_sha"] != successor["prepared_tree_sha"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_PUBLISHED_TREE_MISMATCH")
+
+    replay = add_detached_worktree(
+        predecessor,
+        successor["school_key"],
+        prefix="remote-sealed-apply-fresh",
+    )
+    current_preseal = replay_current_main_preseal(
+        replay,
+        successor["school_key"],
+        authority=authority,
+        diag=DIAG / "sealed-apply-preseal",
+    )
+    expected_preseal = successor["current_main_preseal"]
+    for field in (
+        "preseal_status",
+        "approved_plan_hash_preview",
+        "changed_path_count",
+        "site_gate_normalized_sha256",
+        "equivalence_sha256",
+        "runtime_tool_sha256",
+        "tracked_stage2_mutation",
+    ):
+        actual = (
+            "NONE"
+            if field == "tracked_stage2_mutation"
+            else current_preseal.get(field)
+        )
+        if actual != expected_preseal.get(field):
+            raise Stop("STAGE2_SEALED_APPLY_FRESH_PRESEAL_MISMATCH:%s" % field)
+
+    fresh = run_sealed_apply_tool(
+        replay,
+        successor["school_key"],
+        predecessor,
+        authority=authority,
+        diag=DIAG / "sealed-apply",
+        prepare_commit=False,
+    )
+    if fresh["runtime_tool_sha256"] != successor["apply_runtime_tool_sha256"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_RUNTIME_TOOL_MISMATCH")
+    if fresh["prepared_tree_sha"] != successor["prepared_tree_sha"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_TREE_MISMATCH")
+    if fresh["changed_paths"] != successor["changed_paths"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_PATH_MISMATCH")
+    if fresh["changed_file_sha256"] != successor["changed_file_sha256"]:
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_FILE_HASH_MISMATCH")
+    if sorted(fresh.get("deleted_paths") or []) != sorted(
+        successor.get("deleted_paths") or []
+    ):
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_DELETION_MISMATCH")
+
+    durable_release = json.loads(
+        git_show_bytes(
+            control_head,
+            (writeahead_dir / "release-manifest.json").as_posix(),
+        )
+    )
+    fresh_release = fresh["release_manifest"]
+    for field in (
+        "school_key",
+        "approved_plan_hash",
+        "base_commit",
+        "changed_paths",
+        "summary",
+    ):
+        if fresh_release.get(field) != durable_release.get(field):
+            raise Stop("STAGE2_SEALED_APPLY_FRESH_RELEASE_MISMATCH:%s" % field)
+
+    for name, data_key in (
+        ("pr-body.md", "pr_body_bytes"),
+        ("visual-qa.md", "visual_qa_bytes"),
+    ):
+        sidecars = writeahead.get("sidecars") or {}
+        if name in sidecars:
+            durable = git_show_bytes(
+                control_head,
+                (writeahead_dir / name).as_posix(),
+            )
+            if fresh[data_key] != durable:
+                raise Stop("STAGE2_SEALED_APPLY_FRESH_SIDECAR_MISMATCH:%s" % name)
+
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+        "request_id": successor["request_id"],
+        "school_key": successor["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "target_predecessor_sha": predecessor,
+        "target_sha": prepared,
+        "target_tree_sha": successor["prepared_tree_sha"],
+        "stage2_gate1_seal_checkpoint_sha256": successor[
+            "stage2_gate1_seal_checkpoint_sha256"
+        ],
+        "stage2_gate1_seal_verification_sha256": successor[
+            "stage2_gate1_seal_verification_sha256"
+        ],
+        "approved_plan_hash": successor["approved_plan_hash"],
+        "approved_plan_sha256": successor["approved_plan_sha256"],
+        "changed_paths": successor["changed_paths"],
+        "changed_path_count": len(successor["changed_paths"]),
+        "changed_file_sha256": successor["changed_file_sha256"],
+        "deleted_paths": successor.get("deleted_paths") or [],
+        "release_manifest_sha256": successor["release_manifest_sha256"],
+        "fresh_replayed_tree_sha": fresh["prepared_tree_sha"],
+        "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR",
+        "remote_stage2_sealed_apply_equivalence": "PASS",
+    }
+    verify_dir = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (successor["school_key"], successor["request_id"])
+    )
+    write_json(
+        verify_dir / "stage2-sealed-apply-verification.json",
+        verification,
+    )
+
+    local_state = read_json(STATE_PATH)
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (
+        local_last.get("operation") != OP_STAGE2_SEALED_APPLY
+        or local_last.get("request_id") != successor["request_id"]
+    ):
+        raise Stop("STAGE2_SEALED_APPLY_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last["remote_stage2_sealed_apply_equivalence"] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        "persist fresh Stage 2 sealed apply verification %s"
+        % successor["request_id"],
+        [STATE_PATH, verify_dir],
+    )
+    print(
+        "REMOTE STAGE 2 SEALED APPLY EQUIVALENCE: PASS verification_commit=%s"
+        % commit
+    )
+    return 0
+
+
 def verify_stage2_reconciliation_diagnostic(
     live_main: str,
     control_head: str,
@@ -1540,6 +1775,12 @@ def main() -> int:
             )
         if last.get("operation") == OP_STAGE2_GATE1_SEAL:
             return verify_stage2_gate1_seal(
+                live_main,
+                control_head,
+                state,
+            )
+        if last.get("operation") == OP_STAGE2_SEALED_APPLY:
+            return verify_stage2_sealed_apply(
                 live_main,
                 control_head,
                 state,
