@@ -165,6 +165,7 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_STAGE2_PROPOSAL_RUNNING,
             TX_STAGE2_GATE1_FILL_RUNNING,
             TX_STAGE2_PRESEAL_RUNNING,
+            TX_STAGE2_GATE1_SEAL_RUNNING,
             TX_STAGE2_DIAGNOSTIC_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
