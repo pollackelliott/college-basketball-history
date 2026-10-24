@@ -1,0 +1,91 @@
+{
+  "counts": {
+    "home_missing_venue": 14,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 5,
+    "neutral_missing_venue": 63,
+    "public_gap_rows": 77,
+    "reciprocal_research_accounted_gap": 1,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 14,
+    "researched_unresolved_home_venue_rows": 14,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2198,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0170194",
+      "CBBG-0170207",
+      "CBBG-0170211",
+      "CBBG-0170213",
+      "CBBG-0170218",
+      "CBBG-0170219",
+      "CBBG-0170222",
+      "CBBG-0170231",
+      "CBBG-0170235",
+      "CBBG-0170236",
+      "CBBG-0170237",
+      "CBBG-0170240"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0118205",
+      "CBBG-0170334",
+      "CBBG-0170379",
+      "CBBG-0170621",
+      "CBBG-0170705"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0020651",
+      "CBBG-0034709",
+      "CBBG-0042471",
+      "CBBG-0066859",
+      "CBBG-0089828",
+      "CBBG-0118205",
+      "CBBG-0126000",
+      "CBBG-0155571",
+      "CBBG-0166874",
+      "CBBG-0170334",
+      "CBBG-0170379",
+      "CBBG-0170621"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0089828"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0170194",
+      "CBBG-0170207",
+      "CBBG-0170211",
+      "CBBG-0170213",
+      "CBBG-0170218",
+      "CBBG-0170219",
+      "CBBG-0170222",
+      "CBBG-0170231",
+      "CBBG-0170235",
+      "CBBG-0170236",
+      "CBBG-0170237",
+      "CBBG-0170240"
+    ]
+  },
+  "history_start_season": "1928-1929",
+  "school_key": "long-island-university",
+  "source_site_counts": {
+    "home_missing_venue": 14,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 75,
+    "neutral_missing_location": 5,
+    "neutral_missing_venue": 61,
+    "researched_gap_rows": 75,
+    "researched_unresolved_home_venue_rows": 14,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2193
+  },
+  "status": "PASS",
+  "warnings": []
+}

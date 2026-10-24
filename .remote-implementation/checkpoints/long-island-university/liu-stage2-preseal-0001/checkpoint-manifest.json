@@ -1,0 +1,53 @@
+{
+  "approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
+  "authority_statement": "Read-only pre-seal technical rehearsal checkpoint. It authenticates the exact fresh-verified Owner Gate 1 filled review and invokes the permanent disposable rehearse-review gate suite. READY_TO_SEAL means technical rehearsal passed only. No cryptographic seal, sealed apply, tracked onboarding mutation, Preview, Owner Gate 2, merge, or release authority is included.",
+  "changed_path_count": 87,
+  "command_exit_code": 0,
+  "decision_id_set_sha256": "37c02816f16081bd13312f114178d2d5e3a40f7b6688c7450d8192429b79e9d6",
+  "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+  "filled_review_sha256": "258ac160be65a788c9e157994d2d08f539811458df7dae23d2114de619ef9b60",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+  "normalized_log_sha256": "021d6cd8eb7755506618da2ff2d9fa0b79c7f7c8843ed78ae98b8c169fa55cd3",
+  "owner_gate_1_approval_sha256": "afee8b38cb3f345771f47a273f35710bd7d67073d3225abc7bbccd912e0a23cf",
+  "permanent_command": [
+    "python",
+    "tools/onboarding_hardening.py",
+    "rehearse-review",
+    "long-island-university"
+  ],
+  "preseal_status": "READY_TO_SEAL",
+  "protected_main_sha": "4115f5f99595991e8247499b5a136e746f971238",
+  "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
+  "rehearsal_approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
+  "rehearsal_log_checkpoint_path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-preseal-0001/rehearsal.log",
+  "request_id": "liu-stage2-preseal-0001",
+  "request_sha256": "cf5c4a71c3696b38cc0a95b5482bd6960df800c35c5902864a050c101fb0c7c1",
+  "runtime_commit_sha": "4115f5f99595991e8247499b5a136e746f971238",
+  "runtime_tool_sha256": {
+    "tools/onboard_school.py": "2ff31bbef154741e7be730206e2c8dfdcb0a26626fbaab593b305ed9eef4e794",
+    "tools/onboarding_hardening.py": "066844d9fb25da5f13da722c1ac49967ca40d40bc3e70efad1cfaa961f6230c7"
+  },
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "site_gate_checkpoint_path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-preseal-0001/site-gate.json",
+  "site_gate_normalized_sha256": "c70452d0bc328c1e0f5415c3296345963b1f5ab88786010252340c8f28c7297a",
+  "source_gate1_fill_request_id": "liu-stage2-gate1-fill-0001",
+  "stage2_gate1_fill_checkpoint_path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-gate1-fill-0001/checkpoint-manifest.json",
+  "stage2_gate1_fill_checkpoint_sha256": "26854d1d28c8f140392b5557706c14310ab1e9fecd097decb6edb9acfb830e0c",
+  "stage2_gate1_fill_verification_path": ".remote-implementation/verifications/long-island-university/liu-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+  "stage2_gate1_fill_verification_sha256": "5a46a6353ec00b193899262c0bd24208dd0f6a4c16ad35c0c0601ed0f48b5e6e",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+  "target_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+  "tracked_mutation_proof": {
+    "after_head_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+    "after_status": "",
+    "after_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+    "before_head_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+    "before_status": "",
+    "before_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
