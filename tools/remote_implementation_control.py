@@ -26,6 +26,7 @@ OP_PHASE0 = "PHASE0"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
 OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
+OP_STAGE2_RECONCILIATION_DIAGNOSTIC = "STAGE2_RECONCILIATION_DIAGNOSTIC"
 OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
     OP_STAGE1,
@@ -33,6 +34,7 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     OP_RECOVER,
 }
 
@@ -44,6 +46,7 @@ TX_IDLE = "IDLE"
 TX_STAGE1_RUNNING = "STAGE1_RUNNING"
 TX_STAGE2_CENSUS_RUNNING = "STAGE2_CENSUS_RUNNING"
 TX_STAGE2_PROPOSAL_RUNNING = "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
+TX_STAGE2_DIAGNOSTIC_RUNNING = "STAGE2_RECONCILIATION_DIAGNOSTIC_RUNNING"
 TX_LOCKED = "LOCKED"
 TX_INPUTS_VERIFIED = "INPUTS_VERIFIED"
 TX_PREPARED = "PREPARED_NOT_PUBLISHED"
@@ -61,6 +64,7 @@ HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 REQUEST_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,127}$")
 SCHOOL_KEY_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,127}$")
+CANONICAL_GAME_ID_RE = re.compile(r"^CBBG-[0-9]{1,12}$")
 
 
 class RemoteImplementationError(RuntimeError):
@@ -150,6 +154,7 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_STAGE1_RUNNING,
             TX_STAGE2_CENSUS_RUNNING,
             TX_STAGE2_PROPOSAL_RUNNING,
+            TX_STAGE2_DIAGNOSTIC_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
             TX_PREPARED,
@@ -274,6 +279,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_proposal_rehearsal") is not True,
             "STAGE1_REQUEST_STAGE2_PROPOSAL_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is not True,
+            "STAGE1_REQUEST_STAGE2_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_PHASE0:
         _require(authority.get("phase0") is True, "PHASE0_REQUEST_AUTHORITY_REQUIRED")
@@ -296,6 +305,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_proposal_rehearsal") is not True,
             "PHASE0_REQUEST_STAGE2_PROPOSAL_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is not True,
+            "PHASE0_REQUEST_STAGE2_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
 
     if operation == OP_STAGE2_CENSUS:
         _require(
@@ -317,6 +330,10 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("stage2_proposal_rehearsal") is not True,
             "STAGE2_CENSUS_PROPOSAL_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is not True,
+            "STAGE2_CENSUS_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
         )
         expected_target = f"data/{school_key}-onboarding"
         _require(
@@ -365,6 +382,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_proposal_rehearsal") is not True,
             "STAGE2_OPPONENT_DISPLAY_PROPOSAL_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is not True,
+            "STAGE2_OPPONENT_DISPLAY_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
         expected_target = f"data/{school_key}-onboarding"
         _require(
             request.get("target_branch") == expected_target,
@@ -412,6 +433,10 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_opponent_display_normalize") is False,
             "STAGE2_PROPOSAL_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
         )
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is not True,
+            "STAGE2_PROPOSAL_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
         expected_target = f"data/{school_key}-onboarding"
         _require(
             request.get("target_branch") == expected_target,
@@ -446,6 +471,76 @@ def validate_request(request: dict[str, Any]) -> None:
             request.get("decision_universe_sha256"),
             64,
             "STAGE2_PROPOSAL_DECISION_UNIVERSE_SHA_INVALID",
+        )
+
+
+    if operation == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
+        _require(
+            authority.get("stage2_reconciliation_diagnostic") is True,
+            "STAGE2_DIAGNOSTIC_REQUEST_AUTHORITY_REQUIRED",
+        )
+        _require(
+            authority.get("phase0") is False,
+            "STAGE2_DIAGNOSTIC_PHASE0_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("recovery") is False,
+            "STAGE2_DIAGNOSTIC_RECOVERY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_census") is False,
+            "STAGE2_DIAGNOSTIC_CENSUS_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_opponent_display_normalize") is False,
+            "STAGE2_DIAGNOSTIC_OPPONENT_DISPLAY_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            authority.get("stage2_proposal_rehearsal") is False,
+            "STAGE2_DIAGNOSTIC_PROPOSAL_AUTHORITY_FORBIDDEN",
+        )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "STAGE2_DIAGNOSTIC_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "STAGE2_DIAGNOSTIC_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("stage2_proposal_checkpoint"),
+            "stage2_proposal_checkpoint",
+            required=True,
+        )
+        _require_sha(
+            request.get("integration_freeze_sha256"),
+            64,
+            "STAGE2_DIAGNOSTIC_INTEGRATION_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("semantic_snapshot_sha256"),
+            64,
+            "STAGE2_DIAGNOSTIC_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("decision_universe_sha256"),
+            64,
+            "STAGE2_DIAGNOSTIC_DECISION_UNIVERSE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("recommendation_map_sha256"),
+            64,
+            "STAGE2_DIAGNOSTIC_RECOMMENDATION_MAP_SHA_INVALID",
+        )
+        _require(
+            bool(
+                CANONICAL_GAME_ID_RE.fullmatch(
+                    str(request.get("canonical_game_id") or "")
+                )
+            ),
+            "STAGE2_DIAGNOSTIC_CANONICAL_GAME_ID_INVALID",
         )
 
     if operation == OP_RECOVER:
@@ -519,6 +614,7 @@ def verify_request_predecessor(
             OP_STAGE1,
             OP_STAGE2_CENSUS,
             OP_STAGE2_PROPOSAL_REHEARSAL,
+            OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
         }:
             _require(
                 recovery.get("target_branch") is None
@@ -556,14 +652,17 @@ def begin_request(
         OP_STAGE1,
         OP_STAGE2_CENSUS,
         OP_STAGE2_PROPOSAL_REHEARSAL,
+        OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     }:
         result["lifecycle_state"] = LIFECYCLE_READ_ONLY
         if request["operation"] == OP_STAGE1:
             result["transaction_state"] = TX_STAGE1_RUNNING
         elif request["operation"] == OP_STAGE2_CENSUS:
             result["transaction_state"] = TX_STAGE2_CENSUS_RUNNING
-        else:
+        elif request["operation"] == OP_STAGE2_PROPOSAL_REHEARSAL:
             result["transaction_state"] = TX_STAGE2_PROPOSAL_RUNNING
+        else:
+            result["transaction_state"] = TX_STAGE2_DIAGNOSTIC_RUNNING
         result["active_lock_owner"] = None
         result["active_target_branch"] = request.get("target_branch")
         result["recovery_required"] = True
