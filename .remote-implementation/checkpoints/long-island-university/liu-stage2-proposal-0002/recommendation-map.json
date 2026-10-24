@@ -1,0 +1,76 @@
+{
+  "basis_by_decision": {
+    "ACCOMPLISHMENTS-LONG-ISLAND-UNIVERSITY": "LIU's 2026 institutional championship release identifies the new NEC regular-season crown as the seventh in program history; correct the stale unverified regular-season championship count 13 to 7 while retaining the independently supported 8 tournament titles, 8 NCAA appearances, 0 Final Fours, 0 NCAA titles, and ROUND_OF_64 best finish in 2026. Sources: https://www.liuathletics.com/story.aspx?file_date=3%2F3%2F2026&filename=mens-basketball-sharks-to-open-nec-mens-basketball-tournament-at-home-against-chicago-state ; https://www.liuathletics.com/sports/2020/2/26/liu-history.aspx ; https://www.liuathletics.com/story.aspx?file_date=3%2F15%2F2026&filename=mens-basketball-the-sharks-are-dancing-liu-to-take-on-arizona-to-open-the-ncaa-tournament",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00155-CBBG-0162447-SCORE": "LIU and Seton Hall institutional records identify the same 1934-35 game but preserve conflicting 74-30 and 72-30 scores; publish the conflict transparently.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00189-CBBG-0162464-SCORE": "LIU and Seton Hall institutional records identify the same 1936-37 game but preserve materially conflicting scores; no decisive tie-breaker supports rewriting either source.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00249-CBBG-0150836-SCORE": "LIU and Marquette institutional records identify the same 1939-01-11 game but disagree 41-36 versus 41-34; no decisive tie-breaker supports adjudication.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00325-CBBG-0020651-RESULT_WINNER_TEAM_KEY": "Tennessee's official schedule and opponent history independently identify Tennessee as the 36-33 winner; retain canonical winner and preserve LIU's contrary assertion.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00325-CBBG-0020651-SCORE": "Tennessee's official schedule/opponent history identifies the 1941-12-30 Sugar Bowl Classic game as Tennessee 36-33 LIU; retain canonical score while preserving LIU's contrary 36-33 win assertion.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00325-CBBG-0020651-SITE_TYPE": "Tennessee's official schedule identifies the 1941-12-30 game as neutral in New Orleans at the Sugar Bowl Classic; retain canonical neutral.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00459-CBBG-0162619-SCORE": "LIU and Seton Hall institutional records identify the same 1948 MSG game but preserve materially different scores; no decisive tie-breaker supports adjudication.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00971-CBBG-0077014-SCORE": "LIU and Rutgers institutional records identify the same Rutgers-home game but disagree by one point on both teams' scores; retain transparent unresolved conflict.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-01318-CBBG-0163424-SCORE": "Seton Hall institutional evidence and LIU's own series summary support 110-72; retain canonical 110-72 while preserving LIU season-table raw text 72-100.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-01462-CBBG-0021924-SCORE": "Tennessee institutional evidence and LIU's own series summary support 86-47; retain canonical 86-47 while preserving LIU season-table raw text 47-87.",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-01645-CBBG-0169726-SCORE": "Contemporary FDU evidence establishes the 2006-02-02 FDU-home game as FDU 78, LIU 65; use the incoming 78-65 correction for the correctly matched candidate.",
+    "DISCREPANCY-LIU-S1-00284-SITE_TYPE": "LIU says at DePaul while accepted DePaul evidence classifies the game neutral in New York; neither institutional assertion safely controls.",
+    "DISCREPANCY-LIU-S1-00957-SITE_TYPE": "West Virginia's accepted reciprocal record places the 1981-12-19 LIU game at the neutral Charleston site, outweighing LIU's conflicting at token while preserving it as source evidence.",
+    "DISCREPANCY-LIU-S1-00989-SITE_TYPE": "FDU's exact dated institutional ledger places the 1983-01-11 81-88 game at FDU Gym in Rutherford; retain canonical FDU home and preserve LIU's contrary home assertion.",
+    "PUBLICATION-LONG-ISLAND-UNIVERSITY": "Enable publication only after the exact approved historical recommendations, accomplishment correction, site completeness, accomplishment cross-check, and permanent validation gates pass.",
+    "SOURCE-CONSISTENCY-LIU-S1-01154": "LIU's official Mount St. Mary's series record identifies 1988-12-02 as a neutral 72-81 loss; correct the structured transposed score while preserving played_result=L and literal raw_text."
+  },
+  "canonical_patch_by_decision": {
+    "ACCOMPLISHMENTS-LONG-ISLAND-UNIVERSITY": {
+      "conference_regular_season_championships": "7"
+    }
+  },
+  "decisions": {
+    "ACCOMPLISHMENTS-LONG-ISLAND-UNIVERSITY": "APPLY_ACCOMPLISHMENT_PATCH",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00155-CBBG-0162447-SCORE": "LEAVE_UNRESOLVED",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00189-CBBG-0162464-SCORE": "LEAVE_UNRESOLVED",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00249-CBBG-0150836-SCORE": "LEAVE_UNRESOLVED",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00249-CBBG-0150836-SITE_TYPE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00325-CBBG-0020651-RESULT_WINNER_TEAM_KEY": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00325-CBBG-0020651-SCORE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00325-CBBG-0020651-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00459-CBBG-0162619-SCORE": "LEAVE_UNRESOLVED",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-00971-CBBG-0077014-SCORE": "LEAVE_UNRESOLVED",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-01318-CBBG-0163424-SCORE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-01462-CBBG-0021924-SCORE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-LIU-S1-01645-CBBG-0169726-SCORE": "USE_SOURCE",
+    "DISCREPANCY-LIU-S1-00284-SITE_TYPE": "LEAVE_UNRESOLVED",
+    "DISCREPANCY-LIU-S1-00957-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-LIU-S1-00989-SITE_TYPE": "KEEP_CANONICAL",
+    "PUBLICATION-LONG-ISLAND-UNIVERSITY": "ENABLE_PUBLIC_PAGE",
+    "SOURCE-CONSISTENCY-LIU-S1-01154": "APPLY_SOURCE_CONSISTENCY_PATCH"
+  },
+  "defaults": {
+    "basis": "Frozen LIU institutional evidence and accepted Research curation support the incoming value over the conflicting canonical/reciprocal representation where no row-specific override is listed.",
+    "discrepancy": "USE_SOURCE",
+    "identity_basis": "Same-season opponent identity plus reciprocal date/result/site/sequence context establish the same canonical contest; field-level disagreements remain separately owner-visible.",
+    "not_applicable_basis": "This conditional discrepancy belongs to an unselected canonical identity candidate.",
+    "selected_conditional": "USE_SOURCE"
+  },
+  "identity": {
+    "LIU-S1-00155": "MATCH_CANONICAL:CBBG-0162447",
+    "LIU-S1-00189": "MATCH_CANONICAL:CBBG-0162464",
+    "LIU-S1-00249": "MATCH_CANONICAL:CBBG-0150836",
+    "LIU-S1-00325": "MATCH_CANONICAL:CBBG-0020651",
+    "LIU-S1-00459": "MATCH_CANONICAL:CBBG-0162619",
+    "LIU-S1-00971": "MATCH_CANONICAL:CBBG-0077014",
+    "LIU-S1-01318": "MATCH_CANONICAL:CBBG-0163424",
+    "LIU-S1-01462": "MATCH_CANONICAL:CBBG-0021924",
+    "LIU-S1-01645": "MATCH_CANONICAL:CBBG-0169726",
+    "LIU-S1-01647": "MATCH_CANONICAL:CBBG-0169728"
+  },
+  "notes_by_decision": {
+    "ACCOMPLISHMENTS-LONG-ISLAND-UNIVERSITY": "Gate 1 correction changes only conference_regular_season_championships from 13 to 7; no real reference value changes before explicit Owner Gate 1 and sealed apply.",
+    "DISCREPANCY-LIU-S1-00284-SITE_TYPE": "Preserve both institutional site assertions as transparent unresolved evidence.",
+    "SOURCE-CONSISTENCY-LIU-S1-01154": "Structured score-only repair; played_result remains L and frozen literal raw_text is immutable."
+  },
+  "source_patch_by_decision": {
+    "SOURCE-CONSISTENCY-LIU-S1-01154": {
+      "opponent_score": "81",
+      "team_score": "72"
+    }
+  }
+}
