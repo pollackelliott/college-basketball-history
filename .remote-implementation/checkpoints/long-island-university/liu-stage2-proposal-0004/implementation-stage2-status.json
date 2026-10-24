@@ -1,0 +1,165 @@
+{
+  "branch": "remote-stage2-census/long-island-university-79655f4862eb",
+  "capability_census": {
+    "path": ".onboarding/long-island-university/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+  "integration_base_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "integration_semantic_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 15,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 15,
+      "discrepancy": 69,
+      "identity": 10,
+      "publication": 1,
+      "source_consistency": 1
+    },
+    "decision_count": 97,
+    "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "discrepancies_to_add": 69,
+    "existing_game_matches": 511,
+    "new_canonical_games": 1672,
+    "plan_path": ".onboarding/long-island-university/plan.json",
+    "review_path": ".onboarding/long-island-university/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_SOURCE_CONSISTENCY_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 7,
+      "LEAVE_UNRESOLVED": 6,
+      "MATCH_CANONICAL:CBBG-0020651": 1,
+      "MATCH_CANONICAL:CBBG-0021924": 1,
+      "MATCH_CANONICAL:CBBG-0077014": 1,
+      "MATCH_CANONICAL:CBBG-0150836": 1,
+      "MATCH_CANONICAL:CBBG-0162447": 1,
+      "MATCH_CANONICAL:CBBG-0162464": 1,
+      "MATCH_CANONICAL:CBBG-0162619": 1,
+      "MATCH_CANONICAL:CBBG-0163424": 1,
+      "MATCH_CANONICAL:CBBG-0169726": 1,
+      "MATCH_CANONICAL:CBBG-0169728": 1,
+      "NOT_APPLICABLE": 3,
+      "USE_SOURCE": 68
+    },
+    "approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
+    "changed_path_count": 87
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_SOURCE_CONSISTENCY_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 7,
+      "LEAVE_UNRESOLVED": 6,
+      "MATCH_CANONICAL:CBBG-0020651": 1,
+      "MATCH_CANONICAL:CBBG-0021924": 1,
+      "MATCH_CANONICAL:CBBG-0077014": 1,
+      "MATCH_CANONICAL:CBBG-0150836": 1,
+      "MATCH_CANONICAL:CBBG-0162447": 1,
+      "MATCH_CANONICAL:CBBG-0162464": 1,
+      "MATCH_CANONICAL:CBBG-0162619": 1,
+      "MATCH_CANONICAL:CBBG-0163424": 1,
+      "MATCH_CANONICAL:CBBG-0169726": 1,
+      "MATCH_CANONICAL:CBBG-0169728": 1,
+      "NOT_APPLICABLE": 3,
+      "USE_SOURCE": 68
+    },
+    "approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
+    "decision_count": 97,
+    "path": "/tmp/remote-stage2-proposal-map-eq9ggzu0/recommendation-map.json",
+    "sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f"
+  },
+  "research_base_sha": "8aa88fb7e131aee333ba85ab0f3a52c8d1624c1e",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 14,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 5,
+      "neutral_missing_venue": 63,
+      "public_gap_rows": 77,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 14,
+      "researched_unresolved_home_venue_rows": 14,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2198,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0170194",
+        "CBBG-0170207",
+        "CBBG-0170211",
+        "CBBG-0170213",
+        "CBBG-0170218",
+        "CBBG-0170219",
+        "CBBG-0170222",
+        "CBBG-0170231",
+        "CBBG-0170235",
+        "CBBG-0170236",
+        "CBBG-0170237",
+        "CBBG-0170240"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0118205",
+        "CBBG-0170334",
+        "CBBG-0170379",
+        "CBBG-0170621",
+        "CBBG-0170705"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0020651",
+        "CBBG-0034709",
+        "CBBG-0042471",
+        "CBBG-0066859",
+        "CBBG-0089828",
+        "CBBG-0118205",
+        "CBBG-0126000",
+        "CBBG-0155571",
+        "CBBG-0166874",
+        "CBBG-0170334",
+        "CBBG-0170379",
+        "CBBG-0170621"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0089828"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0170194",
+        "CBBG-0170207",
+        "CBBG-0170211",
+        "CBBG-0170213",
+        "CBBG-0170218",
+        "CBBG-0170219",
+        "CBBG-0170222",
+        "CBBG-0170231",
+        "CBBG-0170235",
+        "CBBG-0170236",
+        "CBBG-0170237",
+        "CBBG-0170240"
+      ]
+    },
+    "path": ".onboarding/long-island-university/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
