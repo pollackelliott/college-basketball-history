@@ -1,15 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "liu-stage2-reconciliation-diagnostic-0001",
+  "request_id": "liu-stage2-proposal-0004",
   "school_key": "long-island-university",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "d73246a9a26f53d0edf1b0dee34c50f554c8ff6e",
-  "previous_control_state_sha256": "fcce8fcd8b2daf678617dc203c0b5b6628cb65c9fa57078ec1ad2b81140497d9",
-  "expected_protected_main_sha": "ac76facf3d670eb5f5280c61a22826d12fbccab5",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "837af6babddefa9dacaf1ca3f2e4d9155bc5c2fe",
+  "previous_control_state_sha256": "0b72c79ebabf18855244694d35dfb8ae7a035fc9455f55049c8d0caf008a3ec2",
+  "expected_protected_main_sha": "9e6c0bbcce1ed8a481ad022252690a3c98afb6d3",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-current-main-rebase-0001/checkpoint-manifest.json",
+    "sha256": "3359c1ed5705da15d160867c30b7a31020fa221839d79b86827f231056f16f7e"
+  },
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/liu-stage2-proposal-0004/recommendation-map.json",
+    "sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f"
+  },
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner said Proceed for the bounded CBBG-0020651 diagnostic unit. Current protected-main policy now productionizes STAGE2_RECONCILIATION_DIAGNOSTIC, so this request is limited to read-only diagnosis of that one canonical game against the exact blocked liu-stage2-proposal-0003 checkpoint; no historical decision, repair, PR, Owner Gate 1 or Owner Gate 2 approval, fill/seal/apply, Preview, merge, release, or Production authority."
+    "authorization": "Owner explicitly authorized one fresh read-only LIU STAGE2_PROPOSAL_REHEARSAL using the authoritative current-main reconciliation checkpoint after external repair of CBBG-0020651. This grants only the exact-map proposal rehearsal and independent fresh-runner equivalence verification; no diagnostic, Research reopening, canonical repair, Owner Gate 1 or Owner Gate 2 approval, fill/seal/apply, tracked Stage 2 mutation, Preview, release, merge, or Production authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -19,18 +32,7 @@
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
-    "stage2_reconciliation_diagnostic": true
-  },
-  "target_branch": "data/long-island-university-onboarding",
-  "target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-proposal-0003/checkpoint-manifest.json",
-    "sha256": "095184ae84ebeb7c55fc3f9f0a3dce01c82aa5bcc984b2835ea35ffcfc215b50"
-  },
-  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
-  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
-  "decision_universe_sha256": "1556cde8b01688a14c807b902af661cf813d8ec1c682625a9e6c62842e6c9465",
-  "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
-  "canonical_game_id": "CBBG-0020651"
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false
+  }
 }
