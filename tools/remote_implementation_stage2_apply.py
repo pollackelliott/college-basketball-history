@@ -393,13 +393,14 @@ def run_sealed_apply_tool(
 
     if not prepare_commit:
         tree = git("write-tree", cwd=repo).stdout.strip()
-        file_hashes = {}
+        file_hashes: dict[str, str] = {}
+        deleted_paths: list[str] = []
         for path in changed:
             absolute = repo / path
             if absolute.is_file():
                 file_hashes[path] = sha256_file(absolute)
             else:
-                file_hashes[path] = None
+                deleted_paths.append(path)
         return {
             "apply_command": [
                 "python",
@@ -413,6 +414,7 @@ def run_sealed_apply_tool(
             "prepared_parent_sha": predecessor_sha,
             "changed_paths": changed,
             "changed_file_sha256": file_hashes,
+            "deleted_paths": deleted_paths,
             "release_manifest": release,
             "release_manifest_bytes": manifest_bytes,
             "release_manifest_sha256": sha256_bytes(manifest_bytes),
@@ -451,14 +453,15 @@ def run_sealed_apply_tool(
     if commit_changed != changed:
         raise Stop("STAGE2_SEALED_APPLY_PREPARED_PATH_MISMATCH")
 
-    changed_hashes: dict[str, str | None] = {}
+    changed_hashes: dict[str, str] = {}
+    deleted_paths: list[str] = []
     for path in changed:
         try:
             changed_hashes[path] = sha256_bytes(
                 git_show_bytes(prepared, path, cwd=repo)
             )
         except Exception:
-            changed_hashes[path] = None
+            deleted_paths.append(path)
 
     return {
         "apply_command": [
@@ -475,6 +478,7 @@ def run_sealed_apply_tool(
         "commit_message": message,
         "changed_paths": changed,
         "changed_file_sha256": changed_hashes,
+        "deleted_paths": deleted_paths,
         "release_manifest": release,
         "release_manifest_bytes": manifest_bytes,
         "release_manifest_sha256": sha256_bytes(manifest_bytes),
@@ -498,7 +502,8 @@ def verify_prepared_sealed_apply(
     predecessor_sha: str,
     prepared_sha: str,
     changed_paths: list[str],
-    changed_file_sha256: dict[str, str | None],
+    changed_file_sha256: dict[str, str],
+    deleted_paths: list[str],
 ) -> dict[str, Any]:
     parent = git("rev-parse", "%s^" % prepared_sha, cwd=repo).stdout.strip()
     tree = git("rev-parse", "%s^{tree}" % prepared_sha, cwd=repo).stdout.strip()
@@ -518,19 +523,23 @@ def verify_prepared_sealed_apply(
     )
     if actual_paths != sorted(changed_paths):
         raise Stop("STAGE2_SEALED_APPLY_VERIFY_PATH_MISMATCH")
-    actual_hashes: dict[str, str | None] = {}
+    actual_hashes: dict[str, str] = {}
+    actual_deleted: list[str] = []
     for path in actual_paths:
         try:
             actual_hashes[path] = sha256_bytes(
                 git_show_bytes(prepared_sha, path, cwd=repo)
             )
         except Exception:
-            actual_hashes[path] = None
+            actual_deleted.append(path)
     if actual_hashes != changed_file_sha256:
         raise Stop("STAGE2_SEALED_APPLY_VERIFY_FILE_HASH_MISMATCH")
+    if sorted(actual_deleted) != sorted(deleted_paths):
+        raise Stop("STAGE2_SEALED_APPLY_VERIFY_DELETION_MISMATCH")
     return {
         "prepared_parent_sha": parent,
         "prepared_tree_sha": tree,
         "changed_paths": actual_paths,
         "changed_file_sha256": actual_hashes,
+        "deleted_paths": actual_deleted,
     }
