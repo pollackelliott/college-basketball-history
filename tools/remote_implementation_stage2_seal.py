@@ -16,7 +16,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from onboarding_plan import approve_plan, verify_approved_plan
+from onboarding_plan import approve_plan, render_report, verify_approved_plan
 from remote_implementation_control import sha256_bytes, sha256_file
 from remote_implementation_io import ROOT, Stop, git_show_bytes, run
 from remote_implementation_stage2_census import (
@@ -252,9 +252,15 @@ def verify_sealed_plan_bytes(
     if expected_bytes != approved_plan_bytes:
         raise Stop("STAGE2_GATE1_SEAL_APPROVED_PLAN_BYTES_MISMATCH")
 
+    approved_review_bytes = render_report(
+        approved,
+        approved_hash,
+    ).encode("utf-8")
     return {
         "approved_plan_hash": approved_hash,
         "approved_plan_sha256": sha256_bytes(approved_plan_bytes),
+        "expected_approved_review_bytes": approved_review_bytes,
+        "expected_approved_review_sha256": sha256_bytes(approved_review_bytes),
         "approved_by": APPROVED_BY,
         "approved_at": approved_at,
         "decision_count": len(approved.get("decisions") or []),
@@ -356,6 +362,8 @@ def run_stage2_gate1_seal_tool(
         approved_plan_bytes=approved_plan_bytes,
     )
 
+    if approved_review_bytes != summary["expected_approved_review_bytes"]:
+        raise Stop("STAGE2_GATE1_SEAL_APPROVED_REVIEW_BYTES_MISMATCH")
     output_match = _APPROVED_HASH_RE.search(cp.stdout or "")
     if not output_match or output_match.group(1) != summary["approved_plan_hash"]:
         raise Stop("STAGE2_GATE1_SEAL_COMMAND_HASH_MISMATCH")
