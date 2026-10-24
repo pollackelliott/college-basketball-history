@@ -64,7 +64,7 @@ def _normalize_text(text: str, *, repo: Path) -> str:
     return normalized
 
 
-def _equivalence_sha256(
+def preseal_equivalence_sha256(
     *,
     preseal_status: str,
     exit_code: int,
@@ -377,7 +377,7 @@ def run_stage2_preseal_rehearsal_tool(
             raise Stop("STAGE2_PRESEAL_SUCCESS_MARKER_MISSING")
 
     tracked_mutation = "NONE"
-    equivalence_sha256 = _equivalence_sha256(
+    equivalence_sha256 = preseal_equivalence_sha256(
         preseal_status=status,
         exit_code=cp.returncode,
         approved_plan_hash_preview=preview_hash,
