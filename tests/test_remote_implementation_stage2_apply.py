@@ -319,7 +319,7 @@ class RemoteStage2SealedApplyTests(unittest.TestCase):
                     SCHOOL,
                     predecessor,
                     authority=authority,
-                    diag=root / "diag",
+                    diag=Path(directory).parent / "sealed-apply-test-diag",
                     tool_repo=ROOT,
                     prepare_commit=True,
                 )
