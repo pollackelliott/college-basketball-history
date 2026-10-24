@@ -14,7 +14,9 @@ repeatable work earlier and makes it executable:
   substantively identical after a purely technical repair;
 - ``rehearse-review``: run the complete disposable transaction and automated gate
   suite before Gate 1; with ``--map``, rehearse an agent recommendation map without
-  mutating the real review or implying owner approval.
+  mutating the real review or implying owner approval;
+- ``diagnose-reconciliation``: reproduce one exact recommendation map in a disposable
+  repository and persist a compact trace for one canonical game's reconciliation path.
 """
 
 from __future__ import annotations
@@ -39,6 +41,7 @@ from integration_freeze_guard import (
     print_semantic_drift_report,
     semantic_drift_report,
 )
+from reconciliation_trace import ReconciliationTrace
 from onboarding_plan import (
     ACCOMPLISHMENT_PATCH_FIELDS,
     CANONICAL_PATCH_FIELDS,
@@ -1166,6 +1169,163 @@ def rehearse_review(
     }
 
 
+class _ReconciliationDiagnosticComplete(Exception):
+    """Internal stop after generic reconciliation succeeds in a disposable copy."""
+
+    def __init__(self, counts: dict[str, int]):
+        super().__init__("reconciliation diagnostic complete")
+        self.counts = counts
+
+
+def diagnose_reconciliation(
+    repo: Path,
+    school_key: str,
+    *,
+    plan_path: Path,
+    review_path: Path,
+    map_path: Path,
+    canonical_game_id: str,
+) -> dict[str, Any]:
+    """Trace one canonical game through the real disposable reconciliation path.
+
+    This command intentionally stops immediately after generic reconciliation.  It
+    never mutates the caller's tracked repository and never substitutes diagnostic
+    logic for the permanent reconciliation implementation.
+    """
+
+    canonical_game_id = canonical_game_id.strip()
+    if not canonical_game_id:
+        raise WorkflowError("--canonical-game-id must be nonblank")
+
+    onboard_school.ensure_package_checkpoint(repo)
+    assert_no_unapproved_semantic_drift(repo, school_key)
+    if not plan_path.is_file():
+        raise WorkflowError(f"reconciliation diagnostic plan not found: {plan_path}")
+    if not review_path.is_file():
+        raise WorkflowError(f"reconciliation diagnostic review not found: {review_path}")
+    if not map_path.is_file():
+        raise WorkflowError(f"reconciliation diagnostic map not found: {map_path}")
+
+    output_dir = repo / ".onboarding" / school_key
+    output_dir.mkdir(parents=True, exist_ok=True)
+    trace_path = output_dir / "last-rehearsal-reconciliation-trace.json"
+
+    with tempfile.TemporaryDirectory(prefix=f"diagnose-review-{school_key}-") as temporary:
+        proposal_review = Path(temporary) / "review.csv"
+        proposal_review.write_bytes(review_path.read_bytes())
+        action_counts = fill_review_from_map(proposal_review, map_path)
+        approved, approved_hash = approve_plan(
+            repo,
+            plan_path,
+            proposal_review,
+            TECHNICAL_PREVIEW_APPROVED_BY,
+            approved_at=TECHNICAL_PREVIEW_APPROVED_AT,
+        )
+
+        integration_freeze = output_dir / "integration-freeze.json"
+        authority: dict[str, Any] = {
+            "head_sha": onboard_school.git(repo, "rev-parse", "HEAD").strip(),
+            "plan_sha256": sha256_file(plan_path),
+            "review_sha256": sha256_file(review_path),
+            "recommendation_map_sha256": sha256_file(map_path),
+            "approved_plan_hash_preview": approved_hash,
+            "decision_count": sum(action_counts.values()),
+            "action_counts": dict(sorted(action_counts.items())),
+        }
+        if integration_freeze.is_file():
+            authority["integration_freeze_sha256"] = sha256_file(integration_freeze)
+            try:
+                freeze = json.loads(integration_freeze.read_text(encoding="utf-8"))
+                semantic = freeze.get("source_game_semantic_guard", {})
+                if isinstance(semantic, dict) and semantic.get("snapshot_sha256"):
+                    authority["semantic_snapshot_sha256"] = semantic["snapshot_sha256"]
+            except (UnicodeError, json.JSONDecodeError):
+                authority["integration_freeze_parse_status"] = "UNREADABLE"
+
+        before_real = onboard_school.tree_hashes(repo)
+        tracer = ReconciliationTrace(canonical_game_id)
+        tracer.document.update(
+            {
+                "school_key": school_key,
+                "authority": authority,
+            }
+        )
+
+        execution_status = ""
+        execution_error = ""
+        reconciliation_counts: dict[str, int] = {}
+
+        with tempfile.TemporaryDirectory(
+            prefix=f"reconciliation-diagnostic-{school_key}-"
+        ) as rehearsal_temp:
+            rehearsal = Path(rehearsal_temp) / "repository"
+            onboard_school.copy_repository(repo, rehearsal, school_key=school_key)
+
+            original_apply = onboard_school.apply_reconciliation_decisions
+
+            def diagnostic_apply(*args: Any, **kwargs: Any) -> dict[str, int]:
+                result = original_apply(*args, **kwargs)
+                raise _ReconciliationDiagnosticComplete(result)
+
+            onboard_school.apply_reconciliation_decisions = diagnostic_apply
+            try:
+                with tracer:
+                    try:
+                        onboard_school.execute_approved_in_place(rehearsal, approved)
+                    except _ReconciliationDiagnosticComplete as completed:
+                        execution_status = "RECONCILIATION_COMPLETED"
+                        reconciliation_counts = completed.counts
+                    except WorkflowError as exc:
+                        execution_status = "RECONCILIATION_BLOCKED"
+                        execution_error = str(exc)
+            finally:
+                onboard_school.apply_reconciliation_decisions = original_apply
+
+        after_real = onboard_school.tree_hashes(repo)
+        unchanged = before_real == after_real
+        tracer.document["execution_status"] = execution_status
+        tracer.document["execution_error"] = execution_error
+        tracer.document["reconciliation_counts"] = reconciliation_counts
+        tracer.document["real_tracked_repository_unchanged"] = unchanged
+        tracer.document["real_changed_paths"] = onboard_school.changed_paths(
+            before_real, after_real
+        )
+
+        target_observed = bool(tracer.document.get("canonical_before"))
+        tracer.document["diagnostic_status"] = (
+            "PASS" if target_observed and unchanged else "FAIL"
+        )
+        if not target_observed:
+            tracer.document.setdefault(
+                "diagnostic_error",
+                f"canonical target {canonical_game_id} was not observed during reconciliation",
+            )
+        if not unchanged:
+            tracer.document.setdefault(
+                "diagnostic_error",
+                "diagnostic mutated the real tracked repository",
+            )
+
+        trace_path.write_text(
+            json.dumps(tracer.document, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+    return {
+        "status": tracer.document["diagnostic_status"],
+        "execution_status": execution_status,
+        "execution_error": execution_error,
+        "partial_location_classification": tracer.document.get(
+            "partial_location_classification", ""
+        ),
+        "decision_count": len(tracer.document.get("decision_order", [])),
+        "mutation_count": len(tracer.document.get("mutations", [])),
+        "site_sync_count": len(tracer.document.get("site_sync_events", [])),
+        "trace_path": trace_path,
+        "real_tracked_repository_unchanged": unchanged,
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Research-freeze and pre-seal hardening helpers for school onboarding."
@@ -1226,6 +1386,21 @@ def parse_args() -> argparse.Namespace:
             "identity applicability exactly."
         ),
     )
+
+
+    diagnose = sub.add_parser(
+        "diagnose-reconciliation",
+        help=(
+            "Trace one canonical game through the exact disposable Stage 2 "
+            "reconciliation path without mutating tracked repository state."
+        ),
+    )
+    diagnose.add_argument("school_key")
+    diagnose.add_argument("--repo", type=Path, default=None)
+    diagnose.add_argument("--plan-file", type=Path, default=None)
+    diagnose.add_argument("--review-file", type=Path, default=None)
+    diagnose.add_argument("--map", dest="map_path", type=Path, required=True)
+    diagnose.add_argument("--canonical-game-id", required=True)
 
     rehearse = sub.add_parser(
         "rehearse-review",
@@ -1329,6 +1504,39 @@ def main() -> int:
                 print(f"  {action}: {count}")
             print("Next: rerun rehearse-review before resealing Gate 1.")
             return 0
+
+
+        if args.command == "diagnose-reconciliation":
+            plan_path = (
+                args.plan_file.resolve()
+                if args.plan_file
+                else output_dir / "plan.json"
+            )
+            result = diagnose_reconciliation(
+                repo,
+                args.school_key,
+                plan_path=plan_path,
+                review_path=review_path,
+                map_path=args.map_path.resolve(),
+                canonical_game_id=args.canonical_game_id,
+            )
+            print("RECONCILIATION DIAGNOSTIC: " + result["status"])
+            print("Execution:         " + result["execution_status"])
+            if result["execution_error"]:
+                print("Permanent error:   " + result["execution_error"].splitlines()[0])
+            print(
+                "Classification:    "
+                + (result["partial_location_classification"] or "[not partial]")
+            )
+            print(f"Decisions traced:  {result['decision_count']}")
+            print(f"Mutations traced:  {result['mutation_count']}")
+            print(f"Site sync events:  {result['site_sync_count']}")
+            print(
+                "Tracked repo:      "
+                + ("UNCHANGED" if result["real_tracked_repository_unchanged"] else "CHANGED")
+            )
+            print("Trace artifact:    " + str(result["trace_path"].relative_to(repo)))
+            return 0 if result["status"] == "PASS" else 1
 
         if args.command == "rehearse-review":
             plan_path = (
