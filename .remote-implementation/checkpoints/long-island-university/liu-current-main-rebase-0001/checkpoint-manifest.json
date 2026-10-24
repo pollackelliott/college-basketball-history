@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "request_id": "control-liu-current-main-rebase-0001",
+  "school_key": "long-island-university",
+  "protected_main_sha": "9e6c0bbcce1ed8a481ad022252690a3c98afb6d3",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+  "target_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+  "phase0_protected_main_sha": "0618c7f1da0ae9b573eaa8716a6970e04e4f8e75",
+  "phase0_successor_path": ".remote-implementation/successors/long-island-university/liu-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "b630bd087be65df2cc1975ec6459457050bf8e1795db92a397de8dd1df7c4b40",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "command_exit_code": 0,
+  "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+  "preflight": {
+    "blocker_count": 0,
+    "warning_count": 0,
+    "decision_count": 97,
+    "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "existing_game_matches": 511,
+    "new_canonical_games": 1672,
+    "conditional_discrepancies": 15,
+    "discrepancies_to_add": 69
+  },
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "long-island-university"
+  ],
+  "tracked_mutation_proof": {
+    "before_head_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+    "after_head_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+    "before_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+    "after_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+    "before_status": "",
+    "after_status": "",
+    "tracked_stage2_mutation": "NONE"
+  },
+  "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
+  "recommendation_map_validation": {
+    "status": "PASS",
+    "decision_count": 97,
+    "approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5"
+  },
+  "reconciliation_proof_path": ".remote-implementation/checkpoints/long-island-university/liu-current-main-rebase-0001/reconciliation-proof.json",
+  "reconciliation_proof_git_blob_sha": "5a7eb1b3cadb9af2e4f5cf60e3cdf2beaefa797f",
+  "workflow_run_id": 40062196855,
+  "authority_statement": "Control Center current-main reconciliation checkpoint. The exact LIU tracked package and Integration Freeze semantic history remain unchanged after rebasing the two existing onboarding commits onto repaired protected main. This is read-only Stage 2 census authority only; no Owner Gate 1 approval, proposal apply, tracked repair, Preview, merge, or release authority is included."
+}

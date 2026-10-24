@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "LIU_CURRENT_MAIN_RECONCILIATION_PROOF",
+  "workflow_run_id": 40062196855,
+  "school_key": "long-island-university",
+  "target_branch": "data/long-island-university-onboarding",
+  "old_target_sha": "8e43a0e48898dbd6bf79476442b4ec55feb3e68b",
+  "old_target_tree_sha": "5993e8da18b018df302825ba17caa79a3af11b58",
+  "new_main_sha": "9e6c0bbcce1ed8a481ad022252690a3c98afb6d3",
+  "rebased_target_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+  "rebased_target_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+  "rebased_commit_count": 2,
+  "school_package_byte_identity": "PASS",
+  "school_package_sha256": {
+    "conferences.csv": "1f3ae9d4d11ead8e116c702e920c1896b398f4fce6951de23367b61b8ee66017",
+    "notes.md": "7e8e0e5c6c8473594c3ca5cd3f540512b0c888e99dc9524fa2041c3a54d2e219",
+    "opponents.csv": "25f29181b2ceebe374cea7c9b7e547288bf6be58f400f45b6a50b6333fb4aeb9",
+    "source-games.csv": "374442754a2a42262d2f91d19f2d84184989610f921fdd159c695a46b6f957fa",
+    "source-notes.md": "4fbd435264319250f50823358ae69dee386799c9b33497140bf8a2b98180a4c1",
+    "venues.csv": "2e56db1172b5381858d1a57baf9589066fbcbb2c751e4fe622c9f1b1b90690c3"
+  },
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "semantic_drift": "PASS",
+  "fresh_stage2_census": {
+    "status": "CAPABILITY_CENSUS_READY",
+    "blocker_count": 0,
+    "warning_count": 0,
+    "decision_count": 97,
+    "runtime_decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "existing_game_matches": 511,
+    "new_canonical_games": 1672,
+    "tracked_stage2_mutation": "NONE"
+  },
+  "recommendation_map": {
+    "sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
+    "decision_count": 97,
+    "validation": "PASS",
+    "approved_plan_hash_preview_after_rebase": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_SOURCE_CONSISTENCY_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 7,
+      "LEAVE_UNRESOLVED": 6,
+      "MATCH_CANONICAL:CBBG-0020651": 1,
+      "MATCH_CANONICAL:CBBG-0021924": 1,
+      "MATCH_CANONICAL:CBBG-0077014": 1,
+      "MATCH_CANONICAL:CBBG-0150836": 1,
+      "MATCH_CANONICAL:CBBG-0162447": 1,
+      "MATCH_CANONICAL:CBBG-0162464": 1,
+      "MATCH_CANONICAL:CBBG-0162619": 1,
+      "MATCH_CANONICAL:CBBG-0163424": 1,
+      "MATCH_CANONICAL:CBBG-0169726": 1,
+      "MATCH_CANONICAL:CBBG-0169728": 1,
+      "NOT_APPLICABLE": 3,
+      "USE_SOURCE": 68
+    }
+  },
+  "repository_validation": "PASS",
+  "authority_statement": "Control Center current-main reconciliation proof. Frozen LIU tracked package bytes and semantic history are unchanged. This proof supplies no Owner Gate 1 approval and authorizes no historical rewrite."
+}
