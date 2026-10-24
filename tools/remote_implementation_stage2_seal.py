@@ -181,6 +181,9 @@ def verify_stage2_gate1_seal_authority(
         "expected_site_gate_normalized_sha256": manifest.get(
             "site_gate_normalized_sha256"
         ),
+        "expected_decision_count": (
+            preseal_authority.get("gate1_fill_manifest") or {}
+        ).get("decision_count"),
     }
 
 
