@@ -1,0 +1,48 @@
+{
+  "approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "94fcf2ad68fb91ad1cd018aa858f905dcd1c899d6a98985da0df1fdaef1f5572",
+    "implementation-stage2-status.json": "be7d75e9619d161222185f7e9e9f265a75021c6d02e67834bfedc40867a1e1ee",
+    "last-rehearsal-site-gate.json": "ba9273396e6b4f9715fcc6dbfddd80e3f125f15622f2ba880ded47a48dbfadcd",
+    "plan.json": "7eb342e3c359a99d5f18e7079f5a1db8b697d3c252fed61ee94e5041e0f9a7a6",
+    "review.csv": "f3d42e47978a6092e889ef13bd2c0f057f2abbdbed0e7d91ca717bfadc4c6b59",
+    "review.md": "24cc419f5706d8071e924d02a518fce449dec3247f0dbcd3ec4aa5450164c36a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "94fcf2ad68fb91ad1cd018aa858f905dcd1c899d6a98985da0df1fdaef1f5572",
+    "implementation-stage2-status.json": "4793436577a2388c0b4358f94010b147127bef671e83adb03438fffddaf15aab",
+    "last-rehearsal-site-gate.json": "ba9273396e6b4f9715fcc6dbfddd80e3f125f15622f2ba880ded47a48dbfadcd",
+    "plan.json": "0cc12d24239a0d1398f537c2a648dd8e7dff0ffc2b603ef7eab2f3e678f86d25",
+    "review.csv": "f3d42e47978a6092e889ef13bd2c0f057f2abbdbed0e7d91ca717bfadc4c6b59",
+    "review.md": "f8418b143fa10714e1446f9865ab598dd42995664655e6e17d20a2f1bc50e14e"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "runtime_decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+  "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "9e6c0bbcce1ed8a481ad022252690a3c98afb6d3",
+  "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "liu-stage2-proposal-0004",
+  "runtime_decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
+  "target_tree_sha": "8f4daebf3100b186a33f6540d96275dd219fcfdb",
+  "tracked_stage2_mutation": "NONE"
+}
