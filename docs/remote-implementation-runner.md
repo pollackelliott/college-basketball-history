@@ -1,8 +1,8 @@
 # Guarded Remote Implementation Runner
 
 - **Status:** Controlling execution-environment policy for serialized Implementation through stable Phase 0 and the narrowly productionized Stage 2 remote boundary
-- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or an honest durable `BLOCKED` checkpoint, the read-only exact-owner-approval `STAGE2_GATE1_FILL` boundary, the read-only filled-review `STAGE2_PRESEAL_REHEARSAL` boundary, and the read-only reconciliation diagnostic
-- **Does not apply to:** arbitrary or other Stage 2 tracked repairs, cryptographic Gate 1 sealing, sealed apply, Preview, Owner Gate 2, merge, or Production proof
+- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or an honest durable `BLOCKED` checkpoint, the read-only exact-owner-approval `STAGE2_GATE1_FILL` boundary, the read-only filled-review `STAGE2_PRESEAL_REHEARSAL` boundary, the read-only cryptographic `STAGE2_GATE1_SEAL` boundary, and the read-only reconciliation diagnostic
+- **Does not apply to:** arbitrary or other Stage 2 tracked repairs, sealed apply, Preview, Owner Gate 2, merge, or Production proof
 
 ## 1. Execution environments
 
@@ -22,6 +22,7 @@ python tools/implementation_stage2.py <school>
 python tools/implementation_stage2.py <school> --map <recommendation-map.json>
 python tools/onboarding_hardening.py fill-review <school> --map <recommendation-map.json>
 python tools/onboarding_hardening.py rehearse-review <school>
+python tools/onboard_school.py <school> --approve --approved-by project-owner
 python tools/normalize_historical_opponent_displays.py <school> --sync-source-games [--apply]
 ```
 
@@ -33,14 +34,15 @@ Tracked repository capability:
 
 - `tools/remote_implementation_control.py` — request/state validation, replay refusal, mutation classification, sidecar hashing, and Git-ref CAS primitives.
 - `tools/remote_implementation_io.py` — hash-bound checkpoint transport, isolated worktrees, permanent-command invocation, and control-branch CAS helpers.
-- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, exact-map proposal rehearsal, exact-owner-approval Gate 1 fill, read-only pre-seal rehearsal, the single opponent-display normalization mutation, reconciliation diagnostics, and explicit recovery.
+- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, exact-map proposal rehearsal, exact-owner-approval Gate 1 fill, read-only pre-seal rehearsal, read-only cryptographic Gate 1 sealing, the single opponent-display normalization mutation, reconciliation diagnostics, and explicit recovery.
 - `tools/remote_implementation_stage2_census.py` — exact Phase 0 authority restoration, read-only Stage 2 coordinator invocation, artifact hashing, and tracked-mutation proof shared by the runner and verifier.
 - `tools/remote_implementation_stage2_opponent_display.py` — exact census/Freeze authentication, permanent normalizer dry-run/apply orchestration, representation-only field proof, and post-repair Stage 2 regeneration.
 - `tools/remote_implementation_stage2_proposal.py` — exact blocker-free Stage 2 authority authentication, immutable recommendation-map transport binding, runtime/target-worktree separation, permanent `--map` invocation, proposal artifact hashing, and tracked-mutation proof.
 - `tools/remote_implementation_stage2_gate1_fill.py` — exact `OWNER_GATE_1_READY` proposal plus fresh-verification authentication, exact owner-approval binding, permanent `fill-review` invocation, filled-review hashing, and tracked-mutation proof.
 - `tools/remote_implementation_stage2_preseal.py` — exact fresh-verified Gate 1 fill authentication, permanent `rehearse-review` invocation, normalized technical-readiness proof, site-gate capture, and tracked-mutation proof.
+- `tools/remote_implementation_stage2_seal.py` — exact fresh-verified `READY_TO_SEAL` authentication, permanent `onboard_school.py --approve` invocation, exact approved-plan/review checkpointing, and independent seal reconstruction without apply.
 - `tools/remote_implementation_stage2_diagnostic.py` — exact blocked-proposal checkpoint authentication, one-canonical-game diagnostic input restoration, permanent reconciliation-trace invocation, trace hashing, and tracked-mutation proof.
-- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of completed Phase 0, Stage 2 census, opponent-display normalization, proposal rehearsal, Gate 1 fill, pre-seal rehearsal, or reconciliation-diagnostic state.
+- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of completed Phase 0, Stage 2 census, opponent-display normalization, proposal rehearsal, Gate 1 fill, pre-seal rehearsal, Gate 1 sealing, or reconciliation-diagnostic state.
 - `.github/workflows/remote-implementation.yml` — push-driven repository Action for the permanent control branch.
 - `config/remote-implementation-control-state.initial.json` — canonical initial IDLE state for creating the operational control branch.
 
@@ -98,6 +100,8 @@ Supported operations are:
 - `STAGE2_OPPONENT_DISPLAY_NORMALIZE`
 - `STAGE2_PROPOSAL_REHEARSAL`
 - `STAGE2_GATE1_FILL`
+- `STAGE2_PRESEAL_REHEARSAL`
+- `STAGE2_GATE1_SEAL`
 - `STAGE2_RECONCILIATION_DIAGNOSTIC`
 - `RECOVER`
 
@@ -371,6 +375,54 @@ This operation supplies **technical readiness only**. It does not cryptographica
 
 
 
+### Stage 2 Gate 1 seal request
+
+`STAGE2_GATE1_SEAL` creates cryptographic Owner Gate 1 authority while remaining read-only with respect to tracked basketball state. It exists only after an exact pre-seal checkpoint is `READY_TO_SEAL` and its independent fresh-runner pre-seal equivalence is `PASS`.
+
+The request binds:
+
+- exact current protected-main SHA;
+- exact onboarding branch, SHA, and pre-seal-bound tree;
+- exact pre-seal checkpoint path/hash and independent verification path/hash;
+- exact Integration Freeze and semantic snapshot SHA-256 values;
+- exact decision-universe and recommendation-map SHA-256 values;
+- exact technical approved-plan preview hash;
+- exact filled-review SHA-256 and decision-ID-set SHA-256;
+- exact prior Owner Gate 1 approval SHA-256;
+- exact source pre-seal structured-equivalence SHA-256;
+- explicit `stage2_gate1_seal=true`, with new Owner Gate 1 authority, Stage 2 fill/pre-seal mutation authority, recovery, Owner Gate 2, release, and sealed-apply authority absent.
+
+The source pre-seal checkpoint may have been created before a later tooling-only protected-main advance. The seal operation therefore does not merely trust the old runtime result. After authenticating the complete prior Owner Gate 1/pre-seal chain, it re-runs the permanent `rehearse-review` suite on the request-bound current protected-main runtime against the same exact target SHA, plan, filled review, and Integration Freeze. Current-main sealing may continue only when that replay remains `READY_TO_SEAL` and reproduces the same approved-plan preview hash, changed-path count, normalized site-gate proof, and no tracked mutation.
+
+Only then does the runner invoke the unchanged permanent seal path conceptually as:
+
+```bash
+python <runtime>/tools/onboard_school.py <school> --approve \
+  --repo <exact-target-worktree> \
+  --output-dir <ignored-seal-output> \
+  --plan-file <checkpointed-plan> \
+  --review-file <checkpointed-filled-review> \
+  --approved-by project-owner
+```
+
+The final sealed `approved_plan_hash` is the real mutation authority for the later apply step. It is distinct from the deterministic technical preview hash because the real seal contains approval metadata, including its actual approval timestamp. The checkpoint preserves the exact `approved-plan.json` and `approved-review.md` bytes/hashes, approved-plan hash, approval metadata, source pre-seal authority, current-main pre-seal replay proof, permanent-tool hashes, exact target tree, and tracked-mutation proof.
+
+Fresh verification must not mint a second seal with a new timestamp. Instead it independently:
+
+1. reauthenticates the same pre-seal authority and exact target;
+2. reruns the permanent pre-seal suite on current protected-main runtime;
+3. verifies the current permanent `onboard_school.py` / `onboarding_plan.py` tool hashes;
+4. verifies the checkpointed approved-plan cryptographic hash and input fingerprint;
+5. reconstructs the exact approved plan from the checkpointed plan/review using the seal's own `approved_by` and `approved_at` metadata through permanent `approve_plan`;
+6. reproduces the exact approved-plan bytes and approved-review rendering; and
+7. again proves tracked basketball mutation remains `NONE`.
+
+Only then may the verification record say `remote_stage2_gate1_seal_equivalence = PASS`.
+
+This is a **seal-only** boundary. It creates the exact approved-plan authority but does not run `--apply`, archive sealed decisions into tracked basketball state, mutate the onboarding branch, create Preview, approve Owner Gate 2, merge, or release.
+
+
+
 ### Stage 2 reconciliation diagnostic request
 
 `STAGE2_RECONCILIATION_DIAGNOSTIC` is read-only with respect to tracked basketball state. It exists only after an exact `STAGE2_PROPOSAL_REHEARSAL` has durably completed as `BLOCKED`, when one canonical game requires compact transaction-path diagnosis rather than conversational repository archaeology.
@@ -478,7 +530,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census, the single census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. All other tracked Stage 2 repairs, cryptographic Gate 1 sealing, sealed apply, Preview, Owner Gate 2, merge, and Production proof remain outside the remote capability until separately productionized and tested.
+Remote Stage 2 capability is limited to the read-only census, the single census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. All other tracked Stage 2 repairs, sealed apply, Preview, Owner Gate 2, merge, and Production proof remain outside the remote capability until separately productionized and tested.
 
 ## 13. Mobile / ChatGPT operation
 
