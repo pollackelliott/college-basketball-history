@@ -373,6 +373,15 @@ def run_permanent_production_proof(
         checked = release_school.production_data_check(
             proof_repo, school, merge_sha, changed_paths
         )
+        required_public_json = {
+            "/data/manifest.json",
+            "/data/programs.json",
+            f"/data/teams/{school}.json",
+        }
+        require(
+            required_public_json.issubset(set(checked)),
+            "PRODUCTION_REQUIRED_PUBLIC_JSON_NOT_VERIFIED",
+        )
     require(
         release_school.git(repo, "ls-remote", "--heads", "origin", "main").split()[0]
         == merge_sha, "PRODUCTION_MAIN_MOVED_DURING_PROOF"
