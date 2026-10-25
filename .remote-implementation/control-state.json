@@ -63,7 +63,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/long-island-university/liu-release-production-proof-0002/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "5ea906363136fb40a0b19b9b5e284dfa929c2d4d667bf944c671f52036464689",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -73,7 +73,7 @@
     "production_deployment_id": 7316783578,
     "production_json_checked_count": 80,
     "protected_main_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "liu-release-production-proof-0002",
     "school_key": "long-island-university"
   },
