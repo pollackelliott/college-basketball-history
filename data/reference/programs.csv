@@ -22,7 +22,7 @@ bellarmine,Bellarmine,Bellarmine,Knights,Louisville,KY,#752936,#C8C8C8,Yes,No,,,
 belmont,Belmont,Belmont,Bruins,Nashville,TN,#C8102E,#00205B,Yes,No,,,,,
 bethune-cookman,Bethune-Cookman,Bethune-Cookman,Wildcats,Daytona Beach,FL,#6F263D,#F2A900,Yes,No,,,,,
 binghamton,Binghamton,Binghamton,Bearcats,Binghamton,NY,#005A43,#000000,Yes,No,,,,,
-boise-state,Boise State,Boise State,Broncos,Boise,ID,#0033A0,#D64309,Yes,No,,,,,
+boise-state,Boise State,Boise State,Broncos,Boise,ID,#0033A0,#D64309,Yes,No,1970-1971,OWNER_CONFIRMED,TOP_LEVEL_INTERVALS,Owner-confirmed Boise State accepted top-level scope: 1970-71+.,1970-71+
 boston-college,Boston College,Boston College,Eagles,Chestnut Hill,MA,#98002E,#BC9B61,Yes,Yes,1904-1905,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed repository top-level scope: Boston College INCEPTION+ from the 1904-1905 program inception.,
 boston-university,Boston University,Boston University,Terriers,Boston,MA,#A3011B,#FFFFFF,Yes,No,,,,,
 bowling-green,Bowling Green,Bowling Green,Falcons,Bowling Green,OH,#F35000,#4F2C1D,Yes,No,,,,,
