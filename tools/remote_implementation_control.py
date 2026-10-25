@@ -30,6 +30,8 @@ OP_STAGE2_GATE1_FILL = "STAGE2_GATE1_FILL"
 OP_STAGE2_PRESEAL_REHEARSAL = "STAGE2_PRESEAL_REHEARSAL"
 OP_STAGE2_GATE1_SEAL = "STAGE2_GATE1_SEAL"
 OP_STAGE2_SEALED_APPLY = "STAGE2_SEALED_APPLY"
+OP_RELEASE_READINESS = "RELEASE_READINESS"
+OP_RELEASE_PREVIEW_VERIFY = "RELEASE_PREVIEW_VERIFY"
 OP_STAGE2_RECONCILIATION_DIAGNOSTIC = "STAGE2_RECONCILIATION_DIAGNOSTIC"
 OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
@@ -42,6 +44,8 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_PRESEAL_REHEARSAL,
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
+    OP_RELEASE_READINESS,
+    OP_RELEASE_PREVIEW_VERIFY,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     OP_RECOVER,
 }
@@ -58,6 +62,8 @@ TX_STAGE2_GATE1_FILL_RUNNING = "STAGE2_GATE1_FILL_RUNNING"
 TX_STAGE2_PRESEAL_RUNNING = "STAGE2_PRESEAL_REHEARSAL_RUNNING"
 TX_STAGE2_GATE1_SEAL_RUNNING = "STAGE2_GATE1_SEAL_RUNNING"
 TX_STAGE2_DIAGNOSTIC_RUNNING = "STAGE2_RECONCILIATION_DIAGNOSTIC_RUNNING"
+TX_RELEASE_READINESS_RUNNING = "RELEASE_READINESS_RUNNING"
+TX_RELEASE_PREVIEW_RUNNING = "RELEASE_PREVIEW_RUNNING"
 TX_LOCKED = "LOCKED"
 TX_INPUTS_VERIFIED = "INPUTS_VERIFIED"
 TX_PREPARED = "PREPARED_NOT_PUBLISHED"
@@ -169,6 +175,8 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_STAGE2_PRESEAL_RUNNING,
             TX_STAGE2_GATE1_SEAL_RUNNING,
             TX_STAGE2_DIAGNOSTIC_RUNNING,
+            TX_RELEASE_READINESS_RUNNING,
+            TX_RELEASE_PREVIEW_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
             TX_PREPARED,
@@ -304,7 +312,29 @@ def validate_request(request: dict[str, Any]) -> None:
             "REQUEST_SEALED_APPLY_AUTHORITY_FORBIDDEN",
         )
     _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
+    # RELEASE_READINESS is inspection and final-gate rehearsal only. No PR,
+    # Preview, Owner Gate 2, or merge authority can be supplied by a request.
     _require(authority.get("release") is False, "REQUEST_RELEASE_AUTHORITY_FORBIDDEN")
+    if operation == OP_RELEASE_READINESS:
+        _require(
+            authority.get("release_readiness") is True,
+            "RELEASE_READINESS_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("release_readiness") is not True,
+            "REQUEST_RELEASE_READINESS_AUTHORITY_FORBIDDEN",
+        )
+    if operation == OP_RELEASE_PREVIEW_VERIFY:
+        _require(
+            authority.get("release_preview_verify") is True,
+            "RELEASE_PREVIEW_VERIFY_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("release_preview_verify") is not True,
+            "REQUEST_RELEASE_PREVIEW_AUTHORITY_FORBIDDEN",
+        )
 
     if operation in {OP_STAGE1, OP_PHASE0}:
         checkpoint = request.get("research_checkpoint")
@@ -790,6 +820,77 @@ def validate_request(request: dict[str, Any]) -> None:
             )
 
 
+    if operation == OP_RELEASE_READINESS:
+        for key in (
+            "phase0", "recovery", "stage2_census",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic",
+        ):
+            _require(
+                authority.get(key) is False,
+                "RELEASE_READINESS_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require(
+            request.get("target_branch") == f"data/{school_key}-onboarding",
+            "RELEASE_READINESS_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"), 40, "RELEASE_READINESS_TARGET_SHA_INVALID"
+        )
+        _validate_payload_ref(
+            request.get("stage2_apply_successor"),
+            "stage2_apply_successor",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("stage2_apply_verification"),
+            "stage2_apply_verification",
+            required=True,
+        )
+        for key in ("approved_plan_hash", "release_manifest_sha256"):
+            _require_sha(
+                request.get(key), 64,
+                "RELEASE_READINESS_%s_INVALID" % key.upper(),
+            )
+
+    if operation == OP_RELEASE_PREVIEW_VERIFY:
+        for key in (
+            "phase0", "recovery", "stage2_census",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+        ):
+            _require(
+                authority.get(key) is False,
+                "RELEASE_PREVIEW_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require(
+            request.get("target_branch") == f"data/{school_key}-onboarding",
+            "RELEASE_PREVIEW_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(request.get("target_sha"), 40, "RELEASE_PREVIEW_TARGET_SHA_INVALID")
+        _validate_payload_ref(
+            request.get("release_readiness_checkpoint"),
+            "release_readiness_checkpoint", required=True,
+        )
+        _validate_payload_ref(
+            request.get("release_readiness_verification"),
+            "release_readiness_verification", required=True,
+        )
+        for key in ("approved_plan_hash", "release_manifest_sha256"):
+            _require_sha(
+                request.get(key), 64,
+                "RELEASE_PREVIEW_%s_INVALID" % key.upper(),
+            )
+        pr_number = request.get("pr_number")
+        _require(
+            isinstance(pr_number, int) and 1 <= pr_number <= 2147483647,
+            "RELEASE_PREVIEW_PR_NUMBER_INVALID",
+        )
+
     if operation == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
         _require(
             authority.get("stage2_reconciliation_diagnostic") is True,
@@ -935,6 +1036,8 @@ def verify_request_predecessor(
             OP_STAGE2_PRESEAL_REHEARSAL,
             OP_STAGE2_GATE1_SEAL,
             OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
+            OP_RELEASE_READINESS,
+            OP_RELEASE_PREVIEW_VERIFY,
         }:
             _require(
                 recovery.get("target_branch") is None
@@ -976,6 +1079,8 @@ def begin_request(
         OP_STAGE2_PRESEAL_REHEARSAL,
         OP_STAGE2_GATE1_SEAL,
         OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
+        OP_RELEASE_READINESS,
+        OP_RELEASE_PREVIEW_VERIFY,
     }:
         result["lifecycle_state"] = LIFECYCLE_READ_ONLY
         if request["operation"] == OP_STAGE1:
@@ -990,6 +1095,10 @@ def begin_request(
             result["transaction_state"] = TX_STAGE2_PRESEAL_RUNNING
         elif request["operation"] == OP_STAGE2_GATE1_SEAL:
             result["transaction_state"] = TX_STAGE2_GATE1_SEAL_RUNNING
+        elif request["operation"] == OP_RELEASE_READINESS:
+            result["transaction_state"] = TX_RELEASE_READINESS_RUNNING
+        elif request["operation"] == OP_RELEASE_PREVIEW_VERIFY:
+            result["transaction_state"] = TX_RELEASE_PREVIEW_RUNNING
         else:
             result["transaction_state"] = TX_STAGE2_DIAGNOSTIC_RUNNING
         result["active_lock_owner"] = None
