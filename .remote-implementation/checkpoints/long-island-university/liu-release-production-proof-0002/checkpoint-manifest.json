@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "59f7508e25c1499ad07b7bfc412a9cdf4a816a65",
+  "merge_parent_onboarding": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "merge_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "226686c5d11bc12fe78e07ef613a7c52ce2b7ee586836336b43137963a498b03",
+  "owner_gate_2_verification_sha256": "d69d8972973f29a815dda95fe1cf9b8c81f15ef581503d5623884dc0cd1d612a",
+  "pr_head_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "pr_number": 367,
+  "production_deployment_id": 7316783578,
+  "production_json_checked_count": 80,
+  "production_proof": true,
+  "production_proof_sha256": "8f61afcf27c1524e5fdc0404c453f4765dfb4c47b9ccd0becbdcbf4e23d87821",
+  "protected_main_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+  "request_id": "liu-release-production-proof-0002",
+  "request_sha256": "7012543c19ed5b76f86f705b426181fe9fb6906b949365d25044a0c76f2b15a3",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "status": "PRODUCTION_PROOF_PASS"
+}
