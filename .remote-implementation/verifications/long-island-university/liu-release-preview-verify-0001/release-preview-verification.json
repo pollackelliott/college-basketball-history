@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "66d715962038a601346c260274b945dedb82719f8bcdd130e344974fbda791ab",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "pr_number": 367,
+  "preview_deployment_id": 7306788588,
+  "preview_deployment_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "preview_url": "https://college-basketball-history-bxrz17y4c-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "b3cdaee2c8306fda1c51a4247028bf58c9e03531",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "liu-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498"
+}
