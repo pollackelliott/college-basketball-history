@@ -244,5 +244,86 @@ class LiveProductionProofTests(unittest.TestCase):
                 prod.approve_exact_gate2(request, MAIN, repo=ROOT)
 
 
+class PermanentProductionReplayTests(unittest.TestCase):
+    def test_exact_merge_runs_permanent_gates_and_production_json(self):
+        request = req(OP_RELEASE_PRODUCTION_PROOF)
+        authority = {
+            "owner_gate_2_approval_checkpoint_sha256": HASH,
+            "owner_gate_2_verification_sha256": HASH,
+        }
+        original = {
+            "pr_number": PR, "pr_head_sha": HEAD,
+            "merge_sha": MERGE, "merge_parent_main": MAIN,
+            "merge_parent_onboarding": HEAD,
+        }
+        def command(_repo, *args):
+            if args[0] == "diff":
+                return "site/data/teams/example-school.json\\nsite/data/programs.json\\n"
+            if args[0] == "ls-remote":
+                return MERGE + " refs/heads/main"
+            raise AssertionError(args)
+        deployment = {
+            "deployment_id": 500, "sha": MERGE,
+            "state": "success", "environment": "Production",
+        }
+        with (
+            patch.object(prod, "verify_exact_merge", return_value=original),
+            patch.object(prod.release_school, "git", side_effect=command),
+            patch.object(prod.release_school, "repository_slug", return_value="example/repo"),
+            patch.object(prod.release_school, "create_production_proof_repository") as checkout,
+            patch.object(prod.release_school, "run_gates") as gates,
+            patch.object(prod.release_school, "wait_for_deployment", return_value=deployment) as get_deploy,
+            patch.object(prod.release_school, "production_data_check", return_value=[
+                "/data/manifest.json", "/data/programs.json", "/data/teams/example-school.json"
+            ]) as compare,
+        ):
+            result = prod.run_permanent_production_proof(
+                request, authority, repo=ROOT,
+            )
+            self.assertEqual(result["status"], "COMPLETE")
+            self.assertEqual(result["production_deployment_sha"], MERGE)
+            self.assertEqual(result["production_json_checked_count"], 3)
+            checkout.assert_called_once()
+            gates.assert_called_once()
+            get_deploy.assert_called_once()
+            self.assertEqual(compare.call_count, 1)
+            self.assertFalse(any("merge" in str(arg) for arg in checkout.call_args.args))
+
+    def test_wrong_or_failed_production_deployment_is_refused(self):
+        request = req(OP_RELEASE_PRODUCTION_PROOF)
+        authority = {
+            "owner_gate_2_approval_checkpoint_sha256": HASH,
+            "owner_gate_2_verification_sha256": HASH,
+        }
+        merge = {
+            "pr_number": PR, "pr_head_sha": HEAD, "merge_sha": MERGE,
+            "merge_parent_main": MAIN, "merge_parent_onboarding": HEAD,
+        }
+        for sha, status, environment in (
+            (HEAD, "success", "Production"),
+            (MERGE, "failure", "Production"),
+            (MERGE, "success", "Preview"),
+        ):
+            with self.subTest(sha=sha, status=status, environment=environment):
+                with (
+                    patch.object(prod, "verify_exact_merge", return_value=merge),
+                    patch.object(prod.release_school, "git", return_value="site/data/teams/example-school.json"),
+                    patch.object(prod.release_school, "create_production_proof_repository"),
+                    patch.object(prod.release_school, "run_gates"),
+                    patch.object(prod.release_school, "repository_slug", return_value="example/repo"),
+                    patch.object(
+                        prod.release_school, "wait_for_deployment",
+                        return_value={
+                            "deployment_id": 1, "sha": sha,
+                            "state": status, "environment": environment,
+                        }
+                    ),
+                ):
+                    with self.assertRaisesRegex(prod.Stop, "PRODUCTION_EXACT_DEPLOYMENT_MISMATCH"):
+                        prod.run_permanent_production_proof(
+                            request, authority, repo=ROOT,
+                        )
+
+
 if __name__ == "__main__":
     unittest.main()
