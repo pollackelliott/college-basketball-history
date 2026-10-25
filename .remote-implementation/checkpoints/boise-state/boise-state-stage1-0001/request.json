@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-stage1-0001",
+  "school_key": "boise-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "c549b1079b7ef888a91208784ffb73e994366cc3",
+  "previous_control_state_sha256": "d04f5a5871f38e083b3ba1fd71ebddac4fe845ad7b8a9ac97fab1b159a0809c9",
+  "expected_protected_main_sha": "4ad8792c5f301d375e2baf20e41a2546523c7e11",
+  "research_checkpoint": {
+    "sha256": "ffb3d0c7ef434cd48f9ee5b9df016b607eeba26b27c856fb81810254a2b9c0de",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "acc89d7d1fd39a5e4dff7ad736bd39f7e3a5840a",
+      "path_prefix": ".remote-implementation/inputs/boise-state-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 8
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized resuming Boise State Implementation Stage 1 from the authenticated Research Freeze intake boundary, transporting the exact accepted six-file ZIP and submitting one bounded read-only STAGE1_INVENTORY request only. No Phase 0, Stage 2, owner-gate, shared-global mutation, recovery, release, or other-school authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
