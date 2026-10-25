@@ -1,0 +1,29 @@
+{
+  "action_counts": {
+    "ENABLE_PUBLIC_PAGE": 1,
+    "KEEP_CANONICAL": 4,
+    "USE_SOURCE": 1,
+    "VERIFY_REFERENCE_VALUES": 1
+  },
+  "approved_plan_hash_preview": "f6cf52cd7b4dbcccc78753c46b1d2e4ac300507e02ae2fa1bb642e9daf8322c5",
+  "decision_count": 7,
+  "decision_id_set_sha256": "7f89aa7ed850ccbc7d7017f92ed97130129aea8193829c82276d135bdac284a9",
+  "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
+  "filled_review_sha256": "e844bc4064d402c2977d33a82cbebe6567afc6a18fa6dc13fbce070132fda4a2",
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION",
+  "owner_gate_1_approval_sha256": "f26a8157a977ac364c31be22dd5f1907f821375372cb68b6854078c476a7a8d1",
+  "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "recommendation_map_sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e",
+  "remote_stage2_gate1_fill_equivalence": "PASS",
+  "request_id": "boise-state-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "stage2_proposal_checkpoint_sha256": "cfffbf303bb7568ba90ff807fa51dd3cbeebe7b1181416b2c539857a31ec93fb",
+  "stage2_proposal_verification_sha256": "695e94806cea09fe5b25cc07265b77201f06b73e5cc93f2a3a8a73b6862b3c72",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
+  "target_tree_sha": "1933062342792cbe8be76a688ab5a9c31fe8a7af",
+  "tracked_stage2_mutation": "NONE"
+}
