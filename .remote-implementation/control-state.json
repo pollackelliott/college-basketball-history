@@ -27,7 +27,7 @@
     "boise-state-phase0-0001"
   ],
   "active_expected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
-  "active_lock_commit": null,
+  "active_lock_commit": "f7e80e67f74a89f6f3404b5cedaab67740b4ccf5",
   "active_lock_owner": "github-actions:40230110205:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
