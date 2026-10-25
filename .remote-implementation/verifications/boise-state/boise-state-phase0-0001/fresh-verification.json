@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+  "prepared_parent_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "prepared_tree_sha": "3f87f63487ae0508220907ecdacbe09a939a3f25",
+  "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "boise-state-phase0-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c"
+}

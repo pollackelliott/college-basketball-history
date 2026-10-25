@@ -67,11 +67,11 @@
   "current_sequence": 22,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
     "operation": "PHASE0",
     "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "boise-state-phase0-0001",
     "school_key": "boise-state",
     "successor_manifest_path": ".remote-implementation/successors/boise-state/boise-state-phase0-0001/successor-manifest.json",
