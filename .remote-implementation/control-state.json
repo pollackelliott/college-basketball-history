@@ -38,7 +38,7 @@
   "active_request_sha256": "2681cb2320c2edf626bd7270502a1a04d617a1addc0052c215c2e1c39b77c345",
   "active_school_key": "boise-state",
   "active_target_branch": "data/boise-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "9eb70a1176fd3adda34bebf39caf59065a76db93",
   "active_writeahead_path": ".remote-implementation/writeahead/boise-state/boise-state-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "c3d64175d1c133138822652c84ec991475605d2d23db76d914340e2bb30922fe",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
