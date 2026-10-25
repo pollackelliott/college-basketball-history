@@ -27,6 +27,7 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
+    OP_RELEASE_PREVIEW_VERIFY,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     abandon_active,
@@ -98,6 +99,10 @@ from remote_implementation_stage2_apply import (
     run_sealed_apply_tool,
     verify_prepared_sealed_apply,
     verify_stage2_sealed_apply_authority,
+)
+from remote_implementation_release_preview import (
+    verify_release_preview_authority,
+    verify_pr_checks_and_preview,
 )
 from remote_implementation_release_readiness import (
     verify_release_readiness_authority,
@@ -2569,6 +2574,131 @@ def run_read_only_release_readiness(
     print("REMOTE RELEASE READINESS: PASS checkpoint_commit=%s" % commit)
 
 
+def run_read_only_release_preview(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    """Authenticated external PR, exact CI and Preview; Gate 2 is not approved."""
+    authority = verify_release_preview_authority(
+        request, predecessor_commit, source_repo=ROOT
+    )
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("RELEASE_PREVIEW_TARGET_CHANGED_BEFORE_REQUEST")
+    active = begin_request(
+        state, request, sha256_bytes(request_bytes),
+        run_id=os.environ.get("GITHUB_RUN_ID", "local"),
+        run_attempt=os.environ.get("GITHUB_RUN_ATTEMPT", "1"),
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted_commit = commit_control(
+        request_commit,
+        "accept read-only release Preview %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    # The PR was created/reused by the school lane's GitHub connector, NOT by
+    # an Actions GITHUB_TOKEN that suppresses CI workflow triggers.
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"], request["target_sha"], request["school_key"]
+    )
+    result = verify_pr_checks_and_preview(
+        worktree,
+        pr_number=request["pr_number"],
+        target_branch=authority["target_branch"],
+        target_sha=authority["target_sha"],
+        exact_pr_body_sha256=authority["pr_body_sha256"],
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("RELEASE_PREVIEW_TARGET_MOVED_AFTER_CHECKS")
+
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+    result.update({
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "readiness_request_id": authority["readiness_request_id"],
+        "readiness_checkpoint_sha256": authority["readiness_checkpoint_sha256"],
+        "readiness_verification_sha256": authority["readiness_verification_sha256"],
+        "approved_plan_hash": request["approved_plan_hash"],
+        "release_manifest_sha256": request["release_manifest_sha256"],
+    })
+    write_json(directory / "preview-proof.json", result)
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_CHECKPOINT",
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "approved_plan_hash": request["approved_plan_hash"],
+        "release_manifest_sha256": request["release_manifest_sha256"],
+        "release_readiness_checkpoint_path": request["release_readiness_checkpoint"]["path"],
+        "release_readiness_checkpoint_sha256": request["release_readiness_checkpoint"]["sha256"],
+        "release_readiness_verification_path": request["release_readiness_verification"]["path"],
+        "release_readiness_verification_sha256": request["release_readiness_verification"]["sha256"],
+        "pr_number": result["pr_number"],
+        "pr_url": result["pr_url"],
+        "pr_head_sha": result["target_sha"],
+        "pr_body_sha256": result["pr_body_sha256"],
+        "preview_url": result["preview_url"],
+        "preview_deployment_id": result["preview_deployment_id"],
+        "preview_deployment_sha": result["preview_deployment_sha"],
+        "preview_proof_sha256": sha256_file(directory / "preview-proof.json"),
+        "gate2_status": "OWNER_GATE_2_READY",
+        "owner_gate_2_approved": False,
+        "merged": False,
+        "production_proof": False,
+        "authority_statement": (
+            "Exact PR-head checks, mergeability and Preview verified. "
+            "This is technical readiness only. Owner Gate 2 approval is "
+            "absent; merge and Production proof remain forbidden."
+        ),
+    }
+    manifest_path = directory / "checkpoint-manifest.json"
+    write_json(manifest_path, manifest)
+    final_state = finalize_success(
+        active,
+        request_id=request["request_id"],
+        last_operation={
+            "operation": OP_RELEASE_PREVIEW_VERIFY,
+            "request_id": request["request_id"],
+            "school_key": request["school_key"],
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "checkpoint_manifest_path": manifest_path.as_posix(),
+            "checkpoint_manifest_sha256": sha256_file(manifest_path),
+            "pr_number": result["pr_number"],
+            "pr_head_sha": result["target_sha"],
+            "preview_deployment_id": result["preview_deployment_id"],
+            "preview_url": result["preview_url"],
+            "gate2_status": "OWNER_GATE_2_READY",
+            "owner_gate_2_approved": False,
+            "fresh_runner_verification": "PENDING",
+            "remote_release_preview_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    commit = commit_control(
+        accepted_commit,
+        "checkpoint exact PR-head Preview %s" % request["request_id"],
+        [STATE_PATH, directory],
+    )
+    print("REMOTE PR/PREVIEW: OWNER_GATE_2_READY checkpoint_commit=%s" % commit)
+
+
 def run_phase0(
     state: dict[str, Any],
     request: dict[str, Any],
@@ -3384,6 +3514,11 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_RELEASE_PREVIEW_VERIFY:
+            run_read_only_release_preview(
+                state, request, request_bytes, request_commit,
+                predecessor_commit, live_main,
             )
         elif request["operation"] == OP_RELEASE_READINESS:
             run_read_only_release_readiness(
