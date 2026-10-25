@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-stage2-sealed-apply-0001",
+  "school_key": "boise-state",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "c8c61b0ee02d2dd6db8df4cf3deb16a3db8f6c5f",
+  "previous_control_state_sha256": "c9e2475930ff74ae1ab7b60606c2227e30216aff5c5eeabd25f9ecc41c6d6fae",
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner said Proceed after the exact Boise State Gate 1 seal was fresh-verified. This authorizes exactly one bounded remote STAGE2_SEALED_APPLY against boise-state-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. It creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  },
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "3fe29d315744afbd47d7098d16af66cdd43543ee17ef16dd51cfd51a1a0130c7"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "d6158b45d8f137a625afdd1f1fb269a148952052f75bd16a2be7c92e7be19f66"
+  },
+  "approved_plan_hash": "b76b1e2c5e5e1969fb59890ad68805f93a015a822d01ae7eee6d388d6b483db3",
+  "approved_plan_sha256": "55e238d97eb834d769be479a81954634a567e2d6294df2724bbd413a15cad6fd",
+  "owner_gate_1_approval_sha256": "f26a8157a977ac364c31be22dd5f1907f821375372cb68b6854078c476a7a8d1",
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
+  "recommendation_map_sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e",
+  "filled_review_sha256": "e844bc4064d402c2977d33a82cbebe6567afc6a18fa6dc13fbce070132fda4a2",
+  "decision_id_set_sha256": "7f89aa7ed850ccbc7d7017f92ed97130129aea8193829c82276d135bdac284a9"
+}
