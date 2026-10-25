@@ -76,6 +76,8 @@ TX_PREPARED = "PREPARED_NOT_PUBLISHED"
 TX_PUBLISHED = "PUBLISHED_NOT_FINALIZED"
 TX_COMPLETE = "COMPLETE"
 TX_DIVERGED = "DIVERGED_STOP"
+TX_ABANDONED_NOT_ATTEMPTED = "ABANDONED_NOT_ATTEMPTED"
+TX_ABANDONED_PREPARED = "ABANDONED_PREPARED_NOT_PUBLISHED"
 
 MUTATION_NOT_ATTEMPTED = "NOT_ATTEMPTED"
 MUTATION_PREPARED = "PREPARED_NOT_PUBLISHED"
@@ -191,6 +193,8 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_PUBLISHED,
             TX_COMPLETE,
             TX_DIVERGED,
+            TX_ABANDONED_NOT_ATTEMPTED,
+            TX_ABANDONED_PREPARED,
         },
         "CONTROL_TRANSACTION_STATE_INVALID",
     )
@@ -198,6 +202,38 @@ def validate_control_state(state: dict[str, Any]) -> None:
         values = state.get(key)
         _require(isinstance(values, list), f"CONTROL_{key.upper()}_INVALID")
         _require(len(values) == len(set(values)), f"CONTROL_{key.upper()}_DUPLICATE")
+    # Abandonment is a valid terminal transaction, but only with matching durable
+    # RECOVER provenance. It is not an escape hatch for an active control lock.
+    abandoned_classifications = {
+        TX_ABANDONED_NOT_ATTEMPTED: MUTATION_NOT_ATTEMPTED,
+        TX_ABANDONED_PREPARED: MUTATION_PREPARED,
+    }
+    classification = abandoned_classifications.get(state["transaction_state"])
+    if classification is not None:
+        _require(
+            state["lifecycle_state"] == LIFECYCLE_IDLE,
+            "ABANDONED_TRANSACTION_NOT_IDLE",
+        )
+        last = state.get("last_operation")
+        _require(
+            isinstance(last, dict)
+            and last.get("operation") == OP_RECOVER
+            and last.get("disposition") == state["transaction_state"],
+            "ABANDONED_TRANSACTION_RECOVERY_DISPOSITION_INVALID",
+        )
+        recovered_id = last.get("recovered_request_id")
+        _require(
+            recovered_id in state["abandoned_request_ids"],
+            "ABANDONED_TRANSACTION_REQUEST_NOT_RECORDED",
+        )
+        recovery_manifest = last.get("recovery_manifest")
+        _require(
+            isinstance(recovery_manifest, dict)
+            and recovery_manifest.get("mutation_classification") == classification
+            and recovery_manifest.get("recovered_request_id") == recovered_id
+            and recovery_manifest.get("request_id") in state["consumed_request_ids"],
+            "ABANDONED_TRANSACTION_MANIFEST_INVALID",
+        )
     active = state.get("active_request_id")
     if state.get("lifecycle_state") == LIFECYCLE_IDLE:
         _require(active is None, "IDLE_CONTROL_HAS_ACTIVE_REQUEST")
@@ -1306,6 +1342,7 @@ def abandon_active(
     }
     result = clear_active(result)
     result["transaction_state"] = disposition
+    validate_control_state(result)
     return result
 
 

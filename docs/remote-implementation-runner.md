@@ -643,6 +643,15 @@ A recovery request must bind the exact active request and exact lock commit. It 
 - `DIVERGED_STOP`: fail closed. Do not reset, overwrite, or guess.
 - stale recovery authority is refused.
 
+A successful abandonment leaves the global lifecycle `IDLE` with a durable
+`transaction_state` of `ABANDONED_NOT_ATTEMPTED` or
+`ABANDONED_PREPARED_NOT_PUBLISHED`, not an invented `COMPLETE` result. Both
+are valid only with matching `RECOVER` last-operation evidence, a recorded
+abandoned original request, a consumed recovery request, and a matching
+mutation classification in the immutable recovery manifest. The fresh verifier
+may then report the ordinary Phase 0 check as not applicable. Do not rewrite
+historical recovery checkpoints simply to normalize the transaction label.
+
 Another school may not enter while the global control is not IDLE.
 
 ## 12. Permissions and protected main

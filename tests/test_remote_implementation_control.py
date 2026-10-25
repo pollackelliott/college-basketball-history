@@ -20,6 +20,9 @@ from remote_implementation_control import (  # noqa: E402
     MUTATION_PUBLISHED,
     OP_PHASE0,
     OP_RECOVER,
+    OP_RELEASE_PRODUCTION_PROOF,
+    TX_ABANDONED_NOT_ATTEMPTED,
+    TX_ABANDONED_PREPARED,
     OP_STAGE1,
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
@@ -509,13 +512,93 @@ class RemoteImplementationControlTests(unittest.TestCase):
         recovered = abandon_active(
             state,
             recovery_request_id="recovery-001",
-            disposition="ABANDONED_PREPARED_NOT_PUBLISHED",
-            recovery_manifest={"classification": MUTATION_PREPARED},
+            disposition=TX_ABANDONED_PREPARED,
+            recovery_manifest={
+                "request_id": "recovery-001",
+                "recovered_request_id": "request-old",
+                "mutation_classification": MUTATION_PREPARED,
+            },
         )
         self.assertEqual(recovered["lifecycle_state"], LIFECYCLE_IDLE)
         self.assertIn("request-old", recovered["abandoned_request_ids"])
         self.assertIn("recovery-001", recovered["consumed_request_ids"])
         self.assertFalse(recovered["recovery_required"])
+        self.assertEqual(recovered["transaction_state"], TX_ABANDONED_PREPARED)
+        validate_control_state(recovered)
+
+    def test_read_only_production_proof_recovery_is_valid_and_reusable(self):
+        # Regression: LIU's exact-merge Production proof failed before any
+        # tracked mutation, then RECOVER abandoned its read-only request.
+        failed_request = request(OP_RELEASE_PRODUCTION_PROOF, "liu-production-proof")
+        active = begin_request(
+            initial_control_state(),
+            failed_request,
+            "7" * 64,
+            run_id="40162480066",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        self.assertIsNone(active["active_lock_commit"])
+        self.assertIsNone(active["active_target_branch"])
+        manifest = {
+            "request_id": "liu-production-proof-recover",
+            "recovered_request_id": "liu-production-proof",
+            "mutation_classification": MUTATION_NOT_ATTEMPTED,
+            "lock_commit": None,
+            "target_branch": None,
+            "actual_target_sha": None,
+            "protected_main_sha": MAIN,
+        }
+        recovered = abandon_active(
+            active,
+            recovery_request_id="liu-production-proof-recover",
+            disposition=TX_ABANDONED_NOT_ATTEMPTED,
+            recovery_manifest=manifest,
+        )
+        validate_control_state(recovered)
+        self.assertEqual(recovered["lifecycle_state"], LIFECYCLE_IDLE)
+        self.assertEqual(recovered["transaction_state"], TX_ABANDONED_NOT_ATTEMPTED)
+        self.assertIsNone(recovered["active_request_id"])
+        self.assertFalse(recovered["recovery_required"])
+        self.assertIn("liu-production-proof", recovered["abandoned_request_ids"])
+        self.assertIn("liu-production-proof-recover", recovered["consumed_request_ids"])
+        successor = begin_request(
+            recovered,
+            request(OP_RELEASE_PRODUCTION_PROOF, "liu-production-proof-002"),
+            "9" * 64,
+            run_id="40200000000",
+            run_attempt="1",
+            request_commit="a" * 40,
+        )
+        self.assertEqual(successor["active_request_id"], "liu-production-proof-002")
+        self.assertEqual(successor["lifecycle_state"], "READ_ONLY_ACTIVE")
+
+    def test_abandoned_transaction_dispositions_fail_closed(self):
+        state = initial_control_state()
+        state["transaction_state"] = TX_ABANDONED_NOT_ATTEMPTED
+        with self.assertRaisesRegex(RemoteImplementationError, "ABANDONED_TRANSACTION_RECOVERY_DISPOSITION_INVALID"):
+            validate_control_state(state)
+
+        state["last_operation"] = {
+            "operation": OP_RECOVER,
+            "recovered_request_id": "old",
+            "disposition": TX_ABANDONED_NOT_ATTEMPTED,
+            "recovery_manifest": {
+                "request_id": "recovery",
+                "recovered_request_id": "old",
+                "mutation_classification": MUTATION_NOT_ATTEMPTED,
+            },
+        }
+        with self.assertRaisesRegex(RemoteImplementationError, "ABANDONED_TRANSACTION_REQUEST_NOT_RECORDED"):
+            validate_control_state(state)
+        state["abandoned_request_ids"].append("old")
+        with self.assertRaisesRegex(RemoteImplementationError, "ABANDONED_TRANSACTION_MANIFEST_INVALID"):
+            validate_control_state(state)
+        state["consumed_request_ids"].append("recovery")
+        validate_control_state(state)
+        state["lifecycle_state"] = "READ_ONLY_ACTIVE"
+        with self.assertRaisesRegex(RemoteImplementationError, "ABANDONED_TRANSACTION_NOT_IDLE"):
+            validate_control_state(state)
 
     def test_mutation_classification_not_attempted(self):
         self.assertEqual(
