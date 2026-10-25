@@ -25,18 +25,19 @@
     "boise-state-stage1-0001",
     "boise-state-stage1-0002",
     "boise-state-phase0-0001",
-    "boise-state-stage2-census-0001"
+    "boise-state-stage2-census-0001",
+    "boise-state-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40231352702:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "boise-state-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "2681cb2320c2edf626bd7270502a1a04d617a1addc0052c215c2e1c39b77c345",
+  "active_school_key": "boise-state",
+  "active_target_branch": "data/boise-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -83,8 +84,11 @@
     "target_branch": "data/boise-state-onboarding",
     "target_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40231352702",
+  "lock_acquisition_request_commit": "e95d90f4904d4bfcca2e9e3596a2b32014c97ced",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

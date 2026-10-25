@@ -1,0 +1,41 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "recovery": false,
+    "release": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said Proceed after independently verified Boise State Stage 2 census BLOCKED on the single historical opponent-display conflict, authorizing exactly one bounded STAGE2_OPPONENT_DISPLAY_NORMALIZE operation against that census. No Phase 0, recovery, recommendation map, proposal rehearsal, Owner Gate 1/2, sealed apply, Preview, merge, Production, release, unrelated opponent cleanup, or other Stage 2 mutation authority.",
+    "origin": "ChatGPT"
+  },
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "ca9ab842bc61fba4dfb6e2a8695b8c45cb8dfba9",
+  "previous_control_state_sha256": "3ce19697da034c3d0e7973ec0633e0619212cde6af98e82552382e15bc2822c1",
+  "request_id": "boise-state-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "63e0377a9a63090485f53266880e56186899faec6b1e13106f43206f8cf16e48"
+  },
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c"
+}
