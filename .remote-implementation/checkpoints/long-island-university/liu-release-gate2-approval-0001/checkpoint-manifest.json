@@ -1,0 +1,23 @@
+{
+  "approval_proof_sha256": "63d82d5f3c41c8dc853a075b6f749ea13007e8289a90c5aec9a77a07a3902f80",
+  "approved_plan_hash": "7ed1c916f96d5b01016b9b1df56e1a82f4c0505802ed9654c086289a605f6e5f",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "pr_number": 367,
+  "preview_checkpoint_sha256": "66d715962038a601346c260274b945dedb82719f8bcdd130e344974fbda791ab",
+  "preview_deployment_id": 7306788588,
+  "preview_url": "https://college-basketball-history-bxrz17y4c-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "179248e2fe9ad09d9b1bf1eaaa8aaad1caf38c162525f25099945d897ebe8151",
+  "production_proof": false,
+  "protected_main_sha": "59f7508e25c1499ad07b7bfc412a9cdf4a816a65",
+  "release_manifest_sha256": "1d8ce94e1437b571a046b0497ecaedd47512cf5d33eb7ced49ea4e536fa5c3f0",
+  "request_id": "liu-release-gate2-approval-0001",
+  "request_sha256": "0469f8937c5e663a0077696735009078300975d8469e94579b7aef7038aa6047",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498"
+}

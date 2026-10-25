@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "liu-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "school_key": "long-island-university",
+  "previous_control_state_commit": "2381d440ad00eeb36f240523f7e3b30db7d96e4e",
+  "previous_control_state_sha256": "a8661502af39d3df3220e0fd1deb6056d8e7af9641de8bd93bf4b7fe8e9316cc",
+  "expected_protected_main_sha": "59f7508e25c1499ad07b7bfc412a9cdf4a816a65",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "pr_number": 367,
+  "approved_plan_hash": "7ed1c916f96d5b01016b9b1df56e1a82f4c0505802ed9654c086289a605f6e5f",
+  "release_manifest_sha256": "1d8ce94e1437b571a046b0497ecaedd47512cf5d33eb7ced49ea4e536fa5c3f0",
+  "preview_deployment_id": 7306788588,
+  "preview_url": "https://college-basketball-history-bxrz17y4c-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "66d715962038a601346c260274b945dedb82719f8bcdd130e344974fbda791ab"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/long-island-university/liu-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "179248e2fe9ad09d9b1bf1eaaa8aaad1caf38c162525f25099945d897ebe8151"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “I do approve the preview.”",
+    "preview_checkpoint_sha256": "66d715962038a601346c260274b945dedb82719f8bcdd130e344974fbda791ab",
+    "preview_verification_sha256": "179248e2fe9ad09d9b1bf1eaaa8aaad1caf38c162525f25099945d897ebe8151",
+    "pr_number": 367,
+    "pr_head_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+    "preview_deployment_id": 7306788588,
+    "preview_url": "https://college-basketball-history-bxrz17y4c-elliott-pollacks-projects.vercel.app"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly approved Owner Gate 2 for exact PR #367 head 38ad43f63fcc852bf927501338dc9d24f4ea2498 and Preview deployment 7306788588 at the bound Preview URL, stating: “I do approve the preview.” This request records only that exact approval and grants no merge execution, Production mutation, Stage 2 mutation, or unrelated release authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
+    "release_production_proof": false
+  }
+}
