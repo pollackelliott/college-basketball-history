@@ -117,5 +117,111 @@ class ExactPreviewVerificationTests(unittest.TestCase):
                     )
 
 
+class PriorReadinessAuthorityTests(unittest.TestCase):
+    def setup_storage(self):
+        import json
+        rid = "example-release-readiness-0001"
+        school = "example-school"
+        ckpt = (
+            ".remote-implementation/checkpoints/"
+            + school + "/" + rid + "/checkpoint-manifest.json"
+        )
+        verify = (
+            ".remote-implementation/verifications/"
+            + school + "/" + rid + "/release-readiness-verification.json"
+        )
+        prior_path = (
+            ".remote-implementation/checkpoints/"
+            + school + "/" + rid + "/request.json"
+        )
+        prior = {"request_id": rid, "operation": "RELEASE_READINESS"}
+        prior_bytes = (json.dumps(prior, sort_keys=True) + "\\n").encode()
+        base = {
+            "request_id": rid, "school_key": school, "target_branch": BRANCH,
+            "target_sha": SHA, "approved_plan_hash": "e" * 64,
+            "release_manifest_sha256": "f" * 64,
+        }
+        check = {
+            **base,
+            "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_CHECKPOINT",
+            "request_sha256": hashlib.sha256(prior_bytes).hexdigest(),
+            "protected_main_sha": "0" * 40,
+            "readiness_status": "RELEASE_READINESS_PASS",
+            "tracked_mutation": "NONE", "pr_created": False, "owner_gate_2": False,
+        }
+        ckpt_bytes = (json.dumps(check, sort_keys=True) + "\\n").encode()
+        ver = {
+            **base,
+            "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+            "checkpoint_manifest_sha256": hashlib.sha256(ckpt_bytes).hexdigest(),
+            "remote_release_readiness_equivalence": "PASS",
+            "tracked_mutation": "NONE", "pr_created": False, "owner_gate_2": False,
+        }
+        ver_bytes = (json.dumps(ver, sort_keys=True) + "\\n").encode()
+        request = {
+            "school_key": school, "target_branch": BRANCH, "target_sha": SHA,
+            "expected_protected_main_sha": "1" * 40,
+            "approved_plan_hash": "e" * 64,
+            "release_manifest_sha256": "f" * 64,
+            "release_readiness_checkpoint": {
+                "path": ckpt, "sha256": hashlib.sha256(ckpt_bytes).hexdigest(),
+            },
+            "release_readiness_verification": {
+                "path": verify, "sha256": hashlib.sha256(ver_bytes).hexdigest(),
+            },
+        }
+        return request, {ckpt: ckpt_bytes, verify: ver_bytes, prior_path: prior_bytes}
+
+    def authenticate(self, request, storage, *, ancestry=0):
+        with patch.object(
+            preview, "git_show_bytes",
+            side_effect=lambda _commit, path, **_: storage[path],
+        ):
+            with patch.object(preview, "git") as git:
+                with patch.object(preview, "remote_head", return_value=SHA):
+                    with patch.object(
+                        preview, "verify_release_readiness_authority",
+                    ) as earlier:
+                        git.return_value.returncode = ancestry
+                        earlier.return_value = {
+                            "target_sha": SHA,
+                            "approved_plan_hash": "e" * 64,
+                            "release_manifest_sha256": "f" * 64,
+                            "sidecars": {"pr-body.md": BODY.encode()},
+                        }
+                        return preview.verify_release_preview_authority(
+                            request, "2" * 40, source_repo=ROOT,
+                        )
+
+    def test_exact_fresh_readiness_chain(self):
+        request, store = self.setup_storage()
+        result = self.authenticate(request, store)
+        self.assertEqual(result["pr_body_sha256"], BODY_SHA)
+        self.assertEqual(result["readiness_request_id"], "example-release-readiness-0001")
+
+    def test_reject_tampered_checkpoint(self):
+        request, store = self.setup_storage()
+        path = request["release_readiness_checkpoint"]["path"]
+        store[path] += b"tampered"
+        with self.assertRaisesRegex(Stop, "CHECKPOINT_HASH_MISMATCH"):
+            self.authenticate(request, store)
+
+    def test_reject_incomplete_fresh_equivalence(self):
+        import json
+        request, store = self.setup_storage()
+        path = request["release_readiness_verification"]["path"]
+        doc = json.loads(store[path])
+        doc["remote_release_readiness_equivalence"] = "PENDING"
+        store[path] = (json.dumps(doc, sort_keys=True) + "\\n").encode()
+        request["release_readiness_verification"]["sha256"] = hashlib.sha256(store[path]).hexdigest()
+        with self.assertRaisesRegex(Stop, "EQUIVALENCE_MISMATCH"):
+            self.authenticate(request, store)
+
+    def test_reject_unrelated_current_main(self):
+        request, store = self.setup_storage()
+        with self.assertRaisesRegex(Stop, "NOT_DESCENDANT"):
+            self.authenticate(request, store, ancestry=1)
+
+
 if __name__ == "__main__":
     unittest.main()
