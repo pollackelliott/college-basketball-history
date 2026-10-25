@@ -34,7 +34,7 @@
     "boise-state-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
-  "active_lock_commit": null,
+  "active_lock_commit": "9541ae9fcc9e2a2955b75534a6fe1f2f70eca69d",
   "active_lock_owner": "github-actions:40245641375:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
