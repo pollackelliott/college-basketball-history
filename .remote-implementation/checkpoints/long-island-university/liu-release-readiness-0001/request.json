@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "liu-release-readiness-0001",
+  "school_key": "long-island-university",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "1791d1cf4fb16edf009f07c17117162b83f66b47",
+  "previous_control_state_sha256": "1a9870387d32898b5de0ab4579607af322eb1d6d8c7db7d6c21c6a8a04516da8",
+  "expected_protected_main_sha": "b3cdaee2c8306fda1c51a4247028bf58c9e03531",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/long-island-university/liu-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "2eb0a8559d9ce7687268de8711660b64d6b7069963a361aa165434639f22e63e"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/long-island-university/liu-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "3f9b449887218e4306706471f0cc3a893cd2673f296bbf517cb6972327cea69b"
+  },
+  "approved_plan_hash": "7ed1c916f96d5b01016b9b1df56e1a82f4c0505802ed9654c086289a605f6e5f",
+  "release_manifest_sha256": "1d8ce94e1437b571a046b0497ecaedd47512cf5d33eb7ced49ea4e536fa5c3f0",
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized the existing LIU Implementation lane to advance through remote release readiness, exact school-lane PR creation/reuse, and exact Preview verification, stopping at OWNER_GATE_2_READY. This request authorizes only the read-only RELEASE_READINESS boundary and creates no PR, Preview, Owner Gate 2 approval, merge, Production, or tracked basketball mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false
+  }
+}

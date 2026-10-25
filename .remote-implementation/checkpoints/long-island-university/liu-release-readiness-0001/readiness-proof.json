@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "802de9cbe0b779da0bad55c71969d3337fa62e82",
+  "apply_request_id": "liu-stage2-sealed-apply-0001",
+  "approved_plan_hash": "7ed1c916f96d5b01016b9b1df56e1a82f4c0505802ed9654c086289a605f6e5f",
+  "changed_path_count": 87,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "b3cdaee2c8306fda1c51a4247028bf58c9e03531",
+  "release_manifest_sha256": "1d8ce94e1437b571a046b0497ecaedd47512cf5d33eb7ced49ea4e536fa5c3f0",
+  "school_key": "long-island-university",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "2eb0a8559d9ce7687268de8711660b64d6b7069963a361aa165434639f22e63e",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "3f9b449887218e4306706471f0cc3a893cd2673f296bbf517cb6972327cea69b",
+  "writeahead_sha256": "f06a77cfa2f4b19cf550abb953e1e60663fb2bbdf0683cdb7173e9fdc5e21acc"
+}
