@@ -94,13 +94,25 @@ def verify_release_readiness_authority(
             "target_branch": branch,
             "actual_published_target_sha": target,
             "prepared_commit_sha": target,
-            "protected_main_sha": request["expected_protected_main_sha"],
+            "protected_main_sha": successor.get("protected_main_sha"),
             "approved_plan_hash": request["approved_plan_hash"],
             "release_manifest_sha256": request["release_manifest_sha256"],
             "repository_validation": "PASS",
             "final_transaction_state": "COMPLETE",
         },
         "SUCCESSOR",
+    )
+    # Historical/apply authority stays anchored to its original protected main.
+    # Tooling productionization advances current main without invalidating it.
+    # Require genuine ancestry rather than pretending the two SHAs are equal.
+    original_main = successor["protected_main_sha"]
+    current_main = request["expected_protected_main_sha"]
+    _require(
+        git(
+            "merge-base", "--is-ancestor", original_main, current_main,
+            cwd=source_repo, check=False,
+        ).returncode == 0,
+        "RELEASE_CURRENT_MAIN_NOT_DESCENDANT_OF_APPLY_MAIN",
     )
     apply_id = successor["request_id"]
     prefix = ".remote-implementation/successors/%s/%s" % (school, apply_id)
@@ -121,7 +133,7 @@ def verify_release_readiness_authority(
             "request_id": apply_id,
             "target_branch": branch,
             "target_sha": target,
-            "protected_main_sha": request["expected_protected_main_sha"],
+            "protected_main_sha": successor["protected_main_sha"],
             "approved_plan_hash": request["approved_plan_hash"],
             "release_manifest_sha256": request["release_manifest_sha256"],
             "remote_stage2_sealed_apply_equivalence": "PASS",
@@ -154,7 +166,7 @@ def verify_release_readiness_authority(
             "school_key": school,
             "request_id": apply_id,
             "target_branch": branch,
-            "protected_main_sha": request["expected_protected_main_sha"],
+            "protected_main_sha": successor["protected_main_sha"],
             "prepared_commit_sha": target,
             "prepared_tree_sha": successor["prepared_tree_sha"],
             "expected_target_predecessor_sha": successor["expected_target_predecessor_sha"],
@@ -244,6 +256,7 @@ def verify_release_readiness_authority(
         "verification_sha256": sha256_bytes(verification_bytes),
         "writeahead_sha256": sha256_bytes(writeahead_bytes),
         "protected_main_sha": request["expected_protected_main_sha"],
+        "apply_protected_main_sha": original_main,
         "approved_plan_hash": request["approved_plan_hash"],
         "release_manifest_sha256": request["release_manifest_sha256"],
         "changed_path_count": len(successor["changed_paths"]),
@@ -289,6 +302,7 @@ def run_permanent_release_readiness(
         "target_branch": authority["target_branch"],
         "target_sha": target,
         "protected_main_sha": authority["protected_main_sha"],
+        "apply_protected_main_sha": authority["apply_protected_main_sha"],
         "apply_request_id": authority["apply_request_id"],
         "successor_sha256": authority["successor_sha256"],
         "verification_sha256": authority["verification_sha256"],
