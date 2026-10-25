@@ -21,6 +21,7 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
+    OP_RELEASE_PREVIEW_VERIFY,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     sha256_bytes,
@@ -82,6 +83,10 @@ from remote_implementation_stage2_opponent_display import (
     run_normalizer_dry_run,
     verify_census_and_freeze_authority,
     verify_prepared_commit_field_boundary,
+)
+from remote_implementation_release_preview import (
+    verify_release_preview_authority,
+    verify_pr_checks_and_preview,
 )
 from remote_implementation_release_readiness import (
     verify_release_readiness_authority,
@@ -1844,6 +1849,117 @@ def verify_release_readiness(
     return 0
 
 
+def verify_release_preview(
+    live_main: str, control_head: str, state: dict,
+) -> int:
+    """Independent exact PR+Preview recheck, preserving absent Gate 2 authority."""
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE PR/PREVIEW: PASS (already fresh-verified)")
+        return 0
+    checkpoint_bytes = git_show_bytes(control_head, last["checkpoint_manifest_path"])
+    if sha256_bytes(checkpoint_bytes) != last["checkpoint_manifest_sha256"]:
+        raise Stop("PREVIEW_FRESH_CHECKPOINT_HASH_MISMATCH")
+    manifest = json.loads(checkpoint_bytes)
+    if manifest.get("kind") != "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_CHECKPOINT":
+        raise Stop("PREVIEW_FRESH_CHECKPOINT_KIND_MISMATCH")
+    if (manifest.get("gate2_status") != "OWNER_GATE_2_READY"
+        or manifest.get("protected_main_sha") != live_main
+        or manifest.get("owner_gate_2_approved") is not False
+        or manifest.get("merged") is not False):
+        raise Stop("PREVIEW_FRESH_OWNER_GATE_BOUNDARY_MISMATCH")
+    directory = Path(last["checkpoint_manifest_path"]).parent
+    request_bytes = git_show_bytes(control_head, (directory / "request.json").as_posix())
+    if sha256_bytes(request_bytes) != manifest["request_sha256"]:
+        raise Stop("PREVIEW_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    if (request.get("operation") != OP_RELEASE_PREVIEW_VERIFY
+        or request.get("request_id") != manifest["request_id"]):
+        raise Stop("PREVIEW_FRESH_REQUEST_INVALID")
+    proof_bytes = git_show_bytes(control_head, (directory / "preview-proof.json").as_posix())
+    if sha256_bytes(proof_bytes) != manifest["preview_proof_sha256"]:
+        raise Stop("PREVIEW_FRESH_PROOF_HASH_MISMATCH")
+    saved = json.loads(proof_bytes)
+    authority = verify_release_preview_authority(
+        request, control_head, source_repo=ROOT
+    )
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"], request["target_sha"], request["school_key"]
+    )
+    fresh = verify_pr_checks_and_preview(
+        worktree,
+        pr_number=request["pr_number"],
+        target_branch=authority["target_branch"],
+        target_sha=authority["target_sha"],
+        exact_pr_body_sha256=authority["pr_body_sha256"],
+    )
+    fresh.update({
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "readiness_request_id": authority["readiness_request_id"],
+        "readiness_checkpoint_sha256": authority["readiness_checkpoint_sha256"],
+        "readiness_verification_sha256": authority["readiness_verification_sha256"],
+        "approved_plan_hash": request["approved_plan_hash"],
+        "release_manifest_sha256": request["release_manifest_sha256"],
+    })
+    if fresh != saved:
+        raise Stop("PREVIEW_FRESH_STRUCTURED_EQUIVALENCE_MISMATCH")
+    for key, expected in (
+        ("pr_number", fresh["pr_number"]),
+        ("pr_head_sha", fresh["target_sha"]),
+        ("pr_body_sha256", fresh["pr_body_sha256"]),
+        ("preview_url", fresh["preview_url"]),
+        ("preview_deployment_id", fresh["preview_deployment_id"]),
+        ("preview_deployment_sha", fresh["preview_deployment_sha"]),
+    ):
+        if manifest.get(key) != expected:
+            raise Stop("PREVIEW_FRESH_MANIFEST_MISMATCH:" + key)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("PREVIEW_FRESH_TARGET_MOVED")
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+        "request_id": request["request_id"],
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "checkpoint_manifest_sha256": last["checkpoint_manifest_sha256"],
+        "pr_number": fresh["pr_number"],
+        "pr_head_sha": fresh["target_sha"],
+        "preview_deployment_id": fresh["preview_deployment_id"],
+        "preview_deployment_sha": fresh["preview_deployment_sha"],
+        "preview_url": fresh["preview_url"],
+        "remote_release_preview_equivalence": "PASS",
+        "owner_gate_2_approved": False,
+        "merged": False,
+    }
+    verification_dir = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    write_json(
+        verification_dir / "release-preview-verification.json", verification
+    )
+    local_state = read_json(STATE_PATH)
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (local_last.get("operation") != OP_RELEASE_PREVIEW_VERIFY
+        or local_last.get("request_id") != request["request_id"]):
+        raise Stop("PREVIEW_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last["remote_release_preview_equivalence"] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        "persist exact PR-head Preview verification %s" % request["request_id"],
+        [STATE_PATH, verification_dir],
+    )
+    print("REMOTE PR/PREVIEW EQUIVALENCE: PASS commit=%s" % commit)
+    return 0
+
+
 def main() -> int:
     DIAG.mkdir(parents=True, exist_ok=True)
     try:
@@ -1854,6 +1970,8 @@ def main() -> int:
         if state.get("lifecycle_state") != LIFECYCLE_IDLE:
             raise Stop("FRESH_VERIFY_CONTROL_NOT_IDLE")
         last = state.get("last_operation") or {}
+        if last.get("operation") == OP_RELEASE_PREVIEW_VERIFY:
+            return verify_release_preview(live_main, control_head, state)
         if last.get("operation") == OP_RELEASE_READINESS:
             return verify_release_readiness(live_main, control_head, state)
         if last.get("operation") == OP_STAGE2_CENSUS:
