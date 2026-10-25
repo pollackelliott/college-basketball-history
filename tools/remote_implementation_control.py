@@ -32,6 +32,8 @@ OP_STAGE2_GATE1_SEAL = "STAGE2_GATE1_SEAL"
 OP_STAGE2_SEALED_APPLY = "STAGE2_SEALED_APPLY"
 OP_RELEASE_READINESS = "RELEASE_READINESS"
 OP_RELEASE_PREVIEW_VERIFY = "RELEASE_PREVIEW_VERIFY"
+OP_RELEASE_GATE2_APPROVAL = "RELEASE_GATE2_APPROVAL"
+OP_RELEASE_PRODUCTION_PROOF = "RELEASE_PRODUCTION_PROOF"
 OP_STAGE2_RECONCILIATION_DIAGNOSTIC = "STAGE2_RECONCILIATION_DIAGNOSTIC"
 OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
@@ -46,6 +48,8 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
     OP_RELEASE_PREVIEW_VERIFY,
+    OP_RELEASE_GATE2_APPROVAL,
+    OP_RELEASE_PRODUCTION_PROOF,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     OP_RECOVER,
 }
@@ -64,6 +68,8 @@ TX_STAGE2_GATE1_SEAL_RUNNING = "STAGE2_GATE1_SEAL_RUNNING"
 TX_STAGE2_DIAGNOSTIC_RUNNING = "STAGE2_RECONCILIATION_DIAGNOSTIC_RUNNING"
 TX_RELEASE_READINESS_RUNNING = "RELEASE_READINESS_RUNNING"
 TX_RELEASE_PREVIEW_RUNNING = "RELEASE_PREVIEW_RUNNING"
+TX_RELEASE_GATE2_RUNNING = "RELEASE_GATE2_RUNNING"
+TX_RELEASE_PRODUCTION_RUNNING = "RELEASE_PRODUCTION_RUNNING"
 TX_LOCKED = "LOCKED"
 TX_INPUTS_VERIFIED = "INPUTS_VERIFIED"
 TX_PREPARED = "PREPARED_NOT_PUBLISHED"
@@ -177,6 +183,8 @@ def validate_control_state(state: dict[str, Any]) -> None:
             TX_STAGE2_DIAGNOSTIC_RUNNING,
             TX_RELEASE_READINESS_RUNNING,
             TX_RELEASE_PREVIEW_RUNNING,
+            TX_RELEASE_GATE2_RUNNING,
+            TX_RELEASE_PRODUCTION_RUNNING,
             TX_LOCKED,
             TX_INPUTS_VERIFIED,
             TX_PREPARED,
@@ -311,7 +319,13 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_sealed_apply") is not True,
             "REQUEST_SEALED_APPLY_AUTHORITY_FORBIDDEN",
         )
-    _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
+    if operation == OP_RELEASE_GATE2_APPROVAL:
+        _require(
+            authority.get("owner_gate_2") is True,
+            "REQUEST_GATE2_APPROVAL_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
     # RELEASE_READINESS is inspection and final-gate rehearsal only. No PR,
     # Preview, Owner Gate 2, or merge authority can be supplied by a request.
     _require(authority.get("release") is False, "REQUEST_RELEASE_AUTHORITY_FORBIDDEN")
@@ -335,6 +349,100 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("release_preview_verify") is not True,
             "REQUEST_RELEASE_PREVIEW_AUTHORITY_FORBIDDEN",
         )
+
+    if operation in {OP_RELEASE_GATE2_APPROVAL, OP_RELEASE_PRODUCTION_PROOF}:
+        flag = (
+            "release_gate2_approval"
+            if operation == OP_RELEASE_GATE2_APPROVAL
+            else "release_production_proof"
+        )
+        for key in (
+            "phase0", "recovery", "stage2_census", "stage2_opponent_display_normalize",
+            "stage2_proposal_rehearsal", "stage2_gate1_fill",
+            "stage2_preseal_rehearsal", "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release",
+        ):
+            _require(
+                authority.get(key) is False,
+                "RELEASE_GATE2_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require(
+            authority.get(flag) is True,
+            "RELEASE_GATE2_OPERATION_AUTHORITY_REQUIRED:" + flag,
+        )
+        other = (
+            "release_production_proof"
+            if operation == OP_RELEASE_GATE2_APPROVAL
+            else "release_gate2_approval"
+        )
+        _require(
+            authority.get(other) is not True,
+            "RELEASE_GATE2_CROSS_OPERATION_AUTHORITY_FORBIDDEN",
+        )
+        _require(
+            request.get("target_branch") == f"data/{school_key}-onboarding",
+            "RELEASE_GATE2_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(request.get("target_sha"), 40, "RELEASE_GATE2_TARGET_SHA_INVALID")
+        pr_number = request.get("pr_number")
+        _require(
+            type(pr_number) is int and 0 < pr_number <= 2147483647,
+            "RELEASE_GATE2_PR_NUMBER_INVALID",
+        )
+        if operation == OP_RELEASE_GATE2_APPROVAL:
+            for field in ("approved_plan_hash", "release_manifest_sha256"):
+                _require_sha(
+                    request.get(field), 64,
+                    "RELEASE_GATE2_%s_INVALID" % field.upper(),
+                )
+            for field in ("release_preview_checkpoint", "release_preview_verification"):
+                _validate_payload_ref(request.get(field), field, required=True)
+            approval = request.get("owner_gate_2_approval")
+            _require(
+                isinstance(approval, dict) and approval.get("approved") is True,
+                "RELEASE_GATE2_EXPLICIT_OWNER_APPROVAL_REQUIRED",
+            )
+            _require(
+                bool(str(approval.get("approval_basis") or "").strip()),
+                "RELEASE_GATE2_OWNER_APPROVAL_BASIS_REQUIRED",
+            )
+            _require(
+                type(request.get("preview_deployment_id")) is int
+                and request["preview_deployment_id"] > 0,
+                "RELEASE_GATE2_PREVIEW_DEPLOYMENT_INVALID",
+            )
+            _require(
+                str(request.get("preview_url") or "").startswith("https://"),
+                "RELEASE_GATE2_PREVIEW_URL_INVALID",
+            )
+            for key in (
+                "preview_checkpoint_sha256", "preview_verification_sha256",
+            ):
+                _require_sha(approval.get(key), 64, "RELEASE_GATE2_APPROVAL_SHA_INVALID")
+            for key in (
+                "pr_number", "pr_head_sha", "preview_deployment_id", "preview_url",
+            ):
+                _require(
+                    approval.get(key) == request.get(
+                        "target_sha" if key == "pr_head_sha" else key
+                    ),
+                    "RELEASE_GATE2_APPROVAL_SCOPE_MISMATCH:" + key,
+                )
+            _require(
+                approval.get("preview_checkpoint_sha256")
+                == request["release_preview_checkpoint"]["sha256"]
+                and approval.get("preview_verification_sha256")
+                == request["release_preview_verification"]["sha256"],
+                "RELEASE_GATE2_APPROVAL_CHECKPOINT_SCOPE_MISMATCH",
+            )
+        else:
+            _require_sha(
+                request.get("merge_sha"), 40,
+                "RELEASE_PRODUCTION_EXACT_MERGE_SHA_INVALID",
+            )
+            for field in ("owner_gate_2_checkpoint", "owner_gate_2_verification"):
+                _validate_payload_ref(request.get(field), field, required=True)
 
     if operation in {OP_STAGE1, OP_PHASE0}:
         checkpoint = request.get("research_checkpoint")
@@ -1038,6 +1146,8 @@ def verify_request_predecessor(
             OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
             OP_RELEASE_READINESS,
             OP_RELEASE_PREVIEW_VERIFY,
+            OP_RELEASE_GATE2_APPROVAL,
+            OP_RELEASE_PRODUCTION_PROOF,
         }:
             _require(
                 recovery.get("target_branch") is None
@@ -1081,6 +1191,8 @@ def begin_request(
         OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
         OP_RELEASE_READINESS,
         OP_RELEASE_PREVIEW_VERIFY,
+        OP_RELEASE_GATE2_APPROVAL,
+        OP_RELEASE_PRODUCTION_PROOF,
     }:
         result["lifecycle_state"] = LIFECYCLE_READ_ONLY
         if request["operation"] == OP_STAGE1:
@@ -1099,6 +1211,10 @@ def begin_request(
             result["transaction_state"] = TX_RELEASE_READINESS_RUNNING
         elif request["operation"] == OP_RELEASE_PREVIEW_VERIFY:
             result["transaction_state"] = TX_RELEASE_PREVIEW_RUNNING
+        elif request["operation"] == OP_RELEASE_GATE2_APPROVAL:
+            result["transaction_state"] = TX_RELEASE_GATE2_RUNNING
+        elif request["operation"] == OP_RELEASE_PRODUCTION_PROOF:
+            result["transaction_state"] = TX_RELEASE_PRODUCTION_RUNNING
         else:
             result["transaction_state"] = TX_STAGE2_DIAGNOSTIC_RUNNING
         result["active_lock_owner"] = None

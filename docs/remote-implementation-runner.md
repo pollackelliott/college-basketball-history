@@ -1,8 +1,8 @@
 # Guarded Remote Implementation Runner
 
-- **Status:** Controlling execution-environment policy for serialized Implementation through stable Phase 0 and the narrowly productionized Stage 2 remote boundary
+- **Status:** Controlling execution-environment policy for serialized remote Implementation, including the authenticated release and Production-proof lifecycle
 - **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or an honest durable `BLOCKED` checkpoint, the read-only exact-owner-approval `STAGE2_GATE1_FILL` boundary, the read-only filled-review `STAGE2_PRESEAL_REHEARSAL` boundary, the read-only cryptographic `STAGE2_GATE1_SEAL` boundary, the transactional `STAGE2_SEALED_APPLY` boundary, and the read-only reconciliation diagnostic
-- **Does not apply to:** arbitrary or other Stage 2 tracked repairs, release preparation / Preview, Owner Gate 2, merge, or Production proof
+- **Does not apply to:** arbitrary unapproved Stage 2 tracked repairs or uncontrolled release/merge bypasses; the remote runner does not itself create or merge PRs or push protected main
 
 ## 1. Execution environments
 
@@ -44,7 +44,10 @@ Tracked repository capability:
 - `tools/remote_implementation_stage2_seal.py` — exact fresh-verified `READY_TO_SEAL` authentication, permanent `onboard_school.py --approve` invocation, exact approved-plan/review checkpointing, and independent seal reconstruction without apply.
 - `tools/remote_implementation_stage2_apply.py` — exact fresh-verified seal authentication, current-main technical-readiness replay, permanent transactional `onboard_school.py --apply` invocation, exact successor preparation, release-manifest proof, and deterministic prepared-tree verification.
 - `tools/remote_implementation_stage2_diagnostic.py` — exact blocked-proposal checkpoint authentication, one-canonical-game diagnostic input restoration, permanent reconciliation-trace invocation, trace hashing, and tracked-mutation proof.
-- `tools/remote_implementation_verify.py` — fresh-runner reconstruction of completed Phase 0, Stage 2 census, opponent-display normalization, proposal rehearsal, Gate 1 fill, pre-seal rehearsal, Gate 1 sealing, sealed apply, or reconciliation-diagnostic state.
+- `tools/remote_implementation_release_readiness.py` — hash-bound sealed-apply release-gate proof.
+- `tools/remote_implementation_release_preview.py` — exact existing school PR, successful CI/mergeability and PR-head Preview verification.
+- `tools/remote_implementation_production.py` — exact independently verified Owner Gate 2 approval and read-only Production proof.
+- `tools/remote_implementation_verify.py` — independent fresh-runner reconstruction of all guarded stages, exact Gate 2 approval, and post-merge Production equality.
 - `.github/workflows/remote-implementation.yml` — push-driven repository Action for the permanent control branch.
 - `config/remote-implementation-control-state.initial.json` — canonical initial IDLE state for creating the operational control branch.
 
@@ -106,9 +109,13 @@ Supported operations are:
 - `STAGE2_GATE1_SEAL`
 - `STAGE2_SEALED_APPLY`
 - `STAGE2_RECONCILIATION_DIAGNOSTIC`
+- `RELEASE_READINESS`
+- `RELEASE_PREVIEW_VERIFY`
+- `RELEASE_GATE2_APPROVAL`
+- `RELEASE_PRODUCTION_PROOF`
 - `RECOVER`
 
-Only `STAGE2_GATE1_FILL` may carry Owner Gate 1 authority, and only when the request contains an explicit owner-approval object hash-bound to the exact fresh-verified `OWNER_GATE_1_READY` proposal checkpoint, decision universe, recommendation map, and approved-plan preview. No request may carry Owner Gate 2 or release authority.
+Only `STAGE2_GATE1_FILL` may carry Owner Gate 1 authority, bound to its exact fresh-verified proposal checkpoint, decision universe, recommendation map and approved-plan preview. Only `RELEASE_GATE2_APPROVAL` may carry Owner Gate 2 authority, bound to an explicit affirmative owner decision on one exact fresh-verified PR-head Preview. No other operation may carry either owner gate or GitHub merge authority; all guarded Production requests remain read-only.
 
 A generic owner `Proceed` may be converted into a request only when the next bounded operation is already unambiguous under repository policy. It is never an owner-gate approval or recovery authorization. `STAGE2_GATE1_FILL` therefore requires a separately explicit Owner Gate 1 approval before the request may be authored.
 
@@ -526,6 +533,22 @@ On success, the runner durably checkpoints `OWNER_GATE_2_READY` with PR number/U
 
 A failed accepted request remains durable and non-replayable; explicit authorized recovery is required. A missing PR or mismatched head, unauthorized changed body, failed/absent checks, missing/mismatched Preview, moved target branch or main, or lack of fresh prior readiness must fail closed, not be bypassed.
 
+### Explicit Owner Gate 2 approval (read-only) and exact post-merge Production proof
+
+`RELEASE_GATE2_APPROVAL` is an **explicit owner-authority** boundary, never inferred from generic `Proceed`. It accepts the exact previously fresh-verified `OWNER_GATE_2_READY` checkpoint and its independent verification, PR number and head SHA, successful Preview deployment ID/URL, approved-plan/release-manifest hashes, current protected-main SHA, and a scoped `owner_gate_2_approval` object with `approved=true` and the same exact preview/checkpoint/PR bindings. The request must state the owner's affirmative approval basis; any missing or conflicting authority fails closed. It carries `owner_gate_2=true` and `release_gate2_approval=true`; no merge/release or other operation authority is granted.
+
+The runner authenticates the complete previous sealed-apply/readiness/Preview chain, rechecks the currently open non-draft same-repository PR, exact approved head and body, passing PR checks and clean mergeability, and the precise successful Preview deployment. It then persists `OWNER_GATE_2_APPROVED` with `merged=false`, `production_proof=false` and the exact approved scope. A separate fresh runner repeats the PR/Preview proof and independently records `remote_gate2_approval_equivalence=PASS`. No PR merge occurs inside the runner.
+
+**Only after the fresh Gate 2 approval PASS**, the school Implementation chat may use its authorized GitHub connector to perform exactly one merge of the approved PR, supplying `expected_head_sha` equal to the approved head. Before merging it must recheck that protected main and the PR head remain at the exact approved identities, required checks and mergeability are passing, and no other Implementation lane is active. The standard repository merge method is a two-parent merge; squash/rebase or unapproved main changes are not acceptable. If connector permissions cannot perform the protected merge, STOP and escalate the permission boundary: do not bypass through an uncontrolled tool or broaden Actions credentials. A successful GitHub merge response is not Implementation COMPLETE.
+
+`RELEASE_PRODUCTION_PROOF` is a separately bounded **read-only** remote request after that merge. It authenticates the exact independently fresh-verified Gate 2 approval checkpoint/verification, prior approved Preview head, PR identity/mergedAt/mergeCommit, and new exact protected-main SHA. The permanent release checker requires `main` to equal that exact merge commit with first parent equal to the Gate-2-approved main and second parent the exact approved PR head. The standard permanent `release_school` merged-main reproducibility checks run on an isolated detached merge checkout; exact SHA successful Vercel `Production` deployment is required, followed by public Production JSON equality for the target and **all** changed generated JSON from the complete merge diff (including earlier Phase 0 paths). The remote action is not allowed to change the merge, PR, or main.
+
+The runner preserves a durable `PRODUCTION_PROOF_PASS` checkpoint with the precise merge SHA, both parents, Production deployment ID/SHA, counts and hashes of the checked generated files, and the original owner approval scope. Its independent fresh-runner verification reconstructs the exact merge, reruns the permanent gates and Production JSON comparisons, requires stable structured equivalence, and persists `remote_production_proof_equivalence=PASS`. Only then is Implementation `COMPLETE`; merge alone, successful Preview, or GitHub deployment metadata alone never suffice.
+
+Failures after explicit Gate 2 approval or after the external GitHub merge require evidence-first recovery. Never blindly retry a merge. Inspect the exact PR merge SHA, current main SHA, global control state, pending request and durable checkpoints; distinguish missing Production deployment from mismatched JSON or wrong commit. Any accepted failed remote request remains non-replayable until authorized recovery. Never infer new owner approval from earlier gate evidence if PR HEAD, approved Preview, or merge identity changes.
+
+These are generic capabilities and **the school Implementation chat**, not the Control Center, executes them for every authorized school. The Owner Gate 2 approval is a real, necessary owner decision; technical request submission and post-merge checks are not additional owner gates.
+
 ### Stage 2 reconciliation diagnostic request
 
 `STAGE2_RECONCILIATION_DIAGNOSTIC` is read-only with respect to tracked basketball state. It exists only after an exact `STAGE2_PROPOSAL_REHEARSAL` has durably completed as `BLOCKED`, when one canonical game requires compact transaction-path diagnosis rather than conversational repository archaeology.
@@ -633,7 +656,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. All other tracked Stage 2 repairs, release preparation / Preview, Owner Gate 2, merge, and Production proof remain outside the remote capability until separately productionized and tested.
+Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
 
 ## 13. Mobile / ChatGPT operation
 
