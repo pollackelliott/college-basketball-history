@@ -1,0 +1,24 @@
+{
+  "basis_by_decision": {
+    "DISCREPANCY-BOI-S1-198485-004-SCORE": "Chicago State's accepted institutional media-guide reciprocal record identifies the 1984-12-08 game at Boise State as a 61-81 Chicago State loss, matching canonical Boise State 81-61. Independent season records also align with 81-61. Boise State's conflicting 59-74 record-book line remains preserved as source evidence.",
+    "DISCREPANCY-BOI-S1-198485-004-RESULT_WINNER_TEAM_KEY": "Chicago State's accepted institutional media-guide reciprocal record identifies Boise State as the 1984-12-08 winner, 81-61; independent season records agree. Retain canonical Boise State as winner while preserving Boise State's contrary frozen source assertion.",
+    "DISCREPANCY-BOI-S1-199697-007-GAME_DATE": "Oregon's official 1996-97 schedule and opponent history both date the 61-58 road win at Boise State to Friday, 1996-12-20; Oregon's later institutional recap repeats Dec. 20 and contemporary Associated Press reporting describes the game as Friday night. Retain canonical 1996-12-20 and preserve Boise State's 1996-12-19 source date.",
+    "DISCREPANCY-BOI-S1-199899-006-GAME_DATE": "Washington's contemporary institutional preview published 1998-12-04 explicitly schedules the Boise State game for Saturday, 1998-12-05, and subsequent Washington institutional recaps identify the 69-61 loss at Boise State as Dec. 5. Retain canonical 1998-12-05 and preserve Boise State's conflicting 1998-12-04 source date.",
+    "DISCREPANCY-BOI-S1-201920-002-SCORE": "Oregon's official 2019-20 opponent history, game recap, schedule, and cumulative statistics all identify Oregon's 2019-11-09 home win over Boise State as 106-75. Boise State's frozen source value 75-106 is therefore supported; replace the stale canonical 65-106 score while preserving all literal source evidence.",
+    "ACCOMPLISHMENTS-BOISE-STATE": "Boise State's official 2025-26 game notes list 7 regular-season conference championships, 6 conference-tournament championships, and 10 NCAA Tournament appearances; the official 2022 NCAA-selection release confirms the 2022 Mountain West tournament title as the program's sixth conference-tournament automatic-bid championship. The existing reference values (7, 6, 10, 0 Final Fours, 0 national titles, ROUND_OF_32 best finish in 1976) require no patch. Sources: https://broncosports.com/documents/download/2026/1/6/20260107_GrandCanyon.pdf ; https://broncosports.com/news/2022/3/13/mbb-earns-highest-ncaa-tournament-seed-in-program-history",
+    "PUBLICATION-BOISE-STATE": "Enable Boise State's public page only after the exact approved seven-decision Gate 1 packet, including the supported 2019 Oregon score correction, survives permanent pre-seal rehearsal, cryptographic sealing, transactional apply, and all publication/release gates."
+  },
+  "decisions": {
+    "DISCREPANCY-BOI-S1-198485-004-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-BOI-S1-198485-004-RESULT_WINNER_TEAM_KEY": "KEEP_CANONICAL",
+    "DISCREPANCY-BOI-S1-199697-007-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-BOI-S1-199899-006-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-BOI-S1-201920-002-SCORE": "USE_SOURCE",
+    "ACCOMPLISHMENTS-BOISE-STATE": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-BOISE-STATE": "ENABLE_PUBLIC_PAGE"
+  },
+  "notes_by_decision": {
+    "DISCREPANCY-BOI-S1-201920-002-SCORE": "Gate 1 recommendation corrects only the canonical score from Boise State 65 to 75 against Oregon; frozen Boise State raw evidence remains unchanged until and through sealed apply.",
+    "ACCOMPLISHMENTS-BOISE-STATE": "Official current Boise State sources verify the numeric baseline; no accomplishment patch is proposed."
+  }
+}
