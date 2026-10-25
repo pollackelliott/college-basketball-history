@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "liu-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "long-island-university",
+  "previous_control_state_commit": "369c2cd7a050b4db48126408f69404c965eb5ecb",
+  "previous_control_state_sha256": "cf67be32d4c337546b73d4d085dd1837fe42ad9d942c2fffae933dc4d933e270",
+  "expected_protected_main_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "pr_number": 367,
+  "merge_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "226686c5d11bc12fe78e07ef613a7c52ce2b7ee586836336b43137963a498b03"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/long-island-university/liu-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "d69d8972973f29a815dda95fe1cf9b8c81f15ef581503d5623884dc0cd1d612a"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized LIU to proceed through exact Production proof after fresh-verified Owner Gate 2 approval and exact-head merge. This request is read-only and may only authenticate merge a40ff7e10d424243dc3484fb55e9f06ed74c9795, run permanent merged-main gates, require the exact-SHA Production deployment, compare all changed public JSON, and independently verify the proof. It grants no further merge, protected-main mutation, historical change, or unrelated release authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true
+  }
+}
