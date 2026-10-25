@@ -1,54 +1,41 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "boise-state-phase0-0001",
-  "school_key": "boise-state",
-  "operation": "PHASE0",
-  "previous_control_state_commit": "22312a6ffd41e58ee2eeb6ca652fb8a5a6f118f9",
-  "previous_control_state_sha256": "0c2a1b181da62f3b79fa9ca72103230c2c6b37dfe1bbb671dbde8769981dfbd3",
-  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
-  "research_checkpoint": {
-    "sha256": "ffb3d0c7ef434cd48f9ee5b9df016b607eeba26b27c856fb81810254a2b9c0de",
-    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "acc89d7d1fd39a5e4dff7ad736bd39f7e3a5840a",
-      "path_prefix": ".remote-implementation/inputs/boise-state-stage1-0001/research-frozen.zip.b64.part",
-      "part_count": 8
-    }
-  },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/boise-state/boise-state-stage1-0002/checkpoint-manifest.json",
-    "sha256": "c02930fe6c121feac1394f5dd67b23c0e850f48a01e29aa5413b4d27e65f65ca"
-  },
-  "target_branch": "data/boise-state-onboarding",
-  "history_scope": {
-    "start_season": "1970-1971",
-    "basis": "TOP_LEVEL_INTERVALS",
-    "intervals": "1970-71+",
-    "notes": "Owner-confirmed Boise State accepted top-level scope: 1970-71+."
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT",
-    "authorization": "Owner explicitly authorized one bounded guarded Boise State PHASE0 operation after independently verified Stage 1 PASS. Authority includes Integration Freeze, stable Phase 0 preparation, nine mechanically safe venue registrations and supported representation updates, write-ahead, create-once onboarding publication, lock release, and independent fresh verification. No Stage 2, new historical decision, unrelated global maintenance, owner-gate, release, merge, or recovery authority."
-  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release": false,
-    "phase0": true,
+    "phase0": false,
     "recovery": false,
-    "stage2_census": false,
+    "release": false,
+    "stage2_census": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "Owner said Proceed after independently verified Boise State Phase 0, authorizing the next ordinary bounded unit: one read-only STAGE2_CENSUS only. No tracked repair, recommendation map, proposal rehearsal, Owner Gate 1/2, release, or recovery authority.",
+    "origin": "ChatGPT"
+  },
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/boise-state/boise-state-phase0-0001/successor-manifest.json",
+    "sha256": "f1dbd4a6231527460700ebc537f8aed35dfd35d62c818f65035a5e23c46a3ccc"
+  },
+  "previous_control_state_commit": "2b6c470c0cc662aad84e2fec80d9020f8bf2db85",
+  "previous_control_state_sha256": "a4d35f06064383621fedeb6aec6f430e54408a745a826437d0414eaca3a3076b",
+  "request_id": "boise-state-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c"
 }
