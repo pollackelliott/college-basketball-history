@@ -141,11 +141,13 @@ class RemoteReleaseReadinessTests(unittest.TestCase):
         with (
             patch.object(ready, "git_show_bytes", side_effect=lambda _commit, path, **_: storage[path]),
             patch.object(ready, "remote_head", return_value=TARGET),
+            patch.object(ready, "git") as mock_git,
             patch.object(
                 ready, "verify_prepared_sealed_apply",
                 return_value={"prepared_tree_sha": TREE},
             ) as verifier,
         ):
+            mock_git.return_value.returncode = 0
             result = ready.verify_release_readiness_authority(
                 request, "0" * 40, source_repo=ROOT
             )
@@ -180,9 +182,25 @@ class RemoteReleaseReadinessTests(unittest.TestCase):
         with (
             patch.object(ready, "git_show_bytes", side_effect=lambda _commit, path, **_: storage[path]),
             patch.object(ready, "remote_head", return_value="9" * 40),
+            patch.object(ready, "git") as mock_git,
         ):
+            mock_git.return_value.returncode = 0
             with self.assertRaisesRegex(ready.Stop, "RELEASE_TARGET_MOVED"):
                 ready.verify_release_readiness_authority(request, "0" * 40, source_repo=ROOT)
+
+    def test_refuses_non_descendant_current_main(self):
+        request, storage = sample()
+        with (
+            patch.object(ready, "git_show_bytes", side_effect=lambda _commit, path, **_: storage[path]),
+            patch.object(ready, "git") as mock_git,
+        ):
+            mock_git.return_value.returncode = 1
+            with self.assertRaisesRegex(
+                ready.Stop, "RELEASE_CURRENT_MAIN_NOT_DESCENDANT"
+            ):
+                ready.verify_release_readiness_authority(
+                    request, "0" * 40, source_repo=ROOT
+                )
 
     def test_rejects_wrong_release_manifest_sidecar(self):
         request, storage = sample()
