@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "226686c5d11bc12fe78e07ef613a7c52ce2b7ee586836336b43137963a498b03",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "pr_number": 367,
+  "preview_deployment_id": 7306788588,
+  "preview_url": "https://college-basketball-history-bxrz17y4c-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "liu-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "status": "PASS"
+}
