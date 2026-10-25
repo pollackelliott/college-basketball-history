@@ -28,6 +28,8 @@ from remote_implementation_control import (
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
     OP_RELEASE_PREVIEW_VERIFY,
+    OP_RELEASE_GATE2_APPROVAL,
+    OP_RELEASE_PRODUCTION_PROOF,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     abandon_active,
@@ -99,6 +101,11 @@ from remote_implementation_stage2_apply import (
     run_sealed_apply_tool,
     verify_prepared_sealed_apply,
     verify_stage2_sealed_apply_authority,
+)
+from remote_implementation_production import (
+    approve_exact_gate2,
+    verify_gate2_approved_chain,
+    run_permanent_production_proof,
 )
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
@@ -2699,6 +2706,187 @@ def run_read_only_release_preview(
     print("REMOTE PR/PREVIEW: OWNER_GATE_2_READY checkpoint_commit=%s" % commit)
 
 
+def run_owner_gate2_approval(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    """Preserve explicit Owner Gate 2 without merging anything."""
+    proof = approve_exact_gate2(request, predecessor_commit, repo=ROOT)
+    active = begin_request(
+        state, request, sha256_bytes(request_bytes),
+        run_id=os.environ.get("GITHUB_RUN_ID", "local"),
+        run_attempt=os.environ.get("GITHUB_RUN_ATTEMPT", "1"),
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted = commit_control(
+        request_commit,
+        "accept explicit Owner Gate 2 %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("GATE2_TARGET_MOVED_AFTER_APPROVAL")
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+    write_json(directory / "gate2-approval-proof.json", proof)
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+        "status": "OWNER_GATE_2_APPROVED",
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "pr_number": proof["pr_number"],
+        "pr_head_sha": proof["target_sha"],
+        "preview_deployment_id": proof["preview_deployment_id"],
+        "preview_url": proof["preview_url"],
+        "preview_checkpoint_sha256": proof["preview_checkpoint_sha256"],
+        "preview_verification_sha256": proof["preview_verification_sha256"],
+        "approved_plan_hash": proof["approved_plan_hash"],
+        "release_manifest_sha256": proof["release_manifest_sha256"],
+        "approval_proof_sha256": sha256_file(directory / "gate2-approval-proof.json"),
+        "owner_gate_2_approved": True,
+        "merged": False,
+        "production_proof": False,
+    }
+    checkpoint = directory / "checkpoint-manifest.json"
+    write_json(checkpoint, manifest)
+    next_state = finalize_success(
+        active,
+        request_id=request["request_id"],
+        last_operation={
+            "operation": OP_RELEASE_GATE2_APPROVAL,
+            "request_id": request["request_id"],
+            "school_key": request["school_key"],
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "pr_number": request["pr_number"],
+            "owner_gate_2_approved": True,
+            "merged": False,
+            "checkpoint_manifest_path": checkpoint.as_posix(),
+            "checkpoint_manifest_sha256": sha256_file(checkpoint),
+            "fresh_runner_verification": "PENDING",
+            "remote_gate2_approval_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, next_state)
+    commit = commit_control(
+        accepted,
+        "checkpoint explicit Owner Gate 2 %s" % request["request_id"],
+        [STATE_PATH, directory],
+    )
+    print("REMOTE OWNER GATE 2: APPROVED, UNMERGED checkpoint_commit=%s" % commit)
+
+
+def run_read_only_production_proof(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    """Post-merge permanent Production validation; cannot merge or rewrite main."""
+    if request["merge_sha"] != live_main:
+        raise Stop("PRODUCTION_REQUEST_NOT_EXACT_CURRENT_MAIN")
+    authority = verify_gate2_approved_chain(
+        request, predecessor_commit, repo=ROOT,
+    )
+    # Reject post-merge production proof unless merged Git main is exactly
+    # the two-parent owner-approved PR with no intervening main commit.
+    active = begin_request(
+        state, request, sha256_bytes(request_bytes),
+        run_id=os.environ.get("GITHUB_RUN_ID", "local"),
+        run_attempt=os.environ.get("GITHUB_RUN_ATTEMPT", "1"),
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted = commit_control(
+        request_commit,
+        "accept exact Production proof %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    proof = run_permanent_production_proof(request, authority, repo=ROOT)
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("PRODUCTION_TARGET_BRANCH_MOVED")
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+    write_json(directory / "production-proof.json", proof)
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+        "status": "PRODUCTION_PROOF_PASS",
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "pr_number": request["pr_number"],
+        "pr_head_sha": request["target_sha"],
+        "merge_sha": request["merge_sha"],
+        "merge_parent_main": proof["merge_parent_main"],
+        "merge_parent_onboarding": proof["merge_parent_onboarding"],
+        "owner_gate_2_checkpoint_sha256": authority["owner_gate_2_approval_checkpoint_sha256"],
+        "owner_gate_2_verification_sha256": authority["owner_gate_2_verification_sha256"],
+        "production_deployment_id": proof["production_deployment_id"],
+        "production_json_checked_count": proof["production_json_checked_count"],
+        "production_proof_sha256": sha256_file(directory / "production-proof.json"),
+        "owner_gate_2_approved": True,
+        "merged": True,
+        "production_proof": True,
+        "fresh_runner_verification": "PENDING",
+    }
+    checkpoint = directory / "checkpoint-manifest.json"
+    write_json(checkpoint, manifest)
+    final_state = finalize_success(
+        active,
+        request_id=request["request_id"],
+        last_operation={
+            "operation": OP_RELEASE_PRODUCTION_PROOF,
+            "request_id": request["request_id"],
+            "school_key": request["school_key"],
+            "protected_main_sha": live_main,
+            "pr_number": request["pr_number"],
+            "pr_head_sha": request["target_sha"],
+            "merge_sha": request["merge_sha"],
+            "production_deployment_id": proof["production_deployment_id"],
+            "production_json_checked_count": proof["production_json_checked_count"],
+            "checkpoint_manifest_path": checkpoint.as_posix(),
+            "checkpoint_manifest_sha256": sha256_file(checkpoint),
+            "owner_gate_2_approved": True,
+            "merged": True,
+            "fresh_runner_verification": "PENDING",
+            "remote_production_proof_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    commit = commit_control(
+        accepted,
+        "checkpoint exact Production proof %s" % request["request_id"],
+        [STATE_PATH, directory],
+    )
+    print("REMOTE EXACT PRODUCTION: PASS pending fresh verification commit=%s" % commit)
+
+
 def run_phase0(
     state: dict[str, Any],
     request: dict[str, Any],
@@ -3514,6 +3702,16 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_RELEASE_GATE2_APPROVAL:
+            run_owner_gate2_approval(
+                state, request, request_bytes, request_commit,
+                predecessor_commit, live_main,
+            )
+        elif request["operation"] == OP_RELEASE_PRODUCTION_PROOF:
+            run_read_only_production_proof(
+                state, request, request_bytes, request_commit,
+                predecessor_commit, live_main,
             )
         elif request["operation"] == OP_RELEASE_PREVIEW_VERIFY:
             run_read_only_release_preview(
