@@ -563,7 +563,7 @@
       "state": "ID",
       "primary_hex": "#0033A0",
       "secondary_hex": "#D64309",
-      "history_start_season": null,
+      "history_start_season": "1970-1971",
       "conference_regular_season_championships": 7,
       "conference_tournament_championships": 6,
       "ncaa_tournament_appearances": 10,
@@ -572,7 +572,7 @@
       "best_finish_key": "ROUND_OF_32",
       "best_finish_year": 1976,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"

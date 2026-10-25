@@ -1226,7 +1226,7 @@
       "opponent_key": "boise-state",
       "opponent_name": "Boise State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
@@ -60961,7 +60961,7 @@
       "opponent_key": "boise-state",
       "opponent_name": "Boise State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 90,
       "opponent_score": 66,
       "score_known": true,
