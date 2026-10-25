@@ -8,11 +8,16 @@ GitHub connector, then supplies the exact PR number through a bounded request.
 from __future__ import annotations
 
 import hashlib
+import json
 from pathlib import Path
 from typing import Any
 
 import release_school
-from remote_implementation_io import Stop, remote_head
+from remote_implementation_io import Stop, remote_head, git, git_show_bytes
+from remote_implementation_control import sha256_bytes
+from remote_implementation_release_readiness import (
+    verify_release_readiness_authority,
+)
 
 
 def _require(condition: bool, code: str) -> None:
@@ -142,4 +147,137 @@ def verify_pr_checks_and_preview(
         "owner_gate_2_approved": False,
         "merged": False,
         "production_proof": False,
+    }
+
+
+def verify_release_preview_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    source_repo: Path,
+) -> dict[str, Any]:
+    """Authenticate exact fresh-verified readiness and sealed-apply chain."""
+    school = request["school_key"]
+    branch = f"data/{school}-onboarding"
+    checkpoint_ref = request["release_readiness_checkpoint"]
+    verification_ref = request["release_readiness_verification"]
+    prefix = (
+        f".remote-implementation/checkpoints/{school}/"
+    )
+    checkpoint_path = checkpoint_ref["path"]
+    _require(
+        checkpoint_path.startswith(prefix)
+        and checkpoint_path.endswith("/checkpoint-manifest.json"),
+        "PREVIEW_READINESS_CHECKPOINT_PATH_INVALID",
+    )
+    checkpoint_bytes = git_show_bytes(
+        control_commit, checkpoint_path, cwd=source_repo,
+    )
+    _require(
+        sha256_bytes(checkpoint_bytes) == checkpoint_ref["sha256"],
+        "PREVIEW_READINESS_CHECKPOINT_HASH_MISMATCH",
+    )
+    checkpoint = json.loads(checkpoint_bytes)
+    source_request_id = checkpoint["request_id"]
+    verification_path = (
+        f".remote-implementation/verifications/{school}/"
+        f"{source_request_id}/release-readiness-verification.json"
+    )
+    _require(
+        verification_ref["path"] == verification_path,
+        "PREVIEW_READINESS_VERIFICATION_PATH_INVALID",
+    )
+    verified_bytes = git_show_bytes(
+        control_commit, verification_path, cwd=source_repo,
+    )
+    _require(
+        sha256_bytes(verified_bytes) == verification_ref["sha256"],
+        "PREVIEW_READINESS_VERIFICATION_HASH_MISMATCH",
+    )
+    verified = __import__("json").loads(verified_bytes)
+    for doc, expected, label in (
+        (
+            checkpoint,
+            {
+                "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_CHECKPOINT",
+                "readiness_status": "RELEASE_READINESS_PASS",
+                "school_key": school,
+                "target_branch": branch,
+                "target_sha": request["target_sha"],
+                "approved_plan_hash": request["approved_plan_hash"],
+                "release_manifest_sha256": request["release_manifest_sha256"],
+                "tracked_mutation": "NONE",
+                "pr_created": False,
+                "owner_gate_2": False,
+            },
+            "CHECKPOINT",
+        ),
+        (
+            verified,
+            {
+                "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+                "remote_release_readiness_equivalence": "PASS",
+                "request_id": source_request_id,
+                "school_key": school,
+                "target_branch": branch,
+                "target_sha": request["target_sha"],
+                "checkpoint_manifest_sha256": checkpoint_ref["sha256"],
+                "tracked_mutation": "NONE",
+                "pr_created": False,
+                "owner_gate_2": False,
+            },
+            "VERIFICATION",
+        ),
+    ):
+        for field, value in expected.items():
+            _require(doc.get(field) == value, f"PREVIEW_READINESS_{label}_{field.upper()}_MISMATCH")
+    request_path = (
+        Path(checkpoint_path).parent / "request.json"
+    ).as_posix()
+    prior_bytes = git_show_bytes(
+        control_commit, request_path, cwd=source_repo,
+    )
+    _require(
+        sha256_bytes(prior_bytes) == checkpoint["request_sha256"],
+        "PREVIEW_READINESS_REQUEST_HASH_MISMATCH",
+    )
+    prior_request = __import__("json").loads(prior_bytes)
+    _require(
+        prior_request.get("request_id") == source_request_id
+        and prior_request.get("operation") == "RELEASE_READINESS",
+        "PREVIEW_READINESS_SOURCE_OPERATION_MISMATCH",
+    )
+    prior_authority = verify_release_readiness_authority(
+        prior_request, control_commit, source_repo=source_repo,
+    )
+    _require(
+        prior_authority["target_sha"] == request["target_sha"]
+        and prior_authority["approved_plan_hash"] == request["approved_plan_hash"]
+        and prior_authority["release_manifest_sha256"] == request["release_manifest_sha256"],
+        "PREVIEW_READINESS_APPLY_CHAIN_MISMATCH",
+    )
+    source_main = checkpoint["protected_main_sha"]
+    current_main = request["expected_protected_main_sha"]
+    _require(
+        git(
+            "merge-base", "--is-ancestor", source_main, current_main,
+            cwd=source_repo, check=False,
+        ).returncode == 0,
+        "PREVIEW_CURRENT_MAIN_NOT_DESCENDANT_OF_READINESS_MAIN",
+    )
+    _require(
+        remote_head(source_repo, branch) == request["target_sha"],
+        "PREVIEW_TARGET_MOVED_BEFORE_CHECKS",
+    )
+    pr_body = prior_authority["sidecars"]["pr-body.md"]
+    return {
+        "school_key": school,
+        "target_branch": branch,
+        "target_sha": request["target_sha"],
+        "approved_plan_hash": request["approved_plan_hash"],
+        "release_manifest_sha256": request["release_manifest_sha256"],
+        "readiness_checkpoint_sha256": checkpoint_ref["sha256"],
+        "readiness_verification_sha256": verification_ref["sha256"],
+        "readiness_request_id": source_request_id,
+        "pr_body_sha256": sha256_bytes(pr_body),
     }
