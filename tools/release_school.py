@@ -226,6 +226,41 @@ def verify_change_boundary(repo: Path, manifest: dict[str, Any]) -> list[str]:
     return sorted(actual)
 
 
+def verify_committed_change_boundary(
+    repo: Path,
+    manifest: dict[str, Any],
+    expected_successor_sha: str,
+) -> list[str]:
+    """Verify the already-published, sealed remote successor without recommitting.
+
+    This deliberately does not replace the original dirty-worktree release path.
+    The generic remote runner must independently authenticate the fresh-verified
+    Stage 2 successor and supply its exact SHA before invoking this mode.
+    """
+    head = git(repo, "rev-parse", "HEAD").strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", expected_successor_sha):
+        raise WorkflowError("committed successor SHA is invalid")
+    if head != expected_successor_sha:
+        raise WorkflowError("committed successor HEAD does not match authenticated SHA")
+    parent = git(repo, "rev-parse", "HEAD^").strip()
+    if parent != manifest.get("base_commit"):
+        raise WorkflowError("committed successor parent differs from sealed apply base")
+    if git(repo, "status", "--porcelain", "--untracked-files=all").strip():
+        raise WorkflowError("committed successor worktree is not clean")
+    expected = sorted(set(manifest.get("changed_paths", [])))
+    if not expected:
+        raise WorkflowError("sealed apply release manifest has no changed paths")
+    actual = sorted({
+        row.strip()
+        for row in git(repo, "diff", "--name-only", "HEAD^", "HEAD").splitlines()
+        if row.strip()
+    })
+    if actual != expected:
+        raise WorkflowError("committed successor diff differs from sealed release manifest")
+    # The remote-successor path must never create an additional publication commit.
+    return expected
+
+
 def stage_exact_paths(repo: Path, paths: list[str]) -> None:
     for path in paths:
         run(["git", "add", "--", path], cwd=repo, label=f"stage {path}", echo=False)
@@ -428,7 +463,14 @@ def wait_for_deployment(
     )
 
 
-def prepare(repo: Path, school_key: str, artifacts: Path, timeout: int) -> int:
+def prepare(
+    repo: Path,
+    school_key: str,
+    artifacts: Path,
+    timeout: int,
+    *,
+    committed_successor_sha: str | None = None,
+) -> int:
     manifest_path = artifacts / "release-manifest.json"
     approved_path = artifacts / "approved-plan.json"
     body_path = artifacts / "pr-body.md"
@@ -449,27 +491,37 @@ def prepare(repo: Path, school_key: str, artifacts: Path, timeout: int) -> int:
     correction_freeze = correction_integration_freeze_bytes(
         repo, school_key, manifest
     )
-    paths = verify_change_boundary(repo, manifest)
+    paths = (
+        verify_committed_change_boundary(repo, manifest, committed_successor_sha)
+        if committed_successor_sha is not None
+        else verify_change_boundary(repo, manifest)
+    )
     print("=== final local release gate ===")
     run_gates(
         repo, school_key, paths, include_tests=True,
         **correction_gate_kwargs_from_manifest(manifest, school_key),
     )
-    stage_exact_paths(repo, paths)
-    display = program_display_name(repo, school_key)
-    run(
-        ["git", "commit", "-m", f"Ingest and publish {display}"],
-        cwd=repo,
-        label="publication commit",
-    )
     branch = git(repo, "branch", "--show-current").strip()
     if branch in {"", "main", "master"}:
         raise WorkflowError("release branch must not be main")
-    run(
-        ["git", "push", "-u", "origin", branch],
-        cwd=repo,
-        label="push onboarding branch",
-    )
+    if committed_successor_sha is not None:
+        verify_committed_change_boundary(repo, manifest, committed_successor_sha)
+        remote = git(repo, "ls-remote", "--heads", "origin", branch).split()
+        if not remote or remote[0] != committed_successor_sha:
+            raise WorkflowError("remote onboarding branch is not exact sealed successor")
+    else:
+        stage_exact_paths(repo, paths)
+        display = program_display_name(repo, school_key)
+        run(
+            ["git", "commit", "-m", f"Ingest and publish {display}"],
+            cwd=repo,
+            label="publication commit",
+        )
+        run(
+            ["git", "push", "-u", "origin", branch],
+            cwd=repo,
+            label="push onboarding branch",
+        )
     pr = create_or_reuse_pr(repo, branch, school_key, body_path)
     pr_number = str(pr["number"])
     print("\n=== pull-request checks ===")
@@ -709,6 +761,11 @@ def parse_args() -> argparse.Namespace:
     mode.add_argument("--prepare", action="store_true")
     mode.add_argument("--merge", action="store_true")
     parser.add_argument("--preview-approved", action="store_true")
+    parser.add_argument(
+        "--committed-successor",
+        default=None,
+        help="Exact fresh-verified remote sealed-apply successor SHA; prepare only",
+    )
     parser.add_argument("--repo", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--deployment-timeout", type=int, default=900)
@@ -723,7 +780,12 @@ def main() -> int:
         if args.prepare:
             if args.preview_approved:
                 raise WorkflowError("--preview-approved is valid only with --merge")
-            return prepare(repo, args.school_key, artifacts, args.deployment_timeout)
+            return prepare(
+                repo, args.school_key, artifacts, args.deployment_timeout,
+                committed_successor_sha=args.committed_successor,
+            )
+        if args.committed_successor is not None:
+            raise WorkflowError("--committed-successor is valid only with --prepare")
         return merge(
             repo,
             args.school_key,
