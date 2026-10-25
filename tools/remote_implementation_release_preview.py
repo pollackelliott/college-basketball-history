@@ -45,7 +45,7 @@ def check_pr_identity(
     pr = release_school.gh_json(
         repo, "pr", "view", str(pr_number),
         "--json",
-        "number,url,state,isDraft,headRefOid,headRefName,baseRefName,body",
+        "number,url,state,isDraft,headRefOid,headRefName,baseRefName,body,headRepositoryOwner,headRepository",
     )
     for key, expected in (
         ("number", pr_number),
@@ -56,6 +56,21 @@ def check_pr_identity(
         ("baseRefName", "main"),
     ):
         _require(pr.get(key) == expected, "PREVIEW_PR_%s_MISMATCH" % key.upper())
+    # A matching branch name and commit SHA are insufficient if the PR's
+    # head is from an unrelated fork. Bind the repository, not just its ref.
+    repo_slug = release_school.repository_slug(repo)
+    expected_owner, expected_repo = repo_slug.split("/", 1)
+    actual_owner = pr.get("headRepositoryOwner") or {}
+    actual_repo = pr.get("headRepository") or {}
+    _require(
+        isinstance(actual_owner, dict)
+        and str(actual_owner.get("login", "")).casefold()
+        == expected_owner.casefold()
+        and isinstance(actual_repo, dict)
+        and str(actual_repo.get("name", "")).casefold()
+        == expected_repo.casefold(),
+        "PREVIEW_PR_FOREIGN_HEAD_REPOSITORY",
+    )
     body = pr.get("body")
     _require(isinstance(body, str), "PREVIEW_PR_BODY_MISSING")
     _require(
