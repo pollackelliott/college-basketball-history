@@ -53,11 +53,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/long-island-university/liu-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "21343a011c8a15b72d01d29817dbc754d70545613e8f9f2de75cd17cb9b58443",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "b3cdaee2c8306fda1c51a4247028bf58c9e03531",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "liu-release-readiness-0001",
     "school_key": "long-island-university",
     "target_branch": "data/long-island-university-onboarding",

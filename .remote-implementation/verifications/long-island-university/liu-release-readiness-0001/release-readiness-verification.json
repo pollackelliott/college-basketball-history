@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "21343a011c8a15b72d01d29817dbc754d70545613e8f9f2de75cd17cb9b58443",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "b3cdaee2c8306fda1c51a4247028bf58c9e03531",
+  "readiness_proof_sha256": "0e6e5d4946678674d7e1293e8a0e67a9145a5bb103af76045fbad6dbf848fc80",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "liu-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "long-island-university",
+  "target_branch": "data/long-island-university-onboarding",
+  "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498",
+  "tracked_mutation": "NONE"
+}
