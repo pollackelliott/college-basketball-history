@@ -105,6 +105,7 @@ from remote_implementation_stage2_apply import (
 from remote_implementation_production import (
     approve_exact_gate2,
     verify_gate2_approved_chain,
+    verify_exact_merge,
     run_permanent_production_proof,
 )
 from remote_implementation_release_preview import (
@@ -2806,8 +2807,9 @@ def run_read_only_production_proof(
     authority = verify_gate2_approved_chain(
         request, predecessor_commit, repo=ROOT,
     )
-    # Reject post-merge production proof unless merged Git main is exactly
-    # the two-parent owner-approved PR with no intervening main commit.
+    # An incorrect merge never consumes a remote request. Deployment/JSON
+    # failures after this preflight remain non-replayable and recoverable.
+    verify_exact_merge(request, authority, repo=ROOT)
     active = begin_request(
         state, request, sha256_bytes(request_bytes),
         run_id=os.environ.get("GITHUB_RUN_ID", "local"),
