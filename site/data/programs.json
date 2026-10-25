@@ -3515,8 +3515,8 @@
       "state": "NY",
       "primary_hex": "#69B3E7",
       "secondary_hex": "#FFC72C",
-      "history_start_season": null,
-      "conference_regular_season_championships": 13,
+      "history_start_season": "1928-1929",
+      "conference_regular_season_championships": 7,
       "conference_tournament_championships": 8,
       "ncaa_tournament_appearances": 8,
       "final_four_appearances": 0,
@@ -3524,7 +3524,7 @@
       "best_finish_key": "ROUND_OF_64",
       "best_finish_year": 2026,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"

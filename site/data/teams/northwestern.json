@@ -2929,7 +2929,7 @@
       "opponent_key": "long-island-university",
       "opponent_name": "Long Island",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "nec",
         "conference_name": "NEC"
@@ -57523,7 +57523,7 @@
       "opponent_key": "long-island-university",
       "opponent_name": "Long Island",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 70,
       "opponent_score": 42,
       "score_known": true,
@@ -63498,7 +63498,7 @@
       "opponent_key": "long-island-university",
       "opponent_name": "Long Island",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 81,
       "opponent_score": 65,
       "score_known": true,
