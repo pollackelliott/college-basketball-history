@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "boise-state",
+  "created_at": "2026-10-25T20:25:57.359856+00:00",
+  "input_fingerprint": {
+    "sha256": "e595bc5a85685a0c2d845886ce5d0ecd669bf2e01eea8c3306bc259e36a0d074",
+    "git_head": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+    "files": {
+      "schools/boise-state/source-games.csv": "708825350b0692c17c9178a436e602a0ced0c7b1f7922bf4733aab3b42802634",
+      "schools/boise-state/opponents.csv": "0f6e944560bca6815a72bd6887f78f40fd1acf0292af608e2cefff71fe4b4590",
+      "schools/boise-state/venues.csv": "2ab119396546084fa6d5aa0ebf9b4a8f85e497a4242e9650b52b40e5f3a8d0a8",
+      "schools/boise-state/conferences.csv": "7260551e24aa445bd872215c0119a5e2063dd7b771b7f0d5b930e2c04b660664",
+      "schools/boise-state/notes.md": "1acd75157630eacaf55d5380652e90b792624e78c79a28552bfe129922c3454b",
+      "schools/boise-state/source-notes.md": "7174a4cfc080c399a47353ad1813fd0c242d8ae1056439945ad891fee33da0ea",
+      "data/canonical/games.csv": "b26ab54f7ed7c963717e7ab92b92feb73dd79e1d5af23e4d0fb8438fa23152d0",
+      "data/evidence/game-assertions.csv": "8c6451ca5219d4a18d0712d3502a96ff2ccf4be56583a312d0b5df67899c6b94",
+      "data/reconciliation/discrepancies.csv": "f5b1dc7d7ac254ea3b27738f5a017d2d4776b0251c411891168ca013c143b819",
+      "data/reference/programs.csv": "c64bd017c34e6601ac74e011b56db6a29233e327b31804e941492f1171ecc217",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "e87d826e27b0d4553a6628159f1796f1aca48eec83f8acd8ea3cbf10b247538f",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "4d8c561c1fb1d6464fcc4294c07fafced37bce0518af18439522c7f1de90c8e7",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "23537ef3a9d1825c38c22189d9274980f10759970b978a600948bef74d6895f8",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "2ff31bbef154741e7be730206e2c8dfdcb0a26626fbaab593b305ed9eef4e794",
+      "tools/onboarding_plan.py": "52af116befe815950162e95936fa83bfb6f233208e507ef6e51b5dd41d372e46",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: metropolitan-state-denver: ['MSU Denver', 'Metropolitan State Denver']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 1670,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 400,
+      "venues": 56,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: metropolitan-state-denver: ['MSU Denver', 'Metropolitan State Denver']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
