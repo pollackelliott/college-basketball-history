@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "request_id": "boise-state-phase0-0001",
+  "research_checkpoint_sha256": "ffb3d0c7ef434cd48f9ee5b9df016b607eeba26b27c856fb81810254a2b9c0de",
+  "research_member_sha256": {
+    "conferences.csv": "7260551e24aa445bd872215c0119a5e2063dd7b771b7f0d5b930e2c04b660664",
+    "notes.md": "3039704452c407bd34d969b87120059fcf7343efd0830d4c9de43adf5a49098b",
+    "opponents.csv": "0f6e944560bca6815a72bd6887f78f40fd1acf0292af608e2cefff71fe4b4590",
+    "source-games.csv": "708825350b0692c17c9178a436e602a0ced0c7b1f7922bf4733aab3b42802634",
+    "source-notes.md": "7174a4cfc080c399a47353ad1813fd0c242d8ae1056439945ad891fee33da0ea",
+    "venues.csv": "6d5ac7f7bc882a76f0970c11f847148fe83e9e3bdb91ebfb60f42658f0a6c3f8"
+  },
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "sidecars": {
+    "stage1-reconciliation.json": "b55f50926d6acd935ba890c30fc51f6669c739f2f4dc096e9acd6112252b1d3f"
+  },
+  "stage1_status": "PASS"
+}
