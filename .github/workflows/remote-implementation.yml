@@ -64,6 +64,36 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+  fresh-release-preview-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'RELEASE_PREVIEW_VERIFY'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest durable control state
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Independently verify exact PR-head CI and Preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/remote_implementation_verify.py
+
+      - name: Upload release Preview verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-release-preview-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
+
   fresh-release-readiness-verification:
     needs: process-request
     if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'RELEASE_READINESS'
