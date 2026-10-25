@@ -217,7 +217,8 @@ def verify_release_readiness_authority(
         manifest,
         {
             "school_key": school,
-            "branch": branch,
+            # The sealed apply manifest was produced in a disposable runner
+            # worktree. Its 'branch' is not the published target Git ref.
             "base_commit": successor["expected_target_predecessor_sha"],
             "approved_plan_hash": request["approved_plan_hash"],
             "changed_paths": successor["changed_paths"],
