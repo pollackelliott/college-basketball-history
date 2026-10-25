@@ -46,16 +46,15 @@ class ExactPreviewVerificationTests(unittest.TestCase):
             ("baseRefName", "other"),
             ("body", "changed"),
         ):
-            with self.subTest(key=key), (
-                patch.object(preview.release_school, "gh_json") as gh,
-                patch.object(preview, "remote_head", return_value=SHA),
-            ):
-                gh.return_value = {**valid_pr(), key: value}
-                with self.assertRaises(Stop):
-                    preview.check_pr_identity(
-                        ROOT, pr_number=PR_NO, target_branch=BRANCH,
-                        target_sha=SHA, exact_pr_body_sha256=BODY_SHA,
-                    )
+            with self.subTest(key=key):
+                with patch.object(preview.release_school, "gh_json") as gh:
+                    with patch.object(preview, "remote_head", return_value=SHA):
+                        gh.return_value = {**valid_pr(), key: value}
+                        with self.assertRaises(Stop):
+                            preview.check_pr_identity(
+                                ROOT, pr_number=PR_NO, target_branch=BRANCH,
+                                target_sha=SHA, exact_pr_body_sha256=BODY_SHA,
+                            )
 
     @patch.object(preview.release_school, "gh_json")
     @patch.object(preview, "remote_head", return_value="c" * 40)
