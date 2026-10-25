@@ -254,5 +254,62 @@ class ProtectedMainMergeTests(unittest.TestCase):
         )
 
 
+class CommittedRemoteSuccessorTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.repo = Path(self.tmp.name)
+        subprocess.run(["git", "init", "-q", "-b", "main"], cwd=self.repo, check=True)
+        subprocess.run(["git", "config", "user.name", "Regression"], cwd=self.repo, check=True)
+        subprocess.run(["git", "config", "user.email", "regression@example.test"], cwd=self.repo, check=True)
+        (self.repo / "stable.txt").write_text("stable\\n", encoding="utf-8")
+        subprocess.run(["git", "add", "stable.txt"], cwd=self.repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "baseline"], cwd=self.repo, check=True)
+        self.base = self.git("rev-parse", "HEAD")
+        subprocess.run(["git", "switch", "-q", "-c", "data/example-onboarding"], cwd=self.repo, check=True)
+        (self.repo / "accepted.txt").write_text("approved\\n", encoding="utf-8")
+        subprocess.run(["git", "add", "accepted.txt"], cwd=self.repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "sealed apply"], cwd=self.repo, check=True)
+        self.head = self.git("rev-parse", "HEAD")
+        self.manifest = {"base_commit": self.base, "changed_paths": ["accepted.txt"]}
+
+    def git(self, *args):
+        return subprocess.check_output(["git", *args], cwd=self.repo, text=True).strip()
+
+    def test_accept_exact_clean_committed_successor(self):
+        paths = release_school.verify_committed_change_boundary(
+            self.repo, self.manifest, self.head
+        )
+        self.assertEqual(paths, ["accepted.txt"])
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.head)
+
+    def test_reject_wrong_authenticated_successor(self):
+        with self.assertRaisesRegex(release_school.WorkflowError, "HEAD does not match"):
+            release_school.verify_committed_change_boundary(
+                self.repo, self.manifest, self.base
+            )
+
+    def test_reject_wrong_predecessor(self):
+        self.manifest["base_commit"] = "a" * 40
+        with self.assertRaisesRegex(release_school.WorkflowError, "parent differs"):
+            release_school.verify_committed_change_boundary(
+                self.repo, self.manifest, self.head
+            )
+
+    def test_reject_unrelated_committed_change(self):
+        self.manifest["changed_paths"] = ["stable.txt"]
+        with self.assertRaisesRegex(release_school.WorkflowError, "diff differs"):
+            release_school.verify_committed_change_boundary(
+                self.repo, self.manifest, self.head
+            )
+
+    def test_reject_dirty_or_untracked_worktree(self):
+        (self.repo / "unexpected.txt").write_text("not approved\\n", encoding="utf-8")
+        with self.assertRaisesRegex(release_school.WorkflowError, "not clean"):
+            release_school.verify_committed_change_boundary(
+                self.repo, self.manifest, self.head
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
