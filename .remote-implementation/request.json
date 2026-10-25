@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "liu-stage2-gate1-seal-0001",
+  "request_id": "liu-stage2-sealed-apply-0001",
   "school_key": "long-island-university",
-  "operation": "STAGE2_GATE1_SEAL",
-  "previous_control_state_commit": "f935dec8156b39f484aecb9cd39a327f8388891c",
-  "previous_control_state_sha256": "c1faa5ece5b9848ccc9afbab124cf544d8d227082eff972961584b2c71c29637",
-  "expected_protected_main_sha": "9607464d6bcb40bb41a2f072e159d22492cc9b20",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "3947eba0c020fa209f21a7d2f6742057152dba3d",
+  "previous_control_state_sha256": "4b40cbd0666bd278c7abc8c67778c72e73883181cbdd32e8c1bbb812a2f76a3a",
+  "expected_protected_main_sha": "802de9cbe0b779da0bad55c71969d3337fa62e82",
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner explicitly authorized exactly one remote STAGE2_GATE1_SEAL for Long Island University against fresh-verified liu-stage2-preseal-0002 authority. This carries forward the existing exact Owner Gate 1 approval chain only. It authorizes current-main pre-seal replay and cryptographic sealing through permanent onboard_school.py --approve, but no sealed apply, tracked LIU basketball mutation, Preview, Owner Gate 2, merge, release, or Production proof."
+    "authorization": "Owner explicitly authorized exactly one bounded remote STAGE2_SEALED_APPLY for Long Island University against the exact fresh-verified cryptographic Gate 1 seal liu-stage2-gate1-seal-0001. This authorizes only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent fresh successor verification. It creates no new historical authority and grants no release preparation, Preview, Owner Gate 2, merge, release, Production proof, unrelated repair, or second Implementation-lane authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -22,26 +22,27 @@
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
     "stage2_reconciliation_diagnostic": false
   },
   "target_branch": "data/long-island-university-onboarding",
   "target_sha": "79655f4862eb654fb3801d1422fe1712cac98a61",
-  "stage2_preseal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-preseal-0002/checkpoint-manifest.json",
-    "sha256": "e9748efe28eb01384881aebc84dc73b20cf747fc130cae79015d7d52e37d3c65"
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/long-island-university/liu-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "4f0816c7ca73d49530d171dd943c5cda1701d1aeccbd9283afad8cd5ce4750da"
   },
-  "stage2_preseal_verification": {
-    "path": ".remote-implementation/verifications/long-island-university/liu-stage2-preseal-0002/stage2-preseal-rehearsal-verification.json",
-    "sha256": "8b00962ea3ea659d85d99c06b4deda0fdbfb370b86cf222f134b450c4c95c080"
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/long-island-university/liu-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "5d1b9a92371572930c46ba34b4234f120402be7afe3d6b24cfa8b4d4bcfa72b0"
   },
+  "approved_plan_hash": "7ed1c916f96d5b01016b9b1df56e1a82f4c0505802ed9654c086289a605f6e5f",
+  "approved_plan_sha256": "0d673575f67c7ffc56c0499cd30a2915a1b335a82401aa7668b27af803a93d36",
+  "owner_gate_1_approval_sha256": "afee8b38cb3f345771f47a273f35710bd7d67073d3225abc7bbccd912e0a23cf",
   "integration_freeze_sha256": "336c1a9a69149f09522fc6d283b64a18529c465ea8b0deccac1fd351046b657a",
   "semantic_snapshot_sha256": "3e9c996db3cc0089c5e314c851309c818dbdbf0f04724676d9eaf28b649ee3d0",
   "decision_universe_sha256": "c8041d2cb7be3b1c1b68e0530e2a89a9b321e62635380a63f727fda56ff83e48",
   "recommendation_map_sha256": "2f4b2f840ca707f1b49150b024da8a46ce826b26d509f072d12c6df42e161f9f",
-  "approved_plan_hash_preview": "14f151af3722fe6af2814275d47fd22a3056a2a6936a5f4b71b4251539dd70b5",
   "filled_review_sha256": "258ac160be65a788c9e157994d2d08f539811458df7dae23d2114de619ef9b60",
-  "decision_id_set_sha256": "37c02816f16081bd13312f114178d2d5e3a40f7b6688c7450d8192429b79e9d6",
-  "owner_gate_1_approval_sha256": "afee8b38cb3f345771f47a273f35710bd7d67073d3225abc7bbccd912e0a23cf",
-  "equivalence_sha256": "aef0853bfd857f0fac32fb977584736ef15f9c819d7bca4ae60b1ac55d54ae23"
+  "decision_id_set_sha256": "37c02816f16081bd13312f114178d2d5e3a40f7b6688c7450d8192429b79e9d6"
 }
