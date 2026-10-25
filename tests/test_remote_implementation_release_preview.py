@@ -135,7 +135,7 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
             + school + "/" + rid + "/request.json"
         )
         prior = {"request_id": rid, "operation": "RELEASE_READINESS"}
-        prior_bytes = (json.dumps(prior, sort_keys=True) + "\\n").encode()
+        prior_bytes = (json.dumps(prior, sort_keys=True)).encode()
         base = {
             "request_id": rid, "school_key": school, "target_branch": BRANCH,
             "target_sha": SHA, "approved_plan_hash": "e" * 64,
@@ -149,7 +149,7 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
             "readiness_status": "RELEASE_READINESS_PASS",
             "tracked_mutation": "NONE", "pr_created": False, "owner_gate_2": False,
         }
-        ckpt_bytes = (json.dumps(check, sort_keys=True) + "\\n").encode()
+        ckpt_bytes = (json.dumps(check, sort_keys=True)).encode()
         ver = {
             **base,
             "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
@@ -157,7 +157,7 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
             "remote_release_readiness_equivalence": "PASS",
             "tracked_mutation": "NONE", "pr_created": False, "owner_gate_2": False,
         }
-        ver_bytes = (json.dumps(ver, sort_keys=True) + "\\n").encode()
+        ver_bytes = (json.dumps(ver, sort_keys=True)).encode()
         request = {
             "school_key": school, "target_branch": BRANCH, "target_sha": SHA,
             "expected_protected_main_sha": "1" * 40,
@@ -212,7 +212,7 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
         path = request["release_readiness_verification"]["path"]
         doc = json.loads(store[path])
         doc["remote_release_readiness_equivalence"] = "PENDING"
-        store[path] = (json.dumps(doc, sort_keys=True) + "\\n").encode()
+        store[path] = (json.dumps(doc, sort_keys=True)).encode()
         request["release_readiness_verification"]["sha256"] = hashlib.sha256(store[path]).hexdigest()
         with self.assertRaisesRegex(Stop, "EQUIVALENCE_MISMATCH"):
             self.authenticate(request, store)
