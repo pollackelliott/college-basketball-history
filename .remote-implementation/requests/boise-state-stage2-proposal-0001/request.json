@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-stage2-proposal-0001",
+  "school_key": "boise-state",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "eee1a372a33810811fc146cc947dae6beb0da5c9",
+  "previous_control_state_sha256": "83da2ff82e849c9dd2b69b92da350bd5ff83f77c25cf15cab031afeb5cf33aaa",
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/boise-state/boise-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8a8153a9db9102bf3773d172303adf8f1559d38d49e7a0a8e46d19a6da15ddf1"
+  },
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/boise-state-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner said Proceed after independently verified Boise State Stage 2 opponent-display normalization, authorizing the next bounded unit: complete the seven-decision evidence review, bind one exact recommendation map, and run one read-only STAGE2_PROPOSAL_REHEARSAL only. No Owner Gate 1 approval, fill, seal, apply, additional tracked mutation, Preview, release, merge, Production, recovery, or unrelated historical authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
