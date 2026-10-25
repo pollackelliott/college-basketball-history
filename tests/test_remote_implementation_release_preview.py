@@ -23,13 +23,16 @@ def valid_pr():
         "number": PR_NO, "url": "https://github.com/example/repo/pull/123",
         "state": "OPEN", "isDraft": False, "headRefOid": SHA,
         "headRefName": BRANCH, "baseRefName": "main", "body": BODY,
+        "headRepositoryOwner": {"login": "example"},
+        "headRepository": {"name": "repo"},
     }
 
 
 class ExactPreviewVerificationTests(unittest.TestCase):
+    @patch.object(preview.release_school, "repository_slug", return_value="example/repo")
     @patch.object(preview.release_school, "gh_json")
     @patch.object(preview, "remote_head", return_value=SHA)
-    def test_pr_identity_valid(self, _remote, gh):
+    def test_pr_identity_valid(self, _remote, gh, _slug):
         gh.return_value = valid_pr()
         result = preview.check_pr_identity(
             ROOT, pr_number=PR_NO, target_branch=BRANCH,
@@ -48,13 +51,30 @@ class ExactPreviewVerificationTests(unittest.TestCase):
         ):
             with self.subTest(key=key):
                 with patch.object(preview.release_school, "gh_json") as gh:
-                    with patch.object(preview, "remote_head", return_value=SHA):
-                        gh.return_value = {**valid_pr(), key: value}
-                        with self.assertRaises(Stop):
-                            preview.check_pr_identity(
-                                ROOT, pr_number=PR_NO, target_branch=BRANCH,
-                                target_sha=SHA, exact_pr_body_sha256=BODY_SHA,
-                            )
+                    with patch.object(preview.release_school, "repository_slug", return_value="example/repo"):
+                        with patch.object(preview, "remote_head", return_value=SHA):
+                            gh.return_value = {**valid_pr(), key: value}
+                            with self.assertRaises(Stop):
+                                preview.check_pr_identity(
+                                    ROOT, pr_number=PR_NO, target_branch=BRANCH,
+                                    target_sha=SHA, exact_pr_body_sha256=BODY_SHA,
+                                )
+
+    @patch.object(preview.release_school, "repository_slug", return_value="example/repo")
+    @patch.object(preview.release_school, "gh_json")
+    @patch.object(preview, "remote_head", return_value=SHA)
+    def test_foreign_pr_head_repo_refused(self, _remote, gh, _slug):
+        for key, value in (
+            ("headRepositoryOwner", {"login": "unauthorized"}),
+            ("headRepository", {"name": "foreign-fork"}),
+        ):
+            with self.subTest(key=key):
+                gh.return_value = {**valid_pr(), key: value}
+                with self.assertRaisesRegex(Stop, "PREVIEW_PR_FOREIGN_HEAD_REPOSITORY"):
+                    preview.check_pr_identity(
+                        ROOT, pr_number=PR_NO, target_branch=BRANCH,
+                        target_sha=SHA, exact_pr_body_sha256=BODY_SHA,
+                    )
 
     @patch.object(preview.release_school, "gh_json")
     @patch.object(preview, "remote_head", return_value="c" * 40)
