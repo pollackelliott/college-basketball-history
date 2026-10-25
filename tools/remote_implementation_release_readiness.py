@@ -283,7 +283,10 @@ def run_permanent_release_readiness(
     )
     # Only ignored artifacts supplied by exact authenticated write-ahead are restored.
     artifact_dir.mkdir(parents=True, exist_ok=True)
-    for name in ("release-manifest.json", "approved-plan.json", "pr-body.md", "visual-qa.md"):
+    for name in (
+        "release-manifest.json", "approved-plan.json", "pr-body.md",
+        "visual-qa.md", "integration-freeze.json",
+    ):
         (artifact_dir / name).write_bytes(authority["sidecars"][name])
     paths = release_school.verify_committed_change_boundary(
         worktree, manifest, target
