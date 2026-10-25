@@ -22,6 +22,8 @@ from remote_implementation_control import (
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
     OP_RELEASE_PREVIEW_VERIFY,
+    OP_RELEASE_GATE2_APPROVAL,
+    OP_RELEASE_PRODUCTION_PROOF,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     sha256_bytes,
@@ -83,6 +85,11 @@ from remote_implementation_stage2_opponent_display import (
     run_normalizer_dry_run,
     verify_census_and_freeze_authority,
     verify_prepared_commit_field_boundary,
+)
+from remote_implementation_production import (
+    approve_exact_gate2,
+    verify_gate2_approved_chain,
+    run_permanent_production_proof,
 )
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
@@ -1960,6 +1967,191 @@ def verify_release_preview(
     return 0
 
 
+def verify_gate2_approval(live_main: str, control_head: str, state: dict) -> int:
+    """Fresh, independent exact approved Preview recheck; no merge."""
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("OWNER GATE 2: PASS (previously verified)")
+        return 0
+    checkpoint_bytes = git_show_bytes(control_head, last["checkpoint_manifest_path"])
+    if sha256_bytes(checkpoint_bytes) != last["checkpoint_manifest_sha256"]:
+        raise Stop("GATE2_FRESH_CHECKPOINT_HASH_MISMATCH")
+    manifest = json.loads(checkpoint_bytes)
+    if (
+        manifest.get("kind") != "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT"
+        or manifest.get("protected_main_sha") != live_main
+        or manifest.get("status") != "OWNER_GATE_2_APPROVED"
+        or manifest.get("owner_gate_2_approved") is not True
+        or manifest.get("merged") is not False
+    ):
+        raise Stop("GATE2_FRESH_CHECKPOINT_STATE_INVALID")
+    path = Path(last["checkpoint_manifest_path"]).parent
+    request_bytes = git_show_bytes(control_head, (path / "request.json").as_posix())
+    if sha256_bytes(request_bytes) != manifest["request_sha256"]:
+        raise Stop("GATE2_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    if (
+        request.get("operation") != OP_RELEASE_GATE2_APPROVAL
+        or request.get("request_id") != manifest["request_id"]
+    ):
+        raise Stop("GATE2_FRESH_REQUEST_INVALID")
+    recorded_bytes = git_show_bytes(
+        control_head, (path / "gate2-approval-proof.json").as_posix()
+    )
+    if sha256_bytes(recorded_bytes) != manifest["approval_proof_sha256"]:
+        raise Stop("GATE2_FRESH_PROOF_HASH_MISMATCH")
+    recorded = json.loads(recorded_bytes)
+    fresh = approve_exact_gate2(request, control_head, repo=ROOT)
+    if recorded != fresh:
+        raise Stop("GATE2_FRESH_STRUCTURED_EQUIVALENCE_MISMATCH")
+    for field, expected in (
+        ("pr_number", fresh["pr_number"]),
+        ("pr_head_sha", fresh["target_sha"]),
+        ("preview_deployment_id", fresh["preview_deployment_id"]),
+        ("preview_url", fresh["preview_url"]),
+        ("preview_checkpoint_sha256", fresh["preview_checkpoint_sha256"]),
+    ):
+        if manifest.get(field) != expected:
+            raise Stop("GATE2_FRESH_MANIFEST_MISMATCH:" + field)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("GATE2_FRESH_TARGET_REF_MOVED")
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+        "status": "PASS",
+        "request_id": request["request_id"],
+        "school_key": request["school_key"],
+        "checkpoint_sha256": last["checkpoint_manifest_sha256"],
+        "pr_number": fresh["pr_number"],
+        "pr_head_sha": fresh["target_sha"],
+        "preview_deployment_id": fresh["preview_deployment_id"],
+        "preview_url": fresh["preview_url"],
+        "owner_gate_2_approved": True,
+        "merged": False,
+        "remote_gate2_approval_equivalence": "PASS",
+    }
+    folder = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    write_json(folder / "gate2-approval-verification.json", verification)
+    local = read_json(STATE_PATH)
+    validate_control_state(local)
+    current = local.get("last_operation") or {}
+    if (
+        current.get("operation") != OP_RELEASE_GATE2_APPROVAL
+        or current.get("request_id") != request["request_id"]
+    ):
+        raise Stop("GATE2_FRESH_CONTROL_MOVED")
+    current["fresh_runner_verification"] = "PASS"
+    current["remote_gate2_approval_equivalence"] = "PASS"
+    local["last_operation"] = current
+    write_json(STATE_PATH, local)
+    commit = commit_control(
+        control_head,
+        "persist exact Owner Gate 2 fresh verification %s" % request["request_id"],
+        [STATE_PATH, folder],
+    )
+    print("OWNER GATE 2 EQUIVALENCE PASS commit=%s" % commit)
+    return 0
+
+
+def verify_exact_production(live_main: str, control_head: str, state: dict) -> int:
+    """Fresh-replay permanent Production gates + exact merged SHA/JSON."""
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE PRODUCTION: PASS (previously verified)")
+        return 0
+    checkpoint_bytes = git_show_bytes(control_head, last["checkpoint_manifest_path"])
+    if sha256_bytes(checkpoint_bytes) != last["checkpoint_manifest_sha256"]:
+        raise Stop("PRODUCTION_FRESH_CHECKPOINT_HASH_MISMATCH")
+    manifest = json.loads(checkpoint_bytes)
+    if (
+        manifest.get("kind") != "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT"
+        or manifest.get("status") != "PRODUCTION_PROOF_PASS"
+        or manifest.get("merge_sha") != live_main
+        or manifest.get("owner_gate_2_approved") is not True
+        or manifest.get("merged") is not True
+        or manifest.get("production_proof") is not True
+    ):
+        raise Stop("PRODUCTION_FRESH_CHECKPOINT_STATE_INVALID")
+    directory = Path(last["checkpoint_manifest_path"]).parent
+    request_bytes = git_show_bytes(control_head, (directory / "request.json").as_posix())
+    if sha256_bytes(request_bytes) != manifest["request_sha256"]:
+        raise Stop("PRODUCTION_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    if (
+        request.get("operation") != OP_RELEASE_PRODUCTION_PROOF
+        or request.get("merge_sha") != live_main
+        or request.get("request_id") != manifest["request_id"]
+    ):
+        raise Stop("PRODUCTION_FRESH_REQUEST_INVALID")
+    proof_bytes = git_show_bytes(
+        control_head, (directory / "production-proof.json").as_posix()
+    )
+    if sha256_bytes(proof_bytes) != manifest["production_proof_sha256"]:
+        raise Stop("PRODUCTION_FRESH_PROOF_HASH_MISMATCH")
+    recorded = json.loads(proof_bytes)
+    authority = verify_gate2_approved_chain(request, control_head, repo=ROOT)
+    fresh = run_permanent_production_proof(request, authority, repo=ROOT)
+    if fresh != recorded:
+        raise Stop("PRODUCTION_FRESH_STRUCTURED_EQUIVALENCE_MISMATCH")
+    for field, expected in (
+        ("pr_number", fresh["pr_number"]),
+        ("pr_head_sha", fresh["pr_head_sha"]),
+        ("merge_sha", fresh["merge_sha"]),
+        ("merge_parent_main", fresh["merge_parent_main"]),
+        ("merge_parent_onboarding", fresh["merge_parent_onboarding"]),
+        ("production_deployment_id", fresh["production_deployment_id"]),
+        ("production_json_checked_count", fresh["production_json_checked_count"]),
+    ):
+        if manifest.get(field) != expected:
+            raise Stop("PRODUCTION_FRESH_MANIFEST_MISMATCH:" + field)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("PRODUCTION_FRESH_TARGET_REF_MOVED")
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+        "status": "COMPLETE",
+        "request_id": request["request_id"],
+        "school_key": request["school_key"],
+        "checkpoint_sha256": last["checkpoint_manifest_sha256"],
+        "pr_number": request["pr_number"],
+        "pr_head_sha": request["target_sha"],
+        "merge_sha": live_main,
+        "production_deployment_id": fresh["production_deployment_id"],
+        "production_json_checked_count": fresh["production_json_checked_count"],
+        "exact_production_equivalence": "PASS",
+        "owner_gate_2_approved": True,
+        "merged": True,
+        "production_proof": True,
+    }
+    folder = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    write_json(folder / "production-verification.json", verification)
+    local = read_json(STATE_PATH)
+    validate_control_state(local)
+    current = local.get("last_operation") or {}
+    if (
+        current.get("operation") != OP_RELEASE_PRODUCTION_PROOF
+        or current.get("request_id") != request["request_id"]
+    ):
+        raise Stop("PRODUCTION_FRESH_CONTROL_MOVED")
+    current["fresh_runner_verification"] = "PASS"
+    current["remote_production_proof_equivalence"] = "PASS"
+    local["last_operation"] = current
+    write_json(STATE_PATH, local)
+    commit = commit_control(
+        control_head,
+        "persist independent exact Production proof %s" % request["request_id"],
+        [STATE_PATH, folder],
+    )
+    print("REMOTE EXACT PRODUCTION PROOF EQUIVALENCE PASS commit=%s" % commit)
+    return 0
+
+
 def main() -> int:
     DIAG.mkdir(parents=True, exist_ok=True)
     try:
@@ -1970,6 +2162,10 @@ def main() -> int:
         if state.get("lifecycle_state") != LIFECYCLE_IDLE:
             raise Stop("FRESH_VERIFY_CONTROL_NOT_IDLE")
         last = state.get("last_operation") or {}
+        if last.get("operation") == OP_RELEASE_GATE2_APPROVAL:
+            return verify_gate2_approval(live_main, control_head, state)
+        if last.get("operation") == OP_RELEASE_PRODUCTION_PROOF:
+            return verify_exact_production(live_main, control_head, state)
         if last.get("operation") == OP_RELEASE_PREVIEW_VERIFY:
             return verify_release_preview(live_main, control_head, state)
         if last.get("operation") == OP_RELEASE_READINESS:
