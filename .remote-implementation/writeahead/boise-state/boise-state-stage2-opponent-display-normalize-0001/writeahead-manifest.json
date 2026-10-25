@@ -1,0 +1,65 @@
+{
+  "allowed_paths": [
+    "schools/boise-state/opponents.csv",
+    "schools/boise-state/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/boise-state/opponents.csv": "b9ddad312bacdaa1d7e9a3d62469ad7f75ddd2c12ecdddcdf6a4588482c4cdb6",
+    "schools/boise-state/source-games.csv": "d329c91e409bf4aff94901185983363786eb0f3e821e3622bc4ec678dff7e5c1"
+  },
+  "changed_paths": [
+    "schools/boise-state/opponents.csv",
+    "schools/boise-state/source-games.csv"
+  ],
+  "commit_message": "Normalize boise-state historical opponent display representation",
+  "expected_blocker_keys": [
+    "metropolitan-state-denver"
+  ],
+  "expected_target_predecessor_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+  "field_level_proof_sha256": "030841149730f9369f6249545e9ec192b90429e8c3d05cd19cdbb8bed7c0e2e5",
+  "global_lock_commit": "eccba2f9ebdf5ae28c098ea897b938990ab05436",
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "c29d738ddc75d76d53738e60e560c2e3379756adcbb5edf137de6f569aa062ae",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
+  "prepared_parent_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+  "prepared_tree_sha": "1933062342792cbe8be76a688ab5a9c31fe8a7af",
+  "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "repository_validation": "PASS",
+  "request_id": "boise-state-stage2-opponent-display-normalize-0001",
+  "request_sha256": "2681cb2320c2edf626bd7270502a1a04d617a1addc0052c215c2e1c39b77c345",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_drift_after": {
+    "baseline_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "integration_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "school_key": "boise-state",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "integration_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "school_key": "boise-state",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "63e0377a9a63090485f53266880e56186899faec6b1e13106f43206f8cf16e48",
+    "field-level-proof.json": "030841149730f9369f6249545e9ec192b90429e8c3d05cd19cdbb8bed7c0e2e5",
+    "integration-freeze.json": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+    "normalization-report.json": "c29d738ddc75d76d53738e60e560c2e3379756adcbb5edf137de6f569aa062ae",
+    "semantic-drift-proof.json": "5c89baba26564d9fb6d5b345d5eaa4b1151b3af92f2ec5dcf37f68fcd9157514"
+  },
+  "source_game_normalized_name_row_count": 1,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/boise-state/boise-state-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "63e0377a9a63090485f53266880e56186899faec6b1e13106f43206f8cf16e48",
+  "target_branch": "data/boise-state-onboarding"
+}

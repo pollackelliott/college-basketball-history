@@ -1,0 +1,78 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+    "implementation-stage2-status.json": "daff31dd83f063d465f56d01343eac48cc9cd0d1939380b81ae29dd966bce65d",
+    "plan.json": "f71d1ef1417f2d743b5f4f357e74e2eba9fc9ab17819792b126d2674796b239c",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "39aca9410b38ba5dc162633276bc29587c51ca571f64f3e822e5843a839e95ec"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+    "implementation-stage2-status.json": "3b7eb9e1c9ebdceb10256ee670620b00d65d6b5eb912584a5d6b223432d884cb",
+    "plan.json": "72b2b5bd9070fe21d1658f420ab80d3073738bbf387c6bfbb1fad879a571a43a",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "d57bf74ce9c0a888ac73614a99eaffeb57954ab57d288fb64f84ae61b815e7fd"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 1,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "boise-state"
+  ],
+  "phase0_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "phase0_successor_path": ".remote-implementation/successors/boise-state/boise-state-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "f1dbd4a6231527460700ebc537f8aed35dfd35d62c818f65035a5e23c46a3ccc",
+  "preflight": {
+    "blocker_count": 1,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/boise-state/plan.json",
+    "review_path": ".onboarding/boise-state/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "request_id": "boise-state-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+  "target_tree_sha": "3f87f63487ae0508220907ecdacbe09a939a3f25",
+  "tracked_mutation_proof": {
+    "after_head_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+    "after_status": "",
+    "after_tree_sha": "3f87f63487ae0508220907ecdacbe09a939a3f25",
+    "before_head_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+    "before_status": "",
+    "before_tree_sha": "3f87f63487ae0508220907ecdacbe09a939a3f25",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

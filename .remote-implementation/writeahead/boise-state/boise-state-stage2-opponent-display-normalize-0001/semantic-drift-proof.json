@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "integration_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "school_key": "boise-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+    "integration_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "school_key": "boise-state",
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 1,
+  "change_row_count": 1,
+  "changes": [
+    {
+      "authority_names": [
+        "Metropolitan State Denver"
+      ],
+      "authority_signature": "metropolitanstatedenver",
+      "canonical_opponent_key": "metropolitan-state-denver",
+      "from_names": [
+        "MSU Denver"
+      ],
+      "target_row_count": 1,
+      "to_name": "Metropolitan State Denver"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "source_game_display_change_keys": 1,
+  "source_game_display_change_rows": 1,
+  "source_game_display_changes": [
+    {
+      "from_name": "MSU Denver",
+      "normalized_opponent_key": "metropolitan-state-denver",
+      "source_game_id": "BOI-S1-198586-004",
+      "to_name": "Metropolitan State Denver"
+    }
+  ],
+  "status": "PASS"
+}
