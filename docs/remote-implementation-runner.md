@@ -512,6 +512,20 @@ A successful request checkpoints `RELEASE_READINESS_PASS` with exact proof SHA, 
 
 This is **not** `OWNER_GATE_2_READY`. A subsequent separately productionized authenticated PR/CI/Preview unit is required to reach that boundary. The operational GitHub Action still has no `pull-requests:write` scope and must not create PRs using its ordinary `GITHUB_TOKEN` as a shortcut that would produce CI approval friction.
 
+### Exact remote PR/CI/Preview verification
+
+`RELEASE_PREVIEW_VERIFY` is a separate bounded, read-only control operation after a completed and independently fresh-verified `RELEASE_READINESS` checkpoint **and** creation of the onboarding release PR by the school Implementation chat through its authorized GitHub connector. The ordinary GitHub Actions `GITHUB_TOKEN` is never used to create the PR: PR creation must trigger the repository's ordinary required CI and Vercel Preview workflows without a routine owner-side `Approve workflows to run` step.
+
+A school Implementation lane may advance both internal boundaries within **one** owner-authorized release `Proceed`: authenticate the sealed apply, submit/monitor release readiness through independent PASS, then use its GitHub connector to create or reuse the exact school-specific PR with the preserved approved `pr-body.md`, submit/monitor `RELEASE_PREVIEW_VERIFY`, and present the resulting Preview. These are bounded, serialized operations; do not submit a second remote request while an earlier request is active or unverified. If any intermediate phase blocks, stop at its durable checkpoint and do not keep advancing.
+
+The preview-verification request binds current main, exact school target ref/SHA, approved-plan hash, sealed release-manifest hash, the exact release-readiness checkpoint path/SHA-256, its independently fresh PASS verification path/SHA-256, and the **existing** PR number. It carries only `release_preview_verify=true`, with all mutation, `release`, Owner Gate 1, and Owner Gate 2 authority false. It authenticates the complete earlier sealed apply and readiness chain, the prior exact approved PR-body bytes, the ancestry of any later tooling main, and the unchanged target SHA.
+
+The permanent `release_school` helpers, not new replica release logic, check the PR's exact open/non-draft state, base `main`, correct head branch and **exact sealed-apply successor SHA**, exact PR body SHA-256, successful GitHub PR checks, clean mergeability, and the successful Vercel `Preview` deployment associated with **that exact PR head SHA**. The PR state, target Git ref, and body are rechecked after Preview. A Preview deployment is never accepted as Production proof.
+
+On success, the runner durably checkpoints `OWNER_GATE_2_READY` with PR number/URL, exact head, Preview URL/deployment ID/SHA, earlier readiness authority, and explicit `owner_gate_2_approved=false`, `merged=false`, `production_proof=false`. An independent fresh runner repeats exact PR/CI/Preview verification, compares the stable structured result, and checkpoints `remote_release_preview_equivalence=PASS`. The school chat then presents the exact PR-head Preview and `visual-qa.md` to the owner and **stops**. Ordinary `Proceed` never constitutes Owner Gate 2 approval. No merge or Production proof is available through this new operation.
+
+A failed accepted request remains durable and non-replayable; explicit authorized recovery is required. A missing PR or mismatched head, unauthorized changed body, failed/absent checks, missing/mismatched Preview, moved target branch or main, or lack of fresh prior readiness must fail closed, not be bypassed.
+
 ### Stage 2 reconciliation diagnostic request
 
 `STAGE2_RECONCILIATION_DIAGNOSTIC` is read-only with respect to tracked basketball state. It exists only after an exact `STAGE2_PROPOSAL_REHEARSAL` has durably completed as `BLOCKED`, when one canonical game requires compact transaction-path diagnosis rather than conversational repository archaeology.
@@ -619,7 +633,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. All other tracked Stage 2 repairs, release preparation / Preview, Owner Gate 2, merge, and Production proof remain outside the remote capability until separately productionized and tested.
+Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. All other tracked Stage 2 repairs, release preparation / Preview, Owner Gate 2, merge, and Production proof remain outside the remote capability until separately productionized and tested.
 
 ## 13. Mobile / ChatGPT operation
 
