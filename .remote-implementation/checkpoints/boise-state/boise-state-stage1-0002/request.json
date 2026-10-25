@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-stage1-0002",
+  "school_key": "boise-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "b9847d96b074d6ea1a906615d8cda52b2d5f9d7e",
+  "previous_control_state_sha256": "db75a25ad80153e396662311260975bc981208fac6dae50528a69c074eb3724c",
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "research_checkpoint": {
+    "sha256": "ffb3d0c7ef434cd48f9ee5b9df016b607eeba26b27c856fb81810254a2b9c0de",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "acc89d7d1fd39a5e4dff7ad736bd39f7e3a5840a",
+      "path_prefix": ".remote-implementation/inputs/boise-state-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 8
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized the remaining Boise State Implementation Stage 1 work after authorized shared-reference maintenance: rerun the complete read-only STAGE1_INVENTORY against refreshed protected main using the exact accepted Research Freeze and existing immutable transport. Stop at Stage 1; Phase 0, Stage 2, owner gates, release, recovery, unrelated shared/global mutation, and other-school work are not authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
