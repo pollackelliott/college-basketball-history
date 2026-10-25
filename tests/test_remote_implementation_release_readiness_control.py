@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from remote_implementation_control import (  # noqa: E402
     OP_RELEASE_READINESS,
+    OP_RELEASE_PREVIEW_VERIFY,
     LIFECYCLE_READ_ONLY,
     TX_RELEASE_READINESS_RUNNING,
     RemoteImplementationError,
@@ -102,6 +103,65 @@ class ReleaseReadinessControlTests(unittest.TestCase):
         r["authority"]["release_readiness"] = False
         with self.assertRaisesRegex(RemoteImplementationError, "RELEASE_READINESS_AUTHORITY_REQUIRED"):
             validate_request(r)
+
+
+def preview_request():
+    r = request()
+    r["operation"] = OP_RELEASE_PREVIEW_VERIFY
+    r["request_id"] = "example-preview-verify-0001"
+    r["authority"]["release_readiness"] = False
+    r["authority"]["release_preview_verify"] = True
+    r["release_readiness_checkpoint"] = {
+        "path": ".remote-implementation/checkpoints/example-school/readiness/checkpoint-manifest.json",
+        "sha256": HASH,
+    }
+    r["release_readiness_verification"] = {
+        "path": ".remote-implementation/verifications/example-school/readiness/release-readiness-verification.json",
+        "sha256": HASH,
+    }
+    r["pr_number"] = 123
+    return r
+
+
+class ReleasePreviewControlTests(unittest.TestCase):
+    def test_exact_preview_check_is_valid_and_read_only(self):
+        r = preview_request()
+        validate_request(r)
+        state = begin_request(
+            initial_control_state(), r, HASH,
+            run_id="1", run_attempt="1", request_commit=SHA,
+        )
+        self.assertEqual(state["lifecycle_state"], LIFECYCLE_READ_ONLY)
+        self.assertIsNone(state["active_lock_owner"])
+
+    def test_gate2_claim_refused(self):
+        r = preview_request()
+        r["authority"]["owner_gate_2"] = True
+        with self.assertRaisesRegex(RemoteImplementationError, "GATE2_AUTHORITY_FORBIDDEN"):
+            validate_request(r)
+
+    def test_release_or_apply_authority_refused(self):
+        for field in ("release", "stage2_sealed_apply", "release_readiness"):
+            with self.subTest(field=field):
+                r = preview_request()
+                r["authority"][field] = True
+                with self.assertRaises(RemoteImplementationError):
+                    validate_request(r)
+
+    def test_missing_preview_prior_verification_refused(self):
+        r = preview_request()
+        r.pop("release_readiness_verification")
+        with self.assertRaisesRegex(RemoteImplementationError, "RELEASE_READINESS_VERIFICATION"):
+            validate_request(r)
+
+    def test_pr_number_must_be_integer(self):
+        for number in ("123", 0, -1, None, 1.5):
+            with self.subTest(number=number):
+                r = preview_request()
+                r["pr_number"] = number
+                with self.assertRaisesRegex(RemoteImplementationError, "PR_NUMBER_INVALID"):
+                    validate_request(r)
+
 
 
 if __name__ == "__main__":
