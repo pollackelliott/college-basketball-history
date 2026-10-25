@@ -37,15 +37,15 @@
   "active_lock_commit": "9541ae9fcc9e2a2955b75534a6fe1f2f70eca69d",
   "active_lock_owner": "github-actions:40245641375:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "active_prepared_tree_sha": "5cfd5adfccccfdeb394a53de5486bdc44921f330",
   "active_request_id": "boise-state-stage2-sealed-apply-0001",
   "active_request_sha256": "5b641737665a8ea0c08c787310637cfaf4b1e77ae40e669f38867a05ab143593",
   "active_school_key": "boise-state",
   "active_target_branch": "data/boise-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/boise-state/boise-state-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "49ffeab30a0db71d7e913e6e1f40edd8a8b616d226d0a09aca20e732479216cc",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -111,5 +111,5 @@
   "lock_acquisition_request_commit": "93e238aa4242c1c986109a80dcbb1597d1fe2edd",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
