@@ -69,6 +69,61 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+  fresh-owner-gate2-approval-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'RELEASE_GATE2_APPROVAL'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact durable control HEAD
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independently verify exact owner-approved PR Preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/remote_implementation_verify.py
+      - name: Upload Gate 2 verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-gate2-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
+
+  fresh-exact-production-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'RELEASE_PRODUCTION_PROOF'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out exact durable control HEAD
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independently reproduce exact merged Production JSON
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/remote_implementation_verify.py
+      - name: Upload exact Production proof diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-production-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
+
   fresh-release-preview-verification:
     needs: process-request
     if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'RELEASE_PREVIEW_VERIFY'
