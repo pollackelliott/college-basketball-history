@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "boise-state-stage2-proposal-0001",
+  "request_id": "boise-state-stage2-gate1-fill-0001",
   "school_key": "boise-state",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "eee1a372a33810811fc146cc947dae6beb0da5c9",
-  "previous_control_state_sha256": "83da2ff82e849c9dd2b69b92da350bd5ff83f77c25cf15cab031afeb5cf33aaa",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "81d9efcea3c5e70ab0e523a40dfc693d3d6f5ad9",
+  "previous_control_state_sha256": "068667d971d07075acc5ebcb2bfcefb1186fa7dad27c2a20c0731a3c99f99d08",
   "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
-  "target_branch": "data/boise-state-onboarding",
-  "target_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
-  "stage2_authority": {
-    "path": ".remote-implementation/successors/boise-state/boise-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "8a8153a9db9102bf3773d172303adf8f1559d38d49e7a0a8e46d19a6da15ddf1"
-  },
-  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
-  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
-  "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/boise-state-stage2-proposal-0001/recommendation-map.json",
-    "sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e"
-  },
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner said Proceed after independently verified Boise State Stage 2 opponent-display normalization, authorizing the next bounded unit: complete the seven-decision evidence review, bind one exact recommendation map, and run one read-only STAGE2_PROPOSAL_REHEARSAL only. No Owner Gate 1 approval, fill, seal, apply, additional tracked mutation, Preview, release, merge, Production, recovery, or unrelated historical authority is granted."
+    "authorization": "Owner explicitly approved the exact seven-decision Boise State Owner Gate 1 packet and authorized one bounded STAGE2_GATE1_FILL operation. No pre-seal rehearsal, seal, apply, tracked basketball mutation, Preview, Gate 2, merge, release, Production, recovery, or unrelated authority is granted."
   },
   "authority": {
-    "owner_gate_1": false,
+    "owner_gate_1": true,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_gate1_fill": false,
+    "stage2_gate1_fill": true,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
@@ -42,5 +29,28 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false
+  },
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-stage2-proposal-0001/checkpoint-manifest.json",
+    "sha256": "cfffbf303bb7568ba90ff807fa51dd3cbeebe7b1181416b2c539857a31ec93fb"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-stage2-proposal-0001/stage2-proposal-rehearsal-verification.json",
+    "sha256": "695e94806cea09fe5b25cc07265b77201f06b73e5cc93f2a3a8a73b6862b3c72"
+  },
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
+  "recommendation_map_sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e",
+  "approved_plan_hash_preview": "f6cf52cd7b4dbcccc78753c46b1d2e4ac300507e02ae2fa1bb642e9daf8322c5",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Explicit Owner Gate 1 approval in ChatGPT for the exact seven-decision Boise State packet from boise-state-stage2-proposal-0001.",
+    "proposal_checkpoint_sha256": "cfffbf303bb7568ba90ff807fa51dd3cbeebe7b1181416b2c539857a31ec93fb",
+    "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
+    "recommendation_map_sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e",
+    "approved_plan_hash_preview": "f6cf52cd7b4dbcccc78753c46b1d2e4ac300507e02ae2fa1bb642e9daf8322c5"
   }
 }
