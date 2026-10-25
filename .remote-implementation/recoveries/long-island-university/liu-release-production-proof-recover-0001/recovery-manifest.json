@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+  "recovered_request_id": "liu-release-production-proof-0001",
+  "request_id": "liu-release-production-proof-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}

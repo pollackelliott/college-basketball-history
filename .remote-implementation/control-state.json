@@ -1,5 +1,7 @@
 {
-  "abandoned_request_ids": [],
+  "abandoned_request_ids": [
+    "liu-release-production-proof-0001"
+  ],
   "accepted_request_ids": [
     "liu-stage1-0001",
     "liu-phase0-0001",
@@ -20,16 +22,16 @@
     "liu-release-gate2-approval-0001",
     "liu-release-production-proof-0001"
   ],
-  "active_expected_main_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "RELEASE_PRODUCTION_PROOF",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "liu-release-production-proof-0001",
-  "active_request_sha256": "f018bb5c449e3c4065eb73dda4eb0939a4f9ecd151c6639c7089d48d82813105",
-  "active_school_key": "long-island-university",
-  "active_target_branch": "data/long-island-university-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -51,30 +53,29 @@
     "liu-stage2-sealed-apply-0001",
     "liu-release-readiness-0001",
     "liu-release-preview-verify-0001",
-    "liu-release-gate2-approval-0001"
+    "liu-release-gate2-approval-0001",
+    "liu-release-production-proof-recover-0001"
   ],
-  "current_sequence": 17,
+  "current_sequence": 18,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/long-island-university/liu-release-gate2-approval-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "226686c5d11bc12fe78e07ef613a7c52ce2b7ee586836336b43137963a498b03",
-    "fresh_runner_verification": "PASS",
-    "merged": false,
-    "operation": "RELEASE_GATE2_APPROVAL",
-    "owner_gate_2_approved": true,
-    "pr_number": 367,
-    "protected_main_sha": "59f7508e25c1499ad07b7bfc412a9cdf4a816a65",
-    "remote_gate2_approval_equivalence": "PASS",
-    "request_id": "liu-release-gate2-approval-0001",
-    "school_key": "long-island-university",
-    "target_branch": "data/long-island-university-onboarding",
-    "target_sha": "38ad43f63fcc852bf927501338dc9d24f4ea2498"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "liu-release-production-proof-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "a40ff7e10d424243dc3484fb55e9f06ed74c9795",
+      "recovered_request_id": "liu-release-production-proof-0001",
+      "request_id": "liu-release-production-proof-recover-0001",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "40162480066",
-  "lock_acquisition_request_commit": "2cc3d23e9e28884ccba5d9828534ec906a0adc4e",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "RELEASE_PRODUCTION_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
