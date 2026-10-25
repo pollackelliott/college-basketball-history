@@ -39,7 +39,9 @@ def sample():
     file_hashes = {paths[0]: "f" * 64}
     manifest = {
         "school_key": SCHOOL,
-        "branch": BRANCH,
+        # A permanent-apply output created in an isolated worktree has an
+        # ephemeral local branch; the published ref comes from successor authority.
+        "branch": "remote-stage2-census/example-school-c",
         "base_commit": PREDECESSOR,
         "approved_plan_hash": APPROVED,
         "changed_paths": paths,
