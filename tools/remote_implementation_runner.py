@@ -26,6 +26,7 @@ from remote_implementation_control import (
     OP_STAGE2_PRESEAL_REHEARSAL,
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
+    OP_RELEASE_READINESS,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
     RemoteImplementationError,
     abandon_active,
@@ -97,6 +98,10 @@ from remote_implementation_stage2_apply import (
     run_sealed_apply_tool,
     verify_prepared_sealed_apply,
     verify_stage2_sealed_apply_authority,
+)
+from remote_implementation_release_readiness import (
+    verify_release_readiness_authority,
+    run_permanent_release_readiness,
 )
 from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
@@ -2459,6 +2464,111 @@ def run_stage2_sealed_apply(
     )
 
 
+def run_read_only_release_readiness(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    """Checkpoint final gates on a fresh-verified committed apply; create no PR."""
+    authority = verify_release_readiness_authority(
+        request, predecessor_commit, source_repo=ROOT
+    )
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("RELEASE_READINESS_TARGET_CHANGED_BEFORE_REQUEST")
+
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=os.environ.get("GITHUB_RUN_ID", "local"),
+        run_attempt=os.environ.get("GITHUB_RUN_ATTEMPT", "1"),
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    accepted_commit = commit_control(
+        request_commit,
+        "accept read-only release readiness %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    worktree = add_existing_onboarding_worktree(
+        request["target_branch"], request["target_sha"], request["school_key"]
+    )
+    result = run_permanent_release_readiness(
+        authority,
+        worktree=worktree,
+        artifact_dir=worktree / ".onboarding" / request["school_key"],
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
+        raise Stop("RELEASE_READINESS_TARGET_MOVED_AFTER_GATES")
+    directory = Path(
+        ".remote-implementation/checkpoints/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "request.json").write_bytes(request_bytes)
+    write_json(directory / "readiness-proof.json", result)
+    manifest = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_CHECKPOINT",
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": request["target_branch"],
+        "target_sha": request["target_sha"],
+        "readiness_status": "RELEASE_READINESS_PASS",
+        "source_apply_request_id": result["apply_request_id"],
+        "stage2_apply_successor_path": request["stage2_apply_successor"]["path"],
+        "stage2_apply_successor_sha256": request["stage2_apply_successor"]["sha256"],
+        "stage2_apply_verification_path": request["stage2_apply_verification"]["path"],
+        "stage2_apply_verification_sha256": request["stage2_apply_verification"]["sha256"],
+        "approved_plan_hash": result["approved_plan_hash"],
+        "release_manifest_sha256": result["release_manifest_sha256"],
+        "changed_path_count": result["changed_path_count"],
+        "readiness_proof_sha256": sha256_file(directory / "readiness-proof.json"),
+        "tracked_mutation": "NONE",
+        "pr_created": False,
+        "preview_verified": False,
+        "owner_gate_2": False,
+        "authority_statement": (
+            "Read-only final release gate proof on one exact fresh-verified "
+            "sealed-apply successor. This checkpoint supplies no PR creation, "
+            "Preview, Owner Gate 2, merge, or Production authority."
+        ),
+    }
+    manifest_path = directory / "checkpoint-manifest.json"
+    write_json(manifest_path, manifest)
+    final_state = finalize_success(
+        active,
+        request_id=request["request_id"],
+        last_operation={
+            "operation": OP_RELEASE_READINESS,
+            "request_id": request["request_id"],
+            "school_key": request["school_key"],
+            "protected_main_sha": live_main,
+            "target_branch": request["target_branch"],
+            "target_sha": request["target_sha"],
+            "checkpoint_manifest_path": manifest_path.as_posix(),
+            "checkpoint_manifest_sha256": sha256_file(manifest_path),
+            "readiness_status": "RELEASE_READINESS_PASS",
+            "fresh_runner_verification": "PENDING",
+            "remote_release_readiness_equivalence": "PENDING",
+        },
+    )
+    write_json(STATE_PATH, final_state)
+    commit = commit_control(
+        accepted_commit,
+        "checkpoint read-only release readiness %s" % request["request_id"],
+        [STATE_PATH, directory],
+    )
+    print("REMOTE RELEASE READINESS: PASS checkpoint_commit=%s" % commit)
+
+
 def run_phase0(
     state: dict[str, Any],
     request: dict[str, Any],
@@ -3274,6 +3384,11 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_RELEASE_READINESS:
+            run_read_only_release_readiness(
+                state, request, request_bytes, request_commit,
+                predecessor_commit, live_main,
             )
         elif request["operation"] == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
             run_read_only_stage2_reconciliation_diagnostic(
