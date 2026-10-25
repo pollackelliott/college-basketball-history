@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-stage2-preseal-0001",
+  "school_key": "boise-state",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "f866591f2013b0124a7bfb63c9974ffdb4c07c44",
+  "previous_control_state_sha256": "6f83a2385f81fe6e2636b652044ba4b7632b4f51a0e022eea45c88a1f00b1c40",
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner said Proceed after the fresh-verified Boise State Owner Gate 1 fill. This authorizes exactly one bounded STAGE2_PRESEAL_REHEARSAL against that exact fill authority. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, merge, release, Production, recovery, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  },
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "8f5e2fbc86baa974354bef06655fae5fc94aac02",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "e367f3a38166cad0c81545d5c452028ce8b1bd8637f685d4799bb41a3e869e0d"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "39b62b83234b125ed36b004b5a8a22d9d644e6a944eb03b8920ea7c97a3d61fa"
+  },
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "decision_universe_sha256": "17e68ab0cd1d3686eae9bee79ae9a14db5f7891da11850390ccb20f377f1c017",
+  "recommendation_map_sha256": "3ea530ab8bf7020a6d8e805e30b42bf0ab83b5ffec24428e8e865bbc7a21a59e",
+  "approved_plan_hash_preview": "f6cf52cd7b4dbcccc78753c46b1d2e4ac300507e02ae2fa1bb642e9daf8322c5",
+  "filled_review_sha256": "e844bc4064d402c2977d33a82cbebe6567afc6a18fa6dc13fbce070132fda4a2",
+  "decision_id_set_sha256": "7f89aa7ed850ccbc7d7017f92ed97130129aea8193829c82276d135bdac284a9"
+}
