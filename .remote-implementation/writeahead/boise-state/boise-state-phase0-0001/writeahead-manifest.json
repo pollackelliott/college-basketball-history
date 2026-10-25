@@ -1,0 +1,528 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/boise-state/conferences.csv",
+    "schools/boise-state/notes.md",
+    "schools/boise-state/opponents.csv",
+    "schools/boise-state/source-games.csv",
+    "schools/boise-state/source-notes.md",
+    "schools/boise-state/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "c64bd017c34e6601ac74e011b56db6a29233e327b31804e941492f1171ecc217",
+    "data/reference/venue-names.csv": "8ddded10b474c98d8142af707f1f94d8d1236a3a94d5c28ccce16574b07e38c5",
+    "data/reference/venues.csv": "1225525bc03878bc4b661b0f6c2725b9d0837f082f51960c1cbcef5892999d28",
+    "schools/boise-state/conferences.csv": "7260551e24aa445bd872215c0119a5e2063dd7b771b7f0d5b930e2c04b660664",
+    "schools/boise-state/notes.md": "1acd75157630eacaf55d5380652e90b792624e78c79a28552bfe129922c3454b",
+    "schools/boise-state/opponents.csv": "0f6e944560bca6815a72bd6887f78f40fd1acf0292af608e2cefff71fe4b4590",
+    "schools/boise-state/source-games.csv": "708825350b0692c17c9178a436e602a0ced0c7b1f7922bf4733aab3b42802634",
+    "schools/boise-state/source-notes.md": "7174a4cfc080c399a47353ad1813fd0c242d8ae1056439945ad891fee33da0ea",
+    "schools/boise-state/venues.csv": "2ab119396546084fa6d5aa0ebf9b4a8f85e497a4242e9650b52b40e5f3a8d0a8"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/boise-state/conferences.csv",
+    "schools/boise-state/notes.md",
+    "schools/boise-state/opponents.csv",
+    "schools/boise-state/source-games.csv",
+    "schools/boise-state/source-notes.md",
+    "schools/boise-state/venues.csv"
+  ],
+  "commit_message": "Add Boise State onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "f7e80e67f74a89f6f3404b5cedaab67740b4ccf5",
+  "history_scope": {
+    "history_scope_basis": "TOP_LEVEL_INTERVALS",
+    "history_scope_intervals": "1970-71+",
+    "history_scope_notes": "Owner-confirmed Boise State accepted top-level scope: 1970-71+.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1970-1971"
+  },
+  "integration_freeze_sha256": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "7260551e24aa445bd872215c0119a5e2063dd7b771b7f0d5b930e2c04b660664",
+    "notes.md": "1acd75157630eacaf55d5380652e90b792624e78c79a28552bfe129922c3454b",
+    "opponents.csv": "0f6e944560bca6815a72bd6887f78f40fd1acf0292af608e2cefff71fe4b4590",
+    "source-games.csv": "708825350b0692c17c9178a436e602a0ced0c7b1f7922bf4733aab3b42802634",
+    "source-notes.md": "7174a4cfc080c399a47353ad1813fd0c242d8ae1056439945ad891fee33da0ea",
+    "venues.csv": "2ab119396546084fa6d5aa0ebf9b4a8f85e497a4242e9650b52b40e5f3a8d0a8"
+  },
+  "prepared_commit_sha": "dc8bdd431c0eeb34a95ded673d909927e7b1080c",
+  "prepared_parent_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "prepared_tree_sha": "3f87f63487ae0508220907ecdacbe09a939a3f25",
+  "program_alias_mapping": [],
+  "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "repository_validation": "PASS",
+  "request_id": "boise-state-phase0-0001",
+  "request_sha256": "a1b7dedc88c40c1c11a3149df3beb506809ece205149406adf3a4411c7495d2b",
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "research_checkpoint_sha256": "ffb3d0c7ef434cd48f9ee5b9df016b607eeba26b27c856fb81810254a2b9c0de",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "semantic_snapshot_sha256": "59dcab91a111412058ae4d4c18b971ece6c7e36e3d62da74beb387d9e55c22d6",
+  "sidecars": {
+    "integration-freeze.json": "aabb642b99b365057e4a43d3eb039040bce190881aab50849d282852507b4964",
+    "stage1-reconciliation.json": "b55f50926d6acd935ba890c30fc51f6669c739f2f4dc096e9acd6112252b1d3f"
+  },
+  "target_branch": "data/boise-state-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Ability360 Sports and Fitness Center",
+      "final_venue_id": "VEN-000973",
+      "final_venue_key": "ability360-sports-and-fitness-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ability360-sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "Afook-Chinen Civic Auditorium",
+      "final_venue_id": "VEN-000465",
+      "final_venue_key": "afook-chinen-civic-auditorium",
+      "research_venue_id": "VEN-000465",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "afook-chinen-civic-auditorium"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "VEN-000386",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "ARCO Arena",
+      "final_venue_id": "VEN-000013",
+      "final_venue_key": "arco-arena",
+      "research_venue_id": "VEN-000013",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "arco-arena"
+    },
+    {
+      "canonical_name": "Bradley Center",
+      "final_venue_id": "VEN-000026",
+      "final_venue_key": "bradley-center",
+      "research_venue_id": "VEN-000026",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bradley-center"
+    },
+    {
+      "canonical_name": "Brick Breeden Fieldhouse",
+      "final_venue_id": "VEN-000447",
+      "final_venue_key": "brick-breeden-fieldhouse",
+      "research_venue_id": "VEN-000447",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "brick-breeden-fieldhouse"
+    },
+    {
+      "canonical_name": "Bronco Gym",
+      "final_venue_id": "VEN-000974",
+      "final_venue_key": "bronco-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "bronco-gym"
+    },
+    {
+      "canonical_name": "Cannon Activities Center",
+      "final_venue_id": "VEN-000389",
+      "final_venue_key": "cannon-activities-center",
+      "research_venue_id": "VEN-000389",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cannon-activities-center"
+    },
+    {
+      "canonical_name": "Comerica Center",
+      "final_venue_id": "VEN-000557",
+      "final_venue_key": "comerica-center",
+      "research_venue_id": "VEN-000557",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "comerica-center"
+    },
+    {
+      "canonical_name": "Dahlberg Arena",
+      "final_venue_id": "VEN-000559",
+      "final_venue_key": "dahlberg-arena",
+      "research_venue_id": "VEN-000559",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dahlberg-arena"
+    },
+    {
+      "canonical_name": "Dee Events Center",
+      "final_venue_id": "VEN-000054",
+      "final_venue_key": "dee-events-center",
+      "research_venue_id": "VEN-000054",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-events-center"
+    },
+    {
+      "canonical_name": "Desert Financial Arena",
+      "final_venue_id": "VEN-000056",
+      "final_venue_key": "desert-financial-arena",
+      "research_venue_id": "VEN-000056",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "desert-financial-arena"
+    },
+    {
+      "canonical_name": "Dickies Arena",
+      "final_venue_id": "VEN-000057",
+      "final_venue_key": "dickies-arena",
+      "research_venue_id": "VEN-000057",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dickies-arena"
+    },
+    {
+      "canonical_name": "ExtraMile Arena",
+      "final_venue_id": "VEN-000061",
+      "final_venue_key": "extramile-arena",
+      "research_venue_id": "VEN-000061",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "extramile-arena"
+    },
+    {
+      "canonical_name": "Gallagher-Iba Arena",
+      "final_venue_id": "VEN-000072",
+      "final_venue_key": "gallagher-iba-arena",
+      "research_venue_id": "VEN-000072",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gallagher-iba-arena"
+    },
+    {
+      "canonical_name": "GCU Arena",
+      "final_venue_id": "VEN-000975",
+      "final_venue_key": "gcu-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "gcu-arena"
+    },
+    {
+      "canonical_name": "Gersten Pavilion",
+      "final_venue_id": "VEN-000379",
+      "final_venue_key": "gersten-pavilion",
+      "research_venue_id": "VEN-000379",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gersten-pavilion"
+    },
+    {
+      "canonical_name": "Golden 1 Center",
+      "final_venue_id": "VEN-000074",
+      "final_venue_key": "golden-1-center",
+      "research_venue_id": "VEN-000074",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "golden-1-center"
+    },
+    {
+      "canonical_name": "Hec Edmundson Pavilion",
+      "final_venue_id": "VEN-000078",
+      "final_venue_key": "hec-edmundson-pavilion",
+      "research_venue_id": "VEN-000078",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hec-edmundson-pavilion"
+    },
+    {
+      "canonical_name": "Honda Center",
+      "final_venue_id": "VEN-000082",
+      "final_venue_key": "honda-center",
+      "research_venue_id": "VEN-000082",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "honda-center"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "VEN-000084",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hp-field-house"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "VEN-000354",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    },
+    {
+      "canonical_name": "Idaho Center",
+      "final_venue_id": "VEN-000976",
+      "final_venue_key": "idaho-center-nampa",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "idaho-center-nampa"
+    },
+    {
+      "canonical_name": "Idaho Central Arena",
+      "final_venue_id": "VEN-000642",
+      "final_venue_key": "idaho-central-arena",
+      "research_venue_id": "VEN-000642",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "idaho-central-arena"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "VEN-000097",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    },
+    {
+      "canonical_name": "Kekua'okalani Gymnasium",
+      "final_venue_id": "VEN-000977",
+      "final_venue_key": "kekuaokalani-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "kekuaokalani-gymnasium"
+    },
+    {
+      "canonical_name": "Kibbie Dome",
+      "final_venue_id": "VEN-000978",
+      "final_venue_key": "kibbie-dome",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "kibbie-dome"
+    },
+    {
+      "canonical_name": "Lahaina Civic Center",
+      "final_venue_id": "VEN-000108",
+      "final_venue_key": "lahaina-civic-center",
+      "research_venue_id": "VEN-000108",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lahaina-civic-center"
+    },
+    {
+      "canonical_name": "Lawlor Events Center",
+      "final_venue_id": "VEN-000579",
+      "final_venue_key": "lawlor-events-center",
+      "research_venue_id": "VEN-000579",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lawlor-events-center"
+    },
+    {
+      "canonical_name": "Legacy Arena",
+      "final_venue_id": "VEN-000109",
+      "final_venue_key": "legacy-arena",
+      "research_venue_id": "VEN-000109",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "legacy-arena"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "VEN-000542",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "Marriott Center",
+      "final_venue_id": "VEN-000405",
+      "final_venue_key": "marriott-center",
+      "research_venue_id": "VEN-000405",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "marriott-center"
+    },
+    {
+      "canonical_name": "Matthew Knight Arena",
+      "final_venue_id": "VEN-000306",
+      "final_venue_key": "matthew-knight-arena",
+      "research_venue_id": "VEN-000306",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "matthew-knight-arena"
+    },
+    {
+      "canonical_name": "McArthur Court",
+      "final_venue_id": "VEN-000126",
+      "final_venue_key": "mcarthur-court",
+      "research_venue_id": "VEN-000126",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcarthur-court"
+    },
+    {
+      "canonical_name": "MGM Grand Garden Arena",
+      "final_venue_id": "VEN-000133",
+      "final_venue_key": "mgm-grand-garden-arena",
+      "research_venue_id": "VEN-000133",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mgm-grand-garden-arena"
+    },
+    {
+      "canonical_name": "Moby Arena",
+      "final_venue_id": "VEN-000481",
+      "final_venue_key": "moby-arena",
+      "research_venue_id": "VEN-000481",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "moby-arena"
+    },
+    {
+      "canonical_name": "Moda Center",
+      "final_venue_id": "VEN-000138",
+      "final_venue_key": "moda-center",
+      "research_venue_id": "VEN-000138",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "moda-center"
+    },
+    {
+      "canonical_name": "Mountain America Center",
+      "final_venue_id": "VEN-000979",
+      "final_venue_key": "mountain-america-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "mountain-america-center"
+    },
+    {
+      "canonical_name": "Numerica Veterans Arena",
+      "final_venue_id": "VEN-000152",
+      "final_venue_key": "numerica-veterans-arena",
+      "research_venue_id": "VEN-000152",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "numerica-veterans-arena"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Pan American Center",
+      "final_venue_id": "VEN-000322",
+      "final_venue_key": "pan-american-center",
+      "research_venue_id": "VEN-000322",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pan-american-center"
+    },
+    {
+      "canonical_name": "John Gray Gym",
+      "final_venue_id": "VEN-000470",
+      "final_venue_key": "provisional-john-gray-gym",
+      "research_venue_id": "VEN-000470",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "provisional-john-gray-gym"
+    },
+    {
+      "canonical_name": "Reynolds Center",
+      "final_venue_id": "VEN-000583",
+      "final_venue_key": "reynolds-center",
+      "research_venue_id": "VEN-000583",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-center"
+    },
+    {
+      "canonical_name": "Save Mart Center",
+      "final_venue_id": "VEN-000798",
+      "final_venue_key": "save-mart-center",
+      "research_venue_id": "VEN-000798",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "save-mart-center"
+    },
+    {
+      "canonical_name": "Assembly Hall",
+      "final_venue_id": "VEN-000186",
+      "final_venue_key": "simon-skjodt-assembly-hall",
+      "research_venue_id": "VEN-000186",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "simon-skjodt-assembly-hall"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "VEN-000194",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "State Farm Center",
+      "final_venue_id": "VEN-000196",
+      "final_venue_key": "state-farm-center",
+      "research_venue_id": "VEN-000196",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "state-farm-center"
+    },
+    {
+      "canonical_name": "Swenson Gym",
+      "final_venue_id": "VEN-000980",
+      "final_venue_key": "swenson-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "swenson-gym"
+    },
+    {
+      "canonical_name": "T-Mobile Arena",
+      "final_venue_id": "VEN-000201",
+      "final_venue_key": "t-mobile-arena",
+      "research_venue_id": "VEN-000201",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-arena"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "VEN-000280",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-arena"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "VEN-000377",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thomas-and-mack-center"
+    },
+    {
+      "canonical_name": "Titan Gym",
+      "final_venue_id": "VEN-000212",
+      "final_venue_key": "titan-gym",
+      "research_venue_id": "VEN-000212",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "titan-gym"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "UNT Coliseum",
+      "final_venue_id": "VEN-000273",
+      "final_venue_key": "unt-coliseum",
+      "research_venue_id": "VEN-000273",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "unt-coliseum"
+    },
+    {
+      "canonical_name": "Veterans Memorial Coliseum",
+      "final_venue_id": "VEN-000297",
+      "final_venue_key": "veterans-memorial-coliseum-portland",
+      "research_venue_id": "VEN-000297",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "veterans-memorial-coliseum-portland"
+    },
+    {
+      "canonical_name": "Walkup Skydome",
+      "final_venue_id": "VEN-000981",
+      "final_venue_key": "walkup-skydome",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "walkup-skydome"
+    }
+  ],
+  "venue_reconciliation": null
+}
