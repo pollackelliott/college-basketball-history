@@ -1,0 +1,40 @@
+{
+  "blockers": [
+    "historical opponent display conflict: augustana-illinois: ['Augustana (IL)', 'Augustana College (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: regis-colorado: ['Regis', 'Regis (CO)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-thomas-aquinas: ['St. Thomas Aquinas', 'St. Thomas Aquinas (NY)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/gonzaga-97bdf3a3c45a",
+  "capability_census": {
+    "path": ".onboarding/gonzaga/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "integration_semantic_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "preflight": {
+    "blocker_count": 3,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/gonzaga/plan.json",
+    "review_path": ".onboarding/gonzaga/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
