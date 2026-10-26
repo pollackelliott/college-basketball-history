@@ -1452,16 +1452,30 @@ def update_program_scope(
     row["history_scope_intervals"] = intervals
 
 
-def accepted_top_level_scope_expression(*, basis: str, intervals: str) -> str:
+def accepted_top_level_scope_expression(
+    *,
+    start_season: str,
+    basis: str,
+    intervals: str,
+) -> str:
     interval_text = (intervals or "").strip()
+    basis_text = (basis or "").strip()
     if interval_text:
         return interval_text
-    if (basis or "").strip() == "ALWAYS_TOP_LEVEL_FROM_INCEPTION":
+    if basis_text == "ALWAYS_TOP_LEVEL_FROM_INCEPTION":
         return "INCEPTION+"
+    if basis_text == "FIRST_TOP_LEVEL_SEASON":
+        start = (start_season or "").strip()
+        match = re.fullmatch(r"(\d{4})-(\d{4})", start)
+        if not match:
+            raise WorkflowError(
+                "FIRST_TOP_LEVEL_SEASON requires a valid YYYY-YYYY history start"
+            )
+        return f"{match.group(1)}-{match.group(2)[-2:]}+"
     raise WorkflowError(
         "accepted Research Freeze history scope cannot be projected into "
         "program-top-level-scope.csv; provide explicit history_scope_intervals "
-        "or use ALWAYS_TOP_LEVEL_FROM_INCEPTION"
+        "for TOP_LEVEL_INTERVALS"
     )
 
 
@@ -1792,6 +1806,7 @@ def main() -> int:
                 if row.get("program_key") == args.school_key
             )
             accepted_scope_expression = accepted_top_level_scope_expression(
+                start_season=args.history_start_season,
                 basis=args.history_scope_basis,
                 intervals=args.history_scope_intervals,
             )
