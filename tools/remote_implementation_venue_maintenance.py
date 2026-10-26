@@ -21,7 +21,7 @@ from remote_implementation_io import (
 
 SPEC_PATH_RE = re.compile(
     r"^data/reconciliation/venue-identity-maintenance/"
-    r"([a-z0-9][a-z0-9-]{1,127})[a-z0-9._-]*\.json$"
+    r"([a-z0-9][a-z0-9._-]{1,127})\.json$"
 )
 
 FIXED_MUTATION_PATHS = {
@@ -36,7 +36,13 @@ FIXED_MUTATION_PATHS = {
 def validate_repository_spec_path(school_key: str, path: str) -> str:
     value = str(path or "").strip()
     match = SPEC_PATH_RE.fullmatch(value)
-    if not match or match.group(1) != school_key:
+    stem = match.group(1) if match else ""
+    if not match or not (
+        stem == school_key
+        or stem.startswith(school_key + "-")
+        or stem.startswith(school_key + ".")
+        or stem.startswith(school_key + "_")
+    ):
         raise Stop("VENUE_MAINTENANCE_REPOSITORY_SPEC_PATH_INVALID")
     return value
 
