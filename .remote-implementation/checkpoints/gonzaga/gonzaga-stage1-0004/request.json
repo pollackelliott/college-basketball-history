@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage1-0004",
+  "school_key": "gonzaga",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "88537607aa1ff7ca257112e9a539a292dae9e9b4",
+  "previous_control_state_sha256": "2254de5a7a192c51f5955758af342422ab8f5e94867063a9b9f81cb23d3e9495",
+  "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner authorized Gonzaga Phase 0. The prior Phase 0 attempt was durably recovered as NOT_ATTEMPTED after a mechanical history_start_season format error, and protected main subsequently advanced through generic Stage 1 tooling only. Run one complete read-only current-main Stage 1 inventory using the unchanged accepted Gonzaga Research Freeze and immutable transport as the exact-main prerequisite to the already-authorized corrected Phase 0 retry. Do not reopen Research or authorize Phase 0, Stage 2, owner gates, release, unrelated maintenance, or other-school work."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
