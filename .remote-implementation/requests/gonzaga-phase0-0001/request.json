@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-phase0-0001",
+  "school_key": "gonzaga",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "8751fdbfefb8d60aab6e7e9ca07218cc1738ac70",
+  "previous_control_state_sha256": "a2429b8fe38182ae395e09bef2d5c667d4b34faacf652d5f8db496e5521038eb",
+  "expected_protected_main_sha": "f269ba21d5097ed083a0e0d7422c1a1348be0f6e",
+  "target_branch": "data/gonzaga-onboarding",
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-0003/checkpoint-manifest.json",
+    "sha256": "916f99ddbc310d31092f978c899ca824635f64c83435d01310a6c89ae81d8e46"
+  },
+  "history_scope": {
+    "start_season": "1958-59",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1958-59+",
+    "notes": "Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner explicitly authorized Proceed for Gonzaga Phase 0 after Stage 1 PASS. Execute only the guarded stable Phase 0 transaction against exact current protected main using the accepted Research Freeze and exact current-main Stage 1 checkpoint. Reconcile Gonzaga's target-only scope metadata from stale 1952-53+ to accepted 1958-59+, register the four Stage 1-approved new global venue identities and any mechanically required venue names/conference representation through the permanent Phase 0 tool, persist Integration Freeze, and stop before Stage 2. No owner gates, Stage 2, release, recovery, unrelated shared/global maintenance, or other-school work are authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": true,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
