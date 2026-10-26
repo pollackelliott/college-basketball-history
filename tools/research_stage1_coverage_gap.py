@@ -161,12 +161,36 @@ def audit_checkpoint(checkpoint: Path, *, evidence_member: str,
         if count is None:
             defects.append("NO_EXPLICIT_INSTITUTIONAL_MISSING_COUNT:" + season)
             continue
+        detail = residual.get("detail", {})
+        remaining_count = count
+        if isinstance(detail, dict) and "unidentified_games" in detail:
+            try:
+                remaining_count = int(detail["unidentified_games"])
+            except (TypeError, ValueError):
+                defects.append("INVALID_REMAINING_UNIDENTIFIED_COUNT:" + season)
+                remaining_count = count
+            if not 0 < remaining_count <= count:
+                defects.append("INVALID_REMAINING_UNIDENTIFIED_COUNT:" + season)
+                remaining_count = count
+        recovered_count = count - remaining_count
         c = census_by_season.get(season)
         if c is None or int(c.get("observed_games", "-1")) != row_counts.get(season, -2):
             defects.append("SEASON_LEDGER_CENSUS_MISMATCH:" + season)
-        if (primary.get("listed_game_rows") != row_counts.get(season) or
-                int(c.get("observed_games", "-1")) != primary.get("listed_game_rows")):
+        try:
+            source_listed_rows = int(primary.get("listed_game_rows", "-1"))
+        except (TypeError, ValueError):
+            source_listed_rows = -1
+        if (source_listed_rows + recovered_count != row_counts.get(season) or
+                int(c.get("observed_games", "-1")) != row_counts.get(season)):
             defects.append("SOURCE_LISTED_ROWS_MISMATCH:" + season)
+        outcome_fields = ("unidentified_wins", "unidentified_losses", "unidentified_ties")
+        if isinstance(detail, dict) and any(k in detail for k in outcome_fields):
+            try:
+                remaining_outcomes = sum(int(detail.get(k, 0)) for k in outcome_fields)
+            except (TypeError, ValueError):
+                remaining_outcomes = -1
+            if remaining_outcomes != remaining_count:
+                defects.append("UNIDENTIFIED_OUTCOME_COUNT_CONFLICT:" + season)
         if not primary.get("heading") or not primary.get("listed_result_tally"):
             defects.append("MISSING_SOURCE_HEADING_OR_TALLY:" + season)
         if kind == "SOURCE_EXPLICIT_GAME_MISSING":
@@ -176,9 +200,8 @@ def audit_checkpoint(checkpoint: Path, *, evidence_member: str,
             if not note.get("page"):
                 defects.append("SOURCE_NOTE_PAGE_MISSING:" + season)
         if kind == "SEASON_OUTCOME_CENSUS_MISMATCH":
-            detail = residual.get("detail", {})
             if (int(detail.get("expected_games", "-1")) -
-                    int(detail.get("observed_games", "-1"))) != count:
+                    int(detail.get("observed_games", "-1"))) != remaining_count:
                 defects.append("SEASON_GAME_DELTA_CONFLICT:" + season)
             if int(detail.get("observed_games", "-1")) != row_counts.get(season):
                 defects.append("BLOCKER_LISTED_ROWS_CONFLICT:" + season)
@@ -200,6 +223,8 @@ def audit_checkpoint(checkpoint: Path, *, evidence_member: str,
             defects.append("MISSING_GAP_PROVENANCE:" + season)
         gaps.append({
             "season": season, "institutional_missing_count": count,
+            "identified_recovered_from_gap": recovered_count,
+            "remaining_unidentified_count": remaining_count,
             "identified_game_rows": row_counts.get(season),
             "source_note": primary.get("explicit_note"),
             "source_heading": primary.get("heading"),
@@ -207,7 +232,7 @@ def audit_checkpoint(checkpoint: Path, *, evidence_member: str,
         })
     if {r.get("season") for r in census if r.get("state") == "MISMATCH"} - set(evidence_by_season):
         defects.append("UNRELATED_UNRESOLVED_SEASON_CENSUS")
-    gap_total = sum(g["institutional_missing_count"] for g in gaps)
+    gap_total = sum(g["remaining_unidentified_count"] for g in gaps)
     for label, value in (
         ("status", status.get("remaining_unknown_real_games")),
         ("manifest", manifest.get("unknown_real_games")),
