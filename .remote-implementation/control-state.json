@@ -45,15 +45,15 @@
   "active_lock_commit": "5732a7ac9de90b2e72065df1759b2ec7ae464a61",
   "active_lock_owner": "github-actions:40349772082:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "5f7d69462f7793a4470b3c73346951941819182a",
+  "active_prepared_tree_sha": "d8630889823f40bd7f86f37a43ed52daa68ac4ee",
   "active_request_id": "gonzaga-venue-maintenance-0002",
   "active_request_sha256": "238951d7b8ee4d88aee64489c93887beffd73aa30ae18ce5f25ec23515c12ca9",
   "active_school_key": "gonzaga",
   "active_target_branch": "maintenance/gonzaga-stage1-forum-identity-v2",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/gonzaga/gonzaga-venue-maintenance-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "a086f7900581f7c9c7eb657b19bf3857fdff5b5ff8a60e61f26eef8744c43663",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -116,5 +116,5 @@
   "lock_acquisition_request_commit": "d49cbffd2ebb7c49319f14a915409e63dafb887c",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

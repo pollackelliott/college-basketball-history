@@ -1,0 +1,56 @@
+{
+  "blockers": [],
+  "fingerprints": {
+    "data/canonical/games.csv": "86bec9a4511557ba908293be820538a066297e62b4e4eb1b388995d18d0bda83",
+    "data/evidence/game-assertions.csv": "56f56e72f99179fadea714d12b6726088b62d64c5ab30ca07b65fc1aafe8718f",
+    "data/evidence/ncaa-tournament-sites.csv": "eb462cba0e44bc87bcedb6b95aa0aa690a917bf4010263db156b281763851135",
+    "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json": "b54d211e8e7a2b282dc985f672f8b404893ae6e2299fbfde79f8911bad85531f",
+    "data/reference/venue-names.csv": "8ddded10b474c98d8142af707f1f94d8d1236a3a94d5c28ccce16574b07e38c5",
+    "data/reference/venues.csv": "1225525bc03878bc4b661b0f6c2725b9d0837f082f51960c1cbcef5892999d28",
+    "schools/arizona-state/venues.csv": "7c003cc62774283dece004e2ad07a41394f1bee10842c524350bd138fa31e98f",
+    "schools/california/venues.csv": "7d71c8e116bf459ee5782a9da10efccda03a3adf83df7a473892c4017f0cbb75",
+    "schools/oregon-state/venues.csv": "b8c6d034b40ab2cf61badd09a6566d0155de1cd909eecdc4b28b56d8f0b8d4ec",
+    "schools/ucla/venues.csv": "3f41ce4be9771e428b22804a583385e787e3f5cd2e572c302c54b5809a02ca3c"
+  },
+  "git_head": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
+  "merges": [
+    {
+      "absorbed_venue_id": "VEN-000392",
+      "absorbed_venue_key": "great-western-forum",
+      "assertion_rows": 0,
+      "canonical_rows": 3,
+      "city": "Inglewood",
+      "expected_canonical_rows": 3,
+      "expected_school_rows": 4,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 3,
+      "resolution_basis": "Control Center-authorized Gonzaga Stage 1 maintenance: current protected main contains duplicate physical identities for the same Inglewood arena under The Forum and Great Western Forum. Preserve earlier-established VEN-000376 / the-forum, retire later duplicate VEN-000392 / great-western-forum, and retain Great Western Forum as a historical/alias name.",
+      "school_files": [
+        {
+          "path": "schools/arizona-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/california/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/oregon-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/ucla/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 4,
+      "state": "CA",
+      "survivor_venue_id": "VEN-000376",
+      "survivor_venue_key": "the-forum",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "bb19f3b1b241a0dd03c88915b317e9616bab0d350fad8642cd8013f08a6c49eb",
+  "schema_version": 1,
+  "spec": "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json"
+}
