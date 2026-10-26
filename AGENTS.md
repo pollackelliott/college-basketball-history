@@ -10,6 +10,7 @@ Read these process documents together before onboarding work:
 
 - `docs/school-onboarding-fast-path.md`
 - `docs/onboarding-process-hardening.md`
+- `docs/implementation-lane-bounded-execution.md`
 - `docs/implementation-efficiency-recovery.md`
 - `docs/implementation-gate1-authority-boundary.md`
 - `docs/remote-implementation-runner.md`
