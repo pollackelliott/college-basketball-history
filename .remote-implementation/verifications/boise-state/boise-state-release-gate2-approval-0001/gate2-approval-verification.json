@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "072cb87691829307e418e2674e6a640d9404f303b550a4e59fab04ee10d2ba38",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "pr_number": 371,
+  "preview_deployment_id": 7321972861,
+  "preview_url": "https://college-basketball-history-qrw05w37w-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "boise-state-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "status": "PASS"
+}
