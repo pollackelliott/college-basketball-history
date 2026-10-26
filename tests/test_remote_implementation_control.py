@@ -530,6 +530,33 @@ class RemoteImplementationControlTests(unittest.TestCase):
             allow_active_recovery=True,
         )
 
+    def test_venue_maintenance_recovery_uses_exact_maintenance_target(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_VENUE_IDENTITY_MAINTENANCE, "venue-old"),
+            "7" * 64,
+            run_id="101",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        state = bind_lock_commit(state, LOCK)
+        data = canonical_json_bytes(state)
+        recovery = request(OP_RECOVER, "venue-recovery")
+        recovery["recovery"]["lock_commit"] = LOCK
+        recovery["recovery"]["target_branch"] = (
+            "maintenance/example-school-stage1-venues"
+        )
+        recovery["recovery"]["abandoned_request_id"] = "venue-old"
+        recovery["previous_control_state_sha256"] = sha256_bytes(data)
+        verify_request_predecessor(
+            state,
+            data,
+            PRED,
+            recovery,
+            MAIN,
+            allow_active_recovery=True,
+        )
+
     def test_read_only_stage1_recovery_uses_no_lock_or_target(self):
         state = begin_request(
             initial_control_state(),
