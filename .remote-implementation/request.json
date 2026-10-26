@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-stage1-0002",
+  "request_id": "gonzaga-stage1-0003",
   "school_key": "gonzaga",
   "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "a32287d5e0109bbda21ee687383aef24d46b6c85",
-  "previous_control_state_sha256": "5638c5b4323763bf5500e44e9666dbca17b13e2e603e58d1aa164e8f342e51cb",
-  "expected_protected_main_sha": "982c7fad258683006d12e988eaf72bef401de4e8",
+  "previous_control_state_commit": "4a133e03ba0071386c77e132d485e1f21c9e20ca",
+  "previous_control_state_sha256": "747e72aa462ee28e1e01f3efc796233c506802db9d02a597acffd677bd4a4e41",
+  "expected_protected_main_sha": "f269ba21d5097ed083a0e0d7422c1a1348be0f6e",
   "research_checkpoint": {
     "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
     "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
@@ -18,8 +18,8 @@
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Control Center",
-    "authorization": "Owner explicitly authorized Proceed after the Control Center-authorized Forum venue maintenance merged and exact Production proof passed. Rerun the complete read-only Gonzaga STAGE1_INVENTORY against refreshed protected main using the exact accepted Research Freeze and existing immutable transport. Stop at Stage 1; Phase 0, Stage 2, owner gates, release, recovery, unrelated shared/global mutation, and other-school work are not authorized."
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner explicitly authorized Proceed for Gonzaga Phase 0. Current protected main advanced after the prior Stage 1 PASS, and the permanent remote Phase 0 contract requires a Stage 1 PASS checkpoint bound to exact live protected main. Run one complete read-only current-main STAGE1_INVENTORY using the unchanged accepted Gonzaga Research Freeze and immutable transport. This is mechanical rebase prerequisite only; do not reopen Research or authorize Phase 0, Stage 2, owner gates, release, recovery, venue maintenance, unrelated shared/global mutation, or other-school work."
   },
   "authority": {
     "owner_gate_1": false,
@@ -38,6 +38,7 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
   }
 }
