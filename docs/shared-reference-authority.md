@@ -68,7 +68,9 @@ This is analogous to provisional Research-time venue identity: Research establis
 
 Serialized Implementation may resolve a Research-settled shared identity, but the **mechanism matters**.
 
-Target-school additions/registrations that are part of the guarded Phase 0 transaction remain normal Stage 1 authority. By contrast, if reconciliation requires a dedicated protected-main maintenance PR that rewrites existing global/shared state or already-published school/canonical representation, the lane must first surface one consolidated declared maintenance scope and receive explicit Control Center authorization for that batch.
+Target-school additions/registrations that are part of the guarded Phase 0 transaction remain normal Stage 1 authority. This includes the target school's own accepted top-level scope: when the frozen six-file package explicitly confirms or supersedes the reusable `program-top-level-scope.csv` row, Implementation may reconcile that one target row and its matching `programs.csv` metadata in the same guarded Phase 0/onboarding commit. A superseding frozen target scope is already historical authority; it does not require a separate Control Center maintenance PR or renewed owner approval merely because protected main is stale.
+
+By contrast, if reconciliation requires a dedicated protected-main maintenance PR that rewrites **other** existing global/shared state or already-published school/canonical representation, the lane must first surface one consolidated declared maintenance scope and receive explicit Control Center authorization for that batch.
 
 An ordinary `Proceed` authorizes the named school Implementation stage. It does not silently authorize an open-ended sequence of dedicated protected-main maintenance PRs affecting already-published/global state.
 
@@ -131,7 +133,7 @@ Guarded Implementation startup must still validate current protected `main`; thi
 
 No seventh required school-package file is introduced by this policy.
 
-Shared-reference proposals should be preserved in the existing durable Research handoff/status/notes artifacts in a form that is explicit and mechanically actionable. At minimum record, as applicable:
+Shared-reference proposals should be preserved in the existing durable Research handoff/status/notes artifacts in a form that is explicit and mechanically actionable. The target school's accepted top-level scope is mandatory freeze authority rather than an optional proposal: the six-file package must explicitly confirm the current scope expression or state the exact superseding expression and basis. At minimum record, as applicable:
 
 - proposed stable key;
 - display/canonical name;
