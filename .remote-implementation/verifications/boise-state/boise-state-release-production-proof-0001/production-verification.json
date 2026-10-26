@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "ff7c244bef4b727ddf4822514469cb21cd34120a6a91739fb0de6154c0cce006",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "pr_number": 371,
+  "production_deployment_id": 7323109287,
+  "production_json_checked_count": 49,
+  "production_proof": true,
+  "request_id": "boise-state-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "status": "COMPLETE"
+}

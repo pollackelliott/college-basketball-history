@@ -91,7 +91,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/boise-state/boise-state-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "ff7c244bef4b727ddf4822514469cb21cd34120a6a91739fb0de6154c0cce006",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -101,7 +101,7 @@
     "production_deployment_id": 7323109287,
     "production_json_checked_count": 49,
     "protected_main_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "boise-state-release-production-proof-0001",
     "school_key": "boise-state"
   },
