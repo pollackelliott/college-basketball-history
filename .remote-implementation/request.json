@@ -1,27 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-phase0-recover-0002",
+  "request_id": "gonzaga-stage1-0004",
   "school_key": "gonzaga",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "2047f5b709732e625d8fb1143c5f2716e5db588b",
-  "previous_control_state_sha256": "1f25a39e3cb12dc99ec419e250c0064e735f7fc0b23030f284f6ea02fdfbf300",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "88537607aa1ff7ca257112e9a539a292dae9e9b4",
+  "previous_control_state_sha256": "2254de5a7a192c51f5955758af342422ab8f5e94867063a9b9f81cb23d3e9495",
   "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-  "recovery": {
-    "abandoned_request_id": "gonzaga-phase0-0001",
-    "lock_commit": "acb721bc78b59567ce78783edcb955914f7ab851",
-    "target_branch": "data/gonzaga-onboarding"
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
   },
   "creation_provenance": {
     "origin": "ChatGPT Gonzaga Implementation",
-    "authorization": "Recover the mechanically failed Gonzaga Phase 0 request after its permanent tool stopped before any prepared commit, write-ahead publication, or onboarding branch publication. A prior recovery attempt was rejected only because protected main advanced before recovery evaluation. This request is rebound to current main and may only classify/clear the exact failed transaction; it creates no basketball mutation or historical authority."
+    "authorization": "Owner authorized Gonzaga Phase 0. The prior Phase 0 attempt was durably recovered as NOT_ATTEMPTED after a mechanical history_start_season format error, and protected main subsequently advanced through generic Stage 1 tooling only. Run one complete read-only current-main Stage 1 inventory using the unchanged accepted Gonzaga Research Freeze and immutable transport as the exact-main prerequisite to the already-authorized corrected Phase 0 retry. Do not reopen Research or authorize Phase 0, Stage 2, owner gates, release, unrelated maintenance, or other-school work."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
-    "recovery": true,
+    "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
