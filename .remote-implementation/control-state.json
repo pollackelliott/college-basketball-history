@@ -40,17 +40,18 @@
     "gonzaga-stage1-0001",
     "gonzaga-venue-maintenance-0001",
     "gonzaga-venue-maintenance-0002",
-    "gonzaga-stage1-0002"
+    "gonzaga-stage1-0002",
+    "gonzaga-stage1-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f269ba21d5097ed083a0e0d7422c1a1348be0f6e",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "gonzaga-stage1-0003",
+  "active_request_sha256": "78332c00a3e30656a0ee29d720342b8c1ecc967957fdf19d15b86ac00f64f322",
+  "active_school_key": "gonzaga",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -107,8 +108,11 @@
     "stage1_reconciliation_sha256": "159c22582e3d3c97af0c3c4c178ae571af8e0fa99a05a6a66e67535879de5b6f",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40392490956",
+  "lock_acquisition_request_commit": "2fd063b46c9a0fcc0fd5a4cac53d1011ae719a92",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "STAGE1_RUNNING"
 }
