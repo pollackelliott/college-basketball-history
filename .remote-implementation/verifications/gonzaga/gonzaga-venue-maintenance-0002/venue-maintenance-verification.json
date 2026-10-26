@@ -1,0 +1,32 @@
+{
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/arizona-state/venues.csv",
+    "schools/california/venues.csv",
+    "schools/oregon-state/venues.csv",
+    "schools/ucla/venues.csv",
+    "site/data/teams/california.json",
+    "site/data/teams/oregon-state.json",
+    "site/data/teams/stanford.json",
+    "site/data/teams/ucla.json",
+    "site/data/teams/washington.json"
+  ],
+  "exact_replay_tree": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_VERIFICATION",
+  "plan_sha256": "bb19f3b1b241a0dd03c88915b317e9616bab0d350fad8642cd8013f08a6c49eb",
+  "protected_main_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
+  "remote_venue_maintenance_equivalence": "PASS",
+  "repository_spec_sha256": "b54d211e8e7a2b282dc985f672f8b404893ae6e2299fbfde79f8911bad85531f",
+  "repository_validation": "PASS",
+  "request_id": "gonzaga-venue-maintenance-0002",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/gonzaga-stage1-forum-identity-v2",
+  "target_predecessor_sha": null,
+  "target_sha": "5f7d69462f7793a4470b3c73346951941819182a",
+  "target_tree_sha": "d8630889823f40bd7f86f37a43ed52daa68ac4ee"
+}
