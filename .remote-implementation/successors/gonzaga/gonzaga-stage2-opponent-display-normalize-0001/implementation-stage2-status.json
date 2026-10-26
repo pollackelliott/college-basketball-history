@@ -1,0 +1,41 @@
+{
+  "branch": "remote-stage2-census/gonzaga-6f7fb9ef94ea",
+  "capability_census": {
+    "path": ".onboarding/gonzaga/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "integration_semantic_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 17,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 17,
+      "discrepancy": 34,
+      "identity": 9,
+      "publication": 1
+    },
+    "decision_count": 62,
+    "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "discrepancies_to_add": 34,
+    "existing_game_matches": 421,
+    "new_canonical_games": 1623,
+    "plan_path": ".onboarding/gonzaga/plan.json",
+    "review_path": ".onboarding/gonzaga/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}

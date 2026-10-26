@@ -1,0 +1,101 @@
+{
+  "actual_published_target_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "changed_file_sha256": {
+    "schools/gonzaga/opponents.csv": "91a511dc9bcba7750633e205eac363847fbfbb1c687accb98fd6dfc1a237aa2d",
+    "schools/gonzaga/source-games.csv": "0d4478e7a60e44a5c4402749cfca1ba6725d736a6037a2ee29d39c384da0cc45"
+  },
+  "changed_paths": [
+    "schools/gonzaga/opponents.csv",
+    "schools/gonzaga/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "augustana-illinois",
+    "regis-colorado",
+    "st-thomas-aquinas"
+  ],
+  "expected_target_predecessor_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "field_level_proof_sha256": "e4419e2e0db42c6b8fe82b02b69c1e65e73053015586cad7f37b76eb469b1e6b",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "68d50220efa1cf9766b363c32ca54037c02bc457",
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "eb868bcf3ca1f4eac1458667b21c3eeeee014a8277f812adc6fb6c0c6f55a099",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "b0e7d911c789c07d54e1cd6464c172be62b17c2623b563b0b7005a11f12d033e",
+      "implementation-stage2-status.json": "8338ed701fd2933943cee1e273a72e6bae72325ffe68c3feb4e121c9dd88fff7",
+      "plan.json": "182254a0d45d4f5612b69c0ebffe4e30670171e58c926f0d06b46f1c4cc7bd68",
+      "review.csv": "7ad6090eedec4caac84601fd99330b46d4c37c65c9cb8ff6e3b4e00aa74cc705",
+      "review.md": "44e76454a05cbfa12545377d417e4f135c7f50d8d69bcec9906bf5ff2b6fc34f"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "b0e7d911c789c07d54e1cd6464c172be62b17c2623b563b0b7005a11f12d033e",
+      "implementation-stage2-status.json": "265d7c909ea7a7736065543bf39002654a1c2bb87d3898967d88f368ba943ad5",
+      "plan.json": "d0d29d21e2a1f2f45107c9f45cedc6c95ef16f867eb81a33babfed2b83f415a3",
+      "review.csv": "7ad6090eedec4caac84601fd99330b46d4c37c65c9cb8ff6e3b4e00aa74cc705",
+      "review.md": "67f1902442eceaf8e1bf36e29bd74991fe09d04478c7c9eceaaa88ae21663885"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 38,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 62,
+    "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+      "after_status": "",
+      "after_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+      "before_head_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+      "before_status": "",
+      "before_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "prepared_parent_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "prepared_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "gonzaga-stage2-opponent-display-normalize-0001",
+  "request_sha256": "cb8cbdc878855d98ae721246a1794bbd16b3281bb232e5a570a2cbad1accc09a",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_drift_after": {
+    "baseline_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "school_key": "gonzaga",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "school_key": "gonzaga",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "source_game_normalized_name_row_count": 4,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "51909c487f2aa3a55494628284f7f5cac5b070a38442b71d21affd8590c29895",
+  "target_branch": "data/gonzaga-onboarding",
+  "writeahead_commit": "df691831971dcdac40b88dc33ed06f4bd855bac9",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/gonzaga/gonzaga-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "2934206e20ca62e7b0ebd5d0e7aa5f2bbb81f6b16229caa7353e29b3482f71a8"
+}
