@@ -35,17 +35,18 @@
     "boise-state-release-readiness-0001",
     "boise-state-release-preview-verify-0001",
     "boise-state-release-gate2-approval-0001",
-    "boise-state-release-production-proof-0001"
+    "boise-state-release-production-proof-0001",
+    "gonzaga-stage1-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "gonzaga-stage1-0001",
+  "active_request_sha256": "703f902b41f75eae1455107f7fea0473c6b9e106a34e8c12d589a620c490b68e",
+  "active_school_key": "gonzaga",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -105,8 +106,11 @@
     "request_id": "boise-state-release-production-proof-0001",
     "school_key": "boise-state"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40323547251",
+  "lock_acquisition_request_commit": "56e6d59ed5614c9c42eb8ffad109839c526070e7",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
