@@ -55,3 +55,6 @@ a deployable website state and should not consume a Preview slot.
 
 The project-level Ignored Build Step remains necessary for the already-diverged operational
 control branch and for non-site commits on other branches.
+
+Regression coverage must include main-always-build, control-always-skip, non-site skip,
+site/config build, missing-parent fail-open, and Git-diff-error fail-open cases.
