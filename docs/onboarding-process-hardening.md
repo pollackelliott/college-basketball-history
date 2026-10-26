@@ -41,6 +41,18 @@ python tools/onboarding_hardening.py research-check <school_key> <portfolio.zip>
 
 If the research lane does not have the repo mounted, the serialized Implementation lane runs this immediately upon receipt, before Phase 0 writes.
 
+A precomputed `<research_zip_sha256>` from the final Research handoff remains preferred.
+When the owner explicitly designates exactly one attached ZIP as the final accepted
+`RESEARCH_FROZEN` artifact but omits the copied digest/status card, Implementation may
+compute the digest from those owner-designated bytes and use it as `--expected-sha256`
+**only after** verifying the exact six-file contract, recovering the package's research
+base/school identity, checking the required final-freeze evidence, and finding no
+competing/superseding candidate in available durable authority. In that case the owner
+selection authenticates the artifact and the computed digest freezes its byte identity for
+all later requests. An arbitrary newly discovered ZIP may not self-authenticate this way.
+Missing copied transport metadata by itself is not a Research failure or a reason to skip
+the read-only Stage 1 inventory.
+
 The acceptance gate checks, at minimum:
 
 - exactly the six flat package files;
