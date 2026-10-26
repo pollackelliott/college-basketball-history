@@ -184,7 +184,7 @@ data/<school_key>-onboarding
 
 Normal Phase 0 refuses a pre-existing target branch. It never silently overwrites or force-adopts an existing onboarding branch.
 
-The permanent Phase 0 command owns the commit/tree. Remote orchestration does not incrementally edit the target branch through GitHub file APIs.
+The permanent Phase 0 command owns the commit/tree. Remote orchestration does not incrementally edit the target branch through GitHub file APIs. The Phase 0 path contract permits the target school's exact `program-top-level-scope.csv` row to change when—and only when—the frozen six-file package carries a different accepted scope expression; that target-row reconciliation is part of the school onboarding transaction, not a separate maintenance workflow.
 
 ## 8. Stage 2 capability census request
 
@@ -598,7 +598,7 @@ Before target publication, the control branch must durably preserve a write-ahea
 - exact reconciliation sidecars/hashes when used;
 - package-member hashes;
 - semantic snapshot hash;
-- venue/conference/program-alias mappings and scope metadata exposed by the Integration Freeze.
+- venue/conference/program-alias mappings and scope metadata exposed by the Integration Freeze, including the prior/final reusable target top-level-scope expression.
 
 Recovery classifies durable state objectively as:
 
