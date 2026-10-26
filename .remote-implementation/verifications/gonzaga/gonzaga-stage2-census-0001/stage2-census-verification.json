@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+    "implementation-stage2-status.json": "ee018bc150829497f8b8b0ee2f0281ae27ccc980fcddfe3de01258d96415b627",
+    "plan.json": "2abd2050ca7e38bd9052170e3ab26447662178a9ea77e092cdacb3104e637e47",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "a420171d5674632326ef30ce36021d7dcdefb5f8a2bd80c070e3fb81dd34f964"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+    "implementation-stage2-status.json": "1646cac9a85bdd3c1749c7634eadfbf5827f37c778d51b6fd93ba12a90a3bce7",
+    "plan.json": "4a5287e870ee931f262c1b08646ef5f8877b527b9f19b6f3ec1cd6c800067840",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "30a63472ee017185d317d82401cc1d8dd1035a21b10b1d24b8ed903bd1ad4c59"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "gonzaga-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "target_tree_sha": "201bb11a6a961ca3dc7194c04b408bb3e9750fb9",
+  "tracked_stage2_mutation": "NONE"
+}
