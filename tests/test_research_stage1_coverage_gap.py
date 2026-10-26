@@ -122,6 +122,37 @@ class Stage1SourceAcknowledgedGapTests(unittest.TestCase):
         self.assertEqual(result["unidentified_games_not_added"], 3)
         self.assertFalse(result["stage1_complete"])
 
+    def test_outcome_specific_missing_counts_pass_full_audit(self):
+        def mutation(doc):
+            evidence = json.loads(doc["missing-game-evidence.json"])
+            evidence["seasons"][0]["primary_source_state"]["explicit_note"] = (
+                "one win missing from archives"
+            )
+            evidence["seasons"][1]["primary_source_state"]["explicit_note"] = (
+                "one win and one loss missing from archives"
+            )
+            doc["missing-game-evidence.json"] = json.dumps(evidence).encode()
+
+            blockers = json.loads(doc["blocking-residuals.json"])
+            blockers[0]["source_note"]["text"] = "one win missing from archives"
+            doc["blocking-residuals.json"] = json.dumps(blockers).encode()
+
+        result = self.audit(mutation)
+        self.assertEqual(result["status"], "ELIGIBLE_FOR_SOURCE_ACKNOWLEDGED_COVERAGE_GAP")
+        self.assertEqual(result["defects"], [])
+        self.assertEqual(result["unidentified_games_not_added"], 3)
+        self.assertEqual(
+            [gap["institutional_missing_count"] for gap in result["source_coverage_gaps"]],
+            [1, 2],
+        )
+
+    def test_missing_count_parser_handles_separate_outcome_clauses(self):
+        self.assertEqual(
+            mod._count_missing("one win missing from archives; one loss missing from archives"),
+            2,
+        )
+        self.assertIsNone(mod._count_missing("record has ten wins and seven losses; archive incomplete"))
+
     def test_missing_note_cannot_be_inferred_from_aggregate(self):
         def mutation(doc):
             obj = json.loads(doc["missing-game-evidence.json"])

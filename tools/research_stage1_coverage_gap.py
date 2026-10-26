@@ -33,15 +33,34 @@ def _csv(data: bytes):
 
 
 def _count_missing(note: str) -> int | None:
-    m = re.search(
-        r"\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+)"
-        r"\s+games?\s+missing\b", note, re.IGNORECASE,
+    """Return an explicit source count of missing games, including outcome wording.
+
+    Institutions sometimes describe an omitted population as "one win missing" or
+    "one win and one loss missing" rather than using the noun "game". Each explicit
+    win/loss/tie count represents one missing played game. Counts remain source-explicit;
+    vague aggregate language is never inferred.
+    """
+    count_token = r"(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)"
+    unit = r"(?:games?|wins?|loss(?:es)?|ties?)"
+    item = rf"\b{count_token}\s+{unit}\b"
+    counted_item = re.compile(
+        rf"\b(?P<count>{count_token})\s+{unit}\b",
+        re.IGNORECASE,
     )
-    if not m:
-        return None
-    word = m.group(1).lower()
-    n = int(word) if word.isdecimal() else WORDS[word]
-    return n if 0 < n <= 10 else None
+    clause = re.compile(
+        rf"(?P<items>{item}(?:\s*(?:,|and|plus)\s*{item})*)"
+        rf"\s+(?:(?:is|are)\s+)?missing\b",
+        re.IGNORECASE,
+    )
+    total = 0
+    for match in clause.finditer(note):
+        for counted in counted_item.finditer(match.group("items")):
+            word = counted.group("count").lower()
+            n = int(word) if word.isdecimal() else WORDS[word]
+            if not 0 < n <= 10:
+                return None
+            total += n
+    return total if 0 < total <= 10 else None
 
 
 def audit_checkpoint(checkpoint: Path, *, evidence_member: str,
