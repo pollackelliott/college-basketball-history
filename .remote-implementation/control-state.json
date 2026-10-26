@@ -48,7 +48,7 @@
     "gonzaga-phase0-0002"
   ],
   "active_expected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-  "active_lock_commit": null,
+  "active_lock_commit": "b4fce1d7d4de0d8fc1fbff9fb0396e4e2d20cd47",
   "active_lock_owner": "github-actions:40394048911:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
