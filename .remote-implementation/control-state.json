@@ -85,11 +85,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/boise-state/boise-state-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "06b9ce1c6c5e0ccae45833da36d145e19caf7f9ccc75e1d4cb847f082614f617",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "boise-state-release-readiness-0001",
     "school_key": "boise-state",
     "target_branch": "data/boise-state-onboarding",
