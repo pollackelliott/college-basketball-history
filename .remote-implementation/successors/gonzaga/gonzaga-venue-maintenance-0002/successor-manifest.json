@@ -1,0 +1,107 @@
+{
+  "actual_published_target_sha": "5f7d69462f7793a4470b3c73346951941819182a",
+  "apply_result": {
+    "assertion_rows_updated": 0,
+    "canonical_rows_updated": 3,
+    "ncaa_evidence_rows_updated": 0,
+    "plan_sha256": "bb19f3b1b241a0dd03c88915b317e9616bab0d350fad8642cd8013f08a6c49eb",
+    "provenance_markers_updated": 3,
+    "school_rows_updated": 4,
+    "site_files_refreshed": 5,
+    "venue_name_rows_reassigned": 1,
+    "venues_retired": 1
+  },
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "9edc390671a52232c9be0272f3a64a8f54a57d0a658485c20a88cc02b453c27d",
+    "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json": "b54d211e8e7a2b282dc985f672f8b404893ae6e2299fbfde79f8911bad85531f",
+    "data/reference/venue-names.csv": "b4ba3ff0b114c11235527f7b12ae302280a2a9471ba5324d5c783e14a64f55c6",
+    "data/reference/venues.csv": "fc269d53266eac5b74e1117b776771a49ae7b78858ec9c35d426b1604cd24f15",
+    "schools/arizona-state/venues.csv": "56d63f7a246e4afa580e9c72263e502fb04344c967576954d282b8aede305a0e",
+    "schools/california/venues.csv": "996d0e64f3053bd54e16f46ad7e675579e7168f2d1786d491dda71b2e81bf1c6",
+    "schools/oregon-state/venues.csv": "6e3550500d12663696c8580cd0e86b1edb7b2ea3e6058b2fe66a7c5f2265aed6",
+    "schools/ucla/venues.csv": "df87ae8674de120244261d9fc34d5f47ea7086717c41140f35f84a76a2a6c26f",
+    "site/data/teams/california.json": "d6ccd384dacced742d4f3a6783ff25d5881b779afb7cc63f5aabc74a43a68b04",
+    "site/data/teams/oregon-state.json": "73b7888cdaae94451b1950306a759a1b2b00ea6ecff1e0ad031ff3f7bd64f012",
+    "site/data/teams/stanford.json": "5bbf4b8debc6fe9cf111ed701ec60a509bc2e021f062eb4de28411241e7acd71",
+    "site/data/teams/ucla.json": "5f70813deb40389fc9ae16494259650cf3261d70b2121cb0d2bbaae2030159ba",
+    "site/data/teams/washington.json": "bc129ee354ef9646e42854e9eda0b3fcdeb6ad155a767ca701cd4624e6ff0b39"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/arizona-state/venues.csv",
+    "schools/california/venues.csv",
+    "schools/oregon-state/venues.csv",
+    "schools/ucla/venues.csv",
+    "site/data/teams/california.json",
+    "site/data/teams/oregon-state.json",
+    "site/data/teams/stanford.json",
+    "site/data/teams/ucla.json",
+    "site/data/teams/washington.json"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": null,
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "5732a7ac9de90b2e72065df1759b2ec7ae464a61",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_SUCCESSOR",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "plan_merges": [
+    {
+      "absorbed_venue_id": "VEN-000392",
+      "absorbed_venue_key": "great-western-forum",
+      "assertion_rows": 0,
+      "canonical_rows": 3,
+      "city": "Inglewood",
+      "expected_canonical_rows": 3,
+      "expected_school_rows": 4,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 3,
+      "resolution_basis": "Control Center-authorized Gonzaga Stage 1 maintenance: current protected main contains duplicate physical identities for the same Inglewood arena under The Forum and Great Western Forum. Preserve earlier-established VEN-000376 / the-forum, retire later duplicate VEN-000392 / great-western-forum, and retain Great Western Forum as a historical/alias name.",
+      "school_files": [
+        {
+          "path": "schools/arizona-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/california/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/oregon-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/ucla/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 4,
+      "state": "CA",
+      "survivor_venue_id": "VEN-000376",
+      "survivor_venue_key": "the-forum",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "bb19f3b1b241a0dd03c88915b317e9616bab0d350fad8642cd8013f08a6c49eb",
+  "prepared_commit_sha": "5f7d69462f7793a4470b3c73346951941819182a",
+  "prepared_parent_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
+  "prepared_tree_sha": "d8630889823f40bd7f86f37a43ed52daa68ac4ee",
+  "protected_main_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
+  "publication_cas": "CREATE_ONCE_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json",
+  "repository_spec_sha256": "b54d211e8e7a2b282dc985f672f8b404893ae6e2299fbfde79f8911bad85531f",
+  "repository_validation": "PASS",
+  "request_id": "gonzaga-venue-maintenance-0002",
+  "request_sha256": "238951d7b8ee4d88aee64489c93887beffd73aa30ae18ce5f25ec23515c12ca9",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/gonzaga-stage1-forum-identity-v2",
+  "writeahead_commit": "e99ed79887a0167eda4b94a0b26c76d7e0f0fb83",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/gonzaga/gonzaga-venue-maintenance-0002/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "a086f7900581f7c9c7eb657b19bf3857fdff5b5ff8a60e61f26eef8744c43663"
+}
