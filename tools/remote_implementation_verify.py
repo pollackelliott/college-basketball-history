@@ -86,6 +86,9 @@ from remote_implementation_stage2_opponent_display import (
     verify_census_and_freeze_authority,
     verify_prepared_commit_field_boundary,
 )
+from remote_implementation_venue_maintenance import (
+    prepare_venue_maintenance,
+)
 from remote_implementation_production import (
     approve_exact_gate2,
     verify_gate2_approved_chain,
@@ -1756,6 +1759,198 @@ def verify_stage2_opponent_display_normalization(
     return 0
 
 
+def verify_venue_identity_maintenance(
+    live_main: str,
+    control_head: str,
+    state: dict,
+) -> int:
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE VENUE MAINTENANCE EQUIVALENCE: PASS (already verified)")
+        return 0
+
+    successor_path = last["successor_manifest_path"]
+    successor_bytes = git_show_bytes(control_head, successor_path)
+    if sha256_bytes(successor_bytes) != last["successor_manifest_sha256"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(successor_bytes)
+    if (
+        successor.get("kind")
+        != "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_SUCCESSOR"
+    ):
+        raise Stop("VENUE_MAINTENANCE_FRESH_SUCCESSOR_KIND_MISMATCH")
+    if successor.get("operation") != OP_VENUE_IDENTITY_MAINTENANCE:
+        raise Stop("VENUE_MAINTENANCE_FRESH_OPERATION_MISMATCH")
+    if successor.get("protected_main_sha") != live_main:
+        raise Stop("VENUE_MAINTENANCE_FRESH_MAIN_CHANGED")
+
+    target_branch = successor["target_branch"]
+    prepared = successor["prepared_commit_sha"]
+    predecessor = successor["expected_target_predecessor_sha"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("VENUE_MAINTENANCE_FRESH_TARGET_REF_MISMATCH")
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/%s:refs/remotes/origin/remote-venue-maintenance-target"
+        % target_branch,
+    )
+
+    request_path = (
+        ".remote-implementation/requests/%s/request.json"
+        % successor["request_id"]
+    )
+    request_bytes = git_show_bytes(control_head, request_path)
+    if sha256_bytes(request_bytes) != successor["request_sha256"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+
+    writeahead_path = successor["writeahead_manifest_path"]
+    writeahead_bytes = git_show_bytes(control_head, writeahead_path)
+    if (
+        sha256_bytes(writeahead_bytes)
+        != successor["writeahead_manifest_sha256"]
+    ):
+        raise Stop("VENUE_MAINTENANCE_FRESH_WRITEAHEAD_HASH_MISMATCH")
+    manifest = json.loads(writeahead_bytes)
+    if manifest.get("operation") != OP_VENUE_IDENTITY_MAINTENANCE:
+        raise Stop("VENUE_MAINTENANCE_FRESH_WRITEAHEAD_OPERATION_MISMATCH")
+    if manifest.get("prepared_commit_sha") != prepared:
+        raise Stop("VENUE_MAINTENANCE_FRESH_PREPARED_MISMATCH")
+    if manifest.get("expected_target_predecessor_sha") != predecessor:
+        raise Stop("VENUE_MAINTENANCE_FRESH_PREDECESSOR_MISMATCH")
+
+    prefix = Path(writeahead_path).parent
+    bundle = Path(tempfile.mkdtemp(prefix="remote-venue-maintenance-fresh-"))
+    for relative, expected in (manifest.get("sidecars") or {}).items():
+        data = git_show_bytes(
+            control_head,
+            (prefix / relative).as_posix(),
+        )
+        target = bundle / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        if sha256_bytes(data) != expected:
+            raise Stop(
+                "VENUE_MAINTENANCE_FRESH_SIDECAR_HASH_MISMATCH:%s"
+                % relative
+            )
+
+    parent = git("rev-parse", "%s^" % prepared).stdout.strip()
+    tree = git("rev-parse", "%s^{tree}" % prepared).stdout.strip()
+    if parent != live_main or parent != manifest["prepared_parent_sha"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_PARENT_MISMATCH")
+    if tree != manifest["prepared_tree_sha"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_TREE_MISMATCH")
+    changed = sorted(
+        line.strip()
+        for line in git(
+            "diff-tree",
+            "--no-commit-id",
+            "--name-only",
+            "-r",
+            prepared,
+        ).stdout.splitlines()
+        if line.strip()
+    )
+    if changed != sorted(manifest["changed_paths"]):
+        raise Stop("VENUE_MAINTENANCE_FRESH_CHANGED_PATH_MISMATCH")
+    for path, expected in manifest["changed_file_sha256"].items():
+        if sha256_bytes(git_show_bytes(prepared, path)) != expected:
+            raise Stop(
+                "VENUE_MAINTENANCE_FRESH_CHANGED_FILE_HASH_MISMATCH:%s"
+                % path
+            )
+
+    spec_bytes = (bundle / "venue-maintenance-spec.json").read_bytes()
+    if sha256_bytes(spec_bytes) != request["venue_maintenance_spec"]["sha256"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_SPEC_HASH_MISMATCH")
+    if sha256_bytes(spec_bytes) != manifest["repository_spec_sha256"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_WRITEAHEAD_SPEC_MISMATCH")
+
+    replay = prepare_venue_maintenance(
+        repo=ROOT,
+        base_sha=live_main,
+        request_id=request["request_id"],
+        school_key=request["school_key"],
+        spec_bytes=spec_bytes,
+        repository_spec_path=request["repository_spec_path"],
+        expected_plan_sha256=request["expected_plan_sha256"],
+        diag=DIAG / "venue-maintenance-fresh",
+        label="fresh",
+    )
+    if replay["plan_bytes"] != (bundle / "transaction-plan.json").read_bytes():
+        raise Stop("VENUE_MAINTENANCE_FRESH_PLAN_BYTES_MISMATCH")
+    if replay["prepared_tree_sha"] != tree:
+        raise Stop("VENUE_MAINTENANCE_FRESH_REPLAY_TREE_MISMATCH")
+    if replay["changed_paths"] != changed:
+        raise Stop("VENUE_MAINTENANCE_FRESH_REPLAY_PATH_MISMATCH")
+    if replay["deleted_paths"] != (manifest.get("deleted_paths") or []):
+        raise Stop("VENUE_MAINTENANCE_FRESH_REPLAY_DELETION_MISMATCH")
+    if replay["changed_file_sha256"] != manifest["changed_file_sha256"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_REPLAY_HASH_MISMATCH")
+    if replay["apply_result"] != manifest["apply_result"]:
+        raise Stop("VENUE_MAINTENANCE_FRESH_APPLY_RESULT_MISMATCH")
+
+    assert_main = fetch_operational_refs(target_branch)[0]
+    if assert_main != live_main:
+        raise Stop("VENUE_MAINTENANCE_FRESH_MAIN_MOVED_DURING_REPLAY")
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("VENUE_MAINTENANCE_FRESH_TARGET_MOVED_DURING_REPLAY")
+
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_VERIFICATION",
+        "request_id": successor["request_id"],
+        "school_key": successor["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "target_predecessor_sha": predecessor,
+        "target_sha": prepared,
+        "target_tree_sha": tree,
+        "changed_paths": changed,
+        "plan_sha256": manifest["plan_sha256"],
+        "repository_spec_sha256": manifest["repository_spec_sha256"],
+        "repository_validation": "PASS",
+        "site_data_freshness": "PASS",
+        "exact_replay_tree": "PASS",
+        "remote_venue_maintenance_equivalence": "PASS",
+    }
+    verify_dir = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (successor["school_key"], successor["request_id"])
+    )
+    write_json(
+        verify_dir / "venue-maintenance-verification.json",
+        verification,
+    )
+
+    local_state = read_json(STATE_PATH)
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (
+        local_last.get("operation") != OP_VENUE_IDENTITY_MAINTENANCE
+        or local_last.get("request_id") != successor["request_id"]
+    ):
+        raise Stop("VENUE_MAINTENANCE_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last["remote_venue_maintenance_equivalence"] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        "persist fresh venue maintenance verification %s"
+        % successor["request_id"],
+        [STATE_PATH, verify_dir],
+    )
+    print(
+        "REMOTE VENUE MAINTENANCE EQUIVALENCE: PASS "
+        "verification_commit=%s" % commit
+    )
+    return 0
+
+
 def verify_release_readiness(
     live_main: str,
     control_head: str,
@@ -2214,6 +2409,12 @@ def main() -> int:
             )
         if last.get("operation") == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
             return verify_stage2_opponent_display_normalization(
+                live_main,
+                control_head,
+                state,
+            )
+        if last.get("operation") == OP_VENUE_IDENTITY_MAINTENANCE:
+            return verify_venue_identity_maintenance(
                 live_main,
                 control_head,
                 state,
