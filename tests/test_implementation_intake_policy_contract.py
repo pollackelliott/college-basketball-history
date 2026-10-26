@@ -17,14 +17,15 @@ class ImplementationIntakePolicyContractTests(unittest.TestCase):
 
         self.assertIn("owner-designated-artifact fallback", agents)
         self.assertIn("Owner-designated Research Freeze attachment fallback", bounded)
-        self.assertIn("owner-designated final attachment", bootstrap)
+        self.assertIn("OWNER-DESIGNATED FINAL ATTACHMENT", bootstrap)
         self.assertIn("owner-designated bytes", hardening)
 
     def test_missing_copied_hash_alone_is_not_recovery_stop(self):
         bounded = self.read("docs/implementation-lane-bounded-execution.md")
+        normalized = " ".join(bounded.split())
         self.assertIn(
             "must not classify that omission alone as `STOP — RECOVERY REQUIRED`",
-            bounded,
+            normalized,
         )
 
     def test_scope_conflict_does_not_skip_read_only_stage1_inventory(self):
