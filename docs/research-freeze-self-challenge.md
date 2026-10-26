@@ -296,6 +296,7 @@ Only after the self-challenge and any bounded repairs may the lane declare:
 - unaccounted material site gaps = 0;
 - ambiguous physical venue identities = 0;
 - authoritative row-level Stage 3A state is present and mechanically reconciles to the Stage 1 universe;
+- the six-file package explicitly records the exact accepted target top-level scope and whether the current reusable baseline is confirmed or superseded;
 - `PRE-FREEZE SELF-CHALLENGE: PASS`.
 
 Then the lane may emit the immutable six-file ZIP/hash and declare:
