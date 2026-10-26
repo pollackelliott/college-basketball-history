@@ -102,6 +102,9 @@ from remote_implementation_stage2_apply import (
     verify_prepared_sealed_apply,
     verify_stage2_sealed_apply_authority,
 )
+from remote_implementation_venue_maintenance import (
+    prepare_venue_maintenance,
+)
 from remote_implementation_production import (
     approve_exact_gate2,
     verify_gate2_approved_chain,
@@ -1561,6 +1564,283 @@ def persist_stage2_reconciliation_diagnostic_checkpoint(
         expected_remote,
         "finalize Stage 2 reconciliation diagnostic %s" % rid,
         [STATE_PATH, directory],
+    )
+
+
+def finalize_venue_maintenance_successor(
+    *,
+    active: dict[str, Any],
+    original_request: dict[str, Any],
+    request_sha256: str,
+    live_main: str,
+    writeahead: dict[str, Any],
+    writeahead_path: str,
+    writeahead_sha256: str,
+    writeahead_commit: str | None,
+    expected_remote: str,
+    publication_cas: str,
+    extra_commit_paths: list[Path | str] | None = None,
+    recovery_request_id: str | None = None,
+    recovery_classification: str | None = None,
+) -> str:
+    rid = original_request["request_id"]
+    school = original_request["school_key"]
+    prepared = writeahead["prepared_commit_sha"]
+    target_branch = original_request["target_branch"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("VENUE_MAINTENANCE_TARGET_NOT_PREPARED_COMMIT")
+
+    successor_dir = Path(
+        ".remote-implementation/successors/%s/%s" % (school, rid)
+    )
+    successor_dir.mkdir(parents=True, exist_ok=True)
+    successor = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_SUCCESSOR",
+        "operation": OP_VENUE_IDENTITY_MAINTENANCE,
+        "request_id": rid,
+        "request_sha256": request_sha256,
+        "school_key": school,
+        "global_lock_commit": active["active_lock_commit"],
+        "writeahead_commit": writeahead_commit,
+        "writeahead_manifest_path": writeahead_path,
+        "writeahead_manifest_sha256": writeahead_sha256,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": writeahead[
+            "expected_target_predecessor_sha"
+        ],
+        "prepared_commit_sha": prepared,
+        "prepared_tree_sha": writeahead["prepared_tree_sha"],
+        "prepared_parent_sha": writeahead["prepared_parent_sha"],
+        "actual_published_target_sha": prepared,
+        "changed_paths": writeahead["changed_paths"],
+        "deleted_paths": writeahead.get("deleted_paths") or [],
+        "changed_file_sha256": writeahead["changed_file_sha256"],
+        "repository_spec_path": writeahead["repository_spec_path"],
+        "repository_spec_sha256": writeahead["repository_spec_sha256"],
+        "plan_sha256": writeahead["plan_sha256"],
+        "plan_merges": writeahead["plan_merges"],
+        "apply_result": writeahead["apply_result"],
+        "repository_validation": writeahead["repository_validation"],
+        "site_data_freshness": writeahead["site_data_freshness"],
+        "publication_cas": publication_cas,
+        "recovery_request_id": recovery_request_id,
+        "recovery_classification": recovery_classification,
+        "final_transaction_state": "COMPLETE",
+    }
+    successor_path = successor_dir / "successor-manifest.json"
+    write_json(successor_path, successor)
+    successor_sha = sha256_file(successor_path)
+
+    final_state = finalize_success(
+        active,
+        request_id=rid,
+        last_operation={
+            "operation": OP_VENUE_IDENTITY_MAINTENANCE,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": target_branch,
+            "target_predecessor_sha": writeahead[
+                "expected_target_predecessor_sha"
+            ],
+            "target_sha": prepared,
+            "writeahead_manifest_path": writeahead_path,
+            "writeahead_manifest_sha256": writeahead_sha256,
+            "successor_manifest_path": successor_path.as_posix(),
+            "successor_manifest_sha256": successor_sha,
+            "plan_sha256": writeahead["plan_sha256"],
+            "fresh_runner_verification": "PENDING",
+            "remote_venue_maintenance_equivalence": "PENDING",
+            "recovery_request_id": recovery_request_id,
+            "recovery_classification": recovery_classification,
+        },
+    )
+    if recovery_request_id and recovery_request_id not in final_state[
+        "consumed_request_ids"
+    ]:
+        final_state["consumed_request_ids"].append(recovery_request_id)
+    write_json(STATE_PATH, final_state)
+    paths: list[Path | str] = [STATE_PATH, successor_dir]
+    if extra_commit_paths:
+        paths.extend(extra_commit_paths)
+    return commit_control(
+        expected_remote,
+        "finalize venue identity maintenance %s" % rid,
+        paths,
+    )
+
+
+def run_venue_identity_maintenance(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    live_main: str,
+) -> None:
+    target_branch = request["target_branch"]
+    target_before = remote_head(ROOT, target_branch)
+    if target_before not in {None, live_main}:
+        raise Stop(
+            "VENUE_MAINTENANCE_TARGET_NOT_AT_CURRENT_MAIN expected=%s actual=%s"
+            % (live_main, target_before)
+        )
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    lock_commit = commit_control(
+        request_commit,
+        "acquire global Implementation lock %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    active = bind_lock_commit(active, lock_commit)
+    write_json(STATE_PATH, active)
+    lock_bound_commit = commit_control(
+        lock_commit,
+        "bind global Implementation lock %s" % request["request_id"],
+        [STATE_PATH],
+    )
+
+    scratch = Path(tempfile.mkdtemp(prefix="remote-venue-maintenance-inputs-"))
+    spec = materialize_payload(
+        request_commit,
+        request["venue_maintenance_spec"],
+        scratch / "venue-maintenance-spec.json",
+    )
+    if spec is None:
+        raise Stop("VENUE_MAINTENANCE_SPEC_MISSING")
+    spec_bytes = spec.read_bytes()
+    prepared = prepare_venue_maintenance(
+        repo=ROOT,
+        base_sha=live_main,
+        request_id=request["request_id"],
+        school_key=request["school_key"],
+        spec_bytes=spec_bytes,
+        repository_spec_path=request["repository_spec_path"],
+        expected_plan_sha256=request["expected_plan_sha256"],
+        diag=DIAG / "venue-maintenance",
+        label="apply",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, target_branch) != target_before:
+        raise Stop("VENUE_MAINTENANCE_TARGET_CHANGED_BEFORE_WRITEAHEAD")
+
+    writeahead_dir = Path(
+        ".remote-implementation/writeahead/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    writeahead_dir.mkdir(parents=True, exist_ok=True)
+    (writeahead_dir / "venue-maintenance-spec.json").write_bytes(spec_bytes)
+    (writeahead_dir / "transaction-plan.json").write_bytes(
+        prepared["plan_bytes"]
+    )
+    write_json(
+        writeahead_dir / "apply-result.json",
+        prepared["apply_result"],
+    )
+    sidecars = {
+        name: sha256_file(writeahead_dir / name)
+        for name in (
+            "venue-maintenance-spec.json",
+            "transaction-plan.json",
+            "apply-result.json",
+        )
+    }
+    writeahead = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+        "operation": OP_VENUE_IDENTITY_MAINTENANCE,
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "global_lock_commit": lock_commit,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": target_before,
+        "prepared_commit_sha": prepared["prepared_commit_sha"],
+        "prepared_tree_sha": prepared["prepared_tree_sha"],
+        "prepared_parent_sha": prepared["prepared_parent_sha"],
+        "commit_message": prepared["commit_message"],
+        "changed_paths": prepared["changed_paths"],
+        "deleted_paths": prepared["deleted_paths"],
+        "changed_file_sha256": prepared["changed_file_sha256"],
+        "allowed_paths": prepared["allowed_paths"],
+        "sidecars": sidecars,
+        "repository_spec_path": prepared["repository_spec_path"],
+        "repository_spec_sha256": prepared["repository_spec_sha256"],
+        "plan_sha256": prepared["plan_sha256"],
+        "plan_merges": prepared["plan"].get("merges") or [],
+        "apply_result": prepared["apply_result"],
+        "repository_validation": prepared["repository_validation"],
+        "site_data_freshness": prepared["site_data_freshness"],
+        "mutation_state": "PREPARED_NOT_PUBLISHED",
+    }
+    writeahead_path = writeahead_dir / "writeahead-manifest.json"
+    write_json(writeahead_path, writeahead)
+    writeahead_sha = sha256_file(writeahead_path)
+
+    active["transaction_state"] = "PREPARED_NOT_PUBLISHED"
+    active["active_writeahead_path"] = writeahead_path.as_posix()
+    active["active_writeahead_sha256"] = writeahead_sha
+    active["active_prepared_commit_sha"] = prepared["prepared_commit_sha"]
+    active["active_prepared_tree_sha"] = prepared["prepared_tree_sha"]
+    write_json(STATE_PATH, active)
+    writeahead_commit = commit_control(
+        lock_bound_commit,
+        "publish venue maintenance write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH, writeahead_dir],
+    )
+    active["active_writeahead_commit"] = writeahead_commit
+    write_json(STATE_PATH, active)
+    writeahead_bound_commit = commit_control(
+        writeahead_commit,
+        "bind venue maintenance write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH],
+    )
+
+    assert_protected_main_unchanged(live_main)
+    publish_ref_cas(
+        ROOT,
+        branch=target_branch,
+        prepared_commit=prepared["prepared_commit_sha"],
+        expected_predecessor=target_before,
+    )
+    if remote_head(ROOT, target_branch) != prepared["prepared_commit_sha"]:
+        raise Stop("VENUE_MAINTENANCE_TARGET_PUBLICATION_VERIFY_FAILED")
+
+    successor_commit = finalize_venue_maintenance_successor(
+        active=active,
+        original_request=request,
+        request_sha256=sha256_bytes(request_bytes),
+        live_main=live_main,
+        writeahead=writeahead,
+        writeahead_path=writeahead_path.as_posix(),
+        writeahead_sha256=writeahead_sha,
+        writeahead_commit=writeahead_commit,
+        expected_remote=writeahead_bound_commit,
+        publication_cas=(
+            "CREATE_ONCE_PASS"
+            if target_before is None
+            else "EXISTING_REF_CAS_PASS"
+        ),
+    )
+    print(
+        "REMOTE VENUE IDENTITY MAINTENANCE: COMPLETE "
+        "target=%s successor_commit=%s"
+        % (prepared["prepared_commit_sha"], successor_commit)
     )
 
 
@@ -3387,6 +3667,41 @@ def run_recovery(
 
         original_request_id = state["active_request_id"]
 
+        if state.get("active_operation") == OP_VENUE_IDENTITY_MAINTENANCE:
+            if manifest.get("operation") != OP_VENUE_IDENTITY_MAINTENANCE:
+                raise Stop("RECOVERY_VENUE_MAINTENANCE_WRITEAHEAD_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit,
+                original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_VENUE_MAINTENANCE_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            commit = finalize_venue_maintenance_successor(
+                active=state,
+                original_request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+            )
+            print(
+                "REMOTE IMPLEMENTATION RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
         if state.get("active_operation") == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
             if manifest.get("operation") != OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
                 raise Stop("RECOVERY_OPPONENT_DISPLAY_WRITEAHEAD_OPERATION_MISMATCH")
@@ -3732,6 +4047,14 @@ def main() -> int:
                 request_bytes,
                 request_commit,
                 predecessor_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_VENUE_IDENTITY_MAINTENANCE:
+            run_venue_identity_maintenance(
+                state,
+                request,
+                request_bytes,
+                request_commit,
                 live_main,
             )
         elif request["operation"] == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
