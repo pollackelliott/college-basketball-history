@@ -228,6 +228,16 @@ authorized dedicated maintenance branch/PR under `docs/shared-reference-authorit
 Any shared-reference mutation must pass both repository validation and declared-intent diff
 validation; unrelated shared-row changes are a STOP.
 
+Any Control Center-authorized duplicate physical-venue repair affecting existing
+global/published state may be executed through the guarded remote
+`VENUE_IDENTITY_MAINTENANCE` operation. That operation accepts only one exact hash-bound
+venue-maintenance spec plus explicit Control Center authority, acquires the global mutation
+lock, invokes unchanged `tools/venue_identity_transaction.py` against exact protected main,
+publishes only to a dedicated `maintenance/<school>-...` branch through CAS, and requires an
+independent replay to the exact same successor tree. It never pushes protected `main`,
+creates/merges a PR, or creates new historical authority. Ordinary target-school new venue
+registration remains Phase 0 authority and must not be routed through this maintenance path.
+
 1. Execute serialized Implementation either in the project Codespace on `data/<school_key>-onboarding` or, through stable Phase 0, the read-only Stage 2 capability census, the narrowly authorized opponent-display representation repair, exact-map proposal rehearsal through `OWNER_GATE_1_READY`, exact-owner-approval `STAGE2_GATE1_FILL`, `STAGE2_PRESEAL_REHEARSAL`, cryptographic `STAGE2_GATE1_SEAL`, and transactional `STAGE2_SEALED_APPLY`, via the guarded remote runner in `docs/remote-implementation-runner.md`; never mutate protected `main` directly.
 2. Treat `RESEARCH_FROZEN` as an executable acceptance state. Run
    `python tools/onboarding_hardening.py research-check ...` on an incoming six-file
