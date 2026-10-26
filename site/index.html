@@ -397,6 +397,51 @@ function administrativeChip(game) {
   return `<span class="chip ${administrativeClass(game.administrativeStatus)}"${title}>${esc(administrativeLabel(game.administrativeStatus))}</span>`;
 }
 
+// Complete the display timeline using the authoritative current-season membership.
+// Historical school source rows remain unchanged: no future games or source claims
+// are invented, and an explicit future interval always outranks this projection.
+function projectCurrentConferenceHistory(history, team, referenceSeason) {
+  if (!Array.isArray(history) || !history.length) return history;
+  const currentKey = team?.currentConferenceKey || "";
+  const currentName = team?.currentConferenceName || "";
+  const season = String(referenceSeason || "");
+  const match = season.match(/^(\d{4})-(\d{4})$/);
+  if (!currentKey || !match || Number(match[2]) !== Number(match[1]) + 1) return history;
+
+  // An explicit institutional 2026-27 (or subsequent current-season) era
+  // is controlling, including correct future entries already in Research.
+  if (history.some((row) => row.start_season === season)) return history;
+
+  const previousSeason = String(Number(match[1]) - 1) + "-" + match[1];
+  const latest = history[history.length - 1];
+  if (!latest?.start_season || latest.start_season >= season
+      || (latest.end_season && latest.end_season !== previousSeason)) {
+    // Do not bridge missing historical years or overwrite a contradictory era.
+    return history;
+  }
+
+  const projected = history.map((row) => ({ ...row }));
+  const last = projected[projected.length - 1];
+  if (last.conference_key === currentKey) {
+    // A Research package ending in the last completed season may still
+    // document the same conference now; simply open the continuing era.
+    if (last.end_season === previousSeason) last.end_season = null;
+    return projected;
+  }
+
+  // Distinct current key includes an ordinary transfer or an owner-approved
+  // conference naming era (MAAC -> Metro, WAC -> United Athletic, etc.).
+  if (!last.end_season) last.end_season = previousSeason;
+  projected.push({
+    start_season: season,
+    end_season: null,
+    conference_key: currentKey,
+    conference_name: currentName || team.conference || currentKey,
+    membership_type: "current",
+  });
+  return projected;
+}
+
 function normalizeProgram(program) {
   return {
     key: program.program_key,
@@ -408,6 +453,8 @@ function normalizeProgram(program) {
     state: program.state || "",
     location: programLocation(program),
     conference: conferenceName(program.current_conference) || "Independent",
+    currentConferenceKey: program.current_conference?.conference_key || "",
+    currentConferenceName: program.current_conference?.conference_name || "",
     headerShort: DB.displayLabels[program.program_key]?.header_short || program.display_name || program.program_name,
     badgeInitialism: DB.displayLabels[program.program_key]?.badge_initialism || initials(program.display_name || program.program_name),
     primary: safeHex(program.primary_hex, "#334155"),
@@ -631,7 +678,9 @@ async function loadData() {
     DB.opponents[key] = opponents;
     DB.seasons[key] = document.seasons || [];
     DB.games[key] = games;
-    DB.conferenceHistory[key] = document.conference_history || [];
+    DB.conferenceHistory[key] = projectCurrentConferenceHistory(
+      document.conference_history || [], directoryProgram, DB.referenceSeason,
+    );
     DB.conferenceNames[key] = document.conference_names || {};
     DB.conferenceTournamentLabels[key] = document.conference_tournament_labels || {};
     DB.summaries[key] = {
