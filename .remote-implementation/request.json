@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "boise-state-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "boise-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "boise-state",
-  "previous_control_state_commit": "e1241561add242d09d7dd66dcd40cf85de58f7b1",
-  "previous_control_state_sha256": "6c7ee271c5683c606251b1589a428b460d3ade67b82d6b0fdb112894d4c87027",
-  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "previous_control_state_commit": "100bf13bebbdc96f9185106ba0b1497cf0018025",
+  "previous_control_state_sha256": "8bcca0eaa3f6ea1c6bd9a31dede8b6607de0359e332d0d96c917fcddfad4ce9f",
+  "expected_protected_main_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
   "target_branch": "data/boise-state-onboarding",
   "target_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
   "pr_number": 371,
-  "approved_plan_hash": "b76b1e2c5e5e1969fb59890ad68805f93a015a822d01ae7eee6d388d6b483db3",
-  "release_manifest_sha256": "f480a5298a5a816d20bebf331a7a5a66207ba2e38b5378330ba7e0d45833412f",
-  "preview_deployment_id": 7321972861,
-  "preview_url": "https://college-basketball-history-qrw05w37w-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/boise-state/boise-state-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "0a8d016ea332e93dbe681918c98dab93496b17a3001046bd6a2ad30ef92cd43e"
+  "merge_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "072cb87691829307e418e2674e6a640d9404f303b550a4e59fab04ee10d2ba38"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/boise-state/boise-state-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "b0d9fe9828b688e0baa0754260516483c89a9520c40534152702046a51fbe322"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: “I APPROVE the preview.”",
-    "preview_checkpoint_sha256": "0a8d016ea332e93dbe681918c98dab93496b17a3001046bd6a2ad30ef92cd43e",
-    "preview_verification_sha256": "b0d9fe9828b688e0baa0754260516483c89a9520c40534152702046a51fbe322",
-    "pr_number": 371,
-    "pr_head_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
-    "preview_deployment_id": 7321972861,
-    "preview_url": "https://college-basketball-history-qrw05w37w-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "5d03eb85681ccd574c34234cb3c76131d97e7b3b23eb6bc4ef2ba890a9749e4a"
   },
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner explicitly reversed the earlier non-approval and approved Owner Gate 2 for the exact Boise State Preview, stating: “I APPROVE the preview.” This approval is bound only to PR #371 head 02c0195f86203dd52678c5ef8ddfaddf4106eabc and Preview deployment 7321972861 at the verified Preview URL. The owner also directed that the 2026-27 conference-display concern be handled separately with the Control Center. This request records only the exact Gate 2 approval and grants no merge execution, Production action, tracked basketball mutation, recovery, unrelated repair, or second Implementation-lane authority."
+    "authorization": "Owner explicitly authorized the exact already-approved Boise State PR #371 merge after removing the approving-review requirement, directed that no remaining rules be bypassed, and authorized continuation to the independent Production proof. The exact approved PR head 02c0195f86203dd52678c5ef8ddfaddf4106eabc was merged by the authenticated GitHub connector as two-parent merge da0a44116dfdc61e599ef477ec0759ce4abf4fa4 with first parent 152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
   },
   "authority": {
     "phase0": false,
@@ -51,8 +38,8 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true
   }
 }
