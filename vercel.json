@@ -1,4 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "site"
+  "outputDirectory": "site",
+  "git": {
+    "deploymentEnabled": {
+      "control/remote-implementation": false
+    }
+  }
 }
