@@ -2,7 +2,8 @@
   "abandoned_request_ids": [
     "liu-release-production-proof-0001",
     "gonzaga-venue-maintenance-0001",
-    "gonzaga-phase0-0001"
+    "gonzaga-phase0-0001",
+    "gonzaga-phase0-0002"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -47,16 +48,16 @@
     "gonzaga-stage1-0004",
     "gonzaga-phase0-0002"
   ],
-  "active_expected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-  "active_lock_commit": "b4fce1d7d4de0d8fc1fbff9fb0396e4e2d20cd47",
-  "active_lock_owner": "github-actions:40394048911:1",
-  "active_operation": "PHASE0",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "gonzaga-phase0-0002",
-  "active_request_sha256": "e1a4c89aa31e19039ddd0a6f2e4ec41ecc0de26940329c29a546b969a592d1fc",
-  "active_school_key": "gonzaga",
-  "active_target_branch": "data/gonzaga-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -101,25 +102,29 @@
     "gonzaga-stage1-0002",
     "gonzaga-stage1-0003",
     "gonzaga-phase0-recover-0002",
-    "gonzaga-stage1-0004"
+    "gonzaga-stage1-0004",
+    "gonzaga-phase0-recover-0003"
   ],
-  "current_sequence": 40,
+  "current_sequence": 41,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-0004/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "cb8dfc6e079f23e7b6cd5a53cb2ee09313d2fb79d18812029779c99744ded6d7",
-    "operation": "STAGE1_INVENTORY",
-    "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-    "request_id": "gonzaga-stage1-0004",
-    "school_key": "gonzaga",
-    "stage1_reconciliation_sha256": "e66e67ceb47dcdf780a26bc5fc4df8826e714bab1b8e45ec01bf0cea2e797887",
-    "stage1_status": "PASS"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "gonzaga-phase0-0002",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "b4fce1d7d4de0d8fc1fbff9fb0396e4e2d20cd47",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+      "recovered_request_id": "gonzaga-phase0-0002",
+      "request_id": "gonzaga-phase0-recover-0003",
+      "schema_version": 1,
+      "target_branch": "data/gonzaga-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "40394048911",
-  "lock_acquisition_request_commit": "5deb5152f7c3581b9f03a695ff59966bb7efdb49",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
