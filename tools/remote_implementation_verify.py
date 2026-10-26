@@ -25,6 +25,7 @@ from remote_implementation_control import (
     OP_RELEASE_GATE2_APPROVAL,
     OP_RELEASE_PRODUCTION_PROOF,
     OP_STAGE2_RECONCILIATION_DIAGNOSTIC,
+    OP_VENUE_IDENTITY_MAINTENANCE,
     RemoteImplementationError,
     sha256_bytes,
     sha256_file,
