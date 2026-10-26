@@ -87,7 +87,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/boise-state/boise-state-release-preview-verify-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "0a8d016ea332e93dbe681918c98dab93496b17a3001046bd6a2ad30ef92cd43e",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -96,7 +96,7 @@
     "preview_deployment_id": 7321972861,
     "preview_url": "https://college-basketball-history-qrw05w37w-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "boise-state-release-preview-verify-0001",
     "school_key": "boise-state",
     "target_branch": "data/boise-state-onboarding",
