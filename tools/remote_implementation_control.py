@@ -504,7 +504,7 @@ def validate_request(request: dict[str, Any]) -> None:
             "release_production_proof", "release",
         ):
             _require(
-                authority.get(key) is False,
+                authority.get(key) is not True,
                 "VENUE_MAINTENANCE_OTHER_AUTHORITY_FORBIDDEN:" + key,
             )
         target_branch = str(request.get("target_branch") or "").strip()
