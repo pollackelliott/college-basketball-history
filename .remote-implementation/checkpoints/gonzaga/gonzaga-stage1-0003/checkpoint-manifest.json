@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "f269ba21d5097ed083a0e0d7422c1a1348be0f6e",
+  "request_id": "gonzaga-stage1-0003",
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "research_checkpoint_sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+  "research_member_sha256": {
+    "conferences.csv": "73645dc8061576bacaa48732e052ff01a37fc76b1849620bcf22d72a110c5ea0",
+    "notes.md": "fa9d0824e5a297ae852d6a8f2c97f01dc84a948b20946408c6b066febd216f4b",
+    "opponents.csv": "e0465ec3ad7da03845c90ed4b84032377f2dbf4ce94f1fdfd0237f1a6ac415fb",
+    "source-games.csv": "4859bdd5aa7f5bddcd7f697debd681c5b8d2124d308d2c49b1b05dd63b6ebbc0",
+    "source-notes.md": "a275ac22cb347988a2bea7b1c3afa8afbc1970bffcb6636cb4c57567e78d4038",
+    "venues.csv": "ecfb7ca853b63e4a4e631d191d22ff93ae1a504725e0ebef83fddea633b92a8f"
+  },
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "sidecars": {
+    "request.json": "78332c00a3e30656a0ee29d720342b8c1ecc967957fdf19d15b86ac00f64f322",
+    "stage1-reconciliation.json": "cfba777c92ee9bee251ebf42b8fe520b8e313f9b40b009639e28705532cd22d2"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
