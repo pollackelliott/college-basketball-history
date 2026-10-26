@@ -81,6 +81,9 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "stage2_proposal_rehearsal": (
                 operation == OP_STAGE2_PROPOSAL_REHEARSAL
             ),
+            "venue_identity_maintenance": (
+                operation == OP_VENUE_IDENTITY_MAINTENANCE
+            ),
             "recovery": operation == OP_RECOVER,
         },
     }
