@@ -72,6 +72,8 @@ Unknown exact dates and unknown played scores remain valid when historically hon
 
 A mechanical pass is necessary but not sufficient. Research lanes must also complete the adversarial pre-freeze review in `docs/research-freeze-self-challenge.md`, including targeted review of large or suspicious HOME-venue, UNKNOWN H/A/N, exact-date, neutral/postseason, and venue-identity debt.
 
+Before final freeze, the six-file package must also explicitly state the target school's accepted top-level scope. It either confirms the current `program-top-level-scope.csv` expression or states an exact superseding expression and its settled basis. That statement becomes historical authority for serialized Implementation; the Implementation lane does not ask the owner to reapprove it merely because protected main still contains the older target row.
+
 The purpose is to keep ordinary research-completeness defects—and mechanically accounted but insufficiently challenged debt—out of serialized preflight.
 
 ## 3. Phase 0 is one guarded current-main staging operation
@@ -95,7 +97,7 @@ Review the mapping summary, then normally rerun with:
 --apply --commit
 ```
 
-The staging tool requires the onboarding branch to point exactly at current `origin/main`, requires `research_base_sha` to be an ancestor of current main, verifies the ZIP and research acceptance gate, rebases venue identities, reuses mechanically safe global identities, ignores research-time numeric IDs when creating genuinely new physical venues, assigns every new physical venue the next authoritative global ID from current main, stops on ambiguous physical identity, installs the six files, applies owner-confirmed scope metadata, validates, writes ignored `.onboarding/<school>/integration-freeze.json`, and can create the stable Phase 0 checkpoint.
+The staging tool requires the onboarding branch to point exactly at current `origin/main`, requires `research_base_sha` to be an ancestor of current main, verifies the ZIP and research acceptance gate, rebases venue identities, reuses mechanically safe global identities, ignores research-time numeric IDs when creating genuinely new physical venues, assigns every new physical venue the next authoritative global ID from current main, stops on ambiguous physical identity, installs the six files, applies the exact accepted frozen scope to both the target `programs.csv` row and the reusable target row in `program-top-level-scope.csv`, validates, writes ignored `.onboarding/<school>/integration-freeze.json`, and can create the stable Phase 0 checkpoint. If the reusable scope row already matches the frozen package, it remains unchanged; if it is stale, that single target-row correction belongs to the same guarded school onboarding commit.
 
 `RESEARCH_FROZEN` remains immutable source/research provenance. The integration manifest records the current-main `INTEGRATION_FROZEN` mapping, fresh member hashes, and a semantic snapshot of substantive source-game historical/evidentiary fields. That snapshot is the pre-Gate historical boundary used by the semantic-drift guard.
 

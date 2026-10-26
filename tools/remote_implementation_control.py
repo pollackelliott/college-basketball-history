@@ -526,8 +526,16 @@ def validate_request(request: dict[str, Any]) -> None:
         _validate_payload_ref(request.get("stage1_checkpoint"), "stage1_checkpoint", required=True)
         scope = request.get("history_scope")
         _require(isinstance(scope, dict), "REQUEST_HISTORY_SCOPE_MISSING")
-        for key in ("start_season", "basis", "intervals", "notes"):
-            _require(bool(str(scope.get(key) or "").strip()), f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING")
+        for key in ("start_season", "basis", "notes"):
+            _require(
+                bool(str(scope.get(key) or "").strip()),
+                f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING",
+            )
+        if str(scope.get("basis") or "").strip() == "TOP_LEVEL_INTERVALS":
+            _require(
+                bool(str(scope.get("intervals") or "").strip()),
+                "REQUEST_HISTORY_SCOPE_INTERVALS_MISSING",
+            )
         _require(
             authority.get("stage2_census") is not True,
             "PHASE0_REQUEST_STAGE2_CENSUS_AUTHORITY_FORBIDDEN",

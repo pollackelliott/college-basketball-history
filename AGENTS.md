@@ -88,6 +88,18 @@ when the program became or remained top-level. Multiple listed intervals are con
 do not collapse them to only the current stint. Bring scope back to the owner only for a
 genuine contradiction, ambiguous school identity, or a target absent from the reference.
 
+Before `RESEARCH_FROZEN`, every target-school package must explicitly record its accepted
+top-level scope inside the six-file portfolio. The package must either confirm the current
+reference expression or explicitly state the superseding accepted expression and its basis.
+That frozen scope statement is settled historical authority for serialized Implementation.
+Implementation must not ask the owner to reapprove it merely because current protected main
+still carries an older scope row. During the target school's guarded Phase 0, reconcile the
+same accepted scope into both `data/reference/programs.csv` and
+`data/reference/program-top-level-scope.csv`. A target-school-only scope correction carried
+by its own frozen package is normal serialized school-integration authority, not a separate
+Control Center maintenance batch. Reopen scope only if current-main/new evidence creates a
+genuine historical contradiction or the frozen package is itself ambiguous/superseded.
+
 For Stage 3A, `docs/stage3a-regular-season-site-research.md` is controlling for
 research responsibility, venue-completeness expectations, stopping, canonical/shared
 reuse, the required Stage 3A-0 through Stage 3A-4 architecture, and the mandatory final
@@ -244,7 +256,10 @@ validation; unrelated shared-row changes are a STOP.
    one consolidated maintenance scope and obtain explicit Control Center authorization
    before opening/merging that dedicated maintenance batch. Pure target-school new
    identities and mechanically safe Phase 0 registrations remain normal Implementation
-   authority. After the inventory is clean, perform current-main rebase and stable Phase 0
+   authority. This includes reconciling the target school's explicit frozen history-scope
+   expression into its own `programs.csv` metadata and the corresponding single row in
+   `program-top-level-scope.csv`; that target-row correction does not require a separate
+   maintenance PR or renewed owner scope approval. After the inventory is clean, perform current-main rebase and stable Phase 0
    staging with `python tools/stage_research_portfolio.py ...`; mutation remains fail-fast.
    Recheck both physical venue identity and opponent/program identity against current main;
    an intervening school may establish the authoritative global key/alias that a frozen

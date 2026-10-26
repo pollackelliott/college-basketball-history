@@ -74,7 +74,7 @@ Each new school chat should receive:
 - the current team-independent onboarding handoff;
 - the school identity;
 - the media guide when readily available;
-- the explicit owner history-scope ruling when known.
+- the current top-level scope baseline plus any explicit owner history-scope ruling already established.
 
 The chat should record the GitHub `main` SHA it used for repository schemas/reference inspection:
 
@@ -236,6 +236,9 @@ TEAM: <school>
 STATUS: RESEARCH_FROZEN
 research_base_sha: <sha>
 portfolio_zip_sha256: <sha>
+accepted_top_level_scope: <exact scope expression>
+scope_baseline_disposition: CONFIRMED | SUPERSEDED
+scope_basis: <brief settled basis>
 
 competitive games: <count>
 on-court record: <record>
@@ -258,6 +261,8 @@ CURRENT-MAIN REBASE REQUIRED BEFORE TRACKED PHASE 0: YES
 ```
 
 If the package uses provisional numeric venue IDs, list them explicitly with the physical venue they represent. If researched site gaps remain, summarize their era/decade concentration rather than hiding them behind an aggregate count.
+
+The same accepted scope expression and baseline disposition must be explicit inside the six-file package itself, preferably in `notes.md`. This prevents a later Implementation lane from having to reconstruct or re-ask a settled scope decision.
 
 ## 10. Suggested queue states
 

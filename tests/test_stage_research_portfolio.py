@@ -1,4 +1,5 @@
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -8,8 +9,13 @@ sys.path.insert(0, str(TOOLS))
 
 from onboarding_plan import WorkflowError  # noqa: E402
 from stage_research_portfolio import (  # noqa: E402
-    rebase_venues, update_program_scope, venue_reconciliation_inventory,
+    accepted_top_level_scope_expression,
+    rebase_venues,
+    reconcile_top_level_scope_reference,
+    update_program_scope,
+    venue_reconciliation_inventory,
     venue_date_bounds,
+    write_top_level_scope_reference,
 )
 
 
@@ -1009,6 +1015,86 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
 
 
 class StageResearchPortfolioHistoryScopeTests(unittest.TestCase):
+    def test_scope_expression_uses_explicit_intervals(self):
+        self.assertEqual(
+            accepted_top_level_scope_expression(
+                start_season="1958-1959",
+                basis="TOP_LEVEL_INTERVALS",
+                intervals="1958-59+",
+            ),
+            "1958-59+",
+        )
+
+    def test_scope_expression_projects_inception_basis(self):
+        self.assertEqual(
+            accepted_top_level_scope_expression(
+                start_season="1911-1912",
+                basis="ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+                intervals="",
+            ),
+            "INCEPTION+",
+        )
+
+    def test_scope_expression_projects_first_top_level_season(self):
+        self.assertEqual(
+            accepted_top_level_scope_expression(
+                start_season="1958-1959",
+                basis="FIRST_TOP_LEVEL_SEASON",
+                intervals="",
+            ),
+            "1958-59+",
+        )
+
+    def test_reconcile_scope_updates_only_target_row(self):
+        rows = [
+            {"school": "Boise State", "top_level_scope": "1970-71+"},
+            {"school": "Gonzaga", "top_level_scope": "1952-53+"},
+            {"school": "Saint Louis", "top_level_scope": "INCEPTION+"},
+        ]
+        result = reconcile_top_level_scope_reference(
+            rows,
+            {"program_name": "Gonzaga", "display_name": "Gonzaga"},
+            accepted_scope="1958-59+",
+        )
+        self.assertEqual(result["action"], "UPDATED")
+        self.assertEqual(result["prior_top_level_scope"], "1952-53+")
+        self.assertEqual(rows[1]["top_level_scope"], "1958-59+")
+        self.assertEqual(rows[0]["top_level_scope"], "1970-71+")
+        self.assertEqual(rows[2]["top_level_scope"], "INCEPTION+")
+
+    def test_reconcile_scope_confirmation_is_noop(self):
+        rows = [{"school": "Gonzaga", "top_level_scope": "1958-59+"}]
+        result = reconcile_top_level_scope_reference(
+            rows,
+            {"program_name": "Gonzaga", "display_name": "Gonzaga"},
+            accepted_scope="1958-59+",
+        )
+        self.assertEqual(result["action"], "CONFIRMED")
+        self.assertFalse(result["changed"])
+
+    def test_scope_writer_preserves_reference_shape(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "program-top-level-scope.csv"
+            path.write_text(
+                'school,top_level_scope\n"Boise State","1970-71+"\n'
+                '"Gonzaga","1952-53+"\n',
+                encoding="utf-8",
+            )
+            rows = [
+                {"school": "Boise State", "top_level_scope": "1970-71+"},
+                {"school": "Gonzaga", "top_level_scope": "1958-59+"},
+            ]
+            write_top_level_scope_reference(
+                path,
+                ["school", "top_level_scope"],
+                rows,
+            )
+            self.assertEqual(
+                path.read_text(encoding="utf-8"),
+                'school,top_level_scope\n"Boise State","1970-71+"\n'
+                '"Gonzaga","1958-59+"\n',
+            )
+
     def test_update_program_scope_persists_interrupted_intervals(self):
         programs = [
             {
