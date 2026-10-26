@@ -33,18 +33,19 @@
     "boise-state-stage2-gate1-seal-0001",
     "boise-state-stage2-sealed-apply-0001",
     "boise-state-release-readiness-0001",
-    "boise-state-release-preview-verify-0001"
+    "boise-state-release-preview-verify-0001",
+    "boise-state-release-gate2-approval-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_GATE2_APPROVAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "boise-state-release-gate2-approval-0001",
+  "active_request_sha256": "959a508e0afca7403f53c245423abb974b33f1f2605ececf10e8618b9eb9016e",
+  "active_school_key": "boise-state",
+  "active_target_branch": "data/boise-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -102,8 +103,11 @@
     "target_branch": "data/boise-state-onboarding",
     "target_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40257465423",
+  "lock_acquisition_request_commit": "f1345cffafdf78b7633f4cddeda0e3bb5145739b",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_GATE2_RUNNING"
 }
