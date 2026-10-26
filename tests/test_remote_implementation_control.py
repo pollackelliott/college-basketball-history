@@ -27,6 +27,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    OP_VENUE_IDENTITY_MAINTENANCE,
     REQUEST_KIND,
     RemoteImplementationError,
     abandon_active,
@@ -80,6 +81,9 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "stage2_proposal_rehearsal": (
                 operation == OP_STAGE2_PROPOSAL_REHEARSAL
             ),
+            "venue_identity_maintenance": (
+                operation == OP_VENUE_IDENTITY_MAINTENANCE
+            ),
             "recovery": operation == OP_RECOVER,
         },
     }
@@ -128,6 +132,23 @@ def request(operation=OP_STAGE1, request_id="request-001"):
         base["integration_freeze_sha256"] = "8" * 64
         base["semantic_snapshot_sha256"] = "9" * 64
         base["decision_universe_sha256"] = "4" * 64
+    if operation == OP_VENUE_IDENTITY_MAINTENANCE:
+        base["target_branch"] = "maintenance/example-school-stage1-venues"
+        base["venue_maintenance_spec"] = {
+            "path": ".remote-implementation/inputs/example-school/venue-maintenance.json",
+            "sha256": "5" * 64,
+        }
+        base["repository_spec_path"] = (
+            "data/reconciliation/venue-identity-maintenance/"
+            "example-school-stage1.json"
+        )
+        base["expected_plan_sha256"] = "6" * 64
+        base["maintenance_authorization"] = {
+            "approved": True,
+            "authority_kind": "CONTROL_CENTER_EXPLICIT",
+            "authorization_basis": "Exact bounded shared-reference repair.",
+            "spec_sha256": "5" * 64,
+        }
     if operation == OP_PHASE0:
         base["target_branch"] = "data/example-school-onboarding"
         base["stage1_checkpoint"] = {
@@ -167,6 +188,44 @@ class RemoteImplementationControlTests(unittest.TestCase):
 
     def test_valid_bounded_phase0_request(self):
         validate_request(request(OP_PHASE0))
+
+    def test_valid_venue_identity_maintenance_request(self):
+        validate_request(request(OP_VENUE_IDENTITY_MAINTENANCE))
+
+    def test_venue_identity_maintenance_requires_control_center_authority(self):
+        req = request(OP_VENUE_IDENTITY_MAINTENANCE)
+        req["maintenance_authorization"]["approved"] = False
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "VENUE_MAINTENANCE_CONTROL_CENTER_APPROVAL_REQUIRED",
+        ):
+            validate_request(req)
+
+    def test_venue_identity_maintenance_rejects_nonmaintenance_target(self):
+        req = request(OP_VENUE_IDENTITY_MAINTENANCE)
+        req["target_branch"] = "data/example-school-onboarding"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "VENUE_MAINTENANCE_TARGET_BRANCH_INVALID",
+        ):
+            validate_request(req)
+
+    def test_venue_identity_maintenance_uses_global_mutation_lock(self):
+        state = initial_control_state()
+        active = begin_request(
+            state,
+            request(OP_VENUE_IDENTITY_MAINTENANCE),
+            HASH,
+            run_id="123",
+            run_attempt="1",
+            request_commit=PRED,
+        )
+        self.assertEqual(active["lifecycle_state"], LIFECYCLE_ACTIVE)
+        self.assertEqual(active["transaction_state"], "LOCKED")
+        self.assertEqual(
+            active["active_target_branch"],
+            "maintenance/example-school-stage1-venues",
+        )
 
     def test_phase0_allows_blank_intervals_for_inception_scope(self):
         req = request(OP_PHASE0)
@@ -461,6 +520,33 @@ class RemoteImplementationControlTests(unittest.TestCase):
         state = bind_lock_commit(state, LOCK)
         data = canonical_json_bytes(state)
         recovery = request(OP_RECOVER, "recovery-001")
+        recovery["previous_control_state_sha256"] = sha256_bytes(data)
+        verify_request_predecessor(
+            state,
+            data,
+            PRED,
+            recovery,
+            MAIN,
+            allow_active_recovery=True,
+        )
+
+    def test_venue_maintenance_recovery_uses_exact_maintenance_target(self):
+        state = begin_request(
+            initial_control_state(),
+            request(OP_VENUE_IDENTITY_MAINTENANCE, "venue-old"),
+            "7" * 64,
+            run_id="101",
+            run_attempt="1",
+            request_commit="8" * 40,
+        )
+        state = bind_lock_commit(state, LOCK)
+        data = canonical_json_bytes(state)
+        recovery = request(OP_RECOVER, "venue-recovery")
+        recovery["recovery"]["lock_commit"] = LOCK
+        recovery["recovery"]["target_branch"] = (
+            "maintenance/example-school-stage1-venues"
+        )
+        recovery["recovery"]["abandoned_request_id"] = "venue-old"
         recovery["previous_control_state_sha256"] = sha256_bytes(data)
         verify_request_predecessor(
             state,

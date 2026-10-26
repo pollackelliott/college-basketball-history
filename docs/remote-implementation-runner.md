@@ -186,6 +186,48 @@ Normal Phase 0 refuses a pre-existing target branch. It never silently overwrite
 
 The permanent Phase 0 command owns the commit/tree. Remote orchestration does not incrementally edit the target branch through GitHub file APIs. The Phase 0 path contract permits the target school's exact `program-top-level-scope.csv` row to change when—and only when—the frozen six-file package carries a different accepted scope expression; that target-row reconciliation is part of the school onboarding transaction, not a separate maintenance workflow.
 
+## 7A. Control Center-authorized venue identity maintenance
+
+`VENUE_IDENTITY_MAINTENANCE` is a serialized tracked-mutation operation for one already
+authorized duplicate physical-venue reconciliation that changes existing shared/published
+state. It is not a substitute for normal Phase 0 registration of a genuinely new
+target-school venue.
+
+The request is bound to exact protected-main SHA, predecessor control state/hash, school
+context, a dedicated `maintenance/<school>-...` target branch, one hash-bound JSON spec,
+the repository path where that spec will be preserved, the exact expected permanent-tool
+plan SHA-256, and explicit `CONTROL_CENTER_EXPLICIT` authorization bound to the same spec
+hash. No Phase 0, Research, Stage 2, owner-gate, release, recovery, or merge authority may
+be smuggled into the request.
+
+The runner:
+
+1. requires the maintenance target to be absent or still exactly at request-bound current main;
+2. acquires the one-active-Implementation global mutation lock;
+3. materializes the exact spec from the accepted control request;
+4. writes that spec under `data/reconciliation/venue-identity-maintenance/`;
+5. invokes unchanged `tools/venue_identity_transaction.py plan` and requires the exact
+   authorized plan hash with zero blockers;
+6. invokes unchanged sealed-plan `apply`, including repository validation and deterministic
+   site-data refresh;
+7. rejects every changed path outside the permanent transaction's fixed global surfaces,
+   planner-reported school venue files, the exact spec path, and deterministic
+   `site/data/*.json` outputs;
+8. prepares exactly one child of current protected main and writes complete changed-path/file
+   hashes plus spec/plan/apply-result sidecars into durable write-ahead;
+9. publishes only the dedicated maintenance branch through create-once/existing-ref CAS; and
+10. finalizes a durable successor checkpoint.
+
+A separate fresh runner reconstructs the exact spec from durable control state, reruns the
+same permanent plan/apply against the same protected-main parent, and requires the exact same
+successor tree, changed paths, file hashes, deletion set, plan bytes, and apply result before
+recording `remote_venue_maintenance_equivalence=PASS`.
+
+The remote operation never edits or pushes protected `main`, creates a pull request, merges,
+or performs Production proof. After fresh verification, the school Implementation chat uses
+its authenticated GitHub connector to create/review/merge the dedicated maintenance PR under
+normal protected-main rules, then reruns the complete Stage 1 inventory on refreshed main.
+
 ## 8. Stage 2 capability census request
 
 `STAGE2_CENSUS` is read-only with respect to tracked basketball state and stops at the permanent coordinator's first discovery boundary.

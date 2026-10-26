@@ -80,6 +80,25 @@ Pure generic tooling repairs required to execute the authorized Stage 1 contract
 
 When an authorized shared-reference transaction deterministically changes generated site output, the transaction/maintenance batch owns that derived refresh and freshness proof. Do not merge the source/reference mutation first and open a second protected-main PR merely to regenerate predictable derived site JSON. The refresh must participate in the same rollback/validation boundary where permanent tooling supports it.
 
+### Guarded execution for an authorized duplicate-venue repair
+
+When Stage 1 exposes one already-classified duplicate physical venue that necessarily rewrites
+existing global/published state, the Control Center may authorize one exact maintenance spec.
+After that authorization, the school Implementation lane may execute the spec through the
+repository-owned `VENUE_IDENTITY_MAINTENANCE` remote operation rather than transporting large
+canonical/derived files through chat.
+
+The remote operation does not supply historical authority. The historical/identity decision
+must already be settled and explicitly authorized by the Control Center. It only executes the
+unchanged permanent `venue_identity_transaction.py` plan/apply path against exact protected
+main, with global mutation lock, durable write-ahead, CAS publication to a dedicated
+maintenance branch, and independent exact-tree replay.
+
+The maintenance PR remains separate from the school onboarding branch. After it merges, the
+school must refresh protected main and rerun one complete Stage 1 inventory. A normal new
+target-school venue remains ordinary Phase 0 registration authority and does not require this
+exception.
+
 ## 5. Early shared-reference registration exception
 
 Occasionally several active lanes may immediately benefit from a newly established shared identity before the discovering school reaches Implementation.
