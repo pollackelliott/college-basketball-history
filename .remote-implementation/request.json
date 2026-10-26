@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-stage1-0004",
+  "request_id": "gonzaga-phase0-0002",
   "school_key": "gonzaga",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "88537607aa1ff7ca257112e9a539a292dae9e9b4",
-  "previous_control_state_sha256": "2254de5a7a192c51f5955758af342422ab8f5e94867063a9b9f81cb23d3e9495",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "655b03943af8613d915e6ff9b4977e7327cc9b2c",
+  "previous_control_state_sha256": "bcbb8d9c6d04b0b543a6509c50fd031c5ea97ad25dfad77865377b27e17afbf9",
   "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "target_branch": "data/gonzaga-onboarding",
   "research_checkpoint": {
     "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
     "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
@@ -17,15 +18,25 @@
       "part_count": 11
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-0004/checkpoint-manifest.json",
+    "sha256": "cb8dfc6e079f23e7b6cd5a53cb2ee09313d2fb79d18812029779c99744ded6d7"
+  },
+  "history_scope": {
+    "start_season": "1958-1959",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1958-59+",
+    "notes": "Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority."
+  },
   "creation_provenance": {
     "origin": "ChatGPT Gonzaga Implementation",
-    "authorization": "Owner authorized Gonzaga Phase 0. The prior Phase 0 attempt was durably recovered as NOT_ATTEMPTED after a mechanical history_start_season format error, and protected main subsequently advanced through generic Stage 1 tooling only. Run one complete read-only current-main Stage 1 inventory using the unchanged accepted Gonzaga Research Freeze and immutable transport as the exact-main prerequisite to the already-authorized corrected Phase 0 retry. Do not reopen Research or authorize Phase 0, Stage 2, owner gates, release, unrelated maintenance, or other-school work."
+    "authorization": "Owner explicitly authorized Gonzaga Phase 0. The first Phase 0 request was durably recovered as NOT_ATTEMPTED after a mechanical compact-season formatting error. Execute only the guarded stable Phase 0 transaction against exact current protected main using the unchanged accepted Research Freeze and the fresh exact-main Stage 1 PASS checkpoint. Use normalized history_start_season 1958-1959 while preserving the accepted compact interval expression 1958-59+. Reconcile the target-only stale 1952-53+ scope metadata, register the four Stage 1-approved new venue identities and mechanically required names/representation through permanent tooling, persist Integration Freeze, and stop before Stage 2."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
