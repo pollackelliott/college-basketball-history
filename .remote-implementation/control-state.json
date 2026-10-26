@@ -42,7 +42,7 @@
     "gonzaga-venue-maintenance-0002"
   ],
   "active_expected_main_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
-  "active_lock_commit": null,
+  "active_lock_commit": "5732a7ac9de90b2e72065df1759b2ec7ae464a61",
   "active_lock_owner": "github-actions:40349772082:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
