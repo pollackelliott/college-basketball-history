@@ -168,6 +168,25 @@ class RemoteImplementationControlTests(unittest.TestCase):
     def test_valid_bounded_phase0_request(self):
         validate_request(request(OP_PHASE0))
 
+    def test_phase0_allows_blank_intervals_for_inception_scope(self):
+        req = request(OP_PHASE0)
+        req["history_scope"] = {
+            "start_season": "1911-1912",
+            "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+            "intervals": "",
+            "notes": "Research Freeze confirmed inception scope.",
+        }
+        validate_request(req)
+
+    def test_phase0_requires_intervals_for_interval_scope(self):
+        req = request(OP_PHASE0)
+        req["history_scope"]["intervals"] = ""
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_HISTORY_SCOPE_INTERVALS_MISSING",
+        ):
+            validate_request(req)
+
     def test_valid_bounded_stage2_census_request(self):
         validate_request(request(OP_STAGE2_CENSUS))
 
