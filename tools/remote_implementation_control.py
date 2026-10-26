@@ -1206,8 +1206,14 @@ def validate_request(request: dict[str, Any]) -> None:
             _require_sha(lock_commit, 40, "RECOVERY_REQUEST_LOCK_COMMIT_INVALID")
         target = recovery.get("target_branch")
         if target is not None:
+            target_text = str(target)
             _require(
-                str(target) == f"data/{school_key}-onboarding",
+                target_text == f"data/{school_key}-onboarding"
+                or (
+                    target_text.startswith(f"maintenance/{school_key}-")
+                    and ".." not in target_text
+                    and not target_text.endswith("/")
+                ),
                 "RECOVERY_TARGET_BRANCH_INVALID",
             )
 
