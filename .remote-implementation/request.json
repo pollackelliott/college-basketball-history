@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "boise-state-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "boise-state",
-  "previous_control_state_commit": "100bf13bebbdc96f9185106ba0b1497cf0018025",
-  "previous_control_state_sha256": "8bcca0eaa3f6ea1c6bd9a31dede8b6607de0359e332d0d96c917fcddfad4ce9f",
-  "expected_protected_main_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
-  "target_branch": "data/boise-state-onboarding",
-  "target_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
-  "pr_number": 371,
-  "merge_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/boise-state/boise-state-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "072cb87691829307e418e2674e6a640d9404f303b550a4e59fab04ee10d2ba38"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/boise-state/boise-state-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "5d03eb85681ccd574c34234cb3c76131d97e7b3b23eb6bc4ef2ba890a9749e4a"
+  "request_id": "gonzaga-stage1-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "71d116749c55accf3aa2651bea298423b8895114",
+  "previous_control_state_sha256": "03c6f9084427ec5636c8fe1eb86d2fcd0c47c683d58d883a6b42e725098ba83c",
+  "expected_protected_main_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
   },
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner explicitly authorized the exact already-approved Boise State PR #371 merge after removing the approving-review requirement, directed that no remaining rules be bypassed, and authorized continuation to the independent Production proof. The exact approved PR head 02c0195f86203dd52678c5ef8ddfaddf4106eabc was merged by the authenticated GitHub connector as two-parent merge da0a44116dfdc61e599ef477ec0759ce4abf4fa4 with first parent 152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+    "authorization": "Owner authorized Gonzaga Implementation Stage 1 remainder only. Authenticate the exact owner-designated RESEARCH_FROZEN bytes, preserve accepted target-school top-level scope 1958-59+, run one read-only STAGE1_INVENTORY against current protected main, and stop before PHASE0. The stale Gonzaga-only 1952-53+ program-top-level-scope baseline is target-school Phase 0 reconciliation under current policy, not dedicated Control Center maintenance."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
@@ -36,10 +37,7 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "release_gate2_approval": false,
-    "release_production_proof": true
+    "release_production_proof": false
   }
 }
