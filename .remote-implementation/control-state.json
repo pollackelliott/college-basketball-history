@@ -31,18 +31,19 @@
     "boise-state-stage2-gate1-fill-0001",
     "boise-state-stage2-preseal-0001",
     "boise-state-stage2-gate1-seal-0001",
-    "boise-state-stage2-sealed-apply-0001"
+    "boise-state-stage2-sealed-apply-0001",
+    "boise-state-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "boise-state-release-readiness-0001",
+  "active_request_sha256": "748b27d3f33c6a054ad67d4c51511b1891ce3220036bab39a5bc1308c0e3c3c3",
+  "active_school_key": "boise-state",
+  "active_target_branch": "data/boise-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -101,8 +102,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/boise-state/boise-state-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "49ffeab30a0db71d7e913e6e1f40edd8a8b616d226d0a09aca20e732479216cc"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40247954686",
+  "lock_acquisition_request_commit": "ca9cf3dd14ec284ced6847eab316dc278e456c31",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }

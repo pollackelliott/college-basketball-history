@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-release-readiness-0001",
+  "school_key": "boise-state",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "1c1f3059001b32e42da6365e42ee8368dd3c36e8",
+  "previous_control_state_sha256": "cac7640478b833e83541ee2712a93b921adc23a9cfb37a5d77864d79b1687d67",
+  "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/boise-state/boise-state-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "1284dda499f48f04a5f5f650f566aad3fcaf4da33d8edbd56bcf85b6c2b170cc"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "e0b12e53c8937551a81e554235418fdf3d9727b337916b546c09f3beabeee1b6"
+  },
+  "approved_plan_hash": "b76b1e2c5e5e1969fb59890ad68805f93a015a822d01ae7eee6d388d6b483db3",
+  "release_manifest_sha256": "f480a5298a5a816d20bebf331a7a5a66207ba2e38b5378330ba7e0d45833412f",
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner said Proceed after the exact Boise State sealed apply successor was fresh-verified. This request authorizes exactly one bounded read-only RELEASE_READINESS operation against successor 02c0195f86203dd52678c5ef8ddfaddf4106eabc. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
