@@ -362,6 +362,17 @@ def validate_request(request: dict[str, Any]) -> None:
         )
     else:
         _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
+    if operation == OP_VENUE_IDENTITY_MAINTENANCE:
+        _require(
+            authority.get("venue_identity_maintenance") is True,
+            "VENUE_MAINTENANCE_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("venue_identity_maintenance") is not True,
+            "REQUEST_VENUE_MAINTENANCE_AUTHORITY_FORBIDDEN",
+        )
+
     # RELEASE_READINESS is inspection and final-gate rehearsal only. No PR,
     # Preview, Owner Gate 2, or merge authority can be supplied by a request.
     _require(authority.get("release") is False, "REQUEST_RELEASE_AUTHORITY_FORBIDDEN")
@@ -479,6 +490,74 @@ def validate_request(request: dict[str, Any]) -> None:
             )
             for field in ("owner_gate_2_checkpoint", "owner_gate_2_verification"):
                 _validate_payload_ref(request.get(field), field, required=True)
+
+    if operation == OP_VENUE_IDENTITY_MAINTENANCE:
+        for key in (
+            "phase0", "recovery", "stage2_census",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release_gate2_approval",
+            "release_production_proof", "release",
+        ):
+            _require(
+                authority.get(key) is False,
+                "VENUE_MAINTENANCE_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        target_branch = str(request.get("target_branch") or "").strip()
+        _require(
+            target_branch.startswith(
+                "maintenance/%s-" % school_key
+            )
+            and ".." not in target_branch
+            and not target_branch.endswith("/"),
+            "VENUE_MAINTENANCE_TARGET_BRANCH_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("venue_maintenance_spec"),
+            "venue_maintenance_spec",
+            required=True,
+        )
+        repository_spec_path = str(
+            request.get("repository_spec_path") or ""
+        ).strip()
+        _require(
+            repository_spec_path.startswith(
+                "data/reconciliation/venue-identity-maintenance/%s"
+                % school_key
+            )
+            and repository_spec_path.endswith(".json")
+            and ".." not in repository_spec_path,
+            "VENUE_MAINTENANCE_REPOSITORY_SPEC_PATH_INVALID",
+        )
+        _require_sha(
+            request.get("expected_plan_sha256"),
+            64,
+            "VENUE_MAINTENANCE_PLAN_SHA_INVALID",
+        )
+        authorization = request.get("maintenance_authorization")
+        _require(
+            isinstance(authorization, dict)
+            and authorization.get("approved") is True,
+            "VENUE_MAINTENANCE_CONTROL_CENTER_APPROVAL_REQUIRED",
+        )
+        _require(
+            authorization.get("authority_kind")
+            == "CONTROL_CENTER_EXPLICIT",
+            "VENUE_MAINTENANCE_AUTHORITY_KIND_INVALID",
+        )
+        _require(
+            bool(str(
+                authorization.get("authorization_basis") or ""
+            ).strip()),
+            "VENUE_MAINTENANCE_AUTHORIZATION_BASIS_REQUIRED",
+        )
+        _require(
+            authorization.get("spec_sha256")
+            == request["venue_maintenance_spec"]["sha256"],
+            "VENUE_MAINTENANCE_AUTHORIZATION_SPEC_MISMATCH",
+        )
 
     if operation in {OP_STAGE1, OP_PHASE0}:
         checkpoint = request.get("research_checkpoint")
@@ -1170,7 +1249,13 @@ def verify_request_predecessor(
             state.get("active_lock_commit") == recovery.get("lock_commit"),
             "STALE_RECOVERY_LOCK_MISMATCH",
         )
-        if state.get("active_operation") in {
+        if state.get("active_operation") == OP_VENUE_IDENTITY_MAINTENANCE:
+            _require(
+                recovery.get("target_branch")
+                == state.get("active_target_branch"),
+                "STALE_RECOVERY_TARGET_MISMATCH",
+            )
+        elif state.get("active_operation") in {
             OP_PHASE0,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
             OP_STAGE2_SEALED_APPLY,
