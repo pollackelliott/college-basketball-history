@@ -41,6 +41,7 @@ REQUIRED_PACKAGE_FILES = [
 ]
 PHASE0_GLOBAL_PATHS = {
     "data/reference/programs.csv",
+    "data/reference/program-top-level-scope.csv",
     "data/reference/venues.csv",
     "data/reference/venue-names.csv",
     "data/reference/conferences.csv",
