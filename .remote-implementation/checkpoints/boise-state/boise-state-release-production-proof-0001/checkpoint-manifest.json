@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "merge_parent_onboarding": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "merge_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "072cb87691829307e418e2674e6a640d9404f303b550a4e59fab04ee10d2ba38",
+  "owner_gate_2_verification_sha256": "5d03eb85681ccd574c34234cb3c76131d97e7b3b23eb6bc4ef2ba890a9749e4a",
+  "pr_head_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "pr_number": 371,
+  "production_deployment_id": 7323109287,
+  "production_json_checked_count": 49,
+  "production_proof": true,
+  "production_proof_sha256": "c0f6c039b4f27a6b97cb3d29c1cc59b4de70ba7b2ddf3adf32c371e835040741",
+  "protected_main_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
+  "request_id": "boise-state-release-production-proof-0001",
+  "request_sha256": "836851cf1b34208b93aecbded080da9a708f4dfa42900dcab3f42f4681fee1bd",
+  "schema_version": 1,
+  "school_key": "boise-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "boise-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "boise-state",
+  "previous_control_state_commit": "100bf13bebbdc96f9185106ba0b1497cf0018025",
+  "previous_control_state_sha256": "8bcca0eaa3f6ea1c6bd9a31dede8b6607de0359e332d0d96c917fcddfad4ce9f",
+  "expected_protected_main_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
+  "target_branch": "data/boise-state-onboarding",
+  "target_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+  "pr_number": 371,
+  "merge_sha": "da0a44116dfdc61e599ef477ec0759ce4abf4fa4",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "072cb87691829307e418e2674e6a640d9404f303b550a4e59fab04ee10d2ba38"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "5d03eb85681ccd574c34234cb3c76131d97e7b3b23eb6bc4ef2ba890a9749e4a"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner explicitly authorized the exact already-approved Boise State PR #371 merge after removing the approving-review requirement, directed that no remaining rules be bypassed, and authorized continuation to the independent Production proof. The exact approved PR head 02c0195f86203dd52678c5ef8ddfaddf4106eabc was merged by the authenticated GitHub connector as two-parent merge da0a44116dfdc61e599ef477ec0759ce4abf4fa4 with first parent 152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true
+  }
+}
