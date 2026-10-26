@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage2-opponent-display-normalize-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "155cfc87146e881b47968151665e22ab267da0ee",
+  "previous_control_state_sha256": "6baeef1d508598041248cb5b9096853e61d4da27e4caeee0efafc064c4a73414",
+  "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "51909c487f2aa3a55494628284f7f5cac5b070a38442b71d21affd8590c29895"
+  },
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner said Proceed after independently verified Gonzaga Stage 2 census BLOCKED solely on exactly three deterministic historical opponent-display conflicts: augustana-illinois, regis-colorado, and st-thomas-aquinas. Authorize exactly one census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE operation using the permanent normalizer and existing project authority. No Phase 0, recovery, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, merge, Production, release, unrelated opponent cleanup, venue maintenance, global maintenance, or other Stage 2 mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
