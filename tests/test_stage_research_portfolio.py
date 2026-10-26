@@ -1018,6 +1018,7 @@ class StageResearchPortfolioHistoryScopeTests(unittest.TestCase):
     def test_scope_expression_uses_explicit_intervals(self):
         self.assertEqual(
             accepted_top_level_scope_expression(
+                start_season="1958-1959",
                 basis="TOP_LEVEL_INTERVALS",
                 intervals="1958-59+",
             ),
@@ -1027,10 +1028,21 @@ class StageResearchPortfolioHistoryScopeTests(unittest.TestCase):
     def test_scope_expression_projects_inception_basis(self):
         self.assertEqual(
             accepted_top_level_scope_expression(
+                start_season="1911-1912",
                 basis="ALWAYS_TOP_LEVEL_FROM_INCEPTION",
                 intervals="",
             ),
             "INCEPTION+",
+        )
+
+    def test_scope_expression_projects_first_top_level_season(self):
+        self.assertEqual(
+            accepted_top_level_scope_expression(
+                start_season="1958-1959",
+                basis="FIRST_TOP_LEVEL_SEASON",
+                intervals="",
+            ),
+            "1958-59+",
         )
 
     def test_reconcile_scope_updates_only_target_row(self):
