@@ -1,6 +1,7 @@
 {
   "abandoned_request_ids": [
-    "liu-release-production-proof-0001"
+    "liu-release-production-proof-0001",
+    "gonzaga-venue-maintenance-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -39,16 +40,16 @@
     "gonzaga-stage1-0001",
     "gonzaga-venue-maintenance-0001"
   ],
-  "active_expected_main_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
-  "active_lock_commit": "f53cf76a525b1830a710731e35c384a5680c4952",
-  "active_lock_owner": "github-actions:40347765416:1",
-  "active_operation": "VENUE_IDENTITY_MAINTENANCE",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "gonzaga-venue-maintenance-0001",
-  "active_request_sha256": "7ba91c002d1e2ff7767d1bd4f6063ad7824c332d9449451173b7504e20258c31",
-  "active_school_key": "gonzaga",
-  "active_target_branch": "maintenance/gonzaga-stage1-forum-identity-v2",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -87,25 +88,29 @@
     "boise-state-release-preview-verify-0001",
     "boise-state-release-gate2-approval-0001",
     "boise-state-release-production-proof-0001",
-    "gonzaga-stage1-0001"
+    "gonzaga-stage1-0001",
+    "gonzaga-venue-maintenance-recover-0001"
   ],
-  "current_sequence": 34,
+  "current_sequence": 35,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "ff06d2dce0e9511c78eaeb5c3d67b72e1cd5ad9e550f9ce0429efc187f66dd9d",
-    "operation": "STAGE1_INVENTORY",
-    "protected_main_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
-    "request_id": "gonzaga-stage1-0001",
-    "school_key": "gonzaga",
-    "stage1_reconciliation_sha256": "946656121fe8fd380000a76ec8a75e59f547acaac245adf2696db53c213f53c4",
-    "stage1_status": "BLOCKED"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "gonzaga-venue-maintenance-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "f53cf76a525b1830a710731e35c384a5680c4952",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
+      "recovered_request_id": "gonzaga-venue-maintenance-0001",
+      "request_id": "gonzaga-venue-maintenance-recover-0001",
+      "schema_version": 1,
+      "target_branch": "maintenance/gonzaga-stage1-forum-identity-v2"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "40347765416",
-  "lock_acquisition_request_commit": "fbd3aac17222212229244c036aaf6f396c5cfe3d",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
