@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-phase0-recover-0001",
+  "request_id": "gonzaga-phase0-recover-0002",
   "school_key": "gonzaga",
   "operation": "RECOVER",
-  "previous_control_state_commit": "68a3c59baa15f81c881fe24e425710f3016b83db",
+  "previous_control_state_commit": "2047f5b709732e625d8fb1143c5f2716e5db588b",
   "previous_control_state_sha256": "1f25a39e3cb12dc99ec419e250c0064e735f7fc0b23030f284f6ea02fdfbf300",
-  "expected_protected_main_sha": "f269ba21d5097ed083a0e0d7422c1a1348be0f6e",
+  "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
   "recovery": {
     "abandoned_request_id": "gonzaga-phase0-0001",
     "lock_commit": "acb721bc78b59567ce78783edcb955914f7ab851",
@@ -14,7 +14,7 @@
   },
   "creation_provenance": {
     "origin": "ChatGPT Gonzaga Implementation",
-    "authorization": "Recover the mechanically failed Gonzaga Phase 0 request after the permanent tool rejected an incorrectly formatted history_start_season before any prepared commit, write-ahead publication, or onboarding branch publication. The durable state and absent target branch establish a NOT_ATTEMPTED mutation. This recovery only clears the failed transaction so the already-authorized Phase 0 can be retried with history_start_season normalized from compact 1958-59 to repository-required 1958-1959; it creates no new historical authority."
+    "authorization": "Recover the mechanically failed Gonzaga Phase 0 request after its permanent tool stopped before any prepared commit, write-ahead publication, or onboarding branch publication. A prior recovery attempt was rejected only because protected main advanced before recovery evaluation. This request is rebound to current main and may only classify/clear the exact failed transaction; it creates no basketball mutation or historical authority."
   },
   "authority": {
     "owner_gate_1": false,
