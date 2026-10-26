@@ -59,7 +59,7 @@
   "active_request_sha256": "7855b4c33cca6eb013e38055360ae8f54f64e22c62629e6e0d8149e417a5e046",
   "active_school_key": "gonzaga",
   "active_target_branch": "data/gonzaga-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "e420c79e7dd899550c8acefe4b3c3855a3529494",
   "active_writeahead_path": ".remote-implementation/writeahead/gonzaga/gonzaga-phase0-0003/writeahead-manifest.json",
   "active_writeahead_sha256": "a6a3fbe122cc90488b52798cd3c08d6d5dc745841043dca337cca3919c3c6550",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
