@@ -42,7 +42,11 @@ def _count_missing(note: str) -> int | None:
     """
     count_token = r"(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)"
     unit = r"(?:games?|wins?|loss(?:es)?|ties?)"
-    item = rf"\b(?P<count>{count_token})\s+{unit}\b"
+    item = rf"\b{count_token}\s+{unit}\b"
+    counted_item = re.compile(
+        rf"\b(?P<count>{count_token})\s+{unit}\b",
+        re.IGNORECASE,
+    )
     clause = re.compile(
         rf"(?P<items>{item}(?:\s*(?:,|and|plus)\s*{item})*)"
         rf"\s+(?:(?:is|are)\s+)?missing\b",
@@ -50,7 +54,7 @@ def _count_missing(note: str) -> int | None:
     )
     total = 0
     for match in clause.finditer(note):
-        for counted in re.finditer(item, match.group("items"), re.IGNORECASE):
+        for counted in counted_item.finditer(match.group("items")):
             word = counted.group("count").lower()
             n = int(word) if word.isdecimal() else WORDS[word]
             if not 0 < n <= 10:
