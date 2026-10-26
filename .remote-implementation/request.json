@@ -1,27 +1,43 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-phase0-recover-0003",
+  "request_id": "gonzaga-phase0-0003",
   "school_key": "gonzaga",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "889f6e2d4a266315dce4072f85c97b5c6a86ebdc",
-  "previous_control_state_sha256": "c05631f2b6bce6f3f140163cb10c70e5745bd7cc75695da411adec0ba566bee6",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "aac96e19ce13af83edfbfabf955bdb1eac766aed",
+  "previous_control_state_sha256": "37d930c961f367a3525a79b83345dff3b61908425daafbfb7cafbfe5eedcd14b",
   "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-  "recovery": {
-    "abandoned_request_id": "gonzaga-phase0-0002",
-    "lock_commit": "b4fce1d7d4de0d8fc1fbff9fb0396e4e2d20cd47",
-    "target_branch": "data/gonzaga-onboarding"
+  "target_branch": "data/gonzaga-onboarding",
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-0004/checkpoint-manifest.json",
+    "sha256": "cb8dfc6e079f23e7b6cd5a53cb2ee09313d2fb79d18812029779c99744ded6d7"
+  },
+  "history_scope": {
+    "start_season": "1958-1959",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1958-59+",
+    "notes": "Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority."
   },
   "creation_provenance": {
     "origin": "ChatGPT Gonzaga Implementation",
-    "authorization": "Recover the second Gonzaga Phase 0 request after the remote runner rejected the target-only program-top-level-scope.csv change because the control branch's Phase 0 allow-list is stale relative to protected main. No prepared commit, write-ahead state, or onboarding branch was published. This recovery may only classify and clear the exact failed transaction; it creates no basketball mutation or historical authority."
+    "authorization": "Owner authorized Gonzaga Phase 0. The two earlier attempts were durably recovered as NOT_ATTEMPTED after mechanical control/tooling defects, and the Control Center has now synchronized the operational Phase 0 scope runtime from protected main. Execute only the guarded stable Phase 0 transaction against exact current protected main using the unchanged accepted Research Freeze and exact-main Stage 1 PASS checkpoint. Use normalized history_start_season 1958-1959 while preserving accepted interval expression 1958-59+. Reconcile only Gonzaga's target scope metadata plus the Stage 1-approved Phase 0 registrations, persist Integration Freeze, and stop before Stage 2."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
-    "recovery": true,
+    "phase0": true,
+    "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
