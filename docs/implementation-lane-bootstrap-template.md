@@ -30,7 +30,9 @@ Minimize my Codespace work. When my Codespace is required, invoke supported perm
 
 For browser GitHub Codespaces, I may drag the incoming RESEARCH_FROZEN ZIP into the repository root. Treat that as the standard transport path: pass the root ZIP directly to the permanent Stage 1 inventory command and let that tool relocate the untracked transport ZIP outside the worktree before cleanliness-sensitive checks. Do not ask me to manually copy/move it to /tmp first.
 
-If the configured history scope excludes researched rows, tell me plainly during Stage 1 what the public page will begin with and how many researched rows/seasons will remain outside it.
+Recover the target school's exact accepted history scope from the frozen six-file package. The package should either confirm the current reusable scope baseline or explicitly supersede it. Treat that frozen statement as already verified historical authority: if current main is stale, reconcile the target `programs.csv` metadata and that school's single `program-top-level-scope.csv` row in the guarded school Phase 0/onboarding commit. Do not ask me to approve the same frozen scope again or route that target-row correction through a separate Control Center maintenance PR unless genuinely new contradictory evidence appears.
+
+If the accepted frozen history scope excludes researched rows, tell me plainly during Stage 1 what the public page will begin with and how many researched rows/seasons will remain outside it.
 
 Any shared-reference proposal preserved by Research is historically settled unless current-main evidence genuinely contradicts it. Reconcile its authoritative repository identity during current-main rebase under docs/shared-reference-authority.md.
 
