@@ -1,0 +1,67 @@
+{
+  "allowed_paths": [
+    "schools/gonzaga/opponents.csv",
+    "schools/gonzaga/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/gonzaga/opponents.csv": "91a511dc9bcba7750633e205eac363847fbfbb1c687accb98fd6dfc1a237aa2d",
+    "schools/gonzaga/source-games.csv": "0d4478e7a60e44a5c4402749cfca1ba6725d736a6037a2ee29d39c384da0cc45"
+  },
+  "changed_paths": [
+    "schools/gonzaga/opponents.csv",
+    "schools/gonzaga/source-games.csv"
+  ],
+  "commit_message": "Normalize gonzaga historical opponent display representation",
+  "expected_blocker_keys": [
+    "augustana-illinois",
+    "regis-colorado",
+    "st-thomas-aquinas"
+  ],
+  "expected_target_predecessor_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "field_level_proof_sha256": "e4419e2e0db42c6b8fe82b02b69c1e65e73053015586cad7f37b76eb469b1e6b",
+  "global_lock_commit": "68d50220efa1cf9766b363c32ca54037c02bc457",
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "eb868bcf3ca1f4eac1458667b21c3eeeee014a8277f812adc6fb6c0c6f55a099",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "prepared_parent_sha": "97bdf3a3c45a08c471518bd831d14e808ede8ab8",
+  "prepared_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "repository_validation": "PASS",
+  "request_id": "gonzaga-stage2-opponent-display-normalize-0001",
+  "request_sha256": "cb8cbdc878855d98ae721246a1794bbd16b3281bb232e5a570a2cbad1accc09a",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_drift_after": {
+    "baseline_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "school_key": "gonzaga",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "school_key": "gonzaga",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "51909c487f2aa3a55494628284f7f5cac5b070a38442b71d21affd8590c29895",
+    "field-level-proof.json": "e4419e2e0db42c6b8fe82b02b69c1e65e73053015586cad7f37b76eb469b1e6b",
+    "integration-freeze.json": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+    "normalization-report.json": "eb868bcf3ca1f4eac1458667b21c3eeeee014a8277f812adc6fb6c0c6f55a099",
+    "semantic-drift-proof.json": "d36e2c4f2d90c3f1a4ca6c5351bea32b4c2f4dc3d4d8dce37c4c1c6f4b833f28"
+  },
+  "source_game_normalized_name_row_count": 4,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "51909c487f2aa3a55494628284f7f5cac5b070a38442b71d21affd8590c29895",
+  "target_branch": "data/gonzaga-onboarding"
+}

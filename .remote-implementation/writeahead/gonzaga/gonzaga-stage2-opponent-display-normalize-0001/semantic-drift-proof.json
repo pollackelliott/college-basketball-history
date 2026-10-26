@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "school_key": "gonzaga",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+    "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "school_key": "gonzaga",
+    "status": "PASS"
+  }
+}
