@@ -55,6 +55,22 @@ tracked integration. The program top-level scope reference is controlling as the
 owner-supplied research baseline for each current D1 program's accepted top-level /
 Division I-equivalent history intervals.
 
+Implementation intake authentication has a narrow owner-designated-artifact fallback.
+A precomputed Research Freeze ZIP SHA-256 and final status card remain the preferred
+bootstrap inputs. If the owner explicitly identifies exactly one attached ZIP as the final
+accepted `RESEARCH_FROZEN` artifact but does not separately copy its checksum/status card,
+do not stop solely for that omission. Compute the exact ZIP SHA-256, verify the flat
+six-file contract, run the permanent research acceptance gate, inspect the package's
+required freeze evidence (including the non-D1 owner scan and pre-freeze self-challenge
+when applicable), and check available durable authority for a competing/superseding
+artifact. When those checks are clean, the owner's explicit artifact selection authenticates
+which bytes are being accepted and the computed digest becomes the immutable Research
+Freeze transport identity for downstream requests. This is not permission for an arbitrary
+newly discovered ZIP to self-authenticate; any conflicting candidate, supersession evidence,
+or materially missing freeze evidence remains a STOP. A history-scope contradiction may be
+recorded by the read-only Stage 1 inventory and resolved before Integration Freeze/Phase 0;
+it does not by itself justify skipping that complete inventory.
+
 ### Post-publication corrections
 
 For a bounded correction to an already-published school, read

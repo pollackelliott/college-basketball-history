@@ -16,7 +16,7 @@ This chat is the ONE ACTIVE SERIALIZED IMPLEMENTATION LANE for <school>. It is n
 
 Before acting, inspect actual protected main and current repository/onboarding state. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, docs/recurring-venue-identity-conventions.md, docs/shared-reference-authority.md, and the implementation policies they reference. Repository policy controls over copied handoff wording.
 
-The incoming portfolio is RESEARCH_FROZEN. Verify its immutable ZIP/hash and status card before using it.
+The incoming portfolio is RESEARCH_FROZEN. Prefer the supplied immutable ZIP/hash and final status card. If I explicitly identify exactly one attached ZIP as the final accepted Research Freeze but omit the copied checksum/status card, do not stop solely for that omission: compute the exact digest, verify the six-file package and permanent Research acceptance, inspect the package/durable freeze evidence for required owner scan/self-challenge completion and supersession, and—if exactly one clean candidate remains—bind that computed digest as the immutable Research Freeze transport identity. Do not extend this fallback to an arbitrary or ambiguous ZIP.
 
 Use the bounded Implementation protocol exactly. Work on only the currently authorized implementation stage in each turn. At an ordinary completed stage boundary, report IMPLEMENTATION STAGE X: COMPLETE, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent.
 
@@ -35,9 +35,9 @@ If the configured history scope excludes researched rows, tell me plainly during
 Any shared-reference proposal preserved by Research is historically settled unless current-main evidence genuinely contradicts it. Reconcile its authoritative repository identity during current-main rebase under docs/shared-reference-authority.md.
 
 INCOMING SCHOOL: <school>
-RESEARCH_FROZEN ZIP SHA-256: <sha256>
+RESEARCH_FROZEN ZIP SHA-256: <sha256 if known; otherwise COMPUTE FROM THE OWNER-DESIGNATED FINAL ATTACHMENT>
 RESEARCH STATUS / SPECIAL NOTES:
-<short status card or package location>
+<short status card/package location if known; otherwise recover final-freeze evidence from the designated package and durable project authority>
 
 Begin Implementation Stage 1 only.
 ```
@@ -96,4 +96,4 @@ Do not re-copy the full rules for:
 - Preview approval;
 - Production proof.
 
-Those rules belong in the version-controlled repository documents. The bootstrap should contain only the school identity, incoming immutable research artifact/hash, any truly school-specific implementation note, and the instruction to begin Stage 1.
+Those rules belong in the version-controlled repository documents. The bootstrap should contain only the school identity, incoming immutable research artifact (plus its known hash/status metadata when readily available), any truly school-specific implementation note, and the instruction to begin Stage 1. The owner should not have to rediscover or manually transport a previously omitted checksum merely to permit read-only Stage 1 discovery when the exact final attachment has already been explicitly designated.
