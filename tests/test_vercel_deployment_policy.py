@@ -64,10 +64,11 @@ class VercelDeploymentGateTests(unittest.TestCase):
     def test_vercel_config_disables_control_branch(self):
         config = json.loads((ROOT / "vercel.json").read_text())
         self.assertEqual(config["outputDirectory"], "site")
-        self.assertIs(
-            config["git"]["deploymentEnabled"]["control/remote-implementation"],
-            False,
-        )
+        disabled = config["git"]["deploymentEnabled"]
+        self.assertIs(disabled["control/remote-implementation"], False)
+        self.assertIs(disabled["transport/*"], False)
+        self.assertIs(disabled["hardening/*"], False)
+        self.assertIs(disabled["docs/*"], False)
 
 
 if __name__ == "__main__":

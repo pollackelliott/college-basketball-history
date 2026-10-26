@@ -53,8 +53,22 @@ a deployable website state and should not consume a Preview slot.
 }
 ```
 
-The project-level Ignored Build Step remains necessary for the already-diverged operational
-control branch and for non-site commits on other branches.
+The static branch rules are the quota-control mechanism because Vercel does not create a
+deployment for disabled branches. The project-level Ignored Build Step is only a secondary
+build-cost/concurrency optimization: Vercel may still create a deployment record before that
+step cancels the build, so it must not be relied upon for the Hobby "Deployments Created per
+Day" ceiling.
+
+The disabled branch families are infrastructure-only by policy:
+
+- `control/remote-implementation` — durable orchestration/checkpoint state;
+- `transport/*` — artifact transport only;
+- `hardening/*` — generic tooling/policy development;
+- `docs/*` — documentation-only maintenance.
+
+Any change that requires an exact Vercel Preview must use a deploy-enabled release branch
+whose checked-in `site/` output represents that exact head (normally `data/*` for school
+release work or `maintenance/*` for shared-reference publication).
 
 Regression coverage must include main-always-build, control-always-skip, non-site skip,
 site/config build, missing-parent fail-open, and Git-diff-error fail-open cases.
