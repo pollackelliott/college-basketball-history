@@ -1,22 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-venue-maintenance-recover-0001",
+  "request_id": "gonzaga-venue-maintenance-0002",
   "school_key": "gonzaga",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "65cd3107598201b822fa17c237be4f2a2bc6eab1",
-  "previous_control_state_sha256": "2e540650fd5bf78e51604d3b14eb7d3b04da9a6ce145bc62314de2939e34212d",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "previous_control_state_commit": "052f9e370ccf05374aad928fc116da550d463bbc",
+  "previous_control_state_sha256": "2e2a7a4c58e409b998e28c26fb0a581511be03f6db35310f1723dd592d6449b2",
   "expected_protected_main_sha": "10079cb9437fdd71ff0bd90bc36e4195dbdcf072",
+  "target_branch": "maintenance/gonzaga-stage1-forum-identity-v2",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/gonzaga-venue-maintenance-0002/venue-maintenance.json",
+    "sha256": "b54d211e8e7a2b282dc985f672f8b404893ae6e2299fbfde79f8911bad85531f"
+  },
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/gonzaga-stage1.json",
+  "expected_plan_sha256": "bb19f3b1b241a0dd03c88915b317e9616bab0d350fad8642cd8013f08a6c49eb",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Exact Gonzaga Stage 1 shared-reference repair authorized by the Control Center: preserve VEN-000376 / The Forum, absorb VEN-000392 / Great Western Forum, and retain Great Western Forum as a historical/alias name.",
+    "spec_sha256": "b54d211e8e7a2b282dc985f672f8b404893ae6e2299fbfde79f8911bad85531f"
+  },
   "creation_provenance": {
     "origin": "ChatGPT Control Center",
-    "authorization": "Owner explicitly authorized Recover and retry after the accepted Gonzaga venue-maintenance request failed before any prepared or published mutation."
+    "authorization": "Owner explicitly authorized Recover and retry; this is the replacement request after the prior request was durably abandoned as NOT_ATTEMPTED."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
-    "recovery": true,
+    "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -29,11 +42,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false
-  },
-  "recovery": {
-    "abandoned_request_id": "gonzaga-venue-maintenance-0001",
-    "lock_commit": "f53cf76a525b1830a710731e35c384a5680c4952",
-    "target_branch": "maintenance/gonzaga-stage1-forum-identity-v2"
+    "venue_identity_maintenance": true
   }
 }

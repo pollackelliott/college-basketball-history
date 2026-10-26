@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000376",
+      "absorbed_venue_id": "VEN-000392",
+      "expected_canonical_rows": 3,
+      "expected_school_rows": 4,
+      "resolution_basis": "Control Center-authorized Gonzaga Stage 1 maintenance: current protected main contains duplicate physical identities for the same Inglewood arena under The Forum and Great Western Forum. Preserve earlier-established VEN-000376 / the-forum, retire later duplicate VEN-000392 / great-western-forum, and retain Great Western Forum as a historical/alias name."
+    }
+  ]
+}
