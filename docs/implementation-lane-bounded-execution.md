@@ -89,6 +89,17 @@ They do **not** substitute for:
 
 ## 4. Required turn-ending contract
 
+**Every bounded Implementation response MUST end with exactly one `NEXT OWNER ACTION` classification**, on its own final line. Give the next bounded operation (or the precise necessary decision) immediately before that line. This requirement applies to both ordinary continuation and checkpoint/recovery turns; a stage status such as `BLOCKED` does not, by itself, identify the next owner action.
+
+- `NEXT OWNER ACTION: PROCEED` — The next single bounded operation is routine, unambiguous, and already authorized under repository policy. Identify that operation and explicitly say **no Control Center consultation is required**. This includes policy-supported deterministic technical repairs after a read-only `BLOCKED` census; it never authorizes a new stage automatically.
+- `NEXT OWNER ACTION: EXPLICIT OWNER APPROVAL REQUIRED` — A genuine historical-authority decision, the exact Owner Gate 1 packet, or the exact PR-head Preview at Owner Gate 2 needs affirmative owner approval. State precisely what must be approved; generic `Proceed` is insufficient.
+- `NEXT OWNER ACTION: CONTROL CENTER AUTHORIZATION REQUIRED` — An exceptional shared/global mutation, unresolved policy or permission-governance choice, competing Implementation lock, or other explicitly controlled authority boundary requires Control Center disposition. State its exact scope rather than silently broadening a routine `Proceed`.
+- `NEXT OWNER ACTION: STOP — RECOVERY REQUIRED` — Durable transaction/control state is unsafe or a genuinely failed/ambiguous operation requires evidence-first recovery. Identify the failing authority and required recovery path. Do **not** use this label merely because a healthy, checkpointed census says `BLOCKED`, because an ordinary bounded stage is incomplete, or because a known next deterministic repair is available.
+- `NEXT OWNER ACTION: NONE — IMPLEMENTATION COMPLETE` — The school has passed the exact approved merge, successful same-SHA Vercel Production deployment, all required public Production JSON equivalence checks, and **independent fresh Production-proof verification**, with healthy final control state. The school has no further Implementation stage; do not misleadingly conclude `PROCEED` just because that was the previous standard's last routine option.
+
+Use **exactly these five labels**. Keep the final classification short and unmistakable; do not replace it with an ambiguous `Next action` sentence. When the appropriate label is `PROCEED`, let the owner answer simply `Proceed` at the next turn; do not demand a special handoff, ceremonial Control Center confirmation, or an extra technical owner gate. The classification changes **communication only**; all one-bounded-unit execution limits, repository mutation protections, Owner Gate 1/2 approvals, and Production-proof requirements remain unchanged.
+
+
 ### Completed ordinary stage
 
 ```text

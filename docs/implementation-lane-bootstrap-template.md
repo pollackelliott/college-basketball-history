@@ -22,6 +22,8 @@ Use the bounded Implementation protocol exactly. Work on only the currently auth
 
 My Proceed/Continue response authorizes only the identified next bounded implementation stage or unfinished remainder. It never substitutes for Owner Gate 1 historical decisions or exact Preview approval.
 
+At the end of every bounded response, use exactly one of the five **NEXT OWNER ACTION** classifications defined in docs/implementation-lane-bounded-execution.md. When an ordinary Proceed suffices, explicitly say so; when independent exact Production proof establishes Implementation COMPLETE, end with NEXT OWNER ACTION: NONE — IMPLEMENTATION COMPLETE (never another Proceed).
+
 If a stage cannot safely finish in one turn, preserve the durable repository/onboarding checkpoint, report IMPLEMENTATION STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
 Minimize my Codespace work. When my Codespace is required, invoke supported permanent repository commands directly by default and request only compact diagnostic output. Use a guarded pasted helper only for genuinely bespoke work that current tooling does not own; do not surround permanent commands with giant wrapper programs merely to restate their invariants. Do not make manual helper-file transfer the normal execution path.
@@ -48,7 +50,7 @@ After an ordinary completed implementation stage:
 Proceed.
 ```
 
-means execute only the identified next bounded stage and stop again.
+means execute only the identified next bounded stage and stop again. The lane should end its prior response with `NEXT OWNER ACTION: PROCEED`, naming that stage; no separate Control Center consultation is needed for routine continuation.
 
 After an incomplete stage, the same response means resume only the identified unfinished remainder of that stage.
 
@@ -66,6 +68,8 @@ We are recovering the serialized Implementation lane for <school> in my College 
 Before acting, inspect actual protected main, Git/GitHub state, the onboarding branch, tracked worktree, .onboarding/<school>/ artifacts, existing PR/release state, and exact hashes/fingerprints. Read current AGENTS.md plus docs/implementation-lane-bounded-execution.md, docs/implementation-pre-gate-adversarial-challenge.md, docs/recurring-venue-identity-conventions.md, and docs/shared-reference-authority.md.
 
 Do not restart the school or replay completed implementation stages merely because the previous chat failed. Reconstruct the earliest incomplete bounded stage from durable state and resume only that stage. Preserve already-settled owner decisions unless actual substantive inputs changed.
+
+Every recovery response must end with exactly one NEXT OWNER ACTION classification from docs/implementation-lane-bounded-execution.md. A checkpointed ordinary technical blocker with an available policy-defined repair normally means PROCEED; a genuinely unsafe transaction requires STOP — RECOVERY REQUIRED. A fully Production-proven school ends with NONE — IMPLEMENTATION COMPLETE.
 
 When owner Codespace execution is required during recovery, retain the default copy/paste relay preference. Do not switch to manual helper-file transfer merely because a prior relay failed; classify the failure and provide a corrected guarded pasted relay when reasonable.
 
