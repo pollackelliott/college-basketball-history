@@ -27,6 +27,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    OP_VENUE_IDENTITY_MAINTENANCE,
     REQUEST_KIND,
     RemoteImplementationError,
     abandon_active,
