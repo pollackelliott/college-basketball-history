@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "boise-state-release-preview-verify-0001",
+  "request_id": "boise-state-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "boise-state",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "10ed6c0a57c8aacb490902e66e541a8201ff7f11",
-  "previous_control_state_sha256": "2cd8ec9bbaad7eb5c747111f322026204da3447db3258a4451ed6fed89e5808b",
+  "previous_control_state_commit": "e1241561add242d09d7dd66dcd40cf85de58f7b1",
+  "previous_control_state_sha256": "6c7ee271c5683c606251b1589a428b460d3ade67b82d6b0fdb112894d4c87027",
   "expected_protected_main_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
   "target_branch": "data/boise-state-onboarding",
   "target_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/boise-state/boise-state-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "06b9ce1c6c5e0ccae45833da36d145e19caf7f9ccc75e1d4cb847f082614f617"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/boise-state/boise-state-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "3e8f908d07b2e312209a9b8796c9595a3b77f23d91f33739cf177f8dbd7c188a"
-  },
+  "pr_number": 371,
   "approved_plan_hash": "b76b1e2c5e5e1969fb59890ad68805f93a015a822d01ae7eee6d388d6b483db3",
   "release_manifest_sha256": "f480a5298a5a816d20bebf331a7a5a66207ba2e38b5378330ba7e0d45833412f",
-  "pr_number": 371,
+  "preview_deployment_id": 7321972861,
+  "preview_url": "https://college-basketball-history-qrw05w37w-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/boise-state/boise-state-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "0a8d016ea332e93dbe681918c98dab93496b17a3001046bd6a2ad30ef92cd43e"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/boise-state/boise-state-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "b0d9fe9828b688e0baa0754260516483c89a9520c40534152702046a51fbe322"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “I APPROVE the preview.”",
+    "preview_checkpoint_sha256": "0a8d016ea332e93dbe681918c98dab93496b17a3001046bd6a2ad30ef92cd43e",
+    "preview_verification_sha256": "b0d9fe9828b688e0baa0754260516483c89a9520c40534152702046a51fbe322",
+    "pr_number": 371,
+    "pr_head_sha": "02c0195f86203dd52678c5ef8ddfaddf4106eabc",
+    "preview_deployment_id": 7321972861,
+    "preview_url": "https://college-basketball-history-qrw05w37w-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
     "origin": "ChatGPT",
-    "authorization": "Owner said Proceed after Boise State RELEASE_READINESS was fresh-verified. The school lane created exact PR #371 from data/boise-state-onboarding to main using the repository-generated sealed-apply PR body. This request authorizes exactly one bounded RELEASE_PREVIEW_VERIFY operation: authenticate fresh readiness and exact PR #371, wait for required checks/mergeability and the exact Preview deployment, then stop at OWNER_GATE_2_READY. It carries no Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, unrelated repair, or second Implementation-lane authority."
+    "authorization": "Owner explicitly reversed the earlier non-approval and approved Owner Gate 2 for the exact Boise State Preview, stating: “I APPROVE the preview.” This approval is bound only to PR #371 head 02c0195f86203dd52678c5ef8ddfaddf4106eabc and Preview deployment 7321972861 at the verified Preview URL. The owner also directed that the 2026-27 conference-display concern be handled separately with the Control Center. This request records only the exact Gate 2 approval and grants no merge execution, Production action, tracked basketball mutation, recovery, unrelated repair, or second Implementation-lane authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
@@ -39,8 +48,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false
   }
 }
