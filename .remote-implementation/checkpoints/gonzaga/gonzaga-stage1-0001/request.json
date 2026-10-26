@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage1-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "71d116749c55accf3aa2651bea298423b8895114",
+  "previous_control_state_sha256": "03c6f9084427ec5636c8fe1eb86d2fcd0c47c683d58d883a6b42e725098ba83c",
+  "expected_protected_main_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT",
+    "authorization": "Owner authorized Gonzaga Implementation Stage 1 remainder only. Authenticate the exact owner-designated RESEARCH_FROZEN bytes, preserve accepted target-school top-level scope 1958-59+, run one read-only STAGE1_INVENTORY against current protected main, and stop before PHASE0. The stale Gonzaga-only 1952-53+ program-top-level-scope baseline is target-school Phase 0 reconciliation under current policy, not dedicated Control Center maintenance."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
