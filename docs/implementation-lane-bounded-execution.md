@@ -25,11 +25,49 @@ At Implementation-lane startup:
    - `docs/implementation-efficiency-recovery.md`
    - `docs/codespace-terminal-safety.md`
    - `docs/parallel-portfolio-pipeline.md`
-3. verify the incoming immutable `RESEARCH_FROZEN` ZIP/hash and status card;
+3. authenticate the incoming immutable `RESEARCH_FROZEN` artifact. A precomputed ZIP SHA-256 and final status card are preferred, but if the owner explicitly designates exactly one attached ZIP as the final accepted Research Freeze and omits those copied fields, use the owner-designated-artifact fallback below rather than stopping solely for missing transport metadata;
 4. reconstruct actual repository/onboarding state before acting if this is a recovery;
 5. begin Implementation Stage 1 only.
 
 Repository policy controls over copied handoff wording.
+
+### 2.1 Owner-designated Research Freeze attachment fallback
+
+The expected normal handoff remains: exact final ZIP, precomputed SHA-256, and compact
+Research Freeze status card. That is the easiest way to detect an accidental stale or
+superseded upload.
+
+However, the checksum is an integrity identity, not a substitute for the owner's selection
+of which artifact is authoritative. When the owner explicitly identifies **exactly one**
+attached ZIP as the final accepted `RESEARCH_FROZEN` artifact but does not separately copy
+the prior checksum/status card, the Implementation lane must not classify that omission
+alone as `STOP — RECOVERY REQUIRED`.
+
+Instead, in the same bounded Stage 1 intake unit:
+
+1. compute the exact SHA-256 and file size of the owner-designated attachment;
+2. require the exact flat six-file package contract;
+3. recover/verify the package's `research_base_sha` and school identity;
+4. run the permanent Research acceptance gate against those exact bytes;
+5. inspect the package/durable Research evidence for the required final acceptance facts,
+   including the owner NON_D1 scan and pre-freeze self-challenge when applicable;
+6. check available durable authority for evidence that another package superseded or
+   conflicts with the selected artifact; and
+7. if all checks are clean and exactly one candidate exists, record the computed digest as
+   the immutable Research Freeze transport identity used by the Stage 1 request and every
+   downstream checkpoint.
+
+This is **owner-designated byte authentication**, not self-authentication by an arbitrary
+new ZIP. A competing/superseding candidate, mismatched school/research base, failed Research
+acceptance, materially missing final-freeze evidence, or ambiguity about which attachment the
+owner intended remains a STOP.
+
+A history-scope contradiction discovered at intake is separate. Because guarded
+`STAGE1_INVENTORY` is read-only and its request schema does not require Phase 0 history-scope
+metadata, a scope discrepancy should be recorded and included in the complete Stage 1
+reconciliation inventory. It must be resolved under current scope/shared-reference policy
+**before Integration Freeze or Phase 0 mutation**, but it does not by itself justify skipping
+or blocking the read-only inventory.
 
 ## 3. Common execution rules
 
@@ -136,7 +174,7 @@ Accept the incoming `RESEARCH_FROZEN` portfolio against **current protected main
 
 ### Work
 
-- verify the immutable research ZIP/hash and exactly-six-file contract;
+- authenticate the immutable research artifact under the preferred precomputed-hash path or the owner-designated attachment fallback above, then verify the exact-six-file contract;
 - inspect current protected `main`, branch/worktree state, and research baseline;
 - rerun the research acceptance check under current tooling;
 - **before any Stage 1 mutation**, run `python tools/implementation_stage1_inventory.py <school> <research.zip> ...` and preserve `.onboarding/<school>/stage1-reconciliation.json`;
