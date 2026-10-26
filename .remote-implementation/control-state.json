@@ -52,7 +52,7 @@
     "gonzaga-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-  "active_lock_commit": null,
+  "active_lock_commit": "68d50220efa1cf9766b363c32ca54037c02bc457",
   "active_lock_owner": "github-actions:40398012411:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
