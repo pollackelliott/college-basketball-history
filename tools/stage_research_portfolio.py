@@ -16,8 +16,9 @@ Normal use from a clean ``data/<school>-onboarding`` branch created from current
 The command verifies the immutable transport artifact, runs the permanent
 research acceptance checks, rebases local venue identities against current
 global references, registers only mechanically safe aliases/new identities,
-installs the exact six-file package, applies the owner-confirmed history scope,
-validates the repository, writes an ignored integration-freeze manifest, and
+installs the exact six-file package, applies the Research-Frozen history scope to
+both target-program metadata and the reusable top-level scope baseline, validates
+the repository, writes an ignored integration-freeze manifest, and
 optionally creates the stable Phase 0 checkpoint commit.
 
 Ambiguous physical venue identity is a STOP, never a guess.
@@ -1451,6 +1452,98 @@ def update_program_scope(
     row["history_scope_intervals"] = intervals
 
 
+def accepted_top_level_scope_expression(*, basis: str, intervals: str) -> str:
+    interval_text = (intervals or "").strip()
+    if interval_text:
+        return interval_text
+    if (basis or "").strip() == "ALWAYS_TOP_LEVEL_FROM_INCEPTION":
+        return "INCEPTION+"
+    raise WorkflowError(
+        "accepted Research Freeze history scope cannot be projected into "
+        "program-top-level-scope.csv; provide explicit history_scope_intervals "
+        "or use ALWAYS_TOP_LEVEL_FROM_INCEPTION"
+    )
+
+
+def reconcile_top_level_scope_reference(
+    rows: list[dict[str, str]],
+    target_program: dict[str, str],
+    *,
+    accepted_scope: str,
+) -> dict[str, Any]:
+    names = {
+        value.strip()
+        for value in (
+            target_program.get("program_name", ""),
+            target_program.get("display_name", ""),
+        )
+        if value.strip()
+    }
+    matches = [row for row in rows if row.get("school", "").strip() in names]
+    if len(matches) > 1:
+        raise WorkflowError(
+            "program-top-level-scope.csv has multiple target rows for "
+            + "/".join(sorted(names))
+        )
+
+    if matches:
+        row = matches[0]
+        prior = row.get("top_level_scope", "").strip()
+        row["top_level_scope"] = accepted_scope
+        school = row.get("school", "").strip()
+        action = "CONFIRMED" if prior == accepted_scope else "UPDATED"
+    else:
+        school = (
+            target_program.get("display_name", "").strip()
+            or target_program.get("program_name", "").strip()
+        )
+        if not school:
+            raise WorkflowError(
+                "cannot register target top-level scope without a program/display name"
+            )
+        prior = ""
+        rows.append({"school": school, "top_level_scope": accepted_scope})
+        rows.sort(key=lambda item: item.get("school", "").casefold())
+        action = "ADDED"
+
+    return {
+        "school": school,
+        "prior_top_level_scope": prior,
+        "accepted_top_level_scope": accepted_scope,
+        "action": action,
+        "changed": prior != accepted_scope,
+    }
+
+
+def write_top_level_scope_reference(
+    path: Path,
+    fieldnames: list[str],
+    rows: list[dict[str, str]],
+) -> None:
+    if fieldnames != ["school", "top_level_scope"]:
+        raise WorkflowError(
+            "unexpected program-top-level-scope.csv fields: "
+            + ",".join(fieldnames)
+        )
+    original = path.read_bytes() if path.exists() else b""
+    has_bom = original.startswith(b"\xef\xbb\xbf")
+    line_ending = "\r\n" if b"\r\n" in original else "\n"
+    encoding = "utf-8-sig" if has_bom else "utf-8"
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with temporary.open("w", newline="", encoding=encoding) as handle:
+        handle.write("school,top_level_scope" + line_ending)
+        writer = csv.writer(
+            handle,
+            lineterminator=line_ending,
+            quoting=csv.QUOTE_ALL,
+        )
+        for row in rows:
+            writer.writerow(
+                [row.get("school", ""), row.get("top_level_scope", "")]
+            )
+    temporary.replace(path)
+
+
 def package_hashes(root: Path) -> dict[str, str]:
     return {name: sha256_file(root / name) for name in REQUIRED_PACKAGE_FILES}
 
@@ -1565,6 +1658,9 @@ def main() -> int:
             global_fields, global_venues = load_csv(repo / "data/reference/venues.csv")
             name_fields, venue_names = load_csv(repo / "data/reference/venue-names.csv")
             program_fields, programs = load_csv(repo / "data/reference/programs.csv")
+            scope_reference_fields, scope_reference_rows = load_csv(
+                repo / "data/reference/program-top-level-scope.csv"
+            )
             _, program_aliases = load_csv(repo / "data/reference/program-names.csv")
             conference_fields, global_conferences = load_csv(
                 repo / "data/reference/conferences.csv"
@@ -1695,6 +1791,15 @@ def main() -> int:
                 for row in programs
                 if row.get("program_key") == args.school_key
             )
+            accepted_scope_expression = accepted_top_level_scope_expression(
+                basis=args.history_scope_basis,
+                intervals=args.history_scope_intervals,
+            )
+            scope_reference_result = reconcile_top_level_scope_reference(
+                scope_reference_rows,
+                target_program,
+                accepted_scope=accepted_scope_expression,
+            )
             scope_problems = history_scope_errors(target_program, required=True)
             if scope_problems:
                 raise WorkflowError(
@@ -1780,6 +1885,7 @@ def main() -> int:
                     "history_scope_basis": args.history_scope_basis,
                     "history_scope_intervals": args.history_scope_intervals,
                     "history_scope_notes": args.history_scope_notes,
+                    "top_level_scope_reference": scope_reference_result,
                 },
             }
 
@@ -1788,6 +1894,11 @@ def main() -> int:
             print(f"Research base:         {args.research_base}")
             print(f"Integration base:      {current_head}")
             print(f"Research ZIP SHA-256:  {actual_sha}")
+            print(
+                "Top-level scope:        "
+                f"{scope_reference_result['accepted_top_level_scope']} "
+                f"({scope_reference_result['action']})"
+            )
             print(f"Venue rows rebased:    {len(mappings)}")
             print(
                 "Semantic freeze rows:  "
@@ -1827,6 +1938,7 @@ def main() -> int:
             manifest_path = output_dir / "integration-freeze.json"
             protected_paths = [
                 repo / "data/reference/programs.csv",
+                repo / "data/reference/program-top-level-scope.csv",
                 repo / "data/reference/venues.csv",
                 repo / "data/reference/venue-names.csv",
                 repo / "data/reference/conferences.csv",
@@ -1844,6 +1956,12 @@ def main() -> int:
                     program_fields,
                     programs,
                 )
+                if scope_reference_result["changed"]:
+                    write_top_level_scope_reference(
+                        repo / "data/reference/program-top-level-scope.csv",
+                        scope_reference_fields,
+                        scope_reference_rows,
+                    )
                 write_csv_preserving_format(
                     repo / "data/reference/venues.csv",
                     global_fields,
@@ -1878,6 +1996,7 @@ def main() -> int:
 
         expected_paths = [
             "data/reference/programs.csv",
+            "data/reference/program-top-level-scope.csv",
             "data/reference/venues.csv",
             "data/reference/venue-names.csv",
             "data/reference/conferences.csv",
