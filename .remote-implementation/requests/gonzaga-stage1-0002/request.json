@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage1-0002",
+  "school_key": "gonzaga",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "a32287d5e0109bbda21ee687383aef24d46b6c85",
+  "previous_control_state_sha256": "5638c5b4323763bf5500e44e9666dbca17b13e2e603e58d1aa164e8f342e51cb",
+  "expected_protected_main_sha": "982c7fad258683006d12e988eaf72bef401de4e8",
+  "research_checkpoint": {
+    "sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0f240b4f036458883b90f1e69140257d2166bb33",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 11
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Control Center",
+    "authorization": "Owner explicitly authorized Proceed after the Control Center-authorized Forum venue maintenance merged and exact Production proof passed. Rerun the complete read-only Gonzaga STAGE1_INVENTORY against refreshed protected main using the exact accepted Research Freeze and existing immutable transport. Stop at Stage 1; Phase 0, Stage 2, owner gates, release, recovery, unrelated shared/global mutation, and other-school work are not authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
