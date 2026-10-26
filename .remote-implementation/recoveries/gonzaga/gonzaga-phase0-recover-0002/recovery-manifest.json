@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "acb721bc78b59567ce78783edcb955914f7ab851",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "recovered_request_id": "gonzaga-phase0-0001",
+  "request_id": "gonzaga-phase0-recover-0002",
+  "schema_version": 1,
+  "target_branch": "data/gonzaga-onboarding"
+}
