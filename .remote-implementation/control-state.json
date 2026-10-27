@@ -80,18 +80,19 @@
     "utah-state-stage1-0005",
     "utah-state-phase0-0002",
     "utah-state-stage2-census-0001",
-    "utah-state-stage2-opponent-display-normalize-0001"
+    "utah-state-stage2-opponent-display-normalize-0001",
+    "utah-state-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "utah-state-stage2-proposal-0001",
+  "active_request_sha256": "810b4d9a1bdb19f85d1550ac49faef1ef33cc8912f3572b2d5809624e02db027",
+  "active_school_key": "utah-state",
+  "active_target_branch": "data/utah-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -195,8 +196,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/utah-state/utah-state-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "4502e5f6ee048168e0ee6a3937e4b47aa7eeee248d4f1e114d474b56f20ce76e"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40565747092",
+  "lock_acquisition_request_commit": "e590aad171f307dc91ff8cbbc5fb653a78551c81",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
