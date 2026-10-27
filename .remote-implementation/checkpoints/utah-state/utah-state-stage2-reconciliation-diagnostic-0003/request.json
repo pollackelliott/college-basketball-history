@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage2-reconciliation-diagnostic-0003",
+  "school_key": "utah-state",
+  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
+  "previous_control_state_commit": "201dd25a87cd0ef7d26e0b5688f71996f3f979ae",
+  "previous_control_state_sha256": "671d4e5c62477dd66a4b0362d4db213030ec0c6c7b5991deeb59a7daa215c66b",
+  "expected_protected_main_sha": "5560f583996f7a96dc05777f8b43c618964db1c7",
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State Implementation",
+    "authorization": "Owner said Proceed for exactly one fresh read-only reconciliation diagnostic after PR #387 merged the exact-protected-main Stage 2 runtime selection repair. Run only representative diagnostic CBBG-0104608 against blocked proposal-0004 using protected main 5560f583996f7a96dc05777f8b43c618964db1c7. Preserve the existing recommendation map and historical authority. No proposal rehearsal, historical change, Gate 1, tracked mutation, Preview, release, or merge authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": true,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-proposal-0004/checkpoint-manifest.json",
+    "sha256": "496f3459393b47103503b6d6e48144a7ddff86cd2262c322593ee47332712c01"
+  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "recommendation_map_sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
+  "canonical_game_id": "CBBG-0104608"
+}
