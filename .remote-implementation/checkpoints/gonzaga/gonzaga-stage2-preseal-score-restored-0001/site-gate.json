@@ -1,0 +1,67 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 57,
+    "public_gap_rows": 182,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2053,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 125
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_location": [
+      "CBBG-0062947"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0051110",
+      "CBBG-0053380",
+      "CBBG-0062947",
+      "CBBG-0072241",
+      "CBBG-0100141",
+      "CBBG-0103068",
+      "CBBG-0116935",
+      "CBBG-0116956",
+      "CBBG-0148993",
+      "CBBG-0159353",
+      "CBBG-0173412",
+      "CBBG-0173413"
+    ],
+    "unknown_site_type": [
+      "CBBG-0171900",
+      "CBBG-0173393",
+      "CBBG-0173394",
+      "CBBG-0173401",
+      "CBBG-0173406",
+      "CBBG-0173414",
+      "CBBG-0173415",
+      "CBBG-0173439",
+      "CBBG-0173441",
+      "CBBG-0173459",
+      "CBBG-0173465",
+      "CBBG-0173474"
+    ]
+  },
+  "history_start_season": "1958-1959",
+  "school_key": "gonzaga",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 181,
+    "neutral_missing_venue": 56,
+    "researched_gap_rows": 181,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 125
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2053
+  },
+  "status": "PASS",
+  "warnings": []
+}
