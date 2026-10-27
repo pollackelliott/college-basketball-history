@@ -4306,13 +4306,24 @@ def _sync_explicit_source_site_patch_to_canonical(
     canonical: dict[str, str],
     venue_map: dict[str, dict[str, str]],
     patched_fields: set[str],
+    *,
+    site_agreement_guaranteed: bool = False,
 ) -> None:
-    """Propagate only explicitly Gate-1-patched source site metadata to canonical."""
+    """Propagate only explicitly Gate-1-patched source site metadata to canonical.
+
+    NORMALIZE_SOURCE_TO_CANONICAL on site_type already establishes exact H/A/N
+    agreement by construction. In that narrow path, do not re-derive agreement
+    from the mutable source row after normalization; doing so can suppress the
+    explicit venue/locality patch before canonical propagation.
+    """
 
     canonical_site = canonical.get("site_type", "").strip()
     if canonical_site in {"", "UNKNOWN"}:
         return
-    if _assertion_site_to_canonical(source, canonical) != canonical_site:
+    if (
+        not site_agreement_guaranteed
+        and _assertion_site_to_canonical(source, canonical) != canonical_site
+    ):
         return
 
     registry_fields: list[str] = []
@@ -5961,6 +5972,10 @@ def apply_reconciliation_decisions(
                 canonical,
                 target_venue_metadata,
                 source_patch_fields,
+                site_agreement_guaranteed=(
+                    field_name == "site_type"
+                    and decision == "NORMALIZE_SOURCE_TO_CANONICAL"
+                ),
             )
         if decision == "NORMALIZE_SOURCE_TO_CANONICAL" or item.get("source_patch"):
             note = (
