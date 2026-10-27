@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage2-gate1-fill-score-restored-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "88d82f723cca7ed6bfffeaf41d811a79a14792db",
+  "previous_control_state_sha256": "4ad94468f140fb4ad0dd2eb1f577aa61092de13d765ddba03d676b621fc8f704",
+  "expected_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation — score-restored restart",
+    "authorization": "Owner explicitly said 'Approved. Proceed' immediately after presentation of the exact fresh-verified 67-decision Gonzaga OWNER_GATE_1_READY packet from gonzaga-stage2-proposal-score-restored-0001. This authorizes exactly one STAGE2_GATE1_FILL operation bound to that exact packet. No pre-seal rehearsal, cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, PR merge, release, Production, recovery, venue maintenance, unrelated repair, or other-school authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "2eea47c0f41b1eb6a6a7fa195f7af11c3439a560",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage2-proposal-score-restored-0001/checkpoint-manifest.json",
+    "sha256": "0b44224789f0bda9456551bd4b353a2cfa5c1deefb73d9e9b176d9af995bd216"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/gonzaga/gonzaga-stage2-proposal-score-restored-0001/stage2-proposal-rehearsal-verification.json",
+    "sha256": "949ec383bd59d5d6c92dfb136b039213bb214bdaa37fb1b8e7ab4054c314886f"
+  },
+  "integration_freeze_sha256": "531ef97f658599b9410768bec169645338d22ff533e603b7ecfe2de6c16d71ac",
+  "semantic_snapshot_sha256": "c21ce7736499499e75603242c76e7cd1f160ee125f6cc2747d57ae5da9ebb14f",
+  "decision_universe_sha256": "d406031954b5602ffa23a1315fef1997fab7dd4b87248433ed38da7634d13818",
+  "recommendation_map_sha256": "8f2267b38b17570b1da1aa88431a8d932aeb187a100948159e31d12ae2e77033",
+  "approved_plan_hash_preview": "b8f8b9fdae754ac1d9b148ab1bbd0fa543cd31eec10b9067c5d7c6b6052bbcb9",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Explicit Owner Gate 1 approval in ChatGPT: owner said 'Approved. Proceed' for the exact fresh-verified Gonzaga 67-decision packet from gonzaga-stage2-proposal-score-restored-0001.",
+    "proposal_checkpoint_sha256": "0b44224789f0bda9456551bd4b353a2cfa5c1deefb73d9e9b176d9af995bd216",
+    "decision_universe_sha256": "d406031954b5602ffa23a1315fef1997fab7dd4b87248433ed38da7634d13818",
+    "recommendation_map_sha256": "8f2267b38b17570b1da1aa88431a8d932aeb187a100948159e31d12ae2e77033",
+    "approved_plan_hash_preview": "b8f8b9fdae754ac1d9b148ab1bbd0fa543cd31eec10b9067c5d7c6b6052bbcb9"
+  }
+}
