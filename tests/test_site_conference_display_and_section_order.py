@@ -72,6 +72,63 @@ class SitePresentationTests(unittest.TestCase):
         for block in (full, mobile, timeline):
             self.assertIn("displayConferenceName(", block)
 
+    def test_timeline_preserves_distinct_adjacent_renaming_eras(self):
+        helper = SITE.split(
+            "function conferenceTimelineDisplayNames(key, history) {", 1
+        )[1].split("\nfunction ", 1)[0]
+        for snippet in (
+            "const candidateNames = history.map((membership) => (",
+            "candidateNames[index - 1] === candidateNames[index]",
+            "previousHistoricalName !== currentHistoricalName",
+            "renderedNames[index - 1] = previousHistoricalName;",
+            "renderedNames[index] = currentHistoricalName;",
+        ):
+            with self.subTest(snippet=snippet):
+                self.assertIn(snippet, helper)
+
+        timeline = SITE.split("function conferenceHistoryMarkup(key) {", 1)[1].split(
+            "\nfunction ", 1
+        )[0]
+        self.assertIn(
+            "const displayNames = conferenceTimelineDisplayNames(key, history);",
+            timeline,
+        )
+        self.assertEqual(timeline.count("const name = displayNames[index];"), 2)
+
+        expected_adjacent_eras = {
+            "gonzaga": ("West Coast Athletic Conference", "WCC"),
+            "long-island-university": ("ECAC Metro", "NEC"),
+            "butler": (
+                "Midwestern City Conference",
+                "Midwestern Collegiate Conference",
+            ),
+            "xavier": (
+                "Midwestern City Conference",
+                "Midwestern Collegiate Conference",
+            ),
+        }
+        for program_key, expected_pair in expected_adjacent_eras.items():
+            with self.subTest(program=program_key):
+                with (ROOT / "schools" / program_key / "conferences.csv").open(
+                    encoding="utf-8", newline=""
+                ) as handle:
+                    rows = list(csv.DictReader(handle))
+                adjacent_pairs = {
+                    (rows[index - 1]["conference_name"], rows[index]["conference_name"])
+                    for index in range(1, len(rows))
+                }
+                self.assertIn(expected_pair, adjacent_pairs)
+
+        overrides = conference_label_overrides()
+        self.assertEqual(overrides["midwestern-city"], "MCC")
+        self.assertEqual(overrides["midwestern-collegiate"], "MCC")
+        with (ROOT / "data" / "reference" / "conferences.csv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            registry = {row["conference_key"]: row for row in csv.DictReader(handle)}
+        self.assertEqual(registry["wcc"]["conference_name"], "WCC")
+        self.assertEqual(registry["nec"]["conference_name"], "NEC")
+
     def test_opponent_record_appears_before_complete_game_history(self):
         team = SITE.split("function teamView(key) {", 1)[1].split(
             "\nfunction toggleTeamFilters(", 1
