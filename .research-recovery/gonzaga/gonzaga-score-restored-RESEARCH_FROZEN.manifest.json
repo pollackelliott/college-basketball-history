@@ -1,7 +1,7 @@
 {
   "kind": "GONZAGA_SUPERSEDING_RESEARCH_FREEZE_CANDIDATE",
   "schema_version": 1,
-  "status": "SIX_FILE_SCORE_ONLY_PACKAGE_READY_PENDING_PERMANENT_RESEARCH_ACCEPTANCE",
+  "status": "RESEARCH_FROZEN_ACCEPTED_SUPERSEDING_SCORE_ONLY",
   "school_key": "gonzaga",
   "generated_at": "2026-10-27",
   "base_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
@@ -63,7 +63,8 @@
         "crc32": "d0840af8",
         "unchanged_from_original": true
       }
-    ]
+    ],
+    "filename": ".research-recovery/gonzaga/gonzaga-score-restored-RESEARCH_FROZEN.zip"
   },
   "score_audit": {
     "row_count": 2053,
@@ -173,5 +174,27 @@
     "global implementation control",
     "accepted old freeze bytes",
     "sealed apply"
-  ]
+  ],
+  "acceptance": {
+    "checker": "python tools/onboarding_hardening.py research-check gonzaga <exact-candidate.zip> --expected-sha256 <exact SHA>",
+    "checker_runtime_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+    "workflow_run_id": 40457824944,
+    "workflow_run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/40457824944",
+    "workflow_head_sha": "ee6faca98ba9647e19a573851db8a764b96c0ed1",
+    "conclusion": "SUCCESS",
+    "permanent_gate": "PASS",
+    "unknown_scores": 0,
+    "unresolved_opponents": 0,
+    "site_unaccounted_gap_rows": 0,
+    "non_score_fields_changed": 0,
+    "comparison_against_original_archive": "PASS",
+    "all_six_members_integrity": "PASS",
+    "stage6_score_specific_self_challenge": "PASS",
+    "owner_non_d1_sanity_accepted_predecessor": "PRESERVED"
+  },
+  "restrictions": {
+    "historical_authority": "This exact ZIP supersedes the original Research Freeze only for structured team_score/opponent_score serialization. The original literal evidence and other accepted research judgments remain intact.",
+    "old_gonzaga_pr_381": "REJECTED_GATE2_NO_MERGE",
+    "implementation_recovery": "Separate Control Center disposition and fresh Implementation authority are required; prior plan, seal, and Preview are not portable to the new SHA."
+  }
 }

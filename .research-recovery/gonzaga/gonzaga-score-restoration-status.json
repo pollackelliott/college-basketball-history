@@ -1,0 +1,42 @@
+{
+  "kind": "GONZAGA_SUPERSEDING_SCORE_ONLY_RESEARCH_FREEZE_STATUS",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "status": "RESEARCH_FROZEN",
+  "research_frozen": true,
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "source_historical_results_cutoff": "2025-2026",
+  "required_completed_season_cutoff": "2025-2026",
+  "zip_path": ".research-recovery/gonzaga/gonzaga-score-restored-RESEARCH_FROZEN.zip",
+  "zip_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+  "original_freeze_zip_sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+  "original_archive_superseded": true,
+  "preservation": {
+    "games": 2053,
+    "score_pairs_restored": 2053,
+    "exception_rows": 10,
+    "zero_blank_scores": true,
+    "zero_score_result_mismatches": true,
+    "other_csv_fields_changed": 0,
+    "other_package_members_changed": 0,
+    "raw_text_preserved": true,
+    "owner_non_d1_sanity_prior_approval": "PRESERVED",
+    "prior_research_stage6_non_score_conclusions": "PRESERVED"
+  },
+  "research_acceptance": {
+    "status": "PASS",
+    "main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+    "workflow_run_id": 40457824944,
+    "workflow_conclusion": "SUCCESS",
+    "score_self_challenge": "PASS"
+  },
+  "implementation": {
+    "pr_number": 381,
+    "gate2": "REJECTED",
+    "merge": false,
+    "carry_over_owner_gate1_and_sealed_apply": false,
+    "old_PR_not_mutated": true,
+    "new_implementation_gate_required": true
+  },
+  "next_action": "CONTROL CENTER DISPOSITION REQUIRED before any new serialized Gonzaga Implementation intake; no concurrent mutation or owner gate bypass."
+}
