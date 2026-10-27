@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "3fac156617334b989ffc981d119722bdf7ef1519",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "recovered_request_id": "utah-state-phase0-0001",
+  "request_id": "utah-state-phase0-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/utah-state-onboarding"
+}
