@@ -1,0 +1,177 @@
+{
+  "kind": "GONZAGA_SUPERSEDING_RESEARCH_FREEZE_CANDIDATE",
+  "schema_version": 1,
+  "status": "SIX_FILE_SCORE_ONLY_PACKAGE_READY_PENDING_PERMANENT_RESEARCH_ACCEPTANCE",
+  "school_key": "gonzaga",
+  "generated_at": "2026-10-27",
+  "base_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "supersedes": {
+    "original_zip_sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "original_archive_bytes": 81241,
+    "original_transport_commit": "0f240b4f036458883b90f1e69140257d2166bb33"
+  },
+  "candidate": {
+    "zip_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "zip_bytes": 612164,
+    "flat_entries": [
+      {
+        "name": "conferences.csv",
+        "sha256": "73645dc8061576bacaa48732e052ff01a37fc76b1849620bcf22d72a110c5ea0",
+        "size": 1260,
+        "method": 8,
+        "crc32": "de3f597c",
+        "unchanged_from_original": true
+      },
+      {
+        "name": "notes.md",
+        "sha256": "fa9d0824e5a297ae852d6a8f2c97f01dc84a948b20946408c6b066febd216f4b",
+        "size": 1476,
+        "method": 8,
+        "crc32": "e4fbd6bc",
+        "unchanged_from_original": true
+      },
+      {
+        "name": "opponents.csv",
+        "sha256": "e0465ec3ad7da03845c90ed4b84032377f2dbf4ce94f1fdfd0237f1a6ac415fb",
+        "size": 90784,
+        "method": 8,
+        "crc32": "b4380349",
+        "unchanged_from_original": true
+      },
+      {
+        "name": "source-games.csv",
+        "sha256": "d75469e09d9cab9380ddbabfcbb8fc6a37a46d0a2babb73bdb0ad9c0a5a76d2c",
+        "size": 592360,
+        "method": 0,
+        "crc32": "bc288e9b",
+        "unchanged_from_original": false
+      },
+      {
+        "name": "source-notes.md",
+        "sha256": "a275ac22cb347988a2bea7b1c3afa8afbc1970bffcb6636cb4c57567e78d4038",
+        "size": 1902,
+        "method": 8,
+        "crc32": "3c958116",
+        "unchanged_from_original": true
+      },
+      {
+        "name": "venues.csv",
+        "sha256": "ecfb7ca853b63e4a4e631d191d22ff93ae1a504725e0ebef83fddea633b92a8f",
+        "size": 38647,
+        "method": 8,
+        "crc32": "d0840af8",
+        "unchanged_from_original": true
+      }
+    ]
+  },
+  "score_audit": {
+    "row_count": 2053,
+    "rows_scored": 2053,
+    "mechanical_from_literal": 2043,
+    "exception_authority": 10,
+    "blank_score_fields_remaining": 0,
+    "score_result_mismatches": 0,
+    "duplicate_game_ids": 0,
+    "non_score_field_changes": 0,
+    "original_raw_text_rows_preserved": 2053,
+    "unchanged_file_hashes": {
+      "conferences.csv": "73645dc8061576bacaa48732e052ff01a37fc76b1849620bcf22d72a110c5ea0",
+      "notes.md": "fa9d0824e5a297ae852d6a8f2c97f01dc84a948b20946408c6b066febd216f4b",
+      "opponents.csv": "e0465ec3ad7da03845c90ed4b84032377f2dbf4ce94f1fdfd0237f1a6ac415fb",
+      "source-notes.md": "a275ac22cb347988a2bea7b1c3afa8afbc1970bffcb6636cb4c57567e78d4038",
+      "venues.csv": "ecfb7ca853b63e4a4e631d191d22ff93ae1a504725e0ebef83fddea633b92a8f"
+    },
+    "exception_rows": [
+      {
+        "id": "GONZAGA-1960-61-026",
+        "date": "1961-01-15",
+        "team_score": 54,
+        "opponent_score": 68,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-1967-68-009",
+        "date": "1968-01-13",
+        "team_score": 83,
+        "opponent_score": 82,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-1971-72-021",
+        "date": "1972-02-18",
+        "team_score": 78,
+        "opponent_score": 83,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-1992-93-013",
+        "date": "1993-01-15",
+        "team_score": 66,
+        "opponent_score": 67,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-2012-13-014",
+        "date": "2012-12-31",
+        "team_score": 69,
+        "opponent_score": 68,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-2014-15-008",
+        "date": "2014-12-06",
+        "team_score": 63,
+        "opponent_score": 66,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-2014-15-031",
+        "date": "2015-02-28",
+        "team_score": 70,
+        "opponent_score": 73,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-2014-15-038",
+        "date": "2015-03-29",
+        "team_score": 52,
+        "opponent_score": 66,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-2017-18-037",
+        "date": "2018-03-22",
+        "team_score": 60,
+        "opponent_score": 75,
+        "basis": "ADJUDICATED_EXCEPTION"
+      },
+      {
+        "id": "GONZAGA-2022-23-030",
+        "date": "2023-02-25",
+        "team_score": 77,
+        "opponent_score": 68,
+        "basis": "ADJUDICATED_EXCEPTION"
+      }
+    ]
+  },
+  "authority": {
+    "source_adjudication_checkpoint": ".research-recovery/gonzaga/score-restoration-adjudication-20261027.json",
+    "record_book_pdf_sha256": "9bdbdcdc24148aa4f762b7d11da983663ecd5b18da20061a00f757c8c16fe2da",
+    "source_text_is_preserved": true,
+    "prior_non_d1_owner_scan_approval": "PRESERVED",
+    "original_stage6_self_challenge": "PRESERVED_WITH_SCORE_DEFECT_REPAIRED",
+    "status_note": "Candidate is NOT RESEARCH_FROZEN until current-main permanent research-check and narrow adversarial score audit pass. Existing Gonzaga Implementation authority is NOT transferred."
+  },
+  "allowed_mutations": [
+    "new isolated research artifact blob",
+    "new research candidate manifest"
+  ],
+  "forbidden_mutations": [
+    "protected main",
+    "data/gonzaga-onboarding PR #381",
+    "global implementation control",
+    "accepted old freeze bytes",
+    "sealed apply"
+  ]
+}
