@@ -62,7 +62,7 @@
     "gonzaga-phase0-score-restored-0001"
   ],
   "active_expected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
-  "active_lock_commit": null,
+  "active_lock_commit": "fb6809f9ac96e3084d0ccab8a37dfe11f0569661",
   "active_lock_owner": "github-actions:40502478400:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
