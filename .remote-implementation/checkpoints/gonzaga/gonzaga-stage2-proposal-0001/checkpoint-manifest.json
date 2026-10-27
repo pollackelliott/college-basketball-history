@@ -1,0 +1,192 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "9640c7f620107aef1c1a940e51f910562f1237b60ea32eb72477304b6ff982fd",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "9aee0d08a3857d38da8083e30ac7ea1967820c1f0f109a731c84faf36e6bbc1f",
+    "implementation-stage2-status.json": "178809d95e6837cd5ed39e061db965dd58b68633eb0116291060e14c2f3d6948",
+    "last-rehearsal-site-gate.json": "51a4499651e86754cd095e95164b5fc0822ce7f60f65753b1ecd09505a0eeb27",
+    "plan.json": "182254a0d45d4f5612b69c0ebffe4e30670171e58c926f0d06b46f1c4cc7bd68",
+    "review.csv": "7ad6090eedec4caac84601fd99330b46d4c37c65c9cb8ff6e3b4e00aa74cc705",
+    "review.md": "44e76454a05cbfa12545377d417e4f135c7f50d8d69bcec9906bf5ff2b6fc34f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "9aee0d08a3857d38da8083e30ac7ea1967820c1f0f109a731c84faf36e6bbc1f",
+    "implementation-stage2-status.json": "0f0a748892a3d407d0f81c78f3fa25820b006b446d6c7d98b756192f62cf924e",
+    "last-rehearsal-site-gate.json": "51a4499651e86754cd095e95164b5fc0822ce7f60f65753b1ecd09505a0eeb27",
+    "plan.json": "402fdce9f03984e77a2444e95a62513be83147cd0d13b705c32b808cbb4167b4",
+    "review.csv": "7ad6090eedec4caac84601fd99330b46d4c37c65c9cb8ff6e3b4e00aa74cc705",
+    "review.md": "2b2838844b708837c9455140b03fa565287db5c64a698c074b207c1c4e9a84c8"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 38,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "runtime_decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "gonzaga",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 17,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 17,
+      "discrepancy": 34,
+      "identity": 9,
+      "publication": 1
+    },
+    "decision_count": 62,
+    "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "discrepancies_to_add": 34,
+    "existing_game_matches": 421,
+    "new_canonical_games": 1623,
+    "plan_path": ".onboarding/gonzaga/plan.json",
+    "review_path": ".onboarding/gonzaga/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 3,
+      "MATCH_CANONICAL:CBBG-0013575": 1,
+      "MATCH_CANONICAL:CBBG-0042638": 1,
+      "MATCH_CANONICAL:CBBG-0061100": 1,
+      "MATCH_CANONICAL:CBBG-0069448": 1,
+      "MATCH_CANONICAL:CBBG-0116660": 1,
+      "MATCH_CANONICAL:CBBG-0149289": 1,
+      "MATCH_CANONICAL:CBBG-0171862": 1,
+      "MATCH_CANONICAL:CBBG-0172348": 1,
+      "MATCH_CANONICAL:CBBG-0172590": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 10,
+      "NOT_APPLICABLE": 6,
+      "USE_SOURCE": 32
+    },
+    "approved_plan_hash_preview": "9640c7f620107aef1c1a940e51f910562f1237b60ea32eb72477304b6ff982fd",
+    "decision_count": 62,
+    "path": "/tmp/remote-stage2-proposal-map-zt8ut_ce/recommendation-map.json",
+    "sha256": "48436fae5d03b0f8ad6e36a792d5d52aabb483a975fc358df33c5c1b50df28ee"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/gonzaga-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "48436fae5d03b0f8ad6e36a792d5d52aabb483a975fc358df33c5c1b50df28ee",
+  "request_id": "gonzaga-stage2-proposal-0001",
+  "request_sha256": "74a7a0d6f89d18f1af2891222abe606bfb07292d6fc0533a68843cfa81eb3efa",
+  "runtime_commit_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "runtime_decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+  "runtime_tool_sha256": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 1,
+      "neutral_missing_venue": 57,
+      "public_gap_rows": 182,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2053,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 125
+    },
+    "errors": [
+      "1 material site-gap row(s) are not research-accounted. Resolve the site data or populate both site_research_status and site_research_basis after deliberate research. Examples: GONZAGA-1960-61-009 (1960-1961: neutral_missing_venue)"
+    ],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0062947"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0051110",
+        "CBBG-0053380",
+        "CBBG-0062947",
+        "CBBG-0072241",
+        "CBBG-0100141",
+        "CBBG-0103068",
+        "CBBG-0116935",
+        "CBBG-0116956",
+        "CBBG-0148993",
+        "CBBG-0159353",
+        "CBBG-0173412",
+        "CBBG-0173413"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0159353"
+      ],
+      "unknown_site_type": [
+        "CBBG-0171900",
+        "CBBG-0173393",
+        "CBBG-0173394",
+        "CBBG-0173401",
+        "CBBG-0173406",
+        "CBBG-0173414",
+        "CBBG-0173415",
+        "CBBG-0173439",
+        "CBBG-0173441",
+        "CBBG-0173459",
+        "CBBG-0173465",
+        "CBBG-0173474"
+      ]
+    },
+    "history_start_season": "1958-1959",
+    "school_key": "gonzaga",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 181,
+      "neutral_missing_venue": 56,
+      "researched_gap_rows": 180,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 1,
+      "unknown_site_type": 125
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2053
+    },
+    "status": "FAIL",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/gonzaga/gonzaga-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_authority_sha256": "9eaf9a2640f5497060a2689ee0b410598cc63d47626ef4a2582cde5758a913d9",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "target_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+  "tracked_mutation_proof": {
+    "after_head_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+    "after_status": "",
+    "after_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+    "before_head_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+    "before_status": "",
+    "before_tree_sha": "c16b3da36ffe2bcd4c5fa4a97ccc7a0a9ea3a16d",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

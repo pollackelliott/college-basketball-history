@@ -1,0 +1,123 @@
+{
+  "branch": "remote-stage2-census/gonzaga-6f7fb9ef94ea",
+  "capability_census": {
+    "path": ".onboarding/gonzaga/implementation-stage2-capability-census.json",
+    "status": "REPAIR_SCOPE_REQUIRED",
+    "topology_group_count": 1
+  },
+  "head_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "integration_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "integration_semantic_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "last_error": "site_completeness failed with exit code 1",
+  "next_action": "Inspect the preserved site diagnostic and durable capability census. Classify the complete detected failure population before changing history or tooling; if generic permanent tooling is defective, define one consolidated repair scope before merging the first repair. Do not invent a replacement rehearsal wrapper.",
+  "origin_main_sha_at_integration_freeze": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 17,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 17,
+      "discrepancy": 34,
+      "identity": 9,
+      "publication": 1
+    },
+    "decision_count": 62,
+    "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+    "discrepancies_to_add": 34,
+    "existing_game_matches": 421,
+    "new_canonical_games": 1623,
+    "plan_path": ".onboarding/gonzaga/plan.json",
+    "review_path": ".onboarding/gonzaga/review.csv",
+    "warning_count": 0
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 3,
+      "MATCH_CANONICAL:CBBG-0013575": 1,
+      "MATCH_CANONICAL:CBBG-0042638": 1,
+      "MATCH_CANONICAL:CBBG-0061100": 1,
+      "MATCH_CANONICAL:CBBG-0069448": 1,
+      "MATCH_CANONICAL:CBBG-0116660": 1,
+      "MATCH_CANONICAL:CBBG-0149289": 1,
+      "MATCH_CANONICAL:CBBG-0171862": 1,
+      "MATCH_CANONICAL:CBBG-0172348": 1,
+      "MATCH_CANONICAL:CBBG-0172590": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 10,
+      "NOT_APPLICABLE": 6,
+      "USE_SOURCE": 32
+    },
+    "approved_plan_hash_preview": "9640c7f620107aef1c1a940e51f910562f1237b60ea32eb72477304b6ff982fd",
+    "decision_count": 62,
+    "path": "/tmp/remote-stage2-proposal-map-zt8ut_ce/recommendation-map.json",
+    "sha256": "48436fae5d03b0f8ad6e36a792d5d52aabb483a975fc358df33c5c1b50df28ee"
+  },
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 1,
+      "neutral_missing_venue": 57,
+      "public_gap_rows": 182,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2053,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 125
+    },
+    "errors": [
+      "1 material site-gap row(s) are not research-accounted. Resolve the site data or populate both site_research_status and site_research_basis after deliberate research. Examples: GONZAGA-1960-61-009 (1960-1961: neutral_missing_venue)"
+    ],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0062947"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0051110",
+        "CBBG-0053380",
+        "CBBG-0062947",
+        "CBBG-0072241",
+        "CBBG-0100141",
+        "CBBG-0103068",
+        "CBBG-0116935",
+        "CBBG-0116956",
+        "CBBG-0148993",
+        "CBBG-0159353",
+        "CBBG-0173412",
+        "CBBG-0173413"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0159353"
+      ],
+      "unknown_site_type": [
+        "CBBG-0171900",
+        "CBBG-0173393",
+        "CBBG-0173394",
+        "CBBG-0173401",
+        "CBBG-0173406",
+        "CBBG-0173414",
+        "CBBG-0173415",
+        "CBBG-0173439",
+        "CBBG-0173441",
+        "CBBG-0173459",
+        "CBBG-0173465",
+        "CBBG-0173474"
+      ]
+    },
+    "path": ".onboarding/gonzaga/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
