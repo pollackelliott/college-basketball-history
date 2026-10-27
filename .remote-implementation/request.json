@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-census-0001",
+  "request_id": "utah-state-stage2-opponent-display-normalize-0001",
   "school_key": "utah-state",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "b240e6fef07e594a8c4ee2422fb7e6ec0a4fbd16",
-  "previous_control_state_sha256": "619f3b84149e46b22abbb1c56c9fb336f93d4c17a7a9aa5feac22ccc695bca29",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "b4caf9e8a2815f58b4e8b4b989254088a219fcef",
+  "previous_control_state_sha256": "bcf8172ac92ec8721483ef3a3d0690ceed353dac364accea39d6a8be1b35e24b",
   "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "target_branch": "data/utah-state-onboarding",
   "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/utah-state/utah-state-phase0-0002/successor-manifest.json",
-    "sha256": "9b5ea767b7bba5b6336441abff4596cf3d6b076d141d3cd8dbe61791e372fa94"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "53432998a2a990f5e3cb4da55674eef896c4af409d61dbfb554652ba9e1c33b0"
   },
   "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
   "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed after independently verified Utah State Phase 0, authorizing exactly the next ordinary bounded unit: one read-only STAGE2_CENSUS against the exact Phase 0 successor and Integration Freeze. No tracked repair, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, release, recovery, or unrelated mutation authority is granted."
+    "authorization": "Owner said Proceed after independently verified Utah State Stage 2 census BLOCKED solely on exactly 16 deterministic historical opponent-display conflicts. Authorize exactly one census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE operation using the permanent normalizer and existing project authority for the complete detected population. No new historical identity ruling, Phase 0, recovery, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, merge, Production, release, unrelated opponent cleanup, venue maintenance, global maintenance, or other Stage 2 mutation authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -25,8 +25,8 @@
     "release": false,
     "phase0": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_opponent_display_normalize": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
