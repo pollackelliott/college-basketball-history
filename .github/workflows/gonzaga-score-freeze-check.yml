@@ -1,0 +1,96 @@
+name: Gonzaga score-only Research Freeze candidate acceptance
+
+on:
+  push:
+    branches: [research/gonzaga-score-restoration-audit-20261027]
+    paths: [.github/workflows/gonzaga-score-freeze-check.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  research-acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out immutable current protected-main tooling
+        uses: actions/checkout@v4
+        with:
+          ref: 16907c93fb47c5373d4aa9994654e7a6d8315fbb
+          path: main-code
+          persist-credentials: false
+
+      - name: Check out exact candidate and original Freeze transport
+        uses: actions/checkout@v4
+        with:
+          ref: b848e5eeba593808284e41efcad456d567d9859d
+          path: evidence
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify exact source-only score delta and archive identities
+        run: |
+          python - <<'PY'
+          import base64, csv, hashlib, io, json, pathlib, re, zipfile
+          root=pathlib.Path('evidence')
+          support=root/'.research-recovery/gonzaga'
+          manifest=json.loads((support/'gonzaga-score-restored-research-freeze-CANDIDATE.manifest.json').read_text())
+          cases=json.loads((support/'score-restoration-adjudication-20261027.json').read_text())
+          package=(support/'gonzaga-score-restored-research-freeze-CANDIDATE.zip').read_bytes()
+          assert hashlib.sha256(package).hexdigest() == '8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d'
+          assert manifest['candidate']['zip_sha256']==hashlib.sha256(package).hexdigest()
+          original_parts=sorted((root/'.remote-implementation/inputs/gonzaga-stage1-0001').glob('research-frozen.zip.b64.part*'))
+          assert len(original_parts)==11
+          original=base64.b64decode(''.join(p.read_text().strip() for p in original_parts))
+          assert hashlib.sha256(original).hexdigest() == '6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f'
+          a=zipfile.ZipFile(io.BytesIO(original))
+          b=zipfile.ZipFile(io.BytesIO(package))
+          want=['conferences.csv','notes.md','opponents.csv','source-games.csv','source-notes.md','venues.csv']
+          assert a.namelist()==b.namelist()==want
+          assert a.testzip() is None and b.testzip() is None
+          for name in want:
+            content=b.read(name)
+            entry=next(x for x in manifest['candidate']['flat_entries'] if x['name']==name)
+            assert entry['sha256']==hashlib.sha256(content).hexdigest()
+            if name!='source-games.csv': assert content==a.read(name),name
+          old=list(csv.DictReader(io.StringIO(a.read('source-games.csv').decode('utf-8'))))
+          new=list(csv.DictReader(io.StringIO(b.read('source-games.csv').decode('utf-8'))))
+          exceptions={x['source_game_id']:x for x in cases['exceptions']}
+          assert len(old)==len(new)==2053 and len(exceptions)==10
+          seen=set()
+          for before,after in zip(old,new):
+            ident=before['source_game_id']
+            assert ident==after['source_game_id'] and ident not in seen
+            seen.add(ident)
+            assert {k:v for k,v in before.items() if k not in ('team_score','opponent_score')} == {k:v for k,v in after.items() if k not in ('team_score','opponent_score')},ident
+            assert before['team_score']==before['opponent_score']==''
+            ts,os=int(after['team_score']),int(after['opponent_score'])
+            assert ts!=os and (('W' if ts>os else 'L')==before['played_result']),ident
+            matches=re.findall(r'(\d{1,3})\s*[-–]\s*(\d{1,3})',before['raw_text'])
+            assert len(matches)==1,ident
+            if ident in exceptions:
+              x=exceptions[ident]
+              assert (ts,os)==(x['team_score'],x['opponent_score']),ident
+            else: assert (ts,os)==tuple(map(int,matches[0])),ident
+          assert manifest['score_audit']['mechanical_from_literal']==2043
+          assert manifest['score_audit']['exception_authority']==10
+          print('RESEARCH_SCORE_ONLY_DELTA_PASS games=2053 exception=10 other_fields_changed=0')
+          PY
+
+      - name: Run permanent current-main Research Freeze acceptance
+        working-directory: main-code
+        run: |
+          python tools/onboarding_hardening.py research-check \
+            gonzaga \
+            ../evidence/.research-recovery/gonzaga/gonzaga-score-restored-research-freeze-CANDIDATE.zip \
+            --expected-sha256 8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d
+
+      - name: Publish read-only Research acceptance run summary
+        if: always()
+        run: |
+          echo "Research acceptance checked against protected main 16907c93fb47c5373d4aa9994654e7a6d8315fbb" >> "$GITHUB_STEP_SUMMARY"
+          echo "Gonzaga candidate SHA256: 8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d" >> "$GITHUB_STEP_SUMMARY"
+          echo "No tracked basketball data, old Freeze, control state, or PR #381 was mutated." >> "$GITHUB_STEP_SUMMARY"
