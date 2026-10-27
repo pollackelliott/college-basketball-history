@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-proposal-0002",
+  "request_id": "utah-state-stage2-proposal-0004",
   "school_key": "utah-state",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "42707ecb2485dbac84490b0602f2d2e8e91ab23c",
-  "previous_control_state_sha256": "fd0a0c3a4466f4fcf757eb53cef39dcb46fe3f93be67d480f75ba90d3c7ffd9c",
-  "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "previous_control_state_commit": "8b487c7dbb29b025a248dddb520b982d7c397309",
+  "previous_control_state_sha256": "bab90c443bf4fa8e9def382c232fce3ead8842ed4f6105ce89fbfe70e7daa155",
+  "expected_protected_main_sha": "d2de92df9459d689e3ee0898205f4028ea614398",
   "target_branch": "data/utah-state-onboarding",
   "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
   "stage2_authority": {
@@ -17,12 +17,12 @@
   "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
   "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
   "recommendation_map": {
-    "path": ".remote-implementation/requests/utah-state-stage2-proposal-0002/recommendation-map.json",
-    "sha256": "89a814cca66ac1f7933872956ba4a25119fa82e1f4d40bebc6666e5665d7c002"
+    "path": ".remote-implementation/requests/utah-state-stage2-proposal-0004/recommendation-map.json",
+    "sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836"
   },
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Same owner-authorized bounded Utah State Stage 2 proposal-rehearsal unit. The first exact rehearsal was fresh-equivalent but mechanically BLOCKED because CBBG-0021150 ended with site_city=Los Angeles and blank site_state. Exact canonical inspection confirms this is a partial-locality representation gap. Revision 0002 changes no decision action or historical H/A/N ruling; it adds only decision-bound canonical site_state=CA while retaining site_city=Los Angeles on the already-supported Tennessee neutral-site reconciliation. Rerun the same read-only proposal rehearsal only. No Owner Gate 1 approval or downstream mutation authority."
+    "authorization": "Owner proceeded with one fresh read-only proposal rehearsal after Control Center-authorized generic repair PR #385 merged at protected main d2de92df9459d689e3ee0898205f4028ea614398. This replaces an unaccepted transport-only submission that omitted the root control request pointer and stopped STALE_CONTROL_PREDECESSOR before acceptance. Recommendation map 083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836 retains all 166 proposal-0002 decision actions and only the authorized six-game site metadata repair. No Owner Gate 1 or tracked mutation authority."
   },
   "authority": {
     "owner_gate_1": false,
