@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-phase0-score-restored-0001",
+  "school_key": "gonzaga",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "152fa8889c6cb61fe765f83a98e040a6b7417c17",
+  "previous_control_state_sha256": "b2624896c244b6d328de6584d50c87b8120d6def9b91aca2e2768bb53b474e27",
+  "expected_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "target_branch": "data/gonzaga-onboarding",
+  "research_checkpoint": {
+    "sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "3cfc6419017b500f58d136dfb240f6faafaedcb7",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 82
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-score-restored-0001/checkpoint-manifest.json",
+    "sha256": "c91baf9f1361159c5c959eb81c897bd0bb19803e5b0cfac24989647bb889479a"
+  },
+  "history_scope": {
+    "start_season": "1958-1959",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1958-59+",
+    "notes": "Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Control Center — Gonzaga score-restored Implementation restart",
+    "authorization": "Owner said Proceed after fresh read-only Gonzaga Stage 1 PASS against the accepted score-restored Research Freeze. Execute exactly one guarded PHASE0 transaction against current protected main. Reconcile Gonzaga's settled 1958-59+ target scope, apply only Stage 1-approved representation reuse/new target-school registrations, install the corrected six-file package, capture Integration Freeze and stable Phase 0 authority, and stop before Stage 2. No Owner Gate 1/2, release, merge, Production, unrelated maintenance, or other-school authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": true,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
