@@ -1,15 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-reconciliation-diagnostic-0004",
+  "request_id": "utah-state-stage2-proposal-0005",
   "school_key": "utah-state",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "c2421a59e64de62d71ae812bed59ea15a0ac5042",
-  "previous_control_state_sha256": "9a0a5b63b06b09dba84e7b1f0742ee6b74318dbf4e8d78895dcc543f74f953bd",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "661f9b29108ca38e4d4e5461a1770ced78f1e432",
+  "previous_control_state_sha256": "da61f63ae1894cd79eb6321e7cdef5855b4402b7f58f8606cb70702ccc5f2b57",
   "expected_protected_main_sha": "fa65eb3531ab1c9a6e25aaf04628f65585545555",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/utah-state/utah-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "cbf8ce7afdd331fc62be45eb7eb6a1b96ff805a7e8356a8d154055707ac7f482"
+  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/utah-state-stage2-proposal-0004/recommendation-map.json",
+    "sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836"
+  },
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed for exactly one fresh read-only reconciliation diagnostic after PR #388 merged and its exact workflow bootstrap bytes were deployed to control/remote-implementation. Run only representative diagnostic CBBG-0104608 against blocked proposal-0004 using request-authenticated protected main fa65eb3531ab1c9a6e25aaf04628f65585545555. Preserve the existing recommendation map, Utah State data, onboarding branch, Research authority, and historical conclusions. No proposal rehearsal, Gate 1 action, tracked basketball mutation, Preview, release, or merge authority."
+    "authorization": "Owner authorized one phase-sized fresh read-only Stage 2 proposal rehearsal immediately after diagnostic-0004 fully authenticated the representative reconciliation repair on protected main fa65eb3531ab1c9a6e25aaf04628f65585545555. Reuse the exact unchanged 166-decision recommendation map SHA256 083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836. Do not rebuild/edit the map, reopen Research/six-game historical classification, or mutate Utah State tracked basketball state. Stop at fresh-verified OWNER_GATE_1_READY or one genuine residual Stage 2 blocker."
   },
   "authority": {
     "owner_gate_1": false,
@@ -19,27 +32,16 @@
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": true,
+    "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/utah-state-onboarding",
-  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-proposal-0004/checkpoint-manifest.json",
-    "sha256": "496f3459393b47103503b6d6e48144a7ddff86cd2262c322593ee47332712c01"
-  },
-  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
-  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
-  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
-  "recommendation_map_sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
-  "canonical_game_id": "CBBG-0104608"
+  }
 }
