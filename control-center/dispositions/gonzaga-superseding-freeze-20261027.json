@@ -44,7 +44,7 @@
     "head_branch": "data/gonzaga-onboarding",
     "exact_head_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
     "disposition": "REJECTED_AT_OWNER_GATE_2_OBSOLETE_AFTER_RESEARCH_SUPERSESSION",
-    "state_at_disposition": "OPEN_NOT_MERGED",
+    "state_at_disposition": "CLOSED_NOT_MERGED",
     "owner_gate_2_approval": false,
     "original_owner_gate_1_decisions": "PRESERVE_AS_HISTORICAL_EVIDENCE_NOT_PORTABLE",
     "original_approved_plan": "fa5834fa234de37fe6816f5aa9e28b6b38e2826b416683744aae7174338481a4",
@@ -62,16 +62,34 @@
       "sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
       "independently_verified": true
     },
-    "note": "Creating audit ref did not alter or close PR #381, mutate its original head, or alter global control state."
+    "note": "Creating audit ref did not alter or close PR #381, mutate its original head, or alter global control state.",
+    "closed_unmerged": true,
+    "closed_verified_head_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7"
   },
   "branch_lifecycle_constraint": {
     "existing_remote_branch": "data/gonzaga-onboarding",
     "constraint": "Permanent Phase 0 and guarded remote operations require EXACT data/gonzaga-onboarding; alternate suffix branch fails current repository contract.",
     "safe_resolution": "Keep old PR/ref intact until archival and separate branch-retirement approval/execution can be verified. Close rejected PR unmerged, then retire occupied branch through a supported exact-ref workflow before creating fresh data/gonzaga-onboarding from current main. Never force-push, reset, or silently overwrite the branch. If branch deletion is unavailable through connected tools, STOP and obtain a supported exact-ref branch lifecycle action rather than attempting unapproved workaround.",
-    "status": "NOT_PERFORMED_IN_THIS_DISPOSITION"
+    "status": "RETIRED_EXACT_REF",
+    "retirement": {
+      "authorization": "EXPLICIT_CONTROL_CENTER_OWNER_AUTHORIZATION",
+      "workflow_branch": "control-center/gonzaga-pr381-branch-retirement-20261027",
+      "workflow_commit": "f13d6b9abfd640851876ccffce2d13a4294e1414",
+      "workflow_run_id": 40501473137,
+      "workflow_job_id": 122179943539,
+      "conclusion": "SUCCESS",
+      "deleted_ref": "refs/heads/data/gonzaga-onboarding",
+      "deleted_exact_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+      "archive_ref": "refs/heads/archive/gonzaga-pr381-rejected-preview-6d27eb99",
+      "archive_ref_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+      "protected_main_after": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+      "global_control_after": "4ad9814b88d5de827448827c098eb3ebedf68f3e",
+      "force_update_used": false,
+      "old_branch_absent_after": true
+    }
   },
   "new_implementation_authorization": {
-    "status": "AUTHORIZED_IN_PRINCIPLE_AFTER_EXACT_TRANSPORT_AND_BRANCH_BOUNDARY_CLEARANCE",
+    "status": "AUTHORIZED_FOR_FRESH_STAGE1_INVENTORY",
     "research_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
     "preconditions": [
       "Reverify protected main, AGENTS and controlling docs",
@@ -82,12 +100,24 @@
       "Classify all current-main blockers before any Phase 0 mutation"
     ],
     "owners_gates": "New exact Gate 1 review and approval if new decision universe or semantics require; always require a new exact Preview and explicit Owner Gate 2 approval, and exact Production proof.",
-    "no_automatic_research_reopening": true
+    "no_automatic_research_reopening": true,
+    "transport": {
+      "commit_sha": "3cfc6419017b500f58d136dfb240f6faafaedcb7",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 82,
+      "sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+      "independent_verification_run": 40500968367,
+      "verification_status": "PASS"
+    }
   },
   "immediate_next_bounded_unit": {
-    "operation": "PREPARE_GIT_BASE64_PARTS_TRANSPORT_OF_CORRECTED_FREEZE",
-    "mutation_scope": "New immutable transport branch only. No tracked basketball data, global control, old release PR, or old onboarding branch mutation.",
-    "exact_expected_zip_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
-    "acceptance": "Reassemble parts deterministically and verify exactly the six accepted members and the exact ZIP SHA-256; preserve immutable transport Git commit/path prefix/part count."
+    "operation": "FRESH_STAGE1_INVENTORY",
+    "authority": "ROUTINE_READ_ONLY_IMPLEMENTATION_STAGE1",
+    "exact_expected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+    "exact_research_freeze_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "exact_transport_commit": "3cfc6419017b500f58d136dfb240f6faafaedcb7",
+    "exact_transport_path_prefix": ".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/research-frozen.zip.b64.part",
+    "exact_transport_part_count": 82,
+    "precondition": "Recheck protected main and global control state immediately before request publication; no tracked Phase 0 mutation in this bounded unit."
   }
 }
