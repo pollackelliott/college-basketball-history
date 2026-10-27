@@ -2,6 +2,7 @@ import csv
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -440,6 +441,204 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
 
     def test_selected_conditional_researched_unknown_home_provenance_survives_full_path(self):
         self.assert_full_path(target_team_a=True, conditional_identity=True)
+
+
+class RuntimeToolAuthorityTests(unittest.TestCase):
+    def test_stale_data_repo_tools_cannot_override_runtime_gate_tools(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            runtime = root / "runtime"
+            data_repo = root / "data-repo"
+
+            tool_names = [
+                "validate_data.py",
+                "ingest_school.py",
+                "implementation_site_gate.py",
+                "verify_program_accomplishments.py",
+                "build_site_data.py",
+            ]
+            for base, label in ((runtime, "runtime"), (data_repo, "stale-data")):
+                tools = base / "tools"
+                tools.mkdir(parents=True, exist_ok=True)
+                for name in tool_names:
+                    (tools / name).write_text(
+                        f"# {label} {name}\n",
+                        encoding="utf-8",
+                    )
+
+            calls = []
+
+            def fake_run(command, *, cwd, label, echo=True):
+                calls.append(
+                    {
+                        "command": list(command),
+                        "cwd": Path(cwd),
+                        "label": label,
+                    }
+                )
+                return "PASS"
+
+            with (
+                mock.patch.object(onboard_school, "RUNTIME_ROOT", runtime),
+                mock.patch.object(onboard_school, "run", side_effect=fake_run),
+                mock.patch.object(onboard_school, "whitespace_errors", return_value=[]),
+            ):
+                onboard_school.run_gates(
+                    data_repo,
+                    "test",
+                    changed=[],
+                    include_tests=True,
+                )
+
+            by_label = {call["label"]: call for call in calls}
+            for label in (
+                "validation",
+                "target_no_op",
+                "site_completeness",
+                "accomplishments",
+                "site_dry_run",
+            ):
+                executable = Path(by_label[label]["command"][1])
+                self.assertTrue(executable.is_relative_to(runtime / "tools"))
+                self.assertFalse(executable.is_relative_to(data_repo / "tools"))
+                self.assertEqual(by_label[label]["cwd"], data_repo)
+
+            self.assertEqual(by_label["unit_tests"]["cwd"], runtime)
+            self.assertEqual(
+                by_label["unit_tests"]["command"],
+                [
+                    sys.executable,
+                    "-m",
+                    "unittest",
+                    "discover",
+                    "-s",
+                    "tests",
+                    "-p",
+                    "test_*.py",
+                ],
+            )
+
+
+class ExecuteApprovedRuntimeToolAuthorityTests(unittest.TestCase):
+    def test_apply_subprocesses_use_runtime_tools_with_data_repo_argument(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            runtime = root / "runtime"
+            data_repo = root / "data-repo"
+            (runtime / "tools").mkdir(parents=True)
+            (data_repo / "tools").mkdir(parents=True)
+            for name in ("ingest_school.py", "build_site_data.py"):
+                (runtime / "tools" / name).write_text("# runtime\n", encoding="utf-8")
+                (data_repo / "tools" / name).write_text("# stale\n", encoding="utf-8")
+            (data_repo / "data/reconciliation/onboarding-decisions").mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+            calls = []
+
+            def fake_run(command, *, cwd, label, echo=True):
+                calls.append(
+                    {
+                        "command": list(command),
+                        "cwd": Path(cwd),
+                        "label": label,
+                    }
+                )
+                return "PASS"
+
+            approved = {
+                "school_key": "test",
+                "approved_plan_hash": "a" * 64,
+                "decisions": [],
+            }
+            plan_path = data_repo / ".approved-onboarding-plan.json"
+
+            with (
+                mock.patch.object(onboard_school, "RUNTIME_ROOT", runtime),
+                mock.patch.object(onboard_school, "run", side_effect=fake_run),
+                mock.patch.object(
+                    onboard_school,
+                    "write_plan_for_ingest",
+                    side_effect=lambda repo, approved: (
+                        plan_path.write_text("{}", encoding="utf-8") or plan_path
+                    ),
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "apply_pre_ingest_correction_identity_patches",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "apply_pre_ingest_source_patches",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "apply_reconciliation_decisions",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "backfill_reciprocal_only_home_chronology",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "backfill_resolved_target_home_chronology",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "annotate_reciprocal_only_unknown_site_provenance",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "apply_publication_decisions",
+                    return_value={},
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "archive_approved_plan",
+                    return_value=Path(
+                        "data/reconciliation/onboarding-decisions/test-a.json"
+                    ),
+                ),
+                mock.patch.object(
+                    onboard_school,
+                    "site_hashes",
+                    return_value={"test": "same"},
+                ),
+            ):
+                onboard_school.execute_approved_in_place(data_repo, approved)
+
+            by_label = {}
+            for call in calls:
+                by_label.setdefault(call["label"], []).append(call)
+
+            ingest = by_label["ingestion apply"][0]
+            self.assertTrue(
+                Path(ingest["command"][1]).is_relative_to(runtime / "tools")
+            )
+            self.assertFalse(
+                Path(ingest["command"][1]).is_relative_to(data_repo / "tools")
+            )
+            self.assertEqual(ingest["cwd"], data_repo)
+            self.assertIn(str(data_repo), ingest["command"])
+
+            builds = by_label["site build apply"] + by_label["site build determinism replay"]
+            self.assertEqual(len(builds), 2)
+            for build in builds:
+                self.assertTrue(
+                    Path(build["command"][1]).is_relative_to(runtime / "tools")
+                )
+                self.assertFalse(
+                    Path(build["command"][1]).is_relative_to(data_repo / "tools")
+                )
+                self.assertEqual(build["cwd"], data_repo)
+                self.assertEqual(build["command"][-2:], [str(data_repo), "--apply"])
 
 
 if __name__ == "__main__":
