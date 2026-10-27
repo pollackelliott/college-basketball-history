@@ -130,11 +130,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "420377f9b3b19faaf02d1c31890a920e29ce46af82b02da195c457b2b7067125",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "gonzaga-release-readiness-0001",
     "school_key": "gonzaga",
     "target_branch": "data/gonzaga-onboarding",

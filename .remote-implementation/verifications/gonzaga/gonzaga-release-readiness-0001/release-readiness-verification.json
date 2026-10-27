@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "420377f9b3b19faaf02d1c31890a920e29ce46af82b02da195c457b2b7067125",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "readiness_proof_sha256": "3cfa0e0361cd22f60900bcdecc88f6fb5cea0029a13a4da0831232dc7d960d01",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "gonzaga-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+  "tracked_mutation": "NONE"
+}
