@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage1-0003",
+  "school_key": "utah-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "35d546994df7573fd6da13ef39d704939be1e7d4",
+  "previous_control_state_sha256": "25f1a037d40a6a161fd31c00fb5f6c1398fab184a2eb27f681c30d23aa819a59",
+  "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "research_checkpoint": {
+    "sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+    "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "35d546994df7573fd6da13ef39d704939be1e7d4",
+      "path_prefix": ".remote-implementation/inputs/utah-state-stage1-0003/research-frozen.zip.b64.part",
+      "part_count": 14
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State serialized Implementation Stage 1 clean retry",
+    "authorization": "Control Center explicitly authorized immediate clean retry of the same bounded Utah State Stage 1 operation after safely recovering utah-state-stage1-0001. Use the same authenticated final RESEARCH_FROZEN bytes, complete permanent Research acceptance and the full read-only Stage 1 inventory, preserve the durable Stage 1 checkpoint/reconciliation population, then stop. No Phase 0, Stage 2, shared/global basketball mutation, Owner Gate 1, Owner Gate 2, release, merge, Production, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

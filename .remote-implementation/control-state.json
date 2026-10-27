@@ -72,17 +72,18 @@
     "gonzaga-release-preview-verify-score-restored-0001",
     "gonzaga-release-gate2-approval-score-restored-0001",
     "gonzaga-release-production-proof-score-restored-0001",
-    "utah-state-stage1-0001"
+    "utah-state-stage1-0001",
+    "utah-state-stage1-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "utah-state-stage1-0003",
+  "active_request_sha256": "640d6dd1ddb8a8ea0c4f1e21dcb24fab9c4dbb9dc422cfbae4b3bbc54d004c47",
+  "active_school_key": "utah-state",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -174,8 +175,11 @@
       "target_branch": null
     }
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40554526430",
+  "lock_acquisition_request_commit": "675cb38f37f739aed4f175d145a642e851e50147",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
+  "transaction_state": "STAGE1_RUNNING"
 }
