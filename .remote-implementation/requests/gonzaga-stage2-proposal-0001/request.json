@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage2-proposal-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "7505eb8f4b71590d5fc076894828eb2129936082",
+  "previous_control_state_sha256": "c7419e76f9bee65c6423d2c53ac322773c8744fcca1040d9d2c83776517feff2",
+  "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/gonzaga/gonzaga-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "9eaf9a2640f5497060a2689ee0b410598cc63d47626ef4a2582cde5758a913d9"
+  },
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/gonzaga-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "48436fae5d03b0f8ad6e36a792d5d52aabb483a975fc358df33c5c1b50df28ee"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner said Proceed after the exact 62-decision Gonzaga recommendation map was assembled and statically validated against the authoritative Stage 2 universe. Authorize exactly one read-only STAGE2_PROPOSAL_REHEARSAL using recommendation-map SHA-256 48436fae5d03b0f8ad6e36a792d5d52aabb483a975fc358df33c5c1b50df28ee and the fresh-verified post-normalization Stage 2 authority. No Owner Gate 1 or Owner Gate 2 approval, fill, pre-seal, seal, apply, tracked Stage 2 repair, diagnostic, Preview, release, merge, Production, recovery, venue maintenance, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
