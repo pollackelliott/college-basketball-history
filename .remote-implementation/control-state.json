@@ -190,11 +190,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
     "recommendation_map_sha256": "89a814cca66ac1f7933872956ba4a25119fa82e1f4d40bebc6666e5665d7c002",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "utah-state-stage2-proposal-0002",
     "runtime_decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
     "school_key": "utah-state",
