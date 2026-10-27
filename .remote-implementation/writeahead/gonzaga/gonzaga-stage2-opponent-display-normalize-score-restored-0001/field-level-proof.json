@@ -1,0 +1,29 @@
+{
+  "allowed_paths": [
+    "schools/gonzaga/opponents.csv",
+    "schools/gonzaga/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "augustana-illinois",
+    "regis-colorado",
+    "st-thomas-aquinas"
+  ],
+  "opponent_changed_row_count": 3,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "source_game_changed_ids": [
+    "GONZAGA-1960-61-019",
+    "GONZAGA-1975-76-007",
+    "GONZAGA-2009-10-009",
+    "GONZAGA-2014-15-004"
+  ],
+  "source_game_changed_keys": [
+    "augustana-illinois",
+    "regis-colorado",
+    "st-thomas-aquinas"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 4
+}

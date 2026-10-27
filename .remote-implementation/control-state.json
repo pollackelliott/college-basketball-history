@@ -67,15 +67,15 @@
   "active_lock_commit": "b4111e2a04d88c67c50d1b4f7267d07ed68babdd",
   "active_lock_owner": "github-actions:40504932350:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "2eea47c0f41b1eb6a6a7fa195f7af11c3439a560",
+  "active_prepared_tree_sha": "79ee222433785ba00d328847b54cb34d6bc9401c",
   "active_request_id": "gonzaga-stage2-opponent-display-normalize-score-restored-0001",
   "active_request_sha256": "fe4dce8128d9d0ed9bfdd87814b47af7c33f0b3d79a4562afb00834f566a720c",
   "active_school_key": "gonzaga",
   "active_target_branch": "data/gonzaga-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/gonzaga/gonzaga-stage2-opponent-display-normalize-score-restored-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "674fd41771ed59e3e08db3c3cb3b4778cbe3fbe1536d19d985224e57ccf9c941",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -157,5 +157,5 @@
   "lock_acquisition_request_commit": "37e7916c69b6325fb6887e8b5afa88967b3594de",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

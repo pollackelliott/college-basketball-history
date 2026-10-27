@@ -1,0 +1,75 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 3,
+  "change_row_count": 3,
+  "changes": [
+    {
+      "authority_names": [
+        "Augustana College (Ill.)"
+      ],
+      "authority_signature": "augustanacollegeill",
+      "canonical_opponent_key": "augustana-illinois",
+      "from_names": [
+        "Augustana (IL)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Augustana College (Ill.)"
+    },
+    {
+      "authority_names": [
+        "Regis"
+      ],
+      "authority_signature": "regis",
+      "canonical_opponent_key": "regis-colorado",
+      "from_names": [
+        "Regis (CO)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Regis"
+    },
+    {
+      "authority_names": [
+        "St. Thomas Aquinas"
+      ],
+      "authority_signature": "stthomasaquinas",
+      "canonical_opponent_key": "st-thomas-aquinas",
+      "from_names": [
+        "St. Thomas Aquinas (NY)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. Thomas Aquinas"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "source_game_display_change_keys": 3,
+  "source_game_display_change_rows": 4,
+  "source_game_display_changes": [
+    {
+      "from_name": "Regis (CO)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "GONZAGA-1960-61-019",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis (CO)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "GONZAGA-1975-76-007",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Augustana (IL)",
+      "normalized_opponent_key": "augustana-illinois",
+      "source_game_id": "GONZAGA-2009-10-009",
+      "to_name": "Augustana College (Ill.)"
+    },
+    {
+      "from_name": "St. Thomas Aquinas (NY)",
+      "normalized_opponent_key": "st-thomas-aquinas",
+      "source_game_id": "GONZAGA-2014-15-004",
+      "to_name": "St. Thomas Aquinas"
+    }
+  ],
+  "status": "PASS"
+}
