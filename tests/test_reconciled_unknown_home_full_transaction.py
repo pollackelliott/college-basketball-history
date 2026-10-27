@@ -561,7 +561,7 @@ class ExecuteApprovedRuntimeToolAuthorityTests(unittest.TestCase):
                     onboard_school,
                     "write_plan_for_ingest",
                     side_effect=lambda repo, approved: (
-                        plan_path.write_text("{}", encoding="utf-8") or plan_path
+                        plan_path.write_text("{}", encoding="utf-8") and plan_path
                     ),
                 ),
                 mock.patch.object(
