@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "c06a1ebe199c817479e64f66b5a9c13052b210271e6d1aac90c4f0531798a819",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+  "pr_number": 381,
+  "preview_deployment_id": 7349656560,
+  "preview_deployment_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+  "preview_url": "https://college-basketball-history-prn450i3e-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "gonzaga-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7"
+}
