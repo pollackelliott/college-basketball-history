@@ -1,52 +1,31 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-phase0-0002",
+  "request_id": "utah-state-stage2-census-0001",
   "school_key": "utah-state",
-  "operation": "PHASE0",
-  "previous_control_state_commit": "01de2e0915fc3d3284e7bec1d0940a9d10e05fb2",
-  "previous_control_state_sha256": "8c7f40b3f4f6909c548a940cb6de4a2c6be5b53201ee488958e4d24137e9ea35",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "b240e6fef07e594a8c4ee2422fb7e6ec0a4fbd16",
+  "previous_control_state_sha256": "619f3b84149e46b22abbb1c56c9fb336f93d4c17a7a9aa5feac22ccc695bca29",
   "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "target_branch": "data/utah-state-onboarding",
-  "research_checkpoint": {
-    "sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
-    "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "35d546994df7573fd6da13ef39d704939be1e7d4",
-      "path_prefix": ".remote-implementation/inputs/utah-state-stage1-0003/research-frozen.zip.b64.part",
-      "part_count": 14
-    }
+  "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/utah-state/utah-state-phase0-0002/successor-manifest.json",
+    "sha256": "9b5ea767b7bba5b6336441abff4596cf3d6b076d141d3cd8dbe61791e372fa94"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage1-0005/checkpoint-manifest.json",
-    "sha256": "8c5b2991aad72fa123ec57b8c9405f9b1eebccc9b1ba4239637965626c8d1ed1"
-  },
-  "conference_reconciliation": {
-    "path": ".remote-implementation/inputs/utah-state-stage1-0005/conference-reconciliation.json",
-    "sha256": "d8ecfe2ab69e7e90e365910d458cc08151d1a5309d5269bf0e7b61e1390a4001"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/inputs/utah-state-stage1-0004/venue-reconciliation.json",
-    "sha256": "33034ce53f0af4fdcf5ee504f567e29c8350ba913b628be462c5a69ed5f5abe2"
-  },
-  "history_scope": {
-    "start_season": "1903-1904",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Owner-confirmed Utah State historical scope: INCEPTION+. The accepted Research Freeze begins with the 1903-04 program record; current protected-main program-top-level-scope.csv already records Utah State as INCEPTION+."
-  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
   "creation_provenance": {
-    "origin": "ChatGPT Utah State Implementation clean Phase 0 retry",
-    "authorization": "Owner explicitly approved recovery and mechanical correction in this chat. The failed utah-state-phase0-0001 was durably recovered NOT_ATTEMPTED with no target branch/write-ahead/prepared commit. Fresh Stage 1 utah-state-stage1-0005 PASS proved the same accepted historical identity decisions with only conference season serialization normalized to repository-required YYYY-YYYY. Execute one guarded Phase 0 transaction using that exact PASS checkpoint, the same venue reconciliation, and ordinary five safe new target-school venues. Stop before Stage 2."
+    "origin": "ChatGPT Utah State Implementation",
+    "authorization": "Owner said Proceed after independently verified Utah State Phase 0, authorizing exactly the next ordinary bounded unit: one read-only STAGE2_CENSUS against the exact Phase 0 successor and Integration Freeze. No tracked repair, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, release, recovery, or unrelated mutation authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": true,
+    "phase0": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
