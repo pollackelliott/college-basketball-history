@@ -4301,6 +4301,66 @@ def _sync_site_metadata_to_source(
             source["site_research_basis"] = ""
 
 
+def _sync_explicit_source_site_patch_to_canonical(
+    source: dict[str, str],
+    canonical: dict[str, str],
+    venue_map: dict[str, dict[str, str]],
+    patched_fields: set[str],
+) -> None:
+    """Propagate only explicitly Gate-1-patched source site metadata to canonical."""
+
+    canonical_site = canonical.get("site_type", "").strip()
+    if canonical_site in {"", "UNKNOWN"}:
+        return
+    if _assertion_site_to_canonical(source, canonical) != canonical_site:
+        return
+
+    registry_fields: list[str] = []
+    if "curated_venue_name" in patched_fields:
+        venue_name = source.get("curated_venue_name", "").strip()
+        if venue_name:
+            venue = ingest_school.resolve_venue_metadata(source, venue_map)
+            venue_key = venue.get("venue_key", "").strip()
+            venue_id = venue.get("venue_id", "").strip()
+            if bool(venue_key) != bool(venue_id):
+                raise WorkflowError(
+                    "explicit source site patch resolved only one half of venue_key/venue_id"
+                )
+            if not venue_key:
+                raise WorkflowError(
+                    "explicit nonblank source venue patch did not resolve a registered venue identity"
+                )
+            canonical["venue_key"] = venue_key
+            canonical["venue_id"] = venue_id
+            registry_fields.extend(("venue_key", "venue_id"))
+            if not ({"city", "state"} & patched_fields) and location_pair_status(
+                venue.get("city", ""), venue.get("state", "")
+            ) == "complete":
+                canonical["site_city"] = venue["city"].strip()
+                canonical["site_state"] = venue["state"].strip()
+                registry_fields.extend(("site_city", "site_state"))
+
+    if {"city", "state"} & patched_fields:
+        if location_pair_status(source.get("city", ""), source.get("state", "")) != "complete":
+            raise WorkflowError(
+                "explicit source site locality patch must leave a complete city/state pair"
+            )
+        canonical["site_city"] = source["city"].strip()
+        canonical["site_state"] = source["state"].strip()
+
+    if registry_fields:
+        canonical["notes"] = append_note(
+            canonical.get("notes", ""),
+            registry_fallback_marker(
+                source.get("source_program_key", ""),
+                source.get("source_game_id", ""),
+                canonical["venue_key"],
+                canonical_site,
+                registry_fields,
+            ),
+        )
+
+
 def _venue_maps(
     repo: Path,
     school_key: str,
@@ -4705,14 +4765,11 @@ def _record_reconciled_unresolved_home_venue_markers(
     assertion_rows: list[dict[str, str]],
     discrepancy_rows: list[dict[str, str]],
 ) -> dict[str, int]:
-    """Mark the narrow owner-approved reconciliation-backed HOME venue exception."""
+    """Mark narrow reconciliation-backed HOME venue exceptions."""
 
     counts = Counter()
-
     for item in reconciliation_items:
-        if item.get("field_name") != "site_type":
-            continue
-        if item.get("decision") == "LEAVE_UNRESOLVED":
+        if item.get("field_name") != "site_type" or item.get("decision") == "LEAVE_UNRESOLVED":
             continue
 
         game_id = item["canonical_game_id"]
@@ -4736,20 +4793,15 @@ def _record_reconciled_unresolved_home_venue_markers(
             continue
         if canonical.get("venue_key", "").strip() or canonical.get("venue_id", "").strip():
             continue
-        if (
-            location_pair_status(
-                canonical.get("site_city", ""),
-                canonical.get("site_state", ""),
-            )
-            != "complete"
-        ):
+        if location_pair_status(canonical.get("site_city", ""), canonical.get("site_state", "")) != "complete":
             continue
         if canonical.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
             continue
 
         source_site = _assertion_site_to_canonical(source, canonical)
-        if source_site in {"", "UNKNOWN", canonical_site}:
+        if source_site in {"", canonical_site}:
             continue
+        source_unknown = source_site == "UNKNOWN"
 
         site_reviews = [
             row
@@ -4775,36 +4827,67 @@ def _record_reconciled_unresolved_home_venue_markers(
         ]
         if not agreeing:
             continue
-
-        # A known physical venue from evidence agreeing with canonical HOME must
-        # be propagated/reconciled rather than waived.
-        if any(
-            assertion.get("curated_venue_name", "").strip()
-            for assertion in agreeing
-        ):
+        if any(assertion.get("curated_venue_name", "").strip() for assertion in agreeing):
             continue
 
         canonical_location = (
             canonical.get("site_city", "").strip(),
             canonical.get("site_state", "").strip(),
         )
+
+        if source_unknown:
+            if (
+                source.get("site_research_status", "").strip().upper()
+                != "RESEARCHED_UNRESOLVED"
+                or not source.get("site_research_basis", "").strip()
+            ):
+                continue
+            patch = item.get("canonical_patch", {})
+            if (
+                str(patch.get("site_city", "") or "").strip(),
+                str(patch.get("site_state", "") or "").strip(),
+            ) != canonical_location:
+                continue
+            reciprocal_locations = {
+                (a.get("city", "").strip(), a.get("state", "").strip())
+                for a in agreeing
+                if location_pair_status(a.get("city", ""), a.get("state", "")) == "complete"
+            }
+            if reciprocal_locations and reciprocal_locations != {canonical_location}:
+                continue
+            reciprocal = sorted(
+                agreeing,
+                key=lambda row: (
+                    row.get("source_program_key", ""),
+                    row.get("source_game_id", ""),
+                ),
+            )[0]
+            marker = (
+                "[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
+                f"source={school_key}/{source_game_id} "
+                f"reciprocal={reciprocal.get('source_program_key', '').strip()}/"
+                f"{reciprocal.get('source_game_id', '').strip()}]"
+            )
+            old_notes = canonical.get("notes", "")
+            canonical["notes"] = _append_note(old_notes, marker)
+            if canonical["notes"] == old_notes:
+                counts["reconciled_unknown_site_home_venue_markers_existing"] += 1
+            else:
+                counts["reconciled_unknown_site_home_venue_markers_added"] += 1
+            continue
+
         location_support = [
             assertion
             for assertion in agreeing
-            if location_pair_status(
-                assertion.get("city", ""),
-                assertion.get("state", ""),
-            )
+            if location_pair_status(assertion.get("city", ""), assertion.get("state", ""))
             == "complete"
             and (
                 assertion.get("city", "").strip(),
                 assertion.get("state", "").strip(),
-            )
-            == canonical_location
+            ) == canonical_location
         ]
         if not location_support:
             continue
-
         reciprocal = sorted(
             location_support,
             key=lambda row: (
@@ -4812,7 +4895,6 @@ def _record_reconciled_unresolved_home_venue_markers(
                 row.get("source_game_id", ""),
             ),
         )[0]
-
         marker = (
             "[RECONCILED_UNRESOLVED_HOME_VENUE "
             f"source={school_key}/{source_game_id} "
@@ -4825,9 +4907,7 @@ def _record_reconciled_unresolved_home_venue_markers(
             counts["reconciled_home_venue_markers_existing"] += 1
         else:
             counts["reconciled_home_venue_markers_added"] += 1
-
     return dict(counts)
-
 
 def _record_reciprocal_discrepancies(
     school_key: str,
@@ -5870,8 +5950,18 @@ def apply_reconciliation_decisions(
             canonical_patch,
             valid_venue_pairs=global_venue_pairs,
         )
+        source_patch_fields = set(item.get("source_patch", {}))
         for field, value in item.get("source_patch", {}).items():
             source[field] = value
+        if source_patch_fields & {"curated_site_type", "curated_venue_name", "city", "state"}:
+            if target_venue_metadata is None or venue_names is None:
+                target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+            _sync_explicit_source_site_patch_to_canonical(
+                source,
+                canonical,
+                target_venue_metadata,
+                source_patch_fields,
+            )
         if decision == "NORMALIZE_SOURCE_TO_CANONICAL" or item.get("source_patch"):
             note = (
                 f"Owner-approved onboarding reconciliation {approved['approved_plan_hash'][:12]}: "
