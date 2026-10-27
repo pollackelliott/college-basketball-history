@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-release-readiness-score-restored-0001",
+  "school_key": "gonzaga",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "2a1dc60adbfc200abe25c7c2dfe74071599ca166",
+  "previous_control_state_sha256": "2940c908be3966144a0448c81b6625bf968fdb8756c51c6fad0a9ecdc8d291ce",
+  "expected_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "f124b9098c68d53127dc7671bb9eb0604dd20b0b",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/gonzaga/gonzaga-stage2-sealed-apply-score-restored-0001/successor-manifest.json",
+    "sha256": "95dc80dff812639770bb38f1a51c8f74188f3d18c5acb6f6ae5ea69590dcdb99"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/gonzaga/gonzaga-stage2-sealed-apply-score-restored-0001/stage2-sealed-apply-verification.json",
+    "sha256": "f80f6f3066593aa32ba50916c4b33fb64eb8393317bbaed15b1018faa6d231ee"
+  },
+  "approved_plan_hash": "93fef75167acf9c861bc87a4e6279909d60ed51429190245cc02bca565b1a542",
+  "release_manifest_sha256": "bdbfaa4151ac8ee4cc217c2e57ef10c23b23865bc7e7c315f28c55fd09c33375",
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation — score-restored restart",
+    "authorization": "Owner said Proceed after the exact score-restored Gonzaga sealed-apply successor f124b9098c68d53127dc7671bb9eb0604dd20b0b was independently fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against that successor. It may authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation only. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

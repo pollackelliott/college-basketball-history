@@ -66,18 +66,19 @@
     "gonzaga-stage2-gate1-fill-score-restored-0001",
     "gonzaga-stage2-preseal-score-restored-0001",
     "gonzaga-stage2-gate1-seal-score-restored-0001",
-    "gonzaga-stage2-sealed-apply-score-restored-0001"
+    "gonzaga-stage2-sealed-apply-score-restored-0001",
+    "gonzaga-release-readiness-score-restored-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "gonzaga-release-readiness-score-restored-0001",
+  "active_request_sha256": "5308b8cb83347e21d8f1328044bd3ad81246b15ef7b2ade60ce78c2b32f3b249",
+  "active_school_key": "gonzaga",
+  "active_target_branch": "data/gonzaga-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -168,8 +169,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/gonzaga/gonzaga-stage2-sealed-apply-score-restored-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "aba1c5d80aa614ed0ef32419d12a73bd420055e4161368f2f26caf1910b2450e"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40522229456",
+  "lock_acquisition_request_commit": "8904186216394e0f750f92f73d61ef39adc80550",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
