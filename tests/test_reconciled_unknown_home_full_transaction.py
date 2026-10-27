@@ -199,7 +199,7 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
             repo = Path(directory)
 
             ordinary = source_row("TEST-ORDINARY")
-            conditional = source_row("TEST-CONDITIONAL")
+            conditional = source_row("TEST-CONDITIONAL", opponent="zeta")
             canonical = [
                 canonical_row(
                     "CBBG-ORDINARY",
@@ -210,7 +210,7 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
                 canonical_row(
                     "CBBG-CONDITIONAL",
                     team_a="test",
-                    team_b="other",
+                    team_b="zeta",
                     site_type="TEAM_A_HOME",
                 ),
                 canonical_row(
@@ -227,7 +227,9 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
                 assertion_from_source(
                     conditional, "CBBG-CONDITIONAL", "ASRT-TEST-CONDITIONAL"
                 ),
-                reciprocal_assertion("CBBG-CONDITIONAL", "OTHER-CONDITIONAL"),
+                reciprocal_assertion(
+                    "CBBG-CONDITIONAL", "ZETA-CONDITIONAL", source_program="zeta"
+                ),
                 reciprocal_assertion("CBBG-BACKFILL", "OTHER-BACKFILL"),
             ]
             discrepancies = [
@@ -267,12 +269,6 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
                         "site_research_basis": "",
                     },
                     {
-                        **source_row("OTHER-CONDITIONAL", opponent="test"),
-                        "source_program_key": "other",
-                        "curated_site_type": "OPPONENT_HOME",
-                        "site_research_status": "",
-                        "site_research_basis": "",
-                    },
                     {
                         **source_row("OTHER-BACKFILL", opponent="test"),
                         "source_program_key": "other",
@@ -282,6 +278,19 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
                         "site_research_status": "",
                         "site_research_basis": "",
                     },
+                ],
+            )
+            write_csv(
+                repo / "schools/zeta/source-games.csv",
+                SOURCE_FIELDS,
+                [
+                    {
+                        **source_row("ZETA-CONDITIONAL", opponent="test"),
+                        "source_program_key": "zeta",
+                        "curated_site_type": "OPPONENT_HOME",
+                        "site_research_status": "",
+                        "site_research_basis": "",
+                    }
                 ],
             )
             write_csv(
@@ -388,11 +397,11 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
             by_id = {row["canonical_game_id"]: row for row in first_rows}
             for game_id, source_id, reciprocal_id in (
                 ("CBBG-ORDINARY", "TEST-ORDINARY", "OTHER-ORDINARY"),
-                ("CBBG-CONDITIONAL", "TEST-CONDITIONAL", "OTHER-CONDITIONAL"),
+                ("CBBG-CONDITIONAL", "TEST-CONDITIONAL", "ZETA-CONDITIONAL"),
             ):
                 marker = (
                     "[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
-                    f"source=test/{source_id} reciprocal=other/{reciprocal_id}]"
+                    f"source=test/{source_id} reciprocal={'zeta' if 'CONDITIONAL' in game_id else 'other'}/{reciprocal_id}]"
                 )
                 row = by_id[game_id]
                 self.assertEqual(row["venue_key"], "")
