@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-release-gate2-approval-score-restored-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "gonzaga-release-production-proof-score-restored-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "gonzaga",
-  "previous_control_state_commit": "186950e3d4f97ea356bcd0c329b541cf7946236e",
-  "previous_control_state_sha256": "20f16d0e043fe8d9211d6bbebf1ee092303e5f37f8fe83aefd90995707776aab",
-  "expected_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "previous_control_state_commit": "08162627e09f63612e89dfd3f1b95f68196df63a",
+  "previous_control_state_sha256": "865e6a42b51323ea308a3e9f136622b6c2ec30022eb359ea56927f8bbfb9761f",
+  "expected_protected_main_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
   "target_branch": "data/gonzaga-onboarding",
   "target_sha": "f124b9098c68d53127dc7671bb9eb0604dd20b0b",
   "pr_number": 383,
-  "approved_plan_hash": "93fef75167acf9c861bc87a4e6279909d60ed51429190245cc02bca565b1a542",
-  "release_manifest_sha256": "bdbfaa4151ac8ee4cc217c2e57ef10c23b23865bc7e7c315f28c55fd09c33375",
-  "preview_deployment_id": 7361018663,
-  "preview_url": "https://college-basketball-history-a0o4ypfto-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-release-preview-verify-score-restored-0001/checkpoint-manifest.json",
-    "sha256": "4974479bf794010c9329d8118dbd8f451cf53e801391d0484b582f3a164e756d"
+  "merge_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-release-gate2-approval-score-restored-0001/checkpoint-manifest.json",
+    "sha256": "e60115c159a47c1dc67a887b054950d4e3acfee1e8319c2f88a29504c004de4c"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/gonzaga/gonzaga-release-preview-verify-score-restored-0001/release-preview-verification.json",
-    "sha256": "d1107f806da9e3f82063de2f72ae3f9ee80d297e91ea36b9395c941a1f3192b6"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: “APPROVED. Proceed” after being presented the exact fresh-verified Gonzaga PR #383 Preview and explicitly told that an affirmative approval was required at Owner Gate 2.",
-    "preview_checkpoint_sha256": "4974479bf794010c9329d8118dbd8f451cf53e801391d0484b582f3a164e756d",
-    "preview_verification_sha256": "d1107f806da9e3f82063de2f72ae3f9ee80d297e91ea36b9395c941a1f3192b6",
-    "pr_number": 383,
-    "pr_head_sha": "f124b9098c68d53127dc7671bb9eb0604dd20b0b",
-    "preview_deployment_id": 7361018663,
-    "preview_url": "https://college-basketball-history-a0o4ypfto-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/gonzaga/gonzaga-release-gate2-approval-score-restored-0001/gate2-approval-verification.json",
+    "sha256": "e236b80aa725edcc0bb7f715040f86f0caa5077e9f7db9ee517094fdd9928f5c"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Gonzaga Implementation — score-restored restart",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” for the exact fresh-verified Gonzaga PR #383 Preview at head f124b9098c68d53127dc7671bb9eb0604dd20b0b and Vercel Preview deployment 7361018663. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "origin": "ChatGPT Gonzaga Implementation — score-restored release completion",
+    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector then rechecked protected main, exact PR #383 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one standard two-parent merge. GitHub merged exact approved head f124b9098c68d53127dc7671bb9eb0604dd20b0b as 31c64f378eaf7386f6b4782ca1ab0c1ca9583c80 with first parent 16907c93fb47c5373d4aa9994654e7a6d8315fbb. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
   },
   "authority": {
     "phase0": false,
@@ -51,9 +38,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
