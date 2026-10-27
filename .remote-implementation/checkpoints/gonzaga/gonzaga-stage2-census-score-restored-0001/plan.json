@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "gonzaga",
+  "created_at": "2026-10-27T12:25:48.620888+00:00",
+  "input_fingerprint": {
+    "sha256": "6e4e40335e27434decb0752c65623a8e3876d317631f29f97db2df26151f8e3f",
+    "git_head": "d64aee40fa72b8a78b51594c216715081f8a249f",
+    "files": {
+      "schools/gonzaga/source-games.csv": "d75469e09d9cab9380ddbabfcbb8fc6a37a46d0a2babb73bdb0ad9c0a5a76d2c",
+      "schools/gonzaga/opponents.csv": "e0465ec3ad7da03845c90ed4b84032377f2dbf4ce94f1fdfd0237f1a6ac415fb",
+      "schools/gonzaga/venues.csv": "57e1c7c75e9e188b703e4680d0ab5531736869f67b5cb1b28617d432c9fa9874",
+      "schools/gonzaga/conferences.csv": "73645dc8061576bacaa48732e052ff01a37fc76b1849620bcf22d72a110c5ea0",
+      "schools/gonzaga/notes.md": "3fcc61d521c61b77706df95d3c0cc0a051d9c18b806f70cd74373e4d271cfea4",
+      "schools/gonzaga/source-notes.md": "a275ac22cb347988a2bea7b1c3afa8afbc1970bffcb6636cb4c57567e78d4038",
+      "data/canonical/games.csv": "9edc390671a52232c9be0272f3a64a8f54a57d0a658485c20a88cc02b453c27d",
+      "data/evidence/game-assertions.csv": "56f56e72f99179fadea714d12b6726088b62d64c5ab30ca07b65fc1aafe8718f",
+      "data/reconciliation/discrepancies.csv": "cf8af8f7d9058b45289be389c16f37dabe32f09e7d2606f0d8f0141fdd9473f0",
+      "data/reference/programs.csv": "eb6dbcb93dedf2959290bc2bbdd1b559d3172be005c6fdf2a6242cf5a192fcc2",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "58181ba4080d1fb5158bf8c6069e8ecc4e6c21f86ae4f94a3a9f533e27f00249",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "4d8c561c1fb1d6464fcc4294c07fafced37bce0518af18439522c7f1de90c8e7",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "23537ef3a9d1825c38c22189d9274980f10759970b978a600948bef74d6895f8",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "2ff31bbef154741e7be730206e2c8dfdcb0a26626fbaab593b305ed9eef4e794",
+      "tools/onboarding_plan.py": "52af116befe815950162e95936fa83bfb6f233208e507ef6e51b5dd41d372e46",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: augustana-illinois: ['Augustana (IL)', 'Augustana College (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: regis-colorado: ['Regis', 'Regis (CO)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: st-thomas-aquinas: ['St. Thomas Aquinas', 'St. Thomas Aquinas (NY)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2053,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 403,
+      "venues": 77,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: augustana-illinois: ['Augustana (IL)', 'Augustana College (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: regis-colorado: ['Regis', 'Regis (CO)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-thomas-aquinas: ['St. Thomas Aquinas', 'St. Thomas Aquinas (NY)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

@@ -1,0 +1,78 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+    "implementation-stage2-status.json": "8e65697ca883309a94feb94111957a81135d297ae546a366d19a678701715931",
+    "plan.json": "8e4323b97dca03fd3de3f42484bbd1a3dc73c5cc7cfb7ca4873659d109556106",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "dd32b0403508778bc6fb0d387edb0521748604f482f5ebc328412c8314fb840f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+    "implementation-stage2-status.json": "5bf54e6d9fb42823459913b97567b2405e962590a0a0a0d3cb7f83a32a9dc5ae",
+    "plan.json": "940b015b796b8c6586d07266fe6545592a480d1af913ca34a38c7f1253e5f62d",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "fb41eeb1dc552f3d33dce7c5ae221c3541e9ec139e378dc0fa518c46fc9c370c"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 3,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 3,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "531ef97f658599b9410768bec169645338d22ff533e603b7ecfe2de6c16d71ac",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "gonzaga"
+  ],
+  "phase0_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "phase0_successor_path": ".remote-implementation/successors/gonzaga/gonzaga-phase0-score-restored-0001/successor-manifest.json",
+  "phase0_successor_sha256": "347c749bf061fe4a0ed1c8b7ff8d4d899cb0fbd094e9b4619035f7fe5251baf6",
+  "preflight": {
+    "blocker_count": 3,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/gonzaga/plan.json",
+    "review_path": ".onboarding/gonzaga/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "request_id": "gonzaga-stage2-census-score-restored-0001",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_snapshot_sha256": "c21ce7736499499e75603242c76e7cd1f160ee125f6cc2747d57ae5da9ebb14f",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "d64aee40fa72b8a78b51594c216715081f8a249f",
+  "target_tree_sha": "fcda1b5b318a6dd6184f5d309086f5dfa369e712",
+  "tracked_mutation_proof": {
+    "after_head_sha": "d64aee40fa72b8a78b51594c216715081f8a249f",
+    "after_status": "",
+    "after_tree_sha": "fcda1b5b318a6dd6184f5d309086f5dfa369e712",
+    "before_head_sha": "d64aee40fa72b8a78b51594c216715081f8a249f",
+    "before_status": "",
+    "before_tree_sha": "fcda1b5b318a6dd6184f5d309086f5dfa369e712",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
