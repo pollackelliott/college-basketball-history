@@ -1,0 +1,137 @@
+{
+  "counts": {
+    "home_missing_both": 2,
+    "home_missing_location": 2,
+    "home_missing_venue": 14,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 4,
+    "neutral_missing_venue": 70,
+    "public_gap_rows": 467,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 9,
+    "researched_unresolved_home_venue_rows": 9,
+    "strict_home_gap": 5,
+    "strict_home_gap_rows": 5,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2968,
+    "target_source_information_loss": 5,
+    "target_source_location_lost": 3,
+    "target_source_venue_lost": 2,
+    "unaccounted_public_gap": 2,
+    "unaccounted_public_gap_rows": 2,
+    "unknown_site_type": 383
+  },
+  "errors": [
+    "5 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+    "target source evidence was lost in the canonical result: target_source_venue_lost=2, target_source_location_lost=3",
+    "2 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0104608",
+      "CBBG-0107294"
+    ],
+    "home_missing_location": [
+      "CBBG-0104608",
+      "CBBG-0107294"
+    ],
+    "home_missing_venue": [
+      "CBBG-0104027",
+      "CBBG-0104048",
+      "CBBG-0104055",
+      "CBBG-0104064",
+      "CBBG-0104608",
+      "CBBG-0106677",
+      "CBBG-0106688",
+      "CBBG-0106693",
+      "CBBG-0106705",
+      "CBBG-0106709",
+      "CBBG-0106719",
+      "CBBG-0106726"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0039736",
+      "CBBG-0050920",
+      "CBBG-0175163",
+      "CBBG-0177017"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0020787",
+      "CBBG-0021150",
+      "CBBG-0036817",
+      "CBBG-0039736",
+      "CBBG-0040749",
+      "CBBG-0041456",
+      "CBBG-0048116",
+      "CBBG-0050920",
+      "CBBG-0066709",
+      "CBBG-0068699",
+      "CBBG-0070984",
+      "CBBG-0071406"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0104055",
+      "CBBG-0104064",
+      "CBBG-0106677",
+      "CBBG-0106688",
+      "CBBG-0106693",
+      "CBBG-0106705",
+      "CBBG-0106719",
+      "CBBG-0106726",
+      "CBBG-0112967"
+    ],
+    "strict_home_gap": [
+      "CBBG-0104027",
+      "CBBG-0104048",
+      "CBBG-0104608",
+      "CBBG-0106709",
+      "CBBG-0107294"
+    ],
+    "target_source_location_lost": [
+      "CBBG-0050920",
+      "CBBG-0104608",
+      "CBBG-0107294"
+    ],
+    "target_source_venue_lost": [
+      "CBBG-0104608",
+      "CBBG-0107294"
+    ],
+    "unaccounted_public_gap": [
+      "CBBG-0104608",
+      "CBBG-0107294"
+    ],
+    "unknown_site_type": [
+      "CBBG-0067844",
+      "CBBG-0067845",
+      "CBBG-0067851",
+      "CBBG-0067852",
+      "CBBG-0112871",
+      "CBBG-0175011",
+      "CBBG-0175012",
+      "CBBG-0175013",
+      "CBBG-0175014",
+      "CBBG-0175015",
+      "CBBG-0175016",
+      "CBBG-0175017"
+    ]
+  },
+  "history_start_season": "1903-1904",
+  "school_key": "utah-state",
+  "source_site_counts": {
+    "home_missing_venue": 9,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 494,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 70,
+    "researched_gap_rows": 494,
+    "researched_unresolved_home_venue_rows": 9,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 415
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2964
+  },
+  "status": "FAIL",
+  "warnings": []
+}
