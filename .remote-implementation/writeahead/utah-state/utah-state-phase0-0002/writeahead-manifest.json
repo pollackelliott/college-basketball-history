@@ -1,0 +1,739 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/utah-state/conferences.csv",
+    "schools/utah-state/notes.md",
+    "schools/utah-state/opponents.csv",
+    "schools/utah-state/source-games.csv",
+    "schools/utah-state/source-notes.md",
+    "schools/utah-state/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "cda5df732b430f753ebb9881a10a6e7a633d968d08d294daad4d9c9266b6d036",
+    "data/reference/venue-names.csv": "f75c1dc11d214f3b2d261d8d30aaa89a3c63b2783aea9b670e5b7278c06d9adf",
+    "data/reference/venues.csv": "59b4f3b9c13205bd95c7b34269932e17af9cd9614a9d81c9d60bb9b6661e6829",
+    "schools/utah-state/conferences.csv": "1761c05d50fcee786180817666ce7ea34e0c8564ba1b569057ea6f5ddd024b62",
+    "schools/utah-state/notes.md": "62dd5445f0c804c670a27f5cb4261325b81419298869cff51ee1e70ce8d71acd",
+    "schools/utah-state/opponents.csv": "ef4c5d2bd06ef54c465011646ff92bb2f6b40c8aab726b7cf57d1e502a88d786",
+    "schools/utah-state/source-games.csv": "d9cec5789cf7d8e5d0e627d65086cf1cd4e059ff60e2d59457a9aa455892e844",
+    "schools/utah-state/source-notes.md": "799806302cb894548535e57c35552658f0f4488ab777696a9857f8786d9cae17",
+    "schools/utah-state/venues.csv": "096c2dce256a7d7330dfeb3f1cc366cbdfa00edba56e00cf64a9f6a4f7f37152"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/utah-state/conferences.csv",
+    "schools/utah-state/notes.md",
+    "schools/utah-state/opponents.csv",
+    "schools/utah-state/source-games.csv",
+    "schools/utah-state/source-notes.md",
+    "schools/utah-state/venues.csv"
+  ],
+  "commit_message": "Add Utah State onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "facf2bfcf0a84d229b345da9345ddfaf7d226b7dc65d41211cf07d354ce8705d",
+    "owner_approval_basis": "Control Center disposition — Utah State Stage 1 reconciliation (2026-10-27): representation-only reconciliation based on the durable utah-state-stage1-0003 checkpoint and current protected-main conference identity evidence. Pacific Coast Athletic Association is the same continuous conference lineage as Big West; change only the canonical key pcaa → big-west for 1978-79 through 1987-88 while preserving the frozen historical display name and all other frozen row fields. No new global conference registration. This is not Owner Gate 1 authority. Owner-approved mechanical integration correction (2026-10-27): normalize only start_season/end_season serialization from equivalent YYYY-YY to repository-required YYYY-YYYY before installed-school validation; no historical interval, identity, display name, membership type, basis, notes, or other meaning changes.",
+    "registration_count": 0,
+    "registrations": [],
+    "replacement_history": [
+      {
+        "basis": "Utah State media guide all-time results 1903-04 through 1916-17, no league records or conference-game markers before 1917-18.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1916-1917",
+        "membership_type": "independent",
+        "notes": "Early pre-Rocky Mountain classification; years with no recorded competition do not represent manufactured games.",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "1903-1904"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results 1917-18 first Rocky Mountain record and subsequent RM season/game labels through 1936-37.",
+        "conference_key": "rocky-mountain",
+        "conference_name": "Rocky Mountain Conference",
+        "end_season": "1936-1937",
+        "membership_type": "conference",
+        "notes": "Rocky Mountain historical identity accepted in protected-main conference registry.",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "1917-1918"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results; 1937-38 through 1961-62 Mountain States / MSAC annual standings and game markers.",
+        "conference_key": "mountain-states",
+        "conference_name": "Mountain States Conference",
+        "end_season": "1961-1962",
+        "membership_type": "conference",
+        "notes": "Mountain States historical identity accepted in protected-main conference registry.",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "1937-1938"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results 1962-63 through 1977-78; annual records have no conference-standings line or recurring conference-game code.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1977-1978",
+        "membership_type": "independent",
+        "notes": "Post-Mountain States, pre-PCAA independent interval; not inferred from opponent geography.",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "1962-1963"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results: PCAA season standings and PC conference-game markers 1978-79 through 1987-88; owner normalized tournament-site reference conference key pcaa.",
+        "conference_key": "big-west",
+        "conference_name": "Pacific Coast Athletic Association",
+        "end_season": "1987-1988",
+        "membership_type": "conference",
+        "notes": "Research-local historical PCAA identity; no corresponding global conference identity registered at verified main; Integration must reconcile explicitly.",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "1978-1979"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results: Big West season standings and BW conference-game markers 1988-89 through 2004-05.",
+        "conference_key": "big-west",
+        "conference_name": "Big West",
+        "end_season": "2004-2005",
+        "membership_type": "conference",
+        "notes": "",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "1988-1989"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results: WAC standings and WAC game markers 2005-06 through 2012-13.",
+        "conference_key": "wac",
+        "conference_name": "WAC",
+        "end_season": "2012-2013",
+        "membership_type": "conference",
+        "notes": "",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "2005-2006"
+      },
+      {
+        "basis": "Utah State 2025-26 media guide all-time results: Mountain West standings and MW game markers from 2013-14 through 2024-25; 2025-26 official completed-season supplement and owner conference-tournament site reference confirm same membership.",
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West",
+        "end_season": "2025-2026",
+        "membership_type": "conference",
+        "notes": "End is latest researched completed 2025-26 season. Current-main membership reference separately records future Pac-12 beginning 2026-27; do not include a future season in this package.",
+        "ongoing": "No",
+        "source_program_key": "utah-state",
+        "start_season": "2013-2014"
+      }
+    ],
+    "replacement_row_count": 8,
+    "spec_path": "/tmp/remote-phase0-inputs-bm1ryhsc/conference-reconciliation.json",
+    "spec_sha256": "d8ecfe2ab69e7e90e365910d458cc08151d1a5309d5269bf0e7b61e1390a4001"
+  },
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "60ce35cb743ba89b5b91a1442cb52915bc98fdd2",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Owner-confirmed Utah State historical scope: INCEPTION+. The accepted Research Freeze begins with the 1903-04 program record; current protected-main program-top-level-scope.csv already records Utah State as INCEPTION+.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1903-1904",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "Utah State"
+    }
+  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "1761c05d50fcee786180817666ce7ea34e0c8564ba1b569057ea6f5ddd024b62",
+    "notes.md": "62dd5445f0c804c670a27f5cb4261325b81419298869cff51ee1e70ce8d71acd",
+    "opponents.csv": "ef4c5d2bd06ef54c465011646ff92bb2f6b40c8aab726b7cf57d1e502a88d786",
+    "source-games.csv": "d9cec5789cf7d8e5d0e627d65086cf1cd4e059ff60e2d59457a9aa455892e844",
+    "source-notes.md": "799806302cb894548535e57c35552658f0f4488ab777696a9857f8786d9cae17",
+    "venues.csv": "096c2dce256a7d7330dfeb3f1cc366cbdfa00edba56e00cf64a9f6a4f7f37152"
+  },
+  "prepared_commit_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "prepared_parent_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "prepared_tree_sha": "b8e58e976495709d51d1b679fd704862d36d3d15",
+  "program_alias_mapping": [],
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "repository_validation": "PASS",
+  "request_id": "utah-state-phase0-0002",
+  "request_sha256": "4940d5298fd4e2bfa3c24fedaec8c381bb392d780a0d4fe0f2352755175166d0",
+  "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
+  "research_checkpoint_sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "sidecars": {
+    "conference-reconciliation.json": "d8ecfe2ab69e7e90e365910d458cc08151d1a5309d5269bf0e7b61e1390a4001",
+    "integration-freeze.json": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+    "stage1-reconciliation.json": "084b48dd8b308ab705fc08a601058b83da542480eb7c37beb85cdc9e3a10abf5",
+    "venue-reconciliation.json": "33034ce53f0af4fdcf5ee504f567e29c8350ba913b628be462c5a69ed5f5abe2"
+  },
+  "target_branch": "data/utah-state-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Thomas Smart Gymnasium",
+      "final_venue_id": "VEN-000986",
+      "final_venue_key": "thomas-smart-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "thomas-smart-gymnasium"
+    },
+    {
+      "canonical_name": "George Nelson Fieldhouse",
+      "final_venue_id": "VEN-000987",
+      "final_venue_key": "george-nelson-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "george-nelson-fieldhouse"
+    },
+    {
+      "canonical_name": "Dee Glen Smith Spectrum",
+      "final_venue_id": "VEN-000378",
+      "final_venue_key": "dee-glen-smith-spectrum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-glen-smith-spectrum"
+    },
+    {
+      "canonical_name": "Assembly Hall",
+      "final_venue_id": "VEN-000186",
+      "final_venue_key": "simon-skjodt-assembly-hall",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "assembly-hall"
+    },
+    {
+      "canonical_name": "Carlson Center",
+      "final_venue_id": "VEN-000466",
+      "final_venue_key": "carlson-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carlson-center"
+    },
+    {
+      "canonical_name": "Delta Center",
+      "final_venue_id": "VEN-000055",
+      "final_venue_key": "delta-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "delta-center"
+    },
+    {
+      "canonical_name": "Freedom Hall",
+      "final_venue_id": "VEN-000069",
+      "final_venue_key": "freedom-hall",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "freedom-hall"
+    },
+    {
+      "canonical_name": "Hard Rock Hotel Riviera Maya Convention Center",
+      "final_venue_id": "VEN-000352",
+      "final_venue_key": "hard-rock-hotel-riviera-maya-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hard-rock-hotel-riviera-maya-convention-center"
+    },
+    {
+      "canonical_name": "Lahaina Civic Center",
+      "final_venue_id": "VEN-000108",
+      "final_venue_key": "lahaina-civic-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lahaina-civic-center"
+    },
+    {
+      "canonical_name": "Neal S. Blaisdell Center",
+      "final_venue_id": "VEN-000149",
+      "final_venue_key": "neal-s-blaisdell-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "neal-s-blaisdell-center"
+    },
+    {
+      "canonical_name": "Nielsen Fieldhouse",
+      "final_venue_id": "VEN-000582",
+      "final_venue_key": "nielsen-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nielsen-fieldhouse"
+    },
+    {
+      "canonical_name": "Oklahoma City Municipal Auditorium",
+      "final_venue_id": "VEN-000453",
+      "final_venue_key": "oklahoma-city-municipal-auditorium",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "oklahoma-city-municipal-auditorium"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "Stokely Athletics Center",
+      "final_venue_id": "VEN-000199",
+      "final_venue_key": "stokely-athletics-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stokely-athletics-center"
+    },
+    {
+      "canonical_name": "T-Mobile Arena",
+      "final_venue_id": "VEN-000201",
+      "final_venue_key": "t-mobile-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-arena"
+    },
+    {
+      "canonical_name": "Afook-Chinen Civic Auditorium",
+      "final_venue_id": "VEN-000465",
+      "final_venue_key": "afook-chinen-civic-auditorium",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "afook-chinen-civic-auditorium"
+    },
+    {
+      "canonical_name": "South Padre Island Convention Center",
+      "final_venue_id": "VEN-000445",
+      "final_venue_key": "south-padre-island-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "south-padre-island-convention-center"
+    },
+    {
+      "canonical_name": "Veterans Memorial Coliseum",
+      "final_venue_id": "VEN-000297",
+      "final_venue_key": "veterans-memorial-coliseum-portland",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "veterans-memorial-coliseum-portland"
+    },
+    {
+      "canonical_name": "Nashville Municipal Auditorium",
+      "final_venue_id": "VEN-000988",
+      "final_venue_key": "nashville-municipal-auditorium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "nashville-municipal-auditorium"
+    },
+    {
+      "canonical_name": "Sanford Pentagon",
+      "final_venue_id": "VEN-000251",
+      "final_venue_key": "sanford-pentagon",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sanford-pentagon"
+    },
+    {
+      "canonical_name": "Rip Griffin Center",
+      "final_venue_id": "VEN-000989",
+      "final_venue_key": "rip-griffin-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "rip-griffin-center"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    },
+    {
+      "canonical_name": "John Gray Gym",
+      "final_venue_id": "VEN-000470",
+      "final_venue_key": "provisional-john-gray-gym",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "provisional-john-gray-gym"
+    },
+    {
+      "canonical_name": "State Farm Field House",
+      "final_venue_id": "VEN-000990",
+      "final_venue_key": "state-farm-field-house",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "state-farm-field-house"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-arena"
+    },
+    {
+      "canonical_name": "Toyota Center",
+      "final_venue_id": "VEN-000213",
+      "final_venue_key": "toyota-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "toyota-center"
+    },
+    {
+      "canonical_name": "BB&T Center",
+      "final_venue_id": "VEN-000009",
+      "final_venue_key": "amerant-bank-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "bb-t-center"
+    },
+    {
+      "canonical_name": "Alumni Hall",
+      "final_venue_id": "VEN-000525",
+      "final_venue_key": "alumni-hall-navy",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "alumni-hall"
+    },
+    {
+      "canonical_name": "Chase Center",
+      "final_venue_id": "VEN-000042",
+      "final_venue_key": "chase-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chase-center"
+    },
+    {
+      "canonical_name": "Michelob ULTRA Arena",
+      "final_venue_id": "VEN-000135",
+      "final_venue_key": "michelob-ultra-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "michelob-ultra-arena"
+    },
+    {
+      "canonical_name": "T-Mobile Center",
+      "final_venue_id": "VEN-000202",
+      "final_venue_key": "t-mobile-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-center"
+    },
+    {
+      "canonical_name": "Comerica Center",
+      "final_venue_id": "VEN-000557",
+      "final_venue_key": "comerica-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "comerica-center"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "The Forum",
+      "final_venue_id": "VEN-000376",
+      "final_venue_key": "the-forum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-forum"
+    },
+    {
+      "canonical_name": "Long Beach Arena",
+      "final_venue_id": "VEN-000117",
+      "final_venue_key": "long-beach-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "long-beach-arena"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thomas-and-mack-center"
+    },
+    {
+      "canonical_name": "Lawlor Events Center",
+      "final_venue_id": "VEN-000579",
+      "final_venue_key": "lawlor-events-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lawlor-events-center"
+    },
+    {
+      "canonical_name": "Pan American Center",
+      "final_venue_id": "VEN-000322",
+      "final_venue_key": "pan-american-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pan-american-center"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "California Coliseum",
+      "final_venue_id": "VEN-000332",
+      "final_venue_key": "california-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "california-coliseum"
+    },
+    {
+      "canonical_name": "Gill Coliseum",
+      "final_venue_id": "VEN-000373",
+      "final_venue_key": "gill-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gill-coliseum"
+    },
+    {
+      "canonical_name": "Smith Fieldhouse",
+      "final_venue_id": "VEN-000382",
+      "final_venue_key": "smith-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "smith-fieldhouse"
+    },
+    {
+      "canonical_name": "McArthur Court",
+      "final_venue_id": "VEN-000126",
+      "final_venue_key": "mcarthur-court",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcarthur-court"
+    },
+    {
+      "canonical_name": "Hec Edmundson Pavilion",
+      "final_venue_id": "VEN-000078",
+      "final_venue_key": "hec-edmundson-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hec-edmundson-pavilion"
+    },
+    {
+      "canonical_name": "Beasley Coliseum",
+      "final_venue_id": "VEN-000283",
+      "final_venue_key": "beasley-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "beasley-coliseum"
+    },
+    {
+      "canonical_name": "Pauley Pavilion",
+      "final_venue_id": "VEN-000161",
+      "final_venue_key": "pauley-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pauley-pavilion"
+    },
+    {
+      "canonical_name": "Dee Events Center",
+      "final_venue_id": "VEN-000054",
+      "final_venue_key": "dee-events-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-events-center"
+    },
+    {
+      "canonical_name": "Bob Devaney Sports Center",
+      "final_venue_id": "VEN-000023",
+      "final_venue_key": "bob-devaney-sports-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bob-devaney-sports-center"
+    },
+    {
+      "canonical_name": "ARCO Arena",
+      "final_venue_id": "VEN-000013",
+      "final_venue_key": "arco-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "arco-arena"
+    },
+    {
+      "canonical_name": "Legacy Arena",
+      "final_venue_id": "VEN-000109",
+      "final_venue_key": "legacy-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "legacy-arena"
+    },
+    {
+      "canonical_name": "Greensboro Coliseum",
+      "final_venue_id": "VEN-000076",
+      "final_venue_key": "greensboro-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "greensboro-coliseum"
+    },
+    {
+      "canonical_name": "Paycom Center",
+      "final_venue_id": "VEN-000162",
+      "final_venue_key": "paycom-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "paycom-center"
+    },
+    {
+      "canonical_name": "ExtraMile Arena",
+      "final_venue_id": "VEN-000061",
+      "final_venue_key": "extramile-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "extramile-arena"
+    },
+    {
+      "canonical_name": "Viejas Arena",
+      "final_venue_id": "VEN-000226",
+      "final_venue_key": "viejas-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "viejas-arena"
+    },
+    {
+      "canonical_name": "Numerica Veterans Arena",
+      "final_venue_id": "VEN-000152",
+      "final_venue_key": "numerica-veterans-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "numerica-veterans-arena"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mckale-center"
+    },
+    {
+      "canonical_name": "Nationwide Arena",
+      "final_venue_id": "VEN-000148",
+      "final_venue_key": "nationwide-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nationwide-arena"
+    },
+    {
+      "canonical_name": "Simon Skjodt Assembly Hall",
+      "final_venue_id": "VEN-000186",
+      "final_venue_key": "simon-skjodt-assembly-hall",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "simon-skjodt-assembly-hall"
+    },
+    {
+      "canonical_name": "Golden 1 Center",
+      "final_venue_id": "VEN-000074",
+      "final_venue_key": "golden-1-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "golden-1-center"
+    },
+    {
+      "canonical_name": "Gainbridge Fieldhouse",
+      "final_venue_id": "VEN-000070",
+      "final_venue_key": "gainbridge-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gainbridge-fieldhouse"
+    },
+    {
+      "canonical_name": "Rupp Arena",
+      "final_venue_id": "VEN-000181",
+      "final_venue_key": "rupp-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rupp-arena"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000123",
+      "final_venue_key": "madison-square-garden-1925",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1925"
+    },
+    {
+      "canonical_name": "Crisler Center",
+      "final_venue_id": "VEN-000261",
+      "final_venue_key": "crisler-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "crisler-center"
+    },
+    {
+      "canonical_name": "Redbird Arena",
+      "final_venue_id": "VEN-000369",
+      "final_venue_key": "redbird-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "redbird-arena"
+    },
+    {
+      "canonical_name": "Municipal Auditorium",
+      "final_venue_id": "VEN-000143",
+      "final_venue_key": "municipal-auditorium-kc",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "municipal-auditorium-kc"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "c46052ad73c75bc5c03c5f80bbf55cc2b03b2c6e01b3ce9801e7a8b3ad5a4a47",
+    "mappings": [
+      {
+        "expected_global_city": "Bloomington",
+        "expected_global_state": "IN",
+        "expected_local_city": "Bloomington",
+        "expected_local_name": "Assembly Hall",
+        "expected_local_state": "IN",
+        "global_venue_id": "VEN-000186",
+        "global_venue_key": "simon-skjodt-assembly-hall",
+        "local_venue_key": "assembly-hall",
+        "resolution_basis": "Control Center-authorized exact physical-identity reuse; durable Stage 1 blocker candidate VEN-000186 and current protected-main venue registry agree on Assembly Hall, Bloomington, IN."
+      },
+      {
+        "expected_global_city": "Annapolis",
+        "expected_global_state": "MD",
+        "expected_local_city": "Annapolis",
+        "expected_local_name": "Alumni Hall",
+        "expected_local_state": "MD",
+        "global_venue_id": "VEN-000525",
+        "global_venue_key": "alumni-hall-navy",
+        "local_venue_key": "alumni-hall",
+        "resolution_basis": "Control Center-authorized exact physical-identity reuse; durable Stage 1 blocker candidate VEN-000525 and current protected-main venue registry agree on Alumni Hall, Annapolis, MD."
+      }
+    ],
+    "owner_approval_basis": "Control Center disposition — Utah State Stage 1 reconciliation (2026-10-27): exact physical-identity reuse based on the durable utah-state-stage1-0003 checkpoint and current protected-main venue registry evidence. Map Assembly Hall, Bloomington, IN to VEN-000186 / simon-skjodt-assembly-hall and Alumni Hall, Annapolis, MD to VEN-000525 / alumni-hall-navy. No new venue identities for these mappings. This is not Owner Gate 1 authority.",
+    "research_zip_sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-phase0-inputs-bm1ryhsc/venue-reconciliation.json",
+    "spec_sha256": "33034ce53f0af4fdcf5ee504f567e29c8350ba913b628be462c5a69ed5f5abe2"
+  }
+}

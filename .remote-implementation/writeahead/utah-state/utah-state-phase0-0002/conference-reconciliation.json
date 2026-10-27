@@ -1,0 +1,97 @@
+{
+  "expected_conferences_sha256": "facf2bfcf0a84d229b345da9345ddfaf7d226b7dc65d41211cf07d354ce8705d",
+  "owner_approval_basis": "Control Center disposition — Utah State Stage 1 reconciliation (2026-10-27): representation-only reconciliation based on the durable utah-state-stage1-0003 checkpoint and current protected-main conference identity evidence. Pacific Coast Athletic Association is the same continuous conference lineage as Big West; change only the canonical key pcaa → big-west for 1978-79 through 1987-88 while preserving the frozen historical display name and all other frozen row fields. No new global conference registration. This is not Owner Gate 1 authority. Owner-approved mechanical integration correction (2026-10-27): normalize only start_season/end_season serialization from equivalent YYYY-YY to repository-required YYYY-YYYY before installed-school validation; no historical interval, identity, display name, membership type, basis, notes, or other meaning changes.",
+  "registrations": [],
+  "replacement_history": [
+    {
+      "basis": "Utah State media guide all-time results 1903-04 through 1916-17, no league records or conference-game markers before 1917-18.",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "end_season": "1916-1917",
+      "membership_type": "independent",
+      "notes": "Early pre-Rocky Mountain classification; years with no recorded competition do not represent manufactured games.",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "1903-1904"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results 1917-18 first Rocky Mountain record and subsequent RM season/game labels through 1936-37.",
+      "conference_key": "rocky-mountain",
+      "conference_name": "Rocky Mountain Conference",
+      "end_season": "1936-1937",
+      "membership_type": "conference",
+      "notes": "Rocky Mountain historical identity accepted in protected-main conference registry.",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "1917-1918"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results; 1937-38 through 1961-62 Mountain States / MSAC annual standings and game markers.",
+      "conference_key": "mountain-states",
+      "conference_name": "Mountain States Conference",
+      "end_season": "1961-1962",
+      "membership_type": "conference",
+      "notes": "Mountain States historical identity accepted in protected-main conference registry.",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "1937-1938"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results 1962-63 through 1977-78; annual records have no conference-standings line or recurring conference-game code.",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "end_season": "1977-1978",
+      "membership_type": "independent",
+      "notes": "Post-Mountain States, pre-PCAA independent interval; not inferred from opponent geography.",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "1962-1963"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results: PCAA season standings and PC conference-game markers 1978-79 through 1987-88; owner normalized tournament-site reference conference key pcaa.",
+      "conference_key": "big-west",
+      "conference_name": "Pacific Coast Athletic Association",
+      "end_season": "1987-1988",
+      "membership_type": "conference",
+      "notes": "Research-local historical PCAA identity; no corresponding global conference identity registered at verified main; Integration must reconcile explicitly.",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "1978-1979"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results: Big West season standings and BW conference-game markers 1988-89 through 2004-05.",
+      "conference_key": "big-west",
+      "conference_name": "Big West",
+      "end_season": "2004-2005",
+      "membership_type": "conference",
+      "notes": "",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "1988-1989"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results: WAC standings and WAC game markers 2005-06 through 2012-13.",
+      "conference_key": "wac",
+      "conference_name": "WAC",
+      "end_season": "2012-2013",
+      "membership_type": "conference",
+      "notes": "",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "2005-2006"
+    },
+    {
+      "basis": "Utah State 2025-26 media guide all-time results: Mountain West standings and MW game markers from 2013-14 through 2024-25; 2025-26 official completed-season supplement and owner conference-tournament site reference confirm same membership.",
+      "conference_key": "mountain-west",
+      "conference_name": "Mountain West",
+      "end_season": "2025-2026",
+      "membership_type": "conference",
+      "notes": "End is latest researched completed 2025-26 season. Current-main membership reference separately records future Pac-12 beginning 2026-27; do not include a future season in this package.",
+      "ongoing": "No",
+      "source_program_key": "utah-state",
+      "start_season": "2013-2014"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "utah-state"
+}
