@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "merge_parent_onboarding": "f124b9098c68d53127dc7671bb9eb0604dd20b0b",
+  "merge_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "e60115c159a47c1dc67a887b054950d4e3acfee1e8319c2f88a29504c004de4c",
+  "owner_gate_2_verification_sha256": "e236b80aa725edcc0bb7f715040f86f0caa5077e9f7db9ee517094fdd9928f5c",
+  "pr_head_sha": "f124b9098c68d53127dc7671bb9eb0604dd20b0b",
+  "pr_number": 383,
+  "production_deployment_id": 7363574196,
+  "production_json_checked_count": 77,
+  "production_proof": true,
+  "production_proof_sha256": "316e155f17a31e9ba64a930e49c027b4d463615dd265ad206bcf90929dadae95",
+  "protected_main_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
+  "request_id": "gonzaga-release-production-proof-score-restored-0001",
+  "request_sha256": "b98aae8bdf5e3bea70813041471e5e126f84d65685dd8d011b853630892b9473",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "status": "PRODUCTION_PROOF_PASS"
+}
