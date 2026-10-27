@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-reconciliation-diagnostic-0002",
+  "request_id": "utah-state-stage2-reconciliation-diagnostic-0003",
   "school_key": "utah-state",
   "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "eead2f74397b5c97afdef06fd83a1b33b439d64a",
-  "previous_control_state_sha256": "95d4855b3ba943ca1dbce2d29e27b7125856375ebb28d2db165239be8a6843e1",
-  "expected_protected_main_sha": "742409f6bc9d034190c0110fd628d928ae1c99a6",
+  "previous_control_state_commit": "201dd25a87cd0ef7d26e0b5688f71996f3f979ae",
+  "previous_control_state_sha256": "671d4e5c62477dd66a4b0362d4db213030ec0c6c7b5991deeb59a7daa215c66b",
+  "expected_protected_main_sha": "5560f583996f7a96dc05777f8b43c618964db1c7",
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed for the already-authorized generic repair proof. PR #386 merged exact normalized-source site propagation support to protected main 742409f6bc9d034190c0110fd628d928ae1c99a6. Rerun only representative read-only diagnostic CBBG-0104608 against blocked proposal-0004 to prove that the existing George Nelson Fieldhouse / Logan, UT source patch now propagates to canonical. No historical change, proposal rehearsal, Gate 1, tracked mutation, Preview, release, or merge authority."
+    "authorization": "Owner said Proceed for exactly one fresh read-only reconciliation diagnostic after PR #387 merged the exact-protected-main Stage 2 runtime selection repair. Run only representative diagnostic CBBG-0104608 against blocked proposal-0004 using protected main 5560f583996f7a96dc05777f8b43c618964db1c7. Preserve the existing recommendation map and historical authority. No proposal rehearsal, historical change, Gate 1, tracked mutation, Preview, release, or merge authority."
   },
   "authority": {
     "owner_gate_1": false,
