@@ -1,0 +1,186 @@
+{
+  "kind": "GONZAGA_PRE_FREEZE_SCORE_RESTORATION_ADJUDICATION_CHECKPOINT",
+  "schema_version": 1,
+  "created_date": "2026-10-27",
+  "status": "EXCEPTION_ADJUDICATION_COMPLETE_FREEZE_REPAIR_PENDING",
+  "school_key": "gonzaga",
+  "lane": "CONTROL_CENTER_BOUNDED_ADJUDICATION",
+  "main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "original_research_freeze": {
+    "transport_branch": "transport/gonzaga-stage1-freeze-6a4632f2",
+    "transport_commit": "0f240b4f036458883b90f1e69140257d2166bb33",
+    "archive_sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "archive_bytes": 81241,
+    "base64_part_count": 11,
+    "flat_files": [
+      "conferences.csv",
+      "notes.md",
+      "opponents.csv",
+      "source-games.csv",
+      "source-notes.md",
+      "venues.csv"
+    ],
+    "verified_sha256": true
+  },
+  "source_guide": {
+    "title": "2026-27 Gonzaga Men's Basketball Record Book",
+    "file_sha256": "9bdbdcdc24148aa4f762b7d11da983663ecd5b18da20061a00f757c8c16fe2da",
+    "page_count": 79
+  },
+  "original_source_games_census": {
+    "competitive_games": 2053,
+    "team_score_blank": 2053,
+    "opponent_score_blank": 2053,
+    "raw_text_exactly_one_score_pair": 2053,
+    "straightforward_w_l_consistent": 2043,
+    "exceptions": 10
+  },
+  "correction_rule": {
+    "straightforward_2043": "Parse unique source raw_text numeric N-N pair; if pair ordering agrees with preserved W/L, serialize first number to team_score and second to opponent_score.",
+    "exception_10": "Apply exact authoritative score values below instead of mechanically transcribing the literal score pair.",
+    "invariants": [
+      "Preserve exactly 2053 source_game_id identities and all 2053 original raw_text values byte for byte.",
+      "Do not change played_result in any game, including Boise State 1972 and Pepperdine 1993; existing structured losses are corroborated by opponent institutional evidence.",
+      "Preserve dates, opponents, game_type, postseason rounds, H/A/N, venue/location, tournament, overtime and other fields.",
+      "Keep original Research Freeze archive unchanged as audit evidence.",
+      "Record intentional source-text score contradictions in the superseding Freeze evidence and include targeted self-challenge.",
+      "Require current-main permanent Research acceptance and new six-file manifest/ZIP/hash before RESEARCH_FROZEN can be declared."
+    ]
+  },
+  "exceptions": [
+    {
+      "source_game_id": "GONZAGA-1960-61-026",
+      "date": "1961-01-15",
+      "opponent": "Portland",
+      "preserved_played_result": "L",
+      "team_score": 54,
+      "opponent_score": 68,
+      "resolution_basis": "Source AP recap gives winner-first 68-54; structure from Gonzaga perspective must be 54-68.",
+      "references": [
+        "https://oregonnews.uoregon.edu/lccn/sn85042470/1961-01-16/ed-1/seq-8/ocr/"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-1967-68-009",
+      "date": "1968-01-13",
+      "opponent": "Montana",
+      "preserved_played_result": "W",
+      "team_score": 83,
+      "opponent_score": 82,
+      "resolution_basis": "Gonzaga guide prints impossible 82-82. Montana institutional 2023 record book 1967-68 schedule reports Montana L 83-82 (Gonzaga 83-82); corroborated by Gonzaga institutional 2024 NCAA guide and historical schedule.",
+      "references": [
+        "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/gogriz.com/documents/2023/8/16/Records___History.pdf?timestamp=20230816053630",
+        "https://www.sports-reference.com/cbb/conferences/big-sky/men/1968-schedule.html"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-1971-72-021",
+      "date": "1972-02-18",
+      "opponent": "Boise State",
+      "preserved_played_result": "L",
+      "team_score": 78,
+      "opponent_score": 83,
+      "resolution_basis": "Gonzaga 2026-27 guide/raw_text incorrectly marks W 78-57, evidently contradicting the accepted structured L. Boise State institutional all-time series records 02.18.72 home W 83-78; Big Sky historical schedule corroborates. Do not change played_result=L or raw_text.",
+      "references": [
+        "https://broncosports.com/documents/download/2022/3/15/2021_22_Postseason_Guide.pdf",
+        "https://www.sports-reference.com/cbb/conferences/big-sky/men/1972-schedule.html"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-1992-93-013",
+      "date": "1993-01-15",
+      "opponent": "Pepperdine",
+      "preserved_played_result": "L",
+      "team_score": 66,
+      "opponent_score": 67,
+      "resolution_basis": "Gonzaga 2026-27 guide/raw_text incorrectly marks W 76-67. Pepperdine institutional 2017-18 record book records 1992-93 home W 67-66 and independent historical schedule confirms Jan. 15; preserve structured Gonzaga L and raw_text.",
+      "references": [
+        "https://pepperdinewaves.com/documents/download/2018/6/26/Men_Basketball_record_book.pdf",
+        "https://www.sports-reference.com/cbb/schools/pepperdine/men/1993-schedule.html"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-2012-13-014",
+      "date": "2012-12-31",
+      "opponent": "Oklahoma State",
+      "preserved_played_result": "W",
+      "team_score": 69,
+      "opponent_score": 68,
+      "resolution_basis": "Gonzaga institutional guide misprints a 69-69 tie with W; Gonzaga athletics series page and contemporary institutional release give road W 69-68.",
+      "references": [
+        "https://gozags.com/sports/mens-basketball/opponent-history/oklahoma-state/187",
+        "https://gozags.com/news/2013/1/2/zag_men_turn_attention_to_wearing_wcc_crown_again.aspx"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-2014-15-008",
+      "date": "2014-12-06",
+      "opponent": "Arizona",
+      "preserved_played_result": "L",
+      "team_score": 63,
+      "opponent_score": 66,
+      "resolution_basis": "Gonzaga institutional guide/source raw_text lists losing team second (Arizona 66, Gonzaga 63, OT); normalize perspective only; preserve OT field.",
+      "references": [
+        "Gonzaga 2026-27 record book, year-by-year results, printed p. 75"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-2014-15-031",
+      "date": "2015-02-28",
+      "opponent": "BYU",
+      "preserved_played_result": "L",
+      "team_score": 70,
+      "opponent_score": 73,
+      "resolution_basis": "Gonzaga institutional guide/source raw_text winner-first 73-70; normalize Gonzaga perspective.",
+      "references": [
+        "Gonzaga 2026-27 record book, year-by-year results, printed p. 76"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-2014-15-038",
+      "date": "2015-03-29",
+      "opponent": "Duke",
+      "preserved_played_result": "L",
+      "team_score": 52,
+      "opponent_score": 66,
+      "resolution_basis": "Gonzaga institutional guide and NCAA tournament summary confirm Duke 66, Gonzaga 52; normalize Gonzaga perspective.",
+      "references": [
+        "Gonzaga 2026-27 record book, all-time NCAA tournament results printed p. 22"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-2017-18-037",
+      "date": "2018-03-22",
+      "opponent": "Florida State",
+      "preserved_played_result": "L",
+      "team_score": 60,
+      "opponent_score": 75,
+      "resolution_basis": "Gonzaga institutional guide and NCAA tournament summary confirm Florida State 75, Gonzaga 60; normalize Gonzaga perspective.",
+      "references": [
+        "Gonzaga 2026-27 record book, all-time NCAA tournament results printed p. 22"
+      ]
+    },
+    {
+      "source_game_id": "GONZAGA-2022-23-030",
+      "date": "2023-02-25",
+      "opponent": "Saint Mary's",
+      "preserved_played_result": "W",
+      "team_score": 77,
+      "opponent_score": 68,
+      "resolution_basis": "Gonzaga institutional guide has damaged W 7 / 7-68 rendering; contemporary Gonzaga recap and scoreboard confirm 77-68.",
+      "references": [
+        "https://gozags.com/news/2023/2/25/mens-basketball-mbb-earns-11th-straight-wcc-title-with-win-over-saint-mary-s"
+      ]
+    }
+  ],
+  "implementation_safety": {
+    "gonzaga_pr": 381,
+    "pr_head_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+    "merge": false,
+    "owner_gate_2": "REJECTED",
+    "old_implementation_authority": "PRESERVED_NOT_VALID_FOR_NEW_FREEZE",
+    "global_mutation_lock": "NONE_AT_RECOVERY"
+  },
+  "next_bounded_operation": "Apply these scores to the exact six-file original frozen package in an isolated workspace; verify score-only field diff, run permanent research-check plus focused adversarial self-challenge, regenerate immutable superseding Research Freeze artifact and explicit transport identity. Do not mutate PR #381 or onboarding/global state."
+}
