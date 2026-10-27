@@ -13,6 +13,9 @@ Serialized Implementation may execute either:
 
 Both environments use the same permanent basketball/reconciliation commands and the same historical authority. Remote execution is an orchestration and durability layer only. It does not weaken current-main requirements, owner gates, shared-reference policy, repository validation, release rules, or the one-active-Implementation invariant.
 
+
+For push-driven execution, the control branch is **data authority, not software authority**. The workflow checks the triggering control commit into a dedicated `control/` working directory, reads the request-bound `expected_protected_main_sha`, fetches protected `main`, and refuses execution unless the fetched main tip exactly equals that request SHA. It then checks out that exact SHA separately under `runtime/` and launches `remote_implementation_runner.py` from the runtime checkout while keeping the process working directory on `control/`. All request, checkpoint, write-ahead, verification, and control-state reads/writes therefore remain on the control branch, while executable runner imports come from authenticated protected main. Fresh verification jobs use the same request-bound protected-main SHA and execute `remote_implementation_verify.py` from `runtime/`, never from a stale control-branch tool copy. Control-branch copies of runner/verifier modules are transport residue only and must not be treated as an independent executable authority.
+
 For the currently productionized remote lifecycle, the permanent commands remain:
 
 ```bash
