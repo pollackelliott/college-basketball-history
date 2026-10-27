@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-reconciliation-diagnostic-0003",
+  "request_id": "utah-state-stage2-reconciliation-diagnostic-0004",
   "school_key": "utah-state",
   "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "201dd25a87cd0ef7d26e0b5688f71996f3f979ae",
-  "previous_control_state_sha256": "671d4e5c62477dd66a4b0362d4db213030ec0c6c7b5991deeb59a7daa215c66b",
-  "expected_protected_main_sha": "5560f583996f7a96dc05777f8b43c618964db1c7",
+  "previous_control_state_commit": "c2421a59e64de62d71ae812bed59ea15a0ac5042",
+  "previous_control_state_sha256": "9a0a5b63b06b09dba84e7b1f0742ee6b74318dbf4e8d78895dcc543f74f953bd",
+  "expected_protected_main_sha": "fa65eb3531ab1c9a6e25aaf04628f65585545555",
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed for exactly one fresh read-only reconciliation diagnostic after PR #387 merged the exact-protected-main Stage 2 runtime selection repair. Run only representative diagnostic CBBG-0104608 against blocked proposal-0004 using protected main 5560f583996f7a96dc05777f8b43c618964db1c7. Preserve the existing recommendation map and historical authority. No proposal rehearsal, historical change, Gate 1, tracked mutation, Preview, release, or merge authority."
+    "authorization": "Owner said Proceed for exactly one fresh read-only reconciliation diagnostic after PR #388 merged and its exact workflow bootstrap bytes were deployed to control/remote-implementation. Run only representative diagnostic CBBG-0104608 against blocked proposal-0004 using request-authenticated protected main fa65eb3531ab1c9a6e25aaf04628f65585545555. Preserve the existing recommendation map, Utah State data, onboarding branch, Research authority, and historical conclusions. No proposal rehearsal, Gate 1 action, tracked basketball mutation, Preview, release, or merge authority."
   },
   "authority": {
     "owner_gate_1": false,
