@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "kind": "UTAH_STATE_STAGE2_MAP_REPAIR_CHECKPOINT",
+  "school_key": "utah-state",
+  "authority": "Control Center authorized the classified six-game generic repair scope. No new historical research and no decision-action change.",
+  "protected_main_tooling_sha": "d2de92df9459d689e3ee0898205f4028ea614398",
+  "prior_map": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "89a814cca66ac1f7933872956ba4a25119fa82e1f4d40bebc6666e5665d7c002"
+  },
+  "repaired_map": {
+    "path": ".remote-implementation/inputs/utah-state-stage2-map-repair-0001/recommendation-map.json",
+    "sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
+    "decision_count": 166
+  },
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "decision_actions_changed": false,
+  "metadata_repairs": {
+    "canonical_locality_patches": [
+      "DISCREPANCY-UST-S1-00037-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00040-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-02962-CBBG-0104048-SITE_TYPE"
+    ],
+    "source_home_chronology_patches": [
+      "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00637-SITE_TYPE"
+    ],
+    "already_present_neutral_locality_patch": "DISCREPANCY-UST-S1-01222-SITE_TYPE"
+  },
+  "proposal_rehearsal_submitted": false,
+  "next_boundary": "STAGE2_PROPOSAL_REHEARSAL"
+}
