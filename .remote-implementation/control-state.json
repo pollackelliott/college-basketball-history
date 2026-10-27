@@ -154,7 +154,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-release-preview-verify-score-restored-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "4974479bf794010c9329d8118dbd8f451cf53e801391d0484b582f3a164e756d",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -163,7 +163,7 @@
     "preview_deployment_id": 7361018663,
     "preview_url": "https://college-basketball-history-a0o4ypfto-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "gonzaga-release-preview-verify-score-restored-0001",
     "school_key": "gonzaga",
     "target_branch": "data/gonzaga-onboarding",
