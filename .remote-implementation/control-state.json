@@ -81,7 +81,7 @@
     "utah-state-phase0-0002"
   ],
   "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
-  "active_lock_commit": null,
+  "active_lock_commit": "60ce35cb743ba89b5b91a1442cb52915bc98fdd2",
   "active_lock_owner": "github-actions:40559760486:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
