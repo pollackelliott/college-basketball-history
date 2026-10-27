@@ -1,0 +1,114 @@
+{
+  "actual_published_target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "changed_file_sha256": {
+    "schools/utah-state/opponents.csv": "9b0cfce1638920d3b064327f0d8a297301a2610e992a8751a59209a9a11995f7",
+    "schools/utah-state/source-games.csv": "40fb9095eb82d5d83dc6cb43e42f39047d82b203444c369aa9034300dda3aecc"
+  },
+  "changed_paths": [
+    "schools/utah-state/opponents.csv",
+    "schools/utah-state/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "american-institute",
+    "brigham-young-college",
+    "byu-idaho",
+    "cal-state-stanislaus",
+    "carroll-college-montana",
+    "centenary-louisiana",
+    "colorado-colorado-springs",
+    "lewis-clark-id",
+    "midwestern-state",
+    "nyu",
+    "regis-colorado",
+    "saint-francis-pa",
+    "springfield-college",
+    "trinity-texas",
+    "westminster-utah",
+    "whitworth"
+  ],
+  "expected_target_predecessor_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "field_level_proof_sha256": "69626a91ded8acbfd17ed68daa5f8556caecfe1343b5f8843579f9e9927c4a53",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "ec27b0ee33c624fa45d54eb0bec428bbf4770013",
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "40d4691d6acf3d021bcd7b99ac2abdfa02f6fdab0b23235be3f5f738144cd30c",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "f43fdfdbd634a792dbf7b2a64e559bb0df149a1f8e7b7e72694b164892280105",
+      "implementation-stage2-status.json": "15d548cb38064bda8812d19aa0e428c6a8446e25d34cf67256035119aa6438ed",
+      "plan.json": "306b12f7b5645c5cfb482d28850e3f8fc81e04ada3a58b963df25d76aa77e4f7",
+      "review.csv": "06f549b39448e36c7138ce4bd79cb659a731a9473f9087e1fa7f957904451bec",
+      "review.md": "0f98c7f177ed0de807d550f04a66945c722aee5a79bf74faf76bc5271b55e756"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "f43fdfdbd634a792dbf7b2a64e559bb0df149a1f8e7b7e72694b164892280105",
+      "implementation-stage2-status.json": "d94ddb72ab70471bde5b82a42e1e8b564e3ec1b95699ef21b7a34f9a72d0f146",
+      "plan.json": "8de54970cba0b05f6d8aceec37000f228083498cf8602b5114ea2f62aa7f7476",
+      "review.csv": "06f549b39448e36c7138ce4bd79cb659a731a9473f9087e1fa7f957904451bec",
+      "review.md": "476d706a778e439b5969248ea8611b33df98dd1915c0f7d52edcf372f8d781a4"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 57,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 166,
+    "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+      "after_status": "",
+      "after_tree_sha": "5610bfa1ca4cad4a1581525ed1b97ba6d7d94eda",
+      "before_head_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+      "before_status": "",
+      "before_tree_sha": "5610bfa1ca4cad4a1581525ed1b97ba6d7d94eda",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "prepared_parent_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "prepared_tree_sha": "5610bfa1ca4cad4a1581525ed1b97ba6d7d94eda",
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "utah-state-stage2-opponent-display-normalize-0001",
+  "request_sha256": "20b099faa8e43ad499b520e8f8497660995f129f1bdf9b5691ed5ac919f00a1b",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "semantic_drift_after": {
+    "baseline_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "integration_base_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+    "school_key": "utah-state",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "integration_base_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+    "school_key": "utah-state",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "source_game_normalized_name_row_count": 70,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "53432998a2a990f5e3cb4da55674eef896c4af409d61dbfb554652ba9e1c33b0",
+  "target_branch": "data/utah-state-onboarding",
+  "writeahead_commit": "c0b7a7526721bc1b64ef5e4640ec5e55803ae8c0",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/utah-state/utah-state-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "4502e5f6ee048168e0ee6a3937e4b47aa7eeee248d4f1e114d474b56f20ce76e"
+}
