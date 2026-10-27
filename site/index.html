@@ -1284,6 +1284,33 @@ function conferenceTimelineDisplayName(key, membership) {
   );
 }
 
+function conferenceTimelineDisplayNames(key, history) {
+  const candidateNames = history.map((membership) => (
+    conferenceTimelineDisplayName(key, membership)
+  ));
+  const renderedNames = [...candidateNames];
+
+  for (let index = 1; index < history.length; index += 1) {
+    const previousHistoricalName = String(
+      history[index - 1]?.conference_name || "",
+    ).trim();
+    const currentHistoricalName = String(
+      history[index]?.conference_name || "",
+    ).trim();
+    if (
+      candidateNames[index - 1] === candidateNames[index]
+      && previousHistoricalName
+      && currentHistoricalName
+      && previousHistoricalName !== currentHistoricalName
+    ) {
+      renderedNames[index - 1] = previousHistoricalName;
+      renderedNames[index] = currentHistoricalName;
+    }
+  }
+
+  return renderedNames;
+}
+
 function conferenceMembershipYearRange(membership) {
   const startMatch = String(membership.start_season || "").match(/^(\d{4})-(\d{4})$/);
   const endMatch = String(membership.end_season || "").match(/^(\d{4})-(\d{4})$/);
@@ -1299,15 +1326,17 @@ function conferenceHistoryMarkup(key) {
   const history = DB.conferenceHistory[key] || [];
   if (!team || !history.length) return "";
 
-  const desktop = history.map((membership) => {
+  const displayNames = conferenceTimelineDisplayNames(key, history);
+
+  const desktop = history.map((membership, index) => {
     const current = !membership.end_season;
-    const name = conferenceTimelineDisplayName(key, membership);
+    const name = displayNames[index];
     return `<div class="conference-era${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-name">${esc(name)}</div><div class="conference-era-seasons">${esc(conferenceMembershipYearRange(membership))}</div><div class="conference-era-dot" aria-hidden="true"></div></div>`;
   }).join("");
 
-  const mobile = history.map((membership) => {
+  const mobile = history.map((membership, index) => {
     const current = !membership.end_season;
-    const name = conferenceTimelineDisplayName(key, membership);
+    const name = displayNames[index];
     return `<div class="conference-era-mobile${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-mobile-name">${esc(name)}</div><div class="conference-era-mobile-seasons">${esc(conferenceMembershipYearRange(membership))}</div></div>`;
   }).join("");
 
