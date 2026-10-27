@@ -100,7 +100,7 @@ georgia,Georgia,Georgia,Bulldogs,Athens,GA,#BA0C2F,#000000,Yes,Yes,1905-1906,OWN
 georgia-southern,Georgia Southern,Georgia Southern,Eagles,Statesboro,GA,#011E41,#87714D,Yes,No,,,,,
 georgia-state,Georgia State,Georgia State,Panthers,Atlanta,GA,#0039A6,#D96A6A,Yes,No,,,,,
 georgia-tech,Georgia Tech,Georgia Tech,Yellow Jackets,Atlanta,GA,#B3A369,#003057,Yes,Yes,1905-1906,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Current owner-supplied Program Top-Level Scope Reference lists Georgia Tech as INCEPTION+; accepted competitive history begins with program inception in 1905-06.,
-gonzaga,Gonzaga,Gonzaga,Bulldogs,Spokane,WA,#041E42,#C8102E,Yes,No,1958-1959,OWNER_CONFIRMED,TOP_LEVEL_INTERVALS,Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority.,1958-59+
+gonzaga,Gonzaga,Gonzaga,Bulldogs,Spokane,WA,#041E42,#C8102E,Yes,Yes,1958-1959,OWNER_CONFIRMED,TOP_LEVEL_INTERVALS,Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority.,1958-59+
 grambling,Grambling,Grambling,Tigers,Grambling,LA,#000000,#EAA921,Yes,No,,,,,
 grand-canyon,Grand Canyon,Grand Canyon,Antelopes,Phoenix,AZ,#522398,#000000,Yes,No,,,,,
 green-bay,Green Bay,Green Bay,Phoenix,Ashwaubenon,WI,#006747,#FFFFFF,Yes,No,,,,,
