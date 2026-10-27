@@ -2459,8 +2459,8 @@
       "state": "WA",
       "primary_hex": "#041E42",
       "secondary_hex": "#C8102E",
-      "history_start_season": null,
-      "conference_regular_season_championships": 29,
+      "history_start_season": "1958-1959",
+      "conference_regular_season_championships": 27,
       "conference_tournament_championships": 23,
       "ncaa_tournament_appearances": 28,
       "final_four_appearances": 2,
@@ -2468,7 +2468,7 @@
       "best_finish_key": "NATIONAL_RUNNER_UP",
       "best_finish_year": 2021,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
