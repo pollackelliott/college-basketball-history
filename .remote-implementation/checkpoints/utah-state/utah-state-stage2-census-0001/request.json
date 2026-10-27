@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage2-census-0001",
+  "school_key": "utah-state",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "b240e6fef07e594a8c4ee2422fb7e6ec0a4fbd16",
+  "previous_control_state_sha256": "619f3b84149e46b22abbb1c56c9fb336f93d4c17a7a9aa5feac22ccc695bca29",
+  "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/utah-state/utah-state-phase0-0002/successor-manifest.json",
+    "sha256": "9b5ea767b7bba5b6336441abff4596cf3d6b076d141d3cd8dbe61791e372fa94"
+  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State Implementation",
+    "authorization": "Owner said Proceed after independently verified Utah State Phase 0, authorizing exactly the next ordinary bounded unit: one read-only STAGE2_CENSUS against the exact Phase 0 successor and Integration Freeze. No tracked repair, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, release, recovery, or unrelated mutation authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
