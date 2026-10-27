@@ -174,14 +174,6 @@ class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
                 live_main,
                 source_repo=source_repo,
             )
-            self.addCleanup(
-                lambda: subprocess.run(
-                    ["git", "worktree", "remove", "--force", str(runtime_repo)],
-                    cwd=source_repo,
-                    check=False,
-                    capture_output=True,
-                )
-            )
             self.assertEqual(
                 (source_repo / "tools/onboarding_plan.py").read_text(encoding="utf-8"),
                 "RUNTIME_MARKER = 'STALE_CONTROL'\n",
@@ -635,6 +627,11 @@ class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
                     verifier,
                     "add_existing_onboarding_worktree",
                     return_value=worktree,
+                ),
+                patch.object(
+                    verifier,
+                    "add_exact_protected_main_runtime_worktree",
+                    return_value=worktree / "runtime",
                 ),
                 patch.object(verifier, "git", return_value=cp),
                 patch.object(
