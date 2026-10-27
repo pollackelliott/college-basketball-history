@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage1-0004",
+  "request_id": "utah-state-phase0-0001",
   "school_key": "utah-state",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "4336b73a484ceb3851f0abd246243601e06d4a75",
-  "previous_control_state_sha256": "1716bd9245e66dafdb6978b236321a561c14b0a2acef22aa9467775804ff9cc5",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "0539157c344767c09e0707512334b1263fc8e901",
+  "previous_control_state_sha256": "effcbbe19b1e8618d5baa0869cc62a1532ad050e7445bcbbcdac59a1623eb46f",
   "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "target_branch": "data/utah-state-onboarding",
   "research_checkpoint": {
     "sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
     "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
@@ -17,6 +18,10 @@
       "part_count": 14
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage1-0004/checkpoint-manifest.json",
+    "sha256": "e2338af75e870151c5ef0c29b719667e8906e3bc46e08267db4a06246be561ae"
+  },
   "conference_reconciliation": {
     "path": ".remote-implementation/inputs/utah-state-stage1-0004/conference-reconciliation.json",
     "sha256": "0b0c555d761c7e3e8e9c5d5825e0834b38b4cf604f7795c87fcc16f1bda5c7ab"
@@ -25,15 +30,21 @@
     "path": ".remote-implementation/inputs/utah-state-stage1-0004/venue-reconciliation.json",
     "sha256": "33034ce53f0af4fdcf5ee504f567e29c8350ba913b628be462c5a69ed5f5abe2"
   },
+  "history_scope": {
+    "start_season": "1903-1904",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Owner-confirmed Utah State historical scope: INCEPTION+. The accepted Research Freeze begins with the 1903-04 program record; current protected-main program-top-level-scope.csv already records Utah State as INCEPTION+."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Utah State serialized Implementation Stage 1 reconciliation",
-    "authorization": "Control Center disposition explicitly authorized exact Stage 1 representation/identity reconciliation only: PCAA canonical key pcaa → big-west while preserving the historical display name and every other frozen field, Assembly Hall Bloomington reuse of VEN-000186, and Alumni Hall Annapolis reuse of VEN-000525. Submit one fresh read-only Stage 1 inventory using the already-clean immutable Research Freeze transport and stop after its durable checkpoint. No Phase 0, Stage 2, shared/global mutation, Owner Gate 1, Owner Gate 2, release, merge, Production, or unrelated authority is granted."
+    "origin": "ChatGPT Utah State serialized Implementation Phase 0",
+    "authorization": "Owner said Proceed after exact reconciled Utah State Stage 1 PASS. Execute exactly one guarded Phase 0 transaction from unchanged protected main using the authenticated Research Freeze, exact Stage 1 PASS checkpoint, and its hash-bound conference/venue reconciliation payloads. Authority includes the ordinary target-school Phase 0 work required by that checkpoint: Integration Freeze, target scope metadata, the five safe new Utah State venue identities and safe representation/name updates, stable onboarding branch publication, lock release, and independent fresh verification. No Stage 2, Owner Gate 1, Owner Gate 2, release, merge, Production, recovery, or unrelated/shared maintenance authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
