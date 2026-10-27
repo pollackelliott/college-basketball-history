@@ -1,5 +1,6 @@
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 
 
@@ -108,6 +109,102 @@ class ReconciliationHomeExceptionPropagationTests(unittest.TestCase):
         self.assertEqual(canonical["venue_id"], "VEN-1")
         self.assertEqual(canonical["site_city"], "Example City")
         self.assertEqual(canonical["site_state"], "EX")
+
+    def test_normalized_site_patch_bypasses_redundant_agreement_recheck(self):
+        source = {
+            "source_program_key": "test",
+            "source_game_id": "TEST-1",
+            "normalized_opponent_key": "other",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "curated_venue_name": "Example Fieldhouse",
+            "city": "Example City",
+            "state": "EX",
+            "game_date": "1946-02-01",
+        }
+        canonical = {
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "site_type": "TEAM_B_HOME",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+            "notes": "",
+        }
+        venue_map = {
+            "example fieldhouse": {
+                "venue_key": "example-fieldhouse",
+                "venue_id": "VEN-1",
+                "city": "Example City",
+                "state": "EX",
+            }
+        }
+
+        # The site_type NORMALIZE_SOURCE_TO_CANONICAL decision has already
+        # established agreement. A later redundant orientation re-check must
+        # not suppress the explicit owner-approved venue/locality patch.
+        with mock.patch(
+            "onboarding_plan._assertion_site_to_canonical",
+            return_value="UNKNOWN",
+        ):
+            _sync_explicit_source_site_patch_to_canonical(
+                source,
+                canonical,
+                venue_map,
+                {"curated_venue_name", "city", "state"},
+                site_agreement_guaranteed=True,
+            )
+
+        self.assertEqual(canonical["venue_key"], "example-fieldhouse")
+        self.assertEqual(canonical["venue_id"], "VEN-1")
+        self.assertEqual(canonical["site_city"], "Example City")
+        self.assertEqual(canonical["site_state"], "EX")
+
+    def test_unproven_site_patch_still_requires_agreement(self):
+        source = {
+            "source_program_key": "test",
+            "source_game_id": "TEST-1",
+            "normalized_opponent_key": "other",
+            "curated_site_type": "SOURCE_PROGRAM_HOME",
+            "curated_venue_name": "Example Fieldhouse",
+            "city": "Example City",
+            "state": "EX",
+            "game_date": "1946-02-01",
+        }
+        canonical = {
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "site_type": "TEAM_B_HOME",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+            "notes": "",
+        }
+        venue_map = {
+            "example fieldhouse": {
+                "venue_key": "example-fieldhouse",
+                "venue_id": "VEN-1",
+                "city": "Example City",
+                "state": "EX",
+            }
+        }
+
+        with mock.patch(
+            "onboarding_plan._assertion_site_to_canonical",
+            return_value="UNKNOWN",
+        ):
+            _sync_explicit_source_site_patch_to_canonical(
+                source,
+                canonical,
+                venue_map,
+                {"curated_venue_name", "city", "state"},
+            )
+
+        self.assertEqual(canonical["venue_key"], "")
+        self.assertEqual(canonical["venue_id"], "")
+        self.assertEqual(canonical["site_city"], "")
+        self.assertEqual(canonical["site_state"], "")
 
     def test_reconciled_researched_unknown_home_adds_marker(self):
         canonical = {
