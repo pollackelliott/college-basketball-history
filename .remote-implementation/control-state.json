@@ -86,15 +86,15 @@
   "active_lock_commit": "ec27b0ee33c624fa45d54eb0bec428bbf4770013",
   "active_lock_owner": "github-actions:40561597245:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "active_prepared_tree_sha": "5610bfa1ca4cad4a1581525ed1b97ba6d7d94eda",
   "active_request_id": "utah-state-stage2-opponent-display-normalize-0001",
   "active_request_sha256": "20b099faa8e43ad499b520e8f8497660995f129f1bdf9b5691ed5ac919f00a1b",
   "active_school_key": "utah-state",
   "active_target_branch": "data/utah-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/utah-state/utah-state-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "4502e5f6ee048168e0ee6a3937e4b47aa7eeee248d4f1e114d474b56f20ce76e",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -193,5 +193,5 @@
   "lock_acquisition_request_commit": "7b7597e098834f1b2b30b3e172823670f00a98fa",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

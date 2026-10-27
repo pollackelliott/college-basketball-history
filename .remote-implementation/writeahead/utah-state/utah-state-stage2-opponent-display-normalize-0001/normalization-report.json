@@ -1,0 +1,628 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 16,
+  "change_row_count": 22,
+  "changes": [
+    {
+      "authority_names": [
+        "American Institute"
+      ],
+      "authority_signature": "americaninstitute",
+      "canonical_opponent_key": "american-institute",
+      "from_names": [
+        "American Institute (historical team)"
+      ],
+      "target_row_count": 1,
+      "to_name": "American Institute"
+    },
+    {
+      "authority_names": [
+        "Brigham Young College"
+      ],
+      "authority_signature": "brighamyoungcollege",
+      "canonical_opponent_key": "brigham-young-college",
+      "from_names": [
+        "Brigham Young College (Logan)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Brigham Young College"
+    },
+    {
+      "authority_names": [
+        "BYU-Idaho"
+      ],
+      "authority_signature": "byuidaho",
+      "canonical_opponent_key": "byu-idaho",
+      "from_names": [
+        "BYU–Idaho (Ricks College)"
+      ],
+      "target_row_count": 1,
+      "to_name": "BYU-Idaho"
+    },
+    {
+      "authority_names": [
+        "Cal State Stanislaus"
+      ],
+      "authority_signature": "calstatestanislaus",
+      "canonical_opponent_key": "cal-state-stanislaus",
+      "from_names": [
+        "Stanislaus State"
+      ],
+      "target_row_count": 1,
+      "to_name": "Cal State Stanislaus"
+    },
+    {
+      "authority_names": [
+        "Carroll College (MT)"
+      ],
+      "authority_signature": "carrollcollegemt",
+      "canonical_opponent_key": "carroll-college-montana",
+      "from_names": [
+        "Carroll College (Montana)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "authority_names": [
+        "Centenary (LA)"
+      ],
+      "authority_signature": "centenaryla",
+      "canonical_opponent_key": "centenary-louisiana",
+      "from_names": [
+        "Centenary (Louisiana)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "authority_names": [
+        "UCCS"
+      ],
+      "authority_signature": "uccs",
+      "canonical_opponent_key": "colorado-colorado-springs",
+      "from_names": [
+        "Colorado–Colorado Springs"
+      ],
+      "target_row_count": 2,
+      "to_name": "UCCS"
+    },
+    {
+      "authority_names": [
+        "Lewis - Clark (ID)"
+      ],
+      "authority_signature": "lewisclarkid",
+      "canonical_opponent_key": "lewis-clark-id",
+      "from_names": [
+        "Lewis–Clark State College (Idaho)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Lewis - Clark (ID)"
+    },
+    {
+      "authority_names": [
+        "Midwestern State"
+      ],
+      "authority_signature": "midwesternstate",
+      "canonical_opponent_key": "midwestern-state",
+      "from_names": [
+        "Midwestern State (Texas)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Midwestern State"
+    },
+    {
+      "authority_names": [
+        "NYU"
+      ],
+      "authority_signature": "nyu",
+      "canonical_opponent_key": "nyu",
+      "from_names": [
+        "New York University"
+      ],
+      "target_row_count": 2,
+      "to_name": "NYU"
+    },
+    {
+      "authority_names": [
+        "Regis"
+      ],
+      "authority_signature": "regis",
+      "canonical_opponent_key": "regis-colorado",
+      "from_names": [
+        "Regis University (Colorado)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Regis"
+    },
+    {
+      "authority_names": [
+        "Saint Francis (PA)",
+        "Saint Francis (Pa.)"
+      ],
+      "authority_signature": "saintfrancispa",
+      "canonical_opponent_key": "saint-francis-pa",
+      "from_names": [
+        "Saint Francis (Pennsylvania)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Francis (PA)"
+    },
+    {
+      "authority_names": [
+        "Springfield College"
+      ],
+      "authority_signature": "springfieldcollege",
+      "canonical_opponent_key": "springfield-college",
+      "from_names": [
+        "Springfield College (Massachusetts)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Springfield College"
+    },
+    {
+      "authority_names": [
+        "Trinity (TX)"
+      ],
+      "authority_signature": "trinitytx",
+      "canonical_opponent_key": "trinity-texas",
+      "from_names": [
+        "Trinity University (Texas)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Trinity (TX)"
+    },
+    {
+      "authority_names": [
+        "Westminster"
+      ],
+      "authority_signature": "westminster",
+      "canonical_opponent_key": "westminster-utah",
+      "from_names": [
+        "Westminster (Utah)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Westminster"
+    },
+    {
+      "authority_names": [
+        "Whitworth"
+      ],
+      "authority_signature": "whitworth",
+      "canonical_opponent_key": "whitworth",
+      "from_names": [
+        "Whitworth University"
+      ],
+      "target_row_count": 2,
+      "to_name": "Whitworth"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "source_game_display_change_keys": 16,
+  "source_game_display_change_rows": 70,
+  "source_game_display_changes": [
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00001",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00005",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00009",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00014",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00017",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00023",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00027",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00029",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00030",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00036",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00041",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00043",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00049",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00059",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00061",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00066",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00078",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00082",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00085",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00088",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00094",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00098",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00108",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00111",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00120",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00121",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "BYU–Idaho (Ricks College)",
+      "normalized_opponent_key": "byu-idaho",
+      "source_game_id": "UST-S1-00123",
+      "to_name": "BYU-Idaho"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00129",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00130",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00132",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Brigham Young College (Logan)",
+      "normalized_opponent_key": "brigham-young-college",
+      "source_game_id": "UST-S1-00143",
+      "to_name": "Brigham Young College"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00147",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00234",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00235",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00246",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00247",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00256",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-00257",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "BYU–Idaho (Ricks College)",
+      "normalized_opponent_key": "byu-idaho",
+      "source_game_id": "UST-S1-00536",
+      "to_name": "BYU-Idaho"
+    },
+    {
+      "from_name": "Springfield College (Massachusetts)",
+      "normalized_opponent_key": "springfield-college",
+      "source_game_id": "UST-S1-00598",
+      "to_name": "Springfield College"
+    },
+    {
+      "from_name": "American Institute (historical team)",
+      "normalized_opponent_key": "american-institute",
+      "source_game_id": "UST-S1-00599",
+      "to_name": "American Institute"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "UST-S1-00647",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "UST-S1-00675",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "UST-S1-00765",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "New York University",
+      "normalized_opponent_key": "nyu",
+      "source_game_id": "UST-S1-00778",
+      "to_name": "NYU"
+    },
+    {
+      "from_name": "New York University",
+      "normalized_opponent_key": "nyu",
+      "source_game_id": "UST-S1-00808",
+      "to_name": "NYU"
+    },
+    {
+      "from_name": "Whitworth University",
+      "normalized_opponent_key": "whitworth",
+      "source_game_id": "UST-S1-00878",
+      "to_name": "Whitworth"
+    },
+    {
+      "from_name": "New York University",
+      "normalized_opponent_key": "nyu",
+      "source_game_id": "UST-S1-00977",
+      "to_name": "NYU"
+    },
+    {
+      "from_name": "New York University",
+      "normalized_opponent_key": "nyu",
+      "source_game_id": "UST-S1-00988",
+      "to_name": "NYU"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "UST-S1-01037",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Centenary (Louisiana)",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "UST-S1-01117",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Saint Francis (Pennsylvania)",
+      "normalized_opponent_key": "saint-francis-pa",
+      "source_game_id": "UST-S1-01250",
+      "to_name": "Saint Francis (PA)"
+    },
+    {
+      "from_name": "Trinity University (Texas)",
+      "normalized_opponent_key": "trinity-texas",
+      "source_game_id": "UST-S1-01325",
+      "to_name": "Trinity (TX)"
+    },
+    {
+      "from_name": "Centenary (Louisiana)",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "UST-S1-01383",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "UST-S1-01402",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Stanislaus State",
+      "normalized_opponent_key": "cal-state-stanislaus",
+      "source_game_id": "UST-S1-01418",
+      "to_name": "Cal State Stanislaus"
+    },
+    {
+      "from_name": "Midwestern State (Texas)",
+      "normalized_opponent_key": "midwestern-state",
+      "source_game_id": "UST-S1-01430",
+      "to_name": "Midwestern State"
+    },
+    {
+      "from_name": "Midwestern State (Texas)",
+      "normalized_opponent_key": "midwestern-state",
+      "source_game_id": "UST-S1-01567",
+      "to_name": "Midwestern State"
+    },
+    {
+      "from_name": "Lewis–Clark State College (Idaho)",
+      "normalized_opponent_key": "lewis-clark-id",
+      "source_game_id": "UST-S1-01889",
+      "to_name": "Lewis - Clark (ID)"
+    },
+    {
+      "from_name": "Lewis–Clark State College (Idaho)",
+      "normalized_opponent_key": "lewis-clark-id",
+      "source_game_id": "UST-S1-01917",
+      "to_name": "Lewis - Clark (ID)"
+    },
+    {
+      "from_name": "Lewis–Clark State College (Idaho)",
+      "normalized_opponent_key": "lewis-clark-id",
+      "source_game_id": "UST-S1-01945",
+      "to_name": "Lewis - Clark (ID)"
+    },
+    {
+      "from_name": "Colorado–Colorado Springs",
+      "normalized_opponent_key": "colorado-colorado-springs",
+      "source_game_id": "UST-S1-02038",
+      "to_name": "UCCS"
+    },
+    {
+      "from_name": "Whitworth University",
+      "normalized_opponent_key": "whitworth",
+      "source_game_id": "UST-S1-02040",
+      "to_name": "Whitworth"
+    },
+    {
+      "from_name": "Colorado–Colorado Springs",
+      "normalized_opponent_key": "colorado-colorado-springs",
+      "source_game_id": "UST-S1-02101",
+      "to_name": "UCCS"
+    },
+    {
+      "from_name": "Centenary (Louisiana)",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "UST-S1-02141",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Centenary (Louisiana)",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "UST-S1-02290",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Carroll College (Montana)",
+      "normalized_opponent_key": "carroll-college-montana",
+      "source_game_id": "UST-S1-02794",
+      "to_name": "Carroll College (MT)"
+    },
+    {
+      "from_name": "Westminster (Utah)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "UST-S1-02830",
+      "to_name": "Westminster"
+    },
+    {
+      "from_name": "Westminster (Utah)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "UST-S1-02894",
+      "to_name": "Westminster"
+    },
+    {
+      "from_name": "Westminster (Utah)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "UST-S1-02926",
+      "to_name": "Westminster"
+    }
+  ],
+  "status": "PASS"
+}

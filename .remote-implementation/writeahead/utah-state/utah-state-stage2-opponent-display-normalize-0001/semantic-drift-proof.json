@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "integration_base_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+    "school_key": "utah-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+    "integration_base_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+    "school_key": "utah-state",
+    "status": "PASS"
+  }
+}
