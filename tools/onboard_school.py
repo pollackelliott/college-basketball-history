@@ -67,6 +67,17 @@ from plan_home_chronology_remediation import (
 
 
 TEXT_SUFFIXES = {".csv", ".py", ".html", ".json", ".md", ".txt"}
+RUNTIME_ROOT = Path(__file__).resolve().parents[1]
+
+
+def _runtime_tool(name: str) -> Path:
+    """Return one executable tool from this onboard_school.py runtime checkout."""
+
+    path = RUNTIME_ROOT / "tools" / name
+    if not path.is_file():
+        raise WorkflowError(f"runtime tool is missing: {path}")
+    return path
+
 
 SINGLE_GAME_CORRECTION_KINDS = frozenset({
     "SINGLE_GAME_IDENTITY",
@@ -236,13 +247,14 @@ def run_gates(
     commands = [
         (
             "validation",
-            [python, str(repo / "tools/validate_data.py"), str(repo)],
+            [python, str(_runtime_tool("validate_data.py")), str(repo)],
+            repo,
         ),
         (
             "target_no_op",
             [
                 python,
-                str(repo / "tools/ingest_school.py"),
+                str(_runtime_tool("ingest_school.py")),
                 school_key,
                 "--check-package",
                 "--repo",
@@ -252,12 +264,13 @@ def run_gates(
                     if correction_source_id else []
                 ),
             ],
+            repo,
         ),
         (
             "site_completeness",
             [
                 python,
-                str(repo / "tools/implementation_site_gate.py"),
+                str(_runtime_tool("implementation_site_gate.py")),
                 school_key,
                 "--repo",
                 str(repo),
@@ -269,20 +282,23 @@ def run_gates(
                     / "implementation-site-gate.json"
                 ),
             ],
+            repo,
         ),
         (
             "accomplishments",
             [
                 python,
-                str(repo / "tools/verify_program_accomplishments.py"),
+                str(_runtime_tool("verify_program_accomplishments.py")),
                 school_key,
                 "--repo",
                 str(repo),
             ],
+            repo,
         ),
         (
             "site_dry_run",
-            [python, str(repo / "tools/build_site_data.py"), str(repo)],
+            [python, str(_runtime_tool("build_site_data.py")), str(repo)],
+            repo,
         ),
     ]
     if include_tests:
@@ -299,9 +315,10 @@ def run_gates(
                     "-p",
                     "test_*.py",
                 ],
+                RUNTIME_ROOT,
             )
         )
-    for label, command in commands:
+    for label, command, command_cwd in commands:
         print(f"\n=== {label} ===")
         if label == "site_completeness" and correction_site_proof is not None:
             if not correction_source_id:
@@ -309,7 +326,7 @@ def run_gates(
             # The independent gate STILL runs and emits its full report.
             failure = None
             try:
-                run(command, cwd=repo, label=label, echo=False)
+                run(command, cwd=command_cwd, label=label, echo=False)
             except WorkflowError as exc:
                 failure = str(exc)
             report_path = (
@@ -330,7 +347,7 @@ def run_gates(
             )
             print(outputs[label])
         else:
-            outputs[label] = run(command, cwd=repo, label=label)
+            outputs[label] = run(command, cwd=command_cwd, label=label)
     if changed is not None:
         bad = whitespace_errors(repo, changed)
         if bad:
@@ -1052,12 +1069,12 @@ def _execute_single_game_correction(
     print(f"Archived sealed decisions: {archive.relative_to(repo)}")
     print("\n=== deterministic site build ===")
     site_output = run(
-        [sys.executable, str(repo / "tools/build_site_data.py"), str(repo), "--apply"],
+        [sys.executable, str(_runtime_tool("build_site_data.py")), str(repo), "--apply"],
         cwd=repo, label="site build apply",
     )
     first = site_hashes(repo)
     run(
-        [sys.executable, str(repo / "tools/build_site_data.py"), str(repo), "--apply"],
+        [sys.executable, str(_runtime_tool("build_site_data.py")), str(repo), "--apply"],
         cwd=repo, label="site build determinism replay", echo=False,
     )
     if first != site_hashes(repo):
@@ -1105,7 +1122,7 @@ def execute_approved_in_place(
         ingestion_output = run(
             [
                 sys.executable,
-                str(repo / "tools/ingest_school.py"),
+                str(_runtime_tool("ingest_school.py")),
                 school_key,
                 "--apply",
                 "--identity-decisions",
@@ -1155,13 +1172,13 @@ def execute_approved_in_place(
 
     print("\n=== deterministic site build ===")
     site_output = run(
-        [sys.executable, str(repo / "tools/build_site_data.py"), str(repo), "--apply"],
+        [sys.executable, str(_runtime_tool("build_site_data.py")), str(repo), "--apply"],
         cwd=repo,
         label="site build apply",
     )
     first_site_hashes = site_hashes(repo)
     run(
-        [sys.executable, str(repo / "tools/build_site_data.py"), str(repo), "--apply"],
+        [sys.executable, str(_runtime_tool("build_site_data.py")), str(repo), "--apply"],
         cwd=repo,
         label="site build determinism replay",
         echo=False,
