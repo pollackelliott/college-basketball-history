@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "recovered_request_id": "utah-state-stage1-0001",
+  "request_id": "utah-state-stage1-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
