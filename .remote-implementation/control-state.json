@@ -79,18 +79,19 @@
     "utah-state-phase0-0001",
     "utah-state-stage1-0005",
     "utah-state-phase0-0002",
-    "utah-state-stage2-census-0001"
+    "utah-state-stage2-census-0001",
+    "utah-state-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40561597245:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "utah-state-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "20b099faa8e43ad499b520e8f8497660995f129f1bdf9b5691ed5ac919f00a1b",
+  "active_school_key": "utah-state",
+  "active_target_branch": "data/utah-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -186,8 +187,11 @@
     "target_branch": "data/utah-state-onboarding",
     "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40561597245",
+  "lock_acquisition_request_commit": "7b7597e098834f1b2b30b3e172823670f00a98fa",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
