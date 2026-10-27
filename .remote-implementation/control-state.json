@@ -53,18 +53,19 @@
     "gonzaga-stage2-proposal-0001",
     "gonzaga-stage2-proposal-0002",
     "gonzaga-stage2-gate1-fill-0001",
-    "gonzaga-stage2-preseal-0001"
+    "gonzaga-stage2-preseal-0001",
+    "gonzaga-stage2-gate1-seal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_SEAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "gonzaga-stage2-gate1-seal-0001",
+  "active_request_sha256": "02f6712d349ccd52ed959f675f7f758b1c85b5e381fb62c249679752551c8ea4",
+  "active_school_key": "gonzaga",
+  "active_target_branch": "data/gonzaga-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -147,8 +148,11 @@
     "target_branch": "data/gonzaga-onboarding",
     "target_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40442941403",
+  "lock_acquisition_request_commit": "d1e4d7eb4ea7b9e149f9e4ba70dee4972e5067b3",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_SEAL_RUNNING"
 }
