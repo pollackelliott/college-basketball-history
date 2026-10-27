@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-release-preview-verify-0001",
+  "school_key": "gonzaga",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "f99f175a1317fd2df7886c081eac4659e1b85eb0",
+  "previous_control_state_sha256": "f4e983775fbc771f4c534f62759b93c26ece92e9c321fd64279fc8762c57e344",
+  "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "420377f9b3b19faaf02d1c31890a920e29ce46af82b02da195c457b2b7067125"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/gonzaga/gonzaga-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "742b76e4db7f728058c2f67faf5788dd77a34b530df5a12f7b5bac0c0b8c94c8"
+  },
+  "approved_plan_hash": "fa5834fa234de37fe6816f5aa9e28b6b38e2826b416683744aae7174338481a4",
+  "release_manifest_sha256": "f173d1aa3aaa76383db41ee8eee4817545db1949d0e330855f0ee86e4c639558",
+  "pr_number": 381,
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner said Proceed after exact Gonzaga release PR #381 was created and identity-read back at head 6d27eb9907c80597ff044f1950a1b67490e153b7. This authorizes exactly one bounded read-only RELEASE_PREVIEW_VERIFY against the fresh-verified release-readiness authority and existing PR #381. It grants no Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
