@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "94a4b2f73ae5cf53e969c169d5ec208e3ff46dedfe0045cd6bfdb8e71f7940f4",
+    "implementation-stage2-status.json": "c96e15a21daa208a42e7e2ea2aad6dc2c5d8e935e38ad6b15f5ef8f6bca45f76",
+    "plan.json": "3938474a4f63a37cc7701d6865cbc50de3b0729215739b9f9a5cd49d83162020",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "bd14762648bdce19aae0568f5afd264372daafc9ac93785268f8003f92c7356a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "94a4b2f73ae5cf53e969c169d5ec208e3ff46dedfe0045cd6bfdb8e71f7940f4",
+    "implementation-stage2-status.json": "049d6e12941d8cfb83db3e417d12a057326849d27a32081ae8bec00c9f3a5b5c",
+    "plan.json": "e91b1612e0d79a62e2d504b8a39c26c14a6b9840e08cd929f976cf26df5f9f24",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "74e42cd18d69c1bf44a3bb6d7b07bff18195877b4302ce3ea1f329adb9008565"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "utah-state-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "target_tree_sha": "b8e58e976495709d51d1b679fd704862d36d3d15",
+  "tracked_stage2_mutation": "NONE"
+}
