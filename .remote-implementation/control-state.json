@@ -64,7 +64,7 @@
     "gonzaga-stage2-opponent-display-normalize-score-restored-0001"
   ],
   "active_expected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
-  "active_lock_commit": null,
+  "active_lock_commit": "b4111e2a04d88c67c50d1b4f7267d07ed68babdd",
   "active_lock_owner": "github-actions:40504932350:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
