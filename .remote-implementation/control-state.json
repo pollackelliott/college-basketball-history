@@ -61,15 +61,15 @@
   "active_lock_commit": "2d2c70a4c349caaf1635be04bb0320860cd523e5",
   "active_lock_owner": "github-actions:40444111540:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+  "active_prepared_tree_sha": "2b91f753feb9ddfe3e86f429aa64ed1a93dd1015",
   "active_request_id": "gonzaga-stage2-sealed-apply-0001",
   "active_request_sha256": "535fe356d0fc04d5242878fb5034c4c797598333851170e9a08e82c3699635c8",
   "active_school_key": "gonzaga",
   "active_target_branch": "data/gonzaga-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/gonzaga/gonzaga-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "d11031be4483b97688093301bd028b08503e0cc0de85237a7b04190b396919c4",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -156,5 +156,5 @@
   "lock_acquisition_request_commit": "416277b76796766f93e7a7ca98b5a7bcc1f69f6d",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

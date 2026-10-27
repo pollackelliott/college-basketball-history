@@ -1,0 +1,108 @@
+## Summary
+
+- onboards `gonzaga` through the permanent sealed-plan workflow
+- preserves 2,053 source rows (0 pre-cutoff)
+- matches 421 existing games and creates 1,623
+- applies 9 owner-approved identity decisions
+- records 45 dated discrepancy decisions
+- approved plan `fa5834fa234de37fe6816f5aa9e28b6b38e2826b416683744aae7174338481a4`
+- discrepancy dispositions: KEEP_CANONICAL=3, NORMALIZE_SOURCE_TO_CANONICAL=10, USE_SOURCE=32
+
+## Validation
+
+- repository validation — PASS
+- target package no-op — PASS
+- implementation site completeness — PASS
+- accomplishment cross-check — PASS
+- deterministic site build — PASS
+- unit tests — PASS
+- changed-file whitespace check — PASS
+
+## Sealed apply boundary
+
+The paths below are the transactional sealed-plan mutation boundary. The full PR diff also includes committed Phase 0 package/reference changes already present on the onboarding branch.
+
+- `data/canonical/games.csv`
+- `data/evidence/game-assertions.csv`
+- `data/reconciliation/discrepancies.csv`
+- `data/reconciliation/onboarding-decisions/gonzaga-fa5834fa234d.json`
+- `data/reference/program-accomplishments.csv`
+- `data/reference/programs.csv`
+- `schools/gonzaga/source-games.csv`
+- `site/data/manifest.json`
+- `site/data/programs.json`
+- `site/data/teams/alabama.json`
+- `site/data/teams/arizona-state.json`
+- `site/data/teams/arizona.json`
+- `site/data/teams/arkansas.json`
+- `site/data/teams/auburn.json`
+- `site/data/teams/baylor.json`
+- `site/data/teams/boise-state.json`
+- `site/data/teams/butler.json`
+- `site/data/teams/byu.json`
+- `site/data/teams/california.json`
+- `site/data/teams/chicago-state.json`
+- `site/data/teams/cincinnati.json`
+- `site/data/teams/clemson.json`
+- `site/data/teams/colorado.json`
+- `site/data/teams/creighton.json`
+- `site/data/teams/depaul.json`
+- `site/data/teams/duke.json`
+- `site/data/teams/fairleigh-dickinson.json`
+- `site/data/teams/florida-state.json`
+- `site/data/teams/florida.json`
+- `site/data/teams/georgia-tech.json`
+- `site/data/teams/georgia.json`
+- `site/data/teams/gonzaga.json`
+- `site/data/teams/houston.json`
+- `site/data/teams/illinois.json`
+- `site/data/teams/indiana.json`
+- `site/data/teams/iowa-state.json`
+- `site/data/teams/iowa.json`
+- `site/data/teams/kansas-state.json`
+- `site/data/teams/kansas.json`
+- `site/data/teams/kentucky.json`
+- `site/data/teams/louisville.json`
+- `site/data/teams/marquette.json`
+- `site/data/teams/maryland.json`
+- `site/data/teams/michigan-state.json`
+- `site/data/teams/michigan.json`
+- `site/data/teams/minnesota.json`
+- `site/data/teams/mississippi-state.json`
+- `site/data/teams/missouri.json`
+- `site/data/teams/nc-state.json`
+- `site/data/teams/north-carolina.json`
+- `site/data/teams/northwestern.json`
+- `site/data/teams/notre-dame.json`
+- `site/data/teams/ohio-state.json`
+- `site/data/teams/oklahoma-state.json`
+- `site/data/teams/oklahoma.json`
+- `site/data/teams/oregon-state.json`
+- `site/data/teams/oregon.json`
+- `site/data/teams/penn-state.json`
+- `site/data/teams/providence.json`
+- `site/data/teams/purdue.json`
+- `site/data/teams/seton-hall.json`
+- `site/data/teams/smu.json`
+- `site/data/teams/south-carolina.json`
+- `site/data/teams/st-john-s.json`
+- `site/data/teams/stanford.json`
+- `site/data/teams/syracuse.json`
+- `site/data/teams/tcu.json`
+- `site/data/teams/tennessee.json`
+- `site/data/teams/texas-a-m.json`
+- `site/data/teams/texas-tech.json`
+- `site/data/teams/texas.json`
+- `site/data/teams/ucla.json`
+- `site/data/teams/uconn.json`
+- `site/data/teams/usc.json`
+- `site/data/teams/utah.json`
+- `site/data/teams/villanova.json`
+- `site/data/teams/virginia-tech.json`
+- `site/data/teams/virginia.json`
+- `site/data/teams/wake-forest.json`
+- `site/data/teams/washington-state.json`
+- `site/data/teams/washington.json`
+- `site/data/teams/west-virginia.json`
+- `site/data/teams/wisconsin.json`
+- `site/data/teams/xavier.json`
