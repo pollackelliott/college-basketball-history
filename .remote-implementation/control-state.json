@@ -134,11 +134,11 @@
   "current_sequence": 54,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "531ef97f658599b9410768bec169645338d22ff533e603b7ecfe2de6c16d71ac",
     "operation": "PHASE0",
     "protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "gonzaga-phase0-score-restored-0001",
     "school_key": "gonzaga",
     "successor_manifest_path": ".remote-implementation/successors/gonzaga/gonzaga-phase0-score-restored-0001/successor-manifest.json",

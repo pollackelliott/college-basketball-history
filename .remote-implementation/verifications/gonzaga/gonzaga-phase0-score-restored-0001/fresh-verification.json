@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "531ef97f658599b9410768bec169645338d22ff533e603b7ecfe2de6c16d71ac",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "d64aee40fa72b8a78b51594c216715081f8a249f",
+  "prepared_parent_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "prepared_tree_sha": "fcda1b5b318a6dd6184f5d309086f5dfa369e712",
+  "protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "gonzaga-phase0-score-restored-0001",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "semantic_snapshot_sha256": "c21ce7736499499e75603242c76e7cd1f160ee125f6cc2747d57ae5da9ebb14f",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "d64aee40fa72b8a78b51594c216715081f8a249f"
+}
