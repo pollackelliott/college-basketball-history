@@ -1,0 +1,26 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "request_id": "utah-state-stage1-0004",
+  "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
+  "research_checkpoint_sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+  "research_member_sha256": {
+    "conferences.csv": "facf2bfcf0a84d229b345da9345ddfaf7d226b7dc65d41211cf07d354ce8705d",
+    "notes.md": "22447d7f352ec5fcb9ef4fd9fc2b1b491520170583948a8caa7ac731bf833d4a",
+    "opponents.csv": "ef4c5d2bd06ef54c465011646ff92bb2f6b40c8aab726b7cf57d1e502a88d786",
+    "source-games.csv": "d9cec5789cf7d8e5d0e627d65086cf1cd4e059ff60e2d59457a9aa455892e844",
+    "source-notes.md": "799806302cb894548535e57c35552658f0f4488ab777696a9857f8786d9cae17",
+    "venues.csv": "c46052ad73c75bc5c03c5f80bbf55cc2b03b2c6e01b3ce9801e7a8b3ad5a4a47"
+  },
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "sidecars": {
+    "conference-reconciliation.json": "0b0c555d761c7e3e8e9c5d5825e0834b38b4cf604f7795c87fcc16f1bda5c7ab",
+    "request.json": "81a7967f7fdbe8ccbf5fdb8c86e8b595040b41b2447cd497fb5a9e546b7b6f7d",
+    "stage1-reconciliation.json": "2cb4e506f2743af36625ce140a94eb2385c0d63fb4e936747f6d7039983e2c68",
+    "venue-reconciliation.json": "33034ce53f0af4fdcf5ee504f567e29c8350ba913b628be462c5a69ed5f5abe2"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}

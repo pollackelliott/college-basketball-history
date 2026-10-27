@@ -1,0 +1,31 @@
+{
+  "expected_research_zip_sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+  "expected_venues_sha256": "c46052ad73c75bc5c03c5f80bbf55cc2b03b2c6e01b3ce9801e7a8b3ad5a4a47",
+  "mappings": [
+    {
+      "expected_global_city": "Bloomington",
+      "expected_global_state": "IN",
+      "expected_local_city": "Bloomington",
+      "expected_local_name": "Assembly Hall",
+      "expected_local_state": "IN",
+      "global_venue_id": "VEN-000186",
+      "global_venue_key": "simon-skjodt-assembly-hall",
+      "local_venue_key": "assembly-hall",
+      "resolution_basis": "Control Center-authorized exact physical-identity reuse; durable Stage 1 blocker candidate VEN-000186 and current protected-main venue registry agree on Assembly Hall, Bloomington, IN."
+    },
+    {
+      "expected_global_city": "Annapolis",
+      "expected_global_state": "MD",
+      "expected_local_city": "Annapolis",
+      "expected_local_name": "Alumni Hall",
+      "expected_local_state": "MD",
+      "global_venue_id": "VEN-000525",
+      "global_venue_key": "alumni-hall-navy",
+      "local_venue_key": "alumni-hall",
+      "resolution_basis": "Control Center-authorized exact physical-identity reuse; durable Stage 1 blocker candidate VEN-000525 and current protected-main venue registry agree on Alumni Hall, Annapolis, MD."
+    }
+  ],
+  "owner_approval_basis": "Control Center disposition — Utah State Stage 1 reconciliation (2026-10-27): exact physical-identity reuse based on the durable utah-state-stage1-0003 checkpoint and current protected-main venue registry evidence. Map Assembly Hall, Bloomington, IN to VEN-000186 / simon-skjodt-assembly-hall and Alumni Hall, Annapolis, MD to VEN-000525 / alumni-hall-navy. No new venue identities for these mappings. This is not Owner Gate 1 authority.",
+  "schema_version": 1,
+  "school_key": "utah-state"
+}

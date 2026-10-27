@@ -76,15 +76,15 @@
     "utah-state-stage1-0003",
     "utah-state-stage1-0004"
   ],
-  "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "utah-state-stage1-0004",
-  "active_request_sha256": "81a7967f7fdbe8ccbf5fdb8c86e8b595040b41b2447cd497fb5a9e546b7b6f7d",
-  "active_school_key": "utah-state",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -157,25 +157,23 @@
     "gonzaga-release-gate2-approval-score-restored-0001",
     "gonzaga-release-production-proof-score-restored-0001",
     "utah-state-stage1-recover-0001",
-    "utah-state-stage1-0003"
+    "utah-state-stage1-0003",
+    "utah-state-stage1-0004"
   ],
-  "current_sequence": 67,
+  "current_sequence": 68,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/utah-state/utah-state-stage1-0003/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "9dfa5e2527f6e89b1cdd275665b6d83530dc5206c6f59e5f09d124ee648f66f4",
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/utah-state/utah-state-stage1-0004/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "e2338af75e870151c5ef0c29b719667e8906e3bc46e08267db4a06246be561ae",
     "operation": "STAGE1_INVENTORY",
     "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
-    "request_id": "utah-state-stage1-0003",
+    "request_id": "utah-state-stage1-0004",
     "school_key": "utah-state",
-    "stage1_reconciliation_sha256": "c5e8aed4deb9d6b2848a11af0b0ed579ce542042c32409a5dedd11a7c18925ce",
-    "stage1_status": "BLOCKED"
+    "stage1_reconciliation_sha256": "2cb4e506f2743af36625ce140a94eb2385c0d63fb4e936747f6d7039983e2c68",
+    "stage1_status": "PASS"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "40556901758",
-  "lock_acquisition_request_commit": "2d80fba52d3106851051b99e66708776c5b48bd5",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }
