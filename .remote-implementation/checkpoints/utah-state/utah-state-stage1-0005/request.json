@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage1-0005",
+  "school_key": "utah-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "378ad23ce995e35ed4ab4fcc6e929ecba5dfc7d8",
+  "previous_control_state_sha256": "1fc5418550ee740a61df52ef525d7ca5b3e80580064ab30faa11b476cbae6580",
+  "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "research_checkpoint": {
+    "sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+    "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "35d546994df7573fd6da13ef39d704939be1e7d4",
+      "path_prefix": ".remote-implementation/inputs/utah-state-stage1-0003/research-frozen.zip.b64.part",
+      "part_count": 14
+    }
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/inputs/utah-state-stage1-0005/conference-reconciliation.json",
+    "sha256": "d8ecfe2ab69e7e90e365910d458cc08151d1a5309d5269bf0e7b61e1390a4001"
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/utah-state-stage1-0004/venue-reconciliation.json",
+    "sha256": "33034ce53f0af4fdcf5ee504f567e29c8350ba913b628be462c5a69ed5f5abe2"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State Implementation mechanical conference-season normalization",
+    "authorization": "Owner explicitly approved handling the diagnosed Phase 0 representation defect in this chat. Run one fresh read-only Stage 1 inventory using the same accepted Research Freeze and same historical/identity reconciliation, with only conference start_season/end_season serialized from equivalent YYYY-YY to repository-required YYYY-YYYY. No historical intervals, conference/venue identities, display names, membership fields, basis, notes, or other frozen meaning may change. No Phase 0 mutation is granted by this Stage 1 request."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
