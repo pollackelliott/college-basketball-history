@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage1-0001",
+  "request_id": "utah-state-stage1-0002",
   "school_key": "utah-state",
   "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "c54d8a959da2a43b87a46d0995953a1cd4eab7e9",
-  "previous_control_state_sha256": "fa7c952e565fdeeed76723db404825a3bca2ee771661768e7fd88c2e3b5740ed",
+  "previous_control_state_commit": "1319d4ea99b67e507ba5dc917b7148872b0bf0c7",
+  "previous_control_state_sha256": "fffa3d1b0ec670af6b38c5198425a65a96d7de9184192cb20e926d31f21be57a",
   "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "research_checkpoint": {
     "sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
@@ -18,8 +18,8 @@
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT — Utah State serialized Implementation Stage 1",
-    "authorization": "Owner explicitly designated the exact attached Utah State RESEARCH_FROZEN ZIP as the final accepted Research Freeze artifact under the current owner-designated-artifact fallback and authorized Implementation Stage 1 only: authenticate the exact Freeze, run the complete read-only current-main Stage 1 inventory/reconciliation, and stop at the durable Stage 1 / stable Phase 0 boundary. This grants no Phase 0 mutation, Stage 2 work, shared/global maintenance outside ordinary target-school reconciliation, Owner Gate 1, Owner Gate 2, release, merge, Production, recovery, unrelated maintenance, or other-school authority."
+    "origin": "ChatGPT — Utah State serialized Implementation Stage 1 corrected request",
+    "authorization": "Owner explicitly designated the exact attached Utah State RESEARCH_FROZEN ZIP as the final accepted Research Freeze artifact under the current owner-designated-artifact fallback and authorized Implementation Stage 1 only: authenticate the exact Freeze, run the complete read-only current-main Stage 1 inventory/reconciliation, and stop at the durable Stage 1 / stable Phase 0 boundary. This corrected request supersedes only the pre-acceptance mechanically rejected utah-state-stage1-0001 request; it grants no Phase 0 mutation, Stage 2 work, shared/global maintenance outside ordinary target-school reconciliation, Owner Gate 1, Owner Gate 2, release, merge, Production, recovery, unrelated maintenance, or other-school authority."
   },
   "authority": {
     "owner_gate_1": false,
