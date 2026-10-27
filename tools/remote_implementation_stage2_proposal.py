@@ -15,7 +15,13 @@ from pathlib import Path
 from typing import Any
 
 from remote_implementation_control import sha256_bytes, sha256_file
-from remote_implementation_io import ROOT, Stop, git_show_bytes, run
+from remote_implementation_io import (
+    ROOT,
+    Stop,
+    git_show_bytes,
+    run,
+    runtime_tool_sha256_manifest,
+)
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
     STAGE2_CENSUS,
@@ -303,6 +309,10 @@ def run_stage2_proposal_tool(
     if not tool_path.is_file():
         raise Stop("STAGE2_PROPOSAL_RUNTIME_TOOL_MISSING:%s" % tool_path)
     runtime_tool_sha256 = sha256_file(tool_path)
+    runtime_tool_manifest_sha256 = runtime_tool_sha256_manifest(
+        runtime_repo,
+        extra_paths=("tools/implementation_stage2.py",),
+    )
     cmd = [
         sys.executable,
         str(tool_path),
@@ -401,6 +411,7 @@ def run_stage2_proposal_tool(
         "artifact_sha256": raw_hashes,
         "artifact_normalized_sha256": normalized_hashes,
         "runtime_tool_sha256": runtime_tool_sha256,
+        "runtime_tool_manifest_sha256": runtime_tool_manifest_sha256,
         "decision_universe_compatibility": decision_universe_compatibility,
         "tracked_mutation_proof": {
             "before_head_sha": before["head_sha"],

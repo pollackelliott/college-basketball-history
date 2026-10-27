@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
+import remote_implementation_io as remote_io  # noqa: E402
 import remote_implementation_runner as runner  # noqa: E402
 import remote_implementation_stage2_diagnostic as diagnostic  # noqa: E402
 import remote_implementation_verify as verifier  # noqa: E402
@@ -87,6 +88,127 @@ def request():
 
 
 class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
+    def test_exact_main_runtime_executes_changed_transitive_reconciliation_tooling(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source_repo = Path(directory) / "source"
+            source_repo.mkdir()
+            subprocess.run(["git", "init"], cwd=source_repo, check=True, capture_output=True)
+            subprocess.run(
+                ["git", "config", "user.email", "runtime@example.invalid"],
+                cwd=source_repo,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "config", "user.name", "Runtime Regression"],
+                cwd=source_repo,
+                check=True,
+            )
+            tools = source_repo / "tools"
+            tools.mkdir()
+            hardening = tools / "onboarding_hardening.py"
+            hardening.write_text(
+                "import json, sys\n"
+                "from pathlib import Path\n"
+                "import onboarding_plan\n"
+                "school=sys.argv[2]\n"
+                "repo=Path(sys.argv[sys.argv.index('--repo')+1])\n"
+                "game=sys.argv[sys.argv.index('--canonical-game-id')+1]\n"
+                "out=repo/'.onboarding'/school/'last-rehearsal-reconciliation-trace.json'\n"
+                "out.parent.mkdir(parents=True, exist_ok=True)\n"
+                "doc={'kind':'IMPLEMENTATION_RECONCILIATION_TRACE','school_key':school,"
+                "'canonical_game_id':game,'diagnostic_status':'PASS',"
+                "'execution_status':onboarding_plan.RUNTIME_MARKER,'execution_error':'',"
+                "'partial_location_classification':'FINAL_LOCATION_NOT_PARTIAL',"
+                "'real_tracked_repository_unchanged':True,'decision_order':[],"
+                "'mutations':[],'site_sync_events':[],'integrity':{'status':'PASS'}}\n"
+                "out.write_text(json.dumps(doc, sort_keys=True)+'\\n', encoding='utf-8')\n",
+                encoding="utf-8",
+            )
+            (tools / "reconciliation_trace.py").write_text("# fixture\n", encoding="utf-8")
+            (tools / "onboard_school.py").write_text("# fixture\n", encoding="utf-8")
+            plan = tools / "onboarding_plan.py"
+            plan.write_text("RUNTIME_MARKER = 'STALE_CONTROL'\n", encoding="utf-8")
+            subprocess.run(["git", "add", "tools"], cwd=source_repo, check=True)
+            subprocess.run(
+                ["git", "commit", "-m", "stale control runtime"],
+                cwd=source_repo,
+                check=True,
+                capture_output=True,
+            )
+            stale = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=source_repo,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+
+            plan.write_text("RUNTIME_MARKER = 'FRESH_MAIN'\n", encoding="utf-8")
+            subprocess.run(["git", "add", "tools/onboarding_plan.py"], cwd=source_repo, check=True)
+            subprocess.run(
+                ["git", "commit", "-m", "fresh main reconciliation"],
+                cwd=source_repo,
+                check=True,
+                capture_output=True,
+            )
+            live_main = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=source_repo,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            subprocess.run(
+                ["git", "update-ref", "refs/remotes/origin/main", live_main],
+                cwd=source_repo,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "checkout", "--detach", stale],
+                cwd=source_repo,
+                check=True,
+                capture_output=True,
+            )
+
+            runtime_repo = remote_io.add_exact_protected_main_runtime_worktree(
+                live_main,
+                source_repo=source_repo,
+            )
+            self.assertEqual(
+                (source_repo / "tools/onboarding_plan.py").read_text(encoding="utf-8"),
+                "RUNTIME_MARKER = 'STALE_CONTROL'\n",
+            )
+            self.assertEqual(
+                (runtime_repo / "tools/onboarding_plan.py").read_text(encoding="utf-8"),
+                "RUNTIME_MARKER = 'FRESH_MAIN'\n",
+            )
+
+            target = Path(directory) / "target"
+            target.mkdir()
+            clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
+            with patch.object(
+                diagnostic,
+                "tracked_worktree_state",
+                side_effect=[clean, clean],
+            ):
+                result = diagnostic.run_stage2_reconciliation_diagnostic_tool(
+                    target,
+                    SCHOOL,
+                    freeze_bytes=b"{}\n",
+                    map_bytes=b"{}\n",
+                    plan_bytes=b"{}\n",
+                    review_bytes=b"decision_id\n",
+                    canonical_game_id=GAME,
+                    diag=target / "diag",
+                    tool_repo=runtime_repo,
+                )
+
+            self.assertEqual(result["trace"]["execution_status"], "FRESH_MAIN")
+            self.assertEqual(
+                set(remote_io.STAGE2_TRANSITIVE_RUNTIME_TOOL_PATHS),
+                set(result["runtime_tool_manifest_sha256"]),
+            )
+
     def authority_fixture(self):
         proposal_request_bytes = (
             json.dumps({"request_id": "proposal-001"}, sort_keys=True) + "\n"
@@ -382,6 +504,11 @@ class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
                 patch.object(runner, "git", return_value=cp),
                 patch.object(
                     runner,
+                    "add_exact_protected_main_runtime_worktree",
+                    return_value=worktree / "runtime",
+                ) as runtime_selector,
+                patch.object(
+                    runner,
                     "run_stage2_reconciliation_diagnostic_tool",
                     return_value=result,
                 ) as run_tool,
@@ -401,6 +528,8 @@ class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
                     MAIN,
                 )
         run_tool.assert_called_once()
+        runtime_selector.assert_called_once_with(MAIN)
+        self.assertEqual(run_tool.call_args.kwargs["tool_repo"], worktree / "runtime")
         persist.assert_called_once()
 
     def test_fresh_verifier_replays_exact_trace_and_marks_equivalence(self):
@@ -498,6 +627,11 @@ class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
                     verifier,
                     "add_existing_onboarding_worktree",
                     return_value=worktree,
+                ),
+                patch.object(
+                    verifier,
+                    "add_exact_protected_main_runtime_worktree",
+                    return_value=worktree / "runtime",
                 ),
                 patch.object(verifier, "git", return_value=cp),
                 patch.object(

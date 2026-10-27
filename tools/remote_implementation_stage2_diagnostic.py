@@ -14,7 +14,13 @@ from pathlib import Path
 from typing import Any
 
 from remote_implementation_control import sha256_bytes, sha256_file
-from remote_implementation_io import ROOT, Stop, git_show_bytes, run
+from remote_implementation_io import (
+    ROOT,
+    Stop,
+    git_show_bytes,
+    run,
+    runtime_tool_sha256_manifest,
+)
 from remote_implementation_stage2_census import (
     RUNTIME_ROOT,
     restore_integration_freeze,
@@ -187,6 +193,7 @@ def run_stage2_reconciliation_diagnostic_tool(
         "tools/onboarding_hardening.py": sha256_file(hardening_tool),
         "tools/reconciliation_trace.py": sha256_file(trace_tool),
     }
+    runtime_tool_manifest_sha256 = runtime_tool_sha256_manifest(runtime_repo)
 
     cmd = [
         sys.executable,
@@ -266,6 +273,7 @@ def run_stage2_reconciliation_diagnostic_tool(
         "trace_bytes": trace_bytes,
         "trace_sha256": sha256_bytes(trace_bytes),
         "runtime_tool_sha256": runtime_tool_sha256,
+        "runtime_tool_manifest_sha256": runtime_tool_manifest_sha256,
         "tracked_mutation_proof": {
             "before_head_sha": before["head_sha"],
             "after_head_sha": after["head_sha"],

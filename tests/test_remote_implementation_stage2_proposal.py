@@ -523,6 +523,80 @@ class RemoteStage2ProposalTests(unittest.TestCase):
                     MAIN,
                 )
 
+    def test_runner_passes_authenticated_main_runtime_to_proposal(self):
+        request = {
+            "request_id": "proposal-001",
+            "school_key": SCHOOL,
+            "operation": OP_STAGE2_PROPOSAL_REHEARSAL,
+            "target_branch": BRANCH,
+            "target_sha": TARGET,
+            "recommendation_map": {"path": "map.json", "sha256": "9" * 64},
+            "decision_universe_sha256": DECISION_SHA,
+        }
+        authority = {"freeze_bytes": b"x", "target_tree_sha": TREE}
+        result = {
+            "stage2_status": "BLOCKED",
+            "tracked_mutation_proof": {"after_tree_sha": TREE},
+        }
+        cp = subprocess.CompletedProcess([], 0, stdout=TREE + "\n")
+        with tempfile.TemporaryDirectory() as directory:
+            worktree = Path(directory)
+            map_path = worktree / "recommendation-map.json"
+            map_path.write_bytes(b"{}\n")
+            with (
+                patch.object(
+                    runner,
+                    "verify_stage2_proposal_authority",
+                    return_value=authority,
+                ),
+                patch.object(runner, "remote_head", side_effect=[TARGET, TARGET]),
+                patch.object(
+                    runner,
+                    "begin_request",
+                    return_value=initial_control_state(),
+                ),
+                patch.object(runner, "write_json"),
+                patch.object(runner, "archive_request", return_value=Path("archive")),
+                patch.object(runner, "commit_control", return_value="3" * 40),
+                patch.object(
+                    runner,
+                    "materialize_payload",
+                    return_value=map_path,
+                ),
+                patch.object(
+                    runner,
+                    "add_existing_onboarding_worktree",
+                    return_value=worktree,
+                ),
+                patch.object(runner, "git", return_value=cp),
+                patch.object(
+                    runner,
+                    "add_exact_protected_main_runtime_worktree",
+                    return_value=worktree / "runtime",
+                ) as runtime_selector,
+                patch.object(
+                    runner,
+                    "run_stage2_proposal_tool",
+                    return_value=result,
+                ) as run_tool,
+                patch.object(runner, "assert_protected_main_unchanged"),
+                patch.object(
+                    runner,
+                    "persist_stage2_proposal_checkpoint",
+                    return_value="4" * 40,
+                ),
+            ):
+                runner.run_read_only_stage2_proposal(
+                    initial_control_state(),
+                    request,
+                    b"{}",
+                    "1" * 40,
+                    "2" * 40,
+                    MAIN,
+                )
+        runtime_selector.assert_called_once_with(MAIN)
+        self.assertEqual(run_tool.call_args.kwargs["tool_repo"], worktree / "runtime")
+
     def test_map_sha_mismatch_stops_at_payload_transport(self):
         request = {
             "request_id": "proposal-001",

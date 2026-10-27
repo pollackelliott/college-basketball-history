@@ -618,6 +618,220 @@ class GenericReconciliationTests(unittest.TestCase):
             self.assertEqual(resolved["source_a_value"], "2020-12-30")
             self.assertEqual(resolved["status"], "RESOLVED")
 
+    def test_normalized_home_site_patch_propagates_through_full_transaction(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+            canonical.update(
+                {
+                    "canonical_game_id": "CBBG-1",
+                    "season_label": "1945-1946",
+                    "game_date": "1946-02-01",
+                    "date_precision": "EXACT",
+                    "team_a_key": "alpha",
+                    "team_b_key": "beta",
+                    "team_a_score": "34",
+                    "team_b_score": "31",
+                    "result_winner_team_key": "alpha",
+                    "site_type": "TEAM_B_HOME",
+                    "designated_home_team_key": "beta",
+                    "game_type": "REGULAR_SEASON",
+                    "canonical_status": "PROVISIONAL",
+                    "venue_key": "",
+                    "venue_id": "",
+                    "site_city": "",
+                    "site_state": "",
+                }
+            )
+            source = {field: "" for field in ingest_school.ASSERTION_FIELDS}
+            source.update(
+                {
+                    "source_program_key": "beta",
+                    "source_game_id": "BETA-1",
+                    "season_label": "1945-1946",
+                    "game_date": "1946-02-01",
+                    "normalized_opponent_key": "alpha",
+                    "normalized_opponent_name": "Alpha",
+                    "team_score": "31",
+                    "opponent_score": "34",
+                    "played_result": "L",
+                    "overtime_periods": "0",
+                    "curated_site_type": "OPPONENT_HOME",
+                    "curated_venue_name": "",
+                    "city": "",
+                    "state": "",
+                    "curated_game_type": "REGULAR_SEASON",
+                    "raw_text": "Alpha 34, Beta 31",
+                }
+            )
+            assertion = dict(source)
+            assertion.update(
+                {
+                    "assertion_id": "ASRT-BETA-1",
+                    "canonical_game_id": "CBBG-1",
+                    "match_status": "MATCHED",
+                    "match_method": "FIXTURE",
+                }
+            )
+            discrepancy = {field: "" for field in ingest_school.DISCREPANCY_FIELDS}
+            discrepancy.update(
+                {
+                    "discrepancy_id": "DISC-SITE-1",
+                    "canonical_game_id": "CBBG-1",
+                    "field_name": "site_type",
+                    "source_a_program_key": "beta",
+                    "source_a_value": "TEAM_A_HOME",
+                    "canonical_value": "TEAM_B_HOME",
+                    "status": "UNDER_REVIEW",
+                }
+            )
+            self.write_csv(
+                repo / "data/canonical/games.csv",
+                ingest_school.CANONICAL_FIELDS,
+                [canonical],
+            )
+            self.write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ingest_school.ASSERTION_FIELDS,
+                [assertion],
+            )
+            self.write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                ingest_school.DISCREPANCY_FIELDS,
+                [discrepancy],
+            )
+            self.write_csv(
+                repo / "schools/beta/source-games.csv",
+                ingest_school.ASSERTION_FIELDS,
+                [source],
+            )
+            self.write_csv(
+                repo / "data/reference/venues.csv",
+                [
+                    "venue_id", "venue_key", "display_name", "city", "state",
+                    "opened", "closed", "date_precision", "identity_status",
+                    "source_basis", "notes",
+                ],
+                [
+                    {
+                        "venue_id": "VEN-999999",
+                        "venue_key": "example-fieldhouse",
+                        "display_name": "Example Fieldhouse",
+                        "city": "Example City",
+                        "state": "EX",
+                        "opened": "1940",
+                        "closed": "1970",
+                        "date_precision": "year",
+                        "identity_status": "CURATED_SEED",
+                        "source_basis": "Regression fixture.",
+                        "notes": "",
+                    }
+                ],
+            )
+            self.write_csv(
+                repo / "data/reference/venue-names.csv",
+                [
+                    "venue_id", "venue_name", "normalized_name", "name_type",
+                    "valid_from", "valid_to", "date_precision", "source_basis",
+                    "notes",
+                ],
+                [
+                    {
+                        "venue_id": "VEN-999999",
+                        "venue_name": "Example Fieldhouse",
+                        "normalized_name": "examplefieldhouse",
+                        "name_type": "PROJECT_DISPLAY",
+                        "valid_from": "",
+                        "valid_to": "",
+                        "date_precision": "",
+                        "source_basis": "Regression fixture.",
+                        "notes": "",
+                    }
+                ],
+            )
+            self.write_csv(
+                repo / "schools/beta/venues.csv",
+                [
+                    "source_program_key", "venue_key", "venue_id",
+                    "canonical_name", "aliases", "city", "state", "venue_type",
+                    "known_opened", "known_closed", "venue_date_precision",
+                    "games_currently_assigned", "first_assigned_game",
+                    "last_assigned_game", "relationship_type",
+                    "relationship_start", "relationship_end",
+                    "relationship_date_precision", "site_rule", "source_basis",
+                    "notes",
+                ],
+                [
+                    {
+                        "source_program_key": "beta",
+                        "venue_key": "example-fieldhouse",
+                        "venue_id": "VEN-999999",
+                        "canonical_name": "Example Fieldhouse",
+                        "aliases": "",
+                        "city": "Example City",
+                        "state": "EX",
+                        "venue_type": "arena",
+                        "known_opened": "1940",
+                        "known_closed": "1970",
+                        "venue_date_precision": "year",
+                        "games_currently_assigned": "1",
+                        "first_assigned_game": "1940-01-01",
+                        "last_assigned_game": "1970-12-31",
+                        "relationship_type": "HOME",
+                        "relationship_start": "1940-01-01",
+                        "relationship_end": "1970-12-31",
+                        "relationship_date_precision": "day",
+                        "site_rule": "HOME only after independent H/A/N classification.",
+                        "source_basis": "Regression fixture.",
+                        "notes": "",
+                    }
+                ],
+            )
+
+            approved = {
+                "school_key": "beta",
+                "approved_plan_hash": "a" * 64,
+                "decisions": [
+                    {
+                        "decision_id": "SITE-1",
+                        "category": "discrepancy",
+                        "source_game_id": "BETA-1",
+                        "canonical_game_id": "CBBG-1",
+                        "field_name": "site_type",
+                        "source_value": "TEAM_A_HOME",
+                        "canonical_value": "TEAM_B_HOME",
+                        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                        "resolution_basis": "Owner-approved regression fixture.",
+                        "canonical_patch": {},
+                        "source_patch": {
+                            "curated_venue_name": "Example Fieldhouse",
+                            "city": "Example City",
+                            "state": "EX",
+                        },
+                    }
+                ],
+            }
+
+            counts = apply_reconciliation_decisions(repo, approved)
+            normalized = self.read_one(repo / "schools/beta/source-games.csv")
+            synced = self.read_one(repo / "data/evidence/game-assertions.csv")
+            final = self.read_one(repo / "data/canonical/games.csv")
+
+            self.assertEqual(counts["source_normalizations"], 1)
+            self.assertEqual(normalized["curated_site_type"], "SOURCE_PROGRAM_HOME")
+            self.assertEqual(normalized["curated_venue_name"], "Example Fieldhouse")
+            self.assertEqual(normalized["city"], "Example City")
+            self.assertEqual(normalized["state"], "EX")
+            self.assertEqual(synced["curated_site_type"], "SOURCE_PROGRAM_HOME")
+            self.assertEqual(synced["curated_venue_name"], "Example Fieldhouse")
+            self.assertEqual(synced["city"], "Example City")
+            self.assertEqual(synced["state"], "EX")
+            self.assertEqual(final["site_type"], "TEAM_B_HOME")
+            self.assertEqual(final["venue_key"], "example-fieldhouse")
+            self.assertEqual(final["venue_id"], "VEN-999999")
+            self.assertEqual(final["site_city"], "Example City")
+            self.assertEqual(final["site_state"], "EX")
+
 
 if __name__ == "__main__":
     unittest.main()
