@@ -370,6 +370,19 @@ def frozen_home_exception_keys(
     return approved
 
 
+
+_RAW_TEXT_SCORE_RE = re.compile(
+    r"(?<![0-9-])(?P<a>[0-9]{1,3})\\s*[-–—]\\s*(?P<b>[0-9]{1,3})(?![0-9-])"
+)
+
+
+def _raw_text_score_tokens(raw_text: str) -> list[tuple[int, int]]:
+    """Return explicit score-like pairs without mistaking ISO dates/seasons for scores."""
+    return [
+        (int(match.group("a")), int(match.group("b")))
+        for match in _RAW_TEXT_SCORE_RE.finditer(raw_text)
+    ]
+
 def research_portfolio_report(
     package: Path,
     *,
@@ -519,12 +532,35 @@ def research_portfolio_report(
                 errors.append(f"{label}: only one score is populated")
             if not team_score and not opp_score:
                 unknown_scores += 1
+                raw_score_tokens = _raw_text_score_tokens(row.get("raw_text", ""))
+                if raw_score_tokens:
+                    rendered = ", ".join(
+                        f"{team}-{opponent}" for team, opponent in raw_score_tokens[:3]
+                    )
+                    errors.append(
+                        f"{label}: structured scores are blank but raw_text contains "
+                        f"explicit score-like evidence ({rendered}); preserve or resolve "
+                        "the score fields before RESEARCH_FROZEN"
+                    )
             elif team_score and opp_score:
                 try:
-                    int(team_score)
-                    int(opp_score)
+                    team_score_value = int(team_score)
+                    opp_score_value = int(opp_score)
                 except ValueError:
                     errors.append(f"{label}: score is not an integer")
+                else:
+                    played_result = row.get("played_result", "").strip().upper()
+                    inconsistent_result = (
+                        (played_result == "W" and team_score_value <= opp_score_value)
+                        or (played_result == "L" and team_score_value >= opp_score_value)
+                        or (played_result == "T" and team_score_value != opp_score_value)
+                    )
+                    if inconsistent_result:
+                        errors.append(
+                            f"{label}: structured score {team_score_value}-"
+                            f"{opp_score_value} conflicts with played_result "
+                            f"{played_result!r}"
+                        )
 
             overtime = row.get("overtime_periods", "").strip()
             if overtime:
