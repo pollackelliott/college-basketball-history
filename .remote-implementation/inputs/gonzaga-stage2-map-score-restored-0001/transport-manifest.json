@@ -1,0 +1,49 @@
+{
+  "kind": "GONZAGA_STAGE2_RECOMMENDATION_MAP_TRANSPORT",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "status": "MAP_AUTHORED_NOT_REHEARSED",
+  "protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "control_authority_commit": "dbd505bd8f4759bdfd73fcc932eb5b3cf7f7c407",
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "2eea47c0f41b1eb6a6a7fa195f7af11c3439a560",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/gonzaga/gonzaga-stage2-opponent-display-normalize-score-restored-0001/successor-manifest.json",
+    "sha256": "3d954998ef39c52d5c5087b36576353726be426e495f162b18b52ad3e3ec806a",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "decision_universe_sha256": "d406031954b5602ffa23a1315fef1997fab7dd4b87248433ed38da7634d13818",
+    "decision_count": 67,
+    "warning_count": 0,
+    "blocker_count": 0
+  },
+  "integration_freeze_sha256": "531ef97f658599b9410768bec169645338d22ff533e603b7ecfe2de6c16d71ac",
+  "semantic_snapshot_sha256": "c21ce7736499499e75603242c76e7cd1f160ee125f6cc2747d57ae5da9ebb14f",
+  "superseding_research_freeze_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/gonzaga-stage2-map-score-restored-0001/recommendation-map.json",
+    "sha256": "8f2267b38b17570b1da1aa88431a8d932aeb187a100948159e31d12ae2e77033",
+    "bytes": 43725
+  },
+  "adjudication": {
+    "carried_forward_same_decision_ids": 48,
+    "new_current_decision_ids": 19,
+    "removed_obsolete_old_decision_ids": 14,
+    "current_decision_count": 67,
+    "action_counts": {
+      "USE_SOURCE": 44,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 10,
+      "MATCH_CANONICAL:CBBG-0116660": 1,
+      "NOT_APPLICABLE": 4,
+      "MATCH_CANONICAL:CBBG-0149289": 1,
+      "MATCH_CANONICAL:CBBG-0069448": 1,
+      "MATCH_CANONICAL:CBBG-0042638": 1,
+      "KEEP_CANONICAL": 3,
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1
+    },
+    "restored_score_direct_conflicts_recommended_use_source": 12,
+    "restored_score_wrong_candidate_conditional_not_applicable": 1,
+    "note": "Prior Gonzaga recommendations were carried forward only where the substantive historical proposition remained the same. Score-only superseding Research authority was applied to newly exposed score conflicts; proposal rehearsal and Owner Gate 1 remain separate."
+  },
+  "authority_statement": "Authored recommendation map only. These are agent recommendations, not owner decisions. No proposal rehearsal, Owner Gate 1 approval, tracked basketball mutation, sealed apply, Preview, merge, or release authority is created by this transport."
+}
