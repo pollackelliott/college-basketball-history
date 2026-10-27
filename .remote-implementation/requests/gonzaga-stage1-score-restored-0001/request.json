@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage1-score-restored-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "4ad9814b88d5de827448827c098eb3ebedf68f3e",
+  "previous_control_state_sha256": "4954e41780262d2b0180e051b7428c2582abed3ca0d2a6c58160ae456939ef94",
+  "expected_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "research_checkpoint": {
+    "sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "3cfc6419017b500f58d136dfb240f6faafaedcb7",
+      "path_prefix": ".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 82
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Control Center — Gonzaga superseding Research Freeze recovery",
+    "authorization": "Owner said Proceed after the Control Center accepted the score-restored Gonzaga Research Freeze, independently verified its immutable git_base64_parts transport, closed rejected PR #381 unmerged, and retired the obsolete data/gonzaga-onboarding ref while preserving its exact head under the audit ref. Run exactly one fresh read-only STAGE1_INVENTORY against current protected main and the superseding Research Freeze. This grants no Phase 0, tracked basketball mutation, shared/global maintenance, Stage 2 work, Owner Gate 1, Owner Gate 2, release, merge, Production, recovery, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
