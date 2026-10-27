@@ -119,3 +119,33 @@ city/state, unresolved H/A/N, known agreeing venue evidence, or NCAA site debt.
 
 As with the source-backed exception, this is explicit visible historical debt,
 not a claim that the venue is complete.
+
+## Reconciliation-backed researched-UNKNOWN HOME supplement
+
+Control Center-authorized on 2026-10-27.
+
+A third narrow canonical-only representation applies when the target source row deliberately
+remains `UNKNOWN` for H/A/N after bounded Research, while an owner-approved Stage 2
+reconciliation retains a reciprocal-supported canonical HOME classification.
+
+This representation is valid only when all of the following are true:
+
+1. the frozen target row remains `curated_site_type=UNKNOWN` with
+   `site_research_status=RESEARCHED_UNRESOLVED` and a substantive research basis;
+2. the sealed reconciliation resolves the target `site_type` discrepancy while preserving
+   that target UNKNOWN assertion unchanged;
+3. at least one independent reciprocal assertion establishes the canonical target-HOME
+   classification;
+4. canonical city/state are complete and were supplied by an explicit owner-approved
+   canonical site patch supported by the target program's accepted HOME-geography evidence;
+5. no assertion agreeing with canonical HOME supplies a usable physical venue identity;
+6. any complete reciprocal locality agrees with the patched canonical locality;
+7. NCAA Tournament strict site rules do not apply; and
+8. canonical notes contain
+   `[RECONCILED_UNKNOWN_SITE_HOME_VENUE source=<target>/<source_game_id> reciprocal=<program>/<source_game_id>]`.
+
+This supplement does **not** convert the target source row to HOME and does not infer H/A/N
+from geography. It exists only so canonical reconciliation can preserve reciprocal HOME
+authority, explicit supported HOME locality, and a truthful unresolved physical venue while
+the accepted target-source H/A/N uncertainty remains visible.
+
