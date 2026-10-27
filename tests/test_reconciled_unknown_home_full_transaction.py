@@ -269,7 +269,6 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
                         "site_research_basis": "",
                     },
                     {
-                    {
                         **source_row("OTHER-BACKFILL", opponent="test"),
                         "source_program_key": "other",
                         "game_date": "1950-01-15",
@@ -423,11 +422,11 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
             rewritten = {row["canonical_game_id"]: row for row in rewritten_rows}
             for game_id, source_id, reciprocal_id in (
                 ("CBBG-ORDINARY", "TEST-ORDINARY", "OTHER-ORDINARY"),
-                ("CBBG-CONDITIONAL", "TEST-CONDITIONAL", "OTHER-CONDITIONAL"),
+                ("CBBG-CONDITIONAL", "TEST-CONDITIONAL", "ZETA-CONDITIONAL"),
             ):
                 marker = (
                     "[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
-                    f"source=test/{source_id} reciprocal=other/{reciprocal_id}]"
+                    f"source=test/{source_id} reciprocal={'zeta' if 'CONDITIONAL' in game_id else 'other'}/{reciprocal_id}]"
                 )
                 self.assertEqual(rewritten[game_id]["notes"].count(marker), 1)
 
