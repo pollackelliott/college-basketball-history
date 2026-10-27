@@ -1,0 +1,74 @@
+name: Gonzaga rejected PR branch retirement
+
+on:
+  push:
+    branches: [control-center/gonzaga-pr381-branch-retirement-20261027]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  retire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact lifecycle commit
+        uses: actions/checkout@v4
+
+      - name: Verify exact rejected authority and delete only occupied onboarding ref
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_MAIN: 16907c93fb47c5373d4aa9994654e7a6d8315fbb
+          EXPECTED_REJECTED: 6d27eb9907c80597ff044f1950a1b67490e153b7
+          TARGET_REF: refs/heads/data/gonzaga-onboarding
+          ARCHIVE_REF: refs/heads/archive/gonzaga-pr381-rejected-preview-6d27eb99
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ref_sha() {
+            git ls-remote --heads origin "$1" | awk '{print $1}'
+          }
+
+          MAIN_BEFORE="$(ref_sha refs/heads/main)"
+          TARGET_BEFORE="$(ref_sha "$TARGET_REF")"
+          ARCHIVE_BEFORE="$(ref_sha "$ARCHIVE_REF")"
+          PR_STATE="$(gh api "repos/$GITHUB_REPOSITORY/pulls/381" --jq '.state')"
+          PR_MERGED_AT="$(gh api "repos/$GITHUB_REPOSITORY/pulls/381" --jq '.merged_at // ""')"
+          PR_HEAD="$(gh api "repos/$GITHUB_REPOSITORY/pulls/381" --jq '.head.sha')"
+
+          test "$MAIN_BEFORE" = "$EXPECTED_MAIN"
+          test "$TARGET_BEFORE" = "$EXPECTED_REJECTED"
+          test "$ARCHIVE_BEFORE" = "$EXPECTED_REJECTED"
+          test "$PR_STATE" = "closed"
+          test -z "$PR_MERGED_AT"
+          test "$PR_HEAD" = "$EXPECTED_REJECTED"
+
+          git push origin --delete "$TARGET_REF"
+
+          MAIN_AFTER="$(ref_sha refs/heads/main)"
+          TARGET_AFTER="$(ref_sha "$TARGET_REF")"
+          ARCHIVE_AFTER="$(ref_sha "$ARCHIVE_REF")"
+
+          test "$MAIN_AFTER" = "$EXPECTED_MAIN"
+          test -z "$TARGET_AFTER"
+          test "$ARCHIVE_AFTER" = "$EXPECTED_REJECTED"
+
+          {
+            echo 'GONZAGA_REJECTED_ONBOARDING_BRANCH_RETIREMENT_PASS'
+            echo "PR381_STATE=$PR_STATE"
+            echo "PR381_HEAD=$PR_HEAD"
+            echo "DELETED_REF=$TARGET_REF"
+            echo "ARCHIVE_REF=$ARCHIVE_REF"
+            echo "ARCHIVE_SHA=$ARCHIVE_AFTER"
+            echo "PROTECTED_MAIN_SHA=$MAIN_AFTER"
+          } | tee /tmp/gonzaga-pr381-retirement-proof.txt
+
+      - name: Publish audit summary
+        if: always()
+        run: |
+          if [ -f /tmp/gonzaga-pr381-retirement-proof.txt ]; then
+            cat /tmp/gonzaga-pr381-retirement-proof.txt >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Branch retirement did not complete; no fresh Gonzaga Phase 0 authority was created.' >> "$GITHUB_STEP_SUMMARY"
+          fi
