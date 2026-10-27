@@ -62,6 +62,9 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
         season_label="2025-2026",
         game_date="2026-03-19",
         raw_text="NCAA Tournament game",
+        team_score="70",
+        opponent_score="60",
+        played_result="W",
         primary_source_cutoff="2024-2025",
         required_completed_cutoff="2025-2026",
         include_coverage=True,
@@ -99,9 +102,9 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     "game_date": game_date,
                     "source_opponent_label": "Example",
                     "normalized_opponent_key": "example",
-                    "team_score": "70",
-                    "opponent_score": "60",
-                    "played_result": "W",
+                    "team_score": team_score,
+                    "opponent_score": opponent_score,
+                    "played_result": played_result,
                     "overtime_periods": overtime_periods,
                     "administrative_status": administrative_status,
                     "administrative_note": administrative_note,
@@ -258,6 +261,78 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     for error in report["errors"]
                 )
             )
+
+    def test_literal_score_cannot_be_dropped_from_structured_fields(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                team_score="",
+                opponent_score="",
+                raw_text="3/19 Example W 70-60",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["unknown_played_scores"], 1)
+            self.assertTrue(
+                any(
+                    "structured scores are blank but raw_text contains explicit score-like evidence"
+                    in error
+                    for error in report["errors"]
+                )
+            )
+
+    def test_genuine_unknown_score_without_literal_score_evidence_still_passes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                team_score="",
+                opponent_score="",
+                raw_text="3/19 Example W score unavailable",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["errors"], [])
+            self.assertEqual(report["counts"]["unknown_played_scores"], 1)
+
+    def test_season_and_iso_date_are_not_mistaken_for_literal_scores(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                team_score="",
+                opponent_score="",
+                raw_text="2025-2026 game played 2026-03-19; score unavailable",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["errors"], [])
+
+    def test_structured_score_must_agree_with_played_result(self):
+        cases = [
+            ("W", "60", "70"),
+            ("L", "70", "60"),
+            ("T", "70", "69"),
+        ]
+        for played_result, team_score, opponent_score in cases:
+            with self.subTest(played_result=played_result):
+                with tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    self.make_package(
+                        root,
+                        team_score=team_score,
+                        opponent_score=opponent_score,
+                        played_result=played_result,
+                    )
+                    report = research_portfolio_report(root, school_key="test")
+                    self.assertEqual(report["status"], "FAIL")
+                    self.assertTrue(
+                        any(
+                            "conflicts with played_result" in error
+                            for error in report["errors"]
+                        )
+                    )
 
     def test_invalid_overtime_blocks_research_freeze(self):
         with tempfile.TemporaryDirectory() as temporary:
