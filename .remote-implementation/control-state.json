@@ -75,15 +75,15 @@
     "utah-state-stage1-0001",
     "utah-state-stage1-0003"
   ],
-  "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "utah-state-stage1-0003",
-  "active_request_sha256": "640d6dd1ddb8a8ea0c4f1e21dcb24fab9c4dbb9dc422cfbae4b3bbc54d004c47",
-  "active_school_key": "utah-state",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -155,31 +155,23 @@
     "gonzaga-release-preview-verify-score-restored-0001",
     "gonzaga-release-gate2-approval-score-restored-0001",
     "gonzaga-release-production-proof-score-restored-0001",
-    "utah-state-stage1-recover-0001"
+    "utah-state-stage1-recover-0001",
+    "utah-state-stage1-0003"
   ],
-  "current_sequence": 66,
+  "current_sequence": 67,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "disposition": "ABANDONED_NOT_ATTEMPTED",
-    "operation": "RECOVER",
-    "recovered_request_id": "utah-state-stage1-0001",
-    "recovery_manifest": {
-      "actual_target_sha": null,
-      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
-      "lock_commit": null,
-      "mutation_classification": "NOT_ATTEMPTED",
-      "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
-      "recovered_request_id": "utah-state-stage1-0001",
-      "request_id": "utah-state-stage1-recover-0001",
-      "schema_version": 1,
-      "target_branch": null
-    }
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/utah-state/utah-state-stage1-0003/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "9dfa5e2527f6e89b1cdd275665b6d83530dc5206c6f59e5f09d124ee648f66f4",
+    "operation": "STAGE1_INVENTORY",
+    "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+    "request_id": "utah-state-stage1-0003",
+    "school_key": "utah-state",
+    "stage1_reconciliation_sha256": "c5e8aed4deb9d6b2848a11af0b0ed579ce542042c32409a5dedd11a7c18925ce",
+    "stage1_status": "BLOCKED"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "40554526430",
-  "lock_acquisition_request_commit": "675cb38f37f739aed4f175d145a642e851e50147",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }
