@@ -432,7 +432,7 @@ class ReconciledUnknownHomeFullTransactionTests(unittest.TestCase):
             )
 
             report = implementation_site_report(repo, "test")
-            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["status"], "PASS", report)
             self.assertEqual(report["counts"]["strict_home_gap_rows"], 0)
             self.assertEqual(
                 report["counts"][
