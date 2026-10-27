@@ -1,0 +1,59 @@
+name: Gonzaga corrected Research Freeze transport verification
+
+on:
+  push:
+    branches: [transport/gonzaga-score-restored-freeze-8fe9d4db]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transport commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify immutable git_base64_parts transport
+        run: |
+          python - <<'PY'
+          import base64, hashlib, io, json, pathlib, zipfile
+
+          manifest_path = pathlib.Path(".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/transport-manifest.json")
+          manifest = json.loads(manifest_path.read_text())
+          prefix = manifest["transport"]["path_prefix"]
+          parent = pathlib.Path(prefix).parent
+          stem = pathlib.Path(prefix).name
+          parts = sorted(parent.glob(stem + "*"))
+
+          assert len(parts) == manifest["transport"]["part_count"], (len(parts), manifest["transport"]["part_count"])
+          encoded = b"".join(p.read_bytes() for p in parts)
+          assert not any(ch in encoded for ch in (b"\n", b"\r", b" ", b"\t"))
+          data = base64.b64decode(encoded, validate=True)
+          actual = hashlib.sha256(data).hexdigest()
+          assert actual == manifest["research_freeze"]["sha256"], (actual, manifest["research_freeze"]["sha256"])
+
+          with zipfile.ZipFile(io.BytesIO(data)) as z:
+              assert z.testzip() is None
+              names = sorted(z.namelist())
+              assert names == sorted(manifest["research_freeze"]["exact_member_names"]), names
+              for name, expected in manifest["research_freeze"]["member_sha256"].items():
+                  got = hashlib.sha256(z.read(name)).hexdigest()
+                  assert got == expected, (name, got, expected)
+
+          print("GONZAGA_TRANSPORT_VERIFICATION_PASS")
+          print("ZIP_SHA256=" + actual)
+          print("PART_COUNT=" + str(len(parts)))
+          print("ZIP_BYTES=" + str(len(data)))
+          print("MEMBERS=" + ",".join(names))
+          PY
+
+      - name: Record scope
+        run: |
+          {
+            echo "Gonzaga corrected Research Freeze transport verification: PASS"
+            echo "Expected ZIP SHA-256: 8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d"
+            echo "Read-only verification; no Phase 0, owner-gate, PR, merge, or release authority."
+          } >> "$GITHUB_STEP_SUMMARY"

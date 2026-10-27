@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "IMMUTABLE_RESEARCH_FREEZE_GIT_BASE64_PARTS_TRANSPORT",
+  "school_key": "gonzaga",
+  "status": "TRANSPORT_PREPARED_PENDING_INDEPENDENT_VERIFICATION",
+  "protected_main_at_transport_creation": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+  "research_freeze": {
+    "source_commit": "81ef1b1d16c9c1069f8219c66b7fb80d0f1fc1a3",
+    "source_path": ".research-recovery/gonzaga/gonzaga-score-restored-RESEARCH_FROZEN.zip",
+    "source_git_blob_sha": "d2ad72ccc3c14cdef3e9567010809b1931c94291",
+    "sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "size_bytes": 612164,
+    "exact_member_names": [
+      "conferences.csv",
+      "notes.md",
+      "opponents.csv",
+      "source-games.csv",
+      "source-notes.md",
+      "venues.csv"
+    ],
+    "member_sha256": {
+      "conferences.csv": "73645dc8061576bacaa48732e052ff01a37fc76b1849620bcf22d72a110c5ea0",
+      "notes.md": "fa9d0824e5a297ae852d6a8f2c97f01dc84a948b20946408c6b066febd216f4b",
+      "opponents.csv": "e0465ec3ad7da03845c90ed4b84032377f2dbf4ce94f1fdfd0237f1a6ac415fb",
+      "source-games.csv": "d75469e09d9cab9380ddbabfcbb8fc6a37a46d0a2babb73bdb0ad9c0a5a76d2c",
+      "source-notes.md": "a275ac22cb347988a2bea7b1c3afa8afbc1970bffcb6636cb4c57567e78d4038",
+      "venues.csv": "ecfb7ca853b63e4a4e631d191d22ff93ae1a504725e0ebef83fddea633b92a8f"
+    }
+  },
+  "transport": {
+    "kind": "git_base64_parts",
+    "path_prefix": ".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/research-frozen.zip.b64.part",
+    "part_count": 82,
+    "nominal_part_size_chars": 10000,
+    "normalized_base64_chars": 816220,
+    "whitespace_in_parts": false,
+    "sort_order": "lexicographic zero-padded part suffix"
+  },
+  "authority": {
+    "purpose": "Future fresh Gonzaga STAGE1_INVENTORY transport only",
+    "no_phase0_authority": true,
+    "no_owner_gate_authority": true,
+    "no_release_authority": true,
+    "no_old_pr_mutation": true,
+    "old_pr_number": 381,
+    "old_onboarding_branch_untouched": true
+  },
+  "verification": {
+    "required": "Independent GitHub Actions reconstruction must PASS before this transport is eligible for a new Stage 1 request.",
+    "workflow_path": ".github/workflows/gonzaga-score-restored-transport-verify.yml"
+  }
+}
