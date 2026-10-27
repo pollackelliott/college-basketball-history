@@ -1,23 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-opponent-display-normalize-0001",
+  "request_id": "utah-state-stage2-proposal-0001",
   "school_key": "utah-state",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "previous_control_state_commit": "b4caf9e8a2815f58b4e8b4b989254088a219fcef",
-  "previous_control_state_sha256": "bcf8172ac92ec8721483ef3a3d0690ceed353dac364accea39d6a8be1b35e24b",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "50b5a979cb8c5556cbc77cbebdc2ae0014eec497",
+  "previous_control_state_sha256": "58d367ba542797ea9738b50b760d498353208f16b664efa002f9bda4f0c75297",
   "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "target_branch": "data/utah-state-onboarding",
-  "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "53432998a2a990f5e3cb4da55674eef896c4af409d61dbfb554652ba9e1c33b0"
+  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/utah-state/utah-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "cbf8ce7afdd331fc62be45eb7eb6a1b96ff805a7e8356a8d154055707ac7f482"
   },
   "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
   "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/utah-state-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "34bdc3c9e4210f86780e0b4877774e32d6de72b646c0ddf42cf412061aa5905e"
+  },
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed after independently verified Utah State Stage 2 census BLOCKED solely on exactly 16 deterministic historical opponent-display conflicts. Authorize exactly one census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE operation using the permanent normalizer and existing project authority for the complete detected population. No new historical identity ruling, Phase 0, recovery, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, merge, Production, release, unrelated opponent cleanup, venue maintenance, global maintenance, or other Stage 2 mutation authority."
+    "authorization": "Owner said Proceed after the fresh-verified Utah State opponent-display normalization produced CAPABILITY_CENSUS_READY with an exact 166-decision universe. Authorize one read-only STAGE2_PROPOSAL_REHEARSAL against the exact hash-bound recommendation map. The map preserves the accepted Research Freeze, uses stronger exact-game institutional authority only where explicitly documented, leaves the 1927-28 BYU linkage residual under review rather than overwriting correct reciprocal games, recommends the supported 18→19 regular-season conference-title correction, and enables publication only conditionally on the full owner/gate/release lifecycle. No Owner Gate 1 approval, fill/seal/apply, Preview, Gate 2, merge, Production, recovery, or unrelated mutation authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
@@ -26,8 +31,8 @@
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_opponent_display_normalize": true,
-    "stage2_proposal_rehearsal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
