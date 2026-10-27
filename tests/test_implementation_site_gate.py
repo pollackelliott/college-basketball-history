@@ -447,6 +447,122 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 report["counts"]["invalid_home_venue_exception_marker_rows"], 1
             )
 
+
+    def test_reconciled_researched_unknown_home_exception_passes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                curated_site_type="UNKNOWN",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis="Bounded H/A/N research remains unresolved.",
+            )
+            canonical = canonical_row(
+                venue_key="",
+                venue_id="",
+                site_city="Example City",
+                site_state="EX",
+                notes=(
+                    "[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
+                    "source=test/TESTRAW-00001 reciprocal=other/OTHRAW-1]"
+                ),
+            )
+            assertions = [
+                target_assertion(
+                    curated_site_type="UNKNOWN",
+                    curated_venue_name="",
+                    city="",
+                    state="",
+                ),
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "source_program_key": "other",
+                    "source_game_id": "OTHRAW-1",
+                    "normalized_opponent_key": "test",
+                    "curated_site_type": "OPPONENT_HOME",
+                    "curated_venue_name": "",
+                    "city": "",
+                    "state": "",
+                },
+            ]
+            discrepancies = [{
+                "canonical_game_id": "CBBG-0000001",
+                "source_a_program_key": "test",
+                "field_name": "site_type",
+                "status": "RESOLVED",
+                "resolution_basis": "Reciprocal source establishes canonical HOME.",
+            }]
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=assertions,
+                discrepancies=discrepancies,
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 0)
+            self.assertEqual(
+                report["counts"]["reconciled_unknown_site_unresolved_home_venue"], 1
+            )
+
+    def test_reconciled_researched_unknown_home_exception_rejects_known_venue(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                curated_site_type="UNKNOWN",
+                curated_venue_name="",
+                city="",
+                state="",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis="Bounded H/A/N research remains unresolved.",
+            )
+            canonical = canonical_row(
+                venue_key="",
+                venue_id="",
+                site_city="Example City",
+                site_state="EX",
+                notes=(
+                    "[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
+                    "source=test/TESTRAW-00001 reciprocal=other/OTHRAW-1]"
+                ),
+            )
+            assertions = [
+                target_assertion(curated_site_type="UNKNOWN", curated_venue_name=""),
+                {
+                    "canonical_game_id": "CBBG-0000001",
+                    "source_program_key": "other",
+                    "source_game_id": "OTHRAW-1",
+                    "normalized_opponent_key": "test",
+                    "curated_site_type": "OPPONENT_HOME",
+                    "curated_venue_name": "Known Arena",
+                    "city": "Example City",
+                    "state": "EX",
+                },
+            ]
+            discrepancies = [{
+                "canonical_game_id": "CBBG-0000001",
+                "source_a_program_key": "test",
+                "field_name": "site_type",
+                "status": "RESOLVED",
+                "resolution_basis": "Reciprocal source establishes canonical HOME.",
+            }]
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=assertions,
+                discrepancies=discrepancies,
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["strict_home_gap_rows"], 1)
+            self.assertEqual(
+                report["counts"]["invalid_home_venue_exception_marker_rows"], 1
+            )
+
     def test_ncaa_canonical_site_gap_is_non_waivable(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
