@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage2-proposal-0002",
+  "school_key": "utah-state",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "42707ecb2485dbac84490b0602f2d2e8e91ab23c",
+  "previous_control_state_sha256": "fd0a0c3a4466f4fcf757eb53cef39dcb46fe3f93be67d480f75ba90d3c7ffd9c",
+  "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/utah-state/utah-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "cbf8ce7afdd331fc62be45eb7eb6a1b96ff805a7e8356a8d154055707ac7f482"
+  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/utah-state-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "89a814cca66ac1f7933872956ba4a25119fa82e1f4d40bebc6666e5665d7c002"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State Implementation",
+    "authorization": "Same owner-authorized bounded Utah State Stage 2 proposal-rehearsal unit. The first exact rehearsal was fresh-equivalent but mechanically BLOCKED because CBBG-0021150 ended with site_city=Los Angeles and blank site_state. Exact canonical inspection confirms this is a partial-locality representation gap. Revision 0002 changes no decision action or historical H/A/N ruling; it adds only decision-bound canonical site_state=CA while retaining site_city=Los Angeles on the already-supported Tennessee neutral-site reconciliation. Rerun the same read-only proposal rehearsal only. No Owner Gate 1 approval or downstream mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

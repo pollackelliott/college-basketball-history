@@ -1,0 +1,228 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 44,
+      "discrepancy": 109,
+      "identity": 10,
+      "publication": 1
+    },
+    "decision_count": 166,
+    "decision_fields": {
+      "game_date": 16,
+      "game_identity": 10,
+      "game_type": 3,
+      "overtime_periods": 3,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 18,
+      "score": 57,
+      "site_metadata": 1,
+      "site_type": 56
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0104048",
+      "CONDITIONAL-DISCREPANCY-UST-S1-00236-CBBG-0106880-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-00236-CBBG-0106881-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-00237-CBBG-0106880-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-00237-CBBG-0106881-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-00996-CBBG-0107567-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-01097-CBBG-0111621-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-02962-CBBG-0104045-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UST-S1-02962-CBBG-0104048-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00033-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00037-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00040-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00045-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00052-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00068-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00075-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00080-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00083-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00097-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00128-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00177-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00181-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00204-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00208-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00217-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00224-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00229-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00240-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00241-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00338-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00414-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00415-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00416-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00420-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00483-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00515-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00518-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00589-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00601-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00627-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00637-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00655-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00671-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00682-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00708-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00760-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00764-SITE_TYPE",
+      "DISCREPANCY-UST-S1-00839-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01041-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01043-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01147-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01176-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01221-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01222-SITE_TYPE",
+      "DISCREPANCY-UST-S1-01684-SITE_TYPE",
+      "DISCREPANCY-UST-S1-02792-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 5,
+      "home_missing_location": 5,
+      "home_missing_venue": 14,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 4,
+      "neutral_missing_venue": 70,
+      "public_gap_rows": 467,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 9,
+      "researched_unresolved_home_venue_rows": 9,
+      "strict_home_gap": 5,
+      "strict_home_gap_rows": 5,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2968,
+      "target_source_information_loss": 1,
+      "target_source_location_lost": 1,
+      "unaccounted_public_gap": 2,
+      "unaccounted_public_gap_rows": 2,
+      "unknown_site_type": 383
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0104608",
+        "CBBG-0106709",
+        "CBBG-0107294"
+      ],
+      "home_missing_location": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0104608",
+        "CBBG-0106709",
+        "CBBG-0107294"
+      ],
+      "home_missing_venue": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0104055",
+        "CBBG-0104064",
+        "CBBG-0104608",
+        "CBBG-0106677",
+        "CBBG-0106688",
+        "CBBG-0106693",
+        "CBBG-0106705",
+        "CBBG-0106709",
+        "CBBG-0106719",
+        "CBBG-0106726"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0039736",
+        "CBBG-0050920",
+        "CBBG-0175163",
+        "CBBG-0177017"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0020787",
+        "CBBG-0021150",
+        "CBBG-0036817",
+        "CBBG-0039736",
+        "CBBG-0040749",
+        "CBBG-0041456",
+        "CBBG-0048116",
+        "CBBG-0050920",
+        "CBBG-0066709",
+        "CBBG-0068699",
+        "CBBG-0070984",
+        "CBBG-0071406"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0104055",
+        "CBBG-0104064",
+        "CBBG-0106677",
+        "CBBG-0106688",
+        "CBBG-0106693",
+        "CBBG-0106705",
+        "CBBG-0106719",
+        "CBBG-0106726",
+        "CBBG-0112967"
+      ],
+      "strict_home_gap": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0104608",
+        "CBBG-0106709",
+        "CBBG-0107294"
+      ],
+      "target_source_location_lost": [
+        "CBBG-0050920"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0104608",
+        "CBBG-0107294"
+      ],
+      "unknown_site_type": [
+        "CBBG-0067844",
+        "CBBG-0067845",
+        "CBBG-0067851",
+        "CBBG-0067852",
+        "CBBG-0112871",
+        "CBBG-0175011",
+        "CBBG-0175012",
+        "CBBG-0175013",
+        "CBBG-0175014",
+        "CBBG-0175015",
+        "CBBG-0175016",
+        "CBBG-0175017"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "REPAIR_SCOPE_REQUIRED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 57,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 5,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 1,
+      "examples": [],
+      "topology": "target_source_information_loss"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 2,
+      "examples": [],
+      "topology": "unaccounted_public_gap_rows"
+    }
+  ]
+}
