@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "94653aecebbf374d2d26270bd61dc47d5607070aaac1485a05423acd8ae2990c",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "f124b9098c68d53127dc7671bb9eb0604dd20b0b",
+  "pr_number": 383,
+  "production_deployment_id": 7363574196,
+  "production_json_checked_count": 77,
+  "production_proof": true,
+  "request_id": "gonzaga-release-production-proof-score-restored-0001",
+  "schema_version": 1,
+  "school_key": "gonzaga",
+  "status": "COMPLETE"
+}

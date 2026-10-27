@@ -158,7 +158,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/gonzaga/gonzaga-release-production-proof-score-restored-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "94653aecebbf374d2d26270bd61dc47d5607070aaac1485a05423acd8ae2990c",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -168,7 +168,7 @@
     "production_deployment_id": 7363574196,
     "production_json_checked_count": 77,
     "protected_main_sha": "31c64f378eaf7386f6b4782ca1ab0c1ca9583c80",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "gonzaga-release-production-proof-score-restored-0001",
     "school_key": "gonzaga"
   },
