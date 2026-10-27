@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage1-0001",
+  "school_key": "utah-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "d101f0e0f681b81c3ceaa77aeb5c9756d19fc80d",
+  "previous_control_state_sha256": "fffa55073e8a7427e0a52feb255dadf888c2e52aee4168177c9b887e2ad4c1a0",
+  "expected_protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "research_checkpoint": {
+    "sha256": "fb458781dbc563b9816550f617225edb30be1d062d94e1f6d1b59cb8fcb84ff0",
+    "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "d101f0e0f681b81c3ceaa77aeb5c9756d19fc80d",
+      "path_prefix": ".remote-implementation/inputs/utah-state-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 14
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State serialized Implementation lane",
+    "authorization": "Owner explicitly designated the single attached Utah State RESEARCH_FROZEN ZIP as the final accepted Research Freeze artifact and authorized Implementation Stage 1 only. Run exactly one fresh read-only STAGE1_INVENTORY against current protected main using the exact authenticated attachment bytes. This grants no Phase 0 mutation, Stage 2 work, shared/global maintenance mutation, Owner Gate 1, Owner Gate 2, release, merge, Production, recovery, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
