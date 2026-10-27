@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "gonzaga-stage2-preseal-0001",
+  "school_key": "gonzaga",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "cecb28ad065abab3dfee3f5a92c4826e9e277e7c",
+  "previous_control_state_sha256": "3f73fa9f3b013ae23befe88055652b223da0141100906350cbfc73d47b4d30af",
+  "expected_protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "creation_provenance": {
+    "origin": "ChatGPT Gonzaga Implementation",
+    "authorization": "Owner said Proceed after the fresh-verified Gonzaga Owner Gate 1 fill. This authorizes exactly one bounded STAGE2_PRESEAL_REHEARSAL against that exact fill authority. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, PR merge, release, Production, recovery, venue maintenance, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/gonzaga-onboarding",
+  "target_sha": "6f7fb9ef94ea52d8f3b7f7728ffc2e4495659461",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "2576942818701675ae129dfd7c495ce21279869892858aeb62e031075aa8726a"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/gonzaga/gonzaga-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "19e4de907472750bc22b378b389d1be3df94d4e3e2c412726d86935559de7b92"
+  },
+  "integration_freeze_sha256": "50fedc3edcbd6a9d2e35495853251c95b50b6b89a3f3f577f164d0d5236c816c",
+  "semantic_snapshot_sha256": "570ab33dfe16af20528ff189add080b0b79414a74269630def136cb14c6dc867",
+  "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
+  "recommendation_map_sha256": "4eefd0d8a0aff2737302278b818abe3ff5b9acc6fb02a7b1636fd2f57e6ab2d0",
+  "approved_plan_hash_preview": "57845fcaf97ce7433d40c44a687570a0f2c11862caf8deaf248ae37eef306ec3",
+  "filled_review_sha256": "96c472ccf279ab1d13a1f6cae4ba122b32d4327f9f3cb783b92e1c4a45d2b097",
+  "decision_id_set_sha256": "4887b5a5211f54ec8408ad29fa1b9629fa308ea00acc1fd058cc8a8dd5f1ff93"
+}
