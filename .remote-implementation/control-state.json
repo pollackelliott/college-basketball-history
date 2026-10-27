@@ -49,18 +49,19 @@
     "gonzaga-phase0-0002",
     "gonzaga-phase0-0003",
     "gonzaga-stage2-census-0001",
-    "gonzaga-stage2-opponent-display-normalize-0001"
+    "gonzaga-stage2-opponent-display-normalize-0001",
+    "gonzaga-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "gonzaga-stage2-proposal-0001",
+  "active_request_sha256": "74a7a0d6f89d18f1af2891222abe606bfb07292d6fc0533a68843cfa81eb3efa",
+  "active_school_key": "gonzaga",
+  "active_target_branch": "data/gonzaga-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -135,8 +136,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/gonzaga/gonzaga-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "2934206e20ca62e7b0ebd5d0e7aa5f2bbb81f6b16229caa7353e29b3482f71a8"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40437698859",
+  "lock_acquisition_request_commit": "ef8603d4156ecb91d76239fe31f0a26275f6f6fb",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
