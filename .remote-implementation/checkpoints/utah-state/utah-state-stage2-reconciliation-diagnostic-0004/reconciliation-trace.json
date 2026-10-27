@@ -1,0 +1,752 @@
+{
+  "approved_decisions_touching_game": [
+    {
+      "allowed_actions": [
+        "KEEP_CANONICAL",
+        "LEAVE_UNRESOLVED",
+        "NORMALIZE_SOURCE_TO_CANONICAL",
+        "USE_SOURCE"
+      ],
+      "canonical_game_date": "1946-02-01",
+      "canonical_game_id": "CBBG-0104608",
+      "canonical_patch": {},
+      "canonical_patch_json": "{}",
+      "canonical_value": "34-31",
+      "category": "discrepancy",
+      "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+      "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+      "field_name": "score",
+      "matchup": "utah vs utah-state",
+      "notes": "Material source/canonical conflict; raw source evidence will remain preserved.",
+      "recommended_action": "KEEP_CANONICAL",
+      "relevant_evidence": "utah 1946-02-01: 34-31",
+      "resolution_basis": "Utah's institutional record identifies the 1946-02-01 meeting as a 34-31 Utah win at Utah State; the two frozen Utah State rows have the Feb. 1 and Mar. 4 score/site pair transposed. Normalize the curated target field to the established canonical/reciprocal record while preserving Utah State raw_text.",
+      "season_label": "1945-1946",
+      "source_game_date": "1946-02-01",
+      "source_game_id": "UST-S1-00583",
+      "source_patch": {},
+      "source_patch_json": "{}",
+      "source_value": "69-44"
+    },
+    {
+      "allowed_actions": [
+        "KEEP_CANONICAL",
+        "LEAVE_UNRESOLVED",
+        "NORMALIZE_SOURCE_TO_CANONICAL",
+        "USE_SOURCE"
+      ],
+      "canonical_game_date": "1946-02-01",
+      "canonical_game_id": "CBBG-0104608",
+      "canonical_patch": {},
+      "canonical_patch_json": "{}",
+      "canonical_value": "TEAM_B_HOME",
+      "category": "discrepancy",
+      "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+      "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+      "field_name": "site_type",
+      "matchup": "utah vs utah-state",
+      "notes": "Deterministic accepted HOME-chronology metadata repair: George Nelson Fieldhouse, Logan, UT.",
+      "recommended_action": "KEEP_CANONICAL",
+      "relevant_evidence": "utah 1946-02-01: TEAM_B_HOME",
+      "resolution_basis": "Normalize target H/A/N to the established canonical Utah State HOME result and apply the accepted Utah State HOME facility chronology: George Nelson Fieldhouse, Logan, UT, covers this exact date. The explicit source site patch supplies venue/locality metadata after H/A/N normalization; raw_text remains preserved.",
+      "season_label": "1945-1946",
+      "source_game_date": "1946-02-01",
+      "source_game_id": "UST-S1-00583",
+      "source_patch": {
+        "city": "Logan",
+        "curated_venue_name": "George Nelson Fieldhouse",
+        "state": "UT"
+      },
+      "source_patch_json": "{}",
+      "source_value": "TEAM_A_HOME"
+    }
+  ],
+  "authority": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 77,
+      "LEAVE_UNRESOLVED": 9,
+      "MATCH_CANONICAL:CBBG-0067845": 1,
+      "MATCH_CANONICAL:CBBG-0067851": 1,
+      "MATCH_CANONICAL:CBBG-0067852": 1,
+      "MATCH_CANONICAL:CBBG-0102906": 1,
+      "MATCH_CANONICAL:CBBG-0104048": 1,
+      "MATCH_CANONICAL:CBBG-0106878": 1,
+      "MATCH_CANONICAL:CBBG-0106879": 1,
+      "MATCH_CANONICAL:CBBG-0107570": 1,
+      "MATCH_CANONICAL:CBBG-0111616": 1,
+      "MATCH_CANONICAL:CBBG-0157104": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 17,
+      "NOT_APPLICABLE": 31,
+      "USE_SOURCE": 20
+    },
+    "approved_plan_hash_preview": "be96604eead7c69a7b844d939c7b27e217d5dab89e18fc0e30814490acea7556",
+    "decision_count": 166,
+    "head_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+    "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+    "plan_sha256": "15d0607a52cae238b802df3ea2c8e645e898e7ba02d042de5014fba4aaaf9f4b",
+    "recommendation_map_sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
+    "review_sha256": "06f549b39448e36c7138ce4bd79cb659a731a9473f9087e1fa7f957904451bec",
+    "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222"
+  },
+  "canonical_before": {
+    "administrative_note": "",
+    "administrative_status": "",
+    "canonical_game_id": "CBBG-0104608",
+    "canonical_status": "PROVISIONAL",
+    "date_precision": "EXACT",
+    "designated_home_team_key": "utah-state",
+    "game_date": "1946-02-01",
+    "game_type": "REGULAR_SEASON",
+    "notes": "",
+    "overtime_periods": "0",
+    "postseason_round": "",
+    "result_winner_team_key": "utah",
+    "season_label": "1945-1946",
+    "site_city": "",
+    "site_state": "",
+    "site_type": "TEAM_B_HOME",
+    "team_a_key": "utah",
+    "team_a_score": "34",
+    "team_b_key": "utah-state",
+    "team_b_score": "31",
+    "venue_id": "",
+    "venue_key": ""
+  },
+  "canonical_game_id": "CBBG-0104608",
+  "canonical_last_observed": {
+    "administrative_note": "",
+    "administrative_status": "",
+    "canonical_game_id": "CBBG-0104608",
+    "canonical_status": "PROVISIONAL",
+    "date_precision": "EXACT",
+    "designated_home_team_key": "utah-state",
+    "game_date": "1946-02-01",
+    "game_type": "REGULAR_SEASON",
+    "notes": "[VENUE_REGISTRY_FALLBACK source=utah-state/UST-S1-00583;venue_key=george-nelson-fieldhouse;site_type=TEAM_B_HOME;fields=venue_id,venue_key]",
+    "overtime_periods": "0",
+    "postseason_round": "",
+    "result_winner_team_key": "utah",
+    "season_label": "1945-1946",
+    "site_city": "Logan",
+    "site_state": "UT",
+    "site_type": "TEAM_B_HOME",
+    "team_a_key": "utah",
+    "team_a_score": "34",
+    "team_b_key": "utah-state",
+    "team_b_score": "31",
+    "venue_id": "VEN-000987",
+    "venue_key": "george-nelson-fieldhouse"
+  },
+  "decision_order": [
+    {
+      "category": "discrepancy",
+      "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+      "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+      "field_name": "score",
+      "source_game_id": "UST-S1-00583"
+    },
+    {
+      "category": "discrepancy",
+      "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+      "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+      "field_name": "site_type",
+      "source_game_id": "UST-S1-00583"
+    },
+    {
+      "category": "publication",
+      "decision": "ENABLE_PUBLIC_PAGE",
+      "decision_id": "PUBLICATION-UTAH-STATE",
+      "field_name": "public_page_enabled",
+      "source_game_id": ""
+    }
+  ],
+  "diagnostic_status": "PASS",
+  "execution_error": "",
+  "execution_status": "RECONCILIATION_COMPLETED",
+  "final_location_status": "complete",
+  "initial_location_status": "blank",
+  "integrity": {
+    "canonical": {
+      "administrative_note": "",
+      "administrative_status": "",
+      "canonical_game_id": "CBBG-0104608",
+      "canonical_status": "PROVISIONAL",
+      "date_precision": "EXACT",
+      "designated_home_team_key": "utah-state",
+      "game_date": "1946-02-01",
+      "game_type": "REGULAR_SEASON",
+      "notes": "[VENUE_REGISTRY_FALLBACK source=utah-state/UST-S1-00583;venue_key=george-nelson-fieldhouse;site_type=TEAM_B_HOME;fields=venue_id,venue_key]",
+      "overtime_periods": "0",
+      "postseason_round": "",
+      "result_winner_team_key": "utah",
+      "season_label": "1945-1946",
+      "site_city": "Logan",
+      "site_state": "UT",
+      "site_type": "TEAM_B_HOME",
+      "team_a_key": "utah",
+      "team_a_score": "34",
+      "team_b_key": "utah-state",
+      "team_b_score": "31",
+      "venue_id": "VEN-000987",
+      "venue_key": "george-nelson-fieldhouse"
+    },
+    "check": "canonical_city_state_atomicity",
+    "status": "PASS"
+  },
+  "kind": "IMPLEMENTATION_RECONCILIATION_TRACE",
+  "linked_assertions_before": [
+    {
+      "administrative_note": "",
+      "administrative_status": "",
+      "assertion_id": "ASRT-UTAH-UTA-S1-00630",
+      "canonical_game_id": "CBBG-0104608",
+      "city": "",
+      "curated_game_type": "REGULAR_SEASON",
+      "curated_postseason_round": "",
+      "curated_site_type": "OPPONENT_HOME",
+      "curated_venue_name": "",
+      "event_or_tournament": "",
+      "game_date": "1946-02-01",
+      "match_method": "NO_SAME_SEASON_TEAM_PAIR",
+      "match_status": "MATCHED",
+      "normalization_status": "resolved",
+      "normalized_opponent_key": "utah-state",
+      "normalized_opponent_name": "Utah State",
+      "notes": "[STAGE1_CORRECTION RAW_ACCEPTED] | Research site provenance: Regular-season AWAY H/A/N is explicit in Utah source; opponent-building reconstruction is reciprocal debt allowed by site-completeness policy and is not a Utah research-freeze blocker.",
+      "opponent_score": "31",
+      "overtime_periods": "0",
+      "played_result": "W",
+      "raw_text": "02/01 at Utah State* W 34-31",
+      "season_label": "1945-1946",
+      "source_era": "2025_26_record_book_year_by_year",
+      "source_game_id": "UTA-S1-00630",
+      "source_opponent_label": "at Utah State*",
+      "source_page": "PDF p.141 col.1 (printed history section)",
+      "source_program_key": "utah",
+      "source_round": "",
+      "source_site_candidate": "at",
+      "source_venue_name": "",
+      "state": "",
+      "team_score": "34"
+    },
+    {
+      "administrative_note": "",
+      "administrative_status": "",
+      "assertion_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "canonical_game_id": "CBBG-0104608",
+      "city": "",
+      "curated_game_type": "REGULAR_SEASON",
+      "curated_postseason_round": "",
+      "curated_site_type": "OPPONENT_HOME",
+      "curated_venue_name": "",
+      "event_or_tournament": "",
+      "game_date": "1946-02-01",
+      "match_method": "UNIQUE_PAIR_SEASON_DATE",
+      "match_status": "MATCHED",
+      "normalization_status": "RESEARCH_ACCEPTED",
+      "normalized_opponent_key": "utah",
+      "normalized_opponent_name": "Utah",
+      "notes": "",
+      "opponent_score": "69",
+      "overtime_periods": "0",
+      "played_result": "L",
+      "raw_text": "2/1 Utah L 44 69",
+      "season_label": "1945-1946",
+      "source_era": "",
+      "source_game_id": "UST-S1-00583",
+      "source_opponent_label": "Utah",
+      "source_page": "123",
+      "source_program_key": "utah-state",
+      "source_round": "",
+      "source_site_candidate": "",
+      "source_venue_name": "",
+      "state": "",
+      "team_score": "44"
+    }
+  ],
+  "linked_assertions_last_observed": [
+    {
+      "administrative_note": "",
+      "administrative_status": "",
+      "assertion_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "canonical_game_id": "CBBG-0104608",
+      "city": "Logan",
+      "curated_game_type": "REGULAR_SEASON",
+      "curated_postseason_round": "",
+      "curated_site_type": "SOURCE_PROGRAM_HOME",
+      "curated_venue_name": "George Nelson Fieldhouse",
+      "event_or_tournament": "",
+      "game_date": "1946-02-01",
+      "match_method": "UNIQUE_PAIR_SEASON_DATE",
+      "match_status": "MATCHED",
+      "normalization_status": "RESEARCH_ACCEPTED",
+      "normalized_opponent_key": "utah",
+      "normalized_opponent_name": "Utah",
+      "notes": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved.; Owner-approved onboarding reconciliation be96604eead7: site_type normalized; raw_text preserved.",
+      "opponent_score": "34",
+      "overtime_periods": "0",
+      "played_result": "L",
+      "raw_text": "2/1 Utah L 44 69",
+      "season_label": "1945-1946",
+      "source_era": "",
+      "source_game_id": "UST-S1-00583",
+      "source_opponent_label": "Utah",
+      "source_page": "123",
+      "source_program_key": "utah-state",
+      "source_round": "",
+      "source_site_candidate": "",
+      "source_venue_name": "",
+      "state": "UT",
+      "team_score": "31"
+    },
+    {
+      "administrative_note": "",
+      "administrative_status": "",
+      "assertion_id": "ASRT-UTAH-UTA-S1-00630",
+      "canonical_game_id": "CBBG-0104608",
+      "city": "",
+      "curated_game_type": "REGULAR_SEASON",
+      "curated_postseason_round": "",
+      "curated_site_type": "OPPONENT_HOME",
+      "curated_venue_name": "",
+      "event_or_tournament": "",
+      "game_date": "1946-02-01",
+      "match_method": "NO_SAME_SEASON_TEAM_PAIR",
+      "match_status": "MATCHED",
+      "normalization_status": "resolved",
+      "normalized_opponent_key": "utah-state",
+      "normalized_opponent_name": "Utah State",
+      "notes": "[STAGE1_CORRECTION RAW_ACCEPTED] | Research site provenance: Regular-season AWAY H/A/N is explicit in Utah source; opponent-building reconstruction is reciprocal debt allowed by site-completeness policy and is not a Utah research-freeze blocker.",
+      "opponent_score": "31",
+      "overtime_periods": "0",
+      "played_result": "W",
+      "raw_text": "02/01 at Utah State* W 34-31",
+      "season_label": "1945-1946",
+      "source_era": "2025_26_record_book_year_by_year",
+      "source_game_id": "UTA-S1-00630",
+      "source_opponent_label": "at Utah State*",
+      "source_page": "PDF p.141 col.1 (printed history section)",
+      "source_program_key": "utah",
+      "source_round": "",
+      "source_site_candidate": "at",
+      "source_venue_name": "",
+      "state": "",
+      "team_score": "34"
+    }
+  ],
+  "mutations": [
+    {
+      "changes": {
+        "opponent_score": {
+          "after": "34",
+          "before": "69"
+        },
+        "team_score": {
+          "after": "31",
+          "before": "44"
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+        "field_name": "score",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5926,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "notes": {
+          "after": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved.",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+        "field_name": "score",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "team_score": {
+          "after": "31",
+          "before": "44"
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+        "field_name": "score",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "opponent_score": {
+          "after": "34",
+          "before": "69"
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+        "field_name": "score",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "notes": {
+          "after": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved.",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SCORE",
+        "field_name": "score",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "curated_site_type": {
+          "after": "SOURCE_PROGRAM_HOME",
+          "before": "OPPONENT_HOME"
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5926,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "city": {
+          "after": "Logan",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5965,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "curated_venue_name": {
+          "after": "George Nelson Fieldhouse",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5965,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "state": {
+          "after": "UT",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5965,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "notes": {
+          "after": "[VENUE_REGISTRY_FALLBACK source=utah-state/UST-S1-00583;venue_key=george-nelson-fieldhouse;site_type=TEAM_B_HOME;fields=venue_id,venue_key]",
+          "before": ""
+        },
+        "site_city": {
+          "after": "Logan",
+          "before": ""
+        },
+        "site_state": {
+          "after": "UT",
+          "before": ""
+        },
+        "venue_id": {
+          "after": "VEN-000987",
+          "before": ""
+        },
+        "venue_key": {
+          "after": "george-nelson-fieldhouse",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5980,
+      "row_id": "CBBG-0104608",
+      "row_kind": "canonical"
+    },
+    {
+      "changes": {
+        "notes": {
+          "after": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved.; Owner-approved onboarding reconciliation be96604eead7: site_type normalized; raw_text preserved.",
+          "before": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved."
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "UST-S1-00583",
+      "row_kind": "source"
+    },
+    {
+      "changes": {
+        "curated_site_type": {
+          "after": "SOURCE_PROGRAM_HOME",
+          "before": "OPPONENT_HOME"
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "curated_venue_name": {
+          "after": "George Nelson Fieldhouse",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "city": {
+          "after": "Logan",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "state": {
+          "after": "UT",
+          "before": ""
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    },
+    {
+      "changes": {
+        "notes": {
+          "after": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved.; Owner-approved onboarding reconciliation be96604eead7: site_type normalized; raw_text preserved.",
+          "before": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved."
+        }
+      },
+      "decision": {
+        "category": "discrepancy",
+        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+        "decision_id": "DISCREPANCY-UST-S1-00583-SITE_TYPE",
+        "field_name": "site_type",
+        "source_game_id": "UST-S1-00583"
+      },
+      "function": "apply_reconciliation_decisions",
+      "line": 5986,
+      "row_id": "ASRT-UTAH-STATE-UST-S1-00583",
+      "row_kind": "assertion"
+    }
+  ],
+  "partial_location_classification": "FINAL_LOCATION_NOT_PARTIAL",
+  "real_changed_paths": [],
+  "real_tracked_repository_unchanged": true,
+  "reconciliation_counts": {
+    "canonical_changes": 20,
+    "canonical_retentions": 77,
+    "conditional_canonical_site_not_applicable": 1,
+    "left_under_review": 8,
+    "processed": 122,
+    "reciprocal_discrepancies_added": 20,
+    "reconciled_unknown_site_home_venue_markers_added": 3,
+    "registry_fallbacks_retired": 4,
+    "source_normalizations": 17
+  },
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "site_sync_events": [],
+  "target_source_rows_before": [
+    {
+      "administrative_note": "",
+      "administrative_status": "",
+      "city": "",
+      "country": "",
+      "curated_game_type": "REGULAR_SEASON",
+      "curated_postseason_round": "",
+      "curated_site_type": "OPPONENT_HOME",
+      "curated_venue_name": "",
+      "event_or_tournament": "",
+      "game_date": "1946-02-01",
+      "normalization_status": "RESEARCH_ACCEPTED",
+      "normalized_opponent_key": "utah",
+      "normalized_opponent_name": "Utah",
+      "notes": "",
+      "opponent_score": "69",
+      "overtime_periods": "0",
+      "played_result": "L",
+      "raw_text": "2/1 Utah L 44 69",
+      "season_label": "1945-1946",
+      "site_research_basis": "",
+      "site_research_status": "",
+      "source_era": "",
+      "source_game_id": "UST-S1-00583",
+      "source_opponent_label": "Utah",
+      "source_page": "123",
+      "source_program_key": "utah-state",
+      "source_round": "",
+      "source_site_candidate": "",
+      "source_venue_name": "",
+      "state": "",
+      "team_score": "44"
+    }
+  ],
+  "target_source_rows_last_observed": [
+    {
+      "administrative_note": "",
+      "administrative_status": "",
+      "city": "Logan",
+      "country": "",
+      "curated_game_type": "REGULAR_SEASON",
+      "curated_postseason_round": "",
+      "curated_site_type": "SOURCE_PROGRAM_HOME",
+      "curated_venue_name": "George Nelson Fieldhouse",
+      "event_or_tournament": "",
+      "game_date": "1946-02-01",
+      "normalization_status": "RESEARCH_ACCEPTED",
+      "normalized_opponent_key": "utah",
+      "normalized_opponent_name": "Utah",
+      "notes": "Owner-approved onboarding reconciliation be96604eead7: score normalized; raw_text preserved.; Owner-approved onboarding reconciliation be96604eead7: site_type normalized; raw_text preserved.",
+      "opponent_score": "34",
+      "overtime_periods": "0",
+      "played_result": "L",
+      "raw_text": "2/1 Utah L 44 69",
+      "season_label": "1945-1946",
+      "site_research_basis": "",
+      "site_research_status": "",
+      "source_era": "",
+      "source_game_id": "UST-S1-00583",
+      "source_opponent_label": "Utah",
+      "source_page": "123",
+      "source_program_key": "utah-state",
+      "source_round": "",
+      "source_site_candidate": "",
+      "source_venue_name": "",
+      "state": "UT",
+      "team_score": "31"
+    }
+  ]
+}
