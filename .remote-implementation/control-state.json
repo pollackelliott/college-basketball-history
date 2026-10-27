@@ -83,7 +83,7 @@
     "utah-state-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
-  "active_lock_commit": null,
+  "active_lock_commit": "ec27b0ee33c624fa45d54eb0bec428bbf4770013",
   "active_lock_owner": "github-actions:40561597245:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
