@@ -37,6 +37,7 @@ from remote_implementation_io import (
     ROOT,
     STATE_PATH,
     Stop,
+    add_exact_protected_main_runtime_worktree,
     commit_control,
     configure_git,
     fetch_operational_refs,
@@ -186,6 +187,7 @@ def verify_stage2_proposal_rehearsal(
     if authority.get("target_tree_sha") and tree != authority["target_tree_sha"]:
         raise Stop("STAGE2_PROPOSAL_FRESH_AUTHORITY_TREE_MISMATCH")
 
+    runtime_repo = add_exact_protected_main_runtime_worktree(live_main)
     result = run_stage2_proposal_tool(
         worktree,
         manifest["school_key"],
@@ -193,9 +195,14 @@ def verify_stage2_proposal_rehearsal(
         map_path,
         manifest["decision_universe_sha256"],
         DIAG / "stage2-proposal",
+        tool_repo=runtime_repo,
     )
     if result["runtime_tool_sha256"] != manifest["runtime_tool_sha256"]:
         raise Stop("STAGE2_PROPOSAL_FRESH_RUNTIME_TOOL_MISMATCH")
+    if result.get("runtime_tool_manifest_sha256") != manifest.get(
+        "runtime_tool_manifest_sha256"
+    ):
+        raise Stop("STAGE2_PROPOSAL_FRESH_RUNTIME_MANIFEST_MISMATCH")
     if result["stage2_status"] != manifest["stage2_status"]:
         raise Stop("STAGE2_PROPOSAL_FRESH_STATUS_MISMATCH")
     runtime_decision_sha = result["status"].get("preflight", {}).get(
@@ -1214,6 +1221,7 @@ def verify_stage2_reconciliation_diagnostic(
     if authority.get("target_tree_sha") and tree != authority["target_tree_sha"]:
         raise Stop("STAGE2_DIAGNOSTIC_FRESH_AUTHORITY_TREE_MISMATCH")
 
+    runtime_repo = add_exact_protected_main_runtime_worktree(live_main)
     result = run_stage2_reconciliation_diagnostic_tool(
         worktree,
         manifest["school_key"],
@@ -1223,9 +1231,14 @@ def verify_stage2_reconciliation_diagnostic(
         review_bytes=authority["review_bytes"],
         canonical_game_id=manifest["canonical_game_id"],
         diag=DIAG / "stage2-reconciliation-diagnostic",
+        tool_repo=runtime_repo,
     )
     if result["runtime_tool_sha256"] != manifest["runtime_tool_sha256"]:
         raise Stop("STAGE2_DIAGNOSTIC_FRESH_RUNTIME_TOOL_MISMATCH")
+    if result.get("runtime_tool_manifest_sha256") != manifest.get(
+        "runtime_tool_manifest_sha256"
+    ):
+        raise Stop("STAGE2_DIAGNOSTIC_FRESH_RUNTIME_MANIFEST_MISMATCH")
     if result["trace_sha256"] != manifest["trace_sha256"]:
         raise Stop("STAGE2_DIAGNOSTIC_FRESH_TRACE_HASH_MISMATCH")
     if (

@@ -39,6 +39,12 @@ REQUIRED_PACKAGE_FILES = [
     "source-notes.md",
     "venues.csv",
 ]
+STAGE2_TRANSITIVE_RUNTIME_TOOL_PATHS = (
+    "tools/onboarding_hardening.py",
+    "tools/reconciliation_trace.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_plan.py",
+)
 PHASE0_GLOBAL_PATHS = {
     "data/reference/programs.csv",
     "data/reference/program-top-level-scope.csv",
@@ -160,6 +166,63 @@ def assert_protected_main_unchanged(expected_sha: str) -> None:
             "PROTECTED_MAIN_CHANGED_DURING_REMOTE_OPERATION expected=%s actual=%s"
             % (expected_sha, actual)
         )
+
+
+def add_exact_protected_main_runtime_worktree(
+    live_main: str,
+    *,
+    source_repo: Path = ROOT,
+) -> Path:
+    """Create a clean detached executable runtime at one authenticated main SHA."""
+
+    fetched_main = git(
+        "rev-parse",
+        "refs/remotes/origin/main",
+        cwd=source_repo,
+    ).stdout.strip()
+    if fetched_main != live_main:
+        raise Stop(
+            "RUNTIME_PROTECTED_MAIN_REF_MISMATCH expected=%s actual=%s"
+            % (live_main, fetched_main)
+        )
+
+    path = Path(tempfile.mkdtemp(prefix="remote-main-runtime-"))
+    shutil.rmtree(path)
+    git("worktree", "add", "--detach", str(path), live_main, cwd=source_repo)
+    configure_git(path)
+
+    head = git("rev-parse", "HEAD", cwd=path).stdout.strip()
+    if head != live_main:
+        raise Stop(
+            "RUNTIME_WORKTREE_HEAD_MISMATCH expected=%s actual=%s"
+            % (live_main, head)
+        )
+    status = git(
+        "status",
+        "--porcelain",
+        "--untracked-files=all",
+        cwd=path,
+    ).stdout
+    if status:
+        raise Stop("RUNTIME_WORKTREE_NOT_CLEAN")
+    return path
+
+
+def runtime_tool_sha256_manifest(
+    runtime_repo: Path,
+    *,
+    extra_paths: tuple[str, ...] = (),
+) -> dict[str, str]:
+    """Hash the materially transitive Stage 2 runtime used for reconciliation."""
+
+    paths = sorted(set(STAGE2_TRANSITIVE_RUNTIME_TOOL_PATHS + extra_paths))
+    result: dict[str, str] = {}
+    for relative in paths:
+        tool = runtime_repo / relative
+        if not tool.is_file():
+            raise Stop("RUNTIME_TRANSITIVE_TOOL_MISSING:%s" % relative)
+        result[relative] = sha256_file(tool)
+    return result
 
 
 def materialize_research_checkpoint(request: dict[str, Any], out_path: Path) -> dict[str, Any]:

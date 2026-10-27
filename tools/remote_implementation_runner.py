@@ -54,6 +54,7 @@ from remote_implementation_io import (
     ROOT,
     STATE_PATH,
     Stop,
+    add_exact_protected_main_runtime_worktree,
     add_isolated_worktree,
     assert_protected_main_unchanged,
     commit_control,
@@ -599,6 +600,9 @@ def persist_stage2_proposal_checkpoint(
         "protected_main_sha": live_main,
         "runtime_commit_sha": live_main,
         "runtime_tool_sha256": result["runtime_tool_sha256"],
+        "runtime_tool_manifest_sha256": result.get(
+            "runtime_tool_manifest_sha256", {}
+        ),
         "target_branch": request["target_branch"],
         "target_sha": request["target_sha"],
         "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
@@ -735,6 +739,7 @@ def run_read_only_stage2_proposal(
     if authority.get("target_tree_sha") and target_tree != authority["target_tree_sha"]:
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_TREE_MISMATCH")
 
+    runtime_repo = add_exact_protected_main_runtime_worktree(live_main)
     result = run_stage2_proposal_tool(
         worktree,
         request["school_key"],
@@ -742,6 +747,7 @@ def run_read_only_stage2_proposal(
         map_path,
         request["decision_universe_sha256"],
         DIAG / "stage2-proposal",
+        tool_repo=runtime_repo,
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
@@ -1501,6 +1507,9 @@ def persist_stage2_reconciliation_diagnostic_checkpoint(
         "protected_main_sha": live_main,
         "runtime_commit_sha": live_main,
         "runtime_tool_sha256": result["runtime_tool_sha256"],
+        "runtime_tool_manifest_sha256": result.get(
+            "runtime_tool_manifest_sha256", {}
+        ),
         "target_branch": request["target_branch"],
         "target_sha": request["target_sha"],
         "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
@@ -1892,6 +1901,7 @@ def run_read_only_stage2_reconciliation_diagnostic(
     if authority.get("target_tree_sha") and target_tree != authority["target_tree_sha"]:
         raise Stop("STAGE2_DIAGNOSTIC_AUTHORITY_TREE_MISMATCH")
 
+    runtime_repo = add_exact_protected_main_runtime_worktree(live_main)
     result = run_stage2_reconciliation_diagnostic_tool(
         worktree,
         request["school_key"],
@@ -1901,6 +1911,7 @@ def run_read_only_stage2_reconciliation_diagnostic(
         review_bytes=authority["review_bytes"],
         canonical_game_id=request["canonical_game_id"],
         diag=DIAG / "stage2-reconciliation-diagnostic",
+        tool_repo=runtime_repo,
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
