@@ -1,44 +1,31 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "gonzaga-phase0-score-restored-0001",
+  "request_id": "gonzaga-stage2-census-score-restored-0001",
   "school_key": "gonzaga",
-  "operation": "PHASE0",
-  "previous_control_state_commit": "152fa8889c6cb61fe765f83a98e040a6b7417c17",
-  "previous_control_state_sha256": "b2624896c244b6d328de6584d50c87b8120d6def9b91aca2e2768bb53b474e27",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "f37c8e315dcb537c5d9e824b8cbe7b1bbd566eaf",
+  "previous_control_state_sha256": "0d84ebf7a12a5e9d5491a711675afb8cea8c9717a2cdde76342789cf52b7f80e",
   "expected_protected_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
   "target_branch": "data/gonzaga-onboarding",
-  "research_checkpoint": {
-    "sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
-    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "3cfc6419017b500f58d136dfb240f6faafaedcb7",
-      "path_prefix": ".remote-implementation/inputs/gonzaga-score-restored-stage1-0001/research-frozen.zip.b64.part",
-      "part_count": 82
-    }
+  "target_sha": "d64aee40fa72b8a78b51594c216715081f8a249f",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/gonzaga/gonzaga-phase0-score-restored-0001/successor-manifest.json",
+    "sha256": "347c749bf061fe4a0ed1c8b7ff8d4d899cb0fbd094e9b4619035f7fe5251baf6"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/gonzaga/gonzaga-stage1-score-restored-0001/checkpoint-manifest.json",
-    "sha256": "c91baf9f1361159c5c959eb81c897bd0bb19803e5b0cfac24989647bb889479a"
-  },
-  "history_scope": {
-    "start_season": "1958-1959",
-    "basis": "TOP_LEVEL_INTERVALS",
-    "intervals": "1958-59+",
-    "notes": "Accepted frozen Gonzaga Research scope 1958-59+; this supersedes the stale current-main 1952-53+ program-top-level-scope baseline under the repository's frozen target-scope authority."
-  },
+  "integration_freeze_sha256": "531ef97f658599b9410768bec169645338d22ff533e603b7ecfe2de6c16d71ac",
+  "semantic_snapshot_sha256": "c21ce7736499499e75603242c76e7cd1f160ee125f6cc2747d57ae5da9ebb14f",
   "creation_provenance": {
-    "origin": "ChatGPT Control Center — Gonzaga score-restored Implementation restart",
-    "authorization": "Owner said Proceed after fresh read-only Gonzaga Stage 1 PASS against the accepted score-restored Research Freeze. Execute exactly one guarded PHASE0 transaction against current protected main. Reconcile Gonzaga's settled 1958-59+ target scope, apply only Stage 1-approved representation reuse/new target-school registrations, install the corrected six-file package, capture Integration Freeze and stable Phase 0 authority, and stop before Stage 2. No Owner Gate 1/2, release, merge, Production, unrelated maintenance, or other-school authority is granted."
+    "origin": "ChatGPT Gonzaga Implementation — score-restored restart",
+    "authorization": "Owner said Proceed after independently verified fresh Gonzaga Phase 0. Execute exactly one read-only STAGE2_CENSUS against the exact Phase 0 successor, Integration Freeze, semantic snapshot, current protected main, and corrected Research Freeze authority. Stop at CAPABILITY_CENSUS_READY or an honest permanent-tool BLOCKED checkpoint. No tracked repair, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, release, recovery, maintenance, merge, Production, or other-school/global mutation authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": true,
+    "phase0": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
