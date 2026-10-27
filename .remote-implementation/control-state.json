@@ -90,7 +90,7 @@
   "active_request_sha256": "4940d5298fd4e2bfa3c24fedaec8c381bb392d780a0d4fe0f2352755175166d0",
   "active_school_key": "utah-state",
   "active_target_branch": "data/utah-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "8a8ebcd499ab0108970f5cd3177d1430f96da7d1",
   "active_writeahead_path": ".remote-implementation/writeahead/utah-state/utah-state-phase0-0002/writeahead-manifest.json",
   "active_writeahead_sha256": "bfcc9fe937c265b3092d414755b9a0a369aaf9d97a23c88c6cf416e51d8bd6e1",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
