@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d",
+  "prepared_parent_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "prepared_tree_sha": "b8e58e976495709d51d1b679fd704862d36d3d15",
+  "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "utah-state-phase0-0002",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "da3a448cf853b02edb07cf53c4484b8788d3178d"
+}

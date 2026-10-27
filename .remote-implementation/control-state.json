@@ -170,11 +170,11 @@
   "current_sequence": 71,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
     "operation": "PHASE0",
     "protected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "utah-state-phase0-0002",
     "school_key": "utah-state",
     "successor_manifest_path": ".remote-implementation/successors/utah-state/utah-state-phase0-0002/successor-manifest.json",
