@@ -128,11 +128,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
     "recommendation_map_sha256": "48436fae5d03b0f8ad6e36a792d5d52aabb483a975fc358df33c5c1b50df28ee",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "gonzaga-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "6c88d4c5f16d4e92c908af42e89462568df29f1e38565e9a2091840b6329d7dc",
     "school_key": "gonzaga",
