@@ -27,6 +27,9 @@ from site_completeness import (
 
 HOME_VENUE_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 RECONCILED_HOME_VENUE_EXCEPTION_MARKER = "[RECONCILED_UNRESOLVED_HOME_VENUE"
+RECONCILED_UNKNOWN_SITE_HOME_VENUE_EXCEPTION_MARKER = (
+    "[RECONCILED_UNKNOWN_SITE_HOME_VENUE"
+)
 RECIPROCAL_ONLY_HOME_VENUE_EXCEPTION_MARKER = "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE"
 RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE_MARKER = "[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE"
 
@@ -173,6 +176,16 @@ def _reconciled_home_venue_exception_marker_for_school(
     )
 
 
+def _reconciled_unknown_site_home_venue_exception_marker_for_school(
+    game: dict[str, str],
+    school_key: str,
+) -> bool:
+    return (
+        f"{RECONCILED_UNKNOWN_SITE_HOME_VENUE_EXCEPTION_MARKER} source={school_key}/"
+        in game.get("notes", "")
+    )
+
+
 def _reconciled_home_venue_exception(
     game: dict[str, str],
     school_key: str,
@@ -264,6 +277,111 @@ def _reconciled_home_venue_exception(
         game.get("site_city", "").strip(),
         game.get("site_state", "").strip(),
     ):
+        return False
+
+    return True
+
+
+
+def _reconciled_unknown_site_home_venue_exception(
+    game: dict[str, str],
+    school_key: str,
+    source_rows: list[dict[str, str]],
+    all_assertions: list[dict[str, str]],
+    discrepancies: list[dict[str, str]],
+) -> bool:
+    """Validate canonical HOME created while target H/A/N remains researched UNKNOWN."""
+
+    if not _target_home(game, school_key):
+        return False
+    if _venue_known(game):
+        return False
+    if not _complete_pair(game.get("site_city", ""), game.get("site_state", "")):
+        return False
+    if game.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
+        return False
+
+    pattern = re.compile(
+        r"\[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
+        r"source=([^/\s]+)/([^\s\]]+) "
+        r"reciprocal=([^/\s]+)/([^\s\]]+)\]"
+    )
+    matches = [
+        match for match in pattern.findall(game.get("notes", ""))
+        if match[0] == school_key
+    ]
+    if len(matches) != 1:
+        return False
+
+    source_program, source_game_id, reciprocal_program, reciprocal_game_id = matches[0]
+    target_source = next(
+        (
+            row
+            for row in source_rows
+            if row.get("source_program_key", "").strip() == source_program
+            and row.get("source_game_id", "").strip() == source_game_id
+        ),
+        None,
+    )
+    if target_source is None:
+        return False
+    if _source_site_to_canonical(target_source) != "UNKNOWN":
+        return False
+    if (
+        target_source.get("site_research_status", "").strip().upper()
+        != "RESEARCHED_UNRESOLVED"
+        or not target_source.get("site_research_basis", "").strip()
+    ):
+        return False
+
+    resolved_site_reviews = [
+        row
+        for row in discrepancies
+        if row.get("field_name", "").strip() == "site_type"
+        and row.get("source_a_program_key", "").strip() == school_key
+        and row.get("status", "").strip().upper() == "RESOLVED"
+        and bool(row.get("resolution_basis", "").strip())
+    ]
+    if len(resolved_site_reviews) != 1:
+        return False
+
+    canonical_site = game.get("site_type", "").strip()
+    agreeing = [
+        assertion
+        for assertion in all_assertions
+        if assertion.get("source_program_key", "").strip() != school_key
+        and _source_site_to_canonical(assertion) == canonical_site
+    ]
+    if any(assertion.get("curated_venue_name", "").strip() for assertion in agreeing):
+        return False
+
+    reciprocal = next(
+        (
+            assertion
+            for assertion in agreeing
+            if assertion.get("source_program_key", "").strip() == reciprocal_program
+            and assertion.get("source_game_id", "").strip() == reciprocal_game_id
+        ),
+        None,
+    )
+    if reciprocal is None:
+        return False
+    if reciprocal.get("normalized_opponent_key", "").strip() != school_key:
+        return False
+
+    canonical_location = (
+        game.get("site_city", "").strip(),
+        game.get("site_state", "").strip(),
+    )
+    reciprocal_locations = {
+        (
+            assertion.get("city", "").strip(),
+            assertion.get("state", "").strip(),
+        )
+        for assertion in agreeing
+        if _complete_pair(assertion.get("city", ""), assertion.get("state", ""))
+    }
+    if reciprocal_locations and reciprocal_locations != {canonical_location}:
         return False
 
     return True
@@ -693,6 +811,15 @@ def implementation_site_report(
             all_game_assertions,
             game_discrepancies,
         )
+        reconciled_unknown_site_home_exception = (
+            _reconciled_unknown_site_home_venue_exception(
+                game,
+                school_key,
+                source_rows,
+                all_game_assertions,
+                game_discrepancies,
+            )
+        )
         reciprocal_only_home_exception = _reciprocal_only_home_venue_exception(
             game,
             school_key,
@@ -702,11 +829,15 @@ def implementation_site_report(
         home_exception = (
             source_home_exception
             or reconciled_home_exception
+            or reconciled_unknown_site_home_exception
             or reciprocal_only_home_exception
         )
         marker_present = (
             _home_venue_exception_marker_for_school(game, school_key)
             or _reconciled_home_venue_exception_marker_for_school(game, school_key)
+            or _reconciled_unknown_site_home_venue_exception_marker_for_school(
+                game, school_key
+            )
             or _reciprocal_only_home_venue_exception_marker_for_school(
                 game, school_key
             )
@@ -727,6 +858,11 @@ def implementation_site_report(
                     record("researched_unresolved_home_venue", canonical_id)
                     if reconciled_home_exception:
                         record("reconciled_unresolved_home_venue", canonical_id)
+                    if reconciled_unknown_site_home_exception:
+                        record(
+                            "reconciled_unknown_site_unresolved_home_venue",
+                            canonical_id,
+                        )
                     if reciprocal_only_home_exception:
                         record(
                             "reciprocal_only_unresolved_home_venue",
