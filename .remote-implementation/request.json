@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-reconciliation-diagnostic-0001",
+  "request_id": "utah-state-stage2-reconciliation-diagnostic-0002",
   "school_key": "utah-state",
   "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "550a1a4a2abacaa0a19108537bcab6465b9a8447",
-  "previous_control_state_sha256": "a304e1eef452d3d0f0ea1e3f6da7e2b92dd90012d7bfdafeacfe0077ca388c70",
-  "expected_protected_main_sha": "d2de92df9459d689e3ee0898205f4028ea614398",
+  "previous_control_state_commit": "eead2f74397b5c97afdef06fd83a1b33b439d64a",
+  "previous_control_state_sha256": "95d4855b3ba943ca1dbce2d29e27b7125856375ebb28d2db165239be8a6843e1",
+  "expected_protected_main_sha": "742409f6bc9d034190c0110fd628d928ae1c99a6",
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed for exactly one bounded read-only Stage 2 reconciliation diagnostic on representative game CBBG-0104608 after fresh-verified proposal rehearsal utah-state-stage2-proposal-0004 remained BLOCKED. Diagnose only where the already-authorized George Nelson Fieldhouse / Logan, UT metadata disappears in final reconciliation. No new historical research, repair, proposal rehearsal, Owner Gate 1, tracked mutation, Preview, release, or merge authority."
+    "authorization": "Owner said Proceed for the already-authorized generic repair proof. PR #386 merged exact normalized-source site propagation support to protected main 742409f6bc9d034190c0110fd628d928ae1c99a6. Rerun only representative read-only diagnostic CBBG-0104608 against blocked proposal-0004 to prove that the existing George Nelson Fieldhouse / Logan, UT source patch now propagates to canonical. No historical change, proposal rehearsal, Gate 1, tracked mutation, Preview, release, or merge authority."
   },
   "authority": {
     "owner_gate_1": false,
