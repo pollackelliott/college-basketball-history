@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "CONTROL_CENTER_SCHOOL_IMPLEMENTATION_SUPERSESSION_DISPOSITION",
+  "school_key": "gonzaga",
+  "decision_date": "2026-10-27",
+  "disposition_status": "RESEARCH_SUPERSEDED_IMPLEMENTATION_INVALIDATED_RELEASE_QUARANTINED",
+  "protected_main_at_disposition": "16907c93fb47c5373d4aa9994654e7a6d8315fbb",
+  "global_implementation_control": {
+    "branch": "control/remote-implementation",
+    "head_sha": "4ad9814b88d5de827448827c098eb3ebedf68f3e",
+    "control_sequence": 52,
+    "lifecycle_state": "IDLE",
+    "transaction_state": "COMPLETE",
+    "active_request": null,
+    "active_lock_owner": null,
+    "recovery_required": false,
+    "note": "Remote control state observed. Before starting new Implementation, inspect Codespace/other potential local integration lanes as required by global one-active-lane policy."
+  },
+  "authoritative_research": {
+    "state": "RESEARCH_FROZEN",
+    "research_base_sha": "fa692b90a72bf32f56bba63c1e10c958513a42f7",
+    "old_research_freeze_sha256": "6a4632f21ed21ef9f6015eff84501dcdc4372fe3ac7fd0856b197b867f2dab8f",
+    "superseding_research_freeze_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "transport_git_commit": "81ef1b1d16c9c1069f8219c66b7fb80d0f1fc1a3",
+    "zip_path": ".research-recovery/gonzaga/gonzaga-score-restored-RESEARCH_FROZEN.zip",
+    "status_card_path": ".research-recovery/gonzaga/gonzaga-score-restoration-status.json",
+    "manifest_path": ".research-recovery/gonzaga/gonzaga-score-restored-RESEARCH_FROZEN.manifest.json",
+    "source_rows": 2053,
+    "explicit_scores_recovered": 2053,
+    "adversarial_exception_rows": 10,
+    "non_score_field_changes": 0,
+    "original_raw_text_preserved": true,
+    "original_owner_non_d1_scan_preserved": true,
+    "existing_stage6_non_score_historical_conclusions_preserved": true,
+    "independent_current_main_acceptance": {
+      "status": "PASS",
+      "workflow_run": 40457824944,
+      "permanent_checker_main_sha": "16907c93fb47c5373d4aa9994654e7a6d8315fbb"
+    }
+  },
+  "legacy_implementation": {
+    "pull_request": 381,
+    "pull_request_url": "https://github.com/pollackelliott/college-basketball-history/pull/381",
+    "head_branch": "data/gonzaga-onboarding",
+    "exact_head_sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+    "disposition": "REJECTED_AT_OWNER_GATE_2_OBSOLETE_AFTER_RESEARCH_SUPERSESSION",
+    "state_at_disposition": "OPEN_NOT_MERGED",
+    "owner_gate_2_approval": false,
+    "original_owner_gate_1_decisions": "PRESERVE_AS_HISTORICAL_EVIDENCE_NOT_PORTABLE",
+    "original_approved_plan": "fa5834fa234de37fe6816f5aa9e28b6b38e2826b416683744aae7174338481a4",
+    "original_preview": "REJECTED_INVALID_FOR_NEW_RESEARCH_FREEZE",
+    "original_stage1_phase0_stage2_seal_apply_authority": "INVALID_FOR_NEW_FREEZE",
+    "required_prohibitions": [
+      "DO_NOT_MERGE_OLD_PR",
+      "DO_NOT_AMEND_OLD_PR_WITH_SCORE_PATCH",
+      "DO_NOT_APPLY_OLD_SEAL",
+      "DO_NOT_CONSTRUE_OLD_GATE_1_AS_APPROVAL_OF_CHANGED_PLAN",
+      "DO_NOT_REUSE_REJECTED_PREVIEW_OR_OWNER_GATE_2"
+    ],
+    "preserved_audit_ref": {
+      "branch": "archive/gonzaga-pr381-rejected-preview-6d27eb99",
+      "sha": "6d27eb9907c80597ff044f1950a1b67490e153b7",
+      "independently_verified": true
+    },
+    "note": "Creating audit ref did not alter or close PR #381, mutate its original head, or alter global control state."
+  },
+  "branch_lifecycle_constraint": {
+    "existing_remote_branch": "data/gonzaga-onboarding",
+    "constraint": "Permanent Phase 0 and guarded remote operations require EXACT data/gonzaga-onboarding; alternate suffix branch fails current repository contract.",
+    "safe_resolution": "Keep old PR/ref intact until archival and separate branch-retirement approval/execution can be verified. Close rejected PR unmerged, then retire occupied branch through a supported exact-ref workflow before creating fresh data/gonzaga-onboarding from current main. Never force-push, reset, or silently overwrite the branch. If branch deletion is unavailable through connected tools, STOP and obtain a supported exact-ref branch lifecycle action rather than attempting unapproved workaround.",
+    "status": "NOT_PERFORMED_IN_THIS_DISPOSITION"
+  },
+  "new_implementation_authorization": {
+    "status": "AUTHORIZED_IN_PRINCIPLE_AFTER_EXACT_TRANSPORT_AND_BRANCH_BOUNDARY_CLEARANCE",
+    "research_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "preconditions": [
+      "Reverify protected main, AGENTS and controlling docs",
+      "Recheck global remote control/Codespace mutation lock and archive exact legacy PR head",
+      "Provide immutable current Freeze transport in repository-supported git_base64_parts form, verifying ZIP SHA-256",
+      "Safely retire old PR branch after separately bounded exact-ref verification",
+      "Execute NEW read-only STAGE1_INVENTORY against current protected main and new immutable Research Freeze",
+      "Classify all current-main blockers before any Phase 0 mutation"
+    ],
+    "owners_gates": "New exact Gate 1 review and approval if new decision universe or semantics require; always require a new exact Preview and explicit Owner Gate 2 approval, and exact Production proof.",
+    "no_automatic_research_reopening": true
+  },
+  "immediate_next_bounded_unit": {
+    "operation": "PREPARE_GIT_BASE64_PARTS_TRANSPORT_OF_CORRECTED_FREEZE",
+    "mutation_scope": "New immutable transport branch only. No tracked basketball data, global control, old release PR, or old onboarding branch mutation.",
+    "exact_expected_zip_sha256": "8fe9d4db69a31ee957b41b029b7e034327836f1303baba26b97d98db2f55142d",
+    "acceptance": "Reassemble parts deterministically and verify exactly the six accepted members and the exact ZIP SHA-256; preserve immutable transport Git commit/path prefix/part count."
+  }
+}
