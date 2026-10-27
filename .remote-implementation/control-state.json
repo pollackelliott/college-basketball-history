@@ -81,18 +81,19 @@
     "utah-state-phase0-0002",
     "utah-state-stage2-census-0001",
     "utah-state-stage2-opponent-display-normalize-0001",
-    "utah-state-stage2-proposal-0001"
+    "utah-state-stage2-proposal-0001",
+    "utah-state-stage2-proposal-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "utah-state-stage2-proposal-0002",
+  "active_request_sha256": "7231a456ff11d32cd791a882636b1789a20ffdc9b054daa5a043ccc0881171cb",
+  "active_school_key": "utah-state",
+  "active_target_branch": "data/utah-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -200,8 +201,11 @@
     "target_branch": "data/utah-state-onboarding",
     "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40566599821",
+  "lock_acquisition_request_commit": "8a1f056d560b8256ba4fa552700078e656c121e4",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
