@@ -1,0 +1,78 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 9,
+      "discrepancy": 52,
+      "identity": 4,
+      "publication": 1
+    },
+    "decision_count": 67,
+    "decision_fields": {
+      "game_date": 10,
+      "game_identity": 4,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 13,
+      "site_type": 37
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-GONZAGA-1961-62-019-CBBG-0116649-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-GONZAGA-2003-04-004-CBBG-0042638-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1959-60-014-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1960-61-009-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1969-70-009-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1971-72-021-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1973-74-004-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1974-75-010-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1975-76-016-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1976-77-003-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1976-77-014-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1978-79-008-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1980-81-005-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1981-82-002-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1982-83-003-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1983-84-007-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1985-86-004-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1985-86-009-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1991-92-005-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1998-99-005-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1998-99-009-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1998-99-014-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1999-00-003-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-1999-00-008-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2003-04-008-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2005-06-008-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2006-07-003-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2007-08-008-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2007-08-012-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2007-08-015-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2014-15-006-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2014-15-009-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2020-21-004-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2021-22-009-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2022-23-004-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2024-25-001-SITE_TYPE",
+      "DISCREPANCY-GONZAGA-2025-26-002-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 37,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
