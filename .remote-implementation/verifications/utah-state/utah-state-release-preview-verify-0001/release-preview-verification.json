@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "cbd99ef0899cfd5124c9beb429dc446dc73e90ed29d259f2079c8a267ae85d9d",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "pr_number": 391,
+  "preview_deployment_id": 7375667884,
+  "preview_deployment_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "preview_url": "https://college-basketball-history-mv0idvg19-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "utah-state-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c"
+}
