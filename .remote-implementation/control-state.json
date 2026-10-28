@@ -121,15 +121,15 @@
   "active_lock_commit": "5beb0c94181f102df0bd23eb6b74cc5c90257066",
   "active_lock_owner": "github-actions:40781039539:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "active_prepared_tree_sha": "d348419e982ebba46b895f9727695355d35ac3ab",
   "active_request_id": "colorado-state-stage2-sealed-apply-0001",
   "active_request_sha256": "4a699bd6a71b3461d167ec88b9c2a4656429dfda9781384e16f648eb9b10713d",
   "active_school_key": "colorado-state",
   "active_target_branch": "data/colorado-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/colorado-state/colorado-state-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "e2c0e293acccb9f94c8652b9f204259c904a7bc73530df012daef5ef1777a8c1",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -272,5 +272,5 @@
   "lock_acquisition_request_commit": "896eedc9a733dda1e127c37fda035386588f939b",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
