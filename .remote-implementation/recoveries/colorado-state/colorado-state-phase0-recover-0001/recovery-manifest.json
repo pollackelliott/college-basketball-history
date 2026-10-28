@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "37dc7830139945ecbdc4cc2248969385cbb7de5f",
+  "mutation_classification": "PREPARED_NOT_PUBLISHED",
+  "protected_main_sha": "cf64b4700921955c3772d16fb51d3676f916626b",
+  "recovered_request_id": "colorado-state-phase0-0001",
+  "request_id": "colorado-state-phase0-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/colorado-state-onboarding"
+}
