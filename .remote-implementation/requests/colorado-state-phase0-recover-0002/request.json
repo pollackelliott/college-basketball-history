@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-phase0-recover-0002",
+  "school_key": "colorado-state",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "ad78962a8040c4603bae626fc3523d2fd702f4a6",
+  "previous_control_state_sha256": "44c44f2a87dc539271d5b6301b8a5a11260bc49431338f3e1319d9f95826269f",
+  "expected_protected_main_sha": "9b11f36ab32399c9c30c3a9d14253ae4b0b366a3",
+  "recovery": {
+    "abandoned_request_id": "colorado-state-phase0-0002",
+    "lock_commit": "1a6b6ea677577f1f9a157af3f5657501a3ee4635",
+    "target_branch": "data/colorado-state-onboarding"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Colorado State serialized Implementation after explicit Control Center authorization",
+    "authorization": "Control Center explicitly authorized exact permanent RECOVER for colorado-state-phase0-0002; observed PREPARED_NOT_PUBLISHED write-ahead SHA256 b7fcbb1077f5cee97ca43a127ee7236a36f30f85b50ca8d2685dbbaab558ddc2, prepared commit bcec1c2a9222a9158ac5702b671b94154a383b5e, target branch absent, active lock commit 1a6b6ea677577f1f9a157af3f5657501a3ee4635. Recovery may safely abandon prepared/unpublished transaction if permanent classifier confirms, release lock, and preserve all basketball/Research/Stage1/Integration Freeze evidence. Only read-only generic code diagnosis permitted after successful recovery; no Phase 0 retry, generic repair, maintenance PR, historical changes, gates, release or merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": true,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

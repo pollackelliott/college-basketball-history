@@ -1,43 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-phase0-0002",
+  "request_id": "colorado-state-phase0-recover-0002",
   "school_key": "colorado-state",
-  "operation": "PHASE0",
-  "previous_control_state_commit": "a4226daeee62848d5ecf3ed9239798d4932a027f",
-  "previous_control_state_sha256": "b330e1e58e9b68ac1e5072bfc96e06ad64a1b87a25db170a168d4f5abe722a3f",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "ad78962a8040c4603bae626fc3523d2fd702f4a6",
+  "previous_control_state_sha256": "44c44f2a87dc539271d5b6301b8a5a11260bc49431338f3e1319d9f95826269f",
   "expected_protected_main_sha": "9b11f36ab32399c9c30c3a9d14253ae4b0b366a3",
-  "target_branch": "data/colorado-state-onboarding",
-  "research_checkpoint": {
-    "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
-    "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "03949e69eeb999b0d5f05ac2e288048cd793c468",
-      "path_prefix": ".remote-implementation/inputs/colorado-state-stage1-0001-20261027-owner-freeze/research-frozen.zip.b64.part",
-      "part_count": 13
-    }
-  },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage1-0003/checkpoint-manifest.json",
-    "sha256": "ad42dae254054625cd3f85d69221c474d8a1838613b01cdcbd4bf9b6045e5c7d"
-  },
-  "history_scope": {
-    "start_season": "1901-1902",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Owner-confirmed Colorado State INCEPTION+; the accepted immutable Research Freeze contains the first competitive source game in 1901-1902, and the protected-main Colorado State top-level scope reference is INCEPTION+. No scope change or historical re-adjudication."
+  "recovery": {
+    "abandoned_request_id": "colorado-state-phase0-0002",
+    "lock_commit": "1a6b6ea677577f1f9a157af3f5657501a3ee4635",
+    "target_branch": "data/colorado-state-onboarding"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Colorado State serialized Implementation — fresh Phase 0 after CAS diagnostic hardening",
-    "authorization": "Owner authorized one fresh bounded Colorado State Phase 0 after Control Center approved and merged PR #393 (preserve sanitized CAS Git diagnostics); current protected main 9b11f36ab32399c9c30c3a9d14253ae4b0b366a3; fresh Stage 1 colorado-state-stage1-0003 PASS zero blockers/maintenance/ambiguities against this exact main; global control sequence 95 IDLE unlocked; original colorado-state-phase0-0001 recovered PREPARED_NOT_PUBLISHED with no onboarding branch. Reuse exact unchanged Research Freeze hash 64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381, original research_base_sha, and accepted INCEPTION+ scope. Authorize only permanent guarded Phase 0 including current-main integration, Integration Freeze, mechanically safe Stage1 venue registrations, writeahead, create-once branch CAS, global lock release, fresh independent verification. Do not recover or replay abandoned previous request; no Stage 2, historical re-adjudication, unrelated shared maintenance, gates, Preview, release, or merge."
+    "origin": "ChatGPT Colorado State serialized Implementation after explicit Control Center authorization",
+    "authorization": "Control Center explicitly authorized exact permanent RECOVER for colorado-state-phase0-0002; observed PREPARED_NOT_PUBLISHED write-ahead SHA256 b7fcbb1077f5cee97ca43a127ee7236a36f30f85b50ca8d2685dbbaab558ddc2, prepared commit bcec1c2a9222a9158ac5702b671b94154a383b5e, target branch absent, active lock commit 1a6b6ea677577f1f9a157af3f5657501a3ee4635. Recovery may safely abandon prepared/unpublished transaction if permanent classifier confirms, release lock, and preserve all basketball/Research/Stage1/Integration Freeze evidence. Only read-only generic code diagnosis permitted after successful recovery; no Phase 0 retry, generic repair, maintenance PR, historical changes, gates, release or merge."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": true,
-    "recovery": false,
+    "phase0": false,
+    "recovery": true,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
