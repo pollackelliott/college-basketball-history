@@ -1,0 +1,147 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 29,
+      "discrepancy": 57,
+      "identity": 8,
+      "publication": 1
+    },
+    "decision_count": 96,
+    "decision_fields": {
+      "game_date": 24,
+      "game_identity": 8,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 2,
+      "score": 34,
+      "site_type": 26
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-CSU-S1-00089-CBBG-0086883-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-CSU-S1-00143-CBBG-0086930-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-CSU-S1-00151-CBBG-0086924-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-CSU-S1-00509-CBBG-0107289-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-CSU-S1-02199-CBBG-0106266-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00012-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00014-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00025-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00076-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00083-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00103-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00122-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00156-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00175-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00346-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00348-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00508-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00510-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00576-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00593-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00615-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00633-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-00702-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-01937-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-SUP-008-SITE_TYPE",
+      "DISCREPANCY-CSU-S1-SUP-042-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 6,
+      "home_missing_location": 6,
+      "home_missing_venue": 8,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 56,
+      "public_gap_rows": 64,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue_rows": 2,
+      "strict_home_gap": 6,
+      "strict_home_gap_rows": 6,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2774,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ],
+      "home_missing_location": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ],
+      "home_missing_venue": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963",
+        "CBBG-0177216",
+        "CBBG-0177217"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0030391",
+        "CBBG-0043745",
+        "CBBG-0047995",
+        "CBBG-0052935",
+        "CBBG-0054996",
+        "CBBG-0059418",
+        "CBBG-0071765",
+        "CBBG-0071967",
+        "CBBG-0072043",
+        "CBBG-0072096",
+        "CBBG-0076672",
+        "CBBG-0104685"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0104685",
+        "CBBG-0145571"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0177216",
+        "CBBG-0177217"
+      ],
+      "strict_home_gap": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "REPAIR_SCOPE_REQUIRED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 26,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 6,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    }
+  ]
+}

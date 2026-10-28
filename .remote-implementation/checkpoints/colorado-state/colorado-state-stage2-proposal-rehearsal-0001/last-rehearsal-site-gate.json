@@ -1,0 +1,99 @@
+{
+  "counts": {
+    "home_missing_both": 6,
+    "home_missing_location": 6,
+    "home_missing_venue": 8,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 56,
+    "public_gap_rows": 64,
+    "reciprocal_research_accounted_gap": 2,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 2,
+    "researched_unresolved_home_venue_rows": 2,
+    "strict_home_gap": 6,
+    "strict_home_gap_rows": 6,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2774,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0
+  },
+  "errors": [
+    "6 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0036066",
+      "CBBG-0086789",
+      "CBBG-0086806",
+      "CBBG-0086879",
+      "CBBG-0086942",
+      "CBBG-0086963"
+    ],
+    "home_missing_location": [
+      "CBBG-0036066",
+      "CBBG-0086789",
+      "CBBG-0086806",
+      "CBBG-0086879",
+      "CBBG-0086942",
+      "CBBG-0086963"
+    ],
+    "home_missing_venue": [
+      "CBBG-0036066",
+      "CBBG-0086789",
+      "CBBG-0086806",
+      "CBBG-0086879",
+      "CBBG-0086942",
+      "CBBG-0086963",
+      "CBBG-0177216",
+      "CBBG-0177217"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0030391",
+      "CBBG-0043745",
+      "CBBG-0047995",
+      "CBBG-0052935",
+      "CBBG-0054996",
+      "CBBG-0059418",
+      "CBBG-0071765",
+      "CBBG-0071967",
+      "CBBG-0072043",
+      "CBBG-0072096",
+      "CBBG-0076672",
+      "CBBG-0104685"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0104685",
+      "CBBG-0145571"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0177216",
+      "CBBG-0177217"
+    ],
+    "strict_home_gap": [
+      "CBBG-0036066",
+      "CBBG-0086789",
+      "CBBG-0086806",
+      "CBBG-0086879",
+      "CBBG-0086942",
+      "CBBG-0086963"
+    ]
+  },
+  "history_start_season": "1901-1902",
+  "school_key": "colorado-state",
+  "source_site_counts": {
+    "home_missing_venue": 2,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 57,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 55,
+    "researched_gap_rows": 57,
+    "researched_unresolved_home_venue_rows": 2,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2765
+  },
+  "status": "FAIL",
+  "warnings": []
+}

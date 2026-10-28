@@ -1,0 +1,147 @@
+{
+  "branch": "remote-stage2-census/colorado-state-87a3bb6b0a16",
+  "capability_census": {
+    "path": ".onboarding/colorado-state/implementation-stage2-capability-census.json",
+    "status": "REPAIR_SCOPE_REQUIRED",
+    "topology_group_count": 2
+  },
+  "head_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "integration_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "integration_semantic_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "last_error": "site_completeness failed with exit code 1",
+  "next_action": "Inspect the preserved site diagnostic and durable capability census. Classify the complete detected failure population before changing history or tooling; if generic permanent tooling is defective, define one consolidated repair scope before merging the first repair. Do not invent a replacement rehearsal wrapper.",
+  "origin_main_sha_at_integration_freeze": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 29,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 29,
+      "discrepancy": 57,
+      "identity": 8,
+      "publication": 1
+    },
+    "decision_count": 96,
+    "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "discrepancies_to_add": 57,
+    "existing_game_matches": 828,
+    "new_canonical_games": 1929,
+    "plan_path": ".onboarding/colorado-state/plan.json",
+    "review_path": ".onboarding/colorado-state/review.csv",
+    "warning_count": 0
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "LEAVE_UNRESOLVED": 49,
+      "MATCH_CANONICAL:CBBG-0049238": 1,
+      "MATCH_CANONICAL:CBBG-0086799": 1,
+      "MATCH_CANONICAL:CBBG-0086881": 1,
+      "MATCH_CANONICAL:CBBG-0086890": 1,
+      "MATCH_CANONICAL:CBBG-0086924": 1,
+      "MATCH_CANONICAL:CBBG-0086930": 1,
+      "MATCH_CANONICAL:CBBG-0106273": 1,
+      "MATCH_CANONICAL:CBBG-0107293": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 2,
+      "NOT_APPLICABLE": 20,
+      "USE_SOURCE": 15,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "182149a52d04fee723c1ec098867a1f1cc971c2dfe5a823d87a33a115aebcf53",
+    "decision_count": 96,
+    "path": "/tmp/remote-stage2-proposal-map-11yybnkc/recommendation-map.json",
+    "sha256": "7ec135fe3ce363a84f2eb714f2c0b4635987add9fd779fd9cab014441b0c337b"
+  },
+  "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 6,
+      "home_missing_location": 6,
+      "home_missing_venue": 8,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 56,
+      "public_gap_rows": 64,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue_rows": 2,
+      "strict_home_gap": 6,
+      "strict_home_gap_rows": 6,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2774,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [
+      "6 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ],
+      "home_missing_location": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ],
+      "home_missing_venue": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963",
+        "CBBG-0177216",
+        "CBBG-0177217"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0030391",
+        "CBBG-0043745",
+        "CBBG-0047995",
+        "CBBG-0052935",
+        "CBBG-0054996",
+        "CBBG-0059418",
+        "CBBG-0071765",
+        "CBBG-0071967",
+        "CBBG-0072043",
+        "CBBG-0072096",
+        "CBBG-0076672",
+        "CBBG-0104685"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0104685",
+        "CBBG-0145571"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0177216",
+        "CBBG-0177217"
+      ],
+      "strict_home_gap": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ]
+    },
+    "path": ".onboarding/colorado-state/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
