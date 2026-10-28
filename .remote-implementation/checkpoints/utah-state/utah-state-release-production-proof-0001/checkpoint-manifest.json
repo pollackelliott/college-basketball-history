@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "merge_parent_onboarding": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "merge_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "ba07d35aa4897c94f38d9540971cafe1609a68e9aa013ab488c9fa4d9d36da8a",
+  "owner_gate_2_verification_sha256": "67ab200f373e3c89cfd664df122c35b560667a06ea37172df1210c44c550595f",
+  "pr_head_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "pr_number": 391,
+  "production_deployment_id": 7376721918,
+  "production_json_checked_count": 72,
+  "production_proof": true,
+  "production_proof_sha256": "7309d792e04987134c25d3091efa8daa829f5dcdf6a08c07069e01147b591e5b",
+  "protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "request_id": "utah-state-release-production-proof-0001",
+  "request_sha256": "8dee45faad6a8278c4160aeef89c22a3535b2df7ed5d8ec28dd41aaa12afc259",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}

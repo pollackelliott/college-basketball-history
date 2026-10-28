@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "utah-state",
+  "previous_control_state_commit": "42018838de9a581db2ce45298a2162c4018e4572",
+  "previous_control_state_sha256": "ee449686931d1035f9b243e8ec93939223de540795bd37ccab89b5250c8c7953",
+  "expected_protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "pr_number": 391,
+  "merge_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "ba07d35aa4897c94f38d9540971cafe1609a68e9aa013ab488c9fa4d9d36da8a"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/utah-state/utah-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "67ab200f373e3c89cfd664df122c35b560667a06ea37172df1210c44c550595f"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State Implementation",
+    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector then rechecked protected main, exact PR #391 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one standard two-parent merge. GitHub merged exact approved head d298bd00b8f2560902d6e7a17e6820f52a82b39c as 2b2c90d01887e8199e404f62d031858a93fc65b5 with first parent 64258e5d3178715f7e936912ede28333f830fd0b. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
+    "venue_identity_maintenance": false
+  }
+}
