@@ -210,7 +210,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/utah-state/utah-state-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "6f75149239b71cd45ae4f778b14a4cd30c635db41b1a520eae93b1291e2ab23c",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -220,7 +220,7 @@
     "production_deployment_id": 7376721918,
     "production_json_checked_count": 72,
     "protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "utah-state-release-production-proof-0001",
     "school_key": "utah-state"
   },

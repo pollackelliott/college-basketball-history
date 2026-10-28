@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "6f75149239b71cd45ae4f778b14a4cd30c635db41b1a520eae93b1291e2ab23c",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "pr_number": 391,
+  "production_deployment_id": 7376721918,
+  "production_json_checked_count": 72,
+  "production_proof": true,
+  "request_id": "utah-state-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "status": "COMPLETE"
+}
