@@ -246,11 +246,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/colorado-state/colorado-state-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "cdbc1a89a1139a7a2de40647ab25acdb951625c93cf92a7694f081b209d35b01",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "colorado-state-release-readiness-0001",
     "school_key": "colorado-state",
     "target_branch": "data/colorado-state-onboarding",
