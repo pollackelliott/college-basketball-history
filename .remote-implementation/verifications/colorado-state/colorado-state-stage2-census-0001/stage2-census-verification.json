@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "50b0b133fa39beeaa1a9907420216763e8259545b6676e1dab174cdd2a2c13c2",
+    "implementation-stage2-status.json": "73b53232fbe4c99240625e0b6f3a3813cb8fc2770aeae2fe2aa4a13dbca468b8",
+    "plan.json": "e05773408ecd808cadd2774affc2aaf83dad4d70c05bbf1e8ba9db4d2a65d530",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "8c8cae3f4cd02b07ed41649dda7e1eef1e4272837f0f9dd3274864f723cedb6f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "50b0b133fa39beeaa1a9907420216763e8259545b6676e1dab174cdd2a2c13c2",
+    "implementation-stage2-status.json": "cd64599c8c9443713f956f4059fffa1f50c8c5167ac2d2e730e19be9f182bc69",
+    "plan.json": "0476911f48029369ff162eadddc55dc50f50673cc67445d777f4170a6470aae1",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "d239cd7d17699fa7f1857f0027fb3abef766dceffa0a53b26f44efe72479caaa"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "colorado-state-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "9e20dd3904681dd6239581833773e8c598767c04",
+  "target_tree_sha": "c08a08d484a33a79036d6e56f526735249b72b67",
+  "tracked_stage2_mutation": "NONE"
+}
