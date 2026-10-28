@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "utah-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "utah-state",
-  "previous_control_state_commit": "746854838ed8d0b077e2392a85533a3cfc64616e",
-  "previous_control_state_sha256": "f25947f18894a3f5d5207ca6269cd338290f48e1311aaa17dd6ab37388f18bd5",
-  "expected_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "previous_control_state_commit": "42018838de9a581db2ce45298a2162c4018e4572",
+  "previous_control_state_sha256": "ee449686931d1035f9b243e8ec93939223de540795bd37ccab89b5250c8c7953",
+  "expected_protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
   "target_branch": "data/utah-state-onboarding",
   "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
   "pr_number": 391,
-  "approved_plan_hash": "3af127c9bd5f6ec1feb17fd3826233ceb3695970abe8ce95ccbba768164caeeb",
-  "release_manifest_sha256": "27335dc4baf691710288b7adb7463f328a9efbffcc69973891c741ea054028a9",
-  "preview_deployment_id": 7375667884,
-  "preview_url": "https://college-basketball-history-mv0idvg19-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "cbd99ef0899cfd5124c9beb429dc446dc73e90ed29d259f2079c8a267ae85d9d"
+  "merge_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "ba07d35aa4897c94f38d9540971cafe1609a68e9aa013ab488c9fa4d9d36da8a"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/utah-state/utah-state-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "e70ccf62059dfb6c6376b7df1c83599bbcecd44b5d2b33d1cb88e8e9b5ffb869"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: “APPROVED. Proceed” after being presented the exact fresh-verified Utah State PR #391 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
-    "preview_checkpoint_sha256": "cbd99ef0899cfd5124c9beb429dc446dc73e90ed29d259f2079c8a267ae85d9d",
-    "preview_verification_sha256": "e70ccf62059dfb6c6376b7df1c83599bbcecd44b5d2b33d1cb88e8e9b5ffb869",
-    "pr_number": 391,
-    "pr_head_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
-    "preview_deployment_id": 7375667884,
-    "preview_url": "https://college-basketball-history-mv0idvg19-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/utah-state/utah-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "67ab200f373e3c89cfd664df122c35b560667a06ea37172df1210c44c550595f"
   },
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” for the exact fresh-verified Utah State PR #391 Preview at head d298bd00b8f2560902d6e7a17e6820f52a82b39c and Vercel Preview deployment 7375667884. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector then rechecked protected main, exact PR #391 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one standard two-parent merge. GitHub merged exact approved head d298bd00b8f2560902d6e7a17e6820f52a82b39c as 2b2c90d01887e8199e404f62d031858a93fc65b5 with first parent 64258e5d3178715f7e936912ede28333f830fd0b. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
   },
   "authority": {
     "phase0": false,
@@ -51,9 +38,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
