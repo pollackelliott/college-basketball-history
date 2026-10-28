@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-release-readiness-0001",
+  "request_id": "utah-state-release-preview-verify-0001",
   "school_key": "utah-state",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "685e5d53c2e5086d0ce6a8e2c1dc3fa86999b9a5",
-  "previous_control_state_sha256": "e5a3ba4fd0df26a151b5ac6e5fb20495cbc0777ef024d0d534f0ea26d99b8bb1",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "cb8b263d2e5f1ec272715abe1c8aa6031020f7d8",
+  "previous_control_state_sha256": "b25f8ece544e0a4f574f084005e0dc98d97f9f5daa7b2eb4067b1c306a1b7657",
   "expected_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
   "target_branch": "data/utah-state-onboarding",
   "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/utah-state/utah-state-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "183096f9e40c575bf785c66057836d35d369499c33f43d902164d38f2d6c41ec"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "0b27f02b973d40f78c8f98b2c4de272e1c8162a583662b4c4837124f6c4ce4bc"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/utah-state/utah-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "45fe155509998eee5814981174c1ca0d18b1e6aeb6a860a2e1d6bc0eaa7f3938"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/utah-state/utah-state-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "1b74a052e53a3439dd46b8d54bc39f0d93d3a2423af8fd60a5b53dd2cccb1ef2"
   },
   "approved_plan_hash": "3af127c9bd5f6ec1feb17fd3826233ceb3695970abe8ce95ccbba768164caeeb",
   "release_manifest_sha256": "27335dc4baf691710288b7adb7463f328a9efbffcc69973891c741ea054028a9",
+  "pr_number": 391,
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed after the exact Utah State sealed-apply successor was fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against successor d298bd00b8f2560902d6e7a17e6820f52a82b39c. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+    "authorization": "Owner said Proceed after Utah State RELEASE_READINESS was fresh-verified. The school lane created exact PR #391 from data/utah-state-onboarding to main using the repository-generated sealed-apply PR body and read it back at exact head d298bd00b8f2560902d6e7a17e6820f52a82b39c. This request authorizes exactly one bounded RELEASE_PREVIEW_VERIFY operation: authenticate fresh readiness and exact PR #391, wait for required checks/mergeability and the exact Preview deployment, then stop at OWNER_GATE_2_READY. It carries no Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -37,8 +38,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
