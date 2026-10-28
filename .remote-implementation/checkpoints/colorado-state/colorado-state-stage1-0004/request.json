@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-stage1-0004",
+  "school_key": "colorado-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "12048f25e2d9b666e0b8bed207c0edda76a92816",
+  "previous_control_state_sha256": "9f4615e93c01835c4a288d1a6f68923fb56d3c32cdf44c3638c4fee6e3985f17",
+  "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "research_checkpoint": {
+    "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
+    "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "03949e69eeb999b0d5f05ac2e288048cd793c468",
+      "path_prefix": ".remote-implementation/inputs/colorado-state-stage1-0001-20261027-owner-freeze/research-frozen.zip.b64.part",
+      "part_count": 13
+    }
+  },
+  "creation_provenance": {
+    "origin": "Colorado State serialized Implementation — exact-main Stage 1 refresh after PR #394",
+    "authorization": "Owner Proceed: refresh read-only Stage 1 inventory at exact current protected main c8334be2c2cbbc5649204f0cec4e20f022580c2d after Control Center-authorized Phase 0 object-store fix. Preserve identical frozen Research evidence and INCEPTION+ history authority. Global control sequence 96 IDLE, recovered failed Phase 0, onboarding branch absent. No Phase 0, Stage 2, owner gates, new historical adjudication, protected-main or basketball mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
