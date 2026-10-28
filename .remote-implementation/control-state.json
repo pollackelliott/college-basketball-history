@@ -114,18 +114,19 @@
     "colorado-state-stage2-proposal-rehearsal-0002",
     "colorado-state-stage2-gate1-fill-0001",
     "colorado-state-stage2-preseal-rehearsal-0001",
-    "colorado-state-stage2-gate1-seal-0001"
+    "colorado-state-stage2-gate1-seal-0001",
+    "colorado-state-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40781039539:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "colorado-state-stage2-sealed-apply-0001",
+  "active_request_sha256": "4a699bd6a71b3461d167ec88b9c2a4656429dfda9781384e16f648eb9b10713d",
+  "active_school_key": "colorado-state",
+  "active_target_branch": "data/colorado-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -265,8 +266,11 @@
     "target_branch": "data/colorado-state-onboarding",
     "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40781039539",
+  "lock_acquisition_request_commit": "896eedc9a733dda1e127c37fda035386588f939b",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

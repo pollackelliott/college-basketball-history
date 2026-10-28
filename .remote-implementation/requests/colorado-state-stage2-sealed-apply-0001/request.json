@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-stage2-sealed-apply-0001",
+  "school_key": "colorado-state",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "00f138a318c2d26283d2d1779452822f6402bf8c",
+  "previous_control_state_sha256": "d8721d4cebc01bbfc1e6691ce026dd7fe1b5694bbef0312008f6daf714427f2c",
+  "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "23a93561a72f75e340b4d53978cecf0f9f00923956c5b5456cd9d37c47031a48"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/colorado-state/colorado-state-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "e83d104b4f814b2892c7095ce4a9ba8e4f1137fecdd81a9c733a5733bc5d2a1f"
+  },
+  "approved_plan_hash": "a54db55d5c07b49cb3c38c17e1f6fcd9afcb25452ab3462ffb5f4986bdb30244",
+  "approved_plan_sha256": "6d6ac7ae9b2b1defaa50dd768cf28aef7d9c8c463e0c36aa712dc05399a37149",
+  "owner_gate_1_approval_sha256": "e6f07c0f0c64d6c1f80fe8f19ce5be6aa1d879bea9ad97e0999393c1707e90b1",
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "recommendation_map_sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96",
+  "filled_review_sha256": "b5d91e195bea7d2391e207b3151c2b8531c5d389563f7979af394abc84e86585",
+  "decision_id_set_sha256": "a8ea5fafae2887b4963b4889d9e70f4c1585a80880ab2feac6af149affb74ec9",
+  "creation_provenance": {
+    "origin": "Colorado State serialized Implementation — exact sealed apply",
+    "authorization": "Control Center explicitly superseded prior recovery stop and directed one STAGE2_SEALED_APPLY after independently verifying exact SEALED checkpoint and fresh equivalence PASS. User's Owner Gate 1 approval is bound by original approval SHA. Authorize only a guarded transactional sealed apply with exact approved-plan hash, serialized lock, write-ahead and CAS successor, then independent fresh verification. No release readiness, PR preparation, Preview, Owner Gate 2, merge or Production authority in this unit."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
