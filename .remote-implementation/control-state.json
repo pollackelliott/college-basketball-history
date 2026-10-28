@@ -111,7 +111,7 @@
   "active_request_sha256": "300e8780c3088271a9cbe677e28b5553fed7443ce23a198e6e0508c1237c47b4",
   "active_school_key": "colorado-state",
   "active_target_branch": "maintenance/colorado-state-stage1-utc-mckenzie-identity",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "04ff18944913d1f49dd8a74b36f5b139b4ffa2e3",
   "active_writeahead_path": ".remote-implementation/writeahead/colorado-state/colorado-state-venue-maintenance-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "a087e0daa74bd94dda3eb9493d34fd8a018c2a17d870dd0c595176ab8e735c9f",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
