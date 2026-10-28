@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "apply_request_id": "utah-state-stage2-sealed-apply-0001",
+  "approved_plan_hash": "3af127c9bd5f6ec1feb17fd3826233ceb3695970abe8ce95ccbba768164caeeb",
+  "changed_path_count": 79,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "release_manifest_sha256": "27335dc4baf691710288b7adb7463f328a9efbffcc69973891c741ea054028a9",
+  "school_key": "utah-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "183096f9e40c575bf785c66057836d35d369499c33f43d902164d38f2d6c41ec",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "45fe155509998eee5814981174c1ca0d18b1e6aeb6a860a2e1d6bc0eaa7f3938",
+  "writeahead_sha256": "24018e39a05c8d7f9881c3bdda91ead74f5f0a6fa5c20d671602395dc8a9fbdb"
+}
