@@ -104,7 +104,7 @@
     "colorado-state-phase0-0001"
   ],
   "active_expected_main_sha": "cf64b4700921955c3772d16fb51d3676f916626b",
-  "active_lock_commit": null,
+  "active_lock_commit": "37dc7830139945ecbdc4cc2248969385cbb7de5f",
   "active_lock_owner": "github-actions:40689232484:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
