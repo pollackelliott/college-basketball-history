@@ -1,0 +1,232 @@
+{
+  "action_counts": {
+    "ENABLE_PUBLIC_PAGE": 1,
+    "LEAVE_UNRESOLVED": 49,
+    "MATCH_CANONICAL:CBBG-0049238": 1,
+    "MATCH_CANONICAL:CBBG-0086799": 1,
+    "MATCH_CANONICAL:CBBG-0086881": 1,
+    "MATCH_CANONICAL:CBBG-0086890": 1,
+    "MATCH_CANONICAL:CBBG-0086924": 1,
+    "MATCH_CANONICAL:CBBG-0086930": 1,
+    "MATCH_CANONICAL:CBBG-0106273": 1,
+    "MATCH_CANONICAL:CBBG-0107293": 1,
+    "NORMALIZE_SOURCE_TO_CANONICAL": 2,
+    "NOT_APPLICABLE": 20,
+    "USE_SOURCE": 15,
+    "VERIFY_REFERENCE_VALUES": 1
+  },
+  "approved_plan_hash_preview": "1a25fe7d99280b135314f9acc14db36fe5f42b346f6d616b5d543bb68fb5165a",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "7f2b379d487d503eca904d54364926cac76a0e23ef390d3dbd0c0083d13a6537",
+    "implementation-stage2-status.json": "97031ea1c1e4324fc69428d2a21a77b136fe7082bda6393e6c0f4877544b7e9d",
+    "last-rehearsal-site-gate.json": "9b91f316e117c27fa4440e2be8d56abcdce691e445ec91c064e2f6c0607baf67",
+    "plan.json": "22b74dc26b92f800095e8cee094d30a9abcdbb0d5b139c61e746cf09a9bb287e",
+    "review.csv": "91aeae58396e48f29480d6c6ec2af19c39878fbccf0907769f50c2e11f99346b",
+    "review.md": "b2f5e94630adc46d6a633609072fee21543302e7f53677710feea4b332242b48"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "7f2b379d487d503eca904d54364926cac76a0e23ef390d3dbd0c0083d13a6537",
+    "implementation-stage2-status.json": "020f0594c20d0b83fda71de40ea1ba456f476e676985d7da9d0c169677eec056",
+    "last-rehearsal-site-gate.json": "9b91f316e117c27fa4440e2be8d56abcdce691e445ec91c064e2f6c0607baf67",
+    "plan.json": "bcc8a96ca68958601030b6ebfdb8c15685a12e73a718b5139c82353dd1607297",
+    "review.csv": "91aeae58396e48f29480d6c6ec2af19c39878fbccf0907769f50c2e11f99346b",
+    "review.md": "521860d1d3e2d63fc80927e72634e6c16fe2bedfa96044426a8d83e8171f6bec"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "PASS",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 26,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": 74,
+  "command_exit_code": 0,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "runtime_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "colorado-state",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 29,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 29,
+      "discrepancy": 57,
+      "identity": 8,
+      "publication": 1
+    },
+    "decision_count": 96,
+    "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "discrepancies_to_add": 57,
+    "existing_game_matches": 828,
+    "new_canonical_games": 1929,
+    "plan_path": ".onboarding/colorado-state/plan.json",
+    "review_path": ".onboarding/colorado-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "LEAVE_UNRESOLVED": 49,
+      "MATCH_CANONICAL:CBBG-0049238": 1,
+      "MATCH_CANONICAL:CBBG-0086799": 1,
+      "MATCH_CANONICAL:CBBG-0086881": 1,
+      "MATCH_CANONICAL:CBBG-0086890": 1,
+      "MATCH_CANONICAL:CBBG-0086924": 1,
+      "MATCH_CANONICAL:CBBG-0086930": 1,
+      "MATCH_CANONICAL:CBBG-0106273": 1,
+      "MATCH_CANONICAL:CBBG-0107293": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 2,
+      "NOT_APPLICABLE": 20,
+      "USE_SOURCE": 15,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "1a25fe7d99280b135314f9acc14db36fe5f42b346f6d616b5d543bb68fb5165a",
+    "changed_path_count": 74
+  },
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "LEAVE_UNRESOLVED": 49,
+      "MATCH_CANONICAL:CBBG-0049238": 1,
+      "MATCH_CANONICAL:CBBG-0086799": 1,
+      "MATCH_CANONICAL:CBBG-0086881": 1,
+      "MATCH_CANONICAL:CBBG-0086890": 1,
+      "MATCH_CANONICAL:CBBG-0086924": 1,
+      "MATCH_CANONICAL:CBBG-0086930": 1,
+      "MATCH_CANONICAL:CBBG-0106273": 1,
+      "MATCH_CANONICAL:CBBG-0107293": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 2,
+      "NOT_APPLICABLE": 20,
+      "USE_SOURCE": 15,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "1a25fe7d99280b135314f9acc14db36fe5f42b346f6d616b5d543bb68fb5165a",
+    "decision_count": 96,
+    "path": "/tmp/remote-stage2-proposal-map-t9yuzply/recommendation-map.json",
+    "sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage2-proposal-rehearsal-0002/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/colorado-state-stage2-proposal-rehearsal-0002/recommendation-map.json",
+  "recommendation_map_sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96",
+  "request_id": "colorado-state-stage2-proposal-rehearsal-0002",
+  "request_sha256": "d9b25e4160ae096117da8dd601685aeada3211f6f72bab4d38af8b438d63fdb5",
+  "runtime_commit_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "runtime_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+    "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+    "tools/onboarding_hardening.py": "2d18fde1fe2828439e311da6588b1bdb89328b69d99318ebce4300c1a8df5673",
+    "tools/onboarding_plan.py": "a443e89ab264c8663a6141e144921de1b26d0eee3fab902e87fb96fce1a95144",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 56,
+      "public_gap_rows": 64,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue_rows": 2,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2774,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 6
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0177216",
+        "CBBG-0177217"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0030391",
+        "CBBG-0043745",
+        "CBBG-0047995",
+        "CBBG-0052935",
+        "CBBG-0054996",
+        "CBBG-0059418",
+        "CBBG-0071765",
+        "CBBG-0071967",
+        "CBBG-0072043",
+        "CBBG-0072096",
+        "CBBG-0076672",
+        "CBBG-0104685"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0104685",
+        "CBBG-0145571"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0177216",
+        "CBBG-0177217"
+      ],
+      "unknown_site_type": [
+        "CBBG-0036066",
+        "CBBG-0086789",
+        "CBBG-0086806",
+        "CBBG-0086879",
+        "CBBG-0086942",
+        "CBBG-0086963"
+      ]
+    },
+    "history_start_season": "1901-1902",
+    "school_key": "colorado-state",
+    "source_site_counts": {
+      "home_missing_venue": 2,
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 57,
+      "neutral_missing_location": 1,
+      "neutral_missing_venue": 55,
+      "researched_gap_rows": 57,
+      "researched_unresolved_home_venue_rows": 2,
+      "unaccounted_gap_rows": 0
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2765
+    },
+    "status": "PASS",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/colorado-state/colorado-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_authority_sha256": "c0909c6b7ec2039e146390617b87c3c1fc693e94abf68a905483f780f99ddbbc",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "target_tree_sha": "aa95c98f5ad329d90bbec8615fea2e9c57be4a93",
+  "tracked_mutation_proof": {
+    "after_head_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+    "after_status": "",
+    "after_tree_sha": "aa95c98f5ad329d90bbec8615fea2e9c57be4a93",
+    "before_head_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+    "before_status": "",
+    "before_tree_sha": "aa95c98f5ad329d90bbec8615fea2e9c57be4a93",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
