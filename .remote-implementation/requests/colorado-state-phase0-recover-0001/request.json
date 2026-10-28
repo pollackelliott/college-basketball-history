@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-phase0-recover-0001",
+  "school_key": "colorado-state",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "5d84bc00d36736573cf57a97428406954831f6d3",
+  "previous_control_state_sha256": "40f0f32f9bef298493300c287c7e9fbf16be583ecb53680904b37de7d7882411",
+  "expected_protected_main_sha": "cf64b4700921955c3772d16fb51d3676f916626b",
+  "recovery": {
+    "abandoned_request_id": "colorado-state-phase0-0001",
+    "lock_commit": "37dc7830139945ecbdc4cc2248969385cbb7de5f",
+    "target_branch": "data/colorado-state-onboarding"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Colorado State serialized Implementation",
+    "authorization": "Owner explicitly commanded 'Recover. Proceed' after the failed colorado-state-phase0-0001. Exact control 93 ACTIVE PREPARED_NOT_PUBLISHED and writeahead prove prepared Phase 0 commit but target branch is absent; recover only via permanent RECOVER mutation classification, preserve evidence, abandon the failed nonreplayable request, release the one-active mutation lock, and leave protected main and all basketball branches unchanged. No Phase 0 retry, another stage, arbitrary repair, Owner Gate 1/2, release, or merge authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": true,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
