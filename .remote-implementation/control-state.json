@@ -93,18 +93,19 @@
     "utah-state-stage2-gate1-fill-0001",
     "utah-state-stage2-preseal-0001",
     "utah-state-stage2-gate1-seal-0001",
-    "utah-state-stage2-sealed-apply-0001"
+    "utah-state-stage2-sealed-apply-0001",
+    "utah-state-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "utah-state-release-readiness-0001",
+  "active_request_sha256": "100ba563bc1b2903017a2fc66019fe6e2dfc98bbcaa0de8e88aea55394fc4a91",
+  "active_school_key": "utah-state",
+  "active_target_branch": "data/utah-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -220,8 +221,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/utah-state/utah-state-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "24018e39a05c8d7f9881c3bdda91ead74f5f0a6fa5c20d671602395dc8a9fbdb"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40624072174",
+  "lock_acquisition_request_commit": "2f949f9cfbe6530e6d375603a5606b0ebdd558ac",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
