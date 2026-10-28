@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-stage2-census-0001",
+  "request_id": "colorado-state-stage2-opponent-display-normalize-0001",
   "school_key": "colorado-state",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "e5d10ed73dca7abb261c385f65c316006cdeb3c6",
-  "previous_control_state_sha256": "f5fa77e118eba8841238e3c7ae5b6714e214c547de3dd26b3ff1d60665ada4c7",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "4bee3363a5c76411c32e54449a7e18d6514766e6",
+  "previous_control_state_sha256": "512ccfc0b1cf0fb49268da118d322be7a67358a64cdf0772c56c5d249dd472ac",
   "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
   "target_branch": "data/colorado-state-onboarding",
   "target_sha": "9e20dd3904681dd6239581833773e8c598767c04",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/colorado-state/colorado-state-phase0-0003/successor-manifest.json",
-    "sha256": "4cd0f131a3b982e09fedfcb00513380c02b96cd88fe9dc6bb1953df21bc99946"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "dd6ba5b6f504db3f964e236e4bed624246cfbdfef47f565f28f999bdf247a537"
   },
   "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
   "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
   "creation_provenance": {
-    "origin": "Colorado State Implementation lane — read-only Stage 2 capability census",
-    "authorization": "Owner Proceed following independently fresh-verified Colorado State Phase 0 colorado-state-phase0-0003. Execute one read-only STAGE2_CENSUS with unchanged permanent implementation_stage2.py, exact successful successor, Integration Freeze and semantic snapshot. Global sequence 98 IDLE unlocked, exact target SHA and current protected main confirmed. Preserve all Research, Stage 1 and Phase 0 authority. Stop at CAPABILITY_CENSUS_READY or honest BLOCKED with durable checkpoint and fresh verification. No tracked repair, map, Gate 1, Stage 2 proposal, release, or main mutation."
+    "origin": "Colorado State Implementation — exact census-bound opponent-display representation normalization",
+    "authorization": "Owner Proceed after independent PASS-equivalent Stage 2 census colorado-state-stage2-census-0001: exactly 38 historical opponent-display conflicts, zero warnings, zero owner decisions, no other blocker types; global control seq 99 IDLE unlocked. Authorize only guarded repository-owned STAGE2_OPPONENT_DISPLAY_NORMALIZE to match exact census blocker keys, apply permanent --sync-source-games canonical display normalization, enforce representation-only field proof and Integration Freeze semantic nonregression, validate, write-ahead, publish with exact existing-target expected-predecessor CAS, regenerate Stage 2 no-map census and independently verify. Prohibit identity re-adjudication, unrelated changes, other Stage 2 repair, map, Owner Gate 1, Preview, release, merge, Research or protected-main mutation."
   },
   "authority": {
     "owner_gate_1": false,
@@ -25,8 +25,8 @@
     "release": false,
     "phase0": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_opponent_display_normalize": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
