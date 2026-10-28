@@ -296,7 +296,7 @@ def materialize_payload(
 def add_isolated_worktree(live_main: str, school_key: str) -> Path:
     path = Path(tempfile.mkdtemp(prefix="remote-implementation-%s-" % school_key))
     shutil.rmtree(path)
-    git("worktree", "add", "-b", "data/%s-onboarding" % school_key, str(path), live_main)
+    git("worktree", "add", "-b", "data/%s-onboarding" % school_key, str(path), live_main, cwd=ROOT)
     configure_git(path)
     if git("rev-parse", "HEAD", cwd=path).stdout.strip() != live_main:
         raise Stop("WORKTREE_MAIN_MISMATCH")
