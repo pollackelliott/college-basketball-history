@@ -1,0 +1,1139 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 38,
+  "change_row_count": 48,
+  "changes": [
+    {
+      "authority_names": [
+        "Adams State"
+      ],
+      "authority_signature": "adamsstate",
+      "canonical_opponent_key": "adams-state",
+      "from_names": [
+        "Adams State University"
+      ],
+      "target_row_count": 3,
+      "to_name": "Adams State"
+    },
+    {
+      "authority_names": [
+        "Alabama-Huntsville",
+        "Alabama–Huntsville"
+      ],
+      "authority_signature": "alabamahuntsville",
+      "canonical_opponent_key": "alabama-huntsville",
+      "from_names": [
+        "University of Alabama in Huntsville"
+      ],
+      "target_row_count": 1,
+      "to_name": "Alabama-Huntsville"
+    },
+    {
+      "authority_names": [
+        "Arkansas Tech"
+      ],
+      "authority_signature": "arkansastech",
+      "canonical_opponent_key": "arkansas-tech",
+      "from_names": [
+        "Arkansas Tech University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Arkansas Tech"
+    },
+    {
+      "authority_names": [
+        "BYU-Hawai'i",
+        "BYU-Hawaii",
+        "BYU–Hawaii"
+      ],
+      "authority_signature": "byuhawaii",
+      "canonical_opponent_key": "byu-hawaii",
+      "from_names": [
+        "Brigham Young University–Hawaii"
+      ],
+      "target_row_count": 1,
+      "to_name": "BYU-Hawaii"
+    },
+    {
+      "authority_names": [
+        "Cal State East Bay"
+      ],
+      "authority_signature": "calstateeastbay",
+      "canonical_opponent_key": "cal-state-east-bay",
+      "from_names": [
+        "California State University East Bay"
+      ],
+      "target_row_count": 1,
+      "to_name": "Cal State East Bay"
+    },
+    {
+      "authority_names": [
+        "Cal State Los Angeles"
+      ],
+      "authority_signature": "calstatelosangeles",
+      "canonical_opponent_key": "cal-state-los-angeles",
+      "from_names": [
+        "California State University Los Angeles"
+      ],
+      "target_row_count": 1,
+      "to_name": "Cal State Los Angeles"
+    },
+    {
+      "authority_names": [
+        "Chadron State"
+      ],
+      "authority_signature": "chadronstate",
+      "canonical_opponent_key": "chadron-state",
+      "from_names": [
+        "Chadron State College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Chadron State"
+    },
+    {
+      "authority_names": [
+        "Chapman"
+      ],
+      "authority_signature": "chapman",
+      "canonical_opponent_key": "chapman",
+      "from_names": [
+        "Chapman University"
+      ],
+      "target_row_count": 2,
+      "to_name": "Chapman"
+    },
+    {
+      "authority_names": [
+        "Colorado Christian"
+      ],
+      "authority_signature": "coloradochristian",
+      "canonical_opponent_key": "colorado-christian",
+      "from_names": [
+        "Colorado Christian University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Colorado Christian"
+    },
+    {
+      "authority_names": [
+        "Colorado Mesa"
+      ],
+      "authority_signature": "coloradomesa",
+      "canonical_opponent_key": "colorado-mesa",
+      "from_names": [
+        "Colorado Mesa University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Colorado Mesa"
+    },
+    {
+      "authority_names": [
+        "CSU Pueblo"
+      ],
+      "authority_signature": "csupueblo",
+      "canonical_opponent_key": "csu-pueblo",
+      "from_names": [
+        "Colorado State University Pueblo"
+      ],
+      "target_row_count": 3,
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "authority_names": [
+        "Dakota Wesleyan"
+      ],
+      "authority_signature": "dakotawesleyan",
+      "canonical_opponent_key": "dakota-wesleyan",
+      "from_names": [
+        "Dakota Wesleyan University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Dakota Wesleyan"
+    },
+    {
+      "authority_names": [
+        "DePauw"
+      ],
+      "authority_signature": "depauw",
+      "canonical_opponent_key": "depauw",
+      "from_names": [
+        "DePauw University"
+      ],
+      "target_row_count": 1,
+      "to_name": "DePauw"
+    },
+    {
+      "authority_names": [
+        "Doane"
+      ],
+      "authority_signature": "doane",
+      "canonical_opponent_key": "doane",
+      "from_names": [
+        "Doane University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Doane"
+    },
+    {
+      "authority_names": [
+        "Emporia State"
+      ],
+      "authority_signature": "emporiastate",
+      "canonical_opponent_key": "emporia-state",
+      "from_names": [
+        "Emporia State University"
+      ],
+      "target_row_count": 2,
+      "to_name": "Emporia State"
+    },
+    {
+      "authority_names": [
+        "Fort Lewis"
+      ],
+      "authority_signature": "fortlewis",
+      "canonical_opponent_key": "fort-lewis",
+      "from_names": [
+        "Fort Lewis College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Fort Lewis"
+    },
+    {
+      "authority_names": [
+        "Lewis & Clark College"
+      ],
+      "authority_signature": "lewisclarkcollege",
+      "canonical_opponent_key": "lewis-clark-college",
+      "from_names": [
+        "Lewis & Clark College (Oregon)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Lewis & Clark College"
+    },
+    {
+      "authority_names": [
+        "Montana State Billings",
+        "Montana State-Billings"
+      ],
+      "authority_signature": "montanastatebillings",
+      "canonical_opponent_key": "montana-state-billings",
+      "from_names": [
+        "Montana State University Billings"
+      ],
+      "target_row_count": 2,
+      "to_name": "Montana State Billings"
+    },
+    {
+      "authority_names": [
+        "Montana State Northern",
+        "Montana State-Northern",
+        "Montana State–Northern"
+      ],
+      "authority_signature": "montanastatenorthern",
+      "canonical_opponent_key": "montana-state-northern",
+      "from_names": [
+        "Montana State University–Northern"
+      ],
+      "target_row_count": 1,
+      "to_name": "Montana State Northern"
+    },
+    {
+      "authority_names": [
+        "Montana Tech"
+      ],
+      "authority_signature": "montanatech",
+      "canonical_opponent_key": "montana-tech",
+      "from_names": [
+        "Montana Technological University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Montana Tech"
+    },
+    {
+      "authority_names": [
+        "Morris Brown"
+      ],
+      "authority_signature": "morrisbrown",
+      "canonical_opponent_key": "morris-brown",
+      "from_names": [
+        "Morris Brown College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Morris Brown"
+    },
+    {
+      "authority_names": [
+        "Northwestern Oklahoma State"
+      ],
+      "authority_signature": "northwesternoklahomastate",
+      "canonical_opponent_key": "northwestern-oklahoma-state",
+      "from_names": [
+        "Northwestern Oklahoma State University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Northwestern Oklahoma State"
+    },
+    {
+      "authority_names": [
+        "Oklahoma City"
+      ],
+      "authority_signature": "oklahomacity",
+      "canonical_opponent_key": "oklahoma-city",
+      "from_names": [
+        "Oklahoma City University"
+      ],
+      "target_row_count": 2,
+      "to_name": "Oklahoma City"
+    },
+    {
+      "authority_names": [
+        "Oklahoma Panhandle State"
+      ],
+      "authority_signature": "oklahomapanhandlestate",
+      "canonical_opponent_key": "oklahoma-panhandle-state",
+      "from_names": [
+        "Oklahoma Panhandle State University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Oklahoma Panhandle State"
+    },
+    {
+      "authority_names": [
+        "Peru State"
+      ],
+      "authority_signature": "perustate",
+      "canonical_opponent_key": "peru-state",
+      "from_names": [
+        "Peru State College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Peru State"
+    },
+    {
+      "authority_names": [
+        "Regis"
+      ],
+      "authority_signature": "regis",
+      "canonical_opponent_key": "regis-colorado",
+      "from_names": [
+        "Regis University (Colorado)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Regis"
+    },
+    {
+      "authority_names": [
+        "Saint Martin's",
+        "Saint Martin’s"
+      ],
+      "authority_signature": "saintmartins",
+      "canonical_opponent_key": "saint-martins",
+      "from_names": [
+        "Saint Martin’s University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Martin's"
+    },
+    {
+      "authority_names": [
+        "Simon Fraser"
+      ],
+      "authority_signature": "simonfraser",
+      "canonical_opponent_key": "simon-fraser",
+      "from_names": [
+        "Simon Fraser University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Simon Fraser"
+    },
+    {
+      "authority_names": [
+        "Southern Oregon"
+      ],
+      "authority_signature": "southernoregon",
+      "canonical_opponent_key": "southern-oregon",
+      "from_names": [
+        "Southern Oregon University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Southern Oregon"
+    },
+    {
+      "authority_names": [
+        "Southwestern Oklahoma State"
+      ],
+      "authority_signature": "southwesternoklahomastate",
+      "canonical_opponent_key": "southwestern-oklahoma-state",
+      "from_names": [
+        "Southwestern Oklahoma State University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Southwestern Oklahoma State"
+    },
+    {
+      "authority_names": [
+        "Texas A&M-Kingsville"
+      ],
+      "authority_signature": "texasamkingsville",
+      "canonical_opponent_key": "texas-a-m-kingsville",
+      "from_names": [
+        "Texas A&M University–Kingsville"
+      ],
+      "target_row_count": 1,
+      "to_name": "Texas A&M-Kingsville"
+    },
+    {
+      "authority_names": [
+        "U.S. International",
+        "US International"
+      ],
+      "authority_signature": "usinternational",
+      "canonical_opponent_key": "us-international",
+      "from_names": [
+        "United States International University"
+      ],
+      "target_row_count": 2,
+      "to_name": "US International"
+    },
+    {
+      "authority_names": [
+        "West Alabama"
+      ],
+      "authority_signature": "westalabama",
+      "canonical_opponent_key": "west-alabama",
+      "from_names": [
+        "University of West Alabama"
+      ],
+      "target_row_count": 1,
+      "to_name": "West Alabama"
+    },
+    {
+      "authority_names": [
+        "Western Colorado"
+      ],
+      "authority_signature": "westerncolorado",
+      "canonical_opponent_key": "western-colorado",
+      "from_names": [
+        "Western Colorado University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Western Colorado"
+    },
+    {
+      "authority_names": [
+        "Whitworth"
+      ],
+      "authority_signature": "whitworth",
+      "canonical_opponent_key": "whitworth",
+      "from_names": [
+        "Whitworth University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Whitworth"
+    },
+    {
+      "authority_names": [
+        "Winston-Salem State"
+      ],
+      "authority_signature": "winstonsalemstate",
+      "canonical_opponent_key": "winston-salem-state",
+      "from_names": [
+        "Winston-Salem State University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Winston-Salem State"
+    },
+    {
+      "authority_names": [
+        "Wisconsin-La Crosse"
+      ],
+      "authority_signature": "wisconsinlacrosse",
+      "canonical_opponent_key": "wisconsin-la-crosse",
+      "from_names": [
+        "University of Wisconsin–La Crosse"
+      ],
+      "target_row_count": 1,
+      "to_name": "Wisconsin-La Crosse"
+    },
+    {
+      "authority_names": [
+        "Wisconsin-Stevens Point"
+      ],
+      "authority_signature": "wisconsinstevenspoint",
+      "canonical_opponent_key": "wisconsin-stevens-point",
+      "from_names": [
+        "University of Wisconsin–Stevens Point"
+      ],
+      "target_row_count": 1,
+      "to_name": "Wisconsin-Stevens Point"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "source_game_display_change_keys": 38,
+  "source_game_display_change_rows": 110,
+  "source_game_display_changes": [
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00214",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00215",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00238",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00239",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Emporia State University",
+      "normalized_opponent_key": "emporia-state",
+      "source_game_id": "CSU-S1-00362",
+      "to_name": "Emporia State"
+    },
+    {
+      "from_name": "Adams State University",
+      "normalized_opponent_key": "adams-state",
+      "source_game_id": "CSU-S1-00375",
+      "to_name": "Adams State"
+    },
+    {
+      "from_name": "Adams State University",
+      "normalized_opponent_key": "adams-state",
+      "source_game_id": "CSU-S1-00376",
+      "to_name": "Adams State"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00380",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00381",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Emporia State University",
+      "normalized_opponent_key": "emporia-state",
+      "source_game_id": "CSU-S1-00396",
+      "to_name": "Emporia State"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00397",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-00398",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00421",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00422",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Dakota Wesleyan University",
+      "normalized_opponent_key": "dakota-wesleyan",
+      "source_game_id": "CSU-S1-00479",
+      "to_name": "Dakota Wesleyan"
+    },
+    {
+      "from_name": "Northwestern Oklahoma State University",
+      "normalized_opponent_key": "northwestern-oklahoma-state",
+      "source_game_id": "CSU-S1-00498",
+      "to_name": "Northwestern Oklahoma State"
+    },
+    {
+      "from_name": "Northwestern Oklahoma State University",
+      "normalized_opponent_key": "northwestern-oklahoma-state",
+      "source_game_id": "CSU-S1-00499",
+      "to_name": "Northwestern Oklahoma State"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00551",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00618",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Whitworth University",
+      "normalized_opponent_key": "whitworth",
+      "source_game_id": "CSU-S1-00619",
+      "to_name": "Whitworth"
+    },
+    {
+      "from_name": "Whitworth University",
+      "normalized_opponent_key": "whitworth",
+      "source_game_id": "CSU-S1-00620",
+      "to_name": "Whitworth"
+    },
+    {
+      "from_name": "Lewis & Clark College (Oregon)",
+      "normalized_opponent_key": "lewis-clark-college",
+      "source_game_id": "CSU-S1-00621",
+      "to_name": "Lewis & Clark College"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00647",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00660",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00668",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00688",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00694",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00699",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00721",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00746",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00768",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00776",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00794",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00798",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00815",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00816",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00840",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00841",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00865",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Chapman University",
+      "normalized_opponent_key": "chapman",
+      "source_game_id": "CSU-S1-00871",
+      "to_name": "Chapman"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00885",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00908",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00909",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Oklahoma City University",
+      "normalized_opponent_key": "oklahoma-city",
+      "source_game_id": "CSU-S1-00912",
+      "to_name": "Oklahoma City"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00925",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00937",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Chapman University",
+      "normalized_opponent_key": "chapman",
+      "source_game_id": "CSU-S1-00941",
+      "to_name": "Chapman"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00951",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-00959",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Oklahoma City University",
+      "normalized_opponent_key": "oklahoma-city",
+      "source_game_id": "CSU-S1-00961",
+      "to_name": "Oklahoma City"
+    },
+    {
+      "from_name": "DePauw University",
+      "normalized_opponent_key": "depauw",
+      "source_game_id": "CSU-S1-00988",
+      "to_name": "DePauw"
+    },
+    {
+      "from_name": "Oklahoma City University",
+      "normalized_opponent_key": "oklahoma-city",
+      "source_game_id": "CSU-S1-01083",
+      "to_name": "Oklahoma City"
+    },
+    {
+      "from_name": "California State University Los Angeles",
+      "normalized_opponent_key": "cal-state-los-angeles",
+      "source_game_id": "CSU-S1-01088",
+      "to_name": "Cal State Los Angeles"
+    },
+    {
+      "from_name": "Chapman University",
+      "normalized_opponent_key": "chapman",
+      "source_game_id": "CSU-S1-01184",
+      "to_name": "Chapman"
+    },
+    {
+      "from_name": "California State University East Bay",
+      "normalized_opponent_key": "cal-state-east-bay",
+      "source_game_id": "CSU-S1-01208",
+      "to_name": "Cal State East Bay"
+    },
+    {
+      "from_name": "DePauw University",
+      "normalized_opponent_key": "depauw",
+      "source_game_id": "CSU-S1-01269",
+      "to_name": "DePauw"
+    },
+    {
+      "from_name": "Colorado Mesa University",
+      "normalized_opponent_key": "colorado-mesa",
+      "source_game_id": "CSU-S1-01293",
+      "to_name": "Colorado Mesa"
+    },
+    {
+      "from_name": "University of Wisconsin–La Crosse",
+      "normalized_opponent_key": "wisconsin-la-crosse",
+      "source_game_id": "CSU-S1-01295",
+      "to_name": "Wisconsin-La Crosse"
+    },
+    {
+      "from_name": "United States International University",
+      "normalized_opponent_key": "us-international",
+      "source_game_id": "CSU-S1-01317",
+      "to_name": "US International"
+    },
+    {
+      "from_name": "Oklahoma City University",
+      "normalized_opponent_key": "oklahoma-city",
+      "source_game_id": "CSU-S1-01341",
+      "to_name": "Oklahoma City"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-01366",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Montana State University Billings",
+      "normalized_opponent_key": "montana-state-billings",
+      "source_game_id": "CSU-S1-01400",
+      "to_name": "Montana State Billings"
+    },
+    {
+      "from_name": "University of Wisconsin–Stevens Point",
+      "normalized_opponent_key": "wisconsin-stevens-point",
+      "source_game_id": "CSU-S1-01402",
+      "to_name": "Wisconsin-Stevens Point"
+    },
+    {
+      "from_name": "Doane University",
+      "normalized_opponent_key": "doane",
+      "source_game_id": "CSU-S1-01421",
+      "to_name": "Doane"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-01451",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "United States International University",
+      "normalized_opponent_key": "us-international",
+      "source_game_id": "CSU-S1-01452",
+      "to_name": "US International"
+    },
+    {
+      "from_name": "United States International University",
+      "normalized_opponent_key": "us-international",
+      "source_game_id": "CSU-S1-01456",
+      "to_name": "US International"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-01502",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-01510",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-01543",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Oklahoma City University",
+      "normalized_opponent_key": "oklahoma-city",
+      "source_game_id": "CSU-S1-01654",
+      "to_name": "Oklahoma City"
+    },
+    {
+      "from_name": "Fort Lewis College",
+      "normalized_opponent_key": "fort-lewis",
+      "source_game_id": "CSU-S1-01674",
+      "to_name": "Fort Lewis"
+    },
+    {
+      "from_name": "Simon Fraser University",
+      "normalized_opponent_key": "simon-fraser",
+      "source_game_id": "CSU-S1-01697",
+      "to_name": "Simon Fraser"
+    },
+    {
+      "from_name": "Montana State University Billings",
+      "normalized_opponent_key": "montana-state-billings",
+      "source_game_id": "CSU-S1-01699",
+      "to_name": "Montana State Billings"
+    },
+    {
+      "from_name": "Fort Lewis College",
+      "normalized_opponent_key": "fort-lewis",
+      "source_game_id": "CSU-S1-01705",
+      "to_name": "Fort Lewis"
+    },
+    {
+      "from_name": "Fort Lewis College",
+      "normalized_opponent_key": "fort-lewis",
+      "source_game_id": "CSU-S1-01734",
+      "to_name": "Fort Lewis"
+    },
+    {
+      "from_name": "Simon Fraser University",
+      "normalized_opponent_key": "simon-fraser",
+      "source_game_id": "CSU-S1-01754",
+      "to_name": "Simon Fraser"
+    },
+    {
+      "from_name": "Colorado Mesa University",
+      "normalized_opponent_key": "colorado-mesa",
+      "source_game_id": "CSU-S1-01760",
+      "to_name": "Colorado Mesa"
+    },
+    {
+      "from_name": "Montana Technological University",
+      "normalized_opponent_key": "montana-tech",
+      "source_game_id": "CSU-S1-01785",
+      "to_name": "Montana Tech"
+    },
+    {
+      "from_name": "Simon Fraser University",
+      "normalized_opponent_key": "simon-fraser",
+      "source_game_id": "CSU-S1-01815",
+      "to_name": "Simon Fraser"
+    },
+    {
+      "from_name": "Adams State University",
+      "normalized_opponent_key": "adams-state",
+      "source_game_id": "CSU-S1-01816",
+      "to_name": "Adams State"
+    },
+    {
+      "from_name": "Simon Fraser University",
+      "normalized_opponent_key": "simon-fraser",
+      "source_game_id": "CSU-S1-01844",
+      "to_name": "Simon Fraser"
+    },
+    {
+      "from_name": "Montana Technological University",
+      "normalized_opponent_key": "montana-tech",
+      "source_game_id": "CSU-S1-01875",
+      "to_name": "Montana Tech"
+    },
+    {
+      "from_name": "Southern Oregon University",
+      "normalized_opponent_key": "southern-oregon",
+      "source_game_id": "CSU-S1-01933",
+      "to_name": "Southern Oregon"
+    },
+    {
+      "from_name": "University of Alabama in Huntsville",
+      "normalized_opponent_key": "alabama-huntsville",
+      "source_game_id": "CSU-S1-01944",
+      "to_name": "Alabama-Huntsville"
+    },
+    {
+      "from_name": "Montana Technological University",
+      "normalized_opponent_key": "montana-tech",
+      "source_game_id": "CSU-S1-01961",
+      "to_name": "Montana Tech"
+    },
+    {
+      "from_name": "Morris Brown College",
+      "normalized_opponent_key": "morris-brown",
+      "source_game_id": "CSU-S1-01974",
+      "to_name": "Morris Brown"
+    },
+    {
+      "from_name": "Texas A&M University–Kingsville",
+      "normalized_opponent_key": "texas-a-m-kingsville",
+      "source_game_id": "CSU-S1-01994",
+      "to_name": "Texas A&M-Kingsville"
+    },
+    {
+      "from_name": "University of West Alabama",
+      "normalized_opponent_key": "west-alabama",
+      "source_game_id": "CSU-S1-01997",
+      "to_name": "West Alabama"
+    },
+    {
+      "from_name": "Brigham Young University–Hawaii",
+      "normalized_opponent_key": "byu-hawaii",
+      "source_game_id": "CSU-S1-02024",
+      "to_name": "BYU-Hawaii"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-02053",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Arkansas Tech University",
+      "normalized_opponent_key": "arkansas-tech",
+      "source_game_id": "CSU-S1-02093",
+      "to_name": "Arkansas Tech"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-02112",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Montana State University–Northern",
+      "normalized_opponent_key": "montana-state-northern",
+      "source_game_id": "CSU-S1-02115",
+      "to_name": "Montana State Northern"
+    },
+    {
+      "from_name": "Western Colorado University",
+      "normalized_opponent_key": "western-colorado",
+      "source_game_id": "CSU-S1-02154",
+      "to_name": "Western Colorado"
+    },
+    {
+      "from_name": "Oklahoma Panhandle State University",
+      "normalized_opponent_key": "oklahoma-panhandle-state",
+      "source_game_id": "CSU-S1-02156",
+      "to_name": "Oklahoma Panhandle State"
+    },
+    {
+      "from_name": "Saint Martin’s University",
+      "normalized_opponent_key": "saint-martins",
+      "source_game_id": "CSU-S1-02177",
+      "to_name": "Saint Martin's"
+    },
+    {
+      "from_name": "Winston-Salem State University",
+      "normalized_opponent_key": "winston-salem-state",
+      "source_game_id": "CSU-S1-02206",
+      "to_name": "Winston-Salem State"
+    },
+    {
+      "from_name": "Chadron State College",
+      "normalized_opponent_key": "chadron-state",
+      "source_game_id": "CSU-S1-02302",
+      "to_name": "Chadron State"
+    },
+    {
+      "from_name": "Adams State University",
+      "normalized_opponent_key": "adams-state",
+      "source_game_id": "CSU-S1-02313",
+      "to_name": "Adams State"
+    },
+    {
+      "from_name": "Southwestern Oklahoma State University",
+      "normalized_opponent_key": "southwestern-oklahoma-state",
+      "source_game_id": "CSU-S1-02345",
+      "to_name": "Southwestern Oklahoma State"
+    },
+    {
+      "from_name": "Regis University (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "CSU-S1-02414",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Fort Lewis College",
+      "normalized_opponent_key": "fort-lewis",
+      "source_game_id": "CSU-S1-02437",
+      "to_name": "Fort Lewis"
+    },
+    {
+      "from_name": "Colorado Christian University",
+      "normalized_opponent_key": "colorado-christian",
+      "source_game_id": "CSU-S1-02504",
+      "to_name": "Colorado Christian"
+    },
+    {
+      "from_name": "Doane University",
+      "normalized_opponent_key": "doane",
+      "source_game_id": "CSU-S1-02550",
+      "to_name": "Doane"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-02568",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Peru State College",
+      "normalized_opponent_key": "peru-state",
+      "source_game_id": "CSU-S1-02598",
+      "to_name": "Peru State"
+    },
+    {
+      "from_name": "Peru State College",
+      "normalized_opponent_key": "peru-state",
+      "source_game_id": "CSU-S1-02637",
+      "to_name": "Peru State"
+    },
+    {
+      "from_name": "Colorado State University Pueblo",
+      "normalized_opponent_key": "csu-pueblo",
+      "source_game_id": "CSU-S1-SUP-011",
+      "to_name": "CSU Pueblo"
+    },
+    {
+      "from_name": "Adams State University",
+      "normalized_opponent_key": "adams-state",
+      "source_game_id": "CSU-S1-SUP-013",
+      "to_name": "Adams State"
+    }
+  ],
+  "status": "PASS"
+}

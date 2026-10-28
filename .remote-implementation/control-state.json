@@ -115,15 +115,15 @@
   "active_lock_commit": "a5464b533d267fa1e93e43831224ca0c18e557a6",
   "active_lock_owner": "github-actions:40742308631:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "active_prepared_tree_sha": "aa95c98f5ad329d90bbec8615fea2e9c57be4a93",
   "active_request_id": "colorado-state-stage2-opponent-display-normalize-0001",
   "active_request_sha256": "2776605284c6fb503ce7183b64cfe31188379021de1b4f2c9f71ea53d2039fb6",
   "active_school_key": "colorado-state",
   "active_target_branch": "data/colorado-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/colorado-state/colorado-state-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "22a76ef0ef98d4097b961b45257fdf012dfc64c4bf1a9e6b95f83c73a95f4671",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -249,5 +249,5 @@
   "lock_acquisition_request_commit": "c8276aa81577a0acb9f5f77e91755de91e264d2b",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

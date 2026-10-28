@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+    "integration_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+    "school_key": "colorado-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+    "integration_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+    "school_key": "colorado-state",
+    "status": "PASS"
+  }
+}
