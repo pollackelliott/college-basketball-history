@@ -112,7 +112,7 @@
     "colorado-state-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
-  "active_lock_commit": null,
+  "active_lock_commit": "a5464b533d267fa1e93e43831224ca0c18e557a6",
   "active_lock_owner": "github-actions:40742308631:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
