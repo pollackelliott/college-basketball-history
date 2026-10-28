@@ -1,15 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-sealed-apply-0001",
+  "request_id": "utah-state-release-readiness-0001",
   "school_key": "utah-state",
-  "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "f50c787320aa4fbd9c93855cdf5d352fab3d4a71",
-  "previous_control_state_sha256": "dfea88e129476332ffe608797af1901dd57a7d31a9df9b1f914e938c1a11863f",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "685e5d53c2e5086d0ce6a8e2c1dc3fa86999b9a5",
+  "previous_control_state_sha256": "e5a3ba4fd0df26a151b5ac6e5fb20495cbc0777ef024d0d534f0ea26d99b8bb1",
   "expected_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/utah-state/utah-state-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "183096f9e40c575bf785c66057836d35d369499c33f43d902164d38f2d6c41ec"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/utah-state/utah-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "45fe155509998eee5814981174c1ca0d18b1e6aeb6a860a2e1d6bc0eaa7f3938"
+  },
+  "approved_plan_hash": "3af127c9bd5f6ec1feb17fd3826233ceb3695970abe8ce95ccbba768164caeeb",
+  "release_manifest_sha256": "27335dc4baf691710288b7adb7463f328a9efbffcc69973891c741ea054028a9",
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed after the exact Utah State Gate 1 seal was fresh-verified. This authorizes exactly one bounded remote STAGE2_SEALED_APPLY against utah-state-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. It creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+    "authorization": "Owner said Proceed after the exact Utah State sealed-apply successor was fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against successor d298bd00b8f2560902d6e7a17e6820f52a82b39c. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -23,31 +35,12 @@
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/utah-state-onboarding",
-  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "3150ffc71e387b583ba0aa38d18d0618d73edcfba113bb785ab9ecbe62a8ec4d"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/utah-state/utah-state-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "3f10ae5ff82ecba9ee7da523123923e3cdaeb190655eeb671e2d4e79513b3aeb"
-  },
-  "approved_plan_hash": "3af127c9bd5f6ec1feb17fd3826233ceb3695970abe8ce95ccbba768164caeeb",
-  "approved_plan_sha256": "4c67e8375dc1a405df2258783656f5a48700580f10a3019572070b98cbf2ff06",
-  "owner_gate_1_approval_sha256": "8ff86db228bde304c49cced3c4095671443fde581ea380190b8c33b9b2f26b27",
-  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
-  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
-  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
-  "recommendation_map_sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
-  "filled_review_sha256": "a8372e2331ab7e591b17c2f7b26df25e212ef5442a55aeb9f43a919cb21eee1f",
-  "decision_id_set_sha256": "df425c649e1b6e322d65713d41a4010ecc35b1652a5a98345e1ca6bfa1077e10"
+  }
 }
