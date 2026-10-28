@@ -1,0 +1,41 @@
+{
+  "branch": "remote-stage2-census/colorado-state-87a3bb6b0a16",
+  "capability_census": {
+    "path": ".onboarding/colorado-state/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "integration_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "integration_semantic_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 29,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 29,
+      "discrepancy": 57,
+      "identity": 8,
+      "publication": 1
+    },
+    "decision_count": 96,
+    "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "discrepancies_to_add": 57,
+    "existing_game_matches": 828,
+    "new_canonical_games": 1929,
+    "plan_path": ".onboarding/colorado-state/plan.json",
+    "review_path": ".onboarding/colorado-state/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
