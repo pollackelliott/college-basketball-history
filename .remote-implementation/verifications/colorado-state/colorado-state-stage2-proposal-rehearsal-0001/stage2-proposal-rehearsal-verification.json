@@ -1,0 +1,48 @@
+{
+  "approved_plan_hash_preview": "182149a52d04fee723c1ec098867a1f1cc971c2dfe5a823d87a33a115aebcf53",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "8d8d9b14aa371824d682ea2faeceb0080fb76dfededeb2f1974aa2bbb8c12474",
+    "implementation-stage2-status.json": "40512ad21ee2877957d3da79e5d124318033f40859830d3c60a57a5ab76a32de",
+    "last-rehearsal-site-gate.json": "7e17ebb958ebe0f651066998fd002dba81437312b18009b3d88ecc9500ced991",
+    "plan.json": "22b74dc26b92f800095e8cee094d30a9abcdbb0d5b139c61e746cf09a9bb287e",
+    "review.csv": "91aeae58396e48f29480d6c6ec2af19c39878fbccf0907769f50c2e11f99346b",
+    "review.md": "b2f5e94630adc46d6a633609072fee21543302e7f53677710feea4b332242b48"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "8d8d9b14aa371824d682ea2faeceb0080fb76dfededeb2f1974aa2bbb8c12474",
+    "implementation-stage2-status.json": "6b65eedbb0799bcb04de8e370bd2ee7c94c1e29ffba36e43713861cccf04fb53",
+    "last-rehearsal-site-gate.json": "7e17ebb958ebe0f651066998fd002dba81437312b18009b3d88ecc9500ced991",
+    "plan.json": "0a2389bc6ec56380abff6fc6538474c5775de467e65494217af846e4ea0232aa",
+    "review.csv": "91aeae58396e48f29480d6c6ec2af19c39878fbccf0907769f50c2e11f99346b",
+    "review.md": "062446466151e09f3d17b0c31fab53a7abe56495e38073b75904e52b609df40b"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "runtime_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "recommendation_map_sha256": "7ec135fe3ce363a84f2eb714f2c0b4635987add9fd779fd9cab014441b0c337b",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "colorado-state-stage2-proposal-rehearsal-0001",
+  "runtime_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "target_tree_sha": "aa95c98f5ad329d90bbec8615fea2e9c57be4a93",
+  "tracked_stage2_mutation": "NONE"
+}

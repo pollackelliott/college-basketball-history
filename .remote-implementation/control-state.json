@@ -244,11 +244,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
     "recommendation_map_sha256": "7ec135fe3ce363a84f2eb714f2c0b4635987add9fd779fd9cab014441b0c337b",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "colorado-state-stage2-proposal-rehearsal-0001",
     "runtime_decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
     "school_key": "colorado-state",
