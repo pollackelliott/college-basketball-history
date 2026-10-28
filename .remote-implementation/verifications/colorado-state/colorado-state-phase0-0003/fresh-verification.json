@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "9e20dd3904681dd6239581833773e8c598767c04",
+  "prepared_parent_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "prepared_tree_sha": "c08a08d484a33a79036d6e56f526735249b72b67",
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "colorado-state-phase0-0003",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "9e20dd3904681dd6239581833773e8c598767c04"
+}

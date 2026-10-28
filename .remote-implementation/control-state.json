@@ -226,11 +226,11 @@
   "current_sequence": 98,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
     "operation": "PHASE0",
     "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "colorado-state-phase0-0003",
     "school_key": "colorado-state",
     "successor_manifest_path": ".remote-implementation/successors/colorado-state/colorado-state-phase0-0003/successor-manifest.json",
