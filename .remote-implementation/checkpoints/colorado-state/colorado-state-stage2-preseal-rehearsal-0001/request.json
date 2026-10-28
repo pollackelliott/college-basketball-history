@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-stage2-preseal-rehearsal-0001",
+  "school_key": "colorado-state",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "35d684496c6fe9818dc3c1807f0ac517c8ca49b5",
+  "previous_control_state_sha256": "a4ba087e43294a4b736914423feab2cc7eba9f6f9b7c0019269c74dcfc288be4",
+  "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "4336f981c2c2d3f34885187bb189aa262f6aa95b9fa1334f3a1b235e5b213750"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/colorado-state/colorado-state-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "ab503ed816383af4ff92dd68b1da850f5b0a86039214c7f9aa283e268113c2ec"
+  },
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "recommendation_map_sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96",
+  "approved_plan_hash_preview": "1a25fe7d99280b135314f9acc14db36fe5f42b346f6d616b5d543bb68fb5165a",
+  "filled_review_sha256": "b5d91e195bea7d2391e207b3151c2b8531c5d389563f7979af394abc84e86585",
+  "decision_id_set_sha256": "a8ea5fafae2887b4963b4889d9e70f4c1585a80880ab2feac6af149affb74ec9",
+  "creation_provenance": {
+    "origin": "Colorado State Implementation — exact Gate 1 approval pre-seal technical rehearsal",
+    "authorization": "Owner APPROVED exact consolidated 96-decision Gate 1 packet and subsequently instructed Proceed after fresh-verified STAGE2_GATE1_FILL. Authorize one guarded read-only STAGE2_PRESEAL_REHEARSAL only on exact FILLED checkpoint and verification; no new owner gate authority, seal, apply, preview, release, mutation or merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
