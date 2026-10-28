@@ -113,7 +113,7 @@
   "active_request_sha256": "4809b0bccaa2fb2cdc6747f80113c15e7d7f92b68c032f4b39fadc0ae3696f77",
   "active_school_key": "colorado-state",
   "active_target_branch": "data/colorado-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "2ba38a589fb32331dfce13681fce53bcc973093d",
   "active_writeahead_path": ".remote-implementation/writeahead/colorado-state/colorado-state-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "e43c37acdeb0876fc9d054fa65ce0d3f794c0365ac293f52bff6d8b84c471cc0",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
