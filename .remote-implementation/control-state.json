@@ -6,7 +6,8 @@
     "gonzaga-phase0-0002",
     "utah-state-stage1-0001",
     "utah-state-phase0-0001",
-    "colorado-state-phase0-0001"
+    "colorado-state-phase0-0001",
+    "colorado-state-phase0-0002"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -106,19 +107,19 @@
     "colorado-state-stage1-0003",
     "colorado-state-phase0-0002"
   ],
-  "active_expected_main_sha": "9b11f36ab32399c9c30c3a9d14253ae4b0b366a3",
-  "active_lock_commit": "1a6b6ea677577f1f9a157af3f5657501a3ee4635",
-  "active_lock_owner": "github-actions:40722967533:1",
-  "active_operation": "PHASE0",
-  "active_prepared_commit_sha": "bcec1c2a9222a9158ac5702b671b94154a383b5e",
-  "active_prepared_tree_sha": "5bd2a24ec7b74076190b597d2d2d3c6a1cf12c59",
-  "active_request_id": "colorado-state-phase0-0002",
-  "active_request_sha256": "85ead69724a3e577b350eb8d7f2aecf4885d6b2a07694cf862aec4966a7f7238",
-  "active_school_key": "colorado-state",
-  "active_target_branch": "data/colorado-state-onboarding",
-  "active_writeahead_commit": "ae178d4e0e994247ace6e1487762139c66dbdf20",
-  "active_writeahead_path": ".remote-implementation/writeahead/colorado-state/colorado-state-phase0-0002/writeahead-manifest.json",
-  "active_writeahead_sha256": "b7fcbb1077f5cee97ca43a127ee7236a36f30f85b50ca8d2685dbbaab558ddc2",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
+  "active_prepared_commit_sha": null,
+  "active_prepared_tree_sha": null,
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
+  "active_writeahead_commit": null,
+  "active_writeahead_path": null,
+  "active_writeahead_sha256": null,
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -215,25 +216,29 @@
     "colorado-state-venue-maintenance-0001",
     "colorado-state-stage1-0002",
     "colorado-state-phase0-recover-0001",
-    "colorado-state-stage1-0003"
+    "colorado-state-stage1-0003",
+    "colorado-state-phase0-recover-0002"
   ],
-  "current_sequence": 95,
+  "current_sequence": 96,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage1-0003/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "ad42dae254054625cd3f85d69221c474d8a1838613b01cdcbd4bf9b6045e5c7d",
-    "operation": "STAGE1_INVENTORY",
-    "protected_main_sha": "9b11f36ab32399c9c30c3a9d14253ae4b0b366a3",
-    "request_id": "colorado-state-stage1-0003",
-    "school_key": "colorado-state",
-    "stage1_reconciliation_sha256": "2571cd4dd60583cd3b387815396d7f55219c06ee534756e8cb3e8f2638279ea9",
-    "stage1_status": "PASS"
+    "disposition": "ABANDONED_PREPARED_NOT_PUBLISHED",
+    "operation": "RECOVER",
+    "recovered_request_id": "colorado-state-phase0-0002",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "1a6b6ea677577f1f9a157af3f5657501a3ee4635",
+      "mutation_classification": "PREPARED_NOT_PUBLISHED",
+      "protected_main_sha": "9b11f36ab32399c9c30c3a9d14253ae4b0b366a3",
+      "recovered_request_id": "colorado-state-phase0-0002",
+      "request_id": "colorado-state-phase0-recover-0002",
+      "schema_version": 1,
+      "target_branch": "data/colorado-state-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "40722967533",
-  "lock_acquisition_request_commit": "ee21cfb9a743463f3857a4a8a6c08152f4722791",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "PREPARED_NOT_PUBLISHED"
+  "transaction_state": "ABANDONED_PREPARED_NOT_PUBLISHED"
 }
