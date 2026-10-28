@@ -98,18 +98,19 @@
     "utah-state-release-preview-verify-0001",
     "utah-state-release-gate2-approval-0001",
     "utah-state-release-production-proof-0001",
-    "colorado-state-stage1-0001"
+    "colorado-state-stage1-0001",
+    "colorado-state-venue-maintenance-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40681913488:1",
+  "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "colorado-state-venue-maintenance-0001",
+  "active_request_sha256": "300e8780c3088271a9cbe677e28b5553fed7443ce23a198e6e0508c1237c47b4",
+  "active_school_key": "colorado-state",
+  "active_target_branch": "maintenance/colorado-state-stage1-utc-mckenzie-identity",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -219,8 +220,11 @@
     "stage1_reconciliation_sha256": "70a3fd3255bd571af335e0b40c4e65f2fa9d297e614551b40c339cfeae503169",
     "stage1_status": "BLOCKED"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40681913488",
+  "lock_acquisition_request_commit": "39bdfcfade4fa46958e083fae9ab704762c3b12a",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
