@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-stage2-proposal-0005",
+  "request_id": "utah-state-stage2-proposal-0006",
   "school_key": "utah-state",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "661f9b29108ca38e4d4e5461a1770ced78f1e432",
-  "previous_control_state_sha256": "da61f63ae1894cd79eb6321e7cdef5855b4402b7f58f8606cb70702ccc5f2b57",
-  "expected_protected_main_sha": "fa65eb3531ab1c9a6e25aaf04628f65585545555",
+  "previous_control_state_commit": "0e147389e39bc90cedcfa6b132f5c061e3d817f4",
+  "previous_control_state_sha256": "bb54d6bca636503dfa192d67c6095aded0dc945c4692d5f8d3f6c3bc6900f4b7",
+  "expected_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
   "target_branch": "data/utah-state-onboarding",
   "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
   "stage2_authority": {
@@ -22,7 +22,7 @@
   },
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner authorized one phase-sized fresh read-only Stage 2 proposal rehearsal immediately after diagnostic-0004 fully authenticated the representative reconciliation repair on protected main fa65eb3531ab1c9a6e25aaf04628f65585545555. Reuse the exact unchanged 166-decision recommendation map SHA256 083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836. Do not rebuild/edit the map, reopen Research/six-game historical classification, or mutate Utah State tracked basketball state. Stop at fresh-verified OWNER_GATE_1_READY or one genuine residual Stage 2 blocker."
+    "authorization": "Control Center authorized exactly one fresh read-only Utah State Stage 2 proposal rehearsal after PR #389 merged to protected main 64258e5d3178715f7e936912ede28333f830fd0b. Reuse the unchanged 166-decision recommendation map SHA256 083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836 and immutable Stage 2 authority. Do not reopen Research, the six-game historical classification, or recommendation-map decisions, and do not mutate Utah State tracked basketball state. Stop at fresh-verified OWNER_GATE_1_READY or one genuine residual blocker."
   },
   "authority": {
     "owner_gate_1": false,
