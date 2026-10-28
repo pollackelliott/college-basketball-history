@@ -1,39 +1,49 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-stage2-proposal-rehearsal-0002",
+  "request_id": "colorado-state-stage2-gate1-fill-0001",
   "school_key": "colorado-state",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "55890ac8b1bd1d66ccbd04736f29c57f6ac9c3b0",
-  "previous_control_state_sha256": "8535a9de5c75b868610a01b3a5469f3a145a9f9ac6d98b145832dee45f3c8d39",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "4b6698c97a1dd8febb06f0de7313b2ba9108a67e",
+  "previous_control_state_sha256": "85b10f497d8094d0b695ebee18a507c19634a1fbfab1e404e752fef9d614c54e",
   "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
   "target_branch": "data/colorado-state-onboarding",
   "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
-  "stage2_authority": {
-    "path": ".remote-implementation/successors/colorado-state/colorado-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "c0909c6b7ec2039e146390617b87c3c1fc693e94abf68a905483f780f99ddbbc"
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage2-proposal-rehearsal-0002/checkpoint-manifest.json",
+    "sha256": "93758450a511051763546158d0a65a61702674d31e29de9bb60ecec138a0790c"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/colorado-state/colorado-state-stage2-proposal-rehearsal-0002/stage2-proposal-rehearsal-verification.json",
+    "sha256": "6afd5a404548c0031873910db22e24d7a56a386349a4758090b34f3921e6b7a9"
   },
   "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
   "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
   "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/colorado-state-stage2-proposal-rehearsal-0002/recommendation-map.json",
-    "sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96"
+  "recommendation_map_sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96",
+  "approved_plan_hash_preview": "1a25fe7d99280b135314f9acc14db36fe5f42b346f6d616b5d543bb68fb5165a",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly wrote 'APPROVED. Proceed' immediately after presentation of the consolidated Colorado State Owner Gate 1 packet (96 decisions), approving the exact fresh-verified Stage 2 proposal and its six UNKNOWN historical site patches; authorize exact-map fill only, not sealing or apply.",
+    "proposal_checkpoint_sha256": "93758450a511051763546158d0a65a61702674d31e29de9bb60ecec138a0790c",
+    "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+    "recommendation_map_sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96",
+    "approved_plan_hash_preview": "1a25fe7d99280b135314f9acc14db36fe5f42b346f6d616b5d543bb68fb5165a"
   },
   "creation_provenance": {
-    "origin": "Colorado State Implementation — exact six-HOME-UNKNOWN revised map proposal rehearsal",
-    "authorization": "Owner Proceed after six-game bounded historical site assessment. Authorize only guarded read-only STAGE2_PROPOSAL_REHEARSAL with immutable revised 96-decision candidate adding six UNKNOWN canonical site patches, exact Stage 2 successor and unchanged protected-main/target/Freeze/semantic/decision-universe authority, permanent validation and disposable rehearsal, durable checkpoint and independent fresh verification. No Owner Gate 1 approval, fill, seal, apply, mutation, release, or merge."
+    "origin": "Colorado State Implementation lane — exact fresh-verified Owner Gate 1 approval",
+    "authorization": "User's explicit 'APPROVED. Proceed' grants Owner Gate 1 approval for the exact 96-decision map, proposal checkpoint, and approved-plan hash preview, authorizing one guarded STAGE2_GATE1_FILL. Fill ignored review only; no pre-seal, seal, sealed apply, tracked basketball mutation, release or merge."
   },
   "authority": {
-    "owner_gate_1": false,
+    "owner_gate_1": true,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": true,
-    "stage2_gate1_fill": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": true,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
