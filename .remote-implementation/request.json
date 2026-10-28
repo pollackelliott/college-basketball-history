@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-stage2-proposal-rehearsal-0001",
+  "request_id": "colorado-state-stage2-proposal-rehearsal-0002",
   "school_key": "colorado-state",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "d1efd9fe3027ebec88fc6bc6df44995437690482",
-  "previous_control_state_sha256": "58b44c64462d612582198c28b9a0260f824156146168eb3824939dde61cd86db",
+  "previous_control_state_commit": "55890ac8b1bd1d66ccbd04736f29c57f6ac9c3b0",
+  "previous_control_state_sha256": "8535a9de5c75b868610a01b3a5469f3a145a9f9ac6d98b145832dee45f3c8d39",
   "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
   "target_branch": "data/colorado-state-onboarding",
   "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
@@ -17,12 +17,12 @@
   "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
   "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
   "recommendation_map": {
-    "path": ".remote-implementation/requests/colorado-state-stage2-proposal-rehearsal-0001/recommendation-map.json",
-    "sha256": "7ec135fe3ce363a84f2eb714f2c0b4635987add9fd779fd9cab014441b0c337b"
+    "path": ".remote-implementation/requests/colorado-state-stage2-proposal-rehearsal-0002/recommendation-map.json",
+    "sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96"
   },
   "creation_provenance": {
-    "origin": "Colorado State Implementation — exact 96-decision proposal-only rehearsal",
-    "authorization": "Owner and Control Center explicitly authorized one guarded read-only STAGE2_PROPOSAL_REHEARSAL against exact successor, target branch/head, Integration Freeze/semantic snapshot, decision universe and immutable map SHA; run permanent coordinator --map, checkpoint either OWNER_GATE_1_READY or honest BLOCKED and independently fresh verify. No owner approval, fill, seal, apply, Phase 0, census, normalization, recovery, tracked basketball mutation, release or merge authority."
+    "origin": "Colorado State Implementation — exact six-HOME-UNKNOWN revised map proposal rehearsal",
+    "authorization": "Owner Proceed after six-game bounded historical site assessment. Authorize only guarded read-only STAGE2_PROPOSAL_REHEARSAL with immutable revised 96-decision candidate adding six UNKNOWN canonical site patches, exact Stage 2 successor and unchanged protected-main/target/Freeze/semantic/decision-universe authority, permanent validation and disposable rehearsal, durable checkpoint and independent fresh verification. No Owner Gate 1 approval, fill, seal, apply, mutation, release, or merge."
   },
   "authority": {
     "owner_gate_1": false,
