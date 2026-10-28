@@ -6021,7 +6021,7 @@
       "opponent_key": "utah-state",
       "opponent_name": "Utah State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
@@ -34951,7 +34951,7 @@
       "opponent_key": "utah-state",
       "opponent_name": "Utah State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 65,
       "opponent_score": 60,
       "score_known": true,
@@ -46501,7 +46501,7 @@
       "opponent_key": "utah-state",
       "opponent_name": "Utah State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 67,
       "opponent_score": 66,
       "score_known": true,
