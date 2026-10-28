@@ -1535,6 +1535,41 @@ def remote_head(repo: Path, branch: str, *, remote: str = "origin") -> str | Non
     return line.split()[0] if line else None
 
 
+def _safe_publication_push_output(output: str, *, max_chars: int = 2048) -> str:
+    """Retain bounded Git failure detail without echoing remote auth material."""
+    detail = str(output or "")
+    detail = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", detail)
+    detail = re.sub(
+        r"(?i)(?:\b(?:https?|ssh|git)://[^\s<>\"']+|\bgit@[^\s:]+:[^\s<>\"']+)",
+        "[REDACTED_URL]",
+        detail,
+    )
+    detail = re.sub(
+        r"(?i)\b[\w.-]+:[^\s@]+@[\w.-]+(?:/[^\s]*)?",
+        "[REDACTED_AUTHORITY]",
+        detail,
+    )
+    detail = re.sub(
+        r"(?i)\b(?:github_pat_|gh[pousr]_|glpat-|xox[baprs]-|sk-)[a-z0-9_-]+",
+        "[REDACTED_TOKEN]",
+        detail,
+    )
+    detail = re.sub(
+        r"(?i)\b(?:authorization\s*:\s*)?(?:basic|bearer)\s+[^\s]+",
+        "[REDACTED_AUTH]",
+        detail,
+    )
+    detail = re.sub(
+        r"(?i)(\b(?:gh_token|github_token|access_token|token|secret|password|passwd|api[_-]?key|credential|client_secret|authorization)\s*[:=]\s*)(?:\"[^\"]*\"|'[^']*'|[^\s]+)",
+        r"\1[REDACTED]",
+        detail,
+    )
+    detail = re.sub(r"\b[A-Za-z0-9_+/=-]{32,}\b", "[REDACTED_LONG_VALUE]", detail)
+    detail = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", detail)
+    detail = detail.strip()
+    return detail[-max_chars:] if detail else "[no Git output]"
+
+
 def publish_ref_cas(
     repo: Path,
     *,
@@ -1566,7 +1601,11 @@ def publish_ref_cas(
         f"{prepared_commit}:refs/heads/{branch}",
         check=False,
     )
-    _require(cp.returncode == 0, "TARGET_PUBLICATION_CAS_FAILED")
+    if cp.returncode != 0:
+        raise RemoteImplementationError(
+            "TARGET_PUBLICATION_CAS_FAILED returncode=%s\n%s"
+            % (cp.returncode, _safe_publication_push_output(cp.stdout))
+        )
     _require(
         remote_head(repo, branch, remote=remote) == prepared_commit,
         "TARGET_PUBLICATION_VERIFY_FAILED",
