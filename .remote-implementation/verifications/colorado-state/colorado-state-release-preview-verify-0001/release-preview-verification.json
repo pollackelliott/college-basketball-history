@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "fac3ab90a54da9bc729fd24c7eaf25db1c9fc9a94cb6328f80433394f50c8ac9",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "pr_number": 395,
+  "preview_deployment_id": 7399190781,
+  "preview_deployment_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "preview_url": "https://college-basketball-history-ncw21f69p-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "colorado-state-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c"
+}
