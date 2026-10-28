@@ -1,28 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-venue-maintenance-0001",
+  "request_id": "colorado-state-stage1-0002",
   "school_key": "colorado-state",
-  "operation": "VENUE_IDENTITY_MAINTENANCE",
-  "previous_control_state_commit": "67d0b5fda70d41e302c333b9ff7f9bbc4a53e45f",
-  "previous_control_state_sha256": "3299cd24410c304866f548734bd1c476ed0d74e28820ad93098738acc464bbc2",
-  "expected_protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
-  "target_branch": "maintenance/colorado-state-stage1-utc-mckenzie-identity",
-  "venue_maintenance_spec": {
-    "path": ".remote-implementation/inputs/colorado-state-venue-maintenance-0001/venue-maintenance.json",
-    "sha256": "6718b57d1e8126e9a79b5f70293b9b098302db5f28b74aafbb6150871f2d12a9"
-  },
-  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json",
-  "expected_plan_sha256": "63a278eaa16e3636c964e9f06890bbb1dc3d4a397fbee0ca7154ec84c7f36da4",
-  "maintenance_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center explicitly approved the exact Colorado State Stage 1 single physical venue identity merge VEN-000697 <- VEN-000961: preserve UTC Arena as survivor and retire McKenzie Arena as duplicate, reassign existing McKenzie Arena registered names without creating The Roundhouse or unrelated aliases, and reconcile only permanent-tool affected published references.",
-    "spec_sha256": "6718b57d1e8126e9a79b5f70293b9b098302db5f28b74aafbb6150871f2d12a9"
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "7c92719e8e345df4e03a9371f6d8b6b0e1070d96",
+  "previous_control_state_sha256": "b3ebb2f1a5a603a830db3b1e6fbc15e9f782e00dc6c7f1013ecbdcb93d1c0f26",
+  "expected_protected_main_sha": "cf64b4700921955c3772d16fb51d3676f916626b",
+  "research_checkpoint": {
+    "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
+    "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "03949e69eeb999b0d5f05ac2e288048cd793c468",
+      "path_prefix": ".remote-implementation/inputs/colorado-state-stage1-0001-20261027-owner-freeze/research-frozen.zip.b64.part",
+      "part_count": 13
+    }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Colorado State serialized Implementation, Control Center explicit shared venue authorization",
-    "authorization": "Owner/Control Center explicitly authorized one bounded VENUE_IDENTITY_MAINTENANCE request for the exact permanent-tool PASS plan on protected main 2b2c90d01887e8199e404f62d031858a93fc65b5, with one merge and zero blockers. No PR, merge, Stage 1 re-run, Phase 0, Research, Stage 2, Gate 1/2, release, or any other authority is granted."
+    "origin": "ChatGPT Colorado State serialized Implementation — resumed bounded Stage 1 read-only census",
+    "authorization": "Owner authorized one new read-only STAGE1_INVENTORY after the exact Control Center-authorized UTC Arena/McKenzie Arena venue identity transaction merged as PR #392. Protected main cf64b4700921955c3772d16fb51d3676f916626b is the exact merge successor; original Stage 1 checkpoint colorado-state-stage1-0001 and frozen six-file package sha256 64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381 remain immutable. Research base d54b117e635c6c8558a962e5df2f32ba24073d7a; scope INCEPTION+, NON_D1 owner sanity scan previously approved, Research stages not reopened. Transport reused unchanged from original 13 Git base64 parts. No Phase 0, tracked mutation, onboarding branch, Stage 2, Research, Owner Gate 1/2, release, or shared maintenance authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -42,6 +39,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": true
+    "venue_identity_maintenance": false
   }
 }
