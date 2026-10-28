@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-release-preview-verify-0001",
+  "request_id": "utah-state-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "utah-state",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "cb8b263d2e5f1ec272715abe1c8aa6031020f7d8",
-  "previous_control_state_sha256": "b25f8ece544e0a4f574f084005e0dc98d97f9f5daa7b2eb4067b1c306a1b7657",
+  "previous_control_state_commit": "746854838ed8d0b077e2392a85533a3cfc64616e",
+  "previous_control_state_sha256": "f25947f18894a3f5d5207ca6269cd338290f48e1311aaa17dd6ab37388f18bd5",
   "expected_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
   "target_branch": "data/utah-state-onboarding",
   "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "0b27f02b973d40f78c8f98b2c4de272e1c8162a583662b4c4837124f6c4ce4bc"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/utah-state/utah-state-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "1b74a052e53a3439dd46b8d54bc39f0d93d3a2423af8fd60a5b53dd2cccb1ef2"
-  },
+  "pr_number": 391,
   "approved_plan_hash": "3af127c9bd5f6ec1feb17fd3826233ceb3695970abe8ce95ccbba768164caeeb",
   "release_manifest_sha256": "27335dc4baf691710288b7adb7463f328a9efbffcc69973891c741ea054028a9",
-  "pr_number": 391,
+  "preview_deployment_id": 7375667884,
+  "preview_url": "https://college-basketball-history-mv0idvg19-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "cbd99ef0899cfd5124c9beb429dc446dc73e90ed29d259f2079c8a267ae85d9d"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/utah-state/utah-state-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "e70ccf62059dfb6c6376b7df1c83599bbcecd44b5d2b33d1cb88e8e9b5ffb869"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “APPROVED. Proceed” after being presented the exact fresh-verified Utah State PR #391 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
+    "preview_checkpoint_sha256": "cbd99ef0899cfd5124c9beb429dc446dc73e90ed29d259f2079c8a267ae85d9d",
+    "preview_verification_sha256": "e70ccf62059dfb6c6376b7df1c83599bbcecd44b5d2b33d1cb88e8e9b5ffb869",
+    "pr_number": 391,
+    "pr_head_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+    "preview_deployment_id": 7375667884,
+    "preview_url": "https://college-basketball-history-mv0idvg19-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
     "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner said Proceed after Utah State RELEASE_READINESS was fresh-verified. The school lane created exact PR #391 from data/utah-state-onboarding to main using the repository-generated sealed-apply PR body and read it back at exact head d298bd00b8f2560902d6e7a17e6820f52a82b39c. This request authorizes exactly one bounded RELEASE_PREVIEW_VERIFY operation: authenticate fresh readiness and exact PR #391, wait for required checks/mergeability and the exact Preview deployment, then stop at OWNER_GATE_2_READY. It carries no Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” for the exact fresh-verified Utah State PR #391 Preview at head d298bd00b8f2560902d6e7a17e6820f52a82b39c and Vercel Preview deployment 7375667884. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
@@ -39,8 +48,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
