@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000697",
+      "absorbed_venue_id": "VEN-000961",
+      "resolution_basis": "UTC Arena and McKenzie Arena are the same physical arena in Chattanooga, Tennessee, across naming eras; preserve earlier-established VEN-000697 and existing registered historical names."
+    }
+  ]
+}
