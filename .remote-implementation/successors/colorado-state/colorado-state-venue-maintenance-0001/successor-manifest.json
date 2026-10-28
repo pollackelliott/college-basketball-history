@@ -1,0 +1,81 @@
+{
+  "actual_published_target_sha": "517dc63fc713c4b7e5770160cce0d939e8a11c46",
+  "apply_result": {
+    "assertion_rows_updated": 0,
+    "canonical_rows_updated": 1,
+    "ncaa_evidence_rows_updated": 0,
+    "plan_sha256": "63a278eaa16e3636c964e9f06890bbb1dc3d4a397fbee0ca7154ec84c7f36da4",
+    "provenance_markers_updated": 1,
+    "school_rows_updated": 1,
+    "site_files_refreshed": 1,
+    "venue_name_rows_reassigned": 2,
+    "venues_retired": 1
+  },
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "0b0cc36a344de6b50a60c913529100af2d515f119533df824f1f3f671ec7ebdb",
+    "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json": "6718b57d1e8126e9a79b5f70293b9b098302db5f28b74aafbb6150871f2d12a9",
+    "data/reference/venue-names.csv": "70ba91bf4cf2ef13807378cedbc41eea0a1c58a647b3dfc54cf6188def49c738",
+    "data/reference/venues.csv": "fe63fcdd1b26c0ba920adb95f2ac140cbd91ce017fb2d5f3256f9411549b5a97",
+    "schools/long-island-university/venues.csv": "9fae991ffd39ba93c6eee3c36dc6eb7e02145023319e9a85434d0b2cb9a6cca9",
+    "site/data/teams/long-island-university.json": "e42359d634a1983072b10b8d1b45da6afe2aeb79bb9377c428e558097b807968"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/venues.csv",
+    "site/data/teams/long-island-university.json"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": null,
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "5adfd589b332f6e1665d45e00800bbc68f55dfc0",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_SUCCESSOR",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "plan_merges": [
+    {
+      "absorbed_venue_id": "VEN-000961",
+      "absorbed_venue_key": "mckenzie-arena-chattanooga",
+      "assertion_rows": 0,
+      "canonical_rows": 1,
+      "city": "Chattanooga",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 1,
+      "resolution_basis": "UTC Arena and McKenzie Arena are the same physical arena in Chattanooga, Tennessee, across naming eras; preserve earlier-established VEN-000697 and existing registered historical names.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "TN",
+      "survivor_venue_id": "VEN-000697",
+      "survivor_venue_key": "utc-arena",
+      "venue_name_rows": 2
+    }
+  ],
+  "plan_sha256": "63a278eaa16e3636c964e9f06890bbb1dc3d4a397fbee0ca7154ec84c7f36da4",
+  "prepared_commit_sha": "517dc63fc713c4b7e5770160cce0d939e8a11c46",
+  "prepared_parent_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "prepared_tree_sha": "910c41b0b411c076b05f3db9a6c180e5ac5cd140",
+  "protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "publication_cas": "CREATE_ONCE_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json",
+  "repository_spec_sha256": "6718b57d1e8126e9a79b5f70293b9b098302db5f28b74aafbb6150871f2d12a9",
+  "repository_validation": "PASS",
+  "request_id": "colorado-state-venue-maintenance-0001",
+  "request_sha256": "300e8780c3088271a9cbe677e28b5553fed7443ce23a198e6e0508c1237c47b4",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/colorado-state-stage1-utc-mckenzie-identity",
+  "writeahead_commit": "04ff18944913d1f49dd8a74b36f5b139b4ffa2e3",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/colorado-state/colorado-state-venue-maintenance-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "a087e0daa74bd94dda3eb9493d34fd8a018c2a17d870dd0c595176ab8e735c9f"
+}
