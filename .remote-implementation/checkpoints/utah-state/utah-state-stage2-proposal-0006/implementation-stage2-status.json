@@ -1,0 +1,180 @@
+{
+  "branch": "remote-stage2-census/utah-state-02ca0d8f4bdb",
+  "capability_census": {
+    "path": ".onboarding/utah-state/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "integration_base_sha": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "integration_semantic_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "6a8f16127e76fd12eb4f387f2ca1a6464af1e6e2",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 44,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 44,
+      "discrepancy": 109,
+      "identity": 10,
+      "publication": 1
+    },
+    "decision_count": 166,
+    "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+    "discrepancies_to_add": 109,
+    "existing_game_matches": 749,
+    "new_canonical_games": 2205,
+    "plan_path": ".onboarding/utah-state/plan.json",
+    "review_path": ".onboarding/utah-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 77,
+      "LEAVE_UNRESOLVED": 9,
+      "MATCH_CANONICAL:CBBG-0067845": 1,
+      "MATCH_CANONICAL:CBBG-0067851": 1,
+      "MATCH_CANONICAL:CBBG-0067852": 1,
+      "MATCH_CANONICAL:CBBG-0102906": 1,
+      "MATCH_CANONICAL:CBBG-0104048": 1,
+      "MATCH_CANONICAL:CBBG-0106878": 1,
+      "MATCH_CANONICAL:CBBG-0106879": 1,
+      "MATCH_CANONICAL:CBBG-0107570": 1,
+      "MATCH_CANONICAL:CBBG-0111616": 1,
+      "MATCH_CANONICAL:CBBG-0157104": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 17,
+      "NOT_APPLICABLE": 31,
+      "USE_SOURCE": 20
+    },
+    "approved_plan_hash_preview": "be96604eead7c69a7b844d939c7b27e217d5dab89e18fc0e30814490acea7556",
+    "changed_path_count": 79
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 77,
+      "LEAVE_UNRESOLVED": 9,
+      "MATCH_CANONICAL:CBBG-0067845": 1,
+      "MATCH_CANONICAL:CBBG-0067851": 1,
+      "MATCH_CANONICAL:CBBG-0067852": 1,
+      "MATCH_CANONICAL:CBBG-0102906": 1,
+      "MATCH_CANONICAL:CBBG-0104048": 1,
+      "MATCH_CANONICAL:CBBG-0106878": 1,
+      "MATCH_CANONICAL:CBBG-0106879": 1,
+      "MATCH_CANONICAL:CBBG-0107570": 1,
+      "MATCH_CANONICAL:CBBG-0111616": 1,
+      "MATCH_CANONICAL:CBBG-0157104": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 17,
+      "NOT_APPLICABLE": 31,
+      "USE_SOURCE": 20
+    },
+    "approved_plan_hash_preview": "be96604eead7c69a7b844d939c7b27e217d5dab89e18fc0e30814490acea7556",
+    "decision_count": 166,
+    "path": "/tmp/remote-stage2-proposal-map-qel_6ovn/recommendation-map.json",
+    "sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836"
+  },
+  "research_base_sha": "17d3b2615796ec6ada7eb324ea311d2072ad83b0",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 12,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 3,
+      "neutral_missing_venue": 70,
+      "public_gap_rows": 465,
+      "reciprocal_unpropagated": 0,
+      "reconciled_unknown_site_unresolved_home_venue": 3,
+      "researched_unresolved_home_venue": 12,
+      "researched_unresolved_home_venue_rows": 12,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2968,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 383
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0104055",
+        "CBBG-0104064",
+        "CBBG-0106677",
+        "CBBG-0106688",
+        "CBBG-0106693",
+        "CBBG-0106705",
+        "CBBG-0106709",
+        "CBBG-0106719",
+        "CBBG-0106726",
+        "CBBG-0112967"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0039736",
+        "CBBG-0175163",
+        "CBBG-0177017"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0020787",
+        "CBBG-0021150",
+        "CBBG-0036817",
+        "CBBG-0039736",
+        "CBBG-0040749",
+        "CBBG-0041456",
+        "CBBG-0048116",
+        "CBBG-0050920",
+        "CBBG-0066709",
+        "CBBG-0068699",
+        "CBBG-0070984",
+        "CBBG-0071406"
+      ],
+      "reconciled_unknown_site_unresolved_home_venue": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0106709"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0104027",
+        "CBBG-0104048",
+        "CBBG-0104055",
+        "CBBG-0104064",
+        "CBBG-0106677",
+        "CBBG-0106688",
+        "CBBG-0106693",
+        "CBBG-0106705",
+        "CBBG-0106709",
+        "CBBG-0106719",
+        "CBBG-0106726",
+        "CBBG-0112967"
+      ],
+      "unknown_site_type": [
+        "CBBG-0067844",
+        "CBBG-0067845",
+        "CBBG-0067851",
+        "CBBG-0067852",
+        "CBBG-0112871",
+        "CBBG-0175011",
+        "CBBG-0175012",
+        "CBBG-0175013",
+        "CBBG-0175014",
+        "CBBG-0175015",
+        "CBBG-0175016",
+        "CBBG-0175017"
+      ]
+    },
+    "path": ".onboarding/utah-state/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}

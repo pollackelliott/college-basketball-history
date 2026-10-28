@@ -1,0 +1,107 @@
+{
+  "counts": {
+    "home_missing_venue": 12,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 3,
+    "neutral_missing_venue": 70,
+    "public_gap_rows": 465,
+    "reciprocal_unpropagated": 0,
+    "reconciled_unknown_site_unresolved_home_venue": 3,
+    "researched_unresolved_home_venue": 12,
+    "researched_unresolved_home_venue_rows": 12,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2968,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 383
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0104027",
+      "CBBG-0104048",
+      "CBBG-0104055",
+      "CBBG-0104064",
+      "CBBG-0106677",
+      "CBBG-0106688",
+      "CBBG-0106693",
+      "CBBG-0106705",
+      "CBBG-0106709",
+      "CBBG-0106719",
+      "CBBG-0106726",
+      "CBBG-0112967"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0039736",
+      "CBBG-0175163",
+      "CBBG-0177017"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0020787",
+      "CBBG-0021150",
+      "CBBG-0036817",
+      "CBBG-0039736",
+      "CBBG-0040749",
+      "CBBG-0041456",
+      "CBBG-0048116",
+      "CBBG-0050920",
+      "CBBG-0066709",
+      "CBBG-0068699",
+      "CBBG-0070984",
+      "CBBG-0071406"
+    ],
+    "reconciled_unknown_site_unresolved_home_venue": [
+      "CBBG-0104027",
+      "CBBG-0104048",
+      "CBBG-0106709"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0104027",
+      "CBBG-0104048",
+      "CBBG-0104055",
+      "CBBG-0104064",
+      "CBBG-0106677",
+      "CBBG-0106688",
+      "CBBG-0106693",
+      "CBBG-0106705",
+      "CBBG-0106709",
+      "CBBG-0106719",
+      "CBBG-0106726",
+      "CBBG-0112967"
+    ],
+    "unknown_site_type": [
+      "CBBG-0067844",
+      "CBBG-0067845",
+      "CBBG-0067851",
+      "CBBG-0067852",
+      "CBBG-0112871",
+      "CBBG-0175011",
+      "CBBG-0175012",
+      "CBBG-0175013",
+      "CBBG-0175014",
+      "CBBG-0175015",
+      "CBBG-0175016",
+      "CBBG-0175017"
+    ]
+  },
+  "history_start_season": "1903-1904",
+  "school_key": "utah-state",
+  "source_site_counts": {
+    "home_missing_venue": 9,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 494,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 70,
+    "researched_gap_rows": 494,
+    "researched_unresolved_home_venue_rows": 9,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 415
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2964
+  },
+  "status": "PASS",
+  "warnings": []
+}
