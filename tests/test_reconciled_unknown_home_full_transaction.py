@@ -602,8 +602,9 @@ class ExecuteApprovedRuntimeToolAuthorityTests(unittest.TestCase):
                 mock.patch.object(
                     onboard_school,
                     "archive_approved_plan",
-                    return_value=Path(
-                        "data/reconciliation/onboarding-decisions/test-a.json"
+                    return_value=(
+                        data_repo
+                        / "data/reconciliation/onboarding-decisions/test-a.json"
                     ),
                 ),
                 mock.patch.object(
