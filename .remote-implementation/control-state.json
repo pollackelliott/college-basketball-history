@@ -102,7 +102,7 @@
     "colorado-state-venue-maintenance-0001"
   ],
   "active_expected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
-  "active_lock_commit": null,
+  "active_lock_commit": "5adfd589b332f6e1665d45e00800bbc68f55dfc0",
   "active_lock_owner": "github-actions:40681913488:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
