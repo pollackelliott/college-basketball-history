@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-stage1-0002",
+  "request_id": "colorado-state-phase0-0001",
   "school_key": "colorado-state",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "7c92719e8e345df4e03a9371f6d8b6b0e1070d96",
-  "previous_control_state_sha256": "b3ebb2f1a5a603a830db3b1e6fbc15e9f782e00dc6c7f1013ecbdcb93d1c0f26",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "9f0f9eb481ae54f2317be77cdc5d9fda257ec52a",
+  "previous_control_state_sha256": "c30925711c7555e292132c3327f658ffe4ffe2b1a4fe38fc2a0aab8eeb65a3db",
   "expected_protected_main_sha": "cf64b4700921955c3772d16fb51d3676f916626b",
+  "target_branch": "data/colorado-state-onboarding",
   "research_checkpoint": {
     "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
     "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
@@ -17,15 +18,25 @@
       "part_count": 13
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage1-0002/checkpoint-manifest.json",
+    "sha256": "21239e329b82c048ddc1172a751d29e6a56a3a988ebdd9d2d45a3fd189d5f8d5"
+  },
+  "history_scope": {
+    "start_season": "1901-1902",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Owner-confirmed Colorado State INCEPTION+; the accepted immutable Research Freeze contains the first competitive source game in 1901-1902, and the protected-main Colorado State top-level scope reference is INCEPTION+. No scope change or historical re-adjudication."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Colorado State serialized Implementation — resumed bounded Stage 1 read-only census",
-    "authorization": "Owner authorized one new read-only STAGE1_INVENTORY after the exact Control Center-authorized UTC Arena/McKenzie Arena venue identity transaction merged as PR #392. Protected main cf64b4700921955c3772d16fb51d3676f916626b is the exact merge successor; original Stage 1 checkpoint colorado-state-stage1-0001 and frozen six-file package sha256 64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381 remain immutable. Research base d54b117e635c6c8558a962e5df2f32ba24073d7a; scope INCEPTION+, NON_D1 owner sanity scan previously approved, Research stages not reopened. Transport reused unchanged from original 13 Git base64 parts. No Phase 0, tracked mutation, onboarding branch, Stage 2, Research, Owner Gate 1/2, release, or shared maintenance authority."
+    "origin": "ChatGPT Colorado State serialized Implementation",
+    "authorization": "Owner authorized exactly one guarded Colorado State Phase 0 after fresh Stage 1 PASS at the current merged main. Use the same immutable six-file Research Freeze and current-main Stage 1 checkpoint, including four mechanically safe NEW_GLOBAL_IDENTITY venue registrations, accepted current-main reuse, the exact INCEPTION+ scope, and only the permanent-tool bounded Phase 0 workflow. Permit current-main rebase, accepted package installation, Integration Freeze, sealed Phase 0 preparation, one create-once data/colorado-state-onboarding branch, write-ahead, independent fresh verification, and global lock release. No Stage 2, Research reopening, new historical adjudication, unrelated maintenance, Gate 1/2, Preview, release, or merge authority."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
