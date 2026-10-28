@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-stage1-0004",
+  "request_id": "colorado-state-phase0-0003",
   "school_key": "colorado-state",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "12048f25e2d9b666e0b8bed207c0edda76a92816",
-  "previous_control_state_sha256": "9f4615e93c01835c4a288d1a6f68923fb56d3c32cdf44c3638c4fee6e3985f17",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "62c5c3134ee16fbca7cb03018f89d411ac274ba1",
+  "previous_control_state_sha256": "ec5d6fc32851dd15cc298641ed2a45d4e7b5385ddea870e88d528f7558350fe5",
   "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "target_branch": "data/colorado-state-onboarding",
   "research_checkpoint": {
     "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
     "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
@@ -17,15 +18,25 @@
       "part_count": 13
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-stage1-0004/checkpoint-manifest.json",
+    "sha256": "3dba46ff6f5c8df914c2af26493f2405ec3e7fee7ffcfb9a375a6d0a45b57066"
+  },
+  "history_scope": {
+    "start_season": "1901-1902",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Owner-confirmed Colorado State INCEPTION+; the accepted immutable Research Freeze contains the first competitive source game in 1901-1902, and the protected-main Colorado State top-level scope reference is INCEPTION+. No scope change or historical re-adjudication."
+  },
   "creation_provenance": {
-    "origin": "Colorado State serialized Implementation — exact-main Stage 1 refresh after PR #394",
-    "authorization": "Owner Proceed: refresh read-only Stage 1 inventory at exact current protected main c8334be2c2cbbc5649204f0cec4e20f022580c2d after Control Center-authorized Phase 0 object-store fix. Preserve identical frozen Research evidence and INCEPTION+ history authority. Global control sequence 96 IDLE, recovered failed Phase 0, onboarding branch absent. No Phase 0, Stage 2, owner gates, new historical adjudication, protected-main or basketball mutation."
+    "origin": "Colorado State serialized Implementation — repaired Phase 0 after PR #394",
+    "authorization": "Owner directed Proceed for one guarded Colorado State Phase 0 attempt after Control Center-approved PR #394 fixed runtime object-store ownership. Protected main c8334be2c2cbbc5649204f0cec4e20f022580c2d; global sequence 97 IDLE unlocked; Stage 1 colorado-state-stage1-0004 PASS zero blockers, ambiguities, maintenance and same exact main; unchanged accepted Research Freeze SHA-256 64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381 and owner-confirmed INCEPTION+ history scope. Prior Phase 0 requests 0001 and 0002 were durably recovered and abandoned. Authorized only permanent guarded Phase 0 preparation, Integration Freeze, one create-once onboarding branch publication, write-ahead, fresh independent verification, and lock release. Do not retry previous requests, reopen Research or Stage 1, begin Stage 2, make unrelated maintenance, bypass gates, merge or release."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
