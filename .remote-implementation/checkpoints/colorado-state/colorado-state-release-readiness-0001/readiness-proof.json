@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "apply_request_id": "colorado-state-stage2-sealed-apply-0001",
+  "approved_plan_hash": "a54db55d5c07b49cb3c38c17e1f6fcd9afcb25452ab3462ffb5f4986bdb30244",
+  "changed_path_count": 74,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "release_manifest_sha256": "3f300e92bc4f96c54325d5dbd658201a4b310143cfd147bc83a89efa3d1e656d",
+  "school_key": "colorado-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "07e8f6acd592d4426a5055448a3925416b5ac24886b56c3df6c0b4bc9a9d4df6",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "72848049502af463a9967cb63ae69ad25c773ad32d03ccd292e382641ae74db0",
+  "writeahead_sha256": "e2c0e293acccb9f94c8652b9f204259c904a7bc73530df012daef5ef1777a8c1"
+}
