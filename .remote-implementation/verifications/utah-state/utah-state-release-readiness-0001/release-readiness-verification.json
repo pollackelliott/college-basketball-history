@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "0b27f02b973d40f78c8f98b2c4de272e1c8162a583662b4c4837124f6c4ce4bc",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "readiness_proof_sha256": "940d3f6ab0db83f3739c4325d05db1e80f7d021d3a86db86e425888ae37c7fad",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "utah-state-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
+  "tracked_mutation": "NONE"
+}

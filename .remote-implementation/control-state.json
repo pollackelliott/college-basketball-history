@@ -204,11 +204,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/utah-state/utah-state-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "0b27f02b973d40f78c8f98b2c4de272e1c8162a583662b4c4837124f6c4ce4bc",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "utah-state-release-readiness-0001",
     "school_key": "utah-state",
     "target_branch": "data/utah-state-onboarding",
