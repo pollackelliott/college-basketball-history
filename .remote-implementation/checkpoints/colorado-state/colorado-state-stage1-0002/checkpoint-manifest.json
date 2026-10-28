@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "cf64b4700921955c3772d16fb51d3676f916626b",
+  "request_id": "colorado-state-stage1-0002",
+  "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+  "research_checkpoint_sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
+  "research_member_sha256": {
+    "conferences.csv": "ed2a419b86bf5bb1182be50ff58d60f84cc53360132169af3ca27804128c21c5",
+    "notes.md": "1242ec0c8b1e4cdc0ed54671654f3f2b93ac61e7646c564ffced4933b7757f60",
+    "opponents.csv": "a0ff301086708dd78abb73ac85990870f28879b44f6bb1eff0b50398785f1030",
+    "source-games.csv": "970178626ce417639c51272922bf9e31fc3028de540e71423da217d7f3badc9b",
+    "source-notes.md": "702023fc38a6f7f182a9ec6b5ebb48670390e6e32efe3d8bc386b57c490e3fd3",
+    "venues.csv": "df846c1b9c2d84f762d3f02d9105830db1db69b54cf17a803d142d9209c620b3"
+  },
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "sidecars": {
+    "request.json": "7492e6c8a0771d516fff48f2379ae924dc0713f464031c63603216f82f7e6ba9",
+    "stage1-reconciliation.json": "e69931fc35c68fb07e4042eafe390030d04aebb63cba1f90c7f2c180a4df3821"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
