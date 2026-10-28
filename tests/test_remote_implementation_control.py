@@ -37,6 +37,7 @@ from remote_implementation_control import (  # noqa: E402
     classify_mutation,
     initial_control_state,
     publish_ref_cas,
+    _safe_publication_push_output,
     remote_head,
     sha256_bytes,
     sha256_file,
@@ -933,6 +934,83 @@ class RemoteImplementationGitCASTests(unittest.TestCase):
             remote_head(work, "data/example-school-onboarding"),
             prepared,
         )
+
+
+    def test_failed_create_once_cas_preserves_safe_git_rejection(self):
+        root, bare, work, prepared = self.make_repo()
+        self.addCleanup(lambda: __import__("shutil").rmtree(root))
+        hook = bare / "hooks" / "pre-receive"
+        hook.write_text(
+            "#!/bin/sh\n"
+            "echo 'permission denied to publish ref' >&2\n"
+            "echo 'remote URL https://x-access-token:SECRET-DO-NOT-LEAK@github.com/org/repo.git' >&2\n"
+            "echo 'github_pat_ANOTHER-SECRET-DO-NOT-LEAK' >&2\n"
+            "echo 'token=ghp_THIRD-SECRET-DO-NOT-LEAK' >&2\n"
+            "echo 'Authorization: Bearer bearer-secret' >&2\n"
+            "exit 1\n",
+            encoding="utf-8",
+        )
+        hook.chmod(0o755)
+
+        with self.assertRaises(RemoteImplementationError) as caught:
+            publish_ref_cas(
+                work,
+                branch="data/example-school-onboarding",
+                prepared_commit=prepared,
+                expected_predecessor=None,
+            )
+        message = str(caught.exception)
+        self.assertIn("TARGET_PUBLICATION_CAS_FAILED", message)
+        self.assertIn("returncode=1", message)
+        self.assertIn("permission denied to publish ref", message)
+        self.assertIn("[REDACTED_URL]", message)
+        for secret in (
+            "SECRET-DO-NOT-LEAK",
+            "ANOTHER-SECRET",
+            "THIRD-SECRET",
+            "bearer-secret",
+            "x-access-token",
+        ):
+            self.assertNotIn(secret, message)
+        self.assertIsNone(remote_head(work, "data/example-school-onboarding"))
+
+    def test_publication_failure_diagnostic_sanitizer_is_bounded(self):
+        message = _safe_publication_push_output(
+            "fatal: unable to access https://secretuser:secretpass@github.com/org/repo\n"
+            "Authorization: Basic dXNlcjpwYXNzd29yZA==\n"
+            "GH_TOKEN=top-secret\n"
+            "remote: rejected " + "A" * 6000 + "\n"
+            "permission denied: test hook declined update"
+        )
+        self.assertLessEqual(len(message), 2048)
+        self.assertIn("permission denied: test hook declined update", message)
+        for secret in ("secretuser", "secretpass", "dXNlcjpwYXNzd29yZA==", "top-secret"):
+            self.assertNotIn(secret, message)
+
+    def test_failed_existing_ref_cas_keeps_predecessor(self):
+        root, bare, work, prepared = self.make_repo()
+        self.addCleanup(lambda: __import__("shutil").rmtree(root))
+        predecessor = self.git(work, "rev-parse", "origin/main").stdout.strip()
+        hook = bare / "hooks" / "pre-receive"
+        hook.write_text(
+            "#!/bin/sh\n"
+            "echo 'remote rejected: branch update denied' >&2\n"
+            "exit 1\n",
+            encoding="utf-8",
+        )
+        hook.chmod(0o755)
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "TARGET_PUBLICATION_CAS_FAILED.*returncode=1",
+        ):
+            publish_ref_cas(
+                work,
+                branch="main",
+                prepared_commit=prepared,
+                expected_predecessor=predecessor,
+            )
+        self.assertEqual(remote_head(work, "main"), predecessor)
+
 
 
 if __name__ == "__main__":
