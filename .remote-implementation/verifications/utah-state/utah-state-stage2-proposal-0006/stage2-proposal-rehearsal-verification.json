@@ -1,0 +1,48 @@
+{
+  "approved_plan_hash_preview": "be96604eead7c69a7b844d939c7b27e217d5dab89e18fc0e30814490acea7556",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "8160107a3a5a4b5928a585e26d4122f170b7b920b856a3ff0db9e966c9dfe814",
+    "implementation-stage2-status.json": "727f037b750648e1c9c218f8ee64b6db36e97de856cc6356c7f3a019fc961429",
+    "last-rehearsal-site-gate.json": "689a7105234f3348f92c843e802c1a0d69fa572c45d5c157cfd4ca6e621a1b35",
+    "plan.json": "306b12f7b5645c5cfb482d28850e3f8fc81e04ada3a58b963df25d76aa77e4f7",
+    "review.csv": "06f549b39448e36c7138ce4bd79cb659a731a9473f9087e1fa7f957904451bec",
+    "review.md": "0f98c7f177ed0de807d550f04a66945c722aee5a79bf74faf76bc5271b55e756"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "8160107a3a5a4b5928a585e26d4122f170b7b920b856a3ff0db9e966c9dfe814",
+    "implementation-stage2-status.json": "6a2760007de5b890e6b0a021f906bd799a4817d9265a80f933bce94dfaf8096d",
+    "last-rehearsal-site-gate.json": "689a7105234f3348f92c843e802c1a0d69fa572c45d5c157cfd4ca6e621a1b35",
+    "plan.json": "577b4d98f4cd9d32a54a51c7b33be6a9a87f966c9541bc2bb7d27756a066f68e",
+    "review.csv": "06f549b39448e36c7138ce4bd79cb659a731a9473f9087e1fa7f957904451bec",
+    "review.md": "21c491a1043ee0e8593dc49e388bc121fd93fba43a7fae50f4628be884cbf910"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+    "runtime_decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "recommendation_map_sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "utah-state-stage2-proposal-0006",
+  "runtime_decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "schema_version": 1,
+  "school_key": "utah-state",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "target_tree_sha": "5610bfa1ca4cad4a1581525ed1b97ba6d7d94eda",
+  "tracked_stage2_mutation": "NONE"
+}
