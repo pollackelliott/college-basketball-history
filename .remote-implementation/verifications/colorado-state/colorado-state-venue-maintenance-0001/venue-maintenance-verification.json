@@ -1,0 +1,25 @@
+{
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/venues.csv",
+    "site/data/teams/long-island-university.json"
+  ],
+  "exact_replay_tree": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_VERIFICATION",
+  "plan_sha256": "63a278eaa16e3636c964e9f06890bbb1dc3d4a397fbee0ca7154ec84c7f36da4",
+  "protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "remote_venue_maintenance_equivalence": "PASS",
+  "repository_spec_sha256": "6718b57d1e8126e9a79b5f70293b9b098302db5f28b74aafbb6150871f2d12a9",
+  "repository_validation": "PASS",
+  "request_id": "colorado-state-venue-maintenance-0001",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/colorado-state-stage1-utc-mckenzie-identity",
+  "target_predecessor_sha": null,
+  "target_sha": "517dc63fc713c4b7e5770160cce0d939e8a11c46",
+  "target_tree_sha": "910c41b0b411c076b05f3db9a6c180e5ac5cd140"
+}
