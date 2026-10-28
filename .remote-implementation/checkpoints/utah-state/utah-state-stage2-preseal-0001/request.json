@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "utah-state-stage2-preseal-0001",
+  "school_key": "utah-state",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "e68bcc5bf0835e88745039a76f40bb802ae3d310",
+  "previous_control_state_sha256": "c7c479327f3d3ab195844678d7200d4fe3bc71a0efef3ca4c24f4a51f6909d53",
+  "expected_protected_main_sha": "64258e5d3178715f7e936912ede28333f830fd0b",
+  "creation_provenance": {
+    "origin": "ChatGPT Utah State Implementation",
+    "authorization": "Owner said Proceed after the fresh-verified Utah State Owner Gate 1 fill. This authorizes exactly one bounded STAGE2_PRESEAL_REHEARSAL against that exact fill authority. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, PR merge, release, Production, recovery, venue maintenance, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/utah-state-onboarding",
+  "target_sha": "02ca0d8f4bdb04e19691ac6958e38cf2303169c5",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/utah-state/utah-state-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "aed0969f8706168c0f1f923328924af6b7e8bac7874160c99284bc7f2141701c"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/utah-state/utah-state-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "fe07d561ff4720c7afe10082dbe25c1138ad6f4ba05fcc7148ea72329710dbe7"
+  },
+  "integration_freeze_sha256": "9e11e478e1ea4781672563dfba7907388a8690e0feba518280b81c494d716e96",
+  "semantic_snapshot_sha256": "1b8082517e33e652a4a6ced8fa13da89d373e83bba1978fd80b526da35036222",
+  "decision_universe_sha256": "443ff34a9d31e5576bc46c5d5e2c57ff9ac1266a53170ce01460397d2dd7c612",
+  "recommendation_map_sha256": "083d64dc5d34375fbf98318c9cd9bcfeba8de5ebd74bc65c8e84fb006413f836",
+  "approved_plan_hash_preview": "be96604eead7c69a7b844d939c7b27e217d5dab89e18fc0e30814490acea7556",
+  "filled_review_sha256": "a8372e2331ab7e591b17c2f7b26df25e212ef5442a55aeb9f43a919cb21eee1f",
+  "decision_id_set_sha256": "df425c649e1b6e322d65713d41a4010ecc35b1652a5a98345e1ca6bfa1077e10"
+}
