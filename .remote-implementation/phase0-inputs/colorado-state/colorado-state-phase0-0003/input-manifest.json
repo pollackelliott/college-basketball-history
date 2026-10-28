@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "request_id": "colorado-state-phase0-0003",
+  "research_checkpoint_sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
+  "research_member_sha256": {
+    "conferences.csv": "ed2a419b86bf5bb1182be50ff58d60f84cc53360132169af3ca27804128c21c5",
+    "notes.md": "1242ec0c8b1e4cdc0ed54671654f3f2b93ac61e7646c564ffced4933b7757f60",
+    "opponents.csv": "a0ff301086708dd78abb73ac85990870f28879b44f6bb1eff0b50398785f1030",
+    "source-games.csv": "970178626ce417639c51272922bf9e31fc3028de540e71423da217d7f3badc9b",
+    "source-notes.md": "702023fc38a6f7f182a9ec6b5ebb48670390e6e32efe3d8bc386b57c490e3fd3",
+    "venues.csv": "df846c1b9c2d84f762d3f02d9105830db1db69b54cf17a803d142d9209c620b3"
+  },
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "sidecars": {
+    "stage1-reconciliation.json": "26c6a66e636f31b9dfe4797b47e64b94c94d34aa146fc0db4560a8342fcada91"
+  },
+  "stage1_status": "PASS"
+}
