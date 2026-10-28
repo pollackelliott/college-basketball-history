@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-stage2-proposal-rehearsal-0002",
+  "school_key": "colorado-state",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "55890ac8b1bd1d66ccbd04736f29c57f6ac9c3b0",
+  "previous_control_state_sha256": "8535a9de5c75b868610a01b3a5469f3a145a9f9ac6d98b145832dee45f3c8d39",
+  "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "target_branch": "data/colorado-state-onboarding",
+  "target_sha": "87a3bb6b0a169b06ff257dc11e8542848187c786",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/colorado-state/colorado-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "c0909c6b7ec2039e146390617b87c3c1fc693e94abf68a905483f780f99ddbbc"
+  },
+  "integration_freeze_sha256": "2ae2ab35fd471b5cfbcaff71ae4882603d23ffccc18bc92f7d51f601062dfee9",
+  "semantic_snapshot_sha256": "a922118e49025807ab409808af07669d182eda58e52f06eb0e968476989ce3f6",
+  "decision_universe_sha256": "ff6c0e97e6267ce498759569fda461ff59685d22a4db6ae0ab8fa02c5df0b9e3",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/colorado-state-stage2-proposal-rehearsal-0002/recommendation-map.json",
+    "sha256": "36185437fade13a82ab6cefe5790b6e31e6ec55dcf9d4ce6bc92bd51c29d4d96"
+  },
+  "creation_provenance": {
+    "origin": "Colorado State Implementation — exact six-HOME-UNKNOWN revised map proposal rehearsal",
+    "authorization": "Owner Proceed after six-game bounded historical site assessment. Authorize only guarded read-only STAGE2_PROPOSAL_REHEARSAL with immutable revised 96-decision candidate adding six UNKNOWN canonical site patches, exact Stage 2 successor and unchanged protected-main/target/Freeze/semantic/decision-universe authority, permanent validation and disposable rehearsal, durable checkpoint and independent fresh verification. No Owner Gate 1 approval, fill, seal, apply, mutation, release, or merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
