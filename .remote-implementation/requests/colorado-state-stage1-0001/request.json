@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "colorado-state-stage1-0001",
+  "school_key": "colorado-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "03949e69eeb999b0d5f05ac2e288048cd793c468",
+  "previous_control_state_sha256": "1b91ac1b875d7828ef62b146d7b627e0d62452f13f85a02f3db9e6ed8ed605c9",
+  "expected_protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "research_checkpoint": {
+    "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
+    "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "03949e69eeb999b0d5f05ac2e288048cd793c468",
+      "path_prefix": ".remote-implementation/inputs/colorado-state-stage1-0001-20261027-owner-freeze/research-frozen.zip.b64.part",
+      "part_count": 13
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Colorado State serialized Implementation / Control Center authorized Stage 1 recovery",
+    "authorization": "Control Center explicitly authorized exactly one read-only Colorado State STAGE1_INVENTORY on protected main 2b2c90d01887e8199e404f62d031858a93fc65b5, using the exact owner-designated final RESEARCH_FROZEN ZIP with independently confirmed SHA-256 64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381. Recovered frozen notes identify research base d54b117e635c6c8558a962e5df2f32ba24073d7a, documented Stage 6 adversarial NCAA/venue/site corrections and retained researched debt, and the explicit approved 66-distinct-opponent/294-game NON_D1 scan. Current protected-main reference independently confirms owner-settled Colorado State INCEPTION+ history scope; retain unchanged for later Phase 0. The existing Git base64-part transport contains unchanged exact attached ZIP bytes. No Phase 0, Stage 2, release, owner-gate, Research reopening, global maintenance or basketball-state mutation is authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

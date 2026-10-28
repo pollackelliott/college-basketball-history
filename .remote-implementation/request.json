@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "utah-state-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "utah-state",
-  "previous_control_state_commit": "42018838de9a581db2ce45298a2162c4018e4572",
-  "previous_control_state_sha256": "ee449686931d1035f9b243e8ec93939223de540795bd37ccab89b5250c8c7953",
+  "request_id": "colorado-state-stage1-0001",
+  "school_key": "colorado-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "03949e69eeb999b0d5f05ac2e288048cd793c468",
+  "previous_control_state_sha256": "1b91ac1b875d7828ef62b146d7b627e0d62452f13f85a02f3db9e6ed8ed605c9",
   "expected_protected_main_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
-  "target_branch": "data/utah-state-onboarding",
-  "target_sha": "d298bd00b8f2560902d6e7a17e6820f52a82b39c",
-  "pr_number": 391,
-  "merge_sha": "2b2c90d01887e8199e404f62d031858a93fc65b5",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/utah-state/utah-state-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "ba07d35aa4897c94f38d9540971cafe1609a68e9aa013ab488c9fa4d9d36da8a"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/utah-state/utah-state-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "67ab200f373e3c89cfd664df122c35b560667a06ea37172df1210c44c550595f"
+  "research_checkpoint": {
+    "sha256": "64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381",
+    "research_base_sha": "d54b117e635c6c8558a962e5df2f32ba24073d7a",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "03949e69eeb999b0d5f05ac2e288048cd793c468",
+      "path_prefix": ".remote-implementation/inputs/colorado-state-stage1-0001-20261027-owner-freeze/research-frozen.zip.b64.part",
+      "part_count": 13
+    }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Utah State Implementation",
-    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector then rechecked protected main, exact PR #391 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one standard two-parent merge. GitHub merged exact approved head d298bd00b8f2560902d6e7a17e6820f52a82b39c as 2b2c90d01887e8199e404f62d031858a93fc65b5 with first parent 64258e5d3178715f7e936912ede28333f830fd0b. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+    "origin": "ChatGPT Colorado State serialized Implementation / Control Center authorized Stage 1 recovery",
+    "authorization": "Control Center explicitly authorized exactly one read-only Colorado State STAGE1_INVENTORY on protected main 2b2c90d01887e8199e404f62d031858a93fc65b5, using the exact owner-designated final RESEARCH_FROZEN ZIP with independently confirmed SHA-256 64a2c037a99ac079f571704087a8d708285f4d33caf756d30e6f92de83aff381. Recovered frozen notes identify research base d54b117e635c6c8558a962e5df2f32ba24073d7a, documented Stage 6 adversarial NCAA/venue/site corrections and retained researched debt, and the explicit approved 66-distinct-opponent/294-game NON_D1 scan. Current protected-main reference independently confirms owner-settled Colorado State INCEPTION+ history scope; retain unchanged for later Phase 0. The existing Git base64-part transport contains unchanged exact attached ZIP bytes. No Phase 0, Stage 2, release, owner-gate, Research reopening, global maintenance or basketball-state mutation is authorized."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
@@ -36,11 +37,8 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "release_gate2_approval": false,
-    "release_production_proof": true,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
   }
 }
