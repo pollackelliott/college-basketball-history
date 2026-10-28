@@ -105,15 +105,15 @@
   "active_lock_commit": "5adfd589b332f6e1665d45e00800bbc68f55dfc0",
   "active_lock_owner": "github-actions:40681913488:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "517dc63fc713c4b7e5770160cce0d939e8a11c46",
+  "active_prepared_tree_sha": "910c41b0b411c076b05f3db9a6c180e5ac5cd140",
   "active_request_id": "colorado-state-venue-maintenance-0001",
   "active_request_sha256": "300e8780c3088271a9cbe677e28b5553fed7443ce23a198e6e0508c1237c47b4",
   "active_school_key": "colorado-state",
   "active_target_branch": "maintenance/colorado-state-stage1-utc-mckenzie-identity",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/colorado-state/colorado-state-venue-maintenance-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "a087e0daa74bd94dda3eb9493d34fd8a018c2a17d870dd0c595176ab8e735c9f",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -226,5 +226,5 @@
   "lock_acquisition_request_commit": "39bdfcfade4fa46958e083fae9ab704762c3b12a",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

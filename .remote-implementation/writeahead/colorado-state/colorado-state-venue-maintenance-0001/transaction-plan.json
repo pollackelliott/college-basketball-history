@@ -1,0 +1,41 @@
+{
+  "blockers": [],
+  "fingerprints": {
+    "data/canonical/games.csv": "1e0d50b1664ab87b41c57f45390a5673af86e82082ff92a27d912266c3b5e3c7",
+    "data/evidence/game-assertions.csv": "b99803020528ac46a9d36a11aa14e449cb83e222d1fc3c3c088d9e5d0c41da10",
+    "data/evidence/ncaa-tournament-sites.csv": "eb462cba0e44bc87bcedb6b95aa0aa690a917bf4010263db156b281763851135",
+    "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json": "6718b57d1e8126e9a79b5f70293b9b098302db5f28b74aafbb6150871f2d12a9",
+    "data/reference/venue-names.csv": "f75c1dc11d214f3b2d261d8d30aaa89a3c63b2783aea9b670e5b7278c06d9adf",
+    "data/reference/venues.csv": "59b4f3b9c13205bd95c7b34269932e17af9cd9614a9d81c9d60bb9b6661e6829",
+    "schools/long-island-university/venues.csv": "2e56db1172b5381858d1a57baf9589066fbcbb2c751e4fe622c9f1b1b90690c3"
+  },
+  "git_head": "2b2c90d01887e8199e404f62d031858a93fc65b5",
+  "merges": [
+    {
+      "absorbed_venue_id": "VEN-000961",
+      "absorbed_venue_key": "mckenzie-arena-chattanooga",
+      "assertion_rows": 0,
+      "canonical_rows": 1,
+      "city": "Chattanooga",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 1,
+      "resolution_basis": "UTC Arena and McKenzie Arena are the same physical arena in Chattanooga, Tennessee, across naming eras; preserve earlier-established VEN-000697 and existing registered historical names.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "TN",
+      "survivor_venue_id": "VEN-000697",
+      "survivor_venue_key": "utc-arena",
+      "venue_name_rows": 2
+    }
+  ],
+  "plan_sha256": "63a278eaa16e3636c964e9f06890bbb1dc3d4a397fbee0ca7154ec84c7f36da4",
+  "schema_version": 1,
+  "spec": "data/reconciliation/venue-identity-maintenance/colorado-state-stage1.json"
+}

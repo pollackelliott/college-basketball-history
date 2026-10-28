@@ -1,0 +1,11 @@
+{
+  "assertion_rows_updated": 0,
+  "canonical_rows_updated": 1,
+  "ncaa_evidence_rows_updated": 0,
+  "plan_sha256": "63a278eaa16e3636c964e9f06890bbb1dc3d4a397fbee0ca7154ec84c7f36da4",
+  "provenance_markers_updated": 1,
+  "school_rows_updated": 1,
+  "site_files_refreshed": 1,
+  "venue_name_rows_reassigned": 2,
+  "venues_retired": 1
+}
