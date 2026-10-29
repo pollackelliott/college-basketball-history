@@ -232,6 +232,126 @@ class VenueIdentityTransactionTests(unittest.TestCase):
         )
         return temporary, repo, spec
 
+    def make_geography_repo(self):
+        temporary, repo, spec = self.make_repo()
+
+        write_csv(
+            repo / "data/canonical/games.csv",
+            [
+                "canonical_game_id",
+                "venue_key",
+                "venue_id",
+                "site_city",
+                "site_state",
+                "notes",
+            ],
+            [
+                {
+                    "canonical_game_id": "G1",
+                    "venue_key": "survivor",
+                    "venue_id": "VEN-000001",
+                    "site_city": "Test City",
+                    "site_state": "TX",
+                    "notes": "",
+                }
+            ],
+        )
+        write_csv(
+            repo / "data/evidence/game-assertions.csv",
+            [
+                "assertion_id",
+                "canonical_game_id",
+                "venue_key",
+                "venue_id",
+                "site_city",
+                "site_state",
+                "raw_text",
+            ],
+            [
+                {
+                    "assertion_id": "A1",
+                    "canonical_game_id": "G1",
+                    "venue_key": "survivor",
+                    "venue_id": "VEN-000001",
+                    "site_city": "Metro Area",
+                    "site_state": "TX",
+                    "raw_text": "literal source geography",
+                }
+            ],
+        )
+        write_csv(
+            repo / "data/evidence/ncaa-tournament-sites.csv",
+            [
+                "canonical_game_id", "venue_id", "venue_key",
+                "site_city", "site_state", "source_authority",
+                "source_index_url", "source_document_title",
+                "source_document_url", "source_locator", "source_scope",
+                "resolution_basis", "notes",
+            ],
+            [{
+                "canonical_game_id": "G1",
+                "venue_id": "VEN-000001",
+                "venue_key": "survivor",
+                "site_city": "Metro Area",
+                "site_state": "TX",
+                "source_authority": "NCAA",
+                "source_index_url": "https://example.org/index",
+                "source_document_title": "Test record",
+                "source_document_url": "https://example.org/record",
+                "source_locator": "page 1",
+                "source_scope": "NCAA sites",
+                "resolution_basis": "literal documentary geography",
+                "notes": "preserve source evidence",
+            }],
+        )
+        write_csv(
+            repo / "schools/test/venues.csv",
+            [
+                "source_program_key",
+                "venue_key",
+                "venue_id",
+                "canonical_name",
+                "aliases",
+                "city",
+                "state",
+                "notes",
+            ],
+            [
+                {
+                    "source_program_key": "test",
+                    "venue_key": "survivor",
+                    "venue_id": "VEN-000001",
+                    "canonical_name": "Test Arena",
+                    "aliases": "",
+                    "city": "Test City",
+                    "state": "TX",
+                    "notes": "published venue row",
+                }
+            ],
+        )
+        spec.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "geography_corrections": [
+                        {
+                            "venue_id": "VEN-000001",
+                            "venue_key": "survivor",
+                            "from_city": "Test City",
+                            "from_state": "TX",
+                            "to_city": "Precise City",
+                            "to_state": "TX",
+                            "expected_canonical_rows": 1,
+                            "expected_school_rows": 1,
+                            "resolution_basis": "fixture exact-locality correction",
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        return temporary, repo, spec
+
     def test_plan_and_apply_merge_duplicate_identity_transactionally(self):
         temporary, repo, spec = self.make_repo()
         self.addCleanup(temporary.cleanup)
@@ -291,6 +411,78 @@ class VenueIdentityTransactionTests(unittest.TestCase):
                 and row["name_type"] == "HISTORICAL_OR_ALIAS"
                 for row in names
             )
+        )
+
+    def test_plan_and_apply_geography_correction_preserves_source_evidence(self):
+        temporary, repo, spec = self.make_geography_repo()
+        self.addCleanup(temporary.cleanup)
+
+        names_path = repo / "data/reference/venue-names.csv"
+        assertions_path = repo / "data/evidence/game-assertions.csv"
+        ncaa_path = repo / "data/evidence/ncaa-tournament-sites.csv"
+        before_names = names_path.read_bytes()
+        before_assertions = assertions_path.read_bytes()
+        before_ncaa = ncaa_path.read_bytes()
+
+        plan = transaction.build_plan(repo, spec)
+        self.assertEqual(plan["blockers"], [])
+        self.assertEqual(plan["merges"], [])
+        correction = plan["geography_corrections"][0]
+        self.assertEqual(correction["canonical_rows"], 1)
+        self.assertEqual(correction["school_rows"], 1)
+        self.assertEqual(correction["source_assertion_rows"], 1)
+        self.assertEqual(correction["ncaa_evidence_rows"], 1)
+
+        result = transaction.apply_transaction(
+            repo,
+            spec,
+            plan["plan_sha256"],
+            run_validation=False,
+        )
+        self.assertEqual(result["venue_geography_corrections"], 1)
+        self.assertEqual(result["canonical_geography_rows_updated"], 1)
+        self.assertEqual(result["canonical_identity_rows_updated"], 0)
+        self.assertEqual(result["school_geography_rows_updated"], 1)
+        self.assertEqual(result["school_identity_rows_updated"], 0)
+        self.assertEqual(result["assertion_rows_updated"], 0)
+        self.assertEqual(result["ncaa_evidence_rows_updated"], 0)
+
+        venues = {
+            row["venue_id"]: row
+            for row in read_rows(repo / "data/reference/venues.csv")
+        }
+        corrected = venues["VEN-000001"]
+        self.assertEqual(corrected["venue_key"], "survivor")
+        self.assertEqual(corrected["display_name"], "Test Arena")
+        self.assertEqual((corrected["city"], corrected["state"]), ("Precise City", "TX"))
+        self.assertIn("VEN-000002", venues)
+
+        canonical = read_rows(repo / "data/canonical/games.csv")[0]
+        self.assertEqual((canonical["venue_id"], canonical["venue_key"]), ("VEN-000001", "survivor"))
+        self.assertEqual((canonical["site_city"], canonical["site_state"]), ("Precise City", "TX"))
+
+        school = read_rows(repo / "schools/test/venues.csv")[0]
+        self.assertEqual((school["venue_id"], school["venue_key"]), ("VEN-000001", "survivor"))
+        self.assertEqual(school["canonical_name"], "Test Arena")
+        self.assertEqual((school["city"], school["state"]), ("Precise City", "TX"))
+
+        self.assertEqual(names_path.read_bytes(), before_names)
+        self.assertEqual(assertions_path.read_bytes(), before_assertions)
+        self.assertEqual(ncaa_path.read_bytes(), before_ncaa)
+
+    def test_geography_correction_blocks_if_registry_geography_moved(self):
+        temporary, repo, spec = self.make_geography_repo()
+        self.addCleanup(temporary.cleanup)
+
+        venue_path = repo / "data/reference/venues.csv"
+        rows = read_rows(venue_path)
+        rows[0]["city"] = "Changed City"
+        write_csv(venue_path, list(rows[0]), rows)
+
+        plan = transaction.build_plan(repo, spec)
+        self.assertTrue(plan["blockers"])
+        self.assertTrue(
+            any("expected current geography" in item for item in plan["blockers"])
         )
 
     def test_site_refresh_applies_generated_data_before_freshness_check(self):
