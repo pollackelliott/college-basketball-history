@@ -291,7 +291,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "e39a57662ba58671ba7ad23eac7310bb451690cb8596b302bbe486c9589aa074",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -301,7 +301,7 @@
     "production_deployment_id": 7419742479,
     "production_json_checked_count": 57,
     "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "fresno-state-release-production-proof-0001",
     "school_key": "fresno-state"
   },
