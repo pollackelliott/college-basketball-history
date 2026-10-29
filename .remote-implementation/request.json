@@ -1,28 +1,67 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-phase0-scope-supersession-recover-0002",
+  "request_id": "fresno-state-phase0-scope-supersession-0002",
   "school_key": "fresno-state",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "8c48ec309d5a01cb5d9b8a13c4c5fd2d5a8c5c85",
-  "previous_control_state_sha256": "2d679f2f596c96f5c90a50ef3f58f3c4b039ef60bb337ca61a81c16e577ce527",
+  "operation": "PHASE0_SCOPE_SUPERSESSION",
+  "previous_control_state_commit": "26bc4e4b3429a3f4b0f2ccc5c4edc465ccab8f0b",
+  "previous_control_state_sha256": "e1cadac8a173b14e3da83ab0f11c2264345e42db4247949c373967be69505c9b",
   "expected_protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
-  "recovery": {
-    "abandoned_request_id": "fresno-state-phase0-scope-supersession-0001",
-    "lock_commit": "72d8e79070f91c8c12529c22c2f6b67645f4840f",
-    "target_branch": "data/fresno-state-onboarding"
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80",
+  "research_checkpoint": {
+    "sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
+    "research_base_sha": "a446e5cf028118d0484b75dc462bfe30f7ebd981",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "162d219dfa3134fbd53274d99ec39bab0cd1580f",
+      "path_prefix": ".remote-implementation/inputs/fresno-state-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 10
+    }
+  },
+  "scope_supersession_spec": {
+    "path": ".remote-implementation/inputs/fresno-state-phase0-scope-supersession-0001/scope-supersession.json",
+    "sha256": "e95fb09b0231b53770b7521f63317acb842a1cc5a594c9b1af4b19db8c786622"
+  },
+  "superseded_phase0_successor": {
+    "path": ".remote-implementation/successors/fresno-state/fresno-state-phase0-0001/successor-manifest.json",
+    "sha256": "9c1e9772cd89f0a383782f71366e7481639b381871bd4c55dbe20d649f2a3aa6"
+  },
+  "superseded_successor": {
+    "path": ".remote-implementation/successors/fresno-state/fresno-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "797fcb450758799e425fff06add45914df1d88c7c106f7aafc6842b19e86a071"
+  },
+  "superseded_successor_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-stage2-opponent-display-normalize-0001/stage2-opponent-display-verification.json",
+    "sha256": "b9b3951fb5700618fc03bbeeaa0587ae937da72888dc36654487e2c37658a444"
+  },
+  "superseded_integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "superseded_semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "history_scope": {
+    "start_season": "1970-1971",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1970-71+",
+    "notes": "Owner executive ruling effective 2026-10-29: Fresno State public history begins with 1970-71. The 1955-56, 1956-57, and 1957-58 Research evidence remains preserved in the immutable original Research Freeze but is excluded from Fresno publication, ingestion, statistics, accomplishments, NCAA appearance counts, and public game history."
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "scope_supersession_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the narrow Fresno State post-Phase-0 scope supersession/rebuild from 1955-56..1957-58|1970-71+ to 1970-71+, with exact 78-row exclusion, 1,708 retained games, target-only scope metadata correction, conference clipping, removal only of out-of-scope-only unreferenced registrations, guarded expected-predecessor publication, fresh Integration Freeze, and independent verification.",
+    "spec_sha256": "e95fb09b0231b53770b7521f63317acb842a1cc5a594c9b1af4b19db8c786622"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Fresno State serialized Implementation — recovery after generic baseline/recovery fix",
-    "authorization": "Recover the failed Fresno scope-supersession transaction after exact durable proof that the target branch remains at 7925342ad192f86ac7f943ce4b439e31dc402b80, no write-ahead exists, and the generic recovery fix is merged on protected main. Recovery is limited to permanent classification, durable recovery evidence, and lock release."
+    "origin": "ChatGPT Fresno State serialized Implementation — scope supersession retry after durable NOT_ATTEMPTED recovery and generic regression fix",
+    "authorization": "Owner explicitly ruled Fresno State public scope = 1970-71+. Control Center authorized the bounded post-Phase-0 scope-supersession/rebuild. The first request was durably recovered as NOT_ATTEMPTED with target unchanged. PR #399 repaired the generic protected-main mutation baseline and pre-writeahead recovery invariants and is merged on current protected main. This new request authorizes only the same bounded supersession transaction; no Stage 2, owner gate, Preview, release, merge, Production proof, unrelated shared-reference mutation, or new historical research."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
-    "phase0_scope_supersession": false,
-    "recovery": true,
+    "phase0_scope_supersession": true,
+    "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
