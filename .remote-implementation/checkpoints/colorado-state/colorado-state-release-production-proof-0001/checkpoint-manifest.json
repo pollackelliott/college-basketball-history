@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "merge_parent_onboarding": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "merge_sha": "194af2825b8704515f0fc6639ac36999669ab3db",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "df9e418f8d91eb37905eb752e3ae7c30934b0e225ad9a64fda6e6a6da96d97cc",
+  "owner_gate_2_verification_sha256": "b510271c57c31bd91a4fb0b053a4c425b497de11d3566c45bc9169fee31baf61",
+  "pr_head_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "pr_number": 395,
+  "production_deployment_id": 7400520570,
+  "production_json_checked_count": 67,
+  "production_proof": true,
+  "production_proof_sha256": "02fefeea06dab56282b4ff8f26e1dd496eb9bd90dfd5b42951c7483c95e8da31",
+  "protected_main_sha": "194af2825b8704515f0fc6639ac36999669ab3db",
+  "request_id": "colorado-state-release-production-proof-0001",
+  "request_sha256": "7b37431132c7ec9825922a74f68f4070d7c88c8f0fcb6d73e771180b855da8bc",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}
