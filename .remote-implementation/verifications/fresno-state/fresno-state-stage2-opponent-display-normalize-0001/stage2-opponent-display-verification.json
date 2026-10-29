@@ -1,0 +1,46 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "845c5c43e346c135bc59c8e3716d15545643b9977aa1544cd796e517ebb386e4",
+    "implementation-stage2-status.json": "e9d525873da21edc7537498406dd67147bdcbd8b329c08effc51b63fd8810cf6",
+    "plan.json": "aea2b02a0aca7ce2886ea2479c57a7d18fd54ed0304d159c66c7076acba9e6ce",
+    "review.csv": "343f1de2f4be3f3415ace2c0f73ac45f068ddec78ccf06a212cfbc07ec47d414",
+    "review.md": "06dac33b50c041f296079015787affb018c9b4a7df7381af8c75b01c8fa0d82a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "845c5c43e346c135bc59c8e3716d15545643b9977aa1544cd796e517ebb386e4",
+    "implementation-stage2-status.json": "dc2124c7d9492ebfdcb574130847fb78f8257de922049db1fff2007f2ec02704",
+    "plan.json": "cc47eb0dd0e0dbf997564e879ece62ddb3fe96cdecaa73daad7aeb11610f17eb",
+    "review.csv": "343f1de2f4be3f3415ace2c0f73ac45f068ddec78ccf06a212cfbc07ec47d414",
+    "review.md": "4d8933ab70708920e384bdba138a23f731e6d6f2722d9e03838b4cafc8ca899e"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "changed_paths": [
+    "schools/fresno-state/opponents.csv",
+    "schools/fresno-state/source-games.csv"
+  ],
+  "decision_universe_sha256": "dcd64ccb4701b78f82d0ec5ed6a415894ffe3fff0a0d0503869bfbd4587426d8",
+  "expected_blocker_keys": [
+    "saint-katherine"
+  ],
+  "field_level_proof_sha256": "a2c479767cedb83b666ce7cbb5c653027419105384a82fab2130d3aa864a2e20",
+  "integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "1a812a2df3a4784b42a9eb046fd3dc1d88313f0b763f3dc63ef76bd7e1521345",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "fresno-state-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_predecessor_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+  "target_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80",
+  "target_tree_sha": "c0da9d90f48f1ee31bbf0848aef1f9c474d35074",
+  "tracked_stage2_mutation": "NONE"
+}
