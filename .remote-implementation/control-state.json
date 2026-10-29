@@ -126,7 +126,7 @@
     "fresno-state-phase0-0001"
   ],
   "active_expected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
-  "active_lock_commit": null,
+  "active_lock_commit": "7d79f7935d775b953176fae159caa8ad4a563249",
   "active_lock_owner": "github-actions:40814948656:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
