@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "df9e418f8d91eb37905eb752e3ae7c30934b0e225ad9a64fda6e6a6da96d97cc",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "pr_number": 395,
+  "preview_deployment_id": 7399190781,
+  "preview_url": "https://college-basketball-history-ncw21f69p-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "colorado-state-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "status": "PASS"
+}
