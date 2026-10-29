@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-stage1-0002",
+  "request_id": "fresno-state-phase0-0001",
   "school_key": "fresno-state",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "56df7b855b6dff7381164ebb97364f8db8aa9c65",
-  "previous_control_state_sha256": "86cc4b778081af81f2b9de3a148e8b55f6366113161bfd45fdf724c03eaa8730",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "70fbfd19e051d15239e3d1670e6eec7add614b55",
+  "previous_control_state_sha256": "188b76e9848a221909997a4180fbb8eca893405c6a28761c692c5f9e775d894a",
   "expected_protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "target_branch": "data/fresno-state-onboarding",
   "research_checkpoint": {
     "sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
     "research_base_sha": "a446e5cf028118d0484b75dc462bfe30f7ebd981",
@@ -17,19 +18,29 @@
       "part_count": 10
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage1-0002/checkpoint-manifest.json",
+    "sha256": "6dba032251eed095eb87b73b686e59c6a56dae3f1b462afab459d62942acfd85"
+  },
   "conference_reconciliation": {
     "path": ".remote-implementation/inputs/fresno-state-stage1-0002/conference-reconciliation.json",
     "sha256": "288c214eacbeda73ea44e3deb8b2c69d3dd91fed5a63334acea5b9ca99f7b8cc"
   },
+  "history_scope": {
+    "start_season": "1955-1956",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "1955-56..1957-58|1970-71+",
+    "notes": "Owner/repository-confirmed Fresno State top-level scope: 1955-56 through 1957-58, then 1970-71 onward. Preserve the accepted discontinuity exactly; do not manufacture top-level seasons for 1958-59 through 1969-70."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Fresno State serialized Implementation Stage 1 refresh after merged VEN-000659 maintenance",
-    "authorization": "Owner instructed one complete Fresno State Stage 1 inventory against refreshed protected main after the authorized VEN-000659 maintenance merged. Apply only the already-approved representation-only WCAC→WCC and PCAA→Big West key mappings and the approved CCAA historical registration, preserving the immutable Research Freeze and all accepted conference chronology/display/basis/notes. This request is read-only Stage 1 only; no Phase 0, Stage 2, Research reopening, owner gate, release, venue maintenance, protected-main mutation, or other authority is granted."
+    "origin": "ChatGPT Fresno State serialized Implementation — guarded Phase 0 after Stage 1 PASS",
+    "authorization": "Owner instructed Proceed after durable Fresno State Stage 1 fresno-state-stage1-0002 PASS on protected main 9e5e782716deb303a60762bc74dee6dedfba7e68. Execute exactly one guarded PHASE0 transaction using the immutable Research Freeze, the approved conference reconciliation (WCAC→WCC, PCAA→Big West, CCAA historical registration), and the accepted top-level scope 1955-56..1957-58|1970-71+. Authorized scope includes Integration Freeze, safe target-school/global registrations permitted by Phase 0, create-once data/fresno-state-onboarding publication, repository validation, write-ahead/CAS, independent fresh verification, and lock release. Do not reopen Research or Stage 1, begin Stage 2, create unrelated maintenance, invoke owner gates, merge, Preview, or release."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
