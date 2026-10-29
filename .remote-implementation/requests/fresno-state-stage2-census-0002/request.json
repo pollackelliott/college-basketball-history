@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fresno-state-stage2-census-0002",
+  "school_key": "fresno-state",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "fc73ee66622477475105730bbd006ba4e130fd68",
+  "previous_control_state_sha256": "215933906f560671935c4444915294b8e899fa82b1996ef6185701d339697c05",
+  "expected_protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/fresno-state/fresno-state-phase0-scope-supersession-0002/successor-manifest.json",
+    "sha256": "9fc99b25a2929f6ff43dd6e13c5ac298f955351f6e85aaf369fbb97e663c054f"
+  },
+  "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
+  "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "creation_provenance": {
+    "origin": "ChatGPT Fresno State serialized Implementation — fresh read-only Stage 2 capability census after verified scope supersession",
+    "authorization": "Owner explicitly instructed one fresh read-only Fresno State STAGE2_CENSUS against onboarding head e83cfac049004fbe277292d374a359fdca3f0263 and protected main 42f820e3dd4dd315e4c1bca04172a0690028299e, bound to Integration Freeze 51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3 and semantic snapshot ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db. The prior Stage 2 decision universe is superseded and must not be reused. Preserve a durable census checkpoint and independent fresh verification, verify whether the prior NCAA-appearance blocker remains, and stop. No tracked repair, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, release, recovery, or unrelated mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
