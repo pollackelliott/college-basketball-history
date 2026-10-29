@@ -686,6 +686,11 @@ def validate_request(request: dict[str, Any]) -> None:
             "superseded_successor",
             required=True,
         )
+        _validate_payload_ref(
+            request.get("superseded_successor_verification"),
+            "superseded_successor_verification",
+            required=True,
+        )
         _require_sha(
             request.get("superseded_integration_freeze_sha256"),
             64,
