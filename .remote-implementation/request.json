@@ -1,41 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-stage2-gate1-fill-0001",
+  "request_id": "fresno-state-stage2-preseal-rehearsal-0001",
   "school_key": "fresno-state",
-  "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "d9afc49796e5975afdda1ff71c95abfb5b3fba0d",
-  "previous_control_state_sha256": "c7dd2892887046e167424d8e742d3ca92ec970cd380ff6216779fd30699c92dc",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "30b08325bbc5fca7f18b325920fe66a079e9693d",
+  "previous_control_state_sha256": "e86bf67efd6a2dab16e9a16416a10ba6b020e81467584aae1f7be8f6b10ddc77",
   "expected_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "target_branch": "data/fresno-state-onboarding",
   "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-proposal-0002/checkpoint-manifest.json",
-    "sha256": "500ea1a55476bf3bfe4f720edb46bf83a1b726a0755b4d17c2c811276835db0f"
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "1f4531e6cee7b222e3b6c0dc28b1a4e773e43f569c85b2e3d2e86a384f40efb9"
   },
-  "stage2_proposal_verification": {
-    "path": ".remote-implementation/verifications/fresno-state/fresno-state-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
-    "sha256": "a99671bc9d80891accd41dc7cfc79192e4ba90893e36424abc0d85117275e064"
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "17aeb187f5a88e8361d0db531a7fd8fa8aaa8ca260e0923f838169c4d35c30b5"
   },
   "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
   "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
   "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
   "recommendation_map_sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09",
   "approved_plan_hash_preview": "80d074b9e918e7b471f82bfae15da54054a4b4d21536d3d6b687de44132035f8",
-  "owner_gate_1_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly wrote 'APPROVED. Proceed' immediately after the Fresno State Implementation lane stated that explicit Owner Gate 1 approval was required and identified the exact fresh-verified proposal packet: checkpoint 500ea1a55476bf3bfe4f720edb46bf83a1b726a0755b4d17c2c811276835db0f, decision universe f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f, recommendation map 8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09, and approved-plan preview 80d074b9e918e7b471f82bfae15da54054a4b4d21536d3d6b687de44132035f8. This approves the exact 18-decision Fresno Owner Gate 1 packet and authorizes exact-map fill only, not pre-seal, seal, apply, tracked basketball mutation, release, merge, or Production.",
-    "proposal_checkpoint_sha256": "500ea1a55476bf3bfe4f720edb46bf83a1b726a0755b4d17c2c811276835db0f",
-    "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
-    "recommendation_map_sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09",
-    "approved_plan_hash_preview": "80d074b9e918e7b471f82bfae15da54054a4b4d21536d3d6b687de44132035f8"
-  },
+  "filled_review_sha256": "adb9429067d35a95713e14bdddeb13001ede04f4f3a5c080350fdab7f1649ff1",
+  "decision_id_set_sha256": "d48176f23dce747068de49de96c2d10784e4c181bc44162362b418ff0b60e4a0",
   "creation_provenance": {
-    "origin": "ChatGPT Fresno State serialized Implementation — exact fresh-verified Owner Gate 1 approval",
-    "authorization": "Owner's explicit 'APPROVED. Proceed' grants Owner Gate 1 approval for the exact 18-decision Fresno proposal packet from fresno-state-stage2-proposal-0002, authorizing exactly one guarded STAGE2_GATE1_FILL. Fill ignored review only; no pre-seal rehearsal, cryptographic seal, sealed apply, tracked basketball mutation, release, Preview, merge, Production, recovery, or unrelated authority."
+    "origin": "ChatGPT Fresno State serialized Implementation — fresh-verified Owner Gate 1 fill pre-seal technical rehearsal",
+    "authorization": "Owner said Proceed after the Fresno State Owner Gate 1 fill completed with fresh equivalence PASS. This authorizes exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against the exact fill checkpoint 1f4531e6cee7b222e3b6c0dc28b1a4e773e43f569c85b2e3d2e86a384f40efb9 and verification 17aeb187f5a88e8361d0db531a7fd8fa8aaa8ca260e0923f838169c4d35c30b5. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, PR merge, release, Production, recovery, or unrelated authority is granted."
   },
   "authority": {
-    "owner_gate_1": true,
+    "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
@@ -44,8 +38,8 @@
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": true,
-    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
