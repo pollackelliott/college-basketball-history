@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80",
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "72d8e79070f91c8c12529c22c2f6b67645f4840f",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "recovered_request_id": "fresno-state-phase0-scope-supersession-0001",
+  "request_id": "fresno-state-phase0-scope-supersession-recover-0002",
+  "schema_version": 1,
+  "target_branch": "data/fresno-state-onboarding"
+}
