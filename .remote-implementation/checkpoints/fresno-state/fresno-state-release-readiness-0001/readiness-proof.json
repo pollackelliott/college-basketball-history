@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
+  "apply_request_id": "fresno-state-stage2-sealed-apply-0001",
+  "approved_plan_hash": "f3dfaa04c818d7d8de1d4c9553b53db2d42bd13deffbcd484ae10e7161fea5dc",
+  "changed_path_count": 63,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
+  "release_manifest_sha256": "0ab9651af22ec4e8597a247c331fda6710ccf94eafcd84852ad32103bd3c1770",
+  "school_key": "fresno-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "ad9509ea223213c5cb55746a52a90f4232944ce261a4b8e1d876458cfbc6ce82",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "2c1a51da797ed4822c14a7c6dd16ae23000efd4bc53badccad4e07b427e95aa6",
+  "writeahead_sha256": "d50a42463acb77bb80596dc793c854bee448e05a41141fc0b36f442a3e15d86f"
+}
