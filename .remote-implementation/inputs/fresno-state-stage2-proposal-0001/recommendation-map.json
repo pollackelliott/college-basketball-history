@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+  "source_census_checkpoint_sha256": "cc10e265081fd7a9baf84b0e41a0eef59512ed55bcd921b0a00af50ef1ea33cb",
+  "prepared_against_protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "prepared_against_target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "decisions": {
+    "DISCREPANCY-FRESNO-S1-1971-72-007-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1976-77-009-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1978-79-008-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1979-80-013-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1979-80-013-RESULT_WINNER_TEAM_KEY": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1980-81-027-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1981-82-029-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-FRESNO-S1-1981-82-030-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1982-83-032-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-1982-83-033-GAME_DATE": "KEEP_CANONICAL",
+    "IDENTITY-FRESNO-S1-1996-97-031": "MATCH_CANONICAL:CBBG-0103403",
+    "CONDITIONAL-DISCREPANCY-FRESNO-S1-1996-97-031-CBBG-0103403-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-FRESNO-S1-2015-16-033-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-FRESNO-S1-2020-21-021-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-FRESNO-S1-2022-23-005-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-FRESNO-S1-2025-26-010-SITE_TYPE": "KEEP_CANONICAL",
+    "ACCOMPLISHMENTS-FRESNO-STATE": "APPLY_ACCOMPLISHMENT_PATCH",
+    "PUBLICATION-FRESNO-STATE": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "DISCREPANCY-FRESNO-S1-1971-72-007-SCORE": "Texas Tech's official 1971-72 record lists Dec. 22 Fresno State as a 98-85 Texas Tech win, confirming the canonical Fresno-perspective score 85-98 and disproving the Fresno source's 95-98 transcription.",
+    "DISCREPANCY-FRESNO-S1-1976-77-009-SITE_TYPE": "Washington State's official 1976-77 record lists Fresno State as 'vs.' at Olympia and includes the game in its neutral-site season count, confirming canonical NEUTRAL rather than Fresno's opponent-home notation.",
+    "DISCREPANCY-FRESNO-S1-1978-79-008-SITE_TYPE": "Georgetown's official opponent history lists the Dec. 20, 1978 Fresno State game as neutral, 49-42. This confirms canonical NEUTRAL and shows Fresno's 'at Georgetown' notation is not H/A authority.",
+    "DISCREPANCY-FRESNO-S1-1979-80-013-SCORE": "Utah State's official Fresno State opponent history lists Jan. 10, 1980 in Logan as a Utah State 78-65 win, confirming canonical score orientation.",
+    "DISCREPANCY-FRESNO-S1-1979-80-013-RESULT_WINNER_TEAM_KEY": "Utah State's official Fresno State opponent history lists Jan. 10, 1980 in Logan as a Utah State 78-65 win, confirming Utah State as canonical winner.",
+    "DISCREPANCY-FRESNO-S1-1980-81-027-GAME_DATE": "Utah State's official opponent history dates the neutral Anaheim Big West semifinal, Fresno State 71-57 Utah State, to March 6, 1981, confirming the canonical date.",
+    "DISCREPANCY-FRESNO-S1-1981-82-029-GAME_DATE": "West Virginia's official game center and opponent history date the neutral Logan NCAA game, Fresno State 50-46 West Virginia, to March 13, 1982, matching Fresno source evidence and disproving canonical March 12.",
+    "DISCREPANCY-FRESNO-S1-1981-82-030-GAME_DATE": "Georgetown's official 1981-82 schedule dates its neutral Provo NCAA Sweet Sixteen win over Fresno State 58-40 to March 19, 1982, confirming the canonical date.",
+    "DISCREPANCY-FRESNO-S1-1982-83-032-GAME_DATE": "Michigan State's official NIT history dates Fresno State's 72-58 second-round win in East Lansing to March 21, 1983, confirming the canonical date.",
+    "DISCREPANCY-FRESNO-S1-1982-83-033-GAME_DATE": "Oregon State's official Fresno State series notes date Fresno State's 76-67 NIT third-round win in Corvallis to March 24, 1983, confirming the canonical date.",
+    "IDENTITY-FRESNO-S1-1996-97-031": "TCU's official record book and all-time Fresno State series both list one WAC Tournament game in Las Vegas on March 6, 1997, TCU 106-81 Fresno State. The unique season/opponent/score/postseason match is CBBG-0103403; Fresno's March 4 date is erroneous.",
+    "CONDITIONAL-DISCREPANCY-FRESNO-S1-1996-97-031-CBBG-0103403-GAME_DATE": "TCU institutional authority dates the matched WAC Tournament game to March 6, 1997; retain that canonical date after matching CBBG-0103403.",
+    "DISCREPANCY-FRESNO-S1-2015-16-033-GAME_DATE": "Fresno State's official box score, game notes, and opponent history all date the Mountain West semifinal win over Colorado State 64-56 to March 11, 2016, matching the Fresno source and disproving canonical March 12.",
+    "DISCREPANCY-FRESNO-S1-2020-21-021-GAME_DATE": "Boise State's official recap identifies Fresno State's 67-64 road win as Tuesday, March 2, 2021, matching the Fresno source and disproving canonical March 3.",
+    "DISCREPANCY-FRESNO-S1-2022-23-005-SITE_TYPE": "Washington's official record book places UW 62-57 Fresno State in the 2022 Wooden Legacy in Anaheim, Calif. Fresno's frozen row is neutral at Anaheim Convention Center Arena; use source NEUTRAL and the permanent site-sync behavior to replace the incorrect Seattle/Hec Edmundson canonical site metadata.",
+    "DISCREPANCY-FRESNO-S1-2025-26-010-SITE_TYPE": "Existing project-authoritative Arkansas 2025-26 evidence classifies the standalone Simmons Bank Arena game in North Little Rock as Arkansas Home under the accepted Little Rock/North Little Rock rule. Retain canonical TEAM_A_HOME.",
+    "ACCOMPLISHMENTS-FRESNO-STATE": "Fresno State Athletics' official Team Championship History lists the in-scope men's basketball conference titles since 1970-71 as five regular-season titles (PCAA 1978, 1981, 1982; WAC 2001, 2003) and two tournament titles (PCAA 1984; MW 2016). Patch the stale 6/5 baseline to 5/2. NCAA appearances=6, Final Fours=0, national titles=0, and Sweet Sixteen/1982 already match canonical derivation and remain unchanged.",
+    "PUBLICATION-FRESNO-STATE": "Recommend enabling the page only through the sealed onboarding workflow after all 18 evidence-backed decisions, including the accomplishment correction, pass Gate 1 and permanent automated gates."
+  },
+  "canonical_patch_by_decision": {
+    "ACCOMPLISHMENTS-FRESNO-STATE": {
+      "conference_regular_season_championships": "5",
+      "conference_tournament_championships": "2"
+    }
+  }
+}
