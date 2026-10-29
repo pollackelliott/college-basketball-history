@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-release-preview-verify-0001",
+  "request_id": "fresno-state-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "fresno-state",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "4058410f6da3443bbcd299983758ed3e37e622a8",
-  "previous_control_state_sha256": "d69204d333cd85af2544d4f337a19d2fc85d7973544fc0b728fd1164f2a9666c",
+  "previous_control_state_commit": "8af4448625fb3e425c739e2dab86dfbb212a113a",
+  "previous_control_state_sha256": "1ada7b82af7343ec8948f97da8bdba3b2a5bf0e177b9dba244bb6eccfd24de9e",
   "expected_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "target_branch": "data/fresno-state-onboarding",
   "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "f03e0839fd8ef9b73a1029e80a3181dae00b3408e840c3e017ccef99215dfc00"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "819c6963c5ae8f89fb1cc9cac64eb33fbe28e6ca3edcb2226b581d6eea395324"
-  },
+  "pr_number": 401,
   "approved_plan_hash": "f3dfaa04c818d7d8de1d4c9553b53db2d42bd13deffbcd484ae10e7161fea5dc",
   "release_manifest_sha256": "0ab9651af22ec4e8597a247c331fda6710ccf94eafcd84852ad32103bd3c1770",
-  "pr_number": 401,
+  "preview_deployment_id": 7418782022,
+  "preview_url": "https://college-basketball-history-62wc521gi-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "b522d3bcd143450a0152142529a4b2ab9797870163ade2a875b583bcebbe31b8"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "a710599097d0927cc21919258f1bb2637fe5abf87fc92ebdc2e88a07d8f06d12"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “Preview APPROVED. Proceed” after being presented the exact fresh-verified Fresno State PR #401 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
+    "preview_checkpoint_sha256": "b522d3bcd143450a0152142529a4b2ab9797870163ade2a875b583bcebbe31b8",
+    "preview_verification_sha256": "a710599097d0927cc21919258f1bb2637fe5abf87fc92ebdc2e88a07d8f06d12",
+    "pr_number": 401,
+    "pr_head_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+    "preview_deployment_id": 7418782022,
+    "preview_url": "https://college-basketball-history-62wc521gi-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
     "origin": "ChatGPT Fresno State serialized Implementation",
-    "authorization": "Owner said Proceed for the bounded release-preparation phase after fresh-verified RELEASE_READINESS. The school lane created exact release PR #401 through the authorized GitHub connector using preserved pr-body.md; readback confirmed open non-draft PR #401, base main, head data/fresno-state-onboarding, exact head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4, mergeable true, and byte-exact preserved body. This authorizes exactly one read-only RELEASE_PREVIEW_VERIFY against that PR and fresh readiness authority, through independently verified OWNER_GATE_2_READY. It grants no Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “Preview APPROVED. Proceed” for the exact fresh-verified Fresno State PR #401 Preview at head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 and Vercel Preview deployment 7418782022. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
@@ -39,8 +48,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
