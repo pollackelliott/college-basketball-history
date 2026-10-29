@@ -604,7 +604,7 @@ jobs:
 
   fresh-phase0-verification:
     needs: process-request
-    if: needs.process-request.result == 'success' && (needs.process-request.outputs.operation == 'PHASE0' || needs.process-request.outputs.operation == 'RECOVER')
+    if: needs.process-request.result == 'success' && (needs.process-request.outputs.operation == 'PHASE0' || needs.process-request.outputs.operation == 'PHASE0_SCOPE_SUPERSESSION' || needs.process-request.outputs.operation == 'RECOVER')
     runs-on: ubuntu-latest
     steps:
       - name: Check out latest durable control state
@@ -626,7 +626,7 @@ jobs:
           path: runtime
           fetch-depth: 0
 
-      - name: Reconstruct and verify stable Phase 0
+      - name: Reconstruct and verify Phase 0 authority
         working-directory: control
         env:
           GH_TOKEN: ${{ github.token }}

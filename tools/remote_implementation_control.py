@@ -23,6 +23,7 @@ REQUEST_SCHEMA_VERSION = 1
 
 OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
+OP_PHASE0_SCOPE_SUPERSESSION = "PHASE0_SCOPE_SUPERSESSION"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
 OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
@@ -40,6 +41,7 @@ OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
     OP_STAGE1,
     OP_PHASE0,
+    OP_PHASE0_SCOPE_SUPERSESSION,
     OP_STAGE2_CENSUS,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
@@ -364,6 +366,17 @@ def validate_request(request: dict[str, Any]) -> None:
         )
     else:
         _require(authority.get("owner_gate_2") is False, "REQUEST_GATE2_AUTHORITY_FORBIDDEN")
+    if operation == OP_PHASE0_SCOPE_SUPERSESSION:
+        _require(
+            authority.get("phase0_scope_supersession") is True,
+            "SCOPE_SUPERSESSION_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("phase0_scope_supersession") is not True,
+            "REQUEST_SCOPE_SUPERSESSION_AUTHORITY_FORBIDDEN",
+        )
+
     if operation == OP_VENUE_IDENTITY_MAINTENANCE:
         _require(
             authority.get("venue_identity_maintenance") is True,
@@ -561,7 +574,7 @@ def validate_request(request: dict[str, Any]) -> None:
             "VENUE_MAINTENANCE_AUTHORIZATION_SPEC_MISMATCH",
         )
 
-    if operation in {OP_STAGE1, OP_PHASE0}:
+    if operation in {OP_STAGE1, OP_PHASE0, OP_PHASE0_SCOPE_SUPERSESSION}:
         checkpoint = request.get("research_checkpoint")
         _require(isinstance(checkpoint, dict), "REQUEST_RESEARCH_CHECKPOINT_MISSING")
         _require_sha(
@@ -632,6 +645,97 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("stage2_reconciliation_diagnostic") is not True,
             "PHASE0_REQUEST_STAGE2_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
+
+    if operation == OP_PHASE0_SCOPE_SUPERSESSION:
+        for key in (
+            "phase0", "recovery", "stage2_census",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release_gate2_approval",
+            "release_production_proof", "venue_identity_maintenance", "release",
+        ):
+            _require(
+                authority.get(key) is not True,
+                "SCOPE_SUPERSESSION_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "SCOPE_SUPERSESSION_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "SCOPE_SUPERSESSION_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("scope_supersession_spec"),
+            "scope_supersession_spec",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("superseded_phase0_successor"),
+            "superseded_phase0_successor",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("superseded_successor"),
+            "superseded_successor",
+            required=True,
+        )
+        _validate_payload_ref(
+            request.get("superseded_successor_verification"),
+            "superseded_successor_verification",
+            required=True,
+        )
+        _require_sha(
+            request.get("superseded_integration_freeze_sha256"),
+            64,
+            "SCOPE_SUPERSESSION_OLD_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("superseded_semantic_snapshot_sha256"),
+            64,
+            "SCOPE_SUPERSESSION_OLD_SEMANTIC_SHA_INVALID",
+        )
+        scope = request.get("history_scope")
+        _require(isinstance(scope, dict), "REQUEST_HISTORY_SCOPE_MISSING")
+        for key in ("start_season", "basis", "notes"):
+            _require(
+                bool(str(scope.get(key) or "").strip()),
+                f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING",
+            )
+        if str(scope.get("basis") or "").strip() == "TOP_LEVEL_INTERVALS":
+            _require(
+                bool(str(scope.get("intervals") or "").strip()),
+                "REQUEST_HISTORY_SCOPE_INTERVALS_MISSING",
+            )
+        authorization = request.get("scope_supersession_authorization")
+        _require(
+            isinstance(authorization, dict)
+            and authorization.get("approved") is True,
+            "SCOPE_SUPERSESSION_CONTROL_CENTER_APPROVAL_REQUIRED",
+        )
+        _require(
+            authorization.get("authority_kind") == "CONTROL_CENTER_EXPLICIT",
+            "SCOPE_SUPERSESSION_AUTHORITY_KIND_INVALID",
+        )
+        _require(
+            bool(str(authorization.get("authorization_basis") or "").strip()),
+            "SCOPE_SUPERSESSION_AUTHORIZATION_BASIS_REQUIRED",
+        )
+        _require(
+            authorization.get("spec_sha256")
+            == request["scope_supersession_spec"]["sha256"],
+            "SCOPE_SUPERSESSION_AUTHORIZATION_SPEC_MISMATCH",
+        )
+        _require(
+            request.get("venue_reconciliation") is None
+            and request.get("conference_reconciliation") is None,
+            "SCOPE_SUPERSESSION_RECONCILIATION_PAYLOAD_FORBIDDEN",
         )
 
     if operation == OP_STAGE2_CENSUS:
@@ -1265,6 +1369,7 @@ def verify_request_predecessor(
             )
         elif state.get("active_operation") in {
             OP_PHASE0,
+            OP_PHASE0_SCOPE_SUPERSESSION,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
             OP_STAGE2_SEALED_APPLY,
         }:
