@@ -124,18 +124,19 @@
     "fresno-state-venue-maintenance-0001",
     "fresno-state-stage1-0002",
     "fresno-state-phase0-0001",
-    "fresno-state-stage2-census-0001"
+    "fresno-state-stage2-census-0001",
+    "fresno-state-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40816611122:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fresno-state-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "ec7b3237ebba9fa5f2ada5435bdc73469ade657bde6c76af25a77d04a1c38e1e",
+  "active_school_key": "fresno-state",
+  "active_target_branch": "data/fresno-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -274,8 +275,11 @@
     "target_branch": "data/fresno-state-onboarding",
     "target_sha": "e8b95d8d11baa2748e6657347db53638006d1bac"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40816611122",
+  "lock_acquisition_request_commit": "1e0e0a4b7e644f3c978cd78f0e0758ae4587102e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

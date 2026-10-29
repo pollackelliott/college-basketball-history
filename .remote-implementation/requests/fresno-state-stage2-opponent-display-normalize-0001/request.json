@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fresno-state-stage2-opponent-display-normalize-0001",
+  "school_key": "fresno-state",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "d364415a07a8b9b27997b588ee83373fb273c5f2",
+  "previous_control_state_sha256": "20f58a9312234829de420a12dd0ba5738c5930c000e7aed50d216f5471b15ab5",
+  "expected_protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "88aba063fc2e9edf6ff20977bec4bdc88a289fb30094a9fc0229df577d81328a"
+  },
+  "integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "creation_provenance": {
+    "origin": "ChatGPT Fresno State serialized Implementation — census-bound opponent display normalization",
+    "authorization": "Owner said Proceed after independently verified Fresno State Stage 2 census fresno-state-stage2-census-0001, which is BLOCKED solely by exactly one deterministic historical opponent-display conflict for saint-katherine: Fresno display 'Saint Katherine' versus existing project authority 'University of Saint Katherine', with zero owner decisions, zero semantic drift, and no other detected blocker topology. Authorize exactly one repository-owned STAGE2_OPPONENT_DISPLAY_NORMALIZE operation bound to that fresh census, using permanent source-game synchronization, representation-only field proof, Integration Freeze semantic nonregression, repository validation, write-ahead/CAS publication, regenerated no-map census, and independent fresh verification. No identity re-adjudication, unrelated opponent cleanup, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing/apply, Preview, release, protected-main mutation, Research reopening, or other Stage 2 mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
