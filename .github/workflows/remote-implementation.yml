@@ -100,64 +100,6 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-
-  fresh-pending-phase0-scope-supersession-verification:
-    if: startsWith(github.event.head_commit.message, '[remote-implementation-internal][verify-phase0]')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out latest durable control state
-        uses: actions/checkout@v4
-        with:
-          ref: control/remote-implementation
-          path: control
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Read exact pending Phase 0 authority
-        id: pending
-        shell: bash
-        working-directory: control
-        run: |
-          python - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
-          from pathlib import Path
-          state=json.loads(Path(".remote-implementation/control-state.json").read_text())
-          last=state.get("last_operation") or {}
-          if state.get("lifecycle_state") != "IDLE":
-              raise SystemExit("pending verifier requires IDLE control")
-          if last.get("operation") != "PHASE0_SCOPE_SUPERSESSION":
-              raise SystemExit("pending verifier requires scope supersession last operation")
-          if last.get("fresh_runner_verification") != "PENDING":
-              raise SystemExit("pending verifier requires PENDING fresh verification")
-          print("protected_main_sha="+str(last.get("protected_main_sha","")))
-          PY
-
-      - name: Check out exact authority-bound protected-main runtime
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ steps.pending.outputs.protected_main_sha }}
-          path: runtime
-          fetch-depth: 0
-
-      - name: Independently verify pending Phase 0 scope supersession
-        working-directory: control
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
-
-      - name: Upload verification diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: remote-implementation-pending-scope-verify-${{ github.run_id }}-${{ github.run_attempt }}
-          path: /tmp/remote-implementation-verification
-          if-no-files-found: ignore
-          retention-days: 14
-
   fresh-owner-gate2-approval-verification:
     needs: process-request
     if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'RELEASE_GATE2_APPROVAL'
