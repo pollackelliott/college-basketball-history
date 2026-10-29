@@ -135,18 +135,19 @@
     "fresno-state-stage2-gate1-fill-0001",
     "fresno-state-stage2-preseal-rehearsal-0001",
     "fresno-state-stage2-gate1-seal-0001",
-    "fresno-state-stage2-sealed-apply-0001"
+    "fresno-state-stage2-sealed-apply-0001",
+    "fresno-state-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fresno-state-release-readiness-0001",
+  "active_request_sha256": "0a380b97d08401c4961d1031a6cb629d494e0dcc3ac31ad6cac623da0ac501db",
+  "active_school_key": "fresno-state",
+  "active_target_branch": "data/fresno-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -301,8 +302,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/fresno-state/fresno-state-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "d50a42463acb77bb80596dc793c854bee448e05a41141fc0b36f442a3e15d86f"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40918966432",
+  "lock_acquisition_request_commit": "1d9c3941a33f02822709575536486445bf87402c",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
