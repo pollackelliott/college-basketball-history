@@ -80,19 +80,29 @@ Pure generic tooling repairs required to execute the authorized Stage 1 contract
 
 When an authorized shared-reference transaction deterministically changes generated site output, the transaction/maintenance batch owns that derived refresh and freshness proof. Do not merge the source/reference mutation first and open a second protected-main PR merely to regenerate predictable derived site JSON. The refresh must participate in the same rollback/validation boundary where permanent tooling supports it.
 
-### Guarded execution for an authorized duplicate-venue repair
+### Guarded execution for authorized venue maintenance
 
-When Stage 1 exposes one already-classified duplicate physical venue that necessarily rewrites
-existing global/published state, the Control Center may authorize one exact maintenance spec.
-After that authorization, the school Implementation lane may execute the spec through the
-repository-owned `VENUE_IDENTITY_MAINTENANCE` remote operation rather than transporting large
-canonical/derived files through chat.
+When Stage 1 exposes either one already-classified duplicate physical venue or one settled
+in-place geography correction to an existing venue identity that necessarily rewrites
+global/published state, the Control Center may authorize one exact maintenance spec. After that
+authorization, the school Implementation lane may execute the spec through the repository-owned
+`VENUE_IDENTITY_MAINTENANCE` remote operation rather than transporting large canonical/derived
+files through chat.
 
-The remote operation does not supply historical authority. The historical/identity decision
-must already be settled and explicitly authorized by the Control Center. It only executes the
-unchanged permanent `venue_identity_transaction.py` plan/apply path against exact protected
-main, with global mutation lock, durable write-ahead, CAS publication to a dedicated
-maintenance branch, and independent exact-tree replay.
+An in-place geography correction is valid only when the existing venue ID, venue key, and
+physical identity remain unchanged. The spec must bind the exact old and new city/state plus
+the resolution basis and may update only registry-backed geography surfaces: the global venue
+registry, canonical rows carrying that exact venue identity, affected published school
+`venues.csv` rows, and deterministic derived site JSON. Literal source assertions and
+documentary site-evidence rows retain their source geography and must not be rewritten merely
+to match the corrected registry locality.
+
+The remote operation does not supply historical authority. The historical/identity or
+geography decision must already be settled and explicitly authorized by the Control Center.
+It executes the unchanged permanent `venue_identity_transaction.py` sealed plan/apply path
+against exact protected main, with global mutation lock, durable write-ahead, intent-constrained
+changed-path validation, CAS publication to a dedicated maintenance branch, and independent
+exact-tree replay.
 
 The maintenance PR remains separate from the school onboarding branch. After it merges, the
 school must refresh protected main and rerun one complete Stage 1 inventory. A normal new

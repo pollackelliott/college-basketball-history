@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Permanent-tool wrapper for guarded remote venue-identity maintenance."""
+"""Permanent-tool wrapper for guarded remote venue identity/geography maintenance."""
 from __future__ import annotations
 
 import json
@@ -24,12 +24,17 @@ SPEC_PATH_RE = re.compile(
     r"([a-z0-9][a-z0-9._-]{1,127})\.json$"
 )
 
-FIXED_MUTATION_PATHS = {
+MERGE_MUTATION_PATHS = {
     "data/reference/venues.csv",
     "data/reference/venue-names.csv",
     "data/canonical/games.csv",
     "data/evidence/game-assertions.csv",
     "data/evidence/ncaa-tournament-sites.csv",
+}
+
+GEOGRAPHY_MUTATION_PATHS = {
+    "data/reference/venues.csv",
+    "data/canonical/games.csv",
 }
 
 
@@ -71,8 +76,10 @@ def add_maintenance_worktree(
 
 def _plan_school_paths(plan: dict[str, Any]) -> set[str]:
     paths: set[str] = set()
-    for merge in plan.get("merges") or []:
-        for item in merge.get("school_files") or []:
+    operations = list(plan.get("merges") or [])
+    operations.extend(plan.get("geography_corrections") or [])
+    for operation in operations:
+        for item in operation.get("school_files") or []:
             path = str(item.get("path") or "").strip()
             if path:
                 paths.add(path)
@@ -84,9 +91,12 @@ def _validate_changed_paths(
     plan: dict[str, Any],
     repository_spec_path: str,
 ) -> list[str]:
-    allowed = FIXED_MUTATION_PATHS | _plan_school_paths(plan) | {
-        repository_spec_path
-    }
+    allowed = {repository_spec_path}
+    if plan.get("merges"):
+        allowed |= MERGE_MUTATION_PATHS
+    if plan.get("geography_corrections"):
+        allowed |= GEOGRAPHY_MUTATION_PATHS
+    allowed |= _plan_school_paths(plan)
     unexpected = [
         path
         for path in changed
@@ -105,7 +115,10 @@ def _validate_changed_paths(
         raise Stop("VENUE_MAINTENANCE_SPEC_NOT_COMMITTED")
     if "data/reference/venues.csv" not in changed:
         raise Stop("VENUE_MAINTENANCE_VENUE_REGISTRY_UNCHANGED")
-    if "data/reference/venue-names.csv" not in changed:
+    if (
+        plan.get("merges")
+        and "data/reference/venue-names.csv" not in changed
+    ):
         raise Stop("VENUE_MAINTENANCE_NAME_REGISTRY_UNCHANGED")
     return sorted(allowed)
 
@@ -261,7 +274,7 @@ def prepare_venue_maintenance(
         if line.startswith("D\t")
     )
 
-    commit_message = "Reconcile shared venue identities for %s" % school_key
+    commit_message = "Reconcile shared venue references for %s" % school_key
     git("commit", "-m", commit_message, cwd=worktree)
     prepared = git("rev-parse", "HEAD", cwd=worktree).stdout.strip()
     parent = git("rev-parse", "%s^" % prepared, cwd=worktree).stdout.strip()

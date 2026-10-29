@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sealed transaction for merging duplicate global physical-venue identities."""
+"""Sealed transaction for duplicate merges and in-place venue geography corrections."""
 
 from __future__ import annotations
 
@@ -88,19 +88,35 @@ def rewrite_registry_marker_keys(notes: str, absorbed_key: str, survivor_key: st
 
 def load_spec(path: Path):
     doc = json.loads(path.read_text(encoding="utf-8"))
-    if doc.get("schema_version") != 1 or not isinstance(doc.get("merges"), list):
-        raise TransactionError("spec must be schema_version 1 with a merges list")
+    if doc.get("schema_version") != 1:
+        raise TransactionError("spec must use schema_version 1")
+
+    raw_merges = doc.get("merges", [])
+    raw_corrections = doc.get("geography_corrections", [])
+    if not isinstance(raw_merges, list) or not isinstance(raw_corrections, list):
+        raise TransactionError(
+            "spec merges and geography_corrections must both be lists"
+        )
+    if not raw_merges and not raw_corrections:
+        raise TransactionError(
+            "spec must contain at least one merge or geography correction"
+        )
+
     merges = []
     used_absorbed = set()
-    for raw in doc["merges"]:
+    merge_ids = set()
+    for raw in raw_merges:
         survivor = clean(raw.get("survivor_venue_id"))
         absorbed = clean(raw.get("absorbed_venue_id"))
         basis = clean(raw.get("resolution_basis"))
         if not survivor or not absorbed or survivor == absorbed or not basis:
-            raise TransactionError("each merge requires survivor, absorbed, and resolution_basis")
+            raise TransactionError(
+                "each merge requires survivor, absorbed, and resolution_basis"
+            )
         if absorbed in used_absorbed:
             raise TransactionError(f"absorbed venue listed twice: {absorbed}")
         used_absorbed.add(absorbed)
+        merge_ids.update({survivor, absorbed})
         merges.append(
             {
                 "survivor_venue_id": survivor,
@@ -110,7 +126,64 @@ def load_spec(path: Path):
                 "expected_school_rows": raw.get("expected_school_rows"),
             }
         )
-    return merges
+
+    geography_corrections = []
+    used_correction_ids = set()
+    for raw in raw_corrections:
+        venue_id = clean(raw.get("venue_id"))
+        venue_key = clean(raw.get("venue_key"))
+        from_city = clean(raw.get("from_city"))
+        from_state = clean(raw.get("from_state"))
+        to_city = clean(raw.get("to_city"))
+        to_state = clean(raw.get("to_state"))
+        basis = clean(raw.get("resolution_basis"))
+        if not all(
+            (
+                venue_id,
+                venue_key,
+                from_city,
+                from_state,
+                to_city,
+                to_state,
+                basis,
+            )
+        ):
+            raise TransactionError(
+                "each geography correction requires venue_id, venue_key, "
+                "from_city, from_state, to_city, to_state, and resolution_basis"
+            )
+        if (from_city, from_state) == (to_city, to_state):
+            raise TransactionError(
+                f"{venue_id}: geography correction must change city/state"
+            )
+        if venue_id in used_correction_ids:
+            raise TransactionError(
+                f"geography correction venue listed twice: {venue_id}"
+            )
+        if venue_id in merge_ids:
+            raise TransactionError(
+                f"{venue_id}: one spec may not both merge and geographically correct "
+                "the same venue identity"
+            )
+        used_correction_ids.add(venue_id)
+        geography_corrections.append(
+            {
+                "venue_id": venue_id,
+                "venue_key": venue_key,
+                "from_city": from_city,
+                "from_state": from_state,
+                "to_city": to_city,
+                "to_state": to_state,
+                "resolution_basis": basis,
+                "expected_canonical_rows": raw.get("expected_canonical_rows"),
+                "expected_school_rows": raw.get("expected_school_rows"),
+            }
+        )
+
+    return {
+        "merges": merges,
+        "geography_corrections": geography_corrections,
+    }
 
 
 def structured_school_paths(repo: Path):
@@ -132,7 +205,9 @@ def _assert_expected(label: str, expected, actual: int, blockers: list[str]):
 def build_plan(repo: Path, spec_path: Path):
     repo = repo.resolve()
     spec_path = spec_path.resolve()
-    merges = load_spec(spec_path)
+    spec = load_spec(spec_path)
+    merges = spec["merges"]
+    geography_corrections = spec["geography_corrections"]
 
     venue_path = repo / "data/reference/venues.csv"
     names_path = repo / "data/reference/venue-names.csv"
@@ -254,6 +329,120 @@ def build_plan(repo: Path, spec_path: Path):
             }
         )
 
+
+    correction_rows = []
+    for correction in geography_corrections:
+        venue_id = correction["venue_id"]
+        venue_key = correction["venue_key"]
+        venue = by_id.get(venue_id)
+        if venue is None:
+            blockers.append(f"{venue_id}: geography correction venue missing")
+            continue
+
+        actual_key = clean(venue.get("venue_key"))
+        if actual_key != venue_key:
+            blockers.append(
+                f"{venue_id}: expected venue_key {venue_key!r}, found {actual_key!r}"
+            )
+
+        actual_geography = (
+            clean(venue.get("city")),
+            clean(venue.get("state")),
+        )
+        expected_geography = (
+            correction["from_city"],
+            correction["from_state"],
+        )
+        if actual_geography != expected_geography:
+            blockers.append(
+                f"{venue_id}: expected current geography "
+                f"{expected_geography[0]!r}, {expected_geography[1]!r}; found "
+                f"{actual_geography[0]!r}, {actual_geography[1]!r}"
+            )
+
+        canonical_matches = []
+        for row in canonical:
+            row_id = clean(row.get("venue_id"))
+            row_key = clean(row.get("venue_key"))
+            if row_id == venue_id:
+                if row_key and row_key != venue_key:
+                    blockers.append(
+                        f"{venue_id}: canonical game "
+                        f"{clean(row.get('canonical_game_id')) or '[unknown game]'} "
+                        f"has conflicting venue_key {row_key!r}"
+                    )
+                canonical_matches.append(row)
+            elif row_key == venue_key:
+                blockers.append(
+                    f"{venue_id}: canonical game "
+                    f"{clean(row.get('canonical_game_id')) or '[unknown game]'} "
+                    "references the venue_key without the matching venue_id"
+                )
+
+        school_refs = []
+        for path in structured_school_paths(repo):
+            _, school_rows = read_csv(path)
+            count = 0
+            for row in school_rows:
+                row_id = clean(row.get("venue_id"))
+                row_key = clean(row.get("venue_key"))
+                if row_id == venue_id:
+                    if row_key and row_key != venue_key:
+                        blockers.append(
+                            f"{venue_id}: {path.relative_to(repo)} has conflicting "
+                            f"venue_key {row_key!r}"
+                        )
+                    count += 1
+                elif row_key == venue_key:
+                    blockers.append(
+                        f"{venue_id}: {path.relative_to(repo)} references the "
+                        "venue_key without the matching venue_id"
+                    )
+            if count:
+                touched_school_paths.add(path)
+                school_refs.append(
+                    {"path": str(path.relative_to(repo)), "row_count": count}
+                )
+
+        canonical_count = len(canonical_matches)
+        school_count = sum(item["row_count"] for item in school_refs)
+        source_assertion_count = sum(
+            1
+            for row in assertions
+            if clean(row.get("venue_id")) == venue_id
+            or clean(row.get("venue_key")) == venue_key
+        )
+        ncaa_evidence_count = sum(
+            1
+            for row in ncaa_evidence
+            if clean(row.get("venue_id")) == venue_id
+            or clean(row.get("venue_key")) == venue_key
+        )
+
+        _assert_expected(
+            f"{venue_id} geography canonical rows",
+            correction.get("expected_canonical_rows"),
+            canonical_count,
+            blockers,
+        )
+        _assert_expected(
+            f"{venue_id} geography school venue rows",
+            correction.get("expected_school_rows"),
+            school_count,
+            blockers,
+        )
+
+        correction_rows.append(
+            {
+                **correction,
+                "canonical_rows": canonical_count,
+                "source_assertion_rows": source_assertion_count,
+                "ncaa_evidence_rows": ncaa_evidence_count,
+                "school_rows": school_count,
+                "school_files": school_refs,
+            }
+        )
+
     fingerprint_paths = [
         venue_path,
         names_path,
@@ -275,6 +464,7 @@ def build_plan(repo: Path, spec_path: Path):
         "git_head": git_head(repo),
         "spec": str(spec_path.relative_to(repo)) if spec_path.is_relative_to(repo) else str(spec_path),
         "merges": rows,
+        "geography_corrections": correction_rows,
         "blockers": sorted(set(blockers)),
         "fingerprints": fingerprints,
     }
@@ -395,6 +585,9 @@ def apply_transaction(
     for merge in plan["merges"]:
         for item in merge["school_files"]:
             paths.add(repo / item["path"])
+    for correction in plan["geography_corrections"]:
+        for item in correction["school_files"]:
+            paths.add(repo / item["path"])
 
     originals = {path: path.read_bytes() for path in paths}
     site_originals = _snapshot_site_data(repo) if run_validation else {}
@@ -418,6 +611,9 @@ def apply_transaction(
         ncaa_evidence_updates = 0
         school_updates = 0
         names_reassigned = 0
+        venue_geography_corrections = 0
+        canonical_geography_updates = 0
+        school_geography_updates = 0
 
         for merge in plan["merges"]:
             survivor_id = merge["survivor_venue_id"]
@@ -535,9 +731,77 @@ def apply_transaction(
                 write_csv(path, fields, rows)
                 school_updates += changed
 
+
+        for correction in plan["geography_corrections"]:
+            venue_id = correction["venue_id"]
+            venue_key = correction["venue_key"]
+            by_id = {clean(row.get("venue_id")): row for row in venues}
+            venue = by_id[venue_id]
+            venue["city"] = correction["to_city"]
+            venue["state"] = correction["to_state"]
+
+            if "site_city" not in cfields or "site_state" not in cfields:
+                raise TransactionError(
+                    "canonical games lack site_city/site_state required for "
+                    "venue geography correction"
+                )
+            canonical_changed = 0
+            for row in canonical:
+                if clean(row.get("venue_id")) != venue_id:
+                    continue
+                if "venue_key" in cfields and clean(row.get("venue_key")) not in {
+                    "",
+                    venue_key,
+                }:
+                    raise TransactionError(
+                        f"{venue_id}: canonical venue_key changed after planning"
+                    )
+                row["site_city"] = correction["to_city"]
+                row["site_state"] = correction["to_state"]
+                canonical_changed += 1
+            if canonical_changed != correction["canonical_rows"]:
+                raise TransactionError(
+                    f"{venue_id}: planned {correction['canonical_rows']} canonical "
+                    f"geography updates, found {canonical_changed}"
+                )
+            canonical_geography_updates += canonical_changed
+
+            for item in correction["school_files"]:
+                path = repo / item["path"]
+                fields, rows = read_csv(path)
+                if "city" not in fields or "state" not in fields:
+                    raise TransactionError(
+                        f"{item['path']}: school venue rows lack city/state"
+                    )
+                changed = 0
+                for row in rows:
+                    if clean(row.get("venue_id")) != venue_id:
+                        continue
+                    if "venue_key" in fields and clean(row.get("venue_key")) not in {
+                        "",
+                        venue_key,
+                    }:
+                        raise TransactionError(
+                            f"{item['path']}: venue_key changed after planning"
+                        )
+                    row["city"] = correction["to_city"]
+                    row["state"] = correction["to_state"]
+                    changed += 1
+                if changed != item["row_count"]:
+                    raise TransactionError(
+                        f"{item['path']}: planned {item['row_count']} geography "
+                        f"updates, found {changed}"
+                    )
+                write_csv(path, fields, rows)
+                school_geography_updates += changed
+
+            venue_geography_corrections += 1
+
         write_csv(venue_path, vfields, venues)
-        write_csv(names_path, nfields, names)
-        write_csv(canonical_path, cfields, canonical)
+        if plan["merges"]:
+            write_csv(names_path, nfields, names)
+        if canonical_updates or canonical_geography_updates:
+            write_csv(canonical_path, cfields, canonical)
         if assertions_path.exists() and assertion_updates:
             write_csv(assertions_path, afields, assertions)
         if ncaa_path.exists() and ncaa_evidence_updates:
@@ -587,6 +851,65 @@ def apply_transaction(
             ):
                 raise TransactionError("postcondition: retired identity remains in NCAA site evidence")
 
+
+        venues_by_id_check = {
+            clean(row.get("venue_id")): row for row in venues_check
+        }
+        for correction in plan["geography_corrections"]:
+            venue_id = correction["venue_id"]
+            venue_key = correction["venue_key"]
+            venue = venues_by_id_check.get(venue_id)
+            if venue is None:
+                raise TransactionError(
+                    f"postcondition: geography-corrected venue {venue_id} missing"
+                )
+            if clean(venue.get("venue_key")) != venue_key:
+                raise TransactionError(
+                    f"postcondition: geography correction changed venue_key for {venue_id}"
+                )
+            expected_geo = (
+                correction["to_city"],
+                correction["to_state"],
+            )
+            if (
+                clean(venue.get("city")),
+                clean(venue.get("state")),
+            ) != expected_geo:
+                raise TransactionError(
+                    f"postcondition: venue registry geography not corrected for {venue_id}"
+                )
+            for row in canonical_check:
+                if clean(row.get("venue_id")) != venue_id:
+                    continue
+                if (
+                    clean(row.get("site_city")),
+                    clean(row.get("site_state")),
+                ) != expected_geo:
+                    raise TransactionError(
+                        f"postcondition: canonical geography not corrected for {venue_id}"
+                    )
+            for item in correction["school_files"]:
+                _, school_rows = read_csv(repo / item["path"])
+                for row in school_rows:
+                    if clean(row.get("venue_id")) != venue_id:
+                        continue
+                    if (
+                        clean(row.get("city")),
+                        clean(row.get("state")),
+                    ) != expected_geo:
+                        raise TransactionError(
+                            f"postcondition: school venue geography not corrected in "
+                            f"{item['path']}"
+                        )
+
+        if plan["geography_corrections"] and not plan["merges"]:
+            for preserved_path in (names_path, assertions_path, ncaa_path):
+                if preserved_path.exists() and preserved_path.read_bytes() != originals[preserved_path]:
+                    raise TransactionError(
+                        "postcondition: geography-only correction modified source/identity "
+                        f"evidence surface {preserved_path.relative_to(repo)}"
+                    )
+
         if run_validation:
             _run_validation(repo)
             _run_site_refresh(repo)
@@ -604,20 +927,28 @@ def apply_transaction(
 
     return {
         "plan_sha256": plan["plan_sha256"],
-        "canonical_rows_updated": canonical_updates,
+        "canonical_rows_updated": canonical_updates + canonical_geography_updates,
+        "canonical_identity_rows_updated": canonical_updates,
+        "canonical_geography_rows_updated": canonical_geography_updates,
         "provenance_markers_updated": provenance_marker_updates,
         "assertion_rows_updated": assertion_updates,
         "ncaa_evidence_rows_updated": ncaa_evidence_updates,
-        "school_rows_updated": school_updates,
+        "school_rows_updated": school_updates + school_geography_updates,
+        "school_identity_rows_updated": school_updates,
+        "school_geography_rows_updated": school_geography_updates,
         "venue_name_rows_reassigned": names_reassigned,
         "venues_retired": len(plan["merges"]),
+        "venue_geography_corrections": venue_geography_corrections,
         "site_files_refreshed": site_files_refreshed,
     }
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Plan/apply duplicate global physical-venue identity reconciliation."
+        description=(
+            "Plan/apply duplicate venue identity reconciliation and exact in-place "
+            "venue geography correction."
+        )
     )
     parser.add_argument(
         "--repo",
@@ -660,6 +991,16 @@ def main():
                         f"assertions={merge['assertion_rows']} "
                         f"ncaa={merge['ncaa_evidence_rows']} "
                         f"school={merge['school_rows']} names={merge['venue_name_rows']}"
+                    )
+                for correction in plan["geography_corrections"]:
+                    print(
+                        f"{correction['venue_id']} geography: "
+                        f"{correction['from_city']}, {correction['from_state']} -> "
+                        f"{correction['to_city']}, {correction['to_state']} "
+                        f"canonical={correction['canonical_rows']} "
+                        f"source_assertions={correction['source_assertion_rows']} "
+                        f"ncaa={correction['ncaa_evidence_rows']} "
+                        f"school={correction['school_rows']}"
                     )
                 print(f"blockers={len(plan['blockers'])}")
                 print(f"plan sha256: {plan['plan_sha256']}")

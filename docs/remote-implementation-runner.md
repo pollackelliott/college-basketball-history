@@ -194,8 +194,11 @@ The permanent Phase 0 command owns the commit/tree. Remote orchestration does no
 ## 7A. Control Center-authorized venue identity maintenance
 
 `VENUE_IDENTITY_MAINTENANCE` is a serialized tracked-mutation operation for one already
-authorized duplicate physical-venue reconciliation that changes existing shared/published
-state. It is not a substitute for normal Phase 0 registration of a genuinely new
+authorized duplicate physical-venue reconciliation or exact in-place geography correction
+that changes existing shared/published state. Geography correction preserves the venue ID,
+venue key, and physical identity; it updates only registry-backed canonical/published
+geography and must preserve literal source assertions and documentary site evidence. The
+operation is not a substitute for normal Phase 0 registration of a genuinely new
 target-school venue.
 
 The request is bound to exact protected-main SHA, predecessor control state/hash, school

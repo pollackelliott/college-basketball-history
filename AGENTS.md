@@ -228,13 +228,16 @@ authorized dedicated maintenance branch/PR under `docs/shared-reference-authorit
 Any shared-reference mutation must pass both repository validation and declared-intent diff
 validation; unrelated shared-row changes are a STOP.
 
-Any Control Center-authorized duplicate physical-venue repair affecting existing
-global/published state may be executed through the guarded remote
-`VENUE_IDENTITY_MAINTENANCE` operation. That operation accepts only one exact hash-bound
-venue-maintenance spec plus explicit Control Center authority, acquires the global mutation
-lock, invokes unchanged `tools/venue_identity_transaction.py` against exact protected main,
-publishes only to a dedicated `maintenance/<school>-...` branch through CAS, and requires an
-independent replay to the exact same successor tree. It never pushes protected `main`,
+Any Control Center-authorized duplicate physical-venue repair or exact in-place geography
+correction affecting existing global/published state may be executed through the guarded
+remote `VENUE_IDENTITY_MAINTENANCE` operation. Geography correction is limited to a settled
+existing venue ID/key whose physical identity is unchanged; it must hash-bind the exact old
+and new geography, update registry-backed canonical/published venue geography, and preserve
+literal source assertions and documentary site evidence. The operation accepts only one exact
+hash-bound venue-maintenance spec plus explicit Control Center authority, acquires the global
+mutation lock, invokes unchanged `tools/venue_identity_transaction.py` against exact protected
+main, publishes only to a dedicated `maintenance/<school>-...` branch through CAS, and requires
+an independent replay to the exact same successor tree. It never pushes protected `main`,
 creates/merges a PR, or creates new historical authority. Ordinary target-school new venue
 registration remains Phase 0 authority and must not be routed through this maintenance path.
 
