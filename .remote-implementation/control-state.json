@@ -127,18 +127,19 @@
     "fresno-state-phase0-0001",
     "fresno-state-stage2-census-0001",
     "fresno-state-stage2-opponent-display-normalize-0001",
-    "fresno-state-phase0-scope-supersession-0001"
+    "fresno-state-phase0-scope-supersession-0001",
+    "fresno-state-phase0-scope-supersession-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40853165872:1",
+  "active_operation": "PHASE0_SCOPE_SUPERSESSION",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fresno-state-phase0-scope-supersession-0002",
+  "active_request_sha256": "4c242b2d642f7ccc1b13aec60ca200a4dc166fd189bcf9f2aa03698dc3f8796f",
+  "active_school_key": "fresno-state",
+  "active_target_branch": "data/fresno-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -280,8 +281,11 @@
       "target_branch": "data/fresno-state-onboarding"
     }
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40853165872",
+  "lock_acquisition_request_commit": "ccd82fe048237e2da6dbfce8506f7c0742f7440d",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
+  "transaction_state": "LOCKED"
 }
