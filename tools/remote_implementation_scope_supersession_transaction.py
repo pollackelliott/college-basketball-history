@@ -344,35 +344,51 @@ def prepare_scope_supersession(
     freeze_path.write_bytes(freeze_bytes)
     integration = json.loads(freeze_bytes)
 
-    prepared = git(
-        "commit-tree",
-        tree,
-        "-p",
-        target_sha,
-        "-m",
-        f"Supersede {school.replace('-', ' ').title()} public history scope",
+    ancestry = run(
+        ["git", "merge-base", "--is-ancestor", live_main, target_sha],
         cwd=worktree,
-    ).stdout.strip()
-    prepared_parent = git(
-        "rev-parse",
-        f"{prepared}^",
+        check=False,
+    )
+    commit_tree_args = ["commit-tree", tree, "-p", target_sha]
+    prepared_main_parent = None
+    if ancestry.returncode != 0:
+        commit_tree_args.extend(["-p", live_main])
+        prepared_main_parent = live_main
+    commit_tree_args.extend(
+        [
+            "-m",
+            f"Supersede {school.replace('-', ' ').title()} public history scope",
+        ]
+    )
+    prepared = git(*commit_tree_args, cwd=worktree).stdout.strip()
+    parent_line = git(
+        "rev-list",
+        "--parents",
+        "-n",
+        "1",
+        prepared,
         cwd=worktree,
-    ).stdout.strip()
+    ).stdout.strip().split()
+    expected_parents = [target_sha]
+    if prepared_main_parent:
+        expected_parents.append(prepared_main_parent)
+    if parent_line[1:] != expected_parents:
+        raise Stop("SCOPE_SUPERSESSION_PREPARED_PARENT_SET_MISMATCH")
+    prepared_parent = target_sha
     prepared_tree = git(
         "rev-parse",
         f"{prepared}^{{tree}}",
         cwd=worktree,
     ).stdout.strip()
-    if prepared_parent != target_sha or prepared_tree != tree:
+    if prepared_tree != tree:
         raise Stop("SCOPE_SUPERSESSION_REPARENT_FAILED")
 
     changed = sorted(
         line.strip()
         for line in git(
-            "diff-tree",
-            "--no-commit-id",
+            "diff",
             "--name-only",
-            "-r",
+            target_sha,
             prepared,
             cwd=worktree,
         ).stdout.splitlines()
@@ -401,6 +417,7 @@ def prepare_scope_supersession(
         "worktree": worktree,
         "prepared_commit_sha": prepared,
         "prepared_parent_sha": prepared_parent,
+        "prepared_main_parent_sha": prepared_main_parent,
         "prepared_tree_sha": prepared_tree,
         "changed_paths": changed,
         "changed_file_sha256": commit_file_hashes(worktree, prepared, changed),
@@ -474,6 +491,7 @@ def finalize_scope_supersession_successor(
         "prepared_commit_sha": prepared,
         "prepared_tree_sha": writeahead["prepared_tree_sha"],
         "prepared_parent_sha": writeahead["prepared_parent_sha"],
+        "prepared_main_parent_sha": writeahead.get("prepared_main_parent_sha"),
         "actual_published_target_sha": prepared,
         "changed_paths": writeahead["changed_paths"],
         "changed_file_sha256": writeahead["changed_file_sha256"],
@@ -705,6 +723,7 @@ def run_phase0_scope_supersession(
         "prepared_commit_sha": prepared["prepared_commit_sha"],
         "prepared_tree_sha": prepared["prepared_tree_sha"],
         "prepared_parent_sha": prepared["prepared_parent_sha"],
+        "prepared_main_parent_sha": prepared["prepared_main_parent_sha"],
         "commit_message": (
             f"Supersede {request['school_key'].replace('-', ' ').title()} "
             "public history scope"
@@ -847,10 +866,17 @@ def verify_scope_supersession_equivalence(
     ).stdout.strip()
     if fetched_target != target_sha:
         raise Stop("SCOPE_SUPERSESSION_FRESH_TARGET_FETCH_MISMATCH")
-    target_parent = git("rev-parse", f"{target_sha}^").stdout.strip()
+    parent_line = git(
+        "rev-list", "--parents", "-n", "1", target_sha
+    ).stdout.strip().split()
+    target_parent = parent_line[1] if len(parent_line) > 1 else ""
+    target_main_parent = parent_line[2] if len(parent_line) > 2 else None
+    if len(parent_line) > 3:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_TOO_MANY_PARENTS")
     target_tree = git("rev-parse", f"{target_sha}^{{tree}}").stdout.strip()
     if (
         target_parent != successor["prepared_parent_sha"]
+        or target_main_parent != successor.get("prepared_main_parent_sha")
         or target_tree != successor["prepared_tree_sha"]
     ):
         raise Stop("SCOPE_SUPERSESSION_FRESH_TARGET_COMMIT_MISMATCH")
@@ -866,6 +892,7 @@ def verify_scope_supersession_equivalence(
         or writeahead.get("prepared_commit_sha") != target_sha
         or writeahead.get("prepared_tree_sha") != target_tree
         or writeahead.get("prepared_parent_sha") != target_parent
+        or writeahead.get("prepared_main_parent_sha") != target_main_parent
     ):
         raise Stop("SCOPE_SUPERSESSION_FRESH_WRITEAHEAD_BINDING_MISMATCH")
 
