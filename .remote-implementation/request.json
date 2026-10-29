@@ -1,34 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-stage2-sealed-apply-0001",
+  "request_id": "fresno-state-release-readiness-0001",
   "school_key": "fresno-state",
-  "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "9de5a599af02ab671d6a7a4f0aba14dd14e48c64",
-  "previous_control_state_sha256": "33e55b5a4b14e744b384a32e91da52cde153d4982a1cf866c548828b05d366af",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "fddea7a45298751b0d2a4f312fb1cbb343a22f43",
+  "previous_control_state_sha256": "e3cbd8c05f85f6744424b81834c47e339f6c60bc0f4bffb31b557a133be74c1d",
   "expected_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "target_branch": "data/fresno-state-onboarding",
-  "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "da57fcf4d3163e7ce106c9cc55ce90755dd354660cf198d17b62bc37d5242edd"
+  "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/fresno-state/fresno-state-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "ad9509ea223213c5cb55746a52a90f4232944ce261a4b8e1d876458cfbc6ce82"
   },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/fresno-state/fresno-state-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "469b0c12223f3d48a1d74383d41c1fff9b77f259296767cd95bb691fed98cf29"
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "2c1a51da797ed4822c14a7c6dd16ae23000efd4bc53badccad4e07b427e95aa6"
   },
   "approved_plan_hash": "f3dfaa04c818d7d8de1d4c9553b53db2d42bd13deffbcd484ae10e7161fea5dc",
-  "approved_plan_sha256": "a4a36446895d54cfc3a9862bfdb19a93cf1e9455bdaff2dc9d974e057b4d4f5f",
-  "owner_gate_1_approval_sha256": "f2dc2edee9d0a7f50df0cf12f9fab9f4a3d923169c3e7f01162ca29bb85ff042",
-  "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
-  "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
-  "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
-  "recommendation_map_sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09",
-  "filled_review_sha256": "adb9429067d35a95713e14bdddeb13001ede04f4f3a5c080350fdab7f1649ff1",
-  "decision_id_set_sha256": "d48176f23dce747068de49de96c2d10784e4c181bc44162362b418ff0b60e4a0",
+  "release_manifest_sha256": "0ab9651af22ec4e8597a247c331fda6710ccf94eafcd84852ad32103bd3c1770",
   "creation_provenance": {
-    "origin": "ChatGPT Fresno State serialized Implementation — exact sealed apply",
-    "authorization": "Owner said Proceed after the exact Fresno State Gate 1 seal was fresh-verified. This authorizes exactly one bounded remote STAGE2_SEALED_APPLY against fresno-state-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. It creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+    "origin": "ChatGPT Fresno State serialized Implementation",
+    "authorization": "Owner said Proceed after the exact Fresno State sealed-apply successor 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 was independently fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against that successor. It may authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation only. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -42,9 +35,9 @@
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
