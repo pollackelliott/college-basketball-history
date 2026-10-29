@@ -128,7 +128,7 @@
     "fresno-state-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
-  "active_lock_commit": null,
+  "active_lock_commit": "a0b1bbd5d98fde1fd877454072f8315672872e6d",
   "active_lock_owner": "github-actions:40816611122:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
