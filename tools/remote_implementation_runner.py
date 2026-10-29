@@ -3663,17 +3663,37 @@ def run_recovery(
             raise Stop("RECOVERY_PREPARED_PARENT_MISMATCH")
         if tree != manifest["prepared_tree_sha"]:
             raise Stop("RECOVERY_PREPARED_TREE_MISMATCH")
-        changed = sorted(
-            line.strip()
-            for line in git(
-                "diff-tree",
-                "--no-commit-id",
-                "--name-only",
-                "-r",
-                prepared,
-            ).stdout.splitlines()
-            if line.strip()
-        )
+        if state.get("active_operation") == OP_PHASE0_SCOPE_SUPERSESSION:
+            parent_line = git(
+                "rev-list", "--parents", "-n", "1", prepared
+            ).stdout.strip().split()
+            expected_parents = [manifest["prepared_parent_sha"]]
+            if manifest.get("prepared_main_parent_sha"):
+                expected_parents.append(manifest["prepared_main_parent_sha"])
+            if parent_line[1:] != expected_parents:
+                raise Stop("RECOVERY_SCOPE_SUPERSESSION_PARENT_SET_MISMATCH")
+            changed = sorted(
+                line.strip()
+                for line in git(
+                    "diff",
+                    "--name-only",
+                    manifest["expected_target_predecessor_sha"],
+                    prepared,
+                ).stdout.splitlines()
+                if line.strip()
+            )
+        else:
+            changed = sorted(
+                line.strip()
+                for line in git(
+                    "diff-tree",
+                    "--no-commit-id",
+                    "--name-only",
+                    "-r",
+                    prepared,
+                ).stdout.splitlines()
+                if line.strip()
+            )
         if changed != sorted(manifest["changed_paths"]):
             raise Stop("RECOVERY_CHANGED_PATH_MISMATCH")
         for path, expected in manifest["changed_file_sha256"].items():
