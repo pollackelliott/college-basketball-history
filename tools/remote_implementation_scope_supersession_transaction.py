@@ -85,15 +85,6 @@ def verify_scope_supersession_authority(
     if remote_head(ROOT, target_branch) != target_sha:
         raise Stop("SCOPE_SUPERSESSION_TARGET_HEAD_MISMATCH")
 
-    last = state.get("last_operation") or {}
-    if (
-        last.get("school_key") != request["school_key"]
-        or last.get("target_branch") != target_branch
-        or last.get("target_sha") != target_sha
-        or last.get("fresh_runner_verification") != "PASS"
-    ):
-        raise Stop("SCOPE_SUPERSESSION_TARGET_NOT_FRESH_VERIFIED")
-
     phase0, phase0_bytes = _read_json_ref(
         predecessor_commit,
         request["superseded_phase0_successor"],
@@ -136,6 +127,29 @@ def verify_scope_supersession_authority(
     }:
         raise Stop("SCOPE_SUPERSESSION_CURRENT_SUCCESSOR_KIND_UNSUPPORTED")
 
+    verification, verification_bytes = _read_json_ref(
+        predecessor_commit,
+        request["superseded_successor_verification"],
+        code="SCOPE_SUPERSESSION_CURRENT_VERIFICATION",
+    )
+    if (
+        verification.get("kind") not in {
+            "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+            "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+        }
+        or verification.get("school_key") != request["school_key"]
+        or verification.get("request_id") != current.get("request_id")
+        or verification.get("target_branch") != target_branch
+        or verification.get("target_sha") != target_sha
+    ):
+        raise Stop("SCOPE_SUPERSESSION_CURRENT_VERIFICATION_BINDING_MISMATCH")
+    equivalence = (
+        verification.get("remote_phase0_equivalence")
+        or verification.get("remote_stage2_opponent_display_equivalence")
+    )
+    if equivalence != "PASS":
+        raise Stop("SCOPE_SUPERSESSION_CURRENT_VERIFICATION_NOT_PASS")
+
     spec_path = materialize_payload(
         request_commit,
         request["scope_supersession_spec"],
@@ -166,6 +180,8 @@ def verify_scope_supersession_authority(
         "phase0_successor_bytes": phase0_bytes,
         "current_successor": current,
         "current_successor_bytes": current_bytes,
+        "current_verification": verification,
+        "current_verification_bytes": verification_bytes,
         "spec": spec,
         "spec_bytes": spec_bytes,
     }
@@ -749,6 +765,9 @@ def run_phase0_scope_supersession(
         "superseded_successor_sha256": request["superseded_successor"][
             "sha256"
         ],
+        "superseded_successor_verification_sha256": request[
+            "superseded_successor_verification"
+        ]["sha256"],
         "superseded_integration_freeze_sha256": request[
             "superseded_integration_freeze_sha256"
         ],
@@ -943,6 +962,24 @@ def verify_scope_supersession_equivalence(
         request["superseded_successor"],
         code="SCOPE_SUPERSESSION_FRESH_CURRENT_SUCCESSOR",
     )
+    prior_verification, _ = _read_json_ref(
+        control_head,
+        request["superseded_successor_verification"],
+        code="SCOPE_SUPERSESSION_FRESH_CURRENT_VERIFICATION",
+    )
+    if (
+        prior_verification.get("school_key") != request["school_key"]
+        or prior_verification.get("request_id") != current.get("request_id")
+        or prior_verification.get("target_branch") != request["target_branch"]
+        or prior_verification.get("target_sha") != request["target_sha"]
+        or (
+            prior_verification.get("remote_phase0_equivalence")
+            or prior_verification.get(
+                "remote_stage2_opponent_display_equivalence"
+            )
+        ) != "PASS"
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_CURRENT_VERIFICATION_MISMATCH")
     if (
         phase0.get("integration_freeze_sha256")
         != request["superseded_integration_freeze_sha256"]
