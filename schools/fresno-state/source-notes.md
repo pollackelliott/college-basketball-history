@@ -1,10 +1,20 @@
 # fresno-state source notes
 
+## Publication scope supersession
+
+- Original accepted Research scope: 1955-56..1957-58|1970-71+
+- Owner-authorized public scope: 1970-71+
+- Original Research competitive games preserved externally: 1,786
+- Excluded from public package by scope supersession: 78
+- Public-package competitive games: 1,708
+- The immutable original Research Freeze remains preserved as audit evidence; excluded rows are not publication authority.
+
+
 Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
 
 ## Research coverage declaration
 
-- Primary-source historical results cutoff: 1955-1956
+- Primary-source historical results cutoff: 1970-1971
 - Required completed-season cutoff: 2025-2026
 - These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
 

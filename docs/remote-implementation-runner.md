@@ -105,8 +105,7 @@ Every push-driven transition is an explicit JSON request bound to:
 Supported operations are:
 
 - `STAGE1_INVENTORY`
-- `PHASE0`
-- `STAGE2_CENSUS`
+- `PHASE0`\n- `PHASE0_SCOPE_SUPERSESSION`\n- `STAGE2_CENSUS`
 - `STAGE2_OPPONENT_DISPLAY_NORMALIZE`
 - `STAGE2_PROPOSAL_REHEARSAL`
 - `STAGE2_GATE1_FILL`
@@ -191,8 +190,50 @@ Normal Phase 0 refuses a pre-existing target branch. It never silently overwrite
 
 The permanent Phase 0 command owns the commit/tree. Remote orchestration does not incrementally edit the target branch through GitHub file APIs. The Phase 0 path contract permits the target school's exact `program-top-level-scope.csv` row to change when—and only when—the frozen six-file package carries a different accepted scope expression; that target-row reconciliation is part of the school onboarding transaction, not a separate maintenance workflow.
 
-## 7A. Control Center-authorized venue identity maintenance
+## 7A. Control Center-authorized pre-publication scope supersession
 
+`PHASE0_SCOPE_SUPERSESSION` is an exceptional serialized mutation for a school whose
+ordinary Phase 0 already exists but whose public history scope is explicitly superseded
+by the owner before first publication. It requires explicit Control Center authorization
+bound to one hash-bound supersession spec. It is not a generic way to revise Research,
+and it is not the post-publication correction workflow.
+
+The request binds the immutable original Research Freeze identity, exact current
+protected main, exact existing onboarding predecessor, prior Phase 0 successor,
+current fresh-verified successor, superseded Integration Freeze/semantic hashes, new
+scope metadata, exact excluded source-game IDs/counts, and the Control Center-approved
+spec hash. No Stage 2, owner-gate, release, venue-maintenance, or recovery authority may
+be bundled into the request.
+
+The runner acquires the global mutation lock, reauthenticates the original Research
+Freeze without rewriting it, derives the candidate package from the exact onboarding
+predecessor, requires the scope-derived deletion set to equal the authorized IDs
+exactly, and proves every retained source-game semantic row unchanged. Supporting
+opponent counts/ranges and conference rows are regenerated mechanically; a school venue
+may be removed only when the spec names it and no retained game uses it. Provisional
+venue IDs absent from current main are cleared so unchanged ordinary Phase 0
+reconciliation allocates current-main-safe IDs.
+
+The derived candidate is then passed through unchanged permanent Stage 1 and ordinary
+`stage_research_portfolio.py` Phase 0 against current protected main. The resulting
+tree receives a fresh Integration Freeze augmented with the supersession audit chain.
+That exact current-main-rebased tree is committed as a child of the existing onboarding
+predecessor and published only through expected-predecessor CAS. Standard create-once
+Phase 0 and post-publication correction invariants are not weakened.
+
+Write-ahead preserves the spec, proof, Stage 1 result, exact Integration Freeze,
+candidate/package hashes, predecessor, prepared tree, changed paths/file hashes, and
+superseded authority hashes. Recovery may adopt only an exact prepared publication.
+Fresh verification independently reconstructs the candidate and permanent Phase 0 tree
+from the predecessor/spec/original Research transport and requires exact tree, proof,
+freeze, semantic snapshot, package and changed-file equivalence before recording
+`remote_phase0_scope_supersession_equivalence=PASS`.
+
+All earlier checkpoints remain immutable audit evidence. Every prior Stage 2 decision
+universe is stale after scope supersession; Stage 2 must restart with a fresh census
+bound to the new successor. Owner Gate 1 is not created by this operation.
+
+## 7B. Control Center-authorized venue identity maintenance\n
 `VENUE_IDENTITY_MAINTENANCE` is a serialized tracked-mutation operation for one already
 authorized duplicate physical-venue reconciliation or exact in-place geography correction
 that changes existing shared/published state. Geography correction preserves the venue ID,
