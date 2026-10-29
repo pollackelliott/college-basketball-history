@@ -1,0 +1,23 @@
+{
+  "approval_proof_sha256": "b1760a7d98d3e7014c0816dd68309dc87ebc02c603c0405342f5ae012d1d7632",
+  "approved_plan_hash": "f3dfaa04c818d7d8de1d4c9553b53db2d42bd13deffbcd484ae10e7161fea5dc",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "pr_number": 401,
+  "preview_checkpoint_sha256": "b522d3bcd143450a0152142529a4b2ab9797870163ade2a875b583bcebbe31b8",
+  "preview_deployment_id": 7418782022,
+  "preview_url": "https://college-basketball-history-62wc521gi-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "a710599097d0927cc21919258f1bb2637fe5abf87fc92ebdc2e88a07d8f06d12",
+  "production_proof": false,
+  "protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
+  "release_manifest_sha256": "0ab9651af22ec4e8597a247c331fda6710ccf94eafcd84852ad32103bd3c1770",
+  "request_id": "fresno-state-release-gate2-approval-0001",
+  "request_sha256": "1f07efbbd931e7457fd2434c2da6c62f963a41c2ae515f03c91c7804770b565d",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4"
+}
