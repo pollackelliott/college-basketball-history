@@ -237,6 +237,10 @@ def request():
             "path": ".remote-implementation/successors/example/current/successor-manifest.json",
             "sha256": "6" * 64,
         },
+        "superseded_successor_verification": {
+            "path": ".remote-implementation/verifications/example/current/verification.json",
+            "sha256": "9" * 64,
+        },
         "superseded_integration_freeze_sha256": "7" * 64,
         "superseded_semantic_snapshot_sha256": "8" * 64,
         "history_scope": {
