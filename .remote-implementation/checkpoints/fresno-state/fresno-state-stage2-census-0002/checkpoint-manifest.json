@@ -1,0 +1,103 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "2f29152ab573d09a9aee7700388dcdf98c46b9fb1e392fb4498e8a4f22dab75c",
+    "implementation-stage2-status.json": "7c81db2de787bc88d7c01c2985fb9ab945afcf5cbede89ca07515f02bffa4a55",
+    "plan.json": "e031c14e2350a0b0c34a8f43f36a4b5dffcb62dee30a885c19faa17ebcde9e61",
+    "review.csv": "e6fd30b439cd6580bbbb5a1229f79ca0fa2b004aee94e05718a79308ab215687",
+    "review.md": "f57d3df0700785a183a70bb7489f6af364902eef40ff801a161e9e5ea33c9d09"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "2f29152ab573d09a9aee7700388dcdf98c46b9fb1e392fb4498e8a4f22dab75c",
+    "implementation-stage2-status.json": "353e16c134da67ab9e698f38d67db6342ada78b8c45c7e5114231947c4d61be8",
+    "plan.json": "48d02f30680d043616f36455998ce224b0580ff72995ed74b5d78d39cf072c51",
+    "review.csv": "e6fd30b439cd6580bbbb5a1229f79ca0fa2b004aee94e05718a79308ab215687",
+    "review.md": "a5d9faaeafd046d36be6b2fd300b10f8232bd524616ded1bab9a72f7a38bee5d"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "2f29152ab573d09a9aee7700388dcdf98c46b9fb1e392fb4498e8a4f22dab75c",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 1,
+      "discrepancy": 14,
+      "identity": 1,
+      "publication": 1
+    },
+    "decision_count": 18,
+    "decision_fields": {
+      "game_date": 8,
+      "game_identity": 1,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 2,
+      "site_type": 4
+    },
+    "site_or_han_review_decision_ids": [
+      "DISCREPANCY-FRESNO-S1-1976-77-009-SITE_TYPE",
+      "DISCREPANCY-FRESNO-S1-1978-79-008-SITE_TYPE",
+      "DISCREPANCY-FRESNO-S1-2022-23-005-SITE_TYPE",
+      "DISCREPANCY-FRESNO-S1-2025-26-010-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 4,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "command_exit_code": 0,
+  "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+  "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "fresno-state"
+  ],
+  "phase0_protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "phase0_successor_path": ".remote-implementation/successors/fresno-state/fresno-state-phase0-scope-supersession-0002/successor-manifest.json",
+  "phase0_successor_sha256": "9fc99b25a2929f6ff43dd6e13c5ac298f955351f6e85aaf369fbb97e663c054f",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 1,
+      "discrepancy": 14,
+      "identity": 1,
+      "publication": 1
+    },
+    "decision_count": 18,
+    "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+    "discrepancies_to_add": 14,
+    "existing_game_matches": 380,
+    "new_canonical_games": 1327,
+    "plan_path": ".onboarding/fresno-state/plan.json",
+    "review_path": ".onboarding/fresno-state/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "request_id": "fresno-state-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "target_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+  "tracked_mutation_proof": {
+    "after_head_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+    "after_status": "",
+    "after_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+    "before_head_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+    "before_status": "",
+    "before_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
