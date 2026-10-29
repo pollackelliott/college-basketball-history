@@ -141,15 +141,15 @@
   "active_lock_commit": "10c33da1c0ca7ae2de6ef3edb153cfa024762f89",
   "active_lock_owner": "github-actions:40915535742:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "active_prepared_tree_sha": "1a6368858b2623894490b63c84e709e0e0bb7578",
   "active_request_id": "fresno-state-stage2-sealed-apply-0001",
   "active_request_sha256": "1479593221e33ec8c486554d810c7a1c9a1a166b896859fac0598e11e651dd08",
   "active_school_key": "fresno-state",
   "active_target_branch": "data/fresno-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/fresno-state/fresno-state-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "d50a42463acb77bb80596dc793c854bee448e05a41141fc0b36f442a3e15d86f",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -311,5 +311,5 @@
   "lock_acquisition_request_commit": "43a6d7d3c4037243e41c798e82c9613a13cc5f99",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
