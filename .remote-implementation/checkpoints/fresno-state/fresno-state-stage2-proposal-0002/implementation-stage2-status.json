@@ -1,0 +1,103 @@
+{
+  "branch": "remote-stage2-census/fresno-state-e83cfac04900",
+  "capability_census": {
+    "path": ".onboarding/fresno-state/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "integration_base_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "integration_semantic_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 1,
+      "discrepancy": 14,
+      "identity": 1,
+      "publication": 1
+    },
+    "decision_count": 18,
+    "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+    "discrepancies_to_add": 14,
+    "existing_game_matches": 380,
+    "new_canonical_games": 1327,
+    "plan_path": ".onboarding/fresno-state/plan.json",
+    "review_path": ".onboarding/fresno-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 11,
+      "MATCH_CANONICAL:CBBG-0103403": 1,
+      "USE_SOURCE": 4
+    },
+    "approved_plan_hash_preview": "80d074b9e918e7b471f82bfae15da54054a4b4d21536d3d6b687de44132035f8",
+    "changed_path_count": 63
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 11,
+      "MATCH_CANONICAL:CBBG-0103403": 1,
+      "USE_SOURCE": 4
+    },
+    "approved_plan_hash_preview": "80d074b9e918e7b471f82bfae15da54054a4b4d21536d3d6b687de44132035f8",
+    "decision_count": 18,
+    "path": "/tmp/remote-stage2-proposal-map-r4f3hi66/recommendation-map.json",
+    "sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09"
+  },
+  "research_base_sha": "a446e5cf028118d0484b75dc462bfe30f7ebd981",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 21,
+      "public_gap_rows": 21,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1708,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_venue": [
+        "CBBG-0032888",
+        "CBBG-0051141",
+        "CBBG-0072270",
+        "CBBG-0116827",
+        "CBBG-0161653",
+        "CBBG-0164780",
+        "CBBG-0179245",
+        "CBBG-0179293",
+        "CBBG-0179402",
+        "CBBG-0179425",
+        "CBBG-0179455",
+        "CBBG-0179480"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0116827",
+        "CBBG-0164780"
+      ]
+    },
+    "path": ".onboarding/fresno-state/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
