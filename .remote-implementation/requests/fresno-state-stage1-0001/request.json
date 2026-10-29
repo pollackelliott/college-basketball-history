@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fresno-state-stage1-0001",
+  "school_key": "fresno-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "162d219dfa3134fbd53274d99ec39bab0cd1580f",
+  "previous_control_state_sha256": "a598c675d982b54cc114a6495c131fe2acdfa2f2a5a52723ed0095b0d1d514db",
+  "expected_protected_main_sha": "194af2825b8704515f0fc6639ac36999669ab3db",
+  "research_checkpoint": {
+    "sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
+    "research_base_sha": "a446e5cf028118d0484b75dc462bfe30f7ebd981",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "162d219dfa3134fbd53274d99ec39bab0cd1580f",
+      "path_prefix": ".remote-implementation/inputs/fresno-state-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 10
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Fresno State serialized Implementation Stage 1",
+    "authorization": "Owner explicitly ended the Fresno State Research lane and authorized exactly one read-only serialized Implementation Stage 1 inventory. Final frozen exact six-file ZIP independently authenticated at SHA-256 eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2 (85,316 bytes), research_base_sha a446e5cf028118d0484b75dc462bfe30f7ebd981, owner-accepted scope 1955-56..1957-58|1970-71+, 1,786 games, owner-approved NON_D1 46 identities/91 games, prior Research Stage 6 self-challenge PASS. Permanent research acceptance rerun on current protected main 194af2825b8704515f0fc6639ac36999669ab3db: PASS. Global control IDLE/COMPLETE sequence 110, no active lock, no Fresno State branch or checkpoint. Full read-only Stage 1 reconciliation inventory only; discover shared/global venue, opponent, conference, scope collisions and maintenance population, create durable Stage 1 checkpoint, then STOP. Explicitly no Phase 0, Stage 2, Research reopening, owner gates, release, global basketball mutation, or protected-main mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
