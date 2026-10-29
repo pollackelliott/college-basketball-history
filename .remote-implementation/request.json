@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "colorado-state-release-preview-verify-0001",
+  "request_id": "colorado-state-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "colorado-state",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "5fc83bd143990e80e8be3a47133d048edd5a4242",
-  "previous_control_state_sha256": "403af8edbe19b2e6d00fc1c9bd26a5a7a9541cd2058f183f723a5c7e734ec4b7",
+  "previous_control_state_commit": "5721a642d4e30175da30c5ec15b59647900cee05",
+  "previous_control_state_sha256": "84f84178b5978476ee21601f062dd372d257392aee09fa1d256ea89c0316ffff",
   "expected_protected_main_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
   "target_branch": "data/colorado-state-onboarding",
   "target_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "cdbc1a89a1139a7a2de40647ab25acdb951625c93cf92a7694f081b209d35b01"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/colorado-state/colorado-state-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "4330cd0e4e4058b4c488b82730fa1c99a932f74abbab8aa5402960b487fa5eb7"
-  },
+  "pr_number": 395,
   "approved_plan_hash": "a54db55d5c07b49cb3c38c17e1f6fcd9afcb25452ab3462ffb5f4986bdb30244",
   "release_manifest_sha256": "3f300e92bc4f96c54325d5dbd658201a4b310143cfd147bc83a89efa3d1e656d",
-  "pr_number": 395,
+  "preview_deployment_id": 7399190781,
+  "preview_url": "https://college-basketball-history-ncw21f69p-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/colorado-state/colorado-state-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "fac3ab90a54da9bc729fd24c7eaf25db1c9fc9a94cb6328f80433394f50c8ac9"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/colorado-state/colorado-state-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "ac0a7a21bd5836965555336669d9b09dac08a5d443f792b93da106271a850c3d"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “APPROVED. Proceed” after being presented the exact fresh-verified Colorado State PR #395 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
+    "preview_checkpoint_sha256": "fac3ab90a54da9bc729fd24c7eaf25db1c9fc9a94cb6328f80433394f50c8ac9",
+    "preview_verification_sha256": "ac0a7a21bd5836965555336669d9b09dac08a5d443f792b93da106271a850c3d",
+    "pr_number": 395,
+    "pr_head_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+    "preview_deployment_id": 7399190781,
+    "preview_url": "https://college-basketball-history-ncw21f69p-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
     "origin": "ChatGPT Colorado State Implementation",
-    "authorization": "Owner said Proceed for the bounded release-preparation unit after fresh-verified RELEASE_READINESS. The school lane created exact release PR #395 through the authorized GitHub connector using the preserved approved pr-body.md; readback confirmed open non-draft PR #395, base main, head data/colorado-state-onboarding, exact head 3eb05c96d42f5dc8f27fa37cc7e53cb581db412c, and preserved body. This authorizes exactly one read-only RELEASE_PREVIEW_VERIFY against that PR and fresh readiness authority, through independently verified OWNER_GATE_2_READY. It grants no Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” for the exact fresh-verified Colorado State PR #395 Preview at head 3eb05c96d42f5dc8f27fa37cc7e53cb581db412c and Vercel Preview deployment 7399190781. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
@@ -39,8 +48,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
