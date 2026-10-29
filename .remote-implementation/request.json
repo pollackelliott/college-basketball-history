@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "fresno-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "fresno-state",
-  "previous_control_state_commit": "8af4448625fb3e425c739e2dab86dfbb212a113a",
-  "previous_control_state_sha256": "1ada7b82af7343ec8948f97da8bdba3b2a5bf0e177b9dba244bb6eccfd24de9e",
-  "expected_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
+  "previous_control_state_commit": "6c89e54d085879aa4c3a8bc9440fc75d6f854e74",
+  "previous_control_state_sha256": "0fd34eff65e26489a4c959b6f09eec9c9d590a9002dd018a0d3ce13ec1b41098",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "target_branch": "data/fresno-state-onboarding",
   "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
   "pr_number": 401,
-  "approved_plan_hash": "f3dfaa04c818d7d8de1d4c9553b53db2d42bd13deffbcd484ae10e7161fea5dc",
-  "release_manifest_sha256": "0ab9651af22ec4e8597a247c331fda6710ccf94eafcd84852ad32103bd3c1770",
-  "preview_deployment_id": 7418782022,
-  "preview_url": "https://college-basketball-history-62wc521gi-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "b522d3bcd143450a0152142529a4b2ab9797870163ade2a875b583bcebbe31b8"
+  "merge_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "2a2bdba02e570456234f63ad9d4c6473ccc3298381fbb94ce0987cc4827732ae"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "a710599097d0927cc21919258f1bb2637fe5abf87fc92ebdc2e88a07d8f06d12"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: “Preview APPROVED. Proceed” after being presented the exact fresh-verified Fresno State PR #401 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
-    "preview_checkpoint_sha256": "b522d3bcd143450a0152142529a4b2ab9797870163ade2a875b583bcebbe31b8",
-    "preview_verification_sha256": "a710599097d0927cc21919258f1bb2637fe5abf87fc92ebdc2e88a07d8f06d12",
-    "pr_number": 401,
-    "pr_head_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
-    "preview_deployment_id": 7418782022,
-    "preview_url": "https://college-basketball-history-62wc521gi-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "a5b165ebfcc410925ac9d737d1cba577e4e0777c33cc0d941097815a5c91ae5a"
   },
   "creation_provenance": {
     "origin": "ChatGPT Fresno State serialized Implementation",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating “Preview APPROVED. Proceed” for the exact fresh-verified Fresno State PR #401 Preview at head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 and Vercel Preview deployment 7418782022. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector rechecked protected main, exact PR #401 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one repository-standard two-parent merge. GitHub merged exact approved head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 as 619daf5a96e9acfc80a8fc74b381f50bdc0599fc with first parent 6fce295d8fa38ae204f7b5318ea4743f0fc019f2 and second parent 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
   },
   "authority": {
     "phase0": false,
@@ -51,9 +38,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
