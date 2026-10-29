@@ -1,0 +1,78 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+    "implementation-stage2-status.json": "d10fcc4473ff16a534d97d94becdf6bc0bf5bf166d38f238cb61c217fdf8d00c",
+    "plan.json": "6fae41ec5071de82a1567d19320c73b30f8ec1ea9352437a019f2b8abf1993ed",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "4bb632c0ff3d9e6a98f8dcbf12ce45fa5ef7d72f92ddd01dbd5c83dd8e8c9b31"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+    "implementation-stage2-status.json": "bc6a089a4afe9857f5695c56824eb6dcfd8298d2670feefa630869eb10b73c72",
+    "plan.json": "53171f03c3c9a21aae81a7ca93b528355969d122316ec8df2ebb098e26d0a61e",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "9514d53fa7b70bd3e3c43a913e1aac14f1584e2341640cbefb69daf8ac69e7eb"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 1,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "fresno-state"
+  ],
+  "phase0_protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "phase0_successor_path": ".remote-implementation/successors/fresno-state/fresno-state-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "9c1e9772cd89f0a383782f71366e7481639b381871bd4c55dbe20d649f2a3aa6",
+  "preflight": {
+    "blocker_count": 1,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/fresno-state/plan.json",
+    "review_path": ".onboarding/fresno-state/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "request_id": "fresno-state-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+  "target_tree_sha": "063aac50c5e1fcfc444c68a7d5ca1021716b3205",
+  "tracked_mutation_proof": {
+    "after_head_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+    "after_status": "",
+    "after_tree_sha": "063aac50c5e1fcfc444c68a7d5ca1021716b3205",
+    "before_head_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+    "before_status": "",
+    "before_tree_sha": "063aac50c5e1fcfc444c68a7d5ca1021716b3205",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

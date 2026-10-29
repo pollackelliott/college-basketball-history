@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "fresno-state",
+  "created_at": "2026-10-29T04:08:16.867803+00:00",
+  "input_fingerprint": {
+    "sha256": "485ebb87c31befd5dc43e8877101cbe50a711447f4ac6fb632470e3e1833e520",
+    "git_head": "e8b95d8d11baa2748e6657347db53638006d1bac",
+    "files": {
+      "schools/fresno-state/source-games.csv": "f009194ebbe10c14183f34a91ecc6446e21eaf595c4cb9874443351785f8fef8",
+      "schools/fresno-state/opponents.csv": "369ae151a090f156fe856de64f68a03940289bd2dc0f0da3cefd6ef973a1341c",
+      "schools/fresno-state/venues.csv": "c095e4d4763e6d979340ceb65bba269e833c38375aff1133aba0a7bbd4852ddf",
+      "schools/fresno-state/conferences.csv": "2058fa9571f890700d02187e49194d91c0dd95bdb3f234942c78d03ac3633a03",
+      "schools/fresno-state/notes.md": "584afaac3a1e6768610b634ccb71efde6c222158d15afc0c142960835132200b",
+      "schools/fresno-state/source-notes.md": "b3fabe5aadd6166b8ca88453bb5b12b2c29a0a410865984f6b61a2879ee4de6b",
+      "data/canonical/games.csv": "6fa6e4d5e5cd07b4e2a9c4f1f87600c98bc20b6307c388ba96c891327693d455",
+      "data/evidence/game-assertions.csv": "f52b9c6964e68a3a8be4fbdcc24fbd37552c44868606caf5ef0cc0ffed304ddf",
+      "data/reconciliation/discrepancies.csv": "782259529caae2676ac84cbc35138993fcf10d71fde879a9f8162a572cef4e82",
+      "data/reference/programs.csv": "4bec4a365464a6fe5ec4c6c9f80d72475c51bc35a86d99a242fcbcc63f1d4d0b",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "f6dabbc8ff7791c581f7c5d4faa81a65c631853d465e7577bacf9fba539e7943",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "c8b9367258e8583fc718bdc74ab5b77df348e5255f499a24c3d3c086aef5edcb",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "23537ef3a9d1825c38c22189d9274980f10759970b978a600948bef74d6895f8",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+      "tools/onboarding_plan.py": "a443e89ab264c8663a6141e144921de1b26d0eee3fab902e87fb96fce1a95144",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: saint-katherine: ['Saint Katherine', 'University of Saint Katherine']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 1786,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 544,
+      "venues": 54,
+      "conference_intervals": 7,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: saint-katherine: ['Saint Katherine', 'University of Saint Katherine']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
