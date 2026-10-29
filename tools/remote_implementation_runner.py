@@ -17,6 +17,7 @@ from remote_implementation_control import (
     MUTATION_PREPARED,
     MUTATION_PUBLISHED,
     OP_PHASE0,
+    OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_STAGE1,
     OP_STAGE2_CENSUS,
@@ -74,6 +75,10 @@ from remote_implementation_io import (
     run_stage1_tool,
     validate_stage1_pass,
     write_json,
+)
+from remote_implementation_scope_supersession_transaction import (
+    finalize_scope_supersession_successor,
+    run_phase0_scope_supersession,
 )
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
@@ -3679,6 +3684,41 @@ def run_recovery(
 
         original_request_id = state["active_request_id"]
 
+        if state.get("active_operation") == OP_PHASE0_SCOPE_SUPERSESSION:
+            if manifest.get("operation") != OP_PHASE0_SCOPE_SUPERSESSION:
+                raise Stop("RECOVERY_SCOPE_SUPERSESSION_WRITEAHEAD_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit,
+                original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_SCOPE_SUPERSESSION_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            commit = finalize_scope_supersession_successor(
+                active=state,
+                original_request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+            )
+            print(
+                "REMOTE IMPLEMENTATION RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
         if state.get("active_operation") == OP_VENUE_IDENTITY_MAINTENANCE:
             if manifest.get("operation") != OP_VENUE_IDENTITY_MAINTENANCE:
                 raise Stop("RECOVERY_VENUE_MAINTENANCE_WRITEAHEAD_OPERATION_MISMATCH")
@@ -4077,6 +4117,16 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_PHASE0_SCOPE_SUPERSESSION:
+            run_phase0_scope_supersession(
+                state=state,
+                request=request,
+                request_bytes=request_bytes,
+                request_commit=request_commit,
+                predecessor_commit=predecessor_commit,
+                live_main=live_main,
+                diag=DIAG,
             )
         elif request["operation"] == OP_PHASE0:
             run_phase0(
