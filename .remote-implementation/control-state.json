@@ -258,11 +258,11 @@
   "current_sequence": 114,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
     "operation": "PHASE0",
     "protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "fresno-state-phase0-0001",
     "school_key": "fresno-state",
     "successor_manifest_path": ".remote-implementation/successors/fresno-state/fresno-state-phase0-0001/successor-manifest.json",

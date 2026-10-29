@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+  "prepared_parent_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "prepared_tree_sha": "063aac50c5e1fcfc444c68a7d5ca1021716b3205",
+  "protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "fresno-state-phase0-0001",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e8b95d8d11baa2748e6657347db53638006d1bac"
+}
