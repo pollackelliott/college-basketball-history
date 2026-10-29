@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-release-readiness-0001",
+  "request_id": "fresno-state-release-preview-verify-0001",
   "school_key": "fresno-state",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "fddea7a45298751b0d2a4f312fb1cbb343a22f43",
-  "previous_control_state_sha256": "e3cbd8c05f85f6744424b81834c47e339f6c60bc0f4bffb31b557a133be74c1d",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "4058410f6da3443bbcd299983758ed3e37e622a8",
+  "previous_control_state_sha256": "d69204d333cd85af2544d4f337a19d2fc85d7973544fc0b728fd1164f2a9666c",
   "expected_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "target_branch": "data/fresno-state-onboarding",
   "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/fresno-state/fresno-state-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "ad9509ea223213c5cb55746a52a90f4232944ce261a4b8e1d876458cfbc6ce82"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "f03e0839fd8ef9b73a1029e80a3181dae00b3408e840c3e017ccef99215dfc00"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/fresno-state/fresno-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "2c1a51da797ed4822c14a7c6dd16ae23000efd4bc53badccad4e07b427e95aa6"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "819c6963c5ae8f89fb1cc9cac64eb33fbe28e6ca3edcb2226b581d6eea395324"
   },
   "approved_plan_hash": "f3dfaa04c818d7d8de1d4c9553b53db2d42bd13deffbcd484ae10e7161fea5dc",
   "release_manifest_sha256": "0ab9651af22ec4e8597a247c331fda6710ccf94eafcd84852ad32103bd3c1770",
+  "pr_number": 401,
   "creation_provenance": {
     "origin": "ChatGPT Fresno State serialized Implementation",
-    "authorization": "Owner said Proceed after the exact Fresno State sealed-apply successor 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 was independently fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against that successor. It may authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation only. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner said Proceed for the bounded release-preparation phase after fresh-verified RELEASE_READINESS. The school lane created exact release PR #401 through the authorized GitHub connector using preserved pr-body.md; readback confirmed open non-draft PR #401, base main, head data/fresno-state-onboarding, exact head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4, mergeable true, and byte-exact preserved body. This authorizes exactly one read-only RELEASE_PREVIEW_VERIFY against that PR and fresh readiness authority, through independently verified OWNER_GATE_2_READY. It grants no Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -37,8 +38,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
