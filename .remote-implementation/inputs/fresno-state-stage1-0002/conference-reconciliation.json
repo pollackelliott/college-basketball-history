@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "owner_approval_basis": "Owner/Control Center-approved Fresno Stage 1 conference lineage reconciliation. Preserve the frozen seven-row membership chronology and all accepted historical display names, membership classifications, basis text, notes, and intervals; representation-only key integration maps WCAC to the existing WCC identity for 1956-57 and PCAA to the existing Big West identity for 1970-71 through 1987-88. Register only CCAA / California Collegiate Athletic Association as a historical global identity with owner-approved nonassertive tournament-label fallback CCAA. Gonzaga published precedent establishes historical West Coast Athletic Conference rows under conference_key=wcc; Utah State published precedent establishes historical Pacific Coast Athletic Association rows under conference_key=big-west. No Owner Gate 1 authority is created.",
+  "expected_conferences_sha256": "06acb64ae8ff7a11e19623a14632ff275348734ecacc5325a604a501d229dbf9",
+  "replacement_history": [
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "1955-1956",
+      "end_season": "1955-1956",
+      "conference_key": "ccaa",
+      "conference_name": "California Collegiate Athletic Association",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Fresno men historical CCAA affiliation during 1955-56; Fresno official institutional season/year-by-year and West Coast conference 1956-57 membership announcement.",
+      "notes": "Research-local historical conference identity; 1956-57 WCAC transition separately represented."
+    },
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "1956-1957",
+      "end_season": "1956-1957",
+      "conference_key": "wcc",
+      "conference_name": "West Coast Athletic Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "West Coast Conference first-party membership history https://wccsports.com/sports/2018/6/26/ot-history-html.aspx: Fresno State joined for 1956-57 only; separate source confirms it departed immediately after one season.",
+      "notes": "Fresno had dual CCAA affiliation during WCAC period per West Coast historical summary; conference row foregrounds WCAC basketball membership without denying dual status."
+    },
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "1957-1958",
+      "end_season": "1957-1958",
+      "conference_key": "ccaa",
+      "conference_name": "California Collegiate Athletic Association",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Fresno official 1957-58 guide season heading explicitly calls California Collegiate Athletic Association champions; WCAC institutional history confirms Fresno exit after one year.",
+      "notes": "Historical source names CCAA; not the separate WCC."
+    },
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "1970-1971",
+      "end_season": "1987-1988",
+      "conference_key": "big-west",
+      "conference_name": "Pacific Coast Athletic Association",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Fresno guide year-by-year PCAA records and Fresno institutional conference membership history; Fresno 1987-88 season header PCAA.",
+      "notes": "Current Big West predecessor naming identity preserved; research-local PCAA key, to reconcile on Implementation."
+    },
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "1988-1989",
+      "end_season": "1991-1992",
+      "conference_key": "big-west",
+      "conference_name": "Big West Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Fresno media guide season headings explicitly use BWC, including 1988-89 and 1991-92; institution athletic chronology supports PCAA rename.",
+      "notes": "Historic name Big West after PCAA rebranding."
+    },
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "1992-1993",
+      "end_season": "2011-2012",
+      "conference_key": "wac",
+      "conference_name": "Western Athletic Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Fresno guide 1992-93 through 2011-12 WAC season records, 1992-93 heading explicitly WAC.",
+      "notes": "Member through 2011-12; Fresno joined Mountain West for 2012-13."
+    },
+    {
+      "source_program_key": "fresno-state",
+      "start_season": "2012-2013",
+      "end_season": "2025-2026",
+      "conference_key": "mountain-west",
+      "conference_name": "Mountain West Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Fresno 2012-13 and later official media-guide MW league-season records; official institutional quick facts say MW since 2012.",
+      "notes": "Historical accepted Research coverage ends 2025-26; 2026-27 Pac-12 not a researched season and no assumption added."
+    }
+  ],
+  "registrations": [
+    {
+      "conference_key": "ccaa",
+      "conference_name": "California Collegiate Athletic Association",
+      "tournament_label": "CCAA",
+      "status": "historical",
+      "notes": "Historical conference identity. Tournament label is a nonassertive display fallback and does not establish that a conference tournament existed in every season."
+    }
+  ]
+}

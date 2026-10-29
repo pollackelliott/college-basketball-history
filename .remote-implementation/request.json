@@ -1,47 +1,48 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fresno-state-stage1-0002",
+  "school_key": "fresno-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "56df7b855b6dff7381164ebb97364f8db8aa9c65",
+  "previous_control_state_sha256": "86cc4b778081af81f2b9de3a148e8b55f6366113161bfd45fdf724c03eaa8730",
+  "expected_protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "research_checkpoint": {
+    "sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
+    "research_base_sha": "a446e5cf028118d0484b75dc462bfe30f7ebd981",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "162d219dfa3134fbd53274d99ec39bab0cd1580f",
+      "path_prefix": ".remote-implementation/inputs/fresno-state-stage1-0001/research-frozen.zip.b64.part",
+      "part_count": 10
+    }
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/inputs/fresno-state-stage1-0002/conference-reconciliation.json",
+    "sha256": "288c214eacbeda73ea44e3deb8b2c69d3dd91fed5a63334acea5b9ca99f7b8cc"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Fresno State serialized Implementation Stage 1 refresh after merged VEN-000659 maintenance",
+    "authorization": "Owner instructed one complete Fresno State Stage 1 inventory against refreshed protected main after the authorized VEN-000659 maintenance merged. Apply only the already-approved representation-only WCAC→WCC and PCAA→Big West key mappings and the approved CCAA historical registration, preserving the immutable Research Freeze and all accepted conference chronology/display/basis/notes. This request is read-only Stage 1 only; no Phase 0, Stage 2, Research reopening, owner gate, release, venue maintenance, protected-main mutation, or other authority is granted."
+  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "recovery": false,
-    "release": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": false,
-    "release_production_proof": false,
-    "release_readiness": false,
     "stage2_census": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "venue_identity_maintenance": true
-  },
-  "creation_provenance": {
-    "authorization": "Owner/Control Center explicitly authorized one bounded VENUE_IDENTITY_MAINTENANCE request for VEN-000659 against protected main f8b65ecc585215887b309dfbfe58ca3c0d4062a6 using the merged guarded geography capability. No maintenance-PR merge, Fresno Stage 1 rerun, Phase 0, Research, Stage 2, owner gate, release, or other authority is granted by this request.",
-    "origin": "ChatGPT Fresno State serialized Implementation, Control Center explicit shared venue geography authorization"
-  },
-  "expected_plan_sha256": "f039e9a88fce2609ea97ee72fb19a17e9cbce5ed8e02f34f2bbc4386ca4f4ff2",
-  "expected_protected_main_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "maintenance_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center explicitly authorized the exact Fresno State Stage 1 in-place geography correction for VEN-000659 / hard-rock-hotel-riviera-maya: preserve the existing physical venue identity, replace repository-level geography Riviera Maya, MX with Puerto Aventuras, Quintana Roo, synchronize only affected registry-backed canonical/published geography and deterministic derived output, and preserve independent source evidence.",
-    "spec_sha256": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648"
-  },
-  "operation": "VENUE_IDENTITY_MAINTENANCE",
-  "previous_control_state_commit": "60c445074fb0584b67f5e44bef1561d52e084870",
-  "previous_control_state_sha256": "7f0439970e3ac78a001ab309afbe303d6d32809dfd7ecd9f47e9339492b0b93d",
-  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json",
-  "request_id": "fresno-state-venue-maintenance-0001",
-  "schema_version": 1,
-  "school_key": "fresno-state",
-  "target_branch": "maintenance/fresno-state-stage1-hard-rock-riviera-maya-geography",
-  "venue_maintenance_spec": {
-    "path": ".remote-implementation/inputs/fresno-state-venue-maintenance-0001/venue-maintenance.json",
-    "sha256": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648"
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
   }
 }
