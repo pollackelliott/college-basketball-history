@@ -1,0 +1,48 @@
+{
+  "preflight": {
+    "blocker_count": 1,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 1,
+      "discrepancy": 14,
+      "identity": 1,
+      "publication": 1
+    },
+    "decision_count": 17,
+    "decision_fields": {
+      "game_date": 8,
+      "game_identity": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 2,
+      "site_type": 4
+    },
+    "site_or_han_review_decision_ids": [
+      "DISCREPANCY-FRESNO-S1-1976-77-009-SITE_TYPE",
+      "DISCREPANCY-FRESNO-S1-1978-79-008-SITE_TYPE",
+      "DISCREPANCY-FRESNO-S1-2022-23-005-SITE_TYPE",
+      "DISCREPANCY-FRESNO-S1-2025-26-010-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "PREFLIGHT_BLOCKED",
+  "topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_blockers"
+    },
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 4,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
