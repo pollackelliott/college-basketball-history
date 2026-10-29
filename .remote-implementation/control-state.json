@@ -131,7 +131,7 @@
     "fresno-state-phase0-scope-supersession-0002"
   ],
   "active_expected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
-  "active_lock_commit": null,
+  "active_lock_commit": "42a4e02e5234aac918cd2038a8f9ce65b1f12e79",
   "active_lock_owner": "github-actions:40853165872:1",
   "active_operation": "PHASE0_SCOPE_SUPERSESSION",
   "active_prepared_commit_sha": null,
