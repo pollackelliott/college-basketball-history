@@ -835,6 +835,18 @@ def verify_scope_supersession_equivalence(
     target_sha = remote_head(ROOT, target_branch)
     if target_sha != successor["prepared_commit_sha"]:
         raise Stop("SCOPE_SUPERSESSION_FRESH_TARGET_REF_MISMATCH")
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        f"+refs/heads/{target_branch}:refs/remotes/origin/remote-target",
+    )
+    fetched_target = git(
+        "rev-parse",
+        "refs/remotes/origin/remote-target",
+    ).stdout.strip()
+    if fetched_target != target_sha:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_TARGET_FETCH_MISMATCH")
     target_parent = git("rev-parse", f"{target_sha}^").stdout.strip()
     target_tree = git("rev-parse", f"{target_sha}^{{tree}}").stdout.strip()
     if (
