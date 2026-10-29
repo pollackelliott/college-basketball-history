@@ -138,7 +138,7 @@
     "fresno-state-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
-  "active_lock_commit": null,
+  "active_lock_commit": "10c33da1c0ca7ae2de6ef3edb153cfa024762f89",
   "active_lock_owner": "github-actions:40915535742:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
