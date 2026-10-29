@@ -21,6 +21,8 @@ from remote_implementation_control import (
     publish_ref_cas,
     sha256_bytes,
     sha256_file,
+    validate_control_state,
+    verify_sidecar_hashes,
 )
 from remote_implementation_io import (
     REQUIRED_PACKAGE_FILES,
@@ -800,3 +802,213 @@ def run_phase0_scope_supersession(
         f"target={prepared['prepared_commit_sha']} "
         f"successor_commit={successor_commit}"
     )
+
+
+def verify_scope_supersession_equivalence(
+    *,
+    live_main: str,
+    control_head: str,
+    state: dict[str, Any],
+    diag: Path,
+) -> int:
+    """Independently reconstruct one completed scope-supersession successor."""
+
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE PHASE 0 SCOPE SUPERSESSION EQUIVALENCE: PASS (already verified)")
+        return 0
+
+    successor_path = last["successor_manifest_path"]
+    successor_bytes = git_show_bytes(control_head, successor_path)
+    if sha256_bytes(successor_bytes) != last["successor_manifest_sha256"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(successor_bytes)
+    if (
+        successor.get("kind") != "REMOTE_IMPLEMENTATION_SUCCESSOR"
+        or successor.get("operation") != OP_PHASE0_SCOPE_SUPERSESSION
+        or successor.get("protected_main_sha") != live_main
+        or successor.get("final_transaction_state") != "COMPLETE"
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_SUCCESSOR_BINDING_MISMATCH")
+
+    target_branch = successor["target_branch"]
+    target_sha = remote_head(ROOT, target_branch)
+    if target_sha != successor["prepared_commit_sha"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_TARGET_REF_MISMATCH")
+    target_parent = git("rev-parse", f"{target_sha}^").stdout.strip()
+    target_tree = git("rev-parse", f"{target_sha}^{{tree}}").stdout.strip()
+    if (
+        target_parent != successor["prepared_parent_sha"]
+        or target_tree != successor["prepared_tree_sha"]
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_TARGET_COMMIT_MISMATCH")
+
+    writeahead_path = successor["writeahead_manifest_path"]
+    writeahead_bytes = git_show_bytes(control_head, writeahead_path)
+    if sha256_bytes(writeahead_bytes) != successor["writeahead_manifest_sha256"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_WRITEAHEAD_HASH_MISMATCH")
+    writeahead = json.loads(writeahead_bytes)
+    if (
+        writeahead.get("operation") != OP_PHASE0_SCOPE_SUPERSESSION
+        or writeahead.get("protected_main_sha") != live_main
+        or writeahead.get("prepared_commit_sha") != target_sha
+        or writeahead.get("prepared_tree_sha") != target_tree
+        or writeahead.get("prepared_parent_sha") != target_parent
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_WRITEAHEAD_BINDING_MISMATCH")
+
+    prefix = Path(writeahead_path).parent
+    bundle = Path(tempfile.mkdtemp(prefix="scope-supersession-fresh-sidecars-"))
+    for relative in writeahead.get("sidecars") or {}:
+        path = bundle / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(
+            git_show_bytes(
+                control_head,
+                (prefix / relative).as_posix(),
+            )
+        )
+    verify_sidecar_hashes(writeahead, bundle)
+
+    request_path = (
+        f".remote-implementation/requests/{successor['request_id']}/request.json"
+    )
+    request_bytes = git_show_bytes(control_head, request_path)
+    if sha256_bytes(request_bytes) != successor["request_sha256"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    if (
+        request.get("operation") != OP_PHASE0_SCOPE_SUPERSESSION
+        or request.get("expected_protected_main_sha") != live_main
+        or request.get("target_branch") != target_branch
+        or request.get("target_sha") != target_parent
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_REQUEST_BINDING_MISMATCH")
+
+    spec_bytes = (bundle / "scope-supersession.json").read_bytes()
+    if sha256_bytes(spec_bytes) != request["scope_supersession_spec"]["sha256"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_SPEC_HASH_MISMATCH")
+    spec = validate_scope_supersession_spec(
+        json.loads(spec_bytes),
+        school_key=request["school_key"],
+    )
+
+    # Re-authenticate the superseded durable authority chain independently.
+    phase0, _ = _read_json_ref(
+        control_head,
+        request["superseded_phase0_successor"],
+        code="SCOPE_SUPERSESSION_FRESH_PHASE0_SUCCESSOR",
+    )
+    current, _ = _read_json_ref(
+        control_head,
+        request["superseded_successor"],
+        code="SCOPE_SUPERSESSION_FRESH_CURRENT_SUCCESSOR",
+    )
+    if (
+        phase0.get("integration_freeze_sha256")
+        != request["superseded_integration_freeze_sha256"]
+        or phase0.get("semantic_snapshot_sha256")
+        != request["superseded_semantic_snapshot_sha256"]
+        or current.get("actual_published_target_sha") != target_parent
+        or current.get("integration_freeze_sha256")
+        != request["superseded_integration_freeze_sha256"]
+        or current.get("semantic_snapshot_sha256")
+        != request["superseded_semantic_snapshot_sha256"]
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_SUPERSEDED_AUTHORITY_MISMATCH")
+
+    rebuilt = prepare_scope_supersession(
+        request=request,
+        authority={"spec": spec, "spec_bytes": spec_bytes},
+        live_main=live_main,
+        diag=diag / "scope-supersession",
+    )
+    stored_proof = json.loads(
+        (bundle / "scope-supersession-proof.json").read_text(encoding="utf-8")
+    )
+    if rebuilt["proof"] != stored_proof:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_PROOF_MISMATCH")
+    comparisons = {
+        "prepared_tree_sha": target_tree,
+        "candidate_zip_sha256": writeahead["candidate_zip_sha256"],
+        "integration_freeze_sha256": writeahead["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": writeahead["semantic_snapshot_sha256"],
+        "proof_sha256": writeahead["scope_supersession_proof_sha256"],
+    }
+    for field, expected in comparisons.items():
+        if rebuilt.get(field) != expected:
+            raise Stop("SCOPE_SUPERSESSION_FRESH_REBUILD_MISMATCH:" + field)
+    if rebuilt["changed_paths"] != writeahead["changed_paths"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_CHANGED_PATH_MISMATCH")
+    if rebuilt["changed_file_sha256"] != writeahead["changed_file_sha256"]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_CHANGED_FILE_HASH_MISMATCH")
+    if rebuilt["candidate_package_member_sha256"] != writeahead[
+        "candidate_package_member_sha256"
+    ]:
+        raise Stop("SCOPE_SUPERSESSION_FRESH_CANDIDATE_MEMBER_MISMATCH")
+
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_PHASE0_SCOPE_SUPERSESSION_VERIFICATION",
+        "request_id": successor["request_id"],
+        "school_key": successor["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "target_predecessor_sha": target_parent,
+        "target_sha": target_sha,
+        "target_tree_sha": target_tree,
+        "original_research_checkpoint_sha256": request[
+            "research_checkpoint"
+        ]["sha256"],
+        "candidate_zip_sha256": rebuilt["candidate_zip_sha256"],
+        "scope_supersession_spec_sha256": sha256_bytes(spec_bytes),
+        "scope_supersession_proof_sha256": rebuilt["proof_sha256"],
+        "excluded_source_game_count": rebuilt["proof"][
+            "excluded_source_game_count"
+        ],
+        "retained_source_game_count": rebuilt["proof"][
+            "source_game_count_after"
+        ],
+        "retained_semantic_equivalence": rebuilt["proof"][
+            "retained_semantic_equivalence"
+        ],
+        "integration_freeze_sha256": rebuilt[
+            "integration_freeze_sha256"
+        ],
+        "semantic_snapshot_sha256": rebuilt["semantic_snapshot_sha256"],
+        "repository_validation": "PASS",
+        "remote_phase0_scope_supersession_equivalence": "PASS",
+    }
+    verify_dir = Path(
+        f".remote-implementation/verifications/{successor['school_key']}/"
+        f"{successor['request_id']}"
+    )
+    write_json(
+        verify_dir / "phase0-scope-supersession-verification.json",
+        verification,
+    )
+
+    local_state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (
+        local_last.get("operation") != OP_PHASE0_SCOPE_SUPERSESSION
+        or local_last.get("request_id") != successor["request_id"]
+        or local_last.get("target_sha") != target_sha
+    ):
+        raise Stop("SCOPE_SUPERSESSION_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last["remote_phase0_scope_supersession_equivalence"] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        f"persist fresh Phase 0 scope supersession verification "
+        f"{successor['request_id']}",
+        [STATE_PATH, verify_dir],
+    )
+    print(
+        "REMOTE PHASE 0 SCOPE SUPERSESSION EQUIVALENCE: PASS "
+        f"verification_commit={commit}"
+    )
+    return 0
