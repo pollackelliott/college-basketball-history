@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fresno-state-stage2-proposal-0001",
+  "school_key": "fresno-state",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "064b8a27cf1e1267ac3da17d8aa240e7aed57868",
+  "previous_control_state_sha256": "eb952c4959cf47e0c865ed0c9de708c606b54ec25c9c81696262191a94d07177",
+  "expected_protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "cc10e265081fd7a9baf84b0e41a0eef59512ed55bcd921b0a00af50ef1ea33cb"
+  },
+  "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
+  "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/fresno-state-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Fresno State serialized Implementation — exact read-only Stage 2 proposal rehearsal",
+    "authorization": "Owner explicitly authorized exactly one read-only STAGE2_PROPOSAL_REHEARSAL using the already durable 18/18 recommendation map at SHA-256 8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09, companion review SHA-256 17bb2eb8d0864d3e090e75a536a32b5f7dc53f5d24b0f5b1005e636e82a3848a, census checkpoint cc10e265081fd7a9baf84b0e41a0eef59512ed55bcd921b0a00af50ef1ea33cb, decision universe f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f, protected main 42f820e3dd4dd315e4c1bca04172a0690028299e, and Fresno target e83cfac049004fbe277292d374a359fdca3f0263. Authorize permanent disposable rehearsal, durable checkpoint, technical-readiness/approved-plan preview evidence where produced, and independent fresh verification only. No Owner Gate 1 approval, fill-review, seal, apply, tracked basketball mutation, publication, release, merge, Production, recovery, or rereview authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
