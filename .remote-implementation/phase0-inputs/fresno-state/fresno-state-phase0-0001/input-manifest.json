@@ -1,0 +1,21 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "request_id": "fresno-state-phase0-0001",
+  "research_checkpoint_sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
+  "research_member_sha256": {
+    "conferences.csv": "06acb64ae8ff7a11e19623a14632ff275348734ecacc5325a604a501d229dbf9",
+    "notes.md": "a8d0934a8717f8dba78abed2547776938638d9dfb21fa4a36ce4790c270750c1",
+    "opponents.csv": "369ae151a090f156fe856de64f68a03940289bd2dc0f0da3cefd6ef973a1341c",
+    "source-games.csv": "f009194ebbe10c14183f34a91ecc6446e21eaf595c4cb9874443351785f8fef8",
+    "source-notes.md": "b3fabe5aadd6166b8ca88453bb5b12b2c29a0a410865984f6b61a2879ee4de6b",
+    "venues.csv": "10a0531d9e29d7f997c02358e69a6c1adb68a4a180ef09d94805169a9e1e8e15"
+  },
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "sidecars": {
+    "conference-reconciliation.json": "288c214eacbeda73ea44e3deb8b2c69d3dd91fed5a63334acea5b9ca99f7b8cc",
+    "stage1-reconciliation.json": "a3f7d9048bbabd10df4c1486d000fbaf5d9ace677616d66f73d3fb96a873a18a"
+  },
+  "stage1_status": "PASS"
+}
