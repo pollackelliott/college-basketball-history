@@ -135,7 +135,7 @@
   "active_request_sha256": "8ce621e32d7ea5b1beef42d72dfff3ad607bbcd0d1ed6e0ccaebc180de0631c8",
   "active_school_key": "fresno-state",
   "active_target_branch": "data/fresno-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "94a22b4d59f7645e9cc1d0a63649fd31044b2ef5",
   "active_writeahead_path": ".remote-implementation/writeahead/fresno-state/fresno-state-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "769ffd9c7c4e35f4c70dd8a40e57af2fe24599cbf4f6fa62e9f71c59f7195266",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
