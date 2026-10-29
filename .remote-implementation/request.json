@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-phase0-scope-supersession-recover-0001",
+  "request_id": "fresno-state-phase0-scope-supersession-recover-0002",
   "school_key": "fresno-state",
   "operation": "RECOVER",
-  "previous_control_state_commit": "c02806dc5e36402096d8e05eb86782d71caa18c8",
+  "previous_control_state_commit": "8c48ec309d5a01cb5d9b8a13c4c5fd2d5a8c5c85",
   "previous_control_state_sha256": "2d679f2f596c96f5c90a50ef3f58f3c4b039ef60bb337ca61a81c16e577ce527",
-  "expected_protected_main_sha": "0385643f002318cecb5da873d38281c3fe95e871",
+  "expected_protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
   "recovery": {
     "abandoned_request_id": "fresno-state-phase0-scope-supersession-0001",
     "lock_commit": "72d8e79070f91c8c12529c22c2f6b67645f4840f",
     "target_branch": "data/fresno-state-onboarding"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Fresno State serialized Implementation — recovery after deterministic tooling stop",
-    "authorization": "Recover the failed Fresno scope-supersession transaction after durable proof that the target branch remains at its exact predecessor and no write-ahead or prepared successor was bound. Recovery is limited to permanent classification, durable recovery evidence, and lock release."
+    "origin": "ChatGPT Fresno State serialized Implementation — recovery after generic baseline/recovery fix",
+    "authorization": "Recover the failed Fresno scope-supersession transaction after exact durable proof that the target branch remains at 7925342ad192f86ac7f943ce4b439e31dc402b80, no write-ahead exists, and the generic recovery fix is merged on protected main. Recovery is limited to permanent classification, durable recovery evidence, and lock release."
   },
   "authority": {
     "owner_gate_1": false,
