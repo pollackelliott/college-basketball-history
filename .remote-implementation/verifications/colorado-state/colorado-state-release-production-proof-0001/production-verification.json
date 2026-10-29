@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "d6d0fb26e176f026972617a7d354e776d4e06fa8e025015066ebf0096655fd51",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "194af2825b8704515f0fc6639ac36999669ab3db",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "3eb05c96d42f5dc8f27fa37cc7e53cb581db412c",
+  "pr_number": 395,
+  "production_deployment_id": 7400520570,
+  "production_json_checked_count": 67,
+  "production_proof": true,
+  "request_id": "colorado-state-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "colorado-state",
+  "status": "COMPLETE"
+}
