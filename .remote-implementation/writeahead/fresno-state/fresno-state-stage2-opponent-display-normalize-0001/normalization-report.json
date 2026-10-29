@@ -1,0 +1,33 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 1,
+  "change_row_count": 1,
+  "changes": [
+    {
+      "authority_names": [
+        "Saint Katherine"
+      ],
+      "authority_signature": "saintkatherine",
+      "canonical_opponent_key": "saint-katherine",
+      "from_names": [
+        "University of Saint Katherine"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Katherine"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "source_game_display_change_keys": 1,
+  "source_game_display_change_rows": 1,
+  "source_game_display_changes": [
+    {
+      "from_name": "University of Saint Katherine",
+      "normalized_opponent_key": "saint-katherine",
+      "source_game_id": "FRESNO-S1-2014-15-013",
+      "to_name": "Saint Katherine"
+    }
+  ],
+  "status": "PASS"
+}

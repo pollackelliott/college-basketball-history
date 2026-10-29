@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "integration_base_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+    "school_key": "fresno-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "integration_base_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+    "school_key": "fresno-state",
+    "status": "PASS"
+  }
+}

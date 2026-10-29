@@ -1,0 +1,65 @@
+{
+  "allowed_paths": [
+    "schools/fresno-state/opponents.csv",
+    "schools/fresno-state/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/fresno-state/opponents.csv": "5fe9784beb8c12e3778e014806f3004e87c87d8e62018e55746fdd0261d21d49",
+    "schools/fresno-state/source-games.csv": "afc22479bd6250331ef771cfcfd416728dde4438df4cdd3b55ea8c100110c540"
+  },
+  "changed_paths": [
+    "schools/fresno-state/opponents.csv",
+    "schools/fresno-state/source-games.csv"
+  ],
+  "commit_message": "Normalize fresno-state historical opponent display representation",
+  "expected_blocker_keys": [
+    "saint-katherine"
+  ],
+  "expected_target_predecessor_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+  "field_level_proof_sha256": "a2c479767cedb83b666ce7cbb5c653027419105384a82fab2130d3aa864a2e20",
+  "global_lock_commit": "a0b1bbd5d98fde1fd877454072f8315672872e6d",
+  "integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "1a812a2df3a4784b42a9eb046fd3dc1d88313f0b763f3dc63ef76bd7e1521345",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80",
+  "prepared_parent_sha": "e8b95d8d11baa2748e6657347db53638006d1bac",
+  "prepared_tree_sha": "c0da9d90f48f1ee31bbf0848aef1f9c474d35074",
+  "protected_main_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+  "repository_validation": "PASS",
+  "request_id": "fresno-state-stage2-opponent-display-normalize-0001",
+  "request_sha256": "ec7b3237ebba9fa5f2ada5435bdc73469ade657bde6c76af25a77d04a1c38e1e",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_drift_after": {
+    "baseline_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "integration_base_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+    "school_key": "fresno-state",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+    "integration_base_sha": "9e5e782716deb303a60762bc74dee6dedfba7e68",
+    "school_key": "fresno-state",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "88aba063fc2e9edf6ff20977bec4bdc88a289fb30094a9fc0229df577d81328a",
+    "field-level-proof.json": "a2c479767cedb83b666ce7cbb5c653027419105384a82fab2130d3aa864a2e20",
+    "integration-freeze.json": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+    "normalization-report.json": "1a812a2df3a4784b42a9eb046fd3dc1d88313f0b763f3dc63ef76bd7e1521345",
+    "semantic-drift-proof.json": "d55e8e2561fedfabcbaa40f6d4b66b8df2a8f290d6df346a7638da5b4a6fd4b2"
+  },
+  "source_game_normalized_name_row_count": 1,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "88aba063fc2e9edf6ff20977bec4bdc88a289fb30094a9fc0229df577d81328a",
+  "target_branch": "data/fresno-state-onboarding"
+}

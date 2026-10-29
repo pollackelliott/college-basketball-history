@@ -1,0 +1,22 @@
+{
+  "allowed_paths": [
+    "schools/fresno-state/opponents.csv",
+    "schools/fresno-state/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "saint-katherine"
+  ],
+  "opponent_changed_row_count": 1,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "source_game_changed_ids": [
+    "FRESNO-S1-2014-15-013"
+  ],
+  "source_game_changed_keys": [
+    "saint-katherine"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 1
+}
