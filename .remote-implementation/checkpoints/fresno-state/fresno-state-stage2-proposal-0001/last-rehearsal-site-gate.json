@@ -1,0 +1,52 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 21,
+    "public_gap_rows": 21,
+    "reciprocal_research_accounted_gap": 2,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 1708,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_venue": [
+      "CBBG-0032888",
+      "CBBG-0051141",
+      "CBBG-0072270",
+      "CBBG-0116827",
+      "CBBG-0161653",
+      "CBBG-0164780",
+      "CBBG-0179245",
+      "CBBG-0179293",
+      "CBBG-0179402",
+      "CBBG-0179425",
+      "CBBG-0179455",
+      "CBBG-0179480"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0116827",
+      "CBBG-0164780"
+    ]
+  },
+  "history_start_season": "1970-1971",
+  "school_key": "fresno-state",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 19,
+    "neutral_missing_venue": 19,
+    "researched_gap_rows": 19,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 1708
+  },
+  "status": "PASS",
+  "warnings": []
+}

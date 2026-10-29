@@ -1,0 +1,168 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "ff735afa136cb18ed56c82fb868ae42234484b735ed6368a014f6c204675ead4",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "a850cad4ea470e2b78cb774182cfc2661fb2f6e786bf143f0caff401a11a50d3",
+    "implementation-stage2-status.json": "d6f5dc84c4bfe2ffdc66584ae6ecda4076ca630d4ca9ec7a14c2570d9626d86e",
+    "last-rehearsal-site-gate.json": "0a9bb66b06b4391d957274904ca91d8a3a5136780e75957058221aa0473d3f53",
+    "plan.json": "e031c14e2350a0b0c34a8f43f36a4b5dffcb62dee30a885c19faa17ebcde9e61",
+    "review.csv": "e6fd30b439cd6580bbbb5a1229f79ca0fa2b004aee94e05718a79308ab215687",
+    "review.md": "f57d3df0700785a183a70bb7489f6af364902eef40ff801a161e9e5ea33c9d09"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "a850cad4ea470e2b78cb774182cfc2661fb2f6e786bf143f0caff401a11a50d3",
+    "implementation-stage2-status.json": "d52ee58dfd5ea3a54dc06ea8e081867f9c5e71cddc392709d51911ebde517b61",
+    "last-rehearsal-site-gate.json": "0a9bb66b06b4391d957274904ca91d8a3a5136780e75957058221aa0473d3f53",
+    "plan.json": "4240fee1744eb91d91f286f98f710eb8ff1936fa5f843395e6ded72f37d4a08d",
+    "review.csv": "e6fd30b439cd6580bbbb5a1229f79ca0fa2b004aee94e05718a79308ab215687",
+    "review.md": "7c79e31668f7e6347360bd1d99caaadd629377b63fc9926b5f6782575bfd12a4"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 4,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+    "runtime_decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+  "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "fresno-state",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 1,
+      "discrepancy": 14,
+      "identity": 1,
+      "publication": 1
+    },
+    "decision_count": 18,
+    "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+    "discrepancies_to_add": 14,
+    "existing_game_matches": 380,
+    "new_canonical_games": 1327,
+    "plan_path": ".onboarding/fresno-state/plan.json",
+    "review_path": ".onboarding/fresno-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 11,
+      "MATCH_CANONICAL:CBBG-0103403": 1,
+      "USE_SOURCE": 4
+    },
+    "approved_plan_hash_preview": "ff735afa136cb18ed56c82fb868ae42234484b735ed6368a014f6c204675ead4",
+    "decision_count": 18,
+    "path": "/tmp/remote-stage2-proposal-map-tycprw1m/recommendation-map.json",
+    "sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/inputs/fresno-state-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "8aa65db6a1ffa22851369ceff35cac78fb9c95fdf2627788b41c543f1c502a09",
+  "request_id": "fresno-state-stage2-proposal-0001",
+  "request_sha256": "1f2fab4c2edbc1f9ad58603875abe50703eadb8321bc47c0a9b468d457b44068",
+  "runtime_commit_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "runtime_decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+    "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+    "tools/onboarding_hardening.py": "2d18fde1fe2828439e311da6588b1bdb89328b69d99318ebce4300c1a8df5673",
+    "tools/onboarding_plan.py": "a443e89ab264c8663a6141e144921de1b26d0eee3fab902e87fb96fce1a95144",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 21,
+      "public_gap_rows": 21,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1708,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_venue": [
+        "CBBG-0032888",
+        "CBBG-0051141",
+        "CBBG-0072270",
+        "CBBG-0116827",
+        "CBBG-0161653",
+        "CBBG-0164780",
+        "CBBG-0179245",
+        "CBBG-0179293",
+        "CBBG-0179402",
+        "CBBG-0179425",
+        "CBBG-0179455",
+        "CBBG-0179480"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0116827",
+        "CBBG-0164780"
+      ]
+    },
+    "history_start_season": "1970-1971",
+    "school_key": "fresno-state",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 19,
+      "neutral_missing_venue": 19,
+      "researched_gap_rows": 19,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 0
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 1708
+    },
+    "status": "PASS",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/fresno-state/fresno-state-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_authority_sha256": "cc10e265081fd7a9baf84b0e41a0eef59512ed55bcd921b0a00af50ef1ea33cb",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "target_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+  "tracked_mutation_proof": {
+    "after_head_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+    "after_status": "",
+    "after_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+    "before_head_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+    "before_status": "",
+    "before_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
