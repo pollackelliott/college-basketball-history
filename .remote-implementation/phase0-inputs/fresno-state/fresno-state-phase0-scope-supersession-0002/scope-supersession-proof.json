@@ -1,0 +1,45 @@
+{
+  "candidate_semantic_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "conferences": {
+    "removed_rows": 3,
+    "retained_rows": 4,
+    "split_or_clipped_rows": 0
+  },
+  "excluded_source_game_count": 78,
+  "excluded_source_game_ids_sha256": "b6ef965f7fc3c90287f1b8fa39f205e611b76529bc3ff87d0136540ab0332421",
+  "new_scope": "1970-71+",
+  "old_scope": "1955-56..1957-58|1970-71+",
+  "opponents": {
+    "recounted_rows": 30,
+    "removed_rows": 11,
+    "retained_rows": 533
+  },
+  "package_member_sha256": {
+    "conferences.csv": "f8281a5553fb872372fc673e1af9c451325c7e630f2c1f92825d56391d288c38",
+    "notes.md": "c30369e80d186937a4772884f45a1d0964459cb289110d38292722bdcbefe1ee",
+    "opponents.csv": "021f6a9cf3d4be97d922f265af9d711fd6899d84018819accfdad72b0bbc3c45",
+    "source-games.csv": "06bc7ce4701bb9a2e9f0b5b71fcb2232d5235e78f2c82c3180b49fe8b2227cb1",
+    "source-notes.md": "03d3f143116c5a67f92b8455246740f2b242e328204eadfbab0b0038d825204c",
+    "venues.csv": "8768ad337de499ea385801040e051c3f2283909e821612ba9484a1bf6e6d947a"
+  },
+  "predecessor_retained_semantic_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "retained_semantic_equivalence": "PASS",
+  "retained_source_game_ids_sha256": "c649255865eaf7cd2a5c4b6d3894365e9b4808ad494a0048ccaec81c1ad611b2",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "source_game_count_after": 1708,
+  "source_game_count_before": 1786,
+  "venues": {
+    "cleared_unregistered_ids": [
+      "alumni-recreation-center-siena",
+      "peterson-gym"
+    ],
+    "dropped_keys": [
+      "cook-gymnasium-santa-ana",
+      "fresno-state-north-gym"
+    ],
+    "rebound_current_main_ids": [],
+    "retained_rows": 52
+  },
+  "workflow_kind": "PRE_PUBLICATION_SCOPE_SUPERSESSION"
+}

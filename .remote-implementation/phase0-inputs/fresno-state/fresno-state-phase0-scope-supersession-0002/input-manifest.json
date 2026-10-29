@@ -1,0 +1,16 @@
+{
+  "candidate_zip_sha256": "70ed40b9941497cb1f845ec0692106eddfa02baee72f92a06c75051b4bc937e4",
+  "kind": "REMOTE_IMPLEMENTATION_SCOPE_SUPERSESSION_INPUTS",
+  "original_research_checkpoint_sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
+  "protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "request_id": "fresno-state-phase0-scope-supersession-0002",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "sidecars": {
+    "scope-supersession-proof.json": "024f2e18fa519ffda436df357aaccc95f2488b40254a6d74f3fc9e7da95e6fb5",
+    "scope-supersession.json": "e95fb09b0231b53770b7521f63317acb842a1cc5a594c9b1af4b19db8c786622",
+    "stage1-reconciliation.json": "867f4e001dd044388d73fe57f15f4c6d2e0191fb2328943df24097866c486511"
+  },
+  "stage1_status": "PASS",
+  "target_predecessor_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80"
+}

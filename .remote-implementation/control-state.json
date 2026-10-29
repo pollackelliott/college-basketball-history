@@ -287,5 +287,5 @@
   "lock_acquisition_request_commit": "ccd82fe048237e2da6dbfce8506f7c0742f7440d",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "INPUTS_VERIFIED"
 }
