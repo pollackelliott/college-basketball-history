@@ -1,0 +1,72 @@
+{
+  "allowed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json",
+    "data/reference/venues.csv",
+    "schools/smu/venues.csv",
+    "schools/west-virginia/venues.csv"
+  ],
+  "apply_result": {
+    "assertion_rows_updated": 0,
+    "canonical_geography_rows_updated": 6,
+    "canonical_identity_rows_updated": 0,
+    "canonical_rows_updated": 6,
+    "ncaa_evidence_rows_updated": 0,
+    "plan_sha256": "f039e9a88fce2609ea97ee72fb19a17e9cbce5ed8e02f34f2bbc4386ca4f4ff2",
+    "provenance_markers_updated": 0,
+    "school_geography_rows_updated": 2,
+    "school_identity_rows_updated": 0,
+    "school_rows_updated": 2,
+    "site_files_refreshed": 3,
+    "venue_geography_corrections": 1,
+    "venue_name_rows_reassigned": 0,
+    "venues_retired": 0
+  },
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "6fa6e4d5e5cd07b4e2a9c4f1f87600c98bc20b6307c388ba96c891327693d455",
+    "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648",
+    "data/reference/venues.csv": "a3ed5440d22d81fb0ae120bc41c940b5f2a183c4c4cdf896d55c0d28274b8eea",
+    "schools/smu/venues.csv": "65f7bec2fc1804ed68bbc2ca1432b4ec2cc851fb458ad35a6ca31cb1fa1fc844",
+    "schools/west-virginia/venues.csv": "fc1e27e0345e4e2dacd820568c86735998d24620e88fe895e1536789f2bc7edf",
+    "site/data/teams/smu.json": "13f7e4244c1147ead9a4efb9c74a9daec6c284f87ac85005ea1fd1bec5f57ebb",
+    "site/data/teams/west-virginia.json": "a720fc99c69fe79d10b3f772fd1caa0afdf1738a7b4e8daf887e0cfe31b30ce6",
+    "site/data/teams/wisconsin.json": "e8ebbd6dcf6d2519b16aa19a641fb98104f13629bf6752a7b659e45f328e97be"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json",
+    "data/reference/venues.csv",
+    "schools/smu/venues.csv",
+    "schools/west-virginia/venues.csv",
+    "site/data/teams/smu.json",
+    "site/data/teams/west-virginia.json",
+    "site/data/teams/wisconsin.json"
+  ],
+  "commit_message": "Reconcile shared venue references for fresno-state",
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "d3244ddf7b42e5a48c8cdb1c7cc8933f1acdf88e",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "plan_merges": [],
+  "plan_sha256": "f039e9a88fce2609ea97ee72fb19a17e9cbce5ed8e02f34f2bbc4386ca4f4ff2",
+  "prepared_commit_sha": "82b04a53e6db350ae4b21f1eaa67d535c1df85c2",
+  "prepared_parent_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
+  "prepared_tree_sha": "d0fd416510b22d1c103279740b2e10a561f9739f",
+  "protected_main_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json",
+  "repository_spec_sha256": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648",
+  "repository_validation": "PASS",
+  "request_id": "fresno-state-venue-maintenance-0001",
+  "request_sha256": "4a2db06e329c52641f71d9a10d6ffdfbf76f3c2f8ad7d572116c05f964012eb9",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "sidecars": {
+    "apply-result.json": "f4e5d75abef984643f6c005af329b14e6c90df2158cb4e4c041eb1b1676879dc",
+    "transaction-plan.json": "d44f254d152dfb49cc2b067245e2a69be680609026518cedf5744e6586cca6f4",
+    "venue-maintenance-spec.json": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648"
+  },
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/fresno-state-stage1-hard-rock-riviera-maya-geography"
+}

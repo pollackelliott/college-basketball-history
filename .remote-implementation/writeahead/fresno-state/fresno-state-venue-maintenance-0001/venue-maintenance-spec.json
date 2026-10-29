@@ -1,0 +1,16 @@
+{
+  "geography_corrections": [
+    {
+      "expected_canonical_rows": 6,
+      "expected_school_rows": 2,
+      "from_city": "Riviera Maya",
+      "from_state": "MX",
+      "resolution_basis": "Control Center-authorized in-place geography correction for the existing Hard Rock Hotel Riviera Maya physical venue: replace the coarse repository geography Riviera Maya, MX with Puerto Aventuras, Quintana Roo while preserving VEN-000659, the hard-rock-hotel-riviera-maya key, and independent source evidence.",
+      "to_city": "Puerto Aventuras",
+      "to_state": "Quintana Roo",
+      "venue_id": "VEN-000659",
+      "venue_key": "hard-rock-hotel-riviera-maya"
+    }
+  ],
+  "schema_version": 1
+}

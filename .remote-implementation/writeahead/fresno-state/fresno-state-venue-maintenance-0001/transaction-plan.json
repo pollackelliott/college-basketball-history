@@ -1,0 +1,45 @@
+{
+  "blockers": [],
+  "fingerprints": {
+    "data/canonical/games.csv": "23ec2b1d606376ef2dab927df9a17a8b50b06e30f9467b9178560a7c80720a83",
+    "data/evidence/game-assertions.csv": "f52b9c6964e68a3a8be4fbdcc24fbd37552c44868606caf5ef0cc0ffed304ddf",
+    "data/evidence/ncaa-tournament-sites.csv": "eb462cba0e44bc87bcedb6b95aa0aa690a917bf4010263db156b281763851135",
+    "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648",
+    "data/reference/venue-names.csv": "a05b36a0d10799037c5089a437a129b15cd4baef643a315cfd1b500cc87e088e",
+    "data/reference/venues.csv": "85ec96ea6ad4e0d1774b6104e91c34edc4ad731fdb2bb5d1f1054a83ae42b392",
+    "schools/smu/venues.csv": "738624b49c23a4294a520dc8a919f35f2bfbc85b90568df7ae1742be8e1144f7",
+    "schools/west-virginia/venues.csv": "016a5dcab71e7d44728928ed3e4f00a9844c283d6127ecfdc75c556e3ea604dc"
+  },
+  "geography_corrections": [
+    {
+      "canonical_rows": 6,
+      "expected_canonical_rows": 6,
+      "expected_school_rows": 2,
+      "from_city": "Riviera Maya",
+      "from_state": "MX",
+      "ncaa_evidence_rows": 0,
+      "resolution_basis": "Control Center-authorized in-place geography correction for the existing Hard Rock Hotel Riviera Maya physical venue: replace the coarse repository geography Riviera Maya, MX with Puerto Aventuras, Quintana Roo while preserving VEN-000659, the hard-rock-hotel-riviera-maya key, and independent source evidence.",
+      "school_files": [
+        {
+          "path": "schools/smu/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/west-virginia/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 2,
+      "source_assertion_rows": 0,
+      "to_city": "Puerto Aventuras",
+      "to_state": "Quintana Roo",
+      "venue_id": "VEN-000659",
+      "venue_key": "hard-rock-hotel-riviera-maya"
+    }
+  ],
+  "git_head": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
+  "merges": [],
+  "plan_sha256": "f039e9a88fce2609ea97ee72fb19a17e9cbce5ed8e02f34f2bbc4386ca4f4ff2",
+  "schema_version": 1,
+  "spec": "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json"
+}
