@@ -120,18 +120,19 @@
     "colorado-state-release-preview-verify-0001",
     "colorado-state-release-gate2-approval-0001",
     "colorado-state-release-production-proof-0001",
-    "fresno-state-stage1-0001"
+    "fresno-state-stage1-0001",
+    "fresno-state-venue-maintenance-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40809865170:1",
+  "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fresno-state-venue-maintenance-0001",
+  "active_request_sha256": "4a2db06e329c52641f71d9a10d6ffdfbf76f3c2f8ad7d572116c05f964012eb9",
+  "active_school_key": "fresno-state",
+  "active_target_branch": "maintenance/fresno-state-stage1-hard-rock-riviera-maya-geography",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -261,8 +262,11 @@
     "stage1_reconciliation_sha256": "8e3b908afeef48c1fb8f8e0081ee30d94e8a85272ad64256c94ab06a3499f697",
     "stage1_status": "BLOCKED"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40809865170",
+  "lock_acquisition_request_commit": "4bbe5f313bb1b0ea76cac65501993726df4b8a43",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }

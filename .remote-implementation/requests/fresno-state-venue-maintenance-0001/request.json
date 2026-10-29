@@ -1,0 +1,47 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": true
+  },
+  "creation_provenance": {
+    "authorization": "Owner/Control Center explicitly authorized one bounded VENUE_IDENTITY_MAINTENANCE request for VEN-000659 against protected main f8b65ecc585215887b309dfbfe58ca3c0d4062a6 using the merged guarded geography capability. No maintenance-PR merge, Fresno Stage 1 rerun, Phase 0, Research, Stage 2, owner gate, release, or other authority is granted by this request.",
+    "origin": "ChatGPT Fresno State serialized Implementation, Control Center explicit shared venue geography authorization"
+  },
+  "expected_plan_sha256": "f039e9a88fce2609ea97ee72fb19a17e9cbce5ed8e02f34f2bbc4386ca4f4ff2",
+  "expected_protected_main_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the exact Fresno State Stage 1 in-place geography correction for VEN-000659 / hard-rock-hotel-riviera-maya: preserve the existing physical venue identity, replace repository-level geography Riviera Maya, MX with Puerto Aventuras, Quintana Roo, synchronize only affected registry-backed canonical/published geography and deterministic derived output, and preserve independent source evidence.",
+    "spec_sha256": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648"
+  },
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "previous_control_state_commit": "60c445074fb0584b67f5e44bef1561d52e084870",
+  "previous_control_state_sha256": "7f0439970e3ac78a001ab309afbe303d6d32809dfd7ecd9f47e9339492b0b93d",
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json",
+  "request_id": "fresno-state-venue-maintenance-0001",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "target_branch": "maintenance/fresno-state-stage1-hard-rock-riviera-maya-geography",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/fresno-state-venue-maintenance-0001/venue-maintenance.json",
+    "sha256": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648"
+  }
+}
