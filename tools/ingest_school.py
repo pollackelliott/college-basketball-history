@@ -1036,6 +1036,22 @@ def canonical_enrichment_candidates(
         if canonical.get("date_precision", "").strip() in {"", "SEASON"}:
             result.append(("date_precision", "EXACT"))
 
+    # This helper is invoked only for confidently matched games. Preserve an
+    # accepted target NCAA round when the existing canonical game has not yet
+    # recorded one. This is fill-only: established canonical rounds still flow
+    # through discrepancy/reconciliation handling and are never overwritten here.
+    src_game_type = source.get("curated_game_type", "").strip()
+    can_game_type = canonical.get("game_type", "").strip()
+    src_round = source.get("curated_postseason_round", "").strip()
+    can_round = canonical.get("postseason_round", "").strip()
+    if (
+        src_game_type == "NCAA_TOURNAMENT"
+        and can_game_type == "NCAA_TOURNAMENT"
+        and src_round
+        and not can_round
+    ):
+        result.append(("postseason_round", src_round))
+
     src_site, src_home_key = source_site_to_canonical(source)
     can_site = canonical.get("site_type", "").strip()
 
