@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fresno-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "fresno-state",
+  "previous_control_state_commit": "6c89e54d085879aa4c3a8bc9440fc75d6f854e74",
+  "previous_control_state_sha256": "0fd34eff65e26489a4c959b6f09eec9c9d590a9002dd018a0d3ce13ec1b41098",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "pr_number": 401,
+  "merge_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "2a2bdba02e570456234f63ad9d4c6473ccc3298381fbb94ce0987cc4827732ae"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "a5b165ebfcc410925ac9d737d1cba577e4e0777c33cc0d941097815a5c91ae5a"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Fresno State serialized Implementation",
+    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector rechecked protected main, exact PR #401 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one repository-standard two-parent merge. GitHub merged exact approved head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 as 619daf5a96e9acfc80a8fc74b381f50bdc0599fc with first parent 6fce295d8fa38ae204f7b5318ea4743f0fc019f2 and second parent 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
+    "venue_identity_maintenance": false
+  }
+}

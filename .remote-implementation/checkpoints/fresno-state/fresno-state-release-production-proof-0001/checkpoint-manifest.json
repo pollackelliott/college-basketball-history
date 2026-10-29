@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
+  "merge_parent_onboarding": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "merge_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "2a2bdba02e570456234f63ad9d4c6473ccc3298381fbb94ce0987cc4827732ae",
+  "owner_gate_2_verification_sha256": "a5b165ebfcc410925ac9d737d1cba577e4e0777c33cc0d941097815a5c91ae5a",
+  "pr_head_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "pr_number": 401,
+  "production_deployment_id": 7419742479,
+  "production_json_checked_count": 57,
+  "production_proof": true,
+  "production_proof_sha256": "bb789d31ac8a4c665828c81095f60d0da658ab7b0bb2c81c1d8e45f80e555b02",
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "request_id": "fresno-state-release-production-proof-0001",
+  "request_sha256": "bc5e4021353cba072561aec8b0943f589f71443d009f7fd9d10891d1e5a68c21",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}
