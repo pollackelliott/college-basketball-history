@@ -285,11 +285,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "f03e0839fd8ef9b73a1029e80a3181dae00b3408e840c3e017ccef99215dfc00",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "fresno-state-release-readiness-0001",
     "school_key": "fresno-state",
     "target_branch": "data/fresno-state-onboarding",

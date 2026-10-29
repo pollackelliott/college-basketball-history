@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "f03e0839fd8ef9b73a1029e80a3181dae00b3408e840c3e017ccef99215dfc00",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
+  "readiness_proof_sha256": "e4ec3e1a3c733639a9bcee8a10f26804cd9c5f501356483745530132fe834ccb",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "fresno-state-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "target_branch": "data/fresno-state-onboarding",
+  "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
+  "tracked_mutation": "NONE"
+}
