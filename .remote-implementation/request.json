@@ -4,7 +4,7 @@
   "request_id": "fresno-state-stage2-gate1-fill-0001",
   "school_key": "fresno-state",
   "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "a7f78c8ccc307fbc4f4cbc186bd96a4ad7a069f3",
+  "previous_control_state_commit": "d9afc49796e5975afdda1ff71c95abfb5b3fba0d",
   "previous_control_state_sha256": "c7dd2892887046e167424d8e742d3ca92ec970cd380ff6216779fd30699c92dc",
   "expected_protected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "target_branch": "data/fresno-state-onboarding",
