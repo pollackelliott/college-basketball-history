@@ -2323,7 +2323,7 @@
       "opponent_key": "fresno-state",
       "opponent_name": "Fresno State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
@@ -40950,7 +40950,7 @@
       "opponent_key": "fresno-state",
       "opponent_name": "Fresno State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 49,
       "opponent_score": 42,
       "score_known": true,
@@ -43950,7 +43950,7 @@
       "opponent_key": "fresno-state",
       "opponent_name": "Fresno State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 58,
       "opponent_score": 40,
       "score_known": true,
@@ -43963,7 +43963,7 @@
       "site_city": "Provo",
       "site_state": "UT",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": null,
+      "postseason_round": "Sweet Sixteen",
       "administrative_status": null,
       "administrative_note": null
     },

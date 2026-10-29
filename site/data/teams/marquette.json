@@ -2214,7 +2214,7 @@
       "opponent_key": "fresno-state",
       "opponent_name": "Fresno State",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
@@ -40752,7 +40752,7 @@
       "opponent_key": "fresno-state",
       "opponent_name": "Fresno State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 57,
       "opponent_score": 54,
       "score_known": true,
@@ -69852,7 +69852,7 @@
       "opponent_key": "fresno-state",
       "opponent_name": "Fresno State",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 84,
       "opponent_score": 81,
       "score_known": true,
