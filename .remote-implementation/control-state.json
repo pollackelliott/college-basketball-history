@@ -131,18 +131,19 @@
     "fresno-state-phase0-scope-supersession-0002",
     "fresno-state-stage2-census-0002",
     "fresno-state-stage2-proposal-0001",
-    "fresno-state-stage2-proposal-0002"
+    "fresno-state-stage2-proposal-0002",
+    "fresno-state-stage2-gate1-fill-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6fce295d8fa38ae204f7b5318ea4743f0fc019f2",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_FILL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fresno-state-stage2-gate1-fill-0001",
+  "active_request_sha256": "f5eadbfb8816dc984459456b7a133f70ee08ad991b94445a8ee3e64dd8362f5b",
+  "active_school_key": "fresno-state",
+  "active_target_branch": "data/fresno-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -297,8 +298,11 @@
     "target_branch": "data/fresno-state-onboarding",
     "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40909840133",
+  "lock_acquisition_request_commit": "da8e860b89533fad800a167e109dd5f3e0c3acf7",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_FILL_RUNNING"
 }
