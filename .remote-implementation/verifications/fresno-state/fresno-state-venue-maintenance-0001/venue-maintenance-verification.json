@@ -1,0 +1,27 @@
+{
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/venue-identity-maintenance/fresno-state-stage1.json",
+    "data/reference/venues.csv",
+    "schools/smu/venues.csv",
+    "schools/west-virginia/venues.csv",
+    "site/data/teams/smu.json",
+    "site/data/teams/west-virginia.json",
+    "site/data/teams/wisconsin.json"
+  ],
+  "exact_replay_tree": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_VERIFICATION",
+  "plan_sha256": "f039e9a88fce2609ea97ee72fb19a17e9cbce5ed8e02f34f2bbc4386ca4f4ff2",
+  "protected_main_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
+  "remote_venue_maintenance_equivalence": "PASS",
+  "repository_spec_sha256": "0a5c37939c6933d62123b409e46995555992a2d21f9cdcf5e862dec116a37648",
+  "repository_validation": "PASS",
+  "request_id": "fresno-state-venue-maintenance-0001",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/fresno-state-stage1-hard-rock-riviera-maya-geography",
+  "target_predecessor_sha": null,
+  "target_sha": "82b04a53e6db350ae4b21f1eaa67d535c1df85c2",
+  "target_tree_sha": "d0fd416510b22d1c103279740b2e10a561f9739f"
+}
