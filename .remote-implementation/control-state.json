@@ -124,7 +124,7 @@
     "fresno-state-venue-maintenance-0001"
   ],
   "active_expected_main_sha": "f8b65ecc585215887b309dfbfe58ca3c0d4062a6",
-  "active_lock_commit": null,
+  "active_lock_commit": "d3244ddf7b42e5a48c8cdb1c7cc8933f1acdf88e",
   "active_lock_owner": "github-actions:40809865170:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
