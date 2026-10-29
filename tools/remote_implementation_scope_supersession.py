@@ -581,3 +581,75 @@ def proof_sha256(proof: dict[str, Any]) -> str:
         separators=(",", ":"),
     ).encode("utf-8")
     return sha256_bytes(data)
+
+
+def augment_integration_freeze(
+    freeze_bytes: bytes,
+    *,
+    request: dict[str, Any],
+    spec: dict[str, Any],
+    proof: dict[str, Any],
+    candidate_zip_sha256: str,
+) -> bytes:
+    """Bind the fresh ordinary Phase 0 freeze to the supersession authority."""
+
+    try:
+        manifest = json.loads(freeze_bytes)
+    except (TypeError, ValueError) as exc:
+        raise Stop("SCOPE_SUPERSESSION_INTEGRATION_FREEZE_INVALID") from exc
+    if not isinstance(manifest, dict) or manifest.get("status") != "INTEGRATION_FROZEN":
+        raise Stop("SCOPE_SUPERSESSION_INTEGRATION_FREEZE_STATUS_INVALID")
+    if manifest.get("school_key") != request["school_key"]:
+        raise Stop("SCOPE_SUPERSESSION_INTEGRATION_FREEZE_SCHOOL_MISMATCH")
+    if manifest.get("research_zip_sha256") != candidate_zip_sha256:
+        raise Stop("SCOPE_SUPERSESSION_INTEGRATION_FREEZE_CANDIDATE_MISMATCH")
+    semantic = (manifest.get("source_game_semantic_guard") or {}).get(
+        "snapshot_sha256"
+    )
+    if semantic != proof.get("candidate_semantic_sha256"):
+        raise Stop("SCOPE_SUPERSESSION_INTEGRATION_FREEZE_SEMANTIC_MISMATCH")
+
+    manifest["workflow_kind"] = WORKFLOW_KIND
+    manifest["scope_supersession"] = {
+        "schema_version": 1,
+        "authority_kind": "OWNER_AND_CONTROL_CENTER_SUPERSESSION",
+        "scope_supersession_spec_sha256": request["scope_supersession_spec"][
+            "sha256"
+        ],
+        "original_research_zip_sha256": request["research_checkpoint"]["sha256"],
+        "research_base_sha": request["research_checkpoint"]["research_base_sha"],
+        "candidate_zip_sha256": candidate_zip_sha256,
+        "target_predecessor_sha": request["target_sha"],
+        "superseded_phase0_successor_sha256": request[
+            "superseded_phase0_successor"
+        ]["sha256"],
+        "superseded_successor_sha256": request["superseded_successor"]["sha256"],
+        "superseded_integration_freeze_sha256": request[
+            "superseded_integration_freeze_sha256"
+        ],
+        "superseded_semantic_snapshot_sha256": request[
+            "superseded_semantic_snapshot_sha256"
+        ],
+        "old_scope": spec["old_scope"],
+        "new_scope": spec["new_scope"],
+        "excluded_source_game_count": proof["excluded_source_game_count"],
+        "excluded_source_game_ids_sha256": proof[
+            "excluded_source_game_ids_sha256"
+        ],
+        "retained_source_game_count": proof["source_game_count_after"],
+        "retained_source_game_ids_sha256": proof[
+            "retained_source_game_ids_sha256"
+        ],
+        "predecessor_retained_semantic_sha256": proof[
+            "predecessor_retained_semantic_sha256"
+        ],
+        "candidate_semantic_sha256": proof["candidate_semantic_sha256"],
+        "retained_semantic_equivalence": proof[
+            "retained_semantic_equivalence"
+        ],
+        "proof_sha256": proof_sha256(proof),
+        "authority_statement": spec["authority_statement"],
+    }
+    return (
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
+    ).encode("utf-8")
