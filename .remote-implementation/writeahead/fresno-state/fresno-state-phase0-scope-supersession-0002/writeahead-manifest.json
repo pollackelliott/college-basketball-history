@@ -1,0 +1,532 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/fresno-state/conferences.csv",
+    "schools/fresno-state/notes.md",
+    "schools/fresno-state/opponents.csv",
+    "schools/fresno-state/source-games.csv",
+    "schools/fresno-state/source-notes.md",
+    "schools/fresno-state/venues.csv"
+  ],
+  "candidate_package_member_sha256": {
+    "conferences.csv": "f8281a5553fb872372fc673e1af9c451325c7e630f2c1f92825d56391d288c38",
+    "notes.md": "c30369e80d186937a4772884f45a1d0964459cb289110d38292722bdcbefe1ee",
+    "opponents.csv": "021f6a9cf3d4be97d922f265af9d711fd6899d84018819accfdad72b0bbc3c45",
+    "source-games.csv": "06bc7ce4701bb9a2e9f0b5b71fcb2232d5235e78f2c82c3180b49fe8b2227cb1",
+    "source-notes.md": "03d3f143116c5a67f92b8455246740f2b242e328204eadfbab0b0038d825204c",
+    "venues.csv": "8768ad337de499ea385801040e051c3f2283909e821612ba9484a1bf6e6d947a"
+  },
+  "candidate_zip_sha256": "70ed40b9941497cb1f845ec0692106eddfa02baee72f92a06c75051b4bc937e4",
+  "changed_file_sha256": {
+    "data/reference/program-top-level-scope.csv": "c8fa6955e6d13e34f56e3d204c3c64cc95d756509ad58386c5ae2d70e33b6169",
+    "data/reference/programs.csv": "5b757f5c50739f1195d2a59e92a37be68d7aef9289707fad136ad700df5d1e66",
+    "data/reference/venue-names.csv": "28f99f5718b3d278088d2c86bef64fa238667be3269ec7a3d7db7944e938fb30",
+    "data/reference/venues.csv": "51df3c39d235b8f5d8e2b5a9ea2e353a30d801ddf0e9f18d5ee6533d04f9dca9",
+    "schools/fresno-state/conferences.csv": "f8281a5553fb872372fc673e1af9c451325c7e630f2c1f92825d56391d288c38",
+    "schools/fresno-state/notes.md": "9826a35980fc78df188520bb84e7a235f35eefddb242ab43f4cea767af55e99c",
+    "schools/fresno-state/opponents.csv": "021f6a9cf3d4be97d922f265af9d711fd6899d84018819accfdad72b0bbc3c45",
+    "schools/fresno-state/source-games.csv": "06bc7ce4701bb9a2e9f0b5b71fcb2232d5235e78f2c82c3180b49fe8b2227cb1",
+    "schools/fresno-state/source-notes.md": "03d3f143116c5a67f92b8455246740f2b242e328204eadfbab0b0038d825204c",
+    "schools/fresno-state/venues.csv": "2ed19a3d620ced0c60663bf9a6f2b1cdd0984fa18629e85602be20f1b13cfca0"
+  },
+  "changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/fresno-state/conferences.csv",
+    "schools/fresno-state/notes.md",
+    "schools/fresno-state/opponents.csv",
+    "schools/fresno-state/source-games.csv",
+    "schools/fresno-state/source-notes.md",
+    "schools/fresno-state/venues.csv"
+  ],
+  "commit_message": "Supersede Fresno State public history scope",
+  "conference_mapping": [],
+  "expected_target_predecessor_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80",
+  "global_lock_commit": "42a4e02e5234aac918cd2038a8f9ce65b1f12e79",
+  "history_scope": {
+    "history_scope_basis": "TOP_LEVEL_INTERVALS",
+    "history_scope_intervals": "1970-71+",
+    "history_scope_notes": "Owner executive ruling effective 2026-10-29: Fresno State public history begins with 1970-71. The 1955-56, 1956-57, and 1957-58 Research evidence remains preserved in the immutable original Research Freeze but is excluded from Fresno publication, ingestion, statistics, accomplishments, NCAA appearance counts, and public game history.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1970-1971",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "1970-71+",
+      "action": "UPDATED",
+      "changed": true,
+      "prior_top_level_scope": "1955-56..1957-58|1970-71+",
+      "school": "Fresno State"
+    }
+  },
+  "integration_freeze_sha256": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "PHASE0_SCOPE_SUPERSESSION",
+  "original_research_checkpoint_sha256": "eff039dec10437bcc404296769780a22a617a4ded271ddb02a15d2355b5e13b2",
+  "original_research_member_sha256": {
+    "conferences.csv": "06acb64ae8ff7a11e19623a14632ff275348734ecacc5325a604a501d229dbf9",
+    "notes.md": "a8d0934a8717f8dba78abed2547776938638d9dfb21fa4a36ce4790c270750c1",
+    "opponents.csv": "369ae151a090f156fe856de64f68a03940289bd2dc0f0da3cefd6ef973a1341c",
+    "source-games.csv": "f009194ebbe10c14183f34a91ecc6446e21eaf595c4cb9874443351785f8fef8",
+    "source-notes.md": "b3fabe5aadd6166b8ca88453bb5b12b2c29a0a410865984f6b61a2879ee4de6b",
+    "venues.csv": "10a0531d9e29d7f997c02358e69a6c1adb68a4a180ef09d94805169a9e1e8e15"
+  },
+  "package_member_sha256": {
+    "conferences.csv": "f8281a5553fb872372fc673e1af9c451325c7e630f2c1f92825d56391d288c38",
+    "notes.md": "9826a35980fc78df188520bb84e7a235f35eefddb242ab43f4cea767af55e99c",
+    "opponents.csv": "021f6a9cf3d4be97d922f265af9d711fd6899d84018819accfdad72b0bbc3c45",
+    "source-games.csv": "06bc7ce4701bb9a2e9f0b5b71fcb2232d5235e78f2c82c3180b49fe8b2227cb1",
+    "source-notes.md": "03d3f143116c5a67f92b8455246740f2b242e328204eadfbab0b0038d825204c",
+    "venues.csv": "2ed19a3d620ced0c60663bf9a6f2b1cdd0984fa18629e85602be20f1b13cfca0"
+  },
+  "prepared_commit_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "prepared_main_parent_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "prepared_parent_sha": "7925342ad192f86ac7f943ce4b439e31dc402b80",
+  "prepared_tree_sha": "8f24d5a0a31ac5b552b3d1051b6b7221095e287f",
+  "program_alias_mapping": [],
+  "protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "repository_validation": "PASS",
+  "request_id": "fresno-state-phase0-scope-supersession-0002",
+  "request_sha256": "4c242b2d642f7ccc1b13aec60ca200a4dc166fd189bcf9f2aa03698dc3f8796f",
+  "research_base_sha": "a446e5cf028118d0484b75dc462bfe30f7ebd981",
+  "schema_version": 1,
+  "school_key": "fresno-state",
+  "scope_supersession_proof_sha256": "67d97e1ac2b0d2eed359ed4033fa30e45547292ea9eda54106b5cdb6617f0cc2",
+  "scope_supersession_spec_sha256": "e95fb09b0231b53770b7521f63317acb842a1cc5a594c9b1af4b19db8c786622",
+  "semantic_snapshot_sha256": "ae76410e9e5a424b1005e84da94e7722a78d24c87f983d366ed2b365c52ef4db",
+  "sidecars": {
+    "integration-freeze.json": "51d2e8de127cc4b5c6876bc56de5f48398f95d0b4f2b377cafd0ecc7db4979a3",
+    "scope-supersession-proof.json": "024f2e18fa519ffda436df357aaccc95f2488b40254a6d74f3fc9e7da95e6fb5",
+    "scope-supersession.json": "e95fb09b0231b53770b7521f63317acb842a1cc5a594c9b1af4b19db8c786622",
+    "stage1-reconciliation.json": "867f4e001dd044388d73fe57f15f4c6d2e0191fb2328943df24097866c486511"
+  },
+  "superseded_integration_freeze_sha256": "12f49812ba9bb739982c92f484521b94580ab3d211b5cc94566c6bbc81943f03",
+  "superseded_phase0_successor_sha256": "9c1e9772cd89f0a383782f71366e7481639b381871bd4c55dbe20d649f2a3aa6",
+  "superseded_semantic_snapshot_sha256": "ba0315240d09525a614b331b2f859f820ad45c6b5d3a602c49c13a87b22425f5",
+  "superseded_successor_sha256": "797fcb450758799e425fff06add45914df1d88c7c106f7aafc6842b19e86a071",
+  "superseded_successor_verification_sha256": "b9b3951fb5700618fc03bbeeaa0587ae937da72888dc36654487e2c37658a444",
+  "target_branch": "data/fresno-state-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Acrisure Arena",
+      "final_venue_id": "VEN-000242",
+      "final_venue_key": "acrisure-arena",
+      "research_venue_id": "VEN-000242",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "acrisure-arena"
+    },
+    {
+      "canonical_name": "Amerant Bank Arena",
+      "final_venue_id": "VEN-000009",
+      "final_venue_key": "amerant-bank-arena",
+      "research_venue_id": "VEN-000009",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amerant-bank-arena"
+    },
+    {
+      "canonical_name": "America West Arena",
+      "final_venue_id": "VEN-000065",
+      "final_venue_key": "footprint-center",
+      "research_venue_id": "VEN-000065",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "footprint-center"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "VEN-000386",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "Ball Arena",
+      "final_venue_id": "VEN-000018",
+      "final_venue_key": "ball-arena",
+      "research_venue_id": "VEN-000018",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ball-arena"
+    },
+    {
+      "canonical_name": "Dee Glen Smith Spectrum",
+      "final_venue_id": "VEN-000378",
+      "final_venue_key": "dee-glen-smith-spectrum",
+      "research_venue_id": "VEN-000378",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-glen-smith-spectrum"
+    },
+    {
+      "canonical_name": "Delta Center",
+      "final_venue_id": "VEN-000055",
+      "final_venue_key": "delta-center",
+      "research_venue_id": "VEN-000055",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "delta-center"
+    },
+    {
+      "canonical_name": "Don Haskins Center",
+      "final_venue_id": "VEN-000325",
+      "final_venue_key": "don-haskins-center",
+      "research_venue_id": "VEN-000325",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "don-haskins-center"
+    },
+    {
+      "canonical_name": "Eugenio Guerra Sports Complex",
+      "final_venue_id": "VEN-000371",
+      "final_venue_key": "eugenio-guerra-sports-complex",
+      "research_venue_id": "VEN-000371",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "eugenio-guerra-sports-complex"
+    },
+    {
+      "canonical_name": "Georgia Dome",
+      "final_venue_id": "VEN-000073",
+      "final_venue_key": "georgia-dome",
+      "research_venue_id": "VEN-000073",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "georgia-dome"
+    },
+    {
+      "canonical_name": "Golden 1 Center",
+      "final_venue_id": "VEN-000074",
+      "final_venue_key": "golden-1-center",
+      "research_venue_id": "VEN-000074",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "golden-1-center"
+    },
+    {
+      "canonical_name": "Great Western Forum",
+      "final_venue_id": "VEN-000376",
+      "final_venue_key": "the-forum",
+      "research_venue_id": "VEN-000376",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-forum"
+    },
+    {
+      "canonical_name": "Hard Rock Hotel Riviera Maya",
+      "final_venue_id": "VEN-000659",
+      "final_venue_key": "hard-rock-hotel-riviera-maya",
+      "research_venue_id": "VEN-000659",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hard-rock-hotel-riviera-maya"
+    },
+    {
+      "canonical_name": "Hertz Arena",
+      "final_venue_id": "VEN-000578",
+      "final_venue_key": "hertz-arena",
+      "research_venue_id": "VEN-000578",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hertz-arena"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "VEN-000097",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    },
+    {
+      "canonical_name": "JSerra Pavilion",
+      "final_venue_id": "VEN-000594",
+      "final_venue_key": "jserra-pavilion",
+      "research_venue_id": "VEN-000594",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jserra-pavilion"
+    },
+    {
+      "canonical_name": "Kaiser Permanente Arena",
+      "final_venue_id": "VEN-000397",
+      "final_venue_key": "kaiser-permanente-arena",
+      "research_venue_id": "VEN-000397",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kaiser-permanente-arena"
+    },
+    {
+      "canonical_name": "Lawlor Events Center",
+      "final_venue_id": "VEN-000579",
+      "final_venue_key": "lawlor-events-center",
+      "research_venue_id": "VEN-000579",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lawlor-events-center"
+    },
+    {
+      "canonical_name": "Long Beach Arena",
+      "final_venue_id": "VEN-000117",
+      "final_venue_key": "long-beach-arena",
+      "research_venue_id": "VEN-000117",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "long-beach-arena"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "VEN-000542",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "Marriott Center",
+      "final_venue_id": "VEN-000405",
+      "final_venue_key": "marriott-center",
+      "research_venue_id": "VEN-000405",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "marriott-center"
+    },
+    {
+      "canonical_name": "Memphis Pyramid",
+      "final_venue_id": "VEN-000131",
+      "final_venue_key": "memphis-pyramid",
+      "research_venue_id": "VEN-000131",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "memphis-pyramid"
+    },
+    {
+      "canonical_name": "Mid-South Coliseum",
+      "final_venue_id": "VEN-000136",
+      "final_venue_key": "mid-south-coliseum",
+      "research_venue_id": "VEN-000136",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mid-south-coliseum"
+    },
+    {
+      "canonical_name": "Moby Arena",
+      "final_venue_id": "VEN-000481",
+      "final_venue_key": "moby-arena",
+      "research_venue_id": "VEN-000481",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "moby-arena"
+    },
+    {
+      "canonical_name": "Neal S. Blaisdell Center",
+      "final_venue_id": "VEN-000149",
+      "final_venue_key": "neal-s-blaisdell-center",
+      "research_venue_id": "VEN-000149",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "neal-s-blaisdell-center"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Pan American Center",
+      "final_venue_id": "VEN-000322",
+      "final_venue_key": "pan-american-center",
+      "research_venue_id": "VEN-000322",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pan-american-center"
+    },
+    {
+      "canonical_name": "Peterson Gym",
+      "final_venue_id": "VEN-000995",
+      "final_venue_key": "peterson-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "peterson-gym"
+    },
+    {
+      "canonical_name": "Reynolds Center",
+      "final_venue_id": "VEN-000583",
+      "final_venue_key": "reynolds-center",
+      "research_venue_id": "VEN-000583",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-center"
+    },
+    {
+      "canonical_name": "San Diego Sports Arena",
+      "final_venue_id": "VEN-000182",
+      "final_venue_key": "san-diego-sports-arena",
+      "research_venue_id": "VEN-000182",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "san-diego-sports-arena"
+    },
+    {
+      "canonical_name": "Save Mart Center",
+      "final_venue_id": "VEN-000798",
+      "final_venue_key": "save-mart-center",
+      "research_venue_id": "VEN-000798",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "save-mart-center"
+    },
+    {
+      "canonical_name": "Selland Arena",
+      "final_venue_id": "VEN-000374",
+      "final_venue_key": "selland-arena",
+      "research_venue_id": "VEN-000374",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "selland-arena"
+    },
+    {
+      "canonical_name": "Simmons Bank Arena",
+      "final_venue_id": "VEN-000185",
+      "final_venue_key": "simmons-bank-arena",
+      "research_venue_id": "VEN-000185",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "simmons-bank-arena"
+    },
+    {
+      "canonical_name": "Springfield Civic Center",
+      "final_venue_id": "VEN-000326",
+      "final_venue_key": "springfield-civic-center",
+      "research_venue_id": "VEN-000326",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "springfield-civic-center"
+    },
+    {
+      "canonical_name": "Sullivan Arena",
+      "final_venue_id": "VEN-000361",
+      "final_venue_key": "sullivan-arena",
+      "research_venue_id": "VEN-000361",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sullivan-arena"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "VEN-000377",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thomas-and-mack-center"
+    },
+    {
+      "canonical_name": "Titan Gym",
+      "final_venue_id": "VEN-000212",
+      "final_venue_key": "titan-gym",
+      "research_venue_id": "VEN-000212",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "titan-gym"
+    },
+    {
+      "canonical_name": "Veterans Memorial Coliseum",
+      "final_venue_id": "VEN-000297",
+      "final_venue_key": "veterans-memorial-coliseum-portland",
+      "research_venue_id": "VEN-000297",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "veterans-memorial-coliseum-portland"
+    },
+    {
+      "canonical_name": "Viejas Arena",
+      "final_venue_id": "VEN-000226",
+      "final_venue_key": "viejas-arena",
+      "research_venue_id": "VEN-000226",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "viejas-arena"
+    },
+    {
+      "canonical_name": "Jenison Fieldhouse",
+      "final_venue_id": "VEN-000093",
+      "final_venue_key": "jenison-fieldhouse",
+      "research_venue_id": "VEN-000093",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jenison-fieldhouse"
+    },
+    {
+      "canonical_name": "Gill Coliseum",
+      "final_venue_id": "VEN-000373",
+      "final_venue_key": "gill-coliseum",
+      "research_venue_id": "VEN-000373",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gill-coliseum"
+    },
+    {
+      "canonical_name": "Pauley Pavilion",
+      "final_venue_id": "VEN-000161",
+      "final_venue_key": "pauley-pavilion",
+      "research_venue_id": "VEN-000161",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pauley-pavilion"
+    },
+    {
+      "canonical_name": "Bramlage Coliseum",
+      "final_venue_id": "VEN-000027",
+      "final_venue_key": "bramlage-coliseum",
+      "research_venue_id": "VEN-000027",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bramlage-coliseum"
+    },
+    {
+      "canonical_name": "A.G. Spanos Center",
+      "final_venue_id": "VEN-000725",
+      "final_venue_key": "ag-spanos-center",
+      "research_venue_id": "VEN-000725",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ag-spanos-center"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "VEN-000194",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "The Arena in Oakland",
+      "final_venue_id": "VEN-000153",
+      "final_venue_key": "oakland-coliseum-arena",
+      "research_venue_id": "VEN-000153",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "oakland-coliseum-arena"
+    },
+    {
+      "canonical_name": "Stegeman Coliseum",
+      "final_venue_id": "VEN-000198",
+      "final_venue_key": "stegeman-coliseum",
+      "research_venue_id": "VEN-000198",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stegeman-coliseum"
+    },
+    {
+      "canonical_name": "Schollmaier Arena",
+      "final_venue_id": "VEN-000370",
+      "final_venue_key": "schollmaier-arena",
+      "research_venue_id": "VEN-000370",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "schollmaier-arena"
+    },
+    {
+      "canonical_name": "Alumni Recreation Center",
+      "final_venue_id": "VEN-000996",
+      "final_venue_key": "alumni-recreation-center-siena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "alumni-recreation-center-siena"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "VEN-000354",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    }
+  ]
+}
