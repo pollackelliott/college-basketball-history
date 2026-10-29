@@ -1562,6 +1562,24 @@ def verify_sidecar_hashes(manifest: dict[str, Any], bundle_dir: Path) -> None:
         _require(sha256_file(path) == expected, f"WRITEAHEAD_SIDECAR_HASH_MISMATCH:{relative}")
 
 
+def recovery_expected_predecessor(
+    manifest: dict[str, Any] | None,
+    original_request: dict[str, Any] | None,
+    target_branch: str | None,
+) -> str | None:
+    """Recover an exact existing-target predecessor before write-ahead exists."""
+
+    if manifest:
+        value = manifest.get("expected_target_predecessor_sha")
+        return value if isinstance(value, str) and HEX40.fullmatch(value) else None
+    if not isinstance(original_request, dict) or not target_branch:
+        return None
+    if original_request.get("target_branch") != target_branch:
+        return None
+    value = original_request.get("target_sha")
+    return value if isinstance(value, str) and HEX40.fullmatch(value) else None
+
+
 def classify_mutation(
     expected_predecessor: str | None,
     actual_target: str | None,

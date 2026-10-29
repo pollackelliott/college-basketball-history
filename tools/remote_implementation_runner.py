@@ -40,6 +40,7 @@ from remote_implementation_control import (
     classify_mutation,
     finalize_success,
     publish_ref_cas,
+    recovery_expected_predecessor,
     request_used,
     sha256_bytes,
     sha256_file,
@@ -79,6 +80,7 @@ from remote_implementation_io import (
 from remote_implementation_scope_supersession_transaction import (
     finalize_scope_supersession_successor,
     run_phase0_scope_supersession,
+    scope_supersession_changed_paths,
 )
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
@@ -3613,10 +3615,25 @@ def run_recovery(
         if target_branch
         else None
     )
+    original_request_for_recovery = None
+    if not manifest and state.get("active_request_id"):
+        original_request_path = (
+            ".remote-implementation/requests/%s/request.json"
+            % state["active_request_id"]
+        )
+        original_request_bytes = git_show_bytes(
+            predecessor_commit,
+            original_request_path,
+        )
+        if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+            raise Stop("RECOVERY_ACTIVE_REQUEST_HASH_MISMATCH")
+        original_request_for_recovery = json.loads(original_request_bytes)
     classification = classify_mutation(
-        manifest.get("expected_target_predecessor_sha")
-        if manifest
-        else None,
+        recovery_expected_predecessor(
+            manifest,
+            original_request_for_recovery,
+            target_branch,
+        ),
         actual_target,
         manifest=manifest,
     )
@@ -3672,15 +3689,10 @@ def run_recovery(
                 expected_parents.append(manifest["prepared_main_parent_sha"])
             if parent_line[1:] != expected_parents:
                 raise Stop("RECOVERY_SCOPE_SUPERSESSION_PARENT_SET_MISMATCH")
-            changed = sorted(
-                line.strip()
-                for line in git(
-                    "diff",
-                    "--name-only",
-                    manifest["expected_target_predecessor_sha"],
-                    prepared,
-                ).stdout.splitlines()
-                if line.strip()
+            changed = scope_supersession_changed_paths(
+                ROOT,
+                protected_main_sha=live_main,
+                prepared_sha=prepared,
             )
         else:
             changed = sorted(

@@ -233,6 +233,27 @@ def _candidate_request(
     return candidate
 
 
+def scope_supersession_changed_paths(
+    repo: Path,
+    *,
+    protected_main_sha: str,
+    prepared_sha: str,
+) -> list[str]:
+    """Return transaction changes relative to the rebuilt protected-main tree."""
+
+    return sorted(
+        line.strip()
+        for line in git(
+            "diff",
+            "--name-only",
+            protected_main_sha,
+            prepared_sha,
+            cwd=repo,
+        ).stdout.splitlines()
+        if line.strip()
+    )
+
+
 def prepare_scope_supersession(
     *,
     request: dict[str, Any],
@@ -399,16 +420,10 @@ def prepare_scope_supersession(
     if prepared_tree != tree:
         raise Stop("SCOPE_SUPERSESSION_REPARENT_FAILED")
 
-    changed = sorted(
-        line.strip()
-        for line in git(
-            "diff",
-            "--name-only",
-            target_sha,
-            prepared,
-            cwd=worktree,
-        ).stdout.splitlines()
-        if line.strip()
+    changed = scope_supersession_changed_paths(
+        worktree,
+        protected_main_sha=live_main,
+        prepared_sha=prepared,
     )
     unexpected = sorted(set(changed) - allowed)
     if unexpected:

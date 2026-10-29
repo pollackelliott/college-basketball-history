@@ -1,4 +1,6 @@
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -12,11 +14,15 @@ from remote_implementation_control import (  # noqa: E402
     RemoteImplementationError,
     begin_request,
     initial_control_state,
+    recovery_expected_predecessor,
     validate_request,
 )
 from remote_implementation_scope_supersession import (  # noqa: E402
     build_scope_superseded_package,
     deterministic_package_zip_bytes,
+)
+from remote_implementation_scope_supersession_transaction import (  # noqa: E402
+    scope_supersession_changed_paths,
 )
 
 
@@ -362,6 +368,73 @@ class ScopeSupersessionTransformTests(unittest.TestCase):
             deterministic_package_zip_bytes(members),
         )
 
+    def test_changed_paths_ignore_protected_main_inheritance(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            subprocess.run(["git", "init", str(repo)], check=True, stdout=subprocess.PIPE)
+            subprocess.run(["git", "config", "user.name", "Test"], cwd=repo, check=True)
+            subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=repo, check=True)
+            (repo / "base.txt").write_text("base\n", encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=repo, check=True)
+            subprocess.run(["git", "commit", "-m", "base"], cwd=repo, check=True, stdout=subprocess.PIPE)
+            base = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=repo,
+                check=True,
+                text=True,
+                stdout=subprocess.PIPE,
+            ).stdout.strip()
+
+            (repo / "tooling.txt").write_text("new main tooling\n", encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=repo, check=True)
+            subprocess.run(["git", "commit", "-m", "main tooling"], cwd=repo, check=True, stdout=subprocess.PIPE)
+            main = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=repo,
+                check=True,
+                text=True,
+                stdout=subprocess.PIPE,
+            ).stdout.strip()
+
+            subprocess.run(["git", "checkout", "--detach", base], cwd=repo, check=True, stdout=subprocess.PIPE)
+            (repo / "school.txt").write_text("old school\n", encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=repo, check=True)
+            subprocess.run(["git", "commit", "-m", "old target"], cwd=repo, check=True, stdout=subprocess.PIPE)
+            target = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=repo,
+                check=True,
+                text=True,
+                stdout=subprocess.PIPE,
+            ).stdout.strip()
+
+            subprocess.run(["git", "checkout", "--detach", main], cwd=repo, check=True, stdout=subprocess.PIPE)
+            (repo / "school.txt").write_text("rebuilt school\n", encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=repo, check=True)
+            tree = subprocess.run(
+                ["git", "write-tree"],
+                cwd=repo,
+                check=True,
+                text=True,
+                stdout=subprocess.PIPE,
+            ).stdout.strip()
+            prepared = subprocess.run(
+                ["git", "commit-tree", tree, "-p", target, "-p", main, "-m", "supersede"],
+                cwd=repo,
+                check=True,
+                text=True,
+                stdout=subprocess.PIPE,
+            ).stdout.strip()
+
+            self.assertEqual(
+                scope_supersession_changed_paths(
+                    repo,
+                    protected_main_sha=main,
+                    prepared_sha=prepared,
+                ),
+                ["school.txt"],
+            )
+
 
 class ScopeSupersessionControlTests(unittest.TestCase):
     def test_valid_request_requires_global_mutation_lock(self):
@@ -398,6 +471,24 @@ class ScopeSupersessionControlTests(unittest.TestCase):
             "REQUEST_SCOPE_SUPERSESSION_AUTHORITY_FORBIDDEN",
         ):
             validate_request(req)
+
+    def test_prewriteahead_recovery_uses_existing_target_predecessor(self):
+        original = request()
+        self.assertEqual(
+            recovery_expected_predecessor(
+                None,
+                original,
+                "data/example-school-onboarding",
+            ),
+            TARGET,
+        )
+        self.assertIsNone(
+            recovery_expected_predecessor(
+                None,
+                original,
+                "data/other-school-onboarding",
+            )
+        )
 
 
 if __name__ == "__main__":
