@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE2_DECISION_REVIEW",
+  "school_key": "fresno-state",
+  "protected_main_sha": "42f820e3dd4dd315e4c1bca04172a0690028299e",
+  "target_sha": "e83cfac049004fbe277292d374a359fdca3f0263",
+  "census_request_id": "fresno-state-stage2-census-0002",
+  "census_checkpoint_sha256": "cc10e265081fd7a9baf84b0e41a0eef59512ed55bcd921b0a00af50ef1ea33cb",
+  "decision_universe_sha256": "f98806439f65bda205caae1e7ba13588b95a4947780b0d6364dceaa4712ab30f",
+  "decision_count": 18,
+  "review_status": "COMPLETE",
+  "action_counts": {
+    "KEEP_CANONICAL": 11,
+    "USE_SOURCE": 4,
+    "MATCH_CANONICAL:CBBG-0103403": 1,
+    "APPLY_ACCOMPLISHMENT_PATCH": 1,
+    "ENABLE_PUBLIC_PAGE": 1
+  },
+  "material_findings": [
+    "The prior NCAA-appearance blocker remains resolved; NCAA appearance count is 6.",
+    "Washington 2022 canonical home classification is contradicted by Washington institutional evidence; Fresno neutral evidence is authoritative.",
+    "West Virginia 1982, Colorado State 2016, and Boise State 2021 canonical dates are contradicted by institutional evidence and should use Fresno source dates.",
+    "The Fresno accomplishment baseline 6 regular-season / 5 tournament conference titles is stale for the superseded 1970-71+ scope. Official Fresno State championship history supports 5 regular-season / 2 tournament titles in scope.",
+    "No additional owner historical adjudication is required by this review; all 18 recommendations have an evidence basis."
+  ],
+  "external_authority": [
+    "Texas Tech official men's basketball record book: 1971-12-22 Texas Tech 98, Fresno State 85.",
+    "Washington State official record book: 1976-12-27 vs Fresno State at Olympia; neutral-site season accounting.",
+    "Georgetown official opponent history: 1978-12-20 Fresno State neutral; Georgetown official 1981-82 schedule: 1982-03-19 Fresno State NCAA Sweet Sixteen.",
+    "Utah State official opponent history: 1980-01-10 Utah State 78-65; 1981-03-06 Fresno State 71-57 at Anaheim.",
+    "West Virginia official game center/opponent history: 1982-03-13 Fresno State 50-46 at Logan.",
+    "Michigan State official NIT history: 1983-03-21 Fresno State 72-58.",
+    "Oregon State official series notes: 1983-03-24 Fresno State 76-67 NIT.",
+    "TCU official record book: 1997-03-06 TCU 106-81 Fresno State, WAC Tournament, Las Vegas.",
+    "Fresno State official 2016 box score/opponent history: 2016-03-11 Fresno State 64-56 Colorado State.",
+    "Boise State official recap: 2021-03-02 Fresno State 67-64 at Boise.",
+    "Washington official record book: 2022 Wooden Legacy, Anaheim — Washington 62, Fresno State 57.",
+    "Fresno State official Team Championship History: in-scope men's basketball conference titles resolve to five regular-season and two tournament titles."
+  ],
+  "project_authority": [
+    "Arkansas 2025-26 project evidence: standalone Little Rock/North Little Rock regular-season game at Simmons Bank Arena is Arkansas Home."
+  ]
+}
