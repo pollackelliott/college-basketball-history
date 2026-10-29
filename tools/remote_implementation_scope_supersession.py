@@ -624,6 +624,9 @@ def augment_integration_freeze(
             "superseded_phase0_successor"
         ]["sha256"],
         "superseded_successor_sha256": request["superseded_successor"]["sha256"],
+        "superseded_successor_verification_sha256": request[
+            "superseded_successor_verification"
+        ]["sha256"],
         "superseded_integration_freeze_sha256": request[
             "superseded_integration_freeze_sha256"
         ],
