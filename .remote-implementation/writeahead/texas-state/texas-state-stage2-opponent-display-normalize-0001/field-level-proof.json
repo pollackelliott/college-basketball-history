@@ -1,0 +1,48 @@
+{
+  "allowed_paths": [
+    "schools/texas-state/opponents.csv",
+    "schools/texas-state/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "concordia-texas",
+    "dallas-baptist",
+    "our-lady-of-the-lake",
+    "phillips-university",
+    "southwestern-texas",
+    "texas-a-m-international",
+    "ut-tyler"
+  ],
+  "opponent_changed_row_count": 10,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "source_game_changed_ids": [
+    "TXST-S1-000200",
+    "TXST-S1-000289",
+    "TXST-S1-000372",
+    "TXST-S1-000601",
+    "TXST-S1-000619",
+    "TXST-S1-000630",
+    "TXST-S1-000649",
+    "TXST-S1-000713",
+    "TXST-S1-000741",
+    "TXST-S1-000750",
+    "TXST-S1-000801",
+    "TXST-S1-000845",
+    "TXST-S1-000896",
+    "TXST-S1-001067",
+    "TXST-S1-001095"
+  ],
+  "source_game_changed_keys": [
+    "concordia-texas",
+    "dallas-baptist",
+    "our-lady-of-the-lake",
+    "phillips-university",
+    "southwestern-texas",
+    "texas-a-m-international",
+    "ut-tyler"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 15
+}

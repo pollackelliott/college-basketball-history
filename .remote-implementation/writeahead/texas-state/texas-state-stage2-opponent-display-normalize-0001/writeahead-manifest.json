@@ -1,0 +1,71 @@
+{
+  "allowed_paths": [
+    "schools/texas-state/opponents.csv",
+    "schools/texas-state/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/texas-state/opponents.csv": "b0d26782fdcf5e5fd21b38c1a2036e2b1d9b68cd77035947a858c5570f42379f",
+    "schools/texas-state/source-games.csv": "9aa3b613585de76e70ff89aa66af27d0aeeb4576acc34a6bf8430a88093786a3"
+  },
+  "changed_paths": [
+    "schools/texas-state/opponents.csv",
+    "schools/texas-state/source-games.csv"
+  ],
+  "commit_message": "Normalize texas-state historical opponent display representation",
+  "expected_blocker_keys": [
+    "concordia-texas",
+    "dallas-baptist",
+    "our-lady-of-the-lake",
+    "phillips-university",
+    "southwestern-texas",
+    "texas-a-m-international",
+    "ut-tyler"
+  ],
+  "expected_target_predecessor_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "field_level_proof_sha256": "bf65c82971d7fdf168a421ec8b53c30b0d782f11de890831a892b68342be90e0",
+  "global_lock_commit": "0bb875fcb44481e3312cf83fb4475132983c8da0",
+  "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "0b65777a133912931199b597ffb0e5df09e57d0fc755335e78f9acebe0eaa885",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "fac90846e9874a6b183d240116594a9cead9f11b",
+  "prepared_parent_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "prepared_tree_sha": "7628fe2b7f82e42810e95b62ad540b306c69645b",
+  "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "repository_validation": "PASS",
+  "request_id": "texas-state-stage2-opponent-display-normalize-0001",
+  "request_sha256": "692a72f039535bcadfd0de0bd198e8427a711a601997a28390496893f8b2d03f",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_drift_after": {
+    "baseline_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "integration_base_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+    "school_key": "texas-state",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "integration_base_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+    "school_key": "texas-state",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "0878fdeca7e79f9603e6318f97423b1fbce341d5158e3c4a1561833946acc404",
+    "field-level-proof.json": "bf65c82971d7fdf168a421ec8b53c30b0d782f11de890831a892b68342be90e0",
+    "integration-freeze.json": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+    "normalization-report.json": "0b65777a133912931199b597ffb0e5df09e57d0fc755335e78f9acebe0eaa885",
+    "semantic-drift-proof.json": "14588a5740aa5bd1a1cab750369cebcfd7bfa4d1b26e6edceb9e6c9da04bd37f"
+  },
+  "source_game_normalized_name_row_count": 15,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/texas-state/texas-state-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "0878fdeca7e79f9603e6318f97423b1fbce341d5158e3c4a1561833946acc404",
+  "target_branch": "data/texas-state-onboarding"
+}

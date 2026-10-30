@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "integration_base_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+    "school_key": "texas-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+    "integration_base_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+    "school_key": "texas-state",
+    "status": "PASS"
+  }
+}

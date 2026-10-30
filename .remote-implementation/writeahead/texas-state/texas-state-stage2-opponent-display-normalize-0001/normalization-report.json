@@ -1,0 +1,190 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 7,
+  "change_row_count": 10,
+  "changes": [
+    {
+      "authority_names": [
+        "Concordia University Texas"
+      ],
+      "authority_signature": "concordiauniversitytexas",
+      "canonical_opponent_key": "concordia-texas",
+      "from_names": [
+        "Concordia (TX)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Concordia University Texas"
+    },
+    {
+      "authority_names": [
+        "Dallas Baptist University"
+      ],
+      "authority_signature": "dallasbaptistuniversity",
+      "canonical_opponent_key": "dallas-baptist",
+      "from_names": [
+        "Dallas Baptist"
+      ],
+      "target_row_count": 1,
+      "to_name": "Dallas Baptist University"
+    },
+    {
+      "authority_names": [
+        "Our Lady of the Lake University"
+      ],
+      "authority_signature": "ourladyofthelakeuniversity",
+      "canonical_opponent_key": "our-lady-of-the-lake",
+      "from_names": [
+        "Our Lady of the Lake"
+      ],
+      "target_row_count": 1,
+      "to_name": "Our Lady of the Lake University"
+    },
+    {
+      "authority_names": [
+        "Phillips University"
+      ],
+      "authority_signature": "phillipsuniversity",
+      "canonical_opponent_key": "phillips-university",
+      "from_names": [
+        "Phillips"
+      ],
+      "target_row_count": 1,
+      "to_name": "Phillips University"
+    },
+    {
+      "authority_names": [
+        "Southwestern (Texas)",
+        "Southwestern Texas"
+      ],
+      "authority_signature": "southwesterntexas",
+      "canonical_opponent_key": "southwestern-texas",
+      "from_names": [
+        "Southwestern (TX)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Southwestern Texas"
+    },
+    {
+      "authority_names": [
+        "Texas A&M International University"
+      ],
+      "authority_signature": "texasaminternationaluniversity",
+      "canonical_opponent_key": "texas-a-m-international",
+      "from_names": [
+        "Texas A&M International"
+      ],
+      "target_row_count": 2,
+      "to_name": "Texas A&M International University"
+    },
+    {
+      "authority_names": [
+        "University of Texas at Tyler"
+      ],
+      "authority_signature": "universityoftexasattyler",
+      "canonical_opponent_key": "ut-tyler",
+      "from_names": [
+        "UT Tyler"
+      ],
+      "target_row_count": 3,
+      "to_name": "University of Texas at Tyler"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "source_game_display_change_keys": 7,
+  "source_game_display_change_rows": 15,
+  "source_game_display_changes": [
+    {
+      "from_name": "Concordia (TX)",
+      "normalized_opponent_key": "concordia-texas",
+      "source_game_id": "TXST-S1-000200",
+      "to_name": "Concordia University Texas"
+    },
+    {
+      "from_name": "Phillips",
+      "normalized_opponent_key": "phillips-university",
+      "source_game_id": "TXST-S1-000289",
+      "to_name": "Phillips University"
+    },
+    {
+      "from_name": "Southwestern (TX)",
+      "normalized_opponent_key": "southwestern-texas",
+      "source_game_id": "TXST-S1-000372",
+      "to_name": "Southwestern Texas"
+    },
+    {
+      "from_name": "UT Tyler",
+      "normalized_opponent_key": "ut-tyler",
+      "source_game_id": "TXST-S1-000601",
+      "to_name": "University of Texas at Tyler"
+    },
+    {
+      "from_name": "Dallas Baptist",
+      "normalized_opponent_key": "dallas-baptist",
+      "source_game_id": "TXST-S1-000619",
+      "to_name": "Dallas Baptist University"
+    },
+    {
+      "from_name": "Texas A&M International",
+      "normalized_opponent_key": "texas-a-m-international",
+      "source_game_id": "TXST-S1-000630",
+      "to_name": "Texas A&M International University"
+    },
+    {
+      "from_name": "Dallas Baptist",
+      "normalized_opponent_key": "dallas-baptist",
+      "source_game_id": "TXST-S1-000649",
+      "to_name": "Dallas Baptist University"
+    },
+    {
+      "from_name": "Texas A&M International",
+      "normalized_opponent_key": "texas-a-m-international",
+      "source_game_id": "TXST-S1-000713",
+      "to_name": "Texas A&M International University"
+    },
+    {
+      "from_name": "Our Lady of the Lake",
+      "normalized_opponent_key": "our-lady-of-the-lake",
+      "source_game_id": "TXST-S1-000741",
+      "to_name": "Our Lady of the Lake University"
+    },
+    {
+      "from_name": "UT Tyler",
+      "normalized_opponent_key": "ut-tyler",
+      "source_game_id": "TXST-S1-000750",
+      "to_name": "University of Texas at Tyler"
+    },
+    {
+      "from_name": "UT Tyler",
+      "normalized_opponent_key": "ut-tyler",
+      "source_game_id": "TXST-S1-000801",
+      "to_name": "University of Texas at Tyler"
+    },
+    {
+      "from_name": "UT Tyler",
+      "normalized_opponent_key": "ut-tyler",
+      "source_game_id": "TXST-S1-000845",
+      "to_name": "University of Texas at Tyler"
+    },
+    {
+      "from_name": "UT Tyler",
+      "normalized_opponent_key": "ut-tyler",
+      "source_game_id": "TXST-S1-000896",
+      "to_name": "University of Texas at Tyler"
+    },
+    {
+      "from_name": "Our Lady of the Lake",
+      "normalized_opponent_key": "our-lady-of-the-lake",
+      "source_game_id": "TXST-S1-001067",
+      "to_name": "Our Lady of the Lake University"
+    },
+    {
+      "from_name": "Southwestern (TX)",
+      "normalized_opponent_key": "southwestern-texas",
+      "source_game_id": "TXST-S1-001095",
+      "to_name": "Southwestern Texas"
+    }
+  ],
+  "status": "PASS"
+}
