@@ -1,30 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "texas-state",
-  "previous_control_state_commit": "34bd8a7ceac4f5f4e1f397aba0f67d0f3aa6a7cb",
-  "previous_control_state_sha256": "e69024a947edef0cd96e3cdb796a36fb16fe5c9b58a580605c2a9619ea5b0c3e",
-  "expected_protected_main_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
-  "target_branch": "data/texas-state-onboarding",
-  "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
-  "pr_number": 406,
-  "merge_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/texas-state/texas-state-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "c529a84a8ae00611937213d26fab5190d50061800fca4fca893007cd56145e4d"
+  "request_id": "saint-louis-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "623ef603e3ee053997af07b9dc455f5ab030f25c",
+  "previous_control_state_sha256": "e73229e9e0b1257f5e10b7c96139cb4467c4a419dbaa158d9af171046a7170c8",
+  "expected_protected_main_sha": "f3d359e47b5a785ac448359398d0a6f13030a65b",
+  "research_checkpoint": {
+    "sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
+    "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "dac5d6b6a40b4263d177cb7234ead9a31b0ea379",
+      "path_prefix": ".remote-implementation/transports/saint-louis/saint-louis-stage1-0001/piece-",
+      "part_count": 36
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/texas-state/texas-state-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "ac5b21ab2829a965a8cba82d99cd8b5a22a448befe0543f7eca34634bca26875"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Texas State serialized Implementation lane",
-    "authorization": "Owner said process immediately after exact Owner Gate 2 approved and independently verified PR #406 two-parent merge. The Texas State lane independently reauthenticated protected main 2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62, merged PR #406, exact approved head c57f1fb38941a59320760f2807c7ca5f2ff76ab6, and first/second merge parents 5ef36cd4003724b59cbcfb7186a75b0552eb2944 / c57f1fb38941a59320760f2807c7ca5f2ff76ab6, fresh verified Gate 2 approval, and global IDLE control. This request only performs read-only permanent merged-main validation, exact-SHA Production deployment and all changed public JSON equivalence with independent fresh verification. No merge replay, mutations, new gates, recovery, or other-school authority."
+    "origin": "ChatGPT Saint Louis serialized Implementation lane, continuing owner-authorized Stage 1 after Control Center generic Research-acceptance repair PR #411",
+    "authorization": "Owner explicitly designated one final accepted unchanged Saint Louis RESEARCH_FROZEN ZIP; Control Center repaired the narrow contradictory raw-score gate at exact main f3d359e47b5a785ac448359398d0a6f13030a65b and authorized same-phase continuation. Exact 36 Git blobs were independently compared with owner-uploaded ZIP byte segments. Invoke the permanent Stage 1 entrypoint, which first runs permanent research_portfolio_report acceptance against exact ZIP SHA and stops if not PASS, then emit one read-only current-main reconciliation inventory. No Research change, Phase 0, shared/global mutation, Stage 2, owner gate, release or protected-main mutation authority."
   },
   "authority": {
     "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
@@ -36,11 +38,10 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
-    "venue_identity_maintenance": false
+    "owner_gate_2": false
   }
 }
