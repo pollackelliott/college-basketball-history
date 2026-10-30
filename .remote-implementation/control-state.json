@@ -149,18 +149,19 @@
     "san-diego-state-stage2-gate1-fill-0001",
     "san-diego-state-stage2-preseal-rehearsal-0001",
     "san-diego-state-stage2-gate1-seal-0001",
-    "san-diego-state-stage2-sealed-apply-0001"
+    "san-diego-state-stage2-sealed-apply-0001",
+    "san-diego-state-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "san-diego-state-release-readiness-0001",
+  "active_request_sha256": "1796b1db5d69f3aaee14b0b66935841565eace45c7637288e9d188234ee56c90",
+  "active_school_key": "san-diego-state",
+  "active_target_branch": "data/san-diego-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -329,8 +330,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/san-diego-state/san-diego-state-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "64aeecd59f0a1ce9d70794e918a36a7c877c7d8c1dbe9b490d2456cf35e81a3e"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41056114783",
+  "lock_acquisition_request_commit": "fcba2502753bfd6c345c3dd5a66febf509375be8",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
