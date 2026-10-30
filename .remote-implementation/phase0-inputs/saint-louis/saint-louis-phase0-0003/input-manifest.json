@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "request_id": "saint-louis-phase0-0003",
+  "research_checkpoint_sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
+  "research_member_sha256": {
+    "conferences.csv": "2e444508902684adedcfed1d16f5923be6715a817dc20121f86b430736830125",
+    "notes.md": "8dd0b68a4f74b1d3d44872251da65c9c5ce0c652bea6541cb0f154082b6e7b6f",
+    "opponents.csv": "58d3f5870e631d37e494b0ed48b09185ef0a8200c15fd5481356d22ca2fcac29",
+    "source-games.csv": "027e3de5ce2f65b479a8a2df01a4cb4d97625767a483c3e8fd1b6fe03f682e0d",
+    "source-notes.md": "23dd7d9fb036db2bef8e3a09fa2c00072b57658077ec0315fa92cb238bda0883",
+    "venues.csv": "9b58c0ebbe2d7ecc72d8c8312aa0c7a026db731850a0590912c491cd200a6937"
+  },
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "sidecars": {
+    "stage1-reconciliation.json": "ec75757a617f83909d84af88e9c7b2fb189474216bd9e59a1ae90790acbde875"
+  },
+  "stage1_status": "PASS"
+}
