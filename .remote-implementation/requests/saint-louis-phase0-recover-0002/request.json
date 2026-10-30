@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-phase0-recover-0002",
+  "school_key": "saint-louis",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "85426f932ebc9f7f0b1f9057aefaae1b409c608b",
+  "previous_control_state_sha256": "822cb3f24f2f73a8390987677f157413f0f017f0c59c259f27fcaccb899b7e47",
+  "expected_protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
+  "recovery": {
+    "abandoned_request_id": "saint-louis-phase0-0001",
+    "lock_commit": "b10742af21b9a3a7abfa4f36f7251fe27021a8cb",
+    "target_branch": "data/saint-louis-onboarding"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Control Center after authenticated Saint Louis Phase 0 failure",
+    "authorization": "Control Center authorizes only exact permanent RECOVER for saint-louis-phase0-0001. Durable control remains ACTIVE/INPUTS_VERIFIED with recovery_required=true, exact lock commit b10742af21b9a3a7abfa4f36f7251fe27021a8cb, no write-ahead/prepared commit/tree, and absent data/saint-louis-onboarding branch. The prior recover-0001 control commit archived a recovery payload but did not update the singleton request.json; its workflow therefore re-read the stale PHASE0 request and stopped at STALE_CONTROL_PREDECESSOR without changing control state. This request corrects transport only. Permanent recovery may classify and abandon the original failed request if objective mutation state is NOT_ATTEMPTED/PREPARED_NOT_PUBLISHED, release the lock, and preserve all Research/Stage1 evidence. No Phase 0 retry, basketball-data mutation, target publication, historical change, Owner Gate 1/2, release, merge, or unrelated mutation authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": true,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
