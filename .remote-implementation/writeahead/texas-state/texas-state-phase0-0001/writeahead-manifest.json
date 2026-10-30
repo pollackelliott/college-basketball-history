@@ -1,0 +1,470 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/texas-state/conferences.csv",
+    "schools/texas-state/notes.md",
+    "schools/texas-state/opponents.csv",
+    "schools/texas-state/source-games.csv",
+    "schools/texas-state/source-notes.md",
+    "schools/texas-state/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+    "data/reference/programs.csv": "07ba86d9737e672e138ffd135695c7bfec8e82ea5050ad6374474938c8d1a51e",
+    "data/reference/venue-names.csv": "060216e914737812f19d2ddb12d17e7c7861facf0198f1f345f9de22f03ea99a",
+    "data/reference/venues.csv": "172a147cd28612a5762a1a96aaf33536c4d64106d67ced0b87df3c5b33481dda",
+    "schools/texas-state/conferences.csv": "3b85a3a25c04d137c34f14e62011a29f552ba74f37f0c0ca727234bc472b2fdc",
+    "schools/texas-state/notes.md": "b5449b86941a463f5f699777984c1b8b474bd5310797a1d48536c986a9e72ea7",
+    "schools/texas-state/opponents.csv": "c829ae2a2da29fe091409351e1e23926df93e1008bb02e10faf0dae9e7bfb81d",
+    "schools/texas-state/source-games.csv": "830ee49a10379969a80851c812a8ebca5f3ba82156e91bdf80fb62016add63dd",
+    "schools/texas-state/source-notes.md": "90ea221f30d4ae02b18e88656147ac0689ab18b45115eb59c53937576b300e1d",
+    "schools/texas-state/venues.csv": "bb2680b10cf45142b09ee80de7cab465ded024ad450a2655f1aec504ee120ba1"
+  },
+  "changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/texas-state/conferences.csv",
+    "schools/texas-state/notes.md",
+    "schools/texas-state/opponents.csv",
+    "schools/texas-state/source-games.csv",
+    "schools/texas-state/source-notes.md",
+    "schools/texas-state/venues.csv"
+  ],
+  "commit_message": "Add Texas State onboarding source package",
+  "conference_mapping": [
+    {
+      "conference_key": "gulf-star",
+      "resolution": "NEW_GLOBAL_IDENTITY"
+    }
+  ],
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "3b85a3a25c04d137c34f14e62011a29f552ba74f37f0c0ca727234bc472b2fdc",
+    "owner_approval_basis": "Owner-approved Texas State RESEARCH_FROZEN six-file portfolio (2026-10-25) includes exact Gulf Star 1984-85 through 1986-87 membership; owner authorized routine bounded Stage 1 resolution with Proceed (2026-10-30). Preserve frozen four-row history literally; mechanically register Gulf Star Conference with its accepted exact name as the nonassertive display/tournament fallback, not as a claim that any conference tournament occurred.",
+    "registration_count": 1,
+    "registrations": [
+      {
+        "conference_key": "gulf-star",
+        "conference_name": "Gulf Star Conference",
+        "notes": "Owner-accepted frozen conference identity. Full accepted name is a nonassertive display/tournament fallback only; does not independently assert Gulf Star tournament occurrence.",
+        "status": "historical",
+        "tournament_label": "Gulf Star Conference"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "Accepted Texas State row-level source footnotes explicitly label Gulf Star Conference games in every covered season 1984-85 through 1986-87.",
+        "conference_key": "gulf-star",
+        "conference_name": "Gulf Star Conference",
+        "end_season": "1986-1987",
+        "membership_type": "primary",
+        "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction.",
+        "ongoing": "No",
+        "source_program_key": "texas-state",
+        "start_season": "1984-1985"
+      },
+      {
+        "basis": "Accepted Texas State row-level source footnotes explicitly label Southland Conference games in every covered season 1987-88 through 2011-12.",
+        "conference_key": "southland",
+        "conference_name": "Southland Conference",
+        "end_season": "2011-2012",
+        "membership_type": "primary",
+        "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction.",
+        "ongoing": "No",
+        "source_program_key": "texas-state",
+        "start_season": "1987-1988"
+      },
+      {
+        "basis": "Accepted Texas State 2012-13 row-level source footnotes explicitly label Western Athletic Conference games and the accepted Stage 3B tournament row carries conference key wac.",
+        "conference_key": "wac",
+        "conference_name": "Western Athletic Conference",
+        "end_season": "2012-2013",
+        "membership_type": "primary",
+        "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction.",
+        "ongoing": "No",
+        "source_program_key": "texas-state",
+        "start_season": "2012-2013"
+      },
+      {
+        "basis": "Accepted Texas State row-level source footnotes explicitly label Sun Belt Conference games in every covered historical-results season 2013-14 through 2024-25; accepted 2025-26 Stage 3B conference-tournament row carries conference key sun-belt.",
+        "conference_key": "sun-belt",
+        "conference_name": "Sun Belt Conference",
+        "end_season": "2025-2026",
+        "membership_type": "primary",
+        "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction.",
+        "ongoing": "Yes",
+        "source_program_key": "texas-state",
+        "start_season": "2013-2014"
+      }
+    ],
+    "replacement_row_count": 4,
+    "spec_path": "/tmp/remote-phase0-inputs-o0s5oxuw/conference-reconciliation.json",
+    "spec_sha256": "00b2cdbe29a5737b6168b9cabfe274f216867520d18e136aa53a951f06d608ea"
+  },
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "97cfbc224aa5ebad50cf5aac9ffbd7bdf78b9ded",
+  "history_scope": {
+    "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted Texas State top-level scope 1984-85+ from the owner-supplied program-top-level-scope reference, consistent with the accepted 1984-85 through 2025-26 immutable Research Freeze and the Stage 1 PASS checkpoint. No historical scope supersession or research reopening.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1984-1985",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "1984-85+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "1984-85+",
+      "school": "Texas State"
+    }
+  },
+  "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "3b85a3a25c04d137c34f14e62011a29f552ba74f37f0c0ca727234bc472b2fdc",
+    "notes.md": "b5449b86941a463f5f699777984c1b8b474bd5310797a1d48536c986a9e72ea7",
+    "opponents.csv": "c829ae2a2da29fe091409351e1e23926df93e1008bb02e10faf0dae9e7bfb81d",
+    "source-games.csv": "830ee49a10379969a80851c812a8ebca5f3ba82156e91bdf80fb62016add63dd",
+    "source-notes.md": "90ea221f30d4ae02b18e88656147ac0689ab18b45115eb59c53937576b300e1d",
+    "venues.csv": "bb2680b10cf45142b09ee80de7cab465ded024ad450a2655f1aec504ee120ba1"
+  },
+  "prepared_commit_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "prepared_parent_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "prepared_tree_sha": "a4300bbbbb2245aa6f64d1f2466e1d415590f92c",
+  "program_alias_mapping": [],
+  "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "repository_validation": "PASS",
+  "request_id": "texas-state-phase0-0001",
+  "request_sha256": "3634942132bfe20b4812a97d8ae2f1959b45eb54b3ecc720084e75ef5ddfc7a1",
+  "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "research_checkpoint_sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "sidecars": {
+    "conference-reconciliation.json": "00b2cdbe29a5737b6168b9cabfe274f216867520d18e136aa53a951f06d608ea",
+    "integration-freeze.json": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+    "stage1-reconciliation.json": "9813e56cd7ba404d0d2ae6c8da8f025d7c333d17cedb83336a3d44bbf1368a93"
+  },
+  "target_branch": "data/texas-state-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Alex G. Spanos Center",
+      "final_venue_id": "VEN-000725",
+      "final_venue_key": "ag-spanos-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "alex-g-spanos-center"
+    },
+    {
+      "canonical_name": "Bob Devaney Sports Center",
+      "final_venue_id": "VEN-000023",
+      "final_venue_key": "bob-devaney-sports-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bob-devaney-sports-center"
+    },
+    {
+      "canonical_name": "Cannon Activities Center",
+      "final_venue_id": "VEN-000389",
+      "final_venue_key": "cannon-activities-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cannon-activities-center"
+    },
+    {
+      "canonical_name": "Chiles Center",
+      "final_venue_id": "VEN-000643",
+      "final_venue_key": "chiles-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chiles-center"
+    },
+    {
+      "canonical_name": "Daniel-Meyer Coliseum",
+      "final_venue_id": "VEN-000370",
+      "final_venue_key": "schollmaier-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "daniel-meyer-coliseum"
+    },
+    {
+      "canonical_name": "Dickies Arena",
+      "final_venue_id": "VEN-000057",
+      "final_venue_key": "dickies-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dickies-arena"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    },
+    {
+      "canonical_name": "Hamilton Gymnasium",
+      "final_venue_id": "VEN-001002",
+      "final_venue_key": "hamilton-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "hamilton-gymnasium"
+    },
+    {
+      "canonical_name": "Hammons Student Center",
+      "final_venue_id": "VEN-000562",
+      "final_venue_key": "hammons-student-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hammons-student-center"
+    },
+    {
+      "canonical_name": "Hirsch Memorial Coliseum",
+      "final_venue_id": "VEN-000738",
+      "final_venue_key": "hirsch-memorial-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hirsch-memorial-coliseum"
+    },
+    {
+      "canonical_name": "Johnson Coliseum",
+      "final_venue_id": "VEN-000941",
+      "final_venue_key": "william-r-johnson-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "johnson-coliseum"
+    },
+    {
+      "canonical_name": "KSU Convocation Center",
+      "final_venue_id": "VEN-001003",
+      "final_venue_key": "ksu-convocation-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ksu-convocation-center"
+    },
+    {
+      "canonical_name": "Kansas Coliseum",
+      "final_venue_id": "VEN-000296",
+      "final_venue_key": "britt-brown-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "kansas-coliseum"
+    },
+    {
+      "canonical_name": "Kemper Arena",
+      "final_venue_id": "VEN-000099",
+      "final_venue_key": "kemper-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kemper-arena"
+    },
+    {
+      "canonical_name": "Lakefront Arena",
+      "final_venue_id": "VEN-000367",
+      "final_venue_key": "lakefront-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lakefront-arena"
+    },
+    {
+      "canonical_name": "Lloyd Noble Center",
+      "final_venue_id": "VEN-000116",
+      "final_venue_key": "lloyd-noble-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lloyd-noble-center"
+    },
+    {
+      "canonical_name": "Merrell Center",
+      "final_venue_id": "VEN-001004",
+      "final_venue_key": "merrell-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "merrell-center"
+    },
+    {
+      "canonical_name": "Moody Coliseum",
+      "final_venue_id": "VEN-000141",
+      "final_venue_key": "moody-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "moody-coliseum"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Pensacola Bay Center",
+      "final_venue_id": "VEN-001005",
+      "final_venue_key": "pensacola-bay-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "pensacola-bay-center"
+    },
+    {
+      "canonical_name": "Poliforum Benito Juarez",
+      "final_venue_id": "VEN-000737",
+      "final_venue_key": "poliforum-benito-juarez",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "poliforum-benito-juarez"
+    },
+    {
+      "canonical_name": "Prather Coliseum",
+      "final_venue_id": "VEN-001006",
+      "final_venue_key": "prather-coliseum",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "prather-coliseum"
+    },
+    {
+      "canonical_name": "Puerto Vallarta International Convention Center",
+      "final_venue_id": "VEN-000358",
+      "final_venue_key": "puerto-vallarta-international-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "puerto-vallarta-international-convention-center"
+    },
+    {
+      "canonical_name": "Resorts World Events Center",
+      "final_venue_id": "VEN-001007",
+      "final_venue_key": "resorts-world-events-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "resorts-world-events-center"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "Strahan Arena at the University Events Center",
+      "final_venue_id": "VEN-001008",
+      "final_venue_key": "strahan-arena-at-the-university-events-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "strahan-arena-at-the-university-events-center"
+    },
+    {
+      "canonical_name": "Sullivan Arena",
+      "final_venue_id": "VEN-000361",
+      "final_venue_key": "sullivan-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sullivan-arena"
+    },
+    {
+      "canonical_name": "The Matadome",
+      "final_venue_id": "VEN-001009",
+      "final_venue_key": "the-matadome",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "the-matadome"
+    },
+    {
+      "canonical_name": "Thomas Assembly Center",
+      "final_venue_id": "VEN-000867",
+      "final_venue_key": "thomas-assembly-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thomas-assembly-center"
+    },
+    {
+      "canonical_name": "UNT Coliseum",
+      "final_venue_id": "VEN-000273",
+      "final_venue_key": "unt-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "unt-coliseum"
+    },
+    {
+      "canonical_name": "UTPA Fieldhouse",
+      "final_venue_id": "VEN-001010",
+      "final_venue_key": "utpa-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "utpa-fieldhouse"
+    },
+    {
+      "canonical_name": "UTSA Convocation Center",
+      "final_venue_id": "VEN-001011",
+      "final_venue_key": "utsa-convocation-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "utsa-convocation-center"
+    },
+    {
+      "canonical_name": "University Center",
+      "final_venue_id": "VEN-001012",
+      "final_venue_key": "university-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "university-center"
+    },
+    {
+      "canonical_name": "Wells Fargo Arena",
+      "final_venue_id": "VEN-000056",
+      "final_venue_key": "desert-financial-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "wells-fargo-arena-tempe"
+    },
+    {
+      "canonical_name": "Wilkerson-Greines Activity Center",
+      "final_venue_id": "VEN-000592",
+      "final_venue_key": "wilkerson-greines-activity-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wilkerson-greines-activity-center"
+    },
+    {
+      "canonical_name": "b1Bank Fant Coliseum",
+      "final_venue_id": "VEN-001013",
+      "final_venue_key": "b1bank-fant-coliseum",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "b1bank-fant-coliseum"
+    },
+    {
+      "canonical_name": "Worthen Arena",
+      "final_venue_id": "VEN-000954",
+      "final_venue_key": "worthen-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "worthen-arena"
+    },
+    {
+      "canonical_name": "Myriad Convention Center",
+      "final_venue_id": "VEN-000146",
+      "final_venue_key": "myriad-convention-center",
+      "research_venue_id": "VEN-000146",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "myriad-convention-center"
+    },
+    {
+      "canonical_name": "Hilton Coliseum",
+      "final_venue_id": "VEN-000079",
+      "final_venue_key": "hilton-coliseum",
+      "research_venue_id": "VEN-000079",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hilton-coliseum"
+    }
+  ],
+  "venue_reconciliation": null
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "owner_approval_basis": "Owner-approved Texas State RESEARCH_FROZEN six-file portfolio (2026-10-25) includes exact Gulf Star 1984-85 through 1986-87 membership; owner authorized routine bounded Stage 1 resolution with Proceed (2026-10-30). Preserve frozen four-row history literally; mechanically register Gulf Star Conference with its accepted exact name as the nonassertive display/tournament fallback, not as a claim that any conference tournament occurred.",
+  "expected_conferences_sha256": "3b85a3a25c04d137c34f14e62011a29f552ba74f37f0c0ca727234bc472b2fdc",
+  "replacement_history": [
+    {
+      "source_program_key": "texas-state",
+      "start_season": "1984-1985",
+      "end_season": "1986-1987",
+      "conference_key": "gulf-star",
+      "conference_name": "Gulf Star Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Accepted Texas State row-level source footnotes explicitly label Gulf Star Conference games in every covered season 1984-85 through 1986-87.",
+      "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction."
+    },
+    {
+      "source_program_key": "texas-state",
+      "start_season": "1987-1988",
+      "end_season": "2011-2012",
+      "conference_key": "southland",
+      "conference_name": "Southland Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Accepted Texas State row-level source footnotes explicitly label Southland Conference games in every covered season 1987-88 through 2011-12.",
+      "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction."
+    },
+    {
+      "source_program_key": "texas-state",
+      "start_season": "2012-2013",
+      "end_season": "2012-2013",
+      "conference_key": "wac",
+      "conference_name": "Western Athletic Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Accepted Texas State 2012-13 row-level source footnotes explicitly label Western Athletic Conference games and the accepted Stage 3B tournament row carries conference key wac.",
+      "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction."
+    },
+    {
+      "source_program_key": "texas-state",
+      "start_season": "2013-2014",
+      "end_season": "2025-2026",
+      "conference_key": "sun-belt",
+      "conference_name": "Sun Belt Conference",
+      "membership_type": "primary",
+      "ongoing": "Yes",
+      "basis": "Accepted Texas State row-level source footnotes explicitly label Sun Belt Conference games in every covered historical-results season 2013-14 through 2024-25; accepted 2025-26 Stage 3B conference-tournament row carries conference key sun-belt.",
+      "notes": "Mechanical compatibility recovery from durable target-source/Stage3B authority; no current-registry reconstruction."
+    }
+  ],
+  "registrations": [
+    {
+      "conference_key": "gulf-star",
+      "conference_name": "Gulf Star Conference",
+      "tournament_label": "Gulf Star Conference",
+      "status": "historical",
+      "notes": "Owner-accepted frozen conference identity. Full accepted name is a nonassertive display/tournament fallback only; does not independently assert Gulf Star tournament occurrence."
+    }
+  ]
+}

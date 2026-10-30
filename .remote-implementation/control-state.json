@@ -162,15 +162,15 @@
   "active_lock_commit": "97cfbc224aa5ebad50cf5aac9ffbd7bdf78b9ded",
   "active_lock_owner": "github-actions:41083520422:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "active_prepared_tree_sha": "a4300bbbbb2245aa6f64d1f2466e1d415590f92c",
   "active_request_id": "texas-state-phase0-0001",
   "active_request_sha256": "3634942132bfe20b4812a97d8ae2f1959b45eb54b3ecc720084e75ef5ddfc7a1",
   "active_school_key": "texas-state",
   "active_target_branch": "data/texas-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/texas-state/texas-state-phase0-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "455d052bee46789978b6d582c07ce0da369319e6367ac95d7585a78ea38f7405",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -337,5 +337,5 @@
   "lock_acquisition_request_commit": "af9b2a30277537cccc1fb5b775a88e7924bdaa43",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
