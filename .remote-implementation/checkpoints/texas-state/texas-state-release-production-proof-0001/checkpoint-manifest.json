@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "merge_parent_onboarding": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "merge_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "c529a84a8ae00611937213d26fab5190d50061800fca4fca893007cd56145e4d",
+  "owner_gate_2_verification_sha256": "ac5b21ab2829a965a8cba82d99cd8b5a22a448befe0543f7eca34634bca26875",
+  "pr_head_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "pr_number": 406,
+  "production_deployment_id": 7447192410,
+  "production_json_checked_count": 39,
+  "production_proof": true,
+  "production_proof_sha256": "bb08d1bbc28b767780fe5cca35cf0946be4a34f4e660abd3085d4afda3e51fb3",
+  "protected_main_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
+  "request_id": "texas-state-release-production-proof-0001",
+  "request_sha256": "4deefcfa4166fe3731e7e5915a41009a57d6afab74c20db50c695509dda9dec3",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}
