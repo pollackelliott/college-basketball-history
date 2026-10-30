@@ -1014,6 +1014,117 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             "armory-fieldhouse-cincinnati",
         )
 
+    def test_new_foreign_venue_uses_unanimous_source_country_as_registry_jurisdiction(self):
+        locals_ = [
+            {
+                **local_venue(
+                    "Historical identity resolved research-locally.",
+                    city="Cork",
+                    state="",
+                ),
+                "source_program_key": "saint-louis",
+                "venue_key": "neptune-stadium-cork",
+                "canonical_name": "Neptune Stadium",
+            }
+        ]
+        source_games = [
+            {
+                "curated_venue_name": "Neptune Stadium",
+                "source_venue_name": "",
+                "city": "Cork",
+                "state": "",
+                "country": "IE",
+            },
+            {
+                "curated_venue_name": "Neptune Stadium",
+                "source_venue_name": "",
+                "city": "Cork",
+                "state": "",
+                "country": "IE",
+            },
+        ]
+
+        local_rows, global_rows, _names, mappings = rebase_venues(
+            "saint-louis",
+            locals_,
+            [],
+            [],
+            source_games=source_games,
+        )
+
+        self.assertEqual(len(global_rows), 1)
+        self.assertEqual(global_rows[0]["city"], "Cork")
+        self.assertEqual(global_rows[0]["state"], "IE")
+        self.assertEqual(local_rows[0]["state"], "IE")
+        self.assertEqual(mappings[0]["resolution"], "NEW_GLOBAL_IDENTITY")
+        self.assertEqual([row["state"] for row in source_games], ["", ""])
+        self.assertEqual([row["country"] for row in source_games], ["IE", "IE"])
+
+    def test_new_venue_does_not_use_domestic_country_as_missing_state(self):
+        locals_ = [
+            {
+                **local_venue("", city="Orlando", state=""),
+                "venue_key": "test-orlando-venue",
+                "canonical_name": "Test Orlando Venue",
+            }
+        ]
+        source_games = [
+            {
+                "curated_venue_name": "Test Orlando Venue",
+                "source_venue_name": "",
+                "city": "Orlando",
+                "state": "",
+                "country": "US",
+            }
+        ]
+
+        local_rows, global_rows, _names, _mappings = rebase_venues(
+            "test-school",
+            locals_,
+            [],
+            [],
+            source_games=source_games,
+        )
+
+        self.assertEqual(global_rows[0]["state"], "")
+        self.assertEqual(local_rows[0]["state"], "")
+
+    def test_new_foreign_venue_requires_unanimous_complete_country_evidence(self):
+        locals_ = [
+            {
+                **local_venue("", city="Cork", state=""),
+                "venue_key": "test-cork-venue",
+                "canonical_name": "Test Cork Venue",
+            }
+        ]
+        source_games = [
+            {
+                "curated_venue_name": "Test Cork Venue",
+                "source_venue_name": "",
+                "city": "Cork",
+                "state": "",
+                "country": "IE",
+            },
+            {
+                "curated_venue_name": "Test Cork Venue",
+                "source_venue_name": "",
+                "city": "Cork",
+                "state": "",
+                "country": "",
+            },
+        ]
+
+        local_rows, global_rows, _names, _mappings = rebase_venues(
+            "test-school",
+            locals_,
+            [],
+            [],
+            source_games=source_games,
+        )
+
+        self.assertEqual(global_rows[0]["state"], "")
+        self.assertEqual(local_rows[0]["state"], "")
+
     def test_research_base_reuse_hint_still_blocks_state_conflict(self):
         globals_ = [
             global_venue(

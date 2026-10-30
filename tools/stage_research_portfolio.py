@@ -405,6 +405,72 @@ def normalize_jurisdiction(value: str) -> str:
     return US_STATE_ABBREVIATIONS.get(normalized, normalized)
 
 
+_DOMESTIC_COUNTRY_TOKENS = {
+    "US",
+    "USA",
+    "UNITED STATES",
+    "UNITED STATES OF AMERICA",
+}
+
+
+def foreign_country_registry_jurisdiction(
+    local: dict[str, str],
+    source_games: list[dict[str, str]],
+) -> str:
+    """Return one exact foreign country value for the legacy global
+    venue jurisdiction slot when the Research venue has city but no state.
+
+    This is representation-only compatibility. Frozen source-game geography
+    remains untouched, and domestic/mixed/incomplete evidence never fills the
+    missing state field.
+    """
+    if local.get("state", "").strip():
+        return local.get("state", "").strip()
+
+    city = local.get("city", "").strip()
+    canonical_name = local.get("canonical_name", "").strip()
+    if not city or not canonical_name:
+        return ""
+
+    accepted_names = {normalize_name(canonical_name)}
+    accepted_names.update(
+        normalize_name(alias)
+        for alias in local.get("aliases", "").split(";")
+        if alias.strip()
+    )
+    accepted_names.discard("")
+    city_folded = city.casefold()
+
+    matches = []
+    for game in source_games:
+        game_name = (
+            game.get("curated_venue_name", "").strip()
+            or game.get("source_venue_name", "").strip()
+        )
+        if normalize_name(game_name) not in accepted_names:
+            continue
+        if game.get("city", "").strip().casefold() != city_folded:
+            continue
+        matches.append(game)
+
+    if not matches:
+        return ""
+    if any(game.get("state", "").strip() for game in matches):
+        return ""
+
+    countries = [game.get("country", "").strip() for game in matches]
+    if any(not country for country in countries):
+        return ""
+    unique = {country for country in countries}
+    if len(unique) != 1:
+        return ""
+
+    country = next(iter(unique))
+    if country.upper() in _DOMESTIC_COUNTRY_TOKENS:
+        return ""
+    return country
+
+
 # A handful of existing foreign venues use a country code in the global
 # registry while incoming Research may retain a more precise region name.
 # This is not a general waiver of physical-venue geography. Only a known
@@ -1140,6 +1206,7 @@ def rebase_venues(
     *,
     existing_school_venues: list[dict[str, str]] | None = None,
     venue_reconciliation: dict[str, dict[str, str]] | None = None,
+    source_games: list[dict[str, str]] | None = None,
 ) -> tuple[
     list[dict[str, str]],
     list[dict[str, str]],
@@ -1187,6 +1254,7 @@ def rebase_venues(
     used_ids = set(global_by_id)
     existing_school_venues = existing_school_venues or []
     venue_reconciliation = venue_reconciliation or {}
+    source_games = source_games or []
     reserved_keys = {
         row.get("venue_key", "").strip()
         for row in [*global_rows, *existing_school_venues, *local_rows]
@@ -1358,12 +1426,16 @@ def rebase_venues(
                 reserved_keys.add(final_key)
                 reason = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
 
+            registry_state = (
+                local.get("state", "").strip()
+                or foreign_country_registry_jurisdiction(local, source_games)
+            )
             chosen = {
                 "venue_id": final_id,
                 "venue_key": final_key,
                 "display_name": name,
                 "city": local.get("city", "").strip(),
-                "state": local.get("state", "").strip(),
+                "state": registry_state,
                 "opened": local.get("known_opened", "").strip(),
                 "closed": local.get("known_closed", "").strip(),
                 "date_precision": (
@@ -1406,6 +1478,14 @@ def rebase_venues(
         # school packages. Frozen source-games.csv geography is untouched.
         if not reason.startswith("NEW_GLOBAL_IDENTITY"):
             local["city"] = chosen.get("city", "").strip()
+            local["state"] = chosen.get("state", "").strip()
+        elif (
+            not local.get("state", "").strip()
+            and chosen.get("state", "").strip()
+        ):
+            # venues.csv is integration representation. Preserve the accepted
+            # foreign country in the registry's legacy jurisdiction slot while
+            # leaving frozen source-games.csv city/state/country untouched.
             local["state"] = chosen.get("state", "").strip()
 
         local_notes = local.get("notes", "").strip()
@@ -1806,6 +1886,7 @@ def main() -> int:
                 venue_names,
                 existing_school_venues=existing_school_venues,
                 venue_reconciliation=venue_reconciliation,
+                source_games=source_games,
             )
 
             global_conferences, conference_mappings = register_conferences(
