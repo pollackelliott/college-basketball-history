@@ -8,7 +8,8 @@
     "utah-state-phase0-0001",
     "colorado-state-phase0-0001",
     "colorado-state-phase0-0002",
-    "fresno-state-phase0-scope-supersession-0001"
+    "fresno-state-phase0-scope-supersession-0001",
+    "saint-louis-phase0-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -172,16 +173,16 @@
     "saint-louis-stage1-0002",
     "saint-louis-phase0-0001"
   ],
-  "active_expected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
-  "active_lock_commit": "b10742af21b9a3a7abfa4f36f7251fe27021a8cb",
-  "active_lock_owner": "github-actions:41129354752:1",
-  "active_operation": "PHASE0",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "saint-louis-phase0-0001",
-  "active_request_sha256": "f741a0b1d009103d84529f55be74aafa4f8aa63d65b974594f940478f1a283a1",
-  "active_school_key": "saint-louis",
-  "active_target_branch": "data/saint-louis-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -345,25 +346,29 @@
     "texas-state-release-gate2-approval-0001",
     "texas-state-release-production-proof-0001",
     "saint-louis-stage1-0001",
-    "saint-louis-stage1-0002"
+    "saint-louis-stage1-0002",
+    "saint-louis-phase0-recover-0002"
   ],
-  "current_sequence": 159,
+  "current_sequence": 160,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage1-0002/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "c96d23b45a652abeab79f0e0f740579e000cad270d013b1adb8893361821b426",
-    "operation": "STAGE1_INVENTORY",
-    "protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
-    "request_id": "saint-louis-stage1-0002",
-    "school_key": "saint-louis",
-    "stage1_reconciliation_sha256": "081e6dadb93235a253180a1140f7fb40ff820ec14a52032f80f7364cf3f41b8d",
-    "stage1_status": "PASS"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "saint-louis-phase0-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "b10742af21b9a3a7abfa4f36f7251fe27021a8cb",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
+      "recovered_request_id": "saint-louis-phase0-0001",
+      "request_id": "saint-louis-phase0-recover-0002",
+      "schema_version": 1,
+      "target_branch": "data/saint-louis-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "41129354752",
-  "lock_acquisition_request_commit": "3ce9403e4f84411e40a03916fac8ee3247038720",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }

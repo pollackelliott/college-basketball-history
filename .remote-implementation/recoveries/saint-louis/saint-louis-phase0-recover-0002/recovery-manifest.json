@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "b10742af21b9a3a7abfa4f36f7251fe27021a8cb",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
+  "recovered_request_id": "saint-louis-phase0-0001",
+  "request_id": "saint-louis-phase0-recover-0002",
+  "schema_version": 1,
+  "target_branch": "data/saint-louis-onboarding"
+}
