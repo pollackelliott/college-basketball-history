@@ -201,6 +201,7 @@ def make_checkpoint(
     include_capsule=True,
     manifest_capsule=True,
     include_coverage=True,
+    include_early_history=False,
 ):
     ledger = legacy_ledger_bytes() if legacy else current_ledger_bytes()
     status_payload = {
@@ -223,6 +224,22 @@ def make_checkpoint(
         "venues.csv": venue_bytes(),
         "conferences.csv": conference_bytes(),
     }
+    if include_early_history:
+        capsule["early-history-uncertainty.json"] = json.dumps(
+            {
+                "schema_version": 1,
+                "school_key": "test",
+                "research_base_sha": "a" * 40,
+                "audit_sha256": "b" * 64,
+                "terminal_classifications": {
+                    "class_a": "EARLY_HISTORY_UNQUANTIFIED_SEASON_COVERAGE",
+                    "class_b": "EARLY_HISTORY_IDENTIFIED_GAME_RESULT_UNKNOWN",
+                },
+                "class_a": [{"season": "1900-1901"}],
+                "class_b": [],
+            },
+            sort_keys=True,
+        ).encode()
 
     if legacy:
         prefix = "test-stage3b-complete-checkpoint/"
@@ -579,6 +596,57 @@ class Stage4AuthoringTests(unittest.TestCase):
                     "stage4-authoring/venues.csv",
                     "stage4-authoring/conferences.csv",
                 },
+            )
+
+    def test_early_history_metadata_is_manifested_and_embedded_without_seventh_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkpoint = root / "early-history.zip"
+            make_checkpoint(checkpoint, include_early_history=True)
+
+            preflight = mod.inspect_checkpoint("test", checkpoint)
+            self.assertEqual(preflight["status"], "PASS")
+            self.assertTrue(preflight["early_history_uncertainty"]["present"])
+            self.assertEqual(
+                preflight["early_history_uncertainty"]["class_a_seasons"],
+                ["1900-1901"],
+            )
+
+            fake_closeout = {
+                "status": "COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
+                "checkpoint_sha256": "c" * 64,
+            }
+            with patch.object(mod, "closeout", return_value=fake_closeout):
+                result = mod.author(
+                    "test",
+                    checkpoint,
+                    "d" * 40,
+                    root / "out",
+                )
+
+            self.assertEqual(
+                result["early_history_uncertainty"]["audit_sha256"],
+                "b" * 64,
+            )
+            package = root / "out" / "package"
+            self.assertEqual(
+                {path.name for path in package.iterdir()},
+                {
+                    "opponents.csv",
+                    "venues.csv",
+                    "conferences.csv",
+                    "source-games.csv",
+                    "notes.md",
+                    "source-notes.md",
+                },
+            )
+            source_notes = (package / "source-notes.md").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("## Early-history uncertainty", source_notes)
+            self.assertIn(
+                '"EARLY_HISTORY_UNQUANTIFIED_SEASON_COVERAGE"',
+                source_notes,
             )
 
     def test_legacy_columns_author_package_without_reinterpretation(self):
