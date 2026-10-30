@@ -1,35 +1,43 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-release-preview-verify-0001",
+  "request_id": "texas-state-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "texas-state",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "3f00f283ee979480b644453adf3120534371f5f2",
-  "previous_control_state_sha256": "5b6c50ba57a4849b9e66abad2c62ad429fe750b550e49eb1688b66a24c2936d8",
+  "previous_control_state_commit": "75cd5a71db4fd73445d6ba790decf8b25eca216a",
+  "previous_control_state_sha256": "4b07d5f230b5f228a31cdf7e8075243dad80e378762d1c0bf49a883a01e8421a",
   "expected_protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
   "target_branch": "data/texas-state-onboarding",
   "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/texas-state/texas-state-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "5a9ce7672d3a62fbba511f4b81c7255d81c437b5967250a2f30f0dd6439acee1"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/texas-state/texas-state-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "62a1ec21b3aefd3d144d2666f8d51484f181686a55ec5c2f57d8ca79706b154a"
-  },
+  "pr_number": 406,
   "approved_plan_hash": "6dd6e6889616af2caf967ef62ff3808de8e367282729ba717ef1004766a4ab9d",
   "release_manifest_sha256": "708b57bb00776bfc4e435358a272f270e6466f62271dd6bce488713ed24368cd",
-  "pr_number": 406,
+  "preview_deployment_id": 7444920622,
+  "preview_url": "https://college-basketball-history-qc4fqrade-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "84d21f0cf504721dc80de309f92afd6dd13f4aa7f08d6267d9448ae142f294e9"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/texas-state/texas-state-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "f0cf1872c3a978a21d6375f4b69b05f5d0a75bc30c684a0a8cbb812a3b6c0b2c"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's explicit statement in the Texas State Implementation conversation: “APPROVED. Proceed” immediately after receiving the exact independently fresh-verified Owner Gate 2 packet for Texas State PR #406 at head c57f1fb38941a59320760f2807c7ca5f2ff76ab6 and successful Vercel Preview deployment 7444920622, and being told that explicit Owner Gate 2 approval was necessary. This is the required affirmative approval of that exact Preview, not a generic Proceed.",
+    "preview_checkpoint_sha256": "84d21f0cf504721dc80de309f92afd6dd13f4aa7f08d6267d9448ae142f294e9",
+    "preview_verification_sha256": "f0cf1872c3a978a21d6375f4b69b05f5d0a75bc30c684a0a8cbb812a3b6c0b2c",
+    "pr_number": 406,
+    "pr_head_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+    "preview_deployment_id": 7444920622,
+    "preview_url": "https://college-basketball-history-qc4fqrade-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Texas State serialized Implementation lane — bounded exact PR-head Preview verification",
-    "authorization": "Owner instructed Proceed after Texas State release PR #406 was created. Fresh authority verified protected main 5ef36cd4003724b59cbcfb7186a75b0552eb2944, unchanged sealed successor c57f1fb38941a59320760f2807c7ca5f2ff76ab6, exact preserved PR body SHA-256 3e8acc5704d70fc2302c17c9f2173da00a35369c6be2df53a18410b74bc2c6c9, open non-draft PR #406 against main with clean mergeability, required CI checks PASS, fresh-verified RELEASE_READINESS and global IDLE control. Authorizes exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification through OWNER_GATE_2_READY. No Owner Gate 2 approval, merge, Production, tracked basketball mutation, historical reconsideration, recovery, maintenance, or other-school authority."
+    "origin": "ChatGPT Texas State serialized Implementation lane — owner-authorized exact Gate 2 approval",
+    "authorization": "Owner explicitly said APPROVED. Proceed in response to independently fresh-verified Texas State PR #406 exact Preview deployment 7444920622 and head c57f1fb38941a59320760f2807c7ca5f2ff76ab6. This request authorizes only read-only RELEASE_GATE2_APPROVAL and independent exact Preview re-verification. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, or affect other schools."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
-    "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
@@ -40,8 +48,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
