@@ -147,18 +147,19 @@
     "san-diego-state-stage2-proposal-0001",
     "san-diego-state-stage2-proposal-0002",
     "san-diego-state-stage2-gate1-fill-0001",
-    "san-diego-state-stage2-preseal-rehearsal-0001"
+    "san-diego-state-stage2-preseal-rehearsal-0001",
+    "san-diego-state-stage2-gate1-seal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_SEAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "san-diego-state-stage2-gate1-seal-0001",
+  "active_request_sha256": "ab3d01d3a3729433dd3e819b178069ecb360f4a6aee1b2a1b00dd93b03f71a61",
+  "active_school_key": "san-diego-state",
+  "active_target_branch": "data/san-diego-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -330,8 +331,11 @@
     "target_branch": "data/san-diego-state-onboarding",
     "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41038737922",
+  "lock_acquisition_request_commit": "cd8e03ed763f698f7c7575439650e222661281c6",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_SEAL_RUNNING"
 }
