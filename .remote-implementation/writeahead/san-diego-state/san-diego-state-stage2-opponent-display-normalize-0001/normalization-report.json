@@ -1,0 +1,63 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 4,
+  "changes": [
+    {
+      "authority_names": [
+        "Saint Katherine"
+      ],
+      "authority_signature": "saintkatherine",
+      "canonical_opponent_key": "saint-katherine",
+      "from_names": [
+        "University of Saint Katherine"
+      ],
+      "target_row_count": 3,
+      "to_name": "Saint Katherine"
+    },
+    {
+      "authority_names": [
+        "Wheaton (IL)"
+      ],
+      "authority_signature": "wheatonil",
+      "canonical_opponent_key": "wheaton-il",
+      "from_names": [
+        "Wheaton College (IL)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Wheaton (IL)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 4,
+  "source_game_display_changes": [
+    {
+      "from_name": "Wheaton College (IL)",
+      "normalized_opponent_key": "wheaton-il",
+      "source_game_id": "SDSU-S1-000032",
+      "to_name": "Wheaton (IL)"
+    },
+    {
+      "from_name": "University of Saint Katherine",
+      "normalized_opponent_key": "saint-katherine",
+      "source_game_id": "SDSU-S1-001278",
+      "to_name": "Saint Katherine"
+    },
+    {
+      "from_name": "University of Saint Katherine",
+      "normalized_opponent_key": "saint-katherine",
+      "source_game_id": "SDSU-S1-001512",
+      "to_name": "Saint Katherine"
+    },
+    {
+      "from_name": "University of Saint Katherine",
+      "normalized_opponent_key": "saint-katherine",
+      "source_game_id": "SDSU-S1-001619",
+      "to_name": "Saint Katherine"
+    }
+  ],
+  "status": "PASS"
+}

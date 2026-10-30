@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "integration_base_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+    "school_key": "san-diego-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "integration_base_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+    "school_key": "san-diego-state",
+    "status": "PASS"
+  }
+}

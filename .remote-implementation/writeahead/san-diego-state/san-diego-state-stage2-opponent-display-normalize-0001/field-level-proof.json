@@ -1,0 +1,27 @@
+{
+  "allowed_paths": [
+    "schools/san-diego-state/opponents.csv",
+    "schools/san-diego-state/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "saint-katherine",
+    "wheaton-il"
+  ],
+  "opponent_changed_row_count": 4,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "source_game_changed_ids": [
+    "SDSU-S1-000032",
+    "SDSU-S1-001278",
+    "SDSU-S1-001512",
+    "SDSU-S1-001619"
+  ],
+  "source_game_changed_keys": [
+    "saint-katherine",
+    "wheaton-il"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 4
+}

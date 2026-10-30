@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/san-diego-state/opponents.csv",
+    "schools/san-diego-state/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/san-diego-state/opponents.csv": "4dd6cd93cde3c58b6b2ae78a4fda12aa1212b9bd2f85ba001bc0d807bf1699c3",
+    "schools/san-diego-state/source-games.csv": "72f3441f83a534fd30d30213f8ed42b1554d17ff3b5bade786f98127ffad0239"
+  },
+  "changed_paths": [
+    "schools/san-diego-state/opponents.csv",
+    "schools/san-diego-state/source-games.csv"
+  ],
+  "commit_message": "Normalize san-diego-state historical opponent display representation",
+  "expected_blocker_keys": [
+    "saint-katherine",
+    "wheaton-il"
+  ],
+  "expected_target_predecessor_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "field_level_proof_sha256": "8466832dc8993df060f776f2cf1c4057a27a3e8f2b3c6cd0d87380cf2769820a",
+  "global_lock_commit": "62052256f07eb03b05d53c4cba8cb72828420fff",
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "08c7d68d3dcbce7787edf9ec97b02d52f150cbc5c2d11e9e64d86bb3c949e644",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "prepared_parent_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "prepared_tree_sha": "c6444aaa52f71af9a07f57251e9b1dbf535ce3c8",
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "repository_validation": "PASS",
+  "request_id": "san-diego-state-stage2-opponent-display-normalize-0001",
+  "request_sha256": "ccf0ce890e51f6e6bf6078050e9835396bfc67ec968f8344a672fcf96ca714d4",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_drift_after": {
+    "baseline_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "integration_base_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+    "school_key": "san-diego-state",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+    "integration_base_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+    "school_key": "san-diego-state",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "740b56ff5e1224fcffacc3adebcb57f66084482420f18925cc9642186762442e",
+    "field-level-proof.json": "8466832dc8993df060f776f2cf1c4057a27a3e8f2b3c6cd0d87380cf2769820a",
+    "integration-freeze.json": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+    "normalization-report.json": "08c7d68d3dcbce7787edf9ec97b02d52f150cbc5c2d11e9e64d86bb3c949e644",
+    "semantic-drift-proof.json": "72f739bc3c5f700db33a2df047c6dfaaa8454a0adcf58a6e0b15d094d50f9a82"
+  },
+  "source_game_normalized_name_row_count": 4,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "740b56ff5e1224fcffacc3adebcb57f66084482420f18925cc9642186762442e",
+  "target_branch": "data/san-diego-state-onboarding"
+}
