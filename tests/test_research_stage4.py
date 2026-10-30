@@ -1239,6 +1239,42 @@ class Stage4AuthoringTests(unittest.TestCase):
         self.assertIn("Accepted Stage 3B postseason round: Second Round.",
                       by_id["NIT"]["notes"])
 
+    def test_dayton_legacy_fields_project_scores_result_and_overtime(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        tokens = (("OT", "1"), ("2OT", "2"), ("3OT", "3"), ("5OT", "5"))
+        rows = []
+        for index, (token, _) in enumerate(tokens, start=1):
+            rows.append(
+                {
+                    "research_game_id": f"DAYTON-LEGACY-{index}",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season": "1989-90",
+                    "dayton_score": "73",
+                    "opponent_score": "69",
+                    "result": "W",
+                    "overtime": token,
+                    "game_type": "REGULAR_SEASON",
+                    "site_type": "UNKNOWN",
+                    "source_locator": "Official Dayton ledger",
+                }
+            )
+
+        games, defects = mod._projection(rows, opponents, venues)
+        self.assertEqual(defects, [])
+        self.assertEqual(len(games), 4)
+        for parent, projected, (_, expected_ot) in zip(rows, games, tokens):
+            self.assertEqual(projected["team_score"], "73")
+            self.assertEqual(projected["opponent_score"], "69")
+            self.assertEqual(projected["played_result"], "W")
+            self.assertEqual(projected["overtime_periods"], expected_ot)
+            self.assertEqual(
+                mod._semantic_projection_defects(parent, projected),
+                [],
+            )
+
     def test_scope_exception_fails_closed_without_owner_and_shared_reference(self):
         row = {
             "game_type": "NCAA", "site_type": "NEUTRAL",
