@@ -42,6 +42,21 @@ When a guarded child script is genuinely required, it should:
 
 Owner attention is not a transport mechanism for routine technical state.
 
+### 2.1 Phase authorization persists until the named phase reaches a real boundary
+
+Once the owner authorizes a clearly named Implementation phase, that authorization persists through the deterministic repository-owned substeps needed to complete that phase. Internal request names, checkpoints, independent verification records, and successful runner handoffs are durable technical boundaries, not new owner gates.
+
+Default phase continuations are:
+
+- Stage 2 technical/reconciliation authorization continues through census, any policy-permitted deterministic representation repair, regeneration, recommendation-map preparation/rehearsal, and stops at `OWNER_GATE_1_READY` or a genuine blocker;
+- explicit Owner Gate 1 approval continues through fill/encode, pre-seal rehearsal, cryptographic seal, transactional sealed apply, and independent post-apply verification;
+- one release-preparation `Proceed` continues through release readiness, exact PR creation/reuse, CI/mergeability checks, exact Preview verification, and stops at `OWNER_GATE_2_READY`;
+- exact Preview `APPROVED. Proceed` continues through durable Gate 2 approval verification, exact approved two-parent merge, Production-proof request, and independent Production verification through `IMPLEMENTATION COMPLETE`.
+
+Any changed PR head, changed approved historical meaning, moved/unauthorized main identity, shared/global mutation requirement, unsafe recovery state, or other genuine blocker ends the persisted phase authority and requires the repository-defined stop/owner boundary.
+
+A healthy in-flight workflow is not a completed owner-facing phase. Do not return a final `NEXT OWNER ACTION: PROCEED` merely because an already-authorized remote request or its fresh verifier is still running. Continue monitoring in the same turn with occasional compact progress updates until the durable terminal result exists or a genuine blocker appears.
+
 ## 3. Compact-output contract
 
 Implementation tools and agent-authored shell work should default to compact output.
