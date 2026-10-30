@@ -319,7 +319,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "7aff1f0fb3e746ef2545b813154ef552d18d4a9a8495489216c3ee2e55fd60be",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -329,7 +329,7 @@
     "production_deployment_id": 7439404529,
     "production_json_checked_count": 73,
     "protected_main_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "san-diego-state-release-production-proof-0001",
     "school_key": "san-diego-state"
   },

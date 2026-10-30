@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "7aff1f0fb3e746ef2545b813154ef552d18d4a9a8495489216c3ee2e55fd60be",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "pr_number": 402,
+  "production_deployment_id": 7439404529,
+  "production_json_checked_count": 73,
+  "production_proof": true,
+  "request_id": "san-diego-state-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "status": "COMPLETE"
+}
