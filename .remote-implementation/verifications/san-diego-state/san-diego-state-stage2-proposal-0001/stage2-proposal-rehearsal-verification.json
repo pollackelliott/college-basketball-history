@@ -1,0 +1,45 @@
+{
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b549f5794d8d9406fe7490bac4ee5ef70093dfe52a9dabd32f18729b59856cd4",
+    "implementation-stage2-status.json": "6c1b366e768fa01701b42df5a9a566eac71789f3ee6ac1839dff098f785c41c8",
+    "plan.json": "d30188486343c7d59a104eaa3c4c3df34e3bcc23488c59edc801f8cb3f22fa3b",
+    "review.csv": "bc93027188e1ee10a37171f8062ec7efa94401a4595c397ac5ff3afe563d2268",
+    "review.md": "b944e80230592c06f844105c80af2e8cf30fb6d4e3afc927bda715392cded641"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b549f5794d8d9406fe7490bac4ee5ef70093dfe52a9dabd32f18729b59856cd4",
+    "implementation-stage2-status.json": "6beb74365721ef79b3f665435d392d1d798af5253d00c32fcf9ca6a0b6121ee2",
+    "plan.json": "80c22e20899b4c737e2ae481f35da3aff9d9ac55db0b144eee910d65c437089f",
+    "review.csv": "bc93027188e1ee10a37171f8062ec7efa94401a4595c397ac5ff3afe563d2268",
+    "review.md": "323e397b65cda5c26bb40e75aad262dbf92ae5ea22ef4acd5a031a881adf7a1a"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "runtime_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "recommendation_map_sha256": "3eb405cfb8de3b49bfd3915945b6c907740cd58d2fb7354315aa80b7d8426b0d",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "san-diego-state-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "target_tree_sha": "c6444aaa52f71af9a07f57251e9b1dbf535ce3c8",
+  "tracked_stage2_mutation": "NONE"
+}

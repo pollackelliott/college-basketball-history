@@ -311,11 +311,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
     "recommendation_map_sha256": "3eb405cfb8de3b49bfd3915945b6c907740cd58d2fb7354315aa80b7d8426b0d",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "san-diego-state-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
     "school_key": "san-diego-state",
