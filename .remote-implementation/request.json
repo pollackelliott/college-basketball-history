@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "san-diego-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "san-diego-state",
-  "previous_control_state_commit": "f6e71fa724f4029d4ea11352deb35b7ad6aa6491",
-  "previous_control_state_sha256": "50f45d3cf6704d8ff6340427a9ffe722c588758f256ddd65e607165b027a1f03",
-  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "previous_control_state_commit": "f95146d3ed84d448a315f000ae04743b67afe6e3",
+  "previous_control_state_sha256": "0b4748977105e86fb18ddb71e76a3d345e7ae2ccf4f7f078d0ae1f5a776d9cae",
+  "expected_protected_main_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
   "target_branch": "data/san-diego-state-onboarding",
   "target_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
   "pr_number": 402,
-  "approved_plan_hash": "bc5d82586fe8cd5e0f097d66bd90beca15d21a446d518dad5da2167f2f06de38",
-  "release_manifest_sha256": "e6dfcff9531e64cdb1c819a389ab57623a0cec270943b23073fefbca355696d4",
-  "preview_deployment_id": 7436155543,
-  "preview_url": "https://college-basketball-history-490qx2ucz-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "0ecb77ff29bb2a82d053d2d09b148b1c13fc546676886b890a08c797d6bf31c8"
+  "merge_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "d9819bb305fa3bc39136254d68bd62a3c971a4b86406fa212281c6847d08c83c"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "8fe67e6cd630a802edfef56bc0888af5b0de9e966cd78c97b3740f918666afe1"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: “APPROVED. Proceed” after being presented the exact fresh-verified San Diego State PR #402 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
-    "preview_checkpoint_sha256": "0ecb77ff29bb2a82d053d2d09b148b1c13fc546676886b890a08c797d6bf31c8",
-    "preview_verification_sha256": "8fe67e6cd630a802edfef56bc0888af5b0de9e966cd78c97b3740f918666afe1",
-    "pr_number": 402,
-    "pr_head_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
-    "preview_deployment_id": 7436155543,
-    "preview_url": "https://college-basketball-history-490qx2ucz-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "f667df3f6a4aecc8f96422c10ecff7f81c7c39baa00155c931d10d6dd469cb78"
   },
   "creation_provenance": {
     "origin": "ChatGPT San Diego State serialized Implementation",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” for the exact fresh-verified San Diego State PR #402 Preview at head 4e2cd0d260867418d2cf543154eed0585681043e and Vercel Preview deployment 7436155543. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector rechecked protected main, exact PR #402 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one repository-standard two-parent merge. GitHub merged exact approved head 4e2cd0d260867418d2cf543154eed0585681043e as b6ebbf2339996d0282f96d69bab410e968fb2f96 with first parent 619daf5a96e9acfc80a8fc74b381f50bdc0599fc and second parent 4e2cd0d260867418d2cf543154eed0585681043e. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
   },
   "authority": {
     "phase0": false,
@@ -51,9 +38,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
