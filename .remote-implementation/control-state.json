@@ -341,11 +341,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/texas-state/texas-state-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "5a9ce7672d3a62fbba511f4b81c7255d81c437b5967250a2f30f0dd6439acee1",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "texas-state-release-readiness-0001",
     "school_key": "texas-state",
     "target_branch": "data/texas-state-onboarding",

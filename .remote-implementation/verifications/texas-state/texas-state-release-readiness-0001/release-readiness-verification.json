@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "5a9ce7672d3a62fbba511f4b81c7255d81c437b5967250a2f30f0dd6439acee1",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "readiness_proof_sha256": "60e0296dea8f1d3fde0c30ac98892ec5082bee624fdacc74a27c31b81cf8ff89",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "texas-state-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "target_branch": "data/texas-state-onboarding",
+  "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "tracked_mutation": "NONE"
+}
