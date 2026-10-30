@@ -152,7 +152,12 @@ def metadata(parent_sha):
     }
 
 
-def write_zip(path, documents):
+def write_zip(
+    path,
+    documents,
+    *,
+    manifest_name="stage1-manifest.json",
+):
     blockers = json.loads(documents["blocking-residuals.json"])
     manifest = {
         "research_base_sha": "a" * 40,
@@ -170,7 +175,7 @@ def write_zip(path, documents):
         for name, data in documents.items():
             archive.writestr("checkpoint/" + name, data)
         archive.writestr(
-            "checkpoint/stage1-manifest.json",
+            "checkpoint/" + manifest_name,
             json.dumps(manifest, sort_keys=True).encode(),
         )
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -284,6 +289,117 @@ def audit_once(
         candidate_sha,
         candidate_docs,
     )
+
+
+def test_legacy_parent_topology_is_accepted_without_rewrite():
+    with tempfile.TemporaryDirectory() as name:
+        root = Path(name)
+        parent_docs = base_docs()
+
+        ledger_bytes = parent_docs.pop(
+            "structured-stage1-ledger.csv"
+        )
+        parent_docs["stage1-ledger.csv"] = ledger_bytes
+
+        census = list(
+            csv.DictReader(
+                io.StringIO(
+                    parent_docs["season-census.csv"].decode()
+                )
+            )
+        )
+        for row in census:
+            row["identified_competitive_games"] = row.pop(
+                "observed_games"
+            )
+        parent_docs["season-census.csv"] = csv_bytes(census)
+
+        parent = root / "legacy-parent.zip"
+        parent_sha = write_zip(
+            parent,
+            parent_docs,
+            manifest_name="checkpoint-manifest.json",
+        )
+
+        candidate_docs = base_docs()
+        candidate_docs["season-census.csv"] = parent_docs[
+            "season-census.csv"
+        ]
+        candidate_docs[mod.METADATA] = json.dumps(
+            metadata(parent_sha),
+            sort_keys=True,
+        ).encode()
+        candidate = root / "candidate.zip"
+        candidate_sha = write_zip(candidate, candidate_docs)
+
+        result = mod.audit_candidate(
+            parent,
+            candidate,
+            expected_parent_sha256=parent_sha,
+            expected_candidate_sha256=candidate_sha,
+        )
+
+        assert result["status"] == mod.ELIGIBLE
+        assert result["defects"] == []
+        assert result["identified_game_count"] == 3
+        assert result["known_result_game_count"] == 2
+
+
+def test_legacy_parent_manifest_still_verifies_member_hashes():
+    with tempfile.TemporaryDirectory() as name:
+        root = Path(name)
+        parent_docs = base_docs()
+        parent_docs["stage1-ledger.csv"] = parent_docs.pop(
+            "structured-stage1-ledger.csv"
+        )
+        parent = root / "legacy-parent.zip"
+        parent_sha = write_zip(
+            parent,
+            parent_docs,
+            manifest_name="checkpoint-manifest.json",
+        )
+
+        with zipfile.ZipFile(parent) as archive:
+            members = {
+                item: archive.read(item)
+                for item in archive.namelist()
+                if not item.endswith("/")
+            }
+        manifest_path = "checkpoint/checkpoint-manifest.json"
+        manifest = json.loads(members[manifest_path])
+        manifest["members"]["stage1-ledger.csv"]["sha256"] = "0" * 64
+
+        corrupt = root / "legacy-parent-corrupt.zip"
+        with zipfile.ZipFile(corrupt, "w") as archive:
+            for member, data in members.items():
+                archive.writestr(
+                    member,
+                    json.dumps(manifest, sort_keys=True).encode()
+                    if member == manifest_path
+                    else data,
+                )
+        corrupt_sha = hashlib.sha256(
+            corrupt.read_bytes()
+        ).hexdigest()
+
+        candidate_docs = base_docs()
+        candidate_docs[mod.METADATA] = json.dumps(
+            metadata(corrupt_sha),
+            sort_keys=True,
+        ).encode()
+        candidate = root / "candidate.zip"
+        candidate_sha = write_zip(candidate, candidate_docs)
+
+        result = mod.audit_candidate(
+            corrupt,
+            candidate,
+            expected_parent_sha256=corrupt_sha,
+            expected_candidate_sha256=candidate_sha,
+        )
+        assert (
+            "PARENT_MANIFEST_MISMATCH:stage1-ledger.csv"
+            in result["defects"]
+        )
 
 
 def test_mixed_classes_are_eligible_but_never_complete():
