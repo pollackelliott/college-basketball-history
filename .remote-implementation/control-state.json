@@ -356,11 +356,11 @@
   "current_sequence": 162,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
     "operation": "PHASE0",
     "protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "saint-louis-phase0-0003",
     "school_key": "saint-louis",
     "successor_manifest_path": ".remote-implementation/successors/saint-louis/saint-louis-phase0-0003/successor-manifest.json",

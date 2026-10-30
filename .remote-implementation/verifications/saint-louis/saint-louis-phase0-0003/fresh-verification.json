@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+  "prepared_parent_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "prepared_tree_sha": "a837fefa56b8a5b54f4601a4e0dc0702c6cbc3fe",
+  "protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "saint-louis-phase0-0003",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53"
+}
