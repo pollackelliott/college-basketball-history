@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "source_census_checkpoint_sha256": "740b56ff5e1224fcffacc3adebcb57f66084482420f18925cc9642186762442e",
+  "prepared_against_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "prepared_against_target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "decisions": {
+    "IDENTITY-SDSU-S1-000017": "MATCH_CANONICAL:CBBG-0179159",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179159-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-GAME_DATE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-SITE_TYPE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-RESULT_WINNER_TEAM_KEY": "NOT_APPLICABLE",
+    "DISCREPANCY-SDSU-S1-000060-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000068-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000083-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000132-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-000146-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000169-SCORE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-000227-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000239-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000453-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000532-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000544-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-000776-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000783-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-000819-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-000991-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-001036-SCORE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-001039-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-001234-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-001385-SCORE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-001392-SCORE": "KEEP_CANONICAL",
+    "IDENTITY-SDSU-S1-001423": "MATCH_CANONICAL:CBBG-0176965",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-001423-CBBG-0176965-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-SDSU-S1-001536-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-SDSU-S1-001613-SITE_TYPE": "USE_SOURCE",
+    "ACCOMPLISHMENTS-SAN-DIEGO-STATE": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-SAN-DIEGO-STATE": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "IDENTITY-SDSU-S1-000017": "Fresno State's current official record book lists a 1971-01-30 Fresno State 97-96 home win over San Diego State and a separate 1971-02-13 San Diego State 106-95 win. The target row is the reciprocal 96-97 road loss, so it is the same one real game as CBBG-0179159; CBBG-0179163 is the separate Feb. 13 game.",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179159-GAME_DATE": "Fresno State institutional history dates the matched 97-96 Fresno home win to 1971-01-30, matching the accepted SDSU source and disproving canonical 1971-02-06. Use the accepted target-source date after matching CBBG-0179159.",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-GAME_DATE": "Not applicable because the identity recommendation selects CBBG-0179159, not the distinct 1971-02-13 CBBG-0179163 game.",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-SCORE": "Not applicable because the identity recommendation selects CBBG-0179159, not the distinct 1971-02-13 CBBG-0179163 game.",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-SITE_TYPE": "Not applicable because the identity recommendation selects CBBG-0179159, not the distinct 1971-02-13 CBBG-0179163 game.",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-RESULT_WINNER_TEAM_KEY": "Not applicable because the identity recommendation selects CBBG-0179159, not the distinct 1971-02-13 CBBG-0179163 game.",
+    "DISCREPANCY-SDSU-S1-000060-GAME_DATE": "DePaul's current official year-by-year results date the 89-75 home win over San Diego State to 1972-12-20. Retain the canonical date; the SDSU 12/19 source notation remains preserved as source evidence.",
+    "DISCREPANCY-SDSU-S1-000068-SCORE": "Creighton's accepted institutional reciprocal row records a 73-61 San Diego State win on 1973-01-18, supporting canonical 61-73 in Creighton-oriented ordering rather than the SDSU source's 73-68.",
+    "DISCREPANCY-SDSU-S1-000083-SCORE": "Arizona's accepted institutional reciprocal row records a 101-79 Arizona home win on 1973-12-11, supporting canonical 101-79 rather than the SDSU source's 109-79.",
+    "DISCREPANCY-SDSU-S1-000132-GAME_DATE": "Fresno State's current official record book dates its 68-64 home win over San Diego State to 1975-03-02, matching the accepted SDSU source and disproving canonical 1975-03-01.",
+    "DISCREPANCY-SDSU-S1-000146-SCORE": "Iowa State's accepted institutional reciprocal row records a 92-75 San Diego State home win on 1976-01-08, supporting canonical 75-92 in Iowa State-oriented ordering rather than the SDSU source's 92-78.",
+    "DISCREPANCY-SDSU-S1-000169-SCORE": "The accepted SDSU source records 78-68, and Boise State's own institutional series notes also identify the 1976-12-16 game as San Diego State 78-68. This independent reciprocal authority outweighs the current Boise package's 79-68 transcription; use the SDSU source score.",
+    "DISCREPANCY-SDSU-S1-000227-SITE_TYPE": "Stanford's accepted reciprocal Research row classifies the 1978-12-29 Cabrillo Classic game in San Diego as NEUTRAL after reconciling the event footnote and Stanford season H/A/N totals. A separate Stanford series table labels the game away, but the accepted event/season accounting is the stronger already-adjudicated project authority; retain canonical NEUTRAL.",
+    "DISCREPANCY-SDSU-S1-000239-GAME_DATE": "Colorado State's institutional series notes date the 83-90 road loss at San Diego State to 1979-02-08. Retain canonical 1979-02-08 rather than the SDSU source's 02/09 notation.",
+    "DISCREPANCY-SDSU-S1-000453-SITE_TYPE": "Ole Miss institutional opponent history classifies the 1986-12-28 88-77 win over San Diego State in San Diego as a neutral-site game. Retain canonical NEUTRAL rather than treating the San Diego venue as SDSU home solely from geography.",
+    "DISCREPANCY-SDSU-S1-000532-GAME_DATE": "Utah's accepted institutional reciprocal row dates the conference-tournament 70-57 win over San Diego State to 1989-03-08. Retain canonical 1989-03-08 rather than the SDSU source's 03/09 notation.",
+    "DISCREPANCY-SDSU-S1-000544-SITE_TYPE": "SDSU institutional history describes Villanova's 57-52 win as the final of the Texaco Star Classic at the San Diego Sports Arena, and the accepted SDSU source places it at SDSU's home arena. The reciprocal Villanova package is UNKNOWN rather than contradictory authority. Use SDSU SOURCE_PROGRAM_HOME.",
+    "DISCREPANCY-SDSU-S1-000776-SITE_TYPE": "TCU institutional series history places its 105-61 win on 1998-01-17 in Fort Worth. For the canonical san-diego-state vs tcu ordering this is TEAM_B_HOME, so retain canonical.",
+    "DISCREPANCY-SDSU-S1-000783-SITE_TYPE": "TCU institutional series history places its 91-69 win on 1998-02-14 in San Diego. For the canonical san-diego-state vs tcu ordering this is TEAM_A_HOME, so retain canonical.",
+    "DISCREPANCY-SDSU-S1-000819-SITE_TYPE": "Oklahoma State institutional contemporaneous coverage identifies the 1999-12-12 97-63 win over San Diego State as an Oklahoma State home game played at the Myriad Center in Oklahoma City. Use the SDSU opponent-home classification; preserve Oklahoma City, OK as the supported historical locality without requiring bespoke building archaeology.",
+    "DISCREPANCY-SDSU-S1-000991-SCORE": "Utah's official recap and institutional game record show a 72-60 Utah win over San Diego State on 2005-03-05. Retain canonical 60-72 in San Diego State-oriented ordering rather than the SDSU source's 67-77.",
+    "DISCREPANCY-SDSU-S1-001036-SCORE": "The accepted SDSU source records Arizona 69-48, and current Arizona institutional opponent/schedule evidence supports that final. Use the SDSU source score rather than the stale reciprocal/canonical 68-49 value.",
+    "DISCREPANCY-SDSU-S1-001039-SITE_TYPE": "Washington State institutional history labels the 2006-12-21 64-54 Seattle win as a WSU home game and later explicitly states that the 2017 meeting was the first official neutral-site game despite prior WSU home games at Spokane and Seattle. Use WSU home and preserve the already-registered KeyArena/Seattle site metadata.",
+    "DISCREPANCY-SDSU-S1-001234-SITE_TYPE": "Syracuse institutional schedule/recap treats the 2012-11-11 Battle on the Midway game as an away game at San Diego State. The USS Midway location does not itself make the game neutral, and SDSU season accounting is consistent with this being its lone home loss. Retain canonical SDSU home.",
+    "DISCREPANCY-SDSU-S1-001385-SCORE": "Arizona State's official recap records a 74-63 road win at San Diego State on 2016-12-10. Use the accepted SDSU source score 63-74 rather than canonical 67-74.",
+    "DISCREPANCY-SDSU-S1-001392-SCORE": "Boise State's official recap records a 78-66 home win over San Diego State on 2017-01-07. Retain canonical 78-66 rather than the SDSU source's 78-68.",
+    "IDENTITY-SDSU-S1-001423": "SDSU and Utah State institutional records both identify one 2017-18 game with this 79-59 score at San Diego State; the accepted SDSU date is 2017-12-30. The unique season/opponent/score/site match is CBBG-0176965, whose current 2017-12-20 date is stale.",
+    "CONDITIONAL-DISCREPANCY-SDSU-S1-001423-CBBG-0176965-GAME_DATE": "SDSU institutional schedule/recap and Utah State institutional series evidence date the matched 79-59 San Diego State home win to 2017-12-30. Use the accepted target-source date after matching CBBG-0176965.",
+    "DISCREPANCY-SDSU-S1-001536-SCORE": "SDSU's official 2021 media central identifies the 2021-03-13 Mountain West Championship as San Diego State 68-57 Utah State; 77-70 was the prior day's semifinal score against Nevada. Retain canonical 68-57.",
+    "DISCREPANCY-SDSU-S1-001613-SITE_TYPE": "Washington institutional coverage identifies the 2023-11-19 100-97 overtime loss to San Diego State as the Continental Tire Main Event championship in Las Vegas, and SDSU's event announcement places the event at T-Mobile Arena. Use target NEUTRAL, but correct the target source's inherited Hec Edmundson/Seattle venue metadata to T-Mobile Arena, Las Vegas.",
+    "ACCOMPLISHMENTS-SAN-DIEGO-STATE": "SDSU institutional history establishes two pre-Mountain-West Division I regular-season conference titles (PCAA shares in 1977 and 1978), two pre-MW conference tournament titles (PCAA 1976 and WAC 1985), and nine Mountain West regular-season plus seven Mountain West tournament titles through the completed 2025-26 season. The in-scope totals are therefore 11 regular-season and 9 tournament championships; the existing NCAA/Final Four/runner-up fields already match.",
+    "PUBLICATION-SAN-DIEGO-STATE": "Recommend enabling the page only through the sealed onboarding workflow after the complete 32-decision map passes the exact proposal rehearsal, explicit Owner Gate 1, sealed apply, verification, Preview, explicit Gate 2, merge, and Production proof."
+  },
+  "canonical_patch_by_decision": {
+    "DISCREPANCY-SDSU-S1-000819-SITE_TYPE": {
+      "site_city": "Oklahoma City",
+      "site_state": "OK",
+      "venue_key": "myriad-convention-center",
+      "venue_id": "VEN-000146"
+    },
+    "DISCREPANCY-SDSU-S1-001039-SITE_TYPE": {
+      "venue_key": "keyarena",
+      "venue_id": "VEN-000102",
+      "site_city": "Seattle",
+      "site_state": "WA"
+    },
+    "DISCREPANCY-SDSU-S1-001613-SITE_TYPE": {
+      "venue_key": "t-mobile-arena",
+      "venue_id": "VEN-000201",
+      "site_city": "Las Vegas",
+      "site_state": "NV"
+    },
+    "DISCREPANCY-SDSU-S1-001234-SITE_TYPE": {
+      "venue_key": "uss-midway-museum-flight-deck",
+      "venue_id": "VEN-001001",
+      "site_city": "San Diego",
+      "site_state": "CA"
+    }
+  },
+  "source_patch_by_decision": {
+    "DISCREPANCY-SDSU-S1-000819-SITE_TYPE": {
+      "city": "Oklahoma City",
+      "state": "OK"
+    },
+    "DISCREPANCY-SDSU-S1-001039-SITE_TYPE": {
+      "city": "Seattle",
+      "state": "WA"
+    },
+    "DISCREPANCY-SDSU-S1-001613-SITE_TYPE": {
+      "curated_venue_name": "T-Mobile Arena",
+      "city": "Las Vegas",
+      "state": "NV"
+    }
+  }
+}
