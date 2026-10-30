@@ -157,20 +157,33 @@ def write_zip(
     documents,
     *,
     manifest_name="stage1-manifest.json",
+    manifest_schema="members",
 ):
     blockers = json.loads(documents["blocking-residuals.json"])
     manifest = {
         "research_base_sha": "a" * 40,
         "game_rows": 3,
         "blocking_residuals": len(blockers),
-        "members": {
+    }
+    if manifest_schema == "members":
+        manifest["members"] = {
             name: {
                 "size": len(data),
                 "sha256": hashlib.sha256(data).hexdigest(),
             }
             for name, data in documents.items()
-        },
-    }
+        }
+    elif manifest_schema == "legacy_files_list":
+        manifest["files"] = [
+            {
+                "path": name,
+                "bytes": len(data),
+                "sha256": hashlib.sha256(data).hexdigest(),
+            }
+            for name, data in documents.items()
+        ]
+    else:
+        raise ValueError("unsupported manifest_schema")
     with zipfile.ZipFile(path, "w") as archive:
         for name, data in documents.items():
             archive.writestr("checkpoint/" + name, data)
@@ -288,6 +301,142 @@ def audit_once(
         candidate,
         candidate_sha,
         candidate_docs,
+    )
+
+
+def test_legacy_parent_files_list_manifest_is_accepted():
+    with tempfile.TemporaryDirectory() as name:
+        root = Path(name)
+        parent_docs = base_docs()
+        parent_docs["stage1-ledger.csv"] = parent_docs.pop(
+            "structured-stage1-ledger.csv"
+        )
+        parent = root / "legacy-parent.zip"
+        parent_sha = write_zip(
+            parent,
+            parent_docs,
+            manifest_name="checkpoint-manifest.json",
+            manifest_schema="legacy_files_list",
+        )
+
+        candidate_docs = base_docs()
+        candidate_docs[mod.METADATA] = json.dumps(
+            metadata(parent_sha),
+            sort_keys=True,
+        ).encode()
+        candidate = root / "candidate.zip"
+        candidate_sha = write_zip(candidate, candidate_docs)
+
+        result = mod.audit_candidate(
+            parent,
+            candidate,
+            expected_parent_sha256=parent_sha,
+            expected_candidate_sha256=candidate_sha,
+        )
+
+        assert result["status"] == mod.ELIGIBLE
+        assert result["defects"] == []
+
+
+def test_legacy_files_manifest_still_fails_bad_hash():
+    with tempfile.TemporaryDirectory() as name:
+        root = Path(name)
+        parent_docs = base_docs()
+        parent_docs["stage1-ledger.csv"] = parent_docs.pop(
+            "structured-stage1-ledger.csv"
+        )
+        parent = root / "legacy-parent.zip"
+        parent_sha = write_zip(
+            parent,
+            parent_docs,
+            manifest_name="checkpoint-manifest.json",
+            manifest_schema="legacy_files_list",
+        )
+
+        with zipfile.ZipFile(parent) as archive:
+            members = {
+                item: archive.read(item)
+                for item in archive.namelist()
+                if not item.endswith("/")
+            }
+        manifest_path = "checkpoint/checkpoint-manifest.json"
+        manifest = json.loads(members[manifest_path])
+        manifest["files"][0]["sha256"] = "0" * 64
+
+        corrupt = root / "legacy-parent-corrupt.zip"
+        with zipfile.ZipFile(corrupt, "w") as archive:
+            for member, data in members.items():
+                archive.writestr(
+                    member,
+                    json.dumps(manifest, sort_keys=True).encode()
+                    if member == manifest_path
+                    else data,
+                )
+        corrupt_sha = hashlib.sha256(corrupt.read_bytes()).hexdigest()
+
+        candidate_docs = base_docs()
+        candidate_docs[mod.METADATA] = json.dumps(
+            metadata(corrupt_sha),
+            sort_keys=True,
+        ).encode()
+        candidate = root / "candidate.zip"
+        candidate_sha = write_zip(candidate, candidate_docs)
+
+        result = mod.audit_candidate(
+            corrupt,
+            candidate,
+            expected_parent_sha256=corrupt_sha,
+            expected_candidate_sha256=candidate_sha,
+        )
+        assert any(
+            defect.startswith("PARENT_MANIFEST_MISMATCH:")
+            for defect in result["defects"]
+        )
+
+
+def test_row_result_prefers_nonblank_accepted_values():
+    row = {
+        "team_score": "70",
+        "opponent_score": "60",
+        "result": "W",
+        "accepted_team_score": "58",
+        "accepted_opponent_score": "63",
+        "accepted_result": "L",
+    }
+
+    team, opponent, result, known = mod._row_result(
+        row,
+        "davidson",
+    )
+
+    assert (team, opponent, result, known) == (
+        "58",
+        "63",
+        "L",
+        True,
+    )
+
+
+def test_row_result_falls_back_when_accepted_values_are_blank():
+    row = {
+        "team_score": "70",
+        "opponent_score": "60",
+        "played_result": "W",
+        "accepted_team_score": "",
+        "accepted_opponent_score": "",
+        "accepted_result": "",
+    }
+
+    team, opponent, result, known = mod._row_result(
+        row,
+        "davidson",
+    )
+
+    assert (team, opponent, result, known) == (
+        "70",
+        "60",
+        "W",
+        True,
     )
 
 
