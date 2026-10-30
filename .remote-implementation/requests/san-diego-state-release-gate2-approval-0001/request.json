@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "san-diego-state-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "school_key": "san-diego-state",
+  "previous_control_state_commit": "f6e71fa724f4029d4ea11352deb35b7ad6aa6491",
+  "previous_control_state_sha256": "50f45d3cf6704d8ff6340427a9ffe722c588758f256ddd65e607165b027a1f03",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "pr_number": 402,
+  "approved_plan_hash": "bc5d82586fe8cd5e0f097d66bd90beca15d21a446d518dad5da2167f2f06de38",
+  "release_manifest_sha256": "e6dfcff9531e64cdb1c819a389ab57623a0cec270943b23073fefbca355696d4",
+  "preview_deployment_id": 7436155543,
+  "preview_url": "https://college-basketball-history-490qx2ucz-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "0ecb77ff29bb2a82d053d2d09b148b1c13fc546676886b890a08c797d6bf31c8"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "8fe67e6cd630a802edfef56bc0888af5b0de9e966cd78c97b3740f918666afe1"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “APPROVED. Proceed” after being presented the exact fresh-verified San Diego State PR #402 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
+    "preview_checkpoint_sha256": "0ecb77ff29bb2a82d053d2d09b148b1c13fc546676886b890a08c797d6bf31c8",
+    "preview_verification_sha256": "8fe67e6cd630a802edfef56bc0888af5b0de9e966cd78c97b3740f918666afe1",
+    "pr_number": 402,
+    "pr_head_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+    "preview_deployment_id": 7436155543,
+    "preview_url": "https://college-basketball-history-490qx2ucz-elliott-pollacks-projects.vercel.app"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT San Diego State serialized Implementation",
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” for the exact fresh-verified San Diego State PR #402 Preview at head 4e2cd0d260867418d2cf543154eed0585681043e and Vercel Preview deployment 7436155543. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It grants no merge execution, Production action, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
