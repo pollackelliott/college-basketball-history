@@ -323,11 +323,11 @@
   "current_sequence": 146,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
     "operation": "PHASE0",
     "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "texas-state-phase0-0001",
     "school_key": "texas-state",
     "successor_manifest_path": ".remote-implementation/successors/texas-state/texas-state-phase0-0001/successor-manifest.json",

@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "prepared_parent_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "prepared_tree_sha": "a4300bbbbb2245aa6f64d1f2466e1d415590f92c",
+  "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "texas-state-phase0-0001",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "target_branch": "data/texas-state-onboarding",
+  "target_sha": "811cdc553810e43d4902f8cc68bd795632852cf7"
+}
