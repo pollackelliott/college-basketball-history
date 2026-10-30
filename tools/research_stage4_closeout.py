@@ -498,7 +498,7 @@ def project_administrative_status(
     if target is None:
         return status, note
 
-    played = _first_parent_value(row, "played_result", "on_court_result", "source_result")
+    played = _first_parent_value(row, "played_result", "on_court_result", "source_result", "result")
     provenance = (
         "Stage 4 representation normalization: accepted legacy "
         f"administrative_status {status} projected to {target}; "
@@ -554,6 +554,18 @@ def explicit_opponent_home_site(row: dict[str, str]) -> tuple[str, str, str] | N
     if not state:
         return None
     return building, city.strip(), state
+
+
+def _project_overtime(value: str) -> str:
+    value = (value or "").strip()
+    if not value:
+        return ""
+    if value.isdigit():
+        return value
+    match = re.fullmatch(r"(?:(\d+))?OT", value.upper())
+    if match:
+        return match.group(1) or "1"
+    return value
 
 
 def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
@@ -707,12 +719,14 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "normalized_opponent_key",
             "opponent_key",
         ),
-        "team_score": _first_parent_value(row, "team_score", "wagner_points"),
+        "team_score": _first_parent_value(row, "team_score", "wagner_points", "dayton_score"),
         "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points"),
         "played_result": _first_parent_value(
-            row, "played_result", "on_court_result", "source_result"
+            row, "played_result", "on_court_result", "source_result", "result"
         ),
-        "overtime_periods": row.get("overtime_periods", "").strip(),
+        "overtime_periods": _project_overtime(
+            _first_parent_value(row, "overtime_periods", "overtime")
+        ),
         "curated_site_type": normalize_site(site),
         "venue_present": "1" if venue.strip() else "0",
         "venue_key": venue_key,
