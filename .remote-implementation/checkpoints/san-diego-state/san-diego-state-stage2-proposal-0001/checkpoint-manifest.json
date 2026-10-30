@@ -1,0 +1,103 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b549f5794d8d9406fe7490bac4ee5ef70093dfe52a9dabd32f18729b59856cd4",
+    "implementation-stage2-status.json": "6c1b366e768fa01701b42df5a9a566eac71789f3ee6ac1839dff098f785c41c8",
+    "plan.json": "d30188486343c7d59a104eaa3c4c3df34e3bcc23488c59edc801f8cb3f22fa3b",
+    "review.csv": "bc93027188e1ee10a37171f8062ec7efa94401a4595c397ac5ff3afe563d2268",
+    "review.md": "b944e80230592c06f844105c80af2e8cf30fb6d4e3afc927bda715392cded641"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b549f5794d8d9406fe7490bac4ee5ef70093dfe52a9dabd32f18729b59856cd4",
+    "implementation-stage2-status.json": "6beb74365721ef79b3f665435d392d1d798af5253d00c32fcf9ca6a0b6121ee2",
+    "plan.json": "37023a7bdb00df8db71a634a53d9db4efbcd1056d28969df8beb7a2b4c5a57ff",
+    "review.csv": "bc93027188e1ee10a37171f8062ec7efa94401a4595c397ac5ff3afe563d2268",
+    "review.md": "c2fe8861ef85791235b9682d7a81276716dde6a87aaec3f1f273daa535db2b45"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 10,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "runtime_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "san-diego-state",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 6,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 6,
+      "discrepancy": 22,
+      "identity": 2,
+      "publication": 1
+    },
+    "decision_count": 32,
+    "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "discrepancies_to_add": 22,
+    "existing_game_matches": 630,
+    "new_canonical_games": 1077,
+    "plan_path": ".onboarding/san-diego-state/plan.json",
+    "review_path": ".onboarding/san-diego-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "recommendation_map": {},
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/inputs/san-diego-state-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "3eb405cfb8de3b49bfd3915945b6c907740cd58d2fb7354315aa80b7d8426b0d",
+  "request_id": "san-diego-state-stage2-proposal-0001",
+  "request_sha256": "6a230d7ca6138d93b68251066da67645f3a457fc9896d0205d6f950c0a652b4b",
+  "runtime_commit_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "runtime_decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+    "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+    "tools/onboarding_hardening.py": "2d18fde1fe2828439e311da6588b1bdb89328b69d99318ebce4300c1a8df5673",
+    "tools/onboarding_plan.py": "a443e89ab264c8663a6141e144921de1b26d0eee3fab902e87fb96fce1a95144",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/san-diego-state/san-diego-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_authority_sha256": "343b2b4bb5bf239e1794867d5a4738922de705e70e9ea508e2bae75f9ba9dde1",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "target_tree_sha": "c6444aaa52f71af9a07f57251e9b1dbf535ce3c8",
+  "tracked_mutation_proof": {
+    "after_head_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+    "after_status": "",
+    "after_tree_sha": "c6444aaa52f71af9a07f57251e9b1dbf535ce3c8",
+    "before_head_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+    "before_status": "",
+    "before_tree_sha": "c6444aaa52f71af9a07f57251e9b1dbf535ce3c8",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
