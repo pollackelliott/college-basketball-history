@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "apply_request_id": "san-diego-state-stage2-sealed-apply-0001",
+  "approved_plan_hash": "bc5d82586fe8cd5e0f097d66bd90beca15d21a446d518dad5da2167f2f06de38",
+  "changed_path_count": 80,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "release_manifest_sha256": "e6dfcff9531e64cdb1c819a389ab57623a0cec270943b23073fefbca355696d4",
+  "school_key": "san-diego-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "070dec8b97c834c523281cf3de2098184b9020f414a03dcfeee641b2b15f3b50",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "a0ed6826dec24e81c7c33c5a5c3edf640d72be819ebac06bb8fe414f3f54f781",
+  "writeahead_sha256": "64aeecd59f0a1ce9d70794e918a36a7c877c7d8c1dbe9b490d2456cf35e81a3e"
+}

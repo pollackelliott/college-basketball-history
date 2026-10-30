@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "san-diego-state-release-readiness-0001",
+  "school_key": "san-diego-state",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "de81a5ed9aeb03325fae0104f71d2096478082cb",
+  "previous_control_state_sha256": "93c011de66d7add47234da5d6fa0c1284e157ca8d71a92a851e08f634ec68283",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/san-diego-state/san-diego-state-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "070dec8b97c834c523281cf3de2098184b9020f414a03dcfeee641b2b15f3b50"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "a0ed6826dec24e81c7c33c5a5c3edf640d72be819ebac06bb8fe414f3f54f781"
+  },
+  "approved_plan_hash": "bc5d82586fe8cd5e0f097d66bd90beca15d21a446d518dad5da2167f2f06de38",
+  "release_manifest_sha256": "e6dfcff9531e64cdb1c819a389ab57623a0cec270943b23073fefbca355696d4",
+  "creation_provenance": {
+    "origin": "ChatGPT San Diego State serialized Implementation",
+    "authorization": "Owner said Proceed after the exact San Diego State sealed-apply successor 4e2cd0d260867418d2cf543154eed0585681043e was independently fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against that successor. It may authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation only. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
