@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-stage2-preseal-rehearsal-0001",
+  "request_id": "san-diego-state-stage2-gate1-seal-0001",
   "school_key": "san-diego-state",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "d9b7eb51d0d35a588932fc5d46cca6347cd0b70e",
-  "previous_control_state_sha256": "c7b849aec0342f2ee32b27e1bc49d4dfbd0bbe5162536eff2fe300210d6dd4c5",
+  "operation": "STAGE2_GATE1_SEAL",
+  "previous_control_state_commit": "aeb7018c1bfab64af6ffbf4ff4c38646cd2371a6",
+  "previous_control_state_sha256": "b08c6f0c5592ae827adf84dd8c7b4faccde954182566f3317526d5f80616d1a9",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "target_branch": "data/san-diego-state-onboarding",
   "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "6305bb51e1ec59e228e7b7f2cfc0179bc81d172b490e6a8e553f69b97fadaa20"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "eafcf869009ee8ecfe731ff7e3aa27a3293941462f7d2458e3877a84a8d35f95"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "3dc6309572c3fe7b3ec9a60e0b3dcf04e24c3dd60da85bb21430965d4585c64f"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "4822cbf1e1fed6aad7f797017daf394fd4452f4e5792239292150faf147bf953"
   },
   "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
   "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
@@ -24,9 +24,11 @@
   "approved_plan_hash_preview": "1a17a64eba1746a2cc4ec980f8361396fbedb0438e4436abedd330debf1b31d0",
   "filled_review_sha256": "6cd17b44671a03e0c8f5b06dded6401a08d3d7ecd227d3748d08300aa59994af",
   "decision_id_set_sha256": "fd024771435023061506376097676f6075e4cde11d1125260d3cf8d50214694a",
+  "owner_gate_1_approval_sha256": "569d3eb6b7d55958cfe1edbe32d5517a96362c6703d110427ee8fe36d6187462",
+  "equivalence_sha256": "00d27450ccbffc12bdf497812d602b705cc099c97271d5d1675af224ec8809dd",
   "creation_provenance": {
-    "origin": "ChatGPT San Diego State serialized Implementation - fresh-verified Owner Gate 1 fill pre-seal technical rehearsal",
-    "authorization": "Owner said Proceed after the San Diego State Owner Gate 1 fill completed with fresh equivalence PASS. This authorizes exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against the exact fresh-verified fill checkpoint 6305bb51e1ec59e228e7b7f2cfc0179bc81d172b490e6a8e553f69b97fadaa20 and verification 3dc6309572c3fe7b3ec9a60e0b3dcf04e24c3dd60da85bb21430965d4585c64f. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, PR merge, release, Production, recovery, or unrelated authority is granted."
+    "origin": "ChatGPT San Diego State serialized Implementation - cryptographic Gate 1 seal",
+    "authorization": "Owner said Proceed after fresh-verified San Diego State STAGE2_PRESEAL_REHEARSAL reached READY_TO_SEAL. This authorizes exactly one bounded STAGE2_GATE1_SEAL carrying forward the existing exact Owner Gate 1 approval chain. It authorizes current-main pre-seal replay and permanent onboard_school.py --approve cryptographic sealing only; no sealed apply, tracked San Diego State basketball mutation, Preview, Owner Gate 2, PR merge, release, Production, recovery, venue maintenance, or unrelated authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
@@ -39,8 +41,8 @@
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": true,
-    "stage2_gate1_seal": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": true,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
