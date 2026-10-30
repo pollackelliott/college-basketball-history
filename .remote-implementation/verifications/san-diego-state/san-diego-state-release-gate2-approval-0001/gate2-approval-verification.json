@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "d9819bb305fa3bc39136254d68bd62a3c971a4b86406fa212281c6847d08c83c",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "pr_number": 402,
+  "preview_deployment_id": 7436155543,
+  "preview_url": "https://college-basketball-history-490qx2ucz-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "san-diego-state-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "status": "PASS"
+}
