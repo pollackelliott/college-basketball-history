@@ -1,33 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-stage2-census-0002",
+  "request_id": "san-diego-state-stage2-opponent-display-normalize-0001",
   "school_key": "san-diego-state",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "80e063d0fadb259840b978ebef6e2cf28d786b05",
-  "previous_control_state_sha256": "5e5c4d6d821a6540cc36028bf5109aabec70a39ecd5a5cb482e61a21db004eba",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "8eea2b8a1224b5f6790860b2e522bbb1d6c17b3a",
+  "previous_control_state_sha256": "94730f10093b2815bf96444c14371a9ad1ee586dcb724467bda948d002f8c74e",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "target_branch": "data/san-diego-state-onboarding",
   "target_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/san-diego-state/san-diego-state-phase0-0001/successor-manifest.json",
-    "sha256": "68baeefbaf16bf8a46fe94964cbc493e1ccf5420f19751651591e77c41fa8470"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "740b56ff5e1224fcffacc3adebcb57f66084482420f18925cc9642186762442e"
   },
   "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
   "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
   "creation_provenance": {
-    "origin": "San Diego State serialized Implementation — corrected read-only Stage 2 census transport binding after pre-acceptance rejection",
-    "authorization": "Owner Proceed authorizes only the bounded Stage 2 read-only capability census after verified Phase 0. The first attempted request san-diego-state-stage2-census-0001 failed at STALE_CONTROL_STATE_HASH before durable acceptance, had no checkpoint and no tracked mutation; GitHub Actions run 40985717130. This distinct request corrects only the exact raw control-state SHA-256 binding, retaining the same protected main, onboarding target, Integration Freeze, semantic snapshot and read-only authority. No Research change, tracked repair, recommendation map, rehearsal, owner gate, release or recovery request."
+    "origin": "San Diego State serialized Implementation — exactly census-bound opponent-display normalization",
+    "authorization": "Owner's short instruction 'Proposed' is treated as continuation of the immediately agreed NEXT OWNER ACTION: PROCEED. Execute one permanent guarded STAGE2_OPPONENT_DISPLAY_NORMALIZE for exactly saint-katherine and wheaton-il, bound to independently verified BLOCKED census san-diego-state-stage2-census-0002 (2 blockers, 0 warnings, 0 owner decisions) and exact Stage 1/Phase 0/Integration Freeze authority. Use permanent canonical-display selection with --sync-source-games, dry-run and exact blocker key match, representation-only field proof and semantic nonregression, repository validation, write-ahead, target expected-predecessor CAS, regenerate no-map census, fresh independent verification. Prohibit unrelated opponent changes or historical adjudication, recommendation map, proposal rehearsal, Owner Gate 1/2, Stage 2 sealed apply, release, Phase 0, protected-main mutations or another Implementation lane."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
-    "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_opponent_display_normalize": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
