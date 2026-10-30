@@ -1,0 +1,22 @@
+{
+  "kind": "CONTROL_CENTER_RESEARCH_FREEZE_SUCCESSOR_ACCEPTANCE",
+  "school_key": "san-diego-state",
+  "disposition": "SUCCESSOR_ACCEPTED_FOR_IMPLEMENTATION_INTAKE",
+  "owner_authorization": "San Diego State serialized Implementation Stage 1 read-only intake and reconciliation only; do not begin Phase 0, Stage 2, or tracked basketball-data mutation.",
+  "accepted_successor_zip_sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+  "git_zip_part_commit_sha": "9f70ca2449e0a2fa8e7a049a50ded3bc8a5a8a58",
+  "git_transport_manifest_commit_sha": "74c0d2725f479f93ce46d4aa6fa46ee5a9ff5a5c",
+  "original_accepted_research_freeze_sha256": "52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651",
+  "original_stage7_checkpoint_sha256": "fa718b089015c76283f197e78de236daae09d3bedab71c80a95252828cab9cfd",
+  "immutable_research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+  "original_byte_equivalence_asserted": false,
+  "six_members_verified": true,
+  "provenance_corrections_accepted": true,
+  "accepted_non_d1_opponents": 29,
+  "stage6_self_challenge": "PASS",
+  "stage1_allowed": true,
+  "owner_gate1_approval": false,
+  "owner_gate2_approval": false,
+  "protected_main_mutation_authorized": false,
+  "reason": "Explicit Control Center acceptance of corrected audited successor in owner message; original Research Freeze remains predecessor audit authority."
+}
