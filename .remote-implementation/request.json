@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-release-readiness-0001",
+  "request_id": "texas-state-release-preview-verify-0001",
   "school_key": "texas-state",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "04f5b2164dfd16c632489984e85e3bc1a3f7bb0a",
-  "previous_control_state_sha256": "42e993c0a7ed28bf0b5d49c45b72e5e76c4853d85ab71c7858f13e50de0bac93",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "3f00f283ee979480b644453adf3120534371f5f2",
+  "previous_control_state_sha256": "5b6c50ba57a4849b9e66abad2c62ad429fe750b550e49eb1688b66a24c2936d8",
   "expected_protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
   "target_branch": "data/texas-state-onboarding",
   "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/texas-state/texas-state-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "95f777802f29bd949b66f753505280d2522030fd92e5943292d8bbccaecc8efc"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "5a9ce7672d3a62fbba511f4b81c7255d81c437b5967250a2f30f0dd6439acee1"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/texas-state/texas-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "a7eeb59d729bab34115c931b0f52fab93da1e50a32f841d1b818a0dd59a5aae1"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/texas-state/texas-state-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "62a1ec21b3aefd3d144d2666f8d51484f181686a55ec5c2f57d8ca79706b154a"
   },
   "approved_plan_hash": "6dd6e6889616af2caf967ef62ff3808de8e367282729ba717ef1004766a4ab9d",
   "release_manifest_sha256": "708b57bb00776bfc4e435358a272f270e6466f62271dd6bce488713ed24368cd",
+  "pr_number": 406,
   "creation_provenance": {
-    "origin": "ChatGPT Texas State Implementation lane",
-    "authorization": "Owner instructed Proceed after independently verified sealed apply recovery. Exactly one read-only RELEASE_READINESS operation. No PR, Preview, owner gate, merge, production, tracked basketball mutation or other authority."
+    "origin": "ChatGPT Texas State serialized Implementation lane — bounded exact PR-head Preview verification",
+    "authorization": "Owner instructed Proceed after Texas State release PR #406 was created. Fresh authority verified protected main 5ef36cd4003724b59cbcfb7186a75b0552eb2944, unchanged sealed successor c57f1fb38941a59320760f2807c7ca5f2ff76ab6, exact preserved PR body SHA-256 3e8acc5704d70fc2302c17c9f2173da00a35369c6be2df53a18410b74bc2c6c9, open non-draft PR #406 against main with clean mergeability, required CI checks PASS, fresh-verified RELEASE_READINESS and global IDLE control. Authorizes exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification through OWNER_GATE_2_READY. No Owner Gate 2 approval, merge, Production, tracked basketball mutation, historical reconsideration, recovery, maintenance, or other-school authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -38,8 +39,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
