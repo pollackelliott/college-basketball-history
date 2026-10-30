@@ -704,6 +704,45 @@ class Stage4AuthoringTests(unittest.TestCase):
             )
 
 
+    def test_projection_accepts_legacy_canonical_opponent_key(self):
+        ledger = list(
+            csv.DictReader(
+                io.StringIO(current_ledger_bytes().decode("utf-8"))
+            )
+        )
+        ledger[0]["canonical_opponent_key"] = ledger[0].pop(
+            "opponent_key"
+        )
+        opponents = list(
+            csv.DictReader(io.StringIO(opponent_bytes().decode("utf-8")))
+        )
+        venues = list(
+            csv.DictReader(io.StringIO(venue_bytes().decode("utf-8")))
+        )
+
+        games, defects = mod._projection(
+            ledger,
+            opponents,
+            venues,
+            school_key="test",
+        )
+
+        self.assertFalse(
+            [
+                item
+                for item in defects
+                if item.get("reason") == "OPPONENT_AUTHORITY_MISSING"
+            ]
+        )
+        self.assertEqual(
+            games[0]["normalized_opponent_key"],
+            "old-college",
+        )
+        self.assertEqual(
+            mod._mapping_defects(games, opponents),
+            [],
+        )
+
     def test_projection_preserves_blank_overtime(self):
         _, opponents = mod._csv_bytes(opponent_bytes())
         _, venues = mod._csv_bytes(venue_bytes())

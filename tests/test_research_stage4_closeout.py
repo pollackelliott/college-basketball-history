@@ -722,6 +722,30 @@ class Stage4CloseoutTests(unittest.TestCase):
                         root / "out",
                     )
 
+    def test_canonical_opponent_key_parent_alias_projects_for_closeout(self):
+        expected = mod.expected_parent_values(
+            {
+                "source_program_key": "test",
+                "season_label": "2000-01",
+                "game_date": "2000-12-01",
+                "canonical_opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "game_type": "REGULAR_SEASON",
+                "stage3b_status": "NOT_APPLICABLE_REGULAR_SEASON",
+                "stage3a_final_site_type": "HOME",
+                "stage3a_final_physical_venue_name": "Test Gym",
+                "stage3a_final_venue_city": "Testville",
+                "stage3a_final_venue_state": "TS",
+            }
+        )
+        self.assertEqual(
+            expected["normalized_opponent_key"],
+            "old-college",
+        )
+
     def test_legacy_stage3_semantic_vocabulary_compares_cleanly(self):
         parent = [
             {
