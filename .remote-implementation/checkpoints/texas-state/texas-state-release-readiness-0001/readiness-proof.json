@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "apply_request_id": "texas-state-stage2-sealed-apply-0001",
+  "approved_plan_hash": "6dd6e6889616af2caf967ef62ff3808de8e367282729ba717ef1004766a4ab9d",
+  "changed_path_count": 45,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "release_manifest_sha256": "708b57bb00776bfc4e435358a272f270e6466f62271dd6bce488713ed24368cd",
+  "school_key": "texas-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "95f777802f29bd949b66f753505280d2522030fd92e5943292d8bbccaecc8efc",
+  "target_branch": "data/texas-state-onboarding",
+  "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "a7eeb59d729bab34115c931b0f52fab93da1e50a32f841d1b818a0dd59a5aae1",
+  "writeahead_sha256": "6b48f4512fdc7b692c44526c1fc9cbe48b3be701b0d95763e304d6d87ad504ff"
+}

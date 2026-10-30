@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "texas-state-release-readiness-0001",
+  "school_key": "texas-state",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "04f5b2164dfd16c632489984e85e3bc1a3f7bb0a",
+  "previous_control_state_sha256": "42e993c0a7ed28bf0b5d49c45b72e5e76c4853d85ab71c7858f13e50de0bac93",
+  "expected_protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "target_branch": "data/texas-state-onboarding",
+  "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/texas-state/texas-state-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "95f777802f29bd949b66f753505280d2522030fd92e5943292d8bbccaecc8efc"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/texas-state/texas-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "a7eeb59d729bab34115c931b0f52fab93da1e50a32f841d1b818a0dd59a5aae1"
+  },
+  "approved_plan_hash": "6dd6e6889616af2caf967ef62ff3808de8e367282729ba717ef1004766a4ab9d",
+  "release_manifest_sha256": "708b57bb00776bfc4e435358a272f270e6466f62271dd6bce488713ed24368cd",
+  "creation_provenance": {
+    "origin": "ChatGPT Texas State Implementation lane",
+    "authorization": "Owner instructed Proceed after independently verified sealed apply recovery. Exactly one read-only RELEASE_READINESS operation. No PR, Preview, owner gate, merge, production, tracked basketball mutation or other authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
