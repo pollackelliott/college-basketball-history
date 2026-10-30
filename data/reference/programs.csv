@@ -256,7 +256,7 @@ saint-peter-s,Saint Peter's,Saint Peter's,Peacocks,Jersey City,NJ,#003C71,#A59C9
 sam-houston,Sam Houston,Sam Houston,Bearkats,Huntsville,TX,#FE5100,#FFFFFF,Yes,No,,,,,
 samford,Samford,Samford,Bulldogs,Homewood,AL,#002649,#C4161D,Yes,No,,,,,
 san-diego,San Diego,San Diego,Toreros,San Diego,CA,#002868,#84BCE8,Yes,No,,,,,
-san-diego-state,San Diego State,San Diego State,Aztecs,San Diego,CA,#A6192E,#000000,Yes,No,1970-1971,OWNER_CONFIRMED,FIRST_TOP_LEVEL_SEASON,Owner-confirmed San Diego State top-level scope 1970-71 onward; accepted corrected audited Research Freeze successor expressly preserves 1970-71+. Current protected-main program-top-level-scope.csv already matches. Do not infer a different scope or reopen historical Research.,
+san-diego-state,San Diego State,San Diego State,Aztecs,San Diego,CA,#A6192E,#000000,Yes,Yes,1970-1971,OWNER_CONFIRMED,FIRST_TOP_LEVEL_SEASON,Owner-confirmed San Diego State top-level scope 1970-71 onward; accepted corrected audited Research Freeze successor expressly preserves 1970-71+. Current protected-main program-top-level-scope.csv already matches. Do not infer a different scope or reopen historical Research.,
 san-francisco,San Francisco,San Francisco,Dons,San Francisco,CA,#00543C,#FDBB30,Yes,No,,,,,
 san-jose-state,San José State,San Jose State,Spartans,San Jose,CA,#0055A2,#E5A823,Yes,No,,,,,
 santa-clara,Santa Clara,Santa Clara,Broncos,Santa Clara,CA,#862633,#FFFFFF,Yes,No,,,,,
