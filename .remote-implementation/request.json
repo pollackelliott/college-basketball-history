@@ -1,27 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fresno-state-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "fresno-state",
-  "previous_control_state_commit": "6c89e54d085879aa4c3a8bc9440fc75d6f854e74",
-  "previous_control_state_sha256": "0fd34eff65e26489a4c959b6f09eec9c9d590a9002dd018a0d3ce13ec1b41098",
+  "request_id": "san-diego-state-stage1-0001",
+  "school_key": "san-diego-state",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "436d09be34e90d98030dd23b34e675e212979b26",
+  "previous_control_state_sha256": "8674f4fb219c302abf7b6e1879aedc33c3f09041869a180a013687691644b4bc",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
-  "target_branch": "data/fresno-state-onboarding",
-  "target_sha": "14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4",
-  "pr_number": 401,
-  "merge_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fresno-state/fresno-state-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "2a2bdba02e570456234f63ad9d4c6473ccc3298381fbb94ce0987cc4827732ae"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/fresno-state/fresno-state-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "a5b165ebfcc410925ac9d737d1cba577e4e0777c33cc0d941097815a5c91ae5a"
+  "research_checkpoint": {
+    "sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+    "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "591f5149a2977c06cd420db6fb42657cb26a7145",
+      "path_prefix": ".recovery/san-diego-state/stage1-runner-transport/sdsu-accepted.zip.b64.part",
+      "part_count": 7
+    }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Fresno State serialized Implementation",
-    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector rechecked protected main, exact PR #401 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one repository-standard two-parent merge. GitHub merged exact approved head 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4 as 619daf5a96e9acfc80a8fc74b381f50bdc0599fc with first parent 6fce295d8fa38ae204f7b5318ea4743f0fc019f2 and second parent 14dcea84f81a188f44d86c7b0ca85aac6fc6cdc4. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+    "origin": "San Diego State existing serialized Implementation lane — Control Center accepted audited successor Research Freeze intake",
+    "authorization": "The Control Center expressly accepted the corrected SDSU six-file successor SHA cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852 for Implementation intake; retain original Freeze predecessor SHA 52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651 and original accepted research_base_sha. Run one read-only permanent Stage 1 current-main reconciliation inventory only; no historical changes, Phase 0, Stage 2, venue maintenance, owner gates, protected-main writes or tracked basketball mutations. The exact ZIP is transported byte-identically from runner-compatible immutable Git parts; provenance acceptance stored at recovery branch commit e766784d028f4fbe7d54366308a5d0f69e58d4e9."
   },
   "authority": {
     "phase0": false,
@@ -36,11 +34,11 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
-    "venue_identity_maintenance": false
+    "owner_gate_2": false
   }
 }
