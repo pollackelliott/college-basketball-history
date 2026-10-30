@@ -173,18 +173,19 @@
     "saint-louis-stage1-0002",
     "saint-louis-phase0-0001",
     "saint-louis-stage1-0003",
-    "saint-louis-phase0-0003"
+    "saint-louis-phase0-0003",
+    "saint-louis-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "saint-louis-stage2-census-0001",
+  "active_request_sha256": "903b964f327cad15e5a3dfff0fc0d217f3d39917a4e2ef40581402ce96ccdd1f",
+  "active_school_key": "saint-louis",
+  "active_target_branch": "data/saint-louis-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -370,8 +371,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/saint-louis/saint-louis-phase0-0003/writeahead-manifest.json",
     "writeahead_manifest_sha256": "0a35183be5d21d88ef27ff37fa285c9e6f43b723651b92f2c4e892e95c540c77"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41142013108",
+  "lock_acquisition_request_commit": "1ba2fbe008b3b3f8b4f119a0ebcf726d4e5839a9",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
