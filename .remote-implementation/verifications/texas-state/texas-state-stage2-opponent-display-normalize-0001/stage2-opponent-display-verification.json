@@ -1,0 +1,52 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "704831be55997541d163b3110d5767c23f090649a7c699509edbf400f78beb85",
+    "implementation-stage2-status.json": "f39bc0dae8d49664bfa3b0897df9b3abc3a1d59ee9052ece34aab93c43738903",
+    "plan.json": "cbb6105eb63c1a8f8650ad632d5a0545a0aa5adcc85c78d4302d39732467f948",
+    "review.csv": "354f2514d9f4420b8c149335b4d2196022734522859c8ea22e91d5875a55c5ad",
+    "review.md": "475d2bfa687b7824d7b2fa927b18a67d59450fdb164c6d9f4bd2db53fa0b09e3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "704831be55997541d163b3110d5767c23f090649a7c699509edbf400f78beb85",
+    "implementation-stage2-status.json": "2335ea6b7c4b74347d272d3775ee327544ed1cd3d951a5ecba46356808744080",
+    "plan.json": "638c7ca5c8e8d1547af2e2c8a992113e23b6572ef730802838c43780f01c2faf",
+    "review.csv": "354f2514d9f4420b8c149335b4d2196022734522859c8ea22e91d5875a55c5ad",
+    "review.md": "57e95c16dddfaf1e2bca83001f1890cdb050e3c8c78f0925e8749cf2fe4a4727"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/texas-state/opponents.csv",
+    "schools/texas-state/source-games.csv"
+  ],
+  "decision_universe_sha256": "60bfb095a8cadf8b80c3d641b3c30eeb614a770381bfe7d10f23d65a68d1ab82",
+  "expected_blocker_keys": [
+    "concordia-texas",
+    "dallas-baptist",
+    "our-lady-of-the-lake",
+    "phillips-university",
+    "southwestern-texas",
+    "texas-a-m-international",
+    "ut-tyler"
+  ],
+  "field_level_proof_sha256": "bf65c82971d7fdf168a421ec8b53c30b0d782f11de890831a892b68342be90e0",
+  "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "0b65777a133912931199b597ffb0e5df09e57d0fc755335e78f9acebe0eaa885",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "texas-state-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/texas-state-onboarding",
+  "target_predecessor_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "target_sha": "fac90846e9874a6b183d240116594a9cead9f11b",
+  "target_tree_sha": "7628fe2b7f82e42810e95b62ad540b306c69645b",
+  "tracked_stage2_mutation": "NONE"
+}
