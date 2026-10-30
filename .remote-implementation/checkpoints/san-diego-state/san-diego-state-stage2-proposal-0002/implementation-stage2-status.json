@@ -1,0 +1,110 @@
+{
+  "branch": "remote-stage2-census/san-diego-state-a2e6ed3b6f26",
+  "capability_census": {
+    "path": ".onboarding/san-diego-state/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "integration_base_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "integration_semantic_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 6,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 6,
+      "discrepancy": 22,
+      "identity": 2,
+      "publication": 1
+    },
+    "decision_count": 32,
+    "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+    "discrepancies_to_add": 22,
+    "existing_game_matches": 630,
+    "new_canonical_games": 1077,
+    "plan_path": ".onboarding/san-diego-state/plan.json",
+    "review_path": ".onboarding/san-diego-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 14,
+      "MATCH_CANONICAL:CBBG-0176965": 1,
+      "MATCH_CANONICAL:CBBG-0179159": 1,
+      "NOT_APPLICABLE": 4,
+      "USE_SOURCE": 10,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "1a17a64eba1746a2cc4ec980f8361396fbedb0438e4436abedd330debf1b31d0",
+    "changed_path_count": 80
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 14,
+      "MATCH_CANONICAL:CBBG-0176965": 1,
+      "MATCH_CANONICAL:CBBG-0179159": 1,
+      "NOT_APPLICABLE": 4,
+      "USE_SOURCE": 10,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "1a17a64eba1746a2cc4ec980f8361396fbedb0438e4436abedd330debf1b31d0",
+    "decision_count": 32,
+    "path": "/tmp/remote-stage2-proposal-map-r_uy1uzm/recommendation-map.json",
+    "sha256": "0a449963976edb10e239a3a9a192a57a2fb1aa07e178294f42e9fa20a5028754"
+  },
+  "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 1,
+      "neutral_missing_venue": 22,
+      "public_gap_rows": 22,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1711,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0032972"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0018972",
+        "CBBG-0032972",
+        "CBBG-0062186",
+        "CBBG-0072093",
+        "CBBG-0115019",
+        "CBBG-0180496",
+        "CBBG-0180531",
+        "CBBG-0180550",
+        "CBBG-0180551",
+        "CBBG-0180566",
+        "CBBG-0180586",
+        "CBBG-0180719"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0115019"
+      ]
+    },
+    "path": ".onboarding/san-diego-state/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}

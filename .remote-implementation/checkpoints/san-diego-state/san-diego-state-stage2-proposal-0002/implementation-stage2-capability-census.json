@@ -1,0 +1,85 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 6,
+      "discrepancy": 22,
+      "identity": 2,
+      "publication": 1
+    },
+    "decision_count": 32,
+    "decision_fields": {
+      "game_date": 7,
+      "game_identity": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 10,
+      "site_type": 10
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-SDSU-S1-000017-CBBG-0179163-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-000227-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-000453-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-000544-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-000776-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-000783-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-000819-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-001039-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-001234-SITE_TYPE",
+      "DISCREPANCY-SDSU-S1-001613-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 1,
+      "neutral_missing_venue": 22,
+      "public_gap_rows": 22,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1711,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0032972"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0018972",
+        "CBBG-0032972",
+        "CBBG-0062186",
+        "CBBG-0072093",
+        "CBBG-0115019",
+        "CBBG-0180496",
+        "CBBG-0180531",
+        "CBBG-0180550",
+        "CBBG-0180551",
+        "CBBG-0180566",
+        "CBBG-0180586",
+        "CBBG-0180719"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0115019"
+      ]
+    },
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 10,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
