@@ -1,51 +1,33 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "texas-state-stage2-census-0001",
   "school_key": "texas-state",
-  "previous_control_state_commit": "fdab40be228b5df7a703bde766e96f44615bb35c",
-  "previous_control_state_sha256": "8bf5c9b7c26cab09ef78dfcd4f158515b3a8be8773f625705d4c7a1ae42ccf03",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "3a786919b63c57607dc1396027149b77d25c5b76",
+  "previous_control_state_sha256": "d3d6de1810393387f049e7ea0ae22c18d2d2d117b9f735e7aff07158f894b27c",
   "expected_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
   "target_branch": "data/texas-state-onboarding",
-  "research_checkpoint": {
-    "sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
-    "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "d834f204b218a438097c2936e37aba70d3baa018",
-      "path_prefix": ".remote-implementation/transports/texas-state/texas-state-stage1-0001/part-",
-      "part_count": 41
-    }
+  "target_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/texas-state/texas-state-phase0-0001/successor-manifest.json",
+    "sha256": "6216aa784c08275b2172f6e23621ff9a992fb9b2cc6b326f8eb6adf00541a5ef"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage1-0002/checkpoint-manifest.json",
-    "sha256": "e08234d4da5399ec6c6a0eca3a4c4a4556f9b96cd3158a57d48a063c7e4ac208"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": {
-    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage1-0002/conference-reconciliation.json",
-    "sha256": "00b2cdbe29a5737b6168b9cabfe274f216867520d18e136aa53a951f06d608ea"
-  },
-  "history_scope": {
-    "start_season": "1984-1985",
-    "basis": "FIRST_TOP_LEVEL_SEASON",
-    "intervals": "",
-    "notes": "Accepted Texas State top-level scope 1984-85+ from the owner-supplied program-top-level-scope reference, consistent with the accepted 1984-85 through 2025-26 immutable Research Freeze and the Stage 1 PASS checkpoint. No historical scope supersession or research reopening."
-  },
+  "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+  "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
   "creation_provenance": {
-    "origin": "ChatGPT Texas State serialized Implementation lane",
-    "authorization": "Owner explicitly said proceed with exactly one guarded PHASE0 after Texas State Stage 1 PASS checkpoint texas-state-stage1-0002. Authorizes deterministic current-main school staging, 12 safe new venue identities, 27 venue reuses, accepted Gulf Star historical conference registration, accepted 1984-85+ scope, Integration Freeze, global mutation lock, durable write-ahead, create-once onboarding branch, and independent Phase 0 verification. No unrelated global/shared maintenance, Stage 2, historical re-adjudication, owner gates, release, Preview, protected-main direct mutation, or recovery authority."
+    "origin": "Texas State Implementation lane",
+    "authorization": "Owner Proceed, one read-only Stage 2 census on fresh-verified Phase 0. No additional operations."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
     "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
