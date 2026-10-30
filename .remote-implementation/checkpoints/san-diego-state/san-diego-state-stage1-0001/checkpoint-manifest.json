@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "request_id": "san-diego-state-stage1-0001",
+  "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+  "research_checkpoint_sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+  "research_member_sha256": {
+    "conferences.csv": "0bfa3fe3b2e57f686c4dc28185df595685643b39552bcba2d4e4b019b01a7e56",
+    "notes.md": "55df6a8cb99c01b930c498f0a6f7659a4d04024ff36862fbf247968f985541b4",
+    "opponents.csv": "6773734732c85900f0fef57f55c59f598625904dc20f7bed4713ae187b03f31a",
+    "source-games.csv": "1104f669f765d0d48000a9121d45c492778a59a95a8b8f5dd5f0da22301feb65",
+    "source-notes.md": "ef0e9dabe05e055de7d92abc69ec8bd63eae7875109a201bde20ae3e5c37c00f",
+    "venues.csv": "5316408907cdb998235cc7170edd75a887f369055bd02a35628a83263bd99d3e"
+  },
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "sidecars": {
+    "request.json": "45e1a38a2d532eee7eb776fbf6cbf38cc869d6a40d3bc015f9fe3a507448ba7b",
+    "stage1-reconciliation.json": "30efedeccf85d2e206e96c11fdd967751cdbb374928f133b194cc1c88bb6d651"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
