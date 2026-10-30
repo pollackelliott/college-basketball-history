@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-phase0-0001",
+  "operation": "PHASE0",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "2a274efec984e6e5acf0d94302b5a84a1de6486c",
+  "previous_control_state_sha256": "793333a9a28ebda10204458714fecc506f926366a55e95488da95c90bd3d01c3",
+  "expected_protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
+  "target_branch": "data/saint-louis-onboarding",
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage1-0002/checkpoint-manifest.json",
+    "sha256": "c96d23b45a652abeab79f0e0f740579e000cad270d013b1adb8893361821b426"
+  },
+  "research_checkpoint": {
+    "sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
+    "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "dac5d6b6a40b4263d177cb7234ead9a31b0ea379",
+      "path_prefix": ".remote-implementation/transports/saint-louis/saint-louis-stage1-0001/piece-",
+      "part_count": 36
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1914-1915",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Owner-accepted Saint Louis INCEPTION+ scope, with first competitive source game in 1914-1915 and accepted games through completed 2025-2026; matching current protected-main top-level scope reference. Preserve exact immutable Research Freeze and all historically researched uncertainty."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Saint Louis serialized Implementation lane; owner-authorized existing Phase 0 continuation",
+    "authorization": "Owner issued Proceed for Saint Louis Integration Freeze / Phase 0; the subsequent Continue preserves that phase authority. Fresh exact-main Stage 1 saint-louis-stage1-0002 PASS at dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc has zero blockers, zero shared maintenance and zero ambiguous stops, exact checkpoint manifest c96d23b45a652abeab79f0e0f740579e000cad270d013b1adb8893361821b426 independently verified. Publish only one first Saint Louis onboarding successor using permanent guarded Phase 0 and CAS; no Stage 2, Owner Gate 1/2, release, merge, protected-main direct mutation, Research reopening, or unrelated global maintenance."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
