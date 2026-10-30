@@ -139,17 +139,18 @@
     "fresno-state-release-readiness-0001",
     "fresno-state-release-preview-verify-0001",
     "fresno-state-release-gate2-approval-0001",
-    "fresno-state-release-production-proof-0001"
+    "fresno-state-release-production-proof-0001",
+    "san-diego-state-stage1-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "san-diego-state-stage1-0001",
+  "active_request_sha256": "45e1a38a2d532eee7eb776fbf6cbf38cc869d6a40d3bc015f9fe3a507448ba7b",
+  "active_school_key": "san-diego-state",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -305,8 +306,11 @@
     "request_id": "fresno-state-release-production-proof-0001",
     "school_key": "fresno-state"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40982890542",
+  "lock_acquisition_request_commit": "2739d9fc853d91d951b7e860a2b20228d8be882c",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
