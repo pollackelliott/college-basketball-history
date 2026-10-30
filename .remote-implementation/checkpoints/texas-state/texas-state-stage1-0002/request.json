@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "texas-state-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "texas-state",
+  "previous_control_state_commit": "604bf2c9a6f50e6c8149a9d5f355cc104636c3b0",
+  "previous_control_state_sha256": "c9b01db382e605a164b9f1af83c6d7cba83ba464d86e1b90782a0b0ed091e3c9",
+  "expected_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "research_checkpoint": {
+    "sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
+    "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "d834f204b218a438097c2936e37aba70d3baa018",
+      "path_prefix": ".remote-implementation/transports/texas-state/texas-state-stage1-0001/part-",
+      "part_count": 41
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": {
+    "path": ".remote-implementation/inputs/texas-state-stage1-0002/conference-reconciliation.json",
+    "sha256": "00b2cdbe29a5737b6168b9cabfe274f216867520d18e136aa53a951f06d608ea"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Texas State serialized Implementation lane",
+    "authorization": "Owner issued Proceed from permanent Texas State Stage 1 blocked discovery. This is exactly one new read-only STAGE1_INVENTORY against updated protected main after generic Stage 1 Mexico country/subdivision representation repair (merged PR #404), with the exact frozen four-row conference history and nonassertive Gulf Star historical registration from accepted Research and owner's continuation. No Phase 0, tracked mutation, broader shared maintenance, Stage 2, owner gate, or release authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
