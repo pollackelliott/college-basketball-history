@@ -341,11 +341,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "60bfb095a8cadf8b80c3d641b3c30eeb614a770381bfe7d10f23d65a68d1ab82",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
     "recommendation_map_sha256": "144deba3ca79706d2e5ea3380c8a909171a3f2c431892c30e93e0471386b946b",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "texas-state-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "60bfb095a8cadf8b80c3d641b3c30eeb614a770381bfe7d10f23d65a68d1ab82",
     "school_key": "texas-state",
