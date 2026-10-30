@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-stage1-0002",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "texas-state-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "texas-state",
-  "previous_control_state_commit": "604bf2c9a6f50e6c8149a9d5f355cc104636c3b0",
-  "previous_control_state_sha256": "c9b01db382e605a164b9f1af83c6d7cba83ba464d86e1b90782a0b0ed091e3c9",
+  "previous_control_state_commit": "fdab40be228b5df7a703bde766e96f44615bb35c",
+  "previous_control_state_sha256": "8bf5c9b7c26cab09ef78dfcd4f158515b3a8be8773f625705d4c7a1ae42ccf03",
   "expected_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "target_branch": "data/texas-state-onboarding",
   "research_checkpoint": {
     "sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
     "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
@@ -17,17 +18,30 @@
       "part_count": 41
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage1-0002/checkpoint-manifest.json",
+    "sha256": "e08234d4da5399ec6c6a0eca3a4c4a4556f9b96cd3158a57d48a063c7e4ac208"
+  },
   "venue_reconciliation": null,
   "conference_reconciliation": {
-    "path": ".remote-implementation/inputs/texas-state-stage1-0002/conference-reconciliation.json",
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage1-0002/conference-reconciliation.json",
     "sha256": "00b2cdbe29a5737b6168b9cabfe274f216867520d18e136aa53a951f06d608ea"
+  },
+  "history_scope": {
+    "start_season": "1984-1985",
+    "basis": "FIRST_TOP_LEVEL_SEASON",
+    "intervals": "",
+    "notes": "Accepted Texas State top-level scope 1984-85+ from the owner-supplied program-top-level-scope reference, consistent with the accepted 1984-85 through 2025-26 immutable Research Freeze and the Stage 1 PASS checkpoint. No historical scope supersession or research reopening."
   },
   "creation_provenance": {
     "origin": "ChatGPT Texas State serialized Implementation lane",
-    "authorization": "Owner issued Proceed from permanent Texas State Stage 1 blocked discovery. This is exactly one new read-only STAGE1_INVENTORY against updated protected main after generic Stage 1 Mexico country/subdivision representation repair (merged PR #404), with the exact frozen four-row conference history and nonassertive Gulf Star historical registration from accepted Research and owner's continuation. No Phase 0, tracked mutation, broader shared maintenance, Stage 2, owner gate, or release authority."
+    "authorization": "Owner explicitly said proceed with exactly one guarded PHASE0 after Texas State Stage 1 PASS checkpoint texas-state-stage1-0002. Authorizes deterministic current-main school staging, 12 safe new venue identities, 27 venue reuses, accepted Gulf Star historical conference registration, accepted 1984-85+ scope, Integration Freeze, global mutation lock, durable write-ahead, create-once onboarding branch, and independent Phase 0 verification. No unrelated global/shared maintenance, Stage 2, historical re-adjudication, owner gates, release, Preview, protected-main direct mutation, or recovery authority."
   },
   "authority": {
-    "phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
     "venue_identity_maintenance": false,
     "recovery": false,
@@ -42,9 +56,6 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false
+    "release_production_proof": false
   }
 }
