@@ -54,6 +54,7 @@ from program_history import (
     BEST_FINISH_RANK,
     derive_ncaa_accomplishments,
     history_scope_errors,
+    ncaa_game_counts_as_appearance,
     partition_source_rows,
     season_is_in_scope,
 )
@@ -1240,6 +1241,7 @@ def _accomplishment_crosscheck_game(
 
     if (
         candidate.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+        and ncaa_game_counts_as_appearance(candidate)
         and canonical.get("game_type", "").strip() == "NCAA_TOURNAMENT"
         and not candidate.get("postseason_round", "").strip()
         and canonical.get("postseason_round", "").strip()
@@ -1269,11 +1271,11 @@ def _project_accomplishment_games_with_existing_seasons(
     target_ncaa_seasons = {
         str(game.get("season_label", "")).strip()
         for game in target_games
-        if game.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+        if ncaa_game_counts_as_appearance(game)
     }
     supplemental = [
         game for game in canonical_games
-        if game.get("game_type", "").strip() == "NCAA_TOURNAMENT"
+        if ncaa_game_counts_as_appearance(game)
         and school_key in {
             game.get("team_a_key", "").strip(),
             game.get("team_b_key", "").strip(),
@@ -2893,6 +2895,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         if (
             status != ingest_school.REVIEW
             and source.get("curated_game_type", "").strip() == "NCAA_TOURNAMENT"
+            and ncaa_game_counts_as_appearance(accomplishment_candidate)
             and not accomplishment_candidate.get("postseason_round", "").strip()
         ):
             canonical_match = canonical_by_id.get(game_id, {})

@@ -50,7 +50,12 @@ from location_safety import (
     venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
-from program_history import history_scope_errors, partition_source_rows
+from program_history import (
+    NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+    history_scope_errors,
+    partition_source_rows,
+    source_declares_ncaa_nonappearance_qualifier,
+)
 from site_completeness import has_supported_foreign_locality, researched_unresolved_home_venue
 from venue_reference import (
     load_global_venue_reference,
@@ -402,6 +407,14 @@ def discrepancy_candidates(
     can_round = canonical.get("postseason_round", "").strip()
     if src_round and can_round and src_round != can_round:
         result.append(("postseason_round", src_round, can_round))
+    elif source_declares_ncaa_nonappearance_qualifier(source) and can_round:
+        result.append(
+            (
+                "postseason_round",
+                NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+                can_round,
+            )
+        )
 
     src_result_known, src_winner = source_result_winner(source)
     can_winner = canonical.get("result_winner_team_key", "").strip()
@@ -1189,6 +1202,21 @@ def canonical_enrichment_candidates(
             result.append(("notes", new_notes))
 
     if (
+        source_declares_ncaa_nonappearance_qualifier(source)
+        and not canonical.get("postseason_round", "").strip()
+    ):
+        marker = (
+            NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+            + " source="
+            + source.get("source_program_key", "").strip()
+            + "/"
+            + source.get("source_game_id", "").strip()
+        )
+        new_notes = append_note(canonical.get("notes", ""), marker)
+        if new_notes != canonical.get("notes", ""):
+            result.append(("notes", new_notes))
+
+    if (
         not canonical.get("designated_home_team_key", "").strip()
         and src_home_key
         and can_site in {"TEAM_A_HOME", "TEAM_B_HOME"}
@@ -1328,6 +1356,16 @@ def build_new_canonical(
             "[RESEARCHED_UNRESOLVED_HOME_VENUE "
             f"source={source.get('source_program_key', '').strip()}/"
             f"{source.get('source_game_id', '').strip()}]",
+        )
+
+    if source_declares_ncaa_nonappearance_qualifier(source):
+        notes = append_note(
+            notes,
+            NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+            + " source="
+            + source.get("source_program_key", "").strip()
+            + "/"
+            + source.get("source_game_id", "").strip(),
         )
 
     return {

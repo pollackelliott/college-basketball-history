@@ -48,6 +48,52 @@ ROUND_TO_FINISH = {
     "Final Four": "FINAL_FOUR",
 }
 
+NCAA_NON_APPEARANCE_QUALIFIER_MARKER = "[NCAA_NON_APPEARANCE_QUALIFIER]"
+LEGACY_NCAA_NON_APPEARANCE_QUALIFIER_PHRASE = (
+    "qualifier rather than a national-bracket round"
+)
+
+
+def source_declares_ncaa_nonappearance_qualifier(
+    source: dict[str, Any],
+) -> bool:
+    """Return whether accepted Research explicitly classifies one NCAA row as
+    a qualifier/district playoff outside the national tournament bracket.
+
+    A blank NCAA round alone is never enough.  The source must be
+    RESEARCH_ACCEPTED, remain broadly NCAA_TOURNAMENT, have no normalized
+    national-bracket round, and carry either the durable marker or the exact
+    accepted legacy phrase.
+    """
+    if str(source.get("normalization_status", "") or "").strip().upper() != "RESEARCH_ACCEPTED":
+        return False
+    if str(source.get("curated_game_type", "") or "").strip() != "NCAA_TOURNAMENT":
+        return False
+    if str(source.get("curated_postseason_round", "") or "").strip():
+        return False
+
+    notes = str(source.get("notes", "") or "")
+    folded = notes.casefold()
+    return (
+        NCAA_NON_APPEARANCE_QUALIFIER_MARKER.casefold() in folded
+        or LEGACY_NCAA_NON_APPEARANCE_QUALIFIER_PHRASE in folded
+    )
+
+
+def ncaa_game_counts_as_appearance(game: dict[str, Any]) -> bool:
+    """Return whether one canonical/projected NCAA row counts toward an
+    NCAA Tournament appearance season.
+
+    NCAA_TOURNAMENT remains a broad provenance type.  Explicitly marked
+    qualifying/district-playoff rows outside the national bracket do not count
+    as appearances; ordinary blank-round historical tournament rows still do.
+    """
+    if str(game.get("game_type", "") or "").strip() != "NCAA_TOURNAMENT":
+        return False
+    notes = str(game.get("notes", "") or "")
+    return NCAA_NON_APPEARANCE_QUALIFIER_MARKER not in notes
+
+
 VERIFICATION_STATUSES = {
     "OWNER_BASELINE_UNVERIFIED",
     "VERIFIED",
@@ -323,8 +369,12 @@ def derive_ncaa_accomplishments(
         history_scope_intervals,
     )
     ncaa_games = [g for g in scoped if g.get("game_type") == "NCAA_TOURNAMENT"]
+    appearance_games = [
+        game for game in ncaa_games
+        if ncaa_game_counts_as_appearance(game)
+    ]
     by_season: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for game in ncaa_games:
+    for game in appearance_games:
         by_season[str(game.get("season_label", ""))].append(game)
 
     incomplete: list[str] = []
@@ -398,6 +448,8 @@ def derive_ncaa_accomplishments(
         "best_finish_year": best_year,
         "conference_tournament_championships_supporting": conference_titles,
         "ncaa_game_count": len(ncaa_games),
+        "ncaa_appearance_game_count": len(appearance_games),
+        "ncaa_nonappearance_qualifier_game_count": len(ncaa_games) - len(appearance_games),
         "incomplete_reasons": incomplete,
     }
 
