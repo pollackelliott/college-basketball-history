@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "san-diego-state-stage2-proposal-0002",
+  "school_key": "san-diego-state",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "ebe425fb2f082d7c4612f8ff7ca2f63c4b485069",
+  "previous_control_state_sha256": "1e160a2676646165a08cf5b2c9d1e95ad4144001d1ad0d0f46451178a1b1acb3",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/san-diego-state/san-diego-state-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "343b2b4bb5bf239e1794867d5a4738922de705e70e9ea508e2bae75f9ba9dde1"
+  },
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/san-diego-state-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "0a449963976edb10e239a3a9a192a57a2fb1aa07e178294f42e9fa20a5028754"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT San Diego State serialized Implementation — corrected exact-map read-only Stage 2 proposal rehearsal",
+    "authorization": "Owner said Proceed after fresh-verified san-diego-state-stage2-proposal-0001 BLOCKED solely because the recommendation map encoded ACCOMPLISHMENTS-SAN-DIEGO-STATE as APPLY_ACCOMPLISHMENT_PATCH while protected main already contains the verified 11 regular-season and 9 tournament conference-title values. Revision 0002 changes exactly that decision action to VERIFY_REFERENCE_VALUES and removes only its no-op canonical accomplishment patch; the other 31 decisions, all historical bases, all other source/canonical patches, protected main, target, Freeze/semantic authority, and decision universe remain unchanged. Authorize exactly one guarded read-only STAGE2_PROPOSAL_REHEARSAL against map SHA-256 0a449963976edb10e239a3a9a192a57a2fb1aa07e178294f42e9fa20a5028754, permanent disposable rehearsal, durable checkpoint, approved-plan preview evidence where produced, and independent fresh verification only. Stop at OWNER_GATE_1_READY or a durable BLOCKED checkpoint. No Owner Gate 1 approval, fill-review, pre-seal rehearsal, seal, sealed apply, tracked basketball mutation, release, Preview, merge, Production, recovery, or unrelated historical authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
