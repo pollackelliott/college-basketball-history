@@ -1,0 +1,55 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 22,
+    "public_gap_rows": 22,
+    "reciprocal_research_accounted_gap": 1,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 1711,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_location": [
+      "CBBG-0032972"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0018972",
+      "CBBG-0032972",
+      "CBBG-0062186",
+      "CBBG-0072093",
+      "CBBG-0115019",
+      "CBBG-0180496",
+      "CBBG-0180531",
+      "CBBG-0180550",
+      "CBBG-0180551",
+      "CBBG-0180566",
+      "CBBG-0180586",
+      "CBBG-0180719"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0115019"
+    ]
+  },
+  "history_start_season": "1970-1971",
+  "school_key": "san-diego-state",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 20,
+    "neutral_missing_venue": 20,
+    "researched_gap_rows": 20,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 1709
+  },
+  "status": "PASS",
+  "warnings": []
+}
