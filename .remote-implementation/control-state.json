@@ -161,7 +161,7 @@
     "texas-state-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
-  "active_lock_commit": null,
+  "active_lock_commit": "0bb875fcb44481e3312cf83fb4475132983c8da0",
   "active_lock_owner": "github-actions:41085894819:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
