@@ -720,6 +720,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "opponent_program_key",
             "normalized_opponent_key",
             "opponent_key",
+            "canonical_opponent_key",
         ),
         "team_score": _first_parent_value(
             row, "team_score", "wagner_points", "dayton_score"
