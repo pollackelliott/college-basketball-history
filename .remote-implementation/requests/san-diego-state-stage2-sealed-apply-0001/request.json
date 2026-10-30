@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "san-diego-state-stage2-sealed-apply-0001",
+  "school_key": "san-diego-state",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "86ca81746932a00fd9fc8adc5167efac3450b9af",
+  "previous_control_state_sha256": "caf92d44f018b01a86e1e65f29a66ed9ffa83c8a4b37448e1cfe836656b319cb",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "c8a5fcd3127c857dd7e7611b8866faa9f117dd8f8ca6048512244efedbb6ef40"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "4c9938814812234a6c443aa00ef99c79cd4ad864c9dd96e2629542696e8f2f1e"
+  },
+  "approved_plan_hash": "bc5d82586fe8cd5e0f097d66bd90beca15d21a446d518dad5da2167f2f06de38",
+  "approved_plan_sha256": "59d373ffa3ec3e6e58da38fd9c75bd59c53605bf51b33db066ad3066996133ea",
+  "owner_gate_1_approval_sha256": "569d3eb6b7d55958cfe1edbe32d5517a96362c6703d110427ee8fe36d6187462",
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "recommendation_map_sha256": "0a449963976edb10e239a3a9a192a57a2fb1aa07e178294f42e9fa20a5028754",
+  "filled_review_sha256": "6cd17b44671a03e0c8f5b06dded6401a08d3d7ecd227d3748d08300aa59994af",
+  "decision_id_set_sha256": "fd024771435023061506376097676f6075e4cde11d1125260d3cf8d50214694a",
+  "creation_provenance": {
+    "origin": "ChatGPT San Diego State serialized Implementation - exact sealed apply",
+    "authorization": "Owner said Proceed after the exact San Diego State Gate 1 seal was fresh-verified. This authorizes exactly one bounded remote STAGE2_SEALED_APPLY against san-diego-state-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. It creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
