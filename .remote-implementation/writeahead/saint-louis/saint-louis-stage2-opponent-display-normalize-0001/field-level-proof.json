@@ -1,0 +1,51 @@
+{
+  "allowed_paths": [
+    "schools/saint-louis/opponents.csv",
+    "schools/saint-louis/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "augustana-il",
+    "centenary",
+    "dubuque",
+    "missouri-st-louis"
+  ],
+  "opponent_changed_row_count": 5,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "source_game_changed_ids": [
+    "saint-louis-1916-17-003",
+    "saint-louis-1930-31-011",
+    "saint-louis-1932-33-005",
+    "saint-louis-1935-36-005",
+    "saint-louis-1936-37-005",
+    "saint-louis-1939-40-005",
+    "saint-louis-1955-56-002",
+    "saint-louis-1971-72-001",
+    "saint-louis-1972-73-002",
+    "saint-louis-1973-74-001",
+    "saint-louis-1975-76-007",
+    "saint-louis-1975-76-023",
+    "saint-louis-1976-77-017",
+    "saint-louis-1976-77-025",
+    "saint-louis-1977-78-003",
+    "saint-louis-1977-78-008",
+    "saint-louis-1978-79-006",
+    "saint-louis-1980-81-009",
+    "saint-louis-1982-83-014",
+    "saint-louis-1983-84-019",
+    "saint-louis-1986-87-028",
+    "saint-louis-1992-93-014",
+    "saint-louis-1993-94-006",
+    "saint-louis-2008-09-001"
+  ],
+  "source_game_changed_keys": [
+    "augustana-il",
+    "centenary",
+    "dubuque",
+    "missouri-st-louis"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 24
+}

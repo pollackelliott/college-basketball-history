@@ -1,0 +1,208 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 4,
+  "change_row_count": 5,
+  "changes": [
+    {
+      "authority_names": [
+        "Augustana (IL)"
+      ],
+      "authority_signature": "augustanail",
+      "canonical_opponent_key": "augustana-il",
+      "from_names": [
+        "Augustana College (IL)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Augustana (IL)"
+    },
+    {
+      "authority_names": [
+        "Centenary"
+      ],
+      "authority_signature": "centenary",
+      "canonical_opponent_key": "centenary",
+      "from_names": [
+        "Centenary (LA)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Centenary"
+    },
+    {
+      "authority_names": [
+        "University of Dubuque"
+      ],
+      "authority_signature": "universityofdubuque",
+      "canonical_opponent_key": "dubuque",
+      "from_names": [
+        "Dubuque"
+      ],
+      "target_row_count": 1,
+      "to_name": "University of Dubuque"
+    },
+    {
+      "authority_names": [
+        "Missouri-St. Louis",
+        "Missouri–St. Louis"
+      ],
+      "authority_signature": "missouristlouis",
+      "canonical_opponent_key": "missouri-st-louis",
+      "from_names": [
+        "UMSL"
+      ],
+      "target_row_count": 2,
+      "to_name": "Missouri-St. Louis"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "source_game_display_change_keys": 4,
+  "source_game_display_change_rows": 24,
+  "source_game_display_changes": [
+    {
+      "from_name": "Dubuque",
+      "normalized_opponent_key": "dubuque",
+      "source_game_id": "saint-louis-1916-17-003",
+      "to_name": "University of Dubuque"
+    },
+    {
+      "from_name": "Centenary (LA)",
+      "normalized_opponent_key": "centenary",
+      "source_game_id": "saint-louis-1930-31-011",
+      "to_name": "Centenary"
+    },
+    {
+      "from_name": "Centenary (LA)",
+      "normalized_opponent_key": "centenary",
+      "source_game_id": "saint-louis-1932-33-005",
+      "to_name": "Centenary"
+    },
+    {
+      "from_name": "Centenary (LA)",
+      "normalized_opponent_key": "centenary",
+      "source_game_id": "saint-louis-1935-36-005",
+      "to_name": "Centenary"
+    },
+    {
+      "from_name": "Centenary (LA)",
+      "normalized_opponent_key": "centenary",
+      "source_game_id": "saint-louis-1936-37-005",
+      "to_name": "Centenary"
+    },
+    {
+      "from_name": "Centenary (LA)",
+      "normalized_opponent_key": "centenary",
+      "source_game_id": "saint-louis-1939-40-005",
+      "to_name": "Centenary"
+    },
+    {
+      "from_name": "Centenary (LA)",
+      "normalized_opponent_key": "centenary",
+      "source_game_id": "saint-louis-1955-56-002",
+      "to_name": "Centenary"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1971-72-001",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1972-73-002",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1973-74-001",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1975-76-007",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1975-76-023",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1976-77-017",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1976-77-025",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1977-78-003",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1977-78-008",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1978-79-006",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1980-81-009",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1982-83-014",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1983-84-019",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-1986-87-028",
+      "to_name": "Missouri-St. Louis"
+    },
+    {
+      "from_name": "Augustana College (IL)",
+      "normalized_opponent_key": "augustana-il",
+      "source_game_id": "saint-louis-1992-93-014",
+      "to_name": "Augustana (IL)"
+    },
+    {
+      "from_name": "Augustana College (IL)",
+      "normalized_opponent_key": "augustana-il",
+      "source_game_id": "saint-louis-1993-94-006",
+      "to_name": "Augustana (IL)"
+    },
+    {
+      "from_name": "UMSL",
+      "normalized_opponent_key": "missouri-st-louis",
+      "source_game_id": "saint-louis-2008-09-001",
+      "to_name": "Missouri-St. Louis"
+    }
+  ],
+  "status": "PASS"
+}

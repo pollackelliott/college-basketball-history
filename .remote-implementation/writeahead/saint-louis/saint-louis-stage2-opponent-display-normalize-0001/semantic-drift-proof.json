@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "integration_base_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+    "school_key": "saint-louis",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "integration_base_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+    "school_key": "saint-louis",
+    "status": "PASS"
+  }
+}

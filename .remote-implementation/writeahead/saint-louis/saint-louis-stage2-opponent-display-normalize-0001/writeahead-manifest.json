@@ -1,0 +1,68 @@
+{
+  "allowed_paths": [
+    "schools/saint-louis/opponents.csv",
+    "schools/saint-louis/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/saint-louis/opponents.csv": "08c06a8db9856c0bfca40417379466426143bf0b3ba9b460e6a21b97a073b2dd",
+    "schools/saint-louis/source-games.csv": "03d012736b257aa6727e7d9149e8a19eb1d6d813f27c9264dd7073c333a41cd4"
+  },
+  "changed_paths": [
+    "schools/saint-louis/opponents.csv",
+    "schools/saint-louis/source-games.csv"
+  ],
+  "commit_message": "Normalize saint-louis historical opponent display representation",
+  "expected_blocker_keys": [
+    "augustana-il",
+    "centenary",
+    "dubuque",
+    "missouri-st-louis"
+  ],
+  "expected_target_predecessor_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+  "field_level_proof_sha256": "f20bf57b453f7bcc3ffa6709527916e6c12f4cd809f461b90cb6663b8db7af63",
+  "global_lock_commit": "32f9adfb4e2eb57a662bf8e221cebe9eb15048e6",
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "e9c7c57fd23b89bed8980b1fec83b8cb1da73e0558b1dc853be3e570d0ff16d7",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "prepared_parent_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+  "prepared_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+  "protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "repository_validation": "PASS",
+  "request_id": "saint-louis-stage2-opponent-display-normalize-0001",
+  "request_sha256": "c57044946e144521b4f8549784d64c5e642760960d8c7588e39171a9acd15225",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_drift_after": {
+    "baseline_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "integration_base_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+    "school_key": "saint-louis",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+    "integration_base_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+    "school_key": "saint-louis",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "e91cacec7c1bc4be6fb084f586721cbc4c14618258e65d24a95fb8f3249716ea",
+    "field-level-proof.json": "f20bf57b453f7bcc3ffa6709527916e6c12f4cd809f461b90cb6663b8db7af63",
+    "integration-freeze.json": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+    "normalization-report.json": "e9c7c57fd23b89bed8980b1fec83b8cb1da73e0558b1dc853be3e570d0ff16d7",
+    "semantic-drift-proof.json": "b7c7d88c77d9c355f0f4b44df18a7d9ee2da7ac8674329f4aa93c03249f89c40"
+  },
+  "source_game_normalized_name_row_count": 24,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "e91cacec7c1bc4be6fb084f586721cbc4c14618258e65d24a95fb8f3249716ea",
+  "target_branch": "data/saint-louis-onboarding"
+}
