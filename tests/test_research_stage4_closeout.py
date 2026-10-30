@@ -1613,21 +1613,46 @@ class Stage4CloseoutTests(unittest.TestCase):
 
 
     def test_dayton_legacy_parent_aliases_and_overtime_tokens(self):
-        for token, expected_ot in (("OT", "1"), ("2OT", "2"), ("3OT", "3"), ("5OT", "5")):
+        tokens = (("OT", "1"), ("2OT", "2"), ("3OT", "3"), ("5OT", "5"))
+        for index, (token, expected_ot) in enumerate(tokens, start=1):
             with self.subTest(token=token):
-                row = {
+                parent = {
+                    "research_game_id": f"DAYTON-LEGACY-{index}",
+                    "source_program_key": "test",
                     "season": "1989-90",
+                    "opponent_key": "old-college",
                     "dayton_score": "73",
                     "opponent_score": "69",
                     "result": "W",
                     "overtime": token,
+                    "game_type": "REGULAR_SEASON",
+                    "site_type": "UNKNOWN",
                 }
-                expected = mod.expected_parent_values(row)
+                expected = mod.expected_parent_values(parent)
                 self.assertEqual(expected["season_start"], "1989")
                 self.assertEqual(expected["team_score"], "73")
                 self.assertEqual(expected["opponent_score"], "69")
                 self.assertEqual(expected["played_result"], "W")
                 self.assertEqual(expected["overtime_periods"], expected_ot)
+
+                package_row = {
+                    "source_game_id": f"DAYTON-LEGACY-{index}",
+                    "source_program_key": "test",
+                    "season_label": "1989-1990",
+                    "game_date": "",
+                    "normalized_opponent_key": "old-college",
+                    "team_score": "73",
+                    "opponent_score": "69",
+                    "played_result": "W",
+                    "overtime_periods": expected_ot,
+                    "curated_site_type": "UNKNOWN",
+                    "curated_game_type": "REGULAR_SEASON",
+                    "raw_text": "",
+                }
+                self.assertEqual(
+                    mod.compare_parent_semantics([parent], [package_row], []),
+                    [],
+                )
 
 
 if __name__ == "__main__":
