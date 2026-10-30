@@ -282,6 +282,41 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                 )
             )
 
+    def test_documented_raw_result_score_conflict_may_preserve_blank_scores(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                team_score="",
+                opponent_score="",
+                played_result="L",
+                raw_text="M11 Central Missouri A L 33-29",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["errors"], [])
+            self.assertEqual(report["counts"]["unknown_played_scores"], 1)
+
+    def test_unoriented_raw_score_without_explicit_result_marker_still_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                team_score="",
+                opponent_score="",
+                played_result="L",
+                raw_text="M11 Central Missouri A 33-29",
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertTrue(
+                any(
+                    "structured scores are blank but raw_text contains explicit score-like evidence"
+                    in error
+                    for error in report["errors"]
+                )
+            )
+
     def test_genuine_unknown_score_without_literal_score_evidence_still_passes(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
