@@ -1,0 +1,128 @@
+{
+  "branch": "remote-stage2-census/texas-state-fac90846e987",
+  "capability_census": {
+    "path": ".onboarding/texas-state/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "fac90846e9874a6b183d240116594a9cead9f11b",
+  "integration_base_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "integration_semantic_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "discrepancy": 8,
+      "publication": 1
+    },
+    "decision_count": 10,
+    "decision_universe_sha256": "60bfb095a8cadf8b80c3d641b3c30eeb614a770381bfe7d10f23d65a68d1ab82",
+    "discrepancies_to_add": 8,
+    "existing_game_matches": 94,
+    "new_canonical_games": 1155,
+    "plan_path": ".onboarding/texas-state/plan.json",
+    "review_path": ".onboarding/texas-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 2,
+      "USE_SOURCE": 6,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "a413fc509ecc62a9055c64d96bf6e3e62b56f0efff31c82d2b1ff510ba50eda4",
+    "changed_path_count": 45
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 2,
+      "USE_SOURCE": 6,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "a413fc509ecc62a9055c64d96bf6e3e62b56f0efff31c82d2b1ff510ba50eda4",
+    "decision_count": 10,
+    "path": "/tmp/remote-stage2-proposal-map-11_y8jvd/recommendation-map.json",
+    "sha256": "144deba3ca79706d2e5ea3380c8a909171a3f2c431892c30e93e0471386b946b"
+  },
+  "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 16,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 18,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 34,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 16,
+      "researched_unresolved_home_venue_rows": 16,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1249,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0100146",
+        "CBBG-0145982",
+        "CBBG-0181574",
+        "CBBG-0181583",
+        "CBBG-0181585",
+        "CBBG-0181590",
+        "CBBG-0181592",
+        "CBBG-0181600",
+        "CBBG-0181742",
+        "CBBG-0181743",
+        "CBBG-0181744",
+        "CBBG-0181747"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0053410",
+        "CBBG-0174125",
+        "CBBG-0180837",
+        "CBBG-0181555",
+        "CBBG-0181606",
+        "CBBG-0181626",
+        "CBBG-0181628",
+        "CBBG-0181656",
+        "CBBG-0181657",
+        "CBBG-0181687",
+        "CBBG-0181688",
+        "CBBG-0181709"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0181709"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0100146",
+        "CBBG-0145982",
+        "CBBG-0181574",
+        "CBBG-0181583",
+        "CBBG-0181585",
+        "CBBG-0181590",
+        "CBBG-0181592",
+        "CBBG-0181600",
+        "CBBG-0181742",
+        "CBBG-0181743",
+        "CBBG-0181744",
+        "CBBG-0181747"
+      ]
+    },
+    "path": ".onboarding/texas-state/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}

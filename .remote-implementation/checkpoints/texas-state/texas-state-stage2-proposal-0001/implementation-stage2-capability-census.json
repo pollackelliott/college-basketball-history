@@ -1,0 +1,99 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "discrepancy": 8,
+      "publication": 1
+    },
+    "decision_count": 10,
+    "decision_fields": {
+      "game_date": 3,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "score": 3,
+      "site_type": 2
+    },
+    "site_or_han_review_decision_ids": [
+      "DISCREPANCY-TXST-S1-000176-SITE_TYPE",
+      "DISCREPANCY-TXST-S1-000712-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 16,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 18,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 34,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 16,
+      "researched_unresolved_home_venue_rows": 16,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1249,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0100146",
+        "CBBG-0145982",
+        "CBBG-0181574",
+        "CBBG-0181583",
+        "CBBG-0181585",
+        "CBBG-0181590",
+        "CBBG-0181592",
+        "CBBG-0181600",
+        "CBBG-0181742",
+        "CBBG-0181743",
+        "CBBG-0181744",
+        "CBBG-0181747"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0053410",
+        "CBBG-0174125",
+        "CBBG-0180837",
+        "CBBG-0181555",
+        "CBBG-0181606",
+        "CBBG-0181626",
+        "CBBG-0181628",
+        "CBBG-0181656",
+        "CBBG-0181657",
+        "CBBG-0181687",
+        "CBBG-0181688",
+        "CBBG-0181709"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0181709"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0100146",
+        "CBBG-0145982",
+        "CBBG-0181574",
+        "CBBG-0181583",
+        "CBBG-0181585",
+        "CBBG-0181590",
+        "CBBG-0181592",
+        "CBBG-0181600",
+        "CBBG-0181742",
+        "CBBG-0181743",
+        "CBBG-0181744",
+        "CBBG-0181747"
+      ]
+    },
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 2,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
