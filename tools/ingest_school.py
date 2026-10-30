@@ -50,7 +50,12 @@ from location_safety import (
     venue_names_for_city_contamination,
 )
 from ncaa_safety import canonical_ncaa_errors
-from program_history import history_scope_errors, partition_source_rows
+from program_history import (
+    NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+    history_scope_errors,
+    partition_source_rows,
+    source_declares_ncaa_nonappearance_qualifier,
+)
 from site_completeness import has_supported_foreign_locality, researched_unresolved_home_venue
 from venue_reference import (
     load_global_venue_reference,
@@ -1328,6 +1333,16 @@ def build_new_canonical(
             "[RESEARCHED_UNRESOLVED_HOME_VENUE "
             f"source={source.get('source_program_key', '').strip()}/"
             f"{source.get('source_game_id', '').strip()}]",
+        )
+
+    if source_declares_ncaa_nonappearance_qualifier(source):
+        notes = append_note(
+            notes,
+            NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+            + " source="
+            + source.get("source_program_key", "").strip()
+            + "/"
+            + source.get("source_game_id", "").strip(),
         )
 
     return {
