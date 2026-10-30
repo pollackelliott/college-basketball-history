@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "texas-state-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "texas-state",
-  "previous_control_state_commit": "75cd5a71db4fd73445d6ba790decf8b25eca216a",
-  "previous_control_state_sha256": "4b07d5f230b5f228a31cdf7e8075243dad80e378762d1c0bf49a883a01e8421a",
-  "expected_protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "previous_control_state_commit": "34bd8a7ceac4f5f4e1f397aba0f67d0f3aa6a7cb",
+  "previous_control_state_sha256": "e69024a947edef0cd96e3cdb796a36fb16fe5c9b58a580605c2a9619ea5b0c3e",
+  "expected_protected_main_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
   "target_branch": "data/texas-state-onboarding",
   "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
   "pr_number": 406,
-  "approved_plan_hash": "6dd6e6889616af2caf967ef62ff3808de8e367282729ba717ef1004766a4ab9d",
-  "release_manifest_sha256": "708b57bb00776bfc4e435358a272f270e6466f62271dd6bce488713ed24368cd",
-  "preview_deployment_id": 7444920622,
-  "preview_url": "https://college-basketball-history-qc4fqrade-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/texas-state/texas-state-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "84d21f0cf504721dc80de309f92afd6dd13f4aa7f08d6267d9448ae142f294e9"
+  "merge_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "c529a84a8ae00611937213d26fab5190d50061800fca4fca893007cd56145e4d"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/texas-state/texas-state-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "f0cf1872c3a978a21d6375f4b69b05f5d0a75bc30c684a0a8cbb812a3b6c0b2c"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's explicit statement in the Texas State Implementation conversation: “APPROVED. Proceed” immediately after receiving the exact independently fresh-verified Owner Gate 2 packet for Texas State PR #406 at head c57f1fb38941a59320760f2807c7ca5f2ff76ab6 and successful Vercel Preview deployment 7444920622, and being told that explicit Owner Gate 2 approval was necessary. This is the required affirmative approval of that exact Preview, not a generic Proceed.",
-    "preview_checkpoint_sha256": "84d21f0cf504721dc80de309f92afd6dd13f4aa7f08d6267d9448ae142f294e9",
-    "preview_verification_sha256": "f0cf1872c3a978a21d6375f4b69b05f5d0a75bc30c684a0a8cbb812a3b6c0b2c",
-    "pr_number": 406,
-    "pr_head_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
-    "preview_deployment_id": 7444920622,
-    "preview_url": "https://college-basketball-history-qc4fqrade-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/texas-state/texas-state-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "ac5b21ab2829a965a8cba82d99cd8b5a22a448befe0543f7eca34634bca26875"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Texas State serialized Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly said APPROVED. Proceed in response to independently fresh-verified Texas State PR #406 exact Preview deployment 7444920622 and head c57f1fb38941a59320760f2807c7ca5f2ff76ab6. This request authorizes only read-only RELEASE_GATE2_APPROVAL and independent exact Preview re-verification. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, or affect other schools."
+    "origin": "ChatGPT Texas State serialized Implementation lane",
+    "authorization": "Owner said process immediately after exact Owner Gate 2 approved and independently verified PR #406 two-parent merge. The Texas State lane independently reauthenticated protected main 2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62, merged PR #406, exact approved head c57f1fb38941a59320760f2807c7ca5f2ff76ab6, and first/second merge parents 5ef36cd4003724b59cbcfb7186a75b0552eb2944 / c57f1fb38941a59320760f2807c7ca5f2ff76ab6, fresh verified Gate 2 approval, and global IDLE control. This request only performs read-only permanent merged-main validation, exact-SHA Production deployment and all changed public JSON equivalence with independent fresh verification. No merge replay, mutations, new gates, recovery, or other-school authority."
   },
   "authority": {
     "phase0": false,
@@ -51,9 +38,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
