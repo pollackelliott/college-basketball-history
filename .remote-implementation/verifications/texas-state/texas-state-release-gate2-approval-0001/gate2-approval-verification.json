@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "c529a84a8ae00611937213d26fab5190d50061800fca4fca893007cd56145e4d",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "pr_number": 406,
+  "preview_deployment_id": 7444920622,
+  "preview_url": "https://college-basketball-history-qc4fqrade-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "texas-state-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "status": "PASS"
+}
