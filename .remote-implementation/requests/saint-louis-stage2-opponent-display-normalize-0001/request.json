@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage2-opponent-display-normalize-0001",
+  "school_key": "saint-louis",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "8503c0f8d73bd4b9995353c28421103a306a070d",
+  "previous_control_state_sha256": "f73b4048412b9a4f682fb05386fb04920f8593e1598f74b2d77b94f49c0a3e7a",
+  "expected_protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "e91cacec7c1bc4be6fb084f586721cbc4c14618258e65d24a95fb8f3249716ea"
+  },
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "creation_provenance": {
+    "origin": "Saint Louis Implementation lane",
+    "authorization": "Owner Proceed. Normalize exactly four census-blocked historical opponent display keys using the permanent guarded representation-only Stage 2 normalizer. Preserve Research Freeze and all historical source evidence. No unrelated work or owner gates."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
