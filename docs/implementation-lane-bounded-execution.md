@@ -115,6 +115,10 @@ A purely technical failure, rerun, or fingerprint regeneration does not reopen h
 
 If a phase cannot safely finish in one turn, preserve the exact durable state and stop. Do not begin the next phase merely to maintain momentum.
 
+Phase-persistent owner authorization does **not** require single-turn phase exhaustion. After each durable checkpoint, continue in the same turn only while the next internal operation is deterministic, bounded, and materially advancing state. If the work becomes exploratory, repeatedly revisits the same evidence/state, opens unrelated diagnostic families, or consumes context faster than it creates durable progress, checkpoint and yield rather than overexerting the turn.
+
+A bounded-turn yield does not consume or revoke the already granted phase authority.
+
 ### 3.5 `Proceed` is execution authorization, not a historical/release gate
 
 After an ordinary completed implementation stage, owner responses such as `Proceed`, `Continue`, or equivalent authorize the identified next bounded **owner-facing phase**, including its explicitly described deterministic internal repository operations and fresh-verification substeps. They do not authorize a different later phase, but authorization is not consumed merely because the first internal request/checkpoint completes.
@@ -127,7 +131,7 @@ They do **not** substitute for:
 
 ### 3.6 Healthy in-flight work is not an owner-action boundary
 
-Once an authorized request has been accepted and is healthy, remain in the same turn and monitor it to its durable terminal result and required independent fresh verification. Use concise progress updates for long-running workflows.
+Once an authorized request has been accepted and is healthy, monitor it with event-oriented polling and concise progress updates. Continue through terminal durable result and required independent fresh verification when that can be done within a healthy bounded turn.
 
 Do **not** end the turn with `NEXT OWNER ACTION: PROCEED` merely because:
 
@@ -136,7 +140,9 @@ Do **not** end the turn with `NEXT OWNER ACTION: PROCEED` merely because:
 - a fresh verifier has not yet written its result;
 - a successful intermediate checkpoint exists and the next deterministic substep belongs to the same authorized phase.
 
-A new owner relay is required only when the current phase reaches its owner-facing completion boundary or encounters a genuine blocker/authority change. This rule does not create background/asynchronous authority; it requires the active school-lane turn to continue its already-authorized monitoring/work rather than converting polling into owner labor.
+Also do **not** poll indefinitely merely to avoid a conversational handoff. After three consecutive no-material-change polls in one assistant turn, preserve the exact workflow/request/control identity and yield at that durable state. The existing phase authorization remains valid.
+
+A new **authorization** relay is required only when the current phase reaches its owner-facing completion boundary or encounters a genuine blocker/authority change. A bounded-turn yield inside the same authorized phase is transport continuation only; it uses the dedicated continuation classification below.
 
 ## 4. Required turn-ending contract
 
@@ -146,9 +152,10 @@ A new owner relay is required only when the current phase reaches its owner-faci
 - `NEXT OWNER ACTION: EXPLICIT OWNER APPROVAL REQUIRED` — A genuine historical-authority decision, the exact Owner Gate 1 packet, or the exact PR-head Preview at Owner Gate 2 needs affirmative owner approval. State precisely what must be approved; generic `Proceed` is insufficient.
 - `NEXT OWNER ACTION: CONTROL CENTER AUTHORIZATION REQUIRED` — An exceptional shared/global mutation, unresolved policy or permission-governance choice, competing Implementation lock, or other explicitly controlled authority boundary requires Control Center disposition. State its exact scope rather than silently broadening a routine `Proceed`.
 - `NEXT OWNER ACTION: STOP — RECOVERY REQUIRED` — Durable transaction/control state is unsafe or a genuinely failed/ambiguous operation requires evidence-first recovery. Identify the failing authority and required recovery path. Do **not** use this label merely because a healthy, checkpointed census says `BLOCKED`, because an ordinary bounded stage is incomplete, or because a known next deterministic repair is available.
+- `NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS` — The current owner-facing phase is already authorized and remains valid, but this assistant turn is yielding at an authenticated durable checkpoint because of bounded execution/context or a healthy external workflow that has not materially changed after the polling budget. No new historical, mutation, gate, merge, or release authority is requested. The owner may reply `Continue`/`Proceed` or start a replacement chat; the next turn reauthenticates durable state and resumes the same phase.
 - `NEXT OWNER ACTION: NONE — IMPLEMENTATION COMPLETE` — The school has passed the exact approved merge, successful same-SHA Vercel Production deployment, all required public Production JSON equivalence checks, and **independent fresh Production-proof verification**, with healthy final control state. The school has no further Implementation stage; do not misleadingly conclude `PROCEED` just because that was the previous standard's last routine option.
 
-Use **exactly these five labels**. Keep the final classification short and unmistakable; do not replace it with an ambiguous `Next action` sentence. When the appropriate label is `PROCEED`, let the owner answer simply `Proceed` at the next turn; do not demand a special handoff, ceremonial Control Center confirmation, or an extra technical owner gate. The classification changes **communication only**; all one-bounded-unit execution limits, repository mutation protections, Owner Gate 1/2 approvals, and Production-proof requirements remain unchanged.
+Use **exactly these six labels**. Keep the final classification short and unmistakable; do not replace it with an ambiguous `Next action` sentence. Reserve `PROCEED` for starting the identified next owner-facing phase. Use `CONTINUE — SAME PHASE AUTHORITY PERSISTS` only for a bounded-turn transport yield inside an already authorized phase; do not use it as a routine checkpoint after every successful internal operation. The classification changes **communication only**; all bounded-execution limits, repository mutation protections, Owner Gate 1/2 approvals, and Production-proof requirements remain unchanged.
 
 
 ### Completed ordinary stage
