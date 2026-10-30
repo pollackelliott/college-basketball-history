@@ -1,0 +1,78 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "48db53686db3396e77ec406e76e683e3379e727145fd1acaae6fc1f64ed3ed34",
+    "plan.json": "ab9cc04374ec205d2bb22cf527da8736fd930c393c8cbac4c4b26ef9f55b52f8",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "566ba43b9491066396527b40f9868e1ce4a0aa59de760c5b72333271c4eee215"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "45833a7d3117624c4a26a870135fe531e828a763a86fe3dcfd23b9b4a055bb26",
+    "plan.json": "d5c407113a3d93a8cf9076eb5e383a00d9b3e81ac83b2f8804260f668a375d4b",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "7eee9a830e5639994a50b3f945fdc7653f6c346906d958a484610de2601cb9e0"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "san-diego-state"
+  ],
+  "phase0_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "phase0_successor_path": ".remote-implementation/successors/san-diego-state/san-diego-state-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "68baeefbaf16bf8a46fe94964cbc493e1ccf5420f19751651591e77c41fa8470",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/san-diego-state/plan.json",
+    "review_path": ".onboarding/san-diego-state/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "request_id": "san-diego-state-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "target_tree_sha": "afb3f4b36e91663cc9fc622a5ec54c09c2d26b6e",
+  "tracked_mutation_proof": {
+    "after_head_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+    "after_status": "",
+    "after_tree_sha": "afb3f4b36e91663cc9fc622a5ec54c09c2d26b6e",
+    "before_head_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+    "before_status": "",
+    "before_tree_sha": "afb3f4b36e91663cc9fc622a5ec54c09c2d26b6e",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
