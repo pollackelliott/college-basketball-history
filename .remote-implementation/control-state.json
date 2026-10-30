@@ -166,7 +166,7 @@
     "texas-state-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
-  "active_lock_commit": null,
+  "active_lock_commit": "d959a4576db86e9e40e840c68674ad4f146dc8f4",
   "active_lock_owner": "github-actions:41099011360:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
