@@ -10,7 +10,7 @@ This protocol changes **how Implementation work is divided into chat turns**, no
 
 The governing rule is:
 
-> **One bounded implementation phase per turn. A completed phase boundary is an intentional execution handoff. Do not automatically begin the next phase.**
+> **One owner-authorized implementation phase per turn. A phase may contain multiple existing deterministic repository operations and fresh-verification substeps. Internal checkpoints do not create owner handoffs; the completed phase boundary does. Do not automatically begin the next owner-facing phase.**
 
 The owner should not be used as a command-by-command transport layer. Deterministic work should be batched into phase-sized operations with compact output and durable checkpoints.
 
@@ -79,7 +79,7 @@ After interruption, reconstruct from Git/GitHub, tracked files, ignored `.onboar
 
 When the owner's Codespace is the only execution surface, invoke the supported permanent repository command directly by default. Assistant-authored multi-line shell/Python orchestration is not a normal Implementation interface. Use a narrow temporary helper only for genuinely bespoke work that current tooling does not own; if the same operation can recur, treat that as a permanent-tooling gap and repair the repository instead of normalizing the helper.
 
-"Phase-sized" does not mean monolithic. The normal relay should contain one principal repository operation plus its immediate validation. Do not wrap a permanent command in a large bespoke program merely to restate its branch, lifecycle, validation, or release invariants, and do not combine mutation, regenerated preflight, rehearsal, release preparation, and unrelated confidence checks into one giant wrapper merely to reduce the number of pastes.
+"Phase-sized" does not mean a giant bespoke wrapper. When the owner must execute work in a Codespace, a relay should normally contain one principal permanent command plus its immediate validation. When the school lane itself can invoke supported repository/remote operations, however, one owner-authorized phase may sequence multiple existing deterministic operations without a new owner relay. Do not reimplement several operations inside one custom script merely to reduce pastes; do use the repository's existing operations serially until the already-authorized phase reaches its real completion boundary.
 
 Browser Codespaces transport convention: the owner may drag the immutable `RESEARCH_FROZEN` ZIP into the repository root in the Explorer. Do **not** ask the owner to manually copy or move that ZIP to `/tmp`. The permanent `python tools/implementation_stage1_inventory.py ...` command accepts that repository-root path, verifies the expected SHA-256 first, and then relocates an untracked root ZIP to `/tmp/cbh-implementation-inputs/` before any branch/cleanliness-sensitive Stage 1 guard runs. A tracked ZIP is never relocated. Inputs already outside the repository root are left unchanged.
 
@@ -117,13 +117,26 @@ If a phase cannot safely finish in one turn, preserve the exact durable state an
 
 ### 3.5 `Proceed` is execution authorization, not a historical/release gate
 
-After an ordinary completed implementation stage, owner responses such as `Proceed`, `Continue`, or equivalent authorize only the identified next bounded stage.
+After an ordinary completed implementation stage, owner responses such as `Proceed`, `Continue`, or equivalent authorize the identified next bounded **owner-facing phase**, including its explicitly described deterministic internal repository operations and fresh-verification substeps. They do not authorize a different later phase, but authorization is not consumed merely because the first internal request/checkpoint completes.
 
 They do **not** substitute for:
 
 - Owner Gate 1 historical decisions;
 - exact Vercel Preview approval;
 - any other explicit owner judgment required by repository policy.
+
+### 3.6 Healthy in-flight work is not an owner-action boundary
+
+Once an authorized request has been accepted and is healthy, remain in the same turn and monitor it to its durable terminal result and required independent fresh verification. Use concise progress updates for long-running workflows.
+
+Do **not** end the turn with `NEXT OWNER ACTION: PROCEED` merely because:
+
+- CI is still running;
+- a guarded remote request is still processing;
+- a fresh verifier has not yet written its result;
+- a successful intermediate checkpoint exists and the next deterministic substep belongs to the same authorized phase.
+
+A new owner relay is required only when the current phase reaches its owner-facing completion boundary or encounters a genuine blocker/authority change. This rule does not create background/asynchronous authority; it requires the active school-lane turn to continue its already-authorized monitoring/work rather than converting polling into owner labor.
 
 ## 4. Required turn-ending contract
 
@@ -266,7 +279,7 @@ Turn the owner-approved Gate 1 batch into a technically validated applied releas
 ### Work
 
 - encode the approved review using current generic tooling;
-- execute the approved-decision mechanical sequence as one guarded Stage 3 operation where current permanent tooling safely permits it: fill/encode -> disposable rehearsal -> seal only on PASS -> transactional apply -> post-apply validation;
+- execute the approved-decision mechanical sequence as one owner-authorized Stage 3 phase, using the distinct permanent guarded operations serially where required: fill/encode -> disposable rehearsal -> seal only on PASS -> transactional apply -> post-apply validation; successful internal checkpoints do not require another `Proceed`;
 - run disposable pre-seal rehearsal;
 - diagnose and repair purely technical failures generically where possible;
 - if tracked inputs change but substantive owner decisions remain identical, regenerate preflight and use supported carry-forward rather than re-asking the owner;
@@ -292,7 +305,7 @@ Create the exact release/PR state and obtain the exact Vercel Preview that the o
 
 ### Work
 
-Run the current release-preparation workflow, which owns the release commit, push, PR preparation, checks, mergeability verification, and exact Preview deployment.
+Run the current release-preparation workflow as one owner-authorized phase. Under the guarded remote architecture this may require distinct internal operations (release readiness, exact PR creation/reuse, CI/mergeability, and Preview verification), but successful internal boundaries do not require additional owner `Proceed` messages. Stop only at `OWNER_GATE_2_READY` or an actual blocker.
 
 Do not manually commit between final apply and release preparation when current tooling binds the release manifest to HEAD.
 
@@ -327,12 +340,16 @@ Merge only the exact owner-approved release state and prove that the exact merge
 
 ### Work
 
+- treat an exact Preview `APPROVED. Proceed` as authorization for this complete final phase while the approved PR head, Preview, and protected-main preconditions remain exact;
+- durably record and independently verify the exact Gate 2 approval;
 - verify the approved Preview still matches the current exact PR head;
 - run the current merge command with explicit preview-approved semantics;
 - verify protected `main` contains the exact merge result;
+- submit and monitor the exact Production-proof operation without another owner relay;
 - wait for the exact merged-main SHA's successful Production deployment;
 - compare production JSON/equivalent published artifacts against merged main for the target and every required affected document;
-- verify final release lock/status and clean repository state.
+- verify final release lock/status and clean repository state;
+- do not stop merely because Gate 2 verification, Production deployment, or fresh Production verification is still processing; continue monitoring within the same authorized phase unless a genuine blocker appears.
 
 ### Completion standard
 
