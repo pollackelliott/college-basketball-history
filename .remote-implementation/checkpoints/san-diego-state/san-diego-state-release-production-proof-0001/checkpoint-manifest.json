@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "merge_parent_onboarding": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "merge_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "d9819bb305fa3bc39136254d68bd62a3c971a4b86406fa212281c6847d08c83c",
+  "owner_gate_2_verification_sha256": "f667df3f6a4aecc8f96422c10ecff7f81c7c39baa00155c931d10d6dd469cb78",
+  "pr_head_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
+  "pr_number": 402,
+  "production_deployment_id": 7439404529,
+  "production_json_checked_count": 73,
+  "production_proof": true,
+  "production_proof_sha256": "784874f9f25b126c057d5015d15215a7301b77fea904a6069425e5ef04179396",
+  "protected_main_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
+  "request_id": "san-diego-state-release-production-proof-0001",
+  "request_sha256": "f9000d7fa6e10dce08ae1a25884a7fc2097c29d8983a440a0bcbdea2d9e32a5d",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}
