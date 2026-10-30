@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "saint-louis",
+  "created_at": "2026-10-30T23:04:31.725703+00:00",
+  "input_fingerprint": {
+    "sha256": "5d12470622c5df4e1015bc1b02630d11b2b40b0afa2b563ee91a3665a91a5751",
+    "git_head": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+    "files": {
+      "schools/saint-louis/source-games.csv": "027e3de5ce2f65b479a8a2df01a4cb4d97625767a483c3e8fd1b6fe03f682e0d",
+      "schools/saint-louis/opponents.csv": "58d3f5870e631d37e494b0ed48b09185ef0a8200c15fd5481356d22ca2fcac29",
+      "schools/saint-louis/venues.csv": "2d7b131aa1f1d95e3caa63a2a009b37ff436e0473475e0f8c102df1ee1fa5044",
+      "schools/saint-louis/conferences.csv": "2e444508902684adedcfed1d16f5923be6715a817dc20121f86b430736830125",
+      "schools/saint-louis/notes.md": "69bbb6801c6686235175aa825bc41f3ea42c1732f894b2ae9d7a7f12b770176d",
+      "schools/saint-louis/source-notes.md": "23dd7d9fb036db2bef8e3a09fa2c00072b57658077ec0315fa92cb238bda0883",
+      "data/canonical/games.csv": "3a925b65f2c763bfa147b1fab41b5db0631d81859b0333f280aa8f326c766199",
+      "data/evidence/game-assertions.csv": "7bce52013c05d2f8d4041d485d81b41bd738c015bf499058caaa2d6d2bcb3f1c",
+      "data/reconciliation/discrepancies.csv": "7dc8e1e2f13604caecdae531c43bc8c5626679be86590f1515dc01145f0a6cc8",
+      "data/reference/programs.csv": "580ed63ae30e8ed6811cb5b5fe35638e42993b742c6a4365c5d6ca8dceb3a894",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "19fddc82481662561f57d41b0e0b3c41e31bd2d5575bdad1823fa3b42ec4854e",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "184574d5b9116640bbaf8bafb4e66e927eaad290774a53d08a0755d6847158c6",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+      "tools/onboarding_plan.py": "a443e89ab264c8663a6141e144921de1b26d0eee3fab902e87fb96fce1a95144",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: augustana-il: ['Augustana (IL)', 'Augustana College (IL)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: centenary: ['Centenary', 'Centenary (LA)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: dubuque: ['Dubuque', 'University of Dubuque']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: missouri-st-louis: ['Missouri-St. Louis', 'Missouri–St. Louis', 'UMSL']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2892,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 404,
+      "venues": 94,
+      "conference_intervals": 9,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: augustana-il: ['Augustana (IL)', 'Augustana College (IL)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: centenary: ['Centenary', 'Centenary (LA)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: dubuque: ['Dubuque', 'University of Dubuque']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: missouri-st-louis: ['Missouri-St. Louis', 'Missouri–St. Louis', 'UMSL']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

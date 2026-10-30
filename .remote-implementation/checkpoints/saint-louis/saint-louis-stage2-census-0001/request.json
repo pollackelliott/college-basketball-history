@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage2-census-0001",
+  "school_key": "saint-louis",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "47a9d9fecaef3b171dea647b5b8d2c727a0ead5f",
+  "previous_control_state_sha256": "93a2420b9cf97e83fdcd075253ea1c3a36bbb1316dfb1573da867d3c8f5a187b",
+  "expected_protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-phase0-0003/successor-manifest.json",
+    "sha256": "60af3c915b2ff308ebeaddab66ec3ba5f7404a5349fce41fd5ada445cf9bb82a"
+  },
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "creation_provenance": {
+    "origin": "Saint Louis serialized Implementation lane — owner-authorized initial Stage 2 capability census",
+    "authorization": "Owner explicitly instructed Proceed after Phase 0 exact successor and fresh-runner PASS. One guarded read-only STAGE2_CENSUS using existing fresh verified Phase 0 successor. It invokes only permanent no-map implementation_stage2.py to discover exact decision universe and stop at CAPABILITY_CENSUS_READY or honest durable BLOCKED; no tracked mutation, no repair, no Stage 2 map, no owner Gate 1, no release, no protected-main change."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
