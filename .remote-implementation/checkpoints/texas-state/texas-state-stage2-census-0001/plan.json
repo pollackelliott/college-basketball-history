@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "texas-state",
+  "created_at": "2026-10-30T15:54:52.518174+00:00",
+  "input_fingerprint": {
+    "sha256": "0f0d80f7849e850e206c0f394a4742ad71b7723867e8f404dcfbb4265680e112",
+    "git_head": "811cdc553810e43d4902f8cc68bd795632852cf7",
+    "files": {
+      "schools/texas-state/source-games.csv": "830ee49a10379969a80851c812a8ebca5f3ba82156e91bdf80fb62016add63dd",
+      "schools/texas-state/opponents.csv": "c829ae2a2da29fe091409351e1e23926df93e1008bb02e10faf0dae9e7bfb81d",
+      "schools/texas-state/venues.csv": "bb2680b10cf45142b09ee80de7cab465ded024ad450a2655f1aec504ee120ba1",
+      "schools/texas-state/conferences.csv": "3b85a3a25c04d137c34f14e62011a29f552ba74f37f0c0ca727234bc472b2fdc",
+      "schools/texas-state/notes.md": "b5449b86941a463f5f699777984c1b8b474bd5310797a1d48536c986a9e72ea7",
+      "schools/texas-state/source-notes.md": "90ea221f30d4ae02b18e88656147ac0689ab18b45115eb59c53937576b300e1d",
+      "data/canonical/games.csv": "cf0d53930f463fb9efec47ce78b37829a1b139509bb67aec41dc0b4f44fec27d",
+      "data/evidence/game-assertions.csv": "402a1f8272bde2d5fb60b01cbd5cd70203095b3e13c4516e87779f6f3397a06d",
+      "data/reconciliation/discrepancies.csv": "8d56325d586bc79dea806ea183c832d2210078f61f3c06e56b5da9f95bc86f3f",
+      "data/reference/programs.csv": "07ba86d9737e672e138ffd135695c7bfec8e82ea5050ad6374474938c8d1a51e",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "f84331937872a1a694f254f9fcc71dd288df068715d4524d5969e22e13d587df",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "184574d5b9116640bbaf8bafb4e66e927eaad290774a53d08a0755d6847158c6",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+      "tools/onboarding_plan.py": "a443e89ab264c8663a6141e144921de1b26d0eee3fab902e87fb96fce1a95144",
+      "tools/program_history.py": "91ffeb180024c0e0234a0e6d78c067a959a26afcc3f00e21307726ad77dc64ae",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: concordia-texas: ['Concordia (TX)', 'Concordia University Texas']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: dallas-baptist: ['Dallas Baptist', 'Dallas Baptist University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: our-lady-of-the-lake: ['Our Lady of the Lake', 'Our Lady of the Lake University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: phillips-university: ['Phillips', 'Phillips University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: southwestern-texas: ['Southwestern (TX)', 'Southwestern (Texas)', 'Southwestern Texas']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: texas-a-m-international: ['Texas A&M International', 'Texas A&M International University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: ut-tyler: ['UT Tyler', 'University of Texas at Tyler']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 1249,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 317,
+      "venues": 39,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: concordia-texas: ['Concordia (TX)', 'Concordia University Texas']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: dallas-baptist: ['Dallas Baptist', 'Dallas Baptist University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: our-lady-of-the-lake: ['Our Lady of the Lake', 'Our Lady of the Lake University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: phillips-university: ['Phillips', 'Phillips University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: southwestern-texas: ['Southwestern (TX)', 'Southwestern (Texas)', 'Southwestern Texas']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: texas-a-m-international: ['Texas A&M International', 'Texas A&M International University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: ut-tyler: ['UT Tyler', 'University of Texas at Tyler']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

@@ -1,0 +1,78 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "44c3625924c9121e97088bd9c15566c12f71405a4622bae658845f29d2698d58",
+    "implementation-stage2-status.json": "10b7cee098dae31aa5168cd26086bb4b63c21bb24a2583483cf4ff9a53a3f15a",
+    "plan.json": "7aa2908f856a10a649662ee1e2f97d80b7fe50824be9e8585a44b1d19cd1c8b1",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "a212621c45d7e3f28cfaf23bd59be0677e8612470221a684ef1d41e3abd65edb"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "44c3625924c9121e97088bd9c15566c12f71405a4622bae658845f29d2698d58",
+    "implementation-stage2-status.json": "154056f6f31276a1c0a3e5d286655a8cf2a02efd4eb203496f62c06b9b96e7b0",
+    "plan.json": "e34a0f28a6dd1cf61e0a7f9ce94afe7e31c865fa399ed602b88f6f33b5961c6a",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "addbac0c0abaeb856fda0cfad2c69b6527032b7a6e561a7e3cc364f41dad70a9"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "44c3625924c9121e97088bd9c15566c12f71405a4622bae658845f29d2698d58",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 7,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 7,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "texas-state"
+  ],
+  "phase0_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "phase0_successor_path": ".remote-implementation/successors/texas-state/texas-state-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "6216aa784c08275b2172f6e23621ff9a992fb9b2cc6b326f8eb6adf00541a5ef",
+  "preflight": {
+    "blocker_count": 7,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/texas-state/plan.json",
+    "review_path": ".onboarding/texas-state/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "request_id": "texas-state-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/texas-state-onboarding",
+  "target_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "target_tree_sha": "a4300bbbbb2245aa6f64d1f2466e1d415590f92c",
+  "tracked_mutation_proof": {
+    "after_head_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+    "after_status": "",
+    "after_tree_sha": "a4300bbbbb2245aa6f64d1f2466e1d415590f92c",
+    "before_head_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+    "before_status": "",
+    "before_tree_sha": "a4300bbbbb2245aa6f64d1f2466e1d415590f92c",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

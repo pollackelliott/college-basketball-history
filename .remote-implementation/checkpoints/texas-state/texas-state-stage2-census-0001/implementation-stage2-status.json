@@ -1,0 +1,44 @@
+{
+  "blockers": [
+    "historical opponent display conflict: concordia-texas: ['Concordia (TX)', 'Concordia University Texas']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: dallas-baptist: ['Dallas Baptist', 'Dallas Baptist University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: our-lady-of-the-lake: ['Our Lady of the Lake', 'Our Lady of the Lake University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: phillips-university: ['Phillips', 'Phillips University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: southwestern-texas: ['Southwestern (TX)', 'Southwestern (Texas)', 'Southwestern Texas']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: texas-a-m-international: ['Texas A&M International', 'Texas A&M International University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: ut-tyler: ['UT Tyler', 'University of Texas at Tyler']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/texas-state-811cdc553810",
+  "capability_census": {
+    "path": ".onboarding/texas-state/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
+  "integration_base_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "integration_semantic_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "preflight": {
+    "blocker_count": 7,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/texas-state/plan.json",
+    "review_path": ".onboarding/texas-state/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
