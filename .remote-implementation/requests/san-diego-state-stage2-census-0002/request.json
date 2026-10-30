@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "san-diego-state-stage2-census-0002",
+  "school_key": "san-diego-state",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "80e063d0fadb259840b978ebef6e2cf28d786b05",
+  "previous_control_state_sha256": "5e5c4d6d821a6540cc36028bf5109aabec70a39ecd5a5cb482e61a21db004eba",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/san-diego-state/san-diego-state-phase0-0001/successor-manifest.json",
+    "sha256": "68baeefbaf16bf8a46fe94964cbc493e1ccf5420f19751651591e77c41fa8470"
+  },
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "creation_provenance": {
+    "origin": "San Diego State serialized Implementation — corrected read-only Stage 2 census transport binding after pre-acceptance rejection",
+    "authorization": "Owner Proceed authorizes only the bounded Stage 2 read-only capability census after verified Phase 0. The first attempted request san-diego-state-stage2-census-0001 failed at STALE_CONTROL_STATE_HASH before durable acceptance, had no checkpoint and no tracked mutation; GitHub Actions run 40985717130. This distinct request corrects only the exact raw control-state SHA-256 binding, retaining the same protected main, onboarding target, Integration Freeze, semantic snapshot and read-only authority. No Research change, tracked repair, recommendation map, rehearsal, owner gate, release or recovery request."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
