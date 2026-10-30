@@ -527,10 +527,20 @@ def _projection(
                 ),
                 "normalized_opponent_key": opponent_key,
                 "normalized_opponent_name": opponent_name,
-                "team_score": _first(row, "team_score", "wagner_points", "dayton_score"),
+                "team_score": _first(
+                    row, "team_score", "wagner_points", "dayton_score"
+                ),
                 "opponent_score": _first(row, "opponent_score", "opponent_points"),
-                "played_result": _first(row, "played_result", "on_court_result", "source_result", "result"),
-                "overtime_periods": _project_overtime(_first(row, "overtime_periods", "overtime")),
+                "played_result": _first(
+                    row,
+                    "played_result",
+                    "on_court_result",
+                    "source_result",
+                    "result",
+                ),
+                "overtime_periods": _project_overtime(
+                    _first(row, "overtime_periods", "overtime")
+                ),
                 "source_site_candidate": _first(
                     row, "source_site_candidate", "source_site_token"
                 ),
@@ -658,7 +668,12 @@ def _semantic_projection_defects(
         "season_label": ("season_label", "season"),
         "team_score": ("team_score", "wagner_points", "dayton_score"),
         "opponent_score": ("opponent_score", "opponent_points"),
-        "played_result": ("played_result", "on_court_result", "source_result", "result"),
+        "played_result": (
+            "played_result",
+            "on_court_result",
+            "source_result",
+            "result",
+        ),
         "source_page": ("source_page", "source_pdf_page", "source_locator"),
     }
     defects = []
