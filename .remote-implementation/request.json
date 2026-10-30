@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-stage2-preseal-rehearsal-0001",
+  "request_id": "texas-state-stage2-gate1-seal-0001",
   "school_key": "texas-state",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "3a7e0767f434935d45b31e5659bd9fa5dc4b14b1",
-  "previous_control_state_sha256": "aa9f12dd964f92ef8bab48c8d802977b6da3b9acd43366b6609f928f22e271bb",
+  "operation": "STAGE2_GATE1_SEAL",
+  "previous_control_state_commit": "178df15f3a2450833e6575e71ef7ec62a865a8e3",
+  "previous_control_state_sha256": "d62dbbd607ffc481286372a5b4b3b52b5de61a5d1674565aabec41e429bb0bb0",
   "expected_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
   "target_branch": "data/texas-state-onboarding",
   "target_sha": "fac90846e9874a6b183d240116594a9cead9f11b",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "06bd4d7fb84754693c79242ffde2eef8bcc997a45d4e5e989ba89cf35ce11b30"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "92811436a83af7f6e3e2f0e5bd378b7f9605a3f6f67203589cf6ef23c297f385"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/texas-state/texas-state-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "fa44bf8a7b1a6e4150e2e74bab4f93475963962e7e83e774f697af37745dbeb4"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/texas-state/texas-state-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "56b5a4fa674e871f406ba5e081949fb6d59ceb35ffea2c181c342b4fc190b251"
   },
   "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
   "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
@@ -24,9 +24,11 @@
   "approved_plan_hash_preview": "a413fc509ecc62a9055c64d96bf6e3e62b56f0efff31c82d2b1ff510ba50eda4",
   "filled_review_sha256": "4a1f7ffe131030205f4be4a43b395d4db8ef770bf87fcee7d5bafce25b39c675",
   "decision_id_set_sha256": "997fda6e1aeaea02bd9ac115d51afa32c5dcb6ae182d0a433ec57b2e98571575",
+  "owner_gate_1_approval_sha256": "934efc5ff45f34faeab6f1bd02ff346c001685644b528cc541010d95b48cd47a",
+  "equivalence_sha256": "c1a9e327ef59a27b47b9408622fa9ae76af9ec48bddc5e890783c621dd455d48",
   "creation_provenance": {
-    "origin": "ChatGPT Texas State serialized Implementation lane — exact fresh-verified Gate 1 fill",
-    "authorization": "Owner explicitly said Proceed after Gate 1 fill was completed and fresh verified. Authorizes exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against the same approved 10-decision map and filled-review checkpoint. Permanent rehearsal and independent fresh verification only. Does not authorize cryptographic seal, sealed apply, tracked mutation, release, Preview, Owner Gate 2, merge, Production, recovery, or unrelated action."
+    "origin": "ChatGPT Texas State serialized Implementation lane — cryptographic Owner Gate 1 seal",
+    "authorization": "Owner said Proceed after exact fresh-verified Texas State Stage 2 pre-seal rehearsal reached READY_TO_SEAL, with explicit Owner Gate 1 approval already durably recorded on the identical 10-decision map. Authorizes one guarded seal-only STAGE2_GATE1_SEAL operation, replaying permanent current-main preseal and invoking unchanged onboard_school.py --approve to seal exact approval metadata. No tracked basketball mutation, sealed apply, unrelated gate, Preview, Owner Gate 2, merge, release, Production, or recovery."
   },
   "authority": {
     "owner_gate_1": false,
@@ -39,8 +41,8 @@
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": true,
-    "stage2_gate1_seal": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": true,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
