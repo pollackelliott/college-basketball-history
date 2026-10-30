@@ -166,18 +166,19 @@
     "texas-state-stage2-sealed-apply-0001",
     "texas-state-release-readiness-0001",
     "texas-state-release-preview-verify-0001",
-    "texas-state-release-gate2-approval-0001"
+    "texas-state-release-gate2-approval-0001",
+    "texas-state-release-production-proof-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PRODUCTION_PROOF",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "texas-state-release-production-proof-0001",
+  "active_request_sha256": "4deefcfa4166fe3731e7e5915a41009a57d6afab74c20db50c695509dda9dec3",
+  "active_school_key": "texas-state",
+  "active_target_branch": "data/texas-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -357,8 +358,11 @@
     "target_branch": "data/texas-state-onboarding",
     "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41117210586",
+  "lock_acquisition_request_commit": "f5918dfa6e7136c3cf48bf7ee5a854517eebcb33",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PRODUCTION_RUNNING"
 }
