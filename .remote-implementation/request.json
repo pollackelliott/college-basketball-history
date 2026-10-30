@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-stage1-0001",
+  "request_id": "san-diego-state-phase0-0001",
   "school_key": "san-diego-state",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "436d09be34e90d98030dd23b34e675e212979b26",
-  "previous_control_state_sha256": "8674f4fb219c302abf7b6e1879aedc33c3f09041869a180a013687691644b4bc",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "b2489423b9f030e51ba1b7ec7b0c3963c4895234",
+  "previous_control_state_sha256": "7e1df53d4f1b7074bbe6ff3d7ab0292d4d4c66a30a042ad2006b9d543560c486",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
   "research_checkpoint": {
     "sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
     "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
@@ -17,12 +18,25 @@
       "part_count": 7
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage1-0001/checkpoint-manifest.json",
+    "sha256": "19e673c228b09b8c8a08a634e365ff775f9d24d1f82788067fd9f964efba0b22"
+  },
+  "history_scope": {
+    "start_season": "1970-1971",
+    "basis": "FIRST_TOP_LEVEL_SEASON",
+    "intervals": "",
+    "notes": "Owner-confirmed San Diego State top-level scope 1970-71 onward; accepted corrected audited Research Freeze successor expressly preserves 1970-71+. Current protected-main program-top-level-scope.csv already matches. Do not infer a different scope or reopen historical Research."
+  },
   "creation_provenance": {
-    "origin": "San Diego State existing serialized Implementation lane — Control Center accepted audited successor Research Freeze intake",
-    "authorization": "The Control Center expressly accepted the corrected SDSU six-file successor SHA cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852 for Implementation intake; retain original Freeze predecessor SHA 52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651 and original accepted research_base_sha. Run one read-only permanent Stage 1 current-main reconciliation inventory only; no historical changes, Phase 0, Stage 2, venue maintenance, owner gates, protected-main writes or tracked basketball mutations. The exact ZIP is transported byte-identically from runner-compatible immutable Git parts; provenance acceptance stored at recovery branch commit e766784d028f4fbe7d54366308a5d0f69e58d4e9."
+    "origin": "San Diego State serialized Implementation — bounded guarded Phase 0 following permanent Stage 1 PASS",
+    "authorization": "Owner explicitly instructed Proceed with one San Diego State Phase 0 operation including Integration Freeze, ordinary target-school reference reconciliation, guarded staging, and independent successor verification. Control Center explicitly accepted audited Research Freeze successor ZIP SHA cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852; original accepted Research Freeze SHA 52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651 remains immutable historical predecessor. Exact Stage 1 san-diego-state-stage1-0001 checkpoint PASS zero blockers, no shared maintenance, no ambiguous identity, on main 619daf5a96e9acfc80a8fc74b381f50bdc0599fc. Authorize only guarded Phase 0, safe new target-school venue registrations, program top-level scope reconciliation, permanent staging and validation, create-once onboarding branch publication, write-ahead/CAS, lock release, and independent fresh verification; no Stage 2, Research reopening, maintenance PR, owner gate, Preview, merge, Production, or protected-main mutation."
   },
   "authority": {
-    "phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
@@ -36,9 +50,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false
+    "venue_identity_maintenance": false
   }
 }
