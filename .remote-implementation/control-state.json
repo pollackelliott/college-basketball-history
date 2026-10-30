@@ -176,7 +176,7 @@
     "saint-louis-phase0-0003"
   ],
   "active_expected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
-  "active_lock_commit": null,
+  "active_lock_commit": "b97d82021102d4b659ae829a3ad833369793b350",
   "active_lock_owner": "github-actions:41140082041:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
