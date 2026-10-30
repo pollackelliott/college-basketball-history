@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage1-0001",
+  "request_id": "saint-louis-stage1-0002",
   "operation": "STAGE1_INVENTORY",
   "school_key": "saint-louis",
-  "previous_control_state_commit": "623ef603e3ee053997af07b9dc455f5ab030f25c",
-  "previous_control_state_sha256": "e73229e9e0b1257f5e10b7c96139cb4467c4a419dbaa158d9af171046a7170c8",
-  "expected_protected_main_sha": "f3d359e47b5a785ac448359398d0a6f13030a65b",
+  "previous_control_state_commit": "a5ab4d943ec235a517bb87fefaa9984050f2d180",
+  "previous_control_state_sha256": "b5848d00a1cda0377b07f1830135a61f6aac79ce265756689fa0aa876c08984d",
+  "expected_protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
   "research_checkpoint": {
     "sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
     "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
@@ -20,8 +20,8 @@
   "venue_reconciliation": null,
   "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation lane, continuing owner-authorized Stage 1 after Control Center generic Research-acceptance repair PR #411",
-    "authorization": "Owner explicitly designated one final accepted unchanged Saint Louis RESEARCH_FROZEN ZIP; Control Center repaired the narrow contradictory raw-score gate at exact main f3d359e47b5a785ac448359398d0a6f13030a65b and authorized same-phase continuation. Exact 36 Git blobs were independently compared with owner-uploaded ZIP byte segments. Invoke the permanent Stage 1 entrypoint, which first runs permanent research_portfolio_report acceptance against exact ZIP SHA and stops if not PASS, then emit one read-only current-main reconciliation inventory. No Research change, Phase 0, shared/global mutation, Stage 2, owner gate, release or protected-main mutation authority."
+    "origin": "Saint Louis serialized Implementation; owner-authorized Phase 0 internal current-main Stage 1 refresh",
+    "authorization": "Owner explicitly authorized Saint Louis Integration Freeze / Phase 0. Protected main advanced after authenticated Stage 1 PASS to dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc by generic early-history PR #412. Repository demands same exact protected-main Stage 1 PASS for guarded Phase 0; rerun unchanged Research Freeze against current permanent tool before Phase 0. This request is read-only. No new Research, Phase 0 mutation, owner gate, global maintenance, release or Stage 2 authority in the refresh operation."
   },
   "authority": {
     "phase0": false,
