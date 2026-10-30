@@ -15,6 +15,12 @@ from onboarding_plan import (  # noqa: E402
     _project_accomplishment_games_with_existing_seasons,
     _ncaa_round_patch_decisions,
 )
+from program_history import (  # noqa: E402
+    NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+    derive_ncaa_accomplishments,
+    ncaa_game_counts_as_appearance,
+)
+
 
 
 def ncaa_game(
@@ -81,6 +87,100 @@ class HistoricalRoundAccomplishmentCrosscheckTests(unittest.TestCase):
                 "",
             ),
         ]
+
+    def test_research_accepted_nonbracket_qualifier_does_not_count_as_appearance(self):
+        source = {
+            "source_program_key": "usc",
+            "source_game_id": "USC-1947-QUALIFIER",
+            "season_label": "1946-1947",
+            "game_date": "1947-03-18",
+            "normalized_opponent_key": "oklahoma",
+            "team_score": "41",
+            "opponent_score": "47",
+            "played_result": "L",
+            "overtime_periods": "0",
+            "curated_site_type": "NEUTRAL",
+            "curated_venue_name": "",
+            "city": "Kansas City",
+            "state": "MO",
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "",
+            "normalization_status": "RESEARCH_ACCEPTED",
+            "notes": (
+                "Stage 6 NCAA-round audit: this was a district playoff/qualifier "
+                "rather than a national-bracket round; standardized NCAA round "
+                "intentionally remains blank."
+            ),
+        }
+
+        predicted = _accomplishment_crosscheck_game(
+            source,
+            ingest_school.NEW_GAME,
+            "",
+            {},
+            {},
+            {},
+            "PREFLIGHT-USC-1947-QUALIFIER",
+        )
+
+        self.assertIn(
+            NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+            predicted["notes"],
+        )
+        self.assertFalse(ncaa_game_counts_as_appearance(predicted))
+
+        derived = derive_ncaa_accomplishments(
+            [predicted],
+            "usc",
+            "1906-1907",
+        )
+        self.assertEqual(derived["ncaa_tournament_appearances"], 0)
+        self.assertEqual(derived["ncaa_nonappearance_qualifier_game_count"], 1)
+        self.assertEqual(derived["incomplete_reasons"], [])
+
+    def test_nonbracket_qualifier_does_not_inherit_reciprocal_round(self):
+        source = {
+            "source_program_key": "usc",
+            "source_game_id": "USC-1947-QUALIFIER",
+            "season_label": "1946-1947",
+            "game_date": "1947-03-18",
+            "normalized_opponent_key": "oklahoma",
+            "team_score": "41",
+            "opponent_score": "47",
+            "played_result": "L",
+            "overtime_periods": "0",
+            "curated_site_type": "NEUTRAL",
+            "curated_venue_name": "",
+            "city": "Kansas City",
+            "state": "MO",
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "",
+            "normalization_status": "RESEARCH_ACCEPTED",
+            "notes": (
+                "district playoff/qualifier rather than a national-bracket round"
+            ),
+        }
+        canonical = ncaa_game(
+            "CBBG-QUALIFIER-CONFLICT",
+            "1946-1947",
+            "1947-03-18",
+            "R64",
+            opponent="oklahoma",
+            winner="oklahoma",
+        )
+
+        predicted = _accomplishment_crosscheck_game(
+            source,
+            ingest_school.CONFIDENT,
+            "CBBG-QUALIFIER-CONFLICT",
+            {"CBBG-QUALIFIER-CONFLICT": canonical},
+            {},
+            {},
+            "PREFLIGHT-USC-1947-QUALIFIER",
+        )
+
+        self.assertEqual(predicted["postseason_round"], "")
+        self.assertFalse(ncaa_game_counts_as_appearance(predicted))
 
     def test_confident_blank_source_round_inherits_known_canonical_round(self):
         source = {
