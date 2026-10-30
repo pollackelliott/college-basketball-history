@@ -1,0 +1,21 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "request_id": "texas-state-phase0-0001",
+  "research_checkpoint_sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
+  "research_member_sha256": {
+    "conferences.csv": "3b85a3a25c04d137c34f14e62011a29f552ba74f37f0c0ca727234bc472b2fdc",
+    "notes.md": "93abb996190a8745f4e2ce3de7f29c533df189c52457878f51d40d494fe8483d",
+    "opponents.csv": "c829ae2a2da29fe091409351e1e23926df93e1008bb02e10faf0dae9e7bfb81d",
+    "source-games.csv": "830ee49a10379969a80851c812a8ebca5f3ba82156e91bdf80fb62016add63dd",
+    "source-notes.md": "90ea221f30d4ae02b18e88656147ac0689ab18b45115eb59c53937576b300e1d",
+    "venues.csv": "8aafce3418f9a025bc752a3b0c116b00962d50bf0ce4310ded84f59aeec08795"
+  },
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "sidecars": {
+    "conference-reconciliation.json": "00b2cdbe29a5737b6168b9cabfe274f216867520d18e136aa53a951f06d608ea",
+    "stage1-reconciliation.json": "9813e56cd7ba404d0d2ae6c8da8f025d7c333d17cedb83336a3d44bbf1368a93"
+  },
+  "stage1_status": "PASS"
+}
