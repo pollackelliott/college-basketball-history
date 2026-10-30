@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-stage2-census-0001",
+  "request_id": "san-diego-state-stage2-census-0002",
   "school_key": "san-diego-state",
   "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "3db0a15fe313d7bed813797ac4bd9d634349c099",
-  "previous_control_state_sha256": "7e74d96a28f6c52fd016788fbb4de2823170d51a965a8d22a1649508ea044dc4",
+  "previous_control_state_commit": "80e063d0fadb259840b978ebef6e2cf28d786b05",
+  "previous_control_state_sha256": "5e5c4d6d821a6540cc36028bf5109aabec70a39ecd5a5cb482e61a21db004eba",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "target_branch": "data/san-diego-state-onboarding",
   "target_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
@@ -16,8 +16,8 @@
   "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
   "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
   "creation_provenance": {
-    "origin": "San Diego State serialized Implementation — one bounded read-only Stage 2 capability census after independently verified Phase 0",
-    "authorization": "Owner issued Proceed after independently fresh-verified San Diego State Phase 0 san-diego-state-phase0-0001 on exact main 619daf5a96e9acfc80a8fc74b381f50bdc0599fc and exact onboarding head 5be69f22619b972c5411bbd66711de4e6568f9c5. Preserve Control Center-accepted audited Research Freeze successor SHA cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852, original predecessor Freeze SHA 52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651, original immutable research_base_sha 90084b27a4a357ea5c88ccab9d729d489fc2c912, exact Integration Freeze and source-game semantic snapshot. Execute only unchanged permanent read-only Stage 2 capability census. Preserve exact checkpoint and independent fresh verification and stop at CAPABILITY_CENSUS_READY or honest BLOCKED. Do not mutate tracked basketball files, normalize displays, create recommendation map, rehearse proposal, invoke Owner Gate 1, seal/apply, begin Phase 0 again, release, merge, or use recovery authority."
+    "origin": "San Diego State serialized Implementation — corrected read-only Stage 2 census transport binding after pre-acceptance rejection",
+    "authorization": "Owner Proceed authorizes only the bounded Stage 2 read-only capability census after verified Phase 0. The first attempted request san-diego-state-stage2-census-0001 failed at STALE_CONTROL_STATE_HASH before durable acceptance, had no checkpoint and no tracked mutation; GitHub Actions run 40985717130. This distinct request corrects only the exact raw control-state SHA-256 binding, retaining the same protected main, onboarding target, Integration Freeze, semantic snapshot and read-only authority. No Research change, tracked repair, recommendation map, rehearsal, owner gate, release or recovery request."
   },
   "authority": {
     "owner_gate_1": false,
