@@ -159,7 +159,7 @@
     "texas-state-phase0-0001"
   ],
   "active_expected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
-  "active_lock_commit": null,
+  "active_lock_commit": "97cfbc224aa5ebad50cf5aac9ffbd7bdf78b9ded",
   "active_lock_owner": "github-actions:41083520422:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
