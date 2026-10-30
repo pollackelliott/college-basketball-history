@@ -121,18 +121,33 @@ def _archive(checkpoint: Path, expected_sha256: str) -> tuple[dict[str, bytes], 
     return members, actual
 
 
-def _verify_manifest(members: dict[str, bytes]) -> list[str]:
+def _verify_manifest(
+    members: dict[str, bytes],
+    *,
+    allow_legacy_parent_manifest: bool = False,
+) -> list[str]:
     defects: list[str] = []
-    if "stage1-manifest.json" not in members:
-        return ["MISSING_STAGE1_MANIFEST"]
+    manifest_names = ["stage1-manifest.json"]
+    if allow_legacy_parent_manifest:
+        manifest_names.append("checkpoint-manifest.json")
+    present = [name for name in manifest_names if name in members]
+    if not present:
+        return [
+            "MISSING_STAGE1_MANIFEST"
+            if not allow_legacy_parent_manifest
+            else "MISSING_STAGE1_OR_CHECKPOINT_MANIFEST"
+        ]
+    if len(present) != 1:
+        return ["AMBIGUOUS_MANIFEST_TOPOLOGY"]
+    manifest_name = present[0]
     try:
-        manifest = _json(members["stage1-manifest.json"])
+        manifest = _json(members[manifest_name])
     except (json.JSONDecodeError, UnicodeDecodeError, TypeError):
         return ["INVALID_STAGE1_MANIFEST"]
     tracked = manifest.get("members")
     if not isinstance(tracked, dict):
         return ["INVALID_MANIFEST_MEMBERS"]
-    actual_names = set(members) - {"stage1-manifest.json"}
+    actual_names = set(members) - {manifest_name}
     if set(tracked) != actual_names:
         defects.append("MANIFEST_MEMBER_SET_MISMATCH")
     for name, meta in tracked.items():
@@ -158,6 +173,35 @@ def _required(
         )
         return b""
     return data
+
+
+def _required_parent_ledger(
+    members: dict[str, bytes], defects: list[str]
+) -> bytes:
+    present = [
+        name
+        for name in (
+            "structured-stage1-ledger.csv",
+            "stage1-ledger.csv",
+        )
+        if name in members
+    ]
+    if not present:
+        defects.append("MISSING_PARENT_STAGE1_LEDGER")
+        return b""
+    if len(present) != 1:
+        defects.append("AMBIGUOUS_PARENT_STAGE1_LEDGER")
+        return b""
+    return members[present[0]]
+
+
+def _census_observed_count(row: dict[str, str]) -> int:
+    raw = str(row.get("observed_games", "") or "").strip()
+    if not raw:
+        raw = str(
+            row.get("identified_competitive_games", "") or ""
+        ).strip()
+    return int(raw)
 
 
 def _row_result(
@@ -269,28 +313,37 @@ def audit_candidate(
     except (OSError, ValueError, zipfile.BadZipFile) as exc:
         return {"status": "FAIL", "defects": [str(exc)]}
     defects.extend(
-        "PARENT_" + item for item in _verify_manifest(parent_members)
+        "PARENT_" + item
+        for item in _verify_manifest(
+            parent_members,
+            allow_legacy_parent_manifest=True,
+        )
     )
     defects.extend(
         "CANDIDATE_" + item
         for item in _verify_manifest(candidate_members)
     )
 
-    for name in (
+    parent_ledger = _required_parent_ledger(parent_members, defects)
+    candidate_ledger = _required(
+        candidate_members,
         "structured-stage1-ledger.csv",
-        "season-census.csv",
+        defects,
+    )
+    if parent_ledger != candidate_ledger:
+        defects.append(
+            "CANDIDATE_HISTORICAL_CORE_DRIFT:"
+            "structured-stage1-ledger.csv"
+        )
+    if parent_members.get("season-census.csv") != candidate_members.get(
+        "season-census.csv"
     ):
-        if parent_members.get(name) != candidate_members.get(name):
-            defects.append("CANDIDATE_HISTORICAL_CORE_DRIFT:" + name)
+        defects.append(
+            "CANDIDATE_HISTORICAL_CORE_DRIFT:season-census.csv"
+        )
 
     try:
-        ledger = _csv(
-            _required(
-                candidate_members,
-                "structured-stage1-ledger.csv",
-                defects,
-            )
-        )
+        ledger = _csv(candidate_ledger)
         census = _csv(
             _required(candidate_members, "season-census.csv", defects)
         )
@@ -520,9 +573,7 @@ def audit_candidate(
             )
         else:
             try:
-                observed_count = int(
-                    str(c.get("observed_games", "")).strip()
-                )
+                observed_count = _census_observed_count(c)
             except ValueError:
                 observed_count = -1
             if observed_count != len(
