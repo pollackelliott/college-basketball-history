@@ -405,13 +405,45 @@ def normalize_jurisdiction(value: str) -> str:
     return US_STATE_ABBREVIATIONS.get(normalized, normalized)
 
 
+# A handful of existing foreign venues use a country code in the global
+# registry while incoming Research may retain a more precise region name.
+# This is not a general waiver of physical-venue geography. Only a known
+# country/subdivision pair, the *same exact venue key*, and the *same populated
+# city* make the representations mechanically compatible.
+_COUNTRY_SUBDIVISION_EQUIVALENTS = {
+    "MX": {"JALISCO", "QUINTANA ROO"},
+}
+
+
+def same_venue_country_subdivision_representation(
+    local: dict[str, str],
+    global_row: dict[str, str],
+) -> bool:
+    local_key = local.get("venue_key", "").strip()
+    global_key = global_row.get("venue_key", "").strip()
+    local_city = local.get("city", "").strip().casefold()
+    global_city = global_row.get("city", "").strip().casefold()
+    if not (local_key and local_key == global_key and local_city and local_city == global_city):
+        return False
+    local_state = normalize_jurisdiction(local.get("state", ""))
+    global_state = normalize_jurisdiction(global_row.get("state", ""))
+    return any(
+        (local_state == country and global_state in subdivisions)
+        or (global_state == country and local_state in subdivisions)
+        for country, subdivisions in _COUNTRY_SUBDIVISION_EQUIVALENTS.items()
+    )
+
+
 def jurisdiction_compatible(
     local: dict[str, str],
     global_row: dict[str, str],
 ) -> bool:
     lstate = normalize_jurisdiction(local.get("state", ""))
     gstate = normalize_jurisdiction(global_row.get("state", ""))
-    return not (lstate and gstate and lstate != gstate)
+    return (
+        not (lstate and gstate and lstate != gstate)
+        or same_venue_country_subdivision_representation(local, global_row)
+    )
 
 
 def geography_compatible(
@@ -425,7 +457,7 @@ def geography_compatible(
     if lcity and gcity and lcity != gcity:
         return False
     if lstate and gstate and lstate != gstate:
-        return False
+        return same_venue_country_subdivision_representation(local, global_row)
     return True
 
 

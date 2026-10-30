@@ -131,6 +131,54 @@ class Stage1VenueInventoryTests(unittest.TestCase):
         self.assertIn("CANONICAL_GEOGRAPHY_NORMALIZATION", row["issues"])
         self.assertEqual(local["city"], "Lake Buena Vista")
 
+
+    def test_foreign_country_and_subdivision_exact_venue_reuse_is_safe(self):
+        local = local_venue(
+            "puerto-vallarta-international-convention-center",
+            "Puerto Vallarta International Convention Center",
+            city="Puerto Vallarta",
+            state="Jalisco",
+        )
+        global_row = global_venue(
+            "VEN-000358",
+            "puerto-vallarta-international-convention-center",
+            "Puerto Vallarta International Convention Center",
+            "Puerto Vallarta",
+            "MX",
+        )
+        report = venue_reconciliation_inventory([local], [global_row], [])
+        self.assertEqual(report["blocker_count"], 0)
+        row = report["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["resolution"], "REUSE_EXACT_KEY")
+        self.assertEqual(row["target_venue_id"], "VEN-000358")
+        self.assertIn("CANONICAL_GEOGRAPHY_NORMALIZATION", row["issues"])
+        self.assertEqual(local["state"], "Jalisco")
+
+    def test_foreign_country_subdivision_requires_exact_key_and_city(self):
+        valid = local_venue(
+            "puerto-vallarta-international-convention-center",
+            "Puerto Vallarta International Convention Center",
+            city="Puerto Vallarta",
+            state="Jalisco",
+        )
+        global_row = global_venue(
+            "VEN-000358",
+            "puerto-vallarta-international-convention-center",
+            "Puerto Vallarta International Convention Center",
+            "Puerto Vallarta",
+            "MX",
+        )
+        cases = (
+            {**valid, "city": "Guadalajara"},
+            {**valid, "venue_key": "different-puerto-vallarta-building"},
+            {**valid, "state": "Oaxaca"},
+        )
+        for local in cases:
+            with self.subTest(local=local["venue_key"], state=local["state"], city=local["city"]):
+                report = venue_reconciliation_inventory([local], [global_row], [])
+                self.assertNotEqual(report["rows"][0]["classification"], "SAFE_REPRESENTATION_REUSE")
+
     def test_research_deferred_exact_key_is_one_shared_maintenance_blocker(self):
         local = local_venue(
             "the-pit",
