@@ -498,7 +498,9 @@ def project_administrative_status(
     if target is None:
         return status, note
 
-    played = _first_parent_value(row, "played_result", "on_court_result", "source_result", "result")
+    played = _first_parent_value(
+        row, "played_result", "on_court_result", "source_result", "result"
+    )
     provenance = (
         "Stage 4 representation normalization: accepted legacy "
         f"administrative_status {status} projected to {target}; "
@@ -719,7 +721,9 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "normalized_opponent_key",
             "opponent_key",
         ),
-        "team_score": _first_parent_value(row, "team_score", "wagner_points", "dayton_score"),
+        "team_score": _first_parent_value(
+            row, "team_score", "wagner_points", "dayton_score"
+        ),
         "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points"),
         "played_result": _first_parent_value(
             row, "played_result", "on_court_result", "source_result", "result"
