@@ -919,6 +919,30 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             "REUSE_REGISTERED_ALIAS",
         )
 
+
+    def test_foreign_exact_key_country_subdivision_rebase_uses_global_geography(self):
+        venue = global_venue(
+            "VEN-000358",
+            "puerto-vallarta-international-convention-center",
+            "Puerto Vallarta International Convention Center",
+            "Puerto Vallarta",
+            "MX",
+        )
+        local = {
+            **local_venue("", city="Puerto Vallarta", state="Jalisco"),
+            "venue_key": venue["venue_key"],
+            "canonical_name": venue["display_name"],
+        }
+        report = venue_reconciliation_inventory([local], [venue], [])
+        self.assertEqual(report["blocker_count"], 0)
+        rebased, global_rows, _names, mappings = rebase_venues(
+            "test-school", [local], [venue], []
+        )
+        self.assertEqual(rebased[0]["venue_id"], "VEN-000358")
+        self.assertEqual(rebased[0]["state"], "MX")
+        self.assertEqual(global_rows[0]["state"], "MX")
+        self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
+
     def test_exact_key_reuse_still_blocks_jurisdiction_conflict(self):
         globals_ = [
             global_venue(
