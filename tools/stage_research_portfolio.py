@@ -753,7 +753,6 @@ def venue_reconciliation_inventory(
     results: list[dict[str, Any]] = []
     existing_school_venues = existing_school_venues or []
     venue_reconciliation = venue_reconciliation or {}
-    source_games = source_games or []
     reserved_keys = {
         row.get("venue_key", "").strip()
         for row in [*global_rows, *existing_school_venues, *local_rows]
@@ -1255,6 +1254,7 @@ def rebase_venues(
     used_ids = set(global_by_id)
     existing_school_venues = existing_school_venues or []
     venue_reconciliation = venue_reconciliation or {}
+    source_games = source_games or []
     reserved_keys = {
         row.get("venue_key", "").strip()
         for row in [*global_rows, *existing_school_venues, *local_rows]
