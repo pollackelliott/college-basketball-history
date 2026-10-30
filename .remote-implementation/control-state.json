@@ -147,15 +147,15 @@
   "active_lock_commit": "aaaaebc7abd336910a2c3d7b199ea334b9154e74",
   "active_lock_owner": "github-actions:40984958979:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "active_prepared_tree_sha": "afb3f4b36e91663cc9fc622a5ec54c09c2d26b6e",
   "active_request_id": "san-diego-state-phase0-0001",
   "active_request_sha256": "adaede3a1f0d9c206f7d93951b373027171ced81c3e51663f4354af12fa5ebaf",
   "active_school_key": "san-diego-state",
   "active_target_branch": "data/san-diego-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/san-diego-state/san-diego-state-phase0-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "61e76448b92a527fb9626a9da5f1c140ff740f9aa8c7660aa52df9d2816b2b0a",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -307,5 +307,5 @@
   "lock_acquisition_request_commit": "cbbef1f250868fdc90c19652842c00df919bfb38",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

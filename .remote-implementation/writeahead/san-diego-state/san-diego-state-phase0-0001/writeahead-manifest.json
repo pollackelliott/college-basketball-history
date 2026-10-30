@@ -1,0 +1,568 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/san-diego-state/conferences.csv",
+    "schools/san-diego-state/notes.md",
+    "schools/san-diego-state/opponents.csv",
+    "schools/san-diego-state/source-games.csv",
+    "schools/san-diego-state/source-notes.md",
+    "schools/san-diego-state/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "7e3623065bacf60347a00b1224d982085de7cff3b836bb589bf7a39edcc52b04",
+    "data/reference/venue-names.csv": "37b00e33a275f14b87076a2bfe9a0ebc6f988dbe831daf04f3c3bf69fa1919b3",
+    "data/reference/venues.csv": "2f4a0cd7811efdf11598b040bac5971e3d9062c745374cb0478837a331e137f2",
+    "schools/san-diego-state/conferences.csv": "0bfa3fe3b2e57f686c4dc28185df595685643b39552bcba2d4e4b019b01a7e56",
+    "schools/san-diego-state/notes.md": "c73a98690926fae0d49cd917bebee88a18bfb8f19b4bd9fa0138c10d2f6b2de6",
+    "schools/san-diego-state/opponents.csv": "6773734732c85900f0fef57f55c59f598625904dc20f7bed4713ae187b03f31a",
+    "schools/san-diego-state/source-games.csv": "1104f669f765d0d48000a9121d45c492778a59a95a8b8f5dd5f0da22301feb65",
+    "schools/san-diego-state/source-notes.md": "ef0e9dabe05e055de7d92abc69ec8bd63eae7875109a201bde20ae3e5c37c00f",
+    "schools/san-diego-state/venues.csv": "81e3a89fb8c0276b410bcc5166157c65a57dbfc0f624f266fa8167c3a7d67d4a"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/san-diego-state/conferences.csv",
+    "schools/san-diego-state/notes.md",
+    "schools/san-diego-state/opponents.csv",
+    "schools/san-diego-state/source-games.csv",
+    "schools/san-diego-state/source-notes.md",
+    "schools/san-diego-state/venues.csv"
+  ],
+  "commit_message": "Add San Diego State onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "aaaaebc7abd336910a2c3d7b199ea334b9154e74",
+  "history_scope": {
+    "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Owner-confirmed San Diego State top-level scope 1970-71 onward; accepted corrected audited Research Freeze successor expressly preserves 1970-71+. Current protected-main program-top-level-scope.csv already matches. Do not infer a different scope or reopen historical Research.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1970-1971",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "1970-71+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "1970-71+",
+      "school": "San Diego State"
+    }
+  },
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "0bfa3fe3b2e57f686c4dc28185df595685643b39552bcba2d4e4b019b01a7e56",
+    "notes.md": "c73a98690926fae0d49cd917bebee88a18bfb8f19b4bd9fa0138c10d2f6b2de6",
+    "opponents.csv": "6773734732c85900f0fef57f55c59f598625904dc20f7bed4713ae187b03f31a",
+    "source-games.csv": "1104f669f765d0d48000a9121d45c492778a59a95a8b8f5dd5f0da22301feb65",
+    "source-notes.md": "ef0e9dabe05e055de7d92abc69ec8bd63eae7875109a201bde20ae3e5c37c00f",
+    "venues.csv": "81e3a89fb8c0276b410bcc5166157c65a57dbfc0f624f266fa8167c3a7d67d4a"
+  },
+  "prepared_commit_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "prepared_parent_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "prepared_tree_sha": "afb3f4b36e91663cc9fc622a5ec54c09c2d26b6e",
+  "program_alias_mapping": [],
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "repository_validation": "PASS",
+  "request_id": "san-diego-state-phase0-0001",
+  "request_sha256": "adaede3a1f0d9c206f7d93951b373027171ced81c3e51663f4354af12fa5ebaf",
+  "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+  "research_checkpoint_sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "sidecars": {
+    "integration-freeze.json": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+    "stage1-reconciliation.json": "30efedeccf85d2e206e96c11fdd967751cdbb374928f133b194cc1c88bb6d651"
+  },
+  "target_branch": "data/san-diego-state-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Amica Mutual Pavilion",
+      "final_venue_id": "VEN-000011",
+      "final_venue_key": "amica-mutual-pavilion",
+      "research_venue_id": "VEN-000011",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amica-mutual-pavilion"
+    },
+    {
+      "canonical_name": "Amway Center",
+      "final_venue_id": "VEN-000012",
+      "final_venue_key": "amway-center",
+      "research_venue_id": "VEN-000012",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amway-center"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "VEN-000386",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "Arena-Auditorium",
+      "final_venue_id": "VEN-000364",
+      "final_venue_key": "arena-auditorium",
+      "research_venue_id": "VEN-000364",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "arena-auditorium"
+    },
+    {
+      "canonical_name": "Ball Arena",
+      "final_venue_id": "VEN-000018",
+      "final_venue_key": "ball-arena",
+      "research_venue_id": "VEN-000018",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ball-arena"
+    },
+    {
+      "canonical_name": "Carlson Center",
+      "final_venue_id": "VEN-000466",
+      "final_venue_key": "carlson-center",
+      "research_venue_id": "VEN-000466",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carlson-center"
+    },
+    {
+      "canonical_name": "Crypto.com Arena",
+      "final_venue_id": "VEN-000051",
+      "final_venue_key": "crypto-com-arena",
+      "research_venue_id": "VEN-000051",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "crypto-com-arena"
+    },
+    {
+      "canonical_name": "Delta Center",
+      "final_venue_id": "VEN-000055",
+      "final_venue_key": "delta-center",
+      "research_venue_id": "VEN-000055",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "delta-center"
+    },
+    {
+      "canonical_name": "Desert Financial Arena",
+      "final_venue_id": "VEN-000056",
+      "final_venue_key": "desert-financial-arena",
+      "research_venue_id": "VEN-000056",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "desert-financial-arena"
+    },
+    {
+      "canonical_name": "Dickies Arena",
+      "final_venue_id": "VEN-000057",
+      "final_venue_key": "dickies-arena",
+      "research_venue_id": "VEN-000057",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dickies-arena"
+    },
+    {
+      "canonical_name": "Don Haskins Center",
+      "final_venue_id": "VEN-000325",
+      "final_venue_key": "don-haskins-center",
+      "research_venue_id": "VEN-000325",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "don-haskins-center"
+    },
+    {
+      "canonical_name": "Mortgage Matchup Center",
+      "final_venue_id": "VEN-000065",
+      "final_venue_key": "footprint-center",
+      "research_venue_id": "VEN-000065",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "footprint-center"
+    },
+    {
+      "canonical_name": "Golden 1 Center",
+      "final_venue_id": "VEN-000074",
+      "final_venue_key": "golden-1-center",
+      "research_venue_id": "VEN-000074",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "golden-1-center"
+    },
+    {
+      "canonical_name": "Hammons Student Center",
+      "final_venue_id": "VEN-000562",
+      "final_venue_key": "hammons-student-center",
+      "research_venue_id": "VEN-000562",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hammons-student-center"
+    },
+    {
+      "canonical_name": "Hec Edmundson Pavilion",
+      "final_venue_id": "VEN-000078",
+      "final_venue_key": "hec-edmundson-pavilion",
+      "research_venue_id": "VEN-000078",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hec-edmundson-pavilion"
+    },
+    {
+      "canonical_name": "Hinkle Fieldhouse",
+      "final_venue_id": "VEN-000080",
+      "final_venue_key": "hinkle-fieldhouse",
+      "research_venue_id": "VEN-000080",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hinkle-fieldhouse"
+    },
+    {
+      "canonical_name": "Honda Center",
+      "final_venue_id": "VEN-000082",
+      "final_venue_key": "honda-center",
+      "research_venue_id": "VEN-000082",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "honda-center"
+    },
+    {
+      "canonical_name": "INTRUST Bank Arena",
+      "final_venue_id": "VEN-000090",
+      "final_venue_key": "intrust-bank-arena",
+      "research_venue_id": "VEN-000090",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "intrust-bank-arena"
+    },
+    {
+      "canonical_name": "Jenny Craig Pavilion",
+      "final_venue_id": "VEN-000094",
+      "final_venue_key": "jenny-craig-pavilion",
+      "research_venue_id": "VEN-000094",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jenny-craig-pavilion"
+    },
+    {
+      "canonical_name": "Carrier Dome",
+      "final_venue_id": "VEN-000096",
+      "final_venue_key": "jma-wireless-dome",
+      "research_venue_id": "VEN-000096",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jma-wireless-dome"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "VEN-000097",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    },
+    {
+      "canonical_name": "JSerra Pavilion",
+      "final_venue_id": "VEN-000594",
+      "final_venue_key": "jserra-pavilion",
+      "research_venue_id": "VEN-000594",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jserra-pavilion"
+    },
+    {
+      "canonical_name": "KFC Yum! Center",
+      "final_venue_id": "VEN-000104",
+      "final_venue_key": "kfc-yum-center",
+      "research_venue_id": "VEN-000104",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kfc-yum-center"
+    },
+    {
+      "canonical_name": "Lahaina Civic Center",
+      "final_venue_id": "VEN-000108",
+      "final_venue_key": "lahaina-civic-center",
+      "research_venue_id": "VEN-000108",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lahaina-civic-center"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Marriott Center",
+      "final_venue_id": "VEN-000405",
+      "final_venue_key": "marriott-center",
+      "research_venue_id": "VEN-000405",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "marriott-center"
+    },
+    {
+      "canonical_name": "McArthur Court",
+      "final_venue_id": "VEN-000126",
+      "final_venue_key": "mcarthur-court",
+      "research_venue_id": "VEN-000126",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcarthur-court"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "VEN-000127",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mckale-center"
+    },
+    {
+      "canonical_name": "MGM Grand Garden Arena",
+      "final_venue_id": "VEN-000133",
+      "final_venue_key": "mgm-grand-garden-arena",
+      "research_venue_id": "VEN-000133",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mgm-grand-garden-arena"
+    },
+    {
+      "canonical_name": "Michelob ULTRA Arena",
+      "final_venue_id": "VEN-000135",
+      "final_venue_key": "michelob-ultra-arena",
+      "research_venue_id": "VEN-000135",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "michelob-ultra-arena"
+    },
+    {
+      "canonical_name": "Millett Hall",
+      "final_venue_id": "VEN-000997",
+      "final_venue_key": "millett-hall",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "millett-hall"
+    },
+    {
+      "canonical_name": "Nationwide Arena",
+      "final_venue_id": "VEN-000148",
+      "final_venue_key": "nationwide-arena",
+      "research_venue_id": "VEN-000148",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nationwide-arena"
+    },
+    {
+      "canonical_name": "Numerica Veterans Arena",
+      "final_venue_id": "VEN-000152",
+      "final_venue_key": "numerica-veterans-arena",
+      "research_venue_id": "VEN-000152",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "numerica-veterans-arena"
+    },
+    {
+      "canonical_name": "O'Connell Center",
+      "final_venue_id": "VEN-000154",
+      "final_venue_key": "oconnell-center",
+      "research_venue_id": "VEN-000154",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "oconnell-center"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Petco Park",
+      "final_venue_id": "VEN-000998",
+      "final_venue_key": "petco-park",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "petco-park"
+    },
+    {
+      "canonical_name": "Peterson Gym",
+      "final_venue_id": "VEN-000995",
+      "final_venue_key": "peterson-gym",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "peterson-gym"
+    },
+    {
+      "canonical_name": "Reliant Stadium",
+      "final_venue_id": "VEN-000172",
+      "final_venue_key": "reliant-stadium",
+      "research_venue_id": "VEN-000172",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reliant-stadium"
+    },
+    {
+      "canonical_name": "Robert A. Mott Athletics Center",
+      "final_venue_id": "VEN-000999",
+      "final_venue_key": "robert-a-mott-athletics-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "robert-a-mott-athletics-center"
+    },
+    {
+      "canonical_name": "San Diego Sports Arena",
+      "final_venue_id": "VEN-000182",
+      "final_venue_key": "san-diego-sports-arena",
+      "research_venue_id": "VEN-000182",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "san-diego-sports-arena"
+    },
+    {
+      "canonical_name": "SAP Center",
+      "final_venue_id": "VEN-000183",
+      "final_venue_key": "sap-center",
+      "research_venue_id": "VEN-000183",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sap-center"
+    },
+    {
+      "canonical_name": "Save Mart Center",
+      "final_venue_id": "VEN-000798",
+      "final_venue_key": "save-mart-center",
+      "research_venue_id": "VEN-000798",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "save-mart-center"
+    },
+    {
+      "canonical_name": "Selland Arena",
+      "final_venue_id": "VEN-000374",
+      "final_venue_key": "selland-arena",
+      "research_venue_id": "VEN-000374",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "selland-arena"
+    },
+    {
+      "canonical_name": "South Point Arena",
+      "final_venue_id": "VEN-000724",
+      "final_venue_key": "south-point-arena",
+      "research_venue_id": "VEN-000724",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "south-point-arena"
+    },
+    {
+      "canonical_name": "Spectrum Center",
+      "final_venue_id": "VEN-000190",
+      "final_venue_key": "spectrum-center",
+      "research_venue_id": "VEN-000190",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "spectrum-center"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "VEN-000194",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "Stockton Memorial Civic Auditorium",
+      "final_venue_id": "VEN-001000",
+      "final_venue_key": "stockton-memorial-civic-auditorium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "stockton-memorial-civic-auditorium"
+    },
+    {
+      "canonical_name": "Sullivan Arena",
+      "final_venue_id": "VEN-000361",
+      "final_venue_key": "sullivan-arena",
+      "research_venue_id": "VEN-000361",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sullivan-arena"
+    },
+    {
+      "canonical_name": "T-Mobile Arena",
+      "final_venue_id": "VEN-000201",
+      "final_venue_key": "t-mobile-arena",
+      "research_venue_id": "VEN-000201",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-arena"
+    },
+    {
+      "canonical_name": "TD Garden",
+      "final_venue_id": "VEN-000203",
+      "final_venue_key": "td-garden",
+      "research_venue_id": "VEN-000203",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-garden"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "VEN-000377",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thomas-and-mack-center"
+    },
+    {
+      "canonical_name": "Titan Gym",
+      "final_venue_id": "VEN-000212",
+      "final_venue_key": "titan-gym",
+      "research_venue_id": "VEN-000212",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "titan-gym"
+    },
+    {
+      "canonical_name": "United Center",
+      "final_venue_id": "VEN-000217",
+      "final_venue_key": "united-center",
+      "research_venue_id": "VEN-000217",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "united-center"
+    },
+    {
+      "canonical_name": "United Supermarkets Arena",
+      "final_venue_id": "VEN-000218",
+      "final_venue_key": "united-supermarkets-arena",
+      "research_venue_id": "VEN-000218",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "united-supermarkets-arena"
+    },
+    {
+      "canonical_name": "University Credit Union Pavilion",
+      "final_venue_id": "VEN-000449",
+      "final_venue_key": "university-credit-union-pavilion",
+      "research_venue_id": "VEN-000449",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-credit-union-pavilion"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "USS Midway Museum (Flight Deck)",
+      "final_venue_id": "VEN-001001",
+      "final_venue_key": "uss-midway-museum-flight-deck",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "uss-midway-museum-flight-deck"
+    },
+    {
+      "canonical_name": "Viejas Arena",
+      "final_venue_id": "VEN-000226",
+      "final_venue_key": "viejas-arena",
+      "research_venue_id": "VEN-000226",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "viejas-arena"
+    },
+    {
+      "canonical_name": "Xfinity Mobile Arena",
+      "final_venue_id": "VEN-000237",
+      "final_venue_key": "xfinity-mobile-arena",
+      "research_venue_id": "VEN-000237",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "xfinity-mobile-arena"
+    }
+  ],
+  "venue_reconciliation": null
+}
