@@ -1,12 +1,17 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage1-0003",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "saint-louis-phase0-0003",
+  "operation": "PHASE0",
   "school_key": "saint-louis",
-  "previous_control_state_commit": "452f706eead58c09e84e8dcb370908cec2f0d152",
-  "previous_control_state_sha256": "e592fda705f392677fc310b1f7bc9d5fdd2778901fbf821b7f94958eed42f798",
+  "previous_control_state_commit": "d1a5819012a215c51b7f1be6f1b7b36ca3d464f9",
+  "previous_control_state_sha256": "59a30797aa09e124a68073bdb8d7f20b7ed488f277b5bf15e96e0d12e65d895e",
   "expected_protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "target_branch": "data/saint-louis-onboarding",
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage1-0003/checkpoint-manifest.json",
+    "sha256": "1482aec7aec0a277a8c1c814721afbbba554eb71c0949327f5971301ca846537"
+  },
   "research_checkpoint": {
     "sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
     "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
@@ -19,12 +24,18 @@
   },
   "venue_reconciliation": null,
   "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1914-1915",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Owner-accepted Saint Louis INCEPTION+ scope from first competitive 1914-15 season. Current protected-main top-level scope reference matches. Preserve source-game historical uncertainty and exact immutable Research Freeze."
+  },
   "creation_provenance": {
-    "origin": "Saint Louis serialized Implementation — owner-authorized Phase 0 current-main Stage 1 rebinding after Control Center PR #413 and recovered prior Phase 0",
-    "authorization": "Control Center expressly authorized a new Stage 1 current-main refresh and new Phase 0 request under the same already-authorized Phase 0, after durable recovery saint-louis-phase0-recover-0002 and the foreign venue integration repair merged PR #413. Original saint-louis-phase0-0001 was abandoned and must never replay. This is exactly one read-only permanent STAGE1_INVENTORY at current main, against identical accepted six-file Research Freeze SHA 9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198. No Phase 0 tracked mutation in this request, no historical changes, no new owner gate or global maintenance."
+    "origin": "Saint Louis existing serialized Implementation, Phase 0 continuation after Control Center recovery and PR #413",
+    "authorization": "Control Center permanently recovered and abandoned saint-louis-phase0-0001 via saint-louis-phase0-recover-0002; PR #413 merged current-main generic foreign-venue registry country representation repair. Owner authorized continued Phase 0 without reapproval. Distinct new Phase 0 request; bind independently authenticated Stage 1 saint-louis-stage1-0003 PASS on exact current protected main ba66a248bccb0ef8feb03299dbe175031075c81b, zero blockers/global maintenance/ambiguity and original unchanged Research Freeze. Preserve Neptune Stadium games Cork, blank source state, IE. No historical mutation, Stage 2, owner gate, release or protected-main mutation."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
     "venue_identity_maintenance": false,
     "recovery": false,
