@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-stage2-proposal-0001",
+  "request_id": "san-diego-state-stage2-proposal-0002",
   "school_key": "san-diego-state",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "65a4828821472fdf559c32b99317ecb94a4bfdc4",
-  "previous_control_state_sha256": "513d28570f917d30a24883331d20a4f5bbe36655ac8d36ebaf3137550b2336eb",
+  "previous_control_state_commit": "ebe425fb2f082d7c4612f8ff7ca2f63c4b485069",
+  "previous_control_state_sha256": "1e160a2676646165a08cf5b2c9d1e95ad4144001d1ad0d0f46451178a1b1acb3",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "target_branch": "data/san-diego-state-onboarding",
   "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
@@ -17,12 +17,12 @@
   "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
   "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
   "recommendation_map": {
-    "path": ".remote-implementation/inputs/san-diego-state-stage2-proposal-0001/recommendation-map.json",
-    "sha256": "3eb405cfb8de3b49bfd3915945b6c907740cd58d2fb7354315aa80b7d8426b0d"
+    "path": ".remote-implementation/inputs/san-diego-state-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "0a449963976edb10e239a3a9a192a57a2fb1aa07e178294f42e9fa20a5028754"
   },
   "creation_provenance": {
-    "origin": "ChatGPT San Diego State serialized Implementation — exact read-only Stage 2 proposal rehearsal",
-    "authorization": "Owner said Proceed after the complete 32-decision San Diego State recommendation map was durably prepared and independently challenged. Authorize exactly one guarded read-only STAGE2_PROPOSAL_REHEARSAL bound to recommendation-map SHA-256 3eb405cfb8de3b49bfd3915945b6c907740cd58d2fb7354315aa80b7d8426b0d, Stage 2 successor manifest 343b2b4bb5bf239e1794867d5a4738922de705e70e9ea508e2bae75f9ba9dde1, decision universe 59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61, protected main 619daf5a96e9acfc80a8fc74b381f50bdc0599fc, and target a2e6ed3b6f26421f36164b499cc113a093be7005. Authorize permanent disposable rehearsal, durable checkpoint, approved-plan preview evidence where produced, and independent fresh verification only. Stop at OWNER_GATE_1_READY or a durable BLOCKED checkpoint. No Owner Gate 1 approval, fill-review, pre-seal rehearsal, seal, sealed apply, tracked basketball mutation, release, Preview, merge, Production, recovery, or unrelated historical authority is granted."
+    "origin": "ChatGPT San Diego State serialized Implementation — corrected exact-map read-only Stage 2 proposal rehearsal",
+    "authorization": "Owner said Proceed after fresh-verified san-diego-state-stage2-proposal-0001 BLOCKED solely because the recommendation map encoded ACCOMPLISHMENTS-SAN-DIEGO-STATE as APPLY_ACCOMPLISHMENT_PATCH while protected main already contains the verified 11 regular-season and 9 tournament conference-title values. Revision 0002 changes exactly that decision action to VERIFY_REFERENCE_VALUES and removes only its no-op canonical accomplishment patch; the other 31 decisions, all historical bases, all other source/canonical patches, protected main, target, Freeze/semantic authority, and decision universe remain unchanged. Authorize exactly one guarded read-only STAGE2_PROPOSAL_REHEARSAL against map SHA-256 0a449963976edb10e239a3a9a192a57a2fb1aa07e178294f42e9fa20a5028754, permanent disposable rehearsal, durable checkpoint, approved-plan preview evidence where produced, and independent fresh verification only. Stop at OWNER_GATE_1_READY or a durable BLOCKED checkpoint. No Owner Gate 1 approval, fill-review, pre-seal rehearsal, seal, sealed apply, tracked basketball mutation, release, Preview, merge, Production, recovery, or unrelated historical authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
