@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-release-readiness-0001",
+  "request_id": "san-diego-state-release-preview-verify-0001",
   "school_key": "san-diego-state",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "de81a5ed9aeb03325fae0104f71d2096478082cb",
-  "previous_control_state_sha256": "93c011de66d7add47234da5d6fa0c1284e157ca8d71a92a851e08f634ec68283",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "2fc87624a1d5a574bfbce5e174098405cfa0704b",
+  "previous_control_state_sha256": "8a1c467ef80ae1ad265e020a33bee494b93726f6f2db311600903e5ebc639353",
   "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "target_branch": "data/san-diego-state-onboarding",
   "target_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/san-diego-state/san-diego-state-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "070dec8b97c834c523281cf3de2098184b9020f414a03dcfeee641b2b15f3b50"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "c07ea41796f3f20c6e4c69b018a71c7c918ef7eb6b9348cc6110b03a53e291eb"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "a0ed6826dec24e81c7c33c5a5c3edf640d72be819ebac06bb8fe414f3f54f781"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "74d422eb1b6b94da258b99d96088ca237cbae6936955f2d6eab79d972ca92bca"
   },
   "approved_plan_hash": "bc5d82586fe8cd5e0f097d66bd90beca15d21a446d518dad5da2167f2f06de38",
   "release_manifest_sha256": "e6dfcff9531e64cdb1c819a389ab57623a0cec270943b23073fefbca355696d4",
+  "pr_number": 402,
   "creation_provenance": {
     "origin": "ChatGPT San Diego State serialized Implementation",
-    "authorization": "Owner said Proceed after the exact San Diego State sealed-apply successor 4e2cd0d260867418d2cf543154eed0585681043e was independently fresh-verified. This authorizes exactly one bounded read-only RELEASE_READINESS operation against that successor. It may authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation only. It creates no PR, Preview, Owner Gate 2 approval, merge, Production, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
+    "authorization": "Owner said Proceed for the bounded release-preparation phase after fresh-verified RELEASE_READINESS. The school lane reauthenticated protected main and exact target head, corrected PR #402 metadata so its body is byte-for-byte identical to the preserved sealed pr-body.md, and confirmed open non-draft PR #402, base main, head data/san-diego-state-onboarding, exact head 4e2cd0d260867418d2cf543154eed0585681043e, clean mergeability, and exact preserved body. This authorizes exactly one read-only RELEASE_PREVIEW_VERIFY against that PR and fresh readiness authority, through independently verified OWNER_GATE_2_READY. It grants no Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, recovery, maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -37,8 +38,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
