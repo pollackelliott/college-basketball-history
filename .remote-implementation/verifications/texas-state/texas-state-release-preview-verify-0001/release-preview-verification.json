@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "84d21f0cf504721dc80de309f92afd6dd13f4aa7f08d6267d9448ae142f294e9",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "pr_number": 406,
+  "preview_deployment_id": 7444920622,
+  "preview_deployment_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6",
+  "preview_url": "https://college-basketball-history-qc4fqrade-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "5ef36cd4003724b59cbcfb7186a75b0552eb2944",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "texas-state-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "target_branch": "data/texas-state-onboarding",
+  "target_sha": "c57f1fb38941a59320760f2807c7ca5f2ff76ab6"
+}
