@@ -24,13 +24,13 @@
     }
   },
   "summary": {
-    "games": 3045,
-    "wins": 1794,
+    "games": 3046,
+    "wins": 1795,
     "losses": 1251,
     "ties": 0,
     "first_season": "1901-1902",
     "last_season": "2025-2026",
-    "opponents": 331
+    "opponents": 332
   },
   "seasons": [
     {
@@ -294,8 +294,8 @@
     },
     {
       "season_label": "1988-1989",
-      "games": 33,
-      "wins": 23,
+      "games": 34,
+      "wins": 24,
       "losses": 10,
       "ties": 0
     },
@@ -5214,6 +5214,22 @@
       "last_season": "2006-2007",
       "games": 5,
       "wins": 5,
+      "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "texas-state",
+      "opponent_name": "Texas State",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "pac-12",
+        "conference_name": "Pac-12"
+      },
+      "first_season": "1988-1989",
+      "last_season": "1988-1989",
+      "games": 1,
+      "wins": 1,
       "losses": 0,
       "ties": 0
     },
@@ -51543,6 +51559,31 @@
       "venue_name": "Carver-Hawkeye Arena",
       "site_city": "Iowa City",
       "site_state": "IA",
+      "game_type": "REGULAR_SEASON",
+      "postseason_round": null,
+      "administrative_status": null,
+      "administrative_note": null
+    },
+    {
+      "canonical_game_id": "CBBG-0181664",
+      "season_label": "1988-1989",
+      "game_date": "1988-12-30",
+      "date_precision": "EXACT",
+      "opponent_key": "texas-state",
+      "opponent_name": "Texas State",
+      "opponent_current_d1": true,
+      "opponent_public_page_enabled": true,
+      "team_score": 96,
+      "opponent_score": 77,
+      "score_known": true,
+      "result": "W",
+      "overtime_periods": 0,
+      "site": "HOME",
+      "venue_key": null,
+      "venue_id": null,
+      "venue_name": null,
+      "site_city": null,
+      "site_state": null,
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,

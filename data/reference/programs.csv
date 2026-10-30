@@ -298,7 +298,7 @@ texas,Texas,Texas,Longhorns,Austin,TX,#BF5700,#FFFFFF,Yes,Yes,1905-1906,OWNER_CO
 texas-a-m,Texas A&M,Texas A&M,Aggies,College Station,TX,#500000,#FFFFFF,Yes,Yes,1912-1913,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed: Texas A&M has always been D1/top-level for site purposes.,
 texas-a-m-corpus-christi,Texas A&M-Corpus Christi,TAMUCC,Islanders,Corpus Christi,TX,#0067C5,#FFFFFF,Yes,No,,,,,
 texas-southern,Texas Southern,Texas Southern,Tigers,Houston,TX,#7C183E,#9DA6AB,Yes,No,,,,,
-texas-state,Texas State,Texas State,Bobcats,San Marcos,TX,#501214,#8D734A,Yes,No,,,,,
+texas-state,Texas State,Texas State,Bobcats,San Marcos,TX,#501214,#8D734A,Yes,Yes,1984-1985,OWNER_CONFIRMED,FIRST_TOP_LEVEL_SEASON,"Accepted Texas State top-level scope 1984-85+ from the owner-supplied program-top-level-scope reference, consistent with the accepted 1984-85 through 2025-26 immutable Research Freeze and the Stage 1 PASS checkpoint. No historical scope supersession or research reopening.",
 texas-tech,Texas Tech,Texas Tech,Red Raiders,Lubbock,TX,#000000,#CC0000,Yes,Yes,1925-1926,OWNER_CONFIRMED,ALWAYS_TOP_LEVEL_FROM_INCEPTION,Owner-confirmed during Texas Tech Research: accepted top-level/D1-equivalent history begins with program inception in 1925-26; supersedes the older 1950-51 baseline.,
 the-citadel,The Citadel,The Citadel,Bulldogs,Charleston,SC,#3975B7,#FFFFFF,Yes,No,,,,,
 toledo,Toledo,Toledo,Rockets,Toledo,OH,#15397F,#FFDA00,Yes,No,,,,,

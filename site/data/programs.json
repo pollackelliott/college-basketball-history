@@ -7187,7 +7187,7 @@
       "state": "TX",
       "primary_hex": "#501214",
       "secondary_hex": "#8D734A",
-      "history_start_season": null,
+      "history_start_season": "1984-1985",
       "conference_regular_season_championships": 4,
       "conference_tournament_championships": 2,
       "ncaa_tournament_appearances": 2,
@@ -7196,7 +7196,7 @@
       "best_finish_key": "ROUND_OF_64",
       "best_finish_year": 1997,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "pac-12",
         "conference_name": "Pac-12"
