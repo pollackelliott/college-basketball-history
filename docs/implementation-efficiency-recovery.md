@@ -215,6 +215,26 @@ Preferred response order:
 
 Never skip research acceptance, current-main rebase, owner decisions, pre-seal rehearsal, transactional apply, exact Preview approval, or Production proof merely to make a chat shorter.
 
+### 9.1 Bound the assistant turn, not the owner-authorized phase
+
+Persistent phase authorization is not a mandate to finish an arbitrarily large phase inside one assistant response.
+
+A healthy turn should make one coherent durable advance or a small deterministic chain, then reassess. Continue inside the same turn only while the next operation is known, bounded, and producing new durable state. Stop at the latest authenticated checkpoint when any of these appear:
+
+- repeated repository archaeology/search with no narrowing result;
+- the same blocker/state is being rechecked without new evidence;
+- multiple unrelated diagnostic families would need to be opened;
+- transcript/context is growing materially faster than durable progress;
+- an external workflow remains healthy but unchanged after three consecutive event-oriented polls in that turn.
+
+When stopping for this reason, preserve the exact active request/checkpoint, residual population, next internal step, and current phase authority. Do not reset or replay completed work.
+
+This is **transport continuation**, not a new owner decision. Report:
+
+`NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS`
+
+The owner may answer `Continue`, `Proceed`, or start a replacement chat with the recovery capsule; none of those supplies new authority. The next turn must reauthenticate durable state and resume the same already-authorized phase. Do not use this classification routinely after every successful internal request; it exists specifically to prevent overlong/stalled turns while preserving phase-sized owner interaction.
+
 ## 10. Tooling direction
 
 Generic tooling should continue moving toward:
