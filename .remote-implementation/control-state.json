@@ -347,7 +347,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/texas-state/texas-state-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "2d8a84af30bcd5bbad43bdeef832c066eba1fc8094fe38b5b90a9cf32a1dc0ff",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -357,7 +357,7 @@
     "production_deployment_id": 7447192410,
     "production_json_checked_count": 39,
     "protected_main_sha": "2f5ed5bca4713dda5a4f05f84b10c5abba0b1f62",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "texas-state-release-production-proof-0001",
     "school_key": "texas-state"
   },
