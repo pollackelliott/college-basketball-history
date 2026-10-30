@@ -1,0 +1,59 @@
+{
+  "kind": "SAN_DIEGO_STATE_PROVENANCE_CORRECTED_SUCCESSOR_TRANSPORT",
+  "status": "PROPOSED_NOT_ACCEPTED",
+  "school_key": "san-diego-state",
+  "original_accepted_research_freeze_sha256": "52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651",
+  "original_accepted_stage3b_final_checkpoint": {
+    "available": false,
+    "sha256_verified": false
+  },
+  "exceptional_reconstruction_feasibility_sha256": "6326440f8d202138a2aa16848a154d60807ede1a8986d102a34eb703596ef70e",
+  "earlier_provisional_successor_sha256": "b52090d5467febb386ecd1cbf69e0f7042c9db4b0e755dca1eac1da2456bdea5",
+  "corrected_proposed_successor_sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+  "corrected_proposed_zip_size_bytes": 86137,
+  "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+  "corrected_members_sha256": {
+    "source-games.csv": "1104f669f765d0d48000a9121d45c492778a59a95a8b8f5dd5f0da22301feb65",
+    "opponents.csv": "6773734732c85900f0fef57f55c59f598625904dc20f7bed4713ae187b03f31a",
+    "venues.csv": "5316408907cdb998235cc7170edd75a887f369055bd02a35628a83263bd99d3e",
+    "conferences.csv": "0bfa3fe3b2e57f686c4dc28185df595685643b39552bcba2d4e4b019b01a7e56",
+    "notes.md": "55df6a8cb99c01b930c498f0a6f7659a4d04024ff36862fbf247968f985541b4",
+    "source-notes.md": "ef0e9dabe05e055de7d92abc69ec8bd63eae7875109a201bde20ae3e5c37c00f"
+  },
+  "mutations": {
+    "unchanged_members": [
+      "source-games.csv",
+      "opponents.csv",
+      "venues.csv",
+      "conferences.csv"
+    ],
+    "changed_members": [
+      "notes.md",
+      "source-notes.md"
+    ],
+    "historical_game_fact_changes": 0
+  },
+  "permanent_research_acceptance": {
+    "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+    "result": "PASS",
+    "errors": 0,
+    "warnings": 0,
+    "games": 1709,
+    "opponent_rows": 1176,
+    "venue_rows": 60,
+    "ncaa_rows": 30,
+    "home_chronology_conflicts": 0
+  },
+  "git_base64_parts": {
+    "commit_sha": "9f70ca2449e0a2fa8e7a049a50ded3bc8a5a8a58",
+    "path_prefix": ".recovery/san-diego-state/provenance-corrected/git-parts/san-diego-state-provenance-corrected-six-file-zip.part-",
+    "extension": ".b64",
+    "part_count": 7,
+    "zip_sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+    "independent_git_readback_hash": "PASS"
+  },
+  "approval_boundary": "CONTROL_CENTER_SUCCESSOR_ACCEPTANCE_REQUIRED",
+  "stage1_started": false,
+  "phase0_started": false,
+  "protected_main_mutated": false
+}
