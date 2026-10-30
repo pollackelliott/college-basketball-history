@@ -1,28 +1,33 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-phase0-recover-0002",
+  "request_id": "saint-louis-stage1-0003",
+  "operation": "STAGE1_INVENTORY",
   "school_key": "saint-louis",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "85426f932ebc9f7f0b1f9057aefaae1b409c608b",
-  "previous_control_state_sha256": "822cb3f24f2f73a8390987677f157413f0f017f0c59c259f27fcaccb899b7e47",
-  "expected_protected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
-  "recovery": {
-    "abandoned_request_id": "saint-louis-phase0-0001",
-    "lock_commit": "b10742af21b9a3a7abfa4f36f7251fe27021a8cb",
-    "target_branch": "data/saint-louis-onboarding"
+  "previous_control_state_commit": "452f706eead58c09e84e8dcb370908cec2f0d152",
+  "previous_control_state_sha256": "e592fda705f392677fc310b1f7bc9d5fdd2778901fbf821b7f94958eed42f798",
+  "expected_protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "research_checkpoint": {
+    "sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
+    "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "dac5d6b6a40b4263d177cb7234ead9a31b0ea379",
+      "path_prefix": ".remote-implementation/transports/saint-louis/saint-louis-stage1-0001/piece-",
+      "part_count": 36
+    }
   },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Control Center after authenticated Saint Louis Phase 0 failure",
-    "authorization": "Control Center authorizes only exact permanent RECOVER for saint-louis-phase0-0001. Durable control remains ACTIVE/INPUTS_VERIFIED with recovery_required=true, exact lock commit b10742af21b9a3a7abfa4f36f7251fe27021a8cb, no write-ahead/prepared commit/tree, and absent data/saint-louis-onboarding branch. The prior recover-0001 control commit archived a recovery payload but did not update the singleton request.json; its workflow therefore re-read the stale PHASE0 request and stopped at STALE_CONTROL_PREDECESSOR without changing control state. This request corrects transport only. Permanent recovery may classify and abandon the original failed request if objective mutation state is NOT_ATTEMPTED/PREPARED_NOT_PUBLISHED, release the lock, and preserve all Research/Stage1 evidence. No Phase 0 retry, basketball-data mutation, target publication, historical change, Owner Gate 1/2, release, merge, or unrelated mutation authorized."
+    "origin": "Saint Louis serialized Implementation — owner-authorized Phase 0 current-main Stage 1 rebinding after Control Center PR #413 and recovered prior Phase 0",
+    "authorization": "Control Center expressly authorized a new Stage 1 current-main refresh and new Phase 0 request under the same already-authorized Phase 0, after durable recovery saint-louis-phase0-recover-0002 and the foreign venue integration repair merged PR #413. Original saint-louis-phase0-0001 was abandoned and must never replay. This is exactly one read-only permanent STAGE1_INVENTORY at current main, against identical accepted six-file Research Freeze SHA 9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198. No Phase 0 tracked mutation in this request, no historical changes, no new owner gate or global maintenance."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": true,
+    "venue_identity_maintenance": false,
+    "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -35,6 +40,8 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
   }
 }
