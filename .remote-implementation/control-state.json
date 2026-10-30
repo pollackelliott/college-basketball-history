@@ -293,11 +293,11 @@
   "current_sequence": 131,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
     "operation": "PHASE0",
     "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "san-diego-state-phase0-0001",
     "school_key": "san-diego-state",
     "successor_manifest_path": ".remote-implementation/successors/san-diego-state/san-diego-state-phase0-0001/successor-manifest.json",

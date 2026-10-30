@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "prepared_parent_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "prepared_tree_sha": "afb3f4b36e91663cc9fc622a5ec54c09c2d26b6e",
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "san-diego-state-phase0-0001",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5"
+}
