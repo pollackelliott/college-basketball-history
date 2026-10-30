@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "san-diego-state-phase0-0001",
+  "school_key": "san-diego-state",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "b2489423b9f030e51ba1b7ec7b0c3963c4895234",
+  "previous_control_state_sha256": "7e1df53d4f1b7074bbe6ff3d7ab0292d4d4c66a30a042ad2006b9d543560c486",
+  "expected_protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "target_branch": "data/san-diego-state-onboarding",
+  "research_checkpoint": {
+    "sha256": "cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852",
+    "research_base_sha": "90084b27a4a357ea5c88ccab9d729d489fc2c912",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "591f5149a2977c06cd420db6fb42657cb26a7145",
+      "path_prefix": ".recovery/san-diego-state/stage1-runner-transport/sdsu-accepted.zip.b64.part",
+      "part_count": 7
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-stage1-0001/checkpoint-manifest.json",
+    "sha256": "19e673c228b09b8c8a08a634e365ff775f9d24d1f82788067fd9f964efba0b22"
+  },
+  "history_scope": {
+    "start_season": "1970-1971",
+    "basis": "FIRST_TOP_LEVEL_SEASON",
+    "intervals": "",
+    "notes": "Owner-confirmed San Diego State top-level scope 1970-71 onward; accepted corrected audited Research Freeze successor expressly preserves 1970-71+. Current protected-main program-top-level-scope.csv already matches. Do not infer a different scope or reopen historical Research."
+  },
+  "creation_provenance": {
+    "origin": "San Diego State serialized Implementation — bounded guarded Phase 0 following permanent Stage 1 PASS",
+    "authorization": "Owner explicitly instructed Proceed with one San Diego State Phase 0 operation including Integration Freeze, ordinary target-school reference reconciliation, guarded staging, and independent successor verification. Control Center explicitly accepted audited Research Freeze successor ZIP SHA cba6613722e6179b4c952359bc2c372b9251320e1601660b3cdb42e476612852; original accepted Research Freeze SHA 52e359f86886ab0f1f15caf6a4ed94a775d677ec2021419aab53238ca18e3651 remains immutable historical predecessor. Exact Stage 1 san-diego-state-stage1-0001 checkpoint PASS zero blockers, no shared maintenance, no ambiguous identity, on main 619daf5a96e9acfc80a8fc74b381f50bdc0599fc. Authorize only guarded Phase 0, safe new target-school venue registrations, program top-level scope reconciliation, permanent staging and validation, create-once onboarding branch publication, write-ahead/CAS, lock release, and independent fresh verification; no Stage 2, Research reopening, maintenance PR, owner gate, Preview, merge, Production, or protected-main mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": true,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

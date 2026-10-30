@@ -140,18 +140,19 @@
     "fresno-state-release-preview-verify-0001",
     "fresno-state-release-gate2-approval-0001",
     "fresno-state-release-production-proof-0001",
-    "san-diego-state-stage1-0001"
+    "san-diego-state-stage1-0001",
+    "san-diego-state-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:40984958979:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "san-diego-state-phase0-0001",
+  "active_request_sha256": "adaede3a1f0d9c206f7d93951b373027171ced81c3e51663f4354af12fa5ebaf",
+  "active_school_key": "san-diego-state",
+  "active_target_branch": "data/san-diego-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -300,8 +301,11 @@
     "stage1_reconciliation_sha256": "30efedeccf85d2e206e96c11fdd967751cdbb374928f133b194cc1c88bb6d651",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "40984958979",
+  "lock_acquisition_request_commit": "cbbef1f250868fdc90c19652842c00df919bfb38",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
