@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "texas-state-stage2-census-0001",
+  "request_id": "texas-state-stage2-opponent-display-normalize-0001",
   "school_key": "texas-state",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "3a786919b63c57607dc1396027149b77d25c5b76",
-  "previous_control_state_sha256": "d3d6de1810393387f049e7ea0ae22c18d2d2d117b9f735e7aff07158f894b27c",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "df9dfe0d9b98ec34c79162f13c26fdb11eedf911",
+  "previous_control_state_sha256": "15569ec7029b18b51ef22b717f21b117166d94410f6126ce34f07cd7b49ac3f9",
   "expected_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
   "target_branch": "data/texas-state-onboarding",
   "target_sha": "811cdc553810e43d4902f8cc68bd795632852cf7",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/texas-state/texas-state-phase0-0001/successor-manifest.json",
-    "sha256": "6216aa784c08275b2172f6e23621ff9a992fb9b2cc6b326f8eb6adf00541a5ef"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/texas-state/texas-state-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "0878fdeca7e79f9603e6318f97423b1fbce341d5158e3c4a1561833946acc404"
   },
   "integration_freeze_sha256": "1678e1ca978f6c958bea066c4dd4f6314e2028ee9afcbeb023051a7e394bfb33",
   "semantic_snapshot_sha256": "5f46e2efb48f002e5600e98ca60c01a24d1ff87a32ea16b370d87913eae7da1a",
   "creation_provenance": {
-    "origin": "Texas State Implementation lane",
-    "authorization": "Owner Proceed, one read-only Stage 2 census on fresh-verified Phase 0. No additional operations."
+    "origin": "Texas State Implementation",
+    "authorization": "Owner Proceed: one exact census-bound display normalization for all seven display conflicts, no other Stage 2 action."
   },
   "authority": {
     "owner_gate_1": false,
@@ -27,8 +27,8 @@
     "phase0_scope_supersession": false,
     "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_opponent_display_normalize": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
