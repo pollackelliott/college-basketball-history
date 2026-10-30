@@ -185,7 +185,7 @@
   "active_request_sha256": "0734aaa7426608e86b0fbc37d5d607e6dc94b1afc4c444886432e1c87ffceeb1",
   "active_school_key": "saint-louis",
   "active_target_branch": "data/saint-louis-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "c0d57e829d5ae0bb6a2231c874757b8f1502edb9",
   "active_writeahead_path": ".remote-implementation/writeahead/saint-louis/saint-louis-phase0-0003/writeahead-manifest.json",
   "active_writeahead_sha256": "0a35183be5d21d88ef27ff37fa285c9e6f43b723651b92f2c4e892e95c540c77",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
