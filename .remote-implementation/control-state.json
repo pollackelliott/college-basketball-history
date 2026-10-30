@@ -153,17 +153,18 @@
     "san-diego-state-release-readiness-0001",
     "san-diego-state-release-preview-verify-0001",
     "san-diego-state-release-gate2-approval-0001",
-    "san-diego-state-release-production-proof-0001"
+    "san-diego-state-release-production-proof-0001",
+    "texas-state-stage1-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "ac52ce70b7a7c550a23bae40c8773a0a081e0388",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "texas-state-stage1-0001",
+  "active_request_sha256": "e2bea58364496e02340b2f432521c0d78b6ca0e89294886f775d95b67fc8b061",
+  "active_school_key": "texas-state",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -333,8 +334,11 @@
     "request_id": "san-diego-state-release-production-proof-0001",
     "school_key": "san-diego-state"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41079907302",
+  "lock_acquisition_request_commit": "13f8394191fd56f1325977ce63cff9f269552fb1",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }

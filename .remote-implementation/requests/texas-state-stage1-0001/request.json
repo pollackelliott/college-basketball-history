@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "texas-state-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "texas-state",
+  "previous_control_state_commit": "cae7b8d780c3211c9485503575cc14c07d9e3669",
+  "previous_control_state_sha256": "95ae272a1380c1039b76e50f8182f5fdcfccb87a6a699545ed8966496b26938f",
+  "expected_protected_main_sha": "ac52ce70b7a7c550a23bae40c8773a0a081e0388",
+  "research_checkpoint": {
+    "sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
+    "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "d834f204b218a438097c2936e37aba70d3baa018",
+      "path_prefix": ".remote-implementation/transports/texas-state/texas-state-stage1-0001/part-",
+      "part_count": 41
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Texas State serialized Implementation lane",
+    "authorization": "Owner explicitly directed a single read-only remote STAGE1_INVENTORY of the authenticated final Texas State RESEARCH_FROZEN artifact, with immutable Git base64-part transport. No Phase 0, existing shared/global mutation, Stage 2, Gate 1, release, or other authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
