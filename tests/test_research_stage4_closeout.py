@@ -1612,5 +1612,23 @@ class Stage4CloseoutTests(unittest.TestCase):
         self.assertEqual(expected["played_result"], "W")
 
 
+    def test_dayton_legacy_parent_aliases_and_overtime_tokens(self):
+        for token, expected_ot in (("OT", "1"), ("2OT", "2"), ("3OT", "3"), ("5OT", "5")):
+            with self.subTest(token=token):
+                row = {
+                    "season": "1989-90",
+                    "dayton_score": "73",
+                    "opponent_score": "69",
+                    "result": "W",
+                    "overtime": token,
+                }
+                expected = mod.expected_parent_values(row)
+                self.assertEqual(expected["season_start"], "1989")
+                self.assertEqual(expected["team_score"], "73")
+                self.assertEqual(expected["opponent_score"], "69")
+                self.assertEqual(expected["played_result"], "W")
+                self.assertEqual(expected["overtime_periods"], expected_ot)
+
+
 if __name__ == "__main__":
     unittest.main()
