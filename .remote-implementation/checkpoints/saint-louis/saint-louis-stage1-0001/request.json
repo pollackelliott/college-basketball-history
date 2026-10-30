@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "623ef603e3ee053997af07b9dc455f5ab030f25c",
+  "previous_control_state_sha256": "e73229e9e0b1257f5e10b7c96139cb4467c4a419dbaa158d9af171046a7170c8",
+  "expected_protected_main_sha": "f3d359e47b5a785ac448359398d0a6f13030a65b",
+  "research_checkpoint": {
+    "sha256": "9d102d7708a3ca32af3a80ed7ae07be420e957e490b37269c726033bcddf8198",
+    "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "dac5d6b6a40b4263d177cb7234ead9a31b0ea379",
+      "path_prefix": ".remote-implementation/transports/saint-louis/saint-louis-stage1-0001/piece-",
+      "part_count": 36
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Saint Louis serialized Implementation lane, continuing owner-authorized Stage 1 after Control Center generic Research-acceptance repair PR #411",
+    "authorization": "Owner explicitly designated one final accepted unchanged Saint Louis RESEARCH_FROZEN ZIP; Control Center repaired the narrow contradictory raw-score gate at exact main f3d359e47b5a785ac448359398d0a6f13030a65b and authorized same-phase continuation. Exact 36 Git blobs were independently compared with owner-uploaded ZIP byte segments. Invoke the permanent Stage 1 entrypoint, which first runs permanent research_portfolio_report acceptance against exact ZIP SHA and stops if not PASS, then emit one read-only current-main reconciliation inventory. No Research change, Phase 0, shared/global mutation, Stage 2, owner gate, release or protected-main mutation authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
