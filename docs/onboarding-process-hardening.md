@@ -68,7 +68,7 @@ The acceptance gate checks, at minimum:
 - a blank NCAA round remains valid when the historical tournament format or game does not map honestly to that controlled vocabulary; do not fabricate a modern round label merely to satisfy QA;
 - no exhibition-like row remains in the competitive package.
 
-Unknown exact dates and unknown played scores remain valid when historically honest; they are reported rather than guessed.
+Unknown exact dates and unknown played scores remain valid when historically honest; they are reported rather than guessed. When preserved raw text contains exactly one explicit score pair plus an explicit W/L/T token that agrees with the accepted `played_result` but the pair itself would imply the opposite result if interpreted target-first, the structured scores may remain blank rather than inventing team/opponent orientation. Ordinary literal scores that are compatible with the accepted result remain mandatory structured evidence and may not be silently dropped.
 
 A mechanical pass is necessary but not sufficient. Research lanes must also complete the adversarial pre-freeze review in `docs/research-freeze-self-challenge.md`, including targeted review of large or suspicious HOME-venue, UNKNOWN H/A/N, exact-date, neutral/postseason, and venue-identity debt.
 

@@ -383,6 +383,58 @@ def _raw_text_score_tokens(raw_text: str) -> list[tuple[int, int]]:
         for match in _RAW_TEXT_SCORE_RE.finditer(raw_text)
     ]
 
+def _score_pair_agrees_with_result(
+    team_score: int,
+    opponent_score: int,
+    played_result: str,
+) -> bool:
+    result = (played_result or "").strip().upper()
+    if result == "W":
+        return team_score > opponent_score
+    if result == "L":
+        return team_score < opponent_score
+    if result == "T":
+        return team_score == opponent_score
+    return False
+
+
+_RAW_TEXT_RESULT_SCORE_RE = re.compile(
+    r"\b(?P<result>[WLT])\b[^0-9\n]{0,16}"
+    r"(?P<a>[0-9]{1,3})\s*[-–—]\s*(?P<b>[0-9]{1,3})(?![0-9-])",
+    re.IGNORECASE,
+)
+
+
+def _raw_text_documents_unassignable_score(
+    raw_text: str,
+    played_result: str,
+) -> bool:
+    """Return True only for one explicit score pair that conflicts with the
+    source's own explicit W/L/T result, so team/opponent orientation is unsafe.
+    """
+    result = (played_result or "").strip().upper()
+    if result not in {"W", "L", "T"}:
+        return False
+
+    pairs = _raw_text_score_tokens(raw_text)
+    if len(pairs) != 1:
+        return False
+    pair = pairs[0]
+    if _score_pair_agrees_with_result(pair[0], pair[1], result):
+        return False
+
+    for match in _RAW_TEXT_RESULT_SCORE_RE.finditer(raw_text):
+        tagged_result = match.group("result").upper()
+        tagged_pair = (
+            int(match.group("a")),
+            int(match.group("b")),
+        )
+        if tagged_result == result and tagged_pair == pair:
+            return True
+    return False
+
+
+
 def research_portfolio_report(
     package: Path,
     *,
@@ -532,8 +584,16 @@ def research_portfolio_report(
                 errors.append(f"{label}: only one score is populated")
             if not team_score and not opp_score:
                 unknown_scores += 1
-                raw_score_tokens = _raw_text_score_tokens(row.get("raw_text", ""))
-                if raw_score_tokens:
+                raw_text = row.get("raw_text", "")
+                raw_score_tokens = _raw_text_score_tokens(raw_text)
+                played_result = row.get("played_result", "").strip().upper()
+                if (
+                    raw_score_tokens
+                    and not _raw_text_documents_unassignable_score(
+                        raw_text,
+                        played_result,
+                    )
+                ):
                     rendered = ", ".join(
                         f"{team}-{opponent}" for team, opponent in raw_score_tokens[:3]
                     )
