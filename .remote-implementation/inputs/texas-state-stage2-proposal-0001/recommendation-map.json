@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "school_key": "texas-state",
+  "decision_universe_sha256": "60bfb095a8cadf8b80c3d641b3c30eeb614a770381bfe7d10f23d65a68d1ab82",
+  "source_census_checkpoint_sha256": "5cf93ef1892dcf0399804e2e450aab73e58719dd443b777f4c1d4f9b8208cee5",
+  "prepared_against_protected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
+  "prepared_against_target_sha": "fac90846e9874a6b183d240116594a9cead9f11b",
+  "decisions": {
+    "DISCREPANCY-TXST-S1-000061-SCORE": "USE_SOURCE",
+    "DISCREPANCY-TXST-S1-000150-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-TXST-S1-000176-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-TXST-S1-000204-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-TXST-S1-000226-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-TXST-S1-000538-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-TXST-S1-000712-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-TXST-S1-000782-SCORE": "USE_SOURCE",
+    "ACCOMPLISHMENTS-TEXAS-STATE": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-TEXAS-STATE": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "DISCREPANCY-TXST-S1-000061-SCORE": "Texas State institutional record book p.48 has Boise State 82-Texas State 63. Boise State published reciprocal has 82-53, but independent Sports-Reference and IN CC Stats both report 82-63. Recommend source score with explicit owner review of disagreement.",
+    "DISCREPANCY-TXST-S1-000150-GAME_DATE": "Texas State institutional record book p.48 dates the neutral UAB Blazer Classic game Dec 21, 1989; San Diego State accepted reciprocal dates Dec 22. Contemporary Los Angeles Times Dec 21 preview and Dec 22 recap establish a Thursday Dec 21 contest. Recommend source date.",
+    "DISCREPANCY-TXST-S1-000176-SITE_TYPE": "Texas State institutional record book p.49 labels Gonzaga game #vs. and identifies KYLT Montana Classic, Missoula, MT. Gonzaga reciprocal labels site UNKNOWN. Independent Gonzaga Sports-Reference 1990-91 schedule shows N. Recommend source NEUTRAL and preserve Missoula locality.",
+    "DISCREPANCY-TXST-S1-000204-GAME_DATE": "Texas State institutional record book p.49 dates home Baylor game Dec 14, 1991; Baylor reciprocal dates Dec 15. Sports-Reference Texas State 1991-92 and mcubed Baylor 1992 both date Dec 14. Recommend source date.",
+    "DISCREPANCY-TXST-S1-000226-SCORE": "Texas State institutional record book p.49 says at SMU L 60-90 on Dec 1, 1992. SMU accepted reciprocal plus independent Sports-Reference and IN CC Stats show SMU 90-Texas State 69. Recommend canonical 90-69; preserve source conflict.",
+    "DISCREPANCY-TXST-S1-000538-GAME_DATE": "Texas State institutional record book p.51 and Purdue current calendar date game Nov 27, 2003; contemporaneous official Southland Texas State-Purdue box score explicitly says Nov 26 at Sullivan Arena, and Purdue contemporary recap describes Nov 26 game while article posted Nov 27. Recommend canonical Nov 26, disclose alternate calendar.",
+    "DISCREPANCY-TXST-S1-000712-SITE_TYPE": "Texas State institutional record book p.52 explicitly says at TCU Nov 24, 2009, lost 99-108 in 3OT. TCU official game box score identifies site Daniel-Meyer Coliseum in Fort Worth and TCU historical fact book labels game H. Canonical NEUTRAL is contradicted. Recommend TEAM_A_HOME (TCU home).",
+    "DISCREPANCY-TXST-S1-000782-SCORE": "Texas State institutional record book p.52 reports Houston 94-Texas State 71 on Dec 30, 2011; Houston accepted retrospective source gives 94-61, but Houston Athletics official 2011-12 schedule and Sports-Reference box score support 94-71. Recommend source score.",
+    "ACCOMPLISHMENTS-TEXAS-STATE": "Texas State Athletics official Men’s Basketball History lists four D1-era conference regular-season titles (Southland 1997/1999, Sun Belt 2021/2022), two D1 conference tournament titles (Southland 1994/1997), two NCAA appearances (1994/1997) and no D1 national titles/Final Fours. Existing 4/2/2/0/0/R64/1997 values are supported; verify unchanged.",
+    "PUBLICATION-TEXAS-STATE": "The authenticated plan has 1,249 in-scope games, 94 canonical matches, 1,155 new canonical games, zero identity reviews and zero blockers/warnings. Enable publication only after exact proposal rehearsal, explicit Gate 1 approval, sealed apply, Preview, Owner Gate 2 and Production proof."
+  },
+  "notes_by_decision": {
+    "DISCREPANCY-TXST-S1-000061-SCORE": "Preserve Boise institutional 82-53 as conflicting reciprocal evidence; 82-63 has Texas State and independent corroboration.",
+    "DISCREPANCY-TXST-S1-000150-GAME_DATE": "UAB Classic game occurred Dec 21. An official SDSU retrospective dates it Dec 22; owner to resolve proposed discrepancy.",
+    "DISCREPANCY-TXST-S1-000176-SITE_TYPE": "Accepted 1990 historical neutral location is Missoula MT; building unspecified under location-first pre-1996 research policy.",
+    "DISCREPANCY-TXST-S1-000204-GAME_DATE": "Baylor official almanac currently says Dec 15; supporting third-party schedules date Dec 14.",
+    "DISCREPANCY-TXST-S1-000226-SCORE": "Texas State literal 90-60 is retained in frozen source, though 90-69 recommended canonical.",
+    "DISCREPANCY-TXST-S1-000538-GAME_DATE": "Exact official game box score Nov 26 controls over website/article posting Nov 27; keep alternate source interpretation visible.",
+    "DISCREPANCY-TXST-S1-000712-SITE_TYPE": "TCU official box score specifies Daniel-Meyer Coliseum, Fort Worth TX. Existing venue alias maps to VEN-000370 / schollmaier-arena. Avoid geography-only H/A inference.",
+    "DISCREPANCY-TXST-S1-000782-SCORE": "Houston official season schedule supports 94-71, but Houston accepted retrospective source row 94-61 still requires preservation.",
+    "ACCOMPLISHMENTS-TEXAS-STATE": "Restrict four regular titles/two conference tournament titles to D1-era scope 1984-85+, not Lone Star/NAIA honors.",
+    "PUBLICATION-TEXAS-STATE": "Publication recommendation is conditional; no publication or owner approval occurs in this map."
+  }
+}
