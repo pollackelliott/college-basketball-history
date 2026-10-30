@@ -1,0 +1,49 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "e59a0a7e11abf68467830bf6350ba56cee3055d7dd133001841e4fc6893723a8",
+    "implementation-stage2-status.json": "fc7f8941d3db8d2a1a690a3294bdb945aa94b4c013aceb5ee64f4567e2855524",
+    "plan.json": "7849ce31414190e66dff0f3bfffda1923da57c4abfd7e14375a455377716cb05",
+    "review.csv": "c696fc6f2038d770bea937e0ceb96e4e7da8a1244669ce8142cac1810f0140bc",
+    "review.md": "5bc79a3ae32d3f864e47aed4436c3c2602379557a61e1941adf71d9570baee95"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "e59a0a7e11abf68467830bf6350ba56cee3055d7dd133001841e4fc6893723a8",
+    "implementation-stage2-status.json": "ed7eecd43b78a0601ccb26a7de0507d9dc43f61f47ed5a10a0b891b1a06cd447",
+    "plan.json": "53afd67b0be3e88270abf8eeb9afd3790076a348bcea6926a9c778165f25cf92",
+    "review.csv": "c696fc6f2038d770bea937e0ceb96e4e7da8a1244669ce8142cac1810f0140bc",
+    "review.md": "330aef6600c9f611a4c91e04228559a95ad282da88dce4a8be6c3eedfcfe1d08"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "changed_paths": [
+    "schools/saint-louis/opponents.csv",
+    "schools/saint-louis/source-games.csv"
+  ],
+  "decision_universe_sha256": "60bc2206f382b5936a6824f218f712972e98cb71feb48efe7fc5d20339a90dd7",
+  "expected_blocker_keys": [
+    "augustana-il",
+    "centenary",
+    "dubuque",
+    "missouri-st-louis"
+  ],
+  "field_level_proof_sha256": "f20bf57b453f7bcc3ffa6709527916e6c12f4cd809f461b90cb6663b8db7af63",
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "e9c7c57fd23b89bed8980b1fec83b8cb1da73e0558b1dc853be3e570d0ff16d7",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "saint-louis-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_predecessor_sha": "f52bfe7ab6b9da248b2fc1b73b55647693931e53",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "target_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+  "tracked_stage2_mutation": "NONE"
+}
