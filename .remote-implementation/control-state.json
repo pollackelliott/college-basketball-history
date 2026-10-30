@@ -168,7 +168,7 @@
   "active_request_sha256": "3634942132bfe20b4812a97d8ae2f1959b45eb54b3ecc720084e75ef5ddfc7a1",
   "active_school_key": "texas-state",
   "active_target_branch": "data/texas-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "3f90ea339535d377bbef110a9dc48bf447bbb1d4",
   "active_writeahead_path": ".remote-implementation/writeahead/texas-state/texas-state-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "455d052bee46789978b6d582c07ce0da369319e6367ac95d7585a78ea38f7405",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
