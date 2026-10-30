@@ -146,7 +146,7 @@
     "san-diego-state-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
-  "active_lock_commit": null,
+  "active_lock_commit": "62052256f07eb03b05d53c4cba8cb72828420fff",
   "active_lock_owner": "github-actions:40987108503:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
