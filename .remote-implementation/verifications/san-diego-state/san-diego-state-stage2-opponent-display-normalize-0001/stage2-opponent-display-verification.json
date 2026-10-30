@@ -1,0 +1,47 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b549f5794d8d9406fe7490bac4ee5ef70093dfe52a9dabd32f18729b59856cd4",
+    "implementation-stage2-status.json": "ae776e0630f781382752277b90575cc73ad787dd95308222ece37b89cc6f981c",
+    "plan.json": "d30188486343c7d59a104eaa3c4c3df34e3bcc23488c59edc801f8cb3f22fa3b",
+    "review.csv": "bc93027188e1ee10a37171f8062ec7efa94401a4595c397ac5ff3afe563d2268",
+    "review.md": "b944e80230592c06f844105c80af2e8cf30fb6d4e3afc927bda715392cded641"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b549f5794d8d9406fe7490bac4ee5ef70093dfe52a9dabd32f18729b59856cd4",
+    "implementation-stage2-status.json": "3632055ef4f381489ea896ba774da811354658604f6cb31fea807036d3f2cc74",
+    "plan.json": "bf6755563f0b729a27e37f70bea5070d3126cefd3611cb8ad5256f4278291a12",
+    "review.csv": "bc93027188e1ee10a37171f8062ec7efa94401a4595c397ac5ff3afe563d2268",
+    "review.md": "aa334d50dc15d25808c0be6de62a340d7c403fbd0e55a7fc631e27b501393d37"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/san-diego-state/opponents.csv",
+    "schools/san-diego-state/source-games.csv"
+  ],
+  "decision_universe_sha256": "59556f7fc458a3a77c976a59cf008e10727d838266c3948354f030f15895cc61",
+  "expected_blocker_keys": [
+    "saint-katherine",
+    "wheaton-il"
+  ],
+  "field_level_proof_sha256": "8466832dc8993df060f776f2cf1c4057a27a3e8f2b3c6cd0d87380cf2769820a",
+  "integration_freeze_sha256": "3f67cb9e14f79c94c4e4b051765b6838df93042c9c2df98d3cf1dc85d6ec37b8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "08c7d68d3dcbce7787edf9ec97b02d52f150cbc5c2d11e9e64d86bb3c949e644",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "619daf5a96e9acfc80a8fc74b381f50bdc0599fc",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "san-diego-state-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "san-diego-state",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "08ebe6e037d3ac57b039029e3a09fe6fcf518dc40204eaff6026749306c3b336",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/san-diego-state-onboarding",
+  "target_predecessor_sha": "5be69f22619b972c5411bbd66711de4e6568f9c5",
+  "target_sha": "a2e6ed3b6f26421f36164b499cc113a093be7005",
+  "target_tree_sha": "c6444aaa52f71af9a07f57251e9b1dbf535ce3c8",
+  "tracked_stage2_mutation": "NONE"
+}
