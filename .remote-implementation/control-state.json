@@ -161,7 +161,7 @@
   "active_request_sha256": "93d1c41c6b2fbab5f06f550f9f132ba3fa8a26d15b277951271a25baa993fcae",
   "active_school_key": "san-diego-state",
   "active_target_branch": "data/san-diego-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "b50cfb4cf80d886d14faa12ed62fb15e3ee5cdd2",
   "active_writeahead_path": ".remote-implementation/writeahead/san-diego-state/san-diego-state-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "64aeecd59f0a1ce9d70794e918a36a7c877c7d8c1dbe9b490d2456cf35e81a3e",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
