@@ -156,18 +156,19 @@
     "san-diego-state-release-production-proof-0001",
     "texas-state-stage1-0001",
     "texas-state-stage1-0002",
-    "texas-state-phase0-0001"
+    "texas-state-phase0-0001",
+    "texas-state-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "texas-state-stage2-census-0001",
+  "active_request_sha256": "06db0b43ab055073e141135f272552a379b542c9d8bc4c47c62118d7a9f5b954",
+  "active_school_key": "texas-state",
+  "active_target_branch": "data/texas-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -337,8 +338,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/texas-state/texas-state-phase0-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "455d052bee46789978b6d582c07ce0da369319e6367ac95d7585a78ea38f7405"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41084867056",
+  "lock_acquisition_request_commit": "76048d1b4c5aa3e1a7489c903e24986583b80c45",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
