@@ -155,18 +155,19 @@
     "san-diego-state-release-gate2-approval-0001",
     "san-diego-state-release-production-proof-0001",
     "texas-state-stage1-0001",
-    "texas-state-stage1-0002"
+    "texas-state-stage1-0002",
+    "texas-state-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "aaba14d0748862eb9f1e075b791125a54eccd12b",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41083520422:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "texas-state-phase0-0001",
+  "active_request_sha256": "3634942132bfe20b4812a97d8ae2f1959b45eb54b3ecc720084e75ef5ddfc7a1",
+  "active_school_key": "texas-state",
+  "active_target_branch": "data/texas-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -330,8 +331,11 @@
     "stage1_reconciliation_sha256": "20ec9807b17d3954e71ab5dcb1a53ac361580a674a74fba8ebe945026881b033",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41083520422",
+  "lock_acquisition_request_commit": "af9b2a30277537cccc1fb5b775a88e7924bdaa43",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
