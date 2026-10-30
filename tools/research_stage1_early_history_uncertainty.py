@@ -145,6 +145,51 @@ def _verify_manifest(
     except (json.JSONDecodeError, UnicodeDecodeError, TypeError):
         return ["INVALID_STAGE1_MANIFEST"]
     tracked = manifest.get("members")
+    if not isinstance(tracked, dict) and allow_legacy_parent_manifest:
+        legacy_files = manifest.get("files")
+        if isinstance(legacy_files, dict):
+            tracked = {
+                str(name): {
+                    "size": (
+                        meta.get("size")
+                        if isinstance(meta, dict)
+                        else None
+                    )
+                    if not isinstance(meta, dict)
+                    or meta.get("size") is not None
+                    else meta.get("bytes"),
+                    "sha256": (
+                        meta.get("sha256")
+                        if isinstance(meta, dict)
+                        else None
+                    ),
+                }
+                for name, meta in legacy_files.items()
+            }
+        elif isinstance(legacy_files, list):
+            normalized: dict[str, dict[str, Any]] = {}
+            for item in legacy_files:
+                if not isinstance(item, dict):
+                    return ["INVALID_MANIFEST_FILES"]
+                name = str(
+                    item.get("name")
+                    or item.get("path")
+                    or item.get("filename")
+                    or item.get("file")
+                    or ""
+                ).strip()
+                if not name or name in normalized:
+                    return ["INVALID_MANIFEST_FILES"]
+                size = (
+                    item.get("size")
+                    if item.get("size") is not None
+                    else item.get("bytes")
+                )
+                normalized[name] = {
+                    "size": size,
+                    "sha256": item.get("sha256"),
+                }
+            tracked = normalized
     if not isinstance(tracked, dict):
         return ["INVALID_MANIFEST_MEMBERS"]
     actual_names = set(members) - {manifest_name}
@@ -155,8 +200,13 @@ def _verify_manifest(
         if data is None or not isinstance(meta, dict):
             defects.append("MANIFEST_MISSING_MEMBER:" + name)
             continue
+        size = (
+            meta.get("size")
+            if meta.get("size") is not None
+            else meta.get("bytes")
+        )
         if (
-            meta.get("size") != len(data)
+            size != len(data)
             or meta.get("sha256") != sha256_bytes(data)
         ):
             defects.append("MANIFEST_MISMATCH:" + name)
@@ -209,11 +259,25 @@ def _row_result(
 ) -> tuple[str, str, str, bool]:
     school_score_key = school_key.replace("-", "_") + "_score"
     team = _first(
-        row, "team_score", school_score_key, "source_program_score"
+        row,
+        "accepted_team_score",
+        "team_score",
+        school_score_key,
+        "source_program_score",
     )
-    opponent = _first(row, "opponent_score", "opponent_points")
+    opponent = _first(
+        row,
+        "accepted_opponent_score",
+        "opponent_score",
+        "opponent_points",
+    )
     played = _first(
-        row, "played_result", "on_court_result", "source_result", "result"
+        row,
+        "accepted_result",
+        "played_result",
+        "on_court_result",
+        "source_result",
+        "result",
     ).upper()
     if played in {"W", "L", "T"}:
         return team, opponent, played, True
