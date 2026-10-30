@@ -40,6 +40,7 @@ from research_stage4_closeout import (
 
 AUTHORING_DIR = "stage4-authoring"
 AUTHORING_FILES = ("opponents.csv", "venues.csv", "conferences.csv")
+EARLY_HISTORY_AUTHORING_FILE = "early-history-uncertainty.json"
 
 OPPONENT_FIELDS = {
     "source_program_key",
@@ -797,6 +798,7 @@ def _source_notes(
     archive: zipfile.ZipFile,
     prefix: str,
     coverage: dict[str, str],
+    early_history: dict[str, Any] | None = None,
 ) -> str:
     kinds = Counter(
         _first(row, "source_kind")
@@ -820,10 +822,22 @@ def _source_notes(
         f"- Primary-source historical results cutoff: {coverage['primary_source_historical_cutoff']}",
         f"- Required completed-season cutoff: {coverage['required_completed_season_cutoff']}",
         "- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.",
-        "",
-        "## Durable row-level source families",
-        "",
     ]
+    if early_history:
+        lines.extend(
+            [
+                "",
+                "## Early-history uncertainty",
+                "",
+                "The following structured payload is carried unchanged from the "
+                "independently verified Stage 1 terminal-debt closeout.",
+                "",
+                "```json",
+                json.dumps(early_history, indent=2, sort_keys=True),
+                "```",
+            ]
+        )
+    lines.extend(["", "## Durable row-level source families", ""])
     lines.extend(f"- {key}: {count:,} game rows" for key, count in sorted(kinds.items()))
     if urls:
         lines.extend(["", "## Row-level source URLs", ""])
@@ -855,6 +869,109 @@ def _source_notes(
     return "\n".join(lines) + "\n"
 
 
+def _early_history_payload(
+    archive: zipfile.ZipFile,
+    prefix: str,
+    manifest: dict[str, Any],
+    *,
+    school_key: str,
+    research_base_sha: str,
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]], dict[str, Any]]:
+    logical = AUTHORING_DIR + "/" + EARLY_HISTORY_AUTHORING_FILE
+    member = prefix + logical
+    if member not in archive.namelist():
+        return None, [], {"present": False}
+
+    defects: list[dict[str, Any]] = []
+    if logical not in _manifest_names(manifest):
+        defects.append(
+            {
+                "reason": "EARLY_HISTORY_AUTHORING_MEMBER_NOT_MANIFESTED",
+                "name": logical,
+            }
+        )
+    data = archive.read(member)
+    try:
+        payload = json.loads(data)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return (
+            None,
+            defects
+            + [
+                {
+                    "reason": "INVALID_EARLY_HISTORY_AUTHORING_JSON",
+                    "name": logical,
+                }
+            ],
+            {"present": True, "sha256": sha256_bytes(data)},
+        )
+    if not isinstance(payload, dict):
+        defects.append(
+            {
+                "reason": "INVALID_EARLY_HISTORY_AUTHORING_PAYLOAD",
+                "name": logical,
+            }
+        )
+        return payload, defects, {"present": True, "sha256": sha256_bytes(data)}
+
+    if payload.get("school_key") != school_key:
+        defects.append(
+            {
+                "reason": "EARLY_HISTORY_SCHOOL_KEY_MISMATCH",
+                "value": payload.get("school_key"),
+            }
+        )
+    if payload.get("research_base_sha") != research_base_sha:
+        defects.append(
+            {
+                "reason": "EARLY_HISTORY_RESEARCH_BASE_MISMATCH",
+                "value": payload.get("research_base_sha"),
+            }
+        )
+    if payload.get("terminal_classifications") != {
+        "class_a": "EARLY_HISTORY_UNQUANTIFIED_SEASON_COVERAGE",
+        "class_b": "EARLY_HISTORY_IDENTIFIED_GAME_RESULT_UNKNOWN",
+    }:
+        defects.append({"reason": "EARLY_HISTORY_TERMINAL_CLASSIFICATIONS_INVALID"})
+    audit_sha = str(payload.get("audit_sha256", "")).strip()
+    if not re.fullmatch(r"[0-9a-f]{64}", audit_sha):
+        defects.append({"reason": "EARLY_HISTORY_AUDIT_SHA_INVALID"})
+
+    class_a = payload.get("class_a", [])
+    class_b = payload.get("class_b", [])
+    if not isinstance(class_a, list) or not isinstance(class_b, list):
+        defects.append({"reason": "EARLY_HISTORY_CLASS_COLLECTION_INVALID"})
+        class_a, class_b = [], []
+
+    class_a_seasons = sorted(
+        str(item.get("season", "")).strip()
+        for item in class_a
+        if isinstance(item, dict) and str(item.get("season", "")).strip()
+    )
+    class_b_game_ids = sorted(
+        str(item.get("research_game_id", "")).strip()
+        for item in class_b
+        if isinstance(item, dict)
+        and str(item.get("research_game_id", "")).strip()
+    )
+    if len(class_a_seasons) != len(set(class_a_seasons)):
+        defects.append({"reason": "EARLY_HISTORY_DUPLICATE_CLASS_A_SEASON"})
+    if len(class_b_game_ids) != len(set(class_b_game_ids)):
+        defects.append({"reason": "EARLY_HISTORY_DUPLICATE_CLASS_B_GAME_ID"})
+
+    return (
+        payload,
+        defects,
+        {
+            "present": True,
+            "sha256": sha256_bytes(data),
+            "audit_sha256": audit_sha,
+            "class_a_seasons": class_a_seasons,
+            "class_b_game_ids": class_b_game_ids,
+        },
+    )
+
+
 def inspect_checkpoint(
     school_key: str,
     checkpoint: Path,
@@ -875,6 +992,20 @@ def inspect_checkpoint(
             primary_source_historical_cutoff=primary_source_historical_cutoff,
             required_completed_season_cutoff=required_completed_season_cutoff,
         )
+        research_base_sha = status.get(
+            "research_base_sha", manifest.get("research_base_sha", "")
+        )
+        (
+            early_history,
+            early_history_defects,
+            early_history_summary,
+        ) = _early_history_payload(
+            archive,
+            layout["prefix"],
+            manifest,
+            school_key=school_key,
+            research_base_sha=research_base_sha,
+        )
 
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
@@ -893,14 +1024,13 @@ def inspect_checkpoint(
             "stage3b_checkpoint_sha256": parent_sha,
             "stage3b_parent_topology": layout["topology"],
             "stage3b_status": status.get("status", ""),
-            "research_base_sha": status.get(
-                "research_base_sha", manifest.get("research_base_sha", "")
-            ),
+            "research_base_sha": research_base_sha,
             "ledger_rows": len(ledger),
             "authoring_members": members,
             "missing_authoring_files": missing,
             "coverage": coverage,
-            "defects": list(coverage_defects),
+            "early_history_uncertainty": early_history_summary,
+            "defects": list(coverage_defects) + early_history_defects,
         }
         if missing:
             return result
@@ -916,7 +1046,32 @@ def inspect_checkpoint(
         opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
         venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         conf_fields, conferences = _csv_bytes(archive.read(members["conferences.csv"]))
-        games, projection_defects = _projection(ledger, opponents, venues, school_key=school_key)
+        games, projection_defects = _projection(
+            ledger, opponents, venues, school_key=school_key
+        )
+        if early_history:
+            by_game_id = {row["source_game_id"]: row for row in games}
+            for game_id in early_history_summary.get("class_b_game_ids", []):
+                projected = by_game_id.get(game_id)
+                if projected is None:
+                    result["defects"].append(
+                        {
+                            "reason": "EARLY_HISTORY_CLASS_B_GAME_MISSING",
+                            "source_game_id": game_id,
+                        }
+                    )
+                    continue
+                if (
+                    projected.get("team_score", "").strip()
+                    or projected.get("opponent_score", "").strip()
+                    or projected.get("played_result", "").strip()
+                ):
+                    result["defects"].append(
+                        {
+                            "reason": "EARLY_HISTORY_CLASS_B_RESULT_NOT_BLANK",
+                            "source_game_id": game_id,
+                        }
+                    )
 
         result["defects"].extend(
             _table_defects(
@@ -1025,6 +1180,17 @@ def author(
         layout = resolve_stage3b_parent_layout(archive)
         status = json.loads(archive.read(layout["status_path"]))
         _, ledger = _csv_bytes(archive.read(layout["ledger_path"]))
+        early_member = (
+            layout["prefix"]
+            + AUTHORING_DIR
+            + "/"
+            + EARLY_HISTORY_AUTHORING_FILE
+        )
+        early_history = (
+            json.loads(archive.read(early_member))
+            if early_member in archive.namelist()
+            else None
+        )
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
             for filename in AUTHORING_FILES
@@ -1057,6 +1223,7 @@ def author(
                 archive,
                 layout["prefix"],
                 preflight["coverage"],
+                early_history,
             ),
             encoding="utf-8",
         )
@@ -1076,6 +1243,7 @@ def author(
         "stage3b_checkpoint_sha256": sha256_bytes(parent),
         "research_base_sha": preflight["research_base_sha"],
         "coverage": preflight["coverage"],
+        "early_history_uncertainty": preflight["early_history_uncertainty"],
         "package_dir": str(package),
         "closeout": closeout_status,
         "repository_mutations": 0,

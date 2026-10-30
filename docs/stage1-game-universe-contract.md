@@ -95,12 +95,32 @@ The Research lane then makes **one explicit, separately hashed Stage 1 closeout 
 
 This exception creates no automatic school-specific exemption or new owner gate. A genuine contrary historical judgment still belongs to the owner. All other Stage 1 completion, documentation, and acceptance rules remain unchanged.
 
+### Separate narrow exception: terminal early-history uncertainty
+
+Some inception/founding-era evidence can be honest, authoritative, and permanently incomplete without fitting the counted-gap exception above. Stage 1 may close through the separate `EARLY_HISTORY_UNCERTAINTY` path only after the repository-owned read-only `tools/research_stage1_early_history_uncertainty.py` independently verifies the exact checkpoint chain.
+
+Two classes are eligible:
+
+1. **Unquantified founding-era season coverage** — authoritative institutional/comparable evidence establishes that the program/team existed in the inception/founding era, but neither an exact competitive-game count nor zero competitive games is established after bounded manifested research. Identified games remain ordinary rows; no anonymous/placeholder game or expected count may be invented. An explicit source missing-game count is **not** eligible here and remains governed exclusively by the existing counted-gap path above.
+2. **Identified competitive games with genuinely unknown results** — each affected game has a stable research ID, season, literal opponent evidence, competitive inclusion, and structured game type, while both scores and the on-court W/L/T remain unknown after bounded manifested research. Do not allocate outcomes from aggregate records or discard direct literal score/result evidence.
+
+Common safeguards:
+
+- exact parent/candidate SHA pins, manifest verification, immutable `research_base_sha`, unique stable IDs, and zero unrelated Stage 1 blockers are mandatory;
+- known-result W/L/T totals are computed only from rows whose outcome is actually known;
+- `audit-candidate` authenticates the unchanged historical ledger/census plus manifested `early-history-uncertainty.json` and may emit only `ELIGIBLE_FOR_EARLY_HISTORY_UNCERTAINTY_CLOSEOUT`; it always leaves `stage1_complete: false`;
+- the Research lane then creates one separately hashed closeout successor, preserving the audited ledger/census unchanged, binding the audit hash, reclassifying only the accepted terminal debt, and seeding an identical `stage4-authoring/early-history-uncertainty.json` payload for later Research carry-through;
+- `verify-closeout` independently verifies that successor and is the only path that permits `STAGE_1 / COMPLETE` with terminal codes `EARLY_HISTORY_UNQUANTIFIED_SEASON_COVERAGE` and/or `EARLY_HISTORY_IDENTIFIED_GAME_RESULT_UNKNOWN`;
+- the metadata is durable historical uncertainty authority, not permission for later stages to fill a score/result, manufacture a game, or infer a season total.
+
+This path is generic and evidence-preserving. It creates no school-specific waiver and no additional owner gate.
+
 ## 4. Stage 1 convergence rule
 
 Once all of the following are true:
 
-- the **identified** competitive-game universe is mechanically reconciled, with any source-acknowledged unidentified-game coverage gap separately audited under §3;
-- every season census is reconciled or its source-internal discrepancy is explicitly explained, including the approved §3 season-level coverage-gap representation;
+- the **identified** competitive-game universe is mechanically reconciled, with any source-acknowledged unidentified-game coverage gap separately audited under §3 and any terminal early-history uncertainty separately audited/verified under the narrow exception above;
+- every season census is reconciled or its source-internal discrepancy is explicitly explained, including the approved §3 counted-gap representation or an independently verified unquantified founding-era coverage record;
 - the target game universe reaches its explicitly declared required completed-season
   cutoff, even when the primary media guide/record book naturally stops one completed
   season earlier;
@@ -108,7 +128,7 @@ Once all of the following are true:
 - stable research-local game IDs exist;
 - every game has a structured `game_type` sufficient to distinguish `REGULAR_SEASON` from postseason; this is a Stage 1 invariant for new Research lanes and Stage 2 must preserve it unchanged;
 - accepted corrections are written through with literal evidence preserved;
-- remaining field-level unknowns are explicitly queued and do not threaten game identity, inclusion, season accounting, or on-court result;
+- remaining field-level unknowns are explicitly queued and do not threaten game identity, inclusion, season accounting, or on-court result, except for exact terminal Class B result-unknown rows independently verified under the early-history uncertainty path;
 
 the next required action is **Stage 1 closeout/checkpoint**, not another historical source family.
 

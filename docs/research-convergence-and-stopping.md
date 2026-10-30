@@ -59,6 +59,15 @@ a played-game ledger, or authorize Stage 2 without a subsequent durable Stage 1 
 checkpoint. Record the identified-game count separately from the unidentified source
 coverage gap in all subsequent handoffs.
 
+A genuinely **unquantified inception/founding-era season** or an **identified competitive
+game whose result remains unknowable** may converge only through the separate
+`EARLY_HISTORY_UNCERTAINTY` contract in `docs/stage1-game-universe-contract.md`.
+The permanent auditor must verify exact parent/candidate hashes, manifested research
+exhaustion, zero unrelated blockers, unchanged ledger/census, and separate known/unknown
+result accounting; the independently verified closeout must preserve the accepted terminal
+debt. Do not use this path for a source-explicit counted gap, arbitrary mid-history missing
+season, recoverable result, or aggregate W/L allocation.
+
 ## 4. Stage 3A convergence
 
 `docs/stage3a-regular-season-site-research.md` controls Stage 3A responsibility and

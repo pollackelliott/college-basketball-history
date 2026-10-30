@@ -26,11 +26,21 @@ Mechanical compatibility is not an owner decision.
 
 Current-policy checkpoints carry package-authoring state under stage4-authoring/.
 
-The package-ready members are:
+The three ordinary package-ready members are:
 
 1. stage4-authoring/opponents.csv
 2. stage4-authoring/venues.csv
 3. stage4-authoring/conferences.csv
+
+A portfolio that completed Stage 1 through the independently verified early-history
+uncertainty path additionally carries:
+
+4. stage4-authoring/early-history-uncertainty.json
+
+The early-history member is not a seventh Research Freeze file. It is durable structured
+historical-debt authority. Stage 2/3 carry it byte-for-byte, Stage 4 verifies its manifest/hash
+continuity and terminal audit binding, preserves Class B blank results, and renders the
+structured payload deterministically inside the existing source-notes.md.
 
 These files are not a second historical truth layer. They are durable serialization of accepted Research conclusions needed by Stage 4.
 
@@ -91,7 +101,7 @@ Every successor Research checkpoint carries all existing stage4-authoring/ membe
 
 A later stage may add or legitimately update the file it owns, but it must not silently drop an earlier package-authoring member.
 
-tools/research_stage3a0.py mechanically carries any Stage 2 authoring capsule through its output and records those files in its manifest. Later Research substages must preserve the same invariant when serializing their checkpoints.
+tools/research_stage3a0.py mechanically carries any Stage 2 authoring capsule through its output and records those files in its manifest, including early-history-uncertainty.json when present. Later Research substages must preserve the same invariant when serializing their checkpoints.
 
 ## 4. Stage 3B completion preflight
 
@@ -200,7 +210,12 @@ The permanent Stage 4 coordinator generates their mechanical baseline from:
 - final game/site/type censuses;
 - row-level source metadata;
 - durable source registers present in the checkpoint;
-- the explicit Research coverage declaration.
+- the explicit Research coverage declaration;
+- the independently verified early-history uncertainty payload when present.
+
+When early-history uncertainty is present, source-notes.md contains one deterministic fenced
+JSON block carrying the exact structured payload. This preserves the established six-file
+portfolio contract while keeping the uncertainty machine-readable and hash-auditable.
 
 They are not a reason to keep essential Research conclusions only in prose/chat.
 

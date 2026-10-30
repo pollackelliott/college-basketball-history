@@ -356,6 +356,7 @@ STAGE4_AUTHORING_BASENAMES = {
     "opponents.csv",
     "venues.csv",
     "conferences.csv",
+    "early-history-uncertainty.json",
 }
 
 
@@ -707,7 +708,8 @@ def main() -> int:
     for basename, metadata in summary.get("stage4_authoring_carried", {}).items():
         output_path = Path(metadata["output_path"])
         if output_path.is_file():
-            artifacts["stage4_authoring_" + basename.replace(".csv", "")] = output_path
+            artifact_name = basename.replace(".csv", "").replace(".json", "")
+            artifacts["stage4_authoring_" + artifact_name] = output_path
 
     dump(
         out,
