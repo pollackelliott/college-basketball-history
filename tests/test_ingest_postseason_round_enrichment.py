@@ -170,6 +170,82 @@ class PostseasonRoundEnrichmentTopologyTests(unittest.TestCase):
         self.assertFalse(any(field == "postseason_round" for field, _ in applied))
         self.assertEqual(canonical["postseason_round"], "R32")
 
+    def test_research_accepted_nonbracket_qualifier_marks_blank_canonical(self):
+        source = source_game(round_name="")
+        source["normalization_status"] = "RESEARCH_ACCEPTED"
+        source["notes"] = (
+            "district playoff/qualifier rather than a national-bracket round"
+        )
+        canonical = canonical_game(
+            "CBBG-QUALIFIER",
+            "1946-1947",
+            "1947-03-18",
+            "georgetown",
+            41,
+            47,
+            "",
+        )
+
+        applied = ingest_school.apply_canonical_enrichment_candidates(
+            source,
+            canonical,
+            {},
+        )
+
+        self.assertTrue(
+            any(
+                field == "notes"
+                and "[NCAA_NON_APPEARANCE_QUALIFIER]" in value
+                for field, value in applied
+            )
+        )
+        self.assertIn(
+            "[NCAA_NON_APPEARANCE_QUALIFIER]",
+            canonical["notes"],
+        )
+
+    def test_nonbracket_qualifier_conflicts_with_existing_canonical_round(self):
+        source = source_game(round_name="")
+        source["normalization_status"] = "RESEARCH_ACCEPTED"
+        source["notes"] = (
+            "district playoff/qualifier rather than a national-bracket round"
+        )
+        canonical = canonical_game(
+            "CBBG-QUALIFIER-CONFLICT",
+            "1946-1947",
+            "1947-03-18",
+            "georgetown",
+            41,
+            47,
+            "R64",
+        )
+
+        disagreements = ingest_school.discrepancy_candidates(
+            source,
+            canonical,
+        )
+        applied = ingest_school.apply_canonical_enrichment_candidates(
+            source,
+            canonical,
+            {},
+        )
+
+        self.assertIn(
+            (
+                "postseason_round",
+                "[NCAA_NON_APPEARANCE_QUALIFIER]",
+                "R64",
+            ),
+            disagreements,
+        )
+        self.assertFalse(
+            any(
+                field == "notes"
+                and "[NCAA_NON_APPEARANCE_QUALIFIER]" in value
+                for field, value in applied
+            )
+        )
+
     def test_round_fill_is_narrowly_limited_to_ncaa_tournament_games(self):
         source = source_game(
             round_name="Championship",
