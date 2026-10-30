@@ -822,9 +822,6 @@ def _source_notes(
         f"- Primary-source historical results cutoff: {coverage['primary_source_historical_cutoff']}",
         f"- Required completed-season cutoff: {coverage['required_completed_season_cutoff']}",
         "- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.",
-        "",
-        "## Durable row-level source families",
-        "",
     ]
     if early_history:
         lines.extend(
@@ -838,11 +835,9 @@ def _source_notes(
                 "```json",
                 json.dumps(early_history, indent=2, sort_keys=True),
                 "```",
-                "",
-                "## Durable row-level source families",
-                "",
             ]
         )
+    lines.extend(["", "## Durable row-level source families", ""])
     lines.extend(f"- {key}: {count:,} game rows" for key, count in sorted(kinds.items()))
     if urls:
         lines.extend(["", "## Row-level source URLs", ""])
