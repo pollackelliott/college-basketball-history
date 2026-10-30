@@ -168,17 +168,18 @@
     "texas-state-release-preview-verify-0001",
     "texas-state-release-gate2-approval-0001",
     "texas-state-release-production-proof-0001",
-    "saint-louis-stage1-0001"
+    "saint-louis-stage1-0001",
+    "saint-louis-stage1-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "dd69ad6e2c20b22b8dc1c8bddace8a7fbd58abbc",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "saint-louis-stage1-0002",
+  "active_request_sha256": "60afaa85f0d0fc9308a09347b17a98b1e4964b3c2aa2289ef7c563d78439efd7",
+  "active_school_key": "saint-louis",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -356,8 +357,11 @@
     "stage1_reconciliation_sha256": "4469b607c82187b05073c0e0ee279548158f10fc566508fbf7395b08b6cbece9",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41128853255",
+  "lock_acquisition_request_commit": "d7fb3fe2ced691658276947fabc9ae2729c4aa8e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "STAGE1_RUNNING"
 }
