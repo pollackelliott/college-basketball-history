@@ -476,6 +476,7 @@ def _projection(
             "normalized_opponent_key",
             "opponent_program_key",
             "opponent_key",
+            "canonical_opponent_key",
         )
         opponent_name = canonical_name.get(opponent_key, "")
         if not opponent_name:
