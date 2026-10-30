@@ -1,30 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "san-diego-state-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "san-diego-state",
-  "previous_control_state_commit": "f95146d3ed84d448a315f000ae04743b67afe6e3",
-  "previous_control_state_sha256": "0b4748977105e86fb18ddb71e76a3d345e7ae2ccf4f7f078d0ae1f5a776d9cae",
-  "expected_protected_main_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
-  "target_branch": "data/san-diego-state-onboarding",
-  "target_sha": "4e2cd0d260867418d2cf543154eed0585681043e",
-  "pr_number": 402,
-  "merge_sha": "b6ebbf2339996d0282f96d69bab410e968fb2f96",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/san-diego-state/san-diego-state-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "d9819bb305fa3bc39136254d68bd62a3c971a4b86406fa212281c6847d08c83c"
+  "request_id": "texas-state-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "texas-state",
+  "previous_control_state_commit": "cae7b8d780c3211c9485503575cc14c07d9e3669",
+  "previous_control_state_sha256": "95ae272a1380c1039b76e50f8182f5fdcfccb87a6a699545ed8966496b26938f",
+  "expected_protected_main_sha": "ac52ce70b7a7c550a23bae40c8773a0a081e0388",
+  "research_checkpoint": {
+    "sha256": "05d1290796707e472a5306067a64571d321c5276400bce2f2877d72f2cefc70a",
+    "research_base_sha": "396ac80855a4d04c3b9a3f98f8c9a2516e9a1e97",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "d834f204b218a438097c2936e37aba70d3baa018",
+      "path_prefix": ".remote-implementation/transports/texas-state/texas-state-stage1-0001/part-",
+      "part_count": 41
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/san-diego-state/san-diego-state-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "f667df3f6a4aecc8f96422c10ecff7f81c7c39baa00155c931d10d6dd469cb78"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT San Diego State serialized Implementation",
-    "authorization": "Owner issued Proceed from the durable exact Owner Gate 2 approved boundary. The school Implementation connector rechecked protected main, exact PR #402 head, passing checks, clean mergeability, global IDLE/COMPLETE control state, and fresh Gate 2 equivalence before performing exactly one repository-standard two-parent merge. GitHub merged exact approved head 4e2cd0d260867418d2cf543154eed0585681043e as b6ebbf2339996d0282f96d69bab410e968fb2f96 with first parent 619daf5a96e9acfc80a8fc74b381f50bdc0599fc and second parent 4e2cd0d260867418d2cf543154eed0585681043e. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, or new owner-approval authority."
+    "origin": "ChatGPT Texas State serialized Implementation lane",
+    "authorization": "Owner explicitly directed a single read-only remote STAGE1_INVENTORY of the authenticated final Texas State RESEARCH_FROZEN artifact, with immutable Git base64-part transport. No Phase 0, existing shared/global mutation, Stage 2, Gate 1, release, or other authority."
   },
   "authority": {
     "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
@@ -36,11 +38,10 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
-    "venue_identity_maintenance": false
+    "owner_gate_2": false
   }
 }
