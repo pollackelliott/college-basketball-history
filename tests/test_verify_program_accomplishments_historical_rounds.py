@@ -93,6 +93,36 @@ class VerifiedHistoricalRoundCrosscheckTests(unittest.TestCase):
             output,
         )
 
+    def test_marked_nonbracket_qualifier_does_not_create_appearance_or_round_gap(self):
+        qualifier = ncaa_game(
+            "CBBG-QUALIFIER",
+            "1946-1947",
+            "1947-03-18",
+            "",
+        )
+        qualifier["notes"] = (
+            "[NCAA_NON_APPEARANCE_QUALIFIER] "
+            "source=usc/USC-1947-QUALIFIER"
+        )
+        reference = dict(self.reference)
+        reference["ncaa_tournament_appearances"] = "1"
+
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            result = compare_program(
+                self.program,
+                reference,
+                [self.games[0], qualifier],
+            )
+
+        self.assertTrue(result)
+        rendered = output.getvalue()
+        self.assertIn("usc: MATCH", rendered)
+        self.assertNotIn(
+            "1946-1947 has no resolved NCAA round",
+            rendered,
+        )
+
     def test_unverified_reference_with_same_round_gap_still_fails(self):
         reference = dict(self.reference)
         reference["verification_status"] = "OWNER_BASELINE_UNVERIFIED"
