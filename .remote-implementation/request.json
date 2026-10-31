@@ -1,29 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage2-census-0002",
-  "school_key": "saint-louis",
+  "request_id": "saint-louis-stage2-census-0003",
   "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "14373d055ba983a98b2c066a84aab15aac7fa199",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "dae4f0cce97256ef97df66ce4c6ea3238e71bad7",
   "previous_control_state_sha256": "dd3af05b4cd89247b54383bcd9ddb726c66a835382cbd305aa5e2680c59ca8b0",
-  "expected_protected_main_sha": "e02ce29cd1bcc7174316dd82c520ee5963642bd1",
+  "expected_protected_main_sha": "a3c0cb9d1034314ff74debfb4545da4c53998370",
   "target_branch": "data/saint-louis-onboarding",
   "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
   "phase0_successor": {
     "path": ".remote-implementation/successors/saint-louis/saint-louis-phase0-0003/successor-manifest.json",
     "sha256": "60af3c915b2ff308ebeaddab66ec3ba5f7404a5349fce41fd5ada445cf9bb82a"
   },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "9638ac17ff25a832c15650deae1fd6b9bd1b0fbaee05136afc650851e7c9cc5b"
+  },
   "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
   "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
   "creation_provenance": {
-    "origin": "Saint Louis serialized Implementation; Stage 2 current-main regeneration after PR 414",
-    "authorization": "Owner authorized continuation; Control Center PR 414 generic NCAA qualifier semantics repair, new Stage 2 census on current protected main. Exact unchanged Saint Louis onboarding successor, immutable accepted Research Freeze, Phase 0 and semantic guard. One read-only permanent Stage 2 census; no opponent normalization replay, no Research changes, no historical override, no owner Gate 1/2 or release."
+    "origin": "Saint Louis serialized Implementation — PR #415 current-main census compatibility continuation",
+    "authorization": "Explicit Control Center disposition PR #415 directs exactly one fresh guarded read-only Stage 2 census on fixed main, bound to original Phase 0 and independently verified opponent-display successor chain. Owner already authorized Stage 2 technical phase. This is not a replay of failed request saint-louis-stage2-census-0002. Preserve immutable Research and March 18, 1947 Oklahoma district qualifier evidence, no historical edits, no normalized display replay, no recommendation map, Gate 1, proposal rehearsal or release."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": true,
     "stage2_opponent_display_normalize": false,
@@ -36,7 +42,6 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false,
-    "venue_identity_maintenance": false
+    "release_production_proof": false
   }
 }
