@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "b40bde0cb35d2bf358896c64b120f0b429de7c5e17e29026f51b3d014afb439d",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
+  "pr_number": 418,
+  "preview_deployment_id": 7463024679,
+  "preview_url": "https://college-basketball-history-2wvijc2mx-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "saint-louis-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "status": "PASS"
+}
