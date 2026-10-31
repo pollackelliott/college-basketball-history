@@ -285,7 +285,24 @@ normal protected-main rules, then reruns the complete Stage 1 inventory on refre
 
 The request binds the exact current protected-main SHA, exact existing onboarding branch and SHA, exact Phase 0 successor manifest path/hash, exact Integration Freeze SHA-256, and exact source-game semantic snapshot SHA-256. A changed or missing onboarding head is a STOP.
 
-The runner authenticates the Phase 0 successor and write-ahead authority already preserved on the control branch, restores only the exact ignored `.onboarding/<school>/integration-freeze.json` required by the permanent Stage 2 coordinator, and verifies the frozen six-file package hashes against the request-bound onboarding commit. It does not regenerate Integration Freeze and does not copy arbitrary historical `.onboarding` state.
+When the request-bound onboarding SHA is still the exact Phase 0 successor, the original Phase 0 authentication path remains unchanged.
+
+When an already-authorized, independently fresh-verified `STAGE2_OPPONENT_DISPLAY_NORMALIZE` operation has published a later onboarding successor, a new census request must additionally bind that exact opponent-display successor manifest through `stage2_opponent_display_successor.path/sha256`. The census authenticator then proves the complete Phase 0 → display-successor chain rather than requiring the older Phase 0 commit to remain the branch head. This compatibility is specific to the productionized opponent-display repair; it is not a generic later-head escape hatch.
+
+For that later-head path the runner must authenticate all of the following before accepting the census request:
+
+- the Phase 0 successor, write-ahead, Integration Freeze, semantic snapshot, and all six Phase 0 package-member hashes at the exact Phase 0 commit;
+- the bound opponent-display successor kind/operation, exact Phase 0 predecessor, exact request target SHA/tree, successful repository validation, completed transaction, and successful existing-ref CAS publication;
+- the actual Git target commit has exactly one parent equal to the Phase 0 successor and its complete Git diff equals the display successor's declared changed-path set;
+- changed paths are a nonempty subset of only `schools/<school>/opponents.csv` and `schools/<school>/source-games.csv`;
+- the display write-ahead and field-level proof match the successor, with zero opponent-key changes, zero literal-evidence changes, and zero non-name source-game field changes;
+- the independent `REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION` for the same request/predecessor/successor is present and records semantic-drift `PASS`, tracked Stage 2 mutation `NONE`, and `remote_stage2_opponent_display_equivalence=PASS`;
+- every changed display file matches the successor's exact post-change SHA-256; and
+- every untouched member of the six-file school package remains byte-identical to its Phase 0 Integration Freeze hash.
+
+A blank or malformed successor binding, changed predecessor, unrelated Git path, altered historical field, failed fresh verification, or unproved package byte is a STOP.
+
+After that authority authentication, the runner restores only the exact ignored `.onboarding/<school>/integration-freeze.json` required by the permanent Stage 2 coordinator. It does not regenerate Integration Freeze and does not copy arbitrary historical `.onboarding` state.
 
 It then invokes unchanged:
 
