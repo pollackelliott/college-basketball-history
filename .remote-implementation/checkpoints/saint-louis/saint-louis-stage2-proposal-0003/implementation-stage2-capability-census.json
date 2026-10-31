@@ -1,0 +1,221 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 9,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 9,
+      "conditional_discrepancy": 42,
+      "discrepancy": 88,
+      "identity": 17,
+      "publication": 1
+    },
+    "decision_count": 158,
+    "decision_fields": {
+      "game_date": 46,
+      "game_identity": 17,
+      "game_type": 3,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 5,
+      "score": 31,
+      "site_metadata": 9,
+      "site_type": 45
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0000464",
+      "CANONICAL-SITE-PATCH-CBBG-0022942",
+      "CANONICAL-SITE-PATCH-CBBG-0069449",
+      "CANONICAL-SITE-PATCH-CBBG-0078886",
+      "CANONICAL-SITE-PATCH-CBBG-0081196",
+      "CANONICAL-SITE-PATCH-CBBG-0085339",
+      "CANONICAL-SITE-PATCH-CBBG-0145628",
+      "CANONICAL-SITE-PATCH-CBBG-0147232",
+      "CANONICAL-SITE-PATCH-CBBG-0170536",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1933-34-008-CBBG-0000457-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1941-42-009-CBBG-0080905-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1945-46-018-CBBG-0170536-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1947-48-018-CBBG-0081036-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1950-51-012-CBBG-0147236-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1951-52-027-CBBG-0081126-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1954-55-026-CBBG-0081191-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-SAINT-LOUIS-1959-60-027-CBBG-0157083-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1925-26-002-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1932-33-017-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1934-35-003-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1944-45-006-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1946-47-002-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1946-47-007-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1946-47-014-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1947-48-004-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1947-48-009-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1947-48-010-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1948-49-010-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1949-50-010-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1950-51-014-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1952-53-020-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1954-55-027-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1956-57-028-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1958-59-020-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1960-61-007-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1963-64-015-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1965-66-001-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1967-68-008-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1967-68-009-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1968-69-005-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1969-70-010-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1970-71-029-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1972-73-004-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1976-77-004-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1985-86-028-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1988-89-031-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1990-91-001-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1991-92-020-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1994-95-028-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-1999-00-007-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-2001-02-012-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-2001-02-026-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-2003-04-030-SITE_TYPE",
+      "DISCREPANCY-SAINT-LOUIS-2005-06-010-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 5,
+      "home_missing_location": 5,
+      "home_missing_venue": 19,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 5,
+      "neutral_missing_venue": 28,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 63,
+      "reciprocal_only_unresolved_home_venue": 1,
+      "reciprocal_research_accounted_gap": 3,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 14,
+      "researched_unresolved_home_venue_rows": 14,
+      "strict_home_gap": 5,
+      "strict_home_gap_rows": 5,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2893,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 16
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0000688",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398"
+      ],
+      "home_missing_location": [
+        "CBBG-0000688",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398"
+      ],
+      "home_missing_venue": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0182749",
+        "CBBG-0182760",
+        "CBBG-0182761",
+        "CBBG-0182762",
+        "CBBG-0182777",
+        "CBBG-0182780"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0007244",
+        "CBBG-0055391",
+        "CBBG-0076669",
+        "CBBG-0182722",
+        "CBBG-0182748"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0007244",
+        "CBBG-0009659",
+        "CBBG-0015306",
+        "CBBG-0015365",
+        "CBBG-0015399",
+        "CBBG-0028764",
+        "CBBG-0040520",
+        "CBBG-0041056",
+        "CBBG-0043350",
+        "CBBG-0049463",
+        "CBBG-0055391",
+        "CBBG-0076669"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0144435"
+      ],
+      "reciprocal_only_unresolved_home_venue": [
+        "CBBG-0022942"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0076669",
+        "CBBG-0081348",
+        "CBBG-0144435"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0022942",
+        "CBBG-0182749",
+        "CBBG-0182760",
+        "CBBG-0182761",
+        "CBBG-0182762",
+        "CBBG-0182777",
+        "CBBG-0182780",
+        "CBBG-0182783",
+        "CBBG-0182784",
+        "CBBG-0182792",
+        "CBBG-0182811",
+        "CBBG-0182812"
+      ],
+      "strict_home_gap": [
+        "CBBG-0000688",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398"
+      ],
+      "unknown_site_type": [
+        "CBBG-0182719",
+        "CBBG-0182720",
+        "CBBG-0182753",
+        "CBBG-0182754",
+        "CBBG-0182755",
+        "CBBG-0182796",
+        "CBBG-0182797",
+        "CBBG-0182798",
+        "CBBG-0182805",
+        "CBBG-0182845",
+        "CBBG-0182986",
+        "CBBG-0183047"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "REPAIR_SCOPE_REQUIRED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 54,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 5,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    }
+  ]
+}
