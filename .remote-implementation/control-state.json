@@ -382,11 +382,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "14429ece751136e5df11e3e458d8bdc530511d7c8f0ad2ccc259d164a880ff3f",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "saint-louis-release-readiness-0001",
     "school_key": "saint-louis",
     "target_branch": "data/saint-louis-onboarding",

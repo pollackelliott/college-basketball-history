@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "14429ece751136e5df11e3e458d8bdc530511d7c8f0ad2ccc259d164a880ff3f",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "readiness_proof_sha256": "0d19e01a740be601561370cfe8265f10df02cc55554c7f467c09f259d30c12a3",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "saint-louis-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
+  "tracked_mutation": "NONE"
+}
