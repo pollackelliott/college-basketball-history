@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage2-census-0004",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "a0e62ef0cff66570cac524723dc0634cdf3ee83e",
+  "previous_control_state_sha256": "cba3cd5ef19cf321c982ef2b9aef0e7e1ea7dea9262ea179d90611b5ab69dff8",
+  "expected_protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-phase0-0003/successor-manifest.json",
+    "sha256": "60af3c915b2ff308ebeaddab66ec3ba5f7404a5349fce41fd5ada445cf9bb82a"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "9638ac17ff25a832c15650deae1fd6b9bd1b0fbaee05136afc650851e7c9cc5b"
+  },
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "creation_provenance": {
+    "origin": "Saint Louis serialized Implementation — post-PR #416 generic Stage 2 cross-opponent identity repair",
+    "authorization": "Owner Proceed continues the already-authorized Stage 2 technical phase after generic PR #416 merged. Run exactly one fresh guarded read-only Stage 2 census on merged protected main, preserving the unchanged Saint Louis onboarding head and historical package. This request does not approve any Washington/Washington University identity choice, historical correction, recommendation map, Owner Gate 1 action, sealed apply, Preview, merge, or release."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
