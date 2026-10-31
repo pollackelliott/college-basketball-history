@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "saint-louis-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "saint-louis",
-  "previous_control_state_commit": "4416794919d25463f85936daec593e6703adb3c8",
-  "previous_control_state_sha256": "7c2651a1ca69f1f863416503283a9815a3c8698f50f23bb67b8adaef5ed3da3d",
-  "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "previous_control_state_commit": "4f04c9e7682d13af575f5d2d9f6454f7726e65a8",
+  "previous_control_state_sha256": "db9024f50ab11462fa25977ce3f0fdf964f90c1ea26756d6d99fba76e7ef6032",
+  "expected_protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
   "target_branch": "data/saint-louis-onboarding",
   "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
   "pr_number": 418,
-  "approved_plan_hash": "03afc8f8fa91b5fef8f10391257d5ba26a9cd96219cce3e64fa24eaa164e58ee",
-  "release_manifest_sha256": "5fa1593d3d4196e65ce9c4a7940bd18f7c27109d2ce795e5d79342e9403f970c",
-  "preview_deployment_id": 7463024679,
-  "preview_url": "https://college-basketball-history-2wvijc2mx-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "05936579ae8a9184c2a9bc6026393d8db62d6c1603360d7304e08d4d061b8380"
+  "merge_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "b40bde0cb35d2bf358896c64b120f0b429de7c5e17e29026f51b3d014afb439d"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "fcb4a4a4fbcc9574e845a01b1419fd2128f09a48795a6398bdb81d775ca539f0"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's explicit statement in the Saint Louis Implementation conversation: “APPROVED. Proceed” immediately after receiving the exact independently fresh-verified Owner Gate 2 packet for Saint Louis PR #418 at head 1d1b762e0775ca52202399ff4a387633cd357856 and successful Vercel Preview deployment 7463024679 at https://college-basketball-history-2wvijc2mx-elliott-pollacks-projects.vercel.app, with the Owner Gate 2 approval requirement stated. This is the required affirmative approval of that exact Preview, not a generic Proceed.",
-    "preview_checkpoint_sha256": "05936579ae8a9184c2a9bc6026393d8db62d6c1603360d7304e08d4d061b8380",
-    "preview_verification_sha256": "fcb4a4a4fbcc9574e845a01b1419fd2128f09a48795a6398bdb81d775ca539f0",
-    "pr_number": 418,
-    "pr_head_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
-    "preview_deployment_id": 7463024679,
-    "preview_url": "https://college-basketball-history-2wvijc2mx-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "4d001b654c8f2f3113fbb000422a8acaf91b4fb01e90879fb63ad6b467f6bf06"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly said APPROVED. Proceed in response to independently fresh-verified Saint Louis PR #418 exact Preview deployment 7463024679 and head 1d1b762e0775ca52202399ff4a387633cd357856. This request authorizes only read-only RELEASE_GATE2_APPROVAL and independent exact Preview re-verification. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, or affect other schools."
+    "origin": "ChatGPT Saint Louis serialized Implementation lane — exact post-merge Production proof",
+    "authorization": "Owner's explicit APPROVED. Proceed authorized the final release phase after exact Preview approval. The lane independently reauthenticated fresh-verified Owner Gate 2 approval, merged PR #418 with expected head 1d1b762e0775ca52202399ff4a387633cd357856, and verified exact merge a76ba14e378267d2d6d6beb18b880916d77e84a1 with first parent 2e3cf2c901a717cb0cce580692234eaca4f47e89 and second parent 1d1b762e0775ca52202399ff4a387633cd357856. This request only performs read-only permanent merged-main validation, exact-SHA Production deployment and all changed public JSON equivalence with independent fresh verification. No merge replay, mutations, new gates, recovery, or other-school authority."
   },
   "authority": {
     "phase0": false,
@@ -51,9 +38,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
