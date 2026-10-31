@@ -19,6 +19,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -370,25 +371,38 @@ def backfill_reciprocal_only_home_chronology(
     repo: Path,
     school_key: str,
 ) -> dict[str, int]:
-    """Fill canonical HOME venue/location for reciprocal-only target games.
+    """Fill reciprocal-only canonical HOME site data without inventing history.
 
-    This is deliberately narrower than the general HOME chronology remediation
-    workflow. It applies only when the canonical game already identifies the target
-    school as HOME, no assertion from the target school exists for that canonical
-    game, and exactly one documented target-school HOME relationship covers the
-    exact game date or the full basketball season. It never changes H/A/N and never
-    writes source/assertion evidence.
+    A unique documented HOME relationship may still supply exact venue/location.
+    When exact venue is not uniquely supportable, a narrower locality-only path is
+    allowed only for a canonical target-HOME game with no target assertion, explicit
+    reciprocal HOME support, no agreeing reciprocal venue, and one unanimous complete
+    locality across the target program's accepted HOME rows for that season.  That
+    path leaves venue blank and emits the existing reciprocal-only unresolved-HOME
+    provenance marker consumed by the permanent implementation site gate.
     """
 
     canonical_path = repo / "data/canonical/games.csv"
     assertions_path = repo / "data/evidence/game-assertions.csv"
+    source_games_path = repo / "schools" / school_key / "source-games.csv"
     school_venues_path = repo / "schools" / school_key / "venues.csv"
     global_venues_path = repo / "data/reference/venues.csv"
 
     canonical_fields, canonical_rows = read_csv_table(canonical_path)
     assertions = chronology_read_csv(assertions_path)
+    source_games = (
+        chronology_read_csv(source_games_path)
+        if source_games_path.is_file()
+        else []
+    )
     school_venues = chronology_read_csv(school_venues_path)
     global_venues = chronology_read_csv(global_venues_path)
+
+    assertions_by_game: dict[str, list[dict[str, str]]] = {}
+    for assertion in assertions:
+        game_id = chronology_clean(assertion.get("canonical_game_id"))
+        if game_id:
+            assertions_by_game.setdefault(game_id, []).append(assertion)
 
     target_assertion_games = {
         chronology_clean(row.get("canonical_game_id"))
@@ -413,7 +427,13 @@ def backfill_reciprocal_only_home_chronology(
     applied = 0
     exact_date_matches = 0
     season_only_matches = 0
+    locality_only_matches = 0
+    skipped_no_reciprocal_home_support = 0
     skipped_no_unique_relationship = 0
+    skipped_no_unique_home_locality = 0
+    skipped_conflicting_reciprocal_locality = 0
+    skipped_reciprocal_known_venue = 0
+    skipped_ncaa = 0
 
     def canonical_home(row: dict[str, str]) -> str:
         site = chronology_clean(row.get("site_type"))
@@ -459,6 +479,31 @@ def backfill_reciprocal_only_home_chronology(
         if not game_id or game_id in target_assertion_games:
             continue
 
+        game_assertions = assertions_by_game.get(game_id, [])
+        canonical_site = chronology_clean(game.get("site_type"))
+        reciprocal_support: list[dict[str, str]] = []
+        for assertion in game_assertions:
+            if chronology_clean(assertion.get("source_program_key")) == school_key:
+                continue
+            if chronology_clean(assertion.get("normalized_opponent_key")) != school_key:
+                continue
+            _, assertion_home = ingest_school.source_site_to_canonical(assertion)
+            if assertion_home != school_key:
+                continue
+            if not chronology_clean(assertion.get("source_game_id")):
+                continue
+            reciprocal_support.append(assertion)
+
+        reciprocal_support.sort(
+            key=lambda row: (
+                chronology_clean(row.get("source_program_key")),
+                chronology_clean(row.get("source_game_id")),
+            )
+        )
+        if not reciprocal_support:
+            skipped_no_reciprocal_home_support += 1
+            continue
+
         game_day = parse_game_date(game.get("game_date", ""))
         if game_day is not None:
             matches = _dedupe_relationships(
@@ -476,58 +521,156 @@ def backfill_reciprocal_only_home_chronology(
             )
             match_kind = "season_only"
 
-        if len(matches) != 1:
+        if len(matches) == 1:
+            rel = matches[0]
+            if not chronology_clean(rel.get("source_basis")):
+                raise WorkflowError(
+                    f"{game_id}: reciprocal-only HOME chronology relationship lacks source_basis"
+                )
+
+            registry, registry_error = _registry_identity(
+                rel,
+                venues_by_id,
+                venues_by_key,
+            )
+            if registry_error or registry is None:
+                raise WorkflowError(
+                    f"{game_id}: reciprocal-only HOME chronology registry error: "
+                    f"{registry_error or 'unknown'}"
+                )
+
+            desired = {
+                "venue_id": chronology_clean(registry.get("venue_id")),
+                "venue_key": chronology_clean(registry.get("venue_key")),
+                "site_city": chronology_clean(registry.get("city")),
+                "site_state": chronology_clean(registry.get("state")),
+            }
+            for field, proposed in desired.items():
+                current = chronology_clean(game.get(field))
+                if current and current != proposed:
+                    raise WorkflowError(
+                        f"{game_id}: reciprocal-only HOME chronology refuses to overwrite "
+                        f"{field}={current!r} with {proposed!r}"
+                    )
+                if not current:
+                    game[field] = proposed
+
+            marker = (
+                "[RECIPROCAL_ONLY_HOME_CHRONOLOGY_BACKFILL "
+                f"target={school_key} venue_key={desired['venue_key']}; "
+                "canonical HOME supplied by reciprocal evidence; venue/location supplied "
+                "by documented target-school HOME chronology]"
+            )
+            notes = game.get("notes", "")
+            if marker not in notes:
+                game["notes"] = (
+                    notes.rstrip()
+                    + (" | " if notes.strip() else "")
+                    + marker
+                )
+
+            applied += 1
+            if match_kind == "exact_date":
+                exact_date_matches += 1
+            else:
+                season_only_matches += 1
+            continue
+
+        # The unresolved-HOME venue exception is reciprocal-only: a target assertion
+        # (including UNKNOWN H/A/N) must use its own reconciliation-backed path.
+        if any(
+            chronology_clean(assertion.get("source_program_key")) == school_key
+            for assertion in game_assertions
+        ):
             skipped_no_unique_relationship += 1
             continue
 
-        rel = matches[0]
-        if not chronology_clean(rel.get("source_basis")):
-            raise WorkflowError(
-                f"{game_id}: reciprocal-only HOME chronology relationship lacks source_basis"
-            )
+        if chronology_clean(game.get("game_type")).upper() == "NCAA_TOURNAMENT":
+            skipped_ncaa += 1
+            continue
 
-        registry, registry_error = _registry_identity(
-            rel,
-            venues_by_id,
-            venues_by_key,
-        )
-        if registry_error or registry is None:
-            raise WorkflowError(
-                f"{game_id}: reciprocal-only HOME chronology registry error: "
-                f"{registry_error or 'unknown'}"
-            )
+        if any(
+            chronology_clean(assertion.get("curated_venue_name"))
+            for assertion in reciprocal_support
+        ):
+            skipped_reciprocal_known_venue += 1
+            continue
 
-        desired = {
-            "venue_id": chronology_clean(registry.get("venue_id")),
-            "venue_key": chronology_clean(registry.get("venue_key")),
-            "site_city": chronology_clean(registry.get("city")),
-            "site_state": chronology_clean(registry.get("state")),
+        season_label = chronology_clean(game.get("season_label"))
+        season_home_rows = [
+            row
+            for row in source_games
+            if chronology_clean(row.get("season_label")) == season_label
+            and chronology_clean(row.get("curated_site_type")).upper()
+            == "SOURCE_PROGRAM_HOME"
+        ]
+        if not season_home_rows:
+            skipped_no_unique_relationship += 1
+            continue
+
+        if any(
+            not chronology_clean(row.get("city"))
+            or not chronology_clean(row.get("state"))
+            for row in season_home_rows
+        ):
+            skipped_no_unique_home_locality += 1
+            continue
+
+        home_localities = {
+            (
+                chronology_clean(row.get("city")),
+                chronology_clean(row.get("state")),
+            )
+            for row in season_home_rows
         }
-        for field, proposed in desired.items():
+        if len(home_localities) != 1:
+            skipped_no_unique_home_locality += 1
+            continue
+
+        locality = next(iter(home_localities))
+        reciprocal_localities = {
+            (
+                chronology_clean(assertion.get("city")),
+                chronology_clean(assertion.get("state")),
+            )
+            for assertion in reciprocal_support
+            if chronology_clean(assertion.get("city"))
+            and chronology_clean(assertion.get("state"))
+        }
+        if reciprocal_localities and reciprocal_localities != {locality}:
+            skipped_conflicting_reciprocal_locality += 1
+            continue
+
+        for field, proposed in (
+            ("site_city", locality[0]),
+            ("site_state", locality[1]),
+        ):
             current = chronology_clean(game.get(field))
             if current and current != proposed:
                 raise WorkflowError(
-                    f"{game_id}: reciprocal-only HOME chronology refuses to overwrite "
+                    f"{game_id}: reciprocal-only HOME locality refuses to overwrite "
                     f"{field}={current!r} with {proposed!r}"
                 )
             if not current:
                 game[field] = proposed
 
+        reciprocal = reciprocal_support[0]
         marker = (
-            "[RECIPROCAL_ONLY_HOME_CHRONOLOGY_BACKFILL "
-            f"target={school_key} venue_key={desired['venue_key']}; "
-            "canonical HOME supplied by reciprocal evidence; venue/location supplied "
-            "by documented target-school HOME chronology]"
+            "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+            f"target={school_key} "
+            f"reciprocal={chronology_clean(reciprocal.get('source_program_key'))}/"
+            f"{chronology_clean(reciprocal.get('source_game_id'))}]"
         )
         notes = game.get("notes", "")
         if marker not in notes:
-            game["notes"] = (notes.rstrip() + (" | " if notes.strip() else "") + marker)
+            game["notes"] = (
+                notes.rstrip()
+                + (" | " if notes.strip() else "")
+                + marker
+            )
 
         applied += 1
-        if match_kind == "exact_date":
-            exact_date_matches += 1
-        else:
-            season_only_matches += 1
+        locality_only_matches += 1
 
     if applied:
         write_csv_preserving_format(canonical_path, canonical_fields, canonical_rows)
@@ -536,9 +679,14 @@ def backfill_reciprocal_only_home_chronology(
         "applied_games": applied,
         "exact_date_matches": exact_date_matches,
         "season_only_matches": season_only_matches,
+        "locality_only_matches": locality_only_matches,
+        "skipped_no_reciprocal_home_support": skipped_no_reciprocal_home_support,
         "skipped_no_unique_relationship": skipped_no_unique_relationship,
+        "skipped_no_unique_home_locality": skipped_no_unique_home_locality,
+        "skipped_conflicting_reciprocal_locality": skipped_conflicting_reciprocal_locality,
+        "skipped_reciprocal_known_venue": skipped_reciprocal_known_venue,
+        "skipped_ncaa": skipped_ncaa,
     }
-
 
 
 def backfill_resolved_target_home_chronology(
@@ -596,6 +744,7 @@ def backfill_resolved_target_home_chronology(
     season_only_matches = 0
     skipped_no_resolved_site_conflict = 0
     skipped_agreeing_site_evidence = 0
+    skipped_conflicting_target_site_evidence = 0
     skipped_no_unique_relationship = 0
 
     def canonical_home(row: dict[str, str]) -> str:
@@ -733,6 +882,43 @@ def backfill_resolved_target_home_chronology(
             "site_city": chronology_clean(registry.get("city")),
             "site_state": chronology_clean(registry.get("state")),
         }
+
+        # A resolved H/A/N decision does not erase preserved exact-game physical-site
+        # evidence from the losing target assertion.  HOME chronology may fill only
+        # when that evidence does not contradict the proposed venue/locality.
+        target_city = chronology_clean(target_assertion.get("city"))
+        target_state = chronology_clean(target_assertion.get("state"))
+        if (
+            (target_city and target_city != desired["site_city"])
+            or (target_state and target_state != desired["site_state"])
+        ):
+            skipped_conflicting_target_site_evidence += 1
+            continue
+
+        target_venue = chronology_clean(
+            target_assertion.get("curated_venue_name")
+        )
+        if target_venue:
+            def venue_label(value: str) -> str:
+                return re.sub(r"[^a-z0-9]+", "", chronology_clean(value).casefold())
+
+            accepted_labels = {
+                venue_label(value)
+                for value in (
+                    rel.get("canonical_name", ""),
+                    rel.get("venue_key", ""),
+                    registry.get("display_name", ""),
+                    registry.get("venue_key", ""),
+                )
+                if chronology_clean(value)
+            }
+            for alias in re.split(r"[|;]", chronology_clean(rel.get("aliases", ""))):
+                if chronology_clean(alias):
+                    accepted_labels.add(venue_label(alias))
+            if venue_label(target_venue) not in accepted_labels:
+                skipped_conflicting_target_site_evidence += 1
+                continue
+
         for field, proposed in desired.items():
             current = chronology_clean(game.get(field))
             if current and current != proposed:
@@ -774,6 +960,9 @@ def backfill_resolved_target_home_chronology(
         "season_only_matches": season_only_matches,
         "skipped_no_resolved_site_conflict": skipped_no_resolved_site_conflict,
         "skipped_agreeing_site_evidence": skipped_agreeing_site_evidence,
+        "skipped_conflicting_target_site_evidence": (
+            skipped_conflicting_target_site_evidence
+        ),
         "skipped_no_unique_relationship": skipped_no_unique_relationship,
     }
 

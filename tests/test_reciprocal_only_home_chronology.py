@@ -41,6 +41,7 @@ CANONICAL_FIELDS = [
     "venue_key",
     "site_city",
     "site_state",
+    "game_type",
     "notes",
 ]
 
@@ -49,6 +50,15 @@ ASSERTION_FIELDS = [
     "source_program_key",
     "source_game_id",
     "normalized_opponent_key",
+    "curated_site_type",
+    "curated_venue_name",
+    "city",
+    "state",
+]
+
+SOURCE_GAME_FIELDS = [
+    "source_game_id",
+    "season_label",
     "curated_site_type",
     "curated_venue_name",
     "city",
@@ -124,11 +134,15 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
                         "canonical_game_id": "CBBG-0000001",
                         "source_program_key": "oklahoma-state",
                         "source_game_id": "OKSTRAW-1",
+                        "normalized_opponent_key": "cincinnati",
+                        "curated_site_type": "OPPONENT_HOME",
                     },
                     {
                         "canonical_game_id": "CBBG-0000002",
                         "source_program_key": "purdue",
                         "source_game_id": "PURRAW-1",
+                        "normalized_opponent_key": "cincinnati",
+                        "curated_site_type": "OPPONENT_HOME",
                     },
                 ],
             )
@@ -219,9 +233,9 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
                     "canonical_game_id": "CBBG-0000004",
                     "season_label": "1935-1936",
                     "game_date": "1936-02-04",
-                    "team_a_key": "north-carolina",
-                    "team_b_key": "cincinnati",
-                    "site_type": "TEAM_B_HOME",
+                    "team_a_key": "cincinnati",
+                    "team_b_key": "north-carolina",
+                    "site_type": "TEAM_A_HOME",
                     "designated_home_team_key": "cincinnati",
                 }],
             )
@@ -233,12 +247,14 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
                         "canonical_game_id": "CBBG-0000004",
                         "source_program_key": "north-carolina",
                         "source_game_id": "UNC-1",
+                        "normalized_opponent_key": "cincinnati",
                         "curated_site_type": "OPPONENT_HOME",
                     },
                     {
                         "canonical_game_id": "CBBG-0000004",
                         "source_program_key": "cincinnati",
                         "source_game_id": "CIN-1",
+                        "normalized_opponent_key": "north-carolina",
                         "curated_site_type": "UNKNOWN",
                     },
                 ],
@@ -304,6 +320,8 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
                         "canonical_game_id": "CBBG-0000003",
                         "source_program_key": "kentucky",
                         "source_game_id": "KYRAW-1",
+                        "normalized_opponent_key": "cincinnati",
+                        "curated_site_type": "OPPONENT_HOME",
                     },
                     {
                         "canonical_game_id": "CBBG-0000003",
@@ -351,6 +369,248 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
             self.assertEqual(row["venue_id"], "")
             self.assertEqual(row["site_city"], "")
 
+
+    def test_reciprocal_only_multiple_venues_same_locality_adds_unresolved_marker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000008",
+                    "season_label": "1925-1926",
+                    "game_date": "",
+                    "team_a_key": "cincinnati",
+                    "team_b_key": "vanderbilt",
+                    "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "cincinnati",
+                    "game_type": "REGULAR_SEASON",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000008",
+                    "source_program_key": "vanderbilt",
+                    "source_game_id": "VANRAW-1",
+                    "normalized_opponent_key": "cincinnati",
+                    "curated_site_type": "OPPONENT_HOME",
+                    "curated_venue_name": "",
+                    "city": "",
+                    "state": "",
+                }],
+            )
+            write_csv(
+                repo / "schools/cincinnati/source-games.csv",
+                SOURCE_GAME_FIELDS,
+                [
+                    {
+                        "source_game_id": "CIN-HOME-1",
+                        "season_label": "1925-1926",
+                        "curated_site_type": "SOURCE_PROGRAM_HOME",
+                        "curated_venue_name": "Armory",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                    },
+                    {
+                        "source_game_id": "CIN-HOME-2",
+                        "season_label": "1925-1926",
+                        "curated_site_type": "SOURCE_PROGRAM_HOME",
+                        "curated_venue_name": "Gymnasium",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                    },
+                ],
+            )
+            write_csv(
+                repo / "schools/cincinnati/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [
+                    {
+                        "venue_id": "VEN-1",
+                        "venue_key": "armory",
+                        "canonical_name": "Armory",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                        "relationship_type": "SOURCE_PROGRAM_HOME",
+                        "relationship_start": "",
+                        "relationship_end": "",
+                        "source_basis": "accepted HOME evidence",
+                    },
+                    {
+                        "venue_id": "VEN-2",
+                        "venue_key": "gymnasium",
+                        "canonical_name": "Gymnasium",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                        "relationship_type": "SOURCE_PROGRAM_HOME",
+                        "relationship_start": "",
+                        "relationship_end": "",
+                        "source_basis": "accepted HOME evidence",
+                    },
+                ],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [
+                    {
+                        "venue_id": "VEN-1",
+                        "venue_key": "armory",
+                        "display_name": "Armory",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                    },
+                    {
+                        "venue_id": "VEN-2",
+                        "venue_key": "gymnasium",
+                        "display_name": "Gymnasium",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                    },
+                ],
+            )
+
+            result = backfill_reciprocal_only_home_chronology(repo, "cincinnati")
+
+            self.assertEqual(result["applied_games"], 1)
+            self.assertEqual(result["locality_only_matches"], 1)
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(row["venue_id"], "")
+            self.assertEqual(row["venue_key"], "")
+            self.assertEqual(row["site_city"], "Cincinnati")
+            self.assertEqual(row["site_state"], "OH")
+            self.assertIn(
+                "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+                "target=cincinnati reciprocal=vanderbilt/VANRAW-1]",
+                row["notes"],
+            )
+
+    def test_reciprocal_only_locality_fallback_rejects_mixed_home_localities(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000009",
+                    "season_label": "1925-1926",
+                    "game_date": "",
+                    "team_a_key": "cincinnati",
+                    "team_b_key": "vanderbilt",
+                    "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "cincinnati",
+                    "game_type": "REGULAR_SEASON",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000009",
+                    "source_program_key": "vanderbilt",
+                    "source_game_id": "VANRAW-2",
+                    "normalized_opponent_key": "cincinnati",
+                    "curated_site_type": "OPPONENT_HOME",
+                }],
+            )
+            write_csv(
+                repo / "schools/cincinnati/source-games.csv",
+                SOURCE_GAME_FIELDS,
+                [
+                    {
+                        "source_game_id": "CIN-HOME-3",
+                        "season_label": "1925-1926",
+                        "curated_site_type": "SOURCE_PROGRAM_HOME",
+                        "city": "Cincinnati",
+                        "state": "OH",
+                    },
+                    {
+                        "source_game_id": "CIN-HOME-4",
+                        "season_label": "1925-1926",
+                        "curated_site_type": "SOURCE_PROGRAM_HOME",
+                        "city": "Dayton",
+                        "state": "OH",
+                    },
+                ],
+            )
+            write_csv(
+                repo / "schools/cincinnati/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [],
+            )
+
+            result = backfill_reciprocal_only_home_chronology(repo, "cincinnati")
+
+            self.assertEqual(result["applied_games"], 0)
+            self.assertEqual(result["skipped_no_unique_home_locality"], 1)
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(row["site_city"], "")
+            self.assertNotIn("RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE", row["notes"])
+
+    def test_reciprocal_only_locality_fallback_requires_reciprocal_home_support(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000010",
+                    "season_label": "1925-1926",
+                    "game_date": "",
+                    "team_a_key": "cincinnati",
+                    "team_b_key": "vanderbilt",
+                    "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "cincinnati",
+                    "game_type": "REGULAR_SEASON",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000010",
+                    "source_program_key": "vanderbilt",
+                    "source_game_id": "VANRAW-3",
+                    "normalized_opponent_key": "cincinnati",
+                    "curated_site_type": "UNKNOWN",
+                }],
+            )
+            write_csv(
+                repo / "schools/cincinnati/source-games.csv",
+                SOURCE_GAME_FIELDS,
+                [{
+                    "source_game_id": "CIN-HOME-5",
+                    "season_label": "1925-1926",
+                    "curated_site_type": "SOURCE_PROGRAM_HOME",
+                    "city": "Cincinnati",
+                    "state": "OH",
+                }],
+            )
+            write_csv(
+                repo / "schools/cincinnati/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [],
+            )
+
+            result = backfill_reciprocal_only_home_chronology(repo, "cincinnati")
+
+            self.assertEqual(result["applied_games"], 0)
+            self.assertEqual(result["skipped_no_reciprocal_home_support"], 1)
 
     def test_resolved_target_site_conflict_backfills_canonical_only_from_home_chronology(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -531,6 +791,100 @@ class ReciprocalOnlyHomeChronologyTests(unittest.TestCase):
             self.assertEqual(row["venue_id"], "")
             self.assertEqual(row["site_city"], "")
 
+
+    def test_resolved_target_home_backfill_rejects_conflicting_target_physical_site(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+
+            write_csv(
+                repo / "data/canonical/games.csv",
+                CANONICAL_FIELDS,
+                [{
+                    "canonical_game_id": "CBBG-0000011",
+                    "season_label": "1967-1968",
+                    "game_date": "1967-12-27",
+                    "team_a_key": "alpha",
+                    "team_b_key": "beta",
+                    "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "alpha",
+                    "game_type": "REGULAR_SEASON",
+                }],
+            )
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ASSERTION_FIELDS,
+                [
+                    {
+                        "canonical_game_id": "CBBG-0000011",
+                        "source_program_key": "alpha",
+                        "source_game_id": "ALPHA-3",
+                        "normalized_opponent_key": "beta",
+                        "curated_site_type": "NEUTRAL",
+                        "curated_venue_name": "Los Angeles Arena",
+                        "city": "Los Angeles",
+                        "state": "CA",
+                    },
+                    {
+                        "canonical_game_id": "CBBG-0000011",
+                        "source_program_key": "beta",
+                        "source_game_id": "BETA-3",
+                        "normalized_opponent_key": "alpha",
+                        "curated_site_type": "OPPONENT_HOME",
+                    },
+                ],
+            )
+            write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                DISCREPANCY_FIELDS,
+                [{
+                    "discrepancy_id": "DISC-3",
+                    "canonical_game_id": "CBBG-0000011",
+                    "field_name": "site_type",
+                    "source_a_program_key": "alpha",
+                    "source_a_value": "NEUTRAL",
+                    "canonical_value": "TEAM_A_HOME",
+                    "status": "RESOLVED",
+                    "resolution_basis": "Owner-confirmed canonical HOME classification.",
+                }],
+            )
+            write_csv(
+                repo / "schools/alpha/venues.csv",
+                SCHOOL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000437",
+                    "venue_key": "alpha-field-house",
+                    "canonical_name": "Alpha Field House",
+                    "city": "Alpha City",
+                    "state": "AA",
+                    "relationship_type": "PRIMARY_HOME",
+                    "relationship_start": "1951-12-15",
+                    "relationship_end": "2002-03-02",
+                    "source_basis": "documented home chronology",
+                }],
+            )
+            write_csv(
+                repo / "data/reference/venues.csv",
+                GLOBAL_VENUE_FIELDS,
+                [{
+                    "venue_id": "VEN-000437",
+                    "venue_key": "alpha-field-house",
+                    "display_name": "Alpha Field House",
+                    "city": "Alpha City",
+                    "state": "AA",
+                }],
+            )
+
+            result = backfill_resolved_target_home_chronology(repo, "alpha")
+
+            self.assertEqual(result["applied_games"], 0)
+            self.assertEqual(
+                result["skipped_conflicting_target_site_evidence"],
+                1,
+            )
+            row = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(row["venue_id"], "")
+            self.assertEqual(row["site_city"], "")
+            self.assertNotIn("RESOLVED_TARGET_HOME_CHRONOLOGY_BACKFILL", row["notes"])
 
     def test_annotates_reciprocal_only_unknown_site_provenance(self):
         with tempfile.TemporaryDirectory() as temporary:
