@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "e9abd9f1805a90ad10759430ab1fbc330bd7ab6273e169bd42b16a41ee97dd14",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
+  "pr_number": 418,
+  "production_deployment_id": 7464055287,
+  "production_json_checked_count": 87,
+  "production_proof": true,
+  "request_id": "saint-louis-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "status": "COMPLETE"
+}
