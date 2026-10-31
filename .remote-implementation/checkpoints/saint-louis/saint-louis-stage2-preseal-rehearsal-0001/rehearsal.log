@@ -1,0 +1,522 @@
+Rehearsing filled review in /tmp/preseal-saint-louis-ib757k5j/repository
+
+=== sealed correction-only identity retarget ===
+{}
+
+=== owner-approved pre-ingest source patches ===
+{"cross_opponent_identity_patches": 3}
+
+=== ingestion apply ===
+College Basketball History — data validation
+Repository: /tmp/preseal-saint-louis-ib757k5j/repository
+
+Canonical games:      184,588
+Source assertions:    261,536
+Discrepancies:        8,482
+Reference programs:   365
+Accomplishment rows:  365
+Conference rows:      365
+Reference venues:     1,004
+
+WARNINGS (10):
+  - missouri: 3,022 legacy source/assertion rows drift (city=1,653, curated_site_type=3,022, curated_venue_name=1,586, state=1,582); run ingest_school.py --check-package for target-team enforcement.
+  - missouri: 3,024 legacy source/local-assertion rows drift (city=1,694, curated_site_type=3,024, curated_venue_name=1,593, state=1,622); run ingest_school.py --check-package for target-team enforcement.
+  - arkansas accomplishments: public accomplishment row awaits source verification.
+  - florida accomplishments: public accomplishment row awaits source verification.
+  - illinois accomplishments: public accomplishment row awaits source verification.
+  - kansas accomplishments: public accomplishment row awaits source verification.
+  - kentucky accomplishments: public accomplishment row awaits source verification.
+  - missouri accomplishments: public accomplishment row awaits source verification.
+  - northwestern accomplishments: public accomplishment row awaits source verification.
+  - tennessee accomplishments: public accomplishment row awaits source verification.
+
+PASS: core canonical, evidence, reconciliation, and reference layers are structurally valid.
+College Basketball History — school ingestion
+Repository: /tmp/preseal-saint-louis-ib757k5j/repository
+School:     saint-louis
+Mode:       APPLY
+
+Source rows:                2,892
+In-scope source rows:       2,892
+Pre-cutoff rows preserved:  0
+Existing-game matches:      944
+New canonical games:        1,948
+Identity review required:   0
+Canonical enrichments:       445 games / 2,188 fields
+Assertions to add:           2,892
+Discrepancies to add:        103
+
+Applied updates:
+  canonical games:   +1,948
+  enrichments:       445 games / 2,188 fields
+  source assertions: +2,892
+  discrepancies:     +103
+
+
+PASS: ingestion applied and post-write validation succeeded.
+
+=== generic reconciliation ===
+{"canonical_changes": 40, "canonical_retentions": 24, "canonical_site_left_unresolved": 1, "conditional_canonical_site_not_applicable": 8, "dependent_site_gap_discrepancies_added": 8, "left_under_review": 39, "processed": 103, "reciprocal_discrepancies_added": 34, "registry_fallbacks_retired": 1}
+
+=== reciprocal-only HOME chronology ===
+{"applied_games": 1, "exact_date_matches": 0, "locality_only_matches": 1, "season_only_matches": 0, "skipped_conflicting_reciprocal_locality": 0, "skipped_ncaa": 0, "skipped_no_reciprocal_home_support": 0, "skipped_no_unique_home_locality": 0, "skipped_no_unique_relationship": 0, "skipped_reciprocal_known_venue": 0}
+
+=== resolved target-conflict HOME chronology ===
+{"applied_games": 0, "exact_date_matches": 0, "season_only_matches": 0, "skipped_agreeing_site_evidence": 0, "skipped_conflicting_target_site_evidence": 0, "skipped_no_resolved_site_conflict": 0, "skipped_no_unique_relationship": 0}
+
+=== reciprocal-only UNKNOWN site provenance ===
+{"already_annotated": 0, "annotated_games": 0}
+
+=== publication metadata ===
+{"accomplishments_verified": 1, "pages_enabled": 1}
+Archived sealed decisions: data/reconciliation/onboarding-decisions/saint-louis-b81088042a8d.json
+
+=== deterministic site build ===
+College Basketball History — public site-data build
+Repository:          /tmp/preseal-saint-louis-ib757k5j/repository
+Mode:                APPLY
+
+Reference season:    2026-2027
+Programs:            365
+Public pages:        98
+Canonical games:     184,588
+Team JSON files:     98
+Stale team files:    0
+
+- alabama: 2,968 games, 1,847-1,120-1, 314 opponents, 0 pre-scope excluded
+- arizona: 3,020 games, 2,013-1,006-1, 379 opponents, 0 pre-scope excluded
+- arizona-state: 2,212 games, 1,177-1,035, 275 opponents, 123 pre-scope excluded
+- arkansas: 2,887 games, 1,849-1,038, 332 opponents, 0 pre-scope excluded
+- auburn: 2,806 games, 1,527-1,274-1, 302 opponents, 0 pre-scope excluded
+- baylor: 2,963 games, 1,515-1,448, 331 opponents, 4 pre-scope excluded
+- boise-state: 1,670 games, 950-720, 222 opponents, 1 pre-scope excluded
+- boston-college: 2,423 games, 1,288-1,135, 284 opponents, 0 pre-scope excluded
+- butler: 2,966 games, 1,706-1,260, 311 opponents, 0 pre-scope excluded
+- byu: 3,157 games, 1,986-1,171, 378 opponents, 0 pre-scope excluded
+- california: 3,017 games, 1,696-1,321, 307 opponents, 0 pre-scope excluded
+- central-connecticut: 1,170 games, 481-689, 180 opponents, 7 pre-scope excluded
+- chicago-state: 1,221 games, 316-905, 248 opponents, 18 pre-scope excluded
+- cincinnati: 3,060 games, 1,949-1,111, 378 opponents, 0 pre-scope excluded
+- clemson: 2,869 games, 1,478-1,390-1, 290 opponents, 0 pre-scope excluded
+- colorado: 2,774 games, 1,457-1,317, 297 opponents, 0 pre-scope excluded
+- colorado-state: 2,774 games, 1,418-1,356, 289 opponents, 0 pre-scope excluded
+- creighton: 2,862 games, 1,738-1,124, 328 opponents, 0 pre-scope excluded
+- depaul: 2,708 games, 1,547-1,161, 370 opponents, 10 pre-scope excluded
+- duke: 3,306 games, 2,370-936, 320 opponents, 0 pre-scope excluded
+- fairleigh-dickinson: 1,678 games, 790-888, 227 opponents, 14 pre-scope excluded
+- florida: 2,789 games, 1,595-1,194, 303 opponents, 0 pre-scope excluded
+- florida-state: 2,080 games, 1,224-856, 271 opponents, 32 pre-scope excluded
+- fresno-state: 1,708 games, 929-779, 226 opponents, 45 pre-scope excluded
+- georgetown: 2,945 games, 1,754-1,191, 346 opponents, 0 pre-scope excluded
+- georgia: 2,960 games, 1,537-1,423, 295 opponents, 0 pre-scope excluded
+- georgia-tech: 2,840 games, 1,478-1,361, 303 opponents, 0 pre-scope excluded
+- gonzaga: 2,053 games, 1,402-651, 257 opponents, 157 pre-scope excluded
+- houston: 2,292 games, 1,437-855, 284 opponents, 4 pre-scope excluded
+- illinois: 3,044 games, 1,956-1,088, 314 opponents, 0 pre-scope excluded
+- indiana: 3,112 games, 1,965-1,147, 314 opponents, 1 pre-scope excluded
+- iowa: 3,046 games, 1,795-1,251, 332 opponents, 2 pre-scope excluded
+- iowa-state: 2,932 games, 1,510-1,422, 300 opponents, 0 pre-scope excluded
+- kansas: 3,374 games, 2,452-922, 357 opponents, 0 pre-scope excluded
+- kansas-state: 3,039 games, 1,759-1,279-1, 326 opponents, 0 pre-scope excluded
+- kentucky: 3,232 games, 2,446-785-1, 308 opponents, 1 pre-scope excluded
+- le-moyne: 96 games, 39-57, 45 opponents, 39 pre-scope excluded
+- long-island-university: 2,198 games, 1,202-994-2, 375 opponents, 13 pre-scope excluded
+- louisville: 2,991 games, 1,958-1,033, 334 opponents, 0 pre-scope excluded
+- lsu: 2,974 games, 1,686-1,288, 304 opponents, 0 pre-scope excluded
+- marquette: 2,868 games, 1,774-1,094, 350 opponents, 0 pre-scope excluded
+- maryland: 2,879 games, 1,704-1,175, 282 opponents, 1 pre-scope excluded
+- mercyhurst: 65 games, 32-33, 32 opponents, 2 pre-scope excluded
+- miami: 1,843 games, 1,052-791, 280 opponents, 24 pre-scope excluded
+- michigan: 2,896 games, 1,764-1,132, 289 opponents, 0 pre-scope excluded
+- michigan-state: 3,059 games, 1,884-1,175, 349 opponents, 0 pre-scope excluded
+- minnesota: 3,083 games, 1,748-1,333-2, 350 opponents, 0 pre-scope excluded
+- mississippi-state: 2,858 games, 1,557-1,301, 299 opponents, 0 pre-scope excluded
+- missouri: 3,032 games, 1,755-1,277, 317 opponents, 0 pre-scope excluded
+- nc-state: 3,050 games, 1,867-1,183, 316 opponents, 0 pre-scope excluded
+- nebraska: 3,105 games, 1,625-1,480, 371 opponents, 0 pre-scope excluded
+- new-haven: 31 games, 14-17, 22 opponents, 3 pre-scope excluded
+- north-carolina: 3,303 games, 2,420-883, 306 opponents, 0 pre-scope excluded
+- northwestern: 2,830 games, 1,195-1,634-1, 303 opponents, 0 pre-scope excluded
+- notre-dame: 3,137 games, 1,989-1,146-2, 373 opponents, 0 pre-scope excluded
+- ohio-state: 3,125 games, 1,909-1,216, 341 opponents, 0 pre-scope excluded
+- oklahoma: 2,998 games, 1,816-1,182, 327 opponents, 0 pre-scope excluded
+- oklahoma-state: 3,067 games, 1,783-1,284, 324 opponents, 0 pre-scope excluded
+- ole-miss: 2,857 games, 1,430-1,427, 304 opponents, 0 pre-scope excluded
+- oregon: 3,265 games, 1,815-1,450, 354 opponents, 0 pre-scope excluded
+- oregon-state: 3,327 games, 1,860-1,467, 369 opponents, 0 pre-scope excluded
+- penn-state: 2,884 games, 1,589-1,294-1, 288 opponents, 0 pre-scope excluded
+- pittsburgh: 3,012 games, 1,734-1,278, 309 opponents, 2 pre-scope excluded
+- providence: 2,670 games, 1,591-1,079, 290 opponents, 0 pre-scope excluded
+- purdue: 3,088 games, 2,001-1,087, 312 opponents, 0 pre-scope excluded
+- rutgers: 2,696 games, 1,361-1,335, 271 opponents, 0 pre-scope excluded
+- saint-louis: 2,893 games, 1,586-1,307, 359 opponents, 0 pre-scope excluded
+- san-diego-state: 1,711 games, 974-737, 231 opponents, 51 pre-scope excluded
+- seton-hall: 2,826 games, 1,638-1,186-1, 350 opponents, 0 pre-scope excluded
+- smu: 2,798 games, 1,486-1,312, 312 opponents, 0 pre-scope excluded
+- south-carolina: 2,899 games, 1,532-1,366-1, 307 opponents, 0 pre-scope excluded
+- st-john-s: 3,160 games, 2,047-1,113, 319 opponents, 0 pre-scope excluded
+- stanford: 2,919 games, 1,652-1,267, 303 opponents, 3 pre-scope excluded
+- stonehill: 127 games, 45-82, 52 opponents, 31 pre-scope excluded
+- syracuse: 3,135 games, 2,123-1,011-1, 298 opponents, 0 pre-scope excluded
+- tcu: 2,869 games, 1,358-1,511, 357 opponents, 0 pre-scope excluded
+- tennessee: 2,952 games, 1,827-1,123-2, 309 opponents, 0 pre-scope excluded
+- texas: 3,116 games, 1,941-1,175, 324 opponents, 0 pre-scope excluded
+- texas-a-m: 2,924 games, 1,568-1,356, 356 opponents, 0 pre-scope excluded
+- texas-state: 1,249 games, 592-657, 203 opponents, 62 pre-scope excluded
+- texas-tech: 2,773 games, 1,578-1,195, 309 opponents, 0 pre-scope excluded
+- ucf: 1,269 games, 649-620, 257 opponents, 3 pre-scope excluded
+- ucla: 2,986 games, 2,052-934, 290 opponents, 0 pre-scope excluded
+- uconn: 2,909 games, 1,887-1,022, 297 opponents, 0 pre-scope excluded
+- usc: 3,064 games, 1,763-1,301, 377 opponents, 0 pre-scope excluded
+- utah: 3,049 games, 1,926-1,123, 354 opponents, 0 pre-scope excluded
+- utah-state: 2,968 games, 1,784-1,184, 357 opponents, 0 pre-scope excluded
+- vanderbilt: 3,019 games, 1,730-1,289, 338 opponents, 0 pre-scope excluded
+- villanova: 2,948 games, 1,932-1,016, 306 opponents, 1 pre-scope excluded
+- virginia: 3,027 games, 1,786-1,240-1, 315 opponents, 0 pre-scope excluded
+- virginia-tech: 2,906 games, 1,590-1,316, 312 opponents, 0 pre-scope excluded
+- wagner: 1,435 games, 685-750, 189 opponents, 56 pre-scope excluded
+- wake-forest: 2,992 games, 1,659-1,333, 299 opponents, 0 pre-scope excluded
+- washington: 3,221 games, 1,913-1,307-1, 329 opponents, 0 pre-scope excluded
+- washington-state: 3,352 games, 1,718-1,634, 304 opponents, 0 pre-scope excluded
+- west-virginia: 3,098 games, 1,895-1,203, 332 opponents, 0 pre-scope excluded
+- wisconsin: 3,069 games, 1,772-1,296-1, 342 opponents, 0 pre-scope excluded
+- xavier: 2,762 games, 1,648-1,114, 346 opponents, 0 pre-scope excluded
+
+PASS: wrote 102 deterministic JSON files under site/data/.
+PASS: repeated site build produced identical JSON hashes.
+
+=== validation ===
+College Basketball History — data validation
+Repository: /tmp/preseal-saint-louis-ib757k5j/repository
+
+Canonical games:      184,588
+Source assertions:    261,536
+Discrepancies:        8,524
+Reference programs:   365
+Accomplishment rows:  365
+Conference rows:      365
+Reference venues:     1,004
+
+WARNINGS (10):
+  - missouri: 3,022 legacy source/assertion rows drift (city=1,653, curated_site_type=3,022, curated_venue_name=1,586, state=1,582); run ingest_school.py --check-package for target-team enforcement.
+  - missouri: 3,024 legacy source/local-assertion rows drift (city=1,694, curated_site_type=3,024, curated_venue_name=1,593, state=1,622); run ingest_school.py --check-package for target-team enforcement.
+  - arkansas accomplishments: public accomplishment row awaits source verification.
+  - florida accomplishments: public accomplishment row awaits source verification.
+  - illinois accomplishments: public accomplishment row awaits source verification.
+  - kansas accomplishments: public accomplishment row awaits source verification.
+  - kentucky accomplishments: public accomplishment row awaits source verification.
+  - missouri accomplishments: public accomplishment row awaits source verification.
+  - northwestern accomplishments: public accomplishment row awaits source verification.
+  - tennessee accomplishments: public accomplishment row awaits source verification.
+
+PASS: core canonical, evidence, reconciliation, and reference layers are structurally valid.
+
+=== target_no_op ===
+College Basketball History — school ingestion
+Repository: /tmp/preseal-saint-louis-ib757k5j/repository
+School:     saint-louis
+Mode:       DRY RUN
+
+Source rows:                2,892
+In-scope source rows:       2,892
+Pre-cutoff rows preserved:  0
+Existing-game matches:      2,892
+New canonical games:        0
+Identity review required:   0
+Canonical enrichments:       0 games / 0 fields
+Assertions to add:           0
+Discrepancies to add:        0
+
+DRY RUN COMPLETE: no files changed.
+NO-OP: this school is already fully represented in the current global layers.
+
+=== site_completeness ===
+College Basketball History — implementation site completeness
+School:               saint-louis
+Status:               PASS
+History start:        1914-1915
+Canonical counts:     {"home_missing_venue": 14, "invalid_home_venue_exception_marker_rows": 0, "neutral_missing_location": 5, "neutral_missing_venue": 28, "postseason_missing_venue": 1, "public_gap_rows": 58, "reciprocal_only_unresolved_home_venue": 1, "reciprocal_research_accounted_gap": 3, "reciprocal_unpropagated": 0, "researched_unresolved_home_venue": 14, "researched_unresolved_home_venue_rows": 14, "strict_home_gap_rows": 0, "strict_ncaa_gap_rows": 0, "target_canonical_games": 2893, "target_source_information_loss": 0, "unaccounted_public_gap_rows": 0, "unknown_site_type": 16}
+Source-site counts:   {"home_missing_venue": 13, "home_publication_blocker_rows": 0, "material_gap_rows": 52, "neutral_missing_location": 2, "neutral_missing_venue": 23, "researched_gap_rows": 52, "researched_unresolved_home_venue_rows": 13, "unaccounted_gap_rows": 0, "unknown_site_type": 16}
+Examples:             {"home_missing_venue": ["CBBG-0022942", "CBBG-0182749", "CBBG-0182760", "CBBG-0182761", "CBBG-0182762", "CBBG-0182777", "CBBG-0182780", "CBBG-0182783", "CBBG-0182784", "CBBG-0182792", "CBBG-0182811", "CBBG-0182812"], "neutral_missing_location": ["CBBG-0007244", "CBBG-0055391", "CBBG-0076669", "CBBG-0182722", "CBBG-0182748"], "neutral_missing_venue": ["CBBG-0007244", "CBBG-0009659", "CBBG-0015306", "CBBG-0015365", "CBBG-0015399", "CBBG-0028764", "CBBG-0040520", "CBBG-0041056", "CBBG-0043350", "CBBG-0049463", "CBBG-0055391", "CBBG-0076669"], "postseason_missing_venue": ["CBBG-0144435"], "reciprocal_only_unresolved_home_venue": ["CBBG-0022942"], "reciprocal_research_accounted_gap": ["CBBG-0076669", "CBBG-0081348", "CBBG-0144435"], "researched_unresolved_home_venue": ["CBBG-0022942", "CBBG-0182749", "CBBG-0182760", "CBBG-0182761", "CBBG-0182762", "CBBG-0182777", "CBBG-0182780", "CBBG-0182783", "CBBG-0182784", "CBBG-0182792", "CBBG-0182811", "CBBG-0182812"], "unknown_site_type": ["CBBG-0182719", "CBBG-0182720", "CBBG-0182753", "CBBG-0182754", "CBBG-0182755", "CBBG-0182796", "CBBG-0182797", "CBBG-0182798", "CBBG-0182805", "CBBG-0182845", "CBBG-0182986", "CBBG-0183047"]}
+
+PASS: target public canonical site coverage preserves known evidence; remaining material gaps are research-accounted, including any explicitly validated historical HOME venue unknowns.
+
+=== accomplishments ===
+saint-louis: MATCH | since 1914-1915 | NCAA 11 | Final Fours 0 | titles 0 | best Elite Eight 1952
+  Conference regular-season championships: NOT_DERIVABLE; authoritative source verification required.
+  Conference tournament titles from tagged on-court finals: 0 (supporting cross-check only).
+  Reference status: VERIFIED; stored canonical cross-check: MATCH.
+
+PASS: 1 program accomplishment cross-check(s) match.
+
+=== site_dry_run ===
+College Basketball History — public site-data build
+Repository:          /tmp/preseal-saint-louis-ib757k5j/repository
+Mode:                DRY RUN
+
+Reference season:    2026-2027
+Programs:            365
+Public pages:        98
+Canonical games:     184,588
+Team JSON files:     98
+Stale team files:    0
+
+- alabama: 2,968 games, 1,847-1,120-1, 314 opponents, 0 pre-scope excluded
+- arizona: 3,020 games, 2,013-1,006-1, 379 opponents, 0 pre-scope excluded
+- arizona-state: 2,212 games, 1,177-1,035, 275 opponents, 123 pre-scope excluded
+- arkansas: 2,887 games, 1,849-1,038, 332 opponents, 0 pre-scope excluded
+- auburn: 2,806 games, 1,527-1,274-1, 302 opponents, 0 pre-scope excluded
+- baylor: 2,963 games, 1,515-1,448, 331 opponents, 4 pre-scope excluded
+- boise-state: 1,670 games, 950-720, 222 opponents, 1 pre-scope excluded
+- boston-college: 2,423 games, 1,288-1,135, 284 opponents, 0 pre-scope excluded
+- butler: 2,966 games, 1,706-1,260, 311 opponents, 0 pre-scope excluded
+- byu: 3,157 games, 1,986-1,171, 378 opponents, 0 pre-scope excluded
+- california: 3,017 games, 1,696-1,321, 307 opponents, 0 pre-scope excluded
+- central-connecticut: 1,170 games, 481-689, 180 opponents, 7 pre-scope excluded
+- chicago-state: 1,221 games, 316-905, 248 opponents, 18 pre-scope excluded
+- cincinnati: 3,060 games, 1,949-1,111, 378 opponents, 0 pre-scope excluded
+- clemson: 2,869 games, 1,478-1,390-1, 290 opponents, 0 pre-scope excluded
+- colorado: 2,774 games, 1,457-1,317, 297 opponents, 0 pre-scope excluded
+- colorado-state: 2,774 games, 1,418-1,356, 289 opponents, 0 pre-scope excluded
+- creighton: 2,862 games, 1,738-1,124, 328 opponents, 0 pre-scope excluded
+- depaul: 2,708 games, 1,547-1,161, 370 opponents, 10 pre-scope excluded
+- duke: 3,306 games, 2,370-936, 320 opponents, 0 pre-scope excluded
+- fairleigh-dickinson: 1,678 games, 790-888, 227 opponents, 14 pre-scope excluded
+- florida: 2,789 games, 1,595-1,194, 303 opponents, 0 pre-scope excluded
+- florida-state: 2,080 games, 1,224-856, 271 opponents, 32 pre-scope excluded
+- fresno-state: 1,708 games, 929-779, 226 opponents, 45 pre-scope excluded
+- georgetown: 2,945 games, 1,754-1,191, 346 opponents, 0 pre-scope excluded
+- georgia: 2,960 games, 1,537-1,423, 295 opponents, 0 pre-scope excluded
+- georgia-tech: 2,840 games, 1,478-1,361, 303 opponents, 0 pre-scope excluded
+- gonzaga: 2,053 games, 1,402-651, 257 opponents, 157 pre-scope excluded
+- houston: 2,292 games, 1,437-855, 284 opponents, 4 pre-scope excluded
+- illinois: 3,044 games, 1,956-1,088, 314 opponents, 0 pre-scope excluded
+- indiana: 3,112 games, 1,965-1,147, 314 opponents, 1 pre-scope excluded
+- iowa: 3,046 games, 1,795-1,251, 332 opponents, 2 pre-scope excluded
+- iowa-state: 2,932 games, 1,510-1,422, 300 opponents, 0 pre-scope excluded
+- kansas: 3,374 games, 2,452-922, 357 opponents, 0 pre-scope excluded
+- kansas-state: 3,039 games, 1,759-1,279-1, 326 opponents, 0 pre-scope excluded
+- kentucky: 3,232 games, 2,446-785-1, 308 opponents, 1 pre-scope excluded
+- le-moyne: 96 games, 39-57, 45 opponents, 39 pre-scope excluded
+- long-island-university: 2,198 games, 1,202-994-2, 375 opponents, 13 pre-scope excluded
+- louisville: 2,991 games, 1,958-1,033, 334 opponents, 0 pre-scope excluded
+- lsu: 2,974 games, 1,686-1,288, 304 opponents, 0 pre-scope excluded
+- marquette: 2,868 games, 1,774-1,094, 350 opponents, 0 pre-scope excluded
+- maryland: 2,879 games, 1,704-1,175, 282 opponents, 1 pre-scope excluded
+- mercyhurst: 65 games, 32-33, 32 opponents, 2 pre-scope excluded
+- miami: 1,843 games, 1,052-791, 280 opponents, 24 pre-scope excluded
+- michigan: 2,896 games, 1,764-1,132, 289 opponents, 0 pre-scope excluded
+- michigan-state: 3,059 games, 1,884-1,175, 349 opponents, 0 pre-scope excluded
+- minnesota: 3,083 games, 1,748-1,333-2, 350 opponents, 0 pre-scope excluded
+- mississippi-state: 2,858 games, 1,557-1,301, 299 opponents, 0 pre-scope excluded
+- missouri: 3,032 games, 1,755-1,277, 317 opponents, 0 pre-scope excluded
+- nc-state: 3,050 games, 1,867-1,183, 316 opponents, 0 pre-scope excluded
+- nebraska: 3,105 games, 1,625-1,480, 371 opponents, 0 pre-scope excluded
+- new-haven: 31 games, 14-17, 22 opponents, 3 pre-scope excluded
+- north-carolina: 3,303 games, 2,420-883, 306 opponents, 0 pre-scope excluded
+- northwestern: 2,830 games, 1,195-1,634-1, 303 opponents, 0 pre-scope excluded
+- notre-dame: 3,137 games, 1,989-1,146-2, 373 opponents, 0 pre-scope excluded
+- ohio-state: 3,125 games, 1,909-1,216, 341 opponents, 0 pre-scope excluded
+- oklahoma: 2,998 games, 1,816-1,182, 327 opponents, 0 pre-scope excluded
+- oklahoma-state: 3,067 games, 1,783-1,284, 324 opponents, 0 pre-scope excluded
+- ole-miss: 2,857 games, 1,430-1,427, 304 opponents, 0 pre-scope excluded
+- oregon: 3,265 games, 1,815-1,450, 354 opponents, 0 pre-scope excluded
+- oregon-state: 3,327 games, 1,860-1,467, 369 opponents, 0 pre-scope excluded
+- penn-state: 2,884 games, 1,589-1,294-1, 288 opponents, 0 pre-scope excluded
+- pittsburgh: 3,012 games, 1,734-1,278, 309 opponents, 2 pre-scope excluded
+- providence: 2,670 games, 1,591-1,079, 290 opponents, 0 pre-scope excluded
+- purdue: 3,088 games, 2,001-1,087, 312 opponents, 0 pre-scope excluded
+- rutgers: 2,696 games, 1,361-1,335, 271 opponents, 0 pre-scope excluded
+- saint-louis: 2,893 games, 1,586-1,307, 359 opponents, 0 pre-scope excluded
+- san-diego-state: 1,711 games, 974-737, 231 opponents, 51 pre-scope excluded
+- seton-hall: 2,826 games, 1,638-1,186-1, 350 opponents, 0 pre-scope excluded
+- smu: 2,798 games, 1,486-1,312, 312 opponents, 0 pre-scope excluded
+- south-carolina: 2,899 games, 1,532-1,366-1, 307 opponents, 0 pre-scope excluded
+- st-john-s: 3,160 games, 2,047-1,113, 319 opponents, 0 pre-scope excluded
+- stanford: 2,919 games, 1,652-1,267, 303 opponents, 3 pre-scope excluded
+- stonehill: 127 games, 45-82, 52 opponents, 31 pre-scope excluded
+- syracuse: 3,135 games, 2,123-1,011-1, 298 opponents, 0 pre-scope excluded
+- tcu: 2,869 games, 1,358-1,511, 357 opponents, 0 pre-scope excluded
+- tennessee: 2,952 games, 1,827-1,123-2, 309 opponents, 0 pre-scope excluded
+- texas: 3,116 games, 1,941-1,175, 324 opponents, 0 pre-scope excluded
+- texas-a-m: 2,924 games, 1,568-1,356, 356 opponents, 0 pre-scope excluded
+- texas-state: 1,249 games, 592-657, 203 opponents, 62 pre-scope excluded
+- texas-tech: 2,773 games, 1,578-1,195, 309 opponents, 0 pre-scope excluded
+- ucf: 1,269 games, 649-620, 257 opponents, 3 pre-scope excluded
+- ucla: 2,986 games, 2,052-934, 290 opponents, 0 pre-scope excluded
+- uconn: 2,909 games, 1,887-1,022, 297 opponents, 0 pre-scope excluded
+- usc: 3,064 games, 1,763-1,301, 377 opponents, 0 pre-scope excluded
+- utah: 3,049 games, 1,926-1,123, 354 opponents, 0 pre-scope excluded
+- utah-state: 2,968 games, 1,784-1,184, 357 opponents, 0 pre-scope excluded
+- vanderbilt: 3,019 games, 1,730-1,289, 338 opponents, 0 pre-scope excluded
+- villanova: 2,948 games, 1,932-1,016, 306 opponents, 1 pre-scope excluded
+- virginia: 3,027 games, 1,786-1,240-1, 315 opponents, 0 pre-scope excluded
+- virginia-tech: 2,906 games, 1,590-1,316, 312 opponents, 0 pre-scope excluded
+- wagner: 1,435 games, 685-750, 189 opponents, 56 pre-scope excluded
+- wake-forest: 2,992 games, 1,659-1,333, 299 opponents, 0 pre-scope excluded
+- washington: 3,221 games, 1,913-1,307-1, 329 opponents, 0 pre-scope excluded
+- washington-state: 3,352 games, 1,718-1,634, 304 opponents, 0 pre-scope excluded
+- west-virginia: 3,098 games, 1,895-1,203, 332 opponents, 0 pre-scope excluded
+- wisconsin: 3,069 games, 1,772-1,296-1, 342 opponents, 0 pre-scope excluded
+- xavier: 2,762 games, 1,648-1,114, 346 opponents, 0 pre-scope excluded
+
+DRY RUN COMPLETE: no files changed.
+
+=== unit_tests ===
+................................................................................................................................................................................................................................................................................................../home/runner/work/college-basketball-history/college-basketball-history/runtime/tests/test_normalize_historical_opponent_displays.py:215: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpd9tbu_i0/schools/alpha/source-games.csv' mode='r' encoding='utf-8'>
+  before = list(csv.DictReader(source.open(encoding="utf-8", newline="")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/runner/work/college-basketball-history/college-basketball-history/runtime/tests/test_normalize_historical_opponent_displays.py:223: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpd9tbu_i0/schools/alpha/source-games.csv' mode='r' encoding='utf-8'>
+  after = list(csv.DictReader(source.open(encoding="utf-8", newline="")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.....................................................................................................................................................................................................................................................................................................................................................................................................hint: Using 'master' as the name for the initial branch. This default branch name
+hint: will change to "main" in Git 3.0. To configure the initial branch name
+hint: to use in all of your new repositories, which will suppress this warning,
+hint: call:
+hint:
+hint: 	git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint: 	git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+HEAD is now at d63887f base
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  ad1c767 old target
+
+If you want to keep it by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> ad1c767
+
+HEAD is now at c3be081 main tooling
+.........................................................../home/runner/work/college-basketball-history/college-basketball-history/runtime/tests/test_remote_implementation_stage2_opponent_display_recovery.py:101: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/display-recovery-test-nr7g5s35/schools/example-school/opponents.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(opp.open(newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/runner/work/college-basketball-history/college-basketball-history/runtime/tests/test_remote_implementation_stage2_opponent_display_recovery.py:105: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/display-recovery-test-nr7g5s35/schools/example-school/source-games.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(source.open(newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+../home/runner/work/college-basketball-history/college-basketball-history/runtime/tests/test_remote_implementation_stage2_opponent_display_recovery.py:101: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/display-recovery-test-squx0lnm/schools/example-school/opponents.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(opp.open(newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/runner/work/college-basketball-history/college-basketball-history/runtime/tests/test_remote_implementation_stage2_opponent_display_recovery.py:105: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/display-recovery-test-squx0lnm/schools/example-school/source-games.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(source.open(newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+............................................................................................................../opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'test-stage3b-complete-checkpoint/manifest.json'
+  return self._open_to_write(zinfo, force_zip64=force_zip64)
+./opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'stage3b-status.json'
+  return self._open_to_write(zinfo, force_zip64=force_zip64)
+.....................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 1080 tests in 56.094s
+
+OK
+conference-tournament reference: valid
+
+=== correction-only identity retarget ===
+{"correction_identity_patches": 1}
+
+=== correction-only canonical site and assertion reconciliation ===
+{}
+PASS: exact one-game correction delta; no other rows changed
+Archived sealed decisions: data/reconciliation/onboarding-decisions/tennessee-eeeeeeeeeeee.json
+
+=== deterministic site build ===
+PASS: correction site nonregression; inherited full-gate status: PASS
+
+=== correction-only identity retarget ===
+{"correction_identity_patches": 1}
+
+=== correction-only canonical site and assertion reconciliation ===
+{"correction_site_patches": 1, "registry_fallbacks_retired": 0}
+PASS: exact one-game correction delta; no other rows changed
+Archived sealed decisions: data/reconciliation/onboarding-decisions/tennessee-eeeeeeeeeeee.json
+
+=== deterministic site build ===
+PASS: correction site nonregression; inherited full-gate status: PASS
+Rehearsing filled review in /tmp/preseal-example-tqjj5q79/repository
+Rehearsing the sealed plan in /tmp/onboard-example-e69pp43a/repository
+
+=== copied-state verification ===
+Rehearsing filled review in /tmp/preseal-example-fnxnqtbc/repository
+Rehearsing the sealed plan in /tmp/onboard-example-n2gkzc0m/repository
+
+=== copied-state verification ===
+Rehearsing filled review in /tmp/preseal-test-222erruu/repository
+
+=== sealed correction-only identity retarget ===
+{}
+
+=== owner-approved pre-ingest source patches ===
+{}
+
+=== ingestion apply ===
+
+=== generic reconciliation ===
+{}
+
+=== reciprocal-only HOME chronology ===
+{}
+
+=== resolved target-conflict HOME chronology ===
+{}
+
+=== reciprocal-only UNKNOWN site provenance ===
+{}
+
+=== publication metadata ===
+{}
+Archived sealed decisions: data/reconciliation/onboarding-decisions/test-a.json
+
+=== deterministic site build ===
+PASS: repeated site build produced identical JSON hashes.
+
+=== validation ===
+
+=== target_no_op ===
+
+=== site_completeness ===
+
+=== accomplishments ===
+
+=== site_dry_run ===
+
+=== unit_tests ===
+
+PASS: no genuine trailing spaces/tabs in changed text files.
+Waiting for GitHub mergeability on PR #20 (UNKNOWN)...
+REMOTE STAGE 2 RECONCILIATION DIAGNOSTIC EQUIVALENCE: PASS verification_commit=eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+REMOTE STAGE 2 RECONCILIATION DIAGNOSTIC: PASS classification=PREEXISTING_PERSISTED checkpoint_commit=3333333333333333333333333333333333333333
+REMOTE STAGE 2 GATE 1 FILL EQUIVALENCE: PASS verification_commit=eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+REMOTE STAGE 2 GATE 1 FILL: PASS checkpoint_commit=2222222222222222222222222222222222222222
+REMOTE IMPLEMENTATION RECOVERY: PUBLISHED_NOT_FINALIZED commit=1111111111111111111111111111111111111111
+REMOTE STAGE 2 PRE-SEAL EQUIVALENCE: PASS verification_commit=eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+REMOTE STAGE 2 PROPOSAL REHEARSAL: BLOCKED checkpoint_commit=4444444444444444444444444444444444444444
+REMOTE STAGE 2 GATE 1 SEAL EQUIVALENCE: PASS verification_commit=eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+REMOTE STAGE 2 GATE 1 SEAL: SEALED approved_plan=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa checkpoint_commit=2222222222222222222222222222222222222222
+
+=== validation ===
+
+=== target_no_op ===
+
+=== site_completeness ===
+
+=== accomplishments ===
+
+=== site_dry_run ===
+long-island-university: MATCH | since 1928-1929 | NCAA 8 | Final Fours 0 | titles 0 | best Round of 64 2026
+  Conference regular-season championships: NOT_DERIVABLE; authoritative source verification required.
+  Conference tournament titles from tagged on-court finals: 0 (supporting cross-check only).
+  Reference status: VERIFIED; stored canonical cross-check: MATCH.
+Rehearsing filled review in /tmp/preseal-example-school-cc6ziim8/repository
+
+PASS: no genuine trailing spaces/tabs in changed text files.
+
+TECHNICAL READINESS PASSED
+Preview approved-plan hash: b81088042a8df43a8d6d496ab3e0d8ce0e283b74999c380cd64fed5169b8f09d
+Changed paths: 94
+The real tracked repository was not changed. Owner Gate 1 may now be sealed with onboard_school.py --approve.

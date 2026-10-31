@@ -1,0 +1,117 @@
+{
+  "counts": {
+    "home_missing_venue": 14,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 5,
+    "neutral_missing_venue": 28,
+    "postseason_missing_venue": 1,
+    "public_gap_rows": 58,
+    "reciprocal_only_unresolved_home_venue": 1,
+    "reciprocal_research_accounted_gap": 3,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 14,
+    "researched_unresolved_home_venue_rows": 14,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2893,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 16
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0022942",
+      "CBBG-0182749",
+      "CBBG-0182760",
+      "CBBG-0182761",
+      "CBBG-0182762",
+      "CBBG-0182777",
+      "CBBG-0182780",
+      "CBBG-0182783",
+      "CBBG-0182784",
+      "CBBG-0182792",
+      "CBBG-0182811",
+      "CBBG-0182812"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0007244",
+      "CBBG-0055391",
+      "CBBG-0076669",
+      "CBBG-0182722",
+      "CBBG-0182748"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0007244",
+      "CBBG-0009659",
+      "CBBG-0015306",
+      "CBBG-0015365",
+      "CBBG-0015399",
+      "CBBG-0028764",
+      "CBBG-0040520",
+      "CBBG-0041056",
+      "CBBG-0043350",
+      "CBBG-0049463",
+      "CBBG-0055391",
+      "CBBG-0076669"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0144435"
+    ],
+    "reciprocal_only_unresolved_home_venue": [
+      "CBBG-0022942"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0076669",
+      "CBBG-0081348",
+      "CBBG-0144435"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0022942",
+      "CBBG-0182749",
+      "CBBG-0182760",
+      "CBBG-0182761",
+      "CBBG-0182762",
+      "CBBG-0182777",
+      "CBBG-0182780",
+      "CBBG-0182783",
+      "CBBG-0182784",
+      "CBBG-0182792",
+      "CBBG-0182811",
+      "CBBG-0182812"
+    ],
+    "unknown_site_type": [
+      "CBBG-0182719",
+      "CBBG-0182720",
+      "CBBG-0182753",
+      "CBBG-0182754",
+      "CBBG-0182755",
+      "CBBG-0182796",
+      "CBBG-0182797",
+      "CBBG-0182798",
+      "CBBG-0182805",
+      "CBBG-0182845",
+      "CBBG-0182986",
+      "CBBG-0183047"
+    ]
+  },
+  "history_start_season": "1914-1915",
+  "school_key": "saint-louis",
+  "source_site_counts": {
+    "home_missing_venue": 13,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 52,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 23,
+    "researched_gap_rows": 52,
+    "researched_unresolved_home_venue_rows": 13,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 16
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2892
+  },
+  "status": "PASS",
+  "warnings": []
+}
