@@ -398,6 +398,177 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         }
         return repo, control_sha, request, freeze_path
 
+    def add_verified_display_successor(
+        self,
+        repo: Path,
+        request: dict,
+        *,
+        extra_school_change: bool = False,
+        bad_predecessor: bool = False,
+        verification_pass: bool = True,
+    ):
+        phase0_target = request["target_sha"]
+        control_branch = self.git(repo, "branch", "--show-current")
+        self.git(repo, "checkout", "-b", "display-target", phase0_target)
+        school_dir = repo / "schools" / SCHOOL
+        (school_dir / "opponents.csv").write_text("opponents.csv display\n")
+        (school_dir / "source-games.csv").write_text("source-games.csv display\n")
+        if extra_school_change:
+            (school_dir / "notes.md").write_text("notes.md unrelated\n")
+        self.git(repo, "add", "schools")
+        self.git(repo, "commit", "-m", "display successor")
+        display_sha = self.git(repo, "rev-parse", "HEAD")
+        display_tree = self.git(repo, "rev-parse", "HEAD^{tree}")
+        self.git(repo, "checkout", control_branch)
+
+        allowed_paths = [
+            f"schools/{SCHOOL}/opponents.csv",
+            f"schools/{SCHOOL}/source-games.csv",
+        ]
+        changed_hashes = {}
+        for changed_path in allowed_paths:
+            data = subprocess.run(
+                ["git", "show", f"{display_sha}:{changed_path}"],
+                cwd=repo,
+                stdout=subprocess.PIPE,
+                check=True,
+            ).stdout
+            changed_hashes[changed_path] = hashlib.sha256(data).hexdigest()
+
+        blocker_keys = ["alpha-academy"]
+        proof = {
+            "schema_version": 1,
+            "school_key": SCHOOL,
+            "allowed_paths": allowed_paths,
+            "literal_evidence_changes": 0,
+            "opponent_key_changes": 0,
+            "source_game_non_name_field_changes": 0,
+            "opponent_changed_keys": blocker_keys,
+            "source_game_changed_keys": blocker_keys,
+            "source_game_normalized_name_row_count": 1,
+        }
+        proof_bytes = (json.dumps(proof, indent=2, sort_keys=True) + "\n").encode()
+        proof_sha = hashlib.sha256(proof_bytes).hexdigest()
+        normalization_sha = "a" * 64
+        display_request_id = "example-display-0001"
+        writeahead_path = (
+            f".remote-implementation/writeahead/{SCHOOL}/"
+            f"{display_request_id}/writeahead-manifest.json"
+        )
+        writeahead_dir = repo / Path(writeahead_path).parent
+        writeahead_dir.mkdir(parents=True, exist_ok=True)
+        (writeahead_dir / "field-level-proof.json").write_bytes(proof_bytes)
+
+        writeahead = {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+            "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+            "request_id": display_request_id,
+            "school_key": SCHOOL,
+            "target_branch": TARGET_BRANCH,
+            "expected_target_predecessor_sha": phase0_target,
+            "prepared_parent_sha": phase0_target,
+            "prepared_commit_sha": display_sha,
+            "prepared_tree_sha": display_tree,
+            "changed_paths": allowed_paths,
+            "allowed_paths": allowed_paths,
+            "changed_file_sha256": changed_hashes,
+            "integration_freeze_sha256": request["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+            "field_level_proof_sha256": proof_sha,
+            "sidecars": {"field-level-proof.json": proof_sha},
+        }
+        writeahead_bytes = (json.dumps(writeahead, indent=2, sort_keys=True) + "\n").encode()
+        (repo / writeahead_path).write_bytes(writeahead_bytes)
+        writeahead_sha = hashlib.sha256(writeahead_bytes).hexdigest()
+
+        drift = {
+            "status": "PASS",
+            "changes": [],
+            "baseline_sha256": request["semantic_snapshot_sha256"],
+            "current_sha256": request["semantic_snapshot_sha256"],
+        }
+        successor_path = (
+            f".remote-implementation/successors/{SCHOOL}/"
+            f"{display_request_id}/successor-manifest.json"
+        )
+        successor = {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+            "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+            "request_id": display_request_id,
+            "school_key": SCHOOL,
+            "target_branch": TARGET_BRANCH,
+            "expected_target_predecessor_sha": (
+                "f" * 40 if bad_predecessor else phase0_target
+            ),
+            "prepared_parent_sha": phase0_target,
+            "actual_published_target_sha": display_sha,
+            "prepared_commit_sha": display_sha,
+            "prepared_tree_sha": display_tree,
+            "publication_cas": "EXISTING_REF_CAS_PASS",
+            "repository_validation": "PASS",
+            "final_transaction_state": "COMPLETE",
+            "protected_main_sha": "1" * 40,
+            "integration_freeze_sha256": request["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+            "semantic_drift_before": drift,
+            "semantic_drift_after": drift,
+            "changed_paths": allowed_paths,
+            "changed_file_sha256": changed_hashes,
+            "expected_blocker_keys": blocker_keys,
+            "field_level_proof_sha256": proof_sha,
+            "normalization_report_sha256": normalization_sha,
+            "source_game_normalized_name_row_count": 1,
+            "writeahead_manifest_path": writeahead_path,
+            "writeahead_manifest_sha256": writeahead_sha,
+        }
+        successor_bytes = (json.dumps(successor, indent=2, sort_keys=True) + "\n").encode()
+        successor_file = repo / successor_path
+        successor_file.parent.mkdir(parents=True, exist_ok=True)
+        successor_file.write_bytes(successor_bytes)
+
+        verification_path = (
+            f".remote-implementation/verifications/{SCHOOL}/"
+            f"{display_request_id}/stage2-opponent-display-verification.json"
+        )
+        verification = {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+            "request_id": display_request_id,
+            "school_key": SCHOOL,
+            "protected_main_sha": "1" * 40,
+            "target_branch": TARGET_BRANCH,
+            "target_predecessor_sha": phase0_target,
+            "target_sha": display_sha,
+            "target_tree_sha": display_tree,
+            "integration_freeze_sha256": request["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+            "field_level_proof_sha256": proof_sha,
+            "normalization_report_sha256": normalization_sha,
+            "changed_paths": allowed_paths,
+            "expected_blocker_keys": blocker_keys,
+            "semantic_drift": "PASS",
+            "tracked_stage2_mutation": "NONE",
+            "remote_stage2_opponent_display_equivalence": (
+                "PASS" if verification_pass else "FAIL"
+            ),
+        }
+        verification_file = repo / verification_path
+        verification_file.parent.mkdir(parents=True, exist_ok=True)
+        verification_file.write_text(json.dumps(verification, indent=2, sort_keys=True) + "\n")
+
+        self.git(repo, "add", ".remote-implementation")
+        self.git(repo, "commit", "-m", "display control authority")
+        control_sha = self.git(repo, "rev-parse", "HEAD")
+        request = dict(request)
+        request["target_sha"] = display_sha
+        request["stage2_opponent_display_successor"] = {
+            "path": successor_path,
+            "sha256": hashlib.sha256(successor_bytes).hexdigest(),
+        }
+        return control_sha, request
+
     def test_wrong_onboarding_sha_is_rejected_before_worktree(self):
         with patch(
             "remote_implementation_stage2_census.remote_head",
