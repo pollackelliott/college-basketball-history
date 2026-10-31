@@ -186,18 +186,19 @@
     "saint-louis-stage2-gate1-seal-0001",
     "saint-louis-stage2-sealed-apply-0001",
     "saint-louis-release-readiness-0001",
-    "saint-louis-release-preview-verify-0001"
+    "saint-louis-release-preview-verify-0001",
+    "saint-louis-release-gate2-approval-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_GATE2_APPROVAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "saint-louis-release-gate2-approval-0001",
+  "active_request_sha256": "96290f8e2d85ff99633c2b8047bc91a21925f66fb68b2b76b651b490438e3994",
+  "active_school_key": "saint-louis",
+  "active_target_branch": "data/saint-louis-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -399,8 +400,11 @@
     "target_branch": "data/saint-louis-onboarding",
     "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41239200132",
+  "lock_acquisition_request_commit": "567c2ab1085bc459d6db932c794f02f13fa772d5",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_GATE2_RUNNING"
 }
