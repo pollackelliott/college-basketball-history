@@ -487,8 +487,8 @@ def backfill_reciprocal_only_home_chronology(
                 continue
             if chronology_clean(assertion.get("normalized_opponent_key")) != school_key:
                 continue
-            assertion_site, _ = ingest_school.source_site_to_canonical(assertion)
-            if assertion_site != canonical_site:
+            _, assertion_home = ingest_school.source_site_to_canonical(assertion)
+            if assertion_home != school_key:
                 continue
             if not chronology_clean(assertion.get("source_game_id")):
                 continue
