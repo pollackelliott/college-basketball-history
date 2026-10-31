@@ -4,7 +4,7 @@
   "request_id": "saint-louis-stage2-census-0004",
   "operation": "STAGE2_CENSUS",
   "school_key": "saint-louis",
-  "previous_control_state_commit": "a0e62ef0cff66570cac524723dc0634cdf3ee83e",
+  "previous_control_state_commit": "6ee4f0a30375efe5c6ff24a993f322a0949800f3",
   "previous_control_state_sha256": "cba3cd5ef19cf321c982ef2b9aef0e7e1ea7dea9262ea179d90611b5ab69dff8",
   "expected_protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
   "target_branch": "data/saint-louis-onboarding",
