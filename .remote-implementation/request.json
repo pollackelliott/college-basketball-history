@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage2-proposal-0001",
+  "request_id": "saint-louis-stage2-proposal-0002",
   "school_key": "saint-louis",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "44d2217a48dc0926064a0ce546c0a1333e574abf",
-  "previous_control_state_sha256": "83b7c489377b670fa2cb961fd13810a4d930eca9e0857467e8933151532e8e1f",
-  "expected_protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+  "previous_control_state_commit": "cb41aa2489e28a72b7836d2812497040f0c5b88a",
+  "previous_control_state_sha256": "3670d85cf1a35db4717c1bd1f252f38004093f8e665f96e5a66be232b5347e60",
+  "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
   "target_branch": "data/saint-louis-onboarding",
   "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
   "stage2_authority": {
@@ -17,12 +17,12 @@
   "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
   "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
   "recommendation_map": {
-    "path": ".remote-implementation/inputs/saint-louis-stage2-proposal-0001/recommendation-map.json",
-    "sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b"
+    "path": ".remote-implementation/inputs/saint-louis-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "61ac3c9a069660d5631f7b2c2a6d02f61024c4d6d7110f16f6d275e26e8115b5"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation — complete exact-map read-only Stage 2 proposal rehearsal",
-    "authorization": "Owner said Proceed after independently verified recommendation preparation reached 158/158 at review/saint-louis-stage2-prep-0011 commit b811c9430b1d8f7d351cce72af3df38fa4372f64. Authorize exactly one guarded read-only STAGE2_PROPOSAL_REHEARSAL against the complete 158-decision recommendation map SHA-256 cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b, permanent disposable rehearsal, durable checkpoint, approved-plan preview evidence where produced, and independent fresh verification only. The eight identity-conditioned canonical-site-patch review rows are encoded as LEAVE_UNRESOLVED because that is their valid review-map vocabulary; permanent approve_plan logic deterministically seals them NOT_APPLICABLE when the corresponding recommended identity match is selected. No historical recommendation is changed. Stop at OWNER_GATE_1_READY or a durable BLOCKED checkpoint. No Owner Gate 1 approval, fill-review, pre-seal rehearsal, seal, sealed apply, tracked basketball mutation, publication, release, Preview, merge, Production, recovery, or unrelated authority is granted."
+    "origin": "ChatGPT Saint Louis serialized Implementation - post-repair exact-map Stage 2 proposal rehearsal",
+    "authorization": "Owner said Proceed after protected main merged the policy-conforming generic HOME provenance/chronology repair at 2e3cf2c901a717cb0cce580692234eaca4f47e89. Authorize one guarded read-only STAGE2_PROPOSAL_REHEARSAL using the preserved exact 158-decision universe and a successor recommendation map that changes exactly six H/A/N recommendations: five LEAVE_UNRESOLVED to KEEP_CANONICAL as least-change Owner Gate 1 recommendations already supported by the permanent review, and DISCREPANCY-SAINT-LOUIS-1967-68-008-SITE_TYPE to USE_SOURCE under the repository's established explicit-NEUTRAL-plus-exact-site recommendation discipline. CANONICAL-SITE-PATCH-CBBG-0022942 remains LEAVE_UNRESOLVED; the merged generic tooling repair is expected to account for its reciprocal-only HOME locality/provenance without inventing a venue. No tracked basketball mutation or owner-gate approval is authorized. Stop at fresh-verified OWNER_GATE_1_READY or a durable BLOCKED checkpoint."
   },
   "authority": {
     "owner_gate_1": false,
