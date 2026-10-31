@@ -378,11 +378,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
     "recommendation_map_sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "saint-louis-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
     "school_key": "saint-louis",
