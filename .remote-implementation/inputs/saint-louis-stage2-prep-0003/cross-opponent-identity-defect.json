@@ -1,0 +1,95 @@
+{
+  "kind": "SAINT_LOUIS_STAGE2_CROSS_OPPONENT_IDENTITY_DEFECT",
+  "schema_version": 1,
+  "authority": {
+    "protected_main_sha": "a3c0cb9d1034314ff74debfb4545da4c53998370",
+    "onboarding_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+    "control_sha": "a0e62ef0cff66570cac524723dc0634cdf3ee83e",
+    "control_sequence": 165,
+    "census_request_id": "saint-louis-stage2-census-0003",
+    "decision_universe_sha256": "8fe179d48755677fa2f675b4610e5a21422f29c76a90680760c9227cc7042c32",
+    "decision_count": 155,
+    "parent_review_commit": "beabfd13acd936b50e9fdfe611dcbe3d97eeaf8d"
+  },
+  "historical_recommendation": {
+    "status": "PRELIMINARY_NOT_OWNER_APPROVED",
+    "conclusion": "Three frozen Saint Louis rows labeled Washington (Mo.) are University of Washington games.",
+    "evidence": [
+      "Saint Louis institutional 1951-52 schedule: Dec. 19 vs Washington, L 53-58.",
+      "Saint Louis institutional 1954-55 schedule: Dec. 21 at Washington, L 70-72; Dec. 22 at Washington, W 73-64.",
+      "Washington published package contains exact reciprocal date/score rows for all three games."
+    ],
+    "source_urls": [
+      "https://slubillikens.com/sports/mens-basketball/schedule/1951-52",
+      "https://slubillikens.com/sports/mens-basketball/schedule/1954-55"
+    ]
+  },
+  "affected_rows": [
+    {
+      "source_game_id": "saint-louis-1951-52-005",
+      "old_key": "washington-university-in-st-louis",
+      "new_key": "washington",
+      "date": "1951-12-19",
+      "score": "53-58",
+      "canonical_game_id": "CBBG-0078886",
+      "reciprocal_source_game_id": "washington-1027"
+    },
+    {
+      "source_game_id": "saint-louis-1954-55-006",
+      "old_key": "washington-university-in-st-louis",
+      "new_key": "washington",
+      "date": "1954-12-21",
+      "score": "70-72",
+      "canonical_game_id": "CBBG-0078950",
+      "reciprocal_source_game_id": "washington-1114"
+    },
+    {
+      "source_game_id": "saint-louis-1954-55-007",
+      "old_key": "washington-university-in-st-louis",
+      "new_key": "washington",
+      "date": "1954-12-22",
+      "score": "73-64",
+      "canonical_game_id": "CBBG-0078951",
+      "reciprocal_source_game_id": "washington-1115"
+    }
+  ],
+  "population_proof": {
+    "washington_reciprocal_games_vs_saint_louis": 15,
+    "saint_louis_rows_already_keyed_washington": 12,
+    "exact_cross_opponent_date_score_collisions": 3,
+    "plan_decisions_for_affected_source_rows": 0,
+    "conclusion": "The three rows are the complete currently detectable exact-fingerprint cross-opponent population."
+  },
+  "tooling_defect": {
+    "classification": "GENERIC_STAGE2_DISCOVERY_AND_ENCODING_GAP",
+    "diagnosis": [
+      "Current candidate discovery is constrained by the frozen opponent identity, so these rows are treated as separate games rather than identity candidates.",
+      "Current 155-decision plan has no decision for any affected source row.",
+      "Canonical-only site review cannot modify source evidence.",
+      "Current identity review source patches are limited to preflight-proven adjacent-season date/season corrections."
+    ],
+    "code_blobs": {
+      "onboarding_plan": "1e511abba5cdbdbd2e42c1c2ad27a022ac33421b",
+      "ingest_school": "ef85237fc582511e8685546e64995c21a01ff031",
+      "implementation_stage2": "1347fdbb803fbed4c77e5b4834ab171ecc4fe8c6"
+    }
+  },
+  "required_generic_repair": [
+    "Detect exact season/date/score target-game candidates even when opponent keys differ, before classifying a source row as a new canonical game.",
+    "Surface an explicit owner-reviewed identity choice; do not auto-correct opponent identity.",
+    "For a selected cross-opponent match, allow only the exact preflight-proven normalized_opponent_key/name source correction while preserving literal source label and raw text.",
+    "Apply that correction inside the sealed transaction before canonical identity validation.",
+    "Add regression tests for exact candidate, ambiguity, near-miss rejection, forbidden arbitrary patch, literal-evidence preservation, and one-real-game/one-canonical-game outcome.",
+    "After merge, rerun fresh Stage 2 census and treat its new decision universe as authority before resuming recommendation preparation."
+  ],
+  "progress": {
+    "reviewed_distinct_decisions": 39,
+    "remaining_under_current_census": 116,
+    "new_existing_census_decisions_reviewed_this_unit": 0,
+    "historical_files_modified": 0,
+    "proposal_rehearsal_run": false,
+    "owner_gate_1_reached": false,
+    "stop_reason": "The required Washington adjudication exposed a generic Stage 2 capability gap before the next ordinary site tranche."
+  },
+  "next_bounded_unit": "Generic Stage 2 tooling repair only; do not resume site review until repaired census is fresh-verified."
+}
