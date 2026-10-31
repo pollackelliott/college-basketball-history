@@ -1,0 +1,42 @@
+{
+  "branch": "remote-stage2-census/saint-louis-08d61b6701de",
+  "capability_census": {
+    "path": ".onboarding/saint-louis/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "integration_base_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "integration_semantic_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 42,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 9,
+      "conditional_discrepancy": 42,
+      "discrepancy": 88,
+      "identity": 17,
+      "publication": 1
+    },
+    "decision_count": 158,
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "discrepancies_to_add": 88,
+    "existing_game_matches": 927,
+    "new_canonical_games": 1948,
+    "plan_path": ".onboarding/saint-louis/plan.json",
+    "review_path": ".onboarding/saint-louis/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
