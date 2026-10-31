@@ -170,6 +170,10 @@ SOURCE_CONSISTENCY_PATCH_FIELDS = {
     "played_result",
 }
 CROSS_SEASON_IDENTITY_PATCH_FIELDS = {"season_label", "game_date"}
+CROSS_OPPONENT_IDENTITY_PATCH_FIELDS = {
+    "normalized_opponent_key",
+    "normalized_opponent_name",
+}
 
 SOURCE_ASSERTION_COPY_FIELDS = tuple(
     field
@@ -1205,6 +1209,82 @@ def _unique_adjacent_season_score_identity_candidate(
                 matches.append(candidate)
 
     return matches[0] if len(matches) == 1 else None
+
+
+def _canonical_exact_fingerprint_index(
+    canonical_rows: list[dict[str, str]],
+) -> dict[tuple[str, str, str, str, str], list[dict[str, str]]]:
+    """Index exact dated/scored games from each participant's perspective."""
+
+    index: dict[
+        tuple[str, str, str, str, str],
+        list[dict[str, str]],
+    ] = defaultdict(list)
+    for row in canonical_rows:
+        season = row.get("season_label", "").strip()
+        game_date = row.get("game_date", "").strip()
+        team_a = row.get("team_a_key", "").strip()
+        team_b = row.get("team_b_key", "").strip()
+        score_a = row.get("team_a_score", "").strip()
+        score_b = row.get("team_b_score", "").strip()
+        if (
+            not season
+            or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", game_date)
+            or not team_a
+            or not team_b
+            or not score_a
+            or not score_b
+        ):
+            continue
+        index[(team_a, season, game_date, score_a, score_b)].append(row)
+        index[(team_b, season, game_date, score_b, score_a)].append(row)
+    return index
+
+
+def _cross_opponent_exact_identity_candidates(
+    source: dict[str, str],
+    exact_fingerprint_index: dict[
+        tuple[str, str, str, str, str],
+        list[dict[str, str]],
+    ],
+) -> list[dict[str, str]]:
+    """Return exact date/score candidates whose opponent key differs.
+
+    This is deliberately strict discovery only.  It never auto-matches or
+    changes historical identity: an exact cross-opponent fingerprint becomes
+    an explicit owner-reviewed identity candidate.
+    """
+
+    school = source.get("source_program_key", "").strip()
+    opponent = source.get("normalized_opponent_key", "").strip()
+    season = source.get("season_label", "").strip()
+    game_date = source.get("game_date", "").strip()
+    team_score = source.get("team_score", "").strip()
+    opponent_score = source.get("opponent_score", "").strip()
+    if (
+        not school
+        or not opponent
+        or not season
+        or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", game_date)
+        or not team_score
+        or not opponent_score
+    ):
+        return []
+
+    current_pair = ingest_school.ordered_pair(school, opponent)
+    matches = [
+        row
+        for row in exact_fingerprint_index.get(
+            (school, season, game_date, team_score, opponent_score),
+            [],
+        )
+        if (
+            row.get("team_a_key", "").strip(),
+            row.get("team_b_key", "").strip(),
+        )
+        != current_pair
+    ]
+    return sorted(matches, key=lambda row: row.get("canonical_game_id", ""))
 
 
 def _accomplishment_crosscheck_game(
@@ -2682,6 +2762,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     canonical_index: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
     for row in canonical:
         canonical_index[(row["team_a_key"], row["team_b_key"], row["season_label"])].append(row)
+    canonical_exact_fingerprint_index = _canonical_exact_fingerprint_index(canonical)
 
     assertions_by_source: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
     assertions_by_game: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -2740,6 +2821,14 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         for row in programs
         if row.get("public_page_enabled") == "Yes"
     }
+    program_display_by_key = {
+        row.get("program_key", "").strip(): (
+            row.get("display_name", "").strip()
+            or row.get("program_name", "").strip()
+        )
+        for row in programs
+        if row.get("program_key", "").strip()
+    }
     global_venues_by_id, global_venues_by_key, _ = load_global_venue_reference(repo)
     venue_metadata = ingest_school.load_venue_metadata_map(
         repo / "schools" / school_key / "venues.csv",
@@ -2755,6 +2844,7 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         candidates = canonical_index.get((team_a, team_b, season), [])
         identity_candidates = list(candidates)
         adjacent_season_candidate: dict[str, str] | None = None
+        cross_opponent_source_patch_by_action: dict[str, dict[str, str]] = {}
         pair = (school_key, source.get("source_game_id", ""))
         prior_ids = sorted(
             {
@@ -2791,6 +2881,46 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                         method
                         + "+UNIQUE_ADJACENT_SEASON_EXACT_SCORE_CANDIDATE"
                     )
+
+                cross_opponent_candidates = _cross_opponent_exact_identity_candidates(
+                    source,
+                    canonical_exact_fingerprint_index,
+                )
+                seen_candidate_ids = {
+                    row.get("canonical_game_id", "").strip()
+                    for row in identity_candidates
+                }
+                for candidate in cross_opponent_candidates:
+                    candidate_id = candidate.get("canonical_game_id", "").strip()
+                    if not candidate_id or candidate_id in seen_candidate_ids:
+                        continue
+                    if candidate.get("team_a_key", "").strip() == school_key:
+                        candidate_opponent = candidate.get("team_b_key", "").strip()
+                    elif candidate.get("team_b_key", "").strip() == school_key:
+                        candidate_opponent = candidate.get("team_a_key", "").strip()
+                    else:
+                        continue
+                    candidate_name = program_display_by_key.get(candidate_opponent, "")
+                    if not candidate_name:
+                        blockers.append(
+                            f"{source.get('source_game_id','')}: exact cross-opponent "
+                            f"candidate {candidate_id} uses unregistered opponent "
+                            f"{candidate_opponent!r}"
+                        )
+                        continue
+                    identity_candidates.append(candidate)
+                    seen_candidate_ids.add(candidate_id)
+                    cross_opponent_source_patch_by_action[
+                        f"MATCH_CANONICAL:{candidate_id}"
+                    ] = {
+                        "normalized_opponent_key": candidate_opponent,
+                        "normalized_opponent_name": candidate_name,
+                    }
+
+                if cross_opponent_source_patch_by_action:
+                    status = ingest_school.REVIEW
+                    game_id = ""
+                    method = method + "+EXACT_DATE_SCORE_CROSS_OPPONENT_CANDIDATE"
         identity_counts[status] += 1
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
@@ -3004,9 +3134,18 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                     "source_identity_expected": {
                         "season_label": season,
                         "game_date": source.get("game_date", "").strip(),
+                        "normalized_opponent_key": source.get(
+                            "normalized_opponent_key", ""
+                        ).strip(),
+                        "normalized_opponent_name": source.get(
+                            "normalized_opponent_name", ""
+                        ).strip(),
                     },
                     "cross_season_source_patch_by_action": (
                         cross_season_source_patch_by_action
+                    ),
+                    "cross_opponent_source_patch_by_action": (
+                        cross_opponent_source_patch_by_action
                     ),
                     "notes": method,
                 }
@@ -3017,18 +3156,23 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                     if participant != school_key and participant in public_keys:
                         affected_public_programs.add(participant)
                 projected_source = source
-                if (
-                    adjacent_season_candidate is not None
-                    and candidate_id
-                    == adjacent_season_candidate.get("canonical_game_id", "")
-                ):
+                candidate_action = f"MATCH_CANONICAL:{candidate_id}"
+                projected_patch: dict[str, str] = {}
+                projected_patch.update(
+                    cross_season_source_patch_by_action.get(
+                        candidate_action,
+                        {},
+                    )
+                )
+                projected_patch.update(
+                    cross_opponent_source_patch_by_action.get(
+                        candidate_action,
+                        {},
+                    )
+                )
+                if projected_patch:
                     projected_source = dict(source)
-                    projected_source["season_label"] = candidate.get(
-                        "season_label", ""
-                    ).strip()
-                    projected_source["game_date"] = candidate.get(
-                        "game_date", ""
-                    ).strip()
+                    projected_source.update(projected_patch)
                 for (
                     field_name,
                     source_value,
@@ -3721,31 +3865,62 @@ def approve_plan(
                 raise WorkflowError(
                     f"{decision_id}: identity review may not carry a canonical patch"
                 )
-            cross_patches = item.get(
+            cross_season_patches = item.get(
                 "cross_season_source_patch_by_action",
                 {},
             )
-            expected_cross_patch = cross_patches.get(decision)
-            if expected_cross_patch is None:
+            cross_opponent_patches = item.get(
+                "cross_opponent_source_patch_by_action",
+                {},
+            )
+            expected_cross_season_patch = cross_season_patches.get(decision)
+            expected_cross_opponent_patch = cross_opponent_patches.get(decision)
+            if (
+                expected_cross_season_patch is not None
+                and expected_cross_opponent_patch is not None
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: one identity action cannot require both "
+                    "cross-season and cross-opponent source patches"
+                )
+            if (
+                expected_cross_season_patch is None
+                and expected_cross_opponent_patch is None
+            ):
                 if source_patch:
                     raise WorkflowError(
                         f"{decision_id}: source patches are permitted only for a "
-                        "preflight-proven adjacent-season identity choice"
+                        "preflight-proven identity choice"
                     )
-            else:
-                expected_cross_patch = {
+            elif expected_cross_season_patch is not None:
+                expected_cross_season_patch = {
                     key: str(value)
-                    for key, value in expected_cross_patch.items()
+                    for key, value in expected_cross_season_patch.items()
                 }
                 if (
-                    set(expected_cross_patch)
+                    set(expected_cross_season_patch)
                     != CROSS_SEASON_IDENTITY_PATCH_FIELDS
-                    or source_patch != expected_cross_patch
+                    or source_patch != expected_cross_season_patch
                 ):
                     raise WorkflowError(
                         f"{decision_id}: adjacent-season identity choice requires "
                         "the exact preflight-proven season_label and game_date "
                         "source patch"
+                    )
+            else:
+                expected_cross_opponent_patch = {
+                    key: str(value)
+                    for key, value in expected_cross_opponent_patch.items()
+                }
+                if (
+                    set(expected_cross_opponent_patch)
+                    != CROSS_OPPONENT_IDENTITY_PATCH_FIELDS
+                    or source_patch != expected_cross_opponent_patch
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: cross-opponent identity choice requires "
+                        "the exact preflight-proven normalized_opponent_key and "
+                        "normalized_opponent_name source patch"
                     )
         if item.get("category") == "postseason_classification":
             if canonical_patch and (
@@ -5066,9 +5241,11 @@ def apply_pre_ingest_source_patches(
 
     Supported populations are:
     - owner-approved H/A/N for a NEW_GAME whose authoritative preflight could
-      not otherwise satisfy NCAA site safety; and
+      not otherwise satisfy NCAA site safety;
     - an owner-approved adjacent-season identity match whose exact source
-      season/date correction was preflight-proven.
+      season/date correction was preflight-proven; and
+    - an owner-approved exact-fingerprint cross-opponent identity match whose
+      opponent key/name correction was preflight-proven.
 
     This runs only inside the sealed disposable/apply transaction, never during
     preflight.
@@ -5090,19 +5267,38 @@ def apply_pre_ingest_source_patches(
         and "game_date" in item.get("source_patch", {})
     ]
     cross_season_identity_items = []
+    cross_opponent_identity_items = []
     for item in approved.get("decisions", []):
         if item.get("category") != "identity":
             continue
         action = item.get("decision", "")
-        expected = item.get(
+        expected_cross_season = item.get(
             "cross_season_source_patch_by_action",
             {},
         ).get(action)
-        if expected is not None:
+        expected_cross_opponent = item.get(
+            "cross_opponent_source_patch_by_action",
+            {},
+        ).get(action)
+        if (
+            expected_cross_season is not None
+            and expected_cross_opponent is not None
+        ):
+            raise WorkflowError(
+                f"{item.get('decision_id','')}: sealed identity action has "
+                "conflicting pre-ingest patch modes"
+            )
+        if expected_cross_season is not None:
             cross_season_identity_items.append(item)
+        if expected_cross_opponent is not None:
+            cross_opponent_identity_items.append(item)
 
     if not (
-        classification_items or site_items or cross_season_identity_items or date_items
+        classification_items
+        or site_items
+        or cross_season_identity_items
+        or cross_opponent_identity_items
+        or date_items
     ):
         return {}
 
@@ -5296,7 +5492,7 @@ def apply_pre_ingest_source_patches(
         counts["new_game_date_patches"] += 1
 
     canonical_by_id: dict[str, dict[str, str]] = {}
-    if cross_season_identity_items:
+    if cross_season_identity_items or cross_opponent_identity_items:
         canonical_by_id = {
             row.get("canonical_game_id", "").strip(): row
             for row in read_csv(repo / "data/canonical/games.csv")
@@ -5377,6 +5573,96 @@ def apply_pre_ingest_source_patches(
             f"sealed onboarding decision {decision_id}; raw_text preserved.",
         )
         counts["adjacent_season_identity_patches"] += 1
+
+    for item in cross_opponent_identity_items:
+        decision_id = item["decision_id"]
+        action = item.get("decision", "")
+        if not action.startswith("MATCH_CANONICAL:"):
+            raise WorkflowError(
+                f"{decision_id}: cross-opponent source patch requires an exact "
+                "MATCH_CANONICAL identity decision"
+            )
+        canonical_game_id = action.split(":", 1)[1]
+        expected_patch = item.get(
+            "cross_opponent_source_patch_by_action",
+            {},
+        ).get(action)
+        patch = item.get("source_patch", {})
+        if (
+            not isinstance(expected_patch, dict)
+            or set(expected_patch) != CROSS_OPPONENT_IDENTITY_PATCH_FIELDS
+            or patch != expected_patch
+        ):
+            raise WorkflowError(
+                f"{decision_id}: sealed cross-opponent source patch does not "
+                "match the preflight-proven patch"
+            )
+
+        source_game_id = item.get("source_game_id", "").strip()
+        source = source_by_id.get(source_game_id)
+        if source is None:
+            raise WorkflowError(
+                f"{decision_id}: source row {source_game_id!r} is missing"
+            )
+        expected_frozen = item.get("source_identity_expected", {})
+        for field in CROSS_OPPONENT_IDENTITY_PATCH_FIELDS:
+            current = source.get(field, "").strip()
+            expected = str(expected_frozen.get(field, "")).strip()
+            if current != expected:
+                raise WorkflowError(
+                    f"{decision_id}: frozen source {field} changed before sealed "
+                    f"apply; expected {expected!r}, found {current!r}"
+                )
+
+        canonical = canonical_by_id.get(canonical_game_id)
+        if canonical is None:
+            raise WorkflowError(
+                f"{decision_id}: reviewed canonical game {canonical_game_id!r} "
+                "is missing before sealed apply"
+            )
+        school = source.get("source_program_key", "").strip()
+        if canonical.get("team_a_key", "").strip() == school:
+            canonical_opponent = canonical.get("team_b_key", "").strip()
+            canonical_team_score = canonical.get("team_a_score", "").strip()
+            canonical_opponent_score = canonical.get("team_b_score", "").strip()
+        elif canonical.get("team_b_key", "").strip() == school:
+            canonical_opponent = canonical.get("team_a_key", "").strip()
+            canonical_team_score = canonical.get("team_b_score", "").strip()
+            canonical_opponent_score = canonical.get("team_a_score", "").strip()
+        else:
+            raise WorkflowError(
+                f"{decision_id}: reviewed cross-opponent canonical no longer "
+                "contains the source program"
+            )
+
+        if canonical_opponent != str(expected_patch["normalized_opponent_key"]).strip():
+            raise WorkflowError(
+                f"{decision_id}: reviewed cross-opponent canonical opponent drifted"
+            )
+        if (
+            canonical.get("season_label", "").strip()
+            != source.get("season_label", "").strip()
+            or canonical.get("game_date", "").strip()
+            != source.get("game_date", "").strip()
+            or canonical_team_score != source.get("team_score", "").strip()
+            or canonical_opponent_score != source.get("opponent_score", "").strip()
+        ):
+            raise WorkflowError(
+                f"{decision_id}: reviewed cross-opponent exact fingerprint drifted"
+            )
+
+        source["normalized_opponent_key"] = str(
+            expected_patch["normalized_opponent_key"]
+        ).strip()
+        source["normalized_opponent_name"] = str(
+            expected_patch["normalized_opponent_name"]
+        ).strip()
+        source["notes"] = _append_note(
+            source.get("notes", ""),
+            "Owner-approved exact-fingerprint opponent identity correction "
+            f"applied by sealed onboarding decision {decision_id}; raw_text preserved.",
+        )
+        counts["cross_opponent_identity_patches"] += 1
 
     write_csv_preserving_format(source_path, source_fields, source_rows)
     return dict(counts)
