@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage2-sealed-apply-0001",
+  "school_key": "saint-louis",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "4b2a07d8eb8472ba43830511a5fdaf816e01ab38",
+  "previous_control_state_sha256": "ac68836d28ad823a6c00510439f7aa989eac8686ff25777c6c8dd6f31d7dc1bb",
+  "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "fa1139b02ec577f58268006c34dfecc670776933471f261e58bb77aca13e4d7d"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "ebc03b3241cd62727781afd7b99a9900267f60fc0ec248d112bb9c98e87058c3"
+  },
+  "approved_plan_hash": "03afc8f8fa91b5fef8f10391257d5ba26a9cd96219cce3e64fa24eaa164e58ee",
+  "approved_plan_sha256": "3a04e60871087ce9de4c586b36047ded9d979370a782a5c81523592a16b8caaa",
+  "owner_gate_1_approval_sha256": "b1d16745b86fc23aabe87c0ab7ca6c12cd330f8d7d5167bb9dee83951a67af67",
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "recommendation_map_sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83",
+  "filled_review_sha256": "54a79133a61177f70b924883ca9d0292094c58ad7ae1ead6158f353bdc54c93d",
+  "decision_id_set_sha256": "a94c10e27456ee84e20b163663cf940aaa84efd0f05f6f2798bf5cfadacfc209",
+  "creation_provenance": {
+    "origin": "ChatGPT Saint Louis serialized Implementation — exact sealed apply",
+    "authorization": "Owner said Proceed after the exact Saint Louis Gate 1 seal was fresh-verified. This authorizes exactly one bounded remote STAGE2_SEALED_APPLY against saint-louis-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. It creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
