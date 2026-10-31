@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage2-proposal-0003",
+  "school_key": "saint-louis",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "0a717dc16a9817153bc11c91898d3905f1793d44",
+  "previous_control_state_sha256": "3670d85cf1a35db4717c1bd1f252f38004093f8e665f96e5a66be232b5347e60",
+  "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0004/checkpoint-manifest.json",
+    "sha256": "d3aa2a76050cabbbfba42361bbbebfeee0a710b7556eeb76762efef90d3bfc47"
+  },
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/saint-louis-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "61ac3c9a069660d5631f7b2c2a6d02f61024c4d6d7110f16f6d275e26e8115b5"
+  },
+  "creation_provenance": {
+    "origin": "Saint Louis serialized Implementation — mechanical predecessor correction",
+    "authorization": "Owner explicitly authorized correcting rejected saint-louis-stage2-proposal-0002 STOP: STALE_CONTROL_PREDECESSOR without altering the exact 158-decision successor map. Fresh request saint-louis-stage2-proposal-0003 is authored as one direct child of current control tip 0a717dc16a9817153bc11c91898d3905f1793d44, with previous_control_state_commit equal to that exact immediate parent and predecessor control-state SHA-256 bound to its unchanged IDLE/COMPLETE state. Map path and exact SHA-256 remain unchanged. Execute one read-only Stage 2 proposal rehearsal; stop at fresh-verified OWNER_GATE_1_READY or durable BLOCKED. No Gate 1 approval or tracked basketball mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
