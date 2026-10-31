@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage2-census-0003",
+  "request_id": "saint-louis-stage2-census-0004",
   "operation": "STAGE2_CENSUS",
   "school_key": "saint-louis",
-  "previous_control_state_commit": "dae4f0cce97256ef97df66ce4c6ea3238e71bad7",
-  "previous_control_state_sha256": "dd3af05b4cd89247b54383bcd9ddb726c66a835382cbd305aa5e2680c59ca8b0",
-  "expected_protected_main_sha": "a3c0cb9d1034314ff74debfb4545da4c53998370",
+  "previous_control_state_commit": "6ee4f0a30375efe5c6ff24a993f322a0949800f3",
+  "previous_control_state_sha256": "cba3cd5ef19cf321c982ef2b9aef0e7e1ea7dea9262ea179d90611b5ab69dff8",
+  "expected_protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
   "target_branch": "data/saint-louis-onboarding",
   "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
   "phase0_successor": {
@@ -20,8 +20,8 @@
   "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
   "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
   "creation_provenance": {
-    "origin": "Saint Louis serialized Implementation — PR #415 current-main census compatibility continuation",
-    "authorization": "Explicit Control Center disposition PR #415 directs exactly one fresh guarded read-only Stage 2 census on fixed main, bound to original Phase 0 and independently verified opponent-display successor chain. Owner already authorized Stage 2 technical phase. This is not a replay of failed request saint-louis-stage2-census-0002. Preserve immutable Research and March 18, 1947 Oklahoma district qualifier evidence, no historical edits, no normalized display replay, no recommendation map, Gate 1, proposal rehearsal or release."
+    "origin": "Saint Louis serialized Implementation — post-PR #416 generic Stage 2 cross-opponent identity repair",
+    "authorization": "Owner Proceed continues the already-authorized Stage 2 technical phase after generic PR #416 merged. Run exactly one fresh guarded read-only Stage 2 census on merged protected main, preserving the unchanged Saint Louis onboarding head and historical package. This request does not approve any Washington/Washington University identity choice, historical correction, recommendation map, Owner Gate 1 action, sealed apply, Preview, merge, or release."
   },
   "authority": {
     "owner_gate_1": false,
