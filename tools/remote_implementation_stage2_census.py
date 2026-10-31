@@ -35,6 +35,8 @@ STAGE2_ARTIFACT_NAMES = (
 )
 STAGE2_ALLOWED_STATUSES = {"CAPABILITY_CENSUS_READY", "BLOCKED"}
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
+OPPONENT_DISPLAY_PACKAGE_FILES = ("opponents.csv", "source-games.csv")
+
 
 
 def normalize_artifact_bytes(
@@ -155,6 +157,288 @@ def add_existing_onboarding_worktree(
     return path
 
 
+def _school_package_hash(
+    commit_sha: str,
+    school_key: str,
+    name: str,
+    *,
+    source_repo: Path,
+) -> str:
+    return sha256_bytes(
+        git_show_bytes(
+            commit_sha,
+            "schools/%s/%s" % (school_key, name),
+            cwd=source_repo,
+        )
+    )
+
+
+def _verify_opponent_display_target_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    phase0_target_sha: str,
+    package_hashes: dict[str, str],
+    source_repo: Path,
+) -> dict[str, Any]:
+    ref = request.get("stage2_opponent_display_successor")
+    if not isinstance(ref, dict):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_REFERENCE_REQUIRED")
+
+    successor_bytes = git_show_bytes(
+        control_commit,
+        str(ref.get("path") or ""),
+        cwd=source_repo,
+    )
+    if sha256_bytes(successor_bytes) != ref.get("sha256"):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(successor_bytes)
+    if successor.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_KIND_MISMATCH")
+    if successor.get("operation") != "STAGE2_OPPONENT_DISPLAY_NORMALIZE":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_OPERATION_MISMATCH")
+    if successor.get("school_key") != request["school_key"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_SCHOOL_MISMATCH")
+    if successor.get("target_branch") != request["target_branch"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_BRANCH_MISMATCH")
+    if successor.get("expected_target_predecessor_sha") != phase0_target_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_PREDECESSOR_MISMATCH")
+    if successor.get("prepared_parent_sha") != phase0_target_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_PREPARED_PARENT_MISMATCH")
+    if successor.get("actual_published_target_sha") != request["target_sha"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_TARGET_MISMATCH")
+    if successor.get("prepared_commit_sha") != request["target_sha"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_PREPARED_COMMIT_MISMATCH")
+    if successor.get("publication_cas") != "EXISTING_REF_CAS_PASS":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_PUBLICATION_CAS_MISMATCH")
+    if successor.get("repository_validation") != "PASS":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_NOT_VALIDATED")
+    if successor.get("final_transaction_state") != "COMPLETE":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_NOT_COMPLETE")
+    if successor.get("integration_freeze_sha256") != request["integration_freeze_sha256"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_FREEZE_MISMATCH")
+    if successor.get("semantic_snapshot_sha256") != request["semantic_snapshot_sha256"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_SEMANTIC_MISMATCH")
+
+    for label in ("semantic_drift_before", "semantic_drift_after"):
+        drift = successor.get(label) or {}
+        if (
+            drift.get("status") != "PASS"
+            or list(drift.get("changes") or [])
+            or drift.get("baseline_sha256") != request["semantic_snapshot_sha256"]
+            or drift.get("current_sha256") != request["semantic_snapshot_sha256"]
+        ):
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_SUCCESSOR_%s_MISMATCH"
+                % label.upper()
+            )
+
+    allowed_paths = {
+        "schools/%s/%s" % (request["school_key"], name)
+        for name in OPPONENT_DISPLAY_PACKAGE_FILES
+    }
+    changed_paths = list(successor.get("changed_paths") or [])
+    if not changed_paths or not set(changed_paths).issubset(allowed_paths):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_CHANGED_PATHS_INVALID")
+    changed_hashes = successor.get("changed_file_sha256") or {}
+    if set(changed_hashes) != set(changed_paths):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_CHANGED_HASH_SET_MISMATCH")
+
+    parents = git(
+        "show",
+        "-s",
+        "--format=%P",
+        request["target_sha"],
+        cwd=source_repo,
+    ).stdout.strip().split()
+    if parents != [phase0_target_sha]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_GIT_PARENT_MISMATCH")
+    actual_diff = sorted(
+        line.strip()
+        for line in git(
+            "diff",
+            "--name-only",
+            phase0_target_sha,
+            request["target_sha"],
+            cwd=source_repo,
+        ).stdout.splitlines()
+        if line.strip()
+    )
+    if actual_diff != sorted(changed_paths):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_GIT_DIFF_MISMATCH")
+
+    actual_tree = git(
+        "rev-parse",
+        request["target_sha"] + "^{tree}",
+        cwd=source_repo,
+    ).stdout.strip()
+    if successor.get("prepared_tree_sha") != actual_tree:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_PREPARED_TREE_MISMATCH")
+
+    writeahead_path = str(successor.get("writeahead_manifest_path") or "")
+    writeahead_sha = str(successor.get("writeahead_manifest_sha256") or "")
+    if not writeahead_path or not writeahead_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_REFERENCE_MISSING")
+    writeahead_bytes = git_show_bytes(
+        control_commit,
+        writeahead_path,
+        cwd=source_repo,
+    )
+    if sha256_bytes(writeahead_bytes) != writeahead_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_HASH_MISMATCH")
+    writeahead = json.loads(writeahead_bytes)
+    if writeahead.get("kind") != "REMOTE_IMPLEMENTATION_WRITEAHEAD":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_KIND_MISMATCH")
+    if writeahead.get("operation") != "STAGE2_OPPONENT_DISPLAY_NORMALIZE":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_OPERATION_MISMATCH")
+    if writeahead.get("school_key") != request["school_key"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_SCHOOL_MISMATCH")
+    if writeahead.get("target_branch") != request["target_branch"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_BRANCH_MISMATCH")
+    if writeahead.get("expected_target_predecessor_sha") != phase0_target_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_PREDECESSOR_MISMATCH")
+    if writeahead.get("prepared_parent_sha") != phase0_target_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_PARENT_MISMATCH")
+    if writeahead.get("prepared_commit_sha") != request["target_sha"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_TARGET_MISMATCH")
+    if writeahead.get("prepared_tree_sha") != actual_tree:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_TREE_MISMATCH")
+    if list(writeahead.get("changed_paths") or []) != changed_paths:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_PATH_MISMATCH")
+    if (writeahead.get("changed_file_sha256") or {}) != changed_hashes:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_FILE_HASH_MISMATCH")
+    if set(writeahead.get("allowed_paths") or []) != allowed_paths:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_ALLOWED_PATH_MISMATCH")
+    if writeahead.get("integration_freeze_sha256") != request["integration_freeze_sha256"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_FREEZE_MISMATCH")
+    if writeahead.get("semantic_snapshot_sha256") != request["semantic_snapshot_sha256"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_WRITEAHEAD_SEMANTIC_MISMATCH")
+
+    proof_sha = str(successor.get("field_level_proof_sha256") or "")
+    if not proof_sha or writeahead.get("field_level_proof_sha256") != proof_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_BINDING_MISMATCH")
+    proof_path = (Path(writeahead_path).parent / "field-level-proof.json").as_posix()
+    proof_bytes = git_show_bytes(control_commit, proof_path, cwd=source_repo)
+    if sha256_bytes(proof_bytes) != proof_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_HASH_MISMATCH")
+    if (writeahead.get("sidecars") or {}).get("field-level-proof.json") != proof_sha:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_SIDECAR_MISMATCH")
+    proof = json.loads(proof_bytes)
+    if proof.get("school_key") != request["school_key"]:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_SCHOOL_MISMATCH")
+    if set(proof.get("allowed_paths") or []) != allowed_paths:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_ALLOWED_PATH_MISMATCH")
+    for field in (
+        "literal_evidence_changes",
+        "opponent_key_changes",
+        "source_game_non_name_field_changes",
+    ):
+        if int(proof.get(field, -1)) != 0:
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_NONREPRESENTATIONAL:%s"
+                % field
+            )
+    blocker_keys = sorted(str(x) for x in successor.get("expected_blocker_keys") or [])
+    if not blocker_keys:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_BLOCKER_KEYS_MISSING")
+    if sorted(str(x) for x in proof.get("opponent_changed_keys") or []) != blocker_keys:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_OPPONENT_KEYS_MISMATCH")
+    if sorted(str(x) for x in proof.get("source_game_changed_keys") or []) != blocker_keys:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_SOURCE_KEYS_MISMATCH")
+    if int(proof.get("source_game_normalized_name_row_count", -1)) != int(
+        successor.get("source_game_normalized_name_row_count", -2)
+    ):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_ROW_COUNT_MISMATCH")
+
+    verification_path = (
+        ".remote-implementation/verifications/%s/%s/"
+        "stage2-opponent-display-verification.json"
+        % (request["school_key"], successor.get("request_id"))
+    )
+    verification_bytes = git_show_bytes(
+        control_commit,
+        verification_path,
+        cwd=source_repo,
+    )
+    verification = json.loads(verification_bytes)
+    if verification.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_VERIFICATION_KIND_MISMATCH")
+    bindings = {
+        "request_id": successor.get("request_id"),
+        "school_key": request["school_key"],
+        "target_branch": request["target_branch"],
+        "target_predecessor_sha": phase0_target_sha,
+        "target_sha": request["target_sha"],
+        "target_tree_sha": actual_tree,
+        "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+        "field_level_proof_sha256": proof_sha,
+        "normalization_report_sha256": successor.get("normalization_report_sha256"),
+        "protected_main_sha": successor.get("protected_main_sha"),
+    }
+    for field, expected in bindings.items():
+        if verification.get(field) != expected:
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_VERIFICATION_BINDING_MISMATCH:%s"
+                % field
+            )
+    if sorted(verification.get("changed_paths") or []) != sorted(changed_paths):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_VERIFICATION_PATH_MISMATCH")
+    if sorted(verification.get("expected_blocker_keys") or []) != blocker_keys:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_VERIFICATION_BLOCKER_MISMATCH")
+    if verification.get("semantic_drift") != "PASS":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_VERIFICATION_SEMANTIC_MISMATCH")
+    if verification.get("tracked_stage2_mutation") != "NONE":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_VERIFICATION_MUTATION_MISMATCH")
+    if verification.get("remote_stage2_opponent_display_equivalence") != "PASS":
+        raise Stop("STAGE2_OPPONENT_DISPLAY_VERIFICATION_NOT_PASS")
+
+    for path, expected in changed_hashes.items():
+        actual = sha256_bytes(
+            git_show_bytes(request["target_sha"], path, cwd=source_repo)
+        )
+        if actual != expected:
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_CHANGED_FILE_HASH_MISMATCH:%s"
+                % path
+            )
+
+    changed_names = {
+        Path(path).name
+        for path in changed_paths
+        if path.startswith("schools/%s/" % request["school_key"])
+    }
+    for name in REQUIRED_PACKAGE_FILES:
+        actual = _school_package_hash(
+            request["target_sha"],
+            request["school_key"],
+            name,
+            source_repo=source_repo,
+        )
+        if name in changed_names:
+            expected = changed_hashes.get(
+                "schools/%s/%s" % (request["school_key"], name)
+            )
+        else:
+            expected = package_hashes.get(name)
+        if not expected or actual != expected:
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_PACKAGE_HASH_MISMATCH:%s" % name
+            )
+
+    return {
+        "successor": successor,
+        "successor_bytes": successor_bytes,
+        "writeahead": writeahead,
+        "writeahead_bytes": writeahead_bytes,
+        "field_level_proof": proof,
+        "field_level_proof_bytes": proof_bytes,
+        "verification": verification,
+        "verification_bytes": verification_bytes,
+        "verification_path": verification_path,
+    }
+
+
 def verify_phase0_authority(
     request: dict[str, Any],
     control_commit: str,
@@ -172,10 +456,9 @@ def verify_phase0_authority(
         raise Stop("STAGE2_PHASE0_SUCCESSOR_SCHOOL_MISMATCH")
     if successor.get("target_branch") != request["target_branch"]:
         raise Stop("STAGE2_PHASE0_SUCCESSOR_BRANCH_MISMATCH")
-    if successor.get("actual_published_target_sha") != request["target_sha"]:
+    phase0_target_sha = str(successor.get("actual_published_target_sha") or "")
+    if not phase0_target_sha or successor.get("prepared_commit_sha") != phase0_target_sha:
         raise Stop("STAGE2_PHASE0_SUCCESSOR_TARGET_MISMATCH")
-    if successor.get("prepared_commit_sha") != request["target_sha"]:
-        raise Stop("STAGE2_PHASE0_PREPARED_COMMIT_MISMATCH")
     if successor.get("integration_freeze_sha256") != request["integration_freeze_sha256"]:
         raise Stop("STAGE2_PHASE0_INTEGRATION_FREEZE_MISMATCH")
     if successor.get("semantic_snapshot_sha256") != request["semantic_snapshot_sha256"]:
@@ -199,7 +482,7 @@ def verify_phase0_authority(
         raise Stop("STAGE2_PHASE0_WRITEAHEAD_SCHOOL_MISMATCH")
     if writeahead.get("target_branch") != request["target_branch"]:
         raise Stop("STAGE2_PHASE0_WRITEAHEAD_BRANCH_MISMATCH")
-    if writeahead.get("prepared_commit_sha") != request["target_sha"]:
+    if writeahead.get("prepared_commit_sha") != phase0_target_sha:
         raise Stop("STAGE2_PHASE0_WRITEAHEAD_TARGET_MISMATCH")
     if writeahead.get("integration_freeze_sha256") != request["integration_freeze_sha256"]:
         raise Stop("STAGE2_PHASE0_WRITEAHEAD_FREEZE_MISMATCH")
@@ -229,15 +512,29 @@ def verify_phase0_authority(
     package_hashes = integration.get("package_member_sha256") or {}
     for name in REQUIRED_PACKAGE_FILES:
         expected = package_hashes.get(name)
-        actual = sha256_bytes(
-            git_show_bytes(
-                request["target_sha"],
-                "schools/%s/%s" % (request["school_key"], name),
-                cwd=source_repo,
-            )
+        actual = _school_package_hash(
+            phase0_target_sha,
+            request["school_key"],
+            name,
+            source_repo=source_repo,
         )
         if not expected or actual != expected:
             raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
+
+    display_authority: dict[str, Any] | None = None
+    if request["target_sha"] == phase0_target_sha:
+        if request.get("stage2_opponent_display_successor") is not None:
+            raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_NOT_APPLICABLE")
+        target_authority_kind = "PHASE0_SUCCESSOR"
+    else:
+        display_authority = _verify_opponent_display_target_authority(
+            request,
+            control_commit,
+            phase0_target_sha=phase0_target_sha,
+            package_hashes=package_hashes,
+            source_repo=source_repo,
+        )
+        target_authority_kind = "STAGE2_OPPONENT_DISPLAY_SUCCESSOR"
 
     return {
         "successor": successor,
@@ -246,7 +543,10 @@ def verify_phase0_authority(
         "writeahead_bytes": writeahead_bytes,
         "freeze_bytes": freeze_bytes,
         "freeze_path": freeze_path,
+        "phase0_target_sha": phase0_target_sha,
         "phase0_protected_main_sha": successor.get("protected_main_sha"),
+        "target_authority_kind": target_authority_kind,
+        "opponent_display_authority": display_authority,
     }
 
 
