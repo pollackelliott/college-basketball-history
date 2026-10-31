@@ -569,6 +569,76 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         }
         return control_sha, request
 
+    def test_verified_opponent_display_successor_is_authenticated(self):
+        repo, _, request, _ = self.make_authority_repo()
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        )
+        self.assertEqual(
+            authority["opponent_display_authority"]["successor"][
+                "actual_published_target_sha"
+            ],
+            request["target_sha"],
+        )
+
+    def test_display_successor_rejects_unrelated_school_file_change(self):
+        repo, _, request, _ = self.make_authority_repo()
+        control_sha, request = self.add_verified_display_successor(
+            repo,
+            request,
+            extra_school_change=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_OPPONENT_DISPLAY_GIT_DIFF_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_display_successor_rejects_invalid_predecessor_chain(self):
+        repo, _, request, _ = self.make_authority_repo()
+        control_sha, request = self.add_verified_display_successor(
+            repo,
+            request,
+            bad_predecessor=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR_PREDECESSOR_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_display_successor_requires_fresh_verification_pass(self):
+        repo, _, request, _ = self.make_authority_repo()
+        control_sha, request = self.add_verified_display_successor(
+            repo,
+            request,
+            verification_pass=False,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_OPPONENT_DISPLAY_VERIFICATION_NOT_PASS",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
     def test_wrong_onboarding_sha_is_rejected_before_worktree(self):
         with patch(
             "remote_implementation_stage2_census.remote_head",
