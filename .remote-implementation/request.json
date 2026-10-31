@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-release-readiness-0001",
+  "request_id": "saint-louis-release-preview-verify-0001",
   "school_key": "saint-louis",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "d8cbb85a1899d40fcded1319f6ba75e574af874e",
-  "previous_control_state_sha256": "6e180ff1e56016b32c862f950271a6aa0b685f268e1f2e3fb642ef90cd64ad17",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "d4fa9441560d2cb84917a52415d598148dc1a972",
+  "previous_control_state_sha256": "8610e551d665044654b5addc56566d50dac3121ffeb47bf83a607a99a4fb1af0",
   "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
   "target_branch": "data/saint-louis-onboarding",
   "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/saint-louis/saint-louis-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "4a9ce3a050c3bd523a68087bdde98537f2b38d1a88283dff372c1a14565fbf83"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "14429ece751136e5df11e3e458d8bdc530511d7c8f0ad2ccc259d164a880ff3f"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "282f4e75e0591b33772c6ff84e237ab7b2f37fd313ffbca16af8550c8db8b661"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "284799ac44bfc00c536f62ed38001de5f1ef2bbc7784583984102a39de6881ec"
   },
   "approved_plan_hash": "03afc8f8fa91b5fef8f10391257d5ba26a9cd96219cce3e64fa24eaa164e58ee",
   "release_manifest_sha256": "5fa1593d3d4196e65ce9c4a7940bd18f7c27109d2ce795e5d79342e9403f970c",
+  "pr_number": 418,
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation — Stage 4 release preparation",
-    "authorization": "Owner explicitly authorized Stage 4 release preparation through OWNER_GATE_2_READY. This request authorizes exactly one read-only RELEASE_READINESS operation against the independently fresh-verified Saint Louis sealed-apply successor. It grants no PR creation, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, shared/global maintenance, or unrelated Implementation authority."
+    "origin": "ChatGPT Saint Louis serialized Implementation lane — bounded exact PR-head Preview verification",
+    "authorization": "Owner authorized Saint Louis Stage 4 release preparation through OWNER_GATE_2_READY; same-phase authority persists. Exact protected main, sealed successor, fresh-verified RELEASE_READINESS, IDLE control, and PR #418 were reauthenticated immediately before request preparation. This request authorizes exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification. It does not authorize Owner Gate 2 approval, merge, Production, tracked basketball mutation, historical reconsideration, recovery, maintenance, or another school."
   },
   "authority": {
     "owner_gate_1": false,
@@ -38,8 +39,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
