@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-stage2-proposal-0004",
+  "school_key": "saint-louis",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "a3d34a045efab5ca0f9bb4543d6e33df2dd1d25e",
+  "previous_control_state_sha256": "d187293d35a4475877d2c5fc07df0af03635d1504b4177faa50b30cf882ce0bf",
+  "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0004/checkpoint-manifest.json",
+    "sha256": "d3aa2a76050cabbbfba42361bbbebfeee0a710b7556eeb76762efef90d3bfc47"
+  },
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/saint-louis-stage2-proposal-0004/recommendation-map.json",
+    "sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83"
+  },
+  "creation_provenance": {
+    "origin": "Saint Louis existing serialized Implementation — owner-final five-game Stage 2 site reconciliation",
+    "authorization": "Owner explicitly finalized five historical site dispositions. Exact 158-decision universe preserved; Missouri H/A/N changes KEEP_CANONICAL to USE_SOURCE, four other H/A/N actions retain KEEP_CANONICAL, and five exact registered-venue canonical patches are carried by their existing discrepancy decision IDs. Original frozen source assertions remain unchanged. Read-only Stage 2 proposal rehearsal only; no Gate 1 approval, fill, seal, apply, Preview, release, or tracked basketball mutation. Stop at verified OWNER_GATE_1_READY or durable BLOCKED."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
