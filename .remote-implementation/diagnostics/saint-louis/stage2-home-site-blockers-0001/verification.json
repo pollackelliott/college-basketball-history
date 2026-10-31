@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "SAINT_LOUIS_STAGE2_HOME_SITE_BLOCKER_CLASSIFICATION_VERIFICATION",
+  "school_key": "saint-louis",
+  "classification_path": ".remote-implementation/diagnostics/saint-louis/stage2-home-site-blockers-0001/classification.json",
+  "classification_commit_sha": "a0e5447fa94aaf9f11ad65fa77cae006d9fe3a0c",
+  "classification_blob_sha": "8ec5db3d9e23dd86f3a0f4ca7dea88201a40f2cd",
+  "source_authority": {
+    "protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+    "onboarding_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+    "control_head_sha": "cb41aa2489e28a72b7836d2812497040f0c5b88a",
+    "control_sequence": 167,
+    "blocked_checkpoint_commit": "e6cca1bd2f659c9839a1e1dbc3fc9d899b1cc752",
+    "checkpoint_manifest_sha256": "2320b6010535a9ea5d47c4d53e6dce7cb53bb687b16fbd0e23d12f866a995dfb",
+    "recommendation_map_sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b",
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f"
+  },
+  "checks": {
+    "exact_strict_home_gap_set_match": true,
+    "strict_home_gap_count": 7,
+    "unique_classified_blocker_count": 7,
+    "exact_unaccounted_public_gap": [
+      "CBBG-0022942"
+    ],
+    "source_home_publication_blocker_rows": 0,
+    "source_unaccounted_gap_rows": 0,
+    "target_source_information_loss": 0,
+    "all_seven_map_actions_match_checkpoint": true,
+    "expected_map_action": "LEAVE_UNRESOLVED",
+    "protected_main_unchanged_after_checkpoint_write": true,
+    "onboarding_head_unchanged_after_checkpoint_write": true,
+    "global_control_sequence_unchanged_after_checkpoint_write": true,
+    "global_control_idle_complete_after_checkpoint_write": true,
+    "global_control_recovery_required": false,
+    "historical_or_tooling_mutation_performed": false
+  },
+  "blocker_ids": [
+    "CBBG-0000688",
+    "CBBG-0022942",
+    "CBBG-0079885",
+    "CBBG-0122116",
+    "CBBG-0133847",
+    "CBBG-0144398",
+    "CBBG-0175749"
+  ],
+  "result": "PASS",
+  "conclusion": "The complete seven-row blocked HOME-site population is classified as a finite generic Stage 2 representation/provenance defect family. Six rows retain real H/A/N conflicts under LEAVE_UNRESOLVED and need a generic canonical-HOME locality/unresolved-venue representation; CBBG-0022942 has a legitimately unknown exact venue but mechanically supported St. Louis, MO HOME locality and needs reciprocal-only unresolved-HOME provenance/public-gap accounting. No new historical decision is required to repair the tooling topology."
+}
