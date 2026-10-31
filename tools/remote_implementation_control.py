@@ -778,6 +778,12 @@ def validate_request(request: dict[str, Any]) -> None:
             "phase0_successor",
             required=True,
         )
+        if request.get("stage2_opponent_display_successor") is not None:
+            _validate_payload_ref(
+                request.get("stage2_opponent_display_successor"),
+                "stage2_opponent_display_successor",
+                required=True,
+            )
         _require_sha(
             request.get("integration_freeze_sha256"),
             64,
