@@ -187,7 +187,7 @@
     "saint-louis-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
-  "active_lock_commit": null,
+  "active_lock_commit": "a22ed2f51fb918377185d8037090b7926d719949",
   "active_lock_owner": "github-actions:41231534119:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
