@@ -1,34 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage2-sealed-apply-0001",
+  "request_id": "saint-louis-release-readiness-0001",
   "school_key": "saint-louis",
-  "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "4b2a07d8eb8472ba43830511a5fdaf816e01ab38",
-  "previous_control_state_sha256": "ac68836d28ad823a6c00510439f7aa989eac8686ff25777c6c8dd6f31d7dc1bb",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "d8cbb85a1899d40fcded1319f6ba75e574af874e",
+  "previous_control_state_sha256": "6e180ff1e56016b32c862f950271a6aa0b685f268e1f2e3fb642ef90cd64ad17",
   "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
   "target_branch": "data/saint-louis-onboarding",
-  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "fa1139b02ec577f58268006c34dfecc670776933471f261e58bb77aca13e4d7d"
+  "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "4a9ce3a050c3bd523a68087bdde98537f2b38d1a88283dff372c1a14565fbf83"
   },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "ebc03b3241cd62727781afd7b99a9900267f60fc0ec248d112bb9c98e87058c3"
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "282f4e75e0591b33772c6ff84e237ab7b2f37fd313ffbca16af8550c8db8b661"
   },
   "approved_plan_hash": "03afc8f8fa91b5fef8f10391257d5ba26a9cd96219cce3e64fa24eaa164e58ee",
-  "approved_plan_sha256": "3a04e60871087ce9de4c586b36047ded9d979370a782a5c81523592a16b8caaa",
-  "owner_gate_1_approval_sha256": "b1d16745b86fc23aabe87c0ab7ca6c12cd330f8d7d5167bb9dee83951a67af67",
-  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
-  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
-  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
-  "recommendation_map_sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83",
-  "filled_review_sha256": "54a79133a61177f70b924883ca9d0292094c58ad7ae1ead6158f353bdc54c93d",
-  "decision_id_set_sha256": "a94c10e27456ee84e20b163663cf940aaa84efd0f05f6f2798bf5cfadacfc209",
+  "release_manifest_sha256": "5fa1593d3d4196e65ce9c4a7940bd18f7c27109d2ce795e5d79342e9403f970c",
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation — exact sealed apply",
-    "authorization": "Owner said Proceed after the exact Saint Louis Gate 1 seal was fresh-verified. This authorizes exactly one bounded remote STAGE2_SEALED_APPLY against saint-louis-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. It creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+    "origin": "ChatGPT Saint Louis serialized Implementation — Stage 4 release preparation",
+    "authorization": "Owner explicitly authorized Stage 4 release preparation through OWNER_GATE_2_READY. This request authorizes exactly one read-only RELEASE_READINESS operation against the independently fresh-verified Saint Louis sealed-apply successor. It grants no PR creation, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, shared/global maintenance, or unrelated Implementation authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -43,9 +36,9 @@
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
