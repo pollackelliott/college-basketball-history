@@ -399,6 +399,18 @@ def persist_stage2_census_checkpoint(
         "phase0_protected_main_sha": phase0_authority[
             "phase0_protected_main_sha"
         ],
+        "target_authority_kind": phase0_authority["target_authority_kind"],
+        "stage2_opponent_display_successor_path": (
+            (request.get("stage2_opponent_display_successor") or {}).get("path")
+        ),
+        "stage2_opponent_display_successor_sha256": (
+            (request.get("stage2_opponent_display_successor") or {}).get("sha256")
+        ),
+        "stage2_opponent_display_verification_path": (
+            (phase0_authority.get("opponent_display_authority") or {}).get(
+                "verification_path"
+            )
+        ),
         "integration_freeze_sha256": request[
             "integration_freeze_sha256"
         ],
