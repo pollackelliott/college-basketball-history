@@ -1,0 +1,48 @@
+{
+  "approved_plan_hash_preview": "b81088042a8df43a8d6d496ab3e0d8ce0e283b74999c380cd64fed5169b8f09d",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "5e2beab84c596e4a5207c03c0641ea12f35122bdaa3c3161a63ac1209a1b6c4a",
+    "implementation-stage2-status.json": "9936e90d4761bc333825c880f6e511711e7eac828508acaee9c66e3f1136feb3",
+    "last-rehearsal-site-gate.json": "e6f03bdb52b3e9c905af5b92ab9b7799537e78d8e6a0ed5bade25b040ddca053",
+    "plan.json": "6b7180904a9111260aef7912696396f486d7c80a917c0e566e126744959824c1",
+    "review.csv": "11a7a648022e125c229f78f16d826fcbf81a910c5303f92663ae258cdaf166ab",
+    "review.md": "6e29ffb60cb7804ff389508c70be688f7865dcdb4d05c1fb119449da678246cd"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "5e2beab84c596e4a5207c03c0641ea12f35122bdaa3c3161a63ac1209a1b6c4a",
+    "implementation-stage2-status.json": "bf134665dce02b10a882d4d3985b6ae49983d0832cfdfd350f24ccca1c3d07e0",
+    "last-rehearsal-site-gate.json": "e6f03bdb52b3e9c905af5b92ab9b7799537e78d8e6a0ed5bade25b040ddca053",
+    "plan.json": "762f543d3f36bc2eef425d869d034485f9d1739e880355f705fe72dbfc460330",
+    "review.csv": "11a7a648022e125c229f78f16d826fcbf81a910c5303f92663ae258cdaf166ab",
+    "review.md": "30b1168ad27724df6cf54b6a30c0bef037c0c06d937e04fdcd9602d75f97eca0"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "runtime_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "recommendation_map_sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "saint-louis-stage2-proposal-0004",
+  "runtime_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "target_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+  "tracked_stage2_mutation": "NONE"
+}
