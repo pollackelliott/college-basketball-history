@@ -1,0 +1,23 @@
+{
+  "approval_proof_sha256": "9391817f104dcc1df020fbc39d0d16b4cbd42a1a70630dec907c50882bcdfd75",
+  "approved_plan_hash": "03afc8f8fa91b5fef8f10391257d5ba26a9cd96219cce3e64fa24eaa164e58ee",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
+  "pr_number": 418,
+  "preview_checkpoint_sha256": "05936579ae8a9184c2a9bc6026393d8db62d6c1603360d7304e08d4d061b8380",
+  "preview_deployment_id": 7463024679,
+  "preview_url": "https://college-basketball-history-2wvijc2mx-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "fcb4a4a4fbcc9574e845a01b1419fd2128f09a48795a6398bdb81d775ca539f0",
+  "production_proof": false,
+  "protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "release_manifest_sha256": "5fa1593d3d4196e65ce9c4a7940bd18f7c27109d2ce795e5d79342e9403f970c",
+  "request_id": "saint-louis-release-gate2-approval-0001",
+  "request_sha256": "96290f8e2d85ff99633c2b8047bc91a21925f66fb68b2b76b651b490438e3994",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856"
+}
