@@ -1,0 +1,465 @@
+{
+  "kind": "SAINT_LOUIS_STAGE2_RECOMMENDATION_PREPARATION_CHECKPOINT",
+  "schema_version": 1,
+  "authority": {
+    "protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+    "onboarding_target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+    "control_branch_sha": "44d2217a48dc0926064a0ce546c0a1333e574abf",
+    "control_sequence": 166,
+    "control_lifecycle": "IDLE",
+    "control_transaction": "COMPLETE",
+    "active_request": null,
+    "active_mutation_lock": null,
+    "recovery_required": false,
+    "census_request_id": "saint-louis-stage2-census-0004",
+    "census_checkpoint_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0004/checkpoint-manifest.json",
+    "census_checkpoint_sha256": "d3aa2a76050cabbbfba42361bbbebfeee0a710b7556eeb76762efef90d3bfc47",
+    "capability_census_sha256": "f610ea224755727ffc9925ec92fa132917e98643bfb19fd65dcb3c8d798ffaf5",
+    "plan_sha256": "451cf8edf8a52e8ecae4e27a9e7cc1898673a2538313bb16a0be487652d84fd6",
+    "plan_normalized_sha256": "6b7180904a9111260aef7912696396f486d7c80a917c0e566e126744959824c1",
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "decision_count": 158,
+    "census_status": "CAPABILITY_CENSUS_READY",
+    "census_blockers": 0,
+    "census_warnings": 0,
+    "fresh_verification": "PASS"
+  },
+  "parent_review_chain": {
+    "prep_0001": {
+      "branch": "review/saint-louis-stage2-prep-0001",
+      "commit_sha": "712be9761a5649883fe58efc1cafc7a95a346108",
+      "artifact_path": ".remote-implementation/inputs/saint-louis-stage2-prep-0001/identity-home-review.json",
+      "artifact_git_blob_sha": "ae73cc125907c0c609ce60bf8b6f51bcfd8e76ae",
+      "distinct_decisions_reviewed": 23
+    },
+    "prep_0002": {
+      "branch": "review/saint-louis-stage2-prep-0002",
+      "commit_sha": "beabfd13acd936b50e9fdfe611dcbe3d97eeaf8d",
+      "artifact_path": ".remote-implementation/inputs/saint-louis-stage2-prep-0002/site-han-review.json",
+      "artifact_git_blob_sha": "09c0cf0378f7b17eafec8355c8e71b9202ea38e7",
+      "reviewed_distinct_decisions_total": 39
+    },
+    "prep_0003_blocker": {
+      "branch": "review/saint-louis-stage2-prep-0003",
+      "commit_sha": "4f7eff264dc24948065c5ccc71027d4b0eebd6f6",
+      "artifact_path": ".remote-implementation/inputs/saint-louis-stage2-prep-0003/cross-opponent-identity-defect.json",
+      "artifact_git_blob_sha": "52b6b6c3e21d86fa086a860b31516865c89f780b"
+    }
+  },
+  "census_rebind_proof": {
+    "prior_decision_count": 155,
+    "current_decision_count": 158,
+    "prior_decision_ids_missing_from_current": [],
+    "newly_added_decision_ids": [
+      "IDENTITY-SAINT-LOUIS-1951-52-005",
+      "IDENTITY-SAINT-LOUIS-1954-55-006",
+      "IDENTITY-SAINT-LOUIS-1954-55-007"
+    ],
+    "prior_decisions_with_structural_metadata_change": 16,
+    "structural_change_classification": {
+      "fourteen_existing_identity_decisions": "Candidate set, source value, canonical value, relevant evidence, allowed actions, dates, and matchup are unchanged. Current runtime adds defensive expected normalized-opponent key/name fields plus an empty cross-opponent patch map. Prior identity recommendations remain substantively bound.",
+      "canonical_site_patch_CBBG_0078886": "Current runtime adds saint-louis-1951-52-005 as a conditional identity source and states that the site review applies only if that identity is not matched to CBBG-0078886. The earlier unresolved site recommendation is revised below to the permanent parser's deterministic conditional NOT_APPLICABLE consequence.",
+      "publication_decision": "Only the evidence count changes from 14 to 17 identity reviews. Publication was not recommendation-prepared in the prior 39-decision review population."
+    },
+    "carry_forward_result": {
+      "previously_reviewed_distinct_decisions": 39,
+      "unchanged_recommendations_carried_forward": 38,
+      "previously_reviewed_recommendation_revised": 1,
+      "revised_decision_id": "CANONICAL-SITE-PATCH-CBBG-0078886",
+      "historical_files_modified": 0
+    }
+  },
+  "washington_identity_recommendations": [
+    {
+      "decision_id": "IDENTITY-SAINT-LOUIS-1951-52-005",
+      "source_game_id": "saint-louis-1951-52-005",
+      "canonical_game_id": "CBBG-0078886",
+      "proposed_disposition": "MATCH_CANONICAL:CBBG-0078886",
+      "exact_source_patch": {
+        "normalized_opponent_key": "washington",
+        "normalized_opponent_name": "Washington"
+      },
+      "evidence": [
+        "Saint Louis institutional 1951-52 schedule records Dec. 19 vs Washington, L 53-58.",
+        "Washington accepted reciprocal source washington-1027 is the same 1951-12-19 58-53 game.",
+        "Fresh Stage 2 census surfaces this as an exact same-season/date/score cross-opponent candidate and no competing canonical candidate."
+      ],
+      "source_url": "https://slubillikens.com/sports/mens-basketball/schedule/1951-52",
+      "basis": "Exact institutional date/score reciprocity identifies one real game; the frozen Washington University in St. Louis normalization is the historical identity error. The source patch is exactly the preflight-proven key/name correction and literal raw evidence remains preserved.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "IDENTITY-SAINT-LOUIS-1954-55-006",
+      "source_game_id": "saint-louis-1954-55-006",
+      "canonical_game_id": "CBBG-0078950",
+      "proposed_disposition": "MATCH_CANONICAL:CBBG-0078950",
+      "exact_source_patch": {
+        "normalized_opponent_key": "washington",
+        "normalized_opponent_name": "Washington"
+      },
+      "evidence": [
+        "Saint Louis institutional 1954-55 schedule records Dec. 21 at Washington, L 70-72.",
+        "Washington accepted reciprocal source washington-1114 is the same 1954-12-21 72-70 game.",
+        "Fresh Stage 2 census surfaces one exact same-season/date/score cross-opponent candidate."
+      ],
+      "source_url": "https://slubillikens.com/sports/mens-basketball/schedule/1954-55",
+      "basis": "Exact institutional reciprocity identifies University of Washington, while the frozen source's Washington University key is the historical identity error.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "IDENTITY-SAINT-LOUIS-1954-55-007",
+      "source_game_id": "saint-louis-1954-55-007",
+      "canonical_game_id": "CBBG-0078951",
+      "proposed_disposition": "MATCH_CANONICAL:CBBG-0078951",
+      "exact_source_patch": {
+        "normalized_opponent_key": "washington",
+        "normalized_opponent_name": "Washington"
+      },
+      "evidence": [
+        "Saint Louis institutional 1954-55 schedule records Dec. 22 at Washington, W 73-64.",
+        "Washington accepted reciprocal source washington-1115 is the same 1954-12-22 64-73 game.",
+        "Fresh Stage 2 census surfaces one exact same-season/date/score cross-opponent candidate."
+      ],
+      "source_url": "https://slubillikens.com/sports/mens-basketball/schedule/1954-55",
+      "basis": "Exact institutional reciprocity identifies University of Washington, while the frozen source's Washington University key is the historical identity error.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    }
+  ],
+  "revised_conditional_site_consequence": {
+    "decision_id": "CANONICAL-SITE-PATCH-CBBG-0078886",
+    "conditional_identity_source_game_ids": [
+      "saint-louis-1951-52-005"
+    ],
+    "selected_identity_recommendation": "MATCH_CANONICAL:CBBG-0078886",
+    "proposed_disposition": "NOT_APPLICABLE_IF_SELECTED_IDENTITY_RECOMMENDATION_IS_ACCEPTED",
+    "basis": "Current permanent approval logic auto-seals this reciprocal-only canonical site patch NOT_APPLICABLE when the target identity is matched to the same canonical game. The Saint Louis source assertion then supplies the game's target evidence; no independent canonical-only site decision should be manufactured.",
+    "confidence": "HIGH_CONDITIONAL",
+    "owner_gate_1_required": "NO_INDEPENDENT_SITE_DECISION; IDENTITY_GATE_CONTROLS"
+  },
+  "newly_reviewed_ordinary_site_decisions": [
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1947-48-009-SITE_TYPE",
+      "source_game_id": "saint-louis-1947-48-009",
+      "canonical_game_id": "CBBG-0170559",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1948-01-13 Long Island, W 68-57, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "LIU LIU-S1-00451: L 57-68, NEUTRAL, Madison Square Garden (1925-1968 building), New York, NY.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "LIU supplies explicit neutral classification plus exact MSG venue/locality for the same score; that site-specific evidence outweighs the target away marker.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1947-48-010-SITE_TYPE",
+      "source_game_id": "saint-louis-1947-48-010",
+      "canonical_game_id": "CBBG-0147201",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "TEAM_B_HOME",
+      "target_evidence": "Saint Louis: 1948-01-17 Notre Dame, W 42-40, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Notre Dame accepted reciprocal for the exact date is TEAM_B_HOME from canonical orientation, implying Saint Louis HOME.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "The accepted institutional sources give opposite home/away classifications and the bounded evidence available here supplies no decisive venue/locality fact.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1948-49-010-SITE_TYPE",
+      "source_game_id": "saint-louis-1948-49-010",
+      "canonical_game_id": "CBBG-0170576",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1949-01-11 Long Island, W 58-47, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "LIU LIU-S1-00475: L 47-58, NEUTRAL, Madison Square Garden (1925-1968 building), New York, NY.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "LIU supplies explicit neutral classification and exact MSG venue/locality for the same score.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1949-50-010-SITE_TYPE",
+      "source_game_id": "saint-louis-1949-50-010",
+      "canonical_game_id": "CBBG-0170593",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1950-01-10 Long Island, L 42-58, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "LIU LIU-S1-00503: W 58-42, NEUTRAL, Madison Square Garden (1925-1968 building), New York, NY.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "LIU supplies explicit neutral classification and exact MSG venue/locality for the same score.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1950-51-014-SITE_TYPE",
+      "source_game_id": "saint-louis-1950-51-014",
+      "canonical_game_id": "CBBG-0170608",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1951-01-09 Long Island, L 62-74, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "LIU LIU-S1-00525: W 74-62, NEUTRAL, Madison Square Garden (1925-1968 building), New York, NY.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "LIU supplies explicit neutral classification and exact MSG venue/locality for the same score.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1952-53-020-SITE_TYPE",
+      "source_game_id": "saint-louis-1952-53-020",
+      "canonical_game_id": "CBBG-0147259",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1953-02-14 Notre Dame, W 78-77, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Notre Dame accepted reciprocal on the same exact date is NEUTRAL.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Both accepted institutional classifications are explicit and contradictory; no stronger same-source venue/locality fact was available in this bounded tranche.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1954-55-027-SITE_TYPE",
+      "source_game_id": "saint-louis-1954-55-027",
+      "canonical_game_id": "CBBG-0155074",
+      "source_value": "NEUTRAL",
+      "canonical_value": "TEAM_B_HOME",
+      "target_evidence": "Saint Louis: 1955-03-12 Connecticut, W 110-103, explicit N$>, NEUTRAL, Madison Square Garden, New York, NY.",
+      "reciprocal_evidence": "UConn UCONN-STG1-000122: L 103-110, curated SOURCE_PROGRAM_HOME at Madison Square Garden; raw text explicitly identifies the National Invitation Tournament in New York, NY.",
+      "proposed_disposition": "USE_SOURCE",
+      "basis": "Saint Louis carries an explicit neutral marker plus exact MSG postseason venue/locality, and UConn's own literal evidence identifies the NIT in New York. The reciprocal HOME classification conflicts with that more site-specific postseason evidence.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1956-57-028-SITE_TYPE",
+      "source_game_id": "saint-louis-1956-57-028",
+      "canonical_game_id": "CBBG-0145698",
+      "source_value": "NEUTRAL",
+      "canonical_value": "TEAM_B_HOME",
+      "target_evidence": "Saint Louis: 1957-03-16 SMU, L 68-78, explicit N#, NEUTRAL, Moody Coliseum, Dallas, TX; accepted Stage 6 note identifies the NCAA Midwest Regional third-place game.",
+      "reciprocal_evidence": "SMU SMU-S1-000813: W 78-68, curated SOURCE_PROGRAM_HOME, Moody Coliseum, Dallas, TX.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Both institutions explicitly classify the same postseason game differently while agreeing on exact venue/locality. Venue geography is not used to break the tie.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1958-59-020-SITE_TYPE",
+      "source_game_id": "saint-louis-1958-59-020",
+      "canonical_game_id": "CBBG-0100828",
+      "source_value": "TEAM_B_HOME",
+      "canonical_value": "TEAM_A_HOME",
+      "target_evidence": "Saint Louis: 1959-02-21 Houston, L 57-64, explicit H / SOURCE_PROGRAM_HOME, Kiel Auditorium, St. Louis, MO.",
+      "reciprocal_evidence": "Houston HOU-R-00222: W 64-57, SOURCE_PROGRAM_HOME, Jeppesen Fieldhouse, Houston, TX.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "The institutional sources agree on exact date/score but assert mutually exclusive home venues in different cities. This is a genuine historical conflict.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1960-61-007-SITE_TYPE",
+      "source_game_id": "saint-louis-1960-61-007",
+      "canonical_game_id": "CBBG-0113294",
+      "source_value": "NEUTRAL",
+      "canonical_value": "UNKNOWN",
+      "target_evidence": "Saint Louis: 1960-12-21 California, W 54-53, explicit N!, NEUTRAL, Memorial Coliseum, Lexington, KY.",
+      "reciprocal_evidence": "California CAL-R1-01078: L 53-54 on 1960-12-21, site UNKNOWN.",
+      "proposed_disposition": "USE_SOURCE",
+      "basis": "Saint Louis supplies affirmative neutral classification plus exact venue/locality; reciprocal evidence is unresolved rather than contradictory.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1963-64-015-SITE_TYPE",
+      "source_game_id": "saint-louis-1963-64-015",
+      "canonical_game_id": "CBBG-0122116",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "TEAM_B_HOME",
+      "target_evidence": "Saint Louis: 1964-01-25 Cincinnati, W 78-76, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Cincinnati accepted reciprocal on the same exact date is TEAM_B_HOME from canonical orientation, implying Saint Louis HOME.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Exact institutional sources classify the same game in opposite home/away directions and no decisive venue/locality fact is present in this bounded evidence set.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1965-66-001-SITE_TYPE",
+      "source_game_id": "saint-louis-1965-66-001",
+      "canonical_game_id": "CBBG-0081348",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1965-12-01 Oklahoma State, W 61-57, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Oklahoma State OKSTRAW-01206: L 57-61, explicit NEUTRAL, Oklahoma City, OK, raw 'vs ... ! Saint Louis'.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "The reciprocal assertion supplies explicit neutral treatment plus independent Oklahoma City locality, more site-specific evidence than the target away marker.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1967-68-008-SITE_TYPE",
+      "source_game_id": "saint-louis-1967-68-008",
+      "canonical_game_id": "CBBG-0175749",
+      "source_value": "NEUTRAL",
+      "canonical_value": "TEAM_A_HOME",
+      "target_evidence": "Saint Louis: 1967-12-27 Utah State, W 97-78, explicit N!, NEUTRAL, Los Angeles Arena, Los Angeles, CA.",
+      "reciprocal_evidence": "Utah State UST-S1-01174: L 78-97, curated OPPONENT_HOME with raw text '12/27 St. Louis LAC A L 78 97'.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Saint Louis has explicit neutral venue/locality evidence, while Utah State's accepted source carries an explicit away classification. The conflict is historical; geography is not used to override either source.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; MEDIUM_ON_SOURCE_SPECIFICITY",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1967-68-009-SITE_TYPE",
+      "source_game_id": "saint-louis-1967-68-009",
+      "canonical_game_id": "CBBG-0074290",
+      "source_value": "TEAM_B_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1967-12-29 UCLA, L 67-108, explicit A! / OPPONENT_HOME.",
+      "reciprocal_evidence": "UCLA accepted reciprocal on the exact date is NEUTRAL.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Both institutional classifications are explicit and contradictory; no decisive reciprocal venue/locality fact was available in this bounded tranche.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1968-69-005-SITE_TYPE",
+      "source_game_id": "saint-louis-1968-69-005",
+      "canonical_game_id": "CBBG-0076669",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1968-12-12 Rutgers, L 67-91, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Rutgers RUTRAW-00963: W 91-67, accepted NEUTRAL.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "The two accepted institutional sources provide opposing explicit classifications but no decisive same-game venue/locality evidence in this bounded tranche.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1969-70-010-SITE_TYPE",
+      "source_game_id": "saint-louis-1969-70-010",
+      "canonical_game_id": "CBBG-0144398",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "TEAM_B_HOME",
+      "target_evidence": "Saint Louis: 1970-01-06 Louisville, L 65-68, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Louisville LOU-STG1-001127: W 68-65, raw '(A)' and curated OPPONENT_HOME from Louisville perspective, implying Saint Louis HOME.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Both institutional sources explicitly call themselves away for the same date/score, a direct historical contradiction without decisive venue evidence.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1970-71-029-SITE_TYPE",
+      "source_game_id": "saint-louis-1970-71-029",
+      "canonical_game_id": "CBBG-0144435",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1971-03-11 Louisville, L 66-68, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Louisville LOU-STG1-001173: W 68-66, explicit '(N)', NEUTRAL, Peoria, IL.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "Louisville supplies explicit neutral treatment and independent Peoria locality for the exact date/score.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1972-73-004-SITE_TYPE",
+      "source_game_id": "saint-louis-1972-73-004",
+      "canonical_game_id": "CBBG-0163098",
+      "source_value": "TEAM_B_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1972-12-16 Seton Hall, W 78-65, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Seton Hall SHU-S1-01167: L 65-78, explicit 'vs.', NEUTRAL, Madison Square Garden, New York, NY.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "Seton Hall supplies explicit neutral treatment plus exact MSG venue/locality for the same date/score.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1976-77-004-SITE_TYPE",
+      "source_game_id": "saint-louis-1976-77-004",
+      "canonical_game_id": "CBBG-0007244",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1976-12-04 Illinois, L 46-54, explicit A% / OPPONENT_HOME.",
+      "reciprocal_evidence": "Illinois ILLRAW-01405: W 54-46, explicit 'vs. St. Louis (at Columbia, Mo.)', NEUTRAL.",
+      "proposed_disposition": "KEEP_CANONICAL",
+      "basis": "Illinois provides explicit neutral wording and independent Columbia, Missouri locality for the exact date/score.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1985-86-028-SITE_TYPE",
+      "source_game_id": "saint-louis-1985-86-028",
+      "canonical_game_id": "CBBG-0083952",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "UNKNOWN",
+      "target_evidence": "Saint Louis: 1986-02-27 Butler, W 63-61, explicit A^ / OPPONENT_HOME, Market Square Arena, Indianapolis, IN.",
+      "reciprocal_evidence": "Butler BUTRAW-01694: L 61-63, 1986-02-28, site UNKNOWN, same Market Square Arena, Indianapolis, IN.",
+      "proposed_disposition": "USE_SOURCE",
+      "basis": "Saint Louis supplies affirmative away classification and exact venue/locality while Butler is explicitly unresolved on H/A/N. The one-day date conflict remains separate.",
+      "confidence": "MEDIUM_HIGH",
+      "owner_gate_1_required": true,
+      "unresolved": "Date discrepancy is separate and remains owner-visible."
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1988-89-031-SITE_TYPE",
+      "source_game_id": "saint-louis-1988-89-031",
+      "canonical_game_id": "CBBG-0084032",
+      "source_value": "NEUTRAL",
+      "canonical_value": "UNKNOWN",
+      "target_evidence": "Saint Louis: 1989-03-09 Butler, W 68-64, explicit N^ / NEUTRAL, University of Dayton Arena, Dayton, OH.",
+      "reciprocal_evidence": "Butler BUTRAW-01778: L 64-68, same 1989-03-09 date and University of Dayton Arena, site UNKNOWN.",
+      "proposed_disposition": "USE_SOURCE",
+      "basis": "Saint Louis supplies affirmative neutral classification and exact venue/locality; Butler agrees on venue/date/score but leaves site type unresolved.",
+      "confidence": "HIGH",
+      "owner_gate_1_required": true
+    },
+    {
+      "decision_id": "DISCREPANCY-SAINT-LOUIS-1990-91-001-SITE_TYPE",
+      "source_game_id": "saint-louis-1990-91-001",
+      "canonical_game_id": "CBBG-0055391",
+      "source_value": "TEAM_A_HOME",
+      "canonical_value": "NEUTRAL",
+      "target_evidence": "Saint Louis: 1990-11-23 Nebraska, L 79-107, explicit A / OPPONENT_HOME.",
+      "reciprocal_evidence": "Nebraska NEBRAW-01959: W 107-79, explicit raw 'N 11/23 Saint Louis*', curated NEUTRAL.",
+      "proposed_disposition": "LEAVE_UNRESOLVED",
+      "basis": "Both institutions explicitly classify the exact game differently and the bounded evidence set provides no independent venue/locality fact strong enough to break the tie.",
+      "confidence": "HIGH_THAT_CONFLICT_IS_GENUINE; LOW_ON_DIRECTION",
+      "owner_gate_1_required": true
+    }
+  ],
+  "progress_after_checkpoint": {
+    "total_decisions": 158,
+    "previously_reviewed_distinct_decisions": 39,
+    "prior_recommendations_carried_forward_unchanged": 38,
+    "prior_recommendations_revised": 1,
+    "newly_reviewed_distinct_decisions": 25,
+    "reviewed_distinct_decisions_total": 64,
+    "remaining_unreviewed_distinct_decisions": 94,
+    "identity_decisions_total": 17,
+    "identity_decisions_recommendation_prepared": 17,
+    "site_or_han_decisions_total": 54,
+    "site_or_han_decisions_with_recommendation_review": 47,
+    "site_or_han_decisions_remaining": 7,
+    "historical_files_modified": 0,
+    "proposal_rehearsal_run": false,
+    "owner_gate_1_reached": false
+  },
+  "guardrails": {
+    "research_frozen": true,
+    "no_source_game_mutation": true,
+    "no_canonical_mutation": true,
+    "no_global_control_mutation": true,
+    "no_mutation_lock_acquired": true,
+    "no_owner_approval_assumed": true,
+    "washington_identity_recommendations_are_preliminary_not_owner_approved": true,
+    "no_recommendation_map_claimed_complete": true,
+    "no_proposal_rehearsal": true,
+    "no_gate1_fill_seal_apply_release": true
+  },
+  "next_bounded_unit": {
+    "population": "Complete recommendation preparation for the final seven ordinary SITE_TYPE decisions remaining in the 54-decision site/H-A/N population.",
+    "stopping_boundary": "Remain inside site/H-A/N. Do not enter score/date/game-type/accomplishment/publication families in the same unit. Stop earlier if a new generic tooling defect or genuine broader historical topology appears.",
+    "goal": "Bring site/H-A/N recommendation coverage from 47/54 to 54/54 while preserving unresolved conflicts honestly."
+  }
+}
