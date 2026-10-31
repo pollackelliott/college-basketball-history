@@ -1,31 +1,41 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage2-proposal-0004",
+  "request_id": "saint-louis-stage2-gate1-fill-0001",
   "school_key": "saint-louis",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "a3d34a045efab5ca0f9bb4543d6e33df2dd1d25e",
-  "previous_control_state_sha256": "d187293d35a4475877d2c5fc07df0af03635d1504b4177faa50b30cf882ce0bf",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "f4791bcc80599d7810e7ee3af8f8723518f2a23d",
+  "previous_control_state_sha256": "dc89e702f53a91f6b3d1ad374dabfd5543d6384626e3ba615e2447c61f10daa7",
   "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
   "target_branch": "data/saint-louis-onboarding",
   "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
-  "stage2_authority": {
-    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0004/checkpoint-manifest.json",
-    "sha256": "d3aa2a76050cabbbfba42361bbbebfeee0a710b7556eeb76762efef90d3bfc47"
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-proposal-0004/checkpoint-manifest.json",
+    "sha256": "5695d475095bdf137fcdbf08157e27f353fa1d755146a63d94129a936a73d496"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-stage2-proposal-0004/stage2-proposal-rehearsal-verification.json",
+    "sha256": "5680a0654c606dd0631f371adf4f90e2ae2cfbb13f7f439781f64dd4182b606c"
   },
   "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
   "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
   "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
-  "recommendation_map": {
-    "path": ".remote-implementation/inputs/saint-louis-stage2-proposal-0004/recommendation-map.json",
-    "sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83"
+  "recommendation_map_sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83",
+  "approved_plan_hash_preview": "b81088042a8df43a8d6d496ab3e0d8ce0e283b74999c380cd64fed5169b8f09d",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly wrote 'I APPROVE. Proceed' immediately after the Saint Louis Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY 158-decision packet and requested explicit Owner Gate 1 approval. This approves that exact packet from saint-louis-stage2-proposal-0004 and authorizes exact-map Gate 1 fill only; it does not itself authorize pre-seal, seal, apply, tracked basketball mutation, Preview, Owner Gate 2, merge, release, Production, or recovery.",
+    "proposal_checkpoint_sha256": "5695d475095bdf137fcdbf08157e27f353fa1d755146a63d94129a936a73d496",
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "recommendation_map_sha256": "3e6687189cfc9b7fb435b5a5ae382079bc4248630ab45db2ef61dc1d9e970f83",
+    "approved_plan_hash_preview": "b81088042a8df43a8d6d496ab3e0d8ce0e283b74999c380cd64fed5169b8f09d"
   },
   "creation_provenance": {
-    "origin": "Saint Louis existing serialized Implementation — owner-final five-game Stage 2 site reconciliation",
-    "authorization": "Owner explicitly finalized five historical site dispositions. Exact 158-decision universe preserved; Missouri H/A/N changes KEEP_CANONICAL to USE_SOURCE, four other H/A/N actions retain KEEP_CANONICAL, and five exact registered-venue canonical patches are carried by their existing discrepancy decision IDs. Original frozen source assertions remain unchanged. Read-only Stage 2 proposal rehearsal only; no Gate 1 approval, fill, seal, apply, Preview, release, or tracked basketball mutation. Stop at verified OWNER_GATE_1_READY or durable BLOCKED."
+    "origin": "ChatGPT Saint Louis serialized Implementation — exact fresh-verified Owner Gate 1 approval",
+    "authorization": "Owner explicitly wrote 'I APPROVE. Proceed' for the exact fresh-verified 158-decision Saint Louis OWNER_GATE_1_READY packet from saint-louis-stage2-proposal-0004. Authorize exactly one guarded STAGE2_GATE1_FILL to encode the approved recommendation map into the filled review. No pre-seal rehearsal, cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, merge, release, Production, recovery, or unrelated authority."
   },
   "authority": {
-    "owner_gate_1": false,
+    "owner_gate_1": true,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
@@ -33,8 +43,8 @@
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": true,
-    "stage2_gate1_fill": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": true,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
