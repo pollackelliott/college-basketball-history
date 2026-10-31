@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "kind": "SAINT_LOUIS_STAGE2_HOME_SITE_BLOCKER_CLASSIFICATION",
+  "school_key": "saint-louis",
+  "lane": "EXISTING_SERIALIZED_IMPLEMENTATION",
+  "phase": "STAGE2_PROPOSAL_RECOVERY",
+  "authority": {
+    "protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+    "control_head_sha": "cb41aa2489e28a72b7836d2812497040f0c5b88a",
+    "control_sequence": 167,
+    "control_state": "IDLE_COMPLETE",
+    "onboarding_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+    "blocked_proposal_request_id": "saint-louis-stage2-proposal-0001",
+    "blocked_checkpoint_commit": "e6cca1bd2f659c9839a1e1dbc3fc9d899b1cc752",
+    "checkpoint_manifest_sha256": "2320b6010535a9ea5d47c4d53e6dce7cb53bb687b16fbd0e23d12f866a995dfb",
+    "recommendation_map_sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b",
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "approved_plan_preview_sha256": "1b22c7177d18359fc61bb05fb16af3c407eff0fc2db9e59b1677407cb9d9150e",
+    "fresh_verification_path": ".remote-implementation/verifications/saint-louis/saint-louis-stage2-proposal-0001/stage2-proposal-rehearsal-verification.json",
+    "fresh_verification_result": "PASS"
+  },
+  "invariants": {
+    "recommendation_decisions_changed": false,
+    "historical_files_changed": false,
+    "generic_tooling_changed": false,
+    "onboarding_branch_changed": false,
+    "protected_main_changed": false,
+    "owner_gate_1_reached": false,
+    "remote_diagnostics_submitted": 0
+  },
+  "population_summary": {
+    "strict_home_gap_rows": 7,
+    "unaccounted_public_gap_rows": 1,
+    "unaccounted_public_gap_canonical_game_id": "CBBG-0022942",
+    "source_home_publication_blocker_rows": 0,
+    "source_unaccounted_gap_rows": 0,
+    "target_source_information_loss": 0,
+    "reciprocal_unpropagated": 0,
+    "primary_blocker_classification": "GENERIC_PERMANENT_TOOL_REPRESENTATION_AND_PROVENANCE_DEFECT",
+    "historical_conflicts_present": true,
+    "new_historical_choice_required_for_repair": false
+  },
+  "mechanical_findings": [
+    "For an ordinary site_type decision of LEAVE_UNRESOLVED, apply_reconciliation_decisions preserves the canonical site_type and records dependent venue/location discrepancies, but does not supply HOME locality or a valid HOME venue-exception marker.",
+    "_record_reconciled_unresolved_home_venue_markers explicitly skips LEAVE_UNRESOLVED decisions and validates only resolved site_type conflicts.",
+    "backfill_resolved_target_home_chronology requires a RESOLVED site_type discrepancy and therefore cannot represent the six target-source HOME conflicts whose approved recommendation is LEAVE_UNRESOLVED.",
+    "backfill_reciprocal_only_home_chronology requires exactly one documented relationship covering the exact date or full season; Saint Louis venue rows carry accepted HOME evidence and assigned-game spans but blank relationship_start/relationship_end fields, so the reciprocal-only Vanderbilt row cannot receive the current unique-relationship backfill.",
+    "implementation_site_gate already recognizes a reciprocal-only unresolved-HOME-venue exception shape, but the current onboarding apply path has no producer for RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE provenance.",
+    "The safe repair must not project venue/locality from a losing H/A/N premise. In particular, CBBG-0175749's target neutral Los Angeles Arena evidence must remain preserved and must not be copied onto a retained Saint Louis-HOME canonical state."
+  ],
+  "blockers": [
+    {
+      "canonical_game_id": "CBBG-0000688",
+      "season_label": "1946-1947",
+      "game_date": "1946-12-09",
+      "matchup": "missouri vs saint-louis",
+      "canonical_site_type": "TEAM_B_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": {
+        "source_game_id": "saint-louis-1946-47-002",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "D9 Missouri A L 44-48"
+      },
+      "reciprocal_source": {
+        "program_key": "missouri",
+        "source_game_id": "MIZ-HIST-00688",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "Dec. 9 @ St. Louis W 48-44"
+      },
+      "map_decision": {
+        "decision_id": "DISCREPANCY-SAINT-LOUIS-1946-47-002-SITE_TYPE",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Canonical Saint Louis HOME is retained; target/reciprocal H/A/N conflict remains under review; venue and locality remain blank.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 12,
+        "venue_population": [
+          "Kiel Auditorium"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "DO_NOT_INFER_FOR_THIS_DISPUTED_GAME",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECONCILIATION_BACKED_HOME_VENUE_EXCEPTION",
+      "classification": "HISTORICAL_HAN_CONFLICT_PLUS_GENERIC_REPRESENTATION_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Preserve both H/A/N sources and LEAVE_UNRESOLVED; if canonical HOME remains the projected publication state, fill only St. Louis, MO from accepted target HOME geography, leave venue blank, and attach field-specific reconciliation/home-venue provenance."
+    },
+    {
+      "canonical_game_id": "CBBG-0122116",
+      "season_label": "1963-1964",
+      "game_date": "1964-01-25",
+      "matchup": "cincinnati vs saint-louis",
+      "canonical_site_type": "TEAM_B_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": {
+        "source_game_id": "saint-louis-1963-64-015",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "J25 Cincinnati* A W 78-76"
+      },
+      "reciprocal_source": {
+        "program_key": "cincinnati",
+        "source_game_id": "CIN-STG1-01127",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "25 Saint Louis L 76-78 A - -"
+      },
+      "map_decision": {
+        "decision_id": "DISCREPANCY-SAINT-LOUIS-1963-64-015-SITE_TYPE",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Canonical Saint Louis HOME is retained while both institutional sources' opposite-perspective away claims remain preserved under review; venue/locality remain blank.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 13,
+        "venue_population": [
+          "Kiel Auditorium"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "DO_NOT_INFER_FOR_THIS_DISPUTED_GAME",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECONCILIATION_BACKED_HOME_VENUE_EXCEPTION",
+      "classification": "HISTORICAL_HAN_CONFLICT_PLUS_GENERIC_REPRESENTATION_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Keep the H/A/N conflict unresolved exactly as mapped; provide canonical-HOME locality and provenance without rewriting either source."
+    },
+    {
+      "canonical_game_id": "CBBG-0175749",
+      "season_label": "1967-1968",
+      "game_date": "1967-12-27",
+      "matchup": "saint-louis vs utah-state",
+      "canonical_site_type": "TEAM_A_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": {
+        "source_game_id": "saint-louis-1967-68-008",
+        "curated_site_type": "NEUTRAL",
+        "venue": "Los Angeles Arena",
+        "city": "Los Angeles",
+        "state": "CA",
+        "raw_text": "D27 Utah State N! W 97-78"
+      },
+      "reciprocal_source": {
+        "program_key": "utah-state",
+        "source_game_id": "UST-S1-01174",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "12/27 St. Louis LAC A L 78 97"
+      },
+      "map_decision": {
+        "decision_id": "DISCREPANCY-SAINT-LOUIS-1967-68-008-SITE_TYPE",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Canonical Saint Louis HOME is retained while Saint Louis neutral Los Angeles evidence and Utah State away evidence remain preserved under review; dependent neutral venue/locality cannot safely project onto HOME.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 12,
+        "venue_population": [
+          "Kiel Auditorium"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "DO_NOT_COPY_LOS_ANGELES_ARENA_AND_DO_NOT_INFER_HOME_BUILDING",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECONCILIATION_BACKED_HOME_VENUE_EXCEPTION",
+      "classification": "HISTORICAL_HAN_AND_PHYSICAL_SITE_CONFLICT_PLUS_GENERIC_REPRESENTATION_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Preserve the neutral Los Angeles source evidence as the competing premise; do not project it onto canonical HOME. If HOME is retained, use only independently supported St. Louis, MO HOME locality and unresolved-venue provenance."
+    },
+    {
+      "canonical_game_id": "CBBG-0144398",
+      "season_label": "1969-1970",
+      "game_date": "1970-01-06",
+      "matchup": "louisville vs saint-louis",
+      "canonical_site_type": "TEAM_B_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": {
+        "source_game_id": "saint-louis-1969-70-010",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "J6 Louisville* A L 65-68"
+      },
+      "reciprocal_source": {
+        "program_key": "louisville",
+        "source_game_id": "LOU-STG1-001127",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "Jan. 6 St. Louis* (A) 68 65"
+      },
+      "map_decision": {
+        "decision_id": "DISCREPANCY-SAINT-LOUIS-1969-70-010-SITE_TYPE",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Canonical Saint Louis HOME remains; both institutional records say themselves away from opposite perspectives; venue/locality stay blank.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 10,
+        "venue_population": [
+          "St. Louis Arena"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "DO_NOT_INFER_FOR_THIS_DISPUTED_GAME",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECONCILIATION_BACKED_HOME_VENUE_EXCEPTION",
+      "classification": "HISTORICAL_HAN_CONFLICT_PLUS_GENERIC_REPRESENTATION_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Preserve both away claims; supply only canonical-HOME locality/provenance required for publication."
+    },
+    {
+      "canonical_game_id": "CBBG-0079885",
+      "season_label": "2001-2002",
+      "game_date": "2001-12-29",
+      "matchup": "saint-louis vs washington",
+      "canonical_site_type": "TEAM_A_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": {
+        "source_game_id": "saint-louis-2001-02-012",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "D29 Washington A W 71-70"
+      },
+      "reciprocal_source": {
+        "program_key": "washington",
+        "source_game_id": "washington-2418",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "Dec. 29 at Saint Louis L 70–71"
+      },
+      "map_decision": {
+        "decision_id": "DISCREPANCY-SAINT-LOUIS-2001-02-012-SITE_TYPE",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Canonical Saint Louis HOME remains while both institutional records claim away from their own perspective; venue/locality remain blank.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 14,
+        "venue_population": [
+          "Enterprise Center"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "DO_NOT_INFER_FOR_THIS_DISPUTED_GAME",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECONCILIATION_BACKED_HOME_VENUE_EXCEPTION",
+      "classification": "HISTORICAL_HAN_CONFLICT_PLUS_GENERIC_REPRESENTATION_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Keep the exact mapped historical uncertainty; provide locality-only HOME representation plus provenance."
+    },
+    {
+      "canonical_game_id": "CBBG-0133847",
+      "season_label": "2001-2002",
+      "game_date": "2002-02-16",
+      "matchup": "georgia-tech vs saint-louis",
+      "canonical_site_type": "TEAM_B_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": {
+        "source_game_id": "saint-louis-2001-02-026",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "F16 Georgia Tech A L 40-60"
+      },
+      "reciprocal_source": {
+        "program_key": "georgia-tech",
+        "source_game_id": "GT-STG1-002061",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "F16 a W 60-40 Saint Louis"
+      },
+      "map_decision": {
+        "decision_id": "DISCREPANCY-SAINT-LOUIS-2001-02-026-SITE_TYPE",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Canonical Saint Louis HOME remains while both institutional records claim away from their own perspective; venue/locality remain blank.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 14,
+        "venue_population": [
+          "Enterprise Center"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "DO_NOT_INFER_FOR_THIS_DISPUTED_GAME",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECONCILIATION_BACKED_HOME_VENUE_EXCEPTION",
+      "classification": "HISTORICAL_HAN_CONFLICT_PLUS_GENERIC_REPRESENTATION_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Keep the exact mapped historical uncertainty; provide locality-only HOME representation plus provenance."
+    },
+    {
+      "canonical_game_id": "CBBG-0022942",
+      "season_label": "1925-1926",
+      "game_date": "",
+      "date_precision": "SEASON",
+      "matchup": "saint-louis vs vanderbilt",
+      "canonical_site_type": "TEAM_A_HOME",
+      "canonical_home_program": "saint-louis",
+      "target_source": null,
+      "reciprocal_source": {
+        "program_key": "vanderbilt",
+        "source_game_id": "VANRAW-00305",
+        "curated_site_type": "OPPONENT_HOME",
+        "venue": "",
+        "city": "",
+        "state": "",
+        "raw_text": "at Saint Louis .........................L 22-35"
+      },
+      "map_decision": {
+        "decision_id": "CANONICAL-SITE-PATCH-CBBG-0022942",
+        "action": "LEAVE_UNRESOLVED"
+      },
+      "projected_effect": "Reciprocal-only canonical Saint Louis HOME remains with blank venue/city/state; current canonical-site LEAVE_UNRESOLVED action emits no patch or public-gap provenance.",
+      "accepted_home_geography": {
+        "same_season_home_rows": 8,
+        "venue_population": [
+          "First Regiment Armory",
+          "St. Louis University High School Gymnasium",
+          "St. Louis Coliseum"
+        ],
+        "localities": [
+          "St. Louis, MO"
+        ]
+      },
+      "geography_mechanically_supported": "St. Louis, MO",
+      "exact_venue_disposition": "LEGITIMATELY_UNRESOLVED_MULTIPLE_BUILDINGS_AND_UNKNOWN_DATE",
+      "researched_unresolved_home_venue_treatment": "APPLICABLE_AS_RECIPROCAL_ONLY_HOME_VENUE_EXCEPTION",
+      "classification": "GENUINE_UNKNOWN_PHYSICAL_VENUE_PLUS_GENERIC_REPRESENTATION_AND_PUBLIC_GAP_ACCOUNTING_DEFECT",
+      "repair_owner": "SAINT_LOUIS_IMPLEMENTATION_GENERIC_TOOLING_REPAIR",
+      "required_authority": "CURRENT_STAGE2_POLICY_NO_NEW_HISTORICAL_AUTHORITY",
+      "recommended_disposition": "Do not invent a building or target assertion. Fill St. Louis, MO from the accepted 1925-26 target HOME population, leave venue blank, and emit reciprocal-only unresolved-HOME-venue plus locality-provenance metadata naming VANRAW-00305."
+    }
+  ],
+  "consolidated_repair": {
+    "operation": "ONE_COHERENT_GENERIC_STAGE2_HOME_SITE_REPRESENTATION_REPAIR",
+    "scope": [
+      "Teach the disposable/apply reconciliation path to represent a retained target-HOME canonical state when the site_type decision is LEAVE_UNRESOLVED: preserve the H/A/N conflict, derive only mechanically unanimous target-HOME locality, leave exact venue blank unless exact-game evidence independently supports it, and create explicit field-specific HOME-venue provenance accepted by the permanent site gate.",
+      "Add the reciprocal-only locality-only HOME path for a canonical_site_patch LEAVE_UNRESOLVED when reciprocal evidence establishes target HOME, no target assertion exists, exact venue is unsupported, and accepted target HOME evidence yields one mechanically safe locality. Produce and validate explicit reciprocal-only locality provenance; never fabricate a target assertion.",
+      "Do not copy venue/locality from a source whose H/A/N premise conflicts with the retained canonical premise.",
+      "Keep complete-location strictness non-waivable and continue blocking when no mechanically unique locality exists.",
+      "Add regression coverage for (a) unresolved target-away vs reciprocal-HOME, (b) unresolved target-neutral with conflicting off-site venue, (c) reciprocal-only unknown-date HOME with multiple same-locality buildings, and (d) negative mixed-locality case that must remain blocked."
+    ],
+    "expected_files": "GENERIC_TOOLING_AND_TESTS_ONLY",
+    "prohibited_mutations": [
+      "schools/saint-louis historical package",
+      "data/canonical historical values as part of the tooling PR",
+      "data/evidence assertions",
+      "the accepted 158-decision recommendation map"
+    ],
+    "authority": "POLICY_SUPPORTED_DETERMINISTIC_STAGE2_TECHNICAL_REPAIR_IN_SAME_IMPLEMENTATION_LANE",
+    "control_center_required": false,
+    "owner_historical_decision_required": false,
+    "post_repair_verification": [
+      "protected main advances only through normal protected-main PR governance",
+      "Saint Louis onboarding head remains 08d61b6701dea6cefb9748ed4b6aa5d74b2d194a before a new guarded rehearsal",
+      "recommendation decision content remains unchanged",
+      "decision universe remains exact",
+      "same exact seven-game population is re-evaluated by the permanent site gate as verification rather than rediscovered iteratively",
+      "proposal rehearsal must PASS before OWNER_GATE_1_READY"
+    ]
+  },
+  "stopping_boundary": {
+    "owner_gate_1": "NOT_REACHED",
+    "gate1_fill": false,
+    "seal": false,
+    "apply": false,
+    "preview": false,
+    "release": false
+  }
+}
