@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-stage2-proposal-0002",
+  "request_id": "saint-louis-stage2-proposal-0003",
   "school_key": "saint-louis",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "cb41aa2489e28a72b7836d2812497040f0c5b88a",
+  "previous_control_state_commit": "0a717dc16a9817153bc11c91898d3905f1793d44",
   "previous_control_state_sha256": "3670d85cf1a35db4717c1bd1f252f38004093f8e665f96e5a66be232b5347e60",
   "expected_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
   "target_branch": "data/saint-louis-onboarding",
@@ -21,8 +21,8 @@
     "sha256": "61ac3c9a069660d5631f7b2c2a6d02f61024c4d6d7110f16f6d275e26e8115b5"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation - post-repair exact-map Stage 2 proposal rehearsal",
-    "authorization": "Owner said Proceed after protected main merged the policy-conforming generic HOME provenance/chronology repair at 2e3cf2c901a717cb0cce580692234eaca4f47e89. Authorize one guarded read-only STAGE2_PROPOSAL_REHEARSAL using the preserved exact 158-decision universe and a successor recommendation map that changes exactly six H/A/N recommendations: five LEAVE_UNRESOLVED to KEEP_CANONICAL as least-change Owner Gate 1 recommendations already supported by the permanent review, and DISCREPANCY-SAINT-LOUIS-1967-68-008-SITE_TYPE to USE_SOURCE under the repository's established explicit-NEUTRAL-plus-exact-site recommendation discipline. CANONICAL-SITE-PATCH-CBBG-0022942 remains LEAVE_UNRESOLVED; the merged generic tooling repair is expected to account for its reciprocal-only HOME locality/provenance without inventing a venue. No tracked basketball mutation or owner-gate approval is authorized. Stop at fresh-verified OWNER_GATE_1_READY or a durable BLOCKED checkpoint."
+    "origin": "Saint Louis serialized Implementation — mechanical predecessor correction",
+    "authorization": "Owner explicitly authorized correcting rejected saint-louis-stage2-proposal-0002 STOP: STALE_CONTROL_PREDECESSOR without altering the exact 158-decision successor map. Fresh request saint-louis-stage2-proposal-0003 is authored as one direct child of current control tip 0a717dc16a9817153bc11c91898d3905f1793d44, with previous_control_state_commit equal to that exact immediate parent and predecessor control-state SHA-256 bound to its unchanged IDLE/COMPLETE state. Map path and exact SHA-256 remain unchanged. Execute one read-only Stage 2 proposal rehearsal; stop at fresh-verified OWNER_GATE_1_READY or durable BLOCKED. No Gate 1 approval or tracked basketball mutation."
   },
   "authority": {
     "owner_gate_1": false,
