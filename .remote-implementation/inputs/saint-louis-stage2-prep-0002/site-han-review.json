@@ -425,8 +425,8 @@
     "conditional_applicability_remains_subject_to_permanent_parser": true
   },
   "next_bounded_unit": {
-    "population": "Next 25 ordinary SITE_TYPE discrepancies chronologically after DISCREPANCY-SAINT-LOUIS-1947-48-004-SITE_TYPE, with any tightly coupled site/date evidence considered only as needed to support H/A/N recommendation.",
-    "stopping_boundary": "Do not enter score/date/game-type/accomplishment/publication families in that unit; stop at another durable checkpoint or earlier if a generic tooling defect or new material identity conflict appears.",
-    "goal": "Advance site/H-A/N recommendation coverage toward all 54 census site decisions while preserving genuine historical conflicts for Owner Gate 1."
+    "population": "First, perform one bounded opponent-identity adjudication for the 1951-12-19 58-53 Washington / Washington University fingerprint conflict exposed by CBBG-0078886. Then, if that remains bounded and no broader topology appears, continue the next ordinary SITE_TYPE discrepancies chronologically, with a maximum of 25 distinct decisions in the unit.",
+    "stopping_boundary": "Remain inside the site/H-A/N family. Do not enter score/date/game-type/accomplishment/publication families; stop at another durable checkpoint or earlier if the Washington conflict exposes a broader identity topology or a generic tooling defect.",
+    "goal": "Resolve or mature the Washington identity recommendation without hiding it behind site metadata, then advance site/H-A/N recommendation coverage toward all 54 census site decisions."
   }
 }
