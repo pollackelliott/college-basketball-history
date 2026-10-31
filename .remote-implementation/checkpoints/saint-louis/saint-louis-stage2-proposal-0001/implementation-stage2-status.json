@@ -1,0 +1,207 @@
+{
+  "branch": "remote-stage2-census/saint-louis-08d61b6701de",
+  "capability_census": {
+    "path": ".onboarding/saint-louis/implementation-stage2-capability-census.json",
+    "status": "REPAIR_SCOPE_REQUIRED",
+    "topology_group_count": 3
+  },
+  "head_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "integration_base_sha": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "integration_semantic_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "last_error": "site_completeness failed with exit code 1",
+  "next_action": "Inspect the preserved site diagnostic and durable capability census. Classify the complete detected failure population before changing history or tooling; if generic permanent tooling is defective, define one consolidated repair scope before merging the first repair. Do not invent a replacement rehearsal wrapper.",
+  "origin_main_sha_at_integration_freeze": "ba66a248bccb0ef8feb03299dbe175031075c81b",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 42,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 9,
+      "conditional_discrepancy": 42,
+      "discrepancy": 88,
+      "identity": 17,
+      "publication": 1
+    },
+    "decision_count": 158,
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "discrepancies_to_add": 88,
+    "existing_game_matches": 927,
+    "new_canonical_games": 1948,
+    "plan_path": ".onboarding/saint-louis/plan.json",
+    "review_path": ".onboarding/saint-louis/review.csv",
+    "warning_count": 0
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 20,
+      "LEAVE_UNRESOLVED": 54,
+      "MATCH_CANONICAL:CBBG-0000464": 1,
+      "MATCH_CANONICAL:CBBG-0006290": 1,
+      "MATCH_CANONICAL:CBBG-0069449": 1,
+      "MATCH_CANONICAL:CBBG-0078886": 1,
+      "MATCH_CANONICAL:CBBG-0078950": 1,
+      "MATCH_CANONICAL:CBBG-0078951": 1,
+      "MATCH_CANONICAL:CBBG-0080899": 1,
+      "MATCH_CANONICAL:CBBG-0081044": 1,
+      "MATCH_CANONICAL:CBBG-0081135": 1,
+      "MATCH_CANONICAL:CBBG-0081196": 1,
+      "MATCH_CANONICAL:CBBG-0085339": 1,
+      "MATCH_CANONICAL:CBBG-0089042": 1,
+      "MATCH_CANONICAL:CBBG-0133532": 1,
+      "MATCH_CANONICAL:CBBG-0145628": 1,
+      "MATCH_CANONICAL:CBBG-0147232": 1,
+      "MATCH_CANONICAL:CBBG-0157103": 1,
+      "MATCH_CANONICAL:CBBG-0170536": 1,
+      "NOT_APPLICABLE": 27,
+      "USE_SOURCE": 38,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "1b22c7177d18359fc61bb05fb16af3c407eff0fc2db9e59b1677407cb9d9150e",
+    "decision_count": 158,
+    "path": "/tmp/remote-stage2-proposal-map-6uq2xava/recommendation-map.json",
+    "sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b"
+  },
+  "research_base_sha": "152c244fbd0dbccebc9e44ec3d5a8d5210d24f9d",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 7,
+      "home_missing_location": 7,
+      "home_missing_venue": 20,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 5,
+      "neutral_missing_venue": 28,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 64,
+      "reciprocal_research_accounted_gap": 3,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 13,
+      "researched_unresolved_home_venue_rows": 13,
+      "strict_home_gap": 7,
+      "strict_home_gap_rows": 7,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2893,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1,
+      "unknown_site_type": 16
+    },
+    "errors": [
+      "7 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+      "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749"
+      ],
+      "home_missing_location": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749"
+      ],
+      "home_missing_venue": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749",
+        "CBBG-0182749",
+        "CBBG-0182760",
+        "CBBG-0182761",
+        "CBBG-0182762",
+        "CBBG-0182777"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0007244",
+        "CBBG-0055391",
+        "CBBG-0076669",
+        "CBBG-0182722",
+        "CBBG-0182748"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0007244",
+        "CBBG-0009659",
+        "CBBG-0015306",
+        "CBBG-0015365",
+        "CBBG-0015399",
+        "CBBG-0028764",
+        "CBBG-0040520",
+        "CBBG-0041056",
+        "CBBG-0043350",
+        "CBBG-0049463",
+        "CBBG-0055391",
+        "CBBG-0076669"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0144435"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0076669",
+        "CBBG-0081348",
+        "CBBG-0144435"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0182749",
+        "CBBG-0182760",
+        "CBBG-0182761",
+        "CBBG-0182762",
+        "CBBG-0182777",
+        "CBBG-0182780",
+        "CBBG-0182783",
+        "CBBG-0182784",
+        "CBBG-0182792",
+        "CBBG-0182811",
+        "CBBG-0182812",
+        "CBBG-0182813"
+      ],
+      "strict_home_gap": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0022942"
+      ],
+      "unknown_site_type": [
+        "CBBG-0182719",
+        "CBBG-0182720",
+        "CBBG-0182753",
+        "CBBG-0182754",
+        "CBBG-0182755",
+        "CBBG-0182796",
+        "CBBG-0182797",
+        "CBBG-0182798",
+        "CBBG-0182805",
+        "CBBG-0182845",
+        "CBBG-0182986",
+        "CBBG-0183047"
+      ]
+    },
+    "path": ".onboarding/saint-louis/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}

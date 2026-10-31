@@ -1,0 +1,297 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "1b22c7177d18359fc61bb05fb16af3c407eff0fc2db9e59b1677407cb9d9150e",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "7a1b10de8d9f68f0b5139b1e0c9db9333ea3a3da0987cd653d74d63a3bac306d",
+    "implementation-stage2-status.json": "fb5151457f9d0be53ab6101ad43a0fd3e50303e207fd4a3fa09bf8880569bde7",
+    "last-rehearsal-site-gate.json": "1c1fa76e4cf104ee7adad7ee8973054349e08b9b664d2a84ebacf24ad5ca5520",
+    "plan.json": "6b7180904a9111260aef7912696396f486d7c80a917c0e566e126744959824c1",
+    "review.csv": "11a7a648022e125c229f78f16d826fcbf81a910c5303f92663ae258cdaf166ab",
+    "review.md": "6e29ffb60cb7804ff389508c70be688f7865dcdb4d05c1fb119449da678246cd"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "7a1b10de8d9f68f0b5139b1e0c9db9333ea3a3da0987cd653d74d63a3bac306d",
+    "implementation-stage2-status.json": "0d6f3526f7562e6b4104c619c42e9e2a36ed74f453244b3cf7eb3a023fec3b25",
+    "last-rehearsal-site-gate.json": "1c1fa76e4cf104ee7adad7ee8973054349e08b9b664d2a84ebacf24ad5ca5520",
+    "plan.json": "1288b63b05d1db7fd4d5a6beaf4c29caf23d02babd2a2a4ec3948a982ca043fd",
+    "review.csv": "11a7a648022e125c229f78f16d826fcbf81a910c5303f92663ae258cdaf166ab",
+    "review.md": "770459328532df057db34c5943979c66c2ae2a3aedfc040e2c1db184068f3aa9"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 54,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 7,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 1,
+      "examples": [],
+      "topology": "unaccounted_public_gap_rows"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "runtime_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "saint-louis",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 42,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 9,
+      "conditional_discrepancy": 42,
+      "discrepancy": 88,
+      "identity": 17,
+      "publication": 1
+    },
+    "decision_count": 158,
+    "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+    "discrepancies_to_add": 88,
+    "existing_game_matches": 927,
+    "new_canonical_games": 1948,
+    "plan_path": ".onboarding/saint-louis/plan.json",
+    "review_path": ".onboarding/saint-louis/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 20,
+      "LEAVE_UNRESOLVED": 54,
+      "MATCH_CANONICAL:CBBG-0000464": 1,
+      "MATCH_CANONICAL:CBBG-0006290": 1,
+      "MATCH_CANONICAL:CBBG-0069449": 1,
+      "MATCH_CANONICAL:CBBG-0078886": 1,
+      "MATCH_CANONICAL:CBBG-0078950": 1,
+      "MATCH_CANONICAL:CBBG-0078951": 1,
+      "MATCH_CANONICAL:CBBG-0080899": 1,
+      "MATCH_CANONICAL:CBBG-0081044": 1,
+      "MATCH_CANONICAL:CBBG-0081135": 1,
+      "MATCH_CANONICAL:CBBG-0081196": 1,
+      "MATCH_CANONICAL:CBBG-0085339": 1,
+      "MATCH_CANONICAL:CBBG-0089042": 1,
+      "MATCH_CANONICAL:CBBG-0133532": 1,
+      "MATCH_CANONICAL:CBBG-0145628": 1,
+      "MATCH_CANONICAL:CBBG-0147232": 1,
+      "MATCH_CANONICAL:CBBG-0157103": 1,
+      "MATCH_CANONICAL:CBBG-0170536": 1,
+      "NOT_APPLICABLE": 27,
+      "USE_SOURCE": 38,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "1b22c7177d18359fc61bb05fb16af3c407eff0fc2db9e59b1677407cb9d9150e",
+    "decision_count": 158,
+    "path": "/tmp/remote-stage2-proposal-map-6uq2xava/recommendation-map.json",
+    "sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/inputs/saint-louis-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "cec9754f3da363efa18ccfc10997e71d5d96031f27669f1dd0d3b4583917476b",
+  "request_id": "saint-louis-stage2-proposal-0001",
+  "request_sha256": "7d71f8f3f1515d5e128453c31524ea8a26bed6dd2a4208c8175b80bd89a34313",
+  "runtime_commit_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+  "runtime_decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+    "tools/onboard_school.py": "8cfbf7f4ddf145ac2240bb10ca8e02d5e04f569f8ccb26107a975f0fa2899f07",
+    "tools/onboarding_hardening.py": "796d100669c1030955c72bee42f7302fdec783dacf554f7aa29b9dcf2995eb79",
+    "tools/onboarding_plan.py": "c1fa696ae6227d2f1dcc3ad4e74e2452a4eae18532bc494ac12a265aae35c992",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "cd0e18d1c3f57348e12a3307c6bb2c3785bcb8c748770f6902b56f1b38d657b6",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 7,
+      "home_missing_location": 7,
+      "home_missing_venue": 20,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 5,
+      "neutral_missing_venue": 28,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 64,
+      "reciprocal_research_accounted_gap": 3,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 13,
+      "researched_unresolved_home_venue_rows": 13,
+      "strict_home_gap": 7,
+      "strict_home_gap_rows": 7,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2893,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1,
+      "unknown_site_type": 16
+    },
+    "errors": [
+      "7 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+      "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749"
+      ],
+      "home_missing_location": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749"
+      ],
+      "home_missing_venue": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749",
+        "CBBG-0182749",
+        "CBBG-0182760",
+        "CBBG-0182761",
+        "CBBG-0182762",
+        "CBBG-0182777"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0007244",
+        "CBBG-0055391",
+        "CBBG-0076669",
+        "CBBG-0182722",
+        "CBBG-0182748"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0007244",
+        "CBBG-0009659",
+        "CBBG-0015306",
+        "CBBG-0015365",
+        "CBBG-0015399",
+        "CBBG-0028764",
+        "CBBG-0040520",
+        "CBBG-0041056",
+        "CBBG-0043350",
+        "CBBG-0049463",
+        "CBBG-0055391",
+        "CBBG-0076669"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0144435"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0076669",
+        "CBBG-0081348",
+        "CBBG-0144435"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0182749",
+        "CBBG-0182760",
+        "CBBG-0182761",
+        "CBBG-0182762",
+        "CBBG-0182777",
+        "CBBG-0182780",
+        "CBBG-0182783",
+        "CBBG-0182784",
+        "CBBG-0182792",
+        "CBBG-0182811",
+        "CBBG-0182812",
+        "CBBG-0182813"
+      ],
+      "strict_home_gap": [
+        "CBBG-0000688",
+        "CBBG-0022942",
+        "CBBG-0079885",
+        "CBBG-0122116",
+        "CBBG-0133847",
+        "CBBG-0144398",
+        "CBBG-0175749"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0022942"
+      ],
+      "unknown_site_type": [
+        "CBBG-0182719",
+        "CBBG-0182720",
+        "CBBG-0182753",
+        "CBBG-0182754",
+        "CBBG-0182755",
+        "CBBG-0182796",
+        "CBBG-0182797",
+        "CBBG-0182798",
+        "CBBG-0182805",
+        "CBBG-0182845",
+        "CBBG-0182986",
+        "CBBG-0183047"
+      ]
+    },
+    "history_start_season": "1914-1915",
+    "school_key": "saint-louis",
+    "source_site_counts": {
+      "home_missing_venue": 13,
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 52,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 23,
+      "researched_gap_rows": 52,
+      "researched_unresolved_home_venue_rows": 13,
+      "unaccounted_gap_rows": 0,
+      "unknown_site_type": 16
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2892
+    },
+    "status": "FAIL",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-stage2-census-0004/checkpoint-manifest.json",
+  "stage2_authority_sha256": "d3aa2a76050cabbbfba42361bbbebfeee0a710b7556eeb76762efef90d3bfc47",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "target_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+  "tracked_mutation_proof": {
+    "after_head_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+    "after_status": "",
+    "after_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+    "before_head_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+    "before_status": "",
+    "before_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
