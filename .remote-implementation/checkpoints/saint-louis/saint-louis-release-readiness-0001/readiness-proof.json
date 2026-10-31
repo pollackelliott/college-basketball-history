@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "apply_request_id": "saint-louis-stage2-sealed-apply-0001",
+  "approved_plan_hash": "03afc8f8fa91b5fef8f10391257d5ba26a9cd96219cce3e64fa24eaa164e58ee",
+  "changed_path_count": 94,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "2e3cf2c901a717cb0cce580692234eaca4f47e89",
+  "release_manifest_sha256": "5fa1593d3d4196e65ce9c4a7940bd18f7c27109d2ce795e5d79342e9403f970c",
+  "school_key": "saint-louis",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "4a9ce3a050c3bd523a68087bdde98537f2b38d1a88283dff372c1a14565fbf83",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "282f4e75e0591b33772c6ff84e237ab7b2f37fd313ffbca16af8550c8db8b661",
+  "writeahead_sha256": "0cc4f9e1a7d108d61e9c1568343ae8a3ce1895545e56b26c5dbab8401679e764"
+}
