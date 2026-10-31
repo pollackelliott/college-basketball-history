@@ -250,6 +250,32 @@ class RemoteImplementationControlTests(unittest.TestCase):
     def test_valid_bounded_stage2_census_request(self):
         validate_request(request(OP_STAGE2_CENSUS))
 
+    def test_valid_stage2_census_request_with_display_successor_binding(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["stage2_opponent_display_successor"] = {
+            "path": (
+                ".remote-implementation/successors/example-school/"
+                "display/successor-manifest.json"
+            ),
+            "sha256": "a" * 64,
+        }
+        validate_request(req)
+
+    def test_stage2_census_display_successor_binding_requires_hash(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["stage2_opponent_display_successor"] = {
+            "path": (
+                ".remote-implementation/successors/example-school/"
+                "display/successor-manifest.json"
+            ),
+            "sha256": "bad",
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR_SHA_INVALID",
+        ):
+            validate_request(req)
+
     def test_valid_stage2_opponent_display_request(self):
         validate_request(request(OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE))
 
