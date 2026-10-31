@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "f610ea224755727ffc9925ec92fa132917e98643bfb19fd65dcb3c8d798ffaf5",
+    "implementation-stage2-status.json": "e6563ce3e08a2f9d6fcff926d70303f4f687d85a89bd55db261a9fa4d6a45d6c",
+    "plan.json": "6b7180904a9111260aef7912696396f486d7c80a917c0e566e126744959824c1",
+    "review.csv": "11a7a648022e125c229f78f16d826fcbf81a910c5303f92663ae258cdaf166ab",
+    "review.md": "6e29ffb60cb7804ff389508c70be688f7865dcdb4d05c1fb119449da678246cd"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "f610ea224755727ffc9925ec92fa132917e98643bfb19fd65dcb3c8d798ffaf5",
+    "implementation-stage2-status.json": "e639c6958b11a7d9a8f55125aa9a4d2d3af9d9f50cb29b7c49d38ab94844b606",
+    "plan.json": "844e92a1ea24c2b545e3a63c57a146b3f4a48ee2b38ef70d917d9dfbe8479a50",
+    "review.csv": "11a7a648022e125c229f78f16d826fcbf81a910c5303f92663ae258cdaf166ab",
+    "review.md": "3294bf2b6ed1c38e3b9b92fe02436b2b533cbacbca484a4f09816fa0c905dc98"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "807675c3bea725e26ffc083eb8b451e4eee0a006ac1ff52d401f01889a9d981f",
+  "integration_freeze_sha256": "86ed9a77ac348b0200d90fb5614db0f5934c49a33e7c8c30805a063a5d5a0598",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "5aaf1ac9c3ce665a4ee7af1fd7acea39651e2fbf",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "saint-louis-stage2-census-0004",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/saint-louis-onboarding",
+  "target_sha": "08d61b6701dea6cefb9748ed4b6aa5d74b2d194a",
+  "target_tree_sha": "dae58f309f7134a54739d00e49d4bfd11da86512",
+  "tracked_stage2_mutation": "NONE"
+}
