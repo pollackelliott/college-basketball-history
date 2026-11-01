@@ -223,7 +223,7 @@
     "loyola-chicago-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
-  "active_lock_commit": null,
+  "active_lock_commit": "2225dba57051cacc15565925ac1b36a122232797",
   "active_lock_owner": "github-actions:41341948969:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
