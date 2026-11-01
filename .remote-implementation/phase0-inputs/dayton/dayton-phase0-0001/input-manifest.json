@@ -1,0 +1,21 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "request_id": "dayton-phase0-0001",
+  "research_checkpoint_sha256": "804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f",
+  "research_member_sha256": {
+    "conferences.csv": "60b74601143ca6417af2d807969307b76d54dacaf9ed6c7a83ae84d11f87b8f1",
+    "notes.md": "7be1bd25ad9dc1e606b125d66f6fab197ed1f0c0e0e480d4ba3ab09a9b9215e3",
+    "opponents.csv": "93e2d191c3837cff55a483646736100538fdc212339e977f72e8e5b8a569ea7b",
+    "source-games.csv": "7f85948ff658b98a5f1b64ccb2a004fc0c4abffe2aa335e1701662f45d4b6011",
+    "source-notes.md": "5dae88d2fdd942348f15633fc70f44f09235913ede0d65ea239e92826f573110",
+    "venues.csv": "d239e5d870bff421448f5e72bb8c87993c02317a0c2aa90431bb4c0cc4614bca"
+  },
+  "schema_version": 1,
+  "school_key": "dayton",
+  "sidecars": {
+    "stage1-reconciliation.json": "353c27d9650f0ad00b73299380180ccc7e51ab52366abccc3292769d0f13bcb6",
+    "venue-reconciliation.json": "a2575ddecbf2689f93f8fc003bb5ff0e8cee8100641624cf8321408baeaf397d"
+  },
+  "stage1_status": "PASS"
+}
