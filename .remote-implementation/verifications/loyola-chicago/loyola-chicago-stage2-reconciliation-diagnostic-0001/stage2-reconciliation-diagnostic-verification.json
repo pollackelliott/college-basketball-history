@@ -1,0 +1,20 @@
+{
+  "canonical_game_id": "CBBG-0182742",
+  "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_VERIFICATION",
+  "partial_location_classification": "FINAL_LOCATION_NOT_PARTIAL",
+  "protected_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "recommendation_map_sha256": "81495b394815b021d68d6e81eca1162ec852b21ed1d24c6df69bdd4cb85651f4",
+  "remote_stage2_diagnostic_equivalence": "PASS",
+  "request_id": "loyola-chicago-stage2-reconciliation-diagnostic-0001",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "stage2_proposal_checkpoint_sha256": "a28e2e31aae3ca484c9f5fa613dfb584479a3592ad8be79fd5af902db6bd11df",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "target_tree_sha": "3f543c84c5149f743a5e1d2c93dc2101f8d59e6c",
+  "trace_sha256": "14b13a717bc389a999eca31ea382657f408b59116f04070663cc6ea5623e8131",
+  "tracked_stage2_mutation": "NONE"
+}
