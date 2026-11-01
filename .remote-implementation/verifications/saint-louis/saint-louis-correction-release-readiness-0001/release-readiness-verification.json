@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "58bcb1ae403aba4b66d91c8b7416a594cc52f1ad2bd16d4272b90c2558bec3bf",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "readiness_proof_sha256": "539b747536e45b3f5e622d0012911d7a175958dfa68d272a7d68d07748a53a1f",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "saint-louis-correction-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "tracked_mutation": "NONE"
+}

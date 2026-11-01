@@ -431,11 +431,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "58bcb1ae403aba4b66d91c8b7416a594cc52f1ad2bd16d4272b90c2558bec3bf",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "saint-louis-correction-release-readiness-0001",
     "school_key": "saint-louis",
     "target_branch": "data/saint-louis-correction",
