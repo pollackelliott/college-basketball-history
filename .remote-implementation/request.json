@@ -1,34 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-correction-stage2-sealed-apply-0001",
+  "request_id": "saint-louis-correction-release-readiness-0001",
   "school_key": "saint-louis",
-  "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "e5cfcae66063d188cbf859d31a2e7c297f47da0b",
-  "previous_control_state_sha256": "518bcc6d43c556caad85e3154a50d652f12e806490e70d06e55cde69d68c4d00",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "b589f50e46dd1c3c653a54a83f0f7ddb5c45a6cb",
+  "previous_control_state_sha256": "bf4d23378e73e6618206f84f152d3b47fab4b6b446e7de633f347ed34faa0573",
   "expected_protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
   "target_branch": "data/saint-louis-correction",
-  "target_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "449a2af80db6fdccfe1fc443e263fe48b5cb67bf09b7b1ce26a731f7520baf73"
+  "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "ee192494bae86cb8f22ab198b9e4726573763be235b52103850067acce3bc4f7"
   },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "959b2044436fb680c7c2149b70a237f9908b6d6175654f137aa15ad8301bf1c5"
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "37bc6c6fb97f265960edc85d1b8585439ee629b497a0e9f07701c85c8f21ef0d"
   },
   "approved_plan_hash": "bfe16499cd111951c435f001f9f5199a8044a733695c2c2fe4d5b71a57203016",
-  "approved_plan_sha256": "7dce2420775a2fb737d29c71ff6ee25d72f3b423a838b4568988409b4b3f0c3d",
-  "owner_gate_1_approval_sha256": "26e98ce99207b270826d21d64df12e8b59a8011c7aef2a902ce7c94f48b66fe8",
-  "integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
-  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
-  "decision_universe_sha256": "8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452",
-  "recommendation_map_sha256": "43eaa9a34b53fff0aac5e1f31df6aaf70e9171d46de6ebe740c896dc4e829d02",
-  "filled_review_sha256": "06f10ca85bdfeaf3afcbd7b44243c250918c9c7e12b1f8e627f1c75793058c62",
-  "decision_id_set_sha256": "46cf87e27e35dba46e11775a4c72b96f519cdee5d738bbc02bab17bf58858b3a",
+  "release_manifest_sha256": "0bde53d1ad5e77f12b554e48ed058dee5c5568bb5bed9d2a4516d70ff11e5898",
   "creation_provenance": {
-    "origin": "Saint Louis post-publication correction — exact sealed apply",
-    "authorization": "The correction Gate 1 seal is independently fresh-verified. The owner has explicitly authorized deterministic progression through guarded sealed apply and exact successor verification. This request authorizes exactly one STAGE2_SEALED_APPLY of the exact sealed plan, durable write-ahead/CAS publication to data/saint-louis-correction, and required independent exact-tree verification. It creates no new historical authority and grants no Owner Gate 2, merge, Production, recovery, maintenance, or unrelated authority."
+    "origin": "Saint Louis post-publication correction — release readiness after exact fresh-verified sealed apply",
+    "authorization": "Owner explicitly authorized deterministic progression through release readiness, PR/CI and exact Preview verification without intermediate owner relays. This request authorizes exactly one read-only RELEASE_READINESS operation against the independently fresh-verified correction successor 97ff09b8047907436e1513b8ed0166c8a1cdafb3. It grants no Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, maintenance, or unrelated authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -43,9 +36,9 @@
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
