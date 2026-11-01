@@ -191,17 +191,18 @@
     "saint-louis-release-production-proof-0001",
     "loyola-chicago-stage1-0001",
     "loyola-chicago-stage1-0002",
-    "loyola-chicago-venue-maintenance-0002"
+    "loyola-chicago-venue-maintenance-0002",
+    "loyola-chicago-stage1-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "loyola-chicago-stage1-0003",
+  "active_request_sha256": "38a29668ba119e7a45060c7d0892bf028cc7a0ef5accede4f66c8de133b423ca",
+  "active_school_key": "loyola-chicago",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -409,8 +410,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/loyola-chicago/loyola-chicago-venue-maintenance-0002/writeahead-manifest.json",
     "writeahead_manifest_sha256": "3870ac0b62b8f335c55e8eee1046cf9e8a3131abb75b84903a47a1a380b09ce0"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41262661702",
+  "lock_acquisition_request_commit": "c7bb3f10e44cfa4364bc90e79dbcca57fd5fc2ea",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
