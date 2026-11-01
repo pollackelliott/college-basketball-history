@@ -1,0 +1,172 @@
+{
+  "branch": "remote-stage2-census/loyola-chicago-a62bc2d87855",
+  "capability_census": {
+    "path": ".onboarding/loyola-chicago/implementation-stage2-capability-census.json",
+    "status": "REPAIR_SCOPE_REQUIRED",
+    "topology_group_count": 3
+  },
+  "head_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "integration_base_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "integration_semantic_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "last_error": "site_completeness failed with exit code 1",
+  "next_action": "Inspect the preserved site diagnostic and durable capability census. Classify the complete detected failure population before changing history or tooling; if generic permanent tooling is defective, define one consolidated repair scope before merging the first repair. Do not invent a replacement rehearsal wrapper.",
+  "origin_main_sha_at_integration_freeze": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 86,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 15,
+      "conditional_discrepancy": 86,
+      "discrepancy": 186,
+      "identity": 26,
+      "publication": 1
+    },
+    "decision_count": 315,
+    "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
+    "discrepancies_to_add": 186,
+    "existing_game_matches": 706,
+    "new_canonical_games": 1995,
+    "plan_path": ".onboarding/loyola-chicago/plan.json",
+    "review_path": ".onboarding/loyola-chicago/review.csv",
+    "warning_count": 0
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 217,
+      "LEAVE_UNRESOLVED": 16,
+      "MATCH_CANONICAL:CBBG-0026093": 1,
+      "MATCH_CANONICAL:CBBG-0036310": 1,
+      "MATCH_CANONICAL:CBBG-0047466": 2,
+      "MATCH_CANONICAL:CBBG-0082871": 1,
+      "MATCH_CANONICAL:CBBG-0082886": 1,
+      "MATCH_CANONICAL:CBBG-0084292": 1,
+      "MATCH_CANONICAL:CBBG-0084399": 1,
+      "MATCH_CANONICAL:CBBG-0089684": 1,
+      "MATCH_CANONICAL:CBBG-0089843": 1,
+      "MATCH_CANONICAL:CBBG-0094957": 1,
+      "MATCH_CANONICAL:CBBG-0107195": 1,
+      "MATCH_CANONICAL:CBBG-0117714": 1,
+      "MATCH_CANONICAL:CBBG-0148467": 1,
+      "MATCH_CANONICAL:CBBG-0150726": 1,
+      "MATCH_CANONICAL:CBBG-0150735": 1,
+      "MATCH_CANONICAL:CBBG-0150746": 1,
+      "MATCH_CANONICAL:CBBG-0152420": 1,
+      "MATCH_CANONICAL:CBBG-0152440": 1,
+      "MATCH_CANONICAL:CBBG-0152443": 1,
+      "MATCH_CANONICAL:CBBG-0153397": 1,
+      "MATCH_CANONICAL:CBBG-0163996": 1,
+      "MATCH_CANONICAL:CBBG-0182891": 1,
+      "MATCH_CANONICAL:CBBG-0182981": 1,
+      "MATCH_CANONICAL:CBBG-0183669": 1,
+      "MATCH_CANONICAL:CBBG-0183737": 1,
+      "NOT_APPLICABLE": 42,
+      "USE_SOURCE": 12,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "11458e29889b48094275845dca92b8f3c596841f0ca4b30ab9880b6173e99d60",
+    "decision_count": 315,
+    "path": "/tmp/remote-stage2-proposal-map-ytnlhfa5/recommendation-map.json",
+    "sha256": "95ef93624127a525eb8d09e5ebafd09919a16e243174b547472e84c1aedd59e7"
+  },
+  "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 2,
+      "home_missing_location": 2,
+      "home_missing_venue": 4,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 41,
+      "public_gap_rows": 590,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "reconciled_unknown_site_unresolved_home_venue": 1,
+      "researched_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue_rows": 2,
+      "strict_home_gap": 2,
+      "strict_home_gap_rows": 2,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2728,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1,
+      "unknown_site_type": 545
+    },
+    "errors": [
+      "2 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+      "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0000992",
+        "CBBG-0182742"
+      ],
+      "home_missing_location": [
+        "CBBG-0000992",
+        "CBBG-0182742"
+      ],
+      "home_missing_venue": [
+        "CBBG-0000992",
+        "CBBG-0182742",
+        "CBBG-0182809",
+        "CBBG-0185581"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0003926",
+        "CBBG-0007450",
+        "CBBG-0007490",
+        "CBBG-0009782",
+        "CBBG-0010193",
+        "CBBG-0010378",
+        "CBBG-0010400",
+        "CBBG-0032846",
+        "CBBG-0042419",
+        "CBBG-0066617",
+        "CBBG-0066863",
+        "CBBG-0076947"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0159358"
+      ],
+      "reconciled_unknown_site_unresolved_home_venue": [
+        "CBBG-0182809"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0182809",
+        "CBBG-0185581"
+      ],
+      "strict_home_gap": [
+        "CBBG-0000992",
+        "CBBG-0182742"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0182742"
+      ],
+      "unknown_site_type": [
+        "CBBG-0050616",
+        "CBBG-0082827",
+        "CBBG-0082886",
+        "CBBG-0082943",
+        "CBBG-0089774",
+        "CBBG-0184652",
+        "CBBG-0184653",
+        "CBBG-0184654",
+        "CBBG-0184655",
+        "CBBG-0184656",
+        "CBBG-0184657",
+        "CBBG-0184658"
+      ]
+    },
+    "path": ".onboarding/loyola-chicago/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
