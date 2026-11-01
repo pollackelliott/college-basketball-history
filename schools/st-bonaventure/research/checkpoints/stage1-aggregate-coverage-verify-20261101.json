@@ -1,0 +1,36 @@
+{
+  "audit_sha256": "4a380f4328db11b62db7d78582a062993099be78b9e0e1003f20835e4bbcb13b",
+  "closeout_checkpoint_sha256": "27ebd74e7f8bec63147041fb4672aeb224424b75b36aff16e11ce59f20479a65",
+  "defects": [],
+  "parent_checkpoint_sha256": "23cb047b2ecbbab3f1310472768974891c851ac687dd5b8c6e55e8bc6f289504",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "season_coverage": {
+    "evidence_member": "founding-season-evidence-exhaustion.json",
+    "identified_record": {
+      "games": 10,
+      "losses": 7,
+      "wins": 3
+    },
+    "institutional_record": {
+      "games": 16,
+      "losses": 10,
+      "wins": 6
+    },
+    "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/426",
+    "parent_checkpoint_sha256": "23cb047b2ecbbab3f1310472768974891c851ac687dd5b8c6e55e8bc6f289504",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "school_key": "st-bonaventure",
+    "season": "1919-20",
+    "source_description": "Institutional year-by-year season aggregate; individual game details incomplete",
+    "terminal_classification": "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP",
+    "unidentified_record": {
+      "games": 6,
+      "losses": 3,
+      "wins": 3
+    },
+    "warning": "Missing-game count is derived from a primary institutional aggregate, not directly stated by the institution. No unidentified game rows are represented."
+  },
+  "stage1_complete": true,
+  "status": "VERIFIED_EARLY_AGGREGATE_COVERAGE_CLOSEOUT"
+}
