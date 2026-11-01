@@ -223,18 +223,19 @@
     "loyola-chicago-stage2-sealed-apply-0001",
     "loyola-chicago-release-readiness-0001",
     "loyola-chicago-release-preview-verify-0001",
-    "loyola-chicago-release-gate2-approval-0001"
+    "loyola-chicago-release-gate2-approval-0001",
+    "loyola-chicago-release-production-proof-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PRODUCTION_PROOF",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "loyola-chicago-release-production-proof-0001",
+  "active_request_sha256": "8a11a71d5cce52f0aa0d82ceb2dc327c8038739b6ee907483249eb53beb39645",
+  "active_school_key": "loyola-chicago",
+  "active_target_branch": "data/loyola-chicago-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -469,8 +470,11 @@
     "target_branch": "data/loyola-chicago-onboarding",
     "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41346279695",
+  "lock_acquisition_request_commit": "09d6aae45c396e0095b8cb016d14396baa565198",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PRODUCTION_RUNNING"
 }
