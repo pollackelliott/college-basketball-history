@@ -1,35 +1,33 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "loyola-chicago-stage1-0002",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "loyola-chicago-venue-maintenance-0001",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
   "school_key": "loyola-chicago",
-  "previous_control_state_commit": "5cca7dbb98db412bfafb21b30e15ac5810630229",
-  "previous_control_state_sha256": "3f4809c1a6d4e13beb6fa57b54d72249e7384356e999249879c7169e89dbe9af",
+  "previous_control_state_commit": "1bc41be333f3ec9186c3e7a17fe9ccbd6003cc5e",
+  "previous_control_state_sha256": "efc8302c268abeba8ddac60ed3dd4e821bf6f4507e98716663eb05f8a9236810",
   "expected_protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
-  "research_checkpoint": {
-    "sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
-    "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "797835f03024f8a08c1c4027d754e909cbc970be",
-      "path_prefix": ".remote-implementation/transports/loyola-chicago/loyola-chicago-stage1-0001-final/piece-",
-      "part_count": 18
-    }
+  "target_branch": "maintenance/loyola-chicago-stage1-venue-identity",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-venue-maintenance-0001/venue-maintenance-spec.json",
+    "sha256": "866adff5fc717e24c19a1cff3e0da1e8aa584d8f5eecf5d3fbf0fe2b837569fb"
   },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-stage1-0002/venue-reconciliation.json",
-    "sha256": "d037a2ce6155a948f37430484ea85ede3a496ea544fd6bdd2cbdcee8f2a92844"
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
+  "expected_plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authenticated Loyola Chicago Stage 1 request loyola-chicago-stage1-0002 and authorized exactly one duplicate physical-venue maintenance transaction: preserve VEN-000196 / state-farm-center and absorb VEN-000967 / assembly-hall-illinois. No broader shared-reference, Research, Phase 0, Stage 2, gate, release, or merge authority is granted.",
+    "spec_sha256": "866adff5fc717e24c19a1cff3e0da1e8aa584d8f5eecf5d3fbf0fe2b837569fb"
   },
-  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — deterministic Stage 1 current-main venue reuse reconciliation",
-    "authorization": "Same owner-authorized Loyola Chicago Stage 1 phase. This second read-only inventory applies five deterministic representation-only venue reuse mappings discovered by Stage 1 checkpoint loyola-chicago-stage1-0001 and deliberately leaves the Illinois Assembly Hall shared/global conflict unresolved for honest classification. No Research change, Phase 0, shared/global mutation, Stage 2, owner gate, recovery, release, or protected-main mutation authority."
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — Control Center-authorized Stage 1 shared-venue maintenance",
+    "authorization": "Explicit Control Center authorization supplied by the owner for exactly VEN-000196 <- VEN-000967 under VENUE_IDENTITY_MAINTENANCE, bound to current protected main a76ba14e378267d2d6d6beb18b880916d77e84a1, exact spec SHA-256 1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff, and permanent zero-blocker plan SHA-256 56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
+    "venue_identity_maintenance": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
