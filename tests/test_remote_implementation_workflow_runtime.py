@@ -97,6 +97,58 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
         self.assertNotIn("working-directory: runtime", process)
 
 
+    def test_pending_fresh_verification_recovery_never_replays_consumed_request(self):
+        text = self.workflow
+        self.assertIn(
+            "pending_verification: ${{ steps.detect.outputs.pending_verification }}",
+            text,
+        )
+        self.assertIn(
+            'used = set(state.get("accepted_request_ids") or [])',
+            text,
+        )
+        self.assertIn(
+            'last.get("fresh_runner_verification") == "PENDING"',
+            text,
+        )
+        self.assertIn("fresh-pending-verification-recovery:", text)
+        recovery = text.split(
+            "  fresh-pending-verification-recovery:", 1
+        )[1].split(
+            "  fresh-owner-gate2-approval-verification:", 1
+        )[0]
+        self.assertIn(
+            "needs.process-request.outputs.has_request == 'false'",
+            recovery,
+        )
+        self.assertIn(
+            "needs.process-request.outputs.pending_verification == 'true'",
+            recovery,
+        )
+        self.assertIn(
+            'run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"',
+            recovery,
+        )
+        self.assertNotIn("remote_implementation_runner.py", recovery)
+
+    def test_new_request_fails_closed_when_control_workflow_is_stale(self):
+        text = self.workflow
+        guard = "Require control workflow snapshot to match protected-main scheduling authority"
+        self.assertIn(guard, text)
+        self.assertIn(
+            'cmp --silent "$control_workflow" "$runtime_workflow"',
+            text,
+        )
+        self.assertIn(
+            "Control workflow is stale relative to request-bound protected main",
+            text,
+        )
+        self.assertLess(
+            text.index(guard),
+            text.index("      - name: Process remote Implementation request"),
+        )
+
+
 class RemoteImplementationPhase0ObjectStoreTests(unittest.TestCase):
     def git(self, repo, *args, check=True):
         cp = subprocess.run(
