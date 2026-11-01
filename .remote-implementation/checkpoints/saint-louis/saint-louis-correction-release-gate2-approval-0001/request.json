@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-correction-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "be522ce4c03cd035d2dcdb05bbadd49b0a9347d1",
+  "previous_control_state_sha256": "9fe9e949e063a09afe08a50101cad324644f745c820e2524e461b553b099ebb3",
+  "expected_protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "pr_number": 422,
+  "approved_plan_hash": "bfe16499cd111951c435f001f9f5199a8044a733695c2c2fe4d5b71a57203016",
+  "release_manifest_sha256": "0bde53d1ad5e77f12b554e48ed058dee5c5568bb5bed9d2a4516d70ff11e5898",
+  "preview_deployment_id": 7474917832,
+  "preview_url": "https://college-basketball-history-oxpae9cyn-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "6ca73d3688eecc45674a29f3798be8ebc3a341eb060b5eba78a9de7c2eb01645"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "eda00fdf072a662b0f187688f424125704f1d236f32fd201bddbfc2066026501"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's explicit statement in this Saint Louis correction Implementation conversation: “APPROVED. Proceed” immediately after being presented the exact independently fresh-verified Owner Gate 2 packet for PR #422 at head 97ff09b8047907436e1513b8ed0166c8a1cdafb3 and successful Preview deployment 7474917832 at https://college-basketball-history-oxpae9cyn-elliott-pollacks-projects.vercel.app, after the owner was reminded exactly what to inspect. This is the required affirmative approval of that exact Preview and PR head, not a generic Proceed.",
+    "preview_checkpoint_sha256": "6ca73d3688eecc45674a29f3798be8ebc3a341eb060b5eba78a9de7c2eb01645",
+    "preview_verification_sha256": "eda00fdf072a662b0f187688f424125704f1d236f32fd201bddbfc2066026501",
+    "pr_number": 422,
+    "pr_head_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+    "preview_deployment_id": 7474917832,
+    "preview_url": "https://college-basketball-history-oxpae9cyn-elliott-pollacks-projects.vercel.app"
+  },
+  "creation_provenance": {
+    "origin": "Saint Louis post-publication correction — owner-authorized exact Gate 2 approval",
+    "authorization": "Owner explicitly said APPROVED. Proceed in response to the independently fresh-verified Saint Louis correction PR #422 exact Preview deployment 7474917832 and head 97ff09b8047907436e1513b8ed0166c8a1cdafb3. This request authorizes only read-only RELEASE_GATE2_APPROVAL and independent exact Preview re-verification. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, or affect another school."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
