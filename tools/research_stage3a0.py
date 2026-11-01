@@ -357,6 +357,7 @@ STAGE4_AUTHORING_BASENAMES = {
     "venues.csv",
     "conferences.csv",
     "early-history-uncertainty.json",
+    "season-coverage.json",
 }
 
 

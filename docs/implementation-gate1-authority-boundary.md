@@ -198,3 +198,21 @@ The change is **where authority lives**:
 - approved mutation belongs to sealed transactional apply.
 
 The intended result is Stanford-like decision discipline without reproducing Stanford's avoidable terminal-wrapper friction, and without repeating Washington State's pre-Gate second-research-cycle behavior.
+
+### Accepted aggregate season-coverage authority
+
+An exact-owner-authorized and independently verified Stage 1
+EARLY_HISTORY_AGGREGATE_RECONCILED_GAP does not turn unidentified games into
+tracked source or canonical games. The terminal season-level evidence is
+carried in the existing Research Freeze's source-notes.md. During ordinary
+sealed apply (never Phase 0 or an ungated preflight), permanent
+publish_historical_season_coverage.py may deterministically add the one
+matching school/season row in historical-season-coverage.csv. It requires
+the exact parent/owner registry, terminal classification, audit hash, and
+institutional-versus-documented arithmetic, and rejects any conflicting
+existing row. The site builder independently requires equality to the
+published canonical game-derived record; it displays official aggregate
+and documented game records separately. No game, opponent series,
+historical score, or result is changed. All ordinary Gate 1, sealed
+apply, Preview, and Production safeguards remain mandatory.
+

@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Any
 
 import ingest_school
+from publish_historical_season_coverage import integrate_approved_coverage
 
 from correction_site_nonregression import (
     capture as capture_correction_site_report,
@@ -190,6 +191,7 @@ def allowed_apply_path(path: str, school_key: str, approved_hash: str) -> bool:
         "data/reconciliation/discrepancies.csv",
         "data/reference/programs.csv",
         "data/reference/program-accomplishments.csv",
+        "data/reference/historical-season-coverage.csv",
         f"schools/{school_key}/source-games.csv",
         f"data/reconciliation/onboarding-decisions/{school_key}-{approved_hash[:12]}.json",
     }
@@ -1356,6 +1358,10 @@ def execute_approved_in_place(
     publication = apply_publication_decisions(repo, approved)
     print(json.dumps(publication, sort_keys=True))
 
+    print("\n=== independently audited historical season coverage ===")
+    historical_coverage = integrate_approved_coverage(repo, school_key)
+    print(json.dumps(historical_coverage, sort_keys=True))
+
     archive = archive_approved_plan(repo, approved)
     print(f"Archived sealed decisions: {archive.relative_to(repo)}")
 
@@ -1385,6 +1391,7 @@ def execute_approved_in_place(
         "resolved_target_home_chronology": resolved_target_home_chronology,
         "reciprocal_unknown_site_provenance": reciprocal_unknown_site_provenance,
         "publication": publication,
+        "historical_coverage": historical_coverage,
         "site_output": site_output,
         "archive": archive.relative_to(repo).as_posix(),
     }

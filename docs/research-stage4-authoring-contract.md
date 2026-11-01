@@ -42,6 +42,23 @@ historical-debt authority. Stage 2/3 carry it byte-for-byte, Stage 4 verifies it
 continuity and terminal audit binding, preserves Class B blank results, and renders the
 structured payload deterministically inside the existing source-notes.md.
 
+A Stage 1 closeout under the separately owner-approved aggregate coverage
+exception additionally carries stage4-authoring/season-coverage.json. It is
+**not** a seventh Research Freeze member or an anonymous game list. Stage 2/3
+must carry its manifested bytes unchanged. Stage 3A-0 includes this member in
+its explicit carry allowlist; Stage 4 checks its school, research-base, terminal
+classification, audit-hash and aggregate arithmetic, then embeds it
+in the existing source-notes.md. The verified Stage 1 ledger and per-game
+W/L are never changed to force the institution's aggregate record.
+
+At publication, one explicit season-level historical coverage entry may
+be approved and integrated under the normal serialized gate. The public
+site builder must compare its official aggregate, known canonical games,
+and derived unidentified gap against the protected owner authority. It
+must show a clearly labeled official institutional record and the
+individually documented count without inventing canonical games,
+opponent series, dates, scores, or venues.
+
 These files are not a second historical truth layer. They are durable serialization of accepted Research conclusions needed by Stage 4.
 
 Every checkpoint manifest that contains one of these members must hash/size-account for it.

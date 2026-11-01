@@ -95,6 +95,51 @@ The Research lane then makes **one explicit, separately hashed Stage 1 closeout 
 
 This exception creates no automatic school-specific exemption or new owner gate. A genuine contrary historical judgment still belongs to the owner. All other Stage 1 completion, documentation, and acceptance rules remain unchanged.
 
+### Separate owner-authorized exception: research-exhausted founding-era aggregate coverage
+
+An institution's **explicit season record** may establish that more games took place
+than can be individually identified after the genuinely available early-history source
+families have been exhausted. This differs from an institution's explicit statement
+that a certain number of games are absent. It may be accepted **only** under an exact
+owner-approved, protected-main registry entry in
+data/reference/early-aggregate-coverage-authorities.json; the evidence does not
+self-authorize a generic exception.
+
+The permitted terminal classification is
+EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
+
+1. An individually documented, correctly included and unique early game ledger
+   whose opponents, structured types, and outcomes are established. Preserve the
+   original ledger, season census, literal institutional season aggregate, and
+   independent bounded research-exhaustion evidence.
+2. A primary institutional **season W/L and exact game total**, not a fabricated
+   inferred season record. The difference between this aggregate and included
+   game-level W/L must reconcile numerically and match the owner's exact approved
+   school, season, original parent checkpoint SHA-256, research base, and residual.
+3. A founding-era season within the registry's explicit period limit, exactly one
+   research-exhausted coverage blocker, and no unrelated Stage 1 blocker.
+4. A repository-owned audit command in tools/research_stage1_aggregate_coverage.py,
+   bound to the exact SHA-256 checkpoint and owner authority registry. An eligible
+   audit alone never makes Stage 1 COMPLETE.
+5. A **separate, hashed closeout successor**, built with the permanent closeout
+   command and independently verified with verify-closeout. It preserves every
+   historical ledger/census/source byte, reclassifies only the identified aggregate
+   coverage blocker, and retains terminal season-level debt in
+   aggregate-coverage-closeout.json and stage4-authoring/season-coverage.json.
+
+Never manufacture unnamed canonical/source games, assign any unknown aggregate
+win/loss to an individual game, add artificial opponent-series results, silently
+treat official aggregate games as recovered game identities, or claim a
+game-derived record is the full institutional season record. A closeout is
+historical-coverage **accounting**, not new game evidence. The unidentified count
+remains separately auditable in all Research, Implementation, and public handoffs.
+Subsequent game-level discovery needs exact evidence-backed correction of debt.
+
+An independently verified closeout may establish STAGE_1 / COMPLETE for this
+specific terminal classification. It does not waive downstream Stage 2–6,
+Research Freeze, Implementation gates, independent publication verification,
+or exact Preview approval.
+
 ### Separate narrow exception: terminal early-history uncertainty
 
 Some inception/founding-era evidence can be honest, authoritative, and permanently incomplete without fitting the counted-gap exception above. Stage 1 may close through the separate `EARLY_HISTORY_UNCERTAINTY` path only after the repository-owned read-only `tools/research_stage1_early_history_uncertainty.py` independently verifies the exact checkpoint chain.
