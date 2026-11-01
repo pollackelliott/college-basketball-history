@@ -1,0 +1,71 @@
+name: Saint Louis correction freeze transport
+
+on:
+  push:
+    branches:
+      - automation/saint-louis-cbbg-0182742-correction
+    paths:
+      - .github/workflows/saint-louis-correction-freeze-transport.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  transport:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out automation commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out exact control branch
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Recover exact correction Integration Freeze artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/sl-correction-preflight
+          mkdir -p /tmp/sl-correction-preflight
+          gh run download 41307902063 \
+            --repo pollackelliott/college-basketball-history \
+            --name saint-louis-cbbg-0182742-correction-preflight \
+            --dir /tmp/sl-correction-preflight
+          test "$(sha256sum /tmp/sl-correction-preflight/saint-louis-correction-integration-freeze.json | awk '{print $1}')" = "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790"
+          python - <<'PY'
+          import json
+          p="/tmp/sl-correction-preflight/saint-louis-correction-integration-freeze.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d["workflow_kind"]=="POST_PUBLICATION_CORRECTION"
+          assert d["status"]=="INTEGRATION_FROZEN"
+          assert d["school_key"]=="saint-louis"
+          assert d["research_base_sha"]=="a76ba14e378267d2d6d6beb18b880916d77e84a1"
+          assert d["integration_base_sha"]=="bed68f763a7ea8920c6ba830b004334b16c9e303"
+          assert d["correction_source_game_ids"]==["saint-louis-1916-17-005"]
+          assert d["source_game_semantic_guard"]["snapshot_sha256"]=="d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc"
+          PY
+
+      - name: Publish exact freeze bytes to control authority
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(git rev-parse HEAD)"
+          test "$expected" = "235250dbc2dcaf45eb43f5a891804d0a9b92793c"
+          mkdir -p .remote-implementation/inputs/saint-louis-correction-cbbg-0182742
+          cp /tmp/sl-correction-preflight/saint-louis-correction-integration-freeze.json \
+            .remote-implementation/inputs/saint-louis-correction-cbbg-0182742/integration-freeze.json
+          test "$(sha256sum .remote-implementation/inputs/saint-louis-correction-cbbg-0182742/integration-freeze.json | awk '{print $1}')" = "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- .remote-implementation/inputs/saint-louis-correction-cbbg-0182742/integration-freeze.json
+          git commit -m "[remote-implementation-internal] transport Saint Louis correction Integration Freeze"
+          git push origin HEAD:control/remote-implementation
