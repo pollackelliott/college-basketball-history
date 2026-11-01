@@ -213,18 +213,19 @@
     "saint-louis-correction-release-readiness-0001",
     "saint-louis-correction-release-preview-verify-0001",
     "saint-louis-correction-release-gate2-approval-0001",
-    "saint-louis-correction-release-production-proof-0001"
+    "saint-louis-correction-release-production-proof-0001",
+    "loyola-chicago-stage2-current-main-refresh-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "c64aec952514b01f2757de0800cb37c1f4ecfc06",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41333558080:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "loyola-chicago-stage2-current-main-refresh-0001",
+  "active_request_sha256": "e1c02e23cf4ddaf1372b5c964691000790cf2a5eb84a54b41cf3cdeb88b90474",
+  "active_school_key": "loyola-chicago",
+  "active_target_branch": "data/loyola-chicago-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -451,8 +452,11 @@
     "request_id": "saint-louis-correction-release-production-proof-0001",
     "school_key": "saint-louis"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41333558080",
+  "lock_acquisition_request_commit": "4249fa052b16942bc6a6a2b03cfa1cbbe0888ca1",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
