@@ -220,18 +220,19 @@
     "loyola-chicago-stage2-gate1-fill-0001",
     "loyola-chicago-stage2-preseal-rehearsal-0001",
     "loyola-chicago-stage2-gate1-seal-0001",
-    "loyola-chicago-stage2-sealed-apply-0001"
+    "loyola-chicago-stage2-sealed-apply-0001",
+    "loyola-chicago-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "loyola-chicago-release-readiness-0001",
+  "active_request_sha256": "5f2e414435fa542362171b5ce0b33bd7a70ee06a9f2ff9e822926cb337acfe3f",
+  "active_school_key": "loyola-chicago",
+  "active_target_branch": "data/loyola-chicago-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -469,8 +470,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/loyola-chicago/loyola-chicago-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "5fadc0ccd8213445782a7fad8dff4c5a65885c4b91cac9eedad020bbc31e62d4"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41343775297",
+  "lock_acquisition_request_commit": "007b79e93d205b2681318f25a171e290e22a88d6",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
