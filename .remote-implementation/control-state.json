@@ -232,7 +232,7 @@
   "active_request_sha256": "b1917c728c28ad837ac9f7fe86edda237ad915c8d69318923b36e2820e41e581",
   "active_school_key": "loyola-chicago",
   "active_target_branch": "data/loyola-chicago-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "9433d2a2953ac2e088a3056e1bc24b180d425c07",
   "active_writeahead_path": ".remote-implementation/writeahead/loyola-chicago/loyola-chicago-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "5fadc0ccd8213445782a7fad8dff4c5a65885c4b91cac9eedad020bbc31e62d4",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
