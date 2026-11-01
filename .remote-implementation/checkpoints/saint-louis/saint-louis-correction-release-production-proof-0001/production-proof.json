@@ -1,0 +1,23 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "merge_parent_onboarding": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "merge_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
+  "owner_gate_2_approval_checkpoint_sha256": "16c6afe86b3e159c27f4babdd2f289cbab29b2ee2f34bcb0df176b1fa299fd16",
+  "owner_gate_2_verification_sha256": "d755a89598aaa5cba092adc24b7f20278613b97b6e7db8490915b4a2e3183dc5",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "pr_number": 422,
+  "production_deployment_id": 7475726693,
+  "production_deployment_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/saint-louis.json"
+  ],
+  "production_json_checked_count": 3,
+  "school_key": "saint-louis",
+  "status": "COMPLETE"
+}

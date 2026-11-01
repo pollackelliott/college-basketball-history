@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "merge_parent_onboarding": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "merge_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "16c6afe86b3e159c27f4babdd2f289cbab29b2ee2f34bcb0df176b1fa299fd16",
+  "owner_gate_2_verification_sha256": "d755a89598aaa5cba092adc24b7f20278613b97b6e7db8490915b4a2e3183dc5",
+  "pr_head_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "pr_number": 422,
+  "production_deployment_id": 7475726693,
+  "production_json_checked_count": 3,
+  "production_proof": true,
+  "production_proof_sha256": "1cb91c6abf280801ff09be1ca4bb64bd827e8b41e7bc30c2e9d43eb26682540f",
+  "protected_main_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
+  "request_id": "saint-louis-correction-release-production-proof-0001",
+  "request_sha256": "74a48a967c50ab56c8761312d925e322d89917308c32ad15348db3ce2c0039b4",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "status": "PRODUCTION_PROOF_PASS"
+}
