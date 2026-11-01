@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "school_key": "dayton",
+  "owner_approval_basis": "Owner explicitly authorized the complete Dayton serialized Implementation Stage 1 current-main reconciliation from immutable Research Freeze 804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f and then explicitly instructed Continue within the same Stage 1 phase. This mapping is a deterministic representation-only reuse of the same frozen physical venue identity and geography; it does not alter frozen historical meaning or mutate global registries.",
+  "expected_research_zip_sha256": "804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f",
+  "expected_venues_sha256": "d239e5d870bff421448f5e72bb8c87993c02317a0c2aa90431bb4c0cc4614bca",
+  "mappings": [
+    {
+      "local_venue_key": "valley-high-school",
+      "expected_local_name": "Valley High School",
+      "expected_local_city": "Las Vegas",
+      "expected_local_state": "NV",
+      "global_venue_id": "VEN-000455",
+      "global_venue_key": "valley-high-school-las-vegas",
+      "expected_global_city": "Las Vegas",
+      "expected_global_state": "NV",
+      "resolution_basis": "Frozen Dayton venue and current-main VEN-000455 identify the same physical Valley High School in Las Vegas, NV; the only difference is the repository venue-key representation. Current-main provenance for VEN-000455 independently records Valley High School as the Las Vegas tournament facility."
+    }
+  ]
+}
