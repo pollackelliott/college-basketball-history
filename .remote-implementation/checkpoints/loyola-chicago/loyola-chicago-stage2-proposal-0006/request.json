@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-proposal-0006",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "c1856e8ea94c955033347525eb9f2332cf5cca0e",
+  "previous_control_state_sha256": "a3f24127be307bed999ea6a1ad320d1c3033458ea9849be1b9a53bdec32ebcb7",
+  "expected_protected_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "130cc370d79dd5ae2841cc3e8409dfcabde9e51bab1ca3f89ef527a80ed6d662"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/loyola-chicago-stage2-proposal-0006/recommendation-map.json",
+    "sha256": "81495b394815b021d68d6e81eca1162ec852b21ed1d24c6df69bdd4cb85651f4"
+  },
+  "creation_provenance": {
+    "origin": "Loyola Chicago serialized Implementation Stage 2 — final bounded HOME-site remediation proposal after independently verified proposal 0005",
+    "authorization": "Owner authorized the narrow Loyola HOME-site remediation through verified OWNER_GATE_1_READY or a genuine new authority blocker. Proposal 0005 reduced the 105 strict HOME gaps to two. Fresh targeted institutional evidence resolves only CBBG-0000992: Missouri's 1959-60 record marks Dec. 21 at Loyola, Loyola's official 1959-60 record lists Missouri L 71-62 without its Chicago Stadium marker, and the accepted Loyola chronology therefore supports Alumni Gym, Chicago, Illinois. This map changes only DISCREPANCY-LOY-STG1-00805-SITE_TYPE from explicit LEAVE_UNRESOLVED to the default KEEP_CANONICAL and adds its canonical site patch; frozen source evidence is untouched. CBBG-0182742 remains deliberately unresolved because Saint Louis identifies the 1917 opponent as Loyola Academy and its Loyola University Chicago series begins in 1922, creating a game-identity authority conflict outside a site-only patch. No Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, protected-main mutation, or unrelated work."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
