@@ -798,7 +798,8 @@ def main() -> int:
                 {
                     "season_label": season_label,
                     **record_from_games(season_games),
-                    "historical_coverage": coverage_by_season.get(season_label),
+                    **({"historical_coverage": coverage_by_season[season_label]}
+                       if season_label in coverage_by_season else {}),
                 }
             )
 
@@ -881,7 +882,7 @@ def main() -> int:
                 "opponents": len(opponents),
             },
             "seasons": season_summaries,
-            "historical_season_coverage": coverage,
+            **({"historical_season_coverage": coverage} if coverage else {}),
             "opponents": opponent_summaries,
             "games": perspective_games,
             **conference_metadata,
