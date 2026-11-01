@@ -217,7 +217,7 @@
     "loyola-chicago-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "c64aec952514b01f2757de0800cb37c1f4ecfc06",
-  "active_lock_commit": null,
+  "active_lock_commit": "c665f5da8143f9e86d0aeaaca3c9d0c76aca7d57",
   "active_lock_owner": "github-actions:41333558080:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
