@@ -1,0 +1,21 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "request_id": "loyola-chicago-phase0-0001",
+  "research_checkpoint_sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
+  "research_member_sha256": {
+    "conferences.csv": "c97af97c2cde3fe0125ecd440e2b849f9390b4670860d1b5fe02198bb1fc4d43",
+    "notes.md": "7a46f6907201a803ef990a6f2e9f82c7307b0c09e79add3cd71a6b467329c12a",
+    "opponents.csv": "d8df3ef2a5d58eff4bab5d6ad23edd3ff1e82df9ca5413edf3fb128feea432bf",
+    "source-games.csv": "cbba5163f2f67304b7ed87b1982e0f4dfde1bc44f5b652bd6e98370a8ecb1e79",
+    "source-notes.md": "e4f585895e9f15ed1809a87f4b21f5da1dd64ac7733026c436bc3c5f353d7ff0",
+    "venues.csv": "e87b4f3d96b304d47bdf99627adf7470759b3f98265d8f35e6c80de0f8cff105"
+  },
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "sidecars": {
+    "stage1-reconciliation.json": "ba5f497368db2be10c1d9be1717a10d1debbebcfdfcbc7e86791773f57cc17e4",
+    "venue-reconciliation.json": "6c2674dd3e6d545e1a0df239170f1a925dc6f7ae8dac4640d0406ee7573bcf1f"
+  },
+  "stage1_status": "PASS"
+}
