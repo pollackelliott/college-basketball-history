@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-opponent-display-normalize-0001",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "d30713589d7311a9e15c80eb2aa4b68326def91d",
+  "previous_control_state_sha256": "08eb0301eef594107716b9ce3bc96adfdb08e52d887ac587e4819bcc777cc89e",
+  "expected_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "d00ba535c123e6480c4861909f932ca83bbbbc0831c40af83952926e6b167c49"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "creation_provenance": {
+    "origin": "Loyola Chicago Implementation lane",
+    "authorization": "Owner Proceed: normalize exactly the fresh-verified 12 census display conflicts using the permanent guarded representation-only operation. No other Stage 2 action."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
