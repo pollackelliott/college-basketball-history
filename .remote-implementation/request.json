@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "loyola-chicago-release-preview-verify-0001",
+  "request_id": "loyola-chicago-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "loyola-chicago",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "1ab971f1e02e6d5330719ce1179868300c8ce55e",
-  "previous_control_state_sha256": "ed5841908bc61cc933b568e3d97eaf3340c3e632a2223c4ab97a3b5e541ab729",
+  "previous_control_state_commit": "a5ef16abcf3bb428b7b850e4c69c67be308a2f3b",
+  "previous_control_state_sha256": "c33eec61b347927a65fa118bde484891cb25dbfa2e7eb4b5bc49423f2ee00e16",
   "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
   "target_branch": "data/loyola-chicago-onboarding",
   "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "a7920be36ae882cfbb0710e367eb06039c0ff65d39cf9e121dc31bec6995fb16"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "c57cd2d6c8002ef4919d7b0497318ada7b9fb10c7dcb805667cc3f1eded9b743"
-  },
+  "pr_number": 425,
   "approved_plan_hash": "4e2033b466dfdfbfeae4292836dec6ebf6ea89eb464f5971b0da4d8030a9ee18",
   "release_manifest_sha256": "b6e5f4753853eb5260652b9cd80e8ac5e8963c50086333a419a05675f5adaf96",
-  "pr_number": 425,
+  "preview_deployment_id": 7478037813,
+  "preview_url": "https://college-basketball-history-lchlxgq23-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "b0521435af112401a76e5ba686aeef57bb6a3970758c25c43fca6da84691aa28"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "3d8e1f6b130cc3f70944fc092b04338b17b5d9f6c2c4cf7eb16340517356ae4b"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement in the Loyola Chicago Implementation conversation: “APPROVED. Procee” immediately after being presented the exact independently fresh-verified Owner Gate 2 packet for Loyola Chicago PR #425 at head 37aefb494d1d51faf0b58b11b1927fbb3038879d and successful Vercel Preview deployment 7478037813 at https://college-basketball-history-lchlxgq23-elliott-pollacks-projects.vercel.app, with the Owner Gate 2 approval requirement stated. The intended affirmative approval is unambiguous despite the truncated final word.",
+    "preview_checkpoint_sha256": "b0521435af112401a76e5ba686aeef57bb6a3970758c25c43fca6da84691aa28",
+    "preview_verification_sha256": "3d8e1f6b130cc3f70944fc092b04338b17b5d9f6c2c4cf7eb16340517356ae4b",
+    "pr_number": 425,
+    "pr_head_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+    "preview_deployment_id": 7478037813,
+    "preview_url": "https://college-basketball-history-lchlxgq23-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — exact PR-head Preview verification",
-    "authorization": "Owner authorized the Loyola Chicago release-preparation phase through OWNER_GATE_2_READY and then said Continue under the same persisted phase authority. Immediately before this request the school lane reauthenticated protected main afeca06b5a2aa7472cc4ab710014d591f596a2fd, exact target head 37aefb494d1d51faf0b58b11b1927fbb3038879d, fresh-verified RELEASE_READINESS PASS, IDLE control, and open non-draft PR #425 with base main, exact head 37aefb494d1d51faf0b58b11b1927fbb3038879d, mergeable=true, and the preserved sealed pr-body.md. This authorizes exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification through OWNER_GATE_2_READY. It grants no Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, historical reconsideration, recovery, maintenance, unrelated repair, or other-school authority."
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — owner-authorized exact Gate 2 approval",
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Procee” in direct response to the exact fresh-verified Loyola Chicago PR #425 Preview at head 37aefb494d1d51faf0b58b11b1927fbb3038879d and Vercel Preview deployment 7478037813. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, maintenance, unrelated repair, or another school."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
@@ -41,8 +50,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
