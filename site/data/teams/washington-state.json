@@ -24,13 +24,13 @@
     }
   },
   "summary": {
-    "games": 3352,
+    "games": 3353,
     "wins": 1718,
-    "losses": 1634,
+    "losses": 1635,
     "ties": 0,
     "first_season": "1901-1902",
     "last_season": "2025-2026",
-    "opponents": 304
+    "opponents": 305
   },
   "seasons": [
     {
@@ -98,9 +98,9 @@
     },
     {
       "season_label": "2016-2017",
-      "games": 31,
+      "games": 32,
       "wins": 13,
-      "losses": 18,
+      "losses": 19,
       "ties": 0
     },
     {
@@ -2716,6 +2716,22 @@
       "games": 1,
       "wins": 1,
       "losses": 0,
+      "ties": 0
+    },
+    {
+      "opponent_key": "loyola-chicago",
+      "opponent_name": "Loyola Chicago",
+      "current_d1": true,
+      "public_page_enabled": true,
+      "current_conference": {
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10"
+      },
+      "first_season": "2016-2017",
+      "last_season": "2016-2017",
+      "games": 1,
+      "wins": 0,
+      "losses": 1,
       "ties": 0
     },
     {
@@ -81227,6 +81243,31 @@
       "opponent_name": "Loyola Marymount",
       "opponent_current_d1": true,
       "opponent_public_page_enabled": false,
+      "team_score": 79,
+      "opponent_score": 88,
+      "score_known": true,
+      "result": "L",
+      "overtime_periods": 0,
+      "site": "NEUTRAL",
+      "venue_key": "sports-and-fitness-center",
+      "venue_id": "VEN-000191",
+      "venue_name": "Sports and Fitness Center",
+      "site_city": "St. Thomas",
+      "site_state": "VI",
+      "game_type": "REGULAR_SEASON",
+      "postseason_round": null,
+      "administrative_status": null,
+      "administrative_note": null
+    },
+    {
+      "canonical_game_id": "CBBG-0186360",
+      "season_label": "2016-2017",
+      "game_date": "2016-11-21",
+      "date_precision": "EXACT",
+      "opponent_key": "loyola-chicago",
+      "opponent_name": "Loyola Chicago",
+      "opponent_current_d1": true,
+      "opponent_public_page_enabled": true,
       "team_score": 79,
       "opponent_score": 88,
       "score_known": true,
