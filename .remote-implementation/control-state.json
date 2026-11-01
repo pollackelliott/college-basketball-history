@@ -212,7 +212,7 @@
     "saint-louis-correction-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
-  "active_lock_commit": null,
+  "active_lock_commit": "7d2fecc4f15c05b5a10a882311134467f1d5c63f",
   "active_lock_owner": "github-actions:41319561720:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
