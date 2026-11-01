@@ -1,0 +1,85 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "86669740387a762ef6abb0c28ef8c633078ea7b85834372eb811a694a3a1932a",
+    "implementation-stage2-status.json": "ea7aa76b70d582f4d4a6fe8b2a8b7b21ff509136df28ce7a6a1b35982fea0d66",
+    "plan.json": "ab9b1b67dd30e384b9d4e97718497b01d8b4011d5b3f0c32413fdbe6e64b8b61",
+    "review.csv": "99b89e29b4c187ea54bf2956be66908abad0bcfd4d527305894594aa99b2cc67",
+    "review.md": "57d1b125ed7933200c9d5233a6615919ff55e21855903de1f6230b32e7a939a2"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "86669740387a762ef6abb0c28ef8c633078ea7b85834372eb811a694a3a1932a",
+    "implementation-stage2-status.json": "9638b59dd0e39321d52f618d73c404e900698a59d53a2de4803c32be220acc49",
+    "plan.json": "ff274153abaabdc803f08e3831e9703ecbe2ac77bf942568208374a6a2b235bc",
+    "review.csv": "99b89e29b4c187ea54bf2956be66908abad0bcfd4d527305894594aa99b2cc67",
+    "review.md": "e0028df720695d1ef4ad158a5f8a8ef7ebd43d8270905adf82e5de9cdd974ebf"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "86669740387a762ef6abb0c28ef8c633078ea7b85834372eb811a694a3a1932a",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "correction_identity_patch": 1
+    },
+    "decision_count": 1,
+    "decision_fields": {
+      "normalized_opponent_key": 1
+    },
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": ".remote-implementation/inputs/saint-louis-correction-cbbg-0182742/integration-freeze.json",
+  "correction_integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
+  "correction_origin_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "decision_universe_sha256": "8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452",
+  "integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "saint-louis"
+  ],
+  "phase0_protected_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "phase0_successor_path": null,
+  "phase0_successor_sha256": null,
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "decision_categories": {
+      "correction_identity_patch": 1
+    },
+    "decision_count": 1,
+    "decision_universe_sha256": "8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 2892,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/saint-louis/plan.json",
+    "review_path": ".onboarding/saint-louis/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "request_id": "saint-louis-correction-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "POST_PUBLICATION_CORRECTION",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+  "target_tree_sha": "09e0c1355e36ade3a6286343f945b970294aabe9",
+  "tracked_mutation_proof": {
+    "after_head_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+    "after_status": "",
+    "after_tree_sha": "09e0c1355e36ade3a6286343f945b970294aabe9",
+    "before_head_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+    "before_status": "",
+    "before_tree_sha": "09e0c1355e36ade3a6286343f945b970294aabe9",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
