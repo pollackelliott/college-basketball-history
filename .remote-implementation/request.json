@@ -1,33 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "loyola-chicago-venue-maintenance-0002",
-  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "request_id": "loyola-chicago-stage1-0003",
+  "operation": "STAGE1_INVENTORY",
   "school_key": "loyola-chicago",
-  "previous_control_state_commit": "636c969c97bad5c67c7faf4f9882b5c5a9c41660",
-  "previous_control_state_sha256": "8180e5c37e116578fc3dd608006e6b9e71b10a44227328f29d3a9b3440628062",
-  "expected_protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
-  "target_branch": "maintenance/loyola-chicago-stage1-venue-identity",
-  "venue_maintenance_spec": {
-    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-venue-maintenance-0001/venue-maintenance-spec.json",
-    "sha256": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff"
+  "previous_control_state_commit": "c96861e91a523b1de029ad5e9bf2d6f387dda529",
+  "previous_control_state_sha256": "a287066b0fb103d4f66d5b4aba8293f600d081bb33778489f7f74a97fe3295fd",
+  "expected_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "research_checkpoint": {
+    "sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
+    "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "797835f03024f8a08c1c4027d754e909cbc970be",
+      "path_prefix": ".remote-implementation/transports/loyola-chicago/loyola-chicago-stage1-0001-final/piece-",
+      "part_count": 18
+    }
   },
-  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
-  "expected_plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
-  "maintenance_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center explicitly authenticated Loyola Chicago Stage 1 request loyola-chicago-stage1-0002 and authorized exactly one duplicate physical-venue maintenance transaction: preserve VEN-000196 / state-farm-center and absorb VEN-000967 / assembly-hall-illinois. No broader shared-reference, Research, Phase 0, Stage 2, gate, release, recovery, or merge authority is granted.",
-    "spec_sha256": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff"
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-stage1-0002/venue-reconciliation.json",
+    "sha256": "d037a2ce6155a948f37430484ea85ede3a496ea544fd6bdd2cbdcee8f2a92844"
   },
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — corrected Control Center-authorized Stage 1 shared-venue maintenance request",
-    "authorization": "Supersedes an unaccepted request carrying locally miscomputed SHA metadata. Control state remained sequence 179 IDLE with no lock or recovery. This corrected request is explicitly bound to protected main a76ba14e378267d2d6d6beb18b880916d77e84a1, exact maintenance spec SHA-256 1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff, and permanent zero-blocker plan SHA-256 56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2."
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — required post-maintenance full Stage 1 rerun",
+    "authorization": "Same owner-authorized Loyola Chicago Stage 1 phase following Control Center-authorized and merged shared-venue maintenance PR #419. This request performs the complete read-only Stage 1 inventory against refreshed protected main 5ffb0a475fd492c1681607aacccf79cdfe0e4a9b, reusing only the five authenticated representation-only venue mappings from Stage 1 request loyola-chicago-stage1-0002. No new historical authority, Phase 0, Stage 2, shared/global mutation, owner gate, release, or protected-main mutation authority."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": true,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
