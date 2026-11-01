@@ -429,6 +429,17 @@ def persist_stage2_census_checkpoint(
                 "verification_path"
             )
         ),
+        "stage2_current_main_refresh_successor_path": (
+            (request.get("stage2_current_main_refresh_successor") or {}).get("path")
+        ),
+        "stage2_current_main_refresh_successor_sha256": (
+            (request.get("stage2_current_main_refresh_successor") or {}).get("sha256")
+        ),
+        "stage2_current_main_refresh_verification_path": (
+            (phase0_authority.get("current_main_refresh_authority") or {}).get(
+                "verification_path"
+            )
+        ),
         "integration_freeze_sha256": request[
             "integration_freeze_sha256"
         ],
