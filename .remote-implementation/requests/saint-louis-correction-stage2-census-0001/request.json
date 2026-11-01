@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-correction-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "8926563c338bd020225a40fec03b5a7dbcfeb37e",
+  "previous_control_state_sha256": "e5508d58e42e69fba84a4f04f731b5aa4144de6e476ee758b3b4832ebba6924a",
+  "expected_protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+  "correction_integration_freeze": {
+    "path": ".remote-implementation/inputs/saint-louis-correction-cbbg-0182742/integration-freeze.json",
+    "sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790"
+  },
+  "integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "creation_provenance": {
+    "origin": "Saint Louis post-publication correction — remote serialization reproduction after PR #421",
+    "authorization": "Control Center authorized resumption of the already-settled one-game SINGLE_GAME_IDENTITY correction for saint-louis-1916-17-005 / CBBG-0182742. This request performs only the first correction-aware read-only Stage 2 census from the exact existing correction branch and hash-bound POST_PUBLICATION_CORRECTION Integration Freeze. No Phase-0 successor, opponent-display normalization, new historical decision, renewed Owner Gate 1 decision, release, merge, or unrelated mutation is authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
