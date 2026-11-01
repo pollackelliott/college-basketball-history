@@ -1,31 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-stage2-census-0001",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "dayton-stage2-opponent-display-normalize-0001",
   "school_key": "dayton",
-  "previous_control_state_commit": "9e76ac61d613ab94f6b37ca5e0dfa0ed40876971",
-  "previous_control_state_sha256": "af2e0e9e3fe3075c03ba52063d8a79d314836576f3051b0ab7cd6ed7380be6a6",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "05382cd763655a87b831b8a01096b3ac172e47ba",
+  "previous_control_state_sha256": "bdf131ee004b0dec38e79989e29996b4772878f0e5fd07410b085e1ddf671d61",
   "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
   "target_branch": "data/dayton-onboarding",
   "target_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
-    "sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/dayton/dayton-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "b4a83aee2361979267dea020efd94cbb8001b42ba87d4dd6a7d4870e23e93ece"
   },
   "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
   "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
   "creation_provenance": {
-    "origin": "Dayton Implementation chat succession — Stage 2 recovery",
-    "authorization": "Owner explicitly authorized resumption of the existing Dayton Implementation Stage 2 phase through its normal OWNER_GATE_1_READY boundary. This request is the first bounded read-only STAGE2_CENSUS operation, bound to the independently verified Phase 0 successor and Integration Freeze. It carries no tracked repair, Owner Gate 1, sealing, sealed apply, release, merge, or Owner Gate 2 authority."
+    "origin": "Dayton Implementation lane — Stage 2 deterministic reconciliation",
+    "authorization": "Existing owner-authorized Dayton Stage 2 phase persists through OWNER_GATE_1_READY. The fresh-verified census found exactly two historical opponent-display representation conflicts (central-state-ohio and manchester-indiana), zero warnings, and zero recommendation decisions. Authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key census population. No historical reinterpretation, unrelated opponent cleanup, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, or protected-main mutation authority."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -35,10 +39,6 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "venue_identity_maintenance": false
+    "release_production_proof": false
   }
 }
