@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-venue-maintenance-0002",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "school_key": "loyola-chicago",
+  "previous_control_state_commit": "636c969c97bad5c67c7faf4f9882b5c5a9c41660",
+  "previous_control_state_sha256": "8180e5c37e116578fc3dd608006e6b9e71b10a44227328f29d3a9b3440628062",
+  "expected_protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "target_branch": "maintenance/loyola-chicago-stage1-venue-identity",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-venue-maintenance-0001/venue-maintenance-spec.json",
+    "sha256": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff"
+  },
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
+  "expected_plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authenticated Loyola Chicago Stage 1 request loyola-chicago-stage1-0002 and authorized exactly one duplicate physical-venue maintenance transaction: preserve VEN-000196 / state-farm-center and absorb VEN-000967 / assembly-hall-illinois. No broader shared-reference, Research, Phase 0, Stage 2, gate, release, recovery, or merge authority is granted.",
+    "spec_sha256": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — corrected Control Center-authorized Stage 1 shared-venue maintenance request",
+    "authorization": "Supersedes an unaccepted request carrying locally miscomputed SHA metadata. Control state remained sequence 179 IDLE with no lock or recovery. This corrected request is explicitly bound to protected main a76ba14e378267d2d6d6beb18b880916d77e84a1, exact maintenance spec SHA-256 1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff, and permanent zero-blocker plan SHA-256 56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": true,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
