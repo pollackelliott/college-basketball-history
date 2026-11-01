@@ -1,0 +1,340 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 12,
+  "change_row_count": 15,
+  "changes": [
+    {
+      "authority_names": [
+        "Augustana (IL)"
+      ],
+      "authority_signature": "augustanail",
+      "canonical_opponent_key": "augustana-il",
+      "from_names": [
+        "Augustana College (Ill.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Augustana (IL)"
+    },
+    {
+      "authority_names": [
+        "Carroll University (Wis.)"
+      ],
+      "authority_signature": "carrolluniversitywis",
+      "canonical_opponent_key": "carroll-wisconsin",
+      "from_names": [
+        "Carroll University (Wisconsin)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Carroll University (Wis.)"
+    },
+    {
+      "authority_names": [
+        "Centenary (LA)"
+      ],
+      "authority_signature": "centenaryla",
+      "canonical_opponent_key": "centenary-louisiana",
+      "from_names": [
+        "Centenary College of Louisiana"
+      ],
+      "target_row_count": 2,
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "authority_names": [
+        "Fort Sheridan"
+      ],
+      "authority_signature": "fortsheridan",
+      "canonical_opponent_key": "fort-sheridan",
+      "from_names": [
+        "Fort Sheridan (U.S. Army)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Fort Sheridan"
+    },
+    {
+      "authority_names": [
+        "Saint John’s (MN)"
+      ],
+      "authority_signature": "saintjohnsmn",
+      "canonical_opponent_key": "saint-johns-minnesota",
+      "from_names": [
+        "Saint John's University (Minnesota)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "authority_names": [
+        "Saint Michael's",
+        "Saint Michael’s"
+      ],
+      "authority_signature": "saintmichaels",
+      "canonical_opponent_key": "saint-michael-s",
+      "from_names": [
+        "Saint Michael’s College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Michael's"
+    },
+    {
+      "authority_names": [
+        "St. Francis Brooklyn"
+      ],
+      "authority_signature": "stfrancisbrooklyn",
+      "canonical_opponent_key": "st-francis-brooklyn",
+      "from_names": [
+        "St. Francis College (Brooklyn)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. Francis Brooklyn"
+    },
+    {
+      "authority_names": [
+        "St. Francis (Ill.)"
+      ],
+      "authority_signature": "stfrancisill",
+      "canonical_opponent_key": "st-francis-illinois",
+      "from_names": [
+        "University of St. Francis (Ill.)"
+      ],
+      "target_row_count": 2,
+      "to_name": "St. Francis (Ill.)"
+    },
+    {
+      "authority_names": [
+        "St. Mary's (Texas)"
+      ],
+      "authority_signature": "stmarystexas",
+      "canonical_opponent_key": "st-marys-texas",
+      "from_names": [
+        "St. Mary's University (Texas)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. Mary's (Texas)"
+    },
+    {
+      "authority_names": [
+        "Truman State"
+      ],
+      "authority_signature": "trumanstate",
+      "canonical_opponent_key": "truman-state",
+      "from_names": [
+        "Truman State University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Truman State"
+    },
+    {
+      "authority_names": [
+        "Westminster"
+      ],
+      "authority_signature": "westminster",
+      "canonical_opponent_key": "westminster",
+      "from_names": [
+        "Westminster College (Mo.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Westminster"
+    },
+    {
+      "authority_names": [
+        "Westminster (PA)"
+      ],
+      "authority_signature": "westminsterpa",
+      "canonical_opponent_key": "westminster-pennsylvania",
+      "from_names": [
+        "Westminster College (Pa.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Westminster (PA)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "source_game_display_change_keys": 12,
+  "source_game_display_change_rows": 30,
+  "source_game_display_changes": [
+    {
+      "from_name": "Carroll University (Wisconsin)",
+      "normalized_opponent_key": "carroll-wisconsin",
+      "source_game_id": "LOY-STG1-00105",
+      "to_name": "Carroll University (Wis.)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "LOY-STG1-00193",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Carroll University (Wisconsin)",
+      "normalized_opponent_key": "carroll-wisconsin",
+      "source_game_id": "LOY-STG1-00197",
+      "to_name": "Carroll University (Wis.)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "LOY-STG1-00208",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Carroll University (Wisconsin)",
+      "normalized_opponent_key": "carroll-wisconsin",
+      "source_game_id": "LOY-STG1-00215",
+      "to_name": "Carroll University (Wis.)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "LOY-STG1-00221",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "St. Francis College (Brooklyn)",
+      "normalized_opponent_key": "st-francis-brooklyn",
+      "source_game_id": "LOY-STG1-00296",
+      "to_name": "St. Francis Brooklyn"
+    },
+    {
+      "from_name": "Augustana College (Ill.)",
+      "normalized_opponent_key": "augustana-il",
+      "source_game_id": "LOY-STG1-00333",
+      "to_name": "Augustana (IL)"
+    },
+    {
+      "from_name": "Westminster College (Mo.)",
+      "normalized_opponent_key": "westminster",
+      "source_game_id": "LOY-STG1-00428",
+      "to_name": "Westminster"
+    },
+    {
+      "from_name": "Fort Sheridan (U.S. Army)",
+      "normalized_opponent_key": "fort-sheridan",
+      "source_game_id": "LOY-STG1-00451",
+      "to_name": "Fort Sheridan"
+    },
+    {
+      "from_name": "Fort Sheridan (U.S. Army)",
+      "normalized_opponent_key": "fort-sheridan",
+      "source_game_id": "LOY-STG1-00465",
+      "to_name": "Fort Sheridan"
+    },
+    {
+      "from_name": "Westminster College (Pa.)",
+      "normalized_opponent_key": "westminster-pennsylvania",
+      "source_game_id": "LOY-STG1-00623",
+      "to_name": "Westminster (PA)"
+    },
+    {
+      "from_name": "Saint Michael’s College",
+      "normalized_opponent_key": "saint-michael-s",
+      "source_game_id": "LOY-STG1-00739",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Carroll University (Wisconsin)",
+      "normalized_opponent_key": "carroll-wisconsin",
+      "source_game_id": "LOY-STG1-00821",
+      "to_name": "Carroll University (Wis.)"
+    },
+    {
+      "from_name": "Truman State University",
+      "normalized_opponent_key": "truman-state",
+      "source_game_id": "LOY-STG1-00956",
+      "to_name": "Truman State"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-00973",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01006",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01029",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01051",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "St. Mary's University (Texas)",
+      "normalized_opponent_key": "st-marys-texas",
+      "source_game_id": "LOY-STG1-01054",
+      "to_name": "St. Mary's (Texas)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "LOY-STG1-01064",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01075",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01099",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01121",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01144",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "LOY-STG1-01163",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01170",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "Saint John's University (Minnesota)",
+      "normalized_opponent_key": "saint-johns-minnesota",
+      "source_game_id": "LOY-STG1-01222",
+      "to_name": "Saint John’s (MN)"
+    },
+    {
+      "from_name": "University of St. Francis (Ill.)",
+      "normalized_opponent_key": "st-francis-illinois",
+      "source_game_id": "LOY-STG1-02183",
+      "to_name": "St. Francis (Ill.)"
+    },
+    {
+      "from_name": "University of St. Francis (Ill.)",
+      "normalized_opponent_key": "st-francis-illinois",
+      "source_game_id": "LOY-STG1-02536",
+      "to_name": "St. Francis (Ill.)"
+    }
+  ],
+  "status": "PASS"
+}

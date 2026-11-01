@@ -1,0 +1,76 @@
+{
+  "allowed_paths": [
+    "schools/loyola-chicago/opponents.csv",
+    "schools/loyola-chicago/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/loyola-chicago/opponents.csv": "ad69ef9b9c6313e94ff7347cf08af7e7b00f2581e3015b54ffba637801dc8521",
+    "schools/loyola-chicago/source-games.csv": "df01cc17510b1883ecc8f2fa63986d4f09b211fcf2213b8f07e0d1a4dcea2a16"
+  },
+  "changed_paths": [
+    "schools/loyola-chicago/opponents.csv",
+    "schools/loyola-chicago/source-games.csv"
+  ],
+  "commit_message": "Normalize loyola-chicago historical opponent display representation",
+  "expected_blocker_keys": [
+    "augustana-il",
+    "carroll-wisconsin",
+    "centenary-louisiana",
+    "fort-sheridan",
+    "saint-johns-minnesota",
+    "saint-michael-s",
+    "st-francis-brooklyn",
+    "st-francis-illinois",
+    "st-marys-texas",
+    "truman-state",
+    "westminster",
+    "westminster-pennsylvania"
+  ],
+  "expected_target_predecessor_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "field_level_proof_sha256": "4f5e3931a58c7e9fe376be74d260a8daf40a08facfbfac37853ddd26ef785b66",
+  "global_lock_commit": "698d884c7468153860cf3e6ecb01b959a45658a8",
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "cdb0ed855f4eb5fb3b42fcfdfb616c5033561514139ab2ca9a0d834832729a8e",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "prepared_parent_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "prepared_tree_sha": "3f543c84c5149f743a5e1d2c93dc2101f8d59e6c",
+  "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "repository_validation": "PASS",
+  "request_id": "loyola-chicago-stage2-opponent-display-normalize-0001",
+  "request_sha256": "efa4171069b48e934ee833da531f8b8a060f45ad2cf6288689691b0d04f7c893",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_drift_after": {
+    "baseline_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+    "integration_base_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+    "school_key": "loyola-chicago",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+    "integration_base_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+    "school_key": "loyola-chicago",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "d00ba535c123e6480c4861909f932ca83bbbbc0831c40af83952926e6b167c49",
+    "field-level-proof.json": "4f5e3931a58c7e9fe376be74d260a8daf40a08facfbfac37853ddd26ef785b66",
+    "integration-freeze.json": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+    "normalization-report.json": "cdb0ed855f4eb5fb3b42fcfdfb616c5033561514139ab2ca9a0d834832729a8e",
+    "semantic-drift-proof.json": "afd77eda6f1e32020be283234e8ec367225e325290674c6063aa4aa84ba5e070"
+  },
+  "source_game_normalized_name_row_count": 30,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "d00ba535c123e6480c4861909f932ca83bbbbc0831c40af83952926e6b167c49",
+  "target_branch": "data/loyola-chicago-onboarding"
+}
