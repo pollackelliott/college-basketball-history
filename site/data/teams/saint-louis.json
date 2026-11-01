@@ -30,7 +30,7 @@
     "ties": 0,
     "first_season": "1914-1915",
     "last_season": "2025-2026",
-    "opponents": 359
+    "opponents": 360
   },
   "seasons": [
     {
@@ -3194,6 +3194,19 @@
       "ties": 0
     },
     {
+      "opponent_key": "loyola-academy",
+      "opponent_name": "Loyola Academy",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1916-1917",
+      "last_season": "1916-1917",
+      "games": 1,
+      "wins": 0,
+      "losses": 1,
+      "ties": 0
+    },
+    {
       "opponent_key": "loyola-chicago",
       "opponent_name": "Loyola Chicago",
       "current_d1": true,
@@ -3202,11 +3215,11 @@
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
       },
-      "first_season": "1916-1917",
+      "first_season": "1921-1922",
       "last_season": "2025-2026",
-      "games": 56,
+      "games": 55,
       "wins": 27,
-      "losses": 29,
+      "losses": 28,
       "ties": 0
     },
     {
@@ -7210,9 +7223,9 @@
       "season_label": "1916-1917",
       "game_date": "1917-01-17",
       "date_precision": "EXACT",
-      "opponent_key": "loyola-chicago",
-      "opponent_name": "Loyola Chicago",
-      "opponent_current_d1": true,
+      "opponent_key": "loyola-academy",
+      "opponent_name": "Loyola Academy",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 12,
       "opponent_score": 28,
