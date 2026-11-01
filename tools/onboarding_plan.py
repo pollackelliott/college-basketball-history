@@ -5818,6 +5818,112 @@ def apply_reconciliation_decisions(
         touched_canonical_ids.add(game_id)
         touched_source_ids.add(source_id)
 
+    # Reconciliation discrepancies are stored at the source-program level, while
+    # the sealed review is source-row specific. Multiple historical source rows
+    # may therefore map to one real canonical game and share one aggregate
+    # discrepancy row. Validate those source assertions independently and require
+    # their sealed decisions to converge before applying any order-sensitive
+    # canonical mutation.
+    shared_discrepancy_items: dict[
+        tuple[str, str, str], list[dict[str, Any]]
+    ] = defaultdict(list)
+    for item in reconciliation_items:
+        if item.get("category") != "discrepancy":
+            continue
+        shared_discrepancy_items[
+            (
+                item.get("canonical_game_id", "").strip(),
+                item.get("field_name", "").strip(),
+                school_key,
+            )
+        ].append(item)
+
+    shared_discrepancy_source_values: dict[
+        tuple[str, str, str], set[str]
+    ] = {}
+    shared_discrepancy_status: dict[tuple[str, str, str], str] = {}
+    shared_discrepancy_basis: dict[tuple[str, str, str], str] = {}
+    for key, grouped_items in shared_discrepancy_items.items():
+        if len(grouped_items) == 1:
+            item = grouped_items[0]
+            classified_value = (
+                classification_by_source.get(item.get("source_game_id", ""), "")
+                if item.get("field_name") == "game_type"
+                else ""
+            )
+            shared_discrepancy_source_values[key] = {
+                classified_value or str(item.get("source_value", ""))
+            }
+            shared_discrepancy_status[key] = (
+                "UNDER_REVIEW"
+                if item.get("decision") == "LEAVE_UNRESOLVED"
+                else "RESOLVED"
+            )
+            shared_discrepancy_basis[key] = str(
+                item.get("resolution_basis", "")
+            )
+            continue
+
+        final_values: set[str] = set()
+        source_values: set[str] = set()
+        for grouped_item in grouped_items:
+            grouped_source_id = grouped_item.get("source_game_id", "")
+            classified_value = (
+                classification_by_source.get(grouped_source_id, "")
+                if grouped_item.get("field_name") == "game_type"
+                else ""
+            )
+            effective_source_value = classified_value or str(
+                grouped_item.get("source_value", "")
+            )
+            source_values.add(effective_source_value)
+            decision = grouped_item.get("decision", "")
+            final_value = (
+                effective_source_value
+                if decision == "USE_SOURCE"
+                else str(grouped_item.get("canonical_value", ""))
+            )
+            canonical_patch = grouped_item.get("canonical_patch", {})
+            if grouped_item.get("field_name") in canonical_patch:
+                final_value = str(
+                    canonical_patch[grouped_item["field_name"]]
+                )
+            final_values.add(final_value)
+
+        if len(final_values) != 1:
+            decision_ids = ", ".join(
+                sorted(
+                    str(grouped_item.get("decision_id", ""))
+                    for grouped_item in grouped_items
+                )
+            )
+            raise WorkflowError(
+                f"{key[0]}/{key[1]}/{key[2]}: multiple source assertions for one "
+                "canonical discrepancy must converge on one final canonical value; "
+                f"decisions={decision_ids}"
+            )
+
+        shared_discrepancy_source_values[key] = source_values
+        shared_discrepancy_status[key] = (
+            "UNDER_REVIEW"
+            if any(
+                grouped_item.get("decision") == "LEAVE_UNRESOLVED"
+                for grouped_item in grouped_items
+            )
+            else "RESOLVED"
+        )
+        shared_discrepancy_basis[key] = " | ".join(
+            f"{grouped_item.get('source_game_id', '')}: "
+            f"{grouped_item.get('resolution_basis', '')}"
+            for grouped_item in sorted(
+                grouped_items,
+                key=lambda grouped_item: (
+                    grouped_item.get("source_game_id", ""),
+                    grouped_item.get("decision_id", ""),
+                ),
+            )
+        )
+
     for item in reconciliation_items:
         game_id = item.get("canonical_game_id", "").strip()
 
@@ -6177,8 +6283,26 @@ def apply_reconciliation_decisions(
         assertion = assertions[0]
         discrepancy = discrepancy_matches[0]
         effective_source_value = classified_type or item.get("source_value", "")
-        if discrepancy.get("source_a_value", "") != effective_source_value:
-            raise WorkflowError(f"{item['decision_id']}: ingested source discrepancy value changed")
+        assertion_source_value = _assertion_value(
+            assertion,
+            canonical,
+            field_name,
+        )
+        if assertion_source_value != effective_source_value:
+            raise WorkflowError(
+                f"{item['decision_id']}: ingested source assertion value changed"
+            )
+
+        discrepancy_key = (game_id, field_name, school_key)
+        grouped_source_values = shared_discrepancy_source_values.get(
+            discrepancy_key,
+            {effective_source_value},
+        )
+        if discrepancy.get("source_a_value", "") not in grouped_source_values:
+            raise WorkflowError(
+                f"{item['decision_id']}: aggregate source discrepancy value is not "
+                "represented by the sealed source assertions"
+            )
 
         current = canonical_field_value(canonical, field_name)
         expected = item.get("canonical_value", "")
@@ -6300,15 +6424,46 @@ def apply_reconciliation_decisions(
             )
 
         discrepancy["canonical_value"] = canonical_field_value(canonical, field_name)
-        discrepancy["resolution_basis"] = item["resolution_basis"]
-        if decision == "LEAVE_UNRESOLVED":
-            discrepancy["status"] = "UNDER_REVIEW"
+        grouped_items = shared_discrepancy_items.get(
+            discrepancy_key,
+            [item],
+        )
+        discrepancy["resolution_basis"] = shared_discrepancy_basis.get(
+            discrepancy_key,
+            item["resolution_basis"],
+        )
+        aggregate_status = shared_discrepancy_status.get(
+            discrepancy_key,
+            "UNDER_REVIEW" if decision == "LEAVE_UNRESOLVED" else "RESOLVED",
+        )
+        discrepancy["status"] = aggregate_status
+        if len(grouped_items) > 1:
+            source_ids = ", ".join(
+                sorted(
+                    str(grouped_item.get("source_game_id", ""))
+                    for grouped_item in grouped_items
+                )
+            )
+            if aggregate_status == "UNDER_REVIEW":
+                discrepancy["notes"] = (
+                    "Sealed source-specific reconciliation leaves at least one "
+                    "assertion conflict unresolved; aggregate canonical and source "
+                    "evidence remain preserved. Source assertions: "
+                    f"{source_ids}."
+                )
+            else:
+                discrepancy["notes"] = (
+                    "Resolved through the sealed generic onboarding plan for "
+                    "multiple source assertions sharing one aggregate discrepancy; "
+                    "source raw_text and source-specific values remain preserved. "
+                    f"Source assertions: {source_ids}."
+                )
+        elif aggregate_status == "UNDER_REVIEW":
             discrepancy["notes"] = (
                 "Owner explicitly approved publication with this dated conflict unresolved; "
                 "canonical and source evidence remain preserved."
             )
         else:
-            discrepancy["status"] = "RESOLVED"
             discrepancy["notes"] = (
                 "Resolved through the sealed generic onboarding plan; source raw_text and "
                 "the original discrepancy value remain preserved."
