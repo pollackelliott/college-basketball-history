@@ -25,6 +25,7 @@ jobs:
       has_request: ${{ steps.detect.outputs.has_request }}
       operation: ${{ steps.detect.outputs.operation }}
       protected_main_sha: ${{ steps.detect.outputs.protected_main_sha }}
+      pending_verification: ${{ steps.detect.outputs.pending_verification }}
     steps:
       - name: Check out exact control request
         uses: actions/checkout@v4
@@ -38,29 +39,46 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Detect bounded request
+      - name: Detect bounded request or pending fresh verification
         id: detect
         shell: bash
         working-directory: control
         run: |
-          if [[ -f .remote-implementation/request.json ]]; then
-            echo "has_request=true" >> "$GITHUB_OUTPUT"
-            python - <<'PY' >> "$GITHUB_OUTPUT"
+          python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           from pathlib import Path
-          request=json.loads(Path(".remote-implementation/request.json").read_text())
-          print("operation="+str(request.get("operation","")))
-          print("protected_main_sha="+str(request.get("expected_protected_main_sha","")))
+
+          state_path = Path(".remote-implementation/control-state.json")
+          request_path = Path(".remote-implementation/request.json")
+          state = json.loads(state_path.read_text()) if state_path.is_file() else {}
+          request = json.loads(request_path.read_text()) if request_path.is_file() else None
+          used = set(state.get("accepted_request_ids") or [])
+          used.update(state.get("consumed_request_ids") or [])
+          used.update(state.get("abandoned_request_ids") or [])
+          request_id = str((request or {}).get("request_id") or "")
+          has_request = bool(request) and request_id not in used
+
+          if has_request:
+              print("has_request=true")
+              print("operation="+str(request.get("operation","")))
+              print("protected_main_sha="+str(request.get("expected_protected_main_sha","")))
+              print("pending_verification=false")
+          else:
+              last = state.get("last_operation") or {}
+              pending = (
+                  state.get("lifecycle_state") == "IDLE"
+                  and last.get("fresh_runner_verification") == "PENDING"
+                  and bool(last.get("operation"))
+                  and bool(last.get("protected_main_sha"))
+              )
+              print("has_request=false")
+              print("operation=")
+              print("protected_main_sha="+str(last.get("protected_main_sha","") if pending else ""))
+              print("pending_verification="+("true" if pending else "false"))
           PY
-          else
-            echo "has_request=false" >> "$GITHUB_OUTPUT"
-            echo "operation=" >> "$GITHUB_OUTPUT"
-            echo "protected_main_sha=" >> "$GITHUB_OUTPUT"
-            echo "Control branch update contains no request."
-          fi
 
       - name: Authenticate exact protected-main runtime
-        if: steps.detect.outputs.has_request == 'true'
+        if: steps.detect.outputs.has_request == 'true' || steps.detect.outputs.pending_verification == 'true'
         shell: bash
         working-directory: control
         run: |
@@ -77,12 +95,23 @@ jobs:
           fi
 
       - name: Check out exact protected-main runtime
-        if: steps.detect.outputs.has_request == 'true'
+        if: steps.detect.outputs.has_request == 'true' || steps.detect.outputs.pending_verification == 'true'
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.detect.outputs.protected_main_sha }}
           path: runtime
           fetch-depth: 0
+
+      - name: Require control workflow snapshot to match protected-main scheduling authority
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        run: |
+          control_workflow="$GITHUB_WORKSPACE/control/.github/workflows/remote-implementation.yml"
+          runtime_workflow="$GITHUB_WORKSPACE/runtime/.github/workflows/remote-implementation.yml"
+          if ! cmp --silent "$control_workflow" "$runtime_workflow"; then
+            echo "Control workflow is stale relative to request-bound protected main; sync the workflow before submitting a request." >&2
+            exit 1
+          fi
 
       - name: Process remote Implementation request
         if: steps.detect.outputs.has_request == 'true'
@@ -97,6 +126,45 @@ jobs:
         with:
           name: remote-implementation-${{ github.run_id }}-${{ github.run_attempt }}
           path: /tmp/remote-implementation-diagnostics
+          if-no-files-found: ignore
+          retention-days: 14
+
+  fresh-pending-verification-recovery:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.has_request == 'false' && needs.process-request.outputs.pending_verification == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest durable control state
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check out exact pending-operation protected-main runtime
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.process-request.outputs.protected_main_sha }}
+          path: runtime
+          fetch-depth: 0
+
+      - name: Independently recover pending fresh verification without replay
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
+
+      - name: Upload pending-verification recovery diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-pending-verification-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
           if-no-files-found: ignore
           retention-days: 14
 
@@ -247,6 +315,45 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: remote-implementation-release-readiness-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
+
+  fresh-stage2-current-main-refresh-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'STAGE2_CURRENT_MAIN_REFRESH'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest durable control state
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check out exact request-bound protected-main runtime
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.process-request.outputs.protected_main_sha }}
+          path: runtime
+          fetch-depth: 0
+
+      - name: Reconstruct and verify Stage 2 current-main refresh
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
+
+      - name: Upload Stage 2 refresh verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-stage2-refresh-verify-${{ github.run_id }}-${{ github.run_attempt }}
           path: /tmp/remote-implementation-verification
           if-no-files-found: ignore
           retention-days: 14
