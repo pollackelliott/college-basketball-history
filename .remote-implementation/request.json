@@ -1,48 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "dayton-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "dayton",
-  "previous_control_state_commit": "82d693cad23eb9cd5b662ac82ded91758b93a024",
-  "previous_control_state_sha256": "6eac1c47dc9a2d983ac671f64b1071185b50b89fc49e96adc2269c2187d5689c",
+  "previous_control_state_commit": "8e78c65c35fc786110b35a5849f77a810d5c0a5d",
+  "previous_control_state_sha256": "af2e0e9e3fe3075c03ba52063d8a79d314836576f3051b0ab7cd6ed7380be6a6",
   "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
   "target_branch": "data/dayton-onboarding",
-  "research_checkpoint": {
-    "sha256": "804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f",
-    "research_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "d29558d43957cb9ae71213410f53eb4e49a46214",
-      "path_prefix": ".remote-implementation/transports/dayton/dayton-stage1-0001-final/piece-",
-      "part_count": 4
-    }
+  "target_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
+    "sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/dayton/dayton-stage1-0002/checkpoint-manifest.json",
-    "sha256": "c81ac3badd29d95b73c2a17df443388f78d9f9de0371c792c6cf88c013267520"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/checkpoints/dayton/dayton-stage1-0002/venue-reconciliation.json",
-    "sha256": "a2575ddecbf2689f93f8fc003bb5ff0e8cee8100641624cf8321408baeaf397d"
-  },
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1903-1904",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted Dayton INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the current reusable project baseline rather than superseding it, and the first accepted competitive source game is in 1903-1904. Preserve the exact frozen historical universe and all accepted researched uncertainty."
-  },
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
   "creation_provenance": {
-    "origin": "ChatGPT Dayton serialized Implementation lane — owner-authorized Integration Freeze / Phase 0",
-    "authorization": "Owner explicitly authorized Proceed after clean Stage 1 request dayton-stage1-0002 PASS on protected main 80b00278ac9add94702ac76c5fa310b95d2b1929. Authorizes exactly one guarded PHASE0 operation: re-run Stage 1 against exact main, stage the immutable six-file Research Freeze, apply the authenticated Valley High School representation-only reuse plus ordinary new target-school venue registrations, reconcile accepted INCEPTION+ target scope, create the Integration Freeze, publish the create-once data/dayton-onboarding successor through the global mutation lock/write-ahead/CAS path, and require fresh independent Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
+    "origin": "Dayton Implementation chat succession — Stage 2 recovery",
+    "authorization": "Owner explicitly authorized resumption of the existing Dayton Implementation Stage 2 phase through its normal OWNER_GATE_1_READY boundary. This request is the first bounded read-only STAGE2_CENSUS operation, bound to the independently verified Phase 0 successor and Integration Freeze. It carries no tracked repair, Owner Gate 1, sealing, sealed apply, release, merge, or Owner Gate 2 authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -57,6 +38,7 @@
     "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
