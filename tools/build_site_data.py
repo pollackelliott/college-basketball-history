@@ -665,6 +665,16 @@ def main() -> int:
         if yes(row["public_page_enabled"])
     )
 
+    invalid_coverage_programs = sorted({
+        row.get("program_key", "") for row in historical_coverage_rows
+        if row.get("program_key", "") not in enabled_keys
+    })
+    if invalid_coverage_programs:
+        raise ValueError(
+            "Historical coverage rows require enabled published programs: "
+            + ", ".join(invalid_coverage_programs)
+        )
+
     canonical_keys_for_enabled: set[str] = set()
     for row in canonical_rows:
         if row["team_a_key"] in enabled_keys or row["team_b_key"] in enabled_keys:
