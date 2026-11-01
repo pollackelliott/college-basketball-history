@@ -34,6 +34,42 @@ python tools/normalize_historical_opponent_displays.py <school> --sync-source-ga
 
 The remote runner must not reimplement their basketball, venue, opponent, conference, scope, reconciliation, or validation logic.
 
+### Post-publication correction target authority
+
+For a staged post-publication correction, the remote Stage 2 chain may use the
+repository-owned correction branch instead of a normal onboarding branch.
+
+The first remote `STAGE2_CENSUS` request must bind exactly:
+
+- `target_branch=data/<school>-correction`;
+- the exact current correction-branch head SHA;
+- one hash-bound `correction_integration_freeze` payload whose
+  `workflow_kind=POST_PUBLICATION_CORRECTION`, `status=INTEGRATION_FROZEN`,
+  school key, package hashes, correction source-game population, pre/post
+  semantic snapshots, and original protected-main base all validate;
+- no Phase 0 successor and no opponent-display successor.
+
+The runner fetches the exact correction ref, proves that its six-file package
+matches the correction Integration Freeze, proves that the correction base is
+an ancestor of both the correction head and the request-bound protected-main
+runtime, and then invokes the unchanged permanent Stage 2 tool. The resulting
+census checkpoint records `target_authority_kind=POST_PUBLICATION_CORRECTION`
+and the exact correction-Freeze path/hash.
+
+After that first authority hop, proposal rehearsal, Gate 1 fill, pre-seal,
+seal, sealed apply, release readiness, Preview verification, Gate 2 approval,
+and Production proof preserve the same correction branch through their normal
+hash-bound predecessor checkpoints. They do not reconstruct or substitute
+Phase 0 authority. The ordinary global mutation lock, write-ahead, expected-
+predecessor CAS, exact-tree fresh replay, PR/Preview approval, merge-parent
+proof, and Production proof remain unchanged.
+
+This mode does not relax or alter normal new-school onboarding. A normal
+`data/<school>-onboarding` Stage 2 census still requires its Phase 0
+successor. The remote opponent-display normalization mutation remains
+onboarding-only; a correction census that exposes a new representation repair
+outside the frozen correction must stop rather than silently broaden scope.
+
 ## 2. Permanent entrypoints
 
 Tracked repository capability:

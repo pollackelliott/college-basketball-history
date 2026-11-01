@@ -138,7 +138,7 @@ class ExactPreviewVerificationTests(unittest.TestCase):
 
 
 class PriorReadinessAuthorityTests(unittest.TestCase):
-    def setup_storage(self):
+    def setup_storage(self, branch=BRANCH):
         import json
         rid = "example-release-readiness-0001"
         school = "example-school"
@@ -157,7 +157,7 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
         prior = {"request_id": rid, "operation": "RELEASE_READINESS"}
         prior_bytes = (json.dumps(prior, sort_keys=True)).encode()
         base = {
-            "request_id": rid, "school_key": school, "target_branch": BRANCH,
+            "request_id": rid, "school_key": school, "target_branch": branch,
             "target_sha": SHA, "approved_plan_hash": "e" * 64,
             "release_manifest_sha256": "f" * 64,
         }
@@ -179,7 +179,7 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
         }
         ver_bytes = (json.dumps(ver, sort_keys=True)).encode()
         request = {
-            "school_key": school, "target_branch": BRANCH, "target_sha": SHA,
+            "school_key": school, "target_branch": branch, "target_sha": SHA,
             "expected_protected_main_sha": "1" * 40,
             "approved_plan_hash": "e" * 64,
             "release_manifest_sha256": "f" * 64,
@@ -218,6 +218,13 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
         result = self.authenticate(request, store)
         self.assertEqual(result["pr_body_sha256"], BODY_SHA)
         self.assertEqual(result["readiness_request_id"], "example-release-readiness-0001")
+
+    def test_exact_fresh_readiness_chain_accepts_correction_branch(self):
+        branch = "data/example-school-correction"
+        request, store = self.setup_storage(branch)
+        result = self.authenticate(request, store)
+        self.assertEqual(result["target_branch"], branch)
+        self.assertEqual(result["target_sha"], SHA)
 
     def test_reject_tampered_checkpoint(self):
         request, store = self.setup_storage()

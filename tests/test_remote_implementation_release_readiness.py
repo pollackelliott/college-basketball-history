@@ -31,7 +31,7 @@ def hash_bytes(value):
     return hashlib.sha256(value).hexdigest()
 
 
-def sample():
+def sample(branch=BRANCH):
     prefix = f".remote-implementation/successors/{SCHOOL}/{APPLY_ID}"
     verify_prefix = f".remote-implementation/verifications/{SCHOOL}/{APPLY_ID}"
     writeahead_prefix = f".remote-implementation/writeahead/{SCHOOL}/{APPLY_ID}"
@@ -60,7 +60,7 @@ def sample():
     release_hash = hash_bytes(sidecars["release-manifest.json"])
     common = {
         "school_key": SCHOOL,
-        "target_branch": BRANCH,
+        "target_branch": branch,
         "protected_main_sha": MAIN,
         "approved_plan_hash": APPROVED,
         "release_manifest_sha256": release_hash,
@@ -121,7 +121,7 @@ def sample():
         storage[writeahead_prefix + "/" + name] = value
     request = {
         "school_key": SCHOOL,
-        "target_branch": BRANCH,
+        "target_branch": branch,
         "target_sha": TARGET,
         "expected_protected_main_sha": MAIN,
         "approved_plan_hash": APPROVED,
@@ -162,6 +162,13 @@ class RemoteReleaseReadinessTests(unittest.TestCase):
         self.assertEqual(got["target_sha"], TARGET)
         self.assertEqual(got["changed_path_count"], 1)
         self.assertEqual(got["sidecars"]["pr-body.md"], b"review\n")
+
+    def test_accepts_post_publication_correction_branch(self):
+        branch = "data/example-school-correction"
+        request, storage = sample(branch)
+        got = self.authenticate(request, storage)
+        self.assertEqual(got["target_branch"], branch)
+        self.assertEqual(got["target_sha"], TARGET)
 
     def test_rejects_stale_or_tampered_successor_reference(self):
         request, storage = sample()

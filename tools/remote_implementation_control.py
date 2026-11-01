@@ -94,6 +94,28 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 REQUEST_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,127}$")
 SCHOOL_KEY_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,127}$")
 CANONICAL_GAME_ID_RE = re.compile(r"^CBBG-[0-9]{1,12}$")
+POST_PUBLICATION_CORRECTION = "POST_PUBLICATION_CORRECTION"
+
+
+def school_data_target_kind(school_key: str, target_branch: Any) -> str | None:
+    """Classify the two repository-owned school data branch shapes."""
+    value = str(target_branch or "").strip()
+    if value == f"data/{school_key}-onboarding":
+        return "ONBOARDING"
+    if value == f"data/{school_key}-correction":
+        return POST_PUBLICATION_CORRECTION
+    return None
+
+
+def _require_school_data_target_branch(
+    request: dict[str, Any],
+    school_key: str,
+    code: str,
+) -> str:
+    kind = school_data_target_kind(school_key, request.get("target_branch"))
+    _require(kind is not None, code)
+    return kind
+
 
 
 class RemoteImplementationError(RuntimeError):
@@ -442,9 +464,8 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get(other) is not True,
             "RELEASE_GATE2_CROSS_OPERATION_AUTHORITY_FORBIDDEN",
         )
-        _require(
-            request.get("target_branch") == f"data/{school_key}-onboarding",
-            "RELEASE_GATE2_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "RELEASE_GATE2_TARGET_BRANCH_INVALID"
         )
         _require_sha(request.get("target_sha"), 40, "RELEASE_GATE2_TARGET_SHA_INVALID")
         pr_number = request.get("pr_number")
@@ -763,27 +784,44 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_reconciliation_diagnostic") is not True,
             "STAGE2_CENSUS_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
         )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_CENSUS_TARGET_BRANCH_INVALID",
+        target_kind = _require_school_data_target_branch(
+            request, school_key, "STAGE2_CENSUS_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
             40,
             "STAGE2_CENSUS_TARGET_SHA_INVALID",
         )
-        _validate_payload_ref(
-            request.get("phase0_successor"),
-            "phase0_successor",
-            required=True,
-        )
-        if request.get("stage2_opponent_display_successor") is not None:
+        if target_kind == POST_PUBLICATION_CORRECTION:
+            _require(
+                request.get("phase0_successor") is None,
+                "STAGE2_CENSUS_CORRECTION_PHASE0_SUCCESSOR_FORBIDDEN",
+            )
+            _require(
+                request.get("stage2_opponent_display_successor") is None,
+                "STAGE2_CENSUS_CORRECTION_DISPLAY_SUCCESSOR_FORBIDDEN",
+            )
             _validate_payload_ref(
-                request.get("stage2_opponent_display_successor"),
-                "stage2_opponent_display_successor",
+                request.get("correction_integration_freeze"),
+                "correction_integration_freeze",
                 required=True,
             )
+        else:
+            _require(
+                request.get("correction_integration_freeze") is None,
+                "STAGE2_CENSUS_ONBOARDING_CORRECTION_FREEZE_FORBIDDEN",
+            )
+            _validate_payload_ref(
+                request.get("phase0_successor"),
+                "phase0_successor",
+                required=True,
+            )
+            if request.get("stage2_opponent_display_successor") is not None:
+                _validate_payload_ref(
+                    request.get("stage2_opponent_display_successor"),
+                    "stage2_opponent_display_successor",
+                    required=True,
+                )
         _require_sha(
             request.get("integration_freeze_sha256"),
             64,
@@ -871,10 +909,8 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_reconciliation_diagnostic") is not True,
             "STAGE2_PROPOSAL_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
         )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_PROPOSAL_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "STAGE2_PROPOSAL_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
@@ -933,10 +969,8 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_reconciliation_diagnostic") is False,
             "STAGE2_GATE1_FILL_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
         )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_GATE1_FILL_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "STAGE2_GATE1_FILL_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
@@ -1020,10 +1054,8 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_reconciliation_diagnostic") is False,
             "STAGE2_PRESEAL_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
         )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_PRESEAL_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "STAGE2_PRESEAL_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
@@ -1071,10 +1103,8 @@ def validate_request(request: dict[str, Any]) -> None:
                 authority.get(key) is False,
                 f"STAGE2_GATE1_SEAL_{code}_AUTHORITY_FORBIDDEN",
             )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_GATE1_SEAL_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "STAGE2_GATE1_SEAL_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
@@ -1125,10 +1155,8 @@ def validate_request(request: dict[str, Any]) -> None:
                 authority.get(key) is False,
                 f"STAGE2_SEALED_APPLY_{code}_AUTHORITY_FORBIDDEN",
             )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_SEALED_APPLY_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "STAGE2_SEALED_APPLY_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
@@ -1175,9 +1203,8 @@ def validate_request(request: dict[str, Any]) -> None:
                 authority.get(key) is False,
                 "RELEASE_READINESS_OTHER_AUTHORITY_FORBIDDEN:" + key,
             )
-        _require(
-            request.get("target_branch") == f"data/{school_key}-onboarding",
-            "RELEASE_READINESS_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "RELEASE_READINESS_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"), 40, "RELEASE_READINESS_TARGET_SHA_INVALID"
@@ -1210,9 +1237,8 @@ def validate_request(request: dict[str, Any]) -> None:
                 authority.get(key) is False,
                 "RELEASE_PREVIEW_OTHER_AUTHORITY_FORBIDDEN:" + key,
             )
-        _require(
-            request.get("target_branch") == f"data/{school_key}-onboarding",
-            "RELEASE_PREVIEW_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "RELEASE_PREVIEW_TARGET_BRANCH_INVALID"
         )
         _require_sha(request.get("target_sha"), 40, "RELEASE_PREVIEW_TARGET_SHA_INVALID")
         _validate_payload_ref(
@@ -1259,10 +1285,8 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_proposal_rehearsal") is False,
             "STAGE2_DIAGNOSTIC_PROPOSAL_AUTHORITY_FORBIDDEN",
         )
-        expected_target = f"data/{school_key}-onboarding"
-        _require(
-            request.get("target_branch") == expected_target,
-            "STAGE2_DIAGNOSTIC_TARGET_BRANCH_INVALID",
+        _require_school_data_target_branch(
+            request, school_key, "STAGE2_DIAGNOSTIC_TARGET_BRANCH_INVALID"
         )
         _require_sha(
             request.get("target_sha"),
@@ -1318,7 +1342,7 @@ def validate_request(request: dict[str, Any]) -> None:
         if target is not None:
             target_text = str(target)
             _require(
-                target_text == f"data/{school_key}-onboarding"
+                school_data_target_kind(school_key, target_text) is not None
                 or (
                     target_text.startswith(f"maintenance/{school_key}-")
                     and ".." not in target_text
@@ -1377,11 +1401,15 @@ def verify_request_predecessor(
             OP_PHASE0,
             OP_PHASE0_SCOPE_SUPERSESSION,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
-            OP_STAGE2_SEALED_APPLY,
         }:
             _require(
                 recovery.get("target_branch")
                 == f"data/{state.get('active_school_key')}-onboarding",
+                "STALE_RECOVERY_TARGET_MISMATCH",
+            )
+        elif state.get("active_operation") == OP_STAGE2_SEALED_APPLY:
+            _require(
+                recovery.get("target_branch") == state.get("active_target_branch"),
                 "STALE_RECOVERY_TARGET_MISMATCH",
             )
         elif state.get("active_operation") in {

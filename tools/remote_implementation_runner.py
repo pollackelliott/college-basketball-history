@@ -394,11 +394,24 @@ def persist_stage2_census_checkpoint(
         "target_branch": request["target_branch"],
         "target_sha": request["target_sha"],
         "target_tree_sha": result["tracked_mutation_proof"]["after_tree_sha"],
-        "phase0_successor_path": request["phase0_successor"]["path"],
-        "phase0_successor_sha256": request["phase0_successor"]["sha256"],
+        "phase0_successor_path": (
+            (request.get("phase0_successor") or {}).get("path")
+        ),
+        "phase0_successor_sha256": (
+            (request.get("phase0_successor") or {}).get("sha256")
+        ),
         "phase0_protected_main_sha": phase0_authority[
             "phase0_protected_main_sha"
         ],
+        "correction_integration_freeze_path": (
+            (request.get("correction_integration_freeze") or {}).get("path")
+        ),
+        "correction_integration_freeze_sha256": (
+            (request.get("correction_integration_freeze") or {}).get("sha256")
+        ),
+        "correction_origin_main_sha": phase0_authority.get(
+            "correction_origin_main_sha"
+        ),
         "target_authority_kind": phase0_authority["target_authority_kind"],
         "stage2_opponent_display_successor_path": (
             (request.get("stage2_opponent_display_successor") or {}).get("path")
@@ -489,7 +502,7 @@ def run_read_only_stage2_census(
     actual_target = remote_head(ROOT, request["target_branch"])
     if actual_target != request["target_sha"]:
         raise Stop(
-            "STAGE2_ONBOARDING_HEAD_MISMATCH expected=%s actual=%s"
+            "STAGE2_TARGET_HEAD_MISMATCH expected=%s actual=%s"
             % (request["target_sha"], actual_target or "[missing]")
         )
 
@@ -525,7 +538,7 @@ def run_read_only_stage2_census(
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
-        raise Stop("STAGE2_ONBOARDING_HEAD_CHANGED_DURING_RUN")
+        raise Stop("STAGE2_TARGET_HEAD_CHANGED_DURING_RUN")
 
     checkpoint_commit = persist_stage2_census_checkpoint(
         state=active,

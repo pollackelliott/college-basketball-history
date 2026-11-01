@@ -655,6 +655,103 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                     source_repo=Path("/tmp/not-used"),
                 )
 
+    def test_post_publication_correction_freeze_is_authenticated(self):
+        target = "a" * 40
+        origin = "b" * 40
+        package_hash = "c" * 64
+        freeze = {
+            "schema_version": 2,
+            "workflow_kind": "POST_PUBLICATION_CORRECTION",
+            "status": "INTEGRATION_FROZEN",
+            "school_key": SCHOOL,
+            "research_base_sha": "d" * 40,
+            "integration_base_sha": origin,
+            "origin_main_sha": origin,
+            "correction_source_game_ids": ["SRC-1"],
+            "package_member_sha256": {
+                name: package_hash for name in stage2_runtime.REQUIRED_PACKAGE_FILES
+            },
+            "pre_correction_source_semantic_guard": {
+                "snapshot_sha256": "e" * 64,
+            },
+            "source_game_semantic_guard": {
+                "snapshot_sha256": SEMANTIC,
+            },
+        }
+        freeze_bytes = (
+            json.dumps(freeze, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        freeze_sha = hashlib.sha256(freeze_bytes).hexdigest()
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": "data/example-school-correction",
+            "target_sha": target,
+            "expected_protected_main_sha": "f" * 40,
+            "correction_integration_freeze": {
+                "path": ".remote-implementation/inputs/correction/integration-freeze.json",
+                "sha256": freeze_sha,
+            },
+            "integration_freeze_sha256": freeze_sha,
+            "semantic_snapshot_sha256": SEMANTIC,
+        }
+
+        def fake_git(*args, **kwargs):
+            if args[:2] == ("rev-parse", "refs/remotes/origin/remote-stage2-correction-authority"):
+                return subprocess.CompletedProcess(args, 0, stdout=target + "\n")
+            return subprocess.CompletedProcess(args, 0, stdout="")
+
+        with (
+            patch.object(stage2_runtime, "git_show_bytes", return_value=freeze_bytes),
+            patch.object(stage2_runtime, "_school_package_hash", return_value=package_hash),
+            patch.object(stage2_runtime, "git", side_effect=fake_git),
+        ):
+            authority = verify_phase0_authority(
+                request,
+                "0" * 40,
+                source_repo=Path("/tmp/synthetic-correction-authority"),
+            )
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "POST_PUBLICATION_CORRECTION",
+        )
+        self.assertEqual(authority["freeze_bytes"], freeze_bytes)
+        self.assertEqual(
+            authority["correction_integration_freeze_sha256"],
+            freeze_sha,
+        )
+
+    def test_post_publication_correction_freeze_rejects_wrong_workflow_kind(self):
+        freeze = {
+            "schema_version": 2,
+            "workflow_kind": "STANDARD_ONBOARDING",
+            "status": "INTEGRATION_FROZEN",
+            "school_key": SCHOOL,
+        }
+        freeze_bytes = json.dumps(freeze).encode()
+        digest = hashlib.sha256(freeze_bytes).hexdigest()
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": "data/example-school-correction",
+            "target_sha": "a" * 40,
+            "expected_protected_main_sha": "f" * 40,
+            "correction_integration_freeze": {
+                "path": ".remote-implementation/inputs/correction/integration-freeze.json",
+                "sha256": digest,
+            },
+            "integration_freeze_sha256": digest,
+            "semantic_snapshot_sha256": SEMANTIC,
+        }
+        with patch.object(stage2_runtime, "git_show_bytes", return_value=freeze_bytes):
+            with self.assertRaisesRegex(
+                RemoteImplementationError,
+                "STAGE2_CORRECTION_WORKFLOW_KIND_MISMATCH",
+            ):
+                verify_phase0_authority(
+                    request,
+                    "0" * 40,
+                    source_repo=Path("/tmp/synthetic-correction-authority"),
+                )
+
     def test_phase0_authority_and_freeze_are_authenticated(self):
         repo, control_sha, request, _ = self.make_authority_repo()
         authority = verify_phase0_authority(
