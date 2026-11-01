@@ -1,31 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "loyola-chicago-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "loyola-chicago",
-  "previous_control_state_commit": "bd54429711c09f4eeccb0e939850309388716771",
-  "previous_control_state_sha256": "32152f0593f738a1550c89cbab707b32f29f9ce74f4c338e01c60666b6db12af",
-  "expected_protected_main_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
-  "target_branch": "data/loyola-chicago-onboarding",
-  "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
-  "pr_number": 425,
-  "merge_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "b23c21be528a0fe8f2bd2274ed5ff81b20c38d9c129ca6b3e4348c388ff6e541"
+  "request_id": "dayton-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "dayton",
+  "previous_control_state_commit": "d29558d43957cb9ae71213410f53eb4e49a46214",
+  "previous_control_state_sha256": "ea12ff1261b9f8559938ba4ecc55998d7b246d0d66c21c36d5aece0c53fb56fc",
+  "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "research_checkpoint": {
+    "sha256": "804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f",
+    "research_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "d29558d43957cb9ae71213410f53eb4e49a46214",
+      "path_prefix": ".remote-implementation/transports/dayton/dayton-stage1-0001-final/piece-",
+      "part_count": 4
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "cc7a176bd52437136d9a78b160e7ce75083a3ff56b8d9bea903064c47e59d403"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — exact post-merge Production proof",
-    "authorization": "Owner's explicit Gate 2 approval authorized the final release phase for exact PR #425 head 37aefb494d1d51faf0b58b11b1927fbb3038879d and Preview deployment 7478037813. The lane independently reauthenticated fresh-verified Owner Gate 2 approval, rechecked protected main and clean PR #425, then merged exactly that approved head once. GitHub created signed two-parent merge cacf737b4a302be28c87aa22abf198946a61922f with first parent afeca06b5a2aa7472cc4ab710014d591f596a2fd and second parent 37aefb494d1d51faf0b58b11b1927fbb3038879d; protected main is exactly cacf737b4a302be28c87aa22abf198946a61922f. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge replay, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, new owner-approval authority, unrelated repair, or other-school authority."
+    "origin": "ChatGPT Dayton serialized Implementation lane — owner-authorized Stage 1",
+    "authorization": "Owner explicitly concluded Dayton Research and authorized Dayton serialized Implementation from immutable RESEARCH_FROZEN SHA-256 804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f with accepted INCEPTION+ scope. This request performs only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main. It carries no Research change, Phase 0, shared/global mutation, Stage 2, owner-gate, release, recovery, protected-main mutation, or other-school authority."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -38,11 +39,10 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
-    "venue_identity_maintenance": false
+    "owner_gate_2": false
   }
 }
