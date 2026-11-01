@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "recovered_request_id": "loyola-chicago-stage2-proposal-0004",
+  "request_id": "loyola-chicago-stage2-proposal-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
