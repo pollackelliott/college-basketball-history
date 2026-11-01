@@ -19,13 +19,6 @@ jobs:
           ref: bed68f763a7ea8920c6ba830b004334b16c9e303
           fetch-depth: 0
 
-      - name: Check out durable correction authority
-        uses: actions/checkout@v4
-        with:
-          ref: control/remote-implementation
-          path: control-authority
-          fetch-depth: 1
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -38,8 +31,9 @@ jobs:
           git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
           test "$(git rev-parse refs/remotes/origin/main)" = "bed68f763a7ea8920c6ba830b004334b16c9e303"
           git cat-file -e "a76ba14e378267d2d6d6beb18b880916d77e84a1^{commit}"
-          authority="control-authority/.remote-implementation/authorities/saint-louis/saint-louis-cbbg-0182742-correction-authority-0001.json"
-          test "$(sha256sum "$authority" | awk '{print $1}')" = "8dfabed8336faaea5f9349385200f75d22f3c387465fd68d2dd1bdd4da3653e7"
+          git show "refs/remotes/origin/control/remote-implementation:.remote-implementation/authorities/saint-louis/saint-louis-cbbg-0182742-correction-authority-0001.json" > /tmp/saint-louis-correction-authority.json
+          test "$(sha256sum /tmp/saint-louis-correction-authority.json | awk '{print $1}')" = "8dfabed8336faaea5f9349385200f75d22f3c387465fd68d2dd1bdd4da3653e7"
+          test -z "$(git status --porcelain --untracked-files=all)"
 
       - name: Materialize exact six-file candidate
         shell: bash
