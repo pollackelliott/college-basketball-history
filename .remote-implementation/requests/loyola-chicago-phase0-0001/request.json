@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-phase0-0001",
+  "operation": "PHASE0",
+  "school_key": "loyola-chicago",
+  "previous_control_state_commit": "836ef09cb59b00475f399bf0ac8eeeecb1234785",
+  "previous_control_state_sha256": "e5c78e773523bc5885535dadc49db9b6b5020b8d621d682be49983f08a2d4ec2",
+  "expected_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "research_checkpoint": {
+    "sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
+    "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "797835f03024f8a08c1c4027d754e909cbc970be",
+      "path_prefix": ".remote-implementation/transports/loyola-chicago/loyola-chicago-stage1-0001-final/piece-",
+      "part_count": 18
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage1-0004/checkpoint-manifest.json",
+    "sha256": "0dcd19007a0f5084d1206d291ef5042588ddad549ce0e5c14725224930c04dca"
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage1-0004/venue-reconciliation.json",
+    "sha256": "6c2674dd3e6d545e1a0df239170f1a925dc6f7ae8dac4640d0406ee7573bcf1f"
+  },
+  "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1913-1914",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted Loyola Chicago INCEPTION+ scope from the immutable Research Freeze. The frozen portfolio explicitly confirms the current owner-supplied top-level scope baseline, and the first accepted competitive source game is in 1913-1914. Preserve the exact frozen historical universe and all accepted researched uncertainty."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — owner-authorized Integration Freeze / Phase 0",
+    "authorization": "Owner said Proceed after clean Stage 1 request loyola-chicago-stage1-0004 PASS on protected main 5ffb0a475fd492c1681607aacccf79cdfe0e4a9b. Authorizes exactly one guarded PHASE0 operation: re-run Stage 1 against exact main, stage the immutable six-file Research Freeze, apply the six authenticated venue reuse mappings and ordinary ten new venue registrations, reconcile accepted INCEPTION+ target scope, create the Integration Freeze, publish the create-once data/loyola-chicago-onboarding successor through the global mutation lock/write-ahead/CAS path, and require fresh independent Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
