@@ -232,7 +232,7 @@
     "dayton-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
-  "active_lock_commit": null,
+  "active_lock_commit": "ae1e432b02a73d8406c13568a4f7372799aa23fe",
   "active_lock_owner": "github-actions:41362660639:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
