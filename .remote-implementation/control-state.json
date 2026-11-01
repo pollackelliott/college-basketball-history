@@ -221,7 +221,7 @@
   "active_request_sha256": "6afe401388b4f735c5d82c24c992d892452bd0e61a81254c5f9c5f40f797e34e",
   "active_school_key": "saint-louis",
   "active_target_branch": "data/saint-louis-correction",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "f41c1391d7eb3046e3b1a2fe2f7d410f1afbca8c",
   "active_writeahead_path": ".remote-implementation/writeahead/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "382640c446d14a7f9e9fb5a142b04ccb412c84d6b7d35ffa4612ca24ea27e955",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
