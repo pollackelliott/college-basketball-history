@@ -230,7 +230,7 @@
     "dayton-phase0-0001"
   ],
   "active_expected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
-  "active_lock_commit": null,
+  "active_lock_commit": "98727524b6d57e0bc882104c1e65bd80066a2651",
   "active_lock_owner": "github-actions:41358178638:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
