@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-proposal-0001",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "b45d9050304de2496d3a624a7ffacf8769f8c069",
+  "previous_control_state_sha256": "fec056becc3929fe1341bbdd0a0257ae1bc5b7db7f5b7b44947282f0d6aaf5a8",
+  "expected_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "130cc370d79dd5ae2841cc3e8409dfcabde9e51bab1ca3f89ef527a80ed6d662"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/loyola-chicago-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "4215e63925669a1cec6db448ca64e929b75c4fc2a80ac3fcec8a14b8b7a69aff"
+  },
+  "creation_provenance": {
+    "origin": "Loyola Chicago serialized Implementation Stage 2",
+    "authorization": "Standing owner authorization continues Stage 2 through verified OWNER_GATE_1_READY. Rehearse the complete 315-decision map against the fresh-verified display-normalized successor; no Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, or protected-main mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
