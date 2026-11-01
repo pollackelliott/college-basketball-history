@@ -157,6 +157,39 @@ def _freeze_from_writeahead(
     return freeze_bytes, writeahead
 
 
+
+def _freeze_from_correction_census(
+    control_commit: str,
+    authority: dict[str, Any],
+    request: dict[str, Any],
+    *,
+    source_repo: Path,
+) -> bytes:
+    path = str(authority.get("correction_integration_freeze_path") or "")
+    expected = str(authority.get("correction_integration_freeze_sha256") or "")
+    if not path or not expected:
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_REFERENCE_MISSING")
+    data = git_show_bytes(control_commit, path, cwd=source_repo)
+    if sha256_bytes(data) != expected:
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_HASH_MISMATCH")
+    if expected != request["integration_freeze_sha256"]:
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_BINDING_MISMATCH")
+    try:
+        freeze = json.loads(data)
+    except (TypeError, ValueError) as exc:
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_JSON_INVALID") from exc
+    if freeze.get("workflow_kind") != "POST_PUBLICATION_CORRECTION":
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_WORKFLOW_KIND_MISMATCH")
+    if freeze.get("status") != "INTEGRATION_FROZEN":
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_STATUS_MISMATCH")
+    if freeze.get("school_key") != request["school_key"]:
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_SCHOOL_MISMATCH")
+    semantic = (freeze.get("source_game_semantic_guard") or {}).get("snapshot_sha256")
+    if semantic != request["semantic_snapshot_sha256"]:
+        raise Stop("STAGE2_PROPOSAL_CORRECTION_FREEZE_SEMANTIC_MISMATCH")
+    return data
+
+
 def verify_stage2_proposal_authority(
     request: dict[str, Any],
     control_commit: str,
@@ -183,16 +216,25 @@ def verify_stage2_proposal_authority(
         semantic_sha = authority.get("semantic_snapshot_sha256")
         writeahead_path = ""
         writeahead_sha = ""
-        phase0_path = str(authority.get("phase0_successor_path") or "")
-        phase0_sha = str(authority.get("phase0_successor_sha256") or "")
-        if not phase0_path or not phase0_sha:
-            raise Stop("STAGE2_PROPOSAL_PHASE0_REFERENCE_MISSING")
-        phase0_bytes = git_show_bytes(control_commit, phase0_path, cwd=source_repo)
-        if sha256_bytes(phase0_bytes) != phase0_sha:
-            raise Stop("STAGE2_PROPOSAL_PHASE0_HASH_MISMATCH")
-        phase0 = json.loads(phase0_bytes)
-        writeahead_path = str(phase0.get("writeahead_manifest_path") or "")
-        writeahead_sha = str(phase0.get("writeahead_manifest_sha256") or "")
+        if authority.get("target_authority_kind") == "POST_PUBLICATION_CORRECTION":
+            correction_freeze_bytes = _freeze_from_correction_census(
+                control_commit,
+                authority,
+                request,
+                source_repo=source_repo,
+            )
+        else:
+            correction_freeze_bytes = None
+            phase0_path = str(authority.get("phase0_successor_path") or "")
+            phase0_sha = str(authority.get("phase0_successor_sha256") or "")
+            if not phase0_path or not phase0_sha:
+                raise Stop("STAGE2_PROPOSAL_PHASE0_REFERENCE_MISSING")
+            phase0_bytes = git_show_bytes(control_commit, phase0_path, cwd=source_repo)
+            if sha256_bytes(phase0_bytes) != phase0_sha:
+                raise Stop("STAGE2_PROPOSAL_PHASE0_HASH_MISMATCH")
+            phase0 = json.loads(phase0_bytes)
+            writeahead_path = str(phase0.get("writeahead_manifest_path") or "")
+            writeahead_sha = str(phase0.get("writeahead_manifest_sha256") or "")
     elif kind == "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR":
         stage2 = authority.get("post_repair_stage2") or {}
         stage2_status = stage2.get("stage2_status")
@@ -226,16 +268,21 @@ def verify_stage2_proposal_authority(
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_FREEZE_MISMATCH")
     if semantic_sha != request["semantic_snapshot_sha256"]:
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_SEMANTIC_MISMATCH")
-    if not writeahead_path or not writeahead_sha:
-        raise Stop("STAGE2_PROPOSAL_WRITEAHEAD_REFERENCE_MISSING")
-
-    freeze_bytes, writeahead = _freeze_from_writeahead(
-        control_commit=control_commit,
-        writeahead_path=writeahead_path,
-        writeahead_sha256=writeahead_sha,
-        request=request,
-        source_repo=source_repo,
-    )
+    if kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT" and (
+        authority.get("target_authority_kind") == "POST_PUBLICATION_CORRECTION"
+    ):
+        freeze_bytes = correction_freeze_bytes
+        writeahead = {}
+    else:
+        if not writeahead_path or not writeahead_sha:
+            raise Stop("STAGE2_PROPOSAL_WRITEAHEAD_REFERENCE_MISSING")
+        freeze_bytes, writeahead = _freeze_from_writeahead(
+            control_commit=control_commit,
+            writeahead_path=writeahead_path,
+            writeahead_sha256=writeahead_sha,
+            request=request,
+            source_repo=source_repo,
+        )
     return {
         "authority": authority,
         "authority_bytes": authority_bytes,
