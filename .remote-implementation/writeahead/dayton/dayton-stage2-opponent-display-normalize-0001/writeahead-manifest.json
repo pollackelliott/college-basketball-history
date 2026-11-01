@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/dayton/opponents.csv",
+    "schools/dayton/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/dayton/opponents.csv": "2a61839566e92a544d7ddf40059be5fce893db0402472fb16632395225dec604",
+    "schools/dayton/source-games.csv": "84daa8e296675d5a93963e4e39b6bd2fde5f3162624aca3db7b3aec3c24964c2"
+  },
+  "changed_paths": [
+    "schools/dayton/opponents.csv",
+    "schools/dayton/source-games.csv"
+  ],
+  "commit_message": "Normalize dayton historical opponent display representation",
+  "expected_blocker_keys": [
+    "central-state-ohio",
+    "manchester-indiana"
+  ],
+  "expected_target_predecessor_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "field_level_proof_sha256": "fe3cc088251f6ba393ff245ce279ef74b9173bc1b6437f6d77dcc5239883f442",
+  "global_lock_commit": "ae1e432b02a73d8406c13568a4f7372799aa23fe",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "b88a0cb470da241cf4b56e06e42f1d1b5c8567e5020dd6421260cae380d06916",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "prepared_parent_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "prepared_tree_sha": "fed64f87c2a1e37be96c702309066e737ffc0835",
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "repository_validation": "PASS",
+  "request_id": "dayton-stage2-opponent-display-normalize-0001",
+  "request_sha256": "dd5d195e3268d4b25fb0bfdf2904bdcf130673817c476ed95acfc1a278925279",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift_after": {
+    "baseline_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "integration_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+    "school_key": "dayton",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "integration_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+    "school_key": "dayton",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "b4a83aee2361979267dea020efd94cbb8001b42ba87d4dd6a7d4870e23e93ece",
+    "field-level-proof.json": "fe3cc088251f6ba393ff245ce279ef74b9173bc1b6437f6d77dcc5239883f442",
+    "integration-freeze.json": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+    "normalization-report.json": "b88a0cb470da241cf4b56e06e42f1d1b5c8567e5020dd6421260cae380d06916",
+    "semantic-drift-proof.json": "bc0135511f39b255bbeb6a4f329d673d96630daa08b0ffbb9e9bc8db7be4d6d0"
+  },
+  "source_game_normalized_name_row_count": 8,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/dayton/dayton-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "b4a83aee2361979267dea020efd94cbb8001b42ba87d4dd6a7d4870e23e93ece",
+  "target_branch": "data/dayton-onboarding"
+}

@@ -1,0 +1,87 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Central State"
+      ],
+      "authority_signature": "centralstate",
+      "canonical_opponent_key": "central-state-ohio",
+      "from_names": [
+        "Central State (OH)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Central State"
+    },
+    {
+      "authority_names": [
+        "Manchester (Indiana)"
+      ],
+      "authority_signature": "manchesterindiana",
+      "canonical_opponent_key": "manchester-indiana",
+      "from_names": [
+        "Manchester (IN)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Manchester (Indiana)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "dayton",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 8,
+  "source_game_display_changes": [
+    {
+      "from_name": "Manchester (IN)",
+      "normalized_opponent_key": "manchester-indiana",
+      "source_game_id": "DAYTON-1948-49-012",
+      "to_name": "Manchester (Indiana)"
+    },
+    {
+      "from_name": "Manchester (IN)",
+      "normalized_opponent_key": "manchester-indiana",
+      "source_game_id": "DAYTON-1949-50-010",
+      "to_name": "Manchester (Indiana)"
+    },
+    {
+      "from_name": "Manchester (IN)",
+      "normalized_opponent_key": "manchester-indiana",
+      "source_game_id": "DAYTON-1952-53-002",
+      "to_name": "Manchester (Indiana)"
+    },
+    {
+      "from_name": "Central State (OH)",
+      "normalized_opponent_key": "central-state-ohio",
+      "source_game_id": "DAYTON-1958-59-001",
+      "to_name": "Central State"
+    },
+    {
+      "from_name": "Central State (OH)",
+      "normalized_opponent_key": "central-state-ohio",
+      "source_game_id": "DAYTON-1959-60-001",
+      "to_name": "Central State"
+    },
+    {
+      "from_name": "Manchester (IN)",
+      "normalized_opponent_key": "manchester-indiana",
+      "source_game_id": "DAYTON-1960-61-001",
+      "to_name": "Manchester (Indiana)"
+    },
+    {
+      "from_name": "Central State (OH)",
+      "normalized_opponent_key": "central-state-ohio",
+      "source_game_id": "DAYTON-1960-61-012",
+      "to_name": "Central State"
+    },
+    {
+      "from_name": "Central State (OH)",
+      "normalized_opponent_key": "central-state-ohio",
+      "source_game_id": "DAYTON-1962-63-002",
+      "to_name": "Central State"
+    }
+  ],
+  "status": "PASS"
+}
