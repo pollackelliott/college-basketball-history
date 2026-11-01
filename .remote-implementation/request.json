@@ -4,7 +4,7 @@
   "request_id": "loyola-chicago-stage2-proposal-0006",
   "school_key": "loyola-chicago",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "9bb72ff9c12f19847d9119c3ec584a4c8f951b66",
+  "previous_control_state_commit": "c1856e8ea94c955033347525eb9f2332cf5cca0e",
   "previous_control_state_sha256": "a3f24127be307bed999ea6a1ad320d1c3033458ea9849be1b9a53bdec32ebcb7",
   "expected_protected_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
   "target_branch": "data/loyola-chicago-onboarding",
