@@ -113,9 +113,11 @@ jobs:
           rows=list(csv.DictReader(open(".onboarding/saint-louis/review.csv",encoding="utf-8-sig",newline="")))
           assert len(rows)==1
           r=rows[0]
+          assert r["decision_id"]=="CORRECTION-IDENTITY-SAINT-LOUIS-1916-17-005-CBBG-0182742"
+          assert r["category"]=="correction_identity_patch"
           assert r["decision"]=="APPLY_CORRECTION_IDENTITY_PATCH"
           assert r["source_game_id"]=="saint-louis-1916-17-005"
-          assert r["canonical_game_id"]=="CBBG-0182742"
+          assert "canonical CBBG-0182742" in r["relevant_evidence"]
           assert r["resolution_basis"]
           PY
 
