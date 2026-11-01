@@ -70,3 +70,19 @@ Do not begin Stage 2.
 Do not infer the missing 1919-20 rows.
 Do not silently resolve the 1916/1919 scope contradiction.
 Do not reopen reconciled post-1919 seasons absent concrete contradictory evidence.
+
+## Successor scope disposition — 2026-11-01
+
+Owner explicitly approved **INCLUDE 1916**. The earlier OWNER_BLOCKED scope decision is superseded by this successor; this file remains an immutable description of the earlier checkpoint.
+
+- Successor ZIP: `st-bonaventure-stage1-scope-resolved-checkpoint-20261101.zip`
+- Successor ZIP SHA-256: `95649f74c615cb0846ce78b4a61711fb0521425a22bc4ce6828e1268f6036579`
+- Parent ZIP SHA-256: `fa5874bfdba1134424a1fd2792bdf5d3bcc0fdc4e34ade4cda0f276d9bce1d6e`
+- Current protected main at successor preparation: `ef2dd1ebf9c1de0541dc4892513a92fac3089487`
+- Immutable research base: `bed68f763a7ea8920c6ba830b004334b16c9e303`
+- Identified candidate rows: **2,610**, including the 1915-16 Buffalo L 18–51.
+- The March 4 vs March 11, 1916 date conflict is retained without choosing a date.
+- Outstanding blockers: 1919-20 ten unidentified games; early 1915-16 through 1918-19 coverage not established.
+- `stage1_complete=false`; no Stage 2 authority. Protected main unchanged.
+
+The exact ZIP bytes are attached in the Research conversation; this branch note records their hash and provenance, not a claim that the ZIP was uploaded to GitHub.
