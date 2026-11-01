@@ -416,11 +416,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
     "recommendation_map_sha256": "4215e63925669a1cec6db448ca64e929b75c4fc2a80ac3fcec8a14b8b7a69aff",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "loyola-chicago-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
     "school_key": "loyola-chicago",
