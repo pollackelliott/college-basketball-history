@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "58294c871817516ba60d8fa97909f473f8f241779003ad9427c1797f320ebf89",
+    "implementation-stage2-status.json": "1d809a631880965e28bb9fcd6955e760baa627bc4337f7bf1a70874477b35c21",
+    "plan.json": "f73cb12ec7e2ef33fec41b528f69d204a60695e3d30b4feb3e0b27e53aec3b3e",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "f6e00093fed4ad5c163f0a5b8b666d960af5b6d871ed1884f26a349354c0df41"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "58294c871817516ba60d8fa97909f473f8f241779003ad9427c1797f320ebf89",
+    "implementation-stage2-status.json": "7e48aa9088a19f3fbf9909430f914ed7d788532e62b49485d47c98233c609cf5",
+    "plan.json": "924b7631be04ceb4fe7a4ff01ea1ea4c6b94efb416f83d98d7a459925d3be793",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "2cecb5d2c2497c757b51a9b6e6dbde92b78b79b5e7923637cdf5eb65c9692567"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "loyola-chicago-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "target_tree_sha": "2d959bf664bdfbf2d498f16022e420020c39acdd",
+  "tracked_stage2_mutation": "NONE"
+}
