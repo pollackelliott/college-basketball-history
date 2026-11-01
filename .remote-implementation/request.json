@@ -1,23 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-stage2-opponent-display-normalize-0001",
+  "request_id": "dayton-stage2-proposal-0001",
   "school_key": "dayton",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "previous_control_state_commit": "05382cd763655a87b831b8a01096b3ac172e47ba",
-  "previous_control_state_sha256": "bdf131ee004b0dec38e79989e29996b4772878f0e5fd07410b085e1ddf671d61",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "89b2e594e7884b9d605dece90b750bce8299bdc6",
+  "previous_control_state_sha256": "ef8f26dfdb0bfecdfbff131c6aa1176b9dd2bc3174afd1c2360eee0a34da4aa8",
   "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
   "target_branch": "data/dayton-onboarding",
-  "target_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/dayton/dayton-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "b4a83aee2361979267dea020efd94cbb8001b42ba87d4dd6a7d4870e23e93ece"
+  "target_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/dayton/dayton-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "72d0ce73428ba9df2f28013c7636bc4cc148da88985b286a913382baa0957cc6"
   },
   "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
   "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/dayton-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37"
+  },
   "creation_provenance": {
-    "origin": "Dayton Implementation lane — Stage 2 deterministic reconciliation",
-    "authorization": "Existing owner-authorized Dayton Stage 2 phase persists through OWNER_GATE_1_READY. The fresh-verified census found exactly two historical opponent-display representation conflicts (central-state-ohio and manchester-indiana), zero warnings, and zero recommendation decisions. Authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key census population. No historical reinterpretation, unrelated opponent cleanup, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, or protected-main mutation authority."
+    "origin": "Dayton Implementation lane — Stage 2 exact recommendation-map rehearsal",
+    "authorization": "Existing owner-authorized Dayton Stage 2 phase persists through OWNER_GATE_1_READY. Authorizes exactly one read-only STAGE2_PROPOSAL_REHEARSAL against the fresh-verified post-normalization successor and exact 162-decision recommendation map. No Owner Gate 1 approval/fill, pre-seal rehearsal, seal, sealed apply, release, Preview, merge, Production proof, recovery, current-main refresh, or tracked basketball mutation authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
@@ -29,8 +34,8 @@
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
-    "stage2_proposal_rehearsal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
