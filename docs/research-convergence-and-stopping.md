@@ -59,6 +59,16 @@ a played-game ledger, or authorize Stage 2 without a subsequent durable Stage 1 
 checkpoint. Record the identified-game count separately from the unidentified source
 coverage gap in all subsequent handoffs.
 
+A distinct **owner-approved, exact-parent, institutional aggregate-reconciled
+founding-era gap** may converge only after the permanent aggregate-coverage
+auditor proves exhaustive research, the explicit institution-level full-season
+W/L and total, the exact difference from independently identified games, and
+zero unrelated Stage 1 blockers. The owner authority must already be durably
+registered under protected-main governance. The audit does not create games
+or close Stage 1; a separate unchanged-ledger closeout and independent
+verify-closeout are required. Retain the full season-level missing identity
+debt and distinct public aggregate-versus-documented counts.
+
 A genuinely **unquantified inception/founding-era season** or an **identified competitive
 game whose result remains unknowable** may converge only through the separate
 `EARLY_HISTORY_UNCERTAINTY` contract in `docs/stage1-game-universe-contract.md`.
