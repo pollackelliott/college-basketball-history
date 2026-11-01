@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "dayton-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "dayton",
+  "previous_control_state_commit": "d29558d43957cb9ae71213410f53eb4e49a46214",
+  "previous_control_state_sha256": "ea12ff1261b9f8559938ba4ecc55998d7b246d0d66c21c36d5aece0c53fb56fc",
+  "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "research_checkpoint": {
+    "sha256": "804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f",
+    "research_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "d29558d43957cb9ae71213410f53eb4e49a46214",
+      "path_prefix": ".remote-implementation/transports/dayton/dayton-stage1-0001-final/piece-",
+      "part_count": 4
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Dayton serialized Implementation lane — owner-authorized Stage 1",
+    "authorization": "Owner explicitly concluded Dayton Research and authorized Dayton serialized Implementation from immutable RESEARCH_FROZEN SHA-256 804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f with accepted INCEPTION+ scope. This request performs only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main. It carries no Research change, Phase 0, shared/global mutation, Stage 2, owner-gate, release, recovery, protected-main mutation, or other-school authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
