@@ -1,0 +1,206 @@
+name: Saint Louis CBBG-0182742 seal rehearsal
+
+on:
+  push:
+    branches:
+      - automation/saint-louis-cbbg-0182742-correction
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  correction-seal-rehearsal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact correction branch head
+        uses: actions/checkout@v4
+        with:
+          ref: 301a823f1e7f4f73624a49146ec704603b718e4d
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate protected main and exact correction branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main" "+refs/heads/data/saint-louis-correction:refs/remotes/origin/data/saint-louis-correction"
+          test "$(git rev-parse refs/remotes/origin/main)" = "bed68f763a7ea8920c6ba830b004334b16c9e303"
+          test "$(git rev-parse refs/remotes/origin/data/saint-louis-correction)" = "301a823f1e7f4f73624a49146ec704603b718e4d"
+          test "$(git rev-parse HEAD)" = "301a823f1e7f4f73624a49146ec704603b718e4d"
+          changed="$(git diff --name-only bed68f763a7ea8920c6ba830b004334b16c9e303..HEAD)"
+          test "$changed" = $'schools/saint-louis/opponents.csv\nschools/saint-louis/source-games.csv'
+          test -z "$(git status --porcelain --untracked-files=all)"
+
+      - name: Recover exact correction Integration Freeze
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/preflight .onboarding/saint-louis
+          gh run download 41307902063 -n saint-louis-cbbg-0182742-correction-preflight -D /tmp/preflight
+          test "$(sha256sum /tmp/preflight/saint-louis-correction-integration-freeze.json | awk '{print $1}')" = "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790"
+          test "$(sha256sum /tmp/preflight/saint-louis-correction-research-frozen.zip | awk '{print $1}')" = "1a414ec26fa560134052289341da1d1557cd1eef114879568fc2fd094d623c2e"
+          cp /tmp/preflight/saint-louis-correction-integration-freeze.json .onboarding/saint-louis/integration-freeze.json
+
+      - name: Regenerate authoritative Stage 2 on published correction head
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/implementation_stage2.py saint-louis
+          python - <<'PY'
+          import json
+          s=json.load(open(".onboarding/saint-louis/implementation-stage2-status.json"))
+          assert s["status"]=="CAPABILITY_CENSUS_READY", s
+          p=s["preflight"]
+          assert p["blocker_count"]==0 and p["warning_count"]==0 and p["decision_count"]==1, p
+          assert p["decision_universe_sha256"]=="8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452", p
+          plan=json.load(open(".onboarding/saint-louis/plan.json"))
+          assert plan["summary"]["correction_transaction_kind"]=="SINGLE_GAME_IDENTITY"
+          assert plan["summary"]["correction_source_game_id"]=="saint-louis-1916-17-005"
+          assert plan["summary"]["correction_canonical_game_id"]=="CBBG-0182742"
+          assert len(plan["decisions"])==1
+          d=plan["decisions"][0]
+          assert d["decision_id"]=="CORRECTION-IDENTITY-SAINT-LOUIS-1916-17-005-CBBG-0182742"
+          assert d["recommended_action"]=="APPLY_CORRECTION_IDENTITY_PATCH"
+          assert d["allowed_actions"]==["APPLY_CORRECTION_IDENTITY_PATCH"]
+          assert d["old_opponent_key"]=="loyola-chicago" and d["new_opponent_key"]=="loyola-academy"
+          PY
+
+      - name: Write exact owner-authorized recommendation map
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/saint-louis-correction-map.json <<'JSON'
+          {
+            "decisions": {
+              "CORRECTION-IDENTITY-SAINT-LOUIS-1916-17-005-CBBG-0182742": "APPLY_CORRECTION_IDENTITY_PATCH"
+            },
+            "basis_by_decision": {
+              "CORRECTION-IDENTITY-SAINT-LOUIS-1916-17-005-CBBG-0182742": "Explicit owner ruling and Control Center authorization: on 1917-01-17 Saint Louis played Loyola Academy, not Loyola University Chicago. Fresh-verified Loyola reconciliation diagnostic loyola-chicago-stage2-reconciliation-diagnostic-0001, trace SHA-256 14b13a717bc389a999eca31ea382657f408b59116f04070663cc6ea5623e8131. Preserve literal Saint Louis source_opponent_label/raw_text and retarget only the normalized opponent identity through the repository-owned SINGLE_GAME_IDENTITY transaction."
+            }
+          }
+          JSON
+          sha256sum /tmp/saint-louis-correction-map.json
+
+      - name: Run exact-map permanent proposal rehearsal
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/implementation_stage2.py saint-louis --map /tmp/saint-louis-correction-map.json
+          python - <<'PY'
+          import json
+          s=json.load(open(".onboarding/saint-louis/implementation-stage2-status.json"))
+          assert s["status"]=="OWNER_GATE_1_READY", s
+          assert s["preflight"]["decision_universe_sha256"]=="8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452"
+          assert s["recommendation_map"]["decision_count"]==1
+          assert s["recommendation_map"]["action_counts"]=={"APPLY_CORRECTION_IDENTITY_PATCH":1}
+          print(json.dumps(s,indent=2,sort_keys=True))
+          PY
+
+      - name: Carry explicit owner authority into real Gate 1 review
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/onboarding_hardening.py fill-review saint-louis --map /tmp/saint-louis-correction-map.json
+          python - <<'PY'
+          import csv
+          rows=list(csv.DictReader(open(".onboarding/saint-louis/review.csv",encoding="utf-8-sig",newline="")))
+          assert len(rows)==1
+          r=rows[0]
+          assert r["decision"]=="APPLY_CORRECTION_IDENTITY_PATCH"
+          assert r["source_game_id"]=="saint-louis-1916-17-005"
+          assert r["canonical_game_id"]=="CBBG-0182742"
+          assert r["resolution_basis"]
+          PY
+
+      - name: Run permanent pre-seal technical rehearsal
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/onboarding_hardening.py rehearse-review saint-louis
+
+      - name: Cryptographically seal carried Owner Gate 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/onboard_school.py saint-louis --approve --approved-by "project-owner-control-center-cbbg-0182742"
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          p=Path(".onboarding/saint-louis/approved-plan.json")
+          a=json.loads(p.read_text())
+          assert a["school_key"]=="saint-louis"
+          assert a["summary"]["correction_transaction_kind"]=="SINGLE_GAME_IDENTITY"
+          assert a["summary"]["correction_source_game_id"]=="saint-louis-1916-17-005"
+          assert a["summary"]["correction_canonical_game_id"]=="CBBG-0182742"
+          assert len(a["decisions"])==1
+          assert a["decisions"][0]["decision"]=="APPLY_CORRECTION_IDENTITY_PATCH"
+          print("approved_plan_hash",a["approved_plan_hash"])
+          print("approved_plan_file_sha256",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+
+      - name: Disposable sealed apply replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          approved="$(python -c 'import json; print(json.load(open(".onboarding/saint-louis/approved-plan.json"))["approved_plan_hash"])')"
+          python tools/onboard_school.py saint-louis --apply --approved-plan "$approved"
+          python tools/onboard_school.py saint-louis --verify
+          git diff --binary > /tmp/saint-louis-correction-sealed-successor.patch
+          git diff --name-only > /tmp/saint-louis-correction-sealed-changed-paths.txt
+          git diff --stat > /tmp/saint-louis-correction-sealed-stat.txt
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          p=Path(".onboarding/saint-louis/approved-plan.json")
+          a=json.loads(p.read_text())
+          changed=[x for x in subprocess.check_output(["git","diff","--name-only"],text=True).splitlines() if x]
+          summary={
+            "schema_version":1,
+            "status":"SEALED_APPLY_REPLAY_PASS",
+            "base_branch_sha":"301a823f1e7f4f73624a49146ec704603b718e4d",
+            "protected_main_sha":"bed68f763a7ea8920c6ba830b004334b16c9e303",
+            "decision_universe_sha256":"8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452",
+            "recommendation_map_sha256":hashlib.sha256(Path("/tmp/saint-louis-correction-map.json").read_bytes()).hexdigest(),
+            "approved_plan_hash":a["approved_plan_hash"],
+            "approved_plan_file_sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
+            "changed_paths":changed,
+            "changed_path_count":len(changed),
+            "release_manifest_sha256":hashlib.sha256(Path(".onboarding/saint-louis/release-manifest.json").read_bytes()).hexdigest(),
+            "source_game_id":"saint-louis-1916-17-005",
+            "canonical_game_id":"CBBG-0182742",
+            "transaction_kind":"SINGLE_GAME_IDENTITY"
+          }
+          Path("/tmp/saint-louis-correction-seal-summary.json").write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+          cp .onboarding/saint-louis/plan.json /tmp/saint-louis-correction-fresh-plan.json
+          cp .onboarding/saint-louis/review.csv /tmp/saint-louis-correction-filled-review.csv
+          cp .onboarding/saint-louis/approved-plan.json /tmp/saint-louis-correction-approved-plan.json
+          cp .onboarding/saint-louis/release-manifest.json /tmp/saint-louis-correction-release-manifest.json
+          cp .onboarding/saint-louis/implementation-stage2-status.json /tmp/saint-louis-correction-stage2-owner-ready-status.json
+
+      - name: Upload exact seal and disposable successor artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saint-louis-cbbg-0182742-correction-seal-rehearsal
+          path: |
+            /tmp/saint-louis-correction-map.json
+            /tmp/saint-louis-correction-fresh-plan.json
+            /tmp/saint-louis-correction-filled-review.csv
+            /tmp/saint-louis-correction-approved-plan.json
+            /tmp/saint-louis-correction-release-manifest.json
+            /tmp/saint-louis-correction-stage2-owner-ready-status.json
+            /tmp/saint-louis-correction-sealed-successor.patch
+            /tmp/saint-louis-correction-sealed-changed-paths.txt
+            /tmp/saint-louis-correction-sealed-stat.txt
+            /tmp/saint-louis-correction-seal-summary.json
+          if-no-files-found: warn
+          retention-days: 14
