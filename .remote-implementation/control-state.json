@@ -453,11 +453,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "a7920be36ae882cfbb0710e367eb06039c0ff65d39cf9e121dc31bec6995fb16",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "loyola-chicago-release-readiness-0001",
     "school_key": "loyola-chicago",
     "target_branch": "data/loyola-chicago-onboarding",
