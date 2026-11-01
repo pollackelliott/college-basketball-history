@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "6ca73d3688eecc45674a29f3798be8ebc3a341eb060b5eba78a9de7c2eb01645",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "pr_number": 422,
+  "preview_deployment_id": 7474917832,
+  "preview_deployment_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "preview_url": "https://college-basketball-history-oxpae9cyn-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "saint-louis-correction-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3"
+}
