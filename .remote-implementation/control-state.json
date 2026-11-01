@@ -437,11 +437,11 @@
   "current_sequence": 202,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "c64aec952514b01f2757de0800cb37c1f4ecfc06",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "loyola-chicago-stage2-current-main-refresh-0001",
     "school_key": "loyola-chicago",
     "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
