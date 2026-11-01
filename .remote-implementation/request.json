@@ -1,32 +1,39 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-correction-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "saint-louis",
-  "previous_control_state_commit": "7e70b91110ac47aadefaa6e5f4b254045c1cbfc0",
-  "previous_control_state_sha256": "ed5121c2a1f749bf889b4ac40d3baea0848270034533c3b2d66c4fa99a97572b",
-  "expected_protected_main_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
-  "target_branch": "data/saint-louis-correction",
-  "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
-  "pr_number": 422,
-  "merge_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "16c6afe86b3e159c27f4babdd2f289cbab29b2ee2f34bcb0df176b1fa299fd16"
+  "request_id": "loyola-chicago-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "loyola-chicago",
+  "previous_control_state_commit": "ad24b5567295e85df023abe507cf6462d8ca4722",
+  "previous_control_state_sha256": "5c07b7da0f7e45fe92d75d1edd5c9a1eaad5198e9dc666699c65f438b68ca53e",
+  "expected_protected_main_sha": "c64aec952514b01f2757de0800cb37c1f4ecfc06",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-phase0-0001/successor-manifest.json",
+    "sha256": "ab149af5e216d1d28c253162252f701535368aa0facaaf34d8e6b831716757d6"
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "d755a89598aaa5cba092adc24b7f20278613b97b6e7db8490915b4a2e3183dc5"
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "130cc370d79dd5ae2841cc3e8409dfcabde9e51bab1ca3f89ef527a80ed6d662"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Deterministic disjoint-path current-main refresh after completed Saint Louis CBBG-0182742 dependency correction; no historical or shared-reference decision is being made."
   },
   "creation_provenance": {
-    "origin": "Saint Louis post-publication correction — exact post-merge Production proof",
-    "authorization": "Owner's explicit APPROVED. Proceed authorized the complete final release phase for exact PR #422 head 97ff09b8047907436e1513b8ed0166c8a1cdafb3 and Preview deployment 7474917832. Fresh-verified Owner Gate 2 approval passed, PR #422 was merged once through the authorized GitHub connector with expected_head_sha 97ff09b8047907436e1513b8ed0166c8a1cdafb3, and protected main is exactly merge afb6be8b409c1dad7348a8903704c7ea95d2a686 with first parent ef2dd1ebf9c1de0541dc4892513a92fac3089487 and second parent 97ff09b8047907436e1513b8ed0166c8a1cdafb3. This request performs only read-only permanent merged-main validation, exact-SHA Production deployment proof, changed public JSON equivalence, and independent fresh verification. No merge replay, mutation, new gate, recovery, or other-school authority."
+    "origin": "Loyola Chicago Implementation chat succession - current-main refresh recovery",
+    "authorization": "Control Center explicitly authorized exactly one Loyola Chicago STAGE2_CURRENT_MAIN_REFRESH against protected main c64aec952514b01f2757de0800cb37c1f4ecfc06 and predecessor a62bc2d87855aed59bf90a823b1b06168d8e149e. Owner authorization persists through the deterministic Stage 2 phase to OWNER_GATE_1_READY, but this request carries no Owner Gate 1 authority."
   },
   "authority": {
     "phase0": false,
+    "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
@@ -36,11 +43,11 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
