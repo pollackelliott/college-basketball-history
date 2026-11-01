@@ -437,7 +437,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "44dc7edc65196aef276ed9347210a16683623b7698c1d678f1a6f4b198170930",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -447,7 +447,7 @@
     "production_deployment_id": 7475726693,
     "production_json_checked_count": 3,
     "protected_main_sha": "afb6be8b409c1dad7348a8903704c7ea95d2a686",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "saint-louis-correction-release-production-proof-0001",
     "school_key": "saint-louis"
   },
