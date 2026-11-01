@@ -4,7 +4,7 @@
   "request_id": "loyola-chicago-stage2-sealed-apply-0001",
   "school_key": "loyola-chicago",
   "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "45e91f2ea98802fdf4774a92b3631dec97f40c64",
+  "previous_control_state_commit": "6021bcefeb99c34bf6a4008ad349359d078e0d44",
   "previous_control_state_sha256": "3d7dd2d96cb5eb6cbf19bdca502ac3782df032e9519a3d4074bd6072fae7e786",
   "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
   "target_branch": "data/loyola-chicago-onboarding",
@@ -28,7 +28,7 @@
   "decision_id_set_sha256": "bbdd043ec83aa3b4cb94751f11ce1591a1f40b37387cf381f2bbe194eb8ff4f5",
   "creation_provenance": {
     "origin": "ChatGPT Loyola Chicago serialized Implementation — exact sealed apply",
-    "authorization": "Owner explicitly approved the fresh-verified 314-decision Loyola Chicago Gate 1 packet. That approval persists through fill, pre-seal rehearsal, cryptographic seal, transactional sealed apply, and independent post-apply verification. The exact Gate 1 seal is now independently fresh-verified PASS. Authorize exactly one bounded STAGE2_SEALED_APPLY against loyola-chicago-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. No new historical authority, release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority is granted."
+    "authorization": "The exact Loyola Chicago Gate 1 seal is fresh-verified PASS under the owner's explicit Gate 1 approval. Authorize exactly one bounded remote STAGE2_SEALED_APPLY against loyola-chicago-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. This creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
   },
   "authority": {
     "owner_gate_1": false,
