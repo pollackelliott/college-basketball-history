@@ -4,7 +4,7 @@
   "request_id": "dayton-stage2-census-0001",
   "operation": "STAGE2_CENSUS",
   "school_key": "dayton",
-  "previous_control_state_commit": "8e78c65c35fc786110b35a5849f77a810d5c0a5d",
+  "previous_control_state_commit": "9e76ac61d613ab94f6b37ca5e0dfa0ed40876971",
   "previous_control_state_sha256": "af2e0e9e3fe3075c03ba52063d8a79d314836576f3051b0ab7cd6ed7380be6a6",
   "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
   "target_branch": "data/dayton-onboarding",
