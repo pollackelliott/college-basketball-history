@@ -491,6 +491,22 @@ def _verify_post_publication_correction_authority(
     integration_base = str(integration.get("integration_base_sha") or "")
     if not origin_main or integration_base != origin_main:
         raise Stop("STAGE2_CORRECTION_INTEGRATION_BASE_MISMATCH")
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/%s:refs/remotes/origin/remote-stage2-correction-authority"
+        % target_branch,
+        cwd=source_repo,
+    )
+    fetched_target = git(
+        "rev-parse",
+        "refs/remotes/origin/remote-stage2-correction-authority",
+        cwd=source_repo,
+    ).stdout.strip()
+    if fetched_target != target_sha:
+        raise Stop("STAGE2_CORRECTION_TARGET_FETCH_MISMATCH")
+
     current_main = request["expected_protected_main_sha"]
     if git(
         "merge-base", "--is-ancestor", origin_main, current_main,
