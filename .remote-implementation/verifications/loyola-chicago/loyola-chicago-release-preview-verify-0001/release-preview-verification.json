@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "b0521435af112401a76e5ba686aeef57bb6a3970758c25c43fca6da84691aa28",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "pr_number": 425,
+  "preview_deployment_id": 7478037813,
+  "preview_deployment_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "preview_url": "https://college-basketball-history-lchlxgq23-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "loyola-chicago-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d"
+}
