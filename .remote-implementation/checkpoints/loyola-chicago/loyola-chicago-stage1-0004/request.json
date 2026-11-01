@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage1-0004",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "loyola-chicago",
+  "previous_control_state_commit": "6160018662b7eb6e9d0fec1bd7ca5c6771f425c0",
+  "previous_control_state_sha256": "8cb3d7231ba458e345986fdc7b9337bfcc498ffc83a77238f58c40410028bc19",
+  "expected_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "research_checkpoint": {
+    "sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
+    "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "797835f03024f8a08c1c4027d754e909cbc970be",
+      "path_prefix": ".remote-implementation/transports/loyola-chicago/loyola-chicago-stage1-0001-final/piece-",
+      "part_count": 18
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-stage1-0004/venue-reconciliation.json",
+    "sha256": "6c2674dd3e6d545e1a0df239170f1a925dc6f7ae8dac4640d0406ee7573bcf1f"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — post-maintenance Stage 1 final reconciliation",
+    "authorization": "Same owner-authorized Loyola Chicago Stage 1 phase. Adds only the already-Control-Center-determined Assembly Hall survivor mapping after exact maintenance PR #419 merged, alongside five previously authenticated representation-only mappings. Complete read-only Stage 1 inventory only; no Phase 0, Stage 2, new historical authority, shared/global mutation, gate, release, or protected-main mutation authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
