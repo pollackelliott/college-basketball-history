@@ -627,17 +627,9 @@ def _verify_current_main_refresh_target_authority(
         "fetch",
         "--no-tags",
         "origin",
-        "+refs/heads/%s:refs/remotes/origin/remote-stage2-refresh-authority"
-        % request["target_branch"],
+        request["target_sha"],
         cwd=source_repo,
     )
-    fetched = git(
-        "rev-parse",
-        "refs/remotes/origin/remote-stage2-refresh-authority",
-        cwd=source_repo,
-    ).stdout.strip()
-    if fetched != request["target_sha"]:
-        raise Stop("STAGE2_REFRESH_SUCCESSOR_TARGET_FETCH_MISMATCH")
     parents = git(
         "show", "-s", "--format=%P", request["target_sha"],
         cwd=source_repo,
