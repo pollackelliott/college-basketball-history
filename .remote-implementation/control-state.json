@@ -214,18 +214,19 @@
     "saint-louis-correction-release-preview-verify-0001",
     "saint-louis-correction-release-gate2-approval-0001",
     "saint-louis-correction-release-production-proof-0001",
-    "loyola-chicago-stage2-current-main-refresh-0001"
+    "loyola-chicago-stage2-current-main-refresh-0001",
+    "loyola-chicago-stage2-census-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "loyola-chicago-stage2-census-0002",
+  "active_request_sha256": "158e6b14d423eb88c2584336335a5e7b562a531e174fb5565f3de282b70b37ed",
+  "active_school_key": "loyola-chicago",
+  "active_target_branch": "data/loyola-chicago-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -451,8 +452,11 @@
     "target_predecessor_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
     "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41338260634",
+  "lock_acquisition_request_commit": "62a3bf80443b8594eef5aab46884e3012fb8cda1",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
