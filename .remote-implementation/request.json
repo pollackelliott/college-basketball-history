@@ -1,45 +1,43 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "loyola-chicago-stage2-reconciliation-diagnostic-0001",
-  "school_key": "loyola-chicago",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "52f9d8dfcd61374245e4dd0719f62d0d0a25a137",
-  "previous_control_state_sha256": "051448efdd0c56ed46b52d04d5e4fa5b2b80cf0ae241e0751ed953c0b9805c77",
-  "expected_protected_main_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "request_id": "saint-louis-correction-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "saint-louis",
+  "previous_control_state_commit": "8926563c338bd020225a40fec03b5a7dbcfeb37e",
+  "previous_control_state_sha256": "e5508d58e42e69fba84a4f04f731b5aa4144de6e476ee758b3b4832ebba6924a",
+  "expected_protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+  "correction_integration_freeze": {
+    "path": ".remote-implementation/inputs/saint-louis-correction-cbbg-0182742/integration-freeze.json",
+    "sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790"
+  },
+  "integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
   "creation_provenance": {
-    "origin": "Loyola Chicago serialized Implementation Stage 2 — owner-approved CBBG-0182742 opponent-identity/game-universe correction diagnosis",
-    "authorization": "Owner explicitly determined CBBG-0182742 is not a Loyola University Chicago game: Saint Louis's 1917 opponent was Loyola Academy. This bounded read-only diagnostic is authorized only to trace the exact permanent reconciliation path for CBBG-0182742 against the fresh-verified blocked proposal 0006, because the current 315-decision map exposes only a canonical_site_patch for this canonical-only game and cannot legally retarget/remove the Loyola Chicago participant. Preserve Saint Louis evidence; do not fabricate a Loyola University source row. No tracked mutation, new historical decision, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, or unrelated authority."
+    "origin": "Saint Louis post-publication correction — remote serialization reproduction after PR #421",
+    "authorization": "Control Center authorized resumption of the already-settled one-game SINGLE_GAME_IDENTITY correction for saint-louis-1916-17-005 / CBBG-0182742. This request performs only the first correction-aware read-only Stage 2 census from the exact existing correction branch and hash-bound POST_PUBLICATION_CORRECTION Integration Freeze. No Phase-0 successor, opponent-display normalization, new historical decision, renewed Owner Gate 1 decision, release, merge, or unrelated mutation is authorized."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": true,
+    "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false,
-    "venue_identity_maintenance": false
-  },
-  "target_branch": "data/loyola-chicago-onboarding",
-  "target_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage2-proposal-0006/checkpoint-manifest.json",
-    "sha256": "a28e2e31aae3ca484c9f5fa613dfb584479a3592ad8be79fd5af902db6bd11df"
-  },
-  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
-  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
-  "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
-  "recommendation_map_sha256": "81495b394815b021d68d6e81eca1162ec852b21ed1d24c6df69bdd4cb85651f4",
-  "canonical_game_id": "CBBG-0182742"
+    "release_production_proof": false
+  }
 }
