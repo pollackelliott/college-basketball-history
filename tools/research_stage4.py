@@ -41,6 +41,7 @@ from research_stage4_closeout import (
 AUTHORING_DIR = "stage4-authoring"
 AUTHORING_FILES = ("opponents.csv", "venues.csv", "conferences.csv")
 EARLY_HISTORY_AUTHORING_FILE = "early-history-uncertainty.json"
+AGGREGATE_COVERAGE_AUTHORING_FILE = "season-coverage.json"
 
 OPPONENT_FIELDS = {
     "source_program_key",
@@ -800,6 +801,7 @@ def _source_notes(
     prefix: str,
     coverage: dict[str, str],
     early_history: dict[str, Any] | None = None,
+    aggregate_coverage: dict[str, Any] | None = None,
 ) -> str:
     kinds = Counter(
         _first(row, "source_kind")
@@ -838,6 +840,22 @@ def _source_notes(
                 "```",
             ]
         )
+    if aggregate_coverage:
+        lines.extend(
+            [
+                "",
+                "## Research-exhausted institutional aggregate coverage gap",
+                "",
+                "This is season-level historical accounting, not one or more game records.",
+                "The official season record and separately identified games are "
+                "not interchangeable. Do not allocate the unidentified games "
+                "to invented dates, opponents, or scores.",
+                "",
+                "```json",
+                json.dumps(aggregate_coverage, indent=2, sort_keys=True),
+                "```",
+            ]
+        )
     lines.extend(["", "## Durable row-level source families", ""])
     lines.extend(f"- {key}: {count:,} game rows" for key, count in sorted(kinds.items()))
     if urls:
@@ -868,6 +886,65 @@ def _source_notes(
             detail = source.get("url") or source.get("use") or ""
             lines.append(f"- {label}" + (f" — {detail}" if detail else ""))
     return "\n".join(lines) + "\n"
+
+
+def _aggregate_coverage_payload(
+    archive: zipfile.ZipFile,
+    prefix: str,
+    manifest: dict[str, Any],
+    *,
+    school_key: str,
+    research_base_sha: str,
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]], dict[str, Any]]:
+    logical = AUTHORING_DIR + "/" + AGGREGATE_COVERAGE_AUTHORING_FILE
+    member = prefix + logical
+    if member not in archive.namelist():
+        return None, [], {"present": False}
+    defects: list[dict[str, Any]] = []
+    if logical not in _manifest_names(manifest):
+        defects.append({"reason": "AGGREGATE_COVERAGE_NOT_MANIFESTED", "name": logical})
+    raw = archive.read(member)
+    try:
+        payload = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return None, [{"reason": "AGGREGATE_COVERAGE_INVALID_JSON"}], {"present": True}
+    entries = payload.get("coverage") if isinstance(payload, dict) else None
+    if payload.get("schema_version") != 1 or not isinstance(entries, list) or not entries:
+        defects.append({"reason": "AGGREGATE_COVERAGE_INVALID_STRUCTURE"})
+        entries = []
+    years: set[str] = set()
+    for item in entries:
+        if not isinstance(item, dict):
+            defects.append({"reason": "AGGREGATE_COVERAGE_INVALID_ITEM"})
+            continue
+        season = str(item.get("season", "")).strip()
+        if not season or season in years:
+            defects.append({"reason": "AGGREGATE_COVERAGE_DUPLICATE_SEASON", "season": season})
+        years.add(season)
+        if item.get("school_key") != school_key or item.get("research_base_sha") != research_base_sha:
+            defects.append({"reason": "AGGREGATE_COVERAGE_AUTHORITY_MISMATCH", "season": season})
+        if item.get("terminal_classification") != "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP":
+            defects.append({"reason": "AGGREGATE_COVERAGE_TERMINAL_MISMATCH", "season": season})
+        if not re.fullmatch(r"[0-9a-f]{64}", str(item.get("audit_sha256", ""))):
+            defects.append({"reason": "AGGREGATE_COVERAGE_AUDIT_HASH_INVALID", "season": season})
+        official = item.get("institutional_record", {})
+        named = item.get("identified_record", {})
+        missing = item.get("unidentified_record", {})
+        if (not all(isinstance(r, dict) for r in (official, named, missing))
+            or any(not isinstance(r.get(k), int) or r[k] < 0
+                   for r in (official, named, missing) for k in ("wins", "losses", "games"))
+            or any(official[k] - named[k] != missing[k] for k in ("wins", "losses", "games"))
+            or missing.get("wins", 0) + missing.get("losses", 0) != missing.get("games", 0)
+            or not missing.get("games", 0)):
+            defects.append({"reason": "AGGREGATE_COVERAGE_ARITHMETIC_INVALID", "season": season})
+    return payload, defects, {
+        "present": True, "sha256": sha256_bytes(raw),
+        "seasons": sorted(years),
+        "unidentified_games": sum(
+            x.get("unidentified_record", {}).get("games", 0)
+            for x in entries if isinstance(x, dict)
+        ),
+    }
 
 
 def _early_history_payload(
@@ -1007,6 +1084,14 @@ def inspect_checkpoint(
             school_key=school_key,
             research_base_sha=research_base_sha,
         )
+        (
+            aggregate_coverage,
+            aggregate_coverage_defects,
+            aggregate_coverage_summary,
+        ) = _aggregate_coverage_payload(
+            archive, layout["prefix"], manifest,
+            school_key=school_key, research_base_sha=research_base_sha,
+        )
 
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
@@ -1031,7 +1116,9 @@ def inspect_checkpoint(
             "missing_authoring_files": missing,
             "coverage": coverage,
             "early_history_uncertainty": early_history_summary,
-            "defects": list(coverage_defects) + early_history_defects,
+            **({"historical_season_coverage": aggregate_coverage_summary}
+               if aggregate_coverage else {}),
+            "defects": list(coverage_defects) + early_history_defects + aggregate_coverage_defects,
         }
         if missing:
             return result
@@ -1192,6 +1279,15 @@ def author(
             if early_member in archive.namelist()
             else None
         )
+        aggregate_member = (
+            layout["prefix"] + AUTHORING_DIR + "/"
+            + AGGREGATE_COVERAGE_AUTHORING_FILE
+        )
+        aggregate_coverage = (
+            json.loads(archive.read(aggregate_member))
+            if aggregate_member in archive.namelist()
+            else None
+        )
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
             for filename in AUTHORING_FILES
@@ -1225,6 +1321,7 @@ def author(
                 layout["prefix"],
                 preflight["coverage"],
                 early_history,
+                aggregate_coverage,
             ),
             encoding="utf-8",
         )
