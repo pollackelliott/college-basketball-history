@@ -581,20 +581,21 @@ def main() -> int:
     conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
     assertion_rows = read_csv(assertions_path)
-    historical_coverage_rows = read_csv(
-        repo_root / "data" / "reference" / "historical-season-coverage.csv"
-    )
-    authority_registry = json.loads((
-        repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
-    ).read_text(encoding="utf-8"))
-    if authority_registry.get("authority_type") != "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE":
-        raise ValueError("Historical coverage owner authority registry invalid")
-    authority_cases = {
-        (item["school_key"], item["season"]): item
-        for item in authority_registry["cases"]
-    }
-    if len(authority_cases) != len(authority_registry["cases"]):
-        raise ValueError("Historical coverage owner authority keys duplicated")
+    coverage_path = repo_root / "data" / "reference" / "historical-season-coverage.csv"
+    historical_coverage_rows = read_csv(coverage_path) if coverage_path.exists() else []
+    authority_cases = {}
+    if historical_coverage_rows:
+        authority_registry = json.loads((
+            repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
+        ).read_text(encoding="utf-8"))
+        if authority_registry.get("authority_type") != "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE":
+            raise ValueError("Historical coverage owner authority registry invalid")
+        authority_cases = {
+            (item["school_key"], item["season"]): item
+            for item in authority_registry["cases"]
+        }
+        if len(authority_cases) != len(authority_registry["cases"]):
+            raise ValueError("Historical coverage owner authority keys duplicated")
 
     global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
     venue_geo_errors = canonical_venue_geography_errors(
