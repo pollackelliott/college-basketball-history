@@ -1,0 +1,68 @@
+{
+  "actual_published_target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "apply_runtime_tool_sha256": {
+    "tools/onboard_school.py": "f85873ca0dacd6a0b4e0706f17e2d417f35f57543de4c4bf0d81d74820f5ac0f",
+    "tools/onboarding_plan.py": "3b8429587b0ce8b7c726cceea545c7c171df3ff3b3daee874bdef42c4274c946"
+  },
+  "approved_plan_hash": "bfe16499cd111951c435f001f9f5199a8044a733695c2c2fe4d5b71a57203016",
+  "approved_plan_sha256": "7dce2420775a2fb737d29c71ff6ee25d72f3b423a838b4568988409b4b3f0c3d",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "a3102a0c6675045203c9a5bbe74c5fa103b04b06021a6736b468cabda3976845",
+    "data/evidence/game-assertions.csv": "cbfe09cf3855586ff49a6457e5a1850b8ca54e7220fd64159001e43e1e6429ea",
+    "data/reconciliation/onboarding-decisions/saint-louis-bfe16499cd11.json": "7dce2420775a2fb737d29c71ff6ee25d72f3b423a838b4568988409b4b3f0c3d",
+    "site/data/teams/saint-louis.json": "8e05549eae6b24bf5abd9dda6fe6fda5eab8540e4af21cc57843d866318a3920"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/onboarding-decisions/saint-louis-bfe16499cd11.json",
+    "site/data/teams/saint-louis.json"
+  ],
+  "current_main_preseal": {
+    "approved_plan_hash_preview": "342c290822f818c11bb97f41b18538d96482f69e6df7d965b39d0e171fea5bf3",
+    "changed_path_count": 4,
+    "equivalence_sha256": "98331928e1eb46b0d4c1a654f6b656c91e02a76e7f644c7a5f398a74660b3528",
+    "preseal_status": "READY_TO_SEAL",
+    "runtime_tool_sha256": {
+      "tools/onboard_school.py": "f85873ca0dacd6a0b4e0706f17e2d417f35f57543de4c4bf0d81d74820f5ac0f",
+      "tools/onboarding_hardening.py": "796d100669c1030955c72bee42f7302fdec783dacf554f7aa29b9dcf2995eb79"
+    },
+    "site_gate_normalized_sha256": "11b1c9137f891ff937d38bdfc14ac915a3aade82671aea7df673acb3d92ee904",
+    "tracked_stage2_mutation": "NONE"
+  },
+  "decision_id_set_sha256": "46cf87e27e35dba46e11775a4c72b96f519cdee5d738bbc02bab17bf58858b3a",
+  "decision_universe_sha256": "8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452",
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+  "filled_review_sha256": "06f10ca85bdfeaf3afcbd7b44243c250918c9c7e12b1f8e627f1c75793058c62",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "7d2fecc4f15c05b5a10a882311134467f1d5c63f",
+  "integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_SUCCESSOR",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "26e98ce99207b270826d21d64df12e8b59a8011c7aef2a902ce7c94f48b66fe8",
+  "prepared_commit_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "prepared_parent_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+  "prepared_tree_sha": "01f998681ca3d75732f7e2847aac88b8fa5bf99e",
+  "protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recommendation_map_sha256": "43eaa9a34b53fff0aac5e1f31df6aaf70e9171d46de6ebe740c896dc4e829d02",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "release_manifest_changed_path_count": 4,
+  "release_manifest_sha256": "0bde53d1ad5e77f12b554e48ed058dee5c5568bb5bed9d2a4516d70ff11e5898",
+  "repository_validation": "PASS",
+  "request_id": "saint-louis-correction-stage2-sealed-apply-0001",
+  "request_sha256": "6afe401388b4f735c5d82c24c992d892452bd0e61a81254c5f9c5f40f797e34e",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "stage2_gate1_seal_checkpoint_path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-stage2-gate1-seal-0001/checkpoint-manifest.json",
+  "stage2_gate1_seal_checkpoint_sha256": "449a2af80db6fdccfe1fc443e263fe48b5cb67bf09b7b1ce26a731f7520baf73",
+  "stage2_gate1_seal_verification_path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+  "stage2_gate1_seal_verification_sha256": "959b2044436fb680c7c2149b70a237f9908b6d6175654f137aa15ad8301bf1c5",
+  "target_branch": "data/saint-louis-correction",
+  "writeahead_commit": "f41c1391d7eb3046e3b1a2fe2f7d410f1afbca8c",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "382640c446d14a7f9e9fb5a142b04ccb412c84d6b7d35ffa4612ca24ea27e955"
+}
