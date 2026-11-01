@@ -233,15 +233,15 @@
   "active_lock_commit": "98727524b6d57e0bc882104c1e65bd80066a2651",
   "active_lock_owner": "github-actions:41358178638:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "active_prepared_tree_sha": "48cf5d226d288d4dadb3d6caa2914306aa170dea",
   "active_request_id": "dayton-phase0-0001",
   "active_request_sha256": "37c54630d708206d4a50b41b73b997a841c0e426b71b39a4f61b7deb2de4379f",
   "active_school_key": "dayton",
   "active_target_branch": "data/dayton-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/dayton/dayton-phase0-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "9992af5ac262a1c72f54b5f1ee5a1b67fb954acc69d1a53d50b332d36cf7d805",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -477,5 +477,5 @@
   "lock_acquisition_request_commit": "e1d21db3e26a8db38467afc8a32d2e0ee3360eea",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
