@@ -1,0 +1,47 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "85755e77bc6b0b207b3ed0ff89446b06647229484cc91ddede89f392658e06ae",
+    "implementation-stage2-status.json": "d2eab11d441efd49b53a04073ccf2b7580912d587dfecd5d87ce33f8cec4c7c7",
+    "plan.json": "a82e0cbfa72360865129a58fd5df9f0d98aa2d79222463fba9c990d3987654e2",
+    "review.csv": "e0ff27cf53da417593168c6cba291ab7f86a9672ae6f16693ae28caa5a9a3481",
+    "review.md": "d03753fdd6e5a56f05fc7c65fa9a277280f347fd0cb99649511a2bdefae1a9d3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "85755e77bc6b0b207b3ed0ff89446b06647229484cc91ddede89f392658e06ae",
+    "implementation-stage2-status.json": "25ba1e564deb734d02d18f12ab5181d5c15af483cf4989d9fe8a244f7d7bdb24",
+    "plan.json": "30c1c9f933667f955bc5a07c1e533d63d3c3f17ab47a29f17631989133a89986",
+    "review.csv": "e0ff27cf53da417593168c6cba291ab7f86a9672ae6f16693ae28caa5a9a3481",
+    "review.md": "c05cd989613d522621f9ab6df5c3c5d0f912586464ca5088878fa181a27633f8"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/dayton/opponents.csv",
+    "schools/dayton/source-games.csv"
+  ],
+  "decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+  "expected_blocker_keys": [
+    "central-state-ohio",
+    "manchester-indiana"
+  ],
+  "field_level_proof_sha256": "fe3cc088251f6ba393ff245ce279ef74b9173bc1b6437f6d77dcc5239883f442",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "b88a0cb470da241cf4b56e06e42f1d1b5c8567e5020dd6421260cae380d06916",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "dayton-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/dayton-onboarding",
+  "target_predecessor_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "target_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "target_tree_sha": "fed64f87c2a1e37be96c702309066e737ffc0835",
+  "tracked_stage2_mutation": "NONE"
+}
