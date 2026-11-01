@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-preseal-rehearsal-0001",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "7b90d8382aa3d1f067008a00e8d9262099c62e33",
+  "previous_control_state_sha256": "9ad8a29eb4e4d2b5ffab0029e3dd1fb29fd9bd90f4067880ba1a88a9b7d4c96f",
+  "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "46d16cae01e0e6265b2ab3fffe3f7be9a52c8df57967e56e236d0cc4a1117fb9"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "b28ff7b32a3fd9ea8fda8a61c1a31bd7991444875e025825b17f2fa9ef152938"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "decision_universe_sha256": "c981a9141685dd9417d103db01bf1c2db1a178213436823d5cb7a94786576f80",
+  "recommendation_map_sha256": "094bb55bc6fc5286fcb6f232856cd897d32fb01dbeb5e30520f068ea5cfcaf96",
+  "approved_plan_hash_preview": "42b0d5c9de4c71be832be3cc202bae669a95a2c58c0c0feec44c2bc6846be8c9",
+  "filled_review_sha256": "18e9925773eba6c1d5678a13ca186e0ab3816289099e2086d8249643a825e94b",
+  "decision_id_set_sha256": "bbdd043ec83aa3b4cb94751f11ce1591a1f40b37387cf381f2bbe194eb8ff4f5",
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation — fresh-verified Owner Gate 1 fill pre-seal technical rehearsal",
+    "authorization": "The owner's explicit Gate 1 approval remains authoritative for the exact Loyola Chicago 314-decision packet. Gate 1 fill completed and independently fresh-verified PASS. Authorize exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against fill checkpoint 46d16cae01e0e6265b2ab3fffe3f7be9a52c8df57967e56e236d0cc4a1117fb9 and verification b28ff7b32a3fd9ea8fda8a61c1a31bd7991444875e025825b17f2fa9ef152938. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, merge, release, Production, recovery, or unrelated authority is granted by this request."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
