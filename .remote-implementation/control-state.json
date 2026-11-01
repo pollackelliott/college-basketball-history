@@ -226,18 +226,19 @@
     "loyola-chicago-release-gate2-approval-0001",
     "loyola-chicago-release-production-proof-0001",
     "dayton-stage1-0001",
-    "dayton-stage1-0002"
+    "dayton-stage1-0002",
+    "dayton-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41358178638:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "dayton-phase0-0001",
+  "active_request_sha256": "37c54630d708206d4a50b41b73b997a841c0e426b71b39a4f61b7deb2de4379f",
+  "active_school_key": "dayton",
+  "active_target_branch": "data/dayton-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -470,8 +471,11 @@
     "stage1_reconciliation_sha256": "2cbd156d992d033f6d6e7feddeb0b24b5df53f14bbe1f34c5cba9d70713f7ea3",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41358178638",
+  "lock_acquisition_request_commit": "e1d21db3e26a8db38467afc8a32d2e0ee3360eea",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
