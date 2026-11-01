@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-proposal-0007",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "4c40bb3c451037be9e394b7bb48c1d198dc7fb7a",
+  "previous_control_state_sha256": "98ddeab6fbc119fa1cd72f52002f0b086e2ea570605b4329cec2903b55fa985e",
+  "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "46969f5f8323adf9feb2e7ba5174108bc978059886903a3df1de123c14874245"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "decision_universe_sha256": "c981a9141685dd9417d103db01bf1c2db1a178213436823d5cb7a94786576f80",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/loyola-chicago-stage2-proposal-0007/recommendation-map.json",
+    "sha256": "094bb55bc6fc5286fcb6f232856cd897d32fb01dbeb5e30520f068ea5cfcaf96"
+  },
+  "creation_provenance": {
+    "origin": "Loyola Chicago serialized Implementation Stage 2 — successor-map proposal after fresh current-main census and exact mechanical reconciliation",
+    "authorization": "Existing owner-authorized Loyola Stage 2 phase persists through exact-map proposal rehearsal and OWNER_GATE_1_READY. Fresh census 0002 is independently verified PASS on target 9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d. Mechanical comparison against prior 315-decision proposal 0006 found 314 substantively identical decisions, zero added decisions, zero changed substantive review fields, and exactly one obsolete decision: CANONICAL-SITE-PATCH-CBBG-0182742. The successor recommendation map carries forward all 314 equivalent recommendations and removes only that obsolete Loyola site patch, which disappeared after the accepted Saint Louis Loyola Academy correction. No historical decision is reopened and no Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, protected-main mutation, or unrelated work is authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
