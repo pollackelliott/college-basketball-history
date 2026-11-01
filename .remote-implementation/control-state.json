@@ -398,11 +398,11 @@
   "current_sequence": 183,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
     "operation": "PHASE0",
     "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "loyola-chicago-phase0-0001",
     "school_key": "loyola-chicago",
     "successor_manifest_path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-phase0-0001/successor-manifest.json",

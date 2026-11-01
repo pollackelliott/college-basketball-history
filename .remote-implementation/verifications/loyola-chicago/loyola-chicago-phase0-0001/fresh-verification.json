@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "prepared_parent_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "prepared_tree_sha": "2d959bf664bdfbf2d498f16022e420020c39acdd",
+  "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "loyola-chicago-phase0-0001",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c"
+}
