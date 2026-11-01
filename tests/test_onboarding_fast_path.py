@@ -507,6 +507,128 @@ class GenericReconciliationTests(unittest.TestCase):
         with path.open(encoding="utf-8") as handle:
             return list(csv.DictReader(handle))[0]
 
+    def write_shared_score_fixture(self, repo):
+        canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+        canonical.update(
+            {
+                "canonical_game_id": "CBBG-1",
+                "season_label": "1930-1931",
+                "game_date": "1931-02-14",
+                "date_precision": "EXACT",
+                "team_a_key": "alpha",
+                "team_b_key": "beta",
+                "team_a_score": "16",
+                "team_b_score": "24",
+                "result_winner_team_key": "beta",
+                "site_type": "UNKNOWN",
+                "game_type": "REGULAR_SEASON",
+                "canonical_status": "PROVISIONAL",
+            }
+        )
+
+        sources = []
+        assertions = []
+        for source_game_id, team_score, opponent_score in (
+            ("ALPHA-1", "21", "26"),
+            ("ALPHA-2", "18", "22"),
+        ):
+            source = {field: "" for field in ingest_school.ASSERTION_FIELDS}
+            source.update(
+                {
+                    "source_program_key": "alpha",
+                    "source_game_id": source_game_id,
+                    "season_label": "1930-1931",
+                    "normalized_opponent_key": "beta",
+                    "normalized_opponent_name": "Beta",
+                    "team_score": team_score,
+                    "opponent_score": opponent_score,
+                    "played_result": "L",
+                    "overtime_periods": "0",
+                    "curated_site_type": "UNKNOWN",
+                    "curated_game_type": "REGULAR_SEASON",
+                    "raw_text": f"{source_game_id} Beta L {team_score}-{opponent_score}",
+                }
+            )
+            sources.append(source)
+            assertion = dict(source)
+            assertion.update(
+                {
+                    "assertion_id": f"ASRT-{source_game_id}",
+                    "canonical_game_id": "CBBG-1",
+                    "match_status": "MATCHED",
+                    "match_method": "FIXTURE",
+                }
+            )
+            assertions.append(assertion)
+
+        discrepancy = {field: "" for field in ingest_school.DISCREPANCY_FIELDS}
+        discrepancy.update(
+            {
+                "discrepancy_id": "DISC-1",
+                "canonical_game_id": "CBBG-1",
+                "field_name": "score",
+                "source_a_program_key": "alpha",
+                "source_a_value": "21-26",
+                "canonical_value": "16-24",
+                "status": "UNDER_REVIEW",
+            }
+        )
+
+        self.write_csv(
+            repo / "data/canonical/games.csv",
+            ingest_school.CANONICAL_FIELDS,
+            [canonical],
+        )
+        self.write_csv(
+            repo / "data/evidence/game-assertions.csv",
+            ingest_school.ASSERTION_FIELDS,
+            assertions,
+        )
+        self.write_csv(
+            repo / "data/reconciliation/discrepancies.csv",
+            ingest_school.DISCREPANCY_FIELDS,
+            [discrepancy],
+        )
+        self.write_csv(
+            repo / "schools/alpha/source-games.csv",
+            ingest_school.ASSERTION_FIELDS,
+            sources,
+        )
+
+    def shared_score_approved(self, second_decision="KEEP_CANONICAL"):
+        return {
+            "school_key": "alpha",
+            "approved_plan_hash": "a" * 64,
+            "decisions": [
+                {
+                    "decision_id": "SCORE-ALPHA-1",
+                    "category": "discrepancy",
+                    "source_game_id": "ALPHA-1",
+                    "canonical_game_id": "CBBG-1",
+                    "field_name": "score",
+                    "source_value": "21-26",
+                    "canonical_value": "16-24",
+                    "decision": "KEEP_CANONICAL",
+                    "resolution_basis": "Reciprocal canonical score controls ALPHA-1.",
+                    "canonical_patch": {},
+                    "source_patch": {},
+                },
+                {
+                    "decision_id": "SCORE-ALPHA-2",
+                    "category": "discrepancy",
+                    "source_game_id": "ALPHA-2",
+                    "canonical_game_id": "CBBG-1",
+                    "field_name": "score",
+                    "source_value": "18-22",
+                    "canonical_value": "16-24",
+                    "decision": second_decision,
+                    "resolution_basis": "Reviewed ALPHA-2 against the same real game.",
+                    "canonical_patch": {},
+                    "source_patch": {},
+                },
+            ],
+        }
+
     def test_source_normalization_preserves_raw_text_and_original_conflict(self):
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)
@@ -617,6 +739,48 @@ class GenericReconciliationTests(unittest.TestCase):
             self.assertEqual(synced["game_date"], "2020-12-29")
             self.assertEqual(resolved["source_a_value"], "2020-12-30")
             self.assertEqual(resolved["status"], "RESOLVED")
+
+    def test_shared_program_discrepancy_accepts_distinct_source_values_when_outcome_agrees(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            self.write_shared_score_fixture(repo)
+
+            counts = apply_reconciliation_decisions(
+                repo,
+                self.shared_score_approved(),
+            )
+
+            self.assertEqual(counts["canonical_retentions"], 2)
+            self.assertEqual(counts["processed"], 2)
+            canonical = self.read_one(repo / "data/canonical/games.csv")
+            self.assertEqual(
+                (canonical["team_a_score"], canonical["team_b_score"]),
+                ("16", "24"),
+            )
+            resolved = self.read_one(
+                repo / "data/reconciliation/discrepancies.csv"
+            )
+            self.assertEqual(resolved["source_a_value"], "21-26")
+            self.assertEqual(resolved["canonical_value"], "16-24")
+            self.assertEqual(resolved["status"], "RESOLVED")
+            self.assertIn("ALPHA-1", resolved["resolution_basis"])
+            self.assertIn("ALPHA-2", resolved["resolution_basis"])
+            self.assertIn("ALPHA-1", resolved["notes"])
+            self.assertIn("ALPHA-2", resolved["notes"])
+
+    def test_shared_program_discrepancy_rejects_conflicting_final_canonical_values(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            self.write_shared_score_fixture(repo)
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "must converge on one final canonical value",
+            ):
+                apply_reconciliation_decisions(
+                    repo,
+                    self.shared_score_approved(second_decision="USE_SOURCE"),
+                )
 
     def test_normalized_home_site_patch_propagates_through_full_transaction(self):
         with tempfile.TemporaryDirectory() as directory:
