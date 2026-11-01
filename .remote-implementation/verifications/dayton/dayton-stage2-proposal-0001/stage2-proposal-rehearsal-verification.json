@@ -1,0 +1,46 @@
+{
+  "approved_plan_hash_preview": "733947ebd7dec91fb1add71cbe012b6ab9e8e497a740f9c4ff646332508fef82",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "85755e77bc6b0b207b3ed0ff89446b06647229484cc91ddede89f392658e06ae",
+    "implementation-stage2-status.json": "da7645f9c25c617290965751dc18571cafad2777b8e2b324be09c70598e96a61",
+    "plan.json": "a82e0cbfa72360865129a58fd5df9f0d98aa2d79222463fba9c990d3987654e2",
+    "review.csv": "e0ff27cf53da417593168c6cba291ab7f86a9672ae6f16693ae28caa5a9a3481",
+    "review.md": "d03753fdd6e5a56f05fc7c65fa9a277280f347fd0cb99649511a2bdefae1a9d3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "85755e77bc6b0b207b3ed0ff89446b06647229484cc91ddede89f392658e06ae",
+    "implementation-stage2-status.json": "2ab4e5d0c2838e4cf14336b9b59419820a79809a681a38775f5711e164225679",
+    "plan.json": "9c93ffddbdb6594e874cbda88b71283728b0553cb127787ff6db6428b637a259",
+    "review.csv": "e0ff27cf53da417593168c6cba291ab7f86a9672ae6f16693ae28caa5a9a3481",
+    "review.md": "68f09ca68ccb41b70b7cce7c08a586dbce2fd66ff8278e67080492a69f06a176"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+    "runtime_decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "recommendation_map_sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "dayton-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "target_tree_sha": "fed64f87c2a1e37be96c702309066e737ffc0835",
+  "tracked_stage2_mutation": "NONE"
+}
