@@ -2020,8 +2020,12 @@ def finalize_stage2_current_main_refresh_successor(
     writeahead: dict[str, Any],
     writeahead_path: str,
     writeahead_sha256: str,
-    writeahead_commit: str,
+    writeahead_commit: str | None,
     expected_remote: str,
+    publication_cas: str = "EXISTING_REF_CAS_PASS",
+    extra_commit_paths: list[Path | str] | None = None,
+    recovery_request_id: str | None = None,
+    recovery_classification: str | None = None,
 ) -> str:
     rid = original_request["request_id"]
     school = original_request["school_key"]
@@ -2069,7 +2073,9 @@ def finalize_stage2_current_main_refresh_successor(
         "writeahead_manifest_sha256": writeahead_sha256,
         "refresh_proof_sha256": writeahead["refresh_proof_sha256"],
         "repository_validation": "PASS",
-        "publication_cas": "EXISTING_REF_CAS_PASS",
+        "publication_cas": publication_cas,
+        "recovery_request_id": recovery_request_id,
+        "recovery_classification": recovery_classification,
         "final_transaction_state": "COMPLETE",
     }
     successor_path = successor_dir / "successor-manifest.json"
@@ -2095,11 +2101,18 @@ def finalize_stage2_current_main_refresh_successor(
             "remote_stage2_current_main_refresh_equivalence": "PENDING",
         },
     )
+    if recovery_request_id and recovery_request_id not in final_state[
+        "consumed_request_ids"
+    ]:
+        final_state["consumed_request_ids"].append(recovery_request_id)
     write_json(STATE_PATH, final_state)
+    paths: list[Path | str] = [STATE_PATH, successor_dir]
+    if extra_commit_paths:
+        paths.extend(extra_commit_paths)
     return commit_control(
         expected_remote,
         "finalize Stage 2 current-main refresh %s" % rid,
-        [STATE_PATH, successor_dir],
+        paths,
     )
 
 
@@ -3981,6 +3994,23 @@ def run_recovery(
                 protected_main_sha=live_main,
                 prepared_sha=prepared,
             )
+        elif state.get("active_operation") == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            parent_line = git(
+                "rev-list", "--parents", "-n", "1", prepared
+            ).stdout.strip().split()
+            if parent_line[1:] != [
+                manifest["expected_target_predecessor_sha"],
+                manifest["protected_main_sha"],
+            ]:
+                raise Stop("RECOVERY_STAGE2_REFRESH_PARENT_SET_MISMATCH")
+            changed = sorted(
+                line.strip()
+                for line in git(
+                    "diff", "--name-only",
+                    manifest["expected_target_predecessor_sha"], prepared,
+                ).stdout.splitlines()
+                if line.strip()
+            )
         else:
             changed = sorted(
                 line.strip()
@@ -4120,6 +4150,49 @@ def run_recovery(
                 writeahead_commit=state.get("active_writeahead_commit"),
                 expected_remote=request_commit,
                 freeze_bytes=freeze_bytes,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+            )
+            print(
+                "REMOTE IMPLEMENTATION RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
+        if state.get("active_operation") == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            if manifest.get("operation") != OP_STAGE2_CURRENT_MAIN_REFRESH:
+                raise Stop("RECOVERY_STAGE2_REFRESH_WRITEAHEAD_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit,
+                original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_STAGE2_REFRESH_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            proof_path = (
+                Path(state["active_writeahead_path"]).parent
+                / "refresh-proof.json"
+            ).as_posix()
+            proof_bytes = git_show_bytes(predecessor_commit, proof_path)
+            if sha256_bytes(proof_bytes) != manifest["refresh_proof_sha256"]:
+                raise Stop("RECOVERY_STAGE2_REFRESH_PROOF_HASH_MISMATCH")
+            commit = finalize_stage2_current_main_refresh_successor(
+                active=state,
+                original_request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                authority={},
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
                 publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
                 extra_commit_paths=[directory],
                 recovery_request_id=request["request_id"],
