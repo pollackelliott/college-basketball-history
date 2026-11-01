@@ -25,7 +25,7 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
             "unidentified_wins": "3", "unidentified_losses": "3", "unidentified_games": "6",
             "source_label": "Example institutional record book",
             "owner_disposition": "https://github.com/example/history/issues/1",
-            "stage1_closeout_sha256": "f" * 64,
+            "stage1_audit_sha256": "f" * 64,
             "public_note": "",
         }
 
@@ -60,8 +60,8 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
             self.build(authority={})
 
     def test_missing_closeout_hash_is_rejected(self):
-        self.row["stage1_closeout_sha256"] = ""
-        with self.assertRaisesRegex(ValueError, "closeout SHA-256 required"):
+        self.row["stage1_audit_sha256"] = ""
+        with self.assertRaisesRegex(ValueError, "audit SHA-256 required"):
             self.build()
 
     def test_changed_source_aggregate_is_rejected(self):
