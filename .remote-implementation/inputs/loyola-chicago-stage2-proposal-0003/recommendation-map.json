@@ -1,0 +1,866 @@
+{
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "decision_universe_sha256": "034611baef2837ea847bedf954f1d9545e739a72b0dfceb04a5aa1dc45598e19",
+  "source_census_checkpoint_sha256": "130cc370d79dd5ae2841cc3e8409dfcabde9e51bab1ca3f89ef527a80ed6d662",
+  "prepared_against_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "prepared_against_target_sha": "a62bc2d87855aed59bf90a823b1b06168d8e149e",
+  "defaults": {
+    "discrepancy": "KEEP_CANONICAL",
+    "selected_conditional": "KEEP_CANONICAL",
+    "basis": "Retain the existing canonical value because the current reciprocal/project authority is at least as specific as the frozen Loyola assertion and no stronger contrary evidence was established in the bounded adversarial review; preserve Loyola's frozen source evidence unchanged.",
+    "not_applicable_basis": "Conditional discrepancy belongs to an unselected canonical identity candidate; no historical value is being adjudicated for that unselected candidate."
+  },
+  "decisions": {
+    "IDENTITY-LOY-STG1-00092": "MATCH_CANONICAL:CBBG-0150726",
+    "IDENTITY-LOY-STG1-00100": "MATCH_CANONICAL:CBBG-0150735",
+    "IDENTITY-LOY-STG1-00103": "MATCH_CANONICAL:CBBG-0148467",
+    "IDENTITY-LOY-STG1-00135": "MATCH_CANONICAL:CBBG-0117714",
+    "IDENTITY-LOY-STG1-00137": "MATCH_CANONICAL:CBBG-0150746",
+    "IDENTITY-LOY-STG1-00151": "MATCH_CANONICAL:CBBG-0152420",
+    "IDENTITY-LOY-STG1-00160": "MATCH_CANONICAL:CBBG-0182891",
+    "IDENTITY-LOY-STG1-00176": "MATCH_CANONICAL:CBBG-0152440",
+    "IDENTITY-LOY-STG1-00180": "MATCH_CANONICAL:CBBG-0163996",
+    "IDENTITY-LOY-STG1-00182": "MATCH_CANONICAL:CBBG-0094957",
+    "IDENTITY-LOY-STG1-00186": "MATCH_CANONICAL:CBBG-0047466",
+    "IDENTITY-LOY-STG1-00187": "MATCH_CANONICAL:CBBG-0082871",
+    "IDENTITY-LOY-STG1-00195": "MATCH_CANONICAL:CBBG-0047466",
+    "IDENTITY-LOY-STG1-00198": "MATCH_CANONICAL:CBBG-0089684",
+    "IDENTITY-LOY-STG1-00206": "MATCH_CANONICAL:CBBG-0082886",
+    "IDENTITY-LOY-STG1-00292": "MATCH_CANONICAL:CBBG-0182981",
+    "IDENTITY-LOY-STG1-00376": "MATCH_CANONICAL:CBBG-0089843",
+    "IDENTITY-LOY-STG1-00409": "MATCH_CANONICAL:CBBG-0107195",
+    "IDENTITY-LOY-STG1-00947": "MATCH_CANONICAL:CBBG-0036310",
+    "IDENTITY-LOY-STG1-00990": "MATCH_CANONICAL:CBBG-0026093",
+    "IDENTITY-LOY-STG1-01439": "MATCH_CANONICAL:CBBG-0183669",
+    "IDENTITY-LOY-STG1-01444": "MATCH_CANONICAL:CBBG-0153397",
+    "IDENTITY-LOY-STG1-01533": "MATCH_CANONICAL:CBBG-0183737",
+    "IDENTITY-LOY-STG1-01857": "MATCH_CANONICAL:CBBG-0084292",
+    "IDENTITY-LOY-STG1-01952": "MATCH_CANONICAL:CBBG-0084399",
+    "IDENTITY-LOY-STG1-02730": "MATCH_CANONICAL:CBBG-0152443",
+    "DISCREPANCY-LOY-STG1-00126-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-00343-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-00805-SITE_TYPE": "LEAVE_UNRESOLVED",
+    "DISCREPANCY-LOY-STG1-01010-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01107-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01384-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01400-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01417-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01453-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01563-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-01844-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-LOY-STG1-02566-SITE_TYPE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-01533-CBBG-0183737-GAME_DATE": "USE_SOURCE",
+    "CANONICAL-SITE-PATCH-CBBG-0084292": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0084399": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0089684": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0107195": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0117714": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0148467": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0150735": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0150746": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0152420": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0152440": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0182742": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0182891": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0182981": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0183669": "LEAVE_UNRESOLVED",
+    "CANONICAL-SITE-PATCH-CBBG-0183737": "LEAVE_UNRESOLVED",
+    "ACCOMPLISHMENTS-LOYOLA-CHICAGO": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-LOYOLA-CHICAGO": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "IDENTITY-LOY-STG1-00092": "Loyola raw text preserves embedded 20-31 evidence; Marquette's official record identifies the 1925-02-28 game as Marquette 31-20, uniquely matching CBBG-0150726 despite Loyola's stale structured date/score.",
+    "IDENTITY-LOY-STG1-00100": "Marquette official history identifies the 1926-02-13 game at Loyola as Loyola 26-16, exactly matching CBBG-0150735.",
+    "IDENTITY-LOY-STG1-00103": "Creighton's current schedule identifies one 1926-01-21 game at Loyola; CBBG-0148467 is the unique same-season reciprocal candidate. Creighton legacy score renderings conflict by one point, so retain canonical score separately.",
+    "IDENTITY-LOY-STG1-00135": "Oregon State's official yearly result records its Loyola loss as 19-29; CBBG-0117714 is the unique reciprocal candidate.",
+    "IDENTITY-LOY-STG1-00137": "Marquette official history records the 1928-01-13 Loyola win 27-12, uniquely identifying CBBG-0150746.",
+    "IDENTITY-LOY-STG1-00151": "The 40-19 score uniquely identifies Xavier reciprocal candidate CBBG-0152420; Xavier's official historical record places that game on 1928-02-25.",
+    "IDENTITY-LOY-STG1-00160": "Saint Louis official series history records 1929-01-30 at Loyola, SLU L 19-21; this uniquely identifies CBBG-0182891.",
+    "IDENTITY-LOY-STG1-00176": "Xavier's official record shows two separate 18-13 losses at Loyola in January 1930. The original Loyola schedule row is assigned to the first, 1930-01-14, CBBG-0152440; the supplemental recovered row is assigned to the second.",
+    "IDENTITY-LOY-STG1-00180": "Georgetown's official opponent history records its 1930 Loyola win 34-23; CBBG-0163996 is the unique reciprocal game.",
+    "IDENTITY-LOY-STG1-00182": "North Carolina's official historical record documents the 1930 Loyola loss 24-25; CBBG-0094957 is the unique reciprocal game.",
+    "IDENTITY-LOY-STG1-00186": "Michigan State's official series history shows only one 1930-31 Loyola meeting, 1931-02-14, MSU 24-16. This frozen Loyola row is one conflicting target assertion for that single real game, CBBG-0047466.",
+    "IDENTITY-LOY-STG1-00187": "CBBG-0082871 is the only same-season Butler reciprocal candidate. No evidence supports a second Loyola-Butler game; retain the reciprocal canonical score as the supported recommendation while disclosing residual one-point uncertainty.",
+    "IDENTITY-LOY-STG1-00195": "Michigan State's official series history shows only one 1930-31 Loyola meeting, 1931-02-14, MSU 24-16. This second frozen Loyola row is a duplicate/conflicting target assertion for that same real game, CBBG-0047466; do not manufacture a second canonical game.",
+    "IDENTITY-LOY-STG1-00198": "DePaul's official 1930-31 results contain two Loyola games, a 22-15 DePaul win and a 20-24 loss; Loyola's 15-23 loss aligns with the 22-15 win, CBBG-0089684.",
+    "IDENTITY-LOY-STG1-00206": "CBBG-0082886 is the only same-season Butler reciprocal candidate. No evidence supports a second Loyola-Butler game; recommend the unique reciprocal identity while preserving the target's conflicting score/result as evidence.",
+    "IDENTITY-LOY-STG1-00292": "Saint Louis official history records 1937-01-12 at Loyola, SLU L 21-47; this uniquely identifies CBBG-0182981.",
+    "IDENTITY-LOY-STG1-00376": "DePaul's official 1940-41 results record a 37-33 win over Loyola; this identifies CBBG-0089843.",
+    "IDENTITY-LOY-STG1-00409": "BYU's official 1942-43 schedule records 1942-12-18 at Loyola, BYU L 44-50; this identifies CBBG-0107195.",
+    "IDENTITY-LOY-STG1-00947": "Indiana official history places the 109-82 Loyola game on 1965-02-08; this identifies CBBG-0036310 and shows Loyola's structured date is stale.",
+    "IDENTITY-LOY-STG1-00990": "Minnesota official history places the 87-63 Loyola result on 1967-01-05; this identifies CBBG-0026093 and shows Loyola's structured date is stale.",
+    "IDENTITY-LOY-STG1-01439": "Saint Louis official history shows the 1983-84 Loyola home meeting on 1984-02-20, SLU L 64-75; this identifies CBBG-0183669.",
+    "IDENTITY-LOY-STG1-01444": "Xavier's official record identifies the 1984 Midwestern City Conference tournament game at UIC Pavilion as Xavier 80-69 Loyola on 1984-03-09; this identifies CBBG-0153397.",
+    "IDENTITY-LOY-STG1-01533": "Saint Louis official series history records the 70-68 SLU win at Loyola on 1987-02-23; this identifies CBBG-0183737, with the canonical date separately corrected through the selected conditional decision.",
+    "IDENTITY-LOY-STG1-01857": "The mirrored 53-51 score uniquely selects Butler candidate CBBG-0084292. Retain the reciprocal canonical date because no stronger institutional date evidence was recovered.",
+    "IDENTITY-LOY-STG1-01952": "Butler's official 2001-02 schedule records 2002-02-20 at Loyola, Butler L 56-60; this uniquely identifies CBBG-0084399.",
+    "IDENTITY-LOY-STG1-02730": "Xavier's official record shows two separate 18-13 losses at Loyola in January 1930. This later supplemental Loyola recovery row is assigned to the second, 1930-01-23, CBBG-0152443, while the original schedule row maps to the first.",
+    "DISCREPANCY-LOY-STG1-00126-GAME_DATE": "Saint Louis's current official series history records the Loyola game on 1927-02-10, matching the frozen Loyola date and contradicting the existing 1927-02-11 canonical date.",
+    "DISCREPANCY-LOY-STG1-00343-SITE_TYPE": "The game was the 1939 NIT at Madison Square Garden; St. John's own media-guide series history classifies the 1939-03-20 Loyola game as neutral. Use Loyola's accepted NEUTRAL value and preserve the conflicting current St. John's web designation as residual evidence.",
+    "DISCREPANCY-LOY-STG1-00805-SITE_TYPE": "Both the frozen Loyola row and reciprocal evidence fail to establish H/A/N responsibly. Preserve the canonical value without claiming the unresolved site classification is historically settled.",
+    "DISCREPANCY-LOY-STG1-01010-SITE_TYPE": "Georgia Tech's official series record treats the 1967-12-30 Chicago Stadium game as away from Georgia Tech, supporting Loyola HOME rather than neutral. Use the frozen Loyola site value and its Chicago Stadium metadata.",
+    "DISCREPANCY-LOY-STG1-01107-SITE_TYPE": "Saint Louis's official 1971-72 schedule lists the 1971-12-29 Loyola game as a Saint Louis home game in St. Louis, matching Loyola's frozen opponent-home value.",
+    "DISCREPANCY-LOY-STG1-01384-SITE_TYPE": "Loyola's accepted frozen source explicitly classifies the 1982-03-02 Butler game as neutral and records the tournament-style 'vs.' context at Mabee Center; canonical site is only UNKNOWN, so use the researched target value without inventing venue chronology.",
+    "DISCREPANCY-LOY-STG1-01400-SITE_TYPE": "Saint Louis's official 1982-83 schedule lists 1983-01-22 at Loyola in Chicago, independently confirming Loyola HOME and contradicting the existing Saint Louis-home canonical direction.",
+    "DISCREPANCY-LOY-STG1-01417-SITE_TYPE": "Illinois's official 1983-84 history classifies the Rosemont Loyola game as neutral, independently confirming Loyola's accepted frozen NEUTRAL value.",
+    "DISCREPANCY-LOY-STG1-01453-SITE_TYPE": "Illinois's official 1984-85 history classifies the Rosemont Loyola game as neutral, independently confirming Loyola's accepted frozen NEUTRAL value.",
+    "DISCREPANCY-LOY-STG1-01563-SITE_TYPE": "Loyola's accepted frozen source explicitly classifies the 1988-03-10 Butler game as neutral with 'vs.' tournament context at Market Square Arena; canonical site is UNKNOWN, so use the researched target value.",
+    "DISCREPANCY-LOY-STG1-01844-SITE_TYPE": "Loyola's accepted frozen source explicitly classifies the 1998-02-28 Butler game as neutral with 'vs.' context at Brown County Arena in Wisconsin; canonical site is UNKNOWN, so use the researched target value.",
+    "DISCREPANCY-LOY-STG1-02566-SITE_TYPE": "Michigan State's official 2021-22 schedule and Battle 4 Atlantis coverage classify the 2021-11-24 game as neutral in the Bahamas, independently confirming Loyola's accepted NEUTRAL value.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-01533-CBBG-0183737-GAME_DATE": "Saint Louis's current official series history records this exact 70-68 game at Loyola on 1987-02-23, matching Loyola's source and correcting the stale 1987-02-12 canonical date.",
+    "ACCOMPLISHMENTS-LOYOLA-CHICAGO": "Loyola's current official athletics history supports NATIONAL_CHAMPION/1963, eight regular-season conference titles, four conference tournament titles (1985, 2018, 2021, 2022), two Final Fours, one national championship, and eight NCAA appearances; the existing reference values are verified.",
+    "PUBLICATION-LOYOLA-CHICAGO": "Recommend enabling the Loyola public page only through the normal downstream sealed apply, release, exact Preview, explicit Owner Gate 2, merge, and Production-proof gates.",
+    "CANONICAL-SITE-PATCH-CBBG-0084292": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0084399": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0089684": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0107195": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0117714": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0148467": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0150735": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0150746": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0152420": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0152440": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0182742": "Fresh first-party Saint Louis evidence identifies the January 17, 1917 opponent as Loyola Academy, not Loyola University Chicago, while Loyola University's frozen 1916-17 schedule contains no Saint Louis game and Saint Louis's current Loyola University series begins in 1922. This is therefore an opponent-identity/game-universe conflict outside the owner-authorized HOME-site remediation. Leave this canonical site patch unresolved rather than manufacturing Loyola University site metadata pending explicit authority to adjudicate CBBG-0182742 identity.",
+    "CANONICAL-SITE-PATCH-CBBG-0182891": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0182981": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0183669": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "CANONICAL-SITE-PATCH-CBBG-0183737": "No exact target HOME venue/locality can be established from documented Loyola chronology without guessing. Preserve the reciprocal canonical HOME classification but leave the physical site metadata unresolved; if the selected identity supplies a target assertion for this same canonical game, permanent sealing may mark this conditional patch not applicable.",
+    "DISCREPANCY-LOY-STG1-00045-SITE_TYPE": "Saint Louis institutional series history identifies the January 6, 1922 Loyola University Chicago meeting as a Saint Louis road game in Chicago, independently supporting the existing canonical Loyola-HOME classification and Chicago, Illinois locality. Loyola's frozen target row remains researched-UNKNOWN and is not rewritten. Alumni Gym did not open until 1924, and bounded review did not establish an exact earlier physical venue, so patch only the supported HOME city/state and leave the ancient building unresolved under the reconciliation-backed researched-UNKNOWN HOME mechanism.",
+    "DISCREPANCY-LOY-STG1-00065-SITE_TYPE": "Notre Dame's accepted reciprocal institutional row records the January 16, 1924 game at Loyola in Alumni Gym, Chicago, 21-16. Retain canonical Loyola HOME despite the conflicting frozen Loyola H/A/N assertion, preserve that source assertion unchanged, and patch Alumni Gym / Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00083-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00086-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00100-CBBG-0150735-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00103-CBBG-0148467-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00110-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00126-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00128-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00135-CBBG-0117714-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00137-CBBG-0150746-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00144-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00151-CBBG-0152420-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00160-CBBG-0182891-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00176-CBBG-0152440-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00198-CBBG-0089684-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00247-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00267-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00281-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00292-CBBG-0182981-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00308-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00409-CBBG-0107195-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00418-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00464-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00466-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00467-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00474-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00481-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00495-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00497-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00508-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00512-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00553-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00554-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00557-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00559-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00560-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00566-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00569-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00586-SITE_TYPE": "Iowa's accepted reciprocal institutional row records December 28, 1950 'at Loyola (IL)', supporting canonical Loyola HOME despite the conflicting frozen Loyola H/A/N assertion. Loyola's supported HOME chronology and absence of an alternate-site marker place this HOME game at Alumni Gym in Chicago; preserve the frozen source assertion and patch canonical physical site only.",
+    "DISCREPANCY-LOY-STG1-00601-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00606-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00620-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00621-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00628-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00629-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00634-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00648-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00650-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00653-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00654-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00659-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00667-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00678-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00680-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00690-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00693-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00695-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00702-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00706-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00707-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00718-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00719-SITE_TYPE": "Seton Hall's accepted reciprocal institutional row records February 11, 1956 'at Loyola (IL)', supporting canonical Loyola HOME despite the conflicting frozen Loyola H/A/N assertion. Loyola's supported HOME chronology and absence of an alternate-site marker place this HOME game at Alumni Gym in Chicago; preserve the frozen source assertion and patch canonical physical site only.",
+    "DISCREPANCY-LOY-STG1-00723-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00724-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00742-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00745-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00746-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00748-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00763-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00764-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00770-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00778-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00788-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00791-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00793-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00801-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00810-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00812-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00815-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00826-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00832-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00837-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00838-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00843-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00938-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00945-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00946-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-00985-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00989-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00994-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00996-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-00998-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01124-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01126-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01134-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-01135-SITE_TYPE": "Loyola's frozen record-book row marks this established canonical HOME game with the explicit '(CS)' site notation. Accepted Loyola exact-site rows in the same source use '(CS)' for Chicago Stadium. Preserve the canonical Loyola-HOME classification and patch the physical site to Chicago Stadium, Chicago, Illinois.",
+    "DISCREPANCY-LOY-STG1-01175-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01180-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01248-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01250-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01262-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01265-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N.",
+    "DISCREPANCY-LOY-STG1-01269-SITE_TYPE": "Established canonical Loyola HOME game. Loyola's supported home-facility chronology identifies Alumni Gym as the ordinary home venue from its 1924 opening through the pre-Gentile era, while the frozen record book marks affirmative alternate sites such as '(CS)' and '(Amp)' explicitly. This row has no alternate-site marker or conflicting physical-site evidence, so apply the Alumni Gym default and Chicago, Illinois locality without changing H/A/N."
+  },
+  "canonical_patch_by_decision": {
+    "DISCREPANCY-LOY-STG1-00045-SITE_TYPE": {
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00065-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00083-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00086-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00100-CBBG-0150735-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00103-CBBG-0148467-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00110-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00126-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00128-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00135-CBBG-0117714-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00137-CBBG-0150746-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00144-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00151-CBBG-0152420-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00160-CBBG-0182891-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00176-CBBG-0152440-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00198-CBBG-0089684-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00247-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00267-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00281-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00292-CBBG-0182981-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00308-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "CONDITIONAL-DISCREPANCY-LOY-STG1-00409-CBBG-0107195-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00418-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00464-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00466-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00467-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00474-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00481-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00495-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00497-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00508-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00512-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00553-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00554-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00557-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00559-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00560-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00566-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00569-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00586-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00601-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00606-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00620-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00621-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00628-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00629-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00634-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00648-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00650-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00653-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00654-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00659-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00667-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00678-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00680-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00690-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00693-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00695-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00702-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00706-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00707-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00718-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00719-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00723-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00724-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00742-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00745-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00746-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00748-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00763-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00764-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00770-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00778-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00788-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00791-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00793-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00801-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00810-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00812-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00815-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00826-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00832-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00837-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00838-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00843-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00938-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00945-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00946-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00985-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00989-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00994-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00996-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-00998-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01124-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01126-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01134-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01135-SITE_TYPE": {
+      "venue_key": "chicago-stadium",
+      "venue_id": "VEN-000044",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01175-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01180-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01248-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01250-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01262-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01265-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    },
+    "DISCREPANCY-LOY-STG1-01269-SITE_TYPE": {
+      "venue_key": "alumni-gym-chicago",
+      "venue_id": "VEN-000800",
+      "site_city": "Chicago",
+      "site_state": "IL"
+    }
+  },
+  "source_patch_by_decision": {},
+  "notes_by_decision": {
+    "IDENTITY-LOY-STG1-00187": "Residual one-point reciprocal score uncertainty remains; identity recommendation is based on the unique same-season Butler canonical candidate.",
+    "IDENTITY-LOY-STG1-00206": "Residual Butler score/result disagreement remains; identity recommendation is based on the unique same-season reciprocal candidate.",
+    "IDENTITY-LOY-STG1-00186": "One real game = one canonical game; Michigan State official history shows only one 1930-31 meeting.",
+    "IDENTITY-LOY-STG1-00195": "Second conflicting Loyola source assertion maps to the same single documented Michigan State game; proposal rehearsal must validate this topology.",
+    "CANONICAL-SITE-PATCH-CBBG-0182742": "AUTHORITY BLOCKER: current Saint Louis first-party schedule names Loyola Academy on 1917-01-17; no Loyola University Chicago source row exists for this game. Site remediation intentionally does not reopen opponent identity or the accepted game universe."
+  }
+}
