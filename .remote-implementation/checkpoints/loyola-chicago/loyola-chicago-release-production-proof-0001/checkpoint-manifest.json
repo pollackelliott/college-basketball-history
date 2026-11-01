@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "merge_parent_onboarding": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "merge_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "b23c21be528a0fe8f2bd2274ed5ff81b20c38d9c129ca6b3e4348c388ff6e541",
+  "owner_gate_2_verification_sha256": "cc7a176bd52437136d9a78b160e7ce75083a3ff56b8d9bea903064c47e59d403",
+  "pr_head_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "pr_number": 425,
+  "production_deployment_id": 7478524242,
+  "production_json_checked_count": 81,
+  "production_proof": true,
+  "production_proof_sha256": "589a4f190eb1dd8996500e04fd2fa401b311ea1f06b0c8321010f633aecd9fa7",
+  "protected_main_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
+  "request_id": "loyola-chicago-release-production-proof-0001",
+  "request_sha256": "8a11a71d5cce52f0aa0d82ceb2dc327c8038739b6ee907483249eb53beb39645",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "status": "PRODUCTION_PROOF_PASS"
+}
