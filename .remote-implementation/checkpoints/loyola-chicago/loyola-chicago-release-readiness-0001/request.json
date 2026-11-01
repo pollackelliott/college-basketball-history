@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-release-readiness-0001",
+  "school_key": "loyola-chicago",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "8c94b01a3baada652358664ba224dadff8ef334b",
+  "previous_control_state_sha256": "aacd6f0b8ba8804dedd4962a3cec47a9677f3f545cd219bd076588e3328227ce",
+  "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "d0e6815c3a515ce9bbecad595bd2062cdea779ddaa991c6fc2c70bc3f0c6b52e"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "d654d920a7101f3056a152c002e5229c6842a48fb3b6a55f4684dc623308cc39"
+  },
+  "approved_plan_hash": "4e2033b466dfdfbfeae4292836dec6ebf6ea89eb464f5971b0da4d8030a9ee18",
+  "release_manifest_sha256": "b6e5f4753853eb5260652b9cd80e8ac5e8963c50086333a419a05675f5adaf96",
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation — release preparation",
+    "authorization": "Owner said Proceed after the exact Loyola Chicago sealed-apply successor 37aefb494d1d51faf0b58b11b1927fbb3038879d independently fresh-verified PASS. This authorizes the existing release-preparation phase through OWNER_GATE_2_READY. This request is only the first bounded read-only RELEASE_READINESS operation: authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation. It grants no PR creation inside the runner, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, shared/global maintenance, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "apply_request_id": "loyola-chicago-stage2-sealed-apply-0001",
+  "approved_plan_hash": "4e2033b466dfdfbfeae4292836dec6ebf6ea89eb464f5971b0da4d8030a9ee18",
+  "changed_path_count": 87,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "release_manifest_sha256": "b6e5f4753853eb5260652b9cd80e8ac5e8963c50086333a419a05675f5adaf96",
+  "school_key": "loyola-chicago",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "d0e6815c3a515ce9bbecad595bd2062cdea779ddaa991c6fc2c70bc3f0c6b52e",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "d654d920a7101f3056a152c002e5229c6842a48fb3b6a55f4684dc623308cc39",
+  "writeahead_sha256": "5fadc0ccd8213445782a7fad8dff4c5a65885c4b91cac9eedad020bbc31e62d4"
+}
