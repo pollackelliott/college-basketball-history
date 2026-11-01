@@ -1,0 +1,100 @@
+{
+  "actual_published_target_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "changed_file_sha256": {
+    "schools/dayton/opponents.csv": "2a61839566e92a544d7ddf40059be5fce893db0402472fb16632395225dec604",
+    "schools/dayton/source-games.csv": "84daa8e296675d5a93963e4e39b6bd2fde5f3162624aca3db7b3aec3c24964c2"
+  },
+  "changed_paths": [
+    "schools/dayton/opponents.csv",
+    "schools/dayton/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "central-state-ohio",
+    "manchester-indiana"
+  ],
+  "expected_target_predecessor_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "field_level_proof_sha256": "fe3cc088251f6ba393ff245ce279ef74b9173bc1b6437f6d77dcc5239883f442",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "ae1e432b02a73d8406c13568a4f7372799aa23fe",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "b88a0cb470da241cf4b56e06e42f1d1b5c8567e5020dd6421260cae380d06916",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "85755e77bc6b0b207b3ed0ff89446b06647229484cc91ddede89f392658e06ae",
+      "implementation-stage2-status.json": "d2eab11d441efd49b53a04073ccf2b7580912d587dfecd5d87ce33f8cec4c7c7",
+      "plan.json": "a82e0cbfa72360865129a58fd5df9f0d98aa2d79222463fba9c990d3987654e2",
+      "review.csv": "e0ff27cf53da417593168c6cba291ab7f86a9672ae6f16693ae28caa5a9a3481",
+      "review.md": "d03753fdd6e5a56f05fc7c65fa9a277280f347fd0cb99649511a2bdefae1a9d3"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "85755e77bc6b0b207b3ed0ff89446b06647229484cc91ddede89f392658e06ae",
+      "implementation-stage2-status.json": "25ba1e564deb734d02d18f12ab5181d5c15af483cf4989d9fe8a244f7d7bdb24",
+      "plan.json": "ec4228dca74766ae6229e016edbec4ee56f714d2756a5e9217a800c560d85dd2",
+      "review.csv": "e0ff27cf53da417593168c6cba291ab7f86a9672ae6f16693ae28caa5a9a3481",
+      "review.md": "b5e5deabe9b337fc2ecabf0ebe031da0c6973b3f774fe389a48a2a1ae919d794"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 58,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 162,
+    "decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+      "after_status": "",
+      "after_tree_sha": "fed64f87c2a1e37be96c702309066e737ffc0835",
+      "before_head_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+      "before_status": "",
+      "before_tree_sha": "fed64f87c2a1e37be96c702309066e737ffc0835",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "prepared_parent_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "prepared_tree_sha": "fed64f87c2a1e37be96c702309066e737ffc0835",
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "dayton-stage2-opponent-display-normalize-0001",
+  "request_sha256": "dd5d195e3268d4b25fb0bfdf2904bdcf130673817c476ed95acfc1a278925279",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift_after": {
+    "baseline_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "integration_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+    "school_key": "dayton",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+    "integration_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+    "school_key": "dayton",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "source_game_normalized_name_row_count": 8,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/dayton/dayton-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "b4a83aee2361979267dea020efd94cbb8001b42ba87d4dd6a7d4870e23e93ece",
+  "target_branch": "data/dayton-onboarding",
+  "writeahead_commit": "d69d0a6470d69c0d60884a71dadf5364a8563ad4",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/dayton/dayton-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "d029b14005e24faa2a650e5be206d2a1584aaaec59ee3432f0ece9b11d1bb481"
+}
