@@ -1,0 +1,269 @@
+name: Saint Louis CBBG-0182742 correction preflight
+
+on:
+  push:
+    branches:
+      - automation/saint-louis-cbbg-0182742-correction
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  permanent-correction-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact protected main
+        uses: actions/checkout@v4
+        with:
+          ref: bed68f763a7ea8920c6ba830b004334b16c9e303
+          fetch-depth: 0
+
+      - name: Check out durable correction authority
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control-authority
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate main, baseline and durable authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+          test "$(git rev-parse refs/remotes/origin/main)" = "bed68f763a7ea8920c6ba830b004334b16c9e303"
+          git cat-file -e "a76ba14e378267d2d6d6beb18b880916d77e84a1^{commit}"
+          authority="control-authority/.remote-implementation/authorities/saint-louis/saint-louis-cbbg-0182742-correction-authority-0001.json"
+          test "$(sha256sum "$authority" | awk '{print $1}')" = "8dfabed8336faaea5f9349385200f75d22f3c387465fd68d2dd1bdd4da3653e7"
+
+      - name: Materialize exact six-file candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/saint-louis-candidate
+          mkdir -p /tmp/saint-louis-candidate
+          for f in source-games.csv opponents.csv venues.csv conferences.csv notes.md source-notes.md; do
+            git show "a76ba14e378267d2d6d6beb18b880916d77e84a1:schools/saint-louis/$f" > "/tmp/saint-louis-candidate/$f"
+          done
+          python - <<'PY'
+          from pathlib import Path
+          import csv, io
+
+          root=Path("/tmp/saint-louis-candidate")
+          source=root/"source-games.csv"
+          raw=source.read_bytes()
+          lines=raw.splitlines(keepends=True)
+          matches=[i for i,line in enumerate(lines) if line.startswith(b"saint-louis-1916-17-005,")]
+          if matches != [39]:
+              raise SystemExit(f"unexpected source row location/count: {matches}")
+          before=lines[matches[0]]
+          required=b",Loyola Chicago,loyola-chicago,Loyola Chicago,"
+          replacement=b",Loyola Chicago,loyola-academy,Loyola Academy,"
+          if before.count(required) != 1:
+              raise SystemExit("source identity token not unique on authorized row")
+          after=before.replace(required,replacement)
+          if b"J17 Loyola Chicago A L 12-28" not in after:
+              raise SystemExit("literal raw_text would not be preserved")
+          lines[matches[0]]=after
+          source.write_bytes(b"".join(lines))
+
+          opp=root/"opponents.csv"
+          data=opp.read_bytes()
+          olines=data.splitlines(keepends=True)
+          idxs=[i for i,line in enumerate(olines) if line.startswith(b"saint-louis,Loyola Chicago,loyola-chicago,Loyola Chicago,")]
+          if len(idxs)!=1:
+              raise SystemExit(f"expected one Loyola Chicago opponent row, found {idxs}")
+          i=idxs[0]
+          old=olines[i]
+          old_token=b",Yes,55,1916-17,2025-26,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,"
+          new_token=b",Yes,54,1921-22,2025-26,RESOLVED,CURRENT_D1_REGISTRY_MATCH,,"
+          if old.count(old_token)!=1:
+              raise SystemExit("published Loyola Chicago census metadata changed unexpectedly")
+          olines[i]=old.replace(old_token,new_token)
+          eol=b"\r\n" if old.endswith(b"\r\n") else b"\n"
+          newrow=(
+              "saint-louis,Loyola Chicago,loyola-academy,Loyola Academy,No,1,1916-17,1916-17,"
+              "RESOLVED,OWNER_SETTLED_HISTORICAL_IDENTITY,,"
+              "Owner-approved exact one-game identity correction for saint-louis-1916-17-005; "
+              "literal source label/raw text preserved; Loyola University Chicago identity retained for later games."
+          ).encode()+eol
+          olines.insert(i+1,newrow)
+          opp.write_bytes(b"".join(olines))
+
+          # Exact semantic delta check on source-games.
+          def rows(path):
+              with path.open("r",encoding="utf-8-sig",newline="") as f:
+                  return list(csv.DictReader(f))
+          base_bytes=__import__("subprocess").check_output([
+              "git","show","a76ba14e378267d2d6d6beb18b880916d77e84a1:schools/saint-louis/source-games.csv"
+          ])
+          base=list(csv.DictReader(io.StringIO(base_bytes.decode("utf-8-sig"),newline="")))
+          cand=rows(source)
+          b={r["source_game_id"]:r for r in base}
+          c={r["source_game_id"]:r for r in cand}
+          changed=[sid for sid in b if b[sid]!=c[sid]]
+          if changed != ["saint-louis-1916-17-005"]:
+              raise SystemExit(f"unauthorized source row population: {changed}")
+          diff={k:(b[changed[0]].get(k,""),c[changed[0]].get(k,"")) for k in b[changed[0]] if b[changed[0]].get(k,"")!=c[changed[0]].get(k,"")}
+          if set(diff) != {"normalized_opponent_key","normalized_opponent_name"}:
+              raise SystemExit(f"unauthorized source fields: {diff}")
+          if c[changed[0]]["source_opponent_label"]!="Loyola Chicago" or c[changed[0]]["raw_text"]!="J17 Loyola Chicago A L 12-28":
+              raise SystemExit("literal evidence changed")
+          PY
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+          root=Path("/tmp/saint-louis-candidate")
+          out=Path("/tmp/saint-louis-candidate.zip")
+          names=["source-games.csv","opponents.csv","venues.csv","conferences.csv","notes.md","source-notes.md"]
+          with zipfile.ZipFile(out,"w",zipfile.ZIP_DEFLATED) as z:
+              for n in names:
+                  z.write(root/n,n)
+          PY
+
+      - name: Run permanent correction freeze report
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/correction_lifecycle.py freeze saint-louis /tmp/saint-louis-candidate.zip \
+            --research-base a76ba14e378267d2d6d6beb18b880916d77e84a1 \
+            --scope field-correction \
+            --research-authority-ref .remote-implementation/authorities/saint-louis/saint-louis-cbbg-0182742-correction-authority-0001.json \
+            --research-authority-digest 8dfabed8336faaea5f9349385200f75d22f3c387465fd68d2dd1bdd4da3653e7 \
+            --report-json /tmp/saint-louis-correction-freeze-report.json
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/saint-louis-correction-freeze-report.json"))
+          if r["scoped_acceptance"]["status"]!="PASS":
+              raise SystemExit("scoped correction acceptance failed")
+          sg=r["correction_diff"]["source_games"]
+          if sg["changed_source_game_ids"]!=["saint-louis-1916-17-005"] or sg["modified_count"]!=1 or sg["added_count"] or sg["deleted_count"]:
+              raise SystemExit(f"wrong correction source population: {sg}")
+          fields=sg["modified"][0]["fields"]
+          if set(fields)!={"normalized_opponent_key","normalized_opponent_name"}:
+              raise SystemExit(f"wrong source field delta: {fields}")
+          changed=[k for k,v in r["correction_diff"]["members"].items() if v["changed"]]
+          if changed!=["opponents.csv","source-games.csv"] and changed!=["source-games.csv","opponents.csv"]:
+              raise SystemExit(f"wrong package member delta: {changed}")
+          print(r["correction_diff_sha256"])
+          PY
+
+      - name: Freeze acknowledged exact correction
+        shell: bash
+        run: |
+          set -euo pipefail
+          diff_sha="$(python -c 'import json; print(json.load(open("/tmp/saint-louis-correction-freeze-report.json"))["correction_diff_sha256"])')"
+          python tools/correction_lifecycle.py freeze saint-louis /tmp/saint-louis-candidate.zip \
+            --research-base a76ba14e378267d2d6d6beb18b880916d77e84a1 \
+            --scope field-correction \
+            --research-authority-ref .remote-implementation/authorities/saint-louis/saint-louis-cbbg-0182742-correction-authority-0001.json \
+            --research-authority-digest 8dfabed8336faaea5f9349385200f75d22f3c387465fd68d2dd1bdd4da3653e7 \
+            --expected-diff-sha256 "$diff_sha" \
+            --output /tmp/saint-louis-correction-research-frozen.zip
+          sha256sum /tmp/saint-louis-correction-research-frozen.zip
+
+      - name: Run permanent current-main correction staging locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          freeze_sha="$(sha256sum /tmp/saint-louis-correction-research-frozen.zip | awk '{print $1}')"
+          git config user.name "College Basketball History Correction Preflight"
+          git config user.email "actions@users.noreply.github.com"
+          git switch --detach refs/remotes/origin/main
+          git switch -c data/saint-louis-correction
+          python tools/correction_lifecycle.py stage saint-louis /tmp/saint-louis-correction-research-frozen.zip --expected-sha256 "$freeze_sha"
+          python tools/correction_lifecycle.py stage saint-louis /tmp/saint-louis-correction-research-frozen.zip --expected-sha256 "$freeze_sha" --apply --commit
+          git format-patch -1 --stdout > /tmp/saint-louis-correction-stage.patch
+          git rev-parse HEAD > /tmp/saint-louis-correction-local-stage-commit.txt
+
+      - name: Run permanent Stage 2 correction preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/implementation_stage2.py saint-louis || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path(".onboarding/saint-louis/plan.json")
+          if not p.is_file():
+              raise SystemExit("Stage 2 did not emit plan.json")
+          plan=json.loads(p.read_text())
+          summary=plan.get("summary",{})
+          if summary.get("correction_transaction_kind")!="SINGLE_GAME_IDENTITY":
+              raise SystemExit(f"wrong correction transaction kind: {summary.get('correction_transaction_kind')}")
+          if summary.get("correction_source_game_id")!="saint-louis-1916-17-005":
+              raise SystemExit("wrong correction source ID")
+          if summary.get("correction_canonical_game_id")!="CBBG-0182742":
+              raise SystemExit("wrong correction canonical ID")
+          decisions=plan.get("decisions",[])
+          if len(decisions)!=1:
+              raise SystemExit(f"expected exactly one correction decision, got {len(decisions)}")
+          d=decisions[0]
+          if d.get("category")!="correction_identity_patch":
+              raise SystemExit(f"wrong decision category: {d.get('category')}")
+          if d.get("source_game_id")!="saint-louis-1916-17-005" or d.get("canonical_game_id")!="CBBG-0182742":
+              raise SystemExit("decision population mismatch")
+          if d.get("recommended_action")!="APPLY_CORRECTION_IDENTITY_PATCH" or d.get("allowed_actions")!=["APPLY_CORRECTION_IDENTITY_PATCH"]:
+              raise SystemExit(f"wrong correction action contract: {d.get('recommended_action')} / {d.get('allowed_actions')}")
+          if d.get("old_opponent_key")!="loyola-chicago" or d.get("new_opponent_key")!="loyola-academy":
+              raise SystemExit("wrong identity retarget")
+          if plan.get("blockers"):
+              raise SystemExit(f"Stage 2 blockers: {plan['blockers']}")
+          print("SINGLE_GAME_IDENTITY PREFLIGHT: PASS")
+          PY
+          cp .onboarding/saint-louis/integration-freeze.json /tmp/saint-louis-correction-integration-freeze.json
+          cp .onboarding/saint-louis/plan.json /tmp/saint-louis-correction-plan.json
+          cp .onboarding/saint-louis/review.csv /tmp/saint-louis-correction-review.csv
+          cp .onboarding/saint-louis/review.md /tmp/saint-louis-correction-review.md
+          cp .onboarding/saint-louis/implementation-stage2-status.json /tmp/saint-louis-correction-stage2-status.json
+          test -f .onboarding/saint-louis/implementation-stage2-capability-census.json && cp .onboarding/saint-louis/implementation-stage2-capability-census.json /tmp/saint-louis-correction-capability-census.json || true
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          def sh(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          plan=json.load(open("/tmp/saint-louis-correction-plan.json"))
+          out={
+            "schema_version":1,
+            "status":"SINGLE_GAME_IDENTITY_PREFLIGHT_PASS",
+            "protected_main_sha":"bed68f763a7ea8920c6ba830b004334b16c9e303",
+            "research_base_sha":"a76ba14e378267d2d6d6beb18b880916d77e84a1",
+            "authority_sha256":"8dfabed8336faaea5f9349385200f75d22f3c387465fd68d2dd1bdd4da3653e7",
+            "candidate_zip_sha256":sh("/tmp/saint-louis-candidate.zip"),
+            "freeze_zip_sha256":sh("/tmp/saint-louis-correction-research-frozen.zip"),
+            "integration_freeze_sha256":sh("/tmp/saint-louis-correction-integration-freeze.json"),
+            "plan_sha256":sh("/tmp/saint-louis-correction-plan.json"),
+            "decision_count":len(plan["decisions"]),
+            "transaction_kind":plan["summary"]["correction_transaction_kind"],
+            "source_game_id":plan["summary"]["correction_source_game_id"],
+            "canonical_game_id":plan["summary"]["correction_canonical_game_id"],
+            "local_stage_commit":Path("/tmp/saint-louis-correction-local-stage-commit.txt").read_text().strip()
+          }
+          Path("/tmp/saint-louis-correction-preflight-summary.json").write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
+
+      - name: Upload bounded correction preflight artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saint-louis-cbbg-0182742-correction-preflight
+          path: |
+            /tmp/saint-louis-candidate.zip
+            /tmp/saint-louis-correction-freeze-report.json
+            /tmp/saint-louis-correction-research-frozen.zip
+            /tmp/saint-louis-correction-integration-freeze.json
+            /tmp/saint-louis-correction-plan.json
+            /tmp/saint-louis-correction-review.csv
+            /tmp/saint-louis-correction-review.md
+            /tmp/saint-louis-correction-stage2-status.json
+            /tmp/saint-louis-correction-capability-census.json
+            /tmp/saint-louis-correction-stage.patch
+            /tmp/saint-louis-correction-local-stage-commit.txt
+            /tmp/saint-louis-correction-preflight-summary.json
+          if-no-files-found: warn
+          retention-days: 14
