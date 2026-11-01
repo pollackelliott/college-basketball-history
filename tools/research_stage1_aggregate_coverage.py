@@ -52,7 +52,7 @@ def read_zip(path: Path, expected: str) -> tuple[dict[str, bytes], str]:
         if not names or len(names) != len(set(names)):
             raise ValueError("INVALID_ARCHIVE_NAMES")
         prefixes = {name.split("/", 1)[0] for name in names if "/" in name}
-        if all("/" not in name for name in names):
+        if "stage1-manifest.json" in names:
             prefix = ""
         elif len(prefixes) == 1 and all(name.startswith(next(iter(prefixes)) + "/") for name in names):
             prefix = next(iter(prefixes)) + "/"
