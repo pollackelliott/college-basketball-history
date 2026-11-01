@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "f4a50db4429a210a9be511c5a5a18f3574bb32d8b36a75b4f8642b1aaa65d658",
+    "implementation-stage2-status.json": "db3fb5584d0bdb3ad19616bf1ea492459f47f34bd2862bb35385422bfc716dc7",
+    "plan.json": "de46fe2a6e71ae536cf71f5f58dd4dd1807d29e6b5d39b4d7594c34121007c84",
+    "review.csv": "983a206cf6e0382a48781cb804870ce3b007076f18119c32b860a504c5e1ed7f",
+    "review.md": "abc4f93e8d0e73957b8522c9ec3b97f27cc4d8b74c700d8402d19b239bf7020e"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "f4a50db4429a210a9be511c5a5a18f3574bb32d8b36a75b4f8642b1aaa65d658",
+    "implementation-stage2-status.json": "a8dc1d91e7a85f3f5890eb1207b28f58b7af95397a6e7324ae218c77437df97c",
+    "plan.json": "8a6d3ec04aaa8c30b14af13ba019c6b4faec67fa703fc47a2497151fb2d2d480",
+    "review.csv": "983a206cf6e0382a48781cb804870ce3b007076f18119c32b860a504c5e1ed7f",
+    "review.md": "d03f7556f9240b347d4ff7c952710aa345a1e2b47fe3fb88db1ff31a51411fea"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "c981a9141685dd9417d103db01bf1c2db1a178213436823d5cb7a94786576f80",
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "loyola-chicago-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d",
+  "target_tree_sha": "375d76417876d97c019429d852fa625e2e290be8",
+  "tracked_stage2_mutation": "NONE"
+}
