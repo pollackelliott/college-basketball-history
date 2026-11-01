@@ -1,30 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "saint-louis",
-  "previous_control_state_commit": "4f04c9e7682d13af575f5d2d9f6454f7726e65a8",
-  "previous_control_state_sha256": "db9024f50ab11462fa25977ce3f0fdf964f90c1ea26756d6d99fba76e7ef6032",
+  "request_id": "loyola-chicago-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "loyola-chicago",
+  "previous_control_state_commit": "8ab6aa645d026165f753aa93d2a4447d7faa9c32",
+  "previous_control_state_sha256": "23a62475196d1d30f622d9cf49c8b2d7dd7de28b36b7f379ae1b1c009a3fcc1f",
   "expected_protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
-  "target_branch": "data/saint-louis-onboarding",
-  "target_sha": "1d1b762e0775ca52202399ff4a387633cd357856",
-  "pr_number": 418,
-  "merge_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "b40bde0cb35d2bf358896c64b120f0b429de7c5e17e29026f51b3d014afb439d"
+  "research_checkpoint": {
+    "sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
+    "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "797835f03024f8a08c1c4027d754e909cbc970be",
+      "path_prefix": ".remote-implementation/transports/loyola-chicago/loyola-chicago-stage1-0001-final/piece-",
+      "part_count": 18
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "4d001b654c8f2f3113fbb000422a8acaf91b4fb01e90879fb63ad6b467f6bf06"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Saint Louis serialized Implementation lane — exact post-merge Production proof",
-    "authorization": "Owner's explicit APPROVED. Proceed authorized the final release phase after exact Preview approval. The lane independently reauthenticated fresh-verified Owner Gate 2 approval, merged PR #418 with expected head 1d1b762e0775ca52202399ff4a387633cd357856, and verified exact merge a76ba14e378267d2d6d6beb18b880916d77e84a1 with first parent 2e3cf2c901a717cb0cce580692234eaca4f47e89 and second parent 1d1b762e0775ca52202399ff4a387633cd357856. This request only performs read-only permanent merged-main validation, exact-SHA Production deployment and all changed public JSON equivalence with independent fresh verification. No merge replay, mutations, new gates, recovery, or other-school authority."
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — owner-authorized Stage 1",
+    "authorization": "Owner explicitly authorized Loyola Chicago serialized Implementation from immutable RESEARCH_FROZEN SHA-256 94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0 with accepted INCEPTION+ scope. This request performs only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main. It carries no Research change, Phase 0, shared/global mutation, Stage 2, owner-gate, release, recovery, or protected-main mutation authority."
   },
   "authority": {
     "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
@@ -36,11 +38,10 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
-    "venue_identity_maintenance": false
+    "owner_gate_2": false
   }
 }
