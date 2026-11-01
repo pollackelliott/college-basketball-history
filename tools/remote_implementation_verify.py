@@ -1368,6 +1368,14 @@ def verify_stage2_census(
     )
     if manifest_authority_kind != phase0["target_authority_kind"]:
         raise Stop("STAGE2_FRESH_TARGET_AUTHORITY_KIND_MISMATCH")
+    correction_ref = request.get("correction_integration_freeze") or {}
+    if (
+        manifest.get("correction_integration_freeze_path")
+        != correction_ref.get("path")
+        or manifest.get("correction_integration_freeze_sha256")
+        != correction_ref.get("sha256")
+    ):
+        raise Stop("STAGE2_FRESH_CORRECTION_AUTHORITY_BINDING_MISMATCH")
     display_ref = request.get("stage2_opponent_display_successor") or {}
     if (
         manifest.get("stage2_opponent_display_successor_path")
