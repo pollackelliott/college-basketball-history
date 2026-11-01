@@ -106,6 +106,80 @@ class RemoteStage2ProposalTests(unittest.TestCase):
         }
         return request, mapping
 
+    def test_correction_census_authority_authenticates_without_phase0(self):
+        branch = "data/example-school-correction"
+        freeze = canonical_json_bytes(
+            {
+                "workflow_kind": "POST_PUBLICATION_CORRECTION",
+                "status": "INTEGRATION_FROZEN",
+                "school_key": SCHOOL,
+                "source_game_semantic_guard": {
+                    "snapshot_sha256": SEMANTIC_SHA,
+                },
+            }
+        )
+        freeze_sha = sha(freeze)
+        freeze_path = (
+            ".remote-implementation/inputs/example-school-correction/"
+            "integration-freeze.json"
+        )
+        census = canonical_json_bytes(
+            {
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+                "school_key": SCHOOL,
+                "target_branch": branch,
+                "target_sha": TARGET,
+                "target_tree_sha": TREE,
+                "target_authority_kind": "POST_PUBLICATION_CORRECTION",
+                "correction_integration_freeze_path": freeze_path,
+                "correction_integration_freeze_sha256": freeze_sha,
+                "stage2_status": "CAPABILITY_CENSUS_READY",
+                "preflight": {
+                    "blocker_count": 0,
+                    "warning_count": 0,
+                },
+                "decision_universe_sha256": DECISION_SHA,
+                "integration_freeze_sha256": freeze_sha,
+                "semantic_snapshot_sha256": SEMANTIC_SHA,
+            }
+        )
+        authority_path = (
+            ".remote-implementation/checkpoints/example-school/"
+            "correction-census/checkpoint-manifest.json"
+        )
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": branch,
+            "target_sha": TARGET,
+            "stage2_authority": {
+                "path": authority_path,
+                "sha256": sha(census),
+            },
+            "integration_freeze_sha256": freeze_sha,
+            "semantic_snapshot_sha256": SEMANTIC_SHA,
+            "decision_universe_sha256": DECISION_SHA,
+        }
+        mapping = {
+            authority_path: census,
+            freeze_path: freeze,
+        }
+        with patch.object(
+            proposal,
+            "git_show_bytes",
+            side_effect=lambda commit, path, **kwargs: mapping[path],
+        ):
+            result = proposal.verify_stage2_proposal_authority(
+                request,
+                "f" * 40,
+            )
+        self.assertEqual(
+            result["authority_kind"],
+            "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+        )
+        self.assertEqual(result["target_tree_sha"], TREE)
+        self.assertEqual(result["freeze_bytes"], freeze)
+        self.assertEqual(result["writeahead"], {})
+
     def test_exact_post_repair_authority_authenticates(self):
         request, mapping = self.authority_fixture()
 
