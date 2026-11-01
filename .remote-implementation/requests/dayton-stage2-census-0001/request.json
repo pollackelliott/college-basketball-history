@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "dayton-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "dayton",
+  "previous_control_state_commit": "8e78c65c35fc786110b35a5849f77a810d5c0a5d",
+  "previous_control_state_sha256": "af2e0e9e3fe3075c03ba52063d8a79d314836576f3051b0ab7cd6ed7380be6a6",
+  "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
+    "sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43"
+  },
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "creation_provenance": {
+    "origin": "Dayton Implementation chat succession — Stage 2 recovery",
+    "authorization": "Owner explicitly authorized resumption of the existing Dayton Implementation Stage 2 phase through its normal OWNER_GATE_1_READY boundary. This request is the first bounded read-only STAGE2_CENSUS operation, bound to the independently verified Phase 0 successor and Integration Freeze. It carries no tracked repair, Owner Gate 1, sealing, sealed apply, release, merge, or Owner Gate 2 authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
