@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "86669740387a762ef6abb0c28ef8c633078ea7b85834372eb811a694a3a1932a",
+    "implementation-stage2-status.json": "ea7aa76b70d582f4d4a6fe8b2a8b7b21ff509136df28ce7a6a1b35982fea0d66",
+    "plan.json": "ab9b1b67dd30e384b9d4e97718497b01d8b4011d5b3f0c32413fdbe6e64b8b61",
+    "review.csv": "99b89e29b4c187ea54bf2956be66908abad0bcfd4d527305894594aa99b2cc67",
+    "review.md": "57d1b125ed7933200c9d5233a6615919ff55e21855903de1f6230b32e7a939a2"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "86669740387a762ef6abb0c28ef8c633078ea7b85834372eb811a694a3a1932a",
+    "implementation-stage2-status.json": "9638b59dd0e39321d52f618d73c404e900698a59d53a2de4803c32be220acc49",
+    "plan.json": "523f8889c02d977bb5a6c84fa561fb75f991883cfa98d485cf16cd09bca84830",
+    "review.csv": "99b89e29b4c187ea54bf2956be66908abad0bcfd4d527305894594aa99b2cc67",
+    "review.md": "5720baa6ce54d2147bc49830a8e78c03ae59b67a764b862df88c41191c4832f6"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "8ee1aa044fe24ad78fe9a1f3de3cbba8230b7b96304afe0c35d2323ba8d86452",
+  "integration_freeze_sha256": "9bc792c19245cafcf8a0c4a4211285c885b3db88c5ee69db0daaf2eba4486790",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "saint-louis-correction-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "saint-louis",
+  "semantic_snapshot_sha256": "d2d9cf8df9cb8a4c0e726f046bcff178d55a2883da3cc1ee7c7e93f026decabc",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "301a823f1e7f4f73624a49146ec704603b718e4d",
+  "target_tree_sha": "09e0c1355e36ade3a6286343f945b970294aabe9",
+  "tracked_stage2_mutation": "NONE"
+}
