@@ -1,0 +1,90 @@
+{
+  "allowed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/evidence/ncaa-tournament-sites.csv",
+    "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/venues.csv"
+  ],
+  "apply_result": {
+    "assertion_rows_updated": 0,
+    "canonical_geography_rows_updated": 0,
+    "canonical_identity_rows_updated": 0,
+    "canonical_rows_updated": 0,
+    "ncaa_evidence_rows_updated": 0,
+    "plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
+    "provenance_markers_updated": 0,
+    "school_geography_rows_updated": 0,
+    "school_identity_rows_updated": 1,
+    "school_rows_updated": 1,
+    "site_files_refreshed": 0,
+    "venue_geography_corrections": 0,
+    "venue_name_rows_reassigned": 1,
+    "venues_retired": 1
+  },
+  "changed_file_sha256": {
+    "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff",
+    "data/reference/venue-names.csv": "c18c02faf65df37d84515a544820e823a206c6120001b3e2c82d5d7051ed6b63",
+    "data/reference/venues.csv": "e058efdcf46dfbfb7b2300610e58c89e59bf11c80c44efb15b3ab5b784a30ac7",
+    "schools/long-island-university/venues.csv": "41081cabca4d7fc8e7fa8239c1379ab7acffb00d6ad193eff7360e63f5a96e76"
+  },
+  "changed_paths": [
+    "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/venues.csv"
+  ],
+  "commit_message": "Reconcile shared venue references for loyola-chicago",
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "be576353edf2edccae4594fd67bedb2862a95d65",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "plan_merges": [
+    {
+      "absorbed_venue_id": "VEN-000967",
+      "absorbed_venue_key": "assembly-hall-illinois",
+      "assertion_rows": 0,
+      "canonical_rows": 0,
+      "city": "Champaign",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 0,
+      "resolution_basis": "Control Center-authorized Loyola Chicago Stage 1 maintenance. Current protected main contains duplicate physical identities for the University of Illinois Assembly Hall / State Farm Center building in Champaign, Illinois. Preserve established VEN-000196 / state-farm-center, whose venue-name authority already carries the official Assembly Hall naming period (1963-03-02 through 2013-04-28), the State Farm Center naming period beginning 2013-04-29, and the Assembly Hall (Illinois) alias; retire later duplicate VEN-000967 / assembly-hall-illinois introduced during Long Island University onboarding. Preserve literal source assertions and historical naming evidence. This is a shared physical-venue identity repair, not Loyola Chicago historical re-research.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "IL",
+      "survivor_venue_id": "VEN-000196",
+      "survivor_venue_key": "state-farm-center",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
+  "prepared_commit_sha": "99bbedd6e55af471062374b36fbb1995e3895f05",
+  "prepared_parent_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "prepared_tree_sha": "f1a8d26e4f1fa844b5c5ea28c22fd2945bf5a2f5",
+  "protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
+  "repository_spec_sha256": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff",
+  "repository_validation": "PASS",
+  "request_id": "loyola-chicago-venue-maintenance-0002",
+  "request_sha256": "8a1c77c8b5e6cf2d0f120c888d733e096c05dbbf707ce2dcacd7359e0cbf3210",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "sidecars": {
+    "apply-result.json": "d8355f54dcde7a4a5982e676e0f60c64abc7f81094f37cd60d65f5480521428d",
+    "transaction-plan.json": "d3f4de23adb78bc383507eca5a8c752f6af14bf51fe9ea189ec64caccabd2d21",
+    "venue-maintenance-spec.json": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff"
+  },
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/loyola-chicago-stage1-venue-identity"
+}

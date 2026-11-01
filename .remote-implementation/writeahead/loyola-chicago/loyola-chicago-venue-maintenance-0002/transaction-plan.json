@@ -1,0 +1,42 @@
+{
+  "blockers": [],
+  "fingerprints": {
+    "data/canonical/games.csv": "f64f6e3e80b815c34aa7ec37e9863794d1173bed0ae06bf0986629ec5be98b49",
+    "data/evidence/game-assertions.csv": "a9c34e0f4b1356ccf31b4d96639b449f27a08330edf2f789d3162e96a8702cc1",
+    "data/evidence/ncaa-tournament-sites.csv": "eb462cba0e44bc87bcedb6b95aa0aa690a917bf4010263db156b281763851135",
+    "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff",
+    "data/reference/venue-names.csv": "3b54f7f2eaf9d142b878fcb9c37200e37abd650543eea60d37253168b15dcf02",
+    "data/reference/venues.csv": "b335704575065aa516778dee695ab538254c8de3284b6d917f377ff801f2258e",
+    "schools/long-island-university/venues.csv": "9fae991ffd39ba93c6eee3c36dc6eb7e02145023319e9a85434d0b2cb9a6cca9"
+  },
+  "geography_corrections": [],
+  "git_head": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "merges": [
+    {
+      "absorbed_venue_id": "VEN-000967",
+      "absorbed_venue_key": "assembly-hall-illinois",
+      "assertion_rows": 0,
+      "canonical_rows": 0,
+      "city": "Champaign",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 0,
+      "resolution_basis": "Control Center-authorized Loyola Chicago Stage 1 maintenance. Current protected main contains duplicate physical identities for the University of Illinois Assembly Hall / State Farm Center building in Champaign, Illinois. Preserve established VEN-000196 / state-farm-center, whose venue-name authority already carries the official Assembly Hall naming period (1963-03-02 through 2013-04-28), the State Farm Center naming period beginning 2013-04-29, and the Assembly Hall (Illinois) alias; retire later duplicate VEN-000967 / assembly-hall-illinois introduced during Long Island University onboarding. Preserve literal source assertions and historical naming evidence. This is a shared physical-venue identity repair, not Loyola Chicago historical re-research.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "IL",
+      "survivor_venue_id": "VEN-000196",
+      "survivor_venue_key": "state-farm-center",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
+  "schema_version": 1,
+  "spec": "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json"
+}
