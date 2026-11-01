@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "authority_type": "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE",
+  "cases": [
+    {
+      "school_key": "st-bonaventure",
+      "season": "1919-20",
+      "parent_checkpoint_sha256": "23cb047b2ecbbab3f1310472768974891c851ac687dd5b8c6e55e8bc6f289504",
+      "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/426",
+      "institutional_record": {
+        "wins": 6,
+        "losses": 10,
+        "games": 16
+      },
+      "identified_record": {
+        "wins": 3,
+        "losses": 7,
+        "games": 10
+      },
+      "unidentified_record": {
+        "wins": 3,
+        "losses": 3,
+        "games": 6
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "notes": "Founding-era year-by-year institutional 6-10 record; 10 individually supported games; exhausted archival/reciprocal routes. Missing-six count is derived, NOT an institutional statement. No hypothetical games."
+    }
+  ]
+}
