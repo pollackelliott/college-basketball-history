@@ -200,15 +200,15 @@
   "active_lock_commit": "96cc3010afdcff0e4f63fd19e6ab8626772a7f33",
   "active_lock_owner": "github-actions:41263214528:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "active_prepared_tree_sha": "2d959bf664bdfbf2d498f16022e420020c39acdd",
   "active_request_id": "loyola-chicago-phase0-0001",
   "active_request_sha256": "8e2a10749189d51f794381b929a5428787eff047a6fe9b1d777d9b8d5af40dba",
   "active_school_key": "loyola-chicago",
   "active_target_branch": "data/loyola-chicago-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/loyola-chicago/loyola-chicago-phase0-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "59ad34f37a383e8db129a4be1cd3fdbc65b2461be24f0278806ebe689307f5bc",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -412,5 +412,5 @@
   "lock_acquisition_request_commit": "7884891c1effbd3d978d96bd05fbda605dd1e240",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
