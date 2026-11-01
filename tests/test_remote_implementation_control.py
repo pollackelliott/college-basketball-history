@@ -250,6 +250,44 @@ class RemoteImplementationControlTests(unittest.TestCase):
     def test_valid_bounded_stage2_census_request(self):
         validate_request(request(OP_STAGE2_CENSUS))
 
+    def test_valid_post_publication_correction_stage2_census_request(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["target_branch"] = "data/example-school-correction"
+        req.pop("phase0_successor")
+        req["correction_integration_freeze"] = {
+            "path": (
+                ".remote-implementation/inputs/example-school-correction/"
+                "integration-freeze.json"
+            ),
+            "sha256": req["integration_freeze_sha256"],
+        }
+        validate_request(req)
+
+    def test_correction_stage2_census_refuses_phase0_successor(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["target_branch"] = "data/example-school-correction"
+        req["correction_integration_freeze"] = {
+            "path": ".remote-implementation/inputs/correction/integration-freeze.json",
+            "sha256": req["integration_freeze_sha256"],
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_CENSUS_CORRECTION_PHASE0_SUCCESSOR_FORBIDDEN",
+        ):
+            validate_request(req)
+
+    def test_onboarding_stage2_census_refuses_correction_freeze(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["correction_integration_freeze"] = {
+            "path": ".remote-implementation/inputs/correction/integration-freeze.json",
+            "sha256": req["integration_freeze_sha256"],
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_CENSUS_ONBOARDING_CORRECTION_FREEZE_FORBIDDEN",
+        ):
+            validate_request(req)
+
     def test_valid_stage2_census_request_with_display_successor_binding(self):
         req = request(OP_STAGE2_CENSUS)
         req["stage2_opponent_display_successor"] = {
@@ -390,6 +428,11 @@ class RemoteImplementationControlTests(unittest.TestCase):
             MAIN,
             allow_active_recovery=True,
         )
+
+    def test_stage2_proposal_accepts_correction_branch_after_census(self):
+        req = request(OP_STAGE2_PROPOSAL_REHEARSAL)
+        req["target_branch"] = "data/example-school-correction"
+        validate_request(req)
 
     def test_stage2_census_requires_exact_target_branch(self):
         req = request(OP_STAGE2_CENSUS)
