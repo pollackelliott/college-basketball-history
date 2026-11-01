@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-sealed-apply-0001",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "6021bcefeb99c34bf6a4008ad349359d078e0d44",
+  "previous_control_state_sha256": "3d7dd2d96cb5eb6cbf19bdca502ac3782df032e9519a3d4074bd6072fae7e786",
+  "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "6677cec86c12906fdc7f87d893f07c999b7119ff91277296ab9c5f9ba8710b5c"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "5906294d106cd12765d226386fc3dcbebbed35113ade6de848a40921ad0145cd"
+  },
+  "approved_plan_hash": "4e2033b466dfdfbfeae4292836dec6ebf6ea89eb464f5971b0da4d8030a9ee18",
+  "approved_plan_sha256": "79f65f3d9e4865369b16929f0f9c2437c0b004eb385a6f469112cdd79ff2be1b",
+  "owner_gate_1_approval_sha256": "c891886624da76903735c9a54e6a99269846902cb72274301da87a3f63eca40c",
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "decision_universe_sha256": "c981a9141685dd9417d103db01bf1c2db1a178213436823d5cb7a94786576f80",
+  "recommendation_map_sha256": "094bb55bc6fc5286fcb6f232856cd897d32fb01dbeb5e30520f068ea5cfcaf96",
+  "filled_review_sha256": "18e9925773eba6c1d5678a13ca186e0ab3816289099e2086d8249643a825e94b",
+  "decision_id_set_sha256": "bbdd043ec83aa3b4cb94751f11ce1591a1f40b37387cf381f2bbe194eb8ff4f5",
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation — exact sealed apply",
+    "authorization": "The exact Loyola Chicago Gate 1 seal is fresh-verified PASS under the owner's explicit Gate 1 approval. Authorize exactly one bounded remote STAGE2_SEALED_APPLY against loyola-chicago-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. This creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

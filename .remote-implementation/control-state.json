@@ -219,18 +219,19 @@
     "loyola-chicago-stage2-proposal-0007",
     "loyola-chicago-stage2-gate1-fill-0001",
     "loyola-chicago-stage2-preseal-rehearsal-0001",
-    "loyola-chicago-stage2-gate1-seal-0001"
+    "loyola-chicago-stage2-gate1-seal-0001",
+    "loyola-chicago-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41341948969:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "loyola-chicago-stage2-sealed-apply-0001",
+  "active_request_sha256": "b1917c728c28ad837ac9f7fe86edda237ad915c8d69318923b36e2820e41e581",
+  "active_school_key": "loyola-chicago",
+  "active_target_branch": "data/loyola-chicago-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -472,8 +473,11 @@
     "target_branch": "data/loyola-chicago-onboarding",
     "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41341948969",
+  "lock_acquisition_request_commit": "697f0369087626c84b81ef3601ade745b5692813",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
