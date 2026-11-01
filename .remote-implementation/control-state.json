@@ -459,7 +459,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "3cb7c44c1ec53b0399348e565b412e6557c81ba55652938865b0ba94e9c646ae",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -469,7 +469,7 @@
     "production_deployment_id": 7478524242,
     "production_json_checked_count": 81,
     "protected_main_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "loyola-chicago-release-production-proof-0001",
     "school_key": "loyola-chicago"
   },

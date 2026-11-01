@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "3cb7c44c1ec53b0399348e565b412e6557c81ba55652938865b0ba94e9c646ae",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "cacf737b4a302be28c87aa22abf198946a61922f",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "pr_number": 425,
+  "production_deployment_id": 7478524242,
+  "production_json_checked_count": 81,
+  "production_proof": true,
+  "request_id": "loyola-chicago-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "status": "COMPLETE"
+}
