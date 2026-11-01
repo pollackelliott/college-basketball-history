@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-census-0001",
+  "school_key": "loyola-chicago",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "8b88eb2d924ff87ecf1b7c8a872f3b575c1ce8d4",
+  "previous_control_state_sha256": "2edc5af4e3f41c940262beb289e18f7dab2f403bf0a51fcdffd148bde2cdee3c",
+  "expected_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-phase0-0001/successor-manifest.json",
+    "sha256": "ab149af5e216d1d28c253162252f701535368aa0facaaf34d8e6b831716757d6"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane",
+    "authorization": "Owner authorized exactly one read-only STAGE2_CENSUS from the fresh-verified Loyola Chicago Phase 0 successor."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}

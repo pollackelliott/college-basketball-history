@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "loyola-chicago",
+  "created_at": "2026-11-01T02:08:07.080739+00:00",
+  "input_fingerprint": {
+    "sha256": "bd9b407881b7fc333698a5844763ba24dd661399d889c02ef53a589085f5a776",
+    "git_head": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+    "files": {
+      "schools/loyola-chicago/source-games.csv": "cbba5163f2f67304b7ed87b1982e0f4dfde1bc44f5b652bd6e98370a8ecb1e79",
+      "schools/loyola-chicago/opponents.csv": "d8df3ef2a5d58eff4bab5d6ad23edd3ff1e82df9ca5413edf3fb128feea432bf",
+      "schools/loyola-chicago/venues.csv": "8838051b32508980e522e6991221178d7843d74f556368a5c55a1045a0c04eb4",
+      "schools/loyola-chicago/conferences.csv": "c97af97c2cde3fe0125ecd440e2b849f9390b4670860d1b5fe02198bb1fc4d43",
+      "schools/loyola-chicago/notes.md": "3e5b77a15237d74389b717ea8f5895a2080092310d1edb55fe0644023a326726",
+      "schools/loyola-chicago/source-notes.md": "e4f585895e9f15ed1809a87f4b21f5da1dd64ac7733026c436bc3c5f353d7ff0",
+      "data/canonical/games.csv": "f64f6e3e80b815c34aa7ec37e9863794d1173bed0ae06bf0986629ec5be98b49",
+      "data/evidence/game-assertions.csv": "a9c34e0f4b1356ccf31b4d96639b449f27a08330edf2f789d3162e96a8702cc1",
+      "data/reconciliation/discrepancies.csv": "cc8a08aa8d5a3abb64d259936851456e063f5a116e725db838431729faff8fc9",
+      "data/reference/programs.csv": "bf43aa4f3e6d1cf4f4b01672083321eef5a8901d1d0f7b598a9d55e91424f0e0",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "a239082063538863e2ca508c28e981f07bd741571f264ed63c947f6bd8fc4d4d",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "f417d740b10a8cbb950cbcf5433d9434bb75d9f728efe5c489ee7a62cff4ec16",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "2d478cfdd209bc912ee2a46248d8aed6474b2661696d7ae7f269b14ab4f61d4e",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "f85873ca0dacd6a0b4e0706f17e2d417f35f57543de4c4bf0d81d74820f5ac0f",
+      "tools/onboarding_plan.py": "c1fa696ae6227d2f1dcc3ad4e74e2452a4eae18532bc494ac12a265aae35c992",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: augustana-il: ['Augustana (IL)', 'Augustana College (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: carroll-wisconsin: ['Carroll University (Wis.)', 'Carroll University (Wisconsin)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: centenary-louisiana: ['Centenary (LA)', 'Centenary College of Louisiana']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: fort-sheridan: ['Fort Sheridan', 'Fort Sheridan (U.S. Army)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: saint-johns-minnesota: [\"Saint John's University (Minnesota)\", 'Saint John’s (MN)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: saint-michael-s: [\"Saint Michael's\", 'Saint Michael’s', 'Saint Michael’s College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: st-francis-brooklyn: ['St. Francis Brooklyn', 'St. Francis College (Brooklyn)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: st-francis-illinois: ['St. Francis (Ill.)', 'University of St. Francis (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: st-marys-texas: [\"St. Mary's (Texas)\", \"St. Mary's University (Texas)\"]. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: truman-state: ['Truman State', 'Truman State University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: westminster: ['Westminster', 'Westminster College (Mo.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: westminster-pennsylvania: ['Westminster (PA)', 'Westminster College (Pa.)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2727,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 879,
+      "venues": 72,
+      "conference_intervals": 6,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: augustana-il: ['Augustana (IL)', 'Augustana College (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: carroll-wisconsin: ['Carroll University (Wis.)', 'Carroll University (Wisconsin)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: centenary-louisiana: ['Centenary (LA)', 'Centenary College of Louisiana']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: fort-sheridan: ['Fort Sheridan', 'Fort Sheridan (U.S. Army)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-johns-minnesota: [\"Saint John's University (Minnesota)\", 'Saint John’s (MN)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-michael-s: [\"Saint Michael's\", 'Saint Michael’s', 'Saint Michael’s College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-francis-brooklyn: ['St. Francis Brooklyn', 'St. Francis College (Brooklyn)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-francis-illinois: ['St. Francis (Ill.)', 'University of St. Francis (Ill.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-marys-texas: [\"St. Mary's (Texas)\", \"St. Mary's University (Texas)\"]. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: truman-state: ['Truman State', 'Truman State University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: westminster: ['Westminster', 'Westminster College (Mo.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: westminster-pennsylvania: ['Westminster (PA)', 'Westminster College (Pa.)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

@@ -1,0 +1,82 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "58294c871817516ba60d8fa97909f473f8f241779003ad9427c1797f320ebf89",
+    "implementation-stage2-status.json": "1d809a631880965e28bb9fcd6955e760baa627bc4337f7bf1a70874477b35c21",
+    "plan.json": "f73cb12ec7e2ef33fec41b528f69d204a60695e3d30b4feb3e0b27e53aec3b3e",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "f6e00093fed4ad5c163f0a5b8b666d960af5b6d871ed1884f26a349354c0df41"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "58294c871817516ba60d8fa97909f473f8f241779003ad9427c1797f320ebf89",
+    "implementation-stage2-status.json": "7e48aa9088a19f3fbf9909430f914ed7d788532e62b49485d47c98233c609cf5",
+    "plan.json": "61826dbde85c8aa16415c73b62588f5708e8ddd493b65ae1e131ac91f470136e",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "c859812fdecd2f71988400920237b3876442eea6128c0f7cfb32b4164bd9f79c"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "58294c871817516ba60d8fa97909f473f8f241779003ad9427c1797f320ebf89",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 12,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 12,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "loyola-chicago"
+  ],
+  "phase0_protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "phase0_successor_path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "ab149af5e216d1d28c253162252f701535368aa0facaaf34d8e6b831716757d6",
+  "preflight": {
+    "blocker_count": 12,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/loyola-chicago/plan.json",
+    "review_path": ".onboarding/loyola-chicago/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "request_id": "loyola-chicago-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+  "target_tree_sha": "2d959bf664bdfbf2d498f16022e420020c39acdd",
+  "tracked_mutation_proof": {
+    "after_head_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+    "after_status": "",
+    "after_tree_sha": "2d959bf664bdfbf2d498f16022e420020c39acdd",
+    "before_head_sha": "8293e5fd303a741c6bb3dd7c1c8e1dd21031bd6c",
+    "before_status": "",
+    "before_tree_sha": "2d959bf664bdfbf2d498f16022e420020c39acdd",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
