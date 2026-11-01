@@ -109,6 +109,15 @@ This writes the ordinary ignored `.onboarding/<school>/integration-freeze.json` 
 
 After correction staging, use the existing repository-owned Stage 2, Gate 1, sealed apply, verification, Preview/Gate 2, merge, and Production-proof workflow.
 
+When serialized execution uses the guarded remote runner, the correction's
+`INTEGRATION_FROZEN` manifest is the initial Stage 2 target authority. Submit
+`STAGE2_CENSUS` against `data/<school>-correction` with the exact hash-bound
+correction Integration Freeze instead of manufacturing a Phase 0 successor.
+Every downstream remote checkpoint must preserve that same correction branch
+through sealed apply and release. The correction mode retains the ordinary
+global mutation lock, write-ahead/CAS publication, fresh verification, exact
+Preview approval, merge, and Production-proof safeguards.
+
 No historical conflict is silently pre-applied. If the accepted correction checkpoint deliberately preserved a Gate 1 conflict, it remains a Gate 1 decision. Previously explicit owner historical authority may be carried through as durable correction authority without manufacturing a second owner decision.
 
 The implementation site gate remains full-strength for canonical/public output. For source-side Research debt only, an explicit correction Integration Freeze scopes the source-side Research gate to rows changed by the correction (plus later semantic source patches). Unchanged pre-existing source debt therefore cannot force an unrelated whole-school re-research. Stage 2 package preflight applies the same authority boundary narrowly to an exact unchanged published-baseline source row whose curated venue is absent from the target school's local venue table: that legacy registration gap is recorded as a warning rather than absorbed into the correction. Correction rows and any subsequently modified legacy row remain subject to the ordinary blocking validator.

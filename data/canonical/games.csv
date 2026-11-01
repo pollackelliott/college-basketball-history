@@ -182677,7 +182677,7 @@ CBBG-0182738,1916-1917,1917-01-09,EXACT,mckendree,saint-louis,28,19,mckendree,,T
 CBBG-0182739,1916-1917,1917-01-13,EXACT,saint-louis,st-ambrose,43,25,saint-louis,,TEAM_B_HOME,st-ambrose,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0182740,1916-1917,1917-01-15,EXACT,dubuque,saint-louis,43,14,dubuque,,TEAM_A_HOME,dubuque,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0182741,1916-1917,1917-01-16,EXACT,campion-college,saint-louis,25,21,campion-college,,TEAM_A_HOME,campion-college,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0182742,1916-1917,1917-01-17,EXACT,loyola-chicago,saint-louis,28,12,loyola-chicago,,TEAM_A_HOME,loyola-chicago,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0182742,1916-1917,1917-01-17,EXACT,loyola-academy,saint-louis,28,12,loyola-academy,,TEAM_A_HOME,loyola-academy,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OWNER_APPROVED_CORRECTION_IDENTITY school=saint-louis source=saint-louis-1916-17-005 old=loyola-chicago new=loyola-academy decision=CORRECTION-IDENTITY-SAINT-LOUIS-1916-17-005-CBBG-0182742 plan=bfe16499cd11]
 CBBG-0182743,1916-1917,1917-01-22,EXACT,mckendree,saint-louis,15,22,saint-louis,,TEAM_A_HOME,mckendree,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0182744,1916-1917,1917-01-31,EXACT,missouri-s-t,saint-louis,18,30,saint-louis,,TEAM_B_HOME,saint-louis,muegge-gymnasium,VEN-001020,St. Louis,MO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=saint-louis/saint-louis-1916-17-007;venue_key=muegge-gymnasium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0182745,1916-1917,1917-02-06,EXACT,saint-louis,washington-university-in-st-louis,20,33,washington-university-in-st-louis,,TEAM_B_HOME,washington-university-in-st-louis,,,,,REGULAR_SEASON,,,,PROVISIONAL,

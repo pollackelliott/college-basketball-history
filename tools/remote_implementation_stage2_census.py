@@ -439,12 +439,281 @@ def _verify_opponent_display_target_authority(
     }
 
 
+
+def _verify_post_publication_correction_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    source_repo: Path = ROOT,
+) -> dict[str, Any]:
+    """Authenticate a correction Integration Freeze instead of Phase 0 authority."""
+    ref = request.get("correction_integration_freeze") or {}
+    path = str(ref.get("path") or "")
+    expected_sha = str(ref.get("sha256") or "")
+    if not path or not expected_sha:
+        raise Stop("STAGE2_CORRECTION_FREEZE_REFERENCE_MISSING")
+    freeze_bytes = git_show_bytes(control_commit, path, cwd=source_repo)
+    if sha256_bytes(freeze_bytes) != expected_sha:
+        raise Stop("STAGE2_CORRECTION_FREEZE_HASH_MISMATCH")
+    if expected_sha != request.get("integration_freeze_sha256"):
+        raise Stop("STAGE2_CORRECTION_FREEZE_REQUEST_BINDING_MISMATCH")
+    try:
+        integration = json.loads(freeze_bytes)
+    except (TypeError, ValueError) as exc:
+        raise Stop("STAGE2_CORRECTION_FREEZE_JSON_INVALID") from exc
+
+    school = request["school_key"]
+    target_branch = request["target_branch"]
+    target_sha = request["target_sha"]
+    if target_branch != f"data/{school}-correction":
+        raise Stop("STAGE2_CORRECTION_TARGET_BRANCH_INVALID")
+    if integration.get("workflow_kind") != "POST_PUBLICATION_CORRECTION":
+        raise Stop("STAGE2_CORRECTION_WORKFLOW_KIND_MISMATCH")
+    if integration.get("status") != "INTEGRATION_FROZEN":
+        raise Stop("STAGE2_CORRECTION_FREEZE_STATUS_MISMATCH")
+    if integration.get("school_key") != school:
+        raise Stop("STAGE2_CORRECTION_FREEZE_SCHOOL_MISMATCH")
+    semantic = (integration.get("source_game_semantic_guard") or {}).get(
+        "snapshot_sha256"
+    )
+    if semantic != request.get("semantic_snapshot_sha256"):
+        raise Stop("STAGE2_CORRECTION_FREEZE_SEMANTIC_MISMATCH")
+    pre_semantic = (integration.get("pre_correction_source_semantic_guard") or {}).get(
+        "snapshot_sha256"
+    )
+    if not isinstance(pre_semantic, str) or len(pre_semantic) != 64:
+        raise Stop("STAGE2_CORRECTION_PRE_SEMANTIC_MISSING")
+    correction_ids = integration.get("correction_source_game_ids")
+    if not isinstance(correction_ids, list) or not correction_ids:
+        raise Stop("STAGE2_CORRECTION_SOURCE_IDS_MISSING")
+
+    origin_main = str(integration.get("origin_main_sha") or "")
+    integration_base = str(integration.get("integration_base_sha") or "")
+    if not origin_main or integration_base != origin_main:
+        raise Stop("STAGE2_CORRECTION_INTEGRATION_BASE_MISMATCH")
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/%s:refs/remotes/origin/remote-stage2-correction-authority"
+        % target_branch,
+        cwd=source_repo,
+    )
+    fetched_target = git(
+        "rev-parse",
+        "refs/remotes/origin/remote-stage2-correction-authority",
+        cwd=source_repo,
+    ).stdout.strip()
+    if fetched_target != target_sha:
+        raise Stop("STAGE2_CORRECTION_TARGET_FETCH_MISMATCH")
+
+    current_main = request["expected_protected_main_sha"]
+    if git(
+        "merge-base", "--is-ancestor", origin_main, current_main,
+        cwd=source_repo, check=False,
+    ).returncode != 0:
+        raise Stop("STAGE2_CORRECTION_CURRENT_MAIN_NOT_DESCENDANT")
+    if git(
+        "merge-base", "--is-ancestor", origin_main, target_sha,
+        cwd=source_repo, check=False,
+    ).returncode != 0:
+        raise Stop("STAGE2_CORRECTION_TARGET_NOT_DESCENDANT_OF_BASE")
+
+    package_hashes = integration.get("package_member_sha256") or {}
+    for name in REQUIRED_PACKAGE_FILES:
+        expected = package_hashes.get(name)
+        actual = _school_package_hash(
+            target_sha,
+            school,
+            name,
+            source_repo=source_repo,
+        )
+        if not expected or actual != expected:
+            raise Stop("STAGE2_CORRECTION_PACKAGE_HASH_MISMATCH:%s" % name)
+
+    return {
+        "freeze_bytes": freeze_bytes,
+        "freeze_path": path,
+        "phase0_target_sha": target_sha,
+        "phase0_protected_main_sha": origin_main,
+        "target_authority_kind": "POST_PUBLICATION_CORRECTION",
+        "opponent_display_authority": None,
+        "correction_integration_freeze_path": path,
+        "correction_integration_freeze_sha256": expected_sha,
+        "correction_origin_main_sha": origin_main,
+    }
+
+
+
+def _verify_current_main_refresh_target_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    source_repo: Path,
+) -> dict[str, Any]:
+    ref = request.get("stage2_current_main_refresh_successor")
+    if not isinstance(ref, dict):
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_REFERENCE_REQUIRED")
+    data = git_show_bytes(
+        control_commit,
+        str(ref.get("path") or ""),
+        cwd=source_repo,
+    )
+    if sha256_bytes(data) != ref.get("sha256"):
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(data)
+    if (
+        successor.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR"
+    ):
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_KIND_MISMATCH")
+    if successor.get("operation") != "STAGE2_CURRENT_MAIN_REFRESH":
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_OPERATION_MISMATCH")
+    if successor.get("school_key") != request["school_key"]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_SCHOOL_MISMATCH")
+    if successor.get("target_branch") != request["target_branch"]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_BRANCH_MISMATCH")
+    if successor.get("actual_published_target_sha") != request["target_sha"]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_TARGET_MISMATCH")
+    if successor.get("prepared_commit_sha") != request["target_sha"]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_PREPARED_MISMATCH")
+    if successor.get("integration_freeze_sha256") != request["integration_freeze_sha256"]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_FREEZE_MISMATCH")
+    if successor.get("semantic_snapshot_sha256") != request["semantic_snapshot_sha256"]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_SEMANTIC_MISMATCH")
+    if successor.get("repository_validation") != "PASS":
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_NOT_VALIDATED")
+    if successor.get("final_transaction_state") != "COMPLETE":
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_NOT_COMPLETE")
+    if successor.get("publication_cas") != "EXISTING_REF_CAS_PASS":
+        raise Stop("STAGE2_REFRESH_PUBLICATION_CAS_MISMATCH")
+
+    predecessor = str(successor.get("expected_target_predecessor_sha") or "")
+    if not predecessor:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_PREDECESSOR_MISSING")
+    prior_request = dict(request)
+    prior_request["target_sha"] = predecessor
+    prior_path = str(successor.get("prior_refresh_successor_path") or "")
+    prior_sha = str(successor.get("prior_refresh_successor_sha256") or "")
+    if prior_path or prior_sha:
+        if not prior_path or not prior_sha:
+            raise Stop("STAGE2_REFRESH_PRIOR_REFRESH_REFERENCE_INCOMPLETE")
+        prior_request["stage2_current_main_refresh_successor"] = {
+            "path": prior_path,
+            "sha256": prior_sha,
+        }
+    else:
+        prior_request.pop("stage2_current_main_refresh_successor", None)
+    prior = verify_phase0_authority(
+        prior_request,
+        control_commit,
+        source_repo=source_repo,
+    )
+    if (
+        successor.get("predecessor_authority_kind")
+        != prior.get("target_authority_kind")
+    ):
+        raise Stop("STAGE2_REFRESH_PRIOR_AUTHORITY_KIND_MISMATCH")
+
+    refresh_main = str(successor.get("protected_main_sha") or "")
+    if git(
+        "merge-base", "--is-ancestor", refresh_main,
+        request["expected_protected_main_sha"],
+        cwd=source_repo, check=False,
+    ).returncode != 0:
+        raise Stop("STAGE2_REFRESH_CURRENT_MAIN_NOT_DESCENDANT")
+
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        request["target_sha"],
+        cwd=source_repo,
+    )
+    parents = git(
+        "show", "-s", "--format=%P", request["target_sha"],
+        cwd=source_repo,
+    ).stdout.strip().split()
+    if parents != [predecessor, refresh_main]:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_GIT_PARENTS_MISMATCH")
+    actual_tree = git(
+        "rev-parse", request["target_sha"] + "^{tree}",
+        cwd=source_repo,
+    ).stdout.strip()
+    if successor.get("prepared_tree_sha") != actual_tree:
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_TREE_MISMATCH")
+
+    verification_path = (
+        ".remote-implementation/verifications/%s/%s/"
+        "stage2-current-main-refresh-verification.json"
+        % (request["school_key"], successor.get("request_id"))
+    )
+    verification_bytes = git_show_bytes(
+        control_commit,
+        verification_path,
+        cwd=source_repo,
+    )
+    verification = json.loads(verification_bytes)
+    if (
+        verification.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION"
+        or verification.get("request_id") != successor.get("request_id")
+        or verification.get("target_sha") != request["target_sha"]
+        or verification.get("target_branch") != request["target_branch"]
+        or verification.get("remote_stage2_current_main_refresh_equivalence")
+        != "PASS"
+    ):
+        raise Stop("STAGE2_REFRESH_VERIFICATION_NOT_PASS")
+
+    package_hashes = successor.get("package_member_sha256") or {}
+    for name in REQUIRED_PACKAGE_FILES:
+        expected = package_hashes.get(name)
+        actual = _school_package_hash(
+            request["target_sha"],
+            request["school_key"],
+            name,
+            source_repo=source_repo,
+        )
+        if not expected or actual != expected:
+            raise Stop("STAGE2_REFRESH_PACKAGE_HASH_MISMATCH:%s" % name)
+
+    result = dict(prior)
+    result.update(
+        {
+            "phase0_target_sha": request["target_sha"],
+            "phase0_protected_main_sha": refresh_main,
+            "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+            "current_main_refresh_authority": {
+                "successor": successor,
+                "successor_bytes": data,
+                "verification": verification,
+                "verification_bytes": verification_bytes,
+                "verification_path": verification_path,
+            },
+        }
+    )
+    return result
+
+
 def verify_phase0_authority(
     request: dict[str, Any],
     control_commit: str,
     *,
     source_repo: Path = ROOT,
 ) -> dict[str, Any]:
+    if request.get("stage2_current_main_refresh_successor") is not None:
+        return _verify_current_main_refresh_target_authority(
+            request,
+            control_commit,
+            source_repo=source_repo,
+        )
+    if request.get("correction_integration_freeze") is not None:
+        return _verify_post_publication_correction_authority(
+            request,
+            control_commit,
+            source_repo=source_repo,
+        )
+
     successor_ref = request["phase0_successor"]
     successor_bytes = git_show_bytes(control_commit, successor_ref["path"], cwd=source_repo)
     if sha256_bytes(successor_bytes) != successor_ref["sha256"]:

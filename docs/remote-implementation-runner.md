@@ -34,6 +34,42 @@ python tools/normalize_historical_opponent_displays.py <school> --sync-source-ga
 
 The remote runner must not reimplement their basketball, venue, opponent, conference, scope, reconciliation, or validation logic.
 
+### Post-publication correction target authority
+
+For a staged post-publication correction, the remote Stage 2 chain may use the
+repository-owned correction branch instead of a normal onboarding branch.
+
+The first remote `STAGE2_CENSUS` request must bind exactly:
+
+- `target_branch=data/<school>-correction`;
+- the exact current correction-branch head SHA;
+- one hash-bound `correction_integration_freeze` payload whose
+  `workflow_kind=POST_PUBLICATION_CORRECTION`, `status=INTEGRATION_FROZEN`,
+  school key, package hashes, correction source-game population, pre/post
+  semantic snapshots, and original protected-main base all validate;
+- no Phase 0 successor and no opponent-display successor.
+
+The runner fetches the exact correction ref, proves that its six-file package
+matches the correction Integration Freeze, proves that the correction base is
+an ancestor of both the correction head and the request-bound protected-main
+runtime, and then invokes the unchanged permanent Stage 2 tool. The resulting
+census checkpoint records `target_authority_kind=POST_PUBLICATION_CORRECTION`
+and the exact correction-Freeze path/hash.
+
+After that first authority hop, proposal rehearsal, Gate 1 fill, pre-seal,
+seal, sealed apply, release readiness, Preview verification, Gate 2 approval,
+and Production proof preserve the same correction branch through their normal
+hash-bound predecessor checkpoints. They do not reconstruct or substitute
+Phase 0 authority. The ordinary global mutation lock, write-ahead, expected-
+predecessor CAS, exact-tree fresh replay, PR/Preview approval, merge-parent
+proof, and Production proof remain unchanged.
+
+This mode does not relax or alter normal new-school onboarding. A normal
+`data/<school>-onboarding` Stage 2 census still requires its Phase 0
+successor. The remote opponent-display normalization mutation remains
+onboarding-only; a correction census that exposes a new representation repair
+outside the frozen correction must stop rather than silently broaden scope.
+
 ## 2. Permanent entrypoints
 
 Tracked repository capability:
@@ -278,6 +314,46 @@ The remote operation never edits or pushes protected `main`, creates a pull requ
 or performs Production proof. After fresh verification, the school Implementation chat uses
 its authenticated GitHub connector to create/review/merge the dedicated maintenance PR under
 normal protected-main rules, then reruns the complete Stage 1 inventory on refreshed main.
+
+## 7B. Control Center-authorized Stage 2 current-main refresh
+
+`STAGE2_CURRENT_MAIN_REFRESH` is a narrow serialized representation operation for an
+already-in-Stage-2 `data/<school>-onboarding` branch when protected `main` has
+advanced and the stale target would otherwise evaluate against obsolete canonical or
+shared project state.
+
+It is not a second Phase 0 and does not recreate, replace, or mutate the immutable
+Research Freeze or Integration Freeze. It authenticates the existing Phase 0 authority,
+any supported opponent-display successor, and any earlier refresh successor, then binds
+the exact current onboarding predecessor and exact protected-main SHA.
+
+Automatic refresh is permitted only when the Git changed-path population from the exact
+merge base to the onboarding target is disjoint from the changed-path population from
+that same merge base to current protected `main`. Protected main also must not have
+changed `schools/<school>/...` for the in-flight target. Any overlapping path is a
+STOP requiring explicit reconciliation; the operation must never guess how to merge
+shared-reference or school-package changes.
+
+For the disjoint topology, the runner:
+
+1. proves the prior target authority and unchanged Integration Freeze / semantic guard;
+2. computes and records the exact target-only and main-only path populations;
+3. prepares an actual two-parent merge commit with parents
+   `[exact onboarding predecessor, exact protected main]`;
+4. proves every target-only path and all six target package members remain byte-identical;
+5. imports exactly the intervening protected-main path population;
+6. reruns repository validation and the semantic-drift guard;
+7. writes durable refresh proof and write-ahead under the global mutation lock;
+8. publishes the prepared merge by expected-predecessor CAS;
+9. independently reconstructs the merge tree on a fresh runner and requires exact-tree,
+   parent, path, package-hash, semantic, and validation equivalence.
+
+The fresh-verified successor kind is
+`REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR`. A later
+`STAGE2_CENSUS` must bind that exact successor and its independent PASS verification.
+The refresh may be chained after another fresh-verified refresh using immutable successor
+authority. It creates no Owner Gate 1 authority and does not carry forward a stale Stage 2
+decision universe by assertion: Stage 2 must regenerate from the refreshed target.
 
 ## 8. Stage 2 capability census request
 
@@ -781,7 +857,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
+Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, the Control-Center-authorized disjoint-path `STAGE2_CURRENT_MAIN_REFRESH`, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
 
 ## 13. Mobile / ChatGPT operation
 

@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import release_school
-from remote_implementation_control import sha256_bytes
+from remote_implementation_control import sha256_bytes, school_data_target_kind
 from remote_implementation_io import Stop, git, git_show_bytes, remote_head
 from remote_implementation_stage2_apply import verify_prepared_sealed_apply
 
@@ -74,9 +74,12 @@ def verify_release_readiness_authority(
 ) -> dict[str, Any]:
     """Bind request, prior write-ahead, successor, verification and sealed bytes."""
     school = request["school_key"]
-    branch = "data/%s-onboarding" % school
+    branch = str(request.get("target_branch") or "")
     target = request["target_sha"]
-    _require(request.get("target_branch") == branch, "RELEASE_TARGET_BRANCH_INVALID")
+    _require(
+        school_data_target_kind(school, branch) is not None,
+        "RELEASE_TARGET_BRANCH_INVALID",
+    )
     successor_ref = request["stage2_apply_successor"]
     verify_ref = request["stage2_apply_verification"]
     successor, successor_bytes = _bound_json(
