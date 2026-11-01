@@ -25,6 +25,7 @@ from remote_implementation_control import (  # noqa: E402
     TX_ABANDONED_PREPARED,
     OP_STAGE1,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_VENUE_IDENTITY_MAINTENANCE,
@@ -249,6 +250,46 @@ class RemoteImplementationControlTests(unittest.TestCase):
 
     def test_valid_bounded_stage2_census_request(self):
         validate_request(request(OP_STAGE2_CENSUS))
+
+    def test_valid_stage2_current_main_refresh_request(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["operation"] = OP_STAGE2_CURRENT_MAIN_REFRESH
+        req["authority"]["stage2_census"] = False
+        req["authority"]["stage2_current_main_refresh"] = True
+        req["current_main_refresh_authorization"] = {
+            "approved": True,
+            "authority_kind": "CONTROL_CENTER_EXPLICIT",
+            "authorization_basis": "Deterministic current-main refresh.",
+        }
+        validate_request(req)
+
+    def test_stage2_current_main_refresh_rejects_non_onboarding_target(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["operation"] = OP_STAGE2_CURRENT_MAIN_REFRESH
+        req["authority"]["stage2_census"] = False
+        req["authority"]["stage2_current_main_refresh"] = True
+        req["target_branch"] = "data/example-school-correction"
+        req["current_main_refresh_authorization"] = {
+            "approved": True,
+            "authority_kind": "CONTROL_CENTER_EXPLICIT",
+            "authorization_basis": "Deterministic current-main refresh.",
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_REFRESH_TARGET_BRANCH_INVALID",
+        ):
+            validate_request(req)
+
+    def test_stage2_census_accepts_fresh_verified_refresh_successor_binding(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["stage2_current_main_refresh_successor"] = {
+            "path": (
+                ".remote-implementation/successors/example-school/"
+                "example-refresh-0001/successor-manifest.json"
+            ),
+            "sha256": "a" * 64,
+        }
+        validate_request(req)
 
     def test_valid_post_publication_correction_stage2_census_request(self):
         req = request(OP_STAGE2_CENSUS)

@@ -25,6 +25,7 @@ OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
 OP_PHASE0_SCOPE_SUPERSESSION = "PHASE0_SCOPE_SUPERSESSION"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
+OP_STAGE2_CURRENT_MAIN_REFRESH = "STAGE2_CURRENT_MAIN_REFRESH"
 OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
 OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
 OP_STAGE2_GATE1_FILL = "STAGE2_GATE1_FILL"
@@ -43,6 +44,7 @@ SUPPORTED_OPERATIONS = {
     OP_PHASE0,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
@@ -397,6 +399,17 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("phase0_scope_supersession") is not True,
             "REQUEST_SCOPE_SUPERSESSION_AUTHORITY_FORBIDDEN",
+        )
+
+    if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
+        _require(
+            authority.get("stage2_current_main_refresh") is True,
+            "STAGE2_REFRESH_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("stage2_current_main_refresh") is not True,
+            "REQUEST_STAGE2_REFRESH_AUTHORITY_FORBIDDEN",
         )
 
     if operation == OP_VENUE_IDENTITY_MAINTENANCE:
@@ -822,6 +835,12 @@ def validate_request(request: dict[str, Any]) -> None:
                     "stage2_opponent_display_successor",
                     required=True,
                 )
+            if request.get("stage2_current_main_refresh_successor") is not None:
+                _validate_payload_ref(
+                    request.get("stage2_current_main_refresh_successor"),
+                    "stage2_current_main_refresh_successor",
+                    required=True,
+                )
         _require_sha(
             request.get("integration_freeze_sha256"),
             64,
@@ -831,6 +850,69 @@ def validate_request(request: dict[str, Any]) -> None:
             request.get("semantic_snapshot_sha256"),
             64,
             "STAGE2_CENSUS_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
+
+    if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
+        for key in (
+            "phase0", "recovery", "stage2_census",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release_gate2_approval",
+            "release_production_proof", "venue_identity_maintenance",
+        ):
+            _require(
+                authority.get(key) is not True,
+                "STAGE2_REFRESH_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require(
+            request.get("target_branch") == f"data/{school_key}-onboarding",
+            "STAGE2_REFRESH_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"), 40, "STAGE2_REFRESH_TARGET_SHA_INVALID"
+        )
+        _validate_payload_ref(
+            request.get("phase0_successor"),
+            "phase0_successor",
+            required=True,
+        )
+        if request.get("stage2_opponent_display_successor") is not None:
+            _validate_payload_ref(
+                request.get("stage2_opponent_display_successor"),
+                "stage2_opponent_display_successor",
+                required=True,
+            )
+        if request.get("stage2_current_main_refresh_successor") is not None:
+            _validate_payload_ref(
+                request.get("stage2_current_main_refresh_successor"),
+                "stage2_current_main_refresh_successor",
+                required=True,
+            )
+        _require_sha(
+            request.get("integration_freeze_sha256"),
+            64,
+            "STAGE2_REFRESH_INTEGRATION_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("semantic_snapshot_sha256"),
+            64,
+            "STAGE2_REFRESH_SEMANTIC_SNAPSHOT_SHA_INVALID",
+        )
+        authorization = request.get("current_main_refresh_authorization")
+        _require(
+            isinstance(authorization, dict)
+            and authorization.get("approved") is True,
+            "STAGE2_REFRESH_CONTROL_CENTER_APPROVAL_REQUIRED",
+        )
+        _require(
+            authorization.get("authority_kind") == "CONTROL_CENTER_EXPLICIT",
+            "STAGE2_REFRESH_AUTHORITY_KIND_INVALID",
+        )
+        _require(
+            bool(str(authorization.get("authorization_basis") or "").strip()),
+            "STAGE2_REFRESH_AUTHORIZATION_BASIS_REQUIRED",
         )
 
     if operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
@@ -1407,7 +1489,10 @@ def verify_request_predecessor(
                 == f"data/{state.get('active_school_key')}-onboarding",
                 "STALE_RECOVERY_TARGET_MISMATCH",
             )
-        elif state.get("active_operation") == OP_STAGE2_SEALED_APPLY:
+        elif state.get("active_operation") in {
+            OP_STAGE2_SEALED_APPLY,
+            OP_STAGE2_CURRENT_MAIN_REFRESH,
+        }:
             _require(
                 recovery.get("target_branch") == state.get("active_target_branch"),
                 "STALE_RECOVERY_TARGET_MISMATCH",

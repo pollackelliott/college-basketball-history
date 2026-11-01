@@ -21,6 +21,7 @@ from remote_implementation_control import (
     OP_RECOVER,
     OP_STAGE1,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
@@ -87,6 +88,10 @@ from remote_implementation_stage2_census import (
     add_existing_onboarding_worktree,
     run_stage2_census_tool,
     verify_phase0_authority,
+)
+from remote_implementation_stage2_refresh import (
+    prepare_current_main_refresh,
+    verify_current_main_refresh_authority,
 )
 from remote_implementation_stage2_proposal import (
     PROPOSAL_ARTIFACT_NAMES,
@@ -421,6 +426,17 @@ def persist_stage2_census_checkpoint(
         ),
         "stage2_opponent_display_verification_path": (
             (phase0_authority.get("opponent_display_authority") or {}).get(
+                "verification_path"
+            )
+        ),
+        "stage2_current_main_refresh_successor_path": (
+            (request.get("stage2_current_main_refresh_successor") or {}).get("path")
+        ),
+        "stage2_current_main_refresh_successor_sha256": (
+            (request.get("stage2_current_main_refresh_successor") or {}).get("sha256")
+        ),
+        "stage2_current_main_refresh_verification_path": (
+            (phase0_authority.get("current_main_refresh_authority") or {}).get(
                 "verification_path"
             )
         ),
@@ -1992,6 +2008,269 @@ def _copy_stage2_result_artifacts(
                 % name
             )
     return artifact_hashes, normalized_hashes
+
+
+def finalize_stage2_current_main_refresh_successor(
+    *,
+    active: dict[str, Any],
+    original_request: dict[str, Any],
+    request_sha256: str,
+    live_main: str,
+    authority: dict[str, Any],
+    writeahead: dict[str, Any],
+    writeahead_path: str,
+    writeahead_sha256: str,
+    writeahead_commit: str | None,
+    expected_remote: str,
+    publication_cas: str = "EXISTING_REF_CAS_PASS",
+    extra_commit_paths: list[Path | str] | None = None,
+    recovery_request_id: str | None = None,
+    recovery_classification: str | None = None,
+) -> str:
+    rid = original_request["request_id"]
+    school = original_request["school_key"]
+    target_branch = original_request["target_branch"]
+    prepared = writeahead["prepared_commit_sha"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("STAGE2_REFRESH_TARGET_NOT_PUBLISHED")
+
+    successor_dir = Path(
+        ".remote-implementation/successors/%s/%s" % (school, rid)
+    )
+    successor_dir.mkdir(parents=True, exist_ok=True)
+    successor = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+        "operation": OP_STAGE2_CURRENT_MAIN_REFRESH,
+        "request_id": rid,
+        "request_sha256": request_sha256,
+        "school_key": school,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": original_request["target_sha"],
+        "actual_published_target_sha": prepared,
+        "prepared_commit_sha": prepared,
+        "prepared_tree_sha": writeahead["prepared_tree_sha"],
+        "prepared_parent_sha": writeahead["prepared_parent_sha"],
+        "prepared_main_parent_sha": writeahead["prepared_main_parent_sha"],
+        "prepared_parents": writeahead["prepared_parents"],
+        "merge_base_sha": writeahead["merge_base_sha"],
+        "changed_paths": writeahead["changed_paths"],
+        "changed_file_sha256": writeahead["changed_file_sha256"],
+        "deleted_paths": writeahead.get("deleted_paths") or [],
+        "target_changed_paths": writeahead["target_changed_paths"],
+        "main_changed_paths": writeahead["main_changed_paths"],
+        "package_member_sha256": writeahead["package_member_sha256"],
+        "integration_freeze_sha256": writeahead["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": writeahead["semantic_snapshot_sha256"],
+        "predecessor_authority_kind": writeahead["predecessor_authority_kind"],
+        "prior_refresh_successor_path": (
+            (original_request.get("stage2_current_main_refresh_successor") or {}).get("path")
+        ),
+        "prior_refresh_successor_sha256": (
+            (original_request.get("stage2_current_main_refresh_successor") or {}).get("sha256")
+        ),
+        "writeahead_commit": writeahead_commit,
+        "writeahead_manifest_path": writeahead_path,
+        "writeahead_manifest_sha256": writeahead_sha256,
+        "refresh_proof_sha256": writeahead["refresh_proof_sha256"],
+        "repository_validation": "PASS",
+        "publication_cas": publication_cas,
+        "recovery_request_id": recovery_request_id,
+        "recovery_classification": recovery_classification,
+        "final_transaction_state": "COMPLETE",
+    }
+    successor_path = successor_dir / "successor-manifest.json"
+    write_json(successor_path, successor)
+    successor_sha = sha256_file(successor_path)
+
+    final_state = finalize_success(
+        active,
+        request_id=rid,
+        last_operation={
+            "operation": OP_STAGE2_CURRENT_MAIN_REFRESH,
+            "request_id": rid,
+            "school_key": school,
+            "protected_main_sha": live_main,
+            "target_branch": target_branch,
+            "target_predecessor_sha": original_request["target_sha"],
+            "target_sha": prepared,
+            "successor_manifest_path": successor_path.as_posix(),
+            "successor_manifest_sha256": successor_sha,
+            "integration_freeze_sha256": writeahead["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": writeahead["semantic_snapshot_sha256"],
+            "fresh_runner_verification": "PENDING",
+            "remote_stage2_current_main_refresh_equivalence": "PENDING",
+        },
+    )
+    if recovery_request_id and recovery_request_id not in final_state[
+        "consumed_request_ids"
+    ]:
+        final_state["consumed_request_ids"].append(recovery_request_id)
+    write_json(STATE_PATH, final_state)
+    paths: list[Path | str] = [STATE_PATH, successor_dir]
+    if extra_commit_paths:
+        paths.extend(extra_commit_paths)
+    return commit_control(
+        expected_remote,
+        "finalize Stage 2 current-main refresh %s" % rid,
+        paths,
+    )
+
+
+def run_stage2_current_main_refresh(
+    state: dict[str, Any],
+    request: dict[str, Any],
+    request_bytes: bytes,
+    request_commit: str,
+    predecessor_commit: str,
+    live_main: str,
+) -> None:
+    authority = verify_current_main_refresh_authority(
+        request,
+        predecessor_commit,
+        live_main,
+    )
+    target_branch = request["target_branch"]
+    target_sha = request["target_sha"]
+    if remote_head(ROOT, target_branch) != target_sha:
+        raise Stop("STAGE2_REFRESH_TARGET_HEAD_MISMATCH")
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+    active = begin_request(
+        state,
+        request,
+        sha256_bytes(request_bytes),
+        run_id=run_id,
+        run_attempt=attempt,
+        request_commit=request_commit,
+    )
+    write_json(STATE_PATH, active)
+    archive = archive_request(request, request_bytes)
+    lock_commit = commit_control(
+        request_commit,
+        "acquire global Implementation lock %s" % request["request_id"],
+        [STATE_PATH, archive],
+    )
+    active = bind_lock_commit(active, lock_commit)
+    write_json(STATE_PATH, active)
+    lock_bound_commit = commit_control(
+        lock_commit,
+        "bind global Implementation lock %s" % request["request_id"],
+        [STATE_PATH],
+    )
+
+    prepared = prepare_current_main_refresh(
+        request,
+        authority,
+        live_main,
+        source_repo=ROOT,
+        diag=DIAG / "stage2-current-main-refresh",
+    )
+    assert_protected_main_unchanged(live_main)
+    if remote_head(ROOT, target_branch) != target_sha:
+        raise Stop("STAGE2_REFRESH_TARGET_CHANGED_BEFORE_WRITEAHEAD")
+
+    writeahead_dir = Path(
+        ".remote-implementation/writeahead/%s/%s"
+        % (request["school_key"], request["request_id"])
+    )
+    writeahead_dir.mkdir(parents=True, exist_ok=True)
+    (writeahead_dir / "integration-freeze.json").write_bytes(
+        authority["prior_authority"]["freeze_bytes"]
+    )
+    write_json(writeahead_dir / "refresh-proof.json", prepared["proof"])
+    sidecars = {
+        "integration-freeze.json": sha256_file(
+            writeahead_dir / "integration-freeze.json"
+        ),
+        "refresh-proof.json": sha256_file(
+            writeahead_dir / "refresh-proof.json"
+        ),
+    }
+    writeahead = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+        "operation": OP_STAGE2_CURRENT_MAIN_REFRESH,
+        "request_id": request["request_id"],
+        "request_sha256": sha256_bytes(request_bytes),
+        "school_key": request["school_key"],
+        "global_lock_commit": lock_commit,
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "expected_target_predecessor_sha": target_sha,
+        "prepared_commit_sha": prepared["prepared_commit_sha"],
+        "prepared_tree_sha": prepared["prepared_tree_sha"],
+        "prepared_parent_sha": target_sha,
+        "prepared_main_parent_sha": live_main,
+        "prepared_parents": prepared["prepared_parents"],
+        "merge_base_sha": authority["merge_base_sha"],
+        "changed_paths": prepared["changed_paths"],
+        "changed_file_sha256": prepared["changed_file_sha256"],
+        "deleted_paths": prepared["deleted_paths"],
+        "target_changed_paths": authority["target_changed_paths"],
+        "main_changed_paths": authority["main_changed_paths"],
+        "package_member_sha256": prepared["proof"]["package_member_sha256"],
+        "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+        "predecessor_authority_kind": authority["prior_authority"]["target_authority_kind"],
+        "refresh_proof_sha256": sidecars["refresh-proof.json"],
+        "sidecars": sidecars,
+        "repository_validation": "PASS",
+        "mutation_state": "PREPARED_NOT_PUBLISHED",
+    }
+    writeahead_path = writeahead_dir / "writeahead-manifest.json"
+    write_json(writeahead_path, writeahead)
+    writeahead_sha = sha256_file(writeahead_path)
+
+    active["transaction_state"] = "PREPARED_NOT_PUBLISHED"
+    active["active_writeahead_path"] = writeahead_path.as_posix()
+    active["active_writeahead_sha256"] = writeahead_sha
+    active["active_prepared_commit_sha"] = prepared["prepared_commit_sha"]
+    active["active_prepared_tree_sha"] = prepared["prepared_tree_sha"]
+    write_json(STATE_PATH, active)
+    writeahead_commit = commit_control(
+        lock_bound_commit,
+        "publish Stage 2 current-main refresh write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH, writeahead_dir],
+    )
+    active["active_writeahead_commit"] = writeahead_commit
+    write_json(STATE_PATH, active)
+    writeahead_bound_commit = commit_control(
+        writeahead_commit,
+        "bind Stage 2 current-main refresh write-ahead %s"
+        % request["request_id"],
+        [STATE_PATH],
+    )
+
+    assert_protected_main_unchanged(live_main)
+    publish_ref_cas(
+        ROOT,
+        branch=target_branch,
+        prepared_commit=prepared["prepared_commit_sha"],
+        expected_predecessor=target_sha,
+    )
+    if remote_head(ROOT, target_branch) != prepared["prepared_commit_sha"]:
+        raise Stop("STAGE2_REFRESH_TARGET_PUBLICATION_VERIFY_FAILED")
+
+    successor_commit = finalize_stage2_current_main_refresh_successor(
+        active=active,
+        original_request=request,
+        request_sha256=sha256_bytes(request_bytes),
+        live_main=live_main,
+        authority=authority,
+        writeahead=writeahead,
+        writeahead_path=writeahead_path.as_posix(),
+        writeahead_sha256=writeahead_sha,
+        writeahead_commit=writeahead_commit,
+        expected_remote=writeahead_bound_commit,
+    )
+    print(
+        "REMOTE STAGE 2 CURRENT-MAIN REFRESH: COMPLETE target=%s successor_commit=%s"
+        % (prepared["prepared_commit_sha"], successor_commit)
+    )
 
 
 def finalize_stage2_opponent_display_successor(
@@ -3719,6 +3998,23 @@ def run_recovery(
                 protected_main_sha=live_main,
                 prepared_sha=prepared,
             )
+        elif state.get("active_operation") == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            parent_line = git(
+                "rev-list", "--parents", "-n", "1", prepared
+            ).stdout.strip().split()
+            if parent_line[1:] != [
+                manifest["expected_target_predecessor_sha"],
+                manifest["protected_main_sha"],
+            ]:
+                raise Stop("RECOVERY_STAGE2_REFRESH_PARENT_SET_MISMATCH")
+            changed = sorted(
+                line.strip()
+                for line in git(
+                    "diff", "--name-only",
+                    manifest["expected_target_predecessor_sha"], prepared,
+                ).stdout.splitlines()
+                if line.strip()
+            )
         else:
             changed = sorted(
                 line.strip()
@@ -3858,6 +4154,49 @@ def run_recovery(
                 writeahead_commit=state.get("active_writeahead_commit"),
                 expected_remote=request_commit,
                 freeze_bytes=freeze_bytes,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+            )
+            print(
+                "REMOTE IMPLEMENTATION RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
+        if state.get("active_operation") == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            if manifest.get("operation") != OP_STAGE2_CURRENT_MAIN_REFRESH:
+                raise Stop("RECOVERY_STAGE2_REFRESH_WRITEAHEAD_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit,
+                original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_STAGE2_REFRESH_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            proof_path = (
+                Path(state["active_writeahead_path"]).parent
+                / "refresh-proof.json"
+            ).as_posix()
+            proof_bytes = git_show_bytes(predecessor_commit, proof_path)
+            if sha256_bytes(proof_bytes) != manifest["refresh_proof_sha256"]:
+                raise Stop("RECOVERY_STAGE2_REFRESH_PROOF_HASH_MISMATCH")
+            commit = finalize_stage2_current_main_refresh_successor(
+                active=state,
+                original_request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                authority={},
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
                 publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
                 extra_commit_paths=[directory],
                 recovery_request_id=request["request_id"],
@@ -4073,6 +4412,15 @@ def main() -> int:
                 request,
                 request_bytes,
                 request_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            run_stage2_current_main_refresh(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
                 live_main,
             )
         elif request["operation"] == OP_STAGE2_CENSUS:

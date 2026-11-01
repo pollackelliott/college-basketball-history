@@ -115,6 +115,15 @@ capability census. Historical meaning in the staged source ledger may not drift 
 between `INTEGRATION_FROZEN` and Gate 1. Representation-only current-main reconciliation
 remains allowed under `docs/implementation-gate1-authority-boundary.md`.
 
+When an in-flight Stage 2 onboarding target must absorb a later protected-main change,
+the guarded remote `STAGE2_CURRENT_MAIN_REFRESH` operation may perform that
+representation-only refresh only after explicit Control Center authorization and only
+when the target-only and intervening-main changed-path populations are disjoint. It
+preserves the Integration Freeze and all six package members byte-for-byte, publishes one
+two-parent merge successor by expected-predecessor CAS, requires independent exact-tree
+verification, and then requires a fresh Stage 2 census. Any overlapping path remains an
+explicit reconciliation STOP rather than an automatic merge.
+
 A blocker-free raw preflight is **not** called `PREFLIGHT_READY`. The normal intermediate
 state is `CAPABILITY_CENSUS_READY`: the decision universe is known, but the lane must still
 classify the complete currently detectable representation/capability population and

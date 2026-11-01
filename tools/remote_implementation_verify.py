@@ -15,6 +15,7 @@ from remote_implementation_control import (
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_STAGE2_CENSUS,
+    OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
@@ -57,7 +58,11 @@ from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
     add_existing_onboarding_worktree,
     run_stage2_census_tool,
+    restore_integration_freeze,
     verify_phase0_authority,
+)
+from remote_implementation_stage2_refresh import (
+    reconstruct_refresh_tree,
 )
 from remote_implementation_stage2_proposal import (
     run_stage2_proposal_tool,
@@ -1390,6 +1395,20 @@ def verify_stage2_census(
         != display_authority.get("verification_path")
     ):
         raise Stop("STAGE2_FRESH_TARGET_VERIFICATION_BINDING_MISMATCH")
+    refresh_ref = request.get("stage2_current_main_refresh_successor") or {}
+    if (
+        manifest.get("stage2_current_main_refresh_successor_path")
+        != refresh_ref.get("path")
+        or manifest.get("stage2_current_main_refresh_successor_sha256")
+        != refresh_ref.get("sha256")
+    ):
+        raise Stop("STAGE2_FRESH_REFRESH_AUTHORITY_BINDING_MISMATCH")
+    refresh_authority = phase0.get("current_main_refresh_authority") or {}
+    if (
+        manifest.get("stage2_current_main_refresh_verification_path")
+        != refresh_authority.get("verification_path")
+    ):
+        raise Stop("STAGE2_FRESH_REFRESH_VERIFICATION_BINDING_MISMATCH")
     target_branch = manifest["target_branch"]
     target_sha = remote_head(ROOT, target_branch)
     if target_sha != manifest["target_sha"]:
@@ -1497,6 +1516,213 @@ def verify_stage2_census(
     )
     return 0
 
+
+
+def verify_stage2_current_main_refresh(
+    live_main: str,
+    control_head: str,
+    state: dict,
+) -> int:
+    last = state.get("last_operation") or {}
+    if last.get("fresh_runner_verification") == "PASS":
+        print("REMOTE STAGE 2 CURRENT-MAIN REFRESH EQUIVALENCE: PASS (already verified)")
+        return 0
+
+    successor_path = last["successor_manifest_path"]
+    successor_bytes = git_show_bytes(control_head, successor_path)
+    if sha256_bytes(successor_bytes) != last["successor_manifest_sha256"]:
+        raise Stop("STAGE2_REFRESH_FRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(successor_bytes)
+    if (
+        successor.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR"
+    ):
+        raise Stop("STAGE2_REFRESH_FRESH_SUCCESSOR_KIND_MISMATCH")
+    if successor.get("operation") != OP_STAGE2_CURRENT_MAIN_REFRESH:
+        raise Stop("STAGE2_REFRESH_FRESH_OPERATION_MISMATCH")
+    if successor.get("protected_main_sha") != live_main:
+        raise Stop("STAGE2_REFRESH_FRESH_MAIN_CHANGED")
+
+    target_branch = successor["target_branch"]
+    prepared = successor["prepared_commit_sha"]
+    predecessor = successor["expected_target_predecessor_sha"]
+    if remote_head(ROOT, target_branch) != prepared:
+        raise Stop("STAGE2_REFRESH_FRESH_TARGET_REF_MISMATCH")
+    git(
+        "fetch",
+        "--no-tags",
+        "origin",
+        f"+refs/heads/{target_branch}:refs/remotes/origin/remote-stage2-refresh-fresh",
+    )
+
+    request_path = (
+        ".remote-implementation/requests/%s/request.json"
+        % successor["request_id"]
+    )
+    request_bytes = git_show_bytes(control_head, request_path)
+    if sha256_bytes(request_bytes) != successor["request_sha256"]:
+        raise Stop("STAGE2_REFRESH_FRESH_REQUEST_HASH_MISMATCH")
+    request = json.loads(request_bytes)
+    prior = verify_phase0_authority(
+        request,
+        control_head,
+    )
+    if prior.get("target_authority_kind") != successor.get(
+        "predecessor_authority_kind"
+    ):
+        raise Stop("STAGE2_REFRESH_FRESH_PRIOR_AUTHORITY_MISMATCH")
+
+    writeahead_path = successor["writeahead_manifest_path"]
+    writeahead_bytes = git_show_bytes(control_head, writeahead_path)
+    if sha256_bytes(writeahead_bytes) != successor["writeahead_manifest_sha256"]:
+        raise Stop("STAGE2_REFRESH_FRESH_WRITEAHEAD_HASH_MISMATCH")
+    manifest = json.loads(writeahead_bytes)
+    if manifest.get("operation") != OP_STAGE2_CURRENT_MAIN_REFRESH:
+        raise Stop("STAGE2_REFRESH_FRESH_WRITEAHEAD_OPERATION_MISMATCH")
+    if manifest.get("expected_target_predecessor_sha") != predecessor:
+        raise Stop("STAGE2_REFRESH_FRESH_PREDECESSOR_MISMATCH")
+    if manifest.get("prepared_commit_sha") != prepared:
+        raise Stop("STAGE2_REFRESH_FRESH_PREPARED_MISMATCH")
+    if manifest.get("protected_main_sha") != live_main:
+        raise Stop("STAGE2_REFRESH_FRESH_WRITEAHEAD_MAIN_MISMATCH")
+
+    prefix = Path(writeahead_path).parent
+    proof_bytes = git_show_bytes(
+        control_head,
+        (prefix / "refresh-proof.json").as_posix(),
+    )
+    if sha256_bytes(proof_bytes) != manifest["refresh_proof_sha256"]:
+        raise Stop("STAGE2_REFRESH_FRESH_PROOF_HASH_MISMATCH")
+    proof = json.loads(proof_bytes)
+    if proof.get("overlap_paths") != []:
+        raise Stop("STAGE2_REFRESH_FRESH_OVERLAP_PROOF_INVALID")
+
+    parents = git(
+        "show", "-s", "--format=%P", prepared
+    ).stdout.strip().split()
+    if parents != [predecessor, live_main]:
+        raise Stop("STAGE2_REFRESH_FRESH_PARENTS_MISMATCH")
+    tree = git("rev-parse", prepared + "^{tree}").stdout.strip()
+    if tree != manifest["prepared_tree_sha"]:
+        raise Stop("STAGE2_REFRESH_FRESH_TREE_MISMATCH")
+    changed = sorted(
+        line.strip()
+        for line in git(
+            "diff", "--name-only", predecessor, prepared
+        ).stdout.splitlines()
+        if line.strip()
+    )
+    if changed != sorted(manifest["changed_paths"]):
+        raise Stop("STAGE2_REFRESH_FRESH_CHANGED_PATH_MISMATCH")
+    for path, expected in (manifest.get("changed_file_sha256") or {}).items():
+        if sha256_bytes(git_show_bytes(prepared, path)) != expected:
+            raise Stop("STAGE2_REFRESH_FRESH_CHANGED_FILE_HASH_MISMATCH:" + path)
+
+    rebuilt_tree = reconstruct_refresh_tree(
+        predecessor_sha=predecessor,
+        protected_main_sha=live_main,
+        school_key=successor["school_key"],
+        source_repo=ROOT,
+    )
+    if rebuilt_tree != tree:
+        raise Stop("STAGE2_REFRESH_FRESH_RECONSTRUCTED_TREE_MISMATCH")
+
+    worktree = add_existing_onboarding_worktree(
+        target_branch,
+        prepared,
+        successor["school_key"],
+    )
+    freeze_bytes = git_show_bytes(
+        control_head,
+        (prefix / "integration-freeze.json").as_posix(),
+    )
+    if sha256_bytes(freeze_bytes) != manifest["integration_freeze_sha256"]:
+        raise Stop("STAGE2_REFRESH_FRESH_FREEZE_HASH_MISMATCH")
+    if freeze_bytes != prior["freeze_bytes"]:
+        raise Stop("STAGE2_REFRESH_FRESH_FREEZE_AUTHORITY_MISMATCH")
+    restore_integration_freeze(
+        worktree,
+        successor["school_key"],
+        freeze_bytes,
+    )
+    drift = semantic_drift_report(worktree, successor["school_key"])
+    if drift.get("status") != "PASS" or drift.get("changes"):
+        raise Stop("STAGE2_REFRESH_FRESH_SEMANTIC_DRIFT")
+
+    validation = run(
+        [sys.executable, "tools/validate_data.py"],
+        cwd=worktree,
+        check=False,
+    )
+    if validation.returncode != 0:
+        raise Stop("STAGE2_REFRESH_FRESH_REPOSITORY_VALIDATION_FAILED")
+
+    package_hashes = successor.get("package_member_sha256") or {}
+    for name in REQUIRED_PACKAGE_FILES:
+        actual = sha256_bytes(
+            git_show_bytes(
+                prepared,
+                f"schools/{successor['school_key']}/{name}",
+            )
+        )
+        if package_hashes.get(name) != actual:
+            raise Stop("STAGE2_REFRESH_FRESH_PACKAGE_HASH_MISMATCH:" + name)
+
+    verification = {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+        "request_id": successor["request_id"],
+        "school_key": successor["school_key"],
+        "protected_main_sha": live_main,
+        "target_branch": target_branch,
+        "target_predecessor_sha": predecessor,
+        "target_sha": prepared,
+        "target_tree_sha": tree,
+        "prepared_parents": [predecessor, live_main],
+        "merge_base_sha": manifest["merge_base_sha"],
+        "changed_paths": manifest["changed_paths"],
+        "changed_file_sha256": manifest["changed_file_sha256"],
+        "deleted_paths": manifest.get("deleted_paths") or [],
+        "package_member_sha256": package_hashes,
+        "integration_freeze_sha256": manifest["integration_freeze_sha256"],
+        "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+        "semantic_drift": "PASS",
+        "repository_validation": "PASS",
+        "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR",
+        "remote_stage2_current_main_refresh_equivalence": "PASS",
+    }
+    verify_dir = Path(
+        ".remote-implementation/verifications/%s/%s"
+        % (successor["school_key"], successor["request_id"])
+    )
+    write_json(
+        verify_dir / "stage2-current-main-refresh-verification.json",
+        verification,
+    )
+
+    local_state = read_json(STATE_PATH)
+    validate_control_state(local_state)
+    local_last = local_state.get("last_operation") or {}
+    if (
+        local_last.get("operation") != OP_STAGE2_CURRENT_MAIN_REFRESH
+        or local_last.get("request_id") != successor["request_id"]
+    ):
+        raise Stop("STAGE2_REFRESH_FRESH_CONTROL_MOVED")
+    local_last["fresh_runner_verification"] = "PASS"
+    local_last["remote_stage2_current_main_refresh_equivalence"] = "PASS"
+    local_state["last_operation"] = local_last
+    write_json(STATE_PATH, local_state)
+    commit = commit_control(
+        control_head,
+        "persist fresh Stage 2 current-main refresh verification %s"
+        % successor["request_id"],
+        [STATE_PATH, verify_dir],
+    )
+    print(
+        "REMOTE STAGE 2 CURRENT-MAIN REFRESH EQUIVALENCE: PASS verification_commit=%s"
+        % commit
+    )
+    return 0
 
 
 def verify_stage2_opponent_display_normalization(
@@ -2455,6 +2681,12 @@ def main() -> int:
             )
         if last.get("operation") == OP_STAGE2_RECONCILIATION_DIAGNOSTIC:
             return verify_stage2_reconciliation_diagnostic(
+                live_main,
+                control_head,
+                state,
+            )
+        if last.get("operation") == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            return verify_stage2_current_main_refresh(
                 live_main,
                 control_head,
                 state,
