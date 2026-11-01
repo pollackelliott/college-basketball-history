@@ -1,0 +1,23 @@
+{
+  "changed_paths": [
+    "data/reconciliation/venue-identity-maintenance/loyola-chicago-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/venues.csv"
+  ],
+  "exact_replay_tree": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_VERIFICATION",
+  "plan_sha256": "56065b2debfd02358b17a198eeb1a707496557955fb251c047d8dbce15d627b2",
+  "protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "remote_venue_maintenance_equivalence": "PASS",
+  "repository_spec_sha256": "1a6b4bec029fad58a614c99d62a56e3d78fb054b14d88ad24f0b25962ce9fdff",
+  "repository_validation": "PASS",
+  "request_id": "loyola-chicago-venue-maintenance-0002",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/loyola-chicago-stage1-venue-identity",
+  "target_predecessor_sha": null,
+  "target_sha": "99bbedd6e55af471062374b36fbb1995e3895f05",
+  "target_tree_sha": "f1a8d26e4f1fa844b5c5ea28c22fd2945bf5a2f5"
+}
