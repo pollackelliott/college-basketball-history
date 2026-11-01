@@ -215,15 +215,15 @@
   "active_lock_commit": "7d2fecc4f15c05b5a10a882311134467f1d5c63f",
   "active_lock_owner": "github-actions:41319561720:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "active_prepared_tree_sha": "01f998681ca3d75732f7e2847aac88b8fa5bf99e",
   "active_request_id": "saint-louis-correction-stage2-sealed-apply-0001",
   "active_request_sha256": "6afe401388b4f735c5d82c24c992d892452bd0e61a81254c5f9c5f40f797e34e",
   "active_school_key": "saint-louis",
   "active_target_branch": "data/saint-louis-correction",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "382640c446d14a7f9e9fb5a142b04ccb412c84d6b7d35ffa4612ca24ea27e955",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -457,5 +457,5 @@
   "lock_acquisition_request_commit": "9d15efc8d10efc18f9ff47ca8df78e5f2927de69",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
