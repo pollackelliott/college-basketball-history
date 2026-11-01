@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "dayton",
+  "created_at": "2026-11-01T23:29:59.027255+00:00",
+  "input_fingerprint": {
+    "sha256": "bc7df0d38d7b695389896570642d52e29ef54c48d1129606a9de353d6462d5ea",
+    "git_head": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+    "files": {
+      "schools/dayton/source-games.csv": "7f85948ff658b98a5f1b64ccb2a004fc0c4abffe2aa335e1701662f45d4b6011",
+      "schools/dayton/opponents.csv": "93e2d191c3837cff55a483646736100538fdc212339e977f72e8e5b8a569ea7b",
+      "schools/dayton/venues.csv": "999c8e1474820ef23ee64bdc9e32ee28317b6fa16d5f8751fd2457bcd3386502",
+      "schools/dayton/conferences.csv": "60b74601143ca6417af2d807969307b76d54dacaf9ed6c7a83ae84d11f87b8f1",
+      "schools/dayton/notes.md": "cb514f417ec5db14c6d5488fcd58aaa52b2fcd9d70e4f535d6c9992f97c6232b",
+      "schools/dayton/source-notes.md": "5dae88d2fdd942348f15633fc70f44f09235913ede0d65ea239e92826f573110",
+      "data/canonical/games.csv": "9c3b705b1f64918010bf8ef650575b7e712f43192a1329f49fd39797906a0200",
+      "data/evidence/game-assertions.csv": "e57eef4766cf90022bdef2f78f514dc2fec95d69730965d2eab03539dd303cd9",
+      "data/reconciliation/discrepancies.csv": "694a1fbd222543ab3bf77a9a2afd17f7675b5fc535fc9df4ff808ab09125f11b",
+      "data/reference/programs.csv": "7066f85a035e2844f00a37565e7b8644e7c4bd76b095c4a6e044f6e2ec6ecf7b",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "f840e8c810aede32a643f9293e88bfac036ac212c5b3106d0ebc9b1f57e7cc3b",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "0d4edbbc9d8abc55026475e95231a7eae8d98495cae681785153f94638fd74f4",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "2d478cfdd209bc912ee2a46248d8aed6474b2661696d7ae7f269b14ab4f61d4e",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+      "tools/onboarding_plan.py": "3b8429587b0ce8b7c726cceea545c7c171df3ff3b3daee874bdef42c4274c946",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: central-state-ohio: ['Central State', 'Central State (OH)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: manchester-indiana: ['Manchester (IN)', 'Manchester (Indiana)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2990,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 523,
+      "venues": 86,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: central-state-ohio: ['Central State', 'Central State (OH)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: manchester-indiana: ['Manchester (IN)', 'Manchester (Indiana)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

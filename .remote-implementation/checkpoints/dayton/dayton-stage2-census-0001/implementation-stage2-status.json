@@ -1,0 +1,39 @@
+{
+  "blockers": [
+    "historical opponent display conflict: central-state-ohio: ['Central State', 'Central State (OH)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: manchester-indiana: ['Manchester (IN)', 'Manchester (Indiana)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/dayton-116444ce77bb",
+  "capability_census": {
+    "path": ".onboarding/dayton/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "integration_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "integration_semantic_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/dayton/plan.json",
+    "review_path": ".onboarding/dayton/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}

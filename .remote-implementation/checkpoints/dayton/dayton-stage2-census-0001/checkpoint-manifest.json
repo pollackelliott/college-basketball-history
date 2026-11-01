@@ -1,0 +1,88 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "b07790743b37521959a80d64a9e501ac07a85488d4db25ba7bb8a35559d85c36",
+    "plan.json": "80e340c0b7d2b43c567fffce08730579d5cc28f6c8ad0c6b0c684f80e978e9e6",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "3392e58ca25d363d23c24cc3b6d4a225017eb0607c82b40488384256db6f6739"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "fd12a07e0d4a0741990269389ba86ee0f91eca69f18b6d18be96a55fdba9af87",
+    "plan.json": "adb83e1dea4d1b5ff59289b675e9ddfbc2124931ef6096558ad349ec57b39f17",
+    "review.csv": "0f1ef862910d7ca605e590a16ccbf1fcd19f6cc92ad9aba066e7fd1f3c28a54a",
+    "review.md": "4f3ffbd5855f72e0be019a0b6465e0bf8c7590272f0762abd6449329f41dcacf"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "dayton"
+  ],
+  "phase0_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "phase0_successor_path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/dayton/plan.json",
+    "review_path": ".onboarding/dayton/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "request_id": "dayton-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "target_tree_sha": "48cf5d226d288d4dadb3d6caa2914306aa170dea",
+  "tracked_mutation_proof": {
+    "after_head_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+    "after_status": "",
+    "after_tree_sha": "48cf5d226d288d4dadb3d6caa2914306aa170dea",
+    "before_head_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+    "before_status": "",
+    "before_tree_sha": "48cf5d226d288d4dadb3d6caa2914306aa170dea",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
