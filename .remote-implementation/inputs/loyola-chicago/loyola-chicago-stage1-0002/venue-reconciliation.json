@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "owner_approval_basis": "Owner explicitly authorized the complete Loyola Chicago serialized Implementation Stage 1 current-main reconciliation from immutable Research Freeze 94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0. These five mappings are deterministic representation-only reuses of the same frozen physical venue identity and geography; they do not alter frozen historical meaning or mutate global registries.",
+  "expected_research_zip_sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
+  "expected_venues_sha256": "e87b4f3d96b304d47bdf99627adf7470759b3f98265d8f35e6c80de0f8cff105",
+  "mappings": [
+    {
+      "local_venue_key": "dale-f-halton-arena",
+      "expected_local_name": "Dale F. Halton Arena",
+      "expected_local_city": "Charlotte",
+      "expected_local_state": "NC",
+      "global_venue_id": "VEN-000480",
+      "global_venue_key": "halton-arena",
+      "expected_global_city": "Charlotte",
+      "expected_global_state": "NC",
+      "resolution_basis": "Frozen Loyola row explicitly identifies Halton Arena as a source-name variant at the same Charlotte facility; current main VEN-000480 is Halton Arena in Charlotte, NC."
+    },
+    {
+      "local_venue_key": "nielsen-field-house",
+      "expected_local_name": "Nielsen Field House",
+      "expected_local_city": "Salt Lake City",
+      "expected_local_state": "UT",
+      "global_venue_id": "VEN-000582",
+      "global_venue_key": "nielsen-fieldhouse",
+      "expected_global_city": "Salt Lake City",
+      "expected_global_state": "UT",
+      "resolution_basis": "Frozen NCAA-site identity and current main VEN-000582 are the same Nielsen Fieldhouse physical venue in Salt Lake City, UT; difference is representation/spelling only."
+    },
+    {
+      "local_venue_key": "american-airlines-center-dallas",
+      "expected_local_name": "American Airlines Center",
+      "expected_local_city": "Dallas",
+      "expected_local_state": "TX",
+      "global_venue_id": "VEN-000010",
+      "global_venue_key": "american-airlines-center",
+      "expected_global_city": "Dallas",
+      "expected_global_state": "TX",
+      "resolution_basis": "Frozen Loyola row and current main VEN-000010 have identical physical venue name and Dallas, TX geography; local key suffix is representational only."
+    },
+    {
+      "local_venue_key": "chi-health-center-omaha",
+      "expected_local_name": "CHI Health Center Omaha",
+      "expected_local_city": "Omaha",
+      "expected_local_state": "NE",
+      "global_venue_id": "VEN-000043",
+      "global_venue_key": "chi-health-center",
+      "expected_global_city": "Omaha",
+      "expected_global_state": "NE",
+      "resolution_basis": "Frozen Loyola row and current main VEN-000043 have identical physical venue name and Omaha, NE geography; key difference is representational only."
+    },
+    {
+      "local_venue_key": "carver-arena-peoria",
+      "expected_local_name": "Carver Arena",
+      "expected_local_city": "Peoria",
+      "expected_local_state": "IL",
+      "global_venue_id": "VEN-000463",
+      "global_venue_key": "carver-arena",
+      "expected_global_city": "Peoria",
+      "expected_global_state": "IL",
+      "resolution_basis": "Frozen Loyola row and current main VEN-000463 have identical physical venue name and Peoria, IL geography; local key suffix is representational only."
+    }
+  ]
+}

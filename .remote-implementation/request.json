@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "loyola-chicago-stage1-0001",
+  "request_id": "loyola-chicago-stage1-0002",
   "operation": "STAGE1_INVENTORY",
   "school_key": "loyola-chicago",
-  "previous_control_state_commit": "8ab6aa645d026165f753aa93d2a4447d7faa9c32",
-  "previous_control_state_sha256": "23a62475196d1d30f622d9cf49c8b2d7dd7de28b36b7f379ae1b1c009a3fcc1f",
+  "previous_control_state_commit": "5cca7dbb98db412bfafb21b30e15ac5810630229",
+  "previous_control_state_sha256": "3f4809c1a6d4e13beb6fa57b54d72249e7384356e999249879c7169e89dbe9af",
   "expected_protected_main_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
   "research_checkpoint": {
     "sha256": "94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0",
@@ -17,11 +17,14 @@
       "part_count": 18
     }
   },
-  "venue_reconciliation": null,
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/loyola-chicago/loyola-chicago-stage1-0002/venue-reconciliation.json",
+    "sha256": "d037a2ce6155a948f37430484ea85ede3a496ea544fd6bdd2cbdcee8f2a92844"
+  },
   "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — owner-authorized Stage 1",
-    "authorization": "Owner explicitly authorized Loyola Chicago serialized Implementation from immutable RESEARCH_FROZEN SHA-256 94b1755f54078c0c7457587fe6c868603348715f5dabf9d15103f71250911dc0 with accepted INCEPTION+ scope. This request performs only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main. It carries no Research change, Phase 0, shared/global mutation, Stage 2, owner-gate, release, recovery, or protected-main mutation authority."
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — deterministic Stage 1 current-main venue reuse reconciliation",
+    "authorization": "Same owner-authorized Loyola Chicago Stage 1 phase. This second read-only inventory applies five deterministic representation-only venue reuse mappings discovered by Stage 1 checkpoint loyola-chicago-stage1-0001 and deliberately leaves the Illinois Assembly Hall shared/global conflict unresolved for honest classification. No Research change, Phase 0, shared/global mutation, Stage 2, owner gate, recovery, release, or protected-main mutation authority."
   },
   "authority": {
     "phase0": false,
