@@ -202,9 +202,9 @@ def validated_historical_coverage(
             raise ValueError(f"Historical coverage lacks owner authority: {program_key}/{season}")
         if row.get("owner_disposition") != authority.get("owner_disposition"):
             raise ValueError(f"Historical coverage owner authority mismatch: {program_key}/{season}")
-        closeout_sha = row.get("stage1_closeout_sha256", "").strip()
+        closeout_sha = row.get("stage1_audit_sha256", "").strip()
         if not re.fullmatch(r"[a-f0-9]{64}", closeout_sha):
-            raise ValueError(f"Historical coverage closeout SHA-256 required: {program_key}/{season}")
+            raise ValueError(f"Historical coverage audit SHA-256 required: {program_key}/{season}")
         if season not in seasons:
             raise ValueError(f"Historical coverage season has no canonical games: {program_key}/{season}")
         documented = record_from_games(seasons[season])
@@ -243,7 +243,7 @@ def validated_historical_coverage(
             "documented_record": named, "unidentified_record": unidentified,
             "source_label": source, "note": note,
             "terminal_classification": "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP",
-            "stage1_closeout_sha256": closeout_sha,
+            "stage1_audit_sha256": closeout_sha,
             "owner_disposition": row["owner_disposition"],
         })
     return sorted(result, key=lambda item: item["season_label"])
