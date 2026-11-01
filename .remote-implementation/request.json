@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-louis-correction-release-readiness-0001",
+  "request_id": "saint-louis-correction-release-preview-verify-0001",
   "school_key": "saint-louis",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "b589f50e46dd1c3c653a54a83f0f7ddb5c45a6cb",
-  "previous_control_state_sha256": "bf4d23378e73e6618206f84f152d3b47fab4b6b446e7de633f347ed34faa0573",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "f4742b80e96b711b705aeffffdd1a253a2818b3f",
+  "previous_control_state_sha256": "fd4df74c9a30e4c293a78d2652371ddedb24cb01f672a5a8bc9517920a007138",
   "expected_protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
   "target_branch": "data/saint-louis-correction",
   "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "ee192494bae86cb8f22ab198b9e4726573763be235b52103850067acce3bc4f7"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-louis/saint-louis-correction-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "58bcb1ae403aba4b66d91c8b7416a594cc52f1ad2bd16d4272b90c2558bec3bf"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "37bc6c6fb97f265960edc85d1b8585439ee629b497a0e9f07701c85c8f21ef0d"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "645499f23dad80c23c6e9934fbf702f195eb82068ac3444c89e0359c5a09ccff"
   },
   "approved_plan_hash": "bfe16499cd111951c435f001f9f5199a8044a733695c2c2fe4d5b71a57203016",
   "release_manifest_sha256": "0bde53d1ad5e77f12b554e48ed058dee5c5568bb5bed9d2a4516d70ff11e5898",
+  "pr_number": 422,
   "creation_provenance": {
-    "origin": "Saint Louis post-publication correction — release readiness after exact fresh-verified sealed apply",
-    "authorization": "Owner explicitly authorized deterministic progression through release readiness, PR/CI and exact Preview verification without intermediate owner relays. This request authorizes exactly one read-only RELEASE_READINESS operation against the independently fresh-verified correction successor 97ff09b8047907436e1513b8ed0166c8a1cdafb3. It grants no Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, maintenance, or unrelated authority."
+    "origin": "Saint Louis post-publication correction — exact PR-head Preview verification",
+    "authorization": "Existing Saint Louis correction release authority persists through OWNER_GATE_2_READY. Protected main, correction HEAD, fresh-verified RELEASE_READINESS, PR #422 identity/head, successful repository checks, clean mergeability, and successful Vercel status were reauthenticated immediately before submission. Authorize exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification. Do not create Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, recovery, maintenance, or unrelated authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -38,8 +39,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
