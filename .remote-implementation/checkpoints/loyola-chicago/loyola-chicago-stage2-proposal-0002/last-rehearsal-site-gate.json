@@ -1,0 +1,139 @@
+{
+  "counts": {
+    "home_missing_both": 105,
+    "home_missing_location": 105,
+    "home_missing_venue": 106,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 41,
+    "public_gap_rows": 692,
+    "reciprocal_research_accounted_gap": 1,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 1,
+    "researched_unresolved_home_venue_rows": 1,
+    "strict_home_gap": 105,
+    "strict_home_gap_rows": 105,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2728,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap": 1,
+    "unaccounted_public_gap_rows": 1,
+    "unknown_site_type": 545
+  },
+  "errors": [
+    "105 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+    "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0000992",
+      "CBBG-0006735",
+      "CBBG-0015521",
+      "CBBG-0015548",
+      "CBBG-0026214",
+      "CBBG-0026259",
+      "CBBG-0026324",
+      "CBBG-0035983",
+      "CBBG-0036338",
+      "CBBG-0038429",
+      "CBBG-0043550",
+      "CBBG-0043598"
+    ],
+    "home_missing_location": [
+      "CBBG-0000992",
+      "CBBG-0006735",
+      "CBBG-0015521",
+      "CBBG-0015548",
+      "CBBG-0026214",
+      "CBBG-0026259",
+      "CBBG-0026324",
+      "CBBG-0035983",
+      "CBBG-0036338",
+      "CBBG-0038429",
+      "CBBG-0043550",
+      "CBBG-0043598"
+    ],
+    "home_missing_venue": [
+      "CBBG-0000992",
+      "CBBG-0006735",
+      "CBBG-0015521",
+      "CBBG-0015548",
+      "CBBG-0026214",
+      "CBBG-0026259",
+      "CBBG-0026324",
+      "CBBG-0035983",
+      "CBBG-0036338",
+      "CBBG-0038429",
+      "CBBG-0043550",
+      "CBBG-0043598"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0003926",
+      "CBBG-0007450",
+      "CBBG-0007490",
+      "CBBG-0009782",
+      "CBBG-0010193",
+      "CBBG-0010378",
+      "CBBG-0010400",
+      "CBBG-0032846",
+      "CBBG-0042419",
+      "CBBG-0066617",
+      "CBBG-0066863",
+      "CBBG-0076947"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0159358"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0185581"
+    ],
+    "strict_home_gap": [
+      "CBBG-0000992",
+      "CBBG-0006735",
+      "CBBG-0015521",
+      "CBBG-0015548",
+      "CBBG-0026214",
+      "CBBG-0026259",
+      "CBBG-0026324",
+      "CBBG-0035983",
+      "CBBG-0036338",
+      "CBBG-0038429",
+      "CBBG-0043550",
+      "CBBG-0043598"
+    ],
+    "unaccounted_public_gap": [
+      "CBBG-0182742"
+    ],
+    "unknown_site_type": [
+      "CBBG-0050616",
+      "CBBG-0082827",
+      "CBBG-0082886",
+      "CBBG-0082943",
+      "CBBG-0089774",
+      "CBBG-0184652",
+      "CBBG-0184653",
+      "CBBG-0184654",
+      "CBBG-0184655",
+      "CBBG-0184656",
+      "CBBG-0184657",
+      "CBBG-0184658"
+    ]
+  },
+  "history_start_season": "1913-1914",
+  "school_key": "loyola-chicago",
+  "source_site_counts": {
+    "home_missing_venue": 1,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 717,
+    "neutral_missing_venue": 42,
+    "researched_gap_rows": 717,
+    "researched_unresolved_home_venue_rows": 1,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 674
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2727
+  },
+  "status": "FAIL",
+  "warnings": []
+}
