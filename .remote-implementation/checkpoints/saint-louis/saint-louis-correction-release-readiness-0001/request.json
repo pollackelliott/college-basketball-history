@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-louis-correction-release-readiness-0001",
+  "school_key": "saint-louis",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "b589f50e46dd1c3c653a54a83f0f7ddb5c45a6cb",
+  "previous_control_state_sha256": "bf4d23378e73e6618206f84f152d3b47fab4b6b446e7de633f347ed34faa0573",
+  "expected_protected_main_sha": "ef2dd1ebf9c1de0541dc4892513a92fac3089487",
+  "target_branch": "data/saint-louis-correction",
+  "target_sha": "97ff09b8047907436e1513b8ed0166c8a1cdafb3",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "ee192494bae86cb8f22ab198b9e4726573763be235b52103850067acce3bc4f7"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/saint-louis/saint-louis-correction-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "37bc6c6fb97f265960edc85d1b8585439ee629b497a0e9f07701c85c8f21ef0d"
+  },
+  "approved_plan_hash": "bfe16499cd111951c435f001f9f5199a8044a733695c2c2fe4d5b71a57203016",
+  "release_manifest_sha256": "0bde53d1ad5e77f12b554e48ed058dee5c5568bb5bed9d2a4516d70ff11e5898",
+  "creation_provenance": {
+    "origin": "Saint Louis post-publication correction — release readiness after exact fresh-verified sealed apply",
+    "authorization": "Owner explicitly authorized deterministic progression through release readiness, PR/CI and exact Preview verification without intermediate owner relays. This request authorizes exactly one read-only RELEASE_READINESS operation against the independently fresh-verified correction successor 97ff09b8047907436e1513b8ed0166c8a1cdafb3. It grants no Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, maintenance, or unrelated authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
