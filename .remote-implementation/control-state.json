@@ -203,7 +203,7 @@
   "active_request_sha256": "8a1c77c8b5e6cf2d0f120c888d733e096c05dbbf707ce2dcacd7359e0cbf3210",
   "active_school_key": "loyola-chicago",
   "active_target_branch": "maintenance/loyola-chicago-stage1-venue-identity",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "28bc9c1e111395fbac64baab70baa0a8ef592a6a",
   "active_writeahead_path": ".remote-implementation/writeahead/loyola-chicago/loyola-chicago-venue-maintenance-0002/writeahead-manifest.json",
   "active_writeahead_sha256": "3870ac0b62b8f335c55e8eee1046cf9e8a3131abb75b84903a47a1a380b09ce0",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
