@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-stage1-0002",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "dayton-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "dayton",
-  "previous_control_state_commit": "524fab8b9139d874fc95eef9f4577faefbf2b7c1",
-  "previous_control_state_sha256": "a46deeb4af238a71eba72eda6e9152434b76572b25b0019e78da5cbaa0f1a00b",
+  "previous_control_state_commit": "82d693cad23eb9cd5b662ac82ded91758b93a024",
+  "previous_control_state_sha256": "6eac1c47dc9a2d983ac671f64b1071185b50b89fc49e96adc2269c2187d5689c",
   "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "target_branch": "data/dayton-onboarding",
   "research_checkpoint": {
     "sha256": "804af75fc453741f25824eb95111c2700f8d7d8206bfa738f555cb1299e0612f",
     "research_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
@@ -17,17 +18,27 @@
       "part_count": 4
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/dayton/dayton-stage1-0002/checkpoint-manifest.json",
+    "sha256": "c81ac3badd29d95b73c2a17df443388f78d9f9de0371c792c6cf88c013267520"
+  },
   "venue_reconciliation": {
-    "path": ".remote-implementation/inputs/dayton/dayton-stage1-0002/venue-reconciliation.json",
+    "path": ".remote-implementation/checkpoints/dayton/dayton-stage1-0002/venue-reconciliation.json",
     "sha256": "a2575ddecbf2689f93f8fc003bb5ff0e8cee8100641624cf8321408baeaf397d"
   },
   "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1903-1904",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted Dayton INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the current reusable project baseline rather than superseding it, and the first accepted competitive source game is in 1903-1904. Preserve the exact frozen historical universe and all accepted researched uncertainty."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Dayton serialized Implementation lane — deterministic Stage 1 current-main venue reuse reconciliation",
-    "authorization": "Same owner-authorized Dayton Stage 1 phase. This second read-only inventory applies one deterministic representation-only reuse mapping discovered by Stage 1 checkpoint dayton-stage1-0001: frozen Valley High School, Las Vegas, NV to current-main VEN-000455 / valley-high-school-las-vegas. No Research change, Phase 0, shared/global mutation, Stage 2, owner gate, recovery, release, protected-main mutation, or other-school authority."
+    "origin": "ChatGPT Dayton serialized Implementation lane — owner-authorized Integration Freeze / Phase 0",
+    "authorization": "Owner explicitly authorized Proceed after clean Stage 1 request dayton-stage1-0002 PASS on protected main 80b00278ac9add94702ac76c5fa310b95d2b1929. Authorizes exactly one guarded PHASE0 operation: re-run Stage 1 against exact main, stage the immutable six-file Research Freeze, apply the authenticated Valley High School representation-only reuse plus ordinary new target-school venue registrations, reconcile accepted INCEPTION+ target scope, create the Integration Freeze, publish the create-once data/dayton-onboarding successor through the global mutation lock/write-ahead/CAS path, and require fresh independent Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
     "venue_identity_maintenance": false,
     "recovery": false,
