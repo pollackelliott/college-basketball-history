@@ -16,7 +16,7 @@ jobs:
       - name: Check out exact correction branch head
         uses: actions/checkout@v4
         with:
-          ref: 301a823f1e7f4f73624a49146ec704603b718e4d
+          ref: data/saint-louis-correction
           fetch-depth: 0
 
       - name: Set up Python
