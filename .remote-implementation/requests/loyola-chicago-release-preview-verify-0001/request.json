@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-release-preview-verify-0001",
+  "school_key": "loyola-chicago",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "1ab971f1e02e6d5330719ce1179868300c8ce55e",
+  "previous_control_state_sha256": "ed5841908bc61cc933b568e3d97eaf3340c3e632a2223c4ab97a3b5e541ab729",
+  "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "37aefb494d1d51faf0b58b11b1927fbb3038879d",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/loyola-chicago/loyola-chicago-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "a7920be36ae882cfbb0710e367eb06039c0ff65d39cf9e121dc31bec6995fb16"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/loyola-chicago/loyola-chicago-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "c57cd2d6c8002ef4919d7b0497318ada7b9fb10c7dcb805667cc3f1eded9b743"
+  },
+  "approved_plan_hash": "4e2033b466dfdfbfeae4292836dec6ebf6ea89eb464f5971b0da4d8030a9ee18",
+  "release_manifest_sha256": "b6e5f4753853eb5260652b9cd80e8ac5e8963c50086333a419a05675f5adaf96",
+  "pr_number": 425,
+  "creation_provenance": {
+    "origin": "ChatGPT Loyola Chicago serialized Implementation lane — exact PR-head Preview verification",
+    "authorization": "Owner authorized the Loyola Chicago release-preparation phase through OWNER_GATE_2_READY and then said Continue under the same persisted phase authority. Immediately before this request the school lane reauthenticated protected main afeca06b5a2aa7472cc4ab710014d591f596a2fd, exact target head 37aefb494d1d51faf0b58b11b1927fbb3038879d, fresh-verified RELEASE_READINESS PASS, IDLE control, and open non-draft PR #425 with base main, exact head 37aefb494d1d51faf0b58b11b1927fbb3038879d, mergeable=true, and the preserved sealed pr-body.md. This authorizes exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification through OWNER_GATE_2_READY. It grants no Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, historical reconsideration, recovery, maintenance, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
