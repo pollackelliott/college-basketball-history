@@ -909,7 +909,7 @@ def _aggregate_coverage_payload(
     except (json.JSONDecodeError, UnicodeDecodeError):
         return None, [{"reason": "AGGREGATE_COVERAGE_INVALID_JSON"}], {"present": True}
     entries = payload.get("coverage") if isinstance(payload, dict) else None
-    if payload.get("schema_version") != 1 or not isinstance(entries, list) or not entries:
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1 or not isinstance(entries, list) or not entries:
         defects.append({"reason": "AGGREGATE_COVERAGE_INVALID_STRUCTURE"})
         entries = []
     years: set[str] = set()
