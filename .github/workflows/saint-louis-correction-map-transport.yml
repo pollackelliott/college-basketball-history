@@ -1,0 +1,59 @@
+name: Saint Louis correction map transport
+
+on:
+  push:
+    branches:
+      - automation/saint-louis-cbbg-0182742-correction
+    paths:
+      - .github/workflows/saint-louis-correction-map-transport.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  transport:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out automation commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out exact control branch
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Recover exact sealed recommendation map
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/sl-correction-seal
+          mkdir -p /tmp/sl-correction-seal
+          gh run download 41309870534 \
+            --repo pollackelliott/college-basketball-history \
+            --name saint-louis-cbbg-0182742-correction-seal-rehearsal \
+            --dir /tmp/sl-correction-seal
+          test "$(sha256sum /tmp/sl-correction-seal/saint-louis-correction-map.json | awk '{print $1}')" = "43eaa9a34b53fff0aac5e1f31df6aaf70e9171d46de6ebe740c896dc4e829d02"
+
+      - name: Publish exact map bytes to control authority
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(git rev-parse HEAD)"
+          test "$expected" = "4b8c535a720be4f5fcfe813792cc058b1b8e0a9c"
+          mkdir -p .remote-implementation/inputs/saint-louis-correction-stage2-proposal-0001
+          cp /tmp/sl-correction-seal/saint-louis-correction-map.json \
+            .remote-implementation/inputs/saint-louis-correction-stage2-proposal-0001/recommendation-map.json
+          test "$(sha256sum .remote-implementation/inputs/saint-louis-correction-stage2-proposal-0001/recommendation-map.json | awk '{print $1}')" = "43eaa9a34b53fff0aac5e1f31df6aaf70e9171d46de6ebe740c896dc4e829d02"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- .remote-implementation/inputs/saint-louis-correction-stage2-proposal-0001/recommendation-map.json
+          git commit -m "[remote-implementation-internal] transport Saint Louis correction recommendation map"
+          git push origin HEAD:control/remote-implementation
