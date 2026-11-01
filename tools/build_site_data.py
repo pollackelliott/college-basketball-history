@@ -180,6 +180,75 @@ def record_from_games(games: list[dict[str, Any]]) -> dict[str, int]:
     }
 
 
+
+def validated_historical_coverage(
+    rows: list[dict[str, str]],
+    program_key: str,
+    seasons: dict[str, list[dict[str, Any]]],
+    authority_cases: dict[tuple[str, str], dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Season notes are separate from canonical games and never alter opponent series."""
+    result = []
+    used = set()
+    for row in rows:
+        if row.get("program_key") != program_key:
+            continue
+        season = row.get("season_label", "").strip()
+        if not season or season in used:
+            raise ValueError(f"Duplicate or blank historical coverage season: {program_key}/{season}")
+        used.add(season)
+        authority = authority_cases.get((program_key, season))
+        if authority is None:
+            raise ValueError(f"Historical coverage lacks owner authority: {program_key}/{season}")
+        if row.get("owner_disposition") != authority.get("owner_disposition"):
+            raise ValueError(f"Historical coverage owner authority mismatch: {program_key}/{season}")
+        closeout_sha = row.get("stage1_closeout_sha256", "").strip()
+        if not re.fullmatch(r"[a-f0-9]{64}", closeout_sha):
+            raise ValueError(f"Historical coverage closeout SHA-256 required: {program_key}/{season}")
+        if season not in seasons:
+            raise ValueError(f"Historical coverage season has no canonical games: {program_key}/{season}")
+        documented = record_from_games(seasons[season])
+        if documented["ties"]:
+            raise ValueError(f"Historical coverage cannot infer tie outcome: {program_key}/{season}")
+        def record(prefix: str) -> dict[str, int]:
+            try:
+                return {key: int(row[f"{prefix}_{key}"]) for key in ("wins", "losses", "games")}
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(f"Historical coverage record is incomplete: {program_key}/{season}") from exc
+        official = record("official")
+        named = record("documented")
+        unidentified = record("unidentified")
+        if (official != authority.get("institutional_record")
+            or named != authority.get("identified_record")
+            or unidentified != authority.get("unidentified_record")
+            or named != {k: documented[k] for k in ("wins", "losses", "games")}
+            or official["wins"] + official["losses"] != official["games"]
+            or named["wins"] + named["losses"] != named["games"]
+            or unidentified["wins"] + unidentified["losses"] != unidentified["games"]
+            or unidentified["games"] <= 0
+            or any(official[k] - named[k] != unidentified[k]
+                   for k in ("wins", "losses", "games"))):
+            raise ValueError(f"Historical coverage arithmetic/canonical discrepancy: {program_key}/{season}")
+        source = row.get("source_label", "").strip()
+        if not source:
+            raise ValueError(f"Historical coverage requires institutional source: {program_key}/{season}")
+        note = (f"Institutional records give {official['wins']}-{official['losses']} across "
+                f"{official['games']} games. {named['games']} individual game results "
+                f"({named['wins']}-{named['losses']}) are documented here. "
+                f"The remaining {unidentified['games']} games collectively account for "
+                f"{unidentified['wins']} wins and {unidentified['losses']} losses; "
+                "their opponents, dates, and scores remain unidentified in available sources.")
+        result.append({
+            "season_label": season, "official_record": official,
+            "documented_record": named, "unidentified_record": unidentified,
+            "source_label": source, "note": note,
+            "terminal_classification": "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP",
+            "stage1_closeout_sha256": closeout_sha,
+            "owner_disposition": row["owner_disposition"],
+        })
+    return sorted(result, key=lambda item: item["season_label"])
+
+
 def json_text(payload: Any) -> str:
     return json.dumps(
         payload,
@@ -512,6 +581,20 @@ def main() -> int:
     conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
     assertion_rows = read_csv(assertions_path)
+    historical_coverage_rows = read_csv(
+        repo_root / "data" / "reference" / "historical-season-coverage.csv"
+    )
+    authority_registry = json.loads((
+        repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
+    ).read_text(encoding="utf-8"))
+    if authority_registry.get("authority_type") != "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE":
+        raise ValueError("Historical coverage owner authority registry invalid")
+    authority_cases = {
+        (item["school_key"], item["season"]): item
+        for item in authority_registry["cases"]
+    }
+    if len(authority_cases) != len(authority_registry["cases"]):
+        raise ValueError("Historical coverage owner authority keys duplicated")
 
     global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
     venue_geo_errors = canonical_venue_geography_errors(
@@ -704,6 +787,10 @@ def main() -> int:
             seasons[game["season_label"]].append(game)
             opponents[game["opponent_key"]].append(game)
 
+        coverage = validated_historical_coverage(
+            historical_coverage_rows, program_key, seasons, authority_cases
+        )
+        coverage_by_season = {item["season_label"]: item for item in coverage}
         season_summaries = []
         for season_label in sorted(seasons, reverse=True):
             season_games = seasons[season_label]
@@ -711,6 +798,7 @@ def main() -> int:
                 {
                     "season_label": season_label,
                     **record_from_games(season_games),
+                    "historical_coverage": coverage_by_season.get(season_label),
                 }
             )
 
@@ -793,6 +881,7 @@ def main() -> int:
                 "opponents": len(opponents),
             },
             "seasons": season_summaries,
+            "historical_season_coverage": coverage,
             "opponents": opponent_summaries,
             "games": perspective_games,
             **conference_metadata,
