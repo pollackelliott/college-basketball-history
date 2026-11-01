@@ -1395,6 +1395,20 @@ def verify_stage2_census(
         != display_authority.get("verification_path")
     ):
         raise Stop("STAGE2_FRESH_TARGET_VERIFICATION_BINDING_MISMATCH")
+    refresh_ref = request.get("stage2_current_main_refresh_successor") or {}
+    if (
+        manifest.get("stage2_current_main_refresh_successor_path")
+        != refresh_ref.get("path")
+        or manifest.get("stage2_current_main_refresh_successor_sha256")
+        != refresh_ref.get("sha256")
+    ):
+        raise Stop("STAGE2_FRESH_REFRESH_AUTHORITY_BINDING_MISMATCH")
+    refresh_authority = phase0.get("current_main_refresh_authority") or {}
+    if (
+        manifest.get("stage2_current_main_refresh_verification_path")
+        != refresh_authority.get("verification_path")
+    ):
+        raise Stop("STAGE2_FRESH_REFRESH_VERIFICATION_BINDING_MISMATCH")
     target_branch = manifest["target_branch"]
     target_sha = remote_head(ROOT, target_branch)
     if target_sha != manifest["target_sha"]:
