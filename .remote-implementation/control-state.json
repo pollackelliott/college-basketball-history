@@ -199,7 +199,7 @@
     "loyola-chicago-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
-  "active_lock_commit": null,
+  "active_lock_commit": "698d884c7468153860cf3e6ecb01b959a45658a8",
   "active_lock_owner": "github-actions:41265279395:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
