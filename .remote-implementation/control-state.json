@@ -197,7 +197,7 @@
     "loyola-chicago-phase0-0001"
   ],
   "active_expected_main_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
-  "active_lock_commit": null,
+  "active_lock_commit": "96cc3010afdcff0e4f63fd19e6ab8626772a7f33",
   "active_lock_owner": "github-actions:41263214528:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
