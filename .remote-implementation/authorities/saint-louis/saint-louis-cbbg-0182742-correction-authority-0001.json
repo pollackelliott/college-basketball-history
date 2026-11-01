@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "POST_PUBLICATION_CORRECTION_AUTHORITY",
+  "status": "AUTHORIZED",
+  "authority_id": "saint-louis-cbbg-0182742-correction-authority-0001",
+  "school_key": "saint-louis",
+  "research_base_sha": "a76ba14e378267d2d6d6beb18b880916d77e84a1",
+  "protected_main_sha_at_authorization": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "source_game_id": "saint-louis-1916-17-005",
+  "canonical_game_id": "CBBG-0182742",
+  "transaction_kind_required": "SINGLE_GAME_IDENTITY",
+  "historical_disposition": {
+    "game_date": "1917-01-17",
+    "old_opponent_key": "loyola-chicago",
+    "old_opponent_name": "Loyola Chicago",
+    "new_opponent_key": "loyola-academy",
+    "new_opponent_name": "Loyola Academy",
+    "ruling": "Saint Louis played Loyola Academy, not Loyola University Chicago."
+  },
+  "literal_source_evidence_must_remain": {
+    "source_opponent_label": "Loyola Chicago",
+    "raw_text": "J17 Loyola Chicago A L 12-28"
+  },
+  "evidence_authority": {
+    "control_center_disposition": "CONTROL CENTER DISPOSITION — EXACT ONE-GAME SAINT LOUIS POST-PUBLICATION IDENTITY CORRECTION AUTHORIZED",
+    "loyola_diagnostic_request_id": "loyola-chicago-stage2-reconciliation-diagnostic-0001",
+    "loyola_diagnostic_checkpoint_sha256": "256e0128143d94bce49e24b63b4f3bcd40a8f48c07b391082722ad709af1609f",
+    "loyola_diagnostic_trace_sha256": "14b13a717bc389a999eca31ea382657f408b59116f04070663cc6ea5623e8131"
+  },
+  "authorized_source_field_changes": [
+    "normalized_opponent_key",
+    "normalized_opponent_name"
+  ],
+  "permitted_supporting_package_change": {
+    "path": "schools/saint-louis/opponents.csv",
+    "purpose": "Add/update only the school-local loyola-academy opponent representation and mechanically truthful census/audit metadata while preserving the later Loyola Chicago identity."
+  },
+  "forbidden": [
+    "source-game deletion",
+    "canonical game recreation",
+    "global programs.csv mutation",
+    "shared-reference mutation",
+    "Loyola onboarding mutation",
+    "unrelated Saint Louis source/opponent/canonical/assertion/discrepancy changes"
+  ],
+  "fail_closed_population": {
+    "source_rows": 1,
+    "assertions": 1,
+    "canonical_games": 1,
+    "source_game_ids": [
+      "saint-louis-1916-17-005"
+    ],
+    "assertion_ids": [
+      "ASRT-SAINT-LOUIS-saint-louis-1916-17-005"
+    ],
+    "canonical_game_ids": [
+      "CBBG-0182742"
+    ]
+  }
+}
