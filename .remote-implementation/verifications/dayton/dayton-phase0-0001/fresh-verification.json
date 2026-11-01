@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86",
+  "prepared_parent_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "prepared_tree_sha": "48cf5d226d288d4dadb3d6caa2914306aa170dea",
+  "protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "dayton-phase0-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "116444ce77bb144eec690fd5ca0c3d8b03d40e86"
+}
