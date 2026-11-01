@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "loyola-chicago-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "loyola-chicago",
+  "previous_control_state_commit": "cf7538a9ca9dce36b7321ec9e73bde3f5e328d2f",
+  "previous_control_state_sha256": "83db596d08561305d27d7f15939c52ec420d64b3d87e3cea011aa70d2384971e",
+  "expected_protected_main_sha": "afeca06b5a2aa7472cc4ab710014d591f596a2fd",
+  "target_branch": "data/loyola-chicago-onboarding",
+  "target_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-phase0-0001/successor-manifest.json",
+    "sha256": "ab149af5e216d1d28c253162252f701535368aa0facaaf34d8e6b831716757d6"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "130cc370d79dd5ae2841cc3e8409dfcabde9e51bab1ca3f89ef527a80ed6d662"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/loyola-chicago/loyola-chicago-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "49b592183998f7de962d6096a78615681a3c8ecb53ff16d5f2b4c7d340929b0c"
+  },
+  "integration_freeze_sha256": "d707c358867b6eb8df40eb241d9f85ac856aec397a189e7bd59ebdbaaaab151e",
+  "semantic_snapshot_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "creation_provenance": {
+    "origin": "Loyola Chicago Implementation — resumed Stage 2 after Control Center verified current-main refresh and PR #424 workflow recovery",
+    "authorization": "Existing Loyola Stage 2 phase authority persists through fresh census, recommendation-map reconciliation, exact-map proposal rehearsal, and OWNER_GATE_1_READY. This request is the fresh read-only census bound to the independently verified refresh successor 9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d and current protected main afeca06b5a2aa7472cc4ab710014d591f596a2fd. It carries no Owner Gate 1, tracked repair, refresh replay, recovery, release, or merge authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}

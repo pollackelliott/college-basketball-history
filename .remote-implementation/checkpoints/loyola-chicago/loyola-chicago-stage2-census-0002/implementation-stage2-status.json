@@ -1,0 +1,42 @@
+{
+  "branch": "remote-stage2-census/loyola-chicago-9979401d1ad0",
+  "capability_census": {
+    "path": ".onboarding/loyola-chicago/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "9979401d1ad0abb5d6adfdd0fa87a22c2e716a7d",
+  "integration_base_sha": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "integration_semantic_sha256": "964ad8875faf2a69e631910e1e08a4e5689f9bc32190752ad3b3769b45ec8c6d",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "5ffb0a475fd492c1681607aacccf79cdfe0e4a9b",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 86,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 14,
+      "conditional_discrepancy": 86,
+      "discrepancy": 186,
+      "identity": 26,
+      "publication": 1
+    },
+    "decision_count": 314,
+    "decision_universe_sha256": "c981a9141685dd9417d103db01bf1c2db1a178213436823d5cb7a94786576f80",
+    "discrepancies_to_add": 186,
+    "existing_game_matches": 706,
+    "new_canonical_games": 1995,
+    "plan_path": ".onboarding/loyola-chicago/plan.json",
+    "review_path": ".onboarding/loyola-chicago/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "2196fecaa0e590428795ab3c8151185b0f132e60",
+  "schema_version": 1,
+  "school_key": "loyola-chicago",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
