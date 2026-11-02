@@ -91,11 +91,12 @@ def _remote_branch_names(repo: Path, remote: str, pattern: str) -> list[str]:
 
 def _cached_control_state(
     repo: Path,
+    remote: str,
     remote_control_sha: str,
 ) -> tuple[dict[str, Any] | None, str | None]:
     candidates = (
         CONTROL_BRANCH,
-        f"origin/{CONTROL_BRANCH}",
+        f"{remote}/{CONTROL_BRANCH}",
     )
     for ref in candidates:
         resolved = _git(repo, "rev-parse", "--verify", ref, check=False)
@@ -166,6 +167,7 @@ def build_snapshot(repo: Path, remote: str = "origin") -> dict[str, Any]:
     worktree = _git(repo, "status", "--porcelain=v1").stdout
     control_state, control_state_ref = _cached_control_state(
         repo,
+        remote,
         control_branch_sha,
     )
 
