@@ -515,11 +515,11 @@
   "current_sequence": 241,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
     "operation": "PHASE0",
     "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "davidson-phase0-0001",
     "school_key": "davidson",
     "successor_manifest_path": ".remote-implementation/successors/davidson/davidson-phase0-0001/successor-manifest.json",

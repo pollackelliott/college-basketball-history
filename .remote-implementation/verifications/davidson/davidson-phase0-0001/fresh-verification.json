@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "prepared_parent_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "prepared_tree_sha": "939994714d33466404f4f9530b49d34a3b4e0397",
+  "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "davidson-phase0-0001",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5"
+}
