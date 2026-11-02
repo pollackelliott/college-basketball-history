@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "duquesne",
+  "created_at": "2026-11-02T22:42:21.619602+00:00",
+  "input_fingerprint": {
+    "sha256": "2ebe5c4262a0689632bbaa7e1146a60e6fa127e293688301d04b38b26afd232b",
+    "git_head": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+    "files": {
+      "schools/duquesne/source-games.csv": "f48c79126e35e656ed447ae7f3d69f21ec925ef5a24bd20cbfeb2726d7653b9d",
+      "schools/duquesne/opponents.csv": "6f49c92d8fa5c0d3a08fabb8adb716fd71bbb441c412ba0d12afd07c587ba999",
+      "schools/duquesne/venues.csv": "fcc8af2ef2d7b6e0beea0be84744ccd862714d3214f82befffed15365a07be83",
+      "schools/duquesne/conferences.csv": "69bdf8c6c955307e4d8d71dadfc55612d38c91e649a273a75f4619c950a6c742",
+      "schools/duquesne/notes.md": "6d23082b8a007c527132c7c46b4211563530b8835c1797ee5bcb3d2384e94a48",
+      "schools/duquesne/source-notes.md": "2cebb069c77dbbe7a0b11bffe7f161fcf483199f2bcf6d7f96cffdb4396bb4af",
+      "data/canonical/games.csv": "9da0d3744cf80f121e2521374d418d8398fad3c2ba6177d176fe520e7adf38c5",
+      "data/evidence/game-assertions.csv": "122446d6b32ee4aba06a73492cfdecbe3239790964e9840454c2494dc02087d3",
+      "data/reconciliation/discrepancies.csv": "c55e368bf1ce12fa0af15ade19624d436dc26bafe625da2c8a5249f9a237e326",
+      "data/reference/programs.csv": "1ccd1a76cfcd9faa2249530bc78ab135672cb204db751fba3ac947588a9a9aea",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "fe81698b5e2679bc98a6c8ed22cf8f7551f87d5ecd242161dd598c315cddc68c",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "0d4edbbc9d8abc55026475e95231a7eae8d98495cae681785153f94638fd74f4",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "2d478cfdd209bc912ee2a46248d8aed6474b2661696d7ae7f269b14ab4f61d4e",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+      "tools/onboarding_plan.py": "e7cca1ed0195b85e56084c71f57aa3cc74c8dac6cbc7fdb08c58345f256ecf59",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: brooklyn-knights-of-columbus: ['Brooklyn Knights of Columbus', 'Brooklyn Knights of Columbus (club team)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: central-state-ohio: ['Central State', 'Central State (Ohio)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: franklin-college: ['Franklin College', 'Franklin College (IN)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: norfolk-naval-base: ['Norfolk Naval Base', 'Norfolk Naval Base (military team)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: oklahoma-city: ['Oklahoma City', 'Oklahoma City University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: rensselaer: ['Rensselaer', 'Rensselaer Polytechnic Institute']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: saint-joseph-s-indiana: [\"Saint Joseph's (IN)\", 'Saint Joseph’s (IN)', 'Saint Joseph’s (Indiana)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: st-johns-college-maryland: [\"St. John's College (Maryland)\", 'St. John’s College (Md.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: wayne-state: ['Wayne State', 'Wayne State (Mich.)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2741,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 1169,
+      "venues": 71,
+      "conference_intervals": 6,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: brooklyn-knights-of-columbus: ['Brooklyn Knights of Columbus', 'Brooklyn Knights of Columbus (club team)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: central-state-ohio: ['Central State', 'Central State (Ohio)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: franklin-college: ['Franklin College', 'Franklin College (IN)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: norfolk-naval-base: ['Norfolk Naval Base', 'Norfolk Naval Base (military team)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: oklahoma-city: ['Oklahoma City', 'Oklahoma City University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: rensselaer: ['Rensselaer', 'Rensselaer Polytechnic Institute']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-joseph-s-indiana: [\"Saint Joseph's (IN)\", 'Saint Joseph’s (IN)', 'Saint Joseph’s (Indiana)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-johns-college-maryland: [\"St. John's College (Maryland)\", 'St. John’s College (Md.)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: wayne-state: ['Wayne State', 'Wayne State (Mich.)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

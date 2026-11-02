@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "duquesne-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "duquesne",
+  "previous_control_state_commit": "ca096aba833b51a5e7ba125f557bfe41a3d328c9",
+  "previous_control_state_sha256": "9c2007de2cc1c0d8fc77230cadb049eca5b6dea950d763b4595d38344c26b058",
+  "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/duquesne/duquesne-phase0-0001/successor-manifest.json",
+    "sha256": "c4484a605c49cc2b9b89b96e0fd3283007e1b0b0bdd56468bd7db115c3e16e14"
+  },
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "creation_provenance": {
+    "origin": "ChatGPT Duquesne serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly authorized Proceed after Duquesne Phase 0 completed with fresh remote_phase0_equivalence=PASS. This request is the first bounded read-only STAGE2_CENSUS operation against the exact independently verified onboarding successor and Integration Freeze. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
