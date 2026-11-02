@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "stage": "STAGE_3A_2",
+  "status": "COMPLETE",
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "parent_research_commit": "1c69fb0c55e855e1162723976a1801c91066a020",
+  "parent_stage3a1_repair_checkpoint_sha256": "956a0bf5ad81596b4c2e8096ceae29048b200d41599fde1d41be06db785a1ea3",
+  "stage3a2_checkpoint_sha256": "5be12cbb1a62cc7eefb87ca63a071c7b0dad77a0e07274ac66b7f8c8a17df601",
+  "stage3a2_manifest_sha256": "06ca4558535a94e73e417bb7e1566fa9a4894aded40f99d89140fe52085b8e19",
+  "home_rows": 833,
+  "home_rows_exact_venue": 833,
+  "home_rows_missing_venue": 0,
+  "home_rows_missing_location": 0,
+  "researched_unresolved_home_venue_rows": 0,
+  "venue_counts": {
+    "Olean Armory": 24,
+    "Butler Memorial Gymnasium": 25,
+    "Reilly Center": 784
+  },
+  "regular_season_han_preserved": {
+    "HOME": 833,
+    "OPPONENT_HOME": 744,
+    "NEUTRAL": 399,
+    "UNKNOWN": 528
+  },
+  "stage3a3_neutral_queue_rows": 399,
+  "postseason_deferred_rows": 110,
+  "protected_main_mutated": false,
+  "next_bounded_unit": "STAGE_3A_3_AFTER_OWNER_PROCEED"
+}
