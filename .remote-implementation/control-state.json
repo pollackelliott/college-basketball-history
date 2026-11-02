@@ -242,18 +242,19 @@
     "dayton-stage2-reconciliation-diagnostic-0003",
     "dayton-stage2-current-main-refresh-0003",
     "dayton-stage2-census-0004",
-    "dayton-stage2-proposal-0004"
+    "dayton-stage2-proposal-0004",
+    "dayton-stage2-gate1-fill-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_FILL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "dayton-stage2-gate1-fill-0001",
+  "active_request_sha256": "dc8553b6142f3096b6b914d223fed012bed5373aedc26b1f5fb233fb1886bb76",
+  "active_school_key": "dayton",
+  "active_target_branch": "data/dayton-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -517,8 +518,11 @@
     "target_branch": "data/dayton-onboarding",
     "target_sha": "7e667c2b588d8063150e40aec23216394d20df79"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41452242476",
+  "lock_acquisition_request_commit": "30bc334e7b3248a5d7233659ade99d1aa11df39f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_FILL_RUNNING"
 }
