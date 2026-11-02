@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "authority_kind": "OWNER_AUTHORIZED_CANONICAL_LOCATION_REPAIR",
+  "authority_note": "Control Center November 1 2026: exact 256-row site-location census and narrow shared repair, no Dayton Research or Gate 1 change",
+  "baseline_protected_main": "0a28151cf0c193afea2641cc5bd6f5557ab76d5b",
+  "expected_canonical_blob": "f15273947ee600dd6e9a7917569041ca8caf27fc",
+  "game_id": "CBBG-0014299",
+  "canonical_expected": {
+    "canonical_game_id": "CBBG-0014299",
+    "season_label": "2019-2020",
+    "game_date": "2019-11-27",
+    "team_a_key": "dayton",
+    "team_b_key": "kansas",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "site_city": "Maui",
+    "site_state": "",
+    "venue_id": "",
+    "venue_key": "",
+    "team_a_score": "84",
+    "team_b_score": "90"
+  },
+  "source_path": "schools/kansas/source-games.csv",
+  "source_game_id": "KURAW-03139",
+  "source_expected": {
+    "source_game_id": "KURAW-03139",
+    "source_program_key": "kansas",
+    "season_label": "2019-2020",
+    "game_date": "2019-11-27",
+    "normalized_opponent_key": "dayton",
+    "curated_site_type": "NEUTRAL",
+    "city": "Maui",
+    "state": "",
+    "team_score": "90",
+    "opponent_score": "84"
+  },
+  "literal_evidence": "Maui, Hawai’i",
+  "approved_site_state": "HI",
+  "allowed_changes": [
+    "data/canonical/games.csv:CBBG-0014299:site_state"
+  ],
+  "provenance": "Kansas's preserved 2019-11-27 raw institutional schedule: N27 #4 Dayton ... Maui, Hawai’i ... W OT 90-84; no site type or venue change"
+}
