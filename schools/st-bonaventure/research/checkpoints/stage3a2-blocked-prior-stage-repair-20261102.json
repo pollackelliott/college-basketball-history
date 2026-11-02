@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "stage": "STAGE_3A_2",
+  "status": "BLOCKED_PRIOR_STAGE_REPAIR_REQUIRED",
+  "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "parent_research_commit": "3631fdc55cf3ccb262c9a6ffc05319c9db25dfa9",
+  "parent_stage3a1_checkpoint_sha256": "d17afed29ea76f9174f6c98d00d81398685f71dccd29a7cc8767ce48a5dd2c42",
+  "blocked_checkpoint_sha256": "0244c7eeb453874f4b97ae79b866075ef396b7889dd09d59b1c6266e7aed21dd",
+  "affected_rows": 1377,
+  "affected_basis": "TARGET_RECORD_BOOK_UNMARKED_HOME_CONVENTION",
+  "armory_era_affected_rows": 260,
+  "armory_era_affected_record": "197-63",
+  "streak_era_affected_losses": 40,
+  "venue_rows_mutated": 0,
+  "owner_historical_decision_required": false,
+  "next_bounded_unit": "STAGE_3A_1_HAN_REPAIR"
+}
