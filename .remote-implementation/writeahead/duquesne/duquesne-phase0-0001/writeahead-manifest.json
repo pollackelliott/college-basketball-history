@@ -1,0 +1,656 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/duquesne/conferences.csv",
+    "schools/duquesne/notes.md",
+    "schools/duquesne/opponents.csv",
+    "schools/duquesne/source-games.csv",
+    "schools/duquesne/source-notes.md",
+    "schools/duquesne/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "1ccd1a76cfcd9faa2249530bc78ab135672cb204db751fba3ac947588a9a9aea",
+    "data/reference/venue-names.csv": "61007a667b7d8a7bbc908ae4cc484eb7fcd96357683904ba99dd37cabf873d9b",
+    "data/reference/venues.csv": "6661f1a64479a62d66c6c24b1d29a2944c3dacbbd704e43db90101232d630a73",
+    "schools/duquesne/conferences.csv": "69bdf8c6c955307e4d8d71dadfc55612d38c91e649a273a75f4619c950a6c742",
+    "schools/duquesne/notes.md": "6d23082b8a007c527132c7c46b4211563530b8835c1797ee5bcb3d2384e94a48",
+    "schools/duquesne/opponents.csv": "6f49c92d8fa5c0d3a08fabb8adb716fd71bbb441c412ba0d12afd07c587ba999",
+    "schools/duquesne/source-games.csv": "f48c79126e35e656ed447ae7f3d69f21ec925ef5a24bd20cbfeb2726d7653b9d",
+    "schools/duquesne/source-notes.md": "2cebb069c77dbbe7a0b11bffe7f161fcf483199f2bcf6d7f96cffdb4396bb4af",
+    "schools/duquesne/venues.csv": "fcc8af2ef2d7b6e0beea0be84744ccd862714d3214f82befffed15365a07be83"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/duquesne/conferences.csv",
+    "schools/duquesne/notes.md",
+    "schools/duquesne/opponents.csv",
+    "schools/duquesne/source-games.csv",
+    "schools/duquesne/source-notes.md",
+    "schools/duquesne/venues.csv"
+  ],
+  "commit_message": "Add Duquesne onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "3af9c7ca809d414c07782ada526ca81dd3268203",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted Duquesne INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the current reusable project Program Top-Level Scope Reference value INCEPTION+. The first accepted competitive source-game season in the frozen package is 1913-1914. Preserve the exact frozen historical universe and all accepted researched uncertainty.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1913-1914",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "Duquesne"
+    }
+  },
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "69bdf8c6c955307e4d8d71dadfc55612d38c91e649a273a75f4619c950a6c742",
+    "notes.md": "6d23082b8a007c527132c7c46b4211563530b8835c1797ee5bcb3d2384e94a48",
+    "opponents.csv": "6f49c92d8fa5c0d3a08fabb8adb716fd71bbb441c412ba0d12afd07c587ba999",
+    "source-games.csv": "f48c79126e35e656ed447ae7f3d69f21ec925ef5a24bd20cbfeb2726d7653b9d",
+    "source-notes.md": "2cebb069c77dbbe7a0b11bffe7f161fcf483199f2bcf6d7f96cffdb4396bb4af",
+    "venues.csv": "fcc8af2ef2d7b6e0beea0be84744ccd862714d3214f82befffed15365a07be83"
+  },
+  "prepared_commit_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "prepared_parent_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "prepared_tree_sha": "4230c025c39ad48bcabdd27798739ed36c8c37ed",
+  "program_alias_mapping": [],
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "repository_validation": "PASS",
+  "request_id": "duquesne-phase0-0001",
+  "request_sha256": "3e4b594eab1b605b202a5ae473829b4f4f46f7b710072311e25cde282e901711",
+  "research_base_sha": "a3c0cb9d1034314ff74debfb4545da4c53998370",
+  "research_checkpoint_sha256": "5f1e4540bf6f73585e64030f13fea4b119158129364e729e6a7bd6303bd371f2",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "sidecars": {
+    "integration-freeze.json": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+    "stage1-reconciliation.json": "c946f018b83448815281b92d0dccb425db943f627c3d3c0934713d85f76130b2"
+  },
+  "target_branch": "data/duquesne-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "Brendan Byrne Arena",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "VEN-000028",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "brendan-byrne-arena"
+    },
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "CHI Health Center Omaha",
+      "final_venue_id": "VEN-000043",
+      "final_venue_key": "chi-health-center",
+      "research_venue_id": "VEN-000043",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chi-health-center"
+    },
+    {
+      "canonical_name": "Chicago Stadium",
+      "final_venue_id": "VEN-000044",
+      "final_venue_key": "chicago-stadium",
+      "research_venue_id": "VEN-000044",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chicago-stadium"
+    },
+    {
+      "canonical_name": "Cole Field House",
+      "final_venue_id": "VEN-000047",
+      "final_venue_key": "cole-field-house",
+      "research_venue_id": "VEN-000047",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cole-field-house"
+    },
+    {
+      "canonical_name": "Hinkle Fieldhouse",
+      "final_venue_id": "VEN-000080",
+      "final_venue_key": "hinkle-fieldhouse",
+      "research_venue_id": "VEN-000080",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hinkle-fieldhouse"
+    },
+    {
+      "canonical_name": "Jersey Mike's Arena",
+      "final_venue_id": "VEN-000095",
+      "final_venue_key": "jersey-mikes-arena",
+      "research_venue_id": "VEN-000095",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jersey-mikes-arena"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000123",
+      "final_venue_key": "madison-square-garden-1925",
+      "research_venue_id": "VEN-000123",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1925"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Market Square Arena",
+      "final_venue_id": "VEN-000125",
+      "final_venue_key": "market-square-arena",
+      "research_venue_id": "VEN-000125",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "market-square-arena"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Reynolds Coliseum",
+      "final_venue_id": "VEN-000174",
+      "final_venue_key": "reynolds-coliseum",
+      "research_venue_id": "VEN-000174",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-coliseum"
+    },
+    {
+      "canonical_name": "Riverfront Coliseum",
+      "final_venue_id": "VEN-000176",
+      "final_venue_key": "riverfront-coliseum",
+      "research_venue_id": "VEN-000176",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "riverfront-coliseum"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "WVU Coliseum",
+      "final_venue_id": "VEN-000235",
+      "final_venue_key": "wvu-coliseum",
+      "research_venue_id": "VEN-000235",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wvu-coliseum"
+    },
+    {
+      "canonical_name": "Mellon Arena",
+      "final_venue_id": "VEN-000241",
+      "final_venue_key": "mellon-arena",
+      "research_venue_id": "VEN-000241",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mellon-arena"
+    },
+    {
+      "canonical_name": "Crisler Center",
+      "final_venue_id": "VEN-000261",
+      "final_venue_key": "crisler-center",
+      "research_venue_id": "VEN-000261",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "crisler-center"
+    },
+    {
+      "canonical_name": "Keaney Gymnasium",
+      "final_venue_id": "VEN-000305",
+      "final_venue_key": "keaney-gymnasium",
+      "research_venue_id": "VEN-000305",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keaney-gymnasium"
+    },
+    {
+      "canonical_name": "Matthew Knight Arena",
+      "final_venue_id": "VEN-000306",
+      "final_venue_key": "matthew-knight-arena",
+      "research_venue_id": "VEN-000306",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "matthew-knight-arena"
+    },
+    {
+      "canonical_name": "Cassell Coliseum",
+      "final_venue_id": "VEN-000329",
+      "final_venue_key": "cassell-coliseum",
+      "research_venue_id": "VEN-000329",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cassell-coliseum"
+    },
+    {
+      "canonical_name": "Boardwalk Hall",
+      "final_venue_id": "VEN-000433",
+      "final_venue_key": "boardwalk-hall",
+      "research_venue_id": "VEN-000433",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boardwalk-hall"
+    },
+    {
+      "canonical_name": "Fitzgerald Field House",
+      "final_venue_id": "VEN-000437",
+      "final_venue_key": "fitzgerald-field-house",
+      "research_venue_id": "VEN-000437",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "fitzgerald-field-house"
+    },
+    {
+      "canonical_name": "Jadwin Gymnasium",
+      "final_venue_id": "VEN-000440",
+      "final_venue_key": "jadwin-gymnasium",
+      "research_venue_id": "VEN-000440",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jadwin-gymnasium"
+    },
+    {
+      "canonical_name": "Ocean Center",
+      "final_venue_id": "VEN-000482",
+      "final_venue_key": "ocean-center",
+      "research_venue_id": "VEN-000482",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ocean-center"
+    },
+    {
+      "canonical_name": "Dahlberg Arena",
+      "final_venue_id": "VEN-000559",
+      "final_venue_key": "dahlberg-arena",
+      "research_venue_id": "VEN-000559",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dahlberg-arena"
+    },
+    {
+      "canonical_name": "Philadelphia Convention Hall",
+      "final_venue_id": "VEN-000563",
+      "final_venue_key": "philadelphia-convention-hall",
+      "research_venue_id": "VEN-000563",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "philadelphia-convention-hall"
+    },
+    {
+      "canonical_name": "Robertson Memorial Fieldhouse",
+      "final_venue_id": "VEN-000597",
+      "final_venue_key": "robertson-memorial-fieldhouse",
+      "research_venue_id": "VEN-000597",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "robertson-memorial-fieldhouse"
+    },
+    {
+      "canonical_name": "Siegel Center",
+      "final_venue_id": "VEN-000705",
+      "final_venue_key": "siegel-center",
+      "research_venue_id": "VEN-000705",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "siegel-center"
+    },
+    {
+      "canonical_name": "Motor Square Garden",
+      "final_venue_id": "VEN-000745",
+      "final_venue_key": "motor-square-garden",
+      "research_venue_id": "VEN-000745",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "motor-square-garden"
+    },
+    {
+      "canonical_name": "A.J. Palumbo Center",
+      "final_venue_id": "VEN-000863",
+      "final_venue_key": "aj-palumbo-center",
+      "research_venue_id": "VEN-000863",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "aj-palumbo-center"
+    },
+    {
+      "canonical_name": "Ryan Center",
+      "final_venue_id": "VEN-000885",
+      "final_venue_key": "ryan-center-kingston-ri",
+      "research_venue_id": "VEN-000885",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ryan-center-kingston-ri"
+    },
+    {
+      "canonical_name": "UPMC Events Center",
+      "final_venue_id": "VEN-000907",
+      "final_venue_key": "upmc-events-center",
+      "research_venue_id": "VEN-000907",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "upmc-events-center"
+    },
+    {
+      "canonical_name": "Reilly Center",
+      "final_venue_id": "VEN-000926",
+      "final_venue_key": "reilly-center-st-bonaventure",
+      "research_venue_id": "VEN-000926",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reilly-center-st-bonaventure"
+    },
+    {
+      "canonical_name": "Ellis T. Johnson Arena",
+      "final_venue_id": "VEN-000994",
+      "final_venue_key": "ellis-t-johnson-arena",
+      "research_venue_id": "VEN-000994",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ellis-t-johnson-arena"
+    },
+    {
+      "canonical_name": "Mullins Center",
+      "final_venue_id": "VEN-001040",
+      "final_venue_key": "mullins-center",
+      "research_venue_id": "VEN-001040",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mullins-center"
+    },
+    {
+      "canonical_name": "Alumni Hall",
+      "final_venue_id": "VEN-000525",
+      "final_venue_key": "alumni-hall-navy",
+      "research_venue_id": "VEN-000525",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alumni-hall-navy"
+    },
+    {
+      "canonical_name": "Athletics-Recreation Center",
+      "final_venue_id": "VEN-000461",
+      "final_venue_key": "athletics-recreation-center",
+      "research_venue_id": "VEN-000461",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "athletics-recreation-center"
+    },
+    {
+      "canonical_name": "Coliseum Hector Sola Bazaras",
+      "final_venue_id": "VEN-001051",
+      "final_venue_key": "coliseum-hector-sola-bazaras-caguas-pr",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "coliseum-hector-sola-bazaras-caguas-pr"
+    },
+    {
+      "canonical_name": "Sovereign Bank Arena",
+      "final_venue_id": "VEN-000861",
+      "final_venue_key": "sovereign-bank-arena",
+      "research_venue_id": "VEN-000861",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sovereign-bank-arena"
+    },
+    {
+      "canonical_name": "Ellet High School",
+      "final_venue_id": "VEN-001052",
+      "final_venue_key": "ellet-high-school-akron-oh",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ellet-high-school-akron-oh"
+    },
+    {
+      "canonical_name": "Freedom Hall",
+      "final_venue_id": "VEN-000069",
+      "final_venue_key": "freedom-hall",
+      "research_venue_id": "VEN-000069",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "freedom-hall"
+    },
+    {
+      "canonical_name": "Hertz Arena",
+      "final_venue_id": "VEN-000578",
+      "final_venue_key": "hertz-arena",
+      "research_venue_id": "VEN-000578",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hertz-arena"
+    },
+    {
+      "canonical_name": "John Gray Gym",
+      "final_venue_id": "VEN-000470",
+      "final_venue_key": "provisional-john-gray-gym",
+      "research_venue_id": "VEN-000470",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "provisional-john-gray-gym"
+    },
+    {
+      "canonical_name": "Johnstown High School",
+      "final_venue_id": "VEN-001053",
+      "final_venue_key": "johnstown-high-school-johnstown-pa",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "johnstown-high-school-johnstown-pa"
+    },
+    {
+      "canonical_name": "KFC Yum! Center",
+      "final_venue_id": "VEN-000104",
+      "final_venue_key": "kfc-yum-center",
+      "research_venue_id": "VEN-000104",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kfc-yum-center"
+    },
+    {
+      "canonical_name": "Lakeland Civic Center",
+      "final_venue_id": "VEN-000905",
+      "final_venue_key": "lakeland-civic-center",
+      "research_venue_id": "VEN-000905",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lakeland-civic-center"
+    },
+    {
+      "canonical_name": "LeBron James Arena",
+      "final_venue_id": "VEN-001054",
+      "final_venue_key": "lebron-james-arena-akron-oh",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "lebron-james-arena-akron-oh"
+    },
+    {
+      "canonical_name": "McArthur Center",
+      "final_venue_id": "VEN-001055",
+      "final_venue_key": "mcarthur-center-st-petersburg-fl",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "mcarthur-center-st-petersburg-fl"
+    },
+    {
+      "canonical_name": "Monessen High School",
+      "final_venue_id": "VEN-001056",
+      "final_venue_key": "monessen-high-school-monessen-pa",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "monessen-high-school-monessen-pa"
+    },
+    {
+      "canonical_name": "Neal S. Blaisdell Center",
+      "final_venue_id": "VEN-000149",
+      "final_venue_key": "neal-s-blaisdell-center",
+      "research_venue_id": "VEN-000149",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "neal-s-blaisdell-center"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "MVP Arena",
+      "final_venue_id": "VEN-000145",
+      "final_venue_key": "mvp-arena",
+      "research_venue_id": "VEN-000145",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mvp-arena"
+    },
+    {
+      "canonical_name": "Pitt Stadium",
+      "final_venue_id": "VEN-001057",
+      "final_venue_key": "pitt-stadium-pittsburgh-pa",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "pitt-stadium-pittsburgh-pa"
+    },
+    {
+      "canonical_name": "Ramsey Center",
+      "final_venue_id": "VEN-001058",
+      "final_venue_key": "ramsey-center-cullowhee-nc",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ramsey-center-cullowhee-nc"
+    },
+    {
+      "canonical_name": "Rocket Arena",
+      "final_venue_id": "VEN-000179",
+      "final_venue_key": "rocket-arena",
+      "research_venue_id": "VEN-000179",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rocket-arena"
+    },
+    {
+      "canonical_name": "Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "VEN-000191",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "Sullivan Arena",
+      "final_venue_id": "VEN-000361",
+      "final_venue_key": "sullivan-arena",
+      "research_venue_id": "VEN-000361",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sullivan-arena"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "CCAC-Allegheny Gym",
+      "final_venue_id": "VEN-001059",
+      "final_venue_key": "ccac-allegheny-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ccac-allegheny-gym"
+    },
+    {
+      "canonical_name": "Gym under the College Chapel",
+      "final_venue_id": "VEN-001060",
+      "final_venue_key": "duquesne-college-chapel-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "duquesne-college-chapel-gym"
+    },
+    {
+      "canonical_name": "Duquesne Gardens",
+      "final_venue_id": "VEN-001061",
+      "final_venue_key": "duquesne-gardens",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "duquesne-gardens"
+    },
+    {
+      "canonical_name": "University Gymnasium",
+      "final_venue_id": "VEN-001062",
+      "final_venue_key": "duquesne-university-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "duquesne-university-gymnasium"
+    },
+    {
+      "canonical_name": "Farrell High School",
+      "final_venue_id": "VEN-001063",
+      "final_venue_key": "farrell-high-school",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "farrell-high-school"
+    },
+    {
+      "canonical_name": "Kerr Fitness Center",
+      "final_venue_id": "VEN-001064",
+      "final_venue_key": "kerr-fitness-center-la-roche",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "kerr-fitness-center-la-roche"
+    },
+    {
+      "canonical_name": "McKeesport High School",
+      "final_venue_id": "VEN-001065",
+      "final_venue_key": "mckeesport-high-school",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "mckeesport-high-school"
+    },
+    {
+      "canonical_name": "Montefiore Gym",
+      "final_venue_id": "VEN-001066",
+      "final_venue_key": "montefiore-gym-pittsburgh",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "montefiore-gym-pittsburgh"
+    },
+    {
+      "canonical_name": "North Catholic High School",
+      "final_venue_id": "VEN-001067",
+      "final_venue_key": "north-catholic-high-school-troy-hill",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "north-catholic-high-school-troy-hill"
+    },
+    {
+      "canonical_name": "Knapp Center",
+      "final_venue_id": "VEN-000940",
+      "final_venue_key": "knapp-center-drake",
+      "research_venue_id": "VEN-000940",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "knapp-center-drake"
+    }
+  ],
+  "venue_reconciliation": null
+}
