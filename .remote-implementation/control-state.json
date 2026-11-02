@@ -261,18 +261,19 @@
     "davidson-stage2-proposal-0002",
     "davidson-stage2-gate1-fill-0001",
     "davidson-stage2-preseal-rehearsal-0001",
-    "davidson-stage2-gate1-seal-0001"
+    "davidson-stage2-gate1-seal-0001",
+    "davidson-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41514742179:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "davidson-stage2-sealed-apply-0001",
+  "active_request_sha256": "d800b9a3646629188ae1ba64c784abb5c6ec210d41ec83cb39df80d0e8fdb1fb",
+  "active_school_key": "davidson",
+  "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -556,8 +557,11 @@
     "target_branch": "data/davidson-onboarding",
     "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41514742179",
+  "lock_acquisition_request_commit": "359f42cb20c1f1a673b459045697d72c815a41a9",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
