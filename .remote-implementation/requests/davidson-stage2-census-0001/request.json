@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "davidson",
+  "previous_control_state_commit": "0619a36b1c885c9b7192646cce50a405e84778e8",
+  "previous_control_state_sha256": "9ab7b82d1314a68b7ea3ea8ba0468c2b30fb0fa64a2cfad6e0784303d3bd22df",
+  "expected_protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/davidson/davidson-phase0-0001/successor-manifest.json",
+    "sha256": "f8743a8cf3111d61adab8c44815db5ca4d013ff736f7d50c4c60c7eec1a98a56"
+  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly authorized Proceed after Davidson Phase 0 completed with fresh remote_phase0_equivalence=PASS. This request is the first bounded read-only STAGE2_CENSUS operation against the exact independently verified onboarding successor and Integration Freeze. It carries no tracked repair, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
