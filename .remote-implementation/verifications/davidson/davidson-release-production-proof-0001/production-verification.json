@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "ca113a0c99f58fd66e7ea6df532f990fe35d581df252f10b0405b45f2d751123",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "pr_number": 436,
+  "production_deployment_id": 7503372531,
+  "production_json_checked_count": 81,
+  "production_proof": true,
+  "request_id": "davidson-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "status": "COMPLETE"
+}
