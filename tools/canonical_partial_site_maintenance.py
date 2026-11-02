@@ -12,6 +12,7 @@ import csv
 import hashlib
 import io
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -63,8 +64,8 @@ def inspect_and_repair(raw: bytes, source: bytes, spec: dict) -> tuple[bytes, di
     if before.get("site_city", "") == "" or before.get("site_state", "") != "":
         raise ValueError("NOT_EXACT_CITY_ONLY_PARTIAL")
     new_state = spec["approved_site_state"]
-    if not new_state or new_state != "HI":
-        raise ValueError("UNSUPPORTED_APPROVED_STATE")
+    if not re.fullmatch(r"[A-Z]{2}", new_state):
+        raise ValueError("INVALID_APPROVED_STATE_CODE")
     fields[header.index("site_state")] = new_state
     delimiter = "\r\n" if line.endswith(b"\r\n") else "\n"
     output = io.StringIO(newline="")
