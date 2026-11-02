@@ -1,48 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "davidson-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "davidson-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "davidson",
-  "previous_control_state_commit": "41f6a1c22c70e74dafba58c20b98abb9e78cfbb5",
-  "previous_control_state_sha256": "33394abbea7b2d0ea431298058a27b7cd68d0822e3341894b1ab7761f3e445a2",
+  "previous_control_state_commit": "0619a36b1c885c9b7192646cce50a405e84778e8",
+  "previous_control_state_sha256": "9ab7b82d1314a68b7ea3ea8ba0468c2b30fb0fa64a2cfad6e0784303d3bd22df",
   "expected_protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
   "target_branch": "data/davidson-onboarding",
-  "research_checkpoint": {
-    "sha256": "a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428",
-    "research_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "b738a5a481a5019d522fb62ede3711a5c5e8b847",
-      "path_prefix": ".remote-implementation/transports/davidson/davidson-stage1-0001-final/piece-",
-      "part_count": 4
-    }
+  "target_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/davidson/davidson-phase0-0001/successor-manifest.json",
+    "sha256": "f8743a8cf3111d61adab8c44815db5ca4d013ff736f7d50c4c60c7eec1a98a56"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/davidson/davidson-stage1-0002/checkpoint-manifest.json",
-    "sha256": "6aa7bd57b32504bd1906d05d0cf93b0b7a5c43385ff919799e75bdb7251c4cc5"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/checkpoints/davidson/davidson-stage1-0002/venue-reconciliation.json",
-    "sha256": "30b20e76315c516162a518d2224729ed146d19b458f082076414223bfe4b755d"
-  },
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1908-1909",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted Davidson INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the reusable project Program Top-Level Scope Reference value INCEPTION+. The first accepted competitive source-game season in the frozen package is 1908-1909. Preserve the exact frozen historical universe and all accepted researched uncertainty."
-  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
   "creation_provenance": {
-    "origin": "ChatGPT Davidson serialized Implementation lane — explicitly owner-authorized Phase 0",
-    "authorization": "Owner explicitly authorized Davidson Phase 0 after clean Stage 1 request davidson-stage1-0002 PASS with zero blockers on protected main fc3a2d4e84f8dbcb68155766568b4ffedc0d6725. Authorizes exactly one guarded PHASE0 operation: fresh-repeat Stage 1 against exact main, stage the immutable six-file Davidson Research Freeze, apply the already-proven deterministic venue reconciliation plus ordinary mechanically safe target-school registrations and accepted INCEPTION+ target scope, capture INTEGRATION_FROZEN, publish create-once data/davidson-onboarding through the global mutation lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
+    "origin": "ChatGPT Davidson serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly authorized Proceed after Davidson Phase 0 completed with fresh remote_phase0_equivalence=PASS. This request is the first bounded read-only STAGE2_CENSUS operation against the exact independently verified onboarding successor and Integration Freeze. It carries no tracked repair, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -57,6 +38,7 @@
     "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
