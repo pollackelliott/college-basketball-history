@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "529d13dfcb6ea07027ec878ef364ff15adbd0880f1ce3dc770573a280f864469",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "pr_number": 436,
+  "preview_deployment_id": 7502141128,
+  "preview_deployment_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "preview_url": "https://college-basketball-history-hc9c9aas7-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "davidson-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f"
+}
