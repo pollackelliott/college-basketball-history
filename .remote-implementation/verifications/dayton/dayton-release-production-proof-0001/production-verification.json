@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "5a93a4d9f1dd910dfe308c70c5c57b266a4623ba3548b5d703ef3a97bdcafd07",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "pr_number": 433,
+  "production_deployment_id": 7495318328,
+  "production_json_checked_count": 92,
+  "production_proof": true,
+  "request_id": "dayton-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "status": "COMPLETE"
+}
