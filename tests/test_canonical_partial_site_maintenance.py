@@ -113,16 +113,26 @@ class CanonicalPartialSiteMaintenanceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "SOURCE_EVIDENCE_CHANGED"):
             inspect_and_repair(self.canonical, self.source, self.spec)
 
-    def test_actual_census_case_rehearses_from_owner_spec(self):
+    def test_real_case_remains_source_grounded_without_pinning_future_global_history(self):
         spec = json.loads((ROOT / "data/maintenance/canonical-location-dayton-kansas-2019-11-27.json").read_text())
-        actual = (ROOT / "data/canonical/games.csv").read_bytes()
-        source = (ROOT / spec["source_path"]).read_bytes()
-        self.assertEqual(_git_blob(actual), spec["expected_canonical_blob"])
-        updated, report = inspect_and_repair(actual, source, spec)
-        self.assertEqual(report["new_site_state"], "HI")
-        self.assertEqual(report["game_id"], "CBBG-0014299")
-        self.assertEqual(report["canonical_only_changed"], ["site_state"])
-        self.assertEqual(len(updated), len(actual) + 2)
+        source_path = ROOT / spec["source_path"]
+        with source_path.open(newline="", encoding="utf-8-sig") as handle:
+            support = [row for row in csv.DictReader(handle)
+                       if row["source_game_id"] == spec["source_game_id"]]
+        self.assertEqual(len(support), 1)
+        self.assertIn(spec["literal_evidence"], support[0]["raw_text"])
+        self.assertEqual(support[0]["curated_site_type"], "NEUTRAL")
+
+        with (ROOT / "data/canonical/games.csv").open(newline="", encoding="utf-8-sig") as handle:
+            games = [row for row in csv.DictReader(handle)
+                     if row["canonical_game_id"] == spec["game_id"]]
+        self.assertEqual(len(games), 1)
+        game = games[0]
+        self.assertEqual(game["site_type"], "NEUTRAL")
+        self.assertEqual(game["site_city"], "Maui")
+        self.assertEqual(game["site_state"], "HI")
+        self.assertEqual(game["venue_id"], "")
+        self.assertEqual(game["venue_key"], "")
 
 
 if __name__ == "__main__":
