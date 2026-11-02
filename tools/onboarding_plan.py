@@ -4951,6 +4951,141 @@ def _record_dependent_site_gap_discrepancies(
     return dict(counts)
 
 
+def _record_reciprocal_only_canonical_site_patch_home_venue_marker(
+    school_key: str,
+    item: dict[str, Any],
+    canonical: dict[str, str],
+    assertion_rows: list[dict[str, str]],
+) -> str:
+    """Record provenance for an owner-reviewed reciprocal-only HOME locality patch.
+
+    This is a provenance capability, not an H/A/N or venue inference rule.  It
+    applies only after a canonical_site_patch explicitly supplies complete
+    locality while leaving the physical venue unresolved.
+    """
+
+    if (
+        item.get("category") != "canonical_site_patch"
+        or item.get("decision") != "APPLY_CANONICAL_PATCH"
+    ):
+        return ""
+
+    resolution_basis = str(item.get("resolution_basis", "") or "").strip()
+    if not resolution_basis:
+        raise WorkflowError(
+            f"{item.get('decision_id', '')}: reciprocal-only HOME locality patch "
+            "requires substantive resolution_basis"
+        )
+
+    canonical_site = canonical.get("site_type", "").strip()
+    if canonical_site == "TEAM_A_HOME":
+        home_program = canonical.get("team_a_key", "").strip()
+    elif canonical_site == "TEAM_B_HOME":
+        home_program = canonical.get("team_b_key", "").strip()
+    else:
+        return ""
+    if home_program != school_key:
+        return ""
+
+    if canonical.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
+        return ""
+    if canonical.get("venue_key", "").strip() or canonical.get("venue_id", "").strip():
+        return ""
+
+    patch = item.get("canonical_patch", {})
+    if not isinstance(patch, dict):
+        return ""
+    patch_city = str(patch.get("site_city", "") or "").strip()
+    patch_state = str(patch.get("site_state", "") or "").strip()
+    if not patch_city or not patch_state:
+        return ""
+    if (
+        str(patch.get("venue_key", "") or "").strip()
+        or str(patch.get("venue_id", "") or "").strip()
+    ):
+        return ""
+
+    canonical_location = (
+        canonical.get("site_city", "").strip(),
+        canonical.get("site_state", "").strip(),
+    )
+    if canonical_location != (patch_city, patch_state):
+        raise WorkflowError(
+            f"{item.get('decision_id', '')}: approved reciprocal-only HOME locality "
+            "patch did not produce its exact canonical city/state"
+        )
+
+    game_id = canonical.get("canonical_game_id", "").strip()
+    if not game_id:
+        return ""
+    linked = [
+        assertion
+        for assertion in assertion_rows
+        if assertion.get("canonical_game_id", "").strip() == game_id
+    ]
+    if any(
+        assertion.get("source_program_key", "").strip() == school_key
+        for assertion in linked
+    ):
+        return ""
+
+    reciprocal = [
+        assertion
+        for assertion in linked
+        if assertion.get("source_program_key", "").strip()
+        and assertion.get("source_program_key", "").strip() != school_key
+        and assertion.get("normalized_opponent_key", "").strip() == school_key
+    ]
+    agreeing = [
+        assertion
+        for assertion in reciprocal
+        if _assertion_site_to_canonical(assertion, canonical) == canonical_site
+    ]
+    if not agreeing:
+        return ""
+    if any(
+        assertion.get("curated_venue_name", "").strip()
+        for assertion in agreeing
+    ):
+        return ""
+
+    reciprocal_locations = {
+        (
+            assertion.get("city", "").strip(),
+            assertion.get("state", "").strip(),
+        )
+        for assertion in reciprocal
+        if location_pair_status(
+            assertion.get("city", ""),
+            assertion.get("state", ""),
+        )
+        == "complete"
+    }
+    if reciprocal_locations and reciprocal_locations != {canonical_location}:
+        return ""
+
+    support = sorted(
+        agreeing,
+        key=lambda row: (
+            row.get("source_program_key", "").strip(),
+            row.get("source_game_id", "").strip(),
+        ),
+    )[0]
+    reciprocal_program = support.get("source_program_key", "").strip()
+    reciprocal_game_id = support.get("source_game_id", "").strip()
+    if not reciprocal_program or not reciprocal_game_id:
+        return ""
+
+    marker = (
+        "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+        f"target={school_key} "
+        f"reciprocal={reciprocal_program}/{reciprocal_game_id}]"
+    )
+    old_notes = canonical.get("notes", "")
+    canonical["notes"] = _append_note(old_notes, marker)
+    return "existing" if canonical["notes"] == old_notes else "added"
+
+
 def _record_reconciled_unresolved_home_venue_markers(
     school_key: str,
     reconciliation_items: list[dict[str, Any]],
@@ -6234,6 +6369,19 @@ def apply_reconciliation_decisions(
                         registry_fallback_support_cache,
                     )
                 )
+                marker_status = (
+                    _record_reciprocal_only_canonical_site_patch_home_venue_marker(
+                        school_key,
+                        item,
+                        canonical,
+                        assertion_rows,
+                    )
+                )
+                if marker_status:
+                    counts[
+                        "reciprocal_only_site_patch_home_venue_markers_"
+                        + marker_status
+                    ] += 1
                 canonical["notes"] = _append_note(
                     canonical.get("notes", ""),
                     "[OWNER_APPROVED_CANONICAL_SITE_PATCH "
