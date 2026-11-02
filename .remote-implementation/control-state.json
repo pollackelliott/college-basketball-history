@@ -269,18 +269,19 @@
     "davidson-release-production-proof-0001",
     "duquesne-stage1-0001",
     "duquesne-phase0-0001",
-    "duquesne-stage2-census-0001"
+    "duquesne-stage2-census-0001",
+    "duquesne-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41540457436:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "duquesne-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "78a98c8759a7dc5600e10fcbb19cf9364afc8783bb959af13500c6bdee49202f",
+  "active_school_key": "duquesne",
+  "active_target_branch": "data/duquesne-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -561,8 +562,11 @@
     "target_branch": "data/duquesne-onboarding",
     "target_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41540457436",
+  "lock_acquisition_request_commit": "48384350714bf1b79d6b68ac33be3e199ae8ef78",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

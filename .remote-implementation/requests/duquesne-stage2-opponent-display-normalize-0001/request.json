@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "duquesne-stage2-opponent-display-normalize-0001",
+  "school_key": "duquesne",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "a189b703da76f3989724be68c276ba10572332c7",
+  "previous_control_state_sha256": "c74fb1ac444ef9eda4cdaa3a7cf3b844537b4ea59214b8ac00e7661d6ce63e04",
+  "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "ac52980b420bc1311c943bb8a5b9a6c106cb7d2673e79c85d8f935d8684d31d7"
+  },
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "creation_provenance": {
+    "origin": "ChatGPT Duquesne serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation",
+    "authorization": "Existing owner-authorized Duquesne Stage 2 phase persists through its normal OWNER_GATE_1_READY boundary. The fresh-verified census found exactly nine historical opponent-display representation conflicts (brooklyn-knights-of-columbus, central-state-ohio, franklin-college, norfolk-naval-base, oklahoma-city, rensselaer, saint-joseph-s-indiana, st-johns-college-maryland, wayne-state), zero warnings, zero recommendation decisions, and semantic drift PASS. Authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete nine-key census population. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, or protected-main mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
