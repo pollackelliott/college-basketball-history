@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "stage": "STAGE_3A_1",
+  "operation": "HAN_REPAIR",
+  "status": "COMPLETE",
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "parent_research_commit": "99a78fd095bf3106145e5d71defb7c6fcbdd00cc",
+  "parent_stage3a1_checkpoint_sha256": "d17afed29ea76f9174f6c98d00d81398685f71dccd29a7cc8767ce48a5dd2c42",
+  "trigger_stage3a2_blocker_checkpoint_sha256": "0244c7eeb453874f4b97ae79b866075ef396b7889dd09d59b1c6266e7aed21dd",
+  "repair_checkpoint_sha256": "956a0bf5ad81596b4c2e8096ceae29048b200d41599fde1d41be06db785a1ea3",
+  "manifest_sha256": "01af210dae9dcd3cdd54c7b3a6f74b037225cc885afdea6254db9e2f4fa2b91d",
+  "affected_rows": 1377,
+  "repair_disposition": {
+    "validated_1967_68_plus_target_convention_home": 768,
+    "accepted_current_main_exact_reciprocal": 41,
+    "niagara_official_exact_series": 43,
+    "pre_1967_terminal_researched_unresolved": 525
+  },
+  "regular_season_han": {
+    "HOME": 833,
+    "OPPONENT_HOME": 744,
+    "NEUTRAL": 399,
+    "UNKNOWN": 528
+  },
+  "resolved_han_rows": 1976,
+  "researched_unresolved_han_rows": 528,
+  "stage3a2_home_queue_rows": 833,
+  "stage3a3_neutral_queue_rows": 399,
+  "stage3a2_prior_blocker": "CLEARED_BY_STAGE3A1_REPAIR",
+  "stage3a2_venue_rows_mutated_during_repair": 0,
+  "owner_historical_decision_required": false,
+  "next_bounded_unit": "STAGE_3A_2_AFTER_OWNER_PROCEED"
+}
