@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "dayton-stage2-proposal-0003",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "dayton",
+  "previous_control_state_commit": "095c5c3f2af7994f79c9f7cd855fd141e5ddb515",
+  "previous_control_state_sha256": "62b0c3a668e811ec6cad920f99ebe1ef057003b5a5a5879d26c257c8d8a5785c",
+  "expected_protected_main_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/dayton/dayton-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "8d6bb9b4f95d477ec3d9a6715f11d72195637eb9668ebad9669ed64571a7e8c5"
+  },
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/dayton-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37"
+  },
+  "creation_provenance": {
+    "origin": "Dayton serialized Implementation Stage 2 — exact-map proposal rehearsal after shared Lahaina remediation and fresh current-main census",
+    "authorization": "Control Center authorized Dayton to resume through current-main refresh, fresh Stage 2 census, exact preserved recommendation-map compatibility, and ordinary exact-map proposal rehearsal toward OWNER_GATE_1_READY. The fresh census reproduced the exact prior 162-decision universe SHA-256 32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c and the preserved map remains byte-identical at SHA-256 1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, or Production authority is granted."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
