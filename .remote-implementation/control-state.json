@@ -271,7 +271,7 @@
     "duquesne-phase0-0001"
   ],
   "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
-  "active_lock_commit": null,
+  "active_lock_commit": "3af9c7ca809d414c07782ada526ca81dd3268203",
   "active_lock_owner": "github-actions:41536502252:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
