@@ -1,0 +1,20 @@
+{
+  "canonical_game_id": "CBBG-0152303",
+  "decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_VERIFICATION",
+  "partial_location_classification": "FINAL_LOCATION_NOT_PARTIAL",
+  "protected_main_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
+  "recommendation_map_sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37",
+  "remote_stage2_diagnostic_equivalence": "PASS",
+  "request_id": "dayton-stage2-reconciliation-diagnostic-0003",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "stage2_proposal_checkpoint_sha256": "72ec64180070f8f2609cdf8b09b7ce4ade32ed58a4ccee2ad5139ffc573639b6",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+  "target_tree_sha": "e250298a1d882bb87195d56e13e0bc523056fbb1",
+  "trace_sha256": "eaff14d99e5ffb02abb8786f8589a688228f8c837a6a177ed73d21c26d9ffcc0",
+  "tracked_stage2_mutation": "NONE"
+}
