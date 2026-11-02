@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "stage": "STAGE_3A_3",
+  "tier": "TIER_3_MODERN_ONEOFFS",
+  "status": "COMPLETE",
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "parent_research_commit": "d17a78173a3f66a6ddf4917bc0d3b1155109fee9",
+  "parent_checkpoint_sha256": "6644337dfb1b51f207e6eaefdb0da8dbfabc44104b0657e949225e9ccb985131",
+  "tier3_checkpoint_sha256": "deca2480f95fc4e90211d4aea5aa632a3dbe49446915a49f0bfc75f3115a8461",
+  "tier3_manifest_sha256": "8000d9cdcfb165e9fb1a6c29dd31c630307f757650943a420b86b6ecc0eb2df0",
+  "tier3_population": 7,
+  "resolved_exact": 7,
+  "modern_neutral_rows": 88,
+  "modern_exact_complete": 85,
+  "modern_researched_partial": 3,
+  "modern_unresearched": 0,
+  "remaining_historical": 275,
+  "next_bounded_assignment": "STAGE_3A_3_HISTORICAL_LOCATION_ENRICHMENT_AFTER_OWNER_PROCEED",
+  "owner_historical_decision_required": false
+}
