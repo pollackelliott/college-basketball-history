@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-stage2-preseal-rehearsal-0001",
+  "school_key": "davidson",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "5f58a913b236a99400a3f69ae0699bd512e586ff",
+  "previous_control_state_sha256": "2f0ba94d68311b0ab9e2d352896b87d217f3daacf69e0b30e5b276ef083a322c",
+  "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/davidson/davidson-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "9394d2109e860cdaba6e0d3888cbf927b154dcb08275fa6cab3d17d29b8bf252"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/davidson/davidson-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "f1968015fd7fb3bd3e093f92f092bbe15f083c256567fc106904c9fc88726f60"
+  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "recommendation_map_sha256": "c629d03ce4f5195d4219a781b1a1e86714a279a4bbbe9491af4e9eab88b6078e",
+  "approved_plan_hash_preview": "fabc69ec76cad6790867e93a6a7f93036c15cbe0f643a94956f7d237c5992c61",
+  "filled_review_sha256": "86fccd7a59454d04f6e9c5ec401fe969c2fca56e34d3e78563c2464a800aebb3",
+  "decision_id_set_sha256": "e2999d599d89f4ca72ee1497557c0c4c8d9baec15bd81b29814b9fb08b87a4b8",
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation — fresh-verified Owner Gate 1 fill pre-seal technical rehearsal",
+    "authorization": "The owner's explicit Gate 1 approval remains authoritative for the exact Davidson 232-decision packet. Gate 1 fill completed and independently fresh-verified PASS. Authorize exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against fill checkpoint 9394d2109e860cdaba6e0d3888cbf927b154dcb08275fa6cab3d17d29b8bf252 and verification f1968015fd7fb3bd3e093f92f092bbe15f083c256567fc106904c9fc88726f60. No cryptographic seal, sealed apply, tracked basketball mutation, release preparation, Preview, Owner Gate 2, merge, Production, recovery, or unrelated authority is granted by this request."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
