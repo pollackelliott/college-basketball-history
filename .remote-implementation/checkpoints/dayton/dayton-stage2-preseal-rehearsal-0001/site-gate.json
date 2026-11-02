@@ -1,0 +1,102 @@
+{
+  "counts": {
+    "home_missing_venue": 6,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 25,
+    "postseason_missing_venue": 2,
+    "public_gap_rows": 584,
+    "reciprocal_only_unresolved_home_venue": 1,
+    "reciprocal_unpropagated": 0,
+    "reconciled_unknown_site_unresolved_home_venue": 2,
+    "researched_unresolved_home_venue": 6,
+    "researched_unresolved_home_venue_rows": 6,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2993,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 553
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0121174",
+      "CBBG-0121204",
+      "CBBG-0146792",
+      "CBBG-0152303",
+      "CBBG-0152309",
+      "CBBG-0152328"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0035241",
+      "CBBG-0062484"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0006770",
+      "CBBG-0006957",
+      "CBBG-0030649",
+      "CBBG-0035241",
+      "CBBG-0041057",
+      "CBBG-0042889",
+      "CBBG-0050851",
+      "CBBG-0062484",
+      "CBBG-0093085",
+      "CBBG-0104842",
+      "CBBG-0104917",
+      "CBBG-0110661"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0187232",
+      "CBBG-0187233"
+    ],
+    "reciprocal_only_unresolved_home_venue": [
+      "CBBG-0152303"
+    ],
+    "reconciled_unknown_site_unresolved_home_venue": [
+      "CBBG-0121174",
+      "CBBG-0121204"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0121174",
+      "CBBG-0121204",
+      "CBBG-0146792",
+      "CBBG-0152303",
+      "CBBG-0152309",
+      "CBBG-0152328"
+    ],
+    "unknown_site_type": [
+      "CBBG-0082768",
+      "CBBG-0082785",
+      "CBBG-0146755",
+      "CBBG-0146778",
+      "CBBG-0146903",
+      "CBBG-0152572",
+      "CBBG-0152582",
+      "CBBG-0152601",
+      "CBBG-0152605",
+      "CBBG-0152616",
+      "CBBG-0152621",
+      "CBBG-0184788"
+    ]
+  },
+  "history_start_season": "1903-1904",
+  "school_key": "dayton",
+  "source_site_counts": {
+    "home_missing_venue": 3,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 586,
+    "neutral_missing_venue": 22,
+    "postseason_missing_venue": 2,
+    "researched_gap_rows": 586,
+    "researched_unresolved_home_venue_rows": 3,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 561
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2990
+  },
+  "status": "PASS",
+  "warnings": []
+}
