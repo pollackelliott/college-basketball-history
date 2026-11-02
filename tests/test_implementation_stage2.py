@@ -253,5 +253,36 @@ class ImplementationStage2CoordinatorTests(unittest.TestCase):
             self.assertTrue(status_path.is_file())
 
 
+    def test_preexisting_partial_canonical_site_is_detected_before_map(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            path = root / "data/canonical/games.csv"
+            path.parent.mkdir(parents=True)
+            path.write_text(
+                "canonical_game_id,site_city,site_state\n"
+                "CBBG-1,Maui,\n"
+                "CBBG-2,Lahaina,HI\n", encoding="utf-8"
+            )
+            plan = self.sample_plan()
+            plan["decisions"][0]["canonical_game_id"] = "CBBG-1"
+            patches = self.common_patches(root, plan)
+            with patches[0], patches[1], patches[2], patches[3], patches[4]:
+                code, status, _ = stage2.run_stage2(root, "test")
+            self.assertEqual(code, 1)
+            self.assertEqual(status["status"], "BLOCKED")
+            self.assertEqual(
+                status["preexisting_partial_canonical_ids"], ["CBBG-1"]
+            )
+            census_path = root / ".onboarding/test/implementation-stage2-capability-census.json"
+            census = json.loads(census_path.read_text(encoding="utf-8"))
+            self.assertEqual(census["status"], "REPAIR_SCOPE_REQUIRED")
+            affected = [
+                item for item in census["topology_groups"]
+                if item["topology"] == "preexisting_partial_canonical_site_on_touched_game"
+            ]
+            self.assertEqual(affected[0]["canonical_game_ids"], ["CBBG-1"])
+            self.assertEqual(affected[0]["count"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()
