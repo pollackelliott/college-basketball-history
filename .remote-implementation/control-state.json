@@ -252,18 +252,19 @@
     "dayton-release-gate2-approval-0001",
     "dayton-release-production-proof-0001",
     "davidson-stage1-0001",
-    "davidson-stage1-0002"
+    "davidson-stage1-0002",
+    "davidson-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41481375824:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "davidson-phase0-0001",
+  "active_request_sha256": "f5e41b468ff45812e8f5929286d1c73ef90fc1764244eaeacef463e99afc5bf6",
+  "active_school_key": "davidson",
+  "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -522,8 +523,11 @@
     "stage1_reconciliation_sha256": "1ce7aa9b03fcc4f377173b5c852762b3d1037e58a27d7d9cfe7b2e1a3766cfb6",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41481375824",
+  "lock_acquisition_request_commit": "48b3a0550e1d6bac6704df07b8f30ac6941b5924",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
