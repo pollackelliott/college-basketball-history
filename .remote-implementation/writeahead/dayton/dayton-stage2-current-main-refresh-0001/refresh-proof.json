@@ -1,0 +1,61 @@
+{
+  "changed_file_sha256": {
+    "tests/test_postseason_round_reconciliation_adapter.py": "68ecf8375efcffc3383fced1dd741f00116b3ab4d48ad9b21f46d65238c0eb76",
+    "tools/onboarding_plan.py": "e5a6ef75588e9eb84eae221c965944be0ba04c69faf106febf94866c8af6f402"
+  },
+  "changed_paths": [
+    "tests/test_postseason_round_reconciliation_adapter.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "main_changed_paths": [
+    "tests/test_postseason_round_reconciliation_adapter.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "60b74601143ca6417af2d807969307b76d54dacaf9ed6c7a83ae84d11f87b8f1",
+    "notes.md": "cb514f417ec5db14c6d5488fcd58aaa52b2fcd9d70e4f535d6c9992f97c6232b",
+    "opponents.csv": "2a61839566e92a544d7ddf40059be5fce893db0402472fb16632395225dec604",
+    "source-games.csv": "84daa8e296675d5a93963e4e39b6bd2fde5f3162624aca3db7b3aec3c24964c2",
+    "source-notes.md": "5dae88d2fdd942348f15633fc70f44f09235913ede0d65ea239e92826f573110",
+    "venues.csv": "999c8e1474820ef23ee64bdc9e32ee28317b6fa16d5f8751fd2457bcd3386502"
+  },
+  "prepared_commit_sha": "d4433ecc6a219527c3dc37fac11f9fba537f6c01",
+  "prepared_parents": [
+    "85e9e4539f413cea6193f55e09c490c71a09968d",
+    "0a28151cf0c193afea2641cc5bd6f5557ab76d5b"
+  ],
+  "prepared_tree_sha": "f1daf780968fd5d503faea40abd1078318511c3a",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "7066f85a035e2844f00a37565e7b8644e7c4bd76b095c4a6e044f6e2ec6ecf7b",
+    "data/reference/venue-names.csv": "c8b9dbe10ab712702a8f39adc838266dbc2de3947115bc42adff85a42f2236ce",
+    "data/reference/venues.csv": "326ac0c52e88a9890e9add86b4a44845552ddef7fd48ff925b673b573fa1ccf1",
+    "schools/dayton/conferences.csv": "60b74601143ca6417af2d807969307b76d54dacaf9ed6c7a83ae84d11f87b8f1",
+    "schools/dayton/notes.md": "cb514f417ec5db14c6d5488fcd58aaa52b2fcd9d70e4f535d6c9992f97c6232b",
+    "schools/dayton/opponents.csv": "2a61839566e92a544d7ddf40059be5fce893db0402472fb16632395225dec604",
+    "schools/dayton/source-games.csv": "84daa8e296675d5a93963e4e39b6bd2fde5f3162624aca3db7b3aec3c24964c2",
+    "schools/dayton/source-notes.md": "5dae88d2fdd942348f15633fc70f44f09235913ede0d65ea239e92826f573110",
+    "schools/dayton/venues.csv": "999c8e1474820ef23ee64bdc9e32ee28317b6fa16d5f8751fd2457bcd3386502"
+  },
+  "protected_main_sha": "0a28151cf0c193afea2641cc5bd6f5557ab76d5b",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "target_branch": "data/dayton-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/dayton/conferences.csv",
+    "schools/dayton/notes.md",
+    "schools/dayton/opponents.csv",
+    "schools/dayton/source-games.csv",
+    "schools/dayton/source-notes.md",
+    "schools/dayton/venues.csv"
+  ]
+}
