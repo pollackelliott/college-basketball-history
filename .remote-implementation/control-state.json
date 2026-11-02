@@ -254,15 +254,15 @@
     "davidson-stage1-0001",
     "davidson-stage1-0002"
   ],
-  "active_expected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "davidson-stage1-0002",
-  "active_request_sha256": "a86ddcf36c8d04b6e655c97df6f0d05c034271c77e0ad40936b14e4c1b49a19f",
-  "active_school_key": "davidson",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -507,25 +507,23 @@
     "dayton-release-preview-verify-0001",
     "dayton-release-gate2-approval-0001",
     "dayton-release-production-proof-0001",
-    "davidson-stage1-0001"
+    "davidson-stage1-0001",
+    "davidson-stage1-0002"
   ],
-  "current_sequence": 239,
+  "current_sequence": 240,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/davidson/davidson-stage1-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "3c6bc49426da13d532269b8d396a2d504b5ee436051ddbbabc814055d2647ab5",
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/davidson/davidson-stage1-0002/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "6aa7bd57b32504bd1906d05d0cf93b0b7a5c43385ff919799e75bdb7251c4cc5",
     "operation": "STAGE1_INVENTORY",
-    "protected_main_sha": "008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d",
-    "request_id": "davidson-stage1-0001",
+    "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "request_id": "davidson-stage1-0002",
     "school_key": "davidson",
-    "stage1_reconciliation_sha256": "b2f639e19acd691e16f404e915ae121be2464c24f3f354bf986897e4c889a7d9",
-    "stage1_status": "BLOCKED"
+    "stage1_reconciliation_sha256": "1ce7aa9b03fcc4f377173b5c852762b3d1037e58a27d7d9cfe7b2e1a3766cfb6",
+    "stage1_status": "PASS"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "41480295991",
-  "lock_acquisition_request_commit": "b3ab6ddc8403e2db2aef17553ac79fad5f1716ce",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }

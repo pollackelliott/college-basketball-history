@@ -1,0 +1,25 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "request_id": "davidson-stage1-0002",
+  "research_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "research_checkpoint_sha256": "a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428",
+  "research_member_sha256": {
+    "conferences.csv": "b183e01f1220cd1066371705be65ea5787c5cf8d3ea0d374c609a88cc3f53224",
+    "notes.md": "45d58c3570fb4cbff47f84fbfb9398e784bda5d0b5161d480f812acf65a434d0",
+    "opponents.csv": "9ae530b02061c3215bf5e5e540bfe9b17a00fbdcf22978616c64810fcb612ddf",
+    "source-games.csv": "f5dc6df5124bffba60bec6fb06c512000e642b1d30ca8e8124529c6365d8017a",
+    "source-notes.md": "8f20bc4116365ad833809f9d044be023f321e1652bde3fa5d5e089213f898cae",
+    "venues.csv": "e1396ddce9de5d38c7a284a524e13632e474a9c49de5decf7897eb1931ec12f2"
+  },
+  "schema_version": 1,
+  "school_key": "davidson",
+  "sidecars": {
+    "request.json": "a86ddcf36c8d04b6e655c97df6f0d05c034271c77e0ad40936b14e4c1b49a19f",
+    "stage1-reconciliation.json": "1ce7aa9b03fcc4f377173b5c852762b3d1037e58a27d7d9cfe7b2e1a3766cfb6",
+    "venue-reconciliation.json": "30b20e76315c516162a518d2224729ed146d19b458f082076414223bfe4b755d"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
