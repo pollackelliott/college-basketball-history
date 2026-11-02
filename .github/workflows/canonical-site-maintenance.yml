@@ -1,0 +1,127 @@
+name: Exact owner-approved 2019 Lahaina canonical-site maintenance
+
+on:
+  push:
+    branches:
+      - tooling/canonical-partial-location-census-20261101
+    paths:
+      - .github/workflows/canonical-site-maintenance.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: exact-lahaina-site-maintenance
+  cancel-in-progress: false
+
+jobs:
+  apply-exact-two-game-maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out exact authorized maintenance branch
+        uses: actions/checkout@v4
+        with:
+          ref: tooling/canonical-partial-location-census-20261101
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate main, exact branch, maintenance spec and IDLE lock
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git status --porcelain)" = ""
+          git fetch --no-tags origin \
+            +refs/heads/main:refs/remotes/origin/main \
+            +refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          main = "0a28151cf0c193afea2641cc5bd6f5557ab76d5b"
+          actual = subprocess.check_output(["git","rev-parse","origin/main"], text=True).strip()
+          assert actual == main, "Protected main moved; refuse outdated maintenance"
+          mergebase = subprocess.check_output(["git","merge-base","HEAD","origin/main"], text=True).strip()
+          assert mergebase == main, "Maintenance branch is not based on exact protected main"
+          state = json.loads(subprocess.check_output(
+              ["git","show","origin/control/remote-implementation:.remote-implementation/control-state.json"],
+              text=True))
+          assert state["lifecycle_state"] == "IDLE", "Implementation control is active"
+          assert state["transaction_state"] == "COMPLETE", "Implementation transaction not complete"
+          assert state["recovery_required"] is False, "Global recovery required"
+          assert not state["active_lock_owner"] and not state["active_request_id"], "Global lock held"
+          spec = json.loads(Path("data/reconciliation/maintenance/dayton-kansas-maui-2019-site-correction.json").read_text())
+          assert spec["protected_main_predecessor_sha"] == main
+          assert spec["authorized_canonical_game_ids"] == ["CBBG-0014297","CBBG-0014299"]
+          assert set(spec["authorized_changed_fields"]) == {"site_city","site_state","venue_key","venue_id"}
+          assert spec["approved_changed_paths"] == [
+              "data/canonical/games.csv","site/data/teams/kansas.json"
+          ]
+          print("PASS: exact owner-approved scope, current main and global IDLE lock")
+          PY
+
+      - name: Validate transaction regressions before mutation
+        run: |
+          python -m unittest tests.test_maintenance_lahaina_2019 -v
+          python -m unittest tests.test_implementation_stage2 -v
+
+      - name: Apply only the two approved canonical site corrections
+        run: |
+          python tools/maintenance_lahaina_2019.py --repo . --apply --manifest "$RUNNER_TEMP/lahaina-maintenance-result.json"
+
+      - name: Validate posttransaction repository, site output and full regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_data.py > "$RUNNER_TEMP/validate.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/validate.log"
+            exit 1
+          }
+          tail -10 "$RUNNER_TEMP/validate.log"
+          python tools/check_site_data_freshness.py > "$RUNNER_TEMP/site-freshness.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/site-freshness.log"
+            exit 1
+          }
+          tail -10 "$RUNNER_TEMP/site-freshness.log"
+          python -m unittest discover -s tests -v > "$RUNNER_TEMP/tests.log" 2>&1 || {
+            tail -120 "$RUNNER_TEMP/tests.log"
+            exit 1
+          }
+          tail -12 "$RUNNER_TEMP/tests.log"
+
+      - name: Prove exact changed-path allowlist, recheck global control and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python - <<'PY'
+          import subprocess
+          paths = set(subprocess.check_output(["git","diff","--name-only"], text=True).splitlines())
+          expected = {"data/canonical/games.csv","site/data/teams/kansas.json"}
+          assert paths == expected, "Unexpected changed paths: " + repr(sorted(paths ^ expected))
+          print("PASS: exact changed paths:", sorted(paths))
+          PY
+          git fetch --no-tags origin \
+            +refs/heads/main:refs/remotes/origin/main \
+            +refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation
+          python - <<'PY'
+          import json, subprocess
+          main = subprocess.check_output(["git","rev-parse","origin/main"], text=True).strip()
+          assert main == "0a28151cf0c193afea2641cc5bd6f5557ab76d5b", "Main changed"
+          state = json.loads(subprocess.check_output(
+              ["git","show","origin/control/remote-implementation:.remote-implementation/control-state.json"],
+              text=True))
+          assert state["lifecycle_state"] == "IDLE" and state["transaction_state"] == "COMPLETE"
+          assert not state["recovery_required"] and not state["active_lock_owner"] and not state["active_request_id"]
+          print("PASS: final independent control reauthentication")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/canonical/games.csv site/data/teams/kansas.json
+          git commit -m "[site-maintenance-applied] Repair exactly two approved 2019 Kansas Lahaina sites"
+          git push origin HEAD:refs/heads/tooling/canonical-partial-location-census-20261101
+          echo "EXACT_LAHAINA_MAINTENANCE_SUCCESSOR=$(git rev-parse HEAD)"
