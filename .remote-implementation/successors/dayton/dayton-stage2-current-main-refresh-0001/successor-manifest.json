@@ -1,0 +1,67 @@
+{
+  "actual_published_target_sha": "d4433ecc6a219527c3dc37fac11f9fba537f6c01",
+  "changed_file_sha256": {
+    "tests/test_postseason_round_reconciliation_adapter.py": "68ecf8375efcffc3383fced1dd741f00116b3ab4d48ad9b21f46d65238c0eb76",
+    "tools/onboarding_plan.py": "e5a6ef75588e9eb84eae221c965944be0ba04c69faf106febf94866c8af6f402"
+  },
+  "changed_paths": [
+    "tests/test_postseason_round_reconciliation_adapter.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "tests/test_postseason_round_reconciliation_adapter.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "60b74601143ca6417af2d807969307b76d54dacaf9ed6c7a83ae84d11f87b8f1",
+    "notes.md": "cb514f417ec5db14c6d5488fcd58aaa52b2fcd9d70e4f535d6c9992f97c6232b",
+    "opponents.csv": "2a61839566e92a544d7ddf40059be5fce893db0402472fb16632395225dec604",
+    "source-games.csv": "84daa8e296675d5a93963e4e39b6bd2fde5f3162624aca3db7b3aec3c24964c2",
+    "source-notes.md": "5dae88d2fdd942348f15633fc70f44f09235913ede0d65ea239e92826f573110",
+    "venues.csv": "999c8e1474820ef23ee64bdc9e32ee28317b6fa16d5f8751fd2457bcd3386502"
+  },
+  "predecessor_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "prepared_commit_sha": "d4433ecc6a219527c3dc37fac11f9fba537f6c01",
+  "prepared_main_parent_sha": "0a28151cf0c193afea2641cc5bd6f5557ab76d5b",
+  "prepared_parent_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "prepared_parents": [
+    "85e9e4539f413cea6193f55e09c490c71a09968d",
+    "0a28151cf0c193afea2641cc5bd6f5557ab76d5b"
+  ],
+  "prepared_tree_sha": "f1daf780968fd5d503faea40abd1078318511c3a",
+  "prior_refresh_successor_path": null,
+  "prior_refresh_successor_sha256": null,
+  "protected_main_sha": "0a28151cf0c193afea2641cc5bd6f5557ab76d5b",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "9dc9cecca5f56d40620beadbdea7c0b5a834fa65d0daef69a61cd6df048b3fdd",
+  "repository_validation": "PASS",
+  "request_id": "dayton-stage2-current-main-refresh-0001",
+  "request_sha256": "e0beb90cd497b1fdc8e8012e71095a1d51fc0c67903cfa5215ee16e9f0d738bb",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "target_branch": "data/dayton-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/dayton/conferences.csv",
+    "schools/dayton/notes.md",
+    "schools/dayton/opponents.csv",
+    "schools/dayton/source-games.csv",
+    "schools/dayton/source-notes.md",
+    "schools/dayton/venues.csv"
+  ],
+  "writeahead_commit": "a6ec0905d789cc0f422ec572743237e11ee71471",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/dayton/dayton-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "ceb7e3b235d6b637709406cb9479c7fd93c5012cafecc4b3b4617fa02f3d683c"
+}
