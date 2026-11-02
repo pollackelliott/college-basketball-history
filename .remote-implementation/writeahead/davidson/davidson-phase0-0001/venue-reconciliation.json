@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "school_key": "davidson",
+  "owner_approval_basis": "Owner authorized Davidson serialized Implementation Stage 1 from immutable Research Freeze a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428 and instructed Continue within the same phase. These mappings are deterministic current-main representation reuse of already-settled frozen physical venues and geography. They do not alter frozen historical meaning, global registries, other schools, or owner-gated facts.",
+  "expected_research_zip_sha256": "a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428",
+  "expected_venues_sha256": "e1396ddce9de5d38c7a284a524e13632e474a9c49de5decf7897eb1931ec12f2",
+  "mappings": [
+    {
+      "local_venue_key": "alumni-hall",
+      "expected_local_name": "Alumni Hall",
+      "expected_local_city": "Annapolis",
+      "expected_local_state": "MD",
+      "global_venue_id": "VEN-000525",
+      "global_venue_key": "alumni-hall-navy",
+      "expected_global_city": "Annapolis",
+      "expected_global_state": "MD",
+      "resolution_basis": "Frozen Davidson Alumni Hall row is Annapolis, MD and explicitly records current protected-main shared venue reuse; VEN-000525 is the same Navy Alumni Hall physical building in Annapolis."
+    },
+    {
+      "local_venue_key": "carrier-dome",
+      "expected_local_name": "Carrier Dome",
+      "expected_local_city": "Syracuse",
+      "expected_local_state": "NY",
+      "global_venue_id": "VEN-000096",
+      "global_venue_key": "jma-wireless-dome",
+      "expected_global_city": "Syracuse",
+      "expected_global_state": "NY",
+      "resolution_basis": "Frozen Davidson row already carries VEN-000096 and identifies Carrier Dome in Syracuse; current main retains VEN-000096 for the same physical building under canonical key jma-wireless-dome."
+    },
+    {
+      "local_venue_key": "gainbridge-fieldhouse-indianapolis",
+      "expected_local_name": "Gainbridge Fieldhouse",
+      "expected_local_city": "Indianapolis",
+      "expected_local_state": "IN",
+      "global_venue_id": "VEN-000070",
+      "global_venue_key": "gainbridge-fieldhouse",
+      "expected_global_city": "Indianapolis",
+      "expected_global_state": "IN",
+      "resolution_basis": "Frozen Davidson rows identify the same Indianapolis arena across Conseco/Gainbridge naming and one row already carries VEN-000070; current main VEN-000070 is that physical building."
+    },
+    {
+      "local_venue_key": "harrah-s-cherokee-center",
+      "expected_local_name": "Harrah's Cherokee Center",
+      "expected_local_city": "Asheville",
+      "expected_local_state": "NC",
+      "global_venue_id": "VEN-000353",
+      "global_venue_key": "harrahs-cherokee-center",
+      "expected_global_city": "Asheville",
+      "expected_global_state": "NC",
+      "resolution_basis": "Frozen Davidson event-site research identifies Harrah's Cherokee Center in Asheville and explicitly records current-main shared venue reuse; VEN-000353 is the same physical venue."
+    },
+    {
+      "local_venue_key": "hp-field-house-orlando",
+      "expected_local_name": "HP Field House",
+      "expected_local_city": "Orlando",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-000084",
+      "global_venue_key": "hp-field-house",
+      "expected_global_city": "Orlando",
+      "expected_global_state": "FL",
+      "resolution_basis": "Both frozen Davidson HP Field House rows identify Orlando and one already carries VEN-000084; current main VEN-000084 is the same physical Disney sports venue."
+    },
+    {
+      "local_venue_key": "jose-miguel-agrelot-coliseum",
+      "expected_local_name": "José Miguel Agrelot Coliseum",
+      "expected_local_city": "San Juan",
+      "expected_local_state": "PR",
+      "global_venue_id": "VEN-000471",
+      "global_venue_key": "provisional-jose-miguel-agrelot-coliseum",
+      "expected_global_city": "San Juan",
+      "expected_global_state": "PR",
+      "resolution_basis": "Frozen Davidson row already carries VEN-000471 for José Miguel Agrelot Coliseum in San Juan; current main retains that exact physical venue identity."
+    },
+    {
+      "local_venue_key": "madison-square-garden",
+      "expected_local_name": "Madison Square Garden",
+      "expected_local_city": "New York",
+      "expected_local_state": "NY",
+      "global_venue_id": "VEN-000124",
+      "global_venue_key": "madison-square-garden-1968",
+      "expected_global_city": "New York",
+      "expected_global_state": "NY",
+      "resolution_basis": "All frozen Davidson Madison Square Garden assignments are dated 2008-12-09 through 2015-12-20. Current main explicitly splits MSG III (1925-1968, VEN-000123) from MSG IV/current Garden opened 1968-02-11 (VEN-000124), so these rows deterministically reuse VEN-000124 without changing historical meaning."
+    },
+    {
+      "local_venue_key": "mckale-center-tucson",
+      "expected_local_name": "McKale Center",
+      "expected_local_city": "Tucson",
+      "expected_local_state": "AZ",
+      "global_venue_id": "VEN-000127",
+      "global_venue_key": "mckale-center",
+      "expected_global_city": "Tucson",
+      "expected_global_state": "AZ",
+      "resolution_basis": "Both frozen Davidson McKale Center rows identify Tucson and one already carries VEN-000127; current main VEN-000127 is the same physical building."
+    },
+    {
+      "local_venue_key": "spectrum-center-charlotte",
+      "expected_local_name": "Spectrum Center",
+      "expected_local_city": "Charlotte",
+      "expected_local_state": "NC",
+      "global_venue_id": "VEN-000190",
+      "global_venue_key": "spectrum-center",
+      "expected_global_city": "Charlotte",
+      "expected_global_state": "NC",
+      "resolution_basis": "Frozen Davidson rows deliberately share one physical key across Spectrum Center and historical Time Warner Cable Arena naming; the historical row already carries VEN-000190, and current main registers Time Warner Cable Arena as an alias of the same VEN-000190 building."
+    },
+    {
+      "local_venue_key": "td-arena-charleston",
+      "expected_local_name": "TD Arena",
+      "expected_local_city": "Charleston",
+      "expected_local_state": "SC",
+      "global_venue_id": "VEN-000280",
+      "global_venue_key": "td-arena",
+      "expected_global_city": "Charleston",
+      "expected_global_state": "SC",
+      "resolution_basis": "Both frozen Davidson TD Arena rows identify Charleston and one already carries VEN-000280; current main VEN-000280 is the same physical building, including historical Carolina First Arena naming."
+    },
+    {
+      "local_venue_key": "thomas-mack-center",
+      "expected_local_name": "Thomas & Mack Center",
+      "expected_local_city": "Las Vegas",
+      "expected_local_state": "NV",
+      "global_venue_id": "VEN-000377",
+      "global_venue_key": "thomas-and-mack-center",
+      "expected_global_city": "Las Vegas",
+      "expected_global_state": "NV",
+      "resolution_basis": "Frozen Davidson row already carries VEN-000377 for Thomas & Mack Center in Las Vegas; current main retains that exact physical venue identity under canonical key thomas-and-mack-center."
+    }
+  ]
+}

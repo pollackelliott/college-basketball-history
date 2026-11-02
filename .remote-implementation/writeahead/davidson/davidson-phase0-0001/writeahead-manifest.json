@@ -1,0 +1,971 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/davidson/conferences.csv",
+    "schools/davidson/notes.md",
+    "schools/davidson/opponents.csv",
+    "schools/davidson/source-games.csv",
+    "schools/davidson/source-notes.md",
+    "schools/davidson/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "dad6132f659f5f4f87a31d0d9c1929f327abe048c7185a2880422d6d741cbd1f",
+    "data/reference/venue-names.csv": "9c9327b0e8042dcd1a9c75b4b37712306cc149fd04689662cc6e06ae3b5c4687",
+    "data/reference/venues.csv": "ef994d2d78adf70680af719e1685c8893958d02b8c99d2035406ded533d68cc4",
+    "schools/davidson/conferences.csv": "b183e01f1220cd1066371705be65ea5787c5cf8d3ea0d374c609a88cc3f53224",
+    "schools/davidson/notes.md": "ecc7a4a9f1a3294811cc54721f8a455f2db71f1822c54d0cf129b5927256a460",
+    "schools/davidson/opponents.csv": "9ae530b02061c3215bf5e5e540bfe9b17a00fbdcf22978616c64810fcb612ddf",
+    "schools/davidson/source-games.csv": "f5dc6df5124bffba60bec6fb06c512000e642b1d30ca8e8124529c6365d8017a",
+    "schools/davidson/source-notes.md": "8f20bc4116365ad833809f9d044be023f321e1652bde3fa5d5e089213f898cae",
+    "schools/davidson/venues.csv": "0e8e56948a3578566b7c568236731341c5047fab9540b5e7a1cc675ef01fd28d"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/davidson/conferences.csv",
+    "schools/davidson/notes.md",
+    "schools/davidson/opponents.csv",
+    "schools/davidson/source-games.csv",
+    "schools/davidson/source-notes.md",
+    "schools/davidson/venues.csv"
+  ],
+  "commit_message": "Add Davidson onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "107079326df78c1f1e009b28f51adcfcbe24eecc",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted Davidson INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the reusable project Program Top-Level Scope Reference value INCEPTION+. The first accepted competitive source-game season in the frozen package is 1908-1909. Preserve the exact frozen historical universe and all accepted researched uncertainty.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1908-1909",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "Davidson"
+    }
+  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "b183e01f1220cd1066371705be65ea5787c5cf8d3ea0d374c609a88cc3f53224",
+    "notes.md": "ecc7a4a9f1a3294811cc54721f8a455f2db71f1822c54d0cf129b5927256a460",
+    "opponents.csv": "9ae530b02061c3215bf5e5e540bfe9b17a00fbdcf22978616c64810fcb612ddf",
+    "source-games.csv": "f5dc6df5124bffba60bec6fb06c512000e642b1d30ca8e8124529c6365d8017a",
+    "source-notes.md": "8f20bc4116365ad833809f9d044be023f321e1652bde3fa5d5e089213f898cae",
+    "venues.csv": "0e8e56948a3578566b7c568236731341c5047fab9540b5e7a1cc675ef01fd28d"
+  },
+  "prepared_commit_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "prepared_parent_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "prepared_tree_sha": "939994714d33466404f4f9530b49d34a3b4e0397",
+  "program_alias_mapping": [],
+  "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "repository_validation": "PASS",
+  "request_id": "davidson-phase0-0001",
+  "request_sha256": "f5e41b468ff45812e8f5929286d1c73ef90fc1764244eaeacef463e99afc5bf6",
+  "research_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "research_checkpoint_sha256": "a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "sidecars": {
+    "integration-freeze.json": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+    "stage1-reconciliation.json": "a048837681c231239fe6bcd7f554bea7eec464e40e0ee4d74023c4029e3ccda8",
+    "venue-reconciliation.json": "30b20e76315c516162a518d2224729ed146d19b458f082076414223bfe4b755d"
+  },
+  "target_branch": "data/davidson-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Alumni Gymnasium",
+      "final_venue_id": "VEN-001045",
+      "final_venue_key": "alumni-gymnasium-davidson",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "alumni-gymnasium-davidson"
+    },
+    {
+      "canonical_name": "Alumni Hall",
+      "final_venue_id": "VEN-000525",
+      "final_venue_key": "alumni-hall-navy",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "alumni-hall"
+    },
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "John M. Belk Arena",
+      "final_venue_id": "VEN-000740",
+      "final_venue_key": "belk-arena",
+      "research_venue_id": "VEN-000740",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "belk-arena"
+    },
+    {
+      "canonical_name": "Boardwalk Hall",
+      "final_venue_id": "VEN-000433",
+      "final_venue_key": "boardwalk-hall",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boardwalk-hall"
+    },
+    {
+      "canonical_name": "Bob Devaney Sports Center",
+      "final_venue_id": "VEN-000023",
+      "final_venue_key": "bob-devaney-sports-center",
+      "research_venue_id": "VEN-000023",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bob-devaney-sports-center"
+    },
+    {
+      "canonical_name": "Bon Secours Wellness Arena",
+      "final_venue_id": "VEN-000025",
+      "final_venue_key": "bon-secours-wellness-arena",
+      "research_venue_id": "VEN-000025",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bon-secours-wellness-arena"
+    },
+    {
+      "canonical_name": "Cameron Indoor Stadium",
+      "final_venue_id": "VEN-000035",
+      "final_venue_key": "cameron-indoor-stadium",
+      "research_venue_id": "VEN-000035",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cameron-indoor-stadium"
+    },
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "Carlson Center",
+      "final_venue_id": "VEN-000466",
+      "final_venue_key": "carlson-center",
+      "research_venue_id": "VEN-000466",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carlson-center"
+    },
+    {
+      "canonical_name": "Carnesecca Arena",
+      "final_venue_id": "VEN-000456",
+      "final_venue_key": "carnesecca-arena",
+      "research_venue_id": "VEN-000456",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carnesecca-arena"
+    },
+    {
+      "canonical_name": "Carolina Coliseum",
+      "final_venue_id": "VEN-000344",
+      "final_venue_key": "carolina-coliseum",
+      "research_venue_id": "VEN-000344",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carolina-coliseum"
+    },
+    {
+      "canonical_name": "Carrier Dome",
+      "final_venue_id": "VEN-000096",
+      "final_venue_key": "jma-wireless-dome",
+      "research_venue_id": "VEN-000096",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "carrier-dome"
+    },
+    {
+      "canonical_name": "Cassell Coliseum",
+      "final_venue_id": "VEN-000329",
+      "final_venue_key": "cassell-coliseum",
+      "research_venue_id": "VEN-000329",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cassell-coliseum"
+    },
+    {
+      "canonical_name": "Charleston Coliseum & Convention Center",
+      "final_venue_id": "VEN-000654",
+      "final_venue_key": "charleston-coliseum-convention-center-wv",
+      "research_venue_id": "VEN-000654",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charleston-coliseum-convention-center-wv"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum (1955; now Bojangles Coliseum)",
+      "final_venue_id": "VEN-000040",
+      "final_venue_key": "charlotte-coliseum-1955",
+      "research_venue_id": "VEN-000040",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1955"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum (1988-2007)",
+      "final_venue_id": "VEN-000041",
+      "final_venue_key": "charlotte-coliseum-1988",
+      "research_venue_id": "VEN-000041",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1988"
+    },
+    {
+      "canonical_name": "Chase Center",
+      "final_venue_id": "VEN-000042",
+      "final_venue_key": "chase-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chase-center"
+    },
+    {
+      "canonical_name": "CHI Health Center Omaha",
+      "final_venue_id": "VEN-000043",
+      "final_venue_key": "chi-health-center",
+      "research_venue_id": "VEN-000043",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chi-health-center"
+    },
+    {
+      "canonical_name": "Civic Center of Anderson",
+      "final_venue_id": "VEN-000713",
+      "final_venue_key": "civic-center-of-anderson",
+      "research_venue_id": "VEN-000713",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "civic-center-of-anderson"
+    },
+    {
+      "canonical_name": "Cole Field House",
+      "final_venue_id": "VEN-000047",
+      "final_venue_key": "cole-field-house",
+      "research_venue_id": "VEN-000047",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cole-field-house"
+    },
+    {
+      "canonical_name": "Colonial Life Arena",
+      "final_venue_id": "VEN-000049",
+      "final_venue_key": "colonial-life-arena",
+      "research_venue_id": "VEN-000049",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "colonial-life-arena"
+    },
+    {
+      "canonical_name": "Crisler Center",
+      "final_venue_id": "VEN-000261",
+      "final_venue_key": "crisler-center",
+      "research_venue_id": "VEN-000261",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "crisler-center"
+    },
+    {
+      "canonical_name": "Desert Financial Arena",
+      "final_venue_id": "VEN-000056",
+      "final_venue_key": "desert-financial-arena",
+      "research_venue_id": "VEN-000056",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "desert-financial-arena"
+    },
+    {
+      "canonical_name": "Donald L. Tucker Civic Center",
+      "final_venue_id": "VEN-000058",
+      "final_venue_key": "donald-l-tucker-civic-center",
+      "research_venue_id": "VEN-000058",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "donald-l-tucker-civic-center"
+    },
+    {
+      "canonical_name": "ExtraMile Arena",
+      "final_venue_id": "VEN-000061",
+      "final_venue_key": "extramile-arena",
+      "research_venue_id": "VEN-000061",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "extramile-arena"
+    },
+    {
+      "canonical_name": "Ford Field",
+      "final_venue_id": "VEN-000066",
+      "final_venue_key": "ford-field",
+      "research_venue_id": "VEN-000066",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ford-field"
+    },
+    {
+      "canonical_name": "Gainbridge Fieldhouse",
+      "final_venue_id": "VEN-000070",
+      "final_venue_key": "gainbridge-fieldhouse",
+      "research_venue_id": "VEN-000070",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "gainbridge-fieldhouse-indianapolis"
+    },
+    {
+      "canonical_name": "Gainbridge Fieldhouse",
+      "final_venue_id": "VEN-000070",
+      "final_venue_key": "gainbridge-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "gainbridge-fieldhouse-indianapolis"
+    },
+    {
+      "canonical_name": "Gallagher-Iba Arena",
+      "final_venue_id": "VEN-000072",
+      "final_venue_key": "gallagher-iba-arena",
+      "research_venue_id": "VEN-000072",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gallagher-iba-arena"
+    },
+    {
+      "canonical_name": "Georgia Dome",
+      "final_venue_id": "VEN-000073",
+      "final_venue_key": "georgia-dome",
+      "research_venue_id": "VEN-000073",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "georgia-dome"
+    },
+    {
+      "canonical_name": "Greensboro Coliseum",
+      "final_venue_id": "VEN-000076",
+      "final_venue_key": "greensboro-coliseum",
+      "research_venue_id": "VEN-000076",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "greensboro-coliseum"
+    },
+    {
+      "canonical_name": "Greenville Memorial Auditorium",
+      "final_venue_id": "VEN-001046",
+      "final_venue_key": "greenville-memorial-auditorium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "greenville-memorial-auditorium"
+    },
+    {
+      "canonical_name": "Hammons Student Center",
+      "final_venue_id": "VEN-000562",
+      "final_venue_key": "hammons-student-center",
+      "research_venue_id": "VEN-000562",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hammons-student-center"
+    },
+    {
+      "canonical_name": "Harrah's Cherokee Center",
+      "final_venue_id": "VEN-000353",
+      "final_venue_key": "harrahs-cherokee-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "harrah-s-cherokee-center"
+    },
+    {
+      "canonical_name": "Harrah's Cherokee Center",
+      "final_venue_id": "VEN-000353",
+      "final_venue_key": "harrahs-cherokee-center",
+      "research_venue_id": "VEN-000353",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "harrahs-cherokee-center"
+    },
+    {
+      "canonical_name": "Honda Center",
+      "final_venue_id": "VEN-000082",
+      "final_venue_key": "honda-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "honda-center"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "VEN-000084",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "hp-field-house-orlando"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "hp-field-house-orlando"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    },
+    {
+      "canonical_name": "Imperial Arena",
+      "final_venue_id": "VEN-000088",
+      "final_venue_key": "imperial-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "imperial-arena"
+    },
+    {
+      "canonical_name": "Johnston Gymnasium",
+      "final_venue_id": "VEN-001047",
+      "final_venue_key": "johnston-gymnasium-davidson",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "johnston-gymnasium-davidson"
+    },
+    {
+      "canonical_name": "José Miguel Agrelot Coliseum",
+      "final_venue_id": "VEN-000471",
+      "final_venue_key": "provisional-jose-miguel-agrelot-coliseum",
+      "research_venue_id": "VEN-000471",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "jose-miguel-agrelot-coliseum"
+    },
+    {
+      "canonical_name": "KeyArena",
+      "final_venue_id": "VEN-000102",
+      "final_venue_key": "keyarena",
+      "research_venue_id": "VEN-000102",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keyarena"
+    },
+    {
+      "canonical_name": "KeyBank Center",
+      "final_venue_id": "VEN-000103",
+      "final_venue_key": "keybank-center",
+      "research_venue_id": "VEN-000103",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keybank-center"
+    },
+    {
+      "canonical_name": "Konawaena High School",
+      "final_venue_id": "VEN-000703",
+      "final_venue_key": "konawaena-high-school",
+      "research_venue_id": "VEN-000703",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "konawaena-high-school"
+    },
+    {
+      "canonical_name": "Legacy Arena",
+      "final_venue_id": "VEN-000109",
+      "final_venue_key": "legacy-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "legacy-arena"
+    },
+    {
+      "canonical_name": "Lenovo Center",
+      "final_venue_id": "VEN-000110",
+      "final_venue_key": "lenovo-center",
+      "research_venue_id": "VEN-000110",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lenovo-center"
+    },
+    {
+      "canonical_name": "Lloyd Noble Center",
+      "final_venue_id": "VEN-000116",
+      "final_venue_key": "lloyd-noble-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lloyd-noble-center"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "madison-square-garden"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "McAlister Field House",
+      "final_venue_id": "VEN-000929",
+      "final_venue_key": "mcalister-field-house",
+      "research_venue_id": "VEN-000929",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcalister-field-house"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "VEN-000127",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "mckale-center-tucson"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "mckale-center-tucson"
+    },
+    {
+      "canonical_name": "Mizzou Arena",
+      "final_venue_id": "VEN-000137",
+      "final_venue_key": "mizzou-arena",
+      "research_venue_id": "VEN-000137",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mizzou-arena"
+    },
+    {
+      "canonical_name": "Moda Center",
+      "final_venue_id": "VEN-000138",
+      "final_venue_key": "moda-center",
+      "research_venue_id": "VEN-000138",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "moda-center"
+    },
+    {
+      "canonical_name": "Morrison Hall (Old YMCA/Gymnasium)",
+      "final_venue_id": "VEN-001048",
+      "final_venue_key": "morrison-hall-davidson",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "morrison-hall-davidson"
+    },
+    {
+      "canonical_name": "North Charleston Coliseum",
+      "final_venue_id": "VEN-001049",
+      "final_venue_key": "north-charleston-coliseum",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "north-charleston-coliseum"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Reynolds Coliseum",
+      "final_venue_id": "VEN-000174",
+      "final_venue_key": "reynolds-coliseum",
+      "research_venue_id": "VEN-000174",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-coliseum"
+    },
+    {
+      "canonical_name": "Richmond Arena",
+      "final_venue_id": "VEN-000666",
+      "final_venue_key": "richmond-arena",
+      "research_venue_id": "VEN-000666",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "richmond-arena"
+    },
+    {
+      "canonical_name": "Richmond Coliseum",
+      "final_venue_id": "VEN-000175",
+      "final_venue_key": "richmond-coliseum",
+      "research_venue_id": "VEN-000175",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "richmond-coliseum"
+    },
+    {
+      "canonical_name": "Robins Center",
+      "final_venue_id": "VEN-000324",
+      "final_venue_key": "robins-center",
+      "research_venue_id": "VEN-000324",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "robins-center"
+    },
+    {
+      "canonical_name": "Rocket Arena",
+      "final_venue_id": "VEN-000179",
+      "final_venue_key": "rocket-arena",
+      "research_venue_id": "VEN-000179",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rocket-arena"
+    },
+    {
+      "canonical_name": "Rupp Arena",
+      "final_venue_id": "VEN-000181",
+      "final_venue_key": "rupp-arena",
+      "research_venue_id": "VEN-000181",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rupp-arena"
+    },
+    {
+      "canonical_name": "Siegel Center",
+      "final_venue_id": "VEN-000705",
+      "final_venue_key": "siegel-center",
+      "research_venue_id": "VEN-000705",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "siegel-center"
+    },
+    {
+      "canonical_name": "Spectrum Center",
+      "final_venue_id": "VEN-000190",
+      "final_venue_key": "spectrum-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "spectrum-center-charlotte"
+    },
+    {
+      "canonical_name": "Time Warner Cable Arena (now Spectrum Center)",
+      "final_venue_id": "VEN-000190",
+      "final_venue_key": "spectrum-center",
+      "research_venue_id": "VEN-000190",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "spectrum-center-charlotte"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "VEN-000194",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "T-Mobile Center",
+      "final_venue_id": "VEN-000202",
+      "final_venue_key": "t-mobile-center",
+      "research_venue_id": "VEN-000202",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-center"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "VEN-000280",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "td-arena-charleston"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "td-arena-charleston"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "VEN-000377",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "thomas-mack-center"
+    },
+    {
+      "canonical_name": "Thompson Gym",
+      "final_venue_id": "VEN-000328",
+      "final_venue_key": "thompson-gym",
+      "research_venue_id": "VEN-000328",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thompson-gym"
+    },
+    {
+      "canonical_name": "University Credit Union Pavilion",
+      "final_venue_id": "VEN-000449",
+      "final_venue_key": "university-credit-union-pavilion",
+      "research_venue_id": "VEN-000449",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-credit-union-pavilion"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "UNT Coliseum",
+      "final_venue_id": "VEN-000273",
+      "final_venue_key": "unt-coliseum",
+      "research_venue_id": "VEN-000273",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "unt-coliseum"
+    },
+    {
+      "canonical_name": "UPMC Events Center",
+      "final_venue_id": "VEN-000907",
+      "final_venue_key": "upmc-events-center",
+      "research_venue_id": "VEN-000907",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "upmc-events-center"
+    },
+    {
+      "canonical_name": "UTC Arena",
+      "final_venue_id": "VEN-000697",
+      "final_venue_key": "utc-arena",
+      "research_venue_id": "VEN-000697",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "utc-arena"
+    },
+    {
+      "canonical_name": "Varsity Gym",
+      "final_venue_id": "VEN-001050",
+      "final_venue_key": "varsity-gym-appalachian-state",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "varsity-gym-appalachian-state"
+    },
+    {
+      "canonical_name": "William and Mary Hall",
+      "final_venue_id": "VEN-000363",
+      "final_venue_key": "william-and-mary-hall",
+      "research_venue_id": "VEN-000363",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "william-and-mary-hall"
+    },
+    {
+      "canonical_name": "WVU Coliseum",
+      "final_venue_id": "VEN-000235",
+      "final_venue_key": "wvu-coliseum",
+      "research_venue_id": "VEN-000235",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wvu-coliseum"
+    },
+    {
+      "canonical_name": "WVU Field House",
+      "final_venue_id": "VEN-000524",
+      "final_venue_key": "wvu-field-house-morgantown",
+      "research_venue_id": "VEN-000524",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wvu-field-house-morgantown"
+    },
+    {
+      "canonical_name": "Xfinity Center",
+      "final_venue_id": "VEN-000236",
+      "final_venue_key": "xfinity-center",
+      "research_venue_id": "VEN-000236",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "xfinity-center"
+    },
+    {
+      "canonical_name": "City Auditorium",
+      "final_venue_id": "VEN-000534",
+      "final_venue_key": "charlotte-city-auditorium",
+      "research_venue_id": "VEN-000534",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-city-auditorium"
+    },
+    {
+      "canonical_name": "Central High",
+      "final_venue_id": "VEN-000532",
+      "final_venue_key": "central-high-charlotte",
+      "research_venue_id": "VEN-000532",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "central-high-charlotte"
+    },
+    {
+      "canonical_name": "Armory Auditorium",
+      "final_venue_id": "VEN-000533",
+      "final_venue_key": "charlotte-armory-auditorium",
+      "research_venue_id": "VEN-000533",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-armory-auditorium"
+    },
+    {
+      "canonical_name": "Card Gym",
+      "final_venue_id": "VEN-000516",
+      "final_venue_key": "card-gym-duke",
+      "research_venue_id": "VEN-000516",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "card-gym-duke"
+    },
+    {
+      "canonical_name": "Woollen Gym",
+      "final_venue_id": "VEN-000552",
+      "final_venue_key": "woollen-gym",
+      "research_venue_id": "VEN-000552",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "woollen-gym"
+    },
+    {
+      "canonical_name": "Memorial Gymnasium (Virginia)",
+      "final_venue_id": "VEN-000330",
+      "final_venue_key": "virginia-memorial-gymnasium",
+      "research_venue_id": "VEN-000330",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "virginia-memorial-gymnasium"
+    },
+    {
+      "canonical_name": "Allstate Arena",
+      "final_venue_id": "VEN-000004",
+      "final_venue_key": "allstate-arena",
+      "research_venue_id": "VEN-000004",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "allstate-arena"
+    },
+    {
+      "canonical_name": "Johnston Gym",
+      "final_venue_id": "VEN-000807",
+      "final_venue_key": "johnston-gym-greensboro",
+      "research_venue_id": "VEN-000807",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "johnston-gym-greensboro"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "e1396ddce9de5d38c7a284a524e13632e474a9c49de5decf7897eb1931ec12f2",
+    "mappings": [
+      {
+        "expected_global_city": "Annapolis",
+        "expected_global_state": "MD",
+        "expected_local_city": "Annapolis",
+        "expected_local_name": "Alumni Hall",
+        "expected_local_state": "MD",
+        "global_venue_id": "VEN-000525",
+        "global_venue_key": "alumni-hall-navy",
+        "local_venue_key": "alumni-hall",
+        "resolution_basis": "Frozen Davidson Alumni Hall row is Annapolis, MD and explicitly records current protected-main shared venue reuse; VEN-000525 is the same Navy Alumni Hall physical building in Annapolis."
+      },
+      {
+        "expected_global_city": "Syracuse",
+        "expected_global_state": "NY",
+        "expected_local_city": "Syracuse",
+        "expected_local_name": "Carrier Dome",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000096",
+        "global_venue_key": "jma-wireless-dome",
+        "local_venue_key": "carrier-dome",
+        "resolution_basis": "Frozen Davidson row already carries VEN-000096 and identifies Carrier Dome in Syracuse; current main retains VEN-000096 for the same physical building under canonical key jma-wireless-dome."
+      },
+      {
+        "expected_global_city": "Indianapolis",
+        "expected_global_state": "IN",
+        "expected_local_city": "Indianapolis",
+        "expected_local_name": "Gainbridge Fieldhouse",
+        "expected_local_state": "IN",
+        "global_venue_id": "VEN-000070",
+        "global_venue_key": "gainbridge-fieldhouse",
+        "local_venue_key": "gainbridge-fieldhouse-indianapolis",
+        "resolution_basis": "Frozen Davidson rows identify the same Indianapolis arena across Conseco/Gainbridge naming and one row already carries VEN-000070; current main VEN-000070 is that physical building."
+      },
+      {
+        "expected_global_city": "Asheville",
+        "expected_global_state": "NC",
+        "expected_local_city": "Asheville",
+        "expected_local_name": "Harrah's Cherokee Center",
+        "expected_local_state": "NC",
+        "global_venue_id": "VEN-000353",
+        "global_venue_key": "harrahs-cherokee-center",
+        "local_venue_key": "harrah-s-cherokee-center",
+        "resolution_basis": "Frozen Davidson event-site research identifies Harrah's Cherokee Center in Asheville and explicitly records current-main shared venue reuse; VEN-000353 is the same physical venue."
+      },
+      {
+        "expected_global_city": "Orlando",
+        "expected_global_state": "FL",
+        "expected_local_city": "Orlando",
+        "expected_local_name": "HP Field House",
+        "expected_local_state": "FL",
+        "global_venue_id": "VEN-000084",
+        "global_venue_key": "hp-field-house",
+        "local_venue_key": "hp-field-house-orlando",
+        "resolution_basis": "Both frozen Davidson HP Field House rows identify Orlando and one already carries VEN-000084; current main VEN-000084 is the same physical Disney sports venue."
+      },
+      {
+        "expected_global_city": "San Juan",
+        "expected_global_state": "PR",
+        "expected_local_city": "San Juan",
+        "expected_local_name": "José Miguel Agrelot Coliseum",
+        "expected_local_state": "PR",
+        "global_venue_id": "VEN-000471",
+        "global_venue_key": "provisional-jose-miguel-agrelot-coliseum",
+        "local_venue_key": "jose-miguel-agrelot-coliseum",
+        "resolution_basis": "Frozen Davidson row already carries VEN-000471 for José Miguel Agrelot Coliseum in San Juan; current main retains that exact physical venue identity."
+      },
+      {
+        "expected_global_city": "New York",
+        "expected_global_state": "NY",
+        "expected_local_city": "New York",
+        "expected_local_name": "Madison Square Garden",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000124",
+        "global_venue_key": "madison-square-garden-1968",
+        "local_venue_key": "madison-square-garden",
+        "resolution_basis": "All frozen Davidson Madison Square Garden assignments are dated 2008-12-09 through 2015-12-20. Current main explicitly splits MSG III (1925-1968, VEN-000123) from MSG IV/current Garden opened 1968-02-11 (VEN-000124), so these rows deterministically reuse VEN-000124 without changing historical meaning."
+      },
+      {
+        "expected_global_city": "Tucson",
+        "expected_global_state": "AZ",
+        "expected_local_city": "Tucson",
+        "expected_local_name": "McKale Center",
+        "expected_local_state": "AZ",
+        "global_venue_id": "VEN-000127",
+        "global_venue_key": "mckale-center",
+        "local_venue_key": "mckale-center-tucson",
+        "resolution_basis": "Both frozen Davidson McKale Center rows identify Tucson and one already carries VEN-000127; current main VEN-000127 is the same physical building."
+      },
+      {
+        "expected_global_city": "Charlotte",
+        "expected_global_state": "NC",
+        "expected_local_city": "Charlotte",
+        "expected_local_name": "Spectrum Center",
+        "expected_local_state": "NC",
+        "global_venue_id": "VEN-000190",
+        "global_venue_key": "spectrum-center",
+        "local_venue_key": "spectrum-center-charlotte",
+        "resolution_basis": "Frozen Davidson rows deliberately share one physical key across Spectrum Center and historical Time Warner Cable Arena naming; the historical row already carries VEN-000190, and current main registers Time Warner Cable Arena as an alias of the same VEN-000190 building."
+      },
+      {
+        "expected_global_city": "Charleston",
+        "expected_global_state": "SC",
+        "expected_local_city": "Charleston",
+        "expected_local_name": "TD Arena",
+        "expected_local_state": "SC",
+        "global_venue_id": "VEN-000280",
+        "global_venue_key": "td-arena",
+        "local_venue_key": "td-arena-charleston",
+        "resolution_basis": "Both frozen Davidson TD Arena rows identify Charleston and one already carries VEN-000280; current main VEN-000280 is the same physical building, including historical Carolina First Arena naming."
+      },
+      {
+        "expected_global_city": "Las Vegas",
+        "expected_global_state": "NV",
+        "expected_local_city": "Las Vegas",
+        "expected_local_name": "Thomas & Mack Center",
+        "expected_local_state": "NV",
+        "global_venue_id": "VEN-000377",
+        "global_venue_key": "thomas-and-mack-center",
+        "local_venue_key": "thomas-mack-center",
+        "resolution_basis": "Frozen Davidson row already carries VEN-000377 for Thomas & Mack Center in Las Vegas; current main retains that exact physical venue identity under canonical key thomas-and-mack-center."
+      }
+    ],
+    "owner_approval_basis": "Owner authorized Davidson serialized Implementation Stage 1 from immutable Research Freeze a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428 and instructed Continue within the same phase. These mappings are deterministic current-main representation reuse of already-settled frozen physical venues and geography. They do not alter frozen historical meaning, global registries, other schools, or owner-gated facts.",
+    "research_zip_sha256": "a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-phase0-inputs-5tgwh86e/venue-reconciliation.json",
+    "spec_sha256": "30b20e76315c516162a518d2224729ed146d19b458f082076414223bfe4b755d"
+  }
+}
