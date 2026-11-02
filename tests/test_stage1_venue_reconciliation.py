@@ -156,6 +156,117 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         with self.assertRaisesRegex(WorkflowError, "repeats local key"):
             self.load()
 
+    def test_repeated_frozen_physical_key_with_historical_names_is_supported(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b"spectrum-center-charlotte,Spectrum Center,Charlotte,NC\n"
+            b"spectrum-center-charlotte,Time Warner Cable Arena (now Spectrum Center),Charlotte,NC\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        local_rows = [
+            {
+                **dict(self.local),
+                "venue_key": "spectrum-center-charlotte",
+                "canonical_name": "Spectrum Center",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+            {
+                **dict(self.local),
+                "venue_key": "spectrum-center-charlotte",
+                "canonical_name": "Time Warner Cable Arena (now Spectrum Center)",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+        ]
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000190",
+            "venue_key": "spectrum-center",
+            "display_name": "Spectrum Center",
+            "city": "Charlotte",
+            "state": "NC",
+        }
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"][0].update({
+            "local_venue_key": "spectrum-center-charlotte",
+            "expected_local_name": "Spectrum Center",
+            "expected_local_city": "Charlotte",
+            "expected_local_state": "NC",
+            "global_venue_id": "VEN-000190",
+            "global_venue_key": "spectrum-center",
+            "expected_global_city": "Charlotte",
+            "expected_global_state": "NC",
+            "resolution_basis": "Same physical arena across historical naming rows.",
+        })
+        self.save()
+
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=local_rows,
+            global_venues=[global_row],
+        )
+        result = venue_reconciliation_inventory(
+            local_rows,
+            [global_row],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(result["blocker_count"], 0)
+        self.assertEqual(
+            [row["target_venue_id"] for row in result["rows"]],
+            ["VEN-000190", "VEN-000190"],
+        )
+
+    def test_repeated_frozen_key_still_rejects_conflicting_geography(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b"shared-arena,Shared Arena,Charlotte,NC\n"
+            b"shared-arena,Shared Arena,Raleigh,NC\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        local_rows = [
+            {**dict(self.local), "venue_key": "shared-arena",
+             "canonical_name": "Shared Arena", "city": "Charlotte", "state": "NC"},
+            {**dict(self.local), "venue_key": "shared-arena",
+             "canonical_name": "Shared Arena", "city": "Raleigh", "state": "NC"},
+        ]
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000190",
+            "venue_key": "shared-arena-current",
+            "display_name": "Shared Arena",
+            "city": "Charlotte",
+            "state": "NC",
+        }
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"][0].update({
+            "local_venue_key": "shared-arena",
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Charlotte",
+            "expected_local_state": "NC",
+            "global_venue_id": "VEN-000190",
+            "global_venue_key": "shared-arena-current",
+            "expected_global_city": "Charlotte",
+            "expected_global_state": "NC",
+        })
+        self.save()
+
+        with self.assertRaisesRegex(WorkflowError, "frozen local identity drift"):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=local_rows,
+                global_venues=[global_row],
+            )
+
 
 class DaytonHistoricalNameBoundTests(unittest.TestCase):
     """Current verified predecessor name must not attach a 1986 opponent to Dayton."""

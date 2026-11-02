@@ -68,12 +68,10 @@ def load_venue_reconciliation(
     if not isinstance(raw_mappings, list) or not raw_mappings:
         raise WorkflowError("venue reconciliation requires nonempty mappings")
 
-    local_by_key = {}
+    local_by_key: dict[str, list[dict[str, str]]] = {}
     for row in local_venues:
         key = row.get("venue_key", "").strip()
-        if key in local_by_key:
-            raise WorkflowError(f"venue reconciliation duplicate frozen local key {key!r}")
-        local_by_key[key] = row
+        local_by_key.setdefault(key, []).append(row)
     global_by_id = {
         row.get("venue_id", "").strip(): row for row in global_venues
     }
@@ -96,15 +94,28 @@ def load_venue_reconciliation(
         key = item["local_venue_key"]
         if key in mappings:
             raise WorkflowError(f"venue reconciliation repeats local key {key!r}")
-        local = local_by_key.get(key)
-        if local is None:
+        local_rows = local_by_key.get(key)
+        if not local_rows:
             raise WorkflowError(f"venue reconciliation unknown local key {key!r}")
-        if local.get("source_program_key", "").strip() != school_key:
+        if any(
+            local.get("source_program_key", "").strip() != school_key
+            for local in local_rows
+        ):
             raise WorkflowError(f"venue reconciliation school mismatch for {key!r}")
-        if (local.get("canonical_name", "").strip() != item["expected_local_name"]
-            or local.get("city", "").strip() != item["expected_local_city"]
-            or local.get("state", "").strip() != item["expected_local_state"]):
-            raise WorkflowError(f"venue reconciliation frozen local identity drift for {key!r}")
+        local_names = {
+            local.get("canonical_name", "").strip() for local in local_rows
+        }
+        if (
+            item["expected_local_name"] not in local_names
+            or any(
+                local.get("city", "").strip() != item["expected_local_city"]
+                or local.get("state", "").strip() != item["expected_local_state"]
+                for local in local_rows
+            )
+        ):
+            raise WorkflowError(
+                f"venue reconciliation frozen local identity drift for {key!r}"
+            )
         target_id = item["global_venue_id"]
         target = global_by_id.get(target_id)
         if (target is None
