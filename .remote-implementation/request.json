@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-stage1-0001",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "duquesne-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "duquesne",
-  "previous_control_state_commit": "e45538cf1b9134f305fe8f53f96ecf1c8aab4643",
-  "previous_control_state_sha256": "3045c6ecdd49aa3a3e2bd928a80c963c4179056216f8916821f8392b636830d3",
+  "previous_control_state_commit": "cf8fcfc704629faf2a397fdf11111a134beb7429",
+  "previous_control_state_sha256": "5772364f25f6ce9ddfdf01c064982000debaf7de4f059fc7558ee5c4af3c3335",
   "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "target_branch": "data/duquesne-onboarding",
   "research_checkpoint": {
     "sha256": "5f1e4540bf6f73585e64030f13fea4b119158129364e729e6a7bd6303bd371f2",
     "research_base_sha": "a3c0cb9d1034314ff74debfb4545da4c53998370",
@@ -17,15 +18,26 @@
       "part_count": 33
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-stage1-0001/checkpoint-manifest.json",
+    "sha256": "258c31e33c7a34f75939f6212f63f8f1deed803e91042237a19b3db111332a26"
+  },
   "venue_reconciliation": null,
   "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1913-1914",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted Duquesne INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the current reusable project Program Top-Level Scope Reference value INCEPTION+. The first accepted competitive source-game season in the frozen package is 1913-1914. Preserve the exact frozen historical universe and all accepted researched uncertainty."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation lane — owner-authorized Stage 1",
-    "authorization": "Owner explicitly concluded Duquesne Research, designated immutable RESEARCH_FROZEN SHA-256 5f1e4540bf6f73585e64030f13fea4b119158129364e729e6a7bd6303bd371f2, and authorized Duquesne serialized Implementation. The current Proceed authorizes the first bounded repository-defined operation only: complete read-only current-main Stage 1 reconciliation inventory against exact protected main d34e954bf738dc3f971f268ffeb4f58f5a32c4a9. This request carries no Research change, Phase 0 mutation, shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, recovery, release, protected-main mutation, or other-school authority."
+    "origin": "ChatGPT Duquesne serialized Implementation lane — explicitly owner-authorized Phase 0",
+    "authorization": "Owner explicitly authorized Duquesne Phase 0 after clean Stage 1 request duquesne-stage1-0001 PASS with zero blockers on protected main d34e954bf738dc3f971f268ffeb4f58f5a32c4a9. Authorizes exactly one guarded PHASE0 operation: fresh-repeat Stage 1 against exact main, stage the immutable six-file Duquesne Research Freeze, apply ordinary mechanically safe target-school venue registrations/reuse and accepted INCEPTION+ target scope, capture INTEGRATION_FROZEN, publish create-once data/duquesne-onboarding through the global mutation lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -38,11 +50,10 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
   }
 }
