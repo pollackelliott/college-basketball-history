@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "davidson",
+  "previous_control_state_commit": "44443a6fe18ac4c967a41db9ed27c2dc9386b236",
+  "previous_control_state_sha256": "cd9ef33a396aeb8059967ac5978bb60f78ca545affa6b8e0cf67a892cb757190",
+  "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/davidson/davidson-phase0-0001/successor-manifest.json",
+    "sha256": "f8743a8cf3111d61adab8c44815db5ca4d013ff736f7d50c4c60c7eec1a98a56"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/davidson/davidson-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "027561ec4759cd9135603acd714795de451484e7034a7906f812925e9bd58c9d"
+  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation lane — fresh Stage 2 census after generic runtime repair PR #435",
+    "authorization": "Existing owner-authorized Davidson Stage 2 phase persists through OWNER_GATE_1_READY. PR #435 advanced protected main only on tools/location_safety.py and tests/test_location_hardening.py; no canonical/shared-reference/school basketball data changed, so no STAGE2_CURRENT_MAIN_REFRESH is required. This read-only census binds the exact fresh-verified opponent-display successor and the repaired current protected-main runtime. No tracked repair, Owner Gate 1 approval, sealing, apply, release, Preview, merge, Production, or recovery authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
