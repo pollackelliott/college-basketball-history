@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "apply_request_id": "davidson-stage2-sealed-apply-0001",
+  "approved_plan_hash": "f0f9b005e1ab2cf4968f677b88229fb6e755a2710fead575ef48aa560ce1ac3b",
+  "changed_path_count": 88,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "release_manifest_sha256": "10dadce774240c65c8ecdf2a8b0250903beb296af5418ccaf30eef5aeb124a0a",
+  "school_key": "davidson",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "e9ef982f81a12a76a726eb2586c54d05e670d26c91c3cfbf39a4792ff9da39cb",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "9831235f4857b86c34e5f0fa5564a563127c0334e47cbbed8c86afada48f877d",
+  "writeahead_sha256": "a68d24dd75db0cc70d1d8b29b9d6023871c06932b36f0385d2438ac654e6138a"
+}
