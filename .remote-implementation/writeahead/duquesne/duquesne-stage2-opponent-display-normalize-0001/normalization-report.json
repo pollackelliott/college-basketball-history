@@ -1,0 +1,196 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 9,
+  "change_row_count": 11,
+  "changes": [
+    {
+      "authority_names": [
+        "Brooklyn Knights of Columbus (club team)"
+      ],
+      "authority_signature": "brooklynknightsofcolumbusclubteam",
+      "canonical_opponent_key": "brooklyn-knights-of-columbus",
+      "from_names": [
+        "Brooklyn Knights of Columbus"
+      ],
+      "target_row_count": 1,
+      "to_name": "Brooklyn Knights of Columbus (club team)"
+    },
+    {
+      "authority_names": [
+        "Central State"
+      ],
+      "authority_signature": "centralstate",
+      "canonical_opponent_key": "central-state-ohio",
+      "from_names": [
+        "Central State (Ohio)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Central State"
+    },
+    {
+      "authority_names": [
+        "Franklin College"
+      ],
+      "authority_signature": "franklincollege",
+      "canonical_opponent_key": "franklin-college",
+      "from_names": [
+        "Franklin College (IN)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Franklin College"
+    },
+    {
+      "authority_names": [
+        "Norfolk Naval Base (military team)"
+      ],
+      "authority_signature": "norfolknavalbasemilitaryteam",
+      "canonical_opponent_key": "norfolk-naval-base",
+      "from_names": [
+        "Norfolk Naval Base"
+      ],
+      "target_row_count": 1,
+      "to_name": "Norfolk Naval Base (military team)"
+    },
+    {
+      "authority_names": [
+        "Oklahoma City"
+      ],
+      "authority_signature": "oklahomacity",
+      "canonical_opponent_key": "oklahoma-city",
+      "from_names": [
+        "Oklahoma City University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Oklahoma City"
+    },
+    {
+      "authority_names": [
+        "Rensselaer"
+      ],
+      "authority_signature": "rensselaer",
+      "canonical_opponent_key": "rensselaer",
+      "from_names": [
+        "Rensselaer Polytechnic Institute"
+      ],
+      "target_row_count": 1,
+      "to_name": "Rensselaer"
+    },
+    {
+      "authority_names": [
+        "Saint Joseph's (IN)",
+        "Saint Joseph’s (IN)"
+      ],
+      "authority_signature": "saintjosephsin",
+      "canonical_opponent_key": "saint-joseph-s-indiana",
+      "from_names": [
+        "Saint Joseph’s (Indiana)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Joseph's (IN)"
+    },
+    {
+      "authority_names": [
+        "St. John's College (Maryland)"
+      ],
+      "authority_signature": "stjohnscollegemaryland",
+      "canonical_opponent_key": "st-johns-college-maryland",
+      "from_names": [
+        "St. John’s College (Md.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. John's College (Maryland)"
+    },
+    {
+      "authority_names": [
+        "Wayne State"
+      ],
+      "authority_signature": "waynestate",
+      "canonical_opponent_key": "wayne-state",
+      "from_names": [
+        "Wayne State (Mich.)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Wayne State"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "source_game_display_change_keys": 9,
+  "source_game_display_change_rows": 12,
+  "source_game_display_changes": [
+    {
+      "from_name": "Franklin College (IN)",
+      "normalized_opponent_key": "franklin-college",
+      "source_game_id": "DUQ-S1-1914-15-010",
+      "to_name": "Franklin College"
+    },
+    {
+      "from_name": "Franklin College (IN)",
+      "normalized_opponent_key": "franklin-college",
+      "source_game_id": "DUQ-S1-1917-18-003",
+      "to_name": "Franklin College"
+    },
+    {
+      "from_name": "Franklin College (IN)",
+      "normalized_opponent_key": "franklin-college",
+      "source_game_id": "DUQ-S1-1919-20-002",
+      "to_name": "Franklin College"
+    },
+    {
+      "from_name": "St. John’s College (Md.)",
+      "normalized_opponent_key": "st-johns-college-maryland",
+      "source_game_id": "DUQ-S1-1925-26-008",
+      "to_name": "St. John's College (Maryland)"
+    },
+    {
+      "from_name": "Brooklyn Knights of Columbus",
+      "normalized_opponent_key": "brooklyn-knights-of-columbus",
+      "source_game_id": "DUQ-S1-1931-32-011",
+      "to_name": "Brooklyn Knights of Columbus (club team)"
+    },
+    {
+      "from_name": "Norfolk Naval Base",
+      "normalized_opponent_key": "norfolk-naval-base",
+      "source_game_id": "DUQ-S1-1942-43-014",
+      "to_name": "Norfolk Naval Base (military team)"
+    },
+    {
+      "from_name": "Rensselaer Polytechnic Institute",
+      "normalized_opponent_key": "rensselaer",
+      "source_game_id": "DUQ-S1-1946-47-013",
+      "to_name": "Rensselaer"
+    },
+    {
+      "from_name": "Saint Joseph’s (Indiana)",
+      "normalized_opponent_key": "saint-joseph-s-indiana",
+      "source_game_id": "DUQ-S1-1949-50-011",
+      "to_name": "Saint Joseph's (IN)"
+    },
+    {
+      "from_name": "Wayne State (Mich.)",
+      "normalized_opponent_key": "wayne-state",
+      "source_game_id": "DUQ-S1-1952-53-006",
+      "to_name": "Wayne State"
+    },
+    {
+      "from_name": "Wayne State (Mich.)",
+      "normalized_opponent_key": "wayne-state",
+      "source_game_id": "DUQ-S1-1953-54-020",
+      "to_name": "Wayne State"
+    },
+    {
+      "from_name": "Oklahoma City University",
+      "normalized_opponent_key": "oklahoma-city",
+      "source_game_id": "DUQ-S1-1958-59-009",
+      "to_name": "Oklahoma City"
+    },
+    {
+      "from_name": "Central State (Ohio)",
+      "normalized_opponent_key": "central-state-ohio",
+      "source_game_id": "DUQ-S1-2025-26-007",
+      "to_name": "Central State"
+    }
+  ],
+  "status": "PASS"
+}

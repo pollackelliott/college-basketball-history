@@ -276,15 +276,15 @@
   "active_lock_commit": "093c7ff33e6a13692f4ec6821b4b979efda89b03",
   "active_lock_owner": "github-actions:41540457436:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+  "active_prepared_tree_sha": "093fa7d1225b87f04f8292c9e3077f90a64aa79a",
   "active_request_id": "duquesne-stage2-opponent-display-normalize-0001",
   "active_request_sha256": "78a98c8759a7dc5600e10fcbb19cf9364afc8783bb959af13500c6bdee49202f",
   "active_school_key": "duquesne",
   "active_target_branch": "data/duquesne-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/duquesne/duquesne-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "36fafe916b7bb7a79644d04cab69152f18e0ee56463683378f3d018591937929",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -568,5 +568,5 @@
   "lock_acquisition_request_commit": "48384350714bf1b79d6b68ac33be3e199ae8ef78",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

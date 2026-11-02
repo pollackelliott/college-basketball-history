@@ -1,0 +1,73 @@
+{
+  "allowed_paths": [
+    "schools/duquesne/opponents.csv",
+    "schools/duquesne/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/duquesne/opponents.csv": "31124bc8338d231976b4c689b5c14b09f2dcb29c269445fe3806c6a5f071d944",
+    "schools/duquesne/source-games.csv": "1da2c4f2e5e6dfc6a0289d4af9570e91ca9e4b1e6e77807efb338f444b9dc805"
+  },
+  "changed_paths": [
+    "schools/duquesne/opponents.csv",
+    "schools/duquesne/source-games.csv"
+  ],
+  "commit_message": "Normalize duquesne historical opponent display representation",
+  "expected_blocker_keys": [
+    "brooklyn-knights-of-columbus",
+    "central-state-ohio",
+    "franklin-college",
+    "norfolk-naval-base",
+    "oklahoma-city",
+    "rensselaer",
+    "saint-joseph-s-indiana",
+    "st-johns-college-maryland",
+    "wayne-state"
+  ],
+  "expected_target_predecessor_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "field_level_proof_sha256": "69e07948c97808d7bfdc7be414c95f28dcbd20fa114550850452e4bd20b02f18",
+  "global_lock_commit": "093c7ff33e6a13692f4ec6821b4b979efda89b03",
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "80f869105121004c866f35b2c93507f2595844811822752b32c663e285766326",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+  "prepared_parent_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "prepared_tree_sha": "093fa7d1225b87f04f8292c9e3077f90a64aa79a",
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "repository_validation": "PASS",
+  "request_id": "duquesne-stage2-opponent-display-normalize-0001",
+  "request_sha256": "78a98c8759a7dc5600e10fcbb19cf9364afc8783bb959af13500c6bdee49202f",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "semantic_drift_after": {
+    "baseline_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+    "integration_base_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+    "school_key": "duquesne",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+    "integration_base_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+    "school_key": "duquesne",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "ac52980b420bc1311c943bb8a5b9a6c106cb7d2673e79c85d8f935d8684d31d7",
+    "field-level-proof.json": "69e07948c97808d7bfdc7be414c95f28dcbd20fa114550850452e4bd20b02f18",
+    "integration-freeze.json": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+    "normalization-report.json": "80f869105121004c866f35b2c93507f2595844811822752b32c663e285766326",
+    "semantic-drift-proof.json": "6fff18e4d1b2060a3153ca7128fefb35eeb57a5dd896da4c2bfef21473929cb5"
+  },
+  "source_game_normalized_name_row_count": 12,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/duquesne/duquesne-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "ac52980b420bc1311c943bb8a5b9a6c106cb7d2673e79c85d8f935d8684d31d7",
+  "target_branch": "data/duquesne-onboarding"
+}

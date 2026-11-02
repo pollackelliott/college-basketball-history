@@ -1,0 +1,49 @@
+{
+  "allowed_paths": [
+    "schools/duquesne/opponents.csv",
+    "schools/duquesne/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "brooklyn-knights-of-columbus",
+    "central-state-ohio",
+    "franklin-college",
+    "norfolk-naval-base",
+    "oklahoma-city",
+    "rensselaer",
+    "saint-joseph-s-indiana",
+    "st-johns-college-maryland",
+    "wayne-state"
+  ],
+  "opponent_changed_row_count": 11,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "source_game_changed_ids": [
+    "DUQ-S1-1914-15-010",
+    "DUQ-S1-1917-18-003",
+    "DUQ-S1-1919-20-002",
+    "DUQ-S1-1925-26-008",
+    "DUQ-S1-1931-32-011",
+    "DUQ-S1-1942-43-014",
+    "DUQ-S1-1946-47-013",
+    "DUQ-S1-1949-50-011",
+    "DUQ-S1-1952-53-006",
+    "DUQ-S1-1953-54-020",
+    "DUQ-S1-1958-59-009",
+    "DUQ-S1-2025-26-007"
+  ],
+  "source_game_changed_keys": [
+    "brooklyn-knights-of-columbus",
+    "central-state-ohio",
+    "franklin-college",
+    "norfolk-naval-base",
+    "oklahoma-city",
+    "rensselaer",
+    "saint-joseph-s-indiana",
+    "st-johns-college-maryland",
+    "wayne-state"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 12
+}
