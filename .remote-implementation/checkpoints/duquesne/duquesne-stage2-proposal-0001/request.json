@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "duquesne-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "duquesne",
+  "previous_control_state_commit": "c11aede19ad9b8e449df0cff2bc17014ac737df4",
+  "previous_control_state_sha256": "49aa258aedd3f6f1eb379cba65821e6d14e5d6f5abfbcff66a08fa50ab46e096",
+  "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/duquesne/duquesne-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "a6f08756475da6fabe01d3387df2ebc83a9d99cdd2023fcf1a8542f860ad4b86"
+  },
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/duquesne-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "70373797a0bef0317bb1d0b92c7b9303e023a127c42d11b20f34a030668c56c9"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Duquesne serialized Implementation Stage 2 — exact recommendation-map proposal rehearsal",
+    "authorization": "Existing owner-authorized Duquesne Stage 2 phase persists through OWNER_GATE_1_READY. This request rehearses one exact 145-decision recommendation map against the fresh-verified post-normalization successor. The map preserves published canonical date/score/result authority by default, recommends Duquesne's accepted frozen H/A/N/site research for all 71 site-type conflicts, resolves 12 deterministic identity pairings, verifies the existing 2 regular-season and 2 conference-tournament title baseline, and enables publication only through the normal gated release path. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, current-main refresh, or tracked basketball mutation authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}

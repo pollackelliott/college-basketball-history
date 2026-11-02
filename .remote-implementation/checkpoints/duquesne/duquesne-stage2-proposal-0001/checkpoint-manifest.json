@@ -1,0 +1,237 @@
+{
+  "action_counts": {
+    "ENABLE_PUBLIC_PAGE": 1,
+    "KEEP_CANONICAL": 36,
+    "MATCH_CANONICAL:CBBG-0040724": 1,
+    "MATCH_CANONICAL:CBBG-0081216": 1,
+    "MATCH_CANONICAL:CBBG-0119195": 1,
+    "MATCH_CANONICAL:CBBG-0119314": 1,
+    "MATCH_CANONICAL:CBBG-0136825": 1,
+    "MATCH_CANONICAL:CBBG-0136851": 1,
+    "MATCH_CANONICAL:CBBG-0136866": 1,
+    "MATCH_CANONICAL:CBBG-0144125": 1,
+    "MATCH_CANONICAL:CBBG-0170451": 1,
+    "MATCH_CANONICAL:CBBG-0170575": 1,
+    "MATCH_CANONICAL:CBBG-0184852": 1,
+    "MATCH_CANONICAL:CBBG-0187354": 1,
+    "NOT_APPLICABLE": 33,
+    "USE_SOURCE": 62,
+    "VERIFY_REFERENCE_VALUES": 1
+  },
+  "approved_plan_hash_preview": "b38327f523f3faebebbeaa13e2d8a11822b105a97753a637afffbcfaa64351ca",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "dd08cd7fd0b9de72b42dfe32ad16f009fb67d68c305900bd4910129998f607e8",
+    "implementation-stage2-status.json": "c8c2cd9d23d303845c752d4422110ad7b439da54c68541c36f74050d3f5bf537",
+    "last-rehearsal-site-gate.json": "6f94d90013ed1057d9e80c3af8d58c93b6c25a28732afab0f23b3594dfae41b3",
+    "plan.json": "56cc0383fb8972e79006b1c52d3682d8099814324c5bb1e796b3c8a1cbf9a695",
+    "review.csv": "5f2ff0dceb5509daa5bb68bb92ef99d5d6574504407747ceced13dbcdec28184",
+    "review.md": "e4cd0118ed10496230c6b5a01352b747801b117eff8abfe92e999814315e490f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "dd08cd7fd0b9de72b42dfe32ad16f009fb67d68c305900bd4910129998f607e8",
+    "implementation-stage2-status.json": "bac3086c573c7019ec74142a559a609e53695b688a91f021e0f5d1f276d7dad5",
+    "last-rehearsal-site-gate.json": "6f94d90013ed1057d9e80c3af8d58c93b6c25a28732afab0f23b3594dfae41b3",
+    "plan.json": "7d63a228c26d84bbf4edd65ca58570876cbc6c4499538b63d6deed00a25a9801",
+    "review.csv": "5f2ff0dceb5509daa5bb68bb92ef99d5d6574504407747ceced13dbcdec28184",
+    "review.md": "2690033077b261d38f5ce24abf768528467be9ab0d570dbf7d7fcee0c34919eb"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "PASS",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 71,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": 85,
+  "command_exit_code": 0,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+    "runtime_decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "duquesne",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 48,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 48,
+      "discrepancy": 83,
+      "identity": 12,
+      "publication": 1
+    },
+    "decision_count": 145,
+    "decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+    "discrepancies_to_add": 83,
+    "existing_game_matches": 809,
+    "new_canonical_games": 1920,
+    "plan_path": ".onboarding/duquesne/plan.json",
+    "review_path": ".onboarding/duquesne/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 36,
+      "MATCH_CANONICAL:CBBG-0040724": 1,
+      "MATCH_CANONICAL:CBBG-0081216": 1,
+      "MATCH_CANONICAL:CBBG-0119195": 1,
+      "MATCH_CANONICAL:CBBG-0119314": 1,
+      "MATCH_CANONICAL:CBBG-0136825": 1,
+      "MATCH_CANONICAL:CBBG-0136851": 1,
+      "MATCH_CANONICAL:CBBG-0136866": 1,
+      "MATCH_CANONICAL:CBBG-0144125": 1,
+      "MATCH_CANONICAL:CBBG-0170451": 1,
+      "MATCH_CANONICAL:CBBG-0170575": 1,
+      "MATCH_CANONICAL:CBBG-0184852": 1,
+      "MATCH_CANONICAL:CBBG-0187354": 1,
+      "NOT_APPLICABLE": 33,
+      "USE_SOURCE": 62,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "b38327f523f3faebebbeaa13e2d8a11822b105a97753a637afffbcfaa64351ca",
+    "changed_path_count": 85
+  },
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 36,
+      "MATCH_CANONICAL:CBBG-0040724": 1,
+      "MATCH_CANONICAL:CBBG-0081216": 1,
+      "MATCH_CANONICAL:CBBG-0119195": 1,
+      "MATCH_CANONICAL:CBBG-0119314": 1,
+      "MATCH_CANONICAL:CBBG-0136825": 1,
+      "MATCH_CANONICAL:CBBG-0136851": 1,
+      "MATCH_CANONICAL:CBBG-0136866": 1,
+      "MATCH_CANONICAL:CBBG-0144125": 1,
+      "MATCH_CANONICAL:CBBG-0170451": 1,
+      "MATCH_CANONICAL:CBBG-0170575": 1,
+      "MATCH_CANONICAL:CBBG-0184852": 1,
+      "MATCH_CANONICAL:CBBG-0187354": 1,
+      "NOT_APPLICABLE": 33,
+      "USE_SOURCE": 62,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "b38327f523f3faebebbeaa13e2d8a11822b105a97753a637afffbcfaa64351ca",
+    "decision_count": 145,
+    "path": "/tmp/remote-stage2-proposal-map-9vc9fj10/recommendation-map.json",
+    "sha256": "70373797a0bef0317bb1d0b92c7b9303e023a127c42d11b20f34a030668c56c9"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/duquesne/duquesne-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/duquesne-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "70373797a0bef0317bb1d0b92c7b9303e023a127c42d11b20f34a030668c56c9",
+  "request_id": "duquesne-stage2-proposal-0001",
+  "request_sha256": "d49809c07eb06dae3b154576dad7eca9cc8ba285000867ca86d9d00976888f3a",
+  "runtime_commit_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "runtime_decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+    "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+    "tools/onboarding_hardening.py": "796d100669c1030955c72bee42f7302fdec783dacf554f7aa29b9dcf2995eb79",
+    "tools/onboarding_plan.py": "e7cca1ed0195b85e56084c71f57aa3cc74c8dac6cbc7fdb08c58345f256ecf59",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 1,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 3,
+      "neutral_missing_venue": 59,
+      "public_gap_rows": 63,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 1,
+      "researched_unresolved_home_venue_rows": 1,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2741,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 3
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0191225"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0192537",
+        "CBBG-0192538",
+        "CBBG-0192539"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0001370",
+        "CBBG-0009658",
+        "CBBG-0010045",
+        "CBBG-0028479",
+        "CBBG-0040724",
+        "CBBG-0042288",
+        "CBBG-0050906",
+        "CBBG-0052671",
+        "CBBG-0066370",
+        "CBBG-0069339",
+        "CBBG-0077028",
+        "CBBG-0114591"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0191225"
+      ],
+      "unknown_site_type": [
+        "CBBG-0191237",
+        "CBBG-0191238",
+        "CBBG-0191243"
+      ]
+    },
+    "history_start_season": "1913-1914",
+    "school_key": "duquesne",
+    "source_site_counts": {
+      "home_missing_venue": 1,
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 64,
+      "neutral_missing_venue": 60,
+      "researched_gap_rows": 64,
+      "researched_unresolved_home_venue_rows": 1,
+      "unaccounted_gap_rows": 0,
+      "unknown_site_type": 3
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2741
+    },
+    "status": "PASS",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/duquesne/duquesne-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_authority_sha256": "a6f08756475da6fabe01d3387df2ebc83a9d99cdd2023fcf1a8542f860ad4b86",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+  "target_tree_sha": "093fa7d1225b87f04f8292c9e3077f90a64aa79a",
+  "tracked_mutation_proof": {
+    "after_head_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+    "after_status": "",
+    "after_tree_sha": "093fa7d1225b87f04f8292c9e3077f90a64aa79a",
+    "before_head_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+    "before_status": "",
+    "before_tree_sha": "093fa7d1225b87f04f8292c9e3077f90a64aa79a",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

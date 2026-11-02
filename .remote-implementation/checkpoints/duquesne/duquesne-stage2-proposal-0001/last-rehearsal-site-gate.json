@@ -1,0 +1,69 @@
+{
+  "counts": {
+    "home_missing_venue": 1,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 3,
+    "neutral_missing_venue": 59,
+    "public_gap_rows": 63,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 1,
+    "researched_unresolved_home_venue_rows": 1,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2741,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 3
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0191225"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0192537",
+      "CBBG-0192538",
+      "CBBG-0192539"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0001370",
+      "CBBG-0009658",
+      "CBBG-0010045",
+      "CBBG-0028479",
+      "CBBG-0040724",
+      "CBBG-0042288",
+      "CBBG-0050906",
+      "CBBG-0052671",
+      "CBBG-0066370",
+      "CBBG-0069339",
+      "CBBG-0077028",
+      "CBBG-0114591"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0191225"
+    ],
+    "unknown_site_type": [
+      "CBBG-0191237",
+      "CBBG-0191238",
+      "CBBG-0191243"
+    ]
+  },
+  "history_start_season": "1913-1914",
+  "school_key": "duquesne",
+  "source_site_counts": {
+    "home_missing_venue": 1,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 64,
+    "neutral_missing_venue": 60,
+    "researched_gap_rows": 64,
+    "researched_unresolved_home_venue_rows": 1,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 3
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2741
+  },
+  "status": "PASS",
+  "warnings": []
+}
