@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "merge_parent_onboarding": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "merge_sha": "008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "2bf918e16fc628e39d2e4a6f32cb5f3bb23d64c028b158a294a330e41068db74",
+  "owner_gate_2_verification_sha256": "9d03494aa9c6a6e566860690a5c98519a940ea8173359aa60b70779aabd006dd",
+  "pr_head_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "pr_number": 433,
+  "production_deployment_id": 7495318328,
+  "production_json_checked_count": 92,
+  "production_proof": true,
+  "production_proof_sha256": "ad63c45236b6db918efb17c9dc48a59635316da67760268e0f4db645ae0d5288",
+  "protected_main_sha": "008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d",
+  "request_id": "dayton-release-production-proof-0001",
+  "request_sha256": "541d33927de5174eb2dc02d026b7214dda242ea36ff0f857d56a000fba6a956c",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "status": "PRODUCTION_PROOF_PASS"
+}
