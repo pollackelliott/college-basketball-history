@@ -535,11 +535,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
     "recommendation_map_sha256": "54d92279858dd9610591cc0a85d431ac1151dfed95655a9094cd55590eee9525",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "davidson-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
     "school_key": "davidson",

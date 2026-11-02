@@ -1,0 +1,45 @@
+{
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "ac11dd446e8e4073b5185fa5c052b464026068ddbf88ce31ea6155a5547cc5cf",
+    "implementation-stage2-status.json": "44862aacee365fcc562f23e561ddaa314d488ae105e178d31cef7583999dca42",
+    "plan.json": "ff9b9aed548c29e23531ae3f85772d3f03915bd652174f6b0bf7e32856d98203",
+    "review.csv": "e3fcfbf5776f05c41c088cd002fd76bc10e92255b8e728b9406fab8bdfbc038f",
+    "review.md": "0b9871339544b6ebfb8825a04ec5c8ed70d442fd219b0deb19cc05fc2bb21a3f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "ac11dd446e8e4073b5185fa5c052b464026068ddbf88ce31ea6155a5547cc5cf",
+    "implementation-stage2-status.json": "3533db94a63ac3d1ba26483114d2f1c272a181c604ad6e06aa15e9d6307e5647",
+    "plan.json": "87ebdad8d90641cfda9ccd11fd0dddf33f4b3cf415095625148f3a0cfea18d82",
+    "review.csv": "e3fcfbf5776f05c41c088cd002fd76bc10e92255b8e728b9406fab8bdfbc038f",
+    "review.md": "81e9967433cc1b3f4363517056fbcd1798bd1a7d87b3eca67422f9f8493ee3d1"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "runtime_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "recommendation_map_sha256": "54d92279858dd9610591cc0a85d431ac1151dfed95655a9094cd55590eee9525",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "davidson-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "target_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+  "tracked_stage2_mutation": "NONE"
+}
