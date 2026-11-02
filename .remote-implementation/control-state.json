@@ -266,17 +266,18 @@
     "davidson-release-readiness-0001",
     "davidson-release-preview-verify-0001",
     "davidson-release-gate2-approval-0001",
-    "davidson-release-production-proof-0001"
+    "davidson-release-production-proof-0001",
+    "duquesne-stage1-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "duquesne-stage1-0001",
+  "active_request_sha256": "c35e75bf5b2f8b8539d73c13264f1a6e09491c5cad8ae01d3cae6ac650f335f1",
+  "active_school_key": "duquesne",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -557,8 +558,11 @@
     "request_id": "davidson-release-production-proof-0001",
     "school_key": "davidson"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41534523501",
+  "lock_acquisition_request_commit": "2d31d81cd5b16f9214907a8203cfb7b986f7628e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
