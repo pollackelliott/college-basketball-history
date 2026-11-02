@@ -262,18 +262,19 @@
     "davidson-stage2-gate1-fill-0001",
     "davidson-stage2-preseal-rehearsal-0001",
     "davidson-stage2-gate1-seal-0001",
-    "davidson-stage2-sealed-apply-0001"
+    "davidson-stage2-sealed-apply-0001",
+    "davidson-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "davidson-release-readiness-0001",
+  "active_request_sha256": "5613abe9ac06f6e75d7fff711fc2aa4ecfd59f884d56cfd49fa9c14f4ace928c",
+  "active_school_key": "davidson",
+  "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -553,8 +554,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/davidson/davidson-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "a68d24dd75db0cc70d1d8b29b9d6023871c06932b36f0385d2438ac654e6138a"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41520610138",
+  "lock_acquisition_request_commit": "e2a7cbeb22b8fab8b99c2b2e888e48eaaff9466d",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
