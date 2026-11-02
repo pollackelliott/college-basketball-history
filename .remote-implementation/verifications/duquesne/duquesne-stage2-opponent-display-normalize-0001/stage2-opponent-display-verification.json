@@ -1,0 +1,54 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "de5e466c79169f1851f0936502926cf92a8d780df21d55c0e7c93811273449e4",
+    "implementation-stage2-status.json": "0b8f35b5f294639ad724b1f038a3e17dc17a953afaa1c53da00377427774daa2",
+    "plan.json": "56cc0383fb8972e79006b1c52d3682d8099814324c5bb1e796b3c8a1cbf9a695",
+    "review.csv": "5f2ff0dceb5509daa5bb68bb92ef99d5d6574504407747ceced13dbcdec28184",
+    "review.md": "e4cd0118ed10496230c6b5a01352b747801b117eff8abfe92e999814315e490f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "de5e466c79169f1851f0936502926cf92a8d780df21d55c0e7c93811273449e4",
+    "implementation-stage2-status.json": "5d13f02dd1cb96d81a0b33361f11b655979093862c22a10eaca5e00cb01b30cc",
+    "plan.json": "ebb789e9678d79cb972478ecdae402746da1dddc69d58eda2725af4383234ad8",
+    "review.csv": "5f2ff0dceb5509daa5bb68bb92ef99d5d6574504407747ceced13dbcdec28184",
+    "review.md": "c3c7e153b8556d143804a4c67a4e5146f00f4e42cb69f12a411a7dc860f69e4e"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/duquesne/opponents.csv",
+    "schools/duquesne/source-games.csv"
+  ],
+  "decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+  "expected_blocker_keys": [
+    "brooklyn-knights-of-columbus",
+    "central-state-ohio",
+    "franklin-college",
+    "norfolk-naval-base",
+    "oklahoma-city",
+    "rensselaer",
+    "saint-joseph-s-indiana",
+    "st-johns-college-maryland",
+    "wayne-state"
+  ],
+  "field_level_proof_sha256": "69e07948c97808d7bfdc7be414c95f28dcbd20fa114550850452e4bd20b02f18",
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "80f869105121004c866f35b2c93507f2595844811822752b32c663e285766326",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "duquesne-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/duquesne-onboarding",
+  "target_predecessor_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "target_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+  "target_tree_sha": "093fa7d1225b87f04f8292c9e3077f90a64aa79a",
+  "tracked_stage2_mutation": "NONE"
+}
