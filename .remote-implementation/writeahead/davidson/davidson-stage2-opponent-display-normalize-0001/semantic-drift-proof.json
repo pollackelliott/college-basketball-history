@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "integration_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "school_key": "davidson",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "integration_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "school_key": "davidson",
+    "status": "PASS"
+  }
+}

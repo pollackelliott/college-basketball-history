@@ -1,0 +1,345 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 3,
+  "change_row_count": 4,
+  "changes": [
+    {
+      "authority_names": [
+        "Belmont Abbey College"
+      ],
+      "authority_signature": "belmontabbeycollege",
+      "canonical_opponent_key": "belmont-abbey",
+      "from_names": [
+        "Belmont Abbey"
+      ],
+      "target_row_count": 1,
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "authority_names": [
+        "Guilford College"
+      ],
+      "authority_signature": "guilfordcollege",
+      "canonical_opponent_key": "guilford",
+      "from_names": [
+        "Guilford"
+      ],
+      "target_row_count": 2,
+      "to_name": "Guilford College"
+    },
+    {
+      "authority_names": [
+        "Mount Saint Mary College (NY)"
+      ],
+      "authority_signature": "mountsaintmarycollegeny",
+      "canonical_opponent_key": "mount-saint-mary-ny",
+      "from_names": [
+        "Mount Saint Mary (N.Y.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Mount Saint Mary College (NY)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "davidson",
+  "source_game_display_change_keys": 3,
+  "source_game_display_change_rows": 49,
+  "source_game_display_changes": [
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1908-09-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1915-16-007",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1915-16-010",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1916-17-007",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1916-17-015",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1917-18-006",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1917-18-007",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1918-19-006",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1919-20-002",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1920-21-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1920-21-012",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1921-22-010",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1922-23-010",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1922-23-016",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1923-24-006",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1923-24-016",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1924-25-015",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1924-25-021",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1925-26-008",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1926-27-010",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1927-28-004",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1927-28-016",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1928-29-009",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1930-31-009",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1931-32-003",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1936-37-014",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1937-38-011",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1938-39-016",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1939-40-012",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1940-41-023",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1941-42-013",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1941-42-017",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1942-43-007",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1943-44-011",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1944-45-003",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1946-47-009",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1953-54-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1954-55-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1954-55-002",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1955-56-007",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1955-56-019",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1956-57-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1956-57-007",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "DAV-S1-1961-62-013",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-1999-00-002",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Mount Saint Mary (N.Y.)",
+      "normalized_opponent_key": "mount-saint-mary-ny",
+      "source_game_id": "DAV-S1-2006-07-011",
+      "to_name": "Mount Saint Mary College (NY)"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-2008-09-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-2011-12-001",
+      "to_name": "Guilford College"
+    },
+    {
+      "from_name": "Guilford",
+      "normalized_opponent_key": "guilford",
+      "source_game_id": "DAV-S1-2022-23-001",
+      "to_name": "Guilford College"
+    }
+  ],
+  "status": "PASS"
+}

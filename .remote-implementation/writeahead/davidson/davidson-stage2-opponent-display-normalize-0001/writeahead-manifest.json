@@ -1,0 +1,67 @@
+{
+  "allowed_paths": [
+    "schools/davidson/opponents.csv",
+    "schools/davidson/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/davidson/opponents.csv": "c46c70cdccc006d2c0b0f290dde7f6bbd59b59948626a4a05c1938e1728f9e1d",
+    "schools/davidson/source-games.csv": "fb26b1d55db072f84a02d90b4b72f0cbe4c938db720e1577010d0250ef9c0418"
+  },
+  "changed_paths": [
+    "schools/davidson/opponents.csv",
+    "schools/davidson/source-games.csv"
+  ],
+  "commit_message": "Normalize davidson historical opponent display representation",
+  "expected_blocker_keys": [
+    "belmont-abbey",
+    "guilford",
+    "mount-saint-mary-ny"
+  ],
+  "expected_target_predecessor_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "field_level_proof_sha256": "48e91800cf38857d0a40e32db06c57a53b42dbda8528208df59b1d181c2769f4",
+  "global_lock_commit": "394d62f6f9e7e0e0e87a2e65a94297e560fb80db",
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "01fe161acc6c9dfd8e83dfb3bbaa0a5d6c86ec1e242c72260e93882a3d7ff7de",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "prepared_parent_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "prepared_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+  "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "repository_validation": "PASS",
+  "request_id": "davidson-stage2-opponent-display-normalize-0001",
+  "request_sha256": "4e9b81bea225b15a81d78ed0348b9bf8d56a1538775447008e723e630b691aa9",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_drift_after": {
+    "baseline_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "integration_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "school_key": "davidson",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+    "integration_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "school_key": "davidson",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "d13b39e4d10eda4193d5d43ff856965f2c82e6c2e99a595992d9a03157fc4534",
+    "field-level-proof.json": "48e91800cf38857d0a40e32db06c57a53b42dbda8528208df59b1d181c2769f4",
+    "integration-freeze.json": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+    "normalization-report.json": "01fe161acc6c9dfd8e83dfb3bbaa0a5d6c86ec1e242c72260e93882a3d7ff7de",
+    "semantic-drift-proof.json": "77c741a850dd9a2e9bc922f60b1baaf00281ceb091cc11e774d4d510dfb0df5d"
+  },
+  "source_game_normalized_name_row_count": 49,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/davidson/davidson-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "d13b39e4d10eda4193d5d43ff856965f2c82e6c2e99a595992d9a03157fc4534",
+  "target_branch": "data/davidson-onboarding"
+}
