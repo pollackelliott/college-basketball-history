@@ -1,5 +1,22 @@
 # Codex repository instructions
 
+## Control Center succession
+
+When the owner identifies the conversation as the College Basketball History
+Control Center, says **"New Control Center needed"**, or requests a successor
+Control Center, read `docs/control-center-succession.md` before taking
+repository-specific action.
+
+Begin with the bounded read-only recovery defined there. Owner-supplied school
+status lists, predecessor messages, and handoffs are recovery locators rather
+than durable authority. Authenticate current protected `main`, current
+`AGENTS.md`, the exact global remote Implementation control, and relevant
+hash-bound checkpoints before declaring current status.
+
+Succession alone never authorizes a new Research lane, a second serialized
+Implementation school, maintenance, an owner gate, replay of a completed
+request, or repository mutation.
+
 ## School onboarding
 
 Use the permanent sealed-plan workflow for every new school. Do not recreate the
