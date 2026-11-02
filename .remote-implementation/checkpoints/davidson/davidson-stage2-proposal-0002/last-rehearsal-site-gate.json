@@ -1,0 +1,105 @@
+{
+  "counts": {
+    "home_missing_venue": 26,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 37,
+    "postseason_missing_venue": 2,
+    "public_gap_rows": 82,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 26,
+    "researched_unresolved_home_venue_rows": 26,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2902,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 17
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0092128",
+      "CBBG-0092146",
+      "CBBG-0092169",
+      "CBBG-0092179",
+      "CBBG-0092259",
+      "CBBG-0092292",
+      "CBBG-0092304",
+      "CBBG-0092647",
+      "CBBG-0094930",
+      "CBBG-0094947",
+      "CBBG-0094982",
+      "CBBG-0094994"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0092622"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0023650",
+      "CBBG-0030441",
+      "CBBG-0043826",
+      "CBBG-0064058",
+      "CBBG-0072268",
+      "CBBG-0092341",
+      "CBBG-0092622",
+      "CBBG-0123969",
+      "CBBG-0127691",
+      "CBBG-0127702",
+      "CBBG-0127715",
+      "CBBG-0127727"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0189546",
+      "CBBG-0189582"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0092128",
+      "CBBG-0092146",
+      "CBBG-0092169",
+      "CBBG-0092179",
+      "CBBG-0092259",
+      "CBBG-0092292",
+      "CBBG-0092304",
+      "CBBG-0092647",
+      "CBBG-0094930",
+      "CBBG-0094947",
+      "CBBG-0094982",
+      "CBBG-0094994"
+    ],
+    "unknown_site_type": [
+      "CBBG-0188700",
+      "CBBG-0188701",
+      "CBBG-0188711",
+      "CBBG-0188712",
+      "CBBG-0188713",
+      "CBBG-0188725",
+      "CBBG-0188731",
+      "CBBG-0188748",
+      "CBBG-0188768",
+      "CBBG-0188774",
+      "CBBG-0188801",
+      "CBBG-0188828"
+    ]
+  },
+  "history_start_season": "1908-1909",
+  "school_key": "davidson",
+  "source_site_counts": {
+    "home_missing_venue": 26,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 82,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 37,
+    "postseason_missing_venue": 2,
+    "researched_gap_rows": 82,
+    "researched_unresolved_home_venue_rows": 26,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 17
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2899
+  },
+  "status": "PASS",
+  "warnings": []
+}
