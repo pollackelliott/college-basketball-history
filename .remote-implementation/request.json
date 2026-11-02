@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "davidson-release-preview-verify-0001",
+  "request_id": "davidson-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "davidson",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "b068f76c3626f9389b316aef6f78e3a1385c6046",
-  "previous_control_state_sha256": "3d8e7e62c8e4109e82d862e05bdc3e253807847cd39268c3e33c6609cd1dc7a9",
+  "previous_control_state_commit": "b482c22fee6c9051cefdaa96dbf0c339398e30dc",
+  "previous_control_state_sha256": "468d76f0d14c9b409de04ab1cca09cda1042d4742b1c2a67bc97076d74a22acd",
   "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
   "target_branch": "data/davidson-onboarding",
   "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/davidson/davidson-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "4b6ad8f5837267d9686c96941c1d3f18180af31483dce1fbc67974a85d51cd3c"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/davidson/davidson-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "84dcfe059b900faaa472091d7efc9bc2b497a78764964c9cf779847ab6c0f7c9"
-  },
+  "pr_number": 436,
   "approved_plan_hash": "f0f9b005e1ab2cf4968f677b88229fb6e755a2710fead575ef48aa560ce1ac3b",
   "release_manifest_sha256": "10dadce774240c65c8ecdf2a8b0250903beb296af5418ccaf30eef5aeb124a0a",
-  "pr_number": 436,
+  "preview_deployment_id": 7502141128,
+  "preview_url": "https://college-basketball-history-hc9c9aas7-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/davidson/davidson-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "529d13dfcb6ea07027ec878ef364ff15adbd0880f1ce3dc770573a280f864469"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/davidson/davidson-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "7acdc648a690d991404f0bb3215d1adc004b5cff5d12e629752380f881778f6c"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement in the Davidson Implementation conversation: “APPROVED. Proceed” immediately after being presented the exact independently fresh-verified Owner Gate 2 packet for Davidson PR #436 at head fdd1f038c321f80faf9ea6de5038c49b1ff3231f and successful Vercel Preview deployment 7502141128 at https://college-basketball-history-hc9c9aas7-elliott-pollacks-projects.vercel.app, with the Owner Gate 2 approval requirement explicitly stated.",
+    "preview_checkpoint_sha256": "529d13dfcb6ea07027ec878ef364ff15adbd0880f1ce3dc770573a280f864469",
+    "preview_verification_sha256": "7acdc648a690d991404f0bb3215d1adc004b5cff5d12e629752380f881778f6c",
+    "pr_number": 436,
+    "pr_head_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+    "preview_deployment_id": 7502141128,
+    "preview_url": "https://college-basketball-history-hc9c9aas7-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Davidson serialized Implementation lane — exact PR-head Preview verification",
-    "authorization": "Owner authorized Davidson release preparation through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #436 only, bound to the exact fresh-verified readiness authority and exact sealed Davidson head. No Gate 2 approval, merge, Production, mutation, recovery, or unrelated authority is granted."
+    "origin": "ChatGPT Davidson serialized Implementation lane — owner-authorized exact Gate 2 approval",
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” in direct response to the exact fresh-verified Davidson PR #436 Preview at head fdd1f038c321f80faf9ea6de5038c49b1ff3231f and Vercel Preview deployment 7502141128. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, maintenance, unrelated repair, or another school."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
@@ -41,8 +50,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
