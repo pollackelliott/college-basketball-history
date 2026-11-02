@@ -282,7 +282,7 @@
   "active_request_sha256": "78a98c8759a7dc5600e10fcbb19cf9364afc8783bb959af13500c6bdee49202f",
   "active_school_key": "duquesne",
   "active_target_branch": "data/duquesne-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "ebd72c9b94322eba4485a0f138b3602633a148b3",
   "active_writeahead_path": ".remote-implementation/writeahead/duquesne/duquesne-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "36fafe916b7bb7a79644d04cab69152f18e0ee56463683378f3d018591937929",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
