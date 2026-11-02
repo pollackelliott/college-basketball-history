@@ -256,7 +256,7 @@
     "davidson-phase0-0001"
   ],
   "active_expected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
-  "active_lock_commit": null,
+  "active_lock_commit": "107079326df78c1f1e009b28f51adcfcbe24eecc",
   "active_lock_owner": "github-actions:41481375824:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
