@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "davidson",
+  "previous_control_state_commit": "46d5215e82a44b8e68a63bdabed98040265c880b",
+  "previous_control_state_sha256": "84baa85abffca663b433864e06db80ef806c08d809c26a39b94bddb9c42c737d",
+  "expected_protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "research_checkpoint": {
+    "sha256": "a634fd0a11b9aac31ce4a13f9ce7bf021696871b04d45e6b12488c0d5a070428",
+    "research_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "b738a5a481a5019d522fb62ede3711a5c5e8b847",
+      "path_prefix": ".remote-implementation/transports/davidson/davidson-stage1-0001-final/piece-",
+      "part_count": 4
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/davidson/davidson-stage1-0002/venue-reconciliation.json",
+    "sha256": "30b20e76315c516162a518d2224729ed146d19b458f082076414223bfe4b755d"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation lane — deterministic Stage 1 current-main venue reuse reconciliation",
+    "authorization": "Same owner-authorized Davidson Stage 1 phase. This second read-only inventory applies the complete 11-key representation-only venue reconciliation discovered by davidson-stage1-0001 after generic loader repair PR #434. No Research change, Phase 0, shared/global data mutation, Stage 2, owner gate, recovery, release, protected-main direct mutation, or other-school authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
