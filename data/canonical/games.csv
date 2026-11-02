@@ -14296,7 +14296,7 @@ CBBG-0014295,2019-2020,2019-11-15,EXACT,kansas,monmouth,112,57,kansas,0,TEAM_A_H
 CBBG-0014296,2019-2020,2019-11-19,EXACT,east-tennessee-state,kansas,63,75,kansas,0,TEAM_B_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014297,2019-2020,2019-11-25,EXACT,chaminade,kansas,63,93,kansas,0,NEUTRAL,,,,Maui,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014298,2019-2020,2019-11-26,EXACT,byu,kansas,56,71,kansas,0,NEUTRAL,,lahaina-civic-center,VEN-000108,Lahaina,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=byu/BYURAW-02931;venue_key=lahaina-civic-center;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0014299,2019-2020,2019-11-27,EXACT,dayton,kansas,84,90,kansas,1,NEUTRAL,,,,Maui,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0014299,2019-2020,2019-11-27,EXACT,dayton,kansas,84,90,kansas,1,NEUTRAL,,,,Maui,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014300,2019-2020,2019-12-07,EXACT,colorado,kansas,58,72,kansas,0,TEAM_B_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014301,2019-2020,2019-12-10,EXACT,kansas,milwaukee,95,68,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0014302,2019-2020,2019-12-14,EXACT,kansas,kansas-city,98,57,kansas,0,TEAM_A_HOME,kansas,t-mobile-center,VEN-000202,Kansas City,MO,REGULAR_SEASON,,,,PROVISIONAL,
