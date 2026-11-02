@@ -274,7 +274,7 @@
   "active_request_sha256": "d800b9a3646629188ae1ba64c784abb5c6ec210d41ec83cb39df80d0e8fdb1fb",
   "active_school_key": "davidson",
   "active_target_branch": "data/davidson-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "7d03ab06597e1e04d9c23ae5989d8c4fb8996b3a",
   "active_writeahead_path": ".remote-implementation/writeahead/davidson/davidson-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "a68d24dd75db0cc70d1d8b29b9d6023871c06932b36f0385d2438ac654e6138a",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
