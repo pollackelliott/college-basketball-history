@@ -5093,7 +5093,7 @@
     },
     {
       "opponent_key": "turners",
-      "opponent_name": "Turner’s",
+      "opponent_name": "Turners",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -6938,7 +6938,7 @@
       "game_date": "1912-02-03",
       "date_precision": "EXACT",
       "opponent_key": "turners",
-      "opponent_name": "Turner’s",
+      "opponent_name": "Turners",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 37,
