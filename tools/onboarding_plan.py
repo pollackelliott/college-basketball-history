@@ -2926,6 +2926,19 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         identity_counts[status] += 1
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
+            existing = canonical_by_id.get(game_id, {})
+            city = existing.get("site_city", "").strip()
+            state = existing.get("site_state", "").strip()
+            if bool(city) != bool(state):
+                blockers.append(
+                    f"PREEXISTING_PARTIAL_CANONICAL_LOCATION {game_id}: "
+                    f"city={city or '[blank]'}; state={state or '[blank]'}; "
+                    "a confident source match will touch this canonical game, "
+                    "but approved reconciliation does not repair existing "
+                    "canonical geography. Require source-supported shared-data "
+                    "maintenance before Owner Gate 1; do not infer geography "
+                    "or silently change the recommendation map."
+                )
         elif status == ingest_school.REVIEW:
             source_id = source.get("source_game_id", "").strip()
             for candidate in identity_candidates:
