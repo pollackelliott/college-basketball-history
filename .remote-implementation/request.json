@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "dayton-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "dayton",
-  "previous_control_state_commit": "1104a74687f70f72e61c7122c8631ae232dda329",
-  "previous_control_state_sha256": "9a8061ae3ea1f011c0a72e9dc8b459e0754275770e40a07dbdb01643fa123e98",
-  "expected_protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "previous_control_state_commit": "9f516c98ca5eaf49b31f0a717932b893a7043a2c",
+  "previous_control_state_sha256": "cc0051a83f89449de3c7f967fb782bf3e8a3360844a4f3ecd9ecb55f89ffa821",
+  "expected_protected_main_sha": "008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d",
   "target_branch": "data/dayton-onboarding",
   "target_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
   "pr_number": 433,
-  "approved_plan_hash": "da418c22981a2943c31dbea4aff83467ad51793e066ded461a538dc5a2d6f070",
-  "release_manifest_sha256": "970edebbed4cc2efbd76f05229cd70a9718a7ff40e0092b8b57929e298c442ea",
-  "preview_deployment_id": 7494076893,
-  "preview_url": "https://college-basketball-history-l86lnl005-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/dayton/dayton-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "0eb9e7cc1dab4920257f4dc9f243a80b4ec5845c82029cbc39842f901c47f171"
+  "merge_sha": "008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/dayton/dayton-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "2bf918e16fc628e39d2e4a6f32cb5f3bb23d64c028b158a294a330e41068db74"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/dayton/dayton-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "d5f6542ac790130e62fc5aa3a6402af05dd507a65ab38495709565f7b49e4830"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement in the Dayton Implementation conversation: “APPROVED. Proceed” immediately after being presented the exact independently fresh-verified Owner Gate 2 packet for Dayton PR #433 at head 8d15886f81329d355ab3f16ff00c03b4779d08ba and successful Vercel Preview deployment 7494076893 at https://college-basketball-history-l86lnl005-elliott-pollacks-projects.vercel.app, with the Owner Gate 2 approval requirement explicitly stated.",
-    "preview_checkpoint_sha256": "0eb9e7cc1dab4920257f4dc9f243a80b4ec5845c82029cbc39842f901c47f171",
-    "preview_verification_sha256": "d5f6542ac790130e62fc5aa3a6402af05dd507a65ab38495709565f7b49e4830",
-    "pr_number": 433,
-    "pr_head_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
-    "preview_deployment_id": 7494076893,
-    "preview_url": "https://college-basketball-history-l86lnl005-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/dayton/dayton-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "9d03494aa9c6a6e566860690a5c98519a940ea8173359aa60b70779aabd006dd"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Dayton serialized Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating “APPROVED. Proceed” in direct response to the exact fresh-verified Dayton PR #433 Preview at head 8d15886f81329d355ab3f16ff00c03b4779d08ba and Vercel Preview deployment 7494076893. This request records only that exact Gate 2 approval and fresh-reverifies the same PR/head/Preview. It does not itself merge, perform Production proof, mutate tracked basketball data, authorize recovery, maintenance, unrelated repair, or another school."
+    "origin": "ChatGPT Dayton serialized Implementation lane — exact post-merge Production proof",
+    "authorization": "Owner's explicit Gate 2 approval authorized the final release phase for exact PR #433 head 8d15886f81329d355ab3f16ff00c03b4779d08ba and Preview deployment 7494076893. The lane independently reauthenticated fresh-verified Owner Gate 2 approval, rechecked protected main and clean PR #433, then merged exactly that approved head once. GitHub created verified two-parent merge 008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d with first parent 428fa4ba980f3454477ed96ce3d71fcaee0ff0fd and second parent 8d15886f81329d355ab3f16ff00c03b4779d08ba; protected main is exactly 008fecaed9cfb15d2c8aaf31b4e4901ec9e1bf1d. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge replay, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, new owner-approval authority, unrelated repair, or other-school authority."
   },
   "authority": {
     "phase0": false,
@@ -53,9 +40,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
