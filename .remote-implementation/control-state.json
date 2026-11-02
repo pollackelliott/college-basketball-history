@@ -489,11 +489,11 @@
   "current_sequence": 228,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "dayton-stage2-current-main-refresh-0003",
     "school_key": "dayton",
     "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",

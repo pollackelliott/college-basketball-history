@@ -1,0 +1,47 @@
+{
+  "changed_file_sha256": {
+    "AGENTS.md": "26393ed44259b2c676d0cebedaa6e52d16ca3b63c1cda68a342837cbe0b151e9",
+    "docs/control-center-succession.md": "6a95b6beab5386ec310520dada3c5232ff15414aaf1418bab36b3b187ec943e9",
+    "tests/test_control_center_status.py": "49084250b9052be1d4e4a291ad2d3f1adc439b1ab05a396d90b925f53624f999",
+    "tests/test_reciprocal_only_home_site_patch_full_transaction.py": "a6a9a4a746f6bd5e01213270e630f3393480e2ce1cebb6be58eba8e9b9048c70",
+    "tools/control_center_status.py": "e695798a50664879fa705812fe370d577835de0f0dfe82e51887da6623afdaf1",
+    "tools/onboarding_plan.py": "e7cca1ed0195b85e56084c71f57aa3cc74c8dac6cbc7fdb08c58345f256ecf59"
+  },
+  "changed_paths": [
+    "AGENTS.md",
+    "docs/control-center-succession.md",
+    "tests/test_control_center_status.py",
+    "tests/test_reciprocal_only_home_site_patch_full_transaction.py",
+    "tools/control_center_status.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
+  "package_member_sha256": {
+    "conferences.csv": "60b74601143ca6417af2d807969307b76d54dacaf9ed6c7a83ae84d11f87b8f1",
+    "notes.md": "cb514f417ec5db14c6d5488fcd58aaa52b2fcd9d70e4f535d6c9992f97c6232b",
+    "opponents.csv": "2a61839566e92a544d7ddf40059be5fce893db0402472fb16632395225dec604",
+    "source-games.csv": "84daa8e296675d5a93963e4e39b6bd2fde5f3162624aca3db7b3aec3c24964c2",
+    "source-notes.md": "5dae88d2fdd942348f15633fc70f44f09235913ede0d65ea239e92826f573110",
+    "venues.csv": "999c8e1474820ef23ee64bdc9e32ee28317b6fa16d5f8751fd2457bcd3386502"
+  },
+  "prepared_parents": [
+    "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+    "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd"
+  ],
+  "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "dayton-stage2-current-main-refresh-0003",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "target_branch": "data/dayton-onboarding",
+  "target_predecessor_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+  "target_sha": "7e667c2b588d8063150e40aec23216394d20df79",
+  "target_tree_sha": "7ab77d6dd62c143381863cf5f8619fba2d3afa22",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
