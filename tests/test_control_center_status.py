@@ -1,7 +1,7 @@
 import sys
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
@@ -78,8 +78,8 @@ class ControlCenterStatusTests(unittest.TestCase):
     ):
         remote_ref_sha.side_effect = ["main-sha", "control-sha"]
         git.side_effect = [
-            unittest.mock.Mock(stdout="local-head\n"),
-            unittest.mock.Mock(stdout=""),
+            Mock(stdout="local-head\n"),
+            Mock(stdout=""),
         ]
         cached_control_state.return_value = (
             {
