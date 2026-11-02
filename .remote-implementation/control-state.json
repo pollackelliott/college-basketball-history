@@ -265,18 +265,19 @@
     "davidson-stage2-sealed-apply-0001",
     "davidson-release-readiness-0001",
     "davidson-release-preview-verify-0001",
-    "davidson-release-gate2-approval-0001"
+    "davidson-release-gate2-approval-0001",
+    "davidson-release-production-proof-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PRODUCTION_PROOF",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "davidson-release-production-proof-0001",
+  "active_request_sha256": "d1a4c7763c04914938035fff465b554f65634d4b68764ba899df9c8da40724d9",
+  "active_school_key": "davidson",
+  "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -553,8 +554,11 @@
     "target_branch": "data/davidson-onboarding",
     "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41525428871",
+  "lock_acquisition_request_commit": "9de529c9956c2accdeb848dafd3086925f9be410",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PRODUCTION_RUNNING"
 }
