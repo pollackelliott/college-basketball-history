@@ -244,7 +244,7 @@
   "active_request_sha256": "e0beb90cd497b1fdc8e8012e71095a1d51fc0c67903cfa5215ee16e9f0d738bb",
   "active_school_key": "dayton",
   "active_target_branch": "data/dayton-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "a6ec0905d789cc0f422ec572743237e11ee71471",
   "active_writeahead_path": ".remote-implementation/writeahead/dayton/dayton-stage2-current-main-refresh-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "ceb7e3b235d6b637709406cb9479c7fd93c5012cafecc4b3b4617fa02f3d683c",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
