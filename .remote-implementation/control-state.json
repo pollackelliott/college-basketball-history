@@ -239,7 +239,7 @@
     "dayton-stage2-current-main-refresh-0002"
   ],
   "active_expected_main_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
-  "active_lock_commit": null,
+  "active_lock_commit": "1afef72ce29fdf2e1b9440b8be9f2b0a1508519d",
   "active_lock_owner": "github-actions:41388671569:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
