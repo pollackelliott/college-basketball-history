@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "davidson",
+  "previous_control_state_commit": "3dc3abe9d471b4f1162ee2d6957657ded43c22e3",
+  "previous_control_state_sha256": "71ff6ae849e4cd6efda07552e4185c078ac47aae4265e50918e075a10e328f44",
+  "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/davidson/davidson-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "3510066cc1c4a3c061cbe70048b4643f9e742af1f318dec1bacdcc3ef5e878f9"
+  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/davidson-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "54d92279858dd9610591cc0a85d431ac1151dfed95655a9094cd55590eee9525"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation Stage 2 — exact recommendation-map proposal rehearsal",
+    "authorization": "Existing owner-authorized Davidson Stage 2 phase persists through OWNER_GATE_1_READY. This request rehearses one exact 232-decision recommendation map against the independently fresh-verified blocker-free census. The map preserves canonical authority by default, recommends Davidson's accepted institutional H/A/N evidence, resolves deterministic identity pairings, independently corroborated date/source-normalization defects, the 1950-51 Clemson cross-swap, official accomplishment counts, and publication readiness. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
