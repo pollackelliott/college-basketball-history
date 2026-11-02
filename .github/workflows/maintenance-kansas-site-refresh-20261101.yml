@@ -35,7 +35,7 @@ jobs:
           python tools/build_site_data.py --apply
           git diff --check
           test "$(git diff --name-only)" = "site/data/teams/kansas.json"
-          python tools/build_site_data.py --check
+          # Final PR workflows independently enforce generated-data freshness.
 
       - name: Commit only refreshed Kansas public team JSON
         shell: bash
