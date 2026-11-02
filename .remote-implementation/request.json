@@ -1,47 +1,53 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-stage2-reconciliation-diagnostic-0001",
+  "request_id": "dayton-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "dayton",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "2b4988da4b9af30b2d3bccc6e00712d16ecc11b8",
-  "previous_control_state_sha256": "01b02f0d96773288b6b045e7292d89db656d574641afc10b6558dd4dfe4f4090",
-  "expected_protected_main_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "previous_control_state_commit": "00eaae6407bfab35fd1b257506a95d6dcf804522",
+  "previous_control_state_sha256": "8add3f72c16c665a9f99826059bb917e07a255fe2f33109c493ceb81b660cd82",
+  "expected_protected_main_sha": "0a28151cf0c193afea2641cc5bd6f5557ab76d5b",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
+    "sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "72d0ce73428ba9df2f28013c7636bc4cc148da88985b286a913382baa0957cc6"
+  },
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the guarded Dayton Stage 2 current-main refresh after PR #428 merged the generic postseason-round reconciliation adapter repair. The Control Center independently established disjoint target-only and intervening-main changed-path populations against common base 80b00278ac9add94702ac76c5fa310b95d2b1929 and confirmed no intervening protected-main change touches schools/dayton/."
+  },
   "creation_provenance": {
-    "origin": "Dayton serialized Implementation Stage 2 — blocked exact-map proposal diagnosis",
-    "authorization": "Existing owner-authorized Dayton Stage 2 phase persists through OWNER_GATE_1_READY. The exact read-only proposal rehearsal blocked only on DISCREPANCY-DAYTON-1983-84-029-POSTSEASON_ROUND with permanent-tool error 'ingested source assertion value changed'. Authorizes exactly one read-only reconciliation diagnostic for canonical game CBBG-0040899 against the fresh-verified blocked proposal checkpoint. Preserve the recommendation map, Dayton data, frozen Research authority, and historical conclusions. No tracked mutation, map rewrite, Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, or current-main refresh authority."
+    "origin": "Dayton serialized Implementation Stage 2 — Control Center disposition after PR #428",
+    "authorization": "Control Center explicitly authorized exactly one repository-defined guarded STAGE2_CURRENT_MAIN_REFRESH from Dayton predecessor 85e9e4539f413cea6193f55e09c490c71a09968d to protected main 0a28151cf0c193afea2641cc5bd6f5557ab76d5b, followed by fresh verification and fresh Stage 2 census under persisting Stage 2 authority. Preserve the immutable Research Freeze, Integration Freeze, six-file package, historical semantics, and recommendation-map meaning. No Owner Gate 1 approval, arbitrary shared-reference repair, Research mutation, sealing, apply, release, Preview, merge, or Production authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": true,
+    "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/dayton-onboarding",
-  "target_sha": "85e9e4539f413cea6193f55e09c490c71a09968d",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/dayton/dayton-stage2-proposal-0001/checkpoint-manifest.json",
-    "sha256": "2e6d30e68169d50d340d62dd422daa642858f3598ffe08dc17cafbbb4189d036"
-  },
-  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
-  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
-  "decision_universe_sha256": "7701f7c1ca1ae4c5a35a38dabdc4e71b86f54f2099e458959ea10542d1919f64",
-  "recommendation_map_sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37",
-  "canonical_game_id": "CBBG-0040899"
+  }
 }
