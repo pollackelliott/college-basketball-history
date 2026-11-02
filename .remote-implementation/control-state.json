@@ -273,7 +273,7 @@
     "duquesne-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
-  "active_lock_commit": null,
+  "active_lock_commit": "093c7ff33e6a13692f4ec6821b4b979efda89b03",
   "active_lock_owner": "github-actions:41540457436:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
