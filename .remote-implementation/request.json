@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-stage2-current-main-refresh-0003",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "dayton-stage2-census-0004",
+  "operation": "STAGE2_CENSUS",
   "school_key": "dayton",
-  "previous_control_state_commit": "ddfb9c0104f910cd445380dfc387024760c51ec1",
-  "previous_control_state_sha256": "04271bfe9a7b27fe446a12c961fac8d73989779b849909835a2cbd0548695430",
+  "previous_control_state_commit": "b4cfec5d54472eb72717c26642a160adce476255",
+  "previous_control_state_sha256": "46d35f66dbeb9a43fd5624642815d241fab4c15fda686f3c2bfb975748316362",
   "expected_protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
   "target_branch": "data/dayton-onboarding",
-  "target_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+  "target_sha": "7e667c2b588d8063150e40aec23216394d20df79",
   "phase0_successor": {
     "path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
     "sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43"
@@ -18,26 +18,21 @@
     "sha256": "72d0ce73428ba9df2f28013c7636bc4cc148da88985b286a913382baa0957cc6"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/dayton/dayton-stage2-current-main-refresh-0002/successor-manifest.json",
-    "sha256": "c04944169d45b2802214a9e94f68c7cee1402c25dd88d52a8cd43da288eb695b"
+    "path": ".remote-implementation/successors/dayton/dayton-stage2-current-main-refresh-0003/successor-manifest.json",
+    "sha256": "44556801afe93a3475bb475ee2374772731bd8b53cd441eb4c404751b8d4c413"
   },
   "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
   "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center disposition explicitly authorizes the guarded STAGE2_CURRENT_MAIN_REFRESH from Dayton predecessor f0c194f41707952791ab4a174e1e1dafaf7a5690 onto protected main 428fa4ba980f3454477ed96ce3d71fcaee0ff0fd after independently verifying zero overlap between the nine Dayton target-only paths and the six intervening protected-main paths. Authorization persists through fresh verification, fresh Stage 2 census, narrowly amended recommendation-map preparation, and exact-map proposal rehearsal to OWNER_GATE_1_READY."
-  },
   "creation_provenance": {
-    "origin": "Dayton serialized Implementation Stage 2 — Control Center-authorized refresh after PR #432 reciprocal-only HOME locality capability repair",
-    "authorization": "The Control Center explicitly authorized exactly this current-main refresh and deterministic Stage 2 continuation. Preserve the immutable Research Freeze, Integration Freeze, semantic snapshot, six Dayton package files, prior accepted historical decisions, and the original recommendation map as predecessor evidence. This request grants no Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, opponent-display normalization, or arbitrary repair authority."
+    "origin": "Dayton serialized Implementation Stage 2 — fresh census after third Control Center-authorized current-main refresh",
+    "authorization": "Control Center explicitly authorized continuation through fresh Stage 2 census, narrowly amended recommendation-map preparation, and exact-map proposal rehearsal to OWNER_GATE_1_READY after refresh successor 7e667c2b588d8063150e40aec23216394d20df79 was independently fresh-verified. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or arbitrary tracked repair authority is granted."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
