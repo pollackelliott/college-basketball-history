@@ -37,7 +37,8 @@ jobs:
         shell: bash
         run: |
           python tools/canonical_partial_site_maintenance.py --repo . --spec data/maintenance/canonical-location-dayton-kansas-2019-11-27.json --apply
-          git diff --check
+          # Canonical CSV is historically CRLF; treat CR as line ending, not trailing whitespace.
+          git -c core.whitespace=cr-at-eol diff --check
           test "$(git diff --name-only)" = "data/canonical/games.csv"
           python - <<'PY'
           import csv, subprocess
