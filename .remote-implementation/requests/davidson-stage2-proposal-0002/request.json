@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-stage2-proposal-0002",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "davidson",
+  "previous_control_state_commit": "ed0ad5034a13b41c8de8cc44a8307afcb8a3fc78",
+  "previous_control_state_sha256": "5ab2214764c86f87eb5f19db76eb246ea49cf029f696f835f9d7147c73ea1a59",
+  "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/davidson/davidson-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "3510066cc1c4a3c061cbe70048b4643f9e742af1f318dec1bacdcc3ef5e878f9"
+  },
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/davidson-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "c629d03ce4f5195d4219a781b1a1e86714a279a4bbbe9491af4e9eab88b6078e"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation Stage 2 — amended exact-map proposal after fresh-verified proposal-0001 blocker",
+    "authorization": "Existing owner-authorized Davidson Stage 2 phase persists through OWNER_GATE_1_READY. Proposal-0001 was fresh-verified BLOCKED only because APPLY_ACCOMPLISHMENT_PATCH attempted to rewrite already-identical 25/13 accomplishment values. This amended map changes only ACCOMPLISHMENTS-DAVIDSON to VERIFY_REFERENCE_VALUES and removes its redundant patch; the official 25/13 historical meaning and every game/identity/HAN/score/date/publication recommendation remain unchanged. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}

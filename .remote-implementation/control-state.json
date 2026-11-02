@@ -257,18 +257,19 @@
     "davidson-stage2-census-0001",
     "davidson-stage2-opponent-display-normalize-0001",
     "davidson-stage2-census-0002",
-    "davidson-stage2-proposal-0001"
+    "davidson-stage2-proposal-0001",
+    "davidson-stage2-proposal-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "davidson-stage2-proposal-0002",
+  "active_request_sha256": "10c9dbd5d4407605db531e0f6c458be5183833b86a2e3e8e03fcdd08ee0a7215",
+  "active_school_key": "davidson",
+  "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -547,8 +548,11 @@
     "target_branch": "data/davidson-onboarding",
     "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41502127173",
+  "lock_acquisition_request_commit": "49bfacfeaa63071b300e841e4e4ed292dc295c4a",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
