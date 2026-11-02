@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "dayton-stage2-census-0003",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "dayton",
+  "previous_control_state_commit": "d91e8720b8a801af3eaedfc2e2b88cf845a91f1a",
+  "previous_control_state_sha256": "479a692bffafeb555e84ace5cd7656fc53e6def54b57b602a05722435b8ec268",
+  "expected_protected_main_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-phase0-0001/successor-manifest.json",
+    "sha256": "f053eb5cef19097314f9733b0343a3229b1210f813b5c8b1aec9142129e40e43"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "72d0ce73428ba9df2f28013c7636bc4cc148da88985b286a913382baa0957cc6"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "c04944169d45b2802214a9e94f68c7cee1402c25dd88d52a8cd43da288eb695b"
+  },
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "creation_provenance": {
+    "origin": "Dayton serialized Implementation Stage 2 — fresh census after second Control Center-authorized current-main refresh",
+    "authorization": "Control Center closed the shared Lahaina maintenance blocker and authorized the guarded refresh onto protected main e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5, followed by fresh Stage 2 census and exact saved-map rehearsal through OWNER_GATE_1_READY if compatible. This request is only the required fresh read-only census against the independently verified refresh successor. No tracked repair, Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, or Production authority is granted."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
