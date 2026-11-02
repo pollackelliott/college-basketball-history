@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "merge_parent_onboarding": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "merge_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "ed78478bf1ae3f047b36a2c7b9fa65ec42b79f2b0621b4518b841e7f47c5c33c",
+  "owner_gate_2_verification_sha256": "b53b2d6f565b0b3fe13eb3afba9e1818968884a309391c45f60aaa45d825b638",
+  "pr_head_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "pr_number": 436,
+  "production_deployment_id": 7503372531,
+  "production_json_checked_count": 81,
+  "production_proof": true,
+  "production_proof_sha256": "c56f14a7a6ac15fd0b9fe2fe3c52a3c9e6addd655fffa8650b6416a6f46355d0",
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "request_id": "davidson-release-production-proof-0001",
+  "request_sha256": "d1a4c7763c04914938035fff465b554f65634d4b68764ba899df9c8da40724d9",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "status": "PRODUCTION_PROOF_PASS"
+}
