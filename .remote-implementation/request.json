@@ -1,34 +1,34 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "dayton-stage2-gate1-seal-0001",
+  "request_id": "dayton-stage2-sealed-apply-0001",
   "school_key": "dayton",
-  "operation": "STAGE2_GATE1_SEAL",
-  "previous_control_state_commit": "fac800234839e012399efc7f1786b8c5bacba049",
-  "previous_control_state_sha256": "7120d7e8896ab8bd0c09fbf3eea583b5689d49991e20dd7ddcc64b4995d5eb94",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "9915a745164f4ade202ca1fd21729d8572660e99",
+  "previous_control_state_sha256": "f0f0477f4277101474744392a56588d32b0c8745d026a0adc415ec97a049641e",
   "expected_protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
   "target_branch": "data/dayton-onboarding",
   "target_sha": "7e667c2b588d8063150e40aec23216394d20df79",
-  "stage2_preseal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/dayton/dayton-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
-    "sha256": "cc207555d09cfc382b445386f811a769bd8abbc757b15eb4e05ea6d302c3cded"
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/dayton/dayton-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "e846e294ce329d51d8594b7b57d4937fb6c7b599d1778364fb639bb59813c827"
   },
-  "stage2_preseal_verification": {
-    "path": ".remote-implementation/verifications/dayton/dayton-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
-    "sha256": "ea3dad79b529afb3e32e9d9bc471e3cc6bfd1abb7d55f5fbfa72a11f4cd001f4"
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/dayton/dayton-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "83165cb7b64c5103e077129f73b50b823f7dce3117f6b683494880d96b99b083"
   },
+  "approved_plan_hash": "da418c22981a2943c31dbea4aff83467ad51793e066ded461a538dc5a2d6f070",
+  "approved_plan_sha256": "242956fe8233613f6a0bf050d01090e5ab608b19ab853c70db9bbbab306a1a81",
+  "owner_gate_1_approval_sha256": "df5a01ae059dd7e60fca419df9498f6aa06d89a40e51f7eaf436cecad3c79e83",
   "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
   "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
   "decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
   "recommendation_map_sha256": "8ac6af3b57cebbb78a173929a197d0c27f9f3970508b2d6b03aef949248a1534",
-  "approved_plan_hash_preview": "07d94b76569141b444af8063c864ac5cecc15cad8b6ae35a9f7cbd9020129f15",
   "filled_review_sha256": "5ae009ce9ea4a53dcd149c54c861977aa0fefc8d3f6002b744dc24ddc243bbf0",
   "decision_id_set_sha256": "408b776abd7aaa4450bc508c6b98b0efdf5f71dcb627306a5c5eb4f3e4b472c0",
-  "owner_gate_1_approval_sha256": "df5a01ae059dd7e60fca419df9498f6aa06d89a40e51f7eaf436cecad3c79e83",
-  "equivalence_sha256": "a8d4faae7d35911f4b9e2781133ae5d95f14f0cf01dd6d92e4a498c86194b7c0",
   "creation_provenance": {
-    "origin": "ChatGPT Dayton serialized Implementation — cryptographic Gate 1 seal",
-    "authorization": "The exact Dayton pre-seal rehearsal reached READY_TO_SEAL and independently fresh-verified PASS under the existing explicit Owner Gate 1 approval bound to dayton-stage2-proposal-0004. Authorize exactly one bounded STAGE2_GATE1_SEAL carrying forward that approval chain. This authorizes current-main pre-seal replay and permanent onboard_school.py --approve cryptographic sealing only; no sealed apply, tracked basketball mutation, release preparation, Preview, Owner Gate 2, PR merge, Production, recovery, venue maintenance, or unrelated authority is granted by this request."
+    "origin": "ChatGPT Dayton serialized Implementation — exact sealed apply",
+    "authorization": "The exact Dayton Gate 1 seal is independently fresh-verified PASS under the owner's explicit Gate 1 approval. Authorize exactly one bounded remote STAGE2_SEALED_APPLY against dayton-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. This creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -43,8 +43,8 @@
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": true,
-    "stage2_sealed_apply": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
