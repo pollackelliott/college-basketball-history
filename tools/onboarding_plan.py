@@ -1113,6 +1113,8 @@ def _assertion_value(
         return ingest_school.source_site_to_canonical(assertion)[0]
     if field_name == "game_type":
         return assertion.get("curated_game_type", "")
+    if field_name == "postseason_round":
+        return assertion.get("curated_postseason_round", "")
     if field_name == "result_winner_team_key":
         known, winner = ingest_school.source_result_winner(assertion)
         return (winner or "[TIE]") if known else "[UNKNOWN]"
@@ -4352,6 +4354,9 @@ def set_source_field(
         return
     if field_name == "game_type":
         source["curated_game_type"] = value
+        return
+    if field_name == "postseason_round":
+        source["curated_postseason_round"] = value
         return
     if field_name == "result_winner_team_key":
         if value in {"[TIE]", ""}:
