@@ -1,0 +1,103 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "ac11dd446e8e4073b5185fa5c052b464026068ddbf88ce31ea6155a5547cc5cf",
+    "implementation-stage2-status.json": "44862aacee365fcc562f23e561ddaa314d488ae105e178d31cef7583999dca42",
+    "plan.json": "ff9b9aed548c29e23531ae3f85772d3f03915bd652174f6b0bf7e32856d98203",
+    "review.csv": "e3fcfbf5776f05c41c088cd002fd76bc10e92255b8e728b9406fab8bdfbc038f",
+    "review.md": "0b9871339544b6ebfb8825a04ec5c8ed70d442fd219b0deb19cc05fc2bb21a3f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "ac11dd446e8e4073b5185fa5c052b464026068ddbf88ce31ea6155a5547cc5cf",
+    "implementation-stage2-status.json": "3533db94a63ac3d1ba26483114d2f1c272a181c604ad6e06aa15e9d6307e5647",
+    "plan.json": "3abbd4b477dce94c5a2512a743e6cda342aeba606b392c80836f9d11057e3446",
+    "review.csv": "e3fcfbf5776f05c41c088cd002fd76bc10e92255b8e728b9406fab8bdfbc038f",
+    "review.md": "c13f405c86e4389ab9b281017eea35b6a9d5d71a341805ab38f11d24a79fdae7"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 112,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "runtime_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "davidson",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 67,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 67,
+      "discrepancy": 138,
+      "identity": 25,
+      "publication": 1
+    },
+    "decision_count": 232,
+    "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+    "discrepancies_to_add": 138,
+    "existing_game_matches": 792,
+    "new_canonical_games": 2082,
+    "plan_path": ".onboarding/davidson/plan.json",
+    "review_path": ".onboarding/davidson/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "recommendation_map": {},
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/davidson/davidson-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/davidson-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "54d92279858dd9610591cc0a85d431ac1151dfed95655a9094cd55590eee9525",
+  "request_id": "davidson-stage2-proposal-0001",
+  "request_sha256": "6d472b47102a1b8937d42fd442417d1356f4f89d9b33b225069d48aaf67a0422",
+  "runtime_commit_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "runtime_decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+    "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+    "tools/onboarding_hardening.py": "796d100669c1030955c72bee42f7302fdec783dacf554f7aa29b9dcf2995eb79",
+    "tools/onboarding_plan.py": "e7cca1ed0195b85e56084c71f57aa3cc74c8dac6cbc7fdb08c58345f256ecf59",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/davidson/davidson-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_authority_sha256": "3510066cc1c4a3c061cbe70048b4643f9e742af1f318dec1bacdcc3ef5e878f9",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "target_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+  "tracked_mutation_proof": {
+    "after_head_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+    "after_status": "",
+    "after_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+    "before_head_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+    "before_status": "",
+    "before_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
