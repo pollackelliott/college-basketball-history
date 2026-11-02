@@ -505,11 +505,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/dayton/dayton-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "823a909e85735da2979916cfbc789effecd81668cdff1c075416a9d3754d9942",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "dayton-release-readiness-0001",
     "school_key": "dayton",
     "target_branch": "data/dayton-onboarding",

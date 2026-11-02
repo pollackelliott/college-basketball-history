@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "823a909e85735da2979916cfbc789effecd81668cdff1c075416a9d3754d9942",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "readiness_proof_sha256": "1f32495197f0cb988d52a58ff16c440746e6ac055b154e27346b5645d1b98e27",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "dayton-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "tracked_mutation": "NONE"
+}
