@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "ed78478bf1ae3f047b36a2c7b9fa65ec42b79f2b0621b4518b841e7f47c5c33c",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "pr_number": 436,
+  "preview_deployment_id": 7502141128,
+  "preview_url": "https://college-basketball-history-hc9c9aas7-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "davidson-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "status": "PASS"
+}
