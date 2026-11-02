@@ -1,0 +1,48 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "aaebd9746e37517b3b7443e493db014111b7e407a69f36ef8a696263ba2d9d4f",
+    "implementation-stage2-status.json": "2452580d6b59629cd8dc349bf310e6c7fec6d978307bf2854942f6d13a2e56de",
+    "plan.json": "c3140caf7ef80cbf650a0511f050d84e1882bbccb4e269045778b79a1920d198",
+    "review.csv": "2bb7a4ef07d18a9fcf88a5434eb20ab350125c7ca931e25477d873fbf8285447",
+    "review.md": "0f31e7deaf943d2a2d38f5648a8d1b09b109bd5948f256fd16a703533203f378"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "aaebd9746e37517b3b7443e493db014111b7e407a69f36ef8a696263ba2d9d4f",
+    "implementation-stage2-status.json": "190b0ba8892dfee12a475839b9fb1ddbfd18b00a359c36c7ec3bb06b2acb0ad2",
+    "plan.json": "434b039d5d4a17003641e8aaca997a7788056459bec8542f5ea6eb0d38ca9214",
+    "review.csv": "2bb7a4ef07d18a9fcf88a5434eb20ab350125c7ca931e25477d873fbf8285447",
+    "review.md": "3fb9251b8508d460dbc514d05d5eb93fa94e50f94cdb0e0f7f36944c5896ca6b"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "changed_paths": [
+    "schools/davidson/opponents.csv",
+    "schools/davidson/source-games.csv"
+  ],
+  "decision_universe_sha256": "3720bc6ceb51a95c80663f5615289178b27f23f7a32cae4235c6608ae4d00f8d",
+  "expected_blocker_keys": [
+    "belmont-abbey",
+    "guilford",
+    "mount-saint-mary-ny"
+  ],
+  "field_level_proof_sha256": "48e91800cf38857d0a40e32db06c57a53b42dbda8528208df59b1d181c2769f4",
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "01fe161acc6c9dfd8e83dfb3bbaa0a5d6c86ec1e242c72260e93882a3d7ff7de",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "davidson-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/davidson-onboarding",
+  "target_predecessor_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "target_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+  "tracked_stage2_mutation": "NONE"
+}
