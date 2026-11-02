@@ -1,0 +1,261 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "9d5ef1a8eb2e0837bb5ae86cf042cd82ebf6fa9bd18c6e8921a64dd7619675de",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "4daefd1c38374bf661aaa38c437c0a3081302db132fabfddd66865245eb99a15",
+    "implementation-stage2-status.json": "ce55bf8a357ef1686aa5f9a14f349fa8913e48fbe4c5039de9bfc28bd0d0576c",
+    "last-rehearsal-site-gate.json": "f4c9a1f8a5eda8b84f5c87eceb92d5bcac4d9c40f47529225ead19ef1c870a26",
+    "plan.json": "cee94da73e1d9c7bff2ce319a796295346a8f3b13dde099dcca8254f8ea35dfa",
+    "review.csv": "11f5584acf2e26956befb3a045b038fd30a6ac59e670b2a3f5512d22b590ed3e",
+    "review.md": "cb9b838adb74ab2d5b613fed881e7a2cbe97847bbdaa0584a8a300f9a3a9047a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "4daefd1c38374bf661aaa38c437c0a3081302db132fabfddd66865245eb99a15",
+    "implementation-stage2-status.json": "dcdaad443ca01fad383dc63844de75e31ce55bd5927a1c3bf05da3971eb8378a",
+    "last-rehearsal-site-gate.json": "f4c9a1f8a5eda8b84f5c87eceb92d5bcac4d9c40f47529225ead19ef1c870a26",
+    "plan.json": "645e0fd38705ec7f802617c442b470cb2dea47a52148ab710563cd5105ac02da",
+    "review.csv": "11f5584acf2e26956befb3a045b038fd30a6ac59e670b2a3f5512d22b590ed3e",
+    "review.md": "7c5b97a30e2fbd91f6a7efd4c26ff9a78dc8ee77f4e1bcafd77b12eede5e1787"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 58,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 3,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 1,
+      "examples": [],
+      "topology": "unaccounted_public_gap_rows"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+    "runtime_decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+  "integration_freeze_sha256": "4f84217a1907148ac9755473f63b0336a4348d29a3ef8ce37e1824a8d6f9cc00",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "dayton",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 52,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 3,
+      "conditional_discrepancy": 52,
+      "discrepancy": 89,
+      "identity": 16,
+      "publication": 1
+    },
+    "decision_count": 162,
+    "decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+    "discrepancies_to_add": 89,
+    "existing_game_matches": 925,
+    "new_canonical_games": 2049,
+    "plan_path": ".onboarding/dayton/plan.json",
+    "review_path": ".onboarding/dayton/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 36,
+      "LEAVE_UNRESOLVED": 7,
+      "MATCH_CANONICAL:CBBG-0045426": 1,
+      "MATCH_CANONICAL:CBBG-0113246": 1,
+      "MATCH_CANONICAL:CBBG-0121174": 1,
+      "MATCH_CANONICAL:CBBG-0121204": 1,
+      "MATCH_CANONICAL:CBBG-0121460": 1,
+      "MATCH_CANONICAL:CBBG-0121477": 1,
+      "MATCH_CANONICAL:CBBG-0136828": 1,
+      "MATCH_CANONICAL:CBBG-0136859": 1,
+      "MATCH_CANONICAL:CBBG-0136863": 1,
+      "MATCH_CANONICAL:CBBG-0144171": 1,
+      "MATCH_CANONICAL:CBBG-0146903": 1,
+      "MATCH_CANONICAL:CBBG-0152320": 1,
+      "MATCH_CANONICAL:CBBG-0152468": 1,
+      "MATCH_CANONICAL:CBBG-0153123": 1,
+      "MATCH_CANONICAL:CBBG-0153246": 1,
+      "MATCH_CANONICAL:CBBG-0185295": 1,
+      "NOT_APPLICABLE": 28,
+      "USE_SOURCE": 73
+    },
+    "approved_plan_hash_preview": "9d5ef1a8eb2e0837bb5ae86cf042cd82ebf6fa9bd18c6e8921a64dd7619675de",
+    "decision_count": 162,
+    "path": "/tmp/remote-stage2-proposal-map-v84pvi0v/recommendation-map.json",
+    "sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/dayton/dayton-stage2-proposal-0003/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/dayton-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "1e8f818a5cf10605212638e81949f839343c6a2c4a16d050add757c8b2845e37",
+  "request_id": "dayton-stage2-proposal-0003",
+  "request_sha256": "04c54e7ec65e62c57b194d8a1a818745c0dc1c15df03191b72b3635d9331557c",
+  "runtime_commit_sha": "e73e12b28fe1e518b957ae59cbb360a6a2bb6fb5",
+  "runtime_decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+    "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+    "tools/onboarding_hardening.py": "796d100669c1030955c72bee42f7302fdec783dacf554f7aa29b9dcf2995eb79",
+    "tools/onboarding_plan.py": "e5a6ef75588e9eb84eae221c965944be0ba04c69faf106febf94866c8af6f402",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_snapshot_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 3,
+      "home_missing_location": 3,
+      "home_missing_venue": 6,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 25,
+      "postseason_missing_venue": 2,
+      "public_gap_rows": 584,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 3,
+      "researched_unresolved_home_venue_rows": 3,
+      "strict_home_gap": 3,
+      "strict_home_gap_rows": 3,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2993,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1,
+      "unknown_site_type": 553
+    },
+    "errors": [
+      "3 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+      "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0152303"
+      ],
+      "home_missing_location": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0152303"
+      ],
+      "home_missing_venue": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0146792",
+        "CBBG-0152303",
+        "CBBG-0152309",
+        "CBBG-0152328"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0035241",
+        "CBBG-0062484"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0006770",
+        "CBBG-0006957",
+        "CBBG-0030649",
+        "CBBG-0035241",
+        "CBBG-0041057",
+        "CBBG-0042889",
+        "CBBG-0050851",
+        "CBBG-0062484",
+        "CBBG-0093085",
+        "CBBG-0104842",
+        "CBBG-0104917",
+        "CBBG-0110661"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0187232",
+        "CBBG-0187233"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0146792",
+        "CBBG-0152309",
+        "CBBG-0152328"
+      ],
+      "strict_home_gap": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0152303"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0152303"
+      ],
+      "unknown_site_type": [
+        "CBBG-0082768",
+        "CBBG-0082785",
+        "CBBG-0146755",
+        "CBBG-0146778",
+        "CBBG-0146903",
+        "CBBG-0152572",
+        "CBBG-0152582",
+        "CBBG-0152601",
+        "CBBG-0152605",
+        "CBBG-0152616",
+        "CBBG-0152621",
+        "CBBG-0184788"
+      ]
+    },
+    "history_start_season": "1903-1904",
+    "school_key": "dayton",
+    "source_site_counts": {
+      "home_missing_venue": 3,
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 586,
+      "neutral_missing_venue": 22,
+      "postseason_missing_venue": 2,
+      "researched_gap_rows": 586,
+      "researched_unresolved_home_venue_rows": 3,
+      "unaccounted_gap_rows": 0,
+      "unknown_site_type": 561
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2990
+    },
+    "status": "FAIL",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/dayton/dayton-stage2-census-0003/checkpoint-manifest.json",
+  "stage2_authority_sha256": "8d6bb9b4f95d477ec3d9a6715f11d72195637eb9668ebad9669ed64571a7e8c5",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+  "target_tree_sha": "e250298a1d882bb87195d56e13e0bc523056fbb1",
+  "tracked_mutation_proof": {
+    "after_head_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+    "after_status": "",
+    "after_tree_sha": "e250298a1d882bb87195d56e13e0bc523056fbb1",
+    "before_head_sha": "f0c194f41707952791ab4a174e1e1dafaf7a5690",
+    "before_status": "",
+    "before_tree_sha": "e250298a1d882bb87195d56e13e0bc523056fbb1",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

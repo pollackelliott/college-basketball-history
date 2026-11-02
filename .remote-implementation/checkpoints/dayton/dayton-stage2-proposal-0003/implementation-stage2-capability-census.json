@@ -1,0 +1,204 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 3,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 3,
+      "conditional_discrepancy": 52,
+      "discrepancy": 89,
+      "identity": 16,
+      "publication": 1
+    },
+    "decision_count": 162,
+    "decision_fields": {
+      "game_date": 27,
+      "game_identity": 16,
+      "game_type": 3,
+      "overtime_periods": 11,
+      "postseason_round": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 5,
+      "score": 38,
+      "site_metadata": 3,
+      "site_type": 55
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0121174",
+      "CANONICAL-SITE-PATCH-CBBG-0121204",
+      "CANONICAL-SITE-PATCH-CBBG-0152303",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1906-07-006-CBBG-0121174-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1910-11-007-CBBG-0121204-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1921-22-006-CBBG-0152320-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1921-22-006-CBBG-0152328-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1928-29-015-CBBG-0121460-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1929-30-016-CBBG-0121472-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1929-30-016-CBBG-0121477-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1931-32-005-CBBG-0152468-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1931-32-005-CBBG-0152471-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1933-34-002-CBBG-0045426-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1957-58-023-CBBG-0144163-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1970-71-021-CBBG-0153126-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1976-77-027-CBBG-0153235-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1995-96-015-CBBG-0136842-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1996-97-018-CBBG-0136863-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-DAYTON-1996-97-022-CBBG-0136859-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1948-49-022-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1949-50-011-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1949-50-032-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1950-51-031-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1951-52-016-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1952-53-016-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1953-54-022-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1954-55-008-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1957-58-028-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1958-59-008-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1959-60-021-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1961-62-030-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1962-63-016-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1963-64-009-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1964-65-023-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1966-67-008-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1967-68-029-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1972-73-018-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1973-74-003-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1976-77-021-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1976-77-024-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1984-85-016-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1984-85-029-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1985-86-021-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1985-86-029-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1987-88-009-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1989-90-030-SITE_TYPE",
+      "DISCREPANCY-DAYTON-1991-92-023-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2001-02-008-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2007-08-034-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2010-11-006-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2014-15-034-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2016-17-002-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2019-20-004-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2019-20-005-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2019-20-006-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2019-20-011-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2020-21-004-SITE_TYPE",
+      "DISCREPANCY-DAYTON-2023-24-010-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 3,
+      "home_missing_location": 3,
+      "home_missing_venue": 6,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 25,
+      "postseason_missing_venue": 2,
+      "public_gap_rows": 584,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue": 3,
+      "researched_unresolved_home_venue_rows": 3,
+      "strict_home_gap": 3,
+      "strict_home_gap_rows": 3,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2993,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1,
+      "unknown_site_type": 553
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0152303"
+      ],
+      "home_missing_location": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0152303"
+      ],
+      "home_missing_venue": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0146792",
+        "CBBG-0152303",
+        "CBBG-0152309",
+        "CBBG-0152328"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0035241",
+        "CBBG-0062484"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0006770",
+        "CBBG-0006957",
+        "CBBG-0030649",
+        "CBBG-0035241",
+        "CBBG-0041057",
+        "CBBG-0042889",
+        "CBBG-0050851",
+        "CBBG-0062484",
+        "CBBG-0093085",
+        "CBBG-0104842",
+        "CBBG-0104917",
+        "CBBG-0110661"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0187232",
+        "CBBG-0187233"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0146792",
+        "CBBG-0152309",
+        "CBBG-0152328"
+      ],
+      "strict_home_gap": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0152303"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0152303"
+      ],
+      "unknown_site_type": [
+        "CBBG-0082768",
+        "CBBG-0082785",
+        "CBBG-0146755",
+        "CBBG-0146778",
+        "CBBG-0146903",
+        "CBBG-0152572",
+        "CBBG-0152582",
+        "CBBG-0152601",
+        "CBBG-0152605",
+        "CBBG-0152616",
+        "CBBG-0152621",
+        "CBBG-0184788"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "REPAIR_SCOPE_REQUIRED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 58,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 3,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 1,
+      "examples": [],
+      "topology": "unaccounted_public_gap_rows"
+    }
+  ]
+}
