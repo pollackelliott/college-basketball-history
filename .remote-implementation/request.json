@@ -1,34 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "davidson-stage2-sealed-apply-0001",
+  "request_id": "davidson-release-readiness-0001",
   "school_key": "davidson",
-  "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "1c0579c6700effd2f4e2bd5a4cbadd6c6cc5747d",
-  "previous_control_state_sha256": "67a299ddf5d07dd57dd02a5e6d886b7bec83aaf7cdf8c7eb5b93226156dea3f5",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "2849215667ac59492915da07729d1b49c2dd469e",
+  "previous_control_state_sha256": "1f6e510585142f78bd9c3c5ec46676d05b0f2a7b3f142b6a683643ffc3133e6d",
   "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
   "target_branch": "data/davidson-onboarding",
-  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/davidson/davidson-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "809173ae92d34d957e191f6ce3a1c5aa2d834843dc6d40fc2d65f9ffedf97953"
+  "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/davidson/davidson-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "e9ef982f81a12a76a726eb2586c54d05e670d26c91c3cfbf39a4792ff9da39cb"
   },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/davidson/davidson-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "fb983f7e4d657941aee514a9b96743c85f5b8514c6e1d6f27d39f367086692d5"
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/davidson/davidson-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "9831235f4857b86c34e5f0fa5564a563127c0334e47cbbed8c86afada48f877d"
   },
   "approved_plan_hash": "f0f9b005e1ab2cf4968f677b88229fb6e755a2710fead575ef48aa560ce1ac3b",
-  "approved_plan_sha256": "a04919fd6f639daf0b4889a9e92a9145a356e9639085997d59fa5c38a7fb7165",
-  "owner_gate_1_approval_sha256": "84ee39daaad3de730734d88bc5e43a4ccf903b7cadc2166be10ad73ce70022eb",
-  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
-  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
-  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
-  "recommendation_map_sha256": "c629d03ce4f5195d4219a781b1a1e86714a279a4bbbe9491af4e9eab88b6078e",
-  "filled_review_sha256": "86fccd7a59454d04f6e9c5ec401fe969c2fca56e34d3e78563c2464a800aebb3",
-  "decision_id_set_sha256": "e2999d599d89f4ca72ee1497557c0c4c8d9baec15bd81b29814b9fb08b87a4b8",
+  "release_manifest_sha256": "10dadce774240c65c8ecdf2a8b0250903beb296af5418ccaf30eef5aeb124a0a",
   "creation_provenance": {
-    "origin": "ChatGPT Davidson serialized Implementation — exact sealed apply",
-    "authorization": "The exact Davidson Gate 1 seal is independently fresh-verified PASS under the owner's explicit Gate 1 approval. Authorize exactly one bounded remote STAGE2_SEALED_APPLY against davidson-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. This creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+    "origin": "ChatGPT Davidson serialized Implementation — release preparation",
+    "authorization": "Owner said Proceed after the exact Davidson sealed-apply successor fdd1f038c321f80faf9ea6de5038c49b1ff3231f independently fresh-verified PASS. This authorizes the existing release-preparation phase through OWNER_GATE_2_READY. This request is only the first bounded read-only RELEASE_READINESS operation: authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation. It grants no PR creation inside the runner, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, shared/global maintenance, unrelated repair, or other-school authority."
   },
   "authority": {
     "owner_gate_1": false,
@@ -44,9 +37,9 @@
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
