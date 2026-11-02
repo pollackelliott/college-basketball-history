@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "ac11dd446e8e4073b5185fa5c052b464026068ddbf88ce31ea6155a5547cc5cf",
+    "implementation-stage2-status.json": "8c5a12090cdbf7c8d628ba9870934af540be6d8aa6239dd6a35bf190a5927d21",
+    "plan.json": "ff9b9aed548c29e23531ae3f85772d3f03915bd652174f6b0bf7e32856d98203",
+    "review.csv": "e3fcfbf5776f05c41c088cd002fd76bc10e92255b8e728b9406fab8bdfbc038f",
+    "review.md": "0b9871339544b6ebfb8825a04ec5c8ed70d442fd219b0deb19cc05fc2bb21a3f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "ac11dd446e8e4073b5185fa5c052b464026068ddbf88ce31ea6155a5547cc5cf",
+    "implementation-stage2-status.json": "807dc89c5cb62a8413f55efa3b13993d4e6a4703357252ec8bc96ff655d4559b",
+    "plan.json": "8b636696af0e9f23d48ed95fefc18da725db11c51ac70b2e935c89fee108585b",
+    "review.csv": "e3fcfbf5776f05c41c088cd002fd76bc10e92255b8e728b9406fab8bdfbc038f",
+    "review.md": "fed94b6c68d30346599552921383f349ecb7a951a3d57d98b164c061cd165808"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "b127e67b5e6d64f9f58a4bb2fa90c1a1f288c9790c75037123ac7f67392a1f2f",
+  "integration_freeze_sha256": "20a9735f13703910b7455be1cbc55cfa2bf7825e7e7efe3c61cef576bf4fcc90",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "davidson-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_snapshot_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "target_tree_sha": "dd3a6f7acbe9c28dbed21660bd5d5642a7522aa2",
+  "tracked_stage2_mutation": "NONE"
+}
