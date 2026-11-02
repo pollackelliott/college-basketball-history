@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "stage": "STAGE_3A_0",
+  "status": "COMPLETE",
+  "stage3a0_complete": true,
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "parent_research_commit": "b3f1f4c130ae78aab2d2d16446cd9eec4c157f1f",
+  "input_stage2_checkpoint_sha256": "47d7518a472d46d74e1515243a47555dd387bedf3f645f06ca7cdd7e51d0b2f0",
+  "checkpoint_zip_sha256": "789b8e5cd5c18ff933335574b22363bd3d6864137b4a543de49f777d6974f3d9",
+  "ledger_rows": 2614,
+  "regular_season_rows": 2504,
+  "postseason_rows": 110,
+  "unclassified_rows": 0,
+  "unknown_han_rows": 2504,
+  "home_rows": 0,
+  "opponent_home_rows": 0,
+  "neutral_rows": 0,
+  "external_historical_research_used": false,
+  "next_bounded_unit": "STAGE_3A_1_AFTER_OWNER_PROCEED"
+}
