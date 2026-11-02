@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "davidson-release-preview-verify-0001",
+  "school_key": "davidson",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "b068f76c3626f9389b316aef6f78e3a1385c6046",
+  "previous_control_state_sha256": "3d8e7e62c8e4109e82d862e05bdc3e253807847cd39268c3e33c6609cd1dc7a9",
+  "expected_protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/davidson/davidson-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "4b6ad8f5837267d9686c96941c1d3f18180af31483dce1fbc67974a85d51cd3c"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/davidson/davidson-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "84dcfe059b900faaa472091d7efc9bc2b497a78764964c9cf779847ab6c0f7c9"
+  },
+  "approved_plan_hash": "f0f9b005e1ab2cf4968f677b88229fb6e755a2710fead575ef48aa560ce1ac3b",
+  "release_manifest_sha256": "10dadce774240c65c8ecdf2a8b0250903beb296af5418ccaf30eef5aeb124a0a",
+  "pr_number": 436,
+  "creation_provenance": {
+    "origin": "ChatGPT Davidson serialized Implementation lane — exact PR-head Preview verification",
+    "authorization": "Owner authorized Davidson release preparation through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #436 only, bound to the exact fresh-verified readiness authority and exact sealed Davidson head. No Gate 2 approval, merge, Production, mutation, recovery, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
