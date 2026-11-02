@@ -1,0 +1,40 @@
+{
+  "blockers": [
+    "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: guilford: ['Guilford', 'Guilford College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: mount-saint-mary-ny: ['Mount Saint Mary (N.Y.)', 'Mount Saint Mary College (NY)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/davidson-beeb7eec3e7a",
+  "capability_census": {
+    "path": ".onboarding/davidson/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+  "integration_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "integration_semantic_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "preflight": {
+    "blocker_count": 3,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/davidson/plan.json",
+    "review_path": ".onboarding/davidson/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}

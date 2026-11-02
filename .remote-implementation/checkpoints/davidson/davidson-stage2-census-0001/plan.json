@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "davidson",
+  "created_at": "2026-11-02T16:35:44.581150+00:00",
+  "input_fingerprint": {
+    "sha256": "1d8f1d13e75b9296d44605974a4536dcfc494526862663f8e9772fed9448e1af",
+    "git_head": "beeb7eec3e7ae5c940e08d3f7c462d8f0b365db5",
+    "files": {
+      "schools/davidson/source-games.csv": "f5dc6df5124bffba60bec6fb06c512000e642b1d30ca8e8124529c6365d8017a",
+      "schools/davidson/opponents.csv": "9ae530b02061c3215bf5e5e540bfe9b17a00fbdcf22978616c64810fcb612ddf",
+      "schools/davidson/venues.csv": "0e8e56948a3578566b7c568236731341c5047fab9540b5e7a1cc675ef01fd28d",
+      "schools/davidson/conferences.csv": "b183e01f1220cd1066371705be65ea5787c5cf8d3ea0d374c609a88cc3f53224",
+      "schools/davidson/notes.md": "ecc7a4a9f1a3294811cc54721f8a455f2db71f1822c54d0cf129b5927256a460",
+      "schools/davidson/source-notes.md": "8f20bc4116365ad833809f9d044be023f321e1652bde3fa5d5e089213f898cae",
+      "data/canonical/games.csv": "6451d88279c8bb7364818ca2fb0e7d01d71de06c0a87ccca8d79923e77d643c8",
+      "data/evidence/game-assertions.csv": "536114f35036c41499c7a4e89dc127573bce3ff37e8923608075386cc294d05d",
+      "data/reconciliation/discrepancies.csv": "d4bc163d5cf3d18ddde7254832eafa187f30bae9a119c2229bc77f761b77b528",
+      "data/reference/programs.csv": "dad6132f659f5f4f87a31d0d9c1929f327abe048c7185a2880422d6d741cbd1f",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "9c13faf1a25bb1f14e6f4394c7bf7b8430626723f5c94c9bcee79227b0ae9a31",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "0d4edbbc9d8abc55026475e95231a7eae8d98495cae681785153f94638fd74f4",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "2d478cfdd209bc912ee2a46248d8aed6474b2661696d7ae7f269b14ab4f61d4e",
+      "tools/location_safety.py": "9bc050b24b5bdde58ce4799510920ae64c641fda532dab53530ee760198eaa1d",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+      "tools/onboarding_plan.py": "e7cca1ed0195b85e56084c71f57aa3cc74c8dac6cbc7fdb08c58345f256ecf59",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: guilford: ['Guilford', 'Guilford College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: mount-saint-mary-ny: ['Mount Saint Mary (N.Y.)', 'Mount Saint Mary College (NY)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2899,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 762,
+      "venues": 94,
+      "conference_intervals": 6,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: guilford: ['Guilford', 'Guilford College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: mount-saint-mary-ny: ['Mount Saint Mary (N.Y.)', 'Mount Saint Mary College (NY)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
