@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "0eb9e7cc1dab4920257f4dc9f243a80b4ec5845c82029cbc39842f901c47f171",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "pr_number": 433,
+  "preview_deployment_id": 7494076893,
+  "preview_deployment_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "preview_url": "https://college-basketball-history-l86lnl005-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "dayton-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba"
+}
