@@ -537,11 +537,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/davidson/davidson-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "4b6ad8f5837267d9686c96941c1d3f18180af31483dce1fbc67974a85d51cd3c",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "davidson-release-readiness-0001",
     "school_key": "davidson",
     "target_branch": "data/davidson-onboarding",

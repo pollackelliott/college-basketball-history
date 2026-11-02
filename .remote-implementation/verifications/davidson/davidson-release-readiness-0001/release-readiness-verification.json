@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "4b6ad8f5837267d9686c96941c1d3f18180af31483dce1fbc67974a85d51cd3c",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
+  "readiness_proof_sha256": "72e30d66afeda18d1bc0b0fb803216ffd565762fa44038e9eb61c3a926aae811",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "davidson-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "target_branch": "data/davidson-onboarding",
+  "target_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "tracked_mutation": "NONE"
+}
