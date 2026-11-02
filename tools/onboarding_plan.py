@@ -2716,6 +2716,30 @@ def _single_game_correction_transaction_kind(
         else "SINGLE_GAME_IDENTITY"
     )
 
+def preexisting_partial_canonical_location_error(
+    canonical: dict[str, str],
+) -> str:
+    """Detect one-sided persisted geography before a matched game is touched.
+
+    The site metadata is shared historical data, not a school-local or
+    recommendation-map normalization. Detection does not mutate either.
+    """
+    city = canonical.get("site_city", "").strip()
+    state = canonical.get("site_state", "").strip()
+    if bool(city) == bool(state):
+        return ""
+    game_id = canonical.get("canonical_game_id", "").strip() or "[unknown]"
+    return (
+        f"PREEXISTING_PARTIAL_CANONICAL_LOCATION {game_id}: "
+        f"city={city or '[blank]'}; state={state or '[blank]'}; "
+        "a confident source match will touch this canonical game, "
+        "but approved reconciliation does not repair existing "
+        "canonical geography. Require source-supported shared-data "
+        "maintenance before Owner Gate 1; do not infer geography "
+        "or silently change the recommendation map."
+    )
+
+
 def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
     repo = repo.resolve()
     package = validate_package(repo, school_key)
@@ -2926,19 +2950,11 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         identity_counts[status] += 1
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
-            existing = canonical_by_id.get(game_id, {})
-            city = existing.get("site_city", "").strip()
-            state = existing.get("site_state", "").strip()
-            if bool(city) != bool(state):
-                blockers.append(
-                    f"PREEXISTING_PARTIAL_CANONICAL_LOCATION {game_id}: "
-                    f"city={city or '[blank]'}; state={state or '[blank]'}; "
-                    "a confident source match will touch this canonical game, "
-                    "but approved reconciliation does not repair existing "
-                    "canonical geography. Require source-supported shared-data "
-                    "maintenance before Owner Gate 1; do not infer geography "
-                    "or silently change the recommendation map."
-                )
+            problem = preexisting_partial_canonical_location_error(
+                canonical_by_id.get(game_id, {})
+            )
+            if problem:
+                blockers.append(problem)
         elif status == ingest_school.REVIEW:
             source_id = source.get("source_game_id", "").strip()
             for candidate in identity_candidates:
