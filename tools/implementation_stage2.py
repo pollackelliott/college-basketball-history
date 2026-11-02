@@ -18,6 +18,7 @@ Every run writes an ignored machine-readable recovery artifact at
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 from collections import Counter
@@ -129,6 +130,7 @@ def _capability_census(
     *,
     site_diagnostic: dict[str, Any] | None = None,
     proposal_rehearsal_passed: bool = False,
+    preexisting_partial_site_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     decisions = list(plan.get("decisions", []))
     decision_categories = Counter(
@@ -172,6 +174,13 @@ def _capability_census(
                 "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
             }
         )
+    if preexisting_partial_site_ids:
+        topology_groups.append({
+            "topology": "preexisting_partial_canonical_site_on_touched_game",
+            "count": len(preexisting_partial_site_ids),
+            "classification": "PREEXISTING_SHARED_CANONICAL_SITE_REPAIR_REQUIRED",
+            "canonical_game_ids": sorted(preexisting_partial_site_ids),
+        })
 
     site_counts: dict[str, Any] = {}
     site_examples: dict[str, Any] = {}
@@ -199,6 +208,8 @@ def _capability_census(
 
     if proposal_rehearsal_passed:
         census_status = "PASS"
+    elif preexisting_partial_site_ids:
+        census_status = "REPAIR_SCOPE_REQUIRED"
     elif site_diagnostic and site_diagnostic.get("status") == "FAIL":
         census_status = "REPAIR_SCOPE_REQUIRED"
     elif blockers:
@@ -233,6 +244,34 @@ def _capability_census(
             "verification, not the discovery mechanism."
         ),
     }
+
+
+def _preexisting_partial_site_ids(repo: Path, plan: dict[str, Any]) -> list[str]:
+    """Fail early on legacy partial canonical sites touched by Stage 2 decisions.
+
+    Scope is the exact decision universe, not every legacy canonical row.
+    This read-only census does not infer state, site type, or venue identity.
+    """
+    ids = {
+        str(value).strip()
+        for decision in plan.get("decisions", [])
+        for key, value in decision.items()
+        if key.endswith("canonical_game_id") and isinstance(value, str) and value.strip()
+    }
+    if not ids:
+        return []
+    path = repo / "data/canonical/games.csv"
+    if not path.is_file():
+        return []
+    affected = set()
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        for row in csv.DictReader(handle):
+            game_id = row.get("canonical_game_id", "").strip()
+            if game_id in ids and bool(row.get("site_city", "").strip()) != bool(
+                row.get("site_state", "").strip()
+            ):
+                affected.add(game_id)
+    return sorted(affected)
 
 
 def _write_capability_census(
@@ -364,17 +403,30 @@ def run_stage2(
         output_dir = repo / ".onboarding" / school_key
         plan = build_plan(repo, school_key)
         paths = write_preflight_artifacts(plan, output_dir)
+        preexisting_partial_ids = _preexisting_partial_site_ids(repo, plan)
         status["preflight"] = _plan_summary(plan)
         status["preflight"]["plan_path"] = _relative(repo, paths["plan"])
         status["preflight"]["review_path"] = _relative(repo, paths["review"])
 
-        census = _capability_census(plan)
+        census = _capability_census(plan, preexisting_partial_site_ids=preexisting_partial_ids)
         census_path = _write_capability_census(repo, school_key, census)
         status["capability_census"] = {
             "path": _relative(repo, census_path),
             "status": census["status"],
             "topology_group_count": len(census["topology_groups"]),
         }
+
+        if preexisting_partial_ids:
+            status["status"] = "BLOCKED"
+            status["preexisting_partial_canonical_ids"] = preexisting_partial_ids
+            status["next_action"] = (
+                "Preexisting shared canonical city/state pairs are partial on decision-touched "
+                "games. Preserve the map/Freeze and obtain evidence-backed exact-scope "
+                "Control Center maintenance; do not defer this failure to proposal rehearsal "
+                "or invent a missing geography value."
+            )
+            status_path = _write_status(repo, school_key, status)
+            return 1, status, status_path
 
         if plan.get("blockers"):
             status["status"] = "BLOCKED"
