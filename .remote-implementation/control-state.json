@@ -268,15 +268,15 @@
   "active_lock_commit": "a706c742ee923071e5496243bd2e766bbb005fd2",
   "active_lock_owner": "github-actions:41514742179:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "fdd1f038c321f80faf9ea6de5038c49b1ff3231f",
+  "active_prepared_tree_sha": "d375c5b937e264fe4baad20e03c2b167a44a2c2a",
   "active_request_id": "davidson-stage2-sealed-apply-0001",
   "active_request_sha256": "d800b9a3646629188ae1ba64c784abb5c6ec210d41ec83cb39df80d0e8fdb1fb",
   "active_school_key": "davidson",
   "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/davidson/davidson-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "a68d24dd75db0cc70d1d8b29b9d6023871c06932b36f0385d2438ac654e6138a",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -563,5 +563,5 @@
   "lock_acquisition_request_commit": "359f42cb20c1f1a673b459045697d72c815a41a9",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
