@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "CONTROL_CENTER_OWNER_APPROVED_SHARED_CANONICAL_SITE_MAINTENANCE",
+  "authorization": "Owner explicitly approved the exact two-game Lahaina Civic Center correction on 2026-11-01",
+  "protected_main_predecessor_sha": "0a28151cf0c193afea2641cc5bd6f5557ab76d5b",
+  "canonical_predecessor_sha256": "9c3b705b1f64918010bf8ef650575b7e712f43192a1329f49fd39797906a0200",
+  "assertions_predecessor_sha256": "e57eef4766cf90022bdef2f78f514dc2fec95d69730965d2eab03539dd303cd9",
+  "authorized_canonical_game_ids": [
+    "CBBG-0014297",
+    "CBBG-0014299"
+  ],
+  "authorized_changed_fields": [
+    "site_city",
+    "site_state",
+    "venue_key",
+    "venue_id"
+  ],
+  "expected_old_site": {
+    "site_type": "NEUTRAL",
+    "site_city": "Maui",
+    "site_state": "",
+    "venue_key": "",
+    "venue_id": ""
+  },
+  "new_site": {
+    "site_type": "NEUTRAL",
+    "site_city": "Lahaina",
+    "site_state": "HI",
+    "venue_key": "lahaina-civic-center",
+    "venue_id": "VEN-000108"
+  },
+  "approved_changed_paths": [
+    "data/canonical/games.csv",
+    "site/data/teams/kansas.json"
+  ],
+  "evidence_urls": [
+    "https://kuathletics.com/sports/mens-basketball/schedule/2019-20/",
+    "https://kuathletics.com/sports/mens-basketball/stats/2019-20/dayton/boxscore/5560",
+    "https://kuathletics.com/news/2019/11/25/jayhawks-cruise-past-chaminade-93-63-in-maui"
+  ],
+  "prohibitions": [
+    "Do not modify source assertions, school research freezes, Dayton Implementation branch, game dates, scores, H/A/N, game_type, venue registry or any other canonical game."
+  ],
+  "census_pr": 430
+}
