@@ -1,0 +1,47 @@
+name: Guarded Kansas generated site data refresh (temporary)
+
+on:
+  push:
+    branches:
+      - maintenance/canonical-partial-location-20261101
+    paths:
+      - .github/workflows/maintenance-kansas-site-refresh-20261101.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temporary-kansas-site-refresh-20261101
+  cancel-in-progress: false
+
+jobs:
+  refresh-exact-affected-public-json:
+    if: github.repository == 'pollackelliott/college-basketball-history' && github.ref == 'refs/heads/maintenance/canonical-partial-location-20261101'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact maintenance branch
+        uses: actions/checkout@v4
+        with:
+          ref: maintenance/canonical-partial-location-20261101
+          persist-credentials: true
+          fetch-depth: 1
+
+      - name: Guard inputs and regenerate deterministic published data
+        shell: bash
+        run: |
+          test "$(git branch --show-current)" = "maintenance/canonical-partial-location-20261101"
+          test -z "$(git status --porcelain)"
+          test "$(git hash-object data/canonical/games.csv)" = "7ae2e7cde0ec91a7f9168a57b9646cfc1fcb9e9c"
+          python tools/build_site_data.py --apply
+          git diff --check
+          test "$(git diff --name-only)" = "site/data/teams/kansas.json"
+          python tools/build_site_data.py --check
+
+      - name: Commit only refreshed Kansas public team JSON
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- site/data/teams/kansas.json
+          git commit -m "Regenerate Kansas team JSON after evidence-based Maui state completion"
+          git push origin HEAD:refs/heads/maintenance/canonical-partial-location-20261101
