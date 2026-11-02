@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "stage": "STAGE_2",
+  "status": "COMPLETE",
+  "stage2_complete": true,
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "protected_main_sha_at_checkpoint": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "parent_stage1_closeout_sha256": "27ebd74e7f8bec63147041fb4672aeb224424b75b36aff16e11ce59f20479a65",
+  "parent_research_commit": "ce9746af071e7778dcffcd350954fd5d762fe225",
+  "checkpoint_zip_sha256": "47d7518a472d46d74e1515243a47555dd387bedf3f645f06ca7cdd7e51d0b2f0",
+  "game_rows": 2614,
+  "distinct_source_opponent_labels": 814,
+  "distinct_canonical_opponent_keys": 343,
+  "unresolved_opponent_identities": 0,
+  "known_current_program_key_splits": 0,
+  "ambiguous_current_program_matches": 0,
+  "terminal_historical_coverage_carried": true,
+  "terminal_historical_coverage_classification": "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP",
+  "next_bounded_unit": "STAGE_3A_0_AFTER_OWNER_PROCEED",
+  "next_owner_boundary": "Stage 2 complete; stop for owner Proceed before Stage 3A-0 mechanical census/partition."
+}
