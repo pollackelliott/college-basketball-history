@@ -1,0 +1,72 @@
+{
+  "blockers": [
+    "DAV-S1-2019-20-003: city equals a source/curated venue name",
+    "DAV-S1-2019-20-004: city equals a source/curated venue name",
+    "DAV-S1-2019-20-010: city equals a source/curated venue name",
+    "DAV-S1-2020-21-001: city equals a source/curated venue name",
+    "DAV-S1-2020-21-005: city equals a source/curated venue name",
+    "DAV-S1-2020-21-006: city equals a source/curated venue name",
+    "DAV-S1-2020-21-008: city equals a source/curated venue name",
+    "DAV-S1-2020-21-009: city equals a source/curated venue name",
+    "DAV-S1-2020-21-011: city equals a source/curated venue name",
+    "DAV-S1-2020-21-012: city equals a source/curated venue name",
+    "DAV-S1-2020-21-014: city equals a source/curated venue name",
+    "DAV-S1-2020-21-016: city equals a source/curated venue name",
+    "DAV-S1-2020-21-018: city equals a source/curated venue name",
+    "DAV-S1-2020-21-019: city equals a source/curated venue name",
+    "DAV-S1-2021-22-001: city equals a source/curated venue name",
+    "DAV-S1-2021-22-006: city equals a source/curated venue name",
+    "DAV-S1-2021-22-008: city equals a source/curated venue name",
+    "DAV-S1-2021-22-010: city equals a source/curated venue name",
+    "DAV-S1-2021-22-012: city equals a source/curated venue name",
+    "DAV-S1-2021-22-014: city equals a source/curated venue name",
+    "DAV-S1-2021-22-015: city equals a source/curated venue name",
+    "DAV-S1-2021-22-019: city equals a source/curated venue name",
+    "DAV-S1-2021-22-020: city equals a source/curated venue name",
+    "DAV-S1-2021-22-023: city equals a source/curated venue name",
+    "DAV-S1-2021-22-025: city equals a source/curated venue name",
+    "DAV-S1-2021-22-026: city equals a source/curated venue name",
+    "DAV-S1-2021-22-028: city equals a source/curated venue name",
+    "DAV-S1-2021-22-029: city equals a source/curated venue name",
+    "DAV-S1-2022-23-015: city equals a source/curated venue name",
+    "DAV-S1-2022-23-017: city equals a source/curated venue name"
+  ],
+  "branch": "remote-stage2-census/davidson-87af03cc63fe",
+  "capability_census": {
+    "path": ".onboarding/davidson/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 2
+  },
+  "head_sha": "87af03cc63fe2a0e880d062aaea41630117e182b",
+  "integration_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "integration_semantic_sha256": "7d0e523c2532a554978852f2abced6e3adc0540c342e3aaf97e514101e40d1b8",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "preflight": {
+    "blocker_count": 30,
+    "conditional_discrepancies": 67,
+    "decision_categories": {
+      "conditional_discrepancy": 67,
+      "discrepancy": 138,
+      "identity": 25,
+      "publication": 1
+    },
+    "decision_count": 231,
+    "decision_universe_sha256": "3720bc6ceb51a95c80663f5615289178b27f23f7a32cae4235c6608ae4d00f8d",
+    "discrepancies_to_add": 138,
+    "existing_game_matches": 792,
+    "new_canonical_games": 2082,
+    "plan_path": ".onboarding/davidson/plan.json",
+    "review_path": ".onboarding/davidson/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "c8334be2c2cbbc5649204f0cec4e20f022580c2d",
+  "schema_version": 1,
+  "school_key": "davidson",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
