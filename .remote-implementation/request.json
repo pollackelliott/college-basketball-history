@@ -1,45 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "duquesne-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "duquesne",
-  "previous_control_state_commit": "cf8fcfc704629faf2a397fdf11111a134beb7429",
-  "previous_control_state_sha256": "5772364f25f6ce9ddfdf01c064982000debaf7de4f059fc7558ee5c4af3c3335",
+  "previous_control_state_commit": "ca096aba833b51a5e7ba125f557bfe41a3d328c9",
+  "previous_control_state_sha256": "9c2007de2cc1c0d8fc77230cadb049eca5b6dea950d763b4595d38344c26b058",
   "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "target_branch": "data/duquesne-onboarding",
-  "research_checkpoint": {
-    "sha256": "5f1e4540bf6f73585e64030f13fea4b119158129364e729e6a7bd6303bd371f2",
-    "research_base_sha": "a3c0cb9d1034314ff74debfb4545da4c53998370",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "e45538cf1b9134f305fe8f53f96ecf1c8aab4643",
-      "path_prefix": ".remote-implementation/transports/duquesne/duquesne-stage1-0001-final/piece-",
-      "part_count": 33
-    }
+  "target_sha": "d1cb3e84eadc0f5b6d2de825a182a59081012466",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/duquesne/duquesne-phase0-0001/successor-manifest.json",
+    "sha256": "c4484a605c49cc2b9b89b96e0fd3283007e1b0b0bdd56468bd7db115c3e16e14"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/duquesne/duquesne-stage1-0001/checkpoint-manifest.json",
-    "sha256": "258c31e33c7a34f75939f6212f63f8f1deed803e91042237a19b3db111332a26"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1913-1914",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted Duquesne INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly confirms the current reusable project Program Top-Level Scope Reference value INCEPTION+. The first accepted competitive source-game season in the frozen package is 1913-1914. Preserve the exact frozen historical universe and all accepted researched uncertainty."
-  },
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation lane — explicitly owner-authorized Phase 0",
-    "authorization": "Owner explicitly authorized Duquesne Phase 0 after clean Stage 1 request duquesne-stage1-0001 PASS with zero blockers on protected main d34e954bf738dc3f971f268ffeb4f58f5a32c4a9. Authorizes exactly one guarded PHASE0 operation: fresh-repeat Stage 1 against exact main, stage the immutable six-file Duquesne Research Freeze, apply ordinary mechanically safe target-school venue registrations/reuse and accepted INCEPTION+ target scope, capture INTEGRATION_FROZEN, publish create-once data/duquesne-onboarding through the global mutation lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
+    "origin": "ChatGPT Duquesne serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly authorized Proceed after Duquesne Phase 0 completed with fresh remote_phase0_equivalence=PASS. This request is the first bounded read-only STAGE2_CENSUS operation against the exact independently verified onboarding successor and Integration Freeze. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -54,6 +38,7 @@
     "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
