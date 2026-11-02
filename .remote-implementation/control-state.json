@@ -258,7 +258,7 @@
     "davidson-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
-  "active_lock_commit": null,
+  "active_lock_commit": "394d62f6f9e7e0e0e87a2e65a94297e560fb80db",
   "active_lock_owner": "github-actions:41484328666:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
