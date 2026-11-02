@@ -1,0 +1,187 @@
+{
+  "branch": "remote-stage2-census/dayton-7e667c2b588d",
+  "capability_census": {
+    "path": ".onboarding/dayton/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "7e667c2b588d8063150e40aec23216394d20df79",
+  "integration_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "integration_semantic_sha256": "31e1894acb086e55ad370624b989cf0f9abcb7bb3342b3c557311ff6849bf0e1",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 52,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 3,
+      "conditional_discrepancy": 52,
+      "discrepancy": 89,
+      "identity": 16,
+      "publication": 1
+    },
+    "decision_count": 162,
+    "decision_universe_sha256": "32f8e8c02b52540bef43260cf3f9df07c3cd9eaad20f0bf34d5c6307229b786c",
+    "discrepancies_to_add": 89,
+    "existing_game_matches": 925,
+    "new_canonical_games": 2049,
+    "plan_path": ".onboarding/dayton/plan.json",
+    "review_path": ".onboarding/dayton/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_CANONICAL_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 36,
+      "LEAVE_UNRESOLVED": 6,
+      "MATCH_CANONICAL:CBBG-0045426": 1,
+      "MATCH_CANONICAL:CBBG-0113246": 1,
+      "MATCH_CANONICAL:CBBG-0121174": 1,
+      "MATCH_CANONICAL:CBBG-0121204": 1,
+      "MATCH_CANONICAL:CBBG-0121460": 1,
+      "MATCH_CANONICAL:CBBG-0121477": 1,
+      "MATCH_CANONICAL:CBBG-0136828": 1,
+      "MATCH_CANONICAL:CBBG-0136859": 1,
+      "MATCH_CANONICAL:CBBG-0136863": 1,
+      "MATCH_CANONICAL:CBBG-0144171": 1,
+      "MATCH_CANONICAL:CBBG-0146903": 1,
+      "MATCH_CANONICAL:CBBG-0152320": 1,
+      "MATCH_CANONICAL:CBBG-0152468": 1,
+      "MATCH_CANONICAL:CBBG-0153123": 1,
+      "MATCH_CANONICAL:CBBG-0153246": 1,
+      "MATCH_CANONICAL:CBBG-0185295": 1,
+      "NOT_APPLICABLE": 28,
+      "USE_SOURCE": 73
+    },
+    "approved_plan_hash_preview": "07d94b76569141b444af8063c864ac5cecc15cad8b6ae35a9f7cbd9020129f15",
+    "changed_path_count": 98
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_CANONICAL_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 36,
+      "LEAVE_UNRESOLVED": 6,
+      "MATCH_CANONICAL:CBBG-0045426": 1,
+      "MATCH_CANONICAL:CBBG-0113246": 1,
+      "MATCH_CANONICAL:CBBG-0121174": 1,
+      "MATCH_CANONICAL:CBBG-0121204": 1,
+      "MATCH_CANONICAL:CBBG-0121460": 1,
+      "MATCH_CANONICAL:CBBG-0121477": 1,
+      "MATCH_CANONICAL:CBBG-0136828": 1,
+      "MATCH_CANONICAL:CBBG-0136859": 1,
+      "MATCH_CANONICAL:CBBG-0136863": 1,
+      "MATCH_CANONICAL:CBBG-0144171": 1,
+      "MATCH_CANONICAL:CBBG-0146903": 1,
+      "MATCH_CANONICAL:CBBG-0152320": 1,
+      "MATCH_CANONICAL:CBBG-0152468": 1,
+      "MATCH_CANONICAL:CBBG-0153123": 1,
+      "MATCH_CANONICAL:CBBG-0153246": 1,
+      "MATCH_CANONICAL:CBBG-0185295": 1,
+      "NOT_APPLICABLE": 28,
+      "USE_SOURCE": 73
+    },
+    "approved_plan_hash_preview": "07d94b76569141b444af8063c864ac5cecc15cad8b6ae35a9f7cbd9020129f15",
+    "decision_count": 162,
+    "path": "/tmp/remote-stage2-proposal-map-87lvdjta/recommendation-map.json",
+    "sha256": "8ac6af3b57cebbb78a173929a197d0c27f9f3970508b2d6b03aef949248a1534"
+  },
+  "research_base_sha": "7226bad1cd2cff8cefcc0f7d44cb5b13179fd9b0",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 6,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 25,
+      "postseason_missing_venue": 2,
+      "public_gap_rows": 584,
+      "reciprocal_only_unresolved_home_venue": 1,
+      "reciprocal_unpropagated": 0,
+      "reconciled_unknown_site_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue": 6,
+      "researched_unresolved_home_venue_rows": 6,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2993,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 553
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0146792",
+        "CBBG-0152303",
+        "CBBG-0152309",
+        "CBBG-0152328"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0035241",
+        "CBBG-0062484"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0006770",
+        "CBBG-0006957",
+        "CBBG-0030649",
+        "CBBG-0035241",
+        "CBBG-0041057",
+        "CBBG-0042889",
+        "CBBG-0050851",
+        "CBBG-0062484",
+        "CBBG-0093085",
+        "CBBG-0104842",
+        "CBBG-0104917",
+        "CBBG-0110661"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0187232",
+        "CBBG-0187233"
+      ],
+      "reciprocal_only_unresolved_home_venue": [
+        "CBBG-0152303"
+      ],
+      "reconciled_unknown_site_unresolved_home_venue": [
+        "CBBG-0121174",
+        "CBBG-0121204"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0121174",
+        "CBBG-0121204",
+        "CBBG-0146792",
+        "CBBG-0152303",
+        "CBBG-0152309",
+        "CBBG-0152328"
+      ],
+      "unknown_site_type": [
+        "CBBG-0082768",
+        "CBBG-0082785",
+        "CBBG-0146755",
+        "CBBG-0146778",
+        "CBBG-0146903",
+        "CBBG-0152572",
+        "CBBG-0152582",
+        "CBBG-0152601",
+        "CBBG-0152605",
+        "CBBG-0152616",
+        "CBBG-0152621",
+        "CBBG-0184788"
+      ]
+    },
+    "path": ".onboarding/dayton/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
