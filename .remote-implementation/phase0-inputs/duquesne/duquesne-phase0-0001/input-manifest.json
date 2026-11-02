@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "request_id": "duquesne-phase0-0001",
+  "research_checkpoint_sha256": "5f1e4540bf6f73585e64030f13fea4b119158129364e729e6a7bd6303bd371f2",
+  "research_member_sha256": {
+    "conferences.csv": "69bdf8c6c955307e4d8d71dadfc55612d38c91e649a273a75f4619c950a6c742",
+    "notes.md": "e1e3983335b56123913a2e2f192d65174bdad11628bd5690ac91033a242d1b6c",
+    "opponents.csv": "6f49c92d8fa5c0d3a08fabb8adb716fd71bbb441c412ba0d12afd07c587ba999",
+    "source-games.csv": "f48c79126e35e656ed447ae7f3d69f21ec925ef5a24bd20cbfeb2726d7653b9d",
+    "source-notes.md": "2cebb069c77dbbe7a0b11bffe7f161fcf483199f2bcf6d7f96cffdb4396bb4af",
+    "venues.csv": "95a7fd222816110db70e4f332692943a88a781044fadd6e310acc28246f52db6"
+  },
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "sidecars": {
+    "stage1-reconciliation.json": "c946f018b83448815281b92d0dccb425db943f627c3d3c0934713d85f76130b2"
+  },
+  "stage1_status": "PASS"
+}
