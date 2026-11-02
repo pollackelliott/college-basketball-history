@@ -2950,11 +2950,19 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
         identity_counts[status] += 1
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
-            problem = preexisting_partial_canonical_location_error(
-                canonical_by_id.get(game_id, {})
-            )
-            if problem:
-                blockers.append(problem)
+            # Only an incoming unmatched source will touch this persisted
+            # canonical row during the sealed transaction. Fully integrated
+            # existing sources are genuine no-ops, and an unrelated legacy
+            # partial site must not retroactively block their preflight.
+            new_assertion = (
+                school_key, source.get("source_game_id", "").strip()
+            ) not in existing_pairs
+            if new_assertion:
+                problem = preexisting_partial_canonical_location_error(
+                    canonical_by_id.get(game_id, {})
+                )
+                if problem:
+                    blockers.append(problem)
         elif status == ingest_school.REVIEW:
             source_id = source.get("source_game_id", "").strip()
             for candidate in identity_candidates:
