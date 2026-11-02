@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "dayton-release-readiness-0001",
+  "school_key": "dayton",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "20d90c2ecbdaef4f64cc59503392df5d89303923",
+  "previous_control_state_sha256": "d93a593c54d3ed210ff035b4438e9acca6b037bf05c536ce509a81ccbe1d08e8",
+  "expected_protected_main_sha": "428fa4ba980f3454477ed96ce3d71fcaee0ff0fd",
+  "target_branch": "data/dayton-onboarding",
+  "target_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/dayton/dayton-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "e2ca7161cfc6864ea2d6436db11b2f68c351fcd7db33858852d312447af9c21a"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/dayton/dayton-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "fec385145a2d82c3e816327a2289d8226b3bf01ae427f2932f344973a8ea39a1"
+  },
+  "approved_plan_hash": "da418c22981a2943c31dbea4aff83467ad51793e066ded461a538dc5a2d6f070",
+  "release_manifest_sha256": "970edebbed4cc2efbd76f05229cd70a9718a7ff40e0092b8b57929e298c442ea",
+  "creation_provenance": {
+    "origin": "ChatGPT Dayton serialized Implementation — release preparation",
+    "authorization": "Owner said Proceed after the exact Dayton sealed-apply successor 8d15886f81329d355ab3f16ff00c03b4779d08ba independently fresh-verified PASS. This authorizes the existing release-preparation phase through OWNER_GATE_2_READY. This request is only the first bounded read-only RELEASE_READINESS operation: authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation. It grants no PR creation inside the runner, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, shared/global maintenance, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
