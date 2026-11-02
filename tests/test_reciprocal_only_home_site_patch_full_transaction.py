@@ -42,12 +42,12 @@ def canonical_game() -> dict[str, str]:
             "season_label": "1919-1920",
             "game_date": "1920-03-05",
             "date_precision": "EXACT",
-            "team_a_key": "test",
-            "team_b_key": "other",
-            "team_a_score": "21",
-            "team_b_score": "14",
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "team_a_score": "14",
+            "team_b_score": "21",
             "result_winner_team_key": "test",
-            "site_type": "TEAM_A_HOME",
+            "site_type": "TEAM_B_HOME",
             "designated_home_team_key": "test",
             "game_type": "REGULAR_SEASON",
             "canonical_status": "PROVISIONAL",
@@ -200,7 +200,7 @@ class ReciprocalOnlyHomeSitePatchTransactionTests(unittest.TestCase):
                 ],
                 1,
             )
-            self.assertEqual(first["site_type"], "TEAM_A_HOME")
+            self.assertEqual(first["site_type"], "TEAM_B_HOME")
             self.assertEqual(first["designated_home_team_key"], "test")
             self.assertEqual(first["site_city"], "Example City")
             self.assertEqual(first["site_state"], "EX")
