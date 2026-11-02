@@ -95,15 +95,33 @@ def obvious_city_contamination(
         return None
 
     folded = value.casefold()
-    venue_names = {
+    source_name = (source_venue_name or "").strip().casefold()
+    curated_name = (curated_venue_name or "").strip().casefold()
+    registry_names = {
         name.strip().casefold()
-        for name in (
-            source_venue_name,
-            curated_venue_name,
-            *(registry_venue_names or set()),
-        )
+        for name in (registry_venue_names or set())
         if name and name.strip()
     }
+
+    # Some official schedules place a locality label in the raw venue/location
+    # column (for example "DAVIDSON") while Research separately resolves the
+    # physical building. Preserve that literal source evidence without treating
+    # the valid city as contaminated, but only when the distinct curated venue
+    # is itself present in the authoritative school venue-name census.
+    source_is_verified_locality_literal = (
+        source_name
+        and source_name == folded
+        and curated_name
+        and curated_name != folded
+        and curated_name in registry_names
+    )
+
+    venue_names = set(registry_names)
+    if curated_name:
+        venue_names.add(curated_name)
+    if source_name and not source_is_verified_locality_literal:
+        venue_names.add(source_name)
+
     if folded in venue_names:
         return "city equals a source/curated venue name"
     if " and " in folded:

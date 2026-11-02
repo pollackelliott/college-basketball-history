@@ -61,6 +61,32 @@ class SourcePackagePreflightTests(unittest.TestCase):
         errors, _ = self.preflight("Example Arena", "EX")
         self.assertIn("venue name", errors[0])
 
+    def test_source_locality_literal_with_registry_backed_curated_venue_passes(self):
+        row = source_row("Davidson", "NC")
+        row["source_venue_name"] = "DAVIDSON"
+        row["curated_venue_name"] = "John M. Belk Arena"
+        self.assertEqual(
+            source_location_preflight(
+                [row],
+                set(),
+                {"john m. belk arena"},
+            ),
+            ([], []),
+        )
+
+    def test_source_locality_literal_without_registry_backed_curated_venue_is_rejected(self):
+        row = source_row("Davidson", "NC")
+        row["source_venue_name"] = "DAVIDSON"
+        row["curated_venue_name"] = "John M. Belk Arena"
+        errors, warnings = source_location_preflight(
+            [row],
+            set(),
+            {"other arena"},
+        )
+        self.assertEqual(len(errors), 1)
+        self.assertIn("venue name", errors[0])
+        self.assertEqual(warnings, [])
+
     def test_locality_shorthand_venue_alias_does_not_poison_city(self):
         registry_names = venue_names_for_city_contamination(
             [
