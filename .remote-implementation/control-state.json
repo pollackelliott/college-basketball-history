@@ -545,11 +545,11 @@
   "current_sequence": 256,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
     "operation": "PHASE0",
     "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "duquesne-phase0-0001",
     "school_key": "duquesne",
     "successor_manifest_path": ".remote-implementation/successors/duquesne/duquesne-phase0-0001/successor-manifest.json",
