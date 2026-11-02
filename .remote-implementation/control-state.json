@@ -255,18 +255,19 @@
     "davidson-stage1-0002",
     "davidson-phase0-0001",
     "davidson-stage2-census-0001",
-    "davidson-stage2-opponent-display-normalize-0001"
+    "davidson-stage2-opponent-display-normalize-0001",
+    "davidson-stage2-census-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d90b71a9a662a462ee2376ea58e37b59b46f49b6",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "davidson-stage2-census-0002",
+  "active_request_sha256": "7710cdb6fa715616059b02caf7b0223ab29f7e547928700fbefe2aca1289812e",
+  "active_school_key": "davidson",
+  "active_target_branch": "data/davidson-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -540,8 +541,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/davidson/davidson-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "b213561beb36d906fae1680a9013229a66441ff7efa2fc1247626e805f7eb49c"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41489356029",
+  "lock_acquisition_request_commit": "f654f86a8e3e7b63bc695fc77b94a0dc90a3d394",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
