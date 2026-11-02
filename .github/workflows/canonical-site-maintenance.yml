@@ -97,7 +97,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git diff --check
+          # games.csv is repository-stored CRLF. Treat CR as part of EOL while
+          # retaining Git's default blank-at-eol, blank-at-eof, and space-before-tab checks.
+          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check
           python - <<'PY'
           import subprocess
           paths = set(subprocess.check_output(["git","diff","--name-only"], text=True).splitlines())
