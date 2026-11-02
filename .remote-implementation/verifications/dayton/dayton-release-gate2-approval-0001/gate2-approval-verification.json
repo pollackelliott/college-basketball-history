@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "2bf918e16fc628e39d2e4a6f32cb5f3bb23d64c028b158a294a330e41068db74",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "8d15886f81329d355ab3f16ff00c03b4779d08ba",
+  "pr_number": 433,
+  "preview_deployment_id": 7494076893,
+  "preview_url": "https://college-basketball-history-l86lnl005-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "dayton-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "dayton",
+  "status": "PASS"
+}
