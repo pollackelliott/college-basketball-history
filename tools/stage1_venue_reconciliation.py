@@ -114,7 +114,7 @@ def load_venue_reconciliation(
     package_path: Path,
     local_venues: list[dict[str, str]],
     global_venues: list[dict[str, str]],
-) -> tuple[dict[str, dict[str, str]], dict[str, Any] | None]:
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any] | None]:
     """Validate an explicit identity map and return mappings + durable provenance.
 
     Both the entire transport ZIP and its exact frozen venues.csv member are
@@ -148,8 +148,12 @@ def load_venue_reconciliation(
     try:
         with zipfile.ZipFile(package_path) as archive:
             member = archive.read("venues.csv")
+            source_games_member = archive.read("source-games.csv")
     except (OSError, ValueError, KeyError, zipfile.BadZipFile) as exc:
-        raise WorkflowError(f"venue reconciliation cannot read frozen venues.csv: {exc}") from exc
+        raise WorkflowError(
+            f"venue reconciliation cannot read frozen package members: {exc}"
+        ) from exc
+    source_games = _csv_rows(source_games_member)
     expected_venues = str(doc.get("expected_venues_sha256") or "").lower().strip()
     actual_venues = _sha256_bytes(member)
     if expected_venues != actual_venues:
@@ -170,8 +174,9 @@ def load_venue_reconciliation(
         row.get("venue_key", "").strip(): row for row in global_venues
     }
 
-    mappings: dict[str, dict[str, str]] = {}
+    mappings: dict[str, dict[str, Any]] = {}
     used_target_ids: set[str] = set()
+    new_identity_specs: dict[str, tuple[str, str, str]] = {}
     for number, raw in enumerate(raw_mappings, 1):
         if not isinstance(raw, dict):
             raise WorkflowError(f"venue reconciliation mapping {number} not an object")
