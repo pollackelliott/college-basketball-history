@@ -817,6 +817,45 @@ def load_venue_reconciliation(
                 f"venue reconciliation global geography mismatch for {selector!r}"
             )
 
+        raw_preserve_local = raw.get("preserve_local_representation", False)
+        if not isinstance(raw_preserve_local, bool):
+            raise WorkflowError(
+                "venue reconciliation preserve_local_representation must be boolean"
+            )
+        if raw_preserve_local:
+            if schema_version != 2 or row_index is None:
+                raise WorkflowError(
+                    "preserve_local_representation requires schema-v2 "
+                    "local_venue_row_index"
+                )
+            retained = [
+                other
+                for index, other in enumerate(local_venues, 1)
+                if index != row_index
+                and other.get("venue_key", "").strip()
+                == item["global_venue_key"]
+                and other.get("canonical_name", "").strip()
+                == item["expected_local_name"]
+                and explicit_reuse_locality_compatible(
+                    local_rows[0], other, item
+                )
+            ]
+            if not retained:
+                raise WorkflowError(
+                    "preserve_local_representation requires a retained keyed "
+                    "row for the same authenticated physical venue"
+                )
+            conflicts = representation_consolidation_conflicts(
+                local_rows[0], retained
+            )
+            if "RELATIONSHIP_AUTHORITY_PRESENT" not in conflicts:
+                raise WorkflowError(
+                    "preserve_local_representation is limited to frozen rows "
+                    "carrying venue relationship authority"
+                )
+            item["preservation_conflicts"] = conflicts
+        item["preserve_local_representation"] = raw_preserve_local
+
         mappings[selector] = item
 
     metadata = {
