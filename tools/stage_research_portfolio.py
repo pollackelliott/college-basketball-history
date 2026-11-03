@@ -46,7 +46,7 @@ from integration_freeze_guard import (
     build_source_game_semantic_snapshot,
     semantic_snapshot_sha256,
 )
-from onboarding_hardening import research_portfolio_report
+from onboarding_hardening import (\n    research_portfolio_report,\n    venue_summary_consistency_report,\n)
 from onboarding_plan import (
     REQUIRED_PACKAGE_FILES,
     WorkflowError,
