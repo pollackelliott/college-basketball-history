@@ -91,6 +91,59 @@ def _matching_source_games(
     ]
 
 
+def representation_consolidation_conflicts(
+    local: dict[str, str],
+    retained_rows: list[dict[str, str]],
+) -> list[str]:
+    """Return semantic reasons a blank representation row may not consolidate."""
+    conflicts: list[str] = []
+    if any(
+        local.get(field, "").strip()
+        for field in (
+            "relationship_type",
+            "relationship_start",
+            "relationship_end",
+            "relationship_date_precision",
+        )
+    ):
+        conflicts.append("RELATIONSHIP_AUTHORITY_PRESENT")
+
+    for field in (
+        "site_rule",
+        "source_basis",
+        "notes",
+        "venue_type",
+        "known_opened",
+        "known_closed",
+        "venue_date_precision",
+    ):
+        value = local.get(field, "").strip()
+        if value and any(
+            retained.get(field, "").strip() != value
+            for retained in retained_rows
+        ):
+            conflicts.append(f"UNIQUE_{field.upper()}_AUTHORITY")
+
+    aliases = {
+        value.strip().casefold()
+        for value in local.get("aliases", "").split(";")
+        if value.strip()
+    }
+    retained_labels = set()
+    for retained in retained_rows:
+        canonical = retained.get("canonical_name", "").strip()
+        if canonical:
+            retained_labels.add(canonical.casefold())
+        retained_labels.update(
+            value.strip().casefold()
+            for value in retained.get("aliases", "").split(";")
+            if value.strip()
+        )
+    if not aliases.issubset(retained_labels):
+        conflicts.append("UNIQUE_ALIASES")
+    return conflicts
+
+
 def venue_reconciliation_for_row(
     mappings: dict[str, dict[str, Any]],
     local: dict[str, str],
