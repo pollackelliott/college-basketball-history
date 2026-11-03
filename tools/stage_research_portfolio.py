@@ -1575,7 +1575,7 @@ def rebase_venues(
     name_rows: list[dict[str, str]],
     *,
     existing_school_venues: list[dict[str, str]] | None = None,
-    venue_reconciliation: dict[str, dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, Any]] | None = None,
     source_games: list[dict[str, str]] | None = None,
 ) -> tuple[
     list[dict[str, str]],
@@ -1645,26 +1645,94 @@ def rebase_venues(
         explicit = venue_reconciliation_for_row(
             venue_reconciliation, local, row_index
         )
-        if (
-            explicit is not None
-            and explicit.get("action") == "DROP_REDUNDANT_LOCAL_ROW"
-        ):
-            mappings.append(
-                {
-                    "venue_key": key,
-                    "final_venue_key": "",
-                    "canonical_name": name,
-                    "research_venue_id": research_id,
-                    "final_venue_id": "",
-                    "resolution": "DROP_REDUNDANT_LOCAL_ROW",
-                    "frozen_row_index": row_index,
-                }
-            )
-            continue
+        register_new_key = ""
+        if explicit is not None:
+            explicit_action = explicit.get("action")
+            if explicit_action == "DROP_REDUNDANT_LOCAL_ROW":
+                mappings.append(
+                    {
+                        "venue_key": key,
+                        "final_venue_key": "",
+                        "canonical_name": name,
+                        "research_venue_id": research_id,
+                        "final_venue_id": "",
+                        "resolution": "DROP_REDUNDANT_LOCAL_ROW",
+                        "frozen_row_index": row_index,
+                    }
+                )
+                continue
+            if explicit_action == "SPLIT_LOCAL_ROW_BY_CUTOVER":
+                mappings.append(
+                    {
+                        "venue_key": key,
+                        "final_venue_key": "",
+                        "canonical_name": name,
+                        "research_venue_id": research_id,
+                        "final_venue_id": "",
+                        "resolution": "SPLIT_LOCAL_ROW_BY_CUTOVER",
+                        "frozen_row_index": row_index,
+                        "split_source_game_count": explicit.get(
+                            "split_source_game_count", ""
+                        ),
+                    }
+                )
+                continue
+            if explicit_action == "REUSE_CURRENT_IDENTITY" and not key:
+                target_key = explicit["global_venue_key"]
+                retained = [
+                    other
+                    for other in local_rows
+                    if other is not local
+                    and other.get("venue_key", "").strip() == target_key
+                    and other.get("canonical_name", "").strip() == name
+                    and other.get("city", "").strip()
+                    == local.get("city", "").strip()
+                    and other.get("state", "").strip()
+                    == local.get("state", "").strip()
+                ]
+                if retained:
+                    conflicts = representation_consolidation_conflicts(
+                        local, retained
+                    )
+                    if conflicts:
+                        raise WorkflowError(
+                            "explicit same-identity venue consolidation is unsafe: "
+                            + ",".join(conflicts)
+                        )
+                    mappings.append(
+                        {
+                            "venue_key": key,
+                            "final_venue_key": target_key,
+                            "canonical_name": name,
+                            "research_venue_id": research_id,
+                            "final_venue_id": explicit["global_venue_id"],
+                            "resolution": "CONSOLIDATE_EXPLICIT_REUSE",
+                            "frozen_row_index": row_index,
+                        }
+                    )
+                    continue
+            if explicit_action == "REGISTER_NEW_IDENTITY":
+                register_new_key = explicit["new_global_venue_key"]
+                already_created = global_by_key.get(register_new_key)
+                if already_created is not None:
+                    if (
+                        normalize_name(already_created.get("display_name", ""))
+                        != normalized
+                        or not geography_compatible(local, already_created)
+                    ):
+                        raise WorkflowError(
+                            "same-package registered venue identity no longer "
+                            f"matches frozen row {row_index}"
+                        )
+                    chosen = already_created
+                    reason = "REUSE_SAME_PACKAGE_NEW_IDENTITY"
 
         research_base_hint = research_base_venue_reuse_hint(local)
 
-        if explicit is not None:
+        if (
+            explicit is not None
+            and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
+        ):
             candidate = global_by_id.get(explicit["global_venue_id"])
             if (candidate is None
                 or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]
@@ -1717,7 +1785,7 @@ def rebase_venues(
             chosen = candidate
             reason = "REUSE_EXACT_KEY"
 
-        if chosen is None and normalized:
+        if chosen is None and normalized and not register_new_key:
             candidate_ids = {
                 venue_id
                 for venue_id in ids_by_name.get(normalized, set())
@@ -1800,21 +1868,29 @@ def rebase_venues(
             final_id = next_venue_id(used_ids)
             used_ids.add(final_id)
 
+            final_key = register_new_key or key
             collisions = incompatible_school_venue_key_rows(
                 local,
-                key,
+                final_key,
                 existing_school_venues,
             )
-            final_key = key
-            reason = "NEW_GLOBAL_IDENTITY"
-            if collisions:
-                final_key = disambiguated_new_venue_key(
-                    key,
-                    school_key,
-                    reserved_keys,
-                )
-                reserved_keys.add(final_key)
-                reason = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
+            if register_new_key:
+                if collisions:
+                    raise WorkflowError(
+                        "explicit new venue key conflicts with an existing "
+                        f"school-local representation: {register_new_key!r}"
+                    )
+                reason = "NEW_GLOBAL_IDENTITY_EXPLICIT_REGISTRATION"
+            else:
+                reason = "NEW_GLOBAL_IDENTITY"
+                if collisions:
+                    final_key = disambiguated_new_venue_key(
+                        key,
+                        school_key,
+                        reserved_keys,
+                    )
+                    reserved_keys.add(final_key)
+                    reason = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
 
             registry_state = (
                 local.get("state", "").strip()
