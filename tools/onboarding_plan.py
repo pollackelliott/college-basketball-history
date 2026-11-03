@@ -5974,57 +5974,6 @@ def apply_pre_ingest_source_patches(
             raise WorkflowError(
                 f"{decision_id}: frozen new-game date/season state changed"
             )
-        if item.get("category") == "new_game_date_patch":
-            source_game_id = item["source_game_id"]
-            source = source_by_id.get(source_game_id)
-            assertions = assertion_by_source.get((school_key, source_game_id), [])
-            if source is None:
-                raise WorkflowError(
-                    f"{item['decision_id']}: new-game date source row is missing after ingestion"
-                )
-            if len(assertions) != 1:
-                raise WorkflowError(
-                    f"{item['decision_id']}: expected one target assertion after ingestion; "
-                    f"found {len(assertions)}"
-                )
-            assertion = assertions[0]
-            actual_game_id = assertion.get("canonical_game_id", "").strip()
-            canonical = canonical_by_id.get(actual_game_id)
-            if canonical is None:
-                raise WorkflowError(
-                    f"{item['decision_id']}: ingested new-game date canonical row is missing"
-                )
-            corrected = _reviewed_new_game_date_patch(
-                item,
-                item.get("source_patch", {}),
-            )
-            if not (
-                source.get("game_date", "").strip() == corrected
-                and assertion.get("game_date", "").strip() == corrected
-                and canonical.get("game_date", "").strip() == corrected
-                and source.get("season_label", "").strip()
-                == str(item.get("season_label", "")).strip()
-                and canonical.get("season_label", "").strip()
-                == str(item.get("season_label", "")).strip()
-            ):
-                raise WorkflowError(
-                    f"{item['decision_id']}: owner-final new-game date did not "
-                    "persist through ingestion"
-                )
-            canonical["notes"] = _append_note(
-                canonical.get("notes", ""),
-                "[OWNER_APPROVED_NEW_GAME_DATE_PATCH "
-                f"school={school_key} source={source_game_id} "
-                f"old={item['source_game_date']} new={corrected} "
-                f"authority={item.get('owner_final_directive_sha256','')[:12]} "
-                f"decision={item['decision_id']} "
-                f"plan={approved['approved_plan_hash'][:12]}]",
-            )
-            counts["new_game_dates_verified"] += 1
-            touched_canonical_ids.add(actual_game_id)
-            touched_source_ids.add(source_game_id)
-            continue
-
         if item.get("category") == "ncaa_round_patch":
             if (
                 source.get("curated_game_type", "").strip() != "NCAA_TOURNAMENT"
@@ -6511,6 +6460,57 @@ def apply_reconciliation_decisions(
 
     for item in reconciliation_items:
         game_id = item.get("canonical_game_id", "").strip()
+
+        if item.get("category") == "new_game_date_patch":
+            source_game_id = item["source_game_id"]
+            source = source_by_id.get(source_game_id)
+            assertions = assertion_by_source.get((school_key, source_game_id), [])
+            if source is None:
+                raise WorkflowError(
+                    f"{item['decision_id']}: new-game date source row is missing after ingestion"
+                )
+            if len(assertions) != 1:
+                raise WorkflowError(
+                    f"{item['decision_id']}: expected one target assertion after ingestion; "
+                    f"found {len(assertions)}"
+                )
+            assertion = assertions[0]
+            actual_game_id = assertion.get("canonical_game_id", "").strip()
+            canonical = canonical_by_id.get(actual_game_id)
+            if canonical is None:
+                raise WorkflowError(
+                    f"{item['decision_id']}: ingested new-game date canonical row is missing"
+                )
+            corrected = _reviewed_new_game_date_patch(
+                item,
+                item.get("source_patch", {}),
+            )
+            if not (
+                source.get("game_date", "").strip() == corrected
+                and assertion.get("game_date", "").strip() == corrected
+                and canonical.get("game_date", "").strip() == corrected
+                and source.get("season_label", "").strip()
+                == str(item.get("season_label", "")).strip()
+                and canonical.get("season_label", "").strip()
+                == str(item.get("season_label", "")).strip()
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: owner-final new-game date did not "
+                    "persist through ingestion"
+                )
+            canonical["notes"] = _append_note(
+                canonical.get("notes", ""),
+                "[OWNER_APPROVED_NEW_GAME_DATE_PATCH "
+                f"school={school_key} source={source_game_id} "
+                f"old={item['source_game_date']} new={corrected} "
+                f"authority={item.get('owner_final_directive_sha256','')[:12]} "
+                f"decision={item['decision_id']} "
+                f"plan={approved['approved_plan_hash'][:12]}]",
+            )
+            counts["new_game_dates_verified"] += 1
+            touched_canonical_ids.add(actual_game_id)
+            touched_source_ids.add(source_game_id)
+            continue
 
         if item.get("category") == "ncaa_round_patch":
             source_game_id = item["source_game_id"]
