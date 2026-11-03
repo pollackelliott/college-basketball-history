@@ -2006,6 +2006,13 @@ def rebase_venues(
         )
         staged_local_rows.append(local)
 
+    if source_games:
+        refresh_local_venue_assignment_summaries(
+            staged_local_rows,
+            source_games,
+            venue_reconciliation,
+        )
+
     return staged_local_rows, global_rows, name_rows, mappings
 
 
@@ -2356,6 +2363,16 @@ def main() -> int:
                 venue_reconciliation=venue_reconciliation,
                 source_games=source_games,
             )
+
+            staged_venue_summary = venue_summary_consistency_report(
+                source_games,
+                local_venues,
+            )
+            if staged_venue_summary["errors"]:
+                raise WorkflowError(
+                    "post-rebase venue summary consistency failed: "
+                    + "; ".join(staged_venue_summary["errors"][:10])
+                )
 
             global_conferences, conference_mappings = register_conferences(
                 global_conferences,
