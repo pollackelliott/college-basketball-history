@@ -109,6 +109,7 @@ def load_venue_reconciliation(
     }
 
     mappings: dict[str, dict[str, str]] = {}
+    used_target_ids: set[str] = set()
     for number, raw in enumerate(raw_mappings, 1):
         if not isinstance(raw, dict):
             raise WorkflowError(f"venue reconciliation mapping {number} not an object")
@@ -116,7 +117,9 @@ def load_venue_reconciliation(
         action = str(raw.get("action") or "REUSE_CURRENT_IDENTITY").strip().upper()
         local_key = str(raw.get("local_venue_key") or "").strip()
         raw_row_index = raw.get("local_venue_row_index")
-        has_row_index = raw_row_index not in {None, ""}
+        has_row_index = (
+            raw_row_index is not None and str(raw_row_index).strip() != ""
+        )
         if schema_version == 1 and has_row_index:
             raise WorkflowError(
                 "venue reconciliation schema_version 1 does not support local_venue_row_index"
@@ -141,6 +144,10 @@ def load_venue_reconciliation(
                 )
             selector = _row_selector(row_index)
             local_rows = [local_venues[row_index - 1]]
+            if local_rows[0].get("venue_key", "").strip():
+                raise WorkflowError(
+                    "local_venue_row_index is limited to blank-key frozen rows"
+                )
         else:
             selector = local_key
             local_rows = local_by_key.get(local_key) or []
@@ -150,6 +157,10 @@ def load_venue_reconciliation(
                 )
 
         if selector in mappings:
+            if local_key:
+                raise WorkflowError(
+                    f"venue reconciliation repeats local key {local_key!r}"
+                )
             raise WorkflowError(
                 f"venue reconciliation repeats local selector {selector!r}"
             )
@@ -270,6 +281,11 @@ def load_venue_reconciliation(
             raise WorkflowError(
                 f"venue reconciliation global geography mismatch for {selector!r}"
             )
+        if target_id in used_target_ids:
+            raise WorkflowError(
+                f"venue reconciliation target ID repeated: {target_id}"
+            )
+        used_target_ids.add(target_id)
         mappings[selector] = item
 
     metadata = {
