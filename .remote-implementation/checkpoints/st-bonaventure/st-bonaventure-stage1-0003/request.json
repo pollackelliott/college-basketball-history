@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage1-0003",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "037a4e69b47f864d3e845a66b1271b750a198a2f",
+  "previous_control_state_sha256": "ae4f7b9183d26cd6bae60d3fe7f2e0156017a9193e3b243452232ba31f3d8872",
+  "expected_protected_main_sha": "8945e0a9a6de8fbd9bc7267b62a1642ebd9372dd",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0003/venue-reconciliation.json",
+    "sha256": "9f41fa988fabfe2a88b6d405570092c09976f3db43f7a93027cf5b8ac1a8640d"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center authorized Stage 1 resumption after PR #439",
+    "authorization": "Control Center explicitly authorized resumption of the same St. Bonaventure Stage 1 current-main reconciliation objective against protected main 8945e0a9a6de8fbd9bc7267b62a1642ebd9372dd using the immutable Research Freeze 22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda and schema-v2 blank-key venue reconciliation. The exact input contains 36 representation-only row-index reuse mappings: all 35 prior single-candidate blocker rows plus Charlotte Coliseum row 26 to VEN-000040 after fresh frozen-ledger/current-main verification. The broad blank-key Madison Square Garden row is deliberately left unresolved because its nonblank site_rule makes DROP_REDUNDANT_LOCAL_ROW fail closed under the permanent guard. No Research reopening, Phase 0, Stage 2, shared/global maintenance, Owner Gate 1/2, release, merge, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
