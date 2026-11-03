@@ -1,0 +1,25 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
+  "request_id": "st-bonaventure-stage1-0004",
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "research_checkpoint_sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+  "research_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "7da6a9d24d6d268d52f979ffb0ee21b68dc3187d6023d87d6f720658a63d232c",
+    "opponents.csv": "a1256551eee7d7a062b859c4db778e6225fa4012e224e04e02f3b19b166e3450",
+    "source-games.csv": "48628a5c9ced087101dfb25eb4d888e530328676969b187611c56d76235d7e2a",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "b9939ac250cf56d9aec80d9c03aba619cfa9569f6c76a6a14787effec3645071"
+  },
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "sidecars": {
+    "request.json": "765e0e7012148ea12086b9ebba72bca7230a89e0146716e5f8dc7ee56aa1cb0b",
+    "stage1-reconciliation.json": "428dbb12cde088503dc2d5c79be0dfc293ddfed73a3760d78ca6ee9edecd20a6",
+    "venue-reconciliation.json": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}

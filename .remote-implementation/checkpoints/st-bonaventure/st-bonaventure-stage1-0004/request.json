@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage1-0004",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "e8f25a63cdb839732c45b9c241483739ef097bf5",
+  "previous_control_state_sha256": "091cbbffd2ae87def6473731527abe65189f5e03b205d09f72f7c6991c28a060",
+  "expected_protected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0004/venue-reconciliation.json",
+    "sha256": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center authorized final Stage 1 resumption after PR #443",
+    "authorization": "Control Center explicitly authorized the same St. Bonaventure Stage 1 objective against protected main 74f994dbd820f57bc1ca9d0a011d09087f70b44a after PRs #441-#443 completed the generic venue-representation capability family. The exact hash-bound schema-v2 input contains 58 mappings with zero permanent residuals: 46 authenticated current-main reuses, 11 explicit new-identity registrations (including two preserved Olean Armory HOME relationship rows sharing one olean-armory physical key), and one exact Madison Square Garden cutover split at 1968-02-11. MSG independently proves 53 -> 34 VEN-000123 + 19 VEN-000124 with zero ambiguity; Olean Armory independently proves 25 -> 1 + 24 across its two relationship windows. Reilly Center row 74 alone uses preserve_local_representation=true with the authenticated locality variant so its HOME relationship/site/provenance/type authority remains distinct while reusing VEN-000926. Immutable Research bytes and source-game geography remain unchanged. No Phase 0, Stage 2, Owner Gate 1/2, release, merge, shared maintenance, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
