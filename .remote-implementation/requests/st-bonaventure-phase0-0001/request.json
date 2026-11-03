@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-phase0-0001",
+  "operation": "PHASE0",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "72e1acb51436c3be2e7bdc42ced5ace0cb4083b4",
+  "previous_control_state_sha256": "f3d03cd9fe6de889a4ce3c8f4c0720c624fc5d647e59536d3c3db8573ad81146",
+  "expected_protected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
+      "part_count": 14
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage1-0004/checkpoint-manifest.json",
+    "sha256": "caa81b52a70a922d6aebfa8080ba257bcef597c7c904afc5ffab67f966b46cbb"
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0004/venue-reconciliation.json",
+    "sha256": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
+  },
+  "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1915-1916",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted St. Bonaventure INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly records owner-confirmed INCEPTION+ authority, includes the owner-approved 1915-16 University at Buffalo game, and preserves the individually documented varsity universe from 1919-20 through 2025-26 together with the explicit six-game unidentified 1919-20 coverage debt. Current program-top-level-scope.csv independently matches INCEPTION+. Preserve the exact frozen historical universe and accepted uncertainty."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — explicitly owner-authorized Phase 0 after Stage 1 PASS",
+    "authorization": "Owner explicitly authorized St. Bonaventure Phase 0 after fresh Stage 1 request st-bonaventure-stage1-0004 completed PASS with zero blockers on protected main 74f994dbd820f57bc1ca9d0a011d09087f70b44a. This authorizes exactly one guarded PHASE0 operation: reauthenticate and fresh-repeat Stage 1 against exact main, stage the immutable six-file St. Bonaventure Research Freeze, apply the exact 58-mapping venue representation reconciliation already proven at Stage 1, register only the 11 mechanically safe new physical venue representations, preserve the exact INCEPTION+ scope, recompute and strictly validate derived venue assignment summaries, capture INTEGRATION_FROZEN, publish create-once data/st-bonaventure-onboarding through the global mutation lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. The frozen package records the Stage 5 NON_D1 owner sanity scan as APPROVED. No Research reopening, unrelated shared/global maintenance, Stage 2, Owner Gate 1/2, release, Preview, merge, recovery, or protected-main direct mutation is authorized."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}

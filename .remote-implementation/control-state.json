@@ -284,18 +284,19 @@
     "st-bonaventure-stage1-0001",
     "st-bonaventure-stage1-0002",
     "st-bonaventure-stage1-0003",
-    "st-bonaventure-stage1-0004"
+    "st-bonaventure-stage1-0004",
+    "st-bonaventure-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41658212905:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "st-bonaventure-phase0-0001",
+  "active_request_sha256": "d811342c47bbdc6136e9e9e19bffed27d3a254a290c242ce260c085c5e4ed283",
+  "active_school_key": "st-bonaventure",
+  "active_target_branch": "data/st-bonaventure-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -585,8 +586,11 @@
     "stage1_reconciliation_sha256": "428dbb12cde088503dc2d5c79be0dfc293ddfed73a3760d78ca6ee9edecd20a6",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41658212905",
+  "lock_acquisition_request_commit": "a73d9bf57aae31cc44bcde6e173df908248d4bb2",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
