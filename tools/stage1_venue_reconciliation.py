@@ -5,8 +5,12 @@ changes global registries or the frozen six-file research portfolio.
 """
 from __future__ import annotations
 
+import csv
+import datetime as dt
 import hashlib
+import io
 import json
+import re
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -29,11 +33,69 @@ def _row_selector(index: int) -> str:
     return f"{_ROW_SELECTOR_PREFIX}{index}"
 
 
+def _normalize_name(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
+
+
+def _csv_rows(data: bytes) -> list[dict[str, str]]:
+    return list(
+        csv.DictReader(
+            io.StringIO(data.decode("utf-8-sig"), newline="")
+        )
+    )
+
+
+def _season_window(value: str) -> tuple[dt.date, dt.date] | None:
+    match = re.fullmatch(r"(\d{4})-(\d{4})", (value or "").strip())
+    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+        return None
+    return (
+        dt.date(int(match.group(1)), 7, 1),
+        dt.date(int(match.group(2)), 6, 30),
+    )
+
+
+def _game_summary(rows: list[dict[str, str]]) -> dict[str, str]:
+    dates = [row.get("game_date", "").strip() for row in rows]
+    exact = [value for value in dates if value]
+    return {
+        "games_currently_assigned": str(len(rows)),
+        "first_assigned_game": (
+            min(exact) if rows and len(exact) == len(rows) else ""
+        ),
+        "last_assigned_game": (
+            max(exact) if rows and len(exact) == len(rows) else ""
+        ),
+    }
+
+
+def _matching_source_games(
+    source_games: list[dict[str, str]],
+    local: dict[str, str],
+) -> list[dict[str, str]]:
+    labels = {_normalize_name(local.get("canonical_name", ""))}
+    labels.update(
+        _normalize_name(alias)
+        for alias in local.get("aliases", "").split(";")
+        if alias.strip()
+    )
+    labels.discard("")
+    city = local.get("city", "").strip().casefold()
+    state = local.get("state", "").strip().upper()
+    return [
+        row
+        for row in source_games
+        if _normalize_name(row.get("curated_venue_name", "")) in labels
+        and row.get("city", "").strip().casefold() == city
+        and row.get("state", "").strip().upper() == state
+    ]
+
+
 def venue_reconciliation_for_row(
-    mappings: dict[str, dict[str, str]],
+    mappings: dict[str, dict[str, Any]],
     local: dict[str, str],
     row_index: int,
-) -> dict[str, str] | None:
+) -> dict[str, Any] | None:
     """Return explicit reconciliation for one frozen venues.csv row.
 
     Legacy schema-v1 mappings remain keyed by nonblank local venue_key.
