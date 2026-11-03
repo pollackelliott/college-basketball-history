@@ -140,7 +140,11 @@ Do **not** end the turn with `NEXT OWNER ACTION: PROCEED` merely because:
 - a fresh verifier has not yet written its result;
 - a successful intermediate checkpoint exists and the next deterministic substep belongs to the same authorized phase.
 
-Also do **not** poll indefinitely merely to avoid a conversational handoff. After three consecutive no-material-change polls in one assistant turn, preserve the exact workflow/request/control identity and yield at that durable state. The existing phase authorization remains valid.
+Also do **not** poll indefinitely merely to avoid a conversational handoff. Treat the polling budget as a measure of **sustained unchanged external state**, not a count of API reads. The first healthy observation establishes the baseline and does not consume the no-progress budget. A subsequent no-progress observation counts only when at least **two minutes of external workflow time** have elapsed since the previous counted observation. Rapid repeated status reads inside that interval are diagnostic only and **must not** consume the budget.
+
+Material progress resets the no-progress count. Material progress includes a relevant workflow/job state transition, a newly durable checkpoint or verification result, a newly accepted deterministic request in the same authorized phase, or another authenticated state change that advances the operation. Elapsed wall-clock time alone is not a reason to yield while such progress continues.
+
+Yield for ordinary healthy waiting only after **three counted no-progress observations after the baseline**, each separated by at least two minutes and all showing no material advance (normally about six minutes of genuinely unchanged external state). If a real chat/tool/context limit prevents continued observation sooner, preserve the exact workflow/request/control identity and yield at that durable state. In either case, the existing phase authorization remains valid.
 
 A new **authorization** relay is required only when the current phase reaches its owner-facing completion boundary or encounters a genuine blocker/authority change. A bounded-turn yield inside the same authorized phase is transport continuation only; it uses the dedicated continuation classification below.
 
