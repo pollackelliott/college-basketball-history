@@ -4,7 +4,7 @@
   "request_id": "st-bonaventure-stage2-census-0002",
   "operation": "STAGE2_CENSUS",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "01f3ad18899c1df674068de015eb58e63f1a476d",
+  "previous_control_state_commit": "431988e25358e8a1fdea78371dd00e8ed6da6f23",
   "previous_control_state_sha256": "254fadec5a37f622edab084461452285aba1b063bdbee0a6ebf0bcbdd09ee718",
   "expected_protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
   "target_branch": "data/st-bonaventure-onboarding",
