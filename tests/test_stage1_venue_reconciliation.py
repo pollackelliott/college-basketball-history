@@ -680,6 +680,7 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
                 "display_name": "Shared Arena",
                 "city": "Example City",
                 "state": "NY",
+                "identity_status": "RESEARCHED_SPLIT",
             },
             {
                 **dict(self.global_row),
@@ -688,6 +689,7 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
                 "display_name": "Shared Arena",
                 "city": "Example City",
                 "state": "NY",
+                "identity_status": "RESEARCHED_SPLIT",
             },
         ]
         source_games = list(csv.DictReader(source_bytes.decode().splitlines()))
