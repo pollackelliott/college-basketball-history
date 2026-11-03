@@ -1,48 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-phase0-0003",
-  "operation": "PHASE0",
+  "request_id": "st-bonaventure-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "61a73d3f8d0b8a69b4b1ddd4d3976595ada3eb84",
-  "previous_control_state_sha256": "ba4f5e1a657be912919e97446b1b62e73910987586a90dca556660ac42946a40",
+  "previous_control_state_commit": "18312edd86810018aa5a5b6b45e375314df81f8d",
+  "previous_control_state_sha256": "abe819760476f982682f3460a216624f18b53a9865ae8b7451cc35f3848d028a",
   "expected_protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
   "target_branch": "data/st-bonaventure-onboarding",
-  "research_checkpoint": {
-    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
-    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
-      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
-      "part_count": 14
-    }
+  "target_sha": "25c1fabd981fc55357a07156ec899c7c004d5512",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage1-0006/checkpoint-manifest.json",
-    "sha256": "b13f008e221ec9e1612b0b1d24668e8e7617bb35a2b254ba02e54d5d60e701bf"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0004/venue-reconciliation.json",
-    "sha256": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
-  },
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1915-1916",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted St. Bonaventure INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly records owner-confirmed INCEPTION+ authority, includes the owner-approved 1915-16 University at Buffalo game, and preserves the individually documented varsity universe from 1919-20 through 2025-26 together with the explicit six-game unidentified 1919-20 coverage debt. Current program-top-level-scope.csv independently matches INCEPTION+. Preserve the exact frozen historical universe and accepted uncertainty."
-  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
   "creation_provenance": {
-    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center-authorized fresh Phase 0 after PR #445 and Stage 1 refresh PASS",
-    "authorization": "Control Center explicitly directed a new Phase 0 only after a fresh Stage 1 inventory passed on repaired protected main 933d2f9e7ebdd24fefcafda326a7ebe898a476df. Fresh Stage 1 request st-bonaventure-stage1-0006 is durably PASS with zero blockers and exact checkpoint hash b13f008e221ec9e1612b0b1d24668e8e7617bb35a2b254ba02e54d5d60e701bf. This request authorizes one guarded PHASE0 operation using the immutable Research Freeze and exact 58-mapping reconciliation, including permanent proof of the complete preserved Reilly relationship/locality topology under PR #445, recomputed venue summaries, authenticated post-rebase summary consistency, INTEGRATION_FROZEN, create-once publication to data/st-bonaventure-onboarding, and required independent fresh Phase 0 verification. The abandoned st-bonaventure-phase0-0001 and st-bonaventure-phase0-0002 remain abandoned and are not replayed. No Stage 2, Owner Gate 1/2, release, merge, unrelated maintenance, or protected-main direct mutation is authorized."
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly authorized Proceed after St. Bonaventure Phase 0 request st-bonaventure-phase0-0003 completed with independent fresh_runner_verification=PASS on protected main 933d2f9e7ebdd24fefcafda326a7ebe898a476df. This is the first bounded read-only STAGE2_CENSUS request against exact onboarding successor 25c1fabd981fc55357a07156ec899c7c004d5512, exact Phase 0 successor manifest, Integration Freeze, and semantic snapshot. It authorizes capability discovery only. It carries no tracked repair, current-main refresh, recommendation map, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, recovery, release, Preview, merge, Owner Gate 2, or protected-main mutation authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -57,6 +38,7 @@
     "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
