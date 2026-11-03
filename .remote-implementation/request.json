@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-release-gate2-approval-0002",
+  "request_id": "duquesne-release-gate2-approval-0003",
   "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "duquesne",
-  "previous_control_state_commit": "e741a3ae67e56781cfde135534479c3e36ac60e1",
+  "previous_control_state_commit": "2f8f96b4df14309bda747319793d6461b130735e",
   "previous_control_state_sha256": "6965d2b67c63b7f1d17a4c4837661a9f65cc7404c4d058862f097782e3153ded",
   "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "target_branch": "data/duquesne-onboarding",
@@ -20,21 +20,21 @@
   },
   "release_preview_verification": {
     "path": ".remote-implementation/verifications/duquesne/duquesne-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "c4a2504548e03ab48f9d93c0155bfbc8fc279fce58a275603c23a86456891b12"
+    "sha256": "c6392622b8aa079dde032c648c560b39f3106398dd701c2ce8791e605c5776a5"
   },
   "owner_gate_2_approval": {
     "approved": true,
-    "approval_basis": "Owner's exact statement: APPROVED. Proceed, given immediately after the exact fresh-verified Duquesne Owner Gate 2 packet for PR #437 head 8fd4c255cc1094ac45c98f7e0d043187526e7816 and Preview deployment 7507221375.",
+    "approval_basis": "Owner's exact statement: APPROVED. Proceed, immediately after the exact fresh-verified Duquesne Owner Gate 2 packet for PR #437 head 8fd4c255cc1094ac45c98f7e0d043187526e7816 and Preview deployment 7507221375.",
     "preview_checkpoint_sha256": "0df962fa5349b155eadee1d115d5acd8ca4c969ae53e569cd67a05d0aa6eabc4",
-    "preview_verification_sha256": "c4a2504548e03ab48f9d93c0155bfbc8fc279fce58a275603c23a86456891b12",
+    "preview_verification_sha256": "c6392622b8aa079dde032c648c560b39f3106398dd701c2ce8791e605c5776a5",
     "pr_number": 437,
     "pr_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
     "preview_deployment_id": 7507221375,
     "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation lane — corrected exact Gate 2 record after pre-accept stale-control-hash rejection",
-    "authorization": "The prior duquesne-release-gate2-approval-0001 request was rejected before acceptance with STALE_CONTROL_STATE_HASH and is absent from accepted/consumed request IDs. This request records the same already-given exact Owner Gate 2 approval only; it does not merge or perform Production proof."
+    "origin": "ChatGPT Duquesne serialized Implementation lane — corrected exact Gate 2 record after two pre-acceptance hash mismatches",
+    "authorization": "Owner explicitly approved exact Duquesne PR #437 Preview. Prior 0001 and 0002 requests were rejected before acceptance and are absent from accepted/consumed IDs. This records the same exact approval only; no merge or Production proof occurs in this request."
   },
   "authority": {
     "phase0": false,
