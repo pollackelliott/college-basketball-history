@@ -217,6 +217,20 @@ def load_venue_reconciliation(
                 raise WorkflowError(
                     "DROP_REDUNDANT_LOCAL_ROW is limited to blank-key frozen rows"
                 )
+            protected_relationship_fields = (
+                "relationship_type",
+                "relationship_start",
+                "relationship_end",
+                "relationship_date_precision",
+                "site_rule",
+            )
+            if any(
+                local.get(field, "").strip()
+                for field in protected_relationship_fields
+            ):
+                raise WorkflowError(
+                    "DROP_REDUNDANT_LOCAL_ROW cannot discard venue relationship authority"
+                )
             retained = [
                 other
                 for index, other in enumerate(local_venues, 1)
@@ -233,6 +247,26 @@ def load_venue_reconciliation(
                 raise WorkflowError(
                     "DROP_REDUNDANT_LOCAL_ROW requires a retained keyed row "
                     "with the same frozen name/geography"
+                )
+            local_aliases = {
+                value.strip().casefold()
+                for value in local.get("aliases", "").split(";")
+                if value.strip()
+            }
+            retained_names = {
+                row.get("canonical_name", "").strip().casefold()
+                for row in retained
+                if row.get("canonical_name", "").strip()
+            }
+            for row in retained:
+                retained_names.update(
+                    value.strip().casefold()
+                    for value in row.get("aliases", "").split(";")
+                    if value.strip()
+                )
+            if not local_aliases.issubset(retained_names):
+                raise WorkflowError(
+                    "DROP_REDUNDANT_LOCAL_ROW cannot discard unique frozen aliases"
                 )
             item["retained_local_keys"] = ";".join(
                 sorted({row.get("venue_key", "").strip() for row in retained})
