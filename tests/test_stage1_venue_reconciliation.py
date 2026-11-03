@@ -11,7 +11,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from onboarding_plan import WorkflowError  # noqa: E402
-from stage1_venue_reconciliation import load_venue_reconciliation  # noqa: E402
+from stage1_venue_reconciliation import (  # noqa: E402
+    explicit_reuse_locality_compatible,
+    load_venue_reconciliation,
+)
 from stage_research_portfolio import (  # noqa: E402
     build_stage1_reconciliation_inventory,
     rebase_venues,
@@ -75,6 +78,33 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         return load_venue_reconciliation(
             self.spec, school_key="test-school", package_path=self.package,
             local_venues=[dict(self.local)], global_venues=[dict(self.global_row)],
+        )
+
+    def test_explicit_locality_variant_predicate_fails_closed(self):
+        mapping = {
+            "allow_locality_variant": True,
+            "locality_variant_basis": "Documented representation difference.",
+        }
+        self.assertTrue(
+            explicit_reuse_locality_compatible(
+                {"city": "Old City", "state": "NY"},
+                {"city": "New City", "state": "NY"},
+                mapping,
+            )
+        )
+        self.assertTrue(
+            explicit_reuse_locality_compatible(
+                {"city": "George Town", "state": "Grand Cayman"},
+                {"city": "George Town", "state": "Cayman Islands"},
+                mapping,
+            )
+        )
+        self.assertFalse(
+            explicit_reuse_locality_compatible(
+                {"city": "Old City", "state": "NY"},
+                {"city": "New City", "state": "PA"},
+                mapping,
+            )
         )
 
     def test_inventory_and_rebase_share_explicit_identity(self):
