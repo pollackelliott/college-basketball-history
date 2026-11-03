@@ -170,6 +170,68 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["errors"], [])
 
+    def test_stale_venue_summary_blocks_freeze_but_is_integration_reconcilable(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(root, ncaa_complete=True)
+            write_csv(
+                root / "venues.csv",
+                [
+                    "source_program_key",
+                    "venue_key",
+                    "venue_id",
+                    "canonical_name",
+                    "aliases",
+                    "city",
+                    "state",
+                    "games_currently_assigned",
+                    "first_assigned_game",
+                    "last_assigned_game",
+                ],
+                [
+                    {
+                        "source_program_key": "test",
+                        "venue_key": "example-arena",
+                        "venue_id": "VEN-999999",
+                        "canonical_name": "Example Arena",
+                        "aliases": "",
+                        "city": "Example City",
+                        "state": "EX",
+                        "games_currently_assigned": "2",
+                        "first_assigned_game": "2026-03-19",
+                        "last_assigned_game": "2026-03-19",
+                    }
+                ],
+            )
+
+            strict = research_portfolio_report(root, school_key="test")
+            self.assertEqual(strict["status"], "FAIL")
+            self.assertTrue(
+                any(
+                    "games_currently_assigned total 2 != 1 source-game assignments"
+                    in error
+                    for error in strict["errors"]
+                )
+            )
+            self.assertEqual(
+                strict["counts"]["venue_summary_consistency"]["mismatch_groups"],
+                1,
+            )
+
+            integration = research_portfolio_report(
+                root,
+                school_key="test",
+                allow_venue_summary_reconciliation=True,
+            )
+            self.assertEqual(integration["status"], "PASS")
+            self.assertTrue(
+                any(
+                    "integration-reconcilable frozen venue summary"
+                    in warning
+                    for warning in integration["warnings"]
+                )
+            )
+
     def test_preseason_guide_cutoff_can_precede_required_completed_season(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
