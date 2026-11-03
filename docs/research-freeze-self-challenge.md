@@ -141,6 +141,13 @@ Ambiguous physical-identity matches must be zero at `RESEARCH_FROZEN`.
 
 Numeric global venue IDs remain provisional until serialized Implementation performs the authoritative current-main rebase.
 
+The self-challenge must also leave the six-file venue representation internally current. If
+Stage 6 recovers or changes accepted game-level physical venue assignments after the
+package-ready venue table was authored, refresh the derived venue assignment summaries
+before final freeze and rerun permanent Research acceptance. A stale
+`games_currently_assigned` / first-assignment / last-assignment summary is a mechanical
+freeze defect even when the underlying historical correction is unquestionably valid.
+
 ## 6. Opponent-identity self-challenge
 
 `unresolved opponent identities = 0` is not enough if a package has confidently resolved a current program to the wrong or stale key.
