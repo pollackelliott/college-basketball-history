@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "recovered_request_id": "st-bonaventure-stage1-0001",
+  "request_id": "st-bonaventure-stage1-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}

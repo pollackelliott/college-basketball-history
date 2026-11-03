@@ -10,7 +10,8 @@
     "colorado-state-phase0-0002",
     "fresno-state-phase0-scope-supersession-0001",
     "saint-louis-phase0-0001",
-    "loyola-chicago-stage2-proposal-0004"
+    "loyola-chicago-stage2-proposal-0004",
+    "st-bonaventure-stage1-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -282,15 +283,15 @@
     "duquesne-release-production-proof-0001",
     "st-bonaventure-stage1-0001"
   ],
-  "active_expected_main_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "st-bonaventure-stage1-0001",
-  "active_request_sha256": "bf140fb9630ed2b659d6324eb425ccfb931d7d7517505a60eff062dbd256ae1e",
-  "active_school_key": "st-bonaventure",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -563,32 +564,29 @@
     "duquesne-release-readiness-0001",
     "duquesne-release-preview-verify-0001",
     "duquesne-release-gate2-approval-0003",
-    "duquesne-release-production-proof-0001"
+    "duquesne-release-production-proof-0001",
+    "st-bonaventure-stage1-recover-0001"
   ],
-  "current_sequence": 267,
+  "current_sequence": 268,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/duquesne/duquesne-release-production-proof-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "b0855899928157e7b5f2ea34fb07fcb9f217adad43de1e13764ce56cdc2aea23",
-    "fresh_runner_verification": "PASS",
-    "merge_sha": "8ab1962e8818a977ccc7ed194e82ad20b4ae186c",
-    "merged": true,
-    "operation": "RELEASE_PRODUCTION_PROOF",
-    "owner_gate_2_approved": true,
-    "pr_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
-    "pr_number": 437,
-    "production_deployment_id": 7509865665,
-    "production_json_checked_count": 79,
-    "protected_main_sha": "8ab1962e8818a977ccc7ed194e82ad20b4ae186c",
-    "remote_production_proof_equivalence": "PASS",
-    "request_id": "duquesne-release-production-proof-0001",
-    "school_key": "duquesne"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "st-bonaventure-stage1-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+      "recovered_request_id": "st-bonaventure-stage1-0001",
+      "request_id": "st-bonaventure-stage1-recover-0001",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "41580238063",
-  "lock_acquisition_request_commit": "d1410f60cdbf28590c9ce0c7ab3cd271caa62769",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
