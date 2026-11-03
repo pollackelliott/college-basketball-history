@@ -1786,6 +1786,7 @@ def main() -> int:
             package,
             school_key=args.school_key,
             expected_sha256=args.expected_sha256,
+            allow_venue_summary_reconciliation=True,
         )
         if acceptance["status"] != "PASS":
             for error in acceptance["errors"]:
