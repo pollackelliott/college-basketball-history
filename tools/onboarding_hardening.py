@@ -614,6 +614,7 @@ def research_portfolio_report(
     *,
     school_key: str,
     expected_sha256: str = "",
+    allow_venue_summary_reconciliation: bool = False,
 ) -> dict[str, Any]:
     """Return the permanent pre-RESEARCH_FROZEN acceptance report."""
 
@@ -669,6 +670,17 @@ def research_portfolio_report(
         )
         errors.extend(home_chronology["errors"])
         warnings.extend(home_chronology["warnings"])
+
+        venue_summary = venue_summary_consistency_report(games, venues)
+        if venue_summary["errors"]:
+            if allow_venue_summary_reconciliation:
+                warnings.extend(
+                    "integration-reconcilable frozen " + error
+                    for error in venue_summary["errors"]
+                )
+            else:
+                errors.extend(venue_summary["errors"])
+        warnings.extend(venue_summary["warnings"])
 
         opponent_keys = {
             row.get("canonical_opponent_key", "").strip()
@@ -904,6 +916,11 @@ def research_portfolio_report(
                     if key not in {"errors", "warnings"}
                 },
                 "home_chronology": home_chronology["counts"],
+                "venue_summary_consistency": {
+                    key: value
+                    for key, value in venue_summary.items()
+                    if key not in {"errors", "warnings", "groups"}
+                },
             },
         }
     finally:
