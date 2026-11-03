@@ -55,6 +55,7 @@ from onboarding_plan import (
 from program_history import history_scope_errors
 from stage1_venue_reconciliation import (
     load_venue_reconciliation,
+    representation_consolidation_conflicts,
     venue_reconciliation_for_row,
 )
 from stage1_reference_reconciliation import (
