@@ -1,0 +1,89 @@
+{
+  "actual_published_target_sha": "a03e0bc4ad82c016f0b73e47dac2d3dfb939fe0c",
+  "changed_file_sha256": {
+    "schools/st-bonaventure/opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "schools/st-bonaventure/source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df"
+  },
+  "changed_paths": [
+    "schools/st-bonaventure/opponents.csv",
+    "schools/st-bonaventure/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "albany-college-of-pharmacy",
+    "belmont-abbey",
+    "gannon",
+    "regis-colorado",
+    "rochester"
+  ],
+  "expected_target_predecessor_sha": "25c1fabd981fc55357a07156ec899c7c004d5512",
+  "field_level_proof_sha256": "93c999af85f0ebc2faf0f2a9b4fddb4d14945c6d9971da6ec22c98302a7e1e7d",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "f8e9314658414eb367d8aff6ac4a698e0ba98ee9",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "fa3479646c6df9723a7d30df327f906bd8427c6dbb5141fa939fd5539dc7abfe",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-status.json": "cc6592d306827ace4cb24e1c3c16692d32429bc633a946e7fbfc1a59b42643e8"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-status.json": "88b1146ce20490bd7039287927a913eb28599b5568058f1173acfc11b8daa0a1"
+    },
+    "blocker_count": 0,
+    "capability_census_status": null,
+    "capability_topology_groups": [],
+    "command_exit_code": 1,
+    "decision_count": 0,
+    "decision_universe_sha256": null,
+    "stage2_status": "BLOCKED",
+    "tracked_mutation_proof": {
+      "after_head_sha": "a03e0bc4ad82c016f0b73e47dac2d3dfb939fe0c",
+      "after_status": "",
+      "after_tree_sha": "d7fb9aa2ef309c469026cce5614ba54f12c30f44",
+      "before_head_sha": "a03e0bc4ad82c016f0b73e47dac2d3dfb939fe0c",
+      "before_status": "",
+      "before_tree_sha": "d7fb9aa2ef309c469026cce5614ba54f12c30f44",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "a03e0bc4ad82c016f0b73e47dac2d3dfb939fe0c",
+  "prepared_parent_sha": "25c1fabd981fc55357a07156ec899c7c004d5512",
+  "prepared_tree_sha": "d7fb9aa2ef309c469026cce5614ba54f12c30f44",
+  "protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "st-bonaventure-stage2-opponent-display-normalize-0001",
+  "request_sha256": "97a966dfd27bf2af37aba69f54f77417993de3f067b1e6a7fec72cc09a9d7491",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift_after": {
+    "baseline_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "integration_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "school_key": "st-bonaventure",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "integration_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "school_key": "st-bonaventure",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "source_game_normalized_name_row_count": 39,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "4ab80641182865ae2937922e96727b9bec30be9a8bbd9129ea84ea2b23afac6c",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "writeahead_commit": "4dcef1f0520aada0774ff8fcd0ab34949a4b3cb0",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "bbe977ca743e00b5f2f467740d735965fff0d221a2a47bd3412cc58142a8cf8e"
+}
