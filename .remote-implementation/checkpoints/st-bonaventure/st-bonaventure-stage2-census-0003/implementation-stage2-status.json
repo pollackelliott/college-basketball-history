@@ -1,0 +1,43 @@
+{
+  "branch": "remote-stage2-census/st-bonaventure-6f57614a0e82",
+  "capability_census": {
+    "path": ".onboarding/st-bonaventure/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "6f57614a0e82cab603a1827325e5d60b6379abe6",
+  "integration_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "integration_semantic_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 87,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 87,
+      "discrepancy": 102,
+      "identity": 28,
+      "postseason_classification": 11,
+      "publication": 1
+    },
+    "decision_count": 231,
+    "decision_universe_sha256": "f43b032fda3468c08c7b10d769095dc7d7257dc301c1453c30572a930931119f",
+    "discrepancies_to_add": 102,
+    "existing_game_matches": 694,
+    "new_canonical_games": 1892,
+    "plan_path": ".onboarding/st-bonaventure/plan.json",
+    "review_path": ".onboarding/st-bonaventure/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
