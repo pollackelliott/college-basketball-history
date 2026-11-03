@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "apply_request_id": "duquesne-stage2-sealed-apply-0001",
+  "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
+  "changed_path_count": 85,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "release_manifest_sha256": "ad9aca99d86248549222e780480e56aabe3f18d52cbcf21abf0b921985fe9579",
+  "school_key": "duquesne",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "52e317471d1cec54b1c1a615175ae61d80d3f72a7653608ffeb3dde8cabe9106",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "a2b474fce14e4b3e893a486a466c558664cc4804132eb1d3cdac44660b15591f",
+  "writeahead_sha256": "41b5b4fcb18fbd7f4483bc46648e2836fbe97564927374c82c47254b5e7a3a7f"
+}
