@@ -1103,6 +1103,97 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         self.assertEqual({row["venue_id"] for row in staged}, {"VEN-000100"})
         self.assertEqual({row["venue_key"] for row in staged}, {"shared-arena"})
 
+    def test_explicit_same_state_locality_variant_can_consolidate(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Reilly Center,Saint Bonaventure,NY\n"
+            b"reilly-center,Reilly Center,Olean,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        common = {
+            **dict(self.local),
+            "canonical_name": "Reilly Center",
+            "aliases": "",
+            "venue_type": "",
+            "site_rule": "",
+            "source_basis": "",
+            "notes": "",
+            "known_opened": "",
+            "known_closed": "",
+            "venue_date_precision": "",
+        }
+        blank = {
+            **common,
+            "venue_key": "",
+            "venue_id": "",
+            "city": "Saint Bonaventure",
+            "state": "NY",
+        }
+        keyed = {
+            **common,
+            "venue_key": "reilly-center",
+            "venue_id": "VEN-000926",
+            "city": "Olean",
+            "state": "NY",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000926",
+            "venue_key": "reilly-center",
+            "display_name": "Reilly Center",
+            "city": "Olean",
+            "state": "NY",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Reilly Center",
+            "expected_local_city": "Saint Bonaventure",
+            "expected_local_state": "NY",
+            "global_venue_id": "VEN-000926",
+            "global_venue_key": "reilly-center",
+            "expected_global_city": "Olean",
+            "expected_global_state": "NY",
+            "allow_locality_variant": True,
+            "locality_variant_basis": "Exact physical identity; school-local locality label differs from registry locality.",
+            "resolution_basis": "Hash-bound representation-only canonicalization.",
+        }]
+        self.save()
+
+        mapping, meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[blank, keyed],
+            global_venues=[global_row],
+        )
+        self.assertTrue(meta["mappings"][0]["allow_locality_variant"])
+        inventory = venue_reconciliation_inventory(
+            [dict(blank), dict(keyed)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            inventory["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_CONSOLIDATION",
+        )
+        staged, _globals, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(blank), dict(keyed)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(len(staged), 1)
+        self.assertEqual(staged[0]["city"], "Olean")
+        self.assertEqual(staged[0]["state"], "NY")
+        self.assertEqual(outcomes[0]["resolution"], "CONSOLIDATE_EXPLICIT_REUSE")
+
     def test_repeated_frozen_physical_key_with_historical_names_is_supported(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
