@@ -1,0 +1,309 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 5,
+  "change_row_count": 7,
+  "changes": [
+    {
+      "authority_names": [
+        "Albany School of Pharm."
+      ],
+      "authority_signature": "albanyschoolofpharm",
+      "canonical_opponent_key": "albany-college-of-pharmacy",
+      "from_names": [
+        "Albany College of Pharmacy"
+      ],
+      "target_row_count": 1,
+      "to_name": "Albany School of Pharm."
+    },
+    {
+      "authority_names": [
+        "Belmont Abbey College"
+      ],
+      "authority_signature": "belmontabbeycollege",
+      "canonical_opponent_key": "belmont-abbey",
+      "from_names": [
+        "Belmont Abbey"
+      ],
+      "target_row_count": 1,
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "authority_names": [
+        "Gannon University"
+      ],
+      "authority_signature": "gannonuniversity",
+      "canonical_opponent_key": "gannon",
+      "from_names": [
+        "Gannon"
+      ],
+      "target_row_count": 2,
+      "to_name": "Gannon University"
+    },
+    {
+      "authority_names": [
+        "Regis"
+      ],
+      "authority_signature": "regis",
+      "canonical_opponent_key": "regis-colorado",
+      "from_names": [
+        "Regis (Colorado)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Regis"
+    },
+    {
+      "authority_names": [
+        "Rochester"
+      ],
+      "authority_signature": "rochester",
+      "canonical_opponent_key": "rochester",
+      "from_names": [
+        "University of Rochester"
+      ],
+      "target_row_count": 1,
+      "to_name": "Rochester"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "source_game_display_change_keys": 5,
+  "source_game_display_change_rows": 39,
+  "source_game_display_changes": [
+    {
+      "from_name": "Albany College of Pharmacy",
+      "normalized_opponent_key": "albany-college-of-pharmacy",
+      "source_game_id": "STB-1924-25-021",
+      "to_name": "Albany School of Pharm."
+    },
+    {
+      "from_name": "Albany College of Pharmacy",
+      "normalized_opponent_key": "albany-college-of-pharmacy",
+      "source_game_id": "STB-1925-26-012",
+      "to_name": "Albany School of Pharm."
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1944-45-002",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1945-46-005",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1946-47-007",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1946-47-019",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1947-48-003",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1947-48-020",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1948-49-016",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1948-49-023",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Regis (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "STB-1949-50-006",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1949-50-014",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1949-50-015",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1950-51-010",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1950-51-018",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1951-52-002",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1952-53-012",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1952-53-019",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1953-54-012",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1953-54-013",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1955-56-017",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1956-57-014",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1956-57-015",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1957-58-014",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1958-59-003",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1959-60-012",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "STB-1960-61-011",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1960-61-013",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "STB-1961-62-010",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "STB-1962-63-010",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Regis (Colorado)",
+      "normalized_opponent_key": "regis-colorado",
+      "source_game_id": "STB-1962-63-024",
+      "to_name": "Regis"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "STB-1966-67-009",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1967-68-002",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "STB-1969-70-015",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "University of Rochester",
+      "normalized_opponent_key": "rochester",
+      "source_game_id": "STB-1971-72-005",
+      "to_name": "Rochester"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "STB-1973-74-017",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "University of Rochester",
+      "normalized_opponent_key": "rochester",
+      "source_game_id": "STB-1976-77-007",
+      "to_name": "Rochester"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-1976-77-019",
+      "to_name": "Gannon University"
+    },
+    {
+      "from_name": "Gannon",
+      "normalized_opponent_key": "gannon",
+      "source_game_id": "STB-2019-20-010",
+      "to_name": "Gannon University"
+    }
+  ],
+  "status": "PASS"
+}

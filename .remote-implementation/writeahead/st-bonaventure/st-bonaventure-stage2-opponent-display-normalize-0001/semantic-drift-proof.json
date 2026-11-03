@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "integration_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "school_key": "st-bonaventure",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+    "integration_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "school_key": "st-bonaventure",
+    "status": "PASS"
+  }
+}
