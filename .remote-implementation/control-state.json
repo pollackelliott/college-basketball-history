@@ -283,17 +283,18 @@
     "duquesne-release-production-proof-0001",
     "st-bonaventure-stage1-0001",
     "st-bonaventure-stage1-0002",
-    "st-bonaventure-stage1-0003"
+    "st-bonaventure-stage1-0003",
+    "st-bonaventure-stage1-0004"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "st-bonaventure-stage1-0004",
+  "active_request_sha256": "765e0e7012148ea12086b9ebba72bca7230a89e0146716e5f8dc7ee56aa1cb0b",
+  "active_school_key": "st-bonaventure",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -583,8 +584,11 @@
     "stage1_reconciliation_sha256": "31c2a119e9882e0d27d5b2953055b2ca765bdb61949482bac003f2863d6c068c",
     "stage1_status": "BLOCKED"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41648957398",
+  "lock_acquisition_request_commit": "8ad74d88bc7b1a682b0050a79de04086ed092778",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "STAGE1_RUNNING"
 }
