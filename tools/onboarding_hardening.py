@@ -247,6 +247,7 @@ def venue_summary_consistency_report(
 
     for group, row_indexes in sorted(groups.items()):
         rows = [venues[index] for index in row_indexes]
+        match_rows = [source_match_venues[index] for index in row_indexes]
         raw_counts = [
             row.get("games_currently_assigned", "").strip()
             for row in rows
@@ -255,8 +256,8 @@ def venue_summary_consistency_report(
             if any(raw_counts):
                 warnings.append(
                     "venue summary count is partially/non-numerically populated "
-                    f"for {rows[0].get('canonical_name','[blank]')!r} "
-                    f"{rows[0].get('city','')}, {rows[0].get('state','')}"
+                    f"for {match_rows[0].get('canonical_name','[blank]')!r} "
+                    f"{match_rows[0].get('city','')}, {match_rows[0].get('state','')}"
                 )
             continue
 
@@ -295,11 +296,11 @@ def venue_summary_consistency_report(
 
         if group_errors:
             mismatch_groups += 1
-            name = rows[0].get("canonical_name", "[blank]")
+            name = match_rows[0].get("canonical_name", "[blank]")
             locality = (
-                rows[0].get("city", "").strip()
+                match_rows[0].get("city", "").strip()
                 + ", "
-                + rows[0].get("state", "").strip()
+                + match_rows[0].get("state", "").strip()
             ).strip(", ")
             for issue in group_errors:
                 errors.append(
@@ -308,9 +309,11 @@ def venue_summary_consistency_report(
 
         details.append(
             {
-                "canonical_name": rows[0].get("canonical_name", "").strip(),
-                "city": rows[0].get("city", "").strip(),
-                "state": rows[0].get("state", "").strip(),
+                "canonical_name": match_rows[0].get("canonical_name", "").strip(),
+                "city": match_rows[0].get("city", "").strip(),
+                "state": match_rows[0].get("state", "").strip(),
+                "staged_city": rows[0].get("city", "").strip(),
+                "staged_state": rows[0].get("state", "").strip(),
                 "venue_rows": len(rows),
                 "declared_games_currently_assigned": declared,
                 "source_game_assignments": expected,
