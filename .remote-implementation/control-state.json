@@ -278,7 +278,7 @@
     "duquesne-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
-  "active_lock_commit": null,
+  "active_lock_commit": "c43ff45f6360f271ef86e5229951d52b2aac9ab3",
   "active_lock_owner": "github-actions:41553473023:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
