@@ -1765,9 +1765,14 @@ def rebase_venues(
             and explicit_action == "REUSE_CURRENT_IDENTITY"
         ):
             candidate = global_by_id.get(explicit["global_venue_id"])
-            if (candidate is None
-                or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]
-                or not geography_compatible(local, candidate)):
+            if (
+                candidate is None
+                or candidate.get("venue_key", "").strip()
+                != explicit["global_venue_key"]
+                or not explicit_reuse_locality_compatible(
+                    local, candidate, explicit
+                )
+            ):
                 raise WorkflowError(
                     f"explicit venue reconciliation no longer matches current main: {key!r}"
                 )
