@@ -1,0 +1,39 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-status.json": "cc6592d306827ace4cb24e1c3c16692d32429bc633a946e7fbfc1a59b42643e8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-status.json": "88b1146ce20490bd7039287927a913eb28599b5568058f1173acfc11b8daa0a1"
+  },
+  "capability_census_status": null,
+  "changed_paths": [
+    "schools/st-bonaventure/opponents.csv",
+    "schools/st-bonaventure/source-games.csv"
+  ],
+  "decision_universe_sha256": null,
+  "expected_blocker_keys": [
+    "albany-college-of-pharmacy",
+    "belmont-abbey",
+    "gannon",
+    "regis-colorado",
+    "rochester"
+  ],
+  "field_level_proof_sha256": "93c999af85f0ebc2faf0f2a9b4fddb4d14945c6d9971da6ec22c98302a7e1e7d",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "fa3479646c6df9723a7d30df327f906bd8427c6dbb5141fa939fd5539dc7abfe",
+  "normalized_equivalence_artifacts": [],
+  "protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "st-bonaventure-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_predecessor_sha": "25c1fabd981fc55357a07156ec899c7c004d5512",
+  "target_sha": "a03e0bc4ad82c016f0b73e47dac2d3dfb939fe0c",
+  "target_tree_sha": "d7fb9aa2ef309c469026cce5614ba54f12c30f44",
+  "tracked_stage2_mutation": "NONE"
+}
