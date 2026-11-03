@@ -1763,7 +1763,7 @@
       "state": "PA",
       "primary_hex": "#041E42",
       "secondary_hex": "#BA0C2F",
-      "history_start_season": null,
+      "history_start_season": "1913-1914",
       "conference_regular_season_championships": 2,
       "conference_tournament_championships": 2,
       "ncaa_tournament_appearances": 6,
@@ -1772,7 +1772,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1940,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"

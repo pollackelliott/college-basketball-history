@@ -2,8 +2,8 @@
   "schema_version": 1,
   "reference_season": "2026-2027",
   "program_count": 365,
-  "public_page_count": 101,
-  "canonical_game_count": 190716,
+  "public_page_count": 102,
+  "canonical_game_count": 192636,
   "files": {
     "programs": "programs.json",
     "display_labels": "program-display-labels.json",
