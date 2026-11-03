@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "st-bonaventure",
+  "created_at": "2026-11-03T19:23:03.739907+00:00",
+  "input_fingerprint": {
+    "sha256": "3b6196d56c7a86b9b68459fdebd031a5de04cb9f8fade0fff82eae344aa419b5",
+    "git_head": "25c1fabd981fc55357a07156ec899c7c004d5512",
+    "files": {
+      "schools/st-bonaventure/source-games.csv": "48628a5c9ced087101dfb25eb4d888e530328676969b187611c56d76235d7e2a",
+      "schools/st-bonaventure/opponents.csv": "a1256551eee7d7a062b859c4db778e6225fa4012e224e04e02f3b19b166e3450",
+      "schools/st-bonaventure/venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff",
+      "schools/st-bonaventure/conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+      "schools/st-bonaventure/notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+      "schools/st-bonaventure/source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+      "data/canonical/games.csv": "5684e4dad20d8fa47758b584a197b4cbffc5cfebfc1f9625134bb6778d613056",
+      "data/evidence/game-assertions.csv": "3e65a7684e70c844ba5db79f3a84fa90fb71c44e80807fca601b1cd553af958c",
+      "data/reconciliation/discrepancies.csv": "0c4941072c198e794c9c20b48ffdfc093d5f8ddc12cb926e27ef5a6bac8ba62e",
+      "data/reference/programs.csv": "03bf9fb9dde53bda109ba3ecd54c0aa7470e9933f06198a6e935983666bea4b7",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "da57488bcf0fc3ea52ffa047f119c5b247732cbd513b023d01850bb0057eb17e",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "0d4edbbc9d8abc55026475e95231a7eae8d98495cae681785153f94638fd74f4",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "2d478cfdd209bc912ee2a46248d8aed6474b2661696d7ae7f269b14ab4f61d4e",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "a8ab1804873533d1b2eab5b71a198a9331c72225c04f448d48e7b83ee17ceec1",
+      "tools/onboarding_plan.py": "e7cca1ed0195b85e56084c71f57aa3cc74c8dac6cbc7fdb08c58345f256ecf59",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: albany-college-of-pharmacy: ['Albany College of Pharmacy', 'Albany School of Pharm.']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: gannon: ['Gannon', 'Gannon University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: regis-colorado: ['Regis', 'Regis (Colorado)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: rochester: ['Rochester', 'University of Rochester']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2614,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 814,
+      "venues": 96,
+      "conference_intervals": 3,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: albany-college-of-pharmacy: ['Albany College of Pharmacy', 'Albany School of Pharm.']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: gannon: ['Gannon', 'Gannon University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: regis-colorado: ['Regis', 'Regis (Colorado)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: rochester: ['Rochester', 'University of Rochester']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
