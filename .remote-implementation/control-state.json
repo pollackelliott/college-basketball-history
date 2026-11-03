@@ -309,7 +309,7 @@
   "active_request_sha256": "5806a996f0fa8b33f08e03dd3ad47c77b6d83427294965cd42645ee856f38933",
   "active_school_key": "st-bonaventure",
   "active_target_branch": "data/st-bonaventure-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "a0136d8d1457753daca70d95834cbaaab9b7b105",
   "active_writeahead_path": ".remote-implementation/writeahead/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0002/writeahead-manifest.json",
   "active_writeahead_sha256": "f599533d442871ca9ac57d871adf25e1cf4bf3c9f24198695af81baa32c379c7",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
