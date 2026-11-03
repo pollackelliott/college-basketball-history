@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from onboarding_plan import WorkflowError  # noqa: E402
+from onboarding_hardening import venue_summary_consistency_report  # noqa: E402
 from stage1_venue_reconciliation import (  # noqa: E402
     explicit_reuse_locality_compatible,
     load_venue_reconciliation,
@@ -732,31 +733,48 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
 
         source_games = [
             {
-                "source_game_id": "G1",
+                "source_game_id": "HOME-0001",
                 "season_label": "1966-1967",
-                "game_date": "1966-12-10",
+                "game_date": "1967-02-25",
                 "curated_venue_name": "Reilly Center",
                 "city": "St. Bonaventure",
                 "state": "NY",
-            },
+            }
+        ]
+        source_games.extend(
             {
-                "source_game_id": "G2",
-                "season_label": "1967-1968",
-                "game_date": "1967-12-09",
+                "source_game_id": f"HOME-{index:04d}",
+                "season_label": "1999-2000",
+                "game_date": "2000-01-01",
                 "curated_venue_name": "Reilly Center",
                 "city": "St. Bonaventure",
                 "state": "NY",
-            },
+            }
+            for index in range(2, 784)
+        )
+        source_games.append(
             {
-                "source_game_id": "G3",
-                "season_label": "2011-2012",
-                "game_date": "2012-01-14",
+                "source_game_id": "HOME-0784",
+                "season_label": "2025-2026",
+                "game_date": "2026-03-01",
+                "curated_venue_name": "Reilly Center",
+                "city": "St. Bonaventure",
+                "state": "NY",
+            }
+        )
+        source_games.extend(
+            {
+                "source_game_id": f"OLEAN-{index:04d}",
+                "season_label": "2025-2026",
+                "game_date": f"2026-03-{index + 2:02d}",
                 "curated_venue_name": "Reilly Center",
                 "city": "Olean",
                 "state": "NY",
-            },
-        ]
+            }
+            for index in range(1, 6)
+        )
         source_games_before = [dict(game) for game in source_games]
+        summary_match_rows = []
 
         staged, globals_, _names, outcomes = rebase_venues(
             "test-school",
@@ -765,6 +783,7 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             [],
             venue_reconciliation=mapping,
             source_games=source_games,
+            summary_match_rows_out=summary_match_rows,
         )
         self.assertEqual(len(staged), 2)
         self.assertEqual(len(globals_), 1)
@@ -774,13 +793,45 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         )
         self.assertEqual(staged[0]["city"], "Olean")
         self.assertEqual(staged[1]["city"], "Olean")
-        self.assertEqual(staged[0]["games_currently_assigned"], "2")
-        self.assertEqual(staged[1]["games_currently_assigned"], "1")
-        self.assertEqual(staged[0]["first_assigned_game"], "1966-12-10")
-        self.assertEqual(staged[0]["last_assigned_game"], "1967-12-09")
-        self.assertEqual(staged[1]["first_assigned_game"], "2012-01-14")
-        self.assertEqual(staged[1]["last_assigned_game"], "2012-01-14")
+        self.assertEqual(staged[0]["games_currently_assigned"], "784")
+        self.assertEqual(staged[1]["games_currently_assigned"], "5")
+        self.assertEqual(staged[0]["first_assigned_game"], "1967-02-25")
+        self.assertEqual(staged[0]["last_assigned_game"], "2026-03-01")
+        self.assertEqual(staged[1]["first_assigned_game"], "2026-03-03")
+        self.assertEqual(staged[1]["last_assigned_game"], "2026-03-07")
+        self.assertEqual(
+            sum(int(row["games_currently_assigned"]) for row in staged),
+            789,
+        )
+        self.assertEqual(
+            min(row["first_assigned_game"] for row in staged),
+            "1967-02-25",
+        )
+        self.assertEqual(
+            max(row["last_assigned_game"] for row in staged),
+            "2026-03-07",
+        )
         self.assertEqual(source_games, source_games_before)
+        self.assertEqual(len(summary_match_rows), 2)
+        self.assertEqual(summary_match_rows[0]["city"], "St. Bonaventure")
+        self.assertEqual(summary_match_rows[1]["city"], "Olean")
+
+        strict_staged = venue_summary_consistency_report(source_games, staged)
+        self.assertEqual(strict_staged["status"], "FAIL")
+        self.assertTrue(
+            any(
+                "games_currently_assigned total 789 != 5 source-game assignments"
+                in error
+                for error in strict_staged["errors"]
+            )
+        )
+        preserved_match = venue_summary_consistency_report(
+            source_games,
+            staged,
+            source_match_venues=summary_match_rows,
+        )
+        self.assertEqual(preserved_match["status"], "PASS")
+        self.assertEqual(preserved_match["errors"], [])
         self.assertEqual(staged[0]["relationship_type"], "HOME")
         self.assertEqual(staged[0]["relationship_start"], "1966-12-02")
         self.assertEqual(
