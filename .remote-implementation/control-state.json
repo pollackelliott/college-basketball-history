@@ -563,11 +563,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/duquesne/duquesne-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "91aed95629e8bc204611bff179fb0ef2b274144315337b7b109d47da3cf8e29a",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "duquesne-release-readiness-0001",
     "school_key": "duquesne",
     "target_branch": "data/duquesne-onboarding",

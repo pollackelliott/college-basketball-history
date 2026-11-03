@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "91aed95629e8bc204611bff179fb0ef2b274144315337b7b109d47da3cf8e29a",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "readiness_proof_sha256": "cc2ebc71494cc0d3062cd72a2d3b8e322a77682641e1d26dd84f5c16e26b4df6",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "duquesne-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+  "tracked_mutation": "NONE"
+}
