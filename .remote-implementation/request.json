@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage1-0006",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "st-bonaventure-phase0-0003",
+  "operation": "PHASE0",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "a652deba2b359c6afe5474f5ebf9ea2bb2751c4a",
-  "previous_control_state_sha256": "fecb321fa24d9cecec16215e89830ecee62cd89e777a7d5fc04de887cc0ef5e1",
+  "previous_control_state_commit": "61a73d3f8d0b8a69b4b1ddd4d3976595ada3eb84",
+  "previous_control_state_sha256": "ba4f5e1a657be912919e97446b1b62e73910987586a90dca556660ac42946a40",
   "expected_protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "target_branch": "data/st-bonaventure-onboarding",
   "research_checkpoint": {
     "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
     "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
@@ -17,18 +18,29 @@
       "part_count": 14
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage1-0006/checkpoint-manifest.json",
+    "sha256": "b13f008e221ec9e1612b0b1d24668e8e7617bb35a2b254ba02e54d5d60e701bf"
+  },
   "venue_reconciliation": {
     "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0004/venue-reconciliation.json",
     "sha256": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
   },
   "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1915-1916",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted St. Bonaventure INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly records owner-confirmed INCEPTION+ authority, includes the owner-approved 1915-16 University at Buffalo game, and preserves the individually documented varsity universe from 1919-20 through 2025-26 together with the explicit six-game unidentified 1919-20 coverage debt. Current program-top-level-scope.csv independently matches INCEPTION+. Preserve the exact frozen historical universe and accepted uncertainty."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center-authorized fresh Stage 1 after PR #445",
-    "authorization": "Control Center explicitly directed a new fresh St. Bonaventure Stage 1 inventory after PR #445 advanced protected main to 933d2f9e7ebdd24fefcafda326a7ebe898a476df. Reuse the exact immutable Research Freeze and established complete 58-mapping venue reconciliation unchanged. PR #445 changes only generic permanent-tool handling of authenticated preserved locality in post-rebase venue-summary consistency plus regression coverage. Do not replay st-bonaventure-stage1-0005 or abandoned st-bonaventure-phase0-0002. This request authorizes read-only Stage 1 only; no Research replay, Phase 0 mutation, Stage 2, owner gate, release, merge, maintenance, or protected-main mutation."
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center-authorized fresh Phase 0 after PR #445 and Stage 1 refresh PASS",
+    "authorization": "Control Center explicitly directed a new Phase 0 only after a fresh Stage 1 inventory passed on repaired protected main 933d2f9e7ebdd24fefcafda326a7ebe898a476df. Fresh Stage 1 request st-bonaventure-stage1-0006 is durably PASS with zero blockers and exact checkpoint hash b13f008e221ec9e1612b0b1d24668e8e7617bb35a2b254ba02e54d5d60e701bf. This request authorizes one guarded PHASE0 operation using the immutable Research Freeze and exact 58-mapping reconciliation, including permanent proof of the complete preserved Reilly relationship/locality topology under PR #445, recomputed venue summaries, authenticated post-rebase summary consistency, INTEGRATION_FROZEN, create-once publication to data/st-bonaventure-onboarding, and required independent fresh Phase 0 verification. The abandoned st-bonaventure-phase0-0001 and st-bonaventure-phase0-0002 remain abandoned and are not replayed. No Stage 2, Owner Gate 1/2, release, merge, unrelated maintenance, or protected-main direct mutation is authorized."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -43,7 +55,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false,
     "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false
