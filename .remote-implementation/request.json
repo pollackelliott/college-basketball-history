@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-stage2-preseal-rehearsal-0001",
+  "request_id": "duquesne-stage2-gate1-seal-0001",
   "school_key": "duquesne",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "fb17b4cd268ea0466120324937fd4781dc82d113",
-  "previous_control_state_sha256": "03d745ea6cc75978b3c6f602341324318cd31e5ba6d1735effbff616273e7219",
+  "operation": "STAGE2_GATE1_SEAL",
+  "previous_control_state_commit": "f5a1dd169502811cd261fd5feaaddccb416fb54c",
+  "previous_control_state_sha256": "7c2e97ef773b2d0d66a39aa3b3d776e6f640f42961b0e238885685e817488410",
   "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "target_branch": "data/duquesne-onboarding",
   "target_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/duquesne/duquesne-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "f598003b370b68f537f6a75b0f90bf0d2d989aa0d67aa293ad13a7f64c39845f"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "23a7321e7189ebffb6443504e2e62499678e3c03a4ba771f7be4733ff6a9ee7c"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/duquesne/duquesne-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "6c7d1bdd3a190057bc4663d56957c89162f5b5b5f3fbc2b95eece4824f226392"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/duquesne/duquesne-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "49024309bcdf679dcf35fde95d600cf1fc7d2c08bb50d3e5f4ab34fbc5384991"
   },
   "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
   "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
@@ -24,9 +24,11 @@
   "approved_plan_hash_preview": "b38327f523f3faebebbeaa13e2d8a11822b105a97753a637afffbcfaa64351ca",
   "filled_review_sha256": "d55c6e4560556e5ba7864229d9cf0d3e237069aeb9f787e9a2dfeec0b89c5273",
   "decision_id_set_sha256": "b9fee375ddd3810188adc2d4a533a6cb1226fb2d4ec442b823fe8b1525f57c87",
+  "owner_gate_1_approval_sha256": "3ba5f6936034b90b031146fb333cbbc997c3bd9a69b7cccf02b5df4a0cb63bae",
+  "equivalence_sha256": "ec0ff4252f4670aa977e03d420b103a5087938ffbff861dbe8d9075ad5ec6020",
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation — fresh-verified Owner Gate 1 fill pre-seal technical rehearsal",
-    "authorization": "The owner's explicit Gate 1 approval remains authoritative for the exact Duquesne 145-decision packet. Gate 1 fill completed and independently fresh-verified PASS. Authorize exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against fill checkpoint f598003b370b68f537f6a75b0f90bf0d2d989aa0d67aa293ad13a7f64c39845f and verification 6c7d1bdd3a190057bc4663d56957c89162f5b5b5f3fbc2b95eece4824f226392. No cryptographic seal, sealed apply, tracked basketball mutation, release preparation, Preview, Owner Gate 2, merge, Production, recovery, or unrelated authority is granted by this request."
+    "origin": "ChatGPT Duquesne serialized Implementation — cryptographic Gate 1 seal",
+    "authorization": "The exact Duquesne pre-seal rehearsal reached READY_TO_SEAL and independently fresh-verified PASS under the existing explicit Owner Gate 1 approval bound to duquesne-stage2-proposal-0001. Authorize exactly one bounded STAGE2_GATE1_SEAL carrying forward that approval chain. This authorizes current-main pre-seal replay and permanent onboard_school.py --approve cryptographic sealing only; no sealed apply, tracked basketball mutation, release preparation, Preview, Owner Gate 2, PR merge, Production, recovery, venue maintenance, or unrelated authority is granted by this request."
   },
   "authority": {
     "owner_gate_1": false,
@@ -40,8 +42,8 @@
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": true,
-    "stage2_gate1_seal": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": true,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
