@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "c94935ca8297c8a65ae81339e09313842fa10227",
+  "previous_control_state_sha256": "136f1e86c04281e4a356e49779906f7006c46c8dbe44b45e837f09ef27715440",
+  "expected_protected_main_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — recovered owner-authorized Stage 1",
+    "authorization": "Owner explicitly authorized repository-defined recovery of failed st-bonaventure-stage1-0001 and resumption of the same already-authorized St. Bonaventure Stage 1 objective. Recovery completed as ABANDONED_NOT_ATTEMPTED with independent verification. This fresh request authorizes only read-only current-main STAGE1_INVENTORY against protected main 89327ed84827323a3f64e08ac1410ed71e442a0e using immutable Research Freeze SHA-256 22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda and corrected Git transport c94935ca8297c8a65ae81339e09313842fa10227, whose committed 14-part bytes were independently reconstructed and SHA-256 verified before request submission. No Research reopening, historical change, Phase 0, Stage 2, shared/global mutation, recovery, Owner Gate 1/2, release, merge, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
