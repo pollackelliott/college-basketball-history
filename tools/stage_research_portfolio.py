@@ -53,7 +53,10 @@ from onboarding_plan import (
     write_csv_preserving_format,
 )
 from program_history import history_scope_errors
-from stage1_venue_reconciliation import load_venue_reconciliation
+from stage1_venue_reconciliation import (
+    load_venue_reconciliation,
+    venue_reconciliation_for_row,
+)
 from stage1_reference_reconciliation import (
     conference_reconciliation_inventory,
     load_conference_reconciliation,
@@ -759,7 +762,7 @@ def venue_reconciliation_inventory(
         if row.get("venue_key", "").strip()
     }
 
-    for local in local_rows:
+    for row_index, local in enumerate(local_rows, 1):
         key = local.get("venue_key", "").strip()
         name = local.get("canonical_name", "").strip()
         normalized = normalize_name(name)
@@ -797,7 +800,18 @@ def venue_reconciliation_inventory(
         reason = ""
         hard_stop = ""
 
-        explicit = venue_reconciliation.get(key)
+        explicit = venue_reconciliation_for_row(
+            venue_reconciliation, local, row_index
+        )
+        if (
+            explicit is not None
+            and explicit.get("action") == "DROP_REDUNDANT_LOCAL_ROW"
+        ):
+            item["classification"] = "SAFE_REPRESENTATION_DROP"
+            item["resolution"] = "DROP_REDUNDANT_LOCAL_ROW"
+            item["issues"].append("EXPLICIT_REDUNDANT_LOCAL_ROW_DROP")
+            results.append(item)
+            continue
         hint = research_base_venue_reuse_hint(local)
         if explicit is not None:
             candidate = global_by_id.get(explicit["global_venue_id"])
@@ -1261,8 +1275,9 @@ def rebase_venues(
         if row.get("venue_key", "").strip()
     }
     mappings: list[dict[str, Any]] = []
+    staged_local_rows: list[dict[str, str]] = []
 
-    for local in local_rows:
+    for row_index, local in enumerate(local_rows, 1):
         key = local.get("venue_key", "").strip()
         name = local.get("canonical_name", "").strip()
         research_id = local.get("venue_id", "").strip()
@@ -1271,7 +1286,26 @@ def rebase_venues(
         chosen: dict[str, str] | None = None
         reason = ""
 
-        explicit = venue_reconciliation.get(key)
+        explicit = venue_reconciliation_for_row(
+            venue_reconciliation, local, row_index
+        )
+        if (
+            explicit is not None
+            and explicit.get("action") == "DROP_REDUNDANT_LOCAL_ROW"
+        ):
+            mappings.append(
+                {
+                    "venue_key": key,
+                    "final_venue_key": "",
+                    "canonical_name": name,
+                    "research_venue_id": research_id,
+                    "final_venue_id": "",
+                    "resolution": "DROP_REDUNDANT_LOCAL_ROW",
+                    "frozen_row_index": row_index,
+                }
+            )
+            continue
+
         research_base_hint = research_base_venue_reuse_hint(local)
 
         if explicit is not None:
@@ -1538,8 +1572,9 @@ def rebase_venues(
                 "resolution": reason,
             }
         )
+        staged_local_rows.append(local)
 
-    return local_rows, global_rows, name_rows, mappings
+    return staged_local_rows, global_rows, name_rows, mappings
 
 
 def update_program_scope(
