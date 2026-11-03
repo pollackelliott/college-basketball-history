@@ -91,6 +91,43 @@ def _matching_source_games(
     ]
 
 
+def explicit_reuse_locality_compatible(
+    local: dict[str, str],
+    global_row: dict[str, str],
+    mapping: dict[str, Any],
+) -> bool:
+    """Return whether an explicit reuse may canonicalize a locality variant.
+
+    Exact geography remains the default. Schema-v2 row-index reconciliation may
+    opt into a documented representation-only locality variant only when the
+    exact current-main venue ID/key has already been authenticated and at least
+    one populated locality axis independently agrees. Frozen source-game
+    geography is never changed by this predicate.
+    """
+    local_city = local.get("city", "").strip()
+    local_state = local.get("state", "").strip()
+    global_city = global_row.get("city", "").strip()
+    global_state = global_row.get("state", "").strip()
+
+    if (
+        local_city.casefold() == global_city.casefold()
+        and local_state.upper() == global_state.upper()
+    ):
+        return True
+
+    if not mapping.get("allow_locality_variant"):
+        return False
+    if not mapping.get("locality_variant_basis", "").strip():
+        return False
+    if not all((local_city, local_state, global_city, global_state)):
+        return False
+
+    return (
+        local_city.casefold() == global_city.casefold()
+        or local_state.upper() == global_state.upper()
+    )
+
+
 def representation_consolidation_conflicts(
     local: dict[str, str],
     retained_rows: list[dict[str, str]],
@@ -236,7 +273,6 @@ def load_venue_reconciliation(
     }
 
     mappings: dict[str, dict[str, Any]] = {}
-    used_target_ids: set[str] = set()
     new_identity_specs: dict[str, tuple[str, str, str]] = {}
     for number, raw in enumerate(raw_mappings, 1):
         if not isinstance(raw, dict):
@@ -564,11 +600,6 @@ def load_venue_reconciliation(
                         ),
                     }
                 )
-                if target_id in used_target_ids:
-                    raise WorkflowError(
-                        f"venue reconciliation target ID repeated: {target_id}"
-                    )
-                used_target_ids.add(target_id)
 
             item.update(
                 {
@@ -749,22 +780,43 @@ def load_venue_reconciliation(
             raise WorkflowError(
                 f"venue reconciliation stale global venue ID/key for {selector!r}"
             )
+
+        raw_allow_variant = raw.get("allow_locality_variant", False)
+        if not isinstance(raw_allow_variant, bool):
+            raise WorkflowError(
+                "venue reconciliation allow_locality_variant must be boolean"
+            )
+        locality_variant_basis = str(
+            raw.get("locality_variant_basis") or ""
+        ).strip()
+        if raw_allow_variant:
+            if schema_version != 2 or row_index is None:
+                raise WorkflowError(
+                    "allow_locality_variant requires schema-v2 local_venue_row_index"
+                )
+            if not locality_variant_basis:
+                raise WorkflowError(
+                    "allow_locality_variant requires locality_variant_basis"
+                )
+        elif locality_variant_basis:
+            raise WorkflowError(
+                "locality_variant_basis requires allow_locality_variant=true"
+            )
+        item["allow_locality_variant"] = raw_allow_variant
+        item["locality_variant_basis"] = locality_variant_basis
+
         if (
             target.get("city", "").strip() != item["expected_global_city"]
             or target.get("state", "").strip() != item["expected_global_state"]
-            or item["expected_local_city"].casefold()
-            != item["expected_global_city"].casefold()
-            or item["expected_local_state"].upper()
-            != item["expected_global_state"].upper()
         ):
             raise WorkflowError(
                 f"venue reconciliation global geography mismatch for {selector!r}"
             )
-        if target_id in used_target_ids:
+        if not explicit_reuse_locality_compatible(local_rows[0], target, item):
             raise WorkflowError(
-                f"venue reconciliation target ID repeated: {target_id}"
+                f"venue reconciliation global geography mismatch for {selector!r}"
             )
-        used_target_ids.add(target_id)
+
         mappings[selector] = item
 
     metadata = {
