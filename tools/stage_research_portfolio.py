@@ -744,7 +744,35 @@ def refresh_local_venue_assignment_summaries(
             else None
         )
         expected = len(games)
-        if declared == expected:
+        all_exact_dates = bool(games) and all(
+            game.get("game_date", "").strip()
+            for game in games
+        )
+        bounds_stale = False
+        if all_exact_dates:
+            exact_dates = sorted(
+                game.get("game_date", "").strip()
+                for game in games
+            )
+            declared_first = sorted(
+                value
+                for row in rows
+                if (value := row.get("first_assigned_game", "").strip())
+            )
+            declared_last = sorted(
+                value
+                for row in rows
+                if (value := row.get("last_assigned_game", "").strip())
+            )
+            bounds_stale = (
+                bool(declared_first)
+                and min(declared_first) != exact_dates[0]
+            ) or (
+                bool(declared_last)
+                and max(declared_last) != exact_dates[-1]
+            )
+
+        if declared == expected and not bounds_stale:
             continue
 
         assignments: dict[int, list[dict[str, str]]] = {
