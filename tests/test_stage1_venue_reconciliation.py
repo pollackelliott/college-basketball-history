@@ -1194,6 +1194,75 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         self.assertEqual(staged[0]["state"], "NY")
         self.assertEqual(outcomes[0]["resolution"], "CONSOLIDATE_EXPLICIT_REUSE")
 
+    def test_explicit_same_city_jurisdiction_variant_canonicalizes(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",John Gray Gymnasium,George Town,Grand Cayman\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        local = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "John Gray Gymnasium",
+            "city": "George Town",
+            "state": "Grand Cayman",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000470",
+            "venue_key": "provisional-john-gray-gym",
+            "display_name": "John Gray Gym",
+            "city": "George Town",
+            "state": "Cayman Islands",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "John Gray Gymnasium",
+            "expected_local_city": "George Town",
+            "expected_local_state": "Grand Cayman",
+            "global_venue_id": "VEN-000470",
+            "global_venue_key": "provisional-john-gray-gym",
+            "expected_global_city": "George Town",
+            "expected_global_state": "Cayman Islands",
+            "allow_locality_variant": True,
+            "locality_variant_basis": "Same exact venue and city; local region label differs from registry jurisdiction.",
+            "resolution_basis": "Registered alias identifies the exact physical venue.",
+        }]
+        self.save()
+
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[local],
+            global_venues=[global_row],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(local)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertIn(
+            "CANONICAL_GEOGRAPHY_NORMALIZATION",
+            inventory["rows"][0]["issues"],
+        )
+        staged, _globals, _names, _outcomes = rebase_venues(
+            "test-school",
+            [dict(local)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(staged[0]["city"], "George Town")
+        self.assertEqual(staged[0]["state"], "Cayman Islands")
+
     def test_repeated_frozen_physical_key_with_historical_names_is_supported(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
