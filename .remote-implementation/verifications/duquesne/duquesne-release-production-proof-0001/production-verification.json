@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "b0855899928157e7b5f2ea34fb07fcb9f217adad43de1e13764ce56cdc2aea23",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "8ab1962e8818a977ccc7ed194e82ad20b4ae186c",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+  "pr_number": 437,
+  "production_deployment_id": 7509865665,
+  "production_json_checked_count": 79,
+  "production_proof": true,
+  "request_id": "duquesne-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "status": "COMPLETE"
+}
