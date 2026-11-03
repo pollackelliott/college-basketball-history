@@ -718,7 +718,7 @@ def venue_reconciliation_inventory(
     *,
     school_key: str = "",
     existing_school_venues: list[dict[str, str]] | None = None,
-    venue_reconciliation: dict[str, dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Inventory all venue-reconciliation outcomes without mutating repository state."""
 
@@ -804,15 +804,40 @@ def venue_reconciliation_inventory(
         explicit = venue_reconciliation_for_row(
             venue_reconciliation, local, row_index
         )
-        if (
-            explicit is not None
-            and explicit.get("action") == "DROP_REDUNDANT_LOCAL_ROW"
-        ):
-            item["classification"] = "SAFE_REPRESENTATION_DROP"
-            item["resolution"] = "DROP_REDUNDANT_LOCAL_ROW"
-            item["issues"].append("EXPLICIT_REDUNDANT_LOCAL_ROW_DROP")
-            results.append(item)
-            continue
+        if explicit is not None:
+            explicit_action = explicit.get("action")
+            if explicit_action == "DROP_REDUNDANT_LOCAL_ROW":
+                item["classification"] = "SAFE_REPRESENTATION_DROP"
+                item["resolution"] = "DROP_REDUNDANT_LOCAL_ROW"
+                item["issues"].append("EXPLICIT_REDUNDANT_LOCAL_ROW_DROP")
+                results.append(item)
+                continue
+            if explicit_action == "SPLIT_LOCAL_ROW_BY_CUTOVER":
+                item["classification"] = "SAFE_REPRESENTATION_SPLIT"
+                item["resolution"] = "SPLIT_LOCAL_ROW_BY_CUTOVER"
+                item["issues"].append(
+                    "EXPLICIT_HASH_BOUND_SOURCE_GAME_CUTOVER_SPLIT"
+                )
+                item["target_venue_id"] = "|".join(
+                    target["global_venue_id"]
+                    for target in explicit.get("split_targets", [])
+                )
+                item["target_venue_key"] = "|".join(
+                    target["global_venue_key"]
+                    for target in explicit.get("split_targets", [])
+                )
+                results.append(item)
+                continue
+            if explicit_action == "REGISTER_NEW_IDENTITY":
+                item["classification"] = "NEW_GLOBAL_IDENTITY"
+                item["resolution"] = "REGISTER_NEW_IDENTITY"
+                item["target_venue_key"] = explicit["new_global_venue_key"]
+                item["issues"].append(
+                    "EXPLICIT_HASH_BOUND_NEW_IDENTITY_REGISTRATION"
+                )
+                results.append(item)
+                continue
+
         hint = research_base_venue_reuse_hint(local)
         if explicit is not None:
             candidate = global_by_id.get(explicit["global_venue_id"])
@@ -957,7 +982,52 @@ def venue_reconciliation_inventory(
                     "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING"
                 )
             else:
-                item["classification"] = "SAFE_REPRESENTATION_REUSE"
+                retained_same_key = [
+                    other
+                    for other in local_rows
+                    if other is not local
+                    and other.get("venue_key", "").strip()
+                    == chosen.get("venue_key", "").strip()
+                    and other.get("canonical_name", "").strip() == name
+                    and other.get("city", "").strip()
+                    == local.get("city", "").strip()
+                    and other.get("state", "").strip()
+                    == local.get("state", "").strip()
+                ]
+                consolidation_conflicts = (
+                    representation_consolidation_conflicts(
+                        local, retained_same_key
+                    )
+                    if explicit is not None
+                    and not key
+                    and retained_same_key
+                    else []
+                )
+                if (
+                    explicit is not None
+                    and not key
+                    and retained_same_key
+                    and not consolidation_conflicts
+                ):
+                    item["classification"] = (
+                        "SAFE_REPRESENTATION_CONSOLIDATION"
+                    )
+                    item["issues"].append(
+                        "EXPLICIT_REUSE_CONSOLIDATES_EXISTING_LOCAL_IDENTITY"
+                    )
+                elif (
+                    explicit is not None
+                    and not key
+                    and retained_same_key
+                    and consolidation_conflicts
+                ):
+                    item["classification"] = "STOP_AMBIGUOUS"
+                    item["issues"].append(
+                        "LOCAL_REPRESENTATION_CONSOLIDATION_NOT_SAFE:"
+                        + ",".join(consolidation_conflicts)
+                    )
+                else:
+                    item["classification"] = "SAFE_REPRESENTATION_REUSE"
                 if pending_shared and registration_only:
                     item["issues"].append(
                         "SETTLED_PENDING_REGISTRATION_RESOLVED_BY_EXACT_REUSE"
@@ -997,6 +1067,15 @@ def venue_reconciliation_inventory(
                     "POSSIBLE_PHYSICAL_MATCH_REQUIRES_RECONCILIATION"
                 )
             else:
+                if not key:
+                    item["classification"] = "STOP_AMBIGUOUS"
+                    item["issues"].append(
+                        "BLANK_KEY_NEW_IDENTITY_REQUIRES_EXPLICIT_REGISTRATION"
+                    )
+                    item["resolution"] = ""
+                    item["target_venue_key"] = ""
+                    results.append(item)
+                    continue
                 item["classification"] = "NEW_GLOBAL_IDENTITY"
                 if pending_shared and registration_only:
                     item["issues"].append(
