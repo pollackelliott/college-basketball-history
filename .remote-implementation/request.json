@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-release-preview-verify-0001",
+  "request_id": "duquesne-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "duquesne",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "c7a1956a488332f1f1e82d5921257f9f8991925d",
-  "previous_control_state_sha256": "6c48c857ef7fd54cabe3b88f002988169d6635a5dd8c74d832b4f52491c41b30",
+  "previous_control_state_commit": "a7d8b7346f30f76c3b28e78263af7bafe721f3ae",
+  "previous_control_state_sha256": "247fc2344b89a34c9d772d88d6585d52aa20473c8475db85a5c6679333f4c222",
   "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "target_branch": "data/duquesne-onboarding",
   "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/duquesne/duquesne-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "91aed95629e8bc204611bff179fb0ef2b274144315337b7b109d47da3cf8e29a"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/duquesne/duquesne-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "70137984f84435c571bb56abf5b68f71b7a0058f7167d61e139c4dfb0166739b"
-  },
+  "pr_number": 437,
   "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
   "release_manifest_sha256": "ad9aca99d86248549222e780480e56aabe3f18d52cbcf21abf0b921985fe9579",
-  "pr_number": 437,
+  "preview_deployment_id": 7507221375,
+  "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "0df962fa5349b155eadee1d115d5acd8ca4c969ae53e569cd67a05d0aa6eabc4"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/duquesne/duquesne-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "c4a2504548e03ab48f9d93c0155bfbc8fc279fce58a275603c23a86456891b12"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "APPROVED. Proceed",
+    "preview_checkpoint_sha256": "0df962fa5349b155eadee1d115d5acd8ca4c969ae53e569cd67a05d0aa6eabc4",
+    "preview_verification_sha256": "c4a2504548e03ab48f9d93c0155bfbc8fc279fce58a275603c23a86456891b12",
+    "pr_number": 437,
+    "pr_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+    "preview_deployment_id": 7507221375,
+    "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation lane — exact PR-head Preview verification",
-    "authorization": "Owner authorized Duquesne release preparation through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #437 only, bound to the exact fresh-verified readiness authority and exact sealed Duquesne head. No Gate 2 approval, merge, Production, mutation, recovery, or unrelated authority is granted."
+    "origin": "Duquesne Implementation",
+    "authorization": "Record exact Owner Gate 2 approval only."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
@@ -41,8 +50,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
