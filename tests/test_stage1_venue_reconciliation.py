@@ -622,6 +622,241 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
                 global_venues=[dict(self.global_row)],
             )
 
+    def test_explicit_reuse_can_preserve_relationship_bearing_local_row(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Reilly Center,St. Bonaventure,NY\n"
+            b"reilly-center-st-bonaventure,Reilly Center,Olean,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+
+        relationship = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Reilly Center",
+            "city": "St. Bonaventure",
+            "state": "NY",
+            "relationship_type": "HOME",
+            "relationship_start": "1966-12-02",
+            "relationship_end": "",
+            "relationship_date_precision": "EXACT",
+            "site_rule": "HOME relationship chronology with documented exceptions.",
+            "source_basis": "Accepted facility chronology.",
+            "notes": "Preserve school-local HOME relationship authority.",
+            "venue_type": "ARENA",
+        }
+        per_game = {
+            **dict(relationship),
+            "venue_key": "reilly-center-st-bonaventure",
+            "venue_id": "VEN-000926",
+            "city": "Olean",
+            "relationship_type": "",
+            "relationship_start": "",
+            "relationship_end": "",
+            "relationship_date_precision": "",
+            "site_rule": "Per-game venue representation.",
+            "source_basis": "Accepted row-level site research.",
+            "notes": "Separate per-game representation.",
+            "venue_type": "",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000926",
+            "venue_key": "reilly-center-st-bonaventure",
+            "display_name": "Reilly Center",
+            "city": "Olean",
+            "state": "NY",
+        }
+
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Reilly Center",
+            "expected_local_city": "St. Bonaventure",
+            "expected_local_state": "NY",
+            "global_venue_id": "VEN-000926",
+            "global_venue_key": "reilly-center-st-bonaventure",
+            "expected_global_city": "Olean",
+            "expected_global_state": "NY",
+            "allow_locality_variant": True,
+            "locality_variant_basis": (
+                "School-local locality label and global physical-venue locality "
+                "refer to the same authenticated building."
+            ),
+            "preserve_local_representation": True,
+            "resolution_basis": (
+                "Reuse the exact physical identity while preserving the distinct "
+                "school-local HOME relationship chronology."
+            ),
+        }]
+        self.save()
+
+        mapping, meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[relationship, per_game],
+            global_venues=[global_row],
+        )
+        preserved = meta["mappings"][0]
+        self.assertTrue(preserved["preserve_local_representation"])
+        self.assertIn(
+            "RELATIONSHIP_AUTHORITY_PRESENT",
+            preserved["preservation_conflicts"],
+        )
+
+        inventory = venue_reconciliation_inventory(
+            [dict(relationship), dict(per_game)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        row = inventory["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_PRESERVE")
+        self.assertEqual(
+            row["resolution"],
+            "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW",
+        )
+        self.assertIn(
+            "EXPLICIT_REUSE_PRESERVES_RELATIONSHIP_LOCAL_ROW",
+            row["issues"],
+        )
+
+        staged, globals_, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(relationship), dict(per_game)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(len(staged), 2)
+        self.assertEqual(len(globals_), 1)
+        self.assertEqual(staged[0]["venue_id"], "VEN-000926")
+        self.assertEqual(
+            staged[0]["venue_key"], "reilly-center-st-bonaventure"
+        )
+        self.assertEqual(staged[0]["city"], "Olean")
+        self.assertEqual(staged[0]["relationship_type"], "HOME")
+        self.assertEqual(staged[0]["relationship_start"], "1966-12-02")
+        self.assertEqual(
+            staged[0]["site_rule"],
+            "HOME relationship chronology with documented exceptions.",
+        )
+        self.assertEqual(staged[0]["source_basis"], "Accepted facility chronology.")
+        self.assertEqual(staged[0]["venue_type"], "ARENA")
+        self.assertEqual(
+            outcomes[0]["resolution"],
+            "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW",
+        )
+
+    def test_preserve_local_representation_requires_relationship_authority(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        keyed = {
+            **dict(blank),
+            "venue_key": "shared-arena",
+            "venue_id": "VEN-000100",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000100",
+            "venue_key": "shared-arena",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "global_venue_id": "VEN-000100",
+            "global_venue_key": "shared-arena",
+            "expected_global_city": "Example City",
+            "expected_global_state": "NY",
+            "preserve_local_representation": True,
+            "resolution_basis": "Attempted preservation without relationship authority.",
+        }]
+        self.save()
+
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "limited to frozen rows carrying venue relationship authority",
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=[blank, keyed],
+                global_venues=[global_row],
+            )
+
+    def test_preserved_relationship_pair_keeps_summary_refresh_fail_closed(self):
+        rows = [
+            {
+                "venue_key": "shared-arena",
+                "canonical_name": "Shared Arena",
+                "aliases": "",
+                "city": "Example City",
+                "state": "NY",
+                "relationship_type": "HOME",
+                "relationship_start": "1966-12-02",
+                "relationship_end": "",
+                "relationship_date_precision": "EXACT",
+                "games_currently_assigned": "0",
+                "first_assigned_game": "",
+                "last_assigned_game": "",
+            },
+            {
+                "venue_key": "shared-arena",
+                "canonical_name": "Shared Arena",
+                "aliases": "",
+                "city": "Example City",
+                "state": "NY",
+                "relationship_type": "",
+                "relationship_start": "",
+                "relationship_end": "",
+                "relationship_date_precision": "",
+                "games_currently_assigned": "0",
+                "first_assigned_game": "",
+                "last_assigned_game": "",
+            },
+        ]
+        games = [{
+            "source_game_id": "G1",
+            "season_label": "1970-1971",
+            "game_date": "1971-01-02",
+            "curated_venue_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }]
+
+        with self.assertRaisesRegex(
+            WorkflowError, "stale venue summary cannot be refreshed safely"
+        ):
+            refresh_local_venue_assignment_summaries(rows, games)
+
     def test_redundant_drop_fails_closed_without_retained_keyed_identity(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
