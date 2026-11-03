@@ -163,6 +163,13 @@ NEW_GAME_SITE_PATCH_VALUES = {
     "OPPONENT_HOME",
     "NEUTRAL",
 }
+NEW_GAME_DATE_PATCH_ACTIONS = {"APPLY_SOURCE_DATE_PATCH"}
+OWNER_FINAL_DIRECTIVE_RE = re.compile(
+    r"^- Owner-final Implementation reconciliation directive [—-] "
+    r"(?P<source_game_id>[A-Za-z0-9._-]+) [—-] "
+    r"(?P<kind>[A-Z_]+): (?P<body>.*)$"
+)
+OWNER_FINAL_EXACT_DATE_RE = re.compile(r"\bgame_date=(?P<game_date>\d{4}-\d{2}-\d{2})\b")
 SOURCE_CONSISTENCY_ACTIONS = {"APPLY_SOURCE_CONSISTENCY_PATCH"}
 SOURCE_CONSISTENCY_PATCH_FIELDS = {
     "team_score",
@@ -489,6 +496,127 @@ def frozen_venue_split_authority(
             raise WorkflowError("frozen venue cutover total count mismatch")
 
     return authority
+
+
+def frozen_owner_final_date_directives(
+    repo: Path,
+    school_key: str,
+) -> dict[str, dict[str, str]]:
+    """Recover exact-date directives already frozen as owner-final Research authority.
+
+    The six-file Research package deliberately leaves these game fields unchanged
+    until Implementation. Only an exact owner-final directive line in the
+    hash-authenticated frozen source-notes.md may create this Stage 2 capability.
+    """
+    source_notes_path = repo / "schools" / school_key / "source-notes.md"
+    if not source_notes_path.is_file():
+        return {}
+
+    parsed: dict[str, dict[str, str]] = {}
+    for raw_line in source_notes_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        match = OWNER_FINAL_DIRECTIVE_RE.fullmatch(line)
+        if match is None:
+            continue
+        kind = match.group("kind")
+        if "GAME_DATE" not in kind:
+            continue
+        date_match = OWNER_FINAL_EXACT_DATE_RE.search(match.group("body"))
+        if date_match is None:
+            continue
+        source_id = match.group("source_game_id")
+        entry = {
+            "game_date": date_match.group("game_date"),
+            "directive_kind": kind,
+            "directive_line": line,
+            "directive_sha256": sha256_text(line),
+        }
+        prior = parsed.get(source_id)
+        if prior is not None and prior != entry:
+            raise WorkflowError(
+                f"owner-final date authority conflicts for source game {source_id}"
+            )
+        parsed[source_id] = entry
+
+    if not parsed:
+        return {}
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        raise WorkflowError(
+            "owner-final date authority requires the Integration Freeze manifest"
+        )
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise WorkflowError(
+            "cannot read Integration Freeze owner-final date authority"
+        ) from exc
+    if (
+        manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+    ):
+        raise WorkflowError(
+            "Integration Freeze owner-final date authority identity mismatch"
+        )
+    package_hashes = manifest.get("package_member_sha256")
+    expected_notes_hash = (
+        str(package_hashes.get("source-notes.md", "")).strip()
+        if isinstance(package_hashes, dict)
+        else ""
+    )
+    if (
+        not re.fullmatch(r"[0-9a-f]{64}", expected_notes_hash)
+        or sha256_file(source_notes_path) != expected_notes_hash
+    ):
+        raise WorkflowError(
+            "owner-final date authority does not match frozen source-notes.md"
+        )
+
+    source_rows = {
+        row.get("source_game_id", "").strip(): row
+        for row in read_csv(repo / "schools" / school_key / "source-games.csv")
+        if row.get("source_game_id", "").strip()
+    }
+    for source_id, directive in parsed.items():
+        source = source_rows.get(source_id)
+        if source is None or source.get("source_program_key", "").strip() != school_key:
+            raise WorkflowError(
+                f"owner-final date authority references unknown source game {source_id}"
+            )
+        original = source.get("game_date", "").strip()
+        corrected = directive["game_date"]
+        try:
+            old_day = dt.date.fromisoformat(original)
+            new_day = dt.date.fromisoformat(corrected)
+        except ValueError as exc:
+            raise WorkflowError(
+                f"{source_id}: owner-final new-game date authority requires exact ISO dates"
+            ) from exc
+        if old_day == new_day:
+            raise WorkflowError(
+                f"{source_id}: owner-final date directive does not change the frozen date"
+            )
+        season = source.get("season_label", "").strip()
+        season_match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+        if (
+            season_match is None
+            or int(season_match.group(2)) != int(season_match.group(1)) + 1
+        ):
+            raise WorkflowError(
+                f"{source_id}: owner-final date directive requires a valid season"
+            )
+        expected_year = (
+            int(season_match.group(1))
+            if new_day.month >= 7
+            else int(season_match.group(2))
+        )
+        if new_day.year != expected_year:
+            raise WorkflowError(
+                f"{source_id}: owner-final date directive cannot change the season"
+            )
+
+    return parsed
 
 
 def plan_input_paths(repo: Path, school_key: str) -> list[Path]:
@@ -1777,6 +1905,63 @@ def _new_game_site_patch_decision(
     }
 
 
+def _new_game_date_patch_decision(
+    school_key: str,
+    source: dict[str, str],
+    status: str,
+    directive: dict[str, str] | None,
+) -> dict[str, Any] | None:
+    """Expose one owner-gated date patch only for frozen owner-final NEW_GAME authority."""
+    if status != ingest_school.NEW_GAME or directive is None:
+        return None
+    source_id = source.get("source_game_id", "").strip()
+    original = source.get("game_date", "").strip()
+    corrected = str(directive.get("game_date", "")).strip()
+    if not source_id or not original or not corrected:
+        raise WorkflowError("owner-final new-game date decision is incomplete")
+
+    # Reuse the same exact-date and same-season invariants enforced at seal/apply.
+    probe = {
+        "decision_id": _decision_id("NEW-GAME-DATE-PATCH", source_id),
+        "category": "new_game_date_patch",
+        "canonical_game_id": "",
+        "season_label": source.get("season_label", "").strip(),
+        "source_game_date": original,
+    }
+    _reviewed_new_game_date_patch(probe, {"game_date": corrected})
+
+    opponent = source.get("normalized_opponent_key", "").strip()
+    return {
+        "decision_id": probe["decision_id"],
+        "category": "new_game_date_patch",
+        "source_game_id": source_id,
+        "canonical_game_id": "",
+        "season_label": source.get("season_label", "").strip(),
+        **_date_fields(original, ""),
+        "matchup": f"{school_key} vs {opponent}",
+        "field_name": "game_date",
+        "source_value": original,
+        "canonical_value": "[new canonical game]",
+        "relevant_evidence": directive["directive_line"],
+        "recommended_action": "APPLY_SOURCE_DATE_PATCH",
+        "allowed_actions": sorted(NEW_GAME_DATE_PATCH_ACTIONS),
+        "allowed_source_date_value": corrected,
+        "owner_final_directive_kind": directive["directive_kind"],
+        "owner_final_directive_sha256": directive["directive_sha256"],
+        "source_game_type": source.get("curated_game_type", "").strip(),
+        "planned_identity_status": status,
+        "decision": "PENDING",
+        "resolution_basis": "",
+        "canonical_patch_json": "{}",
+        "source_patch_json": "{}",
+        "notes": (
+            "Owner-final Research authority is preserved unchanged in the frozen package. "
+            "If approved at Gate 1, the sealed transaction patches only game_date before "
+            "ingestion and records both old and corrected dates in provenance."
+        ),
+    }
+
+
 def _planned_venue_geography_errors(
     source: dict[str, str],
     status: str,
@@ -2977,6 +3162,10 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
             venue_metadata,
             split_authority,
         )
+    owner_final_date_directives = frozen_owner_final_date_directives(
+        repo,
+        school_key,
+    )
 
     for source in sources:
         opponent = source.get("normalized_opponent_key", "").strip()
@@ -3073,6 +3262,17 @@ def build_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 candidate_id = candidate.get("canonical_game_id", "").strip()
                 if candidate_id and source_id:
                     candidate_identity_source_ids_by_canonical[candidate_id].add(source_id)
+
+        new_game_date_decision = _new_game_date_patch_decision(
+            school_key,
+            source,
+            status,
+            owner_final_date_directives.get(
+                source.get("source_game_id", "").strip()
+            ),
+        )
+        if new_game_date_decision is not None:
+            decisions.append(new_game_date_decision)
 
         consistency_issue = source_consistency_by_id.get(
             source.get("source_game_id", "").strip()
@@ -4243,6 +4443,29 @@ def approve_plan(
                 raise WorkflowError(
                     f"{decision_id}: source site patch {desired_site!r} is not one "
                     "of the preflight-proven viable values"
+                )
+        if item.get("category") == "new_game_date_patch":
+            if decision != "APPLY_SOURCE_DATE_PATCH":
+                raise WorkflowError(
+                    f"{decision_id}: unsupported new-game date decision {decision!r}"
+                )
+            if canonical_patch or set(source_patch) != {"game_date"}:
+                raise WorkflowError(
+                    f"{decision_id}: APPLY_SOURCE_DATE_PATCH requires exactly "
+                    "source game_date and no canonical patch"
+                )
+            corrected = _reviewed_new_game_date_patch(item, source_patch)
+            if corrected != str(item.get("allowed_source_date_value", "")).strip():
+                raise WorkflowError(
+                    f"{decision_id}: source date patch does not equal the frozen "
+                    "owner-final directive"
+                )
+            if not re.fullmatch(
+                r"[0-9a-f]{64}",
+                str(item.get("owner_final_directive_sha256", "")).strip(),
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: owner-final directive fingerprint is invalid"
                 )
         if item.get("category") == "ncaa_round_patch":
             date_patch = _reviewed_new_game_date_patch(item, source_patch)
@@ -5473,19 +5696,21 @@ def _reviewed_new_game_date_patch(
     item: dict[str, Any],
     source_patch: dict[str, str],
 ) -> str | None:
-    """Validate an explicit, sealed date correction on a new NCAA game.
+    """Validate an explicit, sealed date correction on a planned new game.
 
-    This is optional on an existing NCAA round-review decision; it does not
-    create a new reviewer decision, infer a date, or authorize changes to
-    an already-canonical game. Both the old and new dates remain recorded
-    in the sealed review and historical provenance.
+    The correction must ride either the established NCAA round-review path or
+    the explicit owner-final new-game date decision. It never infers a date or
+    authorizes changes to an already-canonical game.
     """
     if "game_date" not in source_patch:
         return None
     decision_id = item.get("decision_id", "")
-    if item.get("category") != "ncaa_round_patch" or item.get("canonical_game_id"):
+    if (
+        item.get("category") not in {"ncaa_round_patch", "new_game_date_patch"}
+        or item.get("canonical_game_id")
+    ):
         raise WorkflowError(
-            f"{decision_id}: date patch requires a NEW_GAME NCAA review"
+            f"{decision_id}: date patch requires an owner-gated NEW_GAME review"
         )
     original = str(item.get("source_game_date", "")).strip()
     corrected = str(source_patch["game_date"]).strip()
@@ -5523,6 +5748,8 @@ def apply_pre_ingest_source_patches(
     Supported populations are:
     - owner-approved H/A/N for a NEW_GAME whose authoritative preflight could
       not otherwise satisfy NCAA site safety;
+    - owner-approved exact-date correction for a NEW_GAME backed by frozen
+      owner-final Research authority;
     - an owner-approved adjacent-season identity match whose exact source
       season/date correction was preflight-proven; and
     - an owner-approved exact-fingerprint cross-opponent identity match whose
@@ -5544,8 +5771,13 @@ def apply_pre_ingest_source_patches(
     ]
     date_items = [
         item for item in approved.get("decisions", [])
-        if item.get("category") == "ncaa_round_patch"
-        and "game_date" in item.get("source_patch", {})
+        if (
+            item.get("category") == "new_game_date_patch"
+            or (
+                item.get("category") == "ncaa_round_patch"
+                and "game_date" in item.get("source_patch", {})
+            )
+        )
     ]
     cross_season_identity_items = []
     cross_opponent_identity_items = []
@@ -5738,11 +5970,82 @@ def apply_pre_ingest_source_patches(
             or source.get("game_date", "").strip() != original
             or source.get("season_label", "").strip()
             != str(item.get("season_label", "")).strip()
-            or source.get("curated_game_type", "").strip() != "NCAA_TOURNAMENT"
-            or source.get("curated_postseason_round", "").strip()
         ):
             raise WorkflowError(
-                f"{decision_id}: frozen new-game date/season/NCAA state changed"
+                f"{decision_id}: frozen new-game date/season state changed"
+            )
+        if item.get("category") == "new_game_date_patch":
+            source_game_id = item["source_game_id"]
+            source = source_by_id.get(source_game_id)
+            assertions = assertion_by_source.get((school_key, source_game_id), [])
+            if source is None:
+                raise WorkflowError(
+                    f"{item['decision_id']}: new-game date source row is missing after ingestion"
+                )
+            if len(assertions) != 1:
+                raise WorkflowError(
+                    f"{item['decision_id']}: expected one target assertion after ingestion; "
+                    f"found {len(assertions)}"
+                )
+            assertion = assertions[0]
+            actual_game_id = assertion.get("canonical_game_id", "").strip()
+            canonical = canonical_by_id.get(actual_game_id)
+            if canonical is None:
+                raise WorkflowError(
+                    f"{item['decision_id']}: ingested new-game date canonical row is missing"
+                )
+            corrected = _reviewed_new_game_date_patch(
+                item,
+                item.get("source_patch", {}),
+            )
+            if not (
+                source.get("game_date", "").strip() == corrected
+                and assertion.get("game_date", "").strip() == corrected
+                and canonical.get("game_date", "").strip() == corrected
+                and source.get("season_label", "").strip()
+                == str(item.get("season_label", "")).strip()
+                and canonical.get("season_label", "").strip()
+                == str(item.get("season_label", "")).strip()
+            ):
+                raise WorkflowError(
+                    f"{item['decision_id']}: owner-final new-game date did not "
+                    "persist through ingestion"
+                )
+            canonical["notes"] = _append_note(
+                canonical.get("notes", ""),
+                "[OWNER_APPROVED_NEW_GAME_DATE_PATCH "
+                f"school={school_key} source={source_game_id} "
+                f"old={item['source_game_date']} new={corrected} "
+                f"authority={item.get('owner_final_directive_sha256','')[:12]} "
+                f"decision={item['decision_id']} "
+                f"plan={approved['approved_plan_hash'][:12]}]",
+            )
+            counts["new_game_dates_verified"] += 1
+            touched_canonical_ids.add(actual_game_id)
+            touched_source_ids.add(source_game_id)
+            continue
+
+        if item.get("category") == "ncaa_round_patch":
+            if (
+                source.get("curated_game_type", "").strip() != "NCAA_TOURNAMENT"
+                or source.get("curated_postseason_round", "").strip()
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: frozen new-game NCAA state changed"
+                )
+        elif item.get("category") == "new_game_date_patch":
+            if (
+                item.get("decision") != "APPLY_SOURCE_DATE_PATCH"
+                or set(item.get("source_patch", {})) != {"game_date"}
+                or source.get("curated_game_type", "").strip()
+                != str(item.get("source_game_type", "")).strip()
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: frozen owner-final new-game date authority changed"
+                )
+        else:
+            raise WorkflowError(
+                f"{decision_id}: unsupported new-game date patch category"
             )
         # A date correction cannot silently convert a planned new game into an
         # existing same-game match. Such identity evidence requires its own gate.
