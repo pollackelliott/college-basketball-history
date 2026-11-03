@@ -225,7 +225,9 @@ A healthy turn should make one coherent durable advance or a small deterministic
 - the same blocker/state is being rechecked without new evidence;
 - multiple unrelated diagnostic families would need to be opened;
 - transcript/context is growing materially faster than durable progress;
-- an external workflow remains healthy but unchanged after three consecutive event-oriented polls in that turn.
+- an external workflow remains healthy but genuinely unchanged through three **counted** no-progress observations after the initial healthy baseline, with each counted observation separated from the prior counted observation by at least two minutes of external workflow time; rapid repeated status reads do not count, and any material state transition resets the count.
+
+The polling threshold exists to bound **sustained waiting**, not to turn a few rapid status checks into owner relay work. The first healthy observation is only the baseline. Under ordinary healthy waiting, three counted no-progress observations therefore represent roughly six minutes of genuinely unchanged external state before a transport yield. A real execution/context limit may still require an earlier durable yield.
 
 When stopping for this reason, preserve the exact active request/checkpoint, residual population, next internal step, and current phase authority. Do not reset or replay completed work.
 
