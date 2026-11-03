@@ -274,6 +274,252 @@ def load_venue_reconciliation(
                 f"venue reconciliation frozen local identity drift for {selector!r}"
             )
 
+        if action == "REGISTER_NEW_IDENTITY":
+            if row_index is None:
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY requires local_venue_row_index"
+                )
+            local = local_rows[0]
+            if local.get("venue_key", "").strip():
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY is limited to blank-key frozen rows"
+                )
+            new_key = str(raw.get("new_global_venue_key") or "").strip()
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", new_key):
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY requires a normalized new_global_venue_key"
+                )
+            if new_key in global_by_key:
+                raise WorkflowError(
+                    f"REGISTER_NEW_IDENTITY key already exists on current main: {new_key}"
+                )
+            identity = (
+                item["expected_local_name"],
+                item["expected_local_city"],
+                item["expected_local_state"],
+            )
+            prior = new_identity_specs.get(new_key)
+            if prior is not None and prior != identity:
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY repeats a proposed key for a "
+                    "different frozen physical identity"
+                )
+            new_identity_specs[new_key] = identity
+            item["new_global_venue_key"] = new_key
+            mappings[selector] = item
+            continue
+
+        if action == "SPLIT_LOCAL_ROW_BY_CUTOVER":
+            if row_index is None:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires local_venue_row_index"
+                )
+            local = local_rows[0]
+            if local.get("venue_key", "").strip():
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER is limited to blank-key frozen rows"
+                )
+            if any(
+                local.get(field, "").strip()
+                for field in (
+                    "relationship_type",
+                    "relationship_start",
+                    "relationship_end",
+                    "relationship_date_precision",
+                )
+            ):
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER cannot discard venue relationship authority"
+                )
+
+            cutover_text = str(raw.get("cutover_date") or "").strip()
+            try:
+                cutover = dt.date.fromisoformat(cutover_text)
+            except ValueError as exc:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires exact ISO cutover_date"
+                ) from exc
+            cutover_basis = str(raw.get("cutover_basis") or "").strip()
+            if not cutover_basis:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires cutover_basis"
+                )
+
+            target_specs = []
+            for side in ("before", "after"):
+                target_id = str(
+                    raw.get(f"{side}_global_venue_id") or ""
+                ).strip()
+                target_key = str(
+                    raw.get(f"{side}_global_venue_key") or ""
+                ).strip()
+                if not target_id or not target_key:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER requires before/after "
+                        "global venue ID and key"
+                    )
+                target = global_by_id.get(target_id)
+                if (
+                    target is None
+                    or target.get("venue_key", "").strip() != target_key
+                    or global_by_key.get(target_key) is not target
+                ):
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER target no longer matches current main"
+                    )
+                if (
+                    target.get("city", "").strip().casefold()
+                    != item["expected_local_city"].casefold()
+                    or target.get("state", "").strip().upper()
+                    != item["expected_local_state"].upper()
+                ):
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER target geography mismatch"
+                    )
+                retained = [
+                    other
+                    for index, other in enumerate(local_venues, 1)
+                    if index != row_index
+                    and other.get("venue_key", "").strip() == target_key
+                    and other.get("canonical_name", "").strip()
+                    == item["expected_local_name"]
+                    and other.get("city", "").strip()
+                    == item["expected_local_city"]
+                    and other.get("state", "").strip()
+                    == item["expected_local_state"]
+                ]
+                if len(retained) != 1:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER requires exactly one retained "
+                        f"frozen row for target key {target_key!r}"
+                    )
+                target_specs.append((side, target_id, target_key, retained[0]))
+
+            if target_specs[0][1] == target_specs[1][1]:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires two distinct physical targets"
+                )
+
+            exact_preservation_fields = (
+                "site_rule",
+                "source_basis",
+                "notes",
+                "venue_type",
+                "known_opened",
+                "known_closed",
+                "venue_date_precision",
+            )
+            for field in exact_preservation_fields:
+                value = local.get(field, "").strip()
+                if value and any(
+                    retained.get(field, "").strip() != value
+                    for _, _, _, retained in target_specs
+                ):
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER cannot discard unique frozen "
+                        f"{field} authority"
+                    )
+
+            local_aliases = {
+                value.strip().casefold()
+                for value in local.get("aliases", "").split(";")
+                if value.strip()
+            }
+            retained_labels = set()
+            for _, _, _, retained in target_specs:
+                canonical = retained.get("canonical_name", "").strip()
+                if canonical:
+                    retained_labels.add(canonical.casefold())
+                retained_labels.update(
+                    value.strip().casefold()
+                    for value in retained.get("aliases", "").split(";")
+                    if value.strip()
+                )
+            if not local_aliases.issubset(retained_labels):
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER cannot discard unique frozen aliases"
+                )
+
+            matching_games = _matching_source_games(source_games, local)
+            if not matching_games:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER found no matching frozen source games"
+                )
+            before_games: list[dict[str, str]] = []
+            after_games: list[dict[str, str]] = []
+            for game in matching_games:
+                game_id = game.get("source_game_id", "").strip() or "[unknown]"
+                game_date_text = game.get("game_date", "").strip()
+                if game_date_text:
+                    try:
+                        game_date = dt.date.fromisoformat(game_date_text)
+                    except ValueError as exc:
+                        raise WorkflowError(
+                            "SPLIT_LOCAL_ROW_BY_CUTOVER encountered invalid exact "
+                            f"date for {game_id}: {game_date_text!r}"
+                        ) from exc
+                    (before_games if game_date < cutover else after_games).append(game)
+                    continue
+
+                season = _season_window(game.get("season_label", ""))
+                if season is None:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER cannot classify undated game "
+                        f"{game_id} with invalid season"
+                    )
+                if season[1] < cutover:
+                    before_games.append(game)
+                elif season[0] >= cutover:
+                    after_games.append(game)
+                else:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER transition-season game lacks "
+                        f"an exact date: {game_id}"
+                    )
+
+            if not before_games or not after_games:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires populated assignments "
+                    "on both sides of the cutover"
+                )
+
+            split_targets = []
+            for (side, target_id, target_key, _), rows in zip(
+                target_specs, (before_games, after_games)
+            ):
+                split_targets.append(
+                    {
+                        "side": side.upper(),
+                        "global_venue_id": target_id,
+                        "global_venue_key": target_key,
+                        **_game_summary(rows),
+                        "source_game_ids_sha256": _sha256_bytes(
+                            ("\n".join(
+                                sorted(
+                                    row.get("source_game_id", "").strip()
+                                    for row in rows
+                                )
+                            ) + "\n").encode("utf-8")
+                        ),
+                    }
+                )
+                if target_id in used_target_ids:
+                    raise WorkflowError(
+                        f"venue reconciliation target ID repeated: {target_id}"
+                    )
+                used_target_ids.add(target_id)
+
+            item.update(
+                {
+                    "cutover_date": cutover_text,
+                    "cutover_basis": cutover_basis,
+                    "split_source_game_count": str(len(matching_games)),
+                    "split_targets": split_targets,
+                }
+            )
+            mappings[selector] = item
+            continue
+
         if action == "DROP_REDUNDANT_LOCAL_ROW":
             if row_index is None:
                 raise WorkflowError(
