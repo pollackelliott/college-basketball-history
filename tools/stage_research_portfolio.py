@@ -1107,7 +1107,9 @@ def venue_reconciliation_inventory(
             venue_reconciliation, local, row_index
         )
         if explicit is not None:
-            explicit_action = explicit.get("action")
+            explicit_action = str(
+                explicit.get("action") or "REUSE_CURRENT_IDENTITY"
+            )
             if explicit_action == "DROP_REDUNDANT_LOCAL_ROW":
                 item["classification"] = "SAFE_REPRESENTATION_DROP"
                 item["resolution"] = "DROP_REDUNDANT_LOCAL_ROW"
@@ -1673,7 +1675,9 @@ def rebase_venues(
         )
         register_new_key = ""
         if explicit is not None:
-            explicit_action = explicit.get("action")
+            explicit_action = str(
+                explicit.get("action") or "REUSE_CURRENT_IDENTITY"
+            )
             if explicit_action == "DROP_REDUNDANT_LOCAL_ROW":
                 mappings.append(
                     {
