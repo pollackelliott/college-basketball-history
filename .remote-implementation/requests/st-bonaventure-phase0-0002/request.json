@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-phase0-0002",
+  "operation": "PHASE0",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "1f000b65c0688ab363af5c5c4444a95e75ae24e9",
+  "previous_control_state_sha256": "17bc496eb6497cfb1f749a1dedf86a407af205915df888543352720f04bf0fbd",
+  "expected_protected_main_sha": "a64597d58d095a0597ad71d4cdd52b243c77a54e",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
+      "part_count": 14
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage1-0005/checkpoint-manifest.json",
+    "sha256": "8b28b59da09c83d4be77e478551f879f2f4199da4621b61c4fd7bd0a39da9055"
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0004/venue-reconciliation.json",
+    "sha256": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
+  },
+  "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1915-1916",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted St. Bonaventure INCEPTION+ scope from the immutable Research Freeze. The frozen package explicitly records owner-confirmed INCEPTION+ authority, includes the owner-approved 1915-16 University at Buffalo game, and preserves the individually documented varsity universe from 1919-20 through 2025-26 together with the explicit six-game unidentified 1919-20 coverage debt. Current program-top-level-scope.csv independently matches INCEPTION+. Preserve the exact frozen historical universe and accepted uncertainty."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center-authorized fresh Phase 0 after PR #444 and Stage 1 refresh PASS",
+    "authorization": "Control Center explicitly directed a new Phase 0 only after a fresh Stage 1 inventory passed on repaired protected main a64597d58d095a0597ad71d4cdd52b243c77a54e. Fresh Stage 1 request st-bonaventure-stage1-0005 is durably PASS with zero blockers and exact checkpoint hash 8b28b59da09c83d4be77e478551f879f2f4199da4621b61c4fd7bd0a39da9055. This request authorizes one guarded PHASE0 operation using the immutable Research Freeze and exact 58-mapping reconciliation, including permanent proof of the preserved Reilly relationship/locality topology under PR #444, recomputed venue summaries, INTEGRATION_FROZEN, create-once publication to data/st-bonaventure-onboarding, and required independent fresh Phase 0 verification. The abandoned st-bonaventure-phase0-0001 remains abandoned and is not replayed. No Stage 2, Owner Gate 1/2, release, merge, unrelated maintenance, or protected-main direct mutation is authorized."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
