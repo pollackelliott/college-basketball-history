@@ -1761,7 +1761,7 @@ def rebase_venues(
 
         if (
             explicit is not None
-            and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
+            and explicit_action == "REUSE_CURRENT_IDENTITY"
         ):
             candidate = global_by_id.get(explicit["global_venue_id"])
             if (candidate is None
