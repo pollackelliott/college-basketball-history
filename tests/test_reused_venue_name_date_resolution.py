@@ -1,4 +1,6 @@
 import csv
+import hashlib
+import json
 import sys
 import tempfile
 import unittest
@@ -7,6 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import ingest_school
+from integration_freeze_guard import (
+    build_source_game_semantic_snapshot,
+    semantic_snapshot_sha256,
+)
+from onboarding_plan import frozen_venue_split_authority
 
 FIELDS = [
     "source_program_key","venue_key","venue_id","canonical_name","aliases",
@@ -258,6 +265,245 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "curated_venue_name":"Madison Square Garden",
                 },
                 self.make_msg_map(),
+            )
+
+
+    def test_frozen_split_authority_resolves_exact_53_row_msg_population(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        repo = Path(directory.name)
+        school = repo / "schools" / "st-bonaventure"
+        onboarding = repo / ".onboarding" / "st-bonaventure"
+        school.mkdir(parents=True)
+        onboarding.mkdir(parents=True)
+
+        before_ids = [f"STB-MSG-BEFORE-{index:02d}" for index in range(1, 35)]
+        after_ids = ["STB-1968-69-018"] + [
+            f"STB-MSG-AFTER-{index:02d}" for index in range(1, 19)
+        ]
+        self.assertEqual(len(before_ids), 34)
+        self.assertEqual(len(after_ids), 19)
+
+        source_fields = [
+            "source_game_id",
+            "season_label",
+            "game_date",
+            "curated_venue_name",
+            "city",
+            "state",
+        ]
+        with (school / "source-games.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=source_fields)
+            writer.writeheader()
+            for source_id in before_ids:
+                writer.writerow({
+                    "source_game_id": source_id,
+                    "season_label": "1966-1967",
+                    "game_date": "",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                })
+            for source_id in after_ids:
+                writer.writerow({
+                    "source_game_id": source_id,
+                    "season_label": (
+                        "1968-1969"
+                        if source_id == "STB-1968-69-018"
+                        else "1969-1970"
+                    ),
+                    "game_date": "",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                })
+
+        with (school / "venues.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=FIELDS)
+            writer.writeheader()
+            old = venue_row(
+                "madison-square-garden-1925",
+                "VEN-000123",
+                "1937-02-24",
+                "1966-03-10",
+            )
+            old["source_program_key"] = "st-bonaventure"
+            old["canonical_name"] = "Madison Square Garden"
+            old["city"] = "New York"
+            old["state"] = "NY"
+            new = venue_row(
+                "madison-square-garden-1968",
+                "VEN-000124",
+                "1983-02-20",
+                "2026-03-11",
+            )
+            new["source_program_key"] = "st-bonaventure"
+            new["canonical_name"] = "Madison Square Garden"
+            new["city"] = "New York"
+            new["state"] = "NY"
+            writer.writerow(old)
+            writer.writerow(new)
+
+        snapshot = build_source_game_semantic_snapshot(
+            school / "source-games.csv"
+        )
+        manifest = {
+            "schema_version": 2,
+            "school_key": "st-bonaventure",
+            "status": "INTEGRATION_FROZEN",
+            "package_member_sha256": {
+                "venues.csv": hashlib.sha256(
+                    (school / "venues.csv").read_bytes()
+                ).hexdigest(),
+            },
+            "source_game_semantic_guard": {
+                "schema_version": 1,
+                "snapshot_sha256": semantic_snapshot_sha256(snapshot),
+                "snapshot": snapshot,
+            },
+            "venue_reconciliation": {
+                "schema_version": 2,
+                "mappings": [{
+                    "action": "SPLIT_LOCAL_ROW_BY_CUTOVER",
+                    "expected_local_name": "Madison Square Garden",
+                    "expected_local_city": "New York",
+                    "expected_local_state": "NY",
+                    "cutover_date": "1968-02-11",
+                    "split_source_game_count": "53",
+                    "split_targets": [
+                        {
+                            "side": "BEFORE",
+                            "global_venue_id": "VEN-000123",
+                            "global_venue_key": "madison-square-garden-1925",
+                            "games_currently_assigned": "34",
+                            "source_game_ids": before_ids,
+                        },
+                        {
+                            "side": "AFTER",
+                            "global_venue_id": "VEN-000124",
+                            "global_venue_key": "madison-square-garden-1968",
+                            "games_currently_assigned": "19",
+                            "source_game_ids": after_ids,
+                        },
+                    ],
+                }],
+            },
+        }
+        (onboarding / "integration-freeze.json").write_text(
+            json.dumps(manifest), encoding="utf-8"
+        )
+
+        authority = frozen_venue_split_authority(repo, "st-bonaventure")
+        self.assertEqual(len(authority), 53)
+        self.assertEqual(
+            sum(
+                item["venue_id"] == "VEN-000123"
+                for item in authority.values()
+            ),
+            34,
+        )
+        self.assertEqual(
+            sum(
+                item["venue_id"] == "VEN-000124"
+                for item in authority.values()
+            ),
+            19,
+        )
+        self.assertEqual(
+            authority["STB-1968-69-018"]["venue_id"],
+            "VEN-000124",
+        )
+
+        global_venues = {
+            "VEN-000123": {
+                "venue_id": "VEN-000123",
+                "city": "New York",
+                "state": "NY",
+                "opened": "1925",
+                "closed": "1968",
+            },
+            "VEN-000124": {
+                "venue_id": "VEN-000124",
+                "city": "New York",
+                "state": "NY",
+                "opened": "1968-02-11",
+                "closed": "",
+            },
+        }
+        metadata = ingest_school.load_venue_metadata_map(
+            school / "venues.csv",
+            global_venues,
+        )
+
+        with self.assertRaisesRegex(ValueError, "available date/season evidence"):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "STB-1968-69-018",
+                    "game_date": "",
+                    "season_label": "1968-1969",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                },
+                metadata,
+            )
+
+        ingest_school.bind_frozen_venue_split_authority(metadata, authority)
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id": "STB-1968-69-018",
+                "game_date": "",
+                "season_label": "1968-1969",
+                "curated_venue_name": "Madison Square Garden",
+                "city": "New York",
+                "state": "NY",
+            },
+            metadata,
+        )
+        self.assertEqual(result["venue_id"], "VEN-000124")
+        self.assertEqual(result["venue_key"], "madison-square-garden-1968")
+
+        with self.assertRaisesRegex(ValueError, "available date/season evidence"):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "UNAUTHORIZED-AMBIGUOUS",
+                    "game_date": "",
+                    "season_label": "1968-1969",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                },
+                metadata,
+            )
+
+    def test_frozen_split_authority_mismatch_fails_closed(self):
+        metadata = self.make_msg_map()
+        ingest_school.bind_frozen_venue_split_authority(
+            metadata,
+            {
+                "TRANSITION": {
+                    "venue_id": "VEN-DOES-NOT-EXIST",
+                    "venue_key": "wrong-building",
+                    "curated_venue_name": "Madison Square Garden",
+                }
+            },
+        )
+        with self.assertRaisesRegex(
+            ValueError,
+            "does not match exactly one current venue candidate",
+        ):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "TRANSITION",
+                    "game_date": "",
+                    "season_label": "1967-1968",
+                    "curated_venue_name": "Madison Square Garden",
+                },
+                metadata,
             )
 
 if __name__ == "__main__":
