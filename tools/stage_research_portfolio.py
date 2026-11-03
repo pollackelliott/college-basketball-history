@@ -1296,10 +1296,9 @@ def venue_reconciliation_inventory(
                     and other.get("venue_key", "").strip()
                     == chosen.get("venue_key", "").strip()
                     and other.get("canonical_name", "").strip() == name
-                    and other.get("city", "").strip()
-                    == local.get("city", "").strip()
-                    and other.get("state", "").strip()
-                    == local.get("state", "").strip()
+                    and explicit_reuse_locality_compatible(
+                        local, other, explicit
+                    )
                 ]
                 consolidation_conflicts = (
                     representation_consolidation_conflicts(
@@ -1718,10 +1717,9 @@ def rebase_venues(
                     if other is not local
                     and other.get("venue_key", "").strip() == target_key
                     and other.get("canonical_name", "").strip() == name
-                    and other.get("city", "").strip()
-                    == local.get("city", "").strip()
-                    and other.get("state", "").strip()
-                    == local.get("state", "").strip()
+                    and explicit_reuse_locality_compatible(
+                        local, other, explicit
+                    )
                 ]
                 if retained:
                     conflicts = representation_consolidation_conflicts(
