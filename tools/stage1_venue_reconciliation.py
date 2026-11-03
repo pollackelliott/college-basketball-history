@@ -222,7 +222,6 @@ def load_venue_reconciliation(
                 "relationship_start",
                 "relationship_end",
                 "relationship_date_precision",
-                "site_rule",
             )
             if any(
                 local.get(field, "").strip()
@@ -248,6 +247,31 @@ def load_venue_reconciliation(
                     "DROP_REDUNDANT_LOCAL_ROW requires a retained keyed row "
                     "with the same frozen name/geography"
                 )
+
+            # A blank-key aggregate representation may be dropped only when all
+            # non-relationship authority it carries is provably preserved by the
+            # retained keyed rows. This is deliberately stricter than ordinary
+            # same-name/geography matching.
+            exact_redundancy_fields = (
+                "site_rule",
+                "source_basis",
+                "notes",
+                "venue_type",
+                "known_opened",
+                "known_closed",
+                "venue_date_precision",
+            )
+            for field in exact_redundancy_fields:
+                local_value = local.get(field, "").strip()
+                if local_value and any(
+                    other.get(field, "").strip() != local_value
+                    for other in retained
+                ):
+                    raise WorkflowError(
+                        "DROP_REDUNDANT_LOCAL_ROW cannot discard unique frozen "
+                        f"{field} authority"
+                    )
+
             local_aliases = {
                 value.strip().casefold()
                 for value in local.get("aliases", "").split(";")
@@ -268,6 +292,53 @@ def load_venue_reconciliation(
                 raise WorkflowError(
                     "DROP_REDUNDANT_LOCAL_ROW cannot discard unique frozen aliases"
                 )
+
+            local_count = local.get("games_currently_assigned", "").strip()
+            if local_count:
+                try:
+                    local_count_int = int(local_count)
+                    retained_counts = [
+                        int(other.get("games_currently_assigned", "").strip())
+                        for other in retained
+                    ]
+                except ValueError as exc:
+                    raise WorkflowError(
+                        "DROP_REDUNDANT_LOCAL_ROW requires numeric assignment counts"
+                    ) from exc
+                if sum(retained_counts) != local_count_int:
+                    raise WorkflowError(
+                        "DROP_REDUNDANT_LOCAL_ROW retained assignment counts "
+                        "do not exactly partition the dropped row"
+                    )
+                item["dropped_games_currently_assigned"] = str(local_count_int)
+                item["retained_games_currently_assigned"] = str(
+                    sum(retained_counts)
+                )
+
+            local_first = local.get("first_assigned_game", "").strip()
+            if local_first:
+                retained_first = [
+                    other.get("first_assigned_game", "").strip()
+                    for other in retained
+                ]
+                if any(not value for value in retained_first) or min(retained_first) > local_first:
+                    raise WorkflowError(
+                        "DROP_REDUNDANT_LOCAL_ROW retained rows do not cover "
+                        "the dropped row first assignment"
+                    )
+
+            local_last = local.get("last_assigned_game", "").strip()
+            if local_last:
+                retained_last = [
+                    other.get("last_assigned_game", "").strip()
+                    for other in retained
+                ]
+                if any(not value for value in retained_last) or max(retained_last) < local_last:
+                    raise WorkflowError(
+                        "DROP_REDUNDANT_LOCAL_ROW retained rows do not cover "
+                        "the dropped row last assignment"
+                    )
+
             item["retained_local_keys"] = ";".join(
                 sorted({row.get("venue_key", "").strip() for row in retained})
             )

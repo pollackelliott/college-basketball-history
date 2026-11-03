@@ -371,6 +371,184 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         self.assertEqual(len(globals_), 1)
         self.assertEqual(outcomes[0]["resolution"], "DROP_REDUNDANT_LOCAL_ROW")
 
+    def test_redundant_split_drop_preserves_identical_site_rule_and_counts(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-old,Shared Arena,Example City,NY\n"
+            b"shared-arena-new,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        common = {
+            **dict(self.local),
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "site_rule": "Per-game assignment; venue identity does not establish H/A/N.",
+            "source_basis": "Accepted row-level site research.",
+            "notes": "Representation metadata only.",
+        }
+        blank = {
+            **common,
+            "venue_key": "",
+            "venue_id": "",
+            "games_currently_assigned": "25",
+            "first_assigned_game": "1975-12-26",
+            "last_assigned_game": "2022-03-29",
+        }
+        old = {
+            **common,
+            "venue_key": "shared-arena-old",
+            "venue_id": "VEN-000100",
+            "games_currently_assigned": "18",
+            "first_assigned_game": "1951-01-01",
+            "last_assigned_game": "1967-12-31",
+        }
+        new = {
+            **common,
+            "venue_key": "shared-arena-new",
+            "venue_id": "VEN-000101",
+            "games_currently_assigned": "7",
+            "first_assigned_game": "1975-12-26",
+            "last_assigned_game": "2022-03-29",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Aggregate representation is exactly preserved by retained split rows.",
+        }]
+        self.save()
+
+        mapping, meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[blank, old, new],
+            global_venues=[dict(self.global_row)],
+        )
+        item = meta["mappings"][0]
+        self.assertEqual(item["dropped_games_currently_assigned"], "25")
+        self.assertEqual(item["retained_games_currently_assigned"], "25")
+        inventory = venue_reconciliation_inventory(
+            [dict(blank), dict(old), dict(new)],
+            [],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            inventory["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_DROP",
+        )
+
+    def test_redundant_split_drop_rejects_different_site_rule(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-old,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "site_rule": "Protected rule A.",
+        }
+        keyed = {
+            **dict(blank),
+            "venue_key": "shared-arena-old",
+            "venue_id": "VEN-000100",
+            "site_rule": "Different rule B.",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Attempted unsafe site-rule drop.",
+        }]
+        self.save()
+
+        with self.assertRaisesRegex(
+            WorkflowError, "cannot discard unique frozen site_rule authority"
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=[blank, keyed],
+                global_venues=[dict(self.global_row)],
+            )
+
+    def test_redundant_split_drop_rejects_assignment_count_mismatch(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-old,Shared Arena,Example City,NY\n"
+            b"shared-arena-new,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "games_currently_assigned": "25",
+        }
+        old = {
+            **dict(blank),
+            "venue_key": "shared-arena-old",
+            "venue_id": "VEN-000100",
+            "games_currently_assigned": "18",
+        }
+        new = {
+            **dict(blank),
+            "venue_key": "shared-arena-new",
+            "venue_id": "VEN-000101",
+            "games_currently_assigned": "6",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Attempted incomplete partition.",
+        }]
+        self.save()
+
+        with self.assertRaisesRegex(
+            WorkflowError, "do not exactly partition the dropped row"
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=[blank, old, new],
+                global_venues=[dict(self.global_row)],
+            )
+
     def test_redundant_drop_rejects_relationship_authority(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
