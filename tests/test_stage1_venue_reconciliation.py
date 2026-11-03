@@ -1016,6 +1016,93 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             ["1", "2"],
         )
 
+    def test_two_row_index_mappings_may_reuse_one_authenticated_target(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b",Shared Arena Former Name,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        first = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        second = {
+            **dict(first),
+            "canonical_name": "Shared Arena Former Name",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000100",
+            "venue_key": "shared-arena",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [
+            {
+                "local_venue_row_index": 1,
+                "expected_local_name": "Shared Arena",
+                "expected_local_city": "Example City",
+                "expected_local_state": "NY",
+                "global_venue_id": "VEN-000100",
+                "global_venue_key": "shared-arena",
+                "expected_global_city": "Example City",
+                "expected_global_state": "NY",
+                "resolution_basis": "First immutable representation.",
+            },
+            {
+                "local_venue_row_index": 2,
+                "expected_local_name": "Shared Arena Former Name",
+                "expected_local_city": "Example City",
+                "expected_local_state": "NY",
+                "global_venue_id": "VEN-000100",
+                "global_venue_key": "shared-arena",
+                "expected_global_city": "Example City",
+                "expected_global_state": "NY",
+                "resolution_basis": "Second immutable representation of the same venue.",
+            },
+        ]
+        self.save()
+
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[first, second],
+            global_venues=[global_row],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(first), dict(second)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            [row["target_venue_id"] for row in inventory["rows"]],
+            ["VEN-000100", "VEN-000100"],
+        )
+        staged, globals_, _names, _outcomes = rebase_venues(
+            "test-school",
+            [dict(first), dict(second)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(len(globals_), 1)
+        self.assertEqual(len(staged), 2)
+        self.assertEqual({row["venue_id"] for row in staged}, {"VEN-000100"})
+        self.assertEqual({row["venue_key"] for row in staged}, {"shared-arena"})
+
     def test_repeated_frozen_physical_key_with_historical_names_is_supported(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
