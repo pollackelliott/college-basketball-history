@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "f564d6b354e463755db9f42932fdccd516286610",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
+  "recovered_request_id": "st-bonaventure-phase0-0001",
+  "request_id": "st-bonaventure-phase0-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/st-bonaventure-onboarding"
+}

@@ -11,7 +11,8 @@
     "fresno-state-phase0-scope-supersession-0001",
     "saint-louis-phase0-0001",
     "loyola-chicago-stage2-proposal-0004",
-    "st-bonaventure-stage1-0001"
+    "st-bonaventure-stage1-0001",
+    "st-bonaventure-phase0-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -287,16 +288,16 @@
     "st-bonaventure-stage1-0004",
     "st-bonaventure-phase0-0001"
   ],
-  "active_expected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
-  "active_lock_commit": "f564d6b354e463755db9f42932fdccd516286610",
-  "active_lock_owner": "github-actions:41658212905:1",
-  "active_operation": "PHASE0",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "st-bonaventure-phase0-0001",
-  "active_request_sha256": "d811342c47bbdc6136e9e9e19bffed27d3a254a290c242ce260c085c5e4ed283",
-  "active_school_key": "st-bonaventure",
-  "active_target_branch": "data/st-bonaventure-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -572,25 +573,29 @@
     "st-bonaventure-stage1-recover-0001",
     "st-bonaventure-stage1-0002",
     "st-bonaventure-stage1-0003",
-    "st-bonaventure-stage1-0004"
+    "st-bonaventure-stage1-0004",
+    "st-bonaventure-phase0-recover-0001"
   ],
-  "current_sequence": 271,
+  "current_sequence": 272,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage1-0004/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "caa81b52a70a922d6aebfa8080ba257bcef597c7c904afc5ffab67f966b46cbb",
-    "operation": "STAGE1_INVENTORY",
-    "protected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
-    "request_id": "st-bonaventure-stage1-0004",
-    "school_key": "st-bonaventure",
-    "stage1_reconciliation_sha256": "428dbb12cde088503dc2d5c79be0dfc293ddfed73a3760d78ca6ee9edecd20a6",
-    "stage1_status": "PASS"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "st-bonaventure-phase0-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "f564d6b354e463755db9f42932fdccd516286610",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
+      "recovered_request_id": "st-bonaventure-phase0-0001",
+      "request_id": "st-bonaventure-phase0-recover-0001",
+      "schema_version": 1,
+      "target_branch": "data/st-bonaventure-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "41658212905",
-  "lock_acquisition_request_commit": "a73d9bf57aae31cc44bcde6e173df908248d4bb2",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
