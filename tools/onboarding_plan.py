@@ -5710,7 +5710,7 @@ def _reviewed_new_game_date_patch(
         or item.get("canonical_game_id")
     ):
         raise WorkflowError(
-            f"{decision_id}: date patch requires an owner-gated NEW_GAME review"
+            f"{decision_id}: date patch requires a NEW_GAME owner-gated review"
         )
     original = str(item.get("source_game_date", "")).strip()
     corrected = str(source_patch["game_date"]).strip()
