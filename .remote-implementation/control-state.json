@@ -588,11 +588,11 @@
   "current_sequence": 276,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
     "operation": "PHASE0",
     "protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "st-bonaventure-phase0-0003",
     "school_key": "st-bonaventure",
     "successor_manifest_path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
