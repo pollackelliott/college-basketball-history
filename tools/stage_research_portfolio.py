@@ -564,6 +564,276 @@ def venue_date_bounds(value: str) -> tuple[dt.date, dt.date] | None:
         return None
 
 
+def _source_game_window(
+    game: dict[str, str],
+) -> tuple[dt.date, dt.date] | None:
+    exact = game.get("game_date", "").strip()
+    if exact:
+        bounds = venue_date_bounds(exact)
+        if bounds is not None and bounds[0] == bounds[1]:
+            return bounds
+        return None
+    season = game.get("season_label", "").strip()
+    match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+        return None
+    return (
+        dt.date(int(match.group(1)), 7, 1),
+        dt.date(int(match.group(2)), 6, 30),
+    )
+
+
+def _relationship_window(
+    row: dict[str, str],
+) -> tuple[dt.date | None, dt.date | None] | None:
+    start_text = row.get("relationship_start", "").strip()
+    end_text = row.get("relationship_end", "").strip()
+    if not start_text and not end_text:
+        return None
+    precision = row.get("relationship_date_precision", "").strip().casefold()
+
+    if "season" in precision:
+        def season_edge(value: str, *, end: bool) -> dt.date | None:
+            match = re.fullmatch(r"(\d{4})-(\d{4})", value)
+            if not match or int(match.group(2)) != int(match.group(1)) + 1:
+                return None
+            return (
+                dt.date(int(match.group(2)), 6, 30)
+                if end
+                else dt.date(int(match.group(1)), 7, 1)
+            )
+
+        start = season_edge(start_text, end=False) if start_text else None
+        end = season_edge(end_text, end=True) if end_text else None
+    else:
+        start_bounds = venue_date_bounds(start_text) if start_text else None
+        end_bounds = venue_date_bounds(end_text) if end_text else None
+        start = start_bounds[0] if start_bounds else None
+        end = end_bounds[1] if end_bounds else None
+
+    if start_text and start is None:
+        return None
+    if end_text and end is None:
+        return None
+    return start, end
+
+
+def _relationship_contains_game(
+    row: dict[str, str],
+    game: dict[str, str],
+) -> bool:
+    relationship = _relationship_window(row)
+    game_window = _source_game_window(game)
+    if relationship is None or game_window is None:
+        return False
+    start, end = relationship
+    game_start, game_end = game_window
+    if start is not None and game_start < start:
+        return False
+    if end is not None and game_end > end:
+        return False
+    return True
+
+
+def _assignment_summary(rows: list[dict[str, str]]) -> dict[str, str]:
+    dates = [row.get("game_date", "").strip() for row in rows]
+    exact = [value for value in dates if value]
+    return {
+        "games_currently_assigned": str(len(rows)),
+        "first_assigned_game": (
+            min(exact) if rows and len(exact) == len(rows) else ""
+        ),
+        "last_assigned_game": (
+            max(exact) if rows and len(exact) == len(rows) else ""
+        ),
+    }
+
+
+def refresh_local_venue_assignment_summaries(
+    local_rows: list[dict[str, str]],
+    source_games: list[dict[str, str]],
+    venue_reconciliation: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Refresh only stale derived venue summaries, never historical game fields.
+
+    Unique local representations receive all matching frozen games. Multiple
+    relationship rows for one physical identity are partitioned only when each
+    game fits exactly one relationship window. Multiple physical identities with
+    one reused display name require an explicit hash-bound split proof.
+    """
+    venue_reconciliation = venue_reconciliation or {}
+
+    groups: dict[tuple[str, str, str], list[dict[str, str]]] = {}
+    canonical_lookup: dict[
+        tuple[str, str, str], tuple[str, str, str]
+    ] = {}
+    alias_lookup: dict[
+        tuple[str, str, str], set[tuple[str, str, str]]
+    ] = {}
+
+    for row in local_rows:
+        name = row.get("canonical_name", "").strip()
+        if not name:
+            continue
+        group = (
+            normalize_name(name),
+            row.get("city", "").strip().casefold(),
+            normalize_jurisdiction(row.get("state", "")),
+        )
+        groups.setdefault(group, []).append(row)
+        canonical_lookup[group] = group
+        labels = [name]
+        labels.extend(
+            alias.strip()
+            for alias in row.get("aliases", "").split(";")
+            if alias.strip()
+        )
+        for label in labels:
+            key = (
+                normalize_name(label),
+                row.get("city", "").strip().casefold(),
+                normalize_jurisdiction(row.get("state", "")),
+            )
+            alias_lookup.setdefault(key, set()).add(group)
+
+    group_games: dict[
+        tuple[str, str, str], list[dict[str, str]]
+    ] = {group: [] for group in groups}
+    for game in source_games:
+        name = game.get("curated_venue_name", "").strip()
+        if not name:
+            continue
+        lookup = (
+            normalize_name(name),
+            game.get("city", "").strip().casefold(),
+            normalize_jurisdiction(game.get("state", "")),
+        )
+        if lookup in groups:
+            group_games[lookup].append(game)
+            continue
+        matches = alias_lookup.get(lookup, set())
+        if len(matches) == 1:
+            group_games[next(iter(matches))].append(game)
+        elif len(matches) > 1:
+            raise WorkflowError(
+                "venue summary refresh found an ambiguous local alias for "
+                f"source game {game.get('source_game_id','[unknown]')}"
+            )
+
+    split_game_target: dict[str, str] = {}
+    for mapping in venue_reconciliation.values():
+        if mapping.get("action") != "SPLIT_LOCAL_ROW_BY_CUTOVER":
+            continue
+        for target in mapping.get("split_targets", []):
+            target_key = target["global_venue_key"]
+            for game_id in target.get("source_game_ids", []):
+                prior = split_game_target.get(game_id)
+                if prior is not None and prior != target_key:
+                    raise WorkflowError(
+                        "venue split proof assigns one source game to multiple targets"
+                    )
+                split_game_target[game_id] = target_key
+
+    refreshed: list[dict[str, Any]] = []
+    for group, rows in groups.items():
+        games = group_games.get(group, [])
+        raw_counts = [
+            row.get("games_currently_assigned", "").strip()
+            for row in rows
+        ]
+        if raw_counts and all(value == "" for value in raw_counts):
+            continue
+        declared = (
+            sum(int(value) for value in raw_counts)
+            if raw_counts and all(value.isdigit() for value in raw_counts)
+            else None
+        )
+        expected = len(games)
+        if declared == expected:
+            continue
+
+        assignments: dict[int, list[dict[str, str]]] = {
+            index: [] for index in range(len(rows))
+        }
+
+        if len(rows) == 1:
+            assignments[0] = list(games)
+        else:
+            row_by_key: dict[str, list[int]] = {}
+            for index, row in enumerate(rows):
+                key = row.get("venue_key", "").strip()
+                if key:
+                    row_by_key.setdefault(key, []).append(index)
+
+            if games and all(
+                game.get("source_game_id", "").strip() in split_game_target
+                for game in games
+            ):
+                for game in games:
+                    target_key = split_game_target[
+                        game.get("source_game_id", "").strip()
+                    ]
+                    indexes = row_by_key.get(target_key, [])
+                    if len(indexes) != 1:
+                        raise WorkflowError(
+                            "venue split summary refresh cannot locate exactly one "
+                            f"retained local target row for {target_key!r}"
+                        )
+                    assignments[indexes[0]].append(game)
+            elif (
+                len({
+                    row.get("venue_key", "").strip()
+                    for row in rows
+                    if row.get("venue_key", "").strip()
+                }) == 1
+                and all(_relationship_window(row) is not None for row in rows)
+            ):
+                for game in games:
+                    indexes = [
+                        index
+                        for index, row in enumerate(rows)
+                        if _relationship_contains_game(row, game)
+                    ]
+                    if len(indexes) != 1:
+                        raise WorkflowError(
+                            "venue relationship summary refresh cannot assign "
+                            f"source game {game.get('source_game_id','[unknown]')} "
+                            "to exactly one retained relationship row"
+                        )
+                    assignments[indexes[0]].append(game)
+            else:
+                raise WorkflowError(
+                    "stale venue summary cannot be refreshed safely for "
+                    f"{rows[0].get('canonical_name','[blank]')!r} "
+                    f"{rows[0].get('city','')}, {rows[0].get('state','')}"
+                )
+
+        for index, assigned in assignments.items():
+            rows[index].update(_assignment_summary(assigned))
+
+        refreshed.append(
+            {
+                "canonical_name": rows[0].get("canonical_name", "").strip(),
+                "city": rows[0].get("city", "").strip(),
+                "state": rows[0].get("state", "").strip(),
+                "before_declared_count": declared,
+                "after_declared_count": sum(
+                    int(row.get("games_currently_assigned", "0") or "0")
+                    for row in rows
+                ),
+                "source_game_count": expected,
+                "venue_rows": len(rows),
+            }
+        )
+
+    return {
+        "status": "PASS",
+        "refreshed_group_count": len(refreshed),
+        "groups": refreshed,
+    }
+
+
+
 def venue_chronology_conflicts(
     local: dict[str, str],
     global_row: dict[str, str],
