@@ -296,7 +296,7 @@
     "st-bonaventure-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
-  "active_lock_commit": null,
+  "active_lock_commit": "f8e9314658414eb367d8aff6ac4a698e0ba98ee9",
   "active_lock_owner": "github-actions:41707168014:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
