@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-release-gate2-approval-0003",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "duquesne-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "duquesne",
-  "previous_control_state_commit": "2f8f96b4df14309bda747319793d6461b130735e",
-  "previous_control_state_sha256": "6965d2b67c63b7f1d17a4c4837661a9f65cc7404c4d058862f097782e3153ded",
-  "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "previous_control_state_commit": "59723279ebc763d33962fceaec692abe9f81ed06",
+  "previous_control_state_sha256": "bcf6bff91075efd50e6a35260d14301de34da860390a4ca6cf2910f5c1039183",
+  "expected_protected_main_sha": "8ab1962e8818a977ccc7ed194e82ad20b4ae186c",
   "target_branch": "data/duquesne-onboarding",
   "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
   "pr_number": 437,
-  "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
-  "release_manifest_sha256": "ad9aca99d86248549222e780480e56aabe3f18d52cbcf21abf0b921985fe9579",
-  "preview_deployment_id": 7507221375,
-  "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/duquesne/duquesne-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "0df962fa5349b155eadee1d115d5acd8ca4c969ae53e569cd67a05d0aa6eabc4"
+  "merge_sha": "8ab1962e8818a977ccc7ed194e82ad20b4ae186c",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-release-gate2-approval-0003/checkpoint-manifest.json",
+    "sha256": "10c1bd09f3f262d87862851d209c8d3955e4cc845645e9c57f5f9adbb2a18ef3"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/duquesne/duquesne-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "c6392622b8aa079dde032c648c560b39f3106398dd701c2ce8791e605c5776a5"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: APPROVED. Proceed, immediately after the exact fresh-verified Duquesne Owner Gate 2 packet for PR #437 head 8fd4c255cc1094ac45c98f7e0d043187526e7816 and Preview deployment 7507221375.",
-    "preview_checkpoint_sha256": "0df962fa5349b155eadee1d115d5acd8ca4c969ae53e569cd67a05d0aa6eabc4",
-    "preview_verification_sha256": "c6392622b8aa079dde032c648c560b39f3106398dd701c2ce8791e605c5776a5",
-    "pr_number": 437,
-    "pr_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
-    "preview_deployment_id": 7507221375,
-    "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/duquesne/duquesne-release-gate2-approval-0003/gate2-approval-verification.json",
+    "sha256": "6fcd8673d177567e57e30f642dcfc11a3bd84534d37cef3ace5931b288d222e7"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation lane — corrected exact Gate 2 record after two pre-acceptance hash mismatches",
-    "authorization": "Owner explicitly approved exact Duquesne PR #437 Preview. Prior 0001 and 0002 requests were rejected before acceptance and are absent from accepted/consumed IDs. This records the same exact approval only; no merge or Production proof occurs in this request."
+    "origin": "ChatGPT Duquesne serialized Implementation lane — exact post-merge Production proof",
+    "authorization": "Owner's explicit Gate 2 approval authorized the final release phase for exact PR #437 head 8fd4c255cc1094ac45c98f7e0d043187526e7816 and Preview deployment 7507221375. The lane independently reauthenticated fresh-verified Owner Gate 2 approval, rechecked protected main and clean PR #437, then merged exactly that approved head once. GitHub created verified two-parent merge 8ab1962e8818a977ccc7ed194e82ad20b4ae186c with first parent d34e954bf738dc3f971f268ffeb4f58f5a32c4a9 and second parent 8fd4c255cc1094ac45c98f7e0d043187526e7816; protected main is exactly 8ab1962e8818a977ccc7ed194e82ad20b4ae186c. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, run permanent merged-main validation, require the exact successful Production deployment, compare all changed public JSON, and independently verify the durable proof. It grants no merge replay, deployment creation, recovery, historical mutation, onboarding-branch mutation, protected-main mutation, tooling mutation, new owner-approval authority, unrelated repair, or other-school authority."
   },
   "authority": {
     "phase0": false,
@@ -53,9 +40,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
