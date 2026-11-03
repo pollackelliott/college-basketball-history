@@ -1155,7 +1155,11 @@ def venue_reconciliation_inventory(
                 hard_stop = "EXPLICIT_RECONCILIATION_GEOGRAPHY_CONFLICT"
             else:
                 chosen = candidate
-                reason = "REUSE_EXPLICIT_RECONCILIATION"
+                reason = (
+                    "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW"
+                    if explicit.get("preserve_local_representation")
+                    else "REUSE_EXPLICIT_RECONCILIATION"
+                )
         elif hint is not None:
             hinted_key, hinted_id = hint
             hinted_by_key = global_by_key.get(hinted_key)
@@ -1251,6 +1255,7 @@ def venue_reconciliation_inventory(
                     "REUSE_EXACT_KEY",
                     "REUSE_RESEARCH_BASE_IDENTITY",
                     "REUSE_EXPLICIT_RECONCILIATION",
+                    "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW",
                 }
                 and chosen.get("identity_status", "").strip() == "RESEARCHED_SPLIT"
                 and global_by_id[venue_id].get("identity_status", "").strip()
@@ -1310,6 +1315,20 @@ def venue_reconciliation_inventory(
                     else []
                 )
                 if (
+                    explicit is not None
+                    and not key
+                    and retained_same_key
+                    and explicit.get("preserve_local_representation")
+                ):
+                    item["classification"] = "SAFE_REPRESENTATION_PRESERVE"
+                    item["issues"].append(
+                        "EXPLICIT_REUSE_PRESERVES_RELATIONSHIP_LOCAL_ROW"
+                    )
+                    item["issues"].append(
+                        "PRESERVED_LOCAL_AUTHORITY:"
+                        + ",".join(consolidation_conflicts)
+                    )
+                elif (
                     explicit is not None
                     and not key
                     and retained_same_key
@@ -1725,23 +1744,30 @@ def rebase_venues(
                     conflicts = representation_consolidation_conflicts(
                         local, retained
                     )
-                    if conflicts:
-                        raise WorkflowError(
-                            "explicit same-identity venue consolidation is unsafe: "
-                            + ",".join(conflicts)
+                    if explicit.get("preserve_local_representation"):
+                        if "RELATIONSHIP_AUTHORITY_PRESENT" not in conflicts:
+                            raise WorkflowError(
+                                "preserved local venue representation lost its "
+                                "relationship-authority predicate"
+                            )
+                    else:
+                        if conflicts:
+                            raise WorkflowError(
+                                "explicit same-identity venue consolidation is unsafe: "
+                                + ",".join(conflicts)
+                            )
+                        mappings.append(
+                            {
+                                "venue_key": key,
+                                "final_venue_key": target_key,
+                                "canonical_name": name,
+                                "research_venue_id": research_id,
+                                "final_venue_id": explicit["global_venue_id"],
+                                "resolution": "CONSOLIDATE_EXPLICIT_REUSE",
+                                "frozen_row_index": row_index,
+                            }
                         )
-                    mappings.append(
-                        {
-                            "venue_key": key,
-                            "final_venue_key": target_key,
-                            "canonical_name": name,
-                            "research_venue_id": research_id,
-                            "final_venue_id": explicit["global_venue_id"],
-                            "resolution": "CONSOLIDATE_EXPLICIT_REUSE",
-                            "frozen_row_index": row_index,
-                        }
-                    )
-                    continue
+                        continue
             if explicit_action == "REGISTER_NEW_IDENTITY":
                 register_new_key = explicit["new_global_venue_key"]
                 already_created = global_by_key.get(register_new_key)
@@ -1777,7 +1803,11 @@ def rebase_venues(
                     f"explicit venue reconciliation no longer matches current main: {key!r}"
                 )
             chosen = candidate
-            reason = "REUSE_EXPLICIT_RECONCILIATION"
+            reason = (
+                "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW"
+                if explicit.get("preserve_local_representation")
+                else "REUSE_EXPLICIT_RECONCILIATION"
+            )
         elif research_base_hint is not None:
             hinted_key, hinted_id = research_base_hint
             hinted_by_key = global_by_key.get(hinted_key)
