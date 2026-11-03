@@ -1635,6 +1635,7 @@ def rebase_venues(
     existing_school_venues: list[dict[str, str]] | None = None,
     venue_reconciliation: dict[str, dict[str, Any]] | None = None,
     source_games: list[dict[str, str]] | None = None,
+    summary_match_rows_out: list[dict[str, str]] | None = None,
 ) -> tuple[
     list[dict[str, str]],
     list[dict[str, str]],
@@ -2096,6 +2097,9 @@ def rebase_venues(
             source_match_rows=summary_match_rows,
         )
 
+    if summary_match_rows_out is not None:
+        summary_match_rows_out.extend(dict(row) for row in summary_match_rows)
+
     return staged_local_rows, global_rows, name_rows, mappings
 
 
@@ -2432,6 +2436,7 @@ def main() -> int:
                     "as a discovery loop."
                 )
 
+            staged_venue_source_matches: list[dict[str, str]] = []
             (
                 local_venues,
                 global_venues,
@@ -2445,11 +2450,13 @@ def main() -> int:
                 existing_school_venues=existing_school_venues,
                 venue_reconciliation=venue_reconciliation,
                 source_games=source_games,
+                summary_match_rows_out=staged_venue_source_matches,
             )
 
             staged_venue_summary = venue_summary_consistency_report(
                 source_games,
                 local_venues,
+                source_match_venues=staged_venue_source_matches,
             )
             if staged_venue_summary["errors"]:
                 raise WorkflowError(
