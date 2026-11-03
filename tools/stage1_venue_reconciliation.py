@@ -201,12 +201,20 @@ def load_venue_reconciliation(
     try:
         with zipfile.ZipFile(package_path) as archive:
             member = archive.read("venues.csv")
-            source_games_member = archive.read("source-games.csv")
+            source_games_member = (
+                archive.read("source-games.csv")
+                if "source-games.csv" in archive.namelist()
+                else b""
+            )
     except (OSError, ValueError, KeyError, zipfile.BadZipFile) as exc:
         raise WorkflowError(
             f"venue reconciliation cannot read frozen package members: {exc}"
         ) from exc
-    source_games = _csv_rows(source_games_member)
+    source_games = (
+        _csv_rows(source_games_member)
+        if source_games_member
+        else []
+    )
     expected_venues = str(doc.get("expected_venues_sha256") or "").lower().strip()
     actual_venues = _sha256_bytes(member)
     if expected_venues != actual_venues:
