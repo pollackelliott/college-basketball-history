@@ -57,6 +57,7 @@ from onboarding_plan import (
 )
 from program_history import history_scope_errors
 from stage1_venue_reconciliation import (
+    explicit_reuse_locality_compatible,
     load_venue_reconciliation,
     representation_consolidation_conflicts,
     venue_reconciliation_for_row,
@@ -1148,7 +1149,9 @@ def venue_reconciliation_inventory(
             if (candidate is None
                 or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]):
                 hard_stop = "EXPLICIT_RECONCILIATION_STALE"
-            elif not geography_compatible(local, candidate):
+            elif not explicit_reuse_locality_compatible(
+                local, candidate, explicit
+            ):
                 hard_stop = "EXPLICIT_RECONCILIATION_GEOGRAPHY_CONFLICT"
             else:
                 chosen = candidate
@@ -1293,10 +1296,9 @@ def venue_reconciliation_inventory(
                     and other.get("venue_key", "").strip()
                     == chosen.get("venue_key", "").strip()
                     and other.get("canonical_name", "").strip() == name
-                    and other.get("city", "").strip()
-                    == local.get("city", "").strip()
-                    and other.get("state", "").strip()
-                    == local.get("state", "").strip()
+                    and explicit_reuse_locality_compatible(
+                        local, other, explicit
+                    )
                 ]
                 consolidation_conflicts = (
                     representation_consolidation_conflicts(
@@ -1715,10 +1717,9 @@ def rebase_venues(
                     if other is not local
                     and other.get("venue_key", "").strip() == target_key
                     and other.get("canonical_name", "").strip() == name
-                    and other.get("city", "").strip()
-                    == local.get("city", "").strip()
-                    and other.get("state", "").strip()
-                    == local.get("state", "").strip()
+                    and explicit_reuse_locality_compatible(
+                        local, other, explicit
+                    )
                 ]
                 if retained:
                     conflicts = representation_consolidation_conflicts(
@@ -1764,9 +1765,14 @@ def rebase_venues(
             and explicit_action == "REUSE_CURRENT_IDENTITY"
         ):
             candidate = global_by_id.get(explicit["global_venue_id"])
-            if (candidate is None
-                or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]
-                or not geography_compatible(local, candidate)):
+            if (
+                candidate is None
+                or candidate.get("venue_key", "").strip()
+                != explicit["global_venue_key"]
+                or not explicit_reuse_locality_compatible(
+                    local, candidate, explicit
+                )
+            ):
                 raise WorkflowError(
                     f"explicit venue reconciliation no longer matches current main: {key!r}"
                 )
