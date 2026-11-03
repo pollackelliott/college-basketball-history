@@ -646,6 +646,9 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             "source_basis": "Accepted facility chronology.",
             "notes": "Preserve school-local HOME relationship authority.",
             "venue_type": "ARENA",
+            "games_currently_assigned": "0",
+            "first_assigned_game": "",
+            "last_assigned_game": "",
         }
         per_game = {
             **dict(relationship),
@@ -727,12 +730,41 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             row["issues"],
         )
 
+        source_games = [
+            {
+                "source_game_id": "G1",
+                "season_label": "1966-1967",
+                "game_date": "1966-12-10",
+                "curated_venue_name": "Reilly Center",
+                "city": "St. Bonaventure",
+                "state": "NY",
+            },
+            {
+                "source_game_id": "G2",
+                "season_label": "1967-1968",
+                "game_date": "1967-12-09",
+                "curated_venue_name": "Reilly Center",
+                "city": "St. Bonaventure",
+                "state": "NY",
+            },
+            {
+                "source_game_id": "G3",
+                "season_label": "2011-2012",
+                "game_date": "2012-01-14",
+                "curated_venue_name": "Reilly Center",
+                "city": "Olean",
+                "state": "NY",
+            },
+        ]
+        source_games_before = [dict(game) for game in source_games]
+
         staged, globals_, _names, outcomes = rebase_venues(
             "test-school",
             [dict(relationship), dict(per_game)],
             [dict(global_row)],
             [],
             venue_reconciliation=mapping,
+            source_games=source_games,
         )
         self.assertEqual(len(staged), 2)
         self.assertEqual(len(globals_), 1)
@@ -741,6 +773,14 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             staged[0]["venue_key"], "reilly-center-st-bonaventure"
         )
         self.assertEqual(staged[0]["city"], "Olean")
+        self.assertEqual(staged[1]["city"], "Olean")
+        self.assertEqual(staged[0]["games_currently_assigned"], "2")
+        self.assertEqual(staged[1]["games_currently_assigned"], "1")
+        self.assertEqual(staged[0]["first_assigned_game"], "1966-12-10")
+        self.assertEqual(staged[0]["last_assigned_game"], "1967-12-09")
+        self.assertEqual(staged[1]["first_assigned_game"], "2012-01-14")
+        self.assertEqual(staged[1]["last_assigned_game"], "2012-01-14")
+        self.assertEqual(source_games, source_games_before)
         self.assertEqual(staged[0]["relationship_type"], "HOME")
         self.assertEqual(staged[0]["relationship_start"], "1966-12-02")
         self.assertEqual(
