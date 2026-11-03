@@ -67,6 +67,10 @@ CONFIDENT = "CONFIDENT_MATCH"
 REVIEW = "REVIEW"
 NEW_GAME = "NEW_GAME"
 
+# Reserved internal metadata channel. NUL cannot occur in a CSV venue label, so
+# ordinary name lookup can never collide with this key.
+FROZEN_VENUE_SPLIT_AUTHORITY_KEY = "\x00frozen-source-game-venue-authority"
+
 CANONICAL_FIELDS = [
     "canonical_game_id",
     "season_label",
@@ -699,14 +703,46 @@ def load_venue_metadata_map(
     return dict(result)
 
 
+def bind_frozen_venue_split_authority(
+    venue_metadata_map: dict[str, list[dict[str, str]]],
+    authority: dict[str, dict[str, str]],
+) -> None:
+    """Attach already-authenticated per-source-game split authority.
+
+    This channel is representation authority only. Callers must derive it from a
+    verified Integration Freeze; this helper deliberately does not infer or
+    research venue identity.
+    """
+    normalized: dict[str, dict[str, str]] = {}
+    for source_id, row in authority.items():
+        source_id = str(source_id).strip()
+        venue_id = str(row.get("venue_id", "")).strip()
+        venue_key = str(row.get("venue_key", "")).strip()
+        venue_name = str(row.get("curated_venue_name", "")).strip()
+        if not source_id or not venue_id or not venue_key or not venue_name:
+            raise ValueError("frozen venue split authority is incomplete")
+        normalized[source_id] = {
+            "venue_id": venue_id,
+            "venue_key": venue_key,
+            "curated_venue_name": venue_name,
+        }
+    venue_metadata_map[FROZEN_VENUE_SPLIT_AUTHORITY_KEY] = normalized  # type: ignore[assignment]
+
+
 def resolve_venue_metadata(
     source: dict[str, str],
     venue_metadata_map: dict[str, list[dict[str, str]]],
 ) -> dict[str, str]:
-    # Unique names resolve directly; reused names require one exact-date match.
+    # Unique names resolve directly; reused names require one exact-date match
+    # unless a verified Integration Freeze already assigned this exact source row.
     venue_name = source.get("curated_venue_name", "").strip()
     if not venue_name:
         return {}
+    source_id = source.get("source_game_id", "").strip()
+    authority_map = venue_metadata_map.get(FROZEN_VENUE_SPLIT_AUTHORITY_KEY, {})
+    frozen_authority = (
+        authority_map.get(source_id) if isinstance(authority_map, dict) and source_id else None
+    )
     raw_candidates = venue_metadata_map.get(venue_name.casefold(), [])
     # Backward-compatible support for existing unit fixtures and callers that
     # provide the pre-hardening unique-name shape: name -> metadata dict.
@@ -714,6 +750,29 @@ def resolve_venue_metadata(
         return raw_candidates
 
     candidates = list(raw_candidates)
+    if frozen_authority is not None:
+        expected_name = str(frozen_authority.get("curated_venue_name", "")).strip()
+        expected_id = str(frozen_authority.get("venue_id", "")).strip()
+        expected_key = str(frozen_authority.get("venue_key", "")).strip()
+        if venue_name.casefold() != expected_name.casefold():
+            raise ValueError(
+                f"source game {source_id}: frozen venue split authority expects "
+                f"{expected_name!r}, found {venue_name!r}"
+            )
+        matching = [
+            candidate
+            for candidate in candidates
+            if candidate.get("venue_id", "").strip() == expected_id
+            and candidate.get("venue_key", "").strip() == expected_key
+        ]
+        if len(matching) != 1:
+            raise ValueError(
+                f"source game {source_id}: frozen venue split authority "
+                f"{expected_key}/{expected_id} does not match exactly one current "
+                "venue candidate"
+            )
+        return matching[0]
+
     if not candidates:
         return {}
     if len(candidates) == 1:
