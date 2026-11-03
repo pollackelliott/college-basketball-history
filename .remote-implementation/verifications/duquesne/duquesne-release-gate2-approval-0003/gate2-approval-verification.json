@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "10c1bd09f3f262d87862851d209c8d3955e4cc845645e9c57f5f9adbb2a18ef3",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+  "pr_number": 437,
+  "preview_deployment_id": 7507221375,
+  "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "duquesne-release-gate2-approval-0003",
+  "schema_version": 1,
+  "school_key": "duquesne",
+  "status": "PASS"
+}
