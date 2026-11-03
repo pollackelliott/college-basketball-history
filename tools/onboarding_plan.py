@@ -24,10 +24,6 @@ from typing import Any, Iterable
 
 import ingest_school
 from administrative_status import administrative_status_errors
-from integration_freeze_guard import (
-    build_source_game_semantic_snapshot,
-    semantic_snapshot_sha256,
-)
 from build_site_data import historical_opponent_display_conflicts
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
@@ -370,6 +366,13 @@ def frozen_venue_split_authority(
     function never derives a venue from date/season evidence. It accepts only an
     exact semantic snapshot and exact frozen venues.csv representation.
     """
+    # integration_freeze_guard imports WorkflowError from this module, so these
+    # helpers must be imported lazily after onboarding_plan is fully initialized.
+    from integration_freeze_guard import (
+        build_source_game_semantic_snapshot,
+        semantic_snapshot_sha256,
+    )
+
     manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
     if not manifest_path.is_file():
         return {}
