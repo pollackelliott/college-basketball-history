@@ -152,6 +152,8 @@ def _valid_season(value: str) -> bool:
 def venue_summary_consistency_report(
     games: list[dict[str, str]],
     venues: list[dict[str, str]],
+    *,
+    source_match_venues: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Check package venue assignment summaries against frozen game rows.
 
@@ -163,24 +165,36 @@ def venue_summary_consistency_report(
 
     Ambiguous labels are reported but are not guessed.  Exact first/last summary
     bounds are checked only when every matching game has an exact date.
+
+    source_match_venues may carry an authenticated pre-canonical locality for
+    source matching while declared summaries are still read from the corresponding
+    staged venue rows.  The lists must align one-to-one.
     """
-    groups: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
+    if source_match_venues is None:
+        source_match_venues = venues
+    if len(source_match_venues) != len(venues):
+        raise WorkflowError(
+            "venue summary consistency source-match rows must align exactly "
+            "with staged venue rows"
+        )
+
+    groups: dict[tuple[str, str, str], list[int]] = defaultdict(list)
     labels_to_groups: dict[
         tuple[str, str, str], set[tuple[str, str, str]]
     ] = defaultdict(set)
 
-    for row in venues:
-        canonical = row.get("canonical_name", "").strip()
+    for index, match_row in enumerate(source_match_venues):
+        canonical = match_row.get("canonical_name", "").strip()
         if not canonical:
             continue
-        city = row.get("city", "").strip()
-        state = row.get("state", "").strip()
+        city = match_row.get("city", "").strip()
+        state = match_row.get("state", "").strip()
         group = (_normalize_name(canonical), city.casefold(), state.upper())
-        groups[group].append(row)
+        groups[group].append(index)
         labels = [canonical]
         labels.extend(
             alias.strip()
-            for alias in row.get("aliases", "").split(";")
+            for alias in match_row.get("aliases", "").split(";")
             if alias.strip()
         )
         for label in labels:
@@ -231,7 +245,8 @@ def venue_summary_consistency_report(
     mismatch_groups = 0
     details: list[dict[str, Any]] = []
 
-    for group, rows in sorted(groups.items()):
+    for group, row_indexes in sorted(groups.items()):
+        rows = [venues[index] for index in row_indexes]
         raw_counts = [
             row.get("games_currently_assigned", "").strip()
             for row in rows
