@@ -1,0 +1,21 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "request_id": "st-bonaventure-phase0-0003",
+  "research_checkpoint_sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+  "research_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "7da6a9d24d6d268d52f979ffb0ee21b68dc3187d6023d87d6f720658a63d232c",
+    "opponents.csv": "a1256551eee7d7a062b859c4db778e6225fa4012e224e04e02f3b19b166e3450",
+    "source-games.csv": "48628a5c9ced087101dfb25eb4d888e530328676969b187611c56d76235d7e2a",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "b9939ac250cf56d9aec80d9c03aba619cfa9569f6c76a6a14787effec3645071"
+  },
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "sidecars": {
+    "stage1-reconciliation.json": "94259ab9cbb54a80bbcc79c55aecb2dd3a9d2980bb885bc55bd127c8bc617d96",
+    "venue-reconciliation.json": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
+  },
+  "stage1_status": "PASS"
+}
