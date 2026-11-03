@@ -297,15 +297,15 @@
   "active_lock_commit": "b14061ccef154076d5b8391662b454a041cac491",
   "active_lock_owner": "github-actions:41694424076:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "25c1fabd981fc55357a07156ec899c7c004d5512",
+  "active_prepared_tree_sha": "c736f364b72d503570a14672546c7fd4f34888a5",
   "active_request_id": "st-bonaventure-phase0-0003",
   "active_request_sha256": "2d2d33540517d527d85d26505f02b0e4c8bb5475d4fe2a77935327431d3f8a82",
   "active_school_key": "st-bonaventure",
   "active_target_branch": "data/st-bonaventure-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/st-bonaventure/st-bonaventure-phase0-0003/writeahead-manifest.json",
+  "active_writeahead_sha256": "e5e44806153dbad348acd4b28823bc0a9a49504acc7a041255b9db0abbabf1c1",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -602,5 +602,5 @@
   "lock_acquisition_request_commit": "3399c931c35c79e882eb708e638822978a40f0fc",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
