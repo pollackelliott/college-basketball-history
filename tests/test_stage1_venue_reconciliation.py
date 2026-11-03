@@ -17,6 +17,7 @@ from stage_research_portfolio import (  # noqa: E402
     rebase_venues,
     rebase_program_aliases,
     program_alias_inventory,
+    refresh_local_venue_assignment_summaries,
     venue_reconciliation_inventory,
 )
 
@@ -629,6 +630,389 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
                 local_venues=[blank],
                 global_venues=[dict(self.global_row)],
             )
+
+    def test_cutover_split_reconciles_all_matching_source_games(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-old,Shared Arena,Example City,NY\n"
+            b"shared-arena-new,Shared Arena,Example City,NY\n"
+        )
+        source_bytes = (
+            b"source_game_id,season_label,game_date,curated_venue_name,city,state\n"
+            b"G1,1960-1961,1961-03-17,Shared Arena,Example City,NY\n"
+            b"G2,1966-1967,,Shared Arena,Example City,NY\n"
+            b"G3,1968-1969,,Shared Arena,Example City,NY\n"
+            b"G4,1976-1977,1977-03-15,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+            z.writestr("source-games.csv", source_bytes)
+
+        common = {
+            **dict(self.local),
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "site_rule": "Per-game accepted venue assignment.",
+            "source_basis": "Accepted row-level site research.",
+            "notes": "Representation metadata only.",
+            "games_currently_assigned": "1",
+            "first_assigned_game": "",
+            "last_assigned_game": "",
+        }
+        broad = {**common, "venue_key": "", "venue_id": ""}
+        old = {
+            **common,
+            "venue_key": "shared-arena-old",
+            "venue_id": "VEN-000100",
+        }
+        new = {
+            **common,
+            "venue_key": "shared-arena-new",
+            "venue_id": "VEN-000101",
+        }
+        globals_ = [
+            {
+                **dict(self.global_row),
+                "venue_id": "VEN-000100",
+                "venue_key": "shared-arena-old",
+                "display_name": "Shared Arena",
+                "city": "Example City",
+                "state": "NY",
+            },
+            {
+                **dict(self.global_row),
+                "venue_id": "VEN-000101",
+                "venue_key": "shared-arena-new",
+                "display_name": "Shared Arena",
+                "city": "Example City",
+                "state": "NY",
+            },
+        ]
+        source_games = list(csv.DictReader(source_bytes.decode().splitlines()))
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "SPLIT_LOCAL_ROW_BY_CUTOVER",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "cutover_date": "1968-02-11",
+            "cutover_basis": "Settled physical-building transition authority.",
+            "before_global_venue_id": "VEN-000100",
+            "before_global_venue_key": "shared-arena-old",
+            "after_global_venue_id": "VEN-000101",
+            "after_global_venue_key": "shared-arena-new",
+            "resolution_basis": "Hash-bound frozen source-game split.",
+        }]
+        self.save()
+
+        mapping, meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[broad, old, new],
+            global_venues=globals_,
+        )
+        targets = meta["mappings"][0]["split_targets"]
+        self.assertEqual(
+            [(target["side"], target["games_currently_assigned"]) for target in targets],
+            [("BEFORE", "2"), ("AFTER", "2")],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(broad), dict(old), dict(new)],
+            [dict(row) for row in globals_],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            inventory["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_SPLIT",
+        )
+
+        staged, _global_rows, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(broad), dict(old), dict(new)],
+            [dict(row) for row in globals_],
+            [],
+            venue_reconciliation=mapping,
+            source_games=source_games,
+        )
+        self.assertEqual(len(staged), 2)
+        by_key = {row["venue_key"]: row for row in staged}
+        self.assertEqual(
+            by_key["shared-arena-old"]["games_currently_assigned"], "2"
+        )
+        self.assertEqual(
+            by_key["shared-arena-new"]["games_currently_assigned"], "2"
+        )
+        self.assertEqual(
+            outcomes[0]["resolution"], "SPLIT_LOCAL_ROW_BY_CUTOVER"
+        )
+
+    def test_cutover_split_rejects_undated_transition_season(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-old,Shared Arena,Example City,NY\n"
+            b"shared-arena-new,Shared Arena,Example City,NY\n"
+        )
+        source_bytes = (
+            b"source_game_id,season_label,game_date,curated_venue_name,city,state\n"
+            b"G1,1967-1968,,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+            z.writestr("source-games.csv", source_bytes)
+        common = {
+            **dict(self.local),
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        local_rows = [
+            {**common, "venue_key": "", "venue_id": ""},
+            {**common, "venue_key": "shared-arena-old", "venue_id": "VEN-000100"},
+            {**common, "venue_key": "shared-arena-new", "venue_id": "VEN-000101"},
+        ]
+        globals_ = [
+            {**dict(self.global_row), "venue_id": "VEN-000100", "venue_key": "shared-arena-old", "display_name": "Shared Arena", "city": "Example City", "state": "NY"},
+            {**dict(self.global_row), "venue_id": "VEN-000101", "venue_key": "shared-arena-new", "display_name": "Shared Arena", "city": "Example City", "state": "NY"},
+        ]
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "SPLIT_LOCAL_ROW_BY_CUTOVER",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "cutover_date": "1968-02-11",
+            "cutover_basis": "Settled transition.",
+            "before_global_venue_id": "VEN-000100",
+            "before_global_venue_key": "shared-arena-old",
+            "after_global_venue_id": "VEN-000101",
+            "after_global_venue_key": "shared-arena-new",
+            "resolution_basis": "Must fail closed without exact transition-season date.",
+        }]
+        self.save()
+        with self.assertRaisesRegex(
+            WorkflowError, "transition-season game lacks an exact date"
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=local_rows,
+                global_venues=globals_,
+            )
+
+    def test_explicit_reuse_consolidates_existing_local_identity_and_refreshes_count(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena,Shared Arena,Example City,NY\n"
+        )
+        source_bytes = (
+            b"source_game_id,season_label,game_date,curated_venue_name,city,state\n"
+            b"G1,2020-2021,2021-01-01,Shared Arena,Example City,NY\n"
+            b"G2,2020-2021,,Shared Arena,Example City,NY\n"
+            b"G3,2021-2022,2022-01-01,Shared Arena,Example City,NY\n"
+            b"G4,2021-2022,2022-02-01,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+            z.writestr("source-games.csv", source_bytes)
+        common = {
+            **dict(self.local),
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "site_rule": "Per-game assignment.",
+            "source_basis": "Accepted site research.",
+            "notes": "Representation metadata.",
+        }
+        blank = {
+            **common, "venue_key": "", "venue_id": "",
+            "games_currently_assigned": "2",
+        }
+        keyed = {
+            **common, "venue_key": "shared-arena", "venue_id": "VEN-000100",
+            "games_currently_assigned": "3",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000100",
+            "venue_key": "shared-arena",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "global_venue_id": "VEN-000100",
+            "global_venue_key": "shared-arena",
+            "expected_global_city": "Example City",
+            "expected_global_state": "NY",
+            "resolution_basis": "Same physical identity.",
+        }]
+        self.save()
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[blank, keyed],
+            global_venues=[global_row],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(blank), dict(keyed)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(
+            inventory["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_CONSOLIDATION",
+        )
+        staged, _globals, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(blank), dict(keyed)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+            source_games=list(csv.DictReader(source_bytes.decode().splitlines())),
+        )
+        self.assertEqual(len(staged), 1)
+        self.assertEqual(staged[0]["games_currently_assigned"], "4")
+        self.assertEqual(staged[0]["first_assigned_game"], "")
+        self.assertEqual(staged[0]["last_assigned_game"], "")
+        self.assertEqual(outcomes[0]["resolution"], "CONSOLIDATE_EXPLICIT_REUSE")
+
+    def test_blank_key_new_identity_requires_explicit_registration(self):
+        local = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "New Armory",
+            "city": "Olean",
+            "state": "NY",
+        }
+        inventory = venue_reconciliation_inventory(
+            [local], [], [], venue_reconciliation={}
+        )
+        self.assertEqual(inventory["blocker_count"], 1)
+        self.assertIn(
+            "BLANK_KEY_NEW_IDENTITY_REQUIRES_EXPLICIT_REGISTRATION",
+            inventory["rows"][0]["issues"],
+        )
+
+    def test_explicit_new_identity_preserves_two_relationship_rows_and_refreshes_counts(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",New Armory,Olean,NY\n"
+            b",New Armory,Olean,NY\n"
+        )
+        source_bytes = (
+            b"source_game_id,season_label,game_date,curated_venue_name,city,state\n"
+            b"G1,1915-1916,,New Armory,Olean,NY\n"
+            b"G2,1948-1949,1948-12-18,New Armory,Olean,NY\n"
+            b"G3,1950-1951,,New Armory,Olean,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+            z.writestr("source-games.csv", source_bytes)
+        common = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "New Armory",
+            "city": "Olean",
+            "state": "NY",
+            "venue_type": "armory",
+            "site_rule": "HOME only after independent classification.",
+            "source_basis": "Accepted HOME chronology.",
+            "notes": "One physical building with separate relationship eras.",
+        }
+        early = {
+            **common,
+            "games_currently_assigned": "1",
+            "relationship_type": "source_program_home_exception",
+            "relationship_start": "1915-1916",
+            "relationship_end": "1915-1916",
+            "relationship_date_precision": "season",
+        }
+        later = {
+            **common,
+            "games_currently_assigned": "1",
+            "relationship_type": "source_program_home",
+            "relationship_start": "1946",
+            "relationship_end": "1966-01-19",
+            "relationship_date_precision": "date",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [
+            {
+                "action": "REGISTER_NEW_IDENTITY",
+                "local_venue_row_index": 1,
+                "expected_local_name": "New Armory",
+                "expected_local_city": "Olean",
+                "expected_local_state": "NY",
+                "new_global_venue_key": "new-armory",
+                "resolution_basis": "One settled physical building.",
+            },
+            {
+                "action": "REGISTER_NEW_IDENTITY",
+                "local_venue_row_index": 2,
+                "expected_local_name": "New Armory",
+                "expected_local_city": "Olean",
+                "expected_local_state": "NY",
+                "new_global_venue_key": "new-armory",
+                "resolution_basis": "Same settled physical building.",
+            },
+        ]
+        self.save()
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[early, later],
+            global_venues=[],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(early), dict(later)],
+            [],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        staged, global_rows, _names, _outcomes = rebase_venues(
+            "test-school",
+            [dict(early), dict(later)],
+            [],
+            [],
+            venue_reconciliation=mapping,
+            source_games=list(csv.DictReader(source_bytes.decode().splitlines())),
+        )
+        self.assertEqual(len(global_rows), 1)
+        self.assertEqual({row["venue_key"] for row in staged}, {"new-armory"})
+        self.assertEqual(len({row["venue_id"] for row in staged}), 1)
+        self.assertEqual(
+            [row["games_currently_assigned"] for row in staged],
+            ["1", "2"],
+        )
 
     def test_repeated_frozen_physical_key_with_historical_names_is_supported(self):
         venues_bytes = (
