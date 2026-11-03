@@ -6264,6 +6264,7 @@ def apply_reconciliation_decisions(
             "discrepancy",
             "canonical_site_patch",
             "correction_site_patch",
+            "new_game_date_patch",
             "ncaa_round_patch",
         }
     ]
