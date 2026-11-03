@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+  "merge_authorized_pr_number": 437,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "8802e6a936f2a740a2c5ec21c36479dd3e8e295e49b8f835793e47733a8e2ba3",
+  "pr_number": 437,
+  "preview_checkpoint_sha256": "0df962fa5349b155eadee1d115d5acd8ca4c969ae53e569cd67a05d0aa6eabc4",
+  "preview_deployment_id": 7507221375,
+  "preview_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "preview_request_id": "duquesne-release-preview-verify-0001",
+  "preview_url": "https://college-basketball-history-289nvcan9-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "c6392622b8aa079dde032c648c560b39f3106398dd701c2ce8791e605c5776a5",
+  "production_proof": false,
+  "release_manifest_sha256": "ad9aca99d86248549222e780480e56aabe3f18d52cbcf21abf0b921985fe9579",
+  "school_key": "duquesne",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816"
+}
