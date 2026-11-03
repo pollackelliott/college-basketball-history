@@ -5,8 +5,12 @@ changes global registries or the frozen six-file research portfolio.
 """
 from __future__ import annotations
 
+import csv
+import datetime as dt
 import hashlib
+import io
 import json
+import re
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -29,11 +33,122 @@ def _row_selector(index: int) -> str:
     return f"{_ROW_SELECTOR_PREFIX}{index}"
 
 
+def _normalize_name(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
+
+
+def _csv_rows(data: bytes) -> list[dict[str, str]]:
+    return list(
+        csv.DictReader(
+            io.StringIO(data.decode("utf-8-sig"), newline="")
+        )
+    )
+
+
+def _season_window(value: str) -> tuple[dt.date, dt.date] | None:
+    match = re.fullmatch(r"(\d{4})-(\d{4})", (value or "").strip())
+    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+        return None
+    return (
+        dt.date(int(match.group(1)), 7, 1),
+        dt.date(int(match.group(2)), 6, 30),
+    )
+
+
+def _game_summary(rows: list[dict[str, str]]) -> dict[str, str]:
+    dates = [row.get("game_date", "").strip() for row in rows]
+    exact = [value for value in dates if value]
+    return {
+        "games_currently_assigned": str(len(rows)),
+        "first_assigned_game": (
+            min(exact) if rows and len(exact) == len(rows) else ""
+        ),
+        "last_assigned_game": (
+            max(exact) if rows and len(exact) == len(rows) else ""
+        ),
+    }
+
+
+def _matching_source_games(
+    source_games: list[dict[str, str]],
+    local: dict[str, str],
+) -> list[dict[str, str]]:
+    labels = {_normalize_name(local.get("canonical_name", ""))}
+    labels.update(
+        _normalize_name(alias)
+        for alias in local.get("aliases", "").split(";")
+        if alias.strip()
+    )
+    labels.discard("")
+    city = local.get("city", "").strip().casefold()
+    state = local.get("state", "").strip().upper()
+    return [
+        row
+        for row in source_games
+        if _normalize_name(row.get("curated_venue_name", "")) in labels
+        and row.get("city", "").strip().casefold() == city
+        and row.get("state", "").strip().upper() == state
+    ]
+
+
+def representation_consolidation_conflicts(
+    local: dict[str, str],
+    retained_rows: list[dict[str, str]],
+) -> list[str]:
+    """Return semantic reasons a blank representation row may not consolidate."""
+    conflicts: list[str] = []
+    if any(
+        local.get(field, "").strip()
+        for field in (
+            "relationship_type",
+            "relationship_start",
+            "relationship_end",
+            "relationship_date_precision",
+        )
+    ):
+        conflicts.append("RELATIONSHIP_AUTHORITY_PRESENT")
+
+    for field in (
+        "site_rule",
+        "source_basis",
+        "notes",
+        "venue_type",
+        "known_opened",
+        "known_closed",
+        "venue_date_precision",
+    ):
+        value = local.get(field, "").strip()
+        if value and any(
+            retained.get(field, "").strip() != value
+            for retained in retained_rows
+        ):
+            conflicts.append(f"UNIQUE_{field.upper()}_AUTHORITY")
+
+    aliases = {
+        value.strip().casefold()
+        for value in local.get("aliases", "").split(";")
+        if value.strip()
+    }
+    retained_labels = set()
+    for retained in retained_rows:
+        canonical = retained.get("canonical_name", "").strip()
+        if canonical:
+            retained_labels.add(canonical.casefold())
+        retained_labels.update(
+            value.strip().casefold()
+            for value in retained.get("aliases", "").split(";")
+            if value.strip()
+        )
+    if not aliases.issubset(retained_labels):
+        conflicts.append("UNIQUE_ALIASES")
+    return conflicts
+
+
 def venue_reconciliation_for_row(
-    mappings: dict[str, dict[str, str]],
+    mappings: dict[str, dict[str, Any]],
     local: dict[str, str],
     row_index: int,
-) -> dict[str, str] | None:
+) -> dict[str, Any] | None:
     """Return explicit reconciliation for one frozen venues.csv row.
 
     Legacy schema-v1 mappings remain keyed by nonblank local venue_key.
@@ -52,7 +167,7 @@ def load_venue_reconciliation(
     package_path: Path,
     local_venues: list[dict[str, str]],
     global_venues: list[dict[str, str]],
-) -> tuple[dict[str, dict[str, str]], dict[str, Any] | None]:
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any] | None]:
     """Validate an explicit identity map and return mappings + durable provenance.
 
     Both the entire transport ZIP and its exact frozen venues.csv member are
@@ -86,8 +201,20 @@ def load_venue_reconciliation(
     try:
         with zipfile.ZipFile(package_path) as archive:
             member = archive.read("venues.csv")
+            source_games_member = (
+                archive.read("source-games.csv")
+                if "source-games.csv" in archive.namelist()
+                else b""
+            )
     except (OSError, ValueError, KeyError, zipfile.BadZipFile) as exc:
-        raise WorkflowError(f"venue reconciliation cannot read frozen venues.csv: {exc}") from exc
+        raise WorkflowError(
+            f"venue reconciliation cannot read frozen package members: {exc}"
+        ) from exc
+    source_games = (
+        _csv_rows(source_games_member)
+        if source_games_member
+        else []
+    )
     expected_venues = str(doc.get("expected_venues_sha256") or "").lower().strip()
     actual_venues = _sha256_bytes(member)
     if expected_venues != actual_venues:
@@ -108,8 +235,9 @@ def load_venue_reconciliation(
         row.get("venue_key", "").strip(): row for row in global_venues
     }
 
-    mappings: dict[str, dict[str, str]] = {}
+    mappings: dict[str, dict[str, Any]] = {}
     used_target_ids: set[str] = set()
+    new_identity_specs: dict[str, tuple[str, str, str]] = {}
     for number, raw in enumerate(raw_mappings, 1):
         if not isinstance(raw, dict):
             raise WorkflowError(f"venue reconciliation mapping {number} not an object")
@@ -206,6 +334,252 @@ def load_venue_reconciliation(
             raise WorkflowError(
                 f"venue reconciliation frozen local identity drift for {selector!r}"
             )
+
+        if action == "REGISTER_NEW_IDENTITY":
+            if row_index is None:
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY requires local_venue_row_index"
+                )
+            local = local_rows[0]
+            if local.get("venue_key", "").strip():
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY is limited to blank-key frozen rows"
+                )
+            new_key = str(raw.get("new_global_venue_key") or "").strip()
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", new_key):
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY requires a normalized new_global_venue_key"
+                )
+            if new_key in global_by_key:
+                raise WorkflowError(
+                    f"REGISTER_NEW_IDENTITY key already exists on current main: {new_key}"
+                )
+            identity = (
+                item["expected_local_name"],
+                item["expected_local_city"],
+                item["expected_local_state"],
+            )
+            prior = new_identity_specs.get(new_key)
+            if prior is not None and prior != identity:
+                raise WorkflowError(
+                    "REGISTER_NEW_IDENTITY repeats a proposed key for a "
+                    "different frozen physical identity"
+                )
+            new_identity_specs[new_key] = identity
+            item["new_global_venue_key"] = new_key
+            mappings[selector] = item
+            continue
+
+        if action == "SPLIT_LOCAL_ROW_BY_CUTOVER":
+            if row_index is None:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires local_venue_row_index"
+                )
+            local = local_rows[0]
+            if local.get("venue_key", "").strip():
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER is limited to blank-key frozen rows"
+                )
+            if any(
+                local.get(field, "").strip()
+                for field in (
+                    "relationship_type",
+                    "relationship_start",
+                    "relationship_end",
+                    "relationship_date_precision",
+                )
+            ):
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER cannot discard venue relationship authority"
+                )
+
+            cutover_text = str(raw.get("cutover_date") or "").strip()
+            try:
+                cutover = dt.date.fromisoformat(cutover_text)
+            except ValueError as exc:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires exact ISO cutover_date"
+                ) from exc
+            cutover_basis = str(raw.get("cutover_basis") or "").strip()
+            if not cutover_basis:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires cutover_basis"
+                )
+
+            target_specs = []
+            for side in ("before", "after"):
+                target_id = str(
+                    raw.get(f"{side}_global_venue_id") or ""
+                ).strip()
+                target_key = str(
+                    raw.get(f"{side}_global_venue_key") or ""
+                ).strip()
+                if not target_id or not target_key:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER requires before/after "
+                        "global venue ID and key"
+                    )
+                target = global_by_id.get(target_id)
+                if (
+                    target is None
+                    or target.get("venue_key", "").strip() != target_key
+                    or global_by_key.get(target_key) is not target
+                ):
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER target no longer matches current main"
+                    )
+                if (
+                    target.get("city", "").strip().casefold()
+                    != item["expected_local_city"].casefold()
+                    or target.get("state", "").strip().upper()
+                    != item["expected_local_state"].upper()
+                ):
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER target geography mismatch"
+                    )
+                retained = [
+                    other
+                    for index, other in enumerate(local_venues, 1)
+                    if index != row_index
+                    and other.get("venue_key", "").strip() == target_key
+                    and other.get("canonical_name", "").strip()
+                    == item["expected_local_name"]
+                    and other.get("city", "").strip()
+                    == item["expected_local_city"]
+                    and other.get("state", "").strip()
+                    == item["expected_local_state"]
+                ]
+                if len(retained) != 1:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER requires exactly one retained "
+                        f"frozen row for target key {target_key!r}"
+                    )
+                target_specs.append((side, target_id, target_key, retained[0]))
+
+            if target_specs[0][1] == target_specs[1][1]:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires two distinct physical targets"
+                )
+
+            exact_preservation_fields = (
+                "site_rule",
+                "source_basis",
+                "notes",
+                "venue_type",
+                "known_opened",
+                "known_closed",
+                "venue_date_precision",
+            )
+            for field in exact_preservation_fields:
+                value = local.get(field, "").strip()
+                if value and any(
+                    retained.get(field, "").strip() != value
+                    for _, _, _, retained in target_specs
+                ):
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER cannot discard unique frozen "
+                        f"{field} authority"
+                    )
+
+            local_aliases = {
+                value.strip().casefold()
+                for value in local.get("aliases", "").split(";")
+                if value.strip()
+            }
+            retained_labels = set()
+            for _, _, _, retained in target_specs:
+                canonical = retained.get("canonical_name", "").strip()
+                if canonical:
+                    retained_labels.add(canonical.casefold())
+                retained_labels.update(
+                    value.strip().casefold()
+                    for value in retained.get("aliases", "").split(";")
+                    if value.strip()
+                )
+            if not local_aliases.issubset(retained_labels):
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER cannot discard unique frozen aliases"
+                )
+
+            matching_games = _matching_source_games(source_games, local)
+            if not matching_games:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER found no matching frozen source games"
+                )
+            before_games: list[dict[str, str]] = []
+            after_games: list[dict[str, str]] = []
+            for game in matching_games:
+                game_id = game.get("source_game_id", "").strip() or "[unknown]"
+                game_date_text = game.get("game_date", "").strip()
+                if game_date_text:
+                    try:
+                        game_date = dt.date.fromisoformat(game_date_text)
+                    except ValueError as exc:
+                        raise WorkflowError(
+                            "SPLIT_LOCAL_ROW_BY_CUTOVER encountered invalid exact "
+                            f"date for {game_id}: {game_date_text!r}"
+                        ) from exc
+                    (before_games if game_date < cutover else after_games).append(game)
+                    continue
+
+                season = _season_window(game.get("season_label", ""))
+                if season is None:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER cannot classify undated game "
+                        f"{game_id} with invalid season"
+                    )
+                if season[1] < cutover:
+                    before_games.append(game)
+                elif season[0] >= cutover:
+                    after_games.append(game)
+                else:
+                    raise WorkflowError(
+                        "SPLIT_LOCAL_ROW_BY_CUTOVER transition-season game lacks "
+                        f"an exact date: {game_id}"
+                    )
+
+            if not before_games or not after_games:
+                raise WorkflowError(
+                    "SPLIT_LOCAL_ROW_BY_CUTOVER requires populated assignments "
+                    "on both sides of the cutover"
+                )
+
+            split_targets = []
+            for (side, target_id, target_key, _), rows in zip(
+                target_specs, (before_games, after_games)
+            ):
+                source_game_ids = sorted(
+                    row.get("source_game_id", "").strip()
+                    for row in rows
+                )
+                split_targets.append(
+                    {
+                        "side": side.upper(),
+                        "global_venue_id": target_id,
+                        "global_venue_key": target_key,
+                        **_game_summary(rows),
+                        "source_game_ids": source_game_ids,
+                        "source_game_ids_sha256": _sha256_bytes(
+                            ("\n".join(source_game_ids) + "\n").encode("utf-8")
+                        ),
+                    }
+                )
+                if target_id in used_target_ids:
+                    raise WorkflowError(
+                        f"venue reconciliation target ID repeated: {target_id}"
+                    )
+                used_target_ids.add(target_id)
+
+            item.update(
+                {
+                    "cutover_date": cutover_text,
+                    "cutover_basis": cutover_basis,
+                    "split_source_game_count": str(len(matching_games)),
+                    "split_targets": split_targets,
+                }
+            )
+            mappings[selector] = item
+            continue
 
         if action == "DROP_REDUNDANT_LOCAL_ROW":
             if row_index is None:

@@ -30,7 +30,7 @@ import re
 import shutil
 import tempfile
 import zipfile
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -147,6 +147,180 @@ def _normalize_name(value: str) -> str:
 def _valid_season(value: str) -> bool:
     match = re.fullmatch(r"(\d{4})-(\d{4})", value or "")
     return bool(match and int(match.group(2)) == int(match.group(1)) + 1)
+
+
+def venue_summary_consistency_report(
+    games: list[dict[str, str]],
+    venues: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Check package venue assignment summaries against frozen game rows.
+
+    This is deliberately representation-only.  It does not decide which physical
+    building a reused venue name means.  Instead it groups venue rows by exact
+    normalized canonical name + geography and compares their declared assignment
+    totals with source-game rows that resolve unambiguously to that local group
+    through the group's canonical name/aliases.
+
+    Ambiguous labels are reported but are not guessed.  Exact first/last summary
+    bounds are checked only when every matching game has an exact date.
+    """
+    groups: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
+    labels_to_groups: dict[
+        tuple[str, str, str], set[tuple[str, str, str]]
+    ] = defaultdict(set)
+
+    for row in venues:
+        canonical = row.get("canonical_name", "").strip()
+        if not canonical:
+            continue
+        city = row.get("city", "").strip()
+        state = row.get("state", "").strip()
+        group = (_normalize_name(canonical), city.casefold(), state.upper())
+        groups[group].append(row)
+        labels = [canonical]
+        labels.extend(
+            alias.strip()
+            for alias in row.get("aliases", "").split(";")
+            if alias.strip()
+        )
+        for label in labels:
+            normalized = _normalize_name(label)
+            if normalized:
+                labels_to_groups[
+                    (normalized, city.casefold(), state.upper())
+                ].add(group)
+
+    expected_counts: Counter[tuple[str, str, str]] = Counter()
+    exact_dates: dict[tuple[str, str, str], list[str]] = defaultdict(list)
+    undated_counts: Counter[tuple[str, str, str]] = Counter()
+    ambiguous_games: list[dict[str, Any]] = []
+
+    for game in games:
+        venue_name = game.get("curated_venue_name", "").strip()
+        if not venue_name:
+            continue
+        lookup = (
+            _normalize_name(venue_name),
+            game.get("city", "").strip().casefold(),
+            game.get("state", "").strip().upper(),
+        )
+        matches = labels_to_groups.get(lookup, set())
+        if len(matches) != 1:
+            if len(matches) > 1:
+                ambiguous_games.append(
+                    {
+                        "source_game_id": game.get("source_game_id", "").strip(),
+                        "curated_venue_name": venue_name,
+                        "city": game.get("city", "").strip(),
+                        "state": game.get("state", "").strip(),
+                        "group_count": len(matches),
+                    }
+                )
+            continue
+        group = next(iter(matches))
+        expected_counts[group] += 1
+        date = game.get("game_date", "").strip()
+        if date:
+            exact_dates[group].append(date)
+        else:
+            undated_counts[group] += 1
+
+    errors: list[str] = []
+    warnings: list[str] = []
+    checked_groups = 0
+    mismatch_groups = 0
+    details: list[dict[str, Any]] = []
+
+    for group, rows in sorted(groups.items()):
+        raw_counts = [
+            row.get("games_currently_assigned", "").strip()
+            for row in rows
+        ]
+        if not raw_counts or not all(value.isdigit() for value in raw_counts):
+            if any(raw_counts):
+                warnings.append(
+                    "venue summary count is partially/non-numerically populated "
+                    f"for {rows[0].get('canonical_name','[blank]')!r} "
+                    f"{rows[0].get('city','')}, {rows[0].get('state','')}"
+                )
+            continue
+
+        checked_groups += 1
+        declared = sum(int(value) for value in raw_counts)
+        expected = expected_counts.get(group, 0)
+        group_errors: list[str] = []
+        if declared != expected:
+            group_errors.append(
+                f"games_currently_assigned total {declared} != "
+                f"{expected} source-game assignments"
+            )
+
+        if expected and not undated_counts.get(group):
+            dates = sorted(exact_dates.get(group, []))
+            declared_first = sorted(
+                value
+                for row in rows
+                if (value := row.get("first_assigned_game", "").strip())
+            )
+            declared_last = sorted(
+                value
+                for row in rows
+                if (value := row.get("last_assigned_game", "").strip())
+            )
+            if declared_first and min(declared_first) != dates[0]:
+                group_errors.append(
+                    f"first_assigned_game summary {min(declared_first)} != "
+                    f"earliest source-game date {dates[0]}"
+                )
+            if declared_last and max(declared_last) != dates[-1]:
+                group_errors.append(
+                    f"last_assigned_game summary {max(declared_last)} != "
+                    f"latest source-game date {dates[-1]}"
+                )
+
+        if group_errors:
+            mismatch_groups += 1
+            name = rows[0].get("canonical_name", "[blank]")
+            locality = (
+                rows[0].get("city", "").strip()
+                + ", "
+                + rows[0].get("state", "").strip()
+            ).strip(", ")
+            for issue in group_errors:
+                errors.append(
+                    f"venue summary {name!r} {locality}: {issue}"
+                )
+
+        details.append(
+            {
+                "canonical_name": rows[0].get("canonical_name", "").strip(),
+                "city": rows[0].get("city", "").strip(),
+                "state": rows[0].get("state", "").strip(),
+                "venue_rows": len(rows),
+                "declared_games_currently_assigned": declared,
+                "source_game_assignments": expected,
+                "undated_source_games": undated_counts.get(group, 0),
+                "errors": group_errors,
+            }
+        )
+
+    if ambiguous_games:
+        warnings.append(
+            f"{len(ambiguous_games)} source-game venue label(s) match more "
+            "than one local venue-summary group; summary arithmetic was not "
+            "guessed for those rows"
+        )
+
+    return {
+        "status": "PASS" if not errors else "FAIL",
+        "errors": errors,
+        "warnings": warnings,
+        "checked_groups": checked_groups,
+        "mismatch_groups": mismatch_groups,
+        "ambiguous_game_count": len(ambiguous_games),
+        "ambiguous_game_examples": ambiguous_games[:25],
+        "groups": details,
+    }
 
 
 PRIMARY_SOURCE_CUTOFF_LABEL = "Primary-source historical results cutoff"
@@ -440,6 +614,7 @@ def research_portfolio_report(
     *,
     school_key: str,
     expected_sha256: str = "",
+    allow_venue_summary_reconciliation: bool = False,
 ) -> dict[str, Any]:
     """Return the permanent pre-RESEARCH_FROZEN acceptance report."""
 
@@ -495,6 +670,17 @@ def research_portfolio_report(
         )
         errors.extend(home_chronology["errors"])
         warnings.extend(home_chronology["warnings"])
+
+        venue_summary = venue_summary_consistency_report(games, venues)
+        if venue_summary["errors"]:
+            if allow_venue_summary_reconciliation:
+                warnings.extend(
+                    "integration-reconcilable frozen " + error
+                    for error in venue_summary["errors"]
+                )
+            else:
+                errors.extend(venue_summary["errors"])
+        warnings.extend(venue_summary["warnings"])
 
         opponent_keys = {
             row.get("canonical_opponent_key", "").strip()
@@ -730,6 +916,11 @@ def research_portfolio_report(
                     if key not in {"errors", "warnings"}
                 },
                 "home_chronology": home_chronology["counts"],
+                "venue_summary_consistency": {
+                    key: value
+                    for key, value in venue_summary.items()
+                    if key not in {"errors", "warnings", "groups"}
+                },
             },
         }
     finally:

@@ -106,6 +106,17 @@ durably represented as an explicit exact-date relationship or accepted
 per-game HOME assignment in `stage4-authoring/venues.csv` before Stage 4
 closeout. The generic chronological check remains mandatory.
 
+The venue table also contains derived assignment-summary fields such as
+`games_currently_assigned`, `first_assigned_game`, and
+`last_assigned_game`. Those fields are representation metadata, not a second
+historical truth layer. Before Stage 4 closeout/final Research acceptance, their
+declared numeric totals must agree with the final frozen game ledger for the
+corresponding venue-name/locality population. A later accepted Stage 6 venue
+correction that changes the final game-level venue population requires those
+derived summaries to be refreshed before a new final Freeze is emitted. Do not
+preserve a stale summary merely because the physical-identity conclusion itself
+was already accepted.
+
 ### Conferences
 
 Conference chronology used by the Research package must be durable no later than Stage 3B closeout as stage4-authoring/conferences.csv.

@@ -46,7 +46,10 @@ from integration_freeze_guard import (
     build_source_game_semantic_snapshot,
     semantic_snapshot_sha256,
 )
-from onboarding_hardening import research_portfolio_report
+from onboarding_hardening import (
+    research_portfolio_report,
+    venue_summary_consistency_report,
+)
 from onboarding_plan import (
     REQUIRED_PACKAGE_FILES,
     WorkflowError,
@@ -55,6 +58,7 @@ from onboarding_plan import (
 from program_history import history_scope_errors
 from stage1_venue_reconciliation import (
     load_venue_reconciliation,
+    representation_consolidation_conflicts,
     venue_reconciliation_for_row,
 )
 from stage1_reference_reconciliation import (
@@ -96,6 +100,7 @@ def normalize_name(value: str) -> str:
     value = unicodedata.normalize("NFKD", value or "")
     value = "".join(ch for ch in value if not unicodedata.combining(ch))
     return re.sub(r"[^a-z0-9]+", "", value.casefold())
+
 
 def load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
@@ -557,6 +562,304 @@ def venue_date_bounds(value: str) -> tuple[dt.date, dt.date] | None:
         return None
 
 
+def _source_game_window(
+    game: dict[str, str],
+) -> tuple[dt.date, dt.date] | None:
+    exact = game.get("game_date", "").strip()
+    if exact:
+        bounds = venue_date_bounds(exact)
+        if bounds is not None and bounds[0] == bounds[1]:
+            return bounds
+        return None
+    season = game.get("season_label", "").strip()
+    match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+        return None
+    return (
+        dt.date(int(match.group(1)), 7, 1),
+        dt.date(int(match.group(2)), 6, 30),
+    )
+
+
+def _relationship_window(
+    row: dict[str, str],
+) -> tuple[dt.date | None, dt.date | None] | None:
+    start_text = row.get("relationship_start", "").strip()
+    end_text = row.get("relationship_end", "").strip()
+    if not start_text and not end_text:
+        return None
+    precision = row.get("relationship_date_precision", "").strip().casefold()
+
+    if "season" in precision:
+        def season_edge(value: str, *, end: bool) -> dt.date | None:
+            match = re.fullmatch(r"(\d{4})-(\d{4})", value)
+            if not match or int(match.group(2)) != int(match.group(1)) + 1:
+                return None
+            return (
+                dt.date(int(match.group(2)), 6, 30)
+                if end
+                else dt.date(int(match.group(1)), 7, 1)
+            )
+
+        start = season_edge(start_text, end=False) if start_text else None
+        end = season_edge(end_text, end=True) if end_text else None
+    else:
+        start_bounds = venue_date_bounds(start_text) if start_text else None
+        end_bounds = venue_date_bounds(end_text) if end_text else None
+        start = start_bounds[0] if start_bounds else None
+        end = end_bounds[1] if end_bounds else None
+
+    if start_text and start is None:
+        return None
+    if end_text and end is None:
+        return None
+    return start, end
+
+
+def _relationship_contains_game(
+    row: dict[str, str],
+    game: dict[str, str],
+) -> bool:
+    relationship = _relationship_window(row)
+    game_window = _source_game_window(game)
+    if relationship is None or game_window is None:
+        return False
+    start, end = relationship
+    game_start, game_end = game_window
+    if start is not None and game_start < start:
+        return False
+    if end is not None and game_end > end:
+        return False
+    return True
+
+
+def _assignment_summary(rows: list[dict[str, str]]) -> dict[str, str]:
+    dates = [row.get("game_date", "").strip() for row in rows]
+    exact = [value for value in dates if value]
+    return {
+        "games_currently_assigned": str(len(rows)),
+        "first_assigned_game": (
+            min(exact) if rows and len(exact) == len(rows) else ""
+        ),
+        "last_assigned_game": (
+            max(exact) if rows and len(exact) == len(rows) else ""
+        ),
+    }
+
+
+def refresh_local_venue_assignment_summaries(
+    local_rows: list[dict[str, str]],
+    source_games: list[dict[str, str]],
+    venue_reconciliation: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Refresh only stale derived venue summaries, never historical game fields.
+
+    Unique local representations receive all matching frozen games. Multiple
+    relationship rows for one physical identity are partitioned only when each
+    game fits exactly one relationship window. Multiple physical identities with
+    one reused display name require an explicit hash-bound split proof.
+    """
+    venue_reconciliation = venue_reconciliation or {}
+
+    groups: dict[tuple[str, str, str], list[dict[str, str]]] = {}
+    canonical_lookup: dict[
+        tuple[str, str, str], tuple[str, str, str]
+    ] = {}
+    alias_lookup: dict[
+        tuple[str, str, str], set[tuple[str, str, str]]
+    ] = {}
+
+    for row in local_rows:
+        name = row.get("canonical_name", "").strip()
+        if not name:
+            continue
+        group = (
+            normalize_name(name),
+            row.get("city", "").strip().casefold(),
+            normalize_jurisdiction(row.get("state", "")),
+        )
+        groups.setdefault(group, []).append(row)
+        canonical_lookup[group] = group
+        labels = [name]
+        labels.extend(
+            alias.strip()
+            for alias in row.get("aliases", "").split(";")
+            if alias.strip()
+        )
+        for label in labels:
+            key = (
+                normalize_name(label),
+                row.get("city", "").strip().casefold(),
+                normalize_jurisdiction(row.get("state", "")),
+            )
+            alias_lookup.setdefault(key, set()).add(group)
+
+    group_games: dict[
+        tuple[str, str, str], list[dict[str, str]]
+    ] = {group: [] for group in groups}
+    for game in source_games:
+        name = game.get("curated_venue_name", "").strip()
+        if not name:
+            continue
+        lookup = (
+            normalize_name(name),
+            game.get("city", "").strip().casefold(),
+            normalize_jurisdiction(game.get("state", "")),
+        )
+        if lookup in groups:
+            group_games[lookup].append(game)
+            continue
+        matches = alias_lookup.get(lookup, set())
+        if len(matches) == 1:
+            group_games[next(iter(matches))].append(game)
+        elif len(matches) > 1:
+            raise WorkflowError(
+                "venue summary refresh found an ambiguous local alias for "
+                f"source game {game.get('source_game_id','[unknown]')}"
+            )
+
+    split_game_target: dict[str, str] = {}
+    for mapping in venue_reconciliation.values():
+        if mapping.get("action") != "SPLIT_LOCAL_ROW_BY_CUTOVER":
+            continue
+        for target in mapping.get("split_targets", []):
+            target_key = target["global_venue_key"]
+            for game_id in target.get("source_game_ids", []):
+                prior = split_game_target.get(game_id)
+                if prior is not None and prior != target_key:
+                    raise WorkflowError(
+                        "venue split proof assigns one source game to multiple targets"
+                    )
+                split_game_target[game_id] = target_key
+
+    refreshed: list[dict[str, Any]] = []
+    for group, rows in groups.items():
+        games = group_games.get(group, [])
+        raw_counts = [
+            row.get("games_currently_assigned", "").strip()
+            for row in rows
+        ]
+        if raw_counts and all(value == "" for value in raw_counts):
+            continue
+        declared = (
+            sum(int(value) for value in raw_counts)
+            if raw_counts and all(value.isdigit() for value in raw_counts)
+            else None
+        )
+        expected = len(games)
+        all_exact_dates = bool(games) and all(
+            game.get("game_date", "").strip()
+            for game in games
+        )
+        bounds_stale = False
+        if all_exact_dates:
+            exact_dates = sorted(
+                game.get("game_date", "").strip()
+                for game in games
+            )
+            declared_first = sorted(
+                value
+                for row in rows
+                if (value := row.get("first_assigned_game", "").strip())
+            )
+            declared_last = sorted(
+                value
+                for row in rows
+                if (value := row.get("last_assigned_game", "").strip())
+            )
+            bounds_stale = (
+                bool(declared_first)
+                and min(declared_first) != exact_dates[0]
+            ) or (
+                bool(declared_last)
+                and max(declared_last) != exact_dates[-1]
+            )
+
+        if declared == expected and not bounds_stale:
+            continue
+
+        assignments: dict[int, list[dict[str, str]]] = {
+            index: [] for index in range(len(rows))
+        }
+
+        if len(rows) == 1:
+            assignments[0] = list(games)
+        else:
+            row_by_key: dict[str, list[int]] = {}
+            for index, row in enumerate(rows):
+                key = row.get("venue_key", "").strip()
+                if key:
+                    row_by_key.setdefault(key, []).append(index)
+
+            if games and all(
+                game.get("source_game_id", "").strip() in split_game_target
+                for game in games
+            ):
+                for game in games:
+                    target_key = split_game_target[
+                        game.get("source_game_id", "").strip()
+                    ]
+                    indexes = row_by_key.get(target_key, [])
+                    if len(indexes) != 1:
+                        raise WorkflowError(
+                            "venue split summary refresh cannot locate exactly one "
+                            f"retained local target row for {target_key!r}"
+                        )
+                    assignments[indexes[0]].append(game)
+            elif (
+                len({
+                    row.get("venue_key", "").strip()
+                    for row in rows
+                    if row.get("venue_key", "").strip()
+                }) == 1
+                and all(_relationship_window(row) is not None for row in rows)
+            ):
+                for game in games:
+                    indexes = [
+                        index
+                        for index, row in enumerate(rows)
+                        if _relationship_contains_game(row, game)
+                    ]
+                    if len(indexes) != 1:
+                        raise WorkflowError(
+                            "venue relationship summary refresh cannot assign "
+                            f"source game {game.get('source_game_id','[unknown]')} "
+                            "to exactly one retained relationship row"
+                        )
+                    assignments[indexes[0]].append(game)
+            else:
+                raise WorkflowError(
+                    "stale venue summary cannot be refreshed safely for "
+                    f"{rows[0].get('canonical_name','[blank]')!r} "
+                    f"{rows[0].get('city','')}, {rows[0].get('state','')}"
+                )
+
+        for index, assigned in assignments.items():
+            rows[index].update(_assignment_summary(assigned))
+
+        refreshed.append(
+            {
+                "canonical_name": rows[0].get("canonical_name", "").strip(),
+                "city": rows[0].get("city", "").strip(),
+                "state": rows[0].get("state", "").strip(),
+                "before_declared_count": declared,
+                "after_declared_count": sum(
+                    int(row.get("games_currently_assigned", "0") or "0")
+                    for row in rows
+                ),
+                "source_game_count": expected,
+                "venue_rows": len(rows),
+            }
+        )
+
+    return {
+        "status": "PASS",
+        "refreshed_group_count": len(refreshed),
+        "groups": refreshed,
+    }
+
+
+
 def venue_chronology_conflicts(
     local: dict[str, str],
     global_row: dict[str, str],
@@ -717,7 +1020,7 @@ def venue_reconciliation_inventory(
     *,
     school_key: str = "",
     existing_school_venues: list[dict[str, str]] | None = None,
-    venue_reconciliation: dict[str, dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Inventory all venue-reconciliation outcomes without mutating repository state."""
 
@@ -803,15 +1106,42 @@ def venue_reconciliation_inventory(
         explicit = venue_reconciliation_for_row(
             venue_reconciliation, local, row_index
         )
-        if (
-            explicit is not None
-            and explicit.get("action") == "DROP_REDUNDANT_LOCAL_ROW"
-        ):
-            item["classification"] = "SAFE_REPRESENTATION_DROP"
-            item["resolution"] = "DROP_REDUNDANT_LOCAL_ROW"
-            item["issues"].append("EXPLICIT_REDUNDANT_LOCAL_ROW_DROP")
-            results.append(item)
-            continue
+        if explicit is not None:
+            explicit_action = str(
+                explicit.get("action") or "REUSE_CURRENT_IDENTITY"
+            )
+            if explicit_action == "DROP_REDUNDANT_LOCAL_ROW":
+                item["classification"] = "SAFE_REPRESENTATION_DROP"
+                item["resolution"] = "DROP_REDUNDANT_LOCAL_ROW"
+                item["issues"].append("EXPLICIT_REDUNDANT_LOCAL_ROW_DROP")
+                results.append(item)
+                continue
+            if explicit_action == "SPLIT_LOCAL_ROW_BY_CUTOVER":
+                item["classification"] = "SAFE_REPRESENTATION_SPLIT"
+                item["resolution"] = "SPLIT_LOCAL_ROW_BY_CUTOVER"
+                item["issues"].append(
+                    "EXPLICIT_HASH_BOUND_SOURCE_GAME_CUTOVER_SPLIT"
+                )
+                item["target_venue_id"] = "|".join(
+                    target["global_venue_id"]
+                    for target in explicit.get("split_targets", [])
+                )
+                item["target_venue_key"] = "|".join(
+                    target["global_venue_key"]
+                    for target in explicit.get("split_targets", [])
+                )
+                results.append(item)
+                continue
+            if explicit_action == "REGISTER_NEW_IDENTITY":
+                item["classification"] = "NEW_GLOBAL_IDENTITY"
+                item["resolution"] = "REGISTER_NEW_IDENTITY"
+                item["target_venue_key"] = explicit["new_global_venue_key"]
+                item["issues"].append(
+                    "EXPLICIT_HASH_BOUND_NEW_IDENTITY_REGISTRATION"
+                )
+                results.append(item)
+                continue
+
         hint = research_base_venue_reuse_hint(local)
         if explicit is not None:
             candidate = global_by_id.get(explicit["global_venue_id"])
@@ -956,7 +1286,52 @@ def venue_reconciliation_inventory(
                     "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING"
                 )
             else:
-                item["classification"] = "SAFE_REPRESENTATION_REUSE"
+                retained_same_key = [
+                    other
+                    for other in local_rows
+                    if other is not local
+                    and other.get("venue_key", "").strip()
+                    == chosen.get("venue_key", "").strip()
+                    and other.get("canonical_name", "").strip() == name
+                    and other.get("city", "").strip()
+                    == local.get("city", "").strip()
+                    and other.get("state", "").strip()
+                    == local.get("state", "").strip()
+                ]
+                consolidation_conflicts = (
+                    representation_consolidation_conflicts(
+                        local, retained_same_key
+                    )
+                    if explicit is not None
+                    and not key
+                    and retained_same_key
+                    else []
+                )
+                if (
+                    explicit is not None
+                    and not key
+                    and retained_same_key
+                    and not consolidation_conflicts
+                ):
+                    item["classification"] = (
+                        "SAFE_REPRESENTATION_CONSOLIDATION"
+                    )
+                    item["issues"].append(
+                        "EXPLICIT_REUSE_CONSOLIDATES_EXISTING_LOCAL_IDENTITY"
+                    )
+                elif (
+                    explicit is not None
+                    and not key
+                    and retained_same_key
+                    and consolidation_conflicts
+                ):
+                    item["classification"] = "STOP_AMBIGUOUS"
+                    item["issues"].append(
+                        "LOCAL_REPRESENTATION_CONSOLIDATION_NOT_SAFE:"
+                        + ",".join(consolidation_conflicts)
+                    )
+                else:
+                    item["classification"] = "SAFE_REPRESENTATION_REUSE"
                 if pending_shared and registration_only:
                     item["issues"].append(
                         "SETTLED_PENDING_REGISTRATION_RESOLVED_BY_EXACT_REUSE"
@@ -996,6 +1371,15 @@ def venue_reconciliation_inventory(
                     "POSSIBLE_PHYSICAL_MATCH_REQUIRES_RECONCILIATION"
                 )
             else:
+                if not key:
+                    item["classification"] = "STOP_AMBIGUOUS"
+                    item["issues"].append(
+                        "BLANK_KEY_NEW_IDENTITY_REQUIRES_EXPLICIT_REGISTRATION"
+                    )
+                    item["resolution"] = ""
+                    item["target_venue_key"] = ""
+                    results.append(item)
+                    continue
                 item["classification"] = "NEW_GLOBAL_IDENTITY"
                 if pending_shared and registration_only:
                     item["issues"].append(
@@ -1219,7 +1603,7 @@ def rebase_venues(
     name_rows: list[dict[str, str]],
     *,
     existing_school_venues: list[dict[str, str]] | None = None,
-    venue_reconciliation: dict[str, dict[str, str]] | None = None,
+    venue_reconciliation: dict[str, dict[str, Any]] | None = None,
     source_games: list[dict[str, str]] | None = None,
 ) -> tuple[
     list[dict[str, str]],
@@ -1289,26 +1673,96 @@ def rebase_venues(
         explicit = venue_reconciliation_for_row(
             venue_reconciliation, local, row_index
         )
-        if (
-            explicit is not None
-            and explicit.get("action") == "DROP_REDUNDANT_LOCAL_ROW"
-        ):
-            mappings.append(
-                {
-                    "venue_key": key,
-                    "final_venue_key": "",
-                    "canonical_name": name,
-                    "research_venue_id": research_id,
-                    "final_venue_id": "",
-                    "resolution": "DROP_REDUNDANT_LOCAL_ROW",
-                    "frozen_row_index": row_index,
-                }
+        register_new_key = ""
+        if explicit is not None:
+            explicit_action = str(
+                explicit.get("action") or "REUSE_CURRENT_IDENTITY"
             )
-            continue
+            if explicit_action == "DROP_REDUNDANT_LOCAL_ROW":
+                mappings.append(
+                    {
+                        "venue_key": key,
+                        "final_venue_key": "",
+                        "canonical_name": name,
+                        "research_venue_id": research_id,
+                        "final_venue_id": "",
+                        "resolution": "DROP_REDUNDANT_LOCAL_ROW",
+                        "frozen_row_index": row_index,
+                    }
+                )
+                continue
+            if explicit_action == "SPLIT_LOCAL_ROW_BY_CUTOVER":
+                mappings.append(
+                    {
+                        "venue_key": key,
+                        "final_venue_key": "",
+                        "canonical_name": name,
+                        "research_venue_id": research_id,
+                        "final_venue_id": "",
+                        "resolution": "SPLIT_LOCAL_ROW_BY_CUTOVER",
+                        "frozen_row_index": row_index,
+                        "split_source_game_count": explicit.get(
+                            "split_source_game_count", ""
+                        ),
+                    }
+                )
+                continue
+            if explicit_action == "REUSE_CURRENT_IDENTITY" and not key:
+                target_key = explicit["global_venue_key"]
+                retained = [
+                    other
+                    for other in local_rows
+                    if other is not local
+                    and other.get("venue_key", "").strip() == target_key
+                    and other.get("canonical_name", "").strip() == name
+                    and other.get("city", "").strip()
+                    == local.get("city", "").strip()
+                    and other.get("state", "").strip()
+                    == local.get("state", "").strip()
+                ]
+                if retained:
+                    conflicts = representation_consolidation_conflicts(
+                        local, retained
+                    )
+                    if conflicts:
+                        raise WorkflowError(
+                            "explicit same-identity venue consolidation is unsafe: "
+                            + ",".join(conflicts)
+                        )
+                    mappings.append(
+                        {
+                            "venue_key": key,
+                            "final_venue_key": target_key,
+                            "canonical_name": name,
+                            "research_venue_id": research_id,
+                            "final_venue_id": explicit["global_venue_id"],
+                            "resolution": "CONSOLIDATE_EXPLICIT_REUSE",
+                            "frozen_row_index": row_index,
+                        }
+                    )
+                    continue
+            if explicit_action == "REGISTER_NEW_IDENTITY":
+                register_new_key = explicit["new_global_venue_key"]
+                already_created = global_by_key.get(register_new_key)
+                if already_created is not None:
+                    if (
+                        normalize_name(already_created.get("display_name", ""))
+                        != normalized
+                        or not geography_compatible(local, already_created)
+                    ):
+                        raise WorkflowError(
+                            "same-package registered venue identity no longer "
+                            f"matches frozen row {row_index}"
+                        )
+                    chosen = already_created
+                    reason = "REUSE_SAME_PACKAGE_NEW_IDENTITY"
 
         research_base_hint = research_base_venue_reuse_hint(local)
 
-        if explicit is not None:
+        if (
+            explicit is not None
+            and explicit_action == "REUSE_CURRENT_IDENTITY"
+        ):
             candidate = global_by_id.get(explicit["global_venue_id"])
             if (candidate is None
                 or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]
@@ -1361,7 +1815,7 @@ def rebase_venues(
             chosen = candidate
             reason = "REUSE_EXACT_KEY"
 
-        if chosen is None and normalized:
+        if chosen is None and normalized and not register_new_key:
             candidate_ids = {
                 venue_id
                 for venue_id in ids_by_name.get(normalized, set())
@@ -1444,21 +1898,29 @@ def rebase_venues(
             final_id = next_venue_id(used_ids)
             used_ids.add(final_id)
 
+            final_key = register_new_key or key
             collisions = incompatible_school_venue_key_rows(
                 local,
-                key,
+                final_key,
                 existing_school_venues,
             )
-            final_key = key
-            reason = "NEW_GLOBAL_IDENTITY"
-            if collisions:
-                final_key = disambiguated_new_venue_key(
-                    key,
-                    school_key,
-                    reserved_keys,
-                )
-                reserved_keys.add(final_key)
-                reason = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
+            if register_new_key:
+                if collisions:
+                    raise WorkflowError(
+                        "explicit new venue key conflicts with an existing "
+                        f"school-local representation: {register_new_key!r}"
+                    )
+                reason = "NEW_GLOBAL_IDENTITY_EXPLICIT_REGISTRATION"
+            else:
+                reason = "NEW_GLOBAL_IDENTITY"
+                if collisions:
+                    final_key = disambiguated_new_venue_key(
+                        key,
+                        school_key,
+                        reserved_keys,
+                    )
+                    reserved_keys.add(final_key)
+                    reason = "NEW_GLOBAL_IDENTITY_DISAMBIGUATED_KEY"
 
             registry_state = (
                 local.get("state", "").strip()
@@ -1573,6 +2035,13 @@ def rebase_venues(
             }
         )
         staged_local_rows.append(local)
+
+    if source_games:
+        refresh_local_venue_assignment_summaries(
+            staged_local_rows,
+            source_games,
+            venue_reconciliation,
+        )
 
     return staged_local_rows, global_rows, name_rows, mappings
 
@@ -1786,6 +2255,7 @@ def main() -> int:
             package,
             school_key=args.school_key,
             expected_sha256=args.expected_sha256,
+            allow_venue_summary_reconciliation=True,
         )
         if acceptance["status"] != "PASS":
             for error in acceptance["errors"]:
@@ -1923,6 +2393,16 @@ def main() -> int:
                 venue_reconciliation=venue_reconciliation,
                 source_games=source_games,
             )
+
+            staged_venue_summary = venue_summary_consistency_report(
+                source_games,
+                local_venues,
+            )
+            if staged_venue_summary["errors"]:
+                raise WorkflowError(
+                    "post-rebase venue summary consistency failed: "
+                    + "; ".join(staged_venue_summary["errors"][:10])
+                )
 
             global_conferences, conference_mappings = register_conferences(
                 global_conferences,
