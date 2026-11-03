@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "duquesne-stage2-sealed-apply-0001",
+  "school_key": "duquesne",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "0b5063ffb1bff7f8eec35cb1240a8708754f4b99",
+  "previous_control_state_sha256": "ad2b2db6f41610f4f35fcc56b3371ef5840812c0c068582c4122ae44259772a8",
+  "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "d563ce9698dcd1a59d1250bcb8744c41c2ae5977",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "d464eed770d8476a8f98332e8333c75201cd6645a85d8e9ccfbe80468c9325a9"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/duquesne/duquesne-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "4e030ab03d0c6a7491595c66930a513507ec12e14b91f094320e760e45469e78"
+  },
+  "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
+  "approved_plan_sha256": "fa4ea9b408af5920b8185b3202d17671c51b391312bd38d712101f3511ba1e2f",
+  "owner_gate_1_approval_sha256": "3ba5f6936034b90b031146fb333cbbc997c3bd9a69b7cccf02b5df4a0cb63bae",
+  "integration_freeze_sha256": "bf0e5c122358fbc911fcdc298b7fe59ef1526fa4a167fc9e17b876327d6e2766",
+  "semantic_snapshot_sha256": "bdd5cf135ae16a3259da6fe0c390b38417414b8e4e740d87bd68df1eb0f35bda",
+  "decision_universe_sha256": "e3db04f80ba1a77d36a1a72e31de94b6b539029316145397dd037b1981dc575b",
+  "recommendation_map_sha256": "70373797a0bef0317bb1d0b92c7b9303e023a127c42d11b20f34a030668c56c9",
+  "filled_review_sha256": "d55c6e4560556e5ba7864229d9cf0d3e237069aeb9f787e9a2dfeec0b89c5273",
+  "decision_id_set_sha256": "b9fee375ddd3810188adc2d4a533a6cb1226fb2d4ec442b823fe8b1525f57c87",
+  "creation_provenance": {
+    "origin": "ChatGPT Duquesne serialized Implementation — exact sealed apply",
+    "authorization": "The exact Duquesne Gate 1 seal is independently fresh-verified PASS under the owner's explicit Gate 1 approval. Authorize exactly one bounded remote STAGE2_SEALED_APPLY against duquesne-stage2-gate1-seal-0001: only the previously approved sealed basketball mutation, one durable write-ahead/CAS successor publication, and independent exact-tree fresh verification. This creates no new historical authority and grants no release readiness, PR, Preview, Owner Gate 2, merge, Production proof, recovery, venue maintenance, unrelated repair, or second Implementation-lane authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
