@@ -288,7 +288,7 @@
     "st-bonaventure-phase0-0001"
   ],
   "active_expected_main_sha": "74f994dbd820f57bc1ca9d0a011d09087f70b44a",
-  "active_lock_commit": null,
+  "active_lock_commit": "f564d6b354e463755db9f42932fdccd516286610",
   "active_lock_owner": "github-actions:41658212905:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
