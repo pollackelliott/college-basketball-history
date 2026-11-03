@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage1-0005",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "8234399cbf44e9dddd100391af37d8f914614abb",
+  "previous_control_state_sha256": "cd587adf8d553deb1edd994757890882e4a40d143c952270792f75f5abf63e0e",
+  "expected_protected_main_sha": "a64597d58d095a0597ad71d4cdd52b243c77a54e",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c94935ca8297c8a65ae81339e09313842fa10227",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0002-final/piece-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/st-bonaventure/st-bonaventure-stage1-0004/venue-reconciliation.json",
+    "sha256": "141d809ecc974afcbe4ecef08dd9ed56db4ed788621954eb962fafe5819cc6c9"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — Control Center-authorized fresh Stage 1 after PR #444",
+    "authorization": "Control Center explicitly directed a new fresh St. Bonaventure Stage 1 inventory after PR #444 advanced protected main to a64597d58d095a0597ad71d4cdd52b243c77a54e. This request reuses the exact immutable Research Freeze and the already-established complete 58-mapping schema-v2 venue reconciliation unchanged because PR #444 modifies only generic Phase 0 summary-refresh tooling and its regression test, not venue/reference data or historical authority. No Research replay, Phase 0 mutation, Stage 2, owner gate, release, merge, or protected-main mutation is authorized by this request."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
