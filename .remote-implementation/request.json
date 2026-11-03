@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "duquesne-release-readiness-0001",
+  "request_id": "duquesne-release-preview-verify-0001",
   "school_key": "duquesne",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "9934b0a8d19a417a8e626e3e0a12c595fbab0653",
-  "previous_control_state_sha256": "817e6d0506841a052d58db634c7f7781b0376fe47d52f24025d5cec7afc050b5",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "c7a1956a488332f1f1e82d5921257f9f8991925d",
+  "previous_control_state_sha256": "6c48c857ef7fd54cabe3b88f002988169d6635a5dd8c74d832b4f52491c41b30",
   "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "target_branch": "data/duquesne-onboarding",
   "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/duquesne/duquesne-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "52e317471d1cec54b1c1a615175ae61d80d3f72a7653608ffeb3dde8cabe9106"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "91aed95629e8bc204611bff179fb0ef2b274144315337b7b109d47da3cf8e29a"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/duquesne/duquesne-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "a2b474fce14e4b3e893a486a466c558664cc4804132eb1d3cdac44660b15591f"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/duquesne/duquesne-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "70137984f84435c571bb56abf5b68f71b7a0058f7167d61e139c4dfb0166739b"
   },
   "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
   "release_manifest_sha256": "ad9aca99d86248549222e780480e56aabe3f18d52cbcf21abf0b921985fe9579",
+  "pr_number": 437,
   "creation_provenance": {
-    "origin": "ChatGPT Duquesne serialized Implementation — release preparation",
-    "authorization": "Owner wrote 'Complete' after the exact Duquesne sealed-apply successor 8fd4c255cc1094ac45c98f7e0d043187526e7816 independently fresh-verified PASS. Interpret that as authorization to carry the next release-preparation phase through OWNER_GATE_2_READY, but not as Owner Gate 2 approval. This request is only the first bounded read-only RELEASE_READINESS operation: authenticate the sealed apply and rerun permanent final release gates/committed-change-boundary validation. It grants no PR creation inside the runner, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, shared/global maintenance, unrelated repair, or other-school authority."
+    "origin": "ChatGPT Duquesne serialized Implementation lane — exact PR-head Preview verification",
+    "authorization": "Owner authorized Duquesne release preparation through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #437 only, bound to the exact fresh-verified readiness authority and exact sealed Duquesne head. No Gate 2 approval, merge, Production, mutation, recovery, or unrelated authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
@@ -39,8 +40,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
