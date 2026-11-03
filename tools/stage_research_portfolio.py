@@ -57,6 +57,7 @@ from onboarding_plan import (
 )
 from program_history import history_scope_errors
 from stage1_venue_reconciliation import (
+    explicit_reuse_locality_compatible,
     load_venue_reconciliation,
     representation_consolidation_conflicts,
     venue_reconciliation_for_row,
@@ -1148,7 +1149,9 @@ def venue_reconciliation_inventory(
             if (candidate is None
                 or candidate.get("venue_key", "").strip() != explicit["global_venue_key"]):
                 hard_stop = "EXPLICIT_RECONCILIATION_STALE"
-            elif not geography_compatible(local, candidate):
+            elif not explicit_reuse_locality_compatible(
+                local, candidate, explicit
+            ):
                 hard_stop = "EXPLICIT_RECONCILIATION_GEOGRAPHY_CONFLICT"
             else:
                 chosen = candidate
