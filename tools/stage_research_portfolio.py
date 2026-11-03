@@ -652,6 +652,8 @@ def refresh_local_venue_assignment_summaries(
     local_rows: list[dict[str, str]],
     source_games: list[dict[str, str]],
     venue_reconciliation: dict[str, dict[str, Any]] | None = None,
+    *,
+    source_match_rows: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Refresh only stale derived venue summaries, never historical game fields.
 
@@ -661,37 +663,38 @@ def refresh_local_venue_assignment_summaries(
     one reused display name require an explicit hash-bound split proof.
     """
     venue_reconciliation = venue_reconciliation or {}
+    source_match_rows = source_match_rows or local_rows
+    if len(source_match_rows) != len(local_rows):
+        raise WorkflowError(
+            "venue summary source-match rows must align exactly with staged local rows"
+        )
 
-    groups: dict[tuple[str, str, str], list[dict[str, str]]] = {}
-    canonical_lookup: dict[
-        tuple[str, str, str], tuple[str, str, str]
-    ] = {}
+    groups: dict[tuple[str, str, str], list[int]] = {}
     alias_lookup: dict[
         tuple[str, str, str], set[tuple[str, str, str]]
     ] = {}
 
-    for row in local_rows:
-        name = row.get("canonical_name", "").strip()
+    for index, match_row in enumerate(source_match_rows):
+        name = match_row.get("canonical_name", "").strip()
         if not name:
             continue
         group = (
             normalize_name(name),
-            row.get("city", "").strip().casefold(),
-            normalize_jurisdiction(row.get("state", "")),
+            match_row.get("city", "").strip().casefold(),
+            normalize_jurisdiction(match_row.get("state", "")),
         )
-        groups.setdefault(group, []).append(row)
-        canonical_lookup[group] = group
+        groups.setdefault(group, []).append(index)
         labels = [name]
         labels.extend(
             alias.strip()
-            for alias in row.get("aliases", "").split(";")
+            for alias in match_row.get("aliases", "").split(";")
             if alias.strip()
         )
         for label in labels:
             key = (
                 normalize_name(label),
-                row.get("city", "").strip().casefold(),
-                normalize_jurisdiction(row.get("state", "")),
+                match_row.get("city", "").strip().casefold(),
+                normalize_jurisdiction(match_row.get("state", "")),
             )
             alias_lookup.setdefault(key, set()).add(group)
 
@@ -734,7 +737,8 @@ def refresh_local_venue_assignment_summaries(
                 split_game_target[game_id] = target_key
 
     refreshed: list[dict[str, Any]] = []
-    for group, rows in groups.items():
+    for group, row_indexes in groups.items():
+        rows = [local_rows[index] for index in row_indexes]
         games = group_games.get(group, [])
         raw_counts = [
             row.get("games_currently_assigned", "").strip()
@@ -1681,8 +1685,10 @@ def rebase_venues(
     }
     mappings: list[dict[str, Any]] = []
     staged_local_rows: list[dict[str, str]] = []
+    summary_match_rows: list[dict[str, str]] = []
 
     for row_index, local in enumerate(local_rows, 1):
+        frozen_summary_match_row = dict(local)
         key = local.get("venue_key", "").strip()
         name = local.get("canonical_name", "").strip()
         research_id = local.get("venue_id", "").strip()
@@ -2071,12 +2077,18 @@ def rebase_venues(
             }
         )
         staged_local_rows.append(local)
+        summary_match_rows.append(
+            frozen_summary_match_row
+            if reason == "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW"
+            else dict(local)
+        )
 
     if source_games:
         refresh_local_venue_assignment_summaries(
             staged_local_rows,
             source_games,
             venue_reconciliation,
+            source_match_rows=summary_match_rows,
         )
 
     return staged_local_rows, global_rows, name_rows, mappings
