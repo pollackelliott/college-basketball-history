@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "duquesne-release-preview-verify-0001",
+  "school_key": "duquesne",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "c7a1956a488332f1f1e82d5921257f9f8991925d",
+  "previous_control_state_sha256": "6c48c857ef7fd54cabe3b88f002988169d6635a5dd8c74d832b4f52491c41b30",
+  "expected_protected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
+  "target_branch": "data/duquesne-onboarding",
+  "target_sha": "8fd4c255cc1094ac45c98f7e0d043187526e7816",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/duquesne/duquesne-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "91aed95629e8bc204611bff179fb0ef2b274144315337b7b109d47da3cf8e29a"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/duquesne/duquesne-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "70137984f84435c571bb56abf5b68f71b7a0058f7167d61e139c4dfb0166739b"
+  },
+  "approved_plan_hash": "c72c988cf11c1a8443363335f880f00b2103479ad895ae6d5eb0e937632bf171",
+  "release_manifest_sha256": "ad9aca99d86248549222e780480e56aabe3f18d52cbcf21abf0b921985fe9579",
+  "pr_number": 437,
+  "creation_provenance": {
+    "origin": "ChatGPT Duquesne serialized Implementation lane — exact PR-head Preview verification",
+    "authorization": "Owner authorized Duquesne release preparation through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #437 only, bound to the exact fresh-verified readiness authority and exact sealed Duquesne head. No Gate 2 approval, merge, Production, mutation, recovery, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
