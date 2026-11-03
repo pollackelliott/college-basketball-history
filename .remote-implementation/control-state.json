@@ -275,18 +275,19 @@
     "duquesne-stage2-gate1-fill-0001",
     "duquesne-stage2-preseal-rehearsal-0001",
     "duquesne-stage2-gate1-seal-0001",
-    "duquesne-stage2-sealed-apply-0001"
+    "duquesne-stage2-sealed-apply-0001",
+    "duquesne-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d34e954bf738dc3f971f268ffeb4f58f5a32c4a9",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "duquesne-release-readiness-0001",
+  "active_request_sha256": "bfec2201e7a99229e04f84696728ca2485820a5011e9d658fc62d2bd061e500a",
+  "active_school_key": "duquesne",
+  "active_target_branch": "data/duquesne-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -579,8 +580,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/duquesne/duquesne-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "41b5b4fcb18fbd7f4483bc46648e2836fbe97564927374c82c47254b5e7a3a7f"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41561815439",
+  "lock_acquisition_request_commit": "ddc2dba9fa859033ac30945e3f860fb6b7094946",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
