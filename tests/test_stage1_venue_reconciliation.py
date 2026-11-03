@@ -156,6 +156,302 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         with self.assertRaisesRegex(WorkflowError, "repeats local key"):
             self.load()
 
+    def test_blank_key_row_index_reuse_is_hash_bound_and_safe(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Reitz Arena,Baltimore,MD\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        local = {**dict(self.local), "venue_key": "", "venue_id": ""}
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Reitz Arena",
+            "expected_local_city": "Baltimore",
+            "expected_local_state": "MD",
+            "global_venue_id": "VEN-000925",
+            "global_venue_key": "reitz-arena-loyola-maryland",
+            "expected_global_city": "Baltimore",
+            "expected_global_state": "MD",
+            "resolution_basis": "Exact immutable frozen row and current-main identity.",
+        }]
+        self.save()
+
+        mapping, meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[local],
+            global_venues=[dict(self.global_row)],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(local)],
+            [dict(self.global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            inventory["rows"][0]["resolution"],
+            "REUSE_EXPLICIT_RECONCILIATION",
+        )
+        staged, globals_, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(local)],
+            [dict(self.global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(staged[0]["venue_key"], "reitz-arena-loyola-maryland")
+        self.assertEqual(staged[0]["venue_id"], "VEN-000925")
+        self.assertEqual(len(globals_), 1)
+        self.assertEqual(outcomes[0]["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
+        self.assertEqual(meta["schema_version"], 2)
+
+    def test_row_index_selector_rejects_nonblank_local_key(self):
+        self.doc["schema_version"] = 2
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Reitz Arena",
+            "expected_local_city": "Baltimore",
+            "expected_local_state": "MD",
+            "global_venue_id": "VEN-000925",
+            "global_venue_key": "reitz-arena-loyola-maryland",
+            "expected_global_city": "Baltimore",
+            "expected_global_state": "MD",
+            "resolution_basis": "Row-index selectors are blank-key only.",
+        }]
+        self.save()
+        with self.assertRaisesRegex(
+            WorkflowError, "limited to blank-key frozen rows"
+        ):
+            self.load()
+
+    def test_blank_key_row_index_can_select_intentional_researched_split(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        local = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "first_assigned_game": "1961-03-01",
+            "last_assigned_game": "1962-03-01",
+        }
+        original = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000100",
+            "venue_key": "shared-arena-1955",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "identity_status": "RESEARCHED_SPLIT",
+        }
+        replacement = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000101",
+            "venue_key": "shared-arena-1988",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "identity_status": "RESEARCHED_SPLIT",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "global_venue_id": "VEN-000100",
+            "global_venue_key": "shared-arena-1955",
+            "expected_global_city": "Example City",
+            "expected_global_state": "NY",
+            "resolution_basis": "Exact immutable row plus settled split identity.",
+        }]
+        self.save()
+
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[local],
+            global_venues=[original, replacement],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(local)],
+            [dict(original), dict(replacement)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        row = inventory["rows"][0]
+        self.assertEqual(row["target_venue_id"], "VEN-000100")
+        self.assertIn("INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP", row["issues"])
+
+    def test_blank_key_redundant_row_can_be_dropped_without_changing_frozen_input(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-1955,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        keyed = {
+            **dict(blank),
+            "venue_key": "shared-arena-1955",
+            "venue_id": "VEN-000100",
+        }
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000100",
+            "venue_key": "shared-arena-1955",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Broad blank-key row is redundant with retained keyed row.",
+        }]
+        self.save()
+
+        mapping, _meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[blank, keyed],
+            global_venues=[global_row],
+        )
+        inventory = venue_reconciliation_inventory(
+            [dict(blank), dict(keyed)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(
+            inventory["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_DROP",
+        )
+        staged, globals_, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(blank), dict(keyed)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(len(staged), 1)
+        self.assertEqual(staged[0]["venue_key"], "shared-arena-1955")
+        self.assertEqual(len(globals_), 1)
+        self.assertEqual(outcomes[0]["resolution"], "DROP_REDUNDANT_LOCAL_ROW")
+
+    def test_redundant_drop_rejects_relationship_authority(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-1955,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "relationship_type": "HOME",
+        }
+        keyed = {**dict(blank), "venue_key": "shared-arena-1955", "relationship_type": ""}
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Attempted unsafe relationship drop.",
+        }]
+        self.save()
+
+        with self.assertRaisesRegex(
+            WorkflowError, "cannot discard venue relationship authority"
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=[blank, keyed],
+                global_venues=[dict(self.global_row)],
+            )
+
+    def test_redundant_drop_fails_closed_without_retained_keyed_identity(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Attempted unsafe drop.",
+        }]
+        self.save()
+
+        with self.assertRaisesRegex(
+            WorkflowError, "requires a retained keyed row"
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=[blank],
+                global_venues=[dict(self.global_row)],
+            )
+
     def test_repeated_frozen_physical_key_with_historical_names_is_supported(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
