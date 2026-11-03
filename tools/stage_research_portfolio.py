@@ -661,9 +661,14 @@ def refresh_local_venue_assignment_summaries(
     relationship rows for one physical identity are partitioned only when each
     game fits exactly one relationship window. Multiple physical identities with
     one reused display name require an explicit hash-bound split proof.
+
+    source_match_rows may carry an authenticated pre-canonical representation
+    for source matching while summaries are written to the corresponding staged
+    rows. This is used only when reconciliation explicitly preserves such a row.
     """
     venue_reconciliation = venue_reconciliation or {}
-    source_match_rows = source_match_rows or local_rows
+    if source_match_rows is None:
+        source_match_rows = local_rows
     if len(source_match_rows) != len(local_rows):
         raise WorkflowError(
             "venue summary source-match rows must align exactly with staged local rows"
