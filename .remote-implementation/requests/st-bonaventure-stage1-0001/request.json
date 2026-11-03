@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "c38b242b598e934167c8e919f41cc28c9dc08695",
+  "previous_control_state_sha256": "3134ede34967e0bc6741b4ef57edbbc035fdc8e5bde96689386ca378766d3638",
+  "expected_protected_main_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "research_checkpoint": {
+    "sha256": "22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda",
+    "research_base_sha": "bed68f763a7ea8920c6ba830b004334b16c9e303",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "c38b242b598e934167c8e919f41cc28c9dc08695",
+      "path_prefix": ".remote-implementation/transports/st-bonaventure/st-bonaventure-stage1-0001-final/piece-",
+      "part_count": 8
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — owner-authorized Stage 1",
+    "authorization": "The final immutable St. Bonaventure RESEARCH_FROZEN six-file package passed final Research acceptance and the Research lane was formally closed. The owner explicitly authorized the new logically separate St. Bonaventure serialized Implementation lifecycle and authorized Stage 1 to begin without another routine Proceed. This request authorizes only the read-only current-main Stage 1 reconciliation inventory against exact protected main 89327ed84827323a3f64e08ac1410ed71e442a0e using immutable Research Freeze SHA-256 22dd5a550c511eb62521b8b80c87b9f8d1ee1589b751baed6359c9763c7cecda. It carries no Research change, Phase 0 mutation, shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, recovery, release, protected-main mutation, or other-school authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
