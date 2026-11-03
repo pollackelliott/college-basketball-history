@@ -211,6 +211,25 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         self.assertEqual(outcomes[0]["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
         self.assertEqual(meta["schema_version"], 2)
 
+    def test_row_index_selector_rejects_nonblank_local_key(self):
+        self.doc["schema_version"] = 2
+        self.doc["mappings"] = [{
+            "local_venue_row_index": 1,
+            "expected_local_name": "Reitz Arena",
+            "expected_local_city": "Baltimore",
+            "expected_local_state": "MD",
+            "global_venue_id": "VEN-000925",
+            "global_venue_key": "reitz-arena-loyola-maryland",
+            "expected_global_city": "Baltimore",
+            "expected_global_state": "MD",
+            "resolution_basis": "Row-index selectors are blank-key only.",
+        }]
+        self.save()
+        with self.assertRaisesRegex(
+            WorkflowError, "limited to blank-key frozen rows"
+        ):
+            self.load()
+
     def test_blank_key_row_index_can_select_intentional_researched_split(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
