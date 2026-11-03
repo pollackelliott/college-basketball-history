@@ -540,19 +540,19 @@ def load_venue_reconciliation(
             for (side, target_id, target_key, _), rows in zip(
                 target_specs, (before_games, after_games)
             ):
+                source_game_ids = sorted(
+                    row.get("source_game_id", "").strip()
+                    for row in rows
+                )
                 split_targets.append(
                     {
                         "side": side.upper(),
                         "global_venue_id": target_id,
                         "global_venue_key": target_key,
                         **_game_summary(rows),
+                        "source_game_ids": source_game_ids,
                         "source_game_ids_sha256": _sha256_bytes(
-                            ("\n".join(
-                                sorted(
-                                    row.get("source_game_id", "").strip()
-                                    for row in rows
-                                )
-                            ) + "\n").encode("utf-8")
+                            ("\n".join(source_game_ids) + "\n").encode("utf-8")
                         ),
                     }
                 )
