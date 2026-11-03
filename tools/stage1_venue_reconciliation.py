@@ -69,8 +69,10 @@ def load_venue_reconciliation(
         doc = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
         raise WorkflowError(f"cannot read venue reconciliation {path}: {exc}") from exc
+    if not isinstance(doc, dict):
+        raise WorkflowError("venue reconciliation document must be an object")
     schema_version = doc.get("schema_version")
-    if not isinstance(doc, dict) or schema_version not in {1, 2}:
+    if schema_version not in {1, 2}:
         raise WorkflowError("venue reconciliation schema_version must be 1 or 2")
     if doc.get("school_key") != school_key:
         raise WorkflowError("venue reconciliation school_key mismatch")
