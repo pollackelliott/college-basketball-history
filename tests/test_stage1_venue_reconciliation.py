@@ -371,6 +371,48 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         self.assertEqual(len(globals_), 1)
         self.assertEqual(outcomes[0]["resolution"], "DROP_REDUNDANT_LOCAL_ROW")
 
+    def test_redundant_drop_rejects_relationship_authority(self):
+        venues_bytes = (
+            b"venue_key,canonical_name,city,state\n"
+            b",Shared Arena,Example City,NY\n"
+            b"shared-arena-1955,Shared Arena,Example City,NY\n"
+        )
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr("venues.csv", venues_bytes)
+        blank = {
+            **dict(self.local),
+            "venue_key": "",
+            "venue_id": "",
+            "canonical_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+            "relationship_type": "HOME",
+        }
+        keyed = {**dict(blank), "venue_key": "shared-arena-1955", "relationship_type": ""}
+        self.doc["schema_version"] = 2
+        self.doc["expected_research_zip_sha256"] = sha(self.package.read_bytes())
+        self.doc["expected_venues_sha256"] = sha(venues_bytes)
+        self.doc["mappings"] = [{
+            "action": "DROP_REDUNDANT_LOCAL_ROW",
+            "local_venue_row_index": 1,
+            "expected_local_name": "Shared Arena",
+            "expected_local_city": "Example City",
+            "expected_local_state": "NY",
+            "resolution_basis": "Attempted unsafe relationship drop.",
+        }]
+        self.save()
+
+        with self.assertRaisesRegex(
+            WorkflowError, "cannot discard venue relationship authority"
+        ):
+            load_venue_reconciliation(
+                self.spec,
+                school_key="test-school",
+                package_path=self.package,
+                local_venues=[blank, keyed],
+                global_venues=[dict(self.global_row)],
+            )
+
     def test_redundant_drop_fails_closed_without_retained_keyed_identity(self):
         venues_bytes = (
             b"venue_key,canonical_name,city,state\n"
