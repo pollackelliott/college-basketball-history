@@ -39,6 +39,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from administrative_status import administrative_status_errors
+from frozen_venue_authority import load_frozen_venue_split_authority
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
     append_note,
@@ -1522,6 +1523,15 @@ def main() -> int:
             venue_path,
             global_venues_by_id,
         )
+        frozen_split_authority = load_frozen_venue_split_authority(
+            repo_root,
+            args.school_key,
+        )
+        if frozen_split_authority:
+            bind_frozen_venue_split_authority(
+                venue_metadata_map,
+                frozen_split_authority,
+            )
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
         discrepancies = read_csv(discrepancies_path)
