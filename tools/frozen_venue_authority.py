@@ -111,6 +111,26 @@ def authenticated_frozen_venue_split_authority(
         raise FrozenVenueSplitAuthorityError(
             "cannot read Integration Freeze venue split authority"
         )
+
+    reconciliation = manifest.get("venue_reconciliation")
+    mappings = (
+        reconciliation.get("mappings")
+        if isinstance(reconciliation, dict)
+        else None
+    )
+    split_mappings = (
+        [
+            mapping
+            for mapping in mappings
+            if isinstance(mapping, dict)
+            and mapping.get("action") == "SPLIT_LOCAL_ROW_BY_CUTOVER"
+        ]
+        if isinstance(mappings, list)
+        else []
+    )
+    if not split_mappings:
+        return {}, payload
+
     if (
         manifest.get("status") != "INTEGRATION_FROZEN"
         or manifest.get("school_key") != school_key
@@ -153,15 +173,6 @@ def authenticated_frozen_venue_split_authority(
     ):
         raise FrozenVenueSplitAuthorityError(
             "Integration Freeze venue split authority does not match current venues.csv"
-        )
-
-    reconciliation = manifest.get("venue_reconciliation")
-    if not isinstance(reconciliation, dict):
-        return {}, payload
-    mappings = reconciliation.get("mappings")
-    if not isinstance(mappings, list):
-        raise FrozenVenueSplitAuthorityError(
-            "Integration Freeze venue reconciliation mappings are invalid"
         )
 
     snapshot_rows = snapshot.get("rows")
