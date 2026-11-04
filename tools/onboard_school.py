@@ -28,6 +28,10 @@ from pathlib import Path
 from typing import Any
 
 import ingest_school
+from frozen_venue_authority import (
+    FrozenVenueSplitAuthorityError,
+    frozen_venue_split_freeze_bytes,
+)
 from publish_historical_season_coverage import integrate_approved_coverage
 
 from correction_site_nonregression import (
@@ -1479,6 +1483,16 @@ def copy_repository(
         if school_key is not None
         else None
     )
+    split_authority_freeze = None
+    if school_key is not None and correction_freeze is None:
+        try:
+            split_authority_freeze = frozen_venue_split_freeze_bytes(
+                source,
+                school_key,
+            )
+        except FrozenVenueSplitAuthorityError as exc:
+            raise WorkflowError(str(exc)) from exc
+    runtime_freeze = correction_freeze or split_authority_freeze
 
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {
@@ -1533,10 +1547,10 @@ def copy_repository(
     else:
         shutil.copytree(source, destination, ignore=ignore)
 
-    if correction_freeze is not None:
+    if runtime_freeze is not None:
         target = destination / ".onboarding" / school_key / "integration-freeze.json"
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(correction_freeze)
+        target.write_bytes(runtime_freeze)
 
 
 def copy_validated_changes(

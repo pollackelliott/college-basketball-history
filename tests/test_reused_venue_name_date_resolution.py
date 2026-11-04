@@ -13,7 +13,8 @@ from integration_freeze_guard import (
     build_source_game_semantic_snapshot,
     semantic_snapshot_sha256,
 )
-from onboarding_plan import frozen_venue_split_authority
+from onboard_school import copy_repository
+from onboarding_plan import WorkflowError, frozen_venue_split_authority
 
 FIELDS = [
     "source_program_key","venue_key","venue_id","canonical_name","aliases",
@@ -479,6 +480,62 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 },
                 metadata,
             )
+
+        # The permanent rehearsal/apply boundary strips ignored .onboarding state
+        # before constructing a disposable repository. copy_repository() must
+        # transport this exact manifest only after authenticating the split.
+        with tempfile.TemporaryDirectory() as copied:
+            rehearsal = Path(copied) / "repository"
+            copy_repository(repo, rehearsal, school_key="st-bonaventure")
+            copied_freeze = (
+                rehearsal
+                / ".onboarding"
+                / "st-bonaventure"
+                / "integration-freeze.json"
+            )
+            self.assertTrue(copied_freeze.is_file())
+            self.assertEqual(
+                copied_freeze.read_bytes(),
+                (onboarding / "integration-freeze.json").read_bytes(),
+            )
+
+            runtime_metadata = ingest_school.load_runtime_venue_metadata_map(
+                rehearsal,
+                "st-bonaventure",
+                rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                global_venues,
+            )
+            runtime_result = ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "STB-1968-69-018",
+                    "game_date": "",
+                    "season_label": "1968-1969",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                },
+                runtime_metadata,
+            )
+            self.assertEqual(runtime_result["venue_id"], "VEN-000124")
+            self.assertEqual(
+                runtime_result["venue_key"],
+                "madison-square-garden-1968",
+            )
+
+        # An ignored manifest cannot be smuggled across the disposable-copy
+        # boundary after its frozen package representation has drifted.
+        with (school / "venues.csv").open("a", encoding="utf-8") as handle:
+            handle.write("\n")
+        with tempfile.TemporaryDirectory() as copied:
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "does not match current venues.csv",
+            ):
+                copy_repository(
+                    repo,
+                    Path(copied) / "repository",
+                    school_key="st-bonaventure",
+                )
 
     def test_frozen_split_authority_mismatch_fails_closed(self):
         metadata = self.make_msg_map()
