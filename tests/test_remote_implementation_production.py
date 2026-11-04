@@ -1,6 +1,7 @@
 """Generic remote Gate 2 approval and post-merge Production proof refusal tests."""
 from __future__ import annotations
 
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -24,6 +25,28 @@ MAIN = "b" * 40
 MERGE = "c" * 40
 HASH = "d" * 64
 PREVIEW = "https://example-preview.vercel.app"
+
+
+def production_authority():
+    return {
+        "owner_gate_2_approval_checkpoint_sha256": HASH,
+        "owner_gate_2_verification_sha256": HASH,
+        "release_readiness_authority": {
+            "sidecars": {
+                "approved-plan.json": json.dumps({
+                    "school_key": SCHOOL,
+                    "approved_plan_hash": HASH,
+                    "decisions": [],
+                }).encode("utf-8"),
+                "release-manifest.json": json.dumps({
+                    "school_key": SCHOOL,
+                    "approved_plan_hash": HASH,
+                    "summary": {},
+                }).encode("utf-8"),
+                "integration-freeze.json": b"{}\n",
+            },
+        },
+    }
 
 
 def req(operation):
@@ -247,10 +270,7 @@ class LiveProductionProofTests(unittest.TestCase):
 class PermanentProductionReplayTests(unittest.TestCase):
     def test_exact_merge_runs_permanent_gates_and_production_json(self):
         request = req(OP_RELEASE_PRODUCTION_PROOF)
-        authority = {
-            "owner_gate_2_approval_checkpoint_sha256": HASH,
-            "owner_gate_2_verification_sha256": HASH,
-        }
+        authority = production_authority()
         original = {
             "pr_number": PR, "pr_head_sha": HEAD,
             "merge_sha": MERGE, "merge_parent_main": MAIN,
@@ -291,10 +311,7 @@ class PermanentProductionReplayTests(unittest.TestCase):
 
     def test_wrong_or_failed_production_deployment_is_refused(self):
         request = req(OP_RELEASE_PRODUCTION_PROOF)
-        authority = {
-            "owner_gate_2_approval_checkpoint_sha256": HASH,
-            "owner_gate_2_verification_sha256": HASH,
-        }
+        authority = production_authority()
         merge = {
             "pr_number": PR, "pr_head_sha": HEAD, "merge_sha": MERGE,
             "merge_parent_main": MAIN, "merge_parent_onboarding": HEAD,
