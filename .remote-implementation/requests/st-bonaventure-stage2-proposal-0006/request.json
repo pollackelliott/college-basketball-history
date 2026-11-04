@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage2-proposal-0006",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "08d66cd4534755c276cbc8fbe93321de489d5aaa",
+  "previous_control_state_sha256": "efe3fc0669ba1542f79bb7f9d5a2f2c76b9bd4d89a052d47f847d634c4117f2c",
+  "expected_protected_main_sha": "009c77eb8f294ac380e97e6bb0e5adef1ead4ccf",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "2df04571c006505ba72736d9c970e656d502ee18",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0009/checkpoint-manifest.json",
+    "sha256": "d64cf2771beefd1b5bbe3af95044a9812a969994faf9bf0c89ae0eabf0cd1e74"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0006/recommendation-map.json",
+    "sha256": "783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a"
+  },
+  "creation_provenance": {
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact-map proposal rehearsal after independently fresh-verified PR #455 current-main census -0009",
+    "authorization": "Existing Stage 2 phase authority persists through OWNER_GATE_1_READY. Current-main refresh -0008 and census -0009 are independently fresh-verified PASS on protected main 009c77eb8f294ac380e97e6bb0e5adef1ead4ccf with target 2df04571c006505ba72736d9c970e656d502ee18. Census -0009 independently regenerates the exact settled 232-decision universe SHA 7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6 with zero blockers/warnings, so this request reuses the previously settled recommendation-map bytes unchanged at SHA-256 783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a. This rehearsal tests the corrected generic site-build season-normalization runtime merged in PR #455 without reopening basketball history. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
