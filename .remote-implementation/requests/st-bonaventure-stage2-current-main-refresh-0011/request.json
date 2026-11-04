@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0011",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "07448a19732b696db149f30e707c20ad16f12718",
+  "previous_control_state_sha256": "ba55bd6b1297780603041ed369153c9ae595d79fb366d430efa0f4890899f096",
+  "expected_protected_main_sha": "0c66967db740fb935b1f11f17b223b6a19d8a858",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "0f0f25f0a87010492f02db94955f2f3b84c7b058",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0010/successor-manifest.json",
+    "sha256": "b1368cfde9ca865138df5ab358673ea0db916c70cf609d24f08646bd3a95dd09"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "CONTROL CENTER AUTHORIZATION — ST. BONAVENTURE STAGE 2 CURRENT-MAIN REFRESH AFTER PR #458. The owner explicitly authorized the bounded generic final-semantic-phase repair and directed the Control Center to proceed without another routine owner check-in. Control Center independently verified merged protected main 0c66967db740fb935b1f11f17b223b6a19d8a858, exact onboarding predecessor 0f0f25f0a87010492f02db94955f2f3b84c7b058, exact merge base d64630b7269c6c911ced0c65c5eb0c288541c8cf, target-only 9 / intervening-main 3 / overlap 0 / no intervening schools/st-bonaventure path, global control IDLE, recovery_required=false, and fresh-verified prior refresh successor -0010. Authorization covers exactly one guarded STAGE2_CURRENT_MAIN_REFRESH plus required mutation-lock/write-ahead/CAS, validation, semantic-drift protection, and independent fresh verification. No new basketball-history authority, Research/Integration Freeze change, stale decision-universe carry-forward, recommendation-map change, arbitrary repair, Owner Gate 1/2, release, Preview, St. Bonaventure merge, or Production authority."
+  },
+  "creation_provenance": {
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact post-PR #458 Control Center-authorized current-main refresh",
+    "authorization": "PR #458 merged exact reviewed head ccbd398a05a389052c722d8bd9156ee369b40021 into protected main as 0c66967db740fb935b1f11f17b223b6a19d8a858 with parents d64630b7269c6c911ced0c65c5eb0c288541c8cf and ccbd398a05a389052c722d8bd9156ee369b40021 after both required exact-head workflows and Vercel passed. Immediately before request creation the onboarding predecessor remains 0f0f25f0a87010492f02db94955f2f3b84c7b058; merge base is d64630b7269c6c911ced0c65c5eb0c288541c8cf; target-only paths are the same 9 package/reference paths; intervening-main paths are tests/test_reused_venue_name_date_resolution.py, tools/frozen_venue_authority.py, tools/ingest_school.py; overlap is 0; protected main changes no schools/st-bonaventure path; global control is IDLE/recovery_required=false/transaction COMPLETE. This request binds the independently fresh-verified refresh -0010 successor and preserves immutable Integration Freeze/semantic authority. A fresh Stage 2 census must regenerate after this refresh; the prior 232-decision universe is not carried forward by assertion."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
