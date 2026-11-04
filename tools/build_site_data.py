@@ -205,45 +205,131 @@ def validated_historical_coverage(
         closeout_sha = row.get("stage1_audit_sha256", "").strip()
         if not re.fullmatch(r"[a-f0-9]{64}", closeout_sha):
             raise ValueError(f"Historical coverage audit SHA-256 required: {program_key}/{season}")
-        if season not in seasons:
-            raise ValueError(f"Historical coverage season has no canonical games: {program_key}/{season}")
-        documented = record_from_games(seasons[season])
-        if documented["ties"]:
-            raise ValueError(f"Historical coverage cannot infer tie outcome: {program_key}/{season}")
+
         def record(prefix: str) -> dict[str, int]:
             try:
                 return {key: int(row[f"{prefix}_{key}"]) for key in ("wins", "losses", "games")}
             except (KeyError, TypeError, ValueError) as exc:
                 raise ValueError(f"Historical coverage record is incomplete: {program_key}/{season}") from exc
+
         official = record("official")
         named = record("documented")
         unidentified = record("unidentified")
-        if (official != authority.get("institutional_record")
+        documented = record_from_games(seasons.get(season, []))
+        if documented["ties"]:
+            raise ValueError(f"Historical coverage cannot infer tie outcome: {program_key}/{season}")
+        if (
+            official != authority.get("institutional_record")
             or named != authority.get("identified_record")
             or unidentified != authority.get("unidentified_record")
-            or named != {k: documented[k] for k in ("wins", "losses", "games")}
+            or named != {key: documented[key] for key in ("wins", "losses", "games")}
             or official["wins"] + official["losses"] != official["games"]
             or named["wins"] + named["losses"] != named["games"]
             or unidentified["wins"] + unidentified["losses"] != unidentified["games"]
             or unidentified["games"] <= 0
-            or any(official[k] - named[k] != unidentified[k]
-                   for k in ("wins", "losses", "games"))):
+            or any(
+                official[key] - named[key] != unidentified[key]
+                for key in ("wins", "losses", "games")
+            )
+        ):
             raise ValueError(f"Historical coverage arithmetic/canonical discrepancy: {program_key}/{season}")
         source = row.get("source_label", "").strip()
         if not source:
             raise ValueError(f"Historical coverage requires institutional source: {program_key}/{season}")
-        note = (f"Institutional records give {official['wins']}-{official['losses']} across "
-                f"{official['games']} games. {named['games']} individual game results "
-                f"({named['wins']}-{named['losses']}) are documented here. "
-                f"The remaining {unidentified['games']} games collectively account for "
-                f"{unidentified['wins']} wins and {unidentified['losses']} losses; "
-                "their opponents, dates, and scores remain unidentified in available sources.")
+        note = (
+            f"Institutional records give {official['wins']}-{official['losses']} across "
+            f"{official['games']} games. {named['games']} individual game results "
+            f"({named['wins']}-{named['losses']}) are documented here. "
+            f"The remaining {unidentified['games']} games collectively account for "
+            f"{unidentified['wins']} wins and {unidentified['losses']} losses; "
+            "their opponents, dates, and scores remain unidentified in available sources."
+        )
         result.append({
-            "season_label": season, "official_record": official,
-            "documented_record": named, "unidentified_record": unidentified,
-            "source_label": source, "note": note,
+            "season_label": season,
+            "official_record": official,
+            "documented_record": named,
+            "unidentified_record": unidentified,
+            "source_label": source,
+            "note": note,
             "terminal_classification": "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP",
             "stage1_audit_sha256": closeout_sha,
+            "owner_disposition": row["owner_disposition"],
+        })
+    return sorted(result, key=lambda item: item["season_label"])
+
+
+def validated_historical_accounting(
+    rows: list[dict[str, str]],
+    program_key: str,
+    seasons: dict[str, list[dict[str, Any]]],
+    authority_cases: dict[tuple[str, str], dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Preserve source-accounting contradictions without changing canonical games."""
+    result = []
+    used = set()
+    for row in rows:
+        if row.get("program_key") != program_key:
+            continue
+        season = row.get("season_label", "").strip()
+        if not season or season in used:
+            raise ValueError(f"Duplicate or blank historical accounting season: {program_key}/{season}")
+        used.add(season)
+        authority = authority_cases.get((program_key, season))
+        if authority is None:
+            raise ValueError(f"Historical accounting lacks owner authority: {program_key}/{season}")
+        if (
+            row.get("classification") != "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION"
+            or row.get("owner_disposition") != authority.get("owner_disposition")
+        ):
+            raise ValueError(f"Historical accounting owner authority mismatch: {program_key}/{season}")
+        audit_sha = row.get("stage1_audit_sha256", "").strip()
+        if not re.fullmatch(r"[a-f0-9]{64}", audit_sha):
+            raise ValueError(f"Historical accounting audit SHA-256 required: {program_key}/{season}")
+        if season not in seasons:
+            raise ValueError(f"Historical accounting season has no documented canonical games: {program_key}/{season}")
+
+        def record(prefix: str) -> dict[str, int]:
+            try:
+                return {key: int(row[f"{prefix}_{key}"]) for key in ("wins", "losses", "games")}
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(f"Historical accounting record is incomplete: {program_key}/{season}") from exc
+
+        official = record("official")
+        documented = record("documented")
+        try:
+            delta = {key: int(row[f"delta_{key}"]) for key in ("wins", "losses", "games")}
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f"Historical accounting delta is incomplete: {program_key}/{season}") from exc
+        canonical = record_from_games(seasons[season])
+        if canonical["ties"]:
+            raise ValueError(f"Historical accounting cannot infer tie outcome: {program_key}/{season}")
+        if (
+            official != authority.get("institutional_record")
+            or documented != authority.get("identified_record")
+            or delta != authority.get("mechanical_delta")
+            or documented != {key: canonical[key] for key in ("wins", "losses", "games")}
+            or official["wins"] + official["losses"] != official["games"]
+            or documented["wins"] + documented["losses"] != documented["games"]
+            or any(
+                official[key] - documented[key] != delta[key]
+                for key in ("wins", "losses", "games")
+            )
+        ):
+            raise ValueError(f"Historical accounting arithmetic/canonical discrepancy: {program_key}/{season}")
+        result.append({
+            "season_label": season,
+            "official_record": official,
+            "documented_record": documented,
+            "mechanical_delta": delta,
+            "source_label": row.get("source_label", "").strip(),
+            "note": row.get("public_note", "").strip()
+            or (
+                "Institutional season/cumulative accounting conflicts with the preserved "
+                "identified game list. The diagnostic delta is not a missing-game count "
+                "and is not used to add, remove, or reclassify games."
+            ),
+            "terminal_classification": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+            "stage1_audit_sha256": audit_sha,
             "owner_disposition": row["owner_disposition"],
         })
     return sorted(result, key=lambda item: item["season_label"])
