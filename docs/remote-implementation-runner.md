@@ -770,7 +770,7 @@ python <runtime>/tools/onboarding_hardening.py diagnose-reconciliation <school> 
 
 The permanent diagnostic observes the real reconciliation implementation rather than reimplementing basketball logic. Its durable trace records the selected game's canonical/source/assertion path, actual decision order and mutations, site-metadata synchronization branch where applicable, final integrity result, and whether a partial city/state pair was introduced, mutated, or merely persisted.
 
-Before and after execution the runner proves exact target HEAD/tree stability and a clean non-ignored worktree. The checkpoint preserves the exact trace bytes/hash, source proposal authority, runtime tool hashes, target/Freeze/semantic/decision/map bindings, and tracked-mutation proof. No target-branch push exists for this operation.
+Before and after execution the runner proves exact target HEAD/tree stability and a clean non-ignored worktree. The checkpoint preserves the exact trace bytes/hash, source proposal authority, runtime tool hashes, target/Freeze/semantic/decision/map bindings, and tracked-mutation proof. No target-branch push exists for this operation. A permanent diagnostic that exits `1` after emitting a valid `diagnostic_status=FAIL` trace is durable diagnostic evidence rather than a remote-execution failure; missing or malformed traces, tracked mutation, or an exit/status mismatch remain fail-closed remote failures.
 
 Fresh verification independently reauthenticates the same prior proposal checkpoint and target SHA, reruns the same permanent diagnostic with the same canonical game ID using current protected-main runtime, requires the exact same trace SHA-256 and summary classification, and again proves no tracked mutation.
 
