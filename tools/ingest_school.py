@@ -39,6 +39,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from administrative_status import administrative_status_errors
+from frozen_venue_authority import load_frozen_venue_split_authority
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
     append_note,
@@ -727,6 +728,30 @@ def bind_frozen_venue_split_authority(
             "curated_venue_name": venue_name,
         }
     venue_metadata_map[FROZEN_VENUE_SPLIT_AUTHORITY_KEY] = normalized  # type: ignore[assignment]
+
+
+def load_runtime_venue_metadata_map(
+    repo_root: Path,
+    school_key: str,
+    venue_path: Path,
+    global_venues_by_id: dict[str, dict[str, str]],
+) -> dict[str, list[dict[str, str]]]:
+    """Load venue metadata plus any authenticated frozen per-game split authority."""
+
+    venue_metadata_map = load_venue_metadata_map(
+        venue_path,
+        global_venues_by_id,
+    )
+    frozen_split_authority = load_frozen_venue_split_authority(
+        repo_root,
+        school_key,
+    )
+    if frozen_split_authority:
+        bind_frozen_venue_split_authority(
+            venue_metadata_map,
+            frozen_split_authority,
+        )
+    return venue_metadata_map
 
 
 def resolve_venue_metadata(
@@ -1518,7 +1543,9 @@ def main() -> int:
             global_venue_name_ids,
         ) = load_global_venue_reference(repo_root)
         venue_name_map = load_venue_name_map(venue_path)
-        venue_metadata_map = load_venue_metadata_map(
+        venue_metadata_map = load_runtime_venue_metadata_map(
+            repo_root,
+            args.school_key,
             venue_path,
             global_venues_by_id,
         )
