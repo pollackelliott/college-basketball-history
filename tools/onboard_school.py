@@ -31,6 +31,8 @@ import ingest_school
 from frozen_venue_authority import (
     FrozenVenueSplitAuthorityError,
     frozen_venue_split_freeze_bytes,
+    load_frozen_venue_split_authority,
+    sealed_pre_ingest_semantic_delta,
 )
 from publish_historical_season_coverage import integrate_approved_coverage
 
@@ -248,9 +250,21 @@ def run_gates(
     include_tests: bool = True,
     correction_source_id: str = "",
     correction_site_proof: dict[str, Any] | None = None,
+    approved_plan: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     python = sys.executable
     outputs: dict[str, str] = {}
+    gate_context_temp = None
+    sealed_context_path = None
+    if approved_plan is not None and sealed_pre_ingest_semantic_delta(approved_plan):
+        gate_context_temp = tempfile.TemporaryDirectory(
+            prefix=f"sealed-gate-context-{school_key}-"
+        )
+        sealed_context_path = Path(gate_context_temp.name) / "approved-plan.json"
+        sealed_context_path.write_text(
+            json.dumps(approved_plan, indent=2) + "\n",
+            encoding="utf-8",
+        )
     commands = [
         (
             "validation",
@@ -269,6 +283,10 @@ def run_gates(
                 *(
                     ["--source-game-id", correction_source_id]
                     if correction_source_id else []
+                ),
+                *(
+                    ["--sealed-plan-context", str(sealed_context_path)]
+                    if sealed_context_path is not None else []
                 ),
             ],
             repo,
@@ -364,6 +382,8 @@ def run_gates(
             )
         outputs["whitespace"] = "PASS: no genuine trailing spaces/tabs in changed text files."
         print("\n" + outputs["whitespace"])
+    if gate_context_temp is not None:
+        gate_context_temp.cleanup()
     return outputs
 
 
@@ -1301,6 +1321,11 @@ def execute_approved_in_place(
     ) in SINGLE_GAME_CORRECTION_KINDS:
         return _execute_single_game_correction(repo, approved)
 
+    try:
+        load_frozen_venue_split_authority(repo, school_key)
+    except FrozenVenueSplitAuthorityError as exc:
+        raise WorkflowError(str(exc)) from exc
+
     print("\n=== sealed correction-only identity retarget ===")
     correction_identity_patches = apply_pre_ingest_correction_identity_patches(
         repo, approved
@@ -1711,6 +1736,7 @@ def transactional_apply(
             )
         run_gates(
             rehearsal, approved["school_key"], changed, include_tests=True,
+            approved_plan=approved,
             **({
                 "correction_source_id": approved["summary"]["correction_source_game_id"],
                 "correction_site_proof": execution["correction_site_nonregression"],
@@ -1725,6 +1751,7 @@ def transactional_apply(
         approved["school_key"],
         changed,
         include_tests=False,
+        approved_plan=approved,
         **({
             "correction_source_id": approved["summary"]["correction_source_game_id"],
             "correction_site_proof": execution["correction_site_nonregression"],

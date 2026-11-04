@@ -212,9 +212,15 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
             def gate(
                 checkout, school_key, changed, include_tests=True,
                 correction_source_id="", correction_site_proof=None,
+                approved_plan=None,
             ):
                 observations.append(
-                    (correction_source_id, correction_site_proof, include_tests)
+                    (
+                        correction_source_id,
+                        correction_site_proof,
+                        include_tests,
+                        approved_plan.get("school_key") if approved_plan else None,
+                    )
                 )
                 return {"site_completeness": "CORRECTION NONREGRESSION PASS"}
 
@@ -262,9 +268,9 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
             self.assertEqual(
                 observations,
                 [
-                    ("CORRECTION", proof, True),
-                    ("CORRECTION", proof, True),
-                    ("CORRECTION", proof, False),
+                    ("CORRECTION", proof, True, "example"),
+                    ("CORRECTION", proof, True, "example"),
+                    ("CORRECTION", proof, False, "example"),
                 ],
             )
 
@@ -277,13 +283,22 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
             review.write_text("decision_id\n")
             observations = []
 
-            def gate(checkout, school_key, changed, include_tests=True):
+            def gate(
+                checkout, school_key, changed, include_tests=True, approved_plan=None
+            ):
                 with (checkout / "schools/example/source-games.csv").open(
                     encoding="utf-8", newline=""
                 ) as stream:
                     rows = list(csv.DictReader(stream))
                 mode, selected, errors = self.scoped_gate(checkout, rows)
-                observations.append((mode, selected, include_tests))
+                observations.append(
+                    (
+                        mode,
+                        selected,
+                        include_tests,
+                        approved_plan.get("school_key") if approved_plan else None,
+                    )
+                )
                 if errors:
                     raise AssertionError(errors)
                 return {"site_completeness": "PASS"}
@@ -311,9 +326,9 @@ class CorrectionRehearsalCopyTests(unittest.TestCase):
                     repo / ".onboarding/example")
                 self.assertEqual(result["copied_state_gates"]["site_completeness"], "PASS")
             self.assertEqual(observations, [
-                ("CORRECTION_DELTA", ["CORRECTION"], True),
-                ("CORRECTION_DELTA", ["CORRECTION"], True),
-                ("CORRECTION_DELTA", ["CORRECTION"], False)])
+                ("CORRECTION_DELTA", ["CORRECTION"], True, "example"),
+                ("CORRECTION_DELTA", ["CORRECTION"], True, "example"),
+                ("CORRECTION_DELTA", ["CORRECTION"], False, "example")])
 
 
 if __name__ == "__main__":
