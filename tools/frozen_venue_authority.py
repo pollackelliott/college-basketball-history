@@ -250,23 +250,31 @@ def sealed_post_reconciliation_semantic_delta(
                 )
 
             if field_name == "site_type":
+                team_a = canonical.get("team_a_key", "").strip()
+                team_b = canonical.get("team_b_key", "").strip()
+                if school_key not in {team_a, team_b}:
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: target school is absent "
+                        "from the sealed canonical game"
+                    )
                 if expected in {"NEUTRAL", "UNKNOWN", ""}:
                     normalized = expected or "UNKNOWN"
                 elif expected == "TEAM_A_HOME":
                     normalized = (
                         "SOURCE_PROGRAM_HOME"
-                        if canonical.get("team_a_key", "").strip() == school_key
+                        if team_a == school_key
                         else "OPPONENT_HOME"
                     )
                 elif expected == "TEAM_B_HOME":
                     normalized = (
                         "SOURCE_PROGRAM_HOME"
-                        if canonical.get("team_b_key", "").strip() == school_key
+                        if team_b == school_key
                         else "OPPONENT_HOME"
                     )
                 else:
                     raise FrozenVenueSplitAuthorityError(
-                        f"{item.get('decision_id', '')}: unsupported canonical site_type {expected!r}"
+                        f"{item.get('decision_id', '')}: unsupported canonical "
+                        f"site_type {expected!r}"
                     )
                 source_field = "curated_site_type"
             else:
@@ -287,13 +295,17 @@ def sealed_post_reconciliation_semantic_delta(
             for field, value in patch.items()
             if field in PRE_INGEST_SEMANTIC_FIELDS
         }
-        if frozen_patch and not source_id:
-            raise FrozenVenueSplitAuthorityError(
-                "sealed post-reconciliation source patch has a blank source_game_id"
-            )
-        # Generic reconciliation applies source_patch after any normalization, so
-        # the final semantic guard must mirror that exact deterministic ordering.
-        if frozen_patch:
+        if (
+            frozen_patch
+            and str(item.get("category", "")).strip()
+            in {"discrepancy", "conditional_discrepancy"}
+        ):
+            if not source_id:
+                raise FrozenVenueSplitAuthorityError(
+                    "sealed post-reconciliation source patch has a blank source_game_id"
+                )
+            # Generic discrepancy reconciliation applies source_patch after any
+            # normalization, so mirror that exact deterministic ordering.
             result.setdefault(source_id, {}).update(frozen_patch)
 
     return result
