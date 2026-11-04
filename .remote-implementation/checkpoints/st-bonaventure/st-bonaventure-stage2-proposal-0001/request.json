@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "c68c68f96e46bec2312f3923cc135b0b63338b66",
+  "previous_control_state_sha256": "1ba7a8ac808d696b19741a69813b47eb0ed41102fe3df45a8c69e321b2d9e694",
+  "expected_protected_main_sha": "3b7b1fae0b9fffb1cbb097e3dacaa4cda64d8d17",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "147b8a68b9fd2e6dbeba3371e8784484e85e7980",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0005/checkpoint-manifest.json",
+    "sha256": "943d19e9c74b4ca063f87e0907d9340f61ca2ff4b54895bfe75662f04c08a6eb"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "4e887d3d3d1c3361d3005abe37e0660b64c8f17a815d446ddc209eedd5165cd5"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation Stage 2 — complete exact recommendation-map proposal rehearsal after PR #448",
+    "authorization": "Existing Control-Center-confirmed St. Bonaventure Stage 2 authority persists through OWNER_GATE_1_READY. This request rehearses the complete exact 232-decision recommendation map against independently fresh-verified census st-bonaventure-stage2-census-0005. The fresh universe is byte-substantively identical by decision-universe SHA to census 0004: 232 decisions, 0 blockers, 0 warnings. The map reuses the already-completed classification, carries all nine frozen owner-final directives without pre-applying them, and transports NEW-GAME-DATE-PATCH-STB-1982-83-028 only as APPLY_SOURCE_DATE_PATCH with exact game_date 1983-03-09. It contains no Owner Gate 1 approval/fill, sealing, apply, Preview, release, merge, Production, recovery, or tracked basketball mutation authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
