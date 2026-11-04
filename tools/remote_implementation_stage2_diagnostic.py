@@ -177,6 +177,8 @@ def run_stage2_reconciliation_diagnostic_tool(
     review_path.write_bytes(review_bytes)
     map_path = output / "remote-diagnostic-recommendation-map.json"
     map_path.write_bytes(map_bytes)
+    trace_path = output / TRACE_NAME
+    trace_path.unlink(missing_ok=True)
 
     before = tracked_worktree_state(repo)
     if before["status"]:
@@ -234,10 +236,6 @@ def run_stage2_reconciliation_diagnostic_tool(
                 after["status"],
             )
         )
-    if cp.returncode != 0:
-        raise Stop("STAGE2_DIAGNOSTIC_PERMANENT_COMMAND_FAILED")
-
-    trace_path = output / TRACE_NAME
     if not trace_path.is_file():
         raise Stop("STAGE2_DIAGNOSTIC_TRACE_MISSING")
     trace_bytes = trace_path.read_bytes()
@@ -251,8 +249,12 @@ def run_stage2_reconciliation_diagnostic_tool(
         raise Stop("STAGE2_DIAGNOSTIC_TRACE_SCHOOL_MISMATCH")
     if trace.get("canonical_game_id") != canonical_game_id:
         raise Stop("STAGE2_DIAGNOSTIC_TRACE_GAME_MISMATCH")
-    if trace.get("diagnostic_status") != "PASS":
-        raise Stop("STAGE2_DIAGNOSTIC_TRACE_STATUS_NOT_PASS")
+    diagnostic_status = trace.get("diagnostic_status")
+    if diagnostic_status not in {"PASS", "FAIL"}:
+        raise Stop("STAGE2_DIAGNOSTIC_TRACE_STATUS_INVALID")
+    expected_exit_code = 0 if diagnostic_status == "PASS" else 1
+    if cp.returncode != expected_exit_code:
+        raise Stop("STAGE2_DIAGNOSTIC_EXIT_STATUS_MISMATCH")
     if trace.get("real_tracked_repository_unchanged") is not True:
         raise Stop("STAGE2_DIAGNOSTIC_TRACE_MUTATION_PROOF_FAILED")
 

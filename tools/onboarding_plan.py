@@ -4829,11 +4829,16 @@ def _sync_explicit_source_site_patch_to_canonical(
 def _venue_maps(
     repo: Path,
     school_key: str,
+    *,
+    approved_plan: dict[str, Any] | None = None,
 ) -> tuple[dict[str, list[dict[str, str]]], dict[str, str]]:
     global_venues_by_id, _, _ = load_global_venue_reference(repo)
-    target_metadata = ingest_school.load_venue_metadata_map(
+    target_metadata = ingest_school.load_runtime_venue_metadata_map(
+        repo,
+        school_key,
         repo / "schools" / school_key / "venues.csv",
         global_venues_by_id,
+        sealed_plan_context=approved_plan,
     )
     names_by_key: dict[str, str] = {}
     for path in sorted((repo / "schools").glob("*/venues.csv")):
@@ -6825,7 +6830,11 @@ def apply_reconciliation_decisions(
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
                 if target_venue_metadata is None or venue_names is None:
-                    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                    target_venue_metadata, venue_names = _venue_maps(
+                        repo,
+                        school_key,
+                        approved_plan=approved,
+                    )
                 _sync_site_metadata_from_source(
                     source,
                     canonical,
@@ -6843,7 +6852,11 @@ def apply_reconciliation_decisions(
             set_source_field(source, canonical, field_name, final_value)
             if field_name == "site_type":
                 if target_venue_metadata is None or venue_names is None:
-                    target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                    target_venue_metadata, venue_names = _venue_maps(
+                        repo,
+                        school_key,
+                        approved_plan=approved,
+                    )
                 _sync_site_metadata_to_source(
                     source,
                     canonical,
@@ -6884,7 +6897,11 @@ def apply_reconciliation_decisions(
             source[field] = value
         if source_patch_fields & {"curated_site_type", "curated_venue_name", "city", "state"}:
             if target_venue_metadata is None or venue_names is None:
-                target_venue_metadata, venue_names = _venue_maps(repo, school_key)
+                target_venue_metadata, venue_names = _venue_maps(
+                        repo,
+                        school_key,
+                        approved_plan=approved,
+                    )
             _sync_explicit_source_site_patch_to_canonical(
                 source,
                 canonical,

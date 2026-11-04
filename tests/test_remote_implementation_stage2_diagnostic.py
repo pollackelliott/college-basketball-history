@@ -398,6 +398,117 @@ class RemoteStage2ReconciliationDiagnosticTests(unittest.TestCase):
                 "PREEXISTING_PERSISTED",
             )
 
+    def test_permanent_diagnostic_preserves_valid_failure_trace(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / ".onboarding" / SCHOOL
+            clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
+            trace = {
+                "schema_version": 1,
+                "kind": "IMPLEMENTATION_RECONCILIATION_TRACE",
+                "school_key": SCHOOL,
+                "canonical_game_id": GAME,
+                "diagnostic_status": "FAIL",
+                "execution_status": "RECONCILIATION_BLOCKED",
+                "execution_error": "target was not observed before deterministic reconciliation stop",
+                "partial_location_classification": "",
+                "real_tracked_repository_unchanged": True,
+                "decision_order": [],
+                "mutations": [],
+                "site_sync_events": [],
+                "integrity": {"status": "FAIL"},
+            }
+
+            def fake_run(command, **kwargs):
+                output.mkdir(parents=True, exist_ok=True)
+                (output / diagnostic.TRACE_NAME).write_text(
+                    json.dumps(trace, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+                return subprocess.CompletedProcess(command, 1, stdout="FAIL\n")
+
+            with (
+                patch.object(diagnostic, "restore_integration_freeze"),
+                patch.object(
+                    diagnostic,
+                    "tracked_worktree_state",
+                    side_effect=[clean, clean],
+                ),
+                patch.object(diagnostic, "run", side_effect=fake_run),
+            ):
+                result = diagnostic.run_stage2_reconciliation_diagnostic_tool(
+                    root,
+                    SCHOOL,
+                    freeze_bytes=b"freeze",
+                    map_bytes=b"{}\n",
+                    plan_bytes=b"{}\n",
+                    review_bytes=b"decision_id\n",
+                    canonical_game_id=GAME,
+                    diag=root / "diag",
+                    tool_repo=ROOT,
+                )
+
+            self.assertEqual(result["exit_code"], 1)
+            self.assertEqual(result["trace"]["diagnostic_status"], "FAIL")
+            self.assertEqual(
+                result["tracked_mutation_proof"]["tracked_stage2_mutation"],
+                "NONE",
+            )
+
+    def test_permanent_diagnostic_refuses_exit_trace_status_mismatch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / ".onboarding" / SCHOOL
+            clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
+            trace = {
+                "schema_version": 1,
+                "kind": "IMPLEMENTATION_RECONCILIATION_TRACE",
+                "school_key": SCHOOL,
+                "canonical_game_id": GAME,
+                "diagnostic_status": "FAIL",
+                "execution_status": "RECONCILIATION_BLOCKED",
+                "execution_error": "blocked",
+                "partial_location_classification": "",
+                "real_tracked_repository_unchanged": True,
+                "decision_order": [],
+                "mutations": [],
+                "site_sync_events": [],
+                "integrity": {"status": "FAIL"},
+            }
+
+            def fake_run(command, **kwargs):
+                output.mkdir(parents=True, exist_ok=True)
+                (output / diagnostic.TRACE_NAME).write_text(
+                    json.dumps(trace, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+                return subprocess.CompletedProcess(command, 2, stdout="CRASH\n")
+
+            with (
+                patch.object(diagnostic, "restore_integration_freeze"),
+                patch.object(
+                    diagnostic,
+                    "tracked_worktree_state",
+                    side_effect=[clean, clean],
+                ),
+                patch.object(diagnostic, "run", side_effect=fake_run),
+            ):
+                with self.assertRaisesRegex(
+                    Stop,
+                    "STAGE2_DIAGNOSTIC_EXIT_STATUS_MISMATCH",
+                ):
+                    diagnostic.run_stage2_reconciliation_diagnostic_tool(
+                        root,
+                        SCHOOL,
+                        freeze_bytes=b"freeze",
+                        map_bytes=b"{}\n",
+                        plan_bytes=b"{}\n",
+                        review_bytes=b"decision_id\n",
+                        canonical_game_id=GAME,
+                        diag=root / "diag",
+                        tool_repo=ROOT,
+                    )
+
     def test_permanent_diagnostic_refuses_tracked_mutation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

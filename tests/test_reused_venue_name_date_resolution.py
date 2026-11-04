@@ -20,6 +20,7 @@ from frozen_venue_authority import (
 from onboard_school import copy_repository
 from onboarding_plan import (
     WorkflowError,
+    _venue_maps,
     apply_pre_ingest_source_patches,
     frozen_venue_split_authority,
 )
@@ -694,6 +695,34 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 runtime_metadata,
             )
             self.assertEqual(runtime_result["venue_id"], "VEN-000124")
+
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "does not match current source semantics",
+            ):
+                _venue_maps(rehearsal, "st-bonaventure")
+
+            reconciliation_metadata, _ = _venue_maps(
+                rehearsal,
+                "st-bonaventure",
+                approved_plan=approved,
+            )
+            reconciliation_result = ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "STB-1968-69-018",
+                    "game_date": "",
+                    "season_label": "1968-1969",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                },
+                reconciliation_metadata,
+            )
+            self.assertEqual(reconciliation_result["venue_id"], "VEN-000124")
+            self.assertEqual(
+                reconciliation_result["venue_key"],
+                "madison-square-garden-1968",
+            )
 
             source_path = rehearsal / "schools" / "st-bonaventure" / "source-games.csv"
             rows = list(csv.DictReader(source_path.open(encoding="utf-8-sig", newline="")))
