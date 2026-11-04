@@ -27,6 +27,11 @@ from typing import Any
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
+from frozen_venue_authority import (
+    FrozenVenueSplitAuthorityError,
+    frozen_venue_split_freeze_bytes,
+    sealed_pre_ingest_semantic_delta,
+)
 from onboard_school import (
     run_gates, whitespace_errors, correction_gate_kwargs_from_manifest,
 )
@@ -153,6 +158,28 @@ def correction_integration_freeze_bytes(
             "correction Integration Freeze identity does not match sealed release"
         )
     return payload
+
+
+def runtime_integration_freeze_bytes(
+    repo: Path,
+    school_key: str,
+    manifest: dict[str, Any],
+    approved: dict[str, Any],
+) -> tuple[bytes | None, bytes | None]:
+    """Return correction and generic runtime Freeze authority for release gates."""
+
+    correction = correction_integration_freeze_bytes(repo, school_key, manifest)
+    if correction is not None:
+        return correction, correction
+    try:
+        split = frozen_venue_split_freeze_bytes(
+            repo,
+            school_key,
+            allowed_semantic_delta=sealed_pre_ingest_semantic_delta(approved),
+        )
+    except FrozenVenueSplitAuthorityError as exc:
+        raise WorkflowError(str(exc)) from exc
+    return None, split
 
 
 def create_production_proof_repository(
@@ -488,8 +515,8 @@ def prepare(
             "the approved plan did not publish a team JSON file; use a data-only PR procedure instead"
         )
 
-    correction_freeze = correction_integration_freeze_bytes(
-        repo, school_key, manifest
+    correction_freeze, runtime_freeze = runtime_integration_freeze_bytes(
+        repo, school_key, manifest, approved
     )
     paths = (
         verify_committed_change_boundary(repo, manifest, committed_successor_sha)
@@ -499,6 +526,7 @@ def prepare(
     print("=== final local release gate ===")
     run_gates(
         repo, school_key, paths, include_tests=True,
+        approved_plan=approved,
         **correction_gate_kwargs_from_manifest(manifest, school_key),
     )
     branch = git(repo, "branch", "--show-current").strip()
@@ -553,6 +581,11 @@ def prepare(
         "correction_integration_freeze_sha256": (
             hashlib.sha256(correction_freeze).hexdigest()
             if correction_freeze is not None
+            else None
+        ),
+        "runtime_integration_freeze_sha256": (
+            hashlib.sha256(runtime_freeze).hexdigest()
+            if runtime_freeze is not None
             else None
         ),
     }
@@ -648,8 +681,9 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
     )
 
     manifest = load_json(artifacts / "release-manifest.json")
-    correction_freeze = correction_integration_freeze_bytes(
-        repo, school_key, manifest
+    approved_plan = load_json(artifacts / "approved-plan.json")
+    correction_freeze, runtime_freeze = runtime_integration_freeze_bytes(
+        repo, school_key, manifest, approved_plan
     )
     expected_freeze_hash = state.get("correction_integration_freeze_sha256")
     actual_freeze_hash = (
@@ -660,6 +694,16 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
     if expected_freeze_hash != actual_freeze_hash:
         raise WorkflowError(
             "correction Integration Freeze changed after Preview approval"
+        )
+    expected_runtime_hash = state.get("runtime_integration_freeze_sha256")
+    actual_runtime_hash = (
+        hashlib.sha256(runtime_freeze).hexdigest()
+        if runtime_freeze is not None
+        else None
+    )
+    if expected_runtime_hash != actual_runtime_hash:
+        raise WorkflowError(
+            "runtime Integration Freeze authority changed after Preview approval"
         )
 
     display = program_display_name(repo, school_key)
@@ -702,11 +746,12 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
             proof_repo,
             merge_sha,
             school_key=school_key,
-            correction_freeze=correction_freeze,
+            correction_freeze=runtime_freeze,
         )
         print("\n=== merged-main reproducibility ===")
         run_gates(
             proof_repo, school_key, [], include_tests=True,
+            approved_plan=approved_plan,
             **correction_gate_kwargs_from_manifest(manifest, school_key),
         )
         deployment = wait_for_deployment(
