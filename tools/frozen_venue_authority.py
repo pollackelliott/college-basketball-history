@@ -161,17 +161,177 @@ def sealed_pre_ingest_semantic_delta(
     return result
 
 
+FINAL_SOURCE_SEMANTIC_FIELDS = frozenset({
+    "season_label",
+    "game_date",
+    "team_score",
+    "opponent_score",
+    "played_result",
+    "overtime_periods",
+    "curated_site_type",
+    "curated_venue_name",
+    "city",
+    "state",
+    "event_or_tournament",
+    "curated_game_type",
+    "curated_postseason_round",
+    "source_opponent_label",
+    "raw_text",
+})
+
+POST_RECONCILIATION_NORMALIZATION_FIELDS = frozenset({
+    "game_date",
+    "score",
+    "overtime_periods",
+    "site_type",
+    "game_type",
+    "postseason_round",
+    "result_winner_team_key",
+})
+
+DIRECT_POST_RECONCILIATION_PATCH_CATEGORIES = frozenset({
+    "discrepancy",
+    "conditional_discrepancy",
+})
+
+
+def _canonical_review_value(row: dict[str, str], field_name: str) -> str:
+    if field_name == "score":
+        return f"{row.get('team_a_score', '')}-{row.get('team_b_score', '')}"
+    return row.get(field_name, "")
+
+
+def _venue_names_by_key(repo_root: Path) -> dict[str, str]:
+    """Mirror onboarding_plan._venue_maps canonical-name selection."""
+
+    names_by_key: dict[str, str] = {}
+    for path in sorted((repo_root / "schools").glob("*/venues.csv")):
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                key = row.get("venue_key", "").strip()
+                name = row.get("canonical_name", "").strip()
+                if key and name:
+                    names_by_key.setdefault(key, name)
+    return names_by_key
+
+
+def _normalized_source_projection(
+    canonical: dict[str, str],
+    school_key: str,
+    field_name: str,
+    expected: str,
+    venue_names: dict[str, str],
+) -> dict[str, str]:
+    """Project exactly what onboarding_plan.set_source_field writes.
+
+    Site normalization also mirrors the immediately-following
+    _sync_site_metadata_to_source call. This function is deliberately pure and
+    dependency-neutral so final no-op authentication cannot import onboarding_plan.
+    """
+
+    if field_name not in POST_RECONCILIATION_NORMALIZATION_FIELDS:
+        raise FrozenVenueSplitAuthorityError(
+            f"sealed post-reconciliation normalization has unsupported field {field_name!r}"
+        )
+
+    current = _canonical_review_value(canonical, field_name)
+    if current != expected:
+        raise FrozenVenueSplitAuthorityError(
+            f"sealed canonical {field_name} no longer matches"
+        )
+
+    team_a = canonical.get("team_a_key", "").strip()
+    team_b = canonical.get("team_b_key", "").strip()
+    if field_name in {"score", "site_type", "result_winner_team_key"}:
+        if school_key not in {team_a, team_b}:
+            raise FrozenVenueSplitAuthorityError(
+                "target school is absent from the sealed canonical game"
+            )
+
+    if field_name == "score":
+        try:
+            score_a, score_b = expected.split("-", 1)
+            number_a = int(score_a)
+            number_b = int(score_b)
+        except (ValueError, TypeError) as exc:
+            raise FrozenVenueSplitAuthorityError(
+                "sealed canonical score is not an exact integer score pair"
+            ) from exc
+        if school_key == team_a:
+            team_score, opponent_score = score_a, score_b
+            team_number, opponent_number = number_a, number_b
+        else:
+            team_score, opponent_score = score_b, score_a
+            team_number, opponent_number = number_b, number_a
+        played_result = (
+            "W"
+            if team_number > opponent_number
+            else "L"
+            if opponent_number > team_number
+            else "T"
+        )
+        return {
+            "team_score": team_score,
+            "opponent_score": opponent_score,
+            "played_result": played_result,
+        }
+
+    if field_name == "site_type":
+        if expected in {"NEUTRAL", "UNKNOWN", ""}:
+            normalized = expected or "UNKNOWN"
+        elif expected == "TEAM_A_HOME":
+            normalized = (
+                "SOURCE_PROGRAM_HOME" if team_a == school_key else "OPPONENT_HOME"
+            )
+        elif expected == "TEAM_B_HOME":
+            normalized = (
+                "SOURCE_PROGRAM_HOME" if team_b == school_key else "OPPONENT_HOME"
+            )
+        else:
+            raise FrozenVenueSplitAuthorityError(
+                f"unsupported canonical site_type {expected!r}"
+            )
+        venue_key = canonical.get("venue_key", "").strip()
+        return {
+            "curated_site_type": normalized,
+            "curated_venue_name": venue_names.get(venue_key, "") if venue_key else "",
+            "city": canonical.get("site_city", ""),
+            "state": canonical.get("site_state", ""),
+        }
+
+    if field_name == "game_type":
+        return {"curated_game_type": expected}
+    if field_name == "postseason_round":
+        return {"curated_postseason_round": expected}
+    if field_name == "result_winner_team_key":
+        if expected in {"[TIE]", ""}:
+            played_result = "T"
+        elif expected == school_key:
+            played_result = "W"
+        elif expected in {team_a, team_b}:
+            played_result = "L"
+        else:
+            raise FrozenVenueSplitAuthorityError(
+                f"unsupported canonical result_winner_team_key {expected!r}"
+            )
+        return {"played_result": played_result}
+
+    return {field_name: expected}
+
+
 def sealed_post_reconciliation_semantic_delta(
     repo_root: Path,
     school_key: str,
     approved: dict[str, Any] | None,
 ) -> dict[str, dict[str, str]]:
-    """Derive exact frozen-source semantics after the sealed reconciliation finishes.
+    """Derive exact frozen-source semantics after sealed reconciliation finishes.
 
-    The ordinary runtime path must continue to authenticate against only the
-    pre-ingest delta. This wider final-state delta exists solely for post-apply
-    package/no-op verification, after the sealed transaction has already applied
-    owner-approved source normalizations.
+    Pre-ingest authority stays deliberately narrow. Final no-op verification may
+    additionally authenticate only source mutations deterministically produced by
+    the sealed permanent reconciliation transaction: the complete supported
+    NORMALIZE_SOURCE_TO_CANONICAL field universe, exact direct source patches, and
+    source-consistency patches in their real execution order.
     """
 
     result = {
@@ -207,31 +367,58 @@ def sealed_post_reconciliation_semantic_delta(
             "sealed post-reconciliation semantic delta requires a decision list"
         )
 
-    canonical_field_by_review_field = {
-        "game_date": "game_date",
-        "game_type": "game_type",
-        "postseason_round": "postseason_round",
-        "site_type": "site_type",
-    }
-    source_field_by_review_field = {
-        "game_date": "game_date",
-        "game_type": "curated_game_type",
-        "postseason_round": "curated_postseason_round",
-    }
+    venue_names = _venue_names_by_key(repo_root)
+    source_consistency_items: list[dict[str, Any]] = []
+
+    def apply_exact_patch(
+        item: dict[str, Any],
+        patch: dict[str, Any],
+        *,
+        allow_raw_text: bool = False,
+    ) -> None:
+        source_id = str(item.get("source_game_id", "")).strip()
+        guarded = {
+            field: str(value)
+            for field, value in patch.items()
+            if field in FINAL_SOURCE_SEMANTIC_FIELDS
+        }
+        if "raw_text" in guarded and not allow_raw_text:
+            raise FrozenVenueSplitAuthorityError(
+                f"{item.get('decision_id', '')}: sealed source patch may not mutate raw_text"
+            )
+        if guarded and not source_id:
+            raise FrozenVenueSplitAuthorityError(
+                "sealed post-reconciliation source patch has a blank source_game_id"
+            )
+        if guarded:
+            result.setdefault(source_id, {}).update(guarded)
 
     for item in decisions:
         if not isinstance(item, dict):
             raise FrozenVenueSplitAuthorityError(
                 "sealed post-reconciliation semantic delta contains an invalid decision"
             )
-        source_id = str(item.get("source_game_id", "")).strip()
+        category = str(item.get("category", "")).strip()
         action = str(item.get("decision", "")).strip()
+        source_id = str(item.get("source_game_id", "")).strip()
         field_name = str(item.get("field_name", "")).strip()
+        patch = item.get("source_patch", {})
+        if patch is None:
+            patch = {}
+        if not isinstance(patch, dict):
+            raise FrozenVenueSplitAuthorityError(
+                f"{item.get('decision_id', '')}: source_patch is not an object"
+            )
 
-        if (
-            action == "NORMALIZE_SOURCE_TO_CANONICAL"
-            and field_name in canonical_field_by_review_field
-        ):
+        if category == "source_consistency":
+            source_consistency_items.append(item)
+            continue
+
+        if action == "NORMALIZE_SOURCE_TO_CANONICAL":
+            if category not in DIRECT_POST_RECONCILIATION_PATCH_CATEGORIES:
+                raise FrozenVenueSplitAuthorityError(
+                    f"{item.get('decision_id', '')}: normalization is not a discrepancy decision"
+                )
             if not source_id:
                 raise FrozenVenueSplitAuthorityError(
                     "sealed post-reconciliation normalization has a blank source_game_id"
@@ -242,71 +429,119 @@ def sealed_post_reconciliation_semantic_delta(
                 raise FrozenVenueSplitAuthorityError(
                     f"sealed post-reconciliation normalization references unknown canonical game {game_id}"
                 )
-            canonical_field = canonical_field_by_review_field[field_name]
+
+            canonical_patch = item.get("canonical_patch", {})
+            if canonical_patch is None:
+                canonical_patch = {}
+            if not isinstance(canonical_patch, dict):
+                raise FrozenVenueSplitAuthorityError(
+                    f"{item.get('decision_id', '')}: canonical_patch is not an object"
+                )
+            if (
+                field_name == "site_type"
+                and set(canonical_patch)
+                & {"venue_key", "venue_id", "site_city", "site_state"}
+                and not {"curated_venue_name", "city", "state"} <= set(patch)
+            ):
+                raise FrozenVenueSplitAuthorityError(
+                    f"{item.get('decision_id', '')}: cannot reconstruct pre-patch site metadata"
+                )
+
             expected = str(item.get("canonical_value", ""))
-            if canonical.get(canonical_field, "") != expected:
-                raise FrozenVenueSplitAuthorityError(
-                    f"{item.get('decision_id', '')}: sealed canonical {field_name} no longer matches"
-                )
-
-            if field_name == "site_type":
-                team_a = canonical.get("team_a_key", "").strip()
-                team_b = canonical.get("team_b_key", "").strip()
-                if school_key not in {team_a, team_b}:
-                    raise FrozenVenueSplitAuthorityError(
-                        f"{item.get('decision_id', '')}: target school is absent "
-                        "from the sealed canonical game"
-                    )
-                if expected in {"NEUTRAL", "UNKNOWN", ""}:
-                    normalized = expected or "UNKNOWN"
-                elif expected == "TEAM_A_HOME":
-                    normalized = (
-                        "SOURCE_PROGRAM_HOME"
-                        if team_a == school_key
-                        else "OPPONENT_HOME"
-                    )
-                elif expected == "TEAM_B_HOME":
-                    normalized = (
-                        "SOURCE_PROGRAM_HOME"
-                        if team_b == school_key
-                        else "OPPONENT_HOME"
-                    )
-                else:
-                    raise FrozenVenueSplitAuthorityError(
-                        f"{item.get('decision_id', '')}: unsupported canonical "
-                        f"site_type {expected!r}"
-                    )
-                source_field = "curated_site_type"
-            else:
-                source_field = source_field_by_review_field[field_name]
-                normalized = expected
-
-            result.setdefault(source_id, {})[source_field] = normalized
-
-        patch = item.get("source_patch", {})
-        if patch is None:
-            patch = {}
-        if not isinstance(patch, dict):
-            raise FrozenVenueSplitAuthorityError(
-                f"{item.get('decision_id', '')}: source_patch is not an object"
+            projection = _normalized_source_projection(
+                canonical,
+                school_key,
+                field_name,
+                expected,
+                venue_names,
             )
-        frozen_patch = {
-            field: str(value)
-            for field, value in patch.items()
-            if field in PRE_INGEST_SEMANTIC_FIELDS
-        }
-        if (
-            frozen_patch
-            and str(item.get("category", "")).strip()
-            in {"discrepancy", "conditional_discrepancy"}
-        ):
-            if not source_id:
-                raise FrozenVenueSplitAuthorityError(
-                    "sealed post-reconciliation source patch has a blank source_game_id"
+            result.setdefault(source_id, {}).update(projection)
+
+        if category in DIRECT_POST_RECONCILIATION_PATCH_CATEGORIES:
+            # Generic reconciliation writes source_patch after normalization.
+            apply_exact_patch(item, patch)
+        elif category == "ncaa_round_patch":
+            if action == "APPLY_NCAA_ROUND_PATCH" and "curated_postseason_round" in patch:
+                game_id = str(item.get("canonical_game_id", "")).strip()
+                canonical = canonical_by_id.get(game_id)
+                desired = str(patch["curated_postseason_round"])
+                if canonical is None or canonical.get("postseason_round", "") != desired:
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: sealed canonical postseason_round no longer matches"
+                    )
+                apply_exact_patch(
+                    item,
+                    {"curated_postseason_round": desired},
                 )
-            # Generic discrepancy reconciliation applies source_patch after any
-            # normalization, so mirror that exact deterministic ordering.
-            result.setdefault(source_id, {}).update(frozen_patch)
+
+        # Every other guarded source patch must already have been authenticated
+        # by the narrower pre-ingest path. Anything else is a new/unsupported
+        # post-freeze mutation and therefore fails closed.
+        for field, value in patch.items():
+            if field not in FINAL_SOURCE_SEMANTIC_FIELDS:
+                continue
+            if (
+                category in DIRECT_POST_RECONCILIATION_PATCH_CATEGORIES
+                or category == "source_consistency"
+                or (
+                    category == "ncaa_round_patch"
+                    and field == "curated_postseason_round"
+                    and action == "APPLY_NCAA_ROUND_PATCH"
+                )
+            ):
+                continue
+            if result.get(source_id, {}).get(field) != str(value):
+                raise FrozenVenueSplitAuthorityError(
+                    f"{item.get('decision_id', '')}: unsupported sealed final source mutation {field!r}"
+                )
+
+    # Permanent reconciliation processes source-consistency decisions only after
+    # all discrepancy normalization/source-patch work, regardless of plan order.
+    for item in source_consistency_items:
+        decision_id = str(item.get("decision_id", ""))
+        if str(item.get("decision", "")).strip() != "APPLY_SOURCE_CONSISTENCY_PATCH":
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: unsupported source-consistency decision"
+            )
+        patch = item.get("source_patch", {})
+        if not isinstance(patch, dict) or not patch or set(patch) - {
+            "team_score",
+            "opponent_score",
+            "played_result",
+        }:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: invalid sealed source-consistency patch"
+            )
+        expected_state = item.get("source_consistency_expected", {})
+        if not isinstance(expected_state, dict):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: invalid source-consistency expected state"
+            )
+        projected = {
+            "team_score": str(expected_state.get("team_score", "")),
+            "opponent_score": str(expected_state.get("opponent_score", "")),
+            "played_result": str(expected_state.get("played_result", "")),
+        }
+        projected.update({field: str(value) for field, value in patch.items()})
+        try:
+            team_number = int(projected["team_score"])
+            opponent_number = int(projected["opponent_score"])
+        except ValueError as exc:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: source-consistency score is not integer"
+            ) from exc
+        implied = (
+            "W"
+            if team_number > opponent_number
+            else "L"
+            if opponent_number > team_number
+            else "T"
+        )
+        if projected["played_result"].strip().upper() != implied:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: source-consistency patch remains contradictory"
+            )
+        apply_exact_patch(item, patch)
 
     return result
 
