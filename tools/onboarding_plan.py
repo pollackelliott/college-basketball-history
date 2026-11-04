@@ -164,6 +164,19 @@ NEW_GAME_SITE_PATCH_VALUES = {
     "NEUTRAL",
 }
 NEW_GAME_DATE_PATCH_ACTIONS = {"APPLY_SOURCE_DATE_PATCH"}
+PATCH_CAPABLE_DECISION_CATEGORIES = {
+    "identity",
+    "discrepancy",
+    "conditional_discrepancy",
+    "canonical_site_patch",
+    "correction_site_patch",
+    "ncaa_round_patch",
+    "new_game_site_patch",
+    "new_game_date_patch",
+    "source_consistency",
+    "postseason_classification",
+    "accomplishments",
+}
 OWNER_FINAL_DIRECTIVE_RE = re.compile(
     r"^- Owner-final Implementation reconciliation directive [—-] "
     r"(?P<source_game_id>[A-Za-z0-9._-]+) [—-] "
@@ -4566,6 +4579,14 @@ def approve_plan(
         if unknown_source:
             raise WorkflowError(
                 f"{decision_id}: forbidden source patch fields: {', '.join(unknown_source)}"
+            )
+        if (
+            (canonical_patch or source_patch)
+            and item.get("category") not in PATCH_CAPABLE_DECISION_CATEGORIES
+        ):
+            raise WorkflowError(
+                f"{decision_id}: historical patches are not valid on "
+                f"{item.get('category', '')} decisions"
             )
         sealed = dict(item)
         sealed.update(
