@@ -6898,10 +6898,10 @@ def apply_reconciliation_decisions(
         if source_patch_fields & {"curated_site_type", "curated_venue_name", "city", "state"}:
             if target_venue_metadata is None or venue_names is None:
                 target_venue_metadata, venue_names = _venue_maps(
-                        repo,
-                        school_key,
-                        approved_plan=approved,
-                    )
+                    repo,
+                    school_key,
+                    approved_plan=approved,
+                )
             _sync_explicit_source_site_patch_to_canonical(
                 source,
                 canonical,
