@@ -1,0 +1,61 @@
+{
+  "changed_file_sha256": {
+    "tests/test_site_historical_season_coverage.py": "5a3233fd203d0a63f02162d146df0ad29a36491f68e437c92730c1dab0359dfd",
+    "tools/build_site_data.py": "00fd0358a714f1c3b581df49d8ffed0b8cfdbad77f6a54beec101b10b38b3d9c"
+  },
+  "changed_paths": [
+    "tests/test_site_historical_season_coverage.py",
+    "tools/build_site_data.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "40735efa31adc09e4b89072e3e3cc5142e3e14c8",
+  "main_changed_paths": [
+    "tests/test_site_historical_season_coverage.py",
+    "tools/build_site_data.py"
+  ],
+  "merge_base_sha": "f33368f93bb73a9b6594b50d4e979406164c08e5",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "prepared_commit_sha": "2df04571c006505ba72736d9c970e656d502ee18",
+  "prepared_parents": [
+    "40735efa31adc09e4b89072e3e3cc5142e3e14c8",
+    "009c77eb8f294ac380e97e6bb0e5adef1ead4ccf"
+  ],
+  "prepared_tree_sha": "09194f076f51aa68b59c446105aaab0881316ec8",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "03bf9fb9dde53bda109ba3ecd54c0aa7470e9933f06198a6e935983666bea4b7",
+    "data/reference/venue-names.csv": "98344788c918f0aeb8ac7776f991d31739007c92d354951a418788fc7fa17cf6",
+    "data/reference/venues.csv": "e334b9624f53a5990698801311823b0bffae85c0db1d692edd1dcc272aad87af",
+    "schools/st-bonaventure/conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "schools/st-bonaventure/notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "schools/st-bonaventure/opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "schools/st-bonaventure/source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "schools/st-bonaventure/source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "schools/st-bonaventure/venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "protected_main_sha": "009c77eb8f294ac380e97e6bb0e5adef1ead4ccf",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/st-bonaventure/conferences.csv",
+    "schools/st-bonaventure/notes.md",
+    "schools/st-bonaventure/opponents.csv",
+    "schools/st-bonaventure/source-games.csv",
+    "schools/st-bonaventure/source-notes.md",
+    "schools/st-bonaventure/venues.csv"
+  ]
+}
