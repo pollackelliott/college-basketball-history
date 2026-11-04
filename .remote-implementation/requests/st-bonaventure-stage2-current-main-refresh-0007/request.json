@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0007",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "9f226fbc1d2b47e9b7e6a97d3964f3408283f06b",
+  "previous_control_state_sha256": "3a6c87edb7773fb492e88bfe0dc701ccd4b3ab6014876f5ab2d73f41e424020c",
+  "expected_protected_main_sha": "f33368f93bb73a9b6594b50d4e979406164c08e5",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "dc8b5da7789e24ddaed77b30132694fff2664763",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0006/successor-manifest.json",
+    "sha256": "12149826a7fd28a886cabca0589eb6604e6db8f50dcb9180c528f9fde40ea115"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "CONTROL CENTER AUTHORIZATION — ST. BONAVENTURE STAGE 2 CURRENT-MAIN REFRESH. Owner supplied exact Control Center authorization for this SAME existing lane to execute exactly one STAGE2_CURRENT_MAIN_REFRESH from onboarding predecessor dc8b5da7789e24ddaed77b30132694fff2664763 onto protected main f33368f93bb73a9b6594b50d4e979406164c08e5 with exact merge base ed48aad57ae48efab33b33b724c13446b28ac17b, independently verified target-only 9 / intervening-main 5 / overlap 0 / no intervening schools/st-bonaventure path, and explicit authority only for guarded refresh mechanics plus independent fresh verification. No historical, Research/Integration Freeze change, recommendation-map, stale decision-universe carry-forward, arbitrary Stage 2 repair, Owner Gate 1/2, release, or merge authority."
+  },
+  "creation_provenance": {
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact post-PR #454 Control Center-authorized current-main refresh",
+    "authorization": "Protected main advanced solely through merged generic tooling PR #454 from ed48aad57ae48efab33b33b724c13446b28ac17b to f33368f93bb73a9b6594b50d4e979406164c08e5. Immediately before request creation the onboarding predecessor remains dc8b5da7789e24ddaed77b30132694fff2664763, global control is IDLE/recovery_required=false, merge base is ed48aad57ae48efab33b33b724c13446b28ac17b, target-only path count is 9, intervening-main path count is 5, overlap is 0, and intervening main changes no schools/st-bonaventure path. This request binds the independently fresh-verified prior refresh successor -0006 and preserves immutable Integration Freeze/semantic authority. It carries no Stage 2 census or proposal authority; a fresh census must be generated only after this refresh independently verifies."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
