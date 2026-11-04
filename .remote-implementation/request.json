@@ -1,40 +1,37 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-census-0006",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "st-bonaventure-stage2-proposal-0002",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "adcdb0185e3ff4e088a43c3d4ed14bbcb87118c3",
-  "previous_control_state_sha256": "3efed6be3e0038c24947cd75ab2c04b14a7b1c2bb956f4ee26ea1bb2cbc4d0c8",
+  "previous_control_state_commit": "90d7304af28e5c5891a3feca083c50ba08f6bf7b",
+  "previous_control_state_sha256": "9bae1f2812475b393e2e260c2bddc9c5232b4173dd37066d714427388fe16f1e",
   "expected_protected_main_sha": "556ca58ceea9ee5c93aaf1dcf0134129b0a0f5eb",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "e6bac7914b5079e1afdcc8fcf911633394a4fc72",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
-    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
-  },
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0004/successor-manifest.json",
-    "sha256": "aed8f3681e428eb082725ca1c01a1e0db5deaf0b45e8d4afcaf4f1902200c6bc"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0006/checkpoint-manifest.json",
+    "sha256": "03fd3f8a907924ec35565f938d67ccafc7dfe03d9d7cf513adfb8a9458fb492f"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a"
+  },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census after independently verified PR #449 current-main refresh",
-    "authorization": "Control Center explicitly authorized refresh -0004, one new unique Stage 2 census, exact/substantive equivalence confirmation, preservation of the completed 232-decision classification and recommendation map where unchanged, and new proposal rehearsal -0002 through OWNER_GATE_1_READY. Prior census -0005 remains immutable evidence and is not replayed. The frozen STB-1982-83-028 date directive and the authenticated 53-row Madison Square Garden split remain pending/preserved exactly. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, opponent-display normalization replay, or unrelated tracked mutation authority is granted."
+    "origin": "ChatGPT St. Bonaventure serialized Implementation Stage 2 — exact proposal rehearsal after PR #449 frozen venue-split runtime-authority propagation repair",
+    "authorization": "Existing Control-Center-confirmed St. Bonaventure Stage 2 authority persists through OWNER_GATE_1_READY. Census st-bonaventure-stage2-census-0006 is independently fresh-verified PASS and exactly preserves the prior 232-decision universe with 0 blockers, 0 warnings and decision-universe SHA 7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6. This request rehearses the mechanically rebound complete recommendation map; its substantive recommendation content is identical to proposal -0001 and only its protected-main/target/current-main-refresh authority metadata changed. It preserves all nine owner-final directives, including NEW-GAME-DATE-PATCH-STB-1982-83-028 as APPLY_SOURCE_DATE_PATCH with game_date 1983-03-09, and must exercise PR #449's authenticated frozen 53-row Madison Square Garden split so STB-1968-69-018 resolves to madison-square-garden-1968 / VEN-000124. No new historical decision, Owner Gate 1 approval/fill, sealing, apply, Preview, release, merge, Production, recovery, or tracked basketball mutation authority is included."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
