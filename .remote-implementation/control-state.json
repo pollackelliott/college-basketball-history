@@ -304,18 +304,19 @@
     "st-bonaventure-stage2-proposal-0001",
     "st-bonaventure-stage2-current-main-refresh-0004",
     "st-bonaventure-stage2-census-0006",
-    "st-bonaventure-stage2-proposal-0003"
+    "st-bonaventure-stage2-proposal-0003",
+    "st-bonaventure-stage2-current-main-refresh-0006"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "ed48aad57ae48efab33b33b724c13446b28ac17b",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:41863330589:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "st-bonaventure-stage2-current-main-refresh-0006",
+  "active_request_sha256": "838198eadcfa58e352292e721f7ed2087477cb14d2e40ede55419a9f10c5e0e2",
+  "active_school_key": "st-bonaventure",
+  "active_target_branch": "data/st-bonaventure-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -638,8 +639,11 @@
     "target_branch": "data/st-bonaventure-onboarding",
     "target_sha": "e6bac7914b5079e1afdcc8fcf911633394a4fc72"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41863330589",
+  "lock_acquisition_request_commit": "35d6c45407aa73da0c8d77bd96186eaebbac4f9e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
