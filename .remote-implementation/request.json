@@ -4,8 +4,8 @@
   "request_id": "st-bonaventure-stage2-current-main-refresh-0011",
   "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "07448a19732b696db149f30e707c20ad16f12718",
-  "previous_control_state_sha256": "ba55bd6b1297780603041ed369153c9ae595d79fb366d430efa0f4890899f096",
+  "previous_control_state_commit": "5636a167718d5abf18c5c916cfe9d6b02ddf70f1",
+  "previous_control_state_sha256": "bd3a7a5b40a47ccf88caccc33fb125a4b98d643e1fcabeefeb9bbc6472775acc",
   "expected_protected_main_sha": "0c66967db740fb935b1f11f17b223b6a19d8a858",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "0f0f25f0a87010492f02db94955f2f3b84c7b058",
@@ -30,7 +30,7 @@
   },
   "creation_provenance": {
     "origin": "St. Bonaventure serialized Implementation Stage 2 — exact post-PR #458 Control Center-authorized current-main refresh",
-    "authorization": "PR #458 merged exact reviewed head ccbd398a05a389052c722d8bd9156ee369b40021 into protected main as 0c66967db740fb935b1f11f17b223b6a19d8a858 with parents d64630b7269c6c911ced0c65c5eb0c288541c8cf and ccbd398a05a389052c722d8bd9156ee369b40021 after both required exact-head workflows and Vercel passed. Immediately before request creation the onboarding predecessor remains 0f0f25f0a87010492f02db94955f2f3b84c7b058; merge base is d64630b7269c6c911ced0c65c5eb0c288541c8cf; target-only paths are the same 9 package/reference paths; intervening-main paths are tests/test_reused_venue_name_date_resolution.py, tools/frozen_venue_authority.py, tools/ingest_school.py; overlap is 0; protected main changes no schools/st-bonaventure path; global control is IDLE/recovery_required=false/transaction COMPLETE. This request binds the independently fresh-verified refresh -0010 successor and preserves immutable Integration Freeze/semantic authority. A fresh Stage 2 census must regenerate after this refresh; the prior 232-decision universe is not carried forward by assertion."
+    "authorization": "PR #458 merged exact reviewed head ccbd398a05a389052c722d8bd9156ee369b40021 into protected main as 0c66967db740fb935b1f11f17b223b6a19d8a858 with parents d64630b7269c6c911ced0c65c5eb0c288541c8cf and ccbd398a05a389052c722d8bd9156ee369b40021 after both required exact-head workflows and Vercel passed. Immediately before request creation the onboarding predecessor remains 0f0f25f0a87010492f02db94955f2f3b84c7b058; merge base is d64630b7269c6c911ced0c65c5eb0c288541c8cf; target-only paths are the same 9 package/reference paths; intervening-main paths are tests/test_reused_venue_name_date_resolution.py, tools/frozen_venue_authority.py, tools/ingest_school.py; overlap is 0; protected main changes no schools/st-bonaventure path; global control is IDLE/recovery_required=false/transaction COMPLETE. This request binds the independently fresh-verified refresh -0010 successor and preserves immutable Integration Freeze/semantic authority. A fresh Stage 2 census must regenerate after this refresh; the prior 232-decision universe is not carried forward by assertion. Prior activation attempt failed pre-acceptance with STOP: STALE_CONTROL_PREDECESSOR because an archive-only control commit advanced the control branch before the active request commit. Durable control remained IDLE/COMPLETE with recovery_required=false and request -0011 absent from accepted/consumed/abandoned IDs. This commit corrects only the exact predecessor binding; all substantive refresh authority and topology remain unchanged."
   },
   "authority": {
     "phase0": false,
