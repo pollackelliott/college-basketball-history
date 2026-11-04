@@ -21,6 +21,9 @@ from remote_implementation_release_preview import (
     verify_release_preview_authority,
     verify_pr_checks_and_preview,
 )
+from remote_implementation_release_readiness import (
+    verify_release_readiness_authority,
+)
 
 
 def require(condition: bool, code: str) -> None:
@@ -49,6 +52,52 @@ def matched(document: dict, expected: dict, label: str) -> None:
             document.get(name) == value,
             "GATE2_%s_%s_MISMATCH" % (label, name.upper()),
         )
+
+
+def release_readiness_authority_from_gate2_request(
+    gate2_request: dict[str, Any],
+    control_head: str,
+    *,
+    repo: Path,
+) -> dict[str, Any]:
+    """Recover exact authenticated apply sidecars through immutable Gate 2 ancestry."""
+
+    preview_ref = gate2_request["release_preview_checkpoint"]
+    preview_checkpoint = bound_document(
+        control_head, preview_ref, repo=repo, label="PRODUCTION_PREVIEW_CHECKPOINT"
+    )
+    preview_request_path = (
+        Path(preview_ref["path"]).parent / "request.json"
+    ).as_posix()
+    preview_request_bytes = git_show_bytes(
+        control_head, preview_request_path, cwd=repo
+    )
+    require(
+        sha256_bytes(preview_request_bytes) == preview_checkpoint["request_sha256"],
+        "PRODUCTION_PREVIEW_SOURCE_REQUEST_HASH_MISMATCH",
+    )
+    preview_request = json.loads(preview_request_bytes)
+
+    readiness_ref = preview_request["release_readiness_checkpoint"]
+    readiness_checkpoint = bound_document(
+        control_head, readiness_ref, repo=repo, label="PRODUCTION_READINESS_CHECKPOINT"
+    )
+    readiness_request_path = (
+        Path(readiness_ref["path"]).parent / "request.json"
+    ).as_posix()
+    readiness_request_bytes = git_show_bytes(
+        control_head, readiness_request_path, cwd=repo
+    )
+    require(
+        sha256_bytes(readiness_request_bytes) == readiness_checkpoint["request_sha256"],
+        "PRODUCTION_READINESS_SOURCE_REQUEST_HASH_MISMATCH",
+    )
+    readiness_request = json.loads(readiness_request_bytes)
+    return verify_release_readiness_authority(
+        readiness_request,
+        control_head,
+        source_repo=repo,
+    )
 
 
 def verify_gate2_ready_chain(
@@ -284,12 +333,18 @@ def verify_gate2_approved_chain(
         ("release_manifest_sha256", chain["release_manifest_sha256"]),
     ):
         require(manifest.get(name) == expected, "PRODUCTION_GATE2_%s_MISMATCH" % name.upper())
+    readiness_authority = release_readiness_authority_from_gate2_request(
+        original,
+        control_head,
+        repo=repo,
+    )
     return {
         **chain,
         "owner_gate_2_approval_checkpoint_sha256": approval_ref["sha256"],
         "owner_gate_2_verification_sha256": ver_ref["sha256"],
         "gate2_request_id": original_id,
         "original_main_sha": original["expected_protected_main_sha"],
+        "release_readiness_authority": readiness_authority,
     }
 
 
@@ -344,11 +399,16 @@ def run_permanent_production_proof(
     merge = verify_exact_merge(request, authority, repo=repo)
     school, merge_sha = request["school_key"], request["merge_sha"]
     require(0 < timeout <= 1800, "PRODUCTION_TIMEOUT_INVALID")
+    readiness = authority["release_readiness_authority"]
+    sidecars = readiness["sidecars"]
+    approved = json.loads(sidecars["approved-plan.json"])
+    manifest = json.loads(sidecars["release-manifest.json"])
+    integration_freeze = sidecars["integration-freeze.json"]
     with tempfile.TemporaryDirectory(prefix=f"remote-prod-proof-{school}-") as temp:
         proof_repo = Path(temp) / "repository"
         release_school.create_production_proof_repository(
             repo, proof_repo, merge_sha, school_key=school,
-            correction_freeze=None,
+            correction_freeze=integration_freeze,
         )
         # The full PR delta includes prior Phase 0 data, not only sealed
         # apply's final changed-path population.
@@ -358,7 +418,12 @@ def run_permanent_production_proof(
         changed_paths = sorted(set(x.strip() for x in names.splitlines() if x.strip()))
         require(bool(changed_paths), "PRODUCTION_EMPTY_PR_DELTA")
         release_school.run_gates(
-            proof_repo, school, [], include_tests=True,
+            proof_repo,
+            school,
+            [],
+            include_tests=True,
+            approved_plan=approved,
+            **release_school.correction_gate_kwargs_from_manifest(manifest, school),
         )
         deployment = release_school.wait_for_deployment(
             proof_repo, release_school.repository_slug(repo),
