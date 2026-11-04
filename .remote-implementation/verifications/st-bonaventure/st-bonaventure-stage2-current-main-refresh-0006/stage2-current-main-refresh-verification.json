@@ -1,0 +1,57 @@
+{
+  "changed_file_sha256": {
+    "tests/test_correction_rehearsal_context.py": "6b12eb678a866f10ab69577a746df9c4dc5eb109d624be6b570a4a02fb3ab331",
+    "tests/test_onboarding_hardening.py": "3fe0a735b78dba5ebd0c9b977cbd0204eb396833a2600a82913468554cd83aac",
+    "tests/test_remote_implementation_production.py": "e40fd10a09763382b81710f36c5a90985ad0da39d4c5e31781926888dc4c3cc7",
+    "tests/test_reused_venue_name_date_resolution.py": "cbbaad217338ada7074ff8214517813ba459c73ccfc357cb76986276204fb9f5",
+    "tools/frozen_venue_authority.py": "d8f6a2993219043c885568e1d67f1975ad8857db74907ebeece7fb0dbde1657d",
+    "tools/ingest_school.py": "e4188c89fdac414b6a0c1fee11c214a6555663512ccf5e5c772e4b1410fdd55e",
+    "tools/onboard_school.py": "0f0a7565c468115fb6029bfa4bee03fc500b11fc72c056422781804571012e5d",
+    "tools/onboarding_hardening.py": "ed8749b2ce80c203fb286959072e5edaf77c36d74c32bc43389b30c69f9cc688",
+    "tools/release_school.py": "c05780c761eee328aede1e54ae5ab93c47a2bd67529a665042a12ee0d9533c26",
+    "tools/remote_implementation_production.py": "512dd9abf821582ff220f0b459934edb0dc48d415bd97a40fa7bfee540b2c678",
+    "tools/remote_implementation_release_readiness.py": "c00a4dd09699386d37c148bfc86aab6319a09b42e77d6071e5bed1d3c805c735"
+  },
+  "changed_paths": [
+    "tests/test_correction_rehearsal_context.py",
+    "tests/test_onboarding_hardening.py",
+    "tests/test_remote_implementation_production.py",
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py",
+    "tools/ingest_school.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_hardening.py",
+    "tools/release_school.py",
+    "tools/remote_implementation_production.py",
+    "tools/remote_implementation_release_readiness.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "556ca58ceea9ee5c93aaf1dcf0134129b0a0f5eb",
+  "package_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "prepared_parents": [
+    "e6bac7914b5079e1afdcc8fcf911633394a4fc72",
+    "ed48aad57ae48efab33b33b724c13446b28ac17b"
+  ],
+  "protected_main_sha": "ed48aad57ae48efab33b33b724c13446b28ac17b",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0006",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_predecessor_sha": "e6bac7914b5079e1afdcc8fcf911633394a4fc72",
+  "target_sha": "dc8b5da7789e24ddaed77b30132694fff2664763",
+  "target_tree_sha": "7965d9d969b6e90b1ff7b987015cb3e4552bdeba",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
