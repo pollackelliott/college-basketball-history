@@ -193,6 +193,11 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "canonical_game_id": "CBBG-SITE",
                     "field_name": "site_type",
                     "canonical_value": "TEAM_B_HOME",
+                    "source_patch": {
+                        "curated_venue_name": "Patched Arena",
+                        "city": "Patched City",
+                        "state": "PA",
+                    },
                 },
                 {
                     "decision_id": "OT",
@@ -203,6 +208,36 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "field_name": "overtime_periods",
                     "canonical_value": "1",
                 },
+                {
+                    "decision_id": "SCORE-NORM",
+                    "category": "discrepancy",
+                    "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                    "source_game_id": "SCORE-NORM",
+                    "canonical_game_id": "CBBG-SCORE",
+                    "field_name": "score",
+                    "canonical_value": "70-60",
+                },
+                {
+                    "decision_id": "RESULT-NORM",
+                    "category": "discrepancy",
+                    "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                    "source_game_id": "RESULT-NORM",
+                    "canonical_game_id": "CBBG-RESULT",
+                    "field_name": "result_winner_team_key",
+                    "canonical_value": "example",
+                },
+                {
+                    "decision_id": "SOURCE-CONSISTENCY",
+                    "category": "source_consistency",
+                    "decision": "APPLY_SOURCE_CONSISTENCY_PATCH",
+                    "source_game_id": "SOURCE-CONSISTENCY",
+                    "source_consistency_expected": {
+                        "team_score": "60",
+                        "opponent_score": "61",
+                        "played_result": "W",
+                    },
+                    "source_patch": {"played_result": "L"},
+                },
             ],
         }
         with tempfile.TemporaryDirectory() as temporary:
@@ -211,7 +246,9 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             path.parent.mkdir(parents=True)
             fields = [
                 "canonical_game_id", "team_a_key", "team_b_key", "game_date",
-                "game_type", "postseason_round", "site_type",
+                "team_a_score", "team_b_score", "result_winner_team_key",
+                "overtime_periods", "game_type", "postseason_round", "site_type",
+                "venue_key", "site_city", "site_state",
             ]
             rows = [
                 {
@@ -236,11 +273,28 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "canonical_game_id": "CBBG-SITE", "team_a_key": "opponent",
                     "team_b_key": "example", "game_date": "2010-03-09",
                     "game_type": "REGULAR_SEASON", "postseason_round": "",
-                    "site_type": "TEAM_B_HOME",
+                    "site_type": "TEAM_B_HOME", "venue_key": "arena",
+                    "site_city": "Canonical City", "site_state": "NY",
                 },
                 {
                     "canonical_game_id": "CBBG-OT", "team_a_key": "example",
                     "team_b_key": "opponent", "game_date": "1943-01-01",
+                    "game_type": "REGULAR_SEASON", "postseason_round": "",
+                    "site_type": "UNKNOWN", "overtime_periods": "1",
+                },
+                {
+                    "canonical_game_id": "CBBG-SCORE", "team_a_key": "opponent",
+                    "team_b_key": "example", "game_date": "2000-01-01",
+                    "team_a_score": "70", "team_b_score": "60",
+                    "result_winner_team_key": "opponent",
+                    "game_type": "REGULAR_SEASON", "postseason_round": "",
+                    "site_type": "UNKNOWN",
+                },
+                {
+                    "canonical_game_id": "CBBG-RESULT", "team_a_key": "opponent",
+                    "team_b_key": "example", "game_date": "2000-01-02",
+                    "team_a_score": "60", "team_b_score": "61",
+                    "result_winner_team_key": "example",
                     "game_type": "REGULAR_SEASON", "postseason_round": "",
                     "site_type": "UNKNOWN",
                 },
@@ -250,6 +304,13 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 writer.writeheader()
                 writer.writerows(rows)
 
+            venue_path = repo / "schools" / "example" / "venues.csv"
+            venue_path.parent.mkdir(parents=True)
+            with venue_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=["venue_key", "canonical_name"])
+                writer.writeheader()
+                writer.writerow({"venue_key": "arena", "canonical_name": "Canonical Arena"})
+
             self.assertEqual(
                 sealed_post_reconciliation_semantic_delta(repo, "example", approved),
                 {
@@ -257,7 +318,20 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "DATE": {"game_date": "1983-03-11"},
                     "TYPE": {"curated_game_type": "NIT"},
                     "ROUND": {"curated_postseason_round": "Championship"},
-                    "SITE": {"curated_site_type": "SOURCE_PROGRAM_HOME"},
+                    "SITE": {
+                        "curated_site_type": "SOURCE_PROGRAM_HOME",
+                        "curated_venue_name": "Patched Arena",
+                        "city": "Patched City",
+                        "state": "PA",
+                    },
+                    "OT": {"overtime_periods": "1"},
+                    "SCORE-NORM": {
+                        "team_score": "60",
+                        "opponent_score": "70",
+                        "played_result": "L",
+                    },
+                    "RESULT-NORM": {"played_result": "W"},
+                    "SOURCE-CONSISTENCY": {"played_result": "L"},
                 },
             )
 
@@ -271,6 +345,137 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "sealed canonical game_date no longer matches",
             ):
                 sealed_post_reconciliation_semantic_delta(repo, "example", approved)
+
+    def test_sealed_post_reconciliation_authenticates_complete_four_four_five_one_topology(self):
+        decisions = []
+        rows = []
+        fields = [
+            "canonical_game_id", "team_a_key", "team_b_key", "game_date",
+            "team_a_score", "team_b_score", "result_winner_team_key",
+            "overtime_periods", "game_type", "postseason_round", "site_type",
+            "venue_key", "site_city", "site_state",
+        ]
+        for index in range(4):
+            source_id = f"DATE-{index}"
+            game_id = f"CBBG-DATE-{index}"
+            value = f"1983-03-{11 + index:02d}"
+            decisions.append({
+                "decision_id": source_id,
+                "category": "discrepancy",
+                "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                "source_game_id": source_id,
+                "canonical_game_id": game_id,
+                "field_name": "game_date",
+                "canonical_value": value,
+            })
+            rows.append({
+                "canonical_game_id": game_id, "team_a_key": "example",
+                "team_b_key": "opponent", "game_date": value,
+                "game_type": "REGULAR_SEASON", "site_type": "UNKNOWN",
+            })
+        for index, value in enumerate(("1", "2", "1", "1")):
+            source_id = f"OT-{index}"
+            game_id = f"CBBG-OT-{index}"
+            decisions.append({
+                "decision_id": source_id,
+                "category": "discrepancy",
+                "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                "source_game_id": source_id,
+                "canonical_game_id": game_id,
+                "field_name": "overtime_periods",
+                "canonical_value": value,
+            })
+            rows.append({
+                "canonical_game_id": game_id, "team_a_key": "example",
+                "team_b_key": "opponent", "game_date": f"1949-01-{index + 1:02d}",
+                "overtime_periods": value, "game_type": "REGULAR_SEASON",
+                "site_type": "UNKNOWN",
+            })
+        for index, value in enumerate(("POSTSEASON", "NIT", "NIT", "NIT", "NIT")):
+            source_id = f"TYPE-{index}"
+            game_id = f"CBBG-TYPE-{index}"
+            decisions.append({
+                "decision_id": source_id,
+                "category": "discrepancy",
+                "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                "source_game_id": source_id,
+                "canonical_game_id": game_id,
+                "field_name": "game_type",
+                "canonical_value": value,
+            })
+            rows.append({
+                "canonical_game_id": game_id, "team_a_key": "example",
+                "team_b_key": "opponent", "game_date": f"2022-03-{index + 1:02d}",
+                "game_type": value, "site_type": "UNKNOWN",
+            })
+        decisions.append({
+            "decision_id": "SITE",
+            "category": "discrepancy",
+            "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+            "source_game_id": "SITE",
+            "canonical_game_id": "CBBG-SITE",
+            "field_name": "site_type",
+            "canonical_value": "TEAM_B_HOME",
+        })
+        rows.append({
+            "canonical_game_id": "CBBG-SITE", "team_a_key": "opponent",
+            "team_b_key": "example", "game_date": "2010-03-09",
+            "game_type": "REGULAR_SEASON", "site_type": "TEAM_B_HOME",
+        })
+        approved = {
+            "school_key": "example",
+            "approved_plan_hash": "d" * 64,
+            "decisions": decisions,
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            path = repo / "data" / "canonical" / "games.csv"
+            path.parent.mkdir(parents=True)
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=fields)
+                writer.writeheader()
+                writer.writerows(rows)
+            delta = sealed_post_reconciliation_semantic_delta(repo, "example", approved)
+        self.assertEqual(len(delta), 14)
+        self.assertEqual(
+            sum("game_date" in values for values in delta.values()), 4
+        )
+        self.assertEqual(
+            sum("overtime_periods" in values for values in delta.values()), 4
+        )
+        self.assertEqual(
+            sum("curated_game_type" in values for values in delta.values()), 5
+        )
+        self.assertEqual(
+            delta["SITE"]["curated_site_type"], "SOURCE_PROGRAM_HOME"
+        )
+
+    def test_sealed_post_reconciliation_rejects_unsealed_raw_text_patch(self):
+        approved = {
+            "school_key": "example",
+            "approved_plan_hash": "e" * 64,
+            "decisions": [{
+                "decision_id": "RAW",
+                "category": "discrepancy",
+                "decision": "KEEP_CANONICAL",
+                "source_game_id": "RAW",
+                "source_patch": {"raw_text": "changed"},
+            }],
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            path = repo / "data" / "canonical" / "games.csv"
+            path.parent.mkdir(parents=True)
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=["canonical_game_id"])
+                writer.writeheader()
+                writer.writerow({"canonical_game_id": "CBBG-X"})
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "may not mutate raw_text",
+            ):
+                sealed_post_reconciliation_semantic_delta(repo, "example", approved)
+
 
     def test_runtime_venue_map_uses_final_delta_only_for_post_apply_verification(self):
         approved = {
