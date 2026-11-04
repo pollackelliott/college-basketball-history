@@ -295,6 +295,8 @@ def integrate_approved_coverage(repo: Path, school_key: str) -> dict:
             raise ValueError("ACCOUNTING_CONTRADICTION_EXACT_OWNER_AUTHORITY_REQUIRED")
         accounting_rows.append(_accounting_row(entry, authority))
 
+    coverage_added = False
+    accounting_added = False
     if coverage_rows:
         coverage_path = repo / CSV_PATH
         existing_coverage = _load_csv(
@@ -310,6 +312,7 @@ def integrate_approved_coverage(repo: Path, school_key: str) -> dict:
                 raise ValueError("AGGREGATE_COVERAGE_EXISTING_ROW_CONFLICT")
             if not existing:
                 existing_coverage.append(row)
+                coverage_added = True
         _write_csv(coverage_path, FIELDS, existing_coverage)
 
     if accounting_rows:
@@ -327,12 +330,22 @@ def integrate_approved_coverage(repo: Path, school_key: str) -> dict:
                 raise ValueError("ACCOUNTING_CONTRADICTION_EXISTING_ROW_CONFLICT")
             if not existing:
                 existing_accounting.append(row)
+                accounting_added = True
         _write_csv(accounting_path, ACCOUNTING_FIELDS, existing_accounting)
 
+    if len(coverage_rows) == 1 and not accounting_rows:
+        row = coverage_rows[0]
+        return {
+            "status": "ADDED_VERIFIED_SEASON_COVERAGE" if coverage_added else "EXACT_ALREADY_PRESENT",
+            "season": row["season_label"],
+            "audit_sha256": row["stage1_audit_sha256"],
+        }
     return {
         "status": "ADDED_OR_VERIFIED_HISTORICAL_ACCOUNTING",
         "coverage_seasons": sorted(seen_coverage),
         "accounting_contradiction_seasons": sorted(seen_accounting),
         "coverage_rows": len(coverage_rows),
         "accounting_rows": len(accounting_rows),
+        "coverage_added": coverage_added,
+        "accounting_added": accounting_added,
     }
