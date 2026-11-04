@@ -39,7 +39,10 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from administrative_status import administrative_status_errors
-from frozen_venue_authority import load_frozen_venue_split_authority
+from frozen_venue_authority import (
+    load_frozen_venue_split_authority,
+    sealed_pre_ingest_semantic_delta,
+)
 from conference_reference import history_errors, registry_by_key
 from location_safety import (
     append_note,
@@ -508,29 +511,39 @@ def resolve_identity_override(
     return (REVIEW, "", f"UNKNOWN_IDENTITY_OVERRIDE:{override}")
 
 
-def load_sealed_identity_decisions(
+def load_sealed_plan_context(
     path: Path | None,
     school_key: str,
-) -> dict[str, str]:
-    """Load identity decisions from an owner-approved onboarding plan.
+) -> dict[str, Any] | None:
+    """Load one wrapper-authenticated sealed onboarding plan context."""
 
-    The generic onboarding wrapper verifies the plan hash and input fingerprint
-    before invoking ingestion.  Ingestion still validates every chosen canonical
-    identity against the source row's team pair and season before using it.
-    """
     if path is None:
-        return {}
+        return None
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
-        raise ValueError(f"cannot read identity decision plan {path}: {exc}") from exc
+        raise ValueError(f"cannot read sealed onboarding plan {path}: {exc}") from exc
     if payload.get("school_key") != school_key:
         raise ValueError(
-            "identity decision plan school_key does not match the ingestion target"
+            "sealed onboarding plan school_key does not match the ingestion target"
         )
-    if not payload.get("approved_plan_hash"):
-        raise ValueError("identity decision plan is not sealed")
+    if not re.fullmatch(
+        r"[0-9a-f]{64}",
+        str(payload.get("approved_plan_hash", "")).strip(),
+    ):
+        raise ValueError("sealed onboarding plan has no valid approved_plan_hash")
+    if not isinstance(payload.get("decisions"), list):
+        raise ValueError("sealed onboarding plan has no decision list")
+    return payload
 
+
+def identity_decisions_from_sealed_plan(
+    payload: dict[str, Any] | None,
+) -> dict[str, str]:
+    """Extract identity decisions from an already-loaded sealed plan."""
+
+    if payload is None:
+        return {}
     result: dict[str, str] = {}
     for item in payload.get("decisions", []):
         if item.get("category") != "identity":
@@ -549,6 +562,17 @@ def load_sealed_identity_decisions(
             )
         result[source_game_id] = decision
     return result
+
+
+def load_sealed_identity_decisions(
+    path: Path | None,
+    school_key: str,
+) -> dict[str, str]:
+    """Backward-compatible identity-only wrapper for tests and callers."""
+
+    return identity_decisions_from_sealed_plan(
+        load_sealed_plan_context(path, school_key)
+    )
 
 
 def resolve_sealed_identity_decision(
@@ -735,8 +759,15 @@ def load_runtime_venue_metadata_map(
     school_key: str,
     venue_path: Path,
     global_venues_by_id: dict[str, dict[str, str]],
+    *,
+    sealed_plan_context: dict[str, Any] | None = None,
 ) -> dict[str, list[dict[str, str]]]:
-    """Load venue metadata plus any authenticated frozen per-game split authority."""
+    """Load venue metadata plus authenticated frozen per-game split authority.
+
+    If the sealed transaction legitimately changed Freeze-covered source semantics
+    before ingestion, the current ledger must equal the original Freeze plus exactly
+    the semantic delta derived from that same sealed plan.
+    """
 
     venue_metadata_map = load_venue_metadata_map(
         venue_path,
@@ -745,6 +776,9 @@ def load_runtime_venue_metadata_map(
     frozen_split_authority = load_frozen_venue_split_authority(
         repo_root,
         school_key,
+        allowed_semantic_delta=sealed_pre_ingest_semantic_delta(
+            sealed_plan_context
+        ),
     )
     if frozen_split_authority:
         bind_frozen_venue_split_authority(
@@ -1507,10 +1541,23 @@ def main() -> int:
             "Use only through tools/onboard_school.py."
         ),
     )
+    parser.add_argument(
+        "--sealed-plan-context",
+        type=Path,
+        default=None,
+        help=(
+            "Internal sealed-plan context for post-apply package verification. "
+            "Restricted to --check-package through permanent onboarding/release tooling."
+        ),
+    )
     parser.add_argument("--repo", type=Path, default=None)
     args = parser.parse_args()
     if args.source_game_id and (not args.check_package or args.apply):
         parser.error("--source-game-id is restricted to --check-package without --apply")
+    if args.sealed_plan_context is not None and (
+        not args.check_package or args.apply
+    ):
+        parser.error("--sealed-plan-context is restricted to --check-package without --apply")
 
     repo_root = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
     source_path = repo_root / "schools" / args.school_key / "source-games.csv"
@@ -1528,10 +1575,18 @@ def main() -> int:
     discrepancies_path = repo_root / "data" / "reconciliation" / "discrepancies.csv"
 
     try:
-        sealed_identity_decisions = load_sealed_identity_decisions(
+        sealed_identity_plan = load_sealed_plan_context(
             args.identity_decisions,
             args.school_key,
         )
+        sealed_verification_plan = load_sealed_plan_context(
+            args.sealed_plan_context,
+            args.school_key,
+        )
+        sealed_identity_decisions = identity_decisions_from_sealed_plan(
+            sealed_identity_plan
+        )
+        semantic_plan_context = sealed_identity_plan or sealed_verification_plan
         all_sources = read_csv(source_path)
         program_rows = read_csv(programs_path)
         venue_rows = read_csv(venue_path)
@@ -1548,6 +1603,7 @@ def main() -> int:
             args.school_key,
             venue_path,
             global_venues_by_id,
+            sealed_plan_context=semantic_plan_context,
         )
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
