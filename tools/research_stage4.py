@@ -848,8 +848,10 @@ def _source_notes(
                 "",
                 "This is season-level historical accounting, not one or more game records.",
                 "The official season record and separately identified games are "
-                "not interchangeable. Do not allocate the unidentified games "
-                "to invented dates, opponents, or scores.",
+                "not interchangeable. Do not allocate unidentified games to invented "
+                "dates, opponents, or scores. Any accounting_contradictions entries "
+                "are diagnostic source conflicts only; their deltas must never be "
+                "treated as missing-game counts, overlap identities, or result allocations.",
                 "",
                 "```json",
                 json.dumps(aggregate_coverage, indent=2, sort_keys=True),
@@ -908,10 +910,20 @@ def _aggregate_coverage_payload(
         payload = json.loads(raw)
     except (json.JSONDecodeError, UnicodeDecodeError):
         return None, [{"reason": "AGGREGATE_COVERAGE_INVALID_JSON"}], {"present": True}
+
     entries = payload.get("coverage") if isinstance(payload, dict) else None
-    if not isinstance(payload, dict) or payload.get("schema_version") != 1 or not isinstance(entries, list) or not entries:
+    accounting = payload.get("accounting_contradictions", []) if isinstance(payload, dict) else []
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") != 1
+        or not isinstance(entries, list)
+        or not entries
+        or not isinstance(accounting, list)
+    ):
         defects.append({"reason": "AGGREGATE_COVERAGE_INVALID_STRUCTURE"})
-        entries = []
+        entries = [] if not isinstance(entries, list) else entries
+        accounting = [] if not isinstance(accounting, list) else accounting
+
     years: set[str] = set()
     for item in entries:
         if not isinstance(item, dict):
@@ -930,20 +942,74 @@ def _aggregate_coverage_payload(
         official = item.get("institutional_record", {})
         named = item.get("identified_record", {})
         missing = item.get("unidentified_record", {})
-        if (not all(isinstance(r, dict) for r in (official, named, missing))
-            or any(not isinstance(r.get(k), int) or r[k] < 0
-                   for r in (official, named, missing) for k in ("wins", "losses", "games"))
-            or any(official[k] - named[k] != missing[k] for k in ("wins", "losses", "games"))
-            or missing.get("wins", 0) + missing.get("losses", 0) != missing.get("games", 0)
-            or not missing.get("games", 0)):
+        if (
+            not all(isinstance(record, dict) for record in (official, named, missing))
+            or any(
+                not isinstance(record.get(key), int) or record[key] < 0
+                for record in (official, named, missing)
+                for key in ("wins", "losses", "games")
+            )
+            or any(
+                official[key] - named[key] != missing[key]
+                for key in ("wins", "losses", "games")
+            )
+            or official.get("wins", 0) + official.get("losses", 0) != official.get("games", -1)
+            or named.get("wins", 0) + named.get("losses", 0) != named.get("games", -1)
+            or missing.get("wins", 0) + missing.get("losses", 0) != missing.get("games", -1)
+            or not missing.get("games", 0)
+        ):
             defects.append({"reason": "AGGREGATE_COVERAGE_ARITHMETIC_INVALID", "season": season})
+
+    accounting_years: set[str] = set()
+    for item in accounting:
+        if not isinstance(item, dict):
+            defects.append({"reason": "ACCOUNTING_CONTRADICTION_INVALID_ITEM"})
+            continue
+        season = str(item.get("season", "")).strip()
+        if not season or season in accounting_years:
+            defects.append({"reason": "ACCOUNTING_CONTRADICTION_DUPLICATE_SEASON", "season": season})
+        accounting_years.add(season)
+        if item.get("school_key") != school_key or item.get("research_base_sha") != research_base_sha:
+            defects.append({"reason": "ACCOUNTING_CONTRADICTION_AUTHORITY_MISMATCH", "season": season})
+        if item.get("terminal_classification") != "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION":
+            defects.append({"reason": "ACCOUNTING_CONTRADICTION_TERMINAL_MISMATCH", "season": season})
+        if not re.fullmatch(r"[0-9a-f]{64}", str(item.get("audit_sha256", ""))):
+            defects.append({"reason": "ACCOUNTING_CONTRADICTION_AUDIT_HASH_INVALID", "season": season})
+        official = item.get("institutional_record", {})
+        named = item.get("identified_record", {})
+        delta = item.get("mechanical_delta", {})
+        if (
+            not all(isinstance(record, dict) for record in (official, named, delta))
+            or any(
+                not isinstance(record.get(key), int)
+                for record in (official, named, delta)
+                for key in ("wins", "losses", "games")
+            )
+            or official.get("wins", 0) < 0
+            or official.get("losses", 0) < 0
+            or official.get("games", 0) < 0
+            or named.get("wins", 0) < 0
+            or named.get("losses", 0) < 0
+            or named.get("games", 0) < 0
+            or official.get("wins", 0) + official.get("losses", 0) != official.get("games", -1)
+            or named.get("wins", 0) + named.get("losses", 0) != named.get("games", -1)
+            or any(
+                official[key] - named[key] != delta[key]
+                for key in ("wins", "losses", "games")
+            )
+        ):
+            defects.append({"reason": "ACCOUNTING_CONTRADICTION_ARITHMETIC_INVALID", "season": season})
+
     return payload, defects, {
-        "present": True, "sha256": sha256_bytes(raw),
+        "present": True,
+        "sha256": sha256_bytes(raw),
         "seasons": sorted(years),
         "unidentified_games": sum(
-            x.get("unidentified_record", {}).get("games", 0)
-            for x in entries if isinstance(x, dict)
+            item.get("unidentified_record", {}).get("games", 0)
+            for item in entries
+            if isinstance(item, dict)
         ),
+        "accounting_contradiction_seasons": sorted(accounting_years),
     }
 
 
