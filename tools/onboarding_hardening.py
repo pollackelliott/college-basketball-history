@@ -45,6 +45,7 @@ from reconciliation_trace import ReconciliationTrace
 from onboarding_plan import (
     ACCOMPLISHMENT_PATCH_FIELDS,
     CANONICAL_PATCH_FIELDS,
+    PATCH_CAPABLE_DECISION_CATEGORIES,
     REQUIRED_PACKAGE_FILES,
     SOURCE_PATCH_FIELDS,
     WorkflowError,
@@ -1135,18 +1136,7 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
         did = row["decision_id"]
         category = row.get("category", "").strip()
         if did in canonical_patches or did in source_patches:
-            if category not in {
-                "identity",
-                "discrepancy",
-                "conditional_discrepancy",
-                "canonical_site_patch",
-                "correction_site_patch",
-                "ncaa_round_patch",
-                "new_game_site_patch",
-                "source_consistency",
-                "postseason_classification",
-                "accomplishments",
-            }:
+            if category not in PATCH_CAPABLE_DECISION_CATEGORIES:
                 raise WorkflowError(
                     f"{did}: historical patches are not valid on {category} decisions"
                 )

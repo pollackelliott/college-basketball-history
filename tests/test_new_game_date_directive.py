@@ -11,7 +11,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import ingest_school  # noqa: E402
+from onboarding_hardening import (  # noqa: E402
+    fill_review_from_map,
+    rehearse_decision_map,
+    validate_decision_map,
+)
 from onboarding_plan import (  # noqa: E402
+    PATCH_CAPABLE_DECISION_CATEGORIES,
     REVIEW_COLUMNS,
     WorkflowError,
     _new_game_date_patch_decision,
@@ -234,6 +240,179 @@ class OwnerFinalNewGameDatePatchTests(unittest.TestCase):
             self.assertIn(
                 decision["owner_final_directive_sha256"][:12],
                 final["notes"],
+            )
+
+    def map_fixture(self, repo: Path, decision, *, patch=None):
+        plan = {
+            "school_key": "st-bonaventure",
+            "blockers": [],
+            "input_fingerprint": {"sha256": "frozen"},
+            "decisions": [decision],
+        }
+        plan_path = repo / "plan.json"
+        plan_path.write_text(json.dumps(plan), encoding="utf-8")
+        review_path = repo / "review.csv"
+        write_csv(
+            review_path,
+            REVIEW_COLUMNS,
+            [{
+                field: (
+                    " | ".join(decision["allowed_actions"])
+                    if field == "allowed_actions"
+                    else decision.get(field, "")
+                )
+                for field in REVIEW_COLUMNS
+            }],
+        )
+        map_path = repo / "recommendation-map.json"
+        payload = {
+            "decisions": {
+                decision["decision_id"]: "APPLY_SOURCE_DATE_PATCH",
+            },
+            "basis_by_decision": {
+                decision["decision_id"]: (
+                    "Frozen owner-final Research directive for the 1983 A-10 tournament."
+                ),
+            },
+            "source_patch_by_decision": {
+                decision["decision_id"]: (
+                    {"game_date": "1983-03-09"} if patch is None else patch
+                ),
+            },
+            "notes_by_decision": {
+                decision["decision_id"]: (
+                    "Original 1983-03-07; corrected 1983-03-09 from frozen owner-final authority."
+                ),
+            },
+        }
+        map_path.write_text(json.dumps(payload), encoding="utf-8")
+        return plan_path, review_path, map_path
+
+    def test_patch_registry_covers_new_game_date_but_not_publication(self):
+        self.assertIn("new_game_date_patch", PATCH_CAPABLE_DECISION_CATEGORIES)
+        self.assertNotIn("publication", PATCH_CAPABLE_DECISION_CATEGORIES)
+
+    def test_exact_recommendation_map_validates_owner_final_new_game_date(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self.make_repo(repo)
+            decision = self.decision(repo)
+            plan_path, review_path, map_path = self.map_fixture(repo, decision)
+
+            with (
+                patch("onboarding_hardening.onboard_school.ensure_package_checkpoint"),
+                patch("onboarding_hardening.assert_no_unapproved_semantic_drift"),
+                patch(
+                    "onboarding_plan.input_fingerprint",
+                    return_value={"sha256": "frozen"},
+                ),
+            ):
+                result = validate_decision_map(
+                    repo,
+                    "st-bonaventure",
+                    plan_path=plan_path,
+                    review_path=review_path,
+                    map_path=map_path,
+                )
+
+            self.assertEqual(result["decision_count"], 1)
+            self.assertEqual(
+                result["action_counts"],
+                {"APPLY_SOURCE_DATE_PATCH": 1},
+            )
+
+            filled = repo / "filled-review.csv"
+            filled.write_bytes(review_path.read_bytes())
+            fill_review_from_map(filled, map_path)
+            with filled.open(encoding="utf-8-sig", newline="") as handle:
+                row = next(csv.DictReader(handle))
+            self.assertEqual(row["decision"], "APPLY_SOURCE_DATE_PATCH")
+            self.assertEqual(
+                json.loads(row["source_patch_json"]),
+                {"game_date": "1983-03-09"},
+            )
+
+    def test_recommendation_map_rejects_wrong_missing_and_extra_date_payloads(self):
+        cases = [
+            (
+                {"game_date": "1983-03-10"},
+                "does not equal the frozen owner-final directive",
+            ),
+            (
+                {},
+                "requires exactly source game_date",
+            ),
+            (
+                {"game_date": "1983-03-09", "team_score": "77"},
+                "requires exactly source game_date",
+            ),
+        ]
+        for source_patch, error in cases:
+            with self.subTest(source_patch=source_patch):
+                with tempfile.TemporaryDirectory() as tmp:
+                    repo = Path(tmp)
+                    self.make_repo(repo)
+                    decision = self.decision(repo)
+                    plan_path, review_path, map_path = self.map_fixture(
+                        repo,
+                        decision,
+                        patch=source_patch,
+                    )
+                    with (
+                        patch("onboarding_hardening.onboard_school.ensure_package_checkpoint"),
+                        patch("onboarding_hardening.assert_no_unapproved_semantic_drift"),
+                        patch(
+                            "onboarding_plan.input_fingerprint",
+                            return_value={"sha256": "frozen"},
+                        ),
+                        self.assertRaisesRegex(WorkflowError, error),
+                    ):
+                        validate_decision_map(
+                            repo,
+                            "st-bonaventure",
+                            plan_path=plan_path,
+                            review_path=review_path,
+                            map_path=map_path,
+                        )
+
+    def test_recommendation_map_transports_exact_date_into_rehearsal_handoff(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self.make_repo(repo)
+            decision = self.decision(repo)
+            plan_path, review_path, map_path = self.map_fixture(repo, decision)
+
+            observed = {}
+
+            def fake_rehearse(_repo, _school, *, plan_path, review_path):
+                with review_path.open(encoding="utf-8-sig", newline="") as handle:
+                    row = next(csv.DictReader(handle))
+                observed["decision"] = row["decision"]
+                observed["source_patch"] = json.loads(row["source_patch_json"])
+                observed["notes"] = row["notes"]
+                return {
+                    "approved_plan_hash_preview": "a" * 64,
+                    "changed_paths": [],
+                    "execution": {},
+                    "gates": {},
+                }
+
+            with patch("onboarding_hardening.rehearse_review", side_effect=fake_rehearse):
+                result = rehearse_decision_map(
+                    repo,
+                    "st-bonaventure",
+                    plan_path=plan_path,
+                    review_path=review_path,
+                    map_path=map_path,
+                )
+
+            self.assertEqual(observed["decision"], "APPLY_SOURCE_DATE_PATCH")
+            self.assertEqual(observed["source_patch"], {"game_date": "1983-03-09"})
+            self.assertIn("1983-03-07", observed["notes"])
+            self.assertIn("1983-03-09", observed["notes"])
+            self.assertEqual(
+                result["action_counts"],
+                {"APPLY_SOURCE_DATE_PATCH": 1},
             )
 
     def test_wrong_date_cannot_be_sealed(self):
