@@ -44,6 +44,44 @@ class Stage4AggregateCoverageTests(unittest.TestCase):
         self.assertEqual(summary["seasons"], ["1919-20"])
         self.assertEqual(len(payload["coverage"]), 1)
 
+
+    def test_accounting_contradiction_allows_negative_diagnostic_delta(self):
+        contradiction = {
+            "school_key": "example", "season": "1903-04",
+            "research_base_sha": "a" * 40,
+            "institutional_record": {"wins": 0, "losses": 0, "games": 0},
+            "identified_record": {"wins": 1, "losses": 0, "games": 1},
+            "mechanical_delta": {"wins": -1, "losses": 0, "games": -1},
+            "terminal_classification": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+            "audit_sha256": "c" * 64,
+        }
+        payload, defects, summary = self.inspect(payload={
+            "schema_version": 1,
+            "coverage": [self.entry],
+            "accounting_contradictions": [contradiction],
+        })
+        self.assertFalse(defects)
+        self.assertEqual(summary["accounting_contradiction_seasons"], ["1903-04"])
+        self.assertEqual(payload["accounting_contradictions"][0]["mechanical_delta"]["games"], -1)
+
+    def test_accounting_contradiction_cannot_be_arithmetic_fitted(self):
+        contradiction = {
+            "school_key": "example", "season": "1903-04",
+            "research_base_sha": "a" * 40,
+            "institutional_record": {"wins": 0, "losses": 0, "games": 0},
+            "identified_record": {"wins": 1, "losses": 0, "games": 1},
+            "mechanical_delta": {"wins": 0, "losses": 0, "games": 0},
+            "terminal_classification": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+            "audit_sha256": "c" * 64,
+        }
+        _, defects, _ = self.inspect(payload={
+            "schema_version": 1,
+            "coverage": [self.entry],
+            "accounting_contradictions": [contradiction],
+        })
+        self.assertIn("ACCOUNTING_CONTRADICTION_ARITHMETIC_INVALID",
+                      {d["reason"] for d in defects})
+
     def test_nonmanifested_payload_fails(self):
         _, defects, _ = self.inspect(manifest={"files": {}})
         self.assertIn("AGGREGATE_COVERAGE_NOT_MANIFESTED",
