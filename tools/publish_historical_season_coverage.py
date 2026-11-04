@@ -295,37 +295,39 @@ def integrate_approved_coverage(repo: Path, school_key: str) -> dict:
             raise ValueError("ACCOUNTING_CONTRADICTION_EXACT_OWNER_AUTHORITY_REQUIRED")
         accounting_rows.append(_accounting_row(entry, authority))
 
-    coverage_path = repo / CSV_PATH
-    existing_coverage = _load_csv(
-        coverage_path, FIELDS, "AGGREGATE_COVERAGE_PUBLIC_CSV"
-    )
-    for row in coverage_rows:
-        existing = [
-            item for item in existing_coverage
-            if item["program_key"] == school_key
-            and item["season_label"] == row["season_label"]
-        ]
-        if len(existing) > 1 or (existing and existing[0] != row):
-            raise ValueError("AGGREGATE_COVERAGE_EXISTING_ROW_CONFLICT")
-        if not existing:
-            existing_coverage.append(row)
-    _write_csv(coverage_path, FIELDS, existing_coverage)
+    if coverage_rows:
+        coverage_path = repo / CSV_PATH
+        existing_coverage = _load_csv(
+            coverage_path, FIELDS, "AGGREGATE_COVERAGE_PUBLIC_CSV"
+        )
+        for row in coverage_rows:
+            existing = [
+                item for item in existing_coverage
+                if item["program_key"] == school_key
+                and item["season_label"] == row["season_label"]
+            ]
+            if len(existing) > 1 or (existing and existing[0] != row):
+                raise ValueError("AGGREGATE_COVERAGE_EXISTING_ROW_CONFLICT")
+            if not existing:
+                existing_coverage.append(row)
+        _write_csv(coverage_path, FIELDS, existing_coverage)
 
-    accounting_path = repo / ACCOUNTING_CSV_PATH
-    existing_accounting = _load_csv(
-        accounting_path, ACCOUNTING_FIELDS, "ACCOUNTING_CONTRADICTION_PUBLIC_CSV"
-    )
-    for row in accounting_rows:
-        existing = [
-            item for item in existing_accounting
-            if item["program_key"] == school_key
-            and item["season_label"] == row["season_label"]
-        ]
-        if len(existing) > 1 or (existing and existing[0] != row):
-            raise ValueError("ACCOUNTING_CONTRADICTION_EXISTING_ROW_CONFLICT")
-        if not existing:
-            existing_accounting.append(row)
-    _write_csv(accounting_path, ACCOUNTING_FIELDS, existing_accounting)
+    if accounting_rows:
+        accounting_path = repo / ACCOUNTING_CSV_PATH
+        existing_accounting = _load_csv(
+            accounting_path, ACCOUNTING_FIELDS, "ACCOUNTING_CONTRADICTION_PUBLIC_CSV"
+        )
+        for row in accounting_rows:
+            existing = [
+                item for item in existing_accounting
+                if item["program_key"] == school_key
+                and item["season_label"] == row["season_label"]
+            ]
+            if len(existing) > 1 or (existing and existing[0] != row):
+                raise ValueError("ACCOUNTING_CONTRADICTION_EXISTING_ROW_CONFLICT")
+            if not existing:
+                existing_accounting.append(row)
+        _write_csv(accounting_path, ACCOUNTING_FIELDS, existing_accounting)
 
     return {
         "status": "ADDED_OR_VERIFIED_HISTORICAL_ACCOUNTING",
