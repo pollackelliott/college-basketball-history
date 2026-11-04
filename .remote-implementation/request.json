@@ -1,37 +1,45 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-proposal-0007",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0010",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "c8b5b384c1dcef539dd5f752448ebd6cd7d95c47",
-  "previous_control_state_sha256": "557d541f1b00e121773ea3400555d23b340b8e167609eddc87d01e85ca1e01e7",
-  "expected_protected_main_sha": "bb74b0a770f67192f4e670fade253282cc28074e",
+  "previous_control_state_commit": "f0a9b655b67482ce982c6a50b3b153e280ec1c2d",
+  "previous_control_state_sha256": "dbfdb6a0cc55cdcc242aa13ffdf1db97d372f859327d19c65620ab83f30ca334",
+  "expected_protected_main_sha": "d64630b7269c6c911ced0c65c5eb0c288541c8cf",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "f83944ec41a6a79697f71c62f0b07c1a50fb1539",
-  "stage2_authority": {
-    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0010/checkpoint-manifest.json",
-    "sha256": "992c80d77227fa6deca3cdf280e9a768574b9beba5b623241c9f059aac1296c3"
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0009/successor-manifest.json",
+    "sha256": "4eb21c6238b210dc997ffda13fdc2b2edecd5103d085f6ee9c2ad4bd2ea9b46c"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0007/recommendation-map.json",
-    "sha256": "783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a"
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "CONTROL CENTER AUTHORIZATION — ST. BONAVENTURE STAGE 2 CURRENT-MAIN REFRESH. Owner supplied exact Control Center authorization for this SAME existing lane to execute exactly one STAGE2_CURRENT_MAIN_REFRESH from onboarding predecessor f83944ec41a6a79697f71c62f0b07c1a50fb1539 onto protected main d64630b7269c6c911ced0c65c5eb0c288541c8cf with exact merge base bb74b0a770f67192f4e670fade253282cc28074e, independently verified target-only 9 / intervening-main 2 / overlap 0 / no intervening schools/st-bonaventure path, and explicit authority only for guarded refresh mechanics plus independent fresh verification. No new basketball-history authority, Research/Integration Freeze change, stale decision-universe carry-forward, recommendation-map changes, arbitrary Stage 2 repair, Owner Gate 1/2, release, Preview, merge, or Production authority."
   },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact-map proposal rehearsal after independently verified PR #456 refresh -0009 and fresh census -0010",
-    "authorization": "Owner Proceed authorizes the next bounded Stage 2 proposal rehearsal under existing phase-persistent authority. Fresh census -0010 independently regenerated 232 decisions / 0 blockers / 0 warnings on protected main bb74b0a770f67192f4e670fade253282cc28074e and refreshed target f83944ec41a6a79697f71c62f0b07c1a50fb1539, with decision-universe SHA 7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6 and fresh verification PASS. The prior settled recommendation-map bytes are reused unchanged because their own bound decision-universe SHA and exact SHA-256 remain identical. This request exercises the PR #456 final target_no_op semantic-ordering repair without reopening any basketball-history decision. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact post-PR #457 Control Center-authorized current-main refresh",
+    "authorization": "Protected main advanced solely through merged generic tooling PR #457 from bb74b0a770f67192f4e670fade253282cc28074e to d64630b7269c6c911ced0c65c5eb0c288541c8cf. Immediately before request creation the onboarding predecessor remains f83944ec41a6a79697f71c62f0b07c1a50fb1539, global control is IDLE/recovery_required=false/transaction COMPLETE, merge base is bb74b0a770f67192f4e670fade253282cc28074e, target-only path count is 9, intervening-main path count is 2, overlap is 0, and intervening main changes no schools/st-bonaventure path. This request binds independently fresh-verified prior refresh successor -0009 and preserves immutable Integration Freeze/semantic authority. It carries no Stage 2 census or proposal authority; a fresh census must be generated only after this refresh independently verifies. Control Center STOP condition remains in force: another defect in the same final-source-semantics/target_no_op family after later fresh proposal requires escalation, not another repair."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
