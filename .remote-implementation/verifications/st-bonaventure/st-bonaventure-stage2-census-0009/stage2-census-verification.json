@@ -1,0 +1,35 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "6364ad81cf382512626c108be532ee50744bb8cbf41a586d40a271bfc55844d6",
+    "implementation-stage2-status.json": "7110a173178698315e2cbfdd30afc1139814c279866d96547db735517ee5cdf1",
+    "plan.json": "30c49ea96b5cf0afd7c59633bcea041b98a0b5bb6f689bfb0cf3f83cc60f97a9",
+    "review.csv": "05277eb5d1eeb766ab1b911f2adf0132bb6810304e556e11e9e40d515ad90ccc",
+    "review.md": "d9eb4ae9fb8b71f4c479cedbc63ccf87cee7ab4de9bd5b9ad050477000a62337"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "6364ad81cf382512626c108be532ee50744bb8cbf41a586d40a271bfc55844d6",
+    "implementation-stage2-status.json": "d14bf73c4929dbadf36f4f6ee0896609f1435dddd56753dd26dc085e30ee97a0",
+    "plan.json": "e6e8d1b216052ef4b0250f6597759e07728665ec1ac04e783dc9d2ea263e5d24",
+    "review.csv": "05277eb5d1eeb766ab1b911f2adf0132bb6810304e556e11e9e40d515ad90ccc",
+    "review.md": "d9d4d32bc43e51da4c587d4b403e3663abd4b78be1dbfb886f338d1ce83917e6"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "009c77eb8f294ac380e97e6bb0e5adef1ead4ccf",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "st-bonaventure-stage2-census-0009",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "2df04571c006505ba72736d9c970e656d502ee18",
+  "target_tree_sha": "09194f076f51aa68b59c446105aaab0881316ec8",
+  "tracked_stage2_mutation": "NONE"
+}
