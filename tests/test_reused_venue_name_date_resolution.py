@@ -13,8 +13,16 @@ from integration_freeze_guard import (
     build_source_game_semantic_snapshot,
     semantic_snapshot_sha256,
 )
+from frozen_venue_authority import (
+    FrozenVenueSplitAuthorityError,
+    sealed_pre_ingest_semantic_delta,
+)
 from onboard_school import copy_repository
-from onboarding_plan import WorkflowError, frozen_venue_split_authority
+from onboarding_plan import (
+    WorkflowError,
+    apply_pre_ingest_source_patches,
+    frozen_venue_split_authority,
+)
 
 FIELDS = [
     "source_program_key","venue_key","venue_id","canonical_name","aliases",
@@ -37,6 +45,104 @@ def venue_row(key, vid, first, last):
 
 
 class ReusedVenueNameDateResolutionTests(unittest.TestCase):
+    def test_sealed_pre_ingest_semantic_delta_covers_complete_supported_matrix(self):
+        approved = {
+            "approved_plan_hash": "a" * 64,
+            "decisions": [
+                {
+                    "decision_id": "POST",
+                    "category": "postseason_classification",
+                    "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+                    "source_game_id": "POST",
+                    "source_patch": {
+                        "curated_game_type": "NCAA_TOURNAMENT",
+                        "curated_postseason_round": "Round of 32",
+                        "curated_site_type": "NEUTRAL",
+                    },
+                },
+                {
+                    "decision_id": "SITE",
+                    "category": "new_game_site_patch",
+                    "decision": "APPLY_SOURCE_SITE_PATCH",
+                    "source_game_id": "SITE",
+                    "source_patch": {"curated_site_type": "OPPONENT_HOME"},
+                },
+                {
+                    "decision_id": "DATE",
+                    "category": "new_game_date_patch",
+                    "decision": "APPLY_SOURCE_DATE_PATCH",
+                    "source_game_id": "DATE",
+                    "source_patch": {"game_date": "1983-03-09"},
+                },
+                {
+                    "decision_id": "NCAA-DATE",
+                    "category": "ncaa_round_patch",
+                    "decision": "APPLY_NCAA_ROUND_PATCH",
+                    "source_game_id": "NCAA-DATE",
+                    "source_patch": {
+                        "curated_postseason_round": "Sweet 16",
+                        "game_date": "1977-03-17",
+                    },
+                },
+                {
+                    "decision_id": "ADJACENT",
+                    "category": "identity",
+                    "decision": "MATCH_CANONICAL:CBBG-X",
+                    "source_game_id": "ADJACENT",
+                    "source_patch": {
+                        "season_label": "1978-1979",
+                        "game_date": "1979-01-02",
+                    },
+                    "cross_season_source_patch_by_action": {
+                        "MATCH_CANONICAL:CBBG-X": {
+                            "season_label": "1978-1979",
+                            "game_date": "1979-01-02",
+                        },
+                    },
+                },
+                {
+                    "decision_id": "CROSS-OPPONENT",
+                    "category": "identity",
+                    "decision": "MATCH_CANONICAL:CBBG-Y",
+                    "source_game_id": "CROSS-OPPONENT",
+                    "source_patch": {
+                        "normalized_opponent_key": "example",
+                        "canonical_opponent_name": "Example",
+                    },
+                    "cross_opponent_source_patch_by_action": {
+                        "MATCH_CANONICAL:CBBG-Y": {
+                            "normalized_opponent_key": "example",
+                            "canonical_opponent_name": "Example",
+                        },
+                    },
+                },
+                {
+                    "decision_id": "SCORE",
+                    "category": "source_consistency",
+                    "decision": "APPLY_SOURCE_CONSISTENCY_PATCH",
+                    "source_game_id": "SCORE",
+                    "source_patch": {"played_result": "W"},
+                },
+            ],
+        }
+        self.assertEqual(
+            sealed_pre_ingest_semantic_delta(approved),
+            {
+                "POST": {
+                    "curated_game_type": "NCAA_TOURNAMENT",
+                    "curated_postseason_round": "Round of 32",
+                    "curated_site_type": "NEUTRAL",
+                },
+                "SITE": {"curated_site_type": "OPPONENT_HOME"},
+                "DATE": {"game_date": "1983-03-09"},
+                "NCAA-DATE": {"game_date": "1977-03-17"},
+                "ADJACENT": {
+                    "season_label": "1978-1979",
+                    "game_date": "1979-01-02",
+                },
+            },
+        )
+
     def make_map(self):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
@@ -287,11 +393,17 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
 
         source_fields = [
             "source_game_id",
+            "source_program_key",
             "season_label",
             "game_date",
+            "normalized_opponent_key",
+            "curated_site_type",
             "curated_venue_name",
             "city",
             "state",
+            "curated_game_type",
+            "curated_postseason_round",
+            "notes",
         ]
         with (school / "source-games.csv").open(
             "w", encoding="utf-8", newline=""
@@ -301,6 +413,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             for source_id in before_ids:
                 writer.writerow({
                     "source_game_id": source_id,
+                    "source_program_key": "st-bonaventure",
                     "season_label": "1966-1967",
                     "game_date": "",
                     "curated_venue_name": "Madison Square Garden",
@@ -310,6 +423,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             for source_id in after_ids:
                 writer.writerow({
                     "source_game_id": source_id,
+                    "source_program_key": "st-bonaventure",
                     "season_label": (
                         "1968-1969"
                         if source_id == "STB-1968-69-018"
@@ -320,6 +434,21 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "city": "New York",
                     "state": "NY",
                 })
+            writer.writerow({
+                "source_game_id": "STB-1982-83-028",
+                "source_program_key": "st-bonaventure",
+                "season_label": "1982-1983",
+                "game_date": "1983-03-07",
+                "normalized_opponent_key": "example-opponent",
+                "curated_game_type": "CONFERENCE_TOURNAMENT",
+            })
+
+        canonical = repo / "data" / "canonical"
+        canonical.mkdir(parents=True)
+        (canonical / "games.csv").write_text(
+            "canonical_game_id,season_label,game_date,team_a_key,team_b_key\n",
+            encoding="utf-8",
+        )
 
         with (school / "venues.csv").open(
             "w", encoding="utf-8", newline=""
@@ -521,6 +650,69 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 runtime_result["venue_key"],
                 "madison-square-garden-1968",
             )
+
+        # Exercise the topology that blocked St. Bonaventure proposal -0003:
+        # exact frozen split authority + sealed pre-ingest date mutation + runtime
+        # rehydration. The date row is unrelated to the 53-row MSG population.
+        approved = {
+            "school_key": "st-bonaventure",
+            "approved_plan_hash": "b" * 64,
+            "decisions": [{
+                "decision_id": "NEW-GAME-DATE-PATCH-STB-1982-83-028",
+                "category": "new_game_date_patch",
+                "decision": "APPLY_SOURCE_DATE_PATCH",
+                "source_game_id": "STB-1982-83-028",
+                "source_game_date": "1983-03-07",
+                "source_game_type": "CONFERENCE_TOURNAMENT",
+                "season_label": "1982-1983",
+                "canonical_game_id": "",
+                "source_patch": {"game_date": "1983-03-09"},
+            }],
+        }
+        with tempfile.TemporaryDirectory() as copied:
+            rehearsal = Path(copied) / "repository"
+            copy_repository(repo, rehearsal, school_key="st-bonaventure")
+            counts = apply_pre_ingest_source_patches(rehearsal, approved)
+            self.assertEqual(counts["new_game_date_patches"], 1)
+
+            runtime_metadata = ingest_school.load_runtime_venue_metadata_map(
+                rehearsal,
+                "st-bonaventure",
+                rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                global_venues,
+                sealed_plan_context=approved,
+            )
+            runtime_result = ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "STB-1968-69-018",
+                    "game_date": "",
+                    "season_label": "1968-1969",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                },
+                runtime_metadata,
+            )
+            self.assertEqual(runtime_result["venue_id"], "VEN-000124")
+
+            source_path = rehearsal / "schools" / "st-bonaventure" / "source-games.csv"
+            rows = list(csv.DictReader(source_path.open(encoding="utf-8-sig", newline="")))
+            rows[0]["game_date"] = "1967-01-01"
+            with source_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=source_fields)
+                writer.writeheader()
+                writer.writerows(rows)
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "outside the exact sealed pre-ingest semantic delta",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                    global_venues,
+                    sealed_plan_context=approved,
+                )
 
         # An ignored manifest cannot be smuggled across the disposable-copy
         # boundary after its frozen package representation has drifted.

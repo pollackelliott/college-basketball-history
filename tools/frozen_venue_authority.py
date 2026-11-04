@@ -21,6 +21,146 @@ class FrozenVenueSplitAuthorityError(ValueError):
     """The Integration Freeze venue-split authority is missing trust invariants."""
 
 
+PRE_INGEST_SEMANTIC_FIELDS = frozenset({
+    "season_label",
+    "game_date",
+    "curated_site_type",
+    "curated_game_type",
+    "curated_postseason_round",
+})
+
+
+def sealed_pre_ingest_semantic_delta(
+    approved: dict[str, Any] | None,
+) -> dict[str, dict[str, str]]:
+    """Derive the exact Freeze-covered delta authorized by one sealed plan.
+
+    This deliberately mirrors only source mutations that occur before ingestion.
+    Other source patches either happen later or affect representation-only fields
+    outside the Integration-Freeze semantic snapshot.
+    """
+
+    if not approved:
+        return {}
+    approved_hash = str(approved.get("approved_plan_hash", "")).strip()
+    if not re.fullmatch(r"[0-9a-f]{64}", approved_hash):
+        raise FrozenVenueSplitAuthorityError(
+            "sealed pre-ingest semantic delta requires an approved plan hash"
+        )
+    decisions = approved.get("decisions")
+    if not isinstance(decisions, list):
+        raise FrozenVenueSplitAuthorityError(
+            "sealed pre-ingest semantic delta requires a decision list"
+        )
+
+    result: dict[str, dict[str, str]] = {}
+
+    def add_fields(item: dict[str, Any], fields: dict[str, Any]) -> None:
+        if not fields:
+            return
+        source_id = str(item.get("source_game_id", "")).strip()
+        if not source_id:
+            raise FrozenVenueSplitAuthorityError(
+                "sealed pre-ingest semantic delta has a blank source_game_id"
+            )
+        target = result.setdefault(source_id, {})
+        for field, value in fields.items():
+            if field not in PRE_INGEST_SEMANTIC_FIELDS:
+                raise FrozenVenueSplitAuthorityError(
+                    f"sealed pre-ingest semantic delta contains unsupported field {field!r}"
+                )
+            normalized = str(value)
+            prior = target.get(field)
+            if prior is not None and prior != normalized:
+                raise FrozenVenueSplitAuthorityError(
+                    f"sealed pre-ingest semantic delta conflicts for {source_id} {field}"
+                )
+            target[field] = normalized
+
+    for item in decisions:
+        if not isinstance(item, dict):
+            raise FrozenVenueSplitAuthorityError(
+                "sealed pre-ingest semantic delta contains an invalid decision"
+            )
+        category = str(item.get("category", "")).strip()
+        action = str(item.get("decision", "")).strip()
+        patch = item.get("source_patch", {})
+        if patch is None:
+            patch = {}
+        if not isinstance(patch, dict):
+            raise FrozenVenueSplitAuthorityError(
+                f"{item.get('decision_id', '')}: source_patch is not an object"
+            )
+
+        if category == "postseason_classification":
+            if action == "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+                allowed = {
+                    field: patch[field]
+                    for field in (
+                        "curated_game_type",
+                        "curated_postseason_round",
+                        "curated_site_type",
+                    )
+                    if field in patch
+                }
+                if set(patch) != set(allowed):
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: postseason pre-ingest delta "
+                        "contains unsupported fields"
+                    )
+                add_fields(item, allowed)
+            elif action == "KEEP_POSTSEASON_UNRESOLVED":
+                if patch:
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: unresolved postseason row "
+                        "cannot carry a pre-ingest semantic delta"
+                    )
+
+        elif category == "new_game_site_patch":
+            if action == "APPLY_SOURCE_SITE_PATCH":
+                if set(patch) != {"curated_site_type"}:
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: new-game site delta must "
+                        "contain exactly curated_site_type"
+                    )
+                add_fields(item, {"curated_site_type": patch["curated_site_type"]})
+
+        elif category == "new_game_date_patch":
+            if action == "APPLY_SOURCE_DATE_PATCH":
+                if set(patch) != {"game_date"}:
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: new-game date delta must "
+                        "contain exactly game_date"
+                    )
+                add_fields(item, {"game_date": patch["game_date"]})
+
+        elif category == "ncaa_round_patch" and "game_date" in patch:
+            add_fields(item, {"game_date": patch["game_date"]})
+
+        elif category == "identity":
+            expected = item.get("cross_season_source_patch_by_action", {})
+            selected = expected.get(action) if isinstance(expected, dict) else None
+            if selected is not None:
+                if (
+                    not isinstance(selected, dict)
+                    or patch != selected
+                    or set(selected) != {"season_label", "game_date"}
+                ):
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: adjacent-season semantic "
+                        "delta does not match the sealed preflight patch"
+                    )
+                add_fields(
+                    item,
+                    {
+                        "season_label": selected["season_label"],
+                        "game_date": selected["game_date"],
+                    },
+                )
+
+    return result
+
+
 def _sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -84,9 +224,56 @@ def _current_snapshot_from_template(
     }
 
 
+def _semantic_snapshot_matches_allowed_delta(
+    baseline: dict[str, Any],
+    current: dict[str, Any],
+    allowed_delta: dict[str, dict[str, str]] | None,
+) -> bool:
+    """Require current semantics to equal baseline plus exactly the sealed delta."""
+
+    if (
+        baseline.get("schema_version") != current.get("schema_version")
+        or baseline.get("fields") != current.get("fields")
+    ):
+        return False
+    fields = baseline.get("fields")
+    baseline_rows = baseline.get("rows")
+    current_rows = current.get("rows")
+    if (
+        not isinstance(fields, list)
+        or not isinstance(baseline_rows, dict)
+        or not isinstance(current_rows, dict)
+        or set(baseline_rows) != set(current_rows)
+    ):
+        return False
+
+    delta = allowed_delta or {}
+    for source_id, patch in delta.items():
+        if source_id not in baseline_rows or not isinstance(patch, dict):
+            return False
+        if any(
+            field not in fields or field not in PRE_INGEST_SEMANTIC_FIELDS
+            for field in patch
+        ):
+            return False
+
+    for source_id, baseline_row in baseline_rows.items():
+        current_row = current_rows.get(source_id)
+        if not isinstance(baseline_row, dict) or not isinstance(current_row, dict):
+            return False
+        patch = delta.get(source_id, {})
+        for field in fields:
+            expected = patch.get(field, baseline_row.get(field, ""))
+            if current_row.get(field, "") != expected:
+                return False
+    return True
+
+
 def authenticated_frozen_venue_split_authority(
     repo: Path,
     school_key: str,
+    *,
+    allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
 ) -> tuple[dict[str, dict[str, str]], bytes | None]:
     """Return exact frozen split assignments and their authenticated manifest bytes.
 
@@ -153,10 +340,20 @@ def authenticated_frozen_venue_split_authority(
     if (
         not expected_semantic_hash
         or _snapshot_sha256(snapshot) != expected_semantic_hash
-        or current_snapshot != snapshot
+        or not _semantic_snapshot_matches_allowed_delta(
+            snapshot,
+            current_snapshot,
+            allowed_semantic_delta,
+        )
     ):
+        suffix = (
+            " outside the exact sealed pre-ingest semantic delta"
+            if allowed_semantic_delta
+            else ""
+        )
         raise FrozenVenueSplitAuthorityError(
-            "Integration Freeze venue split authority does not match current source semantics"
+            "Integration Freeze venue split authority does not match current "
+            f"source semantics{suffix}"
         )
 
     package_hashes = manifest.get("package_member_sha256")
@@ -263,18 +460,30 @@ def authenticated_frozen_venue_split_authority(
 def load_frozen_venue_split_authority(
     repo: Path,
     school_key: str,
+    *,
+    allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
 ) -> dict[str, dict[str, str]]:
     """Return only authenticated per-game split assignments."""
 
-    authority, _ = authenticated_frozen_venue_split_authority(repo, school_key)
+    authority, _ = authenticated_frozen_venue_split_authority(
+        repo,
+        school_key,
+        allowed_semantic_delta=allowed_semantic_delta,
+    )
     return authority
 
 
 def frozen_venue_split_freeze_bytes(
     repo: Path,
     school_key: str,
+    *,
+    allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
 ) -> bytes | None:
-    """Return exact manifest bytes only when they carry authenticated split authority."""
+    """Return manifest bytes only when their split authority remains authenticated."""
 
-    authority, payload = authenticated_frozen_venue_split_authority(repo, school_key)
+    authority, payload = authenticated_frozen_venue_split_authority(
+        repo,
+        school_key,
+        allowed_semantic_delta=allowed_semantic_delta,
+    )
     return payload if authority else None
