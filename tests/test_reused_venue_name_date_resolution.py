@@ -20,6 +20,7 @@ from frozen_venue_authority import (
 from onboard_school import copy_repository
 from onboarding_plan import (
     WorkflowError,
+    _venue_maps,
     apply_pre_ingest_source_patches,
     frozen_venue_split_authority,
 )
@@ -564,6 +565,102 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "closed": "",
             },
         }
+        # Model the minimal global physical-venue registry required by the real reconciliation loader.
+        reference = repo / "data" / "reference"
+        reference.mkdir(parents=True, exist_ok=True)
+        venue_fields = [
+            "venue_id",
+            "venue_key",
+            "display_name",
+            "city",
+            "state",
+            "opened",
+            "closed",
+            "date_precision",
+            "identity_status",
+            "source_basis",
+            "notes",
+        ]
+        with (reference / "venues.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=venue_fields)
+            writer.writeheader()
+            writer.writerow({
+                "venue_id": "VEN-000123",
+                "venue_key": "madison-square-garden-1925",
+                "display_name": "Madison Square Garden (1925)",
+                "city": "New York",
+                "state": "NY",
+                "opened": "1925",
+                "closed": "1968",
+                "date_precision": "YEAR",
+                "identity_status": "VERIFIED",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000124",
+                "venue_key": "madison-square-garden-1968",
+                "display_name": "Madison Square Garden",
+                "city": "New York",
+                "state": "NY",
+                "opened": "1968-02-11",
+                "closed": "",
+                "date_precision": "DAY",
+                "identity_status": "VERIFIED",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+        name_fields = [
+            "venue_id",
+            "venue_name",
+            "normalized_name",
+            "name_type",
+            "valid_from",
+            "valid_to",
+            "date_precision",
+            "source_basis",
+            "notes",
+        ]
+        with (reference / "venue-names.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=name_fields)
+            writer.writeheader()
+            writer.writerow({
+                "venue_id": "VEN-000123",
+                "venue_name": "Madison Square Garden (1925)",
+                "normalized_name": "madisonsquaregarden1925",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "1925",
+                "valid_to": "1968",
+                "date_precision": "YEAR",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000123",
+                "venue_name": "Madison Square Garden",
+                "normalized_name": "madisonsquaregarden",
+                "name_type": "HISTORICAL",
+                "valid_from": "1925",
+                "valid_to": "1968",
+                "date_precision": "YEAR",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000124",
+                "venue_name": "Madison Square Garden",
+                "normalized_name": "madisonsquaregarden",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "1968-02-11",
+                "valid_to": "",
+                "date_precision": "DAY",
+                "source_basis": "fixture",
+                "notes": "",
+            })
         metadata = ingest_school.load_venue_metadata_map(
             school / "venues.csv",
             global_venues,
@@ -694,6 +791,34 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 runtime_metadata,
             )
             self.assertEqual(runtime_result["venue_id"], "VEN-000124")
+
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "does not match current source semantics",
+            ):
+                _venue_maps(rehearsal, "st-bonaventure")
+
+            reconciliation_metadata, _ = _venue_maps(
+                rehearsal,
+                "st-bonaventure",
+                approved_plan=approved,
+            )
+            reconciliation_result = ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "STB-1968-69-018",
+                    "game_date": "",
+                    "season_label": "1968-1969",
+                    "curated_venue_name": "Madison Square Garden",
+                    "city": "New York",
+                    "state": "NY",
+                },
+                reconciliation_metadata,
+            )
+            self.assertEqual(reconciliation_result["venue_id"], "VEN-000124")
+            self.assertEqual(
+                reconciliation_result["venue_key"],
+                "madison-square-garden-1968",
+            )
 
             source_path = rehearsal / "schools" / "st-bonaventure" / "source-games.csv"
             rows = list(csv.DictReader(source_path.open(encoding="utf-8-sig", newline="")))
