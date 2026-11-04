@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "ed48aad57ae48efab33b33b724c13446b28ac17b",
+  "recovered_request_id": "st-bonaventure-stage2-reconciliation-diagnostic-0001",
+  "request_id": "st-bonaventure-stage2-reconciliation-diagnostic-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
