@@ -565,6 +565,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "closed": "",
             },
         }
+        # Model the minimal global physical-venue registry required by the real reconciliation loader.
         reference = repo / "data" / "reference"
         reference.mkdir(parents=True, exist_ok=True)
         venue_fields = [
