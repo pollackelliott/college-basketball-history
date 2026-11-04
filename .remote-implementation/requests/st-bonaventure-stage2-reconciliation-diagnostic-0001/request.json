@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage2-reconciliation-diagnostic-0001",
+  "school_key": "st-bonaventure",
+  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
+  "previous_control_state_commit": "fcf6425b3f13e43acd1482d072b8c3ad68196ce7",
+  "previous_control_state_sha256": "b08582a2cf768cb8c1b1e1e166bf69aced11ae750a540cc4cf48775fd4a77d1e",
+  "expected_protected_main_sha": "ed48aad57ae48efab33b33b724c13446b28ac17b",
+  "creation_provenance": {
+    "origin": "St. Bonaventure serialized Implementation Stage 2 - fresh-verified proposal-0004 Madison Square Garden execution diagnosis",
+    "authorization": "Existing St. Bonaventure Stage 2 authority persists through OWNER_GATE_1_READY. Fresh-verified proposal st-bonaventure-stage2-proposal-0004 is BLOCKED on source game STB-1968-69-018 because the permanent runtime sees Madison Square Garden as VEN-000123 or VEN-000124 and fails to apply the already-settled date-aware physical-venue authority. The affected proposal decision is canonical game CBBG-0151249. Authorizes exactly one read-only reconciliation diagnostic for CBBG-0151249 against proposal-0004. Preserve the exact 232-decision universe, recommendation map, target branch, Research Freeze, Integration Freeze, and historical authority. No tracked mutation, historical reclassification, map rewrite, Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, current-main refresh, or repair authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": true,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "dc8b5da7789e24ddaed77b30132694fff2664763",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-proposal-0004/checkpoint-manifest.json",
+    "sha256": "47faebd8c09b540fb33f389621f598a95f46ddd7557ee5d3f1ffa62fceff02e6"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "recommendation_map_sha256": "783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a",
+  "canonical_game_id": "CBBG-0151249"
+}
