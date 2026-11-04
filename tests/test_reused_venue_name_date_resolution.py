@@ -565,6 +565,101 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "closed": "",
             },
         }
+        reference = repo / "data" / "reference"
+        reference.mkdir(parents=True, exist_ok=True)
+        venue_fields = [
+            "venue_id",
+            "venue_key",
+            "display_name",
+            "city",
+            "state",
+            "opened",
+            "closed",
+            "date_precision",
+            "identity_status",
+            "source_basis",
+            "notes",
+        ]
+        with (reference / "venues.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=venue_fields)
+            writer.writeheader()
+            writer.writerow({
+                "venue_id": "VEN-000123",
+                "venue_key": "madison-square-garden-1925",
+                "display_name": "Madison Square Garden (1925)",
+                "city": "New York",
+                "state": "NY",
+                "opened": "1925",
+                "closed": "1968",
+                "date_precision": "YEAR",
+                "identity_status": "VERIFIED",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000124",
+                "venue_key": "madison-square-garden-1968",
+                "display_name": "Madison Square Garden",
+                "city": "New York",
+                "state": "NY",
+                "opened": "1968-02-11",
+                "closed": "",
+                "date_precision": "DAY",
+                "identity_status": "VERIFIED",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+        name_fields = [
+            "venue_id",
+            "venue_name",
+            "normalized_name",
+            "name_type",
+            "valid_from",
+            "valid_to",
+            "date_precision",
+            "source_basis",
+            "notes",
+        ]
+        with (reference / "venue-names.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=name_fields)
+            writer.writeheader()
+            writer.writerow({
+                "venue_id": "VEN-000123",
+                "venue_name": "Madison Square Garden (1925)",
+                "normalized_name": "madisonsquaregarden1925",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "1925",
+                "valid_to": "1968",
+                "date_precision": "YEAR",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000123",
+                "venue_name": "Madison Square Garden",
+                "normalized_name": "madisonsquaregarden",
+                "name_type": "HISTORICAL",
+                "valid_from": "1925",
+                "valid_to": "1968",
+                "date_precision": "YEAR",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000124",
+                "venue_name": "Madison Square Garden",
+                "normalized_name": "madisonsquaregarden",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "1968-02-11",
+                "valid_to": "",
+                "date_precision": "DAY",
+                "source_basis": "fixture",
+                "notes": "",
+            })
         metadata = ingest_school.load_venue_metadata_map(
             school / "venues.csv",
             global_venues,
