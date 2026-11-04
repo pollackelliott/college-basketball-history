@@ -40,6 +40,8 @@ from pathlib import Path
 
 from administrative_status import administrative_status_errors
 from frozen_venue_authority import (
+    SEMANTIC_PHASE_POST_RECONCILIATION,
+    SEMANTIC_PHASE_PRE_INGEST,
     load_frozen_venue_split_authority,
     sealed_post_reconciliation_semantic_delta,
     sealed_pre_ingest_semantic_delta,
@@ -788,6 +790,11 @@ def load_runtime_venue_metadata_map(
         repo_root,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        semantic_phase=(
+            SEMANTIC_PHASE_POST_RECONCILIATION
+            if post_reconciliation_semantics
+            else SEMANTIC_PHASE_PRE_INGEST
+        ),
     )
     if frozen_split_authority:
         bind_frozen_venue_split_authority(
