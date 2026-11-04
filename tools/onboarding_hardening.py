@@ -1434,6 +1434,7 @@ def rehearse_review(
                 school_key,
                 changed,
                 include_tests=True,
+                approved_plan=approved,
                 **({
                     "correction_source_id": approved["summary"]["correction_source_game_id"],
                     "correction_site_proof": execution["correction_site_nonregression"],
