@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-current-main-refresh-0011",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "st-bonaventure-stage2-census-0012",
+  "operation": "STAGE2_CENSUS",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "dd6a363cde9331b1479c8356ce674e8f6ded4f2b",
-  "previous_control_state_sha256": "ba55bd6b1297780603041ed369153c9ae595d79fb366d430efa0f4890899f096",
+  "previous_control_state_commit": "8530b37b1fe863781b2a6b6083f627784568182a",
+  "previous_control_state_sha256": "6ed11c5d3e6b3c9f2c2d5f267081b7f7995fe4b99864b1370e60be0649c16a0e",
   "expected_protected_main_sha": "0c66967db740fb935b1f11f17b223b6a19d8a858",
   "target_branch": "data/st-bonaventure-onboarding",
-  "target_sha": "0f0f25f0a87010492f02db94955f2f3b84c7b058",
+  "target_sha": "c505386c0f8e37a192156f19eb40e824cda45a6a",
   "phase0_successor": {
     "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
     "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
@@ -18,26 +18,21 @@
     "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0010/successor-manifest.json",
-    "sha256": "b1368cfde9ca865138df5ab358673ea0db916c70cf609d24f08646bd3a95dd09"
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0011/successor-manifest.json",
+    "sha256": "a56647ed525d51467c111eb77ae3ae21ce991d1a4c21e49cb3d5a38dad0152d5"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "CONTROL CENTER AUTHORIZATION — ST. BONAVENTURE STAGE 2 CURRENT-MAIN REFRESH AFTER PR #458. The owner explicitly authorized the bounded generic final-semantic-phase repair and directed the Control Center to proceed without another routine owner check-in. Control Center independently verified merged protected main 0c66967db740fb935b1f11f17b223b6a19d8a858, exact onboarding predecessor 0f0f25f0a87010492f02db94955f2f3b84c7b058, exact merge base d64630b7269c6c911ced0c65c5eb0c288541c8cf, target-only 9 / intervening-main 3 / overlap 0 / no intervening schools/st-bonaventure path, global control IDLE, recovery_required=false, and fresh-verified prior refresh successor -0010. Authorization covers exactly one guarded STAGE2_CURRENT_MAIN_REFRESH plus required mutation-lock/write-ahead/CAS, validation, semantic-drift protection, and independent fresh verification. No new basketball-history authority, Research/Integration Freeze change, stale decision-universe carry-forward, recommendation-map change, arbitrary repair, Owner Gate 1/2, release, Preview, St. Bonaventure merge, or Production authority."
-  },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact post-PR #458 Control Center-authorized current-main refresh",
-    "authorization": "PR #458 merged exact reviewed head ccbd398a05a389052c722d8bd9156ee369b40021 into protected main as 0c66967db740fb935b1f11f17b223b6a19d8a858 with parents d64630b7269c6c911ced0c65c5eb0c288541c8cf and ccbd398a05a389052c722d8bd9156ee369b40021 after both required exact-head workflows and Vercel passed. Immediately before request creation the onboarding predecessor remains 0f0f25f0a87010492f02db94955f2f3b84c7b058; merge base is d64630b7269c6c911ced0c65c5eb0c288541c8cf; target-only paths are the same 9 package/reference paths; intervening-main paths are tests/test_reused_venue_name_date_resolution.py, tools/frozen_venue_authority.py, tools/ingest_school.py; overlap is 0; protected main changes no schools/st-bonaventure path; global control is IDLE/recovery_required=false/transaction COMPLETE. This request binds the independently fresh-verified refresh -0010 successor and preserves immutable Integration Freeze/semantic authority. A fresh Stage 2 census must regenerate after this refresh; the prior 232-decision universe is not carried forward by assertion. Prior activation attempt failed pre-acceptance with STOP: STALE_CONTROL_PREDECESSOR because an archive-only control commit advanced the control branch before the active request commit. Durable control remained IDLE/COMPLETE with recovery_required=false and request -0011 absent from accepted/consumed/abandoned IDs. This commit corrects only the exact predecessor binding; all substantive refresh authority and topology remain unchanged. A second pre-acceptance activation attempt failed with STOP: STALE_CONTROL_STATE_HASH because the transport-side SHA-256 calculation was incorrect. The hashing implementation has now been validated against the standard SHA-256 abc test vector; current protected main, target SHA, topology authority, and clean IDLE control state remain unchanged. This commit corrects only the exact predecessor state hash binding. Final pre-acceptance correction: the control-state SHA-256 is now derived with a hash implementation verified both against the standard SHA-256 abc vector and the repository's prior accepted St. Bonaventure control-state hash. Current predecessor is dd6a363cde9331b1479c8356ce674e8f6ded4f2b; exact state SHA-256 is ba55bd6b1297780603041ed369153c9ae595d79fb366d430efa0f4890899f096. All substantive refresh authority and topology remain unchanged."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census after independently verified PR #458 current-main refresh -0011",
+    "authorization": "Existing owner-authorized Stage 2 phase authority persists. Refresh -0011 is COMPLETE and independently fresh-verified PASS on protected main 0c66967db740fb935b1f11f17b223b6a19d8a858 with exact successor c505386c0f8e37a192156f19eb40e824cda45a6a. This read-only census must regenerate the decision universe from that exact successor before any proposal rehearsal. The prior 232-decision universe and recommendation map are not carried forward by assertion. No owner-gate, sealing, apply, release, Preview, merge, Production, recovery, or unrelated mutation authority is granted."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
