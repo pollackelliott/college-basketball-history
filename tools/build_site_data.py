@@ -931,16 +931,26 @@ def main() -> int:
         coverage = validated_historical_coverage(
             historical_coverage_rows, program_key, seasons, authority_cases
         )
+        accounting = validated_historical_accounting(
+            historical_accounting_rows,
+            program_key,
+            seasons,
+            accounting_authority_cases,
+        )
         coverage_by_season = {item["season_label"]: item for item in coverage}
+        accounting_by_season = {item["season_label"]: item for item in accounting}
+        season_labels = set(seasons) | set(coverage_by_season) | set(accounting_by_season)
         season_summaries = []
-        for season_label in sorted(seasons, reverse=True):
-            season_games = seasons[season_label]
+        for season_label in sorted(season_labels, reverse=True):
+            season_games = seasons.get(season_label, [])
             season_summaries.append(
                 {
                     "season_label": season_label,
                     **record_from_games(season_games),
                     **({"historical_coverage": coverage_by_season[season_label]}
                        if season_label in coverage_by_season else {}),
+                    **({"historical_accounting": accounting_by_season[season_label]}
+                       if season_label in accounting_by_season else {}),
                 }
             )
 
@@ -1018,12 +1028,13 @@ def main() -> int:
             },
             "summary": {
                 **overall,
-                "first_season": min(seasons) if seasons else None,
-                "last_season": max(seasons) if seasons else None,
+                "first_season": min(season_labels) if season_labels else None,
+                "last_season": max(season_labels) if season_labels else None,
                 "opponents": len(opponents),
             },
             "seasons": season_summaries,
             **({"historical_season_coverage": coverage} if coverage else {}),
+            **({"historical_season_accounting": accounting} if accounting else {}),
             "opponents": opponent_summaries,
             "games": perspective_games,
             **conference_metadata,
