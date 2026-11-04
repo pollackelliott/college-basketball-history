@@ -17,7 +17,7 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
                 "owner_disposition": "https://github.com/example/history/issues/1",
             }
         }
-        self.seasons = {"1919-20": [{"result": "W"}] * 3 + [{"result": "L"}] * 7}
+        self.seasons = {"1919-1920": [{"result": "W"}] * 3 + [{"result": "L"}] * 7}
         self.row = {
             "program_key": "example", "season_label": "1919-20",
             "official_wins": "6", "official_losses": "10", "official_games": "16",
@@ -41,6 +41,7 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
         before = {key: list(value) for key, value in self.seasons.items()}
         result = self.build()
         self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["season_label"], "1919-1920")
         self.assertEqual(result[0]["unidentified_record"]["games"], 6)
         self.assertEqual(result[0]["official_record"]["wins"], 6)
         self.assertIn("10 individual game results", result[0]["note"])
@@ -76,6 +77,25 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
     def test_missing_or_phantom_canonical_games_rejected(self):
         with self.assertRaisesRegex(ValueError, "no canonical games"):
             self.build(seasons={})
+
+    def test_short_and_full_equivalent_coverage_rows_are_duplicate(self):
+        duplicate = dict(self.row)
+        duplicate["season_label"] = "1919-1920"
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            self.build(rows=[self.row, duplicate])
+
+    def test_short_and_full_equivalent_authority_keys_are_duplicate(self):
+        authority = dict(self.authority)
+        authority[("example", "1919-1920")] = dict(
+            self.authority[("example", "1919-20")]
+        )
+        with self.assertRaisesRegex(ValueError, "duplicated after season normalization"):
+            self.build(authority=authority)
+
+    def test_invalid_coverage_season_fails_closed(self):
+        self.row["season_label"] = "1919-21"
+        with self.assertRaisesRegex(ValueError, "season invalid"):
+            self.build()
 
 
 if __name__ == "__main__":
