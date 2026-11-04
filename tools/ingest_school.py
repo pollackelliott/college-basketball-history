@@ -766,9 +766,9 @@ def load_runtime_venue_metadata_map(
 ) -> dict[str, list[dict[str, str]]]:
     """Load venue metadata plus authenticated frozen per-game split authority.
 
-    If the sealed transaction legitimately changed Freeze-covered source semantics
-    before ingestion, the current ledger must equal the original Freeze plus exactly
-    the semantic delta derived from that same sealed plan.
+    Ordinary runtime callers authenticate only the exact pre-ingest semantic delta.
+    The explicit post-reconciliation mode is reserved for final package/no-op
+    verification after the same sealed plan has applied source normalizations.
     """
 
     venue_metadata_map = load_venue_metadata_map(
