@@ -1,0 +1,63 @@
+{
+  "changed_file_sha256": {
+    "tests/test_reused_venue_name_date_resolution.py": "d1b70b73fb32438f4a1ab014ec0a66c4154bc6575a752f9878f2553450e87df9",
+    "tools/frozen_venue_authority.py": "fea5c68fecf6396efa500786cb30819a6563c22f4ef4f09aeb72013af72c2b7a"
+  },
+  "changed_paths": [
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "f83944ec41a6a79697f71c62f0b07c1a50fb1539",
+  "global_lock_commit": "46744926ac6a13096fa16f0416d25c94e226a547",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py"
+  ],
+  "merge_base_sha": "bb74b0a770f67192f4e670fade253282cc28074e",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "0f0f25f0a87010492f02db94955f2f3b84c7b058",
+  "prepared_main_parent_sha": "d64630b7269c6c911ced0c65c5eb0c288541c8cf",
+  "prepared_parent_sha": "f83944ec41a6a79697f71c62f0b07c1a50fb1539",
+  "prepared_parents": [
+    "f83944ec41a6a79697f71c62f0b07c1a50fb1539",
+    "d64630b7269c6c911ced0c65c5eb0c288541c8cf"
+  ],
+  "prepared_tree_sha": "6f09a21744a470ca113340f88d694245657a2c8b",
+  "protected_main_sha": "d64630b7269c6c911ced0c65c5eb0c288541c8cf",
+  "refresh_proof_sha256": "f55ddee6008102394000dceb427e115cfb2540ad3a74dbe8f4cbcdf51c0d219d",
+  "repository_validation": "PASS",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0010",
+  "request_sha256": "d5d75a71106d541db98ee4010f9cbbf4e5f010aac88a297ed77d155b05997cb8",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "sidecars": {
+    "integration-freeze.json": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+    "refresh-proof.json": "f55ddee6008102394000dceb427e115cfb2540ad3a74dbe8f4cbcdf51c0d219d"
+  },
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/st-bonaventure/conferences.csv",
+    "schools/st-bonaventure/notes.md",
+    "schools/st-bonaventure/opponents.csv",
+    "schools/st-bonaventure/source-games.csv",
+    "schools/st-bonaventure/source-notes.md",
+    "schools/st-bonaventure/venues.csv"
+  ]
+}
