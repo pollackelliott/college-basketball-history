@@ -4216,14 +4216,6 @@ def approve_plan(
         else:
             unknown_canonical = sorted(set(canonical_patch) - CANONICAL_PATCH_FIELDS)
         unknown_source = sorted(set(source_patch) - SOURCE_PATCH_FIELDS)
-        if (
-            (canonical_patch or source_patch)
-            and item.get("category") not in PATCH_CAPABLE_DECISION_CATEGORIES
-        ):
-            raise WorkflowError(
-                f"{decision_id}: historical patches are not valid on "
-                f"{item.get('category', '')} decisions"
-            )
         if item.get("category") == "identity":
             if canonical_patch:
                 raise WorkflowError(
@@ -4587,6 +4579,14 @@ def approve_plan(
         if unknown_source:
             raise WorkflowError(
                 f"{decision_id}: forbidden source patch fields: {', '.join(unknown_source)}"
+            )
+        if (
+            (canonical_patch or source_patch)
+            and item.get("category") not in PATCH_CAPABLE_DECISION_CATEGORIES
+        ):
+            raise WorkflowError(
+                f"{decision_id}: historical patches are not valid on "
+                f"{item.get('category', '')} decisions"
             )
         sealed = dict(item)
         sealed.update(
