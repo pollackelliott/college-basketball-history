@@ -302,7 +302,7 @@
     "st-bonaventure-stage2-current-main-refresh-0003"
   ],
   "active_expected_main_sha": "3b7b1fae0b9fffb1cbb097e3dacaa4cda64d8d17",
-  "active_lock_commit": null,
+  "active_lock_commit": "4e8d9bb9b59b72ee67149b266df339013fc09fd3",
   "active_lock_owner": "github-actions:41745484420:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
