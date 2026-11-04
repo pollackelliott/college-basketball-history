@@ -52,7 +52,7 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
         self.assertEqual(self.build(rows=[]), [])
 
     def test_canonical_result_drift_is_rejected(self):
-        games = {"1919-20": [{"result": "W"}] * 4 + [{"result": "L"}] * 6}
+        games = {"1919-1920": [{"result": "W"}] * 4 + [{"result": "L"}] * 6}
         with self.assertRaisesRegex(ValueError, "arithmetic/canonical discrepancy"):
             self.build(seasons=games)
 
