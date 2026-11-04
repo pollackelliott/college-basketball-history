@@ -267,6 +267,7 @@ def verify_release_readiness_authority(
         "changed_paths": successor["changed_paths"],
         "sidecars": sidecars,
         "manifest": manifest,
+        "approved": approved,
     }
 
 
@@ -299,6 +300,7 @@ def run_permanent_release_readiness(
         school,
         paths,
         include_tests=True,
+        approved_plan=authority["approved"],
         **release_school.correction_gate_kwargs_from_manifest(manifest, school),
     )
     release_school.verify_committed_change_boundary(worktree, manifest, target)
