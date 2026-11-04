@@ -632,11 +632,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "ed48aad57ae48efab33b33b724c13446b28ac17b",
     "recommendation_map_sha256": "783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "st-bonaventure-stage2-proposal-0004",
     "runtime_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
     "school_key": "st-bonaventure",
