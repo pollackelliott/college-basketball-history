@@ -41,6 +41,7 @@ from pathlib import Path
 from administrative_status import administrative_status_errors
 from frozen_venue_authority import (
     load_frozen_venue_split_authority,
+    sealed_post_reconciliation_semantic_delta,
     sealed_pre_ingest_semantic_delta,
 )
 from conference_reference import history_errors, registry_by_key
@@ -761,24 +762,32 @@ def load_runtime_venue_metadata_map(
     global_venues_by_id: dict[str, dict[str, str]],
     *,
     sealed_plan_context: dict[str, Any] | None = None,
+    post_reconciliation_semantics: bool = False,
 ) -> dict[str, list[dict[str, str]]]:
     """Load venue metadata plus authenticated frozen per-game split authority.
 
-    If the sealed transaction legitimately changed Freeze-covered source semantics
-    before ingestion, the current ledger must equal the original Freeze plus exactly
-    the semantic delta derived from that same sealed plan.
+    Ordinary runtime callers authenticate only the exact pre-ingest semantic delta.
+    The explicit post-reconciliation mode is reserved for final package/no-op
+    verification after the same sealed plan has applied source normalizations.
     """
 
     venue_metadata_map = load_venue_metadata_map(
         venue_path,
         global_venues_by_id,
     )
+    allowed_semantic_delta = (
+        sealed_post_reconciliation_semantic_delta(
+            repo_root,
+            school_key,
+            sealed_plan_context,
+        )
+        if post_reconciliation_semantics
+        else sealed_pre_ingest_semantic_delta(sealed_plan_context)
+    )
     frozen_split_authority = load_frozen_venue_split_authority(
         repo_root,
         school_key,
-        allowed_semantic_delta=sealed_pre_ingest_semantic_delta(
-            sealed_plan_context
-        ),
+        allowed_semantic_delta=allowed_semantic_delta,
     )
     if frozen_split_authority:
         bind_frozen_venue_split_authority(
@@ -1586,6 +1595,11 @@ def main() -> int:
         sealed_identity_decisions = identity_decisions_from_sealed_plan(
             sealed_identity_plan
         )
+        if sealed_identity_plan is not None and sealed_verification_plan is not None:
+            raise ValueError(
+                "identity decisions and post-apply sealed-plan verification context "
+                "cannot be combined"
+            )
         semantic_plan_context = sealed_identity_plan or sealed_verification_plan
         all_sources = read_csv(source_path)
         program_rows = read_csv(programs_path)
@@ -1604,6 +1618,7 @@ def main() -> int:
             venue_path,
             global_venues_by_id,
             sealed_plan_context=semantic_plan_context,
+            post_reconciliation_semantics=sealed_verification_plan is not None,
         )
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
