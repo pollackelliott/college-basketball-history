@@ -805,6 +805,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             "season_label",
             "game_date",
             "normalized_opponent_key",
+            "overtime_periods",
             "curated_site_type",
             "curated_venue_name",
             "city",
@@ -1244,6 +1245,224 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     rehearsal / "schools" / "st-bonaventure" / "venues.csv",
                     global_venues,
                     sealed_plan_context=approved,
+                )
+
+        # Exercise the complete post-reconciliation authority contract through
+        # the real Integration Freeze matcher. This is the production topology that
+        # proposal -0008 exposed: 4 dates + 4 OT + 5 game types + 1 site type.
+        with tempfile.TemporaryDirectory() as copied:
+            rehearsal = Path(copied) / "repository"
+            copy_repository(repo, rehearsal, school_key="st-bonaventure")
+            source_path = rehearsal / "schools" / "st-bonaventure" / "source-games.csv"
+            source_rows = list(
+                csv.DictReader(
+                    source_path.open(encoding="utf-8-sig", newline="")
+                )
+            )
+            source_by_id = {row["source_game_id"]: row for row in source_rows}
+            date_ids = before_ids[0:4]
+            overtime_ids = before_ids[4:8]
+            game_type_ids = before_ids[8:13]
+            site_id = "STB-1968-69-018"
+
+            final_decisions = []
+            canonical_rows = []
+            canonical_fields = [
+                "canonical_game_id",
+                "season_label",
+                "game_date",
+                "team_a_key",
+                "team_b_key",
+                "team_a_score",
+                "team_b_score",
+                "result_winner_team_key",
+                "overtime_periods",
+                "site_type",
+                "venue_key",
+                "site_city",
+                "site_state",
+                "game_type",
+                "postseason_round",
+            ]
+
+            for index, source_id in enumerate(date_ids, start=1):
+                value = f"1966-01-{index:02d}"
+                source_by_id[source_id]["game_date"] = value
+                game_id = f"CBBG-FINAL-DATE-{index}"
+                final_decisions.append({
+                    "decision_id": f"FINAL-DATE-{index}",
+                    "category": "discrepancy",
+                    "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                    "source_game_id": source_id,
+                    "canonical_game_id": game_id,
+                    "field_name": "game_date",
+                    "canonical_value": value,
+                })
+                canonical_rows.append({
+                    "canonical_game_id": game_id,
+                    "season_label": "1966-1967",
+                    "game_date": value,
+                    "team_a_key": "st-bonaventure",
+                    "team_b_key": "example-opponent",
+                    "site_type": "UNKNOWN",
+                    "game_type": "REGULAR_SEASON",
+                })
+
+            overtime_values = ("1", "2", "1", "1")
+            for index, (source_id, value) in enumerate(
+                zip(overtime_ids, overtime_values),
+                start=1,
+            ):
+                source_by_id[source_id]["overtime_periods"] = value
+                game_id = f"CBBG-FINAL-OT-{index}"
+                final_decisions.append({
+                    "decision_id": f"FINAL-OT-{index}",
+                    "category": "discrepancy",
+                    "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                    "source_game_id": source_id,
+                    "canonical_game_id": game_id,
+                    "field_name": "overtime_periods",
+                    "canonical_value": value,
+                })
+                canonical_rows.append({
+                    "canonical_game_id": game_id,
+                    "season_label": "1966-1967",
+                    "team_a_key": "st-bonaventure",
+                    "team_b_key": "example-opponent",
+                    "overtime_periods": value,
+                    "site_type": "UNKNOWN",
+                    "game_type": "REGULAR_SEASON",
+                })
+
+            game_type_values = ("POSTSEASON", "NIT", "NIT", "NIT", "NIT")
+            for index, (source_id, value) in enumerate(
+                zip(game_type_ids, game_type_values),
+                start=1,
+            ):
+                source_by_id[source_id]["curated_game_type"] = value
+                game_id = f"CBBG-FINAL-TYPE-{index}"
+                final_decisions.append({
+                    "decision_id": f"FINAL-TYPE-{index}",
+                    "category": "discrepancy",
+                    "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                    "source_game_id": source_id,
+                    "canonical_game_id": game_id,
+                    "field_name": "game_type",
+                    "canonical_value": value,
+                })
+                canonical_rows.append({
+                    "canonical_game_id": game_id,
+                    "season_label": "1966-1967",
+                    "team_a_key": "st-bonaventure",
+                    "team_b_key": "example-opponent",
+                    "site_type": "UNKNOWN",
+                    "game_type": value,
+                })
+
+            source_by_id[site_id]["curated_site_type"] = "SOURCE_PROGRAM_HOME"
+            final_decisions.append({
+                "decision_id": "FINAL-SITE",
+                "category": "discrepancy",
+                "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                "source_game_id": site_id,
+                "canonical_game_id": "CBBG-FINAL-SITE",
+                "field_name": "site_type",
+                "canonical_value": "TEAM_A_HOME",
+            })
+            canonical_rows.append({
+                "canonical_game_id": "CBBG-FINAL-SITE",
+                "season_label": "1968-1969",
+                "team_a_key": "st-bonaventure",
+                "team_b_key": "example-opponent",
+                "site_type": "TEAM_A_HOME",
+                "venue_key": "madison-square-garden-1968",
+                "site_city": "New York",
+                "site_state": "NY",
+                "game_type": "REGULAR_SEASON",
+            })
+
+            with source_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=source_fields)
+                writer.writeheader()
+                writer.writerows(source_rows)
+
+            canonical_path = rehearsal / "data" / "canonical" / "games.csv"
+            with canonical_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=canonical_fields)
+                writer.writeheader()
+                writer.writerows(canonical_rows)
+
+            final_approved = {
+                "school_key": "st-bonaventure",
+                "approved_plan_hash": "f" * 64,
+                "decisions": final_decisions,
+            }
+
+            # Final verification explicitly admits the sealed final semantic
+            # universe and still returns the exact frozen split authority.
+            final_metadata = ingest_school.load_runtime_venue_metadata_map(
+                rehearsal,
+                "st-bonaventure",
+                rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                global_venues,
+                sealed_plan_context=final_approved,
+                post_reconciliation_semantics=True,
+            )
+            final_result = ingest_school.resolve_venue_metadata(
+                source_by_id[site_id],
+                final_metadata,
+            )
+            self.assertEqual(final_result["venue_id"], "VEN-000124")
+
+            # The identical final-state delta remains forbidden in ordinary
+            # pre-ingest authentication.
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "does not match current source semantics",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                    global_venues,
+                    sealed_plan_context=final_approved,
+                )
+
+            # Changed canonical authority is rejected before the matcher can
+            # authenticate the final source state.
+            wrong_approved = json.loads(json.dumps(final_approved))
+            wrong_approved["decisions"][4]["canonical_value"] = "9"
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "sealed canonical overtime_periods no longer matches",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                    global_venues,
+                    sealed_plan_context=wrong_approved,
+                    post_reconciliation_semantics=True,
+                )
+
+            # Unsealed final semantic drift is still fail-closed.
+            unrelated_id = before_ids[20]
+            source_by_id[unrelated_id]["overtime_periods"] = "3"
+            with source_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=source_fields)
+                writer.writeheader()
+                writer.writerows(source_rows)
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "outside the exact sealed post-reconciliation semantic delta",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                    global_venues,
+                    sealed_plan_context=final_approved,
+                    post_reconciliation_semantics=True,
                 )
 
         # An ignored manifest cannot be smuggled across the disposable-copy

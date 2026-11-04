@@ -179,6 +179,13 @@ FINAL_SOURCE_SEMANTIC_FIELDS = frozenset({
     "raw_text",
 })
 
+SEMANTIC_PHASE_PRE_INGEST = "PRE_INGEST"
+SEMANTIC_PHASE_POST_RECONCILIATION = "POST_RECONCILIATION"
+SEMANTIC_PHASE_FIELDS = {
+    SEMANTIC_PHASE_PRE_INGEST: PRE_INGEST_SEMANTIC_FIELDS,
+    SEMANTIC_PHASE_POST_RECONCILIATION: FINAL_SOURCE_SEMANTIC_FIELDS,
+}
+
 POST_RECONCILIATION_NORMALIZATION_FIELDS = frozenset({
     "game_date",
     "score",
@@ -613,9 +620,14 @@ def _semantic_snapshot_matches_allowed_delta(
     baseline: dict[str, Any],
     current: dict[str, Any],
     allowed_delta: dict[str, dict[str, str]] | None,
+    *,
+    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> bool:
-    """Require current semantics to equal baseline plus exactly the sealed delta."""
+    """Require current semantics to equal baseline plus the exact phase-bound delta."""
 
+    allowed_fields = SEMANTIC_PHASE_FIELDS.get(semantic_phase)
+    if allowed_fields is None:
+        return False
     if (
         baseline.get("schema_version") != current.get("schema_version")
         or baseline.get("fields") != current.get("fields")
@@ -637,7 +649,7 @@ def _semantic_snapshot_matches_allowed_delta(
         if source_id not in baseline_rows or not isinstance(patch, dict):
             return False
         if any(
-            field not in fields or field not in PRE_INGEST_SEMANTIC_FIELDS
+            field not in fields or field not in allowed_fields
             for field in patch
         ):
             return False
@@ -659,6 +671,7 @@ def authenticated_frozen_venue_split_authority(
     school_key: str,
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
+    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> tuple[dict[str, dict[str, str]], bytes | None]:
     """Return exact frozen split assignments and their authenticated manifest bytes.
 
@@ -729,11 +742,18 @@ def authenticated_frozen_venue_split_authority(
             snapshot,
             current_snapshot,
             allowed_semantic_delta,
+            semantic_phase=semantic_phase,
         )
     ):
+        phase_label = (
+            "sealed post-reconciliation semantic delta"
+            if semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+            else "sealed pre-ingest semantic delta"
+        )
         suffix = (
-            " outside the exact sealed pre-ingest semantic delta"
+            f" outside the exact {phase_label}"
             if allowed_semantic_delta
+            or semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
             else ""
         )
         raise FrozenVenueSplitAuthorityError(
@@ -847,6 +867,7 @@ def load_frozen_venue_split_authority(
     school_key: str,
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
+    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> dict[str, dict[str, str]]:
     """Return only authenticated per-game split assignments."""
 
@@ -854,6 +875,7 @@ def load_frozen_venue_split_authority(
         repo,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        semantic_phase=semantic_phase,
     )
     return authority
 
@@ -863,6 +885,7 @@ def frozen_venue_split_freeze_bytes(
     school_key: str,
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
+    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> bytes | None:
     """Return manifest bytes only when their split authority remains authenticated."""
 
@@ -870,5 +893,6 @@ def frozen_venue_split_freeze_bytes(
         repo,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        semantic_phase=semantic_phase,
     )
     return payload if authority else None
