@@ -668,20 +668,63 @@ def main() -> int:
     canonical_rows = read_csv(games_path)
     assertion_rows = read_csv(assertions_path)
     coverage_path = repo_root / "data" / "reference" / "historical-season-coverage.csv"
+    accounting_path = repo_root / "data" / "reference" / "historical-season-accounting.csv"
     historical_coverage_rows = read_csv(coverage_path) if coverage_path.exists() else []
-    authority_cases = {}
-    if historical_coverage_rows:
-        authority_registry = json.loads((
-            repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
-        ).read_text(encoding="utf-8"))
+    historical_accounting_rows = read_csv(accounting_path) if accounting_path.exists() else []
+
+    authority_cases: dict[tuple[str, str], dict[str, Any]] = {}
+    legacy_authority_path = (
+        repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
+    )
+    if legacy_authority_path.exists():
+        authority_registry = json.loads(legacy_authority_path.read_text(encoding="utf-8"))
         if authority_registry.get("authority_type") != "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE":
             raise ValueError("Historical coverage owner authority registry invalid")
-        authority_cases = {
-            (item["school_key"], item["season"]): item
-            for item in authority_registry["cases"]
-        }
-        if len(authority_cases) != len(authority_registry["cases"]):
-            raise ValueError("Historical coverage owner authority keys duplicated")
+        for item in authority_registry.get("cases", []):
+            key = (item["school_key"], item["season"])
+            if key in authority_cases:
+                raise ValueError("Historical coverage owner authority keys duplicated")
+            authority_cases[key] = item
+
+    accounting_authority_cases: dict[tuple[str, str], dict[str, Any]] = {}
+    mixed_authority_path = (
+        repo_root / "data" / "reference" / "early-history-accounting-authorities.json"
+    )
+    if mixed_authority_path.exists():
+        mixed_registry = json.loads(mixed_authority_path.read_text(encoding="utf-8"))
+        if mixed_registry.get("authority_type") != "OWNER_APPROVED_EARLY_HISTORY_ACCOUNTING_CLOSEOUT":
+            raise ValueError("Historical accounting owner authority registry invalid")
+        for case in mixed_registry.get("cases", []):
+            school = case.get("school_key", "")
+            for item in case.get("aggregate_only_seasons", []):
+                key = (school, item.get("season", ""))
+                if not all(key) or key in authority_cases:
+                    raise ValueError("Historical coverage owner authority keys duplicated")
+                authority_cases[key] = {
+                    **item,
+                    "school_key": school,
+                    "season": item.get("season"),
+                    "parent_checkpoint_sha256": case.get("parent_checkpoint_sha256"),
+                    "research_base_sha": case.get("research_base_sha"),
+                    "owner_disposition": case.get("owner_disposition"),
+                    "unidentified_record": {
+                        field: item["institutional_record"][field]
+                        - item["identified_record"][field]
+                        for field in ("wins", "losses", "games")
+                    },
+                }
+            for item in case.get("accounting_contradiction_seasons", []):
+                key = (school, item.get("season", ""))
+                if not all(key) or key in accounting_authority_cases:
+                    raise ValueError("Historical accounting owner authority keys duplicated")
+                accounting_authority_cases[key] = {
+                    **item,
+                    "school_key": school,
+                    "season": item.get("season"),
+                    "parent_checkpoint_sha256": case.get("parent_checkpoint_sha256"),
+                    "research_base_sha": case.get("research_base_sha"),
+                    "owner_disposition": case.get("owner_disposition"),
+                }
 
     global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
     venue_geo_errors = canonical_venue_geography_errors(
@@ -752,12 +795,13 @@ def main() -> int:
     )
 
     invalid_coverage_programs = sorted({
-        row.get("program_key", "") for row in historical_coverage_rows
+        row.get("program_key", "")
+        for row in historical_coverage_rows + historical_accounting_rows
         if row.get("program_key", "") not in enabled_keys
     })
     if invalid_coverage_programs:
         raise ValueError(
-            "Historical coverage rows require enabled published programs: "
+            "Historical coverage/accounting rows require enabled published programs: "
             + ", ".join(invalid_coverage_programs)
         )
 
