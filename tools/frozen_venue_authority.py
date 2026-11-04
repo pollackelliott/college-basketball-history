@@ -161,6 +161,144 @@ def sealed_pre_ingest_semantic_delta(
     return result
 
 
+def sealed_post_reconciliation_semantic_delta(
+    repo_root: Path,
+    school_key: str,
+    approved: dict[str, Any] | None,
+) -> dict[str, dict[str, str]]:
+    """Derive exact frozen-source semantics after the sealed reconciliation finishes.
+
+    The ordinary runtime path must continue to authenticate against only the
+    pre-ingest delta. This wider final-state delta exists solely for post-apply
+    package/no-op verification, after the sealed transaction has already applied
+    owner-approved source normalizations.
+    """
+
+    result = {
+        source_id: dict(fields)
+        for source_id, fields in sealed_pre_ingest_semantic_delta(approved).items()
+    }
+    if not approved:
+        return result
+    if str(approved.get("school_key", "")).strip() != school_key:
+        raise FrozenVenueSplitAuthorityError(
+            "sealed post-reconciliation semantic delta school_key mismatch"
+        )
+
+    canonical_path = repo_root / "data" / "canonical" / "games.csv"
+    if not canonical_path.is_file():
+        raise FrozenVenueSplitAuthorityError(
+            "sealed post-reconciliation semantic delta requires canonical games"
+        )
+    canonical_by_id: dict[str, dict[str, str]] = {}
+    with canonical_path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            game_id = row.get("canonical_game_id", "").strip()
+            if not game_id or game_id in canonical_by_id:
+                raise FrozenVenueSplitAuthorityError(
+                    "sealed post-reconciliation semantic delta has invalid canonical identity"
+                )
+            canonical_by_id[game_id] = row
+
+    decisions = approved.get("decisions")
+    if not isinstance(decisions, list):
+        raise FrozenVenueSplitAuthorityError(
+            "sealed post-reconciliation semantic delta requires a decision list"
+        )
+
+    canonical_field_by_review_field = {
+        "game_date": "game_date",
+        "game_type": "game_type",
+        "postseason_round": "postseason_round",
+        "site_type": "site_type",
+    }
+    source_field_by_review_field = {
+        "game_date": "game_date",
+        "game_type": "curated_game_type",
+        "postseason_round": "curated_postseason_round",
+    }
+
+    for item in decisions:
+        if not isinstance(item, dict):
+            raise FrozenVenueSplitAuthorityError(
+                "sealed post-reconciliation semantic delta contains an invalid decision"
+            )
+        source_id = str(item.get("source_game_id", "")).strip()
+        action = str(item.get("decision", "")).strip()
+        field_name = str(item.get("field_name", "")).strip()
+
+        if (
+            action == "NORMALIZE_SOURCE_TO_CANONICAL"
+            and field_name in canonical_field_by_review_field
+        ):
+            if not source_id:
+                raise FrozenVenueSplitAuthorityError(
+                    "sealed post-reconciliation normalization has a blank source_game_id"
+                )
+            game_id = str(item.get("canonical_game_id", "")).strip()
+            canonical = canonical_by_id.get(game_id)
+            if canonical is None:
+                raise FrozenVenueSplitAuthorityError(
+                    f"sealed post-reconciliation normalization references unknown canonical game {game_id}"
+                )
+            canonical_field = canonical_field_by_review_field[field_name]
+            expected = str(item.get("canonical_value", ""))
+            if canonical.get(canonical_field, "") != expected:
+                raise FrozenVenueSplitAuthorityError(
+                    f"{item.get('decision_id', '')}: sealed canonical {field_name} no longer matches"
+                )
+
+            if field_name == "site_type":
+                if expected in {"NEUTRAL", "UNKNOWN", ""}:
+                    normalized = expected or "UNKNOWN"
+                elif expected == "TEAM_A_HOME":
+                    normalized = (
+                        "SOURCE_PROGRAM_HOME"
+                        if canonical.get("team_a_key", "").strip() == school_key
+                        else "OPPONENT_HOME"
+                    )
+                elif expected == "TEAM_B_HOME":
+                    normalized = (
+                        "SOURCE_PROGRAM_HOME"
+                        if canonical.get("team_b_key", "").strip() == school_key
+                        else "OPPONENT_HOME"
+                    )
+                else:
+                    raise FrozenVenueSplitAuthorityError(
+                        f"{item.get('decision_id', '')}: unsupported canonical site_type {expected!r}"
+                    )
+                source_field = "curated_site_type"
+            else:
+                source_field = source_field_by_review_field[field_name]
+                normalized = expected
+
+            result.setdefault(source_id, {})[source_field] = normalized
+
+        patch = item.get("source_patch", {})
+        if patch is None:
+            patch = {}
+        if not isinstance(patch, dict):
+            raise FrozenVenueSplitAuthorityError(
+                f"{item.get('decision_id', '')}: source_patch is not an object"
+            )
+        frozen_patch = {
+            field: str(value)
+            for field, value in patch.items()
+            if field in PRE_INGEST_SEMANTIC_FIELDS
+        }
+        if frozen_patch and not source_id:
+            raise FrozenVenueSplitAuthorityError(
+                "sealed post-reconciliation source patch has a blank source_game_id"
+            )
+        # Generic reconciliation applies source_patch after any normalization, so
+        # the final semantic guard must mirror that exact deterministic ordering.
+        if frozen_patch:
+            result.setdefault(source_id, {}).update(frozen_patch)
+
+    return result
+
+
 def _sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
