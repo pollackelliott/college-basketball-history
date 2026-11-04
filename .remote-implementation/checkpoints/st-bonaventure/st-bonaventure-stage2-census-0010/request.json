@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-stage2-census-0010",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "st-bonaventure",
+  "previous_control_state_commit": "47dbed68dec93a6bf09218f4cc4ac0431fba8cbf",
+  "previous_control_state_sha256": "104ae110649f0084ec57a28bfe8f26005d099cb14757e0e5b9631184be16e311",
+  "expected_protected_main_sha": "bb74b0a770f67192f4e670fade253282cc28074e",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "f83944ec41a6a79697f71c62f0b07c1a50fb1539",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0009/successor-manifest.json",
+    "sha256": "4eb21c6238b210dc997ffda13fdc2b2edecd5103d085f6ee9c2ad4bd2ea9b46c"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "creation_provenance": {
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census after independently verified PR #456 current-main refresh -0009",
+    "authorization": "Existing owner-authorized Stage 2 phase authority persists, and the exact Control Center disposition expressly directs this SAME lane to regenerate the repository-defined Stage 2 census only after refresh -0009 independently verifies. Refresh -0009 is COMPLETE and independently fresh-verified PASS on protected main bb74b0a770f67192f4e670fade253282cc28074e with target f83944ec41a6a79697f71c62f0b07c1a50fb1539. This unique read-only census must derive a fresh decision universe from that exact successor. The previous 232-decision universe and recommendation map are not carried forward by assertion. No Research replay, Stage 1 replay, Integration Freeze replay, Phase 0 replay, opponent-display replay, proposal rehearsal, owner-gate, sealing, apply, release, Preview, merge, Production, recovery, or unrelated tracked mutation authority is granted."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
