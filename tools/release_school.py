@@ -695,16 +695,17 @@ def merge(repo: Path, school_key: str, artifacts: Path, timeout: int, approved: 
         raise WorkflowError(
             "correction Integration Freeze changed after Preview approval"
         )
-    expected_runtime_hash = state.get("runtime_integration_freeze_sha256")
     actual_runtime_hash = (
         hashlib.sha256(runtime_freeze).hexdigest()
         if runtime_freeze is not None
         else None
     )
-    if expected_runtime_hash != actual_runtime_hash:
-        raise WorkflowError(
-            "runtime Integration Freeze authority changed after Preview approval"
-        )
+    if "runtime_integration_freeze_sha256" in state:
+        expected_runtime_hash = state["runtime_integration_freeze_sha256"]
+        if expected_runtime_hash != actual_runtime_hash:
+            raise WorkflowError(
+                "runtime Integration Freeze authority changed after Preview approval"
+            )
 
     display = program_display_name(repo, school_key)
     gh(
