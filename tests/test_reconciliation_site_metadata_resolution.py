@@ -1,4 +1,6 @@
+import csv
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -302,6 +304,251 @@ class ReconciliationSiteMetadataResolutionTests(unittest.TestCase):
                 canonical,
                 {"venue_key": "different-arena"},
             )
+
+
+class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
+    VENUE_FIELDS = [
+        "source_program_key",
+        "venue_key",
+        "venue_id",
+        "canonical_name",
+        "aliases",
+        "city",
+        "state",
+        "venue_type",
+        "known_opened",
+        "known_closed",
+        "venue_date_precision",
+        "games_currently_assigned",
+        "first_assigned_game",
+        "last_assigned_game",
+        "relationship_type",
+        "relationship_start",
+        "relationship_end",
+        "relationship_date_precision",
+        "site_rule",
+        "source_basis",
+        "notes",
+    ]
+
+    def _write_csv(self, path, fieldnames, rows):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+    def _repo(self, root):
+        self._write_csv(
+            root / "data/reference/venues.csv",
+            [
+                "venue_id",
+                "venue_key",
+                "display_name",
+                "city",
+                "state",
+                "opened",
+                "closed",
+                "date_precision",
+                "identity_status",
+                "source_basis",
+                "notes",
+            ],
+            [
+                {
+                    "venue_id": "VEN-000999",
+                    "venue_key": "example-arena",
+                    "display_name": "Example Arena",
+                    "city": "Example City",
+                    "state": "EX",
+                    "opened": "2007-09-08",
+                    "closed": "",
+                    "date_precision": "EXACT",
+                    "identity_status": "CURATED_SEED",
+                    "source_basis": "test",
+                    "notes": "",
+                }
+            ],
+        )
+        self._write_csv(
+            root / "data/reference/venue-names.csv",
+            [
+                "venue_id",
+                "venue_name",
+                "normalized_name",
+                "name_type",
+                "valid_from",
+                "valid_to",
+                "date_precision",
+                "source_basis",
+                "notes",
+            ],
+            [
+                {
+                    "venue_id": "VEN-000999",
+                    "venue_name": "Example Arena",
+                    "normalized_name": "examplearena",
+                    "name_type": "PROJECT_DISPLAY",
+                    "valid_from": "",
+                    "valid_to": "",
+                    "date_precision": "",
+                    "source_basis": "test",
+                    "notes": "",
+                },
+                {
+                    "venue_id": "VEN-000999",
+                    "venue_name": "Historic Example Arena",
+                    "normalized_name": "historicexamplearena",
+                    "name_type": "OFFICIAL_NAMING_PERIOD",
+                    "valid_from": "2007-09-08",
+                    "valid_to": "2013-05-22",
+                    "date_precision": "EXACT",
+                    "source_basis": "test",
+                    "notes": "",
+                },
+            ],
+        )
+        self._write_csv(
+            root / "schools/test/venues.csv",
+            self.VENUE_FIELDS,
+            [],
+        )
+        return root
+
+    def _item(self):
+        return {
+            "decision_id": "DISCREPANCY-TEST-1-GAME_TYPE",
+            "category": "discrepancy",
+            "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+            "source_game_id": "TEST-1",
+            "source_game_date": "2011-03-16",
+            "resolution_basis": "Official host source identifies exact postseason site.",
+            "source_patch": {
+                "curated_venue_name": "Historic Example Arena",
+                "city": "Example City",
+                "state": "EX",
+            },
+            "venue_relationship_patch": {
+                "venue_id": "VEN-000999",
+                "venue_key": "example-arena",
+            },
+        }
+
+    def test_sealed_game_site_relationship_enables_real_source_venue_resolution(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = self._repo(Path(directory))
+            item = self._item()
+            approved = {"school_key": "test", "decisions": [item]}
+
+            count = onboarding_plan._apply_sealed_game_site_venue_relationship_patches(
+                repo,
+                approved,
+            )
+            self.assertEqual(count, 1)
+
+            with (repo / "schools/test/venues.csv").open(
+                encoding="utf-8-sig", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle))
+            self.assertEqual(len(rows), 1)
+            row = rows[0]
+            self.assertEqual(row["venue_id"], "VEN-000999")
+            self.assertEqual(row["venue_key"], "example-arena")
+            self.assertEqual(row["relationship_type"], "GAME_SITE")
+            self.assertEqual(row["games_currently_assigned"], "1")
+            self.assertEqual(row["first_assigned_game"], "2011-03-16")
+            self.assertEqual(row["last_assigned_game"], "2011-03-16")
+            self.assertEqual(row["aliases"], "Historic Example Arena")
+
+            global_by_id, _, _ = onboarding_plan.load_global_venue_reference(repo)
+            venue_map = onboarding_plan.ingest_school.load_venue_metadata_map(
+                repo / "schools/test/venues.csv",
+                global_by_id,
+            )
+            source = {
+                "source_game_id": "TEST-1",
+                "season_label": "2010-2011",
+                "game_date": "2011-03-16",
+                "curated_venue_name": "Historic Example Arena",
+                "city": "Example City",
+                "state": "EX",
+            }
+            resolved = onboarding_plan.ingest_school.resolve_venue_metadata(
+                source,
+                venue_map,
+            )
+            self.assertEqual(resolved["venue_id"], "VEN-000999")
+            self.assertEqual(resolved["venue_key"], "example-arena")
+
+    def test_relationship_patch_rejects_unknown_or_mismatched_global_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = self._repo(Path(directory))
+            item = self._item()
+            item["venue_relationship_patch"] = {
+                "venue_id": "VEN-999999",
+                "venue_key": "example-arena",
+            }
+            with self.assertRaisesRegex(
+                onboarding_plan.WorkflowError,
+                "existing global venue_id/venue_key pair",
+            ):
+                onboarding_plan._validate_game_site_venue_relationship_patch(
+                    repo,
+                    "test",
+                    item,
+                    item["source_patch"],
+                    item["venue_relationship_patch"],
+                )
+
+    def test_relationship_patch_rejects_unregistered_name_and_locality_drift(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = self._repo(Path(directory))
+            item = self._item()
+            bad_name = dict(item["source_patch"], curated_venue_name="Unknown Arena")
+            with self.assertRaisesRegex(
+                onboarding_plan.WorkflowError,
+                "does not resolve uniquely",
+            ):
+                onboarding_plan._validate_game_site_venue_relationship_patch(
+                    repo,
+                    "test",
+                    item,
+                    bad_name,
+                    item["venue_relationship_patch"],
+                )
+
+            bad_location = dict(item["source_patch"], city="Other City")
+            with self.assertRaisesRegex(
+                onboarding_plan.WorkflowError,
+                "locality does not match",
+            ):
+                onboarding_plan._validate_game_site_venue_relationship_patch(
+                    repo,
+                    "test",
+                    item,
+                    bad_location,
+                    item["venue_relationship_patch"],
+                )
+
+    def test_relationship_patch_rejects_redundant_target_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = self._repo(Path(directory))
+            item = self._item()
+            onboarding_plan._apply_sealed_game_site_venue_relationship_patches(
+                repo,
+                {"school_key": "test", "decisions": [item]},
+            )
+            with self.assertRaisesRegex(
+                onboarding_plan.WorkflowError,
+                "redundant",
+            ):
+                onboarding_plan._validate_game_site_venue_relationship_patch(
+                    repo,
+                    "test",
+                    item,
+                    item["source_patch"],
+                    item["venue_relationship_patch"],
+                )
 
 
 if __name__ == "__main__":

@@ -48,6 +48,7 @@ from onboarding_plan import (
     PATCH_CAPABLE_DECISION_CATEGORIES,
     REQUIRED_PACKAGE_FILES,
     SOURCE_PATCH_FIELDS,
+    VENUE_RELATIONSHIP_PATCH_FIELDS,
     WorkflowError,
     approve_plan,
 )
@@ -79,6 +80,7 @@ SUBSTANTIVE_REVIEW_FIELDS = (
 OWNER_REVIEW_PAYLOAD_FIELDS = (
     "canonical_patch_json",
     "source_patch_json",
+    "venue_relationship_patch_json",
     "notes",
 )
 
@@ -1010,6 +1012,9 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
     defaults = decision_map.get("defaults", {})
     canonical_patches = decision_map.get("canonical_patch_by_decision", {})
     source_patches = decision_map.get("source_patch_by_decision", {})
+    venue_relationship_patches = decision_map.get(
+        "venue_relationship_patch_by_decision", {}
+    )
     notes_by_decision = decision_map.get("notes_by_decision", {})
     objects = (
         identities,
@@ -1018,18 +1023,21 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
         defaults,
         canonical_patches,
         source_patches,
+        venue_relationship_patches,
         notes_by_decision,
     )
     if not all(isinstance(value, dict) for value in objects):
         raise WorkflowError(
-            "identity, decisions, basis_by_decision, defaults, patch maps, and "
-            "notes_by_decision must be JSON objects"
+            "identity, decisions, basis_by_decision, defaults, patch maps, "
+            "venue_relationship_patch_by_decision, and notes_by_decision "
+            "must be JSON objects"
         )
 
     known_decision_ids = {row.get("decision_id", "") for row in rows}
     for label, mapping in (
         ("canonical_patch_by_decision", canonical_patches),
         ("source_patch_by_decision", source_patches),
+        ("venue_relationship_patch_by_decision", venue_relationship_patches),
         ("notes_by_decision", notes_by_decision),
     ):
         unknown = sorted(set(mapping) - known_decision_ids)
@@ -1135,7 +1143,11 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
 
         did = row["decision_id"]
         category = row.get("category", "").strip()
-        if did in canonical_patches or did in source_patches:
+        if (
+            did in canonical_patches
+            or did in source_patches
+            or did in venue_relationship_patches
+        ):
             if category not in PATCH_CAPABLE_DECISION_CATEGORIES:
                 raise WorkflowError(
                     f"{did}: historical patches are not valid on {category} decisions"
@@ -1184,6 +1196,29 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
                     + ", ".join(unknown_fields)
                 )
             row["source_patch_json"] = json.dumps(
+                patch, ensure_ascii=False, sort_keys=True
+            )
+
+        if did in venue_relationship_patches:
+            patch = venue_relationship_patches[did]
+            if not isinstance(patch, dict):
+                raise WorkflowError(
+                    f"{did}: venue relationship patch must be a JSON object"
+                )
+            unknown_fields = sorted(
+                set(patch) - VENUE_RELATIONSHIP_PATCH_FIELDS
+            )
+            if unknown_fields:
+                raise WorkflowError(
+                    f"{did}: forbidden venue relationship patch fields: "
+                    + ", ".join(unknown_fields)
+                )
+            if category not in {"discrepancy", "conditional_discrepancy"}:
+                raise WorkflowError(
+                    f"{did}: venue relationship patch is valid only on "
+                    "discrepancy decisions"
+                )
+            row["venue_relationship_patch_json"] = json.dumps(
                 patch, ensure_ascii=False, sort_keys=True
             )
 
@@ -1421,7 +1456,15 @@ def rehearse_review(
         forbidden = [
             path
             for path in changed
-            if not onboard_school.allowed_apply_path(path, school_key, approved_hash)
+            if not onboard_school.allowed_apply_path(
+                path,
+                school_key,
+                approved_hash,
+                allow_school_venues=any(
+                    bool(item.get("venue_relationship_patch"))
+                    for item in approved.get("decisions", [])
+                ),
+            )
         ]
         if forbidden:
             raise WorkflowError(
