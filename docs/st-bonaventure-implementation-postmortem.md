@@ -143,15 +143,15 @@ seal, apply, readiness and verification as separate requests.
 That is safe at the control-plane level, but it pushed scheduling back into conversation.
 The owner repeatedly had to send `Continue` merely to advance already-authorized work.
 
-### RC5 — waiting policy encouraged chat-side polling
+### RC5 — waiting policy lacked a low-frequency heartbeat contract
 
-The efficiency standard attempted to avoid premature owner handoffs by telling the lane
-to keep monitoring healthy workflows in the same turn, including a multi-minute
-no-progress budget.
+The efficiency standard oscillated between two bad defaults: rapid/noisy polling and
+premature transport yields. Neither made the owner-facing phase feel continuous.
 
-For a conversational execution surface without asynchronous continuation, that created
-long turns full of status reads and still often ended in a transport yield. It optimized
-for fewer messages at the cost of latency, context growth and owner frustration.
+The corrected policy permits an active turn to supervise healthy workflows with a
+low-frequency heartbeat of roughly 120 seconds, one status read per heartbeat and immediate
+continuation on a material transition. Repository-owned chaining remains preferred for
+deterministic multi-request sequences; heartbeat polling is the conversational fallback.
 
 ## What worked and must remain
 
@@ -213,23 +213,27 @@ The same design is now implemented for the post-Gate-1 technical chain through
 fresh-verified fill -> pre-seal -> seal -> sealed apply is repository-scheduled while each
 ordinary request/checkpoint/verifier remains intact.
 
-The same design should next be evaluated for:
-
-- release readiness -> Preview readiness, where PR creation permissions permit.
+Release preparation now uses the same owner-facing principle without broadening Actions
+PR permissions. `RELEASE_READINESS_TO_PREVIEW_V1` makes fresh readiness emit and
+independently verify an exact connector-owned PR packet. The school lane's GitHub connector
+creates or reuses the exact same-repository/head/base PR, restores the exact body, and
+immediately submits the packet-bound Preview verification request. This preserves ordinary
+PR-triggered CI while eliminating another owner scheduling relay.
 
 Internal checkpoints remain durable. Bundling scheduling must not collapse authority
 boundaries.
 
-### P0 — bounded waiting, no chat-side idle loops
+### P0 — bounded low-frequency heartbeat supervision
 
-A chat may make a bounded status observation after dispatch, but it must not spend minutes
-performing repeated no-progress polling merely to avoid returning control.
+When the active assistant turn can safely remain open, supervise healthy external workflows
+at roughly 120-second intervals: one status read, one compact update, and immediate
+continuation when the run materially changes. Rapid/noisy polling and multiple equivalent
+reads inside the heartbeat interval remain process defects.
 
-When a repository operation is still genuinely in flight and no useful independent work
-remains, yield once with the exact workflow link and persistent phase authority.
-
-Repeated transport yields inside one deterministic phase are themselves evidence that
-repository orchestration is incomplete and should be fixed rather than normalized.
+Yield only when the turn cannot safely remain active. Preserve the exact workflow link and
+persistent phase authority. Repeated transport yields inside one deterministic phase are
+evidence that repository orchestration is incomplete and should be fixed rather than
+normalized.
 
 ### P1 — full sealed-transaction regression topology
 
@@ -271,7 +275,10 @@ The maintenance is successful when:
 2. the same blocker cannot survive that gate unnoticed;
 3. deterministic Stage 2 continuation after a tooling-only main advance requires one
    repository-owned Actions phase rather than owner-scheduled refresh/census/proposal;
-4. ordinary chat execution performs no multi-minute idle polling loop;
-5. owner interactions return to meaningful boundaries: genuine blocker, Gate 1, Gate 2,
+4. ordinary chat execution uses low-frequency heartbeat supervision rather than rapid
+   polling or owner-scheduled waiting;
+5. release preparation can advance from readiness through exact PR creation/reuse and
+   fresh Preview readiness under one owner `Proceed`;
+6. owner interactions return to meaningful boundaries: genuine blocker, Gate 1, Gate 2,
    changed authority, or completion; and
-6. no safeguard listed above is weakened.
+7. no safeguard listed above is weakened.
