@@ -790,6 +790,9 @@ def load_runtime_venue_metadata_map(
         repo_root,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        sealed_plan_context=(
+            sealed_plan_context if post_reconciliation_semantics else None
+        ),
         semantic_phase=(
             SEMANTIC_PHASE_POST_RECONCILIATION
             if post_reconciliation_semantics
