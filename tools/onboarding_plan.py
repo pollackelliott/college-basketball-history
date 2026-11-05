@@ -6449,6 +6449,30 @@ def apply_reconciliation_decisions(
         "global_venues_by_id": None,
         "venue_metadata_by_program": {},
     }
+    source_site_patch_fields = {
+        "curated_site_type",
+        "curated_venue_name",
+        "city",
+        "state",
+    }
+    needs_target_venue_metadata = any(
+        item.get("field_name") == "site_type"
+        or (
+            isinstance(item.get("source_patch"), dict)
+            and bool(set(item["source_patch"]) & source_site_patch_fields)
+        )
+        for item in reconciliation_items
+    )
+    if needs_target_venue_metadata:
+        # Authenticate the one legitimate mixed lifecycle state immediately
+        # after sealed GAME_SITE rows are appended and before reconciliation
+        # mutates any source semantics. Reuse this cache for the entire pass.
+        target_venue_metadata, venue_names = _venue_maps(
+            repo,
+            school_key,
+            approved_plan=approved,
+        )
+
     counts = Counter()
     if venue_relationship_patch_count:
         counts["venue_relationship_patches"] = venue_relationship_patch_count
@@ -7104,10 +7128,9 @@ def apply_reconciliation_decisions(
             set_canonical_field(canonical, field_name, final_value)
             if field_name == "site_type":
                 if target_venue_metadata is None or venue_names is None:
-                    target_venue_metadata, venue_names = _venue_maps(
-                        repo,
-                        school_key,
-                        approved_plan=approved,
+                    raise WorkflowError(
+                        "reconciliation venue map was not authenticated before "
+                        "source mutation"
                     )
                 _sync_site_metadata_from_source(
                     source,
@@ -7126,10 +7149,9 @@ def apply_reconciliation_decisions(
             set_source_field(source, canonical, field_name, final_value)
             if field_name == "site_type":
                 if target_venue_metadata is None or venue_names is None:
-                    target_venue_metadata, venue_names = _venue_maps(
-                        repo,
-                        school_key,
-                        approved_plan=approved,
+                    raise WorkflowError(
+                        "reconciliation venue map was not authenticated before "
+                        "source mutation"
                     )
                 _sync_site_metadata_to_source(
                     source,
@@ -7171,10 +7193,9 @@ def apply_reconciliation_decisions(
             source[field] = value
         if source_patch_fields & {"curated_site_type", "curated_venue_name", "city", "state"}:
             if target_venue_metadata is None or venue_names is None:
-                target_venue_metadata, venue_names = _venue_maps(
-                    repo,
-                    school_key,
-                    approved_plan=approved,
+                raise WorkflowError(
+                    "reconciliation venue map was not authenticated before "
+                    "source mutation"
                 )
             _sync_explicit_source_site_patch_to_canonical(
                 source,
