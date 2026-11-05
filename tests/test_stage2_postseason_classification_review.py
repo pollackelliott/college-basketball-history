@@ -17,7 +17,12 @@ from onboarding_plan import (  # noqa: E402
     apply_pre_ingest_source_patches, apply_reconciliation_decisions,
 )
 from postseason_classification_review import (  # noqa: E402
-    build_review_rows, mismatch_is_reviewable, row_fingerprint,
+    HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS,
+    build_historical_game_type_challenge_review,
+    build_review_rows,
+    mismatch_is_reviewable,
+    row_fingerprint,
+    validate_historical_game_type_challenges,
 )
 
 
@@ -154,6 +159,106 @@ class EligibilityAndReviewTests(unittest.TestCase):
         original = row_fingerprint(source)
         source["raw_text"] += " changed"
         self.assertNotEqual(row_fingerprint(source), original)
+
+
+class HistoricalGameTypeChallengeTests(unittest.TestCase):
+    def challenge(self, source):
+        return {
+            "source_game_id": source["source_game_id"],
+            "source_row_sha256": row_fingerprint(source),
+            "expected_source_game_type": "REGULAR_SEASON",
+            "proposed_source_game_type": "NCAA_TOURNAMENT",
+            "evidence_basis": "Institutional evidence identifies this exact NCAA game.",
+        }
+
+    def regular_source(self):
+        row = sample_source()
+        row["curated_game_type"] = "REGULAR_SEASON"
+        row["curated_postseason_round"] = ""
+        row["curated_site_type"] = "NEUTRAL"
+        return row
+
+    def expected_identity(self):
+        return {
+            field: "" for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+        }
+
+    def test_challenge_document_is_strict_and_unapproved(self):
+        source = self.regular_source()
+        doc = {
+            "schema_version": 1,
+            "kind": "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES",
+            "school_key": "school",
+            "authority_basis": "Control Center post-freeze contradiction disposition.",
+            "challenges": [self.challenge(source)],
+        }
+        parsed = validate_historical_game_type_challenges(doc, "school")
+        self.assertEqual(parsed[source["source_game_id"]]["proposed_source_game_type"],
+                         "NCAA_TOURNAMENT")
+        decision = build_historical_game_type_challenge_review(
+            "school",
+            {"source": source, "planned_identity_status": "NEW_GAME"},
+            parsed[source["source_game_id"]],
+            self.expected_identity(),
+        )
+        self.assertEqual(decision["decision"], "PENDING")
+        self.assertEqual(decision["source_value"], "REGULAR_SEASON")
+        self.assertEqual(decision["allowed_actions"],
+                         ["APPLY_POSTSEASON_CLASSIFICATION_PATCH"])
+        self.assertEqual(decision["frozen_source_row"], source)
+
+    def test_challenge_rejects_widened_or_stale_payload(self):
+        source = self.regular_source()
+        doc = {
+            "schema_version": 1,
+            "kind": "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES",
+            "school_key": "school",
+            "authority_basis": "Control Center disposition.",
+            "challenges": [self.challenge(source)],
+        }
+        doc["challenges"][0]["curated_postseason_round"] = "R64"
+        with self.assertRaisesRegex(ValueError, "require exactly"):
+            validate_historical_game_type_challenges(doc, "school")
+
+        doc["challenges"][0].pop("curated_postseason_round")
+        doc["challenges"][0]["source_row_sha256"] = "0" * 64
+        parsed = validate_historical_game_type_challenges(doc, "school")
+        with self.assertRaisesRegex(ValueError, "fingerprint"):
+            build_historical_game_type_challenge_review(
+                "school",
+                {"source": source, "planned_identity_status": "NEW_GAME"},
+                parsed[source["source_game_id"]],
+                self.expected_identity(),
+            )
+
+    def test_challenge_pre_ingest_changes_only_game_type(self):
+        source = self.regular_source()
+        frozen = dict(source)
+        challenge = self.challenge(source)
+        decision = build_historical_game_type_challenge_review(
+            "school",
+            {"source": source, "planned_identity_status": "NEW_GAME"},
+            challenge,
+            self.expected_identity(),
+        )
+        decision.update({
+            "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+            "resolution_basis": "Owner Gate 1 approved institutional evidence.",
+            "source_patch": {"curated_game_type": "NCAA_TOURNAMENT"},
+            "canonical_patch": {},
+        })
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            source_path = make_source_repo(repo, source)
+            counts = apply_pre_ingest_source_patches(
+                repo, {"school_key": "school", "decisions": [decision]}
+            )
+            final = read_csv(source_path)[0]
+        self.assertEqual(counts["historical_game_type_challenges_applied"], 1)
+        self.assertEqual(final["curated_game_type"], "NCAA_TOURNAMENT")
+        for field, value in frozen.items():
+            if field != "curated_game_type":
+                self.assertEqual(final[field], value, field)
 
 
 class SealedPreIngestTests(unittest.TestCase):
