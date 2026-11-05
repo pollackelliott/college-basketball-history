@@ -387,7 +387,7 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
                 {
                     "venue_id": "VEN-000999",
                     "venue_name": "Example Arena",
-                    "normalized_name": "additionfinancialarena",
+                    "normalized_name": "examplearena",
                     "name_type": "PROJECT_DISPLAY",
                     "valid_from": "",
                     "valid_to": "",
@@ -398,7 +398,7 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
                 {
                     "venue_id": "VEN-000999",
                     "venue_name": "Historic Example Arena",
-                    "normalized_name": "ucfarena",
+                    "normalized_name": "historicexamplearena",
                     "name_type": "OFFICIAL_NAMING_PERIOD",
                     "valid_from": "2007-09-08",
                     "valid_to": "2013-05-22",
@@ -517,7 +517,7 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
                     item["venue_relationship_patch"],
                 )
 
-            bad_location = dict(item["source_patch"], city="Tampa")
+            bad_location = dict(item["source_patch"], city="Other City")
             with self.assertRaisesRegex(
                 onboarding_plan.WorkflowError,
                 "locality does not match",
