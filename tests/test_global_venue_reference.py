@@ -121,9 +121,9 @@ class GlobalVenueReferenceTests(unittest.TestCase):
             for row in rows(ROOT / "data/canonical/games.csv")
         }
         expected = {
-            "CBBG-0002744": ("hp-field-house", "VEN-000084", "Orlando", "FL"),
-            "CBBG-0002745": ("hp-field-house", "VEN-000084", "Orlando", "FL"),
-            "CBBG-0002746": ("hp-field-house", "VEN-000084", "Orlando", "FL"),
+            "CBBG-0002744": ("hp-field-house", "VEN-000084", "Kissimmee", "FL"),
+            "CBBG-0002745": ("hp-field-house", "VEN-000084", "Kissimmee", "FL"),
+            "CBBG-0002746": ("hp-field-house", "VEN-000084", "Kissimmee", "FL"),
             "CBBG-0029269": (
                 "coleman-coliseum",
                 "VEN-000048",
