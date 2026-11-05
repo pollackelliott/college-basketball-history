@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-release-readiness-0001",
+  "operation": "RELEASE_READINESS",
+  "school_key": "rhode-island",
+  "previous_control_state_commit": "766fb342ee46b982457f7074b35e0f3821c89e9d",
+  "previous_control_state_sha256": "f04a4eb4310bce131fe4cedb180da70543697dbbb7f65f04e7fa5a21ea7a5302",
+  "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/rhode-island/rhode-island-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "531d996976d9bdc7fe4a5645a3bd398185dca9560d8e18a6afa3b632605648d4"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "4ab9fd73f506a883a8ae6c8b9f72678acdf9bbc71fb00ad377f2c10f7f88f581"
+  },
+  "approved_plan_hash": "a1515391ea08b17acc58ab9ea0847834ffa11b09fca31099270c3a70cb1977ae",
+  "release_manifest_sha256": "5e982700968eef2caa26a7ab1b91f2bc2a7adf804f9d237f0d5f7bfeb531182c",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "rhode-island-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation — release preparation",
+    "authorization": "Owner explicitly wrote 'Proceed' after the exact Rhode Island sealed-apply successor 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through OWNER_GATE_2_READY. This request is only the read-only RELEASE_READINESS operation and deterministic PR/Preview continuation packet preparation. It grants no Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, unrelated repair, or other-school authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
