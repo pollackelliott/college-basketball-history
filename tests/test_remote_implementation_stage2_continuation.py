@@ -12,6 +12,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     STAGE2_PHASE_CONTINUATION_KIND,
+    RemoteImplementationError,
     validate_stage2_phase_continuation,
 )
 from remote_implementation_io import Stop  # noqa: E402
@@ -53,7 +54,7 @@ class ContinuationValidationTests(unittest.TestCase):
     def test_census_parent_mismatch_rejected(self):
         spec = continuation_spec()
         spec["recommendation_map"]["sha256"] = "a" * 64
-        with self.assertRaisesRegex(Stop, "CENSUS_PARENT_MISMATCH"):
+        with self.assertRaisesRegex(RemoteImplementationError, "CENSUS_PARENT_MISMATCH"):
             validate_stage2_phase_continuation(
                 OP_STAGE2_CENSUS,
                 "different-census-id",
@@ -63,7 +64,7 @@ class ContinuationValidationTests(unittest.TestCase):
     def test_other_operation_cannot_carry_continuation(self):
         spec = continuation_spec()
         spec["recommendation_map"]["sha256"] = "a" * 64
-        with self.assertRaisesRegex(Stop, "CONTINUATION_FORBIDDEN"):
+        with self.assertRaisesRegex(RemoteImplementationError, "CONTINUATION_FORBIDDEN"):
             validate_stage2_phase_continuation(
                 OP_STAGE2_PROPOSAL_REHEARSAL,
                 "school-stage2-proposal-old",
@@ -74,7 +75,7 @@ class ContinuationValidationTests(unittest.TestCase):
         spec = continuation_spec()
         spec["recommendation_map"]["sha256"] = "a" * 64
         spec["census_request_id"] = "school-stage2-refresh-next"
-        with self.assertRaisesRegex(Stop, "REQUEST_IDS_NOT_DISTINCT"):
+        with self.assertRaisesRegex(RemoteImplementationError, "REQUEST_IDS_NOT_DISTINCT"):
             validate_stage2_phase_continuation(
                 OP_STAGE2_CURRENT_MAIN_REFRESH,
                 "school-stage2-refresh-next",
