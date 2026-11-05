@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-stage2-preseal-rehearsal-0001",
+  "request_id": "rhode-island-stage2-gate1-seal-0001",
   "school_key": "rhode-island",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "5a4f840ac6393390fd703db2315441ff61020771",
-  "previous_control_state_sha256": "f68bf73da270bc38fb0a4f50339e420a20aed184a97a6da98b5ab619e3fda518",
+  "operation": "STAGE2_GATE1_SEAL",
+  "previous_control_state_commit": "05db8cd71856b6cc2532aa2b2ce489c4bfee35b9",
+  "previous_control_state_sha256": "8b24a97129a461097b2b94187df30921197eaf15b734de1de57c9180ef4985ef",
   "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "target_branch": "data/rhode-island-onboarding",
   "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "1d7761cf0acebd4618abd41dd07fed8ae88aeb7e865084d414d79ef1d96ace44"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "6870d641df959d9479a5fe4c0b4df010914407e9f5b8c5f3c5501a0f2c28d2f5"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "2c83674c96a7dca29a4e89598996cdde444e2e13964e66ae6c086859b4ed1987"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "0eefff9e91881517ffb2765e09358f2caeb18996168efb7aeba98cffcf3b5855"
   },
   "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
   "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
@@ -24,9 +24,11 @@
   "approved_plan_hash_preview": "88ef5ca63ad4eb4f16d7ea9a6c30ff0da99a330c10b0a4c0ee42aa03c5d6fefa",
   "filled_review_sha256": "4c7ec1a1fc5d8eeb6d4817663521717218e18933ef711282a8baee5f19ced7ca",
   "decision_id_set_sha256": "97a09da3eb8bb21ae96d2f20c3c0962f6613b9e9be2264f169b65e3a02c393f2",
+  "owner_gate_1_approval_sha256": "2f069cd3488cd6f1ecdd4e6c8f2b7d440a2a3c2a31d518c2efc59aa330db16e0",
+  "equivalence_sha256": "ea833ea3b0320bdad0de3400ccc47a698a8b4b9864b26857436ce0d91c14e90b",
   "creation_provenance": {
     "origin": "Rhode Island Implementation post-Gate-1 continuation",
-    "authorization": "Existing exact owner-approved Gate 1 phase; pre-seal rehearsal only."
+    "authorization": "Fresh-verified READY_TO_SEAL under existing exact owner Gate 1 approval; seal only."
   },
   "authority": {
     "owner_gate_1": false,
@@ -40,8 +42,8 @@
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": true,
-    "stage2_gate1_seal": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": true,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
