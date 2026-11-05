@@ -1,45 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "rhode-island-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "rhode-island",
-  "previous_control_state_commit": "0fe3208b7bafcb4c8f097269635be0bab4603442",
-  "previous_control_state_sha256": "196f8eeb802fa1c2bbb40bd38c4c9229996bf27d0ff621be3bb5505aeeb65710",
+  "previous_control_state_commit": "7c6de41239f912b19b3fedd572dcbe7291bdb7f2",
+  "previous_control_state_sha256": "6a4bee750798c4f0e10d709d7bb299c1604bb929b339550e49e00155ad8d3523",
   "expected_protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
   "target_branch": "data/rhode-island-onboarding",
-  "research_checkpoint": {
-    "sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
-    "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "e9c881d27936c06221fd11e2e09d6ca366ccc483",
-      "path_prefix": ".remote-implementation/transports/rhode-island/rhode-island-stage1-0001/piece-",
-      "part_count": 14
-    }
+  "target_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/rhode-island/rhode-island-phase0-0001/successor-manifest.json",
+    "sha256": "684a83f359717275ba33fc81b00f18248cad48722dd107c03d2cec0fbe053cb6"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage1-0002/checkpoint-manifest.json",
-    "sha256": "532ab5745902ccc0fb0c115b0d3a29dd239e933869b01dd1e63806d813aebb10"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1903-1904",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted Rhode Island INCEPTION+ scope from the immutable Research Freeze: owner-approved 2026-11-03, history_start_season=1903-1904, history_scope_status=OWNER_CONFIRMED, history_scope_basis=ALWAYS_TOP_LEVEL_FROM_INCEPTION. Protected main currently lacks a reusable Rhode Island program-top-level-scope row, so guarded Phase 0 must reconcile this exact frozen target-school scope into the target row without reopening Research. Preserve the exact frozen historical universe and all accepted researched uncertainty."
-  },
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation lane — post-maintenance clean Stage 1 to guarded Phase 0",
-    "authorization": "Control Center explicitly directed the SAME Rhode Island Implementation lane to authenticate merged protected main 5492240bd889b0f2b946034529ef6562fdc9fbca, rerun the complete permanent Stage 1 inventory from the unchanged Research Freeze, and if clean continue under current repository policy without a new owner relay. Rhode Island Stage 1 request rhode-island-stage1-0002 is durably PASS with 69 venues = 66 SAFE_REPRESENTATION_REUSE + 3 NEW_GLOBAL_IDENTITY, zero shared/global maintenance, zero ambiguous stops, zero conference blockers, and zero program-alias blockers. This request authorizes exactly one guarded PHASE0 operation: fresh-repeat Stage 1 against exact main, stage the unchanged six-file Research Freeze, register the three ordinary target-school venue identities, reconcile the frozen INCEPTION+ target scope, capture INTEGRATION_FROZEN, publish create-once data/rhode-island-onboarding through the global mutation lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly said Proceed after Rhode Island stable Phase 0 completed with fresh_runner_verification=PASS and remote_phase0_equivalence=PASS. This request begins the ordinary Stage 2 phase with one bounded read-only STAGE2_CENSUS against exact onboarding head 5907135a31e0be43885f09c257b71ab5754835c9, exact Integration Freeze 5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c, and semantic snapshot 25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450 on protected main 5492240bd889b0f2b946034529ef6562fdc9fbca. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -54,6 +38,7 @@
     "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
