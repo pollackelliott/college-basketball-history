@@ -192,6 +192,43 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
         }
         return request, {ckpt: ckpt_bytes, verify: ver_bytes, prior_path: prior_bytes}
 
+    def bind_release_packet(
+        self,
+        request,
+        storage,
+        *,
+        preview_request_id="example-preview-verify-0001",
+    ):
+        import json
+        checkpoint_path = request["release_readiness_checkpoint"]["path"]
+        verification_path = request["release_readiness_verification"]["path"]
+        checkpoint = json.loads(storage[checkpoint_path])
+        checkpoint["preview_request_id"] = preview_request_id
+        checkpoint["pr_body_sha256"] = BODY_SHA
+        checkpoint["release_pr_packet_sha256"] = "a" * 64
+        storage[checkpoint_path] = (
+            json.dumps(checkpoint, sort_keys=True)
+        ).encode()
+        request["release_readiness_checkpoint"]["sha256"] = hashlib.sha256(
+            storage[checkpoint_path]
+        ).hexdigest()
+
+        verification = json.loads(storage[verification_path])
+        verification["checkpoint_manifest_sha256"] = request[
+            "release_readiness_checkpoint"
+        ]["sha256"]
+        verification["preview_request_id"] = preview_request_id
+        verification["pr_body_sha256"] = BODY_SHA
+        verification["release_pr_packet_sha256"] = "a" * 64
+        storage[verification_path] = (
+            json.dumps(verification, sort_keys=True)
+        ).encode()
+        request["release_readiness_verification"]["sha256"] = hashlib.sha256(
+            storage[verification_path]
+        ).hexdigest()
+        request["request_id"] = preview_request_id
+        return request, storage
+
     def authenticate(self, request, storage, *, ancestry=0):
         with patch.object(
             preview, "git_show_bytes",
@@ -218,6 +255,55 @@ class PriorReadinessAuthorityTests(unittest.TestCase):
         result = self.authenticate(request, store)
         self.assertEqual(result["pr_body_sha256"], BODY_SHA)
         self.assertEqual(result["readiness_request_id"], "example-release-readiness-0001")
+
+    def test_exact_fresh_readiness_chain_honors_release_packet(self):
+        request, store = self.setup_storage()
+        request, store = self.bind_release_packet(request, store)
+        result = self.authenticate(request, store)
+        self.assertEqual(
+            result["preview_request_id"],
+            "example-preview-verify-0001",
+        )
+        self.assertEqual(
+            result["release_pr_packet_sha256"],
+            "a" * 64,
+        )
+
+    def test_release_packet_rejects_wrong_preview_request_id(self):
+        request, store = self.setup_storage()
+        request, store = self.bind_release_packet(request, store)
+        request["request_id"] = "example-preview-verify-wrong"
+        with self.assertRaisesRegex(
+            Stop,
+            "PREVIEW_REQUEST_ID_CONTINUATION_MISMATCH",
+        ):
+            self.authenticate(request, store)
+
+    def test_release_packet_rejects_body_hash_drift(self):
+        import json
+        request, store = self.setup_storage()
+        request, store = self.bind_release_packet(request, store)
+        path = request["release_readiness_checkpoint"]["path"]
+        checkpoint = json.loads(store[path])
+        checkpoint["pr_body_sha256"] = "b" * 64
+        store[path] = json.dumps(checkpoint, sort_keys=True).encode()
+        request["release_readiness_checkpoint"]["sha256"] = hashlib.sha256(
+            store[path]
+        ).hexdigest()
+        verify_path = request["release_readiness_verification"]["path"]
+        verification = json.loads(store[verify_path])
+        verification["checkpoint_manifest_sha256"] = request[
+            "release_readiness_checkpoint"
+        ]["sha256"]
+        store[verify_path] = json.dumps(verification, sort_keys=True).encode()
+        request["release_readiness_verification"]["sha256"] = hashlib.sha256(
+            store[verify_path]
+        ).hexdigest()
+        with self.assertRaisesRegex(
+            Stop,
+            "PREVIEW_PR_BODY_CONTINUATION_HASH_MISMATCH",
+        ):
+            self.authenticate(request, store)
 
     def test_exact_fresh_readiness_chain_accepts_correction_branch(self):
         branch = "data/example-school-correction"
