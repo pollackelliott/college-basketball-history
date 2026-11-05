@@ -2694,6 +2694,11 @@ def verify_exact_production(live_main: str, control_head: str, state: dict) -> i
     if sha256_bytes(proof_bytes) != manifest["production_proof_sha256"]:
         raise Stop("PRODUCTION_FRESH_PROOF_HASH_MISMATCH")
     recorded = json.loads(proof_bytes)
+    verify_final_release_packet_binding(
+        request,
+        control_head,
+        repo=ROOT,
+    )
     authority = verify_gate2_approved_chain(request, control_head, repo=ROOT)
     fresh = run_permanent_production_proof(request, authority, repo=ROOT)
     if fresh != recorded:
