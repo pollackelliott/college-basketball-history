@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-venue-maintenance-0001",
+  "school_key": "rhode-island",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "previous_control_state_commit": "37a8ee68afabc91a9699979694717cc4ca970672",
+  "previous_control_state_sha256": "cb6a96a9fa57a9d38a40576695a081a21f6e3a67d49ef269dca927ec27ba907d",
+  "expected_protected_main_sha": "797f3d87fc5b50585c63aa548d6029b9828eb461",
+  "target_branch": "maintenance/rhode-island-stage1-shared-venue-identity",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/rhode-island-venue-maintenance-0001/venue-maintenance.json",
+    "sha256": "a0246089e5709e86127794b6869e2f37b88d3048c762747347fdf932ad9fa8e6"
+  },
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/rhode-island-stage1.json",
+  "expected_plan_sha256": "d87a3004cc64e6afcb315ced594aed76ac225413a08fef693a677ab4ffcd4a08",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the exact consolidated Rhode Island Stage 1 venue-maintenance family: geography-correct VEN-000084 Orlando, FL -> Kissimmee, FL then preserve VEN-000084 while absorbing VEN-000990; normalize VEN-000709 Montego Bay, JM -> Montego Bay, Jamaica and VEN-000957 Montego Bay, Saint James -> Montego Bay, Jamaica then preserve VEN-000709 while absorbing VEN-000957; preserve VEN-000123 while absorbing duplicate VEN-000966; preserve legitimate names/evidence; leave VEN-000124 physically distinct and untouched. No unrelated venue cleanup or historical reinterpretation is authorized.",
+    "spec_sha256": "a0246089e5709e86127794b6869e2f37b88d3048c762747347fdf932ad9fa8e6"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — Control Center-authorized Stage 1 shared venue maintenance",
+    "authorization": "Owner supplied Control Center disposition authorizing exactly one consolidated Rhode Island VENUE_IDENTITY_MAINTENANCE family after PR #471 merged the generic geography-before-merge capability. This request authorizes only the exact three shared venue conflicts and exact geography corrections declared in the hash-bound spec. It does not authorize Research mutation, unrelated maintenance, Integration Freeze, Phase 0, Stage 2, Owner Gate 1, release, merge of protected main outside normal PR governance, or recovery."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": true,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
