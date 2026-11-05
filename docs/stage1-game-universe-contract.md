@@ -140,6 +140,44 @@ specific terminal classification. It does not waive downstream Stage 2–6,
 Research Freeze, Implementation gates, independent publication verification,
 or exact Preview approval.
 
+### Separate owner-authorized exception: multi-season early-history accounting debt
+
+A Research checkpoint may occasionally contain **both** source-explicit aggregate-only
+seasons and detailed seasons whose institutional season/cumulative accounting conflicts
+with the preserved row-level game list. This mixed population does not self-authorize a
+generic waiver. It may close only under an exact owner-approved protected-main registry
+entry in \`data/reference/early-history-accounting-authorities.json\` and the permanent
+\`tools/research_stage1_early_accounting_closeout.py\` audit/closeout/verify-closeout
+sequence.
+
+Two terminal classes are supported:
+
+1. \`EARLY_HISTORY_AGGREGATE_RECONCILED_GAP\` for exact institutional season records
+   with zero or incomplete recoverable game identities after bounded systematic research.
+   These remain season-level coverage only. Never create anonymous games, opponents,
+   dates, sites, scores, or row-level W/L allocations.
+2. \`EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION\` for seasons where preserved
+   detailed game rows and institutional season/cumulative accounting cannot be safely
+   reconciled. Positive or negative arithmetic deltas are diagnostic only. They are
+   never missing-game counts, overlap identities, or authority to add/remove/reclassify
+   an identified game.
+
+Eligibility requires the exact parent checkpoint SHA-256, immutable research base,
+owner disposition, identified-ledger hash/count, exact approved season populations and
+records, manifested source-accounting evidence, zero unrelated Stage 1 blockers, and
+explicit evidence that arithmetic/string-matching reconciliation was rejected where
+unsafe. The permanent auditor must fail closed on population drift, record drift,
+anonymous/placeholder rows, extra blockers, inferred overlap/result allocation, or
+authority mismatch.
+
+The closeout successor must preserve the identified-game ledger and season census
+byte-for-byte, reclassify only the two approved blocker classes as terminal researched
+historical debt, carry the exact aggregate/accounting payload in
+\`stage4-authoring/season-coverage.json\`, and remain \`stage1_complete: false\` until
+independent \`verify-closeout\` proves the exact successor. Stage 4, Research Freeze,
+Implementation, and publication must preserve the distinction between canonical games,
+season-level aggregate coverage, and source-accounting contradictions.
+
 ### Separate narrow exception: terminal early-history uncertainty
 
 Some inception/founding-era evidence can be honest, authoritative, and permanently incomplete without fitting the counted-gap exception above. Stage 1 may close through the separate `EARLY_HISTORY_UNCERTAINTY` path only after the repository-owned read-only `tools/research_stage1_early_history_uncertainty.py` independently verifies the exact checkpoint chain.
