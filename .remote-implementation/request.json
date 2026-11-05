@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-stage2-census-0001",
+  "request_id": "rhode-island-stage2-census-0002",
   "operation": "STAGE2_CENSUS",
   "school_key": "rhode-island",
-  "previous_control_state_commit": "7c6de41239f912b19b3fedd572dcbe7291bdb7f2",
-  "previous_control_state_sha256": "6a4bee750798c4f0e10d709d7bb299c1604bb929b339550e49e00155ad8d3523",
-  "expected_protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "previous_control_state_commit": "e968d4266b9ddcd0faa4fc610a83566a1d66f0f2",
+  "previous_control_state_sha256": "418a72e4bbf453f45fbbd165f1e13a8315acc055061481fe595e99d12b6b7572",
+  "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "target_branch": "data/rhode-island-onboarding",
   "target_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
   "phase0_successor": {
@@ -16,8 +16,8 @@
   "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
   "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation lane — owner-authorized Stage 2 capability census",
-    "authorization": "Owner explicitly said Proceed after Rhode Island stable Phase 0 completed with fresh_runner_verification=PASS and remote_phase0_equivalence=PASS. This request begins the ordinary Stage 2 phase with one bounded read-only STAGE2_CENSUS against exact onboarding head 5907135a31e0be43885f09c257b71ab5754835c9, exact Integration Freeze 5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c, and semantic snapshot 25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450 on protected main 5492240bd889b0f2b946034529ef6562fdc9fbca. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — post-tooling Stage 2 census rerun",
+    "authorization": "Same owner-authorized Rhode Island Stage 2 phase persists. PR #474 merged generic protected-main tooling repair bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b after exact-head validation/rehearsal PASS. The repair changes only tools/onboarding_plan.py and tests/test_onboarding_fast_path.py; it does not mutate Rhode Island package, canonical data, evidence, Research, Integration Freeze, or historical decisions. This request reruns one read-only STAGE2_CENSUS against unchanged onboarding head 5907135a31e0be43885f09c257b71ab5754835c9 using current protected-main runtime bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b. Expected topology: the prior eight provenance-only false-positive warnings are gone while the same nine deterministic historical opponent-display conflicts remain. No tracked repair, current-main refresh, proposal rehearsal, owner gate, sealing/apply, release, Preview, merge, recovery, or protected-main mutation authority."
   },
   "authority": {
     "phase0": false,
