@@ -697,7 +697,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-preview-verify-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "4cbaa29e259f71cc70a3719eb074500b574f423a1a0940ef64c4262efbf82e86",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -706,7 +706,7 @@
     "preview_deployment_id": 7566270288,
     "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "st-bonaventure-release-preview-verify-0001",
     "school_key": "st-bonaventure",
     "target_branch": "data/st-bonaventure-onboarding",
