@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "merge_parent_onboarding": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "merge_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "1e3270195c7129785fb7aa9a70b47c854a428d4ff7c4deb54d3e62f8adc6cbf5",
+  "owner_gate_2_verification_sha256": "6ca3909c1b2f7330b8ad2fa3d667c7e2610bb7fa010b27e6081030eb16bcb400",
+  "pr_head_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "pr_number": 465,
+  "production_deployment_id": 7566882304,
+  "production_json_checked_count": 79,
+  "production_proof": true,
+  "production_proof_sha256": "4392db90d635fdce385eb3feb4b5a045d2f0352baf5c57fba57b85901ea7bdbb",
+  "protected_main_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
+  "request_id": "st-bonaventure-release-production-proof-0001",
+  "request_sha256": "8f0597e9f8c905b63d1d206704494481fc5cba42cfb246b45f04263d0f688391",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "status": "PRODUCTION_PROOF_PASS"
+}
