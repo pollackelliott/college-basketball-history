@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-stage2-sealed-apply-0001",
+  "school_key": "rhode-island",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "7ee84fbb9c78de00f7f26726d2aa548b4daed4a3",
+  "previous_control_state_sha256": "702c4ff41cb66eee5b1b56024bf750ccf60b0538dc8964826ef3217270a2c56a",
+  "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "cd67029647361d3e6f6ccefbed87adb95903e8b02f2c16d4fe086b72c4be6b0c"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "9178530a441c895d9bbbaf8f0ecdbe3274da96ee87bf9cafb803ad8fc35a4799"
+  },
+  "approved_plan_hash": "a1515391ea08b17acc58ab9ea0847834ffa11b09fca31099270c3a70cb1977ae",
+  "approved_plan_sha256": "1929ee0b7974951b3b3cec6e08d4745edf16552d7066e48dd4332303bc038300",
+  "owner_gate_1_approval_sha256": "2f069cd3488cd6f1ecdd4e6c8f2b7d440a2a3c2a31d518c2efc59aa330db16e0",
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+  "recommendation_map_sha256": "04eef4b4675e69337c175457dabc15b79c9525b5b2de509f59e5fbe6ab372753",
+  "filled_review_sha256": "4c7ec1a1fc5d8eeb6d4817663521717218e18933ef711282a8baee5f19ced7ca",
+  "decision_id_set_sha256": "97a09da3eb8bb21ae96d2f20c3c0962f6613b9e9be2264f169b65e3a02c393f2",
+  "creation_provenance": {
+    "origin": "Rhode Island Implementation post-Gate-1 continuation",
+    "authorization": "Fresh-verified exact Gate 1 seal under existing owner approval; sealed apply only."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": true,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
