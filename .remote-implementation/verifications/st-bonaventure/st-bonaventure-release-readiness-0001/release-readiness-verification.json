@@ -1,0 +1,16 @@
+{
+  "checkpoint_manifest_sha256": "26b800a438494946cff009c85b5a1255f04c340514dd015599a4f6920e8cf808",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "readiness_proof_sha256": "665773c684bc3bd28b432a90276db8541778f24ca21936e7c5787d0afba49ec6",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "st-bonaventure-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "tracked_mutation": "NONE"
+}

@@ -695,11 +695,11 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-readiness-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "26b800a438494946cff009c85b5a1255f04c340514dd015599a4f6920e8cf808",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "RELEASE_READINESS",
     "protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
     "readiness_status": "RELEASE_READINESS_PASS",
-    "remote_release_readiness_equivalence": "PENDING",
+    "remote_release_readiness_equivalence": "PASS",
     "request_id": "st-bonaventure-release-readiness-0001",
     "school_key": "st-bonaventure",
     "target_branch": "data/st-bonaventure-onboarding",
