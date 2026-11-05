@@ -4,7 +4,10 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-from build_site_data import validated_historical_coverage
+from build_site_data import (
+    validated_historical_accounting,
+    validated_historical_coverage,
+)
 
 
 class HistoricalCoverageBuildTests(unittest.TestCase):
@@ -75,8 +78,85 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
             self.build(rows=[self.row, dict(self.row)])
 
     def test_missing_or_phantom_canonical_games_rejected(self):
-        with self.assertRaisesRegex(ValueError, "no canonical games"):
+        with self.assertRaisesRegex(ValueError, "arithmetic/canonical discrepancy"):
             self.build(seasons={})
+
+    def test_zero_documented_coverage_season_is_allowed(self):
+        authority = {
+            ("example", "1909-10"): {
+                "institutional_record": {"wins": 2, "losses": 0, "games": 2},
+                "identified_record": {"wins": 0, "losses": 0, "games": 0},
+                "unidentified_record": {"wins": 2, "losses": 0, "games": 2},
+                "owner_disposition": "https://github.com/example/history/issues/2",
+            }
+        }
+        row = {
+            "program_key": "example",
+            "season_label": "1909-10",
+            "official_wins": "2",
+            "official_losses": "0",
+            "official_games": "2",
+            "documented_wins": "0",
+            "documented_losses": "0",
+            "documented_games": "0",
+            "unidentified_wins": "2",
+            "unidentified_losses": "0",
+            "unidentified_games": "2",
+            "source_label": "Institutional aggregate",
+            "owner_disposition": "https://github.com/example/history/issues/2",
+            "stage1_audit_sha256": "e" * 64,
+            "public_note": "",
+        }
+        result = validated_historical_coverage(
+            [row],
+            "example",
+            {},
+            authority,
+        )
+        self.assertEqual(result[0]["season_label"], "1909-1910")
+        self.assertEqual(result[0]["documented_record"]["games"], 0)
+        self.assertEqual(result[0]["official_record"]["games"], 2)
+
+    def test_accounting_contradiction_preserves_negative_delta(self):
+        authority = {
+            ("example", "1903-04"): {
+                "institutional_record": {"wins": 0, "losses": 0, "games": 0},
+                "identified_record": {"wins": 1, "losses": 0, "games": 1},
+                "mechanical_delta": {"wins": -1, "losses": 0, "games": -1},
+                "owner_disposition": "https://github.com/example/history/issues/2",
+            }
+        }
+        rows = [
+            {
+                "program_key": "example",
+                "season_label": "1903-04",
+                "official_wins": "0",
+                "official_losses": "0",
+                "official_games": "0",
+                "documented_wins": "1",
+                "documented_losses": "0",
+                "documented_games": "1",
+                "delta_wins": "-1",
+                "delta_losses": "0",
+                "delta_games": "-1",
+                "classification":
+                    "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+                "source_label": "Conflicting institutional structures",
+                "owner_disposition": "https://github.com/example/history/issues/2",
+                "stage1_audit_sha256": "e" * 64,
+                "public_note": "Diagnostic only",
+            }
+        ]
+        seasons = {"1903-1904": [{"result": "W"}]}
+        result = validated_historical_accounting(
+            rows,
+            "example",
+            seasons,
+            authority,
+        )
+        self.assertEqual(result[0]["season_label"], "1903-1904")
+        self.assertEqual(result[0]["mechanical_delta"]["games"], -1)
+        self.assertEqual(seasons["1903-1904"], [{"result": "W"}])
 
     def test_short_and_full_equivalent_coverage_rows_are_duplicate(self):
         duplicate = dict(self.row)
