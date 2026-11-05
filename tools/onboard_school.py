@@ -204,6 +204,7 @@ def allowed_apply_path(
         "data/reference/programs.csv",
         "data/reference/program-accomplishments.csv",
         "data/reference/historical-season-coverage.csv",
+        "data/reference/historical-season-accounting.csv",
         f"schools/{school_key}/source-games.csv",
         f"data/reconciliation/onboarding-decisions/{school_key}-{approved_hash[:12]}.json",
     }
