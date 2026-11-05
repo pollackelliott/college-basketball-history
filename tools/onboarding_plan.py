@@ -4209,7 +4209,19 @@ def _apply_sealed_game_site_venue_relationship_patches(
             row["venue_date_precision"] = global_venue.get("date_precision", "").strip()
         additions.append(row)
 
-    write_csv_preserving_format(venue_path, venue_fields, venue_rows + additions)
+    original = venue_path.read_bytes()
+    line_ending = "\r\n" if b"\r\n" in original else "\n"
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(
+        buffer,
+        fieldnames=venue_fields,
+        lineterminator=line_ending,
+    )
+    for row in additions:
+        writer.writerow({field: row.get(field, "") for field in venue_fields})
+    addition_bytes = buffer.getvalue().encode("utf-8")
+    separator = b"" if original.endswith(line_ending.encode("ascii")) else line_ending.encode("ascii")
+    venue_path.write_bytes(original + separator + addition_bytes)
     return len(additions)
 
 
