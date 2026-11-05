@@ -4517,6 +4517,43 @@ def approve_plan(
                         "normalized_opponent_name source patch"
                     )
         if item.get("category") == "postseason_classification":
+            historical_challenge = bool(item.get("historical_game_type_challenge"))
+            if historical_challenge:
+                if decision != "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
+                    raise WorkflowError(
+                        f"{decision_id}: historical game-type challenge must remain "
+                        "an explicit Gate 1 apply decision"
+                    )
+                if canonical_patch:
+                    raise WorkflowError(
+                        f"{decision_id}: historical game-type challenge may not "
+                        "carry a direct canonical patch"
+                    )
+                if source_patch != {"curated_game_type": HISTORICAL_CHALLENGE_TARGET_TYPE}:
+                    raise WorkflowError(
+                        f"{decision_id}: historical game-type challenge may change "
+                        "only curated_game_type to NCAA_TOURNAMENT"
+                    )
+                if item.get("source_value") != HISTORICAL_CHALLENGE_SOURCE_TYPE:
+                    raise WorkflowError(
+                        f"{decision_id}: historical game-type challenge source "
+                        "classification is no longer REGULAR_SEASON"
+                    )
+                if item.get("planned_identity_status") != ingest_school.NEW_GAME:
+                    raise WorkflowError(
+                        f"{decision_id}: historical game-type challenge identity "
+                        "is no longer NEW_GAME"
+                    )
+                expected_identity = item.get("expected_canonical_identity")
+                if (
+                    not isinstance(expected_identity, dict)
+                    or set(expected_identity)
+                    != set(HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS)
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: historical game-type challenge canonical "
+                        "identity binding is incomplete"
+                    )
             if canonical_patch and (
                 decision != "APPLY_POSTSEASON_CLASSIFICATION_PATCH"
                 or set(canonical_patch) != {"postseason_round"}
@@ -6102,16 +6139,33 @@ def apply_pre_ingest_source_patches(
             raise WorkflowError(
                 f"{decision_id}: reviewed postseason source game is missing"
             )
-        if (source.get("curated_game_type", "").strip() != "POSTSEASON"
+        historical_challenge = bool(item.get("historical_game_type_challenge"))
+        expected_source_type = str(item.get("source_value", "")).strip()
+        if (source.get("curated_game_type", "").strip() != expected_source_type
                 or source.get("season_label", "").strip() != item.get("season_label", "")
                 or source.get("game_date", "").strip() != item.get("source_game_date", "")
                 or postseason_row_fingerprint(source) != item.get("source_row_sha256", "")):
             raise WorkflowError(
                 f"{decision_id}: frozen postseason source row changed before sealed apply"
             )
+        if historical_challenge:
+            frozen_source = item.get("frozen_source_row")
+            if (
+                expected_source_type != HISTORICAL_CHALLENGE_SOURCE_TYPE
+                or not isinstance(frozen_source, dict)
+                or frozen_source != source
+            ):
+                raise WorkflowError(
+                    f"{decision_id}: historical challenge frozen source binding changed"
+                )
         action = item.get("decision", "")
         patch = dict(item.get("source_patch", {}))
         if action == "KEEP_POSTSEASON_UNRESOLVED":
+            if historical_challenge:
+                raise WorkflowError(
+                    f"{decision_id}: historical game-type challenge cannot be "
+                    "silently left unresolved inside an approved Gate 1 packet"
+                )
             if patch:
                 raise WorkflowError(
                     f"{decision_id}: unresolved postseason must remain unchanged"
@@ -6163,17 +6217,35 @@ def apply_pre_ingest_source_patches(
                 raise WorkflowError(
                     f"{decision_id}: invalid or redundant historical H/A/N patch"
                 )
+        if historical_challenge and patch != {
+            "curated_game_type": HISTORICAL_CHALLENGE_TARGET_TYPE
+        }:
+            raise WorkflowError(
+                f"{decision_id}: historical challenge source delta widened"
+            )
         source["curated_game_type"] = desired_type
         if "curated_postseason_round" in patch:
             source["curated_postseason_round"] = desired_round
         if site is not None:
             source["curated_site_type"] = site
             counts["postseason_owner_site_patches"] += 1
-        source["notes"] = _append_note(
-            source.get("notes", ""),
-            "Owner-approved postseason source classification through sealed "
-            f"decision {decision_id}; literal raw_text preserved.",
-        )
+        if historical_challenge:
+            frozen_source = item["frozen_source_row"]
+            for field, frozen_value in frozen_source.items():
+                if field == "curated_game_type":
+                    continue
+                if source.get(field, "") != frozen_value:
+                    raise WorkflowError(
+                        f"{decision_id}: historical challenge changed unrelated "
+                        f"source field {field}"
+                    )
+            counts["historical_game_type_challenges_applied"] += 1
+        else:
+            source["notes"] = _append_note(
+                source.get("notes", ""),
+                "Owner-approved postseason source classification through sealed "
+                f"decision {decision_id}; literal raw_text preserved.",
+            )
         counts["postseason_classifications_applied"] += 1
 
     for item in site_items:
@@ -6570,6 +6642,36 @@ def apply_reconciliation_decisions(
             raise WorkflowError(
                 f"{item['decision_id']}: sealed pre-ingest source classification did not persist"
             )
+        if item.get("historical_game_type_challenge"):
+            frozen_source = item.get("frozen_source_row") or {}
+            for field, frozen_value in frozen_source.items():
+                if field == "curated_game_type":
+                    continue
+                if source.get(field, "") != frozen_value:
+                    raise WorkflowError(
+                        f"{item['decision_id']}: historical challenge changed "
+                        f"unrelated source field {field}"
+                    )
+            expected_identity = item.get("expected_canonical_identity") or {}
+            actual_identity = {
+                field: canonical.get(field, "")
+                for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+            }
+            if actual_identity != expected_identity:
+                raise WorkflowError(
+                    f"{item['decision_id']}: historical challenge canonical identity "
+                    "changed after ingestion"
+                )
+            if canonical.get("game_type", "").strip() != HISTORICAL_CHALLENGE_TARGET_TYPE:
+                raise WorkflowError(
+                    f"{item['decision_id']}: historical challenge canonical game type "
+                    "did not persist through ingestion"
+                )
+            if canonical.get("postseason_round", "").strip():
+                raise WorkflowError(
+                    f"{item['decision_id']}: historical challenge inferred an "
+                    "unauthorized postseason round"
+                )
         classification_by_source[source_id] = desired
         previous_type = canonical.get("game_type", "").strip()
         if previous_type == "POSTSEASON":
