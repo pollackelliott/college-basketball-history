@@ -960,6 +960,7 @@ def authenticated_frozen_venue_split_authority(
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
     sealed_plan_context: dict[str, Any] | None = None,
     semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
+    venue_semantic_phase: str | None = None,
 ) -> tuple[dict[str, dict[str, str]], bytes | None]:
     """Return exact frozen split assignments and their authenticated manifest bytes.
 
@@ -967,6 +968,15 @@ def authenticated_frozen_venue_split_authority(
     exists, all trust invariants used by Stage 2 planning must pass before any
     authority is returned or transported into a disposable runtime copy.
     """
+
+    venue_phase = semantic_phase if venue_semantic_phase is None else venue_semantic_phase
+    if (
+        semantic_phase not in SEMANTIC_PHASE_FIELDS
+        or venue_phase not in SEMANTIC_PHASE_FIELDS
+    ):
+        raise FrozenVenueSplitAuthorityError(
+            "unsupported frozen venue split authentication phase"
+        )
 
     manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
     if not manifest_path.is_file():
@@ -1062,11 +1072,11 @@ def authenticated_frozen_venue_split_authority(
         venues_path,
         expected_venues_hash,
         sealed_plan_context,
-        semantic_phase=semantic_phase,
+        semantic_phase=venue_phase,
     ):
         suffix = (
             " outside the exact sealed post-reconciliation GAME_SITE delta"
-            if semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+            if venue_phase == SEMANTIC_PHASE_POST_RECONCILIATION
             else ""
         )
         raise FrozenVenueSplitAuthorityError(
@@ -1166,6 +1176,7 @@ def load_frozen_venue_split_authority(
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
     sealed_plan_context: dict[str, Any] | None = None,
     semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
+    venue_semantic_phase: str | None = None,
 ) -> dict[str, dict[str, str]]:
     """Return only authenticated per-game split assignments."""
 
@@ -1175,6 +1186,7 @@ def load_frozen_venue_split_authority(
         allowed_semantic_delta=allowed_semantic_delta,
         sealed_plan_context=sealed_plan_context,
         semantic_phase=semantic_phase,
+        venue_semantic_phase=venue_semantic_phase,
     )
     return authority
 
@@ -1186,6 +1198,7 @@ def frozen_venue_split_freeze_bytes(
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
     sealed_plan_context: dict[str, Any] | None = None,
     semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
+    venue_semantic_phase: str | None = None,
 ) -> bytes | None:
     """Return manifest bytes only when their split authority remains authenticated."""
 
@@ -1195,5 +1208,6 @@ def frozen_venue_split_freeze_bytes(
         allowed_semantic_delta=allowed_semantic_delta,
         sealed_plan_context=sealed_plan_context,
         semantic_phase=semantic_phase,
+        venue_semantic_phase=venue_semantic_phase,
     )
     return payload if authority else None
