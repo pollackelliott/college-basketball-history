@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-stage1-0002",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "rhode-island-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "rhode-island",
-  "previous_control_state_commit": "43af8b486345f1065694a571b01db5f0fd087a48",
-  "previous_control_state_sha256": "54eef96f901c8660488ecc012d8ef9a5879b92536f449517ef412d41a7bb3cae",
+  "previous_control_state_commit": "0fe3208b7bafcb4c8f097269635be0bab4603442",
+  "previous_control_state_sha256": "196f8eeb802fa1c2bbb40bd38c4c9229996bf27d0ff621be3bb5505aeeb65710",
   "expected_protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "target_branch": "data/rhode-island-onboarding",
   "research_checkpoint": {
     "sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
     "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
@@ -17,15 +18,26 @@
       "part_count": 14
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage1-0002/checkpoint-manifest.json",
+    "sha256": "532ab5745902ccc0fb0c115b0d3a29dd239e933869b01dd1e63806d813aebb10"
+  },
   "venue_reconciliation": null,
   "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1903-1904",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted Rhode Island INCEPTION+ scope from the immutable Research Freeze: owner-approved 2026-11-03, history_start_season=1903-1904, history_scope_status=OWNER_CONFIRMED, history_scope_basis=ALWAYS_TOP_LEVEL_FROM_INCEPTION. Protected main currently lacks a reusable Rhode Island program-top-level-scope row, so guarded Phase 0 must reconcile this exact frozen target-school scope into the target row without reopening Research. Preserve the exact frozen historical universe and all accepted researched uncertainty."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation lane — post-maintenance Stage 1 recovery",
-    "authorization": "Control Center disposition authenticated merged PR #472 at protected main 5492240bd889b0f2b946034529ef6562fdc9fbca and explicitly authorized the same Rhode Island Implementation lane to rerun the complete permanent Stage 1 inventory from the unchanged immutable Research Freeze after shared/global venue maintenance. The exact Research Freeze ZIP was reauthenticated from the original 14-part git transport at SHA-256 5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2 with research_base_sha 80b00278ac9add94702ac76c5fa310b95d2b1929 and unchanged six-file contract. This request is read-only Stage 1 inventory only; no maintenance replay, Research mutation, Phase 0, Stage 2, owner gate, release, recovery, or protected-main mutation is authorized."
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — post-maintenance clean Stage 1 to guarded Phase 0",
+    "authorization": "Control Center explicitly directed the SAME Rhode Island Implementation lane to authenticate merged protected main 5492240bd889b0f2b946034529ef6562fdc9fbca, rerun the complete permanent Stage 1 inventory from the unchanged Research Freeze, and if clean continue under current repository policy without a new owner relay. Rhode Island Stage 1 request rhode-island-stage1-0002 is durably PASS with 69 venues = 66 SAFE_REPRESENTATION_REUSE + 3 NEW_GLOBAL_IDENTITY, zero shared/global maintenance, zero ambiguous stops, zero conference blockers, and zero program-alias blockers. This request authorizes exactly one guarded PHASE0 operation: fresh-repeat Stage 1 against exact main, stage the unchanged six-file Research Freeze, register the three ordinary target-school venue identities, reconcile the frozen INCEPTION+ target scope, capture INTEGRATION_FROZEN, publish create-once data/rhode-island-onboarding through the global mutation lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gate, release, Preview, merge, recovery, or protected-main direct mutation authority."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -40,7 +52,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false,
     "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false
