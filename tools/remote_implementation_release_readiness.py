@@ -296,7 +296,7 @@ def build_release_pr_packet(
         "base_branch": "main",
         "head_branch": authority["target_branch"],
         "head_sha": authority["target_sha"],
-        "title": f"Ingest and publish {display} history",
+        "new_pr_title": f"Ingest and publish {display} history",
         "body_checkpoint_path": body_checkpoint_path,
         "body_sha256": sha256_bytes(body),
         "approved_plan_hash": authority["approved_plan_hash"],
@@ -306,7 +306,8 @@ def build_release_pr_packet(
         "authority_statement": (
             "Exact connector-owned PR creation packet after fresh release "
             "readiness. The school Implementation lane may create or reuse only "
-            "this exact head/base/title/body PR, then queue the bound Preview "
+            "this exact head/base/body PR (using new_pr_title when creating a " 
+            "new PR), then queue the bound Preview "
             "verification request. This packet grants no Owner Gate 2, merge, "
             "Production, or tracked mutation authority."
         ),
