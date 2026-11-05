@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import remote_implementation_final_release as final_release  # noqa: E402
+import remote_implementation_production as production  # noqa: E402
+import remote_implementation_verify as verifier  # noqa: E402
 
 SCHOOL = "example-school"
 BRANCH = "data/example-school-onboarding"
@@ -145,6 +147,20 @@ def fixture(*, packet_method="merge", production_request_id=PRODUCTION_ID):
         packet_path: packet_bytes,
     }
     return request, storage
+
+
+class FinalReleaseVerifierImportTests(unittest.TestCase):
+    def test_gate2_fresh_verifier_imports_merge_packet_builder(self):
+        self.assertIs(
+            verifier.build_gate2_merge_packet,
+            production.build_gate2_merge_packet,
+        )
+
+    def test_production_fresh_verifier_imports_packet_binding(self):
+        self.assertIs(
+            verifier.verify_final_release_packet_binding,
+            final_release.verify_final_release_packet_binding,
+        )
 
 
 class FinalReleasePacketTests(unittest.TestCase):

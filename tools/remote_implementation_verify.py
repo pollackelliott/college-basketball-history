@@ -103,8 +103,12 @@ from remote_implementation_venue_maintenance import (
 )
 from remote_implementation_production import (
     approve_exact_gate2,
+    build_gate2_merge_packet,
     verify_gate2_approved_chain,
     run_permanent_production_proof,
+)
+from remote_implementation_final_release import (
+    verify_final_release_packet_binding,
 )
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
