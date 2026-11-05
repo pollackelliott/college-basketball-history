@@ -343,6 +343,7 @@ def run_stage2_proposal_tool(
     diag: Path,
     *,
     tool_repo: Path | None = None,
+    historical_game_type_challenge_path: Path | None = None,
 ) -> dict[str, Any]:
     """Run the unchanged permanent Stage-2 coordinator with one exact map payload."""
 
@@ -369,6 +370,11 @@ def run_stage2_proposal_tool(
         "--map",
         str(map_path),
     ]
+    if historical_game_type_challenge_path is not None:
+        cmd.extend([
+            "--historical-game-type-challenge",
+            str(historical_game_type_challenge_path),
+        ])
     cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-proposal-rehearsal.log").write_text(cp.stdout, encoding="utf-8")
@@ -443,13 +449,20 @@ def run_stage2_proposal_tool(
         site_doc = json.loads(site_path.read_text(encoding="utf-8"))
 
     return {
-        "command": [
-            "python",
-            "tools/implementation_stage2.py",
-            school_key,
-            "--map",
-            "<MAP>",
-        ],
+        "command": (
+            [
+                "python",
+                "tools/implementation_stage2.py",
+                school_key,
+                "--map",
+                "<MAP>",
+            ]
+            + (
+                ["--historical-game-type-challenge", "<HISTORICAL_CHALLENGE>"]
+                if historical_game_type_challenge_path is not None
+                else []
+            )
+        ),
         "exit_code": cp.returncode,
         "stage2_status": stage2_status,
         "status": status,
