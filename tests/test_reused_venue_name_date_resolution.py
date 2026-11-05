@@ -1821,9 +1821,9 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             extra = {field: "" for field in FIELDS}
             extra.update({
                 "source_program_key": school_key,
-                "venue_key": "unsealed-arena",
-                "venue_id": "VEN-UNSEALED",
-                "canonical_name": "Unsealed Arena",
+                "venue_key": "frozen-arena",
+                "venue_id": "VEN-000901",
+                "canonical_name": "Frozen Arena",
             })
             writer.writerow(extra)
         with self.assertRaisesRegex(
