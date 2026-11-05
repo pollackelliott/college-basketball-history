@@ -350,18 +350,19 @@
     "st-bonaventure-release-production-proof-0001",
     "rhode-island-stage1-0001",
     "rhode-island-venue-maintenance-0001",
-    "rhode-island-stage1-0002"
+    "rhode-island-stage1-0002",
+    "rhode-island-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42068100479:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "rhode-island-phase0-0001",
+  "active_request_sha256": "e26f9f8bd902b19ea055b112fb3e81487e6fd13ac6cdda591ff24f4f171bfd67",
+  "active_school_key": "rhode-island",
+  "active_target_branch": "data/rhode-island-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -714,8 +715,11 @@
     "stage1_reconciliation_sha256": "fecd643ce3a223d15c37924da6866d2b9e991e5244febcbd639ce4cd7ea04943",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42068100479",
+  "lock_acquisition_request_commit": "7bb3b166b8ee9fd664cfcbfd19f3cc0498867d0c",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
