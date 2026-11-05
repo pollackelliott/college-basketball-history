@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Queue deterministic Stage 2 continuation requests after fresh verification.
 
-This helper runs only after a fresh-verified STAGE2_CURRENT_MAIN_REFRESH or
-STAGE2_CENSUS operation. It converts one already-authorized phase continuation
-spec into the next ordinary guarded request, preserving every existing request,
+This helper runs only after a fresh-verified operation carrying a supported
+phase-continuation spec. It converts one already-authorized continuation into
+the next ordinary guarded request, preserving every existing request,
 checkpoint, fresh-verification, CAS, and owner-gate boundary.
 
 It does not execute Stage 2 itself and does not create new owner authority.
@@ -19,6 +19,10 @@ from remote_implementation_control import (
     LIFECYCLE_IDLE,
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
+    OP_STAGE2_GATE1_FILL,
+    OP_STAGE2_PRESEAL_REHEARSAL,
+    OP_STAGE2_GATE1_SEAL,
+    OP_STAGE2_SEALED_APPLY,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     REQUEST_KIND,
     REQUEST_SCHEMA_VERSION,
@@ -67,7 +71,14 @@ def _verify_payload_ref(control_head: str, ref: dict[str, str], label: str) -> b
     return data
 
 
-def _base_authority(*, census: bool = False, proposal: bool = False) -> dict[str, Any]:
+def _base_authority(
+    *,
+    census: bool = False,
+    proposal: bool = False,
+    preseal: bool = False,
+    seal: bool = False,
+    apply: bool = False,
+) -> dict[str, Any]:
     return {
         "owner_gate_1": False,
         "owner_gate_2": False,
@@ -79,9 +90,9 @@ def _base_authority(*, census: bool = False, proposal: bool = False) -> dict[str
         "stage2_proposal_rehearsal": proposal,
         "stage2_reconciliation_diagnostic": False,
         "stage2_gate1_fill": False,
-        "stage2_preseal_rehearsal": False,
-        "stage2_gate1_seal": False,
-        "stage2_sealed_apply": False,
+        "stage2_preseal_rehearsal": preseal,
+        "stage2_gate1_seal": seal,
+        "stage2_sealed_apply": apply,
         "stage2_current_main_refresh": False,
         "venue_identity_maintenance": False,
         "release_readiness": False,
@@ -337,6 +348,239 @@ def queue_after_census(
     return 0
 
 
+def _verification_ref(
+    control_head: str,
+    *,
+    school_key: str,
+    request_id: str,
+    filename: str,
+    label: str,
+) -> dict[str, str]:
+    path = (
+        f".remote-implementation/verifications/{school_key}/"
+        f"{request_id}/{filename}"
+    )
+    data = git_show_bytes(control_head, path)
+    return {"path": path, "sha256": sha256_bytes(data)}
+
+
+def _checkpoint_manifest(
+    control_head: str,
+    last: dict[str, Any],
+    *,
+    expected_kind: str,
+    label: str,
+) -> tuple[dict[str, Any], dict[str, str]]:
+    ref = {
+        "path": last["checkpoint_manifest_path"],
+        "sha256": last["checkpoint_manifest_sha256"],
+    }
+    data = _verify_payload_ref(control_head, ref, label)
+    manifest = json.loads(data)
+    if manifest.get("kind") != expected_kind:
+        raise Stop(f"STAGE2_CONTINUATION_{label}_KIND_MISMATCH")
+    return manifest, ref
+
+
+def queue_after_gate1_fill(
+    *,
+    live_main: str,
+    control_head: str,
+    state: dict[str, Any],
+    state_bytes: bytes,
+    last: dict[str, Any],
+) -> int:
+    parent, _ = _load_archived_request(control_head, last["request_id"])
+    continuation = _continuation_from_parent(parent)
+    if continuation is None:
+        print("STAGE2 CONTINUATION: Gate 1 fill has no phase continuation")
+        return 0
+
+    manifest, checkpoint_ref = _checkpoint_manifest(
+        control_head,
+        last,
+        expected_kind="REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_CHECKPOINT",
+        label="GATE1_FILL_CHECKPOINT",
+    )
+    if manifest.get("gate1_fill_status") != "FILLED":
+        raise Stop("STAGE2_CONTINUATION_GATE1_FILL_NOT_FILLED")
+    verification_ref = _verification_ref(
+        control_head,
+        school_key=manifest["school_key"],
+        request_id=manifest["request_id"],
+        filename="stage2-gate1-fill-verification.json",
+        label="GATE1_FILL_VERIFICATION",
+    )
+
+    request = _request_base(
+        parent=parent,
+        operation=OP_STAGE2_PRESEAL_REHEARSAL,
+        request_id=continuation["preseal_request_id"],
+        control_head=control_head,
+        state_bytes=state_bytes,
+        live_main=live_main,
+        authority=_base_authority(preseal=True),
+    )
+    request.update(
+        {
+            "target_branch": manifest["target_branch"],
+            "target_sha": manifest["target_sha"],
+            "stage2_gate1_fill_checkpoint": checkpoint_ref,
+            "stage2_gate1_fill_verification": verification_ref,
+            "integration_freeze_sha256": manifest["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+            "decision_universe_sha256": manifest["decision_universe_sha256"],
+            "recommendation_map_sha256": manifest["recommendation_map_sha256"],
+            "approved_plan_hash_preview": manifest["approved_plan_hash_preview"],
+            "filled_review_sha256": manifest["filled_review_sha256"],
+            "decision_id_set_sha256": manifest["decision_id_set_sha256"],
+            "phase_continuation": continuation,
+        }
+    )
+    _queue_request(
+        request,
+        expected_control_head=control_head,
+        state=state,
+    )
+    return 0
+
+
+def queue_after_preseal(
+    *,
+    live_main: str,
+    control_head: str,
+    state: dict[str, Any],
+    state_bytes: bytes,
+    last: dict[str, Any],
+) -> int:
+    parent, _ = _load_archived_request(control_head, last["request_id"])
+    continuation = _continuation_from_parent(parent)
+    if continuation is None:
+        print("STAGE2 CONTINUATION: pre-seal has no phase continuation")
+        return 0
+
+    manifest, checkpoint_ref = _checkpoint_manifest(
+        control_head,
+        last,
+        expected_kind="REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_CHECKPOINT",
+        label="PRESEAL_CHECKPOINT",
+    )
+    if manifest.get("preseal_status") != "READY_TO_SEAL":
+        raise Stop(
+            "STAGE2_CONTINUATION_PRESEAL_NOT_READY:"
+            + str(manifest.get("preseal_status") or "")
+        )
+    verification_ref = _verification_ref(
+        control_head,
+        school_key=manifest["school_key"],
+        request_id=manifest["request_id"],
+        filename="stage2-preseal-rehearsal-verification.json",
+        label="PRESEAL_VERIFICATION",
+    )
+
+    request = _request_base(
+        parent=parent,
+        operation=OP_STAGE2_GATE1_SEAL,
+        request_id=continuation["seal_request_id"],
+        control_head=control_head,
+        state_bytes=state_bytes,
+        live_main=live_main,
+        authority=_base_authority(seal=True),
+    )
+    request.update(
+        {
+            "target_branch": manifest["target_branch"],
+            "target_sha": manifest["target_sha"],
+            "stage2_preseal_checkpoint": checkpoint_ref,
+            "stage2_preseal_verification": verification_ref,
+            "integration_freeze_sha256": manifest["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+            "decision_universe_sha256": manifest["decision_universe_sha256"],
+            "recommendation_map_sha256": manifest["recommendation_map_sha256"],
+            "approved_plan_hash_preview": manifest["approved_plan_hash_preview"],
+            "filled_review_sha256": manifest["filled_review_sha256"],
+            "decision_id_set_sha256": manifest["decision_id_set_sha256"],
+            "owner_gate_1_approval_sha256": manifest[
+                "owner_gate_1_approval_sha256"
+            ],
+            "equivalence_sha256": manifest["equivalence_sha256"],
+            "phase_continuation": continuation,
+        }
+    )
+    _queue_request(
+        request,
+        expected_control_head=control_head,
+        state=state,
+    )
+    return 0
+
+
+def queue_after_gate1_seal(
+    *,
+    live_main: str,
+    control_head: str,
+    state: dict[str, Any],
+    state_bytes: bytes,
+    last: dict[str, Any],
+) -> int:
+    parent, _ = _load_archived_request(control_head, last["request_id"])
+    continuation = _continuation_from_parent(parent)
+    if continuation is None:
+        print("STAGE2 CONTINUATION: Gate 1 seal has no phase continuation")
+        return 0
+
+    manifest, checkpoint_ref = _checkpoint_manifest(
+        control_head,
+        last,
+        expected_kind="REMOTE_IMPLEMENTATION_STAGE2_GATE1_SEAL_CHECKPOINT",
+        label="GATE1_SEAL_CHECKPOINT",
+    )
+    if manifest.get("seal_status") != "SEALED":
+        raise Stop("STAGE2_CONTINUATION_GATE1_NOT_SEALED")
+    verification_ref = _verification_ref(
+        control_head,
+        school_key=manifest["school_key"],
+        request_id=manifest["request_id"],
+        filename="stage2-gate1-seal-verification.json",
+        label="GATE1_SEAL_VERIFICATION",
+    )
+
+    request = _request_base(
+        parent=parent,
+        operation=OP_STAGE2_SEALED_APPLY,
+        request_id=continuation["apply_request_id"],
+        control_head=control_head,
+        state_bytes=state_bytes,
+        live_main=live_main,
+        authority=_base_authority(apply=True),
+    )
+    request.update(
+        {
+            "target_branch": manifest["target_branch"],
+            "target_sha": manifest["target_sha"],
+            "stage2_gate1_seal_checkpoint": checkpoint_ref,
+            "stage2_gate1_seal_verification": verification_ref,
+            "approved_plan_hash": manifest["approved_plan_hash"],
+            "approved_plan_sha256": manifest["approved_plan_sha256"],
+            "owner_gate_1_approval_sha256": manifest[
+                "owner_gate_1_approval_sha256"
+            ],
+            "integration_freeze_sha256": manifest["integration_freeze_sha256"],
+            "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+            "decision_universe_sha256": manifest["decision_universe_sha256"],
+            "recommendation_map_sha256": manifest["recommendation_map_sha256"],
+            "filled_review_sha256": manifest["filled_review_sha256"],
+            "decision_id_set_sha256": manifest["decision_id_set_sha256"],
+        }
+    )
+    _queue_request(
+        request,
+        expected_control_head=control_head,
+        state=state,
+    )
+    return 0
+
+
 def main() -> int:
     configure_git()
     live_main, control_head = fetch_operational_refs()
@@ -364,6 +608,30 @@ def main() -> int:
         )
     if operation == OP_STAGE2_CENSUS:
         return queue_after_census(
+            live_main=live_main,
+            control_head=control_head,
+            state=state,
+            state_bytes=state_bytes,
+            last=last,
+        )
+    if operation == OP_STAGE2_GATE1_FILL:
+        return queue_after_gate1_fill(
+            live_main=live_main,
+            control_head=control_head,
+            state=state,
+            state_bytes=state_bytes,
+            last=last,
+        )
+    if operation == OP_STAGE2_PRESEAL_REHEARSAL:
+        return queue_after_preseal(
+            live_main=live_main,
+            control_head=control_head,
+            state=state,
+            state_bytes=state_bytes,
+            last=last,
+        )
+    if operation == OP_STAGE2_GATE1_SEAL:
+        return queue_after_gate1_seal(
             live_main=live_main,
             control_head=control_head,
             state=state,
