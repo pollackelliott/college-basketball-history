@@ -1,35 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-stage2-opponent-display-normalize-0001",
+  "request_id": "rhode-island-stage2-census-0003",
+  "operation": "STAGE2_CENSUS",
   "school_key": "rhode-island",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "previous_control_state_commit": "2a307da24dfdc976c4b027fa927b64c6c1957231",
-  "previous_control_state_sha256": "36243c337e12a0034ef4d99b3e0b386c6c176ad92779f863b2d3fb8de5f2990b",
+  "previous_control_state_commit": "a050c675299f0fa2d42c1e2182fd90729f6f4c7a",
+  "previous_control_state_sha256": "019e6f3bdbae0456cad9f953f6b58c4a2eba8a2c6f186162565d4ea646fca1ce",
   "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "target_branch": "data/rhode-island-onboarding",
-  "target_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-census-0002/checkpoint-manifest.json",
-    "sha256": "381b991b2487f190f88bf814155afb62964fd84ca23e7fbbf0a9eaad77677270"
+  "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/rhode-island/rhode-island-phase0-0001/successor-manifest.json",
+    "sha256": "684a83f359717275ba33fc81b00f18248cad48722dd107c03d2cec0fbe053cb6"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/rhode-island/rhode-island-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f58ef9e51e631a46cc2af0e51088f400c0a8cbc85c67c0e29dea5ee4bd3bd8c8"
   },
   "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
   "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation lane — census-bound Stage 2 opponent-display normalization",
-    "authorization": "Same owner-authorized Rhode Island Stage 2 phase persists. Fresh-verified census rhode-island-stage2-census-0002 at protected main bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b is BLOCKED solely by exactly nine deterministic historical opponent-display conflicts (baltimore, loyola-new-orleans, pratt, rpi, saint-anselm, saint-michaels, springfield, st-thomas-fl, wayne-state-mi), with warning_count=0, decision_count=0, semantic drift PASS, decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly the permanent census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE representation repair over that complete nine-key population. The operation may change only canonical_opponent_name in schools/rhode-island/opponents.csv and normalized_opponent_name in schools/rhode-island/source-games.csv, using existing project display authority. It may not change opponent keys, literal source labels, raw evidence, any historical field, Research, Integration Freeze, protected main, owner gates, sealing/apply, release, Preview, merge, or Production."
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — fresh Stage 2 census after opponent-display normalization",
+    "authorization": "Same owner-authorized Rhode Island Stage 2 phase persists. The exact census-bound opponent-display successor aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3 is independently fresh-verified with remote_stage2_opponent_display_equivalence=PASS, semantic drift PASS, zero opponent-key changes, zero literal-evidence changes, and only the two allowed Rhode Island display-name paths changed. This read-only census binds that exact successor plus the original Phase 0/Integration Freeze authority on protected main bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b. No tracked repair, current-main refresh, recommendation-map rehearsal, owner approval, sealing/apply, release, Preview, merge, Production, recovery, or protected-main mutation authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -39,6 +39,10 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
