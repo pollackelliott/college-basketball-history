@@ -5105,7 +5105,7 @@ def _venue_maps(
         repo / "schools" / school_key / "venues.csv",
         global_venues_by_id,
         sealed_plan_context=approved_plan,
-        post_reconciliation_semantics=True,
+        post_reconciliation_venue_relationships=True,
     )
     names_by_key: dict[str, str] = {}
     for path in sorted((repo / "schools").glob("*/venues.csv")):

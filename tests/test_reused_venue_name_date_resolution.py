@@ -1768,19 +1768,10 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 sealed_plan_context=approved,
             )
 
-        # Model the paired final source state produced by reconciliation.
-        source_rows[1]["curated_game_type"] = "NIT"
-        source_rows[1]["curated_venue_name"] = "Sealed Arena"
-        source_rows[1]["city"] = "Sealed City"
-        source_rows[1]["state"] = "SC"
-        with source_path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=source_fields)
-            writer.writeheader()
-            writer.writerows(source_rows)
-
-        # Exact frozen bytes + the exact sealed GAME_SITE suffix are valid only
-        # in final/post-reconciliation authentication. Exercise the real
-        # reconciliation venue-map call site so it cannot regress to PRE_INGEST.
+        # Generic reconciliation writes the sealed GAME_SITE suffix immediately,
+        # but source reconciliations remain in memory until the final CSV write.
+        # Exercise that real mixed transaction state: venue bytes are post-
+        # reconciliation while source semantics are still exactly pre-ingest.
         metadata, names_by_key = _venue_maps(
             repo,
             school_key,
@@ -1792,6 +1783,45 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
         )
         self.assertEqual(names_by_key["sealed-arena"], "Sealed Arena")
         exact_post_bytes = venue_path.read_bytes()
+
+        # The final/no-op authentication mode remains exact and must not accept
+        # the still-pre-ingest source state merely because the venue suffix is valid.
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "outside the exact sealed post-reconciliation semantic delta",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+                post_reconciliation_semantics=True,
+            )
+
+        # Model the paired final source state produced when reconciliation
+        # eventually persists its in-memory source changes.
+        source_rows[1]["curated_game_type"] = "NIT"
+        source_rows[1]["curated_venue_name"] = "Sealed Arena"
+        source_rows[1]["city"] = "Sealed City"
+        source_rows[1]["state"] = "SC"
+        with source_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=source_fields)
+            writer.writeheader()
+            writer.writerows(source_rows)
+
+        final_metadata = ingest_school.load_runtime_venue_metadata_map(
+            repo,
+            school_key,
+            venue_path,
+            global_venues,
+            sealed_plan_context=approved,
+            post_reconciliation_semantics=True,
+        )
+        self.assertIn(
+            ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
+            final_metadata,
+        )
 
         # A changed frozen row remains forbidden.
         frozen_mutation = bytearray(exact_post_bytes)
