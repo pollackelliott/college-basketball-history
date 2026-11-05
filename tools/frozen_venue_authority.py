@@ -262,9 +262,9 @@ def _venues_match_frozen_plus_sealed_relationships(
     expected_frozen_hash: str,
     approved: dict[str, Any] | None,
     *,
-    semantic_phase: str,
+    venue_semantic_phase: str,
 ) -> bool:
-    """Authenticate exact frozen venue bytes plus exact sealed GAME_SITE additions."""
+    """Authenticate venue bytes for the requested explicit runtime phase."""
 
     if (
         not re.fullmatch(r"[0-9a-f]{64}", expected_frozen_hash)
@@ -272,7 +272,7 @@ def _venues_match_frozen_plus_sealed_relationships(
     ):
         return False
     current_bytes = venues_path.read_bytes()
-    if semantic_phase != SEMANTIC_PHASE_POST_RECONCILIATION:
+    if venue_semantic_phase != SEMANTIC_PHASE_POST_RECONCILIATION:
         return hashlib.sha256(current_bytes).hexdigest() == expected_frozen_hash
 
     line_ending = "\r\n" if b"\r\n" in current_bytes else "\n"
@@ -472,6 +472,37 @@ SEMANTIC_PHASE_FIELDS = {
     SEMANTIC_PHASE_PRE_INGEST: PRE_INGEST_SEMANTIC_FIELDS,
     SEMANTIC_PHASE_POST_RECONCILIATION: FINAL_SOURCE_SEMANTIC_FIELDS,
 }
+
+VENUE_AUTH_PHASE_PRE_INGEST = "PRE_INGEST"
+VENUE_AUTH_PHASE_MID_RECONCILIATION = "MID_RECONCILIATION"
+VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION = "FINAL_POST_RECONCILIATION"
+VENUE_AUTH_PHASE_DIMENSIONS = {
+    VENUE_AUTH_PHASE_PRE_INGEST: (
+        SEMANTIC_PHASE_PRE_INGEST,
+        SEMANTIC_PHASE_PRE_INGEST,
+    ),
+    VENUE_AUTH_PHASE_MID_RECONCILIATION: (
+        SEMANTIC_PHASE_PRE_INGEST,
+        SEMANTIC_PHASE_POST_RECONCILIATION,
+    ),
+    VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION: (
+        SEMANTIC_PHASE_POST_RECONCILIATION,
+        SEMANTIC_PHASE_POST_RECONCILIATION,
+    ),
+}
+
+
+def venue_authentication_phase_dimensions(
+    authentication_phase: str,
+) -> tuple[str, str]:
+    """Return source-semantic and venue-byte phases for one valid runtime state."""
+
+    dimensions = VENUE_AUTH_PHASE_DIMENSIONS.get(authentication_phase)
+    if dimensions is None:
+        raise FrozenVenueSplitAuthorityError(
+            f"unsupported venue authentication phase {authentication_phase!r}"
+        )
+    return dimensions
 
 POST_RECONCILIATION_NORMALIZATION_FIELDS = frozenset({
     "game_date",
@@ -959,14 +990,18 @@ def authenticated_frozen_venue_split_authority(
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
     sealed_plan_context: dict[str, Any] | None = None,
-    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
+    authentication_phase: str = VENUE_AUTH_PHASE_PRE_INGEST,
 ) -> tuple[dict[str, dict[str, str]], bytes | None]:
-    """Return exact frozen split assignments and their authenticated manifest bytes.
+    """Return exact frozen split assignments for one explicit runtime phase.
 
     A missing Integration Freeze is equivalent to no split authority. If a manifest
     exists, all trust invariants used by Stage 2 planning must pass before any
     authority is returned or transported into a disposable runtime copy.
     """
+
+    source_semantic_phase, venue_semantic_phase = (
+        venue_authentication_phase_dimensions(authentication_phase)
+    )
 
     manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
     if not manifest_path.is_file():
@@ -1030,18 +1065,18 @@ def authenticated_frozen_venue_split_authority(
             snapshot,
             current_snapshot,
             allowed_semantic_delta,
-            semantic_phase=semantic_phase,
+            semantic_phase=source_semantic_phase,
         )
     ):
         phase_label = (
             "sealed post-reconciliation semantic delta"
-            if semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+            if source_semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
             else "sealed pre-ingest semantic delta"
         )
         suffix = (
             f" outside the exact {phase_label}"
             if allowed_semantic_delta
-            or semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+            or source_semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
             else ""
         )
         raise FrozenVenueSplitAuthorityError(
@@ -1062,11 +1097,11 @@ def authenticated_frozen_venue_split_authority(
         venues_path,
         expected_venues_hash,
         sealed_plan_context,
-        semantic_phase=semantic_phase,
+        venue_semantic_phase=venue_semantic_phase,
     ):
         suffix = (
             " outside the exact sealed post-reconciliation GAME_SITE delta"
-            if semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+            if venue_semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
             else ""
         )
         raise FrozenVenueSplitAuthorityError(
@@ -1165,16 +1200,16 @@ def load_frozen_venue_split_authority(
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
     sealed_plan_context: dict[str, Any] | None = None,
-    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
+    authentication_phase: str = VENUE_AUTH_PHASE_PRE_INGEST,
 ) -> dict[str, dict[str, str]]:
-    """Return only authenticated per-game split assignments."""
+    """Return authenticated per-game split assignments for one runtime phase."""
 
     authority, _ = authenticated_frozen_venue_split_authority(
         repo,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
         sealed_plan_context=sealed_plan_context,
-        semantic_phase=semantic_phase,
+        authentication_phase=authentication_phase,
     )
     return authority
 
@@ -1185,7 +1220,7 @@ def frozen_venue_split_freeze_bytes(
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
     sealed_plan_context: dict[str, Any] | None = None,
-    semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
+    authentication_phase: str = VENUE_AUTH_PHASE_PRE_INGEST,
 ) -> bytes | None:
     """Return manifest bytes only when their split authority remains authenticated."""
 
@@ -1194,6 +1229,6 @@ def frozen_venue_split_freeze_bytes(
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
         sealed_plan_context=sealed_plan_context,
-        semantic_phase=semantic_phase,
+        authentication_phase=authentication_phase,
     )
     return payload if authority else None
