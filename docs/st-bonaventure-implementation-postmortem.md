@@ -201,6 +201,13 @@ with the repeated post-tooling Stage 2 path:
 
 The owner should not schedule each sub-operation.
 
+The first implementation is `STAGE2_REFRESH_CENSUS_PROPOSAL_V1`: an optional
+hash-bound continuation on the ordinary guarded refresh request. It does not collapse
+the operations. Fresh refresh verification automatically queues the ordinary census;
+fresh census verification queues the ordinary exact-map proposal only when the expected
+decision-universe SHA is reproduced exactly. Each child retains its ordinary checkpoint
+and independent verifier.
+
 The same design should then be evaluated for:
 
 - Gate 1 approval -> fill -> pre-seal -> seal -> sealed apply -> verification; and
