@@ -356,11 +356,11 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
             ],
             [
                 {
-                    "venue_id": "VEN-000038",
-                    "venue_key": "cfe-arena",
-                    "display_name": "Addition Financial Arena",
-                    "city": "Orlando",
-                    "state": "FL",
+                    "venue_id": "VEN-000999",
+                    "venue_key": "example-arena",
+                    "display_name": "Example Arena",
+                    "city": "Example City",
+                    "state": "EX",
                     "opened": "2007-09-08",
                     "closed": "",
                     "date_precision": "EXACT",
@@ -385,8 +385,8 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
             ],
             [
                 {
-                    "venue_id": "VEN-000038",
-                    "venue_name": "Addition Financial Arena",
+                    "venue_id": "VEN-000999",
+                    "venue_name": "Example Arena",
                     "normalized_name": "additionfinancialarena",
                     "name_type": "PROJECT_DISPLAY",
                     "valid_from": "",
@@ -396,8 +396,8 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
                     "notes": "",
                 },
                 {
-                    "venue_id": "VEN-000038",
-                    "venue_name": "UCF Arena",
+                    "venue_id": "VEN-000999",
+                    "venue_name": "Historic Example Arena",
                     "normalized_name": "ucfarena",
                     "name_type": "OFFICIAL_NAMING_PERIOD",
                     "valid_from": "2007-09-08",
@@ -424,13 +424,13 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
             "source_game_date": "2011-03-16",
             "resolution_basis": "Official host source identifies exact postseason site.",
             "source_patch": {
-                "curated_venue_name": "UCF Arena",
-                "city": "Orlando",
-                "state": "FL",
+                "curated_venue_name": "Historic Example Arena",
+                "city": "Example City",
+                "state": "EX",
             },
             "venue_relationship_patch": {
-                "venue_id": "VEN-000038",
-                "venue_key": "cfe-arena",
+                "venue_id": "VEN-000999",
+                "venue_key": "example-arena",
             },
         }
 
@@ -452,13 +452,13 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
                 rows = list(csv.DictReader(handle))
             self.assertEqual(len(rows), 1)
             row = rows[0]
-            self.assertEqual(row["venue_id"], "VEN-000038")
-            self.assertEqual(row["venue_key"], "cfe-arena")
+            self.assertEqual(row["venue_id"], "VEN-000999")
+            self.assertEqual(row["venue_key"], "example-arena")
             self.assertEqual(row["relationship_type"], "GAME_SITE")
             self.assertEqual(row["games_currently_assigned"], "1")
             self.assertEqual(row["first_assigned_game"], "2011-03-16")
             self.assertEqual(row["last_assigned_game"], "2011-03-16")
-            self.assertEqual(row["aliases"], "UCF Arena")
+            self.assertEqual(row["aliases"], "Historic Example Arena")
 
             global_by_id, _, _ = onboarding_plan.load_global_venue_reference(repo)
             venue_map = onboarding_plan.ingest_school.load_venue_metadata_map(
@@ -469,16 +469,16 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
                 "source_game_id": "TEST-1",
                 "season_label": "2010-2011",
                 "game_date": "2011-03-16",
-                "curated_venue_name": "UCF Arena",
-                "city": "Orlando",
-                "state": "FL",
+                "curated_venue_name": "Historic Example Arena",
+                "city": "Example City",
+                "state": "EX",
             }
             resolved = onboarding_plan.ingest_school.resolve_venue_metadata(
                 source,
                 venue_map,
             )
-            self.assertEqual(resolved["venue_id"], "VEN-000038")
-            self.assertEqual(resolved["venue_key"], "cfe-arena")
+            self.assertEqual(resolved["venue_id"], "VEN-000999")
+            self.assertEqual(resolved["venue_key"], "example-arena")
 
     def test_relationship_patch_rejects_unknown_or_mismatched_global_identity(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -486,7 +486,7 @@ class SealedGameSiteVenueRelationshipTests(unittest.TestCase):
             item = self._item()
             item["venue_relationship_patch"] = {
                 "venue_id": "VEN-999999",
-                "venue_key": "cfe-arena",
+                "venue_key": "example-arena",
             }
             with self.assertRaisesRegex(
                 onboarding_plan.WorkflowError,
