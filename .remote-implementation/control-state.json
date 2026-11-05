@@ -735,7 +735,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-gate2-approval-0002/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "c342bbca0ee118f1e2754d24698f0e3c3380ae3218b936c0fa79054ed3d1ce44",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-gate2-approval-0002/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "12ca910cc30175daac75e3020c91c21022c09af4b7d797aa75ee92404ab262e6",
     "merged": false,
@@ -744,7 +744,7 @@
     "pr_number": 475,
     "production_request_id": "rhode-island-release-production-proof-0001",
     "protected_main_sha": "312c3d43049b4b6313cabab2243c1c47a1c2514a",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "rhode-island-release-gate2-approval-0002",
     "school_key": "rhode-island",
     "target_branch": "data/rhode-island-onboarding",
