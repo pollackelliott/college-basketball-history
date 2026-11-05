@@ -301,6 +301,7 @@ def _validate_payload_ref(value: Any, name: str, *, required: bool = False) -> N
 
 
 STAGE2_PHASE_CONTINUATION_KIND = "STAGE2_REFRESH_CENSUS_PROPOSAL_V1"
+STAGE2_POST_GATE1_CONTINUATION_KIND = "STAGE2_GATE1_FILL_TO_APPLY_V1"
 
 
 def validate_stage2_phase_continuation(
@@ -308,55 +309,99 @@ def validate_stage2_phase_continuation(
     parent_request_id: str,
     value: Any,
 ) -> None:
-    """Validate the narrow refresh -> census -> exact-map proposal continuation."""
+    """Validate narrow repository-owned Stage 2 continuation specifications."""
 
     if value is None:
         return
-    _require(
-        operation in {OP_STAGE2_CURRENT_MAIN_REFRESH, OP_STAGE2_CENSUS},
-        "REQUEST_STAGE2_PHASE_CONTINUATION_FORBIDDEN",
-    )
     _require(isinstance(value, dict), "REQUEST_STAGE2_PHASE_CONTINUATION_INVALID")
-    _require(
-        value.get("kind") == STAGE2_PHASE_CONTINUATION_KIND,
-        "REQUEST_STAGE2_PHASE_CONTINUATION_KIND_INVALID",
-    )
-    census_id = str(value.get("census_request_id") or "")
-    proposal_id = str(value.get("proposal_request_id") or "")
-    _require(
-        bool(REQUEST_ID_RE.fullmatch(census_id)),
-        "REQUEST_STAGE2_PHASE_CONTINUATION_CENSUS_ID_INVALID",
-    )
-    _require(
-        bool(REQUEST_ID_RE.fullmatch(proposal_id)),
-        "REQUEST_STAGE2_PHASE_CONTINUATION_PROPOSAL_ID_INVALID",
-    )
-    if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
+    kind = value.get("kind")
+
+    if kind == STAGE2_PHASE_CONTINUATION_KIND:
         _require(
-            len({parent_request_id, census_id, proposal_id}) == 3,
-            "REQUEST_STAGE2_PHASE_CONTINUATION_REQUEST_IDS_NOT_DISTINCT",
+            operation in {OP_STAGE2_CURRENT_MAIN_REFRESH, OP_STAGE2_CENSUS},
+            "REQUEST_STAGE2_PHASE_CONTINUATION_FORBIDDEN",
         )
-    else:
+        census_id = str(value.get("census_request_id") or "")
+        proposal_id = str(value.get("proposal_request_id") or "")
         _require(
-            parent_request_id == census_id and proposal_id != census_id,
-            "REQUEST_STAGE2_PHASE_CONTINUATION_CENSUS_PARENT_MISMATCH",
+            bool(REQUEST_ID_RE.fullmatch(census_id)),
+            "REQUEST_STAGE2_PHASE_CONTINUATION_CENSUS_ID_INVALID",
         )
-    _require_sha(
-        value.get("expected_decision_universe_sha256"),
-        64,
-        "REQUEST_STAGE2_PHASE_CONTINUATION_DECISION_UNIVERSE_INVALID",
-    )
-    _validate_payload_ref(
-        value.get("recommendation_map"),
-        "stage2_phase_continuation_recommendation_map",
-        required=True,
-    )
-    if value.get("historical_game_type_challenge") is not None:
+        _require(
+            bool(REQUEST_ID_RE.fullmatch(proposal_id)),
+            "REQUEST_STAGE2_PHASE_CONTINUATION_PROPOSAL_ID_INVALID",
+        )
+        if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            _require(
+                len({parent_request_id, census_id, proposal_id}) == 3,
+                "REQUEST_STAGE2_PHASE_CONTINUATION_REQUEST_IDS_NOT_DISTINCT",
+            )
+        else:
+            _require(
+                parent_request_id == census_id and proposal_id != census_id,
+                "REQUEST_STAGE2_PHASE_CONTINUATION_CENSUS_PARENT_MISMATCH",
+            )
+        _require_sha(
+            value.get("expected_decision_universe_sha256"),
+            64,
+            "REQUEST_STAGE2_PHASE_CONTINUATION_DECISION_UNIVERSE_INVALID",
+        )
         _validate_payload_ref(
-            value.get("historical_game_type_challenge"),
-            "stage2_phase_continuation_historical_game_type_challenge",
+            value.get("recommendation_map"),
+            "stage2_phase_continuation_recommendation_map",
             required=True,
         )
+        if value.get("historical_game_type_challenge") is not None:
+            _validate_payload_ref(
+                value.get("historical_game_type_challenge"),
+                "stage2_phase_continuation_historical_game_type_challenge",
+                required=True,
+            )
+        return
+
+    if kind == STAGE2_POST_GATE1_CONTINUATION_KIND:
+        _require(
+            operation in {
+                OP_STAGE2_GATE1_FILL,
+                OP_STAGE2_PRESEAL_REHEARSAL,
+                OP_STAGE2_GATE1_SEAL,
+            },
+            "REQUEST_STAGE2_POST_GATE1_CONTINUATION_FORBIDDEN",
+        )
+        preseal_id = str(value.get("preseal_request_id") or "")
+        seal_id = str(value.get("seal_request_id") or "")
+        apply_id = str(value.get("apply_request_id") or "")
+        for request_id, code in (
+            (preseal_id, "PRESEAL"),
+            (seal_id, "SEAL"),
+            (apply_id, "APPLY"),
+        ):
+            _require(
+                bool(REQUEST_ID_RE.fullmatch(request_id)),
+                f"REQUEST_STAGE2_POST_GATE1_CONTINUATION_{code}_ID_INVALID",
+            )
+        _require(
+            len({preseal_id, seal_id, apply_id}) == 3,
+            "REQUEST_STAGE2_POST_GATE1_CONTINUATION_CHILD_IDS_NOT_DISTINCT",
+        )
+        if operation == OP_STAGE2_GATE1_FILL:
+            _require(
+                parent_request_id not in {preseal_id, seal_id, apply_id},
+                "REQUEST_STAGE2_POST_GATE1_CONTINUATION_FILL_PARENT_COLLISION",
+            )
+        elif operation == OP_STAGE2_PRESEAL_REHEARSAL:
+            _require(
+                parent_request_id == preseal_id,
+                "REQUEST_STAGE2_POST_GATE1_CONTINUATION_PRESEAL_PARENT_MISMATCH",
+            )
+        else:
+            _require(
+                parent_request_id == seal_id,
+                "REQUEST_STAGE2_POST_GATE1_CONTINUATION_SEAL_PARENT_MISMATCH",
+            )
+        return
+
+    _require(False, "REQUEST_STAGE2_PHASE_CONTINUATION_KIND_INVALID")
 
 
 def validate_request(request: dict[str, Any]) -> None:
