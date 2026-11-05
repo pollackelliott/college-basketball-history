@@ -1862,7 +1862,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
         # MID must now reject the final source semantic state.
         with self.assertRaisesRegex(
             FrozenVenueSplitAuthorityError,
-            "outside the exact sealed pre-ingest semantic delta",
+            "does not match current source semantics",
         ):
             ingest_school.load_runtime_venue_metadata_map(
                 repo,
@@ -1886,6 +1886,76 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
             final_metadata,
         )
+
+        # Global identity, name, and locality authority remain fail-closed in
+        # both suffix-bearing phases. None may be changed by the sealed plan.
+        global_venues_path = reference / "venues.csv"
+        global_names_path = reference / "venue-names.csv"
+        global_venues_bytes = global_venues_path.read_bytes()
+        global_names_bytes = global_names_path.read_bytes()
+
+        identity_drift = global_venues_bytes.replace(
+            b"sealed-arena",
+            b"sealed-arena-drift",
+            1,
+        )
+        self.assertNotEqual(identity_drift, global_venues_bytes)
+        global_venues_path.write_bytes(identity_drift)
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "no longer matches global venue authority",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+            )
+        global_venues_path.write_bytes(global_venues_bytes)
+
+        name_drift = global_names_bytes.replace(
+            b"Sealed Arena,sealedarena",
+            b"Changed Arena,changedarena",
+            1,
+        )
+        self.assertNotEqual(name_drift, global_names_bytes)
+        global_names_path.write_bytes(name_drift)
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "name no longer resolves uniquely",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+            )
+        global_names_path.write_bytes(global_names_bytes)
+
+        locality_drift = global_venues_bytes.replace(
+            b"Sealed City,SC",
+            b"Changed City,SC",
+            1,
+        )
+        self.assertNotEqual(locality_drift, global_venues_bytes)
+        global_venues_path.write_bytes(locality_drift)
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "locality drift",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+            )
+        global_venues_path.write_bytes(global_venues_bytes)
 
         # A changed frozen row remains forbidden.
         frozen_mutation = bytearray(exact_post_bytes)
