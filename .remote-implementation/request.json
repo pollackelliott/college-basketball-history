@@ -1,41 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-stage2-gate1-fill-0001",
+  "request_id": "rhode-island-stage2-preseal-rehearsal-0001",
   "school_key": "rhode-island",
-  "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "b3444ad66f76e9af2a96ac02f7e15d9f513fc885",
-  "previous_control_state_sha256": "afe271f47d359dc5df71627876574b1bfe88d616bdc1ee84c1ba00618152d0cd",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "5a4f840ac6393390fd703db2315441ff61020771",
+  "previous_control_state_sha256": "f68bf73da270bc38fb0a4f50339e420a20aed184a97a6da98b5ab619e3fda518",
   "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "target_branch": "data/rhode-island-onboarding",
   "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-proposal-0001/checkpoint-manifest.json",
-    "sha256": "389083198ab2b28849bd1bedc3c689564eb3afb4510e7749e6761e62ab92a847"
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "1d7761cf0acebd4618abd41dd07fed8ae88aeb7e865084d414d79ef1d96ace44"
   },
-  "stage2_proposal_verification": {
-    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-proposal-0001/stage2-proposal-rehearsal-verification.json",
-    "sha256": "127a083b44a1010ebb9aa8af2f1162a5c999a2767e180a26c847c5344bd1b423"
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "2c83674c96a7dca29a4e89598996cdde444e2e13964e66ae6c086859b4ed1987"
   },
   "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
   "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
   "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
   "recommendation_map_sha256": "04eef4b4675e69337c175457dabc15b79c9525b5b2de509f59e5fbe6ab372753",
   "approved_plan_hash_preview": "88ef5ca63ad4eb4f16d7ea9a6c30ff0da99a330c10b0a4c0ee42aa03c5d6fefa",
-  "owner_gate_1_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly wrote 'approved. proceed' immediately after the Rhode Island Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY 165-decision packet from rhode-island-stage2-proposal-0001. This approves that exact packet and authorizes exact-map Gate 1 fill. Under repository phase-persistent post-Gate-1 policy, successful fill may be followed serially by pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification only if each exact predecessor fresh-verifies and no new authority boundary or blocker arises. It does not authorize release preparation, Preview, Owner Gate 2, merge, Production, recovery, unrelated historical work, or any change to approved historical meaning.",
-    "proposal_checkpoint_sha256": "389083198ab2b28849bd1bedc3c689564eb3afb4510e7749e6761e62ab92a847",
-    "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
-    "recommendation_map_sha256": "04eef4b4675e69337c175457dabc15b79c9525b5b2de509f59e5fbe6ab372753",
-    "approved_plan_hash_preview": "88ef5ca63ad4eb4f16d7ea9a6c30ff0da99a330c10b0a4c0ee42aa03c5d6fefa"
-  },
+  "filled_review_sha256": "4c7ec1a1fc5d8eeb6d4817663521717218e18933ef711282a8baee5f19ced7ca",
+  "decision_id_set_sha256": "97a09da3eb8bb21ae96d2f20c3c0962f6613b9e9be2264f169b65e3a02c393f2",
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation — exact fresh-verified Owner Gate 1 approval",
-    "authorization": "Owner explicitly wrote 'approved. proceed' for the exact fresh-verified 165-decision Rhode Island OWNER_GATE_1_READY packet from rhode-island-stage2-proposal-0001. Authorize exactly one guarded STAGE2_GATE1_FILL to encode the approved recommendation map into the filled review. The same phase authorization persists through pre-seal rehearsal, Gate 1 seal, sealed apply, and independent post-apply verification if each exact predecessor fresh-verifies. No release preparation, Preview, Owner Gate 2, merge, Production, recovery, unrelated historical work, venue invention, frozen-source rewrite, or changed historical meaning is authorized."
+    "origin": "Rhode Island Implementation post-Gate-1 continuation",
+    "authorization": "Existing exact owner-approved Gate 1 phase; pre-seal rehearsal only."
   },
   "authority": {
-    "owner_gate_1": true,
+    "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
@@ -45,8 +39,8 @@
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": true,
-    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
