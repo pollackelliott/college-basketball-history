@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "st-bonaventure-release-preview-verify-0001",
+  "school_key": "st-bonaventure",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "883be2f8ebc15e174358fea9d29ff795034c074b",
+  "previous_control_state_sha256": "609527b61069e3c6f291b55a39f119ca10bde285a950f55b792e848b326882e5",
+  "expected_protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "26b800a438494946cff009c85b5a1255f04c340514dd015599a4f6920e8cf808"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "2e6ed0cfe7756522b3a06777870fdb3728f156a9593469416cdbe4d1571ac31c"
+  },
+  "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
+  "release_manifest_sha256": "e1baf73ee6f0b6de05c98c130b63072369019adab8e1d90159b5ac3c96e2c0b0",
+  "pr_number": 465,
+  "creation_provenance": {
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — exact PR-head Preview verification",
+    "authorization": "Owner authorized the St. Bonaventure release-preparation phase. Current policy makes readiness, exact PR creation/reuse, CI/mergeability, and Preview verification one phase-persistent owner-authorized sequence through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #465 only, bound to the exact fresh-verified readiness authority and exact sealed St. Bonaventure head. No Gate 2 approval, merge, Production, recovery, mutation, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
