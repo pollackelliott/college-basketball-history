@@ -1,33 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-release-preview-verify-0001",
+  "request_id": "st-bonaventure-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "st-bonaventure",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "883be2f8ebc15e174358fea9d29ff795034c074b",
-  "previous_control_state_sha256": "609527b61069e3c6f291b55a39f119ca10bde285a950f55b792e848b326882e5",
+  "previous_control_state_commit": "2b0fcb09d2dcefe15e573329eab4d44527dace02",
+  "previous_control_state_sha256": "f3fe5de04349370d481bff4c45488e694fdab100b4a9d319c00bdeb7410d0192",
   "expected_protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "26b800a438494946cff009c85b5a1255f04c340514dd015599a4f6920e8cf808"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "2e6ed0cfe7756522b3a06777870fdb3728f156a9593469416cdbe4d1571ac31c"
-  },
+  "pr_number": 465,
   "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
   "release_manifest_sha256": "e1baf73ee6f0b6de05c98c130b63072369019adab8e1d90159b5ac3c96e2c0b0",
-  "pr_number": 465,
+  "preview_deployment_id": 7566270288,
+  "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "4cbaa29e259f71cc70a3719eb074500b574f423a1a0940ef64c4262efbf82e86"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "e2983521f7bb8e38194dd44fc38f31a1580bb187e2dccf729e7ea0ae4b35f4b3"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: APPROVED. Procedd, immediately after the exact fresh-verified St. Bonaventure Owner Gate 2 packet for PR #465 head c9f1eb6886a491b4935c38fcb6e061abb6bab86b and Preview deployment 7566270288.",
+    "preview_checkpoint_sha256": "4cbaa29e259f71cc70a3719eb074500b574f423a1a0940ef64c4262efbf82e86",
+    "preview_verification_sha256": "e2983521f7bb8e38194dd44fc38f31a1580bb187e2dccf729e7ea0ae4b35f4b3",
+    "pr_number": 465,
+    "pr_head_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+    "preview_deployment_id": 7566270288,
+    "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — exact PR-head Preview verification",
-    "authorization": "Owner authorized the St. Bonaventure release-preparation phase. Current policy makes readiness, exact PR creation/reuse, CI/mergeability, and Preview verification one phase-persistent owner-authorized sequence through OWNER_GATE_2_READY. This request is read-only RELEASE_PREVIEW_VERIFY for PR #465 only, bound to the exact fresh-verified readiness authority and exact sealed St. Bonaventure head. No Gate 2 approval, merge, Production, recovery, mutation, or unrelated authority is granted."
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — exact Gate 2 approval record",
+    "authorization": "Owner explicitly approved exact St. Bonaventure PR #465 Preview immediately after presentation of fresh-verified OWNER_GATE_2_READY. This records that exact approval only; no merge or Production proof occurs in this request. Under current policy, the same explicit approval authorizes the complete final release phase while the exact PR head, Preview and protected-main preconditions remain unchanged."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
@@ -41,8 +50,11 @@
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false
   }
