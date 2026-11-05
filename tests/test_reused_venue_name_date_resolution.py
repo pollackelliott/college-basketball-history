@@ -1779,19 +1779,18 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             writer.writerows(source_rows)
 
         # Exact frozen bytes + the exact sealed GAME_SITE suffix are valid only
-        # in final/post-reconciliation authentication.
-        metadata = ingest_school.load_runtime_venue_metadata_map(
+        # in final/post-reconciliation authentication. Exercise the real
+        # reconciliation venue-map call site so it cannot regress to PRE_INGEST.
+        metadata, names_by_key = _venue_maps(
             repo,
             school_key,
-            venue_path,
-            global_venues,
-            sealed_plan_context=approved,
-            post_reconciliation_semantics=True,
+            approved_plan=approved,
         )
         self.assertIn(
             ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
             metadata,
         )
+        self.assertEqual(names_by_key["sealed-arena"], "Sealed Arena")
         exact_post_bytes = venue_path.read_bytes()
 
         # A changed frozen row remains forbidden.
