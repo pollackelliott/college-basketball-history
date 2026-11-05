@@ -335,6 +335,18 @@ def validate_request(request: dict[str, Any]) -> None:
 
     authority = request.get("authority")
     _require(isinstance(authority, dict), "REQUEST_AUTHORITY_MISSING")
+    if operation in {OP_STAGE2_CENSUS, OP_STAGE2_PROPOSAL_REHEARSAL}:
+        if request.get("historical_game_type_challenge") is not None:
+            _validate_payload_ref(
+                request.get("historical_game_type_challenge"),
+                "historical_game_type_challenge",
+                required=True,
+            )
+    else:
+        _require(
+            request.get("historical_game_type_challenge") is None,
+            "REQUEST_HISTORICAL_GAME_TYPE_CHALLENGE_FORBIDDEN",
+        )
     if operation == OP_STAGE2_GATE1_FILL:
         _require(
             authority.get("owner_gate_1") is True,
