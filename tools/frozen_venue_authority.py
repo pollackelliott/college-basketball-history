@@ -30,11 +30,10 @@ def _normalized_venue_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.casefold())
 
 
-def _csv_bytes_with_preserved_format(
+def _csv_rows_bytes(
     fieldnames: list[str],
     rows: list[dict[str, str]],
     *,
-    has_bom: bool,
     line_ending: str,
 ) -> bytes:
     buffer = io.StringIO(newline="")
@@ -43,11 +42,9 @@ def _csv_bytes_with_preserved_format(
         fieldnames=fieldnames,
         lineterminator=line_ending,
     )
-    writer.writeheader()
     for row in rows:
         writer.writerow({field: row.get(field, "") for field in fieldnames})
-    encoding = "utf-8-sig" if has_bom else "utf-8"
-    return buffer.getvalue().encode(encoding)
+    return buffer.getvalue().encode("utf-8")
 
 
 def _sealed_post_reconciliation_venue_relationship_rows(
@@ -255,12 +252,11 @@ def _venues_match_frozen_plus_sealed_relationships(
     if semantic_phase != SEMANTIC_PHASE_POST_RECONCILIATION:
         return hashlib.sha256(current_bytes).hexdigest() == expected_frozen_hash
 
-    has_bom = current_bytes.startswith(b"\xef\xbb\xbf")
     line_ending = "\r\n" if b"\r\n" in current_bytes else "\n"
     with venues_path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fieldnames = list(reader.fieldnames or [])
-        rows = list(reader)
+        list(reader)
     if not fieldnames:
         return False
 
@@ -273,24 +269,20 @@ def _venues_match_frozen_plus_sealed_relationships(
     if not expected_rows:
         return hashlib.sha256(current_bytes).hexdigest() == expected_frozen_hash
 
-    remaining = list(rows)
-    for expected in expected_rows:
-        matches = [
-            index
-            for index, row in enumerate(remaining)
-            if all(row.get(field, "") == expected.get(field, "") for field in fieldnames)
-        ]
-        if len(matches) != 1:
-            return False
-        remaining.pop(matches[0])
-
-    reconstructed = _csv_bytes_with_preserved_format(
+    addition_bytes = _csv_rows_bytes(
         fieldnames,
-        remaining,
-        has_bom=has_bom,
+        expected_rows,
         line_ending=line_ending,
     )
-    return hashlib.sha256(reconstructed).hexdigest() == expected_frozen_hash
+    separator = line_ending.encode("ascii")
+    candidate_suffixes = [addition_bytes, separator + addition_bytes]
+    for suffix in candidate_suffixes:
+        if not suffix or not current_bytes.endswith(suffix):
+            continue
+        frozen_prefix = current_bytes[:-len(suffix)]
+        if hashlib.sha256(frozen_prefix).hexdigest() == expected_frozen_hash:
+            return True
+    return False
 
 
 PRE_INGEST_SEMANTIC_FIELDS = frozenset({
