@@ -357,7 +357,7 @@
     "rhode-island-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
-  "active_lock_commit": null,
+  "active_lock_commit": "e088539aa3eefca90402ef239af9ad2be982c376",
   "active_lock_owner": "github-actions:42088219933:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
