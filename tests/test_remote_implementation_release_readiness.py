@@ -232,6 +232,43 @@ class RemoteReleaseReadinessTests(unittest.TestCase):
         with self.assertRaisesRegex(ready.Stop, "RELEASE_PREPARED_PARENT_MISMATCH"):
             self.authenticate(request, storage)
 
+    @patch.object(
+        ready.release_school,
+        "program_display_name",
+        return_value="Example School",
+    )
+    def test_release_pr_packet_is_exact_and_connector_owned(self, _display):
+        request, storage = sample()
+        authority = self.authenticate(request, storage)
+        packet = ready.build_release_pr_packet(
+            authority,
+            ROOT,
+            readiness_request_id="example-release-readiness-0001",
+            preview_request_id="example-preview-verify-0001",
+            body_checkpoint_path=(
+                ".remote-implementation/checkpoints/example-school/"
+                "example-release-readiness-0001/pr-body.md"
+            ),
+        )
+        self.assertEqual(packet["kind"], ready.PR_PACKET_KIND)
+        self.assertEqual(
+            packet["new_pr_title"],
+            "Ingest and publish Example School history",
+        )
+        self.assertEqual(packet["base_branch"], "main")
+        self.assertEqual(packet["head_branch"], BRANCH)
+        self.assertEqual(packet["head_sha"], TARGET)
+        self.assertEqual(
+            packet["body_sha256"],
+            hash_bytes(authority["sidecars"]["pr-body.md"]),
+        )
+        self.assertEqual(
+            packet["preview_request_id"],
+            "example-preview-verify-0001",
+        )
+        self.assertFalse(packet["pr_created_by_runner"])
+        self.assertFalse(packet["owner_gate_2"])
+
     @patch.object(ready.release_school, "run_gates")
     @patch.object(ready.release_school, "verify_committed_change_boundary", return_value=["data/canonical/games.csv"])
     @patch.object(ready, "git")

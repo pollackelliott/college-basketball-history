@@ -316,9 +316,9 @@ Create the exact release/PR state and obtain the exact Vercel Preview that the o
 
 ### Work
 
-Run the current release-preparation workflow as one owner-authorized phase. Under the guarded remote architecture this may require distinct internal operations (release readiness, exact PR creation/reuse, CI/mergeability, and Preview verification), but successful internal boundaries do not require additional owner `Proceed` messages. Stop only at `OWNER_GATE_2_READY` or an actual blocker.
+Run the current release-preparation workflow as one owner-authorized phase. Under the guarded remote architecture this may require distinct internal operations, but successful internal boundaries do not require additional owner `Proceed` messages. Prefer a `RELEASE_READINESS_TO_PREVIEW_V1` readiness request: supervise it through fresh PASS, consume its exact connector-owned PR packet, create or reuse the exact same-repository/head/base PR through the school lane's GitHub connector with the exact packet body, immediately submit the packet-bound `RELEASE_PREVIEW_VERIFY` request, and supervise CI/mergeability/Preview through fresh `OWNER_GATE_2_READY`. Stop only at `OWNER_GATE_2_READY` or an actual blocker.
 
-Do not manually commit between final apply and release preparation when current tooling binds the release manifest to HEAD.
+Do not grant Actions PR-write authority merely to remove the connector seam, and do not manually commit between final apply and release preparation when current tooling binds the release manifest to HEAD.
 
 ### Completion standard
 

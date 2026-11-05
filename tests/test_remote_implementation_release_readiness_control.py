@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 from remote_implementation_control import (  # noqa: E402
     OP_RELEASE_READINESS,
     OP_RELEASE_PREVIEW_VERIFY,
+    RELEASE_PHASE_CONTINUATION_KIND,
     LIFECYCLE_READ_ONLY,
     TX_RELEASE_READINESS_RUNNING,
     RemoteImplementationError,
@@ -104,6 +105,26 @@ class ReleaseReadinessControlTests(unittest.TestCase):
         with self.assertRaisesRegex(RemoteImplementationError, "RELEASE_READINESS_AUTHORITY_REQUIRED"):
             validate_request(r)
 
+    def test_release_readiness_accepts_preview_continuation(self):
+        r = request()
+        r["release_phase_continuation"] = {
+            "kind": RELEASE_PHASE_CONTINUATION_KIND,
+            "preview_request_id": "example-preview-verify-0001",
+        }
+        validate_request(r)
+
+    def test_release_continuation_preview_id_must_be_distinct(self):
+        r = request()
+        r["release_phase_continuation"] = {
+            "kind": RELEASE_PHASE_CONTINUATION_KIND,
+            "preview_request_id": r["request_id"],
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_ID_COLLISION",
+        ):
+            validate_request(r)
+
 
 def preview_request():
     r = request()
@@ -152,6 +173,18 @@ class ReleasePreviewControlTests(unittest.TestCase):
         r = preview_request()
         r.pop("release_readiness_verification")
         with self.assertRaisesRegex(RemoteImplementationError, "RELEASE_READINESS_VERIFICATION"):
+            validate_request(r)
+
+    def test_release_continuation_is_forbidden_on_preview_request(self):
+        r = preview_request()
+        r["release_phase_continuation"] = {
+            "kind": RELEASE_PHASE_CONTINUATION_KIND,
+            "preview_request_id": r["request_id"],
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "RELEASE_PHASE_CONTINUATION_FORBIDDEN",
+        ):
             validate_request(r)
 
     def test_pr_number_must_be_integer(self):

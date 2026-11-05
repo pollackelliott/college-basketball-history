@@ -19,6 +19,7 @@ from remote_implementation_stage2_apply import verify_prepared_sealed_apply
 SUCCESSOR_KIND = "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_SUCCESSOR"
 VERIFICATION_KIND = "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION"
 WRITEAHEAD_KIND = "REMOTE_IMPLEMENTATION_WRITEAHEAD"
+PR_PACKET_KIND = "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET"
 REQUIRED_SIDECARS = {
     "approved-plan.json",
     "release-manifest.json",
@@ -268,6 +269,48 @@ def verify_release_readiness_authority(
         "sidecars": sidecars,
         "manifest": manifest,
         "approved": approved,
+    }
+
+
+def build_release_pr_packet(
+    authority: dict[str, Any],
+    worktree: Path,
+    *,
+    readiness_request_id: str,
+    preview_request_id: str,
+    body_checkpoint_path: str,
+) -> dict[str, Any]:
+    """Build the exact connector-owned PR handoff after readiness."""
+
+    body = authority["sidecars"]["pr-body.md"]
+    display = release_school.program_display_name(
+        worktree,
+        authority["school_key"],
+    )
+    return {
+        "schema_version": 1,
+        "kind": PR_PACKET_KIND,
+        "readiness_request_id": readiness_request_id,
+        "preview_request_id": preview_request_id,
+        "school_key": authority["school_key"],
+        "base_branch": "main",
+        "head_branch": authority["target_branch"],
+        "head_sha": authority["target_sha"],
+        "new_pr_title": f"Ingest and publish {display} history",
+        "body_checkpoint_path": body_checkpoint_path,
+        "body_sha256": sha256_bytes(body),
+        "approved_plan_hash": authority["approved_plan_hash"],
+        "release_manifest_sha256": authority["release_manifest_sha256"],
+        "pr_created_by_runner": False,
+        "owner_gate_2": False,
+        "authority_statement": (
+            "Exact connector-owned PR creation packet after fresh release "
+            "readiness. The school Implementation lane may create or reuse only "
+            "this exact head/base/body PR (using new_pr_title when creating a "
+            "new PR), then queue the bound Preview "
+            "verification request. This packet grants no Owner Gate 2, merge, "
+            "Production, or tracked mutation authority."
+        ),
     }
 
 

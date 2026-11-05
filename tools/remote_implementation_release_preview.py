@@ -289,6 +289,27 @@ def verify_release_preview_authority(
         "PREVIEW_TARGET_MOVED_BEFORE_CHECKS",
     )
     pr_body = prior_authority["sidecars"]["pr-body.md"]
+    preview_request_id = checkpoint.get("preview_request_id")
+    if preview_request_id is not None:
+        _require(
+            request.get("request_id") == preview_request_id,
+            "PREVIEW_REQUEST_ID_CONTINUATION_MISMATCH",
+        )
+        _require(
+            verified.get("preview_request_id") == preview_request_id,
+            "PREVIEW_VERIFICATION_REQUEST_ID_CONTINUATION_MISMATCH",
+        )
+        _require(
+            checkpoint.get("pr_body_sha256") == sha256_bytes(pr_body)
+            and verified.get("pr_body_sha256") == sha256_bytes(pr_body),
+            "PREVIEW_PR_BODY_CONTINUATION_HASH_MISMATCH",
+        )
+        _require(
+            checkpoint.get("release_pr_packet_sha256")
+            == verified.get("release_pr_packet_sha256")
+            and bool(checkpoint.get("release_pr_packet_sha256")),
+            "PREVIEW_PR_PACKET_CONTINUATION_HASH_MISMATCH",
+        )
     return {
         "school_key": school,
         "target_branch": branch,
@@ -298,5 +319,7 @@ def verify_release_preview_authority(
         "readiness_checkpoint_sha256": checkpoint_ref["sha256"],
         "readiness_verification_sha256": verification_ref["sha256"],
         "readiness_request_id": source_request_id,
+        "release_pr_packet_sha256": checkpoint.get("release_pr_packet_sha256"),
+        "preview_request_id": preview_request_id,
         "pr_body_sha256": sha256_bytes(pr_body),
     }

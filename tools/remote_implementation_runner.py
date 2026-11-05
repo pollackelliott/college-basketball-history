@@ -133,6 +133,7 @@ from remote_implementation_release_preview import (
     verify_pr_checks_and_preview,
 )
 from remote_implementation_release_readiness import (
+    build_release_pr_packet,
     verify_release_readiness_authority,
     run_permanent_release_readiness,
 )
@@ -3169,6 +3170,22 @@ def run_read_only_release_readiness(
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "request.json").write_bytes(request_bytes)
     write_json(directory / "readiness-proof.json", result)
+
+    pr_packet = None
+    continuation = request.get("release_phase_continuation")
+    if continuation is not None:
+        body_path = directory / "pr-body.md"
+        body_path.write_bytes(authority["sidecars"]["pr-body.md"])
+        packet_path = directory / "release-pr-packet.json"
+        pr_packet = build_release_pr_packet(
+            authority,
+            worktree,
+            readiness_request_id=request["request_id"],
+            preview_request_id=continuation["preview_request_id"],
+            body_checkpoint_path=body_path.as_posix(),
+        )
+        write_json(packet_path, pr_packet)
+
     manifest = {
         "schema_version": 1,
         "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_CHECKPOINT",
@@ -3192,6 +3209,25 @@ def run_read_only_release_readiness(
         "pr_created": False,
         "preview_verified": False,
         "owner_gate_2": False,
+        "release_phase_continuation": continuation,
+        "release_pr_packet_path": (
+            (directory / "release-pr-packet.json").as_posix()
+            if pr_packet is not None else None
+        ),
+        "release_pr_packet_sha256": (
+            sha256_file(directory / "release-pr-packet.json")
+            if pr_packet is not None else None
+        ),
+        "pr_body_checkpoint_path": (
+            (directory / "pr-body.md").as_posix()
+            if pr_packet is not None else None
+        ),
+        "pr_body_sha256": (
+            pr_packet["body_sha256"] if pr_packet is not None else None
+        ),
+        "preview_request_id": (
+            pr_packet["preview_request_id"] if pr_packet is not None else None
+        ),
         "authority_statement": (
             "Read-only final release gate proof on one exact fresh-verified "
             "sealed-apply successor. This checkpoint supplies no PR creation, "
@@ -3213,6 +3249,13 @@ def run_read_only_release_readiness(
             "checkpoint_manifest_path": manifest_path.as_posix(),
             "checkpoint_manifest_sha256": sha256_file(manifest_path),
             "readiness_status": "RELEASE_READINESS_PASS",
+            "release_pr_packet_path": (
+                manifest["release_pr_packet_path"]
+            ),
+            "release_pr_packet_sha256": (
+                manifest["release_pr_packet_sha256"]
+            ),
+            "preview_request_id": manifest["preview_request_id"],
             "fresh_runner_verification": "PENDING",
             "remote_release_readiness_equivalence": "PENDING",
         },
