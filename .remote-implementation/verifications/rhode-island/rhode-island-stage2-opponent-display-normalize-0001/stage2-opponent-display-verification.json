@@ -1,0 +1,54 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "581ae2a5c075f86e7d1bf6145da16e24fb012759ffa7b2fb7bfe1b97e0e20826",
+    "implementation-stage2-status.json": "480d99331d2cf331cb3fcb8533d610896b3e0bb719ad1ba081a629c33ac2b130",
+    "plan.json": "81d2a8f2e3805e6072a06f6796e92220b948a16ff858758e12a6f75b5c81094f",
+    "review.csv": "f2f8e7983d3d5234d64c5eacdf460ba0428d8ddc57fb2eca023743491bd7ee4c",
+    "review.md": "caac228559fb334116a673716d11a6d4e565f1dbfca72d1645808f4f00fa4276"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "581ae2a5c075f86e7d1bf6145da16e24fb012759ffa7b2fb7bfe1b97e0e20826",
+    "implementation-stage2-status.json": "ffa1cd302e10e47901ed1cffd5be891f64e4345741438efeba5070e6c68f2814",
+    "plan.json": "a8289ff07794c3511218ba1ff13419617538e8819adc7c628ade62c6783b4637",
+    "review.csv": "f2f8e7983d3d5234d64c5eacdf460ba0428d8ddc57fb2eca023743491bd7ee4c",
+    "review.md": "0d008cb6d6991442156e14397b461435d3340adb35aa91331462ade855e07ac2"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/rhode-island/opponents.csv",
+    "schools/rhode-island/source-games.csv"
+  ],
+  "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+  "expected_blocker_keys": [
+    "baltimore",
+    "loyola-new-orleans",
+    "pratt",
+    "rpi",
+    "saint-anselm",
+    "saint-michaels",
+    "springfield",
+    "st-thomas-fl",
+    "wayne-state-mi"
+  ],
+  "field_level_proof_sha256": "bb8619480500fe8eace1fd5f2f15e31586038192bb4c60aca78155fb1b4704d4",
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "6af9c5b1863255badb3ba290bc79b74034b4ab5ab59ad802d9a682375d3bdb78",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "rhode-island-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_predecessor_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "target_tree_sha": "5d49944e37e3b160a65f7e912e0a17280458862e",
+  "tracked_stage2_mutation": "NONE"
+}
