@@ -1,0 +1,12 @@
+{
+  "approved_plan_hash_preview": "e631bc3834e3b4a699f1f46f3cbdf692a1e15a080c93ee1da2320ac8b15adb82",
+  "changed_path_count": 88,
+  "equivalence_sha256": "35e0a0ab0711fdb662576b4fbc71a3859f1951cd77640482b5768bab7e7abedb",
+  "preseal_status": "READY_TO_SEAL",
+  "runtime_tool_sha256": {
+    "tools/onboard_school.py": "15748c45491d772b96e833e1e58f902bd1b5f40d47ced243ee7ef7dc7d5bc332",
+    "tools/onboarding_hardening.py": "5386fb2c02e746b83700ab947fd6334e187b756500d7af5d8df792ea31e36a02"
+  },
+  "site_gate_normalized_sha256": "1c108d64cf58fb5ee8b476c67e3ed69ada2a6370cb2ea7c24da472351d5574b2",
+  "tracked_stage2_mutation": "NONE"
+}
