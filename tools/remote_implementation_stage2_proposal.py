@@ -214,6 +214,12 @@ def verify_stage2_proposal_authority(
         target_tree_sha = authority.get("target_tree_sha")
         integration_freeze_sha = authority.get("integration_freeze_sha256")
         semantic_sha = authority.get("semantic_snapshot_sha256")
+        authority_challenge = {
+            "path": authority.get("historical_game_type_challenge_path"),
+            "sha256": authority.get("historical_game_type_challenge_sha256"),
+        }
+        if not any(authority_challenge.values()):
+            authority_challenge = None
         writeahead_path = ""
         writeahead_sha = ""
         if authority.get("target_authority_kind") == "POST_PUBLICATION_CORRECTION":
@@ -245,6 +251,7 @@ def verify_stage2_proposal_authority(
         target_tree_sha = authority.get("prepared_tree_sha")
         integration_freeze_sha = authority.get("integration_freeze_sha256")
         semantic_sha = authority.get("semantic_snapshot_sha256")
+        authority_challenge = None
         writeahead_path = str(authority.get("writeahead_manifest_path") or "")
         writeahead_sha = str(authority.get("writeahead_manifest_sha256") or "")
     else:
@@ -268,6 +275,9 @@ def verify_stage2_proposal_authority(
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_FREEZE_MISMATCH")
     if semantic_sha != request["semantic_snapshot_sha256"]:
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_SEMANTIC_MISMATCH")
+    request_challenge = request.get("historical_game_type_challenge")
+    if request_challenge != authority_challenge:
+        raise Stop("STAGE2_PROPOSAL_HISTORICAL_CHALLENGE_AUTHORITY_MISMATCH")
     if kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT" and (
         authority.get("target_authority_kind") == "POST_PUBLICATION_CORRECTION"
     ):
@@ -290,6 +300,7 @@ def verify_stage2_proposal_authority(
         "target_tree_sha": target_tree_sha,
         "freeze_bytes": freeze_bytes,
         "writeahead": writeahead,
+        "historical_game_type_challenge": authority_challenge,
     }
 
 
