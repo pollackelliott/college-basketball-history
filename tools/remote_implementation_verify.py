@@ -2581,6 +2581,36 @@ def verify_gate2_approval(live_main: str, control_head: str, state: dict) -> int
     ):
         if manifest.get(field) != expected:
             raise Stop("GATE2_FRESH_MANIFEST_MISMATCH:" + field)
+    continuation = request.get("final_release_continuation")
+    if continuation is not None:
+        packet_path = (path / "gate2-merge-packet.json").as_posix()
+        packet_bytes = git_show_bytes(control_head, packet_path)
+        if sha256_bytes(packet_bytes) != manifest.get("gate2_merge_packet_sha256"):
+            raise Stop("GATE2_FRESH_MERGE_PACKET_HASH_MISMATCH")
+        packet = json.loads(packet_bytes)
+        expected_packet = build_gate2_merge_packet(
+            request,
+            fresh,
+            production_request_id=continuation["production_request_id"],
+        )
+        if packet != expected_packet:
+            raise Stop("GATE2_FRESH_MERGE_PACKET_MISMATCH")
+        if manifest.get("gate2_merge_packet_path") != packet_path:
+            raise Stop("GATE2_FRESH_MERGE_PACKET_PATH_MISMATCH")
+        if manifest.get("production_request_id") != continuation["production_request_id"]:
+            raise Stop("GATE2_FRESH_PRODUCTION_REQUEST_ID_MISMATCH")
+        if manifest.get("final_release_continuation") != continuation:
+            raise Stop("GATE2_FRESH_CONTINUATION_MISMATCH")
+    else:
+        for field in (
+            "final_release_continuation",
+            "gate2_merge_packet_path",
+            "gate2_merge_packet_sha256",
+            "production_request_id",
+        ):
+            if manifest.get(field) is not None:
+                raise Stop("GATE2_FRESH_UNEXPECTED_MERGE_PACKET:" + field)
+
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
         raise Stop("GATE2_FRESH_TARGET_REF_MOVED")
     verification = {
@@ -2596,6 +2626,8 @@ def verify_gate2_approval(live_main: str, control_head: str, state: dict) -> int
         "preview_url": fresh["preview_url"],
         "owner_gate_2_approved": True,
         "merged": False,
+        "gate2_merge_packet_sha256": manifest.get("gate2_merge_packet_sha256"),
+        "production_request_id": manifest.get("production_request_id"),
         "remote_gate2_approval_equivalence": "PASS",
     }
     folder = Path(
@@ -2613,6 +2645,8 @@ def verify_gate2_approval(live_main: str, control_head: str, state: dict) -> int
         raise Stop("GATE2_FRESH_CONTROL_MOVED")
     current["fresh_runner_verification"] = "PASS"
     current["remote_gate2_approval_equivalence"] = "PASS"
+    current["gate2_merge_packet_sha256"] = manifest.get("gate2_merge_packet_sha256")
+    current["production_request_id"] = manifest.get("production_request_id")
     local["last_operation"] = current
     write_json(STATE_PATH, local)
     commit = commit_control(
