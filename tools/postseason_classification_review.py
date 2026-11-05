@@ -25,6 +25,27 @@ REVIEW_SITES = frozenset({
     "SOURCE_PROGRAM_HOME", "OPPONENT_HOME", "NEUTRAL",
 })
 
+HISTORICAL_CHALLENGE_KIND = "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES"
+HISTORICAL_CHALLENGE_SOURCE_TYPE = "REGULAR_SEASON"
+HISTORICAL_CHALLENGE_TARGET_TYPE = "NCAA_TOURNAMENT"
+HISTORICAL_CHALLENGE_ACTION = "APPLY_POSTSEASON_CLASSIFICATION_PATCH"
+HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS = (
+    "season_label",
+    "game_date",
+    "team_a_key",
+    "team_b_key",
+    "team_a_score",
+    "team_b_score",
+    "result_winner_team_key",
+    "overtime_periods",
+    "site_type",
+    "designated_home_team_key",
+    "venue_key",
+    "venue_id",
+    "site_city",
+    "site_state",
+)
+
 
 def row_fingerprint(source: dict[str, str]) -> str:
     """Bind one review to the complete, unchanged staged source row."""
@@ -32,6 +53,161 @@ def row_fingerprint(source: dict[str, str]) -> str:
         source, sort_keys=True, ensure_ascii=False, separators=(",", ":")
     ).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+def validate_historical_game_type_challenges(
+    document: dict[str, Any] | None,
+    school_key: str,
+) -> dict[str, dict[str, str]]:
+    """Validate an external, hash-bound challenge document without approving it."""
+
+    if document is None:
+        return {}
+    if not isinstance(document, dict):
+        raise ValueError("historical game-type challenge must be a JSON object")
+    if document.get("schema_version") != 1:
+        raise ValueError("historical game-type challenge schema_version must be 1")
+    if document.get("kind") != HISTORICAL_CHALLENGE_KIND:
+        raise ValueError("historical game-type challenge kind is unsupported")
+    if str(document.get("school_key", "")).strip() != school_key:
+        raise ValueError("historical game-type challenge school_key mismatch")
+    allowed_top = {"schema_version", "kind", "school_key", "challenges", "authority_basis"}
+    unknown_top = sorted(set(document) - allowed_top)
+    if unknown_top:
+        raise ValueError(
+            "historical game-type challenge has unknown top-level fields: "
+            + ", ".join(unknown_top)
+        )
+    if not str(document.get("authority_basis", "")).strip():
+        raise ValueError("historical game-type challenge authority_basis is required")
+    rows = document.get("challenges")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("historical game-type challenge requires a nonempty challenges list")
+
+    required = {
+        "source_game_id",
+        "source_row_sha256",
+        "expected_source_game_type",
+        "proposed_source_game_type",
+        "evidence_basis",
+    }
+    result: dict[str, dict[str, str]] = {}
+    for raw in rows:
+        if not isinstance(raw, dict):
+            raise ValueError("historical game-type challenge rows must be objects")
+        if set(raw) != required:
+            raise ValueError(
+                "historical game-type challenge rows require exactly: "
+                + ", ".join(sorted(required))
+            )
+        source_id = str(raw.get("source_game_id", "")).strip()
+        if not source_id or source_id in result:
+            raise ValueError(
+                "historical game-type challenge requires unique nonblank source_game_id"
+            )
+        fingerprint = str(raw.get("source_row_sha256", "")).strip().lower()
+        if len(fingerprint) != 64 or any(ch not in "0123456789abcdef" for ch in fingerprint):
+            raise ValueError(
+                f"{source_id}: historical game-type challenge source_row_sha256 is invalid"
+            )
+        expected = str(raw.get("expected_source_game_type", "")).strip()
+        proposed = str(raw.get("proposed_source_game_type", "")).strip()
+        if expected != HISTORICAL_CHALLENGE_SOURCE_TYPE:
+            raise ValueError(
+                f"{source_id}: challenge may only begin from "
+                f"{HISTORICAL_CHALLENGE_SOURCE_TYPE}"
+            )
+        if proposed != HISTORICAL_CHALLENGE_TARGET_TYPE:
+            raise ValueError(
+                f"{source_id}: challenge may only propose "
+                f"{HISTORICAL_CHALLENGE_TARGET_TYPE}"
+            )
+        basis = str(raw.get("evidence_basis", "")).strip()
+        if not basis:
+            raise ValueError(f"{source_id}: challenge evidence_basis is required")
+        result[source_id] = {
+            "source_game_id": source_id,
+            "source_row_sha256": fingerprint,
+            "expected_source_game_type": expected,
+            "proposed_source_game_type": proposed,
+            "evidence_basis": basis,
+        }
+    return result
+
+
+def build_historical_game_type_challenge_review(
+    school_key: str,
+    candidate: dict[str, Any],
+    challenge: dict[str, str],
+    expected_canonical_identity: dict[str, str],
+) -> dict[str, Any]:
+    """Expose one exact post-freeze contradiction as pending Gate 1 material."""
+
+    source = candidate["source"]
+    source_id = str(source.get("source_game_id", "")).strip()
+    if source_id != challenge["source_game_id"]:
+        raise ValueError("historical challenge source identity mismatch")
+    if row_fingerprint(source) != challenge["source_row_sha256"]:
+        raise ValueError(
+            f"{source_id}: historical challenge frozen source-row fingerprint mismatch"
+        )
+    if source.get("curated_game_type", "").strip() != challenge[
+        "expected_source_game_type"
+    ]:
+        raise ValueError(
+            f"{source_id}: historical challenge source game type changed"
+        )
+    if candidate.get("planned_identity_status") != "NEW_GAME":
+        raise ValueError(
+            f"{source_id}: historical game-type challenge currently requires NEW_GAME identity"
+        )
+    if not expected_canonical_identity or set(expected_canonical_identity) != set(
+        HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+    ):
+        raise ValueError(
+            f"{source_id}: historical challenge canonical identity is incomplete"
+        )
+
+    return {
+        "decision_id": "HISTORICAL-GAME-TYPE-" + source_id,
+        "category": "postseason_classification",
+        "source_game_id": source_id,
+        "canonical_game_id": "",
+        "season_label": source.get("season_label", "").strip(),
+        "source_game_date": source.get("game_date", "").strip(),
+        "canonical_game_date": source.get("game_date", "").strip(),
+        "matchup": (
+            f"{school_key} vs "
+            + source.get("normalized_opponent_key", "").strip()
+        ),
+        "field_name": "game_type",
+        "source_value": challenge["expected_source_game_type"],
+        "canonical_value": "",
+        "source_row_sha256": challenge["source_row_sha256"],
+        "frozen_source_row": dict(source),
+        "expected_canonical_identity": dict(expected_canonical_identity),
+        "planned_identity_status": "NEW_GAME",
+        "historical_game_type_challenge": True,
+        "proposed_game_type": challenge["proposed_source_game_type"],
+        "original_site_type": source.get("curated_site_type", "").strip(),
+        "relevant_evidence": (
+            challenge["evidence_basis"]
+            + " This is a post-freeze contradiction challenge only; "
+            "Owner Gate 1 must explicitly approve the game-type correction."
+        ),
+        "recommended_action": HISTORICAL_CHALLENGE_ACTION,
+        "allowed_actions": [HISTORICAL_CHALLENGE_ACTION],
+        "decision": "PENDING",
+        "resolution_basis": "",
+        "canonical_patch_json": "{}",
+        "source_patch_json": "{}",
+        "notes": (
+            "Exact frozen row and post-ingest canonical identity are bound. "
+            "Only curated_game_type may change; no postseason round, H/A/N, "
+            "venue/location, score/result, overtime, raw evidence, or unrelated "
+            "source field is authorized."
+        ),
+    }
 
 
 def mismatch_is_reviewable(
