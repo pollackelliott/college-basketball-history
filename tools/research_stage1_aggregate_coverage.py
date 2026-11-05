@@ -283,7 +283,8 @@ def audit_checkpoint(parent: Path, *, expected_parent_sha256: str,
         ):
             defects.append("RESIDUAL_COUNT_MISMATCH")
 
-        evidence = structured_evidence.get(season)
+        use_legacy_evidence = authority.get("legacy_evidence_mode") == LEGACY_EVIDENCE_MODE
+        evidence = None if use_legacy_evidence else structured_evidence.get(season)
         evidence_member: str | None = SOURCE_MEMBER if evidence is not None else None
         if evidence is not None:
             if (
