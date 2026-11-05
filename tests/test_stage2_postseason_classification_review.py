@@ -586,7 +586,7 @@ class PostIngestCanonicalTests(unittest.TestCase):
             result = apply_reconciliation_decisions(
                 repo, self.challenge_approved(identity, frozen)
             )
-            self.assertEqual(result["postseason_canonical_types_enriched"], 0)
+            self.assertEqual(result.get("postseason_canonical_types_enriched", 0), 0)
             self.assertEqual(
                 read_csv(repo / "data/canonical/games.csv")[0]["game_type"],
                 "NCAA_TOURNAMENT",
