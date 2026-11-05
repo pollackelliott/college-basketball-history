@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "e1b19f9d3456eb79b3fbdc50d40bb9420da6d1d66e414302e1d93688d24d04ec",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "pr_number": 475,
+  "production_deployment_id": 7586864592,
+  "production_json_checked_count": 93,
+  "production_proof": true,
+  "request_id": "rhode-island-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "status": "COMPLETE"
+}

@@ -737,7 +737,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "e1b19f9d3456eb79b3fbdc50d40bb9420da6d1d66e414302e1d93688d24d04ec",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -747,7 +747,7 @@
     "production_deployment_id": 7586864592,
     "production_json_checked_count": 93,
     "protected_main_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "rhode-island-release-production-proof-0001",
     "school_key": "rhode-island"
   },
