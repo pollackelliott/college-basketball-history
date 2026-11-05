@@ -55,7 +55,7 @@ Default phase continuations are:
 
 Any changed PR head, changed approved historical meaning, moved/unauthorized main identity, shared/global mutation requirement, unsafe recovery state, or other genuine blocker ends the persisted phase authority and requires the repository-defined stop/owner boundary.
 
-A healthy in-flight workflow is not a completed owner-facing phase. Do not return a final `NEXT OWNER ACTION: PROCEED` merely because an already-authorized remote request or its fresh verifier is still running. Continue monitoring in the same turn with occasional compact progress updates until the durable terminal result exists or a genuine blocker appears.
+A healthy in-flight workflow is not a completed owner-facing phase, but owner attention is also not a waiting primitive. After dispatch, make bounded event-oriented status reads only when they can reveal material progress. Do **not** spend minutes repeatedly polling an unchanged workflow merely to avoid a transport yield. If the external operation is still genuinely in flight and no useful independent work remains, preserve its exact request/run identity, provide the direct workflow link, and yield with `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. Repeated such yields across one deterministic phase are a repository-orchestration defect: fix the phase bundling instead of normalizing owner-scheduled continuation.
 
 ## 3. Compact-output contract
 
@@ -225,9 +225,11 @@ A healthy turn should make one coherent durable advance or a small deterministic
 - the same blocker/state is being rechecked without new evidence;
 - multiple unrelated diagnostic families would need to be opened;
 - transcript/context is growing materially faster than durable progress;
-- an external workflow remains healthy but genuinely unchanged through three **counted** no-progress observations after the initial healthy baseline, with each counted observation separated from the prior counted observation by at least two minutes of external workflow time; rapid repeated status reads do not count, and any material state transition resets the count.
+- an external workflow remains healthy but in flight after a bounded status observation and there is no useful independent repository work to perform in the same turn.
 
-The polling threshold exists to bound **sustained waiting**, not to turn a few rapid status checks into owner relay work. The first healthy observation is only the baseline. Under ordinary healthy waiting, three counted no-progress observations therefore represent roughly six minutes of genuinely unchanged external state before a transport yield. A real execution/context limit may still require an earlier durable yield.
+Do not create a multi-minute chat-side polling budget. A status read should answer a concrete event question: did the workflow finish, fail, materially advance, or create the next durable checkpoint? Re-reading an unchanged job at short intervals adds no authority and no durable state. When the answer is still simply “running,” preserve the exact run/request identity and yield rather than idling inside the conversation.
+
+This transport yield is acceptable for one genuinely long external operation. It is **not** acceptable as the normal scheduler for a deterministic chain such as refresh -> census -> proposal. If one owner-authorized phase repeatedly requires transport yields between its internal operations, the repository is missing phase-sized orchestration and that gap should be repaired before the pattern is normalized for later schools.
 
 When stopping for this reason, preserve the exact active request/checkpoint, residual population, next internal step, and current phase authority. Do not reset or replay completed work.
 
@@ -246,7 +248,9 @@ Generic tooling should continue moving toward:
 - concise diagnostics with verbose log artifacts;
 - idempotent no-op behavior after successful phases;
 - automatic detection of the earliest incomplete safe phase;
-- fewer owner-mediated command/result round trips.
+- fewer owner-mediated command/result round trips;
+- pre-merge candidate-runtime replay of the exact blocked Stage 2 proposal for generic repair PRs; and
+- repository-owned continuation for deterministic multi-request chains instead of chat-side scheduling.
 
 Until those capabilities are fully automated, agents should follow the same operating model manually using existing durable state.
 
