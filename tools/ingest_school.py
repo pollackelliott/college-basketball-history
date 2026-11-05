@@ -765,12 +765,16 @@ def load_runtime_venue_metadata_map(
     *,
     sealed_plan_context: dict[str, Any] | None = None,
     post_reconciliation_semantics: bool = False,
+    post_reconciliation_venue_relationships: bool = False,
 ) -> dict[str, list[dict[str, str]]]:
     """Load venue metadata plus authenticated frozen per-game split authority.
 
-    Ordinary runtime callers authenticate only the exact pre-ingest semantic delta.
-    The explicit post-reconciliation mode is reserved for final package/no-op
-    verification after the same sealed plan has applied source normalizations.
+    Ordinary runtime callers authenticate the exact pre-ingest source semantics
+    and frozen venue bytes. Final package/no-op verification authenticates both
+    source and venue state after sealed reconciliation. During generic
+    reconciliation itself, sealed GAME_SITE rows are written before source rows
+    are persisted, so callers may authenticate only that exact venue suffix while
+    retaining the exact pre-ingest source-semantic boundary.
     """
 
     venue_metadata_map = load_venue_metadata_map(
@@ -786,16 +790,25 @@ def load_runtime_venue_metadata_map(
         if post_reconciliation_semantics
         else sealed_pre_ingest_semantic_delta(sealed_plan_context)
     )
+    venue_is_post_reconciliation = (
+        post_reconciliation_semantics
+        or post_reconciliation_venue_relationships
+    )
     frozen_split_authority = load_frozen_venue_split_authority(
         repo_root,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
         sealed_plan_context=(
-            sealed_plan_context if post_reconciliation_semantics else None
+            sealed_plan_context if venue_is_post_reconciliation else None
         ),
         semantic_phase=(
             SEMANTIC_PHASE_POST_RECONCILIATION
             if post_reconciliation_semantics
+            else SEMANTIC_PHASE_PRE_INGEST
+        ),
+        venue_semantic_phase=(
+            SEMANTIC_PHASE_POST_RECONCILIATION
+            if venue_is_post_reconciliation
             else SEMANTIC_PHASE_PRE_INGEST
         ),
     )
