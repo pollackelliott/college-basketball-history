@@ -129,6 +129,9 @@ from remote_implementation_production import (
     verify_exact_merge,
     run_permanent_production_proof,
 )
+from remote_implementation_final_release import (
+    verify_final_release_packet_binding,
+)
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
     verify_pr_checks_and_preview,
@@ -3519,6 +3522,11 @@ def run_read_only_production_proof(
     """Post-merge permanent Production validation; cannot merge or rewrite main."""
     if request["merge_sha"] != live_main:
         raise Stop("PRODUCTION_REQUEST_NOT_EXACT_CURRENT_MAIN")
+    verify_final_release_packet_binding(
+        request,
+        predecessor_commit,
+        repo=ROOT,
+    )
     authority = verify_gate2_approved_chain(
         request, predecessor_commit, repo=ROOT,
     )
