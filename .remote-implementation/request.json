@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-current-main-refresh-0012",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "st-bonaventure-stage2-census-0013",
+  "operation": "STAGE2_CENSUS",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "ed88b6ae24a6e76ee9e2afdf112b24845f8634e8",
-  "previous_control_state_sha256": "e4b31b09c9f1c6e2290a03a7d4810f449692b8b776bae9f78bab1cf1bc97cbf5",
+  "previous_control_state_commit": "226c6724ce3be2a3daa20aa80903ebe8623ea09e",
+  "previous_control_state_sha256": "ee68c3dbaf05af343eaae9c22e4a454b97d3f097ac95bef99a9ef409fb6eba03",
   "expected_protected_main_sha": "462dfc713ebb9fdc7b60186eb2578b8b5d42041d",
   "target_branch": "data/st-bonaventure-onboarding",
-  "target_sha": "c505386c0f8e37a192156f19eb40e824cda45a6a",
+  "target_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
   "phase0_successor": {
     "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
     "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
@@ -18,26 +18,21 @@
     "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0011/successor-manifest.json",
-    "sha256": "a56647ed525d51467c111eb77ae3ae21ce991d1a4c21e49cb3d5a38dad0152d5"
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0012/successor-manifest.json",
+    "sha256": "86df5f60c1d9c77bed77006f2985afbe165b3ff8e660ae8be8d75880f1bc1d46"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "CONTROL CENTER DISPOSITION — SEALED GAME_SITE RELATIONSHIP CAPABILITY MERGED. Owner supplied exact Control Center disposition authorizing the SAME St. Bonaventure Stage 2 lane to perform the repository-defined guarded current-main refresh after PR #459 if eligibility remained exact and disjoint, then regenerate fresh census and proposal rehearsal. Immediately before request creation protected main is 462dfc713ebb9fdc7b60186eb2578b8b5d42041d, target predecessor is c505386c0f8e37a192156f19eb40e824cda45a6a, exact merge base is 0c66967db740fb935b1f11f17b223b6a19d8a858, target-only 9 / intervening-main 6 / overlap 0, no intervening schools/st-bonaventure path, global control IDLE/COMPLETE/recovery_required=false, and prior refresh -0011 is independently fresh-verified PASS. Authority covers this guarded refresh and required verification only; no new historical authority, Gate 1 approval, sealed apply, release, merge, or Production authority."
-  },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — post-PR #459 GAME_SITE capability current-main refresh",
-    "authorization": "PR #459 merged exact reviewed head b24828df40da4fa7590f7154549d5264f99ae780 into protected main as 462dfc713ebb9fdc7b60186eb2578b8b5d42041d with parents 0c66967db740fb935b1f11f17b223b6a19d8a858 and b24828df40da4fa7590f7154549d5264f99ae780 after required checks passed. Current target c505386c0f8e37a192156f19eb40e824cda45a6a is the exact fresh-verified refresh -0011 successor. Current disjoint topology is target-only 9 / main-only 6 / overlap 0 / no schools/st-bonaventure main path. Immutable Integration Freeze and six package hashes are preserved. Fresh Stage 2 census must regenerate after this refresh; the prior 232-decision universe is not carried forward by assertion. Control Center directs autonomous continuation through fresh census and proposal rehearsal, stopping at OWNER_GATE_1_READY or a genuine blocker."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census after independently verified PR #459 current-main refresh -0012",
+    "authorization": "Existing Control Center-authorized Stage 2 phase persists. Refresh -0012 is COMPLETE and independently fresh-verified PASS on protected main 462dfc713ebb9fdc7b60186eb2578b8b5d42041d with exact successor be23cc8441fdeca3dcdafdd5e264cd912aadc324. This read-only census must regenerate the decision universe from that exact successor before another proposal rehearsal. The prior 232-decision universe and recommendation map are not carried forward by assertion. No owner-gate, sealing, apply, release, Preview, merge, Production, recovery, or unrelated mutation authority is granted."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
