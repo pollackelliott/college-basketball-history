@@ -180,6 +180,68 @@ class RemoteStage2ProposalTests(unittest.TestCase):
         self.assertEqual(result["freeze_bytes"], freeze)
         self.assertEqual(result["writeahead"], {})
 
+    def test_census_authority_binds_exact_historical_challenge(self):
+        branch = "data/example-school-correction"
+        challenge = {
+            "path": ".remote-implementation/requests/example/historical-game-type-challenge.json",
+            "sha256": "a" * 64,
+        }
+        freeze = canonical_json_bytes({
+            "workflow_kind": "POST_PUBLICATION_CORRECTION",
+            "status": "INTEGRATION_FROZEN",
+            "school_key": SCHOOL,
+            "source_game_semantic_guard": {"snapshot_sha256": SEMANTIC_SHA},
+        })
+        freeze_sha = sha(freeze)
+        freeze_path = ".remote-implementation/inputs/example/integration-freeze.json"
+        census = canonical_json_bytes({
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+            "school_key": SCHOOL,
+            "target_branch": branch,
+            "target_sha": TARGET,
+            "target_tree_sha": TREE,
+            "target_authority_kind": "POST_PUBLICATION_CORRECTION",
+            "correction_integration_freeze_path": freeze_path,
+            "correction_integration_freeze_sha256": freeze_sha,
+            "stage2_status": "CAPABILITY_CENSUS_READY",
+            "preflight": {"blocker_count": 0, "warning_count": 0},
+            "decision_universe_sha256": DECISION_SHA,
+            "integration_freeze_sha256": freeze_sha,
+            "semantic_snapshot_sha256": SEMANTIC_SHA,
+            "historical_game_type_challenge_path": challenge["path"],
+            "historical_game_type_challenge_sha256": challenge["sha256"],
+        })
+        authority_path = ".remote-implementation/checkpoints/example/census/checkpoint-manifest.json"
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": branch,
+            "target_sha": TARGET,
+            "stage2_authority": {"path": authority_path, "sha256": sha(census)},
+            "integration_freeze_sha256": freeze_sha,
+            "semantic_snapshot_sha256": SEMANTIC_SHA,
+            "decision_universe_sha256": DECISION_SHA,
+            "historical_game_type_challenge": dict(challenge),
+        }
+        mapping = {authority_path: census, freeze_path: freeze}
+        with patch.object(
+            proposal, "git_show_bytes",
+            side_effect=lambda commit, path, **kwargs: mapping[path],
+        ):
+            result = proposal.verify_stage2_proposal_authority(request, "f" * 40)
+        self.assertEqual(result["historical_game_type_challenge"], challenge)
+
+        request["historical_game_type_challenge"] = {
+            **challenge, "sha256": "b" * 64,
+        }
+        with patch.object(
+            proposal, "git_show_bytes",
+            side_effect=lambda commit, path, **kwargs: mapping[path],
+        ):
+            with self.assertRaisesRegex(
+                Stop, "STAGE2_PROPOSAL_HISTORICAL_CHALLENGE_AUTHORITY_MISMATCH"
+            ):
+                proposal.verify_stage2_proposal_authority(request, "f" * 40)
+
     def test_exact_post_repair_authority_authenticates(self):
         request, mapping = self.authority_fixture()
 

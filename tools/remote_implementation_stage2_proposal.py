@@ -214,6 +214,12 @@ def verify_stage2_proposal_authority(
         target_tree_sha = authority.get("target_tree_sha")
         integration_freeze_sha = authority.get("integration_freeze_sha256")
         semantic_sha = authority.get("semantic_snapshot_sha256")
+        authority_challenge = {
+            "path": authority.get("historical_game_type_challenge_path"),
+            "sha256": authority.get("historical_game_type_challenge_sha256"),
+        }
+        if not any(authority_challenge.values()):
+            authority_challenge = None
         writeahead_path = ""
         writeahead_sha = ""
         if authority.get("target_authority_kind") == "POST_PUBLICATION_CORRECTION":
@@ -245,6 +251,7 @@ def verify_stage2_proposal_authority(
         target_tree_sha = authority.get("prepared_tree_sha")
         integration_freeze_sha = authority.get("integration_freeze_sha256")
         semantic_sha = authority.get("semantic_snapshot_sha256")
+        authority_challenge = None
         writeahead_path = str(authority.get("writeahead_manifest_path") or "")
         writeahead_sha = str(authority.get("writeahead_manifest_sha256") or "")
     else:
@@ -268,6 +275,9 @@ def verify_stage2_proposal_authority(
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_FREEZE_MISMATCH")
     if semantic_sha != request["semantic_snapshot_sha256"]:
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_SEMANTIC_MISMATCH")
+    request_challenge = request.get("historical_game_type_challenge")
+    if request_challenge != authority_challenge:
+        raise Stop("STAGE2_PROPOSAL_HISTORICAL_CHALLENGE_AUTHORITY_MISMATCH")
     if kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT" and (
         authority.get("target_authority_kind") == "POST_PUBLICATION_CORRECTION"
     ):
@@ -290,6 +300,7 @@ def verify_stage2_proposal_authority(
         "target_tree_sha": target_tree_sha,
         "freeze_bytes": freeze_bytes,
         "writeahead": writeahead,
+        "historical_game_type_challenge": authority_challenge,
     }
 
 
@@ -343,6 +354,7 @@ def run_stage2_proposal_tool(
     diag: Path,
     *,
     tool_repo: Path | None = None,
+    historical_game_type_challenge_path: Path | None = None,
 ) -> dict[str, Any]:
     """Run the unchanged permanent Stage-2 coordinator with one exact map payload."""
 
@@ -369,6 +381,11 @@ def run_stage2_proposal_tool(
         "--map",
         str(map_path),
     ]
+    if historical_game_type_challenge_path is not None:
+        cmd.extend([
+            "--historical-game-type-challenge",
+            str(historical_game_type_challenge_path),
+        ])
     cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-proposal-rehearsal.log").write_text(cp.stdout, encoding="utf-8")
@@ -443,13 +460,20 @@ def run_stage2_proposal_tool(
         site_doc = json.loads(site_path.read_text(encoding="utf-8"))
 
     return {
-        "command": [
-            "python",
-            "tools/implementation_stage2.py",
-            school_key,
-            "--map",
-            "<MAP>",
-        ],
+        "command": (
+            [
+                "python",
+                "tools/implementation_stage2.py",
+                school_key,
+                "--map",
+                "<MAP>",
+            ]
+            + (
+                ["--historical-game-type-challenge", "<HISTORICAL_CHALLENGE>"]
+                if historical_game_type_challenge_path is not None
+                else []
+            )
+        ),
         "exit_code": cp.returncode,
         "stage2_status": stage2_status,
         "status": status,

@@ -361,6 +361,28 @@ class RemoteImplementationControlTests(unittest.TestCase):
     def test_valid_stage2_proposal_rehearsal_request(self):
         validate_request(request(OP_STAGE2_PROPOSAL_REHEARSAL))
 
+    def test_stage2_census_and_proposal_accept_hash_bound_historical_challenge(self):
+        for operation in (OP_STAGE2_CENSUS, OP_STAGE2_PROPOSAL_REHEARSAL):
+            with self.subTest(operation=operation):
+                value = request(operation)
+                value["historical_game_type_challenge"] = {
+                    "path": ".remote-implementation/requests/request-001/historical-game-type-challenge.json",
+                    "sha256": "a" * 64,
+                }
+                validate_request(value)
+
+    def test_historical_challenge_is_forbidden_outside_census_and_proposal(self):
+        value = request(OP_STAGE1)
+        value["historical_game_type_challenge"] = {
+            "path": ".remote-implementation/requests/request-001/historical-game-type-challenge.json",
+            "sha256": "a" * 64,
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_HISTORICAL_GAME_TYPE_CHALLENGE_FORBIDDEN",
+        ):
+            validate_request(value)
+
     def test_stage2_proposal_requires_exact_map_hash(self):
         req = request(OP_STAGE2_PROPOSAL_REHEARSAL)
         req["recommendation_map"]["sha256"] = "bad"

@@ -376,6 +376,7 @@ def run_stage2(
     school_key: str,
     *,
     map_path: Path | None = None,
+    historical_game_type_challenge_path: Path | None = None,
 ) -> tuple[int, dict[str, Any], Path]:
     status: dict[str, Any] = {
         "schema_version": STATUS_SCHEMA_VERSION,
@@ -401,7 +402,20 @@ def run_stage2(
         }
 
         output_dir = repo / ".onboarding" / school_key
-        plan = build_plan(repo, school_key)
+        historical_challenges = None
+        if historical_game_type_challenge_path is not None:
+            challenge_path = historical_game_type_challenge_path.resolve()
+            historical_challenges = json.loads(
+                challenge_path.read_text(encoding="utf-8")
+            )
+            status["historical_game_type_challenge"] = {
+                "sha256": _sha256_file(challenge_path),
+            }
+        plan = build_plan(
+            repo,
+            school_key,
+            historical_game_type_challenges=historical_challenges,
+        )
         paths = write_preflight_artifacts(plan, output_dir)
         preexisting_partial_ids = _preexisting_partial_site_ids(repo, plan)
         status["preflight"] = _plan_summary(plan)
@@ -547,6 +561,17 @@ def parse_args() -> argparse.Namespace:
         help="Compact Gate 1 recommendation map to validate and rehearse.",
     )
     parser.add_argument(
+        "--historical-game-type-challenge",
+        dest="historical_game_type_challenge_path",
+        type=Path,
+        default=None,
+        help=(
+            "Hash-bound Control Center challenge payload that exposes pending "
+            "post-freeze game-type corrections at Owner Gate 1 without mutating "
+            "the frozen package."
+        ),
+    )
+    parser.add_argument(
         "--status",
         action="store_true",
         help="Print the most recent durable Stage-2 recovery status without running work.",
@@ -571,6 +596,9 @@ def main() -> int:
         repo,
         args.school_key,
         map_path=args.map_path,
+        historical_game_type_challenge_path=(
+            args.historical_game_type_challenge_path
+        ),
     )
     _print_status(status, status_path)
     return code

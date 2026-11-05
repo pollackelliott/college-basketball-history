@@ -46,6 +46,7 @@ from remote_implementation_io import (
     git,
     git_show_bytes,
     git_show_json,
+    materialize_payload,
     read_json,
     remote_head,
     run,
@@ -169,6 +170,14 @@ def verify_stage2_proposal_rehearsal(
     request = json.loads(request_bytes)
     if request.get("request_id") != manifest.get("request_id"):
         raise Stop("STAGE2_PROPOSAL_FRESH_REQUEST_ID_MISMATCH")
+    challenge_ref = request.get("historical_game_type_challenge") or {}
+    if (
+        manifest.get("historical_game_type_challenge_path")
+        != challenge_ref.get("path")
+        or manifest.get("historical_game_type_challenge_sha256")
+        != challenge_ref.get("sha256")
+    ):
+        raise Stop("STAGE2_PROPOSAL_FRESH_HISTORICAL_CHALLENGE_BINDING_MISMATCH")
     authority = verify_stage2_proposal_authority(request, control_head)
 
     map_bytes = git_show_bytes(
@@ -180,6 +189,15 @@ def verify_stage2_proposal_rehearsal(
     map_dir = Path(tempfile.mkdtemp(prefix="remote-stage2-proposal-fresh-map-"))
     map_path = map_dir / "recommendation-map.json"
     map_path.write_bytes(map_bytes)
+    challenge_path = None
+    if challenge_ref:
+        challenge_path = materialize_payload(
+            control_head,
+            challenge_ref,
+            map_dir / "historical-game-type-challenge.json",
+        )
+        if challenge_path is None:
+            raise Stop("STAGE2_PROPOSAL_FRESH_HISTORICAL_CHALLENGE_MISSING")
 
     target_branch = manifest["target_branch"]
     target_sha = remote_head(ROOT, target_branch)
@@ -205,6 +223,7 @@ def verify_stage2_proposal_rehearsal(
         manifest["decision_universe_sha256"],
         DIAG / "stage2-proposal",
         tool_repo=runtime_repo,
+        historical_game_type_challenge_path=challenge_path,
     )
     if result["runtime_tool_sha256"] != manifest["runtime_tool_sha256"]:
         raise Stop("STAGE2_PROPOSAL_FRESH_RUNTIME_TOOL_MISMATCH")
@@ -281,6 +300,12 @@ def verify_stage2_proposal_rehearsal(
         "target_tree_sha": tree,
         "integration_freeze_sha256": manifest["integration_freeze_sha256"],
         "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+        "historical_game_type_challenge_path": manifest.get(
+            "historical_game_type_challenge_path"
+        ),
+        "historical_game_type_challenge_sha256": manifest.get(
+            "historical_game_type_challenge_sha256"
+        ),
         "decision_universe_sha256": manifest["decision_universe_sha256"],
         "runtime_decision_universe_sha256": manifest.get(
             "runtime_decision_universe_sha256"
@@ -1366,6 +1391,14 @@ def verify_stage2_census(
         raise Stop("STAGE2_FRESH_REQUEST_ID_MISMATCH")
     if request.get("target_sha") != manifest.get("target_sha"):
         raise Stop("STAGE2_FRESH_REQUEST_TARGET_MISMATCH")
+    challenge_ref = request.get("historical_game_type_challenge") or {}
+    if (
+        manifest.get("historical_game_type_challenge_path")
+        != challenge_ref.get("path")
+        or manifest.get("historical_game_type_challenge_sha256")
+        != challenge_ref.get("sha256")
+    ):
+        raise Stop("STAGE2_FRESH_HISTORICAL_CHALLENGE_BINDING_MISMATCH")
 
     phase0 = verify_phase0_authority(request, control_head)
     manifest_authority_kind = (
@@ -1414,6 +1447,19 @@ def verify_stage2_census(
     if target_sha != manifest["target_sha"]:
         raise Stop("STAGE2_FRESH_TARGET_REF_MISMATCH")
 
+    challenge_path = None
+    if challenge_ref:
+        challenge_dir = Path(
+            tempfile.mkdtemp(prefix="remote-stage2-fresh-historical-challenge-")
+        )
+        challenge_path = materialize_payload(
+            control_head,
+            challenge_ref,
+            challenge_dir / "historical-game-type-challenge.json",
+        )
+        if challenge_path is None:
+            raise Stop("STAGE2_FRESH_HISTORICAL_CHALLENGE_MISSING")
+
     worktree = add_existing_onboarding_worktree(
         target_branch,
         target_sha,
@@ -1424,6 +1470,7 @@ def verify_stage2_census(
         manifest["school_key"],
         phase0["freeze_bytes"],
         DIAG,
+        historical_game_type_challenge_path=challenge_path,
     )
     if result["stage2_status"] != manifest["stage2_status"]:
         raise Stop("STAGE2_FRESH_STATUS_MISMATCH")
@@ -1470,6 +1517,12 @@ def verify_stage2_census(
         "semantic_snapshot_sha256": manifest[
             "semantic_snapshot_sha256"
         ],
+        "historical_game_type_challenge_path": manifest.get(
+            "historical_game_type_challenge_path"
+        ),
+        "historical_game_type_challenge_sha256": manifest.get(
+            "historical_game_type_challenge_sha256"
+        ),
         "stage2_status": result["stage2_status"],
         "decision_universe_sha256": manifest.get(
             "decision_universe_sha256"
