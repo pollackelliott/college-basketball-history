@@ -462,7 +462,7 @@ def queue_after_preseal(
     manifest, checkpoint_ref = _checkpoint_manifest(
         control_head,
         last,
-        expected_kind="REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_CHECKPOINT",
+        expected_kind="REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
         label="PRESEAL_CHECKPOINT",
     )
     if manifest.get("preseal_status") != "READY_TO_SEAL":
