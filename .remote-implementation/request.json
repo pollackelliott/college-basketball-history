@@ -1,37 +1,45 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-proposal-0012",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0014",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "2739ecfbf1ef772926c3599506bae6448742fbb6",
-  "previous_control_state_sha256": "66347c3f5151dd50896e9cb52d32d445fb9cc64bb07eb67e7ca70a4378d30453",
-  "expected_protected_main_sha": "38068bc0a069bd67c7e30065c665cd0318d20558",
+  "previous_control_state_commit": "0365a09c7af6b34cce6b39402740d617ed006303",
+  "previous_control_state_sha256": "99dcfa2ddc1bb913c4e7c6a7d2883c8803ef2e5235b5a71124201c8f2968354a",
+  "expected_protected_main_sha": "09a3f949a20bea011f07cc64d6ad30d018e3cbc0",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "185db38340211debf440179f2247f6b57c0be8b0",
-  "stage2_authority": {
-    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0014/checkpoint-manifest.json",
-    "sha256": "383ff8b10a39c81f7beeca7a469434e7dce02916900759c7be1faeb41d3b4132"
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0013/successor-manifest.json",
+    "sha256": "ccfd6b5b45dba2209594cfd8d1bd56bc564d8edc6107a570fc190e5fac39907c"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0012/recommendation-map.json",
-    "sha256": "7e72bfca96a5369da31ba20909566a17d900d6c33efa5145250802a09915f60f"
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "CONTROL CENTER DISPOSITION — ST. BONAVENTURE POST-RECONCILIATION VENUE-MAP CALL-SITE REPAIR. The owner authorized the SAME existing St. Bonaventure Stage 2 lane to perform the repository-defined guarded current-main refresh after the generic repair merges and then continue deterministically through fresh census and renewed proposal rehearsal. PR #461 merged exact reviewed head e4db7614934fe6a2f74272c372ffeff393e8b79b into protected main as 09a3f949a20bea011f07cc64d6ad30d018e3cbc0. Immediately before request creation the onboarding predecessor is 185db38340211debf440179f2247f6b57c0be8b0, exact merge base is 38068bc0a069bd67c7e30065c665cd0318d20558, target-only changed paths are 9, intervening-main changed paths are 2, overlap is 0, protected main changes no schools/st-bonaventure path, and global control is IDLE/COMPLETE with recovery_required=false. Authority covers only this guarded refresh and its required verification; no historical authority, Owner Gate 1, sealed apply, release, merge, or Production authority is created."
   },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — proposal rehearsal after PR #460 refresh -0013 and fresh census -0014",
-    "authorization": "Same owner-authorized Stage 2 phase. Fresh census -0014 independently regenerated 232 decisions / 0 blockers / 0 warnings on protected main 38068bc0a069bd67c7e30065c665cd0318d20558 and refreshed target 185db38340211debf440179f2247f6b57c0be8b0 with exact unchanged decision-universe SHA 7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6 and fresh verification PASS. The recommendation map bytes are preserved exactly from accepted proposal -0011 with SHA256 7e72bfca96a5369da31ba20909566a17d900d6c33efa5145250802a09915f60f; current authority is supplied by census -0014, not by the map's historical preparation metadata. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — post-PR #461 current-main refresh",
+    "authorization": "PR #461 permanently repairs the generic post-GAME_SITE reconciliation venue-map call site without changing basketball data. The preserved onboarding head 185db38340211debf440179f2247f6b57c0be8b0 is the exact fresh-verified refresh -0013 successor and proposal -0012 target. Current disjoint topology is target-only 9 / main-only 2 / overlap 0 / no schools/st-bonaventure main path. Immutable Integration Freeze and semantic snapshot remain unchanged. After refresh, Stage 2 must regenerate through a fresh census before the unchanged recommendation map may be reauthenticated and rehearsed; the prior 232-decision universe is not carried forward by assertion."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
