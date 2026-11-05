@@ -363,7 +363,7 @@
   "active_request_sha256": "e26f9f8bd902b19ea055b112fb3e81487e6fd13ac6cdda591ff24f4f171bfd67",
   "active_school_key": "rhode-island",
   "active_target_branch": "data/rhode-island-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "25fb9091f13577d84772cd7517d80841b63261fe",
   "active_writeahead_path": ".remote-implementation/writeahead/rhode-island/rhode-island-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "e6ef1988dc94e926914a9d4521843647e2b5046c5e8d2f2da30ecb830fa1236e",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
