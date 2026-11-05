@@ -398,7 +398,7 @@ skip fresh verification, or create Owner Gate 1 authority. It contains:
 - when already authorized, an optional exact historical-game-type challenge reference.
 
 Before any refresh mutation, the runner proves the continuation's referenced map/challenge
-bytes exist at the request predecessor and match their hashes.
+bytes exist at the exact refresh request commit and match their hashes.
 
 After the ordinary `STAGE2_CURRENT_MAIN_REFRESH` reaches independent fresh PASS, the
 protected-main runtime executes
