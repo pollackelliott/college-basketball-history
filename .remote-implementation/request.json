@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-current-main-refresh-0013",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "st-bonaventure-stage2-census-0014",
+  "operation": "STAGE2_CENSUS",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "c45f8e608445f50c0af19845dc86bd1079580d13",
-  "previous_control_state_sha256": "a1023e8f7b57f494dcd829a71e391ee194c4b36f60155b48f75dda4e323e2375",
+  "previous_control_state_commit": "a6f8aa4b1bc6a9dd971edee5d717e53ac9b9216e",
+  "previous_control_state_sha256": "520f31068fe7af8a8d74b230a29d8bf0387d1ec7b1bebf9f302f00af23f8be3c",
   "expected_protected_main_sha": "38068bc0a069bd67c7e30065c665cd0318d20558",
   "target_branch": "data/st-bonaventure-onboarding",
-  "target_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
+  "target_sha": "185db38340211debf440179f2247f6b57c0be8b0",
   "phase0_successor": {
     "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
     "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
@@ -18,26 +18,21 @@
     "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0012/successor-manifest.json",
-    "sha256": "86df5f60c1d9c77bed77006f2985afbe165b3ff8e660ae8be8d75880f1bc1d46"
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0013/successor-manifest.json",
+    "sha256": "ccfd6b5b45dba2209594cfd8d1bd56bc564d8edc6107a570fc190e5fac39907c"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "CONTROL CENTER DISPOSITION — PR #460 generic sealed GAME_SITE/frozen-venues repair merged. The owner authorized the SAME existing St. Bonaventure Stage 2 lane to use the repository-defined safe current-main refresh path if required before renewed proposal rehearsal. Immediately before request creation protected main is 38068bc0a069bd67c7e30065c665cd0318d20558, onboarding predecessor is be23cc8441fdeca3dcdafdd5e264cd912aadc324, exact merge base is 462dfc713ebb9fdc7b60186eb2578b8b5d42041d, target-only changed paths 9, intervening-main changed paths 5, overlap 0, no intervening schools/st-bonaventure path, global control IDLE/COMPLETE/recovery_required=false, and prior refresh -0012 plus proposal -0011 are independently fresh-verified PASS. Authority covers only this guarded refresh and its required verification; no new historical authority, Owner Gate 1, sealed apply, release, merge, or Production authority."
-  },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — post-PR #460 current-main refresh",
-    "authorization": "PR #460 merged exact reviewed head f9959072e46eacbd6931dbea3aefd00f581d41dc into protected main as 38068bc0a069bd67c7e30065c665cd0318d20558. The preserved onboarding head be23cc8441fdeca3dcdafdd5e264cd912aadc324 is the exact fresh-verified refresh -0012 successor and proposal -0011 target. Current disjoint topology is target-only 9 / main-only 5 / overlap 0 / no schools/st-bonaventure main path. Immutable Integration Freeze and semantic snapshot remain unchanged. After refresh, Stage 2 must regenerate through fresh census before reusing the preserved recommendation map; the prior 232-decision universe is not carried forward by assertion."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census after independently verified PR #460 current-main refresh -0013",
+    "authorization": "Existing owner-authorized Stage 2 phase persists. Refresh -0013 is COMPLETE and independently fresh-verified PASS on protected main 38068bc0a069bd67c7e30065c665cd0318d20558 with exact successor 185db38340211debf440179f2247f6b57c0be8b0. This read-only census must regenerate the decision universe from that exact successor before another proposal rehearsal. The prior 232-decision universe and recommendation map are not carried forward by assertion. No owner-gate, sealing, apply, release, Preview, merge, Production, recovery, or unrelated mutation authority is granted."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
