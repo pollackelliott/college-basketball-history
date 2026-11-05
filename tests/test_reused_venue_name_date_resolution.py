@@ -1291,6 +1291,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     source_path.open(encoding="utf-8-sig", newline="")
                 )
             )
+            baseline_source_rows = json.loads(json.dumps(source_rows))
             source_by_id = {row["source_game_id"]: row for row in source_rows}
             date_ids = before_ids[0:4]
             overtime_ids = before_ids[4:8]
@@ -1464,6 +1465,20 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "approved_plan_hash": "f" * 64,
                 "decisions": final_decisions,
             }
+
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "outside the exact sealed post-reconciliation venue relationship delta",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    rehearsal / "schools" / "st-bonaventure" / "venues.csv",
+                    global_venues,
+                    sealed_plan_context=final_approved,
+                    post_reconciliation_semantics=True,
+                )
+
             self.assertEqual(
                 _apply_sealed_game_site_venue_relationship_patches(
                     rehearsal,
@@ -1489,20 +1504,22 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             )
             self.assertEqual(final_result["venue_id"], "VEN-000124")
 
-            # The identical final-state delta remains forbidden in ordinary
-            # pre-ingest authentication. The venue portfolio must remain byte-exact
-            # outside explicit post-reconciliation verification.
+            # The identical venue delta remains forbidden in ordinary
+            # pre-ingest authentication even when source semantics are restored
+            # exactly to their Integration Freeze baseline.
+            with source_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=source_fields)
+                writer.writeheader()
+                writer.writerows(baseline_source_rows)
             with self.assertRaisesRegex(
-                FrozenVenueSplitAuthorityError,
-                "does not match current",
+                WorkflowError,
+                "does not match current venues.csv",
             ):
-                ingest_school.load_runtime_venue_metadata_map(
-                    rehearsal,
-                    "st-bonaventure",
-                    rehearsal / "schools" / "st-bonaventure" / "venues.csv",
-                    global_venues,
-                    sealed_plan_context=final_approved,
-                )
+                frozen_venue_split_authority(rehearsal, "st-bonaventure")
+            with source_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=source_fields)
+                writer.writeheader()
+                writer.writerows(source_rows)
 
             # Changed canonical authority is rejected before the matcher can
             # authenticate the final source state.
@@ -1521,7 +1538,8 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     post_reconciliation_semantics=True,
                 )
 
-            # An unsealed extra venue row remains forbidden.
+            # The sealed addition itself must match exactly. A changed
+            # relationship date cannot be normalized away by the verifier.
             venue_path = rehearsal / "schools" / "st-bonaventure" / "venues.csv"
             venue_fields_runtime = list(
                 csv.DictReader(
@@ -1529,6 +1547,40 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 ).fieldnames
                 or []
             )
+            exact_venue_rows = list(
+                csv.DictReader(
+                    venue_path.open(encoding="utf-8-sig", newline="")
+                )
+            )
+            sealed_row = next(
+                row for row in exact_venue_rows
+                if row.get("venue_id", "") == "VEN-000999"
+            )
+            sealed_row["first_assigned_game"] = "1983-03-08"
+            with venue_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
+                writer.writeheader()
+                writer.writerows(exact_venue_rows)
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "outside the exact sealed post-reconciliation venue relationship delta",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    venue_path,
+                    global_venues,
+                    sealed_plan_context=final_approved,
+                    post_reconciliation_semantics=True,
+                )
+            sealed_row["first_assigned_game"] = "1983-03-07"
+            with venue_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
+                writer.writeheader()
+                writer.writerows(exact_venue_rows)
+
+            # An unsealed extra venue row remains forbidden.
+            venue_path = rehearsal / "schools" / "st-bonaventure" / "venues.csv"
             with venue_path.open("a", encoding="utf-8", newline="") as handle:
                 writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
                 writer.writerow({
