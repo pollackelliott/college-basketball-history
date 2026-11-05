@@ -1,0 +1,15 @@
+{
+  "authority_basis": "Control Center disposition authorizes the exact St. Bonaventure 1978 Penn historical game-type correction for Owner Gate 1 review.",
+  "challenges": [
+    {
+      "evidence_basis": "St. Bonaventure institutional evidence identifies the March 12, 1978 game vs. Pennsylvania as an NCAA Tournament game; no postseason round is inferred.",
+      "expected_source_game_type": "REGULAR_SEASON",
+      "proposed_source_game_type": "NCAA_TOURNAMENT",
+      "source_game_id": "STB-1977-78-029",
+      "source_row_sha256": "5dc411347dd9351a31368a4c4af0aec125e2e69a8637440c1199e82ed8fafdde"
+    }
+  ],
+  "kind": "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES",
+  "schema_version": 1,
+  "school_key": "st-bonaventure"
+}
