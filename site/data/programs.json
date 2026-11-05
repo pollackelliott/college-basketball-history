@@ -6731,7 +6731,7 @@
       "state": "NY",
       "primary_hex": "#54261A",
       "secondary_hex": "#BDB680",
-      "history_start_season": null,
+      "history_start_season": "1915-1916",
       "conference_regular_season_championships": 6,
       "conference_tournament_championships": 2,
       "ncaa_tournament_appearances": 8,
@@ -6740,7 +6740,7 @@
       "best_finish_key": "FINAL_FOUR",
       "best_finish_year": 1970,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
