@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-release-gate2-approval-0002",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "school_key": "rhode-island",
+  "previous_control_state_commit": "08a8d82cc7515723374e89730b7e9bf7f9d6f9e0",
+  "previous_control_state_sha256": "706a13f0d7a7cf921fcda47eccfc95e0f5a67337edef5a4bc48f99350b51112f",
+  "expected_protected_main_sha": "312c3d43049b4b6313cabab2243c1c47a1c2514a",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "pr_number": 475,
+  "approved_plan_hash": "a1515391ea08b17acc58ab9ea0847834ffa11b09fca31099270c3a70cb1977ae",
+  "release_manifest_sha256": "5e982700968eef2caa26a7ab1b91f2bc2a7adf804f9d237f0d5f7bfeb531182c",
+  "preview_deployment_id": 7585045491,
+  "preview_url": "https://college-basketball-history-do2mhuo5v-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "7c05ada8fdc970e31391e2c714592e067f5f69765aa45106102b0e8f0eb13993"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/rhode-island/rhode-island-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "f6cf1c14791ddbd44a3cc0c57ee2585a9d1faed5a7a60631439e17c7468d9062"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: Approved. Proceed, immediately after the exact fresh-verified Rhode Island Owner Gate 2 packet for PR #475 head 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3 and Preview deployment 7585045491.",
+    "preview_checkpoint_sha256": "7c05ada8fdc970e31391e2c714592e067f5f69765aa45106102b0e8f0eb13993",
+    "preview_verification_sha256": "f6cf1c14791ddbd44a3cc0c57ee2585a9d1faed5a7a60631439e17c7468d9062",
+    "pr_number": 475,
+    "pr_head_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+    "preview_deployment_id": 7585045491,
+    "preview_url": "https://college-basketball-history-do2mhuo5v-elliott-pollacks-projects.vercel.app"
+  },
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "rhode-island-release-production-proof-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — Control Center-authorized Gate 2 verifier recovery",
+    "authorization": "Control Center authorized one new Gate 2 approval request after generic verifier repair PR #476 merged to protected main 312c3d43049b4b6313cabab2243c1c47a1c2514a. Preserve the owner's existing exact approval of PR #475 head 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3 and Preview deployment 7585045491. Fresh live PR/head/CI/mergeability/Preview verification is required under the repaired runtime. If it passes, continue the already-authorized exact merge and Production-proof chain using production request rhode-island-release-production-proof-0001. No new historical authority or different Preview approval is granted."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
