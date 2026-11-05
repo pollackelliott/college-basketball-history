@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "merges": [
+    {
+      "survivor_venue_id": "VEN-000084",
+      "absorbed_venue_id": "VEN-000990",
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 shared-venue maintenance authorization. Preserve VEN-000084 / hp-field-house as the physical identity after exact registry geography normalization from Orlando, FL to Kissimmee, FL; retire VEN-000990 / state-farm-field-house and preserve/reassign its legitimate venue-name evidence under the survivor."
+    },
+    {
+      "survivor_venue_id": "VEN-000709",
+      "absorbed_venue_id": "VEN-000957",
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 shared-venue maintenance authorization. Normalize both Montego Bay Convention Centre registry representations to Montego Bay, Jamaica, preserve VEN-000709 / montego-bay-convention-center as the physical identity, retire VEN-000957 / montego-bay-convention-centre, and preserve legitimate alternate spelling/name evidence without rewriting literal source evidence."
+    },
+    {
+      "survivor_venue_id": "VEN-000123",
+      "absorbed_venue_id": "VEN-000966",
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 shared-venue maintenance authorization. Preserve VEN-000123 / madison-square-garden-1925 as Madison Square Garden III (1925-1968), retire duplicate VEN-000966 / madison-square-garden-third, preserve/reassign legitimate historical naming/source evidence, and leave physically distinct VEN-000124 / madison-square-garden-1968 untouched."
+    }
+  ],
+  "geography_corrections": [
+    {
+      "venue_id": "VEN-000084",
+      "venue_key": "hp-field-house",
+      "from_city": "Orlando",
+      "from_state": "FL",
+      "to_city": "Kissimmee",
+      "to_state": "FL",
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 authorization: normalize the surviving HP Field House physical identity to the supported Kissimmee, FL registry geography before duplicate merge."
+    },
+    {
+      "venue_id": "VEN-000709",
+      "venue_key": "montego-bay-convention-center",
+      "from_city": "Montego Bay",
+      "from_state": "JM",
+      "to_city": "Montego Bay",
+      "to_state": "Jamaica",
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 authorization: normalize the surviving Montego Bay Convention Centre registry jurisdiction from JM to Jamaica before duplicate merge."
+    },
+    {
+      "venue_id": "VEN-000957",
+      "venue_key": "montego-bay-convention-centre",
+      "from_city": "Montego Bay",
+      "from_state": "Saint James",
+      "to_city": "Montego Bay",
+      "to_state": "Jamaica",
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 authorization: normalize the duplicate Montego Bay Convention Centre registry jurisdiction from Saint James to Jamaica before duplicate merge."
+    }
+  ]
+}
