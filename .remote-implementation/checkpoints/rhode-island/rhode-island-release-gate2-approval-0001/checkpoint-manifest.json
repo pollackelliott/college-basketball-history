@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "70368ad39d6be41fded5952d2b2b61cea4cc2049940c39c21ec27ac64b56bac5",
+  "approved_plan_hash": "a1515391ea08b17acc58ab9ea0847834ffa11b09fca31099270c3a70cb1977ae",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "rhode-island-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "bc4f62e7657b4208b56f770e2d4f41772ac9ed3bc9bb838f46a9518eee843087",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "pr_number": 475,
+  "preview_checkpoint_sha256": "7c05ada8fdc970e31391e2c714592e067f5f69765aa45106102b0e8f0eb13993",
+  "preview_deployment_id": 7585045491,
+  "preview_url": "https://college-basketball-history-do2mhuo5v-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "f6cf1c14791ddbd44a3cc0c57ee2585a9d1faed5a7a60631439e17c7468d9062",
+  "production_proof": false,
+  "production_request_id": "rhode-island-release-production-proof-0001",
+  "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "release_manifest_sha256": "5e982700968eef2caa26a7ab1b91f2bc2a7adf804f9d237f0d5f7bfeb531182c",
+  "request_id": "rhode-island-release-gate2-approval-0001",
+  "request_sha256": "115af31ba520e84a5848765faf6dfde745688c64b388d89b4727b7022fa5ca98",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3"
+}

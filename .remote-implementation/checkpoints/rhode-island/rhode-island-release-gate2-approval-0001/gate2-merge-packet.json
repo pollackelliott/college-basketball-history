@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "rhode-island-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "pr_number": 475,
+  "preview_deployment_id": 7585045491,
+  "preview_url": "https://college-basketball-history-do2mhuo5v-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "rhode-island-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "target_branch": "data/rhode-island-onboarding"
+}
