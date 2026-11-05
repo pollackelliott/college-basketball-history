@@ -67,6 +67,52 @@ class RemoteVenueMaintenanceTests(unittest.TestCase):
         self.assertNotIn("data/evidence/game-assertions.csv", allowed)
         self.assertNotIn("data/evidence/ncaa-tournament-sites.csv", allowed)
 
+    def test_mixed_merge_and_geography_diff_uses_union_contract(self):
+        spec_path = (
+            "data/reconciliation/venue-identity-maintenance/"
+            "rhode-island-stage1.json"
+        )
+        plan = {
+            "merges": [
+                {
+                    "school_files": [
+                        {
+                            "path": "schools/utah-state/venues.csv",
+                            "row_count": 1,
+                        }
+                    ]
+                }
+            ],
+            "geography_corrections": [
+                {
+                    "school_files": [
+                        {
+                            "path": "schools/wake-forest/venues.csv",
+                            "row_count": 1,
+                        }
+                    ]
+                }
+            ],
+        }
+        changed = [
+            "data/reference/venues.csv",
+            "data/reference/venue-names.csv",
+            "data/canonical/games.csv",
+            "data/evidence/game-assertions.csv",
+            "data/evidence/ncaa-tournament-sites.csv",
+            "schools/utah-state/venues.csv",
+            "schools/wake-forest/venues.csv",
+            spec_path,
+        ]
+
+        allowed = _validate_changed_paths(changed, plan, spec_path)
+
+        self.assertIn("data/reference/venue-names.csv", allowed)
+        self.assertIn("data/evidence/game-assertions.csv", allowed)
+        self.assertIn("data/evidence/ncaa-tournament-sites.csv", allowed)
+        self.assertIn("schools/utah-state/venues.csv", allowed)
+        self.assertIn("schools/wake-forest/venues.csv", allowed)
+
     def test_geography_only_diff_rejects_source_evidence_mutation(self):
         spec_path = (
             "data/reconciliation/venue-identity-maintenance/"
