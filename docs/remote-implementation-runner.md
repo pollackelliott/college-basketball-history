@@ -602,6 +602,36 @@ Fresh verification repeats the same authority checks and permanent fill on an in
 
 This is a **fill-only** boundary. It does not run pre-seal rehearsal, cryptographically seal Gate 1, apply the sealed plan, mutate the onboarding branch, create Preview, approve Gate 2, merge, or release.
 
+#### Repository-owned post-Gate-1 continuation
+
+After the owner has explicitly approved the exact Gate 1 packet, the ordinary
+`STAGE2_GATE1_FILL` request may carry one optional
+`phase_continuation.kind=STAGE2_GATE1_FILL_TO_APPLY_V1` object with exact future
+request IDs for pre-seal, seal, and sealed apply.
+
+This continuation is scheduling authority only. The fill request remains the only
+request that may carry `owner_gate_1=true`, and the continuation cannot appear on a
+proposal request or otherwise originate before explicit Gate 1 approval.
+
+The repository then advances only through fresh-verified durable boundaries:
+
+1. fresh Gate 1 fill PASS queues the ordinary `STAGE2_PRESEAL_REHEARSAL` request;
+2. fresh pre-seal PASS queues the ordinary `STAGE2_GATE1_SEAL` request only when the
+   durable result is exactly `READY_TO_SEAL`;
+3. fresh cryptographic seal PASS queues the ordinary `STAGE2_SEALED_APPLY` request;
+4. sealed apply retains its ordinary mutation lock, write-ahead, expected-predecessor
+   CAS publication, recovery model, and independent fresh verification.
+
+Each child request binds the exact checkpoint and verification artifact created by the
+prior operation. The owner approval hash, decision universe, recommendation map,
+approved-plan preview, filled review, decision-ID set, and final approved-plan hash are
+therefore carried only through ordinary authenticated checkpoint authority, not copied
+from conversational state.
+
+A changed protected main, moved target, failed fresh verifier, `BLOCKED` pre-seal,
+binding mismatch, recovery condition, or other existing guard stops the chain. This
+continuation never creates new historical authority and never crosses Owner Gate 2.
+
 
 
 ### Stage 2 pre-seal rehearsal request
