@@ -2166,7 +2166,7 @@ def run_stage2_current_main_refresh(
     predecessor_commit: str,
     live_main: str,
 ) -> None:
-    verify_phase_continuation_payloads(request, predecessor_commit)
+    verify_phase_continuation_payloads(request, request_commit)
     authority = verify_current_main_refresh_authority(
         request,
         predecessor_commit,
