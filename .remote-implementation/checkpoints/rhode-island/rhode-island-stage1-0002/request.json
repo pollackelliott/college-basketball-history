@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "rhode-island",
+  "previous_control_state_commit": "43af8b486345f1065694a571b01db5f0fd087a48",
+  "previous_control_state_sha256": "54eef96f901c8660488ecc012d8ef9a5879b92536f449517ef412d41a7bb3cae",
+  "expected_protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "research_checkpoint": {
+    "sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
+    "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "e9c881d27936c06221fd11e2e09d6ca366ccc483",
+      "path_prefix": ".remote-implementation/transports/rhode-island/rhode-island-stage1-0001/piece-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — post-maintenance Stage 1 recovery",
+    "authorization": "Control Center disposition authenticated merged PR #472 at protected main 5492240bd889b0f2b946034529ef6562fdc9fbca and explicitly authorized the same Rhode Island Implementation lane to rerun the complete permanent Stage 1 inventory from the unchanged immutable Research Freeze after shared/global venue maintenance. The exact Research Freeze ZIP was reauthenticated from the original 14-part git transport at SHA-256 5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2 with research_base_sha 80b00278ac9add94702ac76c5fa310b95d2b1929 and unchanged six-file contract. This request is read-only Stage 1 inventory only; no maintenance replay, Research mutation, Phase 0, Stage 2, owner gate, release, recovery, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
