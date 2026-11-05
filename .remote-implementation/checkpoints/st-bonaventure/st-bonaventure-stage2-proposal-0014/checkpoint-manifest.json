@@ -1,0 +1,229 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "cf2706f83515b40bf1370e8aa078d078329e5169775411d4a5c35ee01d51e1df",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "58974e0221f0e290217ae816c543543f2d3a19eba64f032826dd6c1803746147",
+    "implementation-stage2-status.json": "6f05da951d0e58fa192493d378c5764a7f145f847ccb01345331f93006834019",
+    "last-rehearsal-site-gate.json": "6ee0f0bb608578e3ede8f2fd0ecbed067d5cabfc04bb0b20bc8765e7284c0f3f",
+    "plan.json": "e30e50b113e6b4d95f910a00df3607806e3a76cf200ebcf2e8dd0de1c3132a0c",
+    "review.csv": "f53048a32809e58d1a51222f863bf075fd10419627a06c6c1e86a4249ae99274",
+    "review.md": "c1c9786eed4c1698498d434d9bfdaa9bf49b665c3170ab9b48eba719e6d5646c"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "58974e0221f0e290217ae816c543543f2d3a19eba64f032826dd6c1803746147",
+    "implementation-stage2-status.json": "d8c47eb9d7e6ed0689cae1587c0c62bed24fb82a0cd922ca3ac2f74fd6e60ce3",
+    "last-rehearsal-site-gate.json": "6ee0f0bb608578e3ede8f2fd0ecbed067d5cabfc04bb0b20bc8765e7284c0f3f",
+    "plan.json": "ee843bca84286e36a9432d506abe7eb550f4fff6b31827250eebfe0962f9fbce",
+    "review.csv": "f53048a32809e58d1a51222f863bf075fd10419627a06c6c1e86a4249ae99274",
+    "review.md": "5eda78e8daf57f21480854f428216e2202610e1d6fab9172e696ddf943edf2c0"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 101,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "runtime_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "st-bonaventure",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 87,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 87,
+      "discrepancy": 102,
+      "identity": 28,
+      "new_game_date_patch": 1,
+      "postseason_classification": 11,
+      "publication": 1
+    },
+    "decision_count": 232,
+    "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "discrepancies_to_add": 102,
+    "existing_game_matches": 694,
+    "new_canonical_games": 1892,
+    "plan_path": ".onboarding/st-bonaventure/plan.json",
+    "review_path": ".onboarding/st-bonaventure/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_SOURCE_DATE_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 21,
+      "KEEP_POSTSEASON_UNRESOLVED": 11,
+      "LEAVE_UNRESOLVED": 1,
+      "MATCH_CANONICAL:CBBG-0012138": 1,
+      "MATCH_CANONICAL:CBBG-0024320": 1,
+      "MATCH_CANONICAL:CBBG-0120190": 1,
+      "MATCH_CANONICAL:CBBG-0120316": 1,
+      "MATCH_CANONICAL:CBBG-0120450": 1,
+      "MATCH_CANONICAL:CBBG-0136406": 1,
+      "MATCH_CANONICAL:CBBG-0136829": 1,
+      "MATCH_CANONICAL:CBBG-0136849": 1,
+      "MATCH_CANONICAL:CBBG-0142233": 1,
+      "MATCH_CANONICAL:CBBG-0151094": 1,
+      "MATCH_CANONICAL:CBBG-0157231": 1,
+      "MATCH_CANONICAL:CBBG-0157344": 1,
+      "MATCH_CANONICAL:CBBG-0157478": 1,
+      "MATCH_CANONICAL:CBBG-0160489": 1,
+      "MATCH_CANONICAL:CBBG-0160872": 1,
+      "MATCH_CANONICAL:CBBG-0160945": 1,
+      "MATCH_CANONICAL:CBBG-0162258": 1,
+      "MATCH_CANONICAL:CBBG-0162275": 1,
+      "MATCH_CANONICAL:CBBG-0162500": 1,
+      "MATCH_CANONICAL:CBBG-0162714": 1,
+      "MATCH_CANONICAL:CBBG-0162997": 1,
+      "MATCH_CANONICAL:CBBG-0164241": 1,
+      "MATCH_CANONICAL:CBBG-0164370": 1,
+      "MATCH_CANONICAL:CBBG-0164715": 1,
+      "MATCH_CANONICAL:CBBG-0166925": 1,
+      "MATCH_CANONICAL:CBBG-0191299": 1,
+      "MATCH_CANONICAL:CBBG-0191829": 1,
+      "MATCH_CANONICAL:CBBG-0191849": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 14,
+      "NOT_APPLICABLE": 46,
+      "USE_SOURCE": 108,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "cf2706f83515b40bf1370e8aa078d078329e5169775411d4a5c35ee01d51e1df",
+    "decision_count": 232,
+    "path": "/tmp/remote-stage2-proposal-map-mw8c5xwi/recommendation-map.json",
+    "sha256": "7e72bfca96a5369da31ba20909566a17d900d6c33efa5145250802a09915f60f"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-proposal-0014/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0014/recommendation-map.json",
+  "recommendation_map_sha256": "7e72bfca96a5369da31ba20909566a17d900d6c33efa5145250802a09915f60f",
+  "request_id": "st-bonaventure-stage2-proposal-0014",
+  "request_sha256": "78cfd480904c8a5522b08605c6400324a42305ead7ff3c47717b90b6c9eedae6",
+  "runtime_commit_sha": "1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079",
+  "runtime_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+    "tools/onboard_school.py": "15748c45491d772b96e833e1e58f902bd1b5f40d47ced243ee7ef7dc7d5bc332",
+    "tools/onboarding_hardening.py": "5386fb2c02e746b83700ab947fd6334e187b756500d7af5d8df792ea31e36a02",
+    "tools/onboarding_plan.py": "34bac24562cb7e37dc5292e74d41b2cf04ea5dad431d92def0e3d906e6171afc",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "fe55bbb996265eaa750ca46eb8c832eebeaed38ec78c4287759058bc06c3808c",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 26,
+      "public_gap_rows": 533,
+      "reciprocal_only_unknown_site_provenance": 1,
+      "reciprocal_research_accounted_gap": 1,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2618,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 507
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0194555",
+        "CBBG-0194586"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0018764",
+        "CBBG-0036816",
+        "CBBG-0044378",
+        "CBBG-0121975",
+        "CBBG-0133446",
+        "CBBG-0144233",
+        "CBBG-0160945",
+        "CBBG-0163287",
+        "CBBG-0183186",
+        "CBBG-0191558",
+        "CBBG-0193067",
+        "CBBG-0193085"
+      ],
+      "reciprocal_only_unknown_site_provenance": [
+        "CBBG-0184882"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0184882"
+      ],
+      "unknown_site_type": [
+        "CBBG-0164168",
+        "CBBG-0175365",
+        "CBBG-0184882",
+        "CBBG-0192701",
+        "CBBG-0192702",
+        "CBBG-0192703",
+        "CBBG-0192704",
+        "CBBG-0192705",
+        "CBBG-0192706",
+        "CBBG-0192707",
+        "CBBG-0192708",
+        "CBBG-0192709"
+      ]
+    },
+    "history_start_season": "1915-1916",
+    "school_key": "st-bonaventure",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 554,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 26,
+      "postseason_missing_venue": 1,
+      "researched_gap_rows": 554,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 0,
+      "unknown_site_type": 527
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2614
+    },
+    "status": "PASS",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-census-0016/checkpoint-manifest.json",
+  "stage2_authority_sha256": "c004a920fbd294de3fbb98a7d068d29e055b3069c94286978cea70dd7ff54dab",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
+  "target_tree_sha": "703d18b41bfc4e689e98a477789881ed82a70064",
+  "tracked_mutation_proof": {
+    "after_head_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
+    "after_status": "",
+    "after_tree_sha": "703d18b41bfc4e689e98a477789881ed82a70064",
+    "before_head_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
+    "before_status": "",
+    "before_tree_sha": "703d18b41bfc4e689e98a477789881ed82a70064",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

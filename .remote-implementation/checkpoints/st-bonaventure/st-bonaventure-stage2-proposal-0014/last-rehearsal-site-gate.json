@@ -1,0 +1,78 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 26,
+    "public_gap_rows": 533,
+    "reciprocal_only_unknown_site_provenance": 1,
+    "reciprocal_research_accounted_gap": 1,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2618,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 507
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_location": [
+      "CBBG-0194555",
+      "CBBG-0194586"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0018764",
+      "CBBG-0036816",
+      "CBBG-0044378",
+      "CBBG-0121975",
+      "CBBG-0133446",
+      "CBBG-0144233",
+      "CBBG-0160945",
+      "CBBG-0163287",
+      "CBBG-0183186",
+      "CBBG-0191558",
+      "CBBG-0193067",
+      "CBBG-0193085"
+    ],
+    "reciprocal_only_unknown_site_provenance": [
+      "CBBG-0184882"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0184882"
+    ],
+    "unknown_site_type": [
+      "CBBG-0164168",
+      "CBBG-0175365",
+      "CBBG-0184882",
+      "CBBG-0192701",
+      "CBBG-0192702",
+      "CBBG-0192703",
+      "CBBG-0192704",
+      "CBBG-0192705",
+      "CBBG-0192706",
+      "CBBG-0192707",
+      "CBBG-0192708",
+      "CBBG-0192709"
+    ]
+  },
+  "history_start_season": "1915-1916",
+  "school_key": "st-bonaventure",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 554,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 26,
+    "postseason_missing_venue": 1,
+    "researched_gap_rows": 554,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 527
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2614
+  },
+  "status": "PASS",
+  "warnings": []
+}
