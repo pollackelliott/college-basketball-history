@@ -1,15 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-sealed-apply-0001",
+  "request_id": "st-bonaventure-release-readiness-0001",
   "school_key": "st-bonaventure",
-  "operation": "STAGE2_SEALED_APPLY",
-  "previous_control_state_commit": "f7b9f2202c6ba720def20f2e9715f69f4e163bd5",
-  "previous_control_state_sha256": "9371fe73e952cc6b37057e3acc522ecf52024e8ced346207a067f797573f988f",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "1f59638f2c01446f2fa0e4803890124fe5003995",
+  "previous_control_state_sha256": "345f7b6019a68489d217db5fd90e8504cd31a60b2d3b61feb2ecb8694b7fdab7",
   "expected_protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "d68fcf1e3b0a59e9bf3dfda2769852852f4e4e693273a3aed4f6e15fe90a57d2"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "1a7c77260d108a6359222bb62d36b0c486a01d81ff72778acea4ab454125ce58"
+  },
+  "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
+  "release_manifest_sha256": "e1baf73ee6f0b6de05c98c130b63072369019adab8e1d90159b5ac3c96e2c0b0",
   "creation_provenance": {
-    "origin": "ChatGPT",
-    "authorization": "Owner explicitly approved the exact St. Bonaventure Gate 1 package; same approved post-Gate-1 phase continues through transactional sealed apply after fresh-verified cryptographic seal."
+    "origin": "ChatGPT St. Bonaventure serialized Implementation — release preparation",
+    "authorization": "Owner explicitly wrote 'Proceed' after the exact St. Bonaventure sealed-apply successor c9f1eb6886a491b4935c38fcb6e061abb6bab86b independently fresh-verified PASS. This authorizes the next bounded release-preparation/readiness unit only. It does not approve Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or any other-school work."
   },
   "authority": {
     "owner_gate_1": false,
@@ -18,38 +30,19 @@
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": false,
-    "release_production_proof": false,
-    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/st-bonaventure-onboarding",
-  "target_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "fef9400ac336d4372c8c6e36999276a330043d5263dd01f6ecba436bba5adb84"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "831ea7cd4f2ddb86bac2b8fe3fa18248b597128b697a161bf6b5eb95733b3053"
-  },
-  "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
-  "approved_plan_sha256": "cf5a577517017c2ba01bc307491d1980e2db23cbca0e570ac03cdefb7b84017b",
-  "owner_gate_1_approval_sha256": "8235503584fca8191b085626d432e586135a6f4a8b6f0822be85765d1ecc34a2",
-  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
-  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "decision_universe_sha256": "8216be6bddf0523d604fe925282a8e5d458fdbca94329d6745f44c6b79e3b6b5",
-  "recommendation_map_sha256": "218cb8e774de0a073e0b53dc6abf34a44f722749d8d83ca72680891a2bedbd75",
-  "filled_review_sha256": "e0fefaa807cdf309e44e2f4006dcbe23b40e6080753ab0a899687c5c08db1eca",
-  "decision_id_set_sha256": "6c5c9c55ca887761703056f459ee7df77b05436841fa11407b8816c4e43d2fb8"
+  }
 }
