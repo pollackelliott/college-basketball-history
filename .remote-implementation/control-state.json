@@ -329,18 +329,19 @@
     "st-bonaventure-stage2-current-main-refresh-0012",
     "st-bonaventure-stage2-census-0013",
     "st-bonaventure-stage2-proposal-0011",
-    "st-bonaventure-stage2-current-main-refresh-0013"
+    "st-bonaventure-stage2-current-main-refresh-0013",
+    "st-bonaventure-stage2-census-0014"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "38068bc0a069bd67c7e30065c665cd0318d20558",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "st-bonaventure-stage2-census-0014",
+  "active_request_sha256": "826da7e9c636a9f39357b88ee7650d4ed236bb71257f0ea15cfea223c0be2d5d",
+  "active_school_key": "st-bonaventure",
+  "active_target_branch": "data/st-bonaventure-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -677,8 +678,11 @@
     "target_predecessor_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
     "target_sha": "185db38340211debf440179f2247f6b57c0be8b0"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "41955326295",
+  "lock_acquisition_request_commit": "160455b85ea9a0f4c8e6ae1e13f7d3025d02036b",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
