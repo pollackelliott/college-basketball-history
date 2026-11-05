@@ -16,6 +16,9 @@ from integration_freeze_guard import (
 )
 from frozen_venue_authority import (
     FrozenVenueSplitAuthorityError,
+    VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+    VENUE_AUTH_PHASE_MID_RECONCILIATION,
+    VENUE_AUTH_PHASE_PRE_INGEST,
     sealed_post_reconciliation_semantic_delta,
     sealed_pre_ingest_semantic_delta,
 )
@@ -478,7 +481,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 sealed_post_reconciliation_semantic_delta(repo, "example", approved)
 
 
-    def test_runtime_venue_map_uses_final_delta_only_for_post_apply_verification(self):
+    def test_runtime_venue_map_uses_explicit_authentication_phases(self):
         approved = {
             "school_key": "example",
             "approved_plan_hash": "c" * 64,
@@ -517,6 +520,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "site_type": "TEAM_A_HOME",
                 })
             venue_path = repo / "schools" / "example" / "venues.csv"
+
             with patch.object(
                 ingest_school,
                 "load_frozen_venue_split_authority",
@@ -528,11 +532,42 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     venue_path,
                     {},
                     sealed_plan_context=approved,
-                    post_reconciliation_semantics=True,
+                    authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
                 )
             self.assertEqual(
                 loader.call_args.kwargs["allowed_semantic_delta"],
                 {"DATE": {"game_date": "1983-03-11"}},
+            )
+            self.assertEqual(
+                loader.call_args.kwargs["authentication_phase"],
+                VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+            )
+            self.assertIs(
+                loader.call_args.kwargs["sealed_plan_context"],
+                approved,
+            )
+
+            with patch.object(
+                ingest_school,
+                "load_frozen_venue_split_authority",
+                return_value={},
+            ) as loader:
+                ingest_school.load_runtime_venue_metadata_map(
+                    repo,
+                    "example",
+                    venue_path,
+                    {},
+                    sealed_plan_context=approved,
+                    authentication_phase=VENUE_AUTH_PHASE_MID_RECONCILIATION,
+                )
+            self.assertEqual(loader.call_args.kwargs["allowed_semantic_delta"], {})
+            self.assertEqual(
+                loader.call_args.kwargs["authentication_phase"],
+                VENUE_AUTH_PHASE_MID_RECONCILIATION,
+            )
+            self.assertIs(
+                loader.call_args.kwargs["sealed_plan_context"],
+                approved,
             )
 
             with patch.object(
@@ -547,10 +582,12 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     {},
                     sealed_plan_context=approved,
                 )
+            self.assertEqual(loader.call_args.kwargs["allowed_semantic_delta"], {})
             self.assertEqual(
-                loader.call_args.kwargs["allowed_semantic_delta"],
-                {},
+                loader.call_args.kwargs["authentication_phase"],
+                VENUE_AUTH_PHASE_PRE_INGEST,
             )
+            self.assertIsNone(loader.call_args.kwargs["sealed_plan_context"])
 
     def make_map(self):
         directory = tempfile.TemporaryDirectory()
@@ -1407,7 +1444,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 rehearsal / "schools" / "st-bonaventure" / "venues.csv",
                 global_venues,
                 sealed_plan_context=final_approved,
-                post_reconciliation_semantics=True,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
             )
             final_result = ingest_school.resolve_venue_metadata(
                 source_by_id[site_id],
@@ -1443,7 +1480,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     rehearsal / "schools" / "st-bonaventure" / "venues.csv",
                     global_venues,
                     sealed_plan_context=wrong_approved,
-                    post_reconciliation_semantics=True,
+                    authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
                 )
 
             # Unsealed final semantic drift is still fail-closed.
@@ -1463,7 +1500,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     rehearsal / "schools" / "st-bonaventure" / "venues.csv",
                     global_venues,
                     sealed_plan_context=final_approved,
-                    post_reconciliation_semantics=True,
+                    authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
                 )
 
         # An ignored manifest cannot be smuggled across the disposable-copy
@@ -1749,13 +1786,28 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 )
             )
         }
+
+        # Phase A: exact frozen venue bytes + exact pre-ingest source semantics.
+        pre_metadata = ingest_school.load_runtime_venue_metadata_map(
+            repo,
+            school_key,
+            venue_path,
+            global_venues,
+            sealed_plan_context=approved,
+            authentication_phase=VENUE_AUTH_PHASE_PRE_INGEST,
+        )
+        self.assertIn(
+            ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
+            pre_metadata,
+        )
+
         self.assertEqual(
             _apply_sealed_game_site_venue_relationship_patches(repo, approved),
             1,
         )
+        exact_post_bytes = venue_path.read_bytes()
 
-        # The same venue mutation remains forbidden during ordinary pre-ingest
-        # authentication while source semantics are still exactly frozen.
+        # PRE_INGEST must reject the sealed venue suffix.
         with self.assertRaisesRegex(
             FrozenVenueSplitAuthorityError,
             "does not match current venues.csv",
@@ -1766,6 +1818,35 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 venue_path,
                 global_venues,
                 sealed_plan_context=approved,
+                authentication_phase=VENUE_AUTH_PHASE_PRE_INGEST,
+            )
+
+        # Phase B: the real reconciliation call site must accept the exact
+        # GAME_SITE suffix while source semantics are still pre-ingest.
+        metadata, names_by_key = _venue_maps(
+            repo,
+            school_key,
+            approved_plan=approved,
+        )
+        self.assertIn(
+            ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
+            metadata,
+        )
+        self.assertEqual(names_by_key["sealed-arena"], "Sealed Arena")
+
+        # FINAL is intentionally premature here: final source normalizations
+        # have not yet been written.
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "outside the exact sealed post-reconciliation semantic delta",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
             )
 
         # Model the paired final source state produced by reconciliation.
@@ -1778,20 +1859,33 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             writer.writeheader()
             writer.writerows(source_rows)
 
-        # Exact frozen bytes + the exact sealed GAME_SITE suffix are valid only
-        # in final/post-reconciliation authentication. Exercise the real
-        # reconciliation venue-map call site so it cannot regress to PRE_INGEST.
-        metadata, names_by_key = _venue_maps(
+        # MID must now reject the final source semantic state.
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "outside the exact sealed pre-ingest semantic delta",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+                authentication_phase=VENUE_AUTH_PHASE_MID_RECONCILIATION,
+            )
+
+        # Phase C: exact sealed venue suffix + exact final source semantics.
+        final_metadata = ingest_school.load_runtime_venue_metadata_map(
             repo,
             school_key,
-            approved_plan=approved,
+            venue_path,
+            global_venues,
+            sealed_plan_context=approved,
+            authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
         )
         self.assertIn(
             ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
-            metadata,
+            final_metadata,
         )
-        self.assertEqual(names_by_key["sealed-arena"], "Sealed Arena")
-        exact_post_bytes = venue_path.read_bytes()
 
         # A changed frozen row remains forbidden.
         frozen_mutation = bytearray(exact_post_bytes)
@@ -1810,7 +1904,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 venue_path,
                 global_venues,
                 sealed_plan_context=approved,
-                post_reconciliation_semantics=True,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
             )
 
         # An unrelated extra row remains forbidden.
@@ -1835,7 +1929,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 venue_path,
                 global_venues,
                 sealed_plan_context=approved,
-                post_reconciliation_semantics=True,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
             )
 
         # A malformed sealed suffix remains forbidden.
@@ -1854,7 +1948,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 venue_path,
                 global_venues,
                 sealed_plan_context=approved,
-                post_reconciliation_semantics=True,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
             )
 
         # Missing the sealed addition is also forbidden in final-phase auth.
@@ -1869,7 +1963,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 venue_path,
                 global_venues,
                 sealed_plan_context=approved,
-                post_reconciliation_semantics=True,
+                authentication_phase=VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
             )
 
     def test_frozen_split_authority_mismatch_fails_closed(self):
