@@ -208,9 +208,13 @@ fresh census verification queues the ordinary exact-map proposal only when the e
 decision-universe SHA is reproduced exactly. Each child retains its ordinary checkpoint
 and independent verifier.
 
-The same design should then be evaluated for:
+The same design is now implemented for the post-Gate-1 technical chain through
+`STAGE2_GATE1_FILL_TO_APPLY_V1`: explicit owner approval remains the hard boundary, then
+fresh-verified fill -> pre-seal -> seal -> sealed apply is repository-scheduled while each
+ordinary request/checkpoint/verifier remains intact.
 
-- Gate 1 approval -> fill -> pre-seal -> seal -> sealed apply -> verification; and
+The same design should next be evaluated for:
+
 - release readiness -> Preview readiness, where PR creation permissions permit.
 
 Internal checkpoints remain durable. Bundling scheduling must not collapse authority
