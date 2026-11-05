@@ -306,7 +306,7 @@ def build_release_pr_packet(
         "authority_statement": (
             "Exact connector-owned PR creation packet after fresh release "
             "readiness. The school Implementation lane may create or reuse only "
-            "this exact head/base/body PR (using new_pr_title when creating a " 
+            "this exact head/base/body PR (using new_pr_title when creating a "
             "new PR), then queue the bound Preview "
             "verification request. This packet grants no Owner Gate 2, merge, "
             "Production, or tracked mutation authority."
