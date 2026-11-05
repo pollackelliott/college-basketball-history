@@ -1,31 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-release-readiness-0001",
-  "operation": "RELEASE_READINESS",
+  "request_id": "rhode-island-release-preview-verify-0001",
   "school_key": "rhode-island",
-  "previous_control_state_commit": "766fb342ee46b982457f7074b35e0f3821c89e9d",
-  "previous_control_state_sha256": "f04a4eb4310bce131fe4cedb180da70543697dbbb7f65f04e7fa5a21ea7a5302",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "377e93dac7e7e09e0f09b5f3ff3f5c0676e4fc42",
+  "previous_control_state_sha256": "478c88c34bebf96e0219d26868d053893cf60b45d9a21c8cf22c028a3a601784",
   "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "target_branch": "data/rhode-island-onboarding",
   "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/rhode-island/rhode-island-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "531d996976d9bdc7fe4a5645a3bd398185dca9560d8e18a6afa3b632605648d4"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "5187e97328877af7f02475d1b79d5c500c99f2ef79416a11790f645298d17065"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/rhode-island/rhode-island-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "4ab9fd73f506a883a8ae6c8b9f72678acdf9bbc71fb00ad377f2c10f7f88f581"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/rhode-island/rhode-island-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "f0204699244fbe85ea84b8280bedeb67294351f032b8d411c2a1d9f35daf8df3"
   },
   "approved_plan_hash": "a1515391ea08b17acc58ab9ea0847834ffa11b09fca31099270c3a70cb1977ae",
   "release_manifest_sha256": "5e982700968eef2caa26a7ab1b91f2bc2a7adf804f9d237f0d5f7bfeb531182c",
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "rhode-island-release-preview-verify-0001"
-  },
+  "pr_number": 475,
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation — release preparation",
-    "authorization": "Owner explicitly wrote 'Proceed' after the exact Rhode Island sealed-apply successor 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through OWNER_GATE_2_READY. This request is only the read-only RELEASE_READINESS operation and deterministic PR/Preview continuation packet preparation. It grants no Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, unrelated repair, or other-school authority."
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — exact PR-head Preview verification",
+    "authorization": "Owner authorized the Rhode Island release-preparation phase through OWNER_GATE_2_READY. PR #475 was created by the school lane's authorized GitHub connector from the exact fresh-verified release-readiness packet at sealed head 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3. This request is read-only RELEASE_PREVIEW_VERIFY for PR #475 only, bound to the exact fresh-verified readiness authority. No Owner Gate 2 approval, merge, Production, mutation, recovery, or unrelated authority is granted."
   },
   "authority": {
     "owner_gate_1": false,
@@ -43,8 +40,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false
