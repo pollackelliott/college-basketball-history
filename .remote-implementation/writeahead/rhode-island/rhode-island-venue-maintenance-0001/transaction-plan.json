@@ -1,0 +1,351 @@
+{
+  "blockers": [],
+  "fingerprints": {
+    "data/canonical/games.csv": "59d7e95bf70483cb8d84dd0b49d8bc4b4079e2e19f2e6e90c980a4b3b40103d6",
+    "data/evidence/game-assertions.csv": "85e6ae18c2e0a336b7dba258b1628430ab2be62f9e02aa5eee6ff4f1681bfa73",
+    "data/evidence/ncaa-tournament-sites.csv": "eb462cba0e44bc87bcedb6b95aa0aa690a917bf4010263db156b281763851135",
+    "data/reconciliation/venue-identity-maintenance/rhode-island-stage1.json": "a0246089e5709e86127794b6869e2f37b88d3048c762747347fdf932ad9fa8e6",
+    "data/reference/venue-names.csv": "98344788c918f0aeb8ac7776f991d31739007c92d354951a418788fc7fa17cf6",
+    "data/reference/venues.csv": "e334b9624f53a5990698801311823b0bffae85c0db1d692edd1dcc272aad87af",
+    "schools/arizona-state/venues.csv": "56d63f7a246e4afa580e9c72263e502fb04344c967576954d282b8aede305a0e",
+    "schools/boise-state/venues.csv": "2ab119396546084fa6d5aa0ebf9b4a8f85e497a4242e9650b52b40e5f3a8d0a8",
+    "schools/boston-college/venues.csv": "6b83cb9951f7c8fcbad3ee4762ff2a34547ffdf8ad79ecbd61236a7ef7c3099b",
+    "schools/butler/venues.csv": "6b2f82df4ea1f197eb257f631437e721aa220fc723c43457dee7503dc40ef072",
+    "schools/byu/venues.csv": "5fdfb198e2272d7145ebfde7b904d339a8a3ca4a82a58ea411800dd084fff9c8",
+    "schools/california/venues.csv": "996d0e64f3053bd54e16f46ad7e675579e7168f2d1786d491dda71b2e81bf1c6",
+    "schools/central-connecticut/venues.csv": "d8a836f2b99fa9d25bdf707f5f1a4b5491971a33f25e79b9b9162d71f9bb7435",
+    "schools/clemson/venues.csv": "8853f9ebca563610149239a86e2a14ec1ce1812a519a6cb2e29b98473140508b",
+    "schools/colorado-state/venues.csv": "586ae26188082a3a0459d7d07bf19ca51de9a1ce8ffbd3b464d6d51a6e87aac4",
+    "schools/creighton/venues.csv": "67886c30667d018ce8d1f9b0c4d0a1c70ae0022a2179c803d0085539a72db53a",
+    "schools/davidson/venues.csv": "0e8e56948a3578566b7c568236731341c5047fab9540b5e7a1cc675ef01fd28d",
+    "schools/dayton/venues.csv": "999c8e1474820ef23ee64bdc9e32ee28317b6fa16d5f8751fd2457bcd3386502",
+    "schools/depaul/venues.csv": "036d996af6f38d904fa7895a66dc63fa0c8fa3a4b3677cc1fcfcb36a4e307833",
+    "schools/florida-state/venues.csv": "0eb8e4d46dccb7d803cbaf3a141e57abb311ec540858a1d82e444488a03b1dde",
+    "schools/georgetown/venues.csv": "0c6815f368b2f077ff515dbfe1698d6c2e6ba27f71e3d653598a9f7863b03f88",
+    "schools/georgia-tech/venues.csv": "1bb6194074931a47afef0a6393be3b3c3ed844a6245c80fd4f2355d04486454c",
+    "schools/gonzaga/venues.csv": "57e1c7c75e9e188b703e4680d0ab5531736869f67b5cb1b28617d432c9fa9874",
+    "schools/iowa-state/venues.csv": "381761dec73a57bd8f7c3fa05a583fea3e020af9fa699ffe8b66b5772b70aadb",
+    "schools/kansas-state/venues.csv": "2ed677ea25dc3d918ebdff3c348e02c8ce77c82108e572f4aef416495fe292bd",
+    "schools/long-island-university/venues.csv": "41081cabca4d7fc8e7fa8239c1379ab7acffb00d6ad193eff7360e63f5a96e76",
+    "schools/marquette/venues.csv": "4730bac5423d7f4b0a05917514d3846e433c823861b91afbd8c735afb77cf04c",
+    "schools/miami/venues.csv": "ebfeade34358f24f33abc43a54ac7e90eff82a42e06b091a6e9e9960bab2748a",
+    "schools/missouri/venues.csv": "a1735faa6eeb364a24a97fcd1add909661fbd17fd8d2c301700efc4f0ee42670",
+    "schools/nc-state/venues.csv": "7d09bce7de3b909f1bde747268e827445e9d3678ef7b5098f5c53ff9845157f0",
+    "schools/notre-dame/venues.csv": "de6631d4118a6a920b7334a64305b9a13fab2d333e7381f860822f86f2cc9c9e",
+    "schools/oklahoma-state/venues.csv": "0b25c6e8c2fe5fc4230cd1e28c9ca05a175eb55701339f6602b75caf2d219e87",
+    "schools/oregon-state/venues.csv": "6e3550500d12663696c8580cd0e86b1edb7b2ea3e6058b2fe66a7c5f2265aed6",
+    "schools/seton-hall/venues.csv": "8656080fa39a7e62e8ed8e37cb91f660c5fb0b2f3115310c20ac31e032ee1e45",
+    "schools/south-carolina/venues.csv": "5cd12d4d9c727323f2f125452a5f7477f0b4b7fc7d4f980365a4edcd7769f0a6",
+    "schools/st-bonaventure/venues.csv": "cdf8dae4d0f0a5f951af59a9b52f28c6c29edda7953952f8eb5aacadb0619c03",
+    "schools/st-john-s/venues.csv": "faf45e6c6d8f7bc351eb992a63d5d0d45fb2c8aff6b591fd1b75cad2649c2062",
+    "schools/texas-tech/venues.csv": "e4c542dd0d85eca151f68021516c92eadcd224a0ae406bf65e5b79b643eb1b67",
+    "schools/ucf/venues.csv": "37f51cd4d6ed6aee7ab781e263aaaa9409ad3f6d63b6e9f26366fd2169350f20",
+    "schools/utah-state/venues.csv": "096c2dce256a7d7330dfeb3f1cc366cbdfa00edba56e00cf64a9f6a4f7f37152",
+    "schools/villanova/venues.csv": "5ed64ee0315c47a167030bcc24f0709f104fe45d507e93ffcf1cd4138fa6a69a",
+    "schools/virginia-tech/venues.csv": "b4c6adc70f1872654e7253c46932ca1bf3e51e266b5260aa3c79669d4632708a",
+    "schools/wake-forest/venues.csv": "163a94ff05940f4f781b4d95a53263656fab830f8c7e89e85db24f77cc1b7217",
+    "schools/washington-state/venues.csv": "e7ee2a2e54ea47d979165b7ff8b1555388f7e5afd75a0123044864a91da9ad8e",
+    "schools/west-virginia/venues.csv": "fc1e27e0345e4e2dacd820568c86735998d24620e88fe895e1536789f2bc7edf",
+    "schools/xavier/venues.csv": "61fbe877d7033be80135789990e4d9d5e28362e4fcf0cde8e6cf63590802652e"
+  },
+  "geography_corrections": [
+    {
+      "canonical_rows": 147,
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "from_city": "Orlando",
+      "from_state": "FL",
+      "ncaa_evidence_rows": 0,
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 authorization: normalize the surviving HP Field House physical identity to the supported Kissimmee, FL registry geography before duplicate merge.",
+      "school_files": [
+        {
+          "path": "schools/arizona-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/boise-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/boston-college/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/butler/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/byu/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/california/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/clemson/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/creighton/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/davidson/venues.csv",
+          "row_count": 2
+        },
+        {
+          "path": "schools/dayton/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/depaul/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/florida-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/georgetown/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/georgia-tech/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/gonzaga/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/iowa-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/kansas-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/marquette/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/miami/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/missouri/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/nc-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/notre-dame/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/oklahoma-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/oregon-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/seton-hall/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/south-carolina/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/st-john-s/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/texas-tech/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/ucf/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/villanova/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/virginia-tech/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/wake-forest/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/washington-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/west-virginia/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/xavier/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 36,
+      "source_assertion_rows": 0,
+      "to_city": "Kissimmee",
+      "to_state": "FL",
+      "venue_id": "VEN-000084",
+      "venue_key": "hp-field-house"
+    },
+    {
+      "canonical_rows": 11,
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "from_city": "Montego Bay",
+      "from_state": "JM",
+      "ncaa_evidence_rows": 0,
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 authorization: normalize the surviving Montego Bay Convention Centre registry jurisdiction from JM to Jamaica before duplicate merge.",
+      "school_files": [
+        {
+          "path": "schools/central-connecticut/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/colorado-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/florida-state/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/georgetown/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/wake-forest/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 5,
+      "source_assertion_rows": 0,
+      "to_city": "Montego Bay",
+      "to_state": "Jamaica",
+      "venue_id": "VEN-000709",
+      "venue_key": "montego-bay-convention-center"
+    },
+    {
+      "canonical_rows": 2,
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "from_city": "Montego Bay",
+      "from_state": "Saint James",
+      "ncaa_evidence_rows": 0,
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 authorization: normalize the duplicate Montego Bay Convention Centre registry jurisdiction from Saint James to Jamaica before duplicate merge.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "source_assertion_rows": 0,
+      "to_city": "Montego Bay",
+      "to_state": "Jamaica",
+      "venue_id": "VEN-000957",
+      "venue_key": "montego-bay-convention-centre"
+    }
+  ],
+  "git_head": "797f3d87fc5b50585c63aa548d6029b9828eb461",
+  "merges": [
+    {
+      "absorbed_venue_id": "VEN-000990",
+      "absorbed_venue_key": "state-farm-field-house",
+      "assertion_rows": 0,
+      "canonical_rows": 5,
+      "city": "Kissimmee",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 5,
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 shared-venue maintenance authorization. Preserve VEN-000084 / hp-field-house as the physical identity after exact registry geography normalization from Orlando, FL to Kissimmee, FL; retire VEN-000990 / state-farm-field-house and preserve/reassign its legitimate venue-name evidence under the survivor.",
+      "school_files": [
+        {
+          "path": "schools/dayton/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/st-bonaventure/venues.csv",
+          "row_count": 1
+        },
+        {
+          "path": "schools/utah-state/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 3,
+      "state": "FL",
+      "survivor_venue_id": "VEN-000084",
+      "survivor_venue_key": "hp-field-house",
+      "venue_name_rows": 2
+    },
+    {
+      "absorbed_venue_id": "VEN-000957",
+      "absorbed_venue_key": "montego-bay-convention-centre",
+      "assertion_rows": 0,
+      "canonical_rows": 2,
+      "city": "Montego Bay",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 2,
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 shared-venue maintenance authorization. Normalize both Montego Bay Convention Centre registry representations to Montego Bay, Jamaica, preserve VEN-000709 / montego-bay-convention-center as the physical identity, retire VEN-000957 / montego-bay-convention-centre, and preserve legitimate alternate spelling/name evidence without rewriting literal source evidence.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "Jamaica",
+      "survivor_venue_id": "VEN-000709",
+      "survivor_venue_key": "montego-bay-convention-center",
+      "venue_name_rows": 1
+    },
+    {
+      "absorbed_venue_id": "VEN-000966",
+      "absorbed_venue_key": "madison-square-garden-third",
+      "assertion_rows": 0,
+      "canonical_rows": 130,
+      "city": "New York",
+      "expected_canonical_rows": null,
+      "expected_school_rows": null,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 130,
+      "resolution_basis": "Control Center explicit Rhode Island Stage 1 shared-venue maintenance authorization. Preserve VEN-000123 / madison-square-garden-1925 as Madison Square Garden III (1925-1968), retire duplicate VEN-000966 / madison-square-garden-third, preserve/reassign legitimate historical naming/source evidence, and leave physically distinct VEN-000124 / madison-square-garden-1968 untouched.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "NY",
+      "survivor_venue_id": "VEN-000123",
+      "survivor_venue_key": "madison-square-garden-1925",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "d87a3004cc64e6afcb315ced594aed76ac225413a08fef693a677ab4ffcd4a08",
+  "schema_version": 1,
+  "spec": "data/reconciliation/venue-identity-maintenance/rhode-island-stage1.json"
+}

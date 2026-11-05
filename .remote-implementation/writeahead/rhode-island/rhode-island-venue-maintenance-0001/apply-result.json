@@ -1,0 +1,16 @@
+{
+  "assertion_rows_updated": 0,
+  "canonical_geography_rows_updated": 160,
+  "canonical_identity_rows_updated": 137,
+  "canonical_rows_updated": 297,
+  "ncaa_evidence_rows_updated": 0,
+  "plan_sha256": "d87a3004cc64e6afcb315ced594aed76ac225413a08fef693a677ab4ffcd4a08",
+  "provenance_markers_updated": 137,
+  "school_geography_rows_updated": 42,
+  "school_identity_rows_updated": 5,
+  "school_rows_updated": 47,
+  "site_files_refreshed": 71,
+  "venue_geography_corrections": 3,
+  "venue_name_rows_reassigned": 4,
+  "venues_retired": 3
+}
