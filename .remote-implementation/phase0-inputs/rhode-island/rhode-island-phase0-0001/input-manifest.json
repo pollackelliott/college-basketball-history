@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "request_id": "rhode-island-phase0-0001",
+  "research_checkpoint_sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
+  "research_member_sha256": {
+    "conferences.csv": "fe88d4f190184b2921f40e6a8df4ef08eb1b2a449850c7fe28cdd86fc198e9ac",
+    "notes.md": "516c2658411ce60243ba2e2804eb93e7d9365e3b82858a2334ae72c96d190b7e",
+    "opponents.csv": "3b65fa73eab712aa40b7484145fccb369e7e31fa7580c1f2b711d45a538275f7",
+    "source-games.csv": "71600bc4e40081c3c5812ccb10d61668dc4670c7d6d9fab5da5707121ff9fc5e",
+    "source-notes.md": "7654b3c7f14743966900f3779ae90724ce6aa7be33c17ded677b9d75d952f709",
+    "venues.csv": "25f62db60bc2e474d2ed7438f354459594ecd35d054c31f923fbb8bc6df1ed20"
+  },
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "sidecars": {
+    "stage1-reconciliation.json": "fecd643ce3a223d15c37924da6866d2b9e991e5244febcbd639ce4cd7ea04943"
+  },
+  "stage1_status": "PASS"
+}
