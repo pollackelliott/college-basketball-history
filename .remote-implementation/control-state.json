@@ -366,15 +366,15 @@
   "active_lock_commit": "a7e6e0d56c8e1172959ae5e96400a1f061d0f1c1",
   "active_lock_owner": "github-actions:42105575310:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "active_prepared_tree_sha": "e260c606f33dead1969fd4216da0577db8b15f61",
   "active_request_id": "rhode-island-stage2-sealed-apply-0001",
   "active_request_sha256": "6237968e8cd8791bad3ebae64f7309f61531ccb99f666b522fa2d6471a9206c6",
   "active_school_key": "rhode-island",
   "active_target_branch": "data/rhode-island-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/rhode-island/rhode-island-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "bc1615430ef36fbeb7d29791b450c32d18d9efaa17bc8c4f516ac02ba0660b05",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -755,5 +755,5 @@
   "lock_acquisition_request_commit": "475cb9f39b163c0daa3e5a82f415c8a17e74e1c9",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
