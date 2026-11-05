@@ -20,6 +20,7 @@ from onboarding_hardening import (  # noqa: E402
     frozen_home_exception_keys,
 )
 from stage_research_portfolio import rebase_venues  # noqa: E402
+from onboard_school import allowed_apply_path  # noqa: E402
 
 
 REVIEW_FIELDS = [
@@ -40,6 +41,7 @@ REVIEW_FIELDS = [
     "resolution_basis",
     "canonical_patch_json",
     "source_patch_json",
+    "venue_relationship_patch_json",
     "notes",
 ]
 
@@ -1058,6 +1060,12 @@ class ReviewAutomationTests(unittest.TestCase):
                                 "overtime_periods": "1",
                             }
                         },
+                        "venue_relationship_patch_by_decision": {
+                            target_id: {
+                                "venue_id": "VEN-000999",
+                                "venue_key": "example-arena",
+                            }
+                        },
                         "notes_by_decision": {
                             target_id: (
                                 "Owner-authorized historical correction discovered "
@@ -1085,10 +1093,39 @@ class ReviewAutomationTests(unittest.TestCase):
                 json.loads(target["canonical_patch_json"]),
                 {"overtime_periods": "1"},
             )
+            self.assertEqual(
+                json.loads(target["venue_relationship_patch_json"]),
+                {"venue_id": "VEN-000999", "venue_key": "example-arena"},
+            )
             self.assertIn(
                 "Owner-authorized historical correction",
                 target["notes"],
             )
+
+
+
+class SealedVenueRelationshipAllowListTests(unittest.TestCase):
+    def test_target_venues_path_requires_explicit_sealed_relationship_authority(self):
+        path = "schools/test/venues.csv"
+        approved_hash = "a" * 64
+        self.assertFalse(allowed_apply_path(path, "test", approved_hash))
+        self.assertTrue(
+            allowed_apply_path(
+                path,
+                "test",
+                approved_hash,
+                allow_school_venues=True,
+            )
+        )
+        self.assertFalse(
+            allowed_apply_path(
+                "schools/other/venues.csv",
+                "test",
+                approved_hash,
+                allow_school_venues=True,
+            )
+        )
+
 
 
 class VenueRebaseTests(unittest.TestCase):
