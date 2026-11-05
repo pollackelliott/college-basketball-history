@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "prepared_parent_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "prepared_tree_sha": "c970327519059d81388839577e6cab2f769087c1",
+  "protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "rhode-island-phase0-0001",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "5907135a31e0be43885f09c257b71ab5754835c9"
+}
