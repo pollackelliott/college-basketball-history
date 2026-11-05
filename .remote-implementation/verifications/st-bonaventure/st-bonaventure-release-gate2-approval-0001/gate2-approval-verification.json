@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "1e3270195c7129785fb7aa9a70b47c854a428d4ff7c4deb54d3e62f8adc6cbf5",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "pr_number": 465,
+  "preview_deployment_id": 7566270288,
+  "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "st-bonaventure-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "status": "PASS"
+}
