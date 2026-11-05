@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-proposal-0009",
+  "request_id": "st-bonaventure-stage2-proposal-0010",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "b4b8c943ad85b38acbb051c2402a712eef7c31bc",
-  "previous_control_state_sha256": "d0c549b1a6aa80bce26e42770732f4cae7001daeff5e55ec0891f0071f5a70ad",
+  "previous_control_state_commit": "a2bb07b6fddf82e51fcfbf41a3776470f7416b4a",
+  "previous_control_state_sha256": "c5b798bd19acde8c1739f000ffe5159b3fe4a4a12b5f17e9a95bf76428832389",
   "expected_protected_main_sha": "0c66967db740fb935b1f11f17b223b6a19d8a858",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "c505386c0f8e37a192156f19eb40e824cda45a6a",
@@ -17,12 +17,12 @@
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
   "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
   "recommendation_map": {
-    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0008/recommendation-map.json",
-    "sha256": "783bc063ae99d949db8c6a7fa52aeac99ea2455a00528825ba7a75bacaa7e28a"
+    "path": ".remote-implementation/requests/st-bonaventure-stage2-proposal-0010/recommendation-map.json",
+    "sha256": "df8355ef05c8d83be5d2002e8432e4fff3ca9c873652ff6b12dea16ac14df351"
   },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — exact-map proposal rehearsal after independently verified PR #458 refresh -0011 and fresh census -0012",
-    "authorization": "Same already-authorized Stage 2 phase. Fresh census -0012 independently regenerated 232 decisions / 0 blockers / 0 warnings on protected main 0c66967db740fb935b1f11f17b223b6a19d8a858 and refreshed target c505386c0f8e37a192156f19eb40e824cda45a6a, with exact decision-universe SHA 7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6 and fresh verification PASS. The settled recommendation-map bytes are reused unchanged because their bound universe is exactly identical. This request is the production-equivalent test of PR #458. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included. If this proposal exposes another defect in the same final-source-semantics/target_no_op family, STOP and return to Control Center."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — four-row postseason site-accounting repair proposal after proposal -0009",
+    "authorization": "Same already-authorized Stage 2 phase. Proposal -0009 passed the repaired final-source-semantics target_no_op boundary and exposed exactly four later site-completeness blockers, all rows whose frozen structured game_type was stale REGULAR_SEASON but whose accepted map normalizes to CBI/NIT postseason. Official host-school athletics sources identify exact sites: UCF Arena (Orlando, FL) on 2011-03-16; CU Events Center (Boulder, CO) on 2022-03-15; Lloyd Noble Center (Norman, OK) on 2022-03-20; John Paul Jones Arena (Charlottesville, VA) on 2022-03-22. This proposal changes only the recommendation map by attaching exact curated venue/city/state source patches to those four existing game-type decisions; the 232-decision universe, all existing decision actions, raw_text, Integration Freeze, target branch, and protected main remain unchanged. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
   },
   "authority": {
     "phase0": false,
