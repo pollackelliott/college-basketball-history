@@ -190,7 +190,13 @@ def changed_paths(before: dict[str, str], after: dict[str, str]) -> list[str]:
     )
 
 
-def allowed_apply_path(path: str, school_key: str, approved_hash: str) -> bool:
+def allowed_apply_path(
+    path: str,
+    school_key: str,
+    approved_hash: str,
+    *,
+    allow_school_venues: bool = False,
+) -> bool:
     exact = {
         "data/canonical/games.csv",
         "data/evidence/game-assertions.csv",
@@ -201,6 +207,8 @@ def allowed_apply_path(path: str, school_key: str, approved_hash: str) -> bool:
         f"schools/{school_key}/source-games.csv",
         f"data/reconciliation/onboarding-decisions/{school_key}-{approved_hash[:12]}.json",
     }
+    if allow_school_venues:
+        exact.add(f"schools/{school_key}/venues.csv")
     return path in exact or path.startswith("site/data/")
 
 
@@ -1727,7 +1735,15 @@ def transactional_apply(
         forbidden = [
             path
             for path in changed
-            if not allowed_apply_path(path, approved["school_key"], approved["approved_plan_hash"])
+            if not allowed_apply_path(
+                path,
+                approved["school_key"],
+                approved["approved_plan_hash"],
+                allow_school_venues=any(
+                    bool(item.get("venue_relationship_patch"))
+                    for item in approved.get("decisions", [])
+                ),
+            )
         ]
         if forbidden:
             raise WorkflowError(

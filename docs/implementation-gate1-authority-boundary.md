@@ -118,6 +118,12 @@ The compact decision map may now include:
       "overtime_periods": "1"
     }
   },
+  "venue_relationship_patch_by_decision": {
+    "DISCREPANCY-...": {
+      "venue_id": "VEN-000123",
+      "venue_key": "existing-global-venue"
+    }
+  },
   "notes_by_decision": {
     "DISCREPANCY-...": "Evidence basis / explanatory note."
   }
@@ -125,6 +131,16 @@ The compact decision map may now include:
 ```
 
 Use these fields when Implementation discovers a supported historical correction after freeze. Rehearsal proves the exact proposed outcome before owner approval without mutating the tracked frozen package.
+
+A `venue_relationship_patch_by_decision` is narrower than a global venue mutation. It may
+add one decision-bound `GAME_SITE` relationship to the target school's `venues.csv` only
+when the physical `venue_id` / `venue_key` pair already exists in the protected-main
+global venue registry, the paired source patch supplies the exact registered venue name and
+matching city/state, and the reviewed source game has an exact date. The sealed transaction
+derives the local relationship row from that authenticated global identity and exact game;
+the patch cannot create a new global venue, infer H/A/N, reuse an ambiguous name, or mutate
+an unrelated relationship. The target `venues.csv` path remains outside the normal sealed
+apply allow-list unless the approved plan contains such a nonempty sealed relationship patch.
 
 The sealed transactional apply remains the authority that performs an approved source/canonical historical patch.
 

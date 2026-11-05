@@ -77,7 +77,7 @@ from site_completeness import (
     has_supported_foreign_locality,
     researched_unresolved_home_venue,
 )
-from venue_reference import load_global_venue_reference
+from venue_reference import load_global_venue_reference, normalized_venue_name
 from remediate_source_scoped_opponent_identity import canonical_view as correction_canonical_view
 
 
@@ -110,6 +110,7 @@ REVIEW_COLUMNS = (
     "resolution_basis",
     "canonical_patch_json",
     "source_patch_json",
+    "venue_relationship_patch_json",
     "notes",
 )
 
@@ -225,6 +226,8 @@ CANONICAL_PATCH_FIELDS = {
     "canonical_status",
     "notes",
 }
+VENUE_RELATIONSHIP_PATCH_FIELDS = {"venue_id", "venue_key"}
+
 SOURCE_RESEARCH_PATCH_FIELDS = (
     "site_research_status",
     "site_research_basis",
@@ -3976,6 +3979,240 @@ def _allowed_decision(item: dict[str, Any], decision: str) -> bool:
     return decision in allowed
 
 
+
+def _validate_game_site_venue_relationship_patch(
+    repo: Path,
+    school_key: str,
+    item: dict[str, Any],
+    source_patch: dict[str, str],
+    relationship_patch: dict[str, str],
+) -> dict[str, str]:
+    """Authenticate one sealed GAME_SITE relationship against existing global truth."""
+
+    decision_id = str(item.get("decision_id", "")).strip() or "[unknown decision]"
+    if item.get("category") not in {"discrepancy", "conditional_discrepancy"}:
+        raise WorkflowError(
+            f"{decision_id}: venue relationship patches are valid only on "
+            "discrepancy decisions"
+        )
+    if str(item.get("decision", "")).strip() != "NORMALIZE_SOURCE_TO_CANONICAL":
+        raise WorkflowError(
+            f"{decision_id}: venue relationship patch requires "
+            "NORMALIZE_SOURCE_TO_CANONICAL"
+        )
+    if set(relationship_patch) != VENUE_RELATIONSHIP_PATCH_FIELDS:
+        raise WorkflowError(
+            f"{decision_id}: venue relationship patch requires exactly venue_id "
+            "and venue_key"
+        )
+
+    source_id = str(item.get("source_game_id", "")).strip()
+    game_date = str(item.get("source_game_date", "")).strip()
+    if not source_id or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", game_date):
+        raise WorkflowError(
+            f"{decision_id}: GAME_SITE relationship requires one source game "
+            "with an exact source_game_date"
+        )
+    try:
+        dt.date.fromisoformat(game_date)
+    except ValueError as exc:
+        raise WorkflowError(
+            f"{decision_id}: invalid exact source_game_date {game_date!r}"
+        ) from exc
+
+    required_source_fields = {"curated_venue_name", "city", "state"}
+    if not required_source_fields <= set(source_patch):
+        raise WorkflowError(
+            f"{decision_id}: venue relationship patch requires paired source "
+            "curated_venue_name, city, and state"
+        )
+    venue_name = str(source_patch.get("curated_venue_name", "")).strip()
+    city = str(source_patch.get("city", "")).strip()
+    state = str(source_patch.get("state", "")).strip()
+    if not venue_name or not city or not state:
+        raise WorkflowError(
+            f"{decision_id}: paired source venue relationship fields must be nonblank"
+        )
+
+    venues_by_id, venues_by_key, name_ids = load_global_venue_reference(repo)
+    venue_id = str(relationship_patch.get("venue_id", "")).strip()
+    venue_key = str(relationship_patch.get("venue_key", "")).strip()
+    global_by_id = venues_by_id.get(venue_id)
+    global_by_key = venues_by_key.get(venue_key)
+    if (
+        global_by_id is None
+        or global_by_key is None
+        or global_by_id.get("venue_key", "").strip() != venue_key
+        or global_by_key.get("venue_id", "").strip() != venue_id
+    ):
+        raise WorkflowError(
+            f"{decision_id}: venue relationship must reference one existing "
+            "global venue_id/venue_key pair"
+        )
+    if (
+        global_by_id.get("city", "").strip() != city
+        or global_by_id.get("state", "").strip() != state
+    ):
+        raise WorkflowError(
+            f"{decision_id}: source venue locality does not match the existing "
+            "global venue identity"
+        )
+
+    registered_ids = name_ids.get(normalized_venue_name(venue_name), set())
+    if registered_ids != {venue_id}:
+        raise WorkflowError(
+            f"{decision_id}: source venue name {venue_name!r} does not resolve "
+            "uniquely to the sealed global venue identity"
+        )
+
+    venue_path = repo / "schools" / school_key / "venues.csv"
+    local_rows = read_csv(venue_path)
+    if any(
+        row.get("venue_id", "").strip() == venue_id
+        or row.get("venue_key", "").strip() == venue_key
+        for row in local_rows
+    ):
+        raise WorkflowError(
+            f"{decision_id}: venue relationship patch is redundant with an "
+            "existing target-school venue identity"
+        )
+
+    folded_name = normalized_venue_name(venue_name)
+    for row in local_rows:
+        local_names = [row.get("canonical_name", "").strip()]
+        local_names.extend(
+            alias.strip()
+            for alias in row.get("aliases", "").split(";")
+            if alias.strip()
+        )
+        if (
+            any(normalized_venue_name(name) == folded_name for name in local_names if name)
+            and row.get("venue_id", "").strip() != venue_id
+        ):
+            raise WorkflowError(
+                f"{decision_id}: source venue name already maps to a different "
+                "target-school venue identity"
+            )
+
+    return dict(global_by_id)
+
+
+def _apply_sealed_game_site_venue_relationship_patches(
+    repo: Path,
+    approved: dict[str, Any],
+) -> int:
+    """Append only owner-sealed one-game relationships to the target venue portfolio."""
+
+    school_key = str(approved.get("school_key", "")).strip()
+    items = [
+        item
+        for item in approved.get("decisions", [])
+        if item.get("venue_relationship_patch")
+    ]
+    if not items:
+        return 0
+
+    identities = [
+        (
+            str(item["venue_relationship_patch"].get("venue_id", "")).strip(),
+            str(item["venue_relationship_patch"].get("venue_key", "")).strip(),
+        )
+        for item in items
+    ]
+    if len(identities) != len(set(identities)):
+        raise WorkflowError(
+            "one sealed GAME_SITE relationship per global venue identity is required"
+        )
+
+    venue_path = repo / "schools" / school_key / "venues.csv"
+    venue_fields, venue_rows = read_csv_table(venue_path)
+    required_columns = {
+        "source_program_key",
+        "venue_key",
+        "venue_id",
+        "canonical_name",
+        "aliases",
+        "city",
+        "state",
+        "games_currently_assigned",
+        "first_assigned_game",
+        "last_assigned_game",
+        "relationship_type",
+        "site_rule",
+        "source_basis",
+        "notes",
+    }
+    missing = sorted(required_columns - set(venue_fields))
+    if missing:
+        raise WorkflowError(
+            "target venue portfolio cannot carry sealed GAME_SITE relationship; "
+            "missing columns: " + ", ".join(missing)
+        )
+
+    additions: list[dict[str, str]] = []
+    for item in items:
+        relationship_patch = {
+            key: str(value)
+            for key, value in dict(item.get("venue_relationship_patch", {})).items()
+        }
+        source_patch = {
+            key: str(value)
+            for key, value in dict(item.get("source_patch", {})).items()
+        }
+        global_venue = _validate_game_site_venue_relationship_patch(
+            repo,
+            school_key,
+            item,
+            source_patch,
+            relationship_patch,
+        )
+        game_date = str(item.get("source_game_date", "")).strip()
+        venue_name = source_patch["curated_venue_name"].strip()
+        display_name = global_venue.get("display_name", "").strip()
+        row = {field: "" for field in venue_fields}
+        row.update(
+            {
+                "source_program_key": school_key,
+                "venue_key": relationship_patch["venue_key"].strip(),
+                "venue_id": relationship_patch["venue_id"].strip(),
+                "canonical_name": display_name,
+                "aliases": (
+                    venue_name
+                    if normalized_venue_name(venue_name)
+                    != normalized_venue_name(display_name)
+                    else ""
+                ),
+                "city": global_venue.get("city", "").strip(),
+                "state": global_venue.get("state", "").strip(),
+                "games_currently_assigned": "1",
+                "first_assigned_game": game_date,
+                "last_assigned_game": game_date,
+                "relationship_type": "GAME_SITE",
+                "site_rule": (
+                    "Venue identity never establishes H/A/N; relationship applies "
+                    "only to the exact sealed source game."
+                ),
+                "source_basis": str(item.get("resolution_basis", "")).strip(),
+                "notes": (
+                    "Owner-sealed Gate 1 GAME_SITE relationship for "
+                    f"{item.get('source_game_id', '')}; reuses existing global "
+                    f"{relationship_patch['venue_key']}/"
+                    f"{relationship_patch['venue_id']}."
+                ),
+            }
+        )
+        if "known_opened" in row:
+            row["known_opened"] = global_venue.get("opened", "").strip()
+        if "known_closed" in row:
+            row["known_closed"] = global_venue.get("closed", "").strip()
+        if "venue_date_precision" in row:
+            row["venue_date_precision"] = global_venue.get("date_precision", "").strip()
+        additions.append(row)
+
+    write_csv_preserving_format(venue_path, venue_fields, venue_rows + additions)
+    return len(additions)
+
+
 def approve_plan(
     repo: Path,
     plan_path: Path,
@@ -4056,6 +4293,7 @@ def approve_plan(
                         ),
                         "canonical_patch": {},
                         "source_patch": {},
+                        "venue_relationship_patch": {},
                     })
                     sealed_items.append(sealed)
                     continue
@@ -4073,6 +4311,7 @@ def approve_plan(
                         ),
                         "canonical_patch": {},
                         "source_patch": {},
+                        "venue_relationship_patch": {},
                     }
                 )
                 sealed_items.append(sealed)
@@ -4095,6 +4334,20 @@ def approve_plan(
             review.get("source_patch_json", "{}"),
             f"{decision_id} source_patch_json",
         )
+        venue_relationship_patch = _parse_patch(
+            review.get("venue_relationship_patch_json", "{}"),
+            f"{decision_id} venue_relationship_patch_json",
+        )
+        if venue_relationship_patch:
+            validation_item = dict(item)
+            validation_item["decision"] = decision
+            _validate_game_site_venue_relationship_patch(
+                repo,
+                plan["school_key"],
+                validation_item,
+                source_patch,
+                venue_relationship_patch,
+            )
         if item.get("category") == "accomplishments":
             unknown_canonical = sorted(
                 set(canonical_patch) - ACCOMPLISHMENT_PATCH_FIELDS
@@ -4467,7 +4720,7 @@ def approve_plan(
                 f"{decision_id}: forbidden source patch fields: {', '.join(unknown_source)}"
             )
         if (
-            (canonical_patch or source_patch)
+            (canonical_patch or source_patch or venue_relationship_patch)
             and item.get("category") not in PATCH_CAPABLE_DECISION_CATEGORIES
         ):
             raise WorkflowError(
@@ -4481,6 +4734,7 @@ def approve_plan(
                 "resolution_basis": basis,
                 "canonical_patch": canonical_patch,
                 "source_patch": source_patch,
+                "venue_relationship_patch": venue_relationship_patch,
                 "notes": review.get("notes", item.get("notes", "")).strip(),
             }
         )
@@ -6145,6 +6399,10 @@ def apply_reconciliation_decisions(
     discrepancies_path = repo / "data/reconciliation/discrepancies.csv"
     source_path = repo / "schools" / school_key / "source-games.csv"
 
+    venue_relationship_patch_count = (
+        _apply_sealed_game_site_venue_relationship_patches(repo, approved)
+    )
+
     canonical_fields, canonical_rows = read_csv_table(canonical_path)
     assertion_fields, assertion_rows = read_csv_table(assertions_path)
     discrepancy_fields, discrepancy_rows = read_csv_table(discrepancies_path)
@@ -6178,6 +6436,8 @@ def apply_reconciliation_decisions(
         "venue_metadata_by_program": {},
     }
     counts = Counter()
+    if venue_relationship_patch_count:
+        counts["venue_relationship_patches"] = venue_relationship_patch_count
     changed_field_bases: dict[tuple[str, str], str] = {}
     touched_canonical_ids: set[str] = set()
     touched_source_ids: set[str] = set()
