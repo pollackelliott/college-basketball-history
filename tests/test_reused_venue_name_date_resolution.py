@@ -1585,12 +1585,18 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
                 writer.writerow({
                     "source_program_key": "st-bonaventure",
-                    "venue_key": "unsealed-arena",
-                    "venue_id": "VEN-UNSEALED",
-                    "canonical_name": "Unsealed Arena",
-                    "city": "Elsewhere",
+                    "venue_key": "example-arena",
+                    "venue_id": "VEN-000999",
+                    "canonical_name": "Example Arena",
+                    "city": "Example City",
                     "state": "EX",
+                    "games_currently_assigned": "1",
+                    "first_assigned_game": "1983-04-01",
+                    "last_assigned_game": "1983-04-01",
                     "relationship_type": "GAME_SITE",
+                    "site_rule": "Unsealed duplicate fixture row.",
+                    "source_basis": "fixture",
+                    "notes": "unsealed duplicate",
                 })
             with self.assertRaisesRegex(
                 FrozenVenueSplitAuthorityError,
@@ -1615,7 +1621,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             venue_rows_runtime = [
                 row
                 for row in venue_rows_runtime
-                if row.get("venue_id", "") != "VEN-UNSEALED"
+                if row.get("notes", "") != "unsealed duplicate"
             ]
             venue_rows_runtime[0]["notes"] = "tampered frozen row"
             with venue_path.open("w", encoding="utf-8", newline="") as handle:
