@@ -1,0 +1,73 @@
+{
+  "allowed_paths": [
+    "schools/rhode-island/opponents.csv",
+    "schools/rhode-island/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/rhode-island/opponents.csv": "4b7a0622d10e82265650bb91934159b26b08faa729f3dc5d484f70d5d176634f",
+    "schools/rhode-island/source-games.csv": "18d25736a7ff71bbaac47612c67cc3409828f4d5a77a2a7f112ebb4d6fca0885"
+  },
+  "changed_paths": [
+    "schools/rhode-island/opponents.csv",
+    "schools/rhode-island/source-games.csv"
+  ],
+  "commit_message": "Normalize rhode-island historical opponent display representation",
+  "expected_blocker_keys": [
+    "baltimore",
+    "loyola-new-orleans",
+    "pratt",
+    "rpi",
+    "saint-anselm",
+    "saint-michaels",
+    "springfield",
+    "st-thomas-fl",
+    "wayne-state-mi"
+  ],
+  "expected_target_predecessor_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "field_level_proof_sha256": "bb8619480500fe8eace1fd5f2f15e31586038192bb4c60aca78155fb1b4704d4",
+  "global_lock_commit": "e088539aa3eefca90402ef239af9ad2be982c376",
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "6af9c5b1863255badb3ba290bc79b74034b4ab5ab59ad802d9a682375d3bdb78",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "prepared_parent_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "prepared_tree_sha": "5d49944e37e3b160a65f7e912e0a17280458862e",
+  "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "repository_validation": "PASS",
+  "request_id": "rhode-island-stage2-opponent-display-normalize-0001",
+  "request_sha256": "4d89a92287b1912bd2aa72dd848ae3e57f20f24347338572452dfbf314b740ba",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_drift_after": {
+    "baseline_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+    "integration_base_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+    "school_key": "rhode-island",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+    "integration_base_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+    "school_key": "rhode-island",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "381b991b2487f190f88bf814155afb62964fd84ca23e7fbbf0a9eaad77677270",
+    "field-level-proof.json": "bb8619480500fe8eace1fd5f2f15e31586038192bb4c60aca78155fb1b4704d4",
+    "integration-freeze.json": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+    "normalization-report.json": "6af9c5b1863255badb3ba290bc79b74034b4ab5ab59ad802d9a682375d3bdb78",
+    "semantic-drift-proof.json": "daed37b0eae582422a6cb7b82fb8097e32828ac824914d2d69f26f4204a2fbe8"
+  },
+  "source_game_normalized_name_row_count": 58,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "381b991b2487f190f88bf814155afb62964fd84ca23e7fbbf0a9eaad77677270",
+  "target_branch": "data/rhode-island-onboarding"
+}

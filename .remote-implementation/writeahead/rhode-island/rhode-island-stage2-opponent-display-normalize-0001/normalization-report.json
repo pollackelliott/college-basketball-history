@@ -1,0 +1,474 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 9,
+  "change_row_count": 15,
+  "changes": [
+    {
+      "authority_names": [
+        "Baltimore"
+      ],
+      "authority_signature": "baltimore",
+      "canonical_opponent_key": "baltimore",
+      "from_names": [
+        "University of Baltimore"
+      ],
+      "target_row_count": 2,
+      "to_name": "Baltimore"
+    },
+    {
+      "authority_names": [
+        "Loyola (New Orleans)",
+        "Loyola (new Orleans)",
+        "Loyola New Orleans",
+        "Loyola-New Orleans"
+      ],
+      "authority_signature": "loyolaneworleans",
+      "canonical_opponent_key": "loyola-new-orleans",
+      "from_names": [
+        "Loyola University New Orleans"
+      ],
+      "target_row_count": 1,
+      "to_name": "Loyola New Orleans"
+    },
+    {
+      "authority_names": [
+        "Pratt"
+      ],
+      "authority_signature": "pratt",
+      "canonical_opponent_key": "pratt",
+      "from_names": [
+        "Pratt Institute"
+      ],
+      "target_row_count": 2,
+      "to_name": "Pratt"
+    },
+    {
+      "authority_names": [
+        "RPI"
+      ],
+      "authority_signature": "rpi",
+      "canonical_opponent_key": "rpi",
+      "from_names": [
+        "Rensselaer Polytechnic Institute"
+      ],
+      "target_row_count": 2,
+      "to_name": "RPI"
+    },
+    {
+      "authority_names": [
+        "Saint Anselm"
+      ],
+      "authority_signature": "saintanselm",
+      "canonical_opponent_key": "saint-anselm",
+      "from_names": [
+        "St. Anselm"
+      ],
+      "target_row_count": 2,
+      "to_name": "Saint Anselm"
+    },
+    {
+      "authority_names": [
+        "Saint Michael's"
+      ],
+      "authority_signature": "saintmichaels",
+      "canonical_opponent_key": "saint-michaels",
+      "from_names": [
+        "St. Michael’s"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Michael's"
+    },
+    {
+      "authority_names": [
+        "Springfield"
+      ],
+      "authority_signature": "springfield",
+      "canonical_opponent_key": "springfield",
+      "from_names": [
+        "Springfield College"
+      ],
+      "target_row_count": 3,
+      "to_name": "Springfield"
+    },
+    {
+      "authority_names": [
+        "St. Thomas (FL)"
+      ],
+      "authority_signature": "stthomasfl",
+      "canonical_opponent_key": "st-thomas-fl",
+      "from_names": [
+        "St. Thomas University (FL)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. Thomas (FL)"
+    },
+    {
+      "authority_names": [
+        "Wayne State (MI)"
+      ],
+      "authority_signature": "waynestatemi",
+      "canonical_opponent_key": "wayne-state-mi",
+      "from_names": [
+        "Wayne State University (MI)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Wayne State (MI)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "source_game_display_change_keys": 9,
+  "source_game_display_change_rows": 58,
+  "source_game_display_changes": [
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1909-10-004",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Rensselaer Polytechnic Institute",
+      "normalized_opponent_key": "rpi",
+      "source_game_id": "rhode-island-1910-11-005",
+      "to_name": "RPI"
+    },
+    {
+      "from_name": "Rensselaer Polytechnic Institute",
+      "normalized_opponent_key": "rpi",
+      "source_game_id": "rhode-island-1911-12-007",
+      "to_name": "RPI"
+    },
+    {
+      "from_name": "Rensselaer Polytechnic Institute",
+      "normalized_opponent_key": "rpi",
+      "source_game_id": "rhode-island-1912-13-001",
+      "to_name": "RPI"
+    },
+    {
+      "from_name": "Pratt Institute",
+      "normalized_opponent_key": "pratt",
+      "source_game_id": "rhode-island-1912-13-002",
+      "to_name": "Pratt"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1920-21-003",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1921-22-003",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1922-23-002",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1923-24-013",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1924-25-003",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1924-25-010",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1927-28-007",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1929-30-014",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1930-31-004",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Pratt Institute",
+      "normalized_opponent_key": "pratt",
+      "source_game_id": "rhode-island-1932-33-008",
+      "to_name": "Pratt"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1932-33-013",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1935-36-009",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1936-37-007",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1937-38-013",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "St. Anselm",
+      "normalized_opponent_key": "saint-anselm",
+      "source_game_id": "rhode-island-1938-39-010",
+      "to_name": "Saint Anselm"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1938-39-013",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "St. Anselm",
+      "normalized_opponent_key": "saint-anselm",
+      "source_game_id": "rhode-island-1939-40-010",
+      "to_name": "Saint Anselm"
+    },
+    {
+      "from_name": "Wayne State University (MI)",
+      "normalized_opponent_key": "wayne-state-mi",
+      "source_game_id": "rhode-island-1940-41-013",
+      "to_name": "Wayne State (MI)"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1940-41-019",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1940-41-023",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1941-42-016",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1946-47-003",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1947-48-001",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1947-48-023",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1948-49-009",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1948-49-021",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1949-50-013",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1949-50-025",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1950-51-011",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1950-51-024",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1951-52-009",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1951-52-022",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1952-53-014",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1952-53-023",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1953-54-010",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1953-54-019",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1954-55-025",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1955-56-023",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1956-57-020",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1958-59-010",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1959-60-022",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1960-61-023",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "Pratt Institute",
+      "normalized_opponent_key": "pratt",
+      "source_game_id": "rhode-island-1961-62-001",
+      "to_name": "Pratt"
+    },
+    {
+      "from_name": "Springfield College",
+      "normalized_opponent_key": "springfield",
+      "source_game_id": "rhode-island-1961-62-022",
+      "to_name": "Springfield"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1963-64-001",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "Loyola University New Orleans",
+      "normalized_opponent_key": "loyola-new-orleans",
+      "source_game_id": "rhode-island-1963-64-010",
+      "to_name": "Loyola New Orleans"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1965-66-001",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "St. Anselm",
+      "normalized_opponent_key": "saint-anselm",
+      "source_game_id": "rhode-island-1967-68-001",
+      "to_name": "Saint Anselm"
+    },
+    {
+      "from_name": "St. Michael’s",
+      "normalized_opponent_key": "saint-michaels",
+      "source_game_id": "rhode-island-1968-69-001",
+      "to_name": "Saint Michael's"
+    },
+    {
+      "from_name": "St. Anselm",
+      "normalized_opponent_key": "saint-anselm",
+      "source_game_id": "rhode-island-1969-70-021",
+      "to_name": "Saint Anselm"
+    },
+    {
+      "from_name": "St. Thomas University (FL)",
+      "normalized_opponent_key": "st-thomas-fl",
+      "source_game_id": "rhode-island-1977-78-014",
+      "to_name": "St. Thomas (FL)"
+    },
+    {
+      "from_name": "University of Baltimore",
+      "normalized_opponent_key": "baltimore",
+      "source_game_id": "rhode-island-1978-79-025",
+      "to_name": "Baltimore"
+    },
+    {
+      "from_name": "University of Baltimore",
+      "normalized_opponent_key": "baltimore",
+      "source_game_id": "rhode-island-1980-81-006",
+      "to_name": "Baltimore"
+    }
+  ],
+  "status": "PASS"
+}
