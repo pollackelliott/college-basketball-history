@@ -273,7 +273,20 @@ def sealed_post_reconciliation_venue_relationship_delta(
     school_key: str,
     approved: dict[str, Any] | None,
 ) -> list[dict[str, str]]:
-    """Derive only the exact sealed venue rows allowed after reconciliation."""
+    """Derive only the exact sealed venue rows required after reconciliation."""
+
+    if not approved:
+        return []
+    decisions = approved.get("decisions")
+    if not isinstance(decisions, list):
+        raise FrozenVenueSplitAuthorityError(
+            "sealed venue relationship delta requires a decision list"
+        )
+    if not any(
+        isinstance(item, dict) and item.get("venue_relationship_patch")
+        for item in decisions
+    ):
+        return []
 
     venue_path = repo / "schools" / school_key / "venues.csv"
     fieldnames, _ = _read_csv_table(venue_path)
@@ -298,9 +311,6 @@ def _venues_match_allowed_delta(
         or not venues_path.is_file()
     ):
         return False
-    if _sha256_file(venues_path) == expected_frozen_sha256:
-        return True
-
     expected_additions = allowed_rows or []
     if not expected_additions:
         return False
@@ -1075,21 +1085,21 @@ def authenticated_frozen_venue_split_authority(
         else ""
     )
     venues_path = repo / "schools" / school_key / "venues.csv"
-    venues_match = (
-        re.fullmatch(r"[0-9a-f]{64}", expected_venues_hash) is not None
-        and venues_path.is_file()
-        and (
-            _sha256_file(venues_path) == expected_venues_hash
-            or (
-                semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
-                and _venues_match_allowed_delta(
-                    venues_path,
-                    expected_venues_hash,
-                    allowed_venue_relationship_delta,
-                )
-            )
+    if (
+        semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+        and allowed_venue_relationship_delta
+    ):
+        venues_match = _venues_match_allowed_delta(
+            venues_path,
+            expected_venues_hash,
+            allowed_venue_relationship_delta,
         )
-    )
+    else:
+        venues_match = (
+            re.fullmatch(r"[0-9a-f]{64}", expected_venues_hash) is not None
+            and venues_path.is_file()
+            and _sha256_file(venues_path) == expected_venues_hash
+        )
     if not venues_match:
         suffix = (
             " outside the exact sealed post-reconciliation venue relationship delta"
