@@ -300,6 +300,59 @@ def _validate_payload_ref(value: Any, name: str, *, required: bool = False) -> N
     _require_sha(value.get("sha256"), 64, f"REQUEST_{name.upper()}_SHA_INVALID")
 
 
+STAGE2_PHASE_CONTINUATION_KIND = "STAGE2_REFRESH_CENSUS_PROPOSAL_V1"
+
+
+def validate_stage2_phase_continuation(
+    operation: str,
+    parent_request_id: str,
+    value: Any,
+) -> None:
+    """Validate the narrow refresh -> census -> exact-map proposal continuation."""
+
+    if value is None:
+        return
+    _require(
+        operation in {OP_STAGE2_CURRENT_MAIN_REFRESH, OP_STAGE2_CENSUS},
+        "REQUEST_STAGE2_PHASE_CONTINUATION_FORBIDDEN",
+    )
+    _require(isinstance(value, dict), "REQUEST_STAGE2_PHASE_CONTINUATION_INVALID")
+    _require(
+        value.get("kind") == STAGE2_PHASE_CONTINUATION_KIND,
+        "REQUEST_STAGE2_PHASE_CONTINUATION_KIND_INVALID",
+    )
+    census_id = str(value.get("census_request_id") or "")
+    proposal_id = str(value.get("proposal_request_id") or "")
+    _require(
+        bool(REQUEST_ID_RE.fullmatch(census_id)),
+        "REQUEST_STAGE2_PHASE_CONTINUATION_CENSUS_ID_INVALID",
+    )
+    _require(
+        bool(REQUEST_ID_RE.fullmatch(proposal_id)),
+        "REQUEST_STAGE2_PHASE_CONTINUATION_PROPOSAL_ID_INVALID",
+    )
+    _require(
+        len({parent_request_id, census_id, proposal_id}) == 3,
+        "REQUEST_STAGE2_PHASE_CONTINUATION_REQUEST_IDS_NOT_DISTINCT",
+    )
+    _require_sha(
+        value.get("expected_decision_universe_sha256"),
+        64,
+        "REQUEST_STAGE2_PHASE_CONTINUATION_DECISION_UNIVERSE_INVALID",
+    )
+    _validate_payload_ref(
+        value.get("recommendation_map"),
+        "stage2_phase_continuation_recommendation_map",
+        required=True,
+    )
+    if value.get("historical_game_type_challenge") is not None:
+        _validate_payload_ref(
+            value.get("historical_game_type_challenge"),
+            "stage2_phase_continuation_historical_game_type_challenge",
+            required=True,
+        )
+
+
 def validate_request(request: dict[str, Any]) -> None:
     _require(request.get("schema_version") == REQUEST_SCHEMA_VERSION, "REQUEST_SCHEMA_MISMATCH")
     _require(request.get("kind") == REQUEST_KIND, "REQUEST_KIND_MISMATCH")
@@ -335,6 +388,11 @@ def validate_request(request: dict[str, Any]) -> None:
 
     authority = request.get("authority")
     _require(isinstance(authority, dict), "REQUEST_AUTHORITY_MISSING")
+    validate_stage2_phase_continuation(
+        operation,
+        request_id,
+        request.get("phase_continuation"),
+    )
     if operation in {OP_STAGE2_CENSUS, OP_STAGE2_PROPOSAL_REHEARSAL}:
         if request.get("historical_game_type_challenge") is not None:
             _validate_payload_ref(
