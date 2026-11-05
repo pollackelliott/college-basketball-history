@@ -194,6 +194,65 @@ class ExhibitionWarningTests(unittest.TestCase):
             )
         )
 
+    def test_competitive_schedule_exclusion_note_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "2025-11-05 H Alabama A&M W 98-51",
+                "",
+                (
+                    "2025-26 competitive result supplied by project owner; "
+                    "exhibitions and foreign-tour games are excluded."
+                ),
+            )
+        )
+
+    def test_named_exhibition_exclusion_note_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "2025-11-03 Example State W 80-70",
+                "",
+                (
+                    "Completed official schedule; exhibition vs NC State on "
+                    "2025-10-26 excluded."
+                ),
+            )
+        )
+
+    def test_owner_authorized_inclusion_comparator_note_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "",
+                "",
+                (
+                    "Owner-authorized inclusion of institutionally counted alumni game; "
+                    "source supplies seasonal W/L inclusion but no explicit non-exhibition "
+                    "classification; contemporaneous exhibition evidence is comparator only."
+                ),
+            )
+        )
+
+    def test_omitted_competitive_game_note_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "Mar. 1 Oregon W",
+                "",
+                (
+                    "Season summary is 12-19/31 competitive games; Year-by-Year list has "
+                    "30 competitive rows plus one exhibition. Official schedule supplies "
+                    "omitted Mar. 1 Oregon win."
+                ),
+            )
+        )
+
+    def test_note_describing_current_game_as_exhibition_still_warns(self):
+        self.assertTrue(
+            exhibition_warning_required(
+                "10/25/2025 Example State",
+                "",
+                "This game was an exhibition against Example State.",
+            )
+        )
+
 
 class ApprovalContractTests(unittest.TestCase):
     @classmethod
