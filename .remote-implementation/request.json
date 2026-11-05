@@ -1,40 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-release-gate2-approval-0001",
-  "operation": "RELEASE_GATE2_APPROVAL",
+  "request_id": "st-bonaventure-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "2b0fcb09d2dcefe15e573329eab4d44527dace02",
-  "previous_control_state_sha256": "f3fe5de04349370d481bff4c45488e694fdab100b4a9d319c00bdeb7410d0192",
-  "expected_protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "previous_control_state_commit": "9702f95c4f42428ec4410ec9b359886176208f5c",
+  "previous_control_state_sha256": "380e4fbb051cc7a552f21d07d27f021a3fed5ae8603f8c1bdec37202d5185934",
+  "expected_protected_main_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
   "target_branch": "data/st-bonaventure-onboarding",
   "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
   "pr_number": 465,
-  "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
-  "release_manifest_sha256": "e1baf73ee6f0b6de05c98c130b63072369019adab8e1d90159b5ac3c96e2c0b0",
-  "preview_deployment_id": 7566270288,
-  "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "4cbaa29e259f71cc70a3719eb074500b574f423a1a0940ef64c4262efbf82e86"
+  "merge_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "1e3270195c7129785fb7aa9a70b47c854a428d4ff7c4deb54d3e62f8adc6cbf5"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "e2983521f7bb8e38194dd44fc38f31a1580bb187e2dccf729e7ea0ae4b35f4b3"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: APPROVED. Procedd, immediately after the exact fresh-verified St. Bonaventure Owner Gate 2 packet for PR #465 head c9f1eb6886a491b4935c38fcb6e061abb6bab86b and Preview deployment 7566270288.",
-    "preview_checkpoint_sha256": "4cbaa29e259f71cc70a3719eb074500b574f423a1a0940ef64c4262efbf82e86",
-    "preview_verification_sha256": "e2983521f7bb8e38194dd44fc38f31a1580bb187e2dccf729e7ea0ae4b35f4b3",
-    "pr_number": 465,
-    "pr_head_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
-    "preview_deployment_id": 7566270288,
-    "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/st-bonaventure/st-bonaventure-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "6ca3909c1b2f7330b8ad2fa3d667c7e2610bb7fa010b27e6081030eb16bcb400"
   },
   "creation_provenance": {
-    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — exact Gate 2 approval record",
-    "authorization": "Owner explicitly approved exact St. Bonaventure PR #465 Preview immediately after presentation of fresh-verified OWNER_GATE_2_READY. This records that exact approval only; no merge or Production proof occurs in this request. Under current policy, the same explicit approval authorizes the complete final release phase while the exact PR head, Preview and protected-main preconditions remain unchanged."
+    "origin": "ChatGPT St. Bonaventure serialized Implementation lane — post-merge Production proof",
+    "authorization": "Owner explicitly approved exact PR #465 Preview. PR #465 merged exactly approved head c9f1eb6886a491b4935c38fcb6e061abb6bab86b as 53c0778f5c1f3f6b01dae144a4c6f805ab8d9146. This request is read-only Production proof for that exact release chain."
   },
   "authority": {
     "phase0": false,
@@ -53,9 +40,9 @@
     "release_preview_verify": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
-    "release_gate2_approval": true,
-    "release_production_proof": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
     "venue_identity_maintenance": false
   }
 }
