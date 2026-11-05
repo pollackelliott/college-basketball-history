@@ -1,0 +1,56 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Same owner-authorized St. Bonaventure Stage 2 unit. PR #464 merged as protected main e71b571c05b6932486a96188119e9e5704d8bced with only generic tools/tests changed, so no tracked current-main refresh is required. The exact onboarding target remains 07b273f2793dee8e68efaa58dda2c28c767e5390. This read-only census transports only the Control-Center-authorized STB-1977-78-029 REGULAR_SEASON to NCAA_TOURNAMENT Gate 1 challenge, bound to frozen-row SHA-256 5dc411347dd9351a31368a4c4af0aec125e2e69a8637440c1199e82ed8fafdde. No postseason round, Owner Gate 1 approval, tracked basketball mutation, sealing, apply, release, Preview, merge, Production, or recovery authority is included.",
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census under merged PR #464 historical-game-type challenge capability."
+  },
+  "expected_protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "historical_game_type_challenge": {
+    "path": ".remote-implementation/requests/st-bonaventure-stage2-census-0017/historical-game-type-challenge.json",
+    "sha256": "a8dc2bcb970725ad36a5fdff8664d82b52f16b0ada48fcb64c9a459d6d294782"
+  },
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
+    "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
+  },
+  "previous_control_state_commit": "9c90f6bef20853ad006f1a2f21afd13b3a33cf55",
+  "previous_control_state_sha256": "85f9c7ec99cfee2ca0208bf60c3d9f84abdea0689c64ecc5804a47794a0ebf4e",
+  "request_id": "st-bonaventure-stage2-census-0017",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0015/successor-manifest.json",
+    "sha256": "b5ddf9ddec00fdb6f67f000deff40ab3e2169e21f4d0b6f3a733ce238966822f"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
+  },
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390"
+}
