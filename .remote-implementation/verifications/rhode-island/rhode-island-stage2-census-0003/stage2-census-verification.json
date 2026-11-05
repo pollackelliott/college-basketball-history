@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "581ae2a5c075f86e7d1bf6145da16e24fb012759ffa7b2fb7bfe1b97e0e20826",
+    "implementation-stage2-status.json": "480d99331d2cf331cb3fcb8533d610896b3e0bb719ad1ba081a629c33ac2b130",
+    "plan.json": "81d2a8f2e3805e6072a06f6796e92220b948a16ff858758e12a6f75b5c81094f",
+    "review.csv": "f2f8e7983d3d5234d64c5eacdf460ba0428d8ddc57fb2eca023743491bd7ee4c",
+    "review.md": "caac228559fb334116a673716d11a6d4e565f1dbfca72d1645808f4f00fa4276"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "581ae2a5c075f86e7d1bf6145da16e24fb012759ffa7b2fb7bfe1b97e0e20826",
+    "implementation-stage2-status.json": "ffa1cd302e10e47901ed1cffd5be891f64e4345741438efeba5070e6c68f2814",
+    "plan.json": "b206d2c844d16376bc7175addcc04710d926278064aaa337da5d06dffa7e5346",
+    "review.csv": "f2f8e7983d3d5234d64c5eacdf460ba0428d8ddc57fb2eca023743491bd7ee4c",
+    "review.md": "dd19af9d9def58d892fbd1651b75663919874e4f76318ed1e6bff7ab849ea0d3"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "rhode-island-stage2-census-0003",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "target_tree_sha": "5d49944e37e3b160a65f7e912e0a17280458862e",
+  "tracked_stage2_mutation": "NONE"
+}
