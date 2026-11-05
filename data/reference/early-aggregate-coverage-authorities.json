@@ -49,6 +49,141 @@
       },
       "maximum_eligible_season_start_year": 1930,
       "notes": "Owner-approved La Salle 1930-31 founding-era aggregate coverage closeout. Two individually identified games preserve a 1-1 record; the remaining 14-3 / 17-game residual is season-level accounting only after bounded research exhaustion. No anonymous or inferred game rows."
+    },
+    {
+      "school_key": "saint-joseph-s",
+      "season": "1911-12",
+      "parent_checkpoint_sha256": "4f8c8cec64e3fd3fec68f99bf11b3892e071efd2cc2295488d9ed56488c1ece1",
+      "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/478",
+      "institutional_record": {
+        "wins": 6,
+        "losses": 22,
+        "games": 28
+      },
+      "identified_record": {
+        "wins": 5,
+        "losses": 8,
+        "games": 13
+      },
+      "unidentified_record": {
+        "wins": 1,
+        "losses": 14,
+        "games": 15
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "identified_ledger_sha256": "208d3c3cd59e1a8305a73c7995a5bdd4d3dfafa25fd4eca6f00f5ba104fa458c",
+      "identified_rows": 2967,
+      "legacy_evidence_mode": "MANIFESTED_RESIDUAL_SUMMARY",
+      "notes": "Owner-approved Saint Joseph's five-season founding-era aggregate coverage closeout. Preserve only identified games as rows; the unidentified W-L/game delta remains season-level historical coverage debt. No anonymous or inferred game rows."
+    },
+    {
+      "school_key": "saint-joseph-s",
+      "season": "1916-17",
+      "parent_checkpoint_sha256": "4f8c8cec64e3fd3fec68f99bf11b3892e071efd2cc2295488d9ed56488c1ece1",
+      "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/478",
+      "institutional_record": {
+        "wins": 18,
+        "losses": 5,
+        "games": 23
+      },
+      "identified_record": {
+        "wins": 16,
+        "losses": 5,
+        "games": 21
+      },
+      "unidentified_record": {
+        "wins": 2,
+        "losses": 0,
+        "games": 2
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "identified_ledger_sha256": "208d3c3cd59e1a8305a73c7995a5bdd4d3dfafa25fd4eca6f00f5ba104fa458c",
+      "identified_rows": 2967,
+      "legacy_evidence_mode": "MANIFESTED_RESIDUAL_SUMMARY",
+      "notes": "Owner-approved Saint Joseph's five-season founding-era aggregate coverage closeout. Preserve only identified games as rows; the unidentified W-L/game delta remains season-level historical coverage debt. No anonymous or inferred game rows."
+    },
+    {
+      "school_key": "saint-joseph-s",
+      "season": "1924-25",
+      "parent_checkpoint_sha256": "4f8c8cec64e3fd3fec68f99bf11b3892e071efd2cc2295488d9ed56488c1ece1",
+      "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/478",
+      "institutional_record": {
+        "wins": 9,
+        "losses": 9,
+        "games": 18
+      },
+      "identified_record": {
+        "wins": 7,
+        "losses": 5,
+        "games": 12
+      },
+      "unidentified_record": {
+        "wins": 2,
+        "losses": 4,
+        "games": 6
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "identified_ledger_sha256": "208d3c3cd59e1a8305a73c7995a5bdd4d3dfafa25fd4eca6f00f5ba104fa458c",
+      "identified_rows": 2967,
+      "legacy_evidence_mode": "MANIFESTED_RESIDUAL_SUMMARY",
+      "notes": "Owner-approved Saint Joseph's five-season founding-era aggregate coverage closeout. Preserve only identified games as rows; the unidentified W-L/game delta remains season-level historical coverage debt. No anonymous or inferred game rows."
+    },
+    {
+      "school_key": "saint-joseph-s",
+      "season": "1925-26",
+      "parent_checkpoint_sha256": "4f8c8cec64e3fd3fec68f99bf11b3892e071efd2cc2295488d9ed56488c1ece1",
+      "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/478",
+      "institutional_record": {
+        "wins": 4,
+        "losses": 11,
+        "games": 15
+      },
+      "identified_record": {
+        "wins": 4,
+        "losses": 5,
+        "games": 9
+      },
+      "unidentified_record": {
+        "wins": 0,
+        "losses": 6,
+        "games": 6
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "identified_ledger_sha256": "208d3c3cd59e1a8305a73c7995a5bdd4d3dfafa25fd4eca6f00f5ba104fa458c",
+      "identified_rows": 2967,
+      "legacy_evidence_mode": "MANIFESTED_RESIDUAL_SUMMARY",
+      "notes": "Owner-approved Saint Joseph's five-season founding-era aggregate coverage closeout. Preserve only identified games as rows; the unidentified W-L/game delta remains season-level historical coverage debt. No anonymous or inferred game rows."
+    },
+    {
+      "school_key": "saint-joseph-s",
+      "season": "1926-27",
+      "parent_checkpoint_sha256": "4f8c8cec64e3fd3fec68f99bf11b3892e071efd2cc2295488d9ed56488c1ece1",
+      "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/478",
+      "institutional_record": {
+        "wins": 6,
+        "losses": 11,
+        "games": 17
+      },
+      "identified_record": {
+        "wins": 5,
+        "losses": 11,
+        "games": 16
+      },
+      "unidentified_record": {
+        "wins": 1,
+        "losses": 0,
+        "games": 1
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "identified_ledger_sha256": "208d3c3cd59e1a8305a73c7995a5bdd4d3dfafa25fd4eca6f00f5ba104fa458c",
+      "identified_rows": 2967,
+      "legacy_evidence_mode": "MANIFESTED_RESIDUAL_SUMMARY",
+      "notes": "Owner-approved Saint Joseph's five-season founding-era aggregate coverage closeout. Preserve only identified games as rows; the unidentified W-L/game delta remains season-level historical coverage debt. No anonymous or inferred game rows."
     }
   ]
 }
