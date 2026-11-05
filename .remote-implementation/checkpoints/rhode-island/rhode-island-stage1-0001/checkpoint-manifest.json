@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "69f36596f05bf72f51252015515053f80a949588",
+  "request_id": "rhode-island-stage1-0001",
+  "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "research_checkpoint_sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
+  "research_member_sha256": {
+    "conferences.csv": "fe88d4f190184b2921f40e6a8df4ef08eb1b2a449850c7fe28cdd86fc198e9ac",
+    "notes.md": "516c2658411ce60243ba2e2804eb93e7d9365e3b82858a2334ae72c96d190b7e",
+    "opponents.csv": "3b65fa73eab712aa40b7484145fccb369e7e31fa7580c1f2b711d45a538275f7",
+    "source-games.csv": "71600bc4e40081c3c5812ccb10d61668dc4670c7d6d9fab5da5707121ff9fc5e",
+    "source-notes.md": "7654b3c7f14743966900f3779ae90724ce6aa7be33c17ded677b9d75d952f709",
+    "venues.csv": "25f62db60bc2e474d2ed7438f354459594ecd35d054c31f923fbb8bc6df1ed20"
+  },
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "sidecars": {
+    "request.json": "e35b0c138326888ed63c7510ffae3639a5b7093755c6261515bb1973a5097f14",
+    "stage1-reconciliation.json": "9b08ac1c90042dc0b4dd33aedb941fbbed45fd87d185362ce9d0c7860dcade5b"
+  },
+  "stage1_blocker_count": 3,
+  "stage1_status": "BLOCKED"
+}

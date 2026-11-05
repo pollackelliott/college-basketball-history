@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "rhode-island",
+  "previous_control_state_commit": "e9c881d27936c06221fd11e2e09d6ca366ccc483",
+  "previous_control_state_sha256": "47f6b079b5dec40059a94a8aad4cf58af567201016a802b9a32d4a0df7746769",
+  "expected_protected_main_sha": "69f36596f05bf72f51252015515053f80a949588",
+  "research_checkpoint": {
+    "sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
+    "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "e9c881d27936c06221fd11e2e09d6ca366ccc483",
+      "path_prefix": ".remote-implementation/transports/rhode-island/rhode-island-stage1-0001/piece-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — owner-authorized Implementation inception",
+    "authorization": "Owner explicitly authorized Rhode Island serialized Implementation inception from the attached final accepted RESEARCH_FROZEN artifact. Current protected main 69f36596f05bf72f51252015515053f80a949588 and global remote Implementation control were authenticated IDLE with recovery_required=false. The owner-designated attachment fallback was applied: exact ZIP SHA-256 5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2, exact six-file flat contract, research_base_sha 80b00278ac9add94702ac76c5fa310b95d2b1929, explicit RESEARCH_FROZEN evidence, PRE-FREEZE SELF-CHALLENGE PASS, owner NON_D1 sanity scan APPROVED, and accepted INCEPTION+ scope were authenticated. Current protected main now independently carries Rhode Island INCEPTION+ scope, so no scope contradiction exists. This request authorizes read-only Stage 1 inventory only; no Phase 0 mutation, Stage 2, owner gate, release, maintenance, merge, recovery, or protected-main mutation."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
