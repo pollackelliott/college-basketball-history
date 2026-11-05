@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "88ef5ca63ad4eb4f16d7ea9a6c30ff0da99a330c10b0a4c0ee42aa03c5d6fefa",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "dc6f3366fa759cb3b1283cff9a744f422a5389df6f1bb52941ce19319aec23c2",
+    "implementation-stage2-status.json": "51b63cec7a4a438442a6f886166ad90a557241dc097e9ab5dfef38f73055e55b",
+    "last-rehearsal-site-gate.json": "576eeeaf7bafcd942ac755eec66590d06ff4c40969c02a6e8cd2f2ba09a2c0a9",
+    "plan.json": "81d2a8f2e3805e6072a06f6796e92220b948a16ff858758e12a6f75b5c81094f",
+    "review.csv": "f2f8e7983d3d5234d64c5eacdf460ba0428d8ddc57fb2eca023743491bd7ee4c",
+    "review.md": "caac228559fb334116a673716d11a6d4e565f1dbfca72d1645808f4f00fa4276"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "dc6f3366fa759cb3b1283cff9a744f422a5389df6f1bb52941ce19319aec23c2",
+    "implementation-stage2-status.json": "d2fca7ffa7c45af76399831e2f81cf4f52afdc98844d5c1de91bd58673c02561",
+    "last-rehearsal-site-gate.json": "576eeeaf7bafcd942ac755eec66590d06ff4c40969c02a6e8cd2f2ba09a2c0a9",
+    "plan.json": "09c57ace56762f9176f43ad14d9e06f6291f60521014bc1cd90e206a63311b6f",
+    "review.csv": "f2f8e7983d3d5234d64c5eacdf460ba0428d8ddc57fb2eca023743491bd7ee4c",
+    "review.md": "cf6508c362b91600ccac7669c153be537d074209d6469a8ef54721870d818f88"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+    "runtime_decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "recommendation_map_sha256": "04eef4b4675e69337c175457dabc15b79c9525b5b2de509f59e5fbe6ab372753",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "rhode-island-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "target_tree_sha": "5d49944e37e3b160a65f7e912e0a17280458862e",
+  "tracked_stage2_mutation": "NONE"
+}

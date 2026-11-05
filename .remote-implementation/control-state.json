@@ -729,11 +729,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
     "recommendation_map_sha256": "04eef4b4675e69337c175457dabc15b79c9525b5b2de509f59e5fbe6ab372753",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "rhode-island-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
     "school_key": "rhode-island",
