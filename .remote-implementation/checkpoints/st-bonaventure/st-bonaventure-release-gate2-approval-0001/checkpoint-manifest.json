@@ -1,0 +1,23 @@
+{
+  "approval_proof_sha256": "3958041751036eb768c7704fa02c97f10b8a51d82323c73f67ad8aa960af3dd8",
+  "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "pr_number": 465,
+  "preview_checkpoint_sha256": "4cbaa29e259f71cc70a3719eb074500b574f423a1a0940ef64c4262efbf82e86",
+  "preview_deployment_id": 7566270288,
+  "preview_url": "https://college-basketball-history-5gl4d29o5-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "e2983521f7bb8e38194dd44fc38f31a1580bb187e2dccf729e7ea0ae4b35f4b3",
+  "production_proof": false,
+  "protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "release_manifest_sha256": "e1baf73ee6f0b6de05c98c130b63072369019adab8e1d90159b5ac3c96e2c0b0",
+  "request_id": "st-bonaventure-release-gate2-approval-0001",
+  "request_sha256": "3e088e46ad70bdda799adeb11f8df074e1a89e2209b002fe17b4ea1da3ac9f68",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b"
+}
