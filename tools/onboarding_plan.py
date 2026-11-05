@@ -25,6 +25,7 @@ from typing import Any, Iterable
 import ingest_school
 from frozen_venue_authority import (
     FrozenVenueSplitAuthorityError,
+    VENUE_AUTH_PHASE_MID_RECONCILIATION,
     load_frozen_venue_split_authority as load_shared_frozen_venue_split_authority,
 )
 from administrative_status import administrative_status_errors
@@ -5105,7 +5106,7 @@ def _venue_maps(
         repo / "schools" / school_key / "venues.csv",
         global_venues_by_id,
         sealed_plan_context=approved_plan,
-        post_reconciliation_semantics=True,
+        authentication_phase=VENUE_AUTH_PHASE_MID_RECONCILIATION,
     )
     names_by_key: dict[str, str] = {}
     for path in sorted((repo / "schools").glob("*/venues.csv")):
