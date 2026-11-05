@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0012/successor-manifest.json",
+    "sha256": "86df5f60c1d9c77bed77006f2985afbe165b3ff8e660ae8be8d75880f1bc1d46"
+  },
+  "prepared_against_protected_main_sha": "462dfc713ebb9fdc7b60186eb2578b8b5d42041d",
+  "prepared_against_target_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
+  "defaults": {
+    "discrepancy": "USE_SOURCE",
+    "selected_conditional": "USE_SOURCE",
+    "basis": "Use St. Bonaventure's accepted frozen target-school historical evidence for affirmative date, score, result, overtime, game-type and H/A/N facts after completed Research and self-challenge. Preserve reciprocal/canonical conflicts as provenance rather than silently replacing accepted target evidence. Explicit exceptions are encoded separately where the frozen target is UNKNOWN or a settled owner-final/literal-evidence normalization controls.",
+    "identity_basis": "One real game equals one canonical game. Match the same-season reciprocal candidate supported by the accepted St. Bonaventure matchup context and score/result; where several candidates exist, select the exact candidate established by the completed Stage 2 classification and frozen directives. Do not create duplicate canonical games.",
+    "not_applicable_basis": "This conditional discrepancy belongs to a canonical identity candidate not selected by the recommendation map."
+  },
+  "identity": {
+    "STB-1920-21-003": "MATCH_CANONICAL:CBBG-0162258",
+    "STB-1921-22-008": "MATCH_CANONICAL:CBBG-0162275",
+    "STB-1927-28-021": "MATCH_CANONICAL:CBBG-0160489",
+    "STB-1938-39-006": "MATCH_CANONICAL:CBBG-0162500",
+    "STB-1942-43-006": "MATCH_CANONICAL:CBBG-0012138",
+    "STB-1948-49-008": "MATCH_CANONICAL:CBBG-0164241",
+    "STB-1948-49-025": "MATCH_CANONICAL:CBBG-0160872",
+    "STB-1951-52-027": "MATCH_CANONICAL:CBBG-0191299",
+    "STB-1952-53-007": "MATCH_CANONICAL:CBBG-0160945",
+    "STB-1952-53-015": "MATCH_CANONICAL:CBBG-0162714",
+    "STB-1955-56-006": "MATCH_CANONICAL:CBBG-0164370",
+    "STB-1960-61-016": "MATCH_CANONICAL:CBBG-0151094",
+    "STB-1963-64-007": "MATCH_CANONICAL:CBBG-0142233",
+    "STB-1965-66-018": "MATCH_CANONICAL:CBBG-0157231",
+    "STB-1966-67-019": "MATCH_CANONICAL:CBBG-0162997",
+    "STB-1970-71-023": "MATCH_CANONICAL:CBBG-0157344",
+    "STB-1974-75-008": "MATCH_CANONICAL:CBBG-0136406",
+    "STB-1975-76-001": "MATCH_CANONICAL:CBBG-0164715",
+    "STB-1976-77-016": "MATCH_CANONICAL:CBBG-0157478",
+    "STB-1982-83-029": "MATCH_CANONICAL:CBBG-0120190",
+    "STB-1985-86-028": "MATCH_CANONICAL:CBBG-0191829",
+    "STB-1986-87-028": "MATCH_CANONICAL:CBBG-0191849",
+    "STB-1987-88-028": "MATCH_CANONICAL:CBBG-0120316",
+    "STB-1990-91-009": "MATCH_CANONICAL:CBBG-0166925",
+    "STB-1993-94-010": "MATCH_CANONICAL:CBBG-0120450",
+    "STB-1995-96-015": "MATCH_CANONICAL:CBBG-0136829",
+    "STB-1996-97-009": "MATCH_CANONICAL:CBBG-0136849",
+    "STB-1997-98-032": "MATCH_CANONICAL:CBBG-0024320"
+  },
+  "decisions": {
+    "CONDITIONAL-DISCREPANCY-STB-1920-21-003-CBBG-0162258-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1921-22-008-CBBG-0162275-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1922-23-009-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1924-25-016-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1927-28-021-CBBG-0160489-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1929-30-006-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1936-37-004-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1938-39-006-CBBG-0162500-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1938-39-006-CBBG-0162505-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1941-42-005-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1948-49-008-CBBG-0164241-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1948-49-025-CBBG-0160872-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1951-52-010-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1951-52-017-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1952-53-009-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1952-53-014-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1952-53-015-CBBG-0162714-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1953-54-014-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1956-57-012-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1956-57-019-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-STB-1957-58-023-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1966-67-019-CBBG-0162997-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1982-83-029-CBBG-0120190-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1985-86-028-CBBG-0191829-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1986-87-028-CBBG-0191849-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-STB-1987-88-028-CBBG-0120316-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-1942-43-009-OVERTIME_PERIODS": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-1948-49-004-OVERTIME_PERIODS": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-1976-77-026-OVERTIME_PERIODS": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2017-18-012-OVERTIME_PERIODS": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2010-11-031-GAME_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2021-22-030-GAME_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2021-22-031-GAME_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2021-22-032-GAME_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2021-22-033-GAME_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-STB-2009-10-030-SITE_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "NEW-GAME-DATE-PATCH-STB-1982-83-028": "APPLY_SOURCE_DATE_PATCH",
+    "CANONICAL-SITE-PATCH-CBBG-0157231": "LEAVE_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1948-49-026": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1962-63-024": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1962-63-025": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1974-75-026": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1974-75-027": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1975-76-026": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1975-76-027": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1976-77-025": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1977-78-027": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1977-78-028": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-STB-1978-79-027": "KEEP_POSTSEASON_UNRESOLVED",
+    "ACCOMPLISHMENTS-ST-BONAVENTURE": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-ST-BONAVENTURE": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "CONDITIONAL-DISCREPANCY-STB-1920-21-003-CBBG-0162258-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1921-22-008-CBBG-0162275-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1922-23-009-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1924-25-016-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1927-28-021-CBBG-0160489-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1929-30-006-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1936-37-004-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1938-39-006-CBBG-0162500-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1938-39-006-CBBG-0162505-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1941-42-005-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1948-49-008-CBBG-0164241-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1948-49-025-CBBG-0160872-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1951-52-010-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1951-52-017-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1952-53-009-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1952-53-014-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1952-53-015-CBBG-0162714-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1953-54-014-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1956-57-012-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1956-57-019-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "DISCREPANCY-STB-1957-58-023-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1966-67-019-CBBG-0162997-SITE_TYPE": "The frozen St. Bonaventure target source intentionally remains UNKNOWN for H/A/N on this row. Preserve the existing concrete reciprocal/canonical site value without manufacturing target-school certainty.",
+    "CONDITIONAL-DISCREPANCY-STB-1982-83-029-CBBG-0120190-GAME_DATE": "Frozen owner-final directive requires 1983-03-11; the selected reciprocal canonical game already carries that exact date. Normalize only the structured St. Bonaventure game_date at Gate 1; preserve raw_text and The Spectrum site evidence.",
+    "CONDITIONAL-DISCREPANCY-STB-1985-86-028-CBBG-0191829-GAME_DATE": "Frozen owner-final directive requires 1986-02-27; the selected reciprocal canonical game already carries that exact date. Normalize only the structured St. Bonaventure game_date at Gate 1; preserve Reilly Center HOME authority.",
+    "CONDITIONAL-DISCREPANCY-STB-1986-87-028-CBBG-0191849-GAME_DATE": "Frozen owner-final directive requires 1987-02-27; the selected reciprocal canonical game already carries that exact date. Normalize only the structured St. Bonaventure game_date at Gate 1; H/A/N remains separately reconciled to NEUTRAL.",
+    "CONDITIONAL-DISCREPANCY-STB-1987-88-028-CBBG-0120316-GAME_DATE": "Frozen owner-final directive requires 1988-03-06; the selected reciprocal canonical game already carries that exact date. Normalize only the structured St. Bonaventure game_date at Gate 1; H/A/N remains separately reconciled to OPPONENT_HOME.",
+    "DISCREPANCY-STB-1942-43-009-OVERTIME_PERIODS": "The target raw source does not affirm regulation length while reciprocal canonical evidence preserves a specific overtime count. Normalize the structured target overtime field to the more specific canonical value without altering raw_text.",
+    "DISCREPANCY-STB-1948-49-004-OVERTIME_PERIODS": "The target raw source does not affirm regulation length while reciprocal canonical evidence preserves a specific overtime count. Normalize the structured target overtime field to the more specific canonical value without altering raw_text.",
+    "DISCREPANCY-STB-1976-77-026-OVERTIME_PERIODS": "The target raw source does not affirm regulation length while reciprocal canonical evidence preserves a specific overtime count. Normalize the structured target overtime field to the more specific canonical value without altering raw_text.",
+    "DISCREPANCY-STB-2017-18-012-OVERTIME_PERIODS": "Literal frozen raw_text explicitly says OT, while structured overtime_periods is 0 and canonical is 1. Normalize the structured source overtime value to 1 while preserving literal raw_text.",
+    "DISCREPANCY-STB-2010-11-031-GAME_TYPE": "Literal frozen source evidence identifies CBI postseason; official UCF Athletics identifies the March 16, 2011 game at UCF Arena in Orlando. Normalize game_type to POSTSEASON and carry the exact host-site venue/locality while preserving raw_text.",
+    "DISCREPANCY-STB-2021-22-030-GAME_TYPE": "Literal frozen source evidence identifies NIT postseason; official Colorado Athletics identifies the March 15, 2022 game at CU Events Center in Boulder, Colorado. Normalize game_type to NIT and carry the exact host-site venue/locality while preserving raw_text.",
+    "DISCREPANCY-STB-2021-22-031-GAME_TYPE": "Literal frozen source evidence identifies NIT postseason; official Oklahoma Athletics identifies the March 20, 2022 game at Lloyd Noble Center in Norman, Oklahoma. Normalize game_type to NIT and carry the exact host-site venue/locality while preserving raw_text.",
+    "DISCREPANCY-STB-2021-22-032-GAME_TYPE": "Literal frozen source evidence identifies NIT postseason; official Virginia Athletics identifies the March 22, 2022 game at John Paul Jones Arena in Charlottesville, Virginia. Normalize game_type to NIT and carry the exact host-site venue/locality while preserving raw_text.",
+    "DISCREPANCY-STB-2021-22-033-GAME_TYPE": "Literal frozen source evidence identifies this as NIT postseason, while structured game_type is stale REGULAR_SEASON and canonical preserves NIT. Normalize the structured source game_type to canonical while preserving raw_text.",
+    "DISCREPANCY-STB-2009-10-030-SITE_TYPE": "Frozen owner-final directive requires SOURCE_PROGRAM_HOME at Reilly Center. The canonical H/A/N already represents St. Bonaventure HOME; normalize the stale target neutral code to canonical HOME, then reassert the exact Reilly Center locality so no known target site evidence is lost.",
+    "DISCREPANCY-STB-1978-79-028-SITE_TYPE": "Frozen owner-final directive requires OPPONENT_HOME in Birmingham at Birmingham-Jefferson Civic Center / Legacy Arena physical identity VEN-000109. Use the accepted target H/A/N despite contrary Alabama neutral evidence; preserve the conflict in provenance and apply the already-registered exact venue identity.",
+    "DISCREPANCY-STB-1979-80-027-SITE_TYPE": "Frozen owner-final directive requires OPPONENT_HOME. Use the accepted St. Bonaventure H/A/N and retain the Rutgers Athletic Center physical identity VEN-000095 while preserving Rutgers reciprocal NEUTRAL evidence.",
+    "CONDITIONAL-DISCREPANCY-STB-1986-87-028-CBBG-0191849-SITE_TYPE": "Frozen owner-final directive preserves this conference-tournament game as NEUTRAL at Civic Arena physical identity VEN-000241. Use the accepted St. Bonaventure H/A/N/site evidence over the reciprocal Duquesne home designation.",
+    "CONDITIONAL-DISCREPANCY-STB-1987-88-028-CBBG-0120316-SITE_TYPE": "Frozen owner-final directive requires OPPONENT_HOME on 1988-03-06 at WVU Coliseum VEN-000235. Use the accepted St. Bonaventure H/A/N and preserve West Virginia reciprocal NEUTRAL evidence in provenance.",
+    "NEW-GAME-DATE-PATCH-STB-1982-83-028": "Frozen owner-final Research authority requires STB-1982-83-028 game_date=1983-03-09. Apply only the exact authenticated date patch before ingestion; preserve original 1983-03-07 provenance and Civic Arena physical identity.",
+    "CANONICAL-SITE-PATCH-CBBG-0157231": "The selected St. Bonaventure identity STB-1965-66-018 supplies accepted NEUTRAL Buffalo Memorial Auditorium site evidence to this same canonical game through ordinary discrepancy reconciliation. Do not invent a separate canonical-only HOME-site patch.",
+    "POSTSEASON-CLASSIFICATION-STB-1948-49-026": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1962-63-024": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1962-63-025": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1974-75-026": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1974-75-027": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1975-76-026": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1975-76-027": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1976-77-025": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1977-78-027": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1977-78-028": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "POSTSEASON-CLASSIFICATION-STB-1978-79-027": "The frozen source explicitly identifies NCIT/ECAC, which is neither NCAA Tournament, NIT, nor conference tournament under the controlled classifier. Preserve generic POSTSEASON plus the literal tournament label rather than misclassifying historical meaning.",
+    "ACCOMPLISHMENTS-ST-BONAVENTURE": "Preserve the existing St. Bonaventure accomplishment baseline and require the disposable proposal rehearsal to verify exact post-ingest canonical equality before publication; do not lower the reference merely to match the pre-ingest projection.",
+    "PUBLICATION-ST-BONAVENTURE": "Enable publication only through the normal sealed apply and release path after every approved decision, technical gate, Preview approval, merge, and Production proof succeeds."
+  },
+  "canonical_patch_by_decision": {
+    "DISCREPANCY-STB-1978-79-028-SITE_TYPE": {
+      "venue_key": "legacy-arena",
+      "venue_id": "VEN-000109",
+      "site_city": "Birmingham",
+      "site_state": "AL"
+    }
+  },
+  "source_patch_by_decision": {
+    "NEW-GAME-DATE-PATCH-STB-1982-83-028": {
+      "game_date": "1983-03-09"
+    },
+    "DISCREPANCY-STB-2009-10-030-SITE_TYPE": {
+      "curated_venue_name": "Reilly Center",
+      "city": "Olean",
+      "state": "NY"
+    },
+    "DISCREPANCY-STB-2010-11-031-GAME_TYPE": {
+      "curated_venue_name": "UCF Arena",
+      "city": "Orlando",
+      "state": "FL"
+    },
+    "DISCREPANCY-STB-2021-22-030-GAME_TYPE": {
+      "curated_venue_name": "CU Events Center",
+      "city": "Boulder",
+      "state": "CO"
+    },
+    "DISCREPANCY-STB-2021-22-031-GAME_TYPE": {
+      "curated_venue_name": "Lloyd Noble Center",
+      "city": "Norman",
+      "state": "OK"
+    },
+    "DISCREPANCY-STB-2021-22-032-GAME_TYPE": {
+      "curated_venue_name": "John Paul Jones Arena",
+      "city": "Charlottesville",
+      "state": "VA"
+    }
+  },
+  "notes_by_decision": {
+    "DISCREPANCY-STB-2009-10-030-SITE_TYPE": "Owner-final directive: SOURCE_PROGRAM_HOME at Reilly Center VEN-000926; preserve original target vs/neutral coding and Duquesne away evidence in provenance.",
+    "DISCREPANCY-STB-2010-11-031-GAME_TYPE": "Host-source provenance: UCF Athletics, “Knights Open Postseason Wednesday vs. St. Bonaventure,” March 15, 2011.",
+    "DISCREPANCY-STB-2021-22-030-GAME_TYPE": "Host-source provenance: University of Colorado Athletics box score/recap, March 15, 2022.",
+    "DISCREPANCY-STB-2021-22-031-GAME_TYPE": "Host-source provenance: University of Oklahoma Athletics game center/box score, March 20, 2022.",
+    "DISCREPANCY-STB-2021-22-032-GAME_TYPE": "Host-source provenance: Virginia Cavaliers Official Athletic Site preview/recap, March 20-22, 2022."
+  },
+  "venue_relationship_patch_by_decision": {
+    "DISCREPANCY-STB-2010-11-031-GAME_TYPE": {
+      "venue_id": "VEN-000038",
+      "venue_key": "cfe-arena"
+    },
+    "DISCREPANCY-STB-2021-22-030-GAME_TYPE": {
+      "venue_id": "VEN-000052",
+      "venue_key": "cu-events-center"
+    },
+    "DISCREPANCY-STB-2021-22-031-GAME_TYPE": {
+      "venue_id": "VEN-000116",
+      "venue_key": "lloyd-noble-center"
+    },
+    "DISCREPANCY-STB-2021-22-032-GAME_TYPE": {
+      "venue_id": "VEN-000317",
+      "venue_key": "john-paul-jones-arena"
+    }
+  }
+}
