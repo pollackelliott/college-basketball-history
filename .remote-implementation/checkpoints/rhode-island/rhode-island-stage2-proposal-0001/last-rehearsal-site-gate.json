@@ -1,0 +1,77 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 74,
+    "postseason_missing_location": 2,
+    "postseason_missing_venue": 2,
+    "public_gap_rows": 82,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2867,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 8
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_location": [
+      "CBBG-0195157",
+      "CBBG-0195158"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0009847",
+      "CBBG-0029058",
+      "CBBG-0034442",
+      "CBBG-0048068",
+      "CBBG-0049532",
+      "CBBG-0056480",
+      "CBBG-0056822",
+      "CBBG-0059987",
+      "CBBG-0064294",
+      "CBBG-0064412",
+      "CBBG-0066978",
+      "CBBG-0069539"
+    ],
+    "postseason_missing_location": [
+      "CBBG-0195157",
+      "CBBG-0195158"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0195157",
+      "CBBG-0195158"
+    ],
+    "unknown_site_type": [
+      "CBBG-0194592",
+      "CBBG-0194593",
+      "CBBG-0194594",
+      "CBBG-0194595",
+      "CBBG-0194596",
+      "CBBG-0194597",
+      "CBBG-0194598",
+      "CBBG-0194600"
+    ]
+  },
+  "history_start_season": "1903-1904",
+  "school_key": "rhode-island",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 84,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 76,
+    "postseason_missing_location": 2,
+    "postseason_missing_venue": 2,
+    "researched_gap_rows": 84,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 8
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2866
+  },
+  "status": "PASS",
+  "warnings": []
+}

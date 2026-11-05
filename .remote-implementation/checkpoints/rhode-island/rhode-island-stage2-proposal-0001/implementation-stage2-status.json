@@ -1,0 +1,156 @@
+{
+  "branch": "remote-stage2-census/rhode-island-aaba8e2b4dc5",
+  "capability_census": {
+    "path": ".onboarding/rhode-island/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "integration_base_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "integration_semantic_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 49,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 49,
+      "discrepancy": 98,
+      "identity": 16,
+      "publication": 1
+    },
+    "decision_count": 165,
+    "decision_universe_sha256": "cb3168fe6788efe56188605eb19fd627aa25860adf1669484dab413b57de9699",
+    "discrepancies_to_add": 98,
+    "existing_game_matches": 931,
+    "new_canonical_games": 1919,
+    "plan_path": ".onboarding/rhode-island/plan.json",
+    "review_path": ".onboarding/rhode-island/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 47,
+      "MATCH_CANONICAL:CBBG-0009847": 1,
+      "MATCH_CANONICAL:CBBG-0056822": 1,
+      "MATCH_CANONICAL:CBBG-0095333": 1,
+      "MATCH_CANONICAL:CBBG-0136869": 1,
+      "MATCH_CANONICAL:CBBG-0141756": 1,
+      "MATCH_CANONICAL:CBBG-0142015": 1,
+      "MATCH_CANONICAL:CBBG-0154407": 1,
+      "MATCH_CANONICAL:CBBG-0154416": 1,
+      "MATCH_CANONICAL:CBBG-0154455": 1,
+      "MATCH_CANONICAL:CBBG-0154469": 1,
+      "MATCH_CANONICAL:CBBG-0154488": 1,
+      "MATCH_CANONICAL:CBBG-0154640": 1,
+      "MATCH_CANONICAL:CBBG-0159053": 1,
+      "MATCH_CANONICAL:CBBG-0160430": 1,
+      "MATCH_CANONICAL:CBBG-0187099": 1,
+      "MATCH_CANONICAL:CBBG-0193855": 1,
+      "NOT_APPLICABLE": 25,
+      "USE_SOURCE": 75,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "88ef5ca63ad4eb4f16d7ea9a6c30ff0da99a330c10b0a4c0ee42aa03c5d6fefa",
+    "changed_path_count": 99
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 47,
+      "MATCH_CANONICAL:CBBG-0009847": 1,
+      "MATCH_CANONICAL:CBBG-0056822": 1,
+      "MATCH_CANONICAL:CBBG-0095333": 1,
+      "MATCH_CANONICAL:CBBG-0136869": 1,
+      "MATCH_CANONICAL:CBBG-0141756": 1,
+      "MATCH_CANONICAL:CBBG-0142015": 1,
+      "MATCH_CANONICAL:CBBG-0154407": 1,
+      "MATCH_CANONICAL:CBBG-0154416": 1,
+      "MATCH_CANONICAL:CBBG-0154455": 1,
+      "MATCH_CANONICAL:CBBG-0154469": 1,
+      "MATCH_CANONICAL:CBBG-0154488": 1,
+      "MATCH_CANONICAL:CBBG-0154640": 1,
+      "MATCH_CANONICAL:CBBG-0159053": 1,
+      "MATCH_CANONICAL:CBBG-0160430": 1,
+      "MATCH_CANONICAL:CBBG-0187099": 1,
+      "MATCH_CANONICAL:CBBG-0193855": 1,
+      "NOT_APPLICABLE": 25,
+      "USE_SOURCE": 75,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "88ef5ca63ad4eb4f16d7ea9a6c30ff0da99a330c10b0a4c0ee42aa03c5d6fefa",
+    "decision_count": 165,
+    "path": "/tmp/remote-stage2-proposal-map-qwh_1twh/recommendation-map.json",
+    "sha256": "04eef4b4675e69337c175457dabc15b79c9525b5b2de509f59e5fbe6ab372753"
+  },
+  "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 74,
+      "postseason_missing_location": 2,
+      "postseason_missing_venue": 2,
+      "public_gap_rows": 82,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2867,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 8
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0195157",
+        "CBBG-0195158"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0009847",
+        "CBBG-0029058",
+        "CBBG-0034442",
+        "CBBG-0048068",
+        "CBBG-0049532",
+        "CBBG-0056480",
+        "CBBG-0056822",
+        "CBBG-0059987",
+        "CBBG-0064294",
+        "CBBG-0064412",
+        "CBBG-0066978",
+        "CBBG-0069539"
+      ],
+      "postseason_missing_location": [
+        "CBBG-0195157",
+        "CBBG-0195158"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0195157",
+        "CBBG-0195158"
+      ],
+      "unknown_site_type": [
+        "CBBG-0194592",
+        "CBBG-0194593",
+        "CBBG-0194594",
+        "CBBG-0194595",
+        "CBBG-0194596",
+        "CBBG-0194597",
+        "CBBG-0194598",
+        "CBBG-0194600"
+      ]
+    },
+    "path": ".onboarding/rhode-island/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
