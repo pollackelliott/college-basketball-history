@@ -252,7 +252,7 @@ class RemoteReleaseReadinessTests(unittest.TestCase):
         )
         self.assertEqual(packet["kind"], ready.PR_PACKET_KIND)
         self.assertEqual(
-            packet["title"],
+            packet["new_pr_title"],
             "Ingest and publish Example School history",
         )
         self.assertEqual(packet["base_branch"], "main")
