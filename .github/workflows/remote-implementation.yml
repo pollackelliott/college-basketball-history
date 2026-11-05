@@ -159,6 +159,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
 
+      - name: Resume any authorized Stage 2 phase continuation
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_stage2_continuation.py"
+
       - name: Upload pending-verification recovery diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -349,6 +355,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
 
+      - name: Queue authorized Stage 2 census continuation
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_stage2_continuation.py"
+
       - name: Upload Stage 2 refresh verification diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -387,6 +399,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
+
+      - name: Queue authorized Stage 2 proposal continuation
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_stage2_continuation.py"
 
       - name: Upload Stage 2 census verification diagnostics
         if: always()
@@ -466,6 +484,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
 
+      - name: Queue authorized Stage 2 pre-seal continuation
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_stage2_continuation.py"
+
       - name: Upload Stage 2 Gate 1 fill verification diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -505,6 +529,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
 
+      - name: Queue authorized Stage 2 Gate 1 seal continuation
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_stage2_continuation.py"
+
       - name: Upload Stage 2 pre-seal verification diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -543,6 +573,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
+
+      - name: Queue authorized Stage 2 sealed-apply continuation
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_stage2_continuation.py"
 
       - name: Upload Stage 2 Gate 1 seal verification diagnostics
         if: always()
