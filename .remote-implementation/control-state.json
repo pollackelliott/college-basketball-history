@@ -701,7 +701,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/st-bonaventure/st-bonaventure-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "6c3ede558cbdba01b34f5724c48e7d738eb8e698cc7fb6fc5b67b6d3e6410c72",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -711,7 +711,7 @@
     "production_deployment_id": 7566882304,
     "production_json_checked_count": 79,
     "protected_main_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "st-bonaventure-release-production-proof-0001",
     "school_key": "st-bonaventure"
   },

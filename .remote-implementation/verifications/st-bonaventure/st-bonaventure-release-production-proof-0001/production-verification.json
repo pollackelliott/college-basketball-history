@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "6c3ede558cbdba01b34f5724c48e7d738eb8e698cc7fb6fc5b67b6d3e6410c72",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "53c0778f5c1f3f6b01dae144a4c6f805ab8d9146",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "pr_number": 465,
+  "production_deployment_id": 7566882304,
+  "production_json_checked_count": 79,
+  "production_proof": true,
+  "request_id": "st-bonaventure-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "status": "COMPLETE"
+}
