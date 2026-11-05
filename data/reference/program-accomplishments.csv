@@ -241,7 +241,7 @@ purdue-fort-wayne,2,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-progr
 queens-university,0,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 quinnipiac,3,0,0,0,0,,,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 radford,6,3,3,0,0,ROUND_OF_64,2018,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
-rhode-island,14,2,10,0,0,ELITE_EIGHT,1998,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
+rhode-island,14,2,10,0,0,ELITE_EIGHT,1998,VERIFIED,"The NCAA fields already match canonical authority. The frozen source value also carries 14 conference regular-season titles and 2 conference tournament titles, but those conference counts are not separately supported by durable authoritative accomplishment evidence in this bounded Implementation review; verify reference values rather than manufacture a canonical patch.",MATCH,Verified through onboarding plan a1515391ea08.
 rice,10,0,4,0,0,ELITE_EIGHT,1942,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 richmond,7,7,10,0,0,SWEET_SIXTEEN,2011,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,
 rider,12,3,3,0,0,ROUND_OF_64,1994,OWNER_BASELINE_UNVERIFIED,Owner-supplied 365-program baseline; authoritative source verification pending.,NOT_CHECKED,

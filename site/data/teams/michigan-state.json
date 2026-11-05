@@ -4700,7 +4700,7 @@
       "opponent_key": "rhode-island",
       "opponent_name": "Rhode Island",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
@@ -42593,7 +42593,7 @@
       "opponent_key": "rhode-island",
       "opponent_name": "Rhode Island",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 92,
       "opponent_score": 64,
       "score_known": true,
@@ -42603,8 +42603,8 @@
       "venue_key": null,
       "venue_id": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Syracuse",
+      "site_state": "NY",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
