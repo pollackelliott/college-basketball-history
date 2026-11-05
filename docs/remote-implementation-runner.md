@@ -381,6 +381,54 @@ The refresh may be chained after another fresh-verified refresh using immutable 
 authority. It creates no Owner Gate 1 authority and does not carry forward a stale Stage 2
 decision universe by assertion: Stage 2 must regenerate from the refreshed target.
 
+### 7B.1 Repository-owned refresh -> census -> proposal continuation
+
+When the current-main refresh exists only because a generic tooling repair advanced
+protected main and the previously authenticated Stage 2 decision universe plus exact
+recommendation map are expected to remain unchanged, the refresh request may carry one
+optional hash-bound `phase_continuation` object.
+
+The continuation is scheduling authority only. It does not combine the guarded operations,
+skip fresh verification, or create Owner Gate 1 authority. It contains:
+
+- `kind=STAGE2_REFRESH_CENSUS_PROPOSAL_V1`;
+- exact future census and proposal request IDs;
+- the exact previously authenticated decision-universe SHA-256 expected after refresh;
+- an exact path/SHA-256 recommendation-map reference; and
+- when already authorized, an optional exact historical-game-type challenge reference.
+
+Before any refresh mutation, the runner proves the continuation's referenced map/challenge
+bytes exist at the request predecessor and match their hashes.
+
+After the ordinary `STAGE2_CURRENT_MAIN_REFRESH` reaches independent fresh PASS, the
+protected-main runtime executes
+`tools/remote_implementation_stage2_continuation.py`. That helper authors the next
+ordinary `STAGE2_CENSUS` request against the exact fresh-verified refresh successor.
+The new request is committed normally on the control branch and therefore enters the same
+push-driven guarded runner as any manually authored census request.
+
+After that census reaches independent fresh PASS, the helper continues only when:
+
+- census status is exactly `CAPABILITY_CENSUS_READY`; and
+- the regenerated decision-universe SHA-256 equals the continuation's exact expected hash.
+
+Only then does it author the ordinary exact-map `STAGE2_PROPOSAL_REHEARSAL` request.
+Any changed universe, blocked census, changed protected main, payload mismatch, moved target,
+stale control predecessor, or failed verifier stops the automatic chain before proposal.
+
+Thus the chain remains:
+
+`refresh + fresh verify -> census + fresh verify -> proposal + fresh verify`
+
+with the same durable requests, checkpoints and independent verifiers as before. The
+difference is only that the repository, rather than the owner/chat, schedules the two
+deterministic child requests.
+
+This path is deliberately narrow. It is for carry-forward after tooling-only main
+advancement where the exact historical decision universe/map are expected unchanged.
+A newly discovered historical challenge, changed recommendation, changed decision universe,
+shared/global mutation, recovery state, or owner gate remains an explicit stop.
+
 ## 8. Stage 2 capability census request
 
 `STAGE2_CENSUS` is read-only with respect to tracked basketball state and stops at the permanent coordinator's first discovery boundary.
