@@ -40,8 +40,9 @@ from pathlib import Path
 
 from administrative_status import administrative_status_errors
 from frozen_venue_authority import (
-    SEMANTIC_PHASE_POST_RECONCILIATION,
-    SEMANTIC_PHASE_PRE_INGEST,
+    VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+    VENUE_AUTH_PHASE_MID_RECONCILIATION,
+    VENUE_AUTH_PHASE_PRE_INGEST,
     load_frozen_venue_split_authority,
     sealed_post_reconciliation_semantic_delta,
     sealed_pre_ingest_semantic_delta,
@@ -764,40 +765,52 @@ def load_runtime_venue_metadata_map(
     global_venues_by_id: dict[str, dict[str, str]],
     *,
     sealed_plan_context: dict[str, Any] | None = None,
-    post_reconciliation_semantics: bool = False,
+    authentication_phase: str = VENUE_AUTH_PHASE_PRE_INGEST,
 ) -> dict[str, list[dict[str, str]]]:
-    """Load venue metadata plus authenticated frozen per-game split authority.
+    """Load venue metadata under one explicit reconciliation lifecycle phase.
 
-    Ordinary runtime callers authenticate only the exact pre-ingest semantic delta.
-    The explicit post-reconciliation mode is reserved for final package/no-op
-    verification after the same sealed plan has applied source normalizations.
+    PRE_INGEST authenticates exact frozen venue bytes plus the sealed pre-ingest
+    source delta. MID_RECONCILIATION authenticates the exact sealed GAME_SITE
+    venue suffix while source semantics remain at the pre-ingest state. FINAL
+    authentication requires both the sealed venue suffix and the exact final
+    post-reconciliation source semantic delta.
     """
 
     venue_metadata_map = load_venue_metadata_map(
         venue_path,
         global_venues_by_id,
     )
-    allowed_semantic_delta = (
-        sealed_post_reconciliation_semantic_delta(
+    if authentication_phase in {
+        VENUE_AUTH_PHASE_PRE_INGEST,
+        VENUE_AUTH_PHASE_MID_RECONCILIATION,
+    }:
+        allowed_semantic_delta = sealed_pre_ingest_semantic_delta(
+            sealed_plan_context
+        )
+    elif authentication_phase == VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION:
+        allowed_semantic_delta = sealed_post_reconciliation_semantic_delta(
             repo_root,
             school_key,
             sealed_plan_context,
         )
-        if post_reconciliation_semantics
-        else sealed_pre_ingest_semantic_delta(sealed_plan_context)
-    )
+    else:
+        raise ValueError(
+            f"unsupported venue authentication phase {authentication_phase!r}"
+        )
+
     frozen_split_authority = load_frozen_venue_split_authority(
         repo_root,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
         sealed_plan_context=(
-            sealed_plan_context if post_reconciliation_semantics else None
+            sealed_plan_context
+            if authentication_phase in {
+                VENUE_AUTH_PHASE_MID_RECONCILIATION,
+                VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION,
+            }
+            else None
         ),
-        semantic_phase=(
-            SEMANTIC_PHASE_POST_RECONCILIATION
-            if post_reconciliation_semantics
-            else SEMANTIC_PHASE_PRE_INGEST
-        ),
+        authentication_phase=authentication_phase,
     )
     if frozen_split_authority:
         bind_frozen_venue_split_authority(
@@ -1628,7 +1641,11 @@ def main() -> int:
             venue_path,
             global_venues_by_id,
             sealed_plan_context=semantic_plan_context,
-            post_reconciliation_semantics=sealed_verification_plan is not None,
+            authentication_phase=(
+                VENUE_AUTH_PHASE_FINAL_POST_RECONCILIATION
+                if sealed_verification_plan is not None
+                else VENUE_AUTH_PHASE_PRE_INGEST
+            ),
         )
         canonical = read_csv(canonical_path)
         assertions = read_csv(assertions_path)
