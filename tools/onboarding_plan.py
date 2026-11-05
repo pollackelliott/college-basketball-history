@@ -25,6 +25,7 @@ from typing import Any, Iterable
 import ingest_school
 from frozen_venue_authority import (
     FrozenVenueSplitAuthorityError,
+    derive_game_site_venue_relationship_rows,
     load_frozen_venue_split_authority as load_shared_frozen_venue_split_authority,
 )
 from administrative_status import administrative_status_errors
@@ -4126,30 +4127,10 @@ def _apply_sealed_game_site_venue_relationship_patches(
 
     venue_path = repo / "schools" / school_key / "venues.csv"
     venue_fields, venue_rows = read_csv_table(venue_path)
-    required_columns = {
-        "source_program_key",
-        "venue_key",
-        "venue_id",
-        "canonical_name",
-        "aliases",
-        "city",
-        "state",
-        "games_currently_assigned",
-        "first_assigned_game",
-        "last_assigned_game",
-        "relationship_type",
-        "site_rule",
-        "source_basis",
-        "notes",
-    }
-    missing = sorted(required_columns - set(venue_fields))
-    if missing:
-        raise WorkflowError(
-            "target venue portfolio cannot carry sealed GAME_SITE relationship; "
-            "missing columns: " + ", ".join(missing)
-        )
 
-    additions: list[dict[str, str]] = []
+    # Preserve the pre-append local-portfolio conflict checks here. The shared
+    # frozen-authority helper deliberately ignores current local rows so it can
+    # reconstruct the same authorized additions after they have been applied.
     for item in items:
         relationship_patch = {
             key: str(value)
@@ -4159,58 +4140,27 @@ def _apply_sealed_game_site_venue_relationship_patches(
             key: str(value)
             for key, value in dict(item.get("source_patch", {})).items()
         }
-        global_venue = _validate_game_site_venue_relationship_patch(
+        _validate_game_site_venue_relationship_patch(
             repo,
             school_key,
             item,
             source_patch,
             relationship_patch,
         )
-        game_date = str(item.get("source_game_date", "")).strip()
-        venue_name = source_patch["curated_venue_name"].strip()
-        display_name = global_venue.get("display_name", "").strip()
-        row = {field: "" for field in venue_fields}
-        row.update(
-            {
-                "source_program_key": school_key,
-                "venue_key": relationship_patch["venue_key"].strip(),
-                "venue_id": relationship_patch["venue_id"].strip(),
-                "canonical_name": display_name,
-                "aliases": (
-                    venue_name
-                    if normalized_venue_name(venue_name)
-                    != normalized_venue_name(display_name)
-                    else ""
-                ),
-                "city": global_venue.get("city", "").strip(),
-                "state": global_venue.get("state", "").strip(),
-                "games_currently_assigned": "1",
-                "first_assigned_game": game_date,
-                "last_assigned_game": game_date,
-                "relationship_type": "GAME_SITE",
-                "site_rule": (
-                    "Venue identity never establishes H/A/N; relationship applies "
-                    "only to the exact sealed source game."
-                ),
-                "source_basis": str(item.get("resolution_basis", "")).strip(),
-                "notes": (
-                    "Owner-sealed Gate 1 GAME_SITE relationship for "
-                    f"{item.get('source_game_id', '')}; reuses existing global "
-                    f"{relationship_patch['venue_key']}/"
-                    f"{relationship_patch['venue_id']}."
-                ),
-            }
+
+    try:
+        additions = derive_game_site_venue_relationship_rows(
+            repo,
+            school_key,
+            approved,
+            venue_fields,
         )
-        if "known_opened" in row:
-            row["known_opened"] = global_venue.get("opened", "").strip()
-        if "known_closed" in row:
-            row["known_closed"] = global_venue.get("closed", "").strip()
-        if "venue_date_precision" in row:
-            row["venue_date_precision"] = global_venue.get("date_precision", "").strip()
-        additions.append(row)
+    except FrozenVenueSplitAuthorityError as exc:
+        raise WorkflowError(str(exc)) from exc
 
     write_csv_preserving_format(venue_path, venue_fields, venue_rows + additions)
     return len(additions)
+
 
 
 def approve_plan(
