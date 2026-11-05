@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-stage1-0001",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "rhode-island-venue-maintenance-0001",
   "school_key": "rhode-island",
-  "previous_control_state_commit": "e9c881d27936c06221fd11e2e09d6ca366ccc483",
-  "previous_control_state_sha256": "47f6b079b5dec40059a94a8aad4cf58af567201016a802b9a32d4a0df7746769",
-  "expected_protected_main_sha": "69f36596f05bf72f51252015515053f80a949588",
-  "research_checkpoint": {
-    "sha256": "5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2",
-    "research_base_sha": "80b00278ac9add94702ac76c5fa310b95d2b1929",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "e9c881d27936c06221fd11e2e09d6ca366ccc483",
-      "path_prefix": ".remote-implementation/transports/rhode-island/rhode-island-stage1-0001/piece-",
-      "part_count": 14
-    }
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "previous_control_state_commit": "37a8ee68afabc91a9699979694717cc4ca970672",
+  "previous_control_state_sha256": "cb6a96a9fa57a9d38a40576695a081a21f6e3a67d49ef269dca927ec27ba907d",
+  "expected_protected_main_sha": "797f3d87fc5b50585c63aa548d6029b9828eb461",
+  "target_branch": "maintenance/rhode-island-stage1-shared-venue-identity",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/rhode-island-venue-maintenance-0001/venue-maintenance.json",
+    "sha256": "a0246089e5709e86127794b6869e2f37b88d3048c762747347fdf932ad9fa8e6"
   },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/rhode-island-stage1.json",
+  "expected_plan_sha256": "d87a3004cc64e6afcb315ced594aed76ac225413a08fef693a677ab4ffcd4a08",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the exact consolidated Rhode Island Stage 1 venue-maintenance family: geography-correct VEN-000084 Orlando, FL -> Kissimmee, FL then preserve VEN-000084 while absorbing VEN-000990; normalize VEN-000709 Montego Bay, JM -> Montego Bay, Jamaica and VEN-000957 Montego Bay, Saint James -> Montego Bay, Jamaica then preserve VEN-000709 while absorbing VEN-000957; preserve VEN-000123 while absorbing duplicate VEN-000966; preserve legitimate names/evidence; leave VEN-000124 physically distinct and untouched. No unrelated venue cleanup or historical reinterpretation is authorized.",
+    "spec_sha256": "a0246089e5709e86127794b6869e2f37b88d3048c762747347fdf932ad9fa8e6"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation lane — owner-authorized Implementation inception",
-    "authorization": "Owner explicitly authorized Rhode Island serialized Implementation inception from the attached final accepted RESEARCH_FROZEN artifact. Current protected main 69f36596f05bf72f51252015515053f80a949588 and global remote Implementation control were authenticated IDLE with recovery_required=false. The owner-designated attachment fallback was applied: exact ZIP SHA-256 5406bfab685f62d65a4abeae9f284c0d838a8e49e5ecb46c30b477fb5abe0ce2, exact six-file flat contract, research_base_sha 80b00278ac9add94702ac76c5fa310b95d2b1929, explicit RESEARCH_FROZEN evidence, PRE-FREEZE SELF-CHALLENGE PASS, owner NON_D1 sanity scan APPROVED, and accepted INCEPTION+ scope were authenticated. Current protected main now independently carries Rhode Island INCEPTION+ scope, so no scope contradiction exists. This request authorizes read-only Stage 1 inventory only; no Phase 0 mutation, Stage 2, owner gate, release, maintenance, merge, recovery, or protected-main mutation."
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — Control Center-authorized Stage 1 shared venue maintenance",
+    "authorization": "Owner supplied Control Center disposition authorizing exactly one consolidated Rhode Island VENUE_IDENTITY_MAINTENANCE family after PR #471 merged the generic geography-before-merge capability. This request authorizes only the exact three shared venue conflicts and exact geography corrections declared in the hash-bound spec. It does not authorize Research mutation, unrelated maintenance, Integration Freeze, Phase 0, Stage 2, Owner Gate 1, release, merge of protected main outside normal PR governance, or recovery."
   },
   "authority": {
     "phase0": false,
@@ -40,7 +41,7 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false,
+    "venue_identity_maintenance": true,
     "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false
