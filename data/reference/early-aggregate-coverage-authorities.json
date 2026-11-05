@@ -25,6 +25,30 @@
       },
       "maximum_eligible_season_start_year": 1930,
       "notes": "Founding-era year-by-year institutional 6-10 record; 10 individually supported games; exhausted archival/reciprocal routes. Missing-six count is derived, NOT an institutional statement. No hypothetical games."
+    },
+    {
+      "school_key": "la-salle",
+      "season": "1930-31",
+      "parent_checkpoint_sha256": "4e079b53c5d7118881fbdd56d4e9aa38b5930a4dbbc15e0a940cbb0ee0d8f06f",
+      "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/450",
+      "institutional_record": {
+        "wins": 15,
+        "losses": 4,
+        "games": 19
+      },
+      "identified_record": {
+        "wins": 1,
+        "losses": 1,
+        "games": 2
+      },
+      "unidentified_record": {
+        "wins": 14,
+        "losses": 3,
+        "games": 17
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "notes": "Owner-approved La Salle 1930-31 founding-era aggregate coverage closeout. Two individually identified games preserve a 1-1 record; the remaining 14-3 / 17-game residual is season-level accounting only after bounded research exhaustion. No anonymous or inferred game rows."
     }
   ]
 }
