@@ -362,18 +362,19 @@
     "rhode-island-stage2-gate1-seal-0001",
     "rhode-island-stage2-sealed-apply-0001",
     "rhode-island-release-readiness-0001",
-    "rhode-island-release-preview-verify-0001"
+    "rhode-island-release-preview-verify-0001",
+    "rhode-island-release-gate2-approval-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_GATE2_APPROVAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "rhode-island-release-gate2-approval-0001",
+  "active_request_sha256": "115af31ba520e84a5848765faf6dfde745688c64b388d89b4727b7022fa5ca98",
+  "active_school_key": "rhode-island",
+  "active_target_branch": "data/rhode-island-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -746,8 +747,11 @@
     "target_branch": "data/rhode-island-onboarding",
     "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42114808369",
+  "lock_acquisition_request_commit": "bc7999d1d5cb538e5bde245b81bdb4f5f231794f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_GATE2_RUNNING"
 }
