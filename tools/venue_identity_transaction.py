@@ -160,11 +160,6 @@ def load_spec(path: Path):
             raise TransactionError(
                 f"geography correction venue listed twice: {venue_id}"
             )
-        if venue_id in merge_ids:
-            raise TransactionError(
-                f"{venue_id}: one spec may not both merge and geographically correct "
-                "the same venue identity"
-            )
         used_correction_ids.add(venue_id)
         geography_corrections.append(
             {
@@ -229,6 +224,33 @@ def build_plan(repo: Path, spec_path: Path):
     rows = []
     touched_school_paths = set()
 
+    planned_geography = {
+        venue_id: (
+            clean(row.get("city")),
+            clean(row.get("state")),
+        )
+        for venue_id, row in by_id.items()
+    }
+    for correction in geography_corrections:
+        venue = by_id.get(correction["venue_id"])
+        if venue is None:
+            continue
+        if clean(venue.get("venue_key")) != correction["venue_key"]:
+            continue
+        current_geography = (
+            clean(venue.get("city")),
+            clean(venue.get("state")),
+        )
+        if current_geography != (
+            correction["from_city"],
+            correction["from_state"],
+        ):
+            continue
+        planned_geography[correction["venue_id"]] = (
+            correction["to_city"],
+            correction["to_state"],
+        )
+
     for merge in merges:
         survivor_id = merge["survivor_venue_id"]
         absorbed_id = merge["absorbed_venue_id"]
@@ -239,12 +261,21 @@ def build_plan(repo: Path, spec_path: Path):
                 f"{survivor_id}<-{absorbed_id}: survivor or absorbed venue missing"
             )
             continue
+        survivor_geography = planned_geography.get(
+            survivor_id,
+            (clean(survivor.get("city")), clean(survivor.get("state"))),
+        )
+        absorbed_geography = planned_geography.get(
+            absorbed_id,
+            (clean(absorbed.get("city")), clean(absorbed.get("state"))),
+        )
         if (
-            clean(survivor.get("city")).casefold() != clean(absorbed.get("city")).casefold()
-            or clean(survivor.get("state")).upper() != clean(absorbed.get("state")).upper()
+            survivor_geography[0].casefold() != absorbed_geography[0].casefold()
+            or survivor_geography[1].upper() != absorbed_geography[1].upper()
         ):
             blockers.append(
-                f"{survivor_id}<-{absorbed_id}: geography differs; not a mechanical duplicate"
+                f"{survivor_id}<-{absorbed_id}: geography differs after planned "
+                "corrections; not a mechanical duplicate"
             )
 
         canonical_count = sum(
@@ -317,8 +348,8 @@ def build_plan(repo: Path, spec_path: Path):
                 **merge,
                 "survivor_venue_key": clean(survivor.get("venue_key")),
                 "absorbed_venue_key": clean(absorbed.get("venue_key")),
-                "city": clean(survivor.get("city")),
-                "state": clean(survivor.get("state")),
+                "city": survivor_geography[0],
+                "state": survivor_geography[1],
                 "canonical_rows": canonical_count,
                 "provenance_markers": provenance_marker_count,
                 "assertion_rows": assertion_count,
@@ -615,6 +646,71 @@ def apply_transaction(
         canonical_geography_updates = 0
         school_geography_updates = 0
 
+        for correction in plan["geography_corrections"]:
+            venue_id = correction["venue_id"]
+            venue_key = correction["venue_key"]
+            by_id = {clean(row.get("venue_id")): row for row in venues}
+            venue = by_id[venue_id]
+            venue["city"] = correction["to_city"]
+            venue["state"] = correction["to_state"]
+
+            if "site_city" not in cfields or "site_state" not in cfields:
+                raise TransactionError(
+                    "canonical games lack site_city/site_state required for "
+                    "venue geography correction"
+                )
+            canonical_changed = 0
+            for row in canonical:
+                if clean(row.get("venue_id")) != venue_id:
+                    continue
+                if "venue_key" in cfields and clean(row.get("venue_key")) not in {
+                    "",
+                    venue_key,
+                }:
+                    raise TransactionError(
+                        f"{venue_id}: canonical venue_key changed after planning"
+                    )
+                row["site_city"] = correction["to_city"]
+                row["site_state"] = correction["to_state"]
+                canonical_changed += 1
+            if canonical_changed != correction["canonical_rows"]:
+                raise TransactionError(
+                    f"{venue_id}: planned {correction['canonical_rows']} canonical "
+                    f"geography updates, found {canonical_changed}"
+                )
+            canonical_geography_updates += canonical_changed
+
+            for item in correction["school_files"]:
+                path = repo / item["path"]
+                fields, rows = read_csv(path)
+                if "city" not in fields or "state" not in fields:
+                    raise TransactionError(
+                        f"{item['path']}: school venue rows lack city/state"
+                    )
+                changed = 0
+                for row in rows:
+                    if clean(row.get("venue_id")) != venue_id:
+                        continue
+                    if "venue_key" in fields and clean(row.get("venue_key")) not in {
+                        "",
+                        venue_key,
+                    }:
+                        raise TransactionError(
+                            f"{item['path']}: venue_key changed after planning"
+                        )
+                    row["city"] = correction["to_city"]
+                    row["state"] = correction["to_state"]
+                    changed += 1
+                if changed != item["row_count"]:
+                    raise TransactionError(
+                        f"{item['path']}: planned {item['row_count']} geography "
+                        f"updates, found {changed}"
+                    )
+                write_csv(path, fields, rows)
+                school_geography_updates += changed
+
+            venue_geography_corrections += 1
+
         for merge in plan["merges"]:
             survivor_id = merge["survivor_venue_id"]
             absorbed_id = merge["absorbed_venue_id"]
@@ -732,70 +828,6 @@ def apply_transaction(
                 school_updates += changed
 
 
-        for correction in plan["geography_corrections"]:
-            venue_id = correction["venue_id"]
-            venue_key = correction["venue_key"]
-            by_id = {clean(row.get("venue_id")): row for row in venues}
-            venue = by_id[venue_id]
-            venue["city"] = correction["to_city"]
-            venue["state"] = correction["to_state"]
-
-            if "site_city" not in cfields or "site_state" not in cfields:
-                raise TransactionError(
-                    "canonical games lack site_city/site_state required for "
-                    "venue geography correction"
-                )
-            canonical_changed = 0
-            for row in canonical:
-                if clean(row.get("venue_id")) != venue_id:
-                    continue
-                if "venue_key" in cfields and clean(row.get("venue_key")) not in {
-                    "",
-                    venue_key,
-                }:
-                    raise TransactionError(
-                        f"{venue_id}: canonical venue_key changed after planning"
-                    )
-                row["site_city"] = correction["to_city"]
-                row["site_state"] = correction["to_state"]
-                canonical_changed += 1
-            if canonical_changed != correction["canonical_rows"]:
-                raise TransactionError(
-                    f"{venue_id}: planned {correction['canonical_rows']} canonical "
-                    f"geography updates, found {canonical_changed}"
-                )
-            canonical_geography_updates += canonical_changed
-
-            for item in correction["school_files"]:
-                path = repo / item["path"]
-                fields, rows = read_csv(path)
-                if "city" not in fields or "state" not in fields:
-                    raise TransactionError(
-                        f"{item['path']}: school venue rows lack city/state"
-                    )
-                changed = 0
-                for row in rows:
-                    if clean(row.get("venue_id")) != venue_id:
-                        continue
-                    if "venue_key" in fields and clean(row.get("venue_key")) not in {
-                        "",
-                        venue_key,
-                    }:
-                        raise TransactionError(
-                            f"{item['path']}: venue_key changed after planning"
-                        )
-                    row["city"] = correction["to_city"]
-                    row["state"] = correction["to_state"]
-                    changed += 1
-                if changed != item["row_count"]:
-                    raise TransactionError(
-                        f"{item['path']}: planned {item['row_count']} geography "
-                        f"updates, found {changed}"
-                    )
-                write_csv(path, fields, rows)
-                school_geography_updates += changed
-
-            venue_geography_corrections += 1
 
         write_csv(venue_path, vfields, venues)
         if plan["merges"]:
@@ -855,15 +887,29 @@ def apply_transaction(
         venues_by_id_check = {
             clean(row.get("venue_id")): row for row in venues_check
         }
+        absorbed_to_survivor = {
+            merge["absorbed_venue_id"]: merge["survivor_venue_id"]
+            for merge in plan["merges"]
+        }
+        survivor_keys = {
+            merge["survivor_venue_id"]: merge["survivor_venue_key"]
+            for merge in plan["merges"]
+        }
         for correction in plan["geography_corrections"]:
             venue_id = correction["venue_id"]
             venue_key = correction["venue_key"]
-            venue = venues_by_id_check.get(venue_id)
+            postcondition_id = absorbed_to_survivor.get(venue_id, venue_id)
+            venue = venues_by_id_check.get(postcondition_id)
             if venue is None:
                 raise TransactionError(
                     f"postcondition: geography-corrected venue {venue_id} missing"
                 )
-            if clean(venue.get("venue_key")) != venue_key:
+            expected_key = (
+                survivor_keys[postcondition_id]
+                if venue_id in absorbed_to_survivor
+                else venue_key
+            )
+            if clean(venue.get("venue_key")) != expected_key:
                 raise TransactionError(
                     f"postcondition: geography correction changed venue_key for {venue_id}"
                 )
@@ -879,7 +925,7 @@ def apply_transaction(
                     f"postcondition: venue registry geography not corrected for {venue_id}"
                 )
             for row in canonical_check:
-                if clean(row.get("venue_id")) != venue_id:
+                if clean(row.get("venue_id")) != postcondition_id:
                     continue
                 if (
                     clean(row.get("site_city")),
@@ -891,7 +937,7 @@ def apply_transaction(
             for item in correction["school_files"]:
                 _, school_rows = read_csv(repo / item["path"])
                 for row in school_rows:
-                    if clean(row.get("venue_id")) != venue_id:
+                    if clean(row.get("venue_id")) != postcondition_id:
                         continue
                     if (
                         clean(row.get("city")),
@@ -946,8 +992,8 @@ def apply_transaction(
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Plan/apply duplicate venue identity reconciliation and exact in-place "
-            "venue geography correction."
+            "Plan/apply exact venue geography corrections followed by duplicate "
+            "venue identity reconciliation."
         )
     )
     parser.add_argument(

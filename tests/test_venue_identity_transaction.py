@@ -413,6 +413,167 @@ class VenueIdentityTransactionTests(unittest.TestCase):
             )
         )
 
+    def test_mixed_spec_corrects_geography_before_duplicate_merge(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+
+        venue_path = repo / "data/reference/venues.csv"
+        venue_rows = read_rows(venue_path)
+        for row in venue_rows:
+            if row["venue_id"] == "VEN-000001":
+                row["city"] = "Old Survivor City"
+                row["state"] = "AA"
+            elif row["venue_id"] == "VEN-000002":
+                row["city"] = "Old Absorbed City"
+                row["state"] = "BB"
+        write_csv(venue_path, list(venue_rows[0]), venue_rows)
+
+        canonical_path = repo / "data/canonical/games.csv"
+        canonical_rows = read_rows(canonical_path)
+        for row in canonical_rows:
+            if row["venue_id"] == "VEN-000002":
+                row["site_city"] = "Old Absorbed City"
+                row["site_state"] = "BB"
+        write_csv(canonical_path, list(canonical_rows[0]), canonical_rows)
+
+        school_path = repo / "schools/test/venues.csv"
+        school_rows = read_rows(school_path)
+        for row in school_rows:
+            if row["venue_id"] == "VEN-000002":
+                row["city"] = "Old Absorbed City"
+                row["state"] = "BB"
+        write_csv(school_path, list(school_rows[0]), school_rows)
+
+        spec.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "geography_corrections": [
+                        {
+                            "venue_id": "VEN-000001",
+                            "venue_key": "survivor",
+                            "from_city": "Old Survivor City",
+                            "from_state": "AA",
+                            "to_city": "Precise City",
+                            "to_state": "TX",
+                            "expected_canonical_rows": 0,
+                            "expected_school_rows": 0,
+                            "resolution_basis": "normalize survivor before merge",
+                        },
+                        {
+                            "venue_id": "VEN-000002",
+                            "venue_key": "duplicate",
+                            "from_city": "Old Absorbed City",
+                            "from_state": "BB",
+                            "to_city": "Precise City",
+                            "to_state": "TX",
+                            "expected_canonical_rows": 1,
+                            "expected_school_rows": 1,
+                            "resolution_basis": "normalize absorbed identity before merge",
+                        },
+                    ],
+                    "merges": [
+                        {
+                            "survivor_venue_id": "VEN-000001",
+                            "absorbed_venue_id": "VEN-000002",
+                            "expected_canonical_rows": 1,
+                            "expected_school_rows": 1,
+                            "resolution_basis": "same physical venue after exact normalization",
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        plan = transaction.build_plan(repo, spec)
+        self.assertEqual(plan["blockers"], [])
+        self.assertEqual(
+            (plan["merges"][0]["city"], plan["merges"][0]["state"]),
+            ("Precise City", "TX"),
+        )
+
+        result = transaction.apply_transaction(
+            repo,
+            spec,
+            plan["plan_sha256"],
+            run_validation=False,
+        )
+        self.assertEqual(result["venues_retired"], 1)
+        self.assertEqual(result["venue_geography_corrections"], 2)
+        self.assertEqual(result["canonical_geography_rows_updated"], 1)
+        self.assertEqual(result["canonical_identity_rows_updated"], 1)
+
+        venues = read_rows(venue_path)
+        self.assertEqual([row["venue_id"] for row in venues], ["VEN-000001"])
+        self.assertEqual(
+            (venues[0]["city"], venues[0]["state"]),
+            ("Precise City", "TX"),
+        )
+
+        canonical = read_rows(canonical_path)
+        self.assertEqual(canonical[0]["venue_id"], "VEN-000001")
+        self.assertEqual(canonical[0]["venue_key"], "survivor")
+        self.assertEqual(
+            (canonical[0]["site_city"], canonical[0]["site_state"]),
+            ("Precise City", "TX"),
+        )
+
+        school = read_rows(school_path)
+        self.assertEqual(school[0]["venue_id"], "VEN-000001")
+        self.assertEqual(school[0]["venue_key"], "survivor")
+        self.assertEqual(
+            (school[0]["city"], school[0]["state"]),
+            ("Precise City", "TX"),
+        )
+
+    def test_mixed_spec_still_blocks_if_planned_geography_does_not_converge(self):
+        temporary, repo, spec = self.make_repo()
+        self.addCleanup(temporary.cleanup)
+
+        venue_path = repo / "data/reference/venues.csv"
+        venue_rows = read_rows(venue_path)
+        for row in venue_rows:
+            if row["venue_id"] == "VEN-000001":
+                row["city"] = "Old Survivor City"
+                row["state"] = "AA"
+        write_csv(venue_path, list(venue_rows[0]), venue_rows)
+
+        spec.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "geography_corrections": [
+                        {
+                            "venue_id": "VEN-000001",
+                            "venue_key": "survivor",
+                            "from_city": "Old Survivor City",
+                            "from_state": "AA",
+                            "to_city": "Still Different",
+                            "to_state": "CC",
+                            "resolution_basis": "fixture nonconvergent correction",
+                        }
+                    ],
+                    "merges": [
+                        {
+                            "survivor_venue_id": "VEN-000001",
+                            "absorbed_venue_id": "VEN-000002",
+                            "resolution_basis": "must remain blocked",
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        plan = transaction.build_plan(repo, spec)
+        self.assertTrue(
+            any(
+                "geography differs after planned corrections" in item
+                for item in plan["blockers"]
+            )
+        )
+
     def test_plan_and_apply_geography_correction_preserves_source_evidence(self):
         temporary, repo, spec = self.make_geography_repo()
         self.addCleanup(temporary.cleanup)

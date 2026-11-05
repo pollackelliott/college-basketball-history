@@ -97,6 +97,16 @@ registry, canonical rows carrying that exact venue identity, affected published 
 documentary site-evidence rows retain their source geography and must not be rewritten merely
 to match the corrected registry locality.
 
+A single authorized maintenance spec may combine exact geography corrections with duplicate
+identity merges when those operations belong to one already-classified shared-reference
+family. In such a mixed spec, the permanent transaction applies and verifies all exact
+geography corrections **before** duplicate merging. The planner evaluates merge compatibility
+against that post-correction effective geography and remains blocked unless survivor and
+absorbed identities converge to the same city/state. This ordering is not permission to infer
+geography from a duplicate match: every correction still requires its own exact old/new
+geography and settled Control Center basis. Merge-only and geography-only specs retain their
+existing semantics.
+
 The remote operation does not supply historical authority. The historical/identity or
 geography decision must already be settled and explicitly authorized by the Control Center.
 It executes the unchanged permanent `venue_identity_transaction.py` sealed plan/apply path
