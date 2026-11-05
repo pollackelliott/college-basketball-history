@@ -1281,7 +1281,7 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
 
         # Exercise the complete post-reconciliation authority contract through
         # the real Integration Freeze matcher. This is the production topology that
-        # proposal -0008 exposed: 4 dates + 4 OT + 5 game types + 1 site type.
+        # proposal -0008 exposed, plus the later sealed GAME_SITE topology: 4 dates + 4 OT + 5 game types + 1 site type + 1 decision-bound venue relationship.
         with tempfile.TemporaryDirectory() as copied:
             rehearsal = Path(copied) / "repository"
             copy_repository(repo, rehearsal, school_key="st-bonaventure")
