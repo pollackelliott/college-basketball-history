@@ -731,7 +731,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-preview-verify-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "7c05ada8fdc970e31391e2c714592e067f5f69765aa45106102b0e8f0eb13993",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -740,7 +740,7 @@
     "preview_deployment_id": 7585045491,
     "preview_url": "https://college-basketball-history-do2mhuo5v-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "rhode-island-release-preview-verify-0001",
     "school_key": "rhode-island",
     "target_branch": "data/rhode-island-onboarding",
