@@ -1,0 +1,46 @@
+{
+  "approved_plan_hash_preview": "c4e915dc1978fdedc0a3f9d7e9b734db80fcd6f135bdb644fd331257ca15d3af",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "6364ad81cf382512626c108be532ee50744bb8cbf41a586d40a271bfc55844d6",
+    "implementation-stage2-status.json": "fe5b37521705bd410049cb52341939617fc5c289e43c13e8af628565df170322",
+    "plan.json": "1d39797f4b4c99f43ce82e871865be494df08e7b6c7d71d67dbb50bb29c8b42b",
+    "review.csv": "f53048a32809e58d1a51222f863bf075fd10419627a06c6c1e86a4249ae99274",
+    "review.md": "a50bee569471dcfacaa96374f5eb34c7dca11db3c19a69c75823002b067720c2"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "6364ad81cf382512626c108be532ee50744bb8cbf41a586d40a271bfc55844d6",
+    "implementation-stage2-status.json": "efe142ef5dcbe8d6df19e6443fe993cd8d7ae5682d4748a9736b78abdeff7689",
+    "plan.json": "d5df62cee7bbaaa3c746f818b5ed18943891d0bafeb684b25627abac521fbb50",
+    "review.csv": "f53048a32809e58d1a51222f863bf075fd10419627a06c6c1e86a4249ae99274",
+    "review.md": "35eca23d4435689dae209debb5f37c3f051e073bc73c73bd18f50821190afb53"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "runtime_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "462dfc713ebb9fdc7b60186eb2578b8b5d42041d",
+  "recommendation_map_sha256": "7e72bfca96a5369da31ba20909566a17d900d6c33efa5145250802a09915f60f",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "st-bonaventure-stage2-proposal-0011",
+  "runtime_decision_universe_sha256": "7cbfb766ee2f1237c1eb7a4ea43406ab86cec3281512ce41db3a001ded6648b6",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
+  "target_tree_sha": "6e04fc2405f5e0cb06a9f5766fc53449962eb8b1",
+  "tracked_stage2_mutation": "NONE"
+}
