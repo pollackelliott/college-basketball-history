@@ -22,6 +22,7 @@ from frozen_venue_authority import (
 from onboard_school import copy_repository
 from onboarding_plan import (
     WorkflowError,
+    _apply_sealed_game_site_venue_relationship_patches,
     _venue_maps,
     apply_pre_ingest_source_patches,
     frozen_venue_split_authority,
@@ -972,6 +973,13 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "opened": "1968-02-11",
                 "closed": "",
             },
+            "VEN-000999": {
+                "venue_id": "VEN-000999",
+                "city": "Example City",
+                "state": "EX",
+                "opened": "2000-01-01",
+                "closed": "",
+            },
         }
         # Model the minimal global physical-venue registry required by the real reconciliation loader.
         reference = repo / "data" / "reference"
@@ -1014,6 +1022,19 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "city": "New York",
                 "state": "NY",
                 "opened": "1968-02-11",
+                "closed": "",
+                "date_precision": "DAY",
+                "identity_status": "VERIFIED",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000999",
+                "venue_key": "example-arena",
+                "display_name": "Example Arena",
+                "city": "Example City",
+                "state": "EX",
+                "opened": "2000-01-01",
                 "closed": "",
                 "date_precision": "DAY",
                 "identity_status": "VERIFIED",
@@ -1064,6 +1085,17 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "normalized_name": "madisonsquaregarden",
                 "name_type": "PROJECT_DISPLAY",
                 "valid_from": "1968-02-11",
+                "valid_to": "",
+                "date_precision": "DAY",
+                "source_basis": "fixture",
+                "notes": "",
+            })
+            writer.writerow({
+                "venue_id": "VEN-000999",
+                "venue_name": "Example Arena",
+                "normalized_name": "examplearena",
+                "name_type": "PROJECT_DISPLAY",
+                "valid_from": "2000-01-01",
                 "valid_to": "",
                 "date_precision": "DAY",
                 "source_basis": "fixture",
@@ -1381,6 +1413,41 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "game_type": "REGULAR_SEASON",
             })
 
+            relationship_source_id = "STB-1982-83-028"
+            source_by_id[relationship_source_id]["curated_game_type"] = "NIT"
+            source_by_id[relationship_source_id]["curated_venue_name"] = "Example Arena"
+            source_by_id[relationship_source_id]["city"] = "Example City"
+            source_by_id[relationship_source_id]["state"] = "EX"
+            final_decisions.append({
+                "decision_id": "FINAL-GAME-SITE",
+                "category": "discrepancy",
+                "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                "source_game_id": relationship_source_id,
+                "source_game_date": "1983-03-07",
+                "canonical_game_id": "CBBG-FINAL-GAME-SITE",
+                "field_name": "game_type",
+                "canonical_value": "NIT",
+                "source_patch": {
+                    "curated_venue_name": "Example Arena",
+                    "city": "Example City",
+                    "state": "EX",
+                },
+                "venue_relationship_patch": {
+                    "venue_id": "VEN-000999",
+                    "venue_key": "example-arena",
+                },
+                "resolution_basis": "Fixture exact postseason host site.",
+            })
+            canonical_rows.append({
+                "canonical_game_id": "CBBG-FINAL-GAME-SITE",
+                "season_label": "1982-1983",
+                "game_date": "1983-03-07",
+                "team_a_key": "st-bonaventure",
+                "team_b_key": "example-opponent",
+                "site_type": "TEAM_B_HOME",
+                "game_type": "NIT",
+            })
+
             with source_path.open("w", encoding="utf-8", newline="") as handle:
                 writer = csv.DictWriter(handle, fieldnames=source_fields)
                 writer.writeheader()
@@ -1397,9 +1464,17 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "approved_plan_hash": "f" * 64,
                 "decisions": final_decisions,
             }
+            self.assertEqual(
+                _apply_sealed_game_site_venue_relationship_patches(
+                    rehearsal,
+                    final_approved,
+                ),
+                1,
+            )
 
-            # Final verification explicitly admits the sealed final semantic
-            # universe and still returns the exact frozen split authority.
+            # Final verification explicitly admits the sealed final semantic and
+            # exact sealed GAME_SITE venue delta while still returning the exact
+            # frozen split authority.
             final_metadata = ingest_school.load_runtime_venue_metadata_map(
                 rehearsal,
                 "st-bonaventure",
@@ -1415,10 +1490,11 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             self.assertEqual(final_result["venue_id"], "VEN-000124")
 
             # The identical final-state delta remains forbidden in ordinary
-            # pre-ingest authentication.
+            # pre-ingest authentication. The venue portfolio must remain byte-exact
+            # outside explicit post-reconciliation verification.
             with self.assertRaisesRegex(
                 FrozenVenueSplitAuthorityError,
-                "does not match current source semantics",
+                "does not match current",
             ):
                 ingest_school.load_runtime_venue_metadata_map(
                     rehearsal,
@@ -1444,6 +1520,76 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     sealed_plan_context=wrong_approved,
                     post_reconciliation_semantics=True,
                 )
+
+            # An unsealed extra venue row remains forbidden.
+            venue_path = rehearsal / "schools" / "st-bonaventure" / "venues.csv"
+            venue_fields_runtime = list(
+                csv.DictReader(
+                    venue_path.open(encoding="utf-8-sig", newline="")
+                ).fieldnames
+                or []
+            )
+            with venue_path.open("a", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
+                writer.writerow({
+                    "source_program_key": "st-bonaventure",
+                    "venue_key": "unsealed-arena",
+                    "venue_id": "VEN-UNSEALED",
+                    "canonical_name": "Unsealed Arena",
+                    "city": "Elsewhere",
+                    "state": "EX",
+                    "relationship_type": "GAME_SITE",
+                })
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "outside the exact sealed post-reconciliation venue relationship delta",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    venue_path,
+                    global_venues,
+                    sealed_plan_context=final_approved,
+                    post_reconciliation_semantics=True,
+                )
+
+            # Restore the exact sealed venue file, then prove an edited frozen row
+            # also fails rather than being mistaken for an allowed addition.
+            venue_rows_runtime = list(
+                csv.DictReader(
+                    venue_path.open(encoding="utf-8-sig", newline="")
+                )
+            )
+            venue_rows_runtime = [
+                row
+                for row in venue_rows_runtime
+                if row.get("venue_id", "") != "VEN-UNSEALED"
+            ]
+            venue_rows_runtime[0]["notes"] = "tampered frozen row"
+            with venue_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
+                writer.writeheader()
+                writer.writerows(venue_rows_runtime)
+            with self.assertRaisesRegex(
+                FrozenVenueSplitAuthorityError,
+                "outside the exact sealed post-reconciliation venue relationship delta",
+            ):
+                ingest_school.load_runtime_venue_metadata_map(
+                    rehearsal,
+                    "st-bonaventure",
+                    venue_path,
+                    global_venues,
+                    sealed_plan_context=final_approved,
+                    post_reconciliation_semantics=True,
+                )
+
+            # Recreate a clean disposable final state for the independent semantic
+            # drift probe below.
+            venue_rows_runtime[0]["notes"] = ""
+            with venue_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=venue_fields_runtime)
+                writer.writeheader()
+                writer.writerows(venue_rows_runtime)
 
             # Unsealed final semantic drift is still fail-closed.
             unrelated_id = before_ids[20]
