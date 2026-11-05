@@ -352,7 +352,7 @@
     "rhode-island-venue-maintenance-0001"
   ],
   "active_expected_main_sha": "797f3d87fc5b50585c63aa548d6029b9828eb461",
-  "active_lock_commit": null,
+  "active_lock_commit": "2cbff48ee28d2b762fd6fdd0152f3dd38904cf4d",
   "active_lock_owner": "github-actions:42057066251:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
