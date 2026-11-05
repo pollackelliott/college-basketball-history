@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "authority_type": "OWNER_APPROVED_EARLY_HISTORY_ACCOUNTING_CLOSEOUT",
+  "cases": [
+    {
+      "school_key": "fordham",
+      "parent_checkpoint_sha256": "acf5bf3e7b871d57aeabbbed6f36879afae227ab8392566077f4e17ef5dc54dc",
+      "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/452",
+      "identified_ledger_sha256": "2ef5973da2b9b64bc1416169cdadfdc031bce91b45024836dc89a8e651d99513",
+      "identified_rows": 2921,
+      "accepted_nonexcluded_rows": 2917,
+      "aggregate_only_seasons": [
+        {
+          "season": "1909-10",
+          "institutional_record": {
+            "wins": 16,
+            "losses": 2,
+            "games": 18
+          },
+          "identified_record": {
+            "wins": 0,
+            "losses": 0,
+            "games": 0
+          },
+          "source_note": "All games vs. Fordham Prep and Pickup Teams"
+        },
+        {
+          "season": "1910-11",
+          "institutional_record": {
+            "wins": 12,
+            "losses": 4,
+            "games": 16
+          },
+          "identified_record": {
+            "wins": 0,
+            "losses": 0,
+            "games": 0
+          },
+          "source_note": "All games vs. Fordham Prep and Pickup Teams"
+        },
+        {
+          "season": "1915-16",
+          "institutional_record": {
+            "wins": 10,
+            "losses": 4,
+            "games": 14
+          },
+          "identified_record": {
+            "wins": 0,
+            "losses": 0,
+            "games": 0
+          },
+          "source_note": "All Games against club teams"
+        },
+        {
+          "season": "1916-17",
+          "institutional_record": {
+            "wins": 12,
+            "losses": 3,
+            "games": 15
+          },
+          "identified_record": {
+            "wins": 0,
+            "losses": 0,
+            "games": 0
+          },
+          "source_note": "All Games against club teams"
+        },
+        {
+          "season": "1917-18",
+          "institutional_record": {
+            "wins": 11,
+            "losses": 4,
+            "games": 15
+          },
+          "identified_record": {
+            "wins": 0,
+            "losses": 0,
+            "games": 0
+          },
+          "source_note": "All Games against club teams"
+        }
+      ],
+      "accounting_contradiction_seasons": [
+        {
+          "season": "1902-03",
+          "institutional_record": {
+            "wins": 16,
+            "losses": 6,
+            "games": 22
+          },
+          "identified_record": {
+            "wins": 3,
+            "losses": 4,
+            "games": 7
+          },
+          "mechanical_delta": {
+            "wins": 13,
+            "losses": 2,
+            "games": 15
+          }
+        },
+        {
+          "season": "1903-04",
+          "institutional_record": {
+            "wins": 23,
+            "losses": 5,
+            "games": 28
+          },
+          "identified_record": {
+            "wins": 6,
+            "losses": 3,
+            "games": 9
+          },
+          "mechanical_delta": {
+            "wins": 17,
+            "losses": 2,
+            "games": 19
+          }
+        },
+        {
+          "season": "1904-05",
+          "institutional_record": {
+            "wins": 19,
+            "losses": 6,
+            "games": 25
+          },
+          "identified_record": {
+            "wins": 5,
+            "losses": 3,
+            "games": 8
+          },
+          "mechanical_delta": {
+            "wins": 14,
+            "losses": 3,
+            "games": 17
+          }
+        },
+        {
+          "season": "1905-06",
+          "institutional_record": {
+            "wins": 14,
+            "losses": 2,
+            "games": 16
+          },
+          "identified_record": {
+            "wins": 7,
+            "losses": 4,
+            "games": 11
+          },
+          "mechanical_delta": {
+            "wins": 7,
+            "losses": -2,
+            "games": 5
+          }
+        },
+        {
+          "season": "1906-07",
+          "institutional_record": {
+            "wins": 16,
+            "losses": 9,
+            "games": 25
+          },
+          "identified_record": {
+            "wins": 6,
+            "losses": 8,
+            "games": 14
+          },
+          "mechanical_delta": {
+            "wins": 10,
+            "losses": 1,
+            "games": 11
+          }
+        },
+        {
+          "season": "1907-08",
+          "institutional_record": {
+            "wins": 19,
+            "losses": 12,
+            "games": 31
+          },
+          "identified_record": {
+            "wins": 13,
+            "losses": 11,
+            "games": 24
+          },
+          "mechanical_delta": {
+            "wins": 6,
+            "losses": 1,
+            "games": 7
+          }
+        },
+        {
+          "season": "1908-09",
+          "institutional_record": {
+            "wins": 17,
+            "losses": 12,
+            "games": 29
+          },
+          "identified_record": {
+            "wins": 10,
+            "losses": 9,
+            "games": 19
+          },
+          "mechanical_delta": {
+            "wins": 7,
+            "losses": 3,
+            "games": 10
+          }
+        },
+        {
+          "season": "1911-12",
+          "institutional_record": {
+            "wins": 20,
+            "losses": 13,
+            "games": 33
+          },
+          "identified_record": {
+            "wins": 6,
+            "losses": 9,
+            "games": 15
+          },
+          "mechanical_delta": {
+            "wins": 14,
+            "losses": 4,
+            "games": 18
+          }
+        },
+        {
+          "season": "1912-13",
+          "institutional_record": {
+            "wins": 18,
+            "losses": 13,
+            "games": 31
+          },
+          "identified_record": {
+            "wins": 10,
+            "losses": 11,
+            "games": 21
+          },
+          "mechanical_delta": {
+            "wins": 8,
+            "losses": 2,
+            "games": 10
+          }
+        },
+        {
+          "season": "1913-14",
+          "institutional_record": {
+            "wins": 21,
+            "losses": 8,
+            "games": 29
+          },
+          "identified_record": {
+            "wins": 10,
+            "losses": 8,
+            "games": 18
+          },
+          "mechanical_delta": {
+            "wins": 11,
+            "losses": 0,
+            "games": 11
+          }
+        },
+        {
+          "season": "1914-15",
+          "institutional_record": {
+            "wins": 17,
+            "losses": 15,
+            "games": 32
+          },
+          "identified_record": {
+            "wins": 13,
+            "losses": 12,
+            "games": 25
+          },
+          "mechanical_delta": {
+            "wins": 4,
+            "losses": 3,
+            "games": 7
+          }
+        },
+        {
+          "season": "1918-19",
+          "institutional_record": {
+            "wins": 24,
+            "losses": 5,
+            "games": 29
+          },
+          "identified_record": {
+            "wins": 21,
+            "losses": 3,
+            "games": 24
+          },
+          "mechanical_delta": {
+            "wins": 3,
+            "losses": 2,
+            "games": 5
+          }
+        },
+        {
+          "season": "1919-20",
+          "institutional_record": {
+            "wins": 12,
+            "losses": 9,
+            "games": 21
+          },
+          "identified_record": {
+            "wins": 12,
+            "losses": 8,
+            "games": 20
+          },
+          "mechanical_delta": {
+            "wins": 0,
+            "losses": 1,
+            "games": 1
+          }
+        },
+        {
+          "season": "1920-21",
+          "institutional_record": {
+            "wins": 15,
+            "losses": 9,
+            "games": 24
+          },
+          "identified_record": {
+            "wins": 15,
+            "losses": 8,
+            "games": 23
+          },
+          "mechanical_delta": {
+            "wins": 0,
+            "losses": 1,
+            "games": 1
+          }
+        },
+        {
+          "season": "1921-22",
+          "institutional_record": {
+            "wins": 13,
+            "losses": 7,
+            "games": 20
+          },
+          "identified_record": {
+            "wins": 16,
+            "losses": 7,
+            "games": 23
+          },
+          "mechanical_delta": {
+            "wins": -3,
+            "losses": 0,
+            "games": -3
+          }
+        },
+        {
+          "season": "1922-23",
+          "institutional_record": {
+            "wins": 7,
+            "losses": 12,
+            "games": 19
+          },
+          "identified_record": {
+            "wins": 10,
+            "losses": 10,
+            "games": 20
+          },
+          "mechanical_delta": {
+            "wins": -3,
+            "losses": 2,
+            "games": -1
+          }
+        },
+        {
+          "season": "1923-24",
+          "institutional_record": {
+            "wins": 12,
+            "losses": 8,
+            "games": 20
+          },
+          "identified_record": {
+            "wins": 12,
+            "losses": 7,
+            "games": 19
+          },
+          "mechanical_delta": {
+            "wins": 0,
+            "losses": 1,
+            "games": 1
+          }
+        }
+      ],
+      "accounting_summary": {
+        "official_season_aggregate": {
+          "wins": 344,
+          "losses": 168,
+          "games": 512
+        },
+        "chronological_detail": {
+          "wins": 175,
+          "losses": 125,
+          "rows": 300
+        },
+        "club_high_school_aggregate": {
+          "wins": 185,
+          "losses": 46,
+          "games": 231,
+          "distinct_labels": 36
+        },
+        "simple_union_implied_overlap_games": 19
+      },
+      "minimum_direct_result_conflicts": 5,
+      "maximum_eligible_season_start_year": 1923,
+      "notes": "Owner-approved Fordham multi-season early-history closeout. Aggregate-only seasons remain season-level records; detailed/accounting contradictions retain all identified rows and prohibit arithmetic fitting or inferred overlap."
+    }
+  ]
+}
