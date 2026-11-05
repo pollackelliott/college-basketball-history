@@ -10,15 +10,321 @@ assignments against the current source semantic snapshot and frozen venues.csv b
 from __future__ import annotations
 
 import csv
+import datetime as dt
 import hashlib
+import io
 import json
 import re
 from pathlib import Path
 from typing import Any
 
+from venue_reference import load_global_venue_reference, normalized_venue_name
+
 
 class FrozenVenueSplitAuthorityError(ValueError):
     """The Integration Freeze venue-split authority is missing trust invariants."""
+
+
+
+VENUE_RELATIONSHIP_PATCH_FIELDS = frozenset({"venue_id", "venue_key"})
+GAME_SITE_REQUIRED_COLUMNS = frozenset({
+    "source_program_key",
+    "venue_key",
+    "venue_id",
+    "canonical_name",
+    "aliases",
+    "city",
+    "state",
+    "games_currently_assigned",
+    "first_assigned_game",
+    "last_assigned_game",
+    "relationship_type",
+    "site_rule",
+    "source_basis",
+    "notes",
+})
+
+
+def _read_csv_table(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    if not path.is_file():
+        raise FrozenVenueSplitAuthorityError(f"missing CSV file: {path}")
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fieldnames = list(reader.fieldnames or [])
+        return fieldnames, list(reader)
+
+
+def _serialize_csv_like(
+    template_path: Path,
+    fieldnames: list[str],
+    rows: list[dict[str, str]],
+) -> bytes:
+    """Serialize rows using the current file's BOM and newline convention."""
+
+    original = template_path.read_bytes()
+    has_bom = original.startswith(b"\xef\xbb\xbf")
+    line_ending = "\r\n" if b"\r\n" in original else "\n"
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(
+        output,
+        fieldnames=fieldnames,
+        lineterminator=line_ending,
+    )
+    writer.writeheader()
+    for row in rows:
+        writer.writerow({field: row.get(field, "") for field in fieldnames})
+    payload = output.getvalue().encode("utf-8")
+    return (b"\xef\xbb\xbf" + payload) if has_bom else payload
+
+
+def derive_game_site_venue_relationship_rows(
+    repo: Path,
+    school_key: str,
+    approved: dict[str, Any] | None,
+    fieldnames: list[str],
+    *,
+    require_approved_hash: bool = False,
+) -> list[dict[str, str]]:
+    """Derive exact target-school GAME_SITE rows from sealed decision authority.
+
+    The result is deterministic and depends only on the sealed decision payload,
+    protected-main global venue authority, and the target venues.csv schema. It does
+    not inspect current target-school venue rows and therefore remains usable after
+    the authorized rows have already been appended.
+    """
+
+    if not approved:
+        return []
+    if require_approved_hash:
+        approved_hash = str(approved.get("approved_plan_hash", "")).strip()
+        if not re.fullmatch(r"[0-9a-f]{64}", approved_hash):
+            raise FrozenVenueSplitAuthorityError(
+                "sealed venue relationship delta requires an approved plan hash"
+            )
+    if str(approved.get("school_key", "")).strip() != school_key:
+        raise FrozenVenueSplitAuthorityError(
+            "sealed venue relationship delta school identity mismatch"
+        )
+    decisions = approved.get("decisions")
+    if not isinstance(decisions, list):
+        raise FrozenVenueSplitAuthorityError(
+            "sealed venue relationship delta requires a decision list"
+        )
+    missing = sorted(GAME_SITE_REQUIRED_COLUMNS - set(fieldnames))
+    if missing:
+        raise FrozenVenueSplitAuthorityError(
+            "target venue portfolio cannot carry sealed GAME_SITE relationship; "
+            "missing columns: " + ", ".join(missing)
+        )
+
+    try:
+        venues_by_id, venues_by_key, name_ids = load_global_venue_reference(repo)
+    except (FileNotFoundError, ValueError) as exc:
+        raise FrozenVenueSplitAuthorityError(
+            "cannot authenticate global venue authority for sealed GAME_SITE delta"
+        ) from exc
+
+    rows: list[dict[str, str]] = []
+    identities: set[tuple[str, str]] = set()
+
+    for item in decisions:
+        if not isinstance(item, dict):
+            raise FrozenVenueSplitAuthorityError(
+                "sealed venue relationship delta contains an invalid decision"
+            )
+        relationship_patch = item.get("venue_relationship_patch")
+        if not relationship_patch:
+            continue
+        decision_id = str(item.get("decision_id", "")).strip() or "[unknown decision]"
+        if not isinstance(relationship_patch, dict):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: venue_relationship_patch is not an object"
+            )
+        if set(relationship_patch) != VENUE_RELATIONSHIP_PATCH_FIELDS:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: venue relationship patch requires exactly venue_id "
+                "and venue_key"
+            )
+        if item.get("category") not in {"discrepancy", "conditional_discrepancy"}:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: venue relationship patch is valid only on "
+                "discrepancy decisions"
+            )
+        if str(item.get("decision", "")).strip() != "NORMALIZE_SOURCE_TO_CANONICAL":
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: venue relationship patch requires "
+                "NORMALIZE_SOURCE_TO_CANONICAL"
+            )
+
+        source_id = str(item.get("source_game_id", "")).strip()
+        game_date = str(item.get("source_game_date", "")).strip()
+        if not source_id or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", game_date):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: GAME_SITE relationship requires one source game "
+                "with an exact source_game_date"
+            )
+        try:
+            dt.date.fromisoformat(game_date)
+        except ValueError as exc:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: invalid exact source_game_date {game_date!r}"
+            ) from exc
+
+        source_patch = item.get("source_patch", {})
+        if not isinstance(source_patch, dict):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: source_patch is not an object"
+            )
+        required_source_fields = {"curated_venue_name", "city", "state"}
+        if not required_source_fields <= set(source_patch):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: venue relationship patch requires paired source "
+                "curated_venue_name, city, and state"
+            )
+        venue_name = str(source_patch.get("curated_venue_name", "")).strip()
+        city = str(source_patch.get("city", "")).strip()
+        state = str(source_patch.get("state", "")).strip()
+        if not venue_name or not city or not state:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: paired source venue relationship fields must be nonblank"
+            )
+
+        venue_id = str(relationship_patch.get("venue_id", "")).strip()
+        venue_key = str(relationship_patch.get("venue_key", "")).strip()
+        identity = (venue_id, venue_key)
+        if identity in identities:
+            raise FrozenVenueSplitAuthorityError(
+                "one sealed GAME_SITE relationship per global venue identity is required"
+            )
+        identities.add(identity)
+
+        global_by_id = venues_by_id.get(venue_id)
+        global_by_key = venues_by_key.get(venue_key)
+        if (
+            global_by_id is None
+            or global_by_key is None
+            or global_by_id.get("venue_key", "").strip() != venue_key
+            or global_by_key.get("venue_id", "").strip() != venue_id
+        ):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: venue relationship must reference one existing "
+                "global venue_id/venue_key pair"
+            )
+        if (
+            global_by_id.get("city", "").strip() != city
+            or global_by_id.get("state", "").strip() != state
+        ):
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: source venue locality does not match the existing "
+                "global venue identity"
+            )
+
+        registered_ids = name_ids.get(normalized_venue_name(venue_name), set())
+        if registered_ids != {venue_id}:
+            raise FrozenVenueSplitAuthorityError(
+                f"{decision_id}: source venue name {venue_name!r} does not resolve "
+                "uniquely to the sealed global venue identity"
+            )
+
+        display_name = global_by_id.get("display_name", "").strip()
+        row = {field: "" for field in fieldnames}
+        row.update(
+            {
+                "source_program_key": school_key,
+                "venue_key": venue_key,
+                "venue_id": venue_id,
+                "canonical_name": display_name,
+                "aliases": (
+                    venue_name
+                    if normalized_venue_name(venue_name)
+                    != normalized_venue_name(display_name)
+                    else ""
+                ),
+                "city": global_by_id.get("city", "").strip(),
+                "state": global_by_id.get("state", "").strip(),
+                "games_currently_assigned": "1",
+                "first_assigned_game": game_date,
+                "last_assigned_game": game_date,
+                "relationship_type": "GAME_SITE",
+                "site_rule": (
+                    "Venue identity never establishes H/A/N; relationship applies "
+                    "only to the exact sealed source game."
+                ),
+                "source_basis": str(item.get("resolution_basis", "")).strip(),
+                "notes": (
+                    "Owner-sealed Gate 1 GAME_SITE relationship for "
+                    f"{source_id}; reuses existing global {venue_key}/{venue_id}."
+                ),
+            }
+        )
+        if "known_opened" in row:
+            row["known_opened"] = global_by_id.get("opened", "").strip()
+        if "known_closed" in row:
+            row["known_closed"] = global_by_id.get("closed", "").strip()
+        if "venue_date_precision" in row:
+            row["venue_date_precision"] = global_by_id.get("date_precision", "").strip()
+        rows.append(row)
+
+    return rows
+
+
+def sealed_post_reconciliation_venue_relationship_delta(
+    repo: Path,
+    school_key: str,
+    approved: dict[str, Any] | None,
+) -> list[dict[str, str]]:
+    """Derive only the exact sealed venue rows allowed after reconciliation."""
+
+    venue_path = repo / "schools" / school_key / "venues.csv"
+    fieldnames, _ = _read_csv_table(venue_path)
+    return derive_game_site_venue_relationship_rows(
+        repo,
+        school_key,
+        approved,
+        fieldnames,
+        require_approved_hash=True,
+    )
+
+
+def _venues_match_allowed_delta(
+    venues_path: Path,
+    expected_frozen_sha256: str,
+    allowed_rows: list[dict[str, str]] | None,
+) -> bool:
+    """Require current venues to equal frozen bytes plus exact allowed rows."""
+
+    if (
+        not re.fullmatch(r"[0-9a-f]{64}", expected_frozen_sha256)
+        or not venues_path.is_file()
+    ):
+        return False
+    if _sha256_file(venues_path) == expected_frozen_sha256:
+        return True
+
+    expected_additions = allowed_rows or []
+    if not expected_additions:
+        return False
+
+    try:
+        fieldnames, current_rows = _read_csv_table(venues_path)
+    except FrozenVenueSplitAuthorityError:
+        return False
+    if any(set(row) != set(fieldnames) for row in expected_additions):
+        return False
+
+    remaining = list(current_rows)
+    for expected in expected_additions:
+        matches = [
+            index
+            for index, row in enumerate(remaining)
+            if all(row.get(field, "") == expected.get(field, "") for field in fieldnames)
+        ]
+        if len(matches) != 1:
+            return False
+        del remaining[matches[0]]
+
+    reconstructed = _serialize_csv_like(venues_path, fieldnames, remaining)
+    return hashlib.sha256(reconstructed).hexdigest() == expected_frozen_sha256
 
 
 PRE_INGEST_SEMANTIC_FIELDS = frozenset({
@@ -671,6 +977,7 @@ def authenticated_frozen_venue_split_authority(
     school_key: str,
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
+    allowed_venue_relationship_delta: list[dict[str, str]] | None = None,
     semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> tuple[dict[str, dict[str, str]], bytes | None]:
     """Return exact frozen split assignments and their authenticated manifest bytes.
@@ -768,13 +1075,30 @@ def authenticated_frozen_venue_split_authority(
         else ""
     )
     venues_path = repo / "schools" / school_key / "venues.csv"
-    if (
-        not re.fullmatch(r"[0-9a-f]{64}", expected_venues_hash)
-        or not venues_path.is_file()
-        or _sha256_file(venues_path) != expected_venues_hash
-    ):
+    venues_match = (
+        re.fullmatch(r"[0-9a-f]{64}", expected_venues_hash) is not None
+        and venues_path.is_file()
+        and (
+            _sha256_file(venues_path) == expected_venues_hash
+            or (
+                semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+                and _venues_match_allowed_delta(
+                    venues_path,
+                    expected_venues_hash,
+                    allowed_venue_relationship_delta,
+                )
+            )
+        )
+    )
+    if not venues_match:
+        suffix = (
+            " outside the exact sealed post-reconciliation venue relationship delta"
+            if semantic_phase == SEMANTIC_PHASE_POST_RECONCILIATION
+            else ""
+        )
         raise FrozenVenueSplitAuthorityError(
-            "Integration Freeze venue split authority does not match current venues.csv"
+            "Integration Freeze venue split authority does not match current "
+            f"venues.csv{suffix}"
         )
 
     snapshot_rows = snapshot.get("rows")
@@ -867,6 +1191,7 @@ def load_frozen_venue_split_authority(
     school_key: str,
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
+    allowed_venue_relationship_delta: list[dict[str, str]] | None = None,
     semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> dict[str, dict[str, str]]:
     """Return only authenticated per-game split assignments."""
@@ -875,6 +1200,7 @@ def load_frozen_venue_split_authority(
         repo,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        allowed_venue_relationship_delta=allowed_venue_relationship_delta,
         semantic_phase=semantic_phase,
     )
     return authority
@@ -885,6 +1211,7 @@ def frozen_venue_split_freeze_bytes(
     school_key: str,
     *,
     allowed_semantic_delta: dict[str, dict[str, str]] | None = None,
+    allowed_venue_relationship_delta: list[dict[str, str]] | None = None,
     semantic_phase: str = SEMANTIC_PHASE_PRE_INGEST,
 ) -> bytes | None:
     """Return manifest bytes only when their split authority remains authenticated."""
@@ -893,6 +1220,7 @@ def frozen_venue_split_freeze_bytes(
         repo,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        allowed_venue_relationship_delta=allowed_venue_relationship_delta,
         semantic_phase=semantic_phase,
     )
     return payload if authority else None
