@@ -331,10 +331,16 @@ def validate_stage2_phase_continuation(
         bool(REQUEST_ID_RE.fullmatch(proposal_id)),
         "REQUEST_STAGE2_PHASE_CONTINUATION_PROPOSAL_ID_INVALID",
     )
-    _require(
-        len({parent_request_id, census_id, proposal_id}) == 3,
-        "REQUEST_STAGE2_PHASE_CONTINUATION_REQUEST_IDS_NOT_DISTINCT",
-    )
+    if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
+        _require(
+            len({parent_request_id, census_id, proposal_id}) == 3,
+            "REQUEST_STAGE2_PHASE_CONTINUATION_REQUEST_IDS_NOT_DISTINCT",
+        )
+    else:
+        _require(
+            parent_request_id == census_id and proposal_id != census_id,
+            "REQUEST_STAGE2_PHASE_CONTINUATION_CENSUS_PARENT_MISMATCH",
+        )
     _require_sha(
         value.get("expected_decision_universe_sha256"),
         64,
