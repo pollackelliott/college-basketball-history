@@ -93,6 +93,9 @@ from remote_implementation_stage2_refresh import (
     prepare_current_main_refresh,
     verify_current_main_refresh_authority,
 )
+from remote_implementation_stage2_continuation import (
+    verify_phase_continuation_payloads,
+)
 from remote_implementation_stage2_proposal import (
     PROPOSAL_ARTIFACT_NAMES,
     run_stage2_proposal_tool,
@@ -2163,6 +2166,7 @@ def run_stage2_current_main_refresh(
     predecessor_commit: str,
     live_main: str,
 ) -> None:
+    verify_phase_continuation_payloads(request, predecessor_commit)
     authority = verify_current_main_refresh_authority(
         request,
         predecessor_commit,
