@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-stage2-census-0003",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "rhode-island",
+  "previous_control_state_commit": "a050c675299f0fa2d42c1e2182fd90729f6f4c7a",
+  "previous_control_state_sha256": "019e6f3bdbae0456cad9f953f6b58c4a2eba8a2c6f186162565d4ea646fca1ce",
+  "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/rhode-island/rhode-island-phase0-0001/successor-manifest.json",
+    "sha256": "684a83f359717275ba33fc81b00f18248cad48722dd107c03d2cec0fbe053cb6"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/rhode-island/rhode-island-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f58ef9e51e631a46cc2af0e51088f400c0a8cbc85c67c0e29dea5ee4bd3bd8c8"
+  },
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — fresh Stage 2 census after opponent-display normalization",
+    "authorization": "Same owner-authorized Rhode Island Stage 2 phase persists. The exact census-bound opponent-display successor aaba8e2b4dc57aea6b82d83b4324e8286a0ae6c3 is independently fresh-verified with remote_stage2_opponent_display_equivalence=PASS, semantic drift PASS, zero opponent-key changes, zero literal-evidence changes, and only the two allowed Rhode Island display-name paths changed. This read-only census binds that exact successor plus the original Phase 0/Integration Freeze authority on protected main bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b. No tracked repair, current-main refresh, recommendation-map rehearsal, owner approval, sealing/apply, release, Preview, merge, Production, recovery, or protected-main mutation authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}

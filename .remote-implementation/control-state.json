@@ -354,18 +354,19 @@
     "rhode-island-phase0-0001",
     "rhode-island-stage2-census-0001",
     "rhode-island-stage2-census-0002",
-    "rhode-island-stage2-opponent-display-normalize-0001"
+    "rhode-island-stage2-opponent-display-normalize-0001",
+    "rhode-island-stage2-census-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "rhode-island-stage2-census-0003",
+  "active_request_sha256": "80bfb963a33b6565496e5f2606aec6aeeb3d1993e246b3be849000e8d83b5d96",
+  "active_school_key": "rhode-island",
+  "active_target_branch": "data/rhode-island-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -734,8 +735,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/rhode-island/rhode-island-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "0097c5cec9c7b6e0f554d7985c51e288b2494ecf885ff1064bb8fa5a9ed1c210"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42089230410",
+  "lock_acquisition_request_commit": "64db9b92d899e05d2d23650214bec62970fc4eb8",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
