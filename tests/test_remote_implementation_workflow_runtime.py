@@ -84,7 +84,7 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             'run: python "$GITHUB_WORKSPACE/runtime/tools/'
             'remote_implementation_stage2_continuation.py"'
         )
-        self.assertEqual(text.count(runtime_call), 2)
+        self.assertEqual(text.count(runtime_call), 3)
         self.assertNotIn(
             "run: python tools/remote_implementation_stage2_continuation.py",
             text,
@@ -95,6 +95,11 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
         )
         self.assertIn(
             "Queue authorized Stage 2 proposal continuation",
+            text,
+        )
+
+        self.assertIn(
+            "Resume any authorized Stage 2 phase continuation",
             text,
         )
 
