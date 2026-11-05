@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "5187e97328877af7f02475d1b79d5c500c99f2ef79416a11790f645298d17065",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "a837386241c23c022a6ea004373ef54c4cb45bf51218bcecf6ff5c9610059ae4",
+  "pr_created": false,
+  "preview_request_id": "rhode-island-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "readiness_proof_sha256": "c9a24b9968285dceb0b3cc6eb81c6a1896b37f610dab48389ab49f56dd7acd64",
+  "release_pr_packet_sha256": "681f277315c99645d7468fc59b6c81eefc86ce9a52e16f6de082e4bd36c83f6f",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "rhode-island-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "tracked_mutation": "NONE"
+}
