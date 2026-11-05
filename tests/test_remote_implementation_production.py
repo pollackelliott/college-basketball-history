@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import remote_implementation_production as prod  # noqa: E402
 from remote_implementation_control import (  # noqa: E402
     OP_RELEASE_GATE2_APPROVAL, OP_RELEASE_PRODUCTION_PROOF,
+    FINAL_RELEASE_CONTINUATION_KIND,
     LIFECYCLE_READ_ONLY, RemoteImplementationError,
     begin_request, initial_control_state, validate_request,
 )
@@ -177,6 +178,38 @@ class RemoteReleaseGate2ControlTests(unittest.TestCase):
         with self.assertRaises(RemoteImplementationError):
             validate_request(r)
 
+    def test_gate2_accepts_bound_production_continuation(self):
+        r = req(OP_RELEASE_GATE2_APPROVAL)
+        r["final_release_continuation"] = {
+            "kind": FINAL_RELEASE_CONTINUATION_KIND,
+            "production_request_id": "example-production-0001",
+        }
+        validate_request(r)
+
+    def test_final_release_continuation_forbidden_on_production_request(self):
+        r = req(OP_RELEASE_PRODUCTION_PROOF)
+        r["final_release_continuation"] = {
+            "kind": FINAL_RELEASE_CONTINUATION_KIND,
+            "production_request_id": r["request_id"],
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "FINAL_RELEASE_CONTINUATION_FORBIDDEN",
+        ):
+            validate_request(r)
+
+    def test_gate2_continuation_id_must_be_distinct(self):
+        r = req(OP_RELEASE_GATE2_APPROVAL)
+        r["final_release_continuation"] = {
+            "kind": FINAL_RELEASE_CONTINUATION_KIND,
+            "production_request_id": r["request_id"],
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_ID_COLLISION",
+        ):
+            validate_request(r)
+
 
 def merged_pr():
     return {
@@ -241,6 +274,32 @@ class ExactMergedMainTests(unittest.TestCase):
 
 
 class LiveProductionProofTests(unittest.TestCase):
+    def test_gate2_merge_packet_is_exact_and_connector_owned(self):
+        request = req(OP_RELEASE_GATE2_APPROVAL)
+        approval = {
+            "pr_number": PR,
+            "target_sha": HEAD,
+            "preview_deployment_id": 67890,
+            "preview_url": PREVIEW,
+        }
+        packet = prod.build_gate2_merge_packet(
+            request,
+            approval,
+            production_request_id="example-production-0001",
+        )
+        self.assertEqual(packet["kind"], prod.MERGE_PACKET_KIND)
+        self.assertEqual(packet["pr_number"], PR)
+        self.assertEqual(packet["pr_head_sha"], HEAD)
+        self.assertEqual(packet["approved_main_sha"], MAIN)
+        self.assertEqual(packet["merge_method"], "merge")
+        self.assertEqual(
+            packet["production_request_id"],
+            "example-production-0001",
+        )
+        self.assertTrue(packet["owner_gate_2_approved"])
+        self.assertFalse(packet["merged"])
+        self.assertFalse(packet["production_proof"])
+
     def test_owner_gate2_approval_never_claims_merge(self):
         request = req(OP_RELEASE_GATE2_APPROVAL)
         record = {
