@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import sys
 import tempfile
@@ -739,6 +740,400 @@ class GenericReconciliationTests(unittest.TestCase):
             self.assertEqual(synced["game_date"], "2020-12-29")
             self.assertEqual(resolved["source_a_value"], "2020-12-30")
             self.assertEqual(resolved["status"], "RESOLVED")
+
+    def test_reconciliation_authenticates_mid_phase_before_any_source_normalization(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            school_key = "alpha"
+
+            split_source = {field: "" for field in ingest_school.ASSERTION_FIELDS}
+            split_source.update({
+                "source_program_key": school_key,
+                "source_game_id": "SPLIT-1",
+                "season_label": "1960-1961",
+                "game_date": "1961-01-15",
+                "normalized_opponent_key": "gamma",
+                "normalized_opponent_name": "Gamma",
+                "curated_site_type": "NEUTRAL",
+                "curated_venue_name": "Frozen Arena",
+                "city": "Frozen City",
+                "state": "FC",
+                "curated_game_type": "REGULAR_SEASON",
+            })
+            site_source = {field: "" for field in ingest_school.ASSERTION_FIELDS}
+            site_source.update({
+                "source_program_key": school_key,
+                "source_game_id": "ALPHA-SITE",
+                "season_label": "2010-2011",
+                "game_date": "2011-03-16",
+                "normalized_opponent_key": "beta",
+                "normalized_opponent_name": "Beta",
+                "team_score": "65",
+                "opponent_score": "60",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "curated_site_type": "OPPONENT_HOME",
+                "curated_venue_name": "",
+                "city": "",
+                "state": "",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "Beta postseason fixture",
+            })
+            later_source = {field: "" for field in ingest_school.ASSERTION_FIELDS}
+            later_source.update({
+                "source_program_key": school_key,
+                "source_game_id": "ALPHA-LATER",
+                "season_label": "2019-2020",
+                "game_date": "2020-01-02",
+                "normalized_opponent_key": "delta",
+                "normalized_opponent_name": "Delta",
+                "team_score": "70",
+                "opponent_score": "68",
+                "played_result": "W",
+                "overtime_periods": "0",
+                "curated_site_type": "NEUTRAL",
+                "curated_game_type": "REGULAR_SEASON",
+                "raw_text": "Delta date fixture",
+            })
+            self.write_csv(
+                repo / "schools/alpha/source-games.csv",
+                ingest_school.ASSERTION_FIELDS,
+                [split_source, site_source, later_source],
+            )
+
+            site_canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+            site_canonical.update({
+                "canonical_game_id": "CBBG-SITE",
+                "season_label": "2010-2011",
+                "game_date": "2011-03-16",
+                "date_precision": "EXACT",
+                "team_a_key": school_key,
+                "team_b_key": "beta",
+                "team_a_score": "65",
+                "team_b_score": "60",
+                "result_winner_team_key": school_key,
+                "site_type": "TEAM_B_HOME",
+                "game_type": "NIT",
+                "canonical_status": "PROVISIONAL",
+            })
+            later_canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+            later_canonical.update({
+                "canonical_game_id": "CBBG-LATER",
+                "season_label": "2019-2020",
+                "game_date": "2020-01-03",
+                "date_precision": "EXACT",
+                "team_a_key": school_key,
+                "team_b_key": "delta",
+                "team_a_score": "70",
+                "team_b_score": "68",
+                "result_winner_team_key": school_key,
+                "site_type": "NEUTRAL",
+                "game_type": "REGULAR_SEASON",
+                "canonical_status": "PROVISIONAL",
+            })
+            self.write_csv(
+                repo / "data/canonical/games.csv",
+                ingest_school.CANONICAL_FIELDS,
+                [site_canonical, later_canonical],
+            )
+
+            assertions = []
+            for source, game_id in (
+                (site_source, "CBBG-SITE"),
+                (later_source, "CBBG-LATER"),
+            ):
+                assertion = dict(source)
+                assertion.update({
+                    "assertion_id": f"ASRT-{source['source_game_id']}",
+                    "canonical_game_id": game_id,
+                    "match_status": "MATCHED",
+                    "match_method": "FIXTURE",
+                })
+                assertions.append(assertion)
+            self.write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ingest_school.ASSERTION_FIELDS,
+                assertions,
+            )
+
+            site_discrepancy = {
+                field: "" for field in ingest_school.DISCREPANCY_FIELDS
+            }
+            site_discrepancy.update({
+                "discrepancy_id": "DISC-SITE",
+                "canonical_game_id": "CBBG-SITE",
+                "field_name": "game_type",
+                "source_a_program_key": school_key,
+                "source_a_value": "REGULAR_SEASON",
+                "canonical_value": "NIT",
+                "status": "UNDER_REVIEW",
+            })
+            later_discrepancy = {
+                field: "" for field in ingest_school.DISCREPANCY_FIELDS
+            }
+            later_discrepancy.update({
+                "discrepancy_id": "DISC-LATER",
+                "canonical_game_id": "CBBG-LATER",
+                "field_name": "game_date",
+                "source_a_program_key": school_key,
+                "source_a_value": "2020-01-02",
+                "canonical_value": "2020-01-03",
+                "status": "UNDER_REVIEW",
+            })
+            self.write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                ingest_school.DISCREPANCY_FIELDS,
+                [site_discrepancy, later_discrepancy],
+            )
+
+            global_venue_fields = [
+                "venue_id", "venue_key", "display_name", "city", "state",
+                "opened", "closed", "date_precision", "identity_status",
+                "source_basis", "notes",
+            ]
+            self.write_csv(
+                repo / "data/reference/venues.csv",
+                global_venue_fields,
+                [
+                    {
+                        "venue_id": "VEN-000901",
+                        "venue_key": "frozen-arena",
+                        "display_name": "Frozen Arena",
+                        "city": "Frozen City",
+                        "state": "FC",
+                        "opened": "",
+                        "closed": "",
+                        "date_precision": "",
+                        "identity_status": "VERIFIED",
+                        "source_basis": "fixture",
+                        "notes": "",
+                    },
+                    {
+                        "venue_id": "VEN-000902",
+                        "venue_key": "example-arena",
+                        "display_name": "Example Arena",
+                        "city": "Example City",
+                        "state": "EX",
+                        "opened": "2000",
+                        "closed": "",
+                        "date_precision": "YEAR",
+                        "identity_status": "VERIFIED",
+                        "source_basis": "fixture",
+                        "notes": "",
+                    },
+                ],
+            )
+            self.write_csv(
+                repo / "data/reference/venue-names.csv",
+                [
+                    "venue_id", "venue_name", "normalized_name", "name_type",
+                    "valid_from", "valid_to", "date_precision", "source_basis",
+                    "notes",
+                ],
+                [
+                    {
+                        "venue_id": "VEN-000901",
+                        "venue_name": "Frozen Arena",
+                        "normalized_name": "frozenarena",
+                        "name_type": "PROJECT_DISPLAY",
+                        "valid_from": "",
+                        "valid_to": "",
+                        "date_precision": "",
+                        "source_basis": "fixture",
+                        "notes": "",
+                    },
+                    {
+                        "venue_id": "VEN-000902",
+                        "venue_name": "Example Arena",
+                        "normalized_name": "examplearena",
+                        "name_type": "PROJECT_DISPLAY",
+                        "valid_from": "",
+                        "valid_to": "",
+                        "date_precision": "",
+                        "source_basis": "fixture",
+                        "notes": "",
+                    },
+                    {
+                        "venue_id": "VEN-000902",
+                        "venue_name": "Historic Example Arena",
+                        "normalized_name": "historicexamplearena",
+                        "name_type": "HISTORICAL",
+                        "valid_from": "",
+                        "valid_to": "",
+                        "date_precision": "",
+                        "source_basis": "fixture",
+                        "notes": "",
+                    },
+                ],
+            )
+
+            venue_fields = [
+                "source_program_key", "venue_key", "venue_id", "canonical_name",
+                "aliases", "city", "state", "venue_type", "known_opened",
+                "known_closed", "venue_date_precision", "games_currently_assigned",
+                "first_assigned_game", "last_assigned_game", "relationship_type",
+                "relationship_start", "relationship_end",
+                "relationship_date_precision", "site_rule", "source_basis", "notes",
+            ]
+            frozen_venue = {field: "" for field in venue_fields}
+            frozen_venue.update({
+                "source_program_key": school_key,
+                "venue_key": "frozen-arena",
+                "venue_id": "VEN-000901",
+                "canonical_name": "Frozen Arena",
+                "city": "Frozen City",
+                "state": "FC",
+                "games_currently_assigned": "1",
+                "first_assigned_game": "1961-01-15",
+                "last_assigned_game": "1961-01-15",
+                "relationship_type": "GAME_SITE",
+                "site_rule": "fixture",
+                "source_basis": "fixture",
+                "notes": "fixture",
+            })
+            local_venue_path = repo / "schools/alpha/venues.csv"
+            self.write_csv(local_venue_path, venue_fields, [frozen_venue])
+            frozen_venue_hash = hashlib.sha256(
+                local_venue_path.read_bytes()
+            ).hexdigest()
+
+            snapshot_fields = [
+                "season_label",
+                "game_date",
+                "curated_venue_name",
+                "city",
+                "state",
+                "curated_site_type",
+                "curated_game_type",
+            ]
+            source_rows = [split_source, site_source, later_source]
+            snapshot = {
+                "schema_version": 1,
+                "fields": snapshot_fields,
+                "rows": {
+                    row["source_game_id"]: {
+                        field: row.get(field, "")
+                        for field in snapshot_fields
+                    }
+                    for row in source_rows
+                },
+            }
+            onboarding = repo / ".onboarding" / school_key
+            onboarding.mkdir(parents=True)
+            (onboarding / "integration-freeze.json").write_text(
+                json.dumps({
+                    "schema_version": 2,
+                    "school_key": school_key,
+                    "status": "INTEGRATION_FROZEN",
+                    "package_member_sha256": {
+                        "venues.csv": frozen_venue_hash,
+                    },
+                    "source_game_semantic_guard": {
+                        "schema_version": 1,
+                        "snapshot_sha256": hashlib.sha256(
+                            json.dumps(
+                                snapshot,
+                                ensure_ascii=False,
+                                sort_keys=True,
+                                separators=(",", ":"),
+                            ).encode("utf-8")
+                        ).hexdigest(),
+                        "snapshot": snapshot,
+                    },
+                    "venue_reconciliation": {
+                        "schema_version": 2,
+                        "mappings": [{
+                            "action": "SPLIT_LOCAL_ROW_BY_CUTOVER",
+                            "expected_local_name": "Frozen Arena",
+                            "expected_local_city": "Frozen City",
+                            "expected_local_state": "FC",
+                            "cutover_date": "1960-01-01",
+                            "split_source_game_count": "1",
+                            "split_targets": [{
+                                "side": "AFTER",
+                                "global_venue_id": "VEN-000901",
+                                "global_venue_key": "frozen-arena",
+                                "games_currently_assigned": "1",
+                                "source_game_ids": ["SPLIT-1"],
+                            }],
+                        }],
+                    },
+                }),
+                encoding="utf-8",
+            )
+
+            approved = {
+                "school_key": school_key,
+                "approved_plan_hash": "a" * 64,
+                "decisions": [
+                    {
+                        "decision_id": "SITE-GAME-TYPE",
+                        "category": "discrepancy",
+                        "source_game_id": "ALPHA-SITE",
+                        "source_game_date": "2011-03-16",
+                        "canonical_game_id": "CBBG-SITE",
+                        "field_name": "game_type",
+                        "source_value": "REGULAR_SEASON",
+                        "canonical_value": "NIT",
+                        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                        "resolution_basis": "Official host source identifies exact site.",
+                        "canonical_patch": {},
+                        "source_patch": {
+                            "curated_venue_name": "Historic Example Arena",
+                            "city": "Example City",
+                            "state": "EX",
+                        },
+                        "venue_relationship_patch": {
+                            "venue_id": "VEN-000902",
+                            "venue_key": "example-arena",
+                        },
+                    },
+                    {
+                        "decision_id": "LATER-DATE",
+                        "category": "discrepancy",
+                        "source_game_id": "ALPHA-LATER",
+                        "source_game_date": "2020-01-02",
+                        "canonical_game_id": "CBBG-LATER",
+                        "field_name": "game_date",
+                        "source_value": "2020-01-02",
+                        "canonical_value": "2020-01-03",
+                        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                        "resolution_basis": "Exact dated reciprocal source controls.",
+                        "canonical_patch": {},
+                        "source_patch": {},
+                    },
+                ],
+            }
+
+            counts = apply_reconciliation_decisions(repo, approved)
+            self.assertEqual(counts["venue_relationship_patches"], 1)
+            self.assertEqual(counts["source_normalizations"], 2)
+
+            with (repo / "schools/alpha/source-games.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                final_sources = {
+                    row["source_game_id"]: row for row in csv.DictReader(handle)
+                }
+            self.assertEqual(
+                final_sources["ALPHA-SITE"]["curated_game_type"],
+                "NIT",
+            )
+            self.assertEqual(
+                final_sources["ALPHA-SITE"]["curated_venue_name"],
+                "Historic Example Arena",
+            )
+            self.assertEqual(
+                final_sources["ALPHA-LATER"]["game_date"],
+                "2020-01-03",
+            )
+            with local_venue_path.open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                final_venues = list(csv.DictReader(handle))
+            self.assertEqual(len(final_venues), 2)
+            self.assertEqual(final_venues[1]["relationship_type"], "GAME_SITE")
+            self.assertEqual(final_venues[1]["venue_id"], "VEN-000902")
 
     def test_shared_program_discrepancy_accepts_distinct_source_values_when_outcome_agrees(self):
         with tempfile.TemporaryDirectory() as directory:
