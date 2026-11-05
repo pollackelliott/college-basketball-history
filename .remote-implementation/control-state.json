@@ -354,7 +354,7 @@
     "rhode-island-phase0-0001"
   ],
   "active_expected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
-  "active_lock_commit": null,
+  "active_lock_commit": "2cf632afd4ba53dff7c44952a6a7b87dbae8a5d2",
   "active_lock_owner": "github-actions:42068100479:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
