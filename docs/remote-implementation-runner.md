@@ -163,6 +163,30 @@ A generic owner `Proceed` may be converted into a request only when the next bou
 
 Owner authorization is **phase-persistent**, not request-consumed. Once an owner has authorized a named phase, the school lane may author and monitor the distinct exact requests required inside that phase serially, provided each predecessor reaches its required fresh-verified durable state and no new owner authority, changed historical meaning, changed exact approved identity, recovery authority, or shared/global mutation is introduced. A successful internal request/checkpoint or a still-running verifier does not require another owner `Proceed`.
 
+### 4.1 Pre-merge candidate-runtime replay for Stage 2 repair PRs
+
+When one exact durable `STAGE2_PROPOSAL_REHEARSAL` is BLOCKED by a generic permanent-tool defect and a repair PR is prepared, do not wait until that PR merges to discover the next executable boundary.
+
+Run `.github/workflows/stage2-candidate-runtime-rehearsal.yml` against:
+
+- the exact candidate repair commit SHA;
+- the exact remote-control commit containing the blocked proposal checkpoint; and
+- the exact blocked proposal checkpoint-manifest path.
+
+The workflow executes `tools/stage2_candidate_runtime_rehearsal.py`. It authenticates the archived request/checkpoint/map, recreates the exact target onboarding worktree and Integration Freeze, and invokes the candidate runtime's unchanged permanent `implementation_stage2.py --map` against that data.
+
+The candidate rehearsal is read-only. It rejects any candidate diff outside generic tooling/tests/docs/workflow paths, proves tracked basketball mutation remains NONE, and classifies the result as:
+
+- `RESOLVED_TO_GATE1`;
+- `ADVANCED_TO_DIFFERENT_BLOCKER`; or
+- `NO_PROGRESS_SAME_BLOCKER`.
+
+`NO_PROGRESS_SAME_BLOCKER` is a failed repair gate.
+
+`ADVANCED_TO_DIFFERENT_BLOCKER` is not automatic merge authority. Before merge, classify the new blocker. If it belongs to the same repair family, expand the repair and rerun the candidate rehearsal. If it is a materially different generic family or a genuine historical/owner boundary, record that classification explicitly before deciding whether the repair PR is complete.
+
+This gate exists specifically to prevent the St. Bonaventure pattern of merge -> current-main refresh -> census -> proposal -> adjacent defect discovery.
+
 ## 5. Research/checkpoint transport
 
 The initial permanent transport is the proven immutable Git-part transport:
@@ -713,7 +737,7 @@ This is **not** `OWNER_GATE_2_READY`. A subsequent separately productionized aut
 
 A school Implementation lane may advance both internal boundaries within **one** owner-authorized release `Proceed`: authenticate the sealed apply, submit/monitor release readiness through independent PASS, then use its GitHub connector to create or reuse the exact school-specific PR with the preserved approved `pr-body.md`, submit/monitor `RELEASE_PREVIEW_VERIFY`, and present the resulting Preview. These are bounded, serialized operations; do not submit a second remote request while an earlier request is active or unverified. If any intermediate phase blocks, stop at its durable checkpoint and do not keep advancing.
 
-Do not stop after PR creation merely because CI is still running, and do not stop after submitting `RELEASE_PREVIEW_VERIFY` merely because its original or fresh-verification workflow is still processing. Those are continuations of the same release-preparation phase. Monitor them to `OWNER_GATE_2_READY` or an actual blocker. Do not convert this into an unbounded polling loop: after three consecutive event-oriented polls with no material durable-state change in one assistant turn, yield at the exact active request/workflow state using `NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS`; the next turn resumes the same release-preparation authority after reauthentication.
+Do not treat PR creation, CI start, or submission of `RELEASE_PREVIEW_VERIFY` as a new owner-authorization boundary. Those are continuations of the same release-preparation phase. When the external workflow is still genuinely in flight, make bounded event-oriented reads only; do not spend minutes polling an unchanged run. If no useful independent work remains, yield once at the exact active request/workflow state using `NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS`; the next turn resumes the same release-preparation authority after reauthentication. If this phase repeatedly requires conversational transport yields between deterministic internal operations, treat that as missing repository orchestration rather than normal procedure.
 
 The preview-verification request binds current main, exact school target ref/SHA, approved-plan hash, sealed release-manifest hash, the exact release-readiness checkpoint path/SHA-256, its independently fresh PASS verification path/SHA-256, and the **existing** PR number. It carries only `release_preview_verify=true`, with all mutation, `release`, Owner Gate 1, and Owner Gate 2 authority false. It authenticates the complete earlier sealed apply and readiness chain, the prior exact approved PR-body bytes, the ancestry of any later tooling main, and the unchanged target SHA.
 
@@ -737,7 +761,7 @@ When the owner supplies an exact Preview `APPROVED. Proceed`, that affirmative d
 
 The runner preserves a durable `PRODUCTION_PROOF_PASS` checkpoint with the precise merge SHA, both parents, Production deployment ID/SHA, counts and hashes of the checked generated files, and the original owner approval scope. Its independent fresh-runner verification reconstructs the exact merge, reruns the permanent gates and Production JSON comparisons, requires stable structured equivalence, and persists `remote_production_proof_equivalence=PASS`. Only then is Implementation `COMPLETE`; merge alone, successful Preview, or GitHub deployment metadata alone never suffice.
 
-A healthy accepted `RELEASE_PRODUCTION_PROOF` request remains part of that already-authorized final phase while its workflow or fresh verifier is running. Continue monitoring it; do not turn pending Production deployment/verification into a new `NEXT OWNER ACTION: PROCEED` unless the prior phase authority has actually been invalidated or a genuine recovery boundary appears. Apply the same bounded polling rule: after three consecutive no-material-change polls in one assistant turn, yield with `NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS` and resume the same final-phase authority on the next authenticated turn. Never duplicate the accepted Production-proof request merely because the prior turn yielded.
+A healthy accepted `RELEASE_PRODUCTION_PROOF` request remains part of that already-authorized final phase while its workflow or fresh verifier is running. Do not turn pending Production deployment/verification into a new `NEXT OWNER ACTION: PROCEED` unless the prior phase authority has actually been invalidated or a genuine recovery boundary appears. Make bounded event-oriented reads rather than a waiting loop; if the run remains in flight and no useful independent work remains, yield once with the direct workflow link and `NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS`. Never duplicate the accepted Production-proof request merely because the prior turn yielded.
 
 Failures after explicit Gate 2 approval or after the external GitHub merge require evidence-first recovery. Never blindly retry a merge. Inspect the exact PR merge SHA, current main SHA, global control state, pending request and durable checkpoints; distinguish missing Production deployment from mismatched JSON or wrong commit. Any accepted failed remote request remains non-replayable until authorized recovery. Never infer new owner approval from earlier gate evidence if PR HEAD, approved Preview, or merge identity changes.
 

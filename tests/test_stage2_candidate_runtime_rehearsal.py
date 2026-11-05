@@ -1,0 +1,87 @@
+import sys
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+
+from remote_implementation_io import Stop  # noqa: E402
+from stage2_candidate_runtime_rehearsal import (  # noqa: E402
+    classify_candidate_result,
+    validate_candidate_scope,
+)
+
+
+class CandidateRuntimeScopeTests(unittest.TestCase):
+    def test_generic_tooling_paths_are_allowed(self):
+        validate_candidate_scope([
+            "tools/onboarding_plan.py",
+            "tests/test_example.py",
+            "docs/implementation-efficiency-recovery.md",
+            ".github/workflows/example.yml",
+            "AGENTS.md",
+        ])
+
+    def test_basketball_data_path_is_rejected(self):
+        with self.assertRaisesRegex(Stop, "NON_TOOLING_PATHS"):
+            validate_candidate_scope([
+                "tools/onboarding_plan.py",
+                "schools/example/source-games.csv",
+            ])
+
+    def test_reference_data_path_is_rejected(self):
+        with self.assertRaisesRegex(Stop, "NON_TOOLING_PATHS"):
+            validate_candidate_scope([
+                "data/reference/venues.csv",
+            ])
+
+
+class CandidateRuntimeClassificationTests(unittest.TestCase):
+    def test_gate1_ready_is_terminal_success(self):
+        self.assertEqual(
+            classify_candidate_result(
+                {"last_error": "old blocker"},
+                {"stage2_status": "OWNER_GATE_1_READY", "status": {}},
+            ),
+            "RESOLVED_TO_GATE1",
+        )
+
+    def test_different_blocker_is_material_progress(self):
+        self.assertEqual(
+            classify_candidate_result(
+                {"last_error": "old blocker"},
+                {
+                    "stage2_status": "BLOCKED",
+                    "status": {"last_error": "different blocker"},
+                },
+            ),
+            "ADVANCED_TO_DIFFERENT_BLOCKER",
+        )
+
+    def test_same_blocker_is_no_progress(self):
+        self.assertEqual(
+            classify_candidate_result(
+                {"last_error": "same blocker"},
+                {
+                    "stage2_status": "BLOCKED",
+                    "status": {"last_error": "same blocker"},
+                },
+            ),
+            "NO_PROGRESS_SAME_BLOCKER",
+        )
+
+    def test_missing_baseline_error_still_classifies_new_blocker(self):
+        self.assertEqual(
+            classify_candidate_result(
+                {},
+                {
+                    "stage2_status": "BLOCKED",
+                    "status": {"last_error": "candidate blocker"},
+                },
+            ),
+            "ADVANCED_TO_DIFFERENT_BLOCKER",
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
