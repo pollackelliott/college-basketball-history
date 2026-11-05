@@ -3799,6 +3799,22 @@ def build_plan(
                 }
             )
 
+    if historical_challenge_decisions:
+        emitted_challenge_ids = {
+            str(item.get("decision_id", ""))
+            for item in decisions
+            if item.get("historical_game_type_challenge")
+        }
+        expected_challenge_ids = {
+            str(item.get("decision_id", ""))
+            for item in historical_challenge_decisions
+        }
+        if emitted_challenge_ids != expected_challenge_ids:
+            raise WorkflowError(
+                "historical game-type challenge was not exposed in the Gate 1 "
+                "decision universe"
+            )
+
     if program.get("public_page_enabled") != "Yes":
         decisions.append(
             {
