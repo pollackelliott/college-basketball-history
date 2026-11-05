@@ -856,6 +856,7 @@ def run_stage2_census_tool(
     diag: Path,
     *,
     tool_repo: Path | None = None,
+    historical_game_type_challenge_path: Path | None = None,
 ) -> dict[str, Any]:
     restore_integration_freeze(repo, school_key, freeze_bytes)
     before = tracked_worktree_state(repo)
@@ -873,6 +874,11 @@ def run_stage2_census_tool(
         "--repo",
         str(repo),
     ]
+    if historical_game_type_challenge_path is not None:
+        cmd.extend([
+            "--historical-game-type-challenge",
+            str(historical_game_type_challenge_path),
+        ])
     cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-census.log").write_text(cp.stdout, encoding="utf-8")
@@ -929,7 +935,14 @@ def run_stage2_census_tool(
         census_doc = json.loads(census_path.read_text(encoding="utf-8"))
 
     return {
-        "command": ["python", "tools/implementation_stage2.py", school_key],
+        "command": (
+            ["python", "tools/implementation_stage2.py", school_key]
+            + (
+                ["--historical-game-type-challenge", "<HISTORICAL_CHALLENGE>"]
+                if historical_game_type_challenge_path is not None
+                else []
+            )
+        ),
         "exit_code": cp.returncode,
         "stage2_status": stage2_status,
         "status": status,
