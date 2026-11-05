@@ -657,11 +657,11 @@
   "current_sequence": 310,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "462dfc713ebb9fdc7b60186eb2578b8b5d42041d",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "st-bonaventure-stage2-current-main-refresh-0012",
     "school_key": "st-bonaventure",
     "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",

@@ -1,0 +1,47 @@
+{
+  "changed_file_sha256": {
+    "docs/implementation-gate1-authority-boundary.md": "d7a56b73b635a2baa73f0e82e3dab113a54c1df5fc55a47f86a29040121d63b5",
+    "tests/test_onboarding_hardening.py": "e1855cd3604873cea24c92f30ff47bb5bdf5e02833676a58eb13fb79a5945f14",
+    "tests/test_reconciliation_site_metadata_resolution.py": "4786f9e3266afca9751acc2d2955a49d5eec72ba9934f0deb73654f9d7abd7e2",
+    "tools/onboard_school.py": "15748c45491d772b96e833e1e58f902bd1b5f40d47ced243ee7ef7dc7d5bc332",
+    "tools/onboarding_hardening.py": "5386fb2c02e746b83700ab947fd6334e187b756500d7af5d8df792ea31e36a02",
+    "tools/onboarding_plan.py": "b87815220e17b29303f5238dd1a0ae5bdd944aefb3ec5876a3b04f9fb2b14f17"
+  },
+  "changed_paths": [
+    "docs/implementation-gate1-authority-boundary.md",
+    "tests/test_onboarding_hardening.py",
+    "tests/test_reconciliation_site_metadata_resolution.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_hardening.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "0c66967db740fb935b1f11f17b223b6a19d8a858",
+  "package_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "prepared_parents": [
+    "c505386c0f8e37a192156f19eb40e824cda45a6a",
+    "462dfc713ebb9fdc7b60186eb2578b8b5d42041d"
+  ],
+  "protected_main_sha": "462dfc713ebb9fdc7b60186eb2578b8b5d42041d",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0012",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_predecessor_sha": "c505386c0f8e37a192156f19eb40e824cda45a6a",
+  "target_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
+  "target_tree_sha": "6e04fc2405f5e0cb06a9f5766fc53449962eb8b1",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
