@@ -10,8 +10,13 @@ sys.path.insert(0, str(ROOT / "tools"))
 from remote_implementation_control import (  # noqa: E402
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
+    OP_STAGE2_GATE1_FILL,
+    OP_STAGE2_PRESEAL_REHEARSAL,
+    OP_STAGE2_GATE1_SEAL,
+    OP_STAGE2_SEALED_APPLY,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     STAGE2_PHASE_CONTINUATION_KIND,
+    STAGE2_POST_GATE1_CONTINUATION_KIND,
     RemoteImplementationError,
     validate_stage2_phase_continuation,
 )
@@ -285,6 +290,254 @@ class QueueAfterCensusTests(unittest.TestCase):
                         ],
                     },
                 )
+
+
+def post_gate1_spec():
+    return {
+        "kind": STAGE2_POST_GATE1_CONTINUATION_KIND,
+        "preseal_request_id": "school-stage2-preseal-next",
+        "seal_request_id": "school-stage2-seal-next",
+        "apply_request_id": "school-stage2-apply-next",
+    }
+
+
+class PostGate1ContinuationValidationTests(unittest.TestCase):
+    def test_fill_can_start_post_gate1_chain(self):
+        validate_stage2_phase_continuation(
+            OP_STAGE2_GATE1_FILL,
+            "school-stage2-fill-approved",
+            post_gate1_spec(),
+        )
+
+    def test_preseal_and_seal_must_carry_exact_child_identity(self):
+        spec = post_gate1_spec()
+        validate_stage2_phase_continuation(
+            OP_STAGE2_PRESEAL_REHEARSAL,
+            spec["preseal_request_id"],
+            spec,
+        )
+        validate_stage2_phase_continuation(
+            OP_STAGE2_GATE1_SEAL,
+            spec["seal_request_id"],
+            spec,
+        )
+
+    def test_post_gate1_chain_cannot_start_before_owner_gate(self):
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "POST_GATE1_CONTINUATION_FORBIDDEN",
+        ):
+            validate_stage2_phase_continuation(
+                OP_STAGE2_PROPOSAL_REHEARSAL,
+                "school-stage2-proposal",
+                post_gate1_spec(),
+            )
+
+    def test_apply_is_terminal_and_cannot_carry_continuation(self):
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "POST_GATE1_CONTINUATION_FORBIDDEN",
+        ):
+            validate_stage2_phase_continuation(
+                OP_STAGE2_SEALED_APPLY,
+                "school-stage2-apply-next",
+                post_gate1_spec(),
+            )
+
+
+def _post_gate_parent(operation, request_id):
+    return {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+        "request_id": request_id,
+        "school_key": "school",
+        "operation": operation,
+        "target_branch": "data/school-onboarding",
+        "target_sha": "1" * 40,
+        "phase_continuation": post_gate1_spec(),
+    }
+
+
+class QueueAfterGate1FillTests(unittest.TestCase):
+    def test_fill_queues_preseal_from_fresh_checkpoint(self):
+        parent = _post_gate_parent(
+            OP_STAGE2_GATE1_FILL,
+            "school-stage2-fill-approved",
+        )
+        manifest = {
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_CHECKPOINT",
+            "request_id": parent["request_id"],
+            "school_key": "school",
+            "target_branch": parent["target_branch"],
+            "target_sha": parent["target_sha"],
+            "gate1_fill_status": "FILLED",
+            "integration_freeze_sha256": "2" * 64,
+            "semantic_snapshot_sha256": "3" * 64,
+            "decision_universe_sha256": "4" * 64,
+            "recommendation_map_sha256": "5" * 64,
+            "approved_plan_hash_preview": "6" * 64,
+            "filled_review_sha256": "7" * 64,
+            "decision_id_set_sha256": "8" * 64,
+        }
+        captured = {}
+        with patch.object(
+            continuation, "_load_archived_request", return_value=(parent, b"{}")
+        ), patch.object(
+            continuation,
+            "_checkpoint_manifest",
+            return_value=(
+                manifest,
+                {"path": "fill.json", "sha256": "9" * 64},
+            ),
+        ), patch.object(
+            continuation,
+            "_verification_ref",
+            return_value={"path": "fill-verification.json", "sha256": "a" * 64},
+        ), patch.object(
+            continuation,
+            "_queue_request",
+            side_effect=lambda request, **kwargs: captured.setdefault("request", request),
+        ):
+            continuation.queue_after_gate1_fill(
+                live_main="b" * 40,
+                control_head="c" * 40,
+                state={},
+                state_bytes=b"{}",
+                last={"request_id": parent["request_id"]},
+            )
+        request = captured["request"]
+        self.assertEqual(request["operation"], OP_STAGE2_PRESEAL_REHEARSAL)
+        self.assertEqual(
+            request["request_id"],
+            parent["phase_continuation"]["preseal_request_id"],
+        )
+        self.assertTrue(request["authority"]["stage2_preseal_rehearsal"])
+        self.assertEqual(request["phase_continuation"], parent["phase_continuation"])
+
+
+class QueueAfterPresealTests(unittest.TestCase):
+    def test_ready_preseal_queues_seal(self):
+        spec = post_gate1_spec()
+        parent = _post_gate_parent(OP_STAGE2_PRESEAL_REHEARSAL, spec["preseal_request_id"])
+        manifest = {
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+            "request_id": parent["request_id"],
+            "school_key": "school",
+            "target_branch": parent["target_branch"],
+            "target_sha": parent["target_sha"],
+            "preseal_status": "READY_TO_SEAL",
+            "integration_freeze_sha256": "2" * 64,
+            "semantic_snapshot_sha256": "3" * 64,
+            "decision_universe_sha256": "4" * 64,
+            "recommendation_map_sha256": "5" * 64,
+            "approved_plan_hash_preview": "6" * 64,
+            "filled_review_sha256": "7" * 64,
+            "decision_id_set_sha256": "8" * 64,
+            "owner_gate_1_approval_sha256": "9" * 64,
+            "equivalence_sha256": "a" * 64,
+        }
+        captured = {}
+        with patch.object(
+            continuation, "_load_archived_request", return_value=(parent, b"{}")
+        ), patch.object(
+            continuation,
+            "_checkpoint_manifest",
+            return_value=(manifest, {"path": "preseal.json", "sha256": "b" * 64}),
+        ), patch.object(
+            continuation,
+            "_verification_ref",
+            return_value={"path": "preseal-verification.json", "sha256": "c" * 64},
+        ), patch.object(
+            continuation,
+            "_queue_request",
+            side_effect=lambda request, **kwargs: captured.setdefault("request", request),
+        ):
+            continuation.queue_after_preseal(
+                live_main="d" * 40,
+                control_head="e" * 40,
+                state={},
+                state_bytes=b"{}",
+                last={"request_id": parent["request_id"]},
+            )
+        request = captured["request"]
+        self.assertEqual(request["operation"], OP_STAGE2_GATE1_SEAL)
+        self.assertTrue(request["authority"]["stage2_gate1_seal"])
+        self.assertEqual(request["equivalence_sha256"], "a" * 64)
+
+    def test_blocked_preseal_stops_before_seal(self):
+        spec = post_gate1_spec()
+        parent = _post_gate_parent(OP_STAGE2_PRESEAL_REHEARSAL, spec["preseal_request_id"])
+        manifest = {
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+            "preseal_status": "BLOCKED",
+        }
+        with patch.object(
+            continuation, "_load_archived_request", return_value=(parent, b"{}")
+        ), patch.object(
+            continuation,
+            "_checkpoint_manifest",
+            return_value=(manifest, {"path": "preseal.json", "sha256": "b" * 64}),
+        ):
+            with self.assertRaisesRegex(Stop, "PRESEAL_NOT_READY"):
+                continuation.queue_after_preseal(
+                    live_main="d" * 40,
+                    control_head="e" * 40,
+                    state={},
+                    state_bytes=b"{}",
+                    last={"request_id": parent["request_id"]},
+                )
+
+
+class QueueAfterGate1SealTests(unittest.TestCase):
+    def test_fresh_seal_queues_apply(self):
+        spec = post_gate1_spec()
+        parent = _post_gate_parent(OP_STAGE2_GATE1_SEAL, spec["seal_request_id"])
+        manifest = {
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_SEAL_CHECKPOINT",
+            "request_id": parent["request_id"],
+            "school_key": "school",
+            "target_branch": parent["target_branch"],
+            "target_sha": parent["target_sha"],
+            "seal_status": "SEALED",
+            "approved_plan_hash": "2" * 64,
+            "approved_plan_sha256": "3" * 64,
+            "owner_gate_1_approval_sha256": "4" * 64,
+            "integration_freeze_sha256": "5" * 64,
+            "semantic_snapshot_sha256": "6" * 64,
+            "decision_universe_sha256": "7" * 64,
+            "recommendation_map_sha256": "8" * 64,
+            "filled_review_sha256": "9" * 64,
+            "decision_id_set_sha256": "a" * 64,
+        }
+        captured = {}
+        with patch.object(
+            continuation, "_load_archived_request", return_value=(parent, b"{}")
+        ), patch.object(
+            continuation,
+            "_checkpoint_manifest",
+            return_value=(manifest, {"path": "seal.json", "sha256": "b" * 64}),
+        ), patch.object(
+            continuation,
+            "_verification_ref",
+            return_value={"path": "seal-verification.json", "sha256": "c" * 64},
+        ), patch.object(
+            continuation,
+            "_queue_request",
+            side_effect=lambda request, **kwargs: captured.setdefault("request", request),
+        ):
+            continuation.queue_after_gate1_seal(
+                live_main="d" * 40,
+                control_head="e" * 40,
+                state={},
+                state_bytes=b"{}",
+                last={"request_id": parent["request_id"]},
+            )
+        request = captured["request"]
+        self.assertEqual(request["operation"], OP_STAGE2_SEALED_APPLY)
+        self.assertEqual(request["request_id"], spec["apply_request_id"])
+        self.assertTrue(request["authority"]["stage2_sealed_apply"])
+        self.assertNotIn("phase_continuation", request)
+        self.assertEqual(request["approved_plan_hash"], "2" * 64)
 
 
 if __name__ == "__main__":
