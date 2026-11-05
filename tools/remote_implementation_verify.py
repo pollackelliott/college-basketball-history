@@ -111,6 +111,7 @@ from remote_implementation_release_preview import (
     verify_pr_checks_and_preview,
 )
 from remote_implementation_release_readiness import (
+    build_release_pr_packet,
     verify_release_readiness_authority,
     run_permanent_release_readiness,
 )
@@ -2331,6 +2332,49 @@ def verify_release_readiness(
     ):
         if manifest.get(field) != expected:
             raise Stop("RELEASE_READINESS_FRESH_MANIFEST_MISMATCH:" + field)
+    continuation = request.get("release_phase_continuation")
+    if continuation is not None:
+        body_path = (directory / "pr-body.md").as_posix()
+        body_bytes = git_show_bytes(control_head, body_path)
+        if body_bytes != authority["sidecars"]["pr-body.md"]:
+            raise Stop("RELEASE_READINESS_FRESH_PR_BODY_MISMATCH")
+        if sha256_bytes(body_bytes) != manifest.get("pr_body_sha256"):
+            raise Stop("RELEASE_READINESS_FRESH_PR_BODY_HASH_MISMATCH")
+        if manifest.get("pr_body_checkpoint_path") != body_path:
+            raise Stop("RELEASE_READINESS_FRESH_PR_BODY_PATH_MISMATCH")
+
+        packet_path = (directory / "release-pr-packet.json").as_posix()
+        packet_bytes = git_show_bytes(control_head, packet_path)
+        if sha256_bytes(packet_bytes) != manifest.get("release_pr_packet_sha256"):
+            raise Stop("RELEASE_READINESS_FRESH_PR_PACKET_HASH_MISMATCH")
+        packet = json.loads(packet_bytes)
+        expected_packet = build_release_pr_packet(
+            authority,
+            worktree,
+            readiness_request_id=request["request_id"],
+            preview_request_id=continuation["preview_request_id"],
+            body_checkpoint_path=body_path,
+        )
+        if packet != expected_packet:
+            raise Stop("RELEASE_READINESS_FRESH_PR_PACKET_MISMATCH")
+        if manifest.get("release_pr_packet_path") != packet_path:
+            raise Stop("RELEASE_READINESS_FRESH_PR_PACKET_PATH_MISMATCH")
+        if manifest.get("preview_request_id") != continuation["preview_request_id"]:
+            raise Stop("RELEASE_READINESS_FRESH_PREVIEW_REQUEST_ID_MISMATCH")
+        if manifest.get("release_phase_continuation") != continuation:
+            raise Stop("RELEASE_READINESS_FRESH_CONTINUATION_MISMATCH")
+    else:
+        for field in (
+            "release_phase_continuation",
+            "release_pr_packet_path",
+            "release_pr_packet_sha256",
+            "pr_body_checkpoint_path",
+            "pr_body_sha256",
+            "preview_request_id",
+        ):
+            if manifest.get(field) is not None:
+                raise Stop("RELEASE_READINESS_FRESH_UNEXPECTED_PR_PACKET:" + field)
+
     if manifest.get("pr_created") is not False or manifest.get("owner_gate_2") is not False:
         raise Stop("RELEASE_READINESS_FRESH_AUTHORITY_LEAK")
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
@@ -2346,6 +2390,9 @@ def verify_release_readiness(
         "checkpoint_manifest_sha256": last["checkpoint_manifest_sha256"],
         "readiness_proof_sha256": manifest["readiness_proof_sha256"],
         "remote_release_readiness_equivalence": "PASS",
+        "release_pr_packet_sha256": manifest.get("release_pr_packet_sha256"),
+        "pr_body_sha256": manifest.get("pr_body_sha256"),
+        "preview_request_id": manifest.get("preview_request_id"),
         "tracked_mutation": "NONE",
         "pr_created": False,
         "preview_verified": False,
@@ -2364,6 +2411,8 @@ def verify_release_readiness(
         raise Stop("RELEASE_READINESS_FRESH_CONTROL_MOVED")
     local_last["fresh_runner_verification"] = "PASS"
     local_last["remote_release_readiness_equivalence"] = "PASS"
+    local_last["release_pr_packet_sha256"] = manifest.get("release_pr_packet_sha256")
+    local_last["preview_request_id"] = manifest.get("preview_request_id")
     local_state["last_operation"] = local_last
     write_json(STATE_PATH, local_state)
     commit = commit_control(
