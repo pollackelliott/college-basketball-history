@@ -446,6 +446,12 @@ def persist_stage2_census_checkpoint(
         "semantic_snapshot_sha256": request[
             "semantic_snapshot_sha256"
         ],
+        "historical_game_type_challenge_path": (
+            (request.get("historical_game_type_challenge") or {}).get("path")
+        ),
+        "historical_game_type_challenge_sha256": (
+            (request.get("historical_game_type_challenge") or {}).get("sha256")
+        ),
         "permanent_command": result["command"],
         "command_exit_code": result["exit_code"],
         "stage2_status": result["stage2_status"],
@@ -541,6 +547,19 @@ def run_read_only_stage2_census(
         [STATE_PATH, archive],
     )
 
+    challenge_path = None
+    if request.get("historical_game_type_challenge") is not None:
+        challenge_dir = Path(
+            tempfile.mkdtemp(prefix="remote-stage2-historical-challenge-")
+        )
+        challenge_path = materialize_payload(
+            request_commit,
+            request["historical_game_type_challenge"],
+            challenge_dir / "historical-game-type-challenge.json",
+        )
+        if challenge_path is None:
+            raise Stop("STAGE2_HISTORICAL_GAME_TYPE_CHALLENGE_MISSING")
+
     worktree = add_existing_onboarding_worktree(
         request["target_branch"],
         request["target_sha"],
@@ -551,6 +570,7 @@ def run_read_only_stage2_census(
         request["school_key"],
         phase0_authority["freeze_bytes"],
         DIAG,
+        historical_game_type_challenge_path=challenge_path,
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
@@ -659,6 +679,12 @@ def persist_stage2_proposal_checkpoint(
         "stage2_authority_kind": authority["authority_kind"],
         "integration_freeze_sha256": request["integration_freeze_sha256"],
         "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
+        "historical_game_type_challenge_path": (
+            (request.get("historical_game_type_challenge") or {}).get("path")
+        ),
+        "historical_game_type_challenge_sha256": (
+            (request.get("historical_game_type_challenge") or {}).get("sha256")
+        ),
         "decision_universe_sha256": request["decision_universe_sha256"],
         "runtime_decision_universe_sha256": (
             result.get("decision_universe_compatibility") or {}
@@ -778,6 +804,16 @@ def run_read_only_stage2_proposal(
     if map_path is None:
         raise Stop("STAGE2_PROPOSAL_MAP_MISSING")
 
+    challenge_path = None
+    if request.get("historical_game_type_challenge") is not None:
+        challenge_path = materialize_payload(
+            request_commit,
+            request["historical_game_type_challenge"],
+            scratch / "historical-game-type-challenge.json",
+        )
+        if challenge_path is None:
+            raise Stop("STAGE2_PROPOSAL_HISTORICAL_CHALLENGE_MISSING")
+
     worktree = add_existing_onboarding_worktree(
         request["target_branch"],
         request["target_sha"],
@@ -796,6 +832,7 @@ def run_read_only_stage2_proposal(
         request["decision_universe_sha256"],
         DIAG / "stage2-proposal",
         tool_repo=runtime_repo,
+        historical_game_type_challenge_path=challenge_path,
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
