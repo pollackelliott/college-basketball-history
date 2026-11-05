@@ -244,11 +244,7 @@ def validated_historical_coverage(
             raise ValueError(
                 f"Historical coverage audit SHA-256 required: {program_key}/{season}"
             )
-        if canonical_season not in seasons:
-            raise ValueError(
-                f"Historical coverage season has no canonical games: {program_key}/{season}"
-            )
-        documented = record_from_games(seasons[canonical_season])
+        documented = record_from_games(seasons.get(canonical_season, []))
         if documented["ties"]:
             raise ValueError(
                 f"Historical coverage cannot infer tie outcome: {program_key}/{season}"
@@ -311,6 +307,143 @@ def validated_historical_coverage(
                 "note": note,
                 "terminal_classification": "EARLY_HISTORY_AGGREGATE_RECONCILED_GAP",
                 "stage1_audit_sha256": closeout_sha,
+                "owner_disposition": row["owner_disposition"],
+            }
+        )
+    return sorted(result, key=lambda item: item["season_label"])
+
+
+def validated_historical_accounting(
+    rows: list[dict[str, str]],
+    program_key: str,
+    seasons: dict[str, list[dict[str, Any]]],
+    authority_cases: dict[tuple[str, str], dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Preserve source-accounting contradictions without changing canonical games."""
+
+    result = []
+    used = set()
+    normalized_authority_cases: dict[tuple[str, str], dict[str, Any]] = {}
+    for (authority_program, authority_season), authority in authority_cases.items():
+        try:
+            normalized_authority_season = normalize_scope_season(authority_season)
+        except ValueError as exc:
+            raise ValueError(
+                "Historical accounting owner authority season invalid: "
+                f"{authority_program}/{authority_season}"
+            ) from exc
+        authority_key = (authority_program, normalized_authority_season)
+        if authority_key in normalized_authority_cases:
+            raise ValueError(
+                "Historical accounting owner authority keys duplicated after season "
+                f"normalization: {authority_program}/{normalized_authority_season}"
+            )
+        normalized_authority_cases[authority_key] = authority
+
+    for row in rows:
+        if row.get("program_key") != program_key:
+            continue
+        season = row.get("season_label", "").strip()
+        if not season:
+            raise ValueError(
+                f"Duplicate or blank historical accounting season: {program_key}/{season}"
+            )
+        try:
+            canonical_season = normalize_scope_season(season)
+        except ValueError as exc:
+            raise ValueError(
+                f"Historical accounting season invalid: {program_key}/{season}"
+            ) from exc
+        if canonical_season in used:
+            raise ValueError(
+                f"Duplicate or blank historical accounting season: {program_key}/{season}"
+            )
+        used.add(canonical_season)
+        authority = normalized_authority_cases.get((program_key, canonical_season))
+        if authority is None:
+            raise ValueError(
+                f"Historical accounting lacks owner authority: {program_key}/{season}"
+            )
+        if (
+            row.get("classification")
+            != "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION"
+            or row.get("owner_disposition") != authority.get("owner_disposition")
+        ):
+            raise ValueError(
+                f"Historical accounting owner authority mismatch: {program_key}/{season}"
+            )
+        audit_sha = row.get("stage1_audit_sha256", "").strip()
+        if not re.fullmatch(r"[a-f0-9]{64}", audit_sha):
+            raise ValueError(
+                f"Historical accounting audit SHA-256 required: {program_key}/{season}"
+            )
+        if canonical_season not in seasons:
+            raise ValueError(
+                "Historical accounting season has no documented canonical games: "
+                f"{program_key}/{season}"
+            )
+
+        def record(prefix: str) -> dict[str, int]:
+            try:
+                return {
+                    key: int(row[f"{prefix}_{key}"])
+                    for key in ("wins", "losses", "games")
+                }
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(
+                    f"Historical accounting record is incomplete: {program_key}/{season}"
+                ) from exc
+
+        official = record("official")
+        documented = record("documented")
+        try:
+            delta = {
+                key: int(row[f"delta_{key}"])
+                for key in ("wins", "losses", "games")
+            }
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(
+                f"Historical accounting delta is incomplete: {program_key}/{season}"
+            ) from exc
+
+        canonical = record_from_games(seasons[canonical_season])
+        if canonical["ties"]:
+            raise ValueError(
+                f"Historical accounting cannot infer tie outcome: {program_key}/{season}"
+            )
+        if (
+            official != authority.get("institutional_record")
+            or documented != authority.get("identified_record")
+            or delta != authority.get("mechanical_delta")
+            or documented
+            != {key: canonical[key] for key in ("wins", "losses", "games")}
+            or official["wins"] + official["losses"] != official["games"]
+            or documented["wins"] + documented["losses"] != documented["games"]
+            or any(
+                official[key] - documented[key] != delta[key]
+                for key in ("wins", "losses", "games")
+            )
+        ):
+            raise ValueError(
+                f"Historical accounting arithmetic/canonical discrepancy: "
+                f"{program_key}/{season}"
+            )
+        result.append(
+            {
+                "season_label": canonical_season,
+                "official_record": official,
+                "documented_record": documented,
+                "mechanical_delta": delta,
+                "source_label": row.get("source_label", "").strip(),
+                "note": row.get("public_note", "").strip()
+                or (
+                    "Institutional season/cumulative accounting conflicts with the "
+                    "preserved identified game list. The diagnostic delta is not a "
+                    "missing-game count and is not used to add, remove, or reclassify games."
+                ),
+                "terminal_classification":
+                    "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+                "stage1_audit_sha256": audit_sha,
                 "owner_disposition": row["owner_disposition"],
             }
         )
@@ -650,20 +783,83 @@ def main() -> int:
     canonical_rows = read_csv(games_path)
     assertion_rows = read_csv(assertions_path)
     coverage_path = repo_root / "data" / "reference" / "historical-season-coverage.csv"
+    accounting_path = (
+        repo_root / "data" / "reference" / "historical-season-accounting.csv"
+    )
     historical_coverage_rows = read_csv(coverage_path) if coverage_path.exists() else []
-    authority_cases = {}
-    if historical_coverage_rows:
-        authority_registry = json.loads((
-            repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
-        ).read_text(encoding="utf-8"))
-        if authority_registry.get("authority_type") != "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE":
+    historical_accounting_rows = (
+        read_csv(accounting_path) if accounting_path.exists() else []
+    )
+
+    authority_cases: dict[tuple[str, str], dict[str, Any]] = {}
+    legacy_authority_path = (
+        repo_root / "data" / "reference" / "early-aggregate-coverage-authorities.json"
+    )
+    if legacy_authority_path.exists():
+        authority_registry = json.loads(
+            legacy_authority_path.read_text(encoding="utf-8")
+        )
+        if (
+            authority_registry.get("authority_type")
+            != "OWNER_APPROVED_EARLY_AGGREGATE_COVERAGE"
+        ):
             raise ValueError("Historical coverage owner authority registry invalid")
-        authority_cases = {
-            (item["school_key"], item["season"]): item
-            for item in authority_registry["cases"]
-        }
-        if len(authority_cases) != len(authority_registry["cases"]):
-            raise ValueError("Historical coverage owner authority keys duplicated")
+        for item in authority_registry.get("cases", []):
+            key = (item["school_key"], item["season"])
+            if key in authority_cases:
+                raise ValueError("Historical coverage owner authority keys duplicated")
+            authority_cases[key] = item
+
+    accounting_authority_cases: dict[tuple[str, str], dict[str, Any]] = {}
+    mixed_authority_path = (
+        repo_root / "data" / "reference" / "early-history-accounting-authorities.json"
+    )
+    if mixed_authority_path.exists():
+        mixed_registry = json.loads(mixed_authority_path.read_text(encoding="utf-8"))
+        if (
+            mixed_registry.get("authority_type")
+            != "OWNER_APPROVED_EARLY_HISTORY_ACCOUNTING_CLOSEOUT"
+        ):
+            raise ValueError("Historical accounting owner authority registry invalid")
+        for case in mixed_registry.get("cases", []):
+            school = case.get("school_key", "")
+            for item in case.get("aggregate_only_seasons", []):
+                key = (school, item.get("season", ""))
+                if not all(key) or key in authority_cases:
+                    raise ValueError(
+                        "Historical coverage owner authority keys duplicated"
+                    )
+                authority_cases[key] = {
+                    **item,
+                    "school_key": school,
+                    "season": item.get("season"),
+                    "parent_checkpoint_sha256":
+                        case.get("parent_checkpoint_sha256"),
+                    "research_base_sha": case.get("research_base_sha"),
+                    "owner_disposition": case.get("owner_disposition"),
+                    "unidentified_record": {
+                        field: (
+                            item["institutional_record"][field]
+                            - item["identified_record"][field]
+                        )
+                        for field in ("wins", "losses", "games")
+                    },
+                }
+            for item in case.get("accounting_contradiction_seasons", []):
+                key = (school, item.get("season", ""))
+                if not all(key) or key in accounting_authority_cases:
+                    raise ValueError(
+                        "Historical accounting owner authority keys duplicated"
+                    )
+                accounting_authority_cases[key] = {
+                    **item,
+                    "school_key": school,
+                    "season": item.get("season"),
+                    "parent_checkpoint_sha256":
+                        case.get("parent_checkpoint_sha256"),
+                    "research_base_sha": case.get("research_base_sha"),
+                    "owner_disposition": case.get("owner_disposition"),
+                }
 
     global_venues_by_id, _, _ = load_global_venue_reference(repo_root)
     venue_geo_errors = canonical_venue_geography_errors(
@@ -734,12 +930,13 @@ def main() -> int:
     )
 
     invalid_coverage_programs = sorted({
-        row.get("program_key", "") for row in historical_coverage_rows
+        row.get("program_key", "")
+        for row in historical_coverage_rows + historical_accounting_rows
         if row.get("program_key", "") not in enabled_keys
     })
     if invalid_coverage_programs:
         raise ValueError(
-            "Historical coverage rows require enabled published programs: "
+            "Historical coverage/accounting rows require enabled published programs: "
             + ", ".join(invalid_coverage_programs)
         )
 
@@ -869,16 +1066,30 @@ def main() -> int:
         coverage = validated_historical_coverage(
             historical_coverage_rows, program_key, seasons, authority_cases
         )
+        accounting = validated_historical_accounting(
+            historical_accounting_rows,
+            program_key,
+            seasons,
+            accounting_authority_cases,
+        )
         coverage_by_season = {item["season_label"]: item for item in coverage}
+        accounting_by_season = {
+            item["season_label"]: item for item in accounting
+        }
+        season_labels = (
+            set(seasons) | set(coverage_by_season) | set(accounting_by_season)
+        )
         season_summaries = []
-        for season_label in sorted(seasons, reverse=True):
-            season_games = seasons[season_label]
+        for season_label in sorted(season_labels, reverse=True):
+            season_games = seasons.get(season_label, [])
             season_summaries.append(
                 {
                     "season_label": season_label,
                     **record_from_games(season_games),
                     **({"historical_coverage": coverage_by_season[season_label]}
                        if season_label in coverage_by_season else {}),
+                    **({"historical_accounting": accounting_by_season[season_label]}
+                       if season_label in accounting_by_season else {}),
                 }
             )
 
@@ -956,12 +1167,13 @@ def main() -> int:
             },
             "summary": {
                 **overall,
-                "first_season": min(seasons) if seasons else None,
-                "last_season": max(seasons) if seasons else None,
+                "first_season": min(season_labels) if season_labels else None,
+                "last_season": max(season_labels) if season_labels else None,
                 "opponents": len(opponents),
             },
             "seasons": season_summaries,
             **({"historical_season_coverage": coverage} if coverage else {}),
+            **({"historical_season_accounting": accounting} if accounting else {}),
             "opponents": opponent_summaries,
             "games": perspective_games,
             **conference_metadata,
