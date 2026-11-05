@@ -116,15 +116,24 @@ EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
    inferred season record. The difference between this aggregate and included
    game-level W/L must reconcile numerically and match the owner's exact approved
    school, season, original parent checkpoint SHA-256, research base, and residual.
-3. A founding-era season within the registry's explicit period limit, exactly one
-   research-exhausted coverage blocker, and no unrelated Stage 1 blocker.
+3. One or more founding-era seasons within the registry's explicit period limit.
+   Every blocking residual in the parent must be an independently owner-approved
+   research-exhausted aggregate-coverage season, the exact residual-season population
+   must match the protected-main authority population for that parent, and no unrelated
+   Stage 1 blocker may remain.
 4. A repository-owned audit command in tools/research_stage1_aggregate_coverage.py,
    bound to the exact SHA-256 checkpoint and owner authority registry. An eligible
-   audit alone never makes Stage 1 COMPLETE.
+   audit alone never makes Stage 1 COMPLETE. The normal path requires manifested
+   structured research-exhaustion evidence for every season. A legacy checkpoint may
+   use manifested blocker-level research summaries only when its exact protected-main
+   authority explicitly records `legacy_evidence_mode: MANIFESTED_RESIDUAL_SUMMARY`;
+   this exception must also bind the exact parent/research base and may additionally
+   bind the identified-ledger hash/count. It is representation compatibility only,
+   not weaker historical authority.
 5. A **separate, hashed closeout successor**, built with the permanent closeout
    command and independently verified with verify-closeout. It preserves every
-   historical ledger/census/source byte, reclassifies only the identified aggregate
-   coverage blocker, and retains terminal season-level debt in
+   historical ledger/census/source byte, reclassifies only the approved aggregate
+   coverage blockers, and retains every terminal season-level coverage record in
    aggregate-coverage-closeout.json and stage4-authoring/season-coverage.json.
 
 Never manufacture unnamed canonical/source games, assign any unknown aggregate
