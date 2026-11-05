@@ -170,6 +170,34 @@ def _continuation_from_parent(parent: dict[str, Any]) -> dict[str, Any] | None:
     return continuation
 
 
+def verify_phase_continuation_payloads(
+    request: dict[str, Any],
+    control_commit: str,
+) -> None:
+    """Bind continuation payload bytes before any refresh mutation occurs."""
+
+    spec = request.get("phase_continuation")
+    if spec is None:
+        return
+    validate_stage2_phase_continuation(
+        request["operation"],
+        request["request_id"],
+        spec,
+    )
+    _verify_payload_ref(
+        control_commit,
+        spec["recommendation_map"],
+        "RECOMMENDATION_MAP",
+    )
+    challenge = spec.get("historical_game_type_challenge")
+    if challenge is not None:
+        _verify_payload_ref(
+            control_commit,
+            challenge,
+            "HISTORICAL_CHALLENGE",
+        )
+
+
 def queue_after_refresh(
     *,
     live_main: str,
