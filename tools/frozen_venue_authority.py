@@ -98,6 +98,29 @@ def _sealed_post_reconciliation_venue_relationship_rows(
                     venue_id
                 )
 
+    required_columns = {
+        "source_program_key",
+        "venue_key",
+        "venue_id",
+        "canonical_name",
+        "aliases",
+        "city",
+        "state",
+        "games_currently_assigned",
+        "first_assigned_game",
+        "last_assigned_game",
+        "relationship_type",
+        "site_rule",
+        "source_basis",
+        "notes",
+    }
+    missing_columns = sorted(required_columns - set(fieldnames))
+    if missing_columns:
+        raise FrozenVenueSplitAuthorityError(
+            "sealed venue relationship delta cannot authenticate target venues.csv; "
+            "missing columns: " + ", ".join(missing_columns)
+        )
+
     expected_rows: list[dict[str, str]] = []
     identities: set[tuple[str, str]] = set()
     for item in decisions:
