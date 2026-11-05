@@ -124,9 +124,13 @@ from remote_implementation_venue_maintenance import (
 )
 from remote_implementation_production import (
     approve_exact_gate2,
+    build_gate2_merge_packet,
     verify_gate2_approved_chain,
     verify_exact_merge,
     run_permanent_production_proof,
+)
+from remote_implementation_final_release import (
+    verify_final_release_packet_binding,
 )
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
@@ -3427,6 +3431,17 @@ def run_owner_gate2_approval(
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "request.json").write_bytes(request_bytes)
     write_json(directory / "gate2-approval-proof.json", proof)
+
+    merge_packet = None
+    continuation = request.get("final_release_continuation")
+    if continuation is not None:
+        merge_packet = build_gate2_merge_packet(
+            request,
+            proof,
+            production_request_id=continuation["production_request_id"],
+        )
+        write_json(directory / "gate2-merge-packet.json", merge_packet)
+
     manifest = {
         "schema_version": 1,
         "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
@@ -3449,6 +3464,19 @@ def run_owner_gate2_approval(
         "owner_gate_2_approved": True,
         "merged": False,
         "production_proof": False,
+        "final_release_continuation": continuation,
+        "gate2_merge_packet_path": (
+            (directory / "gate2-merge-packet.json").as_posix()
+            if merge_packet is not None else None
+        ),
+        "gate2_merge_packet_sha256": (
+            sha256_file(directory / "gate2-merge-packet.json")
+            if merge_packet is not None else None
+        ),
+        "production_request_id": (
+            merge_packet["production_request_id"]
+            if merge_packet is not None else None
+        ),
     }
     checkpoint = directory / "checkpoint-manifest.json"
     write_json(checkpoint, manifest)
@@ -3465,6 +3493,9 @@ def run_owner_gate2_approval(
             "pr_number": request["pr_number"],
             "owner_gate_2_approved": True,
             "merged": False,
+            "gate2_merge_packet_path": manifest["gate2_merge_packet_path"],
+            "gate2_merge_packet_sha256": manifest["gate2_merge_packet_sha256"],
+            "production_request_id": manifest["production_request_id"],
             "checkpoint_manifest_path": checkpoint.as_posix(),
             "checkpoint_manifest_sha256": sha256_file(checkpoint),
             "fresh_runner_verification": "PENDING",
@@ -3491,6 +3522,11 @@ def run_read_only_production_proof(
     """Post-merge permanent Production validation; cannot merge or rewrite main."""
     if request["merge_sha"] != live_main:
         raise Stop("PRODUCTION_REQUEST_NOT_EXACT_CURRENT_MAIN")
+    verify_final_release_packet_binding(
+        request,
+        predecessor_commit,
+        repo=ROOT,
+    )
     authority = verify_gate2_approved_chain(
         request, predecessor_commit, repo=ROOT,
     )

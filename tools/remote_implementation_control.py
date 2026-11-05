@@ -303,6 +303,7 @@ def _validate_payload_ref(value: Any, name: str, *, required: bool = False) -> N
 STAGE2_PHASE_CONTINUATION_KIND = "STAGE2_REFRESH_CENSUS_PROPOSAL_V1"
 STAGE2_POST_GATE1_CONTINUATION_KIND = "STAGE2_GATE1_FILL_TO_APPLY_V1"
 RELEASE_PHASE_CONTINUATION_KIND = "RELEASE_READINESS_TO_PREVIEW_V1"
+FINAL_RELEASE_CONTINUATION_KIND = "RELEASE_GATE2_TO_PRODUCTION_V1"
 
 
 def validate_stage2_phase_continuation(
@@ -437,6 +438,38 @@ def validate_release_phase_continuation(
     )
 
 
+def validate_final_release_continuation(
+    operation: str,
+    parent_request_id: str,
+    value: Any,
+) -> None:
+    """Validate the connector-owned Gate 2 -> Production continuation."""
+
+    if value is None:
+        return
+    _require(
+        operation == OP_RELEASE_GATE2_APPROVAL,
+        "REQUEST_FINAL_RELEASE_CONTINUATION_FORBIDDEN",
+    )
+    _require(
+        isinstance(value, dict),
+        "REQUEST_FINAL_RELEASE_CONTINUATION_INVALID",
+    )
+    _require(
+        value.get("kind") == FINAL_RELEASE_CONTINUATION_KIND,
+        "REQUEST_FINAL_RELEASE_CONTINUATION_KIND_INVALID",
+    )
+    production_id = str(value.get("production_request_id") or "")
+    _require(
+        bool(REQUEST_ID_RE.fullmatch(production_id)),
+        "REQUEST_FINAL_RELEASE_CONTINUATION_PRODUCTION_ID_INVALID",
+    )
+    _require(
+        production_id != parent_request_id,
+        "REQUEST_FINAL_RELEASE_CONTINUATION_REQUEST_ID_COLLISION",
+    )
+
+
 def validate_request(request: dict[str, Any]) -> None:
     _require(request.get("schema_version") == REQUEST_SCHEMA_VERSION, "REQUEST_SCHEMA_MISMATCH")
     _require(request.get("kind") == REQUEST_KIND, "REQUEST_KIND_MISMATCH")
@@ -481,6 +514,11 @@ def validate_request(request: dict[str, Any]) -> None:
         operation,
         request_id,
         request.get("release_phase_continuation"),
+    )
+    validate_final_release_continuation(
+        operation,
+        request_id,
+        request.get("final_release_continuation"),
     )
     if operation in {OP_STAGE2_CENSUS, OP_STAGE2_PROPOSAL_REHEARSAL}:
         if request.get("historical_game_type_challenge") is not None:

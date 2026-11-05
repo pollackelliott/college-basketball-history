@@ -25,6 +25,8 @@ from remote_implementation_release_readiness import (
     verify_release_readiness_authority,
 )
 
+MERGE_PACKET_KIND = "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET"
+
 
 def require(condition: bool, code: str) -> None:
     if not condition:
@@ -252,6 +254,42 @@ def approve_exact_gate2(
         "merge_authorized_exact_head_sha": authority["target_sha"],
         "merged": False,
         "production_proof": False,
+    }
+
+
+def build_gate2_merge_packet(
+    request: dict[str, Any],
+    approval: dict[str, Any],
+    *,
+    production_request_id: str,
+) -> dict[str, Any]:
+    """Build the exact connector-owned merge handoff after fresh Gate 2 approval."""
+
+    return {
+        "schema_version": 1,
+        "kind": MERGE_PACKET_KIND,
+        "gate2_request_id": request["request_id"],
+        "production_request_id": production_request_id,
+        "school_key": request["school_key"],
+        "pr_number": approval["pr_number"],
+        "pr_head_sha": approval["target_sha"],
+        "target_branch": request["target_branch"],
+        "base_branch": "main",
+        "approved_main_sha": request["expected_protected_main_sha"],
+        "merge_method": "merge",
+        "preview_deployment_id": approval["preview_deployment_id"],
+        "preview_url": approval["preview_url"],
+        "owner_gate_2_approved": True,
+        "merged": False,
+        "production_proof": False,
+        "authority_statement": (
+            "Exact connector-owned merge packet after fresh Owner Gate 2 "
+            "approval. The school Implementation lane may merge only this PR "
+            "at this exact head with a two-parent merge commit while protected "
+            "main remains at approved_main_sha, then submit only the bound "
+            "Production-proof request. No other merge or release authority "
+            "is granted."
+        ),
     }
 
 

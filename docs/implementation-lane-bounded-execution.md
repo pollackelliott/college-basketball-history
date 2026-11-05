@@ -352,11 +352,11 @@ Merge only the exact owner-approved release state and prove that the exact merge
 ### Work
 
 - treat an exact Preview `APPROVED. Proceed` as authorization for this complete final phase while the approved PR head, Preview, and protected-main preconditions remain exact;
-- durably record and independently verify the exact Gate 2 approval;
+- prefer `RELEASE_GATE2_TO_PRODUCTION_V1` on the Gate 2 approval request, with one exact future Production-proof request ID;
+- durably record and independently verify the exact Gate 2 approval and reproduce its exact connector merge packet;
 - verify the approved Preview still matches the current exact PR head;
-- run the current merge command with explicit preview-approved semantics;
-- verify protected `main` contains the exact merge result;
-- submit and monitor the exact Production-proof operation without another owner relay;
+- execute only that fresh-verified packet through the school lane's GitHub connector: exact PR number/head, exact approved protected-main predecessor, and merge method `merge`;
+- verify the returned merge SHA is now exact protected `main`, then immediately submit the packet-bound Production-proof request without another owner relay;
 - wait for the exact merged-main SHA's successful Production deployment;
 - compare production JSON/equivalent published artifacts against merged main for the target and every required affected document;
 - verify final release lock/status and clean repository state;

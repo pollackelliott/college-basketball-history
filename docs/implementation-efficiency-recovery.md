@@ -77,6 +77,15 @@ Preview-verification request, and supervises CI/Preview through fresh
 `OWNER_GATE_2_READY`. This connector seam is intentional: do not broaden Actions
 `GITHUB_TOKEN` to PR-write merely to remove it.
 
+After exact Preview `APPROVED. Proceed`, use `RELEASE_GATE2_TO_PRODUCTION_V1` on the
+Gate 2 approval request. Fresh Gate 2 verification preserves an exact connector merge
+packet binding the approved PR/head, approved protected-main predecessor, required merge
+method, and one future Production-proof request ID. The school lane executes only that
+packet through its GitHub connector, immediately submits the bound Production-proof request
+with the returned merge SHA, and supervises exact Production deployment plus fresh proof
+through `IMPLEMENTATION COMPLETE`. No additional owner relay belongs between Gate 2
+approval and completion unless exact authority changes or a genuine blocker appears.
+
 Any changed PR head, changed approved historical meaning, moved/unauthorized main identity, shared/global mutation requirement, unsafe recovery state, or other genuine blocker ends the persisted phase authority and requires the repository-defined stop/owner boundary.
 
 A healthy in-flight workflow is not a completed owner-facing phase, and owner attention is not a scheduling primitive. When the active assistant turn can safely remain open, use **low-frequency heartbeat polling at roughly 120-second intervals**: one read per heartbeat, a compact visible progress update, and immediate advancement when the workflow materially changes. Do not use rapid 20–30 second polling or multiple equivalent reads inside the heartbeat interval. If the turn cannot remain active safely, preserve the exact request/run identity, provide the direct workflow link, and yield with `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. Repeated such yields across one deterministic phase are a repository-orchestration defect: fix the phase bundling instead of normalizing owner-scheduled continuation.
