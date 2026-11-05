@@ -653,6 +653,26 @@ _EXHIBITION_NONGAME_PATTERNS = (
         r"\b(?:sports\s+and\s+)?exhibition\s+(?:complex|center|centre|hall)\b",
         re.IGNORECASE,
     ),
+    re.compile(
+        r"\bexhibitions?\s+and\s+foreign-tour\s+games\s+are\s+excluded\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bexhibition\s+vs\s+[^.;]+?\s+on\s+\d{4}-\d{2}-\d{2}\s+excluded\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bno\s+explicit\s+non-exhibition\s+classification\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bexhibition\s+evidence\s+is\s+comparator\s+only\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bplus\s+one\s+exhibition\b",
+        re.IGNORECASE,
+    ),
 )
 
 
