@@ -1364,7 +1364,7 @@
     },
     {
       "opponent_key": "byu-hawaii",
-      "opponent_name": "BYU-Hawaii",
+      "opponent_name": "BYU Hawaii",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -56045,7 +56045,7 @@
       "game_date": "1994-12-23",
       "date_precision": "EXACT",
       "opponent_key": "byu-hawaii",
-      "opponent_name": "BYU-Hawaii",
+      "opponent_name": "BYU Hawaii",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 61,
