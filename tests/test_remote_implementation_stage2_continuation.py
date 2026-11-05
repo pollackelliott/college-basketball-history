@@ -18,6 +18,7 @@ from remote_implementation_control import (  # noqa: E402
     STAGE2_PHASE_CONTINUATION_KIND,
     STAGE2_POST_GATE1_CONTINUATION_KIND,
     RemoteImplementationError,
+    validate_request,
     validate_stage2_phase_continuation,
 )
 from remote_implementation_io import Stop  # noqa: E402
@@ -413,6 +414,7 @@ class QueueAfterGate1FillTests(unittest.TestCase):
         )
         self.assertTrue(request["authority"]["stage2_preseal_rehearsal"])
         self.assertEqual(request["phase_continuation"], parent["phase_continuation"])
+        validate_request(request)
 
 
 class QueueAfterPresealTests(unittest.TestCase):
@@ -463,6 +465,7 @@ class QueueAfterPresealTests(unittest.TestCase):
         self.assertEqual(request["operation"], OP_STAGE2_GATE1_SEAL)
         self.assertTrue(request["authority"]["stage2_gate1_seal"])
         self.assertEqual(request["equivalence_sha256"], "a" * 64)
+        validate_request(request)
 
     def test_blocked_preseal_stops_before_seal(self):
         spec = post_gate1_spec()
@@ -538,6 +541,7 @@ class QueueAfterGate1SealTests(unittest.TestCase):
         self.assertTrue(request["authority"]["stage2_sealed_apply"])
         self.assertNotIn("phase_continuation", request)
         self.assertEqual(request["approved_plan_hash"], "2" * 64)
+        validate_request(request)
 
 
 if __name__ == "__main__":
