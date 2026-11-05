@@ -1489,39 +1489,54 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
         school = repo / "schools" / school_key
         onboarding = repo / ".onboarding" / school_key
         reference = repo / "data" / "reference"
+        canonical_dir = repo / "data" / "canonical"
         school.mkdir(parents=True)
         onboarding.mkdir(parents=True)
         reference.mkdir(parents=True)
+        canonical_dir.mkdir(parents=True)
 
         source_fields = [
             "source_game_id",
             "season_label",
             "game_date",
             "curated_venue_name",
+            "city",
+            "state",
             "curated_site_type",
             "curated_game_type",
             "curated_postseason_round",
         ]
-        source_row = {
-            "source_game_id": "EX-1",
-            "season_label": "2010-2011",
-            "game_date": "2011-03-16",
-            "curated_venue_name": "Frozen Arena",
-            "curated_site_type": "NEUTRAL",
-            "curated_game_type": "POSTSEASON",
-            "curated_postseason_round": "",
-        }
-        with (school / "source-games.csv").open(
-            "w", encoding="utf-8", newline=""
-        ) as handle:
+        source_rows = [
+            {
+                "source_game_id": "SPLIT-1",
+                "season_label": "1960-1961",
+                "game_date": "1961-01-15",
+                "curated_venue_name": "Frozen Arena",
+                "city": "Frozen City",
+                "state": "FC",
+                "curated_site_type": "NEUTRAL",
+                "curated_game_type": "REGULAR_SEASON",
+                "curated_postseason_round": "",
+            },
+            {
+                "source_game_id": "EX-2",
+                "season_label": "2011-2012",
+                "game_date": "2012-03-15",
+                "curated_venue_name": "",
+                "city": "",
+                "state": "",
+                "curated_site_type": "OPPONENT_HOME",
+                "curated_game_type": "REGULAR_SEASON",
+                "curated_postseason_round": "",
+            },
+        ]
+        source_path = school / "source-games.csv"
+        with source_path.open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=source_fields)
             writer.writeheader()
-            writer.writerow(source_row)
+            writer.writerows(source_rows)
 
-        frozen_row = {
-            field: ""
-            for field in FIELDS
-        }
+        frozen_row = {field: "" for field in FIELDS}
         frozen_row.update({
             "source_program_key": school_key,
             "venue_key": "frozen-arena",
@@ -1530,8 +1545,8 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             "city": "Frozen City",
             "state": "FC",
             "games_currently_assigned": "1",
-            "first_assigned_game": "2011-03-16",
-            "last_assigned_game": "2011-03-16",
+            "first_assigned_game": "1961-01-15",
+            "last_assigned_game": "1961-01-15",
             "relationship_type": "GAME_SITE",
             "site_rule": "fixture",
             "source_basis": "fixture",
@@ -1614,28 +1629,51 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 "notes": "",
             })
 
+        canonical_fields = [
+            "canonical_game_id", "season_label", "game_date",
+            "team_a_key", "team_b_key", "team_a_score", "team_b_score",
+            "result_winner_team_key", "overtime_periods", "site_type",
+            "venue_key", "site_city", "site_state", "game_type",
+            "postseason_round",
+        ]
+        with (canonical_dir / "games.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=canonical_fields)
+            writer.writeheader()
+            writer.writerow({
+                "canonical_game_id": "CBBG-EX-2",
+                "season_label": "2011-2012",
+                "game_date": "2012-03-15",
+                "team_a_key": school_key,
+                "team_b_key": "example-opponent",
+                "site_type": "TEAM_B_HOME",
+                "venue_key": "sealed-arena",
+                "site_city": "Sealed City",
+                "site_state": "SC",
+                "game_type": "NIT",
+                "postseason_round": "",
+            })
+
+        snapshot_fields = [
+            "season_label",
+            "game_date",
+            "curated_venue_name",
+            "city",
+            "state",
+            "curated_site_type",
+            "curated_game_type",
+            "curated_postseason_round",
+        ]
         snapshot = {
             "schema_version": 1,
-            "fields": [
-                "season_label",
-                "game_date",
-                "curated_venue_name",
-                "curated_site_type",
-                "curated_game_type",
-                "curated_postseason_round",
-            ],
+            "fields": snapshot_fields,
             "rows": {
-                "EX-1": {
-                    field: source_row[field]
-                    for field in [
-                        "season_label",
-                        "game_date",
-                        "curated_venue_name",
-                        "curated_site_type",
-                        "curated_game_type",
-                        "curated_postseason_round",
-                    ]
+                row["source_game_id"]: {
+                    field: row[field]
+                    for field in snapshot_fields
                 }
+                for row in source_rows
             },
         }
         manifest = {
@@ -1662,14 +1700,14 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "expected_local_name": "Frozen Arena",
                     "expected_local_city": "Frozen City",
                     "expected_local_state": "FC",
-                    "cutover_date": "2011-01-01",
+                    "cutover_date": "1960-01-01",
                     "split_source_game_count": "1",
                     "split_targets": [{
                         "side": "AFTER",
                         "global_venue_id": "VEN-000901",
                         "global_venue_key": "frozen-arena",
                         "games_currently_assigned": "1",
-                        "source_game_ids": ["EX-1"],
+                        "source_game_ids": ["SPLIT-1"],
                     }],
                 }],
             },
@@ -1682,11 +1720,14 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             "school_key": school_key,
             "approved_plan_hash": "a" * 64,
             "decisions": [{
-                "decision_id": "DISCREPANCY-EX-1-GAME_TYPE",
+                "decision_id": "DISCREPANCY-EX-2-GAME_TYPE",
                 "category": "discrepancy",
                 "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
                 "source_game_id": "EX-2",
                 "source_game_date": "2012-03-15",
+                "canonical_game_id": "CBBG-EX-2",
+                "field_name": "game_type",
+                "canonical_value": "NIT",
                 "resolution_basis": "Official host source identifies exact site.",
                 "source_patch": {
                     "curated_venue_name": "Sealed Arena",
@@ -1713,7 +1754,31 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             1,
         )
 
-        # Exact frozen bytes + the exact sealed GAME_SITE row are valid only
+        # The same venue mutation remains forbidden during ordinary pre-ingest
+        # authentication while source semantics are still exactly frozen.
+        with self.assertRaisesRegex(
+            FrozenVenueSplitAuthorityError,
+            "does not match current venues.csv",
+        ):
+            ingest_school.load_runtime_venue_metadata_map(
+                repo,
+                school_key,
+                venue_path,
+                global_venues,
+                sealed_plan_context=approved,
+            )
+
+        # Model the paired final source state produced by reconciliation.
+        source_rows[1]["curated_game_type"] = "NIT"
+        source_rows[1]["curated_venue_name"] = "Sealed Arena"
+        source_rows[1]["city"] = "Sealed City"
+        source_rows[1]["state"] = "SC"
+        with source_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=source_fields)
+            writer.writeheader()
+            writer.writerows(source_rows)
+
+        # Exact frozen bytes + the exact sealed GAME_SITE suffix are valid only
         # in final/post-reconciliation authentication.
         metadata = ingest_school.load_runtime_venue_metadata_map(
             repo,
@@ -1727,28 +1792,15 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
             ingest_school.FROZEN_VENUE_SPLIT_AUTHORITY_KEY,
             metadata,
         )
-        with self.assertRaisesRegex(
-            FrozenVenueSplitAuthorityError,
-            "does not match current venues.csv",
-        ):
-            ingest_school.load_runtime_venue_metadata_map(
-                repo,
-                school_key,
-                venue_path,
-                global_venues,
-                sealed_plan_context=approved,
-            )
-
         exact_post_bytes = venue_path.read_bytes()
 
         # A changed frozen row remains forbidden.
-        with venue_path.open(encoding="utf-8-sig", newline="") as handle:
-            rows = list(csv.DictReader(handle))
-        rows[0]["notes"] = "unsealed frozen-row drift"
-        with venue_path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=FIELDS)
-            writer.writeheader()
-            writer.writerows(rows)
+        frozen_mutation = bytearray(exact_post_bytes)
+        marker = b"fixture"
+        marker_pos = frozen_mutation.find(marker)
+        self.assertGreaterEqual(marker_pos, 0)
+        frozen_mutation[marker_pos:marker_pos + len(marker)] = b"changed"
+        venue_path.write_bytes(bytes(frozen_mutation))
         with self.assertRaisesRegex(
             FrozenVenueSplitAuthorityError,
             "outside the exact sealed post-reconciliation GAME_SITE delta",
@@ -1787,15 +1839,12 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                 post_reconciliation_semantics=True,
             )
 
-        # A malformed sealed addition remains forbidden.
-        venue_path.write_bytes(exact_post_bytes)
-        with venue_path.open(encoding="utf-8-sig", newline="") as handle:
-            rows = list(csv.DictReader(handle))
-        rows[-1]["first_assigned_game"] = "2012-03-16"
-        with venue_path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=FIELDS)
-            writer.writeheader()
-            writer.writerows(rows)
+        # A malformed sealed suffix remains forbidden.
+        venue_path.write_bytes(exact_post_bytes.replace(
+            b"2012-03-15,2012-03-15",
+            b"2012-03-16,2012-03-15",
+            1,
+        ))
         with self.assertRaisesRegex(
             FrozenVenueSplitAuthorityError,
             "outside the exact sealed post-reconciliation GAME_SITE delta",
