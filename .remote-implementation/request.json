@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "st-bonaventure-stage2-current-main-refresh-0015",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "st-bonaventure-stage2-census-0016",
+  "operation": "STAGE2_CENSUS",
   "school_key": "st-bonaventure",
-  "previous_control_state_commit": "c8c0f8d06781bbec1c25c057bd3335c724ac3172",
-  "previous_control_state_sha256": "b1361090b66c7dc4e6a12307643ddb6af8eb28789113dfe082a49be84a957886",
+  "previous_control_state_commit": "4fb0614585fde7f5119830a205ec19533c705225",
+  "previous_control_state_sha256": "07e13a462c10493133caef5b18e53678a1bfac5c2486f24613760fca995f2d4e",
   "expected_protected_main_sha": "1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079",
   "target_branch": "data/st-bonaventure-onboarding",
-  "target_sha": "e4b4ca7b95670c65547bed5e0bbcd0d0f432aebb",
+  "target_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
   "phase0_successor": {
     "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-phase0-0003/successor-manifest.json",
     "sha256": "012e478dbea60ba69d9e048017545f3aac6bcb196bd79027e98d47ffd4c54c8c"
@@ -18,26 +18,21 @@
     "sha256": "8f16b3fcb6e5c1691814434373f94c23ec6a09e2ed732694adcd7c63c6ec8e27"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0014/successor-manifest.json",
-    "sha256": "c8a8f74046ca8dfb9bb2abc64f611b8e4ac0c573c4723301c3e67dc84bfd4045"
+    "path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0015/successor-manifest.json",
+    "sha256": "b5ddf9ddec00fdb6f67f000deff40ab3e2169e21f4d0b6f3a733ce238966822f"
   },
   "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
   "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "CONTROL CENTER DISPOSITION — ST. BONAVENTURE POST-RECONCILIATION VENUE-MAP CALL-SITE REPAIR. The same authorized Stage 2 unit includes any repository-defined guarded current-main refresh required after the bounded generic repair. PR #462 merged exact reviewed head 315634ce98f93c9c9fa95bbb1e0cb2efc051033e into protected main as 1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079. Immediately before request creation the onboarding predecessor is e4b4ca7b95670c65547bed5e0bbcd0d0f432aebb, exact merge base is 09a3f949a20bea011f07cc64d6ad30d018e3cbc0, target-only changed paths are 9, intervening-main changed paths are 4, overlap is 0, protected main changes no schools/st-bonaventure path, and global control is IDLE/COMPLETE with recovery_required=false. Authority covers only this guarded refresh and its required verification; no historical authority, Owner Gate 1, sealed apply, release, merge, or Production authority is created."
-  },
   "creation_provenance": {
-    "origin": "St. Bonaventure serialized Implementation Stage 2 — post-PR #462 current-main refresh",
-    "authorization": "PR #462 completes the generic mixed reconciliation venue/source authentication repair without changing basketball data. The preserved onboarding head e4b4ca7b95670c65547bed5e0bbcd0d0f432aebb is the exact fresh-verified refresh -0014 successor and proposal -0013 target. Current disjoint topology is target-only 9 / main-only 4 / overlap 0 / no schools/st-bonaventure main path. Immutable Integration Freeze and semantic snapshot remain unchanged. After refresh, Stage 2 must regenerate through a fresh census before the unchanged recommendation map may be reauthenticated and rehearsed; the prior 232-decision universe is not carried forward by assertion."
+    "origin": "St. Bonaventure serialized Implementation Stage 2 — fresh census after independently verified PR #462 current-main refresh -0015",
+    "authorization": "Existing Control-Center-authorized Stage 2 continuation persists. Refresh -0015 is COMPLETE and independently fresh-verified PASS on protected main 1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079 with exact successor 07b273f2793dee8e68efaa58dda2c28c767e5390. This read-only census must regenerate the decision universe from that exact successor before another proposal rehearsal. The prior 232-decision universe and recommendation map are not carried forward by assertion. No Owner Gate 1, sealing, apply, release, Preview, merge, Production, recovery, or unrelated mutation authority is granted."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
