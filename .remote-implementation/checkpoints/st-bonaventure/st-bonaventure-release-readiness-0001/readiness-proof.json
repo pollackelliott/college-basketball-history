@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "apply_request_id": "st-bonaventure-stage2-sealed-apply-0001",
+  "approved_plan_hash": "91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af",
+  "changed_path_count": 88,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
+  "release_manifest_sha256": "e1baf73ee6f0b6de05c98c130b63072369019adab8e1d90159b5ac3c96e2c0b0",
+  "school_key": "st-bonaventure",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "d68fcf1e3b0a59e9bf3dfda2769852852f4e4e693273a3aed4f6e15fe90a57d2",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_sha": "c9f1eb6886a491b4935c38fcb6e061abb6bab86b",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "1a7c77260d108a6359222bb62d36b0c486a01d81ff72778acea4ab454125ce58",
+  "writeahead_sha256": "27da0f8193637ddd8c803beff7a17047f460874cd108430f310fc5389403f60f"
+}
