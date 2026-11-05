@@ -53,9 +53,16 @@ Default phase continuations are:
 - one release-preparation `Proceed` continues through release readiness, exact PR creation/reuse, CI/mergeability checks, exact Preview verification, and stops at `OWNER_GATE_2_READY`;
 - exact Preview `APPROVED. Proceed` continues through durable Gate 2 approval verification, exact approved two-parent merge, Production-proof request, and independent Production verification through `IMPLEMENTATION COMPLETE`.
 
+For the common post-tooling Stage 2 case, use the repository-owned
+`STAGE2_REFRESH_CENSUS_PROPOSAL_V1` continuation rather than making the owner schedule
+three separate remote requests. The initiating current-main refresh remains the only
+mutation-capable substep; after its fresh PASS, the repository queues the ordinary census,
+requires its fresh PASS plus exact decision-universe preservation, then queues the ordinary
+exact-map proposal. Every child request/checkpoint/verifier remains intact.
+
 Any changed PR head, changed approved historical meaning, moved/unauthorized main identity, shared/global mutation requirement, unsafe recovery state, or other genuine blocker ends the persisted phase authority and requires the repository-defined stop/owner boundary.
 
-A healthy in-flight workflow is not a completed owner-facing phase, but owner attention is also not a waiting primitive. After dispatch, make bounded event-oriented status reads only when they can reveal material progress. Do **not** spend minutes repeatedly polling an unchanged workflow merely to avoid a transport yield. If the external operation is still genuinely in flight and no useful independent work remains, preserve its exact request/run identity, provide the direct workflow link, and yield with `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. Repeated such yields across one deterministic phase are a repository-orchestration defect: fix the phase bundling instead of normalizing owner-scheduled continuation.
+A healthy in-flight workflow is not a completed owner-facing phase, and owner attention is not a scheduling primitive. When the active assistant turn can safely remain open, use **low-frequency heartbeat polling at roughly 120-second intervals**: one read per heartbeat, a compact visible progress update, and immediate advancement when the workflow materially changes. Do not use rapid 20–30 second polling or multiple equivalent reads inside the heartbeat interval. If the turn cannot remain active safely, preserve the exact request/run identity, provide the direct workflow link, and yield with `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. Repeated such yields across one deterministic phase are a repository-orchestration defect: fix the phase bundling instead of normalizing owner-scheduled continuation.
 
 ## 3. Compact-output contract
 

@@ -140,9 +140,9 @@ Do **not** end the turn with `NEXT OWNER ACTION: PROCEED` merely because:
 - a fresh verifier has not yet written its result;
 - a successful intermediate checkpoint exists and the next deterministic substep belongs to the same authorized phase.
 
-Also do **not** turn the conversation into a waiting loop. After the initial authenticated observation, make another status read only when it can reasonably answer a material event question. Rapid or time-spaced reads whose only purpose is to consume minutes until GitHub finishes are not durable progress.
+Do **not** turn the conversation into a rapid waiting loop. After the initial authenticated observation, a healthy active turn may use a low-frequency heartbeat of roughly **120 seconds** between status reads. Each heartbeat should make one status read, provide one compact visible progress update, and immediately continue the already-authorized phase when a material transition occurs. Multiple equivalent reads inside that interval are not durable progress.
 
-If the workflow remains healthy and in flight and no useful independent work remains, preserve the exact workflow/request/control identity, include the direct workflow link, and yield immediately at that durable state. Existing phase authorization remains valid.
+If the workflow remains healthy and in flight but the turn cannot safely remain active, preserve the exact workflow/request/control identity, include the direct workflow link, and yield at that durable state. Existing phase authorization remains valid.
 
 A single long external operation may therefore require one transport continuation. A deterministic phase that repeatedly requires transport continuation between refresh, census, proposal, fill, seal, apply, or release substeps is not healthy phase-sized orchestration. Treat that repeated pattern as a repository tooling defect and add a repository-owned continuation path rather than normalizing owner-scheduled `Continue` messages.
 
