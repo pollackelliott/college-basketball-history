@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "rhode-island-stage2-opponent-display-normalize-0001",
+  "school_key": "rhode-island",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "2a307da24dfdc976c4b027fa927b64c6c1957231",
+  "previous_control_state_sha256": "36243c337e12a0034ef4d99b3e0b386c6c176ad92779f863b2d3fb8de5f2990b",
+  "expected_protected_main_sha": "bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "381b991b2487f190f88bf814155afb62964fd84ca23e7fbbf0a9eaad77677270"
+  },
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "creation_provenance": {
+    "origin": "ChatGPT Rhode Island serialized Implementation lane — census-bound Stage 2 opponent-display normalization",
+    "authorization": "Same owner-authorized Rhode Island Stage 2 phase persists. Fresh-verified census rhode-island-stage2-census-0002 at protected main bb8f6eba5ebe7cb676ad4ae8715662aa0a7e365b is BLOCKED solely by exactly nine deterministic historical opponent-display conflicts (baltimore, loyola-new-orleans, pratt, rpi, saint-anselm, saint-michaels, springfield, st-thomas-fl, wayne-state-mi), with warning_count=0, decision_count=0, semantic drift PASS, decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly the permanent census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE representation repair over that complete nine-key population. The operation may change only canonical_opponent_name in schools/rhode-island/opponents.csv and normalized_opponent_name in schools/rhode-island/source-games.csv, using existing project display authority. It may not change opponent keys, literal source labels, raw evidence, any historical field, Research, Integration Freeze, protected main, owner gates, sealing/apply, release, Preview, merge, or Production."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
