@@ -30,6 +30,7 @@ from remote_implementation_control import (  # noqa: E402
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_VENUE_IDENTITY_MAINTENANCE,
     REQUEST_KIND,
+    STAGE2_PHASE_CONTINUATION_KIND,
     RemoteImplementationError,
     abandon_active,
     begin_request,
@@ -262,6 +263,60 @@ class RemoteImplementationControlTests(unittest.TestCase):
             "authorization_basis": "Deterministic current-main refresh.",
         }
         validate_request(req)
+
+    def test_stage2_refresh_accepts_phase_continuation(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["operation"] = OP_STAGE2_CURRENT_MAIN_REFRESH
+        req["authority"]["stage2_census"] = False
+        req["authority"]["stage2_current_main_refresh"] = True
+        req["current_main_refresh_authorization"] = {
+            "approved": True,
+            "authority_kind": "CONTROL_CENTER_EXPLICIT",
+            "authorization_basis": "Deterministic current-main refresh.",
+        }
+        req["phase_continuation"] = {
+            "kind": STAGE2_PHASE_CONTINUATION_KIND,
+            "census_request_id": "example-stage2-census-next",
+            "proposal_request_id": "example-stage2-proposal-next",
+            "expected_decision_universe_sha256": "b" * 64,
+            "recommendation_map": {
+                "path": ".remote-implementation/payloads/example/map.json",
+                "sha256": "c" * 64,
+            },
+        }
+        validate_request(req)
+
+    def test_stage2_census_accepts_carried_phase_continuation(self):
+        req = request(OP_STAGE2_CENSUS, "example-stage2-census-next")
+        req["phase_continuation"] = {
+            "kind": STAGE2_PHASE_CONTINUATION_KIND,
+            "census_request_id": "example-stage2-census-next",
+            "proposal_request_id": "example-stage2-proposal-next",
+            "expected_decision_universe_sha256": "b" * 64,
+            "recommendation_map": {
+                "path": ".remote-implementation/payloads/example/map.json",
+                "sha256": "c" * 64,
+            },
+        }
+        validate_request(req)
+
+    def test_stage2_phase_continuation_forbidden_on_proposal(self):
+        req = request(OP_STAGE2_PROPOSAL_REHEARSAL)
+        req["phase_continuation"] = {
+            "kind": STAGE2_PHASE_CONTINUATION_KIND,
+            "census_request_id": "example-stage2-census-next",
+            "proposal_request_id": "example-stage2-proposal-next",
+            "expected_decision_universe_sha256": "b" * 64,
+            "recommendation_map": {
+                "path": ".remote-implementation/payloads/example/map.json",
+                "sha256": "c" * 64,
+            },
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_STAGE2_PHASE_CONTINUATION_FORBIDDEN",
+        ):
+            validate_request(req)
 
     def test_stage2_current_main_refresh_rejects_non_onboarding_target(self):
         req = request(OP_STAGE2_CENSUS)
