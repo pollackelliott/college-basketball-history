@@ -361,7 +361,7 @@
   "active_request_sha256": "1c8001d5fc77d76867fce32657a694f4e5759c0570d25feefd201fa699e584ae",
   "active_school_key": "rhode-island",
   "active_target_branch": "maintenance/rhode-island-stage1-shared-venue-identity",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "ec45d42e75554f86584d8a23d4fc901c64e58dc8",
   "active_writeahead_path": ".remote-implementation/writeahead/rhode-island/rhode-island-venue-maintenance-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "4f61cec61270418155d2ed5de7e76327a5b27f3ce868ff7c0733054eb6642a3e",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
