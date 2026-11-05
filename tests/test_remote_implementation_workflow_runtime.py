@@ -78,6 +78,26 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             verifier_count,
         )
 
+    def test_stage2_phase_continuation_runs_only_from_exact_main_runtime(self):
+        text = self.workflow
+        runtime_call = (
+            'run: python "$GITHUB_WORKSPACE/runtime/tools/'
+            'remote_implementation_stage2_continuation.py"'
+        )
+        self.assertEqual(text.count(runtime_call), 2)
+        self.assertNotIn(
+            "run: python tools/remote_implementation_stage2_continuation.py",
+            text,
+        )
+        self.assertIn(
+            "Queue authorized Stage 2 census continuation",
+            text,
+        )
+        self.assertIn(
+            "Queue authorized Stage 2 proposal continuation",
+            text,
+        )
+
     def test_control_checkout_remains_state_authority(self):
         text = self.workflow
         self.assertIn(
