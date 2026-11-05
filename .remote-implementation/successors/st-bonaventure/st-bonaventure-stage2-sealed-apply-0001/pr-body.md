@@ -1,0 +1,112 @@
+## Summary
+
+- onboards `st-bonaventure` through the permanent sealed-plan workflow
+- preserves 2,614 source rows (0 pre-cutoff)
+- matches 694 existing games and creates 1,892
+- applies 28 owner-approved identity decisions
+- records 143 dated discrepancy decisions
+- approved plan `91a8243020e63457df4f7a1cea9cf455895b5733707d0cec8e70163c8be148af`
+- discrepancy dispositions: KEEP_CANONICAL=21, NORMALIZE_SOURCE_TO_CANONICAL=14, USE_SOURCE=108
+
+## Validation
+
+- repository validation — PASS
+- target package no-op — PASS
+- implementation site completeness — PASS
+- accomplishment cross-check — PASS
+- deterministic site build — PASS
+- unit tests — PASS
+- changed-file whitespace check — PASS
+
+## Sealed apply boundary
+
+The paths below are the transactional sealed-plan mutation boundary. The full PR diff also includes committed Phase 0 package/reference changes already present on the onboarding branch.
+
+- `data/canonical/games.csv`
+- `data/evidence/game-assertions.csv`
+- `data/reconciliation/discrepancies.csv`
+- `data/reconciliation/onboarding-decisions/st-bonaventure-91a8243020e6.json`
+- `data/reference/historical-season-coverage.csv`
+- `data/reference/program-accomplishments.csv`
+- `data/reference/programs.csv`
+- `schools/st-bonaventure/source-games.csv`
+- `schools/st-bonaventure/venues.csv`
+- `site/data/manifest.json`
+- `site/data/programs.json`
+- `site/data/teams/alabama.json`
+- `site/data/teams/arizona-state.json`
+- `site/data/teams/arizona.json`
+- `site/data/teams/auburn.json`
+- `site/data/teams/boise-state.json`
+- `site/data/teams/boston-college.json`
+- `site/data/teams/butler.json`
+- `site/data/teams/byu.json`
+- `site/data/teams/central-connecticut.json`
+- `site/data/teams/chicago-state.json`
+- `site/data/teams/cincinnati.json`
+- `site/data/teams/clemson.json`
+- `site/data/teams/colorado-state.json`
+- `site/data/teams/colorado.json`
+- `site/data/teams/creighton.json`
+- `site/data/teams/davidson.json`
+- `site/data/teams/dayton.json`
+- `site/data/teams/depaul.json`
+- `site/data/teams/duke.json`
+- `site/data/teams/duquesne.json`
+- `site/data/teams/fairleigh-dickinson.json`
+- `site/data/teams/florida-state.json`
+- `site/data/teams/florida.json`
+- `site/data/teams/fresno-state.json`
+- `site/data/teams/georgetown.json`
+- `site/data/teams/georgia-tech.json`
+- `site/data/teams/houston.json`
+- `site/data/teams/illinois.json`
+- `site/data/teams/indiana.json`
+- `site/data/teams/iowa.json`
+- `site/data/teams/kansas.json`
+- `site/data/teams/kentucky.json`
+- `site/data/teams/le-moyne.json`
+- `site/data/teams/long-island-university.json`
+- `site/data/teams/louisville.json`
+- `site/data/teams/loyola-chicago.json`
+- `site/data/teams/lsu.json`
+- `site/data/teams/marquette.json`
+- `site/data/teams/maryland.json`
+- `site/data/teams/michigan.json`
+- `site/data/teams/mississippi-state.json`
+- `site/data/teams/missouri.json`
+- `site/data/teams/nc-state.json`
+- `site/data/teams/north-carolina.json`
+- `site/data/teams/notre-dame.json`
+- `site/data/teams/ohio-state.json`
+- `site/data/teams/oklahoma-state.json`
+- `site/data/teams/oklahoma.json`
+- `site/data/teams/oregon-state.json`
+- `site/data/teams/oregon.json`
+- `site/data/teams/penn-state.json`
+- `site/data/teams/pittsburgh.json`
+- `site/data/teams/providence.json`
+- `site/data/teams/purdue.json`
+- `site/data/teams/rutgers.json`
+- `site/data/teams/saint-louis.json`
+- `site/data/teams/seton-hall.json`
+- `site/data/teams/south-carolina.json`
+- `site/data/teams/st-bonaventure.json`
+- `site/data/teams/st-john-s.json`
+- `site/data/teams/syracuse.json`
+- `site/data/teams/tcu.json`
+- `site/data/teams/ucf.json`
+- `site/data/teams/ucla.json`
+- `site/data/teams/uconn.json`
+- `site/data/teams/usc.json`
+- `site/data/teams/utah-state.json`
+- `site/data/teams/utah.json`
+- `site/data/teams/vanderbilt.json`
+- `site/data/teams/villanova.json`
+- `site/data/teams/virginia-tech.json`
+- `site/data/teams/virginia.json`
+- `site/data/teams/wagner.json`
+- `site/data/teams/wake-forest.json`
+- `site/data/teams/west-virginia.json`
+- `site/data/teams/wisconsin.json`
+- `site/data/teams/xavier.json`
