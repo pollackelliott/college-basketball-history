@@ -1,0 +1,70 @@
+{
+  "changed_file_sha256": {
+    "docs/implementation-gate1-authority-boundary.md": "a5d86a27d7c462d48276189095ac0b847ab95a8ddc6e32e64b3046388bfed240",
+    "tests/test_reused_venue_name_date_resolution.py": "c7c1e984b19a53e43eec4c14a60515f2bfed3194030533c994dbfdaf3ffe1d76",
+    "tools/frozen_venue_authority.py": "4380c546d331783920d37631d7208ccf10674b80361aa5590956728edaa454fb",
+    "tools/ingest_school.py": "6335347bd44f2e9a318f4aaab8ddce4847c8be243fa489326eece66597d153b3",
+    "tools/onboarding_plan.py": "7ac121fe49e6d4e00a6afe580e2ab64255f8927487b464c797fc3b88d5505a66"
+  },
+  "changed_paths": [
+    "docs/implementation-gate1-authority-boundary.md",
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
+  "main_changed_paths": [
+    "docs/implementation-gate1-authority-boundary.md",
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "462dfc713ebb9fdc7b60186eb2578b8b5d42041d",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "prepared_commit_sha": "185db38340211debf440179f2247f6b57c0be8b0",
+  "prepared_parents": [
+    "be23cc8441fdeca3dcdafdd5e264cd912aadc324",
+    "38068bc0a069bd67c7e30065c665cd0318d20558"
+  ],
+  "prepared_tree_sha": "57d7e15c193374d82e8c4b302a8203c8752ecfc8",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "03bf9fb9dde53bda109ba3ecd54c0aa7470e9933f06198a6e935983666bea4b7",
+    "data/reference/venue-names.csv": "98344788c918f0aeb8ac7776f991d31739007c92d354951a418788fc7fa17cf6",
+    "data/reference/venues.csv": "e334b9624f53a5990698801311823b0bffae85c0db1d692edd1dcc272aad87af",
+    "schools/st-bonaventure/conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "schools/st-bonaventure/notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "schools/st-bonaventure/opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "schools/st-bonaventure/source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "schools/st-bonaventure/source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "schools/st-bonaventure/venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "protected_main_sha": "38068bc0a069bd67c7e30065c665cd0318d20558",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/st-bonaventure/conferences.csv",
+    "schools/st-bonaventure/notes.md",
+    "schools/st-bonaventure/opponents.csv",
+    "schools/st-bonaventure/source-games.csv",
+    "schools/st-bonaventure/source-notes.md",
+    "schools/st-bonaventure/venues.csv"
+  ]
+}
