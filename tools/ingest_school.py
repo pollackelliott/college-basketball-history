@@ -44,6 +44,7 @@ from frozen_venue_authority import (
     SEMANTIC_PHASE_PRE_INGEST,
     load_frozen_venue_split_authority,
     sealed_post_reconciliation_semantic_delta,
+    sealed_post_reconciliation_venue_relationship_delta,
     sealed_pre_ingest_semantic_delta,
 )
 from conference_reference import history_errors, registry_by_key
@@ -786,10 +787,20 @@ def load_runtime_venue_metadata_map(
         if post_reconciliation_semantics
         else sealed_pre_ingest_semantic_delta(sealed_plan_context)
     )
+    allowed_venue_relationship_delta = (
+        sealed_post_reconciliation_venue_relationship_delta(
+            repo_root,
+            school_key,
+            sealed_plan_context,
+        )
+        if post_reconciliation_semantics
+        else None
+    )
     frozen_split_authority = load_frozen_venue_split_authority(
         repo_root,
         school_key,
         allowed_semantic_delta=allowed_semantic_delta,
+        allowed_venue_relationship_delta=allowed_venue_relationship_delta,
         semantic_phase=(
             SEMANTIC_PHASE_POST_RECONCILIATION
             if post_reconciliation_semantics
