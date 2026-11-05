@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "312c3d43049b4b6313cabab2243c1c47a1c2514a",
+  "merge_parent_onboarding": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "merge_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "c342bbca0ee118f1e2754d24698f0e3c3380ae3218b936c0fa79054ed3d1ce44",
+  "owner_gate_2_verification_sha256": "75c3883bebcbd7bb7bcdc105216f4937a672a1f342e9e72b6909d2bdd61627cb",
+  "pr_head_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
+  "pr_number": 475,
+  "production_deployment_id": 7586864592,
+  "production_json_checked_count": 93,
+  "production_proof": true,
+  "production_proof_sha256": "57758f03fefd268d1f0f5c348c9f8f57183e9c085d1653a14f5638512c5b5bf1",
+  "protected_main_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
+  "request_id": "rhode-island-release-production-proof-0001",
+  "request_sha256": "1c6166f9f4100754f54cab8ef7ed64400c2eaf935380a2e23524f5b24e39d29f",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "status": "PRODUCTION_PROOF_PASS"
+}
