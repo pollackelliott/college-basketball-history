@@ -1,0 +1,73 @@
+{
+  "actual_published_target_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
+  "changed_file_sha256": {
+    "tests/test_reused_venue_name_date_resolution.py": "f3792ea142a303ef2d90719f9744b671cdf7b1ee567483e36c850b3de7529e18",
+    "tools/frozen_venue_authority.py": "bbfbda9516ac4e229ca135888ebfb7b139a2a450af9c108610bf388592dd41e7",
+    "tools/ingest_school.py": "0daa23dcec7782d659d7d11b9634b94ff957500ab2ad47a7900cabfa10692bd0",
+    "tools/onboarding_plan.py": "34bac24562cb7e37dc5292e74d41b2cf04ea5dad431d92def0e3d906e6171afc"
+  },
+  "changed_paths": [
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "e4b4ca7b95670c65547bed5e0bbcd0d0f432aebb",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "747c0c2b42d132a757ae769192a8c48688bd4bad7bbc066d977308fb5ef6c2bf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/frozen_venue_authority.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "09a3f949a20bea011f07cc64d6ad30d018e3cbc0",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "d73b94428f0294b6cada4021a90730fae870a2c4173c97dfa9eaeee2f00bd8f2",
+    "notes.md": "a6be839e377cf910fb34bd93bb829d3b367aa2e13db90f579639019cd0e4393a",
+    "opponents.csv": "573f79ccd4fe590e85cd7a83aa131af271ba1987f645d513c960b26ff14d7c82",
+    "source-games.csv": "ae650fb2a2991edc3b3ef229b7cc38be8995de737e358614612ab9ff489b10df",
+    "source-notes.md": "7b91da494cddc9376590426dfd9fbe2d298604d7edef2faaf7b6c2789c2796f7",
+    "venues.csv": "1844528c9c904a61538b5d1fbf3b2f461ceeb1032e2ba72e2ba3213b8ec6b7ff"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "07b273f2793dee8e68efaa58dda2c28c767e5390",
+  "prepared_main_parent_sha": "1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079",
+  "prepared_parent_sha": "e4b4ca7b95670c65547bed5e0bbcd0d0f432aebb",
+  "prepared_parents": [
+    "e4b4ca7b95670c65547bed5e0bbcd0d0f432aebb",
+    "1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079"
+  ],
+  "prepared_tree_sha": "703d18b41bfc4e689e98a477789881ed82a70064",
+  "prior_refresh_successor_path": ".remote-implementation/successors/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0014/successor-manifest.json",
+  "prior_refresh_successor_sha256": "c8a8f74046ca8dfb9bb2abc64f611b8e4ac0c573c4723301c3e67dc84bfd4045",
+  "protected_main_sha": "1a2a56fddc00a77e2a7ee5f2fa8ca5fe154d7079",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "5e322b6db90063fc8e3f9158a9c1d34bb85544f301accdf201822f1488bad260",
+  "repository_validation": "PASS",
+  "request_id": "st-bonaventure-stage2-current-main-refresh-0015",
+  "request_sha256": "c9b2386f08023bcdbe2961ef157c45c9dbab04eda5565fcde74a2c0d1a8a0367",
+  "schema_version": 1,
+  "school_key": "st-bonaventure",
+  "semantic_snapshot_sha256": "c6bd9da791811582b6fe8cc5a0968faa96cb0688a35932b9051ef9e79e6a8cd8",
+  "target_branch": "data/st-bonaventure-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/st-bonaventure/conferences.csv",
+    "schools/st-bonaventure/notes.md",
+    "schools/st-bonaventure/opponents.csv",
+    "schools/st-bonaventure/source-games.csv",
+    "schools/st-bonaventure/source-notes.md",
+    "schools/st-bonaventure/venues.csv"
+  ],
+  "writeahead_commit": "257fbec9f646d0c8ab956ada7e0eb02605b04f31",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/st-bonaventure/st-bonaventure-stage2-current-main-refresh-0015/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "a4f54c1778d3c1b6d79cea1203179f6a22f761fa241ea3f21df4943ab11f4e41"
+}
