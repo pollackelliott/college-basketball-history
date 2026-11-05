@@ -142,6 +142,17 @@ the patch cannot create a new global venue, infer H/A/N, reuse an ambiguous name
 an unrelated relationship. The target `venues.csv` path remains outside the normal sealed
 apply allow-list unless the approved plan contains such a nonempty sealed relationship patch.
 
+When an Integration Freeze carries frozen per-game venue-split authority, ordinary
+pre-ingest authentication remains byte-exact for the target `venues.csv`. Final
+post-reconciliation verification may accept a different target venue-file hash only
+for this same sealed relationship capability. The mutation must preserve every frozen
+venue byte as an exact prefix and append only the deterministic CSV rows derivable
+from the sealed `venue_relationship_patch`, reviewed source site/date/basis, and
+existing global venue authority. Final authentication hashes the unchanged prefix
+against the Integration Freeze and requires the exact sealed rows as the complete
+suffix. Any edited frozen row, missing/malformed sealed row, unrelated extra row,
+different venue/date/locality, or unsealed venue drift remains a hard failure.
+
 The sealed transactional apply remains the authority that performs an approved source/canonical historical patch.
 
 When the guarded remote runner is used after an explicit owner approval, `STAGE2_GATE1_FILL` may encode that exact approved map into a filled ignored review only when the request hash-binds the fresh-verified `OWNER_GATE_1_READY` proposal checkpoint, decision universe, recommendation map, approved-plan preview, and owner approval. This fill-only operation does not seal or apply the review and must prove tracked repository mutation remains `NONE`.
