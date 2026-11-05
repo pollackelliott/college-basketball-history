@@ -83,6 +83,31 @@ class ContinuationValidationTests(unittest.TestCase):
             )
 
 
+class ContinuationPayloadBindingTests(unittest.TestCase):
+    def test_refresh_payloads_bind_to_supplied_request_commit(self):
+        spec = continuation_spec()
+        spec["recommendation_map"]["sha256"] = "a" * 64
+        request = {
+            "request_id": "school-stage2-refresh-next",
+            "operation": OP_STAGE2_CURRENT_MAIN_REFRESH,
+            "phase_continuation": spec,
+        }
+        with patch.object(
+            continuation,
+            "_verify_payload_ref",
+            return_value=b"payload",
+        ) as verifier:
+            continuation.verify_phase_continuation_payloads(
+                request,
+                "f" * 40,
+            )
+        verifier.assert_called_once_with(
+            "f" * 40,
+            spec["recommendation_map"],
+            "RECOMMENDATION_MAP",
+        )
+
+
 class QueueAfterRefreshTests(unittest.TestCase):
     def parent(self):
         spec = continuation_spec()
