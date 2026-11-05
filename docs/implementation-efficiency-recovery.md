@@ -68,6 +68,15 @@ fresh PASS queues ordinary seal, and fresh seal PASS queues ordinary sealed appl
 apply keeps its existing mutation lock, write-ahead, CAS publication, and independent
 fresh verification. Any technical blocker or identity change stops the chain.
 
+For release preparation, one owner `Proceed` authorizes the whole reversible phase through
+`OWNER_GATE_2_READY`. Prefer `RELEASE_READINESS_TO_PREVIEW_V1` on the readiness request.
+Fresh readiness preserves an exact PR body and deterministic connector handoff packet.
+The school lane then creates or reuses the exact same-repository/head/base PR through its
+GitHub connector, restores the exact packet body, immediately submits the packet-bound
+Preview-verification request, and supervises CI/Preview through fresh
+`OWNER_GATE_2_READY`. This connector seam is intentional: do not broaden Actions
+`GITHUB_TOKEN` to PR-write merely to remove it.
+
 Any changed PR head, changed approved historical meaning, moved/unauthorized main identity, shared/global mutation requirement, unsafe recovery state, or other genuine blocker ends the persisted phase authority and requires the repository-defined stop/owner boundary.
 
 A healthy in-flight workflow is not a completed owner-facing phase, and owner attention is not a scheduling primitive. When the active assistant turn can safely remain open, use **low-frequency heartbeat polling at roughly 120-second intervals**: one read per heartbeat, a compact visible progress update, and immediate advancement when the workflow materially changes. Do not use rapid 20–30 second polling or multiple equivalent reads inside the heartbeat interval. If the turn cannot remain active safely, preserve the exact request/run identity, provide the direct workflow link, and yield with `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. Repeated such yields across one deterministic phase are a repository-orchestration defect: fix the phase bundling instead of normalizing owner-scheduled continuation.
@@ -242,7 +251,7 @@ A healthy turn should make one coherent durable advance or a small deterministic
 - transcript/context is growing materially faster than durable progress;
 - an external workflow remains healthy but in flight after a bounded status observation and there is no useful independent repository work to perform in the same turn.
 
-Do not create a multi-minute chat-side polling budget. A status read should answer a concrete event question: did the workflow finish, fail, materially advance, or create the next durable checkpoint? Re-reading an unchanged job at short intervals adds no authority and no durable state. When the answer is still simply “running,” preserve the exact run/request identity and yield rather than idling inside the conversation.
+When the active assistant turn can safely remain open, use the low-frequency heartbeat rule instead of owner-scheduled transport: roughly one status read every 120 seconds, one compact visible update, and immediate continuation when the workflow finishes, fails, materially advances, or creates the next durable checkpoint. Re-reading an unchanged job at shorter intervals adds no authority and no durable state. Yield only when the turn cannot safely remain active; preserve the exact run/request identity and classify that yield as `CONTINUE — SAME PHASE AUTHORITY PERSISTS`, not as a new owner decision.
 
 This transport yield is acceptable for one genuinely long external operation. It is **not** acceptable as the normal scheduler for a deterministic chain such as refresh -> census -> proposal. If one owner-authorized phase repeatedly requires transport yields between its internal operations, the repository is missing phase-sized orchestration and that gap should be repaired before the pattern is normalized for later schools.
 
