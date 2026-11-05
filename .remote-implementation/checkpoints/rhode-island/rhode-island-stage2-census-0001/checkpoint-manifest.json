@@ -1,0 +1,95 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "286f276946d01962edc2d06d09b569ace0cc57aa3d66fb7640f4915b2869756a",
+    "implementation-stage2-status.json": "8d7e4e60c84629ddc70c35f3d706288c0956c5ccdd02e56fff559017a2543906",
+    "plan.json": "de0ccc089133bf32c41da879d8d2598af06bf00b305f39c583766f1fb6d862d0",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "271a1808d8d60af543e89bf3972e6efd7e9520c20db54df86c3da039147c67d3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "286f276946d01962edc2d06d09b569ace0cc57aa3d66fb7640f4915b2869756a",
+    "implementation-stage2-status.json": "82e8cf022b77d5a0a99ca2526d269fd3e0fa1225ce83112c2713aaa36068b81d",
+    "plan.json": "66ce6c9cf55b9a71c9039b9c8ad8c66e0d24e0eed8840a91ef270bc2e0869c63",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "31fc3865af524109379fbb1ef240249f41177f13bf9dfaaa9adebd7e557e25dd"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "286f276946d01962edc2d06d09b569ace0cc57aa3d66fb7640f4915b2869756a",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 9,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 8
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 9,
+      "topology": "preflight_blockers"
+    },
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 8,
+      "topology": "preflight_warnings"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "5396d0d7b2a0c92d349d16a8d08cc5eaa10f53520e92225da45a5f5ca9c3546c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "rhode-island"
+  ],
+  "phase0_protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "phase0_successor_path": ".remote-implementation/successors/rhode-island/rhode-island-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "684a83f359717275ba33fc81b00f18248cad48722dd107c03d2cec0fbe053cb6",
+  "preflight": {
+    "blocker_count": 9,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/rhode-island/plan.json",
+    "review_path": ".onboarding/rhode-island/review.csv",
+    "warning_count": 8
+  },
+  "protected_main_sha": "5492240bd889b0f2b946034529ef6562fdc9fbca",
+  "request_id": "rhode-island-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "rhode-island",
+  "semantic_snapshot_sha256": "25c8b342997d34d4ddf665ec787b4a50835fdeaf8f0d4cf64cf46202de3a9450",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/rhode-island-onboarding",
+  "target_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+  "target_tree_sha": "c970327519059d81388839577e6cab2f769087c1",
+  "tracked_mutation_proof": {
+    "after_head_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+    "after_status": "",
+    "after_tree_sha": "c970327519059d81388839577e6cab2f769087c1",
+    "before_head_sha": "5907135a31e0be43885f09c257b71ab5754835c9",
+    "before_status": "",
+    "before_tree_sha": "c970327519059d81388839577e6cab2f769087c1",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

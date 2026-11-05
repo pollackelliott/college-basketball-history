@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "rhode-island",
+  "created_at": "2026-11-05T18:00:09.400281+00:00",
+  "input_fingerprint": {
+    "sha256": "1e12901ae714c4d7ec1a6d6c9cb193f7d585f38650f0b1f097bca0bd7eb43284",
+    "git_head": "5907135a31e0be43885f09c257b71ab5754835c9",
+    "files": {
+      "schools/rhode-island/source-games.csv": "71600bc4e40081c3c5812ccb10d61668dc4670c7d6d9fab5da5707121ff9fc5e",
+      "schools/rhode-island/opponents.csv": "3b65fa73eab712aa40b7484145fccb369e7e31fa7580c1f2b711d45a538275f7",
+      "schools/rhode-island/venues.csv": "9b46516234827f7d7b1f2dcd071146078c09321145f1e53dfd2517e7b11c5afd",
+      "schools/rhode-island/conferences.csv": "fe88d4f190184b2921f40e6a8df4ef08eb1b2a449850c7fe28cdd86fc198e9ac",
+      "schools/rhode-island/notes.md": "745705adbf137e74635eed2bfe6c973a4ccc125476c65485b6599bda83e31f37",
+      "schools/rhode-island/source-notes.md": "7654b3c7f14743966900f3779ae90724ce6aa7be33c17ded677b9d75d952f709",
+      "data/canonical/games.csv": "1fed47c36f47a8b115a532adf5aed415b57eccfecfc48999aa7ca99304373f6b",
+      "data/evidence/game-assertions.csv": "85e6ae18c2e0a336b7dba258b1628430ab2be62f9e02aa5eee6ff4f1681bfa73",
+      "data/reconciliation/discrepancies.csv": "1e4529cba47780d7e1eaf1a8d04567fdf892c6ac55dacb49ec5a127a17e12f80",
+      "data/reference/programs.csv": "9a051e8b21c1cdad6d216af76c7342f71b0625a6893dd7825e39e9d0c32a45b6",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "016d6e839d2c6eb5d470e9b72e8f9d3939b74a12fa64624fecebbd7e1315470b",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "b62bca835561185e869a45940261577c42b6b0df02ca68396038805f460ba473",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "00fd0358a714f1c3b581df49d8ffed0b8cfdbad77f6a54beec101b10b38b3d9c",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "0daa23dcec7782d659d7d11b9634b94ff957500ab2ad47a7900cabfa10692bd0",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "15748c45491d772b96e833e1e58f902bd1b5f40d47ced243ee7ef7dc7d5bc332",
+      "tools/onboarding_plan.py": "8c48982b27aae5436837a374ca044701cdf721c4e08bddc93682932e1f4f067e",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: baltimore: ['Baltimore', 'University of Baltimore']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: loyola-new-orleans: ['Loyola (New Orleans)', 'Loyola (new Orleans)', 'Loyola New Orleans', 'Loyola University New Orleans', 'Loyola-New Orleans']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: pratt: ['Pratt', 'Pratt Institute']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: rpi: ['RPI', 'Rensselaer Polytechnic Institute']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: saint-anselm: ['Saint Anselm', 'St. Anselm']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: saint-michaels: [\"Saint Michael's\", 'St. Michael’s']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: springfield: ['Springfield', 'Springfield College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: st-thomas-fl: ['St. Thomas (FL)', 'St. Thomas University (FL)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: wayne-state-mi: ['Wayne State (MI)', 'Wayne State University (MI)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [
+      "rhode-island-1930-31-003: exhibition-like wording requires manual confirmation",
+      "rhode-island-1931-32-004: exhibition-like wording requires manual confirmation",
+      "rhode-island-1933-34-001: exhibition-like wording requires manual confirmation",
+      "rhode-island-1936-37-001: exhibition-like wording requires manual confirmation",
+      "rhode-island-1937-38-001: exhibition-like wording requires manual confirmation",
+      "rhode-island-1938-39-001: exhibition-like wording requires manual confirmation",
+      "rhode-island-1939-40-004: exhibition-like wording requires manual confirmation",
+      "rhode-island-1940-41-001: exhibition-like wording requires manual confirmation"
+    ],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2866,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 860,
+      "venues": 69,
+      "conference_intervals": 5,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: baltimore: ['Baltimore', 'University of Baltimore']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: loyola-new-orleans: ['Loyola (New Orleans)', 'Loyola (new Orleans)', 'Loyola New Orleans', 'Loyola University New Orleans', 'Loyola-New Orleans']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: pratt: ['Pratt', 'Pratt Institute']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: rpi: ['RPI', 'Rensselaer Polytechnic Institute']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-anselm: ['Saint Anselm', 'St. Anselm']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-michaels: [\"Saint Michael's\", 'St. Michael’s']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: springfield: ['Springfield', 'Springfield College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-thomas-fl: ['St. Thomas (FL)', 'St. Thomas University (FL)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: wayne-state-mi: ['Wayne State (MI)', 'Wayne State University (MI)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [
+    "rhode-island-1930-31-003: exhibition-like wording requires manual confirmation",
+    "rhode-island-1931-32-004: exhibition-like wording requires manual confirmation",
+    "rhode-island-1933-34-001: exhibition-like wording requires manual confirmation",
+    "rhode-island-1936-37-001: exhibition-like wording requires manual confirmation",
+    "rhode-island-1937-38-001: exhibition-like wording requires manual confirmation",
+    "rhode-island-1938-39-001: exhibition-like wording requires manual confirmation",
+    "rhode-island-1939-40-004: exhibition-like wording requires manual confirmation",
+    "rhode-island-1940-41-001: exhibition-like wording requires manual confirmation"
+  ],
+  "summary": {},
+  "decisions": []
+}
