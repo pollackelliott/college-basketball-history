@@ -346,7 +346,7 @@
     "st-bonaventure-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "e71b571c05b6932486a96188119e9e5704d8bced",
-  "active_lock_commit": null,
+  "active_lock_commit": "5a997283c8433d3f2297597eb863ee96aee695a3",
   "active_lock_owner": "github-actions:41974752731:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
