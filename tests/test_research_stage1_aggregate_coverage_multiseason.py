@@ -245,78 +245,99 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         legacy_ledger = []
         for row in ledger:
             legacy_ledger.append({
-                "id": row["research_game_id"],
-                "season": legacy_full_season(row["season_label"]),
-                "source_opponent": row["opponent_literal"],
-                "accepted_game_type": row["game_type"],
-                "accepted_result": row["played_result"],
+                "research_game_id": row["research_game_id"],
+                "season_label": legacy_full_season(row["season_label"]),
+                "source_opponent_label": row["opponent_literal"],
+                "played_result": row["played_result"],
+                "game_type": row["game_type"],
+                "inclusion_status": "ACCEPTED_IDENTIFIED_GAME",
             })
         legacy_ledger_raw = csv_bytes(legacy_ledger)
 
         legacy_census = []
         for season, institutional, identified, _ in SEASONS:
             legacy_census.append({
-                "season": legacy_full_season(season),
-                "source_header_record": f"{institutional[0]}-{institutional[1]}",
-                "expected_games": str(institutional[2]),
-                "identified_competitive_games": str(identified[2]),
+                "season_label": legacy_full_season(season),
+                "source_heading": (
+                    f"{season} ({institutional[0]}-{institutional[1]})"
+                ),
+                "source_heading_wins": str(institutional[0]),
+                "source_heading_losses": str(institutional[1]),
+                "identified_game_rows": str(identified[2]),
+                "identified_wins": str(identified[0]),
+                "identified_losses": str(identified[1]),
+                "reconciliation_status": "AGGREGATE_COVERAGE_AUTHORITY_REQUIRED",
+                "reconciliation_note": "Legacy manifested season census.",
             })
 
         legacy_residuals = []
         nonblocking_no = 0
         for season, _, identified, unidentified in SEASONS:
             legacy_residuals.append({
-                "residual_id": "SJU-" + season + "-AGGREGATE",
-                "season": legacy_full_season(season),
+                "residual_id": "BLOCK-" + season,
+                "blocking": "YES",
                 "residual_class": blocker_class,
-                "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
-                "identified_competitive_games": str(identified[2]),
-                "missing_games": str(unidentified[2]),
-                "evidence_summary": "Legacy manifested bounded research exhaustion.",
-                "blocking": "true",
+                "season_label": legacy_full_season(season),
+                "research_game_id": "",
+                "missing_game_count": str(unidentified[2]),
+                "aggregate_delta_wins": str(unidentified[0]),
+                "aggregate_delta_losses": str(unidentified[1]),
+                "detail": "Legacy manifested bounded research exhaustion.",
+                "next_action": "Owner authority already bound by protected-main registry.",
             })
             if duplicate_blocker and season == SEASONS[0][0]:
                 legacy_residuals.append({
-                    "residual_id": "SJU-" + season + "-SECOND-BLOCKER",
-                    "season": legacy_full_season(season),
+                    "residual_id": "BLOCK-" + season + "-SECOND",
+                    "blocking": "YES",
                     "residual_class": blocker_class,
-                    "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
-                    "identified_competitive_games": str(identified[2]),
-                    "missing_games": str(unidentified[2]),
-                    "evidence_summary": "Deliberate duplicate blocking residual.",
-                    "blocking": "true",
+                    "season_label": legacy_full_season(season),
+                    "research_game_id": "",
+                    "missing_game_count": str(unidentified[2]),
+                    "aggregate_delta_wins": str(unidentified[0]),
+                    "aggregate_delta_losses": str(unidentified[1]),
+                    "detail": "Deliberate duplicate blocking residual.",
+                    "next_action": "Must fail closed.",
                 })
             for _ in range(LEGACY_NONBLOCKING_COUNTS[season]):
                 nonblocking_no += 1
                 legacy_residuals.append({
                     "residual_id": f"EXACT_DATE_UNKNOWN-SJU-R1-{nonblocking_no:05d}",
-                    "season": legacy_full_season(season),
+                    "blocking": "NO",
                     "residual_class": "EXACT_DATE_UNKNOWN",
-                    "state": "PRESERVE_UNCHANGED",
-                    "identified_competitive_games": "1",
-                    "missing_games": "0",
-                    "evidence_summary": "Identified game retained with nonblocking exact-date debt.",
-                    "blocking": "false",
+                    "season_label": legacy_full_season(season),
+                    "research_game_id": f"SJU-R1-{nonblocking_no:05d}",
+                    "missing_game_count": "",
+                    "aggregate_delta_wins": "",
+                    "aggregate_delta_losses": "",
+                    "detail": "Identified game retained with nonblocking exact-date debt.",
+                    "next_action": "Preserve unchanged.",
                 })
         legacy_residuals.append({
             "residual_id": "SJU-1952-53-NONBLOCKING",
-            "season": "1952-1953",
+            "blocking": "NO",
             "residual_class": "SOURCE_INTERNAL_AGGREGATE_CONFLICT",
-            "state": "PRESERVE_UNCHANGED",
-            "identified_competitive_games": "25",
-            "missing_games": "0",
-            "evidence_summary": "All game identities stable; aggregate conflict is nonblocking.",
-            "blocking": "false",
+            "season_label": "1952-1953",
+            "research_game_id": "",
+            "missing_game_count": "",
+            "aggregate_delta_wins": "",
+            "aggregate_delta_losses": "",
+            "detail": "All game identities stable; aggregate conflict is nonblocking.",
+            "next_action": "Preserve unchanged.",
         })
 
         members = {
             "stage1-ledger.csv": legacy_ledger_raw,
             "stage1-season-census.csv": csv_bytes(legacy_census),
             "stage1-residuals.csv": csv_bytes(legacy_residuals),
-            "status.json": jb({
+            "stage1-status.json": jb({
                 "school": SCHOOL,
+                "school_key": SCHOOL,
+                "lane": "NEW INDEPENDENT RESEARCH",
+                "stage": "1",
+                "stage_status": "INCOMPLETE_OWNER_AUTHORITY_REQUIRED",
                 "research_base_sha": RESEARCH_BASE,
-                "stage1_complete": False,
+                "identified_candidate_rows": len(legacy_ledger),
+                "blocking_residual_items": len(SEASONS),
             }),
             "research-log.md": b"Original legacy research log.\n",
         }
@@ -324,7 +345,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
             "research_base_sha": RESEARCH_BASE,
             "files": [
                 {
-                    "path": name,
+                    "name": name,
                     "bytes": len(data),
                     "sha256": mod.digest(data),
                 }
@@ -378,7 +399,37 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         self.assertIn("structured-stage1-ledger.csv", successor)
         self.assertIn("season-census.csv", successor)
         self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
-        self.assertTrue(json.loads(successor["stage1-status.json"])["stage1_complete"])
+        self.assertFalse(
+            json.loads(successor["stage1-status.json"]).get("stage1_complete", False)
+        )
+        self.assertTrue(
+            json.loads(successor[mod.LEGACY_CLOSEOUT_STATUS_MEMBER])["stage1_complete"]
+        )
+        manifest = json.loads(successor["stage1-manifest.json"])
+        self.assertTrue(manifest["legacy_parent_members_preserved"])
+        self.assertEqual(
+            manifest["completion_status_member"],
+            mod.LEGACY_CLOSEOUT_STATUS_MEMBER,
+        )
+
+        tampered = dict(successor)
+        tampered["stage1-status.json"] = jb({"tampered": True})
+        tampered_path = self.closeout_file.with_name("legacy-tampered.zip")
+        tampered_sha = mod.serialize_zip(tampered, tampered_path)
+        rejected = mod.verify_closeout(
+            self.parent,
+            tampered_path,
+            self.audit_file,
+            parent_sha=self.parent_sha,
+            successor_sha=tampered_sha,
+            audit_sha=audit_sha,
+            registry=self.registry,
+        )
+        self.assertEqual(rejected["status"], "FAIL")
+        self.assertIn(
+            "LEGACY_PARENT_MEMBER_DRIFT:stage1-status.json",
+            rejected["defects"],
+        )
 
     def test_second_blocking_residual_in_authority_season_still_fails_closed(self):
         self.make_legacy_parent(duplicate_blocker=True)
