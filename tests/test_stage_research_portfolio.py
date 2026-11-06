@@ -943,6 +943,61 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         self.assertEqual(global_rows[0]["state"], "MX")
         self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
 
+    def test_foreign_exact_key_country_code_name_equivalence_uses_global_geography(self):
+        venue = global_venue(
+            "VEN-000709",
+            "montego-bay-convention-center",
+            "Montego Bay Convention Center",
+            "Montego Bay",
+            "Jamaica",
+        )
+        local = {
+            **local_venue("", city="Montego Bay", state="JM"),
+            "venue_key": venue["venue_key"],
+            "venue_id": "VEN-000709",
+            "canonical_name": venue["display_name"],
+        }
+        source_games = [
+            {
+                "curated_venue_name": "Montego Bay Convention Center",
+                "source_venue_name": "",
+                "city": "Montego Bay",
+                "state": "JM",
+                "country": "Jamaica",
+            }
+        ]
+
+        report = venue_reconciliation_inventory([dict(local)], [dict(venue)], [])
+        self.assertEqual(report["blocker_count"], 0)
+        self.assertEqual(
+            report["rows"][0]["classification"],
+            "SAFE_REPRESENTATION_REUSE",
+        )
+        self.assertEqual(report["rows"][0]["target_venue_id"], "VEN-000709")
+        self.assertEqual(
+            report["rows"][0]["target_venue_key"],
+            "montego-bay-convention-center",
+        )
+
+        rebased, global_rows, _names, mappings = rebase_venues(
+            "test-school",
+            [dict(local)],
+            [dict(venue)],
+            [],
+            source_games=source_games,
+        )
+
+        self.assertEqual(rebased[0]["venue_id"], "VEN-000709")
+        self.assertEqual(rebased[0]["venue_key"], "montego-bay-convention-center")
+        self.assertEqual(rebased[0]["canonical_name"], "Montego Bay Convention Center")
+        self.assertEqual(rebased[0]["city"], "Montego Bay")
+        self.assertEqual(rebased[0]["state"], "Jamaica")
+        self.assertEqual(global_rows, [venue])
+        self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
+        self.assertEqual(source_games[0]["city"], "Montego Bay")
+        self.assertEqual(source_games[0]["state"], "JM")
+        self.assertEqual(source_games[0]["country"], "Jamaica")
+
     def test_exact_key_reuse_still_blocks_jurisdiction_conflict(self):
         globals_ = [
             global_venue(
