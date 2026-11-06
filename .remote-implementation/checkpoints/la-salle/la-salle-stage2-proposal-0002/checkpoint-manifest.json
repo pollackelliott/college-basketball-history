@@ -1,0 +1,279 @@
+{
+  "action_counts": {
+    "APPLY_SOURCE_SITE_PATCH": 11,
+    "ENABLE_PUBLIC_PAGE": 1,
+    "KEEP_CANONICAL": 59,
+    "LEAVE_UNRESOLVED": 2,
+    "MATCH_CANONICAL:CBBG-0107303": 1,
+    "MATCH_CANONICAL:CBBG-0121959": 1,
+    "MATCH_CANONICAL:CBBG-0136826": 1,
+    "MATCH_CANONICAL:CBBG-0136856": 1,
+    "MATCH_CANONICAL:CBBG-0136862": 1,
+    "MATCH_CANONICAL:CBBG-0147612": 1,
+    "MATCH_CANONICAL:CBBG-0161644": 1,
+    "MATCH_CANONICAL:CBBG-0162407": 1,
+    "MATCH_CANONICAL:CBBG-0164197": 1,
+    "MATCH_CANONICAL:CBBG-0164202": 1,
+    "MATCH_CANONICAL:CBBG-0164215": 1,
+    "MATCH_CANONICAL:CBBG-0164232": 1,
+    "MATCH_CANONICAL:CBBG-0187797": 1,
+    "MATCH_CANONICAL:CBBG-0191298": 1,
+    "MATCH_CANONICAL:CBBG-0193280": 1,
+    "NOT_APPLICABLE": 23,
+    "USE_SOURCE": 74,
+    "VERIFY_REFERENCE_VALUES": 1
+  },
+  "approved_plan_hash_preview": "da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "8031b15445372d3d6bddd4cd8f2e34514a311a2a91097f5f18017be917fe8236",
+    "implementation-stage2-status.json": "d8afdfb1dc0637c756bdbed749e9b7ecc7e3b99623e96f230ca0d1f459d08311",
+    "last-rehearsal-site-gate.json": "8194d310ffab57d9c0a928fe076cbf7d6798c733682c175a7d6d6c0cf4ec9f0d",
+    "plan.json": "538ea9da194e305e643d2cc46f6662f04b90c1acdf66e9a86f64d47c5522e4bb",
+    "review.csv": "f1f9552e48848fd6c7a510c09d98928d2fa6e49f137fc468b3613a71227e507f",
+    "review.md": "56953fe14931f93507ffb255ac18a56911db4408e14cde17a4b1afa7735e0629"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "8031b15445372d3d6bddd4cd8f2e34514a311a2a91097f5f18017be917fe8236",
+    "implementation-stage2-status.json": "7c24eda4159bb2567518ce4454668e92c5121d20f93ae0ea580b6104dcd33b36",
+    "last-rehearsal-site-gate.json": "8194d310ffab57d9c0a928fe076cbf7d6798c733682c175a7d6d6c0cf4ec9f0d",
+    "plan.json": "efaf065ecb4a8d2b18f7188b3eb88b76b40ea09e72920c24ca51bb38ab0e2425",
+    "review.csv": "f1f9552e48848fd6c7a510c09d98928d2fa6e49f137fc468b3613a71227e507f",
+    "review.md": "c571b4b555eebcf336b2664f2c20ab83b8fe2a49eb9055eb0cd8d68ce412ea5e"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "PASS",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 100,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": 99,
+  "command_exit_code": 0,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "runtime_decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "la-salle",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 43,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 43,
+      "discrepancy": 115,
+      "identity": 15,
+      "new_game_site_patch": 11,
+      "publication": 1
+    },
+    "decision_count": 186,
+    "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "discrepancies_to_add": 115,
+    "existing_game_matches": 791,
+    "new_canonical_games": 1781,
+    "plan_path": ".onboarding/la-salle/plan.json",
+    "review_path": ".onboarding/la-salle/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "APPLY_SOURCE_SITE_PATCH": 11,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 59,
+      "LEAVE_UNRESOLVED": 2,
+      "MATCH_CANONICAL:CBBG-0107303": 1,
+      "MATCH_CANONICAL:CBBG-0121959": 1,
+      "MATCH_CANONICAL:CBBG-0136826": 1,
+      "MATCH_CANONICAL:CBBG-0136856": 1,
+      "MATCH_CANONICAL:CBBG-0136862": 1,
+      "MATCH_CANONICAL:CBBG-0147612": 1,
+      "MATCH_CANONICAL:CBBG-0161644": 1,
+      "MATCH_CANONICAL:CBBG-0162407": 1,
+      "MATCH_CANONICAL:CBBG-0164197": 1,
+      "MATCH_CANONICAL:CBBG-0164202": 1,
+      "MATCH_CANONICAL:CBBG-0164215": 1,
+      "MATCH_CANONICAL:CBBG-0164232": 1,
+      "MATCH_CANONICAL:CBBG-0187797": 1,
+      "MATCH_CANONICAL:CBBG-0191298": 1,
+      "MATCH_CANONICAL:CBBG-0193280": 1,
+      "NOT_APPLICABLE": 23,
+      "USE_SOURCE": 74,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba",
+    "changed_path_count": 99
+  },
+  "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_SOURCE_SITE_PATCH": 11,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 59,
+      "LEAVE_UNRESOLVED": 2,
+      "MATCH_CANONICAL:CBBG-0107303": 1,
+      "MATCH_CANONICAL:CBBG-0121959": 1,
+      "MATCH_CANONICAL:CBBG-0136826": 1,
+      "MATCH_CANONICAL:CBBG-0136856": 1,
+      "MATCH_CANONICAL:CBBG-0136862": 1,
+      "MATCH_CANONICAL:CBBG-0147612": 1,
+      "MATCH_CANONICAL:CBBG-0161644": 1,
+      "MATCH_CANONICAL:CBBG-0162407": 1,
+      "MATCH_CANONICAL:CBBG-0164197": 1,
+      "MATCH_CANONICAL:CBBG-0164202": 1,
+      "MATCH_CANONICAL:CBBG-0164215": 1,
+      "MATCH_CANONICAL:CBBG-0164232": 1,
+      "MATCH_CANONICAL:CBBG-0187797": 1,
+      "MATCH_CANONICAL:CBBG-0191298": 1,
+      "MATCH_CANONICAL:CBBG-0193280": 1,
+      "NOT_APPLICABLE": 23,
+      "USE_SOURCE": 74,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba",
+    "decision_count": 186,
+    "path": "/tmp/remote-stage2-proposal-map-2akw05nj/recommendation-map.json",
+    "sha256": "01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-proposal-0002/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/la-salle-stage2-proposal-0002/recommendation-map.json",
+  "recommendation_map_sha256": "01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534",
+  "request_id": "la-salle-stage2-proposal-0002",
+  "request_sha256": "23e1ec0989da4556b8f064f94dfc960e2cd99cbd164cd45366705f6231815cad",
+  "runtime_commit_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "runtime_decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "baf970f25fb5060af3e99fcd8b43a3c9cf66b6cc39ac0fcf1461966bb69d36c1",
+    "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+    "tools/onboarding_hardening.py": "3fbb3231a2456480e5bc9091b9a38c039f3a2a12b66cccf08b473d29132589e5",
+    "tools/onboarding_plan.py": "4d678bffcca5436bda76d0b0035510de65c92bad7b2ccb31e42d811d2c5f0931",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "baf970f25fb5060af3e99fcd8b43a3c9cf66b6cc39ac0fcf1461966bb69d36c1",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 84,
+      "postseason_missing_location": 2,
+      "postseason_missing_venue": 66,
+      "public_gap_rows": 195,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2586,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 111
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0196655",
+        "CBBG-0197628"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0019098",
+        "CBBG-0023629",
+        "CBBG-0028662",
+        "CBBG-0031164",
+        "CBBG-0042269",
+        "CBBG-0042276",
+        "CBBG-0042421",
+        "CBBG-0042433",
+        "CBBG-0042448",
+        "CBBG-0046002",
+        "CBBG-0046201",
+        "CBBG-0049520"
+      ],
+      "postseason_missing_location": [
+        "CBBG-0197323",
+        "CBBG-0197446"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0084136",
+        "CBBG-0196794",
+        "CBBG-0196795",
+        "CBBG-0196813",
+        "CBBG-0196896",
+        "CBBG-0197109",
+        "CBBG-0197139",
+        "CBBG-0197140",
+        "CBBG-0197156",
+        "CBBG-0197157",
+        "CBBG-0197210",
+        "CBBG-0197211"
+      ],
+      "unknown_site_type": [
+        "CBBG-0084136",
+        "CBBG-0196511",
+        "CBBG-0196512",
+        "CBBG-0196578",
+        "CBBG-0196713",
+        "CBBG-0196782",
+        "CBBG-0196794",
+        "CBBG-0196795",
+        "CBBG-0196804",
+        "CBBG-0196813",
+        "CBBG-0196819",
+        "CBBG-0196859"
+      ]
+    },
+    "history_start_season": "1930-1931",
+    "school_key": "la-salle",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 214,
+      "neutral_missing_location": 1,
+      "neutral_missing_venue": 84,
+      "postseason_missing_location": 2,
+      "postseason_missing_venue": 4,
+      "researched_gap_rows": 214,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 0,
+      "unknown_site_type": 130
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2587
+    },
+    "status": "PASS",
+    "warnings": [
+      "site-research metadata is populated on rows with no material site gap; 11 row(s) affected; examples: LAS-1953-54-026, LAS-1953-54-028, LAS-1953-54-030, LAS-1954-55-028, LAS-1954-55-029, LAS-1954-55-031, LAS-1967-68-028, LAS-1982-83-031, LAS-1982-83-032, LAS-1988-89-032, LAS-1989-90-031"
+    ]
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/la-salle/la-salle-stage2-opponent-display-normalize-0002/successor-manifest.json",
+  "stage2_authority_sha256": "e8f73e0e622f0c335de852d3a57b40db8bbefb0a85c36c0727396f379bbcabf5",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "target_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+  "tracked_mutation_proof": {
+    "after_head_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+    "after_status": "",
+    "after_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+    "before_head_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+    "before_status": "",
+    "before_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
