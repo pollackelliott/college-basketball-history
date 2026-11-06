@@ -81,6 +81,30 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             local_venues=[dict(self.local)], global_venues=[dict(self.global_row)],
         )
 
+    def test_explicit_reuse_accepts_jm_jamaica_representation_equivalence(self):
+        local = {
+            "city": "Montego Bay",
+            "state": "JM",
+        }
+        global_row = {
+            "city": "Montego Bay",
+            "state": "Jamaica",
+        }
+        mapping = {
+            "allow_locality_variant": False,
+            "locality_variant_basis": "",
+        }
+        self.assertTrue(
+            explicit_reuse_locality_compatible(local, global_row, mapping)
+        )
+        self.assertFalse(
+            explicit_reuse_locality_compatible(
+                local,
+                {"city": "Montego Bay", "state": "BS"},
+                mapping,
+            )
+        )
+
     def test_explicit_locality_variant_predicate_fails_closed(self):
         mapping = {
             "allow_locality_variant": True,
