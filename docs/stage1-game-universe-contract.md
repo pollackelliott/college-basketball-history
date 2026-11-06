@@ -132,9 +132,12 @@ EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
    not weaker historical authority. A legacy parent may use the older root
    `manifest.json`, `stage1-ledger.csv`, `stage1-residuals.csv`, and
    `stage1-season-census.csv` topology only through permanent fail-closed
-   compatibility logic. The closeout must preserve every original legacy member
-   byte-for-byte while adding the current logical Stage 1 members in the separately
-   hashed successor; it must never rewrite the immutable parent checkpoint in place.
+   compatibility logic. That in-memory projection may normalize an adjacent full-year
+   season label such as `1911-1912` to the canonical `1911-12` key; non-adjacent
+   or otherwise non-equivalent labels remain literal and must still fail exact authority
+   matching. The closeout must preserve every original legacy member byte-for-byte
+   while adding the current logical Stage 1 members in the separately hashed successor;
+   it must never rewrite the immutable parent checkpoint in place.
 5. A **separate, hashed closeout successor**, built with the permanent closeout
    command and independently verified with verify-closeout. It preserves every
    historical ledger/census/source byte, reclassifies only the approved aggregate
