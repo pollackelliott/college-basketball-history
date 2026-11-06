@@ -780,7 +780,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/la-salle/la-salle-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "b1c9c0fddbbc7bca3a5f5d4558f00d57557f986dd9cdda87e30cb50d84bd32ca",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -790,7 +790,7 @@
     "production_deployment_id": 7612824640,
     "production_json_checked_count": 91,
     "protected_main_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "la-salle-release-production-proof-0001",
     "school_key": "la-salle"
   },

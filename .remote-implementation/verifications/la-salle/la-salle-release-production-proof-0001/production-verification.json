@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "b1c9c0fddbbc7bca3a5f5d4558f00d57557f986dd9cdda87e30cb50d84bd32ca",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "pr_number": 495,
+  "production_deployment_id": 7612824640,
+  "production_json_checked_count": 91,
+  "production_proof": true,
+  "request_id": "la-salle-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "status": "COMPLETE"
+}
